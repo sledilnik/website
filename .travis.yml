@@ -15,7 +15,8 @@ script: yarn build
 deploy:
   provider: pages
   local_dir: dist
-  target_branch: gh-pages
+  repo: slo-covid-19/slo-covid-19.github.io
+  target_branch: master
   committer_from_gh: true
   skip_cleanup: true
   cleanup: false
