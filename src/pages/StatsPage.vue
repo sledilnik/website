@@ -212,7 +212,7 @@ export default {
   methods: {
     loadData() {
       return d3.csv(
-        "https://raw.githubusercontent.com/overlordtm/COVID19.si/master/data/full.csv"
+        "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
       );
     },
     getLastValue(csvdata, field) {
