@@ -22,4 +22,5 @@ deploy:
   cleanup: false
   github_token: $GITHUB_TOKEN
   keep_history: true
+  fqdn: slo-covid-19.rtfm.si
   verbose: true

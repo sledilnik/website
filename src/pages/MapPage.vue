@@ -1,10 +1,7 @@
 <template>
   <b-container>
     <b-row>
-      <b-alert variant="success" show>
-        V delu, lahko si ogledate ta <a
-        href="https://covid19.alpaka.si/zemljevid/">zemljevid</a>
-      </b-alert>
+      <iframe src="https://covid19.alpaka.si/zemljevid/embedded.html" scrolling="no" width="1140px;" height="800px;" />
     </b-row>
   </b-container>
 </template>
