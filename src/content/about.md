@@ -1,4 +1,4 @@
-# **Sledenje SLO COVID-19**
+# **Podatki o širjenju virusa SARS-CoV-19 in bolezni COVID-19 za Slovenijo**
 
 Projekt zbira podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji. 
 Vključeni so **dnevni podatki** (z zgodovino):
