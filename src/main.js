@@ -27,7 +27,7 @@ Vue.config.productionTip = false
 
 const routes = [
   {
-    path: '/',
+    path: '*',
     redirect: '/about'
   },
   {
