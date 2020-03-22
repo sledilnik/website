@@ -20,7 +20,7 @@ export default {
   // },
   data() {
     return {
-      staticContent: "zoki"
+      staticContent: ""
     };
   },
   mounted() {
