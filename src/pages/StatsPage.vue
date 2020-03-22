@@ -1,23 +1,23 @@
 <template>
-  <b-container>
+  <b-container v-if="loaded">
     <b-row>
       <h1>Statistika</h1>
     </b-row>
     <b-row>
-      <b-card-group deckc class="col-12 mb-5">
+      <b-card-group deck class="col-12 mb-5">
         <Info-card
           title="Pozitivnih testov"
           :value="positiveTestToDate.value"
           :value-date="positiveTestToDate.date"
         />
         <Info-card
-          title="Trenutno v bolnisnici"
+          title="Trenutno v bolnišnici"
           :value="inHospitalToDate.value"
           :value-date="positiveTestToDate.date"
         />
         <Info-card title="Mrtvi" :value="deceasedToDate.value" :value-date="deceasedToDate.date" />
         <Info-card
-          title="Ozdravljeni"
+          title="Odpuščeni iz bolnišnice"
           :value="recoveredToDate.value"
           :value-date="recoveredToDate.date"
         />
@@ -40,12 +40,21 @@
       </b-col>
     </b-row>
   </b-container>
+  <b-container v-else>
+    <div>
+      <div class="d-flex justify-content-center mb-3">
+        <b-spinner label="Loading..."></b-spinner>
+      </div>
+    </div>
+  </b-container>
 </template>
 
 <script>
 import * as d3 from "d3";
 import InfoCard from "components/cards/InfoCard";
 import LineChart from "components/charts/LineChart";
+
+import StatsData from "StatsData";
 
 export default {
   name: "StatsPage",
@@ -59,6 +68,7 @@ export default {
   },
   data() {
     return {
+      loaded: false,
       csvdata: null,
       charts: {
         tests: {
@@ -86,6 +96,9 @@ export default {
       return this.getLastValue(this.csvdata, "state.out_of_hospital.todate");
     },
     chartTests() {
+      // if (!this.csvdata) {
+      //   return {};
+      // }
       let seriesPositive = this.csvdata.map(p => {
         return {
           t: new Date(Date.parse(p["date"])),
@@ -140,6 +153,9 @@ export default {
       };
     },
     chartRegions() {
+      // if (!this.csvdata) {
+      //   return {};
+      // }
       let seriesRegions = [];
 
       this.csvdata.columns.forEach(col => {
@@ -154,25 +170,25 @@ export default {
       });
 
       let labelMap = {
-        'region.lj.todate': 'Ljubljana',
-        'region.mb.todate': 'Maribor',
-        'region.nm.todate': 'Novo mesto',
-        'region.kr.todate': 'Kranj',
-        'region.za.todate': 'Zagorje',
-        'region.ce.todate': 'Celje',
-        'region.sg.todate': 'Slovenj Gradec',
-        'region.po.todate': 'Postojna',
-        'region.ms.todate': 'Murska Sobota',
-        'region.kp.todate': 'Koper',
-        'region.ng.todate': 'Nova Gorica',
-        'region.kk.todate': 'Krsko',
-        'region.foreign.todate': 'Tujina',
-        'region.unknown.todate': 'Neznano'
-      }
+        "region.lj.todate": "Ljubljana",
+        "region.mb.todate": "Maribor",
+        "region.nm.todate": "Novo mesto",
+        "region.kr.todate": "Kranj",
+        "region.za.todate": "Zagorje",
+        "region.ce.todate": "Celje",
+        "region.sg.todate": "Slovenj Gradec",
+        "region.po.todate": "Postojna",
+        "region.ms.todate": "Murska Sobota",
+        "region.kp.todate": "Koper",
+        "region.ng.todate": "Nova Gorica",
+        "region.kk.todate": "Krsko",
+        "region.foreign.todate": "Tujina",
+        "region.unknown.todate": "Neznano"
+      };
 
-      let translateKey = (key) => {
-        return labelMap[key]
-      }
+      let translateKey = key => {
+        return labelMap[key];
+      };
 
       let datasets = Object.keys(seriesRegions).map(key => {
         return {
@@ -210,11 +226,11 @@ export default {
     }
   },
   methods: {
-    loadData() {
-      return d3.csv(
-        "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
-      );
-    },
+    // loadData() {
+    //   return d3.csv(
+    //     "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
+    //   );
+    // },
     getLastValue(csvdata, field) {
       if (csvdata && csvdata.length > 0) {
         let i = 0;
@@ -240,10 +256,9 @@ export default {
       }
     }
   },
-  mounted() {
-    this.loadData().then(data => {
-      this.csvdata = data;
-    });
+  async mounted() {
+    this.csvdata = await StatsData.data();
+    this.loaded = true;
   }
 };
 </script>
