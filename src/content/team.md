@@ -4,11 +4,11 @@ Uredniki baze:
 * [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovna struktura in validacija
 * [Aleks Jakulin](https://twitter.com/aleksj) - viri, modeliranje 
 * [Andraz Vrhovec](http://github.com/overlordtm) - CSV oblika, spletna stran 
-* [Maks Mržek](https://twitter.com/maksmrzek) - validacija, modeliranje, vizualizacije
+* [Maks Mržek](https://twitter.com/maksmrzek) - validacija, modeliranje, vizualizacije, koordinacija
 * [Miha Kadunc](https://twitter.com/miha_kadunc) - model bolnišničnih podatkov, modeliranje
 * Matej J - viri, validacija podatkov
 * [Marko B](https://twitter.com/multikultivator) - viri, spletna stran, dataviz
-* Matjaž Lipuš - viri, validacija podatkov
+* [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 
 **Projekt ne bi bil mogoč brez številnih vnosov in komentarjev v bazo bolj ali manj&nbsp;&nbsp;anonimnih&nbsp;sodelavcev, znancev, kolegov&nbsp; ter izmenjave idej in&nbsp;sodelujočih na Slacku; hvala!**
 
