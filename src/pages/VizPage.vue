@@ -2,22 +2,58 @@
   <b-container fluid class="h-100">
     <b-row cols="12" class="h-100">
       <b-col>
-        <iframe
-          style="width:100%; height:90%"
-          headers="false”"
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRNMoa1LR27hrziuNRnIi7_KC5w3c1IJUzESPvqSZXFCOHLE6VP7nTy5lXiC0sbj0eagkv9cM_fDBRj/pubhtml?gid=1946890956&amp;single=true&amp;widget=true&amp;headers=false"
-        ></iframe>
+        <div id="visualizations"></div>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
+import { Visualizations } from 'visualizations/src/App.fsproj'
 export default {
-  name: "VizPage"
-};
+  name: "VizPage",
+  mounted() {
+    Visualizations("visualizations")
+  }
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<!-- <style scoped lang="sass"> -->
+<style lang="sass">
+@import 'node_modules/bootstrap/scss/_functions'
+@import 'node_modules/bootstrap/scss/_variables'
+#visualizations
+  $gap: $grid-gutter-width
+  $font-size: 12px
+
+  margin-top: $gap
+  font-size: $font-size
+
+  .metrics-selectors
+    margin-top: $gap
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+
+  .metric-selector
+    margin: 0 $gap/6 $gap/3 $gap/6
+    border-color: $gray-300
+    &:hover
+      border-color: $gray-500
+
+  .metric-selector--selected
+    color: white
+
+  .data-table
+    margin-top: $gap
+    font-size: $font-size
+
+    thead
+      th
+        vertical-align: top
+
+    tbody
+      td
+        width: 11.1%
+
 </style>

@@ -13,13 +13,13 @@ class StatsData {
   }
 
   init() {
-    this.csvdata = new Promise( (resolve, reject) => {
+    this.csvdata = new Promise( (resolve) => {
       this.loadData().then(data => {
         resolve(data)
         // this.csvdata = data
       })
     })
-    
+
   }
 
   async loadData() {

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Types.fs" />
+        <Compile Include="SourceData.fs" />
+        <Compile Include="Chart.fs" />
+        <Compile Include="DataTable.fs" />
+        <Compile Include="App.fs" />
+        <Compile Include="Main.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
+        <PackageReference Include="Fable.Elmish.HMR" Version="4.0.1" />
+        <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
+        <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
+        <PackageReference Include="Fable.SimpleJson" Version="3.8.2" />
+        <PackageReference Include="Feliz" Version="0.70.0" />
+        <PackageReference Include="Feliz.Recharts" Version="1.2.0" />
+        <PackageReference Include="Zanaptak.TypedCssClasses" Version="0.2.0" />
+    </ItemGroup>
+</Project>
