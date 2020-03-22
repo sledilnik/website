@@ -6,16 +6,31 @@ type RemoteData<'data, 'error> =
     | Failure of 'error
     | Success of 'data
 
+type AgeGroup =
+    { AgeFrom : int option
+      AgeTo : int option
+      TestedPositiveMale : int option
+      TestedPositiveFemale : int option
+      TestedPositiveAll : int option }
+
+type AgeGroups =
+    { Below16 : AgeGroup
+      From16to29 : AgeGroup
+      From30to49 : AgeGroup
+      From50to59 : AgeGroup
+      Above60 : AgeGroup }
+
 type DataPoint =
     { Date : System.DateTime
       Tests : int option
       TotalTests : int option
-      Cases : int option
-      TotalCases : int option
+      PositiveTests : int option
+      TotalPositiveTests : int option
       Hospitalized : int option
       HospitalizedIcu : int option
       Deaths : int option
-      TotalDeaths : int option }
+      TotalDeaths : int option
+      AgeGroups : AgeGroups }
 
 type Data = DataPoint list
 
@@ -27,8 +42,8 @@ type Metric =
 type Metrics =
     { Tests : Metric
       TotalTests : Metric
-      Cases : Metric
-      TotalCases : Metric
+      PositiveTests : Metric
+      TotalPositiveTests : Metric
       Hospitalized : Metric
       HospitalizedIcu : Metric
       Deaths : Metric
@@ -37,8 +52,8 @@ type Metrics =
 type MetricMsg =
     | Tests
     | TotalTests
-    | Cases
-    | TotalCases
+    | PositiveTests
+    | TotalPositiveTests
     | Hospitalized
     | HospitalizedIcu
     | Deaths

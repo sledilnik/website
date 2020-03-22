@@ -1,5 +1,5 @@
 [<RequireQualifiedAccess>]
-module Chart
+module MetricComparisonChart
 
 open Feliz
 open Feliz.Recharts
@@ -46,13 +46,13 @@ let renderChart (data : Data) (metrics : Metrics) =
                 yield renderMetric metrics.TotalTests
                     (fun (point : DataPoint) -> point.TotalTests |> Option.defaultValue 0)
 
-            if metrics.Cases.Visible then
-                yield renderMetric metrics.Cases
-                    (fun (point : DataPoint) -> point.Cases |> Option.defaultValue 0)
+            if metrics.PositiveTests.Visible then
+                yield renderMetric metrics.PositiveTests
+                    (fun (point : DataPoint) -> point.PositiveTests |> Option.defaultValue 0)
 
-            if metrics.TotalCases.Visible then
-                yield renderMetric metrics.TotalCases
-                    (fun (point : DataPoint) -> point.TotalCases |> Option.defaultValue 0)
+            if metrics.TotalPositiveTests.Visible then
+                yield renderMetric metrics.TotalPositiveTests
+                    (fun (point : DataPoint) -> point.TotalPositiveTests |> Option.defaultValue 0)
 
             if metrics.Hospitalized.Visible then
                 yield renderMetric metrics.Hospitalized
@@ -100,8 +100,8 @@ let renderMetricsSelectors metrics dispatch =
         prop.children [
             renderMetricSelector metrics.Tests Tests dispatch
             renderMetricSelector metrics.TotalTests TotalTests dispatch
-            renderMetricSelector metrics.Cases Cases dispatch
-            renderMetricSelector metrics.TotalCases TotalCases dispatch
+            renderMetricSelector metrics.PositiveTests PositiveTests dispatch
+            renderMetricSelector metrics.TotalPositiveTests TotalPositiveTests dispatch
             renderMetricSelector metrics.Hospitalized Hospitalized dispatch
             renderMetricSelector metrics.HospitalizedIcu HospitalizedIcu dispatch
             renderMetricSelector metrics.Deaths Deaths dispatch

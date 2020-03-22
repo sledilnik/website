@@ -5,7 +5,7 @@ open Feliz
 
 open Types
 
-let render data metrics =
+let render data =
     let header =
       [ "Datum"
         "Testi"
@@ -34,8 +34,8 @@ let render data metrics =
             Html.td [ sprintf "%d-%02d-%02d" row.Date.Date.Year row.Date.Date.Month row.Date.Date.Day |> Html.text ]
             renderNumber row.Tests
             renderNumber row.TotalTests
-            renderNumber row.Cases
-            renderNumber row.TotalCases
+            renderNumber row.PositiveTests
+            renderNumber row.TotalPositiveTests
             renderNumber row.Hospitalized
             renderNumber row.HospitalizedIcu
             renderNumber row.Deaths
@@ -46,7 +46,7 @@ let render data metrics =
         prop.className "table-responsive"
         prop.children [
             Html.table [
-                prop.className "data-table table table-bordered table-sm"
+                prop.className "table table-bordered table-hover"
                 prop.children [
                     Html.thead [ header ]
                     Html.tbody (data |> List.map renderRow)

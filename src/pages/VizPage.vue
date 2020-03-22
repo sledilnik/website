@@ -18,7 +18,8 @@ export default {
 }
 </script>
 
-<!-- <style scoped lang="sass"> -->
+<!-- TODO <style scoped lang="sass"> ne deluje -->
+
 <style lang="sass">
 @import 'node_modules/bootstrap/scss/_functions'
 @import 'node_modules/bootstrap/scss/_variables'
@@ -26,34 +27,54 @@ export default {
   $gap: $grid-gutter-width
   $font-size: 12px
 
-  margin-top: $gap
   font-size: $font-size
 
-  .metrics-selectors
+  h2
+    margin-bottom: $gap
+    text-align: center
+
+  .table
+    td, th
+      padding: 6px 9px
+
+  .metric-comparison-chart
     margin-top: $gap
-    display: flex
-    flex-wrap: wrap
-    justify-content: center
 
-  .metric-selector
-    margin: 0 $gap/6 $gap/3 $gap/6
-    border-color: $gray-300
-    &:hover
-      border-color: $gray-500
+    .metrics-selectors
+      margin-top: $gap
+      display: flex
+      flex-wrap: wrap
+      justify-content: center
 
-  .metric-selector--selected
-    color: white
+    .metric-selector
+      margin: 0 $gap/6 $gap/3 $gap/6
+      border-color: $gray-300
+      font-size: $font-size
+      &:hover
+        border-color: $gray-500
+
+    .metric-selector--selected
+      color: white
+
+  .age-group-chart
+    margin-top: $gap
 
   .data-table
     margin-top: $gap
-    font-size: $font-size
 
-    thead
-      th
-        vertical-align: top
+    .table
+      font-size: $font-size
 
-    tbody
-      td
-        width: 11.1%
+      thead
+        th
+          vertical-align: top
+          border-bottom: none
 
+      tbody
+        td
+          width: 11.1%
+
+      tr
+        &:hover
+          background-color: $gray-100
 </style>
