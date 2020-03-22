@@ -10,7 +10,7 @@ Vključeni so **dnevni podatki** (z zgodovino):
 
 Sproti pa se trudimo dodajati tudi nove oz. relevantne kategorije.
 
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem aktivno dela od 10 do 20 ljudi, saj vnašanje in preverjanje podatkov zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva -** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja. Dodate jo enostavno, kot komentar na katerokoli polje v dokumentu, lahko pa preverite tudi  **_Kako urejamo podatke_**  v nadaljevanju. 
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem aktivno dela od 10 do 20 ljudi, saj vnašanje in preverjanje podatkov zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja. Dodate jo enostavno, kot komentar na katerokoli polje v dokumentu, lahko pa preverite tudi  **_Kako urejamo podatke_**  v nadaljevanju. 
 
 ## Pokaži mi zbrane podatke  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)   ([CSV izvoz](https://github.com/slo-covid-19/data)) ([REST API](https://covid19.rthand.com/api/data)).
 
@@ -18,7 +18,8 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 * [**Infografika**](/#/viz) - nekaj grafov z našimi podatki
 * [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
-*  [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
+* [**COVID-19 / Slovenia**](https://joahim.github.io/covid-19/) - vizualizacije od [TwoForSeven](https://twitter.com/TwoForSeven)
+* [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
 *  [**Razmerja okužbe/testi**](https://docs.google.com/spreadsheets/d/1o9DE8PEXvEOZ0yz02JsUGNhWGx2Q11Ncq2uaY-rE-QY/edit#gid=0) - vzdržuje [Matjaž Lipuš](https://twitter.com/MatjazL)
 *  [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevid po dnevih, animacija rasti [Miloš Popovič](https://twitter.com/milos_agathon) 
 
