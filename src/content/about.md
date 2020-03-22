@@ -1,6 +1,6 @@
 # **Sledenje SLO COVID-19**
 
-Projekt  zbira podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji. Vključeni so podatki o številu opravljenih testov, številu potrjeno okuženih v Sloveniji, po posameznih regijah, in občinah. Vodimo tudi evidenco o bolnišnični oskrbi pacientov s COVID-19 (hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe). Sproti pa se trudimo dodajati tudi nove oz. relevantne kategorije.
+Projekt zbira podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji. Vključeni so podatki o številu opravljenih testov, številu potrjeno okuženih v Sloveniji, po posameznih regijah, in občinah. Vodimo tudi evidenco o bolnišnični oskrbi pacientov s COVID-19 (hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe). Sproti pa se trudimo dodajati tudi nove oz. relevantne kategorije.
 
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem aktivno dela od 10 do 20 ljudi, saj vnašanje in preverjanje podatkov zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva -** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja. Dodate jo enostavno, kot komentar na katerokoli polje v dokumentu, lahko pa preverite tudi  **_Kako urejamo podatke_**  v nadaljevanju. 
 
@@ -10,8 +10,8 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 *  [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
 *  [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
-*  [**Razmerja okužbe/testi**](https://docs.google.com/spreadsheets/d/1o9DE8PEXvEOZ0yz02JsUGNhWGx2Q11Ncq2uaY-rE-QY/edit#gid=0) - vzdržuje Matjaž Lipuš
-*  [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevi po dnevih [**Miloš Popovič**](https://twitter.com/milos_agathon?lang=en) 
+*  [**Razmerja okužbe/testi**](https://docs.google.com/spreadsheets/d/1o9DE8PEXvEOZ0yz02JsUGNhWGx2Q11Ncq2uaY-rE-QY/edit#gid=0) - vzdržuje [Matjaž Lipuš](https://twitter.com/MatjazL)
+*  [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevi po dnevih [Miloš Popovič](https://twitter.com/milos_agathon) 
 
 Če bi podatke radi uporabili oz. potrebujete drugače strukturirane podatke za namene podatkovne vizualizacije, predikcijskega modeliranja ali podobno - kontaktirajte [@LukaRenko](https://twitter.com/lukarenko).
 
@@ -24,7 +24,7 @@ Zato tudi računamo na vašo pomoč - tako pri zbiranju in preverjanju podatkov,
 
 ## Kako urejamo podatke:
 
-[Statistiko](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14:00 s podatki iz NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR tudi pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107) 
+[Podatke](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14:00 s podatki iz NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR tudi pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107) 
 
 Kako urejamo bolnišnično oskrbo - [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010): 
 
