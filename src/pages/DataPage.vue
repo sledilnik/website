@@ -1,12 +1,15 @@
 <template>
-  <b-container>
-    <b-row>
+  <b-container fluid>
+    <b-row no-gutters>
+      <b-col>
       <iframe
         style="width:100%; height:800px"
         headers="false”"
         src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRNMoa1LR27hrziuNRnIi7_KC5w3c1IJUzESPvqSZXFCOHLE6VP7nTy5lXiC0sbj0eagkv9cM_fDBRj/pubhtml?widget=true&amp;"
       ></iframe>
+      </b-col>
     </b-row>
+
   </b-container>
 </template>
 

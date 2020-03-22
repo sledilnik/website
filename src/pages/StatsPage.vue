@@ -24,14 +24,14 @@
       </b-card-group>
     </b-row>
     <b-row>
-      <b-col class="col-6">
+      <b-col cols="6" cols-md="12">
         <b-card title="Testiranje" sub-title="Skupno stevilo testiranih in pozitivnih testov">
           <b-card-body>
             <LineChart :chartdata="chartTests.data" :options="chartTests.options" />
           </b-card-body>
         </b-card>
       </b-col>
-      <b-col class="col-6">
+      <b-col cols="6" cols-md="12">
         <b-card title="Po regijah" sub-title="Pozitivni testi po regijah">
           <b-card-body>
             <LineChart :chartdata="chartRegions.data" :options="chartRegions.options" />
@@ -50,7 +50,6 @@
 </template>
 
 <script>
-import * as d3 from "d3";
 import InfoCard from "components/cards/InfoCard";
 import LineChart from "components/charts/LineChart";
 
@@ -226,11 +225,6 @@ export default {
     }
   },
   methods: {
-    // loadData() {
-    //   return d3.csv(
-    //     "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
-    //   );
-    // },
     getLastValue(csvdata, field) {
       if (csvdata && csvdata.length > 0) {
         let i = 0;
