@@ -2947,11 +2947,6 @@ d3-zoom@1:
     d3-selection "1"
     d3-transition "1"
 
-d3.js@^0.0.2-security:
-  version "0.0.2-security"
-  resolved "https://registry.yarnpkg.com/d3.js/-/d3.js-0.0.2-security.tgz#70b602e9fe3eb6f35bdff355ff58cd588d85ca9a"
-  integrity sha512-tSm4YPzBhAZpGQGcxXHdQ9L5zanfel8Rnesff4UKDvvbRTDLUC38caf7KYuU90K72AAhCvUJshsczCC3YCZubQ==
-
 d3@^5.15.0:
   version "5.15.0"
   resolved "https://registry.yarnpkg.com/d3/-/d3-5.15.0.tgz#ffd44958e6a3cb8a59a84429c45429b8bca5677a"

@@ -13,11 +13,6 @@ export default {
     name: String,
     content: Promise
   },
-  // computed: {
-  //   foo: () => {
-  //     console.log("I Am foo")
-  //   }
-  // },
   data() {
     return {
       staticContent: ""
