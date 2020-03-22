@@ -11,7 +11,7 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 *  [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
 *  [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
 *  [**Razmerja okužbe/testi**](https://docs.google.com/spreadsheets/d/1o9DE8PEXvEOZ0yz02JsUGNhWGx2Q11Ncq2uaY-rE-QY/edit#gid=0) - vzdržuje [Matjaž Lipuš](https://twitter.com/MatjazL)
-*  [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevi po dnevih [Miloš Popovič](https://twitter.com/milos_agathon) 
+*  [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevid po dnevih, animacija rasti [Miloš Popovič](https://twitter.com/milos_agathon) 
 
 Če bi podatke radi uporabili oz. potrebujete drugače strukturirane podatke za namene podatkovne vizualizacije, predikcijskega modeliranja ali podobno - kontaktirajte [@LukaRenko](https://twitter.com/lukarenko).
 
@@ -45,6 +45,11 @@ Kako urejamo posamezne primere [tabela Primeri](https://docs.google.com/spreadsh
 ## Bi želel/a sodelovati? 
 
 Če imaš konkretne predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o zdravstvenem sistemu ali COVID-19, lahko [dobiš pravice za urejanje](javascript:void(location.href='mailto:'+String.fromCharCode(108,117,107,97,46,114,101,110,107,111,64,103,109,97,105,108,46,99,111,109)+'?subject=SLO-Covid-19%20-%20urejanje%2Fpredlog&body=Predlagam%2C%20da...%20')) dokumenta. Če lahko projektu namenite nekaj časa vsak dan, se pridružite [naši Slack skupnosti](http://slo-covid-19.slack.com).  Podatke iz dokumenta lahko prosto uporabljate tudi za lastne vizualizacije in/ali predikcijske modele - z veseljem jih objavimo na tej strani!
+
+Sicer ekipa uporablja naslednje komunikacijske kanale:
+* [Slack](http://slo-covid-19.slack.com) 
+* [Trello](https://trello.com/slocovid19)
+* [slo-covid-19.rtfm.si](https://slo-covid-19.rtfm.si/)
 
 #### Ostale zanimive vsebine
 
