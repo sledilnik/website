@@ -1,16 +1,18 @@
 # **Podatki o širjenju virusa SARS-CoV-19 in bolezni COVID-19 za Slovenijo**
 
-Projekt zbira podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji. 
+Projekt zbira podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji.
+
 Vključeni so **dnevni podatki** (z zgodovino):
 * število opravljenih testov, 
 * število potrjeno okuženih: v Sloveniji, po starosti, po spolu, po posameznih regijah, in po občinah
 * evidenca o bolnišnični oskrbi pacientov s COVID-19 (hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe).
 * spremljanje posameznih primerov (posebno kritičnih oseb: zaposleni v zdravstvu, DSO, CZ...)
+
 Sproti pa se trudimo dodajati tudi nove oz. relevantne kategorije.
 
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem aktivno dela od 10 do 20 ljudi, saj vnašanje in preverjanje podatkov zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva -** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja. Dodate jo enostavno, kot komentar na katerokoli polje v dokumentu, lahko pa preverite tudi  **_Kako urejamo podatke_**  v nadaljevanju. 
 
-## Pokaži mi zbrane podatke  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)   ([CSV izvoz](https://github.com/slo-covid-19/data)).
+## Pokaži mi zbrane podatke  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)   ([CSV izvoz](https://github.com/slo-covid-19/data)) ([REST API](https://covid19.rthand.com/api/data)).
 
 ### Podatki se že uporabljajo za različne vizualizacije in statistike: 
 
