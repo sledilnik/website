@@ -8,7 +8,7 @@
 | `src/assets` | Static content (images, media files) |
 | `src/components` | Reusable page components |
 | `src/content` | Markdown content for static pages |
-| `src/pages` | Actual pages of website (each page is one component, StaticPage is reused with different content) |
+| `src/pages` | Actual pages of website (each page is one component, StaticPage is reused with different content). Pages are rendered inside App component (in `router-view`) |
 | `src/App.vue` | Main app component (renders `router-view`) |
 | `src/main.js` | Webpack entrypoint |
 
