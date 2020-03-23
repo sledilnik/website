@@ -5,7 +5,7 @@ open Fable.SimpleJson
 
 open Types
 
-let private dataUrl = "https://covid19.rthand.com/api/data"
+let private dataUrl = "https://covid19.rthand.com/api/stats"
 
 type TransferAgeGroup =
     { ageFrom : int option
@@ -64,7 +64,7 @@ type private TransferDataPoint =
            above60 : TransferAgeGroup |}
     }
 
-    member this.ToDomain : DataPoint =
+    member this.ToDomain : StatsDataPoint =
         { Date = System.DateTime(this.year, this.month, this.day)
           Tests = this.performedTests
           TotalTests = this.performedTestsToDate
@@ -87,7 +87,7 @@ let loadData =
     async {
         let! (statusCode, response) = Http.get dataUrl
         if statusCode <> 200 then
-            return DataLoaded (sprintf "Napaka pri nalaganju podatkov: %d" statusCode |> Failure)
+            return StatsDataLoaded (sprintf "Napaka pri nalaganju podatkov: %d" statusCode |> Failure)
         else
             try
                 let transferData =
@@ -99,7 +99,7 @@ let loadData =
                     transferData
                     |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
 
-                return DataLoaded (Success data)
+                return StatsDataLoaded (Success data)
             with
-                | ex -> return DataLoaded (sprintf "Napaka pri branju podatkov: %s" ex.Message |> Failure)
+                | ex -> return StatsDataLoaded (sprintf "Napaka pri branju podatkov: %s" ex.Message |> Failure)
     }

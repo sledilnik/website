@@ -20,7 +20,7 @@ type AgeGroups =
       From50to59 : AgeGroup
       Above60 : AgeGroup }
 
-type DataPoint =
+type StatsDataPoint =
     { Date : System.DateTime
       Tests : int option
       TotalTests : int option
@@ -32,7 +32,7 @@ type DataPoint =
       TotalDeaths : int option
       AgeGroups : AgeGroups }
 
-type Data = DataPoint list
+type StatsData = StatsDataPoint list
 
 type Metric =
     { Color : string
@@ -60,9 +60,9 @@ type MetricMsg =
     | TotalDeaths
 
 type State =
-    { Data : RemoteData<Data, string>
+    { StatsData : RemoteData<StatsData, string>
       Metrics : Metrics }
 
 type Msg =
-    | DataLoaded of RemoteData<Data, string>
+    | StatsDataLoaded of RemoteData<StatsData, string>
     | ToggleMetricVisible of MetricMsg

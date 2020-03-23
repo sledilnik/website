@@ -17,7 +17,7 @@ open Types
 //     { name = "Page G"; uv = 3490; pv = 4300 }
 // ]
 
-let renderChart (data : Data) =
+let renderChart (data : StatsData) =
     let lastDataPoint = List.last data
     let ageGroupData =
         [ lastDataPoint.AgeGroups.Below16

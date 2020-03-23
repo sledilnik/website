@@ -29,7 +29,7 @@ let render data =
             [ prop.className "has-text-right"
               prop.children [ renderOption number ] ]
 
-    let renderRow (row : DataPoint) =
+    let renderRow (row : StatsDataPoint) =
         Html.tr [
             Html.td [ sprintf "%d-%02d-%02d" row.Date.Date.Year row.Date.Date.Month row.Date.Date.Day |> Html.text ]
             renderNumber row.Tests

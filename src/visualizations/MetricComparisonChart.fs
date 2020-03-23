@@ -9,7 +9,7 @@ open Types
 let formatDate (date : System.DateTime) =
     sprintf "%d.%d." date.Date.Day date.Date.Month
 
-let renderChart (data : Data) (metrics : Metrics) =
+let renderChart (data : StatsData) (metrics : Metrics) =
 
     let renderLineLabel (input: ILabelProperties) =
         Html.text [
@@ -22,7 +22,7 @@ let renderChart (data : Data) (metrics : Metrics) =
             prop.text input.value
         ]
 
-    let renderMetric (metric : Metric) (dataKey : DataPoint -> int) =
+    let renderMetric (metric : Metric) (dataKey : StatsDataPoint -> int) =
         Recharts.line [
             line.name metric.Label
             line.monotone
@@ -40,35 +40,35 @@ let renderChart (data : Data) (metrics : Metrics) =
 
             if metrics.Tests.Visible then
                 yield renderMetric metrics.Tests
-                    (fun (point : DataPoint) -> point.Tests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.Tests |> Option.defaultValue 0)
 
             if metrics.TotalTests.Visible then
                 yield renderMetric metrics.TotalTests
-                    (fun (point : DataPoint) -> point.TotalTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.TotalTests |> Option.defaultValue 0)
 
             if metrics.PositiveTests.Visible then
                 yield renderMetric metrics.PositiveTests
-                    (fun (point : DataPoint) -> point.PositiveTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.PositiveTests |> Option.defaultValue 0)
 
             if metrics.TotalPositiveTests.Visible then
                 yield renderMetric metrics.TotalPositiveTests
-                    (fun (point : DataPoint) -> point.TotalPositiveTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.TotalPositiveTests |> Option.defaultValue 0)
 
             if metrics.Hospitalized.Visible then
                 yield renderMetric metrics.Hospitalized
-                    (fun (point : DataPoint) -> point.Hospitalized |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.Hospitalized |> Option.defaultValue 0)
 
             if metrics.HospitalizedIcu.Visible then
                 yield renderMetric metrics.HospitalizedIcu
-                    (fun (point : DataPoint) -> point.HospitalizedIcu |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.HospitalizedIcu |> Option.defaultValue 0)
 
             if metrics.Deaths.Visible then
                 yield renderMetric metrics.Deaths
-                    (fun (point : DataPoint) -> point.Deaths |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.Deaths |> Option.defaultValue 0)
 
             if metrics.TotalDeaths.Visible then
                 yield renderMetric metrics.TotalDeaths
-                    (fun (point : DataPoint) -> point.TotalDeaths |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> point.TotalDeaths |> Option.defaultValue 0)
         }
 
     Recharts.lineChart [

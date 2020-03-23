@@ -2,19 +2,17 @@ module App
 
 open Elmish
 open Feliz
-// open Fable.React
-// open Fable.React.Props
 
 open Types
 
 let init() =
     let initialState =
-        { Data = NotAsked
+        { StatsData = NotAsked
           Metrics =
             { Tests =               { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
               TotalTests =          { Color = "#bda535" ; Visible = false ; Label = "Testiranja skupaj" }
-              PositiveTests =               { Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
-              TotalPositiveTests =          { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi skupaj" }
+              PositiveTests =       { Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
+              TotalPositiveTests =  { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi skupaj" }
               Hospitalized =        { Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
               HospitalizedIcu =     { Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
               Deaths =              { Color = "#075b76" ; Visible = false ; Label = "Umrli" }
@@ -24,8 +22,8 @@ let init() =
 
 let update (msg: Msg) (state: State) =
     match msg with
-    | DataLoaded data ->
-        { state with Data = data }, Cmd.none
+    | StatsDataLoaded data ->
+        { state with StatsData = data }, Cmd.none
     | ToggleMetricVisible metric ->
         let newMetrics =
             match metric with
@@ -40,13 +38,13 @@ let update (msg: Msg) (state: State) =
         { state with Metrics = newMetrics }, Cmd.none
 
 let render (state: State) (dispatch: Msg -> unit) =
-    match state.Data with
+    match state.StatsData with
     | NotAsked -> Html.none
     | Loading -> Html.text "Nalagam podatke ..."
     | Failure error -> Html.text error
     | Success data ->
         Html.div
-            [ prop.className "visualization container-fluid"
+            [ prop.className "visualization container"
               prop.children
                 [ Html.section
                     [ prop.className "metric-comparison-chart"
