@@ -14,8 +14,8 @@ Sproti se trudimo dodajati tudi nove oz. relevantne kategorije.
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem aktivno dela od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja. Dodate jo enostavno, kot komentar na katerokoli polje v dokumentu, lahko pa preverite tudi  **_Kako urejamo podatke_**  v nadaljevanju. 
 
 ## Zbrani podatki  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)  
-* [CSV izvoz](https://github.com/slo-covid-19/data) 
-* [REST API](https://covid19.rthand.com/api/data)
+* **CSV izvoz**: [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv) 
+* **REST API**: [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients)
 
 ### Podatki se že uporabljajo za različne vizualizacije in statistike: 
 
