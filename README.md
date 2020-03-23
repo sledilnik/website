@@ -42,9 +42,9 @@ yarn run test
 yarn run lint
 ```
 
-
 ## Resources
 
-* https://vuejs.org/v2/guide/
-* https://router.vuejs.org/
-* https://webpack.js.org/concepts/
+* vue (framework) https://vuejs.org/v2/guide/
+* vue-router (view routing) https://router.vuejs.org/
+* vue-bootstrap (styled components) https://bootstrap-vue.js.org/
+* webpack (bundler) https://webpack.js.org/concepts/
