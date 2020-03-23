@@ -34,6 +34,24 @@ type StatsDataPoint =
 
 type StatsData = StatsDataPoint list
 
+type City =
+  { Name : string
+    PositiveTests : int option }
+
+type Region =
+  { Name : string
+    Cities : City list }
+
+type RegionsDataPoint =
+    { Date : System.DateTime
+      Regions : Region list }
+
+type RegionsData = RegionsDataPoint list
+
+type Data =
+    { StatsData : StatsData
+      RegionsData : RegionsData }
+
 type Metric =
     { Color : string
       Visible : bool
@@ -60,9 +78,9 @@ type MetricMsg =
     | TotalDeaths
 
 type State =
-    { StatsData : RemoteData<StatsData, string>
+    { Data : RemoteData<Data, string>
       Metrics : Metrics }
 
 type Msg =
-    | StatsDataLoaded of RemoteData<StatsData, string>
+    | DataLoaded of RemoteData<Data, string>
     | ToggleMetricVisible of MetricMsg

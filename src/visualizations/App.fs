@@ -7,7 +7,7 @@ open Types
 
 let init() =
     let initialState =
-        { StatsData = NotAsked
+        { Data = NotAsked
           Metrics =
             { Tests =               { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
               TotalTests =          { Color = "#bda535" ; Visible = false ; Label = "Testiranja skupaj" }
@@ -22,8 +22,8 @@ let init() =
 
 let update (msg: Msg) (state: State) =
     match msg with
-    | StatsDataLoaded data ->
-        { state with StatsData = data }, Cmd.none
+    | DataLoaded data ->
+        { state with Data = data }, Cmd.none
     | ToggleMetricVisible metric ->
         let newMetrics =
             match metric with
@@ -38,7 +38,7 @@ let update (msg: Msg) (state: State) =
         { state with Metrics = newMetrics }, Cmd.none
 
 let render (state: State) (dispatch: Msg -> unit) =
-    match state.StatsData with
+    match state.Data with
     | NotAsked -> Html.none
     | Loading -> Html.text "Nalagam podatke ..."
     | Failure error -> Html.text error
@@ -50,16 +50,16 @@ let render (state: State) (dispatch: Msg -> unit) =
                     [ prop.className "metric-comparison-chart"
                       prop.children
                         [ Html.h2 "Pregled in primerjava podatkov COVID-19 za Slovenijo"
-                          MetricComparisonChart.render data state.Metrics dispatch ] ]
+                          MetricComparisonChart.render data.StatsData state.Metrics dispatch ] ]
                   Html.section
                     [ prop.className "age-group-chart"
                       prop.children
                         [ Html.h2 "Pozitivni testi po starostnih skupinah"
-                          AgeGroupChart.render data ] ]
+                          AgeGroupChart.render data.StatsData ] ]
                   Html.section
                     [ prop.className "data-table"
                       prop.children
                         [ Html.h2 "Tabelarični prikaz podatkov"
-                          DataTable.render data ] ]
+                          DataTable.render data.StatsData ] ]
                 ]
             ]

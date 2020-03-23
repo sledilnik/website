@@ -4,8 +4,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Types.fs" />
-        <Compile Include="StatsData.fs" />
-        <Compile Include="RegionsData.fs" />
+        <Compile Include="DataLoader.fs" />
         <Compile Include="MetricComparisonChart.fs" />
         <Compile Include="AgeGroupChart.fs" />
         <Compile Include="RegionChart.fs" />
