@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { Visualizations } from 'visualizations/src/App.fsproj'
+import { Visualizations } from 'visualizations/App.fsproj'
 export default {
   name: "VizPage",
   mounted() {
