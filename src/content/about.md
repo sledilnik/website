@@ -62,6 +62,7 @@ Kako urejamo posamezne primere [tabela Primeri](https://docs.google.com/spreadsh
 
 Ekipa uporablja naslednje komunikacijske kanale:
 * [**slo-covid-19.rtfm.si**](https://slo-covid-19.rtfm.si/) - javna predstavitev delovanja, objava zanimivih povezav
+* [**GitHub**](https://github.com/slo-covid-19) - podatki (CSV), spletna stran, orodja
 * [**Slack**](http://slo-covid-19.slack.com) - komunikacija med člani skupnosti
 * [**Trello**](https://trello.com/slocovid19) - skupni cilji in plani
 
