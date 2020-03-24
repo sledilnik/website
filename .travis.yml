@@ -26,7 +26,6 @@ deploy:
       all_branches: true
     provider: pages
     local_dir: dist
-    repo: slo-covid-19/website
     target_branch: gh-pages
     committer_from_gh: true
     cleanup: false
