@@ -32,8 +32,9 @@ deploy:
     cleanup: false
     skip_cleanup: true
     token: $GITHUB_TOKEN
-    # keep_history: true
+    fqdn: slo-covid-19-stage.rtfm.si
     verbose: true
+    deploy_strategy: git
   - on:
       branch: master
     provider: pages
@@ -44,6 +45,6 @@ deploy:
     cleanup: false
     skip_cleanup: true
     token: $GITHUB_TOKEN
-    # keep_history: true
     fqdn: slo-covid-19.rtfm.si
     verbose: true
+    deploy_strategy: git
