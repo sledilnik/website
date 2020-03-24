@@ -41,17 +41,17 @@ NIJZ in žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o �
 
 ## Kako urejamo podatke:
 
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14:00 s podatki iz NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR tudi pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107)
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14:00 s podatki iz NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR tudi pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
 Kako urejamo bolnišnično oskrbo - [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
 
--   Spremljamo objave vseh treh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor in UK Golnik)
+-   Spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje)
 -   Spremljamo število hospitaliziranih (vsi oddelki), na intenzivni negi in v kritičnem stanju
--   Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji.
+-   Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
 -   Kjer so podatki nepopolni s sklepanjem določimo vrednosti (izvedemo s formulo)
--   Vsi viri in sklepanja so zavedena kot komentar na posameznih celicah
+-   Vsi viri in sklepanja so zavedena kot komentar na posameznih celicah (za možnost preverjanja)
 
-Kako urejamo posamezne primere [tabela Primeri](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=1419250136):
+Kako urejamo posamezne primere - [tabela Primeri](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=1419250136):
 
 -   Posamezne primere spremljamo iz podatkov iz tiskovne konference in objav medijev (link na vir).
 -   Zabeležimo predvsem identifikacijske podatke in sledimo izvor in žarišča (kjer je možno).
@@ -62,9 +62,10 @@ Kako urejamo posamezne primere [tabela Primeri](https://docs.google.com/spreadsh
 ## Ostale zanimive vsebine
 
 V zavihku [**Viri**](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=328677411) si lahko ogledate tudi naše vire podatkov. 
+
 Na strani [**Povezave**](/#/links) pa zbirko povezav na ostale statistike, podatkovne vizualizacije in zanimive objave o metodah in ukrepih, ki se nanašajo na COVID-19 pri nas in po svetu in so vplivale tudi na naše zbiranje podatkov. 
 
-#### Pogoji uporabe
+## Pogoji uporabe
 
 Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse nekomercialne vsebine ob navedbi vira - [**slo-covid-19.rtfm.si**](http://slo-covid-19.rtfm.si/).  
 Za izvoz podatkov v drugih formatih ali uporabo za vizualizacije nas kontaktirajte na [@LukaRenko](https://twitter.com/lukarenko)
