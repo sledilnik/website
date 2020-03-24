@@ -46,13 +46,13 @@ let init data : State * Cmd<Msg> =
         { Data = data
           Metrics =
             { Tests =              { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
-              TotalTests =         { Color = "#bda535" ; Visible = false ; Label = "Testiranja skupaj" }
+              TotalTests =         { Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
               PositiveTests =      { Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
-              TotalPositiveTests = { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi skupaj" }
+              TotalPositiveTests = { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi - skupaj" }
               Hospitalized =       { Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
               HospitalizedIcu =    { Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
               Deaths =             { Color = "#075b76" ; Visible = false ; Label = "Umrli" }
-              TotalDeaths =        { Color = "#003f5c" ; Visible = false ; Label = "Umrli skupaj" } } }
+              TotalDeaths =        { Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" } } }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =

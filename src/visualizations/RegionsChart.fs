@@ -11,18 +11,18 @@ open Types
 open Recharts
 
 let dict =
-    [ "ce", "Celje"
-      "kk", "Krško"
-      "kp", "Koper"
-      "kr", "Kranj"
-      "lj", "Ljubljana"
-      "mb", "Maribor"
-      "ms", "Murska Sobota"
-      "ng", "Nova Gorica"
-      "nm", "Novo Mesto"
-      "po", "Postojna"
-      "sg", "Slovenj Gradec"
-      "za", "Zagorje"
+    [ "ce", "Savinjska"
+      "kk", "Posavska"
+      "kp", "Obalno-kraška"
+      "kr", "Gorenjska"
+      "lj", "Osrednjeslovenska"
+      "mb", "Podravska"
+      "ms", "Pomurska"
+      "ng", "Goriška"
+      "nm", "Jugovzhodna Slovenija"
+      "po", "Primorsko-notranjska"
+      "sg", "Koroška"
+      "za", "Zasavska"
       "t",  "Tujina" ]
     |> Map.ofList
 
