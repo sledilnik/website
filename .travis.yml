@@ -19,7 +19,7 @@ install: yarn --frozen-lockfile
 script: yarn build
 deploy:
   - on:
-      branch: visualization
+      all_branches: true
     provider: pages
     local_dir: dist
     repo: slo-covid-19/website
