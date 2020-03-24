@@ -58,12 +58,7 @@ type private TransferStatsDataPoint =
            kr : int option
            lj : int option
            mb : int option |}
-      statePerAgeToDate :
-        {| below16 : TransferAgeGroup
-           from16to29 : TransferAgeGroup
-           from30to49 : TransferAgeGroup
-           from50to59 : TransferAgeGroup
-           above60 : TransferAgeGroup |}
+      statePerAgeToDate : TransferAgeGroup list
     }
 
     member this.ToDomain : StatsDataPoint =
@@ -76,14 +71,18 @@ type private TransferStatsDataPoint =
           HospitalizedIcu = this.statePerTreatment.inICU
           Deaths = this.statePerTreatment.deceased
           TotalDeaths = this.statePerTreatment.deceasedToDate
-          AgeGroups =
-            { Below16 = this.statePerAgeToDate.below16.ToDomain
-              From16to29 = this.statePerAgeToDate.from16to29.ToDomain
-              From30to49 = this.statePerAgeToDate.from30to49.ToDomain
-              From50to59 = this.statePerAgeToDate.from50to59.ToDomain
-              Above60 = this.statePerAgeToDate.above60.ToDomain } }
+          AgeGroups = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain) }
 
 type private TransferStatsData = TransferStatsDataPoint list
+
+let parseStatsData responseData =
+    let transferStatsData =
+        responseData
+        |> SimpleJson.parse
+        |> Json.convertFromJsonAs<TransferStatsData>
+
+    transferStatsData
+    |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
 
 let parseRegionsData data =
     data
@@ -137,17 +136,8 @@ let loadData =
             return DataLoaded (sprintf "Napaka pri nalaganju regijskih podatkov: %d" regionsStatusCode |> Failure)
         else
             try
-                let transferStatsData =
-                    statsResponse
-                    |> SimpleJson.parse
-                    |> Json.convertFromJsonAs<TransferStatsData>
-
-                let statsData =
-                    transferStatsData
-                    |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
-
                 let data =
-                  { StatsData = statsData
+                  { StatsData = parseStatsData statsResponse
                     RegionsData = parseRegionsData regionsResponse }
 
                 return DataLoaded (Success data)

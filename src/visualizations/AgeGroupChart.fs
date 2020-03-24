@@ -9,11 +9,12 @@ open Types
 let renderChart (data : StatsData) =
     let latestDataPoint = List.last data
     let ageGroupData =
-        [ latestDataPoint.AgeGroups.Below16
-          latestDataPoint.AgeGroups.From16to29
-          latestDataPoint.AgeGroups.From30to49
-          latestDataPoint.AgeGroups.From50to59
-          latestDataPoint.AgeGroups.Above60 ]
+        latestDataPoint.AgeGroups
+        |> List.filter (fun ageGroup ->
+            match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
+            | None, None, None -> false
+            | _ -> true
+        )
 
     Recharts.barChart [
         barChart.data ageGroupData

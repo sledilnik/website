@@ -13,12 +13,7 @@ type AgeGroup =
       TestedPositiveFemale : int option
       TestedPositiveAll : int option }
 
-type AgeGroups =
-    { Below16 : AgeGroup
-      From16to29 : AgeGroup
-      From30to49 : AgeGroup
-      From50to59 : AgeGroup
-      Above60 : AgeGroup }
+type AgeGroups = AgeGroup list
 
 type StatsDataPoint =
     { Date : System.DateTime
