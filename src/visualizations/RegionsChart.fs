@@ -114,7 +114,7 @@ let renderChart (state : State) =
         Recharts.line [
             line.name (dictOfKey metric.Key)
             line.monotone
-            line.animationDuration 1000
+            line.isAnimationActive false
             line.stroke metric.Color
             line.label renderLineLabel
             line.dataKey dataKey

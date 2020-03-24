@@ -90,7 +90,7 @@ let renderChart (data : StatsData) (metrics : Metrics) =
         Recharts.line [
             line.name metric.Label
             line.monotone
-            line.animationDuration 1000
+            line.isAnimationActive false
             line.stroke metric.Color
             line.label renderLineLabel
             line.dataKey dataKey
@@ -99,7 +99,7 @@ let renderChart (data : StatsData) (metrics : Metrics) =
     let children =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey (fun point -> formatDate point.Date) ]
-            yield Recharts.yAxis [ yAxis.label {| value = "Število testov / Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            yield Recharts.yAxis [ yAxis.label {| value = "Število testiranj / Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
