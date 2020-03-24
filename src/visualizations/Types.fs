@@ -35,7 +35,7 @@ type Municipality =
 
 type Region =
     { Name : string
-      Cities : Municipality list }
+      Municipalities : Municipality list }
 
 type RegionsDataPoint =
     { Date : System.DateTime

@@ -138,7 +138,7 @@ export default {
       border-color: $gray-300
       font-size: $font-size
       &:hover
-      border-color: $gray-500
+        border-color: $gray-500
 
   .metric-selector--selected
       color: white

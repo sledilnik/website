@@ -3,6 +3,7 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Recharts.fs" />
         <Compile Include="Types.fs" />
         <Compile Include="DataLoader.fs" />
         <Compile Include="MetricsComparisonChart.fs" />

@@ -103,7 +103,7 @@ let parseRegionsData data =
                                 regionMap
                                 |> Map.toList
                                 |> List.map (fun (regionKey, regionValue) ->
-                                    let cities =
+                                    let municipalities =
                                         match regionValue with
                                         | JObject cityMap ->
                                             cityMap
@@ -116,7 +116,7 @@ let parseRegionsData data =
                                             )
                                         | _ -> failwith (sprintf "nepričakovan format podatkov za regijo %s" regionKey)
                                     { Name = regionKey
-                                      Cities = cities }
+                                      Municipalities = municipalities }
                                 )
                             { Date = date
                               Regions = regions }

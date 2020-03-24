@@ -6,11 +6,11 @@ open Elmish
 
 open Feliz
 open Feliz.ElmishComponents
-open Feliz.Recharts
 
 open Types
+open Recharts
 
-let dictionary =
+let dict =
     [ "ce", "Celje"
       "kk", "Krško"
       "kp", "Koper"
@@ -23,21 +23,35 @@ let dictionary =
       "po", "Postojna"
       "sg", "Slovenj Gradec"
       "za", "Zagorje"
-      "t", "Tujina" ]
+      "t",  "Tujina" ]
     |> Map.ofList
+
+let colors =
+    [ "#ffa600"
+      "#dba51d"
+      "#afa53f"
+      "#70a471"
+      "#159ab0"
+      "#128ea5"
+      "#10829a"
+      "#0d768f"
+      "#0a6b85"
+      "#085f7a"
+      "#055470"
+      "#024a66"
+      "#003f5c" ]
 
 let excludedRegions = ["regija"]
 
-let dictOrKey key =
-    dictionary
+let dictOfKey key =
+    dict
     |> Map.tryFind key
     |> Option.defaultValue key
 
 type Metric =
     { Key : string
       Color : string
-      Visible : bool
-      Label : string }
+      Visible : bool }
 
 type State =
     { Data : RegionsData
@@ -47,17 +61,25 @@ type State =
 type Msg =
     | ToggleRegionVisible of string
 
+let regionTotal (region : Region) : int =
+    region.Municipalities
+    |> List.map (fun city -> city.PositiveTests)
+    |> List.choose id
+    |> List.sum
+
 let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
-    let regions = lastDataPoint.Regions
+    let regions =
+        lastDataPoint.Regions
+        |> List.sortByDescending (fun region -> regionTotal region)
     let metrics =
         regions
         |> List.filter (fun region -> not (List.contains region.Name excludedRegions))
-        |> List.map (fun region ->
+        |> List.mapi2 (fun i color region ->
+            let config = dictOfKey region.Name
             { Key = region.Name
-              Color = "hotpink"
-              Visible = false
-              Label = dictOrKey region.Name } )
+              Color = color
+              Visible = i <= 2 } ) colors
 
     { Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
 
@@ -88,36 +110,34 @@ let renderChart (state : State) =
             prop.text input.value
         ]
 
-    let renderRegion (region : Region) (dataKey : RegionsDataPoint -> int) =
+    let renderRegion (metric : Metric) (dataKey : RegionsDataPoint -> int) =
         Recharts.line [
-            line.name (dictOrKey region.Name)
+            line.name (dictOfKey metric.Key)
             line.monotone
-            line.stroke "#666"
+            line.animationDuration 1000
+            line.stroke metric.Color
             line.label renderLineLabel
             line.dataKey dataKey
         ]
 
-    let regionsToRender =
-        state.Regions
-        |> List.filter (fun region ->
-            state.Metrics
-            |> List.exists (fun metric ->
-                metric.Visible = true && region.Name = metric.Key) )
+    let metricsToRender =
+        state.Metrics
+        |> List.filter (fun metric -> metric.Visible)
 
     let children =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey (fun point -> formatDate point.Date) ]
-            yield Recharts.yAxis [ ]
+            yield Recharts.yAxis [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
-            for regionToRender in regionsToRender do
-                yield renderRegion regionToRender
+            for metricToRender in metricsToRender do
+                yield renderRegion metricToRender
                     (fun (point : RegionsDataPoint) ->
                         let region =
                             point.Regions
-                            |> List.find (fun reg -> reg.Name = regionToRender.Name)
-                        region.Cities
+                            |> List.find (fun reg -> reg.Name = metricToRender.Key)
+                        region.Municipalities
                         |> List.map (fun city -> city.PositiveTests)
                         |> List.choose id
                         |> List.sum
@@ -145,7 +165,7 @@ let renderMetricSelector (metric : Metric) dispatch =
         prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
-        prop.text metric.Label ]
+        prop.text (dictOfKey metric.Key) ]
 
 let renderMetricsSelectors metrics dispatch =
     Html.div [
