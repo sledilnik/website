@@ -20,6 +20,16 @@ script: yarn build
 deploy:
   - provider: pages
     local_dir: dist
+    repo: slo-covid-19/website
+    target_branch: gh-pages
+    committer_from_gh: true
+    cleanup: false
+    token: $GITHUB_TOKEN
+    keep_history: true
+    verbose: true
+    strategy: git
+  - provider: pages
+    local_dir: dist
     repo: slo-covid-19/slo-covid-19.github.io
     target_branch: master
     committer_from_gh: true
@@ -31,14 +41,4 @@ deploy:
     strategy: git
     on:
       branch: master
-      repo: slo-covid-19/slo-covid-19
-  - provider: pages
-    local_dir: dist
-    repo: slo-covid-19/website
-    target_branch: gh-pages
-    committer_from_gh: true
-    cleanup: false
-    token: $GITHUB_TOKEN
-    keep_history: true
-    verbose: true
-    strategy: git
+
