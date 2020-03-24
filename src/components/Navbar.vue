@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3">
     <b-navbar toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="about">COVID19 Slovenija</b-navbar-brand>
+      <b-navbar-brand to="about">COVID-19 Sledilnik</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
