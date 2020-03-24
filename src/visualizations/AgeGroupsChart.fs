@@ -1,10 +1,10 @@
 [<RequireQualifiedAccess>]
-module AgeGroupChart
+module AgeGroupsChart
 
 open Feliz
-open Feliz.Recharts
 
 open Types
+open Recharts
 
 let renderChart (data : StatsData) =
     let latestDataPoint = List.last data
@@ -28,7 +28,8 @@ let renderChart (data : StatsData) =
                 | None, Some b -> sprintf "0-%d" b
                 | Some a, Some b -> sprintf "%d-%d" a b
                 | Some a, None -> sprintf "nad %d" a ) ]
-            Recharts.yAxis [ ]
+            Recharts.yAxis [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
+
             Recharts.tooltip [ ]
             Recharts.legend [ ]
 

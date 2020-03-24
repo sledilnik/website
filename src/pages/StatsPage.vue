@@ -127,24 +127,24 @@ export default {
     td, th
       padding: 6px 9px
 
-  .metric-comparison-chart
-    margin-top: $gap
-
-    .metrics-selectors
+  .metrics-selectors
       margin-top: $gap
       display: flex
       flex-wrap: wrap
       justify-content: center
 
-    .metric-selector
+  .metric-selector
       margin: 0 $gap/6 $gap/3 $gap/6
       border-color: $gray-300
       font-size: $font-size
       &:hover
         border-color: $gray-500
 
-    .metric-selector--selected
+  .metric-selector--selected
       color: white
+
+  .metric-comparison-chart
+    margin-top: $gap
 
   .age-group-chart
     margin-top: $gap

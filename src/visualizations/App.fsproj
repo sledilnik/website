@@ -3,11 +3,12 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Recharts.fs" />
         <Compile Include="Types.fs" />
         <Compile Include="DataLoader.fs" />
-        <Compile Include="MetricComparisonChart.fs" />
-        <Compile Include="AgeGroupChart.fs" />
-        <Compile Include="RegionChart.fs" />
+        <Compile Include="MetricsComparisonChart.fs" />
+        <Compile Include="AgeGroupsChart.fs" />
+        <Compile Include="RegionsChart.fs" />
         <Compile Include="DataTable.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
