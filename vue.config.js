@@ -5,6 +5,9 @@ const paths = {
   dist: path.resolve(path.join(__dirname, 'dist')),
 }
 
+process.env.VUE_APP_TITLE='COVID-19 Sledilnik'
+process.env.VUE_APP_DESC='COVID-19 Sledilnik Slovenija | COVID-19 Tracker Slovenia'
+
 module.exports = {
   chainWebpack: config => {
     // Markdown Loader
