@@ -3,24 +3,48 @@ os: linux
 dist: bionic
 node_js: node
 
-branches:
-  only:
-  - master
-
 cache: 
   yarn: true
 
+before_install:
+  - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+  - sudo dpkg -i packages-microsoft-prod.deb
+  - rm packages-microsoft-prod.deb
+  - sudo add-apt-repository universe
+  - sudo apt-get -q update
+  - sudo apt-get -y install apt-transport-https
+  - sudo apt-get -q update
+  - sudo apt-get -y install dotnet-sdk-3.1
+
 install: yarn --frozen-lockfile
-script: yarn build
+script: 
+  - yarn build
+  - pwd
+  - ls -a
+  - ls dist/
 deploy:
-  provider: pages
-  local_dir: dist
-  repo: slo-covid-19/slo-covid-19.github.io
-  target_branch: master
-  committer_from_gh: true
-  skip_cleanup: true
-  cleanup: false
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  fqdn: slo-covid-19.rtfm.si
-  verbose: true
+  - on:
+      all_branches: true
+    provider: pages
+    local_dir: dist
+    target_branch: gh-pages
+    committer_from_gh: true
+    cleanup: false
+    skip_cleanup: true
+    token: $GITHUB_TOKEN
+    fqdn: slo-covid-19-stage.rtfm.si
+    verbose: true
+    deploy_strategy: git
+  - on:
+      branch: master
+    provider: pages
+    local_dir: dist
+    repo: slo-covid-19/slo-covid-19.github.io
+    target_branch: master
+    committer_from_gh: true
+    cleanup: false
+    skip_cleanup: true
+    token: $GITHUB_TOKEN
+    fqdn: slo-covid-19.rtfm.si
+    verbose: true
+    deploy_strategy: git

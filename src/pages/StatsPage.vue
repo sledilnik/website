@@ -1,9 +1,6 @@
 <template>
   <b-container v-if="loaded">
     <b-row>
-      <h1>Statistika</h1>
-    </b-row>
-    <b-row>
       <b-card-group deck class="col-12 mb-5">
         <Info-card
           title="Pozitivnih testov"
@@ -23,43 +20,33 @@
         />
       </b-card-group>
     </b-row>
-    <b-row>
-      <b-col cols="6" cols-md="12">
-        <b-card title="Testiranje" sub-title="Skupno stevilo testiranih in pozitivnih testov">
-          <b-card-body>
-            <LineChart :chartdata="chartTests.data" :options="chartTests.options" />
-          </b-card-body>
-        </b-card>
-      </b-col>
-      <b-col cols="6" cols-md="12">
-        <b-card title="Po regijah" sub-title="Pozitivni testi po regijah">
-          <b-card-body>
-            <LineChart :chartdata="chartRegions.data" :options="chartRegions.options" />
-          </b-card-body>
-        </b-card>
+    <b-row cols="12">
+      <b-col>
+        <div id="visualizations"></div>
       </b-col>
     </b-row>
   </b-container>
   <b-container v-else>
-    <div>
-      <div class="d-flex justify-content-center mb-3">
-        <b-spinner label="Loading..."></b-spinner>
-      </div>
-    </div>
+    <b-row>
+      <b-col>
+        <div class="d-flex justify-content-center mb-3">
+          <b-spinner label="Loading..."></b-spinner>
+        </div>
+      </b-col>
+    </b-row>
   </b-container>
 </template>
 
 <script>
 import InfoCard from "components/cards/InfoCard";
-import LineChart from "components/charts/LineChart";
+import { Visualizations } from "visualizations/App.fsproj";
 
 import StatsData from "StatsData";
 
 export default {
   name: "StatsPage",
   components: {
-    InfoCard,
-    LineChart
+    InfoCard
   },
   props: {
     name: String,
@@ -68,17 +55,7 @@ export default {
   data() {
     return {
       loaded: false,
-      csvdata: null,
-      charts: {
-        tests: {
-          data: null,
-          options: null
-        },
-        regions: {
-          data: null,
-          options: null
-        }
-      }
+      csvdata: null
     };
   },
   computed: {
@@ -93,135 +70,6 @@ export default {
     },
     recoveredToDate() {
       return this.getLastValue(this.csvdata, "state.out_of_hospital.todate");
-    },
-    chartTests() {
-      // if (!this.csvdata) {
-      //   return {};
-      // }
-      let seriesPositive = this.csvdata.map(p => {
-        return {
-          t: new Date(Date.parse(p["date"])),
-          y: p["tests.positive.todate"]
-        };
-      });
-
-      let seriesPositiveNew = this.csvdata.map(p => {
-        return {
-          t: new Date(Date.parse(p["date"])),
-          y: p["tests.positive"]
-        };
-      });
-
-      return {
-        data: {
-          datasets: [
-            {
-              label: "Pozitivnih testov",
-              data: seriesPositive,
-              backgroundColor: "rgba(153,255,51,0.4)",
-              yAxisID: "positive"
-            },
-            {
-              label: "Novih pozitivnih testov",
-              data: seriesPositiveNew,
-              backgroundColor: "rgba(50,255,91,0.4)",
-              yAxisID: "positive"
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          label: "Graf",
-          scales: {
-            yAxes: [
-              {
-                id: "positive",
-                type: "linear"
-              }
-            ],
-            xAxes: [
-              {
-                type: "time",
-                time: {
-                  unit: "day"
-                }
-              }
-            ]
-          }
-        }
-      };
-    },
-    chartRegions() {
-      // if (!this.csvdata) {
-      //   return {};
-      // }
-      let seriesRegions = [];
-
-      this.csvdata.columns.forEach(col => {
-        if (col.startsWith("region.")) {
-          seriesRegions[col] = this.csvdata.map(p => {
-            return {
-              t: new Date(Date.parse(p["date"])),
-              y: p[col]
-            };
-          });
-        }
-      });
-
-      let labelMap = {
-        "region.lj.todate": "Ljubljana",
-        "region.mb.todate": "Maribor",
-        "region.nm.todate": "Novo mesto",
-        "region.kr.todate": "Kranj",
-        "region.za.todate": "Zagorje",
-        "region.ce.todate": "Celje",
-        "region.sg.todate": "Slovenj Gradec",
-        "region.po.todate": "Postojna",
-        "region.ms.todate": "Murska Sobota",
-        "region.kp.todate": "Koper",
-        "region.ng.todate": "Nova Gorica",
-        "region.kk.todate": "Krsko",
-        "region.foreign.todate": "Tujina",
-        "region.unknown.todate": "Neznano"
-      };
-
-      let translateKey = key => {
-        return labelMap[key];
-      };
-
-      let datasets = Object.keys(seriesRegions).map(key => {
-        return {
-          label: translateKey(key),
-          data: seriesRegions[key],
-          yAxisID: "count"
-        };
-      });
-
-      return {
-        data: {
-          datasets: datasets
-        },
-        options: {
-          responsive: true,
-          label: "Graf",
-          scales: {
-            yAxes: [
-              {
-                id: "count",
-                type: "linear"
-              }
-            ],
-            xAxes: [
-              {
-                type: "time",
-                time: {
-                  unit: "day"
-                }
-              }
-            ]
-          }
-        }
-      };
     }
   },
   methods: {
@@ -253,10 +101,70 @@ export default {
   async mounted() {
     this.csvdata = await StatsData.data();
     this.loaded = true;
+    this.$nextTick(() => {
+      Visualizations("visualizations");
+    });
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="sass">
+@import 'node_modules/bootstrap/scss/_functions'
+@import 'node_modules/bootstrap/scss/_variables'
+
+#visualizations
+  $gap: $grid-gutter-width
+  $font-size: 12px
+
+  font-size: $font-size
+
+  h2
+    margin-bottom: $gap
+    text-align: center
+
+  .table
+    td, th
+      padding: 6px 9px
+
+  .metric-comparison-chart
+    margin-top: $gap
+
+    .metrics-selectors
+      margin-top: $gap
+      display: flex
+      flex-wrap: wrap
+      justify-content: center
+
+    .metric-selector
+      margin: 0 $gap/6 $gap/3 $gap/6
+      border-color: $gray-300
+      font-size: $font-size
+      &:hover
+        border-color: $gray-500
+
+    .metric-selector--selected
+      color: white
+
+  .age-group-chart
+    margin-top: $gap
+
+  .data-table
+    margin-top: $gap
+
+    .table
+      font-size: $font-size
+
+      thead
+        th
+          vertical-align: top
+          border-bottom: none
+
+      tbody
+        td
+          width: 11.1%
+
+      tr
+        &:hover
+          background-color: $gray-100
 </style>
