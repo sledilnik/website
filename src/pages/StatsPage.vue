@@ -1,9 +1,6 @@
 <template>
   <b-container v-if="loaded">
     <b-row>
-      <h1>Statistika</h1>
-    </b-row>
-    <b-row>
       <b-card-group deck class="col-12 mb-5">
         <Info-card
           title="Pozitivnih testov"
