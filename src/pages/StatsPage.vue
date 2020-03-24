@@ -1,5 +1,5 @@
 <template>
-  <b-container v-if="loaded" class="h-100">
+  <b-container v-if="loaded">
     <b-row>
       <h1>Statistika</h1>
     </b-row>
@@ -23,7 +23,7 @@
         />
       </b-card-group>
     </b-row>
-    <b-row cols="12" class="h-100">
+    <b-row cols="12">
       <b-col>
         <div id="visualizations"></div>
       </b-col>
@@ -112,7 +112,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="sass">
+<style lang="sass">
 @import 'node_modules/bootstrap/scss/_functions'
 @import 'node_modules/bootstrap/scss/_variables'
 
