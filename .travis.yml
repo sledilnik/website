@@ -32,7 +32,6 @@ deploy:
     token: $GITHUB_TOKEN
     # keep_history: true
     verbose: true
-    strategy: git
   - on:
       branch: master
     provider: pages
@@ -45,4 +44,3 @@ deploy:
     # keep_history: true
     fqdn: slo-covid-19.rtfm.si
     verbose: true
-    strategy: git
