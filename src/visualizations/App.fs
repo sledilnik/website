@@ -57,6 +57,11 @@ let render (state: State) (dispatch: Msg -> unit) =
                         [ Html.h2 "Pozitivni testi po starostnih skupinah"
                           AgeGroupChart.render data.StatsData ] ]
                   Html.section
+                    [ prop.className "regions-chart"
+                      prop.children
+                        [ Html.h2 "Pozitivni testi po regijah"
+                          RegionsChart.render data.RegionsData dispatch ] ]
+                  Html.section
                     [ prop.className "data-table"
                       prop.children
                         [ Html.h2 "Tabelarični prikaz podatkov"

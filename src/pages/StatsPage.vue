@@ -149,6 +149,9 @@ export default {
   .age-group-chart
     margin-top: $gap
 
+  .regions-chart
+    margin-top: $gap
+
   .data-table
     margin-top: $gap
 
