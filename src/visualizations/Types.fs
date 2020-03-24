@@ -52,35 +52,8 @@ type Data =
     { StatsData : StatsData
       RegionsData : RegionsData }
 
-type Metric =
-    { Color : string
-      Visible : bool
-      Label : string }
-
-type Metrics =
-    { Tests : Metric
-      TotalTests : Metric
-      PositiveTests : Metric
-      TotalPositiveTests : Metric
-      Hospitalized : Metric
-      HospitalizedIcu : Metric
-      Deaths : Metric
-      TotalDeaths : Metric }
-
-type MetricMsg =
-    | Tests
-    | TotalTests
-    | PositiveTests
-    | TotalPositiveTests
-    | Hospitalized
-    | HospitalizedIcu
-    | Deaths
-    | TotalDeaths
-
 type State =
-    { Data : RemoteData<Data, string>
-      Metrics : Metrics }
+    { Data : RemoteData<Data, string> }
 
 type Msg =
     | DataLoaded of RemoteData<Data, string>
-    | ToggleMetricVisible of MetricMsg

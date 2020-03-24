@@ -2,7 +2,10 @@
 [<RequireQualifiedAccess>]
 module RegionsChart
 
+open Elmish
+
 open Feliz
+open Feliz.ElmishComponents
 open Feliz.Recharts
 
 open Types
@@ -93,8 +96,27 @@ let renderChartContainer data =
 //             renderMetricSelector metrics.Deaths Deaths dispatch
 //             renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
 
-let render data dispatch =
+
+type State =
+    { Data : RegionsData }
+
+type Msg = unit
+
+let init data : State * Cmd<Msg> =
+    { Data = data }, Cmd.none
+
+let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+    state, Cmd.none
+
+let render (state : State) dispatch =
     Html.div [
-        renderChartContainer data
+        renderChartContainer state.Data
         // renderMetricsSelectors dispatch
     ]
+
+type Props = {
+    data : RegionsData
+}
+
+let regionsChart (props : Props) =
+    React.elmishComponent("RegionsChart", init props.data, update, render)
