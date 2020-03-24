@@ -1,6 +1,6 @@
-# **Podatki o širjenju COVID-19 v Sloveniji**
+# **Podatki o širjenju bolezni COVID-19 v Sloveniji**
 
-Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča COVID-19 v Sloveniji z namenom javnosti omogočiti čim boljši pregled nad obsegom problema in pravilno oceno rizičnosti.
+Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2 oz. virusa, ki povzroča bolezen COVID-19 v Sloveniji z namenom javnosti omogočiti čim boljši pregled nad obsegom problema in pravilno oceno rizičnosti.
 
 Vključeni so **dnevni podatki** (z zgodovino):
 
@@ -12,7 +12,7 @@ Vključeni so **dnevni podatki** (z zgodovino):
 
 Sproti se trudimo dodajati tudi nove oz. relevantne kategorije.
 
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem prostovoljno in aktivno dela od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, [kjer **lahko vsak po svojih močeh prispeva** z viri ali informacijami]([https://slo-covid-19.rtfm.si/#/team](https://slo-covid-19.rtfm.si/#/team). Pridružite se in pomagajte!
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem prostovoljno in aktivno dela od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za "crowdsourced" projekt, [kjer **lahko vsak po svojih močeh prispeva** z viri ali informacijami](https://slo-covid-19.rtfm.si/#/team). Pridružite se in pomagajte!
 
 ## Zbrani podatki  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)
 
@@ -21,7 +21,7 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 ### Podatki se že uporabljajo za različne vizualizacije in statistike:
 
--   [**Infografika**](/#/viz) - nekaj grafov z našimi podatki
+-   [**Infografika**](https://slo-covid-19.rtfm.si/#/viz) - nekaj grafov z našimi podatki
 -   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
 -   [**COVID-19 / Slovenia**](https://joahim.github.io/covid-19/) - vizualizacije od [TwoForSeven](https://twitter.com/TwoForSeven)
 -   [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
@@ -30,8 +30,6 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 -   [**Ustavimo Korono**](https://ustavimokorono.si/) - portal z navodili za javnost
 
 Če bi podatke radi uporabili oz. potrebujete drugače strukturirane podatke za namene podatkovne vizualizacije, predikcijskega modeliranja ali podobno - kontaktirajte [@LukaRenko](https://twitter.com/lukarenko).
-
-##
 
 ## Zakaj?
 
@@ -61,8 +59,6 @@ Kako urejamo posamezne primere [tabela Primeri](https://docs.google.com/spreadsh
 -   Rezerviramo mesta z minimalno informacij (Izvor - na podlagi podatka po regijah), ki jih v naslednjih dneh dopolnjujemo.
 -   Žarišča vodimo iz podatkov o direktnih okužbah in sumarnih podatkov NIJZ (takrat dodamo žarišče rezervirana mesta).
 -   [K:žarišče](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=337671621), [K:regija](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=931207160) in [K:kraj](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=1657814423) so kontrolne pivot tabele za validacijo posameznih primerov.
-
-####
 
 ## Ostale zanimive vsebine
 
