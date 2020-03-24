@@ -17,7 +17,10 @@ before_install:
   - sudo apt-get -y install dotnet-sdk-3.1
 
 install: yarn --frozen-lockfile
-script: yarn build
+script: 
+  - yarn build
+  - ls -a
+  - ls dist/
 deploy:
   - on:
       all_branches: true
