@@ -1,5 +1,5 @@
 [<RequireQualifiedAccess>]
-module AgeGroupChart
+module AgeGroupsChart
 
 open Feliz
 open Feliz.Recharts

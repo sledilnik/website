@@ -1,5 +1,5 @@
 [<RequireQualifiedAccess>]
-module MetricComparisonChart
+module MetricsComparisonChart
 
 open Elmish
 
