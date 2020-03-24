@@ -18,7 +18,9 @@ before_install:
 install: yarn --frozen-lockfile
 script: yarn build
 deploy:
-  - provider: pages
+  - on:
+      branch: visualization
+    provider: pages
     local_dir: dist
     repo: slo-covid-19/website
     target_branch: gh-pages
@@ -28,7 +30,9 @@ deploy:
     keep_history: true
     verbose: true
     strategy: git
-  - provider: pages
+  - on:
+      branch: master
+    provider: pages
     local_dir: dist
     repo: slo-covid-19/slo-covid-19.github.io
     target_branch: master
@@ -39,6 +43,3 @@ deploy:
     fqdn: slo-covid-19.rtfm.si
     verbose: true
     strategy: git
-    on:
-      branch: master
-
