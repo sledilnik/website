@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mb-3">
     <b-navbar toggleable="lg" type="dark" variant="info">
       <b-navbar-brand to="about">COVID19 Slovenija</b-navbar-brand>
 
