@@ -13,12 +13,7 @@ type AgeGroup =
       TestedPositiveFemale : int option
       TestedPositiveAll : int option }
 
-type AgeGroups =
-    { Below16 : AgeGroup
-      From16to29 : AgeGroup
-      From30to49 : AgeGroup
-      From50to59 : AgeGroup
-      Above60 : AgeGroup }
+type AgeGroups = AgeGroup list
 
 type StatsDataPoint =
     { Date : System.DateTime
@@ -34,35 +29,26 @@ type StatsDataPoint =
 
 type StatsData = StatsDataPoint list
 
-type Metric =
-    { Color : string
-      Visible : bool
-      Label : string }
+type City =
+    { Name : string
+      PositiveTests : int option }
 
-type Metrics =
-    { Tests : Metric
-      TotalTests : Metric
-      PositiveTests : Metric
-      TotalPositiveTests : Metric
-      Hospitalized : Metric
-      HospitalizedIcu : Metric
-      Deaths : Metric
-      TotalDeaths : Metric }
+type Region =
+    { Name : string
+      Cities : City list }
 
-type MetricMsg =
-    | Tests
-    | TotalTests
-    | PositiveTests
-    | TotalPositiveTests
-    | Hospitalized
-    | HospitalizedIcu
-    | Deaths
-    | TotalDeaths
+type RegionsDataPoint =
+    { Date : System.DateTime
+      Regions : Region list }
+
+type RegionsData = RegionsDataPoint list
+
+type Data =
+    { StatsData : StatsData
+      RegionsData : RegionsData }
 
 type State =
-    { StatsData : RemoteData<StatsData, string>
-      Metrics : Metrics }
+    { Data : RemoteData<Data, string> }
 
 type Msg =
-    | StatsDataLoaded of RemoteData<StatsData, string>
-    | ToggleMetricVisible of MetricMsg
+    | DataLoaded of RemoteData<Data, string>

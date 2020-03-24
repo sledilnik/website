@@ -1,10 +1,74 @@
 [<RequireQualifiedAccess>]
 module MetricComparisonChart
 
+open Elmish
+
 open Feliz
+open Feliz.ElmishComponents
 open Feliz.Recharts
 
 open Types
+
+type Metric =
+    { Color : string
+      Visible : bool
+      Label : string }
+
+type Metrics =
+    { Tests : Metric
+      TotalTests : Metric
+      PositiveTests : Metric
+      TotalPositiveTests : Metric
+      Hospitalized : Metric
+      HospitalizedIcu : Metric
+      Deaths : Metric
+      TotalDeaths : Metric }
+
+type State =
+    { Data : StatsData
+      Metrics : Metrics }
+
+type MetricMsg =
+    | Tests
+    | TotalTests
+    | PositiveTests
+    | TotalPositiveTests
+    | Hospitalized
+    | HospitalizedIcu
+    | Deaths
+    | TotalDeaths
+
+type Msg =
+    | ToggleMetricVisible of MetricMsg
+
+let init data : State * Cmd<Msg> =
+    let state =
+        { Data = data
+          Metrics =
+            { Tests =              { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
+              TotalTests =         { Color = "#bda535" ; Visible = false ; Label = "Testiranja skupaj" }
+              PositiveTests =      { Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
+              TotalPositiveTests = { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi skupaj" }
+              Hospitalized =       { Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
+              HospitalizedIcu =    { Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
+              Deaths =             { Color = "#075b76" ; Visible = false ; Label = "Umrli" }
+              TotalDeaths =        { Color = "#003f5c" ; Visible = false ; Label = "Umrli skupaj" } } }
+    state, Cmd.none
+
+let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+    match msg with
+    | ToggleMetricVisible metric ->
+        let newMetrics =
+            match metric with
+            | Tests -> { state.Metrics with Tests = { state.Metrics.Tests with Visible = not state.Metrics.Tests.Visible } }
+            | TotalTests -> { state.Metrics with TotalTests = { state.Metrics.TotalTests with Visible = not state.Metrics.TotalTests.Visible } }
+            | PositiveTests -> { state.Metrics with PositiveTests = { state.Metrics.PositiveTests with Visible = not state.Metrics.PositiveTests.Visible } }
+            | TotalPositiveTests -> { state.Metrics with TotalPositiveTests = { state.Metrics.TotalPositiveTests with Visible = not state.Metrics.TotalPositiveTests.Visible } }
+            | Hospitalized -> { state.Metrics with Hospitalized = { state.Metrics.Hospitalized with Visible = not state.Metrics.Hospitalized.Visible } }
+            | HospitalizedIcu -> { state.Metrics with HospitalizedIcu = { state.Metrics.HospitalizedIcu with Visible = not state.Metrics.HospitalizedIcu.Visible } }
+            | Deaths -> { state.Metrics with Deaths = { state.Metrics.Deaths with Visible = not state.Metrics.Deaths.Visible } }
+            | TotalDeaths -> { state.Metrics with TotalDeaths = { state.Metrics.TotalDeaths with Visible = not state.Metrics.TotalDeaths.Visible } }
+        { state with Metrics = newMetrics }, Cmd.none
 
 let formatDate (date : System.DateTime) =
     sprintf "%d.%d." date.Date.Day date.Date.Month
@@ -107,8 +171,15 @@ let renderMetricsSelectors metrics dispatch =
             renderMetricSelector metrics.Deaths Deaths dispatch
             renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
 
-let render data metrics dispatch =
+let render state dispatch =
     Html.div [
-        renderChartContainer data metrics
-        renderMetricsSelectors metrics dispatch
+        renderChartContainer state.Data state.Metrics
+        renderMetricsSelectors state.Metrics dispatch
     ]
+
+type Props = {
+    data : StatsData
+}
+
+let metricsComparisonChart (props : Props) =
+    React.elmishComponent("MetricsComparisonChart", init props.data, update, render)

@@ -8,11 +8,11 @@
           :value-date="positiveTestToDate.date"
         />
         <Info-card
-          title="Trenutno v bolnišnici"
+          title="Hospitalizirani"
           :value="inHospitalToDate.value"
           :value-date="positiveTestToDate.date"
         />
-        <Info-card title="Mrtvi" :value="deceasedToDate.value" :value-date="deceasedToDate.date" />
+        <Info-card title="Umrli" :value="deceasedToDate.value" :value-date="deceasedToDate.date" />
         <Info-card
           title="Odpuščeni iz bolnišnice"
           :value="recoveredToDate.value"
@@ -147,6 +147,9 @@ export default {
       color: white
 
   .age-group-chart
+    margin-top: $gap
+
+  .regions-chart
     margin-top: $gap
 
   .data-table
