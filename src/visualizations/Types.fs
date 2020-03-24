@@ -29,13 +29,13 @@ type StatsDataPoint =
 
 type StatsData = StatsDataPoint list
 
-type City =
+type Municipality =
     { Name : string
       PositiveTests : int option }
 
 type Region =
     { Name : string
-      Cities : City list }
+      Cities : Municipality list }
 
 type RegionsDataPoint =
     { Date : System.DateTime

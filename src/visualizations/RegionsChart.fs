@@ -10,10 +10,72 @@ open Feliz.Recharts
 
 open Types
 
+let dictionary =
+    [ "ce", "Celje"
+      "kk", "Krško"
+      "kp", "Koper"
+      "kr", "Kranj"
+      "lj", "Ljubljana"
+      "mb", "Maribor"
+      "ms", "Murska Sobota"
+      "ng", "Nova Gorica"
+      "nm", "Novo Mesto"
+      "po", "Postojna"
+      "sg", "Slovenj Gradec"
+      "za", "Zagorje"
+      "t", "Tujina" ]
+    |> Map.ofList
+
+let excludedRegions = ["regija"]
+
+let dictOrKey key =
+    dictionary
+    |> Map.tryFind key
+    |> Option.defaultValue key
+
+type Metric =
+    { Key : string
+      Color : string
+      Visible : bool
+      Label : string }
+
+type State =
+    { Data : RegionsData
+      Regions : Region list
+      Metrics : Metric list }
+
+type Msg =
+    | ToggleRegionVisible of string
+
+let init (data : RegionsData) : State * Cmd<Msg> =
+    let lastDataPoint = List.last data
+    let regions = lastDataPoint.Regions
+    let metrics =
+        regions
+        |> List.filter (fun region -> not (List.contains region.Name excludedRegions))
+        |> List.map (fun region ->
+            { Key = region.Name
+              Color = "hotpink"
+              Visible = false
+              Label = dictOrKey region.Name } )
+
+    { Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
+
+let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+    match msg with
+    | ToggleRegionVisible regionKey ->
+        let newMetrics =
+            state.Metrics
+            |> List.map (fun m ->
+                if m.Key = regionKey
+                then { m with Visible = not m.Visible }
+                else m)
+        { state with Metrics = newMetrics }, Cmd.none
+
 let formatDate (date : System.DateTime) =
     sprintf "%d.%d." date.Date.Day date.Date.Month
 
-let renderChart (data : RegionsData) =
+let renderChart (state : State) =
 
     let renderLineLabel (input: ILabelProperties) =
         Html.text [
@@ -28,7 +90,7 @@ let renderChart (data : RegionsData) =
 
     let renderRegion (region : Region) (dataKey : RegionsDataPoint -> int) =
         Recharts.line [
-            line.name region.Name
+            line.name (dictOrKey region.Name)
             line.monotone
             line.stroke "#666"
             line.label renderLineLabel
@@ -36,9 +98,11 @@ let renderChart (data : RegionsData) =
         ]
 
     let regionsToRender =
-        (List.last data).Regions
-        |> List.map (fun region -> region)
-        |> List.filter (fun region -> region.Name <> "regija" && region.Name <> "t")
+        state.Regions
+        |> List.filter (fun region ->
+            state.Metrics
+            |> List.exists (fun metric ->
+                metric.Visible = true && region.Name = metric.Key) )
 
     let children =
         seq {
@@ -61,57 +125,41 @@ let renderChart (data : RegionsData) =
         }
 
     Recharts.lineChart [
-        lineChart.data data
+        lineChart.data state.Data
         lineChart.children (Seq.toList children)
     ]
 
-let renderChartContainer data =
+let renderChartContainer state =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
         responsiveContainer.height 500
-        responsiveContainer.chart (renderChart data)
+        responsiveContainer.chart (renderChart state)
     ]
 
-// let renderMetricSelector (metric : Metric) metricMsg dispatch =
-//     let style =
-//         if metric.Visible
-//         then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
-//         else [ ]
-//     Html.div [
-//         prop.onClick (fun _ -> ToggleMetricVisible metricMsg |> dispatch)
-//         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
-//         prop.style style
-//         prop.text metric.Label ]
+let renderMetricSelector (metric : Metric) dispatch =
+    let style =
+        if metric.Visible
+        then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
+        else [ ]
+    Html.div [
+        prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
+        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        prop.style style
+        prop.text metric.Label ]
 
-// let renderMetricsSelectors metrics dispatch =
-//     Html.div [
-//         prop.className "metrics-selectors"
-//         prop.children [
-//             renderMetricSelector metrics.Tests Tests dispatch
-//             renderMetricSelector metrics.TotalTests TotalTests dispatch
-//             renderMetricSelector metrics.PositiveTests PositiveTests dispatch
-//             renderMetricSelector metrics.TotalPositiveTests TotalPositiveTests dispatch
-//             renderMetricSelector metrics.Hospitalized Hospitalized dispatch
-//             renderMetricSelector metrics.HospitalizedIcu HospitalizedIcu dispatch
-//             renderMetricSelector metrics.Deaths Deaths dispatch
-//             renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
-
-
-type State =
-    { Data : RegionsData }
-
-type Msg = unit
-
-let init data : State * Cmd<Msg> =
-    { Data = data }, Cmd.none
-
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
-    state, Cmd.none
+let renderMetricsSelectors metrics dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            metrics
+            |> List.map (fun metric ->
+                renderMetricSelector metric dispatch
+            ) ) ]
 
 let render (state : State) dispatch =
     Html.div [
-        renderChartContainer state.Data
-        // renderMetricsSelectors dispatch
+        renderChartContainer state
+        renderMetricsSelectors state.Metrics dispatch
     ]
 
 type Props = {
