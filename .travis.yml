@@ -30,6 +30,7 @@ deploy:
     target_branch: gh-pages
     committer_from_gh: true
     cleanup: false
+    skip_cleanup: true
     token: $GITHUB_TOKEN
     # keep_history: true
     verbose: true
@@ -41,6 +42,7 @@ deploy:
     target_branch: master
     committer_from_gh: true
     cleanup: false
+    skip_cleanup: true
     token: $GITHUB_TOKEN
     # keep_history: true
     fqdn: slo-covid-19.rtfm.si
