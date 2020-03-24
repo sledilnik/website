@@ -3,14 +3,8 @@ os: linux
 dist: bionic
 node_js: node
 
-# branches:
-#   only:
-#   - master
-
 cache: 
   yarn: true
-
-sudo: true
 
 before_install:
   - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -24,17 +18,27 @@ before_install:
 install: yarn --frozen-lockfile
 script: yarn build
 deploy:
-  provider: pages
-  local_dir: dist
-  repo: slo-covid-19/slo-covid-19.github.io
-  target_branch: master
-  committer_from_gh: true
-  skip_cleanup: true
-  cleanup: false
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  fqdn: slo-covid-19.rtfm.si
-  verbose: true
-  on:
-    branch: master
-    repo: slo-covid-19/slo-covid-19
+  - provider: pages
+    local_dir: dist
+    repo: slo-covid-19/slo-covid-19.github.io
+    target_branch: master
+    committer_from_gh: true
+    cleanup: false
+    token: $GITHUB_TOKEN
+    keep_history: true
+    fqdn: slo-covid-19.rtfm.si
+    verbose: true
+    strategy: git
+    on:
+      branch: master
+      repo: slo-covid-19/slo-covid-19
+  - provider: pages
+    local_dir: dist
+    repo: slo-covid-19/website
+    target_branch: gh-pages
+    committer_from_gh: true
+    cleanup: false
+    token: $GITHUB_TOKEN
+    keep_history: true
+    verbose: true
+    strategy: git
