@@ -25,7 +25,13 @@ type StatsDataPoint =
       HospitalizedIcu : int option
       Deaths : int option
       TotalDeaths : int option
-      AgeGroups : AgeGroups }
+      AgeGroups : AgeGroups
+      TestsAt14 :
+        {| Performed : int option
+           PerformedToDate : int option
+           Positive : int option
+           PositiveToDate : int option |}
+    }
 
 type StatsData = StatsDataPoint list
 

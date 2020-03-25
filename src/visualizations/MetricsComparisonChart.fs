@@ -112,21 +112,28 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
+            let maxOption a b =
+                match a, b with
+                | None, None -> None
+                | Some x, None -> Some x
+                | None, Some y -> Some y
+                | Some x, Some y -> Some (max x y)
+
             if metrics.Tests.Visible then
                 yield renderMetric metrics.Tests
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Tests)
+                    (fun (point : StatsDataPoint) -> maxOption point.Tests point.TestsAt14.Performed |> Utils.zeroToNone)
 
             if metrics.TotalTests.Visible then
                 yield renderMetric metrics.TotalTests
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalTests)
+                    (fun (point : StatsDataPoint) -> maxOption point.TotalTests point.TestsAt14.PerformedToDate |> Utils.zeroToNone)
 
             if metrics.PositiveTests.Visible then
                 yield renderMetric metrics.PositiveTests
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.PositiveTests)
+                    (fun (point : StatsDataPoint) -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone)
 
             if metrics.TotalPositiveTests.Visible then
                 yield renderMetric metrics.TotalPositiveTests
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalPositiveTests)
+                    (fun (point : StatsDataPoint) -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone)
 
             if metrics.Hospitalized.Visible then
                 yield renderMetric metrics.Hospitalized
@@ -180,8 +187,6 @@ let renderMetricsSelectors metrics dispatch =
             renderMetricSelector metrics.HospitalizedIcu HospitalizedIcu dispatch
             renderMetricSelector metrics.Deaths Deaths dispatch
             renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
-
-
 
 let render state dispatch =
     Html.div [
