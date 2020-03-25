@@ -1,6 +1,6 @@
 <template>
   <div class="mb-3">
-    <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
       <b-navbar-brand to="about">COVID-19 Sledilnik</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

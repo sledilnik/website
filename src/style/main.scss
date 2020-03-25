@@ -1,2 +1,12 @@
-@import "style/style";
 @import "node_modules/bootstrap/scss/bootstrap";
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  margin-top: 66px;
+}
+
