@@ -45,6 +45,6 @@ deploy:
     cleanup: false
     skip_cleanup: true
     token: $GITHUB_TOKEN
-    fqdn: sledilnik.org
+    fqdn: covid-19.sledilnik.org
     verbose: true
     deploy_strategy: git

@@ -12,7 +12,7 @@ Vključeni so sledeči **dnevni podatki** (z zgodovino):
 
 Sproti se trudimo dodajati tudi nove oz. relevantne kategorije.
 
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem prostovoljno in dejavno dela od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim zunanjim izvajanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](https://slo-covid-19.rtfm.si/#/team). Pridružite se in pomagajte!
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa na njem prostovoljno in dejavno dela od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim zunanjim izvajanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](https://covid-19.sledilnik.org/#/team). Pridružite se in pomagajte!
 
 ## Zbrani podatki  - [GDocs preglednica](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0)
 
@@ -21,9 +21,9 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 ### Podatki se uporabljajo za različne vizualizacije in statistike:
 
--   [**Statistika**](https://slo-covid-19.rtfm.si/#/stats) - interaktivni graf s podatki
--   [**Vizualizacije**](https://slo-covid-19.rtfm.si/#/viz) - nekaj zanimivih info grafik 
--   [**Zemljevid**](https://slo-covid-19.rtfm.si/#/map) - zemljevid po občinah
+-   [**Statistika**](https://covid-19.sledilnik.org/#/stats) - interaktivni graf s podatki
+-   [**Vizualizacije**](https://covid-19.sledilnik.org/#/viz) - nekaj zanimivih info grafik 
+-   [**Zemljevid**](https://covid-19.sledilnik.org/#/map) - zemljevid po občinah
 -   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
 
 Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
@@ -35,7 +35,7 @@ Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [B
 **Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah držav, kjer jim je virus uspelo najbolj zajeziti, kritičnega pomena za učinkovit odziv sistemov javnega zdravja.** Šele tako objavljeni podatki so temelj za razumevanje dogajanja, aktivno samozaščitno ravnanje ljudi ter sprejemanje nujnosti ukrepov.
 
 NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o številu okužb, zato jih zbiramo in dopolnjujemo iz različnih javnih virov ter posredujemo javnosti. Podatki v medijih in uradnih virih, iz katerih jih črpamo, so pogosto delni, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.  
-[Zato tudi računamo na vašo pomoč ]([https://slo-covid-19.rtfm.si/#/team](https://slo-covid-19.rtfm.si/#/team))- tako pri zbiranju in preverjanju podatkov, kot programiranju, analiziranju, pa tudi apeliranju na odločevalce, da ustrezno struktururane podatke objavijo! 
+[Zato tudi računamo na vašo pomoč ]([https://covid-19.sledilnik.org/#/team](https://covid-19.sledilnik.org/#/team))- tako pri zbiranju in preverjanju podatkov, kot programiranju, analiziranju, pa tudi apeliranju na odločevalce, da ustrezno struktururane podatke objavijo! 
 
 ## Kako urejamo podatke:
 
@@ -65,5 +65,5 @@ Na strani [**Povezave**](/#/links) si lahko ogledate zbirko povezav na ostale
 
 ## Pogoji uporabe
 
-Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira - [**slo-covid-19.rtfm.si**](http://slo-covid-19.rtfm.si/).  
+Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira - [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).  
 Za izvoz podatkov v drugih formatih ali uporabo za vizualizacije nas kontaktirajte na [@LukaRenko](https://twitter.com/lukarenko)
