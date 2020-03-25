@@ -33,7 +33,7 @@ export default {
   table {
     width: 100%;
     table-layout: fixed;
-    text-align: center;
+    text-align: left;
   }
 }
 </style>

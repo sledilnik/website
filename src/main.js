@@ -3,6 +3,9 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import VueMoment from 'vue-moment'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import 'style/main.scss'
 // import 'bootstrap/dist/css/bootstrap.css'
@@ -23,6 +26,10 @@ Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(VueMoment)
+
+// fontawesome
+library.add(faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 
