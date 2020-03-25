@@ -116,7 +116,7 @@ export default {
 #visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
-
+  $primary-color: $gray-700
   font-size: $font-size
 
   h2
@@ -127,8 +127,25 @@ export default {
     td, th
       padding: 6px 9px
 
+  .scale-type-selector
+    margin: 0 $gap/2 $gap/2 0
+    text-align: right
+
+    .scale-type-selector__item
+      display: inline-block
+      padding: 0px 7px
+      margin: 0 3px
+      border-radius: 3px
+      border: solid 1px $gray-300
+      &:hover
+        cursor: pointer
+      &.selected
+        color: white
+        background-color: $primary-color
+        border-color: $primary-color
+
   .metrics-selectors
-      margin-top: $gap
+      margin-top: $gap/2
       display: flex
       flex-wrap: wrap
       justify-content: center
@@ -143,13 +160,12 @@ export default {
   .metric-selector--selected
       color: white
 
-  .metric-comparison-chart
+//   .metric-comparison-chart
+
+  .regions-chart
     margin-top: $gap
 
   .age-group-chart
-    margin-top: $gap
-
-  .regions-chart
     margin-top: $gap
 
   .data-table

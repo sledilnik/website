@@ -5,6 +5,7 @@
     <ItemGroup>
         <Compile Include="Recharts.fs" />
         <Compile Include="Types.fs" />
+        <Compile Include="Utils.fs" />
         <Compile Include="DataLoader.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />

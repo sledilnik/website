@@ -25,7 +25,8 @@ type Metrics =
       TotalDeaths : Metric }
 
 type State =
-    { Data : StatsData
+    { ScaleType : ScaleType
+      Data : StatsData
       Metrics : Metrics }
 
 type MetricMsg =
@@ -40,10 +41,12 @@ type MetricMsg =
 
 type Msg =
     | ToggleMetricVisible of MetricMsg
+    | ScaleTypeChanged of ScaleType
 
 let init data : State * Cmd<Msg> =
     let state =
-        { Data = data
+        { ScaleType = Linear
+          Data = data
           Metrics =
             { Tests =              { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
               TotalTests =         { Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
@@ -69,11 +72,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             | Deaths -> { state.Metrics with Deaths = { state.Metrics.Deaths with Visible = not state.Metrics.Deaths.Visible } }
             | TotalDeaths -> { state.Metrics with TotalDeaths = { state.Metrics.TotalDeaths with Visible = not state.Metrics.TotalDeaths.Visible } }
         { state with Metrics = newMetrics }, Cmd.none
+    | ScaleTypeChanged scaleType ->
+        { state with ScaleType = scaleType }, Cmd.none
 
-let formatDate (date : System.DateTime) =
-    sprintf "%d.%d." date.Date.Day date.Date.Month
-
-let renderChart (data : StatsData) (metrics : Metrics) =
+let renderChart scaleType (data : StatsData) (metrics : Metrics) =
 
     let renderLineLabel (input: ILabelProperties) =
         Html.text [
@@ -86,7 +88,7 @@ let renderChart (data : StatsData) (metrics : Metrics) =
             prop.text input.value
         ]
 
-    let renderMetric (metric : Metric) (dataKey : StatsDataPoint -> int) =
+    let renderMetric (metric : Metric) (dataKey : StatsDataPoint -> int option) =
         Recharts.line [
             line.name metric.Label
             line.monotone
@@ -98,42 +100,49 @@ let renderChart (data : StatsData) (metrics : Metrics) =
 
     let children =
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> formatDate point.Date) ]
-            yield Recharts.yAxis [ yAxis.label {| value = "Število testiranj / Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date) ]
+
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število testiranj / Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            match scaleType with
+            | Log ->
+                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto) ])
+            | _ ->
+                yield Recharts.yAxis yAxisPropsDefaut
+
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
             if metrics.Tests.Visible then
                 yield renderMetric metrics.Tests
-                    (fun (point : StatsDataPoint) -> point.Tests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Tests)
 
             if metrics.TotalTests.Visible then
                 yield renderMetric metrics.TotalTests
-                    (fun (point : StatsDataPoint) -> point.TotalTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalTests)
 
             if metrics.PositiveTests.Visible then
                 yield renderMetric metrics.PositiveTests
-                    (fun (point : StatsDataPoint) -> point.PositiveTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.PositiveTests)
 
             if metrics.TotalPositiveTests.Visible then
                 yield renderMetric metrics.TotalPositiveTests
-                    (fun (point : StatsDataPoint) -> point.TotalPositiveTests |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalPositiveTests)
 
             if metrics.Hospitalized.Visible then
                 yield renderMetric metrics.Hospitalized
-                    (fun (point : StatsDataPoint) -> point.Hospitalized |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Hospitalized)
 
             if metrics.HospitalizedIcu.Visible then
                 yield renderMetric metrics.HospitalizedIcu
-                    (fun (point : StatsDataPoint) -> point.HospitalizedIcu |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.HospitalizedIcu)
 
             if metrics.Deaths.Visible then
                 yield renderMetric metrics.Deaths
-                    (fun (point : StatsDataPoint) -> point.Deaths |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Deaths)
 
             if metrics.TotalDeaths.Visible then
                 yield renderMetric metrics.TotalDeaths
-                    (fun (point : StatsDataPoint) -> point.TotalDeaths |> Option.defaultValue 0)
+                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalDeaths)
         }
 
     Recharts.lineChart [
@@ -141,11 +150,11 @@ let renderChart (data : StatsData) (metrics : Metrics) =
         lineChart.children (Seq.toList children)
     ]
 
-let renderChartContainer data metrics =
+let renderChartContainer scaleType data metrics =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
         responsiveContainer.height 500
-        responsiveContainer.chart (renderChart data metrics)
+        responsiveContainer.chart (renderChart scaleType data metrics)
     ]
 
 let renderMetricSelector (metric : Metric) metricMsg dispatch =
@@ -172,9 +181,12 @@ let renderMetricsSelectors metrics dispatch =
             renderMetricSelector metrics.Deaths Deaths dispatch
             renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
 
+
+
 let render state dispatch =
     Html.div [
-        renderChartContainer state.Data state.Metrics
+        Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        renderChartContainer state.ScaleType state.Data state.Metrics
         renderMetricsSelectors state.Metrics dispatch
     ]
 

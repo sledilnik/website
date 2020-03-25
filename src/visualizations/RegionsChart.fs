@@ -54,12 +54,14 @@ type Metric =
       Visible : bool }
 
 type State =
-    { Data : RegionsData
+    { ScaleType : ScaleType
+      Data : RegionsData
       Regions : Region list
       Metrics : Metric list }
 
 type Msg =
     | ToggleRegionVisible of string
+    | ScaleTypeChanged of ScaleType
 
 let regionTotal (region : Region) : int =
     region.Municipalities
@@ -81,7 +83,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
               Color = color
               Visible = i <= 2 } ) colors
 
-    { Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
+    { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -93,9 +95,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
                 then { m with Visible = not m.Visible }
                 else m)
         { state with Metrics = newMetrics }, Cmd.none
-
-let formatDate (date : System.DateTime) =
-    sprintf "%d.%d." date.Date.Day date.Date.Month
+    | ScaleTypeChanged scaleType ->
+        { state with ScaleType = scaleType }, Cmd.none
 
 let renderChart (state : State) =
 
@@ -126,8 +127,16 @@ let renderChart (state : State) =
 
     let children =
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> formatDate point.Date) ]
-            yield Recharts.yAxis [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
+            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date) ]
+
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
+
+            match state.ScaleType with
+            | Log ->
+                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto) ])
+            | _ ->
+                yield Recharts.yAxis yAxisPropsDefaut
+
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
@@ -178,6 +187,7 @@ let renderMetricsSelectors metrics dispatch =
 
 let render (state : State) dispatch =
     Html.div [
+        Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state
         renderMetricsSelectors state.Metrics dispatch
     ]

@@ -31,15 +31,15 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Pregled in primerjava podatkov COVID-19 za Slovenijo"
                           MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } ] ]
                   Html.section
-                    [ prop.className "age-group-chart"
-                      prop.children
-                        [ Html.h2 "Pozitivni testi po starostnih skupinah"
-                          AgeGroupsChart.render data.StatsData ] ]
-                  Html.section
                     [ prop.className "regions-chart"
                       prop.children
                         [ Html.h2 "Pozitivni testi po regijah"
                           RegionsChart.regionsChart { data = data.RegionsData } ] ]
+                  Html.section
+                    [ prop.className "age-group-chart"
+                      prop.children
+                        [ Html.h2 "Pozitivni testi po starostnih skupinah"
+                          AgeGroupsChart.render data.StatsData ] ]
                   Html.section
                     [ prop.className "data-table"
                       prop.children
