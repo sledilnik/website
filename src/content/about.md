@@ -22,12 +22,11 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 ### Podatki se že uporabljajo za različne vizualizacije in statistike:
 
 -   [**Statistika**](https://slo-covid-19.rtfm.si/#/stats) - interaktivni graf s podatki
--   [**Vizualiazacije**](https://slo-covid-19.rtfm.si/#/viz) - nekaj zanimivih info grafik 
+-   [**Vizualizacije**](https://slo-covid-19.rtfm.si/#/viz) - nekaj zanimivih info grafik 
 -   [**Zemljevid**](https://slo-covid-19.rtfm.si/#/map) - zemljevid po občinah
-
 -   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
 
-Naše podatke uporabljajo še [Ustavimo Korono](https://ustavimokorono.si/), [COVID-19 / Slovenia](https://joahim.github.io/covid-19/), [Nadzorna plošča Covid 19 SLO Better.Care](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp), [Reported COVID-19 cases in the Slovenia](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
+Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
 
 Če bi podatke radi uporabili oz. potrebujete drugače strukturirane podatke za namene podatkovne vizualizacije, napovednega modeliranja ali podobno - kontaktirajte [@LukaRenko](https://twitter.com/lukarenko).
 
