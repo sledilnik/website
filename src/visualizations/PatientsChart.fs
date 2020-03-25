@@ -57,12 +57,12 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; OutOfHospital; InHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
+        [ InCare; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
     let getColor = function
         | InCare -> "#ffa600"
-        | OutOfHospital -> "#dba51d"
-        | InHospital -> "#afa53f"
+        | OutOfHospital -> "#159ab0"
+        | InHospital -> "#70a471"
         | NeedsO2 -> "#70a471"
         | Icu -> "#8080A0"
         | Critical -> "#802020"
@@ -71,15 +71,15 @@ module Series =
         | Home -> "#003f5c"
     
     let getName = function
-        | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Oskrbovani v bolnišnici"
-        | InHospital -> "Oskrbovani doma"
-        | NeedsO2 -> "Potrebuje kisik"
-        | Icu -> "Intenzivna nega"
-        | Critical -> "Kritični"
-        | Deceased -> "Umrli"
-        | Hospital -> "Hospitalizirani"
-        | Home -> "V domači oskrbi"
+        | InCare -> "oskrbovani"
+        | OutOfHospital -> "iz bol. oskrbe (vsi)"
+        | InHospital -> "v bol. oskrbi"
+        | NeedsO2 -> "potrebuje kisik"
+        | Icu -> "intenzivna nega"
+        | Critical -> "kritično stanje (ocena)"
+        | Deceased -> "umrli (vsi)"
+        | Hospital -> "hospitalizirani"
+        | Home -> "doma"
 
 
 type State = {
@@ -119,6 +119,7 @@ type Msg =
     | ConsumeServerError of exn
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
+    | ScaleTypeChanged of ScaleType
 
 let regionTotal (region : Region) : int =
     region.Municipalities
@@ -142,6 +143,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with activeSegmentations = state.activeSegmentations |> Set.toggle s }, Cmd.none
     | ToggleSeries s ->
         { state with activeSeries = state.activeSeries |> Set.toggle s }, Cmd.none
+    | ScaleTypeChanged scaleType ->
+        { state with scaleType = scaleType }, Cmd.none
+
 
 let renderChart (state : State) =
 
