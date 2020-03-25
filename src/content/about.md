@@ -21,12 +21,13 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 ### Podatki se že uporabljajo za različne vizualizacije in statistike:
 
--   [**Infografika**](https://slo-covid-19.rtfm.si/#/viz) - nekaj grafov z našimi podatki
+-   [**Statistika**](https://slo-covid-19.rtfm.si/#/stats) - interaktivni graf s podatki
+-   [**Vizualiazacije**](https://slo-covid-19.rtfm.si/#/viz) - nekaj zanimivih info grafik 
+-   [**Zemljevid**](https://slo-covid-19.rtfm.si/#/map) - zemljevid po občinah
+
 -   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) - postavil [Nace Štruc](http://www.nace.si/)
--   [**COVID-19 / Slovenia**](https://joahim.github.io/covid-19/) - vizualizacije od [TwoForSeven](https://twitter.com/TwoForSeven)
--   [**Nadzorna plošča Covid 19 SLO**](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp)  ([API](https://bettercare365-my.sharepoint.com/:x:/g/personal/emilp_better_care/EeZA7U_tdFpPjftMy3X2_koBrgpHfQKQvtQMRXPmQakFNw?rtime=eJWxRL3J10g)) - postavil [Better.Care](https://www.better.care/)
--   [**Reported COVID-19 cases in the Slovenia**](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) - zemljevid po dnevih, animacija rasti, postavil [Miloš Popovič](https://twitter.com/milos_agathon)
--   [**Ustavimo Korono**](https://ustavimokorono.si/) - portal z navodili za javnost
+
+Naše podatke uporabljajo še [Ustavimo Korono](https://ustavimokorono.si/), [COVID-19 / Slovenia](https://joahim.github.io/covid-19/), [Nadzorna plošča Covid 19 SLO Better.Care](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp), [Reported COVID-19 cases in the Slovenia](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
 
 Če bi podatke radi uporabili oz. potrebujete drugače strukturirane podatke za namene podatkovne vizualizacije, napovednega modeliranja ali podobno - kontaktirajte [@LukaRenko](https://twitter.com/lukarenko).
 
