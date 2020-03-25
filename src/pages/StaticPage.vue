@@ -1,5 +1,5 @@
 <template>
-  <b-container>
+  <b-container class="page-static" :class="name">
     <b-row>
       <span v-html="staticContent"></span>
     </b-row>
@@ -19,15 +19,21 @@ export default {
     };
   },
   mounted() {
-    let vm = this;
     this.content.then(data => {
-      vm.staticContent = data.default;
-      vm.$forceUpdate();
+      this.staticContent = data.default;
+      this.$forceUpdate()
     });
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss">
+.page-static.sources {
+  table {
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+  }
+}
 </style>

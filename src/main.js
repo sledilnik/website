@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import VueMoment from 'vue-moment'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import 'style/main.scss'
+// import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import StaticPage from './pages/StaticPage.vue'

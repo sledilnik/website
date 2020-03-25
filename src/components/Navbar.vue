@@ -12,6 +12,7 @@
           <b-nav-item to="stats">Statistika</b-nav-item>
           <b-nav-item to="viz">Vizualizacije</b-nav-item>
           <b-nav-item to="map">Zemljevid</b-nav-item>
+          <b-nav-item to="sources">Viri podatkov</b-nav-item>
           <b-nav-item to="links">Povezave</b-nav-item>
           <b-nav-item to="team">Ekipa</b-nav-item>
         </b-navbar-nav>
