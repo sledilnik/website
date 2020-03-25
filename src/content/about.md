@@ -37,8 +37,6 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o številu okužb, zato jih zbiramo in dopolnjujemo iz različnih javnih virov ter posredujemo javnosti. Podatki v medijih in uradnih virih, iz katerih jih črpamo, so pogosto delni, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.  
 [Zato tudi računamo na vašo pomoč ]([https://slo-covid-19.rtfm.si/#/team](https://slo-covid-19.rtfm.si/#/team))- tako pri zbiranju in preverjanju podatkov, kot programiranju, analiziranju, pa tudi apeliranju na odločevalce, da ustrezno struktururane podatke objavijo! 
 
-##
-
 ## Kako urejamo podatke:
 
 [Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14:00 s podatki iz NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR tudi pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
