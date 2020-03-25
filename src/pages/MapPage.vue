@@ -8,6 +8,7 @@
           scrolling="no"
           width="100%"
           height="90%"
+          frameborder="0"
         />
       </b-col>
     </b-row>
