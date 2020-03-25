@@ -10,6 +10,8 @@
 | [Udomačena statistika (do 14.4.).](https://udomacenastatistika.wordpress.com/2020/03/13/rast-koronavirusa-v-sloveniji-do-12-3-2020/) | Dobra poljudno-znanstvena razlaga o statističnem razumevanju podatkov o COVID-19. Žal zgolj do 14.3.2020 ([zaradi spremembe metodologije NIJZ](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/)) |
 | [Projekcija/primerjava rasti oz. št. primerov za SLO](https://www.facebook.com/andraz.stalec/posts/10157326285444205) | [Andraž Štalec](https://www.red-orbit.si/blog/author/andrazstalec) |
 
+<br>
+
 ## Statistike, vizualizacije, simulacije - SVET
 
 | Povezava | Opis |
@@ -37,6 +39,8 @@
 | [Network Graph Visualisation of C19 Outbreak-Singapore](https://co.vid19.sg/cases) | Skoraj popolna sledljivost vseh primerov okužbe v Singapurju v obliki mrežne vizualizacije; [ZP/ UCA](https://twitter.com/zp_uca) |
 | [COVID-19 Virus Outbreak in Singapore](https://co.vid19.sg/)) | Nadzorna plošča in statistike za Singapur; [ZP/ UCA](https://twitter.com/zp_uca) |
 
+<br>
+
 ## Simulacije, projekcije
 
 | Povezava | Opis |
@@ -51,6 +55,8 @@
 | [Simulacija karantena/brez karantene za SLO](https://twitter.com/ZaplotnikZiga/status/1239848814879612928) | Simulacija širitve COVID 19 z 2.05 mio vozlišči in do 10 mio povezavami [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) |
 | [Koliko okuženih z virusom COVID-19 lahko pričakujemo v Sloveniji? (17.3.)](https://damijan.org/2020/03/13/live-koliko-okuzenih-z-virusom-covid-19-lahko-pricakujemo-v-sloveniji/) | J.P. Damjan model |
 | [Estimating The Infected Population From Deaths](https://covid19dashboards.com/covid-infected/) | Ocena števila okuženih ljudi po državah na podlagi števila smrti in stopnje smrtnosti, avtor je makroekonomist; [Joao B. Duarte](http://jbduarte.com/) |
+
+<br>
 
 ## Ostalo
 

@@ -21,7 +21,7 @@ export default {
   mounted() {
     this.content.then(data => {
       this.staticContent = data.default;
-      this.$forceUpdate()
+      this.$forceUpdate();
     });
   }
 };
@@ -29,11 +29,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-.page-static.sources {
-  table {
-    width: 100%;
-    table-layout: fixed;
-    text-align: left;
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+
+.page-static {
+  &.sources {
+    table {
+      width: 100%;
+      table-layout: fixed;
+      text-align: left;
+    }
+  }
+
+  &.links {
+    table {
+      table-layout: fixed;
+      text-align: left;
+      td {
+        width: 50%;
+        border-top: 1px solid $text-muted;
+      }
+    }
   }
 }
 </style>
