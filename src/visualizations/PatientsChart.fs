@@ -101,7 +101,8 @@ type State = {
         activeSegmentations = Set [ Totals ]
         allSeries =
             // exclude stuff that doesn't exist or doesn't make sense in Total
-            Series.all |> List.filter (fun s -> s <> Home && s <> Hospital && s <> InCare)
+            let exclude = Set [ Home; Hospital; InCare; NeedsO2 ] 
+            Series.all |> List.filter (not << exclude.Contains)
         activeSeries = Set Series.all
         //Regions = regions
         //Metrics = metrics
