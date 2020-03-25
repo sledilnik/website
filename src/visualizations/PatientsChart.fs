@@ -11,21 +11,19 @@ open Recharts
 
 open Data.Patients
 
+
 type Segmentation =
     | Totals
-    | Hospital of string
+    | Facility of string
 
-type SegmentationCfg = {
-    target: Segmentation
-    visible: bool
-    color: string
-}
-
-let segmentation = [{
-    target = Totals
-    visible = true
-    color = "#808080"
-}]
+type Breakdown =
+    | BySeries
+    | BySource
+  with
+    static member all = [ BySeries; BySource ]
+    static member getName = function
+        | BySeries -> "Obravnava po pacientih"
+        | BySource -> "Obravnava po bolnišnicah"
 
 type Series =
     | InCare
@@ -72,6 +70,7 @@ type State = {
     activeSegmentations: Set<Segmentation>
     allSeries: Series list
     activeSeries: Set<Series>
+    breakdown: Breakdown
   } with
     static member initial = {
         scaleType = Linear
@@ -84,7 +83,41 @@ type State = {
             let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
             Series.all |> List.filter (not << exclude.Contains)
         activeSeries = Set Series.all
+        breakdown = BySeries
     }
+    static member switchBreakdown breakdown state =
+        match breakdown with
+        | BySeries ->
+            { state with
+                breakdown=breakdown
+                allSegmentations = [ Totals ]
+                activeSegmentations = Set [ Totals ]
+                activeSeries = Set Series.all
+            }
+        | BySource ->
+            let segmentations =
+                match state.data with
+                | [||] -> [Totals]
+                | [| _ |] -> [Totals]
+                | data ->
+                    seq { // take few samples
+                        data.[data.Length-1]
+                        data.[data.Length-2]
+                        data.[data.Length/2]
+                    }
+                    |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map fst) // hospital name
+                    |> Seq.fold (fun hospitals hospital -> hospitals |> Set.add hospital) Set.empty // all
+                    |> Set.toList
+                    |> List.sort
+                    |> List.map Facility
+            { state with
+                breakdown=breakdown
+                allSegmentations = segmentations
+                activeSegmentations = Set segmentations
+                activeSeries = Set [ InHospital ]
+            }
+
+
 
 module Set =
     let toggle x s =
@@ -98,6 +131,7 @@ type Msg =
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
     | ScaleTypeChanged of ScaleType
+    | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
     State.initial, Cmd.OfAsync.either Data.Patients.fetch Data.Patients.url ConsumeServerData ConsumeServerError
@@ -116,6 +150,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with activeSeries = state.activeSeries |> Set.toggle s }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with scaleType = scaleType }, Cmd.none
+    | SwitchBreakdown breakdown ->
+        (state |> State.switchBreakdown breakdown), Cmd.none
 
 let renderChart (state : State) =
 
@@ -130,22 +166,20 @@ let renderChart (state : State) =
             prop.text input.value
         ]
 
-    let renderSeries segmentation series =
+    let orZero = Option.defaultValue 0
+
+    let renderSeries series =
         let dataKey : Data.Patients.PatientsStats -> int =
-            let orZero = Option.defaultValue 0
-            match segmentation with
-            | Totals ->
-                match series with
-                | InCare -> fun ps -> ps.total.inCare |> orZero
-                | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
-                | InHospital -> fun ps -> ps.total.inHospital.today |> orZero
-                | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> orZero
-                | Icu -> fun ps -> ps.total.icu.today |> orZero
-                | Critical -> fun ps -> ps.total.critical.today |> orZero
-                | Deceased -> fun ps -> ps.total.deceased.toDate |> orZero
-                | Hospital ->fun ps -> failwithf "home & hospital"
-                | Home -> fun ps -> failwithf "home & totals"
-            | _ -> failwithf "not implemented"
+            match series with
+            | InCare -> fun ps -> ps.total.inCare |> orZero
+            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
+            | InHospital -> fun ps -> ps.total.inHospital.today |> orZero
+            | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> orZero
+            | Icu -> fun ps -> ps.total.icu.today |> orZero
+            | Critical -> fun ps -> ps.total.critical.today |> orZero
+            | Deceased -> fun ps -> ps.total.deceased.toDate |> orZero
+            | Hospital ->fun ps -> failwithf "home & hospital"
+            | Home -> fun ps -> failwithf "home & totals"
 
         Recharts.line [
             line.name (series |> Series.getName)
@@ -156,8 +190,35 @@ let renderChart (state : State) =
             line.dataKey dataKey
         ]
 
+    let renderSources segmentation =
+        let facility, dataKey =
+            match segmentation with
+            | Totals -> "Skupaj", fun ps -> ps.total.inHospital.today |> orZero
+            | Facility f ->
+                f, fun ps ->
+                    ps.facilities
+                    |> Map.tryFind f
+                    |> Option.bind (fun stats -> stats.inHospital.today)
+                    |> orZero
+        let name, color =
+            facility
+            |> function
+                | "sbce"  -> "SB Celje", "#70a471"
+                | "ukclj" -> "UKC Ljubljana", "#10829a"
+                | "ukcmb" -> "UKC Maribor", "#003f5c"
+                | "ukg"   -> "UK Golnik", "#dba51d"
+                | other -> other, "#000"
+        Recharts.line [
+            line.name name
+            line.monotone
+            line.isAnimationActive false
+            line.stroke color
+            line.label renderLineLabel
+            line.dataKey dataKey
+        ]
+
     let children =
-        let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d" d.day d.month
+        let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d." d.day d.month
         seq {
             yield Recharts.xAxis [ xAxis.dataKey formatDate ]
 
@@ -173,9 +234,14 @@ let renderChart (state : State) =
             yield Recharts.tooltip [ ]
             yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
 
-            for segmentation in state.allSegmentations |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
-                    yield renderSeries segmentation series
+            match state.breakdown with
+            | BySeries ->
+                for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
+                    for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
+                        yield renderSeries series
+            | BySource ->
+                for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
+                    yield renderSources segmentation
         }
 
     Recharts.lineChart [
@@ -190,6 +256,28 @@ let renderChartContainer state =
         responsiveContainer.chart (renderChart state)
     ]
 
+let renderBreakdownSelector state breakdown dispatch =
+    let style =
+        if state.breakdown = breakdown
+        then [ style.backgroundColor "#808080" ; style.borderColor "#404040" ]
+        else [ ]
+    Html.div [
+        prop.onClick (fun _ -> SwitchBreakdown breakdown |> dispatch)
+        prop.className [ true, "btn  btn-sm metric-selector"; state.breakdown = breakdown, "metric-selector--selected" ]
+        prop.style style
+        prop.text (breakdown |> Breakdown.getName)
+    ]
+
+let renderBreakdownSelectors state dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            Breakdown.all
+            |> List.map (fun breakdown ->
+                renderBreakdownSelector state breakdown dispatch
+            ) ) ]
+
+
 let render (state : State) dispatch =
     match state.data, state.error with
     | [||], None -> Html.div [ prop.text "loading" ]
@@ -198,7 +286,7 @@ let render (state : State) dispatch =
         Html.div [
             //Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
             renderChartContainer state
-            //renderMetricsSelectors state.Metrics dispatch
+            renderBreakdownSelectors state dispatch
         ]
 
 let patientsChart () =
