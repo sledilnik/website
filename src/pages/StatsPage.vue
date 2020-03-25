@@ -120,7 +120,7 @@ export default {
   font-size: $font-size
 
   h2
-    margin-bottom: $gap
+    margin-bottom: $gap / 2
     text-align: center
 
   .table
@@ -160,13 +160,16 @@ export default {
   .metric-selector--selected
       color: white
 
-//   .metric-comparison-chart
+  .metric-comparison-chart
+    margin-top: 0
 
   .regions-chart
-    margin-top: $gap
+    margin-top: $gap * 2
 
   .age-group-chart
-    margin-top: $gap
+    margin-top: $gap * 2
+    h2
+      margin-bottom: $gap
 
   .data-table
     margin-top: $gap
