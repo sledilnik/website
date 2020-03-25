@@ -19,7 +19,7 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 -   **CSV izvoz**: [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv)
 -   **REST API**: [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients)
 
-### Podatki se že uporabljajo za različne vizualizacije in statistike:
+### Podatki se uporabljajo za različne vizualizacije in statistike:
 
 -   [**Statistika**](https://slo-covid-19.rtfm.si/#/stats) - interaktivni graf s podatki
 -   [**Vizualizacije**](https://slo-covid-19.rtfm.si/#/viz) - nekaj zanimivih info grafik 
