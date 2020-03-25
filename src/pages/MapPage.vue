@@ -2,12 +2,12 @@
   <b-container fluid class="h-100">
     <b-row cols="12" class="h-100">
       <b-col>
-        <h1 class="text-center">Stanje okužb s COVID-19 po občinah</h1>
+        <h2 class="text-center">Stanje okužb s COVID-19 po občinah</h2>
         <iframe
           src="https://covid19.alpaka.si/zemljevid/embedded.html"
           scrolling="no"
           width="100%"
-          height="90%"
+          height="100%"
           frameborder="0"
         />
       </b-col>
