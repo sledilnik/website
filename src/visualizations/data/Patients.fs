@@ -45,7 +45,6 @@ type PatientsStats = {
 }
 
 let fetch url = async {
-    printfn "fetching data %s" url
     let! code,json = Http.get url
     return
         match code with

@@ -133,7 +133,6 @@ let init () : State * Cmd<Msg> =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeServerData (Ok data) ->
-        printfn "got server data: %A" data
         { state with data = data }, Cmd.none
     | ConsumeServerData (Error err) ->
         { state with error = Some err }, Cmd.none
