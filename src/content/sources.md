@@ -66,4 +66,3 @@
 Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, naš sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz *uradnih virov*, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz *administrativnih virov zdravstvenega sistema*, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, *virov Civilne zaščite* ter seveda iz *nacionalnih in lokalnih medijev*. 
 
 Preverjeni relevantni podatki so obdelani v obliki različnih preglednic, infografik in zemljevidov, ki pripomorejo k bolj natančnemu pregledu, obsegu in razumevanju dogajanja, s tem pa tudi k aktivnemu in odgovornemu samozaščitnemu ravnanju vseh prebivalcev, k učinkovitejšemu odzivu sistemov javnega zdravja ter sprejemanju nujnih ustreznih ukrepov.
->>>>>>> Stashed changes

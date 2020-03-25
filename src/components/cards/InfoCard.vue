@@ -19,7 +19,7 @@
 import Vue from "vue";
 import moment from "moment";
 import StatsData from "StatsData";
-import LineChart from "components/charts/LineChart";
+// import LineChart from "components/charts/LineChart";
 
 Vue.filter("prefixDiff", function(value) {
   if (value > 0) {
@@ -30,9 +30,9 @@ Vue.filter("prefixDiff", function(value) {
 });
 
 export default {
-  components: {
-    LineChart
-  },
+  // components: {
+  //   LineChart
+  // },
   props: ["title", "field"],
   data() {
     return {
@@ -113,8 +113,6 @@ export default {
 
     this.diff = this.value - dataBefore.value;
     this.percentDiff = Math.round((this.diff / this.value) * 1000) / 10;
-
-    console.log(this.field, this.date, this.diff, this.percentDiff);
   }
 };
 </script>

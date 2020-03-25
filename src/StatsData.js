@@ -33,20 +33,25 @@ class StatsData {
     return this.csvdata
   }
 
-  async lastWeek(field) {
+  async getLastWeek(field) {
     return await this.csvdata.then(csvdata => {
       if (csvdata && csvdata.length > 0) {
+
+        let lastWeek = moment().startOf('day').subtract(7, 'days').toDate()
+
+        let rows = []
+
         for (let i = 0; i < csvdata.length; i++) {
           let row = csvdata[i]
-          if (Date.parse(row['date']) == date.getTime()) {
-            return {
+          let date = Date.parse(row['date'])
+          if (date >= lastWeek.getTime()) {
+            rows.push({
               date: date,
               value: row[field],
-            }    
+            })
           }
         }
-        return []
-
+        return rows
       } else {
         return []
       }
