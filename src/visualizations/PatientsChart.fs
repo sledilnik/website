@@ -92,7 +92,9 @@ type State = {
         error = None
         allSegmentations = [ Totals ]
         activeSegmentations = Set [ Totals ]
-        allSeries = Series.all |> List.filter (fun s -> s <> Home && s <> Hospital && s <> InCare)
+        allSeries =
+            // exclude stuff that doesn't exist or doesn't make sense in Total
+            Series.all |> List.filter (fun s -> s <> Home && s <> Hospital && s <> InCare)
         activeSeries = Set Series.all
         //Regions = regions
         //Metrics = metrics
@@ -154,10 +156,10 @@ let renderChart (state : State) =
                 match series with
                 | InCare -> fun ps -> ps.total.inCare |> orZero
                 | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
-                | InHospital -> fun ps -> ps.total.inHospital.toDate |> orZero
+                | InHospital -> fun ps -> ps.total.inHospital.today |> orZero
                 | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> orZero
-                | Icu -> fun ps -> ps.total.icu.toDate |> orZero
-                | Critical -> fun ps -> ps.total.critical.toDate |> orZero
+                | Icu -> fun ps -> ps.total.icu.today |> orZero
+                | Critical -> fun ps -> ps.total.critical.today |> orZero
                 | Deceased -> fun ps -> ps.total.deceased.toDate |> orZero
                 | Hospital ->fun ps -> failwithf "home & hospital"
                 | Home -> fun ps -> failwithf "home & totals"
