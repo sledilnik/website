@@ -70,6 +70,14 @@ const routes = [
       content: import('./content/team.md')
     }
   },
+  {
+    path: '/sources',
+    component: StaticPage,
+    props: {
+      name: 'sources',
+      content: import('./content/sources.md')
+    }
+  },
 ]
 
 const router = new VueRouter({
