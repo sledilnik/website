@@ -10,26 +10,6 @@ open Types
 open Recharts
 
 type Metric =
-    { Color : string
-      Visible : bool
-      Label : string }
-
-type Metrics =
-    { Tests : Metric
-      TotalTests : Metric
-      PositiveTests : Metric
-      TotalPositiveTests : Metric
-      Hospitalized : Metric
-      HospitalizedIcu : Metric
-      Deaths : Metric
-      TotalDeaths : Metric }
-
-type State =
-    { ScaleType : ScaleType
-      Data : StatsData
-      Metrics : Metrics }
-
-type MetricMsg =
     | Tests
     | TotalTests
     | PositiveTests
@@ -39,39 +19,54 @@ type MetricMsg =
     | Deaths
     | TotalDeaths
 
+type MetricCfg = {
+    Metric: Metric
+    Color : string
+    Visible : bool
+    Label : string
+}
+
+type Metrics = MetricCfg list
+
+module Metrics  =
+    let initial = [
+        { Metric = Tests;              Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
+        { Metric = TotalTests;         Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
+        { Metric = PositiveTests;      Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
+        { Metric = TotalPositiveTests; Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi - skupaj" }
+        { Metric = Hospitalized;       Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
+        { Metric = HospitalizedIcu;    Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
+        { Metric = Deaths;             Color = "#075b76" ; Visible = false ; Label = "Umrli" }
+        { Metric = TotalDeaths;        Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" }
+    ]
+    /// find a metric in the list and apply provided function to modify its value
+    let update (fn: MetricCfg -> MetricCfg) metric metrics =
+        metrics
+        |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
+
+type State =
+    { ScaleType : ScaleType
+      Data : StatsData
+      Metrics : Metrics }
+
 type Msg =
-    | ToggleMetricVisible of MetricMsg
+    | ToggleMetricVisible of Metric
     | ScaleTypeChanged of ScaleType
 
 let init data : State * Cmd<Msg> =
-    let state =
-        { ScaleType = Linear
-          Data = data
-          Metrics =
-            { Tests =              { Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
-              TotalTests =         { Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
-              PositiveTests =      { Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
-              TotalPositiveTests = { Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi - skupaj" }
-              Hospitalized =       { Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
-              HospitalizedIcu =    { Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
-              Deaths =             { Color = "#075b76" ; Visible = false ; Label = "Umrli" }
-              TotalDeaths =        { Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" } } }
+    let state = {
+        ScaleType = Linear
+        Data = data
+        Metrics = Metrics.initial
+    }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ToggleMetricVisible metric ->
-        let newMetrics =
-            match metric with
-            | Tests -> { state.Metrics with Tests = { state.Metrics.Tests with Visible = not state.Metrics.Tests.Visible } }
-            | TotalTests -> { state.Metrics with TotalTests = { state.Metrics.TotalTests with Visible = not state.Metrics.TotalTests.Visible } }
-            | PositiveTests -> { state.Metrics with PositiveTests = { state.Metrics.PositiveTests with Visible = not state.Metrics.PositiveTests.Visible } }
-            | TotalPositiveTests -> { state.Metrics with TotalPositiveTests = { state.Metrics.TotalPositiveTests with Visible = not state.Metrics.TotalPositiveTests.Visible } }
-            | Hospitalized -> { state.Metrics with Hospitalized = { state.Metrics.Hospitalized with Visible = not state.Metrics.Hospitalized.Visible } }
-            | HospitalizedIcu -> { state.Metrics with HospitalizedIcu = { state.Metrics.HospitalizedIcu with Visible = not state.Metrics.HospitalizedIcu.Visible } }
-            | Deaths -> { state.Metrics with Deaths = { state.Metrics.Deaths with Visible = not state.Metrics.Deaths.Visible } }
-            | TotalDeaths -> { state.Metrics with TotalDeaths = { state.Metrics.TotalDeaths with Visible = not state.Metrics.TotalDeaths.Visible } }
-        { state with Metrics = newMetrics }, Cmd.none
+        { state with
+            Metrics = state.Metrics |> Metrics.update (fun mc -> { mc with Visible = not mc.Visible}) metric
+        }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
@@ -88,7 +83,7 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
             prop.text input.value
         ]
 
-    let renderMetric (metric : Metric) (dataKey : StatsDataPoint -> int option) =
+    let renderMetric (metric : MetricCfg) (dataKey : StatsDataPoint -> int option) =
         Recharts.line [
             line.name metric.Label
             line.monotone
@@ -119,37 +114,23 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
                 | None, Some y -> Some y
                 | Some x, Some y -> Some (max x y)
 
-            if metrics.Tests.Visible then
-                yield renderMetric metrics.Tests
-                    (fun (point : StatsDataPoint) -> maxOption point.Tests point.TestsAt14.Performed |> Utils.zeroToNone)
-
-            if metrics.TotalTests.Visible then
-                yield renderMetric metrics.TotalTests
-                    (fun (point : StatsDataPoint) -> maxOption point.TotalTests point.TestsAt14.PerformedToDate |> Utils.zeroToNone)
-
-            if metrics.PositiveTests.Visible then
-                yield renderMetric metrics.PositiveTests
-                    (fun (point : StatsDataPoint) -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone)
-
-            if metrics.TotalPositiveTests.Visible then
-                yield renderMetric metrics.TotalPositiveTests
-                    (fun (point : StatsDataPoint) -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone)
-
-            if metrics.Hospitalized.Visible then
-                yield renderMetric metrics.Hospitalized
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Hospitalized)
-
-            if metrics.HospitalizedIcu.Visible then
-                yield renderMetric metrics.HospitalizedIcu
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.HospitalizedIcu)
-
-            if metrics.Deaths.Visible then
-                yield renderMetric metrics.Deaths
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.Deaths)
-
-            if metrics.TotalDeaths.Visible then
-                yield renderMetric metrics.TotalDeaths
-                    (fun (point : StatsDataPoint) -> Utils.zeroToNone point.TotalDeaths)
+            yield!
+                metrics
+                |> List.filter (fun mc -> mc.Visible)
+                |> List.map (fun mc ->
+                    let pointData =
+                        fun point ->
+                            match mc.Metric with
+                            | Tests -> maxOption point.Tests point.TestsAt14.Performed |> Utils.zeroToNone
+                            | TotalTests -> maxOption point.TotalTests point.TestsAt14.PerformedToDate |> Utils.zeroToNone
+                            | PositiveTests -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone
+                            | TotalPositiveTests -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone
+                            | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
+                            | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
+                            | Deaths -> point.Deaths |> Utils.zeroToNone
+                            | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
+                    renderMetric mc pointData
+                )
         }
 
     Recharts.lineChart [
@@ -164,13 +145,13 @@ let renderChartContainer scaleType data metrics =
         responsiveContainer.chart (renderChart scaleType data metrics)
     ]
 
-let renderMetricSelector (metric : Metric) metricMsg dispatch =
+let renderMetricSelector (metric : MetricCfg) dispatch =
     let style =
         if metric.Visible
         then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
         else [ ]
     Html.div [
-        prop.onClick (fun _ -> ToggleMetricVisible metricMsg |> dispatch)
+        prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
         prop.text metric.Label ]
@@ -179,14 +160,10 @@ let renderMetricsSelectors metrics dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children [
-            renderMetricSelector metrics.Tests Tests dispatch
-            renderMetricSelector metrics.TotalTests TotalTests dispatch
-            renderMetricSelector metrics.PositiveTests PositiveTests dispatch
-            renderMetricSelector metrics.TotalPositiveTests TotalPositiveTests dispatch
-            renderMetricSelector metrics.Hospitalized Hospitalized dispatch
-            renderMetricSelector metrics.HospitalizedIcu HospitalizedIcu dispatch
-            renderMetricSelector metrics.Deaths Deaths dispatch
-            renderMetricSelector metrics.TotalDeaths TotalDeaths dispatch ] ]
+            for mc in metrics do
+                yield renderMetricSelector mc dispatch
+        ]
+    ]
 
 let render state dispatch =
     Html.div [
