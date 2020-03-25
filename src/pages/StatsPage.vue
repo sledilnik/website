@@ -112,84 +112,182 @@ export default {
 <style lang="sass">
 @import 'node_modules/bootstrap/scss/_functions'
 @import 'node_modules/bootstrap/scss/_variables'
+@import 'node_modules/bootstrap/scss/_mixins'
 
 #visualizations
-  $gap: $grid-gutter-width
-  $font-size: 12px
-  $primary-color: $gray-700
-  font-size: $font-size
+    $gap: $grid-gutter-width
+    $font-size: 12px
+    $primary-color: #17a2b8
+    font-size: $font-size
 
-  h2
-    margin-bottom: $gap / 2
-    text-align: center
-
-  .table
-    td, th
-      padding: 6px 9px
-
-  .scale-type-selector
-    margin: 0 $gap/2 $gap/2 0
-    text-align: right
-
-    .scale-type-selector__item
-      display: inline-block
-      padding: 0px 7px
-      margin: 0 3px
-      border-radius: 3px
-      border: solid 1px $gray-300
-      &:hover
-        cursor: pointer
-      &.selected
-        color: white
-        background-color: $primary-color
-        border-color: $primary-color
-
-  .metrics-selectors
-      margin-top: $gap/2
-      display: flex
-      flex-wrap: wrap
-      justify-content: center
-
-  .metric-selector
-      margin: 0 $gap/6 $gap/3 $gap/6
-      border-color: $gray-300
-      font-size: $font-size
-      &:hover
-        border-color: $gray-500
-
-  .metric-selector--selected
-      color: white
-
-  .metrics-comparison-chart
-    margin-top: 0
-
-  .regions-chart
-    margin-top: $gap * 2
-
-  .patiens-chart
-    margin-top: $gap * 2
-
-  .age-groups-chart
-    margin-top: $gap * 2
     h2
-      margin-bottom: $gap
-
-  .data-table
-    margin-top: $gap
+        margin-bottom: $gap / 2
+        text-align: center
 
     .table
-      font-size: $font-size
+        td, th
+            padding: 6px 9px
 
-      thead
-        th
-          vertical-align: top
-          border-bottom: none
+    .scale-type-selector
+        margin: 0 $gap/2 $gap/2 0
+        text-align: right
 
-      tbody
-        td
-          width: 11.1%
+        .scale-type-selector__item
+            display: inline-block
+            padding: 0px 7px
+            margin: 0 3px
+            border-radius: 3px
+            border: solid 1px $gray-300
 
-      tr
+            &:hover
+                cursor: pointer
+            &.selected
+                color: white
+                background-color: $gray-700
+                border-color: $gray-700
+
+    .metrics-selectors
+        margin-top: $gap/2
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+
+    .metric-selector
+        margin: 0 $gap/6 $gap/3 $gap/6
+        border-color: $gray-300
+        font-size: $font-size
         &:hover
-          background-color: $gray-100
+            border-color: $gray-500
+
+    .metric-selector--selected
+        color: white
+
+    .metrics-comparison-chart
+        margin-top: 0
+
+    .regions-chart
+        margin-top: $gap * 2
+
+    .age-groups-chart
+        margin-top: $gap * 2
+        h2
+            margin-bottom: $gap
+
+    .patients-chart
+        margin-top: $gap * 2
+
+    .municipalities-chart
+        margin-top: $gap * 2
+        $bar-color: #003f5c
+        $bar-color-light: transparentize($bar-color, 0.6)
+
+        h2
+            margin-bottom: $gap
+
+        .municipalities
+            display: flex
+            flex-wrap: wrap
+
+            .municipality
+                width: calc(25% - #{$gap * 2})
+                margin: $gap
+                border-bottom: solid 1px $gray-300
+
+                @include media-breakpoint-down(md)
+                    width: calc(33% - #{$gap * 2})
+
+                @include media-breakpoint-down(sm)
+                    width: 100%
+                    margin: $gap 0
+
+        .name
+            color: $gray-700
+            padding-right: $gap/2
+            font-size: $font-size-lg
+            text-overflow: ellipsis
+            white-space: nowrap
+            overflow: hidden
+
+        .positive-tests
+            padding-top: $gap/4
+            display: flex
+            align-items: flex-start
+            justify-content: flex-end
+
+        .total-and-date
+            padding-left: $gap/4
+
+            .total
+                line-height: 1.5rem
+                font-size: $font-size-lg
+                color: $bar-color
+
+            .date
+                color: $gray-600
+                white-space: nowrap
+
+        .total-and-date--hover
+            display: none
+            position: absolute
+            top: 0px
+            right: 20px
+            text-align: right
+            text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white
+
+        .bars
+            display: flex
+            align-items: flex-end
+            justify-content: flex-end
+            height: 50px
+
+        .bar-wrapper
+            position: relative
+            display: flex
+            align-items: flex-end
+            height: 50px
+
+            &:last-child
+                .bar
+                    background-color: $bar-color
+
+            &:hover
+                .total-and-date--hover
+                    display: block
+
+                &:last-child
+                    .total-and-date--hover
+                        display: none
+
+        .bar
+            width: 5px
+            margin-right: 1px
+            background-color: $bar-color-light
+
+            &:hover
+                background-color: $bar-color
+
+        .bar--empty
+            background-color: gray
+
+    .data-table
+        margin-top: $gap
+
+        h2
+            margin-bottom: $gap
+
+        .table
+            font-size: $font-size
+
+        thead
+            th
+                vertical-align: top
+                border-bottom: none
+
+        tbody
+            td
+                width: 11.1%
+
+        tr
+            &:hover
+                background-color: $gray-100
 </style>
