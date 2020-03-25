@@ -58,11 +58,18 @@ type Series =
 module Series =
     let all =
         [ InCare; OutOfHospital; InHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
-    let getColor =
-        let colormap =
-            all |> Seq.mapi (fun i s -> s, colors.[i]) |> Map.ofSeq
-        fun s -> colormap.[s]
 
+    let getColor = function
+        | InCare -> "#ffa600"
+        | OutOfHospital -> "#dba51d"
+        | InHospital -> "#afa53f"
+        | NeedsO2 -> "#70a471"
+        | Icu -> "#8080A0"
+        | Critical -> "#802020"
+        | Deceased -> "#000000"
+        | Hospital -> "#0a6b85"
+        | Home -> "#003f5c"
+    
     let getName = function
         | InCare -> "Oskrbovani"
         | OutOfHospital -> "Oskrbovani v bolnišnici"
