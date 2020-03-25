@@ -160,13 +160,16 @@ export default {
   .metric-selector--selected
       color: white
 
-  .metric-comparison-chart
+  .metrics-comparison-chart
     margin-top: 0
 
   .regions-chart
     margin-top: $gap * 2
 
-  .age-group-chart
+  .patiens-chart
+    margin-top: $gap * 2
+
+  .age-groups-chart
     margin-top: $gap * 2
     h2
       margin-bottom: $gap

@@ -7,33 +7,16 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 
-open Types
 open Recharts
 
 open Data.Patients
-
-let colors =
-    [ "#ffa600"
-      "#dba51d"
-      "#afa53f"
-      "#70a471"
-      "#159ab0"
-      "#128ea5"
-      "#10829a"
-      "#0d768f"
-      "#0a6b85"
-      "#085f7a"
-      "#055470"
-      "#024a66"
-      "#003f5c" ]
-
 
 type Segmentation =
     | Totals
     | Hospital of string
 
 type SegmentationCfg = {
-    target: Segmentation 
+    target: Segmentation
     visible: bool
     color: string
 }
@@ -69,18 +52,17 @@ module Series =
         | Deceased -> "#000000"
         | Hospital -> "#0a6b85"
         | Home -> "#003f5c"
-    
-    let getName = function
-        | InCare -> "oskrbovani"
-        | OutOfHospital -> "iz bol. oskrbe (vsi)"
-        | InHospital -> "v bol. oskrbi"
-        | NeedsO2 -> "potrebuje kisik"
-        | Icu -> "intenzivna nega"
-        | Critical -> "kritično stanje (ocena)"
-        | Deceased -> "umrli (vsi)"
-        | Hospital -> "hospitalizirani"
-        | Home -> "doma"
 
+    let getName = function
+        | InCare -> "Oskrbovani"
+        | OutOfHospital -> "Iz bol. oskrbe (vsi)"
+        | InHospital -> "V bol. oskrbi"
+        | NeedsO2 -> "Potrebuje kisik"
+        | Icu -> "Intenzivna nega"
+        | Critical -> "Kritično stanje (ocena)"
+        | Deceased -> "Umrli (vsi)"
+        | Hospital -> "Hospitalizirani"
+        | Home -> "Doma"
 
 type State = {
     scaleType : ScaleType
@@ -90,8 +72,6 @@ type State = {
     activeSegmentations: Set<Segmentation>
     allSeries: Series list
     activeSeries: Set<Series>
-    //Regions : Region list
-    //Metrics : Metric list
   } with
     static member initial = {
         scaleType = Linear
@@ -101,11 +81,9 @@ type State = {
         activeSegmentations = Set [ Totals ]
         allSeries =
             // exclude stuff that doesn't exist or doesn't make sense in Total
-            let exclude = Set [ Home; Hospital; InCare; NeedsO2 ] 
+            let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
             Series.all |> List.filter (not << exclude.Contains)
         activeSeries = Set Series.all
-        //Regions = regions
-        //Metrics = metrics
     }
 
 module Set =
@@ -120,12 +98,6 @@ type Msg =
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
     | ScaleTypeChanged of ScaleType
-
-let regionTotal (region : Region) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.PositiveTests)
-    |> List.choose id
-    |> List.sum
 
 let init () : State * Cmd<Msg> =
     State.initial, Cmd.OfAsync.either Data.Patients.fetch Data.Patients.url ConsumeServerData ConsumeServerError
@@ -145,7 +117,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with scaleType = scaleType }, Cmd.none
 
-
 let renderChart (state : State) =
 
     let renderLineLabel (input: ILabelProperties) =
@@ -163,7 +134,7 @@ let renderChart (state : State) =
         let dataKey : Data.Patients.PatientsStats -> int =
             let orZero = Option.defaultValue 0
             match segmentation with
-            | Totals -> 
+            | Totals ->
                 match series with
                 | InCare -> fun ps -> ps.total.inCare |> orZero
                 | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
@@ -175,7 +146,7 @@ let renderChart (state : State) =
                 | Hospital ->fun ps -> failwithf "home & hospital"
                 | Home -> fun ps -> failwithf "home & totals"
             | _ -> failwithf "not implemented"
-            
+
         Recharts.line [
             line.name (series |> Series.getName)
             line.monotone
@@ -219,31 +190,9 @@ let renderChartContainer state =
         responsiveContainer.chart (renderChart state)
     ]
 
-(*
-let renderMetricSelector (metric : Metric) dispatch =
-    let style =
-        if metric.Visible
-        then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
-        else [ ]
-    Html.div [
-        prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
-        prop.style style
-        prop.text (dictOfKey metric.Key) ]
-
-let renderMetricsSelectors metrics dispatch =
-    Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            metrics
-            |> List.map (fun metric ->
-                renderMetricSelector metric dispatch
-            ) ) ]
-*)            
-
 let render (state : State) dispatch =
     match state.data, state.error with
-    | [||], None -> Html.div [ prop.text "loading" ] 
+    | [||], None -> Html.div [ prop.text "loading" ]
     | _, Some err -> Html.div [ prop.text err ]
     | data, None ->
         Html.div [

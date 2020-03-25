@@ -26,7 +26,7 @@ let render (state : State) (dispatch : Msg -> unit) =
             [ prop.className "visualization container"
               prop.children
                 [ Html.section
-                    [ prop.className "metric-comparison-chart"
+                    [ prop.className "metrics-comparison-chart"
                       prop.children
                         [ Html.h2 "Pregled in primerjava podatkov"
                           MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } ] ]
@@ -36,12 +36,12 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Obravnava obolelih (ocena na podlagi nepopolnih podatkov)"
                           PatientsChart.patientsChart () ] ]
                   Html.section
-                    [ prop.className "regions-chart"
+                    [ prop.className "patiens-chart"
                       prop.children
                         [ Html.h2 "Pozitivni testi po regijah"
                           RegionsChart.regionsChart { data = data.RegionsData } ] ]
                   Html.section
-                    [ prop.className "age-group-chart"
+                    [ prop.className "age-groups-chart"
                       prop.children
                         [ Html.h2 "Pozitivni testi po starostnih skupinah"
                           AgeGroupsChart.render data.StatsData ] ]
