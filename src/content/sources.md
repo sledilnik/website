@@ -4,6 +4,8 @@
 
 Če smo kak relevanten vir spregledali, [nas, prosimo, obvestite](#/team)!
 
+<br><br>
+
 | Vlada | Ostale službe |
 |----|----|
 | [Vlada RS - Twitter](https://twitter.com/vladaRS/with_replies)                                  | [Civilna zaščita Notranjska](https://www.facebook.com/regijskistabcznotranjska/) |
