@@ -36,7 +36,7 @@ export default {
   props: ["title", "field"],
   data() {
     return {
-      valueDate: null,
+      date: null,
       value: null,
       percentDiff: null,
       diff: null,
@@ -91,14 +91,8 @@ export default {
   },
   computed: {
     formattedDate() {
-      let dateFormatted = moment(this.date).calendar(null, {
-        lastDay: "[včeraj]",
-        sameDay: "[danes]",
-        lastWeek: "[last] dddd",
-        nextWeek: "dddd",
-        sameElse: "L"
-      });
-      return `Podatki do ${dateFormatted}`;
+      let dateFormatted = moment(this.date).format('DD. MM. YYYY');
+      return `Osveženo ${dateFormatted}`;
     }
   },
   async mounted() {
