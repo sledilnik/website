@@ -2,22 +2,10 @@
   <b-container v-if="loaded">
     <b-row>
       <b-card-group deck class="col-12 mb-5">
-        <Info-card
-          title="Pozitivnih testov"
-          :value="positiveTestToDate.value"
-          :value-date="positiveTestToDate.date"
-        />
-        <Info-card
-          title="Hospitalizirani"
-          :value="inHospitalToDate.value"
-          :value-date="positiveTestToDate.date"
-        />
-        <Info-card title="Umrli" :value="deceasedToDate.value" :value-date="deceasedToDate.date" />
-        <Info-card
-          title="Odpuščeni iz bolnišnice"
-          :value="recoveredToDate.value"
-          :value-date="recoveredToDate.date"
-        />
+        <Info-card title="Pozitivnih testov" field="tests.positive.todate" />
+        <Info-card title="Hospitalizirani" field="state.in_hospital" />
+        <Info-card title="Umrli" field="state.deceased.todate" />
+        <Info-card title="Odpuščeni iz bolnišnice" field="state.out_of_hospital.todate" />
       </b-card-group>
     </b-row>
     <b-row cols="12">

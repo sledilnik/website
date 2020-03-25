@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import moment from "moment";
 
 class StatsData {
 
@@ -16,7 +17,6 @@ class StatsData {
     this.csvdata = new Promise( (resolve) => {
       this.loadData().then(data => {
         resolve(data)
-        // this.csvdata = data
       })
     })
 
@@ -33,8 +33,59 @@ class StatsData {
     return this.csvdata
   }
 
+  async getLastWeek(field) {
+    return await this.csvdata.then(csvdata => {
+      if (csvdata && csvdata.length > 0) {
+
+        let lastWeek = moment().startOf('day').subtract(7, 'days').toDate()
+
+        let rows = []
+
+        for (let i = 0; i < csvdata.length; i++) {
+          let row = csvdata[i]
+          let date = Date.parse(row['date'])
+          if (date >= lastWeek.getTime()) {
+            rows.push({
+              date: date,
+              value: row[field],
+            })
+          }
+        }
+        return rows
+      } else {
+        return []
+      }
+    })
+  }
+
+  async getValueOn(field, date) {
+    return await this.csvdata.then(csvdata => {
+      if (csvdata && csvdata.length > 0) {
+        for (let i = 0; i < csvdata.length; i++) {
+          let row = csvdata[i]
+          if (Date.parse(row['date']) == date.getTime()) {
+            return {
+              date: date,
+              value: row[field],
+            }    
+          }
+        }
+        return {
+          date: date,
+          value: undefined,
+        }
+
+      } else {
+        return {
+          date: date,
+          value: undefined,
+        }
+      }
+    })
+  }
+
   async getLastValue(field) {
-    await this.csvdata.then(csvdata => {
+    return await this.csvdata.then(csvdata => {
       if (csvdata && csvdata.length > 0) {
         let i = 0;
         // find last non null value
@@ -46,15 +97,15 @@ class StatsData {
         }
 
         let lastRow = csvdata[i];
-        let value = lastRow[field] || "N/A";
+        let value = lastRow[field] || undefined;
         return {
           date: new Date(Date.parse(lastRow["date"])),
           value: value
         };
       } else {
         return {
-          date: new Date(),
-          value: "N/A"
+          date: new Date().setHours(0,0,0,0),
+          value: undefined
         };
       }
     })
