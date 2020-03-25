@@ -222,6 +222,9 @@ let renderChart (state : State) =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey formatDate ]
 
+            // layout="vetical" verticalAlign="middle" align="right"
+            yield Recharts.legend [ line.legendType.circle; ] // prop.custom ("layout","vertical"); prop.custom ("align","left"); prop.custom ("verticalAlign","top") ]
+
             //let yAxisPropsDefaut = [ yAxis.label {| value = "Število pacientov" ; angle = -90 ; position = "insideLeft" |} ]
             let yAxisPropsDefaut = [ ]
 
