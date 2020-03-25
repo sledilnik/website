@@ -19,9 +19,6 @@ before_install:
 install: yarn --frozen-lockfile
 script: 
   - yarn build
-  - pwd
-  - ls -a
-  - ls dist/
 deploy:
   - on:
       all_branches: true
