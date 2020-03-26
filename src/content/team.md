@@ -23,4 +23,4 @@ Uredniki baze in ostali sodelavci:
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - viri, validacija podatkov
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
--   [Nace Štruc](http://www.nace.si/) - vizualizacija
+-   [Nace Štruc](https://www.nace.si/) - vizualizacija
