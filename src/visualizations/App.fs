@@ -36,11 +36,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Obravnava hospitaliziranih"
                           PatientsChart.patientsChart () ] ]
                   Html.section
-                    [ prop.className "age-groups-chart"
-                      prop.children
-                        [ Html.h2 "Potrjeno okuženi po starostnih skupinah"
-                          AgeGroupsChart.render data.StatsData ] ]
-                  Html.section
                     [ prop.className "regions-chart"
                       prop.children
                         [ Html.h2 "Potrjeno okuženi po regijah"
@@ -50,6 +45,11 @@ let render (state : State) (dispatch : Msg -> unit) =
                       prop.children
                         [ Html.h2 "Potrjeno okuženi po občinah"
                           MunicipalitiesChart.municipalitiesChart { data = data.RegionsData } ] ]
+                  Html.section
+                    [ prop.className "age-groups-chart"
+                      prop.children
+                        [ Html.h2 "Potrjeno okuženi po starostnih skupinah"
+                          AgeGroupsChart.render data.StatsData ] ]
                 //   Html.section
                 //     [ prop.className "data-table"
                 //       prop.children

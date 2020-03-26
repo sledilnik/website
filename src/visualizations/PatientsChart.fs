@@ -53,12 +53,12 @@ module Series =
 
     let getName = function
         | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Iz bolnišnične oskrbe (vsi)"
-        | InHospital -> "V bol. oskrbi"
+        | OutOfHospital -> "Iz bolnišnične oskrbe (skupaj)"
+        | InHospital -> "V bolnišnični oskrbi"
         | NeedsO2 -> "Potrebuje kisik"
         | Icu -> "Intenzivna nega"
         | Critical -> "Kritično stanje (ocena)"
-        | Deceased -> "Umrli (vsi)"
+        | Deceased -> "Umrli (skupaj)"
         | Hospital -> "Hospitalizirani"
         | Home -> "Doma"
 
@@ -73,7 +73,7 @@ type State = {
     breakdown: Breakdown
   } with
     static member initial = {
-        scaleType = Linear
+        scaleType = Log // Linear
         data = [||]
         error = None
         allSegmentations = [ Totals ]
