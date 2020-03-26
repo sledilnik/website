@@ -178,7 +178,7 @@ export default {
 
             .municipality
                 width: calc(25% - #{$gap * 2})
-                margin: $gap
+                margin: $gap/2 $gap
                 border-bottom: solid 1px $gray-300
 
                 @include media-breakpoint-down(md)
@@ -186,7 +186,7 @@ export default {
 
                 @include media-breakpoint-down(sm)
                     width: 100%
-                    margin: $gap 0
+                    margin: $gap/4 0
 
         .name
             color: $gray-700
