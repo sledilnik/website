@@ -47,7 +47,8 @@ type private TransferStatsDataPoint =
            deceased : int option
            deceasedToDate : int option
            outOfHospital : int option
-           outOfHospitalToDate : int option |}
+           outOfHospitalToDate : int option
+           recoveredToDate : int option |}
       statePerRegion :
         {| kp : int option
            foreign : int option
@@ -76,6 +77,9 @@ type private TransferStatsDataPoint =
           HospitalizedIcu = this.statePerTreatment.inICU
           Deaths = this.statePerTreatment.deceased
           TotalDeaths = this.statePerTreatment.deceasedToDate
+          OutOfHospitalToDate = this.statePerTreatment.outOfHospitalToDate
+          OutOfHospital = this.statePerTreatment.outOfHospital
+          RecoveredToDate = this.statePerTreatment.recoveredToDate
           AgeGroups = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain)
           TestsAt14 =
             {| Performed = this.testsAt14.performed
