@@ -113,7 +113,7 @@ let renderChart (state : State) =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date) ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |} ]
 
             match state.ScaleType with
             | Log ->
