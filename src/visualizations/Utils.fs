@@ -30,7 +30,7 @@ let renderScaleSelector scaleType dispatch =
         prop.children [
             Html.text "Skala na Y osi: "
             renderSelector Linear scaleType "linearna"
-            renderSelector Log scaleType "logaritmična"
+            renderSelector Log scaleType "logaritemska"
         ]
     ]
 

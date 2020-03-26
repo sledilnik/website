@@ -53,7 +53,7 @@ module Series =
 
     let getName = function
         | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Iz bolnišnične oskrbe (skupaj)"
+        | OutOfHospital -> "Odpuščeni iz bolnišnice (skupaj)"
         | InHospital -> "V bolnišnični oskrbi"
         | NeedsO2 -> "Potrebuje kisik"
         | Icu -> "Intenzivna nega"
