@@ -1,16 +1,20 @@
 <template>
   <b-card :title="title" class="card-info">
     <b-card-text
+      :id="elementId"
       class="text-center"
-      :class="{'text-danger': diff > 0, 'text-info': diff==0, 'text-success': diff < 0}"
+      :class="textClass"
     >
-      <font-awesome-icon icon="arrow-circle-up" v-if="diff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="diff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="diff == 0" />&nbsp;
-      <span>{{ value }}</span>
+      <font-awesome-icon icon="arrow-circle-up" v-if="diffdiff > 0" />
+      <font-awesome-icon icon="arrow-circle-down" v-if="diffdiff < 0" />
+      <font-awesome-icon icon="arrow-circle-right" v-if="diffdiff == 0" />&nbsp;
+      <span>{{ lastDay.value }}</span>
       <span v-if="diff != 0">
-      [{{ diff | prefixDiff }} | {{ percentDiff | prefixDiff }}%]
+      [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
       </span>
+      <b-tooltip :target="elementId" triggers="hover">
+        Prejšni dan: {{ dayBefore.value }} [{{ dayBefore.diff | prefixDiff }}]
+      </b-tooltip>
     </b-card-text>
     <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
   </b-card>
@@ -19,7 +23,6 @@
 import Vue from "vue";
 import moment from "moment";
 import StatsData from "StatsData";
-// import LineChart from "components/charts/LineChart";
 
 Vue.filter("prefixDiff", function(value) {
   if (value > 0) {
@@ -30,89 +33,80 @@ Vue.filter("prefixDiff", function(value) {
 });
 
 export default {
-  // components: {
-  //   LineChart
-  // },
-  props: ["title", "field"],
+  props: {
+    title: String,
+    field: String,
+    goodDirection: {
+      type: String,
+      default: "down"
+    },
+  },
   data() {
     return {
+      dayBefore: {},
+      lastDay: {},
       date: null,
       value: null,
       percentDiff: null,
       diff: null,
-      chartdata: {
-        labels: ["January", "February"],
-        datasets: [
-          {
-            data: [
-              {
-                t: new Date(2020, 3, 25),
-                y: 10
-              },
-              {
-                t: new Date(2020, 3, 24),
-                y: 3
-              },
-              {
-                t: new Date(2020, 3, 23),
-                y: 1
-              }
-            ]
-          }
-        ]
-      },
-      chartoptions: {
-        padding: 0,
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          yAxes: [
-            {
-              gridLines: {
-                drawBorder: false,
-                drawOnChartArea: false,
-                display: false
-              }
-            }
-          ],
-          xAxes: [
-            {
-              type: "time",
-              gridLines: {
-                drawBorder: false,
-                drawOnChartArea: false,
-                display: false
-              }
-            }
-          ]
-        }
-      }
+      diffdiff: null,
     };
   },
   computed: {
+    elementId() {
+      return this.field
+    },
+    textClass() {
+      console.log(this.diffdiff)
+      if (this.goodDirection == 'up') {
+        if (this.diffdiff < 0) {
+          return 'text-danger'
+        }
+        if (this.diffdiff > 0) {
+          return 'text-success'
+        }
+        return 'text-info'
+      } else {
+        if (this.diffdiff > 0) {
+          return 'text-danger'
+        }
+        if (this.diffdiff < 0) {
+          return 'text-success'
+        }
+        return 'text-info'
+      }
+    },
     formattedDate() {
-      let dateFormatted = moment(this.date).format('DD. MM. YYYY');
+      let dateFormatted = moment(this.lastDay.date).format('DD. MM. YYYY');
       return `Osveženo ${dateFormatted}`;
     }
   },
   async mounted() {
-    let data = await StatsData.getLastValue(this.field);
-    this.date = data.date;
-    this.value = data.value;
+    this.lastDay = await StatsData.getLastValue(this.field)
 
-    let dayBefore = moment(data.date)
+    let dayBefore = moment(this.lastDay.date)
       .subtract(1, "days")
-      .toDate();
-    let dataBefore = await StatsData.getValueOn(this.field, dayBefore);
+      .toDate()
+    let day2Before = moment(this.lastDay.date)
+      .subtract(2, "days")
+      .toDate()
+    this.dayBefore = await StatsData.getValueOn(this.field, dayBefore)
+    this.day2Before = await StatsData.getValueOn(this.field, day2Before)
 
-    this.diff = this.value - dataBefore.value;
-    this.percentDiff = Math.round((this.diff / this.value) * 1000) / 10;
+    
+    this.lastDay.diff = this.lastDay.value - this.dayBefore.value
+    this.lastDay.percentDiff = Math.round((this.lastDay.diff / this.lastDay.value) * 1000) / 10
+    this.dayBefore.diff = this.dayBefore.value - this.day2Before.value
+    this.dayBefore.percentDiff = Math.round((this.dayBefore.diff / this.dayBefore.value) * 1000) / 10
+
+    this.diffdiff = this.lastDay.diff - this.dayBefore.diff
   }
 };
 </script>
 
 <style scoped lang="scss">
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
 
 .card.card-info {
   color: $text-muted;
@@ -120,8 +114,11 @@ export default {
   .card-title {
     text-align: center;
     font-size: $font-size-base;
-
     // text-transform: uppercase;
+  }
+  .card-body {
+    font-size: $font-size-base * 0.9;
+    padding: 0.5rem;
   }
 
   .data-time {

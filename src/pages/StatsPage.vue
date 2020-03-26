@@ -5,7 +5,8 @@
         <Info-card title="Pozitivnih testov" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
         <Info-card title="Umrli" field="state.deceased.todate" />
-        <Info-card title="Odpuščeni iz bolnišnice" field="state.out_of_hospital.todate" />
+        <Info-card title="Odpuščeni iz bolnišnice" field="state.out_of_hospital.todate" good-direction="up" />
+        <Info-card title="Ozdravljeni" field="state.recovered.todate" good-direction="up" />
       </b-card-group>
     </b-row>
     <b-row cols="12">
