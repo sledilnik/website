@@ -23,7 +23,7 @@ type Breakdown =
     static member all = [ BySeries; BySource ]
     static member getName = function
         | BySeries -> "Obravnava po pacientih"
-        | BySource -> "Obravnava po bolnišnicah"
+        | BySource -> "Hospitalizirani po bolnišnicah"
 
 type Series =
     | InCare
@@ -41,15 +41,15 @@ module Series =
         [ InCare; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
     let getColor = function
-        | InCare -> "#ffa600"
+        | InCare        -> "#ffa600"
         | OutOfHospital -> "#159ab0"
-        | InHospital -> "#70a471"
-        | NeedsO2 -> "#70a471"
-        | Icu -> "#8080A0"
-        | Critical -> "#802020"
-        | Deceased -> "#000000"
-        | Hospital -> "#0a6b85"
-        | Home -> "#003f5c"
+        | InHospital    -> "#70a471"
+        | NeedsO2       -> "#70a471"
+        | Icu           -> "#8080A0"
+        | Critical      -> "#802020"
+        | Deceased      -> "#000000"
+        | Hospital      -> "#0a6b85"
+        | Home          -> "#003f5c"
 
     let getName = function
         | InCare -> "Oskrbovani"
@@ -169,23 +169,24 @@ let renderChart (state : State) =
     let orZero = Option.defaultValue 0
 
     let renderSeries series =
-        let dataKey : Data.Patients.PatientsStats -> int =
+        let dash, dataKey : (int[] * (Data.Patients.PatientsStats -> int)) =
             match series with
-            | InCare -> fun ps -> ps.total.inCare |> orZero
-            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
-            | InHospital -> fun ps -> ps.total.inHospital.today |> orZero
-            | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> orZero
-            | Icu -> fun ps -> ps.total.icu.today |> orZero
-            | Critical -> fun ps -> ps.total.critical.today |> orZero
-            | Deceased -> fun ps -> ps.total.deceased.toDate |> orZero
-            | Hospital ->fun ps -> failwithf "home & hospital"
-            | Home -> fun ps -> failwithf "home & totals"
+            | InCare        -> [|1;1|], fun ps -> ps.total.inCare |> orZero
+            | OutOfHospital -> [|4;1|], fun ps -> ps.total.outOfHospital.toDate |> orZero
+            | InHospital    -> [||], fun ps -> ps.total.inHospital.today |> orZero
+            | NeedsO2       -> [|1;1|], fun ps -> ps.total.needsO2.toDate |> orZero
+            | Icu           -> [||], fun ps -> ps.total.icu.today |> orZero
+            | Critical      -> [|1;1|], fun ps -> ps.total.critical.today |> orZero
+            | Deceased      -> [|4;1|], fun ps -> ps.total.deceased.toDate |> orZero
+            | Hospital      -> [||], fun ps -> failwithf "home & hospital"
+            | Home          -> [||], fun ps -> failwithf "home & totals"
 
         Recharts.line [
             line.name (series |> Series.getName)
             line.monotone
             line.isAnimationActive false
             line.stroke (series |> Series.getColor)
+            line.strokeDasharray dash
             line.label renderLineLabel
             line.dataKey dataKey
         ]
