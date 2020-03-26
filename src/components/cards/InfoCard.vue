@@ -1,5 +1,5 @@
 <template>
-  <b-card :title="title" class="card-info">
+  <b-card :title="title" class="card-info" v-if="show">
     <b-card-text
       :id="elementId"
       class="text-center"
@@ -12,7 +12,7 @@
       <font-awesome-icon icon="arrow-circle-down" v-if="lastDay.diff < 0" />
       <font-awesome-icon icon="arrow-circle-right" v-if="lastDay.diff == 0" />&nbsp;
       <span>{{ lastDay.value }}</span>
-      <span v-if="diff != 0">
+      <span>
       [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
       </span>
       <b-tooltip :target="elementId" triggers="hover">
@@ -46,6 +46,7 @@ export default {
   },
   data() {
     return {
+      show: false,
       dayBefore: {},
       lastDay: {},
       date: null,
@@ -60,7 +61,6 @@ export default {
       return this.field
     },
     textClass() {
-      console.log(this.diffdiff)
       if (this.goodDirection == 'up') {
         if (this.diffdiff < 0) {
           return 'text-danger'
@@ -86,6 +86,7 @@ export default {
   },
   async mounted() {
     this.lastDay = await StatsData.getLastValue(this.field)
+    
 
     let dayBefore = moment(this.lastDay.date)
       .subtract(1, "days")
@@ -97,12 +98,15 @@ export default {
     this.day2Before = await StatsData.getValueOn(this.field, day2Before)
 
     
+    
     this.lastDay.diff = this.lastDay.value - this.dayBefore.value
     this.lastDay.percentDiff = Math.round((this.lastDay.diff / this.lastDay.value) * 1000) / 10
     this.dayBefore.diff = this.dayBefore.value - this.day2Before.value
     this.dayBefore.percentDiff = Math.round((this.dayBefore.diff / this.dayBefore.value) * 1000) / 10
 
     this.diffdiff = this.lastDay.diff - this.dayBefore.diff
+
+    this.show = true
   }
 };
 </script>
