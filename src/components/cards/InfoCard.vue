@@ -16,7 +16,7 @@
       [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
       </span>
       <b-tooltip :target="elementId" triggers="hover">
-        Prejšni dan: {{ dayBefore.value }} [{{ dayBefore.diff | prefixDiff }}]
+        Prejšnji dan: {{ dayBefore.value }} [{{ dayBefore.diff | prefixDiff }}]
       </b-tooltip>
     </b-card-text>
     <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
