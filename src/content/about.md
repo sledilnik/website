@@ -52,4 +52,4 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 ## Pogoji uporabe
 
 Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).  
-Za izvoz podatkov v drugih oblikah ali uporabo za vizualizacije nas kontaktirajte na [@LukaRenko](https://twitter.com/lukarenko)
+Za izvoz podatkov v drugih oblikah ali uporabo za vizualizacije nas kontaktirajte na info@sledilnik.org.
