@@ -53,7 +53,7 @@ module Series =
 
     let getName = function
         | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Iz bol. oskrbe (vsi)"
+        | OutOfHospital -> "Iz bolnišnične oskrbe (vsi)"
         | InHospital -> "V bol. oskrbi"
         | NeedsO2 -> "Potrebuje kisik"
         | Icu -> "Intenzivna nega"
@@ -166,18 +166,23 @@ let renderChart (state : State) =
             prop.text input.value
         ]
 
-    let orZero = Option.defaultValue 0
+    let zeroToNone value =
+        match value with
+        | None -> None
+        | Some x ->
+            if x = 0 then None
+            else Some x
 
     let renderSeries series =
-        let dataKey : Data.Patients.PatientsStats -> int =
+        let dataKey : Data.Patients.PatientsStats -> int option=
             match series with
-            | InCare -> fun ps -> ps.total.inCare |> orZero
-            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> orZero
-            | InHospital -> fun ps -> ps.total.inHospital.today |> orZero
-            | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> orZero
-            | Icu -> fun ps -> ps.total.icu.today |> orZero
-            | Critical -> fun ps -> ps.total.critical.today |> orZero
-            | Deceased -> fun ps -> ps.total.deceased.toDate |> orZero
+            | InCare -> fun ps -> ps.total.inCare |> zeroToNone
+            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
+            | InHospital -> fun ps -> ps.total.inHospital.today |> zeroToNone
+            | NeedsO2 -> fun ps -> ps.total.needsO2.toDate |> zeroToNone
+            | Icu -> fun ps -> ps.total.icu.today |> zeroToNone
+            | Critical -> fun ps -> ps.total.critical.today |> zeroToNone
+            | Deceased -> fun ps -> ps.total.deceased.toDate |> zeroToNone
             | Hospital ->fun ps -> failwithf "home & hospital"
             | Home -> fun ps -> failwithf "home & totals"
 
@@ -193,13 +198,13 @@ let renderChart (state : State) =
     let renderSources segmentation =
         let facility, dataKey =
             match segmentation with
-            | Totals -> "Skupaj", fun ps -> ps.total.inHospital.today |> orZero
+            | Totals -> "Skupaj", fun ps -> ps.total.inHospital.today |> zeroToNone
             | Facility f ->
                 f, fun ps ->
                     ps.facilities
                     |> Map.tryFind f
                     |> Option.bind (fun stats -> stats.inHospital.today)
-                    |> orZero
+                    |> zeroToNone
         let name, color =
             facility
             |> function

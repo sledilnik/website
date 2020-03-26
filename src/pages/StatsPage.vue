@@ -144,6 +144,7 @@ export default {
         margin: 0 $gap/6 $gap/3 $gap/6
         border-color: $gray-300
         font-size: $font-size
+
         &:hover
             border-color: $gray-500
 
