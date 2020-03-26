@@ -111,7 +111,7 @@ let renderMunicipalities (state : State) dispatch =
                                                 prop.text positiveTests ]
                                             Html.div [
                                                 prop.className "date"
-                                                prop.text (sprintf "%d-%d-%d" d.Date.Year d.Date.Month d.Date.Day) ]
+                                                prop.text (sprintf "%d. %s" d.Date.Day (Utils.monthNameOfdate d.Date)) ]
                                         ]
                                     ]
                                 ]
@@ -150,7 +150,7 @@ let renderMunicipalities (state : State) dispatch =
                                     prop.text totalPositiveTests ]
                                 Html.div [
                                     prop.className "date"
-                                    prop.text (sprintf "%d-%d-%d" lastDataPoint.Date.Year lastDataPoint.Date.Month lastDataPoint.Date.Day) ]
+                                    prop.text (sprintf "%d. %s" lastDataPoint.Date.Day (Utils.monthNameOfdate lastDataPoint.Date)) ]
                             ]
                         ]
                     ]

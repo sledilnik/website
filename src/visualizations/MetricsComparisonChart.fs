@@ -16,6 +16,8 @@ type Metric =
     | TotalPositiveTests
     | Hospitalized
     | HospitalizedIcu
+    | OutOfHospital
+    | OutOfHospitalToDate
     | RecoveredToDate
     | Deaths
     | TotalDeaths
@@ -31,15 +33,17 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric = Tests;              Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
-        { Metric = TotalTests;         Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
-        { Metric = PositiveTests;      Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
-        { Metric = TotalPositiveTests; Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi - skupaj" }
-        { Metric = Hospitalized;       Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
-        { Metric = HospitalizedIcu;    Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
-        { Metric = RecoveredToDate;    Color = "#ffa600" ; Visible = false ; Label = "Ozdraveli - skupaj" }
-        { Metric = Deaths;             Color = "#075b76" ; Visible = false ; Label = "Umrli" }
-        { Metric = TotalDeaths;        Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" }
+        { Metric = Tests;               Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
+        { Metric = TotalTests;          Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
+        { Metric = PositiveTests;       Color = "#7aa469" ; Visible = false ; Label = "Pozitivni testi" }
+        { Metric = TotalPositiveTests;  Color = "#38a39e" ; Visible = true  ; Label = "Pozitivni testi - skupaj" }
+        { Metric = Hospitalized;        Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
+        { Metric = HospitalizedIcu;     Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
+        { Metric = OutOfHospital;       Color = "#7aa469" ; Visible = false ; Label = "Iz bolnišnične oskrbe" }
+        { Metric = OutOfHospitalToDate; Color = "#7aa469" ; Visible = false ; Label = "Iz bolnišnične oskrbe - skupaj" }
+        { Metric = RecoveredToDate;     Color = "#7aa469" ; Visible = false ; Label = "Ozdraveli - skupaj" }
+        { Metric = Deaths;              Color = "#075b76" ; Visible = false ; Label = "Umrli" }
+        { Metric = TotalDeaths;         Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" }
     ]
     /// find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -129,6 +133,8 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
                             | TotalPositiveTests -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone
                             | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
                             | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
+                            | OutOfHospital -> point.OutOfHospital |> Utils.zeroToNone
+                            | OutOfHospitalToDate -> point.OutOfHospitalToDate |> Utils.zeroToNone
                             | RecoveredToDate -> point.RecoveredToDate |> Utils.zeroToNone
                             | Deaths -> point.Deaths |> Utils.zeroToNone
                             | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
