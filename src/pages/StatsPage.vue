@@ -2,7 +2,7 @@
   <b-container v-if="loaded">
     <b-row>
       <b-card-group deck class="col-12 mb-5">
-        <Info-card title="Pozitivnih testov" field="tests.positive.todate" />
+        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
         <Info-card title="Umrli" field="state.deceased.todate" />
         <Info-card title="Odpuščeni iz bolnišnice" field="state.out_of_hospital.todate" good-direction="up" />

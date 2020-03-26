@@ -2,12 +2,11 @@
   <b-card :title="title" class="card-info">
     <b-card-text
       :id="elementId"
-      class="text-center"
-      :class="textClass"
+      class="text-center text-info"
     >
-      <font-awesome-icon icon="arrow-circle-up" v-if="diffdiff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="diffdiff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="diffdiff == 0" />&nbsp;
+      <font-awesome-icon icon="arrow-circle-up" v-if="lastDay.diff > 0" />
+      <font-awesome-icon icon="arrow-circle-down" v-if="lastDay.diff < 0" />
+      <font-awesome-icon icon="arrow-circle-right" v-if="lastDay.diff == 0" />&nbsp;
       <span>{{ lastDay.value }}</span>
       <span v-if="diff != 0">
       [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
