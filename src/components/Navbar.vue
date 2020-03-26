@@ -8,8 +8,8 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="about">O projektu</b-nav-item>
-          <b-nav-item to="data">Podatki</b-nav-item>
           <b-nav-item to="stats">Statistika</b-nav-item>
+          <b-nav-item to="data">Podatki</b-nav-item>
           <b-nav-item to="map">Zemljevid</b-nav-item>
           <b-nav-item to="sources">Viri podatkov</b-nav-item>
           <b-nav-item to="links">Povezave</b-nav-item>
