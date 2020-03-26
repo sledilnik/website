@@ -7,13 +7,18 @@ open Types
 open Recharts
 
 let renderChart (data : StatsData) =
-    let latestDataPoint = List.last data
     let ageGroupData =
-        latestDataPoint.AgeGroups
-        |> List.filter (fun ageGroup ->
-            match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
-            | None, None, None -> false
-            | _ -> true
+        data
+        |> List.rev
+        |> List.pick (fun dataPoint ->
+            dataPoint.AgeGroups
+            |> List.filter (fun ageGroup -> // keep non-empty
+                match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
+                | None, None, None -> false
+                | _ -> true)
+            |> function // take most recent day with some data
+                | [] -> None
+                | filtered -> Some filtered
         )
 
     Recharts.barChart [
