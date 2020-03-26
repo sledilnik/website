@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3">
-    <b-navbar fixed="top" toggleable="lg" type="dark" variant="info">
-      <b-navbar-brand to="about">COVID-19 Sledilnik</b-navbar-brand>
+    <b-navbar fixed="top" toggleable="lg">
+      <b-navbar-brand to="about"></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -31,7 +31,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-a.nav-link {
-  color: #F5F5F5 !important;
+$yellow: #ffd922;
+
+nav.navbar {
+  background: $yellow;
+
+  .navbar-brand {
+    img {
+      fill: black;
+    }
+    background: url("/covid-19.svg") no-repeat;
+    fill: black;
+    width: 200px;
+    height: 60px;
+  }
+
+  a.nav-link {
+    color: #000 !important;
+  }
 }
 </style>
