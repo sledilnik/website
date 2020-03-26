@@ -103,203 +103,203 @@ export default {
 @import 'node_modules/bootstrap/scss/_mixins'
 
 #visualizations
-    $gap: $grid-gutter-width
-    $font-size: 12px
-    $primary-color: #17a2b8
+  $gap: $grid-gutter-width
+  $font-size: 12px
+  $primary-color: #17a2b8
+  font-size: $font-size
+
+  h2
+    margin-bottom: $gap / 2
+    text-align: center
+
+  .table
+    td, th
+      padding: 6px 9px
+
+  .scale-type-selector
+    margin: 0 $gap/2 $gap/2 0
+    text-align: right
+
+    .scale-type-selector__item
+      display: inline-block
+      padding: 0px 7px
+      margin: 0 3px
+      border-radius: 3px
+      border: solid 1px $gray-300
+
+      &:hover
+        cursor: pointer
+      &.selected
+        color: white
+        border-color: $gray-600
+        background-color: $gray-600
+
+  .metrics-selectors
+    margin-top: $gap/2
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+
+  .metric-selector
+    margin: 0 $gap/6 $gap/3 $gap/6
+    border-color: $gray-300
     font-size: $font-size
 
+    &:hover
+      border-color: $gray-500
+
+  .metric-selector--selected
+    color: white
+
+  .metrics-comparison-chart
+    margin-top: 0
+
+  .regions-chart
+    margin-top: $gap * 2
+
+  .age-groups-chart
+    margin-top: $gap * 2
+    margin-bottom: $gap
     h2
-        margin-bottom: $gap / 2
-        text-align: center
+      margin-bottom: $gap
 
-    .table
-        td, th
-            padding: 6px 9px
-
-    .scale-type-selector
-        margin: 0 $gap/2 $gap/2 0
-        text-align: right
-
-        .scale-type-selector__item
-            display: inline-block
-            padding: 0px 7px
-            margin: 0 3px
-            border-radius: 3px
-            border: solid 1px $gray-300
-
-            &:hover
-                cursor: pointer
-            &.selected
-                color: white
-                border-color: $gray-600
-                background-color: $gray-600
-
-    .metrics-selectors
-        margin-top: $gap/2
-        display: flex
-        flex-wrap: wrap
-        justify-content: center
+  .patients-chart
+    margin-top: $gap * 2
 
     .metric-selector
-        margin: 0 $gap/6 $gap/3 $gap/6
-        border-color: $gray-300
-        font-size: $font-size
-
-        &:hover
-            border-color: $gray-500
-
+      background-color: white
     .metric-selector--selected
-        color: white
+      border-color: $gray-600
+      background-color: $gray-600
 
-    .metrics-comparison-chart
-        margin-top: 0
+  .municipalities-chart
+    margin-top: $gap * 2
+    $bar-color: #003f5c
+    $bar-color-light: transparentize($bar-color, 0.6)
 
-    .regions-chart
-        margin-top: $gap * 2
+    h2
+      margin-bottom: $gap
 
-    .age-groups-chart
-        margin-top: $gap * 2
-        margin-bottom: $gap
-        h2
-            margin-bottom: $gap
+    .municipalities
+      display: flex
+      flex-wrap: wrap
 
-    .patients-chart
-        margin-top: $gap * 2
+      .municipality
+        width: calc(25% - #{$gap * 2})
+        margin: $gap/2 $gap
+        border-bottom: solid 1px $gray-300
 
-        .metric-selector
-            background-color: white
-        .metric-selector--selected
-            border-color: $gray-600
-            background-color: $gray-600
+        @include media-breakpoint-down(md)
+          width: calc(33% - #{$gap * 2})
 
-    .municipalities-chart
-        margin-top: $gap * 2
-        $bar-color: #003f5c
-        $bar-color-light: transparentize($bar-color, 0.6)
+        @include media-breakpoint-down(sm)
+          width: 100%
+          margin: $gap/4 0
 
-        h2
-            margin-bottom: $gap
+    .name
+      color: $gray-700
+      padding-right: $gap/2
+      font-size: $font-size-lg
+      text-overflow: ellipsis
+      white-space: nowrap
+      overflow: hidden
 
-        .municipalities
-            display: flex
-            flex-wrap: wrap
+    .positive-tests
+      padding-top: $gap/4
+      display: flex
+      align-items: flex-start
+      justify-content: flex-end
 
-            .municipality
-                width: calc(25% - #{$gap * 2})
-                margin: $gap/2 $gap
-                border-bottom: solid 1px $gray-300
+    .total-and-date
+      padding-left: $gap/4
 
-                @include media-breakpoint-down(md)
-                    width: calc(33% - #{$gap * 2})
+      .total
+        line-height: 1.5rem
+        font-size: $font-size-lg
+        color: $bar-color
 
-                @include media-breakpoint-down(sm)
-                    width: 100%
-                    margin: $gap/4 0
+      .date
+        color: $gray-600
+        white-space: nowrap
 
-        .name
-            color: $gray-700
-            padding-right: $gap/2
-            font-size: $font-size-lg
-            text-overflow: ellipsis
-            white-space: nowrap
-            overflow: hidden
+    .total-and-date--hover
+      display: none
+      position: absolute
+      top: 0px
+      right: 20px
+      text-align: right
+      text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white
 
-        .positive-tests
-            padding-top: $gap/4
-            display: flex
-            align-items: flex-start
-            justify-content: flex-end
+    .bars
+      display: flex
+      align-items: flex-end
+      justify-content: flex-end
+      height: 50px
 
-        .total-and-date
-            padding-left: $gap/4
+    .bar-wrapper
+      position: relative
+      display: flex
+      align-items: flex-end
+      height: 50px
 
-            .total
-                line-height: 1.5rem
-                font-size: $font-size-lg
-                color: $bar-color
-
-            .date
-                color: $gray-600
-                white-space: nowrap
-
-        .total-and-date--hover
-            display: none
-            position: absolute
-            top: 0px
-            right: 20px
-            text-align: right
-            text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white
-
-        .bars
-            display: flex
-            align-items: flex-end
-            justify-content: flex-end
-            height: 50px
-
-        .bar-wrapper
-            position: relative
-            display: flex
-            align-items: flex-end
-            height: 50px
-
-            &:last-child
-                .bar
-                    background-color: $bar-color
-
-            &:hover
-                .total-and-date--hover
-                    display: block
-
-                &:last-child
-                    .total-and-date--hover
-                        display: none
-
+      &:last-child
         .bar
-            width: 5px
-            margin-right: 1px
-            background-color: $bar-color-light
+          background-color: $bar-color
 
-            &:hover
-                background-color: $bar-color
+      &:hover
+        .total-and-date--hover
+          display: block
 
-        .bar--empty
-            background-color: gray
+        &:last-child
+          .total-and-date--hover
+            display: none
 
-        .show-all
-            display: flex
-            justify-content: center
-            margin-top: $gap * 1.2
-            border-top: solid 1px $gray-300
+    .bar
+      width: 5px
+      margin-right: 1px
+      background-color: $bar-color-light
 
-            > div
-                margin-top: -15px
-                padding: 0 $gap
-                background-color: white
+      &:hover
+        background-color: $bar-color
 
-            .btn
-                font-size: $font-size
-                border-color: $bar-color
-                background-color: transparentize($bar-color, 0.1)
+    .bar--empty
+      background-color: gray
 
-    .data-table
-        margin-top: $gap
+    .show-all
+      display: flex
+      justify-content: center
+      margin-top: $gap * 1.2
+      border-top: solid 1px $gray-300
 
-        h2
-            margin-bottom: $gap
+      > div
+        margin-top: -15px
+        padding: 0 $gap
+        background-color: white
 
-        .table
-            font-size: $font-size
+      .btn
+        font-size: $font-size
+        border-color: $bar-color
+        background-color: transparentize($bar-color, 0.1)
 
-        thead
-            th
-                vertical-align: top
-                border-bottom: none
+  .data-table
+    margin-top: $gap
 
-        tbody
-            td
-                width: 11.1%
+    h2
+      margin-bottom: $gap
 
-        tr
-            &:hover
-                background-color: $gray-100
+    .table
+      font-size: $font-size
+
+    thead
+      th
+        vertical-align: top
+        border-bottom: none
+
+    tbody
+      td
+        width: 11.1%
+
+    tr
+      &:hover
+        background-color: $gray-100
 </style>
