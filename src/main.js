@@ -15,7 +15,6 @@ import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import MapPage from './pages/MapPage.vue'
 import DataPage from './pages/DataPage.vue'
-import VizPage from './pages/VizPage.vue'
 
 import moment from 'moment'
 import 'moment/locale/sl'
@@ -49,10 +48,6 @@ const routes = [
   {
     path: '/stats',
     component: StatsPage
-  },
-  {
-    path: '/Viz',
-    component: VizPage
   },
   {
     path: '/data',
