@@ -31,6 +31,11 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Kazalniki COVID-19 v Sloveniji"
                           MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } ] ]
                   Html.section
+                      [ prop.className "patients-chart"
+                        prop.children
+                          [ Html.h2 "Hitrost širjenja okužbe"
+                            SpreadChart.spreadChart { data = data.StatsData } ] ]
+                  Html.section
                     [ prop.className "patients-chart"
                       prop.children
                         [ Html.h2 "Obravnava hospitaliziranih"

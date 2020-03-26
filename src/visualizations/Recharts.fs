@@ -23,6 +23,7 @@ type ScaleType =
     | Threshold
 
 type Feliz.Recharts.yAxis with
+    static member reversed = Interop.mkAttr "reversed" true
     static member label value = Interop.mkAttr "label" (unbox value)
     static member scale (value : ScaleType) = Interop.mkAttr "scale" value
 
