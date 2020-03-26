@@ -4,10 +4,8 @@
 
 Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja - [enostavno jo dodate kot komentar na katerokoli polje v dokumentu](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0). Veseli bomo tudi podatkov iz bolnišnic, štabov Civilne zaščite ipd ali pa zgolj javne podpore v zahtevi za transparentno in ažurno objavljanje podatkov.
 
-Imaš predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o zdravstvenem sistemu ali COVID-19 ali pomagal/a kako drugače? Javi se nam in [dobiš pravice za urejanje](https://twitter.com/lukarenko) dokumenta.
-Če pa lahko projektu nameniš nekaj časa vsak dan, se pridruži [naši Slack skupnosti](http://slo-covid-19.slack.com).
-
-Podatke iz dokumenta lahko prosto uporabljate tudi za lastne vizualizacije in/ali predikcijske modele. Z veseljem jih objavimo na tej strani (kot vir prosimo navedite [**covid-19.sledilnik.org**](https://covid-19.sledilnik.org)).
+Imaš predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o zdravstvenem sistemu ali COVID-19 ali pomagal/a kako drugače? Javi se nam in [dobiš pravice za urejanje](mailto:info@sledilnik.org) dokumenta.
+Če pa lahko projektu nameniš nekaj časa vsak dan, se pridruži [naši Slack skupnosti](http://slo-covid-19.slack.com). Več informacij na info@sledilnik.org.
 
 Uredniki baze in ostali sodelavci:
 
