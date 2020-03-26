@@ -22,6 +22,7 @@ Uredniki baze in ostali sodelavci:
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - viri, validacija podatkov
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
--   [Nace Štruc](https://www.nace.si/) - vizualizacija
--   [Peter Keše](https://twitter.com/pkese/) - vizualizacija
+-   [Nace Štruc](https://www.nace.si/) - vizualizacije
+-   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje
+-   [Demjan Vester](https://github.com/VesterDe) - vizualizacije
