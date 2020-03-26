@@ -53,7 +53,16 @@ let renderMunicipalities (state : State) dispatch =
 
     pivotedData
     |> Seq.groupBy (fun d -> {| Region = d.Region ; Municipality = d.Municipality |})
-    |> Seq.sortByDescending (fun (key, data) -> (Seq.last data).PositiveTests)
+    |> Seq.sortWith (fun (_, data1) (_, data2) ->
+        let last1, last2 = (Seq.last data1), (Seq.last data2)
+        match last1.PositiveTests, last2.PositiveTests with
+        | None, None -> System.String.Compare(last1.Municipality, last2.Municipality)
+        | Some v, None -> -1
+        | None, Some v -> 1
+        | Some v1, Some v2 ->
+            if v1 > v2 then -1
+            else if v1 < v2 then 1
+            else System.String.Compare(last1.Municipality, last2.Municipality))
     |> Seq.map (fun (key, data) ->
         let trimmedData = Seq.skip ((Seq.length data) - showMaxBars) data
 
