@@ -131,8 +131,8 @@ export default {
                 cursor: pointer
             &.selected
                 color: white
-                background-color: $gray-700
-                border-color: $gray-700
+                border-color: $gray-600
+                background-color: $gray-600
 
     .metrics-selectors
         margin-top: $gap/2
@@ -158,11 +158,18 @@ export default {
 
     .age-groups-chart
         margin-top: $gap * 2
+        margin-bottom: $gap
         h2
             margin-bottom: $gap
 
     .patients-chart
         margin-top: $gap * 2
+
+        .metric-selector
+            background-color: white
+        .metric-selector--selected
+            border-color: $gray-600
+            background-color: $gray-600
 
     .municipalities-chart
         margin-top: $gap * 2
@@ -256,6 +263,22 @@ export default {
 
         .bar--empty
             background-color: gray
+
+        .show-all
+            display: flex
+            justify-content: center
+            margin-top: $gap
+            border-top: solid 1px $gray-300
+
+            > div
+                margin-top: -15px
+                padding: 0 $gap
+                background-color: white
+
+            .btn
+                font-size: $font-size
+                border-color: $bar-color
+                background-color: transparentize($bar-color, 0.1)
 
     .data-table
         margin-top: $gap

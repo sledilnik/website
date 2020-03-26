@@ -36,11 +36,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Obravnava obolelih (ocena na podlagi nepopolnih podatkov)"
                           PatientsChart.patientsChart () ] ]
                   Html.section
-                    [ prop.className "age-groups-chart"
-                      prop.children
-                        [ Html.h2 "Pozitivni testi po starostnih skupinah"
-                          AgeGroupsChart.render data.StatsData ] ]
-                  Html.section
                     [ prop.className "regions-chart"
                       prop.children
                         [ Html.h2 "Pozitivni testi po regijah"
@@ -51,9 +46,14 @@ let render (state : State) (dispatch : Msg -> unit) =
                         [ Html.h2 "Pozitivni testi po občinah"
                           MunicipalitiesChart.municipalitiesChart { data = data.RegionsData } ] ]
                   Html.section
-                    [ prop.className "data-table"
+                    [ prop.className "age-groups-chart"
                       prop.children
-                        [ Html.h2 "Tabelarični prikaz podatkov"
-                          DataTable.render data.StatsData ] ]
+                        [ Html.h2 "Pozitivni testi po starostnih skupinah"
+                          AgeGroupsChart.render data.StatsData ] ]
+                //   Html.section
+                //     [ prop.className "data-table"
+                //       prop.children
+                //         [ Html.h2 "Tabelarični prikaz podatkov"
+                //           DataTable.render data.StatsData ] ]
                 ]
             ]

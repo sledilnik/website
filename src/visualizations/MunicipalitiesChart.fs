@@ -11,9 +11,11 @@ open Types
 
 type State =
     { Data : RegionsData
-      Regions : Region list }
+      Regions : Region list
+      ShowAll : bool }
 
-type Msg = unit
+type Msg =
+    | ToggleShowAll
 
 let regionTotal (region : Region) : int =
     region.Municipalities
@@ -27,19 +29,19 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         lastDataPoint.Regions
         |> List.sortByDescending (fun region -> regionTotal region)
 
-    { Data = data ; Regions = regions }, Cmd.none
+    { Data = data ; Regions = regions ; ShowAll = false }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
-    state, Cmd.none
-
-let beautifyMunicipalityName (name : string) =
-    (String.mapi (fun i c -> if i = 0 then System.Char.ToUpper c else c) name).Replace("_", " ")
+    match msg with
+    | ToggleShowAll ->
+        { state with ShowAll = not state.ShowAll }, Cmd.none
 
 let excludeMunicipalities = Set.ofList ["kraj"]
 
 let renderMunicipalities (state : State) dispatch =
     let barMaxHeight = 50
     let showMaxBars = 20
+    let collapsedMnicipalityCount = 24
 
     let pivotedData = seq {
         for dataPoint in state.Data do
@@ -51,18 +53,26 @@ let renderMunicipalities (state : State) dispatch =
                                  Municipality = municipality.Name
                                  PositiveTests = municipality.PositiveTests |} }
 
-    pivotedData
-    |> Seq.groupBy (fun d -> {| Region = d.Region ; Municipality = d.Municipality |})
-    |> Seq.sortWith (fun (_, data1) (_, data2) ->
-        let last1, last2 = (Seq.last data1), (Seq.last data2)
-        match last1.PositiveTests, last2.PositiveTests with
-        | None, None -> System.String.Compare(last1.Municipality, last2.Municipality)
-        | Some v, None -> -1
-        | None, Some v -> 1
-        | Some v1, Some v2 ->
-            if v1 > v2 then -1
-            else if v1 < v2 then 1
-            else System.String.Compare(last1.Municipality, last2.Municipality))
+    let sortedData =
+        pivotedData
+        |> Seq.groupBy (fun d -> {| Region = d.Region ; Municipality = d.Municipality |})
+        |> Seq.sortWith (fun (_, data1) (_, data2) ->
+            let last1, last2 = (Seq.last data1), (Seq.last data2)
+            match last1.PositiveTests, last2.PositiveTests with
+            | None, None -> System.String.Compare(last1.Municipality, last2.Municipality)
+            | Some v, None -> -1
+            | None, Some v -> 1
+            | Some v1, Some v2 ->
+                if v1 > v2 then -1
+                else if v1 < v2 then 1
+                else System.String.Compare(last1.Municipality, last2.Municipality))
+
+    let trimmedData =
+        if state.ShowAll = true
+        then sortedData
+        else Seq.take collapsedMnicipalityCount sortedData
+
+    trimmedData
     |> Seq.map (fun (key, data) ->
         let trimmedData = Seq.skip ((Seq.length data) - showMaxBars) data
 
@@ -120,7 +130,10 @@ let renderMunicipalities (state : State) dispatch =
             prop.children [
                 Html.div [
                     prop.className "name"
-                    prop.text (beautifyMunicipalityName key.Municipality)
+                    prop.text (
+                        match Utils.Dictionaries.municipalities.TryFind key.Municipality with
+                        | None -> key.Municipality
+                        | Some municipality -> municipality.Name)
                 ]
                 Html.div [
                     prop.className "positive-tests"
@@ -146,10 +159,31 @@ let renderMunicipalities (state : State) dispatch =
         ]
     )
 
+let renderShowMore showAll dispatch =
+    if showAll = true
+    then Html.none
+    else
+        Html.div [
+            prop.className "show-all"
+            prop.children [
+                Html.div [
+                    Html.button [
+                        prop.className "btn btn-primary btn-sm"
+                        prop.text "Prikaži vse občine"
+                        prop.onClick (fun _ -> dispatch ToggleShowAll)
+                    ]
+                ]
+            ]
+        ]
+
 let render (state : State) dispatch =
     Html.div [
-        prop.className "municipalities"
-        prop.children (renderMunicipalities state dispatch)
+        prop.children [
+            Html.div [
+                prop.className "municipalities"
+                prop.children (renderMunicipalities state dispatch) ]
+            renderShowMore state.ShowAll dispatch
+        ]
     ]
 
 type Props = {

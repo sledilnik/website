@@ -222,12 +222,9 @@ let renderChart (state : State) =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey formatDate ]
 
-            // layout="vetical" verticalAlign="middle" align="right"
-            yield Recharts.legend [ line.legendType.circle; ] // prop.custom ("layout","vertical"); prop.custom ("align","left"); prop.custom ("verticalAlign","top") ]
+            yield Recharts.legend [ line.legendType.circle; ]
 
-            //let yAxisPropsDefaut = [ yAxis.label {| value = "Število pacientov" ; angle = -90 ; position = "insideLeft" |} ]
-            let yAxisPropsDefaut = [ ]
-
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
             match state.scaleType with
             | Log ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto) ])
@@ -260,14 +257,9 @@ let renderChartContainer state =
     ]
 
 let renderBreakdownSelector state breakdown dispatch =
-    let style =
-        if state.breakdown = breakdown
-        then [ style.backgroundColor "#808080" ; style.borderColor "#404040" ]
-        else [ ]
     Html.div [
         prop.onClick (fun _ -> SwitchBreakdown breakdown |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; state.breakdown = breakdown, "metric-selector--selected" ]
-        prop.style style
+        prop.className [ true, "btn btn-sm metric-selector"; state.breakdown = breakdown, "metric-selector--selected" ]
         prop.text (breakdown |> Breakdown.getName)
     ]
 
@@ -280,14 +272,13 @@ let renderBreakdownSelectors state dispatch =
                 renderBreakdownSelector state breakdown dispatch
             ) ) ]
 
-
 let render (state : State) dispatch =
     match state.data, state.error with
     | [||], None -> Html.div [ prop.text "loading" ]
     | _, Some err -> Html.div [ prop.text err ]
     | data, None ->
         Html.div [
-            //Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
+            Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
             renderChartContainer state
             renderBreakdownSelectors state dispatch
         ]

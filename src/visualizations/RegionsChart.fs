@@ -10,22 +10,6 @@ open Feliz.ElmishComponents
 open Types
 open Recharts
 
-let dict =
-    [ "ce", "Savinjska"
-      "kk", "Posavska"
-      "kp", "Obalno-kraška"
-      "kr", "Gorenjska"
-      "lj", "Osrednjeslovenska"
-      "mb", "Podravska"
-      "ms", "Pomurska"
-      "ng", "Goriška"
-      "nm", "Jugovzhodna Slovenija"
-      "po", "Primorsko-notranjska"
-      "sg", "Koroška"
-      "za", "Zasavska"
-      "t",  "Tujina" ]
-    |> Map.ofList
-
 let colors =
     [ "#ffa600"
       "#dba51d"
@@ -43,10 +27,10 @@ let colors =
 
 let excludedRegions = ["regija"]
 
-let dictOfKey key =
-    dict
-    |> Map.tryFind key
-    |> Option.defaultValue key
+let getRegionName key =
+    match Utils.Dictionaries.regions.TryFind key with
+    | None -> key
+    | Some region -> region.Name
 
 type Metric =
     { Key : string
@@ -78,7 +62,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         regions
         |> List.filter (fun region -> not (List.contains region.Name excludedRegions))
         |> List.mapi2 (fun i color region ->
-            let config = dictOfKey region.Name
+            let config = getRegionName region.Name
             { Key = region.Name
               Color = color
               Visible = i <= 2 } ) colors
@@ -113,7 +97,7 @@ let renderChart (state : State) =
 
     let renderRegion (metric : Metric) (dataKey : RegionsDataPoint -> int) =
         Recharts.line [
-            line.name (dictOfKey metric.Key)
+            line.name (getRegionName metric.Key)
             line.monotone
             line.isAnimationActive false
             line.stroke metric.Color
@@ -174,7 +158,7 @@ let renderMetricSelector (metric : Metric) dispatch =
         prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
-        prop.text (dictOfKey metric.Key) ]
+        prop.text (getRegionName metric.Key) ]
 
 let renderMetricsSelectors metrics dispatch =
     Html.div [
