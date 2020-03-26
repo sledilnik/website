@@ -14,6 +14,7 @@ import 'style/main.scss'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import MapPage from './pages/MapPage.vue'
+import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 
 import moment from 'moment'
@@ -56,6 +57,10 @@ const routes = [
   {
     path: '/map',
     component: MapPage
+  },
+  {
+    path: '/tables',
+    component: TablesPage
   },
   {
     path: '/links',
