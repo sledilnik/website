@@ -6,7 +6,7 @@ const paths = {
 }
 
 process.env.VUE_APP_TITLE='COVID-19 Sledilnik'
-process.env.VUE_APP_DESC='COVID-19 Sledilnik Slovenija | COVID-19 Tracker Slovenia'
+process.env.VUE_APP_DESC='COVID-19 Sledilnik Slovenija | COVID-19 Slovenia Tracking'
 
 module.exports = {
   devServer: {
