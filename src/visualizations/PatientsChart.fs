@@ -226,14 +226,18 @@ let renderChart (state : State) =
     let children =
         let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d." d.day d.month
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey formatDate ]
+            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0) ]
 
             yield Recharts.legend [ line.legendType.circle; ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število oseb" ; angle = -90 ; position = "insideLeft" |}; yAxis.padding (16,0,0,0) ]
             match state.scaleType with
             | Log ->
-                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto) ])
+                yield Recharts.yAxis (yAxisPropsDefaut @ [
+                    yAxis.scale ScaleType.Log
+                    //yAxis.domain (domain.auto, domain.calculate (fun (max:float) -> max*1.1))
+                    yAxis.domain (domain.auto, domain.auto)
+                    yAxis.allowDataOverflow false ])
             | _ ->
                 yield Recharts.yAxis yAxisPropsDefaut
 

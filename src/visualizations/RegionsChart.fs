@@ -111,13 +111,13 @@ let renderChart (state : State) =
 
     let children =
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date) ]
+            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0) ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |} ]
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |}; yAxis.padding (16,0,0,0) ]
 
             match state.ScaleType with
             | Log ->
-                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto) ])
+                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); ])
             | _ ->
                 yield Recharts.yAxis yAxisPropsDefaut
 
