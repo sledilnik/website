@@ -29,12 +29,10 @@ Na voljo so v oblikah:
 ### Uporaba podatkov
 Podatki se uporabljajo za različne vizualizacije in statistike:
 
--   [**Statistika**](https://covid-19.sledilnik.org/#/stats) – interaktivni graf s podatki o številu testiranih in njihovem stanju
--   [**Vizualizacije**](https://covid-19.sledilnik.org/#/viz) – infografike s pregledom okuženih, številu testov ... 
+-   [**Statistika**](https://covid-19.sledilnik.org/#/stats) – grafi in infografike s podatki o številu testiranih in stanju hospitaliziranih pacientov
 -   [**Zemljevid**](https://covid-19.sledilnik.org/#/map) – stanje okužb po občinah
--   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) – postavil [Nace Štruc](http://www.nace.si/)
 
-Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://bit.ly/cov19-slo-report), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
+Naše podatke uporabljajo tudi [Analiza širjenja koronavirusa - covid19.alpaka.si](https://covid19.alpaka.si), [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://bit.ly/cov19-slo-report), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
 
 ### Kako urejamo podatke
 
