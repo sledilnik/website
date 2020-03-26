@@ -268,7 +268,7 @@ export default {
         .show-all
             display: flex
             justify-content: center
-            margin-top: $gap
+            margin-top: $gap * 1.2
             border-top: solid 1px $gray-300
 
             > div
