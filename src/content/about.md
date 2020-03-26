@@ -34,7 +34,7 @@ Podatki se uporabljajo za različne vizualizacije in statistike:
 -   [**Zemljevid**](https://covid-19.sledilnik.org/#/map) – stanje okužb po občinah
 -   [**Analiza širjenja koronavirusa**](https://covid19.alpaka.si) – postavil [Nace Štruc](http://www.nace.si/)
 
-Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://app.powerbi.com/view?r=eyJrIjoiMWE2NGNmZWMtMjcxZC00MzkxLWIyMTUtYjExYjI2YTg4NzA0IiwidCI6IjkxMGYyNzY0LWEyZGItNGM2Mi04OGM0LWE1ZTcwYzMzNjVjNCIsImMiOjl9&nbsp), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
+Naše podatke uporabljajo tudi [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://bit.ly/cov19-slo-report), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
 
 ### Kako urejamo podatke
 
