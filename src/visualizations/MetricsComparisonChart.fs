@@ -39,8 +39,8 @@ module Metrics  =
         { Metric = TotalPositiveTests;  Color = "#38a39e" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
         { Metric = Hospitalized;        Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
         { Metric = HospitalizedIcu;     Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
-        { Metric = OutOfHospital;       Color = "#7aa469" ; Visible = false ; Label = "Iz bolnišnične oskrbe" }
-        { Metric = OutOfHospitalToDate; Color = "#7aa469" ; Visible = false ; Label = "Iz bolnišnične oskrbe - skupaj" }
+        { Metric = OutOfHospital;       Color = "#7aa469" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
+        { Metric = OutOfHospitalToDate; Color = "#7aa469" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
         { Metric = RecoveredToDate;     Color = "#7aa469" ; Visible = false ; Label = "Ozdraveli - skupaj" }
         { Metric = Deaths;              Color = "#075b76" ; Visible = false ; Label = "Umrli" }
         { Metric = TotalDeaths;         Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" }
