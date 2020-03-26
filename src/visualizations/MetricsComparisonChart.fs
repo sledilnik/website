@@ -103,7 +103,7 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
         seq {
             yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0) ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število testiranj / Število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            let yAxisPropsDefaut = [ yAxis.label {| value = "Število testiranj ali število oseb" ; angle = -90 ; position = "insideLeft" |} ]
             match scaleType with
             | Log ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0) ])
