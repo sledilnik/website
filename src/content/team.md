@@ -16,6 +16,7 @@ Uredniki baze in ostali sodelavci:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovna struktura in validacija
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije
+-   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Maks Mržek](https://twitter.com/maksmrzek) - validacija, modeliranje, vizualizacije, koordinacija
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - model bolnišničnih podatkov, modeliranje
 -   [Marko B](https://twitter.com/multikultivator) - viri, spletna stran, dataviz
@@ -24,3 +25,5 @@ Uredniki baze in ostali sodelavci:
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
 -   [Nace Štruc](https://www.nace.si/) - vizualizacija
+-   [Peter Keše](https://twitter.com/pkese/) - vizualizacija
+-   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje
