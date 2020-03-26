@@ -2,7 +2,11 @@
   <b-card :title="title" class="card-info">
     <b-card-text
       :id="elementId"
-      class="text-center text-info"
+      class="text-center"
+      :class="{
+        'text-info': lastDay.diff != 0,
+        'text-secondary': lastDay.diff == 0,
+      }"
     >
       <font-awesome-icon icon="arrow-circle-up" v-if="lastDay.diff > 0" />
       <font-awesome-icon icon="arrow-circle-down" v-if="lastDay.diff < 0" />
