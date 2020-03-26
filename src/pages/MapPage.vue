@@ -2,7 +2,7 @@
   <b-container fluid class="h-100">
     <b-row cols="12" class="h-100">
       <b-col>
-        <h3 class="text-center">Potrjenih okužb po občinah</h3>
+        <h3 class="text-center">Potrjeno okuženi po občinah</h3>
         <iframe
           src="https://covid19.alpaka.si/zemljevid/embedded.html"
           scrolling="no"
