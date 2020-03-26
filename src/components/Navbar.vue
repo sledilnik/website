@@ -1,7 +1,7 @@
 <template>
   <div class="mb-3">
     <b-navbar fixed="top" toggleable="lg">
-      <b-navbar-brand to="about"></b-navbar-brand>
+      <b-navbar-brand to="stats"></b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
