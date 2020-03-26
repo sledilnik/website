@@ -33,7 +33,10 @@ let render (state : State) (dispatch : Msg -> unit) =
                   Html.section
                     [ prop.className "patients-chart"
                       prop.children
-                        [ Html.h2 "Obravnava obolelih (ocena na podlagi nepopolnih podatkov)"
+                        [ Html.h2 [
+                            prop.children [
+                                Html.text "Obravnava obolelih"
+                                Html.small [ prop.text " (ocena na podlagi nepopolnih podatkov)" ] ] ]
                           PatientsChart.patientsChart () ] ]
                   Html.section
                     [ prop.className "regions-chart"
