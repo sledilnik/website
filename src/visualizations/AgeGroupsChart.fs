@@ -28,7 +28,7 @@ let renderChart (data : StatsData) =
                 | None, Some b -> sprintf "0-%d" b
                 | Some a, Some b -> sprintf "%d-%d" a b
                 | Some a, None -> sprintf "nad %d" a ) ]
-            Recharts.yAxis [ yAxis.label {| value = "Število pozitivnih testov" ; angle = -90 ; position = "insideLeft" |} ]
+            Recharts.yAxis [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |} ]
 
             Recharts.tooltip [ ]
             Recharts.legend [ ]
