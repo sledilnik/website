@@ -36,16 +36,19 @@ $yellow: #ffd922;
 nav.navbar {
   background: $yellow;
 
-  height: 64px;
+  &.show {
+    background: $yellow !important;
+  }
+
+  .navbar-expand-lg {
+    background: $yellow !important;
+  }
 
   .navbar-brand {
-    img {
-      fill: black;
-    }
     background: url("/covid-19.svg") no-repeat;
-    fill: black;
     width: 145px;
     height: 40px;
+    margin: 12px 0;
   }
 
   a.nav-link {
