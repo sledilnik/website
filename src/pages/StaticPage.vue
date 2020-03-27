@@ -1,7 +1,9 @@
 <template>
   <b-container class="page-static" :class="name">
     <b-row>
-      <span v-html="staticContent"></span>
+      <b-col col="12">
+        <span v-html="staticContent"></span>
+      </b-col>
     </b-row>
   </b-container>
 </template>
