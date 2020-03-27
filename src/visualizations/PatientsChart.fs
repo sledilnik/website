@@ -11,7 +11,6 @@ open Recharts
 
 open Data.Patients
 
-
 type Segmentation =
     | Totals
     | Facility of string
@@ -73,7 +72,7 @@ type State = {
     breakdown: Breakdown
   } with
     static member initial = {
-        scaleType = Log // Linear
+        scaleType = Linear
         data = [||]
         error = None
         allSegmentations = [ Totals ]
@@ -230,7 +229,7 @@ let renderChart (state : State) =
 
             yield Recharts.legend [ line.legendType.circle; ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število oseb" ; angle = -90 ; position = "insideLeft" |}; yAxis.padding (16,0,0,0) ]
+            let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
             match state.scaleType with
             | Log ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [
@@ -262,7 +261,7 @@ let renderChart (state : State) =
 let renderChartContainer state =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
+        responsiveContainer.height 450
         responsiveContainer.chart (renderChart state)
     ]
 

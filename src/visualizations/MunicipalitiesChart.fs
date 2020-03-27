@@ -160,21 +160,18 @@ let renderMunicipalities (state : State) dispatch =
     )
 
 let renderShowMore showAll dispatch =
-    if showAll = true
-    then Html.none
-    else
-        Html.div [
-            prop.className "show-all"
-            prop.children [
-                Html.div [
-                    Html.button [
-                        prop.className "btn btn-primary btn-sm"
-                        prop.text "Prikaži vse občine"
-                        prop.onClick (fun _ -> dispatch ToggleShowAll)
-                    ]
+    Html.div [
+        prop.className "show-all"
+        prop.children [
+            Html.div [
+                Html.button [
+                    prop.className "btn btn-primary btn-sm"
+                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži več občin")
+                    prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
             ]
         ]
+    ]
 
 let render (state : State) dispatch =
     Html.div [

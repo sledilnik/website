@@ -33,26 +33,26 @@ let renderChart (data : StatsData) =
                 | None, Some b -> sprintf "0-%d" b
                 | Some a, Some b -> sprintf "%d-%d" a b
                 | Some a, None -> sprintf "nad %d" a ) ]
-            Recharts.yAxis [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |} ]
+            Recharts.yAxis [ ]
 
             Recharts.tooltip [ ]
             Recharts.legend [ ]
 
             Recharts.bar [
                 bar.name "Vsi"
-                bar.fill "#ffa600"
+                bar.fill "#666666"
                 bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveAll |> Option.defaultValue 0)
             ]
 
             Recharts.bar [
                 bar.name "Ženske"
-                bar.fill "#38a39e"
+                bar.fill "#2B6A7A"
                 bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveFemale |> Option.defaultValue 0)
             ]
 
             Recharts.bar [
                 bar.name "Moški"
-                bar.fill "#003f5c"
+                bar.fill "#7B7226"
                 bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveMale |> Option.defaultValue 0)
             ]
         ] ]
@@ -60,5 +60,5 @@ let renderChart (data : StatsData) =
 let render data =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
+        responsiveContainer.height 450
         responsiveContainer.chart (renderChart data) ]

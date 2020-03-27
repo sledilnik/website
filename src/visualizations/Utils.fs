@@ -28,7 +28,7 @@ let renderScaleSelector scaleType dispatch =
     Html.div [
         prop.className "scale-type-selector"
         prop.children [
-            Html.text "Skala na Y osi: "
+            Html.text "Skala: "
             renderSelector Linear scaleType "linearna"
             renderSelector Log scaleType "logaritemska"
         ]

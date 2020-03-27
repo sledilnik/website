@@ -6,7 +6,7 @@
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
         <Info-card title="Intenzivna nega" field="state.icu" />
         <Info-card title="Umrli" field="state.deceased.todate" />
-        <Info-card title="Ozdravljeni" field="state.recovered.todate" good-direction="up" />
+        <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
       </b-card-group>
     </b-row>
     <b-row cols="12">
@@ -108,6 +108,8 @@ export default {
   $font-size: 12px
   $primary-color: #17a2b8
   font-size: $font-size
+  $button-color: $gray-600
+  $inactive-button-color: $gray-300
 
   h2
     margin-bottom: $gap / 2
@@ -126,14 +128,16 @@ export default {
       padding: 0px 7px
       margin: 0 3px
       border-radius: 3px
-      border: solid 1px $gray-300
+      border: solid 1px $inactive-button-color
+      border-color: solid 1px $inactive-button-color
 
       &:hover
         cursor: pointer
+
       &.selected
         color: white
-        border-color: $gray-600
-        background-color: $gray-600
+        border-color: $button-color
+        background-color: $button-color
 
   .metrics-selectors
     margin-top: $gap/2
@@ -143,11 +147,11 @@ export default {
 
   .metric-selector
     margin: 0 $gap/6 $gap/3 $gap/6
-    border-color: $gray-300
     font-size: $font-size
+    border-color: $inactive-button-color
 
     &:hover
-      border-color: $gray-500
+      border-color: $button-color
 
   .metric-selector--selected
     color: white
@@ -175,8 +179,8 @@ export default {
 
   .municipalities-chart
     margin-top: $gap * 2
-    $bar-color: #003f5c
-    $bar-color-light: transparentize($bar-color, 0.6)
+    $bar-color: #7B7226
+    $bar-color-light: #B0AA74
 
     h2
       margin-bottom: $gap
@@ -279,8 +283,8 @@ export default {
 
       .btn
         font-size: $font-size
-        border-color: $bar-color
-        background-color: transparentize($bar-color, 0.1)
+        border-color: $button-color
+        background-color: $button-color
 
   .data-table
     margin-top: $gap

@@ -33,17 +33,17 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric = Tests;               Color = "#ffa600" ; Visible = false ; Label = "Testiranja" }
-        { Metric = TotalTests;          Color = "#bda535" ; Visible = false ; Label = "Testiranja - skupaj" }
-        { Metric = PositiveTests;       Color = "#7aa469" ; Visible = false ; Label = "Potrjeno okuženi" }
-        { Metric = TotalPositiveTests;  Color = "#38a39e" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
-        { Metric = Hospitalized;        Color = "#1494ab" ; Visible = true  ; Label = "Hospitalizirani" }
-        { Metric = HospitalizedIcu;     Color = "#0d7891" ; Visible = false ; Label = "Intenzivna nega" }
-        { Metric = OutOfHospital;       Color = "#7aa469" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
-        { Metric = OutOfHospitalToDate; Color = "#7aa469" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
-        { Metric = RecoveredToDate;     Color = "#7aa469" ; Visible = false ; Label = "Ozdraveli - skupaj" }
-        { Metric = Deaths;              Color = "#075b76" ; Visible = false ; Label = "Umrli" }
-        { Metric = TotalDeaths;         Color = "#003f5c" ; Visible = false ; Label = "Umrli - skupaj" }
+        { Metric = Tests;               Color = "#2B6A7A" ; Visible = false ; Label = "Testiranja" }
+        { Metric = TotalTests;          Color = "#74A4AE" ; Visible = false ; Label = "Testiranja - skupaj" }
+        { Metric = PositiveTests;       Color = "#7B7226" ; Visible = false ; Label = "Potrjeno okuženi" }
+        { Metric = TotalPositiveTests;  Color = "#B0AA74" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
+        { Metric = Hospitalized;        Color = "#D09D93" ; Visible = true  ; Label = "Hospitalizirani" }
+        { Metric = HospitalizedIcu;     Color = "#B35D4C" ; Visible = true  ; Label = "Intenzivna nega" }
+        { Metric = OutOfHospital;       Color = "#52AE73" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
+        { Metric = OutOfHospitalToDate; Color = "#8CCDAA" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
+        { Metric = RecoveredToDate;     Color = "#D7EEE3" ; Visible = true  ; Label = "Ozdraveli - skupaj" }
+        { Metric = Deaths;              Color = "#000000" ; Visible = false ; Label = "Umrli" }
+        { Metric = TotalDeaths;         Color = "#666666" ; Visible = true  ; Label = "Umrli - skupaj" }
     ]
     /// find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -104,7 +104,7 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
             // when xAxis getx too crowded, set [ xAxis.interval 1 ]
             yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0); xAxis.interval 0 ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število testiranj ali število oseb" ; angle = -90 ; position = "insideLeft" |} ]
+            let yAxisPropsDefaut = [ ]
             match scaleType with
             | Log ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0) ])
@@ -151,7 +151,7 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
 let renderChartContainer scaleType data metrics =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
+        responsiveContainer.height 450
         responsiveContainer.chart (renderChart scaleType data metrics)
     ]
 
