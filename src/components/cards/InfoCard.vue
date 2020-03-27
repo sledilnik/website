@@ -100,9 +100,9 @@ export default {
     
     
     this.lastDay.diff = this.lastDay.value - this.dayBefore.value
-    this.lastDay.percentDiff = Math.round((this.lastDay.diff / this.lastDay.value) * 1000) / 10
+    this.lastDay.percentDiff = Math.round((this.lastDay.diff / this.dayBefore.value) * 1000) / 10
     this.dayBefore.diff = this.dayBefore.value - this.day2Before.value
-    this.dayBefore.percentDiff = Math.round((this.dayBefore.diff / this.dayBefore.value) * 1000) / 10
+    this.dayBefore.percentDiff = Math.round((this.dayBefore.diff / this.day2Before.value) * 1000) / 10
 
     this.diffdiff = this.lastDay.diff - this.dayBefore.diff
 
