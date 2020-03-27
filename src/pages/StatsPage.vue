@@ -4,8 +4,8 @@
       <b-card-group deck class="col-12 mb-5">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
+        <Info-card title="Intenzivna nega" field="state.icu" />
         <Info-card title="Umrli" field="state.deceased.todate" />
-        <Info-card title="Odpuščeni iz bolnišnice" field="state.out_of_hospital.todate" good-direction="up" />
         <Info-card title="Ozdravljeni" field="state.recovered.todate" good-direction="up" />
       </b-card-group>
     </b-row>
