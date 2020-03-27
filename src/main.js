@@ -85,7 +85,8 @@ const routes = [
 
 const router = new VueRouter({
   routes, // short for `routes: routes`
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior() {
+    // possible arguments to, from, savedPosition - removed, so lint does not complain
     return { x: 0, y: 0 }
   },
 })
