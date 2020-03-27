@@ -19,7 +19,7 @@ type Breakdown =
     | BySeries
     | BySource
   with
-    static member all = [ BySeries; BySource ]
+    static member all = [ BySource; BySeries ]
     static member getName = function
         | BySeries -> "Obravnava po pacientih"
         | BySource -> "Hospitalizirani po bolnišnicah"
@@ -41,25 +41,33 @@ module Series =
 
     let getColor = function
         | InCare        -> "#ffa600"
-        | OutOfHospital -> "#159ab0"
-        | InHospital    -> "#70a471"
+        | OutOfHospital -> "#8CCDAA"
+        | InHospital    -> "#D09D93"
         | NeedsO2       -> "#70a471"
-        | Icu           -> "#8080A0"
-        | Critical      -> "#802020"
+        | Icu           -> "#B35D4C"
+        | Critical      -> "#2B6A7A"
         | Deceased      -> "#000000"
         | Hospital      -> "#0a6b85"
         | Home          -> "#003f5c"
 
     let getName = function
         | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Odpuščeni iz bolnišnice (skupaj)"
-        | InHospital -> "V bolnišnični oskrbi"
+        | OutOfHospital -> "Odpuščeni iz bolnišnice - skupaj"
+        | InHospital -> "Hospitalizirani"
         | NeedsO2 -> "Potrebuje kisik"
         | Icu -> "Intenzivna nega"
-        | Critical -> "Kritično stanje (ocena)"
-        | Deceased -> "Umrli (skupaj)"
+        | Critical -> "Kritično stanje - ocena"
+        | Deceased -> "Umrli - skupaj"
         | Hospital -> "Hospitalizirani"
         | Home -> "Doma"
+
+/// return (seriesName * color) based on facility name
+let facilityLine = function
+    | "sbce"  -> "SB Celje", "#70a471"
+    | "ukclj" -> "UKC Ljubljana", "#10829a"
+    | "ukcmb" -> "UKC Maribor", "#003f5c"
+    | "ukg"   -> "UK Golnik", "#7B7226"
+    | other -> other, "#000"
 
 type State = {
     scaleType : ScaleType
@@ -71,19 +79,6 @@ type State = {
     activeSeries: Set<Series>
     breakdown: Breakdown
   } with
-    static member initial = {
-        scaleType = Linear
-        data = [||]
-        error = None
-        allSegmentations = [ Totals ]
-        activeSegmentations = Set [ Totals ]
-        allSeries =
-            // exclude stuff that doesn't exist or doesn't make sense in Total
-            let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
-            Series.all |> List.filter (not << exclude.Contains)
-        activeSeries = Set Series.all
-        breakdown = BySeries
-    }
     static member switchBreakdown breakdown state =
         match breakdown with
         | BySeries ->
@@ -115,6 +110,21 @@ type State = {
                 activeSegmentations = Set segmentations
                 activeSeries = Set [ InHospital ]
             }
+    static member initial =
+        {
+            scaleType = Linear
+            data = [||]
+            error = None
+            allSegmentations = [ Totals ]
+            activeSegmentations = Set [ Totals ]
+            allSeries =
+                // exclude stuff that doesn't exist or doesn't make sense in Total
+                let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
+                Series.all |> List.filter (not << exclude.Contains)
+            activeSeries = Set Series.all
+            breakdown = BySource
+        }
+        |> State.switchBreakdown BySource
 
 
 
@@ -138,7 +148,7 @@ let init () : State * Cmd<Msg> =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeServerData (Ok data) ->
-        { state with data = data }, Cmd.none
+        { state with data = data } |> State.switchBreakdown state.breakdown, Cmd.none
     | ConsumeServerData (Error err) ->
         { state with error = Some err }, Cmd.none
     | ConsumeServerError ex ->
@@ -206,14 +216,9 @@ let renderChart (state : State) =
                     |> Map.tryFind f
                     |> Option.bind (fun stats -> stats.inHospital.today)
                     |> zeroToNone
-        let name, color =
-            facility
-            |> function
-                | "sbce"  -> "SB Celje", "#70a471"
-                | "ukclj" -> "UKC Ljubljana", "#10829a"
-                | "ukcmb" -> "UKC Maribor", "#003f5c"
-                | "ukg"   -> "UK Golnik", "#dba51d"
-                | other -> other, "#000"
+
+        let name, color = facilityLine facility
+
         Recharts.line [
             line.name name
             line.monotone
