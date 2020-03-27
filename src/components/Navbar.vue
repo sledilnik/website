@@ -2,16 +2,14 @@
   <div class="mb-3">
     <b-navbar fixed="top" toggleable="lg">
       <b-navbar-brand to="stats"></b-navbar-brand>
-
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
-          <b-nav-item to="about">O projektu</b-nav-item>
           <b-nav-item to="stats">Statistika</b-nav-item>
-          <b-nav-item to="data">Podatki</b-nav-item>
           <b-nav-item to="map">Zemljevid</b-nav-item>
-          <b-nav-item to="sources">Viri podatkov</b-nav-item>
+          <b-nav-item to="data">Podatki</b-nav-item>
+          <b-nav-item to="about">O projektu</b-nav-item>
+          <b-nav-item to="sources">Viri</b-nav-item>
           <b-nav-item to="links">Povezave</b-nav-item>
           <b-nav-item to="team">Ekipa</b-nav-item>
         </b-navbar-nav>
@@ -22,7 +20,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "Navbar",
   props: {
     msg: String
   }
