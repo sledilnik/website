@@ -1,5 +1,6 @@
 # covid19-web
 
+[![Build Status](https://travis-ci.org/slo-covid-19/website.svg?branch=master)](https://travis-ci.org/slo-covid-19/website)
 
 ## Structure
 
@@ -11,6 +12,14 @@
 | `src/pages` | Actual pages of website (each page is one component, StaticPage is reused with different content). Pages are rendered inside App component (in `router-view`) |
 | `src/App.vue` | Main app component (renders `router-view`) |
 | `src/main.js` | Webpack entrypoint |
+| `.env` | Configurable values (Page name and description) |
+
+## Deployment
+
+https://travis-ci.org/github/slo-covid-19/website
+
+Every push to `master` is automatically deployed (if build successfull) to https://covid-19.sledilnik.org
+Every push to other branches (not `master`) is deployed to https://preview.sledilnik.org/branch-name
 
 ## Development
 

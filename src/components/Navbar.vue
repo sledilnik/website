@@ -43,7 +43,7 @@ nav.navbar {
   }
 
   .navbar-brand {
-    background: url("/covid-19.svg") no-repeat;
+    background: url('../assets/svg/covid-19.svg') no-repeat;
     width: 145px;
     height: 40px;
     margin: 12px 0;
