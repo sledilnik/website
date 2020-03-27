@@ -11,6 +11,7 @@ Uredniki baze in ostali sodelavci:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - viri, modeliranje
 -   [Andraž Vrhovec](http://github.com/overlordtm) - CSV oblika, spletna stran
+-   [Bojan Košir](https://twitter.com/BojanKosir) - viri, validacija podatkov
 -   [Demjan Vester](https://github.com/VesterDe) - vizualizacije
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije
