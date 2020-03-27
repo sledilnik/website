@@ -226,7 +226,7 @@ let renderChart (state : State) =
     let children =
         let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d." d.day d.month
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0) ]
+            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0); xAxis.interval 0 ]
 
             yield Recharts.legend [ line.legendType.circle; ]
 

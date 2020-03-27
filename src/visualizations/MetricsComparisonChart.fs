@@ -101,7 +101,8 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
 
     let children =
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0) ]
+            // when xAxis getx too crowded, set [ xAxis.interval 1 ]
+            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0); xAxis.interval 0 ]
 
             let yAxisPropsDefaut = [ yAxis.label {| value = "Število testiranj ali število oseb" ; angle = -90 ; position = "insideLeft" |} ]
             match scaleType with
