@@ -190,6 +190,7 @@ let renderChart (state : State) =
             line.monotone
             line.isAnimationActive false
             line.stroke (series |> Series.getColor)
+            line.strokeWidth 2
             line.strokeDasharray dash
             line.label renderLineLabel
             line.dataKey dataKey
@@ -218,6 +219,7 @@ let renderChart (state : State) =
             line.monotone
             line.isAnimationActive false
             line.stroke color
+            line.strokeWidth 2
             line.label renderLineLabel
             line.dataKey dataKey
         ]

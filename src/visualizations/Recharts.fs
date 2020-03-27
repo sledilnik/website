@@ -29,6 +29,7 @@ type Feliz.Recharts.yAxis with
 type Feliz.Recharts.line with
     static member isAnimationActive (value : bool) = Interop.mkAttr "isAnimationActive" value
     static member inline dataKey (f: 'a -> int option) = Interop.mkAttr "dataKey" f
+    static member inline strokeWidth (value: int) = Interop.mkAttr "strokeWidth" value
 
 type Feliz.Recharts.bar with
     static member isAnimationActive (value : bool) = Interop.mkAttr "isAnimationActive" value

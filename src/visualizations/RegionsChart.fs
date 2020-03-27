@@ -101,6 +101,7 @@ let renderChart (state : State) =
             line.monotone
             line.isAnimationActive false
             line.stroke metric.Color
+            line.strokeWidth 2
             line.label renderLineLabel
             line.dataKey dataKey
         ]
