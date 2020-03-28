@@ -55,7 +55,7 @@ let renderBars (data : StatsData) breakdown =
         barChart.data ageGroupData
         barChart.maxBarSize 40
         barChart.barCategoryGapPercentage 15
-        barChart.children (bars @ [
+        barChart.children ([
             Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
             Recharts.xAxis [ xAxis.dataKey (fun (point : AgeGroup) ->
                 match point.AgeFrom, point.AgeTo with
@@ -63,11 +63,12 @@ let renderBars (data : StatsData) breakdown =
                 | None, Some b -> sprintf "0-%d" b
                 | Some a, Some b -> sprintf "%d-%d" a b
                 | Some a, None -> sprintf "nad %d" a ) ]
+
             Recharts.yAxis [ ]
 
             Recharts.tooltip [ ]
             Recharts.legend [ ]
-        ])
+        ] @ bars)
     ]
 
 let renderChart data breakdown =
