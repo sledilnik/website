@@ -39,8 +39,8 @@ let basicChartOptions (scaleType:ScaleType) =
                 tickInterval=86400000
                 //labels = {| rotation= -45 |}
                 plotLines=[|
-                    {| value=jsTime <| DateTime(2020,3,13); label={|text="nov režim testiranja, izolacija" |} |}
-                    {| value=jsTime <| DateTime(2020,3,20); label={|text="nov režim testiranja" |} |}
+                    {| value=jsTime <| DateTime(2020,3,13); label={| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,3,20); label={| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
