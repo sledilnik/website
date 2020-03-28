@@ -3,9 +3,9 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Types.fs" />
         <Compile Include="Recharts.fs" />
         <Compile Include="Highcharts.fs" />
-        <Compile Include="Types.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="DataLoader.fs" />
         <Compile Include="data/Patients.fs" />

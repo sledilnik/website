@@ -1,5 +1,7 @@
 /* eslint-disable */
 
+// sorry for all the junk inhere
+
 import React from 'react'
 import * as Highcharts from 'highcharts/highcharts.js'
 //import * as Highcharts from 'highcharts/highstock.js'

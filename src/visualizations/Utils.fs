@@ -4,7 +4,7 @@ module Utils
 
 open Feliz
 
-open Recharts
+open Types
 
 let zeroToNone value =
     match value with
@@ -30,7 +30,7 @@ let renderScaleSelector scaleType dispatch =
         prop.children [
             Html.text "Skala: "
             renderSelector Linear scaleType "linearna"
-            renderSelector Log scaleType "logaritemska"
+            renderSelector Logarithmic scaleType "logaritemska"
         ]
     ]
 

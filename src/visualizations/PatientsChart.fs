@@ -8,6 +8,7 @@ open Feliz
 open Feliz.ElmishComponents
 
 open Recharts
+open Types
 
 open Data.Patients
 
@@ -234,13 +235,13 @@ let renderChart (state : State) =
 
             let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
             match state.scaleType with
-            | Log ->
+            | Logarithmic ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [
                     yAxis.scale ScaleType.Log
                     //yAxis.domain (domain.auto, domain.calculate (fun (max:float) -> max*1.1))
                     yAxis.domain (domain.auto, domain.auto)
                     yAxis.allowDataOverflow false ])
-            | _ ->
+            | Linear ->
                 yield Recharts.yAxis yAxisPropsDefaut
 
             yield Recharts.tooltip [ ]

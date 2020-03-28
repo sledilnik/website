@@ -1,5 +1,9 @@
 module Types
 
+type ScaleType =
+    | Linear
+    | Logarithmic
+
 type RemoteData<'data, 'error> =
     | NotAsked
     | Loading

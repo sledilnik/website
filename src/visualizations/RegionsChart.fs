@@ -7,8 +7,8 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 
-open Types
 open Recharts
+open Types
 
 let colors =
     [ "#ffa600"
@@ -118,9 +118,9 @@ let renderChart (state : State) =
             let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
 
             match state.ScaleType with
-            | Log ->
+            | Logarithmic ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); ])
-            | _ ->
+            | Linear ->
                 yield Recharts.yAxis yAxisPropsDefaut
 
             yield Recharts.tooltip [ ]

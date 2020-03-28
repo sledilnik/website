@@ -7,21 +7,9 @@ open Elmish
 
 open Feliz
 open Feliz.ElmishComponents
+open Highcharts
 
 open Types
-open Recharts
-
-// plain old javascript object
-let inline pojo o = JsInterop.toPlainJsObj o
-
-// plain old javascript object
-[<Emit """Array.prototype.slice.call($0)""">]
-let poja (a: 'T[]) : obj = jsNative
-
-
-[<Emit("$0.getTime()")>]
-let jsTime (x: DateTime): float = jsNative
-
 
 type Metric =
     | Tests
@@ -92,18 +80,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
-let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metrics) =
-
-    let renderLineLabel (input: ILabelProperties) =
-        Html.text [
-            prop.x(input.x)
-            prop.y(input.y)
-            prop.fill color.black
-            prop.textAnchor.middle
-            prop.dy(-10)
-            prop.fontSize 10
-            prop.text input.value
-        ]
+let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metrics) =
 
     let maxOption a b =
         match a, b with
@@ -130,19 +107,7 @@ let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metri
             | Deaths -> point.Deaths |> Utils.zeroToNone
             | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
 
-
-    let renderMetric (metric : MetricCfg) (dataKey : StatsDataPoint -> int option) =
-        Recharts.line [
-            line.name metric.Label
-            line.monotone
-            line.isAnimationActive false
-            line.stroke metric.Color
-            line.strokeWidth 2
-            line.label renderLineLabel
-            line.dataKey dataKey
-        ]
-
-    let series =
+    let allSeries =
         metrics
         |> List.map (fun metric ->
             let pointData = metricDataGenerator metric
@@ -160,67 +125,15 @@ let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metri
         |> List.toArray
         |> poja
 
-    let config =
-        {|
-            chart = pojo
-                {|
-                    //height = "100%"
-                    ``type`` = "spline"
-                    zoomType = "x"
-                |}
-            title = null //{| text = "Graf" |}
-            xAxis = [|
-                {|
-                    index=0; crosshair=true; ``type``="datetime"
-                    gridLineWidth=1 //; isX=true
-                    tickInterval=86400000
-                    //labels = {| rotation= -45 |}
-                    plotLines=[|
-                        {| value=jsTime (DateTime.Parse "2020-03-14"); label={|text=" Sprememba štetja"; zIndex=100; color="#ccc" |} |}
-                    |]
-                |}
-            |]
-            yAxis = [|
-                {|
-                    index = 0
-                    ``type`` = if scaleType=Linear then "linear" else "logarithmic"
-                    min = if scaleType=Linear then None else Some 1.0
-                    opposite = true // right side
-                    title = {| text = null |} // "oseb" |}
-                    //showFirstLabel = false
-                    tickInterval = if scaleType=Linear then None else Some 0.25
-                |}
-            |]
-            legend = pojo
-                {|
-                    enabled = false
-                    align = "left"
-                    verticalAlign = "top"
-                    borderColor = "#ddd"
-                    borderWidth = 1
-                    //labelFormatter = string //fun series -> series.name
-                    layout = "vertical"
-                |}
-            plotOptions = pojo
-                {|
-                    spline = pojo
-                        {|
-                            dataLabels = pojo {| enabled = true |}
-                            //enableMouseTracking = false
-                        |}
-                |}
-            series = series
-        |}
-    JS.console.log ("highcharts config:", config)
-
-    config
+    // return highcharts options
+    {| basicChartOptions scaleType with series = allSeries |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [
         prop.style [ style.height 450 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartConfig scaleType data metrics
+            renderChartOptions scaleType data metrics
             |> Highcharts.chart
         ]
     ]
