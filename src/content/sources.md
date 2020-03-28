@@ -36,28 +36,31 @@
 
 | Lokalni mediji | |
 |----|----|
-| Gorenjski glas            | Primorske novice |
-| Domžalec                  | Regional Obala |
-| Domžalsko-kamniške novice | Lokalne Ajdovščina |
-| Kamnik.info               | Idrija.com |
-| Radio Sora                | Notranjsko primorske novice |
-| Koroške Novice            | Maribor24.si |
-| Savinjsko-Šaleške Novice  | Celje.info |
-| Savinjske novice          | Novi Tednik \| Celje |
-| Moja-dolenjska            | Kozjansko.info |
-| Dolenjski list            | Sobotainfo |
-| ePosavje                  | Pomurec |
-| Posavski obzornik         | Lendavainfo |
-| Naše Zasavje              | Prlekija-on.net |
-| | Vestnik MS |
+| [Gorenjski glas](http://www.gorenjskiglas.si/) | [Primorske novice](https://www.primorske.si/) |
+| [Domžalec](https://domzalec.si/) | [Regional obala](https://www.regionalobala.si/) |
+| [Domžalsko-kamniške novice](https://www.domzalske-novice.si/) | [Lokalne Ajdovščina](https://www.lokalne-ajdovscina.si/) |
+| [Kamnik.info](https://www.kamnik.info/novice_kamnik/) | [Idrija.com](https://www.idrija.com/) |
+| [Radio Sora](https://www.radio-sora.si/novice) | [Notranjsko primorske novice](https://notranjskoprimorske.si/) |
+| | |
+| [Koroške Novice](https://www.koroskenovice.si/) | [Maribor24.si](https://maribor24.si/) |
+| [Savinjsko-Šaleške Novice](https://sasa-novice.si/) | [Celje.info](https://www.celje.info/) |
+| [Savinjske novice](http://savinjske.com/) | [Novi Tednik Celje](http://www.nt-rc.si/novi-tednik/) |
+| | [Kozjansko.info](https://kozjansko.info/) |
+| | |
+| [Moja-dolenjska](https://moja-dolenjska.si/) | [Sobotainfo](https://sobotainfo.com/) |
+| [Dolenjski list](https://www.dolenjskilist.si/si/novice/) | [Pomurec](https://www.pomurec.com/) |
+| [ePosavje](https://www.eposavje.com/) | [Lendavainfo](http://lendavainfo.com/) |
+| [Posavski obzornik](https://www.posavskiobzornik.si/) | [Prlekija-on.net](https://www.prlekija-on.net/) |
+| [Naše Zasavje](https://nase-zasavje.si/) | [Vestnik MS](https://vestnik.si/) |
 
 <br>
 
 | Ostali viri informacij                                                                                                                                                       |     |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
 | [Nova metodologija diagnosticiranja obolelih](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/) |     |
-| [Tabele o poročanju - Navodila za organizacijo dela ](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)             |     |
+| [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)             |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
+<br>
 
 Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, naš sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz *uradnih virov*, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz *administrativnih virov zdravstvenega sistema*, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, *virov Civilne zaščite* ter seveda iz *nacionalnih in lokalnih medijev*. 
 
