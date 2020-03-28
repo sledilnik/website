@@ -39,7 +39,8 @@ let basicChartOptions (scaleType:ScaleType) =
                 tickInterval=86400000
                 //labels = {| rotation= -45 |}
                 plotLines=[|
-                    {| value=jsTime (DateTime.Parse "2020-03-14"); label={|text=" Sprememba štetja"; zIndex=100; color="#ccc" |} |}
+                    {| value=jsTime <| DateTime(2020,3,13); label={|text="F2 - nov režim testiranja, izolacija" |} |}
+                    {| value=jsTime <| DateTime(2020,3,20); label={|text="F3 - nov režim testiranja" |} |}
                 |]
             |}
         |]
