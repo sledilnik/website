@@ -11,6 +11,7 @@ Uredniki baze in ostali sodelavci:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - viri, modeliranje
 -   [Andraž Vrhovec](http://github.com/overlordtm) - CSV oblika, spletna stran
+-   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
 -   [Bojan Košir](https://twitter.com/BojanKosir) - viri, validacija podatkov
 -   [Demjan Vester](https://github.com/VesterDe) - vizualizacije
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
@@ -27,3 +28,4 @@ Uredniki baze in ostali sodelavci:
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
