@@ -12,29 +12,11 @@
     <b-tab title="Okužbe po spolu">
       <gender-overview-table :csvdata="csvdata"></gender-overview-table>
     </b-tab>
-    <b-tab title="Vse">
-      <b-table
-        responsive
-        bordered
-        outlined
-        striped
-        hover
-        sort-by="date"
-        :sort-desc="true"
-        sticky-header="600px"
-        :items="csvdata"
-      >
-        <template v-slot:head()="scope">
-          <div class="text-nowrap">{{ scope.label }}</div>
-        </template>
-        <template v-slot:table-caption>This is a table caption.</template>
-      </b-table>
-    </b-tab>
-    <b-tab
-      title="Prenos podatkov"
-      title-item-class="ml-auto data-redirect-link"
-      no-body
-    ></b-tab>
+    <template v-slot:tabs-end>
+      <li role="presentation" class="nav-item">
+        <a href="/data" class="nav-link">Prenos podatkov</a>
+      </li>
+    </template>
   </b-tabs>
 </template>
 
@@ -70,7 +52,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.tables-tabs{
+.tables-tabs {
   .nav-pills {
     .nav-item {
       display: flex;
@@ -94,5 +76,4 @@ export default {
     }
   }
 }
-
 </style>
