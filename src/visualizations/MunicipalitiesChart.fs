@@ -38,10 +38,16 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let excludeMunicipalities = Set.ofList ["kraj"]
 
+let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
+    let v1, v2, dt = float v1.PositiveTests, float v2.PositiveTests, float (v2.Day - v1.Day)
+    if v1 = v2 then None
+    else log10 2.0 / log10 ((v2 / v1) ** (1.0 / dt)) |> Some
+
 let renderMunicipalities (state : State) dispatch =
     let barMaxHeight = 50
-    let showMaxBars = 20
+    let showMaxBars = 10
     let collapsedMnicipalityCount = 24
+    let doublingTimeInterval = 4
 
     let pivotedData = seq {
         for dataPoint in state.Data do
@@ -84,6 +90,27 @@ let renderMunicipalities (state : State) dispatch =
                 |> Seq.max
             with
                 | _ -> None
+
+        let reversedDoublingTimeValues =
+            trimmedData
+            |> Seq.mapi (fun i p -> i, p.PositiveTests)
+            |> Seq.choose (fun (i, p) ->
+                match p with
+                | None -> None
+                | Some v -> Some {| Day = i ; PositiveTests = v |})
+            |> Seq.rev
+            |> Array.ofSeq
+
+        let doublingTime =
+            match reversedDoublingTimeValues.Length with
+            | 0 | 1 -> None
+            | length ->
+                if length >= doublingTimeInterval then
+                    calculateDoublingTime reversedDoublingTimeValues.[doublingTimeInterval - 1] reversedDoublingTimeValues.[0]
+                else
+                    calculateDoublingTime reversedDoublingTimeValues.[length - 1] reversedDoublingTimeValues.[0]
+
+        printfn "%s %A" key.Municipality doublingTime
 
         let bars =
             match maxValue with
@@ -160,21 +187,18 @@ let renderMunicipalities (state : State) dispatch =
     )
 
 let renderShowMore showAll dispatch =
-    if showAll = true
-    then Html.none
-    else
-        Html.div [
-            prop.className "show-all"
-            prop.children [
-                Html.div [
-                    Html.button [
-                        prop.className "btn btn-primary btn-sm"
-                        prop.text "Prikaži vse občine"
-                        prop.onClick (fun _ -> dispatch ToggleShowAll)
-                    ]
+    Html.div [
+        prop.className "show-all"
+        prop.children [
+            Html.div [
+                Html.button [
+                    prop.className "btn btn-primary btn-sm"
+                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži več občin")
+                    prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
             ]
         ]
+    ]
 
 let render (state : State) dispatch =
     Html.div [

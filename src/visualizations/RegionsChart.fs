@@ -101,6 +101,7 @@ let renderChart (state : State) =
             line.monotone
             line.isAnimationActive false
             line.stroke metric.Color
+            line.strokeWidth 2
             line.label renderLineLabel
             line.dataKey dataKey
         ]
@@ -111,9 +112,10 @@ let renderChart (state : State) =
 
     let children =
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0) ]
+            // when xAxis getx too crowded, set [ xAxis.interval 1 ]
+            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0); xAxis.interval 0 ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število potrjeno okuženih" ; angle = -90 ; position = "insideLeft" |}; yAxis.padding (16,0,0,0) ]
+            let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
 
             match state.ScaleType with
             | Log ->
@@ -145,7 +147,7 @@ let renderChart (state : State) =
 let renderChartContainer state =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
+        responsiveContainer.height 450
         responsiveContainer.chart (renderChart state)
     ]
 

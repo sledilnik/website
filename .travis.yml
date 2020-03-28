@@ -18,10 +18,15 @@ before_install:
 
 install: yarn --frozen-lockfile
 script: 
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then export C19_OUTPUT_DIR="dist/${TRAVIS_BRANCH}"; export C19_PUBLIC_PATH="https://preview.sledilnik.org/${TRAVIS_BRANCH}"; fi
+  - echo $C19_OUTPUT_DIR
+  - echo $C19_PUBLIC_PATH
   - yarn build
+  - ls dist/
 deploy:
   - on:
       all_branches: true
+      condition: $TRAVIS_BRANCH != master
     provider: pages
     local_dir: dist
     target_branch: gh-pages
@@ -29,8 +34,9 @@ deploy:
     cleanup: false
     skip_cleanup: true
     token: $GITHUB_TOKEN
-    fqdn: slo-covid-19-stage.rtfm.si
+    fqdn: preview.sledilnik.org
     verbose: true
+    keep_history: true
     deploy_strategy: git
   - on:
       branch: master
@@ -45,3 +51,7 @@ deploy:
     fqdn: covid-19.sledilnik.org
     verbose: true
     deploy_strategy: git
+
+notifications:
+  slack:
+    secure: "Dvt+StaruYMsrU+qDMCa1kEHTTZV4l7ukwZO+BvX6qoh2IM5zGvirDN8XzV3nlRUJpXa/LUVytXjJuXOiabhoM5Wb1QENt4opty0Ef69qUmus0jteun+tA0F/C/Ckwjl8wlpZ5HOPV7nJBeSEWkY5G4Cww3qMHJbkiU36jHJwEmJM1xsNvs3cmoieks6GR75wTJ/jv5x1fBd1pot3AxRvyZfcH+9EBDTQa857D+8vBOfJnz+BS+Wwe1tgRXTA9ZSNS6px6PbOBwuLOVzJI1XGYgfOLzdiBiFFKHpcdvoH/a5knXBFf3Vcd8XIzrDcY5se/7YY9iayiAClVhaOW7g3uJM5d4MDGyUbhwYkFZauzkunXuIbJYDSzQciFOXd5+Hf5jTxvCzh51iGwO3GPx16w2+9mLkZXsjFbRDNcEBy9s8gvDTQsQBqDIe1Loat00ccn5dbXfbcaJCgqLblZT4YqBE+XqnbFYbDGXgc94Z5eKy2eBFM94F3y2XiMMG7TZdIvjqupmt5uWwPX253Px1Ru2zWrXOsfjGGfCyY4+mEkGWxbgmQ85A9w2oNQzQ7zNIS+WUy8cUlf8r3dZQNpAU6KmOzIUnn284V3/v+A1/xlsW1vVrGR03XvRs4nJjsxtKka6zV4us91ZlQkmLbcziVsqIXsCZKy9fGn7iy1AC998="

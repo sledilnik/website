@@ -93,6 +93,10 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes, // short for `routes: routes`
+  scrollBehavior() {
+    // possible arguments to, from, savedPosition - removed, so lint does not complain
+    return { x: 0, y: 0 }
+  },
 })
 
 new Vue({

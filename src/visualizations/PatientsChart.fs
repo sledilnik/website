@@ -11,7 +11,6 @@ open Recharts
 
 open Data.Patients
 
-
 type Segmentation =
     | Totals
     | Facility of string
@@ -20,7 +19,7 @@ type Breakdown =
     | BySeries
     | BySource
   with
-    static member all = [ BySeries; BySource ]
+    static member all = [ BySource; BySeries ]
     static member getName = function
         | BySeries -> "Obravnava po pacientih"
         | BySource -> "Hospitalizirani po bolnišnicah"
@@ -29,6 +28,7 @@ type Series =
     | InCare
     | OutOfHospital
     | InHospital
+    | AllInHospital
     | NeedsO2
     | Icu
     | Critical
@@ -38,29 +38,28 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
+        [ InCare; InHospital; AllInHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
-    let getColor = function
-        | InCare        -> "#ffa600"
-        | OutOfHospital -> "#159ab0"
-        | InHospital    -> "#70a471"
-        | NeedsO2       -> "#70a471"
-        | Icu           -> "#8080A0"
-        | Critical      -> "#802020"
-        | Deceased      -> "#000000"
-        | Hospital      -> "#0a6b85"
-        | Home          -> "#003f5c"
+    // color, dash, name
+    let getSeriesInfo = function
+        | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
+        | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
+        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
+        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi"
+        | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
+        | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
+        | Critical      -> "#d99a91", [|1;1|], "Kritično stanje - ocena"
+        | Deceased      -> "#000000", [|4;1|], "Umrli - skupaj"
+        | Hospital      -> "#be772a", [|   |], "Hospitalizirani"
+        | Home          -> "#003f5c", [|   |], "Doma"
 
-    let getName = function
-        | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Odpuščeni iz bolnišnice (skupaj)"
-        | InHospital -> "V bolnišnični oskrbi"
-        | NeedsO2 -> "Potrebuje kisik"
-        | Icu -> "Intenzivna nega"
-        | Critical -> "Kritično stanje (ocena)"
-        | Deceased -> "Umrli (skupaj)"
-        | Hospital -> "Hospitalizirani"
-        | Home -> "Doma"
+/// return (seriesName * color) based on facility name
+let facilityLine = function
+    | "sbce"  -> "#70a471", "SB Celje"
+    | "ukclj" -> "#10829a", "UKC Ljubljana"
+    | "ukcmb" -> "#003f5c", "UKC Maribor"
+    | "ukg"   -> "#7B7226", "UK Golnik"
+    | other   -> "#000000", other
 
 type State = {
     scaleType : ScaleType
@@ -72,19 +71,6 @@ type State = {
     activeSeries: Set<Series>
     breakdown: Breakdown
   } with
-    static member initial = {
-        scaleType = Log // Linear
-        data = [||]
-        error = None
-        allSegmentations = [ Totals ]
-        activeSegmentations = Set [ Totals ]
-        allSeries =
-            // exclude stuff that doesn't exist or doesn't make sense in Total
-            let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
-            Series.all |> List.filter (not << exclude.Contains)
-        activeSeries = Set Series.all
-        breakdown = BySeries
-    }
     static member switchBreakdown breakdown state =
         match breakdown with
         | BySeries ->
@@ -116,6 +102,21 @@ type State = {
                 activeSegmentations = Set segmentations
                 activeSeries = Set [ InHospital ]
             }
+    static member initial =
+        {
+            scaleType = Linear
+            data = [||]
+            error = None
+            allSegmentations = [ Totals ]
+            activeSegmentations = Set [ Totals ]
+            allSeries =
+                // exclude stuff that doesn't exist or doesn't make sense in Total
+                let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
+                Series.all |> List.filter (not << exclude.Contains)
+            activeSeries = Set Series.all
+            breakdown = BySource
+        }
+        |> State.switchBreakdown BySource
 
 
 
@@ -139,7 +140,7 @@ let init () : State * Cmd<Msg> =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeServerData (Ok data) ->
-        { state with data = data }, Cmd.none
+        { state with data = data } |> State.switchBreakdown state.breakdown, Cmd.none
     | ConsumeServerData (Error err) ->
         { state with error = Some err }, Cmd.none
     | ConsumeServerError ex ->
@@ -174,23 +175,27 @@ let renderChart (state : State) =
             else Some x
 
     let renderSeries series =
-        let dash, dataKey : (int[] * (Data.Patients.PatientsStats -> int option)) =
+        let dataKey : (Data.Patients.PatientsStats -> int option) =
             match series with
-            | InCare        -> [|1;1|], fun ps -> ps.total.inCare |> zeroToNone
-            | OutOfHospital -> [|4;1|], fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
-            | InHospital    -> [||], fun ps -> ps.total.inHospital.today |> zeroToNone
-            | NeedsO2       -> [|1;1|], fun ps -> ps.total.needsO2.toDate |> zeroToNone
-            | Icu           -> [||], fun ps -> ps.total.icu.today |> zeroToNone
-            | Critical      -> [|1;1|], fun ps -> ps.total.critical.today |> zeroToNone
-            | Deceased      -> [|4;1|], fun ps -> ps.total.deceased.toDate |> zeroToNone
-            | Hospital      -> [||], fun ps -> failwithf "home & hospital"
-            | Home          -> [||], fun ps -> failwithf "home & totals"
+            | InCare        -> fun ps -> ps.total.inCare |> zeroToNone
+            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
+            | InHospital    -> fun ps -> ps.total.inHospital.today |> zeroToNone
+            | AllInHospital -> fun ps -> ps.total.inHospital.toDate |> zeroToNone
+            | NeedsO2       -> fun ps -> ps.total.needsO2.toDate |> zeroToNone
+            | Icu           -> fun ps -> ps.total.icu.today |> zeroToNone
+            | Critical      -> fun ps -> ps.total.critical.today |> zeroToNone
+            | Deceased      -> fun ps -> ps.total.deceased.toDate |> zeroToNone
+            | Hospital      -> fun ps -> failwithf "home & hospital"
+            | Home          -> fun ps -> failwithf "home & totals"
+
+        let color, dash, name = Series.getSeriesInfo series
 
         Recharts.line [
-            line.name (series |> Series.getName)
+            line.name name
             line.monotone
             line.isAnimationActive false
-            line.stroke (series |> Series.getColor)
+            line.stroke color
+            line.strokeWidth 2
             line.strokeDasharray dash
             line.label renderLineLabel
             line.dataKey dataKey
@@ -206,19 +211,15 @@ let renderChart (state : State) =
                     |> Map.tryFind f
                     |> Option.bind (fun stats -> stats.inHospital.today)
                     |> zeroToNone
-        let name, color =
-            facility
-            |> function
-                | "sbce"  -> "SB Celje", "#70a471"
-                | "ukclj" -> "UKC Ljubljana", "#10829a"
-                | "ukcmb" -> "UKC Maribor", "#003f5c"
-                | "ukg"   -> "UK Golnik", "#dba51d"
-                | other -> other, "#000"
+
+        let color, name = facilityLine facility
+
         Recharts.line [
             line.name name
             line.monotone
             line.isAnimationActive false
             line.stroke color
+            line.strokeWidth 2
             line.label renderLineLabel
             line.dataKey dataKey
         ]
@@ -226,11 +227,11 @@ let renderChart (state : State) =
     let children =
         let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d." d.day d.month
         seq {
-            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0) ]
+            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0); xAxis.interval 0 ]
 
             yield Recharts.legend [ line.legendType.circle; ]
 
-            let yAxisPropsDefaut = [ yAxis.label {| value = "Število oseb" ; angle = -90 ; position = "insideLeft" |}; yAxis.padding (16,0,0,0) ]
+            let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
             match state.scaleType with
             | Log ->
                 yield Recharts.yAxis (yAxisPropsDefaut @ [
@@ -262,7 +263,7 @@ let renderChart (state : State) =
 let renderChartContainer state =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
+        responsiveContainer.height 450
         responsiveContainer.chart (renderChart state)
     ]
 

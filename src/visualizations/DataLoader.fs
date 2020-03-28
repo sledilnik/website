@@ -41,6 +41,7 @@ type private TransferStatsDataPoint =
       statePerTreatment :
         {| inCare : int option
            inHospital : int option
+           inHospitalToDate : int option
            needsO2 : int option
            inICU : int option
            critical : int option
@@ -74,6 +75,7 @@ type private TransferStatsDataPoint =
           PositiveTests = this.positiveTests
           TotalPositiveTests = this.positiveTestsToDate
           Hospitalized = this.statePerTreatment.inHospital
+          HospitalizedToDate = this.statePerTreatment.inHospitalToDate
           HospitalizedIcu = this.statePerTreatment.inICU
           Deaths = this.statePerTreatment.deceased
           TotalDeaths = this.statePerTreatment.deceasedToDate

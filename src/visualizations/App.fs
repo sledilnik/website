@@ -28,7 +28,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 [ Html.section
                     [ prop.className "metrics-comparison-chart"
                       prop.children
-                        [ Html.h2 "Pregled in primerjava podatkov"
+                        [ Html.h2 "Širjenje COVID-19 v Sloveniji"
                           MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } ] ]
                   Html.section
                     [ prop.className "patients-chart"
@@ -49,11 +49,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                     [ prop.className "age-groups-chart"
                       prop.children
                         [ Html.h2 "Potrjeno okuženi po starostnih skupinah"
-                          AgeGroupsChart.render data.StatsData ] ]
-                //   Html.section
-                //     [ prop.className "data-table"
-                //       prop.children
-                //         [ Html.h2 "Tabelarični prikaz podatkov"
-                //           DataTable.render data.StatsData ] ]
+                          AgeGroupsChart.render data.StatsData () ] ]
                 ]
             ]

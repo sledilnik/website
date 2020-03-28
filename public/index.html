@@ -11,12 +11,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<%= VUE_APP_TITLE %>" />
   <meta name="twitter:description" content="<%= VUE_APP_DESC %>" />
-  <meta name="twitter:image" content="https://covid-19.sledilnik.org/covid-19-logo.png" />
+  <meta name="twitter:image" content="<%= BASE_URL %>covid-19-logo.png" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://covid-19.sledilnik.org" />
+  <meta property="og:url" content="<%= BASE_URL %>" />
   <meta property="og:title" content="<%= VUE_APP_TITLE %>" />
-  <meta property="og:image" content="https://covid-19.sledilnik.org/covid-19-logo.png" />
+  <meta property="og:image" content="<%= BASE_URL %>covid-19-logo.png" />
   <meta property="og:description" content="<%= VUE_APP_DESC %>" />
+  <link rel="apple-touch-icon" href="<%= BASE_URL %>images/add-to-home-192.png">
+  <link rel="icon" sizes="192x192" href="<%= BASE_URL %>images/add-to-home-192.png">
 </head>
 
 <body>
