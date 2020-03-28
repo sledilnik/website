@@ -7,6 +7,7 @@
     hover
     sort-by="date"
     :sort-desc="true"
+    head-variant="yellow"
     sticky-header="600px"
     :items="csvdata"
     :fields="fields"
@@ -31,7 +32,8 @@ export default {
           headerTitle: "Datum",
           label: "Datum",
           sortable: true,
-          stickyColumn: true
+          stickyColumn: true,
+          variant: 'yellow'
         },
         {
           key: 'age.0-4.todate',

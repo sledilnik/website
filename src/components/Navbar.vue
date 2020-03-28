@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="navbar-container mb-3">
     <b-navbar fixed="top" toggleable="lg">
       <b-navbar-brand to="stats"></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -29,8 +29,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$yellow: #ffd922;
-
+.navbar-container {
+  overflow: hidden;
+}
 nav.navbar {
   background: $yellow;
 

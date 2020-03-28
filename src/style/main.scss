@@ -1,22 +1,8 @@
 @import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
 
 // customize bootstrap vars here
-
-$theme-colors: map-merge(
-  (
-    'primary': $primary,
-    'secondary': $secondary,
-    'success': $success,
-    'info': $info,
-    'warning': $warning,
-    'danger': $danger,
-    'light': $light,
-    'dark': $dark
-  ),
-  $theme-colors
-);
-
+@import "./variables.scss";
+@import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
@@ -30,6 +16,24 @@ body,
 
 // ce spreminjas visino navbara
 body {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
+.nav-pills{
+  .nav-link{
+    color: #000000;
+  }
+  .nav-link.active{
+    color: #000000;
+    background-color: $yellow;
+  }
+}
+
+.table-yellow{
+  background-color: $yellow;
+}
+.thead-yellow{
+  th{
+    background-color: $yellow;
+  }
+}

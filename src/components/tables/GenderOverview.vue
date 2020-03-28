@@ -6,6 +6,7 @@
     striped
     hover
     sort-by="date"
+    head-variant="yellow"
     :sort-desc="true"
     sticky-header="600px"
     :items="csvdata"
@@ -31,7 +32,8 @@ export default {
           headerTitle: "Datum",
           label: "Datum",
           sortable: true,
-          stickyColumn: true
+          stickyColumn: true,
+          variant: 'yellow'
         },
         {
           key: 'age.female.todate',

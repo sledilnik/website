@@ -7,6 +7,7 @@
     hover
     sort-by="date"
     :sort-desc="true"
+    head-variant="yellow"
     sticky-header="600px"
     :items="csvdata"
     :fields="fields"
@@ -16,6 +17,9 @@
     </template>
     <template v-slot:cell(date)="data">
       <div class="text-nowrap">{{ data.item.dateLocal }}</div>
+    </template>
+    <template v-slot:empty="scope">
+      <h4>{{ scope.emptyText }} ni podatka</h4>
     </template>
   </b-table>
 </template>
@@ -31,7 +35,8 @@ export default {
           headerTitle: "Datum",
           label: "Datum",
           sortable: true,
-          stickyColumn: true
+          stickyColumn: true,
+          variant: 'yellow'
         },
         {
           key: "tests.performed",
