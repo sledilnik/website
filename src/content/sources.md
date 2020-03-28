@@ -41,12 +41,12 @@
 | [Domžalsko-kamniške novice](https://www.domzalske-novice.si/) | [Lokalne Ajdovščina](https://www.lokalne-ajdovscina.si/) |
 | [Kamnik.info](https://www.kamnik.info/novice_kamnik/) | [Idrija.com](https://www.idrija.com/) |
 | [Radio Sora](https://www.radio-sora.si/novice) | [Notranjsko primorske novice](https://notranjskoprimorske.si/) |
-| | |
+| &nbsp; | &nbsp; |
 | [Koroške Novice](https://www.koroskenovice.si/) | [Maribor24.si](https://maribor24.si/) |
 | [Savinjsko-Šaleške Novice](https://sasa-novice.si/) | [Celje.info](https://www.celje.info/) |
 | [Savinjske novice](http://savinjske.com/) | [Novi Tednik Celje](http://www.nt-rc.si/novi-tednik/) |
-| | [Kozjansko.info](https://kozjansko.info/) |
-| | |
+| &nbsp; | [Kozjansko.info](https://kozjansko.info/) |
+| &nbsp; | &nbsp; |
 | [Moja-dolenjska](https://moja-dolenjska.si/) | [Sobotainfo](https://sobotainfo.com/) |
 | [Dolenjski list](https://www.dolenjskilist.si/si/novice/) | [Pomurec](https://www.pomurec.com/) |
 | [ePosavje](https://www.eposavje.com/) | [Lendavainfo](http://lendavainfo.com/) |
