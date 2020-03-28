@@ -243,7 +243,7 @@ function renderChart(options) {
   //options["yAxis"] = [{title: {name:"aaa"}}, {title: {name:"bbb"}}]
   //options["yAxis"] = options.yAxis.map((item) => objectWithFields(item, ["title"]));
   //options = bpOptions;
-  //options = wrapLabelFormatterWithThis(options);
+  options = wrapLabelFormatterWithThis(options);
   //console.log("chart options:", options);
   return React.createElement(HighchartsReact, {
     highcharts: Highcharts,

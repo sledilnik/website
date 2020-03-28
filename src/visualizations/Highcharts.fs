@@ -31,7 +31,7 @@ let basicChartOptions (scaleType:ScaleType) =
                 ``type`` = "spline"
                 zoomType = "x"
             |}
-        title = null //{| text = "Graf" |}
+        title = pojo {| text = None |}
         xAxis = [|
             {|
                 index=0; crosshair=true; ``type``="datetime"
@@ -73,7 +73,7 @@ let basicChartOptions (scaleType:ScaleType) =
                 tickInterval = if scaleType=Linear then None else Some 0.25
             |}
         |]
-        legend = pojo
+        legend =
             {|
                 enabled = false
                 align = "left"

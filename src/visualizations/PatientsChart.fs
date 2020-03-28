@@ -212,6 +212,7 @@ let renderChartOptions (state : State) =
             color = color
             name = name
             data = state.data |> Seq.map renderPoint |> Array.ofSeq
+            showInLegend = true
             //yAxis = 0 // axis index
             //showInLegend = true
             //fillOpacity = 0
@@ -229,7 +230,25 @@ let renderChartOptions (state : State) =
                 yield renderSources segmentation
     |]
 
-    {| Highcharts.basicChartOptions state.scaleType with series = allSeries |}
+    let baseOptions = Highcharts.basicChartOptions state.scaleType
+    {| baseOptions with
+        series = allSeries
+        legend = pojo
+            {|
+                enabled = Some true
+                title = {| text=if state.breakdown=BySeries then "Obravnava hospitaliziranih" else "Hospitalizirani v" |}
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                //labelFormatter = string //fun series -> series.name
+                layout = "vertical"
+                floating = true
+                x = 20
+                y = 30
+                backgroundColor = "#FFF"
+            |}
+|}
 
 let renderChartContainer state =
     Html.div [
