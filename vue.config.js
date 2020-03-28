@@ -5,10 +5,14 @@ const paths = {
   dist: path.resolve(path.join(__dirname, 'dist')),
 }
 
-process.env.VUE_APP_TITLE='COVID-19 Sledilnik'
-process.env.VUE_APP_DESC='COVID-19 Sledilnik Slovenija | COVID-19 Slovenia Tracking'
+if (process.env.NODE_ENV != 'production') {
+  process.env.VUE_APP_TITLE = process.env.VUE_APP_TITLE + ' (preview)'
+  process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
+}
 
 module.exports = {
+  publicPath: process.env.C19_PUBLIC_PATH || '/', 
+  outputDir: process.env.C19_OUTPUT_DIR || 'dist',
   devServer: {
     disableHostCheck: true, 
   },

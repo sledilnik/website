@@ -18,10 +18,15 @@ before_install:
 
 install: yarn --frozen-lockfile
 script: 
+  - if [ "$TRAVIS_BRANCH" != "master" ]; then export C19_OUTPUT_DIR="dist/${TRAVIS_BRANCH}"; export C19_PUBLIC_PATH="https://preview.sledilnik.org/${TRAVIS_BRANCH}"; fi
+  - echo $C19_OUTPUT_DIR
+  - echo $C19_PUBLIC_PATH
   - yarn build
+  - ls dist/
 deploy:
   - on:
       all_branches: true
+      condition: $TRAVIS_BRANCH != master
     provider: pages
     local_dir: dist
     target_branch: gh-pages
@@ -29,8 +34,9 @@ deploy:
     cleanup: false
     skip_cleanup: true
     token: $GITHUB_TOKEN
-    fqdn: slo-covid-19-stage.rtfm.si
+    fqdn: preview.sledilnik.org
     verbose: true
+    keep_history: true
     deploy_strategy: git
   - on:
       branch: master
