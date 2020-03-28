@@ -36,6 +36,7 @@ let basicChartOptions (scaleType:ScaleType) =
             {|
                 index=0; crosshair=true; ``type``="datetime"
                 gridLineWidth=1 //; isX=true
+                gridZIndex = -1
                 tickInterval=86400000
                 //labels = {| rotation= -45 |}
                 plotLines=[|
@@ -71,6 +72,7 @@ let basicChartOptions (scaleType:ScaleType) =
                 title = {| text = null |} // "oseb" |}
                 //showFirstLabel = false
                 tickInterval = if scaleType=Linear then None else Some 0.25
+                gridZIndex = -1
             |}
         |]
         legend =
