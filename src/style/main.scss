@@ -4,7 +4,7 @@
 @import "./variables.scss";
 @import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import 'node_modules/bootstrap-vue/src/index.scss';
+@import "node_modules/bootstrap-vue/src/index.scss";
 
 // rest of SASS
 
@@ -19,34 +19,18 @@ body {
   margin-top: 80px;
 }
 
-.nav-pills{
-  .nav-link{
-    border-radius: 0;
-    color: #000000;
-    line-height: 0.8;
-    border-bottom: 10px solid transparent;
-    padding-bottom: 0;
-  }
-  .nav-link.active{
-    color: #000000;
-    font-weight: bold;
-    background-color: transparent;
-    border-bottom: 10px solid $yellow;
-  }
-}
-
-.button-yellow{
+.button-yellow {
   background-color: $yellow;
   color: #000000;
 }
-.table-yellow{
+.table-yellow {
   background-color: $yellow;
 }
-.table-grey{
+.table-grey {
   background-color: #dee2e6;
 }
-.thead-yellow{
-  th{
+.thead-yellow {
+  th {
     background-color: $yellow;
   }
 }

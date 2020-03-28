@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid class="h-100">
+  <b-container fluid class="h-100 mt-3">
     <b-row cols="12" class="h-100">
       <b-col>
         <h3 class="text-center">Potrjeno okuženi po občinah</h3>

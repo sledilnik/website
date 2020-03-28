@@ -1,5 +1,5 @@
 <template>
-  <b-container class="page-static" :class="name">
+  <b-container class="page-static mt-3" :class="name">
     <b-row>
       <b-col col="12">
         <span v-html="staticContent"></span>

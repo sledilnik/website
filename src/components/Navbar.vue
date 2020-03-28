@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar-container mb-3">
+  <div class="navbar-container">
     <b-navbar fixed="top" toggleable="lg">
       <b-navbar-brand to="stats"></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>

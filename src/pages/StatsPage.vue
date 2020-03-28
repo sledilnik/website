@@ -1,5 +1,5 @@
 <template>
-  <b-container v-if="loaded">
+  <b-container v-if="loaded" class="mt-3">
     <b-row>
       <b-card-group deck class="col-12 mb-5">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
@@ -15,7 +15,7 @@
       </b-col>
     </b-row>
   </b-container>
-  <b-container v-else>
+  <b-container v-else class="mt-3">
     <b-row>
       <b-col>
         <div class="d-flex justify-content-center mb-3">

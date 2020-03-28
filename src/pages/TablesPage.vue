@@ -1,5 +1,5 @@
 <template>
-  <b-tabs class="tables-tabs" pills card @activate-tab="goToData">
+  <b-tabs justified class="tables-tabs" pills card @activate-tab="goToData">
     <b-tab title="Povzetek stanja" active>
       <tests-infections-table :csvdata="csvdata"></tests-infections-table>
     </b-tab>
@@ -31,9 +31,8 @@
       </b-table>
     </b-tab>
     <b-tab
-      @activate-tab="goToData($event)"
       title="Prenos podatkov"
-      title-item-class="ml-auto button-yellow data-redirect-link"
+      title-item-class="ml-auto data-redirect-link"
       no-body
     ></b-tab>
   </b-tabs>
@@ -70,3 +69,30 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+.tables-tabs{
+  .nav-pills {
+    .nav-item {
+      display: flex;
+      justify-content: center;
+      padding: 15px 15px;
+      margin-bottom: -10px;
+    }
+    .nav-link {
+      border-radius: 0;
+      color: #000000;
+      line-height: 0.8;
+      border-bottom: 10px solid transparent;
+      padding: 0;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: #000000;
+      font-weight: bold;
+      background-color: transparent;
+      border-bottom: 10px solid $yellow;
+    }
+  }
+}
+
+</style>
