@@ -19,7 +19,7 @@ Uredniki baze in ostali sodelavci:
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - viri, validacija podatkov, modeliranje
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovna struktura in validacija
--   [Maks Mržek](https://twitter.com/maksmrzek) - validacija, modeliranje, vizualizacije, koordinacija
+-   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija, modeliranje, vizualizacije, koordinacija
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - model bolnišničnih podatkov, modeliranje
 -   [Marko B](https://twitter.com/multikultivator) - viri, spletna stran, dataviz
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
