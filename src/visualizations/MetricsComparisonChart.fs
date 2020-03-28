@@ -171,9 +171,12 @@ let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metri
             title = null //{| text = "Graf" |}
             xAxis = [|
                 {|
-                    index=0; crosshair=true; ``type``="datetime" //; isX=true
+                    index=0; crosshair=true; ``type``="datetime"
+                    gridLineWidth=1 //; isX=true
+                    tickInterval=86400000
+                    //labels = {| rotation= -45 |}
                     plotLines=[|
-                        {| value=jsTime (DateTime.Parse "2020-03-14"); label={|text="Sprememba štetja"; zIndex=100; color="#ccc" |} |}
+                        {| value=jsTime (DateTime.Parse "2020-03-14"); label={|text=" Sprememba štetja"; zIndex=100; color="#ccc" |} |}
                     |]
                 |}
             |]
@@ -181,8 +184,8 @@ let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metri
                 {|
                     index = 0
                     ``type`` = if scaleType=Linear then "linear" else "logarithmic"
-                    min = 1.0
-                    opposite = true // left / right side
+                    min = if scaleType=Linear then None else Some 1.0
+                    opposite = true // right side
                     title = {| text = null |} // "oseb" |}
                     //showFirstLabel = false
                     tickInterval = if scaleType=Linear then None else Some 0.25
