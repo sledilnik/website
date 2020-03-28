@@ -41,7 +41,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 .navbar-container {
   overflow: hidden;
 }
@@ -72,20 +72,33 @@ nav.navbar {
   a.nav-link {
     position: relative;
     display: inline-block;
-    color: #000 !important;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 20px;
     font-weight: 600;
 
-    &.router-link-active:after {
-      content: "";
-      position: absolute;
-      display: block;
-      left: 0;
-      right: 0;
-      border-bottom: 3px solid rgba(0, 0, 0, 0.75);
+    &:hover {
+      color: #000000;
+    }
 
-      @media (min-width: 992px) {
-        left: 0.5rem;
-        right: 0.5rem;
+    &:focus {
+      outline: none;
+    }
+
+    &.router-link-active {
+      color: #000000;
+      
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 0;
+        right: 0;
+        border-bottom: 10px solid #FFFFFF;
+
+        @media (min-width: 992px) {
+          left: 0.5rem;
+          right: 0.5rem;
+        }
       }
     }
   }
