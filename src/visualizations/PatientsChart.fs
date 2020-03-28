@@ -39,14 +39,14 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; InHospital; AllInHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
+        [ InCare; AllInHospital; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
     // color, dash, name
     let getSeriesInfo = function
         | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
         | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
-        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
-        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi"
+        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani - trenutno"
+        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi doslej"
         | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
         | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
         | Critical      -> "#d99a91", [|1;1|], "Kritično stanje - ocena"
