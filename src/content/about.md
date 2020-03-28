@@ -8,13 +8,16 @@ Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2
 
 NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o številu okužb, zato jih zbiramo in dopolnjujemo iz različnih javnih virov ter posredujemo javnosti. Podatki v medijih in uradnih virih, iz katerih jih črpamo, so pogosto delni, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
+### Pomagajte – nam, sebi in drugim
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](#/team). Pridružite se in pomagajte!
+
 ### Zbrani podatki  
 
-Vključeni so naslednji **dnevni podatki** (z zgodovino) iz različnih javnih virov:
+Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [različnih javnih virov](#/sources):
 
--   število opravljenih testov
--   število potrjeno okuženih po kategorijah: v Sloveniji, po starosti, spolu, posameznih regijah in občinah
--   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe
+-   število opravljenih testov in število potrjeno okuženih
+-   število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
+-   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
 -   spremljanje posameznih primerov, še zlasti v kritičnih dejavnostih: zaposleni v zdravstvu, domovih starejših občanov, civilni zaščiti
 -   zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, ventilatorjev za predihavanje ...
 
@@ -29,25 +32,23 @@ Na voljo so v oblikah:
 ### Uporaba podatkov
 Podatki se uporabljajo za različne vizualizacije in statistike:
 
--   [**Statistika**](https://covid-19.sledilnik.org/#/stats) – grafi in infografike s podatki o številu testiranih in stanju hospitaliziranih pacientov
--   [**Zemljevid**](https://covid-19.sledilnik.org/#/map) – stanje okužb po občinah
+-   [**Statistika**](#/stats) – grafi in infografike s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
+-   [**Zemljevid**](#/map) – stanje potrjeno okuženih po občinah
 
 Naše podatke uporabljajo tudi [Analiza širjenja koronavirusa - covid19.alpaka.si](https://covid19.alpaka.si), [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://bit.ly/cov19-slo-report), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
 
 ### Kako urejamo podatke
 
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo praviloma po 14. uri s podatki NIJZ. Če so objavljeni vmesni podatki, začasno vnesemo tudi te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 14h (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki Vlade RS (sumarni) in NIJZ (po kategorijah). Če so objavljeni vmesni podatki, začasno vnesemo tudi te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 23:59 (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
 Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
 
--   Spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje).
+-   Spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) - okoli 14h.
 -   Spremljamo število hospitaliziranih: vsi oddelki, hospitalizirani na intenzivni negi in v kritičnem stanju.
 -   Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
 -   Kjer so podatki nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
 -   Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
-
-### Pomagajte – nam, sebi in drugim
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 15 do 25 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](https://covid-19.sledilnik.org/#/team). Pridružite se in pomagajte!
+-   Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59. 
 
 ## Pogoji uporabe
 
