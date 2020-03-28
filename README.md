@@ -19,6 +19,7 @@
 https://travis-ci.org/github/slo-covid-19/website
 
 Every push to `master` is automatically deployed (if build successfull) to https://covid-19.sledilnik.org
+
 Every push to other branches (not `master`) is deployed to https://preview.sledilnik.org/branch-name
 
 ## Development
