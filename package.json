@@ -30,6 +30,8 @@
     "eslint-plugin-vue": "^5.0.0",
     "fable-compiler": "^2.4.22",
     "fable-loader": "^2.1.9",
+    "highcharts": "^8.0.4",
+    "highcharts-react-official": "^3.0.0",
     "html-loader": "^1.0.0",
     "markdown-loader": "^5.1.0",
     "node-sass": "^4.13.1",
