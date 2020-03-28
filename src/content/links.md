@@ -1,10 +1,18 @@
 # Uporabne povezave
 
-## Statistike, vizualizacije, simulacije - SLO
+## Statistike, vizualizacije, simulacije, ki uporabljajo tudi naše podatke
 
 | Povezava | Opis |
 | --- | --- |
 | [Analiza podatkov in vizualizacija širjenja COVID-19 v Sloveniji](https://covid19.alpaka.si/) | Ena izmed redkih #dataviz strani z vključeno napovedjo rasti primerov; [Nace Štruc](http://nace.si) |
+| [Coronavirus COVID-19 Slovenija](https://bit.ly/cov19-slo-report) | Nadzorna plošča z možnostjo pogleda po dnevih; [Better.Care](https://www.better.care/) |
+| [COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) | Zemljevid občin po dnevih ; [Milos Popovic](http://milosp.info/) |
+| [Ustavimo Korono](https://ustavimokorono.si/) | Informacijski portal o koronavirusu |
+
+## Statistike, vizualizacije, simulacije - SLO
+
+| Povezava | Opis |
+| --- | --- |
 | [Prisotnost koronavirusa (COVID-19) v Sloveniji in ukrepi](https://mediastream.si/korona.php) | Enostavna nadzorna plošča za SLO; [Mediastream](https://mediastream.si/) |
 | [Prisotnost koronavirusa (COVID-19) v Sloveniji in ukrepi](https://gdiljubljana.maps.arcgis.com/apps/opsdashboard/index.html#/1cf4f90e05984ae5a365f4838f746138) | Zemljevid okužb & nadzorna plošča za SLO (by Alenka Jelen) |
 | [Udomačena statistika (do 14.4.).](https://udomacenastatistika.wordpress.com/2020/03/13/rast-koronavirusa-v-sloveniji-do-12-3-2020/) | Dobra poljudno-znanstvena razlaga o statističnem razumevanju podatkov o COVID-19. Žal zgolj do 14.3.2020 ([zaradi spremembe metodologije NIJZ](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/)) |
