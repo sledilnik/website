@@ -115,7 +115,11 @@ let renderChartOptions (state : State) =
         )
         |> List.toArray
 
-    {| Highcharts.basicChartOptions state.ScaleType with series = allSeries |}
+    let baseOptions = Highcharts.basicChartOptions state.ScaleType
+    {| baseOptions with
+        series = allSeries
+        yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
+    |}
 
 let renderChartContainer state =
     Html.div [
