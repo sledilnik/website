@@ -16,6 +16,13 @@ module.exports = {
   devServer: {
     disableHostCheck: true, 
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: '@import "@/../src/style/variables.scss";'
+      },
+    }
+  },
   chainWebpack: config => {
     // Markdown Loader
     config.module

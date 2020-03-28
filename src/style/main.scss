@@ -1,10 +1,10 @@
 @import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
 
 // customize bootstrap vars here
-
+@import "./variables.scss";
+@import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-@import 'node_modules/bootstrap-vue/src/index.scss';
+@import "node_modules/bootstrap-vue/src/index.scss";
 
 // rest of SASS
 
@@ -16,6 +16,21 @@ body,
 
 // ce spreminjas visino navbara
 body {
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
+.button-yellow {
+  background-color: $yellow;
+  color: #000000;
+}
+.table-yellow {
+  background-color: $yellow;
+}
+.table-grey {
+  background-color: #dee2e6;
+}
+.thead-yellow {
+  th {
+    background-color: $yellow;
+  }
+}

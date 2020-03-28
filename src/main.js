@@ -14,12 +14,15 @@ import 'style/main.scss'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import MapPage from './pages/MapPage.vue'
+import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 
 import moment from 'moment'
 import 'moment/locale/sl'
 
 moment.locale('sl')
+
+import store from './store'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -58,6 +61,10 @@ const routes = [
     component: MapPage
   },
   {
+    path: '/tables',
+    component: TablesPage
+  },
+  {
     path: '/links',
     component: StaticPage,
     props: {
@@ -94,4 +101,5 @@ const router = new VueRouter({
 new Vue({
   render: h => h(App),
   router,
+  store,
 }).$mount('#app')

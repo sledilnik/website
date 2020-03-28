@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="navbar-container">
     <b-navbar fixed="top" toggleable="lg">
       <b-navbar-brand to="stats"></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -7,7 +7,7 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="stats">Domov</b-nav-item>
           <b-nav-item to="map">Zemljevid</b-nav-item>
-          <b-nav-item to="data">Tabela</b-nav-item>
+          <b-nav-item to="tables">Tabela</b-nav-item>
           <b-nav-item to="about">O projektu</b-nav-item>
           <b-nav-item to="sources">Viri</b-nav-item>
           <b-nav-item to="links">Povezave</b-nav-item>
@@ -29,8 +29,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-$yellow: #ffd922;
-
+.navbar-container {
+  overflow: hidden;
+}
 nav.navbar {
   background: $yellow;
 
