@@ -9,10 +9,11 @@
 | [NIJZ](https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19) ([Tw](https://twitter.com/NIJZ_pr/with_replies)) | [CZ Ilirska Bistrica](https://www.facebook.com/obcina.ilirskabistrica.73) |
 | [Vlada RS](https://www.gov.si/teme/koronavirus/) ([Tw](https://twitter.com/vladaRS/with_replies)) | [CZ Notranjska](https://www.facebook.com/regijskistabcznotranjska/) |
 | [Ministrstvo za zdravje RS](https://www.gov.si/novice/?org[]=33) ([Tw](https://twitter.com/MinZdravje/with_replies)) | [CZ Sežana](https://www.facebook.com/civilnazascitasezana/) |
-| [Tomaž Gantar, minister za zdravje - Twitter](https://twitter.com/tomazgantar)  | [CZ Žiri](https://www.facebook.com/groups/civilnazascitaziri/) |
-| [Krizni štab RS](https://twitter.com/KrizniStabRS/with_replies) - ukinjen | [CZ Logatec](https://www.facebook.com/zascitaresevanjeLogatec/) |
-| [Uprava RS za zaščito in reševanje](https://twitter.com/URS_ZR/with_replies) | [CZ Vrhnika](https://www.facebook.com/Civilna-za%C5%A1%C4%8Dita-Vrhnika-107764814187703/) |
-|  | [CZ Gorenjska](https://www.facebook.com/stabczgorenjska) |
+| [Tomaž Gantar - minister za zdravje](https://twitter.com/tomazgantar)  | [CZ Žiri](https://www.facebook.com/groups/civilnazascitaziri/) |
+| [Jelko Kacin - govorec Vlade RS za COVID-19](https://twitter.com/GovorecCOVID19/with_replies) | [CZ Logatec](https://www.facebook.com/zascitaresevanjeLogatec/) |
+| [Krizni štab RS](https://twitter.com/KrizniStabRS/with_replies) - ukinjen |
+| [Uprava RS za zaščito in reševanje](https://twitter.com/URS_ZR/with_replies) | [CZ Vrhnika](https://www.facebook.com/Civilna-za%C5%A1%C4%8Dita-Vrhnika-107764814187703/) | [CZ Gorenjska](https://www.facebook.com/stabczgorenjska) |
+
 
 <br>
 
