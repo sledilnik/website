@@ -35,7 +35,7 @@ Podatki se uporabljajo za različne vizualizacije in statistike:
 -   [**Statistika**](#/stats) – grafi in infografike s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
 -   [**Zemljevid**](#/map) – stanje potrjeno okuženih po občinah
 
-Naše podatke uporabljajo tudi [Analiza širjenja koronavirusa - covid19.alpaka.si](https://covid19.alpaka.si), [Ustavimo Korono](https://ustavimokorono.si/), [Better.Care COVID-19 Slo](https://bit.ly/cov19-slo-report), [Reported COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html)
+Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links). 
 
 ### Kako urejamo podatke
 
