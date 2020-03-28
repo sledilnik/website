@@ -6,7 +6,6 @@
     striped
     hover
     sort-by="date"
-    head-variant="yellow"
     :sort-desc="true"
     sticky-header="600px"
     :items="csvdata"
@@ -33,21 +32,24 @@ export default {
           label: "Datum",
           sortable: true,
           stickyColumn: true,
-          variant: 'yellow'
+          variant: 'grey'
         },
         {
-          key: 'age.female.todate',
-          label: 'Okuženih žensk'
+          key: "age.female.todate",
+          label: "Okuženih žensk"
         },
         {
-          key: 'age.male.todate',
-          label: 'Okuženih moških'
+          key: "age.male.todate",
+          label: "Okuženih moških"
         }
       ]
     };
-  },
+  }
 };
 </script>
 
-<style>
+<style lang="scss">
+.b-table-sticky-column {
+  width: 120px;
+}
 </style>

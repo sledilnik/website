@@ -21,16 +21,29 @@ body {
 
 .nav-pills{
   .nav-link{
+    border-radius: 0;
     color: #000000;
+    line-height: 0.8;
+    border-bottom: 10px solid transparent;
+    padding-bottom: 0;
   }
   .nav-link.active{
     color: #000000;
-    background-color: $yellow;
+    font-weight: bold;
+    background-color: transparent;
+    border-bottom: 10px solid $yellow;
   }
 }
 
+.button-yellow{
+  background-color: $yellow;
+  color: #000000;
+}
 .table-yellow{
   background-color: $yellow;
+}
+.table-grey{
+  background-color: #dee2e6;
 }
 .thead-yellow{
   th{

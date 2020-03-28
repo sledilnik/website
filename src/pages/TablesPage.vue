@@ -1,6 +1,6 @@
 <template>
-  <b-tabs pills card>
-    <b-tab title="Testiranja in okužbe" active>
+  <b-tabs class="tables-tabs" pills card @activate-tab="goToData">
+    <b-tab title="Povzetek stanja" active>
       <tests-infections-table :csvdata="csvdata"></tests-infections-table>
     </b-tab>
     <b-tab title="Okužbe po regiji">
@@ -27,8 +27,15 @@
         <template v-slot:head()="scope">
           <div class="text-nowrap">{{ scope.label }}</div>
         </template>
+        <template v-slot:table-caption>This is a table caption.</template>
       </b-table>
     </b-tab>
+    <b-tab
+      @activate-tab="goToData($event)"
+      title="Prenos podatkov"
+      title-item-class="ml-auto button-yellow data-redirect-link"
+      no-body
+    ></b-tab>
   </b-tabs>
 </template>
 
@@ -48,6 +55,18 @@ export default {
   },
   computed: {
     ...mapGetters(["csvdata"])
+  },
+  methods: {
+    goToData(newTabIndex, prevTabIndex, bvEvent) {
+      if (
+        document
+          .querySelector(`.tables-tabs li:nth-child(${newTabIndex + 1})`)
+          .classList.contains("data-redirect-link")
+      ) {
+        bvEvent.preventDefault();
+        window.location = "/data";
+      }
+    }
   }
 };
 </script>
