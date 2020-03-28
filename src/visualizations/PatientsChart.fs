@@ -7,7 +7,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 
-open Recharts
+open Highcharts
 open Types
 
 open Data.Patients
@@ -136,8 +136,8 @@ type Msg =
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-//    let cmd = Cmd.OfAsync.either Data.Patients.fetch Data.Patients.url ConsumeServerData ConsumeServerError
-    State.initial, Cmd.none
+    let cmd = Cmd.OfAsync.either Data.Patients.fetch Data.Patients.url ConsumeServerData ConsumeServerError
+    State.initial, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -156,18 +156,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | SwitchBreakdown breakdown ->
         (state |> State.switchBreakdown breakdown), Cmd.none
 
-let renderChart (state : State) =
-
-    let renderLineLabel (input: ILabelProperties) =
-        Html.text [
-            prop.x(input.x)
-            prop.y(input.y)
-            prop.fill color.black
-            prop.textAnchor.middle
-            prop.dy(-10)
-            prop.fontSize 10
-            prop.text input.value
-        ]
+let renderChartOptions (state : State) =
 
     let zeroToNone value =
         match value with
@@ -177,96 +166,79 @@ let renderChart (state : State) =
             else Some x
 
     let renderSeries series =
-        let dataKey : (Data.Patients.PatientsStats -> int option) =
+        let renderPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match series with
-            | InCare        -> fun ps -> ps.total.inCare |> zeroToNone
-            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
-            | InHospital    -> fun ps -> ps.total.inHospital.today |> zeroToNone
-            | AllInHospital -> fun ps -> ps.total.inHospital.toDate |> zeroToNone
-            | NeedsO2       -> fun ps -> ps.total.needsO2.toDate |> zeroToNone
-            | Icu           -> fun ps -> ps.total.icu.today |> zeroToNone
-            | Critical      -> fun ps -> ps.total.critical.today |> zeroToNone
-            | Deceased      -> fun ps -> ps.total.deceased.toDate |> zeroToNone
-            | Hospital      -> fun ps -> failwithf "home & hospital"
-            | Home          -> fun ps -> failwithf "home & totals"
+            | InCare        -> fun ps -> ps.JsDate, ps.total.inCare |> zeroToNone
+            | OutOfHospital -> fun ps -> ps.JsDate, ps.total.outOfHospital.toDate |> zeroToNone
+            | InHospital    -> fun ps -> ps.JsDate, ps.total.inHospital.today |> zeroToNone
+            | AllInHospital -> fun ps -> ps.JsDate, ps.total.inHospital.toDate |> zeroToNone
+            | NeedsO2       -> fun ps -> ps.JsDate, ps.total.needsO2.toDate |> zeroToNone
+            | Icu           -> fun ps -> ps.JsDate, ps.total.icu.today |> zeroToNone
+            | Critical      -> fun ps -> ps.JsDate, ps.total.critical.today |> zeroToNone
+            | Deceased      -> fun ps -> ps.JsDate, ps.total.deceased.toDate |> zeroToNone
+            | Hospital      -> fun ps -> ps.JsDate, failwithf "home & hospital"
+            | Home          -> fun ps -> ps.JsDate, failwithf "home & totals"
 
         let color, dash, name = Series.getSeriesInfo series
 
-        Recharts.line [
-            line.name name
-            line.monotone
-            line.isAnimationActive false
-            line.stroke color
-            line.strokeWidth 2
-            line.strokeDasharray dash
-            line.label renderLineLabel
-            line.dataKey dataKey
-        ]
+        {|
+            visible = state.activeSeries |> Set.contains series
+            color = color
+            name = name
+            data = state.data |> Seq.map renderPoint |> Array.ofSeq
+            //yAxis = 0 // axis index
+            //showInLegend = true
+            //fillOpacity = 0
+        |}
+        |> pojo
+
 
     let renderSources segmentation =
-        let facility, dataKey =
+        let facility, (renderPoint: Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match segmentation with
-            | Totals -> "Skupaj", fun ps -> ps.total.inHospital.today |> zeroToNone
+            | Totals -> "Skupaj", fun ps -> ps.JsDate, ps.total.inHospital.today |> zeroToNone
             | Facility f ->
-                f, fun ps ->
-                    ps.facilities
-                    |> Map.tryFind f
-                    |> Option.bind (fun stats -> stats.inHospital.today)
-                    |> zeroToNone
+                f, (fun ps ->
+                    let value =
+                        ps.facilities
+                        |> Map.tryFind f
+                        |> Option.bind (fun stats -> stats.inHospital.today)
+                        |> zeroToNone
+                    ps.JsDate, value)
 
         let color, name = facilityLine facility
+        {|
+            visible = true
+            color = color
+            name = name
+            data = state.data |> Seq.map renderPoint |> Array.ofSeq
+            //yAxis = 0 // axis index
+            //showInLegend = true
+            //fillOpacity = 0
+        |}
+        |> pojo
 
-        Recharts.line [
-            line.name name
-            line.monotone
-            line.isAnimationActive false
-            line.stroke color
-            line.strokeWidth 2
-            line.label renderLineLabel
-            line.dataKey dataKey
-        ]
+    let allSeries = [|
+        match state.breakdown with
+        | BySeries ->
+            for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
+                for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
+                    yield renderSeries series
+        | BySource ->
+            for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
+                yield renderSources segmentation
+    |]
 
-    let children =
-        let formatDate (d: Data.Patients.PatientsStats) = sprintf "%d.%d." d.day d.month
-        seq {
-            yield Recharts.xAxis [ xAxis.dataKey formatDate; xAxis.padding (0,10,0,0); xAxis.interval 0 ]
-
-            yield Recharts.legend [ line.legendType.circle; ]
-
-            let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
-            match state.scaleType with
-            | Logarithmic ->
-                yield Recharts.yAxis (yAxisPropsDefaut @ [
-                    yAxis.scale ScaleType.Log
-                    //yAxis.domain (domain.auto, domain.calculate (fun (max:float) -> max*1.1))
-                    yAxis.domain (domain.auto, domain.auto)
-                    yAxis.allowDataOverflow false ])
-            | Linear ->
-                yield Recharts.yAxis yAxisPropsDefaut
-
-            yield Recharts.tooltip [ ]
-            yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
-
-            match state.breakdown with
-            | BySeries ->
-                for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                    for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
-                        yield renderSeries series
-            | BySource ->
-                for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                    yield renderSources segmentation
-        }
-
-    Recharts.lineChart [
-        lineChart.data state.data
-        lineChart.children (Seq.toList children)
-    ]
+    {| Highcharts.basicChartOptions state.scaleType with series = allSeries |}
 
 let renderChartContainer state =
-    Recharts.responsiveContainer [
-        responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 450
-        responsiveContainer.chart (renderChart state)
+    Html.div [
+        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.className "highcharts-wrapper"
+        prop.children [
+            renderChartOptions state
+            |> Highcharts.chart
+        ]
     ]
 
 let renderBreakdownSelector state breakdown dispatch =

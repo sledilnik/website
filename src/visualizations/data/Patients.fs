@@ -1,5 +1,6 @@
 module Data.Patients
 
+open System
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
@@ -42,13 +43,15 @@ type PatientsStats = {
     day: int
     total: TotalPatientStats
     facilities: Map<string,PatientsByFacilityStats>
-}
+  } with
+    member ps.Date = new DateTime(ps.year, ps.month, ps.day)
+    member ps.JsDate = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime
 
 let fetch url = async {
     let! code,json = Http.get url
     return
         match code with
-        | 200 -> 
+        | 200 ->
             json
             |> SimpleJson.parse
             |> Json.convertFromJsonAs<PatientsStats []>

@@ -7,7 +7,6 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 
-open Recharts
 open Highcharts
 open Types
 
@@ -84,28 +83,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with ScaleType = scaleType }, Cmd.none
 
 let renderChartOptions (state : State) =
-
-    let renderLineLabel (input: ILabelProperties) =
-        Html.text [
-            prop.x(input.x)
-            prop.y(input.y)
-            prop.fill color.black
-            prop.textAnchor.middle
-            prop.dy(-10)
-            prop.fontSize 10
-            prop.text input.value
-        ]
-
-    let renderRegion (metric : Metric) (dataKey : RegionsDataPoint -> int) =
-        Recharts.line [
-            line.name (getRegionName metric.Key)
-            line.monotone
-            line.isAnimationActive false
-            line.stroke metric.Color
-            line.strokeWidth 2
-            line.label renderLineLabel
-            line.dataKey dataKey
-        ]
 
     let metricsToRender =
         state.Metrics
