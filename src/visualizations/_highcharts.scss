@@ -1,0 +1,57 @@
+//@import 'highcharts/css/highcharts.scss';
+
+/*
+.highcharts-column-series rect.highcharts-point {
+    // stroke: #ffffff;
+    //stroke: none;
+}
+*/
+
+div.highcharts-tooltip {
+    filter: none;
+}
+
+.highcharts-selection-marker {
+    //fill: $highlight-color-80;
+    fill-opacity: 0.25;
+}
+
+.highcharts-graph {
+    fill: none;
+    stroke-width: 2px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.highcharts-state-hover .highcharts-graph {
+    stroke-width: 3;
+}
+
+.highcharts-point-inactive {
+    opacity: 0.2;
+    transition: opacity 50ms; /* quick in */
+}
+
+.highcharts-series-inactive {
+    opacity: 0.2;
+    transition: opacity 50ms; /* quick in */
+}
+
+.highcharts-state-hover path {
+    transition: stroke-width 50ms; /* quick in */
+}
+.highcharts-state-normal path {
+    transition: stroke-width 250ms; /* slow out */
+}
+/* Legend hover affects points and series */
+g.highcharts-series,
+.highcharts-point,
+.highcharts-markers,
+.highcharts-data-labels {
+    transition: opacity 250ms;
+}
+.highcharts-legend-series-active g.highcharts-series:not(.highcharts-series-hover),
+.highcharts-legend-point-active .highcharts-point:not(.highcharts-point-hover),
+.highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
+.highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
+    opacity: 0.2;
+}

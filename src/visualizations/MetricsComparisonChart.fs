@@ -1,6 +1,8 @@
 [<RequireQualifiedAccess>]
 module MetricsComparisonChart
 
+open System
+open Fable.Core
 open Elmish
 
 open Feliz
@@ -8,6 +10,18 @@ open Feliz.ElmishComponents
 
 open Types
 open Recharts
+
+// plain old javascript object
+let inline pojo o = JsInterop.toPlainJsObj o
+
+// plain old javascript object
+[<Emit """Array.prototype.slice.call($0)""">]
+let poja (a: 'T[]) : obj = jsNative
+
+
+[<Emit("$0.getTime()")>]
+let jsTime (x: DateTime): float = jsNative
+
 
 type Metric =
     | Tests
@@ -78,7 +92,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
-let renderChart scaleType (data : StatsData) (metrics : Metrics) =
+let renderChartConfig (scaleType: ScaleType) (data : StatsData) (metrics : Metrics) =
 
     let renderLineLabel (input: ILabelProperties) =
         Html.text [
@@ -91,6 +105,32 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
             prop.text input.value
         ]
 
+    let maxOption a b =
+        match a, b with
+        | None, None -> None
+        | Some x, None -> Some x
+        | None, Some y -> Some y
+        | Some x, Some y -> Some (max x y)
+
+    let xAxisPoint (dp: StatsDataPoint) = dp.Date
+
+    let metricDataGenerator mc =
+        fun point ->
+            match mc.Metric with
+            | Tests -> maxOption point.Tests point.TestsAt14.Performed |> Utils.zeroToNone
+            | TotalTests -> maxOption point.TotalTests point.TestsAt14.PerformedToDate |> Utils.zeroToNone
+            | PositiveTests -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone
+            | TotalPositiveTests -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone
+            | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
+            | HospitalizedToDate -> point.HospitalizedToDate |> Utils.zeroToNone
+            | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
+            | OutOfHospital -> point.OutOfHospital |> Utils.zeroToNone
+            | OutOfHospitalToDate -> point.OutOfHospitalToDate |> Utils.zeroToNone
+            | RecoveredToDate -> point.RecoveredToDate |> Utils.zeroToNone
+            | Deaths -> point.Deaths |> Utils.zeroToNone
+            | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
+
+
     let renderMetric (metric : MetricCfg) (dataKey : StatsDataPoint -> int option) =
         Recharts.line [
             line.name metric.Label
@@ -102,61 +142,84 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
             line.dataKey dataKey
         ]
 
-    let children =
-        seq {
-            // when xAxis getx too crowded, set [ xAxis.interval 1 ]
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0); xAxis.interval 0 ]
+    let series =
+        metrics
+        |> List.map (fun metric ->
+            let pointData = metricDataGenerator metric
+            {|
+                visible = metric.Visible
+                color = metric.Color
+                name = metric.Label
+                data = data |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp)) |> Seq.toArray
+                //yAxis = 0 // axis index
+                //showInLegend = true
+                //fillOpacity = 0
+            |}
+            |> pojo
+        )
+        |> List.toArray
+        |> poja
 
-            let yAxisPropsDefaut = [ ]
-            match scaleType with
-            | Log ->
-                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0) ])
-            | _ ->
-                yield Recharts.yAxis yAxisPropsDefaut
+    let config =
+        {|
+            chart = pojo
+                {|
+                    //height = "100%"
+                    ``type`` = "spline"
+                    zoomType = "x"
+                |}
+            title = null //{| text = "Graf" |}
+            xAxis = [|
+                {|
+                    index=0; crosshair=true; ``type``="datetime" //; isX=true
+                    plotLines=[|
+                        {| value=jsTime (DateTime.Parse "2020-03-14"); label={|text="Sprememba štetja"; zIndex=100; color="#ccc" |} |}
+                    |]
+                |}
+            |]
+            yAxis = [|
+                {|
+                    index = 0
+                    ``type`` = if scaleType=Linear then "linear" else "logarithmic"
+                    min = 1.0
+                    opposite = true // left / right side
+                    title = {| text = null |} // "oseb" |}
+                    //showFirstLabel = false
+                    tickInterval = if scaleType=Linear then None else Some 0.25
+                |}
+            |]
+            legend = pojo
+                {|
+                    enabled = false
+                    align = "left"
+                    verticalAlign = "top"
+                    borderColor = "#ddd"
+                    borderWidth = 1
+                    //labelFormatter = string //fun series -> series.name
+                    layout = "vertical"
+                |}
+            plotOptions = pojo
+                {|
+                    spline = pojo
+                        {|
+                            dataLabels = pojo {| enabled = true |}
+                            //enableMouseTracking = false
+                        |}
+                |}
+            series = series
+        |}
+    JS.console.log ("highcharts config:", config)
 
-            yield Recharts.tooltip [ ]
-            yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
-
-            let maxOption a b =
-                match a, b with
-                | None, None -> None
-                | Some x, None -> Some x
-                | None, Some y -> Some y
-                | Some x, Some y -> Some (max x y)
-
-            yield!
-                metrics
-                |> List.filter (fun mc -> mc.Visible)
-                |> List.map (fun mc ->
-                    let pointData =
-                        fun point ->
-                            match mc.Metric with
-                            | Tests -> maxOption point.Tests point.TestsAt14.Performed |> Utils.zeroToNone
-                            | TotalTests -> maxOption point.TotalTests point.TestsAt14.PerformedToDate |> Utils.zeroToNone
-                            | PositiveTests -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone
-                            | TotalPositiveTests -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone
-                            | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
-                            | HospitalizedToDate -> point.HospitalizedToDate |> Utils.zeroToNone
-                            | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
-                            | OutOfHospital -> point.OutOfHospital |> Utils.zeroToNone
-                            | OutOfHospitalToDate -> point.OutOfHospitalToDate |> Utils.zeroToNone
-                            | RecoveredToDate -> point.RecoveredToDate |> Utils.zeroToNone
-                            | Deaths -> point.Deaths |> Utils.zeroToNone
-                            | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
-                    renderMetric mc pointData
-                )
-        }
-
-    Recharts.lineChart [
-        lineChart.data data
-        lineChart.children (Seq.toList children)
-    ]
+    config
 
 let renderChartContainer scaleType data metrics =
-    Recharts.responsiveContainer [
-        responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 450
-        responsiveContainer.chart (renderChart scaleType data metrics)
+    Html.div [
+        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.className "highcharts-wrapper"
+        prop.children [
+            renderChartConfig scaleType data metrics
+            |> Highcharts.chart
+        ]
     ]
 
 let renderMetricSelector (metric : MetricCfg) dispatch =
