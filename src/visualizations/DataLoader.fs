@@ -74,6 +74,7 @@ type private TransferStatsDataPoint =
           PositiveTests = this.positiveTests
           TotalPositiveTests = this.positiveTestsToDate
           Hospitalized = this.statePerTreatment.inHospital
+          HospitalizedToDate = (this.statePerTreatment.inHospital, this.statePerTreatment.outOfHospitalToDate) ||> Option.map2 (+)
           HospitalizedIcu = this.statePerTreatment.inICU
           Deaths = this.statePerTreatment.deceased
           TotalDeaths = this.statePerTreatment.deceasedToDate

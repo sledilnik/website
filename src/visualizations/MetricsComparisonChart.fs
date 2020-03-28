@@ -15,6 +15,7 @@ type Metric =
     | PositiveTests
     | TotalPositiveTests
     | Hospitalized
+    | HospitalizedToDate
     | HospitalizedIcu
     | OutOfHospital
     | OutOfHospitalToDate
@@ -38,6 +39,7 @@ module Metrics  =
         { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi" }
         { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
         { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani" }
+        { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - vsi" }
         { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "Intenzivna nega" }
         { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
         { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
@@ -134,6 +136,7 @@ let renderChart scaleType (data : StatsData) (metrics : Metrics) =
                             | PositiveTests -> maxOption point.PositiveTests point.TestsAt14.Positive |> Utils.zeroToNone
                             | TotalPositiveTests -> maxOption point.TotalPositiveTests point.TestsAt14.PositiveToDate |> Utils.zeroToNone
                             | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
+                            | HospitalizedToDate -> point.HospitalizedToDate |> Utils.zeroToNone
                             | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
                             | OutOfHospital -> point.OutOfHospital |> Utils.zeroToNone
                             | OutOfHospitalToDate -> point.OutOfHospitalToDate |> Utils.zeroToNone

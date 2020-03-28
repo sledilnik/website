@@ -22,6 +22,7 @@ type StatsDataPoint =
       PositiveTests : int option
       TotalPositiveTests : int option
       Hospitalized : int option
+      HospitalizedToDate : int option
       HospitalizedIcu : int option
       Deaths : int option
       TotalDeaths : int option
