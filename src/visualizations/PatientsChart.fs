@@ -39,35 +39,25 @@ module Series =
     let all =
         [ InCare; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
-    let getColor = function
-        | InCare        -> "#ffa600"
-        | OutOfHospital -> "#8CCDAA"
-        | InHospital    -> "#D09D93"
-        | NeedsO2       -> "#70a471"
-        | Icu           -> "#B35D4C"
-        | Critical      -> "#2B6A7A"
-        | Deceased      -> "#000000"
-        | Hospital      -> "#0a6b85"
-        | Home          -> "#003f5c"
-
-    let getName = function
-        | InCare -> "Oskrbovani"
-        | OutOfHospital -> "Odpuščeni iz bolnišnice - skupaj"
-        | InHospital -> "Hospitalizirani"
-        | NeedsO2 -> "Potrebuje kisik"
-        | Icu -> "Intenzivna nega"
-        | Critical -> "Kritično stanje - ocena"
-        | Deceased -> "Umrli - skupaj"
-        | Hospital -> "Hospitalizirani"
-        | Home -> "Doma"
+    // color, dash, name
+    let getSeriesInfo = function
+        | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
+        | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
+        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
+        | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
+        | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
+        | Critical      -> "#d99a91", [|1;1|], "Kritično stanje - ocena"
+        | Deceased      -> "#000000", [|4;1|], "Umrli - skupaj"
+        | Hospital      -> "#be772a", [|   |], "Hospitalizirani"
+        | Home          -> "#003f5c", [|   |], "Doma"
 
 /// return (seriesName * color) based on facility name
 let facilityLine = function
-    | "sbce"  -> "SB Celje", "#70a471"
-    | "ukclj" -> "UKC Ljubljana", "#10829a"
-    | "ukcmb" -> "UKC Maribor", "#003f5c"
-    | "ukg"   -> "UK Golnik", "#7B7226"
-    | other -> other, "#000"
+    | "sbce"  -> "#70a471", "SB Celje"
+    | "ukclj" -> "#10829a", "UKC Ljubljana"
+    | "ukcmb" -> "#003f5c", "UKC Maribor"
+    | "ukg"   -> "#7B7226", "UK Golnik"
+    | other   -> "#000000", other
 
 type State = {
     scaleType : ScaleType
@@ -183,23 +173,25 @@ let renderChart (state : State) =
             else Some x
 
     let renderSeries series =
-        let dash, dataKey : (int[] * (Data.Patients.PatientsStats -> int option)) =
+        let dataKey : (Data.Patients.PatientsStats -> int option) =
             match series with
-            | InCare        -> [|1;1|], fun ps -> ps.total.inCare |> zeroToNone
-            | OutOfHospital -> [|4;1|], fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
-            | InHospital    -> [||], fun ps -> ps.total.inHospital.today |> zeroToNone
-            | NeedsO2       -> [|1;1|], fun ps -> ps.total.needsO2.toDate |> zeroToNone
-            | Icu           -> [||], fun ps -> ps.total.icu.today |> zeroToNone
-            | Critical      -> [|1;1|], fun ps -> ps.total.critical.today |> zeroToNone
-            | Deceased      -> [|4;1|], fun ps -> ps.total.deceased.toDate |> zeroToNone
-            | Hospital      -> [||], fun ps -> failwithf "home & hospital"
-            | Home          -> [||], fun ps -> failwithf "home & totals"
+            | InCare        -> fun ps -> ps.total.inCare |> zeroToNone
+            | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
+            | InHospital    -> fun ps -> ps.total.inHospital.today |> zeroToNone
+            | NeedsO2       -> fun ps -> ps.total.needsO2.toDate |> zeroToNone
+            | Icu           -> fun ps -> ps.total.icu.today |> zeroToNone
+            | Critical      -> fun ps -> ps.total.critical.today |> zeroToNone
+            | Deceased      -> fun ps -> ps.total.deceased.toDate |> zeroToNone
+            | Hospital      -> fun ps -> failwithf "home & hospital"
+            | Home          -> fun ps -> failwithf "home & totals"
+
+        let color, dash, name = Series.getSeriesInfo series
 
         Recharts.line [
-            line.name (series |> Series.getName)
+            line.name name
             line.monotone
             line.isAnimationActive false
-            line.stroke (series |> Series.getColor)
+            line.stroke color
             line.strokeWidth 2
             line.strokeDasharray dash
             line.label renderLineLabel
@@ -217,7 +209,7 @@ let renderChart (state : State) =
                     |> Option.bind (fun stats -> stats.inHospital.today)
                     |> zeroToNone
 
-        let name, color = facilityLine facility
+        let color, name = facilityLine facility
 
         Recharts.line [
             line.name name

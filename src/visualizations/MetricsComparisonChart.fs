@@ -33,15 +33,15 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric = Tests;               Color = "#2B6A7A" ; Visible = false ; Label = "Testiranja" }
-        { Metric = TotalTests;          Color = "#74A4AE" ; Visible = false ; Label = "Testiranja - skupaj" }
-        { Metric = PositiveTests;       Color = "#7B7226" ; Visible = false ; Label = "Potrjeno okuženi" }
-        { Metric = TotalPositiveTests;  Color = "#B0AA74" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
-        { Metric = Hospitalized;        Color = "#D09D93" ; Visible = true  ; Label = "Hospitalizirani" }
-        { Metric = HospitalizedIcu;     Color = "#B35D4C" ; Visible = true  ; Label = "Intenzivna nega" }
-        { Metric = OutOfHospital;       Color = "#52AE73" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
-        { Metric = OutOfHospitalToDate; Color = "#8CCDAA" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
-        { Metric = RecoveredToDate;     Color = "#D7EEE3" ; Visible = true  ; Label = "Ozdraveli - skupaj" }
+        { Metric = Tests;               Color = "#19aebd" ; Visible = false ; Label = "Testiranja" }
+        { Metric = TotalTests;          Color = "#73ccd5" ; Visible = false ; Label = "Testiranja - skupaj" }
+        { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi" }
+        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
+        { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani" }
+        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "Intenzivna nega" }
+        { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
+        { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
+        { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli - skupaj" }
         { Metric = Deaths;              Color = "#000000" ; Visible = false ; Label = "Umrli" }
         { Metric = TotalDeaths;         Color = "#666666" ; Visible = true  ; Label = "Umrli - skupaj" }
     ]
