@@ -28,6 +28,7 @@ type Series =
     | InCare
     | OutOfHospital
     | InHospital
+    | AllInHospital
     | NeedsO2
     | Icu
     | Critical
@@ -37,13 +38,14 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
+        [ InCare; InHospital; AllInHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
 
     // color, dash, name
     let getSeriesInfo = function
         | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
         | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
         | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
+        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi"
         | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
         | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
         | Critical      -> "#d99a91", [|1;1|], "Kritično stanje - ocena"
@@ -178,6 +180,7 @@ let renderChart (state : State) =
             | InCare        -> fun ps -> ps.total.inCare |> zeroToNone
             | OutOfHospital -> fun ps -> ps.total.outOfHospital.toDate |> zeroToNone
             | InHospital    -> fun ps -> ps.total.inHospital.today |> zeroToNone
+            | AllInHospital -> fun ps -> ps.total.inHospital.toDate |> zeroToNone
             | NeedsO2       -> fun ps -> ps.total.needsO2.toDate |> zeroToNone
             | Icu           -> fun ps -> ps.total.icu.today |> zeroToNone
             | Critical      -> fun ps -> ps.total.critical.today |> zeroToNone
