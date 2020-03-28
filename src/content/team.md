@@ -17,6 +17,7 @@ Uredniki baze in ostali sodelavci:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
+-   [Luka Medic](https://www.facebook.com/luka.medic.79) - viri, validacija podatkov, modeliranje
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovna struktura in validacija
 -   [Maks Mržek](https://twitter.com/maksmrzek) - validacija, modeliranje, vizualizacije, koordinacija
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - model bolnišničnih podatkov, modeliranje
