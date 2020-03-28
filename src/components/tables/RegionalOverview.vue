@@ -3,6 +3,7 @@
     responsive
     bordered
     outlined
+    striped
     hover
     sort-by="date"
     :sort-desc="true"
