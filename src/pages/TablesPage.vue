@@ -1,23 +1,31 @@
 <template>
-  <b-tabs justified class="tables-tabs" pills card @activate-tab="goToData">
-    <b-tab title="Povzetek stanja" active>
-      <tests-infections-table :csvdata="csvdata"></tests-infections-table>
-    </b-tab>
-    <b-tab title="Okužbe po regiji">
-      <regional-overview-table :csvdata="csvdata"></regional-overview-table>
-    </b-tab>
-    <b-tab title="Okužbe po starosti">
-      <age-groups-table :csvdata="csvdata"></age-groups-table>
-    </b-tab>
-    <b-tab title="Okužbe po spolu">
-      <gender-overview-table :csvdata="csvdata"></gender-overview-table>
-    </b-tab>
-    <template v-slot:tabs-end>
-      <li role="presentation" class="nav-item">
-        <a href="/data" class="nav-link">Prenos podatkov</a>
-      </li>
-    </template>
-  </b-tabs>
+  <b-container fluid class="container-fluid-full">
+    <b-row>
+      <b-col cols="12">
+        <b-tabs justified class="tables-tabs" pills card @activate-tab="goToData">
+          <b-tab title="Povzetek stanja" active>
+            <tests-infections-table :csvdata="csvdata"></tests-infections-table>
+          </b-tab>
+          <b-tab title="Okužbe po regiji">
+            <regional-overview-table :csvdata="csvdata"></regional-overview-table>
+          </b-tab>
+          <b-tab title="Okužbe po starosti">
+            <age-groups-table :csvdata="csvdata"></age-groups-table>
+          </b-tab>
+          <b-tab title="Okužbe po spolu">
+            <gender-overview-table :csvdata="csvdata"></gender-overview-table>
+          </b-tab>
+        </b-tabs>
+      </b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="12">
+        <div class="footnote float-right">
+        Viri podatkov: <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>, <a href="https://covid19.rthand.com/api/stats">REST</a>, <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
@@ -52,6 +60,20 @@ export default {
 };
 </script>
 <style lang="scss">
+
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+.container-fluid-full {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.footnote {
+  font-size: $font-size-sm;
+  padding-right: 1.25rem;
+}
+
 .tables-tabs {
   .nav-pills {
     .nav-item {

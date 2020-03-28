@@ -88,6 +88,14 @@ const routes = [
       content: import('./content/sources.md')
     }
   },
+  {
+    path: '/datasources',
+    component: StaticPage,
+    props: {
+      name: 'datasources',
+      content: import('./content/datasources.md')
+    }
+  },
 ]
 
 const router = new VueRouter({
