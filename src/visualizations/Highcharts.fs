@@ -18,9 +18,9 @@ module Helpers =
     [<Emit """Array.prototype.slice.call($0)""">]
     let poja (a: 'T[]) : obj = jsNative
 
-
+    type JsTimestamp = float
     [<Emit("$0.getTime()")>]
-    let jsTime (x: DateTime): float = jsNative
+    let jsTime (x: DateTime): JsTimestamp = jsNative
 
 
 let basicChartOptions (scaleType:ScaleType) =
@@ -48,6 +48,7 @@ let basicChartOptions (scaleType:ScaleType) =
                 index = 0
                 ``type`` = if scaleType=Linear then "linear" else "logarithmic"
                 min = if scaleType=Linear then None else Some 1.0
+                //floor = if scaleType=Linear then None else Some 1.0
                 opposite = true // right side
                 title = {| text = null |} // "oseb" |}
                 //showFirstLabel = false

@@ -8,6 +8,7 @@ open Feliz
 open Feliz.ElmishComponents
 
 open Recharts
+open Highcharts
 open Types
 
 let colors =
@@ -82,7 +83,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
-let renderChart (state : State) =
+let renderChartOptions (state : State) =
 
     let renderLineLabel (input: ILabelProperties) =
         Html.text [
@@ -110,45 +111,43 @@ let renderChart (state : State) =
         state.Metrics
         |> List.filter (fun metric -> metric.Visible)
 
-    let children =
-        seq {
-            // when xAxis getx too crowded, set [ xAxis.interval 1 ]
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0); xAxis.interval 0 ]
+    let renderRegion metricToRender (point : RegionsDataPoint) =
+        let ts = point.Date |> jsTime
+        let region =
+            point.Regions
+            |> List.find (fun reg -> reg.Name = metricToRender.Key)
+        let count =
+            region.Municipalities
+            |> Seq.sumBy (fun city -> city.PositiveTests |> Option.defaultValue 0)
+        ts,count
 
-            let yAxisPropsDefaut = [ yAxis.padding (16,0,0,0) ]
+    let allSeries =
+        metricsToRender
+        |> List.map (fun metric ->
+            let renderPoint = renderRegion metric
+            {|
+                visible = metric.Visible
+                color = metric.Color
+                name = getRegionName metric.Key
+                data = state.Data |> Seq.map renderPoint |> Array.ofSeq
+                //yAxis = 0 // axis index
+                //showInLegend = true
+                //fillOpacity = 0
+            |}
+            |> pojo
+        )
+        |> List.toArray
 
-            match state.ScaleType with
-            | Logarithmic ->
-                yield Recharts.yAxis (yAxisPropsDefaut @ [yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); ])
-            | Linear ->
-                yield Recharts.yAxis yAxisPropsDefaut
-
-            yield Recharts.tooltip [ ]
-            yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
-
-            for metricToRender in metricsToRender do
-                yield renderRegion metricToRender
-                    (fun (point : RegionsDataPoint) ->
-                        let region =
-                            point.Regions
-                            |> List.find (fun reg -> reg.Name = metricToRender.Key)
-                        region.Municipalities
-                        |> List.map (fun city -> city.PositiveTests)
-                        |> List.choose id
-                        |> List.sum
-                )
-        }
-
-    Recharts.lineChart [
-        lineChart.data state.Data
-        lineChart.children (Seq.toList children)
-    ]
+    {| Highcharts.basicChartOptions state.ScaleType with series = allSeries |}
 
 let renderChartContainer state =
-    Recharts.responsiveContainer [
-        responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 450
-        responsiveContainer.chart (renderChart state)
+    Html.div [
+        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.className "highcharts-wrapper"
+        prop.children [
+            renderChartOptions state
+            |> Highcharts.chart
+        ]
     ]
 
 let renderMetricSelector (metric : Metric) dispatch =
