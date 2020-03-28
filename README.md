@@ -24,6 +24,13 @@ Every push to other branches (not `master`) is deployed to https://preview.sledi
 
 ## Development
 
+## What you need
+
+* yarn
+* node
+* .net core https://dotnet.microsoft.com/download
+* probably something I forgot
+
 ## Project setup
 ```
 yarn install
