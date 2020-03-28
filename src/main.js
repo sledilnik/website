@@ -22,6 +22,8 @@ import 'moment/locale/sl'
 
 moment.locale('sl')
 
+import store from './store'
+
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
@@ -89,10 +91,12 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  mode: 'history',
+  routes, // short for `routes: routes`
 })
 
 new Vue({
   render: h => h(App),
   router,
+  store,
 }).$mount('#app')
