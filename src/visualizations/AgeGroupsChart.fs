@@ -6,7 +6,16 @@ open Feliz
 open Types
 open Recharts
 
-let renderChart (data : StatsData) =
+type Breakdown =
+    | Gender
+    | Total
+  with
+    static member all = [ Gender; Total ]
+    static member getName = function
+        | Gender -> "Glede na spol"
+        | Total -> "Neglede na spol"
+
+let renderBars (data : StatsData) breakdown =
     let ageGroupData =
         data
         |> List.rev
@@ -21,11 +30,32 @@ let renderChart (data : StatsData) =
                 | filtered -> Some filtered
         )
 
+    let bars =
+        match breakdown with
+        | Total -> [
+            Recharts.bar [
+                bar.name "Vsi"
+                bar.fill "#d5c768"
+                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveAll |> Option.defaultValue 0)
+            ]]
+        | Gender -> [
+            Recharts.bar [
+                bar.name "Ženske"
+                bar.fill "#d99a91"
+                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveFemale |> Option.defaultValue 0)
+            ]
+
+            Recharts.bar [
+                bar.name "Moški"
+                bar.fill "#73ccd5"
+                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveMale |> Option.defaultValue 0)
+            ]]
+
     Recharts.barChart [
         barChart.data ageGroupData
         barChart.maxBarSize 40
         barChart.barCategoryGapPercentage 15
-        barChart.children [
+        barChart.children (bars @ [
             Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
             Recharts.xAxis [ xAxis.dataKey (fun (point : AgeGroup) ->
                 match point.AgeFrom, point.AgeTo with
@@ -37,28 +67,36 @@ let renderChart (data : StatsData) =
 
             Recharts.tooltip [ ]
             Recharts.legend [ ]
+        ])
+    ]
 
-            Recharts.bar [
-                bar.name "Vsi"
-                bar.fill "#666666"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveAll |> Option.defaultValue 0)
-            ]
-
-            Recharts.bar [
-                bar.name "Ženske"
-                bar.fill "#2B6A7A"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveFemale |> Option.defaultValue 0)
-            ]
-
-            Recharts.bar [
-                bar.name "Moški"
-                bar.fill "#7B7226"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveMale |> Option.defaultValue 0)
-            ]
-        ] ]
-
-let render data =
+let renderChart data breakdown =
     Recharts.responsiveContainer [
         responsiveContainer.width (length.percent 100)
         responsiveContainer.height 450
-        responsiveContainer.chart (renderChart data) ]
+        responsiveContainer.chart (renderBars data breakdown) ]
+
+let renderBreakdownSelector breakdown current choose =
+    Html.div [
+        prop.onClick (fun _ -> choose breakdown)
+        prop.className [ true, "btn btn-sm metric-selector"; breakdown = current, "metric-selector--selected" ]
+        prop.text (breakdown |> Breakdown.getName)
+    ]
+
+let renderBreakdownSelectors current choose =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            Breakdown.all
+            |> List.map (fun breakdown ->
+                renderBreakdownSelector breakdown current choose
+            ) ) ]
+
+let render data =
+    React.functionComponent ( fun () ->
+        let (breakdown, setBreakdown) = React.useState Gender
+        Html.div [
+            renderChart data breakdown
+            renderBreakdownSelectors breakdown setBreakdown
+        ]
+    )

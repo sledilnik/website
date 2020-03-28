@@ -49,6 +49,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                     [ prop.className "age-groups-chart"
                       prop.children
                         [ Html.h2 "Potrjeno okuženi po starostnih skupinah"
-                          AgeGroupsChart.render data.StatsData ] ]
+                          AgeGroupsChart.render data.StatsData () ] ]
                 ]
             ]

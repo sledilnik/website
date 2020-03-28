@@ -168,7 +168,7 @@ export default {
     h2
       margin-bottom: $gap
 
-  .patients-chart
+  .patients-chart, .age-groups-chart
     margin-top: $gap * 2
 
     .metric-selector
