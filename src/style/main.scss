@@ -1,12 +1,7 @@
-@import "node_modules/bootstrap/scss/functions";
+// rest of SASS
 
-// customize bootstrap vars here
-@import "./variables.scss";
-@import "node_modules/bootstrap/scss/variables";
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "node_modules/bootstrap-vue/src/index.scss";
-
-// rest of SASS
 
 html,
 body,

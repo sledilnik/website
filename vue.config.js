@@ -19,7 +19,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        prependData: '@import "@/../src/style/variables.scss";'
+        prependData: '@import "@/../src/style/bootstrap.scss";'
       },
     }
   },
