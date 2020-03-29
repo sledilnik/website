@@ -136,7 +136,7 @@ export default {
   .municipalities-chart
     margin-top: $gap * 2
     $bar-color: #7B7226
-    $bar-color-light: #B0AA74
+    $bar-color-light: #d5c668
 
     h2
       margin-bottom: $gap
