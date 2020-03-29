@@ -33,7 +33,7 @@ h2 {
     position: absolute;
     left: 0;
     right: 0;
-    top: 70px;
+    top: 74px;
     display: block;
     height: 10px;
     background: $background;
