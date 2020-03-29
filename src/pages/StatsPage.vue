@@ -309,13 +309,18 @@ export default {
         background-color: $gray-100
 
   .exponential-explainer
+    zIndex: 1000
     border: 1px solid #ddd
-    background: #eee
+    background: rgba(220,220,220,0.75)
     padding: 2em
+    backdrop-filter: blur(4px)
+
     h1
+      color: #111
       margin-top: 1em
-      font-size: 24px
+      font-size: 22px
       text-align: center
+      font-weight: bold
       padding-bottom: 1.2em
 
     div.container
@@ -345,6 +350,5 @@ export default {
         h4
           margin-top: 1.4em
           font-size: 24px
-
 
 </style>

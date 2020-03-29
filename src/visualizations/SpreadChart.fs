@@ -201,7 +201,12 @@ let renderExplainer (data: StatsData) =
             prop.className "box"
             prop.children [
                 Html.h2 title
-                Html.span (if times<2 then "" else sprintf "%d-krat toliko" times)
+                Html.p [
+                    match times with
+                    | 0 -> Html.span ""
+                    | 1 -> Html.span (sprintf "%d-krat toliko" (1<<<times))
+                    | n -> Html.span (sprintf "%d-krat toliko" (1<<<times))
+                ]
                 Html.div [ Html.h4 (string positive); Html.p [ Html.text "potrjeno"; Html.br []; Html.text "okuženih"  ]]
                 Html.div [ Html.h4 (string hospitalized); Html.p "hospitaliziranih" ]
             ]
@@ -209,7 +214,7 @@ let renderExplainer (data: StatsData) =
 
     Html.div [
         prop.className "exponential-explainer"
-        prop.style [ style.height 450 ]
+        prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
             yield Html.h1 "Ob nezmanjšani eksponentni rasti s podavajanjem na 7 dni lahko pričakujemo"
             yield Html.div [
@@ -218,7 +223,7 @@ let renderExplainer (data: StatsData) =
                     yield!
                         ["Danes",0; "Čez en teden",1; "Čez dva tedna",2; "Čez tri tedne",3; "Čez štiri tedne",4;]
                         |> List.map (fun (title, doublings) ->
-                            box title (1<<<doublings) (curPositive <<< doublings) (curHospitalzed <<< doublings)
+                            box title doublings (curPositive <<< doublings) (curHospitalzed <<< doublings)
                         )
                 ]
             ]
@@ -228,7 +233,7 @@ let renderExplainer (data: StatsData) =
 
 let renderChartContainer scaleType data =
     Html.div [
-        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data
@@ -260,10 +265,20 @@ let renderScaleSelectors state dispatch =
 
 let render (state: State) dispatch =
     Html.div [
-        match state.page with
-        | Chart scale -> renderChartContainer scale state.data
-        | Explainer -> renderExplainer state.data
-        renderScaleSelectors state dispatch
+        prop.children [
+            Html.div [
+                prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.relative ]
+                prop.children [
+                    match state.page with
+                    | Chart scale ->
+                        yield renderChartContainer scale state.data
+                    | Explainer ->
+                        yield renderChartContainer DoublingRate state.data
+                        yield renderExplainer state.data
+                ]
+            ]
+            renderScaleSelectors state dispatch
+        ]
     ]
 
 type Props = {
