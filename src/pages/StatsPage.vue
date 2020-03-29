@@ -318,7 +318,7 @@ export default {
     h1
       color: #111
       margin-top: 1em
-      font-size: 22px
+      font-size: 23px
       text-align: center
       font-weight: bold
       padding-bottom: 1.2em

@@ -216,7 +216,7 @@ let renderExplainer (data: StatsData) =
         prop.className "exponential-explainer"
         prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
-            yield Html.h1 "Ob nezmanjšani eksponentni rasti s podavajanjem na 7 dni lahko pričakujemo"
+            yield Html.h1 "Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
             yield Html.div [
                 prop.className "container"
                 prop.children [
