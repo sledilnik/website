@@ -24,6 +24,11 @@ const routes = [
     path: '/chart/:type',
     component: ChartEmbed
   },
+  // primer route brez $route.params
+  // {
+  //   path: '/chart',
+  //   component: ChartEmbed
+  // },
 ]
 
 const router = new VueRouter({

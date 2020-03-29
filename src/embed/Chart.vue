@@ -16,6 +16,10 @@ export default {
   async mounted() {
     // console.log(this.$route.params, this.$route.query)
     this.$nextTick(() => {
+      // jaz predlagam nekaj takega
+      // let chartId = this.$route.params.type
+      // Visualizations("visualizations", chartId);
+      // lahko pa tudi preko query params
       Visualizations("visualizations");
     });
   }
