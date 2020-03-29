@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { parseISO, format } from "date-fns";
-import sl from "date-fns/locale/sl";
 import * as d3 from "d3";
 
 Vue.use(Vuex)
+
 const store = new Vuex.Store({
   state: {
     csvdata: []
@@ -14,6 +13,9 @@ const store = new Vuex.Store({
       return state.csvdata
     },
     getValueOn: (state, getters) => (field, date) => {
+      if (!date) {
+        return {}
+      }
       let searchResult = getters.csvdata.find(day => {
         return Date.parse(day.date) === date.getTime()
       })
@@ -35,7 +37,6 @@ const store = new Vuex.Store({
       let csvdata = await d3.csv(
         "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
       );
-      csvdata = addRadableDatesToDays(csvdata)
       commit('setCsvData', csvdata)
     }
   },
@@ -45,14 +46,5 @@ const store = new Vuex.Store({
     }
   }
 })
-
-function addRadableDatesToDays(data) {
-  return data.map(day => {
-    day.dateLocal = format(parseISO(day.date), "d. MMMM", {
-      locale: sl
-    });
-    return day;
-  });
-}
 
 export default store

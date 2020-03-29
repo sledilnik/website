@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar />
+    <Navbar v-if="!embed"/>
     <main>
       <router-view :key="$route.path" />
     </main>
@@ -12,6 +12,12 @@ import Navbar from "./components/Navbar.vue";
 
 export default {
   name: "app",
+  props: {
+    embed: {
+      default: false,
+      type: Boolean
+    }
+  },
   components: {
     Navbar
   },

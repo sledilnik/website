@@ -22,17 +22,8 @@
   </div>
 </template>
 <script>
-import Vue from "vue";
 import moment from "moment";
 import { mapGetters } from "vuex";
-
-Vue.filter("prefixDiff", function(value) {
-  if (value > 0) {
-    return `+${value}`;
-  } else {
-    return `${value}`;
-  }
-});
 
 export default {
   props: {

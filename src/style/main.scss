@@ -3,16 +3,12 @@
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 @import "node_modules/bootstrap-vue/src/index.scss";
 
+// common styles form main page (index) and embedded version (embed)
+
 html,
 body,
 #app {
   height: 100%;
-}
-
-// ce spreminjas visino navbara
-body {
-  margin-top: 76px;
-  // background-color: #f5f5f0;
 }
 
 .button-yellow {
