@@ -18,35 +18,15 @@ const store = new Vuex.Store({
         return Date.parse(day.date) === date.getTime()
       })
 
-      return { date, value: searchResult ? searchResult[field] : undefined }
-    },
-          date: date,
-          value: undefined,
-        }
-      }
+      return { date, value: searchResult ? searchResult[field] : 0 }
     },
     getLastValue: (state, getters) => (field) => {
-      if (getters.csvdata && getters.csvdata.length > 0) {
-        let i = 0;
-        // find last non null value
-        for (i = getters.csvdata.length - 1; i > 0; i--) {
-          let row = getters.csvdata[i];
-          if (row[field]) {
-            break;
-          }
-        }
-
-        let lastRow = getters.csvdata[i];
-        let value = lastRow[field] || undefined;
-        return {
-          date: new Date(Date.parse(lastRow["date"])),
-          value: value
-        };
-      } else {
-        return {
-          date: new Date().setHours(0,0,0,0),
-          value: undefined
-        };
+      let result = getters.csvdata.slice().reverse().find(day => {
+        return day[field]
+      })
+      return {
+        date: result ? new Date(Date.parse(result.date)) : new Date().setHours(0, 0, 0, 0),
+        value: result ? result[field] : 0
       }
     },
   },

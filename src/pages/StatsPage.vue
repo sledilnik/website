@@ -29,7 +29,6 @@
 <script>
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
-import { mapGetters } from "vuex";
 
 export default {
   name: "StatsPage",
@@ -42,23 +41,8 @@ export default {
   },
   data() {
     return {
-      loaded: false,
+      loaded: false
     };
-  },
-  computed: {
-    ...mapGetters(['csvdata', 'getLastValue']),
-    positiveTestToDate() {
-      return this.getLastValue(this.csvdata, "tests.positive.todate");
-    },
-    inHospitalToDate() {
-      return this.getLastValue(this.csvdata, "state.in_hospital");
-    },
-    deceasedToDate() {
-      return this.getLastValue(this.csvdata, "state.deceased.todate");
-    },
-    recoveredToDate() {
-      return this.getLastValue(this.csvdata, "state.out_of_hospital.todate");
-    }
   },
   async mounted() {
     this.loaded = true;
