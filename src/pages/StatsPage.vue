@@ -1,6 +1,6 @@
 <template>
   <b-container v-if="loaded" class="mt-3">
-    <b-row>
+    <b-row class="row-gap">
       <b-card-group deck class="col-12 mb-5">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
@@ -9,7 +9,7 @@
         <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
       </b-card-group>
     </b-row>
-    <b-row cols="12">
+    <b-row cols="12" class="row-gap">
       <b-col>
         <div id="visualizations"></div>
       </b-col>
@@ -58,7 +58,7 @@ export default {
 @import 'node_modules/bootstrap/scss/_variables'
 @import 'node_modules/bootstrap/scss/_mixins'
 
-.row
+.row-gap
   margin-top: 70px
 
 #visualizations
