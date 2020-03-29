@@ -12,7 +12,7 @@ open Types
 let barMaxHeight = 50
 let showMaxBars = 20
 let collapsedMnicipalityCount = 24
-let doublingTimeInterval = 4
+let doublingTimeInterval = 7
 
 type State =
     { Data : RegionsData
