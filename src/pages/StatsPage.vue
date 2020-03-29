@@ -4,7 +4,7 @@
       <div class="d-flex flex-wrap w-100 justify-content-center">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
-        <Info-card title="Intenzivna nega" field="state.icu" />
+        <Info-card title="Intenzivna enota" field="state.icu" />
         <Info-card title="Umrli" field="state.deceased.todate" />
         <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
       </div>
