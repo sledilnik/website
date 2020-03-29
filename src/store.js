@@ -12,6 +12,9 @@ const store = new Vuex.Store({
       return state.csvdata
     },
     getValueOn: (state, getters) => (field, date) => {
+      if (!date) {
+        return {}
+      }
       let searchResult = getters.csvdata.find(day => {
         return Date.parse(day.date) === date.getTime()
       })

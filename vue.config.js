@@ -11,10 +11,22 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 module.exports = {
-  publicPath: process.env.C19_PUBLIC_PATH || '/', 
+  publicPath: process.env.C19_PUBLIC_PATH || '/',
   outputDir: process.env.C19_OUTPUT_DIR || 'dist',
   devServer: {
-    disableHostCheck: true, 
+    disableHostCheck: true,
+  },
+  pages: {
+    index: {
+      entry: 'src/index.js',
+      template: 'public/index.html',
+      filename: 'index.html',
+    },
+    embed: {
+      entry: 'src/embed.js',
+      template: 'public/index.html',
+      filename: 'embed.html',
+    },
   },
   css: {
     loaderOptions: {
@@ -26,21 +38,21 @@ module.exports = {
   chainWebpack: config => {
     // Markdown Loader
     config.module
-    .rule('md')
+      .rule('md')
       .test(/\.md$/)
       .use('html-loader')
-        .loader('html-loader')
-        .end()
+      .loader('html-loader')
+      .end()
       .use('markdown-loader')
-        .loader('markdown-loader')
-        .end()
+      .loader('markdown-loader')
+      .end()
     // Fable loader
     config.module
-    .rule('fable')
-      .test( /\.fs(x|proj)?$/)
+      .rule('fable')
+      .test(/\.fs(x|proj)?$/)
       .use('fable-loader')
-        .loader('fable-loader')
-        .end()
+      .loader('fable-loader')
+      .end()
 
     config.resolve.modules.prepend(paths.src)
   }
