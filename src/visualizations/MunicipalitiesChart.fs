@@ -118,13 +118,14 @@ let renderMunicipalities (state : State) dispatch =
             match doublingTime with
             | None -> Html.none
             | Some value ->
+                printfn "%s - %f" key.Municipality value
                 let displayValue = int (round value)
                 Html.div [
                     prop.className "doubling-time"
                     prop.children [
                         Html.span [
                             prop.className "label"
-                            prop.text "Podvojitev okužb v "
+                            prop.text "Podvojitev v "
                         ]
                         Html.span [
                             prop.className "value"
