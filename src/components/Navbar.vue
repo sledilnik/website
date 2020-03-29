@@ -75,30 +75,40 @@ nav.navbar {
     color: rgba(0, 0, 0, 0.5);
     line-height: 20px;
     font-weight: 600;
+    margin-right: 15px;
 
     &:hover {
-      color: #000000;
+      color: rgba(0, 0, 0, 0.5) !important;
     }
 
     &:focus {
       outline: none;
     }
 
+    &:hover,
     &.router-link-active {
-      color: #000000;
-      
       &:after {
         content: "";
         position: absolute;
         display: block;
+        z-index: -1;
         left: 0;
         right: 0;
-        border-bottom: 10px solid #FFFFFF;
+        bottom: 1.5px;
+        border-bottom: 10px solid #ffffff;
 
         @media (min-width: 992px) {
           left: 0.5rem;
           right: 0.5rem;
         }
+      }
+    }
+
+    &.router-link-active {
+      color: #000000;
+
+      &:hover {
+        color: #000000 !important;
       }
     }
   }

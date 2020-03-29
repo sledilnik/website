@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Navbar v-if="!embed"/>
-    <router-view :key="$route.path" />
+    <main>
+      <router-view :key="$route.path" />
+    </main>
   </div>
 </template>
 
@@ -26,4 +28,8 @@ export default {
 </script>
 
 <style lang="scss">
+main {
+  padding-top: 77px;
+  background: $background;
+}
 </style>
