@@ -14,13 +14,17 @@ import { Visualizations } from "visualizations/App.fsproj";
 export default {
   name: "ChartEmbed",
   async mounted() {
-    // console.log(this.$route.params, this.$route.query)
+    console.log(this.$route.params, this.$route.query)
     this.$nextTick(() => {
-      // jaz predlagam nekaj takega
-      // let chartId = this.$route.params.type
-      // Visualizations("visualizations", chartId);
-      // lahko pa tudi preko query params
-      Visualizations("visualizations");
+      /* Available charts:
+         - MetricsComparison
+         - Patients
+         - Spread
+         - Regions
+         - Municipalities
+         - AgeGroups
+      */
+      Visualizations("visualizations", this.$route.params.type);
     });
   }
 };

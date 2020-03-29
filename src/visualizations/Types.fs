@@ -69,9 +69,13 @@ type Visualization =
     | Municipalities
     | AgeGroups
 
+type RenderingMode =
+    | Normal
+    | Embeded of Visualization option
+
 type State =
     { Data : RemoteData<Data, string>
-      RenderVisualization : Visualization option }
+      RenderingMode : RenderingMode }
 
 type Msg =
     | DataLoaded of RemoteData<Data, string>

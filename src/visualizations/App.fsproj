@@ -15,7 +15,6 @@
         <Compile Include="PatientsChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="SpreadChart.fs" />
-        <Compile Include="DataTable.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

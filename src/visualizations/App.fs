@@ -7,31 +7,27 @@ open Feliz
 
 open Types
 
-module Route =
-
-    let private visualizationParam name =
-        let inner =
-            Option.bind (fun (value : string) ->
-                match value with
+let init (visualization : string option) =
+    let inner () =
+        let renderingMode =
+            match visualization with
+            | None -> Normal
+            | Some viz ->
+                match viz with
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Spread" -> Some Spread
                 | "Regions" -> Some Regions
                 | "AgeGroups" -> Some AgeGroups
-                | _ -> None)
-        customParam name inner
+                | _ -> None
+                |> Embeded
 
-    let parseRoute (location : Location) =
-        location
-        |> parseHash (s "embed" <?> visualizationParam "viz")
-        |> Option.flatten
+        let initialState =
+            { Data = NotAsked
+              RenderingMode = renderingMode }
 
-let init() =
-    let initialState =
-        { Data = NotAsked
-          RenderVisualization = window.location |> Route.parseRoute }
-
-    initialState, Cmd.OfAsync.result SourceData.loadData
+        initialState, Cmd.OfAsync.result SourceData.loadData
+    inner
 
 let update (msg: Msg) (state: State) =
     match msg with
@@ -70,13 +66,16 @@ let render (state : State) (dispatch : Msg -> unit) =
     | Loading -> Html.text "Nalagam podatke..."
     | Failure error -> Html.text error
     | Success data ->
-        let visualizations =
-            match state.RenderVisualization with
-            | Some visualization -> allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
-            | None -> allVisualizations
+        let embeded, visualizations =
+            match state.RenderingMode with
+            | Normal -> false, allVisualizations
+            | Embeded visualization ->
+                match visualization with
+                | None -> true, []
+                | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
 
         Html.div
-            [ prop.className "visualization container"
+            [ prop.className [ true, "visualization container" ; embeded, "embeded" ]
               prop.children (
                   visualizations
                   |> List.map (fun viz ->
