@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 // global vue filters
 import './filters'
 
+// this is common Vue initialization for index.js and embed.js (app entrypoints)
+
 Vue.use(Vuex)
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
