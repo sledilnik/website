@@ -340,5 +340,5 @@ export default {
 .cards-wrapper
   display: flex
   flex-wrap: wrap
-  margin-bottom: 88px
+  margin-bottom: 58px
 </style>

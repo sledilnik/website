@@ -17,7 +17,7 @@
           triggers="hover"
         >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
       </div>
-      <div class="data-time text-center">{{ formattedDate }}</div>
+      <div class="data-time">{{ formattedDate }}</div>
     </div>
   </div>
 </template>
