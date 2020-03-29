@@ -168,13 +168,18 @@ type ChartCfg = {
 let renderChartOptions scaleType (data : StatsData) =
 
     let chartCfg = ChartCfg.fromScale scaleType
+    let startDate = DateTime(2020,3,4)
 
     let allSeries =
         {|
             //visible = true
             color = "#be7a2a"
             name = chartCfg.seriesLabel
-            data = data |> Seq.map chartCfg.dataKey |> Seq.toArray
+            data =
+                data
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                |> Seq.map chartCfg.dataKey
+                |> Seq.toArray
             //yAxis = 0 // axis index
             //showInLegend = true
             //fillOpacity = 0
