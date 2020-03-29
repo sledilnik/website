@@ -20,6 +20,7 @@ import 'moment/locale/sl'
 
 moment.locale('sl')
 
+import './filters'
 import store from './store'
 
 Vue.use(VueRouter)

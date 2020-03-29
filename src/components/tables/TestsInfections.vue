@@ -16,7 +16,7 @@
       <div class="text-nowrap">{{ scope.label }}</div>
     </template>
     <template v-slot:cell(date)="data">
-      <div class="text-nowrap">{{ data.item.dateLocal }}</div>
+      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM') }}</div>
     </template>
     <template v-slot:empty="scope">
       <h4>{{ scope.emptyText }} ni podatka</h4>

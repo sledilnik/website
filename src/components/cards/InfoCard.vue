@@ -18,21 +18,12 @@
         triggers="hover"
       >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
     </b-card-text>
-    <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
+    <b-card-text class="data-time text-center">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</b-card-text>
   </b-card>
 </template>
 <script>
-import Vue from "vue";
 import moment from "moment";
 import { mapGetters } from "vuex";
-
-Vue.filter("prefixDiff", function(value) {
-  if (value > 0) {
-    return `+${value}`;
-  } else {
-    return `${value}`;
-  }
-});
 
 export default {
   props: {
@@ -123,7 +114,6 @@ export default {
   .card-title {
     text-align: center;
     font-size: $font-size-base;
-    // text-transform: uppercase;
   }
   .card-body {
     font-size: $font-size-base * 0.9;
