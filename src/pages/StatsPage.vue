@@ -1,13 +1,13 @@
 <template>
   <b-container v-if="loaded" class="mt-3">
     <b-row>
-      <b-card-group deck class="col-12 mb-5">
+      <div class="d-flex flex-wrap w-100 justify-center">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
         <Info-card title="Intenzivna nega" field="state.icu" />
         <Info-card title="Umrli" field="state.deceased.todate" />
         <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
-      </b-card-group>
+      </div>
     </b-row>
     <b-row cols="12">
       <b-col>

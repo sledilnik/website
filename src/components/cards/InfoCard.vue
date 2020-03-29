@@ -1,5 +1,5 @@
 <template>
-  <b-card :title="title" class="card-info" v-if="show">
+  <b-card :title="title" class="card-info col-12 col-md-3 col-lg-2 mx-3 mb-3 px-0" v-if="show">
     <b-card-text
       :id="elementId"
       class="text-center"
@@ -112,9 +112,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-
 .card.card-info {
   color: $text-muted;
 
