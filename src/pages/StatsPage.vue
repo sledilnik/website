@@ -36,8 +36,7 @@ export default {
     InfoCard
   },
   props: {
-    name: String,
-    content: Promise
+    name: String
   },
   data() {
     return {
@@ -58,6 +57,9 @@ export default {
 @import 'node_modules/bootstrap/scss/_functions'
 @import 'node_modules/bootstrap/scss/_variables'
 @import 'node_modules/bootstrap/scss/_mixins'
+
+.row
+  margin-top: 70px
 
 #visualizations
   $gap: $grid-gutter-width
