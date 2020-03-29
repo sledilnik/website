@@ -49,7 +49,7 @@ module Series =
         | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi doslej"
         | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
         | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
-        | Critical      -> "#d99a91", [|1;1|], "Kritično stanje - ocena"
+        | Critical      -> "#d99a91", [|1;1|], "Ventilator / kritično stanje"
         | Deceased      -> "#666666", [|4;1|], "Umrli - skupaj"
         | Hospital      -> "#be772a", [|   |], "Hospitalizirani"
         | Home          -> "#003f5c", [|   |], "Doma"
