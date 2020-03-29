@@ -14,23 +14,12 @@ const store = new Vuex.Store({
       return state.csvdata
     },
     getValueOn: (state, getters) => (field, date) => {
-      if (getters.csvdata && getters.csvdata.length > 0) {
-        for (let i = 0; i < getters.csvdata.length; i++) {
-          let row = getters.csvdata[i]
-          if (Date.parse(row['date']) == date.getTime()) {
-            return {
-              date: date,
-              value: row[field],
-            }    
-          }
-        }
-        return {
-          date: date,
-          value: undefined,
-        }
+      let searchResult = getters.csvdata.find(day => {
+        return Date.parse(day.date) === date.getTime()
+      })
 
-      } else {
-        return {
+      return { date, value: searchResult ? searchResult[field] : undefined }
+    },
           date: date,
           value: undefined,
         }
