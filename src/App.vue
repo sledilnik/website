@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Navbar v-if="!embed"/>
+    <Navbar v-if="!embed" />
     <main>
       <router-view :key="$route.path" />
     </main>
@@ -30,6 +30,10 @@ export default {
 <style lang="scss">
 main {
   padding-top: 77px;
+  background: $background;
+}
+
+#app {
   background: $background;
 }
 </style>

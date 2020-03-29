@@ -2,8 +2,8 @@
 [<RequireQualifiedAccess>]
 module PatientsChart
 
+open System
 open Elmish
-
 open Feliz
 open Feliz.ElmishComponents
 
@@ -158,6 +158,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderChartOptions (state : State) =
 
+    let startDate = DateTime(2020,03,10)
+
     let zeroToNone value =
         match value with
         | None -> None
@@ -185,7 +187,11 @@ let renderChartOptions (state : State) =
             visible = state.activeSeries |> Set.contains series
             color = color
             name = name
-            data = state.data |> Seq.map renderPoint |> Array.ofSeq
+            data =
+                state.data
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                |> Seq.map renderPoint
+                |> Array.ofSeq
             //yAxis = 0 // axis index
             //showInLegend = true
             //fillOpacity = 0
@@ -211,7 +217,11 @@ let renderChartOptions (state : State) =
             visible = true
             color = color
             name = name
-            data = state.data |> Seq.map renderPoint |> Array.ofSeq
+            data =
+                state.data
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                |> Seq.map renderPoint
+                |> Array.ofSeq
             showInLegend = true
             //yAxis = 0 // axis index
             //showInLegend = true

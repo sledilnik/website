@@ -74,11 +74,11 @@ nav.navbar {
     display: inline-block;
     color: rgba(0, 0, 0, 0.5);
     line-height: 20px;
-    font-weight: 600;
     margin-right: 15px;
+    font-size: 14px;
 
     &:hover {
-      color: rgba(0, 0, 0, 0.5) !important;
+      color: rgba(0, 0, 0) !important;
     }
 
     &:focus {
@@ -94,7 +94,7 @@ nav.navbar {
         z-index: -1;
         left: 0;
         right: 0;
-        bottom: 1.5px;
+        bottom: 3px;
         border-bottom: 10px solid #ffffff;
 
         @media (min-width: 992px) {
@@ -105,7 +105,8 @@ nav.navbar {
     }
 
     &.router-link-active {
-      color: #000000;
+      font-weight: 600;
+      color: #000000 !important;
 
       &:hover {
         color: #000000 !important;

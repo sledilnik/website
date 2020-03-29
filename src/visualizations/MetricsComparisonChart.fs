@@ -115,7 +115,11 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                 visible = metric.Visible
                 color = metric.Color
                 name = metric.Label
-                data = data |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp)) |> Seq.toArray
+                data =
+                    data
+                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
+                    |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+                    |> Seq.toArray
                 //yAxis = 0 // axis index
                 //showInLegend = true
                 //fillOpacity = 0
