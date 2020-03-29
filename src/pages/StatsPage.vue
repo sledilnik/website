@@ -1,7 +1,7 @@
 <template>
   <b-container v-if="loaded" class="mt-3">
     <b-row>
-      <div class="d-flex flex-wrap w-100 justify-center">
+      <div class="d-flex flex-wrap w-100 justify-content-center">
         <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" />
         <Info-card title="Intenzivna nega" field="state.icu" />
