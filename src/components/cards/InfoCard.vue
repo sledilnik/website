@@ -1,25 +1,25 @@
 <template>
-  <b-card :title="title" class="card-info col-12 col-md-3 col-lg-2 mx-3 mb-3 px-0" v-if="show">
-    <b-card-text
-      :id="elementId"
-      class="text-center"
-      :class="{
-        'text-info': renderValues.lastDay.diff != 0,
-        'text-secondary': renderValues.lastDay.diff == 0,
+  <div :title="title" class="hp-card-holder" v-if="show">
+    <div class="hp-card">
+      <span class="card-title">{{title}}</span>
+      <span class="card-number">{{ renderValues.lastDay.value }}</span>
+      <div
+        :id="elementId"
+        class="card-diff"
+        :class="{
+        'bad': renderValues.lastDay.diff != 0,
+        'good': renderValues.lastDay.diff == 0,
       }"
-    >
-      <font-awesome-icon icon="arrow-circle-up" v-if="renderValues.lastDay.diff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="renderValues.lastDay.diff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="renderValues.lastDay.diff == 0" />&nbsp;
-      <span>{{ renderValues.lastDay.value }} </span>
-      <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
-      <b-tooltip
-        :target="elementId"
-        triggers="hover"
-      >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
-    </b-card-text>
-    <b-card-text class="data-time text-center">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</b-card-text>
-  </b-card>
+      >
+        <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
+        <b-tooltip
+          :target="elementId"
+          triggers="hover"
+        >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
+      </div>
+      <div class="data-time">{{ formattedDate }}</div>
+    </div>
+  </div>
 </template>
 <script>
 import moment from "moment";
@@ -108,20 +108,60 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card.card-info {
-  color: $text-muted;
+.hp-card-holder {
+  flex: 0 0 100%;
+  padding: 0 15px 30px;
 
-  .card-title {
-    text-align: center;
-    font-size: $font-size-base;
-  }
-  .card-body {
-    font-size: $font-size-base * 0.9;
-    padding: 0.5rem;
+  @media only screen and (min-width: 768px) {
+    flex: 0 0 calc(100% / 3);
   }
 
-  .data-time {
-    font-size: $font-size-sm * 0.7;
+  @media only screen and (min-width: 1200px) {
+    flex: 0 0 20%;
   }
+}
+
+.hp-card {
+  padding: 32px;
+  background: #fff;
+  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
+    0 11px 12px -12px rgba(0, 0, 0, 0.22);
+  // transition: 0.35s ease-in-out;
+
+  // &:hover {
+  //   transform: translateY(-2px);
+  //   box-shadow: 0 22px 38px -10px rgba(0, 0, 0, 0.3),
+  //     0 18px 12px -10px rgba(0, 0, 0, 0.22);
+  // }
+}
+
+.card-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.card-number {
+  display: block;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.card-diff {
+  font-size: 14px;
+  margin-bottom: 16px;
+
+  &.bad {
+    color: #bf5747;
+  }
+
+  &.good {
+    color: #20b16d;
+  }
+}
+
+.data-time {
+  font-size: 12px;
+  color: #a0a0a0;
 }
 </style>

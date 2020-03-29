@@ -23,6 +23,8 @@ Vue.filter("formatDate", function(value, fmt) {
 
   if (value instanceof Date) {
     date = value
+  } else if (typeof(value) === 'number') {
+    date = new Date(value)
   } else {
     date = parseISO(value)
   }
