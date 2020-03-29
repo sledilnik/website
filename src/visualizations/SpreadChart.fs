@@ -18,7 +18,7 @@ type Scale =
     static member getName = function
         | Absolute -> "Absoluten dnevni prirast"
         | Percentage -> "Relativen dnevni prirast"
-        | DoublingRate -> "Število dni do podvojitve"
+        | DoublingRate -> "Eksponentna rast v dnevih" // "Število dni do podvojitve"
 
 type State = {
     scale: Scale
@@ -71,7 +71,7 @@ let inline legend title =
         title = {| text=title |}
         align = "left"
         verticalAlign = "middle"
-        borderColor = "#ddd"
+        borderColor = "#aaa"
         borderWidth = 1
         //labelFormatter = string //fun series -> series.name
         layout = "vertical"
@@ -99,7 +99,7 @@ type ChartCfg = {
         | Percentage ->
             {
                 legendTitle = "Dnevni prirast okuženih"
-                seriesLabel = "Relativna rast v %"
+                seriesLabel = "Relativen prirast v %"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
                     let daily = maxOption dp.PositiveTests dp.TestsAt14.Positive |> Utils.zeroToNone
@@ -117,14 +117,17 @@ type ChartCfg = {
 
         | DoublingRate ->
             {
-                legendTitle = "Doba podvojitve števila okuženih"
+                legendTitle = "Hitrost eksponentne rasti [v dnevih]"
                 seriesLabel = "V koliko dneh se število okuženih podvoji"
                 yAxis =
                     {| yAxisBase () with
                         ``type``="logarithmic"
                         reversed=true
                         plotLines=[|
-                            {| value=40.0; label={| text="Povprečje Južne Koreje v preteklih dneh"; align="right"; y= -8; x= -10 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            pojo {| value=40.0; label={| text="⬑ Povprečje Južne Koreje v preteklih dneh"; align="right"; y= 12; x= -10 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            pojo {| value= 1.0; label={| text="En dan"   |}; color="#aaa"; dashStyle="ShortDash" |}
+                            pojo {| value= 7.0; label={| text="En teden" |}; color="#888"; dashStyle="ShortDash" |}
+                            pojo {| value=30.0; label={| text="En mesec" |}; color="#888"; dashStyle="ShortDash" |}
                         |]
                         max = Some 50
                     |}
