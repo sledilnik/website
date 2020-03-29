@@ -2,11 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import App from './App.vue'
-import StaticPage from './pages/StaticPage.vue'
-import StatsPage from './pages/StatsPage.vue'
-import MapPage from './pages/MapPage.vue'
 import TablesPage from './pages/TablesPage.vue'
-import DataPage from './pages/DataPage.vue'
+import InfoCardEmbed from '@/embed/InfoCard'
+import ChartEmbed from '@/embed/Chart'
 
 import store from 'store'
 
@@ -17,6 +15,14 @@ const routes = [
   {
     path: '/tables',
     component: TablesPage
+  },
+  {
+    path: '/card/:type',
+    component: InfoCardEmbed
+  },
+  {
+    path: '/chart/:type',
+    component: ChartEmbed
   },
 ]
 
