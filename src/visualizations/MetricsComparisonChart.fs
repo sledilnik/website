@@ -123,7 +123,6 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             |> pojo
         )
         |> List.toArray
-        |> poja
 
     // return highcharts options
     {| basicChartOptions scaleType with series = allSeries |}

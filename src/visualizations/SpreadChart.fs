@@ -1,14 +1,13 @@
 [<RequireQualifiedAccess>]
 module SpreadChart
 
+open System
 open Elmish
-
 open Feliz
 open Feliz.ElmishComponents
 
 open Types
-open Recharts
-open System
+open Highcharts
 
 type Scale =
     | Absolute
@@ -50,119 +49,139 @@ let maxOption a b =
 
 let roundDecimals (nDecimals:int) (f: float) = Math.Round(f,nDecimals)
 
+let inline yAxisBase () =
+     {|
+        //index = 0
+        ``type`` = "linear"
+        //min = if scaleType=Linear then None else Some 1.0
+        //floor = if scaleType=Linear then None else Some 1.0
+        opposite = true // right side
+        reversed = false
+        title = {| text = null |} // "oseb" |}
+        //showFirstLabel = false
+        tickInterval = None
+        gridZIndex = -1
+        max = None
+        plotLines = [||]
+    |}
+
+let inline legend title =
+    {|
+        enabled = Some true
+        title = {| text=title |}
+        align = "left"
+        verticalAlign = "middle"
+        borderColor = "#ddd"
+        borderWidth = 1
+        //labelFormatter = string //fun series -> series.name
+        layout = "vertical"
+        floating = true
+        x = 20
+        y = 30
+        backgroundColor = "#FFF"
+    |}
+    |> pojo
+
 type ChartCfg = {
     seriesLabel: string
-    yAxisName: string
-    yAxisProps: IReactProperty list
-    dataKey: StatsDataPoint -> float
+    legendTitle: string
+    yAxis: obj
+    dataKey: StatsDataPoint -> float*float
   } with
     static member fromScale = function
         | Absolute ->
             {
-                seriesLabel = "Dnevni prirast potrjeno okuženih"
-                yAxisName = "Število novo-okuženih oseb"
-                yAxisProps = [ yAxis.domain (domain.auto, domain.auto) ]
-                dataKey = fun dp -> maxOption dp.PositiveTests dp.TestsAt14.Positive |> Option.map float |> Option.defaultValue nan
+                legendTitle = "Dnevni prirast okuženih"
+                seriesLabel = "Pozitivni testi dnevno"
+                yAxis = yAxisBase ()
+                dataKey = fun dp -> (dp.Date |> jsTime), maxOption dp.PositiveTests dp.TestsAt14.Positive |> Option.map float |> Option.defaultValue nan
             }
         | Percentage ->
             {
-                seriesLabel = "Dnevni prirast potrjeno okuženih v %"
-                yAxisName = "Dnevni prirast okuženih v %"
-                yAxisProps = [ yAxis.domain (domain.auto, domain.auto) ]
+                legendTitle = "Dnevni prirast okuženih"
+                seriesLabel = "Relativna rast v %"
+                yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
                     let daily = maxOption dp.PositiveTests dp.TestsAt14.Positive |> Utils.zeroToNone
                     let total = maxOption dp.TotalPositiveTests dp.TestsAt14.PositiveToDate |> Utils.zeroToNone
-                    (daily, total)
-                    ||> Option.map2 (fun daily total ->
-                        let yesterday = total-daily
-                        if yesterday < 2 then nan
-                        else (float total / float yesterday - 1.0) * 100.0 |> roundDecimals 1
-                    )
-                    |> Option.defaultValue nan
+                    let value =
+                        (daily, total)
+                        ||> Option.map2 (fun daily total ->
+                            let yesterday = total-daily
+                            if yesterday < 2 then nan
+                            else (float total / float yesterday - 1.0) * 100.0 |> roundDecimals 1
+                        )
+                        |> Option.defaultValue nan
+                    dp.Date |> jsTime, value
             }
 
         | DoublingRate ->
             {
-                seriesLabel = "Doba podvojitve števila okuženih v dnevih"
-                yAxisName = "Čas podvojitve števila okuženih v dnevih"
-                yAxisProps = [
-                    yAxis.domain (domain.auto, domain.auto)
-                    yAxis.padding (16,0,16,0)
-                    yAxis.tickCount 10
-                    yAxis.reversed;
-                    yAxis.scale ScaleType.Log;
-                ]
+                legendTitle = "Doba podvojitve števila okuženih"
+                seriesLabel = "V koliko dneh se število okuženih podvoji"
+                yAxis =
+                    {| yAxisBase () with
+                        ``type``="logarithmic"
+                        reversed=true
+                        plotLines=[|
+                            {| value=40.0; label={| text="Povprečje Južne Koreje v preteklih dneh"; align="right"; y= -8; x= -10 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                        |]
+                        max = Some 50
+                    |}
+
                 dataKey = fun dp ->
                     let daily = maxOption dp.PositiveTests dp.TestsAt14.Positive |> Utils.zeroToNone
                     let total = maxOption dp.TotalPositiveTests dp.TestsAt14.PositiveToDate |> Utils.zeroToNone
-                    (daily, total)
-                    ||> Option.map2 (fun daily total ->
-                        let yesterday = total-daily
-                        let v =
-                            if yesterday < 2 then nan
-                            else
-                                let rate = float total / float yesterday
-                                let days = Math.Log 2.0 / Math.Log rate
-                                days |> roundDecimals 1
+                    let value =
+                        (daily, total)
+                        ||> Option.map2 (fun daily total ->
+                            let yesterday = total-daily
+                            let v =
+                                if yesterday < 2 then nan
+                                else
+                                    let rate = float total / float yesterday
+                                    let days = Math.Log 2.0 / Math.Log rate
+                                    days |> roundDecimals 1
 
-                        printfn "val: %f" v
-                        v
-                    )
-                    |> Option.defaultValue nan
+                            printfn "val: %f" v
+                            v
+                        )
+                        |> Option.defaultValue nan
+                    dp.Date |> jsTime, value
             }
 
         // yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0)
 
 
-let renderChart scaleType (data : StatsData) =
+let renderChartOptions scaleType (data : StatsData) =
 
     let chartCfg = ChartCfg.fromScale scaleType
 
-    let renderLineLabel (input: ILabelProperties) =
-        Html.text [
-            prop.x(input.x)
-            prop.y(input.y)
-            prop.fill color.black
-            prop.textAnchor.middle
-            prop.dy(-10)
-            prop.fontSize 10
-            prop.text input.value
-        ]
+    let allSeries =
+        {|
+            //visible = true
+            color = "#be7a2a"
+            name = chartCfg.seriesLabel
+            data = data |> Seq.map chartCfg.dataKey |> Seq.toArray
+            //yAxis = 0 // axis index
+            //showInLegend = true
+            //fillOpacity = 0
+        |}
+        |> pojo
 
-    let renderMetric chartCfg =
-        Recharts.line [
-            line.name chartCfg.seriesLabel
-            line.monotone
-            line.isAnimationActive false
-            line.stroke "#804040"
-            line.label renderLineLabel
-            line.dataKey chartCfg.dataKey
-        ]
+    // return highcharts options
+    {| basicChartOptions Linear with series = [| allSeries |]; yAxis=chartCfg.yAxis; legend=legend chartCfg.legendTitle |}
 
-    let children =
-        seq {
-            yield Recharts.xAxis [ xAxis.dataKey (fun point -> Utils.formatChartAxixDate point.Date); xAxis.padding (0,10,0,0) ]
-
-            yield Recharts.yAxis <| yAxis.label {| value = chartCfg.yAxisName ; angle = -90 ; position = "insideLeft" |} :: chartCfg.yAxisProps
-
-            yield Recharts.tooltip [ ]
-            yield Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
-
-            yield renderMetric chartCfg
-        }
-
-    Recharts.lineChart [
-        lineChart.data data
-        lineChart.children (Seq.toList children)
-    ]
 
 let renderChartContainer scaleType data =
-    Recharts.responsiveContainer [
-        responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 500
-        responsiveContainer.chart (renderChart scaleType data)
+    Html.div [
+        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.className "highcharts-wrapper"
+        prop.children [
+            renderChartOptions scaleType data
+            |> Highcharts.chart
+        ]
     ]
-
 
 let renderScaleSelectors state dispatch =
 
