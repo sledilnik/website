@@ -3,6 +3,7 @@
     responsive
     bordered
     outlined
+    no-border-collapse
     striped
     hover
     sort-by="date"
@@ -47,11 +48,11 @@ export default {
         },
         {
           key: "tests.positive",
-          label: "Potrjeno okuženi"
+          label: "Potrjene okužbe"
         },
         {
           key: "tests.positive.todate",
-          label: "Potrjeno okuženi - Skupno"
+          label: "Potrjene okužbe - Skupno"
         },
         {
           key: "state.in_hospital",

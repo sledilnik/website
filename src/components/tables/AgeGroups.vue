@@ -3,6 +3,7 @@
     responsive
     bordered
     outlined
+    no-border-collapse
     striped
     hover
     sort-by="date"

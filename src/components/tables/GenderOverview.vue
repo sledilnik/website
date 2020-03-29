@@ -2,6 +2,7 @@
   <b-table
     responsive
     bordered
+    no-border-collapse
     outlined
     striped
     hover
