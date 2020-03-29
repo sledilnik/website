@@ -4,20 +4,19 @@
       :id="elementId"
       class="text-center"
       :class="{
-        'text-info': lastDay.diff != 0,
-        'text-secondary': lastDay.diff == 0,
+        'text-info': renderValues.lastDay.diff != 0,
+        'text-secondary': renderValues.lastDay.diff == 0,
       }"
     >
-      <font-awesome-icon icon="arrow-circle-up" v-if="lastDay.diff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="lastDay.diff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="lastDay.diff == 0" />&nbsp;
-      <span>{{ lastDay.value }}</span>
-      <span>
-      [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
-      </span>
-      <b-tooltip :target="elementId" triggers="hover">
-        Prejšnji dan: {{ dayBefore.value }} [{{ dayBefore.diff | prefixDiff }}]
-      </b-tooltip>
+      <font-awesome-icon icon="arrow-circle-up" v-if="renderValues.lastDay.diff > 0" />
+      <font-awesome-icon icon="arrow-circle-down" v-if="renderValues.lastDay.diff < 0" />
+      <font-awesome-icon icon="arrow-circle-right" v-if="renderValues.lastDay.diff == 0" />&nbsp;
+      <span>{{ renderValues.lastDay.value }} </span>
+      <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
+      <b-tooltip
+        :target="elementId"
+        triggers="hover"
+      >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
     </b-card-text>
     <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
   </b-card>
@@ -25,7 +24,7 @@
 <script>
 import Vue from "vue";
 import moment from "moment";
-import StatsData from "StatsData";
+import { mapGetters } from "vuex";
 
 Vue.filter("prefixDiff", function(value) {
   if (value > 0) {
@@ -42,71 +41,77 @@ export default {
     goodDirection: {
       type: String,
       default: "down"
-    },
+    }
   },
   data() {
     return {
-      show: false,
-      dayBefore: {},
-      lastDay: {},
-      date: null,
-      value: null,
-      percentDiff: null,
-      diff: null,
-      diffdiff: null,
+      show: false
     };
   },
   computed: {
+    ...mapGetters(["getLastValue", "getValueOn"]),
+    lastDay() {
+      return this.getLastValue(this.field);
+    },
+    dayBefore() {
+      let dayBefore = moment(this.lastDay.date)
+        .subtract(1, "days")
+        .toDate();
+      return this.getValueOn(this.field, dayBefore);
+    },
+    day2Before() {
+      let day2Before = moment(this.lastDay.date)
+        .subtract(2, "days")
+        .toDate();
+      return this.getValueOn(this.field, day2Before);
+    },
+    renderValues() {
+      let diff = this.lastDay.value - this.dayBefore.value;
+      let dayBeforeDiff = this.dayBefore.value - this.day2Before.value;
+      return {
+        diffdiff: diff - dayBeforeDiff,
+        lastDay: {
+          ...this.lastDay,
+          diff,
+          percentDiff: Math.round((diff / this.dayBefore.value) * 1000) / 10
+        },
+        dayBefore: {
+          ...this.dayBefore,
+          diff: dayBeforeDiff,
+          percentDiff:
+            Math.round((dayBeforeDiff / this.day2Before.value) * 1000) / 10
+        }
+      };
+    },
     elementId() {
-      return this.field
+      return this.field;
     },
     textClass() {
-      if (this.goodDirection == 'up') {
+      if (this.goodDirection == "up") {
         if (this.diffdiff < 0) {
-          return 'text-danger'
+          return "text-danger";
         }
         if (this.diffdiff > 0) {
-          return 'text-success'
+          return "text-success";
         }
-        return 'text-info'
+        return "text-info";
       } else {
         if (this.diffdiff > 0) {
-          return 'text-danger'
+          return "text-danger";
         }
         if (this.diffdiff < 0) {
-          return 'text-success'
+          return "text-success";
         }
-        return 'text-info'
+        return "text-info";
       }
     },
     formattedDate() {
-      let dateFormatted = moment(this.lastDay.date).format('DD. MM. YYYY');
+      let dateFormatted = moment(this.lastDay.date).format("DD. MM. YYYY");
       return `Osveženo ${dateFormatted}`;
     }
   },
-  async mounted() {
-    this.lastDay = await StatsData.getLastValue(this.field)
-    
-
-    let dayBefore = moment(this.lastDay.date)
-      .subtract(1, "days")
-      .toDate()
-    let day2Before = moment(this.lastDay.date)
-      .subtract(2, "days")
-      .toDate()
-    this.dayBefore = await StatsData.getValueOn(this.field, dayBefore)
-    this.day2Before = await StatsData.getValueOn(this.field, day2Before)
-
-    
-    
-    this.lastDay.diff = this.lastDay.value - this.dayBefore.value
-    this.lastDay.percentDiff = Math.round((this.lastDay.diff / this.dayBefore.value) * 1000) / 10
-    this.dayBefore.diff = this.dayBefore.value - this.day2Before.value
-    this.dayBefore.percentDiff = Math.round((this.dayBefore.diff / this.day2Before.value) * 1000) / 10
-
-    this.diffdiff = this.lastDay.diff - this.dayBefore.diff
-
-    this.show = true
+  mounted() {
+    this.show = true;
   }
 };
 </script>

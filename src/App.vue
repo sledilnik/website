@@ -13,8 +13,8 @@ export default {
   components: {
     Navbar
   },
-  created(){
-    this.$store.dispatch('fetchData')
+  created() {
+    this.$store.dispatch("fetchData");
   }
 };
 </script>

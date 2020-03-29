@@ -30,8 +30,6 @@
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
 
-import StatsData from "StatsData";
-
 export default {
   name: "StatsPage",
   components: {
@@ -43,52 +41,10 @@ export default {
   },
   data() {
     return {
-      loaded: false,
-      csvdata: null
+      loaded: false
     };
   },
-  computed: {
-    positiveTestToDate() {
-      return this.getLastValue(this.csvdata, "tests.positive.todate");
-    },
-    inHospitalToDate() {
-      return this.getLastValue(this.csvdata, "state.in_hospital");
-    },
-    deceasedToDate() {
-      return this.getLastValue(this.csvdata, "state.deceased.todate");
-    },
-    recoveredToDate() {
-      return this.getLastValue(this.csvdata, "state.out_of_hospital.todate");
-    }
-  },
-  methods: {
-    getLastValue(csvdata, field) {
-      if (csvdata && csvdata.length > 0) {
-        let i = 0;
-        // find last non null value
-        for (i = csvdata.length - 1; i > 0; i--) {
-          let row = csvdata[i];
-          if (row[field]) {
-            break;
-          }
-        }
-
-        let lastRow = csvdata[i];
-        let value = lastRow[field] || "N/A";
-        return {
-          date: new Date(Date.parse(lastRow["date"])),
-          value: value
-        };
-      } else {
-        return {
-          date: new Date(),
-          value: "N/A"
-        };
-      }
-    }
-  },
   async mounted() {
-    this.csvdata = await StatsData.data();
     this.loaded = true;
     this.$nextTick(() => {
       Visualizations("visualizations");
@@ -364,5 +320,4 @@ export default {
         h4
           margin-top: 1.4em
           font-size: 24px
-
 </style>
