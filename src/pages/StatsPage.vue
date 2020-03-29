@@ -29,8 +29,7 @@
 <script>
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
-
-import StatsData from "StatsData";
+import { mapGetters } from "vuex";
 
 export default {
   name: "StatsPage",
@@ -44,10 +43,10 @@ export default {
   data() {
     return {
       loaded: false,
-      csvdata: null
     };
   },
   computed: {
+    ...mapGetters(['csvdata', 'getLastValue']),
     positiveTestToDate() {
       return this.getLastValue(this.csvdata, "tests.positive.todate");
     },
@@ -61,34 +60,7 @@ export default {
       return this.getLastValue(this.csvdata, "state.out_of_hospital.todate");
     }
   },
-  methods: {
-    getLastValue(csvdata, field) {
-      if (csvdata && csvdata.length > 0) {
-        let i = 0;
-        // find last non null value
-        for (i = csvdata.length - 1; i > 0; i--) {
-          let row = csvdata[i];
-          if (row[field]) {
-            break;
-          }
-        }
-
-        let lastRow = csvdata[i];
-        let value = lastRow[field] || "N/A";
-        return {
-          date: new Date(Date.parse(lastRow["date"])),
-          value: value
-        };
-      } else {
-        return {
-          date: new Date(),
-          value: "N/A"
-        };
-      }
-    }
-  },
   async mounted() {
-    this.csvdata = await StatsData.data();
     this.loaded = true;
     this.$nextTick(() => {
       Visualizations("visualizations");
@@ -350,5 +322,4 @@ export default {
         h4
           margin-top: 1.4em
           font-size: 24px
-
 </style>
