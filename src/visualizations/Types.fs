@@ -61,8 +61,17 @@ type Data =
     { StatsData : StatsData
       RegionsData : RegionsData }
 
+type Visualization =
+    | MetricsComparison
+    | Patients
+    | Spread
+    | Regions
+    | Municipalities
+    | AgeGroups
+
 type State =
-    { Data : RemoteData<Data, string> }
+    { Data : RemoteData<Data, string>
+      RenderVisualization : Visualization option }
 
 type Msg =
     | DataLoaded of RemoteData<Data, string>
