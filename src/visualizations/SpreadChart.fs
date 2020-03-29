@@ -20,25 +20,34 @@ type Scale =
         | Percentage -> "Relativen dnevni prirast"
         | DoublingRate -> "Eksponentna rast v dnevih" // "Število dni do podvojitve"
 
+type Page =
+    | Chart of Scale
+    | Explainer
+  with
+    static member all = (Scale.all |> List.map Chart) @ [ Explainer ]
+    static member getName = function
+        | Chart scale -> Scale.getName scale
+        | Explainer -> "Kaj pomeni eksponenta rast"
+
 type State = {
-    scale: Scale
+    page: Page
     data: StatsData
 }
 
 type Msg =
-    | ScaleTypeChanged of Scale
+    | ChangePage of Page
 
 let init data : State * Cmd<Msg> =
     let state = {
-        scale = Absolute
+        page = Chart Absolute
         data = data
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ScaleTypeChanged scaleType ->
-        { state with scale = scaleType }, Cmd.none
+    | ChangePage page ->
+        { state with page = page }, Cmd.none
 
 let maxOption a b =
     match a, b with
@@ -175,6 +184,47 @@ let renderChartOptions scaleType (data : StatsData) =
     // return highcharts options
     {| basicChartOptions Linear with series = [| allSeries |]; yAxis=chartCfg.yAxis; legend=legend chartCfg.legendTitle |}
 
+let renderExplainer (data: StatsData) =
+    let curPositive, curHospitalzed, doublingRate =
+        data
+        |> List.rev
+        |> Seq.choose (fun dp ->
+            match dp.TotalPositiveTests, dp.Hospitalized with
+            | Some p, Some h -> Some (p, h)
+            | _, _ -> None)
+        |> Seq.take 1
+        |> Seq.toList |> List.head
+        |> fun (p, h) -> (p,h,7.0)
+
+    let box (title: string) times positive hospitalized =
+        Html.div [
+            prop.className "box"
+            prop.children [
+                Html.h2 title
+                Html.span (if times<2 then "" else sprintf "%d-krat toliko" times)
+                Html.div [ Html.h4 (string positive); Html.p [ Html.text "potrjeno"; Html.br []; Html.text "okuženih"  ]]
+                Html.div [ Html.h4 (string hospitalized); Html.p "hospitaliziranih" ]
+            ]
+        ]
+
+    Html.div [
+        prop.className "exponential-explainer"
+        prop.style [ style.height 450 ]
+        prop.children [
+            yield Html.h1 "Ob nezmanjšani eksponentni rasti s podavajanjem na 7 dni lahko pričakujemo"
+            yield Html.div [
+                prop.className "container"
+                prop.children [
+                    yield!
+                        ["Danes",0; "Čez en teden",1; "Čez dva tedna",2; "Čez tri tedne",3; "Čez štiri tedne",4;]
+                        |> List.map (fun (title, doublings) ->
+                            box title (1<<<doublings) (curPositive <<< doublings) (curHospitalzed <<< doublings)
+                        )
+                ]
+            ]
+        ]
+    ]
+
 
 let renderChartContainer scaleType data =
     Html.div [
@@ -188,29 +238,31 @@ let renderChartContainer scaleType data =
 
 let renderScaleSelectors state dispatch =
 
-    let renderScaleSelector (scale: Scale) dispatch =
-        let isActive = state.scale = scale
+    let renderScaleSelector (page: Page) dispatch =
+        let isActive = state.page = page
         let style =
             if isActive
             then [ style.backgroundColor "#808080" ]
             else [ ]
         Html.div [
-            prop.onClick (fun _ -> ScaleTypeChanged scale |> dispatch)
+            prop.onClick (fun _ -> ChangePage page |> dispatch)
             prop.className [ true, "btn  btn-sm metric-selector"; isActive, "metric-selector--selected" ]
             prop.style style
-            prop.text (scale |> Scale.getName) ]
+            prop.text (page |> Page.getName) ]
 
     Html.div [
         prop.className "metrics-selectors"
         prop.children [
-            for scale in Scale.all do
-                yield renderScaleSelector scale dispatch
+            for page in Page.all do
+                yield renderScaleSelector page dispatch
         ]
     ]
 
 let render (state: State) dispatch =
     Html.div [
-        renderChartContainer state.scale state.data
+        match state.page with
+        | Chart scale -> renderChartContainer scale state.data
+        | Explainer -> renderExplainer state.data
         renderScaleSelectors state dispatch
     ]
 

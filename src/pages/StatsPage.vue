@@ -307,4 +307,44 @@ export default {
     tr
       &:hover
         background-color: $gray-100
+
+  .exponential-explainer
+    border: 1px solid #ddd
+    background: #eee
+    padding: 2em
+    h1
+      margin-top: 1em
+      font-size: 24px
+      text-align: center
+      padding-bottom: 1.2em
+
+    div.container
+      display: flex
+      justify-content: space-between
+      flex-flow: row wrap
+
+      div.box
+        flex: none
+        flex-basis: 0
+        padding: 2.2em 2.2em 1.4em 2em
+        border: 1px solid #ddd
+        background: #fff
+        text-align: center
+        h2
+          display: block
+          font-size: 20px
+          height: 3em
+          border-bottom: 1px solid #ddd
+        span
+          display: block
+          height: 1em
+          margin-top: -1em
+        p
+          margin-top: -1em
+          margin-bottom: 1em
+        h4
+          margin-top: 1.4em
+          font-size: 24px
+
+
 </style>
