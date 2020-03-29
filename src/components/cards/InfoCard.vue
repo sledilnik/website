@@ -135,13 +135,13 @@ export default {
   background: #fff;
   box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
     0 11px 12px -12px rgba(0, 0, 0, 0.22);
-  transition: 0.35s ease-in-out;
+  // transition: 0.35s ease-in-out;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 22px 38px -10px rgba(0, 0, 0, 0.3),
-      0 18px 12px -10px rgba(0, 0, 0, 0.22);
-  }
+  // &:hover {
+  //   transform: translateY(-2px);
+  //   box-shadow: 0 22px 38px -10px rgba(0, 0, 0, 0.3),
+  //     0 18px 12px -10px rgba(0, 0, 0, 0.22);
+  // }
 }
 
 .card-title {
