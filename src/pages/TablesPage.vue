@@ -28,7 +28,6 @@
         </div>
       </b-col>
     </b-row>
-    {{ thingy }}
   </b-container>
 </template>
 
@@ -48,10 +47,6 @@ export default {
   },
   computed: {
     ...mapGetters(["csvdata"]),
-    thingy: function(){
-      console.log(this.csvdata);
-      return this.csvdata
-    }
   },
 };
 </script>
