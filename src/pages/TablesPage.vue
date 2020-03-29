@@ -1,6 +1,6 @@
 <template>
-  <b-container fluid class="container-fluid-full">
-    <b-row>
+  <b-container fluid>
+    <b-row class="row-full">
       <b-col cols="12">
         <b-tabs justified class="tables-tabs" pills card @activate-tab="goToData">
           <b-tab title="Povzetek stanja" active>
@@ -64,14 +64,14 @@ export default {
 @import "node_modules/bootstrap/scss/functions";
 @import "node_modules/bootstrap/scss/variables";
 
-.container-fluid-full {
-  padding-left: 0;
-  padding-right: 0;
+.row-full {
+  margin-left: -30px;
+  margin-right: -30px;
 }
 
 .footnote {
   font-size: $font-size-sm;
-  padding-right: 1.25rem;
+  // padding-right: 1.25rem;
 }
 
 .tables-tabs {
