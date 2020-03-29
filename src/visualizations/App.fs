@@ -28,7 +28,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 [ Html.section
                     [ prop.className "metrics-comparison-chart"
                       prop.children
-                        [ Html.h2 "Kazalniki COVID-19 v Sloveniji"
+                        [ Html.h2 "Širjenje COVID-19 v Sloveniji"
                           MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } ] ]
                   Html.section
                     [ prop.className "patients-chart"
