@@ -1,5 +1,5 @@
 <template>
-  <b-container fluid>
+  <b-container fluid class="tables-page">
     <b-row>
       <b-col class="px-0" cols="12">
         <b-tabs justified class="tables-tabs" pills card>
@@ -46,12 +46,11 @@ export default {
     AgeGroupsFemalesTable
   },
   computed: {
-    ...mapGetters(["csvdata"]),
-  },
+    ...mapGetters(["csvdata"])
+  }
 };
 </script>
 <style lang="scss">
-
 .footnote {
   font-size: $font-size-sm;
   // padding-right: 1.25rem;
@@ -80,5 +79,13 @@ export default {
       border-bottom: 10px solid $yellow;
     }
   }
+}
+
+.table-b-table-default {
+  background: #dee2e6 !important;
+}
+
+.tables-page {
+  margin-top: -77px;
 }
 </style>
