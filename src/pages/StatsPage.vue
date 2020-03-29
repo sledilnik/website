@@ -148,10 +148,9 @@ export default {
       .municipality
         width: calc(25% - #{$gap * 2})
         margin: $gap/2 $gap
-        border-bottom: solid 1px $gray-300
 
         @include media-breakpoint-down(md)
-          width: calc(33% - #{$gap * 2})
+          width: calc(50% - #{$gap * 2})
 
         @include media-breakpoint-down(sm)
           width: 100%
@@ -160,7 +159,7 @@ export default {
     .name
       color: $gray-700
       padding-right: $gap/2
-      font-size: $font-size-lg
+      font-size: 1.1rem
       text-overflow: ellipsis
       white-space: nowrap
       overflow: hidden
@@ -170,6 +169,7 @@ export default {
       display: flex
       align-items: flex-start
       justify-content: flex-end
+      border-bottom: solid 1px $gray-300
 
     .total-and-date
       padding-left: $gap/4
@@ -241,6 +241,20 @@ export default {
         font-size: $font-size
         border-color: $button-color
         background-color: $button-color
+
+    .doubling-time
+      margin-top: 5px
+      text-align: right
+
+      .label
+        color: $gray-500
+
+      .value
+        font-weight: bold
+        color: white
+        padding: 1px 5px 2px 5px
+        background-color: $button-color
+        border-radius: 2px
 
   .data-table
     margin-top: $gap

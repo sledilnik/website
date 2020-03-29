@@ -50,6 +50,11 @@ let monthNameOfdate (date : System.DateTime) =
     | 12 -> "december"
     | _ -> failwith "Invalid month"
 
+let daysMestnik days =
+    match days % 100 with
+    | 1 -> "dnevu"
+    | _ -> "dneh"
+
 module Dictionaries =
 
     let regions =
@@ -264,6 +269,7 @@ module Dictionaries =
           ("trzin", "Trzin", 3923)
           ("tržič", "Tržič", 14884)
           ("turnišče", "Turnišče", 3170)
+          ("tujina", "Tujci", 0)
           ("velenje", "Velenje", 33506)
           ("velika_polana", "Velika Polana", 1412)
           ("velike_lašče", "Velike Lašče", 4383)

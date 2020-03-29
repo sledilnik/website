@@ -2,6 +2,7 @@
   <b-table
     responsive
     bordered
+    no-border-collapses
     outlined
     striped
     hover
@@ -35,44 +36,44 @@ export default {
           variant: 'grey'
         },
         {
-          key: 'age.0-4.todate',
+          key: 'age.male.todate',
+          label: 'Skupno'
+        },
+        {
+          key: 'age.male.0-4.todate',
           label: '0 - 4 leta'
         },
         {
-          key: 'age.5-14.todate',
+          key: 'age.male.5-14.todate',
           label: '5 - 14 let'
         },
         {
-          key: 'age.15-24.todate',
+          key: 'age.male.15-24.todate',
           label: '15 - 24 let'
         },
         {
-          key: 'age.25-34.todate',
+          key: 'age.male.25-34.todate',
           label: '25 - 34 let'
         },
         {
-          key: 'age.35-44.todate',
+          key: 'age.male.35-44.todate',
           label: '35 - 44 let'
         },
         {
-          key: 'age.45-54.todate',
+          key: 'age.male.45-54.todate',
           label: '45 - 54 let'
         },
         {
-          key: 'age.55-64.todate',
+          key: 'age.male.55-64.todate',
           label: '55 - 64 let'
         },
         {
-          key: 'age.65-74.todate',
+          key: 'age.male.65-74.todate',
           label: '65 - 74 let'
         },
         {
-          key: 'age.75-84.todate',
-          label: '75 do 84 let'
-        },
-        {
-          key: 'age.85+.todate',
-          label: '85+ let'
+          key: 'age.male.75-84.todate',
+          label: '75 - 84 let'
         },
       ]
     };
@@ -80,5 +81,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.b-table-sticky-column {
+  width: 120px;
+}
 </style>

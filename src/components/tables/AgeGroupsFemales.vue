@@ -18,9 +18,6 @@
     <template v-slot:cell(date)="data">
       <div class="text-nowrap">{{ data.item.dateLocal }}</div>
     </template>
-    <template v-slot:empty="scope">
-      <h4>{{ scope.emptyText }} ni podatka</h4>
-    </template>
   </b-table>
 </template>
 
@@ -39,45 +36,45 @@ export default {
           variant: 'grey'
         },
         {
-          key: "tests.performed",
-          label: "Opravljenih testov"
+          key: 'age.female.todate',
+          label: 'Skupno'
         },
         {
-          key: "tests.performed.todate",
-          label: "Opravljenih testov - Skupno"
+          key: 'age.female.0-4.todate',
+          label: '0 - 4 leta'
         },
         {
-          key: "tests.positive",
-          label: "Potrjene okužbe"
+          key: 'age.female.5-14.todate',
+          label: '5 - 14 let'
         },
         {
-          key: "tests.positive.todate",
-          label: "Potrjene okužbe - Skupno"
+          key: 'age.female.15-24.todate',
+          label: '15 - 24 let'
         },
         {
-          key: "state.in_hospital",
-          label: "Hospitalizirani"
+          key: 'age.female.25-34.todate',
+          label: '25 - 34 let'
         },
         {
-          key: "state.icu",
-          label: "V intenzivnih negi"
+          key: 'age.female.35-44.todate',
+          label: '35 - 44 let'
         },
         {
-          key: "state.critical",
-          label: "V kritičnem stanju"
+          key: 'age.female.45-54.todate',
+          label: '45 - 54 let'
         },
         {
-          key: "state.deceased.todate",
-          label: "Umrli"
+          key: 'age.female.55-64.todate',
+          label: '55 - 64 let'
         },
         {
-          key: "state.out_of_hospital.todate",
-          label: "Odpuščeni iz bolnišnice"
+          key: 'age.female.65-74.todate',
+          label: '65 - 74 let'
         },
         {
-          key: "state.recovered.todate",
-          label: "Ozdravljeni"
-        }
+          key: 'age.female.75-84.todate',
+          label: '75 - 84 let'
+        },
       ]
     };
   }

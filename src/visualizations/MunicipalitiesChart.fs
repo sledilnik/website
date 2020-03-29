@@ -9,6 +9,11 @@ open Feliz.ElmishComponents
 
 open Types
 
+let barMaxHeight = 50
+let showMaxBars = 20
+let collapsedMnicipalityCount = 24
+let doublingTimeInterval = 7
+
 type State =
     { Data : RegionsData
       Regions : Region list
@@ -41,13 +46,12 @@ let excludeMunicipalities = Set.ofList ["kraj"]
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1, v2, dt = float v1.PositiveTests, float v2.PositiveTests, float (v2.Day - v1.Day)
     if v1 = v2 then None
-    else log10 2.0 / log10 ((v2 / v1) ** (1.0 / dt)) |> Some
+    else
+        let value = log10 2.0 / log10 ((v2 / v1) ** (1.0 / dt))
+        if value < 0.0 then None
+        else Some value
 
 let renderMunicipalities (state : State) dispatch =
-    let barMaxHeight = 50
-    let showMaxBars = 10
-    let collapsedMnicipalityCount = 24
-    let doublingTimeInterval = 4
 
     let pivotedData = seq {
         for dataPoint in state.Data do
@@ -110,9 +114,27 @@ let renderMunicipalities (state : State) dispatch =
                 else
                     calculateDoublingTime reversedDoublingTimeValues.[length - 1] reversedDoublingTimeValues.[0]
 
-        printfn "%s %A" key.Municipality doublingTime
+        let renderedDoublingTime =
+            match doublingTime with
+            | None -> Html.none
+            | Some value ->
+                printfn "%s - %f" key.Municipality value
+                let displayValue = int (round value)
+                Html.div [
+                    prop.className "doubling-time"
+                    prop.children [
+                        Html.span [
+                            prop.className "label"
+                            prop.text "Podvojitev v "
+                        ]
+                        Html.span [
+                            prop.className "value"
+                            prop.text (sprintf "%d %s" displayValue (Utils.daysMestnik displayValue))
+                        ]
+                    ]
+                ]
 
-        let bars =
+        let renderedBars =
             match maxValue with
             | None -> Seq.empty
             | Some maxValue ->
@@ -167,7 +189,7 @@ let renderMunicipalities (state : State) dispatch =
                     prop.children [
                         Html.div [
                             prop.className "bars"
-                            prop.children bars
+                            prop.children renderedBars
                         ]
                         Html.div [
                             prop.className "total-and-date"
@@ -182,6 +204,7 @@ let renderMunicipalities (state : State) dispatch =
                         ]
                     ]
                 ]
+                renderedDoublingTime
             ]
         ]
     )
