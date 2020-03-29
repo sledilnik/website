@@ -56,11 +56,18 @@ module Series =
 
 /// return (seriesName * color) based on facility name
 let facilityLine = function
-    | "sbce"  -> "#70a471", "SB Celje"
-    | "ukclj" -> "#10829a", "UKC Ljubljana"
-    | "ukcmb" -> "#003f5c", "UKC Maribor"
-    | "ukg"   -> "#7B7226", "UK Golnik"
-    | other   -> "#000000", other
+    | "sbce"  -> Some "#70a471", "SB Celje"
+    | "sbj"
+    | "sbje"  -> None          , "SB Jesenice"
+    | "sbi"
+    | "sbiz"  -> None          , "SB Izola"
+    | "sbms"  -> None          , "SB Murska Sobota"
+    | "sbng"  -> None          , "SB Nova Gorica"
+    | "sbnm"  -> None          , "SB Novo mesto"
+    | "ukclj" -> Some "#10829a", "UKC Ljubljana"
+    | "ukcmb" -> Some "#003f5c", "UKC Maribor"
+    | "ukg"   -> Some "#7B7226", "UK Golnik"
+    | other   -> None          , other
 
 type State = {
     scaleType : ScaleType
@@ -87,16 +94,17 @@ type State = {
                 | [||] -> [Totals]
                 | [| _ |] -> [Totals]
                 | data ->
+                    // TODO: in future we'll need more
                     seq { // take few samples
-                        data.[data.Length-1]
-                        data.[data.Length-2]
                         data.[data.Length/2]
+                        data.[data.Length-2]
+                        data.[data.Length-1]
                     }
-                    |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map fst) // hospital name
-                    |> Seq.fold (fun hospitals hospital -> hospitals |> Set.add hospital) Set.empty // all
-                    |> Set.toList
-                    |> List.sort
-                    |> List.map Facility
+                    |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map (fun (facility, stats) -> facility,stats.inHospital.toDate)) // hospital name
+                    |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
+                    |> Map.toList
+                    |> List.sortBy (fun (f,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
+                    |> List.map (fst >> Facility)
             { state with
                 breakdown=breakdown
                 allSegmentations = segmentations

@@ -173,7 +173,7 @@ let renderChartOptions scaleType (data : StatsData) =
     let allSeries =
         {|
             //visible = true
-            color = "#be7a2a"
+            color = "#bda506"
             name = chartCfg.seriesLabel
             data =
                 data
