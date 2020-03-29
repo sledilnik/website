@@ -1,14 +1,24 @@
 <template>
   <b-card :title="title" class="card-info col-12 col-md-3 col-lg-2 mx-3 mb-3 px-0" v-if="show">
-    <b-card-text :id="elementId" class="info-card-value">{{ lastDay.value }}</b-card-text>
     <b-card-text
-      :class="textClass"
-    >{{ lastDay.diff | prefixDiff }} ({{ lastDay.percentDiff | prefixDiff }}%)</b-card-text>
-    <b-card-text class="data-time">{{ formattedDate }}</b-card-text>
-    <b-tooltip
-      :target="elementId"
-      triggers="hover"
-    >Prejšnji dan: {{ dayBefore.value }} ({{ dayBefore.diff | prefixDiff }})</b-tooltip>
+      :id="elementId"
+      class="text-center"
+      :class="{
+        'text-info': renderValues.lastDay.diff != 0,
+        'text-secondary': renderValues.lastDay.diff == 0,
+      }"
+    >
+      <font-awesome-icon icon="arrow-circle-up" v-if="renderValues.lastDay.diff > 0" />
+      <font-awesome-icon icon="arrow-circle-down" v-if="renderValues.lastDay.diff < 0" />
+      <font-awesome-icon icon="arrow-circle-right" v-if="renderValues.lastDay.diff == 0" />&nbsp;
+      <span>{{ renderValues.lastDay.value }} </span>
+      <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
+      <b-tooltip
+        :target="elementId"
+        triggers="hover"
+      >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
+    </b-card-text>
+    <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
   </b-card>
 </template>
 <script>
@@ -77,20 +87,19 @@ export default {
       return this.field;
     },
     textClass() {
-      let diff = this.lastDay.diff;
       if (this.goodDirection == "up") {
-        if (diff < 0) {
+        if (this.diffdiff < 0) {
           return "text-danger";
         }
-        if (diff > 0) {
+        if (this.diffdiff > 0) {
           return "text-success";
         }
         return "text-info";
       } else {
-        if (diff > 0) {
+        if (this.diffdiff > 0) {
           return "text-danger";
         }
-        if (diff < 0) {
+        if (this.diffdiff < 0) {
           return "text-success";
         }
         return "text-info";
@@ -109,36 +118,20 @@ export default {
 
 <style scoped lang="scss">
 .card.card-info {
-  border-radius: 0px;
-  border: none;
-  color: #000000;
+  color: $text-muted;
 
   .card-title {
-    font-size: 14px;
-    font-weight: 600;
-
-    // text-align: center;
+    text-align: center;
     font-size: $font-size-base;
     // text-transform: uppercase;
   }
-
-  .card-text {
-    margin-bottom: 0.5rem;
-  }
-
   .card-body {
     font-size: $font-size-base * 0.9;
-    padding: 1.9rem;
-
-    .info-card-value {
-      font-size: 32px;
-      font-weight: 600;
-    }
+    padding: 0.5rem;
   }
 
   .data-time {
-    color: $text-muted;
-    font-size: 0.75rem;
+    font-size: $font-size-sm * 0.7;
   }
 }
 </style>
