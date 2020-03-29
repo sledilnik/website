@@ -72,20 +72,20 @@ export default {
     position: relative
     padding: 70px 30px 30px
 
-  h2
-    position: absolute
-    z-index: 10
-    left: 32px
-    top: 0
-    transform: translateY(-50%)
-    margin-bottom: $gap / 2
-    font-family: 'IBM Plex Sans', sans-serif
-    font-size: 18px
-    font-weight: bold
-    padding: 12px 16px
-    border: 2px solid $yellow
-    background: #fff
-    box-shadow: 0 16px 22px -12px rgba(0,0,0,0.22), 0 13px 12px -10px rgba(0,0,0,0.16)
+    > h2
+      position: absolute
+      z-index: 10
+      left: 32px
+      top: 0
+      transform: translateY(-50%)
+      margin-bottom: $gap / 2
+      font-family: 'IBM Plex Sans', sans-serif
+      font-size: 18px
+      font-weight: bold
+      padding: 12px 16px
+      border: 2px solid $yellow
+      background: #fff
+      box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
   .table
     td, th
