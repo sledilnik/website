@@ -1,14 +1,13 @@
 <template>
   <b-container v-if="loaded" class="mt-3">
-    <b-row>
-      <div class="d-flex flex-wrap w-100 justify-content-center">
-        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
-        <Info-card title="Hospitalizirani" field="state.in_hospital" />
-        <Info-card title="Intenzivna nega" field="state.icu" />
-        <Info-card title="Umrli" field="state.deceased.todate" />
-        <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
-      </div>
-    </b-row>
+    <div class="cards-wrapper">
+      <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
+      <Info-card title="Hospitalizirani" field="state.in_hospital" />
+      <Info-card title="Intenzivna nega" field="state.icu" />
+      <Info-card title="Umrli" field="state.deceased.todate" />
+      <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
+    </div>
+
     <b-row cols="12">
       <b-col>
         <div id="visualizations"></div>
@@ -67,9 +66,26 @@ export default {
   $button-color: $gray-600
   $inactive-button-color: $gray-300
 
+  .visualization section
+    background: #fff
+    margin-bottom: 88px
+    position: relative
+    padding: 70px 30px 30px
+
   h2
+    position: absolute
+    z-index: 10
+    left: 32px
+    top: 0
+    transform: translateY(-50%)
     margin-bottom: $gap / 2
-    text-align: center
+    font-family: 'IBM Plex Sans', sans-serif
+    font-size: 18px
+    font-weight: bold
+    padding: 12px 16px
+    border: 2px solid $yellow
+    background: #fff
+    box-shadow: 0 16px 22px -12px rgba(0,0,0,0.22), 0 13px 12px -10px rgba(0,0,0,0.16)
 
   .table
     td, th
@@ -320,4 +336,9 @@ export default {
         h4
           margin-top: 1.4em
           font-size: 24px
+
+.cards-wrapper
+  display: flex
+  flex-wrap: wrap
+  margin-bottom: 88px
 </style>

@@ -1,25 +1,24 @@
 <template>
-  <b-card :title="title" class="card-info col-12 col-md-3 col-lg-2 mx-3 mb-3 px-0" v-if="show">
-    <b-card-text
-      :id="elementId"
-      class="text-center"
-      :class="{
+  <div :title="title" class="hp-card-holder" v-if="show">
+    <div class="hp-card">
+      <div
+        :id="elementId"
+        class="text-center"
+        :class="{
         'text-info': renderValues.lastDay.diff != 0,
         'text-secondary': renderValues.lastDay.diff == 0,
       }"
-    >
-      <font-awesome-icon icon="arrow-circle-up" v-if="renderValues.lastDay.diff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="renderValues.lastDay.diff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="renderValues.lastDay.diff == 0" />&nbsp;
-      <span>{{ renderValues.lastDay.value }} </span>
-      <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
-      <b-tooltip
-        :target="elementId"
-        triggers="hover"
-      >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
-    </b-card-text>
-    <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
-  </b-card>
+      >
+        <span>{{ renderValues.lastDay.value }}</span>
+        <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
+        <b-tooltip
+          :target="elementId"
+          triggers="hover"
+        >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
+      </div>
+    </div>
+    <div class="data-time text-center">{{ formattedDate }}</div>
+  </div>
 </template>
 <script>
 import Vue from "vue";
@@ -117,7 +116,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card.card-info {
+.hp-card-holder {
+  padding: 0 15px 30px;
+  flex: 0 0 20%;
+}
+
+.card-info {
   color: $text-muted;
 
   .card-title {
