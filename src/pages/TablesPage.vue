@@ -1,8 +1,8 @@
 <template>
   <b-container fluid>
-    <b-row class="row-full">
-      <b-col cols="12">
-        <b-tabs justified class="tables-tabs" pills card @activate-tab="goToData">
+    <b-row>
+      <b-col class="px-0" cols="12">
+        <b-tabs justified class="tables-tabs" pills card>
           <b-tab title="Povzetek stanja" active>
             <tests-infections-table :csvdata="csvdata"></tests-infections-table>
           </b-tab>
@@ -21,10 +21,14 @@
     <b-row>
       <b-col cols="12">
         <div class="footnote float-right">
-        Viri podatkov: <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>, <a href="https://covid19.rthand.com/api/stats">REST</a>, <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
+          Viri podatkov:
+          <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
+          <a href="https://covid19.rthand.com/api/stats">REST</a>,
+          <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
         </div>
       </b-col>
     </b-row>
+    {{ thingy }}
   </b-container>
 </template>
 
@@ -43,31 +47,15 @@ export default {
     AgeGroupsTable
   },
   computed: {
-    ...mapGetters(["csvdata"])
-  },
-  methods: {
-    goToData(newTabIndex, prevTabIndex, bvEvent) {
-      if (
-        document
-          .querySelector(`.tables-tabs li:nth-child(${newTabIndex + 1})`)
-          .classList.contains("data-redirect-link")
-      ) {
-        bvEvent.preventDefault();
-        window.location = "/data";
-      }
+    ...mapGetters(["csvdata"]),
+    thingy: function(){
+      console.log(this.csvdata);
+      return this.csvdata
     }
-  }
+  },
 };
 </script>
 <style lang="scss">
-
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
-
-.row-full {
-  margin-left: -30px;
-  margin-right: -30px;
-}
 
 .footnote {
   font-size: $font-size-sm;

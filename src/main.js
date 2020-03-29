@@ -8,8 +8,6 @@ import { faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRig
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import 'style/main.scss'
-// import 'bootstrap/dist/css/bootstrap.css'
-// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
