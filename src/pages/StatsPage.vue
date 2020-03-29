@@ -203,8 +203,7 @@ export default {
     .name
       color: $gray-700
       padding-right: $gap/2
-      font-size: 1rem
-      font-weight: bold
+      font-size: 1.1rem
       text-overflow: ellipsis
       white-space: nowrap
       overflow: hidden
