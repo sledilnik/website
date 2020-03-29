@@ -2,24 +2,18 @@
   <b-card :title="title" class="card-info" v-if="show">
     <b-card-text
       :id="elementId"
-      class="text-center"
-      :class="{
-        'text-info': lastDay.diff != 0,
-        'text-secondary': lastDay.diff == 0,
-      }"
+      class="info-card-value"
     >
-      <font-awesome-icon icon="arrow-circle-up" v-if="lastDay.diff > 0" />
-      <font-awesome-icon icon="arrow-circle-down" v-if="lastDay.diff < 0" />
-      <font-awesome-icon icon="arrow-circle-right" v-if="lastDay.diff == 0" />&nbsp;
-      <span>{{ lastDay.value }}</span>
-      <span>
-      [{{ lastDay.diff | prefixDiff }} | {{ lastDay.percentDiff | prefixDiff }}%]
-      </span>
-      <b-tooltip :target="elementId" triggers="hover">
-        Prejšnji dan: {{ dayBefore.value }} [{{ dayBefore.diff | prefixDiff }}]
-      </b-tooltip>
+    {{ lastDay.value }}
     </b-card-text>
-    <b-card-text class="data-time text-center">{{ formattedDate }}</b-card-text>
+    <b-card-text
+      :class="textClass">
+      {{ lastDay.diff | prefixDiff }} ({{ lastDay.percentDiff | prefixDiff }}%)
+    </b-card-text>    
+    <b-card-text class="data-time">{{ formattedDate }}</b-card-text>
+    <b-tooltip :target="elementId" triggers="hover">
+      Prejšnji dan: {{ dayBefore.value }} ({{ dayBefore.diff | prefixDiff }})
+    </b-tooltip>
   </b-card>
 </template>
 <script>
@@ -61,19 +55,20 @@ export default {
       return this.field
     },
     textClass() {
+      let diff = this.lastDay.diff
       if (this.goodDirection == 'up') {
-        if (this.diffdiff < 0) {
+        if (diff < 0) {
           return 'text-danger'
         }
-        if (this.diffdiff > 0) {
+        if (diff > 0) {
           return 'text-success'
         }
         return 'text-info'
       } else {
-        if (this.diffdiff > 0) {
+        if (diff > 0) {
           return 'text-danger'
         }
-        if (this.diffdiff < 0) {
+        if (diff < 0) {
           return 'text-success'
         }
         return 'text-info'
@@ -116,20 +111,36 @@ export default {
 @import "node_modules/bootstrap/scss/variables";
 
 .card.card-info {
-  color: $text-muted;
+  border-radius: 0px;
+  border: none;
+  color: #000000;
 
   .card-title {
-    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    
+    // text-align: center;
     font-size: $font-size-base;
     // text-transform: uppercase;
   }
+
+  .card-text {
+    margin-bottom: 0.5rem;
+  }
+
   .card-body {
     font-size: $font-size-base * 0.9;
-    padding: 0.5rem;
+    padding: 1.9rem;
+
+    .info-card-value {
+      font-size: 32px;
+      font-weight: 600;
+    }
   }
 
   .data-time {
-    font-size: $font-size-sm * 0.7;
+    color: $text-muted;
+    font-size: 0.75rem;
   }
 }
 </style>
