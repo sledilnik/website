@@ -11,7 +11,7 @@
       <font-awesome-icon icon="arrow-circle-up" v-if="renderValues.lastDay.diff > 0" />
       <font-awesome-icon icon="arrow-circle-down" v-if="renderValues.lastDay.diff < 0" />
       <font-awesome-icon icon="arrow-circle-right" v-if="renderValues.lastDay.diff == 0" />&nbsp;
-      <span>{{ renderValues.lastDay.value }}</span>
+      <span>{{ renderValues.lastDay.value }} </span>
       <span>[{{ renderValues.lastDay.diff | prefixDiff }} | {{ renderValues.lastDay.percentDiff | prefixDiff }}%]</span>
       <b-tooltip
         :target="elementId"
