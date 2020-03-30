@@ -9,7 +9,7 @@ Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2
 NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o številu okužb, zato jih zbiramo in dopolnjujemo iz različnih javnih virov ter posredujemo javnosti. Podatki v medijih in uradnih virih, iz katerih jih črpamo, so pogosto delni, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
 ### Pomagajte – nam, sebi in drugim
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](#/team). Pridružite se in pomagajte!
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer lahko prispeva vsak po svojih močeh z viri ali podatki](#/team). Pridružite se in pomagajte!
 
 ### Zbrani podatki 
 

@@ -1,12 +1,13 @@
 // Tukaj, pred importom, lahko spremenimo bootstrap spremenljivke.
 
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600,700&display=swap&subset=latin-ext');
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,600&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:600&display=swap&subset=latin-ext');
 
 $font-family-sans-serif: 'IBM Plex Sans', sans-serif;
 // font-family: 'IBM Plex Mono', monospace;
 $yellow: #ffd922;
 $background: #f5f5f0;
+$text-c: rgba(0, 0, 0, 0.75);
 // $primary: #ffd922;
 // $secondary: #000000;
 // $success: #000000;
