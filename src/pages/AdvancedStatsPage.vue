@@ -33,17 +33,17 @@ export default {
         }
       }
 
-      let generateSeries = (hospitalIds) => {
+      let generateSeries = (suffix, hospitalIds) => {
         return hospitalIds.map(id => {
           let hospitalName = this.hospitalName(id)
           return {
             name: hospitalName ? `Skupno zasedenih postelj v ${hospitalName}` : "Skupno zasedenih postelj",
-            data: this.getSeries(seriesKey(id, "bed.occupied")),
+            data: this.getSeries(seriesKey(id, suffix)),
           }
         })
       }
 
-      let chartSeries = generateSeries(['', 'ukclj', 'ukcmb', 'ukg', 'bse', 'bto', 'sbbr', 'sbce', 'sbiz', 'sbje', 'sbms', 'sbng', 'sbnm', 'sbpt', 'sbsg', 'sbtr'])
+      let chartSeries = generateSeries("bed.occupied", ['', 'ukclj', 'ukcmb', 'ukg', 'bse', 'bto', 'sbbr', 'sbce', 'sbiz', 'sbje', 'sbms', 'sbng', 'sbnm', 'sbpt', 'sbsg', 'sbtr'])
 
       return {
         title: {
