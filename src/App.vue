@@ -22,7 +22,8 @@ export default {
     Navbar
   },
   created() {
-    this.$store.dispatch("fetchData");
+    this.$store.dispatch("stats/fetchData");
+    this.$store.dispatch("hospitals/fetchData");
   }
 };
 </script>

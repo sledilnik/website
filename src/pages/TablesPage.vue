@@ -4,16 +4,16 @@
       <b-col class="px-0" cols="12">
         <b-tabs justified class="tables-tabs" pills card>
           <b-tab title="Povzetek stanja" active>
-            <tests-infections-table :csvdata="csvdata"></tests-infections-table>
+            <tests-infections-table :csvdata="data"></tests-infections-table>
           </b-tab>
           <b-tab title="Po regiji">
-            <regional-overview-table :csvdata="csvdata"></regional-overview-table>
+            <regional-overview-table :csvdata="data"></regional-overview-table>
           </b-tab>
           <b-tab title="Po starosti - Moški">
-            <age-groups-males-table :csvdata="csvdata"></age-groups-males-table>
+            <age-groups-males-table :csvdata="data"></age-groups-males-table>
           </b-tab>
           <b-tab title="Po starosti - Ženske">
-            <age-groups-females-table :csvdata="csvdata"></age-groups-females-table>
+            <age-groups-females-table :csvdata="data"></age-groups-females-table>
           </b-tab>
         </b-tabs>
       </b-col>
@@ -46,7 +46,7 @@ export default {
     AgeGroupsFemalesTable
   },
   computed: {
-    ...mapGetters(["csvdata"])
+    ...mapGetters("stats", ["data"])
   }
 };
 </script>

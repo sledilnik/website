@@ -40,7 +40,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getLastValue", "getValueOn"]),
+    ...mapGetters("stats", ["getLastValue", "getValueOn"]),
     lastDay() {
       return this.getLastValue(this.field);
     },
