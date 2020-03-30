@@ -85,7 +85,25 @@ export default {
   background: #dee2e6 !important;
 }
 
-.tables-page {
-  margin-top: -77px;
+.tables-page  {
+  height: 100%;
+  .tables-tabs {
+    display: flex;
+    flex-direction: column;
+
+    .tab-content {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
+  @media all and (max-device-width: 400px) {
+    .nav-pills {
+      a {
+        padding: 5px 10px;
+        font-size: 13px;
+      }
+    }
+  }
 }
 </style>

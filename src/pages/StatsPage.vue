@@ -1,6 +1,6 @@
 <template>
-  <b-container v-if="loaded" class="mt-3 stats-page">
-    <div class="cards-wrapper">
+  <b-container v-if="loaded" fluid class="mt-3 stats-page">
+    <div class="cards-wrapper latest-data-boxes">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
       <Info-card title="V intenzivni enoti" field="state.icu" />
@@ -338,6 +338,52 @@ export default {
 
 .cards-wrapper
   display: flex
+  max-width: 1140px
   flex-wrap: wrap
-  margin-bottom: 58px
+  margin: 0 auto 58px
+</style>
+
+<style lang="scss">
+// don't know sass
+.latest-data-boxes {
+  .hp-card {
+    height: 100%;
+  }
+}
+@media all and (max-width: 1200px) {
+  #visualizations .container {
+    max-width: 100%;
+  }
+  .latest-data-boxes .hp-card-holder {
+    flex: 0 0 32%;
+  }
+}
+@media all and (max-width: 700px) {
+  #visualizations {
+    margin: 0 -15px;
+    .visualization section {
+      padding: 70px 15px 10px;
+    }
+  }
+  .latest-data-boxes .hp-card-holder {
+    flex: 0 0 50%;
+  }
+  .stats-page.container-fluid {
+    > .row {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    padding: 0;
+  }
+}
+@media all and (max-width: 500px) {
+  .latest-data-boxes {
+    .hp-card-holder, .hp-card {
+      padding: 15px;
+    }
+    .hp-card-holder {
+      flex: 0 0 100%;
+    }
+  }
+}
 </style>

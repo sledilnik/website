@@ -6,9 +6,9 @@
 // common styles form main page (index) and embedded version (embed)
 
 html,
-body,
-#app {
+body {
   height: 100%;
+  background: $background;
 }
 
 .button-yellow {
