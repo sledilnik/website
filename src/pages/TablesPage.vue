@@ -86,6 +86,7 @@ export default {
 }
 
 .tables-page  {
+  margin-top: -48px;
   height: 100%;
   .tables-tabs {
     display: flex;
@@ -97,6 +98,9 @@ export default {
     }
   }
 
+  @media all and (max-width: 500px) {
+    margin-top: 0;
+  }
   @media all and (max-device-width: 400px) {
     .nav-pills {
       a {

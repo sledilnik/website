@@ -6,7 +6,11 @@ $navHeight: 76px;
 #app {
   padding-top: $navHeight;
   > main {
+    padding-top: 48px;
     // need to interpolate in calc()
     height: calc(100vh - #{$navHeight});
+  }
+  @media all and (max-width: 500px) {
+    padding-top: 24px;
   }
 } 

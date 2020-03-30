@@ -1,5 +1,5 @@
 <template>
-  <b-container v-if="loaded" fluid class="mt-3 stats-page">
+  <b-container v-if="loaded" class="mt-3 stats-page">
     <div class="cards-wrapper latest-data-boxes">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
