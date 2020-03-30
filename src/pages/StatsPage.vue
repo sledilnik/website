@@ -9,7 +9,7 @@
     </div>
     <b-row cols="12">
       <b-col>
-        <div id="visualizations"></div>
+        <div id="visualizations" class="visualizations"></div>
       </b-col>
     </b-row>
   </b-container>
@@ -63,7 +63,7 @@ h3,
 h4
   font-family: 'IBM Plex Mono', monospace
 
-#visualizations
+.visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
   $primary-color: #17a2b8
@@ -71,26 +71,25 @@ h4
   $button-color: $gray-600
   $inactive-button-color: $gray-300
 
-  .visualization section
+  section
     background: #fff
     margin-bottom: 88px
     position: relative
     padding: 70px 30px 30px
 
-    > h2
-      position: absolute
-      z-index: 10
-      left: 32px
-      top: 0
-      transform: translateY(-50%)
-      margin-bottom: $gap / 2
-      font-family: 'IBM Plex Mono', monospace
-      font-size: 18px
-      font-weight: bold
-      padding: 12px 16px
-      border: 2px solid $yellow
-      background: #fff
-      box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+  h2
+    position: absolute
+    z-index: 10
+    left: 32px
+    top: 0
+    transform: translateY(-50%)
+    margin-bottom: $gap / 2
+    font-size: 18px
+    font-weight: bold
+    padding: 12px 16px
+    border: 2px solid $yellow
+    background: #fff
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
   .table
     td, th
@@ -357,7 +356,7 @@ h4
   }
 }
 @media all and (max-width: 1200px) {
-  #visualizations .container {
+  .visualizations .container {
     max-width: 100%;
   }
   .latest-data-boxes .hp-card-holder {
@@ -365,7 +364,7 @@ h4
   }
 }
 @media all and (max-width: 700px) {
-  #visualizations {
+  .visualizations {
     margin: 0 -15px;
     .visualization section {
       padding: 70px 15px 10px;
@@ -384,7 +383,8 @@ h4
 }
 @media all and (max-width: 500px) {
   .latest-data-boxes {
-    .hp-card-holder, .hp-card {
+    .hp-card-holder,
+    .hp-card {
       padding: 15px;
     }
     .hp-card-holder {

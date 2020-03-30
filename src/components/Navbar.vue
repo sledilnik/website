@@ -47,11 +47,16 @@ export default {
 }
 nav.navbar {
   background: $yellow;
-  transition: all 0.35s ease-out;
+  transition: all 0.45s ease-in-out;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   &.scrolled {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
+      0 11px 12px -12px rgba(0, 0, 0, 0.22);
   }
 
   &.show {
@@ -65,8 +70,8 @@ nav.navbar {
   .navbar-brand {
     background: url("../assets/svg/covid-19.svg") no-repeat;
     width: 145px;
-    height: 40px;
-    margin: 10px 0;
+    height: 39px;
+    margin: 7px 0;
   }
 
   a.nav-link {
