@@ -207,6 +207,7 @@ let renderChartOptions (state : State) =
                 y = 30
                 backgroundColor = "#FFF"
             |}
+        tooltip = pojo {| shared=true |}
     |}
 
 let renderChartContainer state =
@@ -267,7 +268,8 @@ let renderTable (state: State) dispatch =
         // postelje
         let cur = getPatientsDp scope Beds
         let total = getFacilityDp scope Beds Total
-        let free = getFree cur total
+        //let free = getFree cur total
+        let free = getFacilityDp scope Beds Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
@@ -275,7 +277,8 @@ let renderTable (state: State) dispatch =
         // icu
         let cur = getPatientsDp scope Icus
         let total = getFacilityDp scope Icus Total
-        let free = getFree cur total
+        //let free = getFree cur total
+        let free = getFacilityDp scope Icus Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
@@ -284,7 +287,8 @@ let renderTable (state: State) dispatch =
         //let cur = getPatientsDp scope Vents
         let cur = getFacilityDp scope Vents Occupied
         let total = getFacilityDp scope Vents Total
-        let free = getFree cur total
+        //let free = getFree cur total
+        let free = getFacilityDp scope Vents Free
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
