@@ -19,6 +19,7 @@ let init (visualization : string option) =
                 | "Spread" -> Some Spread
                 | "Regions" -> Some Regions
                 | "AgeGroups" -> Some AgeGroups
+                | "Hospitals" -> Some Hospitals
                 | _ -> None
                 |> Embeded
 
@@ -40,31 +41,38 @@ let render (state : State) (dispatch : Msg -> unit) =
           {| Visualization = Hospitals
              ClassName = "patients-chart"
              Label = "Kapacitete"
-             Renderer = fun data -> HospitalsChart.hospitalsChart () |}
+             Renderer = fun data -> HospitalsChart.hospitalsChart ()
+             Explicit = true |}
           {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
-             Renderer = fun data -> MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } |}
+             Renderer = fun data -> MetricsComparisonChart.metricsComparisonChart { data = data.StatsData }
+             Explicit = false |}
           {| Visualization = Patients
              ClassName = "patients-chart"
              Label = "Obravnava hospitaliziranih"
-             Renderer = fun data -> PatientsChart.patientsChart () |}
+             Renderer = fun data -> PatientsChart.patientsChart ()
+             Explicit = false |}
           {| Visualization = Spread
              ClassName = "spread-chart"
              Label = "Hitrost širjenja okužbe"
-             Renderer = fun data -> SpreadChart.spreadChart { data = data.StatsData } |}
+             Renderer = fun data -> SpreadChart.spreadChart { data = data.StatsData }
+             Explicit = false |}
           {| Visualization = Regions
              ClassName = "regions-chart"
              Label = "Potrjeno okuženi po regijah"
-             Renderer = fun data -> RegionsChart.regionsChart { data = data.RegionsData } |}
+             Renderer = fun data -> RegionsChart.regionsChart { data = data.RegionsData }
+             Explicit = false |}
           {| Visualization = Municipalities
              ClassName = "municipalities-chart"
              Label = "Potrjeno okuženi po občinah"
-             Renderer = fun data -> MunicipalitiesChart.municipalitiesChart { data = data.RegionsData } |}
+             Renderer = fun data -> MunicipalitiesChart.municipalitiesChart { data = data.RegionsData }
+             Explicit = false |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"
-             Renderer = fun data -> AgeGroupsChart.render data.StatsData () |} ]
+             Renderer = fun data -> AgeGroupsChart.render data.StatsData ()
+             Explicit = false |} ]
 
     match state.Data with
     | NotAsked -> Html.none
@@ -73,7 +81,7 @@ let render (state : State) (dispatch : Msg -> unit) =
     | Success data ->
         let embeded, visualizations =
             match state.RenderingMode with
-            | Normal -> false, allVisualizations
+            | Normal -> false, allVisualizations |> List.filter (fun v -> not v.Explicit)
             | Embeded visualization ->
                 match visualization with
                 | None -> true, []
