@@ -57,6 +57,12 @@ export default {
 @import 'node_modules/bootstrap/scss/_variables'
 @import 'node_modules/bootstrap/scss/_mixins'
 
+h1,
+h2,
+h3,
+h4
+  font-family: 'IBM Plex Mono', monospace
+
 #visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
@@ -78,7 +84,7 @@ export default {
       top: 0
       transform: translateY(-50%)
       margin-bottom: $gap / 2
-      font-family: 'IBM Plex Sans', sans-serif
+      font-family: 'IBM Plex Mono', monospace
       font-size: 18px
       font-weight: bold
       padding: 12px 16px
