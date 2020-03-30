@@ -1,6 +1,6 @@
-# Uporabne povezave
+## Uporabne povezave
 
-## Statistike, vizualizacije, simulacije, ki uporabljajo tudi naše podatke
+### Statistike, vizualizacije, simulacije, ki uporabljajo tudi naše podatke
 
 | Povezava | Opis |
 | --- | --- |
@@ -9,7 +9,7 @@
 | [COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) | Zemljevid občin po dnevih ; [Milos Popovic](http://milosp.info/) |
 | [Ustavimo Korono](https://ustavimokorono.si/) | Informacijski portal o koronavirusu |
 
-## Statistike, vizualizacije, simulacije - SLO
+### Statistike, vizualizacije, simulacije - SLO
 
 | Povezava | Opis |
 | --- | --- |
@@ -20,7 +20,7 @@
 
 <br>
 
-## Statistike, vizualizacije, simulacije - SVET
+### Statistike, vizualizacije, simulacije - SVET
 
 | Povezava | Opis |
 | --- | --- |
@@ -49,7 +49,7 @@
 
 <br>
 
-## Simulacije, projekcije
+### Simulacije, projekcije
 
 | Povezava | Opis |
 | --- | --- |
@@ -66,7 +66,7 @@
 
 <br>
 
-## Ostalo
+### Ostalo
 
 | Opis | Povezava |
 | --- | --- |
