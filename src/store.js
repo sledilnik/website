@@ -17,18 +17,17 @@ const store = new Vuex.Store({
         return {}
       }
       let searchResult = getters.csvdata.find(day => {
-        return Date.parse(day.date) === date.getTime()
+        return new Date(Date.parse(day.date)).setHours(0,0,0,0) === date.getTime()
       })
-
-      return { date, value: searchResult ? searchResult[field] : 0 }
+      return { date, value: searchResult ? searchResult[field] : null }
     },
     getLastValue: (state, getters) => (field) => {
       let result = getters.csvdata.slice().reverse().find(day => {
         return day[field]
       })
       return {
-        date: result ? new Date(Date.parse(result.date)) : new Date().setHours(0, 0, 0, 0),
-        value: result ? result[field] : 0
+        date: result ? new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
+        value: result ? result[field] : null
       }
     },
   },

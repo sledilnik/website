@@ -17,13 +17,13 @@
           triggers="hover"
         >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
       </div>
-      <div class="data-time">{{ formattedDate }}</div>
+      <div class="data-time">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div>
     </div>
   </div>
 </template>
 <script>
-import moment from "moment";
 import { mapGetters } from "vuex";
+import { add } from "date-fns";
 
 export default {
   props: {
@@ -45,16 +45,22 @@ export default {
       return this.getLastValue(this.field);
     },
     dayBefore() {
-      let dayBefore = moment(this.lastDay.date)
-        .subtract(1, "days")
-        .toDate();
-      return this.getValueOn(this.field, dayBefore);
+      if (this.lastDay.date) {
+        let date = new Date(this.lastDay.date.getTime());
+        let dayBefore = add(date.setHours(0, 0, 0, 0), { days: -1 });
+        return this.getValueOn(this.field, dayBefore);
+      } else {
+        return {};
+      }
     },
     day2Before() {
-      let day2Before = moment(this.lastDay.date)
-        .subtract(2, "days")
-        .toDate();
-      return this.getValueOn(this.field, day2Before);
+      if (this.lastDay.date) {
+        let date = new Date(this.lastDay.date.getTime());
+        let day2Before = add(date.setHours(0, 0, 0, 0), { days: -2 });
+        return this.getValueOn(this.field, day2Before);
+      } else {
+        return {};
+      }
     },
     renderValues() {
       let diff = this.lastDay.value - this.dayBefore.value;
@@ -64,42 +70,24 @@ export default {
         lastDay: {
           ...this.lastDay,
           diff,
-          percentDiff: Math.round((diff / this.dayBefore.value) * 1000) / 10
+          percentDiff:
+            diff != 0
+              ? Math.round((diff / this.dayBefore.value) * 1000) / 10
+              : 0
         },
         dayBefore: {
           ...this.dayBefore,
           diff: dayBeforeDiff,
           percentDiff:
-            Math.round((dayBeforeDiff / this.day2Before.value) * 1000) / 10
+            dayBeforeDiff != 0
+              ? Math.round((dayBeforeDiff / this.day2Before.value) * 1000) / 10
+              : 0
         }
       };
     },
     elementId() {
       return this.field;
     },
-    textClass() {
-      if (this.goodDirection == "up") {
-        if (this.diffdiff < 0) {
-          return "text-danger";
-        }
-        if (this.diffdiff > 0) {
-          return "text-success";
-        }
-        return "text-info";
-      } else {
-        if (this.diffdiff > 0) {
-          return "text-danger";
-        }
-        if (this.diffdiff < 0) {
-          return "text-success";
-        }
-        return "text-info";
-      }
-    },
-    formattedDate() {
-      let dateFormatted = moment(this.lastDay.date).format("DD. MM. YYYY");
-      return `Osveženo ${dateFormatted}`;
-    }
   },
   mounted() {
     this.show = true;
