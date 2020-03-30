@@ -117,7 +117,7 @@ let getSortedFacilityCodes (data: FacilityAssets []) =
         |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
         |> Map.toList
         |> List.sortBy (fun (fc,cnt) ->
-            printfn "hospital %s %A" fc cnt
+            //printfn "hospital %s %A" fc cnt
             (cnt |> Option.defaultValue 0 |> ( * ) -1), (if fc.Length = 3 then fc else "x"+fc))
         |> List.map fst
 
