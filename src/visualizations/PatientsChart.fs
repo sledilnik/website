@@ -45,11 +45,11 @@ module Series =
     let getSeriesInfo = function
         | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
         | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
-        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani - trenutno"
-        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - vsi doslej"
+        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
+        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - skupaj"
         | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
-        | Icu           -> "#bf5747", [|   |], "Intenzivna nega"
-        | Critical      -> "#d99a91", [|1;1|], "Ventilator / kritično stanje"
+        | Icu           -> "#bf5747", [|   |], "Na intenzivni enoti"
+        | Critical      -> "#d99a91", [|1;1|], "Respirator / kritično stanje"
         | Deceased      -> "#666666", [|4;1|], "Umrli - skupaj"
         | Hospital      -> "#be772a", [|   |], "Hospitalizirani"
         | Home          -> "#003f5c", [|   |], "Doma"
@@ -254,7 +254,7 @@ let renderChartOptions (state : State) =
         legend = pojo
             {|
                 enabled = Some true
-                title = {| text=if state.breakdown=BySeries then "Obravnava hospitaliziranih" else "Hospitalizirani v" |}
+                title = {| text=if state.breakdown=BySeries then "" else "Hospitalizirani v:" |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"

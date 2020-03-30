@@ -36,7 +36,7 @@ export default {
         goodDirection: 'down',
       },
       'icu': {
-        title: 'Intenzivna enota',
+        title: 'Na intenzivni enoti',
         field: 'state.icu',
         goodDirection: 'down',
       },

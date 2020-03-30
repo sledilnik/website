@@ -1,8 +1,6 @@
 [<RequireQualifiedAccess>]
 module MetricsComparisonChart
 
-open System
-open Fable.Core
 open Elmish
 
 open Feliz
@@ -41,8 +39,8 @@ module Metrics  =
         { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi" }
         { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
         { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani" }
-        { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - vsi" }
-        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "Intenzivna nega" }
+        { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - skupaj" }
+        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "Na intenzivni enoti" }
         { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
         { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
         { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli - skupaj" }

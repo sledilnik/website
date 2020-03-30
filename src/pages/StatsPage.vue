@@ -3,7 +3,7 @@
     <div class="cards-wrapper">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
-      <Info-card title="Intenzivna nega" field="state.icu" />
+      <Info-card title="Na intenzivni enoti" field="state.icu" />
       <Info-card title="Umrli" field="state.deceased.todate" />
       <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
     </div>

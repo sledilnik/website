@@ -11,15 +11,15 @@ NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o šte
 ### Pomagajte – nam, sebi in drugim
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer **lahko prispeva vsak po svojih močeh** z viri ali podatki](#/team). Pridružite se in pomagajte!
 
-### Zbrani podatki  
+### Zbrani podatki 
 
 Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [različnih javnih virov](#/sources):
 
 -   število opravljenih testov in število potrjeno okuženih
 -   število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
--   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, intenzivna nega, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
+-   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, na intenzivni enoti, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
 -   spremljanje posameznih primerov, še zlasti v kritičnih dejavnostih: zaposleni v zdravstvu, domovih starejših občanov, civilni zaščiti
--   zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, ventilatorjev za predihavanje ...
+-   zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, respiratorjev za predihavanje ...
 
 Sproti se trudimo dodajati tudi nove pomembne kategorije.
 
@@ -35,7 +35,7 @@ Podatki se uporabljajo za različne vizualizacije in statistike:
 -   [**Statistika**](#/stats) – grafi in infografike s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
 -   [**Zemljevid**](#/map) – stanje potrjeno okuženih po občinah
 
-Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links). 
+Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links).
 
 ### Kako urejamo podatke
 
@@ -48,9 +48,9 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 -   Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
 -   Kjer so podatki nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
 -   Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
--   Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59. 
+-   Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59.
 
 ## Pogoji uporabe
 
-Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).  
+Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).
 Za izvoz podatkov v drugih oblikah ali uporabo za vizualizacije nas kontaktirajte na info@sledilnik.org.

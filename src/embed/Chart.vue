@@ -14,7 +14,6 @@ import { Visualizations } from "visualizations/App.fsproj";
 export default {
   name: "ChartEmbed",
   async mounted() {
-    console.log(this.$route.params, this.$route.query)
     this.$nextTick(() => {
       /* Available charts:
          - MetricsComparison

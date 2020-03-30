@@ -12,8 +12,8 @@ type Breakdown =
   with
     static member all = [ Gender; Total ]
     static member getName = function
-        | Gender -> "Glede na spol"
-        | Total -> "Ne glede na spol"
+        | Gender -> "Po spolu"
+        | Total -> "Vsi"
 
 let renderBars (data : StatsData) breakdown =
     let ageGroupData =

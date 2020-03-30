@@ -100,8 +100,8 @@ type ChartCfg = {
     static member fromScale = function
         | Absolute ->
             {
-                legendTitle = "Dnevni prirast okuženih"
-                seriesLabel = "Pozitivni testi dnevno"
+                legendTitle = "Dnevni prirast potrjeno okuženih"
+                seriesLabel = "Potrjeno okuženi dnevno"
                 yAxis = yAxisBase ()
                 dataKey = fun dp -> (dp.Date |> jsTime), maxOption dp.PositiveTests dp.TestsAt14.Positive |> Option.map float |> Option.defaultValue nan
             }
