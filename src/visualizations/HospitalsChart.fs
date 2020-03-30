@@ -7,6 +7,7 @@ open Feliz
 open Feliz.ElmishComponents
 
 open Types
+open Data.Patients
 open Data.Hospitals
 open Highcharts
 
@@ -16,7 +17,8 @@ type Scope =
 
 type State = {
     scaleType : ScaleType
-    data : FacilityAssets []
+    facData : FacilityAssets []
+    patientsData: PatientsStats []
     error: string option
     facilities: FacilityCode list
     scope: Scope
@@ -24,7 +26,8 @@ type State = {
     static member initial =
         {
             scaleType = Linear
-            data = [||]
+            facData = [||]
+            patientsData = [||]
             error = None
             facilities = []
             scope = Totals
@@ -32,24 +35,34 @@ type State = {
     static member switchBreakdown breakdown state = { state with scope = breakdown }
 
 type Msg =
-    | ConsumeServerData of Result<FacilityAssets [], string>
+    | ConsumeHospitalsData of Result<FacilityAssets [], string>
+    | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ScaleTypeChanged of ScaleType
     | SwitchBreakdown of Scope
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Hospitals.fetch () ConsumeServerData ConsumeServerError
-    State.initial, cmd
+    let cmd = Cmd.OfAsync.either Data.Hospitals.fetch () ConsumeHospitalsData ConsumeServerError
+    let cmd2 = Cmd.OfAsync.either Data.Patients.fetch () ConsumePatientsData ConsumeServerError
+    State.initial, (cmd @ cmd2)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ConsumeServerData (Ok data) ->
+    | ConsumeHospitalsData (Ok data) ->
         { state with
-            data = data
+            facData = data
             facilities = data |> Data.Hospitals.getSortedFacilityCodes
         } |> State.switchBreakdown state.scope, Cmd.none
-    | ConsumeServerData (Error err) ->
+    | ConsumeHospitalsData (Error err) ->
         { state with error = Some err }, Cmd.none
+
+    | ConsumePatientsData (Ok data) ->
+        { state with
+            patientsData = data
+        } |> State.switchBreakdown state.scope, Cmd.none
+    | ConsumePatientsData (Error err) ->
+        { state with error = Some err }, Cmd.none
+
     | ConsumeServerError ex ->
         { state with error = Some ex.Message }, Cmd.none
     | ScaleTypeChanged scaleType ->
@@ -68,7 +81,7 @@ let renderChartOptions (state : State) =
             if x = 0 then None
             else Some x
 
-    let renderSeries (breakdown: Scope) (atype:AssetType) (ctype: CountType) color dash name =
+    let renderFacilitiesSeries (breakdown: Scope) (atype:AssetType) (ctype: CountType) color dash name =
         let renderPoint : (FacilityAssets -> (JsTimestamp * int option)) =
             match breakdown with
             | Totals ->
@@ -88,27 +101,67 @@ let renderChartOptions (state : State) =
             name = name
             dashStyle = dash |> DashStyle.value
             data =
-                state.data
+                state.facData
                 |> Seq.map renderPoint
                 |> Seq.skipWhile (snd >> Option.isNone)
                 |> Array.ofSeq
         |}
         |> pojo
 
+    let renderPatientsSeries (breakdown: Scope) (countType) color dash name =
+        let extractTotalsCount : TotalPatientStats -> int option =
+            match countType with
+            | Beds -> fun ps -> ps.inHospital.today
+            | Icus -> fun ps -> ps.icu.today
+            | Vents -> failwithf "no vents in data"
+        let extractFacilityCount : PatientsByFacilityStats -> int option =
+            match countType with
+            | Beds -> fun ps -> ps.inHospital.today
+            | Icus -> fun ps -> ps.icu.today
+            | Vents -> failwithf "no vents in data"
+        let renderPoint : (PatientsStats -> (JsTimestamp * int option)) =
+            match breakdown with
+            | Totals ->
+                fun (fa: PatientsStats) -> fa.JsDate, (fa.total |> extractTotalsCount)
+            | Facility fcode ->
+                fun (fa: PatientsStats) ->
+                    let value =
+                        fa.facilities
+                        |> Map.tryFind fcode
+                        |> Option.bind extractFacilityCount
+                        |> zeroToNone
+                    fa.JsDate, value
+
+        {|
+            //visible = state.activeSeries |> Set.contains series
+            color = color
+            name = name
+            dashStyle = dash |> DashStyle.value
+            data =
+                state.patientsData
+                |> Seq.map renderPoint
+                |> Seq.skipWhile (snd >> Option.isNone)
+                |> Array.ofSeq
+        |}
+        |> pojo
+
+
     let series = [|
         let clr = "#444"
-        yield renderSeries state.scope Beds Max      clr Dash "Postelje, maksimum"
-        yield renderSeries state.scope Beds Total    clr ShortDot "Postelje, vse"
-        yield renderSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
+        yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimum"
+        yield renderFacilitiesSeries state.scope Beds Total    clr ShortDot "Postelje, vse"
+        //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
+        yield renderPatientsSeries state.scope Beds clr Solid "Postelje, zasedene"
 
         let clr = "#c44"
-        yield renderSeries state.scope Icus Max      clr Dash "Intenzivne, maksimum"
-        yield renderSeries state.scope Icus Total    clr ShortDot "Intenzivne, vse"
-        yield renderSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
+        yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimum"
+        yield renderFacilitiesSeries state.scope Icus Total    clr ShortDot "Intenzivne, vse"
+        //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
+        yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, zasedene"
 
         let clr = "#4ad"
-        yield renderSeries state.scope Vents Total    clr ShortDot "Respiratorji, vsi"
-        yield renderSeries state.scope Vents Occupied clr Solid "Respiratorji, zasedeni"
+        yield renderFacilitiesSeries state.scope Vents Total    clr ShortDot "Respiratorji, vsi"
+        yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, zasedeni"
     |]
 
     {| Highcharts.basicChartOptions state.scaleType "hospitals-chart" with
@@ -140,6 +193,35 @@ let renderChartContainer state =
         ]
     ]
 
+let renderTable state =
+
+
+    Html.table [
+        prop.children [
+            Html.tableHeader [
+                prop.children [
+                    Html.tableRow [
+                        prop.children [
+                            Html.tableCell [ prop.text "test" ]
+                            Html.tableCell []
+                        ]
+                    ]
+                ]
+            ]
+            Html.tableBody [
+                prop.children [
+                    Html.tableRow [
+                        prop.children [
+                            Html.tableCell [ prop.text "test" ]
+                            Html.tableCell []
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+
+
 let renderScopeSelector state scope (name:string) onClick =
     Html.div [
         prop.onClick onClick
@@ -164,7 +246,7 @@ let renderBreakdownSelectors state dispatch =
             ) ) ]
 
 let render (state : State) dispatch =
-    match state.data, state.error with
+    match state.facData, state.error with
     | [||], None -> Html.div [ prop.text "loading" ]
     | _, Some err -> Html.div [ prop.text err ]
     | data, None ->
@@ -172,6 +254,7 @@ let render (state : State) dispatch =
             Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
             renderChartContainer state
             renderBreakdownSelectors state dispatch
+            renderTable state
         ]
 
 let hospitalsChart () =

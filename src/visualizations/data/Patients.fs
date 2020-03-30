@@ -8,7 +8,7 @@ open Types
 
 let url = "https://covid19.rthand.com/api/patients"
 
-type PatientNums = {
+type PatientCounts = {
     ``in``: int option
     out: int option
     today: int option
@@ -20,20 +20,20 @@ type PatientNums = {
 
 type TotalPatientStats = {
     inCare: int option
-    outOfHospital: PatientNums
-    inHospital: PatientNums
-    needsO2: PatientNums
-    icu: PatientNums
-    critical: PatientNums
-    deceased: PatientNums
+    outOfHospital: PatientCounts
+    inHospital: PatientCounts
+    needsO2: PatientCounts
+    icu: PatientCounts
+    critical: PatientCounts
+    deceased: PatientCounts
 }
 
 type PatientsByFacilityStats = {
-    inHospital: PatientNums
-    needsO2: PatientNums
-    icu: PatientNums
-    critical: PatientNums
-    deceased: PatientNums
+    inHospital: PatientCounts
+    needsO2: PatientCounts
+    icu: PatientCounts
+    critical: PatientCounts
+    deceased: PatientCounts
 }
 
 type PatientsStats = {
@@ -47,7 +47,7 @@ type PatientsStats = {
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime
 
-let fetch url = async {
+let fetch () = async {
     let! code,json = Http.get url
     return
         match code with
