@@ -1,4 +1,4 @@
-# Ekipa
+## Ekipa
 
 **COVID-19 v Sloveniji je odprto podatkovni in odprto kodni projekt, ki ne bi bil mogoč brez številnih vnosov in komentarjev v bazo bolj ali manj anonimnih posameznikov, sodelavcev, znancev, kolegov ter izmenjave idej skupnosti na Slacku. HVALA!**
 
