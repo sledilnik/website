@@ -1,8 +1,8 @@
-# **Podatki o širjenju bolezni COVID-19 v Sloveniji**
+## **Podatki o širjenju bolezni COVID-19 v Sloveniji**
 
 Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2, ki povzroča bolezen COVID-19 v Sloveniji. Javnosti želimo omogočiti čim boljši pregled nad razsežnostjo težave in pravilno oceno tveganja.
 
-## Zakaj zbiramo podatke
+### Zakaj zbiramo podatke
 
 **Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah držav, kjer jim je virus uspelo najbolj zajeziti, kritičnega pomena za učinkovit odziv sistemov javnega zdravja.** Šele tako objavljeni podatki so temelj za razumevanje dogajanja, aktivno samozaščitno ravnanje ljudi ter sprejemanje nujnosti ukrepov.
 
@@ -50,7 +50,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 -   Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
 -   Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59.
 
-## Pogoji uporabe
+### Pogoji uporabe
 
 Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).
 Za izvoz podatkov v drugih oblikah ali uporabo za vizualizacije nas kontaktirajte na info@sledilnik.org.
