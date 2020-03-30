@@ -36,7 +36,12 @@ let update (msg: Msg) (state: State) =
 
 let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
-        [ {| Visualization = MetricsComparison
+        [
+          {| Visualization = Hospitals
+             ClassName = "patients-chart"
+             Label = "Kapacitete"
+             Renderer = fun data -> HospitalsChart.hospitalsChart () |}
+          {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
              Renderer = fun data -> MetricsComparisonChart.metricsComparisonChart { data = data.StatsData } |}

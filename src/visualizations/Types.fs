@@ -64,6 +64,7 @@ type Data =
 type Visualization =
     | MetricsComparison
     | Patients
+    | Hospitals
     | Spread
     | Regions
     | Municipalities

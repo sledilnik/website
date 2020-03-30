@@ -9,11 +9,13 @@
         <Compile Include="Utils.fs" />
         <Compile Include="DataLoader.fs" />
         <Compile Include="data/Patients.fs" />
+        <Compile Include="data/Hospitals.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
         <Compile Include="RegionsChart.fs" />
         <Compile Include="PatientsChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
+        <Compile Include="HospitalsChart.fs" />
         <Compile Include="SpreadChart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />

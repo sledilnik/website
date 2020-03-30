@@ -54,22 +54,6 @@ module Series =
         | Hospital      -> "#be772a", "cs-hospital", "Hospitalizirani"
         | Home          -> "#003f5c", "cs-home", "Doma"
 
-/// return (seriesName * color) based on facility name
-let facilityLine = function
-    | "sbce"  -> Some "#70a471", "SB Celje"
-    | "sbj"
-    | "sbje"  -> None          , "SB Jesenice"
-    | "sbi"
-    | "sbiz"  -> None          , "SB Izola"
-    | "sbms"  -> None          , "SB Murska Sobota"
-    | "sbng"  -> None          , "SB Nova Gorica"
-    | "sbnm"  -> None          , "SB Novo mesto"
-    | "sbdg"  -> None          , "SB Slovenj Gradec"
-    | "ukclj" -> Some "#10829a", "UKC Ljubljana"
-    | "ukcmb" -> Some "#003f5c", "UKC Maribor"
-    | "ukg"   -> Some "#7B7226", "UK Golnik"
-    | other   -> None          , other
-
 type State = {
     scaleType : ScaleType
     data : PatientsStats []
@@ -222,7 +206,7 @@ let renderChartOptions (state : State) =
                         |> zeroToNone
                     ps.JsDate, value)
 
-        let color, name = facilityLine facility
+        let color, name = Data.Hospitals.facilitySeriesInfo facility
         {|
             visible = true
             color = color

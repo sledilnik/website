@@ -22,6 +22,32 @@ module Helpers =
     [<Emit("$0.getTime()")>]
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
+type DashStyle =
+    | Solid
+    | ShortDash
+    | ShortDot
+    | ShortDashDot
+    | ShortDashDotDot
+    | Dot
+    | Dash
+    | LongDash
+    | DashDot
+    | LongDashDot
+    | LongDashDotDot
+  with
+    static member value = function
+        | Solid -> "Solid"
+        | ShortDash -> "ShortDash"
+        | ShortDot -> "ShortDot"
+        | ShortDashDot -> "ShortDashDot"
+        | ShortDashDotDot -> "ShortDashDotDot"
+        | Dot -> "Dot"
+        | Dash -> "Dash"
+        | LongDash -> "LongDash"
+        | DashDot -> "DashDot"
+        | LongDashDot -> "LongDashDot"
+        | LongDashDotDot -> "LongDashDotDot"
+
 
 let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
