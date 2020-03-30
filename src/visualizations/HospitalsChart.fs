@@ -170,14 +170,14 @@ let renderChartOptions (state : State) =
 
     let series = [|
         let clr = "#444"
-        yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimum"
+        yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
         yield renderFacilitiesSeries state.scope Beds Total    clr ShortDot "Postelje, vse"
         //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
         //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
         yield renderPatientsSeries state.scope Beds clr Solid "Postelje, polne"
 
         let clr = "#c44"
-        yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimum"
+        yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
         yield renderFacilitiesSeries state.scope Icus Total    clr ShortDot "Intenzivne, vse"
         //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
         yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
@@ -369,8 +369,8 @@ let render (state : State) dispatch =
         Html.div [
             Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
             renderChartContainer state
-            Html.div [ prop.style [ style.height 10 ] ]
-            //renderBreakdownSelectors state dispatch
+            //Html.div [ prop.style [ style.height 10 ] ]
+            renderBreakdownSelectors state dispatch
             renderTable state dispatch
         ]
 

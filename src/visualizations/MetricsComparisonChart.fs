@@ -37,8 +37,8 @@ module Metrics  =
     let initial = [
         { Metric = Tests;               Color = "#19aebd" ; Visible = false ; Label = "Testiranja"; Class="cs-tests" }
         { Metric = TotalTests;          Color = "#73ccd5" ; Visible = false ; Label = "Testiranja - skupaj"; Class="cs-testsToDate" }
-        { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi"; Class="cs-positiveTests" }
-        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj"; Class="cs-positiveTestsToDate" }
+        { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi - danes"; Class="cs-positiveTests" }
+        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi"; Class="cs-positiveTestsToDate" }
         { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani"; Class="cs-inHospital" }
         { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - skupaj"; Class="cs-inHospitalToDate" }
         { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "V intenzivni enoti"; Class="cs-inHospitalICU" }
