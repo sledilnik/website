@@ -8,7 +8,7 @@
     hover
     sort-by="date"
     :sort-desc="true"
-    sticky-header="600px"
+    :sticky-header="tableHeight"
     :items="csvdata"
     :fields="fields"
   >
@@ -29,6 +29,8 @@ export default {
   props: ["csvdata"],
   data() {
     return {
+      // at least we don't have double scroll on mobile
+      tableHeight: `${window.innerHeight - 230}px`,
       fields: [
         {
           key: "date",

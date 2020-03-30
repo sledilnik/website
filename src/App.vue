@@ -29,7 +29,6 @@ export default {
 
 <style lang="scss">
 main {
-  padding-top: 77px;
   background: $background;
 }
 

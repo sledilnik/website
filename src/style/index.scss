@@ -1,9 +1,16 @@
 @import './main.scss';
 
-// Specific styles for main page goes here
+$navHeight: 76px;
 
-// ce spreminjas visino navbara
-body {
-  margin-top: 76px;
-  // background-color: #f5f5f0;
-}
+// Specific styles for main page goes here
+#app {
+  padding-top: $navHeight;
+  > main {
+    padding-top: 48px;
+    // need to interpolate in calc()
+    height: calc(100vh - #{$navHeight});
+  }
+  @media all and (max-width: 500px) {
+    padding-top: 24px;
+  }
+} 
