@@ -1,94 +1,71 @@
 <template>
-  <b-container class="mt-3 stats-page">
-    <b-row cols="12">
-      <b-col>
-        <chart title="Stanje bolnisnicnih postelj" :dataseries="occipiedBedDataseries" />
-      </b-col>
-    </b-row>
-    <b-row cols="12">
-      <b-col>
-        <chart title="Stanje intenzivnih enot" :dataseries="occipiedIcuDataseries" />
-      </b-col>
-    </b-row>
-    <b-row cols="12">
-      <b-col>
-        <chart title="Kapacitete" :dataseries="capsDataseries" type="column" />
-      </b-col>
-    </b-row>
-  </b-container>
+  <highcharts :options="chartOptions"></highcharts>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import Chart from "@/components/charts/Chart"
+import Highcharts from "highcharts";
 
 export default {
-  name: "AdvancedStatsPage",
-  components: {
-    Chart
+  name: "Chart",
+  props: {
+    title: String,
+    dataseries: Array,
+    type: {
+      default: 'line',
+      type: String
+    },
+    highchartOptions: Object
   },
   data() {
-    return {
-      hospitals: [
-        "",
-        "ukclj",
-        "ukcmb",
-        "ukg",
-        "bse",
-        "bto",
-        "sbbr",
-        "sbce",
-        "sbiz",
-        "sbje",
-        "sbms",
-        "sbng",
-        "sbnm",
-        "sbpt",
-        "sbsg",
-        "sbtr"
-      ]
-    };
+    return {}
   },
   computed: {
     ...mapGetters("hospitals", {
+      data: "data",
+      getSeries: "getSeries",
       hospitalName: "hospitalName"
     }),
-    occipiedBedDataseries() {
-      return this.hospitals.map(id => {
-        let name = this.hospitalName(id)
-        return {
-          name: name ? `Zasedene postelje (${name})` : "Zasedene postelje",
-          key: this.seriesKey('hospital', id, 'bed.occupied'),
-        }
-      })
-    },
-    occipiedIcuDataseries() {
-      return this.hospitals.map(id => {
-        let name = this.hospitalName(id)
-        return {
-          name: name ? `Zasedene ICU enote (${name})` : "Zasedene ICU enote",
-          key: this.seriesKey('hospital', id, 'icu.occupied'),
-        }
-      })
-    },
-    capsDataseries() {
-      return this.hospitals.map(id => {
-        let name = this.hospitalName(id)
-        return {
-          name: name ? `Zmogljivost ICU enot (${name})` : "Zmogljivost ICU enot",
-          key: this.seriesKey('hospital', id, 'icu.total'),
-        }
-      })
-    },
+    chartOptions() {
+      let chartSeries = this.generateSeries(this.dataseries)
+
+      let opts = {
+        chart: {
+          type: this.type,
+        },
+        title: {
+          text: this.title,
+        },
+        xAxis: {
+          type: "datetime",
+          labels: {
+            formatter: function() {
+              return Highcharts.dateFormat("%a %d %b", this.value)
+            }
+          }
+        },
+        series: chartSeries
+      };
+
+      return Object.assign({}, this.highchartOptions, opts)
+    }
   },
   methods: {
-    seriesKey(prefix, hospitalId, suffix) {
+    seriesKey(hospitalId, suffix) {
       if (hospitalId != "") {
-        return `${prefix}.${hospitalId}.${suffix}`;
+        return `hospital.${hospitalId}.${suffix}`;
       } else {
-        return `${prefix}.${suffix}`;
+        return `hospital.${suffix}`;
       }
     },
+    generateSeries(dataseries) {
+      return dataseries.map(obj => {
+        return {
+          name: obj.name,
+          data: this.getSeries(obj.key)
+        };
+      });
+    }
   }
 };
 </script>
