@@ -355,7 +355,7 @@ export default {
     max-width: 100%;
   }
   .latest-data-boxes .hp-card-holder {
-    flex: 0 0 32%;
+    flex: 0 0 33.333%;
   }
 }
 @media all and (max-width: 700px) {
