@@ -175,6 +175,7 @@ let renderChartOptions scaleType (data : StatsData) =
             //visible = true
             color = "#bda506"
             name = chartCfg.seriesLabel
+            className = "cs-positiveTestsToDate"
             data =
                 data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
@@ -187,7 +188,7 @@ let renderChartOptions scaleType (data : StatsData) =
         |> pojo
 
     // return highcharts options
-    {| basicChartOptions Linear with series = [| allSeries |]; yAxis=chartCfg.yAxis; legend=legend chartCfg.legendTitle |}
+    {| basicChartOptions Linear "covid19-spread" with series = [| allSeries |]; yAxis=chartCfg.yAxis; legend=legend chartCfg.legendTitle |}
 
 let renderExplainer (data: StatsData) =
     let curPositive, curHospitalzed, doublingRate =

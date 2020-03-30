@@ -23,13 +23,15 @@ module Helpers =
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
 
-let basicChartOptions (scaleType:ScaleType) =
+let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
         chart = pojo
             {|
                 //height = "100%"
                 ``type`` = "spline"
                 zoomType = "x"
+                styledMode = false // <- set this to 'true' for CSS styling
+                className = className
             |}
         title = pojo {| text = None |}
         xAxis = [|

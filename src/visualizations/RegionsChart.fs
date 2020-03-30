@@ -115,8 +115,14 @@ let renderChartOptions (state : State) =
         )
         |> List.toArray
 
-    let baseOptions = Highcharts.basicChartOptions state.ScaleType
+    let baseOptions = Highcharts.basicChartOptions state.ScaleType "covid19-regions"
     {| baseOptions with
+        chart = pojo
+            {|
+                ``type`` = "spline"
+                zoomType = "x"
+                styledMode = false // <- set this to 'true' for CSS styling
+            |}
         series = allSeries
         yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
     |}

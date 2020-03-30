@@ -28,24 +28,25 @@ type MetricCfg = {
     Color : string
     Visible : bool
     Label : string
+    Class: string
 }
 
 type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric = Tests;               Color = "#19aebd" ; Visible = false ; Label = "Testiranja" }
-        { Metric = TotalTests;          Color = "#73ccd5" ; Visible = false ; Label = "Testiranja - skupaj" }
-        { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi" }
-        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj" }
-        { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani" }
-        { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - skupaj" }
-        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "V intenzivni enoti" }
-        { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice" }
-        { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj" }
-        { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli - skupaj" }
-        { Metric = Deaths;              Color = "#000000" ; Visible = false ; Label = "Umrli" }
-        { Metric = TotalDeaths;         Color = "#666666" ; Visible = true  ; Label = "Umrli - skupaj" }
+        { Metric = Tests;               Color = "#19aebd" ; Visible = false ; Label = "Testiranja"; Class="cs-tests" }
+        { Metric = TotalTests;          Color = "#73ccd5" ; Visible = false ; Label = "Testiranja - skupaj"; Class="cs-testsToDate" }
+        { Metric = PositiveTests;       Color = "#bda506" ; Visible = false ; Label = "Potrjeno okuženi"; Class="cs-positiveTests" }
+        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = true  ; Label = "Potrjeno okuženi - skupaj"; Class="cs-positiveTestsToDate" }
+        { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani"; Class="cs-inHospital" }
+        { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - skupaj"; Class="cs-inHospitalToDate" }
+        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "V intenzivni enoti"; Class="cs-inHospitalICU" }
+        { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice"; Class="cs-outOfHospital" }
+        { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj"; Class="cs-outOfHospitalToDate" }
+        { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli - skupaj"; Class="cs-recoveredToDate" }
+        { Metric = Deaths;              Color = "#000000" ; Visible = false ; Label = "Umrli"; Class="cs-deceased" }
+        { Metric = TotalDeaths;         Color = "#666666" ; Visible = true  ; Label = "Umrli - skupaj"; Class="cs-deceasedToDate" }
     ]
     /// find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -113,6 +114,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                 visible = metric.Visible
                 color = metric.Color
                 name = metric.Label
+                className = metric.Class
                 data =
                     data
                     |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
@@ -127,7 +129,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         |> List.toArray
 
     // return highcharts options
-    {| basicChartOptions scaleType with series = allSeries |}
+    {| basicChartOptions scaleType "covid19-metrics-comparison" with series = allSeries |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [

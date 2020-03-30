@@ -1,4 +1,46 @@
 //@import 'highcharts/css/highcharts.scss';
+// ^^^-uncomment this if you see black charts
+
+
+// colors
+
+.highcharts-series { path { stroke-width: 2 }}
+
+// wrapper class names for charts (last div element before SVG)
+//
+// .covid19-metrics-comparison <- top
+// .covid19-hospitals <- second/A
+// .covid19-patients <- second/B
+// .covid19-spread <- third
+// .covid19-regions
+
+// top two charts
+.highcharts-series-group .cs-tests { path { stroke: #19aebd }}
+.highcharts-series-group .cs-testsToDate{ path { stroke: #73ccd5 }}
+.highcharts-series-group .cs-positiveTests { path { stroke: #bda506 }}
+.highcharts-series-group .cs-positiveTestsToDate { path { stroke: #d5c768 }}
+.highcharts-series-group .cs-recoveredToDate { path { stroke: #8cd4b2 }}
+
+.highcharts-series-group .cs-inCare { path { stroke: #ffa600 }}
+.highcharts-series-group .cs-outOfHospital { path { stroke: #20b16d }}
+.highcharts-series-group .cs-outOfHospitalToDate { path { stroke: "#57c491" }}
+.highcharts-series-group .cs-inHospital { path { stroke: #be7a2a }}
+.highcharts-series-group .cs-inHospitalToDate { path { stroke: #de9a5a }}
+.highcharts-series-group .cs-inHospitalICU{ path { stroke: "#bf5747" }}
+.highcharts-series-group .cs-needsO2 { path { stroke: #70a471 }}
+.highcharts-series-group .cs-critical { path { stroke: #d99a91 }}
+.highcharts-series-group .cs-deceased { path { stroke: #000000 }}
+.highcharts-series-group .cs-deceasedToDate { path { stroke: #666666 }}
+.highcharts-series-group .cs-hospital { path { stroke: #be772a }}
+.highcharts-series-group .cs-home { path { stroke: #003f5c }}
+
+
+// hospitals
+.highcharts-series-group .cs-hospital-ukclj { path { stroke: #10829a }}
+.highcharts-series-group .cs-hospital-ukcmb { path { stroke: #003f5c }}
+.highcharts-series-group .cs-hospital-sbce { path { stroke: #70a471 }}
+.highcharts-series-group .cs-hospital-ukg { path { stroke: #7B7226 }}
+//.highcharts-series-group .cs-hospital- { path { stroke: #8cd4b2 }}
 
 /*
 .highcharts-column-series rect.highcharts-point {
@@ -6,6 +48,7 @@
     //stroke: none;
 }
 */
+
 
 div.highcharts-tooltip {
     filter: none;
@@ -54,4 +97,8 @@ g.highcharts-series,
 .highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
 .highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
     opacity: 0.2;
+}
+
+.highcharts-data-label {
+    color: red;
 }

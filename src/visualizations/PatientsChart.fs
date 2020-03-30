@@ -43,16 +43,16 @@ module Series =
 
     // color, dash, name
     let getSeriesInfo = function
-        | InCare        -> "#ffa600", [|1;1|], "Oskrbovani"
-        | OutOfHospital -> "#20b16d", [|4;1|], "Odpuščeni iz bolnišnice - skupaj"
-        | InHospital    -> "#be7a2a", [|   |], "Hospitalizirani"
-        | AllInHospital -> "#de9a5a", [|   |], "Hospitalizirani - skupaj"
-        | NeedsO2       -> "#70a471", [|1;1|], "Potrebuje kisik"
-        | Icu           -> "#bf5747", [|   |], "V intenzivni enoti"
-        | Critical      -> "#d99a91", [|1;1|], "Respirator / kritično stanje"
-        | Deceased      -> "#666666", [|4;1|], "Umrli - skupaj"
-        | Hospital      -> "#be772a", [|   |], "Hospitalizirani"
-        | Home          -> "#003f5c", [|   |], "Doma"
+        | InCare        -> "#ffa600", "cs-inCare", "Oskrbovani"
+        | OutOfHospital -> "#20b16d", "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice - skupaj"
+        | InHospital    -> "#be7a2a", "cs-inHospital", "Hospitalizirani - trenutno"
+        | AllInHospital -> "#de9a5a", "cs-inHospitalToDate", "Hospitalizirani - skupaj"
+        | NeedsO2       -> "#70a471", "cs-needsO2", "Potrebuje kisik"
+        | Icu           -> "#bf5747", "cs-inHospitalICU", "V intenzivni enoti"
+        | Critical      -> "#d99a91", "cs-critical", "Respirator / kritično stanje"
+        | Deceased      -> "#666666", "cs-deceasedToDate", "Umrli - skupaj"
+        | Hospital      -> "#be772a", "cs-hospital", "Hospitalizirani"
+        | Home          -> "#003f5c", "cs-home", "Doma"
 
 /// return (seriesName * color) based on facility name
 let facilityLine = function
@@ -64,6 +64,7 @@ let facilityLine = function
     | "sbms"  -> None          , "SB Murska Sobota"
     | "sbng"  -> None          , "SB Nova Gorica"
     | "sbnm"  -> None          , "SB Novo mesto"
+    | "sbdg"  -> None          , "SB Slovenj Gradec"
     | "ukclj" -> Some "#10829a", "UKC Ljubljana"
     | "ukcmb" -> Some "#003f5c", "UKC Maribor"
     | "ukg"   -> Some "#7B7226", "UK Golnik"
@@ -189,12 +190,13 @@ let renderChartOptions (state : State) =
             | Hospital      -> fun ps -> ps.JsDate, failwithf "home & hospital"
             | Home          -> fun ps -> ps.JsDate, failwithf "home & totals"
 
-        let color, dash, name = Series.getSeriesInfo series
+        let color, className, name = Series.getSeriesInfo series
 
         {|
             visible = state.activeSeries |> Set.contains series
             color = color
             name = name
+            className = className
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
@@ -225,6 +227,7 @@ let renderChartOptions (state : State) =
             visible = true
             color = color
             name = name
+            className = "cs-hospital-"+facility
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
@@ -248,7 +251,12 @@ let renderChartOptions (state : State) =
                 yield renderSources segmentation
     |]
 
-    let baseOptions = Highcharts.basicChartOptions state.scaleType
+    let className =
+        match state.breakdown with
+        | BySeries -> "covid19-patients"
+        | BySource -> "covid19-hospitals"
+
+    let baseOptions = Highcharts.basicChartOptions state.scaleType className
     {| baseOptions with
         series = allSeries
         legend = pojo
