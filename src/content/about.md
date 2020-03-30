@@ -27,7 +27,7 @@ Vsi podatki so zbrani v [**GDocs preglednici**](https://docs.google.com/spreadsh
 
 Na voljo so v oblikah:
 -   **CSV izvoz**: [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv)
--   **REST API**: [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
+-   **REST API**: [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals), [hospitals-list](https://covid19.rthand.com/api/hospitals-list), [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
 
 ### Uporaba podatkov
 Podatki se uporabljajo za različne vizualizacije in statistike:
