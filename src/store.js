@@ -51,11 +51,18 @@ const statsStore = {
 const hospitalsStore = {
   namespaced: true,
   state: {
-    data: []
+    data: [],
+    hospitals: {}
   },
   getters: {
     data: (state) => {
       return state.data
+    },
+    hospitals: (state) => {
+      return state.hospitals
+    },
+    hospitalName: (state) => (id) => {
+      return state.hospitals[id]
     },
     getSeries: (state) => (field) => {
       return state.data.map(row => {
@@ -95,11 +102,23 @@ const hospitalsStore = {
         return row
       });
       commit('setData', data)
+
+      let hospitals = {}
+      let rawData = await d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-hospitals.csv")
+
+      rawData.forEach(row => {
+        hospitals[row.id] = row.name
+      })
+
+      commit('setHospitals', hospitals)
     }
   },
   mutations: {
     setData: (state, data) => {
       state.data = data
+    },
+    setHospitals: (state, mapping) => {
+      state.hospitals = mapping
     }
   }
 }

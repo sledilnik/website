@@ -20,9 +20,31 @@ export default {
   computed: {
     ...mapGetters("hospitals", {
       data: "data",
-      getSeries: "getSeries"
+      getSeries: "getSeries",
+      hospitalName: "hospitalName",
     }),
     chartOptions() {
+
+      let seriesKey = (hospitalId, suffix) => {
+        if (hospitalId != "") {
+          return `hospital.${hospitalId}.${suffix}`
+        } else {
+          return `hospital.${suffix}`
+        }
+      }
+
+      let generateSeries = (hospitalIds) => {
+        return hospitalIds.map(id => {
+          let hospitalName = this.hospitalName(id)
+          return {
+            name: hospitalName ? `Skupno zasedenih postelj v ${hospitalName}` : "Skupno zasedenih postelj",
+            data: this.getSeries(seriesKey(id, "bed.occupied")),
+          }
+        })
+      }
+
+      let chartSeries = generateSeries(['', 'ukclj', 'ukcmb', 'ukg', 'bse', 'bto', 'sbbr', 'sbce', 'sbiz', 'sbje', 'sbms', 'sbng', 'sbnm', 'sbpt', 'sbsg', 'sbtr'])
+
       return {
         title: {
           text: "Stanje bolnišničnih postelj"
@@ -35,32 +57,7 @@ export default {
             }
           }
         },
-        series: [
-          {
-            name: "Skupno zasedenih postelj",
-            data: this.getSeries("hospital.bed.occupied")
-          },
-          {
-            name: "Skupno zasedenih postelj v UKCLJ",
-            data: this.getSeries("hospital.ukclj.bed.occupied")
-          },
-          {
-            name: "Skupno zasedenih postelj v UKCMB",
-            data: this.getSeries("hospital.ukcmb.bed.occupied")
-          },
-          {
-            name: "Skupno zasedenih postelj v SB CE",
-            data: this.getSeries("hospital.sbce.bed.occupied")
-          },
-          {
-            name: "Skupno zasedenih postelj v SB NM",
-            data: this.getSeries("hospital.sbnm.bed.occupied")
-          },
-          {
-            name: "Skupno zasedenih postelj v SB NG",
-            data: this.getSeries("hospital.sbng.bed.occupied")
-          }
-        ]
+        series: chartSeries
       };
     }
   }
