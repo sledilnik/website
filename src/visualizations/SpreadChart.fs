@@ -170,9 +170,10 @@ let renderChartOptions scaleType (data : StatsData) =
     let chartCfg = ChartCfg.fromScale scaleType
     let startDate = DateTime(2020,3,4)
 
-    let allSeries =
+    let allSeries = [|
         {|
             //visible = true
+            id = "data"
             color = "#bda506"
             name = chartCfg.seriesLabel
             className = "cs-positiveTestsToDate"
@@ -186,9 +187,26 @@ let renderChartOptions scaleType (data : StatsData) =
             //fillOpacity = 0
         |}
         |> pojo
+        if scaleType = Absolute then
+           {|
+                ``type`` = "flags"
+                onSeries = "data"
+                shape = "flag"
+                showInLegend = false
+                data = Array.map pojo [|
+                    {| x = DateTime(2020,03,27) |> jsTime; title="1387"; text="Petek, opravljenih 1387 testov" |}
+                    {| x = DateTime(2020,03,29) |> jsTime; title="596"; text="Nedelja, opravljenih 596 testov" |}
+                |]
+           |}
+           |> pojo
+    |]
 
     // return highcharts options
-    {| basicChartOptions Linear "covid19-spread" with series = [| allSeries |]; yAxis=chartCfg.yAxis; legend=legend chartCfg.legendTitle |}
+    {| basicChartOptions Linear "covid19-spread" with
+        series = allSeries
+        yAxis=chartCfg.yAxis
+        legend=legend chartCfg.legendTitle
+    |}
 
 let renderExplainer (data: StatsData) =
     let curPositive, curHospitalzed, doublingRate =

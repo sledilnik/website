@@ -2,8 +2,6 @@
 // ^^^-uncomment this if you see black charts
 
 
-// colors
-
 .highcharts-series { path { stroke-width: 2 }}
 
 // wrapper class names for charts (last div element before SVG)
@@ -13,6 +11,8 @@
 // .covid19-patients <- second/B
 // .covid19-spread <- third
 // .covid19-regions
+
+// colors
 
 // top two charts
 .highcharts-series-group .cs-tests { path { stroke: #19aebd }}
@@ -97,8 +97,4 @@ g.highcharts-series,
 .highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
 .highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
     opacity: 0.2;
-}
-
-.highcharts-data-label {
-    color: red;
 }

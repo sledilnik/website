@@ -30,7 +30,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 //height = "100%"
                 ``type`` = "spline"
                 zoomType = "x"
-                styledMode = false // <- set this to 'true' for CSS styling
+                //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
             |}
         title = pojo {| text = None |}

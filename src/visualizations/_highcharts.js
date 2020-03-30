@@ -3,8 +3,8 @@
 // sorry for all the junk inhere
 
 import React from 'react'
-import * as Highcharts from 'highcharts/highcharts.js'
-//import * as Highcharts from 'highcharts/highstock.js'
+//import * as Highcharts from 'highcharts/highcharts.js'
+import * as Highcharts from 'highcharts/highstock.js'
 require("highcharts/highcharts-more")(Highcharts);
 require("highcharts/modules/map.js")(Highcharts);
 //require('highcharts/modules/timeline')(Highcharts);
