@@ -107,18 +107,15 @@ let getSortedFacilityCodes (data: FacilityAssets []) =
             assets.perHospital
             |> Map.toSeq
             |> Seq.map (fun (facility, stats) ->
-                let cnt =
-                    match stats.beds.total, stats.icu.total with
-                    | Some b, Some i -> Some (b+i)
-                    | Some b, None -> Some b
-                    | None, Some i -> Some i
-                    | None, None -> None
-                facility,cnt)) // hospital name
+                let quality =
+                    seq { stats.beds.total; stats.vents.total |> Option.map (( * ) 100); stats.icu.total }
+                    |> Seq.sumBy (Option.defaultValue -1)
+                facility,quality)) // hospital name
         |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
         |> Map.toList
-        |> List.sortBy (fun (fc,cnt) ->
+        |> List.sortBy (fun (fc,quality) ->
             //printfn "hospital %s %A" fc cnt
-            (cnt |> Option.defaultValue 0 |> ( * ) -1), (if fc.Length = 3 then fc else "x"+fc))
+            -quality, (if fc.Length = 3 then fc else "x"+fc))
         |> List.map fst
 
 

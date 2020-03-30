@@ -145,7 +145,10 @@ let renderChartOptions (state : State) =
             data =
                 state.facData
                 |> Seq.map renderPoint
-                |> Seq.skipWhile (snd >> Option.isNone)
+                |> Seq.skipWhile (function
+                    | _, None -> true
+                    | _, Some 0 -> true
+                    | _ -> false)
                 |> Array.ofSeq
         |}
         |> pojo
@@ -225,8 +228,8 @@ let renderTable (state: State) dispatch =
         | [| _ |] -> None
         | data ->
             seq {
-                yield data.[data.Length-2]
                 yield data.[data.Length-1]
+                yield data.[data.Length-2]
             }
             |> Seq.map (renderPoint >> snd)
             |> Seq.skipWhile Option.isNone
@@ -241,8 +244,8 @@ let renderTable (state: State) dispatch =
         | [| _ |] -> None
         | data ->
             seq {
-                yield data.[data.Length-2]
                 yield data.[data.Length-1]
+                yield data.[data.Length-2]
             }
             |> Seq.map (renderPoint >> snd)
             |> Seq.skipWhile Option.isNone
@@ -268,7 +271,7 @@ let renderTable (state: State) dispatch =
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Beds MaxFree |> numericCell
+        yield getFacilityDp scope Beds Max |> numericCell
         // icu
         let cur = getPatientsDp scope Icus
         let total = getFacilityDp scope Icus Total
@@ -276,10 +279,12 @@ let renderTable (state: State) dispatch =
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
-        yield getFacilityDp scope Icus MaxFree |> numericCell
+        yield getFacilityDp scope Icus Max |> numericCell
         // resp
-        let cur = getPatientsDp scope Vents
+        //let cur = getPatientsDp scope Vents
+        let cur = getFacilityDp scope Vents Occupied
         let total = getFacilityDp scope Vents Total
+        let free = getFree cur total
         yield free |> numericCell
         yield cur |> numericCell
         yield total |> numericCell
@@ -314,7 +319,7 @@ let renderTable (state: State) dispatch =
                             Html.th [ prop.text "Polne" ]
                             Html.th [ prop.text "Vse" ]
                             Html.th [ prop.text "Max" ]
-                            // icu
+                            // vents
                             Html.th [ prop.text "Prosti" ]
                             Html.th [ prop.text "V uporabi" ]
                             Html.th [ prop.text "Vsi" ]
