@@ -17,7 +17,7 @@ Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [različnih javnih v
 
 -   število opravljenih testov in število potrjeno okuženih
 -   število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
--   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, na intenzivni enoti, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
+-   evidenca o bolnišnični oskrbi pacientov s COVID-19: hospitalizirani, v intenzivni enoti, kritično stanje, odpuščeni iz bolniške oskrbe, ozdraveli
 -   spremljanje posameznih primerov, še zlasti v kritičnih dejavnostih: zaposleni v zdravstvu, domovih starejših občanov, civilni zaščiti
 -   zmogljivost zdravstvenega sistema: število postelj, enot intenzivne nege, respiratorjev za predihavanje ...
 
