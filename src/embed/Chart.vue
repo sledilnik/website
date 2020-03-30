@@ -28,9 +28,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass">
-@import 'node_modules/bootstrap/scss/_functions'
-@import 'node_modules/bootstrap/scss/_variables'
-@import 'node_modules/bootstrap/scss/_mixins'
 
 #visualizations
   $gap: $grid-gutter-width

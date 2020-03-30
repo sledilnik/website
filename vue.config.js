@@ -33,6 +33,9 @@ module.exports = {
       scss: {
         prependData: '@import "@/../src/style/bootstrap.scss";'
       },
+      sass: {
+        prependData: '@import "@/../src/style/bootstrap.scss"'
+      },
     }
   },
   chainWebpack: config => {
