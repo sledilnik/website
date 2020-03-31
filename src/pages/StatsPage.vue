@@ -95,7 +95,6 @@ $yellow: #ffd922
 
   .btn.btn-sm.metric-selector
     border: none
-    box-shadow: 0 6px 38px 0px rgba(0, 0, 0, 0.3), 0 11px 12px 0px rgba(0, 0, 0, 0.22)
     box-shadow: 0 3px 5px rgba(0,0,0,0.20)
     transition: all 0.2s
 
@@ -103,6 +102,8 @@ $yellow: #ffd922
       box-shadow: 0 3px 11px rgba(0,0,0,0.20)
 
     &.metric-selector--selected
+      box-shadow: none
+
       &:hover
         color: #fff
 
