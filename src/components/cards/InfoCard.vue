@@ -6,10 +6,7 @@
       <div
         :id="elementId"
         class="card-diff"
-        :class="{
-        'bad': renderValues.lastDay.diff != 0,
-        'good': renderValues.lastDay.diff == 0,
-      }"
+        :class="diffClass"
       >
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
         <b-tooltip
@@ -43,6 +40,15 @@ export default {
     ...mapGetters("stats", ["getLastValue", "getValueOn"]),
     lastDay() {
       return this.getLastValue(this.field);
+    },
+    diffClass() {
+      if (this.renderValues.lastDay.diff == 0) {
+        return 'no-change'
+      } else if (this.renderValues.lastDay.diff > 0) {
+        return this.goodDirection === "down" ? "bad" : "good"
+      } else {
+        return this.goodDirection === "down" ? "good" : "bad"
+      }
     },
     dayBefore() {
       if (this.lastDay.date) {
@@ -145,6 +151,10 @@ export default {
 
   &.good {
     color: #20b16d;
+  }
+
+  &.no-change {
+    color: #a0a0a0;
   }
 }
 
