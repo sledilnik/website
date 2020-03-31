@@ -7,7 +7,7 @@
             <tests-infections-table :csvdata="data"></tests-infections-table>
           </b-tab>
           <b-tab title="Po regiji">
-            <regional-overview-table :csvdata="data"></regional-overview-table>
+            <regional-overview-table :csvdata="data" :regions="regions"></regional-overview-table>
           </b-tab>
           <b-tab title="Po starosti - Moški">
             <age-groups-males-table :csvdata="data"></age-groups-males-table>
@@ -46,7 +46,7 @@ export default {
     AgeGroupsFemalesTable
   },
   computed: {
-    ...mapGetters("stats", ["data"])
+    ...mapGetters("stats", ["data", "regions"])
   }
 };
 </script>
