@@ -63,6 +63,8 @@ h3,
 h4
   font-family: 'IBM Plex Mono', monospace
 
+$yellow: #ffd922
+
 .visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
@@ -90,6 +92,19 @@ h4
     border: 2px solid $yellow
     background: #fff
     box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+
+  .btn.btn-sm.metric-selector
+    border: none
+    box-shadow: 0 6px 38px 0px rgba(0, 0, 0, 0.3), 0 11px 12px 0px rgba(0, 0, 0, 0.22)
+    box-shadow: 0 3px 5px rgba(0,0,0,0.20)
+    transition: all 0.2s
+
+    &:hover
+      box-shadow: 0 3px 11px rgba(0,0,0,0.20)
+
+    &.metric-selector--selected
+      &:hover
+        color: #fff
 
   .table
     td, th
@@ -247,10 +262,7 @@ h4
       background-color: gray
 
     .show-all
-      display: flex
-      justify-content: center
-      margin-top: $gap * 1.2
-      border-top: solid 1px $gray-300
+      margin-top: 48px
 
       > div
         margin-top: -15px
@@ -258,9 +270,22 @@ h4
         background-color: white
 
       .btn
-        font-size: $font-size
-        border-color: $button-color
-        background-color: $button-color
+        font-size: 14px
+        font-family: 'IBM Plex Mono', monospace
+        background-color: $yellow
+        color: #000
+        padding: 15px 16px
+        border-radius: 0
+        border: none
+        box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+        &:active
+          background-color: $yellow !important
+          color: #000
+        &:hover
+          box-shadow: 0 6px 38px -14px rgba(0, 0, 0, 0.3), 0 11px 12px -10px rgba(0, 0, 0, 0.22)
+        &:focus
+          border: none
+          outline: none
 
     .doubling-time
       margin-top: 5px
