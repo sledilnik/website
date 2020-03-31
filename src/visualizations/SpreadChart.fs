@@ -187,18 +187,20 @@ let renderChartOptions scaleType (data : StatsData) =
             //fillOpacity = 0
         |}
         |> pojo
-        if scaleType = Absolute then
-           {|
-                ``type`` = "flags"
-                onSeries = "data"
-                shape = "flag"
-                showInLegend = false
-                data = Array.map pojo [|
-                    {| x = DateTime(2020,03,27) |> jsTime; title="1387"; text="Petek, opravljenih 1387 testov" |}
-                    {| x = DateTime(2020,03,29) |> jsTime; title="596"; text="Nedelja, opravljenih 596 testov" |}
-                |]
-           |}
-           |> pojo
+
+        //if scaleType = Absolute then
+        {|
+            ``type`` = "flags"
+            onSeries = "data"
+            shape = "flag"
+            showInLegend = false
+            color = "#444"
+            data = Array.map pojo [|
+                {| x = DateTime(2020,03,27) |> jsTime; title="1387 testov"; text="Petek, opravljenih 1387 testov" |}
+                {| x = DateTime(2020,03,29) |> jsTime; title="596"; text="Nedelja, opravljenih 596 testov" |}
+            |]
+        |}
+        |> pojo
     |]
 
     // return highcharts options
