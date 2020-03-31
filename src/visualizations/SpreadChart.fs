@@ -157,7 +157,7 @@ type ChartCfg = {
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
 
-                            printfn "val: %f" v
+                            // printfn "val: %f" v
                             v
                         )
                         |> Option.defaultValue nan

@@ -18,6 +18,7 @@ let init (visualization : string option) =
                 | "Patients" -> Some Patients
                 | "Spread" -> Some Spread
                 | "Regions" -> Some Regions
+                | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
                 | "Hospitals" -> Some Hospitals
                 | _ -> None

@@ -21,7 +21,9 @@ export default {
          - Patients
          - Spread
          - Regions
+         - Municipalities
          - AgeGroups
+         - Hospitals
       */
       Visualizations("visualizations", this.$route.params.type);
     });
@@ -202,13 +204,7 @@ export default {
     .show-all
       display: flex
       justify-content: center
-      margin-top: $gap * 1.2
-      border-top: solid 1px $gray-300
-
-      > div
-        margin-top: -15px
-        padding: 0 $gap
-        background-color: white
+      margin-top: $gap
 
       .btn
         font-size: $font-size
