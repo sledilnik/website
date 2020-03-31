@@ -10,22 +10,23 @@ Imaš predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o
 Uredniki baze in ostali sodelavci:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - viri, modeliranje
--   [Andraž Vrhovec](http://github.com/overlordtm) - CSV oblika, spletna stran
+-   [Andraž Vrhovec](http://github.com/overlordtm) - spletna stran, CSV oblika
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
 -   [Bojan Košir](https://twitter.com/BojanKosir) - viri, validacija podatkov
--   [Demjan Vester](https://github.com/VesterDe) - vizualizacije
+-   [Demjan Vester](https://github.com/VesterDe) - spletna stran
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - viri, validacija podatkov, modeliranje
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovna struktura in validacija
--   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija, modeliranje, vizualizacije, koordinacija
+-   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija, modeliranje, vizualizacije
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - model bolnišničnih podatkov, modeliranje
--   [Marko B](https://twitter.com/multikultivator) - viri, spletna stran, dataviz
+-   [Marko B](https://twitter.com/multikultivator) - viri, spletna stran, družabna omrežja
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
--   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - viri, validacija podatkov
+-   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - viri, validacija podatkov, koordinacija
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje
