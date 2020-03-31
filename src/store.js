@@ -9,11 +9,15 @@ const statsStore = {
   namespaced: true,
   state: {
     loaded: false,
-    data: []
+    data: [],
+    regions: []
   },
   getters: {
     data: (state) => {
       return state.data
+    },
+    regions: (state) => {
+      return state.regions
     },
     getValueOn: (state, getters) => (field, date) => {
       if (!date) {
@@ -36,10 +40,12 @@ const statsStore = {
   },
   actions: {
     fetchData: async ({ commit }) => {
-      let data = await d3.csv(
-        "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
-      );
+      const [data, regions] = await Promise.all([
+        d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"),
+        d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-region.csv"),
+      ]);
       commit('setData', data)
+      commit('setRegions', regions)
     },
     refreshDataEvery: ({ dispatch }, seconds) => {
       setInterval(() => {
@@ -51,6 +57,9 @@ const statsStore = {
     setData: (state, data) => {
       state.data = data
       state.loaded = true
+    },
+    setRegions: (state, regions) => {
+      state.regions = regions
     }
   }
 }

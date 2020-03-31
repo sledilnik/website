@@ -16,15 +16,23 @@
       <div class="text-nowrap">{{ scope.label }}</div>
     </template>
     <template v-slot:cell(date)="data">
-      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM')  }}</div>
+      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM') }}</div>
     </template>
   </b-table>
 </template>
 
 <script>
 export default {
-  props: ["csvdata"],
+  props: ["csvdata", "regions"],
   data() {
+    const regions = this.regions
+      .filter(region => !["si", "t", "n"].includes(region.id)) //Region slugs don't map to stats data, or we don't want that column
+      .map(region => {
+        return {
+          key: `region.${region.id}.todate`,
+          label: region.name
+        };
+      });
     return {
       fields: [
         {
@@ -33,55 +41,12 @@ export default {
           label: "Datum",
           sortable: true,
           stickyColumn: true,
-          variant: 'grey'
+          variant: "grey"
         },
+        ...regions,
         {
-          key: "region.lj.todate",
-          label: "Ljubljana"
-        },
-        {
-          key: "region.ce.todate",
-          label: "Celje"
-        },
-        {
-          key: "region.nm.todate",
-          label: "Novo Mesto"
-        },
-        {
-          key: "region.mb.todate",
-          label: "Maribor"
-        },
-        {
-          key: "region.kr.todate",
-          label: "Kranj"
-        },
-        {
-          key: "region.sg.todate",
-          label: "Slovenj Gradec"
-        },
-        {
-          key: "region.po.todate",
-          label: "Postojna"
-        },
-        {
-          key: "region.ms.todate",
-          label: "Murska Sobota"
-        },
-        {
-          key: "region.kp.todate",
-          label: "Koper"
-        },
-        {
-          key: "region.za.todate",
-          label: "Zasavje"
-        },
-        {
-          key: "region.kk.todate",
-          label: "Krsko"
-        },
-        {
-          key: "region.ng.todate",
-          label: "Nova Gorica"
+          key: "region.foreign.todate",
+          label: "Tujci"
         }
       ]
     };
