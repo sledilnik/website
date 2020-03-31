@@ -26,6 +26,8 @@
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
 
+import { mapState } from 'vuex'
+
 export default {
   name: "StatsPage",
   components: {
@@ -39,6 +41,11 @@ export default {
     return {
       loaded: false
     };
+  },
+  computed: {
+    ...mapState('stats', {
+      cardsLoaded: 'loaded'
+    })
   },
   mounted() {
     this.$nextTick(() => {
