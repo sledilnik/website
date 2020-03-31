@@ -1,24 +1,22 @@
 <template>
-  <b-container v-if="loaded" class="mt-3 stats-page">
-    <div class="cards-wrapper latest-data-boxes">
+  <b-container class="mt-3 stats-page">
+    <b-row>
+      <b-col v-show="!loaded" cols="12">
+        <div class="d-flex justify-content-center mb-3">
+          <b-spinner label="Nalagam podatke..."></b-spinner>
+        </div>
+      </b-col>
+    </b-row>
+    <div v-show="loaded" class="cards-wrapper latest-data-boxes">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
       <Info-card title="V intenzivni enoti" field="state.icu" />
       <Info-card title="Umrli" field="state.deceased.todate" />
       <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
     </div>
-    <b-row cols="12">
+    <b-row v-show="loaded" cols="12">
       <b-col>
         <div id="visualizations" class="visualizations"></div>
-      </b-col>
-    </b-row>
-  </b-container>
-  <b-container v-else class="mt-3">
-    <b-row>
-      <b-col>
-        <div class="d-flex justify-content-center mb-3">
-          <b-spinner label="Nalagam podatke..."></b-spinner>
-        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -27,6 +25,8 @@
 <script>
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
+
+import { mapState } from 'vuex'
 
 export default {
   name: "StatsPage",
@@ -42,11 +42,26 @@ export default {
       loaded: false
     };
   },
-  async mounted() {
-    this.loaded = true;
+  computed: {
+    ...mapState('stats', {
+      cardsLoaded: 'loaded'
+    })
+  },
+  mounted() {
     this.$nextTick(() => {
+      // must use next tick, so whole DOM is ready and div#id=visualizations exists
       Visualizations("visualizations");
     });
+
+    // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
+    let checker = setInterval(() => {
+      // search for class visualization
+      let elm = document.querySelector(".visualization");
+      if (elm) {
+        this.loaded = true;
+        clearInterval(checker);
+      }
+    }, 100);
   }
 };
 </script>
@@ -64,6 +79,7 @@ h4
   font-family: 'IBM Plex Mono', monospace
 
 $yellow: #ffd922
+$text-c: rgba(0, 0, 0, 0.7)
 
 .visualizations
   $gap: $grid-gutter-width
@@ -72,6 +88,7 @@ $yellow: #ffd922
   font-size: $font-size
   $button-color: $gray-600
   $inactive-button-color: $gray-300
+  $text-c: rgba(0, 0, 0, 0.7)
 
   section
     background: #fff
@@ -86,12 +103,16 @@ $yellow: #ffd922
     top: 0
     transform: translateY(-50%)
     margin-bottom: $gap / 2
+    font-family: 'IBM Plex Sans', sans-serif
     font-size: 18px
     font-weight: bold
     padding: 12px 16px
     border: 2px solid $yellow
     background: #fff
     box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+
+  p
+    color: $text-c
 
   .btn.btn-sm.metric-selector
     border: none
@@ -114,22 +135,43 @@ $yellow: #ffd922
   .scale-type-selector
     margin: 0 $gap/2 $gap/2 0
     text-align: right
+    color: $text-c
+    font-size: 14px
 
     .scale-type-selector__item
       display: inline-block
-      padding: 0px 7px
-      margin: 0 3px
-      border-radius: 3px
-      border: solid 1px $inactive-button-color
-      border-color: solid 1px $inactive-button-color
+      text-transform: capitalize
+      line-height: 2
+      margin-left: 24px
+      transition: all 0.55s
+      color: rgba(0, 0, 0, 0.5)
+
+      &::selection
+        background: rgba(0, 0 , 0 , 0)
 
       &:hover
         cursor: pointer
+        color: #000
+        box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+        animation: link-hover
+        animation-name: link-hover
+        animation-duration: 3s
+        animation-timing-function: ease-out
+        box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
+
+        @keyframes link-hover
+          0%
+            box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+          100%
+            box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
 
       &.selected
-        color: white
-        border-color: $button-color
-        background-color: $button-color
+        color: #000
+        font-weight: 600
+        box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+
+        &:hover
+          animation: none
 
   .metrics-selectors
     margin-top: $gap/2

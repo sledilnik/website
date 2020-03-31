@@ -8,6 +8,7 @@ Vue.use(Vuex)
 const statsStore = {
   namespaced: true,
   state: {
+    loaded: false,
     data: []
   },
   getters: {
@@ -44,6 +45,7 @@ const statsStore = {
   mutations: {
     setData: (state, data) => {
       state.data = data
+      state.loaded = true
     }
   }
 }
@@ -51,6 +53,7 @@ const statsStore = {
 const hospitalsStore = {
   namespaced: true,
   state: {
+    loaded: false,
     data: [],
     hospitals: {}
   },
@@ -101,7 +104,7 @@ const hospitalsStore = {
         });
         return row
       });
-      commit('setData', data)
+      
 
       let hospitals = {}
       let rawData = await d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-hospitals.csv")
@@ -110,16 +113,15 @@ const hospitalsStore = {
         hospitals[row.id] = row.name
       })
 
-      commit('setHospitals', hospitals)
+      commit('setData', data, hospitals)
     }
   },
   mutations: {
-    setData: (state, data) => {
+    setData: (state, data, hospitals) => {
+      state.loaded = true
       state.data = data
+      state.hospitals = hospitals
     },
-    setHospitals: (state, mapping) => {
-      state.hospitals = mapping
-    }
   }
 }
 
