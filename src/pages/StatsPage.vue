@@ -1,24 +1,22 @@
 <template>
-  <b-container v-if="loaded" class="mt-3 stats-page">
-    <div class="cards-wrapper latest-data-boxes">
+  <b-container class="mt-3 stats-page">
+    <b-row>
+      <b-col v-show="!loaded" cols="12">
+        <div class="d-flex justify-content-center mb-3">
+          <b-spinner label="Nalagam podatke..."></b-spinner>
+        </div>
+      </b-col>
+    </b-row>
+    <div v-show="loaded" class="cards-wrapper latest-data-boxes">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
       <Info-card title="V intenzivni enoti" field="state.icu" />
       <Info-card title="Umrli" field="state.deceased.todate" />
       <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
     </div>
-    <b-row cols="12">
+    <b-row v-show="loaded" cols="12">
       <b-col>
         <div id="visualizations" class="visualizations"></div>
-      </b-col>
-    </b-row>
-  </b-container>
-  <b-container v-else class="mt-3">
-    <b-row>
-      <b-col>
-        <div class="d-flex justify-content-center mb-3">
-          <b-spinner label="Nalagam podatke..."></b-spinner>
-        </div>
       </b-col>
     </b-row>
   </b-container>
@@ -42,11 +40,21 @@ export default {
       loaded: false
     };
   },
-  async mounted() {
-    this.loaded = true;
+  mounted() {
     this.$nextTick(() => {
+      // must use next tick, so whole DOM is ready and div#id=visualizations exists
       Visualizations("visualizations");
     });
+
+    // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
+    let checker = setInterval(() => {
+      // search for class visualization
+      let elm = document.querySelector(".visualization");
+      if (elm) {
+        this.loaded = true;
+        clearInterval(checker);
+      }
+    }, 100);
   }
 };
 </script>
