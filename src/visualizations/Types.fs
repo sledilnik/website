@@ -34,11 +34,6 @@ type StatsDataPoint =
       OutOfHospital : int option
       RecoveredToDate : int option
       AgeGroups : AgeGroups
-      TestsAt14 :
-        {| Performed : int option
-           PerformedToDate : int option
-           Positive : int option
-           PositiveToDate : int option |}
     }
 
 type StatsData = StatsDataPoint list

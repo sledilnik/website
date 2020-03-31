@@ -103,7 +103,7 @@ type ChartCfg = {
                 legendTitle = "Dnevni prirast potrjeno okuženih"
                 seriesLabel = "Potrjeno okuženi dnevno"
                 yAxis = yAxisBase ()
-                dataKey = fun dp -> (dp.Date |> jsTime), maxOption dp.PositiveTests dp.TestsAt14.Positive |> Option.map float |> Option.defaultValue nan
+                dataKey = fun dp -> (dp.Date |> jsTime), dp.PositiveTests |> Option.map float |> Option.defaultValue nan
             }
         | Percentage ->
             {
@@ -111,8 +111,8 @@ type ChartCfg = {
                 seriesLabel = "Relativen prirast v %"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
-                    let daily = maxOption dp.PositiveTests dp.TestsAt14.Positive |> Utils.zeroToNone
-                    let total = maxOption dp.TotalPositiveTests dp.TestsAt14.PositiveToDate |> Utils.zeroToNone
+                    let daily = dp.PositiveTests |> Utils.zeroToNone
+                    let total = dp.TotalPositiveTests |> Utils.zeroToNone
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
@@ -142,8 +142,8 @@ type ChartCfg = {
                     |}
 
                 dataKey = fun dp ->
-                    let daily = maxOption dp.PositiveTests dp.TestsAt14.Positive |> Utils.zeroToNone
-                    let total = maxOption dp.TotalPositiveTests dp.TestsAt14.PositiveToDate |> Utils.zeroToNone
+                    let daily = dp.PositiveTests |> Utils.zeroToNone
+                    let total = dp.TotalPositiveTests |> Utils.zeroToNone
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
