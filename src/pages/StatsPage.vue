@@ -79,6 +79,7 @@ h4
   font-family: 'IBM Plex Mono', monospace
 
 $yellow: #ffd922
+$text-c: rgba(0, 0, 0, 0.7)
 
 .visualizations
   $gap: $grid-gutter-width
@@ -87,6 +88,7 @@ $yellow: #ffd922
   font-size: $font-size
   $button-color: $gray-600
   $inactive-button-color: $gray-300
+  $text-c: rgba(0, 0, 0, 0.7)
 
   section
     background: #fff
@@ -101,12 +103,16 @@ $yellow: #ffd922
     top: 0
     transform: translateY(-50%)
     margin-bottom: $gap / 2
+    font-family: 'IBM Plex Sans', sans-serif
     font-size: 18px
     font-weight: bold
     padding: 12px 16px
     border: 2px solid $yellow
     background: #fff
     box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+
+  p
+    color: $text-c
 
   .btn.btn-sm.metric-selector
     border: none
@@ -129,22 +135,43 @@ $yellow: #ffd922
   .scale-type-selector
     margin: 0 $gap/2 $gap/2 0
     text-align: right
+    color: $text-c
+    font-size: 14px
 
     .scale-type-selector__item
       display: inline-block
-      padding: 0px 7px
-      margin: 0 3px
-      border-radius: 3px
-      border: solid 1px $inactive-button-color
-      border-color: solid 1px $inactive-button-color
+      text-transform: capitalize
+      line-height: 2
+      margin-left: 24px
+      transition: all 0.55s
+      color: rgba(0, 0, 0, 0.5)
+
+      &::selection
+        background: rgba(0, 0 , 0 , 0)
 
       &:hover
         cursor: pointer
+        color: #000
+        box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+        animation: link-hover
+        animation-name: link-hover
+        animation-duration: 3s
+        animation-timing-function: ease-out
+        box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
+
+        @keyframes link-hover
+          0%
+            box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+          100%
+            box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
 
       &.selected
-        color: white
-        border-color: $button-color
-        background-color: $button-color
+        color: #000
+        font-weight: 600
+        box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+
+        &:hover
+          animation: none
 
   .metrics-selectors
     margin-top: $gap/2
