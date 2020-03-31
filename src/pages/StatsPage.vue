@@ -1,13 +1,6 @@
 <template>
   <b-container class="mt-3 stats-page">
-    <b-row>
-      <b-col v-show="!loaded" cols="12">
-        <div class="d-flex justify-content-center mb-3">
-          <b-spinner label="Nalagam podatke..."></b-spinner>
-        </div>
-      </b-col>
-    </b-row>
-    <div v-show="loaded" class="cards-wrapper latest-data-boxes">
+    <div class="cards-wrapper latest-data-boxes">
       <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
       <Info-card title="Hospitalizirani" field="state.in_hospital" />
       <Info-card title="V intenzivni enoti" field="state.icu" />
@@ -19,10 +12,12 @@
         <div id="visualizations" class="visualizations"></div>
       </b-col>
     </b-row>
+    <loader v-show="!loaded"></loader>
   </b-container>
 </template>
 
 <script>
+import Loader from "components/Loader";
 import InfoCard from "components/cards/InfoCard";
 import { Visualizations } from "visualizations/App.fsproj";
 
@@ -31,7 +26,8 @@ import { mapState } from 'vuex'
 export default {
   name: "StatsPage",
   components: {
-    InfoCard
+    InfoCard,
+    Loader,
   },
   props: {
     name: String,
