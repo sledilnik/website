@@ -144,9 +144,11 @@ type ChartCfg = {
                 dataKey = fun dp ->
                     let daily = dp.PositiveTests |> Utils.zeroToNone
                     let total = dp.TotalPositiveTests |> Utils.zeroToNone
+                    let recovered = dp.RecoveredToDate |> Option.defaultValue 0
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
+                            let total = total-recovered
                             let yesterday = total-daily
                             let v =
                                 if yesterday < 2 then nan
