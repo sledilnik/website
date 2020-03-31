@@ -91,27 +91,16 @@ export default {
     font-weight: 600;
     color: $text-c;
     z-index: 1;
-
-    &:after {
-      content: "";
-      position: absolute;
-      display: block;
-      z-index: -1;
-      left: 0;
-      right: 0;
-      bottom: 1px;
-      border-bottom: 3px solid $yellow;
-      transition: all 0.35s ease-in-out;
-    }
+    background: rgba(255, 255, 255, 0);
+    transition: all 0.35s ease-in-out;
+    box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
+    text-decoration: none;
 
     &:hover {
       text-decoration: none;
       color: $text-c;
       font-weight: 600;
-
-      &:after {
-        border-bottom: 17px solid $yellow;
-      }
+      box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
     }
   }
 
