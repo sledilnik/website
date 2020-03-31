@@ -21,7 +21,9 @@ export default {
          - Patients
          - Spread
          - Regions
+         - Municipalities
          - AgeGroups
+         - Hospitals
       */
       Visualizations("visualizations", this.$route.params.type);
     });

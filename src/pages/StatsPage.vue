@@ -264,6 +264,7 @@ $yellow: #ffd922
 
     .show-all
       margin-top: 48px
+      text-align: center
 
       > div
         margin-top: -15px
