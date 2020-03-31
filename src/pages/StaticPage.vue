@@ -86,8 +86,7 @@ export default {
     margin-top: 27px;
   }
 
-  a,
-  a > strong {
+  a {
     position: relative;
     font-weight: 600;
     color: $text-c;
@@ -100,8 +99,8 @@ export default {
       z-index: -1;
       left: 0;
       right: 0;
-      bottom: -5px;
-      border-bottom: 10px solid $yellow;
+      bottom: 1px;
+      border-bottom: 3px solid $yellow;
       transition: all 0.35s ease-in-out;
     }
 
@@ -111,7 +110,7 @@ export default {
       font-weight: 600;
 
       &:after {
-        border-bottom: 24px solid $yellow;
+        border-bottom: 17px solid $yellow;
       }
     }
   }
