@@ -37,16 +37,16 @@ module Metrics  =
     let initial = [
         { Metric = Tests;               Color = "#19aebd" ; Visible = false ; Label = "Testiranja"; Class="cs-tests" }
         { Metric = TotalTests;          Color = "#73ccd5" ; Visible = false ; Label = "Testiranja - skupaj"; Class="cs-testsToDate" }
-        { Metric = PositiveTests;       Color = "#bda506" ; Visible = true ; Label = "Potrjeno okuženi - danes"; Class="cs-positiveTests" }
-        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = false  ; Label = "Potrjeno okuženi"; Class="cs-positiveTestsToDate" }
-        { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = false  ; Label = "Hospitalizirani"; Class="cs-inHospital" }
+        { Metric = PositiveTests;       Color = "#bda506" ; Visible = true ; Label = "Potrjeno okuženi"; Class="cs-positiveTests" }
+        { Metric = TotalPositiveTests;  Color = "#d5c768" ; Visible = false  ; Label = "Potrjeno okuženi - skupaj"; Class="cs-positiveTestsToDate" }
+        { Metric = Hospitalized;        Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani"; Class="cs-inHospital" }
         { Metric = HospitalizedToDate;  Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani - skupaj"; Class="cs-inHospitalToDate" }
-        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = false  ; Label = "V intenzivni enoti"; Class="cs-inHospitalICU" }
+        { Metric = HospitalizedIcu;     Color = "#bf5747" ; Visible = true  ; Label = "V intenzivni enoti"; Class="cs-inHospitalICU" }
         { Metric = OutOfHospital;       Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice"; Class="cs-outOfHospital" }
         { Metric = OutOfHospitalToDate; Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice - skupaj"; Class="cs-outOfHospitalToDate" }
-        { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = false  ; Label = "Ozdraveli - skupaj"; Class="cs-recoveredToDate" }
+        { Metric = RecoveredToDate;     Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli - skupaj"; Class="cs-recoveredToDate" }
         { Metric = Deaths;              Color = "#000000" ; Visible = false ; Label = "Umrli"; Class="cs-deceased" }
-        { Metric = TotalDeaths;         Color = "#666666" ; Visible = false  ; Label = "Umrli - skupaj"; Class="cs-deceasedToDate" }
+        { Metric = TotalDeaths;         Color = "#666666" ; Visible = true  ; Label = "Umrli - skupaj"; Class="cs-deceasedToDate" }
     ]
     /// find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
