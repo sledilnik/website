@@ -219,6 +219,21 @@ $text-c: rgba(0, 0, 0, 0.7)
     h2
       margin-bottom: $gap
 
+    .filters
+      display: flex
+      flex-wrap: wrap
+      margin-bottom: $gap / 2
+
+    .filters__query
+      margin-left: $gap/2
+      width: 15rem
+      margin-bottom: $gap / 2
+
+    .filters__region
+      margin-left: $gap/2
+      width: 15rem
+      margin-bottom: $gap / 2
+
     .municipalities
       display: flex
       flex-wrap: wrap

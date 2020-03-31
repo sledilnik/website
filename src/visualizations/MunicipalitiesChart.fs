@@ -1,4 +1,3 @@
-
 [<RequireQualifiedAccess>]
 module MunicipalitiesChart
 
@@ -18,11 +17,13 @@ type State =
     { Data : RegionsData
       Regions : Region list
       ShowAll : bool
-      SearchQuery : string }
+      SearchQuery : string
+      FilterByRegion : string }
 
 type Msg =
     | ToggleShowAll
     | SearchInputChanged of string
+    | RegionFilterChanged of string
 
 let regionTotal (region : Region) : int =
     region.Municipalities
@@ -36,7 +37,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         lastDataPoint.Regions
         |> List.sortByDescending (fun region -> regionTotal region)
 
-    { Data = data ; Regions = regions ; ShowAll = false ; SearchQuery = "" }, Cmd.none
+    { Data = data ; Regions = regions ; ShowAll = false ; SearchQuery = "" ; FilterByRegion = "" }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -44,6 +45,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with ShowAll = not state.ShowAll }, Cmd.none
     | SearchInputChanged query ->
         { state with SearchQuery = query }, Cmd.none
+    | RegionFilterChanged region ->
+        { state with FilterByRegion = region }, Cmd.none
 
 let excludeMunicipalities = Set.ofList ["kraj"]
 
@@ -209,8 +212,8 @@ let renderMunicipalities (state : State) dispatch =
                 else if v1 < v2 then 1
                 else System.String.Compare(last1.Municipality, last2.Municipality))
 
-    let filteredData =
-        let query = state.SearchQuery.Trim().ToLower()
+    let dataFilteredByQuery =
+        let query = state.SearchQuery.Trim().ToLower() |> Utils.transliterateCSZ
         if  query = ""
         then sortedData
         else
@@ -220,13 +223,21 @@ let renderMunicipalities (state : State) dispatch =
                 match Utils.Dictionaries.municipalities.TryFind item.Municipality with
                 | None -> item.Municipality
                 | Some municipality -> municipality.Name
-               name.ToLower().Contains(query))
+               (name.ToLower() |> Utils.transliterateCSZ).Contains(query))
+
+    let dataFikteredByRegion =
+        dataFilteredByQuery
+        |> Seq.filter (fun (item, _) ->
+            if state.FilterByRegion = ""
+            then true
+            else item.Region = state.FilterByRegion
+        )
 
     let truncatedData, displayShowAllButton =
         if state.ShowAll = true
-        then filteredData, true
-        else if Seq.length filteredData <= collapsedMnicipalityCount then filteredData, false
-        else Seq.take collapsedMnicipalityCount filteredData, true
+        then dataFikteredByRegion, true
+        else if Seq.length dataFikteredByRegion <= collapsedMnicipalityCount then dataFikteredByRegion, false
+        else Seq.take collapsedMnicipalityCount dataFikteredByRegion, true
 
     truncatedData |> Seq.map (fun (key, data) -> renderMunicipality key data), displayShowAllButton
 
@@ -237,11 +248,45 @@ let renderShowMore showAll dispatch =
             Html.div [
                 Html.button [
                     prop.className "btn btn-primary btn-sm"
-                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži več občin")
+                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži vse občine")
                     prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
             ]
         ]
+    ]
+
+let renderSearch (query : string) dispatch =
+    Html.input [
+        prop.className "form-control form-control-sm filters__query"
+        prop.type' .text
+        prop.placeholder "Poišči občino"
+        prop.valueOrDefault query
+        prop.onChange (fun query -> SearchInputChanged query |> dispatch)
+    ]
+
+let renderRegionSelector (regions : Region list) (selected : string) dispatch =
+    let renderedRegions = seq {
+        yield Html.option [
+            prop.text "Vse regije"
+            prop.value ""
+        ]
+
+        for region in regions do
+            let label =
+                match Utils.Dictionaries.regions.TryFind region.Name with
+                | None -> region.Name
+                | Some value -> value.Name
+            yield Html.option [
+                prop.text label
+                prop.value region.Name
+            ]
+    }
+
+    Html.select [
+        prop.value selected
+        prop.className "form-control form-control-sm filters__region"
+        prop.children renderedRegions
+        prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
 let render (state : State) dispatch =
@@ -250,12 +295,10 @@ let render (state : State) dispatch =
     Html.div [
         prop.children [
             Html.div [
-                Html.input [
-                    prop.className "form-control"
-                    prop.type' .text
-                    prop.placeholder "Išči po občinah"
-                    prop.valueOrDefault state.SearchQuery
-                    prop.onChange (fun query -> SearchInputChanged query |> dispatch)
+                prop.className "filters"
+                prop.children [
+                    renderRegionSelector state.Regions state.FilterByRegion dispatch
+                    renderSearch state.SearchQuery dispatch
                 ]
             ]
             Html.div [
