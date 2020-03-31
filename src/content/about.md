@@ -6,14 +6,14 @@ Projekt zbira, analizira in objavlja podatke o širjenju koronavirusa SARS-CoV-2
 
 **Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah držav, kjer jim je virus uspelo najbolj zajeziti, kritičnega pomena za učinkovit odziv sistemov javnega zdravja.** Šele tako objavljeni podatki so temelj za razumevanje dogajanja, aktivno samozaščitno ravnanje ljudi ter sprejemanje nujnosti ukrepov.
 
-NIJZ žal trenutno ne objavlja popolnih in dovolj strukturiranih podatkov o številu okužb, zato jih zbiramo in dopolnjujemo iz različnih javnih virov ter posredujemo javnosti. Podatki v medijih in uradnih virih, iz katerih jih črpamo, so pogosto delni, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
+Podatke zbiramo iz različnih virov, od sobote 28. marca smo vzpostavili tudi direkten pot z [NIJZ](https://www.nijz.si/) in drugimi zadravstvenimi inštitucijami, ki nam sedaj pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujem v oblike, ki so primerni za vizualizacije za predstavitev javnosti, kakor tudi za nadaljne delo na razvoju modelov in napovedi. Podatki iz medijev in nekaterih  drugih virov so kdaj tudi, nejasni in nedosledni, zaradi tega preglednica vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
 ### Pomagajte – nam, sebi in drugim
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov in programiranje zahteva vedno več pozornosti. Gre za projekt, podprt z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer lahko prispeva vsak po svojih močeh z viri ali podatki](#/team). Pridružite se in pomagajte!
 
 ### Zbrani podatki 
 
-Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [različnih javnih virov](#/sources):
+Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [NIJZ in različnih javnih virov](#/sources):
 
 -   število opravljenih testov in število potrjeno okuženih
 -   število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
@@ -39,14 +39,14 @@ Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [P
 
 ### Kako urejamo podatke
 
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki Vlade RS (sumarni) in NIJZ (po kategorijah). Če so objavljeni vmesni podatki, začasno vnesemo tudi te. Podatki po regijah in starosti se včasih ne ujemajo s tistimi ob 23:59 (ker se zbirajo ob 10h); dopolnjujemo in navzkrižno preverjamo tudi s podatki, objavljenimi v medijih. S pomočjo OCR pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemiolo[kih raziskav. S pomočjo OCR pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
 Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
 
 -   Spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) - okoli 14h.
 -   Spremljamo število hospitaliziranih: vsi oddelki, hospitalizirani na intenzivni negi in v kritičnem stanju.
 -   Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
--   Kjer so podatki nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
+-   Kjer so podatki o prehodih (sprejem/odpust) nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
 -   Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
 -   Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59.
 
