@@ -306,6 +306,8 @@ h4
     backdrop-filter: blur(4px)
 
     h1
+      font-family: "IBM Plex Sans", sans-serif
+      font-weight: bold
       color: #111
       margin-top: 1em
       font-size: 23px
@@ -325,15 +327,18 @@ h4
         border: 1px solid #ddd
         background: #fff
         text-align: center
-        h2
+        h3
+          font-family: "IBM Plex Sans", sans-serif
+          font-weight: bold
           display: block
-          font-size: 20px
+          font-size: 18px
+          min-width: 5.2em
           height: 3em
           border-bottom: 1px solid #ddd
         span
           display: block
           height: 1em
-          margin-top: -1em
+          padding-top: 0.6em
         p
           margin-top: -1em
           margin-bottom: 1em

@@ -224,7 +224,7 @@ let renderExplainer (data: StatsData) =
         Html.div [
             prop.className "box"
             prop.children [
-                Html.h2 title
+                Html.h3 title
                 Html.p [
                     match times with
                     | 0 -> Html.span ""
