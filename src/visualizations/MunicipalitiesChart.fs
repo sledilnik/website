@@ -13,6 +13,10 @@ let showMaxBars = 20
 let collapsedMnicipalityCount = 24
 let doublingTimeInterval = 7
 
+let excludedRegions = Set.ofList ["t"]
+
+let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
+
 type State =
     { Data : RegionsData
       Regions : Region list
@@ -35,6 +39,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
     let regions =
         lastDataPoint.Regions
+        |> List.filter (fun region -> Set.contains region.Name excludedRegions |> not)
         |> List.sortByDescending (fun region -> regionTotal region)
 
     { Data = data ; Regions = regions ; ShowAll = false ; SearchQuery = "" ; FilterByRegion = "" }, Cmd.none
@@ -47,8 +52,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with SearchQuery = query }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
-
-let excludeMunicipalities = Set.ofList ["kraj"]
 
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1, v2, dt = float v1.PositiveTests, float v2.PositiveTests, float (v2.Day - v1.Day)
@@ -192,7 +195,7 @@ let renderMunicipalities (state : State) dispatch =
         for dataPoint in state.Data do
             for region in dataPoint.Regions do
                 for municipality in region.Municipalities do
-                    if not (Set.contains municipality.Name excludeMunicipalities)  then
+                    if not (Set.contains municipality.Name excludedMunicipalities)  then
                         yield {| Date = dataPoint.Date
                                  Region = region.Name
                                  Municipality = municipality.Name
