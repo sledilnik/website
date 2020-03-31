@@ -40,6 +40,11 @@ const statsStore = {
         "https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"
       );
       commit('setData', data)
+    },
+    refreshDataEvery: ({ dispatch }, seconds) => {
+      setInterval(() => {
+        dispatch('fetchData')
+      }, seconds * 1000)
     }
   },
   mutations: {

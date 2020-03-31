@@ -24,6 +24,7 @@ export default {
   created() {
     this.$store.dispatch("stats/fetchData");
     this.$store.dispatch("hospitals/fetchData");
+    this.$store.dispatch("stats/refreshDataEvery", 30);
   }
 };
 </script>
