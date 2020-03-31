@@ -55,7 +55,7 @@ export default {
   font-size: $font-size-sm;
   // padding-right: 1.25rem;
 }
-
+$table__background: rgb(237, 237, 232);
 .tables-tabs {
   .nav-pills {
     .nav-item {
@@ -65,18 +65,25 @@ export default {
       margin-bottom: -10px;
     }
     .nav-link {
+      position: relative;
+      font-weight: 600;
+      color: $text-c;
+      z-index: 1;
+      background: none;
+      transition: all 0.35s ease-in-out;
+      box-shadow: inset 0 -4px 0 $table__background, inset 0 -7px $yellow;
+      text-decoration: none;
       border-radius: 0;
-      color: #000000;
-      line-height: 0.8;
-      border-bottom: 10px solid transparent;
       padding: 0;
-    }
-    .nav-link:hover,
-    .nav-link.active {
-      color: #000000;
-      font-weight: bold;
-      background-color: transparent;
-      border-bottom: 10px solid $yellow;
+
+      &:hover,
+      &.active {
+        background: none;
+        text-decoration: none;
+        color: $text-c;
+        font-weight: 600;
+        box-shadow: inset 0 -4px 0 $table__background, inset 0 -20px $yellow;
+      }
     }
   }
 }
@@ -85,7 +92,7 @@ export default {
   background: #dee2e6 !important;
 }
 
-.tables-page  {
+.tables-page {
   margin-top: -48px;
   height: 100%;
   .tables-tabs {
