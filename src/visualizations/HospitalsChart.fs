@@ -147,7 +147,7 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "Postelje" |} // "oseb" |}
+            title = pojo {| text = "Bolnišnične Postelje" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
@@ -162,7 +162,7 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "ICU, Respiratorji" |} // "oseb" |}
+            title = pojo {| text = "ICU Postelje" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
@@ -176,26 +176,35 @@ let renderChartOptions (state : State) =
         | Vents -> 1
 
 
-    let extendFacilitiesData (scope: Scope) (aType:AssetType) (cType: CountType) =
-        let startDate, point =
-            match state.facData with
-            | [||] -> DateTime.Now |> jsTime, None
-            | data -> data.[data.Length-1] |> extractFacilityDataPoint scope aType cType
-        match point with
-        | None -> [||]
-        | Some 0 -> [||]
+    let extendFacilitiesData (data: ((JsTimestamp*option<int>)[])) =
+        printfn "data: %A" data
+        match data with
+        | [||] -> data
         | _ ->
-            [| for i in 1..projectDays+1 do
-                    yield startDate + 86400000.0*float i, point |]
+            let startDate, point = data.[data.Length-1]
+            printfn "xy %A" (startDate, point)
+            match point with
+            | None -> data
+            | Some 0 -> data
+            | _ ->
+                let extra = [| for i in 1..projectDays+1 -> startDate + 86400000.0*float i, point |]
+                Array.append data extra
 
-    let renderFacilitiesSeries (scope: Scope) (aType:AssetType) (cType: CountType) color dash name =
-        let renderPoint = extractFacilityDataPoint scope aType cType
+    let renderFacilitiesSeries (scope: Scope) (aType:AssetType) (cType: CountType) scaleBy color dash name =
+        let renderPoint =
+            match scaleBy with
+            | 1.0 -> extractFacilityDataPoint scope aType cType
+            | k ->
+                let scale = fun (ts,x) -> ts, x |> Option.map (fun n -> float n * k |> int)
+                extractFacilityDataPoint scope aType cType >> scale
+
         {|
             //visible = state.activeSeries |> Set.contains series
             ``type``="line"
             color = color
             name = name
             dashStyle = dash |> DashStyle.value
+            showInLegend = true
             data =
                 state.facData
                 |> Seq.map renderPoint
@@ -204,9 +213,7 @@ let renderChartOptions (state : State) =
                     | _, Some 0 -> true
                     | _ -> false)
                 |> Array.ofSeq
-                |> fun data ->
-                    if scope=Projection then Array.append data (extendFacilitiesData scope aType cType)
-                    else data
+                |> (fun data -> if scope=Projection then extendFacilitiesData data else data)
             yAxis = getYAxis aType
             options = pojo {| dataLabels = false |}
         |}
@@ -224,6 +231,7 @@ let renderChartOptions (state : State) =
             name = name
             showInLegend = false
             dashStyle = dash |> DashStyle.value
+            //lineWidth = "1"
             data =
                 [| for i in 1..projectDays+1 do
                     let k = Math.Pow(growthFactor,float i)
@@ -264,25 +272,30 @@ let renderChartOptions (state : State) =
         let gf7, gf14, gf21 = growthFactor 7, growthFactor 14, growthFactor 21
 
         let clr = "#444"
-        yield renderFacilitiesSeries state.scope Beds Total    clr LongDash "Postelje, vse"
+        if state.scope = Projection then
+            yield renderFacilitiesSeries state.scope Beds Max 1.0 clr Dash "Postelje, maksimalno"
+        else
+            yield pojo {| showInLegend = false; data=[||] |}
+
+        yield renderFacilitiesSeries state.scope Beds Total 1.0 clr Solid "Postelje, vse"
+        yield renderFacilitiesSeries state.scope Beds Total 0.7 "#777" Dash "Postelje, 70%"
         //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
         //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
         yield renderPatientsSeries state.scope Beds clr Solid "Postelje, polne"
 
         let clr = "#c44"
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
-        yield renderFacilitiesSeries state.scope Icus Total    clr LongDash "Intenzivne, vse"
+        yield renderFacilitiesSeries state.scope Icus Total 1.0 clr Solid "Intenzivne, vse"
+        yield renderFacilitiesSeries state.scope Icus Total 0.7 "#c88" Dash "Intenzivne, 70%"
         //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
         yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
         if state.scope = Projection then
-            let clr = "#444"
-            yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
-
+            let clr = "#888"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100 "Projekcija, 7-dnevna rast"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevna rast"
             yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevna rast"
 
-            let clr = "#c44"
+            let clr = "#c88"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130 "Projekcija, 7-dnevna rast"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevna rast"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevna rast"
@@ -342,7 +355,7 @@ let renderChartOptions (state : State) =
 
 let renderChartContainer state =
     Html.div [
-        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.style [ style.height 520 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
