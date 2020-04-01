@@ -19,8 +19,16 @@ type AgeGroup =
 
 type AgeGroups = AgeGroup list
 
+type Cases =
+    { ConfirmedToday : int option
+      ConfirmedToDate : int option
+      ClosedToDate : int option
+      ActiveToDate : int option }
+
 type StatsDataPoint =
-    { Date : System.DateTime
+    { DayFromStart : int
+      Date : System.DateTime
+      Phase : string
       Tests : int option
       TotalTests : int option
       PositiveTests : int option
@@ -34,7 +42,7 @@ type StatsDataPoint =
       OutOfHospital : int option
       RecoveredToDate : int option
       AgeGroups : AgeGroups
-    }
+      Cases : Cases }
 
 type StatsData = StatsDataPoint list
 

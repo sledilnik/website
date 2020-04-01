@@ -33,6 +33,11 @@ type private TransferStatsDataPoint =
       performedTests : int option
       positiveTestsToDate : int option
       positiveTests : int option
+      cases :
+        {| confirmedToday : int option
+           confirmedToDate : int option
+           closedToDate : int option
+           activeToDate : int option |}
       statePerTreatment :
         {| inCare : int option
            inHospital : int option
@@ -64,7 +69,9 @@ type private TransferStatsDataPoint =
     }
 
     member this.ToDomain : StatsDataPoint =
-        { Date = System.DateTime(this.year, this.month, this.day)
+        { DayFromStart = this.dayFromStart
+          Date = System.DateTime(this.year, this.month, this.day)
+          Phase = this.phase
           Tests = this.performedTests
           TotalTests = this.performedTestsToDate
           PositiveTests = this.positiveTests
@@ -78,7 +85,12 @@ type private TransferStatsDataPoint =
           OutOfHospital = this.statePerTreatment.outOfHospital
           RecoveredToDate = this.statePerTreatment.recoveredToDate
           AgeGroups = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain)
-          }
+          Cases =
+            { ConfirmedToday = this.cases.confirmedToday
+              ConfirmedToDate = this.cases.confirmedToDate
+              ClosedToDate = this.cases.closedToDate
+              ActiveToDate = this.cases.activeToDate }
+        }
 
 type private TransferStatsData = TransferStatsDataPoint list
 
