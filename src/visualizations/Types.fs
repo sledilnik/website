@@ -65,10 +65,6 @@ type RegionsDataPoint =
 
 type RegionsData = RegionsDataPoint list
 
-type Data =
-    { StatsData : StatsData
-      RegionsData : RegionsData }
-
 type Visualization =
     | MetricsComparison
     | Patients
@@ -83,8 +79,12 @@ type RenderingMode =
     | Embeded of Visualization option
 
 type State =
-    { Data : RemoteData<Data, string>
+    { StatsData : RemoteData<StatsData, string>
+      RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
 
 type Msg =
-    | DataLoaded of RemoteData<Data, string>
+    | StatsDataRequested
+    | StatsDataLoaded of RemoteData<StatsData, string>
+    | RegionsDataRequest
+    | RegionsDataLoaded of RemoteData<RegionsData, string>

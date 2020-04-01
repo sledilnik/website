@@ -34,6 +34,12 @@ let renderScaleSelector scaleType dispatch =
         ]
     ]
 
+let renderLoading =
+    Html.text "Nalagam podatke..."
+
+let renderErrorLoading (error : string) =
+    Html.text error
+
 let monthNameOfdate (date : System.DateTime) =
     match date.Month with
     | 1 -> "januar"

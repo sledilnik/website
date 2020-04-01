@@ -4,8 +4,6 @@ open System
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-open Types
-
 let url = "https://covid19.rthand.com/api/patients"
 
 type PatientCounts = {
@@ -59,5 +57,3 @@ let fetch () = async {
         | err ->
             Error (sprintf "got http %d while fetching %s" err url)
 }
-
-

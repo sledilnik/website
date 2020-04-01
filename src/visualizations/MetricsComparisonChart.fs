@@ -168,9 +168,5 @@ let render state dispatch =
         renderMetricsSelectors state.Metrics dispatch
     ]
 
-type Props = {
-    data : StatsData
-}
-
-let metricsComparisonChart (props : Props) =
+let metricsComparisonChart (props : {| data : StatsData |}) =
     React.elmishComponent("MetricsComparisonChart", init props.data, update, render)

@@ -258,7 +258,6 @@ let renderExplainer (data: StatsData) =
         ]
     ]
 
-
 let renderChartContainer scaleType data =
     Html.div [
         prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
@@ -309,9 +308,5 @@ let render (state: State) dispatch =
         ]
     ]
 
-type Props = {
-    data : StatsData
-}
-
-let spreadChart (props : Props) =
+let spreadChart (props : {| data : StatsData |}) =
     React.elmishComponent("SpreadChart", init props.data, update, render)

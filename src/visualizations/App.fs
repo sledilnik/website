@@ -2,7 +2,6 @@ module App
 
 open Browser
 open Elmish
-open Elmish.UrlParser
 open Feliz
 
 open Types
@@ -25,16 +24,23 @@ let init (visualization : string option) =
                 |> Embeded
 
         let initialState =
-            { Data = NotAsked
+            { StatsData = NotAsked
+              RegionsData = NotAsked
               RenderingMode = renderingMode }
 
-        initialState, Cmd.OfAsync.result SourceData.loadData
+        initialState, Cmd.batch [Cmd.ofMsg StatsDataRequested ; Cmd.ofMsg RegionsDataRequest ]
     inner
 
 let update (msg: Msg) (state: State) =
     match msg with
-    | DataLoaded data ->
-        { state with Data = data }, Cmd.none
+    | StatsDataRequested ->
+        { state with StatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
+    | StatsDataLoaded data ->
+        { state with StatsData = data }, Cmd.none
+    | RegionsDataRequest ->
+        { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
+    | RegionsDataLoaded data ->
+        { state with RegionsData = data }, Cmd.none
 
 let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
@@ -42,62 +48,83 @@ let render (state : State) (dispatch : Msg -> unit) =
           {| Visualization = Hospitals
              ClassName = "patients-chart"
              Label = "Kapacitete"
-             Renderer = fun _ -> HospitalsChart.hospitalsChart ()
-             Explicit = true |}
+             Explicit = true
+             Renderer = fun _ -> HospitalsChart.hospitalsChart () |}
           {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
-             Renderer = fun data -> MetricsComparisonChart.metricsComparisonChart { data = data.StatsData }
-             Explicit = false |}
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> MetricsComparisonChart.metricsComparisonChart {| data = data |} |}
           {| Visualization = Patients
              ClassName = "patients-chart"
              Label = "Obravnava hospitaliziranih"
-             Renderer = fun _ -> PatientsChart.patientsChart ()
-             Explicit = false |}
+             Explicit = false
+             Renderer = fun _ -> PatientsChart.patientsChart () |}
           {| Visualization = Spread
              ClassName = "spread-chart"
              Label = "Hitrost širjenja okužbe"
-             Renderer = fun data -> SpreadChart.spreadChart { data = data.StatsData }
-             Explicit = false |}
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> SpreadChart.spreadChart {| data = data |} |}
           {| Visualization = Regions
              ClassName = "regions-chart"
              Label = "Potrjeno okuženi po regijah"
-             Renderer = fun data -> RegionsChart.regionsChart { data = data.RegionsData }
-             Explicit = false |}
+             Explicit = false
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> RegionsChart.regionsChart {| data = data |} |}
           {| Visualization = Municipalities
              ClassName = "municipalities-chart"
              Label = "Potrjeno okuženi po občinah"
-             Renderer = fun data -> MunicipalitiesChart.municipalitiesChart { data = data.RegionsData }
-             Explicit = false |}
+             Explicit = false
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> MunicipalitiesChart.municipalitiesChart {| data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"
-             Renderer = fun data -> AgeGroupsChart.render data.StatsData ()
-             Explicit = false |} ]
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> AgeGroupsChart.render data () |}
+        ]
 
-    match state.Data with
-    | NotAsked -> Html.none
-    | Loading -> Html.text "Nalagam podatke..."
-    | Failure error -> Html.text error
-    | Success data ->
-        let embeded, visualizations =
-            match state.RenderingMode with
-            | Normal -> false, allVisualizations |> List.filter (fun v -> not v.Explicit)
-            | Embeded visualization ->
-                match visualization with
-                | None -> true, []
-                | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
+    let embeded, visualizations =
+        match state.RenderingMode with
+        | Normal -> false, allVisualizations |> List.filter (fun viz -> not viz.Explicit)
+        | Embeded visualization ->
+            match visualization with
+            | None -> true, []
+            | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
 
-        Html.div
-            [ prop.className [ true, "visualization container" ; embeded, "embeded" ]
-              prop.children (
-                  visualizations
-                  |> List.map (fun viz ->
-                      Html.section
-                        [ prop.className viz.ClassName
-                          prop.id viz.ClassName
-                          prop.children
-                            [ Html.h2 viz.Label
-                              data |> viz.Renderer ] ] )
-              )
-            ]
+    Html.div
+        [ prop.className [ true, "visualization container" ; embeded, "embeded" ]
+          prop.children (
+              visualizations
+              |> List.map (fun viz ->
+                  Html.section
+                    [ prop.className viz.ClassName
+                      prop.id viz.ClassName
+                      prop.children
+                        [ Html.h2 viz.Label
+                          state |> viz.Renderer ] ] )
+          )
+        ]

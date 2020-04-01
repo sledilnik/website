@@ -288,8 +288,8 @@ let renderBreakdownSelectors state dispatch =
 
 let render (state : State) dispatch =
     match state.data, state.error with
-    | [||], None -> Html.div [ prop.text "loading" ]
-    | _, Some err -> Html.div [ prop.text err ]
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | data, None ->
         Html.div [
             Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)

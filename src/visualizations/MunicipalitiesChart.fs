@@ -311,9 +311,5 @@ let render (state : State) dispatch =
         ]
     ]
 
-type Props = {
-    data : RegionsData
-}
-
-let municipalitiesChart (props : Props) =
+let municipalitiesChart (props : {| data : RegionsData |}) =
     React.elmishComponent("MunicipalitiesChart", init props.data, update, render)

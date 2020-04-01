@@ -164,9 +164,5 @@ let render (state : State) dispatch =
         renderMetricsSelectors state.Metrics dispatch
     ]
 
-type Props = {
-    data : RegionsData
-}
-
-let regionsChart (props : Props) =
+let regionsChart (props : {| data : RegionsData |}) =
     React.elmishComponent("RegionsChart", init props.data, update, render)
