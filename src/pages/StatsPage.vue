@@ -17,48 +17,48 @@
 </template>
 
 <script>
-import Loader from "components/Loader";
-import InfoCard from "components/cards/InfoCard";
-import { Visualizations } from "visualizations/App.fsproj";
+import Loader from 'components/Loader';
+import InfoCard from 'components/cards/InfoCard';
+import { Visualizations } from 'visualizations/App.fsproj';
 
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
 
 export default {
-  name: "StatsPage",
+  name: 'StatsPage',
   components: {
     InfoCard,
     Loader,
   },
   props: {
     name: String,
-    content: Promise
+    content: Promise,
   },
   data() {
     return {
-      loaded: false
+      loaded: false,
     };
   },
   computed: {
     ...mapState('stats', {
-      cardsLoaded: 'loaded'
-    })
+      cardsLoaded: 'loaded',
+    }),
   },
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations("visualizations");
+      Visualizations('visualizations');
     });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
       // search for class visualization
-      let elm = document.querySelector(".visualization");
+      let elm = document.querySelector('.visualization');
       if (elm) {
         this.loaded = true;
         clearInterval(checker);
       }
     }, 100);
-  }
+  },
 };
 </script>
 
@@ -74,8 +74,10 @@ h3,
 h4
   font-family: 'IBM Plex Mono', monospace
 
+$background: #f5f5f0
 $yellow: #ffd922
 $text-c: rgba(0, 0, 0, 0.7)
+$box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
 .visualizations
   $gap: $grid-gutter-width
@@ -105,7 +107,7 @@ $text-c: rgba(0, 0, 0, 0.7)
     padding: 12px 16px
     border: 2px solid $yellow
     background: #fff
-    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+    box-shadow: $box-shadow
 
   p
     color: $text-c
@@ -380,51 +382,110 @@ $text-c: rgba(0, 0, 0, 0.7)
 
   .exponential-explainer
     zIndex: 1000
-    border: 1px solid #ddd
-    background: rgba(220,220,220,0.75)
-    padding: 2em
-    backdrop-filter: blur(4px)
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+    background: #fff
+    padding: 0
+    bottom: 0
+    top: -34px
+
+
+    @media (min-width: 992px)
+      padding: 2em
+      top: 0
+      bottom: 0
 
     h1
       font-family: "IBM Plex Sans", sans-serif
       font-weight: bold
       color: #111
-      margin-top: 1em
-      font-size: 23px
+      font-size: 19px
       text-align: center
       font-weight: bold
-      padding-bottom: 1.2em
+      margin-top: 0.5em
+      padding: 0 1em 1em 1em
+
+      @media (min-width: 992px)
+        font-size: 23px
+        margin-top: 1em
+        padding: 0 0 1.2em 0
 
     div.container
       display: flex
-      justify-content: space-between
       flex-flow: row wrap
+      padding-left: 0
+      padding-right: 0
+
+      @media (min-width: 992px)
+        justify-content: space-between
+        flex-flow: row nowrap
+        padding-left: 15px
+        padding-right: 15px
 
       div.box
-        flex: none
-        flex-basis: 0
-        padding: 2.2em 2.2em 1.4em 2em
-        border: 1px solid #ddd
+        flex: 0 0 calc(100% / 3)
+        padding: 0
         background: #fff
         text-align: center
+        margin-bottom: 1.5em
+
+        &:nth-child(2),
+        &:nth-child(5)
+          border-left: 2px solid $yellow
+          border-right: 2px solid $yellow
+
         h3
           font-family: "IBM Plex Sans", sans-serif
           font-weight: bold
           display: block
-          font-size: 18px
-          min-width: 5.2em
-          height: 3em
-          border-bottom: 1px solid #ddd
+          font-size: 13px
+
         span
           display: block
           height: 1em
-          padding-top: 0.6em
+          padding-top: 0.2em
         p
           margin-top: -1em
           margin-bottom: 1em
+
+        div:last-child
+          p:last-child
+           margin-bottom: 0
+
         h4
-          margin-top: 1.4em
+          margin-top: 0.8em
           font-size: 24px
+
+        @media (min-width: 992px)
+          flex: none
+          flex-basis: 0
+          padding: 2.2em 2.2em 1.4em 2em
+          border: none
+          background: #fff
+          text-align: center
+          box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
+
+          &:nth-child(2),
+          &:nth-child(5)
+            border: none
+
+          h3
+            font-family: "IBM Plex Sans", sans-serif
+            font-weight: bold
+            display: block
+            font-size: 18px
+            min-width: 5.2em
+            height: 3em
+            border-bottom: 1px solid #ddd
+          span
+            display: block
+            height: 1em
+            padding-top: 0.6em
+          p
+            margin-top: -1em
+            margin-bottom: 1em
+          h4
+            margin-top: 1.4em
+            font-size: 24px
 
 .cards-wrapper
   display: flex
