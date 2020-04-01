@@ -10,6 +10,23 @@ type RemoteData<'data, 'error> =
     | Failure of 'error
     | Success of 'data
 
+type Cases =
+    { ConfirmedToday : int option
+      ConfirmedToDate : int option
+      ClosedToDate : int option
+      ActiveToDate : int option }
+
+type Treatment =
+    { InHospital : int option
+      InHospitalToDate : int option
+      InICU : int option
+      Critical : int option
+      DeceasedToDate : int option
+      Deceased : int option
+      OutOfHospitalToDate : int option
+      OutOfHospital : int option
+      RecoveredToDate : int option }
+
 type AgeGroup =
     { AgeFrom : int option
       AgeTo : int option
@@ -17,23 +34,19 @@ type AgeGroup =
       TestedPositiveFemale : int option
       TestedPositiveAll : int option }
 
-type AgeGroups = AgeGroup list
+type StatePerAgeToDate = AgeGroup list
 
 type StatsDataPoint =
-    { Date : System.DateTime
-      Tests : int option
-      TotalTests : int option
+    { DayFromStart : int
+      Date : System.DateTime
+      Phase : string
+      PerformedTests : int option
+      PerformedTestsToDate : int option
       PositiveTests : int option
-      TotalPositiveTests : int option
-      Hospitalized : int option
-      HospitalizedToDate : int option
-      HospitalizedIcu : int option
-      Deaths : int option
-      TotalDeaths : int option
-      OutOfHospitalToDate : int option
-      OutOfHospital : int option
-      RecoveredToDate : int option
-      AgeGroups : AgeGroups
+      PositiveTestsToDate : int option
+      Cases : Cases
+      StatePerTreatment : Treatment
+      StatePerAgeToDate : StatePerAgeToDate
     }
 
 type StatsData = StatsDataPoint list
