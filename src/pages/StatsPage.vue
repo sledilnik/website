@@ -7,7 +7,7 @@
       <Info-card title="Umrli" field="state.deceased.todate" />
       <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
     </div>
-    <b-row v-show="loaded" cols="12">
+    <b-row cols="12">
       <b-col>
         <div id="visualizations" class="visualizations"></div>
       </b-col>
@@ -53,12 +53,12 @@ export default {
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
       // search for class visualization
-      let elm = document.querySelector('.visualization');
+      let elm = document.querySelector('.scale-type-selector');
       if (elm) {
         this.loaded = true;
         clearInterval(checker);
       }
-    }, 100);
+    }, 80);
   },
 };
 </script>
@@ -69,4 +69,7 @@ export default {
   max-width: 1140px
   flex-wrap: wrap
   margin: 0px auto 58px
+
+.stats-page
+  position: relative
 </style>
