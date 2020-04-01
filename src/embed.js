@@ -9,7 +9,7 @@ import ChartEmbed from '@/embed/Chart'
 import store from 'store'
 
 import '@/main.js'
-import 'style/embed.scss'
+import 'style/embed.sass'
 
 const routes = [
   {

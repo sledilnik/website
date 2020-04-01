@@ -2,7 +2,7 @@
   <b-container class="mt-3">
     <b-row cols="12">
       <b-col>
-        <div id="visualizations"></div>
+        <div id="visualizations" class="visualizations"></div>
       </b-col>
     </b-row>
   </b-container>
