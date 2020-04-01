@@ -103,7 +103,7 @@ type ChartCfg = {
                 legendTitle = "Dnevni prirast potrjeno okuženih"
                 seriesLabel = "Potrjeno okuženi dnevno"
                 yAxis = yAxisBase ()
-                dataKey = fun dp -> (dp.Date |> jsTime), dp.PositiveTests |> Option.map float |> Option.defaultValue nan
+                dataKey = fun dp -> (dp.Date |> jsTime), dp.Cases.ConfirmedToday |> Option.map float |> Option.defaultValue nan
             }
         | Percentage ->
             {
@@ -111,8 +111,8 @@ type ChartCfg = {
                 seriesLabel = "Relativen prirast v %"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
-                    let daily = dp.PositiveTests |> Utils.zeroToNone
-                    let total = dp.PositiveTestsToDate |> Utils.zeroToNone
+                    let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
+                    let total = dp.Cases.ConfirmedToDate |> Utils.zeroToNone
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
@@ -142,8 +142,8 @@ type ChartCfg = {
                     |}
 
                 dataKey = fun dp ->
-                    let daily = dp.PositiveTests |> Utils.zeroToNone
-                    let total = dp.PositiveTestsToDate |> Utils.zeroToNone
+                    let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
+                    let total = dp.Cases.ConfirmedToDate |> Utils.zeroToNone
                     let recovered = dp.StatePerTreatment.RecoveredToDate |> Option.defaultValue 0
                     let value =
                         (daily, total)
@@ -217,7 +217,7 @@ let renderExplainer (data: StatsData) =
         data
         |> List.rev
         |> Seq.choose (fun dp ->
-            match dp.PositiveTestsToDate, dp.StatePerTreatment.InHospital with
+            match dp.Cases.ConfirmedToDate, dp.StatePerTreatment.InHospital with
             | Some p, Some h -> Some (p, h)
             | _, _ -> None)
         |> Seq.take 1
