@@ -229,8 +229,8 @@ let renderTable (state: State) dispatch =
         | [| _ |] -> None
         | data ->
             seq {
-                yield data.[data.Length-1]
-                yield data.[data.Length-2]
+                for i = data.Length-1 downto data.Length / 2 do
+                    yield data.[i]
             }
             |> Seq.map (renderPoint >> snd)
             |> Seq.skipWhile Option.isNone

@@ -18,6 +18,7 @@ let init (visualization : string option) =
                 | "Patients" -> Some Patients
                 | "Spread" -> Some Spread
                 | "Regions" -> Some Regions
+                | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
                 | "Hospitals" -> Some Hospitals
                 | _ -> None
@@ -94,6 +95,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                   |> List.map (fun viz ->
                       Html.section
                         [ prop.className viz.ClassName
+                          prop.id viz.ClassName
                           prop.children
                             [ Html.h2 viz.Label
                               data |> viz.Renderer ] ] )

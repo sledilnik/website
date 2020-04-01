@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import { Visualizations } from "visualizations/App.fsproj";
+import { Visualizations } from 'visualizations/App.fsproj';
 
 export default {
-  name: "ChartEmbed",
+  name: 'ChartEmbed',
   async mounted() {
     //console.log(this.$route.params, this.$route.query)
     this.$nextTick(() => {
@@ -21,11 +21,13 @@ export default {
          - Patients
          - Spread
          - Regions
+         - Municipalities
          - AgeGroups
+         - Hospitals
       */
-      Visualizations("visualizations", this.$route.params.type);
+      Visualizations('visualizations', this.$route.params.type);
     });
-  }
+  },
 };
 </script>
 

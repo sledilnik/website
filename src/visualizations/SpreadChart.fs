@@ -157,7 +157,7 @@ type ChartCfg = {
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
 
-                            printfn "val: %f" v
+                            // printfn "val: %f" v
                             v
                         )
                         |> Option.defaultValue nan
@@ -242,7 +242,7 @@ let renderExplainer (data: StatsData) =
 
     Html.div [
         prop.className "exponential-explainer"
-        prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute ]
+        prop.style [ (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
             yield Html.h1 "Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
             yield Html.div [
