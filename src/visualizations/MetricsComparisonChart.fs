@@ -93,10 +93,10 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
     let metricDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | Tests -> point.Tests |> Utils.zeroToNone
-            | TotalTests -> point.TotalTests |> Utils.zeroToNone
+            | Tests -> point.PerformedTests |> Utils.zeroToNone
+            | TotalTests -> point.PerformedTestsToDate |> Utils.zeroToNone
             | PositiveTests -> point.PositiveTests |> Utils.zeroToNone
-            | TotalPositiveTests -> point.TotalPositiveTests |> Utils.zeroToNone
+            | TotalPositiveTests -> point.PositiveTestsToDate |> Utils.zeroToNone
             | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
             | HospitalizedToDate -> point.HospitalizedToDate |> Utils.zeroToNone
             | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
