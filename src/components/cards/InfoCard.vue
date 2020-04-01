@@ -15,11 +15,13 @@
         >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
       </div>
       <div class="data-time">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div>
+      <!-- <div class="data-time">Na dan {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div> -->
+      <!-- <div class="data-time">Osveženo {{ exportTime | formatDate('dd. MM. yyyy HH:mm') }}</div> -->
     </div>
   </div>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import { add } from "date-fns";
 
 export default {
@@ -38,6 +40,7 @@ export default {
   },
   computed: {
     ...mapGetters("stats", ["getLastValue", "getValueOn"]),
+    ...mapState("stats", ["exportTime"]),
     lastDay() {
       return this.getLastValue(this.field);
     },
