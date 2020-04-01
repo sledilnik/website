@@ -68,5 +68,5 @@ export default {
   display: flex
   max-width: 1140px
   flex-wrap: wrap
-  margin: 0 auto 58px
+  margin: 0px auto 58px
 </style>

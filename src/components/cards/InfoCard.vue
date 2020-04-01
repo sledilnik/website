@@ -125,6 +125,10 @@ export default {
   box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
     0 11px 12px -12px rgba(0, 0, 0, 0.22);
 
+  @media only screen and (min-width: 480px) {
+    padding: 26px;
+  }
+
   @media only screen and (min-width: 768px) {
     padding: 32px;
   }
