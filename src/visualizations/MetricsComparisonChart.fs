@@ -97,14 +97,14 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | TotalTests -> point.PerformedTestsToDate |> Utils.zeroToNone
             | PositiveTests -> point.PositiveTests |> Utils.zeroToNone
             | TotalPositiveTests -> point.PositiveTestsToDate |> Utils.zeroToNone
-            | Hospitalized -> point.Hospitalized |> Utils.zeroToNone
-            | HospitalizedToDate -> point.HospitalizedToDate |> Utils.zeroToNone
-            | HospitalizedIcu -> point.HospitalizedIcu |> Utils.zeroToNone
-            | OutOfHospital -> point.OutOfHospital |> Utils.zeroToNone
-            | OutOfHospitalToDate -> point.OutOfHospitalToDate |> Utils.zeroToNone
-            | RecoveredToDate -> point.RecoveredToDate |> Utils.zeroToNone
-            | Deaths -> point.Deaths |> Utils.zeroToNone
-            | TotalDeaths -> point.TotalDeaths |> Utils.zeroToNone
+            | Hospitalized -> point.StatePerTreatment.InHospital |> Utils.zeroToNone
+            | HospitalizedToDate -> point.StatePerTreatment.InHospitalToDate |> Utils.zeroToNone
+            | HospitalizedIcu -> point.StatePerTreatment.InICU |> Utils.zeroToNone
+            | OutOfHospital -> point.StatePerTreatment.OutOfHospital |> Utils.zeroToNone
+            | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate |> Utils.zeroToNone
+            | RecoveredToDate -> point.StatePerTreatment.RecoveredToDate |> Utils.zeroToNone
+            | Deaths -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
+            | TotalDeaths -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
 
     let allSeries =
         metrics

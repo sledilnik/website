@@ -144,7 +144,7 @@ type ChartCfg = {
                 dataKey = fun dp ->
                     let daily = dp.PositiveTests |> Utils.zeroToNone
                     let total = dp.PositiveTestsToDate |> Utils.zeroToNone
-                    let recovered = dp.RecoveredToDate |> Option.defaultValue 0
+                    let recovered = dp.StatePerTreatment.RecoveredToDate |> Option.defaultValue 0
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
@@ -217,7 +217,7 @@ let renderExplainer (data: StatsData) =
         data
         |> List.rev
         |> Seq.choose (fun dp ->
-            match dp.PositiveTestsToDate, dp.Hospitalized with
+            match dp.PositiveTestsToDate, dp.StatePerTreatment.InHospital with
             | Some p, Some h -> Some (p, h)
             | _, _ -> None)
         |> Seq.take 1

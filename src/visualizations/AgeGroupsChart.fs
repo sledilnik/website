@@ -20,7 +20,7 @@ let renderBars (data : StatsData) breakdown =
         data
         |> List.rev
         |> List.pick (fun dataPoint ->
-            dataPoint.AgeGroups
+            dataPoint.StatePerAgeToDate
             |> List.filter (fun ageGroup -> // keep non-empty
                 match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
                 | None, None, None -> false
