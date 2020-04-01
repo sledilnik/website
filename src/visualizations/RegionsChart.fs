@@ -22,10 +22,10 @@ let colors =
       "#0a6b85"
       "#085f7a"
       "#055470"
-      "#024a66"
-      "#003f5c" ]
+      "#024a66" ]
+    //   "#003f5c" ]
 
-let excludedRegions = ["regija"]
+let excludedRegions = Set.ofList ["t"]
 
 let getRegionName key =
     match Utils.Dictionaries.regions.TryFind key with
@@ -60,7 +60,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         |> List.sortByDescending (fun region -> regionTotal region)
     let metrics =
         regions
-        |> List.filter (fun region -> not (List.contains region.Name excludedRegions))
+        |> List.filter (fun region -> not (Set.contains region.Name excludedRegions))
         |> List.mapi2 (fun i color region ->
             let config = getRegionName region.Name
             { Key = region.Name
