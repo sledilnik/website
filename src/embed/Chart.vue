@@ -1,7 +1,7 @@
 <template>
   <b-container class="mt-3">
     <b-row cols="12">
-      <b-col>
+      <b-col class="embeded">
         <div id="visualizations" class="visualizations"></div>
       </b-col>
     </b-row>
