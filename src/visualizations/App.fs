@@ -40,7 +40,7 @@ let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
         [
           {| Visualization = Hospitals
-             ClassName = "patients-chart"
+             ClassName = "hospitals-chart"
              Label = "Kapacitete"
              Renderer = fun _ -> HospitalsChart.hospitalsChart ()
              Explicit = true |}
