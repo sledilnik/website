@@ -141,7 +141,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       text-transform: capitalize
       line-height: 2
       margin-left: 24px
-      transition: all 0.55s
       color: rgba(0, 0, 0, 0.5)
 
       &::selection
@@ -150,22 +149,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       &:hover
         cursor: pointer
         color: #000
-        box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
-        animation: link-hover
-        animation-name: link-hover
-        animation-duration: 3s
-        animation-timing-function: ease-out
-        box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
+        // box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+        // animation: link-hover
+        // animation-name: link-hover
+        // animation-duration: 3s
+        // animation-timing-function: ease-out
+        // box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
 
-        @keyframes link-hover
-          0%
-            box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
-          100%
-            box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
+        // @keyframes link-hover
+        //   0%
+        //     box-shadow: inset 0 1px 0 white, inset 0 1px $yellow
+        //   100%
+        //     box-shadow: inset 0 1px 0 white, inset 0 -28px $yellow
 
       &.selected
         color: #000
-        font-weight: 600
         box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
 
         &:hover
