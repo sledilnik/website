@@ -29,6 +29,8 @@ export default {
     this.$store.dispatch("hospitals/fetchData");
   },
   mounted() {
+    this.$store.dispatch("stats/refreshDataEvery", 300);
+    this.$store.dispatch("hospitals/refreshDataEvery", 300);
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash);

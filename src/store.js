@@ -56,6 +56,11 @@ const statsStore = {
       commit('setData', data)
       commit('setRegions', regions)
       commit('setExportTime', d)
+    },
+    refreshDataEvery: ({ dispatch }, seconds) => {
+      setInterval(() => {
+        dispatch('fetchData')
+      }, seconds * 1000)
     }
   },
   mutations: {
@@ -142,6 +147,11 @@ const hospitalsStore = {
       commit('setData', data)
       commit('setHospitals', hospitals)
       commit('setExportTime', d)
+    },
+    refreshDataEvery: ({ dispatch }, seconds) => {
+      setInterval(() => {
+        dispatch('fetchData')
+      }, seconds * 1000)
     }
   },
   mutations: {
