@@ -1,7 +1,9 @@
 <template>
-  <div class="loader-container">
-    <img class="logo-part1" src="../assets/svg/covid-animation-1.svg" alt="logo" />
-    <img class="logo-part2" src="../assets/svg/covid-animation-2.svg" alt="logo" />
+  <div class="wrapper">
+    <div class="loader-container">
+      <img class="logo-part1" src="../assets/svg/covid-animation-1.svg" alt="logo" />
+      <img class="logo-part2" src="../assets/svg/covid-animation-2.svg" alt="logo" />
+    </div>
   </div>
 </template>
 
@@ -14,8 +16,19 @@ export default {
 <style scopped lang="sass">
 
 $width: 50px
+
+.wrapper
+  position: fixed
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  z-index: 999
+  // backdrop-filter: blur(2px)
+  // background: rgba(0,0, 0, 0.03)
+
 .loader-container
-  margin: 80px auto
+  margin: 40vh auto
   width: $width
   height: $width
   position: relative
