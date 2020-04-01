@@ -9,11 +9,12 @@ $footerHeight: 66px;
 #app {
   padding-top: $navHeight;
   > main {
-    padding-top: 48px;
+    padding-top: 24px;
     // need to interpolate in calc()
     min-height: calc(100vh - #{$navHeight} - #{$footerHeight});
-  }
-  @media all and (max-width: 500px) {
-    padding-top: 24px;
+
+    @media only screen and (min-width: 768px) {
+      padding-top: 48px;
+    }
   }
 }
