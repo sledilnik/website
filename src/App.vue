@@ -4,27 +4,30 @@
     <main>
       <router-view :key="$route.path" />
     </main>
+    <Footer v-if="!embed" />
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
+import Navbar from './components/Navbar.vue';
+import Footer from './components/Footer.vue';
 
 export default {
-  name: "app",
+  name: 'app',
   props: {
     embed: {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   components: {
-    Navbar
+    Navbar,
+    Footer,
   },
   created() {
-    this.$store.dispatch("stats/fetchData");
-    this.$store.dispatch("hospitals/fetchData");
-  }
+    this.$store.dispatch('stats/fetchData');
+    this.$store.dispatch('hospitals/fetchData');
+  },
 };
 </script>
 
