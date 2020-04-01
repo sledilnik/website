@@ -1,14 +1,14 @@
 @import './main.scss';
 
-$navHeight: 76px;
-
+$navHeight: 77px;
+$footerHeight: 66px;
 // Specific styles for main page goes here
 #app {
   padding-top: $navHeight;
   > main {
     padding-top: 48px;
     // need to interpolate in calc()
-    height: calc(100vh - #{$navHeight});
+    min-height: calc(100vh - #{$navHeight} - #{$footerHeight});
   }
   @media all and (max-width: 500px) {
     padding-top: 24px;
