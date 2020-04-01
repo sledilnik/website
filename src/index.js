@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueScrollTo from 'vue-scrollto'
 
 import App from './App.vue'
 import StaticPage from './pages/StaticPage.vue'
@@ -13,6 +14,8 @@ import store from 'store'
 
 import '@/main.js'
 import 'style/index.scss'
+
+Vue.use(VueScrollTo)
 
 const routes = [
   {
@@ -83,9 +86,19 @@ const routes = [
 
 const router = new VueRouter({
   routes, // short for `routes: routes`
-  scrollBehavior() {
-    // possible arguments to, from, savedPosition - removed, so lint does not complain
-    return { x: 0, y: 0 }
+  scrollBehavior(to) {
+    if (to.hash) {
+      const elm = document.querySelector(to.hash)
+      if (elm) {
+        let offset = 60
+        if (elm.tagName === "SECTION" && to.hash.endsWith("-chart")) {
+          offset = 90
+        }
+        return { selector: to.hash, offset: { x: 0, y: offset }}
+      }
+    } else {
+      return { x: 0, y: 0 }
+    }
   },
 })
 

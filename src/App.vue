@@ -9,25 +9,50 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue';
-import Footer from './components/Footer.vue';
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-  name: 'app',
+  name: "app",
   props: {
     embed: {
       default: false,
-      type: Boolean,
-    },
+      type: Boolean
+    }
   },
   components: {
     Navbar,
-    Footer,
+    Footer
   },
   created() {
-    this.$store.dispatch('stats/fetchData');
-    this.$store.dispatch('hospitals/fetchData');
+    this.$store.dispatch("stats/fetchData");
+    this.$store.dispatch("hospitals/fetchData");
   },
+  mounted() {
+    if (this.$route.hash) {
+      const checker = setInterval(() => {
+        const elm = document.querySelector(this.$route.hash);
+        if (elm) {
+          // element found on page
+          clearInterval(checker);
+
+          let offset = -60
+          // special case for charts
+          if (elm.tagName === "SECTION" && this.$route.hash.endsWith("-chart")) {
+            offset = -90
+          }
+
+          this.$scrollTo(document.querySelector(this.$route.hash), 500, {
+            offset: offset
+          });
+        }
+      }, 100);
+
+      setTimeout(() => {
+        clearInterval(checker)
+      }, 5000);
+    }
+  }
 };
 </script>
 
