@@ -12,12 +12,6 @@ open Data.Patients
 open Data.Hospitals
 open Highcharts
 
-(*
-[<Emit """require("./fsapps.scss")""">]
-let importScss : unit = jsNative
-importScss |> ignore
-*)
-
 
 type Scope =
     | Totals
@@ -80,7 +74,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         (state |> State.switchBreakdown breakdown), Cmd.none
 
 let getAllScopes state = seq {
-    yield Totals, "Vse bolnice"
+    yield Totals, "Vse bolnišnice"
     yield Projection, "Projekcija"
     for fcode in state.facilities do
         let _, name = fcode |> facilitySeriesInfo
@@ -142,12 +136,13 @@ let renderChartOptions (state : State) =
         if state.scope = Projection then DateTime(2020,03,11)
         else DateTime(2020,03,21)
 
-    let projectDays = 30
+    let projectDays = 40
 
     let yAxes = [|
         {|
             index = 0
             height = "55%"; top = "0%"
+            offset = 0
             ``type`` = if state.scaleType=Linear then "linear" else "logarithmic"
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
@@ -162,6 +157,7 @@ let renderChartOptions (state : State) =
         {|
             index = 1
             height = "40%"; top = "60%"
+            offset = 0
             ``type`` = if state.scaleType=Linear then "linear" else "logarithmic"
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
@@ -217,15 +213,31 @@ let renderChartOptions (state : State) =
         |> pojo
 
 
-    let extendPatientsData (scope: Scope) (aType:AssetType) =
+    let renderPatientsProjection (scope: Scope) (aType:AssetType) color dash growthFactor limit name =
         let startDate, point =
             match state.patientsData with
             | [||] -> DateTime.Now |> jsTime, None
             | data -> data.[data.Length-1] |> extractPatientDataPoint scope aType
-        let growth = 1.06
-        [| for i in 1..projectDays+1 do
-                let k = Math.Pow(growth,float i)
-                yield startDate + 86400000.0*float i, point |> Option.map (fun n -> k * float n |> int) |]
+        {|
+            ``type``="line"
+            color = color
+            name = name
+            showInLegend = false
+            dashStyle = dash |> DashStyle.value
+            data =
+                [| for i in 1..projectDays+1 do
+                    let k = Math.Pow(growthFactor,float i)
+                    match point with
+                    | Some 0
+                    | None -> ()
+                    | Some n ->
+                        let value = k * float n |> int
+                        if value < limit then
+                            yield startDate + 86400000.0*float i, point |> Option.map (fun n -> k * float n |> int)
+                |]
+            yAxis = getYAxis aType
+        |}
+        |> pojo
 
     let renderPatientsSeries (scope: Scope) (aType) color dash name =
         let renderPoint = extractPatientDataPoint scope aType
@@ -241,31 +253,41 @@ let renderChartOptions (state : State) =
                 |> Seq.map renderPoint
                 |> Seq.skipWhile (snd >> Option.isNone)
                 |> Array.ofSeq
-                |> fun data ->
-                    if scope=Projection then Array.append data (extendPatientsData scope aType)
-                    else data
             yAxis = getYAxis aType
         |}
         |> pojo
 
+    let growthFactor nDays =
+        Math.Exp(Math.Log 2.0 / float nDays)
 
     let series = [|
+        let gf7, gf14, gf21 = growthFactor 7, growthFactor 14, growthFactor 21
+
         let clr = "#444"
-        //yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
+        if state.scope = Projection then
+            yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
         yield renderFacilitiesSeries state.scope Beds Total    clr LongDash "Postelje, vse"
         //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
         //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
         yield renderPatientsSeries state.scope Beds clr Solid "Postelje, polne"
+        if state.scope = Projection then
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100 "Projekcija, 7-dnevna rast"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevna rast"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevna rast"
 
         let clr = "#c44"
-        yield renderFacilitiesSeries state.scope Icus Max      clr LongDash "Intenzivne, maksimalno"
-        yield renderFacilitiesSeries state.scope Icus Total    clr ShortDot "Intenzivne, vse"
+        //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
+        yield renderFacilitiesSeries state.scope Icus Total    clr LongDash "Intenzivne, vse"
         //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
         yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
+        if state.scope = Projection then
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130 "Projekcija, 7-dnevna rast"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevna rast"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevna rast"
 
-        let clr = "#4ad"
-        yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
-        yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
+        //let clr = "#4ad"
+        //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
+        //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
     |]
 
     let baseOptions = Highcharts.basicChartOptions state.scaleType "hospitals-chart"
@@ -285,11 +307,11 @@ let renderChartOptions (state : State) =
                 floating = true
                 x = 20
                 y = 30
-                backgroundColor = "#FFF"
+                backgroundColor = "rgba(255,255,255,0.5)"
             |}
         tooltip = pojo {| shared=true |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
-            if state.scope = Projection
+            if false //state.scope = Projection
             then
                 {| xAxis with
                     plotLines=[| {| value=jsTime <| DateTime.Now; label=None |} |]
@@ -313,7 +335,6 @@ let renderChartOptions (state : State) =
                     spline = pojo {| dataLabels = pojo {| enabled = true |} |}
                     line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                 |}
-
     |}
 
 let renderChartContainer state =

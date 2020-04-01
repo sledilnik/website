@@ -47,7 +47,7 @@ let render (state : State) (dispatch : Msg -> unit) =
         [
           {| Visualization = Hospitals
              ClassName = "patients-chart"
-             Label = "Kapacitete"
+             Label = "Kapacitete bolnišnic"
              Explicit = true
              Renderer = fun _ -> HospitalsChart.hospitalsChart () |}
           {| Visualization = MetricsComparison
