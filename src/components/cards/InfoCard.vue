@@ -3,11 +3,7 @@
     <div class="hp-card">
       <span class="card-title">{{title}}</span>
       <span class="card-number">{{ renderValues.lastDay.value }}</span>
-      <div
-        :id="elementId"
-        class="card-diff"
-        :class="diffClass"
-      >
+      <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
         <b-tooltip
           :target="elementId"
@@ -46,11 +42,11 @@ export default {
     },
     diffClass() {
       if (this.renderValues.lastDay.diff == 0) {
-        return 'no-change'
+        return "no-change";
       } else if (this.renderValues.lastDay.diff > 0) {
-        return this.goodDirection === "down" ? "bad" : "good"
+        return this.goodDirection === "down" ? "bad" : "good";
       } else {
-        return this.goodDirection === "down" ? "good" : "bad"
+        return this.goodDirection === "down" ? "good" : "bad";
       }
     },
     dayBefore() {
@@ -96,7 +92,7 @@ export default {
     },
     elementId() {
       return this.field;
-    },
+    }
   },
   mounted() {
     this.show = true;
@@ -107,29 +103,31 @@ export default {
 <style scoped lang="scss">
 .hp-card-holder {
   flex: 0 0 100%;
-  padding: 0 15px 30px;
+  padding: 0 15px 15px;
+
+  @media only screen and (min-width: 480px) {
+    flex: 0 0 calc(100% / 2);
+    padding: 0 15px 30px;
+  }
 
   @media only screen and (min-width: 768px) {
     flex: 0 0 calc(100% / 3);
   }
 
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: 1100px) {
     flex: 0 0 20%;
   }
 }
 
 .hp-card {
-  padding: 32px;
+  padding: 18px;
   background: #fff;
   box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
     0 11px 12px -12px rgba(0, 0, 0, 0.22);
-  // transition: 0.35s ease-in-out;
 
-  // &:hover {
-  //   transform: translateY(-2px);
-  //   box-shadow: 0 22px 38px -10px rgba(0, 0, 0, 0.3),
-  //     0 18px 12px -10px rgba(0, 0, 0, 0.22);
-  // }
+  @media only screen and (min-width: 768px) {
+    padding: 32px;
+  }
 }
 
 .card-title {

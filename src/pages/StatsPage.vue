@@ -62,3 +62,11 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="sass">
+.cards-wrapper
+  display: flex
+  max-width: 1140px
+  flex-wrap: wrap
+  margin: 0 auto 58px
+</style>

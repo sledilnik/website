@@ -1,5 +1,5 @@
 // rest of SASS
-
+@import 'typography.sass';
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
@@ -32,4 +32,10 @@ body {
   th {
     background-color: $yellow;
   }
+}
+
+// override BS container
+.container {
+  max-width: 1170px !important;
+  width: 100% !important;
 }
