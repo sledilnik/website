@@ -199,7 +199,7 @@ let renderChartOptions scaleType (data : StatsData) =
             color = "#444"
             data = Array.map pojo [|
                 {| x = DateTime(2020,03,27) |> jsTime; title="1387 testov"; text="Petek, opravljenih 1387 testov" |}
-                {| x = DateTime(2020,03,29) |> jsTime; title="596"; text="Nedelja, opravljenih 596 testov" |}
+                {| x = DateTime(2020,03,29) |> jsTime; title="596 testov"; text="Nedelja, opravljenih 596 testov" |}
             |]
         |}
         |> pojo

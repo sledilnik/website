@@ -177,7 +177,6 @@ let renderChartOptions (state : State) =
 
 
     let extendFacilitiesData (data: ((JsTimestamp*option<int>)[])) =
-        printfn "data: %A" data
         match data with
         | [||] -> data
         | _ ->
