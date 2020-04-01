@@ -264,16 +264,10 @@ let renderChartOptions (state : State) =
         let gf7, gf14, gf21 = growthFactor 7, growthFactor 14, growthFactor 21
 
         let clr = "#444"
-        if state.scope = Projection then
-            yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
         yield renderFacilitiesSeries state.scope Beds Total    clr LongDash "Postelje, vse"
         //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
         //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
         yield renderPatientsSeries state.scope Beds clr Solid "Postelje, polne"
-        if state.scope = Projection then
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100 "Projekcija, 7-dnevna rast"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevna rast"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevna rast"
 
         let clr = "#c44"
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
@@ -281,9 +275,18 @@ let renderChartOptions (state : State) =
         //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
         yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
         if state.scope = Projection then
+            let clr = "#444"
+            yield renderFacilitiesSeries state.scope Beds Max      clr Dash "Postelje, maksimalno"
+
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100 "Projekcija, 7-dnevna rast"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevna rast"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevna rast"
+
+            let clr = "#c44"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130 "Projekcija, 7-dnevna rast"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevna rast"
             yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevna rast"
+
 
         //let clr = "#4ad"
         //yield renderFacilitiesSeries state.scope Vents Total    clr Dash "Respiratorji, vsi"
