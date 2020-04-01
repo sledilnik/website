@@ -95,8 +95,8 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             match mc.Metric with
             | Tests -> point.PerformedTests |> Utils.zeroToNone
             | TotalTests -> point.PerformedTestsToDate |> Utils.zeroToNone
-            | PositiveTests -> point.PositiveTests |> Utils.zeroToNone
-            | TotalPositiveTests -> point.PositiveTestsToDate |> Utils.zeroToNone
+            | PositiveTests -> point.Cases.ConfirmedToday |> Utils.zeroToNone
+            | TotalPositiveTests -> point.Cases.ConfirmedToDate |> Utils.zeroToNone
             | Hospitalized -> point.StatePerTreatment.InHospital |> Utils.zeroToNone
             | HospitalizedToDate -> point.StatePerTreatment.InHospitalToDate |> Utils.zeroToNone
             | HospitalizedIcu -> point.StatePerTreatment.InICU |> Utils.zeroToNone
