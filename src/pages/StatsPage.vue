@@ -198,7 +198,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     h2
       margin-bottom: $gap
 
-  .patients-chart, .age-groups-chart
+  .patients-chart, .age-groups-chart, .hospitals-chart
     margin-top: $gap * 2
 
     .metric-selector
