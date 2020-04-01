@@ -1,15 +1,7 @@
 <template>
   <div class="loader-container">
-    <img
-      class="logo-part1"
-      src="../assets/svg/covid-animation-1.svg"
-      alt="logo"
-    />
-    <img
-      class="logo-part2"
-      src="../assets/svg/covid-animation-2.svg"
-      alt="logo"
-    />
+    <img class="logo-part1" src="../assets/svg/covid-animation-1.svg" alt="logo" />
+    <img class="logo-part2" src="../assets/svg/covid-animation-2.svg" alt="logo" />
   </div>
 </template>
 
@@ -21,7 +13,7 @@ export default {
 
 <style scopped lang="sass">
 
-$width: 100px
+$width: 50px
 .loader-container
   margin: 80px auto
   width: $width

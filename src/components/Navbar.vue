@@ -1,6 +1,6 @@
 <template>
   <div class="navbar-container">
-    <b-navbar fixed="top" toggleable="lg" :class="{scrolled: scrollPosition > 80}">
+    <b-navbar fixed="top" toggleable="lg" :class="{ scrolled: scrollPosition > 80 }">
       <b-navbar-brand to="stats"></b-navbar-brand>
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
       <b-collapse id="nav-collapse" is-nav>
@@ -20,23 +20,23 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   props: {
-    msg: String
+    msg: String,
   },
   data() {
     return {
-      scrollPosition: ""
+      scrollPosition: '',
     };
   },
   created() {
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll);
   },
   methods: {
     handleScroll() {
       this.scrollPosition = window.scrollY;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -55,8 +55,7 @@ nav.navbar {
     padding-top: 0px;
     padding-bottom: 0px;
 
-    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
-      0 11px 12px -12px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
   }
 
   &.show {
@@ -68,7 +67,7 @@ nav.navbar {
   }
 
   .navbar-brand {
-    background: url("../assets/svg/covid-19.svg") no-repeat;
+    background: url('../assets/svg/covid-19.svg') no-repeat;
     width: 145px;
     height: 39px;
     margin: 7px 0;
@@ -83,17 +82,16 @@ nav.navbar {
     font-size: 14px;
 
     &:hover {
-      color: rgba(0, 0, 0) !important;
+      color: rgb(0, 0, 0) !important;
     }
 
     &:focus {
       outline: none;
     }
 
-    &:hover,
     &.router-link-active {
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         display: block;
         z-index: -1;
@@ -110,7 +108,7 @@ nav.navbar {
     }
 
     &.router-link-active {
-      font-weight: 600;
+      font-weight: 400;
       color: #000000 !important;
 
       &:hover {
