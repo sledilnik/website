@@ -305,7 +305,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
             display: none
 
     .bar
-      width: 5px
+      width: 4px
       margin-right: 1px
       background-color: $bar-color-light
 
