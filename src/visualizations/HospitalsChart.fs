@@ -290,14 +290,14 @@ let renderChartOptions (state : State) =
         yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
         if state.scope = Projection then
             let clr = "#888"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100 "Projekcija, 7-dnevna rast"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevna rast"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevna rast"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  "Projekcija, 7-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevno podvajanje"
 
             let clr = "#c88"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130 "Projekcija, 7-dnevna rast"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevna rast"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevna rast"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130  "Projekcija, 7-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevno podvajanje"
 
 
         //let clr = "#4ad"
