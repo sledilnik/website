@@ -24,6 +24,7 @@ export default {};
 <style scopped lang="sass">
 
 footer
+  border-top: 1px solid rgba(0, 0, 0, 0.13)
   background: #fff
   padding: 16px 15px
   min-height: 66px
@@ -33,6 +34,12 @@ footer
 
   @media (min-width: 576px)
     padding: 16px 32px
+
+  .tables &
+    position: fixed
+    bottom: 0
+    left: 0
+    right: 0
 
 .content-wrapper
   position: relative
