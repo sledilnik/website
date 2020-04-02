@@ -106,11 +106,7 @@ export default {
   }
 
   a {
-    position: relative;
     font-weight: 600;
-    color: $text-c;
-    z-index: 1;
-    background: rgba(255, 255, 255, 0);
     transition: all 0.35s ease-in-out;
     box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
     text-decoration: none;
@@ -118,7 +114,7 @@ export default {
 
     &:hover {
       text-decoration: none;
-      color: $text-c;
+      color: rgba(0, 0, 0, 0.8);
       font-weight: 600;
       box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
     }
