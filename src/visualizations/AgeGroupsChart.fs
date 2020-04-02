@@ -94,7 +94,7 @@ let renderBreakdownSelectors current choose =
             ) ) ]
 
 let render data =
-    React.functionComponent ( fun () ->
+    React.functionComponent (fun () ->
         let (breakdown, setBreakdown) = React.useState Gender
         Html.div [
             renderChart data breakdown
