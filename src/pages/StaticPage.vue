@@ -8,14 +8,14 @@
 
 <script>
 export default {
-  name: "StaticPage",
+  name: 'StaticPage',
   props: {
     name: String,
-    content: Promise
+    content: Promise,
   },
   data() {
     return {
-      staticContent: ""
+      staticContent: '',
     };
   },
   mounted() {
@@ -23,7 +23,7 @@ export default {
       this.staticContent = data.default;
       this.$forceUpdate();
     });
-  }
+  },
 };
 </script>
 
@@ -47,29 +47,38 @@ export default {
     padding: 32px 32px 27px 32px;
   }
 
-  h1,
+  h1 {
+    margin-bottom: 32px;
+  }
+
+  h1 + h2 {
+    margin-top: 64px;
+  }
+
   h2,
   h3,
   h4 {
     margin-bottom: 24px;
   }
 
-  h2 {
-    font-size: 32px;
-    width: 90%;
-
-    & + p {
-      font-size: 16px;
-      margin-bottom: 48px;
-    }
+  h1 {
+    font-size: 28px;
   }
 
-  h3 {
-    font-size: 24px;
+  h2 {
+    font-size: 21px;
   }
 
   p + p {
     margin-top: 14px;
+  }
+
+  p > strong {
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 400;
+    line-height: 1.7;
   }
 
   p,
@@ -78,10 +87,20 @@ export default {
   strong {
     font-size: 14px;
     color: $text-c;
+    line-height: 1.7;
   }
 
+  * + h1,
   * + h2,
   * + h3,
+  * + table {
+    margin-top: 48px;
+  }
+
+  h1 + p {
+    margin-bottom: 48px;
+  }
+
   tr + tr {
     margin-top: 27px;
   }
@@ -95,12 +114,17 @@ export default {
     transition: all 0.35s ease-in-out;
     box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
     text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
 
     &:hover {
       text-decoration: none;
       color: $text-c;
       font-weight: 600;
       box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
+    }
+
+    strong {
+      font-weight: 600;
     }
   }
 
@@ -119,5 +143,13 @@ export default {
       border-top: 1px solid rgba(0, 0, 0, 0.45);
     }
   }
+  // thead {
+  //   display: none;
+  // }
+
+  // tr {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 }
 </style>
