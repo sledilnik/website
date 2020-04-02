@@ -26,11 +26,9 @@
 
 <script>
 export default {
-  props: ["csvdata"],
+  props: ["csvdata", "tableHeight"],
   data() {
     return {
-      // at least we don't have double scroll on mobile
-      tableHeight: "calc(100vh - 500px)",
       fields: [
         {
           key: "date",

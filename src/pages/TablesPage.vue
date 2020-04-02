@@ -4,16 +4,16 @@
       <h1>Tabela</h1>
       <b-tabs>
         <b-tab title="Povzetek stanja" active>
-          <tests-infections-table :csvdata="data"></tests-infections-table>
+          <tests-infections-table :csvdata="data" :tableHeight="tableHeight"></tests-infections-table>
         </b-tab>
         <b-tab title="Po regiji">
-          <regional-overview-table :csvdata="data" :regions="regions"></regional-overview-table>
+          <regional-overview-table :csvdata="data" :regions="regions" :tableHeight="tableHeight"></regional-overview-table>
         </b-tab>
         <b-tab title="Po starosti - Moški">
-          <age-groups-males-table :csvdata="data"></age-groups-males-table>
+          <age-groups-males-table :csvdata="data" :table-height="tableHeight"></age-groups-males-table>
         </b-tab>
         <b-tab title="Po starosti - Ženske">
-          <age-groups-females-table :csvdata="data"></age-groups-females-table>
+          <age-groups-females-table :csvdata="data" :table-height="tableHeight"></age-groups-females-table>
         </b-tab>
       </b-tabs>
     </div>
@@ -41,9 +41,27 @@ export default {
     AgeGroupsMalesTable,
     AgeGroupsFemalesTable
   },
+  data: function() {
+    return {
+      tableHeight: "calc(100vh - 500px)"
+    };
+  },
   computed: {
     ...mapGetters("stats", ["data", "regions"])
   }
+  // created() {
+  //   window.addEventListener("resize", this.myEventHandler);
+  //   // this.tableHeight = "calc(100vh - 500px)";
+  // },
+  // destroyed() {
+  //   window.removeEventListener("resize", this.myEventHandler);
+  // },
+  // methods: {
+  //   myEventHandler(e) {
+  //     console.log(e);
+  //     this.tableHeight = "calc(100vh - 500px)";
+  //   }
+  // }
 };
 </script>
 <style lang="sass">

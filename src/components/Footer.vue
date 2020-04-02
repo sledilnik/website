@@ -1,17 +1,21 @@
 <template>
   <footer>
     <div class="content-wrapper">
-      <div class="copy"><span>© 2020 Sledilnik.org</span></div>
+      <div class="copy">
+        <span>© 2020 Sledilnik.org</span>
+      </div>
       <div class="email">
-        <a href="mailto:info@sledilnik.org"><span>info@sledilnik.org</span></a>
+        <a href="mailto:info@sledilnik.org">
+          <span>info@sledilnik.org</span>
+        </a>
       </div>
       <div class="social">
-        <a href="http://fb.me/COVID19Sledilnik" target="_blank"
-          ><img src="../assets/svg/fb-icon.svg" alt="fb-icon"
-        /></a>
-        <a href="https://twitter.com/sledilnik" target="_blank"
-          ><img src="../assets/svg/tw-icon.svg" alt="tw-icon"
-        /></a>
+        <a href="http://fb.me/COVID19Sledilnik" target="_blank">
+          <img src="../assets/svg/fb-icon.svg" alt="fb-icon" />
+        </a>
+        <a href="https://twitter.com/sledilnik" target="_blank">
+          <img src="../assets/svg/tw-icon.svg" alt="tw-icon" />
+        </a>
       </div>
     </div>
   </footer>
@@ -22,7 +26,6 @@ export default {};
 </script>
 
 <style scopped lang="sass">
-
 footer
   border-top: 1px solid rgba(0, 0, 0, 0.13)
   background: #fff
@@ -31,15 +34,10 @@ footer
   display: flex
   align-items: center
   justify-content: center
+  margin-top: auto
 
   @media (min-width: 576px)
     padding: 16px 32px
-
-  .tables &
-    position: fixed
-    bottom: 0
-    left: 0
-    right: 0
 
 .content-wrapper
   position: relative
@@ -70,7 +68,6 @@ footer
 
     &:hover
       color: rgba(0, 0, 0, 0.5)
-
 
   .social
     position: absolute

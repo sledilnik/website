@@ -30,12 +30,12 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scopped lang="scss">
 .custom-container {
-  margin: 0 auto 65px auto;
-  max-width: 760px;
+  margin: -24px auto 0 auto;
+  max-width: 730px;
 
   @media only screen and (min-width: 768px) {
-    margin: 40px auto 65px auto;
-    padding: 0 15px;
+    margin: 0 auto 65px auto;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   }
 }
 

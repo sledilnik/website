@@ -38,10 +38,13 @@ export default {
           // element found on page
           clearInterval(checker);
 
-          let offset = -60
+          let offset = -60;
           // special case for charts
-          if (elm.tagName === "SECTION" && this.$route.hash.endsWith("-chart")) {
-            offset = -90
+          if (
+            elm.tagName === "SECTION" &&
+            this.$route.hash.endsWith("-chart")
+          ) {
+            offset = -90;
           }
 
           this.$scrollTo(document.querySelector(this.$route.hash), 500, {
@@ -51,7 +54,7 @@ export default {
       }, 100);
 
       setTimeout(() => {
-        clearInterval(checker)
+        clearInterval(checker);
       }, 5000);
     }
   }
@@ -65,5 +68,8 @@ main {
 
 #app {
   background: $background;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 </style>
