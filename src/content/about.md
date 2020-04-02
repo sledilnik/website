@@ -14,7 +14,7 @@ Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenk
 
 ## Zbrani podatki 
 
-Vključeni so naslednji **dnevni podatki** (z zgodovino) iz [NIJZ in različnih javnih virov](#/sources):
+Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](#/sources):
 
 - število opravljenih testov in število potrjeno okuženih
 - število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
