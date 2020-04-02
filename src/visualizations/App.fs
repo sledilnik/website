@@ -34,11 +34,15 @@ let init (visualization : string option) =
 let update (msg: Msg) (state: State) =
     match msg with
     | StatsDataRequested ->
-        { state with StatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
+        match state.StatsData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with StatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
     | StatsDataLoaded data ->
         { state with StatsData = data }, Cmd.none
     | RegionsDataRequest ->
-        { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
+        match state.RegionsData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
     | RegionsDataLoaded data ->
         { state with RegionsData = data }, Cmd.none
 
