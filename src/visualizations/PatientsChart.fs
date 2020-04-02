@@ -129,7 +129,8 @@ type Msg =
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Patients.fetch () ConsumeServerData ConsumeServerError
+    printfn "patients INIT"
+    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumeServerData ConsumeServerError
     State.initial, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =

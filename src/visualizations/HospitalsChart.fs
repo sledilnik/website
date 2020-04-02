@@ -45,8 +45,8 @@ type Msg =
     | SwitchBreakdown of Scope
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Hospitals.fetch () ConsumeHospitalsData ConsumeServerError
-    let cmd2 = Cmd.OfAsync.either Data.Patients.fetch () ConsumePatientsData ConsumeServerError
+    let cmd = Cmd.OfAsync.either Data.Hospitals.getOrFetch () ConsumeHospitalsData ConsumeServerError
+    let cmd2 = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
     State.initial, (cmd @ cmd2)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
