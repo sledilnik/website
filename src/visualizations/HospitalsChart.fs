@@ -132,10 +132,6 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
 
 let renderChartOptions (state : State) =
 
-    let startDate =
-        if state.scope = Projection then DateTime(2020,03,11)
-        else DateTime(2020,03,21)
-
     let projectDays = 40
 
     let yAxes = [|
@@ -181,7 +177,7 @@ let renderChartOptions (state : State) =
         | [||] -> data
         | _ ->
             let startDate, point = data.[data.Length-1]
-            printfn "xy %A" (startDate, point)
+            //printfn "xy %A" (startDate, point)
             match point with
             | None -> data
             | Some 0 -> data
@@ -212,7 +208,7 @@ let renderChartOptions (state : State) =
                     | _, Some 0 -> true
                     | _ -> false)
                 |> Array.ofSeq
-                |> (fun data -> if scope=Projection then extendFacilitiesData data else data)
+                |> if scope=Projection then extendFacilitiesData else id
             yAxis = getYAxis aType
             options = pojo {| dataLabels = false |}
         |}
@@ -247,17 +243,14 @@ let renderChartOptions (state : State) =
         |> pojo
 
     let renderPatientsSeries (scope: Scope) (aType) color dash name =
-        let renderPoint = extractPatientDataPoint scope aType
         {|
-            //visible = state.activeSeries |> Set.contains series
             ``type``="spline"
             color = color
             name = name
             dashStyle = dash |> DashStyle.value
             data =
                 state.patientsData
-                |> Seq.skipWhile (fun pt -> pt.Date < startDate)
-                |> Seq.map renderPoint
+                |> Seq.map (extractPatientDataPoint scope aType)
                 |> Seq.skipWhile (snd >> Option.isNone)
                 |> Array.ofSeq
             yAxis = getYAxis aType
