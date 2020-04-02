@@ -75,6 +75,14 @@ const routes = [
     }
   },
   {
+    path: '/models',
+    component: StaticPage,
+    props: {
+      name: 'sources',
+      content: import('./content/models.md')
+    }
+  },
+  {
     path: '/datasources',
     component: StaticPage,
     props: {
