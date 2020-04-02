@@ -1,4 +1,3 @@
-
 [<RequireQualifiedAccess>]
 module RegionsChart
 

@@ -13,6 +13,7 @@ let init (visualization : string option) =
             | None -> Normal
             | Some viz ->
                 match viz with
+                | "Map" -> Some Map
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Spread" -> Some Spread
@@ -45,6 +46,16 @@ let update (msg: Msg) (state: State) =
 let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
         [
+          {| Visualization = Map
+             ClassName = "map-chart"
+             Label = "Zemljevid"
+             Explicit = false
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> Map.mapChart {| data = data |} |}
           {| Visualization = Hospitals
              ClassName = "patients-chart"
              Label = "Kapacitete bolnišnic"

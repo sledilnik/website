@@ -73,6 +73,7 @@ type Visualization =
     | Regions
     | Municipalities
     | AgeGroups
+    | Map
 
 type RenderingMode =
     | Normal

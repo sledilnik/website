@@ -6,6 +6,7 @@
         <Compile Include="Types.fs" />
         <Compile Include="Recharts.fs" />
         <Compile Include="Highcharts.fs" />
+        <Compile Include="GoogleCharts.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="data/Stats.fs" />
         <Compile Include="data/Regions.fs" />
@@ -18,6 +19,7 @@
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="HospitalsChart.fs" />
         <Compile Include="SpreadChart.fs" />
+        <Compile Include="MapChart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
