@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       // at least we don't have double scroll on mobile
-      tableHeight: `${window.innerHeight - 230}px`,
+      tableHeight: "calc(100vh - 500px)",
       fields: [
         {
           key: "date",
@@ -38,7 +38,7 @@ export default {
           label: "Datum",
           sortable: true,
           stickyColumn: true,
-          variant: 'grey'
+          variant: "grey"
         },
         {
           key: "tests.performed",
@@ -86,5 +86,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
