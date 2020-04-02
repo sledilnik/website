@@ -1,60 +1,59 @@
 <template>
-  <b-container fluid class="tables-page">
-    <b-row>
-      <b-col class="px-0" cols="12">
-        <b-tabs justified class="tables-tabs" pills card>
-          <b-tab title="Povzetek stanja" active>
-            <tests-infections-table :csvdata="data"></tests-infections-table>
-          </b-tab>
-          <b-tab title="Po regiji">
-            <regional-overview-table :csvdata="data" :regions="regions"></regional-overview-table>
-          </b-tab>
-          <b-tab title="Po starosti - Moški">
-            <age-groups-males-table :csvdata="data"></age-groups-males-table>
-          </b-tab>
-          <b-tab title="Po starosti - Ženske">
-            <age-groups-females-table :csvdata="data"></age-groups-females-table>
-          </b-tab>
-        </b-tabs>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col cols="12">
-        <div class="footnote float-right">
-          Viri podatkov:
-          <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
-          <a href="https://covid19.rthand.com/api/stats">REST</a>,
-          <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
-        </div>
-      </b-col>
-    </b-row>
-  </b-container>
+  <div>
+    <div class="table-contaier">
+      <b-tabs>
+        <b-tab title="Povzetek stanja" active>
+          <tests-infections-table :csvdata="data"></tests-infections-table>
+        </b-tab>
+        <b-tab title="Po regiji">
+          <regional-overview-table :csvdata="data" :regions="regions"></regional-overview-table>
+        </b-tab>
+        <b-tab title="Po starosti - Moški">
+          <age-groups-males-table :csvdata="data"></age-groups-males-table>
+        </b-tab>
+        <b-tab title="Po starosti - Ženske">
+          <age-groups-females-table :csvdata="data"></age-groups-females-table>
+        </b-tab>
+      </b-tabs>
+    </div>
+
+    <div class="footnote">
+      Viri podatkov:
+      <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
+      <a href="https://covid19.rthand.com/api/stats">REST</a>,
+      <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
+    </div>
+  </div>
 </template>
 
 <script>
-import TestsInfectionsTable from "../components/tables/TestsInfections";
-import RegionalOverviewTable from "../components/tables/RegionalOverview";
-import AgeGroupsMalesTable from "../components/tables/AgeGroupsMales";
-import AgeGroupsFemalesTable from "../components/tables/AgeGroupsFemales";
+import TestsInfectionsTable from '../components/tables/TestsInfections';
+import RegionalOverviewTable from '../components/tables/RegionalOverview';
+import AgeGroupsMalesTable from '../components/tables/AgeGroupsMales';
+import AgeGroupsFemalesTable from '../components/tables/AgeGroupsFemales';
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
   components: {
     TestsInfectionsTable,
     RegionalOverviewTable,
     AgeGroupsMalesTable,
-    AgeGroupsFemalesTable
+    AgeGroupsFemalesTable,
   },
   computed: {
-    ...mapGetters("stats", ["data", "regions"])
-  }
+    ...mapGetters('stats', ['data', 'regions']),
+  },
 };
 </script>
 <style lang="scss">
+//new
+
+//old
 .footnote {
   font-size: $font-size-sm;
   // padding-right: 1.25rem;
 }
+
 $table__background: rgb(237, 237, 232);
 .tables-tabs {
   .nav-pills {
