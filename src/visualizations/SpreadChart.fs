@@ -145,15 +145,16 @@ type ChartCfg = {
                     let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
                     let total = dp.Cases.ConfirmedToDate |> Utils.zeroToNone
                     let recovered = dp.StatePerTreatment.RecoveredToDate |> Option.defaultValue 0
+                    let deceased = dp.StatePerTreatment.DeceasedToDate |> Option.defaultValue 0
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
-                            let total = total-recovered
-                            let yesterday = total-daily
+                            let active = total-recovered-deceased
+                            let yesterday = active-daily
                             let v =
                                 if yesterday < 2 then nan
                                 else
-                                    let rate = float total / float yesterday
+                                    let rate = float active / float yesterday
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
 
