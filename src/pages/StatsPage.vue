@@ -70,7 +70,10 @@ $loader-width: 50px
   display: flex
   max-width: 1140px
   flex-wrap: wrap
-  margin: 0px auto 58px
+  margin: 0px -15px 58px
+
+  @media only screen and (min-width: 768px)
+    margin: 0px auto 58px
 
 .stats-page
   position: relative
