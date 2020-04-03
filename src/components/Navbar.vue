@@ -53,13 +53,16 @@ nav.navbar {
 
   .navbar-toggler {
     border: none;
+    padding: 0 4px 0 0;
 
     &:focus {
       outline: none;
     }
   }
+
   .navbar-toggler-icon {
     background-image: url(../assets/svg/covid19-menu.svg);
+    width: 24px;
   }
 
   &.scrolled {
