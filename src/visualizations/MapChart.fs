@@ -109,14 +109,14 @@ let renderMap state =
                         let scaled = Math.Log (float absolute + 2.0)
                         yield box((municipality.Municipality.Code,
                                    municipality.Municipality.Name,
-                                   box {| v=scaled; f=absolute |},
-                                   weightedFmt))
+                                   box {| v=scaled; f=string absolute |},
+                                   box {| v=weighted; f=weightedFmt |}))
                     | RegionPopulationWeightedValues ->
                         let scaled = Math.Log (float weighted + 10.0)
                         yield box((municipality.Municipality.Code,
                                    municipality.Municipality.Name,
                                    box {| v=scaled; f=weightedFmt |},
-                                   absolute))
+                                   box {| v=absolute; f=absolute |} ))
 
         } |> List.ofSeq
 
