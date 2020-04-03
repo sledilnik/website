@@ -35,8 +35,7 @@ Na voljo so v oblikah:
 
 Podatki se uporabljajo za različne vizualizacije in statistike:
 
-- [**Statistika**](#/stats) – grafi in infografike s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
-- [**Zemljevid**](#/map) – stanje potrjeno okuženih po občinah
+- [**Statistika**](#/stats) – grafi, infografike in zemljevidi s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
 
 Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links).
 

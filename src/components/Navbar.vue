@@ -6,7 +6,6 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="stats">Domov</b-nav-item>
-          <b-nav-item to="map">Zemljevid</b-nav-item>
           <b-nav-item to="tables">Tabela</b-nav-item>
           <b-nav-item to="about">O projektu</b-nav-item>
           <b-nav-item to="sources">Viri</b-nav-item>

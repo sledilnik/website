@@ -6,7 +6,6 @@ import App from './App.vue'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import AdvancedStatsPage from './pages/AdvancedStatsPage.vue'
-import MapPage from './pages/MapPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 
@@ -41,10 +40,6 @@ const routes = [
   {
     path: '/data',
     component: DataPage
-  },
-  {
-    path: '/map',
-    component: MapPage
   },
   {
     path: '/tables',
