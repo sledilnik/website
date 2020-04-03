@@ -12,14 +12,14 @@
         <div id="visualizations" class="visualizations"></div>
       </b-col>
     </b-row>
-    <loader v-show="!loaded"></loader>
+    <!-- <loader v-show="!loaded"></loader> -->
   </b-container>
 </template>
 
 <script>
 import { mapState } from 'vuex';
 
-import Loader from 'components/Loader';
+// import Loader from 'components/Loader';
 import InfoCard from 'components/cards/InfoCard';
 
 import { Visualizations } from 'visualizations/App.fsproj';
@@ -28,7 +28,7 @@ export default {
   name: 'StatsPage',
   components: {
     InfoCard,
-    Loader,
+    // Loader,
   },
   props: {
     name: String,
@@ -52,9 +52,9 @@ export default {
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
-      // search for class visualization
-      let elm = document.querySelector('.chart-display-property-selector');
+      let elm = document.querySelector('.highcharts-point');
       if (elm) {
+        document.querySelector('.stats-page').classList.add('loaded');
         this.loaded = true;
         clearInterval(checker);
       }
@@ -63,7 +63,9 @@ export default {
 };
 </script>
 
-<style scoped lang="sass">
+<style lang="sass">
+$loader-width: 50px
+
 .cards-wrapper
   display: flex
   max-width: 1140px
@@ -72,4 +74,64 @@ export default {
 
 .stats-page
   position: relative
+
+  &.loaded
+    section
+      &::before,
+      &::after
+        display: none
+
+  section
+    position: relative
+
+    &::before,
+    &::after
+      content: ""
+      z-index: 99
+      display: block
+      position: absolute
+      top: calc(50% - 25px)
+      left:  calc(50% - 25px)
+      width: $loader-width
+      height: $loader-width
+      background-size: cover
+
+    &::after
+      background-image: url(../assets/svg/covid-animation-1.svg)
+
+      animation: rotate1 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate1
+        0%
+          transform: rotate(0deg) scale(1)
+        12.5%
+          transform: rotate(45deg) scale(1.3)
+        25%
+          transform: rotate(90deg) scale(1)
+        37.5%
+          transform: rotate(135deg) scale(1.3)
+        50%
+          transform: rotate(180deg) scale(1)
+        62.5%
+          transform: rotate(225deg) scale(1.3)
+        75%
+          transform: rotate(270deg) scale(1)
+        87.5%
+          transform: rotate(315deg) scale(1.3)
+        100%
+          transform: rotate(360deg) scale(1)
+
+    &::before
+      background-image: url(../assets/svg/covid-animation-2.svg)
+      animation: rotate2 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate2
+        0%
+          transform: rotate(0deg) scale(1)
+        50%
+          transform: rotate(-180deg) scale(1)
+        100%
+          transform: rotate(-360deg) scale(1)
 </style>
