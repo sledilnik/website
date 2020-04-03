@@ -108,20 +108,20 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
 
     let renderFlags startTime =
         let events = [|
+        // day, mo, title,       tooltip text
             4,  3, "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
-            6,  3, "DSO", "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
-            8,  3, "Točke", "16 vstopnih točk za testiranje"
-            10, 3, "Meje", "Zapora nekaterih mejnih prehodov z Italijo, poostren nadzor"
-            13, 3, "Vlada", "Sprejeta nova vlada"
-            14, 3, "Prevozi", "Ukinitev javnih prevozov"
-            16, 3, "Šole", "Zaprtje šol, restavracij"
-            20, 3, "Zbiranje", "Prepoved zbiranja na javnih mestih"
-            29, 3, "Trg.", "Trgovine za upokojence do 10. ure"
-            30, 3, "Občine", "Prepoved gibanja izven meja občin"
+            6,  3, "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
+            8,  3, "Točke",     "16 vstopnih točk za testiranje"
+            10, 3, "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
+            13, 3, "Vlada",     "Sprejeta nova vlada"
+            14, 3, "Prevozi",   "Ukinitev javnih prevozov"
+            16, 3, "Šole",      "Zaprtje šol, restavracij"
+            20, 3, "Zbiranje",  "Prepoved zbiranja na javnih mestih"
+            29, 3, "Trg.",      "Trgovine za upokojence do 10. ure"
+            30, 3, "Občine",    "Prepoved gibanja izven meja občin"
         |]
         {|
             ``type`` = "flags"
-            //onSeries = "data"
             shape = "flag"
             showInLegend = false
             color = "#444"
@@ -135,7 +135,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
 
 
     let allSeries = [
-        let mutable startDate = DateTime.Today |> jsTime
+        let mutable startTime = DateTime.Today |> jsTime
         for metric in metrics do
             let pointData = metricDataGenerator metric
             yield pojo
@@ -149,7 +149,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                         |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
                         |> Seq.skipWhile (fun (ts,value) ->
                             if metric.Visible && value.IsSome then
-                                startDate <- min startDate ts
+                                startTime <- min startTime ts
                             value.IsNone)
                         |> Seq.toArray
                     //yAxis = 0 // axis index
@@ -157,7 +157,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     //fillOpacity = 0
                 |}
         if scaleType = Linear then
-            yield renderFlags startDate |> pojo
+            yield renderFlags startTime |> pojo
     ]
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
