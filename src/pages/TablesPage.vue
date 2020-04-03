@@ -68,43 +68,79 @@ export default {
 <style scopped lang="sass">
 //new
 $table-text-c: rgba(0, 0, 0, 0.75)
+$table-border: rgba(0, 0, 0, 0.13)
 
 .table-container
-  margin: 0 auto
-  padding: 0 15px
+  margin: -24px auto 0
   max-width: 1110px
+  background: #fff
+
+  @media only screen and (min-width: 768px)
+    position: static
+    background: none
+    padding: 0 15px
+    margin: 0 auto
 
 .table-wrapper
   background: #fff
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
+  padding: 24px 0 12px 15px
 
   @media only screen and (min-width: 768px)
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
     padding: 32px 0 32px 32px
 
   h1
-    margin-bottom: 48px
+    margin-bottom: 18px
+
+    @media only screen and (min-width: 768px)
+      margin-bottom: 48px
+
+  .table-bordered
+    td
+      border: none
+      color: $table-text-c
+      font-size: 14px
 
 //table height
 .b-table-sticky-header.table-responsive
-  height: calc(100vh - 500px)
+  height: calc(100vh - 329px)
+  margin-bottom: 0
 
-//tabs
+  @media only screen and (min-width: 768px)
+    height: calc(100vh - 500px)
+
+  //tabs
 .nav.nav-tabs
-  li
+  display: flex
+  flex-wrap: nowrap
+  flex-wrap: wrap
+  margin: 0 0 4px
+  border: none
+
+  @media only screen and (min-width: 768px)
     margin: 0 0 48px
 
-  .nav-item + .nav-item
-    margin-left: 32px
+  .nav-item
+    flex: 50%
+    margin-bottom: 4px
+
+    & + .nav-item
+      @media only screen and (min-width: 768px)
+        margin-left: 32px
+
+    @media only screen and (min-width: 768px)
+      flex: none
+      margin-bottom: 0
 
   .nav-link
     padding: 0
     border: none
     position: relative
-    display: block
     color: rgba(0, 0, 0, 0.5)
     line-height: 20px
     margin-right: 15px
     font-size: 14px
+    display: inline-block
 
     &.active
       color: rgba(0, 0, 0)
@@ -122,6 +158,7 @@ $table-text-c: rgba(0, 0, 0, 0.75)
         display: block
         left: 0
         right: 0
+        z-index: 0
         bottom: -5px
         border-bottom: 10px solid $yellow
 
@@ -142,10 +179,18 @@ thead .table-grey.b-table-sticky-column
   font-size: 14px
   font-weight: 600
 
-th
-  border: none
+.table-wrapper
+  .table
+    td
+      padding: 44px 24px 12px
+    tr
+      border-bottom: 1px solid $table-border
 
-  //old
+.table-grey.b-table-sticky-column
+  .text-nowrap
+    transform: translateY(-30px)
+    font-weight: bold
+
 .footnote
   font-size: 13px
   margin-top: 12px
@@ -153,7 +198,18 @@ th
   @media only screen and (min-width: 768px)
     margin-top: 32px
 
-// $table__background: rgb(237, 237, 232);
+//alternating color
+.table-wrapper
+  .table-striped tbody tr:nth-of-type(odd)
+    background-color: #fff
+
+#app.tables
+  background: #fff
+
+  @media only screen and (min-width: 768px)
+    background: $background
+
+  // $table__background: rgb(237, 237, 232);
 // .tables-tabs {
 //   .nav-pills {
 //     .nav-item {

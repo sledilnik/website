@@ -29,14 +29,14 @@ export default {};
 footer
   border-top: 1px solid rgba(0, 0, 0, 0.13)
   background: #fff
-  padding: 16px 15px
+  padding: 0 15px
   min-height: 66px
   display: flex
   align-items: center
   justify-content: center
   margin-top: auto
 
-  @media (min-width: 576px)
+  @media only screen and (min-width: 768px)
     padding: 16px 32px
 
 .content-wrapper
@@ -46,7 +46,7 @@ footer
   line-height: 1.3
   padding: 15px 0
 
-  @media (min-width: 576px)
+  @media only screen and (min-width: 768px)
     display: flex
     align-items: center
     padding: 0
@@ -54,7 +54,7 @@ footer
   .copy
     margin-bottom: 8px
 
-    @media (min-width: 576px)
+    @media only screen and (min-width: 768px)
       margin-bottom: 0
 
   .email
@@ -79,7 +79,7 @@ footer
     // flex-basis: 100%
     // text-align: right
 
-    @media (min-width: 576px)
+    @media only screen and (min-width: 768px)
       position: static
       margin-left: 32px
       transform: none
@@ -87,7 +87,7 @@ footer
     img
       width: 40px
 
-      @media (min-width: 576px)
+      @media only screen and (min-width: 768px)
         width: 32px
 
     a + a
