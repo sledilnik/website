@@ -74,6 +74,10 @@ export default {
         {
           key: "age.female.75-84.todate",
           label: "75 - 84 let"
+        },
+        {
+          key: "age.female.85+.todate",
+          label: "85+ let"
         }
       ]
     };
