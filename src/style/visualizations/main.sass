@@ -109,9 +109,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .metrics-comparison-chart
     margin-top: 0
+    min-height: 710px
 
   .regions-chart
     margin-top: $gap * 2
+    min-height: 680px
 
   .age-groups-chart
     margin-top: $gap * 2
@@ -121,6 +123,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .patients-chart, .age-groups-chart, .hospitals-chart
     margin-top: $gap * 2
+    min-height: 644px
 
     .metric-selector
       background-color: white
@@ -128,8 +131,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
+  .spread-chart
+    min-height: 601px
+
   .hospitals-chart
     margin-top: 0
+
+  .map-chart
+    min-height: 798px
+
+  .age-groups-chart
+    min-height: 644px
+    .recharts-responsive-container
+      margin-left: -20px
 
   .municipalities-chart
     margin-top: $gap * 2
@@ -407,7 +421,3 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           h4
             margin-top: 1.4em
             font-size: 24px
-
-  .age-groups-chart
-    .recharts-responsive-container
-      margin-left: -20px
