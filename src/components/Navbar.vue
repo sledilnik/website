@@ -44,11 +44,23 @@ export default {
 .navbar-container {
   overflow: hidden;
 }
+
 nav.navbar {
   background: $yellow;
   transition: all 0.45s ease-in-out;
   padding-top: 12px;
   padding-bottom: 12px;
+
+  .navbar-toggler {
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .navbar-toggler-icon {
+    background-image: url(../assets/svg/covid19-menu.svg);
+  }
 
   &.scrolled {
     padding-top: 0px;
