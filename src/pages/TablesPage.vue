@@ -1,29 +1,30 @@
 <template>
   <div>
     <div class="table-container">
-      <h1>Tabela</h1>
-      <b-tabs>
-        <b-tab title="Povzetek stanja" active>
-          <tests-infections-table :csvdata="data" :tableHeight="tableHeight"></tests-infections-table>
-        </b-tab>
-        <b-tab title="Po regiji">
-          <regional-overview-table :csvdata="data" :regions="regions" :tableHeight="tableHeight"></regional-overview-table>
-        </b-tab>
-        <b-tab title="Po starosti - Moški">
-          <age-groups-males-table :csvdata="data" :table-height="tableHeight"></age-groups-males-table>
-        </b-tab>
-        <b-tab title="Po starosti - Ženske">
-          <age-groups-females-table :csvdata="data" :table-height="tableHeight"></age-groups-females-table>
-        </b-tab>
-      </b-tabs>
+      <div class="table-wrapper">
+        <h1>Tabela</h1>
+        <b-tabs>
+          <b-tab title="Povzetek stanja" active>
+            <tests-infections-table :csvdata="data" :tableHeight="tableHeight"></tests-infections-table>
+          </b-tab>
+          <b-tab title="Po regiji">
+            <regional-overview-table :csvdata="data" :regions="regions" :tableHeight="tableHeight"></regional-overview-table>
+          </b-tab>
+          <b-tab title="Po starosti - Moški">
+            <age-groups-males-table :csvdata="data" :table-height="tableHeight"></age-groups-males-table>
+          </b-tab>
+          <b-tab title="Po starosti - Ženske">
+            <age-groups-females-table :csvdata="data" :table-height="tableHeight"></age-groups-females-table>
+          </b-tab>
+        </b-tabs>
+        <div class="footnote">
+          Viri podatkov:
+          <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
+          <a href="https://covid19.rthand.com/api/stats">REST</a>,
+          <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
+        </div>
+      </div>
     </div>
-
-    <!-- <div class="footnote">
-      Viri podatkov:
-      <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
-      <a href="https://covid19.rthand.com/api/stats">REST</a>,
-      <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
-    </div>-->
   </div>
 </template>
 
@@ -43,7 +44,7 @@ export default {
   },
   data: function() {
     return {
-      tableHeight: "calc(100vh - 500px)"
+      tableHeight: "100%"
     };
   },
   computed: {
@@ -64,29 +65,93 @@ export default {
   // }
 };
 </script>
-<style lang="sass">
+<style scopped lang="sass">
 //new
+$table-text-c: rgba(0, 0, 0, 0.75)
 
 .table-container
-  position: absolute
-  width: 95vw
-  top: 120px
-  bottom: 130px
+  margin: 0 auto
+  padding: 0 15px
   max-width: 1110px
-  left: 50%
-  transform: translateX(-50%)
-  padding: 32px 0 32px 32px
+
+.table-wrapper
   background: #fff
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
+
+  @media only screen and (min-width: 768px)
+    padding: 32px 0 32px 32px
 
   h1
     margin-bottom: 48px
 
-//old
-// .footnote {
-  // font-size: $font-size-sm;
-  // padding-right: 1.25rem;
-// }
+//table height
+.b-table-sticky-header.table-responsive
+  height: calc(100vh - 500px)
+
+//tabs
+.nav.nav-tabs
+  li
+    margin: 0 0 48px
+
+  .nav-item + .nav-item
+    margin-left: 32px
+
+  .nav-link
+    padding: 0
+    border: none
+    position: relative
+    display: block
+    color: rgba(0, 0, 0, 0.5)
+    line-height: 20px
+    margin-right: 15px
+    font-size: 14px
+
+    &.active
+      color: rgba(0, 0, 0)
+
+    &:hover
+      color: rgba(0, 0, 0)
+
+    &:focus
+      outline: none
+
+    &.active
+      &:after
+        content: ""
+        position: absolute
+        display: block
+        left: 0
+        right: 0
+        bottom: -5px
+        border-bottom: 10px solid $yellow
+
+.tabs *:focus
+  outline: none
+
+//top left cell
+thead .table-grey.b-table-sticky-column
+  background: #fff
+  color: #fff
+  background-image: none !important
+
+  .text-nowrap
+    display: none
+
+.text-nowrap
+  color: $table-text-c
+  font-size: 14px
+  font-weight: 600
+
+th
+  border: none
+
+  //old
+.footnote
+  font-size: 13px
+  margin-top: 12px
+
+  @media only screen and (min-width: 768px)
+    margin-top: 32px
 
 // $table__background: rgb(237, 237, 232);
 // .tables-tabs {
