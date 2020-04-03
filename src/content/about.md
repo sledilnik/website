@@ -28,8 +28,12 @@ Vsi podatki so zbrani v [**GDocs preglednici**](https://docs.google.com/spreadsh
 
 Na voljo so v oblikah:
 
-- **CSV izvoz**: [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv)
-- **REST API**: [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals), [hospitals-list](https://covid19.rthand.com/api/hospitals-list) in drugi, več informacij v [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
+- **CSV izvoz**: 
+  - [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv), [hospitals.csv](https://github.com/slo-covid-19/data/blob/master/csv/hospitals.csv), [retirement_homes.csv](https://github.com/slo-covid-19/data/blob/master/csv/retirement_homes.csv)
+  - [dict-region.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-region.csv), [dict-muncipality.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-municipality.csv), [dict-hospitals.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-hospitals.csv), [retirement_homes.csv](https://github.com/slo-covid-19/data/blob/master/csv/retirement_homes.csv), 
+- **REST API**: 
+  - [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals)
+  - [hospitals-list](https://covid19.rthand.com/api/hospitals-list) in drugi, več informacij v [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
 
 ## Uporaba podatkov
 
@@ -41,7 +45,7 @@ Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [P
 
 ## Kako urejamo podatke
 
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemiolo[kih raziskav. S pomočjo OCR pretvorimo podatke po občinah v [tabelo Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
 Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
 
@@ -55,4 +59,5 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 ## Pogoji uporabe
 
 Uporaba in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).
+
 Za izvoz podatkov v drugih oblikah ali uporabo za vizualizacije nas kontaktirajte na info@sledilnik.org.
