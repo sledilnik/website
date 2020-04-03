@@ -20,13 +20,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     background: #fff
     margin-bottom: 88px
     position: relative
-    padding: 70px 0 30px
+    padding: 70px 0 32px
 
     &.municipalities-chart
-      padding: 70px 30px 30px
+      padding: 70px 30px 32px
 
     @media only screen and (min-width: 768px)
-      padding: 70px 30px 30px
+      padding: 70px 30px 32px
 
   h2
     position: absolute
@@ -252,16 +252,17 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .show-all
       margin-top: 48px
-      text-align: center
+      text-align: left
 
       > div
-        margin-top: -15px
-        padding: 0 $gap
-        background-color: white
+        @media only screen and (min-width: 768px)
+          margin-top: -15px
+          padding: 0 $gap
 
       .btn
         font-size: 14px
-        font-family: 'IBM Plex Mono', monospace
+        font-family: 'IBM Plex Sans', sans-serif
+        font-weight: 600
         background-color: $yellow
         color: #000
         padding: 15px 16px
