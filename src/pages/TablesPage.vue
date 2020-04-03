@@ -70,14 +70,14 @@ $table-border: rgb(222,222 ,222)
 
 .table-wrapper
   background: #fff
-  padding: 24px 0 12px 15px
+  padding: 30px 0 15px 15px
 
   @media only screen and (min-width: 768px)
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
     padding: 32px 0 32px 32px
 
   h1
-    margin-bottom: 18px
+    margin-bottom: 32px
 
     @media only screen and (min-width: 768px)
       margin-bottom: 48px
@@ -94,18 +94,20 @@ $table-border: rgb(222,222 ,222)
 
   //tabs
 .nav.nav-tabs
+  overflow: auto
   display: flex
   flex-wrap: nowrap
-  flex-wrap: wrap
-  margin: 0 0 4px
+  margin: 0 0 28px
   border: none
 
   @media only screen and (min-width: 768px)
     margin: 0 0 48px
 
   .nav-item
-    flex: 50%
     margin-bottom: 4px
+    a
+      white-space: nowrap
+    
 
     & + .nav-item
       @media only screen and (min-width: 768px)
@@ -148,6 +150,9 @@ $table-border: rgb(222,222 ,222)
 .tabs *:focus
   outline: none
 
+.b-table-sticky-header.table-responsive 
+  height: 72vh
+
 //top left cell
 thead .table-grey.b-table-sticky-column
   background-image: none !important
@@ -173,17 +178,20 @@ thead .table-b-table-default
       background: #ffd92242 !important
 
     td
-      padding: 34px 24px 12px
+      padding: 34px 24px 10px 0.75rem
       border-bottom: 1px solid $table-border
+    
+    td[aria-colindex="1"]
+      padding: 34px 24px 10px 0
 
 .table-grey.b-table-sticky-column
   .text-nowrap
-    transform: translateY(-22px)
+    transform: translateY(-24px)
     font-weight: bold
 
 .footnote
   font-size: 13px
-  margin-top: 12px
+  margin-top: 15px
 
   @media only screen and (min-width: 768px)
     margin-top: 32px
