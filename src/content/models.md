@@ -21,6 +21,6 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 <img src="https://covid-19.sledilnik.org/images/20200403-model-jzibert.png" width="700">
 
-Model lahko tudi sami v [živo uporabljate](https://pacs.zf.uni-lj.si/statistika/simulacija-sirjenja-covid-19/), tako da spreminjate posamezne parametre in vidite vpliv na razvoj epidemije. Klinične in empirične predpostavke so pod podpisom.
+Model lahko tudi sami v [živo uporabljate](https://pacs.zf.uni-lj.si/shinyR/apps/projects/CoronaSim3/), tako da spreminjate posamezne parametre in vidite vpliv na razvoj epidemije. Klinične in empirične predpostavke so pod podpisom.
 
 
