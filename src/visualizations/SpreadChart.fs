@@ -16,8 +16,8 @@ type Scale =
   with
     static member all = [ Absolute; Percentage; DoublingRate ]
     static member getName = function
-        | Absolute -> "Absoluten dnevni prirast"
-        | Percentage -> "Relativen dnevni prirast"
+        | Absolute -> "Absolutni dnevni prirast"
+        | Percentage -> "Relativni dnevni prirast"
         | DoublingRate -> "Eksponentna rast v dnevih" // "Število dni do podvojitve"
 
 type Page =
