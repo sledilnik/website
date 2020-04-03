@@ -15,7 +15,9 @@ type [<StringEnum>] [<RequireQualifiedAccess>] Resolution =
 type Options =
     | Region of string
     | Resolution of Resolution
-    | Legend of obj option
+    | DefaultColor of string
+    | DatalessRegionColor of string
+    | ColorAxis of obj
 
 type Props =
     static member inline width (value : int) = Interop.mkAttr "width" value

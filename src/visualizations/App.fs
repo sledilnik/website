@@ -51,18 +51,7 @@ open Elmish.React
 
 let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
-        [
-          {| Visualization = Map
-             ClassName = "map-chart"
-             Label = "Zemljevid"
-             Explicit = false
-             Renderer = fun state ->
-                match state.RegionsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data -> Map.mapChart {| data = data |} |}
-          {| Visualization = Hospitals
+        [ {| Visualization = Hospitals
              ClassName = "patients-chart"
              Label = "Kapacitete bolnišnic"
              Explicit = true
@@ -112,6 +101,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| data = data |} |}
+          {| Visualization = Map
+             ClassName = "map-chart"
+             Label = "Zemljevid potrjeno okuženih po občinah"
+             Explicit = false
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView Map.mapChart {| data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"

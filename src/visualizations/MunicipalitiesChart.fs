@@ -13,8 +13,6 @@ let showMaxBars = 26
 let collapsedMnicipalityCount = 24
 let doublingTimeInterval = 7
 
-let excludedRegions = Set.ofList ["t"]
-
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
 type State =
@@ -39,7 +37,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
     let regions =
         lastDataPoint.Regions
-        |> List.filter (fun region -> Set.contains region.Name excludedRegions |> not)
+        |> List.filter (fun region -> Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
         |> List.sortByDescending (fun region -> regionTotal region)
 
     { Data = data ; Regions = regions ; ShowAll = false ; SearchQuery = "" ; FilterByRegion = "" }, Cmd.none
@@ -52,14 +50,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with SearchQuery = query }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
-
-let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
-    let v1, v2, dt = float v1.PositiveTests, float v2.PositiveTests, float (v2.Day - v1.Day)
-    if v1 = v2 then None
-    else
-        let value = log10 2.0 / log10 ((v2 / v1) ** (1.0 / dt))
-        if value < 0.0 then None
-        else Some value
 
 let renderMunicipality
         (key : {| Municipality: string; Region: string |})
@@ -91,9 +81,9 @@ let renderMunicipality
         | 0 | 1 -> None
         | length ->
             if length >= doublingTimeInterval then
-                calculateDoublingTime reversedDoublingTimeValues.[doublingTimeInterval - 1] reversedDoublingTimeValues.[0]
+                Utils.calculateDoublingTime reversedDoublingTimeValues.[doublingTimeInterval - 1] reversedDoublingTimeValues.[0]
             else
-                calculateDoublingTime reversedDoublingTimeValues.[length - 1] reversedDoublingTimeValues.[0]
+                Utils.calculateDoublingTime reversedDoublingTimeValues.[length - 1] reversedDoublingTimeValues.[0]
 
     let renderedDoublingTime =
         match doublingTime with

@@ -10,106 +10,150 @@ open GoogleCharts
 
 open Types
 
-let colors =
-    [ "#ffa600"
-      "#dba51d"
-      "#afa53f"
-      "#70a471"
-      "#159ab0"
-      "#128ea5"
-      "#10829a"
-      "#0d768f"
-      "#0a6b85"
-      "#085f7a"
-      "#055470"
-      "#024a66" ]
-    //   "#003f5c" ]
-
 let excludedRegions = Set.ofList ["t"]
 
-let getRegionName key =
-    match Utils.Dictionaries.regions.TryFind key with
-    | None -> key
-    | Some region -> region.Name
+type Municipality = {
+    Municipality : Utils.Dictionaries.Municipality
+    TotalPositiveTests : int option
+    TotalPositiveTestsWeightedRegionPopulation : int option }
 
-type Metric =
-    { Key : string
-      Color : string
-      Visible : bool }
+type Region = {
+    Region : Utils.Dictionaries.Region
+    Municipalities : Municipality list }
+
+type Data = {
+    Date : System.DateTime
+    Regions : Region list }
+
+type DisplayType =
+    | AbsoluteValues
+    | RegionPopulationWeightedValues
 
 type State =
-    { ScaleType : ScaleType
-      Data : RegionsData
-      Regions : Region list
-      Metrics : Metric list }
+    { Data : Data list
+      DisplayType : DisplayType }
 
 type Msg =
-    | ToggleRegionVisible of string
-    | ScaleTypeChanged of ScaleType
+    | DisplayTypeChanged of DisplayType
 
-let regionTotal (region : Region) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.PositiveTests)
-    |> List.choose id
-    |> List.sum
+let init (regionsData : RegionsData) : State * Cmd<Msg> =
+    let data =
+        regionsData
+        |> List.map (fun datapoint ->
+            let municipalityData =
+                datapoint.Regions
+                |> List.map (fun region ->
+                    region.Municipalities
+                    |> List.map (fun municipality -> (municipality.Name, municipality.PositiveTests)))
+                |> List.concat
+            let municipalityDataMap =
+                municipalityData
+                |> Map.ofList
+            let regions =
+                seq {
+                    for region in datapoint.Regions do
+                        match Utils.Dictionaries.regions.TryFind region.Name with
+                        | None -> ()
+                        | Some reg ->
+                            if Set.contains reg.Key Utils.Dictionaries.excludedRegions then ()
+                            else
+                                let municipalities =
+                                    seq {
+                                        for municipality in Utils.Dictionaries.municipalities do
+                                            match Map.tryFind municipality.Key municipalityDataMap with
+                                            | None ->
+                                                yield { Municipality = municipality.Value
+                                                        TotalPositiveTests = None
+                                                        TotalPositiveTestsWeightedRegionPopulation = None }
+                                            | Some totalPositiveTests ->
+                                                yield { Municipality = municipality.Value
+                                                        TotalPositiveTests = totalPositiveTests
+                                                        TotalPositiveTestsWeightedRegionPopulation =
+                                                            match totalPositiveTests with
+                                                            | None -> None
+                                                            | Some tests -> float tests / float municipality.Value.Population * 100000. |> System.Math.Round |> int |> Some }
+                                    } |> List.ofSeq
+                                yield { Region = reg
+                                        Municipalities = municipalities }
+                } |> List.ofSeq
 
-let init (data : RegionsData) : State * Cmd<Msg> =
-    let lastDataPoint = List.last data
-    let regions =
-        lastDataPoint.Regions
-        |> List.sortByDescending (fun region -> regionTotal region)
-    let metrics =
-        regions
-        |> List.filter (fun region -> not (Set.contains region.Name excludedRegions))
-        |> List.mapi2 (fun i color region ->
-            let config = getRegionName region.Name
-            { Key = region.Name
-              Color = color
-              Visible = i <= 2 } ) colors
+            { Date = datapoint.Date
+              Regions = regions })
 
-    { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
+    { Data = data ; DisplayType = RegionPopulationWeightedValues }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ToggleRegionVisible regionKey ->
-        let newMetrics =
-            state.Metrics
-            |> List.map (fun m ->
-                if m.Key = regionKey
-                then { m with Visible = not m.Visible }
-                else m)
-        { state with Metrics = newMetrics }, Cmd.none
-    | ScaleTypeChanged scaleType ->
-        { state with ScaleType = scaleType }, Cmd.none
+    | DisplayTypeChanged displayType ->
+        { state with DisplayType = displayType }, Cmd.none
 
+let renderMap state =
+    let header = box(("Občina", "Ime", "Potrjeno okuženi na 100.000 prebivalcev", "Potrjeno okuženi skupaj"))
+    let data =
+        let lastDataPoint = List.last state.Data
+        seq {
+            for region in lastDataPoint.Regions do
+                for municipality in region.Municipalities do
+                    match state.DisplayType with
+                    | AbsoluteValues ->
+                        yield box((municipality.Municipality.Code,
+                                   municipality.Municipality.Name,
+                                   Option.defaultValue 0 municipality.TotalPositiveTests,
+                                   Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation))
+                    | RegionPopulationWeightedValues ->
+                        yield box((municipality.Municipality.Code,
+                                   municipality.Municipality.Name,
+                                   Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation,
+                                   Option.defaultValue 0 municipality.TotalPositiveTests))
 
-let renderChartContainer state =
+        } |> List.ofSeq
+
     Html.div [
-        prop.style [ style.height 450 ]
+        prop.style [ ]
         prop.className "highcharts-wrapper"
         prop.children [
             Chart [
                 Props.chartType ChartType.GeoChart
                 Props.width "100%"
-                Props.height 450
-                Props.data [
-                    ("Country", "Label", "Value")
-                    ("SI-006", "Bovec", 0)
-                    ("SI-061", "Ljubljana", 100)
-                    ("SI-013", "Cerknica", 40)
-                ]
+                // Props.height 450
+                Props.data (header :: data)
                 Props.options [
                     Options.Region "SI"
                     Options.Resolution Resolution.Provinces
-                    Options.Legend None
+                    Options.DatalessRegionColor "white"
+                    Options.DefaultColor "white"
+                    Options.ColorAxis {| colors = ("#fefefe", "#e03000") |}
                 ]
             ]
         ]
     ]
 
+let renderDisplayTypeSelector displayType dispatch =
+    let renderSelector (displayType : DisplayType) (currentDisplayType : DisplayType) (label : string) =
+        let defaultProps =
+            [ prop.text label
+              prop.className [
+                  true, "chart-display-property-selector__item"
+                  displayType = currentDisplayType, "selected" ] ]
+        if displayType = currentDisplayType
+        then Html.div defaultProps
+        else Html.div ((prop.onClick (fun _ -> dispatch displayType)) :: defaultProps)
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children [
+            Html.text "Prikazane vrednosti: "
+            renderSelector RegionPopulationWeightedValues displayType "Utežene na 100.000 prebivalcev"
+            renderSelector AbsoluteValues displayType "Absolutne"
+        ]
+    ]
+
 let render (state : State) dispatch =
     Html.div [
-        renderChartContainer state
+        prop.children [
+            renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
+            renderMap state
+        ]
     ]
 
 let mapChart (props : {| data : RegionsData |}) =

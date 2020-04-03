@@ -53,7 +53,7 @@ export default {
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
       // search for class visualization
-      let elm = document.querySelector('.scale-type-selector');
+      let elm = document.querySelector('.chart-display-property-selector');
       if (elm) {
         this.loaded = true;
         clearInterval(checker);
