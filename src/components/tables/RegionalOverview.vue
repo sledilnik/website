@@ -24,17 +24,9 @@
 <script>
 export default {
   props: ["csvdata", "regions", "tableHeight"],
-  data() {
-    const regions = this.regions
-      .filter(region => !["si", "t", "n"].includes(region.id)) //Region slugs don't map to stats data, or we don't want that column
-      .map(region => {
-        return {
-          key: `region.${region.id}.todate`,
-          label: region.name
-        };
-      });
-    return {
-      fields: [
+  computed: {
+    fields() {
+      return [
         {
           key: "date",
           headerTitle: "Datum",
@@ -43,13 +35,25 @@ export default {
           stickyColumn: true,
           variant: "grey"
         },
-        ...regions,
+        ...this.regionsProper,
         {
           key: "region.foreign.todate",
           label: "Tujci"
         }
-      ]
-    };
+      ];
+    },
+    regionsProper() {
+      return this.regions
+        .filter(region => !["si", "t", "n"].includes(region.id)) //Region slugs don't map to stats data, or we don't want that column
+        .map(region => {
+          return {
+            key: `region.${region.id}.todate`,
+            label: region.name
+          };
+        })
+        .sort((region1, region2) => region1.label.localeCompare(region2.label));
+
+    }
   }
 };
 </script>

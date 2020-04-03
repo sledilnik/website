@@ -94,7 +94,7 @@ $table-border: rgb(222,222 ,222)
 
   //tabs
 .nav.nav-tabs
-  overflow: auto
+  overflow: hidden
   display: flex
   flex-wrap: nowrap
   margin: 0 0 28px
