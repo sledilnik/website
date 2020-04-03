@@ -5,7 +5,6 @@ open Elmish
 open Feliz
 
 open Types
-
 let init (visualization : string option) =
     let inner () =
         let renderingMode =
