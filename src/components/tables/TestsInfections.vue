@@ -26,11 +26,9 @@
 
 <script>
 export default {
-  props: ["csvdata"],
+  props: ["csvdata", "tableHeight"],
   data() {
     return {
-      // at least we don't have double scroll on mobile
-      tableHeight: `${window.innerHeight - 230}px`,
       fields: [
         {
           key: "date",
@@ -38,7 +36,7 @@ export default {
           label: "Datum",
           sortable: true,
           stickyColumn: true,
-          variant: 'grey'
+          variant: "grey"
         },
         {
           key: "tests.performed",
@@ -86,5 +84,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

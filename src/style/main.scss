@@ -9,6 +9,7 @@ html,
 body {
   height: 100%;
   background: $background;
+  min-height: 100vh;
 }
 
 *::selection {
