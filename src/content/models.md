@@ -19,7 +19,7 @@ Na voljo je tudi [izvorna koda](https://github.com/zaplotnik/korona/tree/master/
 ## SEIR model
 V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) iz Zdravstvene fakultete smo pripravili model SEIR, ki ima parametre usklajene s podatki o hospitalizacijah ter klinično sliko COVID-19. Nakazuje na to, da imamo večje število okuženih, ki se jim ne sledi, zato se okužba v populaciji širi naprej.
 
-![model](images/20200403-model-jzibert.png)
+![model](https://covid-19.sledilnik.org/images/20200403-model-jzibert.png)
 
 Model lahko tudi sami v [živo uporabljate](https://pacs.zf.uni-lj.si/statistika/simulacija-sirjenja-covid-19/), tako da spreminjate posamezne parametre in vidite vpliv na razvoj epidemije. Klinične in empirične predpostavke so pod podpisom.
 
