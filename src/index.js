@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueScrollTo from 'vue-scrollto'
+import { sync } from 'vuex-router-sync'
 
 import App from './App.vue'
 import StaticPage from './pages/StaticPage.vue'
@@ -10,7 +11,7 @@ import AdvancedStatsPage from './pages/AdvancedStatsPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 
-import store from 'store'
+import store from './store'
 
 import '@/main.js'
 import 'style/index.scss'
@@ -128,22 +129,9 @@ const routes = [
 
 const router = new VueRouter({
   routes, // short for `routes: routes`
-  scrollBehavior(to) {
-    if (to.hash) {
-      const elm = document.querySelector(to.hash)
-      if (elm) {
-        let offset = 60
-        if (elm.tagName === "SECTION" && to.hash.endsWith("-chart")) {
-          offset = 90
-        }
-        return { selector: to.hash, offset: { x: 0, y: offset }}
-      }
-    } else {
-      return { x: 0, y: 0 }
-    }
-  },
 })
 
+sync(store, router)
 new Vue({
   render: h => h(App),
   router,

@@ -169,6 +169,31 @@ const statsStore = {
       commit('setData', data)
       commit('setRegions', regions)
       commit('setExportTime', d)
+      dispatch('maybeScrollToChart')
+    },
+
+    maybeScrollToChart: ({ rootState }) => {
+      const elementSelector = rootState.route.hash.split('#').pop()
+      const elm = document.getElementById(elementSelector);
+      if (elm) {
+        let offset = -60;
+        // special case for charts
+        if (
+          elm.tagName === "SECTION" &&
+          elementSelector.endsWith("-chart")
+        ) {
+          offset = -90;
+        }
+        window.requestIdleCallback ? window.requestIdleCallback(() => {
+          VueScrollTo.scrollTo(elm, 500, {
+            offset: offset
+          });
+        }) : setTimeout(() => {
+          VueScrollTo.scrollTo(elm, 500, {
+            offset: offset
+          });
+        }, 3000)
+      }
     },
     refreshDataEvery: ({ dispatch }, seconds) => {
       setInterval(() => {
