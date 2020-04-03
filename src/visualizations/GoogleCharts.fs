@@ -18,6 +18,7 @@ type Options =
     | DefaultColor of string
     | DatalessRegionColor of string
     | ColorAxis of obj
+    | Legend of string
 
 type Props =
     static member inline width (value : int) = Interop.mkAttr "width" value

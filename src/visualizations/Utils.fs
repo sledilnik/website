@@ -42,7 +42,7 @@ let renderScaleSelector scaleType dispatch =
 let renderLoading =
     Html.div [
         prop.className "loader"
-        prop.children [ Html.text "Nalagam podatke..." ]
+        prop.text "Nalagam podatke..."
     ]
 
 

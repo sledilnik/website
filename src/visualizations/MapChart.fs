@@ -2,7 +2,7 @@
 module Map
 
 open Elmish
-
+open System
 open Feliz
 open Feliz.ElmishComponents
 
@@ -87,6 +87,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
+open Highcharts
 let renderMap state =
     let header =
         match state.DisplayType with
@@ -101,14 +102,20 @@ let renderMap state =
                 for municipality in region.Municipalities do
                     match state.DisplayType with
                     | AbsoluteValues ->
+                        // how to render logarithmic color scale:
+                        // https://stackoverflow.com/questions/56275333/display-google-geochart-in-log-scale
+                        let formatted = Option.defaultValue 0 municipality.TotalPositiveTests
+                        let value = Math.Log (float formatted + 2.0)
                         yield box((municipality.Municipality.Code,
                                    municipality.Municipality.Name,
-                                   Option.defaultValue 0 municipality.TotalPositiveTests,
+                                   box {|v=value; f=formatted|},
                                    Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation))
                     | RegionPopulationWeightedValues ->
+                        let formatted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
+                        let value = Math.Log (float formatted + 10.0)
                         yield box((municipality.Municipality.Code,
                                    municipality.Municipality.Name,
-                                   Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation,
+                                   box {|v=value; f=formatted|},
                                    Option.defaultValue 0 municipality.TotalPositiveTests))
 
         } |> List.ofSeq
@@ -128,6 +135,7 @@ let renderMap state =
                     Options.DatalessRegionColor "white"
                     Options.DefaultColor "white"
                     Options.ColorAxis {| colors = ("#fefefe", "#e03000") |}
+                    Options.Legend "none" // legend doesn't make sense with log scale
                 ]
             ]
         ]
