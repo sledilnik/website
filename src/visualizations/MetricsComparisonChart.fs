@@ -106,7 +106,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
 
-    let flagsSeries =
+    let renderFlags startTime =
         let events = [|
             4,  3, "1. primer", "Prvi potrjen primer, turist iz Maroka"
             6,  3, "DSO", "Prepoved obiskov v domovih starejših občanov, potrjena okužba zdravnika v Metliki"
@@ -126,14 +126,16 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             showInLegend = false
             color = "#444"
             data =
-                events |> Array.map (fun (d,m,title,text) ->
-                    {| x = DateTime(2020,m,d) |> jsTime; title=title; text=text |}
-                    |> pojo
+                events |> Array.choose (fun (d,m,title,text) ->
+                    let ts = DateTime(2020,m,d) |> jsTime
+                    if ts >= startTime then Some {| x=ts; title=title; text=text |}
+                    else None
                 )
         |}
 
 
     let allSeries = [
+        let mutable startDate = DateTime.Today |> jsTime
         for metric in metrics do
             let pointData = metricDataGenerator metric
             yield pojo
@@ -145,14 +147,17 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     data =
                         data
                         |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
-                        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+                        |> Seq.skipWhile (fun (ts,value) ->
+                            if metric.Visible && value.IsSome then
+                                startDate <- min startDate ts
+                            value.IsNone)
                         |> Seq.toArray
                     //yAxis = 0 // axis index
                     //showInLegend = true
                     //fillOpacity = 0
                 |}
         if scaleType = Linear then
-            yield pojo flagsSeries
+            yield renderFlags startDate |> pojo
     ]
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
