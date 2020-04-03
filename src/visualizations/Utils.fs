@@ -40,7 +40,11 @@ let renderScaleSelector scaleType dispatch =
     ]
 
 let renderLoading =
-    Html.text "Nalagam podatke..."
+    Html.div [
+        prop.className "loader"
+        prop.children [ Html.text "Nalagam podatke..." ]
+    ]
+
 
 let renderErrorLoading (error : string) =
     Html.text error

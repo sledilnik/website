@@ -136,7 +136,7 @@ let render (state : State) (dispatch : Msg -> unit) =
               visualizations
               |> List.map (fun viz ->
                   Html.section
-                    [ prop.className viz.ClassName
+                    [ prop.className [ true, viz.ClassName; true, "visualization-chart" ]
                       prop.id viz.ClassName
                       prop.children
                         [ Html.h2 viz.Label
