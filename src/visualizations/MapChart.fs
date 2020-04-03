@@ -88,7 +88,12 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with DisplayType = displayType }, Cmd.none
 
 let renderMap state =
-    let header = box(("Občina", "Ime", "Potrjeno okuženi na 100.000 prebivalcev", "Potrjeno okuženi skupaj"))
+    let header =
+        match state.DisplayType with
+        | AbsoluteValues -> ("Občina", "Ime", "Potrjeno okuženi skupaj", "Potrjeno okuženi na 100.000 prebivalcev")
+        | RegionPopulationWeightedValues -> ("Občina", "Ime", "Potrjeno okuženi na 100.000 prebivalcev", "Potrjeno okuženi skupaj")
+        |> box
+
     let data =
         let lastDataPoint = List.last state.Data
         seq {
