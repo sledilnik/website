@@ -68,7 +68,7 @@ export default {
 <style scopped lang="sass">
 //new
 $table-text-c: rgba(0, 0, 0, 0.75)
-$table-border: rgba(0, 0, 0, 0.13)
+$table-border: rgb(222,222 ,222)
 
 .table-container
   margin: -24px auto 0
@@ -96,11 +96,14 @@ $table-border: rgba(0, 0, 0, 0.13)
       margin-bottom: 48px
 
   .table-bordered
-    td
+    td,
+    th
       border: none
       color: $table-text-c
       font-size: 14px
 
+  .border
+    border: none !important
 //table height
 .b-table-sticky-header.table-responsive
   height: calc(100vh - 329px)
@@ -167,12 +170,17 @@ $table-border: rgba(0, 0, 0, 0.13)
 
 //top left cell
 thead .table-grey.b-table-sticky-column
-  background: #fff
-  color: #fff
   background-image: none !important
-
+  background: rgba(255,255 ,255 ,0.9)
+  z-index: 3 !important
+  border-bottom: 1px solid $table-border
   .text-nowrap
     display: none
+
+thead .table-b-table-default
+  background: rgba(255,255 ,255 ,0.9) !important
+  z-index: 4 !important
+  border-bottom: 1px solid $table-border !important
 
 .text-nowrap
   color: $table-text-c
@@ -181,14 +189,16 @@ thead .table-grey.b-table-sticky-column
 
 .table-wrapper
   .table
+    tr:hover
+      background: #ffd92242 !important
+
     td
       padding: 44px 24px 12px
-    tr
       border-bottom: 1px solid $table-border
 
 .table-grey.b-table-sticky-column
   .text-nowrap
-    transform: translateY(-30px)
+    transform: translateY(-32px)
     font-weight: bold
 
 .footnote
@@ -202,6 +212,9 @@ thead .table-grey.b-table-sticky-column
 .table-wrapper
   .table-striped tbody tr:nth-of-type(odd)
     background-color: #fff
+
+  .table-grey
+    background : none
 
 #app.tables
   background: #fff
