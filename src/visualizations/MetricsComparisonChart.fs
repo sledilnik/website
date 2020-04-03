@@ -108,8 +108,8 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
 
     let renderFlags startTime =
         let events = [|
-            4,  3, "1. primer", "Prvi potrjen primer, turist iz Maroka"
-            6,  3, "DSO", "Prepoved obiskov v domovih starejših občanov, potrjena okužba zdravnika v Metliki"
+            4,  3, "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
+            6,  3, "DSO", "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
             8,  3, "Točke", "16 vstopnih točk za testiranje"
             10, 3, "Meje", "Zapora nekaterih mejnih prehodov z Italijo, poostren nadzor"
             13, 3, "Vlada", "Sprejeta nova vlada"
