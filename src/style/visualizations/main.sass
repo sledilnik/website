@@ -113,7 +113,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .regions-chart
     margin-top: $gap * 2
-    min-height: 680px
 
   .age-groups-chart
     margin-top: $gap * 2
@@ -123,7 +122,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .patients-chart, .age-groups-chart, .hospitals-chart
     margin-top: $gap * 2
-    min-height: 644px
 
     .metric-selector
       background-color: white
@@ -131,17 +129,16 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
-  .spread-chart
-    min-height: 601px
+  // .spread-chart
 
   .hospitals-chart
     margin-top: 0
 
   .map-chart
-    min-height: 798px
+    @include media-breakpoint-down(sm)
+      padding-bottom: 1 * $gap
 
   .age-groups-chart
-    min-height: 644px
     .recharts-responsive-container
       margin-left: -20px
 
