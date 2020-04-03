@@ -80,7 +80,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
             { Date = datapoint.Date
               Regions = regions })
 
-    { Data = data ; DisplayType = AbsoluteValues }, Cmd.none
+    { Data = data ; DisplayType = RegionPopulationWeightedValues }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -156,8 +156,8 @@ let renderDisplayTypeSelector displayType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Prikazane vrednosti: "
-            renderSelector AbsoluteValues displayType "Absolutne"
             renderSelector RegionPopulationWeightedValues displayType "Utežene na 100.000 prebivalcev"
+            renderSelector AbsoluteValues displayType "Absolutne"
         ]
     ]
 
