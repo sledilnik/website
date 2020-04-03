@@ -109,12 +109,14 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
     let flagsSeries =
         let events = [|
             4,  3, "1. primer", "Prvi potrjen primer, turist iz Maroka"
-            6,  3, "1. Metlika", "Metlika, Maribor, potrjena okužba pri zdravstvenih delavcih"
+            6,  3, "DSO", "Prepoved obiskov v domovih starejših občanov, potrjena okužba zdravnika v Metliki"
+            8,  3, "Točke", "16 vstopnih točk za testiranje"
             10, 3, "Meje", "Zapora mejnih prehodov za osebni promet"
             13, 3, "Vlada", "Sprejeta nova vlada"
-            14, 3, "Prevozi", "Ukinitev javnega prevoza"
+            14, 3, "Prevozi", "Ukinitev javnih prevozov"
             16, 3, "Šole", "Zaprtje šol, restavracij"
-            29, 3, "10h", "Trgovine za upokojence do 10. ure"
+            20, 3, "Zbiranje", "Prepoved zbiranja na javnih mestih"
+            29, 3, "Trg.", "Trgovine za upokojence do 10. ure"
             30, 3, "Občine", "Prepoved gibanja izven meja občin"
         |]
         {|
@@ -153,12 +155,17 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             yield pojo flagsSeries
     ]
 
-    // return highcharts options
-    {| basicChartOptions scaleType "covid19-metrics-comparison" with series = List.toArray allSeries |}
+    let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
+    {| baseOptions with
+        series = List.toArray allSeries
+        yAxis =
+            let showFirstLabel = scaleType <> Linear
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+    |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [
-        prop.style [ style.height 500 ] //; style.width 500; ]
+        prop.style [ style.height 480 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics

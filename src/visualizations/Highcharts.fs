@@ -98,7 +98,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 //floor = if scaleType=Linear then None else Some 1.0
                 opposite = true // right side
                 title = {| text = null |} // "oseb" |}
-                //showFirstLabel = false
+                showFirstLabel = None
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
             |}
