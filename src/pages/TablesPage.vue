@@ -50,23 +50,10 @@ export default {
   computed: {
     ...mapGetters("stats", ["data", "regions"])
   }
-  // created() {
-  //   window.addEventListener("resize", this.myEventHandler);
-  //   // this.tableHeight = "calc(100vh - 500px)";
-  // },
-  // destroyed() {
-  //   window.removeEventListener("resize", this.myEventHandler);
-  // },
-  // methods: {
-  //   myEventHandler(e) {
-  //     console.log(e);
-  //     this.tableHeight = "calc(100vh - 500px)";
-  //   }
-  // }
 };
 </script>
 <style scopped lang="sass">
-//new
+
 $table-text-c: rgba(0, 0, 0, 0.75)
 $table-border: rgb(222,222 ,222)
 
@@ -79,7 +66,7 @@ $table-border: rgb(222,222 ,222)
     position: static
     background: none
     padding: 0 15px
-    margin: 0 auto
+    margin: 0 auto 64px
 
 .table-wrapper
   background: #fff
@@ -104,13 +91,6 @@ $table-border: rgb(222,222 ,222)
 
   .border
     border: none !important
-//table height
-.b-table-sticky-header.table-responsive
-  height: calc(100vh - 329px)
-  margin-bottom: 0
-
-  @media only screen and (min-width: 768px)
-    height: calc(100vh - 500px)
 
   //tabs
 .nav.nav-tabs
@@ -193,12 +173,12 @@ thead .table-b-table-default
       background: #ffd92242 !important
 
     td
-      padding: 44px 24px 12px
+      padding: 34px 24px 12px
       border-bottom: 1px solid $table-border
 
 .table-grey.b-table-sticky-column
   .text-nowrap
-    transform: translateY(-32px)
+    transform: translateY(-22px)
     font-weight: bold
 
 .footnote
@@ -211,7 +191,7 @@ thead .table-b-table-default
 //alternating color
 .table-wrapper
   .table-striped tbody tr:nth-of-type(odd)
-    background-color: #fff
+    background-color: rgb(250, 250, 250)
 
   .table-grey
     background : none
@@ -221,67 +201,4 @@ thead .table-b-table-default
 
   @media only screen and (min-width: 768px)
     background: $background
-
-  // $table__background: rgb(237, 237, 232);
-// .tables-tabs {
-//   .nav-pills {
-//     .nav-item {
-//       display: flex;
-//       justify-content: center;
-//       padding: 15px 15px;
-//       margin-bottom: -10px;
-//     }
-//     .nav-link {
-//       position: relative;
-//       font-weight: 600;
-//       color: $text-c;
-//       z-index: 1;
-//       background: none;
-//       transition: all 0.35s ease-in-out;
-//       box-shadow: inset 0 -4px 0 $table__background, inset 0 -7px $yellow;
-//       text-decoration: none;
-//       border-radius: 0;
-//       padding: 0;
-
-//       &:hover,
-//       &.active {
-//         background: none;
-//         text-decoration: none;
-//         color: $text-c;
-//         font-weight: 600;
-//         box-shadow: inset 0 -4px 0 $table__background, inset 0 -20px $yellow;
-//       }
-//     }
-//   }
-// }
-
-// .table-b-table-default {
-//   background: #dee2e6 !important;
-// }
-
-// .tables-page {
-//   margin-top: -48px;
-//   height: 100%;
-//   .tables-tabs {
-//     display: flex;
-//     flex-direction: column;
-
-//     .tab-content {
-//       flex: 1;
-//       overflow: auto;
-//     }
-//   }
-
-//   @media all and (max-width: 500px) {
-//     margin-top: 0;
-//   }
-//   @media all and (max-device-width: 400px) {
-//     .nav-pills {
-//       a {
-//         padding: 5px 10px;
-//         font-size: 13px;
-//       }
-//     }
-//   }
-// }
 </style>
