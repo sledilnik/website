@@ -11,7 +11,7 @@ Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi 
 V sodelovanju z [dr. Žigo Zaplotnikom](https://twitter.com/ZaplotnikZiga) iz FMF smo pripravili "ansambel" različnih napovedi, ki upoštevajo obstoj potencialnih nosilcev, ki imajo stik z veliko ljudmi.
 
 Tule je ilustracija:
-![potek pandemije](https://fiz.fmf.uni-lj.si/~zaplotnikz/2020_03_28/plot/potek_pandemije12_share.png)
+![potek pandemije](https://fiz.fmf.uni-lj.si/~zaplotnikz/2020_03_28/plot/potek_pandemije12_share.png | width=500)
 
 Na voljo je tudi [izvorna koda](https://github.com/zaplotnik/korona/tree/master/code) in podroben [opis modela](http://stat.columbia.edu/~jakulin/Covid/3.28.zaplotnik.model.pdf).
 
@@ -19,7 +19,7 @@ Na voljo je tudi [izvorna koda](https://github.com/zaplotnik/korona/tree/master/
 ## SEIR model
 V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) iz Zdravstvene fakultete smo pripravili model SEIR, ki ima parametre usklajene s podatki o hospitalizacijah ter klinično sliko COVID-19. Nakazuje na to, da imamo večje število okuženih, ki se jim ne sledi, zato se okužba v populaciji širi naprej.
 
-![model](https://covid-19.sledilnik.org/images/20200403-model-jzibert.png)
+![model](https://covid-19.sledilnik.org/images/20200403-model-jzibert.png | width=500)
 
 Model lahko tudi sami v [živo uporabljate](https://pacs.zf.uni-lj.si/statistika/simulacija-sirjenja-covid-19/), tako da spreminjate posamezne parametre in vidite vpliv na razvoj epidemije. Klinične in empirične predpostavke so pod podpisom.
 
