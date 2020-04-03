@@ -17,7 +17,7 @@ type PatientCounts = {
 }
 
 type TotalPatientStats = {
-    inCare: int option
+    inCare: int option // obsolete
     outOfHospital: PatientCounts
     inHospital: PatientCounts
     //needsO2: PatientCounts

@@ -1,12 +1,12 @@
 [<RequireQualifiedAccess>]
 module MetricsComparisonChart
 
+open System
 open Elmish
-
 open Feliz
 open Feliz.ElmishComponents
-open Highcharts
 
+open Highcharts
 open Types
 
 type Metric =
@@ -106,34 +106,59 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
 
-    let allSeries =
-        metrics
-        |> List.map (fun metric ->
+    let flagsSeries =
+        let events = [|
+            4,  3, "1. primer", "Prvi potrjen primer, turist iz Maroka"
+            6,  3, "1. Metlika", "Metlika, Maribor, potrjena okužba pri zdravstvenih delavcih"
+            10, 3, "Meje", "Zapora mejnih prehodov za osebni promet"
+            13, 3, "Vlada", "Sprejeta nova vlada"
+            14, 3, "Prevozi", "Ukinitev javnega prevoza"
+            16, 3, "Šole", "Zaprtje šol, restavracij"
+            29, 3, "10h", "Trgovine za upokojence do 10. ure"
+            30, 3, "Občine", "Prepoved gibanja izven meja občin"
+        |]
+        {|
+            ``type`` = "flags"
+            //onSeries = "data"
+            shape = "flag"
+            showInLegend = false
+            color = "#444"
+            data =
+                events |> Array.map (fun (d,m,title,text) ->
+                    {| x = DateTime(2020,m,d) |> jsTime; title=title; text=text |}
+                    |> pojo
+                )
+        |}
+
+
+    let allSeries = [
+        for metric in metrics do
             let pointData = metricDataGenerator metric
-            {|
-                visible = metric.Visible
-                color = metric.Color
-                name = metric.Label
-                className = metric.Class
-                data =
-                    data
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
-                    |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
-                    |> Seq.toArray
-                //yAxis = 0 // axis index
-                //showInLegend = true
-                //fillOpacity = 0
-            |}
-            |> pojo
-        )
-        |> List.toArray
+            yield pojo
+                {|
+                    visible = metric.Visible
+                    color = metric.Color
+                    name = metric.Label
+                    className = metric.Class
+                    data =
+                        data
+                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
+                        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+                        |> Seq.toArray
+                    //yAxis = 0 // axis index
+                    //showInLegend = true
+                    //fillOpacity = 0
+                |}
+        if scaleType = Linear then
+            yield pojo flagsSeries
+    ]
 
     // return highcharts options
-    {| basicChartOptions scaleType "covid19-metrics-comparison" with series = allSeries |}
+    {| basicChartOptions scaleType "covid19-metrics-comparison" with series = List.toArray allSeries |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [
-        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.style [ style.height 500 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
