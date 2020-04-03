@@ -59,6 +59,14 @@ const routes = [
     }
   },
   {
+    path: '/FAQ',
+    component: StaticPage,
+    props: {
+      name: 'FAQ',
+      content: import('./content/FAQ.md')
+    }
+  },
+  {
     path: '/team',
     component: StaticPage,
     props: {
@@ -88,7 +96,7 @@ const routes = [
     props: {
       name: 'datasources',
       content: import('./content/datasources.md')
-    }
+    },
   },
 ]
 
