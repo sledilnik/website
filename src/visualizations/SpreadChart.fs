@@ -192,6 +192,7 @@ let renderChartOptions scaleType (data : StatsData) =
         |> pojo
 
         //if scaleType = Absolute then
+        (*
         {|
             ``type`` = "flags"
             onSeries = "data"
@@ -204,6 +205,7 @@ let renderChartOptions scaleType (data : StatsData) =
             |]
         |}
         |> pojo
+        *)
     |]
 
     // return highcharts options

@@ -123,17 +123,4 @@ let getSortedFacilityCodes (data: FacilityAssets []) =
         |> List.map fst
 
 
-let fetch () = async {
-    let! code,json = Http.get url
-    return
-        match code with
-        | 200 ->
-            json
-            |> SimpleJson.parse
-            |> Json.convertFromJsonAs<FacilityAssets []>
-            |> Ok
-        | err ->
-            Error (sprintf "got http %d while fetching %s" err url)
-}
-
-
+let getOrFetch = Data.makeDataLoader<FacilityAssets []> url

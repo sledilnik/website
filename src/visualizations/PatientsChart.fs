@@ -30,7 +30,7 @@ type Series =
     | OutOfHospital
     | InHospital
     | AllInHospital
-    | NeedsO2
+    //| NeedsO2
     | Icu
     | Critical
     | Deceased
@@ -39,7 +39,7 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; AllInHospital; InHospital; OutOfHospital; NeedsO2; Icu; Critical; Deceased; Hospital; Home; ]
+        [ InCare; AllInHospital; InHospital; OutOfHospital; Icu; Critical; Deceased; Hospital; Home; ]
 
     // color, dash, name
     let getSeriesInfo = function
@@ -47,7 +47,7 @@ module Series =
         | OutOfHospital -> "#20b16d", "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice - skupaj"
         | InHospital    -> "#be7a2a", "cs-inHospital", "Hospitalizirani - trenutno"
         | AllInHospital -> "#de9a5a", "cs-inHospitalToDate", "Hospitalizirani - skupaj"
-        | NeedsO2       -> "#70a471", "cs-needsO2", "Potrebuje kisik"
+        //| NeedsO2       -> "#70a471", "cs-needsO2", "Potrebuje kisik"
         | Icu           -> "#bf5747", "cs-inHospitalICU", "V intenzivni enoti"
         | Critical      -> "#d99a91", "cs-critical", "Respirator / kritično stanje"
         | Deceased      -> "#666666", "cs-deceasedToDate", "Umrli - skupaj"
@@ -105,7 +105,7 @@ type State = {
             activeSegmentations = Set [ Totals ]
             allSeries =
                 // exclude stuff that doesn't exist or doesn't make sense in Total
-                let exclude = Set [ Home; Hospital; InCare; NeedsO2 ]
+                let exclude = Set [ Home; Hospital; InCare ]
                 Series.all |> List.filter (not << exclude.Contains)
             activeSeries = Set Series.all
             breakdown = BySource
@@ -129,7 +129,8 @@ type Msg =
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Patients.fetch () ConsumeServerData ConsumeServerError
+    printfn "patients INIT"
+    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumeServerData ConsumeServerError
     State.initial, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -167,7 +168,7 @@ let renderChartOptions (state : State) =
             | OutOfHospital -> fun ps -> ps.JsDate, ps.total.outOfHospital.toDate |> zeroToNone
             | InHospital    -> fun ps -> ps.JsDate, ps.total.inHospital.today |> zeroToNone
             | AllInHospital -> fun ps -> ps.JsDate, ps.total.inHospital.toDate |> zeroToNone
-            | NeedsO2       -> fun ps -> ps.JsDate, ps.total.needsO2.toDate |> zeroToNone
+            //| NeedsO2       -> fun ps -> ps.JsDate, ps.total.needsO2.toDate |> zeroToNone
             | Icu           -> fun ps -> ps.JsDate, ps.total.icu.today |> zeroToNone
             | Critical      -> fun ps -> ps.JsDate, ps.total.critical.today |> zeroToNone
             | Deceased      -> fun ps -> ps.JsDate, ps.total.deceased.toDate |> zeroToNone

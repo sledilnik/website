@@ -17,10 +17,10 @@ type PatientCounts = {
 }
 
 type TotalPatientStats = {
-    inCare: int option
+    inCare: int option // obsolete
     outOfHospital: PatientCounts
     inHospital: PatientCounts
-    needsO2: PatientCounts
+    //needsO2: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
     deceased: PatientCounts
@@ -28,7 +28,7 @@ type TotalPatientStats = {
 
 type PatientsByFacilityStats = {
     inHospital: PatientCounts
-    needsO2: PatientCounts
+    //needsO2: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
     deceased: PatientCounts
@@ -45,15 +45,4 @@ type PatientsStats = {
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime
 
-let fetch () = async {
-    let! code,json = Http.get url
-    return
-        match code with
-        | 200 ->
-            json
-            |> SimpleJson.parse
-            |> Json.convertFromJsonAs<PatientsStats []>
-            |> Ok
-        | err ->
-            Error (sprintf "got http %d while fetching %s" err url)
-}
+let getOrFetch = Data.makeDataLoader<PatientsStats []> url

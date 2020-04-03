@@ -8,14 +8,14 @@
 
 <script>
 export default {
-  name: 'StaticPage',
+  name: "StaticPage",
   props: {
     name: String,
-    content: Promise,
+    content: Promise
   },
   data() {
     return {
-      staticContent: '',
+      staticContent: ""
     };
   },
   mounted() {
@@ -23,19 +23,19 @@ export default {
       this.staticContent = data.default;
       this.$forceUpdate();
     });
-  },
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scopped lang="scss">
+<style lang="scss">
 .custom-container {
-  margin: 0 auto 65px auto;
-  max-width: 760px;
+  margin: -24px auto 0 auto;
+  max-width: 730px;
 
   @media only screen and (min-width: 768px) {
-    margin: 40px auto 65px auto;
-    padding: 0 15px;
+    margin: 0 auto 65px auto;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   }
 }
 
@@ -105,25 +105,6 @@ export default {
     margin-top: 27px;
   }
 
-  a {
-    font-weight: 600;
-    transition: all 0.35s ease-in-out;
-    box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.8);
-
-    &:hover {
-      text-decoration: none;
-      color: rgba(0, 0, 0, 0.8);
-      font-weight: 600;
-      box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
-    }
-
-    strong {
-      font-weight: 600;
-    }
-  }
-
   table {
     width: 100%;
     table-layout: fixed;
@@ -147,5 +128,26 @@ export default {
   //   display: flex;
   //   flex-direction: column;
   // }
+}
+.static-page-wrapper,
+.footnote {
+  a {
+    font-weight: 600;
+    transition: all 0.35s ease-in-out;
+    box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.8);
+
+    &:hover {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 600;
+      box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
+    }
+
+    strong {
+      font-weight: 600;
+    }
+  }
 }
 </style>

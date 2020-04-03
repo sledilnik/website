@@ -8,7 +8,7 @@
     hover
     sort-by="date"
     :sort-desc="true"
-    sticky-header="600px"
+    :sticky-header="tableHeight"
     :items="csvdata"
     :fields="fields"
   >
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  props: ["csvdata", "regions"],
+  props: ["csvdata", "regions", "tableHeight"],
   data() {
     const regions = this.regions
       .filter(region => !["si", "t", "n"].includes(region.id)) //Region slugs don't map to stats data, or we don't want that column

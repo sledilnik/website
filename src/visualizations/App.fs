@@ -47,6 +47,8 @@ let update (msg: Msg) (state: State) =
     | RegionsDataLoaded data ->
         { state with RegionsData = data }, Cmd.none
 
+open Elmish.React
+
 let render (state : State) (dispatch : Msg -> unit) =
     let allVisualizations =
         [
@@ -64,7 +66,7 @@ let render (state : State) (dispatch : Msg -> unit) =
              ClassName = "patients-chart"
              Label = "Kapacitete bolnišnic"
              Explicit = true
-             Renderer = fun _ -> HospitalsChart.hospitalsChart () |}
+             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () |}
           {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
@@ -74,12 +76,12 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> MetricsComparisonChart.metricsComparisonChart {| data = data |} |}
+                | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} |}
           {| Visualization = Patients
              ClassName = "patients-chart"
              Label = "Obravnava hospitaliziranih"
              Explicit = false
-             Renderer = fun _ -> PatientsChart.patientsChart () |}
+             Renderer = fun _ -> lazyView PatientsChart.patientsChart () |}
           {| Visualization = Spread
              ClassName = "spread-chart"
              Label = "Hitrost širjenja okužbe"
@@ -89,7 +91,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> SpreadChart.spreadChart {| data = data |} |}
+                | Success data -> lazyView SpreadChart.spreadChart {| data = data |} |}
           {| Visualization = Regions
              ClassName = "regions-chart"
              Label = "Potrjeno okuženi po regijah"
@@ -99,7 +101,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> RegionsChart.regionsChart {| data = data |} |}
+                | Success data -> lazyView RegionsChart.regionsChart {| data = data |} |}
           {| Visualization = Municipalities
              ClassName = "municipalities-chart"
              Label = "Potrjeno okuženi po občinah"
@@ -109,7 +111,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> MunicipalitiesChart.municipalitiesChart {| data = data |} |}
+                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"
@@ -119,7 +121,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> AgeGroupsChart.render data () |}
+                | Success data -> lazyView (AgeGroupsChart.render data) () |}
         ]
 
     let embeded, visualizations =

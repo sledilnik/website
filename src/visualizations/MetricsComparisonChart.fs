@@ -1,12 +1,12 @@
 [<RequireQualifiedAccess>]
 module MetricsComparisonChart
 
+open System
 open Elmish
-
 open Feliz
 open Feliz.ElmishComponents
-open Highcharts
 
+open Highcharts
 open Types
 
 type Metric =
@@ -106,34 +106,71 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
 
-    let allSeries =
-        metrics
-        |> List.map (fun metric ->
-            let pointData = metricDataGenerator metric
-            {|
-                visible = metric.Visible
-                color = metric.Color
-                name = metric.Label
-                className = metric.Class
-                data =
-                    data
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
-                    |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
-                    |> Seq.toArray
-                //yAxis = 0 // axis index
-                //showInLegend = true
-                //fillOpacity = 0
-            |}
-            |> pojo
-        )
-        |> List.toArray
+    let renderFlags startTime =
+        let events = [|
+        // day, mo, title,       tooltip text
+            4,  3, "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
+            6,  3, "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
+            8,  3, "Točke",     "16 vstopnih točk za testiranje"
+            10, 3, "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
+            13, 3, "Vlada",     "Sprejeta nova vlada"
+            14, 3, "Prevozi",   "Ukinitev javnih prevozov"
+            16, 3, "Šole",      "Zaprtje šol, restavracij"
+            20, 3, "Zbiranje",  "Prepoved zbiranja na javnih mestih"
+            29, 3, "Trg.",      "Trgovine za upokojence do 10. ure"
+            30, 3, "Občine",    "Prepoved gibanja izven meja občin"
+        |]
+        {|
+            ``type`` = "flags"
+            shape = "flag"
+            showInLegend = false
+            color = "#444"
+            data =
+                events |> Array.choose (fun (d,m,title,text) ->
+                    let ts = DateTime(2020,m,d) |> jsTime
+                    if ts >= startTime then Some {| x=ts; title=title; text=text |}
+                    else None
+                )
+        |}
 
-    // return highcharts options
-    {| basicChartOptions scaleType "covid19-metrics-comparison" with series = allSeries |}
+
+    let allSeries = [
+        let mutable startTime = DateTime.Today |> jsTime
+        for metric in metrics do
+            let pointData = metricDataGenerator metric
+            yield pojo
+                {|
+                    visible = metric.Visible
+                    color = metric.Color
+                    name = metric.Label
+                    className = metric.Class
+                    data =
+                        data
+                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
+                        |> Seq.skipWhile (fun (ts,value) ->
+                            if metric.Visible && value.IsSome then
+                                startTime <- min startTime ts
+                            value.IsNone)
+                        |> Seq.toArray
+                    //yAxis = 0 // axis index
+                    //showInLegend = true
+                    //fillOpacity = 0
+                |}
+        if scaleType = Linear then
+            yield renderFlags startTime |> pojo
+    ]
+
+    let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
+    {| baseOptions with
+        series = List.toArray allSeries
+        yAxis =
+            let showFirstLabel = scaleType <> Linear
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+    |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [
-        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.style [ style.height 480 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
