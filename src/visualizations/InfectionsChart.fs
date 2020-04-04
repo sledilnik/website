@@ -130,7 +130,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
             {|
                 //height = "100%"
                 //``type`` = "spline"
-                ``type`` = "area"
+                ``type`` = "column"
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
             |}
