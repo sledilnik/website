@@ -5,15 +5,15 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <div class="dropdown">
   <div class="dd-title">So vaši podatki in prikazi verodostojni?</div>
   <div class="dd-content">
-    <p>Podatke zbiramo iz različnih uradnih [in drugih javnih virov](https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
+    <p>Podatke zbiramo iz različnih uradnih <a href="https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" target="_blank">in drugih javnih virov</a>. Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
   </div>
 </div>
 
 <div class="dropdown">
   <div class="dd-title">Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</div>
   <div class="dd-content">
-    <p>Na prikazu "Potrjeno okuženi po občinah" je izračun ocene "Podvojitev v N dneh" in pomeni, da se bo število okuženih predvidoma podvojilo v navedenem številu dni. Čas podvojitve je izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni za posamezno občino. Nižja, kot je številka, hitreje se število potrjeno okuženih povečuje (približuje eksponentni funkciji). </p>
-    <p>“Čas podvojitve” je zaradi velikih fluktuacij pri potrjenih in zaradi (na srečo) majhnih absolutnih številk, izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni. Podatek je še vedno za nazaj, le da so številke zglajene.</p>
+    <p>Na prikazu "Potrjeno okuženi po občinah" je prikazana ocena "Podvojitev v N dneh". To je ocena povprečne hitrosti eksponentnega naraščanja skupnega števila potrjeno okuženih, izračunana na podlagi spremembe v zadnjih 6 dneh. Povprečje uporabimo zato, da zgladimo dnevno nihanje pri potrjenih primerih, in se izognemo zaokrožitvam zaradi (na srečo) majhnih absolutnih številk. Nižja, kot je številka, hitreje se je število potrjeno okuženih povečalo.</p>
+    <p>Za izračun uporabimo naslednji izraz: <code>čas_podvojitve = 6 / log2(P0/P6)</code>. V izrazu <code>Pd</code> pomeni število potrjeno okuženih v občini pred <code>d</code> dnevi.
    </div>
 </div>
 
