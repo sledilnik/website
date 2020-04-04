@@ -179,7 +179,7 @@ let renderChartOptions scaleType (data : StatsData) =
             id = "data"
             color = "#bda506"
             name = chartCfg.seriesLabel
-            className = "cs-positiveTestsToDate"
+            //className = "cs-positiveTestsToDate"
             data =
                 data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
