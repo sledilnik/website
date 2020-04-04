@@ -87,7 +87,7 @@ let renderChartOptions (state : State) =
         |> List.filter (fun metric -> metric.Visible)
 
     let renderRegion metricToRender (point : RegionsDataPoint) =
-        let ts = point.Date |> jsTime
+        let ts = point.Date |> jsTime12h
         let region =
             point.Regions
             |> List.find (fun reg -> reg.Name = metricToRender.Key)

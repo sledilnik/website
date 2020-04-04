@@ -148,7 +148,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
-                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
+                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
                         |> Seq.skipWhile (fun (ts,value) ->
                             if metric.Visible && value.IsSome then
                                 startTime <- min startTime ts

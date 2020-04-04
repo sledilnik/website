@@ -103,7 +103,7 @@ type ChartCfg = {
                 legendTitle = "Dnevni prirast potrjeno okuženih"
                 seriesLabel = "Potrjeno okuženi dnevno"
                 yAxis = yAxisBase ()
-                dataKey = fun dp -> (dp.Date |> jsTime), dp.Cases.ConfirmedToday |> Option.map float |> Option.defaultValue nan
+                dataKey = fun dp -> (dp.Date |> jsTime12h), dp.Cases.ConfirmedToday |> Option.map float |> Option.defaultValue nan
             }
         | Percentage ->
             {
@@ -121,7 +121,7 @@ type ChartCfg = {
                             else (float total / float yesterday - 1.0) * 100.0 |> roundDecimals 1
                         )
                         |> Option.defaultValue nan
-                    dp.Date |> jsTime, value
+                    dp.Date |> jsTime12h, value
             }
 
         | DoublingRate ->
@@ -162,7 +162,7 @@ type ChartCfg = {
                             v
                         )
                         |> Option.defaultValue nan
-                    dp.Date |> jsTime, value
+                    dp.Date |> jsTime12h, value
             }
 
         // yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0)

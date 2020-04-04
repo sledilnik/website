@@ -69,6 +69,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
 
+    let offset12h = 86400000.0 / 2.0
     let maxOption a b =
         match a, b with
         | None, None -> None
@@ -114,7 +115,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
-                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))
+                        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
                         |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
                         |> Seq.toArray
                         |> if displayType<>Cummulative then makeRelative else id
@@ -151,7 +152,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                     |}
             |}
         legend = pojo {| reversed=true |}
-        tooltip = pojo {| shared=true |}
+        //tooltip = pojo {| shared=true |}
     |}
 
 let renderChartContainer scaleType data metrics =

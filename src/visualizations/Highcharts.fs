@@ -22,6 +22,9 @@ module Helpers =
     [<Emit("$0.getTime()")>]
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
+    let jsNoon : JsTimestamp = 43200000.0
+    let jsTime12h = jsTime >> ( + ) jsNoon
+
 type DashStyle =
     | Solid
     | ShortDash
@@ -53,7 +56,7 @@ let shadedWeekendPlotBands =
     let saturday = DateTime(2020,02,22)
     let nWeeks = (DateTime.Today-saturday).TotalDays / 7.0 |> int
     let oneDay = 86400000.0
-    let origin = jsTime saturday - oneDay / 2.0
+    let origin = jsTime saturday // - oneDay / 2.0
     [|
         for i in 0..nWeeks+2 do
             //yield {| value=origin + oneDay * 7.0 * float i; label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
@@ -62,7 +65,7 @@ let shadedWeekendPlotBands =
                 {|
                     ``from`` = origin + oneDay * 7.0 * float i
                     ``to`` = origin + oneDay * 7.0 * float i + oneDay * 2.0
-                    color = "rgb(0,0,0,0.04)"
+                    color = "rgb(0,0,0,0.025)"
                     label = None
                 |}
     |]
@@ -84,6 +87,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 gridLineWidth=1 //; isX=true
                 gridZIndex = -1
                 tickInterval=86400000
+                labels = pojo {| align = "center"; y = 30 |}
                 //labels = {| rotation= -45 |}
                 plotLines=[|
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}
@@ -148,6 +152,21 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     {|
                         dataLabels = pojo {| enabled = true |}
                         //enableMouseTracking = false
+                    |}
+            |}
+        tooltip = pojo
+            {|
+                //xDateFormat = @"%A, %e. %b"
+                shared = true
+                dateTimeLabelFormats = pojo
+                    {|
+                        // our data is sampled (offset) to noon: 12:00
+                        // but here we force to always format dates without any time
+                        // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
+                        day = @"%A, %e. %B %Y"
+                        hour = @"%A, %e. %B %Y"
+                        minute = @"%A, %e. %B %Y"
+                        second = @"%A, %e. %B %Y"
                     |}
             |}
     |}

@@ -90,7 +90,7 @@ type FacilityAssets = {
     perHospital: Map<FacilityCode, Assets>
   } with
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
-    member ps.JsDate = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime
+    member ps.JsDate12h = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime12h
 
 let getSortedFacilityCodes (data: FacilityAssets []) =
     match data with

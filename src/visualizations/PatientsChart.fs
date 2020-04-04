@@ -164,16 +164,16 @@ let renderChartOptions (state : State) =
     let renderSeries series =
         let renderPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match series with
-            | InCare        -> fun ps -> ps.JsDate, ps.total.inCare |> zeroToNone
-            | OutOfHospital -> fun ps -> ps.JsDate, ps.total.outOfHospital.toDate |> zeroToNone
-            | InHospital    -> fun ps -> ps.JsDate, ps.total.inHospital.today |> zeroToNone
-            | AllInHospital -> fun ps -> ps.JsDate, ps.total.inHospital.toDate |> zeroToNone
+            | InCare        -> fun ps -> ps.JsDate12h, ps.total.inCare |> zeroToNone
+            | OutOfHospital -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
+            | InHospital    -> fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
+            | AllInHospital -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
             //| NeedsO2       -> fun ps -> ps.JsDate, ps.total.needsO2.toDate |> zeroToNone
-            | Icu           -> fun ps -> ps.JsDate, ps.total.icu.today |> zeroToNone
-            | Critical      -> fun ps -> ps.JsDate, ps.total.critical.today |> zeroToNone
-            | Deceased      -> fun ps -> ps.JsDate, ps.total.deceased.toDate |> zeroToNone
-            | Hospital      -> fun ps -> ps.JsDate, failwithf "home & hospital"
-            | Home          -> fun ps -> ps.JsDate, failwithf "home & totals"
+            | Icu           -> fun ps -> ps.JsDate12h, ps.total.icu.today |> zeroToNone
+            | Critical      -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
+            | Deceased      -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
+            | Hospital      -> fun ps -> ps.JsDate12h, failwithf "home & hospital"
+            | Home          -> fun ps -> ps.JsDate12h, failwithf "home & totals"
 
         let color, className, name = Series.getSeriesInfo series
 
@@ -181,7 +181,7 @@ let renderChartOptions (state : State) =
             visible = state.activeSeries |> Set.contains series
             color = color
             name = name
-            className = className
+            //className = className
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
@@ -197,7 +197,7 @@ let renderChartOptions (state : State) =
     let renderSources segmentation =
         let facility, (renderPoint: Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match segmentation with
-            | Totals -> "Skupaj", fun ps -> ps.JsDate, ps.total.inHospital.today |> zeroToNone
+            | Totals -> "Skupaj", fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
             | Facility f ->
                 f, (fun ps ->
                     let value =
@@ -205,14 +205,14 @@ let renderChartOptions (state : State) =
                         |> Map.tryFind f
                         |> Option.bind (fun stats -> stats.inHospital.today)
                         |> zeroToNone
-                    ps.JsDate, value)
+                    ps.JsDate12h, value)
 
         let color, name = Data.Hospitals.facilitySeriesInfo facility
         {|
             visible = true
             color = color
             name = name
-            className = "cs-hospital-"+facility
+            //className = "cs-hospital-"+facility
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)

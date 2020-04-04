@@ -93,7 +93,7 @@ let extractFacilityDataPoint (scope: Scope) (atype:AssetType) (ctype: CountType)
     match scope with
     | Totals
     | Projection ->
-        fun (fa: FacilityAssets) -> fa.JsDate, (fa.overall |> Assets.getValue ctype atype)
+        fun (fa: FacilityAssets) -> fa.JsDate12h, (fa.overall |> Assets.getValue ctype atype)
     | Facility fcode ->
         fun fa ->
             let value =
@@ -101,7 +101,7 @@ let extractFacilityDataPoint (scope: Scope) (atype:AssetType) (ctype: CountType)
                 |> Map.tryFind fcode
                 |> Option.bind (Assets.getValue ctype atype)
                 |> zeroToNone
-            fa.JsDate, value
+            fa.JsDate12h, value
 
 let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int option)) =
     let extractTotalsCount : TotalPatientStats -> int option =
@@ -117,9 +117,9 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
 
     match scope with
     | Totals ->
-        fun (fa: PatientsStats) -> fa.JsDate, (fa.total |> extractTotalsCount)
+        fun (fa: PatientsStats) -> fa.JsDate12h, (fa.total |> extractTotalsCount)
     | Projection ->
-        fun (fa: PatientsStats) -> fa.JsDate, (fa.total |> extractTotalsCount)
+        fun (fa: PatientsStats) -> fa.JsDate12h, (fa.total |> extractTotalsCount)
     | Facility fcode ->
         fun (fa: PatientsStats) ->
             let value =
@@ -127,7 +127,7 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
                 |> Map.tryFind fcode
                 |> Option.bind extractFacilityCount
                 |> zeroToNone
-            fa.JsDate, value
+            fa.JsDate12h, value
 
 
 let renderChartOptions (state : State) =

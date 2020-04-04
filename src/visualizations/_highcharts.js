@@ -15,10 +15,31 @@ require("./_highcharts.scss");
 
 window.Highcharts = window.Highcharts || Highcharts;
 
+Highcharts.lo
+
 Highcharts.setOptions({
 	global: { 
 		useUTC: false // true by default
-	}
+    },
+    lang: {
+        loading: 'Nalagam...',
+        months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'setember', 'oktober', 'november', 'december'],
+        weekdays: ['Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota','Nedelja'],
+        //shortMonths: ['Jan', 'Feb', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        //exportButtonTitle: "Exportar",
+        //printButtonTitle: "Imprimir",
+        rangeSelectorFrom: "Od",
+        rangeSelectorTo: "do",
+        rangeSelectorZoom: "Obdobje",
+        //downloadPNG: 'Download imagem PNG',
+        //downloadJPEG: 'Download imagem JPEG',
+        //downloadPDF: 'Download documento PDF',
+        //downloadSVG: 'Download imagem SVG'
+        resetZoom: "Ponastavi skalo",
+        resetZoomTitle: "Prikaži celotno časovno obdobje",
+        thousandsSep: ".",
+        decimalPoint: ','
+    }
 });
 
 (function(H) {
