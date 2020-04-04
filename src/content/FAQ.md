@@ -1,16 +1,20 @@
 <h1>FAQ - Pogosta vprašanja in odgovori</h1>
 
-_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (al predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_
+_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_
 
 <div class="dropdown">
   <div class="dd-title">So vaši podatki in prikazi verodostojni?</div>
   <div class="dd-content">
-    <p>Podatke zbiramo iz različnih uradnih [in drugih javnih virov](https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.
-    </p>
+    <p>Podatke zbiramo iz različnih uradnih [in drugih javnih virov](https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
+  </div>
+</div>
+
+<div class="dropdown">
+  <div class="dd-title">Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</div>
+  <div class="dd-content">
     <p>Na prikazu "Potrjeno okuženi po občinah" je izračun ocene "Podvojitev v N dneh" in pomeni, da se bo število okuženih predvidoma podvojilo v navedenem številu dni. Čas podvojitve je izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni za posamezno občino. Nižja, kot je številka, hitreje se število potrjeno okuženih povečuje (približuje eksponentni funkciji). </p>
     <p>“Čas podvojitve” je zaradi velikih fluktuacij pri potrjenih in zaradi (na srečo) majhnih absolutnih številk, izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni. Podatek je še vedno za nazaj, le da so številke zglajene.</p>
-    <p>Content</p>
-  </div>
+   </div>
 </div>
 
 <div class="dropdown">
