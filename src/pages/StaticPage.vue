@@ -19,10 +19,25 @@ export default {
     };
   },
   mounted() {
-    this.content.then(data => {
-      this.staticContent = data.default;
-      this.$forceUpdate();
-    });
+    this.content
+      .then(data => {
+        this.staticContent = data.default;
+        this.$forceUpdate();
+      })
+      .then(this.initDropdowns);
+  },
+  methods: {
+    initDropdowns: function() {
+      let dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach(dropdown => {
+        dropdown.querySelector(".dd-title").addEventListener("click", () => {
+          let content = dropdown.querySelector(".dd-content");
+          content.style.display === "none"
+            ? (content.style.display = "block")
+            : (content.style.display = "none");
+        });
+      });
+    }
   }
 };
 </script>
@@ -74,6 +89,7 @@ export default {
   }
 
   em {
+    display: block;
     font-size: 16px;
     font-style: italic;
     color: rgba(0, 0, 0, 0.8);
@@ -115,6 +131,24 @@ export default {
       padding: 15px 0;
       width: 50%;
       border-top: 1px solid rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  .dropdown {
+    margin-bottom: 8px;
+
+    .dd-title {
+      display: inset-block;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .dd-content {
+      margin: 8px 0;
+      padding: 6px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      display: none;
+      margin-bottom: 22px;
     }
   }
 }
