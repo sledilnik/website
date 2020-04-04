@@ -150,7 +150,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                         //seriesStacking = true
                     |}
             |}
-        legend = None
+        legend = pojo {| reversed = true |}
     |}
 
 let renderChartContainer scaleType data metrics =
@@ -182,7 +182,7 @@ let renderDisplaySelectors scaleType dispatch =
         prop.children [
             //Html.text "Skala na Y osi: "
             renderSelector Cummulative scaleType "Skupaj"
-            renderSelector Daily scaleType "Dnevno"
+            renderSelector Daily scaleType "Po dnevih"
             renderSelector Relative scaleType "Relativno"
         ]
     ]
@@ -190,7 +190,7 @@ let renderDisplaySelectors scaleType dispatch =
 
 let render state dispatch =
     Html.div [
-        Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        //Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state.ScaleType state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
     ]
