@@ -222,4 +222,44 @@ export default {
     }
   }
 }
+
+//scoped only to links page
+.links .static-page-wrapper {
+  table {
+    thead {
+      display: none;
+    }
+
+    td {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    td:first-child {
+      padding: 0;
+      a {
+        color: #000;
+        font-size: 16px;
+        &:hover {
+          color: #000;
+        }
+      }
+    }
+    td:nth-child(2) {
+      padding: 0;
+    }
+
+    tr {
+      padding-bottom: 24px;
+      display: block;
+
+      & + tr {
+        padding-top: 24px;
+        margin: 0;
+        border-top: 1px solid #dedede;
+      }
+    }
+  }
+}
 </style>
