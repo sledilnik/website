@@ -31,10 +31,9 @@ export default {
       let dropdowns = document.querySelectorAll(".dropdown");
       dropdowns.forEach(dropdown => {
         dropdown.querySelector(".dd-title").addEventListener("click", () => {
-          let content = dropdown.querySelector(".dd-content");
-          content.classList.contains("dd-show")
-            ? content.classList.remove("dd-show")
-            : content.classList.add("dd-show");
+          dropdown.classList.contains("dd-show")
+            ? dropdown.classList.remove("dd-show")
+            : dropdown.classList.add("dd-show");
         });
       });
     }
@@ -66,6 +65,8 @@ export default {
     margin-bottom: 32px;
   }
 
+  .dropdown + h2,
+  .dropdown + h3,
   h1 + h2 {
     margin-top: 64px;
   }
@@ -135,25 +136,63 @@ export default {
   }
 
   .dropdown {
-    margin-bottom: 4px;
+    margin-bottom: 24px;
+
+    & + .dropdown {
+      border-top: 1px solid #dedede;
+      padding-top: 24px;
+    }
 
     .dd-title {
-      display: inline-block;
-      color: rgba(0, 0, 0, 0.8);
-      font-size: 16px;
       cursor: pointer;
       user-select: none;
+      font-weight: bold;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: 1.71;
+      color: rgba(0, 0, 0, 0.75);
+      position: relative;
+      padding-right: 40px;
+
+      &:after {
+        content: url("../assets/svg/expand-dd.svg");
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
 
     .dd-content {
       display: none;
       margin: 2px 0;
-      padding: 12px 8px 2px;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-      margin-bottom: 22px;
+      padding-top: 12px;
+      width: 90%;
+      position: relative;
+    }
 
-      &.dd-show {
+    &.dd-show {
+      .dd-content {
         display: block;
+        animation: show-dd 0.5s ease-out;
+
+        @keyframes show-dd {
+          from {
+            transform: translateY(-8px);
+            opacity: 0.1;
+          }
+          to {
+            transform: translateY(0px);
+            opacity: 1;
+          }
+        }
+      }
+
+      .dd-title {
+        &:after {
+          content: url("../assets/svg/close-dd.svg");
+        }
       }
     }
   }
