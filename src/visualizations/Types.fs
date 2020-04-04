@@ -47,6 +47,9 @@ type StatsDataPoint =
       Cases : Cases
       StatePerTreatment : Treatment
       StatePerAgeToDate : StatePerAgeToDate
+      HospitalEmployeePositiveTestsToDate : int option
+      RestHomeEmployeePositiveTestsToDate : int option
+      RestHomeOccupantPositiveTestsToDate : int option
     }
 
 type StatsData = StatsDataPoint list
@@ -74,6 +77,7 @@ type Visualization =
     | Municipalities
     | AgeGroups
     | Map
+    | Infections
 
 type RenderingMode =
     | Normal

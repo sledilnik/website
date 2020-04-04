@@ -35,7 +35,10 @@ type private TransferStatsDataPoint =
         {| confirmedToday : int option
            confirmedToDate : int option
            closedToDate : int option
-           activeToDate : int option |}
+           activeToDate : int option
+           hs : {| employeeConfirmedToDate: int option |}
+           rh : {| employeeConfirmedToDate: int option; occupantConfirmedToDate: int option |}
+        |}
       statePerTreatment :
         {| inHospital : int option
            inHospitalToDate : int option
@@ -73,6 +76,9 @@ type private TransferStatsDataPoint =
               OutOfHospital = this.statePerTreatment.outOfHospital
               RecoveredToDate = this.statePerTreatment.recoveredToDate }
           StatePerAgeToDate = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain)
+          HospitalEmployeePositiveTestsToDate = this.cases.hs.employeeConfirmedToDate
+          RestHomeEmployeePositiveTestsToDate = this.cases.rh.employeeConfirmedToDate
+          RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
         }
 
 type private TransferStatsData = TransferStatsDataPoint list
