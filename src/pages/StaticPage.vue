@@ -73,12 +73,13 @@ export default {
     margin-top: 14px;
   }
 
-  p > strong {
+  em {
     font-size: 16px;
     font-style: italic;
     color: rgba(0, 0, 0, 0.8);
     font-weight: 400;
     line-height: 1.7;
+    margin-bottom: 48px;
   }
 
   p,
@@ -95,10 +96,6 @@ export default {
   * + h3,
   * + table {
     margin-top: 48px;
-  }
-
-  h1 + p {
-    margin-bottom: 48px;
   }
 
   tr + tr {
@@ -120,14 +117,6 @@ export default {
       border-top: 1px solid rgba(0, 0, 0, 0.45);
     }
   }
-  // thead {
-  //   display: none;
-  // }
-
-  // tr {
-  //   display: flex;
-  //   flex-direction: column;
-  // }
 }
 .static-page-wrapper,
 .footnote {
