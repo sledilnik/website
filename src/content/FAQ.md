@@ -12,10 +12,9 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <div class="dropdown">
   <div class="dd-title">Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</div>
   <div class="dd-content">
-    <p>
     <p>Na prikazu "Potrjeno okuženi po občinah" je izračun ocene "Podvojitev v N dneh" in pomeni, da se bo število okuženih predvidoma podvojilo v navedenem številu dni. Čas podvojitve je izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni za posamezno občino. Nižja, kot je številka, hitreje se število potrjeno okuženih povečuje (približuje eksponentni funkciji). </p>
     <p>“Čas podvojitve” je zaradi velikih fluktuacij pri potrjenih in zaradi (na srečo) majhnih absolutnih številk, izračunan iz povprečnega (eksponentnega) prirasta zadnjih nekaj dni. Podatek je še vedno za nazaj, le da so številke zglajene.</p>
-      </div>
+   </div>
 </div>
 
 <div class="dropdown">
