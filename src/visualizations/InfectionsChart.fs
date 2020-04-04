@@ -198,3 +198,4 @@ let render state dispatch =
 
 let infectionsChart (props : {| data : StatsData |}) =
     React.elmishComponent("InfectionsChart", init props.data, update, render)
+

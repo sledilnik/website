@@ -49,6 +49,24 @@ type DashStyle =
         | LongDashDotDot -> "LongDashDotDot"
 
 
+let shadedWeekendPlotBands =
+    let saturday = DateTime(2020,02,22)
+    let nWeeks = (DateTime.Today-saturday).TotalDays / 7.0 |> int
+    let oneDay = 86400000.0
+    let origin = jsTime saturday - oneDay / 2.0
+    [|
+        for i in 0..nWeeks+2 do
+            //yield {| value=origin + oneDay * 7.0 * float i; label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
+            //yield {| value=origin + oneDay * 7.0 * float (i+1); label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
+            yield
+                {|
+                    ``from`` = origin + oneDay * 7.0 * float i
+                    ``to`` = origin + oneDay * 7.0 * float i + oneDay * 2.0
+                    color = "rgb(0,0,0,0.04)"
+                    label = None
+                |}
+    |]
+
 let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
         chart = pojo
@@ -76,18 +94,18 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     {| ``from``=jsTime <| DateTime(2020,2,29);
                        ``to``=jsTime <| DateTime(2020,3,13);
                        color="transparent"
-                       label={| align="center"; text="Faza 1" |}
+                       label=Some {| align="center"; text="Faza 1" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,3,13);
                        ``to``=jsTime <| DateTime(2020,3,20);
                        color="transparent"
-                       label={| align="center"; text=" Faza 2" |}
+                       label=Some {| align="center"; text=" Faza 2" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,3,20);
                        //``to``=jsTime <| DateTime(2020,3,30);
                        ``to``=jsTime <| DateTime.Today;
                        color="transparent"
-                       label={| align="center"; text="Faza 3" |}
+                       label=Some {| align="center"; text="Faza 3" |}
                     |}
                     (*
                     {| ``from``=jsTime <| DateTime(2020,3,30);
@@ -96,7 +114,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                        label={| align="center"; text="Faza 4" |}
                     |}
                     *)
-
+                    yield! shadedWeekendPlotBands
                 |]
             |}
         |]
