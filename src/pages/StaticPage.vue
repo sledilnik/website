@@ -89,7 +89,8 @@ export default {
     margin-top: 14px;
   }
 
-  em {
+  //subtitle
+  h1 + p > em {
     display: block;
     font-size: 16px;
     font-style: italic;
@@ -97,6 +98,10 @@ export default {
     font-weight: 400;
     line-height: 1.7;
     margin-bottom: 48px;
+
+    a {
+      font-size: 16px;
+    }
   }
 
   p,
