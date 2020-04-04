@@ -21,6 +21,7 @@
         <Compile Include="HospitalsChart.fs" />
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
+        <Compile Include="InfectionsChart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

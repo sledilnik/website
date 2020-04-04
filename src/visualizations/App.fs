@@ -20,6 +20,7 @@ let init (visualization : string option) =
                 | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
                 | "Hospitals" -> Some Hospitals
+                | "Infections" -> Some Infections
                 | _ -> None
                 |> Embeded
 
@@ -55,6 +56,17 @@ let render (state : State) (dispatch : Msg -> unit) =
              Label = "Kapacitete bolnišnic"
              Explicit = true
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () |}
+          {| Visualization = Infections
+             ClassName = "metrics-comparison-chart"
+             Label = "Struktura pozitivno testiranih"
+             Explicit = true
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} |}
+
           {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
