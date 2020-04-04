@@ -70,7 +70,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 plotLines=[|
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,3,20); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,3,30); label=Some {| text="poostritev ukrepov"; rotation=270; align="right"; x=12 |} |}
+                    //{| value=jsTime <| DateTime(2020,3,30); label=Some {| text="poostritev ukrepov"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -84,15 +84,18 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                        label={| align="center"; text=" Faza 2" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,3,20);
-                       ``to``=jsTime <| DateTime(2020,3,30);
+                       //``to``=jsTime <| DateTime(2020,3,30);
+                       ``to``=jsTime <| DateTime.Today;
                        color="transparent"
                        label={| align="center"; text="Faza 3" |}
                     |}
+                    (*
                     {| ``from``=jsTime <| DateTime(2020,3,30);
                        ``to``=jsTime <| DateTime.Today
                        color="transparent"
                        label={| align="center"; text="Faza 4" |}
                     |}
+                    *)
 
                 |]
             |}
