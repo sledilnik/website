@@ -1,6 +1,6 @@
 <h1>FAQ - Pogosta vprašanja in odgovori</h1>
 
-Namen Sledilnikovih prikazov je združiti  in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (al predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org.si. (Veseli smo tudi pohval, povratnih informacij ali predlogov!) 
+Namen Sledilnikovih prikazov je združiti  in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (al predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!) 
 
 <details>
  <summary><h3>So vaši podatki in prikazi verodostojni? </h3></summary>
