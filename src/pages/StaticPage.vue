@@ -19,10 +19,25 @@ export default {
     };
   },
   mounted() {
-    this.content.then(data => {
-      this.staticContent = data.default;
-      this.$forceUpdate();
-    });
+    this.content
+      .then(data => {
+        this.staticContent = data.default;
+        this.$forceUpdate();
+      })
+      .then(this.initDropdowns);
+  },
+  methods: {
+    initDropdowns: function() {
+      let dropdowns = document.querySelectorAll(".dropdown");
+      dropdowns.forEach(dropdown => {
+        dropdown.querySelector(".dd-title").addEventListener("click", () => {
+          let content = dropdown.querySelector(".dd-content");
+          content.classList.contains("dd-show")
+            ? content.classList.remove("dd-show")
+            : content.classList.add("dd-show");
+        });
+      });
+    }
   }
 };
 </script>
@@ -73,12 +88,14 @@ export default {
     margin-top: 14px;
   }
 
-  p > strong {
+  em {
+    display: block;
     font-size: 16px;
     font-style: italic;
     color: rgba(0, 0, 0, 0.8);
     font-weight: 400;
     line-height: 1.7;
+    margin-bottom: 48px;
   }
 
   p,
@@ -95,10 +112,6 @@ export default {
   * + h3,
   * + table {
     margin-top: 48px;
-  }
-
-  h1 + p {
-    margin-bottom: 48px;
   }
 
   tr + tr {
@@ -120,14 +133,30 @@ export default {
       border-top: 1px solid rgba(0, 0, 0, 0.45);
     }
   }
-  // thead {
-  //   display: none;
-  // }
 
-  // tr {
-  //   display: flex;
-  //   flex-direction: column;
-  // }
+  .dropdown {
+    margin-bottom: 4px;
+
+    .dd-title {
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .dd-content {
+      display: none;
+      margin: 2px 0;
+      padding: 12px 8px 2px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+      margin-bottom: 22px;
+
+      &.dd-show {
+        display: block;
+      }
+    }
+  }
 }
 .static-page-wrapper,
 .footnote {
