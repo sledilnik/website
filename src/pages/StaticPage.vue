@@ -32,9 +32,9 @@ export default {
       dropdowns.forEach(dropdown => {
         dropdown.querySelector(".dd-title").addEventListener("click", () => {
           let content = dropdown.querySelector(".dd-content");
-          content.style.display === "none"
-            ? (content.style.display = "block")
-            : (content.style.display = "none");
+          content.classList.contains("dd-show")
+            ? content.classList.remove("dd-show")
+            : content.classList.add("dd-show");
         });
       });
     }
@@ -135,20 +135,26 @@ export default {
   }
 
   .dropdown {
-    margin-bottom: 8px;
+    margin-bottom: 4px;
 
     .dd-title {
-      display: inset-block;
-      font-size: 18px;
+      display: inline-block;
+      color: rgba(0, 0, 0, 0.8);
+      font-size: 16px;
       cursor: pointer;
       user-select: none;
     }
+
     .dd-content {
-      margin: 8px 0;
-      padding: 6px;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
       display: none;
+      margin: 2px 0;
+      padding: 12px 8px 2px;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
       margin-bottom: 22px;
+
+      &.dd-show {
+        display: block;
+      }
     }
   }
 }
