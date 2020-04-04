@@ -28,8 +28,8 @@ module Metrics  =
     let all = [
         { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostali državljani" }
         { Metric=HospitalStaff;     Color="#19aebd"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeStaff;     Color="#73ccd5"; Line=Solid; Label="Osebje domov za ostarele" }
         { Metric=RestHomeOccupant;  Color="#bda506"; Line=Solid; Label="Varovanci domov za ostarele" }
+        { Metric=RestHomeStaff;     Color="#73ccd5"; Line=Solid; Label="Osebje domov za ostarele" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -150,7 +150,8 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                         //seriesStacking = true
                     |}
             |}
-        legend = pojo {| reversed = true |}
+        legend = pojo {| reversed=true |}
+        tooltip = pojo {| shared=true |}
     |}
 
 let renderChartContainer scaleType data metrics =
