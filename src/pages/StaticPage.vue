@@ -152,15 +152,14 @@ export default {
       line-height: 1.71;
       color: rgba(0, 0, 0, 0.75);
       position: relative;
-      padding-right: 40px;
+      padding-right: 10%;
 
       &:after {
         content: url("../assets/svg/expand-dd.svg");
         display: block;
         position: absolute;
         right: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
       }
     }
 
