@@ -198,7 +198,7 @@ let renderChartOptions (state : State) =
             ``type``="line"
             color = color
             name = name
-            dashStyle = dash |> DashStyle.value
+            dashStyle = dash |> DashStyle.toString
             showInLegend = true
             data =
                 state.facData
@@ -225,7 +225,7 @@ let renderChartOptions (state : State) =
             color = color
             name = name
             showInLegend = false
-            dashStyle = dash |> DashStyle.value
+            dashStyle = dash |> DashStyle.toString
             //lineWidth = "1"
             data =
                 [| for i in 1..projectDays+1 do
@@ -247,7 +247,7 @@ let renderChartOptions (state : State) =
             ``type``="spline"
             color = color
             name = name
-            dashStyle = dash |> DashStyle.value
+            dashStyle = dash |> DashStyle.toString
             data =
                 state.patientsData
                 |> Seq.map (extractPatientDataPoint scope aType)

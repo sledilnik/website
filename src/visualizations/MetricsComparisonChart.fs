@@ -28,6 +28,7 @@ type MetricCfg = {
     Color : string
     Visible : bool
     Label : string
+    Line : Highcharts.DashStyle
     Class: string
 }
 
@@ -35,18 +36,18 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric = PerformedTests;       Color = "#19aebd" ; Visible = false ; Label = "Testiranja (na dan)"; Class="cs-tests" }
-        { Metric = PerformedTestsToDate; Color = "#73ccd5" ; Visible = false ; Label = "Testiranja (skupaj)"; Class="cs-testsToDate" }
-        { Metric = ConfirmedCasesToday;  Color = "#bda506" ; Visible = true  ; Label = "Potrjeno okuženi (na dan)"; Class="cs-positiveTests" }
-        { Metric = ConfirmedCasesToDate; Color = "#d5c768" ; Visible = false ; Label = "Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
-        { Metric = InHospital;           Color = "#be7A2a" ; Visible = true  ; Label = "Hospitalizirani (trenutno)"; Class="cs-inHospital" }
-        { Metric = InHospitalToDate;     Color = "#de9a5a" ; Visible = false ; Label = "Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
-        { Metric = InICU;                Color = "#bf5747" ; Visible = true  ; Label = "V intenzivni enoti (trenutno)"; Class="cs-inHospitalICU" }
-        { Metric = OutOfHospital;        Color = "#20b16d" ; Visible = false ; Label = "Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
-        { Metric = OutOfHospitalToDate;  Color = "#57c491" ; Visible = false ; Label = "Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
-        { Metric = RecoveredToDate;      Color = "#8cd4b2" ; Visible = true  ; Label = "Ozdraveli (skupaj)"; Class="cs-recoveredToDate" }
-        { Metric = Deceased;             Color = "#000000" ; Visible = false ; Label = "Umrli (na dan)"; Class="cs-deceased" }
-        { Metric = DeceasedToDate;       Color = "#666666" ; Visible = true  ; Label = "Umrli (skupaj)"; Class="cs-deceasedToDate" }
+        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid; Label="Testiranja (na dan)"; Class="cs-tests" }
+        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Solid; Label="Testiranja (skupaj)"; Class="cs-testsToDate" }
+        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid; Label="Potrjeno okuženi (na dan)"; Class="cs-positiveTests" }
+        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Solid; Label="Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
+        { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (trenutno)"; Class="cs-inHospital" }
+        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Solid; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
+        { Metric=InICU;                Color="#bf5747"; Visible=true;  Line=Solid; Label="V intenzivni enoti (trenutno)"; Class="cs-inHospitalICU" }
+        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
+        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
+        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Line=Solid; Label="Ozdraveli (skupaj)"; Class="cs-recoveredToDate" }
+        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid; Label="Umrli (na dan)"; Class="cs-deceased" }
+        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Solid; Label="Umrli (skupaj)"; Class="cs-deceasedToDate" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -143,7 +144,8 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     visible = metric.Visible
                     color = metric.Color
                     name = metric.Label
-                    className = metric.Class
+                    //className = metric.Class
+                    dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
                         |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime, pointData dp))

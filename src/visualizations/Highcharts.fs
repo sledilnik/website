@@ -35,7 +35,7 @@ type DashStyle =
     | LongDashDot
     | LongDashDotDot
   with
-    static member value = function
+    static member toString = function
         | Solid -> "Solid"
         | ShortDash -> "ShortDash"
         | ShortDot -> "ShortDot"
