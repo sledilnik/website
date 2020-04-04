@@ -19,9 +19,9 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 
 <div class="dropdown">
   <div class="dd-title">Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</div>
-  <div class="dd-content">
-    <p>Podatke objavimo vsak dan najkasneje ob 16. uri. Dopoldne podatke zbiramo in obdelujemo, nato osvežimo vse distribucijske poti (.CSV in API) in objavimo poročilo na družbenih omrežjih (FB in TW).</p>
-    <p>Podatek "Potrjeno okuženi" je izjemoma posodabljan ob 8. uri za prejšnji dan, ker je rezultat testiranj za tekoči dan znan šele ob 23.59 (kar je prejšnji dan v trenutku objave).</p>
+  <div class="dd-content">    
+   <p>Večina podatkov se zbira za pretekli dan ob 23:59 (testi, potrjene okužbe,...), podatke o hospitalizacijah pa večinoma pridobimo do 9:00 vsak dan za vse bolnišnice. Naši podatki so tako osveženi ponavadi med 10:00 in 12:00. </p> 
+   <p>Ko objavimo sveže dnevne podatke, so objavljeni v vseh naših distribucijskih poteh (CSV, REST, spletna stran) in objavimo poročilo na družbenih omrežjih (Facebook in Twitter).</p>
   </div>
 </div>
 <div class="dropdown">
@@ -36,7 +36,7 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
  <div class="dd-title">Kje lahko najdem primerjavo med Slovenijo in drugimi državami? 
 </div>
 <div class="dd-content">
- <p>Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot je Worldometer.</p>
+ <p>Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot je Worldometer oz. preverite na strani Povezave.</p>
 </div>
 </div>
 
@@ -44,15 +44,15 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
  <div class="dd-title">Kako pridobivate podatke o odpuščenih iz bolnišnic?
 </div>
 <div class="dd-content">
- <p>Podatek Odpuščeni iz bolnišnice je Sledilnikova ocena, izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Podatke prejemamo vsakodnevno po emailu, hkrati spremljamo tudi javno komuniciranje bolnišnic (Twiter).</p>
+ <p>Podatek Odpuščeni iz bolnišnice je Sledilnikova ocena, izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Ker pa bolnišnice ne poročajo vseh sprejemov in odpustov iz bolnišnice, je naša ocena narejena na podlagi spremembe trenutno hospitaliziranih pacientov (če trenutno število pacientov pade, sklepamo da so bili odpuščeni).</p>
 </div>
 </div>
 
 <div class="dropdown">
- <div class="dd-title">Zakaj v vizualizacijah bolj podrobno ne ločite ICU-bolnikov, ki potrebujejo respirator, od tistih, ki ga ne potrebujejo?
+ <div class="dd-title">Zakaj v vizualizacijah bolniki v intenzivni enoti, ki potrebujejo respirator, tako odstopajo od tistih, ki ga ne potrebujejo?
 </div>
 <div class="dd-content">
- <p>ICU bolnikov oz. tistih okuženih, ki so oskrbovani v enoti intenzivne nege, na začetku zaradi manka podatkov nismo mogli z gotovostjo ločiti na bolnike, ki so respirator potrebovali, in tiste, ki ga k sreči niso. Zato smo metriko odstranili, če pa se pojavi potreba po zbiranju teh informacij, jih lahko hitro vključimo v naš sistem sledenja.</p>
+ <p>Bolnikov v intenzivni enoti na začetku zaradi manka podatkov nismo mogli z gotovostjo ločiti na bolnike, ki so respirator potrebovali, in tiste, ki ga k sreči niso. V zadnjem času prejemamo natančna poročila o uporabi respiratorja, zato so tudi poročila o respiratorju zelo zanesljiva. </p>
 </div>
 </div>
 
@@ -89,7 +89,7 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <div class="dropdown">
  <div class="dd-title">Kakšna je razlika med SARS-Cov-2 in COVID-19?</div>
  <div class="dd-content">
- <p>SARS-CoV-2  je angleška okrajšava za  “Severe Acute Respiratory Syndrome Coronavirus 2” – to je mednarodno sprejeto ime virusa, ki povzroča bolezen COVID-19. Tudi slednje poimenovanje je kratica, skovana iz besed COrona VIrus Disease ter 2019, torej leta, ko je bolezen prvič izbruhnila.</p>
+ <p>SARS-CoV-2 je angleška okrajšava za “Severe Acute Respiratory Syndrome Coronavirus 2” – to je mednarodno sprejeto ime virusa, ki povzroča bolezen COVID-19. Tudi slednje poimenovanje je kratica, skovana iz besed COrona VIrus Disease ter 2019, torej leta, ko je bolezen prvič izbruhnila.</p>
 </div>
 </div>
 
@@ -150,10 +150,10 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjeno okuženih oseb odvisno zgolj od testiranja, in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
  </p>
  <p> -hospitalizirani
-To je število okuženih oseb, ki imajo tako resne simptome bolezni Covid-19, da so bile sprejete v bolnišnično oskrbo. 
+To je število okuženih oseb, ki imajo tako resne simptome bolezni COVID-19, da so bile sprejete v bolnišnično oskrbo. 
 </p>
  <p> -v intenzivni enoti
-Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni Covid-19 v življenjski nevarnosti. Gre za podmnožico kategorije Hospitalizirani. 
+Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije Hospitalizirani. 
 </p>
    <p> -ozdraveli
 To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov bolezni in je bil po 14 dneh test za okužbo negativen (ne kaže več prisotnosti virusa).</p>
@@ -180,7 +180,7 @@ To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov 
 <div class="dropdown">
  <div class="dd-title">Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj? </div>
  <div class="dd-content">
- <p>Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (10.3.2020). </p>
+ <p>Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (4.3.2020). </p>
  <p> (Gl. tudi vprašanje So podatki verodostojni?)</p>
  <p>Content</p>
 </div>
@@ -200,25 +200,22 @@ To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov 
  <div class="dd-title">Kaj pomeni/prikazuje prikaz/graf ______________</div>
  <div class="dd-content">
  <p>Testiranja (na dan) = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19.  V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.</p>
- <p>Testiranja (skupaj) = Vsota testiranj do dne; podatek je uporaben v smislu primerjave oz. deleža celotne populacije, vendar je zavajajoč, saj so določene osebe lahko testirane večkrat.. 
+ <p>Testiranja (skupaj) = Vsota testiranj do dne; podatek je uporaben v smislu primerjave oz. deleža celotne populacije, vendar je zavajajoč, saj so določene osebe lahko testirane večkrat (npr. zdravstveni delavci, zaposleni v DSO...).
 </p>
  <p>
 Potrjeno okuženi (na dan) = Število potrjeno okuženih na dan. Ta kazalec ne odraža dejanskega gibanja novih okuženih v populaciji, saj s testi ne vzorčijo celotne populacije, ampak se ciljno testira rizične in poklicne skupine.
 </p>
  <p>
-V intenzivni enoti (trenutno) = Trenutno število oseb v intenzivnih enotah.</p>
+V intenzivni enoti (trenutno) = Trenutno število oseb v enotah intenzivne terapije.</p>
  <p>Odpuščeni iz bolnišnice (na dan) = Število odpuščenih iz bolnišnice na ta dan.</p>
  <p>Odpuščeni iz bolnišnice (skupaj) = Vsota odpuščenih iz bolnišnice do tega dne.</p>
- <p>V bolnišnični oskrbi (trenutno) = Trenutno število oseb v bolnišnični oskrbi.</p>
+ <p>Hospitalizirani (trenutno) = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali enoti za intenzivno terapijo).</p>
 <p>
 Hospitalizirani (skupaj) = Vsota sprejetih v bolnišnico do dne.
 </p>
- <p>Umrli (na dan) = Število umrlih za posledicami COVID-10 na ta dan.
+ <p>Umrli (na dan) = Število umrlih za posledicami COVID-19 na ta dan.
 </p>
  <p>Umrli (skupaj) = Vsota umrlih do tega dne.</p>
- <p>Content</p>
-<p>Content</p>
- <p>Content</p>
 </div>
 </div>
 
