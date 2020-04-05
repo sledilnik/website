@@ -36,20 +36,19 @@ Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi 
 
 [comment]: <> (!!!!!Vse nad tem izbrisi!!!!)
 
-<div class="dropdown">
-  <div class="dd-title">So vaši podatki in prikazi verodostojni?</div>
-  <div class="dd-content">
-    <p>Podatke zbiramo iz različnih uradnih in drugih javnih virov (zavihek Viri). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
-  </div>
-</div>
+<details>
+  <summary>So vaši podatki in prikazi verodostojni?</summary>
+  
+Podatke zbiramo iz različnih uradnih in drugih javnih virov - navedeni so v [zavihku Viri](#/sources). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, NIJZ in zdravstvenimi zavodi, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.
+</details>
 
-<div class="dropdown">
-  <div class="dd-title">Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</div>
-  <div class="dd-content">
-    <p>Na prikazu "Potrjeno okuženi po občinah" je prikazana ocena "Podvojitev v N dneh". To je ocena povprečne hitrosti eksponentnega naraščanja skupnega števila potrjeno okuženih, izračunana na podlagi spremembe v zadnjih 6 dneh. Povprečje uporabimo zato, da zgladimo dnevno nihanje pri potrjenih primerih, in se izognemo zaokrožitvam zaradi (na srečo) majhnih absolutnih številk. Nižja, kot je številka, hitreje se je število potrjeno okuženih povečalo.</p>
-    <p>Za izračun uporabimo naslednji izraz: <code>čas_podvojitve = 6 / log2(P0/P6)</code>. V izrazu <code>Pd</code> pomeni število potrjeno okuženih v občini pred <code>d</code> dnevi.
-   </div>
-</div>
+<details>
+  <summary>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
+  
+Na prikazu "**Potrjeno okuženi po občinah**" je prikazana ocena "**Podvojitev v N dneh**". To je ocena povprečne hitrosti eksponentnega naraščanja skupnega števila potrjeno okuženih, izračunana na podlagi spremembe v zadnjih 6 dneh. Povprečje uporabimo zato, da zgladimo dnevno nihanje pri potrjenih primerih, in se izognemo zaokrožitvam zaradi (na srečo) majhnih absolutnih številk. Nižja, kot je številka, hitreje se je število potrjeno okuženih povečalo.
+
+Za izračun uporabimo naslednji izraz: `čas_podvojitve = 6 / log2(P0/P6)</code>`. V izrazu `Pd` pomeni število potrjeno okuženih v občini pred `d` dnevi.
+</details>
 
 <div class="dropdown">
   <div class="dd-title">Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</div>
