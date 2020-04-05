@@ -7,10 +7,12 @@
         <b-navbar-nav class="ml-auto">
           <b-nav-item to="stats">Domov</b-nav-item>
           <b-nav-item to="tables">Tabela</b-nav-item>
+          <b-nav-item to="models">Modeli</b-nav-item>
+          <b-nav-item to="faq">FAQ</b-nav-item>
           <b-nav-item to="about">O projektu</b-nav-item>
+          <b-nav-item to="team">Ekipa</b-nav-item>
           <b-nav-item to="sources">Viri</b-nav-item>
           <b-nav-item to="links">Povezave</b-nav-item>
-          <b-nav-item to="team">Ekipa</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
