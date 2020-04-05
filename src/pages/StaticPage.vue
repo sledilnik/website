@@ -85,6 +85,10 @@ export default {
     font-size: 21px;
   }
 
+  h3 {
+    font-size: 18px;
+  }
+
   p + p {
     margin-top: 14px;
   }
@@ -141,6 +145,11 @@ export default {
   }
 
   //dropdown HTML in MD
+  h1 + details,
+  h2 + details,
+  h3 + details {
+    margin-top: 48px;
+  }
 
   details,
   .dropdown {
