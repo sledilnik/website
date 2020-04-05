@@ -218,17 +218,13 @@ let render state dispatch =
     Html.div [
         //Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state.ScaleType state.DisplayType state.Data
+        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
         Html.div [
             prop.className "disclaimer"
-            prop.style [ style.fontSize 12 ]
             prop.children [
-                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena."
-                Html.br []
-                Html.span "Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."
+                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena. Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."                
             ]
         ]
-
-        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
     ]
 
 let infectionsChart (props : {| data : StatsData |}) =
