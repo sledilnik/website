@@ -24,7 +24,7 @@ Highcharts.setOptions({
     lang: {
         loading: 'Nalagam...',
         months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'setember', 'oktober', 'november', 'december'],
-        weekdays: ['Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota','Nedelja'],
+        weekdays: ['Nedelja','Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota'],
         //shortMonths: ['Jan', 'Feb', 'Mar', 'Abr', 'Maio', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         //exportButtonTitle: "Exportar",
         //printButtonTitle: "Imprimir",

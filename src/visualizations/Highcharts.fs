@@ -87,7 +87,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 gridLineWidth=1 //; isX=true
                 gridZIndex = -1
                 tickInterval=86400000
-                labels = pojo {| align = "center"; y = 30 |}
+                //labels = pojo {| align = "center"; y = 30; reserveSpace = false |} // style = pojo {| marginBottom = "-30px" |}
+                labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |} // style = pojo {| marginBottom = "-30px" |}
                 //labels = {| rotation= -45 |}
                 plotLines=[|
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}

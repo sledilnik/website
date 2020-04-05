@@ -85,8 +85,8 @@ let inline legend title =
         //labelFormatter = string //fun series -> series.name
         layout = "vertical"
         floating = true
-        x = 20
-        y = 30
+        x = 8
+        y = 0
         backgroundColor = "#FFF"
     |}
     |> pojo
@@ -247,7 +247,9 @@ let renderExplainer (data: StatsData) =
         prop.className "exponential-explainer"
         prop.style [ (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
-            yield Html.h1 "Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
+            yield Html.h1
+                "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:"
+                //"Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
             yield Html.div [
                 prop.className "container"
                 prop.children [
