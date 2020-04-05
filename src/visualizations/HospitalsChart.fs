@@ -516,7 +516,12 @@ let render (state : State) dispatch =
             renderChartContainer state
             //Html.div [ prop.style [ style.height 10 ] ]
             renderBreakdownSelectors state dispatch
-            renderTable state dispatch
+            Html.div [
+                prop.style [ style.overflow scroll ]
+                prop.children [
+                    renderTable state dispatch
+                ]
+            ]
         ]
 
 let hospitalsChart () =
