@@ -60,12 +60,12 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
  <div class="dd-title">Kaj pomenijo različne faze (F1–F3), ki jih vidimo na vizualizacijah?</div>
  <div class="dd-content">
  <p>Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).</p>
- <p>Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb, hkrati pa omogočajo spremljanje uspešnosti posameznih ukrepov. </p>
- <p>Faza 1 (4. marec.–12. marec 2020): Zabeleženi so prvi primeri okužbe pri nas. 
+ <p>Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb. </p>
+ <p>Faza 1 (4. marec.–12. marec 2020): Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti. 
 </p>
  <p>Faza 2 (13. marec–19. marec 2020): Spremeni se metodologija testiranja, uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.
 </p>
- <p>F3 (20. marec–29. marec 2020): Ponovno se spremeni metodologija testiranja, vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
+ <p>F3 (20. marec–danes): Ponovno se spremeni metodologija testiranja, vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
 </p>
 </div>
 </div>
