@@ -5,7 +5,7 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <div class="dropdown">
   <div class="dd-title">So vaši podatki in prikazi verodostojni?</div>
   <div class="dd-content">
-    <p>Podatke zbiramo iz različnih uradnih <a href="https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" target="_blank">in drugih javnih virov</a>. Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
+    <p>Podatke zbiramo iz različnih uradnih in drugih javnih virov (zavihek Viri). Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
   </div>
 </div>
 
@@ -60,14 +60,13 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
  <div class="dd-title">Kaj pomenijo različne faze (F1–F3), ki jih vidimo na vizualizacijah?</div>
  <div class="dd-content">
  <p>Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).</p>
- <p>Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb, hkrati pa omogočajo spremljanje uspešnosti posameznih ukrepov. </p>
- <p>Faza 1 (4. marec.–12. marec 2020): Zabeleženi so prvi primeri okužbe pri nas. 
+ <p>Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb. </p>
+ <p>Faza 1 (4. marec.–12. marec 2020): Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti. 
 </p>
  <p>Faza 2 (13. marec–19. marec 2020): Spremeni se metodologija testiranja, uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.
 </p>
- <p>F3 (20. marec–29. marec 2020): Ponovno se spremeni metodologija testiranja, vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
+ <p>F3 (20. marec–danes): Ponovno se spremeni metodologija testiranja, vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
 </p>
-  <p>F4 (30. marec–danes): Zaostrijo se ukrepi samoizolacije, popolnoma se prepove vsakršno zbiranje na javnih površinah, gibanje oseb se omeji na gibanje znotraj občine stalnega oz. začasnega prebivališča, obvezna postane nošnja zaščitnih mask in rokavice na vseh javnih prostorih.</p>
 </div>
 </div>
 
@@ -146,17 +145,13 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <div class="dropdown">
  <div class="dd-title">Kaj pomeni izraz … </div>
  <div class="dd-content">
- <p> -potrjeno okuženi
-To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjeno okuženih oseb odvisno zgolj od testiranja, in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
+ <p> -potrjeno okuženi = To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjeno okuženih oseb odvisno zgolj od testiranja, in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
  </p>
- <p> -hospitalizirani
-To je število okuženih oseb, ki imajo tako resne simptome bolezni COVID-19, da so bile sprejete v bolnišnično oskrbo. 
+ <p> -hospitalizirani = To je število okuženih oseb, ki imajo tako resne simptome bolezni COVID-19, da so bile sprejete v bolnišnično oskrbo. 
 </p>
- <p> -v intenzivni enoti
-Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije Hospitalizirani. 
+ <p> -v intenzivni enoti = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije Hospitalizirani. 
 </p>
-   <p> -ozdraveli
-To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov bolezni in je bil po 14 dneh test za okužbo negativen (ne kaže več prisotnosti virusa).</p>
+   <p> -ozdraveli = To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov bolezni in je bil po 14 dneh test za okužbo negativen (ne kaže več prisotnosti virusa).</p>
 
 </div>
 </div>
@@ -172,8 +167,7 @@ To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov 
  <div class="dd-title">Želim pomagati, kje lahko začnem?</div>
  <div class="dd-content">
  <p>Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!</p>
- <p>Content</p>
- <p>Content</p>
+
 </div>
 </div>
 
@@ -182,7 +176,7 @@ To je število oseb, ki so bile v bolnišnični oskrbi, a nimajo več simptomov 
  <div class="dd-content">
  <p>Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (4.3.2020). </p>
  <p> (Gl. tudi vprašanje So podatki verodostojni?)</p>
- <p>Content</p>
+
 </div>
 </div>
 
