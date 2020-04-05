@@ -70,7 +70,8 @@ Celoten postopek zbiranja in urejanja podatkov je opisan na strani [O projektu](
 <details>
   <summary>Ali obstaja vaša stran tudi v angleščini?</summary>
 
-Zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna koda, če bi se želel kdo lotiti tega podviga. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz). </details>
+Zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna koda, če bi se želel kdo lotiti tega podviga. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
+</details>
 
 
 <details>
