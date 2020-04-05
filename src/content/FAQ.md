@@ -133,7 +133,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 
 <details>
-  <summary>Zakaj je na vizualizaciji "Rast potrjeno okuženih" primerjava z Južno Korejo?</summary>
+  <summary>Zakaj je na vizualizaciji "Prirast potrjeno okuženih" primerjava z Južno Korejo?</summary>
 
 Če na grafu izberemo pogled **Eksponentna rast v dnevih**, lahko vidimo povprečje rasti v istem časovnem obdobju tudi za Južno Korejo. To smo izbrali za primerjavo zato, ker ji je kljub močnemu izbruhu bolezni COVID-19 uspelo z različnimi metodami “sploščiti krivuljo” oz. povedano drugače – Južna Koreja je ena najuspešnejših držav pri obvladovanju epidemije.
 </details>
