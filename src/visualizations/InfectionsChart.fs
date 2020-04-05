@@ -27,9 +27,9 @@ type Metrics = MetricCfg list
 module Metrics  =
     let all = [
         { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostali državljani" }
-        { Metric=HospitalStaff;     Color="#19aebd"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeOccupant;  Color="#bda506"; Line=Solid; Label="Varovanci domov za ostarele" }
-        { Metric=RestHomeStaff;     Color="#73ccd5"; Line=Solid; Label="Osebje domov za ostarele" }
+        { Metric=HospitalStaff;     Color="#73ccd5"; Line=Solid; Label="Zaposleni v zdravstvu" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Varovanci domov za ostarele" }
+        { Metric=RestHomeStaff;     Color="#57c491"; Line=Solid; Label="Osebje domov za ostarele" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -109,7 +109,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
             yield pojo
                 {|
                     visible = true
-                    //color = metric.Color
+                    color = metric.Color
                     name = metric.Label
                     //className = metric.Class
                     dashStyle = metric.Line |> DashStyle.toString
@@ -124,6 +124,23 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                     //fillOpacity = 0
                 |}
     ]
+
+    let legend =
+        {|
+            enabled = true
+            title = ""
+            align = "left"
+            verticalAlign = "top"
+            borderColor = "#ddd"
+            borderWidth = 1
+            //labelFormatter = string //fun series -> series.name
+            layout = "vertical"
+            floating = true
+            x = 20
+            y = 30
+            backgroundColor = "rgba(255,255,255,0.5)"
+            reversed = true
+        |}
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
     {| baseOptions with
@@ -151,7 +168,7 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
                         //seriesStacking = true
                     |}
             |}
-        legend = pojo {| reversed=true |}
+        legend = pojo {| legend with enabled = displayType <> Relative |}
         //tooltip = pojo {| shared=true |}
     |}
 
@@ -194,6 +211,16 @@ let render state dispatch =
     Html.div [
         //Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state.ScaleType state.DisplayType state.Data
+        Html.div [
+            prop.className "disclaimer"
+            prop.style [ style.fontSize 16 ]
+            prop.children [
+                Html.span "Prosimo da upoštevate, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi."
+                Html.br []
+                Html.span "Trudimo se zbrati natančne podatke."
+            ]
+        ]
+
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
     ]
 

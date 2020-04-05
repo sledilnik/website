@@ -11,7 +11,7 @@ let chart: obj -> ReactElement = jsNative
 
 [<AutoOpen>]
 module Helpers =
-    // plain old javascript object
+    // Plain-Old-Javascript-Object (i.e. box)
     let inline pojo o = JsInterop.toPlainJsObj o
 
     // plain old javascript object
