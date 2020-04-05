@@ -43,18 +43,15 @@ type DisplayType =
 
 
 type State = {
-    ScaleType : ScaleType
     DisplayType : DisplayType
     Data : StatsData
 }
 
 type Msg =
     | ChangeDisplayType of DisplayType
-    | ScaleTypeChanged of ScaleType
 
 let init data : State * Cmd<Msg> =
     let state = {
-        ScaleType = Linear
         Data = data
         DisplayType = Cummulative
     }
@@ -64,12 +61,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType rt ->
         { state with DisplayType=rt }, Cmd.none
-    | ScaleTypeChanged scaleType ->
-        { state with ScaleType = scaleType }, Cmd.none
 
-let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
+let renderChartOptions displayType (data : StatsData) =
 
-    let offset12h = 86400000.0 / 2.0
     let maxOption a b =
         match a, b with
         | None, None -> None
@@ -142,53 +136,36 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
             reversed = true
         |}
 
-    let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
+    let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
     {| baseOptions with
         chart = pojo
             {|
-                //height = "100%"
-                //``type`` = "spline"
-                ``type`` = "column"
+                ``type`` = "column" // "spline"
                 zoomType = "x"
-                //styledMode = false // <- set this to 'true' for CSS styling
             |}
         title = pojo {| text = None |}
-
         series = List.toArray allSeries
-        xAxis =
-            baseOptions.xAxis |> Array.map (fun ax ->
-                {| ax with
-                    plotBands = [||]
-                    plotLines = ax.plotBands |> Array.skip 3 //TODO! wooooo hack !!!
-                |})
-        yAxis =
-            let showFirstLabel = scaleType <> Linear
-            baseOptions.yAxis |> Array.map (fun ax ->
-                {| ax with showFirstLabel = Some showFirstLabel |})
+        xAxis = baseOptions.xAxis |> Array.map (fun ax ->
+            {| ax with
+                plotBands = shadedWeekendPlotBands
+                plotLines = [||]
+            |})
         plotOptions = pojo
             {|
                 series = pojo {| stacking = if displayType=Relative then "percent" else "normal" |}
-                area = pojo
-                    {|
-                        dataLabels = pojo {| enabled = true |}
-                        //enableMouseTracking = false
-                        //seriesStacking = true
-                    |}
             |}
         legend = pojo {| legend with enabled = displayType <> Relative |}
-        //tooltip = pojo {| shared=true |}
     |}
 
-let renderChartContainer scaleType data metrics =
+let renderChartContainer data metrics =
     Html.div [
         prop.style [ style.height 480 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions scaleType data metrics
+            renderChartOptions data metrics
             |> Highcharts.chart
         ]
     ]
-
 
 let renderDisplaySelectors scaleType dispatch =
     let renderSelector (scaleType : DisplayType) (currentScaleType : DisplayType) (label : string) =
@@ -201,7 +178,6 @@ let renderDisplaySelectors scaleType dispatch =
             if not active then prop.onClick (fun _ -> dispatch scaleType)
             if active then prop.style [ style.backgroundColor "#808080" ]
           ]
-
 
     Html.div [
         prop.className "metrics-selectors"
@@ -216,13 +192,12 @@ let renderDisplaySelectors scaleType dispatch =
 
 let render state dispatch =
     Html.div [
-        //Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
-        renderChartContainer state.ScaleType state.DisplayType state.Data
+        renderChartContainer state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
         Html.div [
             prop.className "disclaimer"
             prop.children [
-                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena. Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."                
+                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena. Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."
             ]
         ]
     ]
