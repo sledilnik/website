@@ -26,10 +26,10 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let all = [
-        { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostali državljani" }
+        { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostale osebe" }
         { Metric=HospitalStaff;     Color="#73ccd5"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Line=Solid; Label="Zaposleni v domovih za ostarele" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Oskrbovanci domov za ostarele" }
+        { Metric=RestHomeStaff;     Color="#20b16d"; Line=Solid; Label="Zaposleni v domovih za starejše občane" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Oskrbovanci domov za starejše občane" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -220,7 +220,7 @@ let render state dispatch =
         renderChartContainer state.ScaleType state.DisplayType state.Data
         Html.div [
             prop.className "disclaimer"
-            prop.style [ style.fontSize 16 ]
+            prop.style [ style.fontSize 12 ]
             prop.children [
                 Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena."
                 Html.br []
