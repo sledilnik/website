@@ -56,17 +56,6 @@ let render (state : State) (dispatch : Msg -> unit) =
              Label = "Kapacitete bolnišnic"
              Explicit = true
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () |}
-          {| Visualization = Infections
-             ClassName = "metrics-comparison-chart"
-             Label = "Struktura potrjeno pozitivnih"
-             Explicit = true
-             Renderer = fun state ->
-                match state.StatsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} |}
-
           {| Visualization = MetricsComparison
              ClassName = "metrics-comparison-chart"
              Label = "Širjenje COVID-19 v Sloveniji"
@@ -92,6 +81,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView SpreadChart.spreadChart {| data = data |} |}
+          {| Visualization = Infections
+             ClassName = "metrics-comparison-chart"
+             Label = "Struktura potrjeno okuženih"
+             Explicit = true
+             Renderer = fun state ->
+               match state.StatsData with
+               | NotAsked -> Html.none
+               | Loading -> Utils.renderLoading
+               | Failure error -> Utils.renderErrorLoading error
+               | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} |}
           {| Visualization = Regions
              ClassName = "regions-chart"
              Label = "Potrjeno okuženi po regijah"

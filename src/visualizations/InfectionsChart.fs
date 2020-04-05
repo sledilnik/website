@@ -215,9 +215,9 @@ let render state dispatch =
             prop.className "disclaimer"
             prop.style [ style.fontSize 16 ]
             prop.children [
-                Html.span "Prosimo da upoštevate, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi."
+                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi."
                 Html.br []
-                Html.span "Trudimo se zbrati natančne podatke."
+                Html.span "Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."
             ]
         ]
 
