@@ -73,7 +73,7 @@ let render (state : State) (dispatch : Msg -> unit) =
              Renderer = fun _ -> lazyView PatientsChart.patientsChart () |}
           {| Visualization = Spread
              ClassName = "spread-chart"
-             Label = "Rast potrjeno okuženih"
+             Label = "Prirast potrjeno okuženih"
              Explicit = false
              Renderer = fun state ->
                 match state.StatsData with
