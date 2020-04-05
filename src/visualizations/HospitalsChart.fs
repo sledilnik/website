@@ -517,7 +517,7 @@ let render (state : State) dispatch =
             //Html.div [ prop.style [ style.height 10 ] ]
             renderBreakdownSelectors state dispatch
             Html.div [
-                prop.style [ style.overflow scroll ]
+                prop.style [ style.overflow.scroll ]
                 prop.children [
                     renderTable state dispatch
                 ]
