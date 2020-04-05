@@ -31,5 +31,6 @@ Uredniki baze in ostali sodelavci:
 - [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 - [Nace Štruc](https://www.nace.si/) - vizualizacije
 - [Peter Keše](https://twitter.com/pkese/) - vizualizacije
+- [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 - [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje
 - [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
