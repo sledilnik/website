@@ -35,14 +35,6 @@ Na voljo so v oblikah:
   - [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals)
   - [hospitals-list](https://covid19.rthand.com/api/hospitals-list) in drugi, več informacij v [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
 
-## Uporaba podatkov
-
-Podatki se uporabljajo za različne vizualizacije in statistike:
-
-- [**Statistika**](#/stats) – grafi, infografike in zemljevidi s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
-
-Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links).
-
 ## Kako urejamo podatke
 
 [Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
@@ -55,6 +47,17 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 - Kjer so podatki o prehodih (sprejem/odpust) nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
 - Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
 - Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59.
+
+## Uporaba podatkov
+
+Podatki se uporabljajo za različne vizualizacije in statistike:
+
+- [**Statistika**](#/stats) – grafi, infografike in zemljevidi s podatki o potrjeno okuženih in stanju hospitaliziranih pacientov
+
+Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](#/links).
+
+**Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde. 
+Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo. Kljub temu ne moremo 100 %/v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
 
 ## Pogoji uporabe
 
