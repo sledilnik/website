@@ -84,7 +84,7 @@ let render (state : State) (dispatch : Msg -> unit) =
           {| Visualization = Infections
              ClassName = "metrics-comparison-chart"
              Label = "Struktura potrjeno okuženih"
-             Explicit = true
+             Explicit = false
              Renderer = fun state ->
                match state.StatsData with
                | NotAsked -> Html.none

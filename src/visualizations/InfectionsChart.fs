@@ -28,8 +28,8 @@ module Metrics  =
     let all = [
         { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostali državljani" }
         { Metric=HospitalStaff;     Color="#73ccd5"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Varovanci domov za ostarele" }
-        { Metric=RestHomeStaff;     Color="#57c491"; Line=Solid; Label="Osebje domov za ostarele" }
+        { Metric=RestHomeStaff;     Color="#20b16d"; Line=Solid; Label="Zaposleni v domovih za ostarele" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Oskrbovanci domov za ostarele" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -155,9 +155,16 @@ let renderChartOptions (scaleType: ScaleType) (displayType) (data : StatsData) =
         title = pojo {| text = None |}
 
         series = List.toArray allSeries
+        xAxis =
+            baseOptions.xAxis |> Array.map (fun ax ->
+                {| ax with
+                    plotBands = [||]
+                    plotLines = ax.plotBands |> Array.skip 3 //TODO! wooooo hack !!!
+                |})
         yAxis =
             let showFirstLabel = scaleType <> Linear
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+            baseOptions.yAxis |> Array.map (fun ax ->
+                {| ax with showFirstLabel = Some showFirstLabel |})
         plotOptions = pojo
             {|
                 series = pojo {| stacking = if displayType=Relative then "percent" else "normal" |}
@@ -215,7 +222,7 @@ let render state dispatch =
             prop.className "disclaimer"
             prop.style [ style.fontSize 16 ]
             prop.children [
-                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi."
+                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena."
                 Html.br []
                 Html.span "Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."
             ]
