@@ -133,14 +133,14 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 
 <details>
-  <summary>Zakaj je na vizualizaciji "Hitrost širjenja okužbe" primerjava z Južno Korejo?</summary>
+  <summary>Zakaj je na vizualizaciji "Rast potrjeno okuženih" primerjava z Južno Korejo?</summary>
 
 Če na grafu izberemo pogled **Eksponentna rast v dnevih**, lahko vidimo povprečje rasti v istem časovnem obdobju tudi za Južno Korejo. To smo izbrali za primerjavo zato, ker ji je kljub močnemu izbruhu bolezni COVID-19 uspelo z različnimi metodami “sploščiti krivuljo” oz. povedano drugače – Južna Koreja je ena najuspešnejših držav pri obvladovanju epidemije.
 </details>
 
 
 <details>
-  <summary>Kaj pomenijo različni prikazi dnevnega prirasta v vizualizaciji Hitrost širjenja okužbe?</summary>
+  <summary>Kaj pomenijo različni prikazi dnevnega prirasta v vizualizaciji Rast potrjeno okuženih?</summary>
 
 * **Absolutni dnevni prirast** prikazuje število novih primerov potrjeno okuženih na določen dan.
 
