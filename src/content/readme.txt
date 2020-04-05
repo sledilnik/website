@@ -3,7 +3,8 @@ Primer:
 _To je subtitle_
 
 
-Dropdown: Za dropdown je treba vsebino objeti z divi, znotran je treba uporabaljati html sintakso
+Dropdown: 
+*Dropdowne se lahko pise s html sintakso
 Primer:
 
 <div class="dropdown">
@@ -14,3 +15,16 @@ Primer:
     <a href="https://www.com">To je link</a>
   </div>
 </div>
+
+
+*Ali z md.
+Primer:
+
+<details>
+  <summary>Naslov dropdowna</summary>
+  
+  Pod _summary obvezno prazna vsrtica_
+
+To je nek text [Link](https://www.Sub.bullets.com) **boldan text**
+
+</details>

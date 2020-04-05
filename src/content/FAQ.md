@@ -2,6 +2,40 @@
 
 _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_
 
+[comment]: <> (!!!!!Vse pod tem izbrisi!!!!!)
+
+<details>
+  <summary>Primer  !!!!!IZBRISI!!!!!</summary>
+  
+  Pod _summary obvezno prazna vsrtica_
+
+To je nek text [Link](https://www.Sub.bullets.com) **boldan text**
+
+</details>
+
+<div class="dropdown">
+  <div class="dd-title">To je dropdown s HTML  !!!!!IZBRISI!!!!!</div>
+  <div class="dd-content">
+    <p>Podatke zbiramo iz različnih uradnih <a href="https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" target="_blank">in drugih javnih virov</a>. Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z zdravstvenimi zavodi in NIJZ, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.</p>
+  </div>
+</div>
+
+<details>
+  <summary>To je DD z MD  !!!IZBRISI!!!!</summary>
+  
+  V naši skupnosti sodelujejo tudi strokovnjaki za statistično modeliranje in računalniške simulacije.
+Na tej strani objavljamo povezave na nekatere od njihovih modelov,
+ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](covid-19.sledilnik.org).
+
+Modeli v veliki meri upoštevajo doslej znane informacije o bolezni COVID-19 in njenem širjenju v Sloveniji, a kljub temu **ne ponujajo natančnih napovedi** za prihodnji potek epidemije, **zato je potrebno skrbno prebrati vse predpostavke modela**.
+Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti.
+
+Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
+
+</details>
+
+[comment]: <> (!!!!!Vse nad tem izbrisi!!!!)
+
 <div class="dropdown">
   <div class="dd-title">So vaši podatki in prikazi verodostojni?</div>
   <div class="dd-content">

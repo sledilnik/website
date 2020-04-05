@@ -140,14 +140,19 @@ export default {
     }
   }
 
+  //dropdown HTML in MD
+
+  details,
   .dropdown {
     margin-bottom: 24px;
 
+    & + details,
     & + .dropdown {
       border-top: 1px solid #dedede;
       padding-top: 24px;
     }
 
+    summary,
     .dd-title {
       cursor: pointer;
       user-select: none;
@@ -166,41 +171,74 @@ export default {
         right: 0;
         top: 0;
       }
-    }
 
-    .dd-content {
-      display: none;
-      margin: 2px 0;
-      padding-top: 12px;
-      width: 90%;
-      position: relative;
-    }
-
-    &.dd-show {
-      .dd-content {
-        display: block;
-        animation: show-dd 0.5s ease-out;
-
-        @keyframes show-dd {
-          from {
-            transform: translateY(-8px);
-            opacity: 0.1;
-          }
-          to {
-            transform: translateY(0px);
-            opacity: 1;
-          }
-        }
-      }
-
-      .dd-title {
-        &:after {
-          content: url("../assets/svg/close-dd.svg");
-        }
+      &:focus {
+        outline: none;
       }
     }
   }
+
+  .dropdown .dd-content {
+    display: none;
+    margin: 2px 0;
+    padding-top: 12px;
+    width: 90%;
+    position: relative;
+  }
+
+  details > *:not(summary) {
+    position: relative;
+    display: none;
+    width: 90%;
+  }
+
+  details > *:nth-child(2) {
+    margin-top: 2px;
+    padding-top: 12px;
+  }
+
+  details[open] {
+    & > *:not(summary) {
+      display: block;
+      animation: show-dd 0.5s ease-out;
+    }
+
+    summary {
+      &:after {
+        content: url("../assets/svg/close-dd.svg");
+      }
+    }
+  }
+
+  .dropdown.dd-show {
+    .dd-content {
+      display: block;
+      animation: show-dd 0.5s ease-out;
+    }
+
+    .dd-title {
+      &:after {
+        content: url("../assets/svg/close-dd.svg");
+      }
+    }
+  }
+
+  @keyframes show-dd {
+    from {
+      transform: translateY(-8px);
+      opacity: 0.1;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
 }
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
 .static-page-wrapper,
 .footnote {
   a {
