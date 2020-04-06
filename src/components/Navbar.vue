@@ -98,14 +98,11 @@ nav.navbar {
   }
 
   .nav-item {
-    margin-bottom: 3px;
-
     @media only screen and (min-width: 768px) {
       margin-left: 15px;
     }
 
     @media (min-width: 992px) {
-      margin-bottom: 0;
       margin-left: 0px;
     }
 
@@ -136,9 +133,15 @@ nav.navbar {
     position: relative;
     display: inline-block;
     color: rgba(0, 0, 0, 0.5);
-    line-height: 20px;
-    font-size: 14px;
-    padding: 0 !important;
+    line-height: 23px;
+    font-size: 18px;
+    padding: 6px 16px 6px 0 !important;
+
+    @media (min-width: 992px) {
+      font-size: 14px;
+      line-height: 20px;
+      padding: 0 !important;
+    }
 
     &:hover {
       color: rgb(0, 0, 0) !important;
@@ -155,9 +158,14 @@ nav.navbar {
         display: block;
         z-index: -1;
         left: 0;
-        right: 0;
-        bottom: -5px;
+        right: 16px;
+        bottom: 0px;
         border-bottom: 10px solid #ffffff;
+
+        @media (min-width: 992px) {
+          right: 0;
+          bottom: -5px;
+        }
       }
     }
 
