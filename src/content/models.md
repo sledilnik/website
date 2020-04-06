@@ -20,5 +20,5 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 Model lahko tudi sami [preizkusite](https://pacs.zf.uni-lj.si/statistika/zadnja-simulacija-covid19/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
 
-[<img src="https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png" width="700">](https://pacs.zf.uni-lj.si/statistika/zadnja-simulacija-covid19/)
+[<img src="https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png" width="700">](https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png)
 
