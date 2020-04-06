@@ -12,7 +12,7 @@ Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi 
 ## Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
 V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v tem delovnem dokumentu](https://nextcloud.fmf.uni-lj.si/s/AdNLwYoA4JyKFBG), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
 
-[<img src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" width="700">](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png)
+![Model prenosa virusa po socialnem omrežju prebivalcev Slovenije, Žiga Zaplotnik](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png)
 
 
 ## SEIR model
@@ -20,5 +20,5 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 Model lahko tudi sami [preizkusite](https://pacs.zf.uni-lj.si/statistika/zadnja-simulacija-covid19/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
 
-[<img src="https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png" width="700">](https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png)
+![SEIR model, prof.Janez Žibert](https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png)
 
