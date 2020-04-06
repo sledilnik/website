@@ -19,6 +19,26 @@ let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| 
         if value < 0.0 then None
         else Some value
 
+let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |} list) =
+    let reversedValues =
+        values
+        |> List.choose (fun dp ->
+            match dp.Value with
+            | None -> None
+            | Some value -> Some {| Date = dp.Date ; Value = value |}
+        )
+        |> List.rev
+
+    match reversedValues with
+    | head :: tail ->
+        printfn "%A" head
+        match tail |> List.tryFind (fun dp ->
+            printfn "  %A" dp
+            float head.Value / 2. >= float dp.Value) with
+        | None -> None
+        | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
+    | _ -> None
+
 let renderScaleSelector scaleType dispatch =
     let renderSelector (scaleType : ScaleType) (currentScaleType : ScaleType) (label : string) =
         let defaultProps =
@@ -44,7 +64,6 @@ let renderLoading =
         prop.className "loader"
         prop.text "Nalagam podatke..."
     ]
-
 
 let renderErrorLoading (error : string) =
     Html.text error

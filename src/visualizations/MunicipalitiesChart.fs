@@ -9,9 +9,8 @@ open Feliz.ElmishComponents
 open Types
 
 let barMaxHeight = 50
-let showMaxBars = 26
+let showMaxBars = 30
 let collapsedMnicipalityCount = 24
-let doublingTimeInterval = 7
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
@@ -77,13 +76,10 @@ let renderMunicipality
         |> Array.ofSeq
 
     let doublingTime =
-        match reversedDoublingTimeValues.Length with
-        | 0 | 1 -> None
-        | length ->
-            if length >= doublingTimeInterval then
-                Utils.calculateDoublingTime reversedDoublingTimeValues.[doublingTimeInterval - 1] reversedDoublingTimeValues.[0]
-            else
-                Utils.calculateDoublingTime reversedDoublingTimeValues.[length - 1] reversedDoublingTimeValues.[0]
+        data
+        |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.PositiveTests |})
+        |> Seq.toList
+        |> Utils.findDoublingTime
 
     let renderedDoublingTime =
         match doublingTime with
