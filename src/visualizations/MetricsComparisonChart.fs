@@ -37,17 +37,17 @@ type Metrics = MetricCfg list
 module Metrics  =
     let initial = [
         { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid; Label="Testiranja (na dan)"; Class="cs-tests" }
-        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Solid; Label="Testiranja (skupaj)"; Class="cs-testsToDate" }
+        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot; Label="Testiranja (skupaj)"; Class="cs-testsToDate" }
         { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid; Label="Potrjeno okuženi (na dan)"; Class="cs-positiveTests" }
-        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Solid; Label="Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
+        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot; Label="Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (trenutno)"; Class="cs-inHospital" }
-        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Solid; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
+        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
         { Metric=InICU;                Color="#bf5747"; Visible=true;  Line=Solid; Label="V intenzivni enoti (trenutno)"; Class="cs-inHospitalICU" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
-        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Line=Solid; Label="Ozdraveli (skupaj)"; Class="cs-recoveredToDate" }
+        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
+        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Line=Dot; Label="Ozdraveli (skupaj)"; Class="cs-recoveredToDate" }
         { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid; Label="Umrli (na dan)"; Class="cs-deceased" }
-        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Solid; Label="Umrli (skupaj)"; Class="cs-deceasedToDate" }
+        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Dot; Label="Umrli (skupaj)"; Class="cs-deceasedToDate" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
