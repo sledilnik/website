@@ -101,16 +101,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView RegionsChart.regionsChart {| data = data |} |}
-          {| Visualization = Municipalities
-             ClassName = "municipalities-chart"
-             Label = "Potrjeno okuženi po občinah"
-             Explicit = false
-             Renderer = fun state ->
-                match state.RegionsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| data = data |} |}
           {| Visualization = Map
              ClassName = "map-chart"
              Label = "Zemljevid potrjeno okuženih po občinah"
@@ -121,6 +111,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView Map.mapChart {| data = data |} |}
+          {| Visualization = Municipalities
+             ClassName = "municipalities-chart"
+             Label = "Potrjeno okuženi po občinah"
+             Explicit = false
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"
