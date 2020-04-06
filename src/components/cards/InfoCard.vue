@@ -9,7 +9,7 @@
           >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip
         >
       </div>
-      <!-- <div class="data-time">{{ renderValues.lastDay.date | formatDate('d. MMMM') }}</div> -->
+      <div class="data-time">{{ renderValues.lastDay.date | formatDate('d. MMMM') }}</div>
     </div>
   </div>
 </template>
