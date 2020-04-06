@@ -1,19 +1,23 @@
 <template>
-  <b-container class="mt-3 stats-page">
-    <div class="cards-wrapper latest-data-boxes">
-      <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
-      <Info-card title="Hospitalizirani" field="state.in_hospital" />
-      <Info-card title="V intenzivni enoti" field="state.icu" />
-      <Info-card title="Umrli" field="state.deceased.todate" />
-      <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
-    </div>
-    <b-row cols="12">
-      <b-col>
-        <div id="visualizations" class="visualizations"></div>
-      </b-col>
-    </b-row>
-    <!-- <loader v-show="!loaded"></loader> -->
-  </b-container>
+  <div>
+    <Time-stamp />
+    <b-container class="stats-page">
+      <div class="time-stamp"></div>
+      <div class="cards-wrapper latest-data-boxes">
+        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
+        <Info-card title="Hospitalizirani" field="state.in_hospital" />
+        <Info-card title="V intenzivni enoti" field="state.icu" />
+        <Info-card title="Umrli" field="state.deceased.todate" />
+        <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
+      </div>
+      <b-row cols="12">
+        <b-col>
+          <div id="visualizations" class="visualizations"></div>
+        </b-col>
+      </b-row>
+      <!-- <loader v-show="!loaded"></loader> -->
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -21,6 +25,7 @@ import { mapState } from 'vuex';
 
 // import Loader from 'components/Loader';
 import InfoCard from 'components/cards/InfoCard';
+import TimeStamp from 'components/TimeStamp';
 
 import { Visualizations } from 'visualizations/App.fsproj';
 
@@ -28,6 +33,7 @@ export default {
   name: 'StatsPage',
   components: {
     InfoCard,
+    TimeStamp,
     // Loader,
   },
   props: {
@@ -63,5 +69,4 @@ export default {
 };
 </script>
 
-<style lang="sass">
-</style>
+<style lang="sass"></style>
