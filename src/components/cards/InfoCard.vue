@@ -9,9 +9,7 @@
           >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip
         >
       </div>
-      <!-- <div class="data-time">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div> -->
-      <!-- <div class="data-time">Na dan {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div> -->
-      <!-- <div class="data-time">Osveženo {{ exportTime | formatDate('dd. MM. yyyy HH:mm') }}</div> -->
+      <!-- <div class="data-time">{{ renderValues.lastDay.date | formatDate('d. MMMM') }}</div> -->
     </div>
   </div>
 </template>
@@ -160,6 +158,8 @@ export default {
 }
 
 .data-time {
+  margin-top: 0.7rem;
+  // text-align: center;
   font-size: 12px;
   color: #a0a0a0;
 }
