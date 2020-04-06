@@ -1,8 +1,11 @@
 <template>
   <div class="time-stamp">
-    <p>
-      Osveženo <span>{{ exportTime | formatDate('dd. MM. yyyy') }}</span> ob
-      <span>{{ exportTime | formatDate('hh:mm') }}</span>
+    <p v-if="exportTime">
+      Osveženo <span>{{ exportTime | formatDate('d. MMMM yyyy') }}</span> ob
+      <span>{{ exportTime | formatDate('HH:mm') }}</span>
+    </p>
+    <p v-else>
+      
     </p>
   </div>
 </template>
