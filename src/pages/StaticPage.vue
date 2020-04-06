@@ -8,19 +8,19 @@
 
 <script>
 export default {
-  name: "StaticPage",
+  name: 'StaticPage',
   props: {
     name: String,
-    content: Promise
+    content: Promise,
   },
   data() {
     return {
-      staticContent: ""
+      staticContent: '',
     };
   },
   mounted() {
     this.content
-      .then(data => {
+      .then((data) => {
         this.staticContent = data.default;
         this.$forceUpdate();
       })
@@ -28,16 +28,16 @@ export default {
   },
   methods: {
     initDropdowns: function() {
-      let dropdowns = document.querySelectorAll(".dropdown");
-      dropdowns.forEach(dropdown => {
-        dropdown.querySelector(".dd-title").addEventListener("click", () => {
-          dropdown.classList.contains("dd-show")
-            ? dropdown.classList.remove("dd-show")
-            : dropdown.classList.add("dd-show");
+      let dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach((dropdown) => {
+        dropdown.querySelector('.dd-title').addEventListener('click', () => {
+          dropdown.classList.contains('dd-show')
+            ? dropdown.classList.remove('dd-show')
+            : dropdown.classList.add('dd-show');
         });
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -174,7 +174,7 @@ export default {
       padding-right: 10%;
 
       &:after {
-        content: url("../assets/svg/expand-dd.svg");
+        content: url('../assets/svg/expand-dd.svg');
         display: block;
         position: absolute;
         right: 0;
@@ -214,7 +214,7 @@ export default {
 
     summary {
       &:after {
-        content: url("../assets/svg/close-dd.svg");
+        content: url('../assets/svg/close-dd.svg');
       }
     }
   }
@@ -227,7 +227,7 @@ export default {
 
     .dd-title {
       &:after {
-        content: url("../assets/svg/close-dd.svg");
+        content: url('../assets/svg/close-dd.svg');
       }
     }
   }
@@ -240,6 +240,20 @@ export default {
     to {
       transform: translateY(0px);
       opacity: 1;
+    }
+  }
+
+  .img-link {
+    display: block;
+    box-shadow: none;
+    margin-bottom: 24px;
+
+    &:hover {
+      box-shadow: none;
+    }
+
+    img {
+      width: 100%;
     }
   }
 }
