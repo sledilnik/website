@@ -57,6 +57,10 @@ nav.navbar {
     border: none;
     padding: 0 4px 0 0;
 
+    @media only screen and (min-width: 768px) {
+      padding: 0 19px 0 0;
+    }
+
     &:focus {
       outline: none;
     }
@@ -87,6 +91,45 @@ nav.navbar {
     width: 145px;
     height: 39px;
     margin: 7px 0;
+
+    @media only screen and (min-width: 768px) {
+      margin: 7px 0 7px 15px;
+    }
+  }
+
+  .nav-item {
+    margin-bottom: 3px;
+
+    @media only screen and (min-width: 768px) {
+      margin-left: 15px;
+    }
+
+    @media (min-width: 992px) {
+      margin-bottom: 0;
+      margin-left: 0px;
+    }
+
+    & + .nav-item {
+      @media (min-width: 992px) {
+        margin-left: 32px;
+      }
+    }
+
+    &:first-child {
+      margin-top: 12px;
+      @media (min-width: 992px) {
+        margin-top: 0;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 12px;
+
+      @media (min-width: 992px) {
+        margin-right: 15px;
+        margin-bottom: 0;
+      }
+    }
   }
 
   a.nav-link {
@@ -94,8 +137,8 @@ nav.navbar {
     display: inline-block;
     color: rgba(0, 0, 0, 0.5);
     line-height: 20px;
-    margin-right: 15px;
     font-size: 14px;
+    padding: 0 !important;
 
     &:hover {
       color: rgb(0, 0, 0) !important;
@@ -113,13 +156,8 @@ nav.navbar {
         z-index: -1;
         left: 0;
         right: 0;
-        bottom: 3px;
+        bottom: -5px;
         border-bottom: 10px solid #ffffff;
-
-        @media (min-width: 992px) {
-          left: 0.5rem;
-          right: 0.5rem;
-        }
       }
     }
 

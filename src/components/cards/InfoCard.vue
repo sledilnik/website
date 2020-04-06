@@ -1,24 +1,23 @@
 <template>
   <div :title="title" class="hp-card-holder" v-if="show">
     <div class="hp-card">
-      <span class="card-title">{{title}}</span>
+      <span class="card-title">{{ title }}</span>
       <span class="card-number">{{ renderValues.lastDay.value }}</span>
       <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
-        <b-tooltip
-          :target="elementId"
-          triggers="hover"
-        >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip>
+        <b-tooltip :target="elementId" triggers="hover"
+          >Prejšnji dan: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip
+        >
       </div>
-      <div class="data-time">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div>
+      <!-- <div class="data-time">Osveženo {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div> -->
       <!-- <div class="data-time">Na dan {{ renderValues.lastDay.date | formatDate('dd. MM. yyyy') }}</div> -->
       <!-- <div class="data-time">Osveženo {{ exportTime | formatDate('dd. MM. yyyy HH:mm') }}</div> -->
     </div>
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from "vuex";
-import { add } from "date-fns";
+import { mapGetters, mapState } from 'vuex';
+import { add } from 'date-fns';
 
 export default {
   props: {
@@ -26,27 +25,27 @@ export default {
     field: String,
     goodDirection: {
       type: String,
-      default: "down"
-    }
+      default: 'down',
+    },
   },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
   computed: {
-    ...mapGetters("stats", ["getLastValue", "getValueOn"]),
-    ...mapState("stats", ["exportTime"]),
+    ...mapGetters('stats', ['getLastValue', 'getValueOn']),
+    ...mapState('stats', ['exportTime']),
     lastDay() {
       return this.getLastValue(this.field);
     },
     diffClass() {
       if (this.renderValues.lastDay.diff == 0) {
-        return "no-change";
+        return 'no-change';
       } else if (this.renderValues.lastDay.diff > 0) {
-        return this.goodDirection === "down" ? "bad" : "good";
+        return this.goodDirection === 'down' ? 'bad' : 'good';
       } else {
-        return this.goodDirection === "down" ? "good" : "bad";
+        return this.goodDirection === 'down' ? 'good' : 'bad';
       }
     },
     dayBefore() {
@@ -75,28 +74,22 @@ export default {
         lastDay: {
           ...this.lastDay,
           diff,
-          percentDiff:
-            diff != 0
-              ? Math.round((diff / this.dayBefore.value) * 1000) / 10
-              : 0
+          percentDiff: diff != 0 ? Math.round((diff / this.dayBefore.value) * 1000) / 10 : 0,
         },
         dayBefore: {
           ...this.dayBefore,
           diff: dayBeforeDiff,
-          percentDiff:
-            dayBeforeDiff != 0
-              ? Math.round((dayBeforeDiff / this.day2Before.value) * 1000) / 10
-              : 0
-        }
+          percentDiff: dayBeforeDiff != 0 ? Math.round((dayBeforeDiff / this.day2Before.value) * 1000) / 10 : 0,
+        },
       };
     },
     elementId() {
       return this.field;
-    }
+    },
   },
   mounted() {
     this.show = true;
-  }
+  },
 };
 </script>
 
@@ -120,14 +113,13 @@ export default {
 }
 
 .hp-card {
-  min-height: 200px;
+  min-height: 167px;
   padding: 18px;
   background: #fff;
-  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
-    0 11px 12px -12px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
 
   @include media-breakpoint-down(sm) {
-    min-height: 172px;
+    min-height: 139px;
   }
 
   @media only screen and (min-width: 480px) {
@@ -153,7 +145,6 @@ export default {
 
 .card-diff {
   font-size: 14px;
-  margin-bottom: 16px;
 
   &.bad {
     color: #bf5747;
