@@ -14,32 +14,81 @@ let collapsedMnicipalityCount = 24
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
+type Region =
+    { Key : string
+      Name : string option }
+
+type TotalPositiveTestsForDate =
+    { Date : System.DateTime
+      TotalPositiveTests : int option }
+
+type Municipality =
+    { Key : string
+      Name : string option
+      RegionKey : string
+      DoublingTime : float option
+      TotalPositiveTest : TotalPositiveTestsForDate seq }
+
+type SortBy =
+    | TotalPositiveTests
+    | DoublingTimeDays
+
 type State =
-    { Data : RegionsData
+    { Municipalities : Municipality seq
       Regions : Region list
       ShowAll : bool
       SearchQuery : string
-      FilterByRegion : string }
+      FilterByRegion : string
+      SortBy : SortBy }
 
 type Msg =
     | ToggleShowAll
     | SearchInputChanged of string
     | RegionFilterChanged of string
-
-let regionTotal (region : Region) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.PositiveTests)
-    |> List.choose id
-    |> List.sum
+    | SortByChanged of SortBy
 
 let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
     let regions =
         lastDataPoint.Regions
         |> List.filter (fun region -> Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
-        |> List.sortByDescending (fun region -> regionTotal region)
+        |> List.map (fun reg -> { Key = reg.Name ; Name = (Utils.Dictionaries.regions.TryFind reg.Name) |> Option.map (fun region -> region.Name) })
+        |> List.sortBy (fun region -> region.Name)
+    let municipalities =
+        seq {
+            for regionsDataPoint in data do
+                for region in regionsDataPoint.Regions do
+                    for municipality in region.Municipalities do
+                        if not (Set.contains municipality.Name excludedMunicipalities) then
+                            yield {| Date = regionsDataPoint.Date
+                                     RegionKey = region.Name
+                                     MunicipalityKey = municipality.Name
+                                     TotalPositiveTests = municipality.PositiveTests |} }
+        |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
+        |> Seq.map (fun (municipalityKey, dp) ->
+            let doublingTime =
+                dp
+                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.TotalPositiveTests |})
+                |> Seq.toList
+                |> Utils.findDoublingTime
+            { Key = municipalityKey
+              Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
+              RegionKey = (dp |> Seq.last).RegionKey
+              DoublingTime = doublingTime
+              TotalPositiveTest =
+                dp
+                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
+                |> Seq.sortBy (fun dp -> dp.Date)
+            })
+    let state =
+        { Municipalities = municipalities
+          Regions = regions
+          ShowAll = false
+          SearchQuery = ""
+          FilterByRegion = ""
+          SortBy = TotalPositiveTests }
 
-    { Data = data ; Regions = regions ; ShowAll = false ; SearchQuery = "" ; FilterByRegion = "" }, Cmd.none
+    state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -49,43 +98,28 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with SearchQuery = query }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
+    | SortByChanged sortBy ->
+        { state with SortBy = sortBy }, Cmd.none
 
-let renderMunicipality
-        (key : {| Municipality: string; Region: string |})
-        (data : {| Date: System.DateTime; Municipality: string; PositiveTests: int option; Region: string |} seq) =
+let renderMunicipality (municipality : Municipality) =
 
-    let trimmedData = Seq.skip ((Seq.length data) - showMaxBars) data
+    let data = municipality.TotalPositiveTest
+
+    let truncatedData = data |> Seq.skip ((Seq.length data) - showMaxBars)
 
     let maxValue =
         try
-            trimmedData
-            |> Seq.map (fun d -> d.PositiveTests)
+            truncatedData
+            |> Seq.map (fun d -> d.TotalPositiveTests)
             |> Seq.filter Option.isSome
             |> Seq.max
         with
             | _ -> None
 
-    let reversedDoublingTimeValues =
-        trimmedData
-        |> Seq.mapi (fun i p -> i, p.PositiveTests)
-        |> Seq.choose (fun (i, p) ->
-            match p with
-            | None -> None
-            | Some v -> Some {| Day = i ; PositiveTests = v |})
-        |> Seq.rev
-        |> Array.ofSeq
-
-    let doublingTime =
-        data
-        |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.PositiveTests |})
-        |> Seq.toList
-        |> Utils.findDoublingTime
-
     let renderedDoublingTime =
-        match doublingTime with
+        match municipality.DoublingTime with
         | None -> Html.none
         | Some value ->
-            // printfn "%s - %f" key.Municipality value
             let displayValue = int (round value)
             Html.div [
                 prop.className "doubling-time"
@@ -106,8 +140,8 @@ let renderMunicipality
         | None -> Seq.empty
         | Some maxValue ->
             seq {
-                for i, d in trimmedData |> Seq.mapi (fun i d -> i, d) do
-                    match d.PositiveTests with
+                for i, d in truncatedData |> Seq.mapi (fun i d -> i, d) do
+                    match d.TotalPositiveTests with
                     | None ->
                         yield Html.div [
                             prop.className "bar bar--empty"
@@ -137,7 +171,7 @@ let renderMunicipality
     let lastDataPoint = Seq.last data
 
     let totalPositiveTests =
-        match lastDataPoint.PositiveTests with
+        match lastDataPoint.TotalPositiveTests with
         | None -> ""
         | Some v -> v.ToString()
 
@@ -147,9 +181,9 @@ let renderMunicipality
             Html.div [
                 prop.className "name"
                 prop.text (
-                    match Utils.Dictionaries.municipalities.TryFind key.Municipality with
-                    | None -> key.Municipality
-                    | Some municipality -> municipality.Name)
+                    match municipality.Name with
+                    | None -> municipality.Key
+                    | Some name -> name)
             ]
             Html.div [
                 prop.className "positive-tests"
@@ -177,58 +211,75 @@ let renderMunicipality
 
 let renderMunicipalities (state : State) dispatch =
 
-    let pivotedData = seq {
-        for dataPoint in state.Data do
-            for region in dataPoint.Regions do
-                for municipality in region.Municipalities do
-                    if not (Set.contains municipality.Name excludedMunicipalities)  then
-                        yield {| Date = dataPoint.Date
-                                 Region = region.Name
-                                 Municipality = municipality.Name
-                                 PositiveTests = municipality.PositiveTests |} }
-
-    let sortedData =
-        pivotedData
-        |> Seq.groupBy (fun d -> {| Region = d.Region ; Municipality = d.Municipality |})
-        |> Seq.sortWith (fun (_, data1) (_, data2) ->
-            let last1, last2 = (Seq.last data1), (Seq.last data2)
-            match last1.PositiveTests, last2.PositiveTests with
-            | None, None -> System.String.Compare(last1.Municipality, last2.Municipality)
-            | Some v, None -> -1
-            | None, Some v -> 1
-            | Some v1, Some v2 ->
-                if v1 > v2 then -1
-                else if v1 < v2 then 1
-                else System.String.Compare(last1.Municipality, last2.Municipality))
-
     let dataFilteredByQuery =
         let query = state.SearchQuery.Trim().ToLower() |> Utils.transliterateCSZ
         if  query = ""
-        then sortedData
+        then state.Municipalities
         else
-            sortedData
-            |> Seq.filter (fun (item, _) ->
+            state.Municipalities
+            |> Seq.filter (fun municipality ->
                let name =
-                match Utils.Dictionaries.municipalities.TryFind item.Municipality with
-                | None -> item.Municipality
-                | Some municipality -> municipality.Name
+                match municipality.Name with
+                | None -> municipality.Key
+                | Some name -> name
                (name.ToLower() |> Utils.transliterateCSZ).Contains(query))
 
-    let dataFikteredByRegion =
+    let dataFilteredByRegion =
         dataFilteredByQuery
-        |> Seq.filter (fun (item, _) ->
+        |> Seq.filter (fun municipality ->
             if state.FilterByRegion = ""
             then true
-            else item.Region = state.FilterByRegion
+            else municipality.RegionKey = state.FilterByRegion
         )
+
+    let compareStringOption s1 s2 =
+        match s1, s2 with
+        | None, None -> 0
+        | Some s1, None -> 1
+        | None, Some s2 -> -1
+        | Some s1, Some s2 -> System.String.Compare(s1, s2)
+
+    let sortedMunicipalities =
+        match state.SortBy with
+        | TotalPositiveTests ->
+            dataFilteredByRegion
+            |> Seq.sortWith (fun m1 m2 ->
+                let lastDataPoint municipality =
+                    municipality.TotalPositiveTest
+                    |> Seq.choose (fun dp ->
+                        match dp.TotalPositiveTests with
+                        | None -> None
+                        | Some totalPositiveTests -> Some {| Date = dp.Date ; TotalPositiveTests = totalPositiveTests |})
+                    |> Seq.sortBy (fun dp -> dp.Date)
+                    |> Seq.last
+                let t1, t2 = (lastDataPoint m1).TotalPositiveTests, (lastDataPoint m2).TotalPositiveTests
+                if t1 > t2 then -1
+                else if t1 < t2 then 1
+                else
+                    match m1.Name, m2.Name with
+                    | None, None -> 0
+                    | Some n1, None -> 1
+                    | None, Some n2 -> -1
+                    | Some n1, Some n2 -> System.String.Compare(n1, n2))
+        | DoublingTimeDays ->
+            dataFilteredByRegion
+            |> Seq.sortWith (fun m1 m2 ->
+                match m1.DoublingTime, m2.DoublingTime with
+                | None, None -> compareStringOption m1.Name m2.Name
+                | Some d1, None -> -1
+                | None, Some d2 -> 1
+                | Some d1, Some d2 ->
+                    if d1 > d2 then 1
+                    else if d1 < d2 then -1
+                    else compareStringOption m1.Name m2.Name)
 
     let truncatedData, displayShowAllButton =
         if state.ShowAll = true
-        then dataFikteredByRegion, true
-        else if Seq.length dataFikteredByRegion <= collapsedMnicipalityCount then dataFikteredByRegion, false
-        else Seq.take collapsedMnicipalityCount dataFikteredByRegion, true
+        then sortedMunicipalities, true
+        else if Seq.length sortedMunicipalities <= collapsedMnicipalityCount then sortedMunicipalities, false
+        else Seq.take collapsedMnicipalityCount sortedMunicipalities, true
 
-    truncatedData |> Seq.map (fun (key, data) -> renderMunicipality key data), displayShowAllButton
+    (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
     Html.div [
@@ -262,12 +313,12 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
 
         for region in regions do
             let label =
-                match Utils.Dictionaries.regions.TryFind region.Name with
-                | None -> region.Name
-                | Some value -> value.Name
+                match region.Name with
+                | None -> region.Key
+                | Some name -> name
             yield Html.option [
                 prop.text label
-                prop.value region.Name
+                prop.value region.Key
             ]
     }
 
@@ -278,16 +329,43 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
+let renderSortBy (currenSortBy : SortBy) dispatch =
+
+    let renderSelector (currentSortBy : SortBy) (sortBy : SortBy) (label : string) =
+        let defaultProps =
+            [ prop.text label
+              prop.className [
+                  true, "chart-display-property-selector__item"
+                  sortBy = currentSortBy, "selected" ] ]
+        if sortBy = currentSortBy
+        then Html.div defaultProps
+        else Html.div ((prop.onClick (fun _ -> SortByChanged sortBy |> dispatch)) :: defaultProps)
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children [
+            Html.text "Razvrsti po: "
+            renderSelector currenSortBy SortBy.TotalPositiveTests "Številu okuženih"
+            renderSelector currenSortBy SortBy.DoublingTimeDays "Dnevih podvojitve števila okuženih"
+        ]
+    ]
+
 let render (state : State) dispatch =
     let renderedMunicipalities, showMore = renderMunicipalities state dispatch
 
     Html.div [
         prop.children [
             Html.div [
-                prop.className "filters"
+                prop.className "filter-and-sort"
                 prop.children [
-                    renderRegionSelector state.Regions state.FilterByRegion dispatch
-                    renderSearch state.SearchQuery dispatch
+                    Html.div [
+                        prop.className "filters"
+                        prop.children [
+                            renderRegionSelector state.Regions state.FilterByRegion dispatch
+                            renderSearch state.SearchQuery dispatch
+                        ]
+                    ]
+                    renderSortBy state.SortBy dispatch
                 ]
             ]
             Html.div [

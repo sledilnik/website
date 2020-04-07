@@ -80,6 +80,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     color: $text-c
     font-size: 14px
 
+    @include media-breakpoint-down(sm)
+      text-align: left
+      margin: 0 $gap / 2
+
     .chart-display-property-selector__item
       display: inline-block
       line-height: 2
@@ -159,20 +163,35 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     h2
       margin-bottom: $gap
 
-    .filters
+    .filter-and-sort
       display: flex
       flex-wrap: wrap
-      margin-bottom: $gap / 2
+      margin-top: $gap / 2
+      margin-bottom: $gap
+      justify-content: space-between
+      .filters
+        display: flex
+        flex-wrap: wrap
 
     .filters__query
       margin-left: $gap/2
       width: 15rem
       margin-bottom: $gap / 2
 
+      @include media-breakpoint-down(sm)
+        margin-left: 0
+
     .filters__region
-      margin-left: $gap/2
       width: 15rem
+      margin-left: $gap / 2
       margin-bottom: $gap / 2
+
+      @include media-breakpoint-down(md)
+        margin-left: 0
+
+    .chart-display-property-selector
+      @include media-breakpoint-down(sm)
+        margin-left: 0
 
     .municipalities
       display: flex
@@ -429,7 +448,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
             margin-top: 1.4em
             font-size: 24px
 
-// 
 .cards-wrapper
   display: flex
   max-width: 1140px
