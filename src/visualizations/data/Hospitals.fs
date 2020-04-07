@@ -14,13 +14,6 @@ type CountType =
     | Occupied
     | Free
     | MaxFree
-  with
-    static member seriesInfo = function
-        | Total     -> "", "Skupaj"
-        | Max       -> "", ""
-        | Occupied  -> "", ""
-        | Free      -> "", ""
-        | MaxFree   -> "", ""
 
 type AssetCounts = {
     total: int option
@@ -41,11 +34,6 @@ type AssetType =
     | Beds
     | Icus
     | Vents
-  with
-    static member seriesInfo = function
-        | Beds  -> "", "", "Postelje"
-        | Icus   -> "", "", "ICU"
-        | Vents -> "", "", "Respiratorji"
 
 type Assets = {
     beds: AssetCounts
