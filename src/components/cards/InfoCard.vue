@@ -111,13 +111,13 @@ export default {
 }
 
 .hp-card {
-  min-height: 167px;
+  min-height: 195px;
   padding: 18px;
   background: #fff;
   box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
 
   @include media-breakpoint-down(sm) {
-    min-height: 139px;
+    min-height: 167px;
   }
 
   @media only screen and (min-width: 480px) {
