@@ -1,5 +1,8 @@
 <template>
-  <div class="navbar-container" :class="{ scrolled: scrollPosition > 80, menuOpen: menuOpened }">
+  <div
+    class="navbar-container"
+    :class="{ scrolled: scrollPosition > 80, menuOpen: menuOpened, closingMenu: closingMenu }"
+  >
     <div class="navbar-logo"></div>
     <div class="🍔" @click="toggleMenu">
       <div class="line line-1"></div>
@@ -12,7 +15,7 @@
       <router-link to="tables" class="router-link"><span>Tabela</span></router-link>
       <router-link to="models" class="router-link"><span>Modeli</span></router-link>
       <router-link to="FAQ" class="router-link"><span>FAQ</span></router-link>
-      <router-link to="about" class="router-link"><span>O projek</span></router-link>
+      <router-link to="about" class="router-link"><span>O projektu</span></router-link>
       <router-link to="team" class="router-link"><span>Ekipa</span></router-link>
       <router-link to="sources" class="router-link"><span>Viri</span></router-link>
       <router-link to="links" class="router-link"><span>Povezave</span></router-link>
@@ -29,7 +32,8 @@ export default {
   data() {
     return {
       scrollPosition: '',
-      menuOpened: true,
+      menuOpened: false,
+      closingMenu: false,
     };
   },
   created() {
@@ -41,7 +45,15 @@ export default {
       this.scrollPosition = window.scrollY;
     },
     toggleMenu() {
-      this.menuOpened ? (this.menuOpened = false) : (this.menuOpened = true);
+      if (this.menuOpened) {
+        this.menuOpened = false;
+        this.closingMenu = true;
+        setTimeout(() => {
+          this.closingMenu = false;
+        }, 650);
+      } else {
+        this.menuOpened = true;
+      }
     },
   },
   watch: {
@@ -83,8 +95,10 @@ export default {
       margin-top: 7px;
     }
   }
+}
 
-  .menuOpen & {
+.menuOpen {
+  .🍔 {
     $ani-duration: 0.6s;
 
     .line-1 {
@@ -135,6 +149,57 @@ export default {
   }
 }
 
+.closingMenu {
+  .🍔 {
+    $ani-duration: 0.6s;
+
+    .line-1 {
+      animation: line1-closing $ani-duration;
+      transform: translateY(0px) rotate(0deg);
+
+      @keyframes line1-closing {
+        0% {
+          transform: translateY(9px) rotate(-45deg);
+        }
+        50% {
+          transform: translateY(9px) rotate(0deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+      }
+    }
+    .line-2 {
+      opacity: 1;
+      animation: line2-closing $ani-duration;
+
+      @keyframes line2-closing {
+        0% {
+          opacity: 0;
+        }
+        49% {
+          opacity: 1;
+        }
+      }
+    }
+    .line-3 {
+      animation: line3-closing $ani-duration;
+      transform: translateY(0px) rotate(0deg);
+
+      @keyframes line3-closing {
+        0% {
+          transform: translateY(-9px) rotate(45deg);
+        }
+        50% {
+          transform: translateY(-9px) rotate(0deg);
+        }
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+      }
+    }
+  }
+}
 .navbar-container {
   position: fixed;
   top: 0;
@@ -188,7 +253,7 @@ export default {
 
   .menuOpen & {
     display: block;
-    animation: menu-transition 0.75s;
+    animation: menu-transition 0.65s;
 
     @keyframes menu-transition {
       0% {
@@ -199,6 +264,20 @@ export default {
       }
       100% {
         transform: translateX(0%);
+      }
+    }
+  }
+
+  .closingMenu & {
+    display: block;
+    animation: menu-transition-close 0.65s;
+
+    @keyframes menu-transition-close {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(100%);
       }
     }
   }
@@ -217,6 +296,7 @@ export default {
 .nav-overlay {
   display: none;
 
+  .closingMenu &,
   .menuOpen & {
     display: block;
     position: fixed;
@@ -226,8 +306,15 @@ export default {
     left: 0;
     z-index: 99;
     background: rgb(0, 0, 0);
+
+    @include nav-break {
+      display: none;
+    }
+  }
+
+  .menuOpen & {
     opacity: 0.75;
-    animation: overlay-transition 0.75s ease-out;
+    animation: overlay-transition 0.65s ease-out;
 
     @keyframes overlay-transition {
       0% {
@@ -238,9 +325,20 @@ export default {
         opacity: 0.75;
       }
     }
+  }
 
-    @include nav-break {
-      display: none;
+  .closingMenu & {
+    opacity: 0;
+    animation: overlay-transition-close 0.65s ease-out;
+
+    @keyframes overlay-transition-close {
+      0% {
+        opacity: 0.75;
+      }
+
+      100% {
+        opacity: 0;
+      }
     }
   }
 }
