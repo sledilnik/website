@@ -231,7 +231,7 @@ export default {
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
+  min-height: 100vh;
   left: 33%;
   z-index: 100;
   background: $yellow;
@@ -285,6 +285,7 @@ export default {
   @include nav-break {
     position: static;
     display: block;
+    min-height: auto;
     padding: 0;
 
     &:before {
@@ -302,8 +303,8 @@ export default {
     position: fixed;
     top: 0;
     right: 0;
-    bottom: 0;
     left: 0;
+    min-height: 100vh;
     z-index: 99;
     background: rgb(0, 0, 0);
 
