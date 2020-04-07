@@ -53,7 +53,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = Cummulative
+        DisplayType = Daily
     }
     state, Cmd.none
 
