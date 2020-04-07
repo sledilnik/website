@@ -205,7 +205,6 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  overflow: hidden;
   background: $yellow;
   transition: all 0.45s ease-in-out;
   padding: 16px 15px;
@@ -231,7 +230,7 @@ export default {
   position: fixed;
   top: 0;
   right: 0;
-  min-height: 100vh;
+  bottom: 0;
   left: 33%;
   z-index: 100;
   background: $yellow;
@@ -271,6 +270,7 @@ export default {
   .closingMenu & {
     display: block;
     animation: menu-transition-close 0.65s;
+    transform: translateX(100%);
 
     @keyframes menu-transition-close {
       0% {
@@ -285,7 +285,6 @@ export default {
   @include nav-break {
     position: static;
     display: block;
-    min-height: auto;
     padding: 0;
 
     &:before {
@@ -304,7 +303,7 @@ export default {
     top: 0;
     right: 0;
     left: 0;
-    min-height: 100vh;
+    bottom: 0;
     z-index: 99;
     background: rgb(0, 0, 0);
 
