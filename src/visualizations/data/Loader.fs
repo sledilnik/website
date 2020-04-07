@@ -1,13 +1,11 @@
 module Data
 
-open System
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
 let inline makeDataLoader<'T>(url) =
     let mutable cached = None
     let fetch () = async {
-        printfn "fetching %s" url
         let! code,json = Http.get url
         return
             match code with
@@ -28,4 +26,3 @@ let inline makeDataLoader<'T>(url) =
             return result
     }
     getOrFetch
-

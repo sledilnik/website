@@ -31,9 +31,7 @@ let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |}
 
     match reversedValues with
     | head :: tail ->
-        printfn "%A" head
         match tail |> List.tryFind (fun dp ->
-            printfn "  %A" dp
             float head.Value / 2. >= float dp.Value) with
         | None -> None
         | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
