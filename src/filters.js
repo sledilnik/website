@@ -15,6 +15,10 @@ Vue.filter("prefixDiff", function(value) {
 
 Vue.filter("formatDate", function(value, fmt) {
   
+  if (!value) {
+    return ""
+  }
+
   if (!fmt) {
     fmt = "d. MMMM"
   }

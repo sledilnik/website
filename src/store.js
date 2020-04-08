@@ -11,6 +11,62 @@ async function exportTime(url) {
   return new Date(x.data * 1000)
 }
 
+function lastChange(data, field) {
+  const lastLastValue = data.slice().reverse().find(row => {
+    return row[field]
+  })
+
+  if (!lastLastValue) {
+    return {
+      lastDay: {
+        date: new Date(),
+        value: 0,
+        diff: 0,
+        percentDiff: 0
+      },
+      dayBefore: {
+        date: new Date(),
+        value: 0,
+        diff: 0,
+        percentDiff: 0
+      },
+    }
+  }
+
+  const lastValue = data.slice().find(row => {
+    return row[field] == lastLastValue[field]
+  })
+
+  const previousValue = data.slice().reverse().find(row => {
+    return row[field] != lastValue[field] && +row['day'] < +lastValue['day']
+  })
+  const prePreviousValue = data.slice().reverse().find(row => {
+    return row[field] != previousValue[field] && +row['day'] < +previousValue['day']
+  })
+
+  const lastDayValue =  lastValue[field] || null
+  const dayBeforeValue =  previousValue[field] || null
+
+  const lastDayDiff = lastValue[field] - previousValue[field]
+  const dayBeforeDiff = previousValue[field] - prePreviousValue[field]
+  
+  const lastDayPercentDiff = lastDayDiff != 0 ? Math.round((lastDayDiff / dayBeforeValue) * 1000) / 10 : 0
+
+  return {
+    lastDay: {
+      date: lastValue ? new Date(Date.parse(lastValue.date)) : null,
+      value: lastDayValue,
+      diff: lastDayDiff,
+      percentDiff: lastDayPercentDiff,
+    },
+    dayBefore: {
+      date: previousValue ? new Date(Date.parse(previousValue.date)) : null, 
+      value: dayBeforeValue,
+      diff: dayBeforeDiff,
+    }
+  }
+}
+
 const statsStore = {
   namespaced: true,
   state: {
@@ -43,6 +99,9 @@ const statsStore = {
         date: result ? new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
         value: result ? result[field] : null
       }
+    },
+    lastChange: (state, getters) => (field) => {
+      return lastChange(getters.data, field)
     },
   },
   actions: {
