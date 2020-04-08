@@ -61,7 +61,7 @@ export default {
   },
   watch: {
     $route() {
-      this.closeMenu();
+      this.menuOpened = false;
     },
   },
 };
@@ -75,6 +75,7 @@ export default {
     @content;
   }
 }
+
 .🍔 {
   width: 36px;
   height: 30px;
@@ -106,23 +107,25 @@ export default {
 
     .line-1 {
       animation: line1 $ani-duration;
-      transform: translateY(9px) rotate(-45deg);
+      transform: translate3d(0, 9px, 0) rotate(-45deg);
+      will-change: transform;
 
       @keyframes line1 {
         0% {
-          transform: translateY(0px) rotate(0deg);
+          transform: translate3d(0, 0px, 0) rotate(0deg);
         }
         50% {
-          transform: translateY(9px) rotate(0deg);
+          transform: translate3d(0, 9px, 0) rotate(0deg);
         }
         100% {
-          transform: translateY(9px) rotate(-45deg);
+          transform: translate3d(0, 9px, 0) rotate(-45deg);
         }
       }
     }
     .line-2 {
       opacity: 0;
       animation: line2 $ani-duration;
+      will-change: opacity;
 
       @keyframes line2 {
         0% {
@@ -135,17 +138,18 @@ export default {
     }
     .line-3 {
       animation: line3 $ani-duration;
-      transform: translateY(-9px) rotate(45deg);
+      transform: translate3d(0, -9px, 0) rotate(45deg);
+      will-change: transform;
 
       @keyframes line3 {
         0% {
-          transform: translateY(0px) rotate(0deg);
+          transform: translate3d(0, 0px, 0) rotate(0deg);
         }
         50% {
-          transform: translateY(-9px) rotate(0deg);
+          transform: translate3d(0, -9px, 0) rotate(0deg);
         }
         100% {
-          transform: translateY(-9px) rotate(45deg);
+          transform: translate3d(0, -9px, 0) rotate(45deg);
         }
       }
     }
@@ -158,51 +162,57 @@ export default {
 
     .line-1 {
       animation: line1-closing $ani-duration;
-      transform: translateY(0px) rotate(0deg);
+      transform: translate3d(0, 0px, 0) rotate(0deg);
+      will-change: transform;
 
       @keyframes line1-closing {
         0% {
-          transform: translateY(9px) rotate(-45deg);
+          transform: translate3d(0, 9px, 0) rotate(-45deg);
         }
         50% {
-          transform: translateY(9px) rotate(0deg);
+          transform: translate3d(0, 9px, 0) rotate(0deg);
         }
         100% {
-          transform: translateY(0px) rotate(0deg);
+          transform: translate3d(0, 0px, 0) rotate(0deg);
         }
       }
     }
+
     .line-2 {
       opacity: 1;
       animation: line2-closing $ani-duration;
+      will-change: opacity;
 
       @keyframes line2-closing {
         0% {
           opacity: 0;
         }
-        49% {
+        50% {
           opacity: 1;
         }
       }
     }
+
     .line-3 {
       animation: line3-closing $ani-duration;
-      transform: translateY(0px) rotate(0deg);
+      transform: translate3d(0, 0px, 0) rotate(0deg);
+      will-change: transform;
 
       @keyframes line3-closing {
         0% {
-          transform: translateY(-9px) rotate(45deg);
+          transform: translate3d(0, -9px, 0) rotate(45deg);
         }
         50% {
-          transform: translateY(-9px) rotate(0deg);
+          transform: translate3d(0, -9px, 0) rotate(0deg);
         }
         100% {
-          transform: translateY(0px) rotate(0deg);
+          transform: translate3d(0, 0px, 0) rotate(0deg);
         }
       }
     }
   }
 }
+
 .navbar-container {
   position: fixed;
   top: 0;
@@ -239,7 +249,8 @@ export default {
   background: $yellow;
   padding: 18px 0 0 15px;
   overflow: auto;
-  transition: all 0.45s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  will-change: transform;
 
   .scrolled & {
     padding: 6px 0 0 15px;
@@ -255,38 +266,28 @@ export default {
 
   .menuOpen & {
     display: block;
+    transform: translate3d(0, 0 0);
     animation: menu-transition 0.65s;
+    will-change: transform;
 
     @keyframes menu-transition {
       0% {
-        transform: translateX(100%);
+        transform: translate3d(100%, 0, 0);
       }
-      28% {
-        transform: translateX(100%);
-      }
+
       100% {
-        transform: translateX(0%);
+        transform: translate3d(0, 0, 0);
       }
     }
   }
 
   .closingMenu & {
     display: block;
-    animation: menu-transition-close 0.65s;
-    transform: translateX(100%);
-
-    @keyframes menu-transition-close {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
+    will-change: transform;
+    transform: translate3d(100%, 0, 0);
 
     @include nav-break {
-      animation: none;
-      transform: translateX(0);
+      transform: none;
     }
   }
 
@@ -294,6 +295,7 @@ export default {
     position: static;
     display: block;
     padding: 0;
+    transform: none;
 
     &:before {
       display: none;
@@ -323,6 +325,7 @@ export default {
   .menuOpen & {
     opacity: 0.75;
     animation: overlay-transition 0.65s ease-out;
+    will-change: opacity;
 
     @keyframes overlay-transition {
       0% {
@@ -338,6 +341,7 @@ export default {
   .closingMenu & {
     opacity: 0;
     animation: overlay-transition-close 0.65s ease-out;
+    will-change: opacity;
 
     @keyframes overlay-transition-close {
       0% {
