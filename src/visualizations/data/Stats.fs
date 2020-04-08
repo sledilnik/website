@@ -38,6 +38,7 @@ type private TransferStatsDataPoint =
            activeToDate : int option
            hs : {| employeeConfirmedToDate: int option |}
            rh : {| employeeConfirmedToDate: int option; occupantConfirmedToDate: int option |}
+           unclassified : {| confirmedToDate: int option |}
         |}
       statePerTreatment :
         {| inHospital : int option
@@ -79,6 +80,7 @@ type private TransferStatsDataPoint =
           HospitalEmployeePositiveTestsToDate = this.cases.hs.employeeConfirmedToDate
           RestHomeEmployeePositiveTestsToDate = this.cases.rh.employeeConfirmedToDate
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
+          UnclassifiedPositiveTestsToDate = this.cases.unclassified.confirmedToDate
         }
 
 type private TransferStatsData = TransferStatsDataPoint list

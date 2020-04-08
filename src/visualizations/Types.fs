@@ -50,6 +50,7 @@ type StatsDataPoint =
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
+      UnclassifiedPositiveTestsToDate : int option
     }
 
 type StatsData = StatsDataPoint list

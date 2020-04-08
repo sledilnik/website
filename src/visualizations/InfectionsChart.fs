@@ -78,13 +78,7 @@ let renderChartOptions displayType (data : StatsData) =
         | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate |> Utils.zeroToNone
         | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate |> Utils.zeroToNone
         | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate |> Utils.zeroToNone
-        | OtherPeople -> fun pt ->
-            let sum =
-                (pt.PositiveTestsToDate |> Option.defaultValue 0)
-                - (pt.HospitalEmployeePositiveTestsToDate |> Option.defaultValue 0)
-                - (pt.RestHomeEmployeePositiveTestsToDate |> Option.defaultValue 0)
-                - (pt.RestHomeOccupantPositiveTestsToDate |> Option.defaultValue 0)
-            if sum <= 0 then None else Some sum
+        | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate |> Utils.zeroToNone
 
     let makeRelative (data: (JsTimestamp*int option)[]) =
         let mutable last = 0
