@@ -46,19 +46,22 @@ export default {
     },
     toggleMenu() {
       if (this.menuOpened) {
-        this.menuOpened = false;
-        this.closingMenu = true;
-        setTimeout(() => {
-          this.closingMenu = false;
-        }, 650);
+        this.closeMenu();
       } else {
         this.menuOpened = true;
       }
     },
+    closeMenu() {
+      this.menuOpened = false;
+      this.closingMenu = true;
+      setTimeout(() => {
+        this.closingMenu = false;
+      }, 650);
+    },
   },
   watch: {
     $route() {
-      this.menuOpened = false;
+      this.closeMenu();
     },
   },
 };
@@ -279,6 +282,11 @@ export default {
       100% {
         transform: translateX(100%);
       }
+    }
+
+    @include nav-break {
+      animation: none;
+      transform: translateX(0);
     }
   }
 
