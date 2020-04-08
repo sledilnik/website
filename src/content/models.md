@@ -2,7 +2,7 @@
 
 V naši skupnosti sodelujejo tudi strokovnjaki za statistično modeliranje in računalniške simulacije.
 Na tej strani objavljamo povezave na nekatere od njihovih modelov,
-ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](covid-19.sledilnik.org).
+ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](https://covid-19.sledilnik.org).
 
 Modeli v veliki meri upoštevajo doslej znane informacije o bolezni COVID-19 in njenem širjenju v Sloveniji, a kljub temu **ne ponujajo natančnih napovedi** za prihodnji potek epidemije, **zato je potrebno skrbno prebrati vse predpostavke modela**.
 Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti.
