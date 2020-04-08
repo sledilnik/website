@@ -6,7 +6,9 @@
       <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
         <b-tooltip :target="elementId" triggers="hover"
-          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} [{{ renderValues.dayBefore.diff | prefixDiff }}]</b-tooltip
+          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} [{{
+            renderValues.dayBefore.diff | prefixDiff
+          }}]</b-tooltip
         >
       </div>
       <div class="data-time">{{ renderValues.lastDay.date | formatDate('d. MMMM') }}</div>
@@ -19,7 +21,7 @@
 </template>
 <script>
 import { mapGetters, mapState } from 'vuex';
-import { add } from 'date-fns';
+// import { add } from 'date-fns';
 
 export default {
   props: {
@@ -48,7 +50,7 @@ export default {
       }
     },
     renderValues() {
-      return this.lastChange(this.field)
+      return this.lastChange(this.field);
     },
     elementId() {
       return this.field;
