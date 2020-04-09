@@ -119,7 +119,7 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 
 
 <details>
-  <summary>Kaj pomenijo različne faze (faze 1–faza 3), ki jih vidimo na vizualizacijah?</summary>
+  <summary>Kaj pomenijo različne faze (faze 1 – faza 3), ki jih vidimo na vizualizacijah?</summary>
 
 Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).
  
@@ -160,9 +160,8 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 <details>
   <summary>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
   
-Na prikazu **Potrjeno okuženi po občinah** je prikazana ocena **Podvojitev v N dneh**. To je ocena povprečne hitrosti eksponentnega naraščanja skupnega števila potrjeno okuženih, izračunana na podlagi spremembe v zadnjih 6 dneh. Povprečje uporabimo zato, da zgladimo dnevno nihanje pri potrjenih primerih, in se izognemo zaokrožitvam zaradi (na srečo) majhnih absolutnih številk. Nižja kot je številka, hitreje se je število potrjeno okuženih povečalo.
+Na prikazu **Potrjeno okuženi po občinah** je prikazana ocena **Podvojitev v N dneh**. To je ocena povprečne hitrosti eksponentnega naraščanja in sicer se ugotovi iz podatkov prejšnih dni, tako da se najde dan na kateri se je vrednost prepolovila. 
 
-Za izračun uporabimo naslednji izraz: `čas_podvojitve = 6 / log2( P0 / P6 )</code>`. V izrazu `Pd` pomeni število potrjeno okuženih v občini pred `d` dnevi.
 </details>
 
 
