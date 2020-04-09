@@ -33,7 +33,7 @@ function lastChange(data, field) {
     }
   }
 
-  const lastValue = data.slice().find(row => {
+  const lastValue = data.slice().reverse().find(row => {
     return row[field] == lastLastValue[field]
   })
 
