@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <time>Embed example</time>
+  </head>
+  <script>
+    window.addEventListener("message", function(event) {
+      if (event.data.type === "embed-size") {
+        console.log("event recieved", event.data)
+        var iframe = document.querySelector("iframe[name='" + event.data.name + "']");
+        if (iframe != null) {
+          iframe.style.height = event.data.height + "px";
+        }
+      }
+    });
+  </script>
+  <body>
+    <iframe frameBorder="0" width="100%" name="my-iframe" src="https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison"></iframe> 
+  </body>
+</html>

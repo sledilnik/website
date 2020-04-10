@@ -9,7 +9,7 @@ import ChartEmbed from '@/embed/Chart'
 import store from 'store'
 
 import '@/main.js'
-import 'style/embed.sass'
+import 'style/embed.scss'
 
 const routes = [
   {
@@ -37,8 +37,8 @@ const router = new VueRouter({
 
 document.addEventListener('chartLoaded', function () {
   const elm = document.getElementsByTagName("main")[0]
-  const height = elm.offsetHeight
-  // console.log("chart je naloadan", elm.offsetHeight, window.name)
+  const height = +elm.offsetHeight + 10
+  // console.log("chart je naloadan", elm.offsetHeight, height, window.name)
   window.top.postMessage(
     {
       type: "embed-size",
