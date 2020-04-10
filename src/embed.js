@@ -35,8 +35,22 @@ const router = new VueRouter({
   routes, // short for `routes: routes`
 })
 
+document.addEventListener('chartLoaded', function () {
+  const elm = document.getElementsByTagName("main")[0]
+  const height = elm.offsetHeight
+  // console.log("chart je naloadan", elm.offsetHeight, window.name)
+  window.top.postMessage(
+    {
+      type: "embed-size",
+      height: height,
+      name: window.name
+    },
+    "*"
+  );
+}, false);
+
 new Vue({
-  render: h => h(App, {props: {embed: true}}),
+  render: h => h(App, { props: { embed: true } }),
   router,
   store,
 }).$mount('#app')

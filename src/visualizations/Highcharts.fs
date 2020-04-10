@@ -3,6 +3,8 @@ module Highcharts
 open System
 open Fable.Core
 open Fable.React
+open Browser
+open Browser.Event
 
 open Types
 
@@ -70,6 +72,11 @@ let shadedWeekendPlotBands =
                 |}
     |]
 
+let myLoadEvent(event: Event) = 
+    let evt = Browser.Dom.document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    Dom.document.dispatchEvent(evt)
+
 let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
         chart = pojo
@@ -79,6 +86,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
+                events = pojo {| load = myLoadEvent |}
             |}
         title = pojo {| text = None |}
         xAxis = [|
