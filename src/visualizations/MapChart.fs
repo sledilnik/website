@@ -6,6 +6,8 @@ open System
 open Feliz
 open Feliz.ElmishComponents
 
+open Browser
+
 open GoogleCharts
 
 open Types
@@ -162,12 +164,19 @@ let renderDisplayTypeSelector displayType dispatch =
     ]
 
 let render (state : State) dispatch =
-    Html.div [
+    let elm = Html.div [
         prop.children [
             renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
             renderMap state
         ]
     ]
+
+    // trigger event for iframe resize
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    document.dispatchEvent(evt) |> ignore
+
+    elm
 
 let mapChart (props : {| data : RegionsData |}) =
     React.elmishComponent("MapChart", init props.data, update, render)

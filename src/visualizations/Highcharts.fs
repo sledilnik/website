@@ -71,6 +71,7 @@ let shadedWeekendPlotBands =
                 |}
     |]
 
+// trigger event for iframe resize
 let myLoadEvent(event: Event) = 
     let evt = document.createEvent("event")
     evt.initEvent("chartLoaded", true, true);

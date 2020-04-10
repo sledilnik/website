@@ -48,7 +48,7 @@ document.addEventListener('chartLoaded', function () {
       },
       "*"
     );
-  }, 10)
+  }, 50)
 }, false);
 
 new Vue({

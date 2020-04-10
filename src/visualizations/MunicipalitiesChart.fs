@@ -103,6 +103,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | SortByChanged sortBy ->
         { state with SortBy = sortBy }, Cmd.none
 
+    // trigger event for iframe resize
     let evt = document.createEvent("event")
     evt.initEvent("chartLoaded", true, true);
     document.dispatchEvent(evt) |> ignore
@@ -383,6 +384,7 @@ let render (state : State) dispatch =
         ]
     ]
 
+    // trigger event for iframe resize
     let evt = document.createEvent("event")
     evt.initEvent("chartLoaded", true, true);
     document.dispatchEvent(evt) |> ignore
