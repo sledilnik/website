@@ -147,6 +147,7 @@ let render (state : State) (dispatch : Msg -> unit) =
         | Embeded _ ->
             Html.a
                 [ prop.className "brand-link"
+                  prop.target "_blank"
                   prop.href "https://covid-19.sledilnik.org/"
                   prop.text "covid-19.sledilnik.org" ]
 
