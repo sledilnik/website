@@ -8,7 +8,7 @@
 | [Coronavirus COVID-19 Slovenija](https://bit.ly/cov19-slo-report)                                      | Nadzorna plošča z možnostjo pogleda po dnevih; [Better.Care](https://www.better.care/)              |
 | [COVID-19 cases in the Slovenia - map](http://milosp.info/maps/interactive/covid19svn/covid19svn.html) | Zemljevid občin po dnevih ; [Milos Popovic](http://milosp.info/)                                    |
 | [Ustavimo Korono](https://ustavimokorono.si/)                                                          | Informacijski portal o koronavirusu                                                                 |
-| [Razširjenost koronavirusa SARS-CoV-2](https://uni-lj.maps.arcgis.com/apps/opsdashboard/index.html#/18b95bedbc2440bc9fc1067224eb6d25)| Razširjenost koronavirusa (COVID-19) v Sloveniji, Evropi in svetu; [Oddelek za FF UL](http://geo.ff.uni-lj.si/)                                                                 |
+| [Razširjenost koronavirusa SARS-CoV-2](https://uni-lj.maps.arcgis.com/apps/opsdashboard/index.html#/18b95bedbc2440bc9fc1067224eb6d25)| Razširjenost koronavirusa (COVID-19) v Sloveniji, Evropi in svetu; [Oddelek za geografijo FF UL](http://geo.ff.uni-lj.si/)         |
 
 
 ## Statistike, vizualizacije, simulacije - SLO
