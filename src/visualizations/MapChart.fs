@@ -5,7 +5,6 @@ open Elmish
 open System
 open Feliz
 open Feliz.ElmishComponents
-
 open Browser
 
 open GoogleCharts
@@ -89,6 +88,12 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
+let chartLoadedEvent () = 
+    // trigger event for iframe resize
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    document.dispatchEvent(evt) |> ignore
+
 let renderMap state =
     let header =
         match state.DisplayType with
@@ -130,6 +135,10 @@ let renderMap state =
                 Props.chartType ChartType.GeoChart
                 Props.width "100%"
                 // Props.height 450
+                Props.chartEvents [
+                    {| eventName = "ready"
+                       callback = chartLoadedEvent |}
+                ]
                 Props.data (header :: data)
                 Props.options [
                     Options.Region "SI"
@@ -170,12 +179,6 @@ let render (state : State) dispatch =
             renderMap state
         ]
     ]
-
-    // trigger event for iframe resize
-    let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true);
-    document.dispatchEvent(evt) |> ignore
-
     elm
 
 let mapChart (props : {| data : RegionsData |}) =

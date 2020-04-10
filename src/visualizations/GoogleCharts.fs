@@ -26,6 +26,7 @@ type Props =
     static member inline height (value : int) = Interop.mkAttr "height" value
     static member inline height (value : string) = Interop.mkAttr "height" value
     static member inline data (value : obj list) = Interop.mkAttr "data" (Array.ofList value)
+    static member inline chartEvents (value : obj list) = Interop.mkAttr "chartEvents" (Array.ofList value)
     static member inline chartType (value : ChartType) = Interop.mkAttr "chartType" value
     static member inline options (value : Options list) = Interop.mkAttr "options" (keyValueList CaseRules.LowerFirst value)
 
