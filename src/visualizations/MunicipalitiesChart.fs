@@ -8,6 +8,8 @@ open Feliz.ElmishComponents
 
 open Types
 
+open Browser
+
 let barMaxHeight = 50
 let showMaxBars = 30
 let collapsedMnicipalityCount = 24
@@ -91,7 +93,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
-    match msg with
+    let ret = match msg with
     | ToggleShowAll ->
         { state with ShowAll = not state.ShowAll }, Cmd.none
     | SearchInputChanged query ->
@@ -100,6 +102,12 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with FilterByRegion = region }, Cmd.none
     | SortByChanged sortBy ->
         { state with SortBy = sortBy }, Cmd.none
+
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    document.dispatchEvent(evt) |> ignore
+
+    ret
 
 let renderMunicipality (municipality : Municipality) =
 
@@ -353,7 +361,7 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
 let render (state : State) dispatch =
     let renderedMunicipalities, showMore = renderMunicipalities state dispatch
 
-    Html.div [
+    let element = Html.div [
         prop.children [
             Html.div [
                 prop.className "filter-and-sort"
@@ -374,6 +382,12 @@ let render (state : State) dispatch =
             (if showMore then renderShowMore state.ShowAll dispatch else Html.none)
         ]
     ]
+
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    document.dispatchEvent(evt) |> ignore
+
+    element
 
 let municipalitiesChart (props : {| data : RegionsData |}) =
     React.elmishComponent("MunicipalitiesChart", init props.data, update, render)

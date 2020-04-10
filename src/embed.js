@@ -36,17 +36,19 @@ const router = new VueRouter({
 })
 
 document.addEventListener('chartLoaded', function () {
-  const elm = document.getElementsByTagName("main")[0]
-  const height = +elm.offsetHeight + 10
-  // console.log("chart je naloadan", elm.offsetHeight, height, window.name)
-  window.top.postMessage(
-    {
-      type: "embed-size",
-      height: height,
-      name: window.name
-    },
-    "*"
-  );
+  setTimeout(() => {
+    const elm = document.getElementsByTagName("main")[0]
+    const height = +elm.offsetHeight + 10
+    // console.log("chart je naloadan", elm.offsetHeight, height, window.name)
+    window.top.postMessage(
+      {
+        type: "embed-size",
+        height: height,
+        name: window.name
+      },
+      "*"
+    );
+  }, 10)
 }, false);
 
 new Vue({

@@ -4,7 +4,6 @@ open System
 open Fable.Core
 open Fable.React
 open Browser
-open Browser.Event
 
 open Types
 
@@ -73,9 +72,9 @@ let shadedWeekendPlotBands =
     |]
 
 let myLoadEvent(event: Event) = 
-    let evt = Browser.Dom.document.createEvent("event")
+    let evt = document.createEvent("event")
     evt.initEvent("chartLoaded", true, true);
-    Dom.document.dispatchEvent(evt)
+    document.dispatchEvent(evt)
 
 let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
