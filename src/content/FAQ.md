@@ -86,7 +86,33 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 ## O grafih
 
 <details>
-  <summary>Katere kazalnike vključuje graf o širjenju?</summary>
+  <summary>Zakaj je število kategorije "Ozdraveli" tako majhno? Zakaj je zadnji podatek z dne 30.3.? </summary>
+
+Poročanja o ozdravljenih so žal redka, žal pa tudi ni uradne oz. jasne definicije, kdaj se nek pacient/ka tretira kot ozdravljena. Zaenkrat imamo samo 2 potrjena vira o ozdravljenih: 24.3. o 10-ih ([vir](https://www.youtube.com/watch?v=hPgQcE0hJfE)) in pa 30.3. o 6-ih ([vir](https://www.rtvslo.si/zdravje/novi-koronavirus/802-okuzena-z-novim-koronavirusom-15-umrlih/518957)).
+
+Vlada RS sicer redno poroča o ***odpuščenih*** iz bolnišnice, za katere pa ne vemo ali so res ozdravljeni, ali so samo doma v karanteni/samo izolaciji, dokler se ne ponovi testiranje. (Prav tako ne vemo, ali tovrstne paciente ponovno testirajo po koncu bolezni). 
+
+Nekateri drugi viri (npr. [Worldometer]([https://www.worldometers.info/coronavirus/#countries](https://www.worldometers.info/coronavirus/#countries)) sicer navajajo višje številke ozdravelih, vendar opozarjamo, da verjetno kombinirajo ozdravele skupaj z številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne pokažeta enakega stanja bolezni, ju zato ju prikazujemo ločeno.
+  </details>
+
+<details>
+  <summary>Zakaj ni prikaza "Hospitalizirani/dan"?</summary>
+
+Ta kazalec bi bila trenutno žal zgolj izvedena metrika, saj bolnišnice ne poročajo o posameznih sprejemih ali odpustih, iz katerega bi lahko imeli natančne podatke.
+Sprejem in odpust na dan lahko zaznamo samo iz spremembe trenutno hospitaliziranih, kar pomeni da ne moremo zaznati vseh sprejemov in odpustov. Če je bilo npr. 5 sprejetih in 4 odpuščeni, mi žal zaznamo samo en sprejem - to pa se nam ne zdi dovolj zanesljiv podatek za objavo. 
+
+</details>
+
+<details>
+  <summary>Ali vodite števec aktivnih okužb?</summary>
+
+Da, števec aktivnih okužb redno vodimo in ga lahko najdete v [Google Sheets tabeli](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit?usp=sharing), ga pa grafično še ne prikazujemo, saj je podatkov o ozdravelih relativno malo, so nezanesljivi in niti ni znano, ali so res vsi evidentirani. 
+
+  </details>
+  
+<details>
+  <summary>Katere kazalnike vključuje graf "Širjenje COVID-19 v Sloveniji
+"?</summary>
 
 * **Testiranja (na dan)** = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19. V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.
 
