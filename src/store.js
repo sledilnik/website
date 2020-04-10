@@ -11,7 +11,8 @@ async function exportTime(url) {
   return new Date(x.data * 1000)
 }
 
-function lastChange(data, field) {
+export function lastChange(data, field) {
+  
   const lastLastValue = data.slice().reverse().find(row => {
     return row[field]
   })
@@ -38,10 +39,10 @@ function lastChange(data, field) {
   })
 
   const previousValue = data.slice().reverse().find(row => {
-    return row[field] != lastValue[field] && +row['day'] < +lastValue['day']
+    return row[field] != lastValue[field] && Date.parse(row['date']) < Date.parse(lastValue['date'])
   })
   const prePreviousValue = data.slice().reverse().find(row => {
-    return row[field] != previousValue[field] && +row['day'] < +previousValue['day']
+    return row[field] != previousValue[field] && Date.parse(row['date']) < Date.parse(previousValue['date'])
   })
 
   const lastDayValue =  lastValue[field] || null
