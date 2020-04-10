@@ -141,6 +141,15 @@ let render (state : State) (dispatch : Msg -> unit) =
             | None -> true, []
             | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
 
+    let brandLink =
+        match state.RenderingMode with
+        | Normal -> Html.none
+        | Embeded _ ->
+            Html.a
+                [ prop.className "brand-link"
+                  prop.href "https://covid-19.sledilnik.org/"
+                  prop.text "covid-19.sledilnik.org" ]
+
     Html.div
         [ prop.className [ true, "visualization container" ; embeded, "embeded" ]
           prop.children (
@@ -150,7 +159,9 @@ let render (state : State) (dispatch : Msg -> unit) =
                     [ prop.className [ true, viz.ClassName; true, "visualization-chart" ]
                       prop.id viz.ClassName
                       prop.children
-                        [ Html.h2 viz.Label
-                          state |> viz.Renderer ] ] )
-          )
-        ]
+                        [ Html.div [
+                            prop.className "title-brand-wrapper"
+                            prop.children
+                                [ Html.h2 viz.Label
+                                  brandLink ] ]
+                          state |> viz.Renderer ] ] ) ) ]
