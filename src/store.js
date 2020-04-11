@@ -11,19 +11,39 @@ async function exportTime(url) {
   return new Date(x.data * 1000)
 }
 
+// loads csv, converts dates to Date objects, string values to numberical
+async function loadCsv(url) {
+  const data = await d3.csv(url)
+  data.forEach((row) => {
+    data.columns.forEach((col) => {
+      if (col != "date") {
+        row[col] = row[col] === "" ? null : +row[col]
+      } else {
+        row['date'] = new Date(row['date'])
+      }
+    })
+
+  })
+  return data
+}
+
 export function lastChange(data, field) {
+
+  if (field == 'state.recovered.todate') {
+    console.log(data)
+  }
 
   const result = {
     lastDay: {
       date: new Date(),
-      fistDate: undefined,
+      firstDate: undefined,
       value: undefined,
       diff: undefined,
       percentDiff: undefined
     },
     dayBefore: {
       date: new Date(),
-      fistDate: undefined,
+      firstDate: undefined,
       value: undefined,
       diff: undefined,
       percentDiff: undefined
@@ -34,38 +54,57 @@ export function lastChange(data, field) {
     }
   }
 
+  let i = data.length - 1
 
-  // result.lastDay.date = new Date(data[data.length - 1]['date'])
-  // result.lastDay.value = data[data.length - 1][field]
+  // console.log("lastDay found in row", i, data[i])
 
-  let i = data.length
-
-  while(i > 0 && data[i][field] == null) i--
+  while (i >= 0 && data[i][field] == null) i--
   result.lastDay.date = new Date(data[i]['date'])
   result.lastDay.value = data[i][field]
 
-  while(i > 0 && result.lastDay.value === data[i][field]) i--
-  result.lastDay.fistDate = new Date(data[i+1]['date'])
+  while (i >= 0 && (result.lastDay.value === data[i][field])) i--
+  let date = new Date(data[i + 1]['date'])
+  if (data[i + 1][field] != null && result.lastDay.date.getTime() != date.getTime()) {
+    result.lastDay.firstDate = date
+  }
 
-  while(i > 0 && data[i][field] == null) i--
-  result.dayBefore.date = new Date(data[i]['date'])
-  result.dayBefore.value = data[i][field]
+  if (i >= 0) {
+    while (i >= 0 && data[i][field] == null) i--
+    result.dayBefore.date = new Date(data[i]['date'])
+    result.dayBefore.value = data[i][field]
+  }
 
-  while(i > 0 && result.dayBefore.value === data[i][field]) i--
-  result.dayBefore.fistDate = new Date(data[i+1]['date'])
 
-  while(i > 0 && data[i][field] == null) i--
-  result.day2Before.date = new Date(data[i]['date'])
-  result.day2Before.value = data[i][field]
+  if (i >= 0) {
+    while (i >= 0 && result.dayBefore.value === data[i][field]) i--
+    date = new Date(data[i + 1]['date'])
+    if (result.dayBefore.date.getTime() != date.getTime()) {
+      result.dayBefore.firstDate = date
+    }
+  }
 
-  // while(i > 0 && result.dayBefore.value === data[i][field]) i--
-  // result.day2Before.fistDate = new Date(data[i+1]['date'])
+  if (i >= 0) {
+    while (i >= 0 && data[i][field] == null) i--
+    if (data[i]) {
+      result.day2Before.date = new Date(data[i]['date'])
+      result.day2Before.value = data[i][field]
+    }
+  }
 
-  result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-  result.lastDay.percentDiff = result.dayBefore.value ? Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10 : 0
 
-  result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-  result.dayBefore.percentDiff = result.day2Before.value ? Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10 : 0
+  if (!result.dayBefore.value) {
+    result.dayBefore = undefined
+  } else {
+    result.lastDay.diff = result.lastDay.value - result.dayBefore.value
+    result.lastDay.percentDiff = Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
+  }
+
+  if (!result.day2Before.value) {
+    result.day2Before = undefined
+  } else {
+    result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
+    result.dayBefore.percentDiff = Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10
+  }
 
   return result
 }
@@ -112,7 +151,7 @@ const statsStore = {
       const d = await exportTime("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv.timestamp")
 
       const [data, regions] = await Promise.all([
-        d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"),
+        loadCsv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv"),
         d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-region.csv"),
       ]);
       commit('setData', data)
@@ -189,16 +228,7 @@ const hospitalsStore = {
 
       const d = await exportTime("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/hospitals.csv.timestamp")
 
-      let data = await d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/hospitals.csv", (row) => {
-        Object.keys(row).forEach(col => {
-          if (col != 'date') {
-            row[col] = +row[col]
-          }
-        });
-        return row
-      });
-
-
+      let data = await loadCsv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/hospitals.csv")
       let hospitals = {}
       let rawData = await d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-hospitals.csv")
 
