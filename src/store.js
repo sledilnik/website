@@ -12,60 +12,62 @@ async function exportTime(url) {
 }
 
 export function lastChange(data, field) {
-  
-  const lastLastValue = data.slice().reverse().find(row => {
-    return row[field]
-  })
 
-  if (!lastLastValue) {
-    return {
-      lastDay: {
-        date: new Date(),
-        value: 0,
-        diff: 0,
-        percentDiff: 0
-      },
-      dayBefore: {
-        date: new Date(),
-        value: 0,
-        diff: 0,
-        percentDiff: 0
-      },
-    }
-  }
-
-  const lastValue = data.slice().reverse().find(row => {
-    return row[field] == lastLastValue[field]
-  })
-
-  const previousValue = data.slice().reverse().find(row => {
-    return row[field] != lastValue[field] && Date.parse(row['date']) < Date.parse(lastValue['date'])
-  })
-  const prePreviousValue = data.slice().reverse().find(row => {
-    return row[field] != previousValue[field] && Date.parse(row['date']) < Date.parse(previousValue['date'])
-  })
-
-  const lastDayValue =  lastValue[field] || null
-  const dayBeforeValue =  previousValue[field] || null
-
-  const lastDayDiff = lastValue[field] - previousValue[field]
-  const dayBeforeDiff = previousValue[field] - prePreviousValue[field]
-  
-  const lastDayPercentDiff = lastDayDiff != 0 ? Math.round((lastDayDiff / dayBeforeValue) * 1000) / 10 : 0
-
-  return {
+  const result = {
     lastDay: {
-      date: lastValue ? new Date(Date.parse(lastValue.date)) : null,
-      value: lastDayValue,
-      diff: lastDayDiff,
-      percentDiff: lastDayPercentDiff,
+      date: new Date(),
+      fistDate: undefined,
+      value: undefined,
+      diff: undefined,
+      percentDiff: undefined
     },
     dayBefore: {
-      date: previousValue ? new Date(Date.parse(previousValue.date)) : null, 
-      value: dayBeforeValue,
-      diff: dayBeforeDiff,
+      date: new Date(),
+      fistDate: undefined,
+      value: undefined,
+      diff: undefined,
+      percentDiff: undefined
+    },
+    day2Before: {
+      date: new Date(),
+      value: undefined,
     }
   }
+
+
+  // result.lastDay.date = new Date(data[data.length - 1]['date'])
+  // result.lastDay.value = data[data.length - 1][field]
+
+  let i = data.length
+
+  while(i > 0 && data[i][field] == null) i--
+  result.lastDay.date = new Date(data[i]['date'])
+  result.lastDay.value = data[i][field]
+
+  while(i > 0 && result.lastDay.value === data[i][field]) i--
+  result.lastDay.fistDate = new Date(data[i+1]['date'])
+
+  while(i > 0 && data[i][field] == null) i--
+  result.dayBefore.date = new Date(data[i]['date'])
+  result.dayBefore.value = data[i][field]
+
+  while(i > 0 && result.dayBefore.value === data[i][field]) i--
+  result.dayBefore.fistDate = new Date(data[i+1]['date'])
+
+  while(i > 0 && data[i][field] == null) i--
+  result.day2Before.date = new Date(data[i]['date'])
+  result.day2Before.value = data[i][field]
+
+  // while(i > 0 && result.dayBefore.value === data[i][field]) i--
+  // result.day2Before.fistDate = new Date(data[i+1]['date'])
+
+  result.lastDay.diff = result.lastDay.value - result.dayBefore.value
+  result.lastDay.percentDiff = result.dayBefore.value ? Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10 : 0
+
+  result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
+  result.dayBefore.percentDiff = result.day2Before.value ? Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10 : 0
+
+  return result
 }
 
 const statsStore = {
@@ -88,7 +90,7 @@ const statsStore = {
         return {}
       }
       let searchResult = getters.data.find(day => {
-        return new Date(Date.parse(day.date)).setHours(0,0,0,0) === date.getTime()
+        return new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
       })
       return { date, value: searchResult ? searchResult[field] : null }
     },
@@ -168,7 +170,7 @@ const hospitalsStore = {
         return {}
       }
       let searchResult = getters.data.find(day => {
-        return new Date(Date.parse(day.date)).setHours(0,0,0,0) === date.getTime()
+        return new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
       })
       return { date, value: searchResult ? searchResult[field] : null }
     },
@@ -195,7 +197,7 @@ const hospitalsStore = {
         });
         return row
       });
-      
+
 
       let hospitals = {}
       let rawData = await d3.csv("https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-hospitals.csv")
