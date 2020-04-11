@@ -4,8 +4,8 @@
   </head>
   <script type="text/javascript">
 
-    // window.baseUrl = "https://covid-19.sledilnik.org/embed.html#/"
-    window.baseUrl = "http://localhost:8080/embed.html#/"
+    window.baseUrl = "https://covid-19.sledilnik.org/embed.html#/"
+    //window.baseUrl = "http://localhost:8080/embed.html#/"
 
     window.addEventListener("message", function(event) {
       if (event.data.type === "embed-size") {
@@ -26,8 +26,7 @@
       <option value="chart/Spread">Spread</option>
       <option value="chart/Regions">Regions</option>
       <option value="chart/AgeGroups">AgeGroups</option>
-      <option value="chart/Hospitals">Hospitals</option>
-      <option value="chart/AgeGroups">AgeGroups</option>
+      <!-- <option value="chart/Hospitals">Hospitals</option> -->
       <option value="chart/Municipalities">Municipalities</option>
       <option value="chart/Map">Map</option>
     </select> 
