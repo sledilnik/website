@@ -4,7 +4,7 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 
 ## Splošno
 <details>
-  <summary>Zakaj Sledilnik</summary>
+  <summary>Zakaj Sledilnik?</summary>
   
 Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](https://covid-19.sledilnik.org/#/about). 
 </details>
@@ -45,6 +45,11 @@ Zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna ko
 Nihče oz. ne. Sledilnik je neprofitna pobuda, ustvarjena kot podpora sprotnemu zbiranju in urejanju ključnih podatkov o širjenju koronavirusa pri nas. Naša baza podatkov je javna in prosto dostopna, torej brezplačna in nekomercialna, in bo takšna tudi ostala. Gl. tudi vprašanje Kako lahko pridobim in uporabim vašo bazo podatkov.
 </details>
 
+<details>
+  <summary>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
+
+Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)) . Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, cel projekt pa odprt in na voljo na [GitHubu - Sledilnik]([https://github.com/slo-covid-19](https://github.com/slo-covid-19)).
+</details>
 
 ## O podatkih
 
@@ -124,6 +129,12 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 
 
 ## O izračunih in grafih
+
+<details>
+  <summary>Lahko uporabim vaše grafe na svoji strani? Kako?
+    
+Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz - ob navedbi vira, seveda. Kako, najdete [na strani z primeri](https://github.com/slo-covid-19/website/tree/master/examples). O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav]([https://covid-19.sledilnik.org/#/links](https://covid-19.sledilnik.org/#/links)). 
+</details>
 
 <details>
   <summary>Kaj pomenijo odstotki, ki se pojavljajo v informativnih okvirčkih na vrhu strani?</summary>
