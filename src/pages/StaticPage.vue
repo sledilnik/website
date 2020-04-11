@@ -1,7 +1,7 @@
 <template>
   <div class="custom-container">
     <div class="static-page-wrapper">
-      <span v-html="staticContent"></span>
+      <span v-html="content"></span>
     </div>
   </div>
 </template>
@@ -13,18 +13,8 @@ export default {
     name: String,
     content: Promise,
   },
-  data() {
-    return {
-      staticContent: '',
-    };
-  },
   mounted() {
-    this.content
-      .then((data) => {
-        this.staticContent = data.default;
-        this.$forceUpdate();
-      })
-      .then(this.initDropdowns);
+    this.initDropdowns;
   },
   methods: {
     initDropdowns: function() {

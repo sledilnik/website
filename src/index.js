@@ -14,6 +14,14 @@ import store from 'store'
 import '@/main.js'
 import 'style/index.scss'
 
+import * as aboutMd from './content/about.md'
+import * as linksMd from './content/links.md'
+import * as contentMd from './content/FAQ.md'
+import * as teamMd from './content/team.md'
+import * as sourcesMd from './content/sources.md'
+import * as modelsMd from './content/models.md'
+import * as datasourcesMd from './content/datasources.md'
+
 Vue.use(VueScrollTo)
 
 const routes = [
@@ -26,7 +34,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'about',
-      content: import('./content/about.md')
+      content: aboutMd,
     }
   },
   {
@@ -50,7 +58,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'links',
-      content: import('./content/links.md')
+      content: linksMd
     }
   },
   {
@@ -58,7 +66,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'FAQ',
-      content: import('./content/FAQ.md')
+      content: contentMd
     }
   },
   {
@@ -66,7 +74,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'team',
-      content: import('./content/team.md')
+      content: teamMd
     }
   },
   {
@@ -74,7 +82,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'sources',
-      content: import('./content/sources.md')
+      content: sourcesMd
     }
   },
   {
@@ -82,7 +90,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'sources',
-      content: import('./content/models.md')
+      content: modelsMd
     }
   },
   {
@@ -90,7 +98,7 @@ const routes = [
     component: StaticPage,
     props: {
       name: 'datasources',
-      content: import('./content/datasources.md')
+      content: datasourcesMd
     },
   },
 ]

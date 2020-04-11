@@ -50,7 +50,9 @@ export default {
       }
     },
     renderValues() {
-      return this.lastChange(this.field);
+      const x= this.lastChange(this.field);
+      console.log(x)
+      return x
     },
     elementId() {
       return this.field;
