@@ -29,10 +29,6 @@ async function loadCsv(url) {
 
 export function lastChange(data, field) {
 
-  if (field == 'state.recovered.todate') {
-    console.log(data)
-  }
-
   const result = {
     lastDay: {
       date: new Date(),

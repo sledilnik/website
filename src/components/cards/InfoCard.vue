@@ -6,12 +6,12 @@
       <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
         <b-tooltip :target="elementId" triggers="hover"
-          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} [{{
+          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} <span v-if="renderValues.dayBefore.diff">[{{
             renderValues.dayBefore.diff | prefixDiff
-          }}]</b-tooltip
+          }}]</span></b-tooltip
         >
       </div>
-      <div class="data-time">{{ renderValues.lastDay.date | formatDate('d. MMMM') }}</div>
+      <div class="data-time">{{ renderValues.lastDay.displayDate | formatDate('d. MMMM') }}</div>
     </div>
     <div class="hp-card" v-else>
       <span class="card-title">{{ title }}</span>
@@ -31,6 +31,10 @@ export default {
       type: String,
       default: 'down',
     },
+    seriesType: {
+      type: String,
+      default: 'cum'
+    }
   },
   data() {
     return {
@@ -50,8 +54,14 @@ export default {
       }
     },
     renderValues() {
-      const x= this.lastChange(this.field);
-      console.log(x)
+      const x = this.lastChange(this.field);
+      if (x) {
+        if (this.seriesType == 'cum') {
+          x.lastDay.displayDate = x.lastDay.firstDate || x.lastDay.date
+        } else {
+          x.lastDay.displayDate = x.lastDay.date
+        }
+      }
       return x
     },
     elementId() {

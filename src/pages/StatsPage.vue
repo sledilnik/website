@@ -4,11 +4,11 @@
     <b-container class="stats-page">
       <div class="time-stamp"></div>
       <div class="cards-wrapper latest-data-boxes">
-        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" />
-        <Info-card title="Hospitalizirani" field="state.in_hospital" />
-        <Info-card title="V intenzivni enoti" field="state.icu" />
-        <Info-card title="Umrli" field="state.deceased.todate" />
-        <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" />
+        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" series-type="cum" />
+        <Info-card title="Hospitalizirani" field="state.in_hospital" series-type="state" />
+        <Info-card title="V intenzivni enoti" field="state.icu" series-type="state" />
+        <Info-card title="Umrli" field="state.deceased.todate" series-type="cum" />
+        <Info-card title="Ozdraveli" field="state.recovered.todate" good-direction="up" series-type="cum" />
       </div>
       <b-row cols="12">
         <b-col>
