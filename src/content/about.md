@@ -6,7 +6,7 @@
 
 Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah držav, kjer jim je virus uspelo najbolj zajeziti, kritičnega pomena za učinkovit odziv sistemov javnega zdravja. Šele tako objavljeni podatki so temelj za razumevanje dogajanja, aktivno samozaščitno ravnanje ljudi ter sprejemanje nujnosti ukrepov.
 
-Podatke zbiramo iz različnih virov, od sobote, 28. marca dalje imamo vzpostavljeno tudi direktno povezavo z zdravstvenimi zavodi in [NIJZ](https://www.nijz.si/). Ti nam pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujemo v obliko, primerno za vizualizacije in  predstavitev javnosti, kakor tudi za nadaljne delo pri razvoju modelov in napovedi. Ker so podatki iz medijev in nekaterih drugih virov kdaj tudi nejasni in nedosledni, [preglednica]([https://covid-19.sledilnik.org/#/tables](https://covid-19.sledilnik.org/#/tables)  vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
+Podatke zbiramo iz različnih javno dostopnih virov, od sobote, 28. marca dalje pa imamo vzpostavljeno tudi direktno povezavo z zdravstvenimi zavodi in [NIJZ](https://www.nijz.si/). Ti nam pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujemo v obliko, primerno za vizualizacije in  predstavitev javnosti, kakor tudi za nadaljne delo pri razvoju modelov in napovedi. Ker so podatki iz medijev in nekaterih drugih virov kdaj tudi nejasni in nedosledni, [preglednica]([https://covid-19.sledilnik.org/#/tables](https://covid-19.sledilnik.org/#/tables)  vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
 ##### Pomagajte tudi vi – nam, sebi in drugim
 
@@ -52,7 +52,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 
 ## Uporaba grafov in vizualizacij
 
-Naše grafe in prikaze lahko na svojo spletni strani uporabite tudi vi. Vgradite lahko  poljuben graf ali prikaz; opis, kako to storite, lahko najdete [na strani s primeri](https://github.com/slo-covid-19/website/tree/master/examples). 
+Naše grafe in prikaze lahko na svojo spletni strani uporabite tudi vi. Vgradite lahko  poljuben graf ali prikaz; opis, kako to storite, lahko najdete [na strani s primeri](https://github.com/slo-covid-19/website/tree/master/examples); če želite objavo vašega projekta na naši strani, nas prosimo kontaktirajte. 
 
 ## Uporaba podatkov
 
@@ -68,7 +68,7 @@ Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike š
 
 ## Pogoji uporabe
 
-Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/).
+Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/). Če ni določeno drugače, velja za vso vsebino na tej strani licenca Creative Commons: [Priznanje avtorstva-Deljenje pod enakimi pogoji 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.sl).
 
 Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike sodelovanja nas kontaktirajte na info@sledilnik.org.
 
