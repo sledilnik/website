@@ -2,7 +2,7 @@
   <b-container class="mt-3">
     <b-row>
       <div class="d-flex flex-wrap w-100 justify-content-center">
-        <Info-card :title="title" :field="field" :good-direction="goodDirection" />
+        <Info-card :title="title" :field="field" :good-trend="goodDirection" />
       </div>
     </b-row>
   </b-container>
