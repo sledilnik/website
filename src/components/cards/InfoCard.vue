@@ -6,7 +6,7 @@
       <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
         <b-tooltip :target="elementId" triggers="hover"
-          >Glede na {{ renderValues.dayBefore.displayDate | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} <span v-if="renderValues.dayBefore.diff">[{{
+          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} <span v-if="renderValues.dayBefore.diff">[{{
             renderValues.dayBefore.diff | prefixDiff
           }}]</span></b-tooltip
         >
