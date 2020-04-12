@@ -131,7 +131,7 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 ## O izračunih in grafih
 
 <details>
-  <summary>Lahko uporabim vaše grafe na svoji strani? Kako?
+  <summary>Lahko uporabim vaše grafe na svoji strani? Kako?</summary>
     
 Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz - ob navedbi vira, seveda. Kako, najdete [na strani z primeri](https://github.com/slo-covid-19/website/tree/master/examples). O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav]([https://covid-19.sledilnik.org/#/links](https://covid-19.sledilnik.org/#/links)). 
 </details>
