@@ -1,4 +1,4 @@
-![logo](https://covid-19.sledilnik.org/covid-19-logo.png)
+![logo](https://covid-19.sledilnik.org/covid-19-logo.png?v=4&s=200)
 
 # Embed Sledilnik.org charts - Examples 
 
