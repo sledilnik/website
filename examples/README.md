@@ -18,6 +18,7 @@ For example, see `example.html` in this directory.
 | Zemljevid potrjeno okuženih po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Potrjeno okuženi po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
 | Potrjeno okuženi po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
+| Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 
 
 ### Resize
