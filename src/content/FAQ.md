@@ -48,7 +48,7 @@ Nihče oz. ne. Sledilnik je neprofitna pobuda, ustvarjena kot podpora sprotnemu 
 <details>
   <summary>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
 
-Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)) . Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, cel projekt pa odprt in na voljo na [GitHubu - Sledilnik]([https://github.com/slo-covid-19](https://github.com/slo-covid-19)).
+Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)) . Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, cel projekt pa odprt in na voljo na [GitHubu - Sledilnik](https://github.com/slo-covid-19).
 </details>
 
 ## O podatkih
