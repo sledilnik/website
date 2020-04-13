@@ -17,6 +17,7 @@ type Metric =
     | InHospital
     | InHospitalToDate
     | InICU
+    | OnVentilator
     | OutOfHospital
     | OutOfHospitalToDate
     | RecoveredToDate
@@ -43,6 +44,7 @@ module Metrics  =
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (trenutno)"; Class="cs-inHospital" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
         { Metric=InICU;                Color="#bf5747"; Visible=true;  Line=Solid; Label="V intenzivni enoti (trenutno)"; Class="cs-inHospitalICU" }
+        { Metric=OnVentilator;         Color="#d99a91"; Visible=false; Line=Solid; Label="Na respiratorju (trenutno)"; Class="cs-inHospitalVentilator" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
         { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
         { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Line=Dot; Label="Ozdraveli (skupaj)"; Class="cs-recoveredToDate" }
@@ -101,6 +103,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | InHospital -> point.StatePerTreatment.InHospital |> Utils.zeroToNone
             | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate |> Utils.zeroToNone
             | InICU -> point.StatePerTreatment.InICU |> Utils.zeroToNone
+            | OnVentilator -> point.StatePerTreatment.Critical |> Utils.zeroToNone
             | OutOfHospital -> point.StatePerTreatment.OutOfHospital |> Utils.zeroToNone
             | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate |> Utils.zeroToNone
             | RecoveredToDate -> point.StatePerTreatment.RecoveredToDate |> Utils.zeroToNone
