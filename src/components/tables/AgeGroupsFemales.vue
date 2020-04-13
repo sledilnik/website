@@ -3,7 +3,6 @@
     responsive
     bordered
     outlined
-    no-border-collapse
     hover
     :stickyColumn="' '"
     :sort-desc="true"

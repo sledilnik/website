@@ -3,7 +3,6 @@
     responsive
     bordered
     outlined
-    no-border-collapse
     hover
     :stickyColumn="' '"
     :sort-desc="true"
@@ -43,7 +42,6 @@ export default {
         "state.deceased.todate",
         "state.out_of_hospital.todate",
         "state.recovered.todate",
-        "age.male.todate"
       ]
     };
   },

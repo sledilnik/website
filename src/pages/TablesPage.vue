@@ -190,11 +190,16 @@ thead .table-b-table-default
 
       &:nth-child(odd)
         background-color: #fafafa
+      @media only screen and (max-width: 768px)
+        vertical-align: bottom
 
     td[aria-colindex="1"]
+        background-color: transparent !important
         padding: 10px 24px 10px 10px
         font-weight: bold
         text-align: left
+        @media only screen and (max-width: 768px)
+          padding-bottom: 30px
 
 .table-grey.b-table-sticky-column
   .text-nowrap

@@ -284,8 +284,6 @@ const tableData = {
       return rootState.stats.data.length ? processTableData(rootState.stats.data) : []
     },
     filterTableData: (state, getters) => (dimension) => {
-      console.log(getters.tableData);
-
       const items = getters.tableData.filter(day => {
         return dimension.includes(day.dim);
       });
@@ -313,10 +311,10 @@ function processTableData(data) {
     newData[' '] = tableDict[dimension]
 
     data.slice().reverse().forEach((day, i) => {
-      let date = format(day.date, 'd.M.', {
+      let date = format(day.date, 'E d.M.', {
         locale: sl
       });
-      newData[date] = day[dimension] === null ? 'Ni podatka' : day[dimension]
+      newData[date] = day[dimension]
     })
     return newData
   }).filter(val => val)
