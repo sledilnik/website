@@ -307,7 +307,7 @@ function processTableData(data) {
       let date = format(day.date, 'd.M.', {
         locale: sl
       });
-      newData[date] = day[dimension] === null ? 'Ni podatka' : day[dimension]
+      newData[date] = day[dimension]
     })
     return newData
   }).filter(val => val)
