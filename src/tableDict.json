@@ -3,7 +3,7 @@
   "tests.performed.todate": "Testiranja (skupaj)",
   "tests.positive": "Potrjeno okuženi (na dan)",
   "tests.positive.todate": "Potrjeno okuženi (skupaj)",
-  "state.in_hospital": "Hospitalizirani",
+  "state.in_hospital": "Hospitalizirani (trenutno)",
   "state.icu": "V intenzivni enoti (trenutno)",
   "state.critical": "Na respiratorju (trenutno)",
   "state.deceased.todate": "Umrli (skupaj)",
