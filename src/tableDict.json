@@ -42,5 +42,6 @@
   "region.kk.todate": "Posavska",
   "region.po.todate": "Primorsko-notranjska",
   "region.ce.todate": "Savinjska",
-  "region.za.todate": "Zasavska"
+  "region.za.todate": "Zasavska",
+  "region.todate": "Skupno"
 }

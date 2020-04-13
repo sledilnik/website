@@ -34,7 +34,8 @@ export default {
         "region.kk.todate",
         "region.po.todate",
         "region.ce.todate",
-        "region.za.todate"
+        "region.za.todate",
+        "region.todate"
       ]
     };
   },
