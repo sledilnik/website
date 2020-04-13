@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as d3 from "d3";
+import _ from 'lodash'
 
 import axios from 'axios'
+import tableDict from './tableDict.json'
 
 Vue.use(Vuex)
 
@@ -264,11 +266,57 @@ const hospitalsStore = {
   }
 }
 
+const tableData = {
+  namespaced: true,
+  getters: {
+    tableData(state, getters, rootState) {
+      return rootState.stats.data.length ? processTableData(rootState.stats.data) : []
+    },
+    filterTableData: (state, getters) => (dimension) => {
+      console.log(getters.tableData);
+
+      const items = getters.tableData.filter(day => {
+        return dimension.includes(day.dim);
+      });
+      const sample = items[0];
+      const fields = Object.keys(sample).map((dimension, i) => {
+        return {
+          key: dimension,
+          label: dimension,
+          stickyColumn: dimension === ' ',
+          sortable: true
+        };
+      }).filter(item => item.key !== 'dim')
+      return {
+        items,
+        fields
+      }
+    }
+  }
+}
+
+function processTableData(data) {
+  const x = Object.keys(_.last(data)).map(dimension => {
+    let newData = {}
+    newData['dim'] = dimension
+    newData[' '] = tableDict[dimension]
+
+    data.slice().reverse().forEach((day, i) => {
+      let date = format(day.date, 'd.M.', {
+        locale: sl
+      });
+      newData[date] = day[dimension] === null ? 'Ni podatka' : day[dimension]
+    })
+    return newData
+  }).filter(val => val)
+  return x
+}
 
 const store = new Vuex.Store({
   modules: {
     stats: statsStore,
     hospitals: hospitalsStore,
+    tableData
   }
 })
 

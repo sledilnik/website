@@ -4,12 +4,11 @@
     bordered
     outlined
     no-border-collapse
-    striped
     hover
-    sort-by="date"
+    :stickyColumn="' '"
     :sort-desc="true"
     :sticky-header="tableHeight"
-    :items="csvdata"
+    :items="items"
     :fields="fields"
   >
     <template v-slot:head()="scope">
@@ -25,63 +24,38 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import _ from "lodash";
 export default {
-  props: ["csvdata", "tableHeight"],
+  props: ["tableHeight"],
   data() {
     return {
-      fields: [
-        {
-          key: "date",
-          headerTitle: "Datum",
-          label: "Datum",
-          sortable: true,
-          stickyColumn: true,
-          variant: "grey"
-        },
-        {
-          key: "tests.performed",
-          label: "Opravljenih testov"
-        },
-        {
-          key: "tests.performed.todate",
-          label: "Opravljenih testov - Skupno"
-        },
-        {
-          key: "tests.positive",
-          label: "Potrjene okužbe"
-        },
-        {
-          key: "tests.positive.todate",
-          label: "Potrjene okužbe - Skupno"
-        },
-        {
-          key: "state.in_hospital",
-          label: "Hospitalizirani"
-        },
-        {
-          key: "state.icu",
-          label: "V intenzivnih negi"
-        },
-        {
-          key: "state.critical",
-          label: "V kritičnem stanju"
-        },
-        {
-          key: "state.deceased.todate",
-          label: "Umrli"
-        },
-        {
-          key: "state.out_of_hospital.todate",
-          label: "Odpuščeni iz bolnišnice"
-        },
-        {
-          key: "state.recovered.todate",
-          label: "Ozdravljeni"
-        }
+      items: [],
+      fields: [],
+      dimensions: [
+        "tests.performed",
+        "tests.performed.todate",
+        "tests.positive",
+        "tests.positive.todate",
+        "state.in_hospital",
+        "state.icu",
+        "state.critical",
+        "state.deceased.todate",
+        "state.out_of_hospital.todate",
+        "state.recovered.todate",
+        "age.male.todate"
       ]
     };
+  },
+  watch: {
+    tableData() {
+      const { items, fields } = this.filterTableData(this.dimensions);
+      this.items = items;
+      this.fields = fields;
+    }
+  },
+  computed: {
+    ...mapGetters("tableData", ["tableData", "filterTableData"])
   }
 };
 </script>
-
-<style></style>

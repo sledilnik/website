@@ -4,55 +4,49 @@
     bordered
     no-border-collapse
     outlined
-    striped
     hover
     sort-by="date"
     :sort-desc="true"
     :sticky-header="tableHeight"
-    :items="csvdata"
+    :items="items"
     :fields="fields"
-  >
-    <template v-slot:head()="scope">
-      <div class="text-nowrap">{{ scope.label }}</div>
-    </template>
-    <template v-slot:cell(date)="data">
-      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM') }}</div>
-    </template>
-  </b-table>
+  ></b-table>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import _ from "lodash";
 export default {
-  props: ["csvdata", "regions", "tableHeight"],
+  props: ["tableHeight"],
+  data() {
+    return {
+      items: [],
+      fields: [],
+      dimensions: [
+        "region.kr.todate",
+        "region.ng.todate",
+        "region.nm.todate",
+        "region.sg.todate",
+        "region.kp.todate",
+        "region.lj.todate",
+        "region.mb.todate",
+        "region.ms.todate",
+        "region.kk.todate",
+        "region.po.todate",
+        "region.ce.todate",
+        "region.za.todate"
+      ]
+    };
+  },
   computed: {
-    fields() {
-      return [
-        {
-          key: "date",
-          headerTitle: "Datum",
-          label: "Datum",
-          sortable: true,
-          stickyColumn: true,
-          variant: "grey"
-        },
-        ...this.regionsProper,
-        {
-          key: "region.foreign.todate",
-          label: "Tujci"
-        }
-      ];
-    },
-    regionsProper() {
-      return this.regions
-        .filter(region => !["si", "t", "n"].includes(region.id)) //Region slugs don't map to stats data, or we don't want that column
-        .map(region => {
-          return {
-            key: `region.${region.id}.todate`,
-            label: region.name
-          };
-        })
-        .sort((region1, region2) => region1.label.localeCompare(region2.label));
-
+    ...mapGetters("stats", ["regions"]),
+    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  },
+  watch: {
+    tableData() {
+      const { items, fields } = this.filterTableData(this.dimensions);
+      this.items = items;
+      this.fields = fields;
     }
   }
 };

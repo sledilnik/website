@@ -4,83 +4,52 @@
     bordered
     outlined
     no-border-collapse
-    striped
     hover
-    sort-by="date"
+    :stickyColumn="' '"
     :sort-desc="true"
     :sticky-header="tableHeight"
-    :items="csvdata"
+    :items="items"
     :fields="fields"
   >
     <template v-slot:head()="scope">
       <div class="text-nowrap">{{ scope.label }}</div>
     </template>
-    <template v-slot:cell(date)="data">
-      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM') }}</div>
-    </template>
   </b-table>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  props: ["csvdata", "tableHeight"],
+  props: ["tableHeight"],
   data() {
     return {
-      fields: [
-        {
-          key: "date",
-          headerTitle: "Datum",
-          label: "Datum",
-          sortable: true,
-          stickyColumn: true,
-          variant: "grey"
-        },
-        {
-          key: "age.female.todate",
-          label: "Skupno"
-        },
-        {
-          key: "age.female.0-4.todate",
-          label: "0 - 4 leta"
-        },
-        {
-          key: "age.female.5-14.todate",
-          label: "5 - 14 let"
-        },
-        {
-          key: "age.female.15-24.todate",
-          label: "15 - 24 let"
-        },
-        {
-          key: "age.female.25-34.todate",
-          label: "25 - 34 let"
-        },
-        {
-          key: "age.female.35-44.todate",
-          label: "35 - 44 let"
-        },
-        {
-          key: "age.female.45-54.todate",
-          label: "45 - 54 let"
-        },
-        {
-          key: "age.female.55-64.todate",
-          label: "55 - 64 let"
-        },
-        {
-          key: "age.female.65-74.todate",
-          label: "65 - 74 let"
-        },
-        {
-          key: "age.female.75-84.todate",
-          label: "75 - 84 let"
-        },
-        {
-          key: "age.female.85+.todate",
-          label: "85+ let"
-        }
+      items: [],
+      fields: [],
+      dimensions: [
+        "age.female.todate",
+        "age.female.0-4.todate",
+        "age.female.5-14.todate",
+        "age.female.15-24.todate",
+        "age.female.25-34.todate",
+        "age.female.35-44.todate",
+        "age.female.45-54.todate",
+        "age.female.55-64.todate",
+        "age.female.65-74.todate",
+        "age.female.75-84.todate",
+        "age.female.85+.todate"
       ]
     };
+  },
+  computed: {
+    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  },
+  watch: {
+    tableData() {
+      const { items, fields } = this.filterTableData(this.dimensions);
+      this.items = items;
+      this.fields = fields;
+    }
   }
 };
 </script>
