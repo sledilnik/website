@@ -304,7 +304,7 @@ function processTableData(data) {
     newData[' '] = tableDict[dimension]
 
     data.slice().reverse().forEach((day, i) => {
-      let date = format(day.date, 'd.M.', {
+      let date = format(day.date, 'E d.M.', {
         locale: sl
       });
       newData[date] = day[dimension]
