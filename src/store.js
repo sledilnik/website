@@ -31,7 +31,7 @@ async function loadCsv(url) {
   return data
 }
 
-export function lastChange(data, field) {
+export function lastChange(data, field, cumulative) {
 
   const result = {
     lastDay: {
@@ -62,11 +62,16 @@ export function lastChange(data, field) {
   result.lastDay.date = new Date(data[i]['date'])
   result.lastDay.value = data[i][field]
 
-  while (i >= 0 && (result.lastDay.value === data[i][field])) i--
-  let date = new Date(data[i + 1]['date'])
-  if (data[i + 1][field] != null && result.lastDay.date.getTime() != date.getTime()) {
-    result.lastDay.firstDate = date
+  if (cumulative) {
+    while (i >= 0 && (result.lastDay.value === data[i][field])) i--
+    let date = new Date(data[i + 1]['date'])
+    if (data[i + 1][field] != null && result.lastDay.date.getTime() != date.getTime()) {
+      result.lastDay.firstDate = date
+    }
+  } else {
+    i--
   }
+
 
   if (i >= 0) {
     while (i >= 0 && data[i][field] == null) i--
@@ -74,14 +79,18 @@ export function lastChange(data, field) {
     result.dayBefore.value = data[i][field]
   }
 
-
-  if (i >= 0) {
-    while (i >= 0 && result.dayBefore.value === data[i][field]) i--
-    date = new Date(data[i + 1]['date'])
-    if (result.dayBefore.date.getTime() != date.getTime()) {
-      result.dayBefore.firstDate = date
+  if (cumulative) {
+    if (i >= 0) {
+      while (i >= 0 && result.dayBefore.value === data[i][field]) i--
+      let date = new Date(data[i + 1]['date'])
+      if (result.dayBefore.date.getTime() != date.getTime()) {
+        result.dayBefore.firstDate = date
+      }
     }
+  } else {
+    i--
   }
+
 
   if (i >= 0) {
     while (i >= 0 && data[i][field] == null) i--
@@ -142,8 +151,8 @@ const statsStore = {
         value: result ? result[field] : null
       }
     },
-    lastChange: (state, getters) => (field) => {
-      return lastChange(getters.data, field)
+    lastChange: (state, getters) => (field, cumulative) => {
+      return lastChange(getters.data, field, cumulative)
     },
   },
   actions: {

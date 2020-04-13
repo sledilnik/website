@@ -4,12 +4,8 @@ import { lastChange } from '../../src/store.js'
 // mocha.fullTrace()
 assert.includeStack = true
 
-function testLastChange(data, expected) {
-  const actual = lastChange(data, 'value')
-
-  // console.log(actual)
-  // console.log(expected)
-
+function testLastChange(data, expected, cumulative) {
+  const actual = lastChange(data, 'value', cumulative)
   assert.deepEqual(actual, expected)
 }
 
@@ -46,7 +42,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with monotonicaly decreasing data', function () {
@@ -80,7 +76,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with constant data', function () {
@@ -105,7 +101,7 @@ describe('vuex store helpers', function () {
         day2Before: undefined
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with constan data in beteween', function () {
@@ -139,7 +135,7 @@ describe('vuex store helpers', function () {
         },
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with constant data in tail', function () {
@@ -173,7 +169,7 @@ describe('vuex store helpers', function () {
         },
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with actual data sample', function () {
@@ -207,7 +203,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with actual data sample (missing values) #1', function () {
@@ -241,7 +237,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
 
@@ -276,7 +272,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with data like recovered', function () {
@@ -313,7 +309,7 @@ describe('vuex store helpers', function () {
         }
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
     });
 
     it('should work with data like recovered #2', function () {
@@ -347,7 +343,45 @@ describe('vuex store helpers', function () {
         day2Before: undefined
       }
 
-      testLastChange(fakedata, expected)
+      testLastChange(fakedata, expected, true)
+    });
+
+
+    it('should work with non-cumulative series', function () {
+
+      const fakedata = [
+        { date: '2020-01-01', value: 10 },
+        { date: '2020-01-02', value: 10 },
+        { date: '2020-01-03', value: 10 },
+        { date: '2020-01-04', value: 10 },
+        { date: '2020-01-05', value: 10 },
+        { date: '2020-01-06', value: 16 },
+        { date: '2020-01-07', value: 16 },
+        { date: '2020-01-08', value: 16 },
+        { date: '2020-01-09', value: undefined },
+      ]
+      const expected = {
+        lastDay: {
+          date: new Date('2020-01-08'),
+          firstDate: undefined,
+          value: 16,
+          diff: 0,
+          percentDiff: 0
+        },
+        dayBefore: {
+          date: new Date('2020-01-07'),
+          firstDate: undefined,
+          value: 16,
+          diff: 0,
+          percentDiff: 0
+        },
+        day2Before: {
+          date: new Date('2020-01-06'),
+          value: 16,
+        }
+      }
+
+      testLastChange(fakedata, expected, false)
     });
 
 
