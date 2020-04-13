@@ -85,7 +85,8 @@ type RenderingMode =
     | Embeded of Visualization option
 
 type State =
-    { StatsData : RemoteData<StatsData, string>
+    { Query : obj // URL query parameters
+      StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
 

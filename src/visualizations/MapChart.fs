@@ -88,10 +88,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
-let chartLoadedEvent () = 
+let chartLoadedEvent () =
     // trigger event for iframe resize
     let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true);
+    evt.initEvent("chartLoaded", true, true)
     document.dispatchEvent(evt) |> ignore
 
 let renderMap state =
@@ -135,10 +135,7 @@ let renderMap state =
                 Props.chartType ChartType.GeoChart
                 Props.width "100%"
                 // Props.height 450
-                Props.chartEvents [
-                    {| eventName = "ready"
-                       callback = chartLoadedEvent |}
-                ]
+                Props.chartEvents [{| eventName = "ready" ; callback = chartLoadedEvent |}]
                 Props.data (header :: data)
                 Props.options [
                     Options.Region "SI"
@@ -173,13 +170,12 @@ let renderDisplayTypeSelector displayType dispatch =
     ]
 
 let render (state : State) dispatch =
-    let elm = Html.div [
+    Html.div [
         prop.children [
             renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
             renderMap state
         ]
     ]
-    elm
 
 let mapChart (props : {| data : RegionsData |}) =
     React.elmishComponent("MapChart", init props.data, update, render)

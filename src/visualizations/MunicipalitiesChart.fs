@@ -2,13 +2,13 @@
 module MunicipalitiesChart
 
 open Elmish
+open Browser
+open Fable.Core.JsInterop
 
 open Feliz
 open Feliz.ElmishComponents
 
 open Types
-
-open Browser
 
 let barMaxHeight = 50
 let showMaxBars = 30
@@ -33,7 +33,27 @@ type Municipality =
 
 type SortBy =
     | TotalPositiveTests
-    | DoublingTimeDays
+    | DoublingTime
+
+type Query (query : obj, regions : Region list) =
+    member this.Query = query
+    member this.Regions =
+        regions
+        |> List.map (fun region -> region.Key)
+        |> Set.ofList
+    member this.Region =
+        match query?("region") with
+        | Some (region : string) when Set.contains (region.ToLower()) this.Regions ->
+            Some (region.ToLower())
+        | _ -> None
+    member this.SortBy =
+        match query?("sort") with
+        | Some (sort : string) ->
+            match sort.ToLower() with
+            | "total-positive-tests" -> Some TotalPositiveTests
+            | "time-to-double" -> Some DoublingTime
+            | _ -> None
+        | _ -> None
 
 type State =
     { Municipalities : Municipality seq
@@ -49,13 +69,17 @@ type Msg =
     | RegionFilterChanged of string
     | SortByChanged of SortBy
 
-let init (data : RegionsData) : State * Cmd<Msg> =
+let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
+
     let regions =
         lastDataPoint.Regions
         |> List.filter (fun region -> Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
         |> List.map (fun reg -> { Key = reg.Name ; Name = (Utils.Dictionaries.regions.TryFind reg.Name) |> Option.map (fun region -> region.Name) })
         |> List.sortBy (fun region -> region.Name)
+
+    let query = Query(queryObj, regions)
+
     let municipalities =
         seq {
             for regionsDataPoint in data do
@@ -82,18 +106,30 @@ let init (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
                 |> Seq.sortBy (fun dp -> dp.Date)
             })
+
     let state =
         { Municipalities = municipalities
           Regions = regions
           ShowAll = false
           SearchQuery = ""
-          FilterByRegion = ""
-          SortBy = TotalPositiveTests }
+          FilterByRegion =
+            match query.Region with
+            | None -> ""
+            | Some region -> region
+          SortBy =
+            match query.SortBy with
+            | None -> TotalPositiveTests
+            | Some sortBy -> sortBy }
 
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
-    let ret = match msg with
+    // trigger event for iframe resize
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true)
+    document.dispatchEvent(evt) |> ignore
+
+    match msg with
     | ToggleShowAll ->
         { state with ShowAll = not state.ShowAll }, Cmd.none
     | SearchInputChanged query ->
@@ -102,13 +138,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with FilterByRegion = region }, Cmd.none
     | SortByChanged sortBy ->
         { state with SortBy = sortBy }, Cmd.none
-
-    // trigger event for iframe resize
-    let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true);
-    document.dispatchEvent(evt) |> ignore
-
-    ret
 
 let renderMunicipality (municipality : Municipality) =
 
@@ -270,7 +299,7 @@ let renderMunicipalities (state : State) dispatch =
                     | Some n1, None -> 1
                     | None, Some n2 -> -1
                     | Some n1, Some n2 -> System.String.Compare(n1, n2))
-        | DoublingTimeDays ->
+        | DoublingTime ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
                 match m1.DoublingTime, m2.DoublingTime with
@@ -355,7 +384,7 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
         prop.children [
             Html.text "Razvrsti po: "
             renderSelector currenSortBy SortBy.TotalPositiveTests "Številu okuženih"
-            renderSelector currenSortBy SortBy.DoublingTimeDays "Dnevih podvojitve števila okuženih"
+            renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve števila okuženih"
         ]
     ]
 
@@ -386,10 +415,10 @@ let render (state : State) dispatch =
 
     // trigger event for iframe resize
     let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true);
+    evt.initEvent("chartLoaded", true, true)
     document.dispatchEvent(evt) |> ignore
 
     element
 
-let municipalitiesChart (props : {| data : RegionsData |}) =
-    React.elmishComponent("MunicipalitiesChart", init props.data, update, render)
+let municipalitiesChart (props : {| query : obj ; data : RegionsData |}) =
+    React.elmishComponent("MunicipalitiesChart", init props.query props.data, update, render)
