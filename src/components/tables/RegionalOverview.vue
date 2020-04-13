@@ -2,7 +2,6 @@
   <b-table
     responsive
     bordered
-    no-border-collapse
     outlined
     hover
     sort-by="date"
