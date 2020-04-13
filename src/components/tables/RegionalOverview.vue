@@ -44,10 +44,18 @@ export default {
   },
   watch: {
     tableData() {
+      this.refreshData();
+    }
+  },
+  methods: {
+    refreshData() {
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
     }
+  },
+  mounted() {
+    this.refreshData();
   }
 };
 </script>

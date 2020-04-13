@@ -47,13 +47,21 @@ export default {
   },
   watch: {
     tableData() {
+      this.refreshData()
+    }
+  },
+  computed: {
+    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  },
+  methods: {
+    refreshData(){
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
     }
   },
-  computed: {
-    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  mounted(){
+    this.refreshData()
   }
 };
 </script>
