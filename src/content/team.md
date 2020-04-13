@@ -21,6 +21,7 @@ Uredniki baze in ostali sodelavci:
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeliranje
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
+-   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, viri, validacija podatkov
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
