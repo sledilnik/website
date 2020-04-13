@@ -275,8 +275,6 @@ const tableData = {
       return rootState.stats.data.length ? processTableData(rootState.stats.data) : []
     },
     filterTableData: (state, getters) => (dimension) => {
-      console.log(getters.tableData);
-
       const items = getters.tableData.filter(day => {
         return dimension.includes(day.dim);
       });
