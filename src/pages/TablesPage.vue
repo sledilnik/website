@@ -5,16 +5,16 @@
         <h1>Tabela</h1>
         <b-tabs>
           <b-tab title="Povzetek stanja" active>
-            <tests-infections-table :csvdata="data" :tableHeight="tableHeight"></tests-infections-table>
+            <tests-infections-table :tableHeight="tableHeight"></tests-infections-table>
           </b-tab>
           <b-tab title="Po regiji">
-            <regional-overview-table :csvdata="data" :regions="regions" :tableHeight="tableHeight"></regional-overview-table>
+            <regional-overview-table :tableHeight="tableHeight"></regional-overview-table>
           </b-tab>
           <b-tab title="Po starosti - Moški">
-            <age-groups-males-table :csvdata="data" :table-height="tableHeight"></age-groups-males-table>
+            <age-groups-males-table :table-height="tableHeight"></age-groups-males-table>
           </b-tab>
           <b-tab title="Po starosti - Ženske">
-            <age-groups-females-table :csvdata="data" :table-height="tableHeight"></age-groups-females-table>
+            <age-groups-females-table :table-height="tableHeight"></age-groups-females-table>
           </b-tab>
         </b-tabs>
         <div class="footnote">
@@ -46,14 +46,10 @@ export default {
     return {
       tableHeight: "100%"
     };
-  },
-  computed: {
-    ...mapGetters("stats", ["data", "regions"])
   }
 };
 </script>
 <style scopped lang="sass">
-
 $table-text-c: rgba(0, 0, 0, 0.75)
 $table-border: rgb(222,222 ,222)
 
@@ -107,7 +103,6 @@ $table-border: rgb(222,222 ,222)
     margin-bottom: 4px
     a
       white-space: nowrap
-    
 
     & + .nav-item
       @media only screen and (min-width: 768px)
@@ -150,7 +145,7 @@ $table-border: rgb(222,222 ,222)
 .tabs *:focus
   outline: none
 
-.b-table-sticky-header.table-responsive 
+.b-table-sticky-header.table-responsive
   height: 72vh
 
 //top left cell
@@ -163,7 +158,7 @@ thead .table-grey.b-table-sticky-column
     display: none
 
 thead .table-b-table-default
-  background: rgba(255,255 ,255 ,0.9) !important
+  background: rgba(255,255 ,255 ,1) !important
   z-index: 4 !important
   border-bottom: 1px solid $table-border !important
 
@@ -171,18 +166,35 @@ thead .table-b-table-default
   color: $table-text-c
   font-size: 14px
   font-weight: 600
-
 .table-wrapper
   .table
+    th
+      padding-right: 0.75rem
+      text-align: right
+      &:first-child
+        div
+          width: 150px
     tr:hover
       background: #ffd92242 !important
+      td
+        background-color: inherit
 
     td
-      padding: 34px 24px 10px 0.75rem
+      min-width: 95px
+      white-space: nowrap
+      padding: 10px 0.75rem 10px 0.75rem
+      text-align: right
       border-bottom: 1px solid $table-border
-    
+      &:first-child
+        border-right: 1px solid #dedede
+
+      &:nth-child(odd)
+        background-color: #fafafa
+
     td[aria-colindex="1"]
-      padding: 34px 24px 10px 0
+        padding: 10px 24px 10px 10px
+        font-weight: bold
+        text-align: left
 
 .table-grey.b-table-sticky-column
   .text-nowrap
