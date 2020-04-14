@@ -95,7 +95,8 @@ $table-border: rgb(222,222 ,222)
 
   //tabs
 .nav.nav-tabs
-  overflow: hidden
+  overflow-y: hidden
+  overflow-x: scroll
   display: flex
   flex-wrap: nowrap
   margin: 0 0 28px
@@ -105,7 +106,6 @@ $table-border: rgb(222,222 ,222)
     margin: 0 0 48px
 
   .nav-item
-    margin-bottom: 4px
     a
       white-space: nowrap
 
@@ -115,14 +115,13 @@ $table-border: rgb(222,222 ,222)
 
     @include mobile-break
       flex: none
-      margin-bottom: 0
 
   .nav-link
     padding: 0
     border: none
     position: relative
     color: rgba(0, 0, 0, 0.5)
-    line-height: 20px
+    line-height: 29px
     margin-right: 15px
     font-size: 14px
     display: inline-block
@@ -137,15 +136,7 @@ $table-border: rgb(222,222 ,222)
       outline: none
 
     &.active
-      &:after
-        content: ""
-        position: absolute
-        display: block
-        left: 0
-        right: 0
-        z-index: 0
-        bottom: -5px
-        border-bottom: 10px solid $yellow
+      box-shadow: inset 0 -10px 0 $yellow
 
 .tabs *:focus
   outline: none
