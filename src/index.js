@@ -5,6 +5,7 @@ import VueScrollTo from 'vue-scrollto'
 import App from './App.vue'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
+import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import AdvancedStatsPage from './pages/AdvancedStatsPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
@@ -100,6 +101,10 @@ const routes = [
       name: 'datasources',
       content: datasourcesMd
     },
+  },
+  {
+    path: '/embed',
+    component: EmbedMakerPage,
   },
 ]
 
