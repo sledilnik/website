@@ -6,6 +6,8 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 
+open Browser
+
 open Highcharts
 open Types
 
@@ -130,12 +132,20 @@ let renderChartOptions displayType (data : StatsData) =
             reversed = true
         |}
 
+    let myLoadEvent(name: String) = 
+        let ret(event: Event) =
+            let evt = document.createEvent("event")
+            evt.initEvent("chartLoaded", true, true);
+            document.dispatchEvent(evt)
+        ret
+
     let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
     {| baseOptions with
         chart = pojo
             {|
                 ``type`` = "column" // "spline"
                 zoomType = "x"
+                events = {| load = myLoadEvent("infections") |}
             |}
         title = pojo {| text = None |}
         series = List.toArray allSeries

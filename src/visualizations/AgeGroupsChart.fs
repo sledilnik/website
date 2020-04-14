@@ -5,6 +5,7 @@ open Feliz
 
 open Types
 open Recharts
+open Browser
 
 type Breakdown =
     | Gender
@@ -94,10 +95,15 @@ let renderBreakdownSelectors current choose =
             ) ) ]
 
 let render data =
-    React.functionComponent (fun () ->
+    let elm = React.functionComponent (fun () ->
         let (breakdown, setBreakdown) = React.useState Gender
         Html.div [
             renderChart data breakdown
             renderBreakdownSelectors breakdown setBreakdown
         ]
     )
+
+    let evt = document.createEvent("event")
+    evt.initEvent("chartLoaded", true, true);
+    document.dispatchEvent(evt) |> ignore
+    elm
