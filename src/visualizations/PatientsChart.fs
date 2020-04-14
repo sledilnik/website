@@ -26,11 +26,9 @@ type Breakdown =
         | BySource -> "Hospitalizirani po bolnišnicah"
 
 type Series =
-    | InCare
     | OutOfHospital
     | InHospital
     | AllInHospital
-    //| NeedsO2
     | Icu
     | Critical
     | Deceased
@@ -39,18 +37,16 @@ type Series =
 
 module Series =
     let all =
-        [ InCare; AllInHospital; InHospital; OutOfHospital; Icu; Critical; Deceased; Hospital; Home; ]
+        [ AllInHospital; InHospital; OutOfHospital; Icu; Critical; Deceased; Hospital; Home; ]
 
     // color, dash, name
     let getSeriesInfo = function
-        | InCare        -> "#ffa600", "cs-inCare", "Oskrbovani"
-        | OutOfHospital -> "#20b16d", "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice - skupaj"
-        | InHospital    -> "#be7a2a", "cs-inHospital", "Hospitalizirani - trenutno"
-        | AllInHospital -> "#de9a5a", "cs-inHospitalToDate", "Hospitalizirani - skupaj"
-        //| NeedsO2       -> "#70a471", "cs-needsO2", "Potrebuje kisik"
-        | Icu           -> "#bf5747", "cs-inHospitalICU", "V intenzivni enoti"
-        | Critical      -> "#d99a91", "cs-critical", "Respirator / kritično stanje"
-        | Deceased      -> "#666666", "cs-deceasedToDate", "Umrli - skupaj"
+        | OutOfHospital -> "#20b16d", "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
+        | InHospital    -> "#be7a2a", "cs-inHospital", "Hospitalizirani (trenutno)"
+        | AllInHospital -> "#de9a5a", "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
+        | Icu           -> "#bf5747", "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
+        | Critical      -> "#d99a91", "cs-critical", "Na respiratorju (trenutno)"
+        | Deceased      -> "#666666", "cs-deceasedToDate", "Umrli (skupaj)"
         | Hospital      -> "#be772a", "cs-hospital", "Hospitalizirani"
         | Home          -> "#003f5c", "cs-home", "Doma"
 
@@ -105,7 +101,7 @@ type State = {
             activeSegmentations = Set [ Totals ]
             allSeries =
                 // exclude stuff that doesn't exist or doesn't make sense in Total
-                let exclude = Set [ Home; Hospital; InCare ]
+                let exclude = Set [ Home; Hospital ]
                 Series.all |> List.filter (not << exclude.Contains)
             activeSeries = Set Series.all
             breakdown = BySource
@@ -163,11 +159,9 @@ let renderChartOptions (state : State) =
     let renderSeries series =
         let renderPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match series with
-            | InCare        -> fun ps -> ps.JsDate12h, ps.total.inCare |> zeroToNone
             | OutOfHospital -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
             | InHospital    -> fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
             | AllInHospital -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
-            //| NeedsO2       -> fun ps -> ps.JsDate, ps.total.needsO2.toDate |> zeroToNone
             | Icu           -> fun ps -> ps.JsDate12h, ps.total.icu.today |> zeroToNone
             | Critical      -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
             | Deceased      -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone

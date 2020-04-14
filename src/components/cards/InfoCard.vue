@@ -54,7 +54,7 @@ export default {
       }
     },
     renderValues() {
-      const x = this.lastChange(this.field);
+      const x = this.lastChange(this.field, this.seriesType == 'cum');
       if (x) {
         if (this.seriesType == 'cum') {
           x.lastDay.displayDate = x.lastDay.firstDate || x.lastDay.date

@@ -2,7 +2,6 @@
   <b-table
     responsive
     bordered
-    no-border-collapse
     outlined
     hover
     sort-by="date"
@@ -34,7 +33,8 @@ export default {
         "region.kk.todate",
         "region.po.todate",
         "region.ce.todate",
-        "region.za.todate"
+        "region.za.todate",
+        "region.todate"
       ]
     };
   },
@@ -44,10 +44,18 @@ export default {
   },
   watch: {
     tableData() {
+      this.refreshData();
+    }
+  },
+  methods: {
+    refreshData() {
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
     }
+  },
+  mounted() {
+    this.refreshData();
   }
 };
 </script>

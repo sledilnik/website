@@ -5,7 +5,8 @@ open Elmish
 open Feliz
 
 open Types
-let init (visualization : string option) =
+
+let init (query : obj) (visualization : string option) =
     let inner () =
         let renderingMode =
             match visualization with
@@ -25,7 +26,8 @@ let init (visualization : string option) =
                 |> Embeded
 
         let initialState =
-            { StatsData = NotAsked
+            { Query = query
+              StatsData = NotAsked
               RegionsData = NotAsked
               RenderingMode = renderingMode }
 
@@ -120,7 +122,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| data = data |} |}
+                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query ; data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
              Label = "Potrjeno okuženi po starostnih skupinah"

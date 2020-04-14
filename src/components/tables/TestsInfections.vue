@@ -3,7 +3,6 @@
     responsive
     bordered
     outlined
-    no-border-collapse
     hover
     :stickyColumn="' '"
     :sort-desc="true"
@@ -43,19 +42,26 @@ export default {
         "state.deceased.todate",
         "state.out_of_hospital.todate",
         "state.recovered.todate",
-        "age.male.todate"
       ]
     };
   },
   watch: {
     tableData() {
+      this.refreshData()
+    }
+  },
+  computed: {
+    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  },
+  methods: {
+    refreshData(){
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
     }
   },
-  computed: {
-    ...mapGetters("tableData", ["tableData", "filterTableData"])
+  mounted(){
+    this.refreshData()
   }
 };
 </script>

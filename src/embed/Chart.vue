@@ -17,7 +17,7 @@ import { Visualizations } from 'visualizations/App.fsproj';
 export default {
   name: 'ChartEmbed',
   async mounted() {
-    //console.log(this.$route.params, this.$route.query)
+    // console.log(this.$route.params, this.$route.query)
     this.$nextTick(() => {
       /* Available charts:
          - MetricsComparison
@@ -28,7 +28,7 @@ export default {
          - AgeGroups
          - Hospitals
       */
-      Visualizations('visualizations', this.$route.params.type);
+      Visualizations('visualizations', this.$route.query, this.$route.params.type);
     });
   },
 };

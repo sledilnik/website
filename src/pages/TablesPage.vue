@@ -214,7 +214,6 @@ thead .table-b-table-default
         //   padding: 10px 32px 10px 10px
         //   background: $white-gradient
 
-
 .table-grey.b-table-sticky-column
   .text-nowrap
     transform: translateY(-24px)
