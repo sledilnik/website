@@ -87,8 +87,12 @@ $table-border: rgb(222,222 ,222)
     td,
     th
       border: none
-      color: $table-text-c
+      color: $table-text-c !important
       font-size: 14px
+
+      &:not(.b-table-sticky-column)
+        color: rgba(0, 0, 0, 0.7) !important
+
 
   .border
     border: none !important
@@ -163,7 +167,7 @@ thead .table-b-table-default
 .table-wrapper
   .table
     th
-      padding: 0.75rem 31px 0.75rem 0
+      padding: 0.75rem 31px 10px 0
       text-align: left
 
       @include mobile-break
