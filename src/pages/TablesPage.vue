@@ -54,6 +54,10 @@ $white-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255
 $table-text-c: rgba(0, 0, 0, 0.75)
 $table-border: rgb(222,222 ,222)
 
+@mixin mobile-break
+  @media only screen and (min-width: 768px)
+    @content
+
 .table-container
   margin: -24px auto 0
   max-width: 1110px
@@ -149,18 +153,17 @@ $table-border: rgb(222,222 ,222)
 .b-table-sticky-header.table-responsive
   height: 72vh
 
-//top left cell
-thead .table-grey.b-table-sticky-column
-  background-image: none !important
-  background: rgba(255,255 ,255 ,0.9)
-  z-index: 3 !important
-  border-bottom: 1px solid $table-border
-  .text-nowrap
-    display: none
+tr:hover
+  .table-b-table-default.b-table-sticky-column
+    background: #fff !important
 
 thead .table-b-table-default
-  background: $white-gradient !important
+  background: white !important
+  z-index: 5 !important
   border-bottom: 1px solid $table-border !important
+
+  // @include mobile-break
+  //   background: $white-gradient !important
 
 .text-nowrap
   color: $table-text-c
@@ -169,33 +172,48 @@ thead .table-b-table-default
 .table-wrapper
   .table
     th
-      padding-right: 0.75rem
-      text-align: right
+      padding: 0.75rem 31px 0.75rem 0
+      text-align: left
       &:first-child
         div
           width: 150px
     tr:hover
-      background: inherit !important
+      background: rgba(0, 0, 0, 0.03)
 
-      .table-b-table-default
-        background: $white-gradient !important
+      .b-table-sticky-column
+        background: none !important
 
+    thead tr:hover
+      background: #fff !important
+      .b-table-sticky-column
+        background: #fff !important
 
     td
       min-width: 95px
       white-space: nowrap
-      padding: 10px 0.75rem 10px 0.75rem
-      text-align: right
+      padding: 38px 31px 10px 0
+      text-align: left
       border-bottom: 1px solid $table-border
 
+      // @include mobile-break
+      //   padding: 10px 0.75rem 10px 0
+
       &:nth-child(even)
-        background-color: rgba(0, 0, 0, 0.03)
+        background: none
+
+        // @include mobile-break
+        //   background-color: rgba(0, 0, 0, 0.03)
 
     td[aria-colindex="1"].b-table-sticky-column
-        padding: 10px 32px 10px 10px
+        padding: 10px 32px 38px 0px
         font-weight: bold
         text-align: left
-        background: $white-gradient
+        background: none
+
+        // @include mobile-break
+        //   padding: 10px 32px 10px 10px
+        //   background: $white-gradient
+
 
 .table-grey.b-table-sticky-column
   .text-nowrap
