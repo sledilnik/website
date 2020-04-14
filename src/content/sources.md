@@ -11,8 +11,8 @@
 | [Ministrstvo za zdravje RS](https://www.gov.si/novice/?org[]=33) ([Tw](https://twitter.com/MinZdravje/with_replies))           | [CZ Sežana](https://www.facebook.com/civilnazascitasezana/)                               |
 | [Tomaž Gantar - minister za zdravje](https://twitter.com/tomazgantar)                                                          | [CZ Žiri](https://www.facebook.com/groups/civilnazascitaziri/)                            |
 | [Jelko Kacin - govorec Vlade RS za COVID-19](https://twitter.com/GovorecCOVID19/with_replies)                                  | [CZ Logatec](https://www.facebook.com/zascitaresevanjeLogatec/)                           |
-| [Krizni štab RS](https://twitter.com/KrizniStabRS/with_replies) - ukinjen                                                      |
 | [Uprava RS za zaščito in reševanje](https://twitter.com/URS_ZR/with_replies)                                                   | [CZ Vrhnika](https://www.facebook.com/Civilna-za%C5%A1%C4%8Dita-Vrhnika-107764814187703/) | [CZ Gorenjska](https://www.facebook.com/stabczgorenjska) |
+| [Krizni štab RS](https://twitter.com/KrizniStabRS/with_replies) - ukinjen                                                      |
 
 <br>
 
@@ -24,7 +24,7 @@
 | [SB Celje](https://twitter.com/CeljeSb/with_replies)                             | [Dnevnik](https://www.dnevnik.si/slovenija)                                                                                                          |
 | [SB Novo Mesto](https://twitter.com/sbnovomesto/with_replies)                    | [Večer](https://www.vecer.com/koronavirus-novice)                                                                                                    |
 | [SB Brežice](https://www.sb-brezice.si/)                                         | [Žurnal24](https://www.zurnal24.si/slovenija)                                                                                                        |
-| [SB Izola](https://www.sb-izola.si/si/aktualno/)                                 | [STA](https://www.sta.si/slovenija)                                                                                                                  |
+| [SB Izola](https://www.sb-izola.si/si/aktualno/)                                 | [STA](https://www.sta.si/v-srediscu/koronavirus2020)                                                                                                                  |
 | [SB Jesenice](https://www.sb-je.si/aktualno/aktualne_novice/)                    | [Pod črto](https://podcrto.si/dosje/koronavirus/)  ([Tw](https://twitter.com/podcrto?lang=en))                                                       |
 | [SB Murska Sobota](https://www.sb-ms.si/mediji-in-javnost/sporocila-za-javnost/) | [Necenzurirano](https://necenzurirano.si/clanek/aktualno/dosje-zbirno-o-koronavirusu-763944) ([Tw](https://twitter.com/necenzurirano_/with_replies)) |
 | [SB Ptuj](http://www.sb-ptuj.si/aktualno/novice/novice/)                         |                                                                                                                                                      |
