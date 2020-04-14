@@ -41,14 +41,14 @@ module Series =
 
     // color, dash, name
     let getSeriesInfo = function
-        | OutOfHospital -> "#20b16d", "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
-        | InHospital    -> "#be7a2a", "cs-inHospital", "Hospitalizirani (trenutno)"
-        | AllInHospital -> "#de9a5a", "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
-        | Icu           -> "#bf5747", "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
-        | Critical      -> "#d99a91", "cs-critical", "Na respiratorju (trenutno)"
-        | Deceased      -> "#666666", "cs-deceasedToDate", "Umrli (skupaj)"
-        | Hospital      -> "#be772a", "cs-hospital", "Hospitalizirani"
-        | Home          -> "#003f5c", "cs-home", "Doma"
+        | OutOfHospital -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
+        | AllInHospital -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
+        | InHospital    -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani (trenutno)"
+        | Icu           -> "#bf5747", Solid, "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
+        | Critical      -> "#d99a91", Solid, "cs-critical", "Na respiratorju (trenutno)"
+        | Deceased      -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
+        | Hospital      -> "#be772a", Solid, "cs-hospital", "Hospitalizirani"
+        | Home          -> "#003f5c", Solid, "cs-home", "Doma"
 
 type State = {
     scaleType : ScaleType
@@ -168,11 +168,12 @@ let renderChartOptions (state : State) =
             | Hospital      -> fun ps -> ps.JsDate12h, failwithf "home & hospital"
             | Home          -> fun ps -> ps.JsDate12h, failwithf "home & totals"
 
-        let color, className, name = Series.getSeriesInfo series
+        let color, line, className, name = Series.getSeriesInfo series
 
         {|
             visible = state.activeSeries |> Set.contains series
             color = color
+            dashStyle = line |> DashStyle.toString
             name = name
             //className = className
             data =
