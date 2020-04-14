@@ -2,7 +2,7 @@
   <div class="container">
     <div class="d-flex embed-controls">
       <div class="p-3">
-        <h2>Izberite graf</h2>
+        <h1>Vgradite graf v vašo spletno stran</h1>
         <b-form-select v-model="chosenChartValue" :options="charts"></b-form-select>
       </div>
       <div class="p-3">
@@ -52,10 +52,20 @@ export default {
           text: 'Prirast potrjeno okuženih',
           dimensions: [1140, 630]
         },
+        "Infections": {
+          value: "Infections",
+          text: 'Struktura potrjeno okuženih',
+          dimensions: [1140, 740]
+        },
         "Regions": {
           value: "Regions",
           text: 'Potrjeno okuženi po regijah',
           dimensions: [1140, 720]
+        },
+        "Map": {
+          value: "Map",
+          text: 'Zemljevid potrjeno okuženih po občinah',
+          dimensions: [1140, 820]
         },
         "Municipalities": {
           value: "Municipalities",
@@ -67,16 +77,11 @@ export default {
           text: 'Potrjeno okuženi po starostnih skupinah',
           dimensions: [1140, 650]
         },
-        "Hospitals": {
-          value: "Hospitals",
-          text: 'Kapacitete bolnišnic',
-          dimensions: [1140, 1300]
-        },
-        "Map": {
-          value: "Map",
-          text: 'Zemljevid potrjeno okuženih po občinah',
-          dimensions: [1140, 820]
-        },
+//        "Hospitals": {
+//          value: "Hospitals",
+//          text: 'Kapacitete bolnišnic',
+//          dimensions: [1140, 1300]
+//        },
       }
     };
   },

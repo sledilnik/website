@@ -52,7 +52,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 
 ## Uporaba grafov in vizualizacij
 
-[Naše grafe in prikaze](#/stats) lahko na svojo spletni strani uporabite tudi vi. Vgradite lahko  poljuben graf ali prikaz; opis, kako to storite, lahko najdete [na strani s primeri](https://github.com/slo-covid-19/website/tree/master/examples); če želite objavo vašega projekta na naši strani, nas prosimo kontaktirajte. 
+[Naše grafe in prikaze](#/stats) lahko na svojo spletni strani uporabite tudi vi. Vgradite lahko  poljuben graf ali prikaz; opis, kako to storite, lahko najdete [na strani s primeri](#/embed); če želite objavo vašega projekta na naši strani, nas prosimo kontaktirajte. 
 
 ## Uporaba podatkov
 
