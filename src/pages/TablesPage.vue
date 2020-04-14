@@ -29,27 +29,28 @@
 </template>
 
 <script>
-import TestsInfectionsTable from "../components/tables/TestsInfections";
-import RegionalOverviewTable from "../components/tables/RegionalOverview";
-import AgeGroupsMalesTable from "../components/tables/AgeGroupsMales";
-import AgeGroupsFemalesTable from "../components/tables/AgeGroupsFemales";
+import TestsInfectionsTable from '../components/tables/TestsInfections';
+import RegionalOverviewTable from '../components/tables/RegionalOverview';
+import AgeGroupsMalesTable from '../components/tables/AgeGroupsMales';
+import AgeGroupsFemalesTable from '../components/tables/AgeGroupsFemales';
 
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 export default {
   components: {
     TestsInfectionsTable,
     RegionalOverviewTable,
     AgeGroupsMalesTable,
-    AgeGroupsFemalesTable
+    AgeGroupsFemalesTable,
   },
   data: function() {
     return {
-      tableHeight: "100%"
+      tableHeight: '100%',
     };
-  }
+  },
 };
 </script>
 <style scopped lang="sass">
+$white-gradient: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 80%, rgba(255,255,255,0) 100%, rgba(255,255,255,1) 100%)
 $table-text-c: rgba(0, 0, 0, 0.75)
 $table-border: rgb(222,222 ,222)
 
@@ -158,8 +159,7 @@ thead .table-grey.b-table-sticky-column
     display: none
 
 thead .table-b-table-default
-  background: rgba(255,255 ,255 ,1) !important
-  z-index: 4 !important
+  background: $white-gradient !important
   border-bottom: 1px solid $table-border !important
 
 .text-nowrap
@@ -175,9 +175,11 @@ thead .table-b-table-default
         div
           width: 150px
     tr:hover
-      background: #ffd92242 !important
-      td
-        background-color: inherit
+      background: inherit !important
+
+      .table-b-table-default
+        background: $white-gradient !important
+
 
     td
       min-width: 95px
@@ -185,21 +187,22 @@ thead .table-b-table-default
       padding: 10px 0.75rem 10px 0.75rem
       text-align: right
       border-bottom: 1px solid $table-border
-      &:first-child
-        border-right: 1px solid #dedede
 
-      &:nth-child(odd)
-        background-color: #fafafa
+      &:nth-child(even)
+        background-color: rgba(0, 0, 0, 0.03)
 
-    td[aria-colindex="1"]
-        padding: 10px 24px 10px 10px
+    td[aria-colindex="1"].b-table-sticky-column
+        padding: 10px 32px 10px 10px
         font-weight: bold
         text-align: left
+        background: $white-gradient
 
 .table-grey.b-table-sticky-column
   .text-nowrap
     transform: translateY(-24px)
     font-weight: bold
+
+
 
 .footnote
   font-size: 13px
