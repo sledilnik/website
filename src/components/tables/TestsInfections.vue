@@ -39,8 +39,9 @@ export default {
         "state.in_hospital",
         "state.icu",
         "state.critical",
-        "state.deceased.todate",
+        "state.in_hospital.todate",
         "state.out_of_hospital.todate",
+        "state.deceased.todate",
         "state.recovered.todate",
       ]
     };

@@ -7,6 +7,7 @@
   "state.icu": "V intenzivni enoti (trenutno)",
   "state.critical": "Na respiratorju (trenutno)",
   "state.deceased.todate": "Umrli (skupaj)",
+  "state.in_hospital.todate": "Hospitalizirani (skupaj)",
   "state.out_of_hospital.todate": "Odpuščeni iz bolnišnice (skupaj)",
   "state.recovered.todate": "Ozdraveli (skupaj)",
   "age.male.todate": "Skupno",
