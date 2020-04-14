@@ -1,8 +1,8 @@
 {
   "tests.performed": "Testiranja (na dan)",
   "tests.performed.todate": "Testiranja (skupaj)",
-  "tests.positive": "Potrjeno okuženi (na dan)",
-  "tests.positive.todate": "Potrjeno okuženi (skupaj)",
+  "cases.confirmed": "Potrjeno okuženi (na dan)",
+  "cases.confirmed.todate": "Potrjeno okuženi (skupaj)",
   "state.in_hospital": "Hospitalizirani (trenutno)",
   "state.icu": "V intenzivni enoti (trenutno)",
   "state.critical": "Na respiratorju (trenutno)",

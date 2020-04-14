@@ -34,8 +34,8 @@ export default {
       dimensions: [
         "tests.performed",
         "tests.performed.todate",
-        "tests.positive",
-        "tests.positive.todate",
+        "cases.confirmed",
+        "cases.confirmed.todate",
         "state.in_hospital",
         "state.icu",
         "state.critical",
