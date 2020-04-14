@@ -63,7 +63,7 @@ $table-border: rgb(222,222 ,222)
   max-width: 1110px
   background: #fff
 
-  @media only screen and (min-width: 768px)
+  @include mobile-break
     position: static
     background: none
     padding: 0 15px
@@ -73,14 +73,14 @@ $table-border: rgb(222,222 ,222)
   background: #fff
   padding: 30px 0 15px 15px
 
-  @media only screen and (min-width: 768px)
+  @include mobile-break
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
     padding: 32px 0 32px 32px
 
   h1
     margin-bottom: 32px
 
-    @media only screen and (min-width: 768px)
+    @include mobile-break
       margin-bottom: 48px
 
   .table-bordered
@@ -101,7 +101,7 @@ $table-border: rgb(222,222 ,222)
   margin: 0 0 28px
   border: none
 
-  @media only screen and (min-width: 768px)
+  @include mobile-break
     margin: 0 0 48px
 
   .nav-item
@@ -110,10 +110,10 @@ $table-border: rgb(222,222 ,222)
       white-space: nowrap
 
     & + .nav-item
-      @media only screen and (min-width: 768px)
+      @include mobile-break
         margin-left: 32px
 
-    @media only screen and (min-width: 768px)
+    @include mobile-break
       flex: none
       margin-bottom: 0
 
@@ -159,54 +159,66 @@ thead .table-b-table-default
   z-index: 5 !important
   border-bottom: 1px solid $table-border !important
 
+  &.b-table-sticky-column
+    @include mobile-break
+      z-index: 6 !important
+      background: $white-gradient !important
+
 .text-nowrap
   color: $table-text-c
   font-size: 14px
   font-weight: 600
+
 .table-wrapper
   .table
     th
       padding: 0.75rem 31px 0.75rem 0
       text-align: left
+
+      @include mobile-break
+        padding: 12px 7px 18px 7px
+
       &:first-child
         div
           width: 150px
+
     tr:hover
-      background: rgba(0, 0, 0, 0.03)
+      background: none
 
       .b-table-sticky-column
-        background: none !important
+        @include mobile-break
+          background: $white-gradient !important
 
     thead tr:hover
       background: #fff !important
+
       .b-table-sticky-column
         background: #fff !important
 
     td
-      min-width: 95px
       white-space: nowrap
       padding: 38px 31px 10px 0
       text-align: left
       border-bottom: 1px solid $table-border
 
-      // @include mobile-break
-      //   padding: 10px 0.75rem 10px 0
+      @include mobile-break
+        padding: 12px 7px
 
       &:nth-child(even)
         background: none
 
-        // @include mobile-break
-        //   background-color: rgba(0, 0, 0, 0.03)
+        @include mobile-break
+          background-color: rgba(0, 0, 0, 0.03)
 
     td[aria-colindex="1"].b-table-sticky-column
         padding: 10px 32px 38px 0px
         font-weight: bold
         text-align: left
-        background: none
+        background: none !important
 
-        // @include mobile-break
-        //   padding: 10px 32px 10px 10px
-        //   background: $white-gradient
+        @include mobile-break
+          padding: 10px 64px 10px 10px
+          background: $white-gradient !important
 
 .table-grey.b-table-sticky-column
   .text-nowrap
@@ -219,7 +231,7 @@ thead .table-b-table-default
   font-size: 13px
   margin-top: 15px
 
-  @media only screen and (min-width: 768px)
+  @include mobile-break
     margin-top: 32px
 
 //alternating color
@@ -233,6 +245,6 @@ thead .table-b-table-default
 #app.tables
   background: #fff
 
-  @media only screen and (min-width: 768px)
+  @include mobile-break
     background: $background
 </style>
