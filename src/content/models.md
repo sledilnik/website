@@ -25,3 +25,6 @@ Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projec
 <a href="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png" class="img-link">
 <img alt="SEIR model" src="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png"></a>
 
+## Drugi modeli za Slovenijo
+
+-  [Dr. Matjaž Leskovar](http://r4.ijs.si/leskovar) z Odseka za reaktorsko tehniko Instituta Jožef Stefan pripravlja napoved razvoja epidemije v Sloveniji glede na javno dostopne podatke o potrjenih okužbah in trenutni zasedenosti bolnišnic. Na voljo je [opis modela, s povezavo na izvorno datoteko](http://r4.ijs.si/COVID19model), [arhiv napovedi](http://r4.ijs.si/COVID19arhiv) in [prikaz zadnjih rezultatov](http://r4.ijs.si/COVID19).
