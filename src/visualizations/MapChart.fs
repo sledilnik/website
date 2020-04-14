@@ -97,8 +97,8 @@ let chartLoadedEvent () =
 let renderMap state =
     let header =
         match state.DisplayType with
-        | AbsoluteValues -> ("Občina", "Ime", "Potrjeno okuženi skupaj", "Delež potrjeno okuženih")
-        | RegionPopulationWeightedValues -> ("Občina", "Ime", "Delež potrjeno okuženih", "Potrjeno okuženi skupaj")
+        | AbsoluteValues -> ("Občina", "Ime", "Potrjeno okuženi skupaj", "Delež")
+        | RegionPopulationWeightedValues -> ("Občina", "Ime", "Delež", "Potrjeno okuženi skupaj")
         |> box
 
     let data =
@@ -107,8 +107,9 @@ let renderMap state =
             for region in lastDataPoint.Regions do
                 for municipality in region.Municipalities do
                     let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
-                    let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
-                    let weightedFmt = sprintf "%d na 100.000 prebivalcev" weighted
+                    let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation 
+                    let weightedF = float weighted / 1000.0
+                    let weightedFmt = sprintf "%.3f%% od %d prebivalcev" weightedF municipality.Municipality.Population
                     match state.DisplayType with
                     | AbsoluteValues ->
                         // how to render logarithmic color scale:
