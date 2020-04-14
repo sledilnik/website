@@ -72,6 +72,11 @@ export default {
           text: 'Kapacitete bolnišnic',
           dimensions: [1140, 1300]
         },
+        "Map": {
+          value: "Map",
+          text: 'Zemljevid potrjeno okuženih po občinah',
+          dimensions: [1140, 820]
+        },
       }
     };
   },
