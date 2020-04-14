@@ -7,7 +7,7 @@
 You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `iframe`. 
 For example, see `example.html` in this directory.
 
-### Charts
+## Charts
 
 | Chart | Url |
 | ----- | --- |
@@ -20,6 +20,32 @@ For example, see `example.html` in this directory.
 | Potrjeno okuženi po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 
+### Municipalities: filter specific region or change sort order
+Parameters:
+
+`sort`=
+- `total-positive-tests`
+- `time-to-double`
+
+`region`=
+- `ms` (Pomurska)
+- `mb` (Podravska)
+- `sg` (Koroška)
+- `ce` (Savinjska)
+- `za` (Zasavska)
+- `kk` (Posavska)
+- `nm` (Jugovzhodna Slovenija)
+- `lj` (Osrednjeslovenska)
+- `kr` (Gorenjska)
+- `po` (Primorsko-notranjska)
+- `ng` (Goriška)
+- `kp` (Obalno-kraška)
+
+| Chart | Url |
+| ----- | --- |
+| Občine - Pomurska | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms |
+| Občine - Savinjska, podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=time-to-double |
+| Občine - podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double |
 
 ### Resize
 
