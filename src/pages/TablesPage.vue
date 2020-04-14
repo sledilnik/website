@@ -78,10 +78,10 @@ $table-border: rgb(222,222 ,222)
     padding: 32px 0 32px 32px
 
   h1
-    margin-bottom: 32px
+    margin-bottom: 30px
 
     @include mobile-break
-      margin-bottom: 48px
+      margin-bottom: 32px
 
   .table-bordered
     td,
@@ -103,11 +103,11 @@ $table-border: rgb(222,222 ,222)
   overflow-x: scroll
   display: flex
   flex-wrap: nowrap
-  margin: 0 0 28px
+  margin: 0 0 26px
   border: none
 
   @include mobile-break
-    margin: 0 0 48px
+    margin: 0 0 32px
 
   .nav-item
     a
