@@ -17,10 +17,11 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 
 
 ## SEIR model
-V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji. 
+V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji.
 
-Model lahko tudi sami [preizkusite](https://pacs.zf.uni-lj.si/statistika/zadnja-simulacija-covid19/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
+Zadnje simulacije modela si lahko ogledate  [na spletni strani](https://pacs.zf.uni-lj.si/shinyR/apps/projects/CoronaSim/). 
+Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projects/CoronaSim5/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
 
-<a href="https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png" class="img-link">
-<img alt="SEIR model" src="https://pacs.zf.uni-lj.si/wp-content/uploads/2020/04/zadnja-simulacija.png"></a>
+<a href="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png" class="img-link">
+<img alt="SEIR model" src="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png"></a>
 
