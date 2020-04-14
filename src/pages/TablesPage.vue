@@ -150,9 +150,6 @@ $table-border: rgb(222,222 ,222)
 .tabs *:focus
   outline: none
 
-.b-table-sticky-header.table-responsive
-  height: 72vh
-
 tr:hover
   .table-b-table-default.b-table-sticky-column
     background: #fff !important
@@ -161,9 +158,6 @@ thead .table-b-table-default
   background: white !important
   z-index: 5 !important
   border-bottom: 1px solid $table-border !important
-
-  // @include mobile-break
-  //   background: $white-gradient !important
 
 .text-nowrap
   color: $table-text-c
