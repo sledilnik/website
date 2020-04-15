@@ -289,8 +289,9 @@ let renderMunicipalities (state : State) dispatch =
                         | None -> None
                         | Some totalPositiveTests -> Some {| Date = dp.Date ; TotalPositiveTests = totalPositiveTests |})
                     |> Seq.sortBy (fun dp -> dp.Date)
-                    |> Seq.last
-                let t1, t2 = (lastDataPoint m1).TotalPositiveTests, (lastDataPoint m2).TotalPositiveTests
+                    |> Seq.tryLast
+                let t1 = lastDataPoint m1 |> Option.map (fun m -> m.TotalPositiveTests) |> Option.defaultValue 0
+                let t2 = lastDataPoint m2 |> Option.map (fun m -> m.TotalPositiveTests) |> Option.defaultValue 0
                 if t1 > t2 then -1
                 else if t1 < t2 then 1
                 else
