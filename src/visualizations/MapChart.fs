@@ -107,11 +107,11 @@ let renderMap state =
             for region in lastDataPoint.Regions do
                 for municipality in region.Municipalities do
                     let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
-                    let absoluteFmt = Option.defaultValue 0 municipality.TotalPositiveTests
                     let absoluteFmt = sprintf "%d od %d prebivalcev" absolute municipality.Municipality.Population
                     let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation 
-                    let weightedF = float weighted / 1000.0
-                    let weightedFmt = sprintf "%.3f%%" weightedF
+                    let weightedD = weighted / 1000
+                    let weightedR = weighted % 1000
+                    let weightedFmt = sprintf "%d,%d %%" weightedD weightedR
                     match state.DisplayType with
                     | AbsoluteValues ->
                         // how to render logarithmic color scale:
