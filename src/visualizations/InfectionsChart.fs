@@ -201,7 +201,7 @@ let render state dispatch =
         Html.div [
             prop.className "disclaimer"
             prop.children [
-                Html.span "Prosimo, upoštevajte, da dnevni podatki o zdravstvenih delavcih (modri stolpci) morda niso povsem zanesljivi - v vsakem primeru pa so konzervativna ocena. Graf bomo dopolnili, ko bomo zbrali podrobnejše podatke."
+                Html.span "Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev zelo konzervativna ocena."
             ]
         ]
     ]
