@@ -48,7 +48,7 @@ Nihče oz. ne. Sledilnik je neprofitna pobuda, ustvarjena kot podpora sprotnemu 
 <details>
   <summary>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
 
-Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)) . Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, cel projekt pa odprt in na voljo na [GitHubu - Sledilnik](https://github.com/slo-covid-19).
+Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)). Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, projekt pa je odprt in na voljo na [GitHubu - Sledilnik](https://github.com/slo-covid-19).
 </details>
 
 ## O podatkih
@@ -94,9 +94,9 @@ Podatek **Odpuščeni iz bolnišnice** je Sledilnikova ocena, izračunana na pod
 <details>
   <summary>Zakaj je prikazano število ozdravelih manjše od števila odpuščenih iz bolnišnične oskrbe?</summary>
   
-Sledilnik se pri številu ozdravelih zanaša na uradne vire (Vlada RS, mediji). Poročanja o ozdravljenih so žal redka - za zdaj imamo samo par potrjenih virov o ozdravljenih. 
+Sledilnik se pri številu ozdravelih zanaša na uradne vire (Vlada RS, mediji). Poročanja o ozdravljenih so žal redka – za zdaj imamo samo par potrjenih virov o ozdravljenih. 
 
-Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) iz katerih bi lahko sklepali, kdaj se oseba obravnava kot ozdravljena. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res ozdravljeni ali pa so bili zaradi izboljšanja napoteni domov v nadaljnjo karanteno/samoizolacijo, dokler se ne ponovi testiranje. Prav tako ne vemo, ali tovrstne paciente ponovno testirajo po koncu bolezni.
+Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih bi lahko sklepali, kdaj se oseba obravnava kot ozdravljena in je sposobna za vrnitev na delo: za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res ozdravljeni. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo.  
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o več ozdravelih, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo ozdravele skupaj s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, ju v Sledilniku prikazujemo ločeno.
 </details>
@@ -135,7 +135,7 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 <details>
   <summary>Lahko uporabim vaše grafe na svoji strani? Kako?</summary>
     
-Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz - ob navedbi vira, seveda. Kako, najdete [na strani z primeri](#/embed). O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav]([https://covid-19.sledilnik.org/#/links](https://covid-19.sledilnik.org/#/links)). 
+Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz – ob navedbi vira, seveda. [Kliknite sem](#/embed) in s seznama izberite graf, ki ga želite vgraditi. O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav]([https://covid-19.sledilnik.org/#/links](https://covid-19.sledilnik.org/#/links)). 
 </details>
 
 <details>
