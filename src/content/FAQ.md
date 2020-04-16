@@ -184,7 +184,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 
 <details>
-  <summary>Kaj pomenijo različne faze (faze 1–faza 3), ki jih vidimo v grafih?</summary>
+  <summary>Kaj pomenijo različne faze (faze 1–faza 4), ki jih vidimo v grafih?</summary>
 
 Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).
  
@@ -193,7 +193,9 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 2 (13.–19. marec 2020)**: Spremeni se [metodologija testiranja](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/), uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.
  
-* **Faza 3 (20. marec–danes)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
+* **Faza 3 (20. marec–7.april)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
+
+* **Faza 4 (8. marec–danes)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/145-Dopolnitev-navodil-glede-testiranja-na-COVID-19.pdf) - dodatno se testiranjo osebe iz gospodinjstev kjer je več oseb z okužbo dihal.
 </details>
 
 <details>
