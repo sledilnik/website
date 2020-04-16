@@ -111,7 +111,7 @@ let renderMap state =
                     let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation 
                     let weightedD = weighted / 1000
                     let weightedR = weighted % 1000
-                    let weightedFmt = sprintf "%d,%d %%" weightedD weightedR
+                    let weightedFmt = sprintf "%d,%03d %%" weightedD weightedR
                     match state.DisplayType with
                     | AbsoluteValues ->
                         // how to render logarithmic color scale:
