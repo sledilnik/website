@@ -94,7 +94,9 @@ Podatek **Odpuščeni iz bolnišnice** je Sledilnikova ocena, izračunana na pod
 <details>
   <summary>Zakaj je prikazano število ozdravelih manjše od števila odpuščenih iz bolnišnične oskrbe?</summary>
   
-Sledilnik se pri številu ozdravelih zanaša na uradne vire (Vlada RS). Poročanja o ozdravljenih so žal redka, niti ni uradne, jasne definicije, kdaj se neka oseba obravnava kot ozdravljena. Za zdaj imamo samo par potrjenih virov o ozdravljenih. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res ozdravljeni ali pa so bili zaradi izboljšanja napoteni domov v nadaljnjo karanteno/samoizolacijo, dokler se ne ponovi testiranje. Prav tako ne vemo, ali tovrstne paciente ponovno testirajo po koncu bolezni.
+Sledilnik se pri številu ozdravelih zanaša na uradne vire (Vlada RS, mediji). Poročanja o ozdravljenih so žal redka - za zdaj imamo samo par potrjenih virov o ozdravljenih. 
+
+Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) iz katerih bi lahko sklepali, kdaj se oseba obravnava kot ozdravljena. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res ozdravljeni ali pa so bili zaradi izboljšanja napoteni domov v nadaljnjo karanteno/samoizolacijo, dokler se ne ponovi testiranje. Prav tako ne vemo, ali tovrstne paciente ponovno testirajo po koncu bolezni.
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o več ozdravelih, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo ozdravele skupaj s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, ju v Sledilniku prikazujemo ločeno.
 </details>
