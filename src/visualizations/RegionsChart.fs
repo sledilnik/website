@@ -83,7 +83,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
-let myLoadEvent(name: String) = 
+let myLoadEvent(name: String) =
     let ret(event: Event) =
         let evt = document.createEvent("event")
         evt.initEvent("chartLoaded", true, true);

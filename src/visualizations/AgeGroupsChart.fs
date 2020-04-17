@@ -3,6 +3,7 @@ module AgeGroupsChart
 
 open Browser
 open Feliz
+open Fable.Core.JsInterop
 
 open Types
 open Highcharts
@@ -69,7 +70,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
     {| baseOptions with
         chart = pojo {| ``type`` = "bar" |}
         title = pojo {| text = None |}
-        xAxis = [
+        xAxis = [|
             {| categories = List.toArray categories
                reversed = false
                opposite = false
@@ -80,27 +81,31 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                opposite = true
                labels = {| step = 1 |}
                linkedTo = Some 0 |}
-        ]
+        |]
 
-        yAxis =
-            {| title =
-                {| text = "" |}
-            // labels = {| formatter = function () {| return Math.abs(this.value) + "%" |}
+        yAxis = pojo
+            {| title = {| text = "" |}
+               labels = pojo {| formatter = fun () -> sprintf "%.1f%%" (abs(float jsThis?value)) |}
             |}
 
-        plotOptions =
+        plotOptions = pojo
             {| series =
                 {| stacking = "normal" |} |}
 
-        tooltip = {| enabled = false |}
+        //tooltip = {| enabled = false |}
         // tooltip =
         //     {| formatter = fun () ->
         //         return "<b>" + this.series.name + ", age " + this.point.category + "</b><br/>" +
         //             "Population = " + Highcharts.numberFormat(Math.abs(this.point.y), 1) + "%";
         //     |}
+        tooltip = pojo
+            {| formatter = fun () ->
+                sprintf "<b>%s, age %s</b><br/>Population = %.1f%%" jsThis?series?name jsThis?point?category (abs(float jsThis?point?y))
+            |}
 
-        series = [
+        series = [|
             {| name = "Male"
+               xAxis = 0
                data =
                 [ -2.2 ; -2.1 ; -2.2 ; -2.4
                   -2.7 ; -3.0 ; -3.3 ; -3.2
@@ -109,12 +114,14 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                   -1.6 ; -0.6 ; -0.3 ; -0.0
                   -0.0 ] |> List.toArray |}
             {| name = "Female"
+               xAxis = 1
                data =
                 [ 2.1 ; 2.0 ; 2.1 ; 2.3 ; 2.6
                   2.9 ; 3.2 ; 3.1 ; 2.9 ; 3.4
                   4.3 ; 4.0 ; 3.5 ; 2.9 ; 2.5
                   2.7 ; 2.2 ; 1.1 ; 0.6 ; 0.2
-                  0.0 ] |> List.toArray |} ] |> List.toArray
+                  0.0 ] |> List.toArray |}
+        |]
     |}
 
 let renderChartContainer data displayType setDisplayType =
