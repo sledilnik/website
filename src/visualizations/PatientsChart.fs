@@ -206,6 +206,7 @@ let renderChartOptions (state : State) =
             visible = true
             color = color
             name = name
+            dashStyle = Solid |> DashStyle.toString
             //className = "cs-hospital-"+facility
             data =
                 state.data
