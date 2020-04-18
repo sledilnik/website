@@ -18,21 +18,21 @@ type DisplayType =
         | Infections -> "Potrjeno okuženi"
         | Deaths -> "Umrli"
 
-// let renderBreakdownSelector breakdown current choose =
-//     Html.div [
-//         prop.onClick (fun _ -> choose breakdown)
-//         prop.className [ true, "btn btn-sm metric-selector"; breakdown = current, "metric-selector--selected" ]
-//         prop.text (breakdown |> Breakdown.getName)
-//     ]
+let renderDisplayTypeSelector displaytype current choose =
+    Html.div [
+        prop.onClick (fun _ -> choose displaytype)
+        prop.className [ true, "btn btn-sm metric-selector"; displaytype = current, "metric-selector--selected" ]
+        prop.text (displaytype |> DisplayType.getName)
+    ]
 
-// let renderBreakdownSelectors current choose =
-//     Html.div [
-//         prop.className "metrics-selectors"
-//         prop.children (
-//             Breakdown.all
-//             |> List.map (fun breakdown ->
-//                 renderBreakdownSelector breakdown current choose
-//             ) ) ]
+let renderDisplayTypeSelectors current choose =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            DisplayType.all
+            |> List.map (fun displaytype ->
+                renderDisplayTypeSelector displaytype current choose
+            ) ) ]
 
 let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
 
@@ -40,88 +40,69 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
         data
         |> List.rev
         |> List.pick (fun dataPoint ->
-            dataPoint.StatePerAgeToDate
+            let ageGroupsData =
+                match displayType with
+                | Infections -> dataPoint.StatePerAgeToDate
+                | Deaths -> dataPoint.DeceasedPerAgeToDate
+            ageGroupsData
             |> List.filter (fun ageGroup ->
-                match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
+                match ageGroup.Male, ageGroup.Female, ageGroup.All with
                 | None, None, None -> false
                 | _ -> true)
             |> function // take the most recent day with some data
                 | [] -> None
-                | filtered -> Some filtered
+                | filtered -> Some ageGroupsData
         )
 
-    let xAxisDataKey (dp : AgeGroup) =
-        (fun (dp : AgeGroup) ->
-            match dp.AgeFrom, dp.AgeTo with
+    let ageGroups =
+        ageGroupsData
+        |> List.map (fun ag ->
+            match ag.AgeFrom, ag.AgeTo with
             | None, None -> ""
             | None, Some b -> sprintf "0-%d" b
             | Some a, Some b -> sprintf "%d-%d" a b
-            | Some a, None -> sprintf "nad %d" a )
+            | Some a, None -> sprintf "nad %d" a)
+        |> List.toArray
 
-    let categories =
-        [ "0-4" ; "5-9" ; "10-14" ; "15-19"
-          "20-24" ; "25-29" ; "30-34" ; "35-39" ; "40-44"
-          "45-49" ; "50-54" ; "55-59" ; "60-64" ; "65-69"
-          "70-74" ; "75-79" ; "80-84" ; "85-89" ; "90-94"
-          "95-99" ; "100 +" ]
-
-    let baseOptions = basicChartOptions Linear "covid19-age-groups-comparison"
-
-    {| baseOptions with
-        chart = pojo {| ``type`` = "bar" |}
-        title = pojo {| text = None |}
-        xAxis = [|
-            {| categories = List.toArray categories
-               reversed = false
-               opposite = false
-               labels = {| step = 1 |}
-               linkedTo = None |}
-            {| categories = List.toArray categories // mirror axis on right side
-               reversed = false
-               opposite = true
-               labels = {| step = 1 |}
-               linkedTo = Some 0 |}
-        |]
-
-        yAxis = pojo
-            {| title = {| text = "" |}
-               labels = pojo {| formatter = fun () -> sprintf "%.1f%%" (abs(float jsThis?value)) |}
-            |}
-
-        plotOptions = pojo
-            {| series =
-                {| stacking = "normal" |} |}
-
-        //tooltip = {| enabled = false |}
-        // tooltip =
-        //     {| formatter = fun () ->
-        //         return "<b>" + this.series.name + ", age " + this.point.category + "</b><br/>" +
-        //             "Population = " + Highcharts.numberFormat(Math.abs(this.point.y), 1) + "%";
-        //     |}
-        tooltip = pojo
-            {| formatter = fun () ->
-                sprintf "<b>%s, age %s</b><br/>Population = %.1f%%" jsThis?series?name jsThis?point?category (abs(float jsThis?point?y))
-            |}
-
-        series = [|
-            {| name = "Male"
-               xAxis = 0
-               data =
-                [ -2.2 ; -2.1 ; -2.2 ; -2.4
-                  -2.7 ; -3.0 ; -3.3 ; -3.2
-                  -2.9 ; -3.5 ; -4.4 ; -4.1
-                  -3.4 ; -2.7 ; -2.3 ; -2.2
-                  -1.6 ; -0.6 ; -0.3 ; -0.0
-                  -0.0 ] |> List.toArray |}
-            {| name = "Female"
-               xAxis = 1
-               data =
-                [ 2.1 ; 2.0 ; 2.1 ; 2.3 ; 2.6
-                  2.9 ; 3.2 ; 3.1 ; 2.9 ; 3.4
-                  4.3 ; 4.0 ; 3.5 ; 2.9 ; 2.5
-                  2.7 ; 2.2 ; 1.1 ; 0.6 ; 0.2
-                  0.0 ] |> List.toArray |}
-        |]
+    {| chart = pojo {| ``type`` = "bar" |}
+       title = pojo {| text = None |}
+       xAxis = [|
+           {| categories = ageGroups
+              reversed = false
+              opposite = false
+              linkedTo = None |}
+           {| categories = ageGroups // mirror axis on right side
+              reversed = false
+              opposite = true
+              linkedTo = Some 0 |}
+       |]
+       yAxis = pojo
+           {| title = {| text = "" |}
+              labels = pojo {| formatter = fun () -> abs(jsThis?value) |}
+           |}
+       plotOptions = pojo
+           {| series =
+               {| stacking = "normal" |} |}
+       tooltip = pojo
+           {| formatter = fun () ->
+                match displayType with
+                | Infections -> sprintf "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
+                | Deaths -> sprintf "<b>%s</b><br/>Starost: %s<br/>Umrli: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
+           |}
+       series = [|
+           {| name = "Moški"
+              color = "#73ccd5"
+              data =
+               ageGroupsData
+               |> List.map (fun dp -> dp.Male |> Option.map (fun x -> -x))
+               |> List.toArray |}
+           {| name = "Ženske"
+              color = "#d99a91"
+              data =
+               ageGroupsData
+               |> List.map (fun dp -> dp.Female)
+               |> List.toArray |}
+       |]
     |}
 
 let renderChartContainer data displayType setDisplayType =
@@ -136,9 +117,9 @@ let renderChartContainer data displayType setDisplayType =
 
 let render data =
     React.functionComponent (fun () ->
-        let (displayType, setDisplayType) = React.useState Infections
+        let (displayType, setDisplayType) = React.useState Deaths
         Html.div [
             renderChartContainer data displayType setDisplayType
-            // renderBreakdownSelectors breakdown setBreakdown
+            renderDisplayTypeSelectors displayType setDisplayType
         ]
     )

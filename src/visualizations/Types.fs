@@ -30,11 +30,9 @@ type Treatment =
 type AgeGroup =
     { AgeFrom : int option
       AgeTo : int option
-      TestedPositiveMale : int option
-      TestedPositiveFemale : int option
-      TestedPositiveAll : int option }
-
-type StatePerAgeToDate = AgeGroup list
+      Male : int option
+      Female : int option
+      All : int option }
 
 type StatsDataPoint =
     { DayFromStart : int
@@ -46,7 +44,8 @@ type StatsDataPoint =
       PositiveTestsToDate : int option
       Cases : Cases
       StatePerTreatment : Treatment
-      StatePerAgeToDate : StatePerAgeToDate
+      StatePerAgeToDate : AgeGroup list
+      DeceasedPerAgeToDate : AgeGroup list
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
