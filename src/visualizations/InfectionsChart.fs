@@ -38,11 +38,27 @@ module Metrics  =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
-type DisplayType =
-    | Daily
-    | Cummulative
-    | Relative
+type Stacking =
+    | Normal
+    | Percent
 
+type DisplayType = {
+    Label: string
+    IsRelative: bool
+    Stacking: Stacking
+    ShowLegend: bool
+}
+
+let availableDisplayTypes: DisplayType[] = [|
+    { Label = "Skupaj"; IsRelative = false; 
+        Stacking = Normal; ShowLegend = true }
+    { Label = "Po dnevih"; IsRelative = true; 
+        Stacking = Normal; ShowLegend = true }
+    { Label = "Relativno"; IsRelative = true; 
+        Stacking = Percent; ShowLegend = false }
+    { Label = "Skupaj relativno"; IsRelative = false; 
+        Stacking = Percent; ShowLegend = false }
+|]
 
 type State = {
     DisplayType : DisplayType
@@ -55,7 +71,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = Daily
+        DisplayType = availableDisplayTypes.[0]
     }
     state, Cmd.none
 
@@ -101,17 +117,13 @@ let renderChartOptions displayType (data : StatsData) =
                     visible = true
                     color = metric.Color
                     name = metric.Label
-                    //className = metric.Class
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
                         |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
                         |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
                         |> Seq.toArray
-                        |> if displayType<>Cummulative then makeRelative else id
-                    //yAxis = 0 // axis index
-                    //showInLegend = true
-                    //fillOpacity = 0
+                        |> if displayType.IsRelative then makeRelative else id
                 |}
     ]
 
@@ -156,9 +168,15 @@ let renderChartOptions displayType (data : StatsData) =
             |})
         plotOptions = pojo
             {|
-                series = pojo {| stacking = if displayType=Relative then "percent" else "normal" |}
+                series = pojo 
+                    {| 
+                        stacking = 
+                            match displayType.Stacking with
+                            | Normal -> "normal"
+                            | Percent -> "percent"
+                    |}                        
             |}
-        legend = pojo {| legend with enabled = displayType <> Relative |}
+        legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
 
 let renderChartContainer data metrics =
@@ -171,26 +189,23 @@ let renderChartContainer data metrics =
         ]
     ]
 
-let renderDisplaySelectors scaleType dispatch =
-    let renderSelector (scaleType : DisplayType) (currentScaleType : DisplayType) (label : string) =
-        let active = scaleType = currentScaleType
+let renderDisplaySelectors activeDisplayType dispatch =
+    let renderSelector (displayType : DisplayType) =
+        let active = displayType = activeDisplayType
         Html.div [
-            prop.text label
+            prop.text displayType.Label
             prop.className [
                 true, "btn btn-sm metric-selector"
                 active, "metric-selector--selected selected" ]
-            if not active then prop.onClick (fun _ -> dispatch scaleType)
+            if not active then prop.onClick (fun _ -> dispatch displayType)
             if active then prop.style [ style.backgroundColor "#808080" ]
           ]
 
     Html.div [
         prop.className "metrics-selectors"
-        prop.children [
-            //Html.text "Skala na Y osi: "
-            renderSelector Cummulative scaleType "Skupaj"
-            renderSelector Daily scaleType "Po dnevih"
-            renderSelector Relative scaleType "Relativno"
-        ]
+        availableDisplayTypes 
+        |> Array.map renderSelector
+        |> prop.children
     ]
 
 
@@ -208,4 +223,3 @@ let render state dispatch =
 
 let infectionsChart (props : {| data : StatsData |}) =
     React.elmishComponent("InfectionsChart", init props.data, update, render)
-
