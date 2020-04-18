@@ -51,9 +51,9 @@ type DisplayType = {
 
 let availableDisplayTypes: DisplayType array = [|
     { Label = "Skupaj"; IsRelative = false; Stacking = Normal; ShowLegend = true }
-    { Label = "Skupaj relativno"; IsRelative = false;  Stacking = Percent; ShowLegend = false }
+    { Label = "Relativno"; IsRelative = false;  Stacking = Percent; ShowLegend = false }
     { Label = "Po dnevih"; IsRelative = true;  Stacking = Normal; ShowLegend = true }
-    { Label = "Po dnevih relativno"; IsRelative = true;  Stacking = Percent; ShowLegend = false } |]
+    |]
 
 type State = {
     DisplayType : DisplayType
