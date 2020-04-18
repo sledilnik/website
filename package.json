@@ -26,7 +26,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-charts": "^3.0.15",
-    "recharts": "^1.8.5",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.0",
     "vue-moment": "^4.1.0",

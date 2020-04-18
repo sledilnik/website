@@ -108,7 +108,7 @@ let renderMap state =
                 for municipality in region.Municipalities do
                     let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
                     let absoluteFmt = sprintf "%d od %d prebivalcev" absolute municipality.Municipality.Population
-                    let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation 
+                    let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
                     let weightedD = weighted / 1000
                     let weightedR = weighted % 1000
                     let weightedFmt = sprintf "%d,%03d %%" weightedD weightedR

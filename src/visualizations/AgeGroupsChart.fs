@@ -1,109 +1,125 @@
 [<RequireQualifiedAccess>]
 module AgeGroupsChart
 
+open Browser
 open Feliz
+open Fable.Core.JsInterop
 
 open Types
-open Recharts
-open Browser
+open Highcharts
 
-type Breakdown =
-    | Gender
-    | Total
-  with
-    static member all = [ Gender; Total ]
+type DisplayType =
+    | Infections
+    | Deaths
+
+    static member all = [ Infections ; Deaths ]
+
     static member getName = function
-        | Gender -> "Po spolu"
-        | Total -> "Vsi"
+        | Infections -> "Potrjeno okuženi"
+        | Deaths -> "Umrli"
 
-let renderBars (data : StatsData) breakdown =
-    let ageGroupData =
-        data
-        |> List.rev
-        |> List.pick (fun dataPoint ->
-            dataPoint.StatePerAgeToDate
-            |> List.filter (fun ageGroup -> // keep non-empty
-                match ageGroup.TestedPositiveMale, ageGroup.TestedPositiveFemale, ageGroup.TestedPositiveAll with
-                | None, None, None -> false
-                | _ -> true)
-            |> function // take most recent day with some data
-                | [] -> None
-                | filtered -> Some filtered
-        )
-
-    let bars =
-        match breakdown with
-        | Total -> [
-            Recharts.bar [
-                bar.name "Vsi"
-                bar.fill "#d5c768"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveAll |> Option.defaultValue 0)
-            ]]
-        | Gender -> [
-            Recharts.bar [
-                bar.name "Ženske"
-                bar.fill "#d99a91"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveFemale |> Option.defaultValue 0)
-            ]
-
-            Recharts.bar [
-                bar.name "Moški"
-                bar.fill "#73ccd5"
-                bar.dataKey (fun (point : AgeGroup) -> point.TestedPositiveMale |> Option.defaultValue 0)
-            ]]
-
-    Recharts.barChart [
-        barChart.data ageGroupData
-        barChart.maxBarSize 40
-        barChart.barCategoryGapPercentage 15
-        barChart.children ([
-            Recharts.cartesianGrid [ cartesianGrid.strokeDasharray(3, 3) ]
-            Recharts.xAxis [ xAxis.dataKey (fun (point : AgeGroup) ->
-                match point.AgeFrom, point.AgeTo with
-                | None, None -> ""
-                | None, Some b -> sprintf "0-%d" b
-                | Some a, Some b -> sprintf "%d-%d" a b
-                | Some a, None -> sprintf "nad %d" a ) ]
-
-            Recharts.yAxis [ ]
-
-            Recharts.tooltip [ ]
-            Recharts.legend [ ]
-        ] @ bars)
-    ]
-
-let renderChart data breakdown =
-    Recharts.responsiveContainer [
-        responsiveContainer.width (length.percent 100)
-        responsiveContainer.height 450
-        responsiveContainer.chart (renderBars data breakdown) ]
-
-let renderBreakdownSelector breakdown current choose =
+let renderDisplayTypeSelector displaytype current choose =
     Html.div [
-        prop.onClick (fun _ -> choose breakdown)
-        prop.className [ true, "btn btn-sm metric-selector"; breakdown = current, "metric-selector--selected" ]
-        prop.text (breakdown |> Breakdown.getName)
+        prop.onClick (fun _ -> choose displaytype)
+        prop.className [ true, "btn btn-sm metric-selector"; displaytype = current, "metric-selector--selected" ]
+        prop.text (displaytype |> DisplayType.getName)
     ]
 
-let renderBreakdownSelectors current choose =
+let renderDisplayTypeSelectors current choose =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            Breakdown.all
-            |> List.map (fun breakdown ->
-                renderBreakdownSelector breakdown current choose
+            DisplayType.all
+            |> List.map (fun displaytype ->
+                renderDisplayTypeSelector displaytype current choose
             ) ) ]
 
+let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
+
+    let ageGroupsData =
+        data
+        |> List.rev
+        |> List.pick (fun dataPoint ->
+            let ageGroupsData =
+                match displayType with
+                | Infections -> dataPoint.StatePerAgeToDate
+                | Deaths -> dataPoint.DeceasedPerAgeToDate
+            ageGroupsData
+            |> List.filter (fun ageGroup ->
+                match ageGroup.Male, ageGroup.Female, ageGroup.All with
+                | None, None, None -> false
+                | _ -> true)
+            |> function // take the most recent day with some data
+                | [] -> None
+                | filtered -> Some ageGroupsData
+        )
+
+    let ageGroups =
+        ageGroupsData
+        |> List.map (fun ag ->
+            match ag.AgeFrom, ag.AgeTo with
+            | None, None -> ""
+            | None, Some b -> sprintf "0-%d" b
+            | Some a, Some b -> sprintf "%d-%d" a b
+            | Some a, None -> sprintf "nad %d" a)
+        |> List.toArray
+
+    {| chart = pojo {| ``type`` = "bar" |}
+       title = pojo {| text = None |}
+       xAxis = [|
+           {| categories = ageGroups
+              reversed = false
+              opposite = false
+              linkedTo = None |}
+           {| categories = ageGroups // mirror axis on right side
+              reversed = false
+              opposite = true
+              linkedTo = Some 0 |}
+       |]
+       yAxis = pojo
+           {| title = {| text = "" |}
+              labels = pojo {| formatter = fun () -> abs(jsThis?value) |}
+           |}
+       plotOptions = pojo
+           {| series =
+               {| stacking = "normal" |} |}
+       tooltip = pojo
+           {| formatter = fun () ->
+                match displayType with
+                | Infections -> sprintf "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
+                | Deaths -> sprintf "<b>%s</b><br/>Starost: %s<br/>Umrli: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
+           |}
+       series = [|
+           {| name = "Moški"
+              color = "#73ccd5"
+              data =
+               ageGroupsData
+               |> List.map (fun dp -> dp.Male |> Option.map (fun x -> -x))
+               |> List.toArray |}
+           {| name = "Ženske"
+              color = "#d99a91"
+              data =
+               ageGroupsData
+               |> List.map (fun dp -> dp.Female)
+               |> List.toArray |}
+       |]
+    |}
+
+let renderChartContainer data displayType setDisplayType =
+    Html.div [
+        prop.style [ style.height 450 ]
+        prop.className "highcharts-wrapper"
+        prop.children [
+            chartOptions data displayType setDisplayType
+            |> Highcharts.chart
+        ]
+    ]
+
 let render data =
-    let elm = React.functionComponent (fun () ->
-        let (breakdown, setBreakdown) = React.useState Gender
+    React.functionComponent (fun () ->
+        let (displayType, setDisplayType) = React.useState Infections
         Html.div [
-            renderChart data breakdown
-            renderBreakdownSelectors breakdown setBreakdown
+            renderChartContainer data displayType setDisplayType
+            renderDisplayTypeSelectors displayType setDisplayType
         ]
     )
-
-    let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true);
-    document.dispatchEvent(evt) |> ignore
-    elm
