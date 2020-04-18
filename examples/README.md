@@ -1,10 +1,10 @@
 <img src="https://covid-19.sledilnik.org/covid-19-logo.png" width="200">
 
-# Embed Sledilnik.org charts - Examples 
+# Embed Sledilnik.org charts - Examples
 
 ## Embedding visualizations into your webpage
 
-You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `iframe`. 
+You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `iframe`.
 For example, see `embed.html` and `embed_multi.html` in this directory.
 
 ## Charts
@@ -17,7 +17,7 @@ For example, see `embed.html` and `embed_multi.html` in this directory.
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
 | Zemljevid potrjeno okuženih po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Potrjeno okuženi po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
-| Potrjeno okuženi po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
+| Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 
 ### Municipalities: filter specific region or change sort order
@@ -64,6 +64,6 @@ window.addEventListener("message", function(event) {
       }
     });
 </script>
-<iframe id="myFrame" frameBorder="0" width="100%" height="0" name="my-iframe" src="https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison"></iframe> 
+<iframe id="myFrame" frameBorder="0" width="100%" height="0" name="my-iframe" src="https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison"></iframe>
 ...
 ```

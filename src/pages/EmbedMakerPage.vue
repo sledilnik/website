@@ -34,7 +34,7 @@ export default {
       baseEmbedUrl: "https://covid-19.sledilnik.org/embed.html#",
       charts: {
         "empty": {
-          value: null, 
+          value: null,
           text: 'Izberite graf'
         },
         "MetricsComparison": {
@@ -74,7 +74,7 @@ export default {
         },
         "AgeGroups": {
           value: "AgeGroups",
-          text: 'Potrjeno okuženi po starostnih skupinah',
+          text: 'Po starostnih skupinah',
           dimensions: [1140, 650]
         },
 //        "Hospitals": {

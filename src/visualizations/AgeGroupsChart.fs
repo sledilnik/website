@@ -79,6 +79,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
        yAxis = pojo
            {| title = {| text = "" |}
               labels = pojo {| formatter = fun () -> abs(jsThis?value) |}
+              allowDecimals = false
            |}
        plotOptions = pojo
            {| series =

@@ -125,7 +125,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query ; data = data |} |}
           {| Visualization = AgeGroups
              ClassName = "age-groups-chart"
-             Label = "Potrjeno okuženi po starostnih skupinah"
+             Label = "Po starostnih skupinah"
              Explicit = false
              Renderer = fun state ->
                 match state.StatsData with
