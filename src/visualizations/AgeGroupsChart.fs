@@ -117,7 +117,7 @@ let renderChartContainer data displayType setDisplayType =
 
 let render data =
     React.functionComponent (fun () ->
-        let (displayType, setDisplayType) = React.useState Deaths
+        let (displayType, setDisplayType) = React.useState Infections
         Html.div [
             renderChartContainer data displayType setDisplayType
             renderDisplayTypeSelectors displayType setDisplayType
