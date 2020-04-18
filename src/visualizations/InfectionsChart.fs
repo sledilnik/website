@@ -49,16 +49,11 @@ type DisplayType = {
     ShowLegend: bool
 }
 
-let availableDisplayTypes: DisplayType[] = [|
-    { Label = "Skupaj"; IsRelative = false; 
-        Stacking = Normal; ShowLegend = true }
-    { Label = "Po dnevih"; IsRelative = true; 
-        Stacking = Normal; ShowLegend = true }
-    { Label = "Relativno"; IsRelative = true; 
-        Stacking = Percent; ShowLegend = false }
-    { Label = "Skupaj relativno"; IsRelative = false; 
-        Stacking = Percent; ShowLegend = false }
-|]
+let availableDisplayTypes: DisplayType array = [|
+    { Label = "Skupaj"; IsRelative = false; Stacking = Normal; ShowLegend = true }
+    { Label = "Skupaj relativno"; IsRelative = false;  Stacking = Percent; ShowLegend = false }
+    { Label = "Po dnevih"; IsRelative = true;  Stacking = Normal; ShowLegend = true }
+    { Label = "Po dnevih relativno"; IsRelative = true;  Stacking = Percent; ShowLegend = false } |]
 
 type State = {
     DisplayType : DisplayType
@@ -144,7 +139,7 @@ let renderChartOptions displayType (data : StatsData) =
             reversed = true
         |}
 
-    let myLoadEvent(name: String) = 
+    let myLoadEvent(name: String) =
         let ret(event: Event) =
             let evt = document.createEvent("event")
             evt.initEvent("chartLoaded", true, true);
@@ -168,13 +163,13 @@ let renderChartOptions displayType (data : StatsData) =
             |})
         plotOptions = pojo
             {|
-                series = pojo 
-                    {| 
-                        stacking = 
+                series = pojo
+                    {|
+                        stacking =
                             match displayType.Stacking with
                             | Normal -> "normal"
                             | Percent -> "percent"
-                    |}                        
+                    |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
@@ -203,7 +198,7 @@ let renderDisplaySelectors activeDisplayType dispatch =
 
     Html.div [
         prop.className "metrics-selectors"
-        availableDisplayTypes 
+        availableDisplayTypes
         |> Array.map renderSelector
         |> prop.children
     ]
