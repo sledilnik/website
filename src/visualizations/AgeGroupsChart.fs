@@ -51,7 +51,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                 | _ -> true)
             |> function // take the most recent day with some data
                 | [] -> None
-                | filtered -> Some ageGroupsData
+                | _ -> Some ageGroupsData
         )
 
     let ageGroups =
@@ -82,8 +82,9 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
               allowDecimals = false
            |}
        plotOptions = pojo
-           {| series =
-               {| stacking = "normal" |} |}
+           {| series = pojo
+               {| stacking = "normal" |}
+           |}
        tooltip = pojo
            {| formatter = fun () ->
                 match displayType with
@@ -94,8 +95,13 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
            {| name = "Moški"
               color =
                 match displayType with
-                | Infections -> "#73ccd5"
+                | Infections -> "#73CCD5"
                 | Deaths -> "#5FA8AD"
+              dataLabels = pojo
+                {| enabled = true
+                   formatter = fun () -> abs(jsThis?y)
+                   align = "right"
+                   padding = 10 |}
               data =
                ageGroupsData
                |> List.map (fun dp -> dp.Male |> Option.map (fun x -> -x))
@@ -103,8 +109,13 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
            {| name = "Ženske"
               color =
                 match displayType with
-                | Infections -> "#d99a91"
+                | Infections -> "#D99A91"
                 | Deaths -> "#B17E79"
+              dataLabels = pojo
+                {| enabled = true
+                   formatter = fun () -> abs(jsThis?y)
+                   align = "left"
+                   padding = 10 |}
               data =
                ageGroupsData
                |> List.map (fun dp -> dp.Female)
