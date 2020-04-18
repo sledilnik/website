@@ -39,19 +39,19 @@ module Metrics  =
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
 type ValueTypes = Daily | RunningTotals
-type Stacking = Normal | Percent
+type ChartType = StackedBarNormal | StackedBarPercent | LineChart
 
 type DisplayType = {
     Label: string
     ValueTypes: ValueTypes
-    Stacking: Stacking
+    ChartType: ChartType
     ShowLegend: bool
 }
 
 let availableDisplayTypes: DisplayType array = [|
-    { Label = "Po dnevih"; ValueTypes = Daily;  Stacking = Normal; ShowLegend = true }
-    { Label = "Skupaj"; ValueTypes = RunningTotals; Stacking = Normal; ShowLegend = true }
-    { Label = "Relativno"; ValueTypes = RunningTotals;  Stacking = Percent; ShowLegend = false }
+    { Label = "Po dnevih"; ValueTypes = Daily; ChartType = StackedBarNormal; ShowLegend = true }
+    { Label = "Skupaj"; ValueTypes = RunningTotals; ChartType = StackedBarNormal; ShowLegend = true }
+    { Label = "Relativno"; ValueTypes = RunningTotals;  ChartType = StackedBarPercent; ShowLegend = false }
     |]
 
 type State = {
@@ -164,7 +164,11 @@ let renderChartOptions displayType (data : StatsData) =
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = "column" // "spline"
+                ``type`` = 
+                    match displayType.ChartType with
+                    | LineChart -> "line"
+                    | StackedBarNormal -> "column"
+                    | StackedBarPercent -> "column"
                 zoomType = "x"
                 events = {| load = myLoadEvent("infections") |}
             |}
@@ -177,13 +181,11 @@ let renderChartOptions displayType (data : StatsData) =
             |})
         plotOptions = pojo
             {|
-                series = pojo
-                    {|
-                        stacking =
-                            match displayType.Stacking with
-                            | Normal -> "normal"
-                            | Percent -> "percent"
-                    |}
+                series = 
+                match displayType.ChartType with
+                | LineChart -> pojo {| |}
+                | StackedBarNormal -> pojo {| stacking = "normal" |}
+                | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
