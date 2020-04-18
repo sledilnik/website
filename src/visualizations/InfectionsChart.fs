@@ -38,21 +38,20 @@ module Metrics  =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
-type Stacking =
-    | Normal
-    | Percent
+type ValueTypes = Daily | RunningTotals
+type Stacking = Normal | Percent
 
 type DisplayType = {
     Label: string
-    IsRelative: bool
+    ValueTypes: ValueTypes
     Stacking: Stacking
     ShowLegend: bool
 }
 
 let availableDisplayTypes: DisplayType array = [|
-    { Label = "Po dnevih"; IsRelative = true;  Stacking = Normal; ShowLegend = true }
-    { Label = "Skupaj"; IsRelative = false; Stacking = Normal; ShowLegend = true }
-    { Label = "Relativno"; IsRelative = false;  Stacking = Percent; ShowLegend = false }
+    { Label = "Po dnevih"; ValueTypes = Daily;  Stacking = Normal; ShowLegend = true }
+    { Label = "Skupaj"; ValueTypes = RunningTotals; Stacking = Normal; ShowLegend = true }
+    { Label = "Relativno"; ValueTypes = RunningTotals;  Stacking = Percent; ShowLegend = false }
     |]
 
 type State = {
@@ -87,16 +86,33 @@ let renderChartOptions displayType (data : StatsData) =
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
     let metricDataGenerator mc : (StatsDataPoint -> int option) =
-        match mc.Metric with
-        | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate |> Utils.zeroToNone
-        | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate |> Utils.zeroToNone
-        | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate |> Utils.zeroToNone
-        | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate |> Utils.zeroToNone
+        let metricFunc = 
+            match mc.Metric with
+            | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate
+            | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
+            | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate
+            | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate
 
-    let makeRelative (data: (JsTimestamp*int option)[]) =
+        fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
+
+    /// <summary>
+    /// Calculates running totals for a given metric.
+    /// </summary>
+    let calcRunningTotals metric =
+        let pointData = metricDataGenerator metric
+
+        data
+        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
+        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+        |> Seq.toArray
+
+    /// <summary>
+    /// Converts running total series to daily (delta) values.
+    /// </summary>
+    let toDailyValues (series: (JsTimestamp*int option)[]) =
         let mutable last = 0
-        Array.init data.Length (fun i ->
-            match data.[i] with
+        Array.init series.Length (fun i ->
+            match series.[i] with
             | ts, None -> ts, None
             | ts, Some current ->
                 let result = current - last
@@ -106,7 +122,6 @@ let renderChartOptions displayType (data : StatsData) =
 
     let allSeries = [
         for metric in Metrics.all do
-            let pointData = metricDataGenerator metric
             yield pojo
                 {|
                     visible = true
@@ -114,11 +129,10 @@ let renderChartOptions displayType (data : StatsData) =
                     name = metric.Label
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
-                        data
-                        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
-                        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
-                        |> Seq.toArray
-                        |> if displayType.IsRelative then makeRelative else id
+                        let runningTotals = calcRunningTotals metric
+                        match displayType.ValueTypes with
+                        | Daily -> toDailyValues runningTotals
+                        | RunningTotals -> runningTotals
                 |}
     ]
 
