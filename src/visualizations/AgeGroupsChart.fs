@@ -92,13 +92,19 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
            |}
        series = [|
            {| name = "Moški"
-              color = "#73ccd5"
+              color =
+                match displayType with
+                | Infections -> "#73ccd5"
+                | Deaths -> "#5FA8AD"
               data =
                ageGroupsData
                |> List.map (fun dp -> dp.Male |> Option.map (fun x -> -x))
                |> List.toArray |}
            {| name = "Ženske"
-              color = "#d99a91"
+              color =
+                match displayType with
+                | Infections -> "#d99a91"
+                | Deaths -> "#B17E79"
               data =
                ageGroupsData
                |> List.map (fun dp -> dp.Female)
