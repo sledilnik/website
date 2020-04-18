@@ -38,22 +38,21 @@ module Metrics  =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
-type Stacking =
-    | Normal
-    | Percent
+type ValueTypes = Daily | RunningTotals
+type ChartType = StackedBarNormal | StackedBarPercent | LineChart
 
 type DisplayType = {
     Label: string
-    IsRelative: bool
-    Stacking: Stacking
+    ValueTypes: ValueTypes
+    ChartType: ChartType
     ShowLegend: bool
 }
 
 let availableDisplayTypes: DisplayType array = [|
-    { Label = "Skupaj"; IsRelative = false; Stacking = Normal; ShowLegend = true }
-    { Label = "Skupaj relativno"; IsRelative = false;  Stacking = Percent; ShowLegend = false }
-    { Label = "Po dnevih"; IsRelative = true;  Stacking = Normal; ShowLegend = true }
-    { Label = "Po dnevih relativno"; IsRelative = true;  Stacking = Percent; ShowLegend = false } |]
+    { Label = "Po dnevih"; ValueTypes = Daily; ChartType = StackedBarNormal; ShowLegend = true }
+    { Label = "Skupaj"; ValueTypes = RunningTotals; ChartType = StackedBarNormal; ShowLegend = true }
+    { Label = "Relativno"; ValueTypes = RunningTotals;  ChartType = StackedBarPercent; ShowLegend = false }
+    |]
 
 type State = {
     DisplayType : DisplayType
@@ -87,16 +86,33 @@ let renderChartOptions displayType (data : StatsData) =
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
     let metricDataGenerator mc : (StatsDataPoint -> int option) =
-        match mc.Metric with
-        | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate |> Utils.zeroToNone
-        | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate |> Utils.zeroToNone
-        | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate |> Utils.zeroToNone
-        | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate |> Utils.zeroToNone
+        let metricFunc = 
+            match mc.Metric with
+            | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate
+            | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
+            | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate
+            | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate
 
-    let makeRelative (data: (JsTimestamp*int option)[]) =
+        fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
+
+    /// <summary>
+    /// Calculates running totals for a given metric.
+    /// </summary>
+    let calcRunningTotals metric =
+        let pointData = metricDataGenerator metric
+
+        data
+        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
+        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+        |> Seq.toArray
+
+    /// <summary>
+    /// Converts running total series to daily (delta) values.
+    /// </summary>
+    let toDailyValues (series: (JsTimestamp*int option)[]) =
         let mutable last = 0
-        Array.init data.Length (fun i ->
-            match data.[i] with
+        Array.init series.Length (fun i ->
+            match series.[i] with
             | ts, None -> ts, None
             | ts, Some current ->
                 let result = current - last
@@ -106,7 +122,6 @@ let renderChartOptions displayType (data : StatsData) =
 
     let allSeries = [
         for metric in Metrics.all do
-            let pointData = metricDataGenerator metric
             yield pojo
                 {|
                     visible = true
@@ -114,11 +129,10 @@ let renderChartOptions displayType (data : StatsData) =
                     name = metric.Label
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
-                        data
-                        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
-                        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
-                        |> Seq.toArray
-                        |> if displayType.IsRelative then makeRelative else id
+                        let runningTotals = calcRunningTotals metric
+                        match displayType.ValueTypes with
+                        | Daily -> toDailyValues runningTotals
+                        | RunningTotals -> runningTotals
                 |}
     ]
 
@@ -150,7 +164,11 @@ let renderChartOptions displayType (data : StatsData) =
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = "column" // "spline"
+                ``type`` = 
+                    match displayType.ChartType with
+                    | LineChart -> "line"
+                    | StackedBarNormal -> "column"
+                    | StackedBarPercent -> "column"
                 zoomType = "x"
                 events = {| load = myLoadEvent("infections") |}
             |}
@@ -163,13 +181,11 @@ let renderChartOptions displayType (data : StatsData) =
             |})
         plotOptions = pojo
             {|
-                series = pojo
-                    {|
-                        stacking =
-                            match displayType.Stacking with
-                            | Normal -> "normal"
-                            | Percent -> "percent"
-                    |}
+                series = 
+                match displayType.ChartType with
+                | LineChart -> pojo {| |}
+                | StackedBarNormal -> pojo {| stacking = "normal" |}
+                | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}

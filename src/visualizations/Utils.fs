@@ -6,6 +6,9 @@ open Feliz
 
 open Types
 
+/// <summary>
+/// Converts Some 0 value to None.
+/// </summary>
 let zeroToNone value =
     match value with
     | Some 0 -> None
