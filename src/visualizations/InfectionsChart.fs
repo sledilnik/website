@@ -101,9 +101,19 @@ let renderChartOptions displayType (data : StatsData) =
     let calcRunningTotals metric =
         let pointData = metricDataGenerator metric
 
+        let skipLeadingMissing data =
+            data |> List.skipWhile (fun (_,value: 'T option) -> value.IsNone) 
+
+        let skipTrailingMissing data =
+            data
+            |> List.rev
+            |> skipLeadingMissing
+            |> List.rev
+
         data
-        |> Seq.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
-        |> Seq.skipWhile (fun (ts,value) -> value.IsNone)
+        |> List.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
+        |> skipLeadingMissing
+        |> skipTrailingMissing
         |> Seq.toArray
 
     /// <summary>
