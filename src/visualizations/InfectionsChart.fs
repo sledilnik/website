@@ -26,6 +26,9 @@ type MetricCfg = {
 
 type Metrics = MetricCfg list
 
+type DayValueIntMaybe = JsTimestamp*int option
+type DayValueFloat = JsTimestamp*float
+
 module Metrics  =
     let all = [
         { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostale osebe" }
@@ -38,8 +41,8 @@ module Metrics  =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
-type ValueTypes = Daily | RunningTotals
-type ChartType = StackedBarNormal | StackedBarPercent | LineChart
+type ValueTypes = Daily | RunningTotals | MovingAverages
+type ChartType = StackedBarNormal | StackedBarPercent | LineChart | SplineChart
 
 type DisplayType = {
     Label: string
@@ -52,6 +55,7 @@ let availableDisplayTypes: DisplayType array = [|
     { Label = "Po dnevih"; ValueTypes = Daily; ChartType = StackedBarNormal; ShowLegend = true }
     { Label = "Skupaj"; ValueTypes = RunningTotals; ChartType = StackedBarNormal; ShowLegend = true }
     { Label = "Relativno"; ValueTypes = RunningTotals;  ChartType = StackedBarPercent; ShowLegend = false }
+    { Label = "Po dnevih povprečno"; ValueTypes = MovingAverages; ChartType = SplineChart; ShowLegend = true }
     |]
 
 type State = {
@@ -119,7 +123,7 @@ let renderChartOptions displayType (data : StatsData) =
     /// <summary>
     /// Converts running total series to daily (delta) values.
     /// </summary>
-    let toDailyValues (series: (JsTimestamp*int option)[]) =
+    let toDailyValues (series: DayValueIntMaybe[]) =
         let mutable last = 0
         Array.init series.Length (fun i ->
             match series.[i] with
@@ -129,6 +133,27 @@ let renderChartOptions displayType (data : StatsData) =
                 last <- current
                 ts, Some result
         )
+
+    let toFloatValues (series: DayValueIntMaybe[]) =
+        series 
+        |> Array.map (fun (date, value) -> 
+            (date, value |> Option.defaultValue 0 |> float))
+
+    let toMovingAverages (series: DayValueIntMaybe[]): DayValueFloat[] =
+        let daysOfAverage = 5
+
+        let calculateDayAverage (daysValues: DayValueIntMaybe[]) =
+            let (targetDate, _) = daysValues |> Array.last
+            let averageValue = 
+                daysValues
+                |> Seq.averageBy(
+                    fun (_, value) -> 
+                        value |> Option.defaultValue 0 |> float)
+            (targetDate, averageValue)
+
+        series
+        |> Array.windowed daysOfAverage
+        |> Array.map calculateDayAverage
 
     let allSeries = [
         for metric in Metrics.all do
@@ -141,8 +166,11 @@ let renderChartOptions displayType (data : StatsData) =
                     data =
                         let runningTotals = calcRunningTotals metric
                         match displayType.ValueTypes with
-                        | Daily -> toDailyValues runningTotals
-                        | RunningTotals -> runningTotals
+                        | Daily -> toDailyValues runningTotals |> toFloatValues
+                        | RunningTotals -> runningTotals |> toFloatValues
+                        | MovingAverages -> 
+                            runningTotals |> toDailyValues |> toMovingAverages
+                    marker = pojo {| enabled = false |}                     
                 |}
     ]
 
@@ -177,6 +205,7 @@ let renderChartOptions displayType (data : StatsData) =
                 ``type`` = 
                     match displayType.ChartType with
                     | LineChart -> "line"
+                    | SplineChart -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -193,7 +222,8 @@ let renderChartOptions displayType (data : StatsData) =
             {|
                 series = 
                 match displayType.ChartType with
-                | LineChart -> pojo {| |}
+                | LineChart -> pojo {| stacking = "" |}
+                | SplineChart -> pojo {| stacking = ""; |}
                 | StackedBarNormal -> pojo {| stacking = "normal" |}
                 | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
@@ -202,7 +232,7 @@ let renderChartOptions displayType (data : StatsData) =
 
 let renderChartContainer data metrics =
     Html.div [
-        prop.style [ style.height 480 ] //; style.width 500; ]
+        prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
@@ -229,6 +259,18 @@ let renderDisplaySelectors activeDisplayType dispatch =
         |> prop.children
     ]
 
+let disclaimer1 = 
+    @"Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno 
+    na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem 
+    statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene 
+    delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so 
+    dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani 
+    na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev 
+    zelo konzervativna ocena."
+
+let disclaimer2 = 
+    @"Pri grafu 'Po dnevih povprečno' podatki predstavljajo drseča povprečja 
+    zadnjih 5 dni."
 
 let render state dispatch =
     Html.div [
@@ -236,9 +278,9 @@ let render state dispatch =
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
         Html.div [
             prop.className "disclaimer"
-            prop.children [
-                Html.span "Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev zelo konzervativna ocena."
-            ]
+            prop.children [ 
+                Html.div disclaimer1
+                Html.div disclaimer2 ]
         ]
     ]
 
