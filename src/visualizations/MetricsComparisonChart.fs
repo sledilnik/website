@@ -112,17 +112,20 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
 
     let renderFlags startTime =
         let events = [|
-        // day, mo, title,       tooltip text
-            4,  3, "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
-            6,  3, "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
-            8,  3, "Točke",     "16 vstopnih točk za testiranje"
-            10, 3, "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
-            13, 3, "Vlada",     "Sprejeta nova vlada"
-            14, 3, "Prevozi",   "Ukinitev javnih prevozov"
-            16, 3, "Šole",      "Zaprtje šol, restavracij"
-            20, 3, "Zbiranje",  "Prepoved zbiranja na javnih mestih"
-            29, 3, "Trg.",      "Trgovine za upokojence do 10. ure"
-            30, 3, "Občine",    "Prepoved gibanja izven meja občin"
+        // day, mo, color,    title,       tooltip text
+            4,  3, "#FFFFFF", "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
+            6,  3, "#FFe6e6", "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
+            8,  3, "#FFFFFF", "Točke",     "16 vstopnih točk za testiranje"
+            10, 3, "#FFe6e6", "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
+            13, 3, "#FFFFFF", "Vlada",     "Sprejeta nova vlada"
+            14, 3, "#FFe6e6", "Prevozi",   "Ukinitev javnih prevozov"
+            16, 3, "#FFe6e6", "Šole",      "Zaprtje šol, restavracij"
+            20, 3, "#FFe6e6", "Zbiranje",  "Prepoved zbiranja na javnih mestih"
+            29, 3, "#e6f0ff", "Trg.",      "Trgovine za upokojence do 10. ure"
+            30, 3, "#FFe6e6", "Občine",    "Prepoved gibanja izven meja občin"
+            12, 4, "#FFe6e6", "K.7 dni",   "Obvezna 7 dnevna karantena pri prihodu iz tujine"
+            18, 4, "#FFe6e6", "Gibanje",   "Splošna prepoved gibanja in pojasnila glede omejitev gibanja med občinami."
+            20, 4, "#ebfaeb", "Servisi",   "Sproščanje nekaterih dejavnosti (gradnja, servisi, šport na prostem...), linijski prevozi."
         |]
         {|
             ``type`` = "flags"
@@ -130,9 +133,9 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             showInLegend = false
             color = "#444"
             data =
-                events |> Array.choose (fun (d,m,title,text) ->
+                events |> Array.choose (fun (d,m,color,title,text) ->
                     let ts = DateTime(2020,m,d) |> jsTime
-                    if ts >= startTime then Some {| x=ts; title=title; text=text |}
+                    if ts >= startTime then Some {| x=ts; fillColor=color; title=title; text=text |}
                     else None
                 )
         |}
