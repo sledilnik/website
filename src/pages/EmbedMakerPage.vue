@@ -4,15 +4,17 @@
       <div class="p-3">
         <h1>Vgradite graf v vašo spletno stran</h1>
         <b-form-select v-model="chosenChartValue" :options="charts"></b-form-select>
-      </div>
+        Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. 
+        Podrobnejša navodila <a href="https://github.com/slo-covid-19/website/blob/master/examples/README.md">najdete tukaj</a>. 
+          </div>
       <div class="p-3">
-        <h2 v-if="chosenChart">Koda za vdelavo:</h2>
+        <h3 v-if="chosenChart">Koda za vdelavo:</h3>
         <b-form-textarea @click="copy" v-if="chosenChart" v-b-tooltip.bottom.hover :title="tooltipTitle" class="copy-input" id="textarea-plaintext" readonly :value="embedString"></b-form-textarea>
       </div>
     </div>
     <hr>
     <div v-if="chosenChart" class="d-flex flex-column">
-      <h2 class="p-3">Predogled:</h2>
+      <h3 class="p-3">Predogled:</h3>
       <iframe
         :src="embedUrl"
         frameborder="0"
