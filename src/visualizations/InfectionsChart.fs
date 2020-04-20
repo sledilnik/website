@@ -348,10 +348,9 @@ let lastDateOfGraph =
 
 let disclaimer2 = 
     sprintf 
-        @"Pri grafu '%s' podatek za posamezni dan predstavlja drseče povprečje 
+        @"Podatek za posamezni dan predstavlja drseče povprečje 
         %d dni (seštevek vrednosti tega dneva, %d dni pred dnevom 
         in %d dni po tem dnevu, deljen s %d). Zato graf kaže stanje samo do %s."
-        DisplayTypeAverageLabel
         DaysOfMovingAverage
         halfDaysOfMovingAverage
         halfDaysOfMovingAverage
@@ -365,7 +364,7 @@ let render state dispatch =
 
         let fullDisclaimer =
             match state.DisplayType.ValueTypes with
-            | MovingAverages -> [ Html.p disclaimer1; Html.p disclaimer2 ]
+            | MovingAverages -> [ Html.p disclaimer2; Html.p disclaimer1 ]
             | _ -> [ Html.p disclaimer1 ]
 
         Html.div [
