@@ -16,43 +16,131 @@ type Metric =
     | RestHomeStaff
     | RestHomeOccupant
     | OtherPeople
+    | AllConfirmed
 
 type MetricCfg = {
     Metric : Metric
     Color : string
     Label : string
-    Line : Highcharts.DashStyle
 }
 
 type Metrics = MetricCfg list
 
+type DayValueIntMaybe = JsTimestamp*int option
+type DayValueFloat = JsTimestamp*float
+
+type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
+
 module Metrics  =
     let all = [
-        { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostale osebe" }
-        { Metric=HospitalStaff;     Color="#73ccd5"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Line=Solid; Label="Zaposleni v domovih za starejše občane" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Oskrbovanci domov za starejše občane" }
+        { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi potrjeni" }
+        { Metric=OtherPeople;       Color="#d5c768"; Label="Ostale osebe" }
+        { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
+        { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Label="Oskrbovanci domov za starejše občane" }
     ]
-    /// Find a metric in the list and apply provided function to modify its value
-    let update (fn: MetricCfg -> MetricCfg) metric metrics =
-        metrics
-        |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
-type ValueTypes = Daily | RunningTotals
-type ChartType = StackedBarNormal | StackedBarPercent | LineChart
+    let metricsToDisplay filter =
+        let without metricType =
+            all |> List.filter (fun metric -> metric.Metric <> metricType)
+
+        match filter with
+        | ShowAllConfirmed -> without OtherPeople
+        | ShowOthers -> without AllConfirmed
+
+type ValueTypes = RunningTotals | MovingAverages
+type ChartType = 
+    | StackedBarNormal 
+    | StackedBarPercent 
+    | SplineChart
 
 type DisplayType = {
     Label: string
     ValueTypes: ValueTypes
+    ShowAllOrOthers: ShowAllOrOthers
     ChartType: ChartType
     ShowLegend: bool
 }
 
+[<Literal>]
+let DisplayTypeAverageLabel = "Po dnevih (povprečno)"
+
+[<Literal>]
+let DaysOfMovingAverage = 5
+
+/// <summary>
+/// A function that calculates the moving average value for a given array of
+/// day values.
+/// </summary>
+type MovingAverageFunc = (DayValueIntMaybe[]) -> DayValueFloat
+
+/// <summary>
+/// Calculates the trailing moving average for a given array of day values.
+/// </summary>
+/// <remarks>
+/// The trailing moving average takes the last day as the target day of the
+/// average.
+/// </remarks>
+let movingAverageTrailing: MovingAverageFunc = fun (daysValues) -> 
+    let (targetDate, _) = daysValues |> Array.last
+    let averageValue = 
+        daysValues
+        |> Seq.averageBy(
+            fun (_, value) -> 
+                value |> Option.defaultValue 0 |> float)
+    (targetDate, averageValue)
+
+/// <summary>
+/// Calculates the centered moving average for a given array of day values.
+/// </summary>
+/// <remarks>
+/// The centered moving average takes the day that is at the center of the 
+/// values array as the target day of the average.
+/// </remarks>
+let movingAverageCentered: MovingAverageFunc = fun (daysValues) -> 
+    match (daysValues |> Seq.length) % 2 with
+    | 1 ->
+        let centerIndex = (daysValues |> Seq.length) / 2
+        let (targetDate, _) = daysValues.[centerIndex]
+        let averageValue = 
+            daysValues
+            |> Seq.averageBy(
+                fun (_, value) -> 
+                    value |> Option.defaultValue 0 |> float)
+        (targetDate, averageValue)
+    | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
+
+/// <summary>
+/// Calculates the moving averages array for a given array of day values.
+/// </summary>
+let movingAverages 
+    (averageFunc: MovingAverageFunc) 
+    (daysOfMovingAverage: int)
+    (series: DayValueIntMaybe[]): DayValueFloat[] =
+    series
+    |> Array.windowed daysOfMovingAverage
+    |> Array.map averageFunc
+
 let availableDisplayTypes: DisplayType array = [|
-    { Label = "Po dnevih"; ValueTypes = Daily; ChartType = StackedBarNormal; ShowLegend = true }
-    { Label = "Skupaj"; ValueTypes = RunningTotals; ChartType = StackedBarNormal; ShowLegend = true }
-    { Label = "Relativno"; ValueTypes = RunningTotals;  ChartType = StackedBarPercent; ShowLegend = false }
-    |]
+    {   Label = DisplayTypeAverageLabel;
+        ValueTypes = MovingAverages;
+        ShowAllOrOthers = ShowAllConfirmed;
+        ChartType = SplineChart; 
+        ShowLegend = true 
+    }
+    {   Label = "Skupaj"; 
+        ValueTypes = RunningTotals; 
+        ShowAllOrOthers = ShowOthers;
+        ChartType = StackedBarNormal; 
+        ShowLegend = true 
+    }
+    {   Label = "Relativno"; 
+        ValueTypes = RunningTotals;  
+        ShowAllOrOthers = ShowOthers;
+        ChartType = StackedBarPercent; 
+        ShowLegend = false 
+    }
+|]
 
 type State = {
     DisplayType : DisplayType
@@ -92,6 +180,7 @@ let renderChartOptions displayType (data : StatsData) =
             | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
             | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate
             | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate
+            | AllConfirmed -> fun pt -> pt.Cases.ConfirmedToDate
 
         fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
 
@@ -119,7 +208,7 @@ let renderChartOptions displayType (data : StatsData) =
     /// <summary>
     /// Converts running total series to daily (delta) values.
     /// </summary>
-    let toDailyValues (series: (JsTimestamp*int option)[]) =
+    let toDailyValues (series: DayValueIntMaybe[]) =
         let mutable last = 0
         Array.init series.Length (fun i ->
             match series.[i] with
@@ -130,19 +219,27 @@ let renderChartOptions displayType (data : StatsData) =
                 ts, Some result
         )
 
+    let toFloatValues (series: DayValueIntMaybe[]) =
+        series 
+        |> Array.map (fun (date, value) -> 
+            (date, value |> Option.defaultValue 0 |> float))
+
     let allSeries = [
-        for metric in Metrics.all do
-            yield pojo
+        for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
+            yield pojo 
                 {|
-                    visible = true
-                    color = metric.Color
-                    name = metric.Label
-                    dashStyle = metric.Line |> DashStyle.toString
-                    data =
-                        let runningTotals = calcRunningTotals metric
-                        match displayType.ValueTypes with
-                        | Daily -> toDailyValues runningTotals
-                        | RunningTotals -> runningTotals
+                visible = true
+                color = metric.Color
+                name = metric.Label
+                data =
+                    let runningTotals = calcRunningTotals metric
+                    match displayType.ValueTypes with
+                    | RunningTotals -> runningTotals |> toFloatValues
+                    | MovingAverages -> 
+                        runningTotals |> toDailyValues 
+                        |> (movingAverages 
+                                movingAverageCentered DaysOfMovingAverage)
+                marker = pojo {| enabled = false |}
                 |}
     ]
 
@@ -176,7 +273,7 @@ let renderChartOptions displayType (data : StatsData) =
             {|
                 ``type`` = 
                     match displayType.ChartType with
-                    | LineChart -> "line"
+                    | SplineChart -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -192,21 +289,21 @@ let renderChartOptions displayType (data : StatsData) =
         plotOptions = pojo
             {|
                 series = 
-                match displayType.ChartType with
-                | LineChart -> pojo {| |}
-                | StackedBarNormal -> pojo {| stacking = "normal" |}
-                | StackedBarPercent -> pojo {| stacking = "percent" |}
+                    match displayType.ChartType with
+                    | SplineChart -> pojo {| stacking = ""; |}
+                    | StackedBarNormal -> pojo {| stacking = "normal" |}
+                    | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
 
 let renderChartContainer data metrics =
     Html.div [
-        prop.style [ style.height 480 ] //; style.width 500; ]
+        prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
-            |> Highcharts.chart
+            |> chart
         ]
     ]
 
@@ -229,16 +326,51 @@ let renderDisplaySelectors activeDisplayType dispatch =
         |> prop.children
     ]
 
+let disclaimer1 = 
+    @"Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno 
+    na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem 
+    statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene 
+    delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so 
+    dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani 
+    na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev 
+    zelo konzervativna ocena."
+
+let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
+
+// TODO: the last date of the graph should be determined from the actual data
+// because the graph cuts trailing days without any data. This requires some
+// bit of refactoring of the code, to first prepare the data and only then 
+// render everything. Also the series arrays should work with native DateTime
+// so it can be used in arithmetics, instead of JsTimestamp (it should be 
+// transformed to JsTimestamp at the moment of setting the Highcharts objects).
+let lastDateOfGraph = 
+    DateTime.Now.AddDays(-(halfDaysOfMovingAverage + 1) |> float)
+
+let disclaimer2 = 
+    sprintf 
+        @"Pri grafu '%s' podatek za posamezni dan predstavlja drseče povprečje 
+        %d dni (seštevek vrednosti tega dneva, %d dni pred dnevom 
+        in %d dni po tem dnevu, deljen s %d). Zato graf kaže stanje samo do %s."
+        DisplayTypeAverageLabel
+        DaysOfMovingAverage
+        halfDaysOfMovingAverage
+        halfDaysOfMovingAverage
+        DaysOfMovingAverage
+        (lastDateOfGraph.ToString("dd.MM"))
 
 let render state dispatch =
     Html.div [
         renderChartContainer state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
+
+        let fullDisclaimer =
+            match state.DisplayType.ValueTypes with
+            | MovingAverages -> [ Html.p disclaimer1; Html.p disclaimer2 ]
+            | _ -> [ Html.p disclaimer1 ]
+
         Html.div [
             prop.className "disclaimer"
-            prop.children [
-                Html.span "Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev zelo konzervativna ocena."
-            ]
+            prop.children fullDisclaimer
         ]
     ]
 

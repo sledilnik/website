@@ -2,8 +2,6 @@
 // ^^^-uncomment this if you see black charts
 
 
-.highcharts-series { path { stroke-width: 2 }}
-
 // wrapper class names for charts (last div element before SVG)
 //
 // .covid19-metrics-comparison <- top
@@ -63,7 +61,6 @@ div.highcharts-tooltip {
 
 .highcharts-graph {
     fill: none;
-    stroke-width: 2px;
     stroke-linecap: round;
     stroke-linejoin: round;
 }
