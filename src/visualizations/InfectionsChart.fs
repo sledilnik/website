@@ -33,7 +33,7 @@ type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
 
 module Metrics  =
     let all = [
-        { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi" }
+        { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi potrjeni" }
         { Metric=OtherPeople;       Color="#d5c768"; Label="Ostale osebe" }
         { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
         { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
@@ -54,7 +54,9 @@ type ChartType =
     | StackedBarPercent 
     | LineChart 
     | SplineChart
+    | SplineFatLineChart
     | SplineDottedChart
+    | SplineChartWithDataLabels
 
 let chartDashStyle chartType =
     match chartType with
@@ -68,6 +70,13 @@ type DisplayType = {
     ChartType: ChartType
     ShowLegend: bool
 }
+
+[<Literal>]
+let DisplayTypeAverageLabel = "Po dnevih povprečno"
+
+[<Literal>]
+let DaysOfMovingAverage = 5
+
 
 let availableDisplayTypes: DisplayType array = [|
     {   Label = "Po dnevih"; 
@@ -88,22 +97,28 @@ let availableDisplayTypes: DisplayType array = [|
         ChartType = StackedBarPercent; 
         ShowLegend = false 
     }
-    {   Label = "Po dnevih povprečno 1"; 
+    {   Label = DisplayTypeAverageLabel + " 1"; 
         ValueTypes = MovingAverages; 
-        ShowAllOrOthers = ShowOthers;
-        ChartType = SplineChart; 
+        ShowAllOrOthers = ShowAllConfirmed;
+        ChartType = SplineFatLineChart; 
         ShowLegend = true 
     }
-    {   Label = "Po dnevih povprečno 2";
+    {   Label = DisplayTypeAverageLabel + " 2";
         ValueTypes = MovingAverages;
-        ShowAllOrOthers = ShowOthers;
+        ShowAllOrOthers = ShowAllConfirmed;
         ChartType = SplineDottedChart; 
         ShowLegend = true 
     }
-    {   Label = "Po dnevih povprečno 3";
+    {   Label = DisplayTypeAverageLabel + " 3";
         ValueTypes = MovingAverages;
         ShowAllOrOthers = ShowAllConfirmed;
         ChartType = SplineChart; 
+        ShowLegend = true 
+    }
+    {   Label = DisplayTypeAverageLabel + " 4";
+        ValueTypes = MovingAverages;
+        ShowAllOrOthers = ShowAllConfirmed;
+        ChartType = SplineChartWithDataLabels; 
         ShowLegend = true 
     }
 |]
@@ -191,8 +206,6 @@ let renderChartOptions displayType (data : StatsData) =
             (date, value |> Option.defaultValue 0 |> float))
 
     let toMovingAverages (series: DayValueIntMaybe[]): DayValueFloat[] =
-        let daysOfAverage = 5
-
         let calculateDayAverage (daysValues: DayValueIntMaybe[]) =
             let (targetDate, _) = daysValues |> Array.last
             let averageValue = 
@@ -203,7 +216,7 @@ let renderChartOptions displayType (data : StatsData) =
             (targetDate, averageValue)
 
         series
-        |> Array.windowed daysOfAverage
+        |> Array.windowed DaysOfMovingAverage
         |> Array.map calculateDayAverage
 
     let allSeries = [
@@ -211,7 +224,12 @@ let renderChartOptions displayType (data : StatsData) =
             yield pojo 
                 {|
                 visible = true
-                color = metric.Color
+                color = match displayType.ChartType with
+                        // This was the only way I could find to achieve half-
+                        // transparency, "opacity" parameters just wouldn't 
+                        // work.
+                        | SplineFatLineChart -> metric.Color + "80"
+                        | _ -> metric.Color
                 name = metric.Label
                 dashStyle = 
                     chartDashStyle displayType.ChartType |> DashStyle.toString
@@ -222,7 +240,12 @@ let renderChartOptions displayType (data : StatsData) =
                     | RunningTotals -> runningTotals |> toFloatValues
                     | MovingAverages -> 
                         runningTotals |> toDailyValues |> toMovingAverages
-                marker = pojo {| enabled = false |}                     
+                marker = 
+                    pojo {| enabled = 
+                            match displayType.ChartType with
+                            | SplineChartWithDataLabels -> true
+                            | _ -> false 
+                        |}
                 |}
     ]
 
@@ -258,7 +281,9 @@ let renderChartOptions displayType (data : StatsData) =
                     match displayType.ChartType with
                     | LineChart -> "line"
                     | SplineChart -> "spline"
+                    | SplineFatLineChart -> "spline"
                     | SplineDottedChart -> "spline"
+                    | SplineChartWithDataLabels -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -274,12 +299,28 @@ let renderChartOptions displayType (data : StatsData) =
         plotOptions = pojo
             {|
                 series = 
-                match displayType.ChartType with
-                | LineChart -> pojo {| stacking = "" |}
-                | SplineChart -> pojo {| stacking = ""; |}
-                | SplineDottedChart -> pojo {| stacking = ""; |}
-                | StackedBarNormal -> pojo {| stacking = "normal" |}
-                | StackedBarPercent -> pojo {| stacking = "percent" |}
+                    match displayType.ChartType with
+                    | LineChart -> 
+                        pojo {| stacking = ""; lineWidth = 2 |}
+                    | SplineChart -> 
+                        pojo {| stacking = ""; lineWidth = 2 |}
+                    | SplineFatLineChart -> 
+                        pojo {| stacking = ""; lineWidth = 5 |}
+                    | SplineDottedChart -> 
+                        pojo {| stacking = ""; lineWidth = 2 |}
+                    | SplineChartWithDataLabels -> 
+                        pojo {| stacking = ""; lineWidth = 2 |}
+                    | StackedBarNormal -> pojo {| stacking = "normal" |}
+                    | StackedBarPercent -> pojo {| stacking = "percent" |}
+
+                spline =
+                    match displayType.ChartType with
+                    | SplineChartWithDataLabels -> 
+                        pojo {| 
+                                dataLabels = pojo {| enabled = true |} 
+                                marker = pojo {| enabled = true |}
+                            |}
+                    | _ -> pojo {| dataLabels = pojo {| enabled = false |} |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
@@ -323,8 +364,10 @@ let disclaimer1 =
     zelo konzervativna ocena."
 
 let disclaimer2 = 
-    @"Pri grafu 'Po dnevih povprečno' podatki predstavljajo drseča povprečja 
-    zadnjih 5 dni."
+    sprintf 
+        @"Pri grafu '%s' podatki predstavljajo drseča povprečja zadnjih %d dni."
+        DisplayTypeAverageLabel
+        DaysOfMovingAverage
 
 let render state dispatch =
     Html.div [
@@ -333,8 +376,8 @@ let render state dispatch =
         Html.div [
             prop.className "disclaimer"
             prop.children [ 
-                Html.div disclaimer1
-                Html.div disclaimer2 ]
+                Html.p disclaimer1
+                Html.p disclaimer2 ]
         ]
     ]
 

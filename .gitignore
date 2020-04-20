@@ -152,7 +152,7 @@ sketch
 # End of https://www.gitignore.io/api/vue,node,code
 
 .ionide
+.fake
 
-.fake
-.ionide
-.fake
+# Resharper/Rider stuff
+**/_Resharper*
