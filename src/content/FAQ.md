@@ -63,6 +63,21 @@ Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, N
 
 
 <details>
+  <summary>Kako zbirate in urejate podatke?</summary>
+
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
+
+Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
+
+- Dobivamo dnevna poročila in spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) - okoli 8h.
+- Spremljamo število hospitaliziranih: vsi oddelki, v intenzivni enoti in na respiratorju.
+- Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
+- Kjer so podatki o prehodih (sprejem/odpust) nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
+- Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
+- Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih objavlja Vlada RS.
+</details>
+
+<details>
   <summary>Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</summary>
 
 Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjene okužbe,...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.  

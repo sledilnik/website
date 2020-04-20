@@ -35,20 +35,6 @@ Na voljo so v oblikah:
   - [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals), [retirement-homes](https://covid19.rthand.com/api/retirement-homes)
   - [hospitals-list](https://covid19.rthand.com/api/hospitals-list), [retirement-homes-list](https://covid19.rthand.com/api/retirement-homes-list) in drugi, več informacij v [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
 
-## Kako urejamo podatke
-
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
-
-Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
-
-- Spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) - okoli 14h.
-- Spremljamo število hospitaliziranih: vsi oddelki, hospitalizirani na intenzivni negi in v kritičnem stanju.
-- Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
-- Kjer so podatki o prehodih (sprejem/odpust) nepopolni, s sklepanjem določimo vrednosti (uporabimo formulo).
-- Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
-- Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih Vlada RS objavlja ob 23:59.
-
-## 
 
 ## Uporaba grafov in vizualizacij
 
