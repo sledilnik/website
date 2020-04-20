@@ -4,8 +4,8 @@
 
 ## Embedding visualizations into your webpage
 
-You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `iframe`.
-For example, see `embed.html` and `embed_multi.html` in this directory.
+You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `<iframe>`.
+For example, see [`embed.html`](https://github.com/slo-covid-19/website/tree/master/examples/embed.html) and [`embed_multi.html`](https://github.com/slo-covid-19/website/tree/master/examples/embed_multi.html).
 
 ## Charts
 
@@ -14,15 +14,14 @@ For example, see `embed.html` and `embed_multi.html` in this directory.
 | Širjenje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Obravnava hospitaliziranih | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
+| Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
 | Zemljevid potrjeno okuženih po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Potrjeno okuženi po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
 | Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
-| Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 
 ### Municipalities: filter specific region or change sort order
 Parameters:
-
 `sort`=
 - `total-positive-tests`
 - `time-to-double`
