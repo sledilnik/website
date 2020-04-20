@@ -63,13 +63,24 @@ type DisplayType = {
 }
 
 [<Literal>]
-let DisplayTypeAverageLabel = "Po dnevih povprečno"
+let DisplayTypeAverageLabel = "Po dnevih (povprečno)"
 
 [<Literal>]
 let DaysOfMovingAverage = 5
 
+/// <summary>
+/// A function that calculates the moving average value for a given array of
+/// day values.
+/// </summary>
 type MovingAverageFunc = (DayValueIntMaybe[]) -> DayValueFloat
 
+/// <summary>
+/// Calculates the trailing moving average for a given array of day values.
+/// </summary>
+/// <remarks>
+/// The trailing moving average takes the last day as the target day of the
+/// average.
+/// </remarks>
 let movingAverageTrailing: MovingAverageFunc = fun (daysValues) -> 
     let (targetDate, _) = daysValues |> Array.last
     let averageValue = 
@@ -79,6 +90,13 @@ let movingAverageTrailing: MovingAverageFunc = fun (daysValues) ->
                 value |> Option.defaultValue 0 |> float)
     (targetDate, averageValue)
 
+/// <summary>
+/// Calculates the centered moving average for a given array of day values.
+/// </summary>
+/// <remarks>
+/// The centered moving average takes the day that is at the center of the 
+/// values array as the target day of the average.
+/// </remarks>
 let movingAverageCentered: MovingAverageFunc = fun (daysValues) -> 
     match (daysValues |> Seq.length) % 2 with
     | 1 ->
@@ -92,6 +110,9 @@ let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
         (targetDate, averageValue)
     | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
 
+/// <summary>
+/// Calculates the moving averages array for a given array of day values.
+/// </summary>
 let movingAverages 
     (averageFunc: MovingAverageFunc) 
     (daysOfMovingAverage: int)
@@ -99,7 +120,6 @@ let movingAverages
     series
     |> Array.windowed daysOfMovingAverage
     |> Array.map averageFunc
-
 
 let availableDisplayTypes: DisplayType array = [|
     {   Label = DisplayTypeAverageLabel;
@@ -315,21 +335,42 @@ let disclaimer1 =
     na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev 
     zelo konzervativna ocena."
 
+let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
+
+// TODO: the last date of the graph should be determined from the actual data
+// because the graph cuts trailing days without any data. This requires some
+// bit of refactoring of the code, to first prepare the data and only then 
+// render everything. Also the series arrays should work with native DateTime
+// so it can be used in arithmetics, instead of JsTimestamp (it should be 
+// transformed to JsTimestamp at the moment of setting the Highcharts objects).
+let lastDateOfGraph = 
+    DateTime.Now.AddDays(-(halfDaysOfMovingAverage + 1) |> float)
+
 let disclaimer2 = 
     sprintf 
-        @"Pri grafu '%s' podatki predstavljajo drseča povprečja zadnjih %d dni."
+        @"Pri grafu '%s' podatek za posamezni dan predstavlja drseče povprečje 
+        %d dni (seštevek vrednosti tega dneva, %d dni pred dnevom 
+        in %d dni po tem dnevu, deljen s %d). Zato graf kaže stanje samo do %s."
         DisplayTypeAverageLabel
         DaysOfMovingAverage
+        halfDaysOfMovingAverage
+        halfDaysOfMovingAverage
+        DaysOfMovingAverage
+        (lastDateOfGraph.ToString("dd.MM"))
 
 let render state dispatch =
     Html.div [
         renderChartContainer state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
+
+        let fullDisclaimer =
+            match state.DisplayType.ValueTypes with
+            | MovingAverages -> [ Html.p disclaimer1; Html.p disclaimer2 ]
+            | _ -> [ Html.p disclaimer1 ]
+
         Html.div [
             prop.className "disclaimer"
-            prop.children [ 
-                Html.p disclaimer1
-                Html.p disclaimer2 ]
+            prop.children fullDisclaimer
         ]
     ]
 
