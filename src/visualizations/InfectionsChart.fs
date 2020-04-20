@@ -21,7 +21,6 @@ type MetricCfg = {
     Metric : Metric
     Color : string
     Label : string
-    Line : Highcharts.DashStyle
 }
 
 type Metrics = MetricCfg list
@@ -31,10 +30,10 @@ type DayValueFloat = JsTimestamp*float
 
 module Metrics  =
     let all = [
-        { Metric=OtherPeople;       Color="#d5c768"; Line=Solid; Label="Ostale osebe" }
-        { Metric=HospitalStaff;     Color="#73ccd5"; Line=Solid; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Line=Solid; Label="Zaposleni v domovih za starejše občane" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Line=Solid; Label="Oskrbovanci domov za starejše občane" }
+        { Metric=OtherPeople;       Color="#d5c768"; Label="Ostale osebe" }
+        { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
+        { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Label="Oskrbovanci domov za starejše občane" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -42,7 +41,17 @@ module Metrics  =
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
 
 type ValueTypes = Daily | RunningTotals | MovingAverages
-type ChartType = StackedBarNormal | StackedBarPercent | LineChart | SplineChart
+type ChartType = 
+    | StackedBarNormal 
+    | StackedBarPercent 
+    | LineChart 
+    | SplineChart
+    | SplineDottedChart
+
+let chartDashStyle chartType =
+    match chartType with
+    | SplineDottedChart -> Dot
+    | _ -> Solid
 
 type DisplayType = {
     Label: string
@@ -52,11 +61,32 @@ type DisplayType = {
 }
 
 let availableDisplayTypes: DisplayType array = [|
-    { Label = "Po dnevih"; ValueTypes = Daily; ChartType = StackedBarNormal; ShowLegend = true }
-    { Label = "Skupaj"; ValueTypes = RunningTotals; ChartType = StackedBarNormal; ShowLegend = true }
-    { Label = "Relativno"; ValueTypes = RunningTotals;  ChartType = StackedBarPercent; ShowLegend = false }
-    { Label = "Po dnevih povprečno"; ValueTypes = MovingAverages; ChartType = SplineChart; ShowLegend = true }
-    |]
+    {   Label = "Po dnevih"; 
+        ValueTypes = Daily; 
+        ChartType = StackedBarNormal; 
+        ShowLegend = true 
+    }
+    {   Label = "Skupaj"; 
+        ValueTypes = RunningTotals; 
+        ChartType = StackedBarNormal; 
+        ShowLegend = true 
+    }
+    {   Label = "Relativno"; 
+        ValueTypes = RunningTotals;  
+        ChartType = StackedBarPercent; 
+        ShowLegend = false 
+    }
+    { Label = "Po dnevih povprečno 1"; 
+        ValueTypes = MovingAverages; 
+        ChartType = SplineChart; 
+        ShowLegend = true 
+    }
+    { Label = "Po dnevih povprečno 2";
+        ValueTypes = MovingAverages;
+        ChartType = SplineDottedChart; 
+        ShowLegend = true 
+    }
+|]
 
 type State = {
     DisplayType : DisplayType
@@ -157,20 +187,21 @@ let renderChartOptions displayType (data : StatsData) =
 
     let allSeries = [
         for metric in Metrics.all do
-            yield pojo
+            yield pojo 
                 {|
-                    visible = true
-                    color = metric.Color
-                    name = metric.Label
-                    dashStyle = metric.Line |> DashStyle.toString
-                    data =
-                        let runningTotals = calcRunningTotals metric
-                        match displayType.ValueTypes with
-                        | Daily -> toDailyValues runningTotals |> toFloatValues
-                        | RunningTotals -> runningTotals |> toFloatValues
-                        | MovingAverages -> 
-                            runningTotals |> toDailyValues |> toMovingAverages
-                    marker = pojo {| enabled = false |}                     
+                visible = true
+                color = metric.Color
+                name = metric.Label
+                dashStyle = 
+                    chartDashStyle displayType.ChartType |> DashStyle.toString
+                data =
+                    let runningTotals = calcRunningTotals metric
+                    match displayType.ValueTypes with
+                    | Daily -> toDailyValues runningTotals |> toFloatValues
+                    | RunningTotals -> runningTotals |> toFloatValues
+                    | MovingAverages -> 
+                        runningTotals |> toDailyValues |> toMovingAverages
+                marker = pojo {| enabled = false |}                     
                 |}
     ]
 
@@ -206,6 +237,7 @@ let renderChartOptions displayType (data : StatsData) =
                     match displayType.ChartType with
                     | LineChart -> "line"
                     | SplineChart -> "spline"
+                    | SplineDottedChart -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -224,6 +256,7 @@ let renderChartOptions displayType (data : StatsData) =
                 match displayType.ChartType with
                 | LineChart -> pojo {| stacking = "" |}
                 | SplineChart -> pojo {| stacking = ""; |}
+                | SplineDottedChart -> pojo {| stacking = ""; |}
                 | StackedBarNormal -> pojo {| stacking = "normal" |}
                 | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
@@ -236,7 +269,7 @@ let renderChartContainer data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
-            |> Highcharts.chart
+            |> chart
         ]
     ]
 
