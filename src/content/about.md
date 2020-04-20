@@ -12,6 +12,7 @@ Podatke zbiramo iz različnih javno dostopnih virov, od sobote, 28. marca dalje 
 
 Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov ter programiranje zahteva vedno več pozornosti. Projekt nastaja z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer lahko prispeva vsak po svojih močeh z viri ali podatki](#/team). Pridružite se in pomagajte!
 
+
 ## Zbrani podatki
 
 Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](#/sources):
@@ -24,21 +25,13 @@ Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javn
 
 Sproti se trudimo dodajati tudi nove pomembne kategorije.
 
-Vsi podatki so zbrani v [**GDocs preglednici**](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0).
-
-Na voljo so v oblikah:
-
-- **CSV izvoz**: 
-  - [stats.csv](https://github.com/slo-covid-19/data/blob/master/csv/stats.csv), [regions.csv](https://github.com/slo-covid-19/data/blob/master/csv/regions.csv), [patients.csv](https://github.com/slo-covid-19/data/blob/master/csv/patients.csv), [hospitals.csv](https://github.com/slo-covid-19/data/blob/master/csv/hospitals.csv), [retirement_homes.csv](https://github.com/slo-covid-19/data/blob/master/csv/retirement_homes.csv), [safety_measures.csv](https://github.com/slo-covid-19/data/blob/master/csv/safety_measures.csv)
-  - [dict-region.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-region.csv), [dict-muncipality.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-municipality.csv), [dict-hospitals.csv](https://github.com/slo-covid-19/data/blob/master/csv/dict-hospitals.csv), [retirement_homes.csv](https://github.com/slo-covid-19/data/blob/master/csv/retirement_homes.csv), 
-- **REST API**: 
-  - [stats](https://covid19.rthand.com/api/stats), [regions](https://covid19.rthand.com/api/regions), [patients](https://covid19.rthand.com/api/patients), [hospitals](https://covid19.rthand.com/api/hospitals), [retirement-homes](https://covid19.rthand.com/api/retirement-homes)
-  - [hospitals-list](https://covid19.rthand.com/api/hospitals-list), [retirement-homes-list](https://covid19.rthand.com/api/retirement-homes-list) in drugi, več informacij v [README](https://github.com/slo-covid-19/data-api/blob/master/README.md)
+Vsi podatki so na voljo v [**GDocs preglednici, CSV obliki ali preko REST API**](#/datasources).
 
 
 ## Uporaba grafov in vizualizacij
 
 [Naše grafe in prikaze](#/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](#/embed) in ga prilagodite svoji spletni strani; če želite objavo vašega projekta na naši strani (glej [Povezave](#/links)), nas prosimo kontaktirajte. 
+
 
 ## Uporaba podatkov
 
@@ -48,10 +41,10 @@ Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [P
 Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo.
  Kljub temu ne moremo 100 % oz. v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
 
+
 ## Pogoji uporabe
 
 Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz virov v javni domeni in jih lahko prosto uporabljate, urejate, predelujete ali vključujete v vse netržne vsebine ob navedbi vira – [**covid-19.sledilnik.org**](http://covid-19.sledilnik.org/). Če ni določeno drugače, velja za vso vsebino na tej strani licenca Creative Commons: [Priznanje avtorstva-Deljenje pod enakimi pogoji 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.sl).
 
 Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike sodelovanja nas kontaktirajte na info@sledilnik.org.
 
-## 
