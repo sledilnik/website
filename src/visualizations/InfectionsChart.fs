@@ -48,20 +48,11 @@ module Metrics  =
         | ShowAllConfirmed -> without OtherPeople
         | ShowOthers -> without AllConfirmed
 
-type ValueTypes = Daily | RunningTotals | MovingAverages
+type ValueTypes = RunningTotals | MovingAverages
 type ChartType = 
     | StackedBarNormal 
     | StackedBarPercent 
-    | LineChart 
     | SplineChart
-    | SplineFatLineChart
-    | SplineDottedChart
-    | SplineChartWithDataLabels
-
-let chartDashStyle chartType =
-    match chartType with
-    | SplineDottedChart -> Dot
-    | _ -> Solid
 
 type DisplayType = {
     Label: string
@@ -77,12 +68,44 @@ let DisplayTypeAverageLabel = "Po dnevih povprečno"
 [<Literal>]
 let DaysOfMovingAverage = 5
 
+type MovingAverageFunc = (DayValueIntMaybe[]) -> DayValueFloat
+
+let movingAverageTrailing: MovingAverageFunc = fun (daysValues) -> 
+    let (targetDate, _) = daysValues |> Array.last
+    let averageValue = 
+        daysValues
+        |> Seq.averageBy(
+            fun (_, value) -> 
+                value |> Option.defaultValue 0 |> float)
+    (targetDate, averageValue)
+
+let movingAverageCentered: MovingAverageFunc = fun (daysValues) -> 
+    match (daysValues |> Seq.length) % 2 with
+    | 1 ->
+        let centerIndex = (daysValues |> Seq.length) / 2
+        let (targetDate, _) = daysValues.[centerIndex]
+        let averageValue = 
+            daysValues
+            |> Seq.averageBy(
+                fun (_, value) -> 
+                    value |> Option.defaultValue 0 |> float)
+        (targetDate, averageValue)
+    | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
+
+let movingAverages 
+    (averageFunc: MovingAverageFunc) 
+    (daysOfMovingAverage: int)
+    (series: DayValueIntMaybe[]): DayValueFloat[] =
+    series
+    |> Array.windowed daysOfMovingAverage
+    |> Array.map averageFunc
+
 
 let availableDisplayTypes: DisplayType array = [|
-    {   Label = "Po dnevih"; 
-        ValueTypes = Daily; 
-        ShowAllOrOthers = ShowOthers;
-        ChartType = StackedBarNormal; 
+    {   Label = DisplayTypeAverageLabel;
+        ValueTypes = MovingAverages;
+        ShowAllOrOthers = ShowAllConfirmed;
+        ChartType = SplineChart; 
         ShowLegend = true 
     }
     {   Label = "Skupaj"; 
@@ -96,30 +119,6 @@ let availableDisplayTypes: DisplayType array = [|
         ShowAllOrOthers = ShowOthers;
         ChartType = StackedBarPercent; 
         ShowLegend = false 
-    }
-    {   Label = DisplayTypeAverageLabel + " 1"; 
-        ValueTypes = MovingAverages; 
-        ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineFatLineChart; 
-        ShowLegend = true 
-    }
-    {   Label = DisplayTypeAverageLabel + " 2";
-        ValueTypes = MovingAverages;
-        ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineDottedChart; 
-        ShowLegend = true 
-    }
-    {   Label = DisplayTypeAverageLabel + " 3";
-        ValueTypes = MovingAverages;
-        ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineChart; 
-        ShowLegend = true 
-    }
-    {   Label = DisplayTypeAverageLabel + " 4";
-        ValueTypes = MovingAverages;
-        ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineChartWithDataLabels; 
-        ShowLegend = true 
     }
 |]
 
@@ -205,47 +204,22 @@ let renderChartOptions displayType (data : StatsData) =
         |> Array.map (fun (date, value) -> 
             (date, value |> Option.defaultValue 0 |> float))
 
-    let toMovingAverages (series: DayValueIntMaybe[]): DayValueFloat[] =
-        let calculateDayAverage (daysValues: DayValueIntMaybe[]) =
-            let (targetDate, _) = daysValues |> Array.last
-            let averageValue = 
-                daysValues
-                |> Seq.averageBy(
-                    fun (_, value) -> 
-                        value |> Option.defaultValue 0 |> float)
-            (targetDate, averageValue)
-
-        series
-        |> Array.windowed DaysOfMovingAverage
-        |> Array.map calculateDayAverage
-
     let allSeries = [
         for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
             yield pojo 
                 {|
                 visible = true
-                color = match displayType.ChartType with
-                        // This was the only way I could find to achieve half-
-                        // transparency, "opacity" parameters just wouldn't 
-                        // work.
-                        | SplineFatLineChart -> metric.Color + "80"
-                        | _ -> metric.Color
+                color = metric.Color
                 name = metric.Label
-                dashStyle = 
-                    chartDashStyle displayType.ChartType |> DashStyle.toString
                 data =
                     let runningTotals = calcRunningTotals metric
                     match displayType.ValueTypes with
-                    | Daily -> toDailyValues runningTotals |> toFloatValues
                     | RunningTotals -> runningTotals |> toFloatValues
                     | MovingAverages -> 
-                        runningTotals |> toDailyValues |> toMovingAverages
-                marker = 
-                    pojo {| enabled = 
-                            match displayType.ChartType with
-                            | SplineChartWithDataLabels -> true
-                            | _ -> false 
-                        |}
+                        runningTotals |> toDailyValues 
+                        |> (movingAverages 
+                                movingAverageCentered DaysOfMovingAverage)
+                marker = pojo {| enabled = false |}
                 |}
     ]
 
@@ -279,11 +253,7 @@ let renderChartOptions displayType (data : StatsData) =
             {|
                 ``type`` = 
                     match displayType.ChartType with
-                    | LineChart -> "line"
                     | SplineChart -> "spline"
-                    | SplineFatLineChart -> "spline"
-                    | SplineDottedChart -> "spline"
-                    | SplineChartWithDataLabels -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -300,27 +270,9 @@ let renderChartOptions displayType (data : StatsData) =
             {|
                 series = 
                     match displayType.ChartType with
-                    | LineChart -> 
-                        pojo {| stacking = ""; lineWidth = 2 |}
-                    | SplineChart -> 
-                        pojo {| stacking = ""; lineWidth = 2 |}
-                    | SplineFatLineChart -> 
-                        pojo {| stacking = ""; lineWidth = 5 |}
-                    | SplineDottedChart -> 
-                        pojo {| stacking = ""; lineWidth = 2 |}
-                    | SplineChartWithDataLabels -> 
-                        pojo {| stacking = ""; lineWidth = 2 |}
+                    | SplineChart -> pojo {| stacking = ""; |}
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
-
-                spline =
-                    match displayType.ChartType with
-                    | SplineChartWithDataLabels -> 
-                        pojo {| 
-                                dataLabels = pojo {| enabled = true |} 
-                                marker = pojo {| enabled = true |}
-                            |}
-                    | _ -> pojo {| dataLabels = pojo {| enabled = false |} |}
             |}
         legend = pojo {| legend with enabled = displayType.ShowLegend |}
     |}
