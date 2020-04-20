@@ -25,6 +25,17 @@ Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projec
 <a href="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png" class="img-link">
 <img alt="SEIR model" src="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png"></a>
 
+## Ocenjevanje stopnje reprodukcije
+Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov ocenil stopnjo reprodukcije, to je hitrost širjenja okužbe, med posamičnimi intervencijami. To omogoča slediti učinkovitosti intervencij. Pri modeliranju so uporabili najnovejše tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva. 
+
+Poročilo si lahko ogledate [tule](http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf).
+
+<a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
+<img alt="R_t model" src="http://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
+
+
+
+
 ## Drugi modeli za Slovenijo
 
 -  [Dr. Matjaž Leskovar](http://r4.ijs.si/leskovar) z Odseka za reaktorsko tehniko Instituta Jožef Stefan pripravlja napoved razvoja epidemije v Sloveniji glede na javno dostopne podatke o potrjenih okužbah in trenutni zasedenosti bolnišnic. Na voljo je [opis modela, s povezavo na izvorno datoteko](http://r4.ijs.si/COVID19model), [arhiv napovedi](http://r4.ijs.si/COVID19arhiv) in [prikaz zadnjih rezultatov](http://r4.ijs.si/COVID19).
