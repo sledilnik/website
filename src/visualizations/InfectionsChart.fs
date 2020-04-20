@@ -16,6 +16,7 @@ type Metric =
     | RestHomeStaff
     | RestHomeOccupant
     | OtherPeople
+    | AllConfirmed
 
 type MetricCfg = {
     Metric : Metric
@@ -28,17 +29,24 @@ type Metrics = MetricCfg list
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
 
+type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
+
 module Metrics  =
     let all = [
+        { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi" }
         { Metric=OtherPeople;       Color="#d5c768"; Label="Ostale osebe" }
         { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
         { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
         { Metric=RestHomeOccupant;  Color="#bf5747"; Label="Oskrbovanci domov za starejše občane" }
     ]
-    /// Find a metric in the list and apply provided function to modify its value
-    let update (fn: MetricCfg -> MetricCfg) metric metrics =
-        metrics
-        |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
+
+    let metricsToDisplay filter =
+        let without metricType =
+            all |> List.filter (fun metric -> metric.Metric <> metricType)
+
+        match filter with
+        | ShowAllConfirmed -> without OtherPeople
+        | ShowOthers -> without AllConfirmed
 
 type ValueTypes = Daily | RunningTotals | MovingAverages
 type ChartType = 
@@ -56,6 +64,7 @@ let chartDashStyle chartType =
 type DisplayType = {
     Label: string
     ValueTypes: ValueTypes
+    ShowAllOrOthers: ShowAllOrOthers
     ChartType: ChartType
     ShowLegend: bool
 }
@@ -63,27 +72,38 @@ type DisplayType = {
 let availableDisplayTypes: DisplayType array = [|
     {   Label = "Po dnevih"; 
         ValueTypes = Daily; 
+        ShowAllOrOthers = ShowOthers;
         ChartType = StackedBarNormal; 
         ShowLegend = true 
     }
     {   Label = "Skupaj"; 
         ValueTypes = RunningTotals; 
+        ShowAllOrOthers = ShowOthers;
         ChartType = StackedBarNormal; 
         ShowLegend = true 
     }
     {   Label = "Relativno"; 
         ValueTypes = RunningTotals;  
+        ShowAllOrOthers = ShowOthers;
         ChartType = StackedBarPercent; 
         ShowLegend = false 
     }
-    { Label = "Po dnevih povprečno 1"; 
+    {   Label = "Po dnevih povprečno 1"; 
         ValueTypes = MovingAverages; 
+        ShowAllOrOthers = ShowOthers;
         ChartType = SplineChart; 
         ShowLegend = true 
     }
-    { Label = "Po dnevih povprečno 2";
+    {   Label = "Po dnevih povprečno 2";
         ValueTypes = MovingAverages;
+        ShowAllOrOthers = ShowOthers;
         ChartType = SplineDottedChart; 
+        ShowLegend = true 
+    }
+    {   Label = "Po dnevih povprečno 3";
+        ValueTypes = MovingAverages;
+        ShowAllOrOthers = ShowAllConfirmed;
+        ChartType = SplineChart; 
         ShowLegend = true 
     }
 |]
@@ -126,6 +146,7 @@ let renderChartOptions displayType (data : StatsData) =
             | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
             | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate
             | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate
+            | AllConfirmed -> fun pt -> pt.Cases.ConfirmedToDate
 
         fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
 
@@ -186,7 +207,7 @@ let renderChartOptions displayType (data : StatsData) =
         |> Array.map calculateDayAverage
 
     let allSeries = [
-        for metric in Metrics.all do
+        for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
             yield pojo 
                 {|
                 visible = true
