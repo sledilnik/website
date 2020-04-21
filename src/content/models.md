@@ -9,6 +9,17 @@ Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta ob
 
 Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
 
+## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
+Mlada sekcija Statističnega društva Slovenije je skupaj z Sledilnik.org 21. aprila 2020 organizirala [okroglo mizo](https://stat-d.si/2020/04/17/4-srecanje-mlade-sekcije-modeliranje-in-statisticni-vidiki-covid-19-v-sloveniji/), ki sta jo vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek [prenašala v živo](https://youtu.be/ZzIbNxvGdo8?t=117) preko 800 udeležencem.
+
+Na dogodku so sodelovali:
+ - Dr. Aleks Jakulin: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=534), [predstavitev](/docs/sledilnik-aleks-jakulin.pdf)
+ - Dr. Žiga Zaplotnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=1521), [predstavitev](/docs/korona_model_ZZ.pdf)
+ - Dr. Janez Žibert: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=3037), [predstavitev](/docs/modelSEIR_jz.pdf)
+ - Prof. dr. Maja Pohar Perme: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=4485)
+ - Doc. dr. Tomaž Štupnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=5958)
+
+
 ## Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
 V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v tem delovnem dokumentu](https://nextcloud.fmf.uni-lj.si/s/AdNLwYoA4JyKFBG), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
 
