@@ -118,26 +118,43 @@ let renderChartOptions (state : State) =
         System.Math.Round(rawPercentage, 3)
 
     let femaleValue (ageGroupData: AgeGroup) = 
-        let populationStats = 
-            Utils.AgePopulationStats.populationStatsForAgeGroup 
-                ageGroupData.AgeFrom ageGroupData.AgeTo
+        match state.ScaleType with
+        | Absolute ->
+            match ageGroupData.Female with
+            | Some x -> float x |> Some
+            | None -> None
+        | PopulationPercentage -> 
+            let populationStats = 
+                Utils.AgePopulationStats.populationStatsForAgeGroup 
+                    ageGroupData.AgeFrom ageGroupData.AgeTo
 
-        match ageGroupData.Female with
-        | Some x -> percentageOfPopulation x populationStats.Female |> Some
-        | None -> None
+            match ageGroupData.Female with
+            | Some x -> percentageOfPopulation x populationStats.Female |> Some
+            | None -> None
 
     let maleValue (ageGroupData: AgeGroup) = 
-        let populationStats = 
-            Utils.AgePopulationStats.populationStatsForAgeGroup 
-                ageGroupData.AgeFrom ageGroupData.AgeTo
+        match state.ScaleType with
+        | Absolute ->
+            match ageGroupData.Male with
+            | Some x -> float -x |> Some
+            | None -> None
+        | PopulationPercentage -> 
+            let populationStats = 
+                Utils.AgePopulationStats.populationStatsForAgeGroup 
+                    ageGroupData.AgeFrom ageGroupData.AgeTo
 
-        match ageGroupData.Male with
-        | Some x -> -percentageOfPopulation x populationStats.Male |> Some
-        | None -> None
+            match ageGroupData.Male with
+            | Some x -> -percentageOfPopulation x populationStats.Male |> Some
+            | None -> None
 
-    let labelFormatterPercentage (value: float) = 
+    let percentageValuesLabelFormatter (value: float) =
         // A hack to replace decimal point with decimal comma.
         ((abs value).ToString() + "%").Replace('.', ',')
+
+    let valuesLabelFormatter (value: float) = 
+        match state.ScaleType with
+        | Absolute -> (abs value).ToString()
+        | PopulationPercentage -> percentageValuesLabelFormatter value
 
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
@@ -164,9 +181,32 @@ let renderChartOptions (state : State) =
            |}
        tooltip = pojo
            {| formatter = fun () ->
-                match state.DisplayType with
-                | Infections -> sprintf "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
-                | Deaths -> sprintf "<b>%s</b><br/>Starost: %s<br/>Umrli: %d" jsThis?series?name jsThis?point?category (abs(jsThis?point?y))
+                match state.DisplayType, state.ScaleType with
+                | Infections, Absolute -> 
+                    sprintf 
+                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d" 
+                        jsThis?series?name 
+                        jsThis?point?category 
+                        (abs(jsThis?point?y))
+                | Infections, PopulationPercentage -> 
+                    sprintf 
+                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>" 
+                        jsThis?series?name 
+                        jsThis?point?category 
+                        (percentageValuesLabelFormatter jsThis?point?y)
+
+                | Deaths, Absolute -> 
+                    sprintf 
+                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %d" 
+                        jsThis?series?name 
+                        jsThis?point?category 
+                        (abs(jsThis?point?y))
+                | Deaths, PopulationPercentage -> 
+                    sprintf 
+                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s" 
+                        jsThis?series?name 
+                        jsThis?point?category 
+                        (percentageValuesLabelFormatter jsThis?point?y)
            |}
        series = [|
            {| name = "Moški"
@@ -176,7 +216,7 @@ let renderChartOptions (state : State) =
                 | Deaths -> "#73CCD5"
               dataLabels = pojo
                 {| enabled = true
-                   formatter = fun() -> labelFormatterPercentage jsThis?y
+                   formatter = fun() -> valuesLabelFormatter jsThis?y
                    align = "right"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
@@ -191,7 +231,7 @@ let renderChartOptions (state : State) =
                 | Deaths -> "#D99A91"
               dataLabels = pojo
                 {| enabled = true
-                   formatter = fun () -> labelFormatterPercentage jsThis?y
+                   formatter = fun () -> valuesLabelFormatter jsThis?y
                    align = "left"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
