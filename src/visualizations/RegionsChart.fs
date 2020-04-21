@@ -127,7 +127,7 @@ let renderChartOptions (state : State) =
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
                 events = pojo {| load = myLoadEvent("covid19-regions") |}

@@ -85,7 +85,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
         chart = pojo
             {|
                 //height = "100%"
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
@@ -157,9 +157,10 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             |}
         plotOptions = pojo
             {|
-                spline = pojo
+                line = pojo
                     {|
                         dataLabels = pojo {| enabled = true |}
+                        marker = pojo {| symbol = "circle" |}
                         //enableMouseTracking = false
                     |}
             |}
