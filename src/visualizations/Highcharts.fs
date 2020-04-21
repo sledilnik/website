@@ -88,6 +88,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 ``type`` = "line"
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
+                scrollablePlotArea = pojo {| minWidth = 700; scrollPositionX = 1 |}
                 className = className
                 events = pojo {| load = myLoadEvent(className) |}
             |}
