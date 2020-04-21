@@ -64,10 +64,9 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
             | Some a, None -> sprintf "nad %d" a)
         |> List.toArray
 
-    let per100000 ocurrence total =
-        let populationPer100000 = (total |> float) / 100000.
-        let raw = (ocurrence |> float) / populationPer100000
-        System.Math.Round(raw)
+    let percentageOfPopulation affected total =
+        let rawPercentage = (float affected) / (float total) * 100.
+        System.Math.Round(rawPercentage, 3)
 
     let femaleValue (ageGroupData: AgeGroup) = 
         let populationStats = 
@@ -75,7 +74,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                 ageGroupData.AgeFrom ageGroupData.AgeTo
 
         match ageGroupData.Female with
-        | Some x -> per100000 x populationStats.Female |> Some
+        | Some x -> percentageOfPopulation x populationStats.Female |> Some
         | None -> None
 
     let maleValue (ageGroupData: AgeGroup) = 
@@ -84,8 +83,12 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                 ageGroupData.AgeFrom ageGroupData.AgeTo
 
         match ageGroupData.Male with
-        | Some x -> -per100000 x populationStats.Male |> Some
+        | Some x -> -percentageOfPopulation x populationStats.Male |> Some
         | None -> None
+
+    let labelFormatterPercentage (value: float) = 
+        // A hack to replace decimal point with decimal comma.
+        ((abs value).ToString() + "%").Replace('.', ',')
 
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
@@ -102,7 +105,9 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
        yAxis = pojo
            {| title = {| text = "" |}
               labels = pojo {| formatter = fun () -> abs(jsThis?value) |}
-              allowDecimals = false
+              // allowDecimals needs to be enabled because the values can be
+              // be below 1, otherwise it won't auto-scale to below 1.
+              allowDecimals = true
            |}
        plotOptions = pojo
            {| series = pojo
@@ -119,11 +124,12 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
               color =
                 match displayType with
                 | Infections -> "#73CCD5"
-                | Deaths -> "#5FA8AD"
+                | Deaths -> "#73CCD5"
               dataLabels = pojo
                 {| enabled = true
-                   formatter = fun () -> abs(jsThis?y)
+                   formatter = fun() -> labelFormatterPercentage jsThis?y
                    align = "right"
+                   style = pojo {| textOutline = false |}
                    padding = 10 |}
               data =
                ageGroupsData
@@ -133,11 +139,12 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
               color =
                 match displayType with
                 | Infections -> "#D99A91"
-                | Deaths -> "#B17E79"
+                | Deaths -> "#D99A91"
               dataLabels = pojo
                 {| enabled = true
-                   formatter = fun () -> abs(jsThis?y)
+                   formatter = fun () -> labelFormatterPercentage jsThis?y
                    align = "left"
+                   style = pojo {| textOutline = false |}
                    padding = 10 |}
               data =
                ageGroupsData

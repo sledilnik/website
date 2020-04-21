@@ -1,6 +1,7 @@
 # TODO
 
 ## Age groups
-- extract per100000 as a helper func
-- add the upper right switch
-- add tooltip description for 100,000
+- add the upper right switch: Absolutno in Delež prebivalstva
+    - implement different calculation based on the switch
+- add tooltip description
+    - how many are in this group (like on the map)
