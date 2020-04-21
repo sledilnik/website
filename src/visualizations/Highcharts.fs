@@ -159,7 +159,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 line = pojo
                     {|
-                        dataLabels = pojo {| enabled = true |}
+                        //dataLabels = pojo {| enabled = true |}
                         marker = pojo {| symbol = "circle" |}
                         //enableMouseTracking = false
                     |}
