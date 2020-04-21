@@ -54,7 +54,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                 | _ -> Some ageGroupsData
         )
 
-    let ageGroups =
+    let ageGroupsLabels =
         ageGroupsData
         |> List.map (fun ag ->
             match ag.AgeFrom, ag.AgeTo with
@@ -64,14 +64,37 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
             | Some a, None -> sprintf "nad %d" a)
         |> List.toArray
 
+    let per100000 ocurrence total =
+        let populationPer100000 = (total |> float) / 100000.
+        let raw = (ocurrence |> float) / populationPer100000
+        System.Math.Round(raw)
+
+    let femaleValue (ageGroupData: AgeGroup) = 
+        let populationStats = 
+            Utils.AgePopulationStats.populationStatsForAgeGroup 
+                ageGroupData.AgeFrom ageGroupData.AgeTo
+
+        match ageGroupData.Female with
+        | Some x -> per100000 x populationStats.Female |> Some
+        | None -> None
+
+    let maleValue (ageGroupData: AgeGroup) = 
+        let populationStats = 
+            Utils.AgePopulationStats.populationStatsForAgeGroup 
+                ageGroupData.AgeFrom ageGroupData.AgeTo
+
+        match ageGroupData.Male with
+        | Some x -> -per100000 x populationStats.Male |> Some
+        | None -> None
+
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
        xAxis = [|
-           {| categories = ageGroups
+           {| categories = ageGroupsLabels
               reversed = false
               opposite = false
               linkedTo = None |}
-           {| categories = ageGroups // mirror axis on right side
+           {| categories = ageGroupsLabels // mirror axis on right side
               reversed = false
               opposite = true
               linkedTo = Some 0 |}
@@ -104,7 +127,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                    padding = 10 |}
               data =
                ageGroupsData
-               |> List.map (fun dp -> dp.Male |> Option.map (fun x -> -x))
+               |> List.map maleValue
                |> List.toArray |}
            {| name = "Ženske"
               color =
@@ -118,7 +141,7 @@ let chartOptions (data : StatsData) (displayType : DisplayType) setDisplayType =
                    padding = 10 |}
               data =
                ageGroupsData
-               |> List.map (fun dp -> dp.Female)
+               |> List.map femaleValue
                |> List.toArray |}
        |]
     |}
