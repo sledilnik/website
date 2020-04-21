@@ -9,6 +9,7 @@ open Fable.Core.JsInterop
 
 open Types
 open Highcharts
+open System
 
 type ScaleType = Absolute | PopulationPercentage
 
@@ -31,6 +32,46 @@ type State = {
 type Msg =
     | ScaleTypeChanged of ScaleType
     | DisplayTypeChanged of DisplayType
+
+[<Literal>]
+let LabelMale = "Moški"
+[<Literal>]
+let LabelFemale = "Ženske"
+
+let ageGroupsLabels ageGroupsData =
+    ageGroupsData
+    |> List.map (fun ag ->
+        match ag.AgeFrom, ag.AgeTo with
+        | None, None -> ""
+        | None, Some b -> sprintf "0-%d" b
+        | Some a, Some b -> sprintf "%d-%d" a b
+        | Some a, None -> sprintf "nad %d" a)
+    |> List.toArray
+
+let populationOf sexLabel ageGroupLabel =
+    let parseAgeGroupLabel (label: string) =
+        if label.Contains('-') then
+            let i = label.IndexOf('-')
+            let fromAge = Int32.Parse(label.Substring(0, i))
+            let toAge = Int32.Parse(label.Substring(i+1))
+            (Some fromAge, Some toAge)
+        else if label.Contains("nad ") then
+            let fromAge = Int32.Parse(label.Substring("nad ".Length))
+            (Some fromAge, None)
+        else
+            sprintf "Invalid age group label: %s" label
+            |> ArgumentException |> raise
+
+    let (fromAge, toAge) = parseAgeGroupLabel ageGroupLabel
+    let ageGroupStats = 
+        Utils.AgePopulationStats.populationStatsForAgeGroup fromAge toAge
+
+    match sexLabel with
+    | LabelMale -> ageGroupStats.Male
+    | LabelFemale -> ageGroupStats.Female
+    | _ -> 
+        sprintf "Invalid sex label: '%s'" sexLabel 
+        |> ArgumentException |> raise
 
 let renderScaleTypeSelectors activeScaleType dispatch =
     let renderScaleTypeSelector 
@@ -103,16 +144,6 @@ let renderChartOptions (state : State) =
                 | _ -> Some ageGroupsData
         )
 
-    let ageGroupsLabels =
-        ageGroupsData
-        |> List.map (fun ag ->
-            match ag.AgeFrom, ag.AgeTo with
-            | None, None -> ""
-            | None, Some b -> sprintf "0-%d" b
-            | Some a, Some b -> sprintf "%d-%d" a b
-            | Some a, None -> sprintf "nad %d" a)
-        |> List.toArray
-
     let percentageOfPopulation affected total =
         let rawPercentage = (float affected) / (float total) * 100.
         System.Math.Round(rawPercentage, 3)
@@ -159,11 +190,11 @@ let renderChartOptions (state : State) =
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
        xAxis = [|
-           {| categories = ageGroupsLabels
+           {| categories = ageGroupsLabels ageGroupsData
               reversed = false
               opposite = false
               linkedTo = None |}
-           {| categories = ageGroupsLabels // mirror axis on right side
+           {| categories = ageGroupsLabels  ageGroupsData // mirror axis on right side
               reversed = false
               opposite = true
               linkedTo = Some 0 |}
@@ -190,10 +221,11 @@ let renderChartOptions (state : State) =
                         (abs(jsThis?point?y))
                 | Infections, PopulationPercentage -> 
                     sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>" 
+                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d" 
                         jsThis?series?name 
                         jsThis?point?category 
                         (percentageValuesLabelFormatter jsThis?point?y)
+                        (populationOf jsThis?series?name jsThis?point?category)
 
                 | Deaths, Absolute -> 
                     sprintf 
@@ -203,13 +235,14 @@ let renderChartOptions (state : State) =
                         (abs(jsThis?point?y))
                 | Deaths, PopulationPercentage -> 
                     sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s" 
+                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d" 
                         jsThis?series?name 
                         jsThis?point?category 
                         (percentageValuesLabelFormatter jsThis?point?y)
+                        (populationOf jsThis?series?name jsThis?point?category)
            |}
        series = [|
-           {| name = "Moški"
+           {| name = LabelMale
               color =
                 match state.DisplayType with
                 | Infections -> "#73CCD5"
@@ -224,7 +257,7 @@ let renderChartOptions (state : State) =
                ageGroupsData
                |> List.map maleValue
                |> List.toArray |}
-           {| name = "Ženske"
+           {| name = LabelFemale
               color =
                 match state.DisplayType with
                 | Infections -> "#D99A91"

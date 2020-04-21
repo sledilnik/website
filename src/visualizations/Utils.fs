@@ -379,7 +379,7 @@ module AgePopulationStats =
     let parseAgeGroupId (ageGroupId: AgeGroupId): (int option * int option) =
         if ageGroupId.Contains('-') then
             let i = ageGroupId.IndexOf('-')
-            let fromAge = Int32.Parse(ageGroupId.Substring(0, i-1))
+            let fromAge = Int32.Parse(ageGroupId.Substring(0, i))
             let toAge = Int32.Parse(ageGroupId.Substring(i+1))
             (Some fromAge, Some toAge)
         else if ageGroupId.Contains('+') then
@@ -400,5 +400,10 @@ module AgePopulationStats =
     let populationStatsForAgeGroup (fromAge: int option) (toAge: int option)
         : AgeGroupPopulationStats =
         let ageGroupId = toAgeGroupId fromAge toAge
-        agePopulationStats.[ageGroupId]
+
+        if agePopulationStats.ContainsKey ageGroupId then
+            agePopulationStats.[ageGroupId]
+        else
+            sprintf "Age group '%s' does not exist." ageGroupId
+            |> ArgumentException |> raise
     
