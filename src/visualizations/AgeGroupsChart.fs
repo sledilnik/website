@@ -11,42 +11,36 @@ open Types
 open Highcharts
 open System
 
-type ScaleType = Absolute | PopulationPercentage
+type ScaleType = Absolute | Relative
 
-type DisplayType =
-    | Infections
-    | Deaths
+type ChartMode =
+    | AbsoluteInfections
+    | AbsoluteDeaths
+    | InfectionsPerPopulation
+    | DeathsPerPopulation
+    | DeathsPerInfections
 
-    static member all = [ Infections ; Deaths ]
+    static member ScaleType mode =
+        match mode with
+        | AbsoluteInfections -> Absolute
+        | AbsoluteDeaths -> Absolute
+        | InfectionsPerPopulation -> Relative
+        | DeathsPerPopulation -> Relative
+        | DeathsPerInfections -> Relative
 
-    static member getName = function
-        | Infections -> "Potrjeno okuženi"
-        | Deaths -> "Umrli"
-
-type State = { 
-    ScaleType: ScaleType
-    DisplayType: DisplayType
+type State = {
+    ChartMode: ChartMode
     Data: StatsData
 }
 
 type Msg =
+    | ChartModeChanged of ChartMode
     | ScaleTypeChanged of ScaleType
-    | DisplayTypeChanged of DisplayType
 
 [<Literal>]
 let LabelMale = "Moški"
 [<Literal>]
 let LabelFemale = "Ženske"
-
-let ageGroupsLabels ageGroupsData =
-    ageGroupsData
-    |> List.map (fun ag ->
-        match ag.AgeFrom, ag.AgeTo with
-        | None, None -> ""
-        | None, Some b -> sprintf "0-%d" b
-        | Some a, Some b -> sprintf "%d-%d" a b
-        | Some a, None -> sprintf "nad %d" a)
-    |> List.toArray
 
 let populationOf sexLabel ageGroupLabel =
     let parseAgeGroupLabel (label: string) =
@@ -63,30 +57,139 @@ let populationOf sexLabel ageGroupLabel =
             |> ArgumentException |> raise
 
     let (fromAge, toAge) = parseAgeGroupLabel ageGroupLabel
-    let ageGroupStats = 
+    let ageGroupStats =
         Utils.AgePopulationStats.populationStatsForAgeGroup fromAge toAge
 
     match sexLabel with
     | LabelMale -> ageGroupStats.Male
     | LabelFemale -> ageGroupStats.Female
-    | _ -> 
-        sprintf "Invalid sex label: '%s'" sexLabel 
+    | _ ->
+        sprintf "Invalid sex label: '%s'" sexLabel
         |> ArgumentException |> raise
 
+type AgeGroupKey = {
+    AgeFrom : int option
+    AgeTo : int option
+}
+
+type InfectionsAndDeathsForAgeGroup = {
+    GroupKey: AgeGroupKey
+    InfectionsMale : int option
+    InfectionsFemale : int option
+    DeathsMale : int option
+    DeathsFemale : int option
+}
+
+type InfectionsAndDeathsPerAge = InfectionsAndDeathsForAgeGroup list
+
+let mergeInfectionsAndDeathsByGroups
+    (infections: AgeGroupsList) (deaths: AgeGroupsList)
+    : InfectionsAndDeathsPerAge =
+
+    let mappedInfections =
+        infections
+        |> List.map (fun group ->
+            let groupKey = { AgeFrom = group.AgeFrom; AgeTo = group.AgeTo }
+            let combined = { GroupKey = groupKey
+                             InfectionsMale = group.Male
+                             InfectionsFemale = group.Female
+                             DeathsMale = None; DeathsFemale = None }
+            combined)
+
+    let deathsDict =
+        deaths
+        |> Seq.map (fun group ->
+            { AgeFrom = group.AgeFrom; AgeTo = group.AgeTo }, group)
+        |> dict
+
+    let merged =
+        mappedInfections
+        |> List.map (fun combined ->
+            match deathsDict.TryGetValue combined.GroupKey with
+            | (true, deathsForGroup) ->
+                { combined with
+                        DeathsMale = deathsForGroup.Male
+                        DeathsFemale = deathsForGroup.Female }
+            | (false, _) -> combined
+            )
+
+    merged |> List.sortBy (fun group -> group.GroupKey) |> List.rev
+
+/// <summary>
+/// Fetches the infections and deaths per age groups for the latest day that
+/// has both sets of data.
+/// </summary>
+let latestAgeData state: InfectionsAndDeathsPerAge =
+    /// <summary>
+    /// Filter function for determining whether the specified AgeGroups
+    /// actually has any data or just an empty record.
+    /// </summary>
+    let extractAgeGroupsDataMaybe (ageGroupsData: AgeGroupsList) =
+        ageGroupsData
+            |> List.filter (fun ageGroup ->
+                match ageGroup.Male, ageGroup.Female with
+                | None, None -> false
+                | _ -> true)
+            |> function // take the most recent day with some data
+                | [] -> None
+                | _ -> Some ageGroupsData
+
+    state.Data
+    |> List.rev
+    |> List.pick (fun dataPoint ->
+        let infectionsDataMaybe =
+            extractAgeGroupsDataMaybe dataPoint.StatePerAgeToDate
+        let deathsDataMaybe =
+            extractAgeGroupsDataMaybe dataPoint.DeceasedPerAgeToDate
+
+        match infectionsDataMaybe, deathsDataMaybe with
+        | Some infectionsData, Some deathsData ->
+            mergeInfectionsAndDeathsByGroups infectionsData deathsData |> Some
+        | _ -> None
+    )
+
+type AgeCategoryChartData = {
+    AgeFrom: int option
+    AgeTo: int option
+}
+
+type AgesChartData = {
+    Categories: AgeCategoryChartData list
+    } with
+
+    member this.AgeGroupsLabels =
+        this.Categories
+        |> List.map (fun ag ->
+            match ag.AgeFrom, ag.AgeTo with
+            | None, None -> ""
+            | None, Some b -> sprintf "0-%d" b
+            | Some a, Some b -> sprintf "%d-%d" a b
+            | Some a, None -> sprintf "nad %d" a)
+        |> List.toArray
+
+let calculateChartData infectionsAndDeathsPerAge chartMode =
+    raise (NotImplementedException "")
+    // match chartMode with
+    // | AbsoluteInfections ->
+    // | AbsoluteDeaths
+    // | InfectionsPerPopulation
+    // | DeathsPerPopulation
+    // | DeathsPerInfections
+
 let renderScaleTypeSelectors activeScaleType dispatch =
-    let renderScaleTypeSelector 
-        (scaleType : ScaleType) 
-        (activeScaleType : ScaleType) 
+    let renderScaleTypeSelector
+        (scaleType : ScaleType)
+        (activeScaleType : ScaleType)
         (label : string) =
         let defaultProps =
             [ prop.text label
               prop.className [
                   true, "chart-display-property-selector__item"
                   scaleType = activeScaleType, "selected" ] ]
-        if scaleType = activeScaleType then 
+        if scaleType = activeScaleType then
             Html.div defaultProps
-        else 
-            Html.div 
+        else
+            Html.div
                 ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
 
     Html.div [
@@ -94,84 +197,81 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         prop.children [
             Html.text "Prikazane vrednosti: "
             renderScaleTypeSelector Absolute activeScaleType "Absolutne"
-            renderScaleTypeSelector 
-                PopulationPercentage activeScaleType "Delež prebivalstva"
+            renderScaleTypeSelector Relative activeScaleType "Relativne"
         ]
     ]
 
-let renderDisplayTypeSelector 
-    (displayType: DisplayType) 
-    (activeDisplayType: DisplayType) 
+let renderDisplayTypeSelector
+    (displayType: ChartMode)
+    (activeDisplayType: ChartMode)
     dispatch =
 
     let isActive = displayType = activeDisplayType
-    
+
     Html.div [
-        prop.onClick (fun _ -> DisplayTypeChanged displayType |> dispatch)
-        prop.className [ 
-            true, "btn btn-sm metric-selector"; 
+        prop.onClick (fun _ -> ChartModeChanged displayType |> dispatch)
+        prop.className [
+            true, "btn btn-sm metric-selector";
             isActive, "metric-selector--selected" ]
-        prop.text (displayType |> DisplayType.getName)
+        prop.text (
+            match displayType with
+            | AbsoluteInfections -> "Potrjeno okuženi"
+            | AbsoluteDeaths -> "Umrli"
+            | InfectionsPerPopulation -> "Delež potrjeno okuženih"
+            | DeathsPerPopulation -> "Delež umrlih"
+            | DeathsPerInfections -> "Umrli glede na okužene"
+            )
     ]
 
-let renderDisplayTypeSelectors activeDisplayType dispatch =
+let renderDisplayTypeSelectors activeChartMode dispatch =
+    let displayTypesForChartMode chartMode =
+        match ChartMode.ScaleType chartMode with
+        | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
+        | Relative ->
+            [ InfectionsPerPopulation;
+            DeathsPerPopulation;
+            DeathsPerInfections; ]
+
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            displayTypesForChartMode activeChartMode
             |> List.map (fun displayType ->
-                renderDisplayTypeSelector 
-                    displayType activeDisplayType dispatch
+                renderDisplayTypeSelector
+                    displayType activeChartMode dispatch
             ) ) ]
 
-let renderChartOptions (state : State) =
-
-    let ageGroupsData =
-        state.Data
-        |> List.rev
-        |> List.pick (fun dataPoint ->
-            let ageGroupsData =
-                match state.DisplayType with
-                | Infections -> dataPoint.StatePerAgeToDate
-                | Deaths -> dataPoint.DeceasedPerAgeToDate
-            ageGroupsData
-            |> List.filter (fun ageGroup ->
-                match ageGroup.Male, ageGroup.Female, ageGroup.All with
-                | None, None, None -> false
-                | _ -> true)
-            |> function // take the most recent day with some data
-                | [] -> None
-                | _ -> Some ageGroupsData
-        )
+let renderChartOptions
+    (state : State) (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) =
 
     let percentageOfPopulation affected total =
         let rawPercentage = (float affected) / (float total) * 100.
         System.Math.Round(rawPercentage, 3)
 
-    let femaleValue (ageGroupData: AgeGroup) = 
-        match state.ScaleType with
+    let femaleValue (ageGroupData: AgeGroup) =
+        match ChartMode.ScaleType state.ChartMode with
         | Absolute ->
             match ageGroupData.Female with
             | Some x -> float x |> Some
             | None -> None
-        | PopulationPercentage -> 
-            let populationStats = 
-                Utils.AgePopulationStats.populationStatsForAgeGroup 
+        | Relative ->
+            let populationStats =
+                Utils.AgePopulationStats.populationStatsForAgeGroup
                     ageGroupData.AgeFrom ageGroupData.AgeTo
 
             match ageGroupData.Female with
             | Some x -> percentageOfPopulation x populationStats.Female |> Some
             | None -> None
 
-    let maleValue (ageGroupData: AgeGroup) = 
-        match state.ScaleType with
+    let maleValue (ageGroupData: AgeGroup) =
+        match ChartMode.ScaleType state.ChartMode with
         | Absolute ->
             match ageGroupData.Male with
             | Some x -> float -x |> Some
             | None -> None
-        | PopulationPercentage -> 
-            let populationStats = 
-                Utils.AgePopulationStats.populationStatsForAgeGroup 
+        | Relative ->
+            let populationStats =
+                Utils.AgePopulationStats.populationStatsForAgeGroup
                     ageGroupData.AgeFrom ageGroupData.AgeTo
 
             match ageGroupData.Male with
@@ -182,30 +282,30 @@ let renderChartOptions (state : State) =
         // A hack to replace decimal point with decimal comma.
         ((abs value).ToString() + "%").Replace('.', ',')
 
-    let valuesLabelFormatter (value: float) = 
-        match state.ScaleType with
+    let valuesLabelFormatter (value: float) =
+        match ChartMode.ScaleType state.ChartMode with
         | Absolute -> (abs value).ToString()
-        | PopulationPercentage -> percentageValuesLabelFormatter value
+        | Relative -> percentageValuesLabelFormatter value
 
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
        xAxis = [|
-           {| categories = ageGroupsLabels ageGroupsData
+           {| categories = "" // TODO: ageGroupsLabels ageGroupsData
               reversed = false
               opposite = false
               linkedTo = None |}
-           {| categories = ageGroupsLabels ageGroupsData // mirror axis on right side
+           {| categories = "" // TODO: ageGroupsLabels ageGroupsData // mirror axis on right side
               reversed = false
               opposite = true
               linkedTo = Some 0 |}
        |]
        yAxis = pojo
            {| title = {| text = "" |}
-              labels = pojo 
+              labels = pojo
                 {| formatter = fun () -> valuesLabelFormatter jsThis?value |}
               // allowDecimals needs to be enabled because the values can be
               // be below 1, otherwise it won't auto-scale to below 1.
-              allowDecimals = state.ScaleType = PopulationPercentage
+              allowDecimals = ChartMode.ScaleType state.ChartMode = Relative
            |}
        plotOptions = pojo
            {| series = pojo
@@ -213,96 +313,96 @@ let renderChartOptions (state : State) =
            |}
        tooltip = pojo
            {| formatter = fun () ->
-                match state.DisplayType, state.ScaleType with
-                | Infections, Absolute -> 
-                    sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d" 
-                        jsThis?series?name 
-                        jsThis?point?category 
+                match state.ChartMode with
+                | AbsoluteInfections ->
+                    sprintf
+                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d"
+                        jsThis?series?name
+                        jsThis?point?category
                         (abs(jsThis?point?y))
-                | Infections, PopulationPercentage -> 
-                    sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d" 
-                        jsThis?series?name 
-                        jsThis?point?category 
+                | InfectionsPerPopulation ->
+                    sprintf
+                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d"
+                        jsThis?series?name
+                        jsThis?point?category
                         (percentageValuesLabelFormatter jsThis?point?y)
                         (populationOf jsThis?series?name jsThis?point?category)
 
-                | Deaths, Absolute -> 
-                    sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %d" 
-                        jsThis?series?name 
-                        jsThis?point?category 
+                | AbsoluteDeaths ->
+                    sprintf
+                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %d"
+                        jsThis?series?name
+                        jsThis?point?category
                         (abs(jsThis?point?y))
-                | Deaths, PopulationPercentage -> 
-                    sprintf 
-                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d" 
-                        jsThis?series?name 
-                        jsThis?point?category 
+                | DeathsPerPopulation ->
+                    sprintf
+                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d"
+                        jsThis?series?name
+                        jsThis?point?category
                         (percentageValuesLabelFormatter jsThis?point?y)
                         (populationOf jsThis?series?name jsThis?point?category)
+                | DeathsPerInfections -> "" // TODO
            |}
        series = [|
            {| name = LabelMale
-              color =
-                match state.DisplayType with
-                | Infections -> "#73CCD5"
-                | Deaths -> "#73CCD5"
+              color = "#73CCD5"
               dataLabels = pojo
                 {| enabled = true
                    formatter = fun() -> valuesLabelFormatter jsThis?y
                    align = "right"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
-              data =
-               ageGroupsData
-               |> List.map maleValue
-               |> List.toArray |}
+              data = [| |] // TODO
+            //    ageGroupsData
+            //    |> List.map maleValue
+            //    |> List.toArray
+               |}
            {| name = LabelFemale
-              color =
-                match state.DisplayType with
-                | Infections -> "#D99A91"
-                | Deaths -> "#D99A91"
+              color = "#D99A91"
               dataLabels = pojo
                 {| enabled = true
                    formatter = fun () -> valuesLabelFormatter jsThis?y
                    align = "left"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
-              data =
-               ageGroupsData
-               |> List.map femaleValue
-               |> List.toArray |}
+              data = [| |] // TODO
+            //    ageGroupsData
+            //    |> List.map femaleValue
+            //    |> List.toArray
+               |}
        |]
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =
-    {   ScaleType = Absolute
-        DisplayType = Infections
-        Data = data }, Cmd.none
+    { ChartMode = AbsoluteInfections; Data = data }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | ChartModeChanged chartMode ->
+        { state with ChartMode = chartMode}, Cmd.none
     | ScaleTypeChanged scaleType ->
-        { state with ScaleType = scaleType }, Cmd.none
-    | DisplayTypeChanged displayType ->
-        { state with DisplayType = displayType }, Cmd.none
+        match scaleType with
+        | Absolute -> { state with ChartMode = AbsoluteInfections }, Cmd.none
+        | Relative -> { state with ChartMode = InfectionsPerPopulation }, Cmd.none
 
 let renderChartContainer state =
+    let infectionsAndDeathsPerAge = latestAgeData state
+    let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
+
     Html.div [
         prop.style [ style.height 450 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state 
-            |> Highcharts.chart
-        ]
+            renderChartOptions state infectionsAndDeathsPerAge |> chart ]
     ]
 
 let render (state : State) dispatch =
+    let activeScaleType = ChartMode.ScaleType state.ChartMode
+
     Html.div [
-        renderScaleTypeSelectors state.ScaleType (ScaleTypeChanged >> dispatch)
+        renderScaleTypeSelectors activeScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state
-        renderDisplayTypeSelectors state.DisplayType dispatch
+        renderDisplayTypeSelectors state.ChartMode dispatch
     ]
 
 let renderChart (props : {| data : StatsData |}) =

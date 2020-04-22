@@ -154,5 +154,9 @@ sketch
 .ionide
 .fake
 
+# Visual Studio stuff
+**/bin
+**/obj
+
 # Resharper/Rider stuff
 **/_Resharper*

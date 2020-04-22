@@ -111,4 +111,4 @@ let getSortedFacilityCodes (data: FacilityAssets []) =
         |> List.map fst
 
 
-let getOrFetch = Data.makeDataLoader<FacilityAssets []> url
+let getOrFetch = DataLoader.makeDataLoader<FacilityAssets []> url

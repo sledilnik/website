@@ -34,6 +34,8 @@ type AgeGroup =
       Female : int option
       All : int option }
 
+type AgeGroupsList = AgeGroup list
+
 type StatsDataPoint =
     { DayFromStart : int
       Date : System.DateTime
@@ -44,8 +46,8 @@ type StatsDataPoint =
       PositiveTestsToDate : int option
       Cases : Cases
       StatePerTreatment : Treatment
-      StatePerAgeToDate : AgeGroup list
-      DeceasedPerAgeToDate : AgeGroup list
+      StatePerAgeToDate : AgeGroupsList
+      DeceasedPerAgeToDate : AgeGroupsList
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option

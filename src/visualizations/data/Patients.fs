@@ -45,4 +45,4 @@ type PatientsStats = {
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate12h = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime12h
 
-let getOrFetch = Data.makeDataLoader<PatientsStats []> url
+let getOrFetch = DataLoader.makeDataLoader<PatientsStats []> url
