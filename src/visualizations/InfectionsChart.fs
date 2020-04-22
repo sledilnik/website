@@ -34,7 +34,7 @@ type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
 module Metrics  =
     let all = [
         { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi potrjeni" }
-        { Metric=OtherPeople;       Color="#d5c768"; Label="Ostale osebe" }
+        { Metric=OtherPeople;       Color="#FFDBA3"; Label="Ostale osebe" }
         { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
         { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
         { Metric=RestHomeOccupant;  Color="#bf5747"; Label="Oskrbovanci domov za starejše občane" }
@@ -348,9 +348,11 @@ let lastDateOfGraph =
 
 let disclaimer2 = 
     sprintf 
-        @"Podatek za posamezni dan predstavlja drseče povprečje 
-        %d dni (seštevek vrednosti tega dneva, %d dni pred dnevom 
-        in %d dni po tem dnevu, deljen s %d). Zato graf kaže stanje samo do %s."
+        @"Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjeno 
+        okuženih so dnevne vrednosti prikazane kot drseče povprečje %d dni.
+        Seštevek vrednosti tega dneva, %d dni pred dnevom 
+        in %d dni po tem dnevu je deljen s %d. Zato graf kaže stanje samo do %s,
+        na ta način pa dobimo boljšo predstavo o trendih po posameznih skupinah."
         DaysOfMovingAverage
         halfDaysOfMovingAverage
         halfDaysOfMovingAverage
