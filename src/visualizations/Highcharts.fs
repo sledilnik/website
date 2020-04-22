@@ -155,6 +155,16 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
+        responsive = pojo 
+            {|
+                rules = 
+                    [| {|
+                        condition = {| maxWidth = 500 |}
+                        chartOptions = {| legend = {| enabled = false |} |}
+                    |} |]
+            |}
+        
+
         plotOptions = pojo
             {|
                 line = pojo
