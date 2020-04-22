@@ -67,10 +67,23 @@ let populationOf sexLabel ageGroupLabel =
         sprintf "Invalid sex label: '%s'" sexLabel
         |> ArgumentException |> raise
 
+let roundDecimal (value: float) = System.Math.Round(value, 3)
+
+let percentageOfPopulation affected total =
+    let rawPercentage = (float affected) / (float total) * 100.
+    rawPercentage |> roundDecimal
+
 type AgeGroupKey = {
     AgeFrom : int option
     AgeTo : int option
-}
+    } with
+
+    member this.Label =
+        match this.AgeFrom, this.AgeTo with
+        | None, None -> ""
+        | None, Some b -> sprintf "0-%d" b
+        | Some a, Some b -> sprintf "%d-%d" a b
+        | Some a, None -> sprintf "nad %d" a
 
 type InfectionsAndDeathsForAgeGroup = {
     GroupKey: AgeGroupKey
@@ -113,7 +126,7 @@ let mergeInfectionsAndDeathsByGroups
             | (false, _) -> combined
             )
 
-    merged |> List.sortBy (fun group -> group.GroupKey) |> List.rev
+    merged |> List.sortBy (fun group -> group.GroupKey)
 
 /// <summary>
 /// Fetches the infections and deaths per age groups for the latest day that
@@ -149,8 +162,9 @@ let latestAgeData state: InfectionsAndDeathsPerAge =
     )
 
 type AgeCategoryChartData = {
-    AgeFrom: int option
-    AgeTo: int option
+    GroupKey: AgeGroupKey
+    Male: float option
+    Female: float option
 }
 
 type AgesChartData = {
@@ -159,22 +173,99 @@ type AgesChartData = {
 
     member this.AgeGroupsLabels =
         this.Categories
-        |> List.map (fun ag ->
-            match ag.AgeFrom, ag.AgeTo with
-            | None, None -> ""
-            | None, Some b -> sprintf "0-%d" b
-            | Some a, Some b -> sprintf "%d-%d" a b
-            | Some a, None -> sprintf "nad %d" a)
+        |> List.map (fun ag -> ag.GroupKey.Label)
         |> List.toArray
 
-let calculateChartData infectionsAndDeathsPerAge chartMode =
-    raise (NotImplementedException "")
-    // match chartMode with
-    // | AbsoluteInfections ->
-    // | AbsoluteDeaths
-    // | InfectionsPerPopulation
-    // | DeathsPerPopulation
-    // | DeathsPerInfections
+    member this.MaleValues =
+        this.Categories
+        |> List.map (fun ag -> ag.Male)
+        |> List.toArray
+
+    member this.FemaleValues =
+        this.Categories
+        |> List.map (fun ag -> ag.Female)
+        |> List.toArray
+
+let calculateChartData
+    (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) chartMode
+    : AgesChartData =
+
+    let categories =
+        infectionsAndDeathsPerAge
+        |> List.map (fun ageGroupData ->
+
+            let (male, female) =
+                match chartMode with
+                | AbsoluteInfections ->
+                    (ageGroupData.InfectionsMale |> Option.map float,
+                     ageGroupData.InfectionsFemale |> Option.map float)
+                | AbsoluteDeaths ->
+                    (ageGroupData.DeathsMale |> Option.map float,
+                     ageGroupData.DeathsFemale |> Option.map float)
+                | InfectionsPerPopulation ->
+                    let populationStats =
+                        Utils.AgePopulationStats.populationStatsForAgeGroup
+                            ageGroupData.GroupKey.AgeFrom
+                            ageGroupData.GroupKey.AgeTo
+
+                    let male =
+                        match ageGroupData.InfectionsMale with
+                        | Some x ->
+                            percentageOfPopulation x populationStats.Male
+                            |> Some
+                        | None -> None
+                    let female =
+                        match ageGroupData.InfectionsFemale with
+                        | Some x ->
+                            percentageOfPopulation x populationStats.Female
+                            |> Some
+                        | None -> None
+                    (male, female)
+
+                | DeathsPerPopulation ->
+                    let populationStats =
+                        Utils.AgePopulationStats.populationStatsForAgeGroup
+                            ageGroupData.GroupKey.AgeFrom
+                            ageGroupData.GroupKey.AgeTo
+
+                    let male =
+                        match ageGroupData.DeathsMale with
+                        | Some x ->
+                            percentageOfPopulation x populationStats.Male
+                            |> Some
+                        | None -> None
+                    let female =
+                        match ageGroupData.DeathsFemale with
+                        | Some x ->
+                            percentageOfPopulation x populationStats.Female
+                            |> Some
+                        | None -> None
+                    (male, female)
+
+                | DeathsPerInfections ->
+                    let male =
+                        match ageGroupData.DeathsMale,
+                            ageGroupData.InfectionsMale with
+                        | (_, Some 0) -> None
+                        | (Some deaths, Some infections) ->
+                            (float deaths) / (float infections) * 100.
+                            |> roundDecimal |> Some
+                        | _ -> None
+                    let female =
+                        match ageGroupData.DeathsFemale,
+                            ageGroupData.InfectionsFemale with
+                        | (_, Some 0) -> None
+                        | (Some deaths, Some infections) ->
+                            (float deaths) / (float infections) * 100.
+                            |> roundDecimal |> Some
+                        | _ -> None
+                    (male, female)
+
+            { GroupKey = ageGroupData.GroupKey
+              Male = male; Female = female }
+            )
+
+    { Categories = categories }
 
 let renderScaleTypeSelectors activeScaleType dispatch =
     let renderScaleTypeSelector
@@ -219,7 +310,7 @@ let renderDisplayTypeSelector
             | AbsoluteDeaths -> "Umrli"
             | InfectionsPerPopulation -> "Delež potrjeno okuženih"
             | DeathsPerPopulation -> "Delež umrlih"
-            | DeathsPerInfections -> "Umrli glede na okužene"
+            | DeathsPerInfections -> "Umrli glede na št. okuženih"
             )
     ]
 
@@ -242,41 +333,7 @@ let renderDisplayTypeSelectors activeChartMode dispatch =
             ) ) ]
 
 let renderChartOptions
-    (state : State) (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) =
-
-    let percentageOfPopulation affected total =
-        let rawPercentage = (float affected) / (float total) * 100.
-        System.Math.Round(rawPercentage, 3)
-
-    let femaleValue (ageGroupData: AgeGroup) =
-        match ChartMode.ScaleType state.ChartMode with
-        | Absolute ->
-            match ageGroupData.Female with
-            | Some x -> float x |> Some
-            | None -> None
-        | Relative ->
-            let populationStats =
-                Utils.AgePopulationStats.populationStatsForAgeGroup
-                    ageGroupData.AgeFrom ageGroupData.AgeTo
-
-            match ageGroupData.Female with
-            | Some x -> percentageOfPopulation x populationStats.Female |> Some
-            | None -> None
-
-    let maleValue (ageGroupData: AgeGroup) =
-        match ChartMode.ScaleType state.ChartMode with
-        | Absolute ->
-            match ageGroupData.Male with
-            | Some x -> float -x |> Some
-            | None -> None
-        | Relative ->
-            let populationStats =
-                Utils.AgePopulationStats.populationStatsForAgeGroup
-                    ageGroupData.AgeFrom ageGroupData.AgeTo
-
-            match ageGroupData.Male with
-            | Some x -> -percentageOfPopulation x populationStats.Male |> Some
-            | None -> None
+    (state : State) (chartData: AgesChartData) =
 
     let percentageValuesLabelFormatter (value: float) =
         // A hack to replace decimal point with decimal comma.
@@ -290,11 +347,11 @@ let renderChartOptions
     {| chart = pojo {| ``type`` = "bar" |}
        title = pojo {| text = None |}
        xAxis = [|
-           {| categories = "" // TODO: ageGroupsLabels ageGroupsData
+           {| categories = chartData.AgeGroupsLabels
               reversed = false
               opposite = false
               linkedTo = None |}
-           {| categories = "" // TODO: ageGroupsLabels ageGroupsData // mirror axis on right side
+           {| categories = chartData.AgeGroupsLabels // mirror axis on right side
               reversed = false
               opposite = true
               linkedTo = Some 0 |}
@@ -352,10 +409,8 @@ let renderChartOptions
                    align = "right"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
-              data = [| |] // TODO
-            //    ageGroupsData
-            //    |> List.map maleValue
-            //    |> List.toArray
+              data = chartData.MaleValues
+                     |> Array.map (Option.map (fun y -> -y))
                |}
            {| name = LabelFemale
               color = "#D99A91"
@@ -365,10 +420,7 @@ let renderChartOptions
                    align = "left"
                    style = pojo {| textOutline = false |}
                    padding = 10 |}
-              data = [| |] // TODO
-            //    ageGroupsData
-            //    |> List.map femaleValue
-            //    |> List.toArray
+              data = chartData.FemaleValues
                |}
        |]
     |}
@@ -392,8 +444,7 @@ let renderChartContainer state =
     Html.div [
         prop.style [ style.height 450 ]
         prop.className "highcharts-wrapper"
-        prop.children [
-            renderChartOptions state infectionsAndDeathsPerAge |> chart ]
+        prop.children [ renderChartOptions state chartData |> chart ]
     ]
 
 let render (state : State) dispatch =

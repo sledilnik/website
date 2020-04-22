@@ -91,7 +91,7 @@ let ``Matches age groups by their keys``() =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
     test <@ result = [
-        expectedInfectionsAndDeaths2; expectedInfectionsAndDeaths1
+        expectedInfectionsAndDeaths1; expectedInfectionsAndDeaths2
     ] @>
 
 [<Fact>]
@@ -103,5 +103,5 @@ let ``Returns groups sorted descending by age``() =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
     test <@ result = [
-        expectedInfectionsAndDeaths2; expectedInfectionsAndDeaths1
+        expectedInfectionsAndDeaths1; expectedInfectionsAndDeaths2
     ] @>
