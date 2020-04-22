@@ -30,19 +30,11 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 ## SEIR model
 V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji.
 
-Zadnje simulacije modela si lahko ogledate  [na spletni strani](https://www.stata.si/appsR/projects/CoronaSim/). 
-Model lahko tudi [sami preizkusite](https://www.stata.si/appsR/projects/CoronaSim/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
-
-<a href="/docs/jzibert-modelling_data_20200421.png" class="img-link">
-<img alt="SEIR model" src="/docs/jzibert-modelling_data_20200421.png"></a>
-
-<!---
 Zadnje simulacije modela si lahko ogledate  [na spletni strani](https://pacs.zf.uni-lj.si/shinyR/apps/projects/CoronaSim/). 
 Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projects/CoronaSim5/) tako, da spreminjate posamezne parametre in vidite njihov vpliv na razvoj epidemije. 
 
 <a href="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png" class="img-link">
 <img alt="SEIR model" src="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png"></a>
--->
 
 ## Ocenjevanje stopnje reprodukcije
 Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov ocenila stopnjo reprodukcije, to je hitrost širjenja okužbe, med posamičnimi intervencijami. To omogoča sledenje učinkovitosti intervencij. Pri modeliranju so uporabili tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva. 
