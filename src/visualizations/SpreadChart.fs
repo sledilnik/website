@@ -179,6 +179,7 @@ let renderChartOptions scaleType (data : StatsData) =
             id = "data"
             color = "#bda506"
             name = chartCfg.seriesLabel
+            dataLabels = pojo {| enabled = true |}
             //className = "cs-positiveTestsToDate"
             data =
                 data
