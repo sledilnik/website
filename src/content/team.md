@@ -27,6 +27,7 @@ Uredniki baze in ostali sodelavci:
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - podatkovni model in validacija, modeliranje
+-   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
