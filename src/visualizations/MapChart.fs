@@ -167,8 +167,8 @@ let renderDisplayTypeSelector displayType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Prikaži:"
-            renderSelector RegionPopulationWeightedValues displayType "Delež prebivalstva"
             renderSelector AbsoluteValues displayType "Absolutno"
+            renderSelector RegionPopulationWeightedValues displayType "Delež prebivalstva"
         ]
     ]
 
