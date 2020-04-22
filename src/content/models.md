@@ -13,11 +13,11 @@ Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi 
 Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala [spletni pogovor](https://stat-d.si/2020/04/17/4-srecanje-mlade-sekcije-modeliranje-in-statisticni-vidiki-covid-19-v-sloveniji/), ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. [STA](https://vzivo.sta.si/) je dogodek [prenašala v živo](https://youtu.be/ZzIbNxvGdo8?t=117) več kot 850 udeležencem.
 
 Na dogodku so sodelovali:
- - dr. Aleks Jakulin: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=534), [predstavitev](/docs/sledilnik-aleks-jakulin.pdf);
- - dr. Žiga Zaplotnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=1521), [predstavitev](/docs/korona_model_ZZ.pdf);
- - prof. dr. Janez Žibert: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=3037), [predstavitev](/docs/modelSEIR_jz.pdf);
+ - dr. Aleks Jakulin: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=544), [predstavitev](/docs/sledilnik-aleks-jakulin.pdf);
+ - dr. Žiga Zaplotnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=1526), [predstavitev](/docs/korona_model_ZZ.pdf);
+ - prof. dr. Janez Žibert: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=3041), [predstavitev](/docs/modelSEIR_jz.pdf);
  - prof. dr. Maja Pohar Perme: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=4485);
- - doc. dr. Tomaž Štupnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=5958).
+ - doc. dr. Tomaž Štupnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=5964).
 
 
 ## Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
