@@ -194,17 +194,18 @@ let renderChartOptions (state : State) =
               reversed = false
               opposite = false
               linkedTo = None |}
-           {| categories = ageGroupsLabels  ageGroupsData // mirror axis on right side
+           {| categories = ageGroupsLabels ageGroupsData // mirror axis on right side
               reversed = false
               opposite = true
               linkedTo = Some 0 |}
        |]
        yAxis = pojo
            {| title = {| text = "" |}
-              labels = pojo {| formatter = fun () -> abs(jsThis?value) |}
+              labels = pojo 
+                {| formatter = fun () -> valuesLabelFormatter jsThis?value |}
               // allowDecimals needs to be enabled because the values can be
               // be below 1, otherwise it won't auto-scale to below 1.
-              allowDecimals = true
+              allowDecimals = state.ScaleType = PopulationPercentage
            |}
        plotOptions = pojo
            {| series = pojo
