@@ -383,9 +383,9 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Razvrsti po: "
+            Html.text "Razvrsti po:"
             renderSelector currenSortBy SortBy.TotalPositiveTests "Številu okuženih"
-            renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve števila okuženih"
+            renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve"
         ]
     ]
 

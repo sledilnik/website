@@ -92,8 +92,8 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Prikazane vrednosti: "
-            renderScaleTypeSelector Absolute activeScaleType "Absolutne"
+            Html.text "Prikaži:"
+            renderScaleTypeSelector Absolute activeScaleType "Absolutno"
             renderScaleTypeSelector 
                 PopulationPercentage activeScaleType "Delež prebivalstva"
         ]
