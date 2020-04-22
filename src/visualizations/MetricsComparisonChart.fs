@@ -124,7 +124,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             29, 3, "#e6f0ff", "Trg.",      "Trgovine za upokojence do 10. ure"
             30, 3, "#FFe6e6", "Občine",    "Prepoved gibanja izven meja občin"
             12, 4, "#FFe6e6", "K.7 dni",   "Obvezna 7 dnevna karantena pri prihodu iz tujine"
-            18, 4, "#FFe6e6", "Gibanje",   "Splošna prepoved gibanja in pojasnila glede omejitev gibanja med občinami."
+            18, 4, "#ebfaeb", "Vikendi",   "Splošna prepoved gibanja in sproščanje glede omejitev gibanja med občinami (vikendi...)."
             20, 4, "#ebfaeb", "Servisi",   "Sproščanje nekaterih dejavnosti (gradnja, servisi, šport na prostem...), linijski prevozi."
         |]
         {|
