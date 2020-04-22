@@ -155,12 +155,22 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
+        responsive = pojo 
+            {|
+                rules = 
+                    [| {|
+                        condition = {| maxWidth = 500 |}
+                        chartOptions = {| legend = {| enabled = false |} |}
+                    |} |]
+            |}
+        
+
         plotOptions = pojo
             {|
                 line = pojo
                     {|
                         //dataLabels = pojo {| enabled = true |}
-                        marker = pojo {| symbol = "circle" |}
+                        marker = pojo {| symbol = "circle"; radius = 3 |}
                         //enableMouseTracking = false
                     |}
             |}
