@@ -375,7 +375,7 @@ let renderChartOptions
                 match state.ChartMode with
                 | AbsoluteInfections ->
                     sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženih: %d"
+                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %d"
                         jsThis?series?name
                         jsThis?point?category
                         (abs(jsThis?point?y))
@@ -400,7 +400,12 @@ let renderChartOptions
                         jsThis?point?category
                         (percentageValuesLabelFormatter jsThis?point?y)
                         (populationOf jsThis?series?name jsThis?point?category)
-                | DeathsPerInfections -> "" // TODO
+                | DeathsPerInfections ->
+                    sprintf
+                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih glede na št. okuženih: %s"
+                        jsThis?series?name
+                        jsThis?point?category
+                        (percentageValuesLabelFormatter jsThis?point?y)
            |}
        series = [|
            {| name = LabelMale
