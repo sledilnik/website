@@ -22,6 +22,7 @@ script:
   - echo $C19_OUTPUT_DIR
   - echo $C19_PUBLIC_PATH
   - yarn build
+  - yarn test-fsharp
   - ls dist/
 deploy:
   - on:
