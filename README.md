@@ -1,6 +1,6 @@
 # covid19-web
 
-[![Build Status](https://travis-ci.org/slo-covid-19/website.svg?branch=master)](https://travis-ci.org/slo-covid-19/website)
+[![Build Status](https://travis-ci.com/sledilnik/website.svg?branch=master)](https://travis-ci.com/sledilnik/website)
 
 ## Structure
 
