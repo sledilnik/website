@@ -16,7 +16,7 @@ Na dogodku so sodelovali:
  - dr. Aleks Jakulin: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=544), [predstavitev](/docs/sledilnik-aleks-jakulin.pdf);
  - dr. Žiga Zaplotnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=1526), [predstavitev](/docs/korona_model_ZZ.pdf);
  - prof. dr. Janez Žibert: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=3041), [predstavitev](/docs/modelSEIR_jz.pdf);
- - prof. dr. Maja Pohar Perme: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=4485);
+ - prof. dr. Maja Pohar Perme: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=4485); [predstavitev](/docs/predst-mpp.pdf);
  - doc. dr. Tomaž Štupnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=5964).
 
 
