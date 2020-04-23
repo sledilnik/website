@@ -43,7 +43,7 @@ const routes = [
     path: '/about/en',
     component: StaticPage,
     props: {
-      name: 'about',
+      name: 'about-en',
       content: aboutMdEn,
     }
   },
