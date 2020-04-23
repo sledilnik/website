@@ -21,8 +21,9 @@ script:
   - if [ "$TRAVIS_BRANCH" != "master" ]; then export C19_OUTPUT_DIR="dist/${TRAVIS_BRANCH}"; export C19_PUBLIC_PATH="https://preview.sledilnik.org/${TRAVIS_BRANCH}"; fi
   - echo $C19_OUTPUT_DIR
   - echo $C19_PUBLIC_PATH
-  - yarn build
+  - yarn test
   - yarn test-fsharp
+  - yarn build
   - ls dist/
 deploy:
   - on:
