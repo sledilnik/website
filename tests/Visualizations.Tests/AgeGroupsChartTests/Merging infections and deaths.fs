@@ -5,22 +5,22 @@ open Xunit
 open Swensen.Unquote
 
 let infections1 = {
-    AgeFrom = Some 10; AgeTo = Some 20
+    GroupKey = { AgeFrom = Some 10; AgeTo = Some 20 }
     Male = Some 20; Female = Some 10; All = Some 30
 }
 
 let infections2 = {
-    AgeFrom = Some 20; AgeTo = Some 30
+    GroupKey = { AgeFrom = Some 20; AgeTo = Some 30 }
     Male = Some 25; Female = Some 15; All = Some 40
 }
 
 let deaths1 = {
-    AgeFrom = Some 10; AgeTo = Some 20
+    GroupKey = { AgeFrom = Some 10; AgeTo = Some 20 }
     Male = Some 2; Female = Some 1; All = Some 3
 }
 
 let deaths2 = {
-    AgeFrom = Some 20; AgeTo = Some 30
+    GroupKey = { AgeFrom = Some 20; AgeTo = Some 30 }
     Male = Some 3; Female = Some 4; All = Some 7
 }
 
@@ -50,7 +50,7 @@ let ``Merging empty groups results in empty result`` () =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [] @>
+    test <@ result = [||] @>
 
 [<Fact>]
 let ``Group can have infections and no deaths``() =
@@ -60,7 +60,7 @@ let ``Group can have infections and no deaths``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [ expectedInfectionsOnly1 ] @>
+    test <@ result = [| expectedInfectionsOnly1 |] @>
 
 [<Fact>]
 let ``If group has no infections and has deaths, it is ignored as invalid``() =
@@ -70,7 +70,7 @@ let ``If group has no infections and has deaths, it is ignored as invalid``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [] @>
+    test <@ result = [||] @>
 
 [<Fact>]
 let ``Merges infections and deaths together``() =
@@ -80,7 +80,7 @@ let ``Merges infections and deaths together``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [ expectedInfectionsAndDeaths1 ] @>
+    test <@ result = [| expectedInfectionsAndDeaths1 |] @>
 
 [<Fact>]
 let ``Matches age groups by their keys``() =
@@ -90,9 +90,9 @@ let ``Matches age groups by their keys``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [
+    test <@ result = [|
         expectedInfectionsAndDeaths1; expectedInfectionsAndDeaths2
-    ] @>
+    |] @>
 
 [<Fact>]
 let ``Returns groups sorted descending by age``() =
@@ -102,6 +102,6 @@ let ``Returns groups sorted descending by age``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [
+    test <@ result = [|
         expectedInfectionsAndDeaths1; expectedInfectionsAndDeaths2
-    ] @>
+    |] @>

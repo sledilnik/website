@@ -27,9 +27,20 @@ type Treatment =
       OutOfHospital : int option
       RecoveredToDate : int option }
 
+type AgeGroupKey = {
+    AgeFrom : int option
+    AgeTo : int option
+    } with
+
+    member this.Label =
+        match this.AgeFrom, this.AgeTo with
+        | None, None -> ""
+        | None, Some b -> sprintf "0-%d" b
+        | Some a, Some b -> sprintf "%d-%d" a b
+        | Some a, None -> sprintf "nad %d" a
+
 type AgeGroup =
-    { AgeFrom : int option
-      AgeTo : int option
+    { GroupKey : AgeGroupKey
       Male : int option
       Female : int option
       All : int option }

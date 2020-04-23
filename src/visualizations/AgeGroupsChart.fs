@@ -45,22 +45,22 @@ let LabelMale = "Moški"
 let LabelFemale = "Ženske"
 
 let populationOf sexLabel ageGroupLabel =
-    let parseAgeGroupLabel (label: string) =
+    let parseAgeGroupLabel (label: string): AgeGroupKey =
         if label.Contains('-') then
             let i = label.IndexOf('-')
             let fromAge = Int32.Parse(label.Substring(0, i))
             let toAge = Int32.Parse(label.Substring(i+1))
-            (Some fromAge, Some toAge)
+            { AgeFrom = Some fromAge; AgeTo =  Some toAge }
         else if label.Contains("nad ") then
             let fromAge = Int32.Parse(label.Substring("nad ".Length))
-            (Some fromAge, None)
+            { AgeFrom = Some fromAge; AgeTo =  None }
         else
             sprintf "Invalid age group label: %s" label
             |> ArgumentException |> raise
 
-    let (fromAge, toAge) = parseAgeGroupLabel ageGroupLabel
+    let groupKey = parseAgeGroupLabel ageGroupLabel
     let ageGroupStats =
-        Utils.AgePopulationStats.populationStatsForAgeGroup fromAge toAge
+        Utils.AgePopulationStats.populationStatsForAgeGroup groupKey
 
     match sexLabel with
     | LabelMale -> ageGroupStats.Male
@@ -89,18 +89,6 @@ let deathsPerInfectionsMaybe deaths infections =
         percentageOfInfected deaths infections |> Some
     | _ -> None
 
-type AgeGroupKey = {
-    AgeFrom : int option
-    AgeTo : int option
-    } with
-
-    member this.Label =
-        match this.AgeFrom, this.AgeTo with
-        | None, None -> ""
-        | None, Some b -> sprintf "0-%d" b
-        | Some a, Some b -> sprintf "%d-%d" a b
-        | Some a, None -> sprintf "nad %d" a
-
 type InfectionsAndDeathsForAgeGroup = {
     GroupKey: AgeGroupKey
     InfectionsMale : int option
@@ -118,7 +106,7 @@ let mergeInfectionsAndDeathsByGroups
     let mappedInfections =
         infections
         |> List.map (fun group ->
-            let groupKey = { AgeFrom = group.AgeFrom; AgeTo = group.AgeTo }
+            let groupKey = group.GroupKey
             let combined = { GroupKey = groupKey
                              InfectionsMale = group.Male
                              InfectionsFemale = group.Female
@@ -128,8 +116,7 @@ let mergeInfectionsAndDeathsByGroups
 
     let deathsDict =
         deaths
-        |> Seq.map (fun group ->
-            { AgeFrom = group.AgeFrom; AgeTo = group.AgeTo }, group)
+        |> Seq.map (fun group -> group.GroupKey, group)
         |> dict
 
     let merged =
@@ -208,8 +195,7 @@ let calculateChartData
         |> Array.map (fun ageGroupData ->
             let populationStats =
                 Utils.AgePopulationStats.populationStatsForAgeGroup
-                    ageGroupData.GroupKey.AgeFrom
-                    ageGroupData.GroupKey.AgeTo
+                    ageGroupData.GroupKey
 
             let (male, female) =
                 match chartMode with
