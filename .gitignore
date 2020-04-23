@@ -17,6 +17,7 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sw?
+*.user
 
 # Created by https://www.gitignore.io/api/vue,node,code
 # Edit at https://www.gitignore.io/?templates=vue,node,code

@@ -49,9 +49,9 @@ module Metrics  =
         | ShowOthers -> without AllConfirmed
 
 type ValueTypes = RunningTotals | MovingAverages
-type ChartType = 
-    | StackedBarNormal 
-    | StackedBarPercent 
+type ChartType =
+    | StackedBarNormal
+    | StackedBarPercent
     | SplineChart
 
 type DisplayType = {
@@ -81,12 +81,12 @@ type MovingAverageFunc = (DayValueIntMaybe[]) -> DayValueFloat
 /// The trailing moving average takes the last day as the target day of the
 /// average.
 /// </remarks>
-let movingAverageTrailing: MovingAverageFunc = fun (daysValues) -> 
+let movingAverageTrailing: MovingAverageFunc = fun (daysValues) ->
     let (targetDate, _) = daysValues |> Array.last
-    let averageValue = 
+    let averageValue =
         daysValues
         |> Seq.averageBy(
-            fun (_, value) -> 
+            fun (_, value) ->
                 value |> Option.defaultValue 0 |> float)
     (targetDate, averageValue)
 
@@ -94,18 +94,18 @@ let movingAverageTrailing: MovingAverageFunc = fun (daysValues) ->
 /// Calculates the centered moving average for a given array of day values.
 /// </summary>
 /// <remarks>
-/// The centered moving average takes the day that is at the center of the 
+/// The centered moving average takes the day that is at the center of the
 /// values array as the target day of the average.
 /// </remarks>
-let movingAverageCentered: MovingAverageFunc = fun (daysValues) -> 
+let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
     match (daysValues |> Seq.length) % 2 with
     | 1 ->
         let centerIndex = (daysValues |> Seq.length) / 2
         let (targetDate, _) = daysValues.[centerIndex]
-        let averageValue = 
+        let averageValue =
             daysValues
             |> Seq.averageBy(
-                fun (_, value) -> 
+                fun (_, value) ->
                     value |> Option.defaultValue 0 |> float)
         (targetDate, averageValue)
     | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
@@ -113,8 +113,8 @@ let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
 /// <summary>
 /// Calculates the moving averages array for a given array of day values.
 /// </summary>
-let movingAverages 
-    (averageFunc: MovingAverageFunc) 
+let movingAverages
+    (averageFunc: MovingAverageFunc)
     (daysOfMovingAverage: int)
     (series: DayValueIntMaybe[]): DayValueFloat[] =
     series
@@ -125,20 +125,20 @@ let availableDisplayTypes: DisplayType array = [|
     {   Label = DisplayTypeAverageLabel;
         ValueTypes = MovingAverages;
         ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineChart; 
-        ShowLegend = true 
+        ChartType = SplineChart;
+        ShowLegend = true
     }
-    {   Label = "Skupaj"; 
-        ValueTypes = RunningTotals; 
+    {   Label = "Skupaj";
+        ValueTypes = RunningTotals;
         ShowAllOrOthers = ShowOthers;
-        ChartType = StackedBarNormal; 
-        ShowLegend = true 
+        ChartType = StackedBarNormal;
+        ShowLegend = true
     }
-    {   Label = "Relativno"; 
-        ValueTypes = RunningTotals;  
+    {   Label = "Relativno";
+        ValueTypes = RunningTotals;
         ShowAllOrOthers = ShowOthers;
-        ChartType = StackedBarPercent; 
-        ShowLegend = false 
+        ChartType = StackedBarPercent;
+        ShowLegend = false
     }
 |]
 
@@ -174,7 +174,7 @@ let renderChartOptions displayType (data : StatsData) =
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
     let metricDataGenerator mc : (StatsDataPoint -> int option) =
-        let metricFunc = 
+        let metricFunc =
             match mc.Metric with
             | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate
             | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
@@ -191,7 +191,7 @@ let renderChartOptions displayType (data : StatsData) =
         let pointData = metricDataGenerator metric
 
         let skipLeadingMissing data =
-            data |> List.skipWhile (fun (_,value: 'T option) -> value.IsNone) 
+            data |> List.skipWhile (fun (_,value: 'T option) -> value.IsNone)
 
         let skipTrailingMissing data =
             data
@@ -220,13 +220,13 @@ let renderChartOptions displayType (data : StatsData) =
         )
 
     let toFloatValues (series: DayValueIntMaybe[]) =
-        series 
-        |> Array.map (fun (date, value) -> 
+        series
+        |> Array.map (fun (date, value) ->
             (date, value |> Option.defaultValue 0 |> float))
 
     let allSeries = [
         for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
-            yield pojo 
+            yield pojo
                 {|
                 visible = true
                 color = metric.Color
@@ -235,9 +235,9 @@ let renderChartOptions displayType (data : StatsData) =
                     let runningTotals = calcRunningTotals metric
                     match displayType.ValueTypes with
                     | RunningTotals -> runningTotals |> toFloatValues
-                    | MovingAverages -> 
-                        runningTotals |> toDailyValues 
-                        |> (movingAverages 
+                    | MovingAverages ->
+                        runningTotals |> toDailyValues
+                        |> (movingAverages
                                 movingAverageCentered DaysOfMovingAverage)
                 marker = pojo {| enabled = false |}
                 |}
@@ -271,7 +271,7 @@ let renderChartOptions displayType (data : StatsData) =
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = 
+                ``type`` =
                     match displayType.ChartType with
                     | SplineChart -> "spline"
                     | StackedBarNormal -> "column"
@@ -288,7 +288,7 @@ let renderChartOptions displayType (data : StatsData) =
             |})
         plotOptions = pojo
             {|
-                series = 
+                series =
                     match displayType.ChartType with
                     | SplineChart -> pojo {| stacking = ""; |}
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
@@ -326,31 +326,32 @@ let renderDisplaySelectors activeDisplayType dispatch =
         |> prop.children
     ]
 
-let disclaimer1 = 
-    @"Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno 
-    na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem 
-    statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene 
-    delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so 
-    dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani 
-    na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev 
+let disclaimer1 =
+    @"Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno
+    na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem
+    statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene
+    delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so
+    dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani
+    na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev
     zelo konzervativna ocena."
 
 let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
 
 // TODO: the last date of the graph should be determined from the actual data
 // because the graph cuts trailing days without any data. This requires some
-// bit of refactoring of the code, to first prepare the data and only then 
+// bit of refactoring of the code, to first prepare the data and only then
 // render everything. Also the series arrays should work with native DateTime
-// so it can be used in arithmetics, instead of JsTimestamp (it should be 
-// transformed to JsTimestamp at the moment of setting the Highcharts objects).
-let lastDateOfGraph = 
+// so it can be used in arithmetic operations, instead of JsTimestamp (it
+// should be transformed to JsTimestamp at the moment of setting the Highcharts
+// objects).
+let lastDateOfGraph =
     DateTime.Now.AddDays(-(halfDaysOfMovingAverage + 1) |> float)
 
-let disclaimer2 = 
-    sprintf 
-        @"Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjeno 
+let disclaimer2 =
+    sprintf
+        @"Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjeno
         okuženih so dnevne vrednosti prikazane kot drseče povprečje %d dni.
-        Seštevek vrednosti tega dneva, %d dni pred dnevom 
+        Seštevek vrednosti tega dneva, %d dni pred dnevom
         in %d dni po tem dnevu je deljen s %d. Zato graf kaže stanje samo do %s,
         na ta način pa dobimo boljšo predstavo o trendih po posameznih skupinah."
         DaysOfMovingAverage

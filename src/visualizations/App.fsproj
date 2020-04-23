@@ -12,6 +12,7 @@
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
         <Compile Include="data/Hospitals.fs" />
+        <Compile Include="data\CountriesData.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
         <Compile Include="RegionsChart.fs" />
@@ -21,6 +22,7 @@
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
+        <Compile Include="CountriesChart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

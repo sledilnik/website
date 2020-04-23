@@ -91,10 +91,11 @@ type Visualization =
     | AgeGroups
     | Map
     | Infections
+    | Countries
 
 type RenderingMode =
     | Normal
-    | Embeded of Visualization option
+    | Embedded of Visualization option
 
 type State =
     { Query : obj // URL query parameters
