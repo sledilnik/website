@@ -440,9 +440,18 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ChartModeChanged chartMode ->
         { state with ChartMode = chartMode}, Cmd.none
     | ScaleTypeChanged scaleType ->
-        match scaleType with
-        | Absolute -> { state with ChartMode = AbsoluteInfections }, Cmd.none
-        | Relative -> { state with ChartMode = InfectionsPerPopulation }, Cmd.none
+        let toChartMode =
+            match scaleType with
+            | Absolute ->
+                match state.ChartMode with
+                | DeathsPerPopulation -> AbsoluteDeaths
+                | DeathsPerInfections -> AbsoluteDeaths
+                | _ -> AbsoluteInfections
+            | Relative ->
+                match state.ChartMode with
+                | AbsoluteInfections -> InfectionsPerPopulation
+                | _ -> DeathsPerPopulation
+        { state with ChartMode = toChartMode }, Cmd.none
 
 let renderChartContainer state =
     let infectionsAndDeathsPerAge = latestAgeData state

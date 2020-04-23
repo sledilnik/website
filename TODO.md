@@ -2,8 +2,6 @@
 
 ## age-groups-mortality
 
-- fix all todos
-- more user-friendly switch between chart modes once the scale type is changed
 - rename "display type" to something else
 - merge duplicated code?
 - document
