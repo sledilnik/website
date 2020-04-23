@@ -69,7 +69,7 @@ let populationOf sexLabel ageGroupLabel =
         sprintf "Invalid sex label: '%s'" sexLabel
         |> ArgumentException |> raise
 
-let roundTo2Decimals (value: float) = System.Math.Round(value, 2)
+let roundTo1Decimal (value: float) = System.Math.Round(value, 1)
 let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
 
 let percentageOfPopulation affected total =
@@ -80,7 +80,7 @@ let percentageOfPopulationMaybe infections population =
     infections |> Option.map (fun x -> percentageOfPopulation x population)
 
 let percentageOfInfected deaths infections =
-    (float deaths) / (float infections) * 100. |> roundTo2Decimals
+    (float deaths) / (float infections) * 100. |> roundTo1Decimal
 
 let deathsPerInfectionsMaybe deaths infections =
     match deaths, infections with
