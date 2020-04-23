@@ -2,7 +2,6 @@
 
 ## age-groups-mortality
 
-- rename "display type" to something else
 - merge duplicated code?
 - document
 - split into several files?

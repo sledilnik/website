@@ -294,20 +294,20 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         ]
     ]
 
-let renderDisplayTypeSelector
-    (displayType: ChartMode)
-    (activeDisplayType: ChartMode)
-    dispatch =
+let renderChartCategorySelector
+    (activeChartMode: ChartMode)
+    dispatch
+    (chartModeToRender: ChartMode) =
 
-    let isActive = displayType = activeDisplayType
+    let isActive = chartModeToRender = activeChartMode
 
     Html.div [
-        prop.onClick (fun _ -> ChartModeChanged displayType |> dispatch)
+        prop.onClick (fun _ -> ChartModeChanged chartModeToRender |> dispatch)
         prop.className [
             true, "btn btn-sm metric-selector";
             isActive, "metric-selector--selected" ]
         prop.text (
-            match displayType with
+            match chartModeToRender with
             | AbsoluteInfections -> "Potrjeno okuženi"
             | AbsoluteDeaths -> "Umrli"
             | InfectionsPerPopulation -> "Delež potrjeno okuženih"
@@ -316,8 +316,8 @@ let renderDisplayTypeSelector
             )
     ]
 
-let renderDisplayTypeSelectors activeChartMode dispatch =
-    let displayTypesForChartMode chartMode =
+let renderChartCategorySelectors activeChartMode dispatch =
+    let categoriesForChartMode chartMode =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
@@ -328,11 +328,9 @@ let renderDisplayTypeSelectors activeChartMode dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            displayTypesForChartMode activeChartMode
-            |> List.map (fun displayType ->
-                renderDisplayTypeSelector
-                    displayType activeChartMode dispatch
-            ) ) ]
+            categoriesForChartMode activeChartMode
+            |> List.map (renderChartCategorySelector activeChartMode dispatch)
+            ) ]
 
 let renderChartOptions
     (state : State) (chartData: AgesChartData) =
@@ -469,7 +467,7 @@ let render (state : State) dispatch =
     Html.div [
         renderScaleTypeSelectors activeScaleType (ScaleTypeChanged >> dispatch)
         renderChartContainer state
-        renderDisplayTypeSelectors state.ChartMode dispatch
+        renderChartCategorySelectors state.ChartMode dispatch
     ]
 
 let renderChart (props : {| data : StatsData |}) =
