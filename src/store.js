@@ -160,11 +160,11 @@ const statsStore = {
 
       const ts = new Date().getTime()
 
-      const d = await exportTime(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv.timestamp?nocache=${ts}`)
+      const d = await exportTime(`https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`)
 
       const [data, regions] = await Promise.all([
-        loadCsv(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/stats.csv?nocache=${ts}`),
-        d3.csv(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-region.csv?nocache=${ts}`),
+        loadCsv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv?nocache=${ts}`),
+        d3.csv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-region.csv?nocache=${ts}`),
       ]);
       commit('setData', data)
       commit('setRegions', regions)
@@ -240,11 +240,11 @@ const hospitalsStore = {
 
       const ts = new Date().getTime()
 
-      const d = await exportTime(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/hospitals.csv.timestamp?nocache=${ts}`)
+      const d = await exportTime(`https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv.timestamp?nocache=${ts}`)
 
-      let data = await loadCsv(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/hospitals.csv?nocache=${ts}`)
+      let data = await loadCsv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv?nocache=${ts}`)
       let hospitals = {}
-      let rawData = await d3.csv(`https://raw.githubusercontent.com/slo-covid-19/data/master/csv/dict-hospitals.csv?nocache=${ts}`)
+      let rawData = await d3.csv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-hospitals.csv?nocache=${ts}`)
 
       rawData.forEach(row => {
         hospitals[row.id] = row.name
