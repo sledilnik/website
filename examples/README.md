@@ -5,7 +5,7 @@
 ## Embedding visualizations into your webpage
 
 You can embed visualizations from [Sledilnik.org](https://covid-19.sledilnik.org/) by using `<iframe>`.
-For example, see [`embed.html`](https://github.com/slo-covid-19/website/tree/master/examples/embed.html) and [`embed_multi.html`](https://github.com/slo-covid-19/website/tree/master/examples/embed_multi.html).
+For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master/examples/embed.html) and [`embed_multi.html`](https://github.com/sledilnik/website/tree/master/examples/embed_multi.html).
 
 ## Charts
 

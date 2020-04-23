@@ -5,7 +5,7 @@
         <h1>Vgradite graf v vašo spletno stran</h1>
         <b-form-select v-model="chosenChartValue" :options="charts"></b-form-select>
         Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. 
-        Podrobnejša navodila <a href="https://github.com/slo-covid-19/website/blob/master/examples/README.md">najdete tukaj</a>. 
+        Podrobnejša navodila <a href="https://github.com/sledilnik/website/blob/master/examples/README.md">najdete tukaj</a>. 
           </div>
       <div class="p-3">
         <h3 v-if="chosenChart">Koda za vdelavo:</h3>

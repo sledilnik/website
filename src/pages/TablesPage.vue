@@ -19,9 +19,9 @@
         </b-tabs>
         <div class="footnote">
           Viri podatkov:
-          <a href="https://github.com/slo-covid-19/data/blob/master/csv/stats.csv">CSV</a>,
+          <a href="https://github.com/sledilnik/data/blob/master/csv/stats.csv">CSV</a>,
           <a href="https://covid19.rthand.com/api/stats">REST</a>,
-          <a href="https://tinyurl.com/slo-covid-19">Google Sheet</a>
+          <a href="https://tinyurl.com/sledilnik-gdocs">Google Sheet</a>
         </div>
       </div>
     </div>
