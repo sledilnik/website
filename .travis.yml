@@ -19,12 +19,9 @@ before_install:
 install: yarn --frozen-lockfile
 script: 
   - if [ "$TRAVIS_BRANCH" != "master" ]; then export C19_OUTPUT_DIR="dist/${TRAVIS_BRANCH}"; export C19_PUBLIC_PATH="https://preview.sledilnik.org/${TRAVIS_BRANCH}"; fi
-  - echo $C19_OUTPUT_DIR
-  - echo $C19_PUBLIC_PATH
   - yarn test
   - yarn test-fsharp
   - yarn build
-  - ls dist/
 deploy:
   - on:
       all_branches: true
@@ -56,4 +53,4 @@ deploy:
 
 notifications:
   slack:
-    secure: "L/kvRTErzbY0Aam1Ve4lZFTkOpsA9dyP2YCeFEvdpyzagfNjrbcLbs3sa5Zz34KSayVRVF4GckS6Y8f9KaAiGgxBwuCDjioAoF7WUpqO456t00mSwc0YMc6/rF9XxfEzz+CLMuBHRcTUrofCNYv77yNCWOXJpSlx9bCBCBoj4YG3NyYuqC/3j/dauiMB3pd91ibBT2P0T+fwgY8P05BctWSbAC6ispveKQkobbnw//Yke6gtU5IuX+0Vp0hOyfrK3bSEOEVUPl0DMCqFd2Z8MUOUaFNW6QVutMIvc6xh7oScAkM3ptnwfjmxB9xishlvRoJZytsy6l1NBltixhTEnUG/fHPdA/FWSGN09eq5lmF3mxx2C4Fi/niVaZr8gc99tmh+p0QlsmMdhADATNO+W+HtlAuyiIhVbDUKNIDz/g1D0uouj4W/+q5HGAjEdLGKLB1olcq+GUbfA/W9sWI2VDRTE8UbmuDhdUh4RU+mHw2mMWceLgGvTDwRcP0c+6ugeRDkPuVkQJeMR11T4KYNiFdQfO2hm1P+pMbGKnCc+WjWLWHNLt+PM4uThEuJgwvdYNCZSRvfflaTs3MdGBosTYw8WJp4qDZlUf1bcnrSpLNYEWvGRJ2H4xim9Sx9YF8gmcsHXxLtoJbUgqN9RUOKRj0qRpjjns9yybk75/AlF9I="
+    secure: "qZwMcdNqFjhIW5tL//V5vKcPJop78/yIOMs0V4KTCaTC05tVMi8XRzwoIlqZfxbPodh/TJfdy2I6Jo1QDdICkXQKYdV2VTzTcQ6iVZf8Tl9LiRo7FkvDjQNhht+gJ+s7PbGwst/N+GDjVsFESUPUTCkNogEFsEOPs4IKGIlZmf7lmCfsnd5rvw3dNaKMWm8yt7lxALaD+WQMiVGj4v5RqAGiYct3KsuUQSyhtoJ8YDcyjXYW/ZMUbd9ue6K5U5gftOBJ0z1TnEvGofDYyjv6/Q/5TEswbt8D8mxaPjqo6HBVJYPsUFBS+wlLlQkJMXEnVHbFyY4grCuNAKqyJ3P7k9/m32JZ7FNGFhAU5KJfWnitbAchszEyG7/OArLiKzDeCucznQVf6Q8iDAkitN9MV/xKafpAulzf99pruuJhaTB9+B2WW9YLNYSmPL7psjbZsxRZA81ep3HgCe6Hd2plqeaOkPQ+pFQjLrD8TDsLG9RoQQ60PbR95+Wtg65Ry0ckPkR55hdWf7oo3MS0O995ajT3kDuRiHwAaNy7tzzAo0OY9rwwS/doES3e1wDsghkK8bkKcwSlqxcWwONlBD8nIFU5DwULuEMKfELpa/UxFHAumPZYZzwlRLqZ7QEPXoeWxn3BGg8eF2yhZRi0qjXghWUU1SuID74RxvzJC0TYS2A="
