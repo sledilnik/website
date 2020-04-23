@@ -1,4 +1,4 @@
-module Data
+module DataLoader
 
 open Fable.SimpleHttp
 open Fable.SimpleJson

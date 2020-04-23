@@ -12,12 +12,10 @@ yarn-debug.log*
 yarn-error.log*
 
 # Editor directories and files
-.idea
 .vscode
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
 
 # Created by https://www.gitignore.io/api/vue,node,code
@@ -153,6 +151,10 @@ sketch
 
 .ionide
 .fake
+
+# Visual Studio stuff
+**/bin
+**/obj
 
 # Resharper/Rider stuff
 **/_Resharper*

@@ -1,0 +1,23 @@
+# User-specific stuff
+**/workspace.xml
+**/tasks.xml
+**/shelf/*
+
+# Generated files
+**/contentModel.xml
+
+# Sensitive or high-churn files
+**/dataSources/
+**/dataSources.ids
+**/dataSources.xml
+**/dataSources.local.xml
+**/sqlDataSources.xml
+**/dynamic.xml
+
+# Rider
+# Rider auto-generates .iml files, and contentModel.xml
+**/*.iml
+**/contentModel.xml
+**/modules.xml
+
+**/*.name

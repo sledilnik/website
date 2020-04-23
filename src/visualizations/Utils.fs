@@ -350,8 +350,8 @@ module Dictionaries =
         |> List.map (fun (key,  name,  population,  code) -> key,  { Key = key ; Name = name ; Population = population ; Code = code })
         |> Map.ofList
 
-module AgePopulationStats = 
-    type AgeGroupId = string    
+module AgePopulationStats =
+    type AgeGroupId = string
 
     type AgeGroupPopulationStats = {
         Key: AgeGroupId
@@ -360,7 +360,7 @@ module AgePopulationStats =
     }
 
     let agePopulationStats =
-        [ 
+        [
             "0-4", 53183, 50328
             "5-14", 106600, 100566
             "15-24", 100391, 93739
@@ -370,40 +370,39 @@ module AgePopulationStats =
             "55-64", 147957, 147089
             "65-74", 101173, 113253
             "75-84", 54460, 81981
-            "85+", 13635, 36760 
+            "85+", 13635, 36760
         ]
-        |> List.map (fun (ageGroupId,  male,  female) -> 
+        |> List.map (fun (ageGroupId,  male,  female) ->
             ageGroupId, { Key = ageGroupId;  Male = male;  Female = female })
         |> Map.ofList
 
-    let parseAgeGroupId (ageGroupId: AgeGroupId): (int option * int option) =
+    let parseAgeGroupId (ageGroupId: AgeGroupId): AgeGroupKey =
         if ageGroupId.Contains('-') then
             let i = ageGroupId.IndexOf('-')
             let fromAge = Int32.Parse(ageGroupId.Substring(0, i))
             let toAge = Int32.Parse(ageGroupId.Substring(i+1))
-            (Some fromAge, Some toAge)
+            { AgeFrom = Some fromAge; AgeTo =  Some toAge }
         else if ageGroupId.Contains('+') then
             let i = ageGroupId.IndexOf('+')
             let fromAge = Int32.Parse(ageGroupId.Substring(0, i-1))
-            (Some fromAge, None)
+            { AgeFrom = Some fromAge; AgeTo = None }
         else
             sprintf "Invalid age group ID: %s" ageGroupId
             |> ArgumentException |> raise
 
-    let toAgeGroupId (fromAge: int option) (toAge: int option): AgeGroupId =
-        match fromAge, toAge with
+    let toAgeGroupId (groupKey: AgeGroupKey): AgeGroupId =
+        match groupKey.AgeFrom, groupKey.AgeTo with
         | Some fromValue, Some toValue -> sprintf "%d-%d" fromValue toValue
         | Some fromValue, None -> sprintf "%d+" fromValue
-        | _ -> sprintf "Invalid age range (%A - %A)" fromAge toAge
+        | _ -> sprintf "Invalid age group key (%A)" groupKey
                 |> ArgumentException |> raise
 
-    let populationStatsForAgeGroup (fromAge: int option) (toAge: int option)
+    let populationStatsForAgeGroup (groupKey: AgeGroupKey)
         : AgeGroupPopulationStats =
-        let ageGroupId = toAgeGroupId fromAge toAge
+        let ageGroupId = toAgeGroupId groupKey
 
         if agePopulationStats.ContainsKey ageGroupId then
             agePopulationStats.[ageGroupId]
         else
             sprintf "Age group '%s' does not exist." ageGroupId
             |> ArgumentException |> raise
-    

@@ -27,12 +27,25 @@ type Treatment =
       OutOfHospital : int option
       RecoveredToDate : int option }
 
+type AgeGroupKey = {
+    AgeFrom : int option
+    AgeTo : int option
+    } with
+
+    member this.Label =
+        match this.AgeFrom, this.AgeTo with
+        | None, None -> ""
+        | None, Some b -> sprintf "0-%d" b
+        | Some a, Some b -> sprintf "%d-%d" a b
+        | Some a, None -> sprintf "nad %d" a
+
 type AgeGroup =
-    { AgeFrom : int option
-      AgeTo : int option
+    { GroupKey : AgeGroupKey
       Male : int option
       Female : int option
       All : int option }
+
+type AgeGroupsList = AgeGroup list
 
 type StatsDataPoint =
     { DayFromStart : int
@@ -44,8 +57,8 @@ type StatsDataPoint =
       PositiveTestsToDate : int option
       Cases : Cases
       StatePerTreatment : Treatment
-      StatePerAgeToDate : AgeGroup list
-      DeceasedPerAgeToDate : AgeGroup list
+      StatePerAgeToDate : AgeGroupsList
+      DeceasedPerAgeToDate : AgeGroupsList
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option

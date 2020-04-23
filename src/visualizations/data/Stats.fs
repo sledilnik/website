@@ -15,8 +15,7 @@ type TransferAgeGroup =
       maleToDate : int option }
 
     member this.ToDomain : AgeGroup =
-        { AgeFrom = this.ageFrom
-          AgeTo = this.ageTo
+        { GroupKey = { AgeFrom = this.ageFrom; AgeTo = this.ageTo }
           Male = this.maleToDate
           Female = this.femaleToDate
           All = this.allToDate }
