@@ -16,6 +16,7 @@ import '@/main.js'
 import 'style/index.scss'
 
 import * as aboutMd from './content/about.md'
+import * as aboutMdEn from './content/about_en.md'
 import * as linksMd from './content/links.md'
 import * as contentMd from './content/FAQ.md'
 import * as teamMd from './content/team.md'
@@ -36,6 +37,14 @@ const routes = [
     props: {
       name: 'about',
       content: aboutMd,
+    }
+  },
+  {
+    path: '/about/en',
+    component: StaticPage,
+    props: {
+      name: 'about',
+      content: aboutMdEn,
     }
   },
   {
