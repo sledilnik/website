@@ -67,11 +67,15 @@ let populationOf sexLabel ageGroupLabel =
         sprintf "Invalid sex label: '%s'" sexLabel
         |> ArgumentException |> raise
 
-let roundDecimal (value: float) = System.Math.Round(value, 3)
+let roundTo2Decimals (value: float) = System.Math.Round(value, 2)
+let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
 
 let percentageOfPopulation affected total =
     let rawPercentage = (float affected) / (float total) * 100.
-    rawPercentage |> roundDecimal
+    rawPercentage |> roundTo3Decimals
+
+let percentageOfInfected deaths infections =
+    (float deaths) / (float infections) * 100. |> roundTo2Decimals
 
 type AgeGroupKey = {
     AgeFrom : int option
@@ -248,16 +252,14 @@ let calculateChartData
                             ageGroupData.InfectionsMale with
                         | (_, Some 0) -> None
                         | (Some deaths, Some infections) ->
-                            (float deaths) / (float infections) * 100.
-                            |> roundDecimal |> Some
+                            percentageOfInfected deaths infections |> Some
                         | _ -> None
                     let female =
                         match ageGroupData.DeathsFemale,
                             ageGroupData.InfectionsFemale with
                         | (_, Some 0) -> None
                         | (Some deaths, Some infections) ->
-                            (float deaths) / (float infections) * 100.
-                            |> roundDecimal |> Some
+                            percentageOfInfected deaths infections |> Some
                         | _ -> None
                     (male, female)
 

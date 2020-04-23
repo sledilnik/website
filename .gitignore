@@ -17,7 +17,6 @@ yarn-error.log*
 *.suo
 *.ntvs*
 *.njsproj
-*.sln
 *.sw?
 
 # Created by https://www.gitignore.io/api/vue,node,code
