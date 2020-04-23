@@ -37,6 +37,8 @@ type Msg =
     | ChartModeChanged of ChartMode
     | ScaleTypeChanged of ScaleType
 
+let maybeFloat = Option.map float
+
 [<Literal>]
 let LabelMale = "Moški"
 [<Literal>]
@@ -74,8 +76,18 @@ let percentageOfPopulation affected total =
     let rawPercentage = (float affected) / (float total) * 100.
     rawPercentage |> roundTo3Decimals
 
+let percentageOfPopulationMaybe infections population =
+    infections |> Option.map (fun x -> percentageOfPopulation x population)
+
 let percentageOfInfected deaths infections =
     (float deaths) / (float infections) * 100. |> roundTo2Decimals
+
+let deathsPerInfectionsMaybe deaths infections =
+    match deaths, infections with
+    | (_, Some 0) -> None
+    | (Some deaths, Some infections) ->
+        percentageOfInfected deaths infections |> Some
+    | _ -> None
 
 type AgeGroupKey = {
     AgeFrom : int option
@@ -97,7 +109,7 @@ type InfectionsAndDeathsForAgeGroup = {
     DeathsFemale : int option
 }
 
-type InfectionsAndDeathsPerAge = InfectionsAndDeathsForAgeGroup list
+type InfectionsAndDeathsPerAge = InfectionsAndDeathsForAgeGroup[]
 
 let mergeInfectionsAndDeathsByGroups
     (infections: AgeGroupsList) (deaths: AgeGroupsList)
@@ -112,6 +124,7 @@ let mergeInfectionsAndDeathsByGroups
                              InfectionsFemale = group.Female
                              DeathsMale = None; DeathsFemale = None }
             combined)
+        |> List.toArray
 
     let deathsDict =
         deaths
@@ -121,7 +134,7 @@ let mergeInfectionsAndDeathsByGroups
 
     let merged =
         mappedInfections
-        |> List.map (fun combined ->
+        |> Array.map (fun combined ->
             match deathsDict.TryGetValue combined.GroupKey with
             | (true, deathsForGroup) ->
                 { combined with
@@ -130,7 +143,7 @@ let mergeInfectionsAndDeathsByGroups
             | (false, _) -> combined
             )
 
-    merged |> List.sortBy (fun group -> group.GroupKey)
+    merged |> Array.sortBy (fun group -> group.GroupKey)
 
 /// <summary>
 /// Fetches the infections and deaths per age groups for the latest day that
@@ -172,95 +185,67 @@ type AgeCategoryChartData = {
 }
 
 type AgesChartData = {
-    Categories: AgeCategoryChartData list
+    Categories: AgeCategoryChartData[]
     } with
 
     member this.AgeGroupsLabels =
         this.Categories
-        |> List.map (fun ag -> ag.GroupKey.Label)
-        |> List.toArray
+        |> Array.map (fun ag -> ag.GroupKey.Label)
 
     member this.MaleValues =
-        this.Categories
-        |> List.map (fun ag -> ag.Male)
-        |> List.toArray
+        this.Categories |> Array.map (fun ag -> ag.Male)
 
     member this.FemaleValues =
-        this.Categories
-        |> List.map (fun ag -> ag.Female)
-        |> List.toArray
+        this.Categories |> Array.map (fun ag -> ag.Female)
 
 let calculateChartData
     (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) chartMode
     : AgesChartData =
 
+
     let categories =
         infectionsAndDeathsPerAge
-        |> List.map (fun ageGroupData ->
+        |> Array.map (fun ageGroupData ->
+            let populationStats =
+                Utils.AgePopulationStats.populationStatsForAgeGroup
+                    ageGroupData.GroupKey.AgeFrom
+                    ageGroupData.GroupKey.AgeTo
 
             let (male, female) =
                 match chartMode with
                 | AbsoluteInfections ->
-                    (ageGroupData.InfectionsMale |> Option.map float,
-                     ageGroupData.InfectionsFemale |> Option.map float)
+                    (maybeFloat ageGroupData.InfectionsMale,
+                     maybeFloat ageGroupData.InfectionsFemale)
                 | AbsoluteDeaths ->
-                    (ageGroupData.DeathsMale |> Option.map float,
-                     ageGroupData.DeathsFemale |> Option.map float)
+                    (maybeFloat ageGroupData.DeathsMale,
+                     maybeFloat ageGroupData.DeathsFemale)
                 | InfectionsPerPopulation ->
-                    let populationStats =
-                        Utils.AgePopulationStats.populationStatsForAgeGroup
-                            ageGroupData.GroupKey.AgeFrom
-                            ageGroupData.GroupKey.AgeTo
-
                     let male =
-                        match ageGroupData.InfectionsMale with
-                        | Some x ->
-                            percentageOfPopulation x populationStats.Male
-                            |> Some
-                        | None -> None
+                        percentageOfPopulationMaybe
+                            ageGroupData.InfectionsMale populationStats.Male
                     let female =
-                        match ageGroupData.InfectionsFemale with
-                        | Some x ->
-                            percentageOfPopulation x populationStats.Female
-                            |> Some
-                        | None -> None
+                        percentageOfPopulationMaybe
+                            ageGroupData.InfectionsFemale populationStats.Female
                     (male, female)
 
                 | DeathsPerPopulation ->
-                    let populationStats =
-                        Utils.AgePopulationStats.populationStatsForAgeGroup
-                            ageGroupData.GroupKey.AgeFrom
-                            ageGroupData.GroupKey.AgeTo
-
                     let male =
-                        match ageGroupData.DeathsMale with
-                        | Some x ->
-                            percentageOfPopulation x populationStats.Male
-                            |> Some
-                        | None -> None
+                        percentageOfPopulationMaybe
+                            ageGroupData.DeathsMale populationStats.Male
                     let female =
-                        match ageGroupData.DeathsFemale with
-                        | Some x ->
-                            percentageOfPopulation x populationStats.Female
-                            |> Some
-                        | None -> None
+                        percentageOfPopulationMaybe
+                            ageGroupData.DeathsFemale populationStats.Female
                     (male, female)
 
                 | DeathsPerInfections ->
                     let male =
-                        match ageGroupData.DeathsMale,
-                            ageGroupData.InfectionsMale with
-                        | (_, Some 0) -> None
-                        | (Some deaths, Some infections) ->
-                            percentageOfInfected deaths infections |> Some
-                        | _ -> None
+                        deathsPerInfectionsMaybe
+                            ageGroupData.DeathsMale
+                            ageGroupData.InfectionsMale
                     let female =
-                        match ageGroupData.DeathsFemale,
-                            ageGroupData.InfectionsFemale with
-                        | (_, Some 0) -> None
-                        | (Some deaths, Some infections) ->
-                            percentageOfInfected deaths infections |> Some
-                        | _ -> None
+                        deathsPerInfectionsMaybe
+                            ageGroupData.DeathsFemale
+                            ageGroupData.InfectionsFemale
                     (male, female)
 
             { GroupKey = ageGroupData.GroupKey
@@ -370,40 +355,43 @@ let renderChartOptions
            |}
        tooltip = pojo
            {| formatter = fun () ->
+                let sex = jsThis?series?name
+                let ageGroup = jsThis?point?category
+                let dataValue: float = jsThis?point?y
+
                 match state.ChartMode with
                 | AbsoluteInfections ->
                     sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %d"
-                        jsThis?series?name
-                        jsThis?point?category
-                        (abs(jsThis?point?y))
+                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %A"
+                        sex
+                        ageGroup
+                        (abs dataValue)
                 | InfectionsPerPopulation ->
                     sprintf
                         "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d"
-                        jsThis?series?name
-                        jsThis?point?category
-                        (percentageValuesLabelFormatter jsThis?point?y)
-                        (populationOf jsThis?series?name jsThis?point?category)
-
+                        sex
+                        ageGroup
+                        (percentageValuesLabelFormatter dataValue)
+                        (populationOf sex ageGroup)
                 | AbsoluteDeaths ->
                     sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %d"
-                        jsThis?series?name
-                        jsThis?point?category
-                        (abs(jsThis?point?y))
+                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %A"
+                        sex
+                        ageGroup
+                        (abs dataValue)
                 | DeathsPerPopulation ->
                     sprintf
                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d"
-                        jsThis?series?name
-                        jsThis?point?category
-                        (percentageValuesLabelFormatter jsThis?point?y)
-                        (populationOf jsThis?series?name jsThis?point?category)
+                        sex
+                        ageGroup
+                        (percentageValuesLabelFormatter dataValue)
+                        (populationOf sex ageGroup)
                 | DeathsPerInfections ->
                     sprintf
                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih glede na št. okuženih: %s"
-                        jsThis?series?name
-                        jsThis?point?category
-                        (percentageValuesLabelFormatter jsThis?point?y)
+                        sex
+                        ageGroup
+                        (percentageValuesLabelFormatter dataValue)
            |}
        series = [|
            {| name = LabelMale
