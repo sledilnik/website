@@ -10,6 +10,7 @@ open Browser
 
 open Highcharts
 open Types
+open Data.OurWorldInData
 
 type DailyData = {
     Day: DateTime
@@ -31,6 +32,7 @@ type CountriesSelection =
 
 type State = {
     Data: CountriesData
+    OurWorldInData: Data.OurWorldInData.Data
     DisplayedCountries: CountriesSelection
 }
 
@@ -48,8 +50,9 @@ let ColorPalette =
       "#10829a"
       "#024a66" ]
 
-
 type Msg =
+    | DataRequested
+    | DataLoaded of Data.OurWorldInData.Data
     | ChangeCountriesSelection of CountriesSelection
 
 let parseCountriesCsv(): CountriesData =
@@ -84,14 +87,31 @@ let parseCountriesCsv(): CountriesData =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = parseCountriesCsv()
+        OurWorldInData = NotAsked
         DisplayedCountries = Scandinavia
     }
-    state, Cmd.none
+    state, Cmd.ofMsg DataRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeCountriesSelection countries ->
         { state with DisplayedCountries=countries }, Cmd.none
+    | DataRequested ->
+        let countries = ["Slovenia" ; "Italy" ; "Norway"]
+        { state with OurWorldInData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
+    | DataLoaded remoteData ->
+
+        match remoteData with
+        | NotAsked ->
+            printfn "Not asked"
+        | Loading ->
+            printfn "Loading"
+        | Failure error ->
+            printfn "Error: %s" error
+        | Success data ->
+            printfn "Success %A" data
+
+        { state with OurWorldInData = remoteData }, Cmd.none
 
 let renderChartOptions (state: State) =
     let myLoadEvent(name: String) =
@@ -162,7 +182,6 @@ let renderChartOptions (state: State) =
             |}
         legend = pojo {| legend with enabled = true |}
     |}
-
 
 let renderChartContainer state =
     Html.div [
