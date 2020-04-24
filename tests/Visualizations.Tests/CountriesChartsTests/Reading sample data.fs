@@ -7,4 +7,4 @@ open Swensen.Unquote
 let ``Data is parsed correctly``() =
     let data = CountriesChart.parseCountriesCsv()
     test <@ data |> Map.count = 4 @>
-    test <@ data.["NOR"].Data |> Array.length = 42 @>
+    test <@ data.["NOR"].Data |> Array.length = 38 @>

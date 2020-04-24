@@ -1,12 +1,12 @@
 ﻿[<RequireQualifiedAccess>]
 module CountriesChart
 
+open Browser
 open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
-
-open Browser
+open Fable.Core.JsInterop
 
 open Highcharts
 open Types
@@ -34,6 +34,42 @@ type State = {
     DisplayedCountries: CountriesSelection
 }
 
+/// <summary>
+/// A function that calculates the moving average value for a given array of
+/// day values.
+/// </summary>
+type MovingAverageFunc = (DailyData[]) -> DailyData
+
+/// <summary>
+/// Calculates the centered moving average for a given array of day values.
+/// </summary>
+/// <remarks>
+/// The centered moving average takes the day that is at the center of the
+/// values array as the target day of the average.
+/// </remarks>
+let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
+    match (daysValues |> Seq.length) % 2 with
+    | 1 ->
+        let centerIndex = (daysValues |> Seq.length) / 2
+        let targetDate = daysValues.[centerIndex].Day
+        let averageValue =
+            daysValues
+            |> Seq.averageBy(
+                fun dayValue -> dayValue.TotalDeathsPerMillion)
+        { Day = targetDate; TotalDeathsPerMillion = averageValue }
+    | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
+
+/// <summary>
+/// Calculates the moving averages array for a given array of day values.
+/// </summary>
+let movingAverages
+    (averageFunc: MovingAverageFunc)
+    (daysOfMovingAverage: int)
+    (series: DailyData[]): DailyData[] =
+    series
+    |> Array.windowed daysOfMovingAverage
+    |> Array.map averageFunc
+
 let ColorPalette =
     [ "#ffa600"
       "#dba51d"
@@ -48,6 +84,8 @@ let ColorPalette =
       "#10829a"
       "#024a66" ]
 
+[<Literal>]
+let DaysOfMovingAverage = 5
 
 type Msg =
     | ChangeCountriesSelection of CountriesSelection
@@ -72,6 +110,7 @@ let parseCountriesCsv(): CountriesData =
                 |> Seq.map(fun (_, _, date, deathsPerMillion) ->
                     { Day = date; TotalDeathsPerMillion = deathsPerMillion })
                 |> Seq.toArray
+                |> (movingAverages movingAverageCentered DaysOfMovingAverage)
             { CountryIsoCode = isoCode
               CountryName = countryName
               Data = dailyEntries }
@@ -80,6 +119,32 @@ let parseCountriesCsv(): CountriesData =
     countriesData
     |> Seq.map (fun x -> (x.CountryIsoCode, x))
     |> Map.ofSeq
+
+type CountrySeries = {
+    CountryAbbr: string
+    CountryName: string
+    Color: string
+    Data: DailyData[]
+}
+
+type ChartData = CountrySeries[]
+
+let prepareChartData (state: State): ChartData =
+    let colorsInPalette = ColorPalette |> List.length
+    let countriesCount = state.Data |> Seq.length
+
+    state.Data
+    |> Map.toArray
+    |> Array.mapi (fun countryIndex (_, countryData) ->
+            let colorIndex =
+                countryIndex * colorsInPalette / countriesCount
+            let color = ColorPalette.[colorIndex]
+
+            { CountryAbbr = countryData.CountryIsoCode
+              CountryName = countryData.CountryName
+              Color = color
+              Data = countryData.Data }
+        )
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -93,7 +158,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ChangeCountriesSelection countries ->
         { state with DisplayedCountries=countries }, Cmd.none
 
-let renderChartOptions (state: State) =
+let renderChartCode (state: State) (chartData: ChartData) =
     let myLoadEvent(name: String) =
         let ret(event: Event) =
             let evt = document.createEvent("event")
@@ -101,23 +166,16 @@ let renderChartOptions (state: State) =
             document.dispatchEvent(evt)
         ret
 
-    let colorsInPalette = ColorPalette |> List.length
-    let countriesCount = state.Data |> Seq.length
-
     let allSeries =
-        state.Data
-        |> Map.toArray
-        |> Array.mapi (fun countryIndex (_, countryData) ->
+        chartData
+        |> Array.map (fun countrySeries ->
              pojo
                 {|
                 visible = true
-                color =
-                    let colorIndex =
-                        countryIndex * colorsInPalette / countriesCount
-                    ColorPalette.[colorIndex]
-                name = countryData.CountryName
+                color = countrySeries.Color
+                name = countrySeries.CountryAbbr
                 data =
-                    countryData.Data
+                    countrySeries.Data
                     |> Array.map (fun entry ->
                         ((entry.Day |> jsTime12h), entry.TotalDeathsPerMillion))
                 marker = pojo {| enabled = false |}
@@ -161,22 +219,35 @@ let renderChartOptions (state: State) =
                 series = pojo {| stacking = ""; |}
             |}
         legend = pojo {| legend with enabled = true |}
+        tooltip = pojo
+           {| formatter = fun () ->
+                let countryCode = jsThis?series?name
+//                let date = jsThis?point?category
+                let dataValue: float = jsThis?point?y
+
+                sprintf
+                    "<b>%s</b><br/>Št. umrlih na 1 milijon prebivalcev: %A"
+                    countryCode
+                    (Utils.roundTo1Decimal dataValue)
+           |}
     |}
 
 
-let renderChartContainer state =
+let renderChartContainer state chartData =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
+            renderChartCode state chartData
             |> chart
         ]
     ]
 
 let render state dispatch =
+    let chartData = prepareChartData state
+
     Html.div [
-        renderChartContainer state
+        renderChartContainer state chartData
 //        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
 
         Html.div [
