@@ -61,6 +61,10 @@
 | [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)              |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
 
+<!--
+| [Register prostorskih enot, Geodetska uprava RS](https://www.e-prostor.gov.si/zbirke-prostorskih-podatkov/nepremicnine/register-prostorskih-enot/)                           |     |
+-->
+
 <br>
 
 Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, naš sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz _uradnih virov_, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz _administrativnih virov zdravstvenega sistema_, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, _virov Civilne zaščite_ ter seveda iz _nacionalnih in lokalnih medijev_.
