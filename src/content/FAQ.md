@@ -4,13 +4,13 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 
 ## Splošno
 <details>
-  <summary><a name="001">Zakaj Sledilnik?</a></summary>
+  <summary><a name="why-sledilnik">Zakaj Sledilnik?</a></summary>
   
-Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](#/about). Glej tudi [Kaj je Sledilnik](#projekt-01)<sup>projekt-01</sup>.
+Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](#/about). Glej tudi [Kaj je Sledilnik](#what-is-sledilnik).
 </details>
 
 <details>
-  <summary><a name="splosno-02">Kakšna je razlika med SARS-Cov-2 in COVID-19?</a></summary>
+  <summary><a name="virus-vs-disease">Kakšna je razlika med SARS-Cov-2 in COVID-19?</a></summary>
 
 **SARS-CoV-2** je angleška okrajšava za “Severe Acute Respiratory Syndrome Coronavirus 2” – to je mednarodno sprejeto ime virusa, ki povzroča bolezen **COVID-19**. Tudi slednje poimenovanje je kratica, skovana iz besed COrona VIrus Disease ter 2019, torej leta, ko je bolezen prvič izbruhnila.
 </details>
@@ -18,7 +18,7 @@ Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni 
 <details>
   <summary>Kakšna je razlika med novookužen in potrjeno okužen?</summary>
   
-V Sledilniku uporabljamo terminologijo, ki je razložena v odgovoru [Kaj pomeni izraz …?](#024)<sup>024</sup> / [Kaj pomeni izraz …?](https://covid-19.sledilnik.org/#/FAQ#024). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
+V Sledilniku uporabljamo terminologijo, ki je razložena v odgovoru [Kaj pomeni izraz …?](#what-does-it-mean). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
 </details>
 
 <details>
@@ -186,7 +186,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 
 <details>
-  <summary><a name="024">Kaj pomeni izraz …?</a> </summary>
+  <summary><a name="what-does-it-mean">Kaj pomeni izraz …?</a> </summary>
 
 * **potrjeno okuženi** = To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjeno okuženih oseb odvisno zgolj od testiranja in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
 
@@ -294,7 +294,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 ## O projektu
 
 <details>
-  <summary><a name="projekt-01">Kaj je Sledilnik?</a></summary>
+  <summary><a name="what-is-sledilnik">Kaj je Sledilnik?</a></summary>
 
 [Sledilnik je projekt](#/about), ki zbira, analizira in prikazuje nekaj najbolj uporabnih podatkov, da bi lahko bolje razumeli širjenje pandemije koronavirusa in bolezni COVID-19 skupaj z njeno dinamiko in obsegom. 
 
