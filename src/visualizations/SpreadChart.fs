@@ -86,7 +86,7 @@ let inline legend title =
         layout = "vertical"
         floating = true
         x = 8
-        y = 0
+        y = 80
         backgroundColor = "#FFF"
     |}
     |> pojo
@@ -138,7 +138,7 @@ type ChartCfg = {
                             pojo {| value= 7.0; label={| text="En teden" |}; color="#888"; dashStyle="ShortDash" |}
                             pojo {| value=30.0; label={| text="En mesec" |}; color="#888"; dashStyle="ShortDash" |}
                         |]
-                        max = Some 50
+                        max = Some 100
                     |}
 
                 dataKey = fun dp ->
