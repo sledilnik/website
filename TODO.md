@@ -2,7 +2,7 @@
 
 ## Countries comparison
 
-- do not show weekends, since we're switching to days count instead of dates
+- try to reuse moving average functions
 - move more logic to Synthesis
 - fetch data from REST
 - add tooltips

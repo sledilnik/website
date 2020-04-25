@@ -106,7 +106,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         series = allSeries
         xAxis = baseOptions.xAxis |> Array.map (fun ax ->
             {| ax with
-                plotBands = shadedWeekendPlotBands
+                plotBands = [||]
                 plotLines = [||]
             |})
         plotOptions = pojo
