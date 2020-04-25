@@ -1,8 +1,6 @@
-﻿module CountriesChartViz.Rendering
+﻿[<RequireQualifiedAccess>]
+module CountriesChart
 
-open CountriesChartViz.Analysis
-open CountriesChartViz.Synthesis
-open Browser
 open System
 open Elmish
 open Feliz
@@ -11,8 +9,11 @@ open Fable.Core.JsInterop
 
 open Highcharts
 open Types
+open Data.OurWorldInData
 
 type Msg =
+    | DataRequested
+    | DataLoaded of Data.OurWorldInData.Data
     | ChangeCountriesSelection of CountriesSelection
 
 [<Literal>]
@@ -20,15 +21,33 @@ let DaysOfMovingAverage = 5
 
 let init data : ChartState * Cmd<Msg> =
     let state = {
+        Data = parseCountriesCsv()
+        OurWorldInData = NotAsked
         Data = parseCountriesCsv DaysOfMovingAverage
         DisplayedCountries = Scandinavia
     }
-    state, Cmd.none
+    state, Cmd.ofMsg DataRequested
 
 let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     match msg with
     | ChangeCountriesSelection countries ->
         { state with DisplayedCountries=countries }, Cmd.none
+    | DataRequested ->
+        let countries = ["Slovenia" ; "Italy" ; "Norway"]
+        { state with OurWorldInData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
+    | DataLoaded remoteData ->
+
+        match remoteData with
+        | NotAsked ->
+            printfn "Not asked"
+        | Loading ->
+            printfn "Loading"
+        | Failure error ->
+            printfn "Error: %s" error
+        | Success data ->
+            printfn "Success %A" data
+
+        { state with OurWorldInData = remoteData }, Cmd.none
 
 let renderChartCode (state: ChartState) (chartData: ChartData) =
     let myLoadEvent(name: String) =
