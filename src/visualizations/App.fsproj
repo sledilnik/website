@@ -22,7 +22,9 @@
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
-        <Compile Include="CountriesChart.fs" />
+        <Compile Include="CountriesChartViz\Analysis.fs" />
+        <Compile Include="CountriesChartViz\Synthesis.fs" />
+        <Compile Include="CountriesChartViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

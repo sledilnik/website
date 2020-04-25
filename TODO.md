@@ -2,7 +2,7 @@
 
 ## Countries comparison
 
-- try to separate code for analysis, chart data construction and rendering
+- move more logic to Synthesis
 - fetch data from REST
 - add tooltips
     - tooltip should include the date
