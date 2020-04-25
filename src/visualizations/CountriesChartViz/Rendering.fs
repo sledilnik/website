@@ -1,7 +1,10 @@
-﻿[<RequireQualifiedAccess>]
-module CountriesChart
+﻿module CountriesChartViz.Rendering
 
+open CountriesChartViz.Analysis
+open CountriesChartViz.Synthesis
 open System
+open DataLoader
+open Browser
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -21,7 +24,6 @@ let DaysOfMovingAverage = 5
 
 let init data : ChartState * Cmd<Msg> =
     let state = {
-        Data = parseCountriesCsv()
         OurWorldInData = NotAsked
         Data = parseCountriesCsv DaysOfMovingAverage
         DisplayedCountries = Scandinavia

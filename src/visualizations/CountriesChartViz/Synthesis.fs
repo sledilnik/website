@@ -4,6 +4,7 @@ open CountriesChartViz.Analysis
 
 type ChartState = {
     Data: CountriesData
+    OurWorldInData: Data.OurWorldInData.Data
     DisplayedCountries: CountriesSelection
 }
 

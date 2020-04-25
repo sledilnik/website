@@ -2,6 +2,7 @@
 
 ## Countries comparison
 
+- do not show weekends, since we're switching to days count instead of dates
 - move more logic to Synthesis
 - fetch data from REST
 - add tooltips
