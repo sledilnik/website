@@ -145,6 +145,7 @@ let prepareChartData (state: State): ChartData =
               Color = color
               Data = countryData.Data }
         )
+    |> Array.sortBy (fun x -> x.CountryAbbr)
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -181,6 +182,8 @@ let renderChartCode (state: State) (chartData: ChartData) =
                 marker = pojo {| enabled = false |}
                 |}
             )
+        // we need to reverse the array, for some reason
+        |> Array.rev
 
     let legend =
         {|
@@ -226,7 +229,7 @@ let renderChartCode (state: State) (chartData: ChartData) =
                 let dataValue: float = jsThis?point?y
 
                 sprintf
-                    "<b>%s</b><br/>Št. umrlih na 1 milijon prebivalcev: %A"
+                    "<b>%s</b><br/>Umrli na 1 milijon preb.: %A"
                     countryCode
                     (Utils.roundTo1Decimal dataValue)
            |}
