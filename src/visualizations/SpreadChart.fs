@@ -133,7 +133,7 @@ type ChartCfg = {
                         ``type``="logarithmic"
                         reversed=true
                         plotLines=[|
-                            pojo {| value=40.0; label={| text="⬑ Povprečje Južne Koreje v preteklih dneh"; align="right"; y= 12; x= -10 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            pojo {| value=40.0; label={| text="Povprečje Južne Koreje v preteklih dneh"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
                             pojo {| value= 1.0; label={| text="En dan"   |}; color="#aaa"; dashStyle="ShortDash" |}
                             pojo {| value= 7.0; label={| text="En teden" |}; color="#888"; dashStyle="ShortDash" |}
                             pojo {| value=30.0; label={| text="En mesec" |}; color="#888"; dashStyle="ShortDash" |}
