@@ -172,9 +172,10 @@ let renderChartOptions scaleType (data : StatsData) =
 
     let chartCfg = ChartCfg.fromScale scaleType
     let startDate = DateTime(2020,3,4)
+    let mutable startTime = startDate |> jsTime
 
     let allSeries = [|
-        {|
+        yield pojo {|
             //visible = true
             id = "data"
             color = "#bda506"
@@ -190,8 +191,8 @@ let renderChartOptions scaleType (data : StatsData) =
             //showInLegend = true
             //fillOpacity = 0
         |}
-        |> pojo
-
+        yield addContainmentMeasuresFlags startTime |> pojo
+        
         //if scaleType = Absolute then
         (*
         {|
