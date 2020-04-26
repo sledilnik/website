@@ -2,6 +2,7 @@
 
 open System
 open CountriesChartViz.Analysis
+open Statistics
 
 type ChartState = {
     Data: CountriesData

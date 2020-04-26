@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module InfectionsChart
 
+open Statistics
 open System
 open Elmish
 open Feliz
@@ -68,59 +69,6 @@ let DisplayTypeAverageLabel = "Po dnevih (povprečno)"
 
 [<Literal>]
 let DaysOfMovingAverage = 5
-
-/// <summary>
-/// A function that calculates the moving average value for a given array of
-/// day values.
-/// </summary>
-type MovingAverageFunc = (DayValueIntMaybe[]) -> DayValueFloat
-
-/// <summary>
-/// Calculates the trailing moving average for a given array of day values.
-/// </summary>
-/// <remarks>
-/// The trailing moving average takes the last day as the target day of the
-/// average.
-/// </remarks>
-let movingAverageTrailing: MovingAverageFunc = fun (daysValues) ->
-    let (targetDate, _) = daysValues |> Array.last
-    let averageValue =
-        daysValues
-        |> Seq.averageBy(
-            fun (_, value) ->
-                value |> Option.defaultValue 0 |> float)
-    (targetDate, averageValue)
-
-/// <summary>
-/// Calculates the centered moving average for a given array of day values.
-/// </summary>
-/// <remarks>
-/// The centered moving average takes the day that is at the center of the
-/// values array as the target day of the average.
-/// </remarks>
-let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
-    match (daysValues |> Seq.length) % 2 with
-    | 1 ->
-        let centerIndex = (daysValues |> Seq.length) / 2
-        let (targetDate, _) = daysValues.[centerIndex]
-        let averageValue =
-            daysValues
-            |> Seq.averageBy(
-                fun (_, value) ->
-                    value |> Option.defaultValue 0 |> float)
-        (targetDate, averageValue)
-    | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
-
-/// <summary>
-/// Calculates the moving averages array for a given array of day values.
-/// </summary>
-let movingAverages
-    (averageFunc: MovingAverageFunc)
-    (daysOfMovingAverage: int)
-    (series: DayValueIntMaybe[]): DayValueFloat[] =
-    series
-    |> Array.windowed daysOfMovingAverage
-    |> Array.map averageFunc
 
 let availableDisplayTypes: DisplayType array = [|
     {   Label = DisplayTypeAverageLabel
@@ -235,7 +183,12 @@ let renderChartOptions displayType (data : StatsData) =
                     | MovingAverages ->
                         runningTotals |> toDailyValues
                         |> (movingAverages
-                                movingAverageCentered DaysOfMovingAverage)
+                                movingAverageCentered
+                                DaysOfMovingAverage
+                                (fun (timestamp, _) -> timestamp)
+                                (fun (_, value) ->
+                                    value |> Option.defaultValue 0 |> float)
+                            )
                 marker = pojo {| enabled = false |}
                 |}
     ]
