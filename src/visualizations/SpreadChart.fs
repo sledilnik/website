@@ -175,24 +175,25 @@ let renderChartOptions scaleType (data : StatsData) =
     let mutable startTime = startDate |> jsTime
 
     let allSeries = [|
-        yield pojo {|
-            //visible = true
-            id = "data"
-            color = "#bda506"
-            name = chartCfg.seriesLabel
-            dataLabels = pojo {| enabled = true |}
-            //className = "cs-positiveTestsToDate"
-            data =
-                data
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map chartCfg.dataKey
-                |> Seq.toArray
-            //yAxis = 0 // axis index
-            //showInLegend = true
-            //fillOpacity = 0
-        |}
+        yield pojo 
+            {|
+                //visible = true
+                id = "data"
+                color = "#bda506"
+                name = chartCfg.seriesLabel
+                dataLabels = pojo {| enabled = true |}
+                //className = "cs-positiveTestsToDate"
+                data =
+                    data
+                    |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                    |> Seq.map chartCfg.dataKey
+                    |> Seq.toArray
+                //yAxis = 0 // axis index
+                //showInLegend = true
+                //fillOpacity = 0
+            |}
         yield addContainmentMeasuresFlags startTime |> pojo
-        
+
         //if scaleType = Absolute then
         (*
         {|

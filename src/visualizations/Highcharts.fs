@@ -103,6 +103,7 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         shape = "flag"
         showInLegend = false
         color = "#444"
+        yAxis = "flags"
         data =
             events |> Array.choose (fun (d,m,color,title,text) ->
                 let ts = DateTime(2020,m,d) |> jsTime
