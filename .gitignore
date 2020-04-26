@@ -159,3 +159,14 @@ sketch
 
 # Resharper/Rider stuff
 **/_Resharper*
+
+### Firebase ###
+.idea
+**/node_modules/*
+**/.firebaserc
+
+### Firebase Patch ###
+.runtimeconfig.json
+.firebase/
+
+# End of https://www.gitignore.io/api/firebase
