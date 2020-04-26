@@ -32,7 +32,6 @@
 .highcharts-series-group .cs-hospital { path { stroke: #be772a }}
 .highcharts-series-group .cs-home { path { stroke: #003f5c }}
 
-
 // hospitals
 .highcharts-series-group .cs-hospital-ukclj { path { stroke: #10829a }}
 .highcharts-series-group .cs-hospital-ukcmb { path { stroke: #003f5c }}
@@ -46,6 +45,8 @@
     //stroke: none;
 }
 */
+
+.highcharts-plot-line-label { stroke: #DCDCDC }
 
 
 div.highcharts-tooltip {

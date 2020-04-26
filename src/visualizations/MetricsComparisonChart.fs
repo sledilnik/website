@@ -110,37 +110,6 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
 
-    let renderFlags startTime =
-        let events = [|
-        // day, mo, color,    title,       tooltip text
-            4,  3, "#FFFFFF", "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
-            6,  3, "#FFe6e6", "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
-            8,  3, "#FFFFFF", "Točke",     "16 vstopnih točk za testiranje"
-            10, 3, "#FFe6e6", "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
-            13, 3, "#FFFFFF", "Vlada",     "Sprejeta nova vlada"
-            14, 3, "#FFe6e6", "Prevozi",   "Ukinitev javnih prevozov"
-            16, 3, "#FFe6e6", "Šole",      "Zaprtje šol, restavracij"
-            20, 3, "#FFe6e6", "Zbiranje",  "Prepoved zbiranja na javnih mestih"
-            30, 3, "#FFe6e6", "Občine",    "Prepoved gibanja izven meja občin, obvezno razkuževanje <br/>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
-            4,  4, "#e6f0ff", "Trgovine",  "Trgovine od 8-10 ure in zadnjo uro izključno <br/>za ranljive skupine (invalidi, upokojenci, nosečnice)"
-            12, 4, "#FFe6e6", "Karantena", "Obvezna 7 dnevna karantena pri prihodu iz tujine"
-            18, 4, "#ebfaeb", "Vikendi",   "Splošna prepoved gibanja in sproščanje omejitev <br/>gibanja med občinami (vikendi...)"
-            20, 4, "#ebfaeb", "Servisi",   "Sproščanje nekaterih dejavnosti (gradnja, servisi, šport na prostem...), <br/>dovoljeni nekateri linijski prevozi"
-        |]
-        {|
-            ``type`` = "flags"
-            shape = "flag"
-            showInLegend = false
-            color = "#444"
-            data =
-                events |> Array.choose (fun (d,m,color,title,text) ->
-                    let ts = DateTime(2020,m,d) |> jsTime
-                    if ts >= startTime then Some {| x=ts; fillColor=color; title=title; text=text |}
-                    else None
-                )
-        |}
-
-
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
         for metric in metrics do
@@ -164,8 +133,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     //showInLegend = true
                     //fillOpacity = 0
                 |}
-        if scaleType = Linear then
-            yield renderFlags startTime |> pojo
+        yield addContainmentMeasuresFlags startTime |> pojo
     ]
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"

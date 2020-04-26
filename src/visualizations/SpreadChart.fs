@@ -67,11 +67,11 @@ let inline yAxisBase () =
         opposite = true // right side
         reversed = false
         title = {| text = null |} // "oseb" |}
-        //showFirstLabel = false
+        showFirstLabel = false  // need to hide negative label for addContainmentMeasuresFlags
         tickInterval = None
         gridZIndex = -1
         max = None
-        plotLines = [||]
+        plotLines = [| {| value = 0; color = "black" |} |]
     |}
 
 let inline legend title =
@@ -172,25 +172,27 @@ let renderChartOptions scaleType (data : StatsData) =
 
     let chartCfg = ChartCfg.fromScale scaleType
     let startDate = DateTime(2020,3,4)
+    let mutable startTime = startDate |> jsTime
 
     let allSeries = [|
-        {|
-            //visible = true
-            id = "data"
-            color = "#bda506"
-            name = chartCfg.seriesLabel
-            dataLabels = pojo {| enabled = true |}
-            //className = "cs-positiveTestsToDate"
-            data =
-                data
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map chartCfg.dataKey
-                |> Seq.toArray
-            //yAxis = 0 // axis index
-            //showInLegend = true
-            //fillOpacity = 0
-        |}
-        |> pojo
+        yield pojo 
+            {|
+                //visible = true
+                id = "data"
+                color = "#bda506"
+                name = chartCfg.seriesLabel
+                dataLabels = pojo {| enabled = true |}
+                //className = "cs-positiveTestsToDate"
+                data =
+                    data
+                    |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                    |> Seq.map chartCfg.dataKey
+                    |> Seq.toArray
+                //yAxis = 0 // axis index
+                //showInLegend = true
+                //fillOpacity = 0
+            |}
+        yield addContainmentMeasuresFlags startTime |> pojo
 
         //if scaleType = Absolute then
         (*
