@@ -1,5 +1,6 @@
 module Data.OurWorldInData
 
+open System
 open Fable.SimpleHttp
 
 open EdelweissData.Base.Identifiers
@@ -33,15 +34,18 @@ let createQuery (countries : string list) =
     { DataQuery.Default with
         Condition = Some (Or (List.map countryMatch countries)) }
 
+type CountryIsoCode = string
+
 type DataPoint = {
-    Location : string
+    CountryCode : CountryIsoCode
+    CountryName : string
     Date : string
     TotalCases : int
     TotalCasesPerMillion : float option
     TotalDeathsPerMillion : float option
 }
 
-type Data = RemoteData<DataPoint list, string>
+type OurWorldInDataRemoteData = RemoteData<DataPoint list, string>
 
 let stringOfResult row column =
     match row.Data.TryFind column with
@@ -116,7 +120,8 @@ let load countries msg =
                             data.Results
                             |> List.map (fun row ->
                             {
-                                Location = stringOfResult row "location"
+                                CountryCode = stringOfResult row "iso_code"
+                                CountryName = stringOfResult row "location"
                                 Date = stringOfResult row "date"
                                 TotalCases = intOfResult row "total_cases"
                                 TotalCasesPerMillion =

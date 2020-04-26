@@ -7,8 +7,7 @@ open Statistics
 open JsInterop
 
 type ChartState = {
-    Data: CountriesData
-    OurWorldInData: Data.OurWorldInData.Data
+    Data: Data.OurWorldInData.OurWorldInDataRemoteData
     DisplayedCountries: CountriesSelection
 }
 
@@ -46,20 +45,32 @@ let legendFormatter jsThis =
         (Utils.roundTo1Decimal dataValue)
 
 
-let prepareChartData (state: ChartState): ChartData =
-    let colorsInPalette = ColorPalette |> List.length
-    let countriesCount = state.Data |> Seq.length
+let prepareChartData
+    daysOfMovingAverage
+    (state: ChartState)
+    : ChartData option =
 
-    state.Data
-    |> Map.toArray
-    |> Array.mapi (fun countryIndex (_, countryData) ->
-            let colorIndex =
-                countryIndex * colorsInPalette / countriesCount
-            let color = ColorPalette.[colorIndex]
+    let aggregated =
+        state.Data
+        |> aggregateOurWorldInData daysOfMovingAverage
 
-            { CountryAbbr = countryData.CountryIsoCode
-              CountryName = countryData.CountryName
-              Color = color
-              Data = countryData.Data }
-        )
-    |> Array.sortBy (fun x -> x.CountryAbbr)
+    match aggregated with
+    | Some aggregated ->
+        let colorsInPalette = ColorPalette |> List.length
+        let countriesCount = aggregated |> Seq.length
+
+        aggregated
+        |> Map.toArray
+        |> Array.mapi (fun countryIndex (_, countryData) ->
+                let colorIndex =
+                    countryIndex * colorsInPalette / countriesCount
+                let color = ColorPalette.[colorIndex]
+
+                { CountryAbbr = countryData.CountryIsoCode
+                  CountryName = countryData.CountryName
+                  Color = color
+                  Data = countryData.Data }
+            )
+        |> Array.sortBy (fun x -> x.CountryAbbr)
+        |> Some
+    | None -> None

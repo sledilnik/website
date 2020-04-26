@@ -14,7 +14,7 @@ open Types
 
 type Msg =
     | DataRequested
-    | DataLoaded of Data.OurWorldInData.Data
+    | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
     | ChangeCountriesSelection of CountriesSelection
 
 [<Literal>]
@@ -22,8 +22,7 @@ let DaysOfMovingAverage = 5
 
 let init data : ChartState * Cmd<Msg> =
     let state = {
-        OurWorldInData = NotAsked
-        Data = parseCountriesCsv DaysOfMovingAverage
+        Data = NotAsked
         DisplayedCountries = Scandinavia
     }
     state, Cmd.ofMsg DataRequested
@@ -34,7 +33,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         { state with DisplayedCountries=countries }, Cmd.none
     | DataRequested ->
         let countries = ["Slovenia" ; "Italy" ; "Norway"]
-        { state with OurWorldInData = Loading },
+        { state with Data = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
     | DataLoaded remoteData ->
 
@@ -48,7 +47,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         | Success data ->
             printfn "Success %A" data
 
-        { state with OurWorldInData = remoteData }, Cmd.none
+        { state with Data = remoteData }, Cmd.none
 
 let renderChartCode (state: ChartState) (chartData: ChartData) =
     let myLoadEvent(name: String) =
@@ -128,16 +127,19 @@ let renderChartContainer state chartData =
     ]
 
 let render state dispatch =
-    let chartData = prepareChartData state
+    let chartData = state |> prepareChartData DaysOfMovingAverage
 
-    Html.div [
-        renderChartContainer state chartData
-//        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
-
+    match chartData with
+    | Some chartData ->
         Html.div [
-            prop.className "disclaimer"
+            renderChartContainer state chartData
+    //        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
+
+            Html.div [
+                prop.className "disclaimer"
+            ]
         ]
-    ]
+    | None -> Html.div []
 
 let renderChart (props : {| data : StatsData |}) =
     React.elmishComponent
