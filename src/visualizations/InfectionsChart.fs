@@ -59,6 +59,7 @@ type DisplayType = {
     ValueTypes: ValueTypes
     ShowAllOrOthers: ShowAllOrOthers
     ChartType: ChartType
+    ShowPhases: bool
     ShowLegend: bool
 }
 
@@ -122,22 +123,25 @@ let movingAverages
     |> Array.map averageFunc
 
 let availableDisplayTypes: DisplayType array = [|
-    {   Label = DisplayTypeAverageLabel;
-        ValueTypes = MovingAverages;
-        ShowAllOrOthers = ShowAllConfirmed;
-        ChartType = SplineChart;
+    {   Label = DisplayTypeAverageLabel
+        ValueTypes = MovingAverages
+        ShowAllOrOthers = ShowAllConfirmed
+        ChartType = SplineChart
+        ShowPhases = true
         ShowLegend = true
     }
     {   Label = "Skupaj";
-        ValueTypes = RunningTotals;
-        ShowAllOrOthers = ShowOthers;
-        ChartType = StackedBarNormal;
+        ValueTypes = RunningTotals
+        ShowAllOrOthers = ShowOthers
+        ChartType = StackedBarNormal
+        ShowPhases = false
         ShowLegend = true
     }
     {   Label = "Relativno";
-        ValueTypes = RunningTotals;
-        ShowAllOrOthers = ShowOthers;
-        ChartType = StackedBarPercent;
+        ValueTypes = RunningTotals
+        ShowAllOrOthers = ShowOthers
+        ChartType = StackedBarPercent
+        ShowPhases = false
         ShowLegend = false
     }
 |]
@@ -163,13 +167,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with DisplayType=rt }, Cmd.none
 
 let renderChartOptions displayType (data : StatsData) =
-
-    let maxOption a b =
-        match a, b with
-        | None, None -> None
-        | Some x, None -> Some x
-        | None, Some y -> Some y
-        | Some x, Some y -> Some (max x y)
 
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
@@ -260,14 +257,26 @@ let renderChartOptions displayType (data : StatsData) =
             reversed = true
         |}
 
-    let myLoadEvent(name: String) =
-        let ret(event: Event) =
+    let myLoadEvent(_: String) =
+        let ret(_: Event) =
             let evt = document.createEvent("event")
             evt.initEvent("chartLoaded", true, true);
             document.dispatchEvent(evt)
         ret
 
     let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
+
+    let axisWithPhases() = baseOptions.xAxis
+
+    let axisWithWithoutPhases() =
+        baseOptions.xAxis
+        |> Array.map (fun ax ->
+        {| ax with
+            plotBands = shadedWeekendPlotBands
+            plotLines = [||]
+        |})
+
+
     {| baseOptions with
         chart = pojo
             {|
@@ -281,11 +290,9 @@ let renderChartOptions displayType (data : StatsData) =
             |}
         title = pojo {| text = None |}
         series = List.toArray allSeries
-        xAxis = baseOptions.xAxis |> Array.map (fun ax ->
-            {| ax with
-                plotBands = shadedWeekendPlotBands
-                plotLines = [||]
-            |})
+        xAxis =
+            if displayType.ShowPhases then axisWithPhases()
+            else axisWithWithoutPhases()
         plotOptions = pojo
             {|
                 series =

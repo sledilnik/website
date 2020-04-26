@@ -104,7 +104,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 plotLines=[|
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,3,20); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,8); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -123,9 +124,14 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                        label=Some {| align="center"; text="Faza 3" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,4,8);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,4,21);
                        color="transparent"
                        label=Some {| align="center"; text="Faza 4" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,4,21);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text="Faza 5" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

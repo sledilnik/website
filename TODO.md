@@ -2,7 +2,7 @@
 
 ## Countries comparison
 
-- try to reuse moving average functions
+- reuse moving average functions
 - move more logic to Synthesis
 - fetch data from REST
 - add tooltips
