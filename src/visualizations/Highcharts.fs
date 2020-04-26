@@ -96,6 +96,7 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         12, 4, "#FFe6e6", "Karantena", "Obvezna 7 dnevna karantena pri prihodu iz tujine"
         18, 4, "#ebfaeb", "Vikendi",   "Splošna prepoved gibanja in sproščanje omejitev <br/>gibanja med občinami (vikendi...)"
         20, 4, "#ebfaeb", "Servisi",   "Sproščanje nekaterih dejavnosti (gradnja, servisi, šport na prostem...), <br/>dovoljeni nekateri linijski prevozi"
+        21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb."
     |]
     {|
         ``type`` = "flags"
@@ -135,7 +136,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text="nov režim testiranja, izolacija"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,3,20); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,4,15); label=Some {| text="nov režim testiranja"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text="nov režim testiranja, raziskava"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -154,14 +156,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                        label=Some {| align="center"; text="Faza 3" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,4,8);
-                       ``to``=jsTime <| DateTime(2020,4,21);
+                       ``to``=jsTime <| DateTime(2020,4,15);
                        color="transparent"
                        label=Some {| align="center"; text="Faza 4" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,4,15);
+                       ``to``=jsTime <| DateTime(2020,4,21);
+                       color="transparent"
+                       label=Some {| align="center"; text="Faza 5" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,4,21);
                        ``to``=jsTime <| DateTime.Today;
                        color="transparent"
-                       label=Some {| align="center"; text="Faza 5" |}
+                       label=Some {| align="center"; text="Faza 6" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
