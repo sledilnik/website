@@ -240,7 +240,7 @@ let renderChartOptions displayType (data : StatsData) =
                                 movingAverageCentered DaysOfMovingAverage)
                 marker = pojo {| enabled = false |}
                 |}
-        if displayType.ChartType = SplineChart then yield addContainmentMeasuresFlags startTime |> pojo
+        if displayType.ShowPhases then yield addContainmentMeasuresFlags startTime |> pojo
     ]
 
     let legend =
@@ -296,6 +296,10 @@ let renderChartOptions displayType (data : StatsData) =
         xAxis =
             if displayType.ShowPhases then axisWithPhases()
             else axisWithWithoutPhases()
+        yAxis =     // need to hide negative label for addContainmentMeasuresFlags
+            let showFirstLabel = not displayType.ShowPhases
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+
         plotOptions = pojo
             {|
                 series =

@@ -67,7 +67,7 @@ let inline yAxisBase () =
         opposite = true // right side
         reversed = false
         title = {| text = null |} // "oseb" |}
-        //showFirstLabel = false
+        showFirstLabel = false  // need to hide negative label for addContainmentMeasuresFlags
         tickInterval = None
         gridZIndex = -1
         max = None
