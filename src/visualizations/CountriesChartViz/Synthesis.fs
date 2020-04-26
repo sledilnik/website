@@ -2,7 +2,9 @@
 
 open System
 open CountriesChartViz.Analysis
+open Fable.Core
 open Statistics
+open JsInterop
 
 type ChartState = {
     Data: CountriesData
@@ -32,6 +34,17 @@ type CountrySeries = {
 }
 
 type ChartData = CountrySeries[]
+
+let legendFormatter jsThis =
+    let countryCode = jsThis?series?name
+//                let date = jsThis?point?category
+    let dataValue: float = jsThis?point?y
+
+    sprintf
+        "<b>%s</b><br/>Umrli na 1 milijon preb.: %A"
+        countryCode
+        (Utils.roundTo1Decimal dataValue)
+
 
 let prepareChartData (state: ChartState): ChartData =
     let colorsInPalette = ColorPalette |> List.length

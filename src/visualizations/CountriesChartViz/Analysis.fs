@@ -2,6 +2,8 @@
 
 open System
 open Statistics
+open DataLoader
+open Data.OurWorldInData
 
 type CountryIsoCode = string
 

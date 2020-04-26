@@ -17,21 +17,28 @@ let datasetIdAndVersion =
     { Id = datasetId
       VersionOrLatest = Latest }
 
-let (Url datasetUrl) = createRoutePublishedDatasetGetByIdSpecificVersion apiUrl datasetIdAndVersion
-let (Url dataUrl) = createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
+let (Url datasetUrl) =
+    createRoutePublishedDatasetGetByIdSpecificVersion apiUrl datasetIdAndVersion
+let (Url dataUrl) =
+    createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
 
 let createQuery (countries : string list) =
-    let countrMatch country =
-        ExactSearch (Cast (QueryExpression.Column(QueryColumn.UserColumn "location"), EdelweissData.Base.Types.TypeString), country)
+    let countryMatch country =
+        ExactSearch
+            (Cast
+                 (QueryExpression.Column
+                      (QueryColumn.UserColumn "location"),
+                      EdelweissData.Base.Types.TypeString),
+                 country)
     { DataQuery.Default with
-        Condition =
-            Some (Or (List.map (fun country -> countrMatch country) countries)) }
+        Condition = Some (Or (List.map countryMatch countries)) }
 
 type DataPoint = {
     Location : string
     Date : string
     TotalCases : int
     TotalCasesPerMillion : float option
+    TotalDeathsPerMillion : float option
 }
 
 type Data = RemoteData<DataPoint list, string>
@@ -74,24 +81,50 @@ let load countries msg =
         let! statusCode, response = Http.get datasetUrl
 
         match statusCode = 200 with
-        | false -> return sprintf "Napaka pri nalaganju OurWorldInData podatkov: %d" statusCode |> Failure |> msg
+        | false ->
+            return sprintf
+                       "Napaka pri nalaganju OurWorldInData podatkov: %d"
+                       statusCode |> Failure |> msg
         | true ->
-            match EdelweissData.Thoth.Datasets.PublishedDataset.fromString response with
-            | Error error -> return sprintf "Napaka pri nalaganju OurWorldInData: %s" (error.ToString()) |> Failure |> msg
+            match EdelweissData.Thoth.Datasets.PublishedDataset.fromString
+                      response with
+            | Error error ->
+                return sprintf
+                           "Napaka pri nalaganju OurWorldInData: %s"
+                           (error.ToString()) |> Failure |> msg
             | Ok dataset ->
-                let! statusCode, response = Http.post dataUrl (createQuery countries |> EdelweissData.Thoth.Queries.DataQuery.toString)
+                let! statusCode, response =
+                    Http.post dataUrl
+                        (createQuery countries
+                         |> EdelweissData.Thoth.Queries.DataQuery.toString)
+
                 match statusCode = 200 with
-                | false -> return sprintf "Napaka pri nalaganju OurWorldInData podatkov: %d" statusCode |> Failure |> msg
+                | false ->
+                    return sprintf
+                        "Napaka pri nalaganju OurWorldInData podatkov: %d"
+                        statusCode |> Failure |> msg
                 | true ->
-                        match EdelweissData.Thoth.Queries.DataQueryResponse.fromString dataset.Schema response with
-                        | Error error -> return sprintf "Napaka pri nalaganju OurWorldInData podatkov: %s" (error.ToString()) |> Failure |> msg
-                        | Ok data ->
-                            let dataPoints =
-                                data.Results
-                                |> List.map (fun row ->
-                                    { Location = stringOfResult row "location"
-                                      Date = stringOfResult row "date"
-                                      TotalCases = intOfResult row "total_cases"
-                                      TotalCasesPerMillion = floatOptionOfResult row "total_cases_per_million" })
-                            return dataPoints |> Success |> msg
+                    match
+                        EdelweissData.Thoth.Queries.DataQueryResponse.fromString
+                            dataset.Schema response with
+                    | Error error ->
+                        return sprintf
+                                   "Napaka pri nalaganju OurWorldInData podatkov: %s"
+                                   (error.ToString()) |> Failure |> msg
+                    | Ok data ->
+                        let dataPoints =
+                            data.Results
+                            |> List.map (fun row ->
+                            {
+                                Location = stringOfResult row "location"
+                                Date = stringOfResult row "date"
+                                TotalCases = intOfResult row "total_cases"
+                                TotalCasesPerMillion =
+                                  floatOptionOfResult
+                                      row "total_cases_per_million"
+                                TotalDeathsPerMillion =
+                                  floatOptionOfResult
+                                      row "total_deaths_per_million"
+                            })
+                        return dataPoints |> Success |> msg
     }

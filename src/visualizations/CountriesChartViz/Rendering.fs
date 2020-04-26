@@ -3,7 +3,6 @@
 open CountriesChartViz.Analysis
 open CountriesChartViz.Synthesis
 open System
-open DataLoader
 open Browser
 open Elmish
 open Feliz
@@ -12,7 +11,6 @@ open Fable.Core.JsInterop
 
 open Highcharts
 open Types
-open Data.OurWorldInData
 
 type Msg =
     | DataRequested
@@ -36,7 +34,8 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         { state with DisplayedCountries=countries }, Cmd.none
     | DataRequested ->
         let countries = ["Slovenia" ; "Italy" ; "Norway"]
-        { state with OurWorldInData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
+        { state with OurWorldInData = Loading },
+        Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
     | DataLoaded remoteData ->
 
         match remoteData with
@@ -114,17 +113,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 series = pojo {| stacking = ""; |}
             |}
         legend = pojo {| legend with enabled = true |}
-        tooltip = pojo
-           {| formatter = fun () ->
-                let countryCode = jsThis?series?name
-//                let date = jsThis?point?category
-                let dataValue: float = jsThis?point?y
-
-                sprintf
-                    "<b>%s</b><br/>Umrli na 1 milijon preb.: %A"
-                    countryCode
-                    (Utils.roundTo1Decimal dataValue)
-           |}
+        tooltip = pojo {| formatter = fun () -> legendFormatter jsThis |}
     |}
 
 
@@ -151,4 +140,5 @@ let render state dispatch =
     ]
 
 let renderChart (props : {| data : StatsData |}) =
-    React.elmishComponent("CountriesChartViz/CountriesChart", init props.data, update, render)
+    React.elmishComponent
+        ("CountriesChartViz/CountriesChart", init props.data, update, render)
