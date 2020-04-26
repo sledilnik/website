@@ -222,6 +222,8 @@ let renderChartOptions displayType (data : StatsData) =
             (date, value |> Option.defaultValue 0 |> float))
 
     let allSeries = [
+        let mutable startTime = DateTime(2020,3,4) |> jsTime  // TODO: breki - set to actual start date of series
+
         for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
             yield pojo
                 {|
@@ -238,6 +240,7 @@ let renderChartOptions displayType (data : StatsData) =
                                 movingAverageCentered DaysOfMovingAverage)
                 marker = pojo {| enabled = false |}
                 |}
+        yield addContainmentMeasuresFlags startTime |> pojo
     ]
 
     let legend =
