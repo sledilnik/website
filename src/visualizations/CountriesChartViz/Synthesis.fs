@@ -1,5 +1,6 @@
 ﻿module CountriesChartViz.Synthesis
 
+open System
 open CountriesChartViz.Analysis
 
 type ChartState = {
@@ -26,7 +27,7 @@ type CountrySeries = {
     CountryAbbr: string
     CountryName: string
     Color: string
-    Data: DailyData[]
+    Data: SeriesValues<DateTime>
 }
 
 type ChartData = CountrySeries[]

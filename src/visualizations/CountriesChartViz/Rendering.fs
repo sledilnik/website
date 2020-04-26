@@ -69,8 +69,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 name = countrySeries.CountryAbbr
                 data =
                     countrySeries.Data
-                    |> Array.map (fun entry ->
-                        ((entry.Day |> jsTime12h), entry.TotalDeathsPerMillion))
+                    |> Array.map (fun (day, value) ->
+                        ((day |> jsTime12h), value))
                 marker = pojo {| enabled = false |}
                 |}
             )

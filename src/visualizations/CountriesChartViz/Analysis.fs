@@ -2,17 +2,15 @@
 
 open System
 
-type DailyData = {
-    Day: DateTime
-    TotalDeathsPerMillion: float
-}
+type SeriesValue<'XAxis> = 'XAxis * float
+type SeriesValues<'XAxis> = SeriesValue<'XAxis>[]
 
 type CountryIsoCode = string
 
 type CountryData = {
     CountryIsoCode: CountryIsoCode
     CountryName: string
-    Data: DailyData[]
+    Data: SeriesValues<DateTime>
 }
 
 type CountriesData = Map<CountryIsoCode, CountryData>
@@ -21,40 +19,76 @@ type CountriesSelection =
     | Scandinavia
 
 /// <summary>
-/// A function that calculates the moving average value for a given array of
-/// day values.
+/// A function that returns the key for a given data value object.
 /// </summary>
-type MovingAverageFunc = (DailyData[]) -> DailyData
+/// <typeparam name="'T">The type of data value object.</typeparam>
+/// <typeparam name="'TKey">The type of key for the value object
+/// (like int or DateTime).</typeparam>
+type ValueItemKeyFunc<'T, 'TKey> = ('T -> 'TKey)
 
 /// <summary>
-/// Calculates the centered moving average for a given array of day values.
+/// A function that returns the value for a given data value object.
+/// </summary>
+/// <typeparam name="'T">The type of data value object.</typeparam>
+type ValueItemValueFunc<'T> = ('T -> float)
+
+/// <summary>
+/// A function that calculates the moving average value for a given array
+/// values.
+/// </summary>
+/// <typeparam name="'TKey">The type of key for the value
+/// (like int or DateTime).</typeparam>
+/// <typeparam name="'TValue">The type of value.</typeparam>
+/// <param name="keyFunc">The function that returns the key of the pair.</param>
+/// <param name="valueFunc">The function that returns the value of the pair.
+/// </param>
+/// <returns>A key-value pair containing the average value and its
+/// corresponding key.</returns>
+type MovingAverageFunc<'TKey, 'TValue> =
+    ValueItemKeyFunc<'TKey, 'TValue> -> ValueItemValueFunc<'TKey> -> 'TKey[]
+     -> ('TValue * float)
+
+/// <summary>
+/// Calculates the centered moving average for a given array of values.
 /// </summary>
 /// <remarks>
 /// The centered moving average takes the day that is at the center of the
 /// values array as the target day of the average.
 /// </remarks>
-let movingAverageCentered: MovingAverageFunc = fun (daysValues) ->
-    match (daysValues |> Seq.length) % 2 with
+/// <typeparam name="'TKey">The type of key for the value
+/// (like int or DateTime).</typeparam>
+/// <typeparam name="'TValue">The type of value.</typeparam>
+/// <param name="keyFunc">The function that returns the key of the pair.</param>
+/// <param name="valueFunc">The function that returns the value of the pair.
+let movingAverageCentered: MovingAverageFunc<'TKey, 'TValue> =
+    fun keyFunc valueFunc values ->
+    match (values |> Seq.length) % 2 with
     | 1 ->
-        let centerIndex = (daysValues |> Seq.length) / 2
-        let targetDate = daysValues.[centerIndex].Day
-        let averageValue =
-            daysValues
-            |> Seq.averageBy(
-                fun dayValue -> dayValue.TotalDeathsPerMillion)
-        { Day = targetDate; TotalDeathsPerMillion = averageValue }
-    | _ -> ArgumentException "daysValues needs to be an odd number" |> raise
+        let centerIndex = (values |> Seq.length) / 2
+        let targetKey = values.[centerIndex] |> keyFunc
+        let averageValue = values |> Seq.averageBy valueFunc
+        (targetKey, averageValue)
+    | _ -> ArgumentException "values array length needs to be an odd number"
+           |> raise
 
 /// <summary>
-/// Calculates the moving averages array for a given array of day values.
+/// Calculates an array of moving averages array for a given array values.
 /// </summary>
-let movingAverages
-    (averageFunc: MovingAverageFunc)
+/// <typeparam name="'T">The type of the object holding an individual value.
+/// <typeparam name="'TKey">The type of key for the value
+/// (like int or DateTime).</typeparam>
+/// <param name="keyFunc">The function that returns the key of the pair.</param>
+/// <param name="valueFunc">The function that returns the value of the pair.
+let movingAverages<'T, 'TKey>
+    (averageFunc: MovingAverageFunc<'T, 'TKey>)
     (daysOfMovingAverage: int)
-    (series: DailyData[]): DailyData[] =
+    (keyFunc: ValueItemKeyFunc<'T, 'TKey>)
+    (valueFunc: ValueItemValueFunc<'T>)
+    (series: 'T[])
+    : ('TKey * float)[] =
     series
     |> Array.windowed daysOfMovingAverage
-    |> Array.map averageFunc
+    |> Array.map (averageFunc keyFunc valueFunc)
 
 
 let parseCountriesCsv daysOfMovingAverage: CountriesData =
@@ -75,9 +109,11 @@ let parseCountriesCsv daysOfMovingAverage: CountriesData =
             let dailyEntries =
                 countryLines
                 |> Seq.map(fun (_, _, date, deathsPerMillion) ->
-                    { Day = date; TotalDeathsPerMillion = deathsPerMillion })
+                    (date, deathsPerMillion) )
                 |> Seq.toArray
-                |> (movingAverages movingAverageCentered daysOfMovingAverage)
+                |> (movingAverages
+                        movingAverageCentered daysOfMovingAverage
+                        (fun (day, _) -> day) (fun (_, value) -> value))
             { CountryIsoCode = isoCode
               CountryName = countryName
               Data = dailyEntries }
