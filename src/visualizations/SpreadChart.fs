@@ -71,7 +71,7 @@ let inline yAxisBase () =
         tickInterval = None
         gridZIndex = -1
         max = None
-        plotLines = [||]
+        plotLines = [| {| value = 0; color = "black" |} |]
     |}
 
 let inline legend title =

@@ -185,6 +185,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 showFirstLabel = None
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
+                plotLines = [| {| value = 0; color = "black" |} |]
             |}
         |]
         legend =
