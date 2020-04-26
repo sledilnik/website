@@ -253,7 +253,7 @@ let renderChartOptions displayType (data : StatsData) =
             floating = true
             x = 20
             y = 30
-            backgroundColor = "rgba(255,255,255,0.5)"
+            backgroundColor = "#FFF"
             reversed = true
         |}
 
