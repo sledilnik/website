@@ -19,6 +19,7 @@ import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
 import * as linksMd from './content/links.md'
 import * as contentMd from './content/FAQ.md'
+import * as contentMdEn from './content/FAQ_en.md'
 import * as teamMd from './content/team.md'
 import * as sourcesMd from './content/sources.md'
 import * as modelsMd from './content/models.md'
@@ -77,6 +78,14 @@ const routes = [
     props: {
       name: 'FAQ',
       content: contentMd
+    }
+  },
+  {
+    path: '/FAQ/en',
+    component: StaticPage,
+    props: {
+      name: 'FAQ-en',
+      content: contentMdEn
     }
   },
   {

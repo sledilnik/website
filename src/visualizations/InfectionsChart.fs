@@ -170,6 +170,8 @@ let renderChartOptions displayType (data : StatsData) =
             (date, value |> Option.defaultValue 0 |> float))
 
     let allSeries = [
+        let mutable startTime = DateTime(2020,3,6) |> jsTime  // TODO: breki - set to actual start date of series
+
         for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
             yield pojo
                 {|
@@ -191,6 +193,7 @@ let renderChartOptions displayType (data : StatsData) =
                             )
                 marker = pojo {| enabled = false |}
                 |}
+        if displayType.ShowPhases then yield addContainmentMeasuresFlags startTime |> pojo
     ]
 
     let legend =
@@ -206,7 +209,7 @@ let renderChartOptions displayType (data : StatsData) =
             floating = true
             x = 20
             y = 30
-            backgroundColor = "rgba(255,255,255,0.5)"
+            backgroundColor = "#FFF"
             reversed = true
         |}
 
@@ -246,6 +249,10 @@ let renderChartOptions displayType (data : StatsData) =
         xAxis =
             if displayType.ShowPhases then axisWithPhases()
             else axisWithWithoutPhases()
+        yAxis =     // need to hide negative label for addContainmentMeasuresFlags
+            let showFirstLabel = not displayType.ShowPhases
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+
         plotOptions = pojo
             {|
                 series =

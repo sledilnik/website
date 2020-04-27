@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:443"
+    volumes:
+      - "./dist:/app"
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+    environment:
+      - CV19_DOMAIN=localhost

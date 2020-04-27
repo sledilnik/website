@@ -1,0 +1,8 @@
+{$CV19_DOMAIN}:443 {
+  root * /app
+  file_server {
+    index index.html
+  }
+  templates
+  tls internal
+}

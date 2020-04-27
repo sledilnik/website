@@ -143,12 +143,12 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "Bolnišnične Postelje" |} // "oseb" |}
+            title = pojo {| text = "Bolnišnične postelje" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
             visible = true
-            plotLines=[| {| value=0; label=None |} |]
+            plotLines=[| {| value=0; color="black"; |} |]
         |}
         {|
             index = 1
@@ -158,12 +158,12 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "ICU Postelje" |} // "oseb" |}
+            title = pojo {| text = "ICU postelje" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
             visible = true
-            plotLines=[| {| value=0; label=None |} |]
+            plotLines=[| {| value=0; color="black"; |} |]
         |}
     |]
     let getYAxis = function
@@ -441,7 +441,7 @@ let renderTable (state: State) dispatch =
                         prop.children [
                             Html.th []
                             Html.th [ prop.text "Postelje"; prop.colSpan 4 ]
-                            Html.th [ prop.text "Intenzivne Postelje"; prop.colSpan 4 ]
+                            Html.th [ prop.text "Intenzivne postelje"; prop.colSpan 4 ]
                             Html.th [ prop.text "Respiratorji"; prop.colSpan 4 ]
                         ]
                     ]
