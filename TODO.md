@@ -2,7 +2,8 @@
 
 ## Countries comparison
 
-- add country sets switcher
+- how to prevent graph getting smaller when loading new data
+- prevent graph animation?
 - always show Slovenia in the same color
 - show dates in tooltips
 - add log scale switcher

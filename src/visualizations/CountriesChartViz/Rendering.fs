@@ -41,13 +41,22 @@ let init: ChartState * Cmd<Msg> =
     state, Cmd.ofMsg DataRequested
 
 let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
+    let getCountriesCodes selectedSet =
+        "SVN" ::
+        (selectedSet.CountriesCodes |> Array.toList)
+
     match msg with
     | ChangeCountriesSelection selectedSet ->
-        { state with DisplayedCountriesSet = selectedSet }, Cmd.none
+        let countriesCodes = getCountriesCodes selectedSet
+
+        {
+            Data = Loading
+            DisplayedCountriesSet = selectedSet
+        },
+        Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataRequested ->
-        let countriesCodes =
-            "SVN" ::
-            (state.DisplayedCountriesSet.CountriesCodes |> Array.toList)
+        let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
+
         { state with Data = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataLoaded remoteData ->
