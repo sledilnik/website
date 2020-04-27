@@ -33,65 +33,60 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with displayType=rt }, Cmd.none
 
 let renderChartOptions (state : State) =
-        // point.PerformedTests
-        // point.PerformedTestsToDate
-
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
-
+    let negativeTests (dp: StatsDataPoint) = dp.PerformedTests.Value - dp.PositiveTests.Value
     let percentPositive (dp: StatsDataPoint) = Math.Round(float dp.PositiveTests.Value / float dp.PerformedTests.Value * float 100.0, 2)
     
     let allYAxis = [|
         {|
             index = 0
             title = {| text = null |} 
-            opposite = false
+            labels = pojo {| format = "{value}" |}
+            opposite = true
             visible = true
             max = None
         |}
         {|
             index = 1
             title = {| text = null |} 
-            opposite = true
-            visible = true
-            max = Some 100
-        |}
-        {|
-            index = 2
-            title = {| text = null |} 
+            labels = pojo {| format = "{value}%" |}
             opposite = false
-            visible = false
-            max = Some 30
+            visible = true
+            max = Some 15
         |}
     |]
 
+    let startDate = DateTime(2020,3,4)
     let allSeries = [
         yield pojo
             {|
-                name = "Testiranja (na dan)"
-                ``type`` = "line"
+                name = "Negativnih testov (na dan)"
+                ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
-                data = state.data |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, dp.PerformedTests)) |> Seq.toArray
+                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, negativeTests dp)) |> Seq.toArray
             |}
         yield pojo
             {|
                 name = "Pozitivnih testov (na dan)"
-                ``type`` = "line"
+                ``type`` = "column"
                 color = "#bda506"
-                yAxis = 1 
-                data = state.data |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
+                yAxis = 0 
+                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
             |}
         yield pojo
             {|
                 name = "Delež pozitivnih testov (%)"
-                ``type`` = "column"
+                ``type`` = "line"
                 color = "#665191"
-                zIndex = -1
-                yAxis = 2 
-                data = state.data |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, percentPositive dp)) |> Seq.toArray
+                yAxis = 1
+                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
     
@@ -99,9 +94,14 @@ let renderChartOptions (state : State) =
     {| baseOptions with
         yAxis = allYAxis
         series = List.toArray allSeries
+        plotOptions = pojo 
+            {| 
+                series = {| stacking = "normal" |} 
+            |}        
+
         legend = pojo
             {|
-                enabled = Some true
+                enabled = true
                 title = {| text = null |}
                 align = "left"
                 verticalAlign = "top"
@@ -117,7 +117,7 @@ let renderChartOptions (state : State) =
 
 let renderChartContainer (state : State) =
     Html.div [
-        prop.style [ style.height 450 ] //; style.width 500; ]
+        prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
