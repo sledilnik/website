@@ -96,19 +96,19 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
     let metricDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | PerformedTests -> point.PerformedTests |> Utils.zeroToNone
-            | PerformedTestsToDate -> point.PerformedTestsToDate |> Utils.zeroToNone
-            | ConfirmedCasesToday -> point.Cases.ConfirmedToday |> Utils.zeroToNone
-            | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate |> Utils.zeroToNone
-            | InHospital -> point.StatePerTreatment.InHospital |> Utils.zeroToNone
-            | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate |> Utils.zeroToNone
-            | InICU -> point.StatePerTreatment.InICU |> Utils.zeroToNone
-            | OnVentilator -> point.StatePerTreatment.Critical |> Utils.zeroToNone
-            | OutOfHospital -> point.StatePerTreatment.OutOfHospital |> Utils.zeroToNone
-            | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate |> Utils.zeroToNone
-            | RecoveredToDate -> point.StatePerTreatment.RecoveredToDate |> Utils.zeroToNone
-            | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
-            | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate |> Utils.zeroToNone
+            | PerformedTests -> point.PerformedTests
+            | PerformedTestsToDate -> point.PerformedTestsToDate
+            | ConfirmedCasesToday -> point.Cases.ConfirmedToday
+            | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
+            | InHospital -> point.StatePerTreatment.InHospital
+            | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
+            | InICU -> point.StatePerTreatment.InICU
+            | OnVentilator -> point.StatePerTreatment.Critical
+            | OutOfHospital -> point.StatePerTreatment.OutOfHospital
+            | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate
+            | RecoveredToDate -> point.StatePerTreatment.RecoveredToDate
+            | Deceased -> point.StatePerTreatment.Deceased
+            | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate
 
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
