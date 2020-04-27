@@ -29,7 +29,7 @@ type CountrySeries = {
     CountryAbbr: string
     CountryName: string
     Color: string
-    Data: SeriesValues<DateTime>
+    Data: SeriesValues<IndexedDate>
 }
 
 type ChartData = CountrySeries[]
@@ -46,6 +46,7 @@ let legendFormatter jsThis =
 
 
 let prepareChartData
+    minimumDeathsOfStartingDay
     daysOfMovingAverage
     (state: ChartState)
     : ChartData option =
@@ -53,7 +54,7 @@ let prepareChartData
     let aggregated =
         state.Data
         |> aggregateOurWorldInData
-               (fun entry -> entry.TotalDeaths >= 5)
+               (fun entry -> entry.TotalDeaths >= minimumDeathsOfStartingDay)
                daysOfMovingAverage
 
     match aggregated with

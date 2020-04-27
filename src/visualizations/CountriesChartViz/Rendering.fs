@@ -1,6 +1,5 @@
 ﻿module CountriesChartViz.Rendering
 
-open CountriesChartViz.Analysis
 open CountriesChartViz.Synthesis
 open System
 open Browser
@@ -12,6 +11,24 @@ open Fable.Core.JsInterop
 open Highcharts
 open Types
 
+type CountriesDisplaySet = {
+    Label: string
+    CountriesCodes: string[]
+}
+
+// source: https://unstats.un.org/unsd/tradekb/knowledgebase/country-code
+let countriesDisplaySets = [|
+    { Label = "Nordijske države"
+      CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
+    }
+    { Label = "Ex-Yugoslavia"
+      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
+    }
+    { Label = "Sosedje"
+      CountriesCodes = [| "AUT"; "HRV"; "HUN"; "ITA" |]
+    }
+|]
+
 type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
@@ -19,6 +36,8 @@ type Msg =
 
 [<Literal>]
 let DaysOfMovingAverage = 5
+
+let MinimumDeathsOfStartingDay = 1
 
 let init data : ChartState * Cmd<Msg> =
     let state = {
@@ -72,8 +91,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 name = countrySeries.CountryAbbr
                 data =
                     countrySeries.Data
-                    |> Array.map (fun (day, value) ->
-                        ((day |> jsTime12h), value))
+                    |> Array.map (fun ((dayIndex, _), value) ->
+                        (dayIndex, value))
                 marker = pojo {| enabled = false |}
                 |}
             )
@@ -107,11 +126,27 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         title = pojo {| text = None |}
         series = allSeries
-        xAxis = baseOptions.xAxis |> Array.map (fun ax ->
-            {| ax with
-                plotBands = [||]
-                plotLines = [||]
-            |})
+        xAxis =
+            pojo {|
+                   ``type`` = "int"
+                   allowDecimals = false
+                   title =
+                       pojo {|
+                            text =
+                                sprintf
+                                    "Št. dni od prvega dni s smrtjo %d človeka ali več"
+                                    MinimumDeathsOfStartingDay
+                       |}
+            |}
+        yAxis =
+            pojo {|
+                   opposite = true
+                   title =
+                       pojo {|
+                            align = "middle"
+                            text = "Št. umrlih na 1 milijon prebivalcev"
+                        |}
+            |}
         plotOptions = pojo
             {|
                 series = pojo {| stacking = ""; |}
@@ -132,7 +167,9 @@ let renderChartContainer state chartData =
     ]
 
 let render state dispatch =
-    let chartData = state |> prepareChartData DaysOfMovingAverage
+    let chartData =
+        state
+        |> prepareChartData MinimumDeathsOfStartingDay DaysOfMovingAverage
 
     match chartData with
     | Some chartData ->
