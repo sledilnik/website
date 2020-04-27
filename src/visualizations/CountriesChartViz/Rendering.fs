@@ -12,20 +12,15 @@ open Analysis
 open Highcharts
 open Types
 
-type CountriesDisplaySet = {
-    Label: string
-    CountriesCodes: string[]
-}
-
 // source: https://unstats.un.org/unsd/tradekb/knowledgebase/country-code
 let countriesDisplaySets = [|
     { Label = "Nordijske države"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
-    { Label = "Ex-Yugoslavia"
+    { Label = "Ex-Jugoslavija"
       CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
     }
-    { Label = "Sosedje"
+    { Label = "sosedje"
       CountriesCodes = [| "AUT"; "HRV"; "HUN"; "ITA" |]
     }
 |]
@@ -33,7 +28,7 @@ let countriesDisplaySets = [|
 type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
-    | ChangeCountriesSelection of int
+    | ChangeCountriesSelection of CountriesDisplaySet
 
 [<Literal>]
 let DaysOfMovingAverage = 5
@@ -41,21 +36,18 @@ let DaysOfMovingAverage = 5
 let init: ChartState * Cmd<Msg> =
     let state = {
         Data = NotAsked
-        DisplayedCountriesSet = 0
+        DisplayedCountriesSet = countriesDisplaySets.[0]
     }
     state, Cmd.ofMsg DataRequested
 
 let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     match msg with
-    | ChangeCountriesSelection setIndex ->
-        { state with DisplayedCountriesSet = setIndex }, Cmd.none
+    | ChangeCountriesSelection selectedSet ->
+        { state with DisplayedCountriesSet = selectedSet }, Cmd.none
     | DataRequested ->
         let countriesCodes =
-            let displaySetIndex = state.DisplayedCountriesSet
-
             "SVN" ::
-            (countriesDisplaySets.[displaySetIndex].CountriesCodes
-                |> Array.toList)
+            (state.DisplayedCountriesSet.CountriesCodes |> Array.toList)
         { state with Data = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataLoaded remoteData ->
@@ -153,13 +145,29 @@ let renderChartContainer state chartData =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [
-            renderChartCode state chartData
-            |> chart
-        ]
+        prop.children [ renderChartCode state chartData |> chart ]
     ]
 
-let render state _ =
+let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
+    let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
+        let active = setToRender = activeSet
+        Html.div [
+            prop.text setToRender.Label
+            prop.className [
+                true, "btn btn-sm metric-selector"
+                active, "metric-selector--selected selected" ]
+            if not active then prop.onClick (fun _ -> dispatch setToRender)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-selectors"
+        countriesDisplaySets
+        |> Array.map renderCountriesSetSelector
+        |> prop.children
+    ]
+
+let render state dispatch =
     let chartData =
         state
         |> prepareChartData FirstDeath DaysOfMovingAverage
@@ -168,7 +176,9 @@ let render state _ =
     | Some chartData ->
         Html.div [
             renderChartContainer state chartData
-    //        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
+            renderCountriesSetsSelectors
+                state.DisplayedCountriesSet
+                (ChangeCountriesSelection >> dispatch)
 
             Html.div [
                 prop.className "disclaimer"

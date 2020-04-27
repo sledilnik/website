@@ -6,9 +6,14 @@ open Fable.Core
 open Statistics
 open JsInterop
 
+type CountriesDisplaySet = {
+    Label: string
+    CountriesCodes: string[]
+}
+
 type ChartState = {
     Data: Data.OurWorldInData.OurWorldInDataRemoteData
-    DisplayedCountriesSet: int
+    DisplayedCountriesSet: CountriesDisplaySet
 }
 
 let ColorPalette =
