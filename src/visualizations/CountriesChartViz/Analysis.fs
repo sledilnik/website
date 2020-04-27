@@ -17,6 +17,7 @@ type CountriesSelection =
     | Scandinavia
 
 let aggregateOurWorldInData
+    filterRecords
     daysOfMovingAverage
     (ourWorldInData: OurWorldInDataRemoteData)
     : CountriesData option =
@@ -25,6 +26,7 @@ let aggregateOurWorldInData
     | Success ourWorldInData ->
         let countriesData =
             ourWorldInData
+            |> Seq.filter filterRecords
             |> Seq.map (fun entry ->
                 let countryIsoCode = entry.CountryCode
                 let countryName = entry.CountryName

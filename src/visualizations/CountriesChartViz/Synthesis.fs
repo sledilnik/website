@@ -52,7 +52,9 @@ let prepareChartData
 
     let aggregated =
         state.Data
-        |> aggregateOurWorldInData daysOfMovingAverage
+        |> aggregateOurWorldInData
+               (fun entry -> entry.TotalDeaths >= 5)
+               daysOfMovingAverage
 
     match aggregated with
     | Some aggregated ->

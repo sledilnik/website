@@ -1,6 +1,5 @@
 module Data.OurWorldInData
 
-open System
 open Fable.SimpleHttp
 
 open EdelweissData.Base.Identifiers
@@ -28,7 +27,7 @@ let createQuery (countries : string list) =
         ExactSearch
             (Cast
                  (QueryExpression.Column
-                      (QueryColumn.UserColumn "location"),
+                      (QueryColumn.UserColumn "iso_code"),
                       EdelweissData.Base.Types.TypeString),
                  country)
     { DataQuery.Default with
@@ -40,8 +39,9 @@ type DataPoint = {
     CountryCode : CountryIsoCode
     CountryName : string
     Date : string
-    TotalCases : int
+    TotalCases: int
     TotalCasesPerMillion : float option
+    TotalDeaths: int
     TotalDeathsPerMillion : float option
 }
 
@@ -81,6 +81,21 @@ let floatOptionOfResult row column =
         | _ -> None
 
 let load countries msg =
+    let mapRow row =
+        {
+            CountryCode = stringOfResult row "iso_code"
+            CountryName = stringOfResult row "location"
+            Date = stringOfResult row "date"
+            TotalCases = intOfResult row "total_cases"
+            TotalCasesPerMillion =
+              floatOptionOfResult
+                  row "total_cases_per_million"
+            TotalDeaths = intOfResult row "total_deaths"
+            TotalDeathsPerMillion =
+              floatOptionOfResult
+                  row "total_deaths_per_million"
+        }
+
     async {
         let! statusCode, response = Http.get datasetUrl
 
@@ -113,23 +128,10 @@ let load countries msg =
                             dataset.Schema response with
                     | Error error ->
                         return sprintf
-                                   "Napaka pri nalaganju OurWorldInData podatkov: %s"
-                                   (error.ToString()) |> Failure |> msg
+                           "Napaka pri nalaganju OurWorldInData podatkov: %s"
+                           (error.ToString()) |> Failure |> msg
                     | Ok data ->
-                        let dataPoints =
-                            data.Results
-                            |> List.map (fun row ->
-                            {
-                                CountryCode = stringOfResult row "iso_code"
-                                CountryName = stringOfResult row "location"
-                                Date = stringOfResult row "date"
-                                TotalCases = intOfResult row "total_cases"
-                                TotalCasesPerMillion =
-                                  floatOptionOfResult
-                                      row "total_cases_per_million"
-                                TotalDeathsPerMillion =
-                                  floatOptionOfResult
-                                      row "total_deaths_per_million"
-                            })
-                        return dataPoints |> Success |> msg
+                        return
+                            data.Results |> List.map mapRow
+                            |> Success |> msg
     }

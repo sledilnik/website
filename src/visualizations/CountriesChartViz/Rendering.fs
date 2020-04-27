@@ -32,7 +32,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     | ChangeCountriesSelection countries ->
         { state with DisplayedCountries=countries }, Cmd.none
     | DataRequested ->
-        let countries = ["Slovenia" ; "Italy" ; "Norway"]
+        let countries = ["SVN" ; "SWE" ; "NOR" ; "DNK"]
         { state with Data = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
     | DataLoaded remoteData ->
