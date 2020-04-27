@@ -111,6 +111,23 @@ let renderChartOptions (state : State) =
                 floating = true
                 backgroundColor = "#FFF"
             |}
+
+        responsive = pojo 
+            {|
+                rules = 
+                    [| {|
+                        condition = {| maxWidth = 500 |}
+                        chartOptions = 
+                            {| 
+                                legend = {| enabled = false |}
+                                yAxis = [| 
+                                    {| labels = {| enabled = false |} |} 
+                                    {| labels = {| enabled = false |} |} 
+                                |]
+                            |}
+                    |} |]
+            |}
+ 
     |}
 
 let renderChartContainer (state : State) =
