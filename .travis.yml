@@ -20,6 +20,7 @@ install: yarn --frozen-lockfile
 script: 
   - if [ "$TRAVIS_BRANCH" != "master" ]; then export C19_OUTPUT_DIR="dist/${TRAVIS_BRANCH}"; export C19_PUBLIC_PATH="https://preview.sledilnik.org/${TRAVIS_BRANCH}"; fi
   - yarn test
+  - yarn dotnet-restore
   - yarn test-fsharp
   - yarn build
 deploy:
