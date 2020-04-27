@@ -2,9 +2,7 @@
 
 ## Countries comparison
 
-- remove OurWorldInData tests
 - fetch data from REST instead of built-in
-    - remove Data.CountriesData.countriesRawData
     - search by country ISO code, not name
     - specify country sets and their country codes
 - show day numbers instead of dates on the graph

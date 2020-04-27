@@ -13,7 +13,6 @@
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
         <Compile Include="data/Hospitals.fs" />
-        <Compile Include="data/CountriesData.fs" />
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
