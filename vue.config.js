@@ -10,7 +10,7 @@ if (process.env.NODE_ENV != 'production') {
   process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
 }
 
-indexTemplate = process.env.CADDY_BUILD == '1' ? 'public/index_caddy.html' : 'public/index.html'
+indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.html'
 
 console.log("Using template", indexTemplate)
 
