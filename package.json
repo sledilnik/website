@@ -8,7 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit",
-    "dotnet-restore": "dotnet restore tests/Visualizations.Tests/Visualizations.Tests.fsproj",
+    "dotnet-restore": "dotnet restore --configfile src/visualizations/NuGet.Config SloCovid19Website.sln",
     "test-fsharp": "dotnet test"
   },
   "dependencies": {
