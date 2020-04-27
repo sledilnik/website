@@ -2,6 +2,6 @@
 
 ## Countries comparison
 
-- calculate day 0 when deaths/1 M reach certain value
+- show country names in Slovene in the legend
 - show dates in tooltips
 - add log scale switcher

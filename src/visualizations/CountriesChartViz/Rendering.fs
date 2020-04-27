@@ -8,6 +8,7 @@ open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 
+open Analysis
 open Highcharts
 open Types
 
@@ -37,9 +38,7 @@ type Msg =
 [<Literal>]
 let DaysOfMovingAverage = 5
 
-let MinimumDeathsOfStartingDay = 1
-
-let init data : ChartState * Cmd<Msg> =
+let init: ChartState * Cmd<Msg> =
     let state = {
         Data = NotAsked
         DisplayedCountriesSet = 0
@@ -74,15 +73,15 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         { state with Data = remoteData }, Cmd.none
 
 let renderChartCode (state: ChartState) (chartData: ChartData) =
-    let myLoadEvent(name: String) =
-        let ret(event: Event) =
+    let myLoadEvent _ =
+        let ret _ =
             let evt = document.createEvent("event")
             evt.initEvent("chartLoaded", true, true);
             document.dispatchEvent(evt)
         ret
 
     let allSeries =
-        chartData
+        chartData.Series
         |> Array.map (fun countrySeries ->
              pojo
                 {|
@@ -130,13 +129,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             pojo {|
                    ``type`` = "int"
                    allowDecimals = false
-                   title =
-                       pojo {|
-                            text =
-                                sprintf
-                                    "Št. dni od prvega dni s smrtjo %d človeka ali več"
-                                    MinimumDeathsOfStartingDay
-                       |}
+                   title = pojo {| text = chartData.XAxisTitle |}
             |}
         yAxis =
             pojo {|
@@ -144,7 +137,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                    title =
                        pojo {|
                             align = "middle"
-                            text = "Št. umrlih na 1 milijon prebivalcev"
+                            text = chartData.YAxisTitle
                         |}
             |}
         plotOptions = pojo
@@ -166,10 +159,10 @@ let renderChartContainer state chartData =
         ]
     ]
 
-let render state dispatch =
+let render state _ =
     let chartData =
         state
-        |> prepareChartData MinimumDeathsOfStartingDay DaysOfMovingAverage
+        |> prepareChartData FirstDeath DaysOfMovingAverage
 
     match chartData with
     | Some chartData ->
@@ -183,6 +176,6 @@ let render state dispatch =
         ]
     | None -> Html.div []
 
-let renderChart (props : {| data : StatsData |}) =
+let renderChart() =
     React.elmishComponent
-        ("CountriesChartViz/CountriesChart", init props.data, update, render)
+        ("CountriesChartViz/CountriesChart", init, update, render)

@@ -145,8 +145,8 @@ let render (state : State) (dispatch : Msg -> unit) =
                | Loading -> Utils.renderLoading
                | Failure error -> Utils.renderErrorLoading error
                | Success data ->
-                lazyView CountriesChartViz.Rendering.renderChart
-                            {| data = data |} |}
+                lazyView CountriesChartViz.Rendering.renderChart ()
+            |}
         ]
 
     let embedded, visualizations =

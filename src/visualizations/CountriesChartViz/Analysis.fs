@@ -15,11 +15,18 @@ type CountryData = {
 
 type CountriesData = Map<CountryIsoCode, CountryData>
 
+type StartingDayMode =
+    | FirstDeath
+
 let aggregateOurWorldInData
-    filterRecords
+    startingDayMode
     daysOfMovingAverage
     (ourWorldInData: OurWorldInDataRemoteData)
     : CountriesData option =
+
+    let filterRecords entry =
+        match startingDayMode with
+        | FirstDeath -> entry.TotalDeaths >= 1
 
     match ourWorldInData with
     | Success ourWorldInData ->

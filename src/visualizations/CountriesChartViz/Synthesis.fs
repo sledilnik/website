@@ -32,7 +32,11 @@ type CountrySeries = {
     Data: SeriesValues<IndexedDate>
 }
 
-type ChartData = CountrySeries[]
+type ChartData = {
+    XAxisTitle: string
+    YAxisTitle: string
+    Series: CountrySeries[]
+}
 
 let legendFormatter jsThis =
     let countryCode = jsThis?series?name
@@ -46,34 +50,41 @@ let legendFormatter jsThis =
 
 
 let prepareChartData
-    minimumDeathsOfStartingDay
+    startingDayMode
     daysOfMovingAverage
     (state: ChartState)
     : ChartData option =
 
     let aggregated =
         state.Data
-        |> aggregateOurWorldInData
-               (fun entry -> entry.TotalDeaths >= minimumDeathsOfStartingDay)
-               daysOfMovingAverage
+        |> aggregateOurWorldInData FirstDeath daysOfMovingAverage
 
     match aggregated with
     | Some aggregated ->
         let colorsInPalette = ColorPalette |> List.length
         let countriesCount = aggregated |> Seq.length
 
-        aggregated
-        |> Map.toArray
-        |> Array.mapi (fun countryIndex (_, countryData) ->
-                let colorIndex =
-                    countryIndex * colorsInPalette / countriesCount
-                let color = ColorPalette.[colorIndex]
+        let series =
+            aggregated
+            |> Map.toArray
+            |> Array.mapi (fun countryIndex (_, countryData) ->
+                    let colorIndex =
+                        countryIndex * colorsInPalette / countriesCount
+                    let color = ColorPalette.[colorIndex]
 
-                { CountryAbbr = countryData.CountryIsoCode
-                  CountryName = countryData.CountryName
-                  Color = color
-                  Data = countryData.Data }
-            )
-        |> Array.sortBy (fun x -> x.CountryAbbr)
+                    { CountryAbbr = countryData.CountryIsoCode
+                      CountryName = countryData.CountryName
+                      Color = color
+                      Data = countryData.Data }
+                )
+            |> Array.sortBy (fun x -> x.CountryAbbr)
+
+        {
+            Series = series
+            XAxisTitle =
+              match startingDayMode with
+                | FirstDeath -> "Št. dni od prvega smrtnega primera"
+            YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
+        }
         |> Some
     | None -> None
