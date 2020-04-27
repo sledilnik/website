@@ -18,6 +18,7 @@
         <Compile Include="PatientsChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="HospitalsChart.fs" />
+        <Compile Include="TestsChart.fs" />
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
