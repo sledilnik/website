@@ -71,8 +71,7 @@ let prepareChartData
 
         let series =
             aggregated
-            |> Map.toArray
-            |> Array.mapi (fun countryIndex (_, countryData) ->
+            |> Array.mapi (fun countryIndex countryData ->
                     let colorIndex =
                         countryIndex * colorsInPalette / countriesCount
                     let color = ColorPalette.[colorIndex]
@@ -82,7 +81,6 @@ let prepareChartData
                       Color = color
                       Data = countryData.Data }
                 )
-            |> Array.sortBy (fun x -> x.CountryAbbr)
 
         {
             Series = series

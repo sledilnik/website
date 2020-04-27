@@ -143,7 +143,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         plotOptions = pojo
             {|
-                series = pojo {| stacking = ""; |}
+                series = pojo {| stacking = ""; animation = false |}
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {| formatter = fun () -> legendFormatter jsThis |}
