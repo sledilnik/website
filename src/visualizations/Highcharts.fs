@@ -204,7 +204,11 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 rules = 
                     [| {|
                         condition = {| maxWidth = 500 |}
-                        chartOptions = {| legend = {| enabled = false |} |}
+                        chartOptions = 
+                            {| 
+                                legend = {| enabled = false |}
+                                yAxis = [| {| labels = {| enabled = false |} |} |]
+                            |}
                     |} |]
             |}
         
