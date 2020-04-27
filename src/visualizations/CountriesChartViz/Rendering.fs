@@ -15,7 +15,7 @@ open Types
 type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
-    | ChangeCountriesSelection of CountriesSelection
+    | ChangeCountriesSelection of int
 
 [<Literal>]
 let DaysOfMovingAverage = 5
@@ -23,18 +23,23 @@ let DaysOfMovingAverage = 5
 let init data : ChartState * Cmd<Msg> =
     let state = {
         Data = NotAsked
-        DisplayedCountries = Scandinavia
+        DisplayedCountriesSet = 0
     }
     state, Cmd.ofMsg DataRequested
 
 let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     match msg with
-    | ChangeCountriesSelection countries ->
-        { state with DisplayedCountries=countries }, Cmd.none
+    | ChangeCountriesSelection setIndex ->
+        { state with DisplayedCountriesSet = setIndex }, Cmd.none
     | DataRequested ->
-        let countries = ["SVN" ; "SWE" ; "NOR" ; "DNK"]
+        let countriesCodes =
+            let displaySetIndex = state.DisplayedCountriesSet
+
+            "SVN" ::
+            (countriesDisplaySets.[displaySetIndex].CountriesCodes
+                |> Array.toList)
         { state with Data = Loading },
-        Cmd.OfAsync.result (Data.OurWorldInData.load countries DataLoaded)
+        Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataLoaded remoteData ->
 
         match remoteData with

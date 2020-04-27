@@ -5,6 +5,24 @@ open Statistics
 open Data.OurWorldInData
 open System
 
+type CountriesDisplaySet = {
+    Label: string
+    CountriesCodes: string[]
+}
+
+// source: https://unstats.un.org/unsd/tradekb/knowledgebase/country-code
+let countriesDisplaySets = [|
+    { Label = "Nordijske države"
+      CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
+    }
+    { Label = "Ex-Yugoslavia"
+      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
+    }
+    { Label = "Sosedje"
+      CountriesCodes = [| "AUT"; "HRV"; "HUN"; "ITA" |]
+    }
+|]
+
 type CountryData = {
     CountryIsoCode: CountryIsoCode
     CountryName: string
@@ -12,9 +30,6 @@ type CountryData = {
 }
 
 type CountriesData = Map<CountryIsoCode, CountryData>
-
-type CountriesSelection =
-    | Scandinavia
 
 let aggregateOurWorldInData
     filterRecords

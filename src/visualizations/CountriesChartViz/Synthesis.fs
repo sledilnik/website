@@ -8,7 +8,7 @@ open JsInterop
 
 type ChartState = {
     Data: Data.OurWorldInData.OurWorldInDataRemoteData
-    DisplayedCountries: CountriesSelection
+    DisplayedCountriesSet: int
 }
 
 let ColorPalette =
