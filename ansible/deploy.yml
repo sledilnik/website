@@ -1,0 +1,5 @@
+---
+- hosts: all
+  tasks:
+    - name: Deploy
+      command: sudo /opt/sledilnik/deploy.sh
