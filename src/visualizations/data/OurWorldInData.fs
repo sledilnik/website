@@ -37,7 +37,6 @@ type CountryIsoCode = string
 
 type DataPoint = {
     CountryCode : CountryIsoCode
-    CountryName : string
     Date : string
     TotalCases: int
     TotalCasesPerMillion : float option
@@ -84,7 +83,6 @@ let load countries msg =
     let mapRow row =
         {
             CountryCode = stringOfResult row "iso_code"
-            CountryName = stringOfResult row "location"
             Date = stringOfResult row "date"
             TotalCases = intOfResult row "total_cases"
             TotalCasesPerMillion =

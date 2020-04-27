@@ -87,7 +87,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 {|
                 visible = true
                 color = countrySeries.Color
-                name = countrySeries.CountryAbbr
+                name = countrySeries.CountryName
                 data =
                     countrySeries.Data
                     |> Array.map (fun ((dayIndex, _), value) ->

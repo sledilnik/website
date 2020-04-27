@@ -18,6 +18,26 @@ type CountriesData = Map<CountryIsoCode, CountryData>
 type StartingDayMode =
     | FirstDeath
 
+let countryNames =
+    [
+        "AUT", "Avstrija"
+        "BIH", "Bosna in Hercegovina"
+        "DNK", "Danska"
+        "FIN", "Finska"
+        "HRV", "Hrvaška"
+        "HUN", "Madžarska"
+        "ISL", "Island"
+        "ITA", "Italija"
+        "MKD", "Severna Makedonija"
+        "MNE", "Črna gora"
+        "NOR", "Norveška"
+        "RKS", "Kosovo"
+        "SRB", "Srbija"
+        "SVN", "Slovenija"
+        "SWE", "Švedska" ]
+    |> List.map (fun (code, name) -> code,  name)
+    |> Map.ofList
+
 let aggregateOurWorldInData
     startingDayMode
     daysOfMovingAverage
@@ -35,20 +55,18 @@ let aggregateOurWorldInData
             |> Seq.filter filterRecords
             |> Seq.map (fun entry ->
                 let countryIsoCode = entry.CountryCode
-                let countryName = entry.CountryName
                 let dateStr = entry.Date
                 let deathsPerMillion = entry.TotalDeathsPerMillion
 
                 let date = DateTime.Parse(dateStr)
 
-                (countryIsoCode, countryName, date, deathsPerMillion))
-            |> Seq.sortBy (fun (isoCode, _, _, _) -> isoCode)
-            |> Seq.groupBy (fun (isoCode, countryName, _, _)
-                             -> (isoCode, countryName))
-            |> Seq.map (fun ((isoCode, countryName), countryLines) ->
+                (countryIsoCode, date, deathsPerMillion))
+            |> Seq.sortBy (fun (isoCode, _, _) -> isoCode)
+            |> Seq.groupBy (fun (isoCode, _, _) -> isoCode)
+            |> Seq.map (fun (isoCode, countryLines) ->
                 let dailyEntries =
                     countryLines
-                    |> Seq.mapi(fun dayIndex (_, _, date, deathsPerMillion) ->
+                    |> Seq.mapi(fun dayIndex (_, date, deathsPerMillion) ->
                         ((dayIndex, date), deathsPerMillion) )
                     |> Seq.toArray
                     |> (movingAverages
@@ -56,7 +74,7 @@ let aggregateOurWorldInData
                             (fun (day, _) -> day)
                             (fun (_, value) -> value |> Option.defaultValue 0.))
                 { CountryIsoCode = isoCode
-                  CountryName = countryName
+                  CountryName = countryNames.[isoCode]
                   Data = dailyEntries }
                 )
 

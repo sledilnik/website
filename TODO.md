@@ -2,6 +2,6 @@
 
 ## Countries comparison
 
-- show country names in Slovene in the legend
+- always show Slovenia in the same color
 - show dates in tooltips
 - add log scale switcher
