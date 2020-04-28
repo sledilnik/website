@@ -45,7 +45,7 @@ jobs:
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
-          [[ "${{ github.ref }}" == "refs/pull/"* ]] && VERSION=$(echo $VERSION | awk -F/ '{print "pr-" $3}')
+          [[ "${{ github.ref }}" == "refs/pull/"* ]] && VERSION=$(echo ${{ github.ref }} | awk -F/ '{print "pr-" $3}')
           # Use Docker `latest` tag convention
           [ "$VERSION" == "master" ] && VERSION=latest
           echo "Image $IMAGE_ID:$VERSION"
