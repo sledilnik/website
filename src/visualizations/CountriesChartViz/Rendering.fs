@@ -14,14 +14,19 @@ open Types
 
 // source: https://unstats.un.org/unsd/tradekb/knowledgebase/country-code
 let countriesDisplaySets = [|
+    { Label = "okolica (brez Italije)"
+      CountriesCodes = [|
+          "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SWZ"
+      |]
+    }
+    { Label = "kritične države (EU)"
+      CountriesCodes = [| "BEL"; "ESP"; "GBR"; "ITA"; "SWE" |]
+    }
     { Label = "Nordijske države"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
     { Label = "Ex-Jugoslavija"
       CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
-    }
-    { Label = "sosedje"
-      CountriesCodes = [| "AUT"; "HRV"; "HUN"; "ITA" |]
     }
 |]
 

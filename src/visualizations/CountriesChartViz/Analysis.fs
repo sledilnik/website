@@ -26,9 +26,14 @@ type OwidDataState =
 let countryNames =
     [
         "AUT", "Avstrija"
+        "BEL", "Belgija"
         "BIH", "Bosna in Hercegovina"
+        "CZE", "Češka"
+        "DEU", "Nemčija"
         "DNK", "Danska"
+        "ESP", "Španija"
         "FIN", "Finska"
+        "GBR", "Združeno kraljestvo"
         "HRV", "Hrvaška"
         "HUN", "Madžarska"
         "ISL", "Island"
@@ -38,8 +43,11 @@ let countryNames =
         "NOR", "Norveška"
         "RKS", "Kosovo"
         "SRB", "Srbija"
+        "SVK", "Slovaška"
         "SVN", "Slovenija"
-        "SWE", "Švedska" ]
+        "SWE", "Švedska"
+        "SWZ", "Švica"
+    ]
     |> List.map (fun (code, name) -> code,  name)
     |> Map.ofList
 
