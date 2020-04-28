@@ -49,6 +49,11 @@ export default {
           text: 'Obravnava hospitaliziranih',
           dimensions: [1140, 680]
         },
+        "Tests": {
+          value: "Tests",
+          text: 'Testiranje',
+          dimensions: [1140, 630]
+        },
         "Spread": {
           value: "Spread",
           text: 'Prirast potrjeno okuženih',
