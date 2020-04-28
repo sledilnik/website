@@ -4,7 +4,7 @@
 FROM docker.pkg.github.com/sledilnik/docker-base/web-base:latest AS builder
 ADD . /app
 RUN yarn
-RUN NODE_ENV=production yarn build
+RUN NODE_ENV=production CADDY_BUILD=1 yarn build
 
 ########################################
 # webserver image

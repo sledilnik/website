@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - master
-
-env:
-  IMAGE_NAME: web
-  CADDY_BUILD: 1
+    tags:
+      - v*
+  pull_request:
+    branches:
+      - master
 
 jobs:
   test:
@@ -39,25 +40,14 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/web
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           # Strip "v" prefix from tag name
           [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          [[ "${{ github.ref }}" == "refs/pull/"* ]] && VERSION=$(echo ${{ github.ref }} | awk -F/ '{print "pr-" $3}')
           # Use Docker `latest` tag convention
           [ "$VERSION" == "master" ] && VERSION=latest
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
+          echo "Image $IMAGE_ID:$VERSION"
           docker tag image $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
-
-  deploy:
-    runs-on: ubuntu-18.04
-    needs:
-      - build
-    steps:
-      - uses: actions/checkout@v2
-      - name: Deploy image
-        uses: ./.github/actions/ansible
-        env:
-          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
