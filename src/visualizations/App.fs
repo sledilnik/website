@@ -17,6 +17,7 @@ let init (query : obj) (visualization : string option) =
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Tests" -> Some Tests
+                | "Cases" -> Some Cases
                 | "Spread" -> Some Spread
                 | "Regions" -> Some Regions
                 | "Municipalities" -> Some Municipalities
@@ -84,6 +85,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} |}
+          {| Visualization = Cases
+             ClassName = "cases-chart"
+             Label = "Aktivni primeri"
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView CasesChart.casesChart {| data = data |} |}
           {| Visualization = Spread
              ClassName = "spread-chart"
              Label = "Prirast potrjeno okuženih"

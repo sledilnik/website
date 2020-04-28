@@ -86,6 +86,7 @@ type Visualization =
     | Patients
     | Hospitals
     | Tests
+    | Cases
     | Spread
     | Regions
     | Municipalities
