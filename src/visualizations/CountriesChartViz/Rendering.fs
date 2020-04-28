@@ -134,6 +134,7 @@ let renderChartCode (chartData: ChartData) =
     {| baseOptions with
         chart = pojo
             {|
+                animation = false
                 ``type`` = "spline"
                 zoomType = "x"
                 events = {| load = myLoadEvent("countries") |}
@@ -157,7 +158,7 @@ let renderChartCode (chartData: ChartData) =
             |}
         plotOptions = pojo
             {|
-                series = pojo {| stacking = ""; animation = false |}
+                series = pojo {| stacking = "" |}
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {| formatter = fun () -> legendFormatter jsThis |}
