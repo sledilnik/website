@@ -22,10 +22,10 @@ let countriesDisplaySets = [|
     { Label = "kritične države (EU)"
       CountriesCodes = [| "BEL"; "ESP"; "GBR"; "ITA"; "SWE" |]
     }
-    { Label = "Nordijske države"
+    { Label = "nordijske države"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
-    { Label = "Ex-Jugoslavija"
+    { Label = "ex-Jugoslavija"
       CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
     }
 |]
@@ -33,7 +33,8 @@ let countriesDisplaySets = [|
 type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
-    | ChangeCountriesSelection of CountriesDisplaySet
+    | CountriesSelectionChanged of CountriesDisplaySet
+    | ScaleTypeChanged of ScaleType
 
 [<Literal>]
 let DaysOfMovingAverage = 5
@@ -42,6 +43,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
+        ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
 
@@ -51,7 +53,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         (selectedSet.CountriesCodes |> Array.toList)
 
     match msg with
-    | ChangeCountriesSelection selectedSet ->
+    | CountriesSelectionChanged selectedSet ->
         let countriesCodes = getCountriesCodes selectedSet
 
         let newOwidDataState =
@@ -61,7 +63,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
                 PreviousAndLoadingNew oldOwidData
             | Current oldOwidData -> PreviousAndLoadingNew oldOwidData
 
-        {
+        { state with
             OwidDataState = newOwidDataState
             DisplayedCountriesSet = selectedSet
         },
@@ -91,8 +93,10 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             printfn "Success %A" data
 
         { state with OwidDataState = Current remoteData }, Cmd.none
+    | ScaleTypeChanged newScaleType ->
+        { state with ScaleType = newScaleType }, Cmd.none
 
-let renderChartCode (chartData: ChartData) =
+let renderChartCode (state: ChartState) (chartData: ChartData) =
     let myLoadEvent _ =
         let ret _ =
             let evt = document.createEvent("event")
@@ -154,6 +158,12 @@ let renderChartCode (chartData: ChartData) =
             |}
         yAxis =
             pojo {|
+                   ``type`` =
+                       if state.ScaleType=Linear then "linear"
+                       else "logarithmic"
+//                   min =
+//                        if state.ScaleType=Linear then None
+//                        else Some 1.0
                    opposite = true
                    title =
                        pojo {|
@@ -170,11 +180,11 @@ let renderChartCode (chartData: ChartData) =
     |}
 
 
-let renderChartContainer chartData =
+let renderChartContainer state chartData =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderChartCode chartData |> chart ]
+        prop.children [ renderChartCode state chartData |> chart ]
     ]
 
 let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
@@ -204,10 +214,12 @@ let render state dispatch =
     match chartData with
     | Some chartData ->
         Html.div [
-            renderChartContainer chartData
+            Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch)
+            renderChartContainer state chartData
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet
-                (ChangeCountriesSelection >> dispatch)
+                (CountriesSelectionChanged >> dispatch)
 
             Html.div [
                 prop.className "disclaimer"

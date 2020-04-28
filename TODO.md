@@ -2,8 +2,11 @@
 
 ## Countries comparison
 
-- add more countries (sosedje + 1)
+- logarithmic scale should use a different starting mode
+    1 / 1M
+- dodaj vir podatkov spodaj
+- add more country sets
+    - kritične države (svet)
 - show dates in tooltips
-- add log scale switcher
-- add other metrics - which ones
+- add other metrics - which ones?
 - add disclaimer

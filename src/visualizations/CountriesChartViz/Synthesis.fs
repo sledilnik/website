@@ -1,11 +1,10 @@
 ﻿module CountriesChartViz.Synthesis
 
-open System
 open CountriesChartViz.Analysis
-open Data.OurWorldInData
 open Fable.Core
 open Statistics
 open JsInterop
+open Types
 
 type CountriesDisplaySet = {
     Label: string
@@ -15,6 +14,7 @@ type CountriesDisplaySet = {
 type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
+    ScaleType : ScaleType
 }
 
 let ColorPalette =
