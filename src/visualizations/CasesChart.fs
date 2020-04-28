@@ -55,29 +55,25 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 let renderChartOptions (state : State) =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
-
-    let xAxisPoint (dp: StatsDataPoint) = dp.Date
-    let negativeTests (dp: StatsDataPoint) = dp.PerformedTests.Value - dp.PositiveTests.Value
-    let percentPositive (dp: StatsDataPoint) = Math.Round(float dp.PositiveTests.Value / float dp.PerformedTests.Value * float 100.0, 2)
     
     let startDate = DateTime(2020,3,4)
-    let subtract (a: int option) (b: int option) = a.Value - b.Value
+    let subtract a b = b - a
 
     let renderSeries series =
 
         let renderPoint : (StatsDataPoint -> JsTimestamp * int option) =
             match series with
             | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ClosedToDate  // todo   
-            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ActiveToDate //|> subtract dp.StatePerTreatment.InHospitalToDate // todo rename  
-            | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital //|> subtract dp.StatePerTreatment.InICU  
-            | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU //|> subtract dp.StatePerTreatment.Critical
+            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ActiveToDate.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some // todo rename  
+            | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some  
+            | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some
             | Critical      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Critical
             | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Deceased
 
         let color, className, name = Series.getSeriesInfo series
 
         {|
-            ``type`` = "column"
+            ``type`` = "area"
             color = color
             name = name
             //className = className
@@ -99,7 +95,7 @@ let renderChartOptions (state : State) =
         series = allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal" |} 
+                series = {| stacking = "normal"; marker = pojo {| symbol = "circle"; radius = 3 |} |} 
             |}        
 
         legend = pojo
@@ -108,7 +104,7 @@ let renderChartOptions (state : State) =
                 title = {| text = null |}
                 align = "left"
                 verticalAlign = "top"
-                x = 60
+                x = 10
                 y = 30
                 borderColor = "#ddd"
                 borderWidth = 1
