@@ -27,7 +27,7 @@ export default {
     const cards = {
       'confirmedCases': {
         title: 'Potrjeno okuženi',
-        field: 'tests.positive.todate',
+        field: 'cases.confirmed.todate',
         goodDirection: 'down',
       },
       'hospitalized': {
@@ -46,8 +46,8 @@ export default {
         goodDirection: 'down',
       },
       'recovered': {
-        title: 'Ozdraveli',
-        field: 'state.recovered.todate',
+        title: 'Preboleli',
+        field: 'cases.recovered.todate',
         goodDirection: 'up',
       },
     }
