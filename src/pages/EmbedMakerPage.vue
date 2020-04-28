@@ -49,6 +49,11 @@ export default {
           text: 'Obravnava hospitaliziranih',
           dimensions: [1140, 680]
         },
+        "Tests": {
+          value: "Tests",
+          text: 'Testiranje',
+          dimensions: [1140, 630]
+        },
         "Spread": {
           value: "Spread",
           text: 'Prirast potrjeno okuženih',
@@ -57,7 +62,7 @@ export default {
         "Infections": {
           value: "Infections",
           text: 'Struktura potrjeno okuženih',
-          dimensions: [1140, 740]
+          dimensions: [1140, 820]
         },
         "Regions": {
           value: "Regions",
@@ -77,7 +82,7 @@ export default {
         "AgeGroups": {
           value: "AgeGroups",
           text: 'Po starostnih skupinah',
-          dimensions: [1140, 650]
+          dimensions: [1140, 720]
         },
 //        "Hospitals": {
 //          value: "Hospitals",

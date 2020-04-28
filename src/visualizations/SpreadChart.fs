@@ -268,7 +268,7 @@ let renderExplainer (data: StatsData) =
 
 let renderChartContainer scaleType data =
     Html.div [
-        prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
+        prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data
@@ -302,7 +302,7 @@ let render (state: State) dispatch =
     Html.div [
         prop.children [
             Html.div [
-                prop.style [ style.height 450; (Interop.mkStyle "width" "100%"); style.position.relative ]
+                prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
                 prop.children [
                     match state.page with
                     | Chart scale ->

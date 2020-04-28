@@ -347,7 +347,7 @@ let renderChartOptions (state : State) =
 
 let renderChartContainer state =
     Html.div [
-        prop.style [ style.height 520 ] //; style.width 500; ]
+        prop.style [ style.height 480 ] 
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state

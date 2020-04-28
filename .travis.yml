@@ -6,6 +6,10 @@ node_js: node
 cache: 
   yarn: true
 
+branches:
+  except:
+  - deploy-wip
+
 before_install:
   - wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
   - sudo dpkg -i packages-microsoft-prod.deb

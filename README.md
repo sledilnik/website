@@ -20,7 +20,11 @@ https://travis-ci.com/github/sledilnik/website
 
 Every push to `master` is automatically deployed (if build successfull) to https://covid-19.sledilnik.org
 
-Every push to other branches (not `master`) is deployed to https://preview.sledilnik.org/branch-name
+## Preview deployment
+
+Create PR from a branch (in this repo, not fork) to master. Label PR with label `deploy-preview` and wait few minutes. Deployment should be available at https://pr-NUM.sledilnik.org where NUM is number of your PR.
+
+Only open PR with label `deploy-preview` are deployed. When PR is closed or label removed, deployment is stopped.
 
 ## Development
 

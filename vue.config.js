@@ -10,6 +10,10 @@ if (process.env.NODE_ENV != 'production') {
   process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
 }
 
+indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.html'
+
+console.log("Using template", indexTemplate)
+
 module.exports = {
   publicPath: process.env.C19_PUBLIC_PATH || '/',
   outputDir: process.env.C19_OUTPUT_DIR || 'dist',
@@ -19,12 +23,12 @@ module.exports = {
   pages: {
     index: {
       entry: 'src/index.js',
-      template: 'public/index.html',
+      template: indexTemplate,
       filename: 'index.html',
     },
     embed: {
       entry: 'src/embed.js',
-      template: 'public/index.html',
+      template: indexTemplate,
       filename: 'embed.html',
     },
   },

@@ -1,0 +1,14 @@
+version: '3'
+services:
+  lint:
+    image: docker.pkg.github.com/sledilnik/docker-base/web-base:latest
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+      - ".:/app"
+    command: ["bash", "-c", "yarn && yarn lint"]
+  test:
+    image: docker.pkg.github.com/sledilnik/docker-base/web-base:latest
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"
+      - ".:/app"
+    command: ["bash", "-c", "yarn && yarn test && yarn test-fsharp"]

@@ -4,7 +4,7 @@
     <b-container class="stats-page">
       <div class="time-stamp"></div>
       <div class="cards-wrapper latest-data-boxes">
-        <Info-card title="Potrjeno okuženi" field="tests.positive.todate" series-type="cum" />
+        <Info-card title="Potrjeno okuženi" field="cases.confirmed.todate" series-type="cum" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" series-type="state" />
         <Info-card title="V intenzivni enoti" field="state.icu" series-type="state" />
         <Info-card title="Umrli" field="state.deceased.todate" series-type="cum" />
