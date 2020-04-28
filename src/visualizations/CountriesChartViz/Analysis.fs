@@ -1,8 +1,8 @@
 ﻿module CountriesChartViz.Analysis
 
-open Types
 open Statistics
 open Data.OurWorldInData
+open Types
 open System
 
 type IndexedDate = (int * DateTime)
@@ -17,6 +17,11 @@ type CountriesData = CountryData[]
 
 type StartingDayMode =
     | FirstDeath
+
+type OwidDataState =
+    | NotLoaded
+    | PreviousAndLoadingNew of OurWorldInDataRemoteData
+    | Current of OurWorldInDataRemoteData
 
 let countryNames =
     [
@@ -41,7 +46,7 @@ let countryNames =
 let aggregateOurWorldInData
     startingDayMode
     daysOfMovingAverage
-    (ourWorldInData: OurWorldInDataRemoteData)
+    (owidDataState: OwidDataState)
     : CountriesData option =
 
     let filterRecords entry =
@@ -54,35 +59,41 @@ let aggregateOurWorldInData
         | _, "SVN" -> 1
         | _ -> a.CountryName.CompareTo b.CountryName
 
-    match ourWorldInData with
-    | Success ourWorldInData ->
-        ourWorldInData
-        |> Seq.filter filterRecords
-        |> Seq.map (fun entry ->
-            let countryIsoCode = entry.CountryCode
-            let dateStr = entry.Date
-            let deathsPerMillion = entry.TotalDeathsPerMillion
+    let doAggregate (owidData: OurWorldInDataRemoteData) =
+        match owidData with
+        | Success dataPoints ->
+            dataPoints
+            |> Seq.filter filterRecords
+            |> Seq.map (fun entry ->
+                let countryIsoCode = entry.CountryCode
+                let dateStr = entry.Date
+                let deathsPerMillion = entry.TotalDeathsPerMillion
 
-            let date = DateTime.Parse(dateStr)
+                let date = DateTime.Parse(dateStr)
 
-            (countryIsoCode, date, deathsPerMillion))
-        |> Seq.sortBy (fun (isoCode, _, _) -> isoCode)
-        |> Seq.groupBy (fun (isoCode, _, _) -> isoCode)
-        |> Seq.map (fun (isoCode, countryLines) ->
-            let dailyEntries =
-                countryLines
-                |> Seq.mapi(fun dayIndex (_, date, deathsPerMillion) ->
-                    ((dayIndex, date), deathsPerMillion) )
-                |> Seq.toArray
-                |> (movingAverages
-                        movingAverageCentered daysOfMovingAverage
-                        (fun (day, _) -> day)
-                        (fun (_, value) -> value |> Option.defaultValue 0.))
-            { CountryIsoCode = isoCode
-              CountryName = countryNames.[isoCode]
-              Data = dailyEntries }
-            )
-        |> Seq.sortWith countriesComparer
-        |> Seq.toArray
-        |> Some
-    | _ -> None
+                (countryIsoCode, date, deathsPerMillion))
+            |> Seq.sortBy (fun (isoCode, _, _) -> isoCode)
+            |> Seq.groupBy (fun (isoCode, _, _) -> isoCode)
+            |> Seq.map (fun (isoCode, countryLines) ->
+                let dailyEntries =
+                    countryLines
+                    |> Seq.mapi(fun dayIndex (_, date, deathsPerMillion) ->
+                        ((dayIndex, date), deathsPerMillion) )
+                    |> Seq.toArray
+                    |> (movingAverages
+                            movingAverageCentered daysOfMovingAverage
+                            (fun (day, _) -> day)
+                            (fun (_, value) -> value |> Option.defaultValue 0.))
+                { CountryIsoCode = isoCode
+                  CountryName = countryNames.[isoCode]
+                  Data = dailyEntries }
+                )
+            |> Seq.sortWith countriesComparer
+            |> Seq.toArray
+            |> Some
+        | _ -> None
+
+    match owidDataState with
+    | PreviousAndLoadingNew owidData -> doAggregate owidData
+    | Current owidData -> doAggregate owidData
+    | NotLoaded -> None

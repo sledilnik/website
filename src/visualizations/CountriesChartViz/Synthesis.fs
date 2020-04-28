@@ -2,6 +2,7 @@
 
 open System
 open CountriesChartViz.Analysis
+open Data.OurWorldInData
 open Fable.Core
 open Statistics
 open JsInterop
@@ -12,7 +13,7 @@ type CountriesDisplaySet = {
 }
 
 type ChartState = {
-    Data: Data.OurWorldInData.OurWorldInDataRemoteData
+    OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
 }
 
@@ -61,7 +62,7 @@ let prepareChartData
     : ChartData option =
 
     let aggregated =
-        state.Data
+        state.OwidDataState
         |> aggregateOurWorldInData FirstDeath daysOfMovingAverage
 
     match aggregated with

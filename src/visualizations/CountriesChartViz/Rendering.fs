@@ -35,7 +35,7 @@ let DaysOfMovingAverage = 5
 
 let init: ChartState * Cmd<Msg> =
     let state = {
-        Data = NotAsked
+        OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
     }
     state, Cmd.ofMsg DataRequested
@@ -49,15 +49,29 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     | ChangeCountriesSelection selectedSet ->
         let countriesCodes = getCountriesCodes selectedSet
 
+        let newOwidDataState =
+            match state.OwidDataState with
+            | NotLoaded -> PreviousAndLoadingNew Loading
+            | PreviousAndLoadingNew oldOwidData ->
+                PreviousAndLoadingNew oldOwidData
+            | Current oldOwidData -> PreviousAndLoadingNew oldOwidData
+
         {
-            Data = Loading
+            OwidDataState = newOwidDataState
             DisplayedCountriesSet = selectedSet
         },
         Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataRequested ->
         let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
 
-        { state with Data = Loading },
+        let newOwidDataState =
+            match state.OwidDataState with
+            | NotLoaded -> PreviousAndLoadingNew Loading
+            | PreviousAndLoadingNew oldOwidData ->
+                PreviousAndLoadingNew oldOwidData
+            | Current oldOwidData -> PreviousAndLoadingNew oldOwidData
+
+        { state with OwidDataState = newOwidDataState },
         Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataLoaded remoteData ->
 
@@ -71,9 +85,9 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         | Success data ->
             printfn "Success %A" data
 
-        { state with Data = remoteData }, Cmd.none
+        { state with OwidDataState = Current remoteData }, Cmd.none
 
-let renderChartCode (state: ChartState) (chartData: ChartData) =
+let renderChartCode (chartData: ChartData) =
     let myLoadEvent _ =
         let ret _ =
             let evt = document.createEvent("event")
@@ -150,11 +164,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
     |}
 
 
-let renderChartContainer state chartData =
+let renderChartContainer chartData =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderChartCode state chartData |> chart ]
+        prop.children [ renderChartCode chartData |> chart ]
     ]
 
 let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
@@ -184,7 +198,7 @@ let render state dispatch =
     match chartData with
     | Some chartData ->
         Html.div [
-            renderChartContainer state chartData
+            renderChartContainer chartData
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet
                 (ChangeCountriesSelection >> dispatch)
