@@ -66,13 +66,13 @@ let renderChartOptions (state : State) =
     let renderSeries series =
 
         let renderPoint : (StatsDataPoint -> JsTimestamp * int option) =
-                match series with
-                | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ClosedToDate  // todo   
-                | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ActiveToDate //|> subtract dp.StatePerTreatment.InHospitalToDate // todo rename  
-                | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital //|> subtract dp.StatePerTreatment.InICU  
-                | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU //|> subtract dp.StatePerTreatment.Critical
-                | Critical      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Critical
-                | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Deceased
+            match series with
+            | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ClosedToDate  // todo   
+            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ActiveToDate //|> subtract dp.StatePerTreatment.InHospitalToDate // todo rename  
+            | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital //|> subtract dp.StatePerTreatment.InICU  
+            | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU //|> subtract dp.StatePerTreatment.Critical
+            | Critical      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Critical
+            | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Deceased
 
         let color, className, name = Series.getSeriesInfo series
 
