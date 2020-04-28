@@ -430,7 +430,7 @@ let renderChartContainer state =
     let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
 
     Html.div [
-        prop.style [ style.height 450 ]
+        prop.style [ style.height 400 ]
         prop.className "highcharts-wrapper"
         prop.children [ renderChartOptions state chartData |> chart ]
     ]
