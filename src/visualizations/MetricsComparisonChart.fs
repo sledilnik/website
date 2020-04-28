@@ -42,14 +42,14 @@ module Metrics  =
         { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot; Label="Testiranja (skupaj)"; Class="cs-testsToDate" }
         { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid; Label="Potrjeno okuženi (na dan)"; Class="cs-positiveTests" }
         { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot; Label="Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
-        { Metric=ConfirmedCases;       Color="#bda506"; Visible=false; Line=Dot; Label="Potrjeno okuženi (aktivni)"; Class="cs-positiveTestsActive" }
+        { Metric=ConfirmedCases;       Color="#bda506"; Visible=false; Line=Dash; Label="Potrjeno okuženi (aktivni)"; Class="cs-positiveTestsActive" }
+        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash; Label="Preboleli (skupaj)"; Class="cs-recoveredToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (aktivni)"; Class="cs-inHospital" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
         { Metric=InICU;                Color="#bf5747"; Visible=true;  Line=Solid; Label="V intenzivni enoti (aktivni)"; Class="cs-inHospitalICU" }
         { Metric=OnVentilator;         Color="#d99a91"; Visible=false; Line=Solid; Label="Na respiratorju (aktivni)"; Class="cs-inHospitalVentilator" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
         { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Line=Dot; Label="Okrevali (skupaj)"; Class="cs-recoveredToDate" }
         { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid; Label="Umrli (na dan)"; Class="cs-deceased" }
         { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Dot; Label="Umrli (skupaj)"; Class="cs-deceasedToDate" }
     ]
@@ -100,16 +100,16 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             match mc.Metric with
             | PerformedTests -> point.PerformedTests
             | PerformedTestsToDate -> point.PerformedTestsToDate
-            | ConfirmedCases -> point.Cases.ActiveToDate // rename
             | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
+            | ConfirmedCases -> point.Cases.ActiveToDate // rename
+            | RecoveredToDate -> point.Cases.ClosedToDate // temporary
             | InHospital -> point.StatePerTreatment.InHospital
             | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
             | InICU -> point.StatePerTreatment.InICU
             | OnVentilator -> point.StatePerTreatment.Critical
             | OutOfHospital -> point.StatePerTreatment.OutOfHospital
             | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate
-            | RecoveredToDate -> point.StatePerTreatment.RecoveredToDate
             | Deceased -> point.StatePerTreatment.Deceased
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate
 
