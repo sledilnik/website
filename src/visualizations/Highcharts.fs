@@ -10,6 +10,9 @@ open Types
 [<Import("renderChart", from="./_highcharts")>]
 let chart: obj -> ReactElement = jsNative
 
+[<Import("renderMap", from="./_highcharts")>]
+let map: obj -> ReactElement = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -73,7 +76,7 @@ let shadedWeekendPlotBands =
 
 // trigger event for iframe resize
 
-let myLoadEvent(name: String) = 
+let myLoadEvent(name: String) =
     let ret(event: Event) =
         let evt = document.createEvent("event")
         evt.initEvent("chartLoaded", true, true);
@@ -199,19 +202,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
-        responsive = pojo 
+        responsive = pojo
             {|
-                rules = 
+                rules =
                     [| {|
                         condition = {| maxWidth = 500 |}
-                        chartOptions = 
-                            {| 
+                        chartOptions =
+                            {|
                                 legend = {| enabled = false |}
                                 yAxis = [| {| labels = {| enabled = false |} |} |]
                             |}
                     |} |]
             |}
-        
+
 
         plotOptions = pojo
             {|

@@ -143,7 +143,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> 
+                | Success data ->
                     lazyView AgeGroupsChart.renderChart {| data = data |} |}
         ]
 
