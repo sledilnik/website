@@ -35,7 +35,7 @@ To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del po
 <details>
   <summary>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot je [Worldometer](https://www.worldometers.info/coronavirus/), oz. preverite na [strani Povezave](#/links).
+Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](#/links).
 
 </details>
 
@@ -75,11 +75,11 @@ Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, N
 <details>
   <summary>Kako zbirate in urejate podatke?</summary>
 
-[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatki po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
+[Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatke po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
 Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):
 
-- Dobivamo dnevna poročila in spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) - okoli 8h.
+- Dobivamo dnevna poročila in spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) – okoli 8h.
 
 - Spremljamo število hospitaliziranih: vsi oddelki, v intenzivni enoti in na respiratorju.
 
@@ -96,7 +96,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 <details>
   <summary>Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</summary>
 
-Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjene okužbe,...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.  
+Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjene okužbe ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.  
 
 Ko objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih poteh (CSV, REST, spletna stran), o objavi poročamo tudi na družbenih omrežjih ([Facebook](https://www.facebook.com/COVID19Sledilnik) in [Twitter](https://twitter.com/sledilnik)).
 
@@ -126,26 +126,26 @@ Podatek **Odpuščeni iz bolnišnice** je Sledilnikova ocena, izračunana na pod
 </details>
 
 <details>
-  <summary>Zakaj tako dolgo niste prikazovali števila ozdravljenih?</summary>
+  <summary>Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?</summary>
 
-Sledilnik se pri številu ozdravelih zanaša na uradne vire (Vlada RS, mediji). Poročanja o ozdravljenih so žal redka – za zdaj imamo samo par potrjenih virov o ozdravljenih, rednih podatkov in uradnih virov pa ni, kakor tudi ne defincije, kdaj je določena oseba ozdravljena. 
+Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo trenutno poteka [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo s prostovoljnim testiranjem na vzorcu pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?) 
 
-Ministrstvo za zdravje je 14. aprila objavilo zgolj [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih bi lahko sklepali, kdaj se oseba obravnava kot ozdravljena in je sposobna za vrnitev na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res ozdravljeni. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo.  
+V vednost: Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo.  
 
-Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o več ozdravelih, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo ozdravele skupaj s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno. 
+Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o številu okrevanj, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo prebolele osebe s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno (kazalnika Odpuščeni in Preboleli). 
 
 </details>
 
 <details>
   <summary>Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?</summary>
 
-Da, od konca aprila dalje grafično prikazujemo tudi te kazalnike - **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
+Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
 
-Pri teh prikazih ne gre za podatke iz javnih virov, ampak na  osnovi uradnih podatkov izračunane vrednosti, ki so zato tudi prikazane s črtkano in ne polno črto. 
-Formula izračuna je:  
+Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni.
 
-- Preboleli (skupaj) = Potrjeno okuženi (na dan - danes) - Potrjeno okuženi (na dan - pred 21 dnevi)
-- Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) - Preboleli (skupaj) - Umrli (skupaj)
+- Preboleli (skupaj) = Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom. Ocena je seveda poenostavljena, saj ne upošteva primerov resnejših komplikacij in posledic bolezni covid-19. 
+
+- Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
 
 </details>
 
@@ -208,27 +208,27 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeno okuženi (na dan)** = Število potrjeno okuženih na dan na podlagi testov. Ta kazalec ne odraža dejanskega gibanja novih okuženih v populaciji, saj se s testi ne vzorči celotne populacije, ampak se ciljno testira rizične in poklicne skupine.
 
-* **Potrjeno okuženi (skupaj)** = skupno število vseh potrjeno okuženih oseb do določenega dne
+* **Potrjeno okuženi (skupaj)** = Skupno število vseh potrjeno okuženih oseb do določenega dne.
 
-* **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) - Preboleli (skupaj) - Umrli (skupaj)
+* **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
 
-* **Preboleli (skupaj)** = Potrjeno okuženi (na dan - danes) - Potrjeno okuženi (na dan - pred 21 dnevi)
+* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih tri tedne pred danim datumom ob predpostavki, da se bolezen povprečno preboli najkasneje v 21 dneh.
 
-* **Hospitalizirani (trenutno)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
+* **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
 * **Hospitalizirani (skupaj)** = Vsota sprejetih v bolnišnico do dne.
 
-* **V intenzivni enoti (trenutno)** = Trenutno število oseb v enotah intenzivne terapije.
+* **V intenzivni enoti (aktivni)** = Trenutno število oseb v enotah intenzivne terapije.
 
-* **Na respiratorju (trenutno)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
+* **Na respiratorju (aktivni)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
 
 * **Odpuščeni iz bolnišnice (na dan)** = Število odpuščenih iz bolnišnice na ta dan.
 
-* **Odpuščeni iz bolnišnice (skupaj)** = Vsota odpuščenih iz bolnišnice do tega dne.
+* **Odpuščeni iz bolnišnice (skupaj)** = Vsota vseh odpuščenih iz bolnišnice do tega dne.
 
 * **Umrli (na dan)** = Število umrlih za posledicami COVID-19 na ta dan.
 
-* **Umrli (skupaj)** = Vsota umrlih do tega dne.
+* **Umrli (skupaj)** = Vsota vseh umrlih do tega dne.
   
   </details>
 
@@ -243,7 +243,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
 
-* **preboleli** = To je s pomočjo formule izračunano število oseb, ki so bile potrjeno okužene in so po 21 dneh - teoretično - prebolele bolezen. 
+* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
   
   </details>
 
@@ -260,11 +260,11 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 3 (20. marec–7. april)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
 
-* **Faza 4 (8.–15. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/145-Dopolnitev-navodil-glede-testiranja-na-COVID-19.pdf) - dodatno se testirajo tudi osebe z blagimi simptomi iz gospodinjstev, kjer je več oseb z okužbo dihal.
+* **Faza 4 (8.–15. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/145-Dopolnitev-navodil-glede-testiranja-na-COVID-19.pdf) – dodatno se testirajo tudi osebe z blagimi simptomi iz gospodinjstev, v katerih je več oseb z okužbo dihal.
 
-* **Faza 5 (15.–21. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) - ponovno se **po možnosti** testirajo **vse** osebe pri katerih je sum za možno okužbo s SARS-CoV-2 virusom.
+* **Faza 5 (15.–21. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.
 
-* **Faza 6 (21. april–danes)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID19-Testiranje-pri-vseh-osebah-s-sumom.pdf) - ponovno se testirajo **vse** osebe pri katerih je sum za možno okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
+* **Faza 6 (21. april–danes)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID19-Testiranje-pri-vseh-osebah-s-sumom.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
 </details>
 
