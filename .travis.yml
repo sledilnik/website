@@ -28,20 +28,6 @@ script:
   - yarn build
 deploy:
   - on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH != master
-    provider: pages
-    local_dir: dist
-    target_branch: gh-pages
-    committer_from_gh: true
-    cleanup: false
-    skip_cleanup: true
-    token: $GITHUB_TOKEN
-    fqdn: preview.sledilnik.org
-    verbose: true
-    keep_history: true
-    deploy_strategy: git
-  - on:
       branch: master
     provider: pages
     local_dir: dist

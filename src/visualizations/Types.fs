@@ -13,8 +13,10 @@ type RemoteData<'data, 'error> =
 type Cases =
     { ConfirmedToday : int option
       ConfirmedToDate : int option
+      RecoveredToDate : int option
       ClosedToDate : int option
-      ActiveToDate : int option }
+      Active : int option
+    }
 
 type Treatment =
     { InHospital : int option

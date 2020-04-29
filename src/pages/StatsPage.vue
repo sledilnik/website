@@ -8,7 +8,7 @@
         <Info-card title="Hospitalizirani" field="state.in_hospital" series-type="state" />
         <Info-card title="V intenzivni enoti" field="state.icu" series-type="state" />
         <Info-card title="Umrli" field="state.deceased.todate" series-type="cum" />
-        <Info-card title="Ozdraveli" field="state.recovered.todate" good-trend="up" series-type="cum" />
+        <Info-card title="Preboleli" field="cases.recovered.todate" good-trend="up" series-type="cum" />
       </div>
       <b-row cols="12">
         <b-col>
