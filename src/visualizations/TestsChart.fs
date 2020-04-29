@@ -154,7 +154,7 @@ let renderDisplaySelectors state dispatch =
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state
-        renderDisplaySelectors state dispatch
+        //renderDisplaySelectors state dispatch
     ]
 
 let testsChart (props : {| data : StatsData |}) =
