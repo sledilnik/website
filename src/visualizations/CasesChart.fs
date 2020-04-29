@@ -33,6 +33,8 @@ module Series =
         [ Deceased; Recovered; Active; InHospital; Icu; Critical; ]
     let active =
         [ Active; InHospital; Icu; Critical; ]
+    let inHospital =
+        [ InHospital; Icu; Critical; ]
     let closed =
         [ Deceased; Recovered;  ]
 
@@ -99,7 +101,6 @@ let renderChartOptions (state : State) =
         plotOptions = pojo 
             {| 
                 series = {| stacking = "normal"; groupPadding = 0 |}
-                //series = {| stacking = "normal"; marker = pojo {| symbol = "circle"; radius = 3 |} |} 
             |}        
 
         legend = pojo
