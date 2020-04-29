@@ -26,13 +26,15 @@ let ``Groups entries by countries``() =
     test <@ grouped |> Map.count = 2 @>
 
     test <@ grouped.ContainsKey "SVN" @>
-    test <@ grouped.["SVN"].Length = 2 @>
-    test <@ grouped.["SVN"].[0].Date = DateTime(2020, 04, 29) @>
-    test <@ grouped.["SVN"].[0].TotalCases = 1. @>
-    test <@ grouped.["SVN"].[0].TotalCasesPerMillion = 0. @>
-    test <@ grouped.["SVN"].[0].TotalDeaths = 2. @>
-    test <@ grouped.["SVN"].[0].TotalDeathsPerMillion = 3. @>
-    test <@ grouped.["SVN"].[1].Date = DateTime(2020, 04, 30) @>
+    test <@ grouped.["SVN"].Entries.Length = 2 @>
 
-    test <@ grouped.["AUT"].Length = 1 @>
+    let sampleEntry = grouped.["SVN"].Entries.[0]
+    test <@ sampleEntry.Date = DateTime(2020, 04, 29) @>
+    test <@ sampleEntry.TotalCases = 1. @>
+    test <@ sampleEntry.TotalCasesPerMillion = 0. @>
+    test <@ sampleEntry.TotalDeaths = 2. @>
+    test <@ sampleEntry.TotalDeathsPerMillion = 3. @>
+    test <@ grouped.["SVN"].Entries.[1].Date = DateTime(2020, 04, 30) @>
+
+    test <@ grouped.["AUT"].Entries.Length = 1 @>
     test <@ grouped.ContainsKey "AUT" @>

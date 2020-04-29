@@ -2,6 +2,7 @@
 
 ## Countries comparison
 
+- add build script
 - how to make the series on the logarithmic scale start from the same point? 
 - something is wrong with Swiss data
 - dodaj vir podatkov spodaj
