@@ -21,24 +21,28 @@ type Msg =
     | ChangeDisplayType of DisplayType
 
 type Series =
+    | Deceased
     | Recovered
     | Active
     | InHospital
     | Icu
     | Critical
-    | Deceased
 
 module Series =
     let all =
-        [ Recovered; Active; InHospital; Icu; Critical; Deceased; ]
+        [ Deceased; Recovered; Active; InHospital; Icu; Critical; ]
+    let active =
+        [ Active; InHospital; Icu; Critical; ]
+    let closed =
+        [ Deceased; Recovered;  ]
 
     let getSeriesInfo = function
+        | Deceased      -> "#666666",   "cs-deceased",      "Umrli"
         | Recovered     -> "#8cd4b2",   "cs-recovered",     "Preboleli"
         | Active        -> "#bda506",   "cs-active",        "Aktivni"
         | InHospital    -> "#be7a2a",   "cs-inHospital",    "Hospitalizirani"
         | Icu           -> "#bf5747",   "cs-inHospitalICU", "V intenzivni enoti"
         | Critical      -> "#d99a91",   "cs-critical",      "Na respiratorju"
-        | Deceased      -> "#666666",   "cs-deceased",      "Umrli"
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -56,38 +60,37 @@ let renderChartOptions (state : State) =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
     
-    let startDate = DateTime(2020,3,4)
     let subtract a b = b - a
 
-    let renderSeries series =
+    let renderSeries series (stackID : string)  =
 
         let renderPoint : (StatsDataPoint -> JsTimestamp * int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ClosedToDate  // todo   
-            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.ActiveToDate.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some // todo rename  
+            | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.RecoveredToDate    
+            | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.DeceasedToDate
+            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.Active.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some // todo rename  
             | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some  
             | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some
             | Critical      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Critical
-            | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Deceased
 
         let color, className, name = Series.getSeriesInfo series
-
         {|
-            ``type`` = "area"
+            ``type`` = "column"
             color = color
             name = name
+            //stack = stackID
             //className = className
             data =
                 state.data
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map renderPoint
-                |> Array.ofSeq
+                |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
+                |> Seq.map renderPoint  
+                |> Array.ofSeq 
         |}
         |> pojo
 
     let allSeries = [|
         for series in Series.all do
-            yield renderSeries series
+            yield renderSeries series ""
     |]
     
     let baseOptions = Highcharts.basicChartOptions scaleType className
@@ -95,7 +98,8 @@ let renderChartOptions (state : State) =
         series = allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal"; marker = pojo {| symbol = "circle"; radius = 3 |} |} 
+                series = {| stacking = "normal"; groupPadding = 0 |}
+                //series = {| stacking = "normal"; marker = pojo {| symbol = "circle"; radius = 3 |} |} 
             |}        
 
         legend = pojo
