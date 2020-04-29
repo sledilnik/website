@@ -67,7 +67,6 @@ let renderChartOptions (state : State) =
         |}
     |]
 
-    let startDate = DateTime(2020,3,4)
     let allSeries = [
         yield pojo
             {|
@@ -75,7 +74,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTests dp)) |> Seq.toArray
             |}
         yield pojo
@@ -84,7 +83,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#bda506"
                 yAxis = 0 
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
             |}
         yield pojo
@@ -93,7 +92,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#665191"
                 yAxis = 1
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
@@ -104,7 +103,7 @@ let renderChartOptions (state : State) =
         series = List.toArray allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal" |} 
+                series = {| stacking = "normal"; groupPadding = 0 |} 
             |}        
 
         legend = pojo
