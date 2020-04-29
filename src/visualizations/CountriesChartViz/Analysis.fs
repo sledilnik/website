@@ -17,6 +17,7 @@ type CountriesData = CountryData[]
 
 type StartingDayMode =
     | FirstDeath
+    | OneDeathPerMillion
 
 type OwidDataState =
     | NotLoaded
@@ -60,6 +61,10 @@ let aggregateOurWorldInData
     let filterRecords entry =
         match startingDayMode with
         | FirstDeath -> entry.TotalDeaths >= 1
+        | OneDeathPerMillion ->
+            match entry.TotalDeathsPerMillion with
+            | Some x -> x >= 1.
+            | None -> false
 
     let countriesComparer a b =
         match a.CountryIsoCode, b.CountryIsoCode with

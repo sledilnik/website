@@ -3,6 +3,7 @@
 open CountriesChartViz.Synthesis
 open System
 open Browser
+open EdelweissData.Base.Types
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -139,7 +140,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             reversed = true
         |}
 
-    let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
+    let baseOptions =
+        basicChartOptions state.ScaleType "covid19-metrics-comparison"
     {| baseOptions with
         chart = pojo
             {|
@@ -159,11 +161,13 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         yAxis =
             pojo {|
                    ``type`` =
-                       if state.ScaleType=Linear then "linear"
-                       else "logarithmic"
-//                   min =
-//                        if state.ScaleType=Linear then None
-//                        else Some 1.0
+                       match state.ScaleType with
+                       | Linear -> "linear"
+                       | Logarithmic -> "logarithmic"
+                   min =
+                       match state.ScaleType with
+                       | Linear -> 0
+                       | Logarithmic -> 1
                    opposite = true
                    title =
                        pojo {|
@@ -207,9 +211,13 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
     ]
 
 let render state dispatch =
+    let firstDayMode =
+        match state.ScaleType with
+        | Linear -> FirstDeath
+        | Logarithmic -> OneDeathPerMillion
+
     let chartData =
-        state
-        |> prepareChartData FirstDeath DaysOfMovingAverage
+        state |> prepareChartData firstDayMode DaysOfMovingAverage
 
     match chartData with
     | Some chartData ->

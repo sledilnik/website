@@ -63,7 +63,7 @@ let prepareChartData
 
     let aggregated =
         state.OwidDataState
-        |> aggregateOurWorldInData FirstDeath daysOfMovingAverage
+        |> aggregateOurWorldInData startingDayMode daysOfMovingAverage
 
     match aggregated with
     | Some aggregated ->
@@ -88,6 +88,7 @@ let prepareChartData
             XAxisTitle =
               match startingDayMode with
                 | FirstDeath -> "Št. dni od prvega smrtnega primera"
+                | OneDeathPerMillion -> "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
             YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
         }
         |> Some
