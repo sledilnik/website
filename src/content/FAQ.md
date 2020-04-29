@@ -143,7 +143,7 @@ Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjen
 
 Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni.
 
-- Preboleli (skupaj) = Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom. Ocena je seveda poenostavljena, saj ne upošteva primerov resnejših komplikacij in posledic bolezni covid-19. 
+- Preboleli (skupaj) = Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom. Ocena je seveda poenostavljena, saj ne upošteva primerov resnejših komplikacij in posledic bolezni COVID-19. 
 
 - Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
 
