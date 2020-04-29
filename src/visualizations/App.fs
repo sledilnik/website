@@ -87,7 +87,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} |}
           {| Visualization = Cases
              ClassName = "cases-chart"
-             Label = "Aktivni primeri"
+             Label = "Potrjeni primeri"
              Explicit = false
              Renderer = fun state ->
                 match state.StatsData with
