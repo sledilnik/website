@@ -7,6 +7,7 @@ open System
 
 type IndexedDate = (int * DateTime)
 
+
 type CountryData = {
     CountryIsoCode: CountryIsoCode
     Data: SeriesValues<IndexedDate>
