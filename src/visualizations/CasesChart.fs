@@ -104,7 +104,7 @@ let renderChartOptions (state : State) =
         tooltip = pojo 
            {| shared = true
               formatter = fun () ->
-                // Available data are:
+                // Available data are: https://api.highcharts.com/highcharts/tooltip.formatter
                 // this.percentage (not shared) / this.points[i].percentage (shared): Stacked series and pies only. The point's percentage of the total.
                 // this.point (not shared) / this.points[i].point (shared): The point object. The point name, if defined, is available through this.point.name.
                 // this.points: In a shared tooltip, this is an array containing all other properties for each point.
