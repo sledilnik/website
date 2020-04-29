@@ -1,4 +1,4 @@
-﻿module Visualizations.Tests.CountriesChartTests.``Grouping and averaging OWID data``
+﻿module Visualizations.Tests.CountriesChartTests.``Grouping OWID data by countries``
 
 open System
 open Data.OurWorldInData
@@ -16,36 +16,29 @@ type CountryDataDayEntry = {
 let groupEntriesByCountries (entries: DataPoint list)
     : Map<CountryIsoCode, CountryDataDayEntry[]> =
 
+    let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
+        let dateStr = entryRaw.Date
+        let date = DateTime.Parse(dateStr)
+
+        { Date = date
+          TotalCases = entryRaw.TotalCases
+          TotalCasesPerMillion =
+              entryRaw.TotalCasesPerMillion
+              |> Option.defaultValue 0.
+          TotalDeaths = entryRaw.TotalDeaths
+          TotalDeathsPerMillion =
+              entryRaw.TotalDeathsPerMillion
+              |> Option.defaultValue 0.
+        }
+
     let groupedRaw =
-        entries
-        |> Seq.map (fun entry ->
-            let countryIsoCode = entry.CountryCode
-            let dateStr = entry.Date
-            let cases = entry.TotalCases
-            let casesPerMillion =
-                entry.TotalCasesPerMillion |> Option.defaultValue 0.
-            let deaths = entry.TotalDeaths
-            let deathsPerMillion =
-                entry.TotalDeathsPerMillion |> Option.defaultValue 0.
-
-            let date = DateTime.Parse(dateStr)
-
-            (countryIsoCode, date,
-                cases, casesPerMillion, deaths, deathsPerMillion)
-            )
-        |> Seq.groupBy (fun (isoCode, _, _, _, _, _) -> isoCode)
+        entries |> Seq.groupBy (fun entry -> entry.CountryCode)
 
     groupedRaw
     |> Seq.map (fun (isoCode, countryEntriesRaw) ->
         let countryEntries =
             countryEntriesRaw
-            |> Seq.map (
-                fun (_, date, cases, casesPerMillion, deaths, deathsPerMillion) ->
-                    { Date = date
-                      TotalCases = cases; TotalCasesPerMillion = casesPerMillion
-                      TotalDeaths = deaths; TotalDeathsPerMillion = deathsPerMillion
-                    }
-                )
+            |> Seq.map transformFromRawOwid
             |> Seq.toArray
 
         (isoCode, countryEntries)
