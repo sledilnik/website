@@ -1,66 +1,9 @@
 ﻿module CountriesChartTests.``Averaging country data``
 
+open CountriesChartViz.Analysis
 open System
 open Xunit
 open Swensen.Unquote
-open CountriesChartTests.``Grouping OWID data by countries``
-
-let calculateMovingAverages
-    daysOfMovingAverage
-    (countryEntries: CountryDataDayEntry[]) =
-
-    let entriesCount = countryEntries.Length
-    let cutOff = daysOfMovingAverage / 2
-    let averagesSetLength = entriesCount - cutOff * 2
-
-    let averages: CountryDataDayEntry[] = Array.zeroCreate averagesSetLength
-
-    let daysOfMovingAverageFloat = float daysOfMovingAverage
-    let mutable currentCasesSum = 0.
-    let mutable currentCases1MSum = 0.
-    let mutable currentDeathsSum = 0.
-    let mutable currentDeaths1MSum = 0.
-
-    let movingAverageFunc index =
-        let entry = countryEntries.[index]
-
-        currentCasesSum <-
-            currentCasesSum + entry.TotalCases
-        currentCases1MSum <-
-            currentCases1MSum + entry.TotalCasesPerMillion
-        currentDeathsSum <- currentDeathsSum + entry.TotalDeaths
-        currentDeaths1MSum <- currentDeaths1MSum + entry.TotalDeathsPerMillion
-
-        match index with
-        | index when index >= daysOfMovingAverage - 1 ->
-            let date = countryEntries.[index - cutOff].Date
-            let casesAvg = currentCasesSum / daysOfMovingAverageFloat
-            let cases1MAvg = currentCases1MSum / daysOfMovingAverageFloat
-            let deathsAvg = currentDeathsSum / daysOfMovingAverageFloat
-            let deaths1MAvg = currentDeaths1MSum / daysOfMovingAverageFloat
-
-            averages.[index - (daysOfMovingAverage - 1)] <- {
-                Date = date
-                TotalCases = casesAvg; TotalCasesPerMillion = cases1MAvg
-                TotalDeaths = deathsAvg; TotalDeathsPerMillion = deaths1MAvg
-            }
-
-            let entryToRemove = countryEntries.[index - (daysOfMovingAverage - 1)]
-            currentCasesSum <-
-                currentCasesSum - entryToRemove.TotalCases
-            currentCases1MSum <-
-                currentCases1MSum - entryToRemove.TotalCasesPerMillion
-            currentDeathsSum <- currentDeathsSum - entryToRemove.TotalDeaths
-            currentDeaths1MSum <-
-                currentDeaths1MSum - entryToRemove.TotalDeathsPerMillion
-
-        | _ -> ignore()
-
-    for i in 0 .. entriesCount-1 do
-        movingAverageFunc i
-
-    averages
-
 
 [<Fact>]
 let ``Calculates centered moving average of country entries data``() =

@@ -1,19 +1,110 @@
 ﻿module CountriesChartViz.Analysis
 
-open Statistics
 open Data.OurWorldInData
 open Types
 open System
 
-type IndexedDate = (int * DateTime)
-
-
-type CountryData = {
-    CountryIsoCode: CountryIsoCode
-    Data: SeriesValues<IndexedDate>
+type CountryDataDayEntry = {
+    Date: DateTime
+    TotalCases: float
+    TotalCasesPerMillion : float
+    TotalDeaths: float
+    TotalDeathsPerMillion : float
 }
 
-type CountriesData = CountryData[]
+type CountryData = {
+    IsoCode : CountryIsoCode
+    Entries: CountryDataDayEntry[]
+}
+
+type CountriesData = Map<CountryIsoCode, CountryData>
+
+let groupEntriesByCountries (entries: DataPoint list): CountriesData =
+
+    let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
+        let dateStr = entryRaw.Date
+        let date = DateTime.Parse(dateStr)
+
+        { Date = date
+          TotalCases = float entryRaw.TotalCases
+          TotalCasesPerMillion =
+              entryRaw.TotalCasesPerMillion
+              |> Option.defaultValue 0.
+          TotalDeaths = float entryRaw.TotalDeaths
+          TotalDeathsPerMillion =
+              entryRaw.TotalDeathsPerMillion
+              |> Option.defaultValue 0.
+        }
+
+    let groupedRaw =
+        entries |> Seq.groupBy (fun entry -> entry.CountryCode)
+
+    groupedRaw
+    |> Seq.map (fun (isoCode, countryEntriesRaw) ->
+        let countryEntries =
+            countryEntriesRaw
+            |> Seq.map transformFromRawOwid
+            |> Seq.toArray
+
+        (isoCode, { IsoCode = isoCode; Entries = countryEntries } )
+    ) |> Map.ofSeq
+
+let calculateMovingAverages
+    daysOfMovingAverage
+    (countryEntries: CountryDataDayEntry[]) =
+
+    let entriesCount = countryEntries.Length
+    let cutOff = daysOfMovingAverage / 2
+    let averagesSetLength = entriesCount - cutOff * 2
+
+    let averages: CountryDataDayEntry[] = Array.zeroCreate averagesSetLength
+
+    let daysOfMovingAverageFloat = float daysOfMovingAverage
+    let mutable currentCasesSum = 0.
+    let mutable currentCases1MSum = 0.
+    let mutable currentDeathsSum = 0.
+    let mutable currentDeaths1MSum = 0.
+
+    let movingAverageFunc index =
+        let entry = countryEntries.[index]
+
+        currentCasesSum <-
+            currentCasesSum + entry.TotalCases
+        currentCases1MSum <-
+            currentCases1MSum + entry.TotalCasesPerMillion
+        currentDeathsSum <- currentDeathsSum + entry.TotalDeaths
+        currentDeaths1MSum <- currentDeaths1MSum + entry.TotalDeathsPerMillion
+
+        match index with
+        | index when index >= daysOfMovingAverage - 1 ->
+            let date = countryEntries.[index - cutOff].Date
+            let casesAvg = currentCasesSum / daysOfMovingAverageFloat
+            let cases1MAvg = currentCases1MSum / daysOfMovingAverageFloat
+            let deathsAvg = currentDeathsSum / daysOfMovingAverageFloat
+            let deaths1MAvg = currentDeaths1MSum / daysOfMovingAverageFloat
+
+            averages.[index - (daysOfMovingAverage - 1)] <- {
+                Date = date
+                TotalCases = casesAvg; TotalCasesPerMillion = cases1MAvg
+                TotalDeaths = deathsAvg; TotalDeathsPerMillion = deaths1MAvg
+            }
+
+            let entryToRemove = countryEntries.[index - (daysOfMovingAverage - 1)]
+            currentCasesSum <-
+                currentCasesSum - entryToRemove.TotalCases
+            currentCases1MSum <-
+                currentCases1MSum - entryToRemove.TotalCasesPerMillion
+            currentDeathsSum <- currentDeathsSum - entryToRemove.TotalDeaths
+            currentDeaths1MSum <-
+                currentDeaths1MSum - entryToRemove.TotalDeathsPerMillion
+
+        | _ -> ignore()
+
+    for i in 0 .. entriesCount-1 do
+        movingAverageFunc i
+
+    averages
+
 
 type StartingDayMode =
     | FirstDeath
@@ -30,44 +121,27 @@ let aggregateOurWorldInData
     (owidDataState: OwidDataState)
     : CountriesData option =
 
-    let filterRecords entry =
+    let filterEntries (entry: CountryDataDayEntry) =
         match startingDayMode with
-        | FirstDeath -> entry.TotalDeaths >= 1
-        | OneDeathPerMillion ->
-            match entry.TotalDeathsPerMillion with
-            | Some x -> x >= 1.
-            | None -> false
+        | FirstDeath -> entry.TotalDeaths >= 1.
+        | OneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
 
-    let doAggregate (owidData: OurWorldInDataRemoteData) =
+    let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with
         | Success dataPoints ->
-            dataPoints
-            |> Seq.filter filterRecords
-            |> Seq.map (fun entry ->
-                let countryIsoCode = entry.CountryCode
-                let dateStr = entry.Date
-                let deathsPerMillion = entry.TotalDeathsPerMillion
+            let groupedByCountries: CountriesData =
+                dataPoints |> groupEntriesByCountries
 
-                let date = DateTime.Parse(dateStr)
+            let averagedAndFilteredByCountries: CountriesData  =
+                groupedByCountries
+                |> Map.map (fun _ (countryData: CountryData) ->
+                    let averagedEntries =
+                        countryData.Entries
+                        |> calculateMovingAverages daysOfMovingAverage
+                        |> Array.filter filterEntries
+                    { countryData with Entries = averagedEntries })
 
-                (countryIsoCode, date, deathsPerMillion))
-            |> Seq.sortBy (fun (isoCode, _, _) -> isoCode)
-            |> Seq.groupBy (fun (isoCode, _, _) -> isoCode)
-            |> Seq.map (fun (isoCode, countryLines) ->
-                let dailyEntries =
-                    countryLines
-                    |> Seq.mapi(fun dayIndex (_, date, deathsPerMillion) ->
-                        ((dayIndex, date), deathsPerMillion) )
-                    |> Seq.toArray
-                    |> (movingAverages
-                            movingAverageCentered daysOfMovingAverage
-                            (fun (day, _) -> day)
-                            (fun (_, value) -> value |> Option.defaultValue 0.))
-                { CountryIsoCode = isoCode
-                  Data = dailyEntries }
-                )
-            |> Seq.toArray
-            |> Some
+            Some averagedAndFilteredByCountries
         | _ -> None
 
     match owidDataState with

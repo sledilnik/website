@@ -3,7 +3,6 @@
 open CountriesChartViz.Synthesis
 open System
 open Browser
-open EdelweissData.Base.Types
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -114,9 +113,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 color = countrySeries.Color
                 name = countrySeries.CountryName
                 data =
-                    countrySeries.Data
-                    |> Array.map (fun ((dayIndex, _), value) ->
-                        (dayIndex, value))
+                    countrySeries.Entries
+                    |> Array.mapi (fun i entry ->
+                        (i, entry.TotalDeathsPerMillion))
                 marker = pojo {| enabled = false |}
                 |}
             )

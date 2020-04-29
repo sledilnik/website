@@ -2,7 +2,6 @@
 
 open CountriesChartViz.Analysis
 open Fable.Core
-open Statistics
 open JsInterop
 open Types
 
@@ -63,7 +62,7 @@ type CountrySeries = {
     CountryAbbr: string
     CountryName: string
     Color: string
-    Data: SeriesValues<IndexedDate>
+    Entries: CountryDataDayEntry[]
 }
 
 type ChartData = {
@@ -93,7 +92,7 @@ let prepareChartData
     /// Ensures Slovenia is über alles ;-).
     /// </summary>
     let countriesComparer (a, countryNameA: string) (b, countryNameB: string) =
-        match a.CountryIsoCode, b.CountryIsoCode with
+        match a.IsoCode, b.IsoCode with
         | "SVN", _ -> -1
         | _, "SVN" -> 1
         | _ -> countryNameA.CompareTo countryNameB
@@ -110,8 +109,10 @@ let prepareChartData
         let series =
             aggregated
             // assign country names
-            |> Array.map (fun countryData ->
-                (countryData, countryNames.[countryData.CountryIsoCode]))
+            |> Map.map (fun countryIsoCode countryData ->
+                (countryData, countryNames.[countryIsoCode]))
+            |> Map.toArray
+            |> Array.map (fun (_, value) -> value)
             // sort by country names (but keep Slovenia at the top)
             |> Array.sortWith countriesComparer
             // assign colors to countries and transform into final records
@@ -120,10 +121,10 @@ let prepareChartData
                         countryIndex * colorsInPalette / countriesCount
                     let color = ColorPalette.[colorIndex]
 
-                    { CountryAbbr = countryData.CountryIsoCode
+                    { CountryAbbr = countryData.IsoCode
                       CountryName = countryName
                       Color = color
-                      Data = countryData.Data }
+                      Entries = countryData.Entries }
                 )
 
         {

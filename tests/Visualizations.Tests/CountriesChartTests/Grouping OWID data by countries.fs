@@ -1,48 +1,11 @@
 ﻿module CountriesChartTests.``Grouping OWID data by countries``
 
-open System
 open Data.OurWorldInData
+open CountriesChartViz.Analysis
+open System
 open Xunit
 open Swensen.Unquote
 
-type CountryDataDayEntry = {
-    Date: DateTime
-    TotalCases: float
-    TotalCasesPerMillion : float
-    TotalDeaths: float
-    TotalDeathsPerMillion : float
-}
-
-let groupEntriesByCountries (entries: DataPoint list)
-    : Map<CountryIsoCode, CountryDataDayEntry[]> =
-
-    let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
-        let dateStr = entryRaw.Date
-        let date = DateTime.Parse(dateStr)
-
-        { Date = date
-          TotalCases = float entryRaw.TotalCases
-          TotalCasesPerMillion =
-              entryRaw.TotalCasesPerMillion
-              |> Option.defaultValue 0.
-          TotalDeaths = float entryRaw.TotalDeaths
-          TotalDeathsPerMillion =
-              entryRaw.TotalDeathsPerMillion
-              |> Option.defaultValue 0.
-        }
-
-    let groupedRaw =
-        entries |> Seq.groupBy (fun entry -> entry.CountryCode)
-
-    groupedRaw
-    |> Seq.map (fun (isoCode, countryEntriesRaw) ->
-        let countryEntries =
-            countryEntriesRaw
-            |> Seq.map transformFromRawOwid
-            |> Seq.toArray
-
-        (isoCode, countryEntries)
-    ) |> Map.ofSeq
 
 [<Fact>]
 let ``Groups entries by countries``() =
