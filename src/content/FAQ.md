@@ -139,12 +139,12 @@ Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countri
 <details>
   <summary>Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?</summary>
 
-Da, od konca aprila dalje grafično prikazujemo tudi te kazalnike - **Potrjeno okuženi (skupaj)** in **Preboleli (skupaj)**. 
+Da, od konca aprila dalje grafično prikazujemo tudi te kazalnike - **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
 
 Pri teh prikazih ne gre za podatke iz javnih virov, ampak na  osnovi uradnih podatkov izračunane vrednosti, ki so zato tudi prikazane s črtkano in ne polno črto. 
 Formula izračuna je:  
 
-- Preboleli (skupaj)= Potrjeno okuženi na dan - 21 dni po okužbi
+- Preboleli (skupaj) = Potrjeno okuženi (na dan - danes) - Potrjeno okuženi (na dan - pred 21 dnevi)
 - Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) - Preboleli (skupaj) - Umrli (skupaj)
 
 </details>
@@ -212,7 +212,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) - Preboleli (skupaj) - Umrli (skupaj)
 
-* **Preboleli (skupaj)** = Potrjeno okuženi (na dan) - 21 dni
+* **Preboleli (skupaj)** = Potrjeno okuženi (na dan - danes) - Potrjeno okuženi (na dan - pred 21 dnevi)
 
 * **Hospitalizirani (trenutno)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
@@ -220,7 +220,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **V intenzivni enoti (trenutno)** = Trenutno število oseb v enotah intenzivne terapije.
 
-* **Respirator / kritično stanje (trenutno)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
+* **Na respiratorju (trenutno)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
 
 * **Odpuščeni iz bolnišnice (na dan)** = Število odpuščenih iz bolnišnice na ta dan.
 
@@ -241,7 +241,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **v intenzivni enoti** = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije *Hospitalizirani*. 
 
-* **respirator / kritično stanje** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
+* **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
 
 * **preboleli** = To je s pomočjo formule izračunano število oseb, ki so bile potrjeno okužene in so po 21 dneh - teoretično - prebolele bolezen. 
   
