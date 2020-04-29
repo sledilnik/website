@@ -9,8 +9,17 @@ open Feliz.ElmishComponents
 open Types
 open Highcharts
 
+
 type DisplayType =
-    | MultiChart
+    | Total
+    | Regular
+    | SurveyApr2020
+with
+    static member all = [ Total; Regular; SurveyApr2020 ]
+    static member getName = function
+        | Total -> "Skupaj"
+        | Regular -> "Redno"
+        | SurveyApr2020 -> "Raziskava"
 
 type State = {
     data: StatsData
@@ -23,7 +32,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
-        displayType = MultiChart
+        displayType = Total
     }
     state, Cmd.none
 
@@ -36,7 +45,6 @@ let renderChartOptions (state : State) =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
-    let xAxisPoint (dp: StatsDataPoint) = dp.Date
     let negativeTests (dp: StatsDataPoint) = dp.PerformedTests.Value - dp.PositiveTests.Value
     let percentPositive (dp: StatsDataPoint) = Math.Round(float dp.PositiveTests.Value / float dp.PerformedTests.Value * float 100.0, 2)
     
@@ -68,7 +76,7 @@ let renderChartOptions (state : State) =
                 color = "#19aebd"
                 yAxis = 0
                 data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, negativeTests dp)) |> Seq.toArray
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTests dp)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -77,7 +85,7 @@ let renderChartOptions (state : State) =
                 color = "#bda506"
                 yAxis = 0 
                 data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -86,7 +94,7 @@ let renderChartOptions (state : State) =
                 color = "#665191"
                 yAxis = 1
                 data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, percentPositive dp)) |> Seq.toArray
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
     
@@ -142,9 +150,25 @@ let renderChartContainer (state : State) =
         ]
     ]
 
+let renderSelector state dt dispatch =
+    Html.div [
+        prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
+        prop.className [ true, "btn btn-sm metric-selector"; state.displayType = dt, "metric-selector--selected" ]
+        prop.text (dt |> DisplayType.getName) ]
+
+let renderDisplaySelectors state dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            DisplayType.all
+            |> List.map (fun dt ->
+                renderSelector state dt dispatch
+            ) ) ]
+
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state
+        renderDisplaySelectors state dispatch
     ]
 
 let testsChart (props : {| data : StatsData |}) =
