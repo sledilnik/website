@@ -12,11 +12,10 @@ open Analysis
 open Highcharts
 open Types
 
-// source: https://unstats.un.org/unsd/tradekb/knowledgebase/country-code
 let countriesDisplaySets = [|
     { Label = "okolica (brez Italije)"
       CountriesCodes = [|
-          "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SWZ"
+          "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SVK"
       |]
     }
     { Label = "kritične države (EU)"

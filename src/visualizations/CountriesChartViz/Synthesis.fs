@@ -16,11 +16,13 @@ type ChartState = {
     ScaleType : ScaleType
 }
 
+// source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
 let countryNames =
     [
         "AUT", "Avstrija"
         "BEL", "Belgija"
         "BIH", "Bosna in Hercegovina"
+        "CHE", "Švica"
         "CZE", "Češka"
         "DEU", "Nemčija"
         "DNK", "Danska"
@@ -29,7 +31,7 @@ let countryNames =
         "GBR", "Združeno kraljestvo"
         "HRV", "Hrvaška"
         "HUN", "Madžarska"
-        "ISL", "Island"
+        "ISL", "Islandija"
         "ITA", "Italija"
         "MKD", "Severna Makedonija"
         "MNE", "Črna gora"
@@ -39,7 +41,6 @@ let countryNames =
         "SVK", "Slovaška"
         "SVN", "Slovenija"
         "SWE", "Švedska"
-        "SWZ", "Švica"
     ]
     |> List.map (fun (code, name) -> code,  name)
     |> Map.ofList
