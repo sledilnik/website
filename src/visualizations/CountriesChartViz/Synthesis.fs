@@ -92,11 +92,11 @@ let prepareChartData
     /// <summary>
     /// Ensures Slovenia is über alles ;-).
     /// </summary>
-    let countriesComparer a b =
-        match a.CountryAbbr, b.CountryAbbr with
+    let countriesComparer (a, countryNameA: string) (b, countryNameB: string) =
+        match a.CountryIsoCode, b.CountryIsoCode with
         | "SVN", _ -> -1
         | _, "SVN" -> 1
-        | _ -> a.CountryName.CompareTo b.CountryName
+        | _ -> countryNameA.CompareTo countryNameB
 
     let aggregated =
         state.OwidDataState
@@ -109,24 +109,30 @@ let prepareChartData
 
         let series =
             aggregated
-            |> Array.mapi (fun countryIndex countryData ->
+            // assign country names
+            |> Array.map (fun countryData ->
+                (countryData, countryNames.[countryData.CountryIsoCode]))
+            // sort by country names (but keep Slovenia at the top)
+            |> Array.sortWith countriesComparer
+            // assign colors to countries and transform into final records
+            |> Array.mapi (fun countryIndex (countryData, countryName) ->
                     let colorIndex =
                         countryIndex * colorsInPalette / countriesCount
                     let color = ColorPalette.[colorIndex]
 
                     { CountryAbbr = countryData.CountryIsoCode
-                      CountryName = countryNames.[countryData.CountryIsoCode]
+                      CountryName = countryName
                       Color = color
                       Data = countryData.Data }
                 )
-            |> Array.sortWith countriesComparer
 
         {
             Series = series
             XAxisTitle =
               match startingDayMode with
                 | FirstDeath -> "Št. dni od prvega smrtnega primera"
-                | OneDeathPerMillion -> "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+                | OneDeathPerMillion ->
+                    "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
             YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
         }
         |> Some
