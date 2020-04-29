@@ -19,7 +19,11 @@ let countriesDisplaySets = [|
       |]
     }
     { Label = "kritične države (EU)"
-      CountriesCodes = [| "BEL"; "ESP"; "GBR"; "ITA"; "SWE" |]
+      CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
+    }
+    { Label = "kritične države (svet)"
+      CountriesCodes =
+          [| "CHN"; "ESP"; "IRN"; "ITA"; "RUS"; "SWE"; "TUR"; "USA" |]
     }
     { Label = "nordijske države"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
@@ -110,11 +114,29 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 {|
                 visible = true
                 color = countrySeries.Color
-                name = countrySeries.CountryName
+                name =
+                    sprintf "%s (%s)"
+                        countrySeries.CountryName countrySeries.CountryAbbr
                 data =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
-                        (i, entry.TotalDeathsPerMillion))
+                        pojo {|
+                             x = i
+                             y = entry.TotalDeathsPerMillion
+                             dataLabels =
+                                  if i = countrySeries.Entries.Length-1 then
+                                    pojo {|
+                                            enabled = true
+                                            format = countrySeries.CountryAbbr
+                                            align = "left"
+                                            verticalAlign = "middle"
+                                            x = 0
+                                            y = 0
+                                     |}
+                                  else pojo {||}
+                        |}
+                        )
+//                        (i, entry.TotalDeathsPerMillion))
                 marker = pojo {| enabled = false |}
                 |}
             )

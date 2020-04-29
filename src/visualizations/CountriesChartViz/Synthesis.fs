@@ -2,6 +2,7 @@
 
 open CountriesChartViz.Analysis
 open Fable.Core
+open Highcharts
 open JsInterop
 open Types
 
@@ -23,24 +24,30 @@ let countryNames =
         "BEL", "Belgija"
         "BIH", "Bosna in Hercegovina"
         "CHE", "Švica"
+        "CHN", "Kitajska"
         "CZE", "Češka"
         "DEU", "Nemčija"
         "DNK", "Danska"
         "ESP", "Španija"
         "FIN", "Finska"
+        "FRA", "Francija"
         "GBR", "Združeno kraljestvo"
         "HRV", "Hrvaška"
         "HUN", "Madžarska"
+        "IRN", "Iran"
         "ISL", "Islandija"
         "ITA", "Italija"
         "MKD", "Severna Makedonija"
         "MNE", "Črna gora"
         "NOR", "Norveška"
         "RKS", "Kosovo"
+        "RUS", "Rusija"
         "SRB", "Srbija"
         "SVK", "Slovaška"
         "SVN", "Slovenija"
         "SWE", "Švedska"
+        "TUR", "Turčija"
+        "USA", "ZDA"
     ]
     |> List.map (fun (code, name) -> code,  name)
     |> Map.ofList
@@ -58,6 +65,8 @@ let ColorPalette =
       "#665191"
       "#10829a"
       "#024a66" ]
+
+let Dashes = [ DashStyle.Solid; DashStyle.Dash ]
 
 type CountrySeries = {
     CountryAbbr: string
