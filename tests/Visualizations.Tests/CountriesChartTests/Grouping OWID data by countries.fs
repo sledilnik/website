@@ -1,4 +1,4 @@
-﻿module Visualizations.Tests.CountriesChartTests.``Grouping OWID data by countries``
+﻿module CountriesChartTests.``Grouping OWID data by countries``
 
 open System
 open Data.OurWorldInData
@@ -7,9 +7,9 @@ open Swensen.Unquote
 
 type CountryDataDayEntry = {
     Date: DateTime
-    TotalCases: int
+    TotalCases: float
     TotalCasesPerMillion : float
-    TotalDeaths: int
+    TotalDeaths: float
     TotalDeathsPerMillion : float
 }
 
@@ -21,11 +21,11 @@ let groupEntriesByCountries (entries: DataPoint list)
         let date = DateTime.Parse(dateStr)
 
         { Date = date
-          TotalCases = entryRaw.TotalCases
+          TotalCases = float entryRaw.TotalCases
           TotalCasesPerMillion =
               entryRaw.TotalCasesPerMillion
               |> Option.defaultValue 0.
-          TotalDeaths = entryRaw.TotalDeaths
+          TotalDeaths = float entryRaw.TotalDeaths
           TotalDeathsPerMillion =
               entryRaw.TotalDeathsPerMillion
               |> Option.defaultValue 0.
@@ -65,9 +65,9 @@ let ``Groups entries by countries``() =
     test <@ grouped.ContainsKey "SVN" @>
     test <@ grouped.["SVN"].Length = 2 @>
     test <@ grouped.["SVN"].[0].Date = DateTime(2020, 04, 29) @>
-    test <@ grouped.["SVN"].[0].TotalCases = 1 @>
+    test <@ grouped.["SVN"].[0].TotalCases = 1. @>
     test <@ grouped.["SVN"].[0].TotalCasesPerMillion = 0. @>
-    test <@ grouped.["SVN"].[0].TotalDeaths = 2 @>
+    test <@ grouped.["SVN"].[0].TotalDeaths = 2. @>
     test <@ grouped.["SVN"].[0].TotalDeathsPerMillion = 3. @>
     test <@ grouped.["SVN"].[1].Date = DateTime(2020, 04, 30) @>
 

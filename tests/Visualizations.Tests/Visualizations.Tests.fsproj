@@ -11,6 +11,7 @@
         <Compile Include="AgeGroupsChartTests\Merging infections and deaths.fs" />
         <Compile Include="AgeGroupsChartTests\Sorting age groups.fs" />
         <Compile Include="CountriesChartTests\Grouping OWID data by countries.fs" />
+        <Compile Include="CountriesChartTests\Averaging country data.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
