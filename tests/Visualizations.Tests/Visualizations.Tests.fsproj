@@ -10,7 +10,7 @@
     <ItemGroup>
         <Compile Include="AgeGroupsChartTests\Merging infections and deaths.fs" />
         <Compile Include="AgeGroupsChartTests\Sorting age groups.fs" />
-        <Folder Include="CountriesChartsTests" />
+        <Compile Include="CountriesChartTests\Grouping and averaging OWID data.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

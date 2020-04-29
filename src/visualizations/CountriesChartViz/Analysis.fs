@@ -9,7 +9,6 @@ type IndexedDate = (int * DateTime)
 
 type CountryData = {
     CountryIsoCode: CountryIsoCode
-    CountryName: string
     Data: SeriesValues<IndexedDate>
 }
 
@@ -24,34 +23,6 @@ type OwidDataState =
     | PreviousAndLoadingNew of OurWorldInDataRemoteData
     | Current of OurWorldInDataRemoteData
 
-let countryNames =
-    [
-        "AUT", "Avstrija"
-        "BEL", "Belgija"
-        "BIH", "Bosna in Hercegovina"
-        "CZE", "Češka"
-        "DEU", "Nemčija"
-        "DNK", "Danska"
-        "ESP", "Španija"
-        "FIN", "Finska"
-        "GBR", "Združeno kraljestvo"
-        "HRV", "Hrvaška"
-        "HUN", "Madžarska"
-        "ISL", "Island"
-        "ITA", "Italija"
-        "MKD", "Severna Makedonija"
-        "MNE", "Črna gora"
-        "NOR", "Norveška"
-        "RKS", "Kosovo"
-        "SRB", "Srbija"
-        "SVK", "Slovaška"
-        "SVN", "Slovenija"
-        "SWE", "Švedska"
-        "SWZ", "Švica"
-    ]
-    |> List.map (fun (code, name) -> code,  name)
-    |> Map.ofList
-
 let aggregateOurWorldInData
     startingDayMode
     daysOfMovingAverage
@@ -65,12 +36,6 @@ let aggregateOurWorldInData
             match entry.TotalDeathsPerMillion with
             | Some x -> x >= 1.
             | None -> false
-
-    let countriesComparer a b =
-        match a.CountryIsoCode, b.CountryIsoCode with
-        | "SVN", _ -> -1
-        | _, "SVN" -> 1
-        | _ -> a.CountryName.CompareTo b.CountryName
 
     let doAggregate (owidData: OurWorldInDataRemoteData) =
         match owidData with
@@ -98,10 +63,8 @@ let aggregateOurWorldInData
                             (fun (day, _) -> day)
                             (fun (_, value) -> value |> Option.defaultValue 0.))
                 { CountryIsoCode = isoCode
-                  CountryName = countryNames.[isoCode]
                   Data = dailyEntries }
                 )
-            |> Seq.sortWith countriesComparer
             |> Seq.toArray
             |> Some
         | _ -> None

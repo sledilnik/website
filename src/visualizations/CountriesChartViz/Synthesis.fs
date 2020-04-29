@@ -17,6 +17,34 @@ type ChartState = {
     ScaleType : ScaleType
 }
 
+let countryNames =
+    [
+        "AUT", "Avstrija"
+        "BEL", "Belgija"
+        "BIH", "Bosna in Hercegovina"
+        "CZE", "Češka"
+        "DEU", "Nemčija"
+        "DNK", "Danska"
+        "ESP", "Španija"
+        "FIN", "Finska"
+        "GBR", "Združeno kraljestvo"
+        "HRV", "Hrvaška"
+        "HUN", "Madžarska"
+        "ISL", "Island"
+        "ITA", "Italija"
+        "MKD", "Severna Makedonija"
+        "MNE", "Črna gora"
+        "NOR", "Norveška"
+        "RKS", "Kosovo"
+        "SRB", "Srbija"
+        "SVK", "Slovaška"
+        "SVN", "Slovenija"
+        "SWE", "Švedska"
+        "SWZ", "Švica"
+    ]
+    |> List.map (fun (code, name) -> code,  name)
+    |> Map.ofList
+
 let ColorPalette =
     [ "#ffa600"
       "#dba51d"
@@ -61,6 +89,15 @@ let prepareChartData
     (state: ChartState)
     : ChartData option =
 
+    /// <summary>
+    /// Ensures Slovenia is über alles ;-).
+    /// </summary>
+    let countriesComparer a b =
+        match a.CountryAbbr, b.CountryAbbr with
+        | "SVN", _ -> -1
+        | _, "SVN" -> 1
+        | _ -> a.CountryName.CompareTo b.CountryName
+
     let aggregated =
         state.OwidDataState
         |> aggregateOurWorldInData startingDayMode daysOfMovingAverage
@@ -78,10 +115,11 @@ let prepareChartData
                     let color = ColorPalette.[colorIndex]
 
                     { CountryAbbr = countryData.CountryIsoCode
-                      CountryName = countryData.CountryName
+                      CountryName = countryNames.[countryData.CountryIsoCode]
                       Color = color
                       Data = countryData.Data }
                 )
+            |> Array.sortWith countriesComparer
 
         {
             Series = series
