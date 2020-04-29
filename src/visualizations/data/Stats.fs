@@ -33,8 +33,9 @@ type private TransferStatsDataPoint =
       cases :
         {| confirmedToday : int option
            confirmedToDate : int option
+           recoveredToDate : int option
            closedToDate : int option
-           activeToDate : int option
+           active : int option
            hs : {| employeeConfirmedToDate: int option |}
            rh : {| employeeConfirmedToDate: int option; occupantConfirmedToDate: int option |}
            unclassified : {| confirmedToDate: int option |}
@@ -64,9 +65,9 @@ type private TransferStatsDataPoint =
           Cases =
             { ConfirmedToday = this.cases.confirmedToday
               ConfirmedToDate = this.cases.confirmedToDate
-              RecoveredToDate = this.cases.closedToDate //todo: change when REST is done
+              RecoveredToDate = this.cases.recoveredToDate 
               ClosedToDate = this.cases.closedToDate
-              Active = this.cases.closedToDate } //todo: change when REST is done
+              Active = this.cases.active } 
           StatePerTreatment =
             { InHospital = this.statePerTreatment.inHospital
               InHospitalToDate = this.statePerTreatment.inHospitalToDate

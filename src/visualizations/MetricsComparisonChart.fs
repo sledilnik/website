@@ -12,16 +12,16 @@ open Types
 type Metric =
     | PerformedTests
     | PerformedTestsToDate
-    | ConfirmedCases
     | ConfirmedCasesToday
     | ConfirmedCasesToDate
+    | ConfirmedCases
+    | RecoveredToDate
     | InHospital
     | InHospitalToDate
     | InICU
     | OnVentilator
     | OutOfHospital
     | OutOfHospitalToDate
-    | RecoveredToDate
     | Deceased
     | DeceasedToDate
 
