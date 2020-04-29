@@ -38,8 +38,8 @@ let init data : State * Cmd<Msg> =
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ChangeDisplayType rt ->
-        { state with displayType=rt }, Cmd.none
+    | ChangeDisplayType dt ->
+        { state with displayType = dt }, Cmd.none
 
 let renderChartOptions (state : State) =
     let className = "tests-chart"
@@ -150,20 +150,19 @@ let renderChartContainer (state : State) =
         ]
     ]
 
-let renderSelector state dt dispatch =
+let renderSelector state (dt: DisplayType) dispatch =
     Html.div [
+        let isActive = state.displayType = dt
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
-        prop.className [ true, "btn btn-sm metric-selector"; state.displayType = dt, "metric-selector--selected" ]
-        prop.text (dt |> DisplayType.getName) ]
+        prop.className [ true, "btn btn-sm metric-selector"; isActive, "metric-selector--selected" ]
+        prop.text (DisplayType.getName dt) ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
             DisplayType.all
-            |> List.map (fun dt ->
-                renderSelector state dt dispatch
-            ) ) ]
+            |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
 
 let render (state: State) dispatch =
     Html.div [
