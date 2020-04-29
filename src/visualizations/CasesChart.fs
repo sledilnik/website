@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Fable.Core.JsInterop
 
 open Types
 open Highcharts
@@ -64,7 +65,7 @@ let renderChartOptions (state : State) =
     
     let subtract a b = b - a
 
-    let renderSeries series (stackID : string)  =
+    let renderSeries series =
 
         let renderPoint : (StatsDataPoint -> JsTimestamp * int option) =
             match series with
@@ -80,8 +81,6 @@ let renderChartOptions (state : State) =
             ``type`` = "column"
             color = color
             name = name
-            //stack = stackID
-            //className = className
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
@@ -92,7 +91,7 @@ let renderChartOptions (state : State) =
 
     let allSeries = [|
         for series in Series.all do
-            yield renderSeries series ""
+            yield renderSeries series
     |]
     
     let baseOptions = Highcharts.basicChartOptions scaleType className
@@ -102,6 +101,21 @@ let renderChartOptions (state : State) =
             {| 
                 series = {| stacking = "normal"; groupPadding = 0 |}
             |}        
+        tooltip = pojo 
+           {| shared = true
+              formatter = fun () ->
+                // Available data are:
+                // this.percentage (not shared) / this.points[i].percentage (shared): Stacked series and pies only. The point's percentage of the total.
+                // this.point (not shared) / this.points[i].point (shared): The point object. The point name, if defined, is available through this.point.name.
+                // this.points: In a shared tooltip, this is an array containing all other properties for each point.
+                // this.series (not shared) / this.points[i].series (shared): The series object. The series name is available through this.series.name.
+                // this.total (not shared) / this.points[i].total (shared): Stacked series only. The total value at this point's x value.
+                // this.x: The x value. This property is the same regardless of the tooltip being shared or not.
+                // this.y (not shared) / this.points[i].y (shared): The y value.           |}
+                let dt = DateTime(jsThis?x)
+                dt.ToShortDateString
+                
+            |}            
 
         legend = pojo
             {|
