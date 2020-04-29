@@ -123,6 +123,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         pojo {|
                              x = i
                              y = entry.TotalDeathsPerMillion
+                             date = entry.Date.ToString("dd.MM.yyyy")
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|
@@ -151,7 +152,6 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             verticalAlign = "top"
             borderColor = "#ddd"
             borderWidth = 1
-            //labelFormatter = string //fun series -> series.name
             layout = "vertical"
             floating = true
             x = 20

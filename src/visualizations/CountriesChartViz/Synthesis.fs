@@ -83,12 +83,13 @@ type ChartData = {
 
 let legendFormatter jsThis =
     let countryCode = jsThis?series?name
-//                let date = jsThis?point?category
+    let date = jsThis?point?date
     let dataValue: float = jsThis?point?y
 
     sprintf
-        "<b>%s</b><br/>Umrli na 1 milijon preb.: %A"
+        "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A"
         countryCode
+        date
         (Utils.roundTo1Decimal dataValue)
 
 
