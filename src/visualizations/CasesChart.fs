@@ -101,7 +101,8 @@ let renderChartOptions (state : State) =
             {| 
                 series = {| stacking = "normal"; groupPadding = 0 |}
             |}        
-        tooltip = pojo 
+            
+(*        tooltip = pojo 
            {| shared = true
               formatter = fun () ->
                 // Available data are: https://api.highcharts.com/highcharts/tooltip.formatter
@@ -116,7 +117,7 @@ let renderChartOptions (state : State) =
                 dt.ToShortDateString
                 
             |}            
-
+*)
         legend = pojo
             {|
                 enabled = true
