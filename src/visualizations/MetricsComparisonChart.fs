@@ -102,8 +102,8 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
             | PerformedTestsToDate -> point.PerformedTestsToDate
             | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
-            | ConfirmedCases -> point.Cases.ActiveToDate // rename
-            | RecoveredToDate -> point.Cases.ClosedToDate // temporary
+            | ConfirmedCases -> point.Cases.Active
+            | RecoveredToDate -> point.Cases.RecoveredToDate
             | InHospital -> point.StatePerTreatment.InHospital
             | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
             | InICU -> point.StatePerTreatment.InICU
