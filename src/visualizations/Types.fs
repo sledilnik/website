@@ -18,6 +18,22 @@ type Cases =
       Active : int option
     }
 
+type TestsGroup =
+    | Total
+    | Regular
+    | SurveyApr2020
+with
+    static member all = [ Total; Regular; SurveyApr2020; ]
+    static member getName = function
+        | Total -> "Skupaj"
+        | Regular -> "Redno"
+        | SurveyApr2020 -> "Raziskava"
+
+type Tests =
+    { TestGroup : TestsGroup    
+      ToDate : int option
+      Today : int option }
+
 type Treatment =
     { InHospital : int option
       InHospitalToDate : int option
@@ -57,6 +73,8 @@ type StatsDataPoint =
       PerformedTestsToDate : int option
       PositiveTests : int option
       PositiveTestsToDate : int option
+      //PerformedTests : Tests list
+      //PositiveTests : Tests list
       Cases : Cases
       StatePerTreatment : Treatment
       StatePerAgeToDate : AgeGroupsList
