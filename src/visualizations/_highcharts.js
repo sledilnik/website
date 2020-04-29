@@ -269,7 +269,7 @@ function renderChart(options) {
   return React.createElement(HighchartsReact, {
     highcharts: Highcharts,
     containerProps: {style: {height:"100%"}},
-    options: {...options, credits: {enabled: false}},
+    options: {...options},
   }, null);
 }
 

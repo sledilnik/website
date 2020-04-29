@@ -336,6 +336,7 @@ let renderChartOptions
            {| series = pojo
                {| stacking = "normal" |}
            |}
+       credits = pojo {| enabled = false |}
        tooltip = pojo
            {| formatter = fun () ->
                 let sex = jsThis?series?name
@@ -398,7 +399,7 @@ let renderChartOptions
                    padding = 10 |}
               data = chartData.FemaleValues
                |}
-       |]
+        |]
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =

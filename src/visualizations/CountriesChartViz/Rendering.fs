@@ -201,6 +201,12 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {| formatter = fun () -> legendFormatter jsThis |}
+        credits = pojo
+            {|
+                enabled = true
+                text = "vir podatkov: Our World In Data"
+                href = "https://ourworldindata.org"
+            |}
     |}
 
 
