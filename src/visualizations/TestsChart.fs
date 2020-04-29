@@ -9,30 +9,18 @@ open Feliz.ElmishComponents
 open Types
 open Highcharts
 
-
-type DisplayType =
-    | Total
-    | Regular
-    | SurveyApr2020
-with
-    static member all = [ Total; Regular; SurveyApr2020 ]
-    static member getName = function
-        | Total -> "Skupaj"
-        | Regular -> "Redno"
-        | SurveyApr2020 -> "Raziskava"
-
 type State = {
     data: StatsData
-    displayType: DisplayType
+    displayType: TestsGroup
 }
 
 type Msg =
-    | ChangeDisplayType of DisplayType
+    | ChangeDisplayType of TestsGroup
 
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
-        displayType = Total
+        displayType = Regular
     }
     state, Cmd.none
 
@@ -149,18 +137,18 @@ let renderChartContainer (state : State) =
         ]
     ]
 
-let renderSelector state (dt: DisplayType) dispatch =
+let renderSelector state (dt: TestsGroup) dispatch =
     Html.div [
         let isActive = state.displayType = dt
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
         prop.className [ true, "btn btn-sm metric-selector"; isActive, "metric-selector--selected" ]
-        prop.text (DisplayType.getName dt) ]
+        prop.text (TestsGroup.getName dt) ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            TestsGroup.all
             |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
 
 let render (state: State) dispatch =
