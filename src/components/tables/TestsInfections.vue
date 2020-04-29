@@ -40,13 +40,15 @@ export default {
         "cases.rh.employee.confirmed.todate",
         "cases.rh.occupant.confirmed.todate",
         "cases.unclassified.confirmed.todate",
+        "cases.active",
+        "cases.recovered.todate",
+        "cases.closed.todate",
         "state.in_hospital",
         "state.icu",
         "state.critical",
         "state.in_hospital.todate",
         "state.out_of_hospital.todate",
         "state.deceased.todate",
-        "state.recovered.todate",
       ]
     };
   },
