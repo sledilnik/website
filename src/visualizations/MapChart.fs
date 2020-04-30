@@ -130,19 +130,20 @@ let seriesData state =
         for region in lastDataPoint.Regions do
             for municipality in region.Municipalities do
                 let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
-                let absoluteFmt = sprintf "%d od %d prebivalcev" absolute municipality.Municipality.Population
                 let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
-                let weightedD = weighted / 1000
-                let weightedR = weighted % 1000
-                let weightedFmt = sprintf "%d,%03d %%" weightedD weightedR
-                let label = sprintf "Delež: <b>%s</b><br>Potrjeno okuženi skupaj: <b>%s</b>" weightedFmt absoluteFmt
-                match state.DisplayType with
-                | AbsoluteValues ->
-                    let scaled = Math.Log (float absolute)
-                    {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
-                | RegionPopulationWeightedValues ->
-                    let scaled = Math.Log (float weighted)
-                    {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
+                let weightedFmt = sprintf "%d,%03d %%" (weighted / 1000) (weighted % 1000)
+                let label = sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" municipality.Municipality.Population absolute weightedFmt
+                let value =
+                    match state.DisplayType with
+                    | AbsoluteValues ->
+                        absolute
+                    | RegionPopulationWeightedValues ->
+                        weighted
+                let scaled =
+                    match value with
+                    | 0 -> 0.
+                    | x -> float x |> Math.Log
+                {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
 
     } |> Seq.toArray
 
@@ -162,10 +163,16 @@ let renderMap (state : State) =
             {| normal = {| animation = {| duration = 0 |} |}
                hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            tooltip =
-            {| distance = 30
+            {| distance = 50
                headerFormat = "<b>{point.key}</b><br>"
                pointFormat = "{point.label}" |}
         |}
+
+    // Adjust the color scale for better readibility
+    let colorAxisMin =
+        match state.DisplayType with
+        | AbsoluteValues -> 0.
+        | RegionPopulationWeightedValues -> Math.E
 
     match state.GeoJson with
     | NotAsked
@@ -175,7 +182,7 @@ let renderMap (state : State) =
         {| title = null
            series = [| series geoJson |]
            legend = {| enabled = false |}
-           colorAxis = {| minColor = "white" ; maxColor = "#e03000" |}
+           colorAxis = {| min = colorAxisMin ; minColor = "white" ; maxColor = "#e03000" |}
         |}
         |> Highcharts.map
 
