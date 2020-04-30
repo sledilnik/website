@@ -95,7 +95,7 @@ let addContainmentMeasuresFlags
         21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
         29, 4, "#ebfaeb", "Muzeji",    "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
         30, 4, "#ebfaeb", "Občine",    "Sproščanje: gibanje izven meja svoje občine"
-        4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+        //4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
     |]
     {|
         ``type`` = "flags"

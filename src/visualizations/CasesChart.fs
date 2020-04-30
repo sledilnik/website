@@ -44,8 +44,8 @@ module Series =
         | Recovered     -> "#8cd4b2",   "cs-recovered",     "Preboleli"
         | Active        -> "#bda506",   "cs-active",        "Aktivni"
         | InHospital    -> "#be7a2a",   "cs-inHospital",    "Hospitalizirani"
-        | Icu           -> "#bf5747",   "cs-inHospitalICU", "V intenzivni enoti"
-        | Critical      -> "#d99a91",   "cs-critical",      "Na respiratorju"
+        | Icu           -> "#d99a91",   "cs-inHospitalICU", "V intenzivni enoti"
+        | Critical      -> "#bf5747",   "cs-critical",      "Na respiratorju"
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -66,15 +66,17 @@ let legendFormatter jsThis =
     let mutable fmtUnder = ""
     let mutable fmtStr = sprintf "%s" fmtDate
     for p in pts do 
-        fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
-            fmtUnder
-            p?series?color
-            p?series?name
-            p?point?fmtTotal
-          
-        match p?series?name with
-        | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
-        | _ -> ()
+        match p?point?fmtTotal with
+        | "null" -> ()
+        | _ -> 
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+                fmtUnder
+                p?series?color
+                p?series?name
+                p?point?fmtTotal             
+            match p?series?name with
+            | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
+            | _ -> ()
 
     fmtStr
 
@@ -134,7 +136,7 @@ let renderChartOptions (state : State) =
         series = allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal"; groupPadding = 0 |}
+                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0  |}
             |}        
             
         tooltip = pojo
@@ -143,22 +145,6 @@ let renderChartOptions (state : State) =
                 formatter = fun () -> legendFormatter jsThis
             |}
 
-(*        tooltip = pojo 
-           {| shared = true
-              formatter = fun () ->
-                // Available data are: https://api.highcharts.com/highcharts/tooltip.formatter
-                // this.percentage (not shared) / this.points[i].percentage (shared): Stacked series and pies only. The point's percentage of the total.
-                // this.point (not shared) / this.points[i].point (shared): The point object. The point name, if defined, is available through this.point.name.
-                // this.points: In a shared tooltip, this is an array containing all other properties for each point.
-                // this.series (not shared) / this.points[i].series (shared): The series object. The series name is available through this.series.name.
-                // this.total (not shared) / this.points[i].total (shared): Stacked series only. The total value at this point's x value.
-                // this.x: The x value. This property is the same regardless of the tooltip being shared or not.
-                // this.y (not shared) / this.points[i].y (shared): The y value.           |}
-                let dt = DateTime(jsThis?x)
-                dt.ToShortDateString
-                
-            |}            
-*)
         legend = pojo
             {|
                 enabled = true
