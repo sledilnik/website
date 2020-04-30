@@ -35,7 +35,7 @@ To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del po
 <details>
   <summary>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](#/links).
+Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](#/links).
 
 </details>
 
@@ -43,7 +43,7 @@ Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji p
   <summary>Ali obstaja vaša stran tudi v angleščini?</summary>
 
 Deloma. V celoti zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna koda, če bi se želel kdo lotiti tega podviga. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
-V angleškem jeziku obstaja samo [stran "O projektu"]([https://covid-19.sledilnik.org/#/about/en](https://covid-19.sledilnik.org/#/about/en), ki zajema osnovne podatke in vire podatkov.
+V angleškem jeziku obstaja samo [stran O projektu](https://covid-19.sledilnik.org/#/about/en), ki zajema osnovne podatke in vire podatkov.
 
 </details>
 
@@ -57,7 +57,7 @@ Nihče oz. ne. Sledilnik je neprofitna pobuda, ustvarjena kot podpora sprotnemu 
 <details>
   <summary>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
 
-Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)). Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, projekt pa je odprt in na voljo na [GitHubu - Sledilnik](https://github.com/sledilnik).
+Stran gostuje na [GitHub Pages](https://pages.github.com). Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, projekt pa je odprt in na voljo na [GitHubu - Sledilnik](https://github.com/sledilnik).
 
 </details>
 
@@ -141,9 +141,10 @@ Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countri
 
 Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
 
-Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni.
+Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom, od katerega se odšteje še število umrlih na isti dan, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19. 
 
-- Preboleli (skupaj) = Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom. Ocena je seveda poenostavljena, saj ne upošteva primerov resnejših komplikacij in posledic bolezni COVID-19. 
+Formula za izračun vrednosti:
+- Preboleli (skupaj) = Potrjeno okuženi (skupaj) pred 21 dnevi – Umrli (skupaj) na dani dan izračuna
 
 - Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
 
@@ -212,7 +213,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
 
-* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih tri tedne pred danim datumom ob predpostavki, da se bolezen povprečno preboli najkasneje v 21 dneh.
+* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih tri tedne pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 21 dneh), od katerega se odšteje še število umrlih na isti dan, ko se ugotavlja število prebolelih.
 
 * **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
@@ -243,7 +244,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
 
-* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
+* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti –, od katerega se odšteje še število umrlih na isti dan, ko se ugotavlja število prebolelih. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
   
   </details>
 
