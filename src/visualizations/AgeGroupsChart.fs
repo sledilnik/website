@@ -315,93 +315,94 @@ let renderChartOptions
         | Absolute -> (abs value).ToString()
         | Relative -> percentageValuesLabelFormatter value
 
-    {| chart = pojo {| ``type`` = "bar" |}
-       title = pojo {| text = None |}
-       xAxis = [|
-           {| categories = chartData.AgeGroupsLabels
-              reversed = false
-              opposite = false
-              linkedTo = None |}
-           {| categories = chartData.AgeGroupsLabels // mirror axis on right side
-              reversed = false
-              opposite = true
-              linkedTo = Some 0 |}
-       |]
-       yAxis = pojo
-           {| title = {| text = "" |}
-              labels = pojo
-                {| formatter = fun () -> valuesLabelFormatter jsThis?value |}
-              // allowDecimals needs to be enabled because the values can be
-              // be below 1, otherwise it won't auto-scale to below 1.
-              allowDecimals = ChartMode.ScaleType state.ChartMode = Relative
-           |}
-       plotOptions = pojo
-           {| series = pojo
-               {| stacking = "normal" |}
-           |}
-       tooltip = pojo
-           {| formatter = fun () ->
-                let sex = jsThis?series?name
-                let ageGroup = jsThis?point?category
-                let dataValue: float = jsThis?point?y
+    {| Highcharts.optionsWithOnLoadEvent "covid19-age-groups" with
+        chart = pojo {| ``type`` = "bar" |}
+        title = pojo {| text = None |}
+        xAxis = [|
+            {| categories = chartData.AgeGroupsLabels
+               reversed = false
+               opposite = false
+               linkedTo = None |}
+            {| categories = chartData.AgeGroupsLabels // mirror axis on right side
+               reversed = false
+               opposite = true
+               linkedTo = Some 0 |}
+        |]
+        yAxis = pojo
+            {| title = {| text = "" |}
+               labels = pojo
+                 {| formatter = fun () -> valuesLabelFormatter jsThis?value |}
+               // allowDecimals needs to be enabled because the values can be
+               // be below 1, otherwise it won't auto-scale to below 1.
+               allowDecimals = ChartMode.ScaleType state.ChartMode = Relative
+            |}
+        plotOptions = pojo
+            {| series = pojo
+                {| stacking = "normal" |}
+            |}
+        tooltip = pojo
+            {| formatter = fun () ->
+                 let sex = jsThis?series?name
+                 let ageGroup = jsThis?point?category
+                 let dataValue: float = jsThis?point?y
 
-                match state.ChartMode with
-                | AbsoluteInfections ->
-                    sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %A"
-                        sex
-                        ageGroup
-                        (abs dataValue)
-                | InfectionsPerPopulation ->
-                    sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d"
-                        sex
-                        ageGroup
-                        (percentageValuesLabelFormatter dataValue)
-                        (populationOf sex ageGroup)
-                | AbsoluteDeaths ->
-                    sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Umrli: %A"
-                        sex
-                        ageGroup
-                        (abs dataValue)
-                | DeathsPerPopulation ->
-                    sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d"
-                        sex
-                        ageGroup
-                        (percentageValuesLabelFormatter dataValue)
-                        (populationOf sex ageGroup)
-                | DeathsPerInfections ->
-                    sprintf
-                        "<b>%s</b><br/>Starost: %s<br/>Delež umrlih glede na št. okuženih: %s"
-                        sex
-                        ageGroup
-                        (percentageValuesLabelFormatter dataValue)
-           |}
-       series = [|
-           {| name = LabelMale
-              color = "#73CCD5"
-              dataLabels = pojo
-                {| enabled = true
-                   formatter = fun() -> valuesLabelFormatter jsThis?y
-                   align = "right"
-                   style = pojo {| textOutline = false |}
-                   padding = 10 |}
-              data = chartData.MaleValues
-                     |> Array.map (Option.map (fun y -> -y))
-               |}
-           {| name = LabelFemale
-              color = "#D99A91"
-              dataLabels = pojo
-                {| enabled = true
-                   formatter = fun () -> valuesLabelFormatter jsThis?y
-                   align = "left"
-                   style = pojo {| textOutline = false |}
-                   padding = 10 |}
-              data = chartData.FemaleValues
-               |}
-       |]
+                 match state.ChartMode with
+                 | AbsoluteInfections ->
+                     sprintf
+                         "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %A"
+                         sex
+                         ageGroup
+                         (abs dataValue)
+                 | InfectionsPerPopulation ->
+                     sprintf
+                         "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d"
+                         sex
+                         ageGroup
+                         (percentageValuesLabelFormatter dataValue)
+                         (populationOf sex ageGroup)
+                 | AbsoluteDeaths ->
+                     sprintf
+                         "<b>%s</b><br/>Starost: %s<br/>Umrli: %A"
+                         sex
+                         ageGroup
+                         (abs dataValue)
+                 | DeathsPerPopulation ->
+                     sprintf
+                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d"
+                         sex
+                         ageGroup
+                         (percentageValuesLabelFormatter dataValue)
+                         (populationOf sex ageGroup)
+                 | DeathsPerInfections ->
+                     sprintf
+                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih glede na št. okuženih: %s"
+                         sex
+                         ageGroup
+                         (percentageValuesLabelFormatter dataValue)
+            |}
+        series = [|
+            {| name = LabelMale
+               color = "#73CCD5"
+               dataLabels = pojo
+                 {| enabled = true
+                    formatter = fun() -> valuesLabelFormatter jsThis?y
+                    align = "right"
+                    style = pojo {| textOutline = false |}
+                    padding = 10 |}
+               data = chartData.MaleValues
+                      |> Array.map (Option.map (fun y -> -y))
+                |}
+            {| name = LabelFemale
+               color = "#D99A91"
+               dataLabels = pojo
+                 {| enabled = true
+                    formatter = fun () -> valuesLabelFormatter jsThis?y
+                    align = "left"
+                    style = pojo {| textOutline = false |}
+                    padding = 10 |}
+               data = chartData.FemaleValues
+                |}
+        |]
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =

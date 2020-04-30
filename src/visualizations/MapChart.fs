@@ -12,7 +12,7 @@ open Browser
 
 open Types
 
-let geoJsonUrl = "https://raw.githubusercontent.com/sledilnik/website/0d160782b4382f384ac0755a542948541e6d8b49/src/assets/maps/municipalities-gurs-simplified-3857.geojson"
+let geoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 
 let excludedRegions = Set.ofList ["t"]
 
@@ -136,12 +136,13 @@ let seriesData state =
                 let value =
                     match state.DisplayType with
                     | AbsoluteValues ->
-                        absolute
+                        float absolute
                     | RegionPopulationWeightedValues ->
-                        weighted
+                        // Adjust the color scale for better readibility
+                        float weighted + (Math.E * Math.E)
                 let scaled =
                     match value with
-                    | 0 -> 0.
+                    | 0. -> 0.
                     | x -> float x |> Math.Log
                 {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
 
@@ -168,21 +169,16 @@ let renderMap (state : State) =
                pointFormat = "{point.label}" |}
         |}
 
-    // Adjust the color scale for better readibility
-    let colorAxisMin =
-        match state.DisplayType with
-        | AbsoluteValues -> 0.
-        | RegionPopulationWeightedValues -> Math.E
-
     match state.GeoJson with
     | NotAsked
     | Loading -> Html.none
     | Failure str -> Html.text str
     | Success geoJson ->
-        {| title = null
-           series = [| series geoJson |]
-           legend = {| enabled = false |}
-           colorAxis = {| min = colorAxisMin ; minColor = "white" ; maxColor = "#e03000" |}
+        {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
+            title = null
+            series = [| series geoJson |]
+            legend = {| enabled = false |}
+            colorAxis = {| minColor = "white" ; maxColor = "#e03000" |}
         |}
         |> Highcharts.map
 
@@ -201,8 +197,8 @@ let renderDisplayTypeSelector displayType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Prikaži:"
-            renderSelector AbsoluteValues displayType "Absolutno"
             renderSelector RegionPopulationWeightedValues displayType "Delež prebivalstva"
+            renderSelector AbsoluteValues displayType "Absolutno"
         ]
     ]
 
