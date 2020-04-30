@@ -200,7 +200,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 series = pojo {| stacking = "" |}
             |}
         legend = pojo {| legend with enabled = true |}
-        tooltip = pojo {| formatter = fun () -> legendFormatter jsThis |}
+        tooltip = pojo {|
+                          formatter = fun () -> legendFormatter jsThis
+//                          shared=true
+                        |}
+
         credits = pojo
             {|
                 enabled = true

@@ -86,12 +86,18 @@ let legendFormatter jsThis =
     let date = jsThis?point?date
     let dataValue: float = jsThis?point?y
 
+//        let x: obj[] = jsThis?points
+//    x.[0]?series?name
+//
+//    let countryCode = x.[0]?series?name
+//    let date = x.[0]?point?date
+//    let dataValue: float = x.[0]?point?y
+
     sprintf
         "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A"
         countryCode
         date
         (Utils.roundTo1Decimal dataValue)
-
 
 let prepareChartData
     startingDayMode
