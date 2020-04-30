@@ -44,8 +44,8 @@ module Series =
         | Recovered     -> "#8cd4b2",   "cs-recovered",     "Preboleli"
         | Active        -> "#bda506",   "cs-active",        "Aktivni"
         | InHospital    -> "#be7a2a",   "cs-inHospital",    "Hospitalizirani"
-        | Icu           -> "#bf5747",   "cs-inHospitalICU", "V intenzivni enoti"
-        | Critical      -> "#d99a91",   "cs-critical",      "Na respiratorju"
+        | Icu           -> "#d99a91",   "cs-inHospitalICU", "V intenzivni enoti"
+        | Critical      -> "#bf5747",   "cs-critical",      "Na respiratorju"
 
 let init data : State * Cmd<Msg> =
     let state = {
