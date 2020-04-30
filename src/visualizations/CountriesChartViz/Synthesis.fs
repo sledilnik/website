@@ -1,5 +1,6 @@
 ﻿module CountriesChartViz.Synthesis
 
+open System.Text
 open CountriesChartViz.Analysis
 open Fable.Core
 open Highcharts
@@ -81,23 +82,27 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
-let legendFormatter jsThis =
-    let countryCode = jsThis?series?name
-    let date = jsThis?point?date
-    let dataValue: float = jsThis?point?y
+let tooltipFormatter jsThis =
+    let points: obj[] = jsThis?points
 
-//        let x: obj[] = jsThis?points
-//    x.[0]?series?name
-//
-//    let countryCode = x.[0]?series?name
-//    let date = x.[0]?point?date
-//    let dataValue: float = x.[0]?point?y
+    let s = StringBuilder()
+    points
+    |> Array.iter
+           (fun country ->
+                let countryCode = country?series?name
+                let date = country?point?date
+                let dataValue: float = country?point?y
 
-    sprintf
-        "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A"
-        countryCode
-        date
-        (Utils.roundTo1Decimal dataValue)
+                let countryTooltip =
+                    sprintf
+                        "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A<br/>"
+                        countryCode
+                        date
+                        (Utils.roundTo1Decimal dataValue)
+                s.Append(countryTooltip) |> ignore
+            )
+
+    s.ToString()
 
 let prepareChartData
     startingDayMode

@@ -23,7 +23,7 @@ let countriesDisplaySets = [|
     }
     { Label = "kritične države (svet)"
       CountriesCodes =
-          [| "CHN"; "ESP"; "IRN"; "ITA"; "RUS"; "SWE"; "TUR"; "USA" |]
+          [| "CHN"; "ESP"; "IRN"; "ITA"; "SWE"; "USA" |]
     }
     { Label = "nordijske države"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
@@ -201,8 +201,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {|
-                          formatter = fun () -> legendFormatter jsThis
-//                          shared=true
+                          formatter = fun () -> tooltipFormatter jsThis
+                          shared=true
                         |}
 
         credits = pojo
