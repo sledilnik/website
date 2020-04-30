@@ -136,7 +136,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     //showInLegend = true
                     //fillOpacity = 0
                 |}
-        yield addContainmentMeasuresFlags startTime |> pojo
+        yield addContainmentMeasuresFlags startTime None |> pojo
     ]
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"

@@ -74,7 +74,9 @@ let shadedWeekendPlotBands =
                 |}
     |]
 
-let addContainmentMeasuresFlags(startTime: JsTimestamp) =
+let addContainmentMeasuresFlags
+    (startDate: JsTimestamp)
+    (endDate: JsTimestamp option) =
     let events = [|
     // day, mo, color,    title,       tooltip text
         4,  3, "#FFFFFF", "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
@@ -103,7 +105,14 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         data =
             events |> Array.choose (fun (d,m,color,title,text) ->
                 let ts = DateTime(2020,m,d) |> jsTime
-                if ts >= startTime then Some {| x=ts; fillColor=color; title=title; text=text |}
+                let showMeasure =
+                    match startDate, endDate with
+                    | startDate, None -> ts >= startDate
+                    | startDate, Some endDate ->
+                        ts >= startDate && ts <= endDate
+                
+                if showMeasure then
+                    Some {| x=ts; fillColor=color; title=title; text=text |}
                 else None
             )
     |}
