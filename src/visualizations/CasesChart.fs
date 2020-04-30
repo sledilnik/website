@@ -155,7 +155,6 @@ let renderChartOptions (state : State) =
                 // this.x: The x value. This property is the same regardless of the tooltip being shared or not.
                 // this.y (not shared) / this.points[i].y (shared): The y value.           |}
                 let dt = DateTime(jsThis?x)
-                dt.ToShortDateString
                 
             |}            
 *)
