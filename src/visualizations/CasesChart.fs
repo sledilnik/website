@@ -61,31 +61,22 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let legendFormatter jsThis =
     let pts: obj[] = jsThis?points
-    sprintf """%s<br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
-                 <br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
-                 <br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
-                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>
-                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>
-                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>"""
-        pts.[0]?point?fmtDate
-        pts.[0]?series?color 
-        pts.[0]?series?name 
-        pts.[0]?point?fmtTotal
-        pts.[1]?series?color 
-        pts.[1]?series?name 
-        pts.[1]?point?fmtTotal
-        pts.[2]?series?color 
-        pts.[2]?series?name 
-        pts.[2]?point?fmtTotal
-        pts.[3]?series?color 
-        pts.[3]?series?name 
-        pts.[3]?point?fmtTotal
-        pts.[4]?series?color 
-        pts.[4]?series?name 
-        pts.[4]?point?fmtTotal
-        pts.[5]?series?color 
-        pts.[5]?series?name 
-        pts.[5]?point?fmtTotal
+    let fmtDate = pts.[0]?point?fmtDate
+
+    let mutable fmtUnder = ""
+    let mutable fmtStr = sprintf "%s" fmtDate
+    for p in pts do 
+        fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+            fmtUnder
+            p?series?color
+            p?series?name
+            p?point?fmtTotal
+          
+        match p?series?name with
+        | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
+        | _ -> ()
+
+    fmtStr
 
 let renderChartOptions (state : State) =
     let className = "cases-chart"
