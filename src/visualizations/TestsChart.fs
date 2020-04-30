@@ -9,34 +9,30 @@ open Feliz.ElmishComponents
 open Types
 open Highcharts
 
-type DisplayType =
-    | MultiChart
-
 type State = {
     data: StatsData
-    displayType: DisplayType
+    displayType: TestsGroup
 }
 
 type Msg =
-    | ChangeDisplayType of DisplayType
+    | ChangeDisplayType of TestsGroup
 
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
-        displayType = MultiChart
+        displayType = Regular
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ChangeDisplayType rt ->
-        { state with displayType=rt }, Cmd.none
+    | ChangeDisplayType dt ->
+        { state with displayType = dt }, Cmd.none
 
 let renderChartOptions (state : State) =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
-    let xAxisPoint (dp: StatsDataPoint) = dp.Date
     let negativeTests (dp: StatsDataPoint) = dp.PerformedTests.Value - dp.PositiveTests.Value
     let percentPositive (dp: StatsDataPoint) = Math.Round(float dp.PositiveTests.Value / float dp.PerformedTests.Value * float 100.0, 2)
     
@@ -59,7 +55,6 @@ let renderChartOptions (state : State) =
         |}
     |]
 
-    let startDate = DateTime(2020,3,4)
     let allSeries = [
         yield pojo
             {|
@@ -67,8 +62,8 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, negativeTests dp)) |> Seq.toArray
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTests dp)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -76,8 +71,8 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#bda506"
                 yAxis = 0 
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -85,8 +80,8 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#665191"
                 yAxis = 1
-                data = state.data |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                    |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, percentPositive dp)) |> Seq.toArray
+                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
     
@@ -96,7 +91,7 @@ let renderChartOptions (state : State) =
         series = List.toArray allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal" |} 
+                series = {| stacking = "normal"; groupPadding = 0 |} 
             |}        
 
         legend = pojo
@@ -142,9 +137,24 @@ let renderChartContainer (state : State) =
         ]
     ]
 
+let renderSelector state (dt: TestsGroup) dispatch =
+    Html.div [
+        let isActive = state.displayType = dt
+        prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
+        prop.className [ true, "btn btn-sm metric-selector"; isActive, "metric-selector--selected" ]
+        prop.text (TestsGroup.getName dt) ]
+
+let renderDisplaySelectors state dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            TestsGroup.all
+            |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
+
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state
+        //renderDisplaySelectors state dispatch
     ]
 
 let testsChart (props : {| data : StatsData |}) =

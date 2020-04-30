@@ -97,9 +97,12 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         30, 3, "#FFe6e6", "Občine",    "Prepoved gibanja izven meja občin, obvezno razkuževanje <br/>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
         4,  4, "#e6f0ff", "Trgovine",  "Trgovine od 8-10 ure in zadnjo uro izključno <br/>za ranljive skupine (invalidi, upokojenci, nosečnice)"
         12, 4, "#FFe6e6", "Karantena", "Obvezna 7 dnevna karantena pri prihodu iz tujine"
-        18, 4, "#ebfaeb", "Vikendi",   "Splošna prepoved gibanja in sproščanje omejitev <br/>gibanja med občinami (vikendi...)"
-        20, 4, "#ebfaeb", "Servisi",   "Sproščanje nekaterih dejavnosti (gradnja, servisi, šport na prostem...), <br/>dovoljeni nekateri linijski prevozi"
-        21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb."
+        18, 4, "#ebfaeb", "Vikendi",   "Sproščanje: gibanje med občinami (vikendi...), <br/>pojasnila glede splošne prepovedi gibanja"
+        20, 4, "#ebfaeb", "Servisi",   "Sproščanje: gradnja, servisi, šport na prostem,<br/>dovoljeni nekateri linijski prevozi"
+        21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
+        29, 4, "#ebfaeb", "Muzeji",    "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
+        30, 4, "#ebfaeb", "Občine",    "Sproščanje: gibanje izven meja svoje občine"
+        4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
     |]
     {|
         ``type`` = "flags"
