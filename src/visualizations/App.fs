@@ -70,6 +70,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} |}
+          {| Visualization = Cases
+             ClassName = "cases-chart"
+             Label = "Potrjeni primeri"
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView CasesChart.casesChart {| data = data |} |}
           {| Visualization = Patients
              ClassName = "patients-chart"
              Label = "Obravnava hospitaliziranih"
@@ -85,26 +95,6 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} |}
-          {| Visualization = Cases
-             ClassName = "cases-chart"
-             Label = "Potrjeni primeri"
-             Explicit = false
-             Renderer = fun state ->
-                match state.StatsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView CasesChart.casesChart {| data = data |} |}
-          {| Visualization = Spread
-             ClassName = "spread-chart"
-             Label = "Prirast potrjeno okuženih"
-             Explicit = false
-             Renderer = fun state ->
-                match state.StatsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView SpreadChart.spreadChart {| data = data |} |}
           {| Visualization = Infections
              ClassName = "metrics-comparison-chart"
              Label = "Struktura potrjeno okuženih"
@@ -115,6 +105,16 @@ let render (state : State) (dispatch : Msg -> unit) =
                | Loading -> Utils.renderLoading
                | Failure error -> Utils.renderErrorLoading error
                | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} |}
+          {| Visualization = Spread
+             ClassName = "spread-chart"
+             Label = "Prirast potrjeno okuženih"
+             Explicit = false
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView SpreadChart.spreadChart {| data = data |} |}
           {| Visualization = Regions
              ClassName = "regions-chart"
              Label = "Potrjeno okuženi po regijah"

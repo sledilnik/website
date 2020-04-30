@@ -44,6 +44,11 @@ export default {
           text: 'Širjenje COVID-19 v Sloveniji',
           dimensions: [1140, 780]
         },
+        "Cases": {
+          value: "Cases",
+          text: 'Potrjeni primeri',
+          dimensions: [1140, 630]
+        },
         "Patients": {
           value: "Patients",
           text: 'Obravnava hospitaliziranih',
@@ -54,20 +59,15 @@ export default {
           text: 'Testiranje',
           dimensions: [1140, 630]
         },
-        "Cases": {
-          value: "Cases",
-          text: 'Potrjeni primeri',
-          dimensions: [1140, 630]
+        "Infections": {
+          value: "Infections",
+          text: 'Struktura potrjeno okuženih',
+          dimensions: [1140, 820]
         },
         "Spread": {
           value: "Spread",
           text: 'Prirast potrjeno okuženih',
           dimensions: [1140, 630]
-        },
-        "Infections": {
-          value: "Infections",
-          text: 'Struktura potrjeno okuženih',
-          dimensions: [1140, 820]
         },
         "Regions": {
           value: "Regions",
