@@ -29,10 +29,6 @@ Vue.use(VueScrollTo)
 
 const routes = [
   {
-    path: '*',
-    redirect: '/stats'
-  },
-  {
     path: '/about',
     component: StaticPage,
     props: {
@@ -124,10 +120,23 @@ const routes = [
     path: '/embed',
     component: EmbedMakerPage,
   },
+  {
+    path: '*',
+    beforeEnter: (to, from, next) => {
+      // handle legacy routes
+      if (to.fullPath.substr(0,2) === "/#") {
+        const path = to.fullPath.substr(2);
+        next(path);
+        return;
+      }
+      next({ name: 'stats' });
+    }
+  },
 ]
 
 const router = new VueRouter({
   routes, // short for `routes: routes`
+  mode: "history",
   scrollBehavior(to) {
     if (to.hash) {
       const elm = document.querySelector(to.hash)
