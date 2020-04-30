@@ -14,6 +14,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Širjenje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Obravnava hospitaliziranih | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
+| Potrjeni primeri | https://covid-19.sledilnik.org/embed.html#/chart/Cases |
 | Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |

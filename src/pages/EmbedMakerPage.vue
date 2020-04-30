@@ -54,6 +54,11 @@ export default {
           text: 'Testiranje',
           dimensions: [1140, 630]
         },
+        "Cases": {
+          value: "Cases",
+          text: 'Potrjeni primeri',
+          dimensions: [1140, 630]
+        },
         "Spread": {
           value: "Spread",
           text: 'Prirast potrjeno okuženih',
