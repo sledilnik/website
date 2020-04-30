@@ -1,7 +1,6 @@
 # covid19-web
 
-[![Build Status](https://travis-ci.com/sledilnik/website.svg?branch=master)](https://travis-ci.com/sledilnik/website)
-
+![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)
 ## Structure
 
 | folder | content |

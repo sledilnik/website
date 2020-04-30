@@ -5,7 +5,6 @@
     <ItemGroup>
         <Compile Include="Types.fs" />
         <Compile Include="Highcharts.fs" />
-        <Compile Include="GoogleCharts.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="data/Loader.fs" />
         <Compile Include="data/Stats.fs" />
