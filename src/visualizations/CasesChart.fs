@@ -134,7 +134,7 @@ let renderChartOptions (state : State) =
         series = allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal"; groupPadding = 0 |}
+                series = {| stacking = "normal"; borderWidth = None; padding = 0; pointPadding = 0; groupPadding = 0; shadow = false |}
             |}        
             
         tooltip = pojo
@@ -143,21 +143,6 @@ let renderChartOptions (state : State) =
                 formatter = fun () -> legendFormatter jsThis
             |}
 
-(*        tooltip = pojo 
-           {| shared = true
-              formatter = fun () ->
-                // Available data are: https://api.highcharts.com/highcharts/tooltip.formatter
-                // this.percentage (not shared) / this.points[i].percentage (shared): Stacked series and pies only. The point's percentage of the total.
-                // this.point (not shared) / this.points[i].point (shared): The point object. The point name, if defined, is available through this.point.name.
-                // this.points: In a shared tooltip, this is an array containing all other properties for each point.
-                // this.series (not shared) / this.points[i].series (shared): The series object. The series name is available through this.series.name.
-                // this.total (not shared) / this.points[i].total (shared): Stacked series only. The total value at this point's x value.
-                // this.x: The x value. This property is the same regardless of the tooltip being shared or not.
-                // this.y (not shared) / this.points[i].y (shared): The y value.           |}
-                let dt = DateTime(jsThis?x)
-                
-            |}            
-*)
         legend = pojo
             {|
                 enabled = true
