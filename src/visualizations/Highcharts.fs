@@ -10,6 +10,9 @@ open Types
 [<Import("renderChart", from="./_highcharts")>]
 let chart: obj -> ReactElement = jsNative
 
+[<Import("renderMap", from="./_highcharts")>]
+let map: obj -> ReactElement = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -71,15 +74,6 @@ let shadedWeekendPlotBands =
                 |}
     |]
 
-// trigger event for iframe resize
-
-let myLoadEvent(name: String) = 
-    let ret(event: Event) =
-        let evt = document.createEvent("event")
-        evt.initEvent("chartLoaded", true, true);
-        document.dispatchEvent(evt)
-    ret
-
 let addContainmentMeasuresFlags(startTime: JsTimestamp) =
     let events = [|
     // day, mo, color,    title,       tooltip text
@@ -114,6 +108,21 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
             )
     |}
 
+(* Trigger document event for iframe resizing *)
+let onLoadEvent (name : String) =
+    let res (e : Event) =
+        let event = document.createEvent("Event")
+        event.initEvent("chartLoaded", true, true)
+        document.dispatchEvent(event)
+    res
+
+let optionsWithOnLoadEvent (className : string) =
+    {| chart = pojo
+        {| events = pojo
+            {| load = onLoadEvent(className) |}
+        |}
+    |}
+
 let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
         chart = pojo
@@ -123,7 +132,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
-                events = pojo {| load = myLoadEvent(className) |}
+                events = pojo {| load = onLoadEvent(className) |}
             |}
         title = pojo {| text = None |}
         xAxis = [|
@@ -202,19 +211,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
-        responsive = pojo 
+        responsive = pojo
             {|
-                rules = 
+                rules =
                     [| {|
                         condition = {| maxWidth = 500 |}
-                        chartOptions = 
-                            {| 
+                        chartOptions =
+                            {|
                                 legend = {| enabled = false |}
                                 yAxis = [| {| labels = {| enabled = false |} |} |]
                             |}
                     |} |]
             |}
-        
+
 
         plotOptions = pojo
             {|

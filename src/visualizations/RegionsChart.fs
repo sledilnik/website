@@ -83,13 +83,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
-let myLoadEvent(name: String) =
-    let ret(event: Event) =
-        let evt = document.createEvent("event")
-        evt.initEvent("chartLoaded", true, true);
-        document.dispatchEvent(evt)
-    ret
-
 let renderChartOptions (state : State) =
 
     let metricsToRender =
@@ -130,7 +123,6 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
-                events = pojo {| load = myLoadEvent("covid19-regions") |}
             |}
         series = allSeries
         yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})

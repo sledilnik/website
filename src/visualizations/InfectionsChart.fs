@@ -260,13 +260,6 @@ let renderChartOptions displayType (data : StatsData) =
             reversed = true
         |}
 
-    let myLoadEvent(_: String) =
-        let ret(_: Event) =
-            let evt = document.createEvent("event")
-            evt.initEvent("chartLoaded", true, true);
-            document.dispatchEvent(evt)
-        ret
-
     let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
 
     let axisWithPhases() = baseOptions.xAxis
@@ -289,7 +282,6 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
-                events = {| load = myLoadEvent("infections") |}
             |}
         title = pojo {| text = None |}
         series = List.toArray allSeries
