@@ -66,15 +66,17 @@ let legendFormatter jsThis =
     let mutable fmtUnder = ""
     let mutable fmtStr = sprintf "%s" fmtDate
     for p in pts do 
-        fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
-            fmtUnder
-            p?series?color
-            p?series?name
-            p?point?fmtTotal
-          
-        match p?series?name with
-        | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
-        | _ -> ()
+        match p?point?fmtTotal with
+        | "null" -> ()
+        | _ -> 
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+                fmtUnder
+                p?series?color
+                p?series?name
+                p?point?fmtTotal             
+            match p?series?name with
+            | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
+            | _ -> ()
 
     fmtStr
 
@@ -134,7 +136,7 @@ let renderChartOptions (state : State) =
         series = allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal"; borderWidth = None; padding = 0; pointPadding = 0; groupPadding = 0; shadow = false |}
+                series = {| stacking = "normal"; borderWidth = 0.001; padding = 0; pointPadding = 0; groupPadding = 0; shadow = false |}
             |}        
             
         tooltip = pojo
