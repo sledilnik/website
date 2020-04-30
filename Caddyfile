@@ -1,5 +1,6 @@
 :80 {
   root * /app
+  gzip
   file_server {
     index index.html
   }
