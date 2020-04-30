@@ -59,6 +59,34 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ChangeDisplayType rt ->
         { state with displayType=rt }, Cmd.none
 
+let legendFormatter jsThis =
+    let pts: obj[] = jsThis?points
+    sprintf """%s<br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
+                 <br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
+                 <br><span style="color:%s">⬤</span> %s: <b>%s</b><br>
+                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>
+                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>
+                 <br>↳ <span style="color:%s">⬤</span> %s: <b>%s</b><br>"""
+        pts.[0]?point?fmtDate
+        pts.[0]?series?color 
+        pts.[0]?series?name 
+        pts.[0]?point?fmtTotal
+        pts.[1]?series?color 
+        pts.[1]?series?name 
+        pts.[1]?point?fmtTotal
+        pts.[2]?series?color 
+        pts.[2]?series?name 
+        pts.[2]?point?fmtTotal
+        pts.[3]?series?color 
+        pts.[3]?series?name 
+        pts.[3]?point?fmtTotal
+        pts.[4]?series?color 
+        pts.[4]?series?name 
+        pts.[4]?point?fmtTotal
+        pts.[5]?series?color 
+        pts.[5]?series?name 
+        pts.[5]?point?fmtTotal
+
 let renderChartOptions (state : State) =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
@@ -67,14 +95,23 @@ let renderChartOptions (state : State) =
 
     let renderSeries series =
 
-        let renderPoint : (StatsDataPoint -> JsTimestamp * int option) =
+        let getPoint : (StatsDataPoint -> int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Date |> jsTime12h, dp.Cases.RecoveredToDate    
-            | Deceased      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.DeceasedToDate
-            | Active        -> fun dp -> dp.Date |> jsTime12h, dp.Cases.Active.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some // todo rename  
-            | InHospital    -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some  
-            | Icu           -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some
-            | Critical      -> fun dp -> dp.Date |> jsTime12h, dp.StatePerTreatment.Critical
+            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate    
+            | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
+            | Active        -> fun dp -> dp.Cases.Active.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some
+            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some 
+            | Icu           -> fun dp -> dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some 
+            | Critical      -> fun dp -> dp.StatePerTreatment.Critical
+
+        let getPointTotal : (StatsDataPoint -> int option) =
+            match series with
+            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate    
+            | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
+            | Active        -> fun dp -> dp.Cases.Active  
+            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital
+            | Icu           -> fun dp -> dp.StatePerTreatment.InICU
+            | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
         let color, className, name = Series.getSeriesInfo series
         {|
@@ -84,7 +121,14 @@ let renderChartOptions (state : State) =
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
-                |> Seq.map renderPoint  
+                |> Seq.map (fun dp ->  
+                    {|
+                        x = dp.Date |> jsTime12h
+                        y = getPoint dp
+                        fmtDate = dp.Date.ToString "d. M. yyyy"
+                        fmtTotal = getPointTotal dp |> string  
+                    |} |> pojo
+                )    
                 |> Array.ofSeq 
         |}
         |> pojo
@@ -102,6 +146,12 @@ let renderChartOptions (state : State) =
                 series = {| stacking = "normal"; groupPadding = 0 |}
             |}        
             
+        tooltip = pojo
+            {|
+                shared = true
+                formatter = fun () -> legendFormatter jsThis
+            |}
+
 (*        tooltip = pojo 
            {| shared = true
               formatter = fun () ->
