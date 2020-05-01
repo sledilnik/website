@@ -300,7 +300,7 @@ let renderMunicipalities (state : State) dispatch =
                 | Some d1, Some d2 ->
                     if d1 > d2 then 1
                     else if d1 < d2 then -1
-                    else compareStringOption m1.Name m2.Name)
+                    else compareMaxTests m1 m2)
         | LastPositiveTest ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 -> 
