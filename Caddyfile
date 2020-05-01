@@ -1,5 +1,6 @@
 :80 {
   root * /app
+  try_files {path} /index.html
   file_server {
     index index.html
   }

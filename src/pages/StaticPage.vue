@@ -11,10 +11,15 @@ export default {
   name: 'StaticPage',
   props: {
     name: String,
-    content: Promise,
+    content: String,
   },
   mounted() {
     this.initDropdowns;
+
+    // open question, if anchor link
+    if (this.$route.hash && document.querySelector(this.$route.hash)) {
+      document.querySelector(this.$route.hash).parentElement.open=true
+    }
   },
   methods: {
     initDropdowns: function() {

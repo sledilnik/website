@@ -25,13 +25,9 @@ import * as sourcesMd from './content/sources.md'
 import * as modelsMd from './content/models.md'
 import * as datasourcesMd from './content/datasources.md'
 
-Vue.use(VueScrollTo)
+Vue.use(VueScrollTo, { offset: 60,})
 
 const routes = [
-  {
-    path: '*',
-    redirect: '/stats'
-  },
   {
     path: '/about',
     component: StaticPage,
@@ -124,24 +120,31 @@ const routes = [
     path: '/embed',
     component: EmbedMakerPage,
   },
+  {
+    path: '*',
+    beforeEnter: (to, from, next) => {
+      // handle legacy routes
+      if (to.fullPath.substr(0,2) === "/#") {
+        const path = to.fullPath.substr(2);
+        next(path);
+        return;
+      }
+      next({ path: '/stats' });
+    }
+  },
 ]
 
 const router = new VueRouter({
   routes, // short for `routes: routes`
-  scrollBehavior(to) {
-    if (to.hash) {
-      const elm = document.querySelector(to.hash)
-      if (elm) {
-        let offset = 60
-        if (elm.tagName === "SECTION" && to.hash.endsWith("-chart")) {
-          offset = 90
-        }
-        return { selector: to.hash, offset: { x: 0, y: offset }}
-      }
-    } else {
-      return { x: 0, y: 0 }
-    }
-  },
+  mode: "history",
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  if(to.hash === "") {
+    window.scrollTo(0, 0)
+  }
+  next()
 })
 
 new Vue({
