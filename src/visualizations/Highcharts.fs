@@ -110,7 +110,7 @@ let addContainmentMeasuresFlags
                     | startDate, None -> ts >= startDate
                     | startDate, Some endDate ->
                         ts >= startDate && ts <= endDate
-                
+
                 if showMeasure then
                     Some {| x=ts; fillColor=color; title=title; text=text |}
                 else None
@@ -258,4 +258,5 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         second = @"%A, %e. %B %Y"
                     |}
             |}
+        credits = pojo {| enabled = false |}
     |}

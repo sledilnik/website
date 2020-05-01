@@ -11,4 +11,4 @@ services:
     volumes:
       - "./Caddyfile:/etc/caddy/Caddyfile"
       - ".:/app"
-    command: ["bash", "-c", "yarn && yarn test && yarn test-fsharp"]
+    command: ["bash", "-c", "yarn && yarn test && yarn dotnet-restore && yarn test-fsharp"]

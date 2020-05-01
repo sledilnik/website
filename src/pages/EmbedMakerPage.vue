@@ -94,6 +94,11 @@ export default {
 //          text: 'Kapacitete bolnišnic',
 //          dimensions: [1140, 1300]
 //        },
+        "Countries": {
+          value: "Countries",
+          text: 'Primerjava po državah',
+          dimensions: [1140, 740]
+        },
       }
     };
   },

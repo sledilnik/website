@@ -24,8 +24,9 @@ let init (query : obj) (visualization : string option) =
                 | "AgeGroups" -> Some AgeGroups
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
+                | "Countries" -> Some Countries
                 | _ -> None
-                |> Embeded
+                |> Embedded
 
         let initialState =
             { Query = query
@@ -156,12 +157,24 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data ->
                     lazyView AgeGroupsChart.renderChart {| data = data |} |}
+//          {| Visualization = Countries
+//             ClassName = "countries-comparison-chart"
+//             Label = "Primerjava po državah"
+//             Explicit = false
+//             Renderer = fun state ->
+//               match state.StatsData with
+//               | NotAsked -> Html.none
+//               | Loading -> Utils.renderLoading
+//               | Failure error -> Utils.renderErrorLoading error
+//               | Success data ->
+//                lazyView CountriesChartViz.Rendering.renderChart ()
+//            |}
         ]
 
-    let embeded, visualizations =
+    let embedded, visualizations =
         match state.RenderingMode with
         | Normal -> false, allVisualizations |> List.filter (fun viz -> not viz.Explicit)
-        | Embeded visualization ->
+        | Embedded visualization ->
             match visualization with
             | None -> true, []
             | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
@@ -169,7 +182,7 @@ let render (state : State) (dispatch : Msg -> unit) =
     let brandLink =
         match state.RenderingMode with
         | Normal -> Html.none
-        | Embeded _ ->
+        | Embedded _ ->
             Html.a
                 [ prop.className "brand-link"
                   prop.target "_blank"
@@ -177,7 +190,7 @@ let render (state : State) (dispatch : Msg -> unit) =
                   prop.text "covid-19.sledilnik.org" ]
 
     Html.div
-        [ prop.className [ true, "visualization container" ; embeded, "embeded" ]
+        [ prop.className [ true, "visualization container" ; embedded, "embeded" ]
           prop.children (
               visualizations
               |> List.map (fun viz ->
