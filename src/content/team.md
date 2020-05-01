@@ -5,12 +5,12 @@
 Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja - [enostavno jo dodate kot komentar na katerokoli polje v dokumentu](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0). Veseli bomo tudi podatkov iz bolnišnic, štabov Civilne zaščite ipd ali pa zgolj javne podpore v zahtevi za transparentno in ažurno objavljanje podatkov.
 
 Imaš predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o zdravstvenem sistemu ali COVID-19 ali pomagal/a kako drugače? Javi se nam in [dobiš pravice za urejanje](mailto:info@sledilnik.org) dokumenta.
-Če pa lahko projektu nameniš nekaj časa vsak dan, se pridruži [naši Slack skupnosti](http://sledilnik.slack.com). Več informacij na info@sledilnik.org.
+Če pa lahko projektu nameniš nekaj časa vsak dan, se pridruži [naši Slack skupnosti](https://sledilnik.slack.com). Več informacij na info@sledilnik.org.
 
 Uredniki baze in ostali sodelavci:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - koordinacija za modeliranje, modeliranje, viri
--   [Andraž Vrhovec](http://github.com/overlordtm) - spletna stran, CSV oblika
+-   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, CSV oblika
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
