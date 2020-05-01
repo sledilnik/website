@@ -46,7 +46,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
-        XAxisType = ByDate
+        XAxisType = DaysSinceFirstDeath
         ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
@@ -108,8 +108,6 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             document.dispatchEvent(evt)
         ret
 
-    let xAxisType = ByDate
-
     let allSeries =
         chartData.Series
         |> Array.map (fun countrySeries ->
@@ -125,7 +123,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                     |> Array.mapi (fun i entry ->
                         pojo {|
                              x =
-                                 match xAxisType with
+                                 match state.XAxisType with
                                  | ByDate -> entry.Date :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
@@ -181,7 +179,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         xAxis =
             pojo {|
                    ``type`` =
-                        match xAxisType with
+                        match state.XAxisType with
                         | ByDate -> "datetime"
                         | DaysSinceFirstDeath -> "int"
                         | DaysSinceOneDeathPerMillion -> "int"
@@ -212,7 +210,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {|
                           formatter = fun () -> tooltipFormatter jsThis
-                          shared=true
+                          shared = true
+                          useHTML = true
                         |}
 
         credits = pojo

@@ -86,24 +86,39 @@ type ChartData = {
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points
 
-    let s = StringBuilder()
-    points
-    |> Array.iter
-           (fun country ->
-                let countryCode = country?series?name
-                let date = country?point?date
-                let dataValue: float = country?point?y
+    match points with
+    | [||] -> ""
+    | _ ->
+        let dataDescription = "<b>Umrli na 1 milijon prebivalcev:</b>"
 
-                let countryTooltip =
-                    sprintf
-                        "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A<br/>"
-                        countryCode
-                        date
-                        (Utils.roundTo1Decimal dataValue)
-                s.Append(countryTooltip) |> ignore
-            )
+        let s = StringBuilder()
+        s.Append dataDescription |> ignore
+        s.Append "<br/><table>" |> ignore
 
-    s.ToString()
+        points
+        |> Array.sortByDescending
+               (fun country ->
+                    let dataValue: float = country?point?y
+                    dataValue)
+        |> Array.iter
+               (fun country ->
+                    let countryCode = country?series?name
+                    let date = country?point?date
+                    let dataValue: float = country?point?y
+
+                    s.Append "<tr>" |> ignore
+                    let countryTooltip =
+                        sprintf
+                            "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            countryCode
+                            date
+                            (Utils.roundTo1Decimal dataValue)
+                    s.Append countryTooltip |> ignore
+                    s.Append "</tr>" |> ignore
+                )
+
+        s.Append "</table>" |> ignore
+        s.ToString()
 
 let prepareChartData
     xAxisType
