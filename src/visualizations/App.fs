@@ -157,18 +157,18 @@ let render (state : State) (dispatch : Msg -> unit) =
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data ->
                     lazyView AgeGroupsChart.renderChart {| data = data |} |}
-          {| Visualization = Countries
-             ClassName = "countries-comparison-chart"
-             Label = "Primerjava po državah"
-             Explicit = false
-             Renderer = fun state ->
-               match state.StatsData with
-               | NotAsked -> Html.none
-               | Loading -> Utils.renderLoading
-               | Failure error -> Utils.renderErrorLoading error
-               | Success data ->
-                lazyView CountriesChartViz.Rendering.renderChart ()
-            |}
+//          {| Visualization = Countries
+//             ClassName = "countries-comparison-chart"
+//             Label = "Primerjava po državah"
+//             Explicit = false
+//             Renderer = fun state ->
+//               match state.StatsData with
+//               | NotAsked -> Html.none
+//               | Loading -> Utils.renderLoading
+//               | Failure error -> Utils.renderErrorLoading error
+//               | Success data ->
+//                lazyView CountriesChartViz.Rendering.renderChart ()
+//            |}
         ]
 
     let embedded, visualizations =
