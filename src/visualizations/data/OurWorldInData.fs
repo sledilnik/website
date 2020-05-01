@@ -9,9 +9,9 @@ open EdelweissData.Base.Values
 
 open Types
 
-let apiUrl = Url "https://api.develop.edelweiss.douglasconnect.com/"
+let apiUrl = Url "https://api.edelweissdata.com/"
 
-let datasetId = PublishedDatasetId (Guid "cc898cd8-5d61-4d69-b15e-6a9e35bc5906")
+let datasetId = PublishedDatasetId (Guid "b55b229d-6338-4e41-a507-0cf4d3297b54")
 
 let datasetIdAndVersion =
     { Id = datasetId

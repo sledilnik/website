@@ -91,7 +91,7 @@ let renderChartOptions (state : State) =
         series = List.toArray allSeries
         plotOptions = pojo 
             {| 
-                series = {| stacking = "normal"; groupPadding = 0 |} 
+                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |} 
             |}        
 
         legend = pojo

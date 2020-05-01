@@ -170,15 +170,10 @@ let renderChartOptions displayType (data : StatsData) =
             (date, value |> Option.defaultValue 0 |> float))
 
     let allSeries = [
-        let mutable startTime = DateTime(2020,3,6) |> jsTime  // TODO: breki - set to actual start date of series
-
-        for metric in (Metrics.metricsToDisplay displayType.ShowAllOrOthers) do
-            yield pojo
-                {|
-                visible = true
-                color = metric.Color
-                name = metric.Label
-                data =
+        let allMetricsData =
+            Metrics.metricsToDisplay displayType.ShowAllOrOthers
+            |> Seq.map(fun metric ->
+                let data =
                     let runningTotals = calcRunningTotals metric
                     match displayType.ValueTypes with
                     | RunningTotals -> runningTotals |> toFloatValues
@@ -191,9 +186,29 @@ let renderChartOptions displayType (data : StatsData) =
                                 (fun (_, value) ->
                                     value |> Option.defaultValue 0 |> float)
                             )
+
+                (metric, data))
+
+        for (metric, metricData) in allMetricsData do
+            yield pojo
+                {|
+                visible = true
+                color = metric.Color
+                name = metric.Label
+                data = metricData
                 marker = pojo {| enabled = false |}
                 |}
-        if displayType.ShowPhases then yield addContainmentMeasuresFlags startTime |> pojo
+
+        let allDates =
+            allMetricsData
+            |> Seq.map (fun (_, metricData) ->
+                metricData |> Seq.map (fun (date, _) -> date))
+            |> Seq.concat
+        let startDate = allDates |> Seq.min
+        let endDate = allDates |> Seq.max |> Some
+
+        if displayType.ShowPhases then
+            yield addContainmentMeasuresFlags startDate endDate |> pojo
     ]
 
     let legend =
@@ -212,13 +227,6 @@ let renderChartOptions displayType (data : StatsData) =
             backgroundColor = "#FFF"
             reversed = true
         |}
-
-    let myLoadEvent(_: String) =
-        let ret(_: Event) =
-            let evt = document.createEvent("event")
-            evt.initEvent("chartLoaded", true, true);
-            document.dispatchEvent(evt)
-        ret
 
     let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
 
@@ -242,7 +250,6 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
-                events = {| load = myLoadEvent("infections") |}
             |}
         title = pojo {| text = None |}
         series = List.toArray allSeries
@@ -308,9 +315,8 @@ let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
 // because the graph cuts trailing days without any data. This requires some
 // bit of refactoring of the code, to first prepare the data and only then
 // render everything. Also the series arrays should work with native DateTime
-// so it can be used in arithmetic operations, instead of JsTimestamp (it
-// should be transformed to JsTimestamp at the moment of setting the Highcharts
-// objects).
+// so it can be used in arithmetic calculations, instead of JsTimestamp (it should be
+// transformed to JsTimestamp at the moment of setting the Highcharts objects).
 let lastDateOfGraph =
     DateTime.Now.AddDays(-(halfDaysOfMovingAverage + 1) |> float)
 

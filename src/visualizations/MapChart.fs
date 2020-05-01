@@ -1,15 +1,18 @@
 [<RequireQualifiedAccess>]
 module Map
 
-open Elmish
 open System
+
+open Fable.SimpleHttp
+
+open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
 
-open GoogleCharts
-
 open Types
+
+let geoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 
 let excludedRegions = Set.ofList ["t"]
 
@@ -30,12 +33,31 @@ type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
 
+type GeoJson = RemoteData<obj, string>
+
 type State =
-    { Data : Data list
+    { GeoJson : GeoJson
+      Data : Data list
       DisplayType : DisplayType }
 
 type Msg =
+    | GeoJsonRequested
+    | GeoJsonLoaded of GeoJson
     | DisplayTypeChanged of DisplayType
+
+let loadGeoJson =
+    async {
+        let! (statusCode, response) = Http.get geoJsonUrl
+
+        if statusCode <> 200 then
+            return GeoJsonLoaded (sprintf "Napaka pri nalaganju zemljevida: %d" statusCode |> Failure)
+        else
+            try
+                let data = response |> Fable.Core.JS.JSON.parse
+                return GeoJsonLoaded (data |> Success)
+            with
+                | ex -> return GeoJsonLoaded (sprintf "Napaka pri nalaganju zemljevida: %s" ex.Message |> Failure)
+    }
 
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
     let data =
@@ -81,76 +103,84 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
             { Date = datapoint.Date
               Regions = regions })
 
-    { Data = data ; DisplayType = RegionPopulationWeightedValues }, Cmd.none
+    { Data = data
+      GeoJson = NotAsked
+      DisplayType = RegionPopulationWeightedValues
+    }, Cmd.ofMsg GeoJsonRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | GeoJsonRequested ->
+        { state with GeoJson = Loading }, Cmd.OfAsync.result loadGeoJson
+    | GeoJsonLoaded geoJson ->
+        { state with GeoJson = geoJson }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
+// TODO
 let chartLoadedEvent () =
     // trigger event for iframe resize
     let evt = document.createEvent("event")
     evt.initEvent("chartLoaded", true, true)
     document.dispatchEvent(evt) |> ignore
 
-let renderMap state =
-    let header =
-        match state.DisplayType with
-        | AbsoluteValues -> ("Občina", "Ime", "Potrjeno okuženi skupaj", "Delež")
-        | RegionPopulationWeightedValues -> ("Občina", "Ime", "Delež", "Potrjeno okuženi skupaj")
-        |> box
-
-    let data =
-        let lastDataPoint = List.last state.Data
-        seq {
-            for region in lastDataPoint.Regions do
-                for municipality in region.Municipalities do
-                    let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
-                    let absoluteFmt = sprintf "%d od %d prebivalcev" absolute municipality.Municipality.Population
-                    let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
-                    let weightedD = weighted / 1000
-                    let weightedR = weighted % 1000
-                    let weightedFmt = sprintf "%d,%03d %%" weightedD weightedR
+let seriesData state =
+    let lastDataPoint = List.last state.Data
+    seq {
+        for region in lastDataPoint.Regions do
+            for municipality in region.Municipalities do
+                let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
+                let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
+                let weightedFmt = sprintf "%d,%03d %%" (weighted / 1000) (weighted % 1000)
+                let label = sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" municipality.Municipality.Population absolute weightedFmt
+                let value =
                     match state.DisplayType with
                     | AbsoluteValues ->
-                        // how to render logarithmic color scale:
-                        // https://stackoverflow.com/questions/56275333/display-google-geochart-in-log-scale
-                        let scaled = Math.Log (float absolute + 2.0)
-                        yield box((municipality.Municipality.Code,
-                                   municipality.Municipality.Name,
-                                   box {| v=scaled; f=absoluteFmt |},
-                                   box {| v=weighted; f=weightedFmt |}))
+                        float absolute
                     | RegionPopulationWeightedValues ->
-                        let scaled = Math.Log (float weighted + 10.0)
-                        yield box((municipality.Municipality.Code,
-                                   municipality.Municipality.Name,
-                                   box {| v=scaled; f=weightedFmt |},
-                                   box {| v=absolute; f=absoluteFmt |} ))
+                        // Adjust the color scale for better readibility
+                        float weighted + (Math.E * Math.E)
+                let scaled =
+                    match value with
+                    | 0. -> 0.
+                    | x -> float x |> Math.Log
+                {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
 
-        } |> List.ofSeq
+    } |> Seq.toArray
 
-    Html.div [
-        prop.style [ ]
-        prop.className "highcharts-wrapper"
-        prop.children [
-            Chart [
-                Props.chartType ChartType.GeoChart
-                Props.width "100%"
-                // Props.height 450
-                Props.chartEvents [{| eventName = "ready" ; callback = chartLoadedEvent |}]
-                Props.data (header :: data)
-                Props.options [
-                    Options.Region "SI"
-                    Options.Resolution Resolution.Provinces
-                    Options.DatalessRegionColor "white"
-                    Options.DefaultColor "white"
-                    Options.ColorAxis {| colors = ("#fefefe", "#e03000") |}
-                    Options.Legend "none" // legend doesn't make sense with log scale
-                ]
-            ]
-        ]
-    ]
+let renderMap (state : State) =
+
+    let series geoJson =
+        {| visible = true
+           mapData = geoJson
+           data = seriesData state
+           keys = [| "isoid" ; "value" |]
+           joinBy = "isoid"
+           nullColor = "white"
+           borderColor = "#888"
+           borderWidth = 0.5
+           mapline = {| animation = {| duration = 0 |} |}
+           states =
+            {| normal = {| animation = {| duration = 0 |} |}
+               hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+           tooltip =
+            {| distance = 50
+               headerFormat = "<b>{point.key}</b><br>"
+               pointFormat = "{point.label}" |}
+        |}
+
+    match state.GeoJson with
+    | NotAsked
+    | Loading -> Html.none
+    | Failure str -> Html.text str
+    | Success geoJson ->
+        {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
+            title = null
+            series = [| series geoJson |]
+            legend = {| enabled = false |}
+            colorAxis = {| minColor = "white" ; maxColor = "#e03000" |}
+        |}
+        |> Highcharts.map
 
 let renderDisplayTypeSelector displayType dispatch =
     let renderSelector (displayType : DisplayType) (currentDisplayType : DisplayType) (label : string) =
@@ -167,8 +197,8 @@ let renderDisplayTypeSelector displayType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Prikaži:"
-            renderSelector AbsoluteValues displayType "Absolutno"
             renderSelector RegionPopulationWeightedValues displayType "Delež prebivalstva"
+            renderSelector AbsoluteValues displayType "Absolutno"
         ]
     ]
 
@@ -176,7 +206,10 @@ let render (state : State) dispatch =
     Html.div [
         prop.children [
             renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
-            renderMap state
+            Html.div [
+                prop.className "map"
+                prop.children [ renderMap state ]
+            ]
         ]
     ]
 

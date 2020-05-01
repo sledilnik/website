@@ -18,7 +18,7 @@ window.Highcharts = window.Highcharts || Highcharts;
 Highcharts.lo
 
 Highcharts.setOptions({
-	global: { 
+	global: {
 		useUTC: false // true by default
     },
     lang: {
@@ -91,7 +91,7 @@ Highcharts.setOptions({
 
           // Add hover state to linked series
           //if (hasLinkedSeries(item)) {
-              
+
           //    setLinkedSeriesState(item, 'hover')
           //}
           // A CSS class to dim or hide other than the hovered series
@@ -109,18 +109,18 @@ Highcharts.setOptions({
 
       // A CSS class to dim or hide other than the hovered series
       boxWrapper.removeClass(activeClass);
-      
+
       let peers = getLinkedSeries(item);
       for (let peer of peers) peer.setState();
-  
+
       // Remove hover state from linked series
       //if(hasLinkedSeries(item)) {
       //    setLinkedSeriesState(item)
       //}
-      
+
       item.setState();
-      
-      
+
+
   })
   .on('click', function (event) {
       var strLegendItemClick = 'legendItemClick',
@@ -259,13 +259,7 @@ function wrapLabelFormatterWithThis({legend, ...options}) {
 }
 
 function renderChart(options) {
-  //console.log("yy", genericArray (options.yAxis, ["title"]));
-  //options["yAxis"] = genericArray (options.yAxis, ["title"])
-  //options["yAxis"] = [{title: {name:"aaa"}}, {title: {name:"bbb"}}]
-  //options["yAxis"] = options.yAxis.map((item) => objectWithFields(item, ["title"]));
-  //options = bpOptions;
   options = wrapLabelFormatterWithThis(options);
-  //console.log("chart options:", options);
   return React.createElement(HighchartsReact, {
     highcharts: Highcharts,
     containerProps: {style: {height:"100%"}},
@@ -273,27 +267,15 @@ function renderChart(options) {
   }, null);
 }
 
-function renderMap(mapName, options) {
-    //console.log("map options:", options);
+function renderMap(options) {
     options = wrapLabelFormatterWithThis(options);
-    let mapData = Highcharts.maps[mapName];
-    let addMapToSeries = ({ series, ...options }) =>
-        ({
-            series: series.map(series => ({mapData, ...series})),
-            ...options
-        });
-    options = addMapToSeries(options);
-    //console.log("map options:", options);
-    //return <HighchartsReact
     return React.createElement(HighchartsReact, {
-        containerProps: {style: {height:"100%"}},
         highcharts: Highcharts,
+        containerProps: {style: {height:"100%"}},
         constructorType: "mapChart",
         options: {...options, credits: {enabled: false}}
     }, null);
-    ///>
 }
-
 
 export {
     genericArray,

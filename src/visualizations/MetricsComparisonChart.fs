@@ -46,8 +46,8 @@ module Metrics  =
         { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash; Label="Preboleli (skupaj)"; Class="cs-recoveredToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (aktivni)"; Class="cs-inHospital" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
-        { Metric=InICU;                Color="#bf5747"; Visible=true;  Line=Solid; Label="V intenzivni enoti (aktivni)"; Class="cs-inHospitalICU" }
-        { Metric=OnVentilator;         Color="#d99a91"; Visible=false; Line=Solid; Label="Na respiratorju (aktivni)"; Class="cs-inHospitalVentilator" }
+        { Metric=InICU;                Color="#d99a91"; Visible=true;  Line=Solid; Label="V intenzivni enoti (aktivni)"; Class="cs-inHospitalICU" }
+        { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid; Label="Na respiratorju (aktivni)"; Class="cs-inHospitalVentilator" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
         { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
         { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid; Label="Umrli (na dan)"; Class="cs-deceased" }
@@ -136,7 +136,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     //showInLegend = true
                     //fillOpacity = 0
                 |}
-        yield addContainmentMeasuresFlags startTime |> pojo
+        yield addContainmentMeasuresFlags startTime None |> pojo
     ]
 
     let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"

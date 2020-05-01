@@ -175,7 +175,7 @@ let renderChartOptions scaleType (data : StatsData) =
     let mutable startTime = startDate |> jsTime
 
     let allSeries = [|
-        yield pojo 
+        yield pojo
             {|
                 //visible = true
                 id = "data"
@@ -192,7 +192,7 @@ let renderChartOptions scaleType (data : StatsData) =
                 //showInLegend = true
                 //fillOpacity = 0
             |}
-        yield addContainmentMeasuresFlags startTime |> pojo
+        yield addContainmentMeasuresFlags startTime None |> pojo
 
         //if scaleType = Absolute then
         (*

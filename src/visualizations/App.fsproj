@@ -5,7 +5,6 @@
     <ItemGroup>
         <Compile Include="Types.fs" />
         <Compile Include="Highcharts.fs" />
-        <Compile Include="GoogleCharts.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Statistics.fs" />
         <Compile Include="data/Loader.fs" />
@@ -21,6 +20,7 @@
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="HospitalsChart.fs" />
         <Compile Include="TestsChart.fs" />
+        <Compile Include="CasesChart.fs" />
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
         <Compile Include="InfectionsChart.fs" />

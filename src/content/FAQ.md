@@ -5,66 +5,66 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 ## Splošno
 
 <details>
-  <summary>Zakaj Sledilnik?</summary>
+  <summary id=why-sledilnik>Zakaj Sledilnik?</summary>
 
 Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](#/about). 
 
 </details>
 
 <details>
-  <summary>Kakšna je razlika med SARS-Cov-2 in COVID-19?</summary>
+  <summary id=virus-vs-disease>Kakšna je razlika med SARS-Cov-2 in COVID-19?</summary>
 
 **SARS-CoV-2** je angleška okrajšava za “Severe Acute Respiratory Syndrome Coronavirus 2” – to je mednarodno sprejeto ime virusa, ki povzroča bolezen **COVID-19**. Tudi slednje poimenovanje je kratica, skovana iz besed COrona VIrus Disease ter 2019, torej leta, ko je bolezen prvič izbruhnila.
 
 </details>
 
 <details>
-  <summary>Kakšna je razlika med novookužen in potrjeno okužen?</summary>
+  <summary id=confirmed-cases>Kakšna je razlika med novookužen in potrjeno okužen?</summary>
 
 V Sledilniku uporabljamo terminologijo, ki je razložena v odgovoru Kaj pomeni izraz …? Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
 
 </details>
 
 <details>
-  <summary>Je kjer koli mogoče dobiti statistiko vseh obolelih, tudi asimptomatskih primerov?</summary>
+  <summary id=all-infected>Je kjer koli mogoče dobiti statistiko vseh obolelih, tudi asimptomatskih primerov?</summary>
 
 To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del populacije (bolniki z znaki in simptomi akutne okužbe dihal, ki bi lahko potrebovali zdravljenje v bolnišnici, zdravstveni delavci in oskrbovanci DSO s simptomi okužbe dihal, starejši nad 60 let po presoji zdravnika), zato je v statistiko lahko zajet le del populacije, ki očitno kaže znake okužbe, mlajša oz. netestirana populacija je torej za zdaj disproporcionalno zastopana. Statistike asimptomatskih bolnikov, ki ne kažejo simptomov in niso zato nikjer zavedeni, tako ni mogoče dobiti. 
 
 </details>
 
 <details>
-  <summary>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
+  <summary id=other-countries>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](#/links).
+Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](#/links).
 
 </details>
 
 <details>
-  <summary>Ali obstaja vaša stran tudi v angleščini?</summary>
+  <summary id=english-translation>Ali obstaja vaša stran tudi v angleščini?</summary>
 
 Deloma. V celoti zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna koda, če bi se želel kdo lotiti tega podviga. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
-V angleškem jeziku obstaja samo [stran "O projektu"]([https://covid-19.sledilnik.org/#/about/en](https://covid-19.sledilnik.org/#/about/en), ki zajema osnovne podatke in vire podatkov.
+V angleškem jeziku obstaja samo [stran O projektu](https://covid-19.sledilnik.org/#/about/en), ki zajema osnovne podatke in vire podatkov.
 
 </details>
 
 <details>
-  <summary>Kdo vas plačuje za izdelavo teh preglednic oz. ali s temi podatki kaj zaslužite?</summary>
+  <summary id=are-you-paid>Kdo vas plačuje za izdelavo teh preglednic oz. ali s temi podatki kaj zaslužite?</summary>
 
 Nihče oz. ne. Sledilnik je neprofitna pobuda, ustvarjena kot podpora sprotnemu zbiranju in urejanju ključnih podatkov o širjenju koronavirusa pri nas. Naša baza podatkov je javna in prosto dostopna, torej brezplačna in nekomercialna, in bo takšna tudi ostala. Gl. tudi vprašanje Kako lahko pridobim in uporabim vašo bazo podatkov.
 
 </details>
 
 <details>
-  <summary>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
+  <summary id=tech-used>Katere tehnologije ste uporabili za izdelavo spletne strani/aplikacije?</summary>
 
-Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.com)). Narejena je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts in Google Charts, projekt pa je odprt in na voljo na [GitHubu - Sledilnik](https://github.com/sledilnik).
+Stran je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F# s pomočjo knjižnic Highcharts, projekt pa je odprt in na voljo na [GitHubu - Sledilnik](https://github.com/sledilnik).
 
 </details>
 
 ## O podatkih
 
 <details>
-  <summary>So vaši podatki in prikazi verodostojni?</summary>
+  <summary id=data-reliability>So vaši podatki in prikazi verodostojni?</summary>
 
 Podatke zbiramo iz različnih uradnih in drugih javnih virov – navedeni so v [zavihku Viri](#/sources). 
 
@@ -73,7 +73,7 @@ Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, N
 </details>
 
 <details>
-  <summary>Kako zbirate in urejate podatke?</summary>
+  <summary id=data-collection>Kako zbirate in urejate podatke?</summary>
 
 [Bazo podatkov](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) urejamo s podatki NIJZ (po kategorijah). Podatke po regijah in starosti kdaj tudi kasneje dopolnjujemo in navzkrižno preverjamo, ko se spremenijo zaradi epidemioloških raziskav. Podatke o občinah sledimo v [tabeli Kraji](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).
 
@@ -94,7 +94,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
   </details>
 
 <details>
-  <summary>Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</summary>
+  <summary id=data-publish-time>Kdaj objavljate podatke? Zakaj so nekateri podatki osveženi z današnjim dnem, drugi pa imajo včerajšnji datum?</summary>
 
 Večina podatkov se zbira za pretekli dan ob 23.59 (testi, potrjene okužbe ...), podatke o hospitalizacijah pa večinoma pridobimo do 9. ure vsak dan za vse bolnišnice. **Naši podatki so tako osveženi ponavadi med 10.00 in 12.00**.  
 
@@ -103,30 +103,30 @@ Ko objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih
 </details>
 
 <details>
-  <summary>Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj?</summary>
+  <summary id=data-differences>Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj?</summary>
 
 Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (4. 3. 2020). Razlike v objavljenih podatkih se po navadi pojavijo zato, ker so bili zajeti ob različnih urah dneva.
 
-(Gl. tudi vprašanje So podatki verodostojni?)</p>
+(Gl. tudi vprašanje <a href="#data-reliability">So podatki verodostojni?</a>)</p>
 
 </details>
 
 <details>
-  <summary>Zakaj poleg trenutno hospitaliziranih ne prikazujete tudi, koliko ljudi je bilo na določen dan sprejetih v hospitalizacijo?</summary>
+  <summary id=data-hospital-in>Zakaj poleg trenutno hospitaliziranih ne prikazujete tudi, koliko ljudi je bilo na določen dan sprejetih v hospitalizacijo?</summary>
 
 Bolnišnice o posameznih sprejemih ali odpustih, iz katerih bi lahko pridobili natančne podatke, ne poročajo. Število sprejemov in odpustov na določen dan lahko zaznamo le iz spremembe trenutno hospitaliziranih. Če je bilo recimo pet sprejetih in štirje odpuščeni, je iz naših podatkov zaznan le en sprejem. Ker želimo na grafih sporočati le dejanske, preverjene podatke, pomanjkljivih podatkov o številu hospitaliziranih na dan ne bomo vključili, dokler se sistematika sledenja ne spremeni. 
 
 </details>
 
 <details>
-  <summary>Kako pridobivate podatke o odpuščenih iz bolnišnic?</summary>
+  <summary id=data-hospital-out>Kako pridobivate podatke o odpuščenih iz bolnišnic?</summary>
 
 Podatek **Odpuščeni iz bolnišnice** je Sledilnikova ocena, izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Ker pa bolnišnice ne poročajo vseh sprejemov in odpustov iz bolnišnice, je naša ocena narejena na podlagi spremembe trenutno hospitaliziranih pacientov (če trenutno število pacientov pade, sklepamo, da so bili odpuščeni). Zato je naša ocena konzervativna (nižja od dejanskega števila odpuščenih bolnikov).
 
 </details>
 
 <details>
-  <summary>Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?</summary>
+  <summary id=data-recovered>Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?</summary>
 
 Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo trenutno poteka [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo s prostovoljnim testiranjem na vzorcu pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?) 
 
@@ -137,20 +137,21 @@ Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countri
 </details>
 
 <details>
-  <summary>Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?</summary>
+  <summary id=data-active-cases>Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?</summary>
 
 Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
 
-Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni.
+Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred tremi tedni (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19. 
 
-- Preboleli (skupaj) = Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen povprečno preboli najkasneje v 21 dneh; tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih tri tedne pred danim datumom. Ocena je seveda poenostavljena, saj ne upošteva primerov resnejših komplikacij in posledic bolezni COVID-19. 
+Formula za izračun vrednosti:
+- Preboleli (skupaj) = Potrjeno okuženi (skupaj) pred 21 dnevi – Umrli (skupaj) do dneva izračuna
 
 - Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
 
 </details>
 
 <details>
-  <summary>Kako se lahko uporabniki aktivno vključimo v oddajo podatkov? Kako lahko sodelujem?</summary>
+  <summary id=data-contribute>Kako se lahko uporabniki aktivno vključimo v oddajo podatkov? Kako lahko sodelujem?</summary>
 
 Sledilnik ne zbira osebnih podatkov uporabnikov niti podatkov, ki bi jih želeli o svojem stanju ali o stanju v bolnišnicah posredovati posamezniki.
 
@@ -159,14 +160,14 @@ Lahko pa uporabniki prostovoljno pomagate z zbiranjem in preverjanjem podatkov i
 </details>
 
 <details>
-  <summary>Kako urejate podatke?</summary>
+  <summary id=data-collection>Kako urejate podatke?</summary>
 
 Celoten postopek zbiranja in urejanja podatkov je opisan na strani [O projektu](#/about).
 
 </details>
 
 <details>
-  <summary>Kako lahko pridobim in uporabim vašo bazo podatkov?</summary>
+  <summary id=data-usage>Kako lahko pridobim in uporabim vašo bazo podatkov?</summary>
 
 Naša baza podatkov je javna in prosto dostopna v obliki [**CSV**, **REST** in **Google Sheet**](#/datasources). Prosimo vas le, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
 
@@ -177,21 +178,21 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 ## O izračunih in grafih
 
 <details>
-  <summary>Lahko uporabim vaše grafe na svoji strani? Kako?</summary>
+  <summary id=chart-usage>Lahko uporabim vaše grafe na svoji strani? Kako?</summary>
 
 Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz – ob navedbi vira, seveda. [Kliknite sem](#/embed) in s seznama izberite graf, ki ga želite vgraditi. O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav](#/links). 
 
 </details>
 
 <details>
-  <summary>Kaj pomenijo odstotki, ki se pojavljajo v informativnih okvirčkih na vrhu strani?</summary>
+  <summary id=chart-infocard-percent>Kaj pomenijo odstotki, ki se pojavljajo v informativnih okvirčkih na vrhu strani?</summary>
 
 Gre za odstotno stopnjo rasti na današnji dan v številu oseb glede na prejšnji dan. Če je, recimo, včeraj bilo v intenzivni enoti 16 oseb, danes pa so sprejeli še štiri, je to 25 % več glede na včerajšnje stanje.  
 
 </details>
 
 <details>
-  <summary>Kaj kaže graf "Širjenje COVID-19 v Sloveniji"?</summary>
+  <summary id=chart-metrics>Kaj kaže graf "Širjenje COVID-19 v Sloveniji"?</summary>
 
 Graf prikazuje dnevno in skupno dinamiko širjenja okužbe od začetka do danes. Uporabljeni kazalniki (gl. Katere kazalnike vključuje graf o širjenju?) nam pomagajo razumeti, ali in kako uspešno obvladujemo širjenje virusa. Spremljamo lahko, kakšen je dnevni prirast okuženih, in posredno vidimo, ali ukrepi delujejo; iz podatka o številu hospitaliziranih in deleža teh v intenzivni enoti lahko razberemo, koliko oseb je bolezen resno ogrozila, hkrati pa nam ti podatki kažejo tudi, kolikšna je obremenjenost zdravstvenega sistema.
 
@@ -200,7 +201,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 </details>
 
 <details>
-  <summary>Katere kazalnike vključuje graf "Širjenje COVID-19 v Sloveniji"?</summary>
+  <summary id=chart-metrics-included>Katere kazalnike vključuje graf "Širjenje COVID-19 v Sloveniji"?</summary>
 
 * **Testiranja (na dan)** = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19. V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.
 
@@ -212,7 +213,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
 
-* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih tri tedne pred danim datumom ob predpostavki, da se bolezen povprečno preboli najkasneje v 21 dneh.
+* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih tri tedne pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 21 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih.
 
 * **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
@@ -233,7 +234,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
   </details>
 
 <details>
-  <summary>Kaj pomeni izraz …? </summary>
+  <summary id=chart-terminology>Kaj pomeni izraz …? </summary>
 
 * **potrjeno okuženi** = To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjeno okuženih oseb odvisno zgolj od testiranja in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
 
@@ -243,12 +244,12 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
 
-* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
+* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti –, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
   
   </details>
 
 <details>
-  <summary>Kaj pomenijo različne faze (faze 1–faza 6), ki jih vidimo v grafih?</summary>
+  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 6), ki jih vidimo v grafih?</summary>
 
 Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).
 
@@ -269,7 +270,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 </details>
 
 <details>
-  <summary>Kaj nam pove graf "Obravnava hospitaliziranih"?</summary>
+  <summary id=chart-patients>Kaj nam pove graf "Obravnava hospitaliziranih"?</summary>
 
 Graf ima dva prikaza, eden nam kaže število oseb v bolnišnični oskrbi na ta dan po bolnišnicah, če pa pogled spremenimo s klikom na Obravnava po pacientih, vidimo celotno sliko hospitalizacij glede na stanje pacientov: kolikšno število hospitaliziranih je v enoti intenzivne nege, koliko od teh je v kritičnem stanju in potrebuje respirator, koliko je odpuščenih in umrlih. 
 
@@ -278,14 +279,14 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 </details>
 
 <details>
-  <summary>Zakaj kaže graf "Prirast potrjeno okuženih" primerjavo z Južno Korejo?</summary>
+  <summary id=chart-spread>Zakaj kaže graf "Prirast potrjeno okuženih" primerjavo z Južno Korejo?</summary>
 
 Če na grafu izberemo pogled **Eksponentna rast v dnevih**, lahko vidimo povprečje rasti v istem časovnem obdobju tudi za Južno Korejo. To smo izbrali za primerjavo zato, ker ji je kljub močnemu izbruhu bolezni COVID-19 uspelo z različnimi metodami “sploščiti krivuljo” oz. povedano drugače – Južna Koreja je ena najuspešnejših držav pri obvladovanju epidemije.
 
 </details>
 
 <details>
-  <summary>Kaj pomenijo različni prikazi dnevnega prirasta v grafu "Prirast potrjeno okuženih"?</summary>
+  <summary id=chart-spread-pages>Kaj pomenijo različni prikazi dnevnega prirasta v grafu "Prirast potrjeno okuženih"?</summary>
 
 * **Absolutni dnevni prirast** prikazuje število novih primerov potrjeno okuženih na določen dan.
 
@@ -296,7 +297,7 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
   </details>
 
 <details>
-  <summary>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
+  <summary id=chart-cases>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
 
 **Zaprti primeri** so seštevek vseh potrjeno okuženih, ki niso več okuženi z virusom, torej ozdravljenih oseb in mrtvih.
 
@@ -305,14 +306,14 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 </details>
 
 <details>
-  <summary>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
+  <summary id=chart-double-rate>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
 
 Na prikazu **Potrjeno okuženi po občinah** je vključena ocena **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
 
 </details>
 
 <details>
-  <summary>So vaši grafi slika realnega stanja?</summary>
+  <summary id=chart-reality>So vaši grafi slika realnega stanja?</summary>
 
 Da, kolikor so lahko, če se zavedamo omejitev trenutnih prikazov: grafi na tej strani prikazujejo le tisto, kar je mogoče ugotoviti glede na dane podatke. Tako recimo skupno število testiranj pomeni število vseh opravljenih testov do danes, ne izraža pa skupnega števila vseh testiranih oseb, saj so nekatere osebe, na primer zdravstveni delavci in osebe, pri katerih sumijo na okužbo, testirane večkrat.
 
@@ -323,7 +324,7 @@ Zato je treba te kategorije jemati z védenjem, kaj pomenijo, in interpretirati 
 </details>
 
 <details>
-  <summary>Kako računate odstotni (%) prirast? </summary>
+  <summary id=chart-percentage>Kako računate odstotni (%) prirast? </summary>
 
 Za odstotni prirast vzamemo trenutno vrednost spremenljivke in od nje odštejemo stanje prejšnjega dne. Dobljeno razliko delimo s stanjem prejšnjega dne in jo pomnožimo s 100, da dobimo odstotni prirast, ki ga za potrebe predstavitve zaokrožimo na eno decimalko natančno.
 
@@ -332,14 +333,14 @@ Zavedamo se, da obstajajo drugačne metode, ki odstotni prirast prikazujejo drug
 </details>
 
 <details>
-  <summary>Kaj pomeni logaritemska skala na Y osi in kako deluje?</summary>
+  <summary id=chart-log-scale>Kaj pomeni logaritemska skala na Y osi in kako deluje?</summary>
 
 Logaritemska skala na navpični osi (ordinata, Y os) je izjemno uporabna za prikaz funkcij oz. količin, ki zelo hitro naraščajo – recimo za t.i. eksponentno rast okuženih –, saj bi v navadnem merilu hitro prerasla najvišjo vrednost na ordinatni osi. 
 
 </details>
 
 <details>
-  <summary>Kaj pomeni “eksponentna rast okuženih”? Kako lahko merimo, s kakšno hitrostjo se širi epidemija?</summary>
+  <summary id=chart-exp-growth>Kaj pomeni “eksponentna rast okuženih”? Kako lahko merimo, s kakšno hitrostjo se širi epidemija?</summary>
 
 Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnja rasti okužb, saj to vpliva tudi na število obolelih in smrti. Če se število okužb v nekem določenem času povečuje za enako število, npr. za 10 vsake tri dni – 10, 20, 30, 40 ..., gre za *linearno rast primerov*; če pa se število okužb v določenem časovnem obdobju podvoji, recimo podvojitev za 10 vsake 3 dni – 10, 20, 40, 80 …, pa govorimo o *eksponentni rasti*, ki v kratkem času privede do zelo velikega števila obolelih.
 
@@ -350,7 +351,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 ## O projektu
 
 <details>
-  <summary>Kaj je Sledilnik?</summary>
+  <summary id=what-is-sledilnik>Kaj je Sledilnik?</summary>
 
 [Sledilnik je projekt](#/about), ki zbira, analizira in prikazuje nekaj najbolj uporabnih podatkov, da bi lahko bolje razumeli širjenje pandemije koronavirusa in bolezni COVID-19 skupaj z njeno dinamiko in obsegom. 
 
@@ -359,7 +360,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 </details>
 
 <details>
-  <summary>Imam odlično povezavo na stran, ki je vi še nimate v povezavah, pa bi si tam zaslužila biti. Jo boste dodali?</summary>
+  <summary id=add-link>Imam odlično povezavo na stran, ki je vi še nimate v povezavah, pa bi si tam zaslužila biti. Jo boste dodali?</summary>
 
 Pišite nam na info@sledilnik.org – predlagano povezavo bomo preverili in jo, če je stran verodostojna in koristna, z veseljem vključili med naše povezave.
 
@@ -368,7 +369,7 @@ Pišite nam na info@sledilnik.org – predlagano povezavo bomo preverili in jo, 
 </details>
 
 <details>
-  <summary>Želim pomagati, kje lahko začnem?</summary>
+  <summary id=how-to-help>Želim pomagati, kje lahko začnem?</summary>
 
 Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!
 

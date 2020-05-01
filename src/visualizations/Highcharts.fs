@@ -10,6 +10,9 @@ open Types
 [<Import("renderChart", from="./_highcharts")>]
 let chart: obj -> ReactElement = jsNative
 
+[<Import("renderMap", from="./_highcharts")>]
+let map: obj -> ReactElement = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -71,16 +74,9 @@ let shadedWeekendPlotBands =
                 |}
     |]
 
-// trigger event for iframe resize
-
-let myLoadEvent(name: String) =
-    let ret(event: Event) =
-        let evt = document.createEvent("event")
-        evt.initEvent("chartLoaded", true, true);
-        document.dispatchEvent(evt)
-    ret
-
-let addContainmentMeasuresFlags(startTime: JsTimestamp) =
+let addContainmentMeasuresFlags
+    (startDate: JsTimestamp)
+    (endDate: JsTimestamp option) =
     let events = [|
     // day, mo, color,    title,       tooltip text
         4,  3, "#FFFFFF", "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
@@ -99,7 +95,7 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
         29, 4, "#ebfaeb", "Muzeji",    "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
         30, 4, "#ebfaeb", "Občine",    "Sproščanje: gibanje izven meja svoje občine"
-        4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+        //4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
     |]
     {|
         ``type`` = "flags"
@@ -109,9 +105,31 @@ let addContainmentMeasuresFlags(startTime: JsTimestamp) =
         data =
             events |> Array.choose (fun (d,m,color,title,text) ->
                 let ts = DateTime(2020,m,d) |> jsTime
-                if ts >= startTime then Some {| x=ts; fillColor=color; title=title; text=text |}
+                let showMeasure =
+                    match startDate, endDate with
+                    | startDate, None -> ts >= startDate
+                    | startDate, Some endDate ->
+                        ts >= startDate && ts <= endDate
+
+                if showMeasure then
+                    Some {| x=ts; fillColor=color; title=title; text=text |}
                 else None
             )
+    |}
+
+(* Trigger document event for iframe resizing *)
+let onLoadEvent (name : String) =
+    let res (e : Event) =
+        let event = document.createEvent("Event")
+        event.initEvent("chartLoaded", true, true)
+        document.dispatchEvent(event)
+    res
+
+let optionsWithOnLoadEvent (className : string) =
+    {| chart = pojo
+        {| events = pojo
+            {| load = onLoadEvent(className) |}
+        |}
     |}
 
 let basicChartOptions (scaleType:ScaleType) (className:string)=
@@ -123,7 +141,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 zoomType = "x"
                 //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
-                events = pojo {| load = myLoadEvent(className) |}
+                events = pojo {| load = onLoadEvent(className) |}
             |}
         title = pojo {| text = None |}
         xAxis = [|
