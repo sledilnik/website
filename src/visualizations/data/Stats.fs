@@ -26,10 +26,6 @@ type private TransferStatsDataPoint =
       month : int
       day : int
       phase : string
-      performedTestsToDate : int option
-      performedTests : int option
-      positiveTestsToDate : int option
-      positiveTests : int option
       tests :
         {|
             performed : {| toDate : int option; today : int option |}
@@ -73,10 +69,6 @@ type private TransferStatsDataPoint =
         { DayFromStart = this.dayFromStart
           Date = System.DateTime(this.year, this.month, this.day)
           Phase = this.phase
-          PerformedTests = this.performedTests
-          PerformedTestsToDate = this.performedTestsToDate
-          PositiveTests = this.positiveTests
-          PositiveTestsToDate = this.positiveTestsToDate
           Tests =
             { Performed = { ToDate = this.tests.performed.toDate; Today = this.tests.performed.today }
               Positive = { ToDate = this.tests.positive.toDate; Today = this.tests.positive.today }
