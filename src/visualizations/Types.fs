@@ -10,6 +10,21 @@ type RemoteData<'data, 'error> =
     | Failure of 'error
     | Success of 'data
 
+type TestMeasure =
+    { ToDate : int option
+      Today : int option }
+
+type TestGroup =
+    { Performed : TestMeasure
+      Positive : TestMeasure }
+
+type Tests =
+    { Performed : TestMeasure
+      Positive : TestMeasure
+      Regular : TestGroup
+      NsApr20 : TestGroup
+    }
+
 type Cases =
     { ConfirmedToday : int option
       ConfirmedToDate : int option
@@ -17,22 +32,6 @@ type Cases =
       ClosedToDate : int option
       Active : int option
     }
-
-type TestsGroup =
-    | Total
-    | Regular
-    | SurveyApr2020
-with
-    static member all = [ Total; Regular; SurveyApr2020; ]
-    static member getName = function
-        | Total -> "Skupaj"
-        | Regular -> "Redno"
-        | SurveyApr2020 -> "Raziskava"
-
-type Tests =
-    { TestGroup : TestsGroup    
-      ToDate : int option
-      Today : int option }
 
 type Treatment =
     { InHospital : int option
@@ -73,8 +72,7 @@ type StatsDataPoint =
       PerformedTestsToDate : int option
       PositiveTests : int option
       PositiveTestsToDate : int option
-      //PerformedTests : Tests list
-      //PositiveTests : Tests list
+      Tests : Tests
       Cases : Cases
       StatePerTreatment : Treatment
       StatePerAgeToDate : AgeGroupsList

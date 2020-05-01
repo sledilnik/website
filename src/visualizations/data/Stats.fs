@@ -30,6 +30,21 @@ type private TransferStatsDataPoint =
       performedTests : int option
       positiveTestsToDate : int option
       positiveTests : int option
+      tests :
+        {|
+            performed : {| toDate : int option; today : int option |}
+            positive : {| toDate : int option; today : int option |}
+            regular : 
+              {| 
+                performed : {| toDate : int option; today : int option |}
+                positive : {| toDate : int option; today : int option |}
+              |}
+            nsApr20 : 
+              {| 
+                performed : {| toDate : int option; today : int option |}
+                positive : {| toDate : int option; today : int option |}
+              |}
+        |}
       cases :
         {| confirmedToday : int option
            confirmedToDate : int option
@@ -62,6 +77,16 @@ type private TransferStatsDataPoint =
           PerformedTestsToDate = this.performedTestsToDate
           PositiveTests = this.positiveTests
           PositiveTestsToDate = this.positiveTestsToDate
+          Tests =
+            { Performed = { ToDate = this.tests.performed.toDate; Today = this.tests.performed.today }
+              Positive = { ToDate = this.tests.positive.toDate; Today = this.tests.positive.today }
+              Regular =
+                { Performed = { ToDate = this.tests.regular.performed.toDate; Today = this.tests.regular.performed.today }
+                  Positive = { ToDate = this.tests.regular.positive.toDate; Today = this.tests.regular.positive.today } }
+              NsApr20 =
+                { Performed = { ToDate = this.tests.nsApr20.performed.toDate; Today = this.tests.nsApr20.performed.today }
+                  Positive = { ToDate = this.tests.nsApr20.positive.toDate; Today = this.tests.nsApr20.positive.today } }
+            }
           Cases =
             { ConfirmedToday = this.cases.confirmedToday
               ConfirmedToDate = this.cases.confirmedToDate
