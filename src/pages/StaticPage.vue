@@ -11,7 +11,7 @@ export default {
   name: 'StaticPage',
   props: {
     name: String,
-    content: Promise,
+    content: String,
   },
   mounted() {
     this.initDropdowns;
