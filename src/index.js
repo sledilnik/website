@@ -139,6 +139,14 @@ const router = new VueRouter({
   mode: "history",
 })
 
+router.beforeEach((to, from, next) => {
+  console.log(to)
+  if(to.hash === "") {
+    window.scrollTo(0, 0)
+  }
+  next()
+})
+
 new Vue({
   render: h => h(App),
   router,
