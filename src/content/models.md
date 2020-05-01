@@ -42,7 +42,7 @@ Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.u
 Podrobnejši opis metodologije in izsledkov je objavljen kot [članek v Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068).
 
 <a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
-<img alt="R_t model" src="http://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
+<img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
 
 
 
