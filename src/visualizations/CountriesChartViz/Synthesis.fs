@@ -83,7 +83,7 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
-let tooltipFormatter jsThis =
+let tooltipFormatter state jsThis =
     let points: obj[] = jsThis?points
 
     match points with
@@ -108,11 +108,18 @@ let tooltipFormatter jsThis =
 
                     s.Append "<tr>" |> ignore
                     let countryTooltip =
-                        sprintf
-                            "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
-                            countryCode
-                            date
-                            (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                        match state.XAxisType with
+                        | ByDate ->
+                            sprintf
+                                "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                countryCode
+                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                        | _ ->
+                            sprintf
+                                "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                countryCode
+                                date
+                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
                     s.Append countryTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )

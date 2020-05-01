@@ -37,6 +37,7 @@ type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
+    | XAxisTypeChanged of XAxisType
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
@@ -46,7 +47,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
-        XAxisType = DaysSinceFirstDeath
+        XAxisType = ByDate// DaysSinceFirstDeath
         ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
@@ -97,6 +98,8 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             printfn "Success %A" data
 
         { state with OwidDataState = Current remoteData }, Cmd.none
+    | XAxisTypeChanged newXAxisType ->
+        { state with XAxisType = newXAxisType }, Cmd.none
     | ScaleTypeChanged newScaleType ->
         { state with ScaleType = newScaleType }, Cmd.none
 
@@ -209,7 +212,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter jsThis
+                          formatter = fun () -> tooltipFormatter state jsThis
                           shared = true
                           useHTML = true
                         |}
@@ -249,6 +252,30 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
         |> prop.children
     ]
 
+let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
+    let renderXAxisSelector (axisSelector: XAxisType) =
+        let active = axisSelector = activeXAxisType
+        Html.div [
+            match axisSelector with
+            | ByDate -> "kronološko"
+            | DaysSinceFirstDeath -> "od prve smrti"
+            | DaysSinceOneDeathPerMillion -> "od prve smrti na milij. preb."
+            |> prop.text
+
+            prop.className [
+                true, "btn btn-sm metric-2-selector"
+                active, "metric-2-selector--selected selected" ]
+            if not active then prop.onClick (fun _ -> dispatch axisSelector)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-2-selectors"
+        [ ByDate; DaysSinceFirstDeath; DaysSinceOneDeathPerMillion]
+        |> List.map renderXAxisSelector
+        |> prop.children
+    ]
+
 let render state dispatch =
     let xAxisType = state.XAxisType
 
@@ -264,6 +291,9 @@ let render state dispatch =
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
+            renderXAxisSelectors
+                state.XAxisType
+                (XAxisTypeChanged >> dispatch)
 
             Html.div [
                 prop.className "disclaimer"

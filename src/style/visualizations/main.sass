@@ -69,6 +69,24 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       &:hover
         color: #fff
 
+  .btn.btn-sm.metric-2-selector
+    border: none
+    box-shadow: 0 3px 5px rgba(0,0,0,0.20)
+    transition: all 0.2s
+    background-color: #625fa7
+    color: white
+    font-weight: bold
+
+    &:hover
+      box-shadow: 0 3px 11px rgba(0,0,0,0.20)
+
+    &.metric-2-selector--selected
+      box-shadow: none
+      background-color: #3a3772
+
+      &:hover
+        color: #fff
+
   .disclaimer
     font-size: 13px
     color: $text-c
@@ -121,7 +139,23 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     &:hover
       border-color: $button-color
 
+  .metrics-2-selectors
+    margin-top: $gap/2
+    display: flex
+    flex-wrap: wrap
+
+  .metric-2-selector
+    margin: 0 $gap/6 $gap/3 $gap/6
+    font-size: $font-size
+    border-color: $inactive-button-color
+
+    &:hover
+      border-color: $button-color
+
   .metric-selector--selected
+    color: white
+
+  .metric-2-selector--selected
     color: white
 
   .metrics-comparison-chart
@@ -151,6 +185,12 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     .metric-selector
       background-color: white
     .metric-selector--selected
+      border-color: $gray-600
+      background-color: $gray-600
+
+    .metric-2-selector
+      background-color: white
+    .metric-2-selector--selected
       border-color: $gray-600
       background-color: $gray-600
 

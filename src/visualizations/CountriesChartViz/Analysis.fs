@@ -23,7 +23,12 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
 
     let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
         let dateStr = entryRaw.Date
-        let date = DateTime.Parse(dateStr)
+        let dateWithTime = DateTime.Parse(dateStr)
+        let date = DateTime
+                    (dateWithTime.Year,
+                     dateWithTime.Month,
+                     dateWithTime.Day,
+                     0, 0, 0)
 
         { Date = date
           TotalCases = float entryRaw.TotalCases
