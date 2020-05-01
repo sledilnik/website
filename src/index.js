@@ -129,7 +129,7 @@ const routes = [
         next(path);
         return;
       }
-      next({ name: 'stats' });
+      next({ path: '/stats' });
     }
   },
 ]
