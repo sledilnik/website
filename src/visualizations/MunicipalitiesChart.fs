@@ -12,7 +12,7 @@ open Types
 
 let barMaxHeight = 50
 let showMaxBars = 30
-let collapsedMnicipalityCount = 24
+let collapsedMunicipalityCount = 24
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
@@ -29,11 +29,14 @@ type Municipality =
       Name : string option
       RegionKey : string
       DoublingTime : float option
+      MaxPositiveTests : int option
+      LastPositiveTest : System.DateTime   
       TotalPositiveTest : TotalPositiveTestsForDate seq }
 
 type SortBy =
     | TotalPositiveTests
     | DoublingTime
+    | LastPositiveTest
 
 type Query (query : obj, regions : Region list) =
     member this.Query = query
@@ -52,6 +55,7 @@ type Query (query : obj, regions : Region list) =
             match sort.ToLower() with
             | "total-positive-tests" -> Some TotalPositiveTests
             | "time-to-double" -> Some DoublingTime
+            | "last-positive-test" -> Some LastPositiveTest
             | _ -> None
         | _ -> None
 
@@ -92,19 +96,28 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                                      TotalPositiveTests = municipality.PositiveTests |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
+            let totalPositiveTest =
+                dp
+                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
+                |> Seq.sortBy (fun dp -> dp.Date)
             let doublingTime =
                 dp
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.TotalPositiveTests |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
+            let maxValue = 
+                dp
+                |> Seq.map (fun dp -> dp.TotalPositiveTests)
+                |> Seq.filter Option.isSome
+                |> Seq.max
+            let maxDay = dp |> Seq.filter (fun p -> p.TotalPositiveTests = maxValue) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              TotalPositiveTest =
-                dp
-                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
-                |> Seq.sortBy (fun dp -> dp.Date)
+              MaxPositiveTests = maxValue
+              LastPositiveTest = maxDay.Date
+              TotalPositiveTest = totalPositiveTest
             })
 
     let state =
@@ -118,7 +131,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             | Some region -> region
           SortBy =
             match query.SortBy with
-            | None -> TotalPositiveTests
+            | None -> LastPositiveTest
             | Some sortBy -> sortBy }
 
     state, Cmd.none
@@ -145,14 +158,6 @@ let renderMunicipality (municipality : Municipality) =
 
     let truncatedData = data |> Seq.skip ((Seq.length data) - showMaxBars)
 
-    let maxValue =
-        try
-            truncatedData
-            |> Seq.map (fun d -> d.TotalPositiveTests)
-            |> Seq.filter Option.isSome
-            |> Seq.max
-        with
-            | _ -> None
 
     let renderedDoublingTime =
         match municipality.DoublingTime with
@@ -174,7 +179,7 @@ let renderMunicipality (municipality : Municipality) =
             ]
 
     let renderedBars =
-        match maxValue with
+        match municipality.MaxPositiveTests with
         | None -> Seq.empty
         | Some maxValue ->
             seq {
@@ -206,10 +211,8 @@ let renderMunicipality (municipality : Municipality) =
                         ]
                 }
 
-    let lastDataPoint = Seq.last data
-
     let totalPositiveTests =
-        match lastDataPoint.TotalPositiveTests with
+        match municipality.MaxPositiveTests with
         | None -> ""
         | Some v -> v.ToString()
 
@@ -238,7 +241,7 @@ let renderMunicipality (municipality : Municipality) =
                                 prop.text totalPositiveTests ]
                             Html.div [
                                 prop.className "date"
-                                prop.text (sprintf "%d. %s" lastDataPoint.Date.Day (Utils.monthNameOfdate lastDataPoint.Date)) ]
+                                prop.text (sprintf "%d. %s" municipality.LastPositiveTest.Day (Utils.monthNameOfdate municipality.LastPositiveTest.Date)) ]
                         ]
                     ]
                 ]
@@ -277,29 +280,16 @@ let renderMunicipalities (state : State) dispatch =
         | None, Some s2 -> -1
         | Some s1, Some s2 -> System.String.Compare(s1, s2)
 
+    let compareMaxTests m1 m2 =
+        if m1.MaxPositiveTests < m2.MaxPositiveTests then 1
+        else if m1.MaxPositiveTests > m2.MaxPositiveTests then -1
+        else compareStringOption m1.Name m2.Name
+
     let sortedMunicipalities =
         match state.SortBy with
         | TotalPositiveTests ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 ->
-                let lastDataPoint municipality =
-                    municipality.TotalPositiveTest
-                    |> Seq.choose (fun dp ->
-                        match dp.TotalPositiveTests with
-                        | None -> None
-                        | Some totalPositiveTests -> Some {| Date = dp.Date ; TotalPositiveTests = totalPositiveTests |})
-                    |> Seq.sortBy (fun dp -> dp.Date)
-                    |> Seq.tryLast
-                let t1 = lastDataPoint m1 |> Option.map (fun m -> m.TotalPositiveTests) |> Option.defaultValue 0
-                let t2 = lastDataPoint m2 |> Option.map (fun m -> m.TotalPositiveTests) |> Option.defaultValue 0
-                if t1 > t2 then -1
-                else if t1 < t2 then 1
-                else
-                    match m1.Name, m2.Name with
-                    | None, None -> 0
-                    | Some n1, None -> 1
-                    | None, Some n2 -> -1
-                    | Some n1, Some n2 -> System.String.Compare(n1, n2))
+            |> Seq.sortWith (fun m1 m2 -> compareMaxTests m1 m2)
         | DoublingTime ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
@@ -310,13 +300,19 @@ let renderMunicipalities (state : State) dispatch =
                 | Some d1, Some d2 ->
                     if d1 > d2 then 1
                     else if d1 < d2 then -1
-                    else compareStringOption m1.Name m2.Name)
+                    else compareMaxTests m1 m2)
+        | LastPositiveTest ->
+            dataFilteredByRegion
+            |> Seq.sortWith (fun m1 m2 -> 
+                if m1.LastPositiveTest < m2.LastPositiveTest then 1
+                else if m1.LastPositiveTest > m2.LastPositiveTest then -1
+                else compareMaxTests m1 m2)
 
     let truncatedData, displayShowAllButton =
         if state.ShowAll = true
         then sortedMunicipalities, true
-        else if Seq.length sortedMunicipalities <= collapsedMnicipalityCount then sortedMunicipalities, false
-        else Seq.take collapsedMnicipalityCount sortedMunicipalities, true
+        else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
+        else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
     (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality), displayShowAllButton)
 
@@ -386,6 +382,7 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
             Html.text "Razvrsti:"
             renderSelector currenSortBy SortBy.TotalPositiveTests "Absolutno"
             renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve"
+            renderSelector currenSortBy SortBy.LastPositiveTest "Zadnjem primeru"
         ]
     ]
 
