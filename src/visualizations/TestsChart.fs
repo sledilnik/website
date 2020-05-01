@@ -9,13 +9,24 @@ open Feliz.ElmishComponents
 open Types
 open Highcharts
 
+type DisplayType =
+    | Total
+    | Regular
+    | NsApr20
+with
+    static member all = [ Total; Regular; NsApr20; ]
+    static member getName = function
+        | Total -> "Skupaj"
+        | Regular -> "Redno"
+        | NsApr20 -> "Raziskava"
+
 type State = {
     data: StatsData
-    displayType: TestsGroup
+    displayType: DisplayType
 }
 
 type Msg =
-    | ChangeDisplayType of TestsGroup
+    | ChangeDisplayType of DisplayType
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -33,8 +44,20 @@ let renderChartOptions (state : State) =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
-    let negativeTests (dp: StatsDataPoint) = dp.PerformedTests.Value - dp.PositiveTests.Value
-    let percentPositive (dp: StatsDataPoint) = Math.Round(float dp.PositiveTests.Value / float dp.PerformedTests.Value * float 100.0, 2)
+    let positiveTests (dp: StatsDataPoint) = 
+        match state.displayType with
+        | Total     -> dp.Tests.Positive.Today.Value
+        | Regular   -> dp.Tests.Regular.Positive.Today.Value
+        | NsApr20   -> dp.Tests.NsApr20.Positive.Today.Value
+    let negativeTests (dp: StatsDataPoint) =
+        match state.displayType with
+        | Total     -> dp.Tests.Performed.Today.Value - dp.Tests.Positive.Today.Value
+        | Regular   -> dp.Tests.Regular.Performed.Today.Value - dp.Tests.Regular.Positive.Today.Value
+        | NsApr20   -> dp.Tests.NsApr20.Performed.Today.Value - dp.Tests.NsApr20.Positive.Today.Value
+    let percentPositive (dp: StatsDataPoint) =
+        let positive = positiveTests dp 
+        let performed = positiveTests dp + negativeTests dp 
+        Math.Round(float positive / float performed * float 100.0, 2)
     
     let allYAxis = [|
         {|
@@ -72,7 +95,7 @@ let renderChartOptions (state : State) =
                 color = "#bda506"
                 yAxis = 0 
                 data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.PositiveTests)) |> Seq.toArray
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTests dp)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -137,24 +160,24 @@ let renderChartContainer (state : State) =
         ]
     ]
 
-let renderSelector state (dt: TestsGroup) dispatch =
+let renderSelector state (dt: DisplayType) dispatch =
     Html.div [
         let isActive = state.displayType = dt
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
         prop.className [ true, "btn btn-sm metric-selector"; isActive, "metric-selector--selected" ]
-        prop.text (TestsGroup.getName dt) ]
+        prop.text (DisplayType.getName dt) ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            TestsGroup.all
+            DisplayType.all
             |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
 
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state
-        //renderDisplaySelectors state dispatch
+        renderDisplaySelectors state dispatch
     ]
 
 let testsChart (props : {| data : StatsData |}) =
