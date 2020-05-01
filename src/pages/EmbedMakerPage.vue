@@ -52,12 +52,12 @@ export default {
         "Patients": {
           value: "Patients",
           text: 'Obravnava hospitaliziranih',
-          dimensions: [1140, 680]
+          dimensions: [1140, 720]
         },
         "Tests": {
           value: "Tests",
           text: 'Testiranje',
-          dimensions: [1140, 630]
+          dimensions: [1140, 720]
         },
         "Infections": {
           value: "Infections",
