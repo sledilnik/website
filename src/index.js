@@ -25,7 +25,7 @@ import * as sourcesMd from './content/sources.md'
 import * as modelsMd from './content/models.md'
 import * as datasourcesMd from './content/datasources.md'
 
-Vue.use(VueScrollTo)
+Vue.use(VueScrollTo, { offset: 60,})
 
 const routes = [
   {
@@ -137,20 +137,6 @@ const routes = [
 const router = new VueRouter({
   routes, // short for `routes: routes`
   mode: "history",
-  scrollBehavior(to) {
-    if (to.hash) {
-      const elm = document.querySelector(to.hash)
-      if (elm) {
-        let offset = 60
-        if (elm.tagName === "SECTION" && to.hash.endsWith("-chart")) {
-          offset = 90
-        }
-        return { selector: to.hash, offset: { x: 0, y: offset }}
-      }
-    } else {
-      return { x: 0, y: 0 }
-    }
-  },
 })
 
 new Vue({
