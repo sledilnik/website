@@ -11,7 +11,7 @@ open Feliz.ElmishComponents
 open Types
 
 let barMaxHeight = 50
-let showMaxBars = 30
+let showMaxBars = 21
 let collapsedMnicipalityCount = 24
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
@@ -154,6 +154,8 @@ let renderMunicipality (municipality : Municipality) =
         with
             | _ -> None
 
+    let maxDay = data |> Seq.filter (fun p -> p.TotalPositiveTests = maxValue) |> Seq.head
+
     let renderedDoublingTime =
         match municipality.DoublingTime with
         | None -> Html.none
@@ -206,10 +208,8 @@ let renderMunicipality (municipality : Municipality) =
                         ]
                 }
 
-    let lastDataPoint = Seq.last data
-
     let totalPositiveTests =
-        match lastDataPoint.TotalPositiveTests with
+        match maxDay.TotalPositiveTests with
         | None -> ""
         | Some v -> v.ToString()
 
@@ -238,7 +238,7 @@ let renderMunicipality (municipality : Municipality) =
                                 prop.text totalPositiveTests ]
                             Html.div [
                                 prop.className "date"
-                                prop.text (sprintf "%d. %s" lastDataPoint.Date.Day (Utils.monthNameOfdate lastDataPoint.Date)) ]
+                                prop.text (sprintf "%d. %s" maxDay.Date.Day (Utils.monthNameOfdate maxDay.Date)) ]
                         ]
                     ]
                 ]
