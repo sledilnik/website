@@ -112,7 +112,7 @@ let tooltipFormatter jsThis =
                             "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
                             countryCode
                             date
-                            (Utils.roundTo1Decimal dataValue)
+                            (Utils.formatTo1DecimalWithTrailingZero dataValue)
                     s.Append countryTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )
