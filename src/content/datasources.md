@@ -1,6 +1,6 @@
 ## Google Sheet
 
-- [https://tinyurl.com/sledilnik](http://tinyurl.com/sledilnik-gdocs)
+- [https://tinyurl.com/sledilnik](https://tinyurl.com/sledilnik-gdocs)
 
 ## CSV
 
