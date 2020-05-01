@@ -2,6 +2,7 @@
 
 ## Countries comparison
 
+- add controls for x-axis type switching
+- tooltip: sort countries by values
 - add other metrics - which ones?
-- how to make the series on the logarithmic scale start from the same point? 
 - add disclaimer

@@ -15,7 +15,8 @@ type CountriesDisplaySet = {
 type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
-    ScaleType : ScaleType
+    XAxisType: XAxisType
+    ScaleType: ScaleType
 }
 
 // source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
@@ -105,7 +106,7 @@ let tooltipFormatter jsThis =
     s.ToString()
 
 let prepareChartData
-    startingDayMode
+    xAxisType
     daysOfMovingAverage
     (state: ChartState)
     : ChartData option =
@@ -121,7 +122,7 @@ let prepareChartData
 
     let aggregated =
         state.OwidDataState
-        |> aggregateOurWorldInData startingDayMode daysOfMovingAverage
+        |> aggregateOurWorldInData xAxisType daysOfMovingAverage
 
     match aggregated with
     | Some aggregated ->
@@ -152,9 +153,10 @@ let prepareChartData
         {
             Series = series
             XAxisTitle =
-              match startingDayMode with
-                | FirstDeath -> "Št. dni od prvega smrtnega primera"
-                | OneDeathPerMillion ->
+                match xAxisType with
+                | ByDate -> ""
+                | DaysSinceFirstDeath -> "Št. dni od prvega smrtnega primera"
+                | DaysSinceOneDeathPerMillion ->
                     "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
             YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
         }

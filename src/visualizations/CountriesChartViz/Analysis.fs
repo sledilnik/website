@@ -106,9 +106,10 @@ let calculateMovingAverages
     averages
 
 
-type StartingDayMode =
-    | FirstDeath
-    | OneDeathPerMillion
+type XAxisType =
+    | ByDate
+    | DaysSinceFirstDeath
+    | DaysSinceOneDeathPerMillion
 
 type OwidDataState =
     | NotLoaded
@@ -116,15 +117,16 @@ type OwidDataState =
     | Current of OurWorldInDataRemoteData
 
 let aggregateOurWorldInData
-    startingDayMode
+    xAxisType
     daysOfMovingAverage
     (owidDataState: OwidDataState)
     : CountriesData option =
 
     let filterEntries (entry: CountryDataDayEntry) =
-        match startingDayMode with
-        | FirstDeath -> entry.TotalDeaths >= 1.
-        | OneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
+        match xAxisType with
+        | ByDate -> entry.TotalDeaths > 0.
+        | DaysSinceFirstDeath -> entry.TotalDeaths >= 1.
+        | DaysSinceOneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
 
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with

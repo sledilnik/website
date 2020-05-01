@@ -46,6 +46,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
+        XAxisType = ByDate
         ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
@@ -107,6 +108,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             document.dispatchEvent(evt)
         ret
 
+    let xAxisType = ByDate
+
     let allSeries =
         chartData.Series
         |> Array.map (fun countrySeries ->
@@ -121,7 +124,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
                         pojo {|
-                             x = i
+                             x =
+                                 match xAxisType with
+                                 | ByDate -> entry.Date :> obj
+                                 | DaysSinceFirstDeath -> i :> obj
+                                 | DaysSinceOneDeathPerMillion -> i :> obj
                              y = entry.TotalDeathsPerMillion
                              date = entry.Date.ToString("dd.MM.yyyy")
                              dataLabels =
@@ -137,7 +144,6 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                   else pojo {||}
                         |}
                         )
-//                        (i, entry.TotalDeathsPerMillion))
                 marker = pojo {| enabled = false |}
                 |}
             )
@@ -174,7 +180,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         series = allSeries
         xAxis =
             pojo {|
-                   ``type`` = "int"
+                   ``type`` =
+                        match xAxisType with
+                        | ByDate -> "datetime"
+                        | DaysSinceFirstDeath -> "int"
+                        | DaysSinceOneDeathPerMillion -> "int"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
             |}
@@ -241,13 +251,10 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
     ]
 
 let render state dispatch =
-    let firstDayMode =
-        match state.ScaleType with
-        | Linear -> FirstDeath
-        | Logarithmic -> OneDeathPerMillion
+    let xAxisType = state.XAxisType
 
     let chartData =
-        state |> prepareChartData firstDayMode DaysOfMovingAverage
+        state |> prepareChartData xAxisType DaysOfMovingAverage
 
     match chartData with
     | Some chartData ->
