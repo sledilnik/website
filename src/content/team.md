@@ -10,7 +10,7 @@ Imaš predlog za izboljšanje strukture ali oblike dokumenta, bi urejal/a vire o
 Uredniki baze in ostali sodelavci:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - koordinacija za modeliranje, modeliranje, viri
--   [Andraž Vrhovec](http://github.com/overlordtm) - spletna stran, CSV oblika
+-   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, CSV oblika
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
