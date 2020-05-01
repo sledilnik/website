@@ -68,10 +68,6 @@ type StatsDataPoint =
     { DayFromStart : int
       Date : System.DateTime
       Phase : string
-      PerformedTests : int option
-      PerformedTestsToDate : int option
-      PositiveTests : int option
-      PositiveTestsToDate : int option
       Tests : Tests
       Cases : Cases
       StatePerTreatment : Treatment

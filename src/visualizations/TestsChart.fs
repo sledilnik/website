@@ -85,7 +85,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
-                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTests dp)) |> Seq.toArray
             |}
         yield pojo
@@ -94,7 +94,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "column"
                 color = "#bda506"
                 yAxis = 0 
-                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTests dp)) |> Seq.toArray
             |}
         yield pojo
@@ -103,7 +103,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#665191"
                 yAxis = 1
-                data = state.data |> Seq.filter (fun dp -> dp.PositiveTests.IsSome )
+                data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
