@@ -23,29 +23,3 @@ library.add(faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircle
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
-
-// source: https://stackoverflow.com/questions/6215779/scroll-if-element-is-not-visible
-function scrollToView(element){
-    var offset = element.offset().top;
-    if(!element.is(":visible")) {
-        element.css({"visibility":"hidden"}).show();
-        var offset = element.offset().top;
-        element.css({"visibility":"", "display":""});
-    }
-
-    var visible_area_start = $(window).scrollTop();
-    var visible_area_end = visible_area_start + window.innerHeight;
-
-    if(offset < visible_area_start || offset > visible_area_end){
-         // Not in view so scroll to it
-         $('html,body').animate({scrollTop: offset - window.innerHeight/3}, 1000);
-         return false;
-    }
-    return true;
-}
-
-function jumpToVisualization(visualizationId) {
-    var visualizationRootEl = document.getElementById(visualizationId);
-    scrollToView(visualizationRootEl);
-    return true;
-}

@@ -140,7 +140,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if(to.hash === "") {
     window.scrollTo(0, 0)
   }
