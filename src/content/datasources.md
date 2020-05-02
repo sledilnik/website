@@ -15,13 +15,13 @@
 - [dict-region.csv](https://github.com/sledilnik/data/blob/master/csv/dict-region.csv), [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv), [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv), [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv), 
 
 ## REST API
-- [stats](https://covid19.rthand.com/api/stats)
-- [regions](https://covid19.rthand.com/api/regions)
-- [deceased-regions](https://covid19.rthand.com/api/deceased-regions)
-- [patients](https://covid19.rthand.com/api/patients)
-- [hospitals](https://covid19.rthand.com/api/hospitals)
-- [retirement-homes](https://covid19.rthand.com/api/retirement-homes)
-- [hospitals-list](https://covid19.rthand.com/api/hospitals-list), [retirement-homes-list](https://covid19.rthand.com/api/retirement-homes-list) in drugi
+- [stats](https://api.sledilnik.org/api/stats)
+- [regions](https://api.sledilnik.org/api/regions)
+- [deceased-regions](https://api.sledilnik.org/api/deceased-regions)
+- [patients](https://api.sledilnik.org/api/patients)
+- [hospitals](https://api.sledilnik.org/api/hospitals)
+- [retirement-homes](https://api.sledilnik.org/api/retirement-homes)
+- [hospitals-list](https://api.sledilnik.org/api/hospitals-list), [retirement-homes-list](https://api.sledilnik.org/api/retirement-homes-list) in drugi
 - več informacij v [README](https://github.com/sledilnik/data-api/blob/master/README.md)
 
 

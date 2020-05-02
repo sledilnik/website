@@ -20,7 +20,7 @@
         <div class="footnote">
           Viri podatkov:
           <a href="https://github.com/sledilnik/data/blob/master/csv/stats.csv">CSV</a>,
-          <a href="https://covid19.rthand.com/api/stats">REST</a>,
+          <a href="https://api.sledilnik.org/api/stats">REST</a>,
           <a href="https://tinyurl.com/sledilnik-gdocs">Google Sheet</a>
         </div>
       </div>
