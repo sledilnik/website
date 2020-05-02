@@ -37,6 +37,7 @@ type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
+    | XAxisTypeChanged of XAxisType
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
@@ -46,6 +47,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
+        XAxisType = ByDate// DaysSinceFirstDeath
         ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
@@ -96,6 +98,8 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             printfn "Success %A" data
 
         { state with OwidDataState = Current remoteData }, Cmd.none
+    | XAxisTypeChanged newXAxisType ->
+        { state with XAxisType = newXAxisType }, Cmd.none
     | ScaleTypeChanged newScaleType ->
         { state with ScaleType = newScaleType }, Cmd.none
 
@@ -121,7 +125,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
                         pojo {|
-                             x = i
+                             x =
+                                 match state.XAxisType with
+                                 | ByDate -> entry.Date :> obj
+                                 | DaysSinceFirstDeath -> i :> obj
+                                 | DaysSinceOneDeathPerMillion -> i :> obj
                              y = entry.TotalDeathsPerMillion
                              date = entry.Date.ToString("dd.MM.yyyy")
                              dataLabels =
@@ -137,7 +145,6 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                   else pojo {||}
                         |}
                         )
-//                        (i, entry.TotalDeathsPerMillion))
                 marker = pojo {| enabled = false |}
                 |}
             )
@@ -174,7 +181,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         series = allSeries
         xAxis =
             pojo {|
-                   ``type`` = "int"
+                   ``type`` =
+                        match state.XAxisType with
+                        | ByDate -> "datetime"
+                        | DaysSinceFirstDeath -> "int"
+                        | DaysSinceOneDeathPerMillion -> "int"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
             |}
@@ -201,8 +212,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             |}
         legend = pojo {| legend with enabled = true |}
         tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter jsThis
-                          shared=true
+                          formatter = fun () -> tooltipFormatter state jsThis
+                          shared = true
+                          useHTML = true
                         |}
 
         credits = pojo
@@ -240,14 +252,35 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
         |> prop.children
     ]
 
+let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
+    let renderXAxisSelector (axisSelector: XAxisType) =
+        let active = axisSelector = activeXAxisType
+        Html.div [
+            match axisSelector with
+            | ByDate -> "kronološko"
+            | DaysSinceFirstDeath -> "od prve smrti"
+            | DaysSinceOneDeathPerMillion -> "od prve smrti na milij. preb."
+            |> prop.text
+
+            prop.className [
+                true, "btn btn-sm metric-2-selector"
+                active, "metric-2-selector--selected selected" ]
+            if not active then prop.onClick (fun _ -> dispatch axisSelector)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-2-selectors"
+        [ ByDate; DaysSinceFirstDeath; DaysSinceOneDeathPerMillion]
+        |> List.map renderXAxisSelector
+        |> prop.children
+    ]
+
 let render state dispatch =
-    let firstDayMode =
-        match state.ScaleType with
-        | Linear -> FirstDeath
-        | Logarithmic -> OneDeathPerMillion
+    let xAxisType = state.XAxisType
 
     let chartData =
-        state |> prepareChartData firstDayMode DaysOfMovingAverage
+        state |> prepareChartData xAxisType DaysOfMovingAverage
 
     match chartData with
     | Some chartData ->
@@ -258,6 +291,9 @@ let render state dispatch =
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
+            renderXAxisSelectors
+                state.XAxisType
+                (XAxisTypeChanged >> dispatch)
 
             Html.div [
                 prop.className "disclaimer"

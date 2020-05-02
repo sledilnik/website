@@ -18,6 +18,12 @@ let zeroToNone value =
 let roundTo1Decimal (value: float) = System.Math.Round(value, 1)
 let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
 
+let formatTo1DecimalWithTrailingZero (value: float) =
+    let formatted =
+        sprintf "%.1f" value
+    // A hack to replace decimal point with decimal comma.
+    formatted.Replace('.', ',')
+
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)
     if v1 = v2 then None

@@ -23,7 +23,12 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
 
     let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
         let dateStr = entryRaw.Date
-        let date = DateTime.Parse(dateStr)
+        let dateWithTime = DateTime.Parse(dateStr)
+        let date = DateTime
+                    (dateWithTime.Year,
+                     dateWithTime.Month,
+                     dateWithTime.Day,
+                     0, 0, 0)
 
         { Date = date
           TotalCases = float entryRaw.TotalCases
@@ -106,9 +111,10 @@ let calculateMovingAverages
     averages
 
 
-type StartingDayMode =
-    | FirstDeath
-    | OneDeathPerMillion
+type XAxisType =
+    | ByDate
+    | DaysSinceFirstDeath
+    | DaysSinceOneDeathPerMillion
 
 type OwidDataState =
     | NotLoaded
@@ -116,15 +122,16 @@ type OwidDataState =
     | Current of OurWorldInDataRemoteData
 
 let aggregateOurWorldInData
-    startingDayMode
+    xAxisType
     daysOfMovingAverage
     (owidDataState: OwidDataState)
     : CountriesData option =
 
     let filterEntries (entry: CountryDataDayEntry) =
-        match startingDayMode with
-        | FirstDeath -> entry.TotalDeaths >= 1.
-        | OneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
+        match xAxisType with
+        | ByDate -> entry.TotalDeaths > 0.
+        | DaysSinceFirstDeath -> entry.TotalDeaths >= 1.
+        | DaysSinceOneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
 
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with

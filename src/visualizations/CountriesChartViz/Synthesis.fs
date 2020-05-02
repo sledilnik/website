@@ -15,7 +15,8 @@ type CountriesDisplaySet = {
 type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
-    ScaleType : ScaleType
+    XAxisType: XAxisType
+    ScaleType: ScaleType
 }
 
 // source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
@@ -82,30 +83,52 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
-let tooltipFormatter jsThis =
+let tooltipFormatter state jsThis =
     let points: obj[] = jsThis?points
 
-    let s = StringBuilder()
-    points
-    |> Array.iter
-           (fun country ->
-                let countryCode = country?series?name
-                let date = country?point?date
-                let dataValue: float = country?point?y
+    match points with
+    | [||] -> ""
+    | _ ->
+        let dataDescription = "<b>Umrli na 1 milijon prebivalcev:</b>"
 
-                let countryTooltip =
-                    sprintf
-                        "<b>%s</b><br/>%s<br/>Umrli na 1 milijon preb.: %A<br/>"
-                        countryCode
-                        date
-                        (Utils.roundTo1Decimal dataValue)
-                s.Append(countryTooltip) |> ignore
-            )
+        let s = StringBuilder()
+        s.Append dataDescription |> ignore
+        s.Append "<br/><table>" |> ignore
 
-    s.ToString()
+        points
+        |> Array.sortByDescending
+               (fun country ->
+                    let dataValue: float = country?point?y
+                    dataValue)
+        |> Array.iter
+               (fun country ->
+                    let countryCode = country?series?name
+                    let date = country?point?date
+                    let dataValue: float = country?point?y
+
+                    s.Append "<tr>" |> ignore
+                    let countryTooltip =
+                        match state.XAxisType with
+                        | ByDate ->
+                            sprintf
+                                "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                countryCode
+                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                        | _ ->
+                            sprintf
+                                "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                countryCode
+                                date
+                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                    s.Append countryTooltip |> ignore
+                    s.Append "</tr>" |> ignore
+                )
+
+        s.Append "</table>" |> ignore
+        s.ToString()
 
 let prepareChartData
-    startingDayMode
+    xAxisType
     daysOfMovingAverage
     (state: ChartState)
     : ChartData option =
@@ -121,7 +144,7 @@ let prepareChartData
 
     let aggregated =
         state.OwidDataState
-        |> aggregateOurWorldInData startingDayMode daysOfMovingAverage
+        |> aggregateOurWorldInData xAxisType daysOfMovingAverage
 
     match aggregated with
     | Some aggregated ->
@@ -152,9 +175,10 @@ let prepareChartData
         {
             Series = series
             XAxisTitle =
-              match startingDayMode with
-                | FirstDeath -> "Št. dni od prvega smrtnega primera"
-                | OneDeathPerMillion ->
+                match xAxisType with
+                | ByDate -> ""
+                | DaysSinceFirstDeath -> "Št. dni od prvega smrtnega primera"
+                | DaysSinceOneDeathPerMillion ->
                     "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
             YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
         }
