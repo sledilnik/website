@@ -97,7 +97,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} }
           { VisualizationType = Infections;
-             ClassName = "metrics-comparison-chart";
+             ClassName = "infections-chart";
              Label = "Struktura potrjeno okuženih";
              Explicit = false;
              Renderer = fun state ->
