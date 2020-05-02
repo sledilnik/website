@@ -43,7 +43,7 @@ Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji p
   <summary id=english-translation>Ali obstaja vaša stran tudi v angleščini?</summary>
 
 Deloma. V celoti zaenkrat ne, sta pa na voljo za prosto uporabo tako besedilni del kot izvorna koda, če bi se želel kdo lotiti tega podviga. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
-V angleškem jeziku obstaja samo [stran O projektu](https://covid-19.sledilnik.org/#/about/en), ki zajema osnovne podatke in vire podatkov.
+V angleškem jeziku obstaja samo [stran O projektu](/about/en), ki zajema osnovne podatke in vire podatkov.
 
 </details>
 

@@ -23,7 +23,7 @@ The following data from the NIJZ and various public sources is included in datab
 -   healthcare system capacity: number of beds, intensive care units, respirators for ventilation...
     
     We are also constantly striving to add new important categories.
-    All data is collected and available in form of [GSheets, CSV or via REST API.](https://covid-19.sledilnik.org/#/datasources)
+    All data is collected and available in form of [GSheets, CSV or via REST API.](/datasources)
     
 
 <details>
@@ -51,8 +51,8 @@ Updating the hospital care data – the Patients table process:
 
 ## Use of the data
 
-The data is used for various visualizations and statistics, such as [charts, infographics and maps with information on confirmed infections and hospitalized patients]([https://covid-19.sledilnik.org/#/stats](https://covid-19.sledilnik.org/#/stats) on our own website. 
-Our data is also freely avaliable and hence used by some other portals and projects - you can find them on the [Links](https://covid-19.sledilnik.org/#/links) page.
+The data is used for various visualizations and statistics, such as [charts, infographics and maps with information on confirmed infections and hospitalized patients](/stats) on our own website. 
+Our data is also freely avaliable and hence used by some other portals and projects - you can find them on the [Links](/links) page.
 
 <details>
   <summary>Disclaimer of responsibility (click for more)</summary>
