@@ -196,12 +196,14 @@ let render (state : State) (_ : Msg -> unit) =
                   prop.text "covid-19.sledilnik.org" ]
 
     let renderChartTitle (visualization: Visualization) =
-        let renderOnClickEvent() =
-            let eventBody =
-                sprintf
-                    "return jumpToVisualization('%s')"
-                    visualization.ClassName
-            prop.custom ("onClick", eventBody)
+
+        let scrollToElement (e : MouseEvent) visualizationId =
+            e.preventDefault()
+            let element = document.getElementById(visualizationId)
+            let offset = -100.
+            let position = element.getBoundingClientRect().top + window.pageYOffset + offset
+            window.scrollTo({| top = position ; behavior = "smooth" |} |> unbox) // behavior = smooth | auto
+            window.history.pushState(null, null, "#" + visualizationId)
 
         Html.div [
             prop.className "title-brand-wrapper"
@@ -210,7 +212,7 @@ let render (state : State) (_ : Msg -> unit) =
                     Html.a
                         [ prop.href ("#" + visualization.ClassName)
                           prop.text visualization.Label
-                          renderOnClickEvent()
+                          prop.onClick (fun e -> scrollToElement e visualization.ClassName)
                         ] |> Html.h2
                     brandLink
                 ]
