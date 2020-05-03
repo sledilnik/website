@@ -6,7 +6,7 @@ _Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v v
 <details>
   <summary>Zakaj Sledilnik?</summary>
   
-Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](#/about). 
+Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni ozaveščenosti, odzivnosti ter učinkovitosti ukrepov za zajezitev virusa. Več v [zavihku O projektu](/about). 
 </details>
 
 <details>
@@ -30,7 +30,7 @@ To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del po
 <details>
   <summary>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot je [Worldometer](https://www.worldometers.info/coronavirus/), oz. preverite na [strani Povezave](#/links).
+Sledilnik trenutno ne prikazuje nobenih vizualizacij, ki bi stanje v Sloveniji primerjale s podobnimi stanji v tujini. Za takšne primerjave si lahko vedno ogledate katero od strani, kot je [Worldometer](https://www.worldometers.info/coronavirus/), oz. preverite na [strani Povezave](/links).
 </details>
 
 <details>
@@ -56,7 +56,7 @@ Stran gostuje na [GitHub Pages]([https://pages.github.com](https://pages.github.
 <details>
   <summary>So vaši podatki in prikazi verodostojni?</summary>
   
-Podatke zbiramo iz različnih uradnih in drugih javnih virov – navedeni so v [zavihku Viri](#/sources). 
+Podatke zbiramo iz različnih uradnih in drugih javnih virov – navedeni so v [zavihku Viri](/sources). 
 
 Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, NIJZ in zdravstvenimi zavodi, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.
 </details>
@@ -133,13 +133,13 @@ Lahko pa uporabniki prostovoljno pomagate z zbiranjem in preverjanjem podatkov i
 <details>
   <summary>Kako urejate podatke?</summary>
 
-Celoten postopek zbiranja in urejanja podatkov je opisan na strani [O projektu](#/about).
+Celoten postopek zbiranja in urejanja podatkov je opisan na strani [O projektu](/about).
 </details>
 
 <details>
   <summary>Kako lahko pridobim in uporabim vašo bazo podatkov?</summary>
 
-Naša baza podatkov je javna in prosto dostopna v obliki [**CSV**, **REST** in **Google Sheet**](#/datasources). Prosimo vas le, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
+Naša baza podatkov je javna in prosto dostopna v obliki [**CSV**, **REST** in **Google Sheet**](/datasources). Prosimo vas le, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
 
 Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša stran tudi v angleščini?), je mogoča tudi njihova mednarodna uporaba (izvoz, prikaz).
 </details>
@@ -150,7 +150,7 @@ Ker so oznake podatkov tudi v angleščini (gl. vprašanje Ali obstaja vaša str
 <details>
   <summary>Lahko uporabim vaše grafe na svoji strani? Kako?</summary>
     
-Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz – ob navedbi vira, seveda. [Kliknite sem](#/embed) in s seznama izberite graf, ki ga želite vgraditi. O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav](#/links). 
+Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz – ob navedbi vira, seveda. [Kliknite sem](/embed) in s seznama izberite graf, ki ga želite vgraditi. O uporabi nas obvestite (info@sledilnik.org) in povezavo bomo z veseljem dodali tudi v našo zbirko [priporočenih povezav](/links). 
 </details>
 
 <details>
@@ -299,7 +299,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 <details>
   <summary>Kaj je Sledilnik?</summary>
 
-[Sledilnik je projekt](#/about), ki zbira, analizira in prikazuje nekaj najbolj uporabnih podatkov, da bi lahko bolje razumeli širjenje pandemije koronavirusa in bolezni COVID-19 skupaj z njeno dinamiko in obsegom. 
+[Sledilnik je projekt](/about), ki zbira, analizira in prikazuje nekaj najbolj uporabnih podatkov, da bi lahko bolje razumeli širjenje pandemije koronavirusa in bolezni COVID-19 skupaj z njeno dinamiko in obsegom. 
 
 Želimo si jasno predstaviti, kaj nam trenutni podatki in pregledi govorijo o širjenju virusa v Sloveniji, in zagotoviti, da postanejo informacije o obsegu in resnosti problema COVID-19 v Sloveniji vsem dostopne in čim bolj razumljive. 
 </details>
