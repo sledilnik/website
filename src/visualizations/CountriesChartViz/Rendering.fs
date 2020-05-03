@@ -148,23 +148,21 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 marker = pojo {| enabled = false |}
                 |}
             )
-        // we need to reverse the array, for some reason
-        |> Array.rev
 
     let legend =
-        {|
-            enabled = true
-            title = ""
-            align = "left"
-            verticalAlign = "top"
-            borderColor = "#ddd"
-            borderWidth = 1
-            layout = "vertical"
-            floating = true
-            x = 20
-            y = 30
-            backgroundColor = "rgba(255,255,255,0.5)"
-            reversed = true
+        pojo {|
+                enabled = true
+                title = pojo {| text = chartData.DataDescription |}
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                layout = "vertical"
+                floating = true
+                padding = 15
+                x = 20
+                y = 30
+                backgroundColor = "rgba(255,255,255,0.5)"
         |}
 
     let baseOptions =
@@ -210,9 +208,10 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             {|
                 series = pojo {| stacking = "" |}
             |}
-        legend = pojo {| legend with enabled = true |}
+        legend = legend
         tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter state jsThis
+                          formatter = fun () ->
+                              tooltipFormatter state chartData jsThis
                           shared = true
                           useHTML = true
                         |}

@@ -78,18 +78,20 @@ type CountrySeries = {
 }
 
 type ChartData = {
+    DataDescription: string
     XAxisTitle: string
     YAxisTitle: string
     Series: CountrySeries[]
 }
 
-let tooltipFormatter state jsThis =
+let tooltipFormatter state chartData jsThis =
     let points: obj[] = jsThis?points
 
     match points with
     | [||] -> ""
     | _ ->
-        let dataDescription = "<b>Umrli na 1 milijon prebivalcev:</b>"
+        let dataDescription =
+            sprintf "<b>%s:</b>" chartData.DataDescription
 
         let s = StringBuilder()
         s.Append dataDescription |> ignore
@@ -174,6 +176,7 @@ let prepareChartData
 
         {
             Series = series
+            DataDescription = "Umrli na 1 milijon prebivalcev"
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
