@@ -54,130 +54,136 @@ let update (msg: Msg) (state: State) =
 
 open Elmish.React
 
-let render (state : State) (dispatch : Msg -> unit) =
-    let allVisualizations =
-        [ {| Visualization = Hospitals
-             ClassName = "patients-chart"
-             Label = "Kapacitete bolnišnic"
-             Explicit = true
-             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () |}
-          {| Visualization = MetricsComparison
-             ClassName = "metrics-comparison-chart"
-             Label = "Širjenje COVID-19 v Sloveniji"
-             Explicit = false
+let render (state : State) (_ : Msg -> unit) =
+    let allVisualizations: Visualization list =
+        [ { VisualizationType = Hospitals;
+             ClassName = "patients-chart";
+             Label = "Kapacitete bolnišnic";
+             Explicit = true;
+             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
+          { VisualizationType = MetricsComparison;
+             ClassName = "metrics-comparison-chart";
+             Label = "Širjenje COVID-19 v Sloveniji";
+             Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} |}
-          {| Visualization = Cases
-             ClassName = "cases-chart"
-             Label = "Potrjeni primeri"
-             Explicit = false
+                | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+          { VisualizationType = Cases;
+             ClassName = "cases-chart";
+             Label = "Potrjeni primeri";
+             Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView CasesChart.casesChart {| data = data |} |}
-          {| Visualization = Patients
-             ClassName = "patients-chart"
-             Label = "Obravnava hospitaliziranih"
-             Explicit = false
-             Renderer = fun _ -> lazyView PatientsChart.patientsChart () |}
-          {| Visualization = Tests
-             ClassName = "tests-chart"
-             Label = "Testiranje"
-             Explicit = false
+                | Success data -> lazyView CasesChart.casesChart {| data = data |} }
+          { VisualizationType = Patients;
+             ClassName = "patients-chart";
+             Label = "Obravnava hospitaliziranih";
+             Explicit = false;
+             Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+          { VisualizationType = Tests;
+             ClassName = "tests-chart";
+             Label = "Testiranje";
+             Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView TestsChart.testsChart {| data = data |} |}
-          {| Visualization = Infections
-             ClassName = "metrics-comparison-chart"
-             Label = "Struktura potrjeno okuženih"
-             Explicit = false
+                | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+          { VisualizationType = Infections;
+             ClassName = "infections-chart";
+             Label = "Struktura potrjeno okuženih";
+             Explicit = false;
              Renderer = fun state ->
                match state.StatsData with
                | NotAsked -> Html.none
                | Loading -> Utils.renderLoading
                | Failure error -> Utils.renderErrorLoading error
-               | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} |}
-          {| Visualization = Spread
-             ClassName = "spread-chart"
-             Label = "Prirast potrjeno okuženih"
-             Explicit = false
+               | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
+          { VisualizationType = Spread;
+             ClassName = "spread-chart";
+             Label = "Prirast potrjeno okuženih";
+             Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView SpreadChart.spreadChart {| data = data |} |}
-          {| Visualization = Regions
-             ClassName = "regions-chart"
-             Label = "Potrjeno okuženi po regijah"
-             Explicit = false
+                | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
+          { VisualizationType = Regions;
+             ClassName = "regions-chart";
+             Label = "Potrjeno okuženi po regijah";
+             Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView RegionsChart.regionsChart {| data = data |} |}
-          {| Visualization = Map
-             ClassName = "map-chart"
-             Label = "Zemljevid potrjeno okuženih po občinah"
-             Explicit = false
+                | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+          { VisualizationType = Map;
+             ClassName = "map-chart";
+             Label = "Zemljevid potrjeno okuženih po občinah";
+             Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView Map.mapChart {| data = data |} |}
-          {| Visualization = Municipalities
-             ClassName = "municipalities-chart"
-             Label = "Potrjeno okuženi po občinah"
-             Explicit = false
+                | Success data -> lazyView Map.mapChart {| data = data |} }
+          { VisualizationType = Municipalities;
+             ClassName = "municipalities-chart";
+             Label = "Potrjeno okuženi po občinah";
+             Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
-                | Success data -> lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query ; data = data |} |}
-          {| Visualization = AgeGroups
-             ClassName = "age-groups-chart"
-             Label = "Po starostnih skupinah"
-             Explicit = false
+                | Success data ->
+                    lazyView
+                        MunicipalitiesChart.municipalitiesChart
+                        {| query = state.Query ; data = data |} }
+          { VisualizationType = AgeGroups;
+             ClassName = "age-groups-chart";
+             Label = "Po starostnih skupinah";
+             Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
                 | NotAsked -> Html.none
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data ->
-                    lazyView AgeGroupsChart.renderChart {| data = data |} |}
-          {| Visualization = Countries
-             ClassName = "countries-comparison-chart"
-             Label = "Primerjava po državah"
-             Explicit = false
+                    lazyView AgeGroupsChart.renderChart {| data = data |} }
+          { VisualizationType = Countries;
+             ClassName = "countries-chart";
+             Label = "Primerjava po državah";
+             Explicit = false;
              Renderer = fun state ->
                match state.StatsData with
                | NotAsked -> Html.none
                | Loading -> Utils.renderLoading
                | Failure error -> Utils.renderErrorLoading error
-               | Success data ->
-                lazyView CountriesChartViz.Rendering.renderChart ()
-            |}
+               | Success _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart ()
+            }
         ]
 
     let embedded, visualizations =
         match state.RenderingMode with
         | Normal -> false, allVisualizations |> List.filter (fun viz -> not viz.Explicit)
-        | Embedded visualization ->
-            match visualization with
+        | Embedded visualizationType ->
+            match visualizationType with
             | None -> true, []
-            | Some visualization -> true, allVisualizations |> List.filter (fun viz -> viz.Visualization = visualization)
+            | Some visualizationType ->
+                true, allVisualizations
+                |> List.filter (fun viz ->
+                    viz.VisualizationType = visualizationType)
 
     let brandLink =
         match state.RenderingMode with
@@ -189,6 +195,29 @@ let render (state : State) (dispatch : Msg -> unit) =
                   prop.href "https://covid-19.sledilnik.org/"
                   prop.text "covid-19.sledilnik.org" ]
 
+    let renderChartTitle (visualization: Visualization) =
+
+        let scrollToElement (e : MouseEvent) visualizationId =
+            e.preventDefault()
+            let element = document.getElementById(visualizationId)
+            let offset = -100.
+            let position = element.getBoundingClientRect().top + window.pageYOffset + offset
+            window.scrollTo({| top = position ; behavior = "smooth" |} |> unbox) // behavior = smooth | auto
+            window.history.pushState(null, null, "#" + visualizationId)
+
+        Html.div [
+            prop.className "title-brand-wrapper"
+            prop.children
+                [
+                    Html.a
+                        [ prop.href ("#" + visualization.ClassName)
+                          prop.text visualization.Label
+                          prop.onClick (fun e -> scrollToElement e visualization.ClassName)
+                        ] |> Html.h2
+                    brandLink
+                ]
+            ]
+
     Html.div
         [ prop.className [ true, "visualization container" ; embedded, "embeded" ]
           prop.children (
@@ -198,9 +227,9 @@ let render (state : State) (dispatch : Msg -> unit) =
                     [ prop.className [ true, viz.ClassName; true, "visualization-chart" ]
                       prop.id viz.ClassName
                       prop.children
-                        [ Html.div [
-                            prop.className "title-brand-wrapper"
-                            prop.children
-                                [ Html.h2 viz.Label
-                                  brandLink ] ]
-                          state |> viz.Renderer ] ] ) ) ]
+                        [ renderChartTitle viz
+                          state |> viz.Renderer
+                        ]
+                    ]
+            ) )
+        ]

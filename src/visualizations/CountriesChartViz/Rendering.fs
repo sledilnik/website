@@ -86,17 +86,6 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
         { state with OwidDataState = newOwidDataState },
         Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
     | DataLoaded remoteData ->
-
-        match remoteData with
-        | NotAsked ->
-            printfn "Not asked"
-        | Loading ->
-            printfn "Loading"
-        | Failure error ->
-            printfn "Error: %s" error
-        | Success data ->
-            printfn "Success %A" data
-
         { state with OwidDataState = Current remoteData }, Cmd.none
     | XAxisTypeChanged newXAxisType ->
         { state with XAxisType = newXAxisType }, Cmd.none

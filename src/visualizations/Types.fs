@@ -95,7 +95,7 @@ type RegionsDataPoint =
 
 type RegionsData = RegionsDataPoint list
 
-type Visualization =
+type VisualizationType =
     | MetricsComparison
     | Patients
     | Hospitals
@@ -111,13 +111,21 @@ type Visualization =
 
 type RenderingMode =
     | Normal
-    | Embedded of Visualization option
+    | Embedded of VisualizationType option
 
 type State =
     { Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
+
+type Visualization = {
+    VisualizationType: VisualizationType
+    ClassName: string
+    Label: string
+    Explicit: bool
+    Renderer: State -> Fable.React.ReactElement
+}
 
 type Msg =
     | StatsDataRequested
