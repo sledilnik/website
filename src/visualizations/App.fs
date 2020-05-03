@@ -57,7 +57,7 @@ open Elmish.React
 let render (state : State) (_ : Msg -> unit) =
     let allVisualizations: Visualization list =
         [ { VisualizationType = Hospitals;
-             ClassName = "patients-chart";
+             ClassName = "hospitals-chart";
              Label = "Kapacitete bolnišnic";
              Explicit = true;
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
