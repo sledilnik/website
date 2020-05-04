@@ -31,23 +31,23 @@ type DisplayType =
 
     override this.ToString() =
        match this with
-       | AbsoluteValues -> "Absolutno"
+       | AbsoluteValues -> "Absolutne vrednosti"
        | RegionPopulationWeightedValues -> "Delež prebivalstva"
 
 type DataTimeInterval =
-    | All
-    | Days of int
+    | Complete
+    | LastDays of int
 
     override this.ToString() =
         match this with
-        | All -> "Celotno obdobje"
-        | Days days -> sprintf "%d dni" days
+        | Complete -> "Celotnem obdobju"
+        | LastDays days -> sprintf "%d dneh" days
 
 let dataTimeIntervals =
-    [ Days 7
-      Days 14
-      Days 21
-      All ]
+    [ LastDays 7
+      LastDays 14
+      LastDays 21
+      Complete ]
 
 type GeoJson = RemoteData<obj, string>
 
@@ -78,7 +78,7 @@ let loadGeoJson =
     }
 
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
-    let dataTimeInterval = Days 7
+    let dataTimeInterval = LastDays 21
 
     let municipalityDataMap =
         seq {
@@ -151,14 +151,29 @@ let seriesData (state : State) =
                 match municipalityData.TotalPositiveTests with
                 | None -> 0., renderLabel 0 0
                 | Some totalPositiveTests ->
-                    let lastValue =
+                    let values =
                         totalPositiveTests
                         |> Seq.map (fun dp -> dp.TotalPositiveTests)
                         |> Seq.choose id
-                        |> Seq.tryLast
-                    match lastValue with
+                        |> Seq.toArray
+
+                    let lastValueTotal = values |> Array.tryLast
+
+                    let lastValueRelative =
+                        match state.DataTimeInterval with
+                        | Complete -> lastValueTotal
+                        | LastDays days ->
+                            let firstValueTotal = values |> Array.tryItem (values.Length - days)
+                            match firstValueTotal, lastValueTotal with
+                            | None, None -> None
+                            | None, Some b -> Some b
+                            | Some a, None -> Some a
+                            | Some a, Some b -> Some (b - a)
+
+                    match lastValueRelative with
                     | None -> 0., renderLabel 0 0
                     | Some lastValue ->
+
                         let absolute = lastValue
                         let weighted = float absolute / float municipalityData.Municipality.Population * 100000. |> System.Math.Round |> int
                         let value =
@@ -231,23 +246,23 @@ let renderSelectors options currentOption dispatch =
     |> List.map (fun option ->
         renderSelector option currentOption dispatch)
 
-let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
-    Html.div [
-        prop.className "chart-display-property-selector"
-        prop.children (Html.text "Zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
-    ]
-
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children (Html.text "Prikaži:" :: renderSelectors [RegionPopulationWeightedValues ; AbsoluteValues] currentDisplayType dispatch)
     ]
 
+let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (Html.text "Potrjeno okuženi v zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+    ]
+
 let render (state : State) dispatch =
     Html.div [
         prop.children [
-            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
             renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
+            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
             Html.div [
                 prop.className "map"
                 prop.children [ renderMap state ]
