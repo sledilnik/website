@@ -173,7 +173,6 @@ let seriesData (state : State) =
                     match lastValueRelative with
                     | None -> 0., renderLabel 0 0
                     | Some lastValue ->
-
                         let absolute = lastValue
                         let weighted = float absolute / float municipalityData.Municipality.Population * 100000. |> System.Math.Round |> int
                         let value =
@@ -185,7 +184,7 @@ let seriesData (state : State) =
                         let scaled =
                             match value with
                             | 0 -> 0.
-                            | x -> float x |> Math.Log
+                            | x -> float x + Math.E |> Math.Log
                         scaled, renderLabel absolute (weighted |> int)
             {| isoid = municipalityData.Municipality.Code ; value = value ; label = label municipalityData.Municipality.Population |}
     } |> Seq.toArray
@@ -198,11 +197,6 @@ let renderMap (state : State) =
     | Failure str -> Html.text str
     | Success geoJson ->
         let data = seriesData state
-
-        let maxValue =
-            data
-            |> Array.map (fun d -> d.value)
-            |> Array.max
 
         let series geoJson =
             {| visible = true
