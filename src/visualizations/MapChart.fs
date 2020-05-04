@@ -16,14 +16,14 @@ let geoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
-type TotalPositiveTestsForDate =
+type TotalConfirmedCasesForDate =
     { Date : System.DateTime
-      TotalPositiveTests : int option }
+      TotalConfirmedCases : int option }
 
 type Municipality =
     { Municipality : Utils.Dictionaries.Municipality
       Region : Utils.Dictionaries.Region option
-      TotalPositiveTests : TotalPositiveTestsForDate seq option }
+      TotalConfirmedCases : TotalConfirmedCasesForDate seq option }
 
 type DisplayType =
     | AbsoluteValues
@@ -89,17 +89,17 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     TotalPositiveTests = municipality.ConfirmedToDate |} }
+                                     TotalConfirmedCases = municipality.ConfirmedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
-            let totalPositiveTest =
+            let totalConfirmedCases =
                 dp
-                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
+                |> Seq.map (fun dp -> { Date = dp.Date ; TotalConfirmedCases = dp.TotalConfirmedCases })
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( municipalityKey,
               {|
                 Region = (dp |> Seq.tryLast) |> Option.map (fun dp -> Utils.Dictionaries.regions.TryFind dp.RegionKey) |> Option.flatten
-                TotalPositiveTests = totalPositiveTest |} ) )
+                TotalConfirmedCases = totalConfirmedCases |} ) )
         |> Map.ofSeq
 
     let data =
@@ -109,11 +109,11 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                 | None ->
                     yield { Municipality = municipality.Value
                             Region = None
-                            TotalPositiveTests = None }
+                            TotalConfirmedCases = None }
                 | Some data ->
                     yield { Municipality = municipality.Value
                             Region = data.Region
-                            TotalPositiveTests = Some data.TotalPositiveTests }
+                            TotalConfirmedCases = Some data.TotalConfirmedCases }
         }
         
     { GeoJson = NotAsked
@@ -148,12 +148,12 @@ let seriesData (state : State) =
     seq {
         for municipalityData in state.Data do
             let value, label =
-                match municipalityData.TotalPositiveTests with
+                match municipalityData.TotalConfirmedCases with
                 | None -> 0., renderLabel 0 0
-                | Some totalPositiveTests ->
+                | Some totalConfirmedCases ->
                     let values =
-                        totalPositiveTests
-                        |> Seq.map (fun dp -> dp.TotalPositiveTests)
+                        totalConfirmedCases
+                        |> Seq.map (fun dp -> dp.TotalConfirmedCases)
                         |> Seq.choose id
                         |> Seq.toArray
 
