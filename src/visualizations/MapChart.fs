@@ -31,7 +31,7 @@ type DisplayType =
 
     override this.ToString() =
        match this with
-       | AbsoluteValues -> "Absolutne vrednosti"
+       | AbsoluteValues -> "Absolutno"
        | RegionPopulationWeightedValues -> "Delež prebivalstva"
 
 type DataTimeInterval =
@@ -40,8 +40,8 @@ type DataTimeInterval =
 
     override this.ToString() =
         match this with
-        | Complete -> "Celotnem obdobju"
-        | LastDays days -> sprintf "%d dneh" days
+        | Complete -> "Vsi"
+        | LastDays days -> sprintf "%d dni" days
 
 let dataTimeIntervals =
     [ LastDays 7
@@ -243,20 +243,27 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (Html.text "Prikaži:" :: renderSelectors [RegionPopulationWeightedValues ; AbsoluteValues] currentDisplayType dispatch)
+        prop.children (Html.text "Prikaži:" :: renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
     ]
 
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
     Html.div [
-        prop.className "chart-display-property-selector"
-        prop.children (Html.text "Potrjeno okuženi v zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+        prop.className "chart-data-interval-selector"
+        prop.children (Html.text "Filter:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
     ]
 
 let render (state : State) dispatch =
     Html.div [
         prop.children [
-            renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
-            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+            Html.div [
+                prop.className "filter-and-display"
+                prop.children [
+                    Html.div [
+                        renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                        renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
+                    ] 
+                ]
+            ]
             Html.div [
                 prop.className "map"
                 prop.children [ renderMap state ]
