@@ -89,7 +89,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     TotalPositiveTests = municipality.PositiveTests |} }
+                                     TotalPositiveTests = municipality.ConfirmedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalPositiveTest =
@@ -115,7 +115,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                             Region = data.Region
                             TotalPositiveTests = Some data.TotalPositiveTests }
         }
-
+        
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
