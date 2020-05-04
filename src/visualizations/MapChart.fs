@@ -33,16 +33,38 @@ type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
 
+    override this.ToString() =
+       match this with
+       | AbsoluteValues -> "Absolutno"
+       | RegionPopulationWeightedValues -> "Delež prebivalstva"
+
+type DataTimeInterval =
+    | All
+    | Days of int
+
+    override this.ToString() =
+        match this with
+        | All -> "Celotno obdobje"
+        | Days days -> sprintf "%d dni" days
+
+let dataTimeIntervals =
+    [ Days 7
+      Days 14
+      Days 21
+      All ]
+
 type GeoJson = RemoteData<obj, string>
 
 type State =
     { GeoJson : GeoJson
       Data : Data list
+      DataTimeInterval : DataTimeInterval
       DisplayType : DisplayType }
 
 type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
+    | DataTimeIntervalChanged of DataTimeInterval
     | DisplayTypeChanged of DisplayType
 
 let loadGeoJson =
@@ -60,6 +82,8 @@ let loadGeoJson =
     }
 
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
+    let dataTimeInterval = Days 7
+
     let data =
         regionsData
         |> List.map (fun datapoint ->
@@ -105,6 +129,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
 
     { Data = data
       GeoJson = NotAsked
+      DataTimeInterval = dataTimeInterval
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -114,6 +139,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with GeoJson = Loading }, Cmd.OfAsync.result loadGeoJson
     | GeoJsonLoaded geoJson ->
         { state with GeoJson = geoJson }, Cmd.none
+    | DataTimeIntervalChanged dataTimeInterval ->
+        { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -182,29 +209,37 @@ let renderMap (state : State) =
         |}
         |> Highcharts.map
 
-let renderDisplayTypeSelector displayType dispatch =
-    let renderSelector (displayType : DisplayType) (currentDisplayType : DisplayType) (label : string) =
-        let defaultProps =
-            [ prop.text label
-              prop.className [
-                  true, "chart-display-property-selector__item"
-                  displayType = currentDisplayType, "selected" ] ]
-        if displayType = currentDisplayType
-        then Html.div defaultProps
-        else Html.div ((prop.onClick (fun _ -> dispatch displayType)) :: defaultProps)
+let renderSelector option currentOption dispatch =
+    let defaultProps =
+        [ prop.text (option.ToString())
+          prop.className [
+              true, "chart-display-property-selector__item"
+              option = currentOption, "selected" ] ]
+    if option = currentOption
+    then Html.div defaultProps
+    else Html.div ((prop.onClick (fun _ -> dispatch option)) :: defaultProps)
 
+let renderSelectors options currentOption dispatch =
+    options
+    |> List.map (fun option ->
+        renderSelector option currentOption dispatch)
+
+let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children [
-            Html.text "Prikaži:"
-            renderSelector RegionPopulationWeightedValues displayType "Delež prebivalstva"
-            renderSelector AbsoluteValues displayType "Absolutno"
-        ]
+        prop.children (Html.text "Zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+    ]
+
+let renderDisplayTypeSelector currentDisplayType dispatch =
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (Html.text "Prikaži:" :: renderSelectors [RegionPopulationWeightedValues ; AbsoluteValues] currentDisplayType dispatch)
     ]
 
 let render (state : State) dispatch =
     Html.div [
         prop.children [
+            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
             renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
             Html.div [
                 prop.className "map"
