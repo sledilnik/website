@@ -255,7 +255,7 @@ let renderDisplayTypeSelector currentDisplayType dispatch =
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (Html.text "Potrjeno okužene v zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+        prop.children (Html.text "Potrjeno okuženi v zadnjih:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
     ]
 
 let render (state : State) dispatch =
