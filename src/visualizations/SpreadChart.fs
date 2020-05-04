@@ -312,7 +312,8 @@ let render (state: State) dispatch =
                         yield renderExplainer state.data
                 ]
             ]
-            renderScaleSelectors state dispatch
+            if Highcharts.showExpGrowthFeatures then
+                renderScaleSelectors state dispatch
         ]
     ]
 
