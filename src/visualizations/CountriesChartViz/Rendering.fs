@@ -143,6 +143,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         // we need to reverse the array, for some reason
         |> Array.rev
 
+
     let legend =
         {|
             enabled = true
