@@ -22,6 +22,7 @@ type ChartState = {
 // source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
 let countryNames =
     [
+        "AUS", "Avstralija"
         "AUT", "Avstrija"
         "BEL", "Belgija"
         "BIH", "Bosna in Hercegovina"
@@ -39,15 +40,20 @@ let countryNames =
         "IRN", "Iran"
         "ISL", "Islandija"
         "ITA", "Italija"
+        "JPN", "Japonska"
+        "KOR", "Koreja"
         "MKD", "Severna Makedonija"
         "MNE", "Črna gora"
+        "NZL", "Nova Zelandija"
         "NOR", "Norveška"
         "RKS", "Kosovo"
         "RUS", "Rusija"
+        "SGP", "Singapur"
         "SRB", "Srbija"
         "SVK", "Slovaška"
         "SVN", "Slovenija"
         "SWE", "Švedska"
+        "TWN", "Tajvan"
         "TUR", "Turčija"
         "USA", "ZDA"
     ]

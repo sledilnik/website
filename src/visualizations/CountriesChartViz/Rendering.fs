@@ -31,6 +31,9 @@ let countriesDisplaySets = [|
     { Label = "ex-Jugoslavija"
       CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
     }
+    { Label = "vzh. Azija in Oceanija"
+      CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
+    }
 |]
 
 type Msg =
@@ -107,9 +110,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 {|
                 visible = true
                 color = countrySeries.Color
-                name =
-                    sprintf "%s (%s)"
-                        countrySeries.CountryName countrySeries.CountryAbbr
+                name = countrySeries.CountryName
+//                    sprintf "%s (%s)"
+//                        countrySeries.CountryName countrySeries.CountryAbbr
                 data =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
@@ -125,7 +128,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|
                                             enabled = true
-                                            format = countrySeries.CountryAbbr
+                                            format = countrySeries.CountryName
                                             align = "left"
                                             verticalAlign = "middle"
                                             x = 0
