@@ -83,7 +83,8 @@ type StatsData = StatsDataPoint list
 
 type Municipality =
     { Name : string
-      PositiveTests : int option }
+      ConfirmedToDate : int option
+      DeceasedToDate : int option }
 
 type Region =
     { Name : string

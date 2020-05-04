@@ -67,7 +67,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                 datapoint.Regions
                 |> List.map (fun region ->
                     region.Municipalities
-                    |> List.map (fun municipality -> (municipality.Name, municipality.PositiveTests)))
+                    |> List.map (fun municipality -> (municipality.Name, municipality.ConfirmedToDate)))
                 |> List.concat
             let municipalityDataMap =
                 municipalityData
