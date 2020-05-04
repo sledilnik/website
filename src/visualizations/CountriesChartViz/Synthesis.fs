@@ -41,7 +41,7 @@ let countryNames =
         "ISL", "Islandija"
         "ITA", "Italija"
         "JPN", "Japonska"
-        "KOR", "Koreja"
+        "KOR", "J. Koreja"
         "MKD", "Severna Makedonija"
         "MNE", "Črna gora"
         "NZL", "Nova Zelandija"
