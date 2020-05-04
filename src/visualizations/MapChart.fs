@@ -14,20 +14,16 @@ open Types
 
 let geoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 
-let excludedRegions = Set.ofList ["t"]
+let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
-type Municipality = {
-    Municipality : Utils.Dictionaries.Municipality
-    TotalPositiveTests : int option
-    TotalPositiveTestsWeightedRegionPopulation : int option }
+type TotalPositiveTestsForDate =
+    { Date : System.DateTime
+      TotalPositiveTests : int option }
 
-type Region = {
-    Region : Utils.Dictionaries.Region
-    Municipalities : Municipality list }
-
-type Data = {
-    Date : System.DateTime
-    Regions : Region list }
+type Municipality =
+    { Municipality : Utils.Dictionaries.Municipality
+      Region : Utils.Dictionaries.Region option
+      TotalPositiveTests : TotalPositiveTestsForDate seq option }
 
 type DisplayType =
     | AbsoluteValues
@@ -57,7 +53,7 @@ type GeoJson = RemoteData<obj, string>
 
 type State =
     { GeoJson : GeoJson
-      Data : Data list
+      Data : Municipality seq
       DataTimeInterval : DataTimeInterval
       DisplayType : DisplayType }
 
@@ -84,51 +80,44 @@ let loadGeoJson =
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
     let dataTimeInterval = Days 7
 
+    let municipalityDataMap =
+        seq {
+            for regionsDataPoint in regionsData do
+                for region in regionsDataPoint.Regions do
+                    for municipality in region.Municipalities do
+                        if not (Set.contains municipality.Name excludedMunicipalities) then
+                            yield {| Date = regionsDataPoint.Date
+                                     RegionKey = region.Name
+                                     MunicipalityKey = municipality.Name
+                                     TotalPositiveTests = municipality.PositiveTests |} }
+        |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
+        |> Seq.map (fun (municipalityKey, dp) ->
+            let totalPositiveTest =
+                dp
+                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
+                |> Seq.sortBy (fun dp -> dp.Date)
+            ( municipalityKey,
+              {|
+                Region = (dp |> Seq.tryLast) |> Option.map (fun dp -> Utils.Dictionaries.regions.TryFind dp.RegionKey) |> Option.flatten
+                TotalPositiveTests = totalPositiveTest |} ) )
+        |> Map.ofSeq
+
     let data =
-        regionsData
-        |> List.map (fun datapoint ->
-            let municipalityData =
-                datapoint.Regions
-                |> List.map (fun region ->
-                    region.Municipalities
-                    |> List.map (fun municipality -> (municipality.Name, municipality.PositiveTests)))
-                |> List.concat
-            let municipalityDataMap =
-                municipalityData
-                |> Map.ofList
-            let regions =
-                seq {
-                    for region in datapoint.Regions do
-                        match Utils.Dictionaries.regions.TryFind region.Name with
-                        | None -> ()
-                        | Some reg ->
-                            if Set.contains reg.Key Utils.Dictionaries.excludedRegions then ()
-                            else
-                                let municipalities =
-                                    seq {
-                                        for municipality in Utils.Dictionaries.municipalities do
-                                            match Map.tryFind municipality.Key municipalityDataMap with
-                                            | None ->
-                                                yield { Municipality = municipality.Value
-                                                        TotalPositiveTests = None
-                                                        TotalPositiveTestsWeightedRegionPopulation = None }
-                                            | Some totalPositiveTests ->
-                                                yield { Municipality = municipality.Value
-                                                        TotalPositiveTests = totalPositiveTests
-                                                        TotalPositiveTestsWeightedRegionPopulation =
-                                                            match totalPositiveTests with
-                                                            | None -> None
-                                                            | Some tests -> float tests / float municipality.Value.Population * 100000. |> System.Math.Round |> int |> Some }
-                                    } |> List.ofSeq
-                                yield { Region = reg
-                                        Municipalities = municipalities }
-                } |> List.ofSeq
+        seq {
+            for municipality in Utils.Dictionaries.municipalities do
+                match Map.tryFind municipality.Key municipalityDataMap with
+                | None ->
+                    yield { Municipality = municipality.Value
+                            Region = None
+                            TotalPositiveTests = None }
+                | Some data ->
+                    yield { Municipality = municipality.Value
+                            Region = data.Region
+                            TotalPositiveTests = Some data.TotalPositiveTests }
+        }
 
-            { Date = datapoint.Date
-              Regions = regions })
-
-    { Data = data
-      GeoJson = NotAsked
+    { GeoJson = NotAsked
+      Data = data
       DataTimeInterval = dataTimeInterval
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
@@ -151,56 +140,74 @@ let chartLoadedEvent () =
     evt.initEvent("chartLoaded", true, true)
     document.dispatchEvent(evt) |> ignore
 
-let seriesData state =
-    let lastDataPoint = List.last state.Data
-    seq {
-        for region in lastDataPoint.Regions do
-            for municipality in region.Municipalities do
-                let absolute = Option.defaultValue 0 municipality.TotalPositiveTests
-                let weighted = Option.defaultValue 0 municipality.TotalPositiveTestsWeightedRegionPopulation
-                let weightedFmt = sprintf "%d,%03d %%" (weighted / 1000) (weighted % 1000)
-                let label = sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" municipality.Municipality.Population absolute weightedFmt
-                let value =
-                    match state.DisplayType with
-                    | AbsoluteValues ->
-                        float absolute
-                    | RegionPopulationWeightedValues ->
-                        // Adjust the color scale for better readibility
-                        float weighted + (Math.E * Math.E)
-                let scaled =
-                    match value with
-                    | 0. -> 0.
-                    | x -> float x |> Math.Log
-                {| isoid = municipality.Municipality.Code ; value = scaled ; label = label |}
+let seriesData (state : State) =
+    let renderLabel absolute weighted population =
+        let weightedFmt = sprintf "%d,%03d %%" (weighted / 1000) (weighted % 1000)
+        sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
 
+    seq {
+        for municipalityData in state.Data do
+            let value, label =
+                match municipalityData.TotalPositiveTests with
+                | None -> 0., renderLabel 0 0
+                | Some totalPositiveTests ->
+                    let lastValue =
+                        totalPositiveTests
+                        |> Seq.map (fun dp -> dp.TotalPositiveTests)
+                        |> Seq.choose id
+                        |> Seq.tryLast
+                    match lastValue with
+                    | None -> 0., renderLabel 0 0
+                    | Some lastValue ->
+                        let absolute = lastValue
+                        let weighted = float absolute / float municipalityData.Municipality.Population * 100000. |> System.Math.Round |> int
+                        let value =
+                            match state.DisplayType with
+                            | AbsoluteValues ->
+                                absolute
+                            | RegionPopulationWeightedValues ->
+                                weighted
+                        let scaled =
+                            match value with
+                            | 0 -> 0.
+                            | x -> float x |> Math.Log
+                        scaled, renderLabel absolute (weighted |> int)
+            {| isoid = municipalityData.Municipality.Code ; value = value ; label = label municipalityData.Municipality.Population |}
     } |> Seq.toArray
 
 let renderMap (state : State) =
-
-    let series geoJson =
-        {| visible = true
-           mapData = geoJson
-           data = seriesData state
-           keys = [| "isoid" ; "value" |]
-           joinBy = "isoid"
-           nullColor = "white"
-           borderColor = "#888"
-           borderWidth = 0.5
-           mapline = {| animation = {| duration = 0 |} |}
-           states =
-            {| normal = {| animation = {| duration = 0 |} |}
-               hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-           tooltip =
-            {| distance = 50
-               headerFormat = "<b>{point.key}</b><br>"
-               pointFormat = "{point.label}" |}
-        |}
 
     match state.GeoJson with
     | NotAsked
     | Loading -> Html.none
     | Failure str -> Html.text str
     | Success geoJson ->
+        let data = seriesData state
+
+        let maxValue =
+            data
+            |> Array.map (fun d -> d.value)
+            |> Array.max
+
+        let series geoJson =
+            {| visible = true
+               mapData = geoJson
+               data = data
+               keys = [| "isoid" ; "value" |]
+               joinBy = "isoid"
+               nullColor = "white"
+               borderColor = "#888"
+               borderWidth = 0.5
+               mapline = {| animation = {| duration = 0 |} |}
+               states =
+                {| normal = {| animation = {| duration = 0 |} |}
+                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+               tooltip =
+                {| distance = 50
+                   headerFormat = "<b>{point.key}</b><br>"
+                   pointFormat = "{point.label}" |}
+            |}
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
