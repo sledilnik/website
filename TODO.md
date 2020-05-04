@@ -1,6 +1,10 @@
 # TODO
 
+## Upper controls
+- fix all other charts to insert the new div
+
 ## Anchors
+
 - create the URL for each anchor
 - the anchor should include the title
 

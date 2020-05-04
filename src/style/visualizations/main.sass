@@ -99,35 +99,40 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     td, th
       padding: 6px 9px
 
-  .chart-display-property-selector
-    margin: 0 $gap/2 $gap/2 0
-    text-align: right
-    color: $text-c
-    font-size: 14px
+  .chart-display-properties
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
 
-    @include media-breakpoint-down(sm)
-      text-align: left
-      margin: 0 $gap / 2
+    .chart-display-property-selector
+      margin: 0 $gap/2 $gap/2 0
+      text-align: right
+      color: $text-c
+      font-size: 14px
 
-    .chart-display-property-selector__item
-      display: inline-block
-      line-height: 2
-      margin-left: 24px
-      color: rgba(0, 0, 0, 0.5)
+      @include media-breakpoint-down(sm)
+        text-align: left
+        margin: 0 $gap / 2
 
-      &::selection
-        background: rgba(0, 0 , 0 , 0)
+      .chart-display-property-selector__item
+        display: inline-block
+        line-height: 2
+        margin-left: 24px
+        color: rgba(0, 0, 0, 0.5)
 
-      &:hover
-        cursor: pointer
-        color: #000
-
-      &.selected
-        color: #000
-        box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+        &::selection
+          background: rgba(0, 0 , 0 , 0)
 
         &:hover
-          animation: none
+          cursor: pointer
+          color: #000
+
+        &.selected
+          color: #000
+          box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+
+          &:hover
+            animation: none
 
   .metrics-selectors
     margin-top: $gap/2
