@@ -121,7 +121,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               DoublingTime = doublingTime
               MaxPositiveTests = maxValue
               LastPositiveTest = maxDay.Date
-              DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date.AddDays(1.0)).Days
+              DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
               TotalPositiveTest = totalPositiveTest
             })
 
@@ -164,16 +164,22 @@ let renderMunicipality (municipality : Municipality) =
     let truncatedData = data |> Seq.skip ((Seq.length data) - showMaxBars)
 
     let renderLastCase =
+        let label, value =
+            match municipality.DaysSinceLastCase with
+            | 0 -> "Zadnji primer: ", "danes"
+            | 1 -> "Zadnji primer: ", "včeraj"
+            | x -> "Zadnji primer pred: ", sprintf "%d %s" x (Utils.daysOrodnik x)
+
         Html.div [
             prop.className "last-case-days"
             prop.children [
                 Html.span [
                     prop.className "label"
-                    prop.text "Zadnji primer pred: "
+                    prop.text label
                 ]
                 Html.span [
                     prop.className "value"
-                    prop.text (sprintf "%d %s" municipality.DaysSinceLastCase (Utils.daysOrodnik municipality.DaysSinceLastCase))
+                    prop.text value
                 ]
             ]
         ]
