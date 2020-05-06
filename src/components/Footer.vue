@@ -16,6 +16,9 @@
         <a href="https://twitter.com/sledilnik" target="_blank">
           <img src="../assets/svg/tw-icon.svg" alt="tw-icon" />
         </a>
+        <a href="https://github.com/sledilnik" target="_blank">
+          <img src="../assets/svg/gh-icon.svg" alt="gh-icon" />
+        </a>
       </div>
     </div>
   </footer>
