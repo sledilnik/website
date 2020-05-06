@@ -51,7 +51,7 @@ export default {
         },
         "Patients": {
           value: "Patients",
-          text: 'Obravnava hospitaliziranih',
+          text: "Hospitalizirani",
           dimensions: [1140, 720]
         },
         "Tests": {

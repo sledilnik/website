@@ -89,7 +89,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 
 - Vsi viri in sklepanja so zabeleženi kot komentar v posameznih celicah (možnost preverjanja).
 
-- Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni negi, ki jih objavlja Vlada RS.
+- Podatke primerjamo s sumarnimi podatki o hospitaliziranih in intenzivni terapiji, ki jih objavlja Vlada RS.
   
   </details>
 
@@ -112,16 +112,16 @@ Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJ
 </details>
 
 <details>
-  <summary id=data-hospital-in>Zakaj poleg trenutno hospitaliziranih ne prikazujete tudi, koliko ljudi je bilo na določen dan sprejetih v hospitalizacijo?</summary>
+  <summary id=data-hospital-in>Kako pridobivate podatke o sprejetih v bolnišnico?</summary>
 
-Bolnišnice o posameznih sprejemih ali odpustih, iz katerih bi lahko pridobili natančne podatke, ne poročajo. Število sprejemov in odpustov na določen dan lahko zaznamo le iz spremembe trenutno hospitaliziranih. Če je bilo recimo pet sprejetih in štirje odpuščeni, je iz naših podatkov zaznan le en sprejem. Ker želimo na grafih sporočati le dejanske, preverjene podatke, pomanjkljivih podatkov o številu hospitaliziranih na dan ne bomo vključili, dokler se sistematika sledenja ne spremeni. 
+Bolnišnice o posameznih sprejemih ali odpustih, iz katerih bi lahko pridobili natančne podatke, ne poročajo vedno. Število sprejemov ponavadi izračunamo iz podatkov o trenutno hospitaliziranih in razliko na prejšni dan, kateri pa prištejemo število odpuščenih in umrlih na določen dan. Podobno vodimo tudi evidenco o sprejemih in odpustih v enoto za intenzivno terapijo in za priklop in odklop od respiratorja. 
 
 </details>
 
 <details>
   <summary id=data-hospital-out>Kako pridobivate podatke o odpuščenih iz bolnišnic?</summary>
 
-Podatek **Odpuščeni iz bolnišnice** je Sledilnikova ocena, izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Ker pa bolnišnice ne poročajo vseh sprejemov in odpustov iz bolnišnice, je naša ocena narejena na podlagi spremembe trenutno hospitaliziranih pacientov (če trenutno število pacientov pade, sklepamo, da so bili odpuščeni). Zato je naša ocena konzervativna (nižja od dejanskega števila odpuščenih bolnikov).
+Podatek **Odpuščeni iz bolnišnice** je izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Večinoma za vse bolnišnice dobivamo dnevno število odpuščenih iz katerega potem lahko potem tudi sklepamo o številu novo sprejetih. Glej tudi [Kako pridobivate podatke o sprejetih v bolnišnico?](/FAQ/#data-hospital-in)
 
 </details>
 
@@ -217,7 +217,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
-* **Hospitalizirani (skupaj)** = Vsota sprejetih v bolnišnico do dne.
+* **Hospitalizirani (skupaj)** = Vsota vseh do sedaj sprejetih v bolnišnico do dne.
 
 * **V intenzivni enoti (aktivni)** = Trenutno število oseb v enotah intenzivne terapije.
 
@@ -242,7 +242,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **v intenzivni enoti** = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije *Hospitalizirani*. 
 
-* **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni negi* in kategorije *Hospitalizirani*.
+* **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.
 
 * **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 21 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih tri tedne pred danim datumom – skladno z domnevo, da bi morali najkasneje v 21 dneh bolezen preboleti –, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. (Gl. tudi vprašanje Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?)
   
@@ -270,11 +270,11 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 </details>
 
 <details>
-  <summary id=chart-patients>Kaj nam pove graf "Obravnava hospitaliziranih"?</summary>
+  <summary id=chart-patients>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-Graf ima dva prikaza, eden nam kaže število oseb v bolnišnični oskrbi na ta dan po bolnišnicah, če pa pogled spremenimo s klikom na Obravnava po pacientih, vidimo celotno sliko hospitalizacij glede na stanje pacientov: kolikšno število hospitaliziranih je v enoti intenzivne nege, koliko od teh je v kritičnem stanju in potrebuje respirator, koliko je odpuščenih in umrlih. 
+Graf ima dva prikaza, prvi nam kaže celotno sliko hospitalizacij glede na stanje pacientov: kolikšno število hospitaliziranih je v enoti intenzivne terapije, koliko od teh je v kritičnem stanju in potrebuje respirator, koliko je sprejetih, odpuščenih in umrlih. Če pa izberemo "Po bolnišnicah" pa vidimo število oseb v bolnišnični oskrbi na ta dan po posameznih COVID-19 bolnišnicah.  
 
-To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebitnega povečanja zmogljivosti. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno nego imamo trenutno na razpolago 56 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
+To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebitnega povečanja zmogljivosti. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
 </details>
 

@@ -14,7 +14,7 @@ type DisplayType =
     | Regular
     | NsApr20
 with
-    static member all = [ Total; Regular; NsApr20; ]
+    static member all = [ Regular; NsApr20; Total; ]
     static member getName = function
         | Total -> "Skupaj"
         | Regular -> "Redno"
@@ -81,7 +81,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = "Negativnih testov (na dan)"
+                name = "Negativnih testov"
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
@@ -90,9 +90,9 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Pozitivnih testov (na dan)"
+                name = "Pozitivnih testov"
                 ``type`` = "column"
-                color = "#bda506"
+                color = "#d5c768"
                 yAxis = 0 
                 data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTests dp)) |> Seq.toArray
