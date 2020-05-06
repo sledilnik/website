@@ -26,29 +26,25 @@ type Breakdown =
         | BySource -> "Hospitalizirani po bolnišnicah"
 
 type Series =
+    | AllInHospital
     | OutOfHospital
     | InHospital
-    | AllInHospital
     | Icu
     | Critical
     | Deceased
-    | Hospital
-    | Home
 
 module Series =
     let all =
-        [ AllInHospital; InHospital; OutOfHospital; Icu; Critical; Deceased; Hospital; Home; ]
+        [ AllInHospital; OutOfHospital; InHospital; Icu; Critical; Deceased; ]
 
     // color, dash, name
     let getSeriesInfo = function
-        | OutOfHospital -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | AllInHospital -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
+        | OutOfHospital -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | InHospital    -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani (trenutno)"
         | Icu           -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
         | Critical      -> "#bf5747", Solid, "cs-critical", "Na respiratorju (trenutno)"
         | Deceased      -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
-        | Hospital      -> "#be772a", Solid, "cs-hospital", "Hospitalizirani"
-        | Home          -> "#003f5c", Solid, "cs-home", "Doma"
 
 type State = {
     scaleType : ScaleType
@@ -99,10 +95,7 @@ type State = {
             error = None
             allSegmentations = [ Totals ]
             activeSegmentations = Set [ Totals ]
-            allSeries =
-                // exclude stuff that doesn't exist or doesn't make sense in Total
-                let exclude = Set [ Home; Hospital ]
-                Series.all |> List.filter (not << exclude.Contains)
+            allSeries = Series.all
             activeSeries = Set Series.all
             breakdown = BySource
         }
@@ -159,14 +152,12 @@ let renderChartOptions (state : State) =
     let renderSeries series =
         let renderPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
             match series with
+            | AllInHospital -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
             | OutOfHospital -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
             | InHospital    -> fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
-            | AllInHospital -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
             | Icu           -> fun ps -> ps.JsDate12h, ps.total.icu.today |> zeroToNone
             | Critical      -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
             | Deceased      -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
-            | Hospital      -> fun ps -> ps.JsDate12h, failwithf "home & hospital"
-            | Home          -> fun ps -> ps.JsDate12h, failwithf "home & totals"
 
         let color, line, className, name = Series.getSeriesInfo series
 
