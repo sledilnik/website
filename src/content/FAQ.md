@@ -278,23 +278,26 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 
 </details>
 
-<details>
-  <summary id=chart-spread>Zakaj kaže graf "Prirast potrjeno okuženih" primerjavo z Južno Korejo?</summary>
-
-Če na grafu izberemo pogled **Eksponentna rast v dnevih**, lahko vidimo povprečje rasti v istem časovnem obdobju tudi za Južno Korejo. To smo izbrali za primerjavo zato, ker ji je kljub močnemu izbruhu bolezni COVID-19 uspelo z različnimi metodami “sploščiti krivuljo” oz. povedano drugače – Južna Koreja je ena najuspešnejših držav pri obvladovanju epidemije.
-
-</details>
 
 <details>
   <summary id=chart-spread-pages>Kaj pomenijo različni prikazi dnevnega prirasta v grafu "Prirast potrjeno okuženih"?</summary>
 
 * **Absolutni dnevni prirast** prikazuje število novih primerov potrjeno okuženih na določen dan.
 
+V obdobju eksponentne rasti pa prikazujemo še dva dodatna pogleda:
+
 * **Relativni dnevni prirast** prikazuje odstotno vrednost novih potrjeno okuženih na določen dan.
 
 * **Eksponentna rast v dnevih** prikazuje faktor, v koliko dneh se število potrjeno okuženih podvoji.
   
-  </details>
+</details>
+
+<details>
+  <summary id=chart-spread>Zakaj kaže graf "Prirast potrjeno okuženih" primerjavo z Južno Korejo?</summary>
+
+V obdobju eksponentne rasti na grafu "Prirast potrjeno okuženih" dodatno prikazujemo pogled **Eksponentna rast v dnevih** na katerem lahko vidimo povprečje rasti v istem časovnem obdobju tudi za Južno Korejo. To smo izbrali za primerjavo zato, ker ji je kljub močnemu izbruhu bolezni COVID-19 uspelo z različnimi metodami “sploščiti krivuljo” oz. povedano drugače – Južna Koreja je ena najuspešnejših držav pri obvladovanju epidemije.
+
+</details>
 
 <details>
   <summary id=chart-cases>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
@@ -308,7 +311,7 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 <details>
   <summary id=chart-double-rate>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
 
-Na prikazu **Potrjeno okuženi po občinah** je vključena ocena **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
+V obdobju eksponentne rasti na prikazu **Potrjeno okuženi po občinah** prikazujemo oceno **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
 
 </details>
 

@@ -30,6 +30,11 @@ export default {
         field: 'cases.confirmed.todate',
         goodDirection: 'down',
       },
+      'recovered': {
+        title: 'Preboleli',
+        field: 'cases.recovered.todate',
+        goodDirection: 'up',
+      },
       'hospitalized': {
         title: 'Hospitalizirani',
         field: 'state.in_hospital',
@@ -44,11 +49,6 @@ export default {
         title: 'Umrli',
         field: 'state.deceased.todate',
         goodDirection: 'down',
-      },
-      'recovered': {
-        title: 'Preboleli',
-        field: 'cases.recovered.todate',
-        goodDirection: 'up',
       },
     }
 

@@ -104,7 +104,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     justify-content: space-between
     flex-wrap: wrap
 
-    .chart-display-property-selector
+    .chart-display-property-selector,   .chart-display-property-selector, .chart-data-interval-selector
+
       margin: 0 $gap/2 $gap/2 0
       text-align: right
       color: $text-c
@@ -366,6 +367,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         &:focus
           border: none
           outline: none
+
+    .last-case-days
+      margin-top: 5px
+      text-align: right
+
+      .label
+        color: $gray-500
+
+      .value
+        font-weight: bold
+        margin-left: 2px
+        // color: white
+        // padding: 1px 5px 2px 5px
+        // background-color: $button-color
+        // border-radius: 2px
 
     .doubling-time
       margin-top: 5px

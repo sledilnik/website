@@ -30,7 +30,8 @@ type Municipality =
       RegionKey : string
       DoublingTime : float option
       MaxPositiveTests : int option
-      LastPositiveTest : System.DateTime   
+      LastPositiveTest : System.DateTime
+      DaysSinceLastCase : int
       TotalPositiveTest : TotalPositiveTestsForDate seq }
 
 type SortBy =
@@ -54,8 +55,11 @@ type Query (query : obj, regions : Region list) =
         | Some (sort : string) ->
             match sort.ToLower() with
             | "total-positive-tests" -> Some TotalPositiveTests
-            | "time-to-double" -> Some DoublingTime
             | "last-positive-test" -> Some LastPositiveTest
+            | "time-to-double" ->
+                match Highcharts.showExpGrowthFeatures with
+                    | true -> Some DoublingTime
+                    | _ -> None
             | _ -> None
         | _ -> None
 
@@ -93,7 +97,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     TotalPositiveTests = municipality.PositiveTests |} }
+                                     TotalPositiveTests = municipality.ConfirmedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalPositiveTest =
@@ -105,7 +109,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.TotalPositiveTests |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
-            let maxValue = 
+            let maxValue =
                 dp
                 |> Seq.map (fun dp -> dp.TotalPositiveTests)
                 |> Seq.filter Option.isSome
@@ -117,6 +121,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               DoublingTime = doublingTime
               MaxPositiveTests = maxValue
               LastPositiveTest = maxDay.Date
+              DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
               TotalPositiveTest = totalPositiveTest
             })
 
@@ -158,6 +163,26 @@ let renderMunicipality (municipality : Municipality) =
 
     let truncatedData = data |> Seq.skip ((Seq.length data) - showMaxBars)
 
+    let renderLastCase =
+        let label, value =
+            match municipality.DaysSinceLastCase with
+            | 0 -> "Zadnji primer: ", "danes"
+            | 1 -> "Zadnji primer: ", "včeraj"
+            | x -> "Zadnji primer pred: ", sprintf "%d %s" x (Utils.daysOrodnik x)
+
+        Html.div [
+            prop.className "last-case-days"
+            prop.children [
+                Html.span [
+                    prop.className "label"
+                    prop.text label
+                ]
+                Html.span [
+                    prop.className "value"
+                    prop.text value
+                ]
+            ]
+        ]
 
     let renderedDoublingTime =
         match municipality.DoublingTime with
@@ -246,7 +271,10 @@ let renderMunicipality (municipality : Municipality) =
                     ]
                 ]
             ]
-            renderedDoublingTime
+            if Highcharts.showExpGrowthFeatures then
+                renderedDoublingTime
+            else
+                renderLastCase
         ]
     ]
 
@@ -303,7 +331,7 @@ let renderMunicipalities (state : State) dispatch =
                     else compareMaxTests m1 m2)
         | LastPositiveTest ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> 
+            |> Seq.sortWith (fun m1 m2 ->
                 if m1.LastPositiveTest < m2.LastPositiveTest then 1
                 else if m1.LastPositiveTest > m2.LastPositiveTest then -1
                 else compareMaxTests m1 m2)
@@ -381,7 +409,8 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
         prop.children [
             Html.text "Razvrsti:"
             renderSelector currenSortBy SortBy.TotalPositiveTests "Absolutno"
-            renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve"
+            if Highcharts.showExpGrowthFeatures then
+                renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve"
             renderSelector currenSortBy SortBy.LastPositiveTest "Zadnjem primeru"
         ]
     ]

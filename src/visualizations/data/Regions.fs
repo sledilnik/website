@@ -5,7 +5,7 @@ open Fable.SimpleJson
 
 open Types
 
-let url = "https://api.sledilnik.org/api/regions"
+let url = "https://api.sledilnik.org/api/municipalities"
 
 let parseRegionsData data =
     data
@@ -28,13 +28,23 @@ let parseRegionsData data =
                                 |> List.map (fun (regionKey, regionValue) ->
                                     let municipalities =
                                         match regionValue with
-                                        | JObject cityMap ->
-                                            cityMap
+                                        | JObject citiesMap ->
+                                            citiesMap
                                             |> Map.toList
                                             |> List.map (fun (cityKey, cityValue) ->
                                                 match cityValue with
-                                                | JNumber num -> { Name = cityKey ; PositiveTests = Some (int num) }
-                                                | JNull -> { Name = cityKey ; PositiveTests = None }
+                                                | JObject cityMap ->
+                                                    let confirmedToDate =
+                                                        match Map.tryFind "confirmedToDate" cityMap with
+                                                        | Some (JNumber num) -> Some (int num)
+                                                        | Some (JNull) -> None
+                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in confirmedToDate" cityKey)
+                                                    let deceasedToDate =
+                                                        match Map.tryFind "deceasedToDate" cityMap with
+                                                        | Some (JNumber num) -> Some (int num)
+                                                        | Some (JNull) -> None
+                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in deceasedToDate" cityKey)
+                                                    { Name = cityKey ; ConfirmedToDate = confirmedToDate ; DeceasedToDate = deceasedToDate }
                                                 | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s" cityKey)
                                             )
                                         | _ -> failwith (sprintf "nepričakovan format podatkov za regijo %s" regionKey)

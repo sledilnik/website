@@ -100,6 +100,12 @@ let daysMestnik days =
     | 1 -> "dnevu"
     | _ -> "dneh"
 
+let daysOrodnik days =
+    match days % 100 with
+    | 1 -> "dnevom"
+    | 2 -> "dnevoma"
+    | _ -> "dnevi"
+
 let transliterateCSZ (str : string) =
     str
         .Replace("Č",  "C")
