@@ -1,4 +1,3 @@
-
 [<RequireQualifiedAccess>]
 module PatientsChart
 
@@ -24,9 +23,9 @@ type Breakdown =
   with
     static member all = [ ByInOut; BySource; BySeries ]
     static member getName = function
-        | ByInOut -> "Sprejemi in odpusti"
+        | ByInOut -> "Struktura"
         | BySeries -> "Obravnava po pacientih"
-        | BySource -> "Hospitalizirani po bolnišnicah"
+        | BySource -> "Po bolnišnicah"
 
 type Series =
     | InHospital
@@ -47,16 +46,16 @@ module Series =
         [ InHospital; Icu; Critical; AllInHospital; OutOfHospital; Deceased; ]
 
     let byInOut =
-        [ InHospital; Icu; Critical; InHospitalIn; InHospitalDeceased; InHospitalOut; ]
+        [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; ]
 
     // color, dash, name
     let getSeriesInfo = function
-        | InHospital            -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani (trenutno)"
-        | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
-        | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju (trenutno)"
-        | InHospitalIn          -> "#bda506", Solid, "cs-inHospitalIn", "Sprejeti (na dan)"
-        | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni (na dan)"
-        | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli (na dan)"
+        | InHospital            -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani"
+        | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti"
+        | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju"
+        | InHospitalIn          -> "#bda506", Solid, "cs-inHospitalIn", "Sprejeti"
+        | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni"
+        | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli"
         | AllInHospital         -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
         | OutOfHospital         -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | Deceased              -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
@@ -176,9 +175,9 @@ let legendFormatter jsThis =
                 p?series?name
                 p?point?fmtTotal
             match p?series?name with
-            | "Hospitalizirani (trenutno)" | "V intenzivni enoti (trenutno)" -> fmtUnder <- fmtUnder + "↳ "
-            | "Na respiratorju (trenutno)" -> fmtUnder <- "↳ "
-            | "Sprejeti (na dan)" -> fmtUnder <- ""
+            | "Hospitalizirani" | "V intenzivni enoti" -> fmtUnder <- fmtUnder + "↳ "
+            | "Na respiratorju" -> fmtUnder <- "↳ "
+            | "Sprejeti" -> fmtUnder <- ""
             | _ -> ()
 
     fmtStr
@@ -399,10 +398,10 @@ let render (state : State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | data, None ->
         Html.div [
-            Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
+            // Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
             renderChartContainer state
             renderBreakdownSelectors state dispatch
         ]
 
 let patientsChart () =
-    React.elmishComponent("RegionsChart", init (), update, render)
+    React.elmishComponent("PatientsChart", init (), update, render)
