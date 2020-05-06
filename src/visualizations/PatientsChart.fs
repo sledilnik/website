@@ -168,17 +168,17 @@ let legendFormatter jsThis =
 
     let mutable fmtUnder = ""
     let mutable fmtStr = sprintf "%s" fmtDate
-    for p in pts do 
+    for p in pts do
         match p?point?fmtTotal with
         | "null" -> ()
-        | _ -> 
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+        | _ ->
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
-                p?point?fmtTotal             
+                p?point?fmtTotal
             match p?series?name with
-            | "Hospitalizirani" | "V intenzivni enoti" -> fmtUnder <- fmtUnder + "↳ " 
+            | "Hospitalizirani" | "V intenzivni enoti" -> fmtUnder <- fmtUnder + "↳ "
             | "Na respiratorju" -> fmtUnder <- "↳ "
             | "Sprejeti" -> fmtUnder <- ""
             | _ -> ()
@@ -229,12 +229,12 @@ let renderChartOptions (state : State) =
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map (fun dp ->  
+                |> Seq.map (fun dp ->
                     {|
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
                         fmtDate = dp.Date.ToString "d. M. yyyy"
-                        fmtTotal = getPointTotal dp |> string  
+                        fmtTotal = getPointTotal dp |> string
                     |}
                 )
                 |> Array.ofSeq
@@ -318,9 +318,13 @@ let renderChartOptions (state : State) =
         | BySeries      -> "covid19-patients"
         | ByHospital    -> "covid19-hospitals"
 
-    let tooltipOpt = if state.breakdown = Structure 
-                        then {| shared = true; formatter = fun () -> legendFormatter jsThis |} |> pojo
-                        else {| shared = true; formatter = None |} |> pojo
+    let tooltipOpt = {|
+                         shared = true
+                         formatter =
+                             if state.breakdown = Structure then
+                                 (fun () -> legendFormatter jsThis) |> Some
+                             else None
+                      |} |> pojo
 
     let baseOptions = Highcharts.basicChartOptions state.scaleType className
     {| baseOptions with
@@ -331,9 +335,9 @@ let renderChartOptions (state : State) =
             |}
         plotOptions = pojo
             {|
-                series = 
+                series =
                     if state.breakdown = Structure
-                    then pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |} 
+                    then pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
                     else pojo {| stacking = ""; |}
             |}
         series = allSeries
