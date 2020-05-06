@@ -121,7 +121,7 @@ Bolnišnice o posameznih sprejemih ali odpustih, iz katerih bi lahko pridobili n
 <details>
   <summary id=data-hospital-out>Kako pridobivate podatke o odpuščenih iz bolnišnic?</summary>
 
-Podatek **Odpuščeni iz bolnišnice** je izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Večinoma za vse bolnišnice dobivamo dnevno število odpuščenih iz katerega potem lahko potem tudi sklepamo o številu novo sprejetih. Glej tudi [Kako pridobivate podatke o sprejetih v bolnišnico?](#data-hospital-in)
+Podatek **Odpuščeni iz bolnišnice** je izračunana na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Večinoma za vse bolnišnice dobivamo dnevno število odpuščenih iz katerega potem lahko potem tudi sklepamo o številu novo sprejetih. Glej tudi [Kako pridobivate podatke o sprejetih v bolnišnico?](/FAQ/#data-hospital-in)
 
 </details>
 
