@@ -56,7 +56,7 @@ module Series =
         | InHospital            -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani"
         | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti"
         | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju"
-        | InHospitalIn          -> "#bda506", Solid, "cs-inHospitalIn", "Sprejeti"
+        | InHospitalIn          -> "#d5c768", Solid, "cs-inHospitalIn", "Sprejeti"
         | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni"
         | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli"
         | AllInHospital         -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"

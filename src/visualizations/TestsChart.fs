@@ -92,7 +92,7 @@ let renderChartOptions (state : State) =
             {|
                 name = "Pozitivnih testov (na dan)"
                 ``type`` = "column"
-                color = "#bda506"
+                color = "#d5c768"
                 yAxis = 0 
                 data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTests dp)) |> Seq.toArray
