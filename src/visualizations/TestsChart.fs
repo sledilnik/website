@@ -81,7 +81,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = "Negativnih testov (na dan)"
+                name = "Negativnih testov"
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
@@ -90,7 +90,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Pozitivnih testov (na dan)"
+                name = "Pozitivnih testov"
                 ``type`` = "column"
                 color = "#d5c768"
                 yAxis = 0 
