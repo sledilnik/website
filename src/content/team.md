@@ -1,6 +1,6 @@
 # Ekipa
 
-*COVID-19 Sledilink je odprto podatkovni in odprto kodni projekt, ki ne bi bil mogoč brez številnih vnosov in komentarjev v bazo bolj ali manj anonimnih posameznikov, sodelavcev, znancev, kolegov ter izmenjave idej skupnosti na Slacku. HVALA!*
+*COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mogoč brez številnih vnosov in komentarjev v bazo bolj ali manj anonimnih posameznikov, sodelavcev, znancev, kolegov ter izmenjave idej skupnosti na Slacku. HVALA!*
 
 Gre za "crowdsourced" projekt, kjer **lahko vsak prispeva** tako, da vnese kakšen nov vir ali informacijo iz svojega okolja - [enostavno jo dodate kot komentar na katerokoli polje v dokumentu](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0). Veseli bomo tudi podatkov iz bolnišnic, štabov Civilne zaščite ipd ali pa zgolj javne podpore v zahtevi za transparentno in ažurno objavljanje podatkov.
 
