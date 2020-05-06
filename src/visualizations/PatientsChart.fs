@@ -17,15 +17,15 @@ type Segmentation =
     | Facility of string
 
 type Breakdown =
-    | ByInOut
+    | Structure
     | BySeries
-    | BySource
+    | ByHospital
   with
-    static member all = [ ByInOut; BySource; BySeries ]
+    static member all = [ Structure; ByHospital; ]
     static member getName = function
-        | ByInOut -> "Struktura"
-        | BySeries -> "Obravnava po pacientih"
-        | BySource -> "Po bolnišnicah"
+        | Structure     -> "Struktura"
+        | BySeries      -> "Obravnava po pacientih"
+        | ByHospital    -> "Po bolnišnicah"
 
 type Series =
     | InHospital
@@ -42,11 +42,14 @@ module Series =
     let all =
         [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; AllInHospital; OutOfHospital; Deceased; ]
 
+    let structure =
+        [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; ]
+
     let bySeries =
         [ InHospital; Icu; Critical; AllInHospital; OutOfHospital; Deceased; ]
 
-    let byInOut =
-        [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; ]
+    let byHospital =
+        [ InHospital; ]
 
     // color, dash, name
     let getSeriesInfo = function
@@ -72,12 +75,12 @@ type State = {
   } with
     static member switchBreakdown breakdown state =
         match breakdown with
-        | ByInOut ->
+        | Structure ->
             { state with
                 breakdown=breakdown
                 allSegmentations = [ Totals ]
                 activeSegmentations = Set [ Totals ]
-                activeSeries = Set Series.byInOut
+                activeSeries = Set Series.structure
             }
         | BySeries ->
             { state with
@@ -86,7 +89,7 @@ type State = {
                 activeSegmentations = Set [ Totals ]
                 activeSeries = Set Series.bySeries
             }
-        | BySource ->
+        | ByHospital ->
             let segmentations =
                 match state.data with
                 | [||] -> [Totals]
@@ -107,7 +110,7 @@ type State = {
                 breakdown=breakdown
                 allSegmentations = segmentations
                 activeSegmentations = Set segmentations
-                activeSeries = Set [ InHospital ]
+                activeSeries = Set Series.byHospital
             }
     static member initial =
         {
@@ -118,9 +121,9 @@ type State = {
             activeSegmentations = Set [ Totals ]
             allSeries = Series.all
             activeSeries = Set Series.all
-            breakdown = ByInOut
+            breakdown = Structure
         }
-        |> State.switchBreakdown ByInOut
+        |> State.switchBreakdown Structure
 
 
 
@@ -258,15 +261,11 @@ let renderChartOptions (state : State) =
             color = color
             dashStyle = line |> DashStyle.toString
             name = name
-            //className = className
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
-            //yAxis = 0 // axis index
-            //showInLegend = true
-            //fillOpacity = 0
         |}
         |> pojo
 
@@ -289,22 +288,18 @@ let renderChartOptions (state : State) =
             color = color
             name = name
             dashStyle = Solid |> DashStyle.toString
-            //className = "cs-hospital-"+facility
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
             showInLegend = true
-            //yAxis = 0 // axis index
-            //showInLegend = true
-            //fillOpacity = 0
         |}
         |> pojo
 
     let allSeries = [|
         match state.breakdown with
-        | ByInOut ->
+        | Structure ->
             for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
                     yield renderBarSeries series
@@ -312,32 +307,32 @@ let renderChartOptions (state : State) =
             for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
                     yield renderSeries series
-        | BySource ->
+        | ByHospital ->
             for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 yield renderSources segmentation
     |]
 
     let className =
         match state.breakdown with
-        | ByInOut -> "covid19-patients-inout"
-        | BySeries -> "covid19-patients"
-        | BySource -> "covid19-hospitals"
+        | Structure     -> "covid19-patients-inout"
+        | BySeries      -> "covid19-patients"
+        | ByHospital    -> "covid19-hospitals"
 
-    let tooltipOpt = if state.breakdown = ByInOut 
+    let tooltipOpt = if state.breakdown = Structure 
                         then {| shared = true; formatter = fun () -> legendFormatter jsThis |} |> pojo
-                        else {| shared = true |} |> pojo
+                        else {| shared = true; formatter = None |} |> pojo
 
     let baseOptions = Highcharts.basicChartOptions state.scaleType className
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = if state.breakdown = ByInOut then "column" else "line"
+                ``type`` = if state.breakdown = Structure then "column" else "line"
                 zoomType = "x"
             |}
         plotOptions = pojo
             {|
                 series = 
-                    if state.breakdown = ByInOut 
+                    if state.breakdown = Structure
                     then pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |} 
                     else pojo {| stacking = ""; |}
             |}
@@ -348,7 +343,7 @@ let renderChartOptions (state : State) =
         legend = pojo
             {|
                 enabled = Some true
-                title = {| text=if state.breakdown=BySource then "Hospitalizirani v:" else "" |}
+                title = {| text=if state.breakdown=ByHospital then "Hospitalizirani v:" else "" |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"
