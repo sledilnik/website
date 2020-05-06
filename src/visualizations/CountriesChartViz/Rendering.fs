@@ -276,26 +276,22 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
         prop.children ((Html.text "X os: ") :: xAxisTypesSelectors)
     ]
 
-let renderChartDisplayControls state dispatch =
-    Html.div [
-        prop.className "chart-display-properties"
-        prop.children [
-            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
-            Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch)
-        ]
-    ]
-
 let render state dispatch =
     let xAxisType = state.XAxisType
 
     let chartData =
         state |> prepareChartData xAxisType DaysOfMovingAverage
 
+    let topControls = [
+            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
+            Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch)
+    ]
+
     match chartData with
     | Some chartData ->
         Html.div [
-            renderChartDisplayControls state dispatch
+            Utils.renderChartTopControls topControls
             renderChartContainer state chartData
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet

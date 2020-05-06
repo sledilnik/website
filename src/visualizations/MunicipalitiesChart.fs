@@ -208,7 +208,7 @@ let renderMunicipality (municipality : Municipality) =
         | None -> Seq.empty
         | Some maxValue ->
             seq {
-                for i, d in truncatedData |> Seq.mapi (fun i d -> i, d) do
+                for _, d in truncatedData |> Seq.mapi (fun i d -> i, d) do
                     match d.TotalPositiveTests with
                     | None ->
                         yield Html.div [
@@ -278,7 +278,7 @@ let renderMunicipality (municipality : Municipality) =
         ]
     ]
 
-let renderMunicipalities (state : State) dispatch =
+let renderMunicipalities (state : State) _ =
 
     let dataFilteredByQuery =
         let query = state.SearchQuery.Trim().ToLower() |> Utils.transliterateCSZ
@@ -304,8 +304,8 @@ let renderMunicipalities (state : State) dispatch =
     let compareStringOption s1 s2 =
         match s1, s2 with
         | None, None -> 0
-        | Some s1, None -> 1
-        | None, Some s2 -> -1
+        | Some _, None -> 1
+        | None, Some _ -> -1
         | Some s1, Some s2 -> System.String.Compare(s1, s2)
 
     let compareMaxTests m1 m2 =
@@ -323,8 +323,8 @@ let renderMunicipalities (state : State) dispatch =
             |> Seq.sortWith (fun m1 m2 ->
                 match m1.DoublingTime, m2.DoublingTime with
                 | None, None -> compareStringOption m1.Name m2.Name
-                | Some d1, None -> -1
-                | None, Some d2 -> 1
+                | Some _, None -> -1
+                | None, Some _ -> 1
                 | Some d1, Some d2 ->
                     if d1 > d2 then 1
                     else if d1 < d2 then -1
@@ -392,9 +392,9 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
-let renderSortBy (currenSortBy : SortBy) dispatch =
+let renderSortBy (currentSortBy : SortBy) dispatch =
 
-    let renderSelector (currentSortBy : SortBy) (sortBy : SortBy) (label : string) =
+    let renderSelector (sortBy : SortBy) (label : string) =
         let defaultProps =
             [ prop.text label
               prop.className [
@@ -408,10 +408,10 @@ let renderSortBy (currenSortBy : SortBy) dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Razvrsti:"
-            renderSelector currenSortBy SortBy.TotalPositiveTests "Absolutno"
+            renderSelector SortBy.TotalPositiveTests "Absolutno"
             if Highcharts.showExpGrowthFeatures then
-                renderSelector currenSortBy SortBy.DoublingTime "Dnevih podvojitve"
-            renderSelector currenSortBy SortBy.LastPositiveTest "Zadnjem primeru"
+                renderSelector SortBy.DoublingTime "Dnevih podvojitve"
+            renderSelector SortBy.LastPositiveTest "Zadnjem primeru"
         ]
     ]
 
@@ -420,18 +420,15 @@ let render (state : State) dispatch =
 
     let element = Html.div [
         prop.children [
-            Html.div [
-                prop.className "filter-and-sort"
-                prop.children [
-                    Html.div [
-                        prop.className "filters"
-                        prop.children [
-                            renderRegionSelector state.Regions state.FilterByRegion dispatch
-                            renderSearch state.SearchQuery dispatch
-                        ]
+            Utils.renderChartTopControls [
+                Html.div [
+                    prop.className "filters"
+                    prop.children [
+                        renderRegionSelector state.Regions state.FilterByRegion dispatch
+                        renderSearch state.SearchQuery dispatch
                     ]
-                    renderSortBy state.SortBy dispatch
                 ]
+                renderSortBy state.SortBy dispatch
             ]
             Html.div [
                 prop.className "municipalities"

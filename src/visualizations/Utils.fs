@@ -70,6 +70,19 @@ let renderScaleSelector scaleType dispatch =
         ]
     ]
 
+let renderChartTopControls (children: ReactElement seq) =
+    Html.div [
+        prop.className "chart-display-properties"
+        prop.children children
+    ]
+
+let renderChartTopControlRight (topControl: ReactElement) =
+    Html.div [
+        prop.className "chart-display-properties"
+        prop.style [ style.justifyContent.flexEnd ]
+        prop.children [ topControl ]
+    ]
+
 let renderLoading =
     Html.div [
         prop.className "loader"
