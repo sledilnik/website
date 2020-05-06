@@ -324,6 +324,10 @@ let renderChartOptions (state : State) =
         | BySeries -> "covid19-patients"
         | BySource -> "covid19-hospitals"
 
+    let tooltipOpt = if state.breakdown = ByInOut 
+                        then {| shared = true; formatter = fun () -> legendFormatter jsThis |} |> pojo
+                        else {| shared = true |} |> pojo
+
     let baseOptions = Highcharts.basicChartOptions state.scaleType className
     {| baseOptions with
         chart = pojo
@@ -340,11 +344,7 @@ let renderChartOptions (state : State) =
             |}
         series = allSeries
 
-        tooltip = pojo
-            {|
-                shared = true
-                formatter = fun () -> legendFormatter jsThis
-            |}
+        tooltip = tooltipOpt
 
         legend = pojo
             {|
