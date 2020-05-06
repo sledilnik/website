@@ -64,7 +64,7 @@ let legendFormatter jsThis =
     let fmtDate = pts.[0]?point?fmtDate
 
     let mutable fmtUnder = ""
-    let mutable fmtStr = sprintf "%s" fmtDate
+    let mutable fmtStr = sprintf "<b>%s</b>" fmtDate
     for p in pts do 
         match p?point?fmtTotal with
         | "null" -> ()

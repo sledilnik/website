@@ -14,7 +14,7 @@ type DisplayType =
     | Regular
     | NsApr20
 with
-    static member all = [ Total; Regular; NsApr20; ]
+    static member all = [ Regular; NsApr20; Total; ]
     static member getName = function
         | Total -> "Skupaj"
         | Regular -> "Redno"
