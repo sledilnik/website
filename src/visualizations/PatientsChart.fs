@@ -43,7 +43,7 @@ module Series =
         [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; AllInHospital; OutOfHospital; Deceased; ]
 
     let structure =
-        [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; ]
+        [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; ]
 
     let bySeries =
         [ InHospital; Icu; Critical; AllInHospital; OutOfHospital; Deceased; ]
@@ -166,24 +166,27 @@ let legendFormatter jsThis =
     let pts: obj[] = jsThis?points
     let fmtDate = pts.[0]?point?fmtDate
 
-    let mutable fmtUnder = ""
-    let mutable fmtStr = sprintf "%s" fmtDate
+    let mutable fmtStr = ""
+    let mutable fmtLine = ""
+    let mutable fmtUnder = "↳ "
     for p in pts do
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+            fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
             match p?series?name with
+            | "Hospitalizirani" -> fmtStr <- fmtLine + fmtStr
+            | _ -> fmtStr <- fmtStr + fmtLine
+            match p?series?name with
             | "Hospitalizirani" | "V intenzivni enoti" -> fmtUnder <- fmtUnder + "↳ "
-            | "Na respiratorju" -> fmtUnder <- "↳ "
-            | "Sprejeti" -> fmtUnder <- ""
+            | "Na respiratorju" | "Sprejeti" -> fmtUnder <- ""
             | _ -> ()
 
-    fmtStr
+    sprintf "<b>%s</b>" fmtDate + fmtStr 
 
 let renderChartOptions (state : State) =
 
@@ -300,9 +303,8 @@ let renderChartOptions (state : State) =
     let allSeries = [|
         match state.breakdown with
         | Structure ->
-            for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
-                    yield renderBarSeries series
+            for series in Series.structure do
+                yield renderBarSeries series
         | BySeries ->
             for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
