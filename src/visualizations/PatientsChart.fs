@@ -6,6 +6,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Fable.Core.JsInterop
 
 open Highcharts
 open Types
@@ -53,9 +54,9 @@ module Series =
         | InHospital            -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani (trenutno)"
         | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti (trenutno)"
         | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju (trenutno)"
-        | InHospitalIn          -> "#bda506", Solid, "cs-inHospitalIn", "Sprejeti"
-        | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni"
-        | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli"
+        | InHospitalIn          -> "#bda506", Solid, "cs-inHospitalIn", "Sprejeti (na dan)"
+        | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni (na dan)"
+        | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli (na dan)"
         | AllInHospital         -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
         | OutOfHospital         -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | Deceased              -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
@@ -159,6 +160,29 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | SwitchBreakdown breakdown ->
         (state |> State.switchBreakdown breakdown), Cmd.none
 
+let legendFormatter jsThis =
+    let pts: obj[] = jsThis?points
+    let fmtDate = pts.[0]?point?fmtDate
+
+    let mutable fmtUnder = ""
+    let mutable fmtStr = sprintf "%s" fmtDate
+    for p in pts do 
+        match p?point?fmtTotal with
+        | "null" -> ()
+        | _ -> 
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+                fmtUnder
+                p?series?color
+                p?series?name
+                p?point?fmtTotal             
+            match p?series?name with
+            | "Hospitalizirani (trenutno)" | "V intenzivni enoti (trenutno)" -> fmtUnder <- fmtUnder + "↳ " 
+            | "Na respiratorju (trenutno)" -> fmtUnder <- "↳ "
+            | "Sprejeti (na dan)" -> fmtUnder <- ""
+            | _ -> ()
+
+    fmtStr
+
 let renderChartOptions (state : State) =
 
     let startDate = DateTime(2020,03,10)
@@ -173,17 +197,26 @@ let renderChartOptions (state : State) =
     let renderBarSeries series =
         let subtract (a : int option) (b : int option) = Some (b.Value - a.Value)
         let negative (a : int option) = Some (- a.Value)
-        let renderBarPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
+
+        let getPoint : (Data.Patients.PatientsStats -> int option) =
             match series with
-            | InHospital            -> fun ps -> ps.JsDate12h, ps.total.inHospital.today |> subtract ps.total.icu.today |> zeroToNone
-            | Icu                   -> fun ps -> ps.JsDate12h, ps.total.icu.today |> subtract ps.total.critical.today |> zeroToNone
-            | Critical              -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
-            | InHospitalIn          -> fun ps -> ps.JsDate12h, ps.total.inHospital.``in`` |> zeroToNone
-            | InHospitalOut         -> fun ps -> ps.JsDate12h, negative ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, negative ps.total.deceased.hospital |> zeroToNone
-            | AllInHospital         -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
-            | OutOfHospital         -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
-            | Deceased              -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
+            | InHospital            -> fun ps -> ps.total.inHospital.today |> subtract ps.total.icu.today |> subtract ps.total.inHospital.``in`` |> zeroToNone
+            | Icu                   -> fun ps -> ps.total.icu.today |> subtract ps.total.critical.today |> zeroToNone
+            | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
+            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
+            | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital |> zeroToNone
+            | _ -> fun ps -> None
+
+        let getPointTotal : (Data.Patients.PatientsStats -> int option) =
+            match series with
+            | InHospital            -> fun ps -> ps.total.inHospital.today |> zeroToNone
+            | Icu                   -> fun ps -> ps.total.icu.today |> zeroToNone
+            | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
+            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
+            | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital |> zeroToNone
+            | _ -> fun ps -> None
 
         let color, line, className, name = Series.getSeriesInfo series
 
@@ -194,7 +227,14 @@ let renderChartOptions (state : State) =
             data =
                 state.data
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map renderBarPoint
+                |> Seq.map (fun dp ->  
+                    {|
+                        x = dp.Date |> jsTime12h
+                        y = getPoint dp
+                        fmtDate = dp.Date.ToString "d. M. yyyy"
+                        fmtTotal = getPointTotal dp |> string  
+                    |}
+                )
                 |> Array.ofSeq
         |}
         |> pojo
@@ -299,6 +339,13 @@ let renderChartOptions (state : State) =
                     else pojo {| stacking = ""; |}
             |}
         series = allSeries
+
+        tooltip = pojo
+            {|
+                shared = true
+                formatter = fun () -> legendFormatter jsThis
+            |}
+
         legend = pojo
             {|
                 enabled = Some true
