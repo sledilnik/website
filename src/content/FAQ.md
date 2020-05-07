@@ -194,7 +194,7 @@ Gre za odstotno stopnjo rasti na današnji dan v številu oseb glede na prejšnj
 </details>
 
 <details>
-  <summary id=chart-metrics>Kaj kaže graf "Širjenje COVID-19 v Sloveniji"?</summary>
+  <summary id=chart-metrics>Kaj kaže graf "Stanje COVID-19 v Sloveniji"?</summary>
 
 Graf prikazuje dnevno in skupno dinamiko širjenja okužbe od začetka do danes. Uporabljeni kazalniki (gl. Katere kazalnike vključuje graf o širjenju?) nam pomagajo razumeti, ali in kako uspešno obvladujemo širjenje virusa. Spremljamo lahko, kakšen je dnevni prirast okuženih, in posredno vidimo, ali ukrepi delujejo; iz podatka o številu hospitaliziranih in deleža teh v intenzivni enoti lahko razberemo, koliko oseb je bolezen resno ogrozila, hkrati pa nam ti podatki kažejo tudi, kolikšna je obremenjenost zdravstvenega sistema.
 
@@ -203,7 +203,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 </details>
 
 <details>
-  <summary id=chart-metrics-included>Katere kazalnike vključuje graf "Širjenje COVID-19 v Sloveniji"?</summary>
+  <summary id=chart-metrics-included>Katere kazalnike vključuje graf "Stanje COVID-19 v Sloveniji"?</summary>
 
 * **Testiranja (na dan)** = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19. V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.
 
