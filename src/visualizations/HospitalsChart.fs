@@ -2,7 +2,6 @@
 module HospitalsChart
 
 open System
-open Fable.Core
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -108,12 +107,12 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
         match cType with
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
-        | Vents -> fun ps -> failwithf "no vents in data"
+        | Vents -> fun _ -> failwithf "no vents in data"
     let extractFacilityCount : PatientsByFacilityStats -> int option =
         match cType with
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
-        | Vents -> fun ps -> failwithf "no vents in data"
+        | Vents -> fun _ -> failwithf "no vents in data"
 
     match scope with
     | Totals ->
@@ -347,7 +346,7 @@ let renderChartOptions (state : State) =
 
 let renderChartContainer state =
     Html.div [
-        prop.style [ style.height 480 ] 
+        prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
@@ -390,7 +389,6 @@ let renderTable (state: State) dispatch =
             |> Option.flatten
 
     let renderFacilityCells scope (facilityName: string) = [
-        let isCurrent = state.scope = scope
         yield Html.th [
             prop.className "text-left"
             prop.text facilityName
@@ -398,7 +396,6 @@ let renderTable (state: State) dispatch =
 
         let numericCell (pt: int option) =
             Html.td [ prop.text (pt |> Option.map string |> Option.defaultValue "") ]
-        let getFree cur total = Option.map2 (-) total cur
 
         // postelje
         let cur = getPatientsDp scope Beds
@@ -510,9 +507,12 @@ let render (state : State) dispatch =
     match state.facData, state.error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
-    | data, None ->
+    | _, None ->
         Html.div [
-            Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
+            Utils.renderChartTopControlRight
+                (Utils.renderScaleSelector
+                    state.scaleType (ScaleTypeChanged >> dispatch))
+
             renderChartContainer state
             //Html.div [ prop.style [ style.height 10 ] ]
             renderBreakdownSelectors state dispatch

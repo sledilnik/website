@@ -115,7 +115,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                             Region = data.Region
                             TotalConfirmedCases = Some data.TotalConfirmedCases }
         }
-        
+
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
@@ -255,14 +255,11 @@ let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
 let render (state : State) dispatch =
     Html.div [
         prop.children [
-            Html.div [
-                prop.className "filter-and-display"
-                prop.children [
-                    Html.div [
-                        renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
-                        renderDisplayTypeSelector state.DisplayType (DisplayTypeChanged >> dispatch)
-                    ] 
-                ]
+            Utils.renderChartTopControls [
+                renderDataTimeIntervalSelector
+                    state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                renderDisplayTypeSelector
+                    state.DisplayType (DisplayTypeChanged >> dispatch)
             ]
             Html.div [
                 prop.className "map"

@@ -8,9 +8,6 @@ open Feliz.ElmishComponents
 
 open Highcharts
 open Types
-open System
-open Browser
-open Types
 
 let colors =
     [ "#ffa600"
@@ -63,7 +60,6 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         regions
         |> List.filter (fun region -> not (Set.contains region.Name excludedRegions))
         |> List.mapi2 (fun i color region ->
-            let config = getRegionName region.Name
             { Key = region.Name
               Color = color
               Visible = i <= 2 } ) colors
@@ -160,7 +156,9 @@ let renderMetricsSelectors metrics dispatch =
 
 let render (state : State) dispatch =
     Html.div [
-        Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        Utils.renderChartTopControlRight
+            (Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch))
         renderChartContainer state
         renderMetricsSelectors state.Metrics dispatch
     ]

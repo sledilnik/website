@@ -140,24 +140,22 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 marker = pojo {| enabled = false |}
                 |}
             )
-        // we need to reverse the array, for some reason
-        |> Array.rev
 
 
     let legend =
-        {|
-            enabled = true
-            title = ""
-            align = "left"
-            verticalAlign = "top"
-            borderColor = "#ddd"
-            borderWidth = 1
-            layout = "vertical"
-            floating = true
-            x = 20
-            y = 30
-            backgroundColor = "rgba(255,255,255,0.5)"
-            reversed = true
+        pojo {|
+                enabled = true
+                title = pojo {| text = chartData.DataDescription |}
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                layout = "vertical"
+                floating = true
+                padding = 15
+                x = 20
+                y = 30
+                backgroundColor = "rgba(255,255,255,0.5)"
         |}
 
     let baseOptions =
@@ -203,9 +201,10 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             {|
                 series = pojo {| stacking = "" |}
             |}
-        legend = pojo {| legend with enabled = true |}
+        legend = legend
         tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter state jsThis
+                          formatter = fun () ->
+                              tooltipFormatter state chartData jsThis
                           shared = true
                           useHTML = true
                         |}
@@ -248,25 +247,33 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
 let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
     let renderXAxisSelector (axisSelector: XAxisType) =
         let active = axisSelector = activeXAxisType
-        Html.div [
-            match axisSelector with
-            | ByDate -> "kronološko"
-            | DaysSinceFirstDeath -> "od prve smrti"
-            | DaysSinceOneDeathPerMillion -> "od prve smrti na milij. preb."
-            |> prop.text
 
-            prop.className [
-                true, "btn btn-sm metric-2-selector"
-                active, "metric-2-selector--selected selected" ]
-            if not active then prop.onClick (fun _ -> dispatch axisSelector)
-            if active then prop.style [ style.backgroundColor "#808080" ]
-          ]
+        let defaultProps =
+            [
+                match axisSelector with
+                | ByDate -> "Kronološko"
+                | DaysSinceFirstDeath -> "Od prve smrti"
+                | DaysSinceOneDeathPerMillion -> "Od prve smrti na milij. preb."
+                |> prop.text
 
-    Html.div [
-        prop.className "metrics-2-selectors"
+                prop.className [
+                    true, "chart-display-property-selector__item"
+                    active, "selected" ]
+            ]
+
+        if active then Html.div defaultProps
+        else
+            Html.div
+                ((prop.onClick (fun _ -> dispatch axisSelector))
+                    :: defaultProps)
+
+    let xAxisTypesSelectors =
         [ ByDate; DaysSinceFirstDeath; DaysSinceOneDeathPerMillion]
         |> List.map renderXAxisSelector
-        |> prop.children
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children ((Html.text "X os: ") :: xAxisTypesSelectors)
     ]
 
 let render state dispatch =
@@ -275,18 +282,20 @@ let render state dispatch =
     let chartData =
         state |> prepareChartData xAxisType DaysOfMovingAverage
 
+    let topControls = [
+            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
+            Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch)
+    ]
+
     match chartData with
     | Some chartData ->
         Html.div [
-            Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch)
+            Utils.renderChartTopControls topControls
             renderChartContainer state chartData
             renderCountriesSetsSelectors
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
-            renderXAxisSelectors
-                state.XAxisType
-                (XAxisTypeChanged >> dispatch)
 
             Html.div [
                 prop.className "disclaimer"

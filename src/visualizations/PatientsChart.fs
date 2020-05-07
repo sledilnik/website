@@ -104,7 +104,7 @@ type State = {
                     |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map (fun (facility, stats) -> facility,stats.inHospital.toDate)) // hospital name
                     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
                     |> Map.toList
-                    |> List.sortBy (fun (f,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
+                    |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
                     |> List.map (fst >> Facility)
             { state with
                 breakdown=breakdown
@@ -186,7 +186,7 @@ let legendFormatter jsThis =
             | "Na respiratorju" | "Sprejeti" -> fmtUnder <- ""
             | _ -> ()
 
-    sprintf "<b>%s</b>" fmtDate + fmtStr 
+    sprintf "<b>%s</b>" fmtDate + fmtStr
 
 let renderChartOptions (state : State) =
 
@@ -306,7 +306,7 @@ let renderChartOptions (state : State) =
             for series in Series.structure do
                 yield renderBarSeries series
         | BySeries ->
-            for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
+            for _ in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
                     yield renderSeries series
         | ByHospital ->
@@ -393,9 +393,12 @@ let render (state : State) dispatch =
     match state.data, state.error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
-    | data, None ->
+    | _, None ->
         Html.div [
-            // Utils.renderScaleSelector state.scaleType (ScaleTypeChanged >> dispatch)
+            Utils.renderChartTopControlRight
+                (Utils.renderScaleSelector
+                    state.scaleType (ScaleTypeChanged >> dispatch))
+
             renderChartContainer state
             renderBreakdownSelectors state dispatch
         ]

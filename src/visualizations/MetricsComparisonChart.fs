@@ -85,14 +85,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with ScaleType = scaleType }, Cmd.none
 
 let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metrics) =
-
-    let maxOption a b =
-        match a, b with
-        | None, None -> None
-        | Some x, None -> Some x
-        | None, Some y -> Some y
-        | Some x, Some y -> Some (max x y)
-
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
     let metricDataGenerator mc =
@@ -179,7 +171,9 @@ let renderMetricsSelectors metrics dispatch =
 
 let render state dispatch =
     Html.div [
-        Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        Utils.renderChartTopControlRight
+            (Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch))
         renderChartContainer state.ScaleType state.Data state.Metrics
         renderMetricsSelectors state.Metrics dispatch
     ]
