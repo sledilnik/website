@@ -438,7 +438,8 @@ let render (state : State) dispatch =
     let activeScaleType = ChartMode.ScaleType state.ChartMode
 
     Html.div [
-        renderScaleTypeSelectors activeScaleType (ScaleTypeChanged >> dispatch)
+        Utils.renderChartTopControlRight
+            (renderScaleTypeSelectors activeScaleType (ScaleTypeChanged >> dispatch))
         renderChartContainer state
         renderChartCategorySelectors state.ChartMode dispatch
     ]
