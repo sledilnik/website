@@ -101,7 +101,15 @@ let tooltipFormatter state chartData jsThis =
 
         let s = StringBuilder()
         s.Append dataDescription |> ignore
-        s.Append "<br/><table>" |> ignore
+        s.Append "<br/>" |> ignore
+
+        match state.XAxisType with
+        | ByDate ->
+            let date = points.[0]?point?date
+            s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
+        | _ -> ignore()
+
+        s.Append "<table>" |> ignore
 
         points
         |> Array.sortByDescending
@@ -110,7 +118,7 @@ let tooltipFormatter state chartData jsThis =
                     dataValue)
         |> Array.iter
                (fun country ->
-                    let countryCode = country?series?name
+                    let countryName = country?series?name
                     let date = country?point?date
                     let dataValue: float = country?point?y
 
@@ -120,12 +128,12 @@ let tooltipFormatter state chartData jsThis =
                         | ByDate ->
                             sprintf
                                 "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
-                                countryCode
+                                countryName
                                 (Utils.formatTo1DecimalWithTrailingZero dataValue)
                         | _ ->
                             sprintf
                                 "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
-                                countryCode
+                                countryName
                                 date
                                 (Utils.formatTo1DecimalWithTrailingZero dataValue)
                     s.Append countryTooltip |> ignore

@@ -111,15 +111,13 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 visible = true
                 color = countrySeries.Color
                 name = countrySeries.CountryName
-//                    sprintf "%s (%s)"
-//                        countrySeries.CountryName countrySeries.CountryAbbr
                 data =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
                         pojo {|
                              x =
                                  match state.XAxisType with
-                                 | ByDate -> entry.Date :> obj
+                                 | ByDate -> entry.Date |> jsTime12h :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
                              y = entry.TotalDeathsPerMillion
