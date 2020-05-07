@@ -64,7 +64,7 @@ let renderScaleSelector scaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Skala na Y osi: "
+            Html.text "Y os: "
             renderSelector Linear scaleType "Linearna"
             renderSelector Logarithmic scaleType "Logaritemska"
         ]

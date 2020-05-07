@@ -251,9 +251,9 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
         let defaultProps =
             [
                 match axisSelector with
-                | ByDate -> "kronološko"
-                | DaysSinceFirstDeath -> "od prve smrti"
-                | DaysSinceOneDeathPerMillion -> "od prve smrti na milij. preb."
+                | ByDate -> "Kronološko"
+                | DaysSinceFirstDeath -> "Od prve smrti"
+                | DaysSinceOneDeathPerMillion -> "Od prve smrti na milij. preb."
                 |> prop.text
 
                 prop.className [
