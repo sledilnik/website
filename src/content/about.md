@@ -48,3 +48,5 @@ Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz viro
 
 Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike sodelovanja nas kontaktirajte na info@sledilnik.org.
 
+Uporaba Sledilnika ne bi bila možna brez spletnega servisa CloudFlare, preko katerega pretakamo podatke in ki za svoje nemoteno delovanje na vaš računalnik vstavi en sam piškotek, ki tam ostane največ 30 dni. Več informacij o varovanju zasebnosti [najdete na njihovi spletni strani]([https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies#12345682](https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies#12345682).
+
