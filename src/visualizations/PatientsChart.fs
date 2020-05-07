@@ -168,23 +168,23 @@ let legendFormatter jsThis =
 
     let mutable fmtStr = ""
     let mutable fmtLine = ""
-    let mutable fmtUnder = "↳ "
+    let mutable fmtUnder = ""
     for p in pts do
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
+            match p?series?name with
+            | "Hospitalizirani" | "Odpuščeni" | "Umrli"  -> fmtUnder <- ""
+            | _ -> fmtUnder <- fmtUnder + "↳ "
             fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
-            match p?series?name with
-            | "Hospitalizirani" -> fmtStr <- fmtLine + fmtStr
-            | _ -> fmtStr <- fmtStr + fmtLine
-            match p?series?name with
-            | "Hospitalizirani" | "V intenzivni enoti" -> fmtUnder <- fmtUnder + "↳ "
-            | "Na respiratorju" | "Sprejeti" -> fmtUnder <- ""
-            | _ -> ()
+            if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then 
+                fmtStr <- fmtLine + fmtStr // if we got Sprejeti before, then put it after Hospitalizirani
+            else 
+                fmtStr <- fmtStr + fmtLine
 
     sprintf "<b>%s</b>" fmtDate + fmtStr
 
