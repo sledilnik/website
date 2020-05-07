@@ -395,9 +395,9 @@ let render (state : State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
-            Utils.renderChartTopControlRight
-                (Utils.renderScaleSelector
-                    state.scaleType (ScaleTypeChanged >> dispatch))
+            //Utils.renderChartTopControlRight
+            //    (Utils.renderScaleSelector
+            //        state.scaleType (ScaleTypeChanged >> dispatch))
 
             renderChartContainer state
             renderBreakdownSelectors state dispatch
