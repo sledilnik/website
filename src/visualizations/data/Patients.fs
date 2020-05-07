@@ -17,10 +17,8 @@ type PatientCounts = {
 }
 
 type TotalPatientStats = {
-    inCare: int option // obsolete
     outOfHospital: PatientCounts
     inHospital: PatientCounts
-    //needsO2: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
     deceased: PatientCounts
@@ -28,7 +26,6 @@ type TotalPatientStats = {
 
 type PatientsByFacilityStats = {
     inHospital: PatientCounts
-    //needsO2: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
     deceased: PatientCounts

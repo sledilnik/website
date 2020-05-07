@@ -42,7 +42,7 @@ module Series =
     let getSeriesInfo = function
         | Deceased      -> "#666666",   "cs-deceased",      "Umrli"
         | Recovered     -> "#8cd4b2",   "cs-recovered",     "Preboleli"
-        | Active        -> "#bda506",   "cs-active",        "Aktivni"
+        | Active        -> "#d5c768",   "cs-active",        "Aktivni"
         | InHospital    -> "#be7a2a",   "cs-inHospital",    "Hospitalizirani"
         | Icu           -> "#d99a91",   "cs-inHospitalICU", "V intenzivni enoti"
         | Critical      -> "#bf5747",   "cs-critical",      "Na respiratorju"
@@ -64,7 +64,7 @@ let legendFormatter jsThis =
     let fmtDate = pts.[0]?point?fmtDate
 
     let mutable fmtUnder = ""
-    let mutable fmtStr = sprintf "%s" fmtDate
+    let mutable fmtStr = sprintf "<b>%s</b>" fmtDate
     for p in pts do 
         match p?point?fmtTotal with
         | "null" -> ()
