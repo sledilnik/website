@@ -53,7 +53,7 @@ module Series =
 
     // color, dash, name
     let getSeriesInfo = function
-        | InHospital            -> "#be7a2a", Solid, "cs-inHospital", "Hospitalizirani"
+        | InHospital            -> "#de9a5a", Solid, "cs-inHospital", "Hospitalizirani"
         | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti"
         | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju"
         | InHospitalIn          -> "#d5c768", Solid, "cs-inHospitalIn", "Sprejeti"
