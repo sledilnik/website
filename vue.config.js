@@ -22,12 +22,12 @@ module.exports = {
   },
   pages: {
     index: {
-      entry: 'src/index.js',
+      entry: ['src/index.js'],
       template: indexTemplate,
       filename: 'index.html',
     },
     embed: {
-      entry: 'src/embed.js',
+      entry: ['src/embed.js'],
       template: indexTemplate,
       filename: 'embed.html',
     },
