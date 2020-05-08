@@ -154,6 +154,7 @@ let renderChartOptions (state : State) =
             DateTime(2020, 5, 4), 101, 1247
             DateTime(2020, 5, 5), 95, 1255
             DateTime(2020, 5, 6), 83, 1267
+            DateTime(2020, 5, 7), 77, 1274
         ]
         |> List.map (fun (date,  active,  recovered) ->
             date, { Key = date;  Active = active;  Recovered = recovered })
