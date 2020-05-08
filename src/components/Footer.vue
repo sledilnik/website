@@ -64,9 +64,16 @@ footer
 
     @media only screen and (min-width: 768px)
       margin-bottom: 0
+    @media only screen and (max-width: 480px)
+      display: inline-block
 
   .email
     margin-left: auto
+    @media only screen and (max-width: 480px)
+      display: inline-block
+      float: right
+      margin-left: 16px
+      margin-bottom: 16px
 
   a
     line-height: 1.3
@@ -92,15 +99,22 @@ footer
       margin-left: 32px
       transform: none
 
+    @media only screen and (max-width: 480px)
+      width:100%
+      position: static
+      transform: none
+      display: flex
+      justify-content: space-around
+
     img
-      width: 32px
+      width: 40px
 
       @media only screen and (min-width: 768px)
-        width: 40px
+        width: 32px
 
     a + a
-      margin-left: 20px
+      margin-left: 32px
 
-      @media only screen and (min-width: 768px)
-        margin-left: 32px
+      @media only screen and (max-width: 480px)
+        margin-left: 16px
 </style>
