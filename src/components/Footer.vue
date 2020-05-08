@@ -16,11 +16,11 @@
         <a href="https://twitter.com/sledilnik" target="_blank">
           <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
-        <a href="https://github.com/sledilnik" target="_blank">
-          <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
-        </a>
         <a href="https://medium.com/sledilnik" target="_blank">
           <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+        </a>
+        <a href="https://github.com/sledilnik" target="_blank">
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         </a>
       </div>
     </div>
