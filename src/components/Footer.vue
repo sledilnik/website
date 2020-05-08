@@ -16,6 +16,9 @@
         <a href="https://twitter.com/sledilnik" target="_blank">
           <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
+        <a href="https://medium.com/sledilnik" target="_blank">
+          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+        </a>
         <a href="https://github.com/sledilnik" target="_blank">
           <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         </a>
@@ -90,11 +93,14 @@ footer
       transform: none
 
     img
-      width: 40px
+      width: 32px
 
       @media only screen and (min-width: 768px)
-        width: 32px
+        width: 40px
 
     a + a
-      margin-left: 32px
+      margin-left: 20px
+
+      @media only screen and (min-width: 768px)
+        margin-left: 32px
 </style>
