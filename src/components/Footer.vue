@@ -11,13 +11,13 @@
       </div>
       <div class="social">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank">
-          <img src="../assets/svg/fb-icon.svg" alt="fb-icon" />
+          <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
         <a href="https://twitter.com/sledilnik" target="_blank">
-          <img src="../assets/svg/tw-icon.svg" alt="tw-icon" />
+          <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
         <a href="https://github.com/sledilnik" target="_blank">
-          <img src="../assets/svg/gh-icon.svg" alt="gh-icon" />
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         </a>
       </div>
     </div>
