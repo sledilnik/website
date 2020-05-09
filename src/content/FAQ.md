@@ -19,9 +19,9 @@ Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni 
 </details>
 
 <details>
-  <summary id=confirmed-cases>Kakšna je razlika med novookužen in potrjeno okužen?</summary>
+  <summary id=confirmed-cases>Kakšna je razlika med izrazom novookužen in potrjeno okužen?</summary>
 
-V Sledilniku uporabljamo terminologijo, ki je razložena v odgovoru [Kaj pomeni izraz …?](/FAQ/#chart-terminology) Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
+V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni izraz …?](/FAQ/#chart-terminology). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
 
 </details>
 
@@ -279,7 +279,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 <details>
   <summary id=chart-patients>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: na zgornji strani osi vidimo, koliko je bilo sprejetih, kolikšno je število hospitaliziranih, z rdečimi odtenki sta označena delež hospitaliziranih v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Na zgornji strani osi vidimo delež odpuščenih in umrlih. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
+[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: na zgornji strani X osi vidimo, koliko je bilo sprejetih, kolikšno je število hospitaliziranih, z rdečimi odtenki sta označena delež hospitaliziranih v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Na spodnji strani X osi vidimo delež odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
 To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebitnega povečanja zmogljivosti. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
