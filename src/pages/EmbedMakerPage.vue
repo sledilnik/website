@@ -76,7 +76,7 @@ export default {
         },
         "Map": {
           value: "Map",
-          text: 'Zemljevid potrjeno okuženih po občinah',
+          text: 'Zemljevid po občinah',
           dimensions: [1140, 820]
         },
         "Municipalities": {

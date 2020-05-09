@@ -26,6 +26,15 @@ type Municipality =
       Region : Utils.Dictionaries.Region option
       Cases : TotalCasesForDate seq option }
 
+type ContentType =
+    | ConfirmedCases
+    | Deceased
+
+    override this.ToString() =
+       match this with
+       | ConfirmedCases -> "Potrjeni primeri"
+       | Deceased -> "Umrli"
+
 type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
@@ -56,12 +65,14 @@ type State =
     { GeoJson : GeoJson
       Data : Municipality seq
       DataTimeInterval : DataTimeInterval
+      ContentType : string 
       DisplayType : DisplayType }
 
 type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
     | DataTimeIntervalChanged of DataTimeInterval
+    | ContentTypeChanged of string
     | DisplayTypeChanged of DisplayType
 
 let loadGeoJson =
@@ -124,6 +135,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
+      ContentType = (ConfirmedCases.ToString()) 
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -135,6 +147,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with GeoJson = geoJson }, Cmd.none
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
+    | ContentTypeChanged contentType ->
+        { state with ContentType = contentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -148,7 +162,9 @@ let chartLoadedEvent () =
 let seriesData (state : State) =
     let renderLabel absolute weighted population =
         let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000)
-        sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
+        if state.ContentType = Deceased.ToString()
+        then sprintf "Prebivalcev: <b>%d</b><br>Umrlih skupaj: <b>%d</b><br>Delež umrlih: <b>%s</b>" population absolute weightedFmt
+        else sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
 
     seq {
         for municipalityData in state.Data do
@@ -158,7 +174,10 @@ let seriesData (state : State) =
                 | Some totalCases ->
                     let values =
                         totalCases
-                        |> Seq.map (fun dp -> dp.TotalConfirmedCases)
+                        |> Seq.map (fun dp -> 
+                            if state.ContentType = Deceased.ToString() 
+                            then dp.TotalDeceasedCases 
+                            else dp.TotalConfirmedCases)
                         |> Seq.choose id
                         |> Seq.toArray
 
@@ -222,11 +241,12 @@ let renderMap (state : State) =
                    pointFormat = "{point.label}" |}
             |}
 
+        let maxColor = if state.ContentType = Deceased.ToString() then "#808080" else "#e03000"
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
             legend = {| enabled = false |}
-            colorAxis = {| minColor = "white" ; maxColor = "#e03000" |}
+            colorAxis = {| minColor = "white" ; maxColor = maxColor |}
         |}
         |> Highcharts.map
 
@@ -254,15 +274,39 @@ let renderDisplayTypeSelector currentDisplayType dispatch =
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
     Html.div [
         prop.className "chart-data-interval-selector"
-        prop.children (Html.text "Filter:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+        prop.children ( Html.text "" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch )
+    ]
+
+let renderContentTypeSelector (selected : string) dispatch =
+    let renderedTypes = seq {
+        yield Html.option [
+            prop.text (ContentType.ConfirmedCases.ToString())
+            prop.value (ContentType.ConfirmedCases.ToString())
+        ]
+        yield Html.option [
+            prop.text (ContentType.Deceased.ToString())
+            prop.value (ContentType.Deceased.ToString())
+        ]
+    }
+
+    Html.select [
+        prop.value selected
+        prop.className "form-control form-control-sm filters__type"
+        prop.children renderedTypes
+        prop.onChange (fun (value : string) -> ContentTypeChanged value |> dispatch)
     ]
 
 let render (state : State) dispatch =
     Html.div [
         prop.children [
             Utils.renderChartTopControls [
-                renderDataTimeIntervalSelector
-                    state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                Html.div [
+                    prop.className "filters"
+                    prop.children [
+                        renderContentTypeSelector state.ContentType dispatch
+                        renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                    ]
+                ]
                 renderDisplayTypeSelector
                     state.DisplayType (DisplayTypeChanged >> dispatch)
             ]
