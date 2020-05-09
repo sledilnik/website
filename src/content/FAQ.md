@@ -248,7 +248,7 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 </details>
 
 <details>
-  <summary id=chart-cases>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
+  <summary id=cases-chart>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
 
 Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/stats#cases-chart). Sicer pa je za spremljanje epidemije pomembno vedeti, koliko je še aktualno okuženih. Zato uporabljamo terminologijo:
 
