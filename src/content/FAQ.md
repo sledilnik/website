@@ -133,7 +133,7 @@ Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolac
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o številu okrevanj, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo prebolele osebe s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno; to sta  kazalnika **Odpuščeni iz bolnišnice** in **Preboleli**. 
 
-Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate razliko v izračunu, nastalo zaradi poenotenja ocene z uradnimi viri.
+*Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate to razliko v izračunu. Podrobnejša razlaga spremenjenega izračunavanja je na voljo v članku na Mediumu [Od potrjeno okuženih do prebolelih](https://medium.com/@sledilnik/94c81674718e).*
 
 </details>
 
@@ -142,7 +142,9 @@ Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo pr
 
 Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
 
-Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred dvema tednoma (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen **povprečno preboli najkasneje v 14 dneh** (vir: [ECDC poročilo](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19.       *Opomba: izračun prebolelih smo spremenili 7. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate to razliko v izračunu. Podrobnejša razlaga spremenjenega izračunavanja je na voljo v članku na Mediumu [Od potrjeno okuženih do prebolelih](https://medium.com/@sledilnik/94c81674718e).*
+Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred dvema tednoma (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen **povprečno preboli najkasneje v 14 dneh** (vir: [ECDC poročilo](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19.       
+
+*Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate to razliko v izračunu. Podrobnejša razlaga spremenjenega izračunavanja je na voljo v članku na Mediumu [Od potrjeno okuženih do prebolelih](https://medium.com/@sledilnik/94c81674718e).*
 
 Formula za izračun vrednosti:
 - Preboleli (skupaj) = Potrjeno okuženi (skupaj) pred 14 dnevi – Umrli (skupaj) do dneva izračuna
@@ -186,7 +188,7 @@ Gre za odstotno stopnjo rasti na današnji dan v številu oseb glede na prejšnj
 </details>
 
 <details>
-  <summary id=chart-metrics>Kaj kaže graf "Stanje COVID-19 v Sloveniji"?</summary>
+  <summary id=metrics-comparison-chart>Kaj kaže graf "Stanje COVID-19 v Sloveniji"?</summary>
 
 [Graf](/stats#metrics-comparison-chart) prikazuje dnevno in skupno dinamiko širjenja okužbe od začetka do danes. Uporabljeni kazalniki (gl. [Katere kazalnike vključuje graf o stanju?](/FAQ/#chart-metrics-included)) nam pomagajo razumeti, kako uspešno obvladujemo širjenje virusa. Spremljamo lahko, kakšen je dnevni prirast okuženih, in posredno vidimo, ali ukrepi delujejo; iz podatka o številu hospitaliziranih in deleža teh v intenzivni enoti lahko razberemo, koliko oseb je bolezen resno ogrozila, hkrati pa nam ti podatki kažejo tudi, kolikšna je obremenjenost zdravstvenega sistema.
 
@@ -279,7 +281,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 </details>
 
 <details>
-  <summary id=chart-patients>Kaj nam pove graf "Hospitalizirani"?</summary>
+  <summary id=patients-chart>Kaj nam pove graf "Hospitalizirani"?</summary>
 
 [Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: na zgornji strani X osi vidimo, koliko je bilo sprejetih, kolikšno je število hospitaliziranih, z rdečimi odtenki sta označena delež hospitaliziranih v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Na spodnji strani X osi vidimo delež odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
@@ -288,16 +290,16 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 </details>
 
 <details>
-  <summary id=bar-graph-testing>Kaj nam pove graf "Testiranje"?</summary>
+  <summary id=tests-chart>Kaj nam pove graf "Testiranje"?</summary>
 
-[Graf](/stats#tests-chart) Testiranje prikazuje skupno število rednih testiranj (prikaz *Redno*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih. 
+[Graf](/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih. 
 
 Vse pomembne zdravstvene organizacije in ustanove se zavedajo, da je testiranje za okužbo s koronavirusom eden najpomembnejši dejavnikov, saj lahko le s testiranjem razumemo potek in razsežnost pandemije ter s tem ustrezno odgovorimo na grožnjo, ki jo predstavlja. Se pa vsaka država po svoje spopada s pomanjkanjem testov. Slovenija je *14. marca 2020* spremenila način spremljanja širjenja okužbe (https://www.gov.si/teme/koronavirus/koronavirus-simptomi-okuzbe-in-zdravljenje/), po katerem se ni več testiralo ljudi z okužbo dihal, ki niso potrebovali bolnišnične oskrbe (stanje se zato ocenjuje le na podlagi števila obolelih), testirale pa so se vse osebe z blago okužbo dihal, ki so starejše od 60 let, osebe s potrjenimi drugimi boleznimi (visok krvni tlak, sladkorna bolezen, srčno-žilne, pljučne, ledvične, težje jetrne bolezni) ter osebe z imunskimi pomanjkljivostmi (ne glede na starost). *21. aprila 2020* se je način testiranja spremenil, saj so zdravstveni delavci dobili [navodilo](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID-19-Testiranje-pri-vseh-osebah-s-sumom.pdf), naj se testirajo vsi pacienti s sumom na okužbo dihal (tudi taki z blažjimi simptomi in ne glede na njihovo starost). 
 
 </details>
 
 <details>
-  <summary id=graph-confirmed-cases>Kaj nam pove graf "Struktura potrjeno okuženih?</summary>
+  <summary id=infections-chart>Kaj nam pove graf "Struktura potrjeno okuženih?</summary>
 
 [Graf](/stats#infections-chart) nudi vpogled, kolikšen je med vsemi potrjeno okuženimi dnevni delež potrjeno okuženih oseb iz rizičnih skupin oz. zaposlenih na rizičnih območjih. Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjeno okuženih so dnevne vrednosti (*Po dnevih (povprečno)*) prikazane kot drseče povprečje 5 dni. Seštevek vrednosti tega dneva, 2 dni pred dnevom in 2 dni po tem dnevu je deljen s 5. Zato graf kaže stanje za tri dni nazaj, na ta način pa dobimo boljšo predstavo o trendih po posameznih skupinah. Če spodaj izberemo prikaz *Skupno* oz. *Relativno*, bomo iz krivulje potrjenih primerov preskočili na stolpčni prikaz, ki kaže, kolikšno je število potrjeno okuženih oseb znotraj posamezne kategorijeza na določen dan.  
 
@@ -306,14 +308,14 @@ Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na 
 </details>
 
 <details>
-  <summary id=chart-spread-pages>Kaj kaže graf "Prirast potrjeno okuženih"?</summary>
+  <summary id=spread-chart>Kaj kaže graf "Prirast potrjeno okuženih"?</summary>
 
-(Gl. [graf](/stats#spread-chart)) Dnevni prirast prikazuje število novih primerov potrjeno okuženih na določen dan, pri čemer upošteva oznako WHO in ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni)(https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov), da so potrjeni primeri "osebe z laboratorijsko potrjeno okužbo s COVID-19". Ker je število potrjeno okuženih oseb še vedno odvisno zgolj od testiranja, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
+[Graf](/stats#spread-chart) prikazuje število novih primerov potrjeno okuženih na določen dan, pri čemer upošteva oznako WHO in  [ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni)](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov), da so potrjeni primeri "osebe z laboratorijsko potrjeno okužbo s COVID-19". Ker je število potrjeno okuženih oseb še vedno odvisno zgolj od testiranja, je podatek o potrjeno okuženih bistveno manjši od dejanskega števila okuženih ljudi.
   
 </details>
 
 <details>
-  <summary id=growth-rate-by-region>Kaj nam pove graf "Potrjeno okuženi po regijah"?</summary>
+  <summary id=regions-chart>Kaj nam pove graf "Potrjeno okuženi po regijah"?</summary>
 
 [Graf](/stats#regions-chart) kaže dinamiko rasti potrjeno okuženih po izbranih regijah. Posamezne regije je mogoče enostavno primerjati tako, da pod grafom s klikom na določene regije izberemo tiste, ki jih želimo prikazati na grafu. Iz krivulje lahko hitro razberemo, katere regije imajo največ in katere najmanj potrjeno okuženih ter kako se to število spreminja skozi čas.
 
