@@ -133,7 +133,7 @@ Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolac
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o številu okrevanj, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo prebolele osebe s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno; to sta  kazalnika **Odpuščeni iz bolnišnice** in **Preboleli**. 
 
-Opomba: izračun prebolelih smo spremenili 7. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate razliko v izračunu, nastalo zaradi poenotenja ocene z uradnimi viri.
+Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate razliko v izračunu, nastalo zaradi poenotenja ocene z uradnimi viri.
 
 </details>
 
