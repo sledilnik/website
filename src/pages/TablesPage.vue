@@ -18,10 +18,8 @@
           </b-tab>
         </b-tabs>
         <div class="footnote">
-          Viri podatkov:
-          <a href="https://github.com/sledilnik/data/blob/master/csv/stats.csv">CSV</a>,
-          <a href="https://api.sledilnik.org/api/stats">REST</a>,
-          <a href="https://tinyurl.com/sledilnik-gdocs">Google Sheet</a>
+          Viri podatkov in druge oblike:
+          <a href="/datasources">GDocs preglednica, CSV oblika ali REST API</a>
         </div>
       </div>
     </div>

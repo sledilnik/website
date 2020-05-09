@@ -1,6 +1,6 @@
-## Google Sheet
+## GDocs preglednica
 
-- [https://tinyurl.com/sledilnik](https://tinyurl.com/sledilnik-gdocs)
+- [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
 
 ## CSV
 
