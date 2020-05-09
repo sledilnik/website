@@ -16,6 +16,9 @@
         <a href="https://twitter.com/sledilnik" target="_blank">
           <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
+        <a href="https://medium.com/sledilnik" target="_blank">
+          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+        </a>
         <a href="https://github.com/sledilnik" target="_blank">
           <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         </a>
@@ -61,9 +64,16 @@ footer
 
     @media only screen and (min-width: 768px)
       margin-bottom: 0
+    @media only screen and (max-width: 480px)
+      display: inline-block
 
   .email
     margin-left: auto
+    @media only screen and (max-width: 480px)
+      display: inline-block
+      float: right
+      margin-left: 16px
+      margin-bottom: 16px
 
   a
     line-height: 1.3
@@ -89,6 +99,13 @@ footer
       margin-left: 32px
       transform: none
 
+    @media only screen and (max-width: 480px)
+      width:100%
+      position: static
+      transform: none
+      display: flex
+      justify-content: space-around
+
     img
       width: 40px
 
@@ -97,4 +114,7 @@ footer
 
     a + a
       margin-left: 32px
+
+      @media only screen and (max-width: 480px)
+        margin-left: 16px
 </style>
