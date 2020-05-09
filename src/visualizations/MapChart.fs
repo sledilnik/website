@@ -78,7 +78,7 @@ let loadGeoJson =
     }
 
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
-    let dataTimeInterval = LastDays 21
+    let dataTimeInterval = LastDays 14
 
     let municipalityDataMap =
         seq {
