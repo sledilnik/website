@@ -174,7 +174,7 @@ let seriesData (state : State) =
                     | None -> 0., renderLabel 0 0
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted = float absolute / float municipalityData.Municipality.Population * 100000. |> System.Math.Round |> int
+                        let weighted = float absolute * 1000000. / float municipalityData.Municipality.Population |> System.Math.Round |> int
                         let value =
                             match state.DisplayType with
                             | AbsoluteValues ->
