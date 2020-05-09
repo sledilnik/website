@@ -11,7 +11,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 
 | Chart | Url |
 | ----- | --- |
-| Širjenje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
+| Stanje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
 | Potrjeni primeri | https://covid-19.sledilnik.org/embed.html#/chart/Cases |
