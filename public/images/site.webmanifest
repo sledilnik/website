@@ -1,0 +1,19 @@
+{
+    "name": "COVID-19 Sledilnik",
+    "start_url": "/",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "add-to-home-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "add-to-home-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffd922",
+    "background_color": "#ffffff",
+}
