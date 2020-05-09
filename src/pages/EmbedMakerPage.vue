@@ -41,7 +41,7 @@ export default {
         },
         "MetricsComparison": {
           value: "MetricsComparison",
-          text: 'Širjenje COVID-19 v Sloveniji',
+          text: 'Stanje COVID-19 v Sloveniji',
           dimensions: [1140, 780]
         },
         "Cases": {

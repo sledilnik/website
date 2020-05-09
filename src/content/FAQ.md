@@ -129,9 +129,11 @@ Podatek **Odpuščeni iz bolnišnice** je izračunan na podlagi podatkov, ki jih
 
 Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)) 
 
-V vednost: Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo.  
+Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo. ECDC je v svojem [poročilu](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) navedla, *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population* - zato smo izbrali 14 dnevno obdobje kot čas ko je povprečno potrjeno okuženi aktiven. 
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o številu okrevanj, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo prebolele osebe s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno; to sta  kazalnika **Odpuščeni iz bolnišnice** in **Preboleli**. 
+
+Opomba: izračun prebolelih smo spremenili 7. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato bo opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate razliko v izračunu, nastalo zaradi poenotenja ocene z uradnimi viri.
 
 </details>
 
@@ -225,7 +227,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Umrli (skupaj)** = Vsota vseh umrlih do tega dne.
   
-  </details>
+</details>
 
 <details>
   <summary id=chart-terminology>Kaj pomeni izraz …? </summary>
@@ -241,7 +243,7 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 
 * **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](/FAQ/#data-recovered)
   
-  </details>
+</details>
 
 <details>
   <summary id=chart-cases>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
