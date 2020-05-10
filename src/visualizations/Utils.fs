@@ -24,6 +24,12 @@ let formatTo1DecimalWithTrailingZero (value: float) =
     // A hack to replace decimal point with decimal comma.
     formatted.Replace('.', ',')
 
+let formatTo3DecimalWithTrailingZero (value: float) =
+    let formatted =
+        sprintf "%.3f" value
+    // A hack to replace decimal point with decimal comma.
+    formatted.Replace('.', ',')
+
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)
     if v1 = v2 then None

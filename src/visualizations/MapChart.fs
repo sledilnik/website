@@ -16,14 +16,24 @@ let geoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
-type TotalConfirmedCasesForDate =
+type TotalCasesForDate =
     { Date : System.DateTime
-      TotalConfirmedCases : int option }
+      TotalConfirmedCases : int option
+      TotalDeceasedCases : int option }
 
 type Municipality =
     { Municipality : Utils.Dictionaries.Municipality
       Region : Utils.Dictionaries.Region option
-      TotalConfirmedCases : TotalConfirmedCasesForDate seq option }
+      Cases : TotalCasesForDate seq option }
+
+type ContentType =
+    | ConfirmedCases
+    | Deceased
+
+    override this.ToString() =
+       match this with
+       | ConfirmedCases -> "Potrjeni primeri"
+       | Deceased -> "Umrli"
 
 type DisplayType =
     | AbsoluteValues
@@ -55,12 +65,14 @@ type State =
     { GeoJson : GeoJson
       Data : Municipality seq
       DataTimeInterval : DataTimeInterval
+      ContentType : string 
       DisplayType : DisplayType }
 
 type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
     | DataTimeIntervalChanged of DataTimeInterval
+    | ContentTypeChanged of string
     | DisplayTypeChanged of DisplayType
 
 let loadGeoJson =
@@ -89,17 +101,21 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     TotalConfirmedCases = municipality.ConfirmedToDate |} }
+                                     TotalConfirmedCases = municipality.ConfirmedToDate
+                                     TotalDeceasedCases = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
-            let totalConfirmedCases =
+            let totalCases =
                 dp
-                |> Seq.map (fun dp -> { Date = dp.Date ; TotalConfirmedCases = dp.TotalConfirmedCases })
+                |> Seq.map (fun dp -> 
+                    { Date = dp.Date
+                      TotalConfirmedCases = dp.TotalConfirmedCases
+                      TotalDeceasedCases = dp.TotalDeceasedCases } )
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( municipalityKey,
               {|
                 Region = (dp |> Seq.tryLast) |> Option.map (fun dp -> Utils.Dictionaries.regions.TryFind dp.RegionKey) |> Option.flatten
-                TotalConfirmedCases = totalConfirmedCases |} ) )
+                Cases = totalCases |} ) )
         |> Map.ofSeq
 
     let data =
@@ -109,16 +125,17 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
                 | None ->
                     yield { Municipality = municipality.Value
                             Region = None
-                            TotalConfirmedCases = None }
+                            Cases = None }
                 | Some data ->
                     yield { Municipality = municipality.Value
                             Region = data.Region
-                            TotalConfirmedCases = Some data.TotalConfirmedCases }
+                            Cases = Some data.Cases }
         }
 
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
+      ContentType = (ConfirmedCases.ToString()) 
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -130,6 +147,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with GeoJson = geoJson }, Cmd.none
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
+    | ContentTypeChanged contentType ->
+        { state with ContentType = contentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -141,24 +160,40 @@ let chartLoadedEvent () =
     document.dispatchEvent(evt) |> ignore
 
 let seriesData (state : State) =
-    let renderLabel absolute weighted population =
-        let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000 / 10)
-        sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
+
+    let renderLabel population absolute totalConfirmed =
+        let pctPopulation = float absolute * 100.0 / float population 
+        let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
+        if state.ContentType = ConfirmedCases.ToString()
+        then 
+            fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
+            if absolute > 0 then
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+        else // deceased
+            fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b> (%s %% prebivalcev)" 
+                    totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                fmtStr <- fmtStr + sprintf "<br>Smrtnost potrjenih primerov: <b>%s %%</b>" 
+                    (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+        fmtStr
 
     seq {
         for municipalityData in state.Data do
             let value, label =
-                match municipalityData.TotalConfirmedCases with
-                | None -> 0., renderLabel 0 0
-                | Some totalConfirmedCases ->
-                    let values =
-                        totalConfirmedCases
-                        |> Seq.map (fun dp -> dp.TotalConfirmedCases)
-                        |> Seq.choose id
-                        |> Seq.toArray
+                match municipalityData.Cases with
+                | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
+                | Some totalCases ->
+                    let valC = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
+                    let valD = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
+                    let values = if state.ContentType = Deceased.ToString() then valD else valC
 
+                    let totalConfirmed = valC |> Array.tryLast
+                   
                     let lastValueTotal = values |> Array.tryLast
-
                     let lastValueRelative =
                         match state.DataTimeInterval with
                         | Complete -> lastValueTotal
@@ -171,22 +206,22 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> 0., renderLabel 0 0
+                    | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted = float absolute * 1000000. / float municipalityData.Municipality.Population |> System.Math.Round |> int
+                        let weighted = 
+                            float absolute * 1000000. / float municipalityData.Municipality.Population 
+                            |> System.Math.Round |> int
                         let value =
                             match state.DisplayType with
-                            | AbsoluteValues ->
-                                absolute
-                            | RegionPopulationWeightedValues ->
-                                weighted
+                            | AbsoluteValues                 -> absolute
+                            | RegionPopulationWeightedValues -> weighted
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        scaled, renderLabel absolute (weighted |> int)
-            {| isoid = municipalityData.Municipality.Code ; value = value ; label = label municipalityData.Municipality.Population |}
+                        scaled, (renderLabel municipalityData.Municipality.Population absolute totalConfirmed.Value)
+            {| isoid = municipalityData.Municipality.Code ; value = value ; label = label |}
     } |> Seq.toArray
 
 let renderMap (state : State) =
@@ -217,11 +252,12 @@ let renderMap (state : State) =
                    pointFormat = "{point.label}" |}
             |}
 
+        let maxColor = if state.ContentType = Deceased.ToString() then "#808080" else "#e03000"
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
             legend = {| enabled = false |}
-            colorAxis = {| minColor = "white" ; maxColor = "#e03000" |}
+            colorAxis = {| minColor = "white" ; maxColor = maxColor |}
         |}
         |> Highcharts.map
 
@@ -249,15 +285,39 @@ let renderDisplayTypeSelector currentDisplayType dispatch =
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
     Html.div [
         prop.className "chart-data-interval-selector"
-        prop.children (Html.text "Filter:" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch)
+        prop.children ( Html.text "" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch )
+    ]
+
+let renderContentTypeSelector (selected : string) dispatch =
+    let renderedTypes = seq {
+        yield Html.option [
+            prop.text (ContentType.ConfirmedCases.ToString())
+            prop.value (ContentType.ConfirmedCases.ToString())
+        ]
+        yield Html.option [
+            prop.text (ContentType.Deceased.ToString())
+            prop.value (ContentType.Deceased.ToString())
+        ]
+    }
+
+    Html.select [
+        prop.value selected
+        prop.className "form-control form-control-sm filters__type"
+        prop.children renderedTypes
+        prop.onChange (fun (value : string) -> ContentTypeChanged value |> dispatch)
     ]
 
 let render (state : State) dispatch =
     Html.div [
         prop.children [
             Utils.renderChartTopControls [
-                renderDataTimeIntervalSelector
-                    state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                Html.div [
+                    prop.className "filters"
+                    prop.children [
+                        renderContentTypeSelector state.ContentType dispatch
+                        renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                    ]
+                ]
                 renderDisplayTypeSelector
                     state.DisplayType (DisplayTypeChanged >> dispatch)
             ]
