@@ -139,6 +139,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin-top: $gap/2
     display: flex
     flex-wrap: wrap
+    padding: 0 $gap/2
+
+    @media only screen and (max-width: 767px)
+      justify-content: center
 
   .metric-selector
     margin: 0 $gap/6 $gap/3 $gap/6
