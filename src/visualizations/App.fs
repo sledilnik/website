@@ -197,17 +197,20 @@ let render (state : State) (_ : Msg -> unit) =
 
 
     let renderFaqLink (visualization: Visualization) =
-            Html.div [
-                prop.className "faq-link-wrapper"
-                prop.children
-                    [ Html.a
-                        [ prop.className "faq-link"
-                          prop.target "_blank"
-                          prop.href ("/FAQ/#" + visualization.ClassName)
-                          prop.text "?"
-                        ] |> Html.h3
-                    ]
-            ]
+            if visualization.Explicit
+            then Html.none // we do not have FAQ for hidden charts yet
+            else 
+                Html.div [
+                    prop.className "faq-link-wrapper"
+                    prop.children
+                        [ Html.a
+                            [ prop.className "faq-link"
+                              prop.target "_blank"
+                              prop.href ("/FAQ/#" + visualization.ClassName)
+                              prop.text "?"
+                            ] |> Html.h3
+                        ]
+                ]
 
     let renderChartTitle (visualization: Visualization) =
 
