@@ -134,6 +134,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
           &:hover
             animation: none
+            
+    .chart-data-interval-selector .chart-display-property-selector__item:nth-child(1)
+      @include media-breakpoint-down(sm)
+        margin-left: 0
 
   .metrics-selectors
     margin-top: $gap/2
@@ -222,7 +226,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       margin-bottom: $gap / 2
 
       @include media-breakpoint-down(md)
-        margin-left: 0
+        margin-left: $gap / 2
 
     @include media-breakpoint-down(sm)
       .map
