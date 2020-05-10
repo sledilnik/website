@@ -22,6 +22,7 @@ let init (query : obj) (visualization : string option) =
                 | "Regions" -> Some Regions
                 | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
+                | "HCenters" -> Some HCenters
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
                 | "Countries" -> Some Countries
@@ -96,6 +97,11 @@ let render (state : State) (_ : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+          { VisualizationType = HCenters;
+             ClassName = "hcenters-chart";
+             Label = "Zdravstveni domovi";
+             Explicit = false;
+             Renderer =  fun _ -> lazyView HCentersChart.hCentersChart () }
           { VisualizationType = Infections;
              ClassName = "infections-chart";
              Label = "Struktura potrjeno okuženih";
