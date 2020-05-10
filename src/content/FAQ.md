@@ -19,6 +19,13 @@ Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni 
 </details>
 
 <details>
+  <summary id=ventilator-vs-respirator>Kakšna je razlika med ventilatorjem in respiratorjem? Kateri izraz je pravi(len)?</summary>
+
+Načeloma sta oba pravilna. Pri Sledilniku smo najprej uporabljali *ventilator*, nato pa smo se po tehtanju argumentov ter na na predlog člana strokovne skupine, ki svetuje Ministrstvu za zdravje, odločili za uporabo izraza *respirator*. Izraz "*medicinski ventilator*" je sicer ustreznejši z vidika medicinske stroke in tudi slovenskega jezika, izraz "respirator" pa se nam zdi boljši zaradi jedrnatosti in hkratne jasnosti v splošni oz. pogovorni uporabi. Več o dilemah poimenovanja lahko preberete v odličnem članku [**Respirator ali ventilator?** (STA, 24. marca 2020)](https://www.sta.si/2743782/respirator-ali-ventilator).
+
+</details>
+
+<details>
   <summary id=confirmed-cases>Kakšna je razlika med izrazom novookužen in potrjeno okužen?</summary>
 
 V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni izraz …?](/FAQ/#chart-terminology). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
@@ -283,9 +290,9 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 <details>
   <summary id=patients-chart>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označena posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
+[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
-To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebitnega povečanja zmogljivosti. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
+Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
 </details>
 
