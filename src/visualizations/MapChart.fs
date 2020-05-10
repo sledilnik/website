@@ -164,9 +164,9 @@ let seriesData (state : State) =
         let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000 / 10)
         let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
         if state.ContentType = Deceased.ToString()
-        then fmtStr <- fmtStr + sprintf "<br>Umrlih skupaj: <b>%d</b>" absolute
-        else fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženih skupaj: <b>%d</b>" absolute
-        if absolute > 0 then
+        then fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
+        else fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
+        if state.DataTimeInterval = Complete && absolute > 0 then
             if state.ContentType = Deceased.ToString()
             then fmtStr <- fmtStr + sprintf "<br>Delež umrlih: <b>%s</b>" weightedFmt
             else fmtStr <- fmtStr + sprintf "<br>Delež okuženih: <b>%s</b>" weightedFmt
