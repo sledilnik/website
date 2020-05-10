@@ -161,10 +161,16 @@ let chartLoadedEvent () =
 
 let seriesData (state : State) =
     let renderLabel absolute weighted population =
-        let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000)
+        let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000 / 10)
+        let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
         if state.ContentType = Deceased.ToString()
-        then sprintf "Prebivalcev: <b>%d</b><br>Umrlih skupaj: <b>%d</b><br>Delež umrlih: <b>%s</b>" population absolute weightedFmt
-        else sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
+        then fmtStr <- fmtStr + sprintf "<br>Umrlih skupaj: <b>%d</b>" absolute
+        else fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženih skupaj: <b>%d</b>" absolute
+        if absolute > 0 then
+            if state.ContentType = Deceased.ToString()
+            then fmtStr <- fmtStr + sprintf "<br>Delež umrlih: <b>%s</b>" weightedFmt
+            else fmtStr <- fmtStr + sprintf "<br>Delež okuženih: <b>%s</b>" weightedFmt
+        fmtStr
 
     seq {
         for municipalityData in state.Data do
