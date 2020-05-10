@@ -166,9 +166,11 @@ let seriesData (state : State) =
         if state.ContentType = Deceased.ToString()
         then fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
         else fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
-        if state.DataTimeInterval = Complete && absolute > 0 then
+        if absolute > 0 then
             if state.ContentType = Deceased.ToString()
-            then fmtStr <- fmtStr + sprintf "<br>Delež umrlih: <b>%s</b>" weightedFmt
+            then 
+                if state.DataTimeInterval = Complete then 
+                    fmtStr <- fmtStr + sprintf "<br>Delež umrlih: <b>%s</b>" weightedFmt
             else fmtStr <- fmtStr + sprintf "<br>Delež okuženih: <b>%s</b>" weightedFmt
         fmtStr
 
