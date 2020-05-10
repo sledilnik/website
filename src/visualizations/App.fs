@@ -128,7 +128,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
           { VisualizationType = Map;
              ClassName = "map-chart";
-             Label = "Zemljevid potrjeno okuženih po občinah";
+             Label = "Zemljevid po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
