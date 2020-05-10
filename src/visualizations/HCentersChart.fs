@@ -42,6 +42,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 let renderChartOptions (state : State) =
     let className = "hcenters-chart"
     let scaleType = ScaleType.Linear
+    let startDate = DateTime(2020,3,18)
+    let mutable startTime = startDate |> jsTime
+
 
     let allSeries = [
         yield pojo
@@ -49,6 +52,7 @@ let renderChartOptions (state : State) =
                 name = "Sumov (pregled)"
                 ``type`` = "line"
                 color = "#10829a"
+                dashStyle = Dot |> DashStyle.toString
                 data = state.hcData 
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.suspectedCovid)) |> Seq.toArray
             |}
@@ -57,6 +61,7 @@ let renderChartOptions (state : State) =
                 name = "Sumov (telefonsko)"
                 ``type`` = "line"
                 color = "#024a66"
+                dashStyle = Dot |> DashStyle.toString
                 data = state.hcData 
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.phoneTriage.suspectedCovid)) |> Seq.toArray
             |}
@@ -84,6 +89,8 @@ let renderChartOptions (state : State) =
                 data = state.hcData 
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.tests.positive)) |> Seq.toArray
             |}
+        yield addContainmentMeasuresFlags startTime None |> pojo
+
     ]
     
     let baseOptions = Highcharts.basicChartOptions scaleType className
@@ -94,9 +101,9 @@ let renderChartOptions (state : State) =
             {|
                 enabled = true
                 title = {| text = null |}
-                align = "left"
+                align = "right"
                 verticalAlign = "top"
-                x = 60
+                x = -80
                 y = 30
                 borderColor = "#ddd"
                 borderWidth = 1
