@@ -160,40 +160,39 @@ let chartLoadedEvent () =
     document.dispatchEvent(evt) |> ignore
 
 let seriesData (state : State) =
-    let renderLabel absolute population pctDeceased =
+
+    let renderLabel population absolute totalConfirmed =
         let pctPopulation = float absolute * 100.0 / float population 
         let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
-        if state.ContentType = Deceased.ToString()
-        then fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
-        else fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
-        if absolute > 0 then
-            if state.ContentType = ConfirmedCases.ToString()
-            then fmtStr <- fmtStr + sprintf "<br>Delež okuženih: <b>%s %%</b>" 
+        if state.ContentType = ConfirmedCases.ToString()
+        then 
+            fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
+            if absolute > 0 then
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-            else if state.DataTimeInterval = Complete then // deceased
-                fmtStr <- fmtStr + sprintf "<br>Delež umrlih: <b>%s %%</b><br>Smrtnost potrjenih primerov: <b>%s %%</b>" 
+        else // deceased
+            fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                    (Utils.formatTo1DecimalWithTrailingZero pctDeceased)
+                fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b> (%s %% prebivalcev)" 
+                    totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                fmtStr <- fmtStr + sprintf "<br>Smrtnost potrjenih primerov: <b>%s %%</b>" 
+                    (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
         fmtStr
 
     seq {
         for municipalityData in state.Data do
             let value, label =
                 match municipalityData.Cases with
-                | None -> 0., (renderLabel 0 municipalityData.Municipality.Population 0.)
+                | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                 | Some totalCases ->
                     let valC = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let valD = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values = if state.ContentType = Deceased.ToString() then valD else valC
 
-                    let pctDeceased =
-                        let confirmed = valC |> Array.tryLast
-                        let deceased = valD |> Array.tryLast
-                        match confirmed, deceased with
-                            | Some 0, Some b -> 0.
-                            | Some a, Some b -> float b * 100.0 / float a
-                            | _ -> 0.
-                         
+                    let totalConfirmed = valC |> Array.tryLast
+                   
                     let lastValueTotal = values |> Array.tryLast
                     let lastValueRelative =
                         match state.DataTimeInterval with
@@ -207,7 +206,7 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> 0., (renderLabel 0 municipalityData.Municipality.Population 0.)
+                    | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
                         let weighted = 
@@ -221,7 +220,7 @@ let seriesData (state : State) =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        scaled, (renderLabel absolute municipalityData.Municipality.Population pctDeceased)
+                        scaled, (renderLabel municipalityData.Municipality.Population absolute totalConfirmed.Value)
             {| isoid = municipalityData.Municipality.Code ; value = value ; label = label |}
     } |> Seq.toArray
 
