@@ -102,6 +102,7 @@ let addContainmentMeasuresFlags
         29, 4, "#ebfaeb", "Muzeji",    "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
         30, 4, "#ebfaeb", "Občine",    "Sproščanje: gibanje izven meja svoje občine"
         4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+        11, 5, "#ebfaeb", "Prevozi",   "Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
     |]
     {|
         ``type`` = "flags"
