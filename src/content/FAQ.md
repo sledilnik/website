@@ -305,7 +305,7 @@ Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi z
 
 *Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje) - za te primere ne prejemamo podatkov o obravnavanih sumih za COVID-19, tako da ta graf žal ne prikazuje popolne situacije na primarni ravni.*
 
-*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi,od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
+*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
 
 Tudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
 
