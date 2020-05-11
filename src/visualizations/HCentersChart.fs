@@ -49,9 +49,19 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
+                name = "Nujna medicinska pomoč (pregled)"
+                ``type`` = "line"
+                color = "#70a471"
+                dashStyle = Dot |> DashStyle.toString
+                data = state.hcData 
+                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.medicalEmergency)) |> Seq.toArray
+            |}
+
+        yield pojo
+            {|
                 name = "Sum COVID-19 (pregled)"
                 ``type`` = "line"
-                color = "#10829a"
+                color = "#a05195"
                 dashStyle = Dot |> DashStyle.toString
                 data = state.hcData 
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.suspectedCovid)) |> Seq.toArray
@@ -60,7 +70,7 @@ let renderChartOptions (state : State) =
             {|
                 name = "Sum COVID-19 (telefonsko)"
                 ``type`` = "line"
-                color = "#024a66"
+                color = "#d45087"
                 dashStyle = Dot |> DashStyle.toString
                 data = state.hcData 
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.phoneTriage.suspectedCovid)) |> Seq.toArray
