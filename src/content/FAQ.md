@@ -297,6 +297,23 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 </details>
 
 <details>
+  <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
+
+[Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva). Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.
+
+Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ostale bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej preko telefonskega pogovora, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.  
+
+*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje) - za te primere ne prejemamo podatkov o obravnavanih sumih za COVID-19, tako da ta graf žal ne prikazuje popolne situacije na primarni ravni.*
+
+*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
+
+Tudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
+
+
+</details>
+
+
+<details>
   <summary id=tests-chart>Kaj nam pove graf "Testiranje"?</summary>
 
 [Graf](/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih. 
