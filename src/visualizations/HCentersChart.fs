@@ -111,6 +111,11 @@ let renderChartOptions (state : State) =
         yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
+
+        caption = pojo 
+            {|  enabled = true
+                useHTML = true
+                text = """Opomba: omejitve prikazanih podatkov so razložene v <a href="/FAQ/#hcenters-chart">FAQ</a>""" |}
     |}
 
 let renderChartContainer (state : State) =
