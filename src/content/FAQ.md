@@ -19,6 +19,13 @@ Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni 
 </details>
 
 <details>
+  <summary id=ventilator-vs-respirator>Kakšna je razlika med ventilatorjem in respiratorjem? Kateri izraz je pravi(len)?</summary>
+
+Načeloma sta oba pravilna. Pri Sledilniku smo najprej uporabljali *ventilator*, nato pa smo se po tehtanju argumentov ter na na predlog člana strokovne skupine, ki svetuje Ministrstvu za zdravje, odločili za uporabo izraza *respirator*. Izraz "*medicinski ventilator*" je sicer ustreznejši z vidika medicinske stroke in tudi slovenskega jezika, izraz "respirator" pa se nam zdi boljši zaradi jedrnatosti in hkratne jasnosti v splošni oz. pogovorni uporabi. Več o dilemah poimenovanja lahko preberete v odličnem članku [**Respirator ali ventilator?** (STA, 24. marca 2020)](https://www.sta.si/2743782/respirator-ali-ventilator).
+
+</details>
+
+<details>
   <summary id=confirmed-cases>Kakšna je razlika med izrazom novookužen in potrjeno okužen?</summary>
 
 V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni izraz …?](/FAQ/#chart-terminology). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
@@ -283,11 +290,28 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 <details>
   <summary id=patients-chart>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: na zgornji strani X osi vidimo, koliko je bilo sprejetih, kolikšno je število hospitaliziranih, z rdečimi odtenki sta označena delež hospitaliziranih v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Na spodnji strani X osi vidimo delež odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
+[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
-To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebitnega povečanja zmogljivosti. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
+Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
 </details>
+
+<details>
+  <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
+
+[Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva). Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.
+
+Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ostale bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej preko telefonskega pogovora, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.  
+
+*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje) - za te primere ne prejemamo podatkov o obravnavanih sumih za COVID-19, tako da ta graf žal ne prikazuje popolne situacije na primarni ravni.*
+
+*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
+
+Tudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
+
+
+</details>
+
 
 <details>
   <summary id=tests-chart>Kaj nam pove graf "Testiranje"?</summary>
@@ -326,7 +350,7 @@ Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na 
 
 [Zemljevid](/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine z največjim skupnim številom novih potrjeno okuženih ali umrlih v izbranem časovnem okviru (*7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*7, 14 ali 21 dni*).
 
 </details>
 

@@ -300,14 +300,6 @@ let renderDisplaySelectors activeDisplayType dispatch =
         |> prop.children
     ]
 
-let disclaimer1 =
-    @"Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno
-    na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem
-    statusu pridobil naknadno. Postavka Zaposleni v DSO vključuje zdravstvene
-    delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so
-    dnevni podatki o zdravstvenih delavcih (modri stolpci) ustrezno zmanjšani
-    na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev
-    zelo konzervativna ocena."
 
 let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
 
@@ -320,32 +312,22 @@ let halfDaysOfMovingAverage = DaysOfMovingAverage / 2
 let lastDateOfGraph =
     DateTime.Now.AddDays(-(halfDaysOfMovingAverage + 1) |> float)
 
-let disclaimer2 =
-    sprintf
-        @"Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjeno
-        okuženih so dnevne vrednosti prikazane kot drseče povprečje %d dni.
-        Seštevek vrednosti tega dneva, %d dni pred dnevom
-        in %d dni po tem dnevu je deljen s %d. Zato graf kaže stanje samo do %s,
-        na ta način pa dobimo boljšo predstavo o trendih po posameznih skupinah."
-        DaysOfMovingAverage
-        halfDaysOfMovingAverage
-        halfDaysOfMovingAverage
-        DaysOfMovingAverage
-        (lastDateOfGraph.ToString("dd.MM"))
 
 let render state dispatch =
     Html.div [
         renderChartContainer state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
 
-        let fullDisclaimer =
-            match state.DisplayType.ValueTypes with
-            | MovingAverages -> [ Html.p disclaimer2; Html.p disclaimer1 ]
-            | _ -> [ Html.p disclaimer1 ]
-
         Html.div [
             prop.className "disclaimer"
-            prop.children fullDisclaimer
+            prop.children [
+                Html.text "Opomba: omejitve prikazanih podatkov so razložene v "
+                Html.a
+                    [ prop.className "faq-link"
+                      prop.target "_blank"
+                      prop.href "/FAQ/#infections-chart"
+                      prop.text "FAQ" ]
+            ]
         ]
     ]
 

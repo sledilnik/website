@@ -160,34 +160,40 @@ let chartLoadedEvent () =
     document.dispatchEvent(evt) |> ignore
 
 let seriesData (state : State) =
-    let renderLabel absolute weighted population =
-<<<<<<< HEAD
-        let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000)
-        if state.ContentType = Deceased.ToString()
-        then sprintf "Prebivalcev: <b>%d</b><br>Umrlih skupaj: <b>%d</b><br>Delež umrlih: <b>%s</b>" population absolute weightedFmt
-        else sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
-=======
-        let weightedFmt = sprintf "%d,%03d %%" (weighted / 10000) (weighted % 10000 / 10)
-        sprintf "Prebivalcev: <b>%d</b><br>Potrjeno okuženih skupaj: <b>%d</b><br>Delež okuženih: <b>%s</b>" population absolute weightedFmt
->>>>>>> 8e95a0f1f0a739459a987f0330b623a42bff7de4
+
+    let renderLabel population absolute totalConfirmed =
+        let pctPopulation = float absolute * 100.0 / float population 
+        let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
+        if state.ContentType = ConfirmedCases.ToString()
+        then 
+            fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
+            if absolute > 0 then
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+        else // deceased
+            fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b> (%s %% prebivalcev)" 
+                    totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                fmtStr <- fmtStr + sprintf "<br>Smrtnost potrjenih primerov: <b>%s %%</b>" 
+                    (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+        fmtStr
 
     seq {
         for municipalityData in state.Data do
             let value, label =
                 match municipalityData.Cases with
-                | None -> 0., renderLabel 0 0
+                | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                 | Some totalCases ->
-                    let values =
-                        totalCases
-                        |> Seq.map (fun dp -> 
-                            if state.ContentType = Deceased.ToString() 
-                            then dp.TotalDeceasedCases 
-                            else dp.TotalConfirmedCases)
-                        |> Seq.choose id
-                        |> Seq.toArray
+                    let valC = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
+                    let valD = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
+                    let values = if state.ContentType = Deceased.ToString() then valD else valC
 
+                    let totalConfirmed = valC |> Array.tryLast
+                   
                     let lastValueTotal = values |> Array.tryLast
-
                     let lastValueRelative =
                         match state.DataTimeInterval with
                         | Complete -> lastValueTotal
@@ -200,22 +206,22 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> 0., renderLabel 0 0
+                    | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted = float absolute * 1000000. / float municipalityData.Municipality.Population |> System.Math.Round |> int
+                        let weighted = 
+                            float absolute * 1000000. / float municipalityData.Municipality.Population 
+                            |> System.Math.Round |> int
                         let value =
                             match state.DisplayType with
-                            | AbsoluteValues ->
-                                absolute
-                            | RegionPopulationWeightedValues ->
-                                weighted
+                            | AbsoluteValues                 -> absolute
+                            | RegionPopulationWeightedValues -> weighted
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        scaled, renderLabel absolute (weighted |> int)
-            {| isoid = municipalityData.Municipality.Code ; value = value ; label = label municipalityData.Municipality.Population |}
+                        scaled, (renderLabel municipalityData.Municipality.Population absolute totalConfirmed.Value)
+            {| isoid = municipalityData.Municipality.Code ; value = value ; label = label |}
     } |> Seq.toArray
 
 let renderMap (state : State) =

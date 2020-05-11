@@ -15,7 +15,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   @media only screen and (min-width: 768px)
     margin: 0
-
+    
   section
     background: #fff
     margin-bottom: 88px
@@ -95,6 +95,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     color: $text-c
     padding: 15px 15px 0 15px
 
+    a
+      color: black
+      font-weight: bold
+      text-decoration: underline
+      text-decoration-color: $yellow
+
+
   .table
     td, th
       padding: 6px 9px
@@ -134,11 +141,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
           &:hover
             animation: none
+            
+    .chart-data-interval-selector .chart-display-property-selector__item:nth-child(1)
+      @include media-breakpoint-down(sm)
+        margin-left: 0
 
   .metrics-selectors
     margin-top: $gap/2
     display: flex
     flex-wrap: wrap
+    padding: 0 $gap/2
+
+    @media only screen and (max-width: 767px)
+      justify-content: center
 
   .metric-selector
     margin: 0 $gap/6 $gap/3 $gap/6
@@ -222,7 +237,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       margin-bottom: $gap / 2
 
       @include media-breakpoint-down(md)
-        margin-left: 0
+        margin-left: $gap / 2
+      @include media-breakpoint-down(sm)
+        width: 8.25rem
+        padding: 0
 
     @include media-breakpoint-down(sm)
       .map
