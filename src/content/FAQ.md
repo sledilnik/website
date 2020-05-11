@@ -297,6 +297,18 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 </details>
 
 <details>
+  <summary id=hcenters-chart>Kaj nam pove graf "Zdravstveni domovi"?</summary>
+
+[Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva). 
+
+Zdravstveni domovi so vstopna točka za odvzem brisov za testiranje za prisotnost virusa. Na grafu prikazujemo številov sumov za COVID-19, ki so bili zaznani na podlagi telefonskega pogovora ali pregleda na vstopni točki COVID-19. Nekatere osebe so tako lahko zavedene večkrat, najprej preko telefonskega pogovora, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo. Porast sumov in napotitev na samoizolacijo je lahko zgodnji indikator, da je prišlo do novih izbruhov. 
+
+V številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da tudi število pozitivnih testov šteje vse pozitivne teste, tudi ponovitvene (ista oseba je lahko večkrat testirana in šteta kot pozitivna). Tako je lahko to število večje kot pa število pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
+
+</details>
+
+
+<details>
   <summary id=tests-chart>Kaj nam pove graf "Testiranje"?</summary>
 
 [Graf](/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih. 
