@@ -107,21 +107,7 @@ let renderChartOptions (state : State) =
     {| baseOptions with
         series = List.toArray allSeries
 
-        legend = pojo
-            {|
-                enabled = true
-                title = {| text = null |}
-                align = "right"
-                verticalAlign = "top"
-                x = -80
-                y = 30
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                backgroundColor = "#FFF"
-            |}
- 
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
 let renderChartContainer (state : State) =

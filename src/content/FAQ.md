@@ -305,6 +305,8 @@ Na grafu prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ost
 
 V številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da tudi število pozitivnih testov šteje vse pozitivne teste, tudi ponovitvene (ista oseba je lahko večkrat testirana in šteta kot pozitivna). Tako je lahko to število večje kot pa število pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
 
+*Opomba: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje) - za te primere ne prejemamo podatkov o obravnavanih sumih za COVID-19, tako da ta graf žal ne prikazuje popolne situacije na primarni ravni.*
+
 </details>
 
 
