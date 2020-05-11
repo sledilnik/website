@@ -297,7 +297,7 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 </details>
 
 <details>
-  <summary id=hcenters-chart>Kaj nam pove graf "Zdravstveni domovi"?</summary>
+  <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
 
 [Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva).  Zdravstveni domovi so vstopna točka za odvzem brisov za testiranje za prisotnost virusa. 
 

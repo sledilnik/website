@@ -54,6 +54,11 @@ export default {
           text: "Hospitalizirani",
           dimensions: [1140, 720]
         },
+        "HCenters": {
+          value: "HCenters",
+          text: 'Obravnava v ZD',
+          dimensions: [1140, 720]
+        },
         "Tests": {
           value: "Tests",
           text: 'Testiranje',
