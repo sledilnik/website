@@ -67,7 +67,7 @@ export default {
         "Infections": {
           value: "Infections",
           text: 'Struktura potrjeno okuženih',
-          dimensions: [1140, 820]
+          dimensions: [1140, 720]
         },
         "Spread": {
           value: "Spread",
