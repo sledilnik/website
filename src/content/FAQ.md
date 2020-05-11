@@ -307,7 +307,7 @@ Na grafu prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ost
 
 *Opomba: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi,od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
 
-V številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da tudi število pozitivnih testov šteje vse pozitivne teste, tudi ponovitvene (ista oseba je lahko večkrat testirana in šteta kot pozitivna). Tako je lahko to število večje kot pa število pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
+V številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da tudi število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Tako je lahko to število večje kot pa število pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/FAQ/#test-charts) 
 
 
 </details>

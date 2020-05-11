@@ -49,7 +49,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = "Nujna medicinska pomoč (pregled)"
+                name = "Nujna medicinska pomoč (skupaj)"
                 ``type`` = "line"
                 color = "#70a471"
                 dashStyle = Dot |> DashStyle.toString
@@ -93,7 +93,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Test (pozitivnih)"
+                name = "Test (pozitivnih*)"
                 ``type`` = "line"
                 color = "#d5c768"
                 data = state.hcData 
@@ -106,6 +106,9 @@ let renderChartOptions (state : State) =
     let baseOptions = Highcharts.basicChartOptions scaleType className
     {| baseOptions with
         series = List.toArray allSeries
+
+        // need to hide negative label for addContainmentMeasuresFlags
+        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
