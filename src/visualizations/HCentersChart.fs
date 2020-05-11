@@ -49,7 +49,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = "Sumov (pregled)"
+                name = "Sum COVID-19 (pregled)"
                 ``type`` = "line"
                 color = "#10829a"
                 dashStyle = Dot |> DashStyle.toString
@@ -58,7 +58,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Sumov (telefonsko)"
+                name = "Sum COVID-19 (telefonsko)"
                 ``type`` = "line"
                 color = "#024a66"
                 dashStyle = Dot |> DashStyle.toString
@@ -67,7 +67,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Napotitev v samo-izolacijo"
+                name = "Napotitev v samoizolacijo"
                 ``type`` = "line"
                 color = "#665191"
                 data = state.hcData 
@@ -75,7 +75,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Testov (opravljenih)"
+                name = "Test (opravljenih)"
                 ``type`` = "line"
                 color = "#19aebd"
                 data = state.hcData 
@@ -83,7 +83,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Testov (pozitivnih)"
+                name = "Test (pozitivnih)"
                 ``type`` = "line"
                 color = "#d5c768"
                 data = state.hcData 
