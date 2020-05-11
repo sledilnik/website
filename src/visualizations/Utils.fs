@@ -157,8 +157,8 @@ module Dictionaries =
           "po",  "Primorsko-notranjska",  Some 52818
           "ng",  "Goriška",  Some 118008
           "kp",  "Obalno-kraška",  Some 115613
-          "t",  "Tujci",  None
-          "n",  "Neznano",  None ]
+          "t",   "TUJINA",  None
+          "n",   "NEZNANO",  None ]
         |> List.map (fun (key,  name,  population) -> key,  { Key = key ; Name = name ; Population = population })
         |> Map.ofList
 
@@ -359,6 +359,7 @@ module Dictionaries =
           "trnovska_vas", "Trnovska vas", 1350, "SI-185"
           "trzin", "Trzin", 3923, "SI-186"
           "tržič", "Tržič", 14884, "SI-131"
+          "tujina", "TUJINA", 0, ""
           "turnišče", "Turnišče", 3170, "SI-132"
           "velenje", "Velenje", 33506, "SI-133"
           "velika_polana", "Velika Polana", 1412, "SI-187"
