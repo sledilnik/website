@@ -201,6 +201,23 @@ let render (state : State) (_ : Msg -> unit) =
                   prop.href "https://covid-19.sledilnik.org/"
                   prop.text "covid-19.sledilnik.org" ]
 
+
+    let renderFaqLink (visualization: Visualization) =
+            if visualization.Explicit
+            then Html.none // we do not have FAQ for hidden charts yet
+            else 
+                Html.div [
+                    prop.className "faq-link-wrapper"
+                    prop.children
+                        [ Html.a
+                            [ prop.className "faq-link"
+                              prop.target "_blank"
+                              prop.href ("/FAQ/#" + visualization.ClassName)
+                              prop.text "?"
+                            ] |> Html.h3
+                        ]
+                ]
+
     let renderChartTitle (visualization: Visualization) =
 
         let scrollToElement (e : MouseEvent) visualizationId =
@@ -234,6 +251,7 @@ let render (state : State) (_ : Msg -> unit) =
                       prop.id viz.ClassName
                       prop.children
                         [ renderChartTitle viz
+                          renderFaqLink viz
                           state |> viz.Renderer
                         ]
                     ]
