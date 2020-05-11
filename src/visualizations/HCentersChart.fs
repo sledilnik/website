@@ -111,11 +111,6 @@ let renderChartOptions (state : State) =
         yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-
-        caption = pojo 
-            {|  enabled = true
-                useHTML = true
-                text = """Opomba: omejitve prikazanih podatkov so razložene v <a href="/FAQ/#hcenters-chart">FAQ</a>""" |}
     |}
 
 let renderChartContainer (state : State) =
@@ -135,7 +130,20 @@ let render (state : State) dispatch =
     | _, None ->
         Html.div [
             renderChartContainer state
+
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text "Opomba: omejitve prikazanih podatkov so razložene v "
+                    Html.a
+                        [ prop.className "faq-link"
+                          prop.target "_blank"
+                          prop.href "/FAQ/#hcenters-chart"
+                          prop.text "FAQ" ]
+                ]
+            ]
         ]
+
 
 let hCentersChart () =
     React.elmishComponent("HCentersChart", init (), update, render)
