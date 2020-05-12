@@ -2,11 +2,10 @@
   <div class="container">
     <div class="notice">
       <span>
-        <b>Zadnja novica: </b>
-        Največji posvet znanstvenikov: ‘Združiti je treba moč institucij in
-        znanstvene skupnosti v boju proti COVID-19’
+        <b>Nov graf: </b>
+        'Obravnava v ZD' prikazuje vse sume COVID-19 na vstopnih točkah in napotitve na samoizolacijo. Preberi tudi FAQ.
       </span>
-      <a href="#" class="notice-button">
+      <a href="/stats#hcenters-chart" class="notice-button">
         <img src="../assets/svg/go-to.svg" alt="Go to news" />
       </a>
     </div>
