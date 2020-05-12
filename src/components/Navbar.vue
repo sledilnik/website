@@ -19,6 +19,10 @@
       <router-link to="team" class="router-link"><span>Ekipa</span></router-link>
       <router-link to="sources" class="router-link"><span>Viri</span></router-link>
       <router-link to="links" class="router-link"><span>Povezave</span></router-link>
+      <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
+        <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
+        <span>GitHub</span>
+      </a>
     </div>
   </div>
 </template>
@@ -408,6 +412,30 @@ export default {
 
     &:hover {
       color: #000000 !important;
+    }
+  }
+
+  &.router-link-icon {
+    @include nav-break {
+      border: 2px solid #e8c250;
+      border-radius: 8px;
+      padding: 0px 6px;
+    }
+
+    span {
+      @include nav-break {
+        margin-left: 6px;
+      }
+    }
+
+    img {
+      display: none;
+
+      @include nav-break {
+        display: inline-block;
+        opacity: .5;
+        width: 18px;
+      }
     }
   }
 }
