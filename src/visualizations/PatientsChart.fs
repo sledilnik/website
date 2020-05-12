@@ -65,7 +65,8 @@ module Series =
 
 type State = {
     scaleType : ScaleType
-    data : PatientsStats []
+    statsData: StatsData
+    patientsData : PatientsStats []
     error: string option
     allSegmentations: Segmentation list
     activeSegmentations: Set<Segmentation>
@@ -91,7 +92,7 @@ type State = {
             }
         | ByHospital ->
             let segmentations =
-                match state.data with
+                match state.patientsData with
                 | [||] -> [Totals]
                 | [| _ |] -> [Totals]
                 | data ->
@@ -115,7 +116,8 @@ type State = {
     static member initial =
         {
             scaleType = Linear
-            data = [||]
+            statsData = []
+            patientsData = [||]
             error = None
             allSegmentations = [ Totals ]
             activeSegmentations = Set [ Totals ]
@@ -134,7 +136,8 @@ module Set =
         | false -> s |> Set.add x
 
 type Msg =
-    | ConsumeServerData of Result<PatientsStats [], string>
+    | ConsumeStatsData of Result<StatsData, string>
+    | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
@@ -142,14 +145,19 @@ type Msg =
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumeServerData ConsumeServerError
-    State.initial, cmd
+    let cmdS = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    let cmdP = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    State.initial, (cmdS @ cmdP)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ConsumeServerData (Ok data) ->
-        { state with data = data } |> State.switchBreakdown state.breakdown, Cmd.none
-    | ConsumeServerData (Error err) ->
+    | ConsumeStatsData (Ok data) ->
+        { state with statsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
+    | ConsumeStatsData (Error err) ->
+        { state with error = Some err }, Cmd.none
+    | ConsumePatientsData (Ok data) ->
+        { state with patientsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
+    | ConsumePatientsData (Error err) ->
         { state with error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with error = Some ex.Message }, Cmd.none
@@ -230,7 +238,7 @@ let renderChartOptions (state : State) =
             color = color
             name = name
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map (fun dp ->
                     {|
@@ -265,7 +273,7 @@ let renderChartOptions (state : State) =
             dashStyle = line |> DashStyle.toString
             name = name
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
@@ -292,7 +300,7 @@ let renderChartOptions (state : State) =
             name = name
             dashStyle = Solid |> DashStyle.toString
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
@@ -390,7 +398,7 @@ let renderBreakdownSelectors state dispatch =
             ) ) ]
 
 let render (state : State) dispatch =
-    match state.data, state.error with
+    match state.patientsData, state.error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
