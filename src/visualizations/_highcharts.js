@@ -267,12 +267,20 @@ function renderChart(options) {
   }, null);
 }
 
+function renderChartFromWindow(options) {
+  options = wrapLabelFormatterWithThis(options);
+  return React.createElement(HighchartsReact, {
+    containerProps: {style: {height:"100%"}},
+    options: {...options},
+  }, null);
+}
+
 function renderMap(options) {
     options = wrapLabelFormatterWithThis(options);
     return React.createElement(HighchartsReact, {
         highcharts: Highcharts,
-        containerProps: {style: {height:"100%"}},
         constructorType: "mapChart",
+        containerProps: {style: {height:"100%"}},
         options: {...options, credits: {enabled: false}}
     }, null);
 }
@@ -281,5 +289,6 @@ export {
     genericArray,
     loadScript,
     renderChart,
+    renderChartFromWindow,
     renderMap
 }
