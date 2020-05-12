@@ -20,8 +20,8 @@
       <router-link to="sources" class="router-link"><span>Viri</span></router-link>
       <router-link to="links" class="router-link"><span>Povezave</span></router-link>
       <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
-        <img src="../assets/svg/gh-icon.svg" alt="Github" />
-        <span>Github</span>
+        <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
+        <span>GitHub</span>
       </a>
     </div>
   </div>
