@@ -85,6 +85,13 @@ type State = {
                 activeSegmentations = Set [ Totals ]
                 activeSeries = Set Series.structure
             }
+        | Ratios ->
+            { state with
+                breakdown=breakdown
+                allSegmentations = [ Totals ]
+                activeSegmentations = Set [ Totals ]
+                activeSeries = Set Series.structure
+            }
         | BySeries ->
             { state with
                 breakdown=breakdown
