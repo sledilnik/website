@@ -181,9 +181,9 @@ let legendFormatter jsThis =
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
-            if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then 
+            if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then
                 fmtStr <- fmtLine + fmtStr // if we got Sprejeti before, then put it after Hospitalizirani
-            else 
+            else
                 fmtStr <- fmtStr + fmtLine
 
     sprintf "<b>%s</b>" fmtDate + fmtStr
@@ -369,7 +369,7 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

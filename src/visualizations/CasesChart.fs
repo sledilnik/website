@@ -65,15 +65,15 @@ let legendFormatter jsThis =
 
     let mutable fmtUnder = ""
     let mutable fmtStr = sprintf "<b>%s</b>" fmtDate
-    for p in pts do 
+    for p in pts do
         match p?point?fmtTotal with
         | "null" -> ()
-        | _ -> 
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>""" 
+        | _ ->
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
-                p?point?fmtTotal             
+                p?point?fmtTotal
             match p?series?name with
             | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
             | _ -> ()
@@ -83,25 +83,25 @@ let legendFormatter jsThis =
 let renderChartOptions (state : State) =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
-    
+
     let subtract a b = b - a
 
     let renderSeries series =
 
         let getPoint : (StatsDataPoint -> int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate    
+            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate
             | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
             | Active        -> fun dp -> dp.Cases.Active.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some
-            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some 
-            | Icu           -> fun dp -> dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some 
+            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some
+            | Icu           -> fun dp -> dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
         let getPointTotal : (StatsDataPoint -> int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate    
+            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate
             | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
-            | Active        -> fun dp -> dp.Cases.Active  
+            | Active        -> fun dp -> dp.Cases.Active
             | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital
             | Icu           -> fun dp -> dp.StatePerTreatment.InICU
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
@@ -114,15 +114,15 @@ let renderChartOptions (state : State) =
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
-                |> Seq.map (fun dp ->  
+                |> Seq.map (fun dp ->
                     {|
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
                         fmtDate = dp.Date.ToString "d. M. yyyy"
-                        fmtTotal = getPointTotal dp |> string  
+                        fmtTotal = getPointTotal dp |> string
                     |} |> pojo
-                )    
-                |> Array.ofSeq 
+                )
+                |> Array.ofSeq
         |}
         |> pojo
 
@@ -130,15 +130,15 @@ let renderChartOptions (state : State) =
         for series in Series.all do
             yield renderSeries series
     |]
-    
+
     let baseOptions = Highcharts.basicChartOptions scaleType className
     {| baseOptions with
         series = allSeries
-        plotOptions = pojo 
-            {| 
+        plotOptions = pojo
+            {|
                 series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0  |}
-            |}        
-            
+            |}
+
         tooltip = pojo
             {|
                 shared = true
@@ -167,7 +167,7 @@ let renderChartContainer (state : State) =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -178,4 +178,3 @@ let render (state: State) dispatch =
 
 let casesChart (props : {| data : StatsData |}) =
     React.elmishComponent("CasesChart", init props.data, update, render)
-

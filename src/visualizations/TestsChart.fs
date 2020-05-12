@@ -44,7 +44,7 @@ let renderChartOptions (state : State) =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
-    let positiveTests (dp: StatsDataPoint) = 
+    let positiveTests (dp: StatsDataPoint) =
         match state.displayType with
         | Total     -> dp.Tests.Positive.Today.Value
         | Regular   -> dp.Tests.Regular.Positive.Today.Value
@@ -55,14 +55,14 @@ let renderChartOptions (state : State) =
         | Regular   -> dp.Tests.Regular.Performed.Today.Value - dp.Tests.Regular.Positive.Today.Value
         | NsApr20   -> dp.Tests.NsApr20.Performed.Today.Value - dp.Tests.NsApr20.Positive.Today.Value
     let percentPositive (dp: StatsDataPoint) =
-        let positive = positiveTests dp 
-        let performed = positiveTests dp + negativeTests dp 
+        let positive = positiveTests dp
+        let performed = positiveTests dp + negativeTests dp
         Math.Round(float positive / float performed * float 100.0, 2)
-    
+
     let allYAxis = [|
         {|
             index = 0
-            title = {| text = null |} 
+            title = {| text = null |}
             labels = pojo {| format = "{value}" |}
             opposite = true
             visible = true
@@ -70,7 +70,7 @@ let renderChartOptions (state : State) =
         |}
         {|
             index = 1
-            title = {| text = null |} 
+            title = {| text = null |}
             labels = pojo {| format = "{value}%" |}
             opposite = false
             visible = true
@@ -93,7 +93,7 @@ let renderChartOptions (state : State) =
                 name = "Pozitivnih testov"
                 ``type`` = "column"
                 color = "#d5c768"
-                yAxis = 0 
+                yAxis = 0
                 data = state.data |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTests dp)) |> Seq.toArray
             |}
@@ -107,15 +107,15 @@ let renderChartOptions (state : State) =
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositive dp)) |> Seq.toArray
             |}
     ]
-    
+
     let baseOptions = Highcharts.basicChartOptions scaleType className
     {| baseOptions with
         yAxis = allYAxis
         series = List.toArray allSeries
-        plotOptions = pojo 
-            {| 
-                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |} 
-            |}        
+        plotOptions = pojo
+            {|
+                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
+            |}
 
         legend = pojo
             {|
@@ -132,22 +132,21 @@ let renderChartOptions (state : State) =
                 backgroundColor = "#FFF"
             |}
 
-        responsive = pojo 
+        responsive = pojo
             {|
-                rules = 
+                rules =
                     [| {|
                         condition = {| maxWidth = 500 |}
-                        chartOptions = 
-                            {| 
+                        chartOptions =
+                            {|
                                 legend = {| enabled = false |}
-                                yAxis = [| 
-                                    {| labels = {| enabled = false |} |} 
-                                    {| labels = {| enabled = false |} |} 
+                                yAxis = [|
+                                    {| labels = {| enabled = false |} |}
+                                    {| labels = {| enabled = false |} |}
                                 |]
                             |}
                     |} |]
             |}
- 
     |}
 
 let renderChartContainer (state : State) =
@@ -156,7 +155,7 @@ let renderChartContainer (state : State) =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -182,4 +181,3 @@ let render (state: State) dispatch =
 
 let testsChart (props : {| data : StatsData |}) =
     React.elmishComponent("TestsChart", init props.data, update, render)
-
