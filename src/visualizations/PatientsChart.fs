@@ -18,12 +18,14 @@ type Segmentation =
 
 type Breakdown =
     | Structure
+    | Ratios
     | BySeries
     | ByHospital
   with
-    static member all = [ Structure; ByHospital; ]
+    static member all = [ Structure; ByHospital; Ratios ]
     static member getName = function
         | Structure     -> "Struktura"
+        | Ratios        -> "Razmerja"
         | BySeries      -> "Obravnava po pacientih"
         | ByHospital    -> "Po bolnišnicah"
 
@@ -308,11 +310,40 @@ let renderChartOptions (state : State) =
         |}
         |> pojo
 
+    let renderRatiosH series =
+        let percent (a : int option) (b : int option) = 
+            Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
+
+        let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
+            match series with
+            | Icu                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
+            | Critical              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
+            | _                     -> fun ps -> ps.JsDate12h, None
+
+        let color, line, className, name = Series.getSeriesInfo series
+
+        {|
+            visible = true
+            color = color
+            dashStyle = line |> DashStyle.toString
+            name = name
+            data =
+                state.patientsData
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate || dp.total.inHospital.toDate.IsNone)
+                |> Seq.map renderRatioPoint
+                |> Array.ofSeq
+        |}
+        |> pojo
+
+
     let allSeries = [|
         match state.breakdown with
         | Structure ->
             for series in Series.structure do
                 yield renderBarSeries series
+        | Ratios ->            
+            for series in [ Icu ; Critical ] do
+                yield renderRatiosH series
         | BySeries ->
             for _ in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
@@ -324,7 +355,8 @@ let renderChartOptions (state : State) =
 
     let className =
         match state.breakdown with
-        | Structure     -> "covid19-patients-inout"
+        | Structure     -> "covid19-patients-structure"
+        | Ratios        -> "covid19-patients-ratio"
         | BySeries      -> "covid19-patients"
         | ByHospital    -> "covid19-hospitals"
 
