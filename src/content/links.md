@@ -128,7 +128,7 @@
 | [Visualizing the spread of virus in a population](https://corona-simulation.now.sh/)                      | Enostavna vizualizacija širjenja virusa med populacijo z možnostjo nastavljanja faktorjev (smrtnost, viralnost,..); [Swizec Teller](https://swizec.com/)                                                                       |
 | [Visualizing how viruses spread in a population](https://reactfordataviz.com/articles/corona-simulation/) | Članek - vizualizacija širjenja virusa med populacijo z možnostjo nastavljanja faktorjev + primerjava z nekaterimi drugimi epidemijami + "how to" programiranja simulacij; [Swizec Teller](https://swizec.com/)-               |
 | [Outbreak - playable disease simulaton](https://meltingasphalt.com/interactive/outbreak/)                 | Enako kot Swizec, ampak drugače :-) [Kevin Simler](https://meltingasphalt.com/about/)                                                                                                                                          |
-
+| [Modeling Covid-19](https://modelingcovid.com/) | SEIR model z umeritvijo na podatke in upoštevanjem ukrepov za omejevanje širjenja ter različnimi scenariji le-teh v prihodnosti. Izvorna koda je dostopna. |
 
 ## Poljudno in strokovno – svet
 
