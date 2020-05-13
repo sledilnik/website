@@ -20,24 +20,26 @@ type Region =
     { Key : string
       Name : string option }
 
-type TotalPositiveTestsForDate =
+type TotalsForDate =
     { Date : System.DateTime
-      TotalPositiveTests : int option }
+      ConfirmedToDate : int option
+      DeceasedToDate : int option
+    }
 
 type Municipality =
     { Key : string
       Name : string option
       RegionKey : string
       DoublingTime : float option
-      MaxPositiveTests : int option
-      LastPositiveTest : System.DateTime
+      MaxConfirmedCases : int option
+      LastConfirmedCase : System.DateTime
       DaysSinceLastCase : int
-      TotalPositiveTest : TotalPositiveTestsForDate seq }
+      TotalsForDate : TotalsForDate array }
 
 type SortBy =
-    | TotalPositiveTests
+    | TotalConfirmedCases
+    | LastConfirmedCase
     | DoublingTime
-    | LastPositiveTest
 
 type Query (query : obj, regions : Region list) =
     member this.Query = query
@@ -54,8 +56,8 @@ type Query (query : obj, regions : Region list) =
         match query?("sort") with
         | Some (sort : string) ->
             match sort.ToLower() with
-            | "total-positive-tests" -> Some TotalPositiveTests
-            | "last-positive-test" -> Some LastPositiveTest
+            | "total-confirmed-cases" -> Some TotalConfirmedCases
+            | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
                 match Highcharts.showExpGrowthFeatures with
                     | true -> Some DoublingTime
@@ -97,32 +99,35 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     TotalPositiveTests = municipality.ConfirmedToDate |} }
+                                     ConfirmedToDate = municipality.ConfirmedToDate 
+                                     DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
-            let totalPositiveTest =
+            let totalsForDate =
                 dp
-                |> Seq.map (fun dp -> { Date = dp.Date ; TotalPositiveTests = dp.TotalPositiveTests })
+                |> Seq.map (
+                    fun dp -> { Date = dp.Date ; ConfirmedToDate = dp.ConfirmedToDate ; DeceasedToDate = dp.DeceasedToDate })
                 |> Seq.sortBy (fun dp -> dp.Date)
+                |> Seq.toArray
             let doublingTime =
                 dp
-                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.TotalPositiveTests |})
+                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
             let maxValue =
                 dp
-                |> Seq.map (fun dp -> dp.TotalPositiveTests)
+                |> Seq.map (fun dp -> dp.ConfirmedToDate)
                 |> Seq.filter Option.isSome
                 |> Seq.max
-            let maxDay = dp |> Seq.filter (fun p -> p.TotalPositiveTests = maxValue) |> Seq.head
+            let maxDay = dp |> Seq.filter (fun p -> p.ConfirmedToDate = maxValue) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              MaxPositiveTests = maxValue
-              LastPositiveTest = maxDay.Date
+              MaxConfirmedCases = maxValue
+              LastConfirmedCase = maxDay.Date
               DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
-              TotalPositiveTest = totalPositiveTest
+              TotalsForDate = totalsForDate
             })
 
     let state =
@@ -136,7 +141,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             | Some region -> region
           SortBy =
             match query.SortBy with
-            | None -> LastPositiveTest
+            | None -> LastConfirmedCase
             | Some sortBy -> sortBy }
 
     state, Cmd.none
@@ -159,7 +164,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderMunicipality (municipality : Municipality) =
 
-    let data = municipality.TotalPositiveTest
+    let data = municipality.TotalsForDate
 
     let truncatedData = data |> Seq.skip ((Seq.length data) - showMaxBars)
 
@@ -204,29 +209,29 @@ let renderMunicipality (municipality : Municipality) =
             ]
 
     let renderedBars =
-        match municipality.MaxPositiveTests with
+        match municipality.MaxConfirmedCases with
         | None -> Seq.empty
         | Some maxValue ->
             seq {
                 for _, d in truncatedData |> Seq.mapi (fun i d -> i, d) do
-                    match d.TotalPositiveTests with
+                    match d.ConfirmedToDate with
                     | None ->
                         yield Html.div [
                             prop.className "bar bar--empty"
                         ]
-                    | Some positiveTests ->
+                    | Some confirmedToDate ->
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
                                 Html.div [
                                     prop.className "bar"
-                                    prop.style [ style.height (positiveTests * barMaxHeight / maxValue) ] ]
+                                    prop.style [ style.height (confirmedToDate * barMaxHeight / maxValue) ] ]
                                 Html.div [
                                     prop.className "total-and-date total-and-date--hover"
                                     prop.children [
                                         Html.div [
                                             prop.className "total"
-                                            prop.text positiveTests ]
+                                            prop.text confirmedToDate ]
                                         Html.div [
                                             prop.className "date"
                                             prop.text (sprintf "%d. %s" d.Date.Day (Utils.monthNameOfdate d.Date)) ]
@@ -236,8 +241,8 @@ let renderMunicipality (municipality : Municipality) =
                         ]
                 }
 
-    let totalPositiveTests =
-        match municipality.MaxPositiveTests with
+    let TotalConfirmedCases =
+        match municipality.MaxConfirmedCases with
         | None -> ""
         | Some v -> v.ToString()
 
@@ -263,10 +268,10 @@ let renderMunicipality (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "total"
-                                prop.text totalPositiveTests ]
+                                prop.text TotalConfirmedCases ]
                             Html.div [
                                 prop.className "date"
-                                prop.text (sprintf "%d. %s" municipality.LastPositiveTest.Day (Utils.monthNameOfdate municipality.LastPositiveTest.Date)) ]
+                                prop.text (sprintf "%d. %s" municipality.LastConfirmedCase.Day (Utils.monthNameOfdate municipality.LastConfirmedCase.Date)) ]
                         ]
                     ]
                 ]
@@ -308,16 +313,16 @@ let renderMunicipalities (state : State) _ =
         | None, Some _ -> -1
         | Some s1, Some s2 -> System.String.Compare(s1, s2)
 
-    let compareMaxTests m1 m2 =
-        if m1.MaxPositiveTests < m2.MaxPositiveTests then 1
-        else if m1.MaxPositiveTests > m2.MaxPositiveTests then -1
+    let compareMaxCases m1 m2 =
+        if m1.MaxConfirmedCases < m2.MaxConfirmedCases then 1
+        else if m1.MaxConfirmedCases > m2.MaxConfirmedCases then -1
         else compareStringOption m1.Name m2.Name
 
     let sortedMunicipalities =
         match state.SortBy with
-        | TotalPositiveTests ->
+        | TotalConfirmedCases ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> compareMaxTests m1 m2)
+            |> Seq.sortWith (fun m1 m2 -> compareMaxCases m1 m2)
         | DoublingTime ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
@@ -328,13 +333,13 @@ let renderMunicipalities (state : State) _ =
                 | Some d1, Some d2 ->
                     if d1 > d2 then 1
                     else if d1 < d2 then -1
-                    else compareMaxTests m1 m2)
-        | LastPositiveTest ->
+                    else compareMaxCases m1 m2)
+        | LastConfirmedCase ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
-                if m1.LastPositiveTest < m2.LastPositiveTest then 1
-                else if m1.LastPositiveTest > m2.LastPositiveTest then -1
-                else compareMaxTests m1 m2)
+                if m1.LastConfirmedCase < m2.LastConfirmedCase then 1
+                else if m1.LastConfirmedCase > m2.LastConfirmedCase then -1
+                else compareMaxCases m1 m2)
 
     let truncatedData, displayShowAllButton =
         if state.ShowAll = true
@@ -408,10 +413,10 @@ let renderSortBy (currentSortBy : SortBy) dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Razvrsti:"
-            renderSelector SortBy.TotalPositiveTests "Absolutno"
+            renderSelector SortBy.TotalConfirmedCases "Absolutno"
             if Highcharts.showExpGrowthFeatures then
                 renderSelector SortBy.DoublingTime "Dnevih podvojitve"
-            renderSelector SortBy.LastPositiveTest "Zadnjem primeru"
+            renderSelector SortBy.LastConfirmedCase "Zadnjem primeru"
         ]
     ]
 
