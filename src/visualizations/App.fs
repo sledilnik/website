@@ -217,6 +217,25 @@ let render (state : State) (_ : Msg -> unit) =
                             ] |> Html.h3
                         ]
                 ]
+                
+    let renderShareButton (visualization: Visualization) =
+            if visualization.Explicit
+            then Html.none
+            else 
+                Html.div [
+                    prop.className "share-button-wrapper"
+                    prop.children
+                        [ Html.img
+                            [ prop.className "share-button"
+                              prop.src "../assets/svg/share-icon.svg"
+                              prop.alt "Share"
+                            ]
+                          Html.span
+                            [ prop.className "share-button"
+                              prop.text "Deli graf na"
+                            ]
+                        ]
+                ]
 
     let renderChartTitle (visualization: Visualization) =
 
@@ -250,10 +269,19 @@ let render (state : State) (_ : Msg -> unit) =
                     [ prop.className [ true, viz.ClassName; true, "visualization-chart" ]
                       prop.id viz.ClassName
                       prop.children
-                        [ renderChartTitle viz
-                          renderFaqLink viz
+                        [
+                          Html.div
+                            [
+                              prop.className "title-chart-wrapper"
+                              prop.children
+                                [ renderChartTitle viz
+                                  renderFaqLink viz
+                                  renderShareButton viz
+                                ]
+                            ]
                           state |> viz.Renderer
                         ]
                     ]
-            ) )
+            )
+          )
         ]
