@@ -1,6 +1,10 @@
 <template>
   <div class="container">
-    <a href="/stats#hcenters-chart" class="notice-link">
+    <a
+      class="notice-link"
+      href="#hcenters-chart"
+      v-scroll-to="{ el: '#hcenters-chart', offset: -115 }"
+    >
       <div class="notice">
         <span>
           <b>Nov graf: </b>
