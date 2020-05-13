@@ -417,7 +417,7 @@ export default {
 
   &.router-link-icon {
     @include nav-break {
-      border: 1px solid rgba(#e8c250, 0.75);
+      border: 1px solid rgba(0, 0, 0, 0.13);
       border-radius: 8px;
       padding: 0px 6px;
     }
@@ -435,7 +435,7 @@ export default {
     }
 
     &:hover {
-      border: 1px solid #e8c250;
+      border: 1px solid rgba(0, 0, 0, 0.33);
       img {
         opacity: 0.75;
       }
