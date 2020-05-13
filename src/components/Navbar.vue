@@ -417,17 +417,16 @@ export default {
 
   &.router-link-icon {
     @include nav-break {
-      border: 2px solid rgba(#e8c250, 0.75);
+      border: 1px solid rgba(0, 0, 0, 0.13);
       border-radius: 8px;
       padding: 0px 6px;
     }
 
     span {
-        margin-left: 6px;
-      }
+      margin-left: 6px;
+    }
 
     img {
-
       @include nav-break {
         display: inline-block;
         opacity: 0.5;
@@ -436,7 +435,7 @@ export default {
     }
 
     &:hover {
-      border: 2px solid #e8c250;
+      border: 1px solid rgba(0, 0, 0, 0.33);
       img {
         opacity: 0.75;
       }
