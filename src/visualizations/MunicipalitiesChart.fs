@@ -31,12 +31,14 @@ type Municipality =
       Name : string option
       RegionKey : string
       DoublingTime : float option
+      ActiveCases : int option
       MaxConfirmedCases : int option
       LastConfirmedCase : System.DateTime
       DaysSinceLastCase : int
       TotalsForDate : TotalsForDate array }
 
 type SortBy =
+    | ActiveCases
     | TotalConfirmedCases
     | LastConfirmedCase
     | DoublingTime
@@ -56,6 +58,7 @@ type Query (query : obj, regions : Region list) =
         match query?("sort") with
         | Some (sort : string) ->
             match sort.ToLower() with
+            | "active-cases" -> Some ActiveCases
             | "total-confirmed-cases" -> Some TotalConfirmedCases
             | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
@@ -127,6 +130,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
+              ActiveCases = 
+                    let dayR = totalsForDate |> Array.tryItem (totalsForDate.Length - 15)
+                    let dayL = totalsForDate |> Array.tryLast
+                    match dayR, dayL with
+                    | None, None -> Some 0
+                    | None, Some b -> b.ConfirmedToDate
+                    | Some a, None -> Some 0
+                    | Some a, Some b -> Some (b.ConfirmedToDate.Value - a.ConfirmedToDate.Value)
               MaxConfirmedCases = maxValue
               LastConfirmedCase = maxDay.Date
               DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
@@ -254,11 +265,6 @@ let renderMunicipality (municipality : Municipality) =
                         ]
                 }
 
-    let totalConfirmedCases =
-        match municipality.MaxConfirmedCases with
-        | None -> ""
-        | Some v -> v.ToString()
-
     Html.div [
         prop.className "municipality"
         prop.children [
@@ -280,8 +286,11 @@ let renderMunicipality (municipality : Municipality) =
                         prop.className "total-and-date"
                         prop.children [
                             Html.div [
+                                prop.className "active"
+                                prop.text (sprintf "%d" municipality.ActiveCases.Value) ]
+                            Html.div [
                                 prop.className "total"
-                                prop.text totalConfirmedCases ]
+                                prop.text (sprintf "%d" municipality.MaxConfirmedCases.Value) ]
                             Html.div [
                                 prop.className "date"
                                 prop.text (sprintf "%d. %s" municipality.LastConfirmedCase.Day (Utils.monthNameOfdate municipality.LastConfirmedCase.Date)) ]
@@ -326,6 +335,11 @@ let renderMunicipalities (state : State) _ =
         | None, Some _ -> -1
         | Some s1, Some s2 -> System.String.Compare(s1, s2)
 
+    let compareActiveCases m1 m2 =
+        if m1.ActiveCases < m2.ActiveCases then 1
+        else if m1.ActiveCases > m2.ActiveCases then -1
+        else compareStringOption m1.Name m2.Name
+
     let compareMaxCases m1 m2 =
         if m1.MaxConfirmedCases < m2.MaxConfirmedCases then 1
         else if m1.MaxConfirmedCases > m2.MaxConfirmedCases then -1
@@ -333,6 +347,9 @@ let renderMunicipalities (state : State) _ =
 
     let sortedMunicipalities =
         match state.SortBy with
+        | ActiveCases ->
+            dataFilteredByRegion
+            |> Seq.sortWith (fun m1 m2 -> compareActiveCases m1 m2)
         | TotalConfirmedCases ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 -> compareMaxCases m1 m2)
@@ -426,10 +443,11 @@ let renderSortBy (currentSortBy : SortBy) dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Razvrsti:"
-            renderSelector SortBy.TotalConfirmedCases "Absolutno"
+            renderSelector SortBy.LastConfirmedCase "Zadnji"
+            renderSelector SortBy.ActiveCases "Aktivni"
+            renderSelector SortBy.TotalConfirmedCases "Vsi"
             if Highcharts.showExpGrowthFeatures then
                 renderSelector SortBy.DoublingTime "Dnevih podvojitve"
-            renderSelector SortBy.LastConfirmedCase "Zadnjem primeru"
         ]
     ]
 
