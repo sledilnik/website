@@ -141,7 +141,7 @@ module Dictionaries =
         Name : string
         Population : int option }
 
-    let excludedRegions = Set.ofList ["t" ; "n"]
+    let excludedRegions = Set.ofList ["si" ; "t" ; "n"]
 
     let regions =
         [ "si",  "SLOVENIJA",  Some 2089310
