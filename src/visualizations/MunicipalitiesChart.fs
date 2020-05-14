@@ -24,8 +24,6 @@ type TotalsForDate =
     { Date : System.DateTime
       ConfirmedToDate : int option
       DeceasedToDate : int option
-      RecoveredToDate : int option
-      ActiveCases : int option
     }
 
 type Municipality =
@@ -107,13 +105,11 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalsForDate =
                 dp
-                |> Seq.mapi (
-                    fun index dp -> { 
+                |> Seq.map (
+                    fun dp -> { 
                         Date = dp.Date
                         ConfirmedToDate = dp.ConfirmedToDate
-                        DeceasedToDate = dp.DeceasedToDate 
-                        RecoveredToDate = None
-                        ActiveCases = Some (dp.ConfirmedToDate.Value - dp.DeceasedToDate.Value) })
+                        DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toArray
             let doublingTime =
@@ -171,9 +167,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderMunicipality (municipality : Municipality) =
 
-    let truncatedData = 
-        municipality.TotalsForDate |> Seq.skip ((Array.length municipality.TotalsForDate) - showMaxBars)
-
     let renderLastCase =
         let label, value =
             match municipality.DaysSinceLastCase with
@@ -219,7 +212,10 @@ let renderMunicipality (municipality : Municipality) =
         | None -> Seq.empty
         | Some maxValue ->
             seq {
-                for dp in truncatedData do
+                let dpLen = Array.length municipality.TotalsForDate
+                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0 
+                for i = dpStart to dpLen - 1 do
+                    let dp = municipality.TotalsForDate.[i]
                     match dp.ConfirmedToDate with
                     | None ->
                         yield Html.div [
@@ -230,19 +226,25 @@ let renderMunicipality (municipality : Municipality) =
                             prop.className "bar-wrapper"
                             prop.children [
                                 // TODO: Mia, tukaj bi morali "bar" razbiti na tri dele in vsakega z svojo barvo pobarvat
-                                // dp.ActiveCases - nadomesti trenutno ConfirmedCases
-                                // dp.RecoveredToDate  #8cd4b2
-                                // dp.DeceasedToDate   #666666
+                                // cctiveCases - nadomesti trenutno ConfirmedCases
+                                // recoveredToDate  #8cd4b2
+                                // deceasedToDate   #666666
+                                let deceasedToDate = dp.DeceasedToDate.Value
+                                let recoveredToDate = 
+                                    if i >= 14 
+                                    then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
+                                    else 0
+                                let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
                                 Html.div [
                                     prop.className "bar"
-                                    prop.style [ style.height (confirmedToDate * barMaxHeight / maxValue) ] ]
+                                    prop.style [ style.height (activeCases * barMaxHeight / maxValue) ] ]
                                 // TODO: on hover pa bi verjetno morali vse tri številke izpisat? Kako?
                                 Html.div [
                                     prop.className "total-and-date total-and-date--hover"
                                     prop.children [
                                         Html.div [
                                             prop.className "total"
-                                            prop.text confirmedToDate ]
+                                            prop.text activeCases ]
                                         Html.div [
                                             prop.className "date"
                                             prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date)) ]
