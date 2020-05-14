@@ -249,7 +249,7 @@ let renderMunicipality (municipality : Municipality) =
                                             prop.style [ style.height (deceasedToDate * barMaxHeight / maxValue) ]
                                             prop.className "bar--deceased" ]
                                         Html.div [
-                                            prop.style [ style.height (confirmedToDate * barMaxHeight / maxValue) ]
+                                            prop.style [ style.height (recoveredToDate * barMaxHeight / maxValue) ]
                                             prop.className "bar--recovered" ]
                                         Html.div [
                                             prop.style [ style.height (activeCases * barMaxHeight / maxValue) ]
@@ -271,7 +271,7 @@ let renderMunicipality (municipality : Municipality) =
                                             prop.className "recovered"
                                             prop.children [
                                                 Html.span [ prop.text "Preboleli: " ]
-                                                Html.b [ prop.text confirmedToDate ] ] ]
+                                                Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
                                             prop.className "active"
                                             prop.children [
