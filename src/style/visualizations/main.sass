@@ -20,7 +20,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     background: #fff
     margin-bottom: 88px
     position: relative
-    padding: 46px 0 32px
+    padding: 0 0 32px
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15)
 
     &.municipalities-chart
@@ -74,12 +74,42 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     border: solid 1px rgba(0, 0, 0, 0.13)
     cursor: pointer
     padding: 3px 8px
+    margin-right: 16px
     
     span
       display: inline-block
       font-size: 14px
       line-height: 24px
       font-weight: bold
+      
+  .share-dropdown-wrapper
+    display: none
+    position: absolute
+    top: 74px
+    right: 46px
+    background: #fff
+    z-index: 50
+    border-radius: 6px
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+    width: 180px
+    &.share-open
+      display: block
+    
+    .share-link
+      display: block
+      margin: 3px
+      &:hover
+        background: $background
+        
+      .share-icon
+        object-fit: contain
+        width: 15px
+        height: 20px
+        margin: 10px
+        
+      span
+        font-size: 14px
+        line-height: 30px
 
   p
     color: $text-c
@@ -137,10 +167,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     justify-content: space-between
     flex-wrap: wrap
     border-top: 1px solid $gray-300
+    padding: 22px 15px
 
     .chart-display-property-selector, .chart-data-interval-selector
-
-      margin: 22px $gap/2 22px 0
       text-align: right
       color: $text-c
       font-size: 14px
