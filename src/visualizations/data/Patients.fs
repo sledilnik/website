@@ -11,9 +11,7 @@ type PatientCounts = {
     out: int option
     today: int option
     toDate: int option
-    total: int option
-    hospital: int option
-    home: int option
+    hospital: int option // TODO: make obsolete with REST change
 }
 
 type TotalPatientStats = {

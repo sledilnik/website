@@ -299,7 +299,7 @@ let render state dispatch =
                 prop.className "disclaimer"
             ]
         ]
-    | None -> Html.div []
+    | None -> Html.none
 
 let renderChart() =
     React.elmishComponent

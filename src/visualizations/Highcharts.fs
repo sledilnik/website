@@ -10,6 +10,9 @@ open Types
 [<Import("renderChart", from="./_highcharts")>]
 let chart: obj -> ReactElement = jsNative
 
+[<Import("renderChartFromWindow", from="./_highcharts")>]
+let chartFromWindow: obj -> ReactElement = jsNative
+
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
@@ -75,9 +78,9 @@ let shadedWeekendPlotBands =
     |]
 
 // if set to true:
-// - MunicipalitiesChart will showDoublesInXday 
-// - SpreadChart will show exponential growth pages 
-let showExpGrowthFeatures = 
+// - MunicipalitiesChart will showDoublesInXday
+// - SpreadChart will show exponential growth pages
+let showExpGrowthFeatures =
     false
 
 let addContainmentMeasuresFlags

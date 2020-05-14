@@ -20,7 +20,7 @@
           <img src="../assets/svg/medium-icon.svg" alt="Medium" />
         </a>
         <a href="https://github.com/sledilnik" target="_blank">
-          <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
         </a>
       </div>
     </div>
@@ -117,4 +117,7 @@ footer
 
       @media only screen and (max-width: 480px)
         margin-left: 16px
+
+    .gh-icon
+      opacity: .25
 </style>

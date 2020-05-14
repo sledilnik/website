@@ -53,7 +53,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#70a471"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.medicalEmergency)) |> Seq.toArray
             |}
 
@@ -63,7 +63,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#a05195"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.suspectedCovid)) |> Seq.toArray
             |}
         yield pojo
@@ -72,7 +72,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#d45087"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.phoneTriage.suspectedCovid)) |> Seq.toArray
             |}
         yield pojo
@@ -80,7 +80,7 @@ let renderChartOptions (state : State) =
                 name = "Napotitev v samoizolacijo"
                 ``type`` = "line"
                 color = "#665191"
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.sentTo.selfIsolation)) |> Seq.toArray
             |}
         yield pojo
@@ -88,7 +88,7 @@ let renderChartOptions (state : State) =
                 name = "Test (opravljenih)"
                 ``type`` = "line"
                 color = "#19aebd"
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.tests.performed)) |> Seq.toArray
             |}
         yield pojo
@@ -96,13 +96,13 @@ let renderChartOptions (state : State) =
                 name = "Test (pozitivnih*)"
                 ``type`` = "line"
                 color = "#d5c768"
-                data = state.hcData 
+                data = state.hcData
                     |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.tests.positive)) |> Seq.toArray
             |}
         yield addContainmentMeasuresFlags startTime None |> pojo
 
     ]
-    
+
     let baseOptions = Highcharts.basicChartOptions scaleType className
     {| baseOptions with
         series = List.toArray allSeries
