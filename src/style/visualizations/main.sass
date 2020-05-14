@@ -332,7 +332,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       display: none
       position: absolute
       top: 0px
-      right: 10px
+      right: 20px
       text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white
       border: 1px solid black
       border-radius: 3px
@@ -386,9 +386,20 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         .total-and-date--hover
           display: block
 
+        .bar
+          &--active
+            background-color: rgba($bar-active-color, 0.8)
+          
+          &--recovered
+            background-color: rgba($bar-recovered-color, 0.8)
+          
+          &--deceased 
+            background-color: rgba($bar-deceased-color, 0.8)
+
     .bar
       width: 4px
       margin-right: 1px
+      transition: all .3s
 
       &--active
         background-color: $bar-active-color
