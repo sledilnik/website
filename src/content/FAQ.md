@@ -364,10 +364,10 @@ V obdobju eksponentne rasti na prikazu **Primeri po občinah** prikazujemo oceno
 <details>
   <summary id=municipalities-chart>Kaj kaže prikaz "Primeri po občinah"?</summary>
 
-Stolpčni [prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po dnevih, pri tem da so prikazani aktivni primeri, preboleli in umrli v posamezni občini. Pod občino pa je podatek o času od zadnje okužbe. Občine so razvrščene glede na to, kdaj je bil tam zabeležen zadnji potrjeni primer, iz česar lahko sklepamo, katere občine so trenutno bolj “okužene” in katere bolj "zdrave" kot druge.   
-Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo prikaz *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov, če pa izberemo *Vsi* pa po največjem skupnem številu obolelih, če pa bomo z zgornjega spustnega seznama *Vse regije* izbrali posamezno regijo, si lahko ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščete z vnosom imena v iskalnik *Poišči občino*. 
+Stolpčni [prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po dnevih, pri tem da so prikazani aktivni primeri, preboleli (ocena) in umrli v posamezni občini. Pod občino pa je podatek o času od zadnje okužbe. Občine so razvrščene glede na to, kdaj je bil tam zabeležen zadnji potrjeni primer, iz česar lahko sklepamo, katere občine so trenutno bolj “okužene” in katere bolj "zdrave" kot druge.   
+Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo prikaz *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov, če pa izberemo *Vsi* pa po največjem skupnem številu potrjeno okuženih, če pa bomo z zgornjega spustnega seznama *Vse regije* izbrali posamezno regijo, si lahko ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščete z vnosom imena v iskalnik *Poišči občino*. 
 
-*Opomba: izračun prebolelih in aktivnih je na podlagi poteka 14 dni pri blagi obliki bolezni. Če pa je posameznik iz občine hospitaliziran, pa bo ta prebolevanje trajalo dlje, ampak v tem primeru posameznik ni nevaren za okolico, ker je hospitaliziran.*
+*Opomba: ocena prebolelih in aktivnih je narejena po poteku 14 dni pri blagi obliki bolezni. Če pa je posameznik hospitaliziran, pa bo ta prebolevanje trajalo dlje, ampak v tem primeru posameznik ni nevaren za okolico, ker je v bolnišnici. Ker v prikazu po občinah ne upoštevamo hospitaliziranih je mogoče, da se seštevek aktivnih po občinah ne ujema z oceno aktivnih za celo državo. Glej tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
 
 </details>
 
