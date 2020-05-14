@@ -238,7 +238,7 @@ let renderMunicipality (municipality : Municipality) =
                             prop.children [
                                 let deceasedToDate = dp.DeceasedToDate.Value
                                 let recoveredToDate = 
-                                    if i >= 14 
+                                    if i >= 14 && municipality.TotalsForDate.[i-14].ConfirmedToDate.Value > deceasedToDate
                                     then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
                                     else 0
                                 let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
