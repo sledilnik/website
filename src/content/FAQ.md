@@ -357,15 +357,17 @@ S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogl
 <!--<details>
   <summary id=chart-double-rate>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
 
-V obdobju eksponentne rasti na prikazu **Potrjeno okuženi po občinah** prikazujemo oceno **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
+V obdobju eksponentne rasti na prikazu **Primeri po občinah** prikazujemo oceno **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
 
 </details>-->
 
 <details>
-  <summary id=municipalities-chart>Kaj kaže prikaz "Potrjeno okuženi po občinah"?</summary>
+  <summary id=municipalities-chart>Kaj kaže prikaz "Primeri po občinah"?</summary>
 
-Stolpčni [prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po dnevih, pod občino pa je podatek o času od zadnje okužbe. Občine so razvrščene glede na to, kdaj je bil tam zabeležen zadnji potrjeni primer, iz česar lahko sklepamo, katere občine so bolj “okužene” in katere bolj "zdrave" kot druge.   
-Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo prikaz *Absolutno*, bomo občine razvrstili po največjem skupnem številu obolelih, če pa bomo z zgornjega spustnega seznama *Vse regije* izbrali posamezno regijo, si lahko ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščete z vnosom imena v iskalnik *Poišči občino*. 
+Stolpčni [prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po dnevih, pri tem da so prikazani aktivni primeri, preboleli (ocena) in umrli v posamezni občini. Pod občino pa je podatek o času od zadnje okužbe. Občine so razvrščene glede na to, kdaj je bil tam zabeležen zadnji potrjeni primer, iz česar lahko sklepamo, katere občine so trenutno bolj “okužene” in katere bolj "zdrave" kot druge.   
+Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo prikaz *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov, če pa izberemo *Vsi* pa po največjem skupnem številu potrjeno okuženih, če pa bomo z zgornjega spustnega seznama *Vse regije* izbrali posamezno regijo, si lahko ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščete z vnosom imena v iskalnik *Poišči občino*. 
+
+*Opomba: ocena prebolelih in aktivnih je narejena po poteku 14 dni pri blagi obliki bolezni. Če pa je posameznik hospitaliziran, pa bo ta prebolevanje trajalo dlje, ampak v tem primeru posameznik ni nevaren za okolico, ker je v bolnišnici. Ker v prikazu po občinah ne upoštevamo hospitaliziranih je mogoče, da se seštevek aktivnih po občinah ne ujema z oceno aktivnih za celo državo. Glej tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
 
 </details>
 
