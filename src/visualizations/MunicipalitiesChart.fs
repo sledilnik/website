@@ -10,7 +10,7 @@ open Feliz.ElmishComponents
 
 open Types
 
-let barMaxHeight = 50
+let barMaxHeight = 25
 let showMaxBars = 30
 let collapsedMunicipalityCount = 24
 
@@ -236,10 +236,6 @@ let renderMunicipality (municipality : Municipality) =
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
-                                // TODO: Mia, tukaj bi morali "bar" razbiti na tri dele in vsakega z svojo barvo pobarvat
-                                // cctiveCases - nadomesti trenutno ConfirmedCases
-                                // recoveredToDate  #8cd4b2
-                                // deceasedToDate   #666666
                                 let deceasedToDate = dp.DeceasedToDate.Value
                                 let recoveredToDate = 
                                     if i >= 14 
@@ -248,20 +244,39 @@ let renderMunicipality (municipality : Municipality) =
                                 let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
                                 Html.div [
                                     prop.className "bar"
-                                    prop.style [ style.height (activeCases * barMaxHeight / maxValue) ] ]
-                                // TODO: on hover pa bi verjetno morali vse tri številke izpisat? Kako?
+                                    prop.children [
+                                        Html.div [
+                                            prop.style [ style.height (deceasedToDate * barMaxHeight / maxValue) ]
+                                            prop.className "bar--deceased" ]
+                                        Html.div [
+                                            prop.style [ style.height (confirmedToDate * barMaxHeight / maxValue) ]
+                                            prop.className "bar--recovered" ]
+                                        Html.div [
+                                            prop.style [ style.height (activeCases * barMaxHeight / maxValue) ]
+                                            prop.className "bar--active" ]
+                                    ]
+                                ]
                                 Html.div [
                                     prop.className "total-and-date total-and-date--hover"
                                     prop.children [
                                         Html.div [
-                                            prop.className "active"
-                                            prop.text activeCases ]
-                                        Html.div [
-                                            prop.className "total"
-                                            prop.text confirmedToDate ]
-                                        Html.div [
                                             prop.className "date"
-                                            prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date)) ]
+                                            prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date))]
+                                        Html.div [
+                                            prop.className "deceased"
+                                            prop.children [
+                                                Html.span [ prop.text "Umrli: " ]
+                                                Html.b [ prop.text deceasedToDate ] ] ]
+                                        Html.div [
+                                            prop.className "recovered"
+                                            prop.children [
+                                                Html.span [ prop.text "Preboleli: " ]
+                                                Html.b [ prop.text confirmedToDate ] ] ]
+                                        Html.div [
+                                            prop.className "active"
+                                            prop.children [
+                                                Html.span [ prop.text "Aktivni: " ]
+                                                Html.b [ prop.text activeCases ] ] ]
                                     ]
                                 ]
                             ]
