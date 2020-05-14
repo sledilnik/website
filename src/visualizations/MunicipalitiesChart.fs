@@ -266,20 +266,28 @@ let renderMunicipality (municipality : Municipality) =
                                             prop.className "date"
                                             prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date))]
                                         Html.div [
-                                            prop.className "deceased"
-                                            prop.children [
-                                                Html.span [ prop.text "Umrli: " ]
-                                                Html.b [ prop.text deceasedToDate ] ] ]
+                                            if (deceasedToDate > 0) then
+                                                prop.className "deceased"
+                                                prop.children [
+                                                    Html.span [ prop.text "Umrli: " ]
+                                                    Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
-                                            prop.className "recovered"
-                                            prop.children [
-                                                Html.span [ prop.text "Preboleli: " ]
-                                                Html.b [ prop.text recoveredToDate ] ] ]
+                                            if (recoveredToDate > 0) then 
+                                                prop.className "recovered"
+                                                prop.children [
+                                                    Html.span [ prop.text "Preboleli: " ]
+                                                    Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
-                                            prop.className "active"
+                                            if (activeCases > 0) then 
+                                                prop.className "active"
+                                                prop.children [
+                                                    Html.span [ prop.text "Aktivni: " ]
+                                                    Html.b [ prop.text activeCases ] ] ]
+                                        Html.div [
+                                            prop.className "confirmed"
                                             prop.children [
-                                                Html.span [ prop.text "Aktivni: " ]
-                                                Html.b [ prop.text activeCases ] ] ]
+                                                Html.span [ prop.text "Vsi: " ]
+                                                Html.b [ prop.text confirmedToDate ] ] ]
                                     ]
                                 ]
                             ]

@@ -313,7 +313,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       padding-left: $gap/4
 
       .active
-        font-size: $font-size
+        font-size: $font-size-lg
         color: $bar-active-color
 
       .recovered
@@ -323,10 +323,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       .deceased
         font-size: $font-size
         color: $bar-deceased-color
-
-      .active
-        font-size: $font-size
-        color: $bar-active-color
 
       .date
         color: $gray-600
@@ -343,6 +339,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background: rgba(white, 0.8)
       padding: 5px
       min-width: 120px
+
+      .active
+        font-size: $font-size
 
       .deceased::before, .recovered::before, .active::before
         content: ""
@@ -386,10 +385,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       &:hover
         .total-and-date--hover
           display: block
-
-        &:last-child
-          .total-and-date--hover
-            display: none
 
     .bar
       width: 4px
