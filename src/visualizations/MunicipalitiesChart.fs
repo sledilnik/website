@@ -254,8 +254,11 @@ let renderMunicipality (municipality : Municipality) =
                                     prop.className "total-and-date total-and-date--hover"
                                     prop.children [
                                         Html.div [
-                                            prop.className "total"
+                                            prop.className "active"
                                             prop.text activeCases ]
+                                        Html.div [
+                                            prop.className "total"
+                                            prop.text confirmedToDate ]
                                         Html.div [
                                             prop.className "date"
                                             prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date)) ]
