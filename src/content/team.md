@@ -33,6 +33,7 @@ Uredniki baze in ostali sodelavci:
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
+-   [Mia Erbus](https://github.com/miaerbus) - spletna stran
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije

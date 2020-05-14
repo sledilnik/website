@@ -198,7 +198,7 @@ let seriesData (state : State) =
                         match state.DataTimeInterval with
                         | Complete -> lastValueTotal
                         | LastDays days ->
-                            let firstValueTotal = values |> Array.tryItem (values.Length - days)
+                            let firstValueTotal = values |> Array.tryItem (values.Length - days - 1)
                             match firstValueTotal, lastValueTotal with
                             | None, None -> None
                             | None, Some b -> Some b

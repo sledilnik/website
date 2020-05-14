@@ -144,7 +144,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView Map.mapChart {| data = data |} }
           { VisualizationType = Municipalities;
              ClassName = "municipalities-chart";
-             Label = "Potrjeno okuženi po občinah";
+             Label = "Primeri po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
