@@ -10,13 +10,18 @@ open Types
 open Data.HCenters
 open Highcharts
 
+type Scope =
+    | Totals
+    | Region of string
 
 type State = {
+    scope : Scope
     hcData : HcStats []
     error: string option
   } with
     static member initial =
         {
+            scope = Totals
             hcData = [||]
             error = None
         }
@@ -24,6 +29,14 @@ type State = {
 type Msg =
     | ConsumeHcData of Result<HcStats [], string>
     | ConsumeServerError of exn
+    | SwitchScope of Scope
+
+let getAllScopes state = seq {
+    yield Totals, "Vse"
+    for region in Utils.Dictionaries.regions do
+        if not (Set.contains region.Key Utils.Dictionaries.excludedRegions)
+        then yield Region region.Key, region.Value.Name
+}
 
 let init () : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either Data.HCenters.getOrFetch () ConsumeHcData ConsumeServerError
@@ -35,9 +48,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with hcData = data }, Cmd.none
     | ConsumeHcData (Error err) ->
         { state with error = Some err }, Cmd.none
-
     | ConsumeServerError ex ->
         { state with error = Some ex.Message }, Cmd.none
+    | SwitchScope scope ->
+        { state with scope = scope }, Cmd.none
 
 let renderChartOptions (state : State) =
     let className = "hcenters-chart"
@@ -123,6 +137,22 @@ let renderChartContainer (state : State) =
         ]
     ]
 
+let renderScopeSelector state scope (name:string) onClick =
+    Html.div [
+        prop.onClick onClick
+        prop.className [ true, "btn btn-sm metric-selector"; state.scope = scope, "metric-selector--selected" ]
+        prop.text name
+    ]
+
+let renderScopeSelectors state dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            getAllScopes state
+            |> Seq.map (fun (scope,name) ->
+                renderScopeSelector state scope name (fun _ -> SwitchScope scope |> dispatch)
+            ) ) ]
+
 let render (state : State) dispatch =
     match state.hcData, state.error with
     | [||], None -> Html.div [ Utils.renderLoading ]
@@ -130,6 +160,7 @@ let render (state : State) dispatch =
     | _, None ->
         Html.div [
             renderChartContainer state
+            renderScopeSelectors state dispatch
 
             Html.div [
                 prop.className "disclaimer"
