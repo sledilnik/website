@@ -242,17 +242,20 @@ let renderMunicipality (municipality : Municipality) =
                                     then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
                                     else 0
                                 let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
+                                let dHeight = deceasedToDate * barMaxHeight / maxValue
+                                let aHeight = activeCases * barMaxHeight / maxValue
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         Html.div [
-                                            prop.style [ style.height (deceasedToDate * barMaxHeight / maxValue) ]
+                                            prop.style [ style.height dHeight ]
                                             prop.className "bar--deceased" ]
                                         Html.div [
-                                            prop.style [ style.height (recoveredToDate * barMaxHeight / maxValue) ]
+                                            prop.style [ style.height rHeight ]
                                             prop.className "bar--recovered" ]
                                         Html.div [
-                                            prop.style [ style.height (activeCases * barMaxHeight / maxValue) ]
+                                            prop.style [ style.height aHeight ]
                                             prop.className "bar--active" ]
                                     ]
                                 ]
