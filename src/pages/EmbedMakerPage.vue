@@ -54,6 +54,11 @@ export default {
           text: "Hospitalizirani",
           dimensions: [1140, 720]
         },
+        "HCenters": {
+          value: "HCenters",
+          text: 'Obravnava v ZD',
+          dimensions: [1140, 720]
+        },
         "Tests": {
           value: "Tests",
           text: 'Testiranje',
@@ -62,7 +67,7 @@ export default {
         "Infections": {
           value: "Infections",
           text: 'Struktura potrjeno okuženih',
-          dimensions: [1140, 820]
+          dimensions: [1140, 720]
         },
         "Spread": {
           value: "Spread",
@@ -76,7 +81,7 @@ export default {
         },
         "Map": {
           value: "Map",
-          text: 'Zemljevid potrjeno okuženih po občinah',
+          text: 'Zemljevid po občinah',
           dimensions: [1140, 820]
         },
         "Municipalities": {

@@ -15,37 +15,38 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   @media only screen and (min-width: 768px)
     margin: 0
-
+    
   section
     background: #fff
     margin-bottom: 88px
     position: relative
-    padding: 46px 0 32px
+    padding: 0 0 32px
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15)
 
     &.municipalities-chart
-      padding: 46px 30px 32px
+      padding: 10px 30px 32px
 
     @media only screen and (min-width: 768px)
-      padding: 46px 30px 32px
+      padding: 10px 30px 32px
 
     div.loader
       min-height: 450px
       color: #fff // hide 'loading' text
-
+  
+  .title-chart-wrapper
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    min-width: 100%
+    
   .title-brand-wrapper
-    position: absolute
-    z-index: 10
-    left: 32px
-    top: 0
-    transform: translateY(-50%)
-    box-shadow: $box-shadow
-
+    margin-right: auto
+    
     h2
       font-size: 18px
+      line-height: 28px
       font-weight: bold
-      padding: 12px 16px
-      border: 1px solid $yellow
+      padding: 22px 16px
       background: #fff
       margin-bottom: 0
 
@@ -56,23 +57,59 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         display: none
 
   .faq-link-wrapper
-    position: absolute
-    z-index: 10
-    right: 32px
-    top: 0
-    transform: translateY(-50%)
-    box-shadow: $box-shadow
 
     h3
       font-size: 18px
       font-weight: bold
       padding: 12px 16px
-      border: 1px solid $yellow
+      // border: 1px solid $yellow
       background: #fff
       margin-bottom: 0
 
       a
         color: black
+    
+  .share-button-wrapper
+    border-radius: 6px
+    border: solid 1px rgba(0, 0, 0, 0.13)
+    cursor: pointer
+    padding: 3px 8px
+    margin-right: 16px
+    
+    span
+      display: inline-block
+      font-size: 14px
+      line-height: 24px
+      font-weight: bold
+      
+  .share-dropdown-wrapper
+    display: none
+    position: absolute
+    top: 74px
+    right: 46px
+    background: #fff
+    z-index: 50
+    border-radius: 6px
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+    width: 180px
+    &.share-open
+      display: block
+    
+    .share-link
+      display: block
+      margin: 3px
+      &:hover
+        background: $background
+        
+      .share-icon
+        object-fit: contain
+        width: 15px
+        height: 20px
+        margin: 10px
+        
+      span
+        font-size: 14px
+        line-height: 30px
 
   p
     color: $text-c
@@ -114,6 +151,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     color: $text-c
     padding: 15px 15px 0 15px
 
+    a
+      color: black
+      font-weight: bold
+      text-decoration: underline
+      text-decoration-color: $yellow
+
+
   .table
     td, th
       padding: 6px 9px
@@ -122,10 +166,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     justify-content: space-between
     flex-wrap: wrap
+    border-top: 1px solid $gray-300
+    padding: 22px 15px
 
     .chart-display-property-selector, .chart-data-interval-selector
-
-      margin: 0 $gap/2 $gap/2 0
       text-align: right
       color: $text-c
       font-size: 14px
@@ -153,11 +197,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
           &:hover
             animation: none
+            
+    .chart-data-interval-selector .chart-display-property-selector__item:nth-child(1)
+      @include media-breakpoint-down(sm)
+        margin-left: 0
 
   .metrics-selectors
     margin-top: $gap/2
     display: flex
     flex-wrap: wrap
+    padding: 0 $gap/2
+
+    @media only screen and (max-width: 767px)
+      justify-content: center
 
   .metric-selector
     margin: 0 $gap/6 $gap/3 $gap/6
@@ -230,6 +282,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .map-chart
     .map
       height: 600px
+
+    .filters
+      display: flex
+      flex-wrap: wrap
+
+    .filters__type
+      width: 10rem
+      margin-left: $gap / 2
+      margin-bottom: $gap / 2
+
+      @include media-breakpoint-down(md)
+        margin-left: $gap / 2
+      @include media-breakpoint-down(sm)
+        width: 8.25rem
+        padding: 0
 
     @include media-breakpoint-down(sm)
       .map

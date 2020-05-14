@@ -5,10 +5,10 @@
       <div class="time-stamp"></div>
       <div class="cards-wrapper latest-data-boxes">
         <Info-card title="Potrjeno okuženi" field="cases.confirmed.todate" series-type="state" />
-        <Info-card title="Preboleli" field="cases.recovered.todate" good-trend="up" series-type="cum" />
+        <Info-card title="Preboleli" field="cases.recovered.todate" good-trend="up" series-type="state" />
         <Info-card title="Hospitalizirani" field="state.in_hospital" series-type="state" />
         <Info-card title="V intenzivni enoti" field="state.icu" series-type="state" />
-        <Info-card title="Umrli" field="state.deceased.todate" series-type="cum" />
+        <Info-card title="Umrli" field="state.deceased.todate" series-type="state" />
       </div>
       <b-row cols="12">
         <b-col>

@@ -22,6 +22,7 @@ let init (query : obj) (visualization : string option) =
                 | "Regions" -> Some Regions
                 | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
+                | "HCenters" -> Some HCenters
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
                 | "Countries" -> Some Countries
@@ -96,6 +97,11 @@ let render (state : State) (_ : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+          { VisualizationType = HCenters;
+             ClassName = "hcenters-chart";
+             Label = "Obravnava v ZD";
+             Explicit = false;
+             Renderer =  fun _ -> lazyView HCentersChart.hCentersChart () }
           { VisualizationType = Infections;
              ClassName = "infections-chart";
              Label = "Struktura potrjeno okuženih";
@@ -128,7 +134,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
           { VisualizationType = Map;
              ClassName = "map-chart";
-             Label = "Zemljevid potrjeno okuženih po občinah";
+             Label = "Zemljevid po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
@@ -211,6 +217,79 @@ let render (state : State) (_ : Msg -> unit) =
                             ] |> Html.h3
                         ]
                 ]
+                
+ 
+    let renderShareButton (visualization: Visualization) =
+            if visualization.Explicit
+            then Html.none
+            else 
+                Html.div [
+                    prop.className "share-button-wrapper"
+                    prop.children
+                        [ Html.img
+                            [ prop.className "share-button"
+                              prop.src "/images/share-icon.svg"
+                              prop.alt "Share"
+                            ]
+                          Html.span
+                            [ prop.className "share-button"
+                              prop.text "Deli graf na"
+                            ]
+                        ]
+                ]
+              
+    let renderShareDropdown (visualization: Visualization) =
+            if visualization.Explicit
+            then Html.none
+            else 
+                Html.div [
+                    prop.className "share-dropdown-wrapper"
+                    prop.children
+                      [
+                        Html.a [
+                          prop.className "share-link"
+                          prop.children
+                            [ Html.img
+                                [ prop.className "share-icon"
+                                  prop.src "/images/facebook-f.svg"
+                                  prop.alt "Facebok"
+                                ]
+                              Html.span
+                                [ 
+                                  prop.text "Facebook"
+                                ]
+                            ]
+                        ]
+                        Html.a [
+                          prop.className "share-link"
+                          prop.children
+                            [ Html.img
+                                [ prop.className "share-icon"
+                                  prop.src "/images/twitter.svg"
+                                  prop.alt "Twitter"
+                                ]
+                              Html.span
+                                [ 
+                                  prop.text "Twitter"
+                                ]
+                            ]
+                        ]
+                        Html.a [
+                          prop.className "share-link"
+                          prop.children
+                            [ Html.img
+                                [ prop.className "share-icon"
+                                  prop.src "/images/code.svg"
+                                  prop.alt "Webpage"
+                                ]
+                              Html.span
+                                [ 
+                                  prop.text "Spletno stran"
+                                ]
+                            ]
+                        ]
+                      ]
+                ]
 
     let renderChartTitle (visualization: Visualization) =
 
@@ -244,10 +323,20 @@ let render (state : State) (_ : Msg -> unit) =
                     [ prop.className [ true, viz.ClassName; true, "visualization-chart" ]
                       prop.id viz.ClassName
                       prop.children
-                        [ renderChartTitle viz
-                          renderFaqLink viz
+                        [
+                          Html.div
+                            [
+                              prop.className "title-chart-wrapper"
+                              prop.children
+                                [ renderChartTitle viz
+                                  renderFaqLink viz
+                                  renderShareButton viz
+                                  renderShareDropdown viz
+                                ]
+                            ]
                           state |> viz.Renderer
                         ]
                     ]
-            ) )
+            )
+          )
         ]

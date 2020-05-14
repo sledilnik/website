@@ -14,11 +14,12 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Stanje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
+| Obravnava v ZD | https://covid-19.sledilnik.org/embed.html#/chart/HCenters |
 | Potrjeni primeri | https://covid-19.sledilnik.org/embed.html#/chart/Cases |
 | Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
-| Zemljevid potrjeno okuženih po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
+| Zemljevid po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Potrjeno okuženi po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
 | Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
 
