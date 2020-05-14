@@ -303,7 +303,7 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 
 Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ostale bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej preko telefonskega pogovora, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.  
 
-*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje) - za te primere ne prejemamo podatkov o obravnavanih sumih za COVID-19, tako da ta graf žal ne prikazuje popolne situacije na primarni ravni.*
+*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje in SB Novo mesto).*
 
 *Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
 
