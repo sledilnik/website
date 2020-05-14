@@ -227,7 +227,7 @@ let render (state : State) (_ : Msg -> unit) =
                     prop.children
                         [ Html.img
                             [ prop.className "share-button"
-                              prop.src "../assets/svg/share-icon.svg"
+                              prop.src "/images/share-icon.svg"
                               prop.alt "Share"
                             ]
                           Html.span

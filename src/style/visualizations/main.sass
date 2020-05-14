@@ -38,7 +38,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     justify-content: flex-end
     align-items: center
     min-width: 100%
-    border-bottom: 1px solid $gray-300
     
   .title-brand-wrapper
     margin-right: auto
@@ -74,10 +73,12 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     border-radius: 6px
     border: solid 1px rgba(0, 0, 0, 0.13)
     cursor: pointer
-    padding: 5px
+    padding: 3px 8px
     
     span
+      display: inline-block
       font-size: 14px
+      line-height: 24px
       font-weight: bold
 
   p
@@ -135,6 +136,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     justify-content: space-between
     flex-wrap: wrap
+    border-top: 1px solid $gray-300
 
     .chart-display-property-selector, .chart-data-interval-selector
 
