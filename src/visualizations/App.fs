@@ -144,7 +144,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView Map.mapChart {| data = data |} }
           { VisualizationType = Municipalities;
              ClassName = "municipalities-chart";
-             Label = "Potrjeno okuženi po občinah";
+             Label = "Primeri po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
@@ -304,13 +304,14 @@ let render (state : State) (_ : Msg -> unit) =
         Html.div [
             prop.className "title-brand-wrapper"
             prop.children
-                [
-                    Html.a
-                        [ prop.href ("#" + visualization.ClassName)
-                          prop.text visualization.Label
-                          prop.onClick (fun e -> scrollToElement e visualization.ClassName)
-                        ] |> Html.h2
-                    brandLink
+                [ Html.h2 [
+                    prop.children [
+                        Html.a [
+                            prop.href ("#" + visualization.ClassName)
+                            prop.text visualization.Label
+                            prop.onClick (fun e -> scrollToElement e visualization.ClassName)
+                        ] ] ]
+                  brandLink
                 ]
             ]
 

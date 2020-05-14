@@ -254,7 +254,7 @@ To je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje morebi
 <details>
   <summary>Kako se izračunava “podvojitev v N dneh” in kaj pomeni?</summary>
   
-Na prikazu **Potrjeno okuženi po občinah** je vključena ocena **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
+Na prikazu **Primeri po občinah** je vključena ocena **Podvojitev v N dneh**, ki pomeni, da se bo število okuženih v določeni občini predvidoma podvojilo v navedenem številu dni. To je ocena povprečne hitrosti eksponentnega naraščanja, ki temelji na podatkih iz prejšnjih dni, tako da se ugotovi dan, ko se je vrednost prepolovila.
 
 </details>
 

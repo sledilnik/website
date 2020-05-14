@@ -2,7 +2,11 @@
   <div>
     <Time-stamp />
     <b-container class="stats-page">
-      <div class="time-stamp"></div>
+      <b-row cols="12">
+        <b-col>
+          <Notice />
+        </b-col>
+      </b-row>
       <div class="cards-wrapper latest-data-boxes">
         <Info-card title="Potrjeno okuženi" field="cases.confirmed.todate" series-type="state" />
         <Info-card title="Preboleli" field="cases.recovered.todate" good-trend="up" series-type="state" />
@@ -26,6 +30,7 @@ import { mapState } from 'vuex';
 // import Loader from 'components/Loader';
 import InfoCard from 'components/cards/InfoCard';
 import TimeStamp from 'components/TimeStamp';
+import Notice from 'components/Notice';
 
 import { Visualizations } from 'visualizations/App.fsproj';
 
@@ -34,6 +39,7 @@ export default {
   components: {
     InfoCard,
     TimeStamp,
+    Notice,
     // Loader,
   },
   props: {
