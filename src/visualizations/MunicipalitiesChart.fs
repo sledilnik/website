@@ -443,11 +443,11 @@ let renderSortBy (currentSortBy : SortBy) dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Razvrsti:"
-            renderSelector SortBy.LastConfirmedCase "Zadnji"
             renderSelector SortBy.ActiveCases "Aktivni"
             renderSelector SortBy.TotalConfirmedCases "Vsi"
             if Highcharts.showExpGrowthFeatures then
                 renderSelector SortBy.DoublingTime "Dnevih podvojitve"
+            renderSelector SortBy.LastConfirmedCase "Zadnji"
         ]
     ]
 

@@ -312,9 +312,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     .total-and-date
       padding-left: $gap/4
 
-      .total
+      .active
         line-height: 1.5rem
         font-size: $font-size-lg
+        color: $bar-color
+
+      .total
+        line-height: 1.5rem
+        font-size: $font-size
         color: $bar-color
 
       .date
@@ -341,9 +346,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       align-items: flex-end
       height: 50px
 
-      &:last-child
-        .bar
-          background-color: $bar-color
+      //&:last-child
+      //  .bar
+      //    background-color: $bar-color
 
       &:hover
         .total-and-date--hover
