@@ -252,7 +252,7 @@ let render (state : State) (_ : Msg -> unit) =
                             [ Html.img
                                 [ prop.className "share-icon"
                                   prop.src "/images/facebook-f.svg"
-                                  prop.alt "Facebok"
+                                  prop.alt "Facebook"
                                 ]
                               Html.span
                                 [ 
@@ -280,7 +280,7 @@ let render (state : State) (_ : Msg -> unit) =
                             [ Html.img
                                 [ prop.className "share-icon"
                                   prop.src "/images/code.svg"
-                                  prop.alt "Webpage"
+                                  prop.alt "Spletno stran"
                                 ]
                               Html.span
                                 [ 
