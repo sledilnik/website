@@ -210,7 +210,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital.today |> zeroToNone
             | _ -> fun ps -> None
 
         let getPointTotal : (Data.Patients.PatientsStats -> int option) =
@@ -220,7 +220,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> zeroToNone
             | _ -> fun ps -> None
 
         let color, line, className, name = Series.getSeriesInfo series
@@ -252,7 +252,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.JsDate12h, ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> ps.JsDate12h, ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, ps.total.deceased.hospital.today |> zeroToNone
             | AllInHospital         -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
             | OutOfHospital         -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
             | Deceased              -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
