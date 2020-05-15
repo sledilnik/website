@@ -283,7 +283,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 5 (15.–21. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.
 
-* **Faza 6 (21. april–danes)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID19-Testiranje-pri-vseh-osebah-s-sumom.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
+* **Faza 6 (21. april–danes)**: Nova [sprememba metodologije testiranja](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
 </details>
 
@@ -373,7 +373,7 @@ Ker so občine samodejno razvrščene po preteklem času od zadnjega potrjenega 
 Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo razvrstitev *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov. Če izberemo *Vsi*, bodo občine razvrščene po največjem *skupnem* številu potrjeno okuženih.   
 Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega spustnega seznama *Vse regije* izberemo določeno regijo in si ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščemo z vnosom imena v iskalnik *Poišči občino*. 
 
-*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem  hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
+*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
 
 </details>
 
