@@ -4,8 +4,8 @@ open System
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-//let url = "https://api.sledilnik.org/api/patients"
-let url = "https://covid19.rthand.com/api/patients"
+let url = "https://api.sledilnik.org/api/patients"
+//let url = "https://covid19.rthand.com/api/patients"
 
 type DeceasedCounts = {
     today: int option

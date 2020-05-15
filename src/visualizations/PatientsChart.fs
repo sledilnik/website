@@ -22,7 +22,7 @@ type Breakdown =
     | BySeries
     | ByHospital
   with
-    static member all = [ Structure; ByHospital; Ratios ]
+    static member all = [ Structure; ByHospital; ]
     static member getName = function
         | Structure     -> "Struktura"
         | Ratios        -> "Razmerja"
