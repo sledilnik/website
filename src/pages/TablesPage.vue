@@ -72,7 +72,7 @@ $table-border: rgb(222,222 ,222)
   padding: 30px 0 15px 15px
 
   @include mobile-break
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15)
+    box-shadow: $element-box-shadow
     padding: 32px 0 32px 32px
 
   h1
