@@ -2,14 +2,13 @@
   <div class="container">
     <a
       class="notice-link"
-      href="#hcenters-chart"
-      v-scroll-to="{ el: '#hcenters-chart', offset: -115 }"
+      href="#municipalites-chart"
+      v-scroll-to="{ el: '#municipalities-chart', offset: -115 }"
     >
       <div class="notice">
         <span>
-          <b>Nov graf: </b>
-          'Obravnava v ZD' prikazuje vse sume COVID-19 na vstopnih točkah in
-          napotitve na samoizolacijo. Preberi tudi FAQ.
+          <b>Nov prikaz po občinah: </b>
+          nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

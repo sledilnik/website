@@ -86,7 +86,7 @@ export default {
         },
         "Municipalities": {
           value: "Municipalities",
-          text: 'Potrjeno okuženi po občinah',
+          text: 'Primeri po občinah',
           dimensions: [1140, 1150]
         },
         "AgeGroups": {

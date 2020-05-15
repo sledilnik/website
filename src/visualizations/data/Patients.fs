@@ -5,13 +5,31 @@ open Fable.SimpleHttp
 open Fable.SimpleJson
 
 let url = "https://api.sledilnik.org/api/patients"
+//let url = "https://covid19.rthand.com/api/patients"
+
+type DeceasedCounts = {
+    today: int option
+    toDate: int option
+}
+
+type HDeceasedCounts = {
+    today: int option
+    toDate: int option
+    icu : DeceasedCounts
+}
+
+type TDeceasedCounts = {
+    today: int option
+    toDate: int option
+    hospital : HDeceasedCounts
+    home : DeceasedCounts
+}
 
 type PatientCounts = {
     ``in``: int option
     out: int option
     today: int option
     toDate: int option
-    hospital: int option // TODO: make obsolete with REST change
 }
 
 type TotalPatientStats = {
@@ -19,14 +37,14 @@ type TotalPatientStats = {
     inHospital: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
-    deceased: PatientCounts
+    deceased: TDeceasedCounts
 }
 
 type PatientsByFacilityStats = {
     inHospital: PatientCounts
     icu: PatientCounts
     critical: PatientCounts
-    deceased: PatientCounts
+    deceased: HDeceasedCounts
 }
 
 type PatientsStats = {
