@@ -234,8 +234,8 @@ export default {
   }
 
   &.scrolled {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 
     box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
   }
@@ -251,13 +251,17 @@ export default {
   left: 33%;
   z-index: 100;
   background: $yellow;
-  padding: 18px 0 0 15px;
+  padding: 20px 0 0 15px;
   overflow: auto;
   transition: all 0.4s ease-in-out;
   will-change: transform;
 
   .scrolled & {
-    padding: 6px 0 0 15px;
+    padding: 11px 0 0 15px;
+
+    @include nav-break {
+      padding: 0;
+    }
   }
 
   &:before {
