@@ -18,12 +18,14 @@ type Segmentation =
 
 type Breakdown =
     | Structure
+    | Ratios
     | BySeries
     | ByHospital
   with
-    static member all = [ Structure; ByHospital; ]
+    static member all = [ Structure; ByHospital; Ratios ]
     static member getName = function
         | Structure     -> "Struktura"
+        | Ratios        -> "Razmerja"
         | BySeries      -> "Obravnava po pacientih"
         | ByHospital    -> "Po bolnišnicah"
 
@@ -65,7 +67,8 @@ module Series =
 
 type State = {
     scaleType : ScaleType
-    data : PatientsStats []
+    statsData: StatsData
+    patientsData : PatientsStats []
     error: string option
     allSegmentations: Segmentation list
     activeSegmentations: Set<Segmentation>
@@ -82,6 +85,13 @@ type State = {
                 activeSegmentations = Set [ Totals ]
                 activeSeries = Set Series.structure
             }
+        | Ratios ->
+            { state with
+                breakdown=breakdown
+                allSegmentations = [ Totals ]
+                activeSegmentations = Set [ Totals ]
+                activeSeries = Set Series.structure
+            }
         | BySeries ->
             { state with
                 breakdown=breakdown
@@ -91,7 +101,7 @@ type State = {
             }
         | ByHospital ->
             let segmentations =
-                match state.data with
+                match state.patientsData with
                 | [||] -> [Totals]
                 | [| _ |] -> [Totals]
                 | data ->
@@ -115,7 +125,8 @@ type State = {
     static member initial =
         {
             scaleType = Linear
-            data = [||]
+            statsData = []
+            patientsData = [||]
             error = None
             allSegmentations = [ Totals ]
             activeSegmentations = Set [ Totals ]
@@ -134,7 +145,8 @@ module Set =
         | false -> s |> Set.add x
 
 type Msg =
-    | ConsumeServerData of Result<PatientsStats [], string>
+    | ConsumeStatsData of Result<StatsData, string>
+    | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
@@ -142,14 +154,19 @@ type Msg =
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumeServerData ConsumeServerError
-    State.initial, cmd
+    let cmdS = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    let cmdP = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    State.initial, (cmdS @ cmdP)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ConsumeServerData (Ok data) ->
-        { state with data = data } |> State.switchBreakdown state.breakdown, Cmd.none
-    | ConsumeServerData (Error err) ->
+    | ConsumeStatsData (Ok data) ->
+        { state with statsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
+    | ConsumeStatsData (Error err) ->
+        { state with error = Some err }, Cmd.none
+    | ConsumePatientsData (Ok data) ->
+        { state with patientsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
+    | ConsumePatientsData (Error err) ->
         { state with error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with error = Some ex.Message }, Cmd.none
@@ -210,7 +227,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital.today |> zeroToNone
             | _ -> fun ps -> None
 
         let getPointTotal : (Data.Patients.PatientsStats -> int option) =
@@ -220,7 +237,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> zeroToNone
             | _ -> fun ps -> None
 
         let color, line, className, name = Series.getSeriesInfo series
@@ -230,7 +247,7 @@ let renderChartOptions (state : State) =
             color = color
             name = name
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map (fun dp ->
                     {|
@@ -252,7 +269,7 @@ let renderChartOptions (state : State) =
             | Critical              -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
             | InHospitalIn          -> fun ps -> ps.JsDate12h, ps.total.inHospital.``in`` |> zeroToNone
             | InHospitalOut         -> fun ps -> ps.JsDate12h, ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, ps.total.deceased.hospital |> zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, ps.total.deceased.hospital.today |> zeroToNone
             | AllInHospital         -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
             | OutOfHospital         -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
             | Deceased              -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
@@ -265,7 +282,7 @@ let renderChartOptions (state : State) =
             dashStyle = line |> DashStyle.toString
             name = name
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
@@ -292,7 +309,7 @@ let renderChartOptions (state : State) =
             name = name
             dashStyle = Solid |> DashStyle.toString
             data =
-                state.data
+                state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map renderPoint
                 |> Array.ofSeq
@@ -300,11 +317,40 @@ let renderChartOptions (state : State) =
         |}
         |> pojo
 
+    let renderRatiosH series =
+        let percent (a : int option) (b : int option) = 
+            Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
+
+        let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
+            match series with
+            | Icu                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
+            | Critical              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
+            | _                     -> fun ps -> ps.JsDate12h, None
+
+        let color, line, className, name = Series.getSeriesInfo series
+
+        {|
+            visible = true
+            color = color
+            dashStyle = line |> DashStyle.toString
+            name = name
+            data =
+                state.patientsData
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate || dp.total.inHospital.toDate.IsNone)
+                |> Seq.map renderRatioPoint
+                |> Array.ofSeq
+        |}
+        |> pojo
+
+
     let allSeries = [|
         match state.breakdown with
         | Structure ->
             for series in Series.structure do
                 yield renderBarSeries series
+        | Ratios ->            
+            for series in [ Icu ; Critical ] do
+                yield renderRatiosH series
         | BySeries ->
             for _ in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
                 for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
@@ -316,7 +362,8 @@ let renderChartOptions (state : State) =
 
     let className =
         match state.breakdown with
-        | Structure     -> "covid19-patients-inout"
+        | Structure     -> "covid19-patients-structure"
+        | Ratios        -> "covid19-patients-ratio"
         | BySeries      -> "covid19-patients"
         | ByHospital    -> "covid19-hospitals"
 
@@ -390,7 +437,7 @@ let renderBreakdownSelectors state dispatch =
             ) ) ]
 
 let render (state : State) dispatch =
-    match state.data, state.error with
+    match state.patientsData, state.error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
