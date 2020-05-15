@@ -12,6 +12,10 @@ body {
   min-height: 100vh;
 }
 
+*:focus {
+  outline: 1.6px solid $yellow;
+}
+
 *::selection {
   background: $yellow;
 }

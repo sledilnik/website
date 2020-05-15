@@ -122,7 +122,7 @@ $table-border: rgb(222,222 ,222)
     padding: 0
     border: none
     position: relative
-    color: rgba(0, 0, 0, 0.5)
+    color: $text-unselcted
     line-height: 29px
     margin-right: 15px
     font-size: 14px

@@ -363,15 +363,25 @@ export default {
   background: url('../assets/svg/covid-19.svg') no-repeat;
   width: 145px;
   height: 40px;
+
+  &:focus {
+    outline: 1.4px solid rgba(0, 0, 0, 0.1);
+  }
 }
 
 .router-link {
   position: relative;
   display: block;
-  color: rgba(0, 0, 0, 0.5);
+  color: $text-unselcted;
   font-size: 14px;
   line-height: 20px;
   padding: 9px 0;
+
+  &:first-of-type {
+    @include nav-break {
+      margin-left: 2px;
+    }
+  }
 
   & + .router-link {
     @include nav-break {
@@ -391,6 +401,11 @@ export default {
 
   &:focus {
     outline: none;
+  }
+
+  &:focus span {
+    outline: 1.4px solid rgba(0, 0, 0, 0.1);
+    color: rgb(0, 0, 0);
   }
 
   span {
@@ -416,10 +431,15 @@ export default {
   }
 
   &.router-link-icon {
-    @include nav-break {
       border: 1px solid rgba(0, 0, 0, 0.13);
-      border-radius: 8px;
+      border-radius: 6px;
+      display: inline-block;
+      padding: 2px 6px;
+      margin-top: 11px;
+
+    @include nav-break {
       padding: 0px 6px;
+      margin-top: 0px;
     }
 
     span {
