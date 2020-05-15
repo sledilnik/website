@@ -49,7 +49,7 @@ footer
 
 .content-wrapper
   position: relative
-  color: $text-unselcted
+  color: $text-unselected
   font-size: 13px
   line-height: 1.3
   padding: 15px 0
@@ -78,7 +78,7 @@ footer
   a
     line-height: 1.3
     font-size: 13px
-    color: $text-unselcted
+    color: $text-unselected
     text-decoration: none
 
     &:hover

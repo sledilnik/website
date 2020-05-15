@@ -31,7 +31,7 @@ export default {
     padding: 8px 15px;
     line-height: 1.85;
     font-size: 13px;
-    color: $text-unselcted;
+    color: $text-unselected;
 
     @media only screen and (min-width: 768px) {
       padding: 8px 32px;

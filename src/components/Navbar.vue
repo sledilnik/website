@@ -365,14 +365,14 @@ export default {
   height: 40px;
 
   &:focus {
-    outline: 1.4px solid rgba(0, 0, 0, 0.1);
+    outline: 2px solid rgba(0, 0, 0, 0.1);
   }
 }
 
 .router-link {
   position: relative;
   display: block;
-  color: $text-unselcted;
+  color: $text-unselected;
   font-size: 14px;
   line-height: 20px;
   padding: 9px 0;
@@ -404,7 +404,7 @@ export default {
   }
 
   &:focus span {
-    outline: 1.4px solid rgba(0, 0, 0, 0.1);
+    outline: 2px solid rgba(0, 0, 0, 0.1);
     color: rgb(0, 0, 0);
   }
 
