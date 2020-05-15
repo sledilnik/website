@@ -6,13 +6,13 @@
       v-scroll-to="{ el: '#municipalities-chart', offset: -115 }"
     >
       <div class="notice">
-        <span>
-          <b>Nov prikaz po občinah: </b>
-          nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
-        </span>
-        <div class="notice-button">
-          <img src="../assets/svg/go-to.svg" alt="Go to news" />
-        </div>
+          <span>
+            <b>Nov prikaz po občinah: </b>
+            nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
+          </span>
+          <div class="notice-button">
+            <img src="../assets/svg/go-to.svg" alt="Go to news" />
+          </div>
       </div>
     </a>
   </div>
@@ -37,7 +37,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba($yellow, 0.1);
+  background: #fffbe8;
   padding: 18px;
   margin: 0px auto 48px;
   width: 100%;
@@ -45,8 +45,7 @@
   font-size: 14px;
   color: $text-c;
   text-decoration: none;
-  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
-    0 11px 12px -12px rgba(0, 0, 0, 0.22);
+  box-shadow: $element-box-shadow;
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
@@ -60,4 +59,5 @@
     margin-left: 16px;
   }
 }
+
 </style>
