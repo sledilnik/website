@@ -19,14 +19,12 @@ type Segmentation =
 type Breakdown =
     | Structure
     | Ratios
-    | BySeries
     | ByHospital
   with
     static member all = [ Structure; ByHospital; Ratios ]
     static member getName = function
         | Structure     -> "Struktura"
         | Ratios        -> "Razmerja"
-        | BySeries      -> "Obravnava po pacientih"
         | ByHospital    -> "Po bolnišnicah"
 
 type Series =
@@ -65,6 +63,28 @@ module Series =
         | OutOfHospital         -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | Deceased              -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
 
+type Ratios =
+    | IcuHospital
+    | CriticalHospital
+    | DeceasedIcu
+    | DeceasedHospital
+    | DeceasedIcuDeceasedHospital
+    | DeceasedHospitalDeceasedTotal
+
+module Ratios =
+    let all =
+        [ IcuHospital; CriticalHospital; DeceasedIcu; DeceasedHospital; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
+
+    // color, dash, name
+    let getSeriesInfo = function
+        | IcuHospital                   -> "#d99a91", Solid,    "Delež v intenzivni enoti"
+        | CriticalHospital              -> "#bf5747", Solid,    "Delež na repiratorju"
+        | DeceasedIcu                   -> "#d5c768", Solid,    "Smrtnost v intenzivni enoti"
+        | DeceasedHospital              -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
+        | DeceasedIcuDeceasedHospital   -> "#de9a5a", Dot,      "Delež smrti v intenzivni enoti"
+        | DeceasedHospitalDeceasedTotal -> "#666666", Dot,      "Delež smrti v bolnišnici"
+
+
 type State = {
     scaleType : ScaleType
     statsData: StatsData
@@ -91,13 +111,6 @@ type State = {
                 allSegmentations = [ Totals ]
                 activeSegmentations = Set [ Totals ]
                 activeSeries = Set Series.structure
-            }
-        | BySeries ->
-            { state with
-                breakdown=breakdown
-                allSegmentations = [ Totals ]
-                activeSegmentations = Set [ Totals ]
-                activeSeries = Set Series.bySeries
             }
         | ByHospital ->
             let segmentations =
@@ -179,42 +192,89 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | SwitchBreakdown breakdown ->
         (state |> State.switchBreakdown breakdown), Cmd.none
 
-let legendFormatter jsThis =
-    let pts: obj[] = jsThis?points
-    let fmtDate = pts.[0]?point?fmtDate
 
-    let mutable fmtStr = ""
-    let mutable fmtLine = ""
-    let mutable fmtUnder = ""
-    for p in pts do
-        match p?point?fmtTotal with
-        | "null" -> ()
-        | _ ->
-            match p?series?name with
-            | "Hospitalizirani" | "Odpuščeni" | "Umrli"  -> fmtUnder <- ""
-            | _ -> fmtUnder <- fmtUnder + "↳ "
-            fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
-                fmtUnder
-                p?series?color
-                p?series?name
-                p?point?fmtTotal
-            if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then
-                fmtStr <- fmtLine + fmtStr // if we got Sprejeti before, then put it after Hospitalizirani
-            else
-                fmtStr <- fmtStr + fmtLine
-
-    sprintf "<b>%s</b>" fmtDate + fmtStr
-
-let renderChartOptions (state : State) =
+let renderByHospitalChart (state : State) =
 
     let startDate = DateTime(2020,03,10)
 
-    let zeroToNone value =
-        match value with
-        | None -> None
-        | Some x ->
-            if x = 0 then None
-            else Some x
+    let renderSources segmentation =
+        let facility, (renderPoint: Data.Patients.PatientsStats -> JsTimestamp * int option) =
+            match segmentation with
+            | Totals -> "Skupaj", fun ps -> ps.JsDate12h, ps.total.inHospital.today |> Utils.zeroToNone
+            | Facility f ->
+                f, (fun ps ->
+                    let value =
+                        ps.facilities
+                        |> Map.tryFind f
+                        |> Option.bind (fun stats -> stats.inHospital.today)
+                        |> Utils.zeroToNone
+                    ps.JsDate12h, value)
+
+        let color, name = Data.Hospitals.facilitySeriesInfo facility
+        {|
+            visible = true
+            color = color
+            name = name
+            dashStyle = Solid |> DashStyle.toString
+            data =
+                state.patientsData
+                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+                |> Seq.map renderPoint
+                |> Array.ofSeq
+            showInLegend = true
+        |}
+        |> pojo
+
+    let className = "covid19-hospitals"
+    let baseOptions = Highcharts.basicChartOptions state.scaleType className
+    {| baseOptions with
+
+        series = [| for segmentation in state.allSegmentations do yield renderSources segmentation |]
+
+        legend = pojo
+            {|
+                enabled = Some true
+                title = {| text="Hospitalizirani v:" |}
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                layout = "vertical"
+                floating = true
+                x = 20
+                y = 30
+                backgroundColor = "#FFF"
+            |}
+|}
+
+let renderStructureChart (state : State) =
+
+    let startDate = DateTime(2020,03,10)
+
+    let legendFormatter jsThis =
+        let pts: obj[] = jsThis?points
+        let fmtDate = pts.[0]?point?fmtDate
+
+        let mutable fmtStr = ""
+        let mutable fmtLine = ""
+        let mutable fmtUnder = ""
+        for p in pts do
+            match p?point?fmtTotal with
+            | "null" -> ()
+            | _ ->
+                match p?series?name with
+                | "Hospitalizirani" | "Odpuščeni" | "Umrli"  -> fmtUnder <- ""
+                | _ -> fmtUnder <- fmtUnder + "↳ "
+                fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+                    fmtUnder
+                    p?series?color
+                    p?series?name
+                    p?point?fmtTotal
+                if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then
+                    fmtStr <- fmtLine + fmtStr // if we got Sprejeti before, then put it after Hospitalizirani
+                else
+                    fmtStr <- fmtStr + fmtLine
+        sprintf "<b>%s</b>" fmtDate + fmtStr
 
     let renderBarSeries series =
         let subtract (a : int option) (b : int option) = Some (b.Value - a.Value)
@@ -222,22 +282,22 @@ let renderChartOptions (state : State) =
 
         let getPoint : (Data.Patients.PatientsStats -> int option) =
             match series with
-            | InHospital            -> fun ps -> ps.total.inHospital.today |> subtract ps.total.icu.today |> subtract ps.total.inHospital.``in`` |> zeroToNone
-            | Icu                   -> fun ps -> ps.total.icu.today |> subtract ps.total.critical.today |> zeroToNone
-            | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
-            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
-            | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital |> zeroToNone
+            | InHospital            -> fun ps -> ps.total.inHospital.today |> subtract ps.total.icu.today |> subtract ps.total.inHospital.``in`` |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.total.icu.today |> subtract ps.total.critical.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.total.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital.today |> Utils.zeroToNone
             | _ -> fun ps -> None
 
         let getPointTotal : (Data.Patients.PatientsStats -> int option) =
             match series with
-            | InHospital            -> fun ps -> ps.total.inHospital.today |> zeroToNone
-            | Icu                   -> fun ps -> ps.total.icu.today |> zeroToNone
-            | Critical              -> fun ps -> ps.total.critical.today |> zeroToNone
-            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> zeroToNone
-            | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital |> zeroToNone
+            | InHospital            -> fun ps -> ps.total.inHospital.today |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.total.icu.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.total.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> Utils.zeroToNone
             | _ -> fun ps -> None
 
         let color, line, className, name = Series.getSeriesInfo series
@@ -261,73 +321,60 @@ let renderChartOptions (state : State) =
         |}
         |> pojo
 
-    let renderSeries series =
-        let renderPoint : (Data.Patients.PatientsStats -> JsTimestamp * int option) =
-            match series with
-            | InHospital            -> fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
-            | Icu                   -> fun ps -> ps.JsDate12h, ps.total.icu.today |> zeroToNone
-            | Critical              -> fun ps -> ps.JsDate12h, ps.total.critical.today |> zeroToNone
-            | InHospitalIn          -> fun ps -> ps.JsDate12h, ps.total.inHospital.``in`` |> zeroToNone
-            | InHospitalOut         -> fun ps -> ps.JsDate12h, ps.total.inHospital.out |> zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.JsDate12h, ps.total.deceased.hospital |> zeroToNone
-            | AllInHospital         -> fun ps -> ps.JsDate12h, ps.total.inHospital.toDate |> zeroToNone
-            | OutOfHospital         -> fun ps -> ps.JsDate12h, ps.total.outOfHospital.toDate |> zeroToNone
-            | Deceased              -> fun ps -> ps.JsDate12h, ps.total.deceased.toDate |> zeroToNone
 
-        let color, line, className, name = Series.getSeriesInfo series
+    let className = "covid19-patients-structure"
+    let baseOptions = Highcharts.basicChartOptions state.scaleType className
+    {| baseOptions with
+        chart = pojo
+            {|
+                ``type`` = "column"
+                zoomType = "x"
+            |}
+        plotOptions = pojo
+            {|
+                series = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
+            |}
+        series = [| for series in Series.structure do yield renderBarSeries series |]
 
-        {|
-            visible = state.activeSeries |> Set.contains series
-            color = color
-            dashStyle = line |> DashStyle.toString
-            name = name
-            data =
-                state.patientsData
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map renderPoint
-                |> Array.ofSeq
-        |}
-        |> pojo
+        tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |} 
 
-    let renderSources segmentation =
-        let facility, (renderPoint: Data.Patients.PatientsStats -> JsTimestamp * int option) =
-            match segmentation with
-            | Totals -> "Skupaj", fun ps -> ps.JsDate12h, ps.total.inHospital.today |> zeroToNone
-            | Facility f ->
-                f, (fun ps ->
-                    let value =
-                        ps.facilities
-                        |> Map.tryFind f
-                        |> Option.bind (fun stats -> stats.inHospital.today)
-                        |> zeroToNone
-                    ps.JsDate12h, value)
+        legend = pojo
+            {|
+                enabled = Some true
+                title = {| text=if state.breakdown=ByHospital then "Hospitalizirani v:" else "" |}
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                //labelFormatter = string //fun series -> series.name
+                layout = "vertical"
+                floating = true
+                x = 20
+                y = 30
+                backgroundColor = "#FFF"
+            |}
+|}
 
-        let color, name = Data.Hospitals.facilitySeriesInfo facility
-        {|
-            visible = true
-            color = color
-            name = name
-            dashStyle = Solid |> DashStyle.toString
-            data =
-                state.patientsData
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map renderPoint
-                |> Array.ofSeq
-            showInLegend = true
-        |}
-        |> pojo
+let renderRatiosChart (state : State) =
 
-    let renderRatiosH series =
+    let startDate = DateTime(2020,03,10)
+
+    let renderRatiosH ratio =
         let percent (a : int option) (b : int option) = 
-            Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
+            match a with
+            | None | Some 0 -> None
+            | _ ->  Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
 
         let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
-            match series with
-            | Icu                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
-            | Critical              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
-            | _                     -> fun ps -> ps.JsDate12h, None
+            match ratio with
+            | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
+            | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
+            | DeceasedIcu                   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
+            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.today ps.total.inHospital.toDate // change today
+            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.today // change today
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.today ps.total.deceased.toDate // change today
 
-        let color, line, className, name = Series.getSeriesInfo series
+        let color, line, name = Ratios.getSeriesInfo ratio
 
         {|
             visible = true
@@ -342,56 +389,18 @@ let renderChartOptions (state : State) =
         |}
         |> pojo
 
-
-    let allSeries = [|
-        match state.breakdown with
-        | Structure ->
-            for series in Series.structure do
-                yield renderBarSeries series
-        | Ratios ->            
-            for series in [ Icu ; Critical ] do
-                yield renderRatiosH series
-        | BySeries ->
-            for _ in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                for series in state.allSeries |> Seq.filter (fun s -> Set.contains s state.activeSeries) do
-                    yield renderSeries series
-        | ByHospital ->
-            for segmentation in state.allSegmentations do // |> Seq.filter (fun s -> Set.contains s state.activeSegmentations) do
-                yield renderSources segmentation
-    |]
-
-    let className =
-        match state.breakdown with
-        | Structure     -> "covid19-patients-structure"
-        | Ratios        -> "covid19-patients-ratio"
-        | BySeries      -> "covid19-patients"
-        | ByHospital    -> "covid19-hospitals"
-
-    let tooltipOpt = {|
-                         shared = true
-                         formatter =
-                             if state.breakdown = Structure then
-                                 (fun () -> legendFormatter jsThis) |> Some
-                             else None
-                      |} |> pojo
+    let className = "covid19-patients-ratio"
 
     let baseOptions = Highcharts.basicChartOptions state.scaleType className
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` = if state.breakdown = Structure then "column" else "line"
+                ``type`` ="spline"
                 zoomType = "x"
             |}
-        plotOptions = pojo
-            {|
-                series =
-                    if state.breakdown = Structure
-                    then pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
-                    else pojo {| stacking = ""; |}
-            |}
-        series = allSeries
+        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with max = 55 |})
 
-        tooltip = tooltipOpt
+        series = [| for ratio in Ratios.all do yield renderRatiosH ratio |]
 
         legend = pojo
             {|
@@ -415,8 +424,10 @@ let renderChartContainer state =
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
-            |> Highcharts.chartFromWindow
+            match state.breakdown with 
+            | Structure -> renderStructureChart state |> Highcharts.chartFromWindow
+            | Ratios -> renderRatiosChart state |> Highcharts.chartFromWindow
+            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
         ]
     ]
 
