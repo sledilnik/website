@@ -21,7 +21,7 @@ type Breakdown =
     | Ratios
     | ByHospital
   with
-    static member all = [ Structure; ByHospital; ]
+    static member all = [ Structure; ByHospital; Ratios ]
     static member getName = function
         | Structure     -> "Struktura"
         | Ratios        -> "Razmerja"
@@ -231,6 +231,8 @@ let renderByHospitalChart (state : State) =
 
         series = [| for segmentation in state.allSegmentations do yield renderSources segmentation |]
 
+        tooltip = pojo {| shared = true; formatter = None |} 
+
         legend = pojo
             {|
                 enabled = Some true
@@ -332,8 +334,9 @@ let renderStructureChart (state : State) =
             |}
         plotOptions = pojo
             {|
-                series = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
+                column = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
+
         series = [| for series in Series.structure do yield renderBarSeries series |]
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |} 
@@ -370,9 +373,9 @@ let renderRatiosChart (state : State) =
             | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
             | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
             | DeceasedIcu                   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.today ps.total.inHospital.toDate // change today
-            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.today // change today
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.today ps.total.deceased.toDate // change today
+            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate 
+            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate 
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
 
         let color, line, name = Ratios.getSeriesInfo ratio
 
@@ -398,9 +401,15 @@ let renderRatiosChart (state : State) =
                 ``type`` ="spline"
                 zoomType = "x"
             |}
-        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with max = 55 |})
+        plotOptions = pojo
+            {|
+                spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
+            |}
+        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with max = 55 ; labels = pojo {| format = "{value}%" |} |} )
 
         series = [| for ratio in Ratios.all do yield renderRatiosH ratio |]
+
+        tooltip = pojo {| shared = true; formatter = None |} 
 
         legend = pojo
             {|
@@ -425,9 +434,9 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             match state.breakdown with 
-            | Structure -> renderStructureChart state |> Highcharts.chartFromWindow
-            | Ratios -> renderRatiosChart state |> Highcharts.chartFromWindow
-            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
+            | Structure     -> renderStructureChart state   |> Highcharts.chartFromWindow
+            | Ratios        -> renderRatiosChart state      |> Highcharts.chartFromWindow
+            | ByHospital    -> renderByHospitalChart state  |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -443,9 +452,7 @@ let renderBreakdownSelectors state dispatch =
         prop.className "metrics-selectors"
         prop.children (
             Breakdown.all
-            |> List.map (fun breakdown ->
-                renderBreakdownSelector state breakdown dispatch
-            ) ) ]
+            |> List.map (fun breakdown -> renderBreakdownSelector state breakdown dispatch) ) ]
 
 let render (state : State) dispatch =
     match state.patientsData, state.error with
@@ -453,10 +460,6 @@ let render (state : State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
-            //Utils.renderChartTopControlRight
-            //    (Utils.renderScaleSelector
-            //        state.scaleType (ScaleTypeChanged >> dispatch))
-
             renderChartContainer state
             renderBreakdownSelectors state dispatch
         ]

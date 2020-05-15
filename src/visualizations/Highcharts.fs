@@ -211,6 +211,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 index = 0
                 ``type`` = if scaleType=Linear then "linear" else "logarithmic"
                 min = if scaleType=Linear then None else Some 1.0
+                max = None
                 //floor = if scaleType=Linear then None else Some 1.0
                 opposite = true // right side
                 title = {| text = null |} // "oseb" |}
