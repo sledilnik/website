@@ -18,6 +18,7 @@
         <Compile Include="AgeGroupsChart.fs" />
         <Compile Include="RegionsChart.fs" />
         <Compile Include="PatientsChart.fs" />
+        <Compile Include="RatiosChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="HCentersChart.fs" />
         <Compile Include="HospitalsChart.fs" />

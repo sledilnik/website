@@ -16,6 +16,7 @@ let init (query : obj) (visualization : string option) =
                 | "Map" -> Some Map
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
+                | "Ratios" -> Some Ratios
                 | "Tests" -> Some Tests
                 | "Cases" -> Some Cases
                 | "Spread" -> Some Spread
@@ -87,6 +88,16 @@ let render (state : State) (_ : Msg -> unit) =
              Label = "Hospitalizirani";
              Explicit = false;
              Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+          { VisualizationType = Ratios;
+             ClassName = "ratios-chart";
+             Label = "Delež resnih primerov";
+             Explicit = false;
+             Renderer = fun state ->
+                match state.StatsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
           { VisualizationType = Tests;
              ClassName = "tests-chart";
              Label = "Testiranje";
