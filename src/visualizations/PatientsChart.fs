@@ -18,13 +18,11 @@ type Segmentation =
 
 type Breakdown =
     | Structure
-    | Ratios
     | ByHospital
   with
-    static member all = [ Structure; ByHospital; Ratios ]
+    static member all = [ Structure; ByHospital; ]
     static member getName = function
         | Structure     -> "Struktura"
-        | Ratios        -> "Razmerja"
         | ByHospital    -> "Po bolnišnicah"
 
 type Series =
@@ -63,31 +61,8 @@ module Series =
         | OutOfHospital         -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
         | Deceased              -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
 
-type Ratios =
-    | IcuHospital
-    | CriticalHospital
-    | DeceasedIcu
-    | DeceasedHospital
-    | DeceasedIcuDeceasedHospital
-    | DeceasedHospitalDeceasedTotal
-
-module Ratios =
-    let all =
-        [ IcuHospital; CriticalHospital; DeceasedIcu; DeceasedHospital; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
-
-    // color, dash, name
-    let getSeriesInfo = function
-        | IcuHospital                   -> "#d99a91", Solid,    "Delež v intenzivni enoti"
-        | CriticalHospital              -> "#bf5747", Solid,    "Delež na repiratorju"
-        | DeceasedIcu                   -> "#d5c768", Solid,    "Smrtnost v intenzivni enoti"
-        | DeceasedHospital              -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
-        | DeceasedIcuDeceasedHospital   -> "#de9a5a", Dot,      "Delež smrti v intenzivni enoti"
-        | DeceasedHospitalDeceasedTotal -> "#666666", Dot,      "Delež smrti v bolnišnici"
-
 
 type State = {
-    scaleType : ScaleType
-    statsData: StatsData
     patientsData : PatientsStats []
     error: string option
     allSegmentations: Segmentation list
@@ -99,13 +74,6 @@ type State = {
     static member switchBreakdown breakdown state =
         match breakdown with
         | Structure ->
-            { state with
-                breakdown=breakdown
-                allSegmentations = [ Totals ]
-                activeSegmentations = Set [ Totals ]
-                activeSeries = Set Series.structure
-            }
-        | Ratios ->
             { state with
                 breakdown=breakdown
                 allSegmentations = [ Totals ]
@@ -137,8 +105,6 @@ type State = {
             }
     static member initial =
         {
-            scaleType = Linear
-            statsData = []
             patientsData = [||]
             error = None
             allSegmentations = [ Totals ]
@@ -158,25 +124,18 @@ module Set =
         | false -> s |> Set.add x
 
 type Msg =
-    | ConsumeStatsData of Result<StatsData, string>
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ToggleSegmentation of Segmentation
     | ToggleSeries of Series
-    | ScaleTypeChanged of ScaleType
     | SwitchBreakdown of Breakdown
 
 let init () : State * Cmd<Msg> =
-    let cmdS = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
-    let cmdP = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
-    State.initial, (cmdS @ cmdP)
+    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    State.initial, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ConsumeStatsData (Ok data) ->
-        { state with statsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
-    | ConsumeStatsData (Error err) ->
-        { state with error = Some err }, Cmd.none
     | ConsumePatientsData (Ok data) ->
         { state with patientsData = data } |> State.switchBreakdown state.breakdown, Cmd.none
     | ConsumePatientsData (Error err) ->
@@ -187,11 +146,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with activeSegmentations = state.activeSegmentations |> Set.toggle s }, Cmd.none
     | ToggleSeries s ->
         { state with activeSeries = state.activeSeries |> Set.toggle s }, Cmd.none
-    | ScaleTypeChanged scaleType ->
-        { state with scaleType = scaleType }, Cmd.none
     | SwitchBreakdown breakdown ->
         (state |> State.switchBreakdown breakdown), Cmd.none
-
 
 let renderByHospitalChart (state : State) =
 
@@ -225,8 +181,7 @@ let renderByHospitalChart (state : State) =
         |}
         |> pojo
 
-    let className = "covid19-hospitals"
-    let baseOptions = Highcharts.basicChartOptions state.scaleType className
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-hospitals"
     {| baseOptions with
 
         series = [| for segmentation in state.allSegmentations do yield renderSources segmentation |]
@@ -324,8 +279,7 @@ let renderStructureChart (state : State) =
         |> pojo
 
 
-    let className = "covid19-patients-structure"
-    let baseOptions = Highcharts.basicChartOptions state.scaleType className
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-structure"
     {| baseOptions with
         chart = pojo
             {|
@@ -358,75 +312,6 @@ let renderStructureChart (state : State) =
             |}
 |}
 
-let renderRatiosChart (state : State) =
-
-    let startDate = DateTime(2020,03,10)
-
-    let renderRatiosH ratio =
-        let percent (a : int option) (b : int option) = 
-            match a with
-            | None | Some 0 -> None
-            | _ ->  Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
-
-        let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
-            match ratio with
-            | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
-            | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
-            | DeceasedIcu                   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate 
-            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate 
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
-
-        let color, line, name = Ratios.getSeriesInfo ratio
-
-        {|
-            visible = true
-            color = color
-            dashStyle = line |> DashStyle.toString
-            name = name
-            data =
-                state.patientsData
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate || dp.total.inHospital.toDate.IsNone)
-                |> Seq.map renderRatioPoint
-                |> Array.ofSeq
-        |}
-        |> pojo
-
-    let className = "covid19-patients-ratio"
-
-    let baseOptions = Highcharts.basicChartOptions state.scaleType className
-    {| baseOptions with
-        chart = pojo
-            {|
-                ``type`` ="spline"
-                zoomType = "x"
-            |}
-        plotOptions = pojo
-            {|
-                spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
-            |}
-        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with max = 55 ; labels = pojo {| format = "{value}%" |} |} )
-
-        series = [| for ratio in Ratios.all do yield renderRatiosH ratio |]
-
-        tooltip = pojo {| shared = true; formatter = None |} 
-
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text=if state.breakdown=ByHospital then "Hospitalizirani v:" else "" |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
-|}
 
 let renderChartContainer state =
     Html.div [
@@ -435,7 +320,6 @@ let renderChartContainer state =
         prop.children [
             match state.breakdown with 
             | Structure     -> renderStructureChart state   |> Highcharts.chartFromWindow
-            | Ratios        -> renderRatiosChart state      |> Highcharts.chartFromWindow
             | ByHospital    -> renderByHospitalChart state  |> Highcharts.chartFromWindow
         ]
     ]
