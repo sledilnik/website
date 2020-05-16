@@ -14,36 +14,51 @@ open Data.Patients
 
 type DisplayType =
     | Cases
+    | Hospital
     | Mortality
   with
-    static member all = [ Cases; Mortality ]
+    static member all = [ Cases; Hospital; Mortality ]
     static member getName = function
         | Cases     -> "Resni primeri"
+        | Hospital  -> "Hospitalizirani"
         | Mortality -> "Smrtnost"
 
 type Ratios =
+    | HospitalCases
+    | IcuCases
+    | CriticalCases
+    | DeceasedCases
     | IcuHospital
     | CriticalHospital
-    | DeceasedIcu
     | DeceasedHospital
+    | DeceasedHospitalC
+    | DeceasedIcuC
     | DeceasedIcuDeceasedHospital
     | DeceasedHospitalDeceasedTotal
 
 module Ratios =
-    let all =
-        [ IcuHospital; CriticalHospital; DeceasedIcu; DeceasedHospital; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
+    let getSeries = function
+        | Cases     -> [ HospitalCases; IcuCases; CriticalCases; DeceasedCases ]
+        | Hospital  -> [ IcuHospital; CriticalHospital; DeceasedHospital]
+        | Mortality -> [ DeceasedHospitalC; DeceasedIcuC; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
 
     // color, dash, name
     let getSeriesInfo = function
-        | IcuHospital                   -> "#d99a91", Solid,    "Delež v intenzivni enoti"
-        | CriticalHospital              -> "#bf5747", Solid,    "Delež na repiratorju"
-        | DeceasedIcu                   -> "#d5c768", Solid,    "Smrtnost v intenzivni enoti"
-        | DeceasedHospital              -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
+        | HospitalCases                 -> "#de9a5a", Solid,    "Hospitalizirirani"
+        | IcuCases                      -> "#d99a91", Solid,    "V intenzivni enoti"
+        | CriticalCases                 -> "#bf5747", Solid,    "Na respiratorju"
+        | DeceasedCases                 -> "#666666", Dot,      "Umrli"
+        | IcuHospital                   -> "#d99a91", Solid,    "V intenzivni enoti"
+        | CriticalHospital              -> "#bf5747", Solid,    "Na repiratorju"
+        | DeceasedHospital              -> "#666666", Dot,      "Umrli"
+        | DeceasedHospitalC             -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
+        | DeceasedIcuC                  -> "#d5c768", Dot,      "Smrtnost v intenzivni enoti"
         | DeceasedIcuDeceasedHospital   -> "#de9a5a", Dot,      "Delež smrti v intenzivni enoti"
         | DeceasedHospitalDeceasedTotal -> "#666666", Dot,      "Delež smrti v bolnišnici"
 
+
 type State = {
-    statsData: StatsData
+    casesMap: Map<DateTime, int option>
     patientsData : PatientsStats []
     error: string option
     displayType: DisplayType
@@ -56,7 +71,7 @@ type Msg =
 
 let init (data : StatsData) : State * Cmd<Msg> =
     let state = {
-        statsData = data
+        casesMap = data |> Seq.map (fun dp -> dp.Date, dp.Cases.ConfirmedToDate) |> Map.ofSeq
         patientsData = [||]
         error = None
         displayType = Cases
@@ -86,12 +101,22 @@ let renderRatiosChart (state : State) =
             | None | Some 0 -> None
             | _ ->  Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
 
+        let cases (date : DateTime) = 
+            match state.casesMap.TryFind date with
+            | None -> None
+            | Some i -> i
+
         let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
             match ratio with
+            | HospitalCases                 -> fun ps -> ps.JsDate12h, percent ps.total.inHospital.toDate (cases ps.Date)
+            | IcuCases                      -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate (cases ps.Date)
+            | CriticalCases                 -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate (cases ps.Date)
+            | DeceasedCases                 -> fun ps -> ps.JsDate12h, percent ps.total.deceased.toDate (cases ps.Date)
             | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
             | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
-            | DeceasedIcu                   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
             | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate 
+            | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
+            | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
             | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate 
             | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
 
@@ -110,7 +135,9 @@ let renderRatiosChart (state : State) =
         |}
         |> pojo
 
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-ratios-mortality"
+        
+    let maxValue = if state.displayType = Mortality then Some 65 else None
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-ratios"
     {| baseOptions with
         chart = pojo
             {|
@@ -121,38 +148,24 @@ let renderRatiosChart (state : State) =
             {|
                 spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
-        yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with max = 55 ; labels = pojo {| format = "{value}%" |} |} )
+        yAxis = baseOptions.yAxis 
+            |> Array.map (fun ax -> {| ax with max = maxValue ; labels = pojo {| format = "{value}%" |} |} )
 
-        series = [| for ratio in Ratios.all do yield renderRatiosH ratio |]
+        series = [| 
+            for ratio in Ratios.getSeries(state.displayType) do 
+            yield renderRatiosH ratio 
+        |]
 
-        tooltip = pojo {| shared = true; formatter = None |} 
+        tooltip = pojo {| shared = true; valueSuffix = " %" |}
 
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text= "" |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}
 
 let renderChartContainer state =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [
-            match state.displayType with 
-            | Cases     -> renderRatiosChart state  |> Highcharts.chartFromWindow
-            | Mortality -> renderRatiosChart state  |> Highcharts.chartFromWindow
-        ]
+        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
     ]
 
 let renderDisplaySelector state dt dispatch =
