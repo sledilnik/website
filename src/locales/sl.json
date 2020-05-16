@@ -8,5 +8,14 @@
     "team": "Ekipa",
     "sources": "Viri",
     "links": "Povezave"
+  },
+  "tables": {
+    "title": "Tabela",
+    "tabSummary": "Povzetek stanja",
+    "tabByRegion": "Po regiji",
+    "tabByAgeMale": "Po starosti - Moški",
+    "tabByAgeFemale": "Po starosti - Ženske",
+    "source": "Viri podatkov in druge oblike",
+    "sourceLink": "GDocs preglednica, CSV oblika ali REST API"
   }
 }
