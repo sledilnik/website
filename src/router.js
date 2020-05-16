@@ -25,24 +25,21 @@ function dynamicProps(route) {
   let lang = route.params.lang
   let langSl = lang === 'sl'
 
+  //Add content here
+  const mdContent = {
+    FAQ: { sl: contentMd, en: contentMdEn },
+    about: { sl: aboutMd, en: aboutMdEn },
+  }
+
   return typeof lang === undefined || langSl
     ? {
         name: `${baseRoute}`,
-        content: getContent(),
+        content: mdContent[baseRoute][lang],
       }
     : {
         name: `${baseRoute}-${route.params.lang}`,
-        content: getContent(),
+        content: mdContent[baseRoute][lang],
       }
-
-  function getContent() {
-    switch (baseRoute) {
-      case 'FAQ':
-        return langSl ? contentMd : contentMdEn
-      case 'about':
-        return langSl ? aboutMd : aboutMdEn
-    }
-  }
 }
 
 const routes = [
