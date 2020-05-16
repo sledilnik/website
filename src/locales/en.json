@@ -8,5 +8,14 @@
     "team": "Team",
     "sources": "Resources",
     "links": "Links"
+  },
+  "tables": {
+    "title": "Table",
+    "tabSummary": "Summary",
+    "tabByRegion": "By region",
+    "tabByAgeMale": "By age - Male",
+    "tabByAgeFemale": "By age - Female",
+    "source": "Data source in other formats",
+    "sourceLink": "GDocs spreadsheet, CSV format or REST API"
   }
 }
