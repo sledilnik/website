@@ -23,6 +23,8 @@
         <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         <span>GitHub</span>
       </a>
+      <a class="router-link" v-if="$i18n.i18next.language === 'en'" @click.prevent="changeLanguage('sl')">SI</a>
+      <a class="router-link" v-if="$i18n.i18next.language === 'sl'" @click.prevent="changeLanguage('en')">EN</a>
     </div>
   </div>
 </template>
@@ -61,6 +63,12 @@ export default {
       setTimeout(() => {
         this.closingMenu = false;
       }, 650);
+    },
+    changeLanguage(lang) {
+      this.$i18n.i18next.changeLanguage(lang, (err, t) => {
+        if (err) return console.log('something went wrong loading', err);
+        this.$router.push({ name: this.$route.name, params: { lang } });
+      });
     },
   },
   watch: {
