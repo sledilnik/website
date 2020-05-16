@@ -18,5 +18,52 @@
     "tabByAgeFemale": "Po starosti - Ženske",
     "source": "Viri podatkov in druge oblike",
     "sourceLink": "GDocs preglednica, CSV oblika ali REST API"
+  },
+  "embedMaker": {
+    "title": "Vgradite graf v vašo spletno stran",
+    "chooseChart": "Izberite graf",
+    "preview": "Predogled:",
+    "embedCode": "Koda za vdelavo:",
+    "description": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">najdete tukaj</a>.",
+    "copy": "Kopiraj",
+    "copied": "Skopirano!"
+  },
+  "charts": {
+    "metricsComparison": {
+      "title": "Stanje COVID-19 v Sloveniji"
+    },
+    "cases": {
+      "title": "Potrjeni primeri"
+    },
+    "patients": {
+      "title": "Hospitalizirani"
+    },
+    "hCenters": {
+      "title": "Obravnava v ZD"
+    },
+    "tests": {
+      "title": "Testiranje"
+    },
+    "infections": {
+      "title": "Struktura potrjeno okuženih"
+    },
+    "spread": {
+      "title": "Prirast potrjeno okuženih"
+    },
+    "regions": {
+      "title": "Potrjeno okuženi po regijah"
+    },
+    "map": {
+      "title": "Zemljevid po občinah"
+    },
+    "municipalities": {
+      "title": "Primeri po občinah"
+    },
+    "ageGroups": {
+      "title": "Po starostnih skupinah"
+    },
+    "countries": {
+      "title": "Primerjava po državah"
+    }
   }
 }
