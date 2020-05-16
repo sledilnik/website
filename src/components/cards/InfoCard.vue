@@ -99,7 +99,7 @@ export default {
   min-height: 195px;
   padding: 18px;
   background: #fff;
-  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
+  box-shadow: $element-box-shadow;
 
   @include media-breakpoint-down(sm) {
     min-height: 167px;
