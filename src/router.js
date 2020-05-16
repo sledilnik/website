@@ -49,10 +49,15 @@ const routes = [
   {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
-      if (to.params.lang) {
-        i18next.changeLanguage(to.params.lang)
+      const language = to.params.lang 
+      const supportedLanguages = ['sl', 'en']
+      if (!supportedLanguages.includes(language)) {
+        return next(`${i18next.language}/stats`)
       }
-      next()
+      if (i18next.language !== language) {
+        i18next.changeLanguage(language)
+      }
+      return next()
     },
     component: {
       render(c) {
@@ -126,7 +131,7 @@ const routes = [
         },
       },
       {
-        path: '/embed',
+        path: 'embed',
         component: EmbedMakerPage,
         props: true,
       },
