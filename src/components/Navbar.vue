@@ -11,14 +11,14 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
-      <router-link to="stats" class="router-link"><span>Domov</span></router-link>
-      <router-link to="tables" class="router-link"><span>Tabela</span></router-link>
-      <router-link to="models" class="router-link"><span>Modeli</span></router-link>
-      <router-link to="FAQ" class="router-link"><span>FAQ</span></router-link>
-      <router-link to="about" class="router-link"><span>O projektu</span></router-link>
-      <router-link to="team" class="router-link"><span>Ekipa</span></router-link>
-      <router-link to="sources" class="router-link"><span>Viri</span></router-link>
-      <router-link to="links" class="router-link"><span>Povezave</span></router-link>
+      <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
+      <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
+      <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
+      <router-link to="FAQ" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
+      <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
+      <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
+      <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
+      <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
       <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
         <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
         <span>GitHub</span>

@@ -1,0 +1,12 @@
+{
+  "navbar": {
+    "home": "Home",
+    "tables": "Table",
+    "models": "Models",
+    "faq": "FAQ",
+    "about": "About",
+    "team": "Team",
+    "sources": "Resources",
+    "links": "Links"
+  }
+}
