@@ -53,8 +53,8 @@ module Ratios =
         | DeceasedHospital              -> "#666666", Dot,      "Umrli"
         | DeceasedHospitalC             -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
         | DeceasedIcuC                  -> "#d5c768", Dot,      "Smrtnost v intenzivni enoti"
-        | DeceasedIcuDeceasedHospital   -> "#de9a5a", Dot,      "Delež smrti v intenzivni enoti"
-        | DeceasedHospitalDeceasedTotal -> "#666666", Dot,      "Delež smrti v bolnišnici"
+        | DeceasedIcuDeceasedHospital   -> "#d5c768", Solid,    "Delež smrti v intenzivni enoti"
+        | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "Delež smrti v bolnišnici"
 
 
 type State = {
