@@ -18,5 +18,39 @@
     "tabByAgeFemale": "By age - Female",
     "source": "Data source in other formats",
     "sourceLink": "GDocs spreadsheet, CSV format or REST API"
+  },
+  "embedMaker": {
+    "title": "Embed a chart into your web page",
+    "chooseChart": "Choose a chart",
+    "preview": "Preview:",
+    "embedCode": "Embed code:",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "charts": {
+    "cases": {
+      "title": "Confirmed cases"
+    },
+    "countries": {
+      "title": "Comparison by country"
+    },
+    "ageGroups": {
+      "title": "By age groups"
+    },
+    "map": {
+      "title": "Map of municipalities"
+    },
+    "patients": {
+      "title": "Hospitalized"
+    },
+    "regions": {
+      "title": "Confirmed cases by regions"
+    },
+    "tests": {
+      "title": "Testing"
+    },
+    "metricsComparison": {
+      "title": "Status of COVID-19 in Slovenia"
+    }
   }
 }
