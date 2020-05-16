@@ -11,42 +11,46 @@ import DataPage from './pages/DataPage.vue'
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
 import * as linksMd from './content/links.md'
+import * as linksMdEn from './content/links_en.md'
 import * as contentMd from './content/FAQ.md'
 import * as contentMdEn from './content/FAQ_en.md'
 import * as teamMd from './content/team.md'
+import * as teamMdEn from './content/team_en.md'
 import * as sourcesMd from './content/sources.md'
+import * as sourcesMdEn from './content/sources_en.md'
 import * as modelsMd from './content/models.md'
+import * as modelsMdEn from './content/models_en.md'
 import * as datasourcesMd from './content/datasources.md'
+import * as datasourcesMdEn from './content/datasources_en.md'
 
 Vue.use(VueRouter)
 
 function dynamicProps(route) {
   let baseRoute = route.path.slice(4)
   let lang = route.params.lang
-  let langSl = lang === 'sl'
 
   //Add content here
   const mdContent = {
     FAQ: { sl: contentMd, en: contentMdEn },
     about: { sl: aboutMd, en: aboutMdEn },
+    team: { sl: teamMd, en: teamMdEn },
+    links: { sl: linksMd, en: linksMdEn },
+    sources: { sl: sourcesMd, en: sourcesMdEn },
+    models: { sl: modelsMd, en: modelsMdEn },
+    datasources: { sl: datasourcesMd, en: datasourcesMdEn },
   }
 
-  return typeof lang === undefined || langSl
-    ? {
-        name: `${baseRoute}`,
-        content: mdContent[baseRoute][lang],
-      }
-    : {
-        name: `${baseRoute}-${route.params.lang}`,
-        content: mdContent[baseRoute][lang],
-      }
+  return {
+    name: lang === 'en' ? `${baseRoute}-${lang}` : `${baseRoute}`,
+    content: mdContent[baseRoute][lang || 'sl'],
+  }
 }
 
 const routes = [
   {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
-      const language = to.params.lang 
+      const language = to.params.lang
       const supportedLanguages = ['sl', 'en']
       if (!supportedLanguages.includes(language)) {
         return next(`${i18next.language}/stats`)
@@ -63,11 +67,6 @@ const routes = [
     },
     children: [
       {
-        path: 'about',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
         path: 'stats',
         component: StatsPage,
         props: true,
@@ -83,12 +82,14 @@ const routes = [
         props: true,
       },
       {
+        path: 'about',
+        component: StaticPage,
+        props: dynamicProps,
+      },
+      {
         path: 'links',
         component: StaticPage,
-        props: {
-          name: 'links',
-          content: linksMd,
-        },
+        props: dynamicProps,
       },
       {
         path: 'FAQ',
@@ -98,34 +99,22 @@ const routes = [
       {
         path: 'team',
         component: StaticPage,
-        props: {
-          name: 'team',
-          content: teamMd,
-        },
+        props: dynamicProps,
       },
       {
         path: 'sources',
         component: StaticPage,
-        props: {
-          name: 'sources',
-          content: sourcesMd,
-        },
+        props: dynamicProps,
       },
       {
         path: 'models',
         component: StaticPage,
-        props: {
-          name: 'sources',
-          content: modelsMd,
-        },
+        props: dynamicProps,
       },
       {
         path: 'datasources',
         component: StaticPage,
-        props: {
-          name: 'datasources',
-          content: datasourcesMd,
-        },
+        props: dynamicProps,
       },
       {
         path: 'embed',
