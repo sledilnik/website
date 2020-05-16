@@ -21,17 +21,28 @@ import * as datasourcesMd from './content/datasources.md'
 Vue.use(VueRouter)
 
 function dynamicProps(route) {
-  let baseRoute = route.path.slice(4);
+  let baseRoute = route.path.slice(4)
+  let lang = route.params.lang
+  let langSl = lang === 'sl'
 
-  return typeof route.params.lang === undefined || route.params.lang === 'sl'
+  return typeof lang === undefined || langSl
     ? {
         name: `${baseRoute}`,
-        content: baseRoute === 'FAQ' ? contentMd : aboutMd,
+        content: getContent(),
       }
     : {
         name: `${baseRoute}-${route.params.lang}`,
-        content: baseRoute === 'FAQ' ? contentMdEn : aboutMdEn,
-      };
+        content: getContent(),
+      }
+
+  function getContent() {
+    switch (baseRoute) {
+      case 'FAQ':
+        return langSl ? contentMd : contentMdEn
+      case 'about':
+        return langSl ? aboutMd : aboutMdEn
+    }
+  }
 }
 
 const routes = [
