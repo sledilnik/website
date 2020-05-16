@@ -20,35 +20,18 @@ import * as datasourcesMd from './content/datasources.md'
 
 Vue.use(VueRouter)
 
-// TODO: refactor these two ugly functions
-function dynamicPropsAbout(route) {
-  console.log('lang', route.params.lang)
+function dynamicProps(route) {
+  let baseRoute = route.path.slice(4);
 
-  if (typeof route.params.lang === undefined || route.params.lang === 'sl') {
-    return {
-      name: 'about',
-      content: aboutMd,
-    }
-  } else {
-    return {
-      name: 'about-' + route.params.lang,
-      content: aboutMdEn,
-    }
-  }
-}
-
-function dynamicPropsFaq(route) {
-  if (typeof route.params.lang === undefined || route.params.lang === 'sl') {
-    return {
-      name: 'FAQ',
-      content: contentMd,
-    }
-  } else {
-    return {
-      name: 'FAQ-' + route.params.lang,
-      content: contentMdEn,
-    }
-  }
+  return typeof route.params.lang === undefined || route.params.lang === 'sl'
+    ? {
+        name: `${baseRoute}`,
+        content: baseRoute === 'FAQ' ? contentMd : aboutMd,
+      }
+    : {
+        name: `${baseRoute}-${route.params.lang}`,
+        content: baseRoute === 'FAQ' ? contentMdEn : aboutMdEn,
+      };
 }
 
 const routes = [
@@ -69,7 +52,7 @@ const routes = [
       {
         path: 'about',
         component: StaticPage,
-        props: dynamicPropsAbout,
+        props: dynamicProps,
       },
       {
         path: 'stats',
@@ -97,7 +80,7 @@ const routes = [
       {
         path: 'FAQ',
         component: StaticPage,
-        props: dynamicPropsFaq,
+        props: dynamicProps,
       },
       {
         path: 'team',
