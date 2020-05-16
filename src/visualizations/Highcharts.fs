@@ -92,7 +92,7 @@ let addContainmentMeasuresFlags
         6,  3, "#FFe6e6", "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
         8,  3, "#FFFFFF", "Točke",     "16 vstopnih točk za testiranje"
         10, 3, "#FFe6e6", "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
-        12, 3, "#FFFFFF", "Epidemija", "Razglašena epidemija, sprejeta nova vlada"
+        12, 3, "#FFFFFF", "Epidemija", "Razglašena epidemija, predpisana splošna samoizolacija. Zvečer sprejeta nova vlada"
         14, 3, "#FFe6e6", "Prevozi",   "Ukinitev javnih prevozov"
         16, 3, "#FFe6e6", "Šole",      "Zaprtje šol, restavracij"
         20, 3, "#FFe6e6", "Zbiranje",  "Prepoved zbiranja na javnih mestih"
