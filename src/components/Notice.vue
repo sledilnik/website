@@ -52,12 +52,17 @@
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 20px 32px;
+    padding: 20px 24px 20px 32px;
   }
 
   &-button {
     margin-left: 16px;
   }
+
+  span b {
+    padding-right: 8px;
+  }
+
 }
 
 </style>
