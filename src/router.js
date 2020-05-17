@@ -25,25 +25,38 @@ import * as datasourcesMdEn from './content/datasources_en.md'
 
 Vue.use(VueRouter)
 
+const mdContent = {
+  FAQ: { sl: contentMd, en: contentMdEn },
+  about: { sl: aboutMd, en: aboutMdEn },
+  team: { sl: teamMd, en: teamMdEn },
+  links: { sl: linksMd, en: linksMdEn },
+  sources: { sl: sourcesMd, en: sourcesMdEn },
+  models: { sl: modelsMd, en: modelsMdEn },
+  datasources: { sl: datasourcesMd, en: datasourcesMdEn },
+}
+
 function dynamicProps(route) {
   let baseRoute = route.path.slice(4)
   let lang = route.params.lang
-
-  //Add content here
-  const mdContent = {
-    FAQ: { sl: contentMd, en: contentMdEn },
-    about: { sl: aboutMd, en: aboutMdEn },
-    team: { sl: teamMd, en: teamMdEn },
-    links: { sl: linksMd, en: linksMdEn },
-    sources: { sl: sourcesMd, en: sourcesMdEn },
-    models: { sl: modelsMd, en: modelsMdEn },
-    datasources: { sl: datasourcesMd, en: datasourcesMdEn },
-  }
 
   return {
     name: lang === 'en' ? `${baseRoute}-${lang}` : `${baseRoute}`,
     content: mdContent[baseRoute][lang || 'sl'],
   }
+}
+
+function mdContentRoutes() {
+  const mdContentRoutes = []
+
+  Object.keys(mdContent).forEach((key) => {
+    mdContentRoutes.push({
+      path: key,
+      component: StaticPage,
+      props: dynamicProps,
+    })
+  })
+
+  return mdContentRoutes
 }
 
 const routes = [
@@ -82,45 +95,11 @@ const routes = [
         props: true,
       },
       {
-        path: 'about',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'links',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'FAQ',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'team',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'sources',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'models',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
-        path: 'datasources',
-        component: StaticPage,
-        props: dynamicProps,
-      },
-      {
         path: 'embed',
         component: EmbedMakerPage,
         props: true,
       },
+      ...mdContentRoutes(),
     ],
   },
   {
