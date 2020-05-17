@@ -23,7 +23,7 @@
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      <a href="#" class="router-link" v-if="$i18n.i18next.language === 'en'" @click.prevent="changeLanguage('sl')">SI</a>
+      <a href="#" class="router-link" v-if="$i18n.i18next.language === 'en'" @click.prevent="changeLanguage('sl')">SL</a>
       <a href="#" class="router-link" v-if="$i18n.i18next.language === 'sl'" @click.prevent="changeLanguage('en')">EN</a>
     </div>
   </div>
