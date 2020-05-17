@@ -147,10 +147,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
     {|
         chart = pojo
             {|
-                //height = "100%"
                 ``type`` = "line"
                 zoomType = "x"
-                //styledMode = false // <- set this to 'true' for CSS styling
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
@@ -263,7 +261,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             |}
         tooltip = pojo
             {|
-                //xDateFormat = @"%A, %e. %b"
                 shared = true
                 dateTimeLabelFormats = pojo
                     {|

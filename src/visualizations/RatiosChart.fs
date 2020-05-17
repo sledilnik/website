@@ -22,6 +22,10 @@ type DisplayType =
         | Cases     -> "Resni primeri"
         | Hospital  -> "Hospitalizirani"
         | Mortality -> "Smrtnost"
+    static member getClassName = function
+        | Cases     -> "covid19-ratios-cases"
+        | Hospital  -> "covid19-ratios-hospital"
+        | Mortality -> "covid19-ratios-mortality"
 
 type Ratios =
     | HospitalCases
@@ -137,12 +141,15 @@ let renderRatiosChart (state : State) =
 
         
     let maxValue = if state.displayType = Mortality then Some 65 else None
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-ratios"
+    let className = DisplayType.getClassName state.displayType
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
     {| baseOptions with
         chart = pojo
             {|
-                ``type`` ="spline"
+                ``type`` = "spline"
                 zoomType = "x"
+                className = className
+                events = pojo {| load = onLoadEvent(className) |}
             |}
         plotOptions = pojo
             {|
@@ -156,7 +163,7 @@ let renderRatiosChart (state : State) =
             yield renderRatiosH ratio 
         |]
 
-        tooltip = pojo {| shared = true; valueSuffix = " %" |}
+        tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = @"%A, %e. %B %Y" |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}

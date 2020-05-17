@@ -181,12 +181,12 @@ let renderByHospitalChart (state : State) =
         |}
         |> pojo
 
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-hospitals"
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
     {| baseOptions with
 
         series = [| for segmentation in state.allSegmentations do yield renderSources segmentation |]
 
-        tooltip = pojo {| shared = true; formatter = None |} 
+        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = @"%A, %e. %B %Y" |} 
 
         legend = pojo
             {|
@@ -278,13 +278,15 @@ let renderStructureChart (state : State) =
         |}
         |> pojo
 
-
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-structure"
+    let className = "covid19-patients-structure"
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
     {| baseOptions with
         chart = pojo
             {|
                 ``type`` = "column"
                 zoomType = "x"
+                className = className
+                events = pojo {| load = onLoadEvent(className) |}
             |}
         plotOptions = pojo
             {|
