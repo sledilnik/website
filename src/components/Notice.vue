@@ -7,8 +7,7 @@
     >
       <div class="notice">
         <span>
-          <b>Nov prikaz po občinah: </b>
-          nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
+          <b>Nov prikaz po občinah:</b>Nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
@@ -52,12 +51,17 @@
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 20px 32px;
+    padding: 20px 24px 20px 32px;
   }
 
   &-button {
     margin-left: 16px;
   }
+
+  span b {
+    padding-right: 8px;
+  }
+
 }
 
 </style>
