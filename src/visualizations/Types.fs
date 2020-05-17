@@ -115,11 +115,16 @@ type RenderingMode =
     | Normal
     | Embedded of VisualizationType option
 
+type Language =
+    | Slovenian
+    | English
+    
 type State =
     { Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
-      RenderingMode : RenderingMode }
+      RenderingMode : RenderingMode
+      Language: Language }
 
 type Visualization = {
     VisualizationType: VisualizationType
@@ -134,3 +139,7 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
+
+type Translations =
+    { MetricsComparison: string
+      ConfirmedCases: string }

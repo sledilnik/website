@@ -59,7 +59,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations('visualizations', this.$route.query);
+      Visualizations('visualizations', this.$route.query, this.$route.path.slice(1, 3));
     });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
