@@ -56,8 +56,8 @@ module Ratios =
         | CriticalHospital              -> "#bf5747", Solid,    "Na repiratorju"
         | DeceasedHospital              -> "#666666", Dot,      "Umrli"
         | DeceasedHospitalC             -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
-        | DeceasedIcuC                  -> "#d5c768", Dot,      "Smrtnost v intenzivni enoti"
-        | DeceasedIcuDeceasedHospital   -> "#d5c768", Solid,    "Delež smrti v intenzivni enoti"
+        | DeceasedIcuC                  -> "#d99a91", Dot,      "Smrtnost v intenzivni enoti"
+        | DeceasedIcuDeceasedHospital   -> "#d99a91", Solid,    "Delež smrti v intenzivni enoti"
         | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "Delež smrti v bolnišnici"
 
 
