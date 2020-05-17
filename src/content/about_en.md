@@ -1,4 +1,4 @@
-# *Tracking data on the COVID-19 spread in Slovenia*
+# Tracking data on the COVID-19 spread in Slovenia
 
 *The **"Covid-19 Tracker Slovenia"** project collects, analyses and publishes data on the spread of the SARS-CoV-2 coronavirus, the cause of COVID-19, in Slovenia. We wish to give the public a better overview of the magnitude of the issue and a proper assessment of the risk.*
 
