@@ -316,7 +316,6 @@ let renderChartOptions (state : State) =
                 y = 30
                 backgroundColor = "rgba(255,255,255,0.5)"
             |}
-        tooltip = pojo {| shared=true |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
             if false //state.scope = Projection
             then

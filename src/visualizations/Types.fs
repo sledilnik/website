@@ -99,6 +99,7 @@ type RegionsData = RegionsDataPoint list
 type VisualizationType =
     | MetricsComparison
     | Patients
+    | Ratios
     | HCenters
     | Hospitals
     | Tests
