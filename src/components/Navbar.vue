@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'Navbar',
   props: {
@@ -68,6 +70,7 @@ export default {
       this.$i18n.i18next.changeLanguage(lang, (err, t) => {
         if (err) return console.log('something went wrong loading', err);
         this.$router.push({ name: this.$route.name, params: { lang } });
+        moment.locale(lang);
       });
     },
   },

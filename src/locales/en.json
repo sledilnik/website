@@ -10,6 +10,10 @@
     "links": "Links",
     "github": "GitHub"
   },
+  "timestamp": {
+    "updated": "Updated {{ date, MMMM Do yyyy }}",
+    "at": "at {{ date, HH:mm }}"
+  },
   "tables": {
     "title": "Table",
     "tabSummary": "Summary",

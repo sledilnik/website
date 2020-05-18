@@ -2,10 +2,13 @@ import Vue from 'vue'
 import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import VueI18Next from '@panter/vue-i18next'
+import moment from 'moment'
 import en from './locales/en.json'
 import sl from './locales/sl.json'
 
 Vue.use(VueI18Next)
+
+moment.locale('sl')
 
 const detectionOptions = {
   order: [
@@ -17,6 +20,7 @@ const detectionOptions = {
     'queryString',
     'htmlTag',
   ],
+  lookupLocalStorage: 'i18nextLng',
   lookupFromPathIndex: 0,
 }
 
@@ -28,6 +32,14 @@ i18next.use(LanguageDetector).init({
     en: { translation: en },
   },
   detection: detectionOptions,
+  interpolation: {
+    format: function(value, format, lng) {
+      if (value instanceof Date) {
+        return moment(value).format(format)
+      }
+      return value
+    },
+  },
   debug: true,
 })
 
