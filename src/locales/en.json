@@ -11,7 +11,7 @@
     "github": "GitHub"
   },
   "timestamp": {
-    "updated": "Updated {{ date, MMMM Do yyyy }}",
+    "updated": "Updated {{ date, MMMM Do YYYY }}",
     "at": "at {{ date, HH:mm }}"
   },
   "tables": {

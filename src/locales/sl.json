@@ -11,7 +11,7 @@
     "github": "GitHub"
   },
   "timestamp": {
-    "updated": "Osveženo {{ date, D. MMMM yyyy }}",
+    "updated": "Osveženo {{ date, D. MMMM YYYY }}",
     "at": "ob {{ date, HH.mm }}"
   },
   "tables": {
