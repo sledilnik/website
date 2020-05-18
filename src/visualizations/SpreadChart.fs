@@ -60,14 +60,11 @@ let roundDecimals (nDecimals:int) (f: float) = Math.Round(f,nDecimals)
 
 let inline yAxisBase () =
      {|
-        //index = 0
         ``type`` = "linear"
-        //min = if scaleType=Linear then None else Some 1.0
-        //floor = if scaleType=Linear then None else Some 1.0
-        opposite = true // right side
+        opposite = true
         reversed = false
-        title = {| text = null |} // "oseb" |}
-        showFirstLabel = false  // need to hide negative label for addContainmentMeasuresFlags
+        title = {| text = null |}
+        showFirstLabel = not Highcharts.showExpGrowthFeatures // need to hide negative label for addContainmentMeasuresFlags
         tickInterval = None
         gridZIndex = -1
         max = None
@@ -82,7 +79,6 @@ let inline legend title =
         verticalAlign = "middle"
         borderColor = "#aaa"
         borderWidth = 1
-        //labelFormatter = string //fun series -> series.name
         layout = "vertical"
         floating = true
         x = 8
@@ -157,15 +153,11 @@ type ChartCfg = {
                                     let rate = float active / float yesterday
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
-
-                            // printfn "val: %f" v
                             v
                         )
                         |> Option.defaultValue nan
                     dp.Date |> jsTime12h, value
             }
-
-        // yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0)
 
 
 let renderChartOptions scaleType (data : StatsData) =
@@ -177,38 +169,18 @@ let renderChartOptions scaleType (data : StatsData) =
     let allSeries = [|
         yield pojo
             {|
-                //visible = true
                 id = "data"
                 color = "#bda506"
                 name = chartCfg.seriesLabel
                 dataLabels = pojo {| enabled = true |}
-                //className = "cs-positiveTestsToDate"
                 data =
                     data
                     |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                     |> Seq.map chartCfg.dataKey
                     |> Seq.toArray
-                //yAxis = 0 // axis index
-                //showInLegend = true
-                //fillOpacity = 0
             |}
-        yield addContainmentMeasuresFlags startTime None |> pojo
-
-        //if scaleType = Absolute then
-        (*
-        {|
-            ``type`` = "flags"
-            onSeries = "data"
-            shape = "flag"
-            showInLegend = false
-            color = "#444"
-            data = Array.map pojo [|
-                {| x = DateTime(2020,03,27) |> jsTime; title="1387 testov"; text="Petek, opravljenih 1387 testov" |}
-                {| x = DateTime(2020,03,29) |> jsTime; title="596 testov"; text="Nedelja, opravljenih 596 testov" |}
-            |]
-        |}
-        |> pojo
-        *)
+        if Highcharts.showExpGrowthFeatures then
+            yield addContainmentMeasuresFlags startTime None |> pojo 
     |]
 
     // return highcharts options
@@ -252,7 +224,6 @@ let renderExplainer (data: StatsData) =
         prop.children [
             yield Html.h1
                 "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:"
-                //"Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
             yield Html.div [
                 prop.className "container"
                 prop.children [
