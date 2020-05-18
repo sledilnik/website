@@ -140,7 +140,7 @@ let renderRatiosChart (state : State) =
         |> pojo
 
         
-    let maxValue = if state.displayType = Mortality then Some 65 else None
+    let maxValue = if state.displayType = Mortality then Some 100 else None
     let className = DisplayType.getClassName state.displayType
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
     {| baseOptions with
