@@ -2,13 +2,13 @@
   <div class="container">
     <a
       class="notice-link"
-      href="#municipalites-chart"
-      v-scroll-to="{ el: '#municipalities-chart', offset: -115 }"
+      href="#ratios-chart"
+      v-scroll-to="{ el: '#ratios-chart', offset: -115 }"
     >
       <div class="notice">
         <span>
-          <b>Nov prikaz po občinah: </b>
-          nov prikaz za aktivne primere, umrle in oceno prebolelih v posamezni občini.
+          <b>Nov graf: </b>
+          prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti.
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
@@ -52,12 +52,17 @@
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 20px 32px;
+    padding: 20px 24px 20px 32px;
   }
 
   &-button {
     margin-left: 16px;
   }
+
+  span b {
+    padding-right: 8px;
+  }
+
 }
 
 </style>
