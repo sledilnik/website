@@ -130,15 +130,13 @@ $table-border: rgb(222,222 ,222)
 
     &.active
       color: rgba(0, 0, 0)
+      box-shadow: inset 0 -10px 0 $yellow
 
     &:hover
       color: rgba(0, 0, 0)
 
     &:focus
       outline: none
-
-    &.active
-      box-shadow: inset 0 -10px 0 $yellow
 
 .tabs *:focus
   outline: none

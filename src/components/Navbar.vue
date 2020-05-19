@@ -23,8 +23,16 @@
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      <a href="#" class="router-link" v-if="$i18n.i18next.language === 'en'" @click.prevent="changeLanguage('sl')">SL</a>
-      <a href="#" class="router-link" v-if="$i18n.i18next.language === 'sl'" @click.prevent="changeLanguage('en')">EN</a>
+      <div class="router-link">
+        <a href="#"
+           class="router-link-anchor"
+           :class="{ active: $i18n.i18next.language === 'sl' }"
+           @click.prevent="changeLanguage('sl')">SL</a> /
+        <a href="#"
+           class="router-link-anchor"
+           :class="{ active: $i18n.i18next.language === 'en' }"
+           @click.prevent="changeLanguage('en')">EN</a>
+      </div>
     </div>
   </div>
 </template>
@@ -414,16 +422,14 @@ export default {
   }
 
   &.router-link-active {
+    font-weight: 400;
+    color: #000000 !important;
+
     span {
       line-height: 30px;
       display: inline-block;
       box-shadow: inset 0 -10px 0 #fff;
     }
-  }
-
-  &.router-link-active {
-    font-weight: 400;
-    color: #000000 !important;
 
     &:hover {
       color: #000000 !important;
@@ -454,6 +460,15 @@ export default {
       img {
         opacity: 0.75;
       }
+    }
+  }
+
+  &-anchor {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
     }
   }
 }
