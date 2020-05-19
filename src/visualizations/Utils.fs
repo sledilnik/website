@@ -103,18 +103,18 @@ let renderErrorLoading (error : string) =
 
 let monthNameOfdate (date : System.DateTime) =
     match date.Month with
-    | 1 -> "januar"
-    | 2 -> "februar"
-    | 3 -> "marec"
-    | 4 -> "april"
-    | 5 -> "maj"
-    | 6 -> "junij"
-    | 7 -> "julij"
-    | 8 -> "avgust"
-    | 9 -> "september"
-    | 10 -> "oktober"
-    | 11 -> "november"
-    | 12 -> "december"
+    | 1 -> I18N.t "month.1"
+    | 2 -> I18N.t "month.2"
+    | 3 -> I18N.t "month.3"
+    | 4 -> I18N.t "month.4"
+    | 5 -> I18N.t "month.5"
+    | 6 -> I18N.t "month.6"
+    | 7 -> I18N.t "month.7"
+    | 8 -> I18N.t "month.8"
+    | 9 -> I18N.t "month.9"
+    | 10 -> I18N.t "month.10"
+    | 11 -> I18N.t "month.11"
+    | 12 -> I18N.t "month.12"
     | _ -> failwith "Invalid month"
 
 let daysMestnik days =
