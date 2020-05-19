@@ -196,10 +196,24 @@
       "deceasedToDate": "Umrli (skupaj)"
     },
     "cases": {
-      "title": "Potrjeni primeri"
+      "title": "Potrjeni primeri",
+      "active": "Aktivni",
+      "hospitalized": "Hospitalizirani",
+      "icu": "V intenzivni enoti",
+      "ventilator": "Na respiratorju",
+      "recovered": "Preboleli",
+      "deceased": "Umrli"
     },
     "patients": {
-      "title": "Hospitalizirani"
+      "title": "Hospitalizirani",
+      "structure": "Struktura",
+      "byHospital": "Po bolnišnicah",
+      "admitted": "Sprejeti",
+      "hospitalized": "Hospitalizirani",
+      "icu": "V intenzivni enoti",
+      "ventilator": "Na respiratorju",
+      "discharged": "Odpuščeni",
+      "deceased": "Umrli"
     },
     "ratios": {
       "title": "Delež resnih primerov"

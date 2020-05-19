@@ -111,17 +111,32 @@
       "hospitalized": "Hospitalized",
       "hospitalizedToDate": "Hospitalized (to date)",
       "icu": "In ICU",
-      "ventilator": "On ventilator",
-      "discharged": "Discharged from hospital",
-      "dischargedToDate": "Discharged from hospital (to date)",
+      "ventilator": "On Ventilator",
+      "discharged": "Discharged from Hospital",
+      "dischargedToDate": "Discharged from Hospital (to date)",
       "deceased": "Deceased",
       "deceasedToDate": "Deceased (to date)"
     },
     "cases": {
-      "title": "Confirmed Cases"
+      "title": "Confirmed Cases",
+      "active": "Active",
+      "hospitalized": "Hospitalized",
+      "icu": "In ICU",
+      "ventilator": "On Ventilator",
+      "recovered": "Recovered",
+      "deceased": "Deceased"
     },
     "patients": {
-      "title": "Hospitalizations"
+      "title": "Hospitalizations",
+      "structure": "Structure",
+      "byHospital": "By Hospital",
+      "hospitalizedIn": "Hospitalized In:",
+      "admitted": "Admitted",
+      "hospitalized": "Hospitalized",
+      "icu": "In ICU",
+      "ventilator": "On Ventilator",
+      "discharged": "Discharged",
+      "deceased": "Deceased"
     },
     "ratios": {
       "title": "Share of Serious Cases"

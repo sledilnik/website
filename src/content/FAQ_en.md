@@ -401,7 +401,7 @@ Demographics can help us understand how the pandemic has spread and why it has d
 <details>
   <summary id=countries-chart>What does the “Comparison by Country” graph show?</summary>
 
-The [graf](/en/stats#countries-chart) shows a comparison between Slovenia and different groups of countries in terms of the number of deaths due to COVID-19 per million inhabitants. The graph is arranged chronologically. You can change the view of different chronological displays of comparisons of different clusters of countries by clicking on the appropriate tabs below.   
+The [chart](/en/stats#countries-chart) shows a comparison between Slovenia and different groups of countries in terms of the number of deaths due to COVID-19 per million inhabitants. The graph is arranged chronologically. You can change the view of different chronological displays of comparisons of different clusters of countries by clicking on the appropriate tabs below.   
 
 </details>
 
