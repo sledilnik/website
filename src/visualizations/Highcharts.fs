@@ -87,26 +87,26 @@ let addContainmentMeasuresFlags
     (startDate: JsTimestamp)
     (endDate: JsTimestamp option) =
     let events = [|
-    // day, mo, color,    title,       tooltip text
-        4,  3, "#FFFFFF", "1. primer", "Prvi potrjen primer:<br/>turist iz Maroka"
-        6,  3, "#FFe6e6", "DSO",       "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
-        8,  3, "#FFFFFF", "Točke",     "16 vstopnih točk za testiranje"
-        10, 3, "#FFe6e6", "Meje",      "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
-        12, 3, "#FFFFFF", "Epidemija", "Razglašena epidemija, predpisana splošna samoizolacija"
-        14, 3, "#FFe6e6", "Prevozi",   "Ukinitev javnih prevozov"
-        16, 3, "#FFe6e6", "Šole",      "Zaprtje šol, restavracij"
-        20, 3, "#FFe6e6", "Zbiranje",  "Prepoved zbiranja na javnih mestih"
-        30, 3, "#FFe6e6", "Občine",    "Prepoved gibanja izven meja občin, obvezno razkuževanje <br/>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
-        4,  4, "#e6f0ff", "Trgovine",  "Trgovine od 8-10 ure in zadnjo uro izključno <br/>za ranljive skupine (invalidi, upokojenci, nosečnice)"
-        12, 4, "#FFe6e6", "Karantena", "Obvezna 7 dnevna karantena pri prihodu iz tujine"
-        18, 4, "#ebfaeb", "Vikendi",   "Sproščanje: gibanje med občinami (vikendi...), <br/>pojasnila glede splošne prepovedi gibanja"
-        20, 4, "#ebfaeb", "Servisi",   "Sproščanje: gradnja, servisi, šport na prostem,<br/>dovoljeni nekateri linijski prevozi"
-        21, 4, "#FFFFFF", "Raziskava", "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
-        29, 4, "#ebfaeb", "Muzeji",    "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
-        30, 4, "#ebfaeb", "Občine",    "Sproščanje: gibanje izven meja svoje občine"
-        4,  5, "#ebfaeb", "Tržnice",   "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
-        11, 5, "#ebfaeb", "Prevozi",   "Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
-        15, 5, "#ebfaeb", "Karantena", "Sproščanje: karantena samo za tujce iz tretjih držav"
+    // day, mo, color,    i18n
+        4,  3, "#FFFFFF", "first"
+        6,  3, "#FFe6e6", "rh"
+        8,  3, "#FFFFFF", "checkpoints"
+        10, 3, "#FFe6e6", "borders"
+        12, 3, "#FFFFFF", "epidemic"
+        14, 3, "#FFe6e6", "transport"
+        16, 3, "#FFe6e6", "schools"
+        20, 3, "#FFe6e6", "gatherings"
+        30, 3, "#FFe6e6", "municipality"
+        4,  4, "#e6f0ff", "shops"
+        12, 4, "#FFe6e6", "quarantine"
+        18, 4, "#ebfaeb", "r-vac-homes"
+        20, 4, "#ebfaeb", "r-service"
+        21, 4, "#FFFFFF", "random-tests"
+        29, 4, "#ebfaeb", "r-museums"
+        30, 4, "#ebfaeb", "r-municipality"
+        4,  5, "#ebfaeb", "r-markets"
+        11, 5, "#ebfaeb", "r-transport"
+        15, 5, "#ebfaeb", "r-quarantine"
     |]
     {|
         ``type`` = "flags"
@@ -114,7 +114,7 @@ let addContainmentMeasuresFlags
         showInLegend = false
         color = "#444"
         data =
-            events |> Array.choose (fun (d,m,color,title,text) ->
+            events |> Array.choose (fun (d,m,color,i18n) ->
                 let ts = DateTime(2020,m,d) |> jsTime
                 let showMeasure =
                     match startDate, endDate with
@@ -122,8 +122,10 @@ let addContainmentMeasuresFlags
                     | startDate, Some endDate ->
                         ts >= startDate && ts <= endDate
 
+                let title = "cm." + i18n + ".title"
+                let text = "cm." + i18n + ".description"
                 if showMeasure then
-                    Some {| x=ts; fillColor=color; title=title; text=text |}
+                    Some {| x=ts; fillColor=color; title=I18N.t title; text=I18N.t text |}
                 else None
             )
     |}

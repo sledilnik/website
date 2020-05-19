@@ -58,6 +58,84 @@
       "11": "november",
       "12": "december"
   },
+  "cm": {
+      "first": {
+        "title": "1. primer", 
+        "description":"Prvi potrjen primer:<br/>turist iz Maroka"
+      },
+      "rh": {
+        "title": "DSO",
+        "description":"Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
+      },
+      "checkpoints": {
+        "title": "Točke",
+        "description":"16 vstopnih točk za testiranje"
+      },
+      "borders": {
+        "title": "Meje",      
+        "description":"Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
+      },
+      "epidemic": {
+        "title": "Epidemija", 
+        "description":"Razglašena epidemija, predpisana splošna samoizolacija"
+      },
+      "transport": {
+        "title": "Prevozi",
+        "description":"Ukinitev javnih prevozov"
+      },
+      "schools": {
+        "title": "Šole",
+        "description":"Zaprtje šol, restavracij"
+      },
+      "gatherings": {
+        "title": "Zbiranje",  
+        "description":"Prepoved zbiranja na javnih mestih"
+      },
+      "municipality": {
+        "title": "Občine",
+        "description":"Prepoved gibanja izven meja občin, obvezno razkuževanje <br/>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
+      },
+      "shops": {
+        "title": "Trgovine",
+        "description":"Trgovine od 8-10 ure in zadnjo uro izključno <br/>za ranljive skupine (invalidi, upokojenci, nosečnice)"
+      },
+      "quarantine": {
+        "title": "Karantena",
+        "description":"Obvezna 7 dnevna karantena pri prihodu iz tujine"
+      },
+      "r-vac-homes": {
+        "title": "Vikendi",
+        "description":"Sproščanje: gibanje med občinami (vikendi...), <br/>pojasnila glede splošne prepovedi gibanja"
+      },
+      "r-service": {
+        "title": "Servisi",
+        "description":"Sproščanje: gradnja, servisi, šport na prostem,<br/>dovoljeni nekateri linijski prevozi"
+      },
+      "random-tests": {
+        "title": "Raziskava",
+        "description":"Začetek nacionalne raziskave 3000 naključno izbranih oseb"
+      },
+      "r-museums": {
+        "title": "Muzeji",
+        "description":"Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
+      },
+      "r-municipality": {
+        "title": "Občine",
+        "description":"Sproščanje: gibanje izven meja svoje občine"
+      },
+      "r-markets": {
+        "title": "Tržnice",
+        "description":"Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+      },
+      "r-transport": {
+        "title": "Prevozi",
+        "description":"Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
+      },
+      "r-quarantine": {
+        "title": "Karantena",
+        "description":"Sproščanje: karantena samo za tujce iz tretjih držav"      
+      }
+  },
   "phase": {
     "1": {
       "title": "Faza 1"
