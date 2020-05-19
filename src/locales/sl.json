@@ -167,7 +167,7 @@
   },
   "charts": {
     "common": {
-      "loading": "Nalagam podatke...",
+      "loading": "Nalagam podatke…",
       "y-axis": "Y os:",
       "linear": "Linearna",
       "log": "Logaritemska"
