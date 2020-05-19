@@ -44,6 +44,35 @@
     "copy": "Kopiraj",
     "copied": "Skopirano!"
   },
+  "phase": {
+    "1": {
+      "title": "Faza 1"
+    },
+    "2": {
+      "title": "Faza 2",
+      "description": "epidemija, nov režim testiranja"
+    },
+    "3": {
+      "title": "Faza 3",
+      "description": "nov režim testiranja"
+    },
+    "4": {
+      "title": "Faza 4",
+      "description": "nov režim testiranja"
+    },
+    "5": {
+      "title": "Faza 5",
+      "description": "nov režim testiranja"
+    },
+    "6": {
+      "title": "Faza 6",
+      "description": "nov režim testiranja, raziskava"
+    },
+    "7": {
+      "title": "Faza 7",
+      "description": "preklic epidemije"
+    }
+  },
   "charts": {
     "metricsComparison": {
       "title": "Stanje COVID-19 v Sloveniji"

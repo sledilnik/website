@@ -44,6 +44,36 @@
     "copy": "Copy",
     "copied": "Copied!"
   },
+  "phase": {
+    "1": {
+      "title": "Phase 1"
+    },
+    "2": {
+      "title": "Phase 2",
+      "description": "epidemic, new testing methodology"
+    },
+    "3": {
+      "title": "Phase 3",
+      "description": "new testing methodology"
+    },
+    "4": {
+      "title": "Phase 4",
+      "description": "new testing methodology"
+    },
+    "5": {
+      "title": "Phase 5",
+      "description": "new testing methodology"
+    },
+    "6": {
+      "title": "Phase 6",
+      "description": "new testing methodology, random testing"
+    },
+    "7": {
+      "title": "Phase 7",
+      "description": "end of epidemic"
+    }
+  },
+
   "charts": {
     "metricsComparison": {
       "title": "COVID-19 Situation in Slovenia"
