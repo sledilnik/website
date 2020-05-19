@@ -240,7 +240,11 @@
       "title": "Primeri po občinah"
     },
     "ageGroups": {
-      "title": "Po starostnih skupinah"
+      "title": "Po starostnih skupinah",
+      "male": "Moški",
+      "female": "Ženske",
+      "absolute": "Absolutno",
+      "relative": "Relativno"
     },
     "countries": {
       "title": "Primerjava po državah"

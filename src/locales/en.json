@@ -163,7 +163,11 @@
       "title": "Cases by Municipalities"
     },
     "ageGroups": {
-      "title": "Age Groups"
+      "title": "Age Groups",
+      "male": "Male",
+      "female": "Female",
+      "absolute": "Absolute",
+      "relative": "Relative"
     },
     "countries": {
       "title": "Comparison by Country"
