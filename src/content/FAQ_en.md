@@ -346,7 +346,7 @@ All important health organizations and institutions are aware of the fact that t
 </details>
 
 <details>
-  <summary id=infections-chart>What does the “”Structure of Confirmed Cases” graph tell us?</summary>
+  <summary id=infections-chart>What does the “Structure of Confirmed Cases” graph tell us?</summary>
 
 The [graph](/en/stats#infections-chart)provides an insight into the daily share of confirmed cases from high-risk groups or employees in high-risk areas. Due to insufficiently accurate input data on confirmed infections, daily values (By days (average)) are shown as a moving average of 5 days. The sum of the values on a particular day, from 2 days prior, and 2 days after, is divided by 5. Therefore, the graph shows the situation three days before a specific day, and in this way we get a better idea of trends by individual groups. If we select the *Total* or *Relative* display, we will jump from the confirmed cases curve to the histogram, which shows the number of confirmed infected persons within each category on a given day.
 

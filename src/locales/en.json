@@ -19,10 +19,10 @@
     "at": "at {{ date, HH:mm }}"
   },
   "infocard": {
-    "confirmedToDate": "Confirmed",
+    "confirmedToDate": "Confirmed Cases",
     "recoveredToDate": "Recovered",
     "inHospital": "Hospitalized",
-    "icu": "V intenzivni enoti",
+    "icu": "In ICU",
     "deceasedToDate": "Deceased"
   },
   "tables": {
@@ -44,29 +44,41 @@
     "copied": "Copied!"
   },
   "charts": {
+    "metricsComparison": {
+      "title": "COVID-19 Situation in Slovenia"
+    },
     "cases": {
-      "title": "Confirmed cases"
-    },
-    "countries": {
-      "title": "Comparison by country"
-    },
-    "ageGroups": {
-      "title": "By age groups"
-    },
-    "map": {
-      "title": "Map of municipalities"
+      "title": "Confirmed Cases"
     },
     "patients": {
-      "title": "Hospitalized"
+      "title": "Hospitalizations"
     },
-    "regions": {
-      "title": "Confirmed cases by regions"
+    "hCenters": {
+      "title": "Healthcare Center Treatment"
     },
     "tests": {
       "title": "Testing"
     },
-    "metricsComparison": {
-      "title": "Status of COVID-19 in Slovenia"
+    "infections": {
+      "title": "Structure of Confirmed Cases"
+    },
+    "spread": {
+      "title": "Daily Confirmed Cases"
+    },
+    "regions": {
+      "title": "Confirmed Cases by Region"
+    },
+    "map": {
+      "title": "Municipality Map"
+    },
+    "municipalities": {
+      "title": "Cases by Municipalities"
+    },
+    "ageGroups": {
+      "title": "Age Groups"
+    },
+    "countries": {
+      "title": "Comparison by Country"
     }
   },
   "footer": {
