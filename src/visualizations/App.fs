@@ -90,7 +90,7 @@ let render (state : State) (_ : Msg -> unit) =
              Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
           { VisualizationType = Ratios;
              ClassName = "ratios-chart";
-             Label = "Delež resnih primerov";
+             Label = I18N.t "charts.ratios.title";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
