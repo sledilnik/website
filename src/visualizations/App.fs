@@ -6,12 +6,12 @@ open Feliz
 
 open Types
 
-let getTranslation lang = 
+let getTranslation lang =
     match lang with
-    | Slovenian -> 
+    | Slovenian ->
         { MetricsComparison = "Stanje COVID-19 v Sloveniji"
           ConfirmedCases = "Potrjeni primeri" }
-    | English -> 
+    | English ->
         { MetricsComparison = "COVID-19 situation in Slovenia"
           ConfirmedCases = "Confirmed cases" }
 

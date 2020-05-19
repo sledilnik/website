@@ -119,7 +119,7 @@ type RenderingMode =
 type Language =
     | Slovenian
     | English
-    
+
 type State =
     { Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>

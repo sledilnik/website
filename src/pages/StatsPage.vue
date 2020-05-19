@@ -32,6 +32,8 @@ import InfoCard from 'components/cards/InfoCard';
 import TimeStamp from 'components/TimeStamp';
 import Notice from 'components/Notice';
 
+import i18n from 'i18n'
+
 import { Visualizations } from 'visualizations/App.fsproj';
 
 export default {
