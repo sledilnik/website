@@ -173,7 +173,21 @@
       "log": "Logaritemska"
     },
     "metricsComparison": {
-      "title": "Stanje COVID-19 v Sloveniji"
+      "title": "Stanje COVID-19 v Sloveniji",
+      "tests": "Testiranja (na dan)",
+      "testsToDate": "Testiranja (skupaj)",
+      "confirmed": "Potrjeno okuženi (na dan)",
+      "confirmedToDate": "Potrjeno okuženi (skupaj)",
+      "active": "Potrjeno okuženi (aktivni)",
+      "recovered": "Preboleli (skupaj)",
+      "hospitalized": "Hospitalizirani (aktivni)",
+      "hospitalizedToDate": "Hospitalizirani (skupaj)",
+      "icu": "V intenzivni enoti (aktivni)",
+      "ventilator": "Na respiratorju (aktivni)",
+      "discharged": "Odpuščeni iz bolnišnice (na dan)",
+      "dischargedToDate": "Odpuščeni iz bolnišnice (skupaj)",
+      "deceased": "Umrli (na dan)",
+      "deceasedToDate": "Umrli (skupaj)"   
     },
     "cases": {
       "title": "Potrjeni primeri"

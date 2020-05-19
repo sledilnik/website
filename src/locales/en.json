@@ -95,7 +95,22 @@
       "log": "Logarithmic"
     },
     "metricsComparison": {
-      "title": "COVID-19 Situation in Slovenia"
+      "title": "COVID-19 Situation in Slovenia",
+      "tests": "Tests",
+      "testsToDate": "Tests (to date)",
+      "confirmed": "Confirmed Cases",
+      "confirmedToDate": "Confirmed Cases (to date)",
+      "active": "Active Cases",
+      "recovered": "Recovered (to date)",
+      "hospitalized": "Hospitalized",
+      "hospitalizedToDate": "Hospitalized (to date)",
+      "icu": "In ICU",
+      "ventilator": "On ventilator",
+      "discharged": "Discharged from hospital",
+      "dischargedToDate": "Discharged from hospital (to date)",
+      "deceased": "Deceased",
+      "deceasedToDate": "Deceased (to date)"   
+
     },
     "cases": {
       "title": "Confirmed Cases"

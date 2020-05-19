@@ -29,29 +29,28 @@ type MetricCfg = {
     Metric: Metric
     Color : string
     Visible : bool
-    Label : string
     Line : Highcharts.DashStyle
-    Class: string
+    Id: string
 }
 
 type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid; Label="Testiranja (na dan)"; Class="cs-tests" }
-        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot; Label="Testiranja (skupaj)"; Class="cs-testsToDate" }
-        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid; Label="Potrjeno okuženi (na dan)"; Class="cs-positiveTests" }
-        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot; Label="Potrjeno okuženi (skupaj)"; Class="cs-positiveTestsToDate" }
-        { Metric=ConfirmedCases;       Color="#d5c768"; Visible=false; Line=Dash; Label="Potrjeno okuženi (aktivni)"; Class="cs-positiveTestsActive" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash; Label="Preboleli (skupaj)"; Class="cs-recoveredToDate" }
-        { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid; Label="Hospitalizirani (aktivni)"; Class="cs-inHospital" }
-        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot; Label="Hospitalizirani (skupaj)"; Class="cs-inHospitalToDate" }
-        { Metric=InICU;                Color="#d99a91"; Visible=true;  Line=Solid; Label="V intenzivni enoti (aktivni)"; Class="cs-inHospitalICU" }
-        { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid; Label="Na respiratorju (aktivni)"; Class="cs-inHospitalVentilator" }
-        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid; Label="Odpuščeni iz bolnišnice (na dan)"; Class="cs-outOfHospital" }
-        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot; Label="Odpuščeni iz bolnišnice (skupaj)"; Class="cs-outOfHospitalToDate" }
-        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid; Label="Umrli (na dan)"; Class="cs-deceased" }
-        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Dot; Label="Umrli (skupaj)"; Class="cs-deceasedToDate" }
+        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid;  Id="tests" }
+        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot;    Id="testsToDate" }
+        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmed" }
+        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot;    Id="confirmedToDate" }
+        { Metric=ConfirmedCases;       Color="#d5c768"; Visible=false; Line=Dash;   Id="active" }
+        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
+        { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
+        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
+        { Metric=InICU;                Color="#d99a91"; Visible=true;  Line=Solid;  Id="icu" }
+        { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid;  Id="ventilator" }
+        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="discharged" }
+        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot;    Id="dischargedToDate" }
+        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid;  Id="deceased" }
+        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Dot;    Id="deceasedToDate" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -109,12 +108,12 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         let mutable startTime = DateTime.Today |> jsTime
         for metric in metrics do
             let pointData = metricDataGenerator metric
+            let label = "charts.metricsComparison." + metric.Id
             yield pojo
                 {|
                     visible = metric.Visible
                     color = metric.Color
-                    name = metric.Label
-                    //className = metric.Class
+                    name = I18N.t label
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
@@ -124,9 +123,6 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                                 startTime <- min startTime ts
                             value.IsNone)
                         |> Seq.toArray
-                    //yAxis = 0 // axis index
-                    //showInLegend = true
-                    //fillOpacity = 0
                 |}
         yield addContainmentMeasuresFlags startTime None |> pojo
     ]
@@ -150,6 +146,8 @@ let renderChartContainer scaleType data metrics =
     ]
 
 let renderMetricSelector (metric : MetricCfg) dispatch =
+    let label = "charts.metricsComparison." + metric.Id
+    let btnLabel = I18N.t label 
     let style =
         if metric.Visible
         then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
@@ -158,7 +156,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
-        prop.text metric.Label ]
+        prop.text btnLabel ]
 
 let renderMetricsSelectors metrics dispatch =
     Html.div [
