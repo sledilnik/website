@@ -84,6 +84,10 @@ export default {
     font-size: 18px;
   }
 
+  p {
+    margin-bottom: 28px;
+  }
+
   p + p {
     margin-top: 14px;
   }
