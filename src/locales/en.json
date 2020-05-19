@@ -90,6 +90,7 @@
   "charts": {
     "common": {
       "loading": "Loading data...",
+      "loading": "Loading data…",
       "y-axis": "Y axis:",
       "linear": "Linear",
       "log": "Logarithmic"
