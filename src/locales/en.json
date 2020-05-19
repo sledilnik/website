@@ -18,12 +18,18 @@
     "updated": "Updated {{ date, MMMM Do YYYY }}",
     "at": "at {{ date, HH:mm }}"
   },
+  "notice": {
+    "news001": "Nov graf:",
+    "news002": "prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti."
+  },
   "infocard": {
     "confirmedToDate": "Confirmed Cases",
     "recoveredToDate": "Recovered",
     "inHospital": "Hospitalized",
     "icu": "In ICU",
-    "deceasedToDate": "Deceased"
+    "deceasedToDate": "Deceased",
+    "accordingTo": "According to {{ date, MMMM Do }}",
+    "lastUpdated": "{{ date, MMMM Do }}"
   },
   "tables": {
     "title": "Table",
@@ -33,7 +39,7 @@
     "tabByAgeFemale": "By age - Female",
     "source": "Data source in other formats",
     "sourceLink": "GDocs spreadsheet, CSV format or REST API",
-    "day": "{{ date, M.D }}"
+    "day": "{{ date, M/D }}"
   },
   "embedMaker": {
     "title": "Embed a chart into your web page",
@@ -109,8 +115,7 @@
       "discharged": "Discharged from hospital",
       "dischargedToDate": "Discharged from hospital (to date)",
       "deceased": "Deceased",
-      "deceasedToDate": "Deceased (to date)"   
-
+      "deceasedToDate": "Deceased (to date)"
     },
     "cases": {
       "title": "Confirmed Cases"

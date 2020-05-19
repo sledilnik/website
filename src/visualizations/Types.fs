@@ -116,10 +116,6 @@ type RenderingMode =
     | Normal
     | Embedded of VisualizationType option
 
-type Language =
-    | Slovenian
-    | English
-
 type State =
     { Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
