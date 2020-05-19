@@ -73,8 +73,13 @@
       "description": "end of epidemic"
     }
   },
-
   "charts": {
+    "common": {
+      "loading": "Loading data...",
+      "y-axis": "Y axis:",
+      "linear": "Linear",
+      "log": "Logarithmic"
+    },
     "metricsComparison": {
       "title": "COVID-19 Situation in Slovenia"
     },

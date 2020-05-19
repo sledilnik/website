@@ -74,6 +74,12 @@
     }
   },
   "charts": {
+    "common": {
+      "loading": "Nalagam podatke...",
+      "y-axis": "Y os:",
+      "linear": "Linearna",
+      "log": "Logaritemska"
+    },
     "metricsComparison": {
       "title": "Stanje COVID-19 v Sloveniji"
     },

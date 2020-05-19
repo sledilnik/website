@@ -1,4 +1,3 @@
-
 [<RequireQualifiedAccess>]
 module Utils
 
@@ -67,12 +66,15 @@ let renderScaleSelector scaleType dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
 
+    let yLabel = I18N.t "charts.common.y-axis"
+    let linearLabel = I18N.t "charts.common.linear"
+    let logLabel = I18N.t "charts.common.log"
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Y os: "
-            renderSelector Linear scaleType "Linearna"
-            renderSelector Logarithmic scaleType "Logaritemska"
+            Html.text yLabel
+            renderSelector Linear scaleType linearLabel
+            renderSelector Logarithmic scaleType logLabel
         ]
     ]
 
@@ -90,9 +92,10 @@ let renderChartTopControlRight (topControl: ReactElement) =
     ]
 
 let renderLoading =
+    let loadingLabel = I18N.t "charts.common.loading"
     Html.div [
         prop.className "loader"
-        prop.text "Nalagam podatke..."
+        prop.text loadingLabel 
     ]
 
 let renderErrorLoading (error : string) =
