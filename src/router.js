@@ -61,6 +61,34 @@ function mdContentRoutes() {
 
 const routes = [
   {
+    path: '/tables',
+    redirect: `/${i18next.language}/tables`,
+  },
+  {
+    path: '/models',
+    redirect: `/${i18next.language}/models`,
+  },
+  {
+    path: '/faq',
+    redirect: `/${i18next.language}/faq`,
+  },
+  {
+    path: '/about',
+    redirect: `/${i18next.language}/about`,
+  },
+  {
+    path: '/sources',
+    redirect: `/${i18next.language}/sources`,
+  },
+  {
+    path: '/links',
+    redirect: `/${i18next.language}/links`,
+  },
+  {
+    path: '/data',
+    redirect: `/${i18next.language}/data`,
+  },
+  {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
@@ -82,22 +110,18 @@ const routes = [
       {
         path: 'stats',
         component: StatsPage,
-        props: true,
       },
       {
         path: 'data',
         component: DataPage,
-        props: true,
       },
       {
         path: 'tables',
         component: TablesPage,
-        props: true,
       },
       {
         path: 'embed',
         component: EmbedMakerPage,
-        props: true,
       },
       ...mdContentRoutes(),
     ],
