@@ -61,6 +61,10 @@ function mdContentRoutes() {
 
 const routes = [
   {
+    path: '/stats',
+    redirect: `/${i18next.language}/stats`,
+  },
+  {
     path: '/tables',
     redirect: `/${i18next.language}/tables`,
   },
@@ -77,6 +81,14 @@ const routes = [
     redirect: `/${i18next.language}/about`,
   },
   {
+    path: '/about/en',
+    redirect: `/en/about`,
+  },
+  {
+    path: '/team',
+    redirect: `/${i18next.language}/team`,
+  },
+  {
     path: '/sources',
     redirect: `/${i18next.language}/sources`,
   },
@@ -87,6 +99,14 @@ const routes = [
   {
     path: '/data',
     redirect: `/${i18next.language}/data`,
+  },
+  {
+    path: '/embed',
+    redirect: `/${i18next.language}/embed`,
+  },
+  {
+    path: '/datasources',
+    redirect: `/${i18next.language}/datasources`,
   },
   {
     path: '/:lang',
