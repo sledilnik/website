@@ -40,6 +40,7 @@
     "chooseChart": "Choose a chart",
     "preview": "Preview:",
     "embedCode": "Embed code:",
+    "description": "Specific view can be adopted to your needs.  You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
     "copy": "Copy",
     "copied": "Copied!"
   },
