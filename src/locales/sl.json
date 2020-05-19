@@ -8,11 +8,22 @@
     "team": "Ekipa",
     "sources": "Viri",
     "links": "Povezave",
-    "github": "GitHub"
+    "github": "GitHub",
+    "language": {
+      "slovenian": "Slovensko",
+      "english": "Angleško"
+    }
   },
   "timestamp": {
     "updated": "Osveženo {{ date, D. MMMM YYYY }}",
     "at": "ob {{ date, HH.mm }}"
+  },
+  "infocard": {
+    "confirmedToDate": "Potrjeno okuženi",
+    "recoveredToDate": "Preboleli",
+    "inHospital": "Hospitalizirani",
+    "icu": "V intenzivni enoti",
+    "deceasedToDate": "Umrli"
   },
   "tables": {
     "title": "Tabela",
@@ -21,7 +32,8 @@
     "tabByAgeMale": "Po starosti - Moški",
     "tabByAgeFemale": "Po starosti - Ženske",
     "source": "Viri podatkov in druge oblike",
-    "sourceLink": "GDocs preglednica, CSV oblika ali REST API"
+    "sourceLink": "GDocs preglednica, CSV oblika ali REST API",
+    "day": "{{ date, D.M. }}"
   },
   "embedMaker": {
     "title": "Vgradite graf v vašo spletno stran",
@@ -69,5 +81,8 @@
     "countries": {
       "title": "Primerjava po državah"
     }
+  },
+  "footer": {
+    "copyright": "© 2020 Sledilnik.org"
   }
 }

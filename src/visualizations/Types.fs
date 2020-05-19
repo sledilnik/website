@@ -124,8 +124,7 @@ type State =
     { Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
-      RenderingMode : RenderingMode
-      Language: Language }
+      RenderingMode : RenderingMode }
 
 type Visualization = {
     VisualizationType: VisualizationType
@@ -141,6 +140,3 @@ type Msg =
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
 
-type Translations =
-    { MetricsComparison: string
-      ConfirmedCases: string }

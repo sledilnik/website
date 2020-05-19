@@ -5,8 +5,8 @@ import _ from 'lodash'
 
 import axios from 'axios'
 import tableDict from './tableDict.json'
-import { format } from 'date-fns'
-import { sl } from 'date-fns/locale';
+import i18next from 'i18next'
+import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -311,9 +311,7 @@ function processTableData(data) {
     newData[' '] = tableDict[dimension]
 
     data.slice().reverse().forEach((day, i) => {
-      let date = format(day.date, 'E d.M.', {
-        locale: sl
-      });
+      let date = i18next.t('tables.day', { date: new Date(day.date) })
       newData[date] = day[dimension]
     })
     return newData

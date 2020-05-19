@@ -8,8 +8,6 @@ import sl from './locales/sl.json'
 
 Vue.use(VueI18Next)
 
-moment.locale('sl')
-
 const detectionOptions = {
   order: [
     'path',
@@ -33,7 +31,7 @@ i18next.use(LanguageDetector).init({
   },
   detection: detectionOptions,
   interpolation: {
-    format: function(value, format, lng) {
+    format: function (value, format, lng) {
       if (value instanceof Date) {
         return moment(value).format(format)
       }

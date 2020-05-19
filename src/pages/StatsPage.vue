@@ -8,11 +8,11 @@
         </b-col>
       </b-row>
       <div class="cards-wrapper latest-data-boxes">
-        <Info-card title="Potrjeno okuženi" field="cases.confirmed.todate" series-type="state" />
-        <Info-card title="Preboleli" field="cases.recovered.todate" good-trend="up" series-type="state" />
-        <Info-card title="Hospitalizirani" field="state.in_hospital" series-type="state" />
-        <Info-card title="V intenzivni enoti" field="state.icu" series-type="state" />
-        <Info-card title="Umrli" field="state.deceased.todate" series-type="state" />
+        <Info-card :title="$t('infocard.confirmedToDate')" field="cases.confirmed.todate" series-type="state" />
+        <Info-card :title="$t('infocard.recoveredToDate')" field="cases.recovered.todate" good-trend="up" series-type="state" />
+        <Info-card :title="$t('infocard.inHospital')" field="state.in_hospital" series-type="state" />
+        <Info-card :title="$t('infocard.icu')" field="state.icu" series-type="state" />
+        <Info-card :title="$t('infocard.deceasedToDate')" field="state.deceased.todate" series-type="state" />
       </div>
       <b-row cols="12">
         <b-col>
@@ -31,8 +31,6 @@ import { mapState } from 'vuex';
 import InfoCard from 'components/cards/InfoCard';
 import TimeStamp from 'components/TimeStamp';
 import Notice from 'components/Notice';
-
-import i18n from 'i18n'
 
 import { Visualizations } from 'visualizations/App.fsproj';
 
@@ -61,7 +59,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations('visualizations', this.$route.query, this.$route.path.slice(1, 3));
+      Visualizations('visualizations', this.$route.query);
     });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)

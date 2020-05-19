@@ -8,11 +8,22 @@
     "team": "Team",
     "sources": "Sources",
     "links": "Links",
-    "github": "GitHub"
+    "github": "GitHub",
+    "language": {
+      "slovenian": "Slovenian",
+      "english": "English"
+    }
   },
   "timestamp": {
     "updated": "Updated {{ date, MMMM Do YYYY }}",
     "at": "at {{ date, HH:mm }}"
+  },
+  "infocard": {
+    "confirmedToDate": "Confirmed",
+    "recoveredToDate": "Recovered",
+    "inHospital": "Hospitalized",
+    "icu": "V intenzivni enoti",
+    "deceasedToDate": "Deceased"
   },
   "tables": {
     "title": "Table",
@@ -21,7 +32,8 @@
     "tabByAgeMale": "By age - Male",
     "tabByAgeFemale": "By age - Female",
     "source": "Data source in other formats",
-    "sourceLink": "GDocs spreadsheet, CSV format or REST API"
+    "sourceLink": "GDocs spreadsheet, CSV format or REST API",
+    "day": "{{ date, M.D }}"
   },
   "embedMaker": {
     "title": "Embed a chart into your web page",
@@ -56,5 +68,8 @@
     "metricsComparison": {
       "title": "Status of COVID-19 in Slovenia"
     }
+  },
+  "footer": {
+    "copyright": "© 2020 Sledilnik.org"
   }
 }

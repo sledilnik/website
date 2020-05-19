@@ -63,7 +63,7 @@ Our data is also freely avaliable and hence used by some other portals and proje
 
 ## Lend a helping hand – to us, yourself and others
 
-The project was initiated by[ Luka Renko](https://twitter.com/LukaRenko) who began collecting data in the begining of COVID-19 epidemiy and has grown steadily into a team of 20 to 45 volunteers and active participants due to increasing need for data input and verification, as well as programming. It is a crowdsourcing project, supported by massive voluntary participation, where everyone can contribute with their resources or data to the best of their ability. Join in and lend a helping hand.
+The project was initiated by [Luka Renko](https://twitter.com/LukaRenko) who began collecting data in the begining of COVID-19 epidemiy and has grown steadily into a team of 20 to 45 volunteers and active participants due to increasing need for data input and verification, as well as programming. It is a crowdsourcing project, supported by massive voluntary participation, where everyone can contribute with their resources or data to the best of their ability. Join in and lend a helping hand.
 
 ## Terms of use
 

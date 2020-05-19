@@ -6,16 +6,7 @@ open Feliz
 
 open Types
 
-let getTranslation lang =
-    match lang with
-    | Slovenian ->
-        { MetricsComparison = "Stanje COVID-19 v Sloveniji"
-          ConfirmedCases = "Potrjeni primeri" }
-    | English ->
-        { MetricsComparison = "COVID-19 situation in Slovenia"
-          ConfirmedCases = "Confirmed cases" }
-
-let init (query : obj) (visualization : string option) (language : string) =
+let init (query : obj) (visualization : string option) =
     let inner () =
         let renderingMode =
             match visualization with
@@ -43,12 +34,7 @@ let init (query : obj) (visualization : string option) (language : string) =
             { Query = query
               StatsData = NotAsked
               RegionsData = NotAsked
-              RenderingMode = renderingMode
-              Language =
-                match language with
-                    | "sl" -> Slovenian
-                    | "en" -> English
-                    | _ -> Slovenian }
+              RenderingMode = renderingMode }
 
         initialState, Cmd.batch [Cmd.ofMsg StatsDataRequested ; Cmd.ofMsg RegionsDataRequest ]
     inner
@@ -71,7 +57,6 @@ let update (msg: Msg) (state: State) =
 open Elmish.React
 
 let render (state : State) (_ : Msg -> unit) =
-    let i18n = getTranslation state.Language
     let allVisualizations: Visualization list =
         [ { VisualizationType = Hospitals;
              ClassName = "hospitals-chart";
@@ -80,7 +65,7 @@ let render (state : State) (_ : Msg -> unit) =
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
           { VisualizationType = MetricsComparison;
              ClassName = "metrics-comparison-chart";
-             Label = i18n.MetricsComparison;
+             Label = I18N.t "charts.metricsComparison.title";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -90,7 +75,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
           { VisualizationType = Cases;
              ClassName = "cases-chart";
-             Label = i18n.ConfirmedCases;
+             Label = I18N.t "charts.cases.title";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
