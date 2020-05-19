@@ -54,6 +54,9 @@
     "patients": {
       "title": "Hospitalizations"
     },
+    "ratios": {
+      "title": "Share of Serious Cases"
+    },
     "hCenters": {
       "title": "Healthcare Center Treatment"
     },

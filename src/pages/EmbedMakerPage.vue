@@ -55,7 +55,7 @@ export default {
         },
         "Ratios": {
           value: "Ratios",
-          text: 'Delež resnih primerov',
+          text: this.$t('charts.ratios.title'),
           dimensions: [1140, 720]
         },
         "HCenters": {

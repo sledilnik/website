@@ -54,6 +54,9 @@
     "patients": {
       "title": "Hospitalizirani"
     },
+    "ratios": {
+      "title": "Delež resnih primerov"
+    },
     "hCenters": {
       "title": "Obravnava v ZD"
     },
