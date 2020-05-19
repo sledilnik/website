@@ -1,6 +1,6 @@
 # covid19-web
 
-![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)
+[![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)](https://github.com/sledilnik/website/actions)
 ## Structure
 
 | folder | content |
