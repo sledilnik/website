@@ -372,7 +372,7 @@ export default {
 .router-link {
   position: relative;
   display: block;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.56);
   font-size: 14px;
   line-height: 20px;
   padding: 9px 0;
@@ -420,10 +420,14 @@ export default {
   }
 
   &.router-link-icon {
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+    padding: 0 6px;
+    display: inline-block;
+    margin-top: 16px;
+
     @include nav-break {
-      border: 1px solid rgba(0, 0, 0, 0.13);
-      border-radius: 8px;
-      padding: 0px 6px;
+      margin-top: 0;
     }
 
     span {
@@ -431,9 +435,10 @@ export default {
     }
 
     img {
+      opacity: 0.5;
+      
       @include nav-break {
         display: inline-block;
-        opacity: 0.5;
         width: 18px;
       }
     }

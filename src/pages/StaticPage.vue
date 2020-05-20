@@ -84,8 +84,8 @@ export default {
     font-size: 18px;
   }
 
-  p + p {
-    margin-top: 14px;
+  p:not(:last-of-type) {
+    margin-bottom: 28px;
   }
 
   //subtitle
