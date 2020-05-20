@@ -316,7 +316,6 @@
     "state.deceased.todate": "Umrli (skupaj)",
     "state.in_hospital.todate": "Hospitalizirani (skupaj)",
     "state.out_of_hospital.todate": "Odpuščeni iz bolnišnice (skupaj)",
-    "state.recovered.todate": "Ozdraveli (skupaj)",
     "age.male.todate": "Skupno",
     "age.male.0-4.todate": "0 - 4 leta",
     "age.male.5-14.todate": "5 - 14 let",
