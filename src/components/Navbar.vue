@@ -435,9 +435,10 @@ export default {
     }
 
     img {
+      opacity: 0.5;
+      
       @include nav-break {
         display: inline-block;
-        opacity: 0.5;
         width: 18px;
       }
     }
