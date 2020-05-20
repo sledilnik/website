@@ -39,7 +39,6 @@ i18next.use(LanguageDetector).init({
       return value
     },
   },
-  debug: true,
 })
 
 const i18n = new VueI18Next(i18next)

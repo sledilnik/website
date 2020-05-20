@@ -4,9 +4,7 @@ import * as d3 from "d3";
 import _ from 'lodash'
 
 import axios from 'axios'
-import tableDict from './tableDict.json'
 import i18next from 'i18next'
-import moment from 'moment'
 
 Vue.use(Vuex)
 
@@ -308,7 +306,7 @@ function processTableData(data) {
   const x = Object.keys(_.last(data)).map(dimension => {
     let newData = {}
     newData['dim'] = dimension
-    newData[' '] = tableDict[dimension]
+    newData[' '] = i18next.t('tableDict')[dimension]
 
     data.slice().reverse().forEach((day, i) => {
       let date = i18next.t('tables.day', { date: new Date(day.date), interpolation: { escapeValue: false }})
