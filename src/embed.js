@@ -11,7 +11,7 @@ import store from 'store'
 import '@/main.js'
 import 'style/embed.scss'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter) 
 
 // TODO: fix to work with locales
 const routes = [
