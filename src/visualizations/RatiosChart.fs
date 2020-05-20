@@ -44,7 +44,7 @@ module Ratios =
     let getSeries = function
         | Cases     -> [ HospitalCases; IcuCases; CriticalCases; DeceasedCases ]
         | Hospital  -> [ IcuHospital; CriticalHospital; DeceasedHospital]
-        | Mortality -> [ DeceasedHospitalC; DeceasedIcuC; DeceasedIcuDeceasedTotal; DeceasedHospitalDeceasedTotal; ]
+        | Mortality -> [ DeceasedHospitalDeceasedTotal; DeceasedIcuDeceasedTotal; DeceasedIcuC; DeceasedHospitalC; ]
 
     // color, dash, name
     let getSeriesInfo = function
