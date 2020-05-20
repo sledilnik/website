@@ -4,7 +4,6 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Types.fs" />
-        <Compile Include="I18N.fs" />
         <Compile Include="Highcharts.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Statistics.fs" />

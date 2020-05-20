@@ -11,35 +11,23 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
-      <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
-      <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
-      <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
-      <router-link to="FAQ" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
-      <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
-      <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
-      <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
-      <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
+      <router-link to="stats" class="router-link"><span>Domov</span></router-link>
+      <router-link to="tables" class="router-link"><span>Tabela</span></router-link>
+      <router-link to="models" class="router-link"><span>Modeli</span></router-link>
+      <router-link to="FAQ" class="router-link"><span>FAQ</span></router-link>
+      <router-link to="about" class="router-link"><span>O projektu</span></router-link>
+      <router-link to="team" class="router-link"><span>Ekipa</span></router-link>
+      <router-link to="sources" class="router-link"><span>Viri</span></router-link>
+      <router-link to="links" class="router-link"><span>Povezave</span></router-link>
       <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
-        <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
-        <span>{{ $t("navbar.github") }}</span>
+        <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
+        <span>GitHub</span>
       </a>
-      <div class="router-link">
-        <a href="#"
-           class="router-link-anchor"
-           :class="{ active: $i18n.i18next.language === 'sl' }"
-           @click.prevent="changeLanguage('sl')">SL</a> /
-        <a href="#"
-           class="router-link-anchor"
-           :class="{ active: $i18n.i18next.language === 'en' }"
-           @click.prevent="changeLanguage('en')">EN</a>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   name: 'Navbar',
   props: {
@@ -73,13 +61,6 @@ export default {
       setTimeout(() => {
         this.closingMenu = false;
       }, 650);
-    },
-    changeLanguage(lang) {
-      this.$i18n.i18next.changeLanguage(lang, (err, t) => {
-        if (err) return console.log('something went wrong loading', err);
-        this.$router.push({ name: this.$route.name, params: { lang } });
-        moment.locale(lang);
-      });
     },
   },
   watch: {
@@ -422,14 +403,16 @@ export default {
   }
 
   &.router-link-active {
-    font-weight: 400;
-    color: #000000 !important;
-
     span {
       line-height: 30px;
       display: inline-block;
       box-shadow: inset 0 -10px 0 #fff;
     }
+  }
+
+  &.router-link-active {
+    font-weight: 400;
+    color: #000000 !important;
 
     &:hover {
       color: #000000 !important;
@@ -460,15 +443,6 @@ export default {
       img {
         opacity: 0.75;
       }
-    }
-  }
-
-  &-anchor {
-    color: rgba(0, 0, 0, 0.5);
-    text-decoration: none;
-
-    &.active {
-      font-weight: bold;
     }
   }
 }

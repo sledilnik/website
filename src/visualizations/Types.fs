@@ -135,4 +135,3 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
-

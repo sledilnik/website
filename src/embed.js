@@ -11,7 +11,6 @@ import store from 'store'
 import '@/main.js'
 import 'style/embed.scss'
 
-// TODO: fix to work with locales
 const routes = [
   {
     path: '/tables',

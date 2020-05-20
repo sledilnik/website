@@ -16,9 +16,9 @@ type DisplayType =
 with
     static member all = [ Regular; NsApr20; Total; ]
     static member getName = function
-        | Total -> I18N.t "charts.tests.allTesting"
-        | Regular -> I18N.t "charts.tests.regularTesting"
-        | NsApr20 -> I18N.t "charts.tests.nationalStudyTesting"
+        | Total -> "Skupaj"
+        | Regular -> "Redno"
+        | NsApr20 -> "Raziskava"
 
 type State = {
     data: StatsData
@@ -81,7 +81,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = I18N.t "charts.tests.negativeTests"
+                name = "Negativnih testov"
                 ``type`` = "column"
                 color = "#19aebd"
                 yAxis = 0
@@ -90,7 +90,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = I18N.t "charts.tests.positiveTests"
+                name = "Pozitivnih testov"
                 ``type`` = "column"
                 color = "#d5c768"
                 yAxis = 0
@@ -99,7 +99,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = I18N.t "charts.tests.shareOfPositive"
+                name = "Delež pozitivnih testov (%)"
                 ``type`` = "line"
                 color = "#665191"
                 yAxis = 1

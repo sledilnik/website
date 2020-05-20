@@ -65,7 +65,7 @@ let render (state : State) (_ : Msg -> unit) =
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
           { VisualizationType = MetricsComparison;
              ClassName = "metrics-comparison-chart";
-             Label = I18N.t "charts.metricsComparison.title";
+             Label = "Stanje COVID-19 v Sloveniji";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -75,7 +75,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
           { VisualizationType = Cases;
              ClassName = "cases-chart";
-             Label = I18N.t "charts.cases.title";
+             Label = "Potrjeni primeri";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -85,12 +85,12 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView CasesChart.casesChart {| data = data |} }
           { VisualizationType = Patients;
              ClassName = "patients-chart";
-             Label = I18N.t "charts.patients.title";
+             Label = "Hospitalizirani";
              Explicit = false;
              Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
           { VisualizationType = Ratios;
              ClassName = "ratios-chart";
-             Label = I18N.t "charts.ratios.title";
+             Label = "Delež resnih primerov";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -100,7 +100,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
           { VisualizationType = Tests;
              ClassName = "tests-chart";
-             Label = I18N.t "charts.tests.title";
+             Label = "Testiranje";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -110,12 +110,12 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView TestsChart.testsChart {| data = data |} }
           { VisualizationType = HCenters;
              ClassName = "hcenters-chart";
-             Label = I18N.t "charts.hCenters.title";
+             Label = "Obravnava v ZD";
              Explicit = false;
              Renderer =  fun _ -> lazyView HCentersChart.hCentersChart () }
           { VisualizationType = Infections;
              ClassName = "infections-chart";
-             Label = I18N.t "charts.infections.title";
+             Label = "Struktura potrjeno okuženih";
              Explicit = false;
              Renderer = fun state ->
                match state.StatsData with
@@ -125,7 +125,7 @@ let render (state : State) (_ : Msg -> unit) =
                | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
           { VisualizationType = Spread;
              ClassName = "spread-chart";
-             Label = I18N.t "charts.spread.title";
+             Label = "Prirast potrjeno okuženih";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -135,7 +135,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
           { VisualizationType = Regions;
              ClassName = "regions-chart";
-             Label = I18N.t "charts.regions.title";
+             Label = "Potrjeno okuženi po regijah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
@@ -145,7 +145,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
           { VisualizationType = Map;
              ClassName = "map-chart";
-             Label = I18N.t "charts.map.title";
+             Label = "Zemljevid po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
@@ -155,7 +155,7 @@ let render (state : State) (_ : Msg -> unit) =
                 | Success data -> lazyView Map.mapChart {| data = data |} }
           { VisualizationType = Municipalities;
              ClassName = "municipalities-chart";
-             Label = I18N.t "charts.municipalities.title";
+             Label = "Primeri po občinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.RegionsData with
@@ -168,7 +168,7 @@ let render (state : State) (_ : Msg -> unit) =
                         {| query = state.Query ; data = data |} }
           { VisualizationType = AgeGroups;
              ClassName = "age-groups-chart";
-             Label = I18N.t "charts.ageGroups.title";
+             Label = "Po starostnih skupinah";
              Explicit = false;
              Renderer = fun state ->
                 match state.StatsData with
@@ -179,7 +179,7 @@ let render (state : State) (_ : Msg -> unit) =
                     lazyView AgeGroupsChart.renderChart {| data = data |} }
           { VisualizationType = Countries;
              ClassName = "countries-chart";
-             Label = I18N.t "charts.countries.title";
+             Label = "Primerjava po državah";
              Explicit = false;
              Renderer = fun state ->
                match state.StatsData with

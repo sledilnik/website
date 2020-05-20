@@ -22,8 +22,8 @@ type Breakdown =
   with
     static member all = [ Structure; ByHospital; ]
     static member getName = function
-        | Structure     -> I18N.t "charts.patients.structure"
-        | ByHospital    -> I18N.t "charts.patients.byHospital"
+        | Structure     -> "Struktura"
+        | ByHospital    -> "Po bolnišnicah"
 
 type Series =
     | InHospital
@@ -32,22 +32,34 @@ type Series =
     | InHospitalIn
     | InHospitalOut
     | InHospitalDeceased
+    | AllInHospital
+    | OutOfHospital
+    | Deceased
 
 module Series =
+    let all =
+        [ InHospital; Icu; Critical; InHospitalIn; InHospitalOut; InHospitalDeceased; AllInHospital; OutOfHospital; Deceased; ]
+
     let structure =
         [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; ]
+
+    let bySeries =
+        [ InHospital; Icu; Critical; AllInHospital; OutOfHospital; Deceased; ]
 
     let byHospital =
         [ InHospital; ]
 
-    // color, dash, id
+    // color, dash, name
     let getSeriesInfo = function
-        | InHospital            -> "#de9a5a", Solid, "hospitalized"
-        | Icu                   -> "#d99a91", Solid, "icu"
-        | Critical              -> "#bf5747", Solid, "ventilator"
-        | InHospitalIn          -> "#d5c768", Solid, "admitted"
-        | InHospitalOut         -> "#8cd4b2", Solid, "discharged"
-        | InHospitalDeceased    -> "#666666", Solid, "deceased"
+        | InHospital            -> "#de9a5a", Solid, "cs-inHospital", "Hospitalizirani"
+        | Icu                   -> "#d99a91", Solid, "cs-inHospitalICU", "V intenzivni enoti"
+        | Critical              -> "#bf5747", Solid, "cs-critical", "Na respiratorju"
+        | InHospitalIn          -> "#d5c768", Solid, "cs-inHospitalIn", "Sprejeti"
+        | InHospitalOut         -> "#8cd4b2", Solid, "cs-inHospitalOut", "Odpuščeni"
+        | InHospitalDeceased    -> "#666666", Solid, "cs-inHospitalDeceased", "Umrli"
+        | AllInHospital         -> "#de9a5a", Dot,   "cs-inHospitalToDate", "Hospitalizirani (skupaj)"
+        | OutOfHospital         -> "#20b16d", Dot,   "cs-outOfHospitalToDate", "Odpuščeni iz bolnišnice (skupaj)"
+        | Deceased              -> "#666666", Dot,   "cs-deceasedToDate", "Umrli (skupaj)"
 
 
 type State = {
@@ -97,8 +109,8 @@ type State = {
             error = None
             allSegmentations = [ Totals ]
             activeSegmentations = Set [ Totals ]
-            allSeries = Series.structure
-            activeSeries = Set Series.structure
+            allSeries = Series.all
+            activeSeries = Set Series.all
             breakdown = Structure
         }
         |> State.switchBreakdown Structure
@@ -179,7 +191,7 @@ let renderByHospitalChart (state : State) =
         legend = pojo
             {|
                 enabled = Some true
-                title = {| text=(I18N.t "charts.patients.hospitalizedIn") |}
+                title = {| text="Hospitalizirani v:" |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"
@@ -207,16 +219,16 @@ let renderStructureChart (state : State) =
             match p?point?fmtTotal with
             | "null" -> ()
             | _ ->
-                match p?point?id with
-                | "hospitalized" | "discharged" | "deceased"  -> fmtUnder <- ""
+                match p?series?name with
+                | "Hospitalizirani" | "Odpuščeni" | "Umrli"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
                 fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
                     fmtUnder
                     p?series?color
                     p?series?name
                     p?point?fmtTotal
-                if fmtStr.Length > 0 && p?point?id = "hospitalized" then
-                    fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
+                if fmtStr.Length > 0 && p?series?name = "Hospitalizirani" then
+                    fmtStr <- fmtLine + fmtStr // if we got Sprejeti before, then put it after Hospitalizirani
                 else
                     fmtStr <- fmtStr + fmtLine
         sprintf "<b>%s</b>" fmtDate + fmtStr
@@ -233,6 +245,7 @@ let renderStructureChart (state : State) =
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
             | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital.today |> Utils.zeroToNone
+            | _ -> fun ps -> None
 
         let getPointTotal : (Data.Patients.PatientsStats -> int option) =
             match series with
@@ -242,12 +255,14 @@ let renderStructureChart (state : State) =
             | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
             | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> Utils.zeroToNone
+            | _ -> fun ps -> None
 
-        let color, line, id = Series.getSeriesInfo series
+        let color, line, className, name = Series.getSeriesInfo series
+
         {|
             visible = state.activeSeries |> Set.contains series
             color = color
-            name = I18N.tt "charts.patients" id
+            name = name
             data =
                 state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
@@ -255,7 +270,6 @@ let renderStructureChart (state : State) =
                     {|
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
-                        id = id
                         fmtDate = dp.Date.ToString "d. M. yyyy"
                         fmtTotal = getPointTotal dp |> string
                     |}
@@ -286,11 +300,12 @@ let renderStructureChart (state : State) =
         legend = pojo
             {|
                 enabled = Some true
-                title = {| text="" |}
+                title = {| text=if state.breakdown=ByHospital then "Hospitalizirani v:" else "" |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"
                 borderWidth = 1
+                //labelFormatter = string //fun series -> series.name
                 layout = "vertical"
                 floating = true
                 x = 20
