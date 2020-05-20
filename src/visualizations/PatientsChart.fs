@@ -169,7 +169,6 @@ let renderByHospitalChart (state : State) =
         |}
         |> pojo
 
-    let legendLabel=I18N.t "charts.patients.hospitalizedIn"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
     {| baseOptions with
 
@@ -180,7 +179,7 @@ let renderByHospitalChart (state : State) =
         legend = pojo
             {|
                 enabled = Some true
-                title = {| text=legendLabel |}
+                title = {| text=(I18N.t "charts.patients.hospitalizedIn") |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"
@@ -245,12 +244,10 @@ let renderStructureChart (state : State) =
             | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> Utils.zeroToNone
 
         let color, line, id = Series.getSeriesInfo series
-        let i18n = "charts.patients." + id
-        let name = I18N.t i18n;
         {|
             visible = state.activeSeries |> Set.contains series
             color = color
-            name = name
+            name = I18N.tt "charts.patients" id
             data =
                 state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)

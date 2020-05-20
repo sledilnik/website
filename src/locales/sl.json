@@ -65,11 +65,11 @@
     "12": "december"
   },
   "cm": {
-    "first": {
+    "firstCase": {
       "title": "1. primer",
       "description": "Prvi potrjen primer:<br/>turist iz Maroka"
     },
-    "rh": {
+    "retirementHomes": {
       "title": "DSO",
       "description": "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
     },
@@ -85,7 +85,7 @@
       "title": "Epidemija",
       "description": "Razglašena epidemija, predpisana splošna samoizolacija"
     },
-    "transport": {
+    "publicTransport": {
       "title": "Prevozi",
       "description": "Ukinitev javnih prevozov"
     },
@@ -109,35 +109,35 @@
       "title": "Karantena",
       "description": "Obvezna 7 dnevna karantena pri prihodu iz tujine"
     },
-    "r-vac-homes": {
+    "liftVacationHomes": {
       "title": "Vikendi",
       "description": "Sproščanje: gibanje med občinami (vikendi...), <br/>pojasnila glede splošne prepovedi gibanja"
     },
-    "r-service": {
+    "liftService": {
       "title": "Servisi",
       "description": "Sproščanje: gradnja, servisi, šport na prostem,<br/>dovoljeni nekateri linijski prevozi"
     },
-    "random-tests": {
+    "nationalStudy": {
       "title": "Raziskava",
       "description": "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
     },
-    "r-museums": {
+    "liftMuseums": {
       "title": "Muzeji",
       "description": "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
     },
-    "r-municipality": {
+    "liftMunicipality": {
       "title": "Občine",
       "description": "Sproščanje: gibanje izven meja svoje občine"
     },
-    "r-markets": {
+    "liftFoodMarkets": {
       "title": "Tržnice",
       "description": "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
     },
-    "r-transport": {
+    "liftPublicTransport": {
       "title": "Prevozi",
       "description": "Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
     },
-    "r-quarantine": {
+    "liftQuarantine": {
       "title": "Karantena",
       "description": "Sproščanje: karantena samo za tujce iz tretjih držav"
     }
@@ -174,7 +174,7 @@
   "charts": {
     "common": {
       "loading": "Nalagam podatke…",
-      "y-axis": "Y os:",
+      "yAxis": "Y os:",
       "linear": "Linearna",
       "log": "Logaritemska"
     },
@@ -208,6 +208,7 @@
       "title": "Hospitalizirani",
       "structure": "Struktura",
       "byHospital": "Po bolnišnicah",
+      "hospitalizedIn": "Hospitalizirani v:",
       "admitted": "Sprejeti",
       "hospitalized": "Hospitalizirani",
       "icu": "V intenzivni enoti",
@@ -216,7 +217,21 @@
       "deceased": "Umrli"
     },
     "ratios": {
-      "title": "Delež resnih primerov"
+      "title": "Delež resnih primerov",
+      "seriousCases": "Resni primeri",
+      "hospitalizations": "Hospitalizirani",
+      "mortality": "Smrtnost",
+      "hospitalCases": "Hospitalizirani",
+      "icuCases": "V intenzivni enoti",
+      "ventilatorCases": "Na respiratorju",
+      "deceasedCases": "Umrli",
+      "icuHospital": "V intenzivni enoti",
+      "ventilatorHospital": "Na respiratorju",
+      "deceasedHospital": "Umrli",
+      "hospitalMortality": "Smrtnost v bolnišnici",
+      "icuMortality": "Smrtnost v intenzivni enoti",
+      "icuDeceasedShare": "Delež smrti v intenzivni enoti",
+      "hospitalDeceasedShare": "Delež smrti v bolnišnici"
     },
     "hCenters": {
       "title": "Obravnava v ZD"

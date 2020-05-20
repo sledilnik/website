@@ -8,3 +8,7 @@ type Ii18n =
 let i18n : Ii18n = importDefault "i18n"
 
 let t key = i18n.t key
+
+let tt section id = 
+    let key = section + "." + id
+    t key

@@ -19,15 +19,15 @@
     "at": "at {{ date, HH:mm }}"
   },
   "notice": {
-    "news001": "Nov graf:",
-    "news002": "prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti."
+    "news001": "New chart:",
+    "news002": "share of serious cases, share of hospitalized by department and fatality rate."
   },
   "infocard": {
     "confirmedToDate": "Confirmed Cases",
     "recoveredToDate": "Recovered",
     "inHospital": "Hospitalized",
     "icu": "In ICU",
-    "deceasedToDate": "Deceased",
+    "deceasedToDate": "Confirmed Deaths",
     "accordingTo": "According to {{ date, MMMM Do }}",
     "lastUpdated": "{{ date, MMMM Do }}"
   },
@@ -86,7 +86,7 @@
     },
     "6": {
       "title": "Phase 6",
-      "description": "new testing methodology, random testing"
+      "description": "new testing methodology, study"
     },
     "7": {
       "title": "Phase 7",
@@ -96,7 +96,7 @@
   "charts": {
     "common": {
       "loading": "Loading data…",
-      "y-axis": "Y axis:",
+      "yAxis": "Y axis:",
       "linear": "Linear",
       "log": "Logarithmic"
     },
@@ -114,8 +114,8 @@
       "ventilator": "On Ventilator",
       "discharged": "Discharged from Hospital",
       "dischargedToDate": "Discharged from Hospital (to date)",
-      "deceased": "Deceased",
-      "deceasedToDate": "Deceased (to date)"
+      "deceased": "Confirmed Deaths",
+      "deceasedToDate": "Confirmed Deaths (to date)"
     },
     "cases": {
       "title": "Confirmed Cases",
@@ -124,7 +124,7 @@
       "icu": "In ICU",
       "ventilator": "On Ventilator",
       "recovered": "Recovered",
-      "deceased": "Deceased"
+      "deceased": "Died"
     },
     "patients": {
       "title": "Hospitalizations",
@@ -136,10 +136,24 @@
       "icu": "In ICU",
       "ventilator": "On Ventilator",
       "discharged": "Discharged",
-      "deceased": "Deceased"
+      "deceased": "Died"
     },
     "ratios": {
-      "title": "Share of Serious Cases"
+      "title": "Share of Serious Cases",
+      "seriousCases": "Serious Cases",
+      "hospitalizations": "Hospitalizations",
+      "mortality": "Mortality",
+      "hospitalCases": "Hospitalized",
+      "icuCases": "In ICU",
+      "ventilatorCases": "On Ventilator",
+      "deceasedCases": "Deaths",
+      "icuHospital": "In ICU",
+      "ventilatorHospital": "On Ventilator",
+      "deceasedHospital": "Deaths",
+      "hospitalMortality": "Hospital mortality",
+      "icuMortality": "ICU mortality",
+      "icuDeceasedShare": "Share of ICU deaths",
+      "hospitalDeceasedShare": "Share of hospital deaths"
     },
     "hCenters": {
       "title": "Healthcare Center Treatment"

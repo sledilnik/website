@@ -108,12 +108,11 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         let mutable startTime = DateTime.Today |> jsTime
         for metric in metrics do
             let pointData = metricDataGenerator metric
-            let label = "charts.metricsComparison." + metric.Id
             yield pojo
                 {|
                     visible = metric.Visible
                     color = metric.Color
-                    name = I18N.t label
+                    name = I18N.tt "charts.metricsComparison" metric.Id
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
                         data
@@ -146,8 +145,6 @@ let renderChartContainer scaleType data metrics =
     ]
 
 let renderMetricSelector (metric : MetricCfg) dispatch =
-    let label = "charts.metricsComparison." + metric.Id
-    let btnLabel = I18N.t label 
     let style =
         if metric.Visible
         then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
@@ -156,7 +153,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
-        prop.text btnLabel ]
+        prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 
 let renderMetricsSelectors metrics dispatch =
     Html.div [

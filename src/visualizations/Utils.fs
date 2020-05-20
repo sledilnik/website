@@ -66,7 +66,7 @@ let renderScaleSelector scaleType dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
 
-    let yLabel = I18N.t "charts.common.y-axis"
+    let yLabel = I18N.t "charts.common.yAxis"
     let linearLabel = I18N.t "charts.common.linear"
     let logLabel = I18N.t "charts.common.log"
     Html.div [

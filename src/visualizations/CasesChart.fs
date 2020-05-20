@@ -107,12 +107,10 @@ let renderChartOptions (state : State) =
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
         let color, id = Series.getSeriesInfo series
-        let i18n = "charts.cases." + id
-        let name = I18N.t i18n;
         {|
             ``type`` = "column"
             color = color
-            name = name
+            name = I18N.tt "charts.cases" id
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
