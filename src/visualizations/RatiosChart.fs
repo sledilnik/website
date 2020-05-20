@@ -99,12 +99,12 @@ let renderRatiosChart (state : State) =
     let startDate = DateTime(2020,03,10)
 
     let renderRatiosH ratio =
-        let percent (a : int option) (b : int option) = 
+        let percent (a : int option) (b : int option) =
             match a with
             | None | Some 0 -> None
             | _ ->  Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
 
-        let cases (date : DateTime) = 
+        let cases (date : DateTime) =
             match state.casesMap.TryFind date with
             | None -> None
             | Some i -> i
@@ -117,11 +117,11 @@ let renderRatiosChart (state : State) =
             | DeceasedCases                 -> fun ps -> ps.JsDate12h, percent ps.total.deceased.toDate (cases ps.Date)
             | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
             | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
-            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate 
+            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate 
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
+            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate
 
         let color, line, id = Ratios.getSeriesInfo ratio
         {|
@@ -137,7 +137,7 @@ let renderRatiosChart (state : State) =
         |}
         |> pojo
 
-        
+
     let maxValue = if state.displayType = Mortality then Some 100 else None
     let className = DisplayType.getClassName state.displayType
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
@@ -153,12 +153,12 @@ let renderRatiosChart (state : State) =
             {|
                 spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
-        yAxis = baseOptions.yAxis 
+        yAxis = baseOptions.yAxis
             |> Array.map (fun ax -> {| ax with max = maxValue ; labels = pojo {| format = "{value}%" |} |} )
 
-        series = [| 
-            for ratio in Ratios.getSeries(state.displayType) do 
-            yield renderRatiosH ratio 
+        series = [|
+            for ratio in Ratios.getSeries(state.displayType) do
+            yield renderRatiosH ratio
         |]
 
         tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = @"%A, %e. %B %Y" |}
@@ -170,7 +170,7 @@ let renderChartContainer state =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
+        prop.children [ renderRatiosChart state  |> Highcharts.chart ]
     ]
 
 let renderDisplaySelector state dt dispatch =

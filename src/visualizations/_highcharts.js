@@ -13,34 +13,32 @@ import HighchartsReact from 'highcharts-react-official';
 //require("highcharts/css/highcharts.scss");
 require("./_highcharts.scss");
 
+import i18n from "../i18n"
+
 window.Highcharts = window.Highcharts || Highcharts;
 
 Highcharts.lo
 
-Highcharts.setOptions({
-	global: {
-		useUTC: false // true by default
-    },
-    lang: {
-        loading: 'Nalagam...',
-        months: ['januar', 'februar', 'marec', 'april', 'maj', 'junij', 'julij', 'avgust', 'setember', 'oktober', 'november', 'december'],
-        weekdays: ['Nedelja','Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota'],
-        shortMonths: ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'],
-        //exportButtonTitle: "Exportar",
-        //printButtonTitle: "Imprimir",
-        rangeSelectorFrom: "Od",
-        rangeSelectorTo: "do",
-        rangeSelectorZoom: "Obdobje",
-        //downloadPNG: 'Download imagem PNG',
-        //downloadJPEG: 'Download imagem JPEG',
-        //downloadPDF: 'Download documento PDF',
-        //downloadSVG: 'Download imagem SVG'
-        resetZoom: "Ponastavi skalo",
-        resetZoomTitle: "Prikaži celotno časovno obdobje",
-        thousandsSep: ".",
-        decimalPoint: ','
-    }
-});
+function setHighchartsOptions (highcharts) {
+    highcharts.setOptions({
+        global: {
+            useUTC: false
+        },
+        lang: {
+            loading: 'Nalagam...',
+            months: i18n.t("month"),
+            shortMonths: i18n.t("shortMonth"),
+            weekdays: ['Nedelja','Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota'],
+            rangeSelectorFrom: "Od",
+            rangeSelectorTo: "do",
+            rangeSelectorZoom: "Obdobje",
+            resetZoom: "Ponastavi skalo",
+            resetZoomTitle: "Prikaži celotno časovno obdobje",
+            thousandsSep: ".",
+            decimalPoint: ','
+        }
+    });
+};
 
 (function(H) {
   H.Legend.prototype.setItemEvents = function(item, legendItem, useHTML) {
@@ -242,7 +240,6 @@ function loadScript(src, onLoad) {
     head.appendChild(script);
 }
 
-
 /// workaround to replace labelFormatter with labelFormatter(this)
 function wrapLabelFormatterWithThis({legend, ...options}) {
     if (!!legend) {
@@ -260,6 +257,7 @@ function wrapLabelFormatterWithThis({legend, ...options}) {
 
 function renderChart(options) {
   options = wrapLabelFormatterWithThis(options);
+  setHighchartsOptions(Highcharts);
   return React.createElement(HighchartsReact, {
     highcharts: Highcharts,
     containerProps: {style: {height:"100%"}},
@@ -269,6 +267,7 @@ function renderChart(options) {
 
 function renderChartFromWindow(options) {
   options = wrapLabelFormatterWithThis(options);
+  setHighchartsOptions(window.Highcharts);
   return React.createElement(HighchartsReact, {
     containerProps: {style: {height:"100%"}},
     options: {...options},
@@ -277,6 +276,7 @@ function renderChartFromWindow(options) {
 
 function renderMap(options) {
     options = wrapLabelFormatterWithThis(options);
+    setHighchartsOptions(Highcharts);
     return React.createElement(HighchartsReact, {
         highcharts: Highcharts,
         constructorType: "mapChart",
