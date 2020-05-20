@@ -19,9 +19,9 @@ type DisplayType =
   with
     static member all = [ Cases; Hospital; Mortality ]
     static member getName = function
-        | Cases     -> "Resni primeri"
-        | Hospital  -> "Hospitalizirani"
-        | Mortality -> "Smrtnost"
+        | Cases     -> I18N.t "charts.ratios.seriousCases"
+        | Hospital  -> I18N.t "charts.ratios.hospitalizations"
+        | Mortality -> I18N.t "charts.ratios.mortality"
     static member getClassName = function
         | Cases     -> "covid19-ratios-cases"
         | Hospital  -> "covid19-ratios-hospital"
@@ -46,20 +46,19 @@ module Ratios =
         | Hospital  -> [ IcuHospital; CriticalHospital; DeceasedHospital]
         | Mortality -> [ DeceasedHospitalC; DeceasedIcuC; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
 
-    // color, dash, name
+    // color, dash, id
     let getSeriesInfo = function
-        | HospitalCases                 -> "#de9a5a", Solid,    "Hospitalizirirani"
-        | IcuCases                      -> "#d99a91", Solid,    "V intenzivni enoti"
-        | CriticalCases                 -> "#bf5747", Solid,    "Na respiratorju"
-        | DeceasedCases                 -> "#666666", Dot,      "Umrli"
-        | IcuHospital                   -> "#d99a91", Solid,    "V intenzivni enoti"
-        | CriticalHospital              -> "#bf5747", Solid,    "Na repiratorju"
-        | DeceasedHospital              -> "#666666", Dot,      "Umrli"
-        | DeceasedHospitalC             -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
-        | DeceasedIcuC                  -> "#d99a91", Dot,      "Smrtnost v intenzivni enoti"
-        | DeceasedIcuDeceasedHospital   -> "#d99a91", Solid,    "Delež smrti v intenzivni enoti"
-        | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "Delež smrti v bolnišnici"
-
+        | HospitalCases                 -> "#de9a5a", Solid,    "hospitalCases"
+        | IcuCases                      -> "#d99a91", Solid,    "icuCases"
+        | CriticalCases                 -> "#bf5747", Solid,    "ventilatorCases"
+        | DeceasedCases                 -> "#666666", Dot,      "deceasedCases"
+        | IcuHospital                   -> "#d99a91", Solid,    "icuHospital"
+        | CriticalHospital              -> "#bf5747", Solid,    "ventilatorHospital"
+        | DeceasedHospital              -> "#666666", Dot,      "deceasedHospital"
+        | DeceasedHospitalC             -> "#de9a5a", Dot,      "hospitalMortality"
+        | DeceasedIcuC                  -> "#d99a91", Dot,      "icuMortality"
+        | DeceasedIcuDeceasedHospital   -> "#d99a91", Solid,    "icuDeceasedShare"
+        | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "hospitalDeceasedShare"
 
 type State = {
     casesMap: Map<DateTime, int option>
@@ -124,13 +123,12 @@ let renderRatiosChart (state : State) =
             | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate 
             | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
 
-        let color, line, name = Ratios.getSeriesInfo ratio
-
+        let color, line, id = Ratios.getSeriesInfo ratio
         {|
             visible = true
             color = color
             dashStyle = line |> DashStyle.toString
-            name = name
+            name = I18N.tt "charts.ratios" id
             data =
                 state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate || dp.total.inHospital.toDate.IsNone)

@@ -5,13 +5,12 @@
       <span class="card-number">{{ renderValues.lastDay.value }}</span>
       <div :id="elementId" class="card-diff" :class="diffClass">
         <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
-        <b-tooltip :target="elementId" triggers="hover"
-          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }} <span v-if="renderValues.dayBefore.diff">[{{
-            renderValues.dayBefore.diff | prefixDiff
-          }}]</span></b-tooltip
-        >
+        <b-tooltip :target="elementId" triggers="hover">
+          {{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
+          <span v-if="renderValues.dayBefore.diff">[{{renderValues.dayBefore.diff | prefixDiff}}]</span>
+        </b-tooltip>
       </div>
-      <div class="data-time">{{ renderValues.lastDay.displayDate | formatDate('d. MMMM') }}</div>
+      <div class="data-time">{{ $t("infocard.lastUpdated", { date: new Date(renderValues.lastDay.displayDate) }) }}</div>
     </div>
     <div class="hp-card" v-else>
       <span class="card-title">{{ title }}</span>
