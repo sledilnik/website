@@ -9,17 +9,6 @@ Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta ob
 
 Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
 
-## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
-Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala [spletni pogovor](https://stat-d.si/2020/04/17/4-srecanje-mlade-sekcije-modeliranje-in-statisticni-vidiki-covid-19-v-sloveniji/), ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. [STA](https://vzivo.sta.si/) je dogodek [prenašala v živo](https://youtu.be/ZzIbNxvGdo8?t=117) več kot 850 udeležencem.
-
-Na dogodku so sodelovali:
- - dr. Aleks Jakulin: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=544), [predstavitev](/docs/sledilnik-aleks-jakulin.pdf);
- - dr. Žiga Zaplotnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=1526), [predstavitev](/docs/korona_model_ZZ.pdf);
- - prof. dr. Janez Žibert: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=3041), [predstavitev](/docs/modelSEIR_jz.pdf);
- - prof. dr. Maja Pohar Perme: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=4485); [predstavitev](/docs/predst-mpp.pdf);
- - doc. dr. Tomaž Štupnik: [posnetek](https://youtu.be/ZzIbNxvGdo8?t=5964).
-
-
 ## Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
 V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v tem delovnem dokumentu](https://nextcloud.fmf.uni-lj.si/s/AdNLwYoA4JyKFBG), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
 
@@ -44,6 +33,9 @@ Podrobnejši opis metodologije in izsledkov je objavljen kot [članek v Zdravni�
 <a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
 <img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
 
+
+## Drugi modeli za Slovenijo
+- ## Drugi modeli za Slovenijo
 
 
 ## Drugi modeli za Slovenijo
