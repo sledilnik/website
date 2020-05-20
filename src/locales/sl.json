@@ -199,7 +199,9 @@
       "loading": "Nalagam podatke…",
       "yAxis": "Y os:",
       "linear": "Linearna",
-      "log": "Logaritemska"
+      "log": "Logaritemska",
+      "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
+      "linkFaq": "FAQ"
     },
     "metricsComparison": {
       "title": "Stanje COVID-19 v Sloveniji",
@@ -257,7 +259,13 @@
       "hospitalDeceasedShare": "Delež smrti v bolnišnici"
     },
     "hCenters": {
-      "title": "Obravnava v ZD"
+      "title": "Obravnava v ZD",
+      "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
+      "suspectedCovidExamination": "Sum COVID-19 (pregled)",
+      "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",
+      "sentToSelfIsolation": "Napotitev v samoizolacijo",
+      "testsPerformed": "Test (opravljenih)",
+      "testsPositive": "Test (pozitivnih*)"
     },
     "tests": {
       "title": "Testiranje",

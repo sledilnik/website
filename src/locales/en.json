@@ -121,7 +121,9 @@
       "loading": "Loading data…",
       "yAxis": "Y axis:",
       "linear": "Linear",
-      "log": "Logarithmic"
+      "log": "Logarithmic",
+      "noteFaq": "Note: limitation of presented data is described in ",
+      "linkFaq": "FAQ"
     },
     "metricsComparison": {
       "title": "COVID-19 Situation in Slovenia",
@@ -179,7 +181,13 @@
       "hospitalDeceasedShare": "Share of hospital deaths"
     },
     "hCenters": {
-      "title": "Healthcare Center Treatment"
+      "title": "Healthcare Center Treatment",
+      "emergencyExamination": "Emergency Examinations",
+      "suspectedCovidExamination": "Suspected COVID-19 (examination)",
+      "suspectedCovidPhone": "Suspected COVID-19 (phone)",
+      "sentToSelfIsolation": "Sent to Self-Isolation",
+      "testsPerformed": "Tests (performed)",
+      "testsPositive": "Tests (positive*)"
     },
     "tests": {
       "title": "Testing",
