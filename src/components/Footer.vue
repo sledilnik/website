@@ -2,7 +2,7 @@
   <footer>
     <div class="content-wrapper">
       <div class="copy">
-        <span>© 2020 Sledilnik.org</span>
+        <span>{{ $t('footer.copyright') }}</span>
       </div>
       <div class="email">
         <a href="mailto:info@sledilnik.org">

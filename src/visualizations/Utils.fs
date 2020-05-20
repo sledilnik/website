@@ -1,4 +1,3 @@
-
 [<RequireQualifiedAccess>]
 module Utils
 
@@ -67,12 +66,15 @@ let renderScaleSelector scaleType dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
 
+    let yLabel = I18N.t "charts.common.yAxis"
+    let linearLabel = I18N.t "charts.common.linear"
+    let logLabel = I18N.t "charts.common.log"
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Y os: "
-            renderSelector Linear scaleType "Linearna"
-            renderSelector Logarithmic scaleType "Logaritemska"
+            Html.text yLabel
+            renderSelector Linear scaleType linearLabel
+            renderSelector Logarithmic scaleType logLabel
         ]
     ]
 
@@ -90,9 +92,10 @@ let renderChartTopControlRight (topControl: ReactElement) =
     ]
 
 let renderLoading =
+    let loadingLabel = I18N.t "charts.common.loading"
     Html.div [
         prop.className "loader"
-        prop.text "Nalagam podatke..."
+        prop.text loadingLabel 
     ]
 
 let renderErrorLoading (error : string) =
@@ -100,18 +103,18 @@ let renderErrorLoading (error : string) =
 
 let monthNameOfdate (date : System.DateTime) =
     match date.Month with
-    | 1 -> "januar"
-    | 2 -> "februar"
-    | 3 -> "marec"
-    | 4 -> "april"
-    | 5 -> "maj"
-    | 6 -> "junij"
-    | 7 -> "julij"
-    | 8 -> "avgust"
-    | 9 -> "september"
-    | 10 -> "oktober"
-    | 11 -> "november"
-    | 12 -> "december"
+    | 1 -> I18N.t "month.1"
+    | 2 -> I18N.t "month.2"
+    | 3 -> I18N.t "month.3"
+    | 4 -> I18N.t "month.4"
+    | 5 -> I18N.t "month.5"
+    | 6 -> I18N.t "month.6"
+    | 7 -> I18N.t "month.7"
+    | 8 -> I18N.t "month.8"
+    | 9 -> I18N.t "month.9"
+    | 10 -> I18N.t "month.10"
+    | 11 -> I18N.t "month.11"
+    | 12 -> I18N.t "month.12"
     | _ -> failwith "Invalid month"
 
 let daysMestnik days =
