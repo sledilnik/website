@@ -237,7 +237,13 @@
       "title": "Obravnava v ZD"
     },
     "tests": {
-      "title": "Testiranje"
+      "title": "Testiranje",
+      "allTesting": "Skupaj",
+      "regularTesting": "Redno",
+      "nationalStudyTesting": "Raziskava",
+      "negativeTests": "Negativnih testov",
+      "positiveTests": "Pozitivnih testov",
+      "shareOfPositive": "Delež pozitivnih testov (%)"
     },
     "infections": {
       "title": "Struktura potrjeno okuženih"

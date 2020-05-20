@@ -159,7 +159,14 @@
       "title": "Healthcare Center Treatment"
     },
     "tests": {
-      "title": "Testing"
+      "title": "Testing",
+      "allTesting": "All",
+      "regularTesting": "Regular",
+      "nationalStudyTesting": "Study",
+      "negativeTests": "Negative Tests",
+      "positiveTests": "Positive Tests",
+      "shareOfPositive": "Share of Positive Tests (%)"
+
     },
     "infections": {
       "title": "Structure of Confirmed Cases"
