@@ -1,7 +1,7 @@
 # covid19-web
 
 [![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)](https://github.com/sledilnik/website/actions)
-[![Translation status](https://hosted.weblate.org/widgets/covid-19-sledilnik-org/-/website/svg-badge.svg)](https://hosted.weblate.org/engage/covid-19-sledilnik-org/?utm_source=widget)
+[![Translation status](https://hosted.weblate.org/widgets/sledilnik/-/website/svg-badge.svg)](https://hosted.weblate.org/engage/sledilnik/?utm_source=widget)
 
 ## Structure
 
