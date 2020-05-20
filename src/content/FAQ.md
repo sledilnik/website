@@ -307,7 +307,7 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 
 (*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori, na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.
 
-(*Smrtnost*) nam pokaže delež smrti v bolnišnici glede na vse umrle in delež smrti v intenzivni enoti glede na vse umrle v bolnišnici - prikazano s polno črto. S črtkano črto sta prikazani Smrtnost v bolnišnici (koliko oseb umre glede na vse hospitalizirane) in Smrtnost v intenzivni enoti (koliko oseb umre glede na vse sprejete v intenzivno enoto). 
+(*Smrtnost*) nam pokaže delež smrti v bolnišnici glede na vse umrle in delež smrti v intenzivni enoti glede na vse umrle - prikazano s polno črto. S črtkano črto sta prikazani Smrtnost v bolnišnici (koliko oseb umre glede na vse hospitalizirane) in Smrtnost v intenzivni enoti (koliko oseb umre glede na vse sprejete v intenzivno enoto). 
 
 Graf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z ostalimi državami (glede na njihova poročila).
 

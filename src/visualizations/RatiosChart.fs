@@ -37,14 +37,14 @@ type Ratios =
     | DeceasedHospital
     | DeceasedHospitalC
     | DeceasedIcuC
-    | DeceasedIcuDeceasedHospital
+    | DeceasedIcuDeceasedTotal
     | DeceasedHospitalDeceasedTotal
 
 module Ratios =
     let getSeries = function
         | Cases     -> [ HospitalCases; IcuCases; CriticalCases; DeceasedCases ]
         | Hospital  -> [ IcuHospital; CriticalHospital; DeceasedHospital]
-        | Mortality -> [ DeceasedHospitalC; DeceasedIcuC; DeceasedIcuDeceasedHospital; DeceasedHospitalDeceasedTotal; ]
+        | Mortality -> [ DeceasedHospitalDeceasedTotal; DeceasedIcuDeceasedTotal; DeceasedIcuC; DeceasedHospitalC; ]
 
     // color, dash, id
     let getSeriesInfo = function
@@ -57,7 +57,7 @@ module Ratios =
         | DeceasedHospital              -> "#666666", Dot,      "deceasedHospital"
         | DeceasedHospitalC             -> "#de9a5a", Dot,      "hospitalMortality"
         | DeceasedIcuC                  -> "#d99a91", Dot,      "icuMortality"
-        | DeceasedIcuDeceasedHospital   -> "#d99a91", Solid,    "icuDeceasedShare"
+        | DeceasedIcuDeceasedTotal      -> "#d99a91", Solid,    "icuDeceasedShare"
         | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "hospitalDeceasedShare"
 
 type State = {
@@ -120,8 +120,10 @@ let renderRatiosChart (state : State) =
             | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedIcuDeceasedHospital   -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.hospital.toDate
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate
+            | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate 
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
+
+        let color, line, name = Ratios.getSeriesInfo ratio
 
         let color, line, id = Ratios.getSeriesInfo ratio
         {|
