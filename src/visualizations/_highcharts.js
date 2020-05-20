@@ -28,7 +28,7 @@ function setHighchartsOptions (highcharts) {
             loading: 'Nalagam...',
             months: i18n.t("month"),
             shortMonths: i18n.t("shortMonth"),
-            weekdays: ['Nedelja','Ponedeljek','Torek','Sreda','Četrtek','Petek','Sobota'],
+            weekdays: i18n.t("weekday"),
             rangeSelectorFrom: "Od",
             rangeSelectorTo: "do",
             rangeSelectorZoom: "Obdobje",
