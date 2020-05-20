@@ -257,8 +257,8 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text "Prikaži:"
-            renderScaleTypeSelector Absolute activeScaleType (I18N.t "charts.ageGroups.absolute")
-            renderScaleTypeSelector Relative activeScaleType (I18N.t "charts.ageGroups.relative")
+            renderScaleTypeSelector Absolute activeScaleType "Absolutno"
+            renderScaleTypeSelector Relative activeScaleType "Relativno"
         ]
     ]
 
@@ -379,7 +379,7 @@ let renderChartOptions
                          (percentageValuesLabelFormatter dataValue)
             |}
         series = [|
-            {| name = I18N.t "charts.ageGroups.male"
+            {| name = LabelMale
                color = "#73CCD5"
                dataLabels = pojo
                  {| enabled = true
@@ -390,7 +390,7 @@ let renderChartOptions
                data = chartData.MaleValues
                       |> Array.map (Option.map (fun y -> -y))
                 |}
-            {| name = I18N.t "charts.ageGroups.female"
+            {| name = LabelFemale
                color = "#D99A91"
                dataLabels = pojo
                  {| enabled = true

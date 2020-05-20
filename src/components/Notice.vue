@@ -7,7 +7,8 @@
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.news001") }}</b> <span>{{ $t("notice.news002") }}</span>
+          <b>Nov graf: </b>
+          prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti.
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

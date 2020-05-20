@@ -2,24 +2,24 @@
   <div>
     <div class="table-container">
       <div class="table-wrapper">
-        <h1>{{ $t("tables.title") }}</h1>
+        <h1>Tabela</h1>
         <b-tabs>
-          <b-tab :title="$t('tables.tabSummary')" active>
+          <b-tab title="Povzetek stanja" active>
             <tests-infections-table :tableHeight="tableHeight"></tests-infections-table>
           </b-tab>
-          <b-tab :title="$t('tables.tabByRegion')">
+          <b-tab title="Po regiji">
             <regional-overview-table :tableHeight="tableHeight"></regional-overview-table>
           </b-tab>
-          <b-tab :title="$t('tables.tabByAgeMale')">
+          <b-tab title="Po starosti - Moški">
             <age-groups-males-table :table-height="tableHeight"></age-groups-males-table>
           </b-tab>
-          <b-tab :title="$t('tables.tabByAgeFemale')">
+          <b-tab title="Po starosti - Ženske">
             <age-groups-females-table :table-height="tableHeight"></age-groups-females-table>
           </b-tab>
         </b-tabs>
         <div class="footnote">
-          {{ $t("tables.source") }}:
-          <router-link to="datasources">{{ $t("tables.sourceLink") }}</router-link>
+          Viri podatkov in druge oblike:
+          <a href="/datasources">GDocs preglednica, CSV oblika ali REST API</a>
         </div>
       </div>
     </div>
@@ -130,13 +130,15 @@ $table-border: rgb(222,222 ,222)
 
     &.active
       color: rgba(0, 0, 0)
-      box-shadow: inset 0 -10px 0 $yellow
 
     &:hover
       color: rgba(0, 0, 0)
 
     &:focus
       outline: none
+
+    &.active
+      box-shadow: inset 0 -10px 0 $yellow
 
 .tabs *:focus
   outline: none

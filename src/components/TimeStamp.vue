@@ -1,8 +1,11 @@
 <template>
   <div class="time-stamp">
     <p v-if="exportTime">
-      {{ $t("timestamp.updated", { date: new Date(exportTime) }) }}
-      {{ $t("timestamp.at", { date: new Date(exportTime) }) }}
+      Osveženo <span>{{ exportTime | formatDate('d. MMMM yyyy') }}</span> ob
+      <span>{{ exportTime | formatDate('HH:mm') }}</span>
+    </p>
+    <p v-else>
+      
     </p>
   </div>
 </template>
