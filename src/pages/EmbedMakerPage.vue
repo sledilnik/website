@@ -32,7 +32,7 @@ export default {
       height: 750,
       width: 1100,
       tooltipTitle: this.$t('embedMaker.copy'),
-      baseEmbedUrl: "https://covid-19.sledilnik.org/embed.html#",
+      baseEmbedUrl: location.origin + "/embed.html#",
       charts: {
         "empty": {
           value: null,
