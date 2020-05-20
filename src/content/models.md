@@ -28,14 +28,17 @@ Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projec
 ## Ocenjevanje stopnje reprodukcije
 Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov ocenila stopnjo reprodukcije, to je hitrost širjenja okužbe, med posamičnimi intervencijami. To omogoča sledenje učinkovitosti intervencij. Pri modeliranju so uporabili tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva. 
 
-Podrobnejši opis metodologije in izsledkov je objavljen kot [članek v Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068).
+Podrobnejši opis metodologije in izsledkov je objavljen kot [članek v Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068). 
+
+Zadnji prepračun R za potrebe alarmov pa je [objavljen tukaj](http://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji)
 
 <a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
 <img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
 
 
-## Drugi modeli za Slovenijo
-- ## Drugi modeli za Slovenijo
+## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
+
+Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).  
 
 
 ## Drugi modeli za Slovenijo
