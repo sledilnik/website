@@ -390,5 +390,8 @@
     "region.ce.todate": "Savinjska",
     "region.za.todate": "Zasavska",
     "region.todate": "Skupno"
+  },
+  "zzzWeblateWebhookTEST": {
+    "test": "deluje !!!"
   }
 }
