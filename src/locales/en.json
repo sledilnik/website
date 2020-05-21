@@ -199,7 +199,15 @@
       "shareOfPositive": "Share of Positive Tests (%)"
     },
     "infections": {
-      "title": "Structure of Confirmed Cases"
+      "title": "Structure of Confirmed Cases",
+      "averageByDay": "By Day (average)",
+      "all": "All",
+      "relative": "Relative",
+      "hcStaff": "Healthcare Staff",
+      "rhStaff": "Retirement Home Staff",
+      "rhOccupant": "Retirement Home Occupants",
+      "allConfirmed": "All Confiermed",
+      "otherPersons": "Other Persons" 
     },
     "spread": {
       "title": "Daily Confirmed Cases"

@@ -277,7 +277,15 @@
       "shareOfPositive": "Delež pozitivnih testov (%)"
     },
     "infections": {
-      "title": "Struktura potrjeno okuženih"
+      "title": "Struktura potrjeno okuženih",
+      "averageByDay": "Po dnevih (povprečno)",
+      "all": "Skupaj",
+      "relative": "Relativno",
+      "hcStaff": "Zaposleni v zdravstvu",
+      "rhStaff": "Zaposleni v domovih za starejše občane",
+      "rhOccupant": "Oskrbovanci domov za starejše občane",
+      "allConfirmed": "Vsi potrjeni",
+      "otherPersons": "Ostale osebe"
     },
     "spread": {
       "title": "Prirast potrjeno okuženih"
