@@ -184,6 +184,7 @@ export default {
 
     &.no-change {
       background-color: #a0a0a0;
+      display: none;
     }
   }
 }

@@ -102,14 +102,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     ConfirmedToDate = municipality.ConfirmedToDate 
+                                     ConfirmedToDate = municipality.ConfirmedToDate
                                      DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalsForDate =
                 dp
                 |> Seq.map (
-                    fun dp -> { 
+                    fun dp -> {
                         Date = dp.Date
                         ConfirmedToDate = dp.ConfirmedToDate
                         DeceasedToDate = dp.DeceasedToDate } )
@@ -121,16 +121,19 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.toList
                 |> Utils.findDoublingTime
             let maxValue =
-                dp
-                |> Seq.map (fun dp -> dp.ConfirmedToDate)
-                |> Seq.filter Option.isSome
-                |> Seq.max
+                try
+                    dp
+                    |> Seq.map (fun dp -> dp.ConfirmedToDate)
+                    |> Seq.filter Option.isSome
+                    |> Seq.max
+                with
+                    | _ -> None
             let maxDay = dp |> Seq.filter (fun p -> p.ConfirmedToDate = maxValue) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              ActiveCases = 
+              ActiveCases =
                     let dayR = totalsForDate |> Array.tryItem (totalsForDate.Length - 15)
                     let dayL = totalsForDate |> Array.tryLast
                     match dayR, dayL with
@@ -224,7 +227,7 @@ let renderMunicipality (municipality : Municipality) =
         | Some maxValue ->
             seq {
                 let dpLen = Array.length municipality.TotalsForDate
-                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0 
+                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0
                 for i = dpStart to dpLen - 1 do
                     let dp = municipality.TotalsForDate.[i]
                     match dp.ConfirmedToDate with
@@ -237,7 +240,7 @@ let renderMunicipality (municipality : Municipality) =
                             prop.className "bar-wrapper"
                             prop.children [
                                 let deceasedToDate = dp.DeceasedToDate.Value
-                                let recoveredToDate = 
+                                let recoveredToDate =
                                     if i >= 14 && municipality.TotalsForDate.[i-14].ConfirmedToDate.Value > deceasedToDate
                                     then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
                                     else 0
@@ -272,13 +275,13 @@ let renderMunicipality (municipality : Municipality) =
                                                     Html.span [ prop.text "Umrli: " ]
                                                     Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
-                                            if (recoveredToDate > 0) then 
+                                            if (recoveredToDate > 0) then
                                                 prop.className "recovered"
                                                 prop.children [
                                                     Html.span [ prop.text "Preboleli: " ]
                                                     Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
-                                            if (activeCases > 0) then 
+                                            if (activeCases > 0) then
                                                 prop.className "active"
                                                 prop.children [
                                                     Html.span [ prop.text "Aktivni: " ]
