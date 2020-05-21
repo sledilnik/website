@@ -252,7 +252,25 @@
             "confirmedCases": "Confirmed Cases"
         },
         "municipalities": {
-            "title": "Cases by Municipalities"
+            "title": "Cases by Municipalities",
+            "sortLast": "Last",
+            "sortDoublingTime": "Doubling time",
+            "sortTotal": "All",
+            "sortActive": "Active",
+            "sortBy": "Sort by:",
+            "allRegions": "All regions",
+            "search": "Search municipality",
+            "showAll": "Show all",
+            "showLess": "Show less",
+            "all": "All:",
+            "active": "Active:",
+            "recovered": "Recovered:",
+            "deceased": "Deceased:",
+            "doublesIn": "Doubles in ",
+            "yesterday": "yesterday",
+            "today": "today",
+            "lastCaseBefore": "Last case in: ",
+            "lastCase": "Last case: "
         },
         "ageGroups": {
             "title": "Age Groups",
@@ -399,5 +417,12 @@
             "description": "The ban on visits to the retirement homes.<br>Confirmed infection of a doctor in Metlika",
             "title": "RH"
         }
+    },
+    "days": {
+        "dnevi": "days",
+        "dnevoma": "days",
+        "dnevom": "day",
+        "dneh": "days",
+        "dnevu": "day"
     }
 }
