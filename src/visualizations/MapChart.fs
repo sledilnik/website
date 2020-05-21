@@ -168,13 +168,15 @@ let seriesData (state : State) =
         then 
             fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
             if absolute > 0 then
-                fmtStr <- fmtStr + sprintf " (%s %% %s)" (I18N.t "charts.map.population")
+                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                    (I18N.t "charts.map.population")
         else // deceased
             fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                fmtStr <- fmtStr + sprintf " (%s %% %s)" (I18N.t "charts.map.population")
+                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                    (I18N.t "charts.map.population")
                 fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b> (%s %% %s)" (I18N.t "charts.map.confirmedCases") 
                     totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
                     (I18N.t "charts.map.population")
