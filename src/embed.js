@@ -33,7 +33,6 @@ const routes = [
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
-      console.log(language, i18n.language)
       const supportedLanguages = ['sl', 'en']
       if (!supportedLanguages.includes(language)) {
         return next()
