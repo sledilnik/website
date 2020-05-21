@@ -57,7 +57,7 @@ export default {
       }
     },
     iconClass() {
-      if (this.title == this.$t('infocard.deceasedToDate')) {
+      if (this.field === 'state.deceased.todate') {
         return "deceased";
       } else if (this.renderValues.lastDay.diff == 0) {
         return 'none';
