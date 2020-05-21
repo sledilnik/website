@@ -32,7 +32,7 @@ export default {
       height: 750,
       width: 1100,
       tooltipTitle: this.$t('embedMaker.copy'),
-      baseEmbedUrl: location.origin + "/embed.html#",
+      baseEmbedUrl: location.origin + "/embed.html#/" + this.$i18n.i18next.language,
       charts: {
         "empty": {
           value: null,
