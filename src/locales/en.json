@@ -239,7 +239,17 @@
             "title": "Confirmed Cases by Region"
         },
         "map": {
-            "title": "Municipality Map"
+            "title": "Municipality Map",
+            "mortalityOfConfirmedCases": "Mortality of confirmed cases",
+            "all": "All",
+            "populationShare": "Population share",
+            "populationC": "Population",
+            "population": "population",
+            "days": "days",
+            "absolute": "Absolute",
+            "view": "Show:",
+            "deceased": "Deceased",
+            "confirmedCases": "Confirmed Cases"
         },
         "municipalities": {
             "title": "Cases by Municipalities"
