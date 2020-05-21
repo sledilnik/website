@@ -288,7 +288,30 @@
       "otherPersons": "Ostale osebe"
     },
     "spread": {
-      "title": "Prirast potrjeno okuženih"
+      "title": "Prirast potrjeno okuženih",
+      "absolute": "Absolutni dnevni prirast",
+      "percentage": "Relativni dnevni prirast",
+      "doublingRate": "Eksponentna rast v dnevih",
+      "explainer": "Kaj pomeni eksponenta rast",
+      "absoluteTitle": "Dnevni prirast potrjeno okuženih",
+      "absoluteLabel": "Potrjeno okuženi dnevno",
+      "relativeTitle": "Dnevni prirast okuženih",
+      "relativeLabel": "Relativen prirast v %",
+      "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
+      "doublingRateLabel":"V koliko dneh se število okuženih podvoji",
+      "everageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
+      "oneDay": "En dan",
+      "oneWeek": "En teden",
+      "oneMonth": "En mesec",
+      "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:",
+      "today": "Danes",
+      "inOneWeek": "Čez en teden",
+      "inTwoWeeks": "Čez dva tedna",
+      "inThreeWeeks": "Čez tri tedne",
+      "inFourWeeks": "Čez štiri tedne",
+      "timesAsMany": "-krat toliko",
+      "confirmedCases": "potrjeno okuženih",
+      "hospitalized": "hospitaliziranih"
     },
     "regions": {
       "title": "Potrjeno okuženi po regijah"

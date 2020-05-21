@@ -210,7 +210,7 @@
       "otherPersons": "Other Persons" 
     },
     "spread": {
-      "title": "Daily Confirmed Cases"
+      "title": "Growth of Confirmed Cases"
     },
     "regions": {
       "title": "Confirmed Cases by Region"

@@ -355,7 +355,7 @@ The increase in infected healthcare workers does not mean that they were discove
 </details>
 
 <details>
-  <summary id=spread-chart>What does the “Number of Daily Confirmed Cases” graph mean?</summary>
+  <summary id=spread-chart>What does the “Growth of Confirmed Cases” graph mean?</summary>
 
 The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people.
   
