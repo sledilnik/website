@@ -2,13 +2,17 @@
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <span class="card-title">{{ title }}</span>
-      <span class="card-number">{{ renderValues.lastDay.value }}</span>
+      <span class="card-number">{{ renderValues.lastDay.value }}<span class="card-percentage-diff" :class="diffClass">{{ renderValues.lastDay.percentDiff | prefixDiff }}%</span></span>
+
       <div :id="elementId" class="card-diff" :class="diffClass">
-        <span>{{ renderValues.lastDay.diff | prefixDiff }} ({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
-        <b-tooltip :target="elementId" triggers="hover">
-          {{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
-          <span v-if="renderValues.dayBefore.diff">[{{renderValues.dayBefore.diff | prefixDiff}}]</span>
-        </b-tooltip>
+        <div class="trend-icon" :class="[diffClass, iconClass]"></div>
+        <span>{{ Math.abs(renderValues.lastDay.diff) }}</span>
+        <b-tooltip :target="elementId" triggers="hover"
+          >{{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
+          <span v-if="renderValues.dayBefore.diff">[{{
+            renderValues.dayBefore.diff | prefixDiff
+          }}]</span></b-tooltip
+        >
       </div>
       <div class="data-time">{{ $t("infocard.lastUpdated", { date: new Date(renderValues.lastDay.displayDate) }) }}</div>
     </div>
@@ -50,6 +54,17 @@ export default {
         return this.goodTrend === 'down' ? 'bad' : 'good';
       } else {
         return this.goodTrend === 'down' ? 'good' : 'bad';
+      }
+    },
+    iconClass() {
+      if (this.field === 'state.deceased.todate') {
+        return "deceased";
+      } else if (this.renderValues.lastDay.diff == 0) {
+        return 'none';
+      } else if (this.renderValues.lastDay.diff > 0) {
+        return "up";
+      } else {
+        return "down";
       }
     },
     renderValues() {
@@ -125,20 +140,64 @@ export default {
   font-weight: 700;
 }
 
+
+.card-percentage-diff {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
 .card-diff {
   font-size: 14px;
 
-  &.bad {
-    color: #bf5747;
-  }
+  .trend-icon {
+    display:inline-block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    vertical-align: bottom;
 
-  &.good {
-    color: #20b16d;
-  }
+    &.bad {
+      background-color: #bf5747;
+    }
 
-  &.no-change {
-    color: #a0a0a0;
+    &.good {
+      background-color: #20b16d;
+    }
+
+    &.up {
+      -webkit-mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+      mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+    }
+
+    &.down {
+      -webkit-mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+      mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+    }
+
+    &.deceased {
+      -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+      mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+      background-color: #404040;
+    }
+
+    &.no-change {
+      background-color: #a0a0a0;
+    }
   }
+}
+
+.bad {
+  color: #bf5747;
+}
+
+.good {
+  color: #20b16d;
+}
+
+.no-change {
+  color: #a0a0a0;
 }
 
 .data-time {
