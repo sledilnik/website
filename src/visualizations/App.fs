@@ -153,19 +153,19 @@ let render (state : State) (_ : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView Map.mapChart {| data = data |} }
-          { VisualizationType = Municipalities;
-             ClassName = "municipalities-chart";
-             Label = "Primeri po občinah";
-             Explicit = false;
-             Renderer = fun state ->
-                match state.RegionsData with
-                | NotAsked -> Html.none
-                | Loading -> Utils.renderLoading
-                | Failure error -> Utils.renderErrorLoading error
-                | Success data ->
-                    lazyView
-                        MunicipalitiesChart.municipalitiesChart
-                        {| query = state.Query ; data = data |} }
+        //   { VisualizationType = Municipalities;
+        //      ClassName = "municipalities-chart";
+        //      Label = "Primeri po občinah";
+        //      Explicit = false;
+        //      Renderer = fun state ->
+        //         match state.RegionsData with
+        //         | NotAsked -> Html.none
+        //         | Loading -> Utils.renderLoading
+        //         | Failure error -> Utils.renderErrorLoading error
+        //         | Success data ->
+        //             lazyView
+        //                 MunicipalitiesChart.municipalitiesChart
+        //                 {| query = state.Query ; data = data |} }
           { VisualizationType = AgeGroups;
              ClassName = "age-groups-chart";
              Label = "Po starostnih skupinah";
