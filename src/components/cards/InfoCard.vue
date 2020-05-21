@@ -57,7 +57,7 @@ export default {
       }
     },
     iconClass() {
-      if (this.title == "Umrli" || this.title == "Confirmed Deaths") { // TODO: make it less fragile
+      if (this.field === 'state.deceased.todate') {
         return "deceased";
       } else if (this.renderValues.lastDay.diff == 0) {
         return 'none';
