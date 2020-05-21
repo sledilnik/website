@@ -46,7 +46,7 @@
         "chooseChart": "Choose a chart",
         "preview": "Preview:",
         "embedCode": "Embed code:",
-        "description": "Specific view can be adopted to your needs.  You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "description": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
         "copy": "Copy",
         "copied": "Copied!"
     },
@@ -269,171 +269,62 @@
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests": {
-            "performed": {
-                "todate": "Tests (to date)"
-            }
-        },
-        "cases": {
-            "confirmed": {
-                "todate": "Confirmed Cases (to date)"
-            },
-            "active": "Active Cases",
-            "recovered": {
-                "todate": "Recovered (to date)"
-            },
-            "closed": {
-                "todate": "Closed Cases (to date)"
-            },
-            "hs": {
-                "employee": {
-                    "confirmed": {
-                        "todate": "Confirmed Cases - Healthcare workers (to date)"
-                    }
-                }
-            },
-            "rh": {
-                "employee": {
-                    "confirmed": {
-                        "todate": "Confirmed Cases - Retirement home employees (to date)"
-                    }
-                },
-                "occupant": {
-                    "confirmed": {
-                        "todate": "Confirmed Cases - Retirement home residents (to date)"
-                    }
-                }
-            },
-            "unclassified": {
-                "confirmed": {
-                    "todate": "Confirmed Cases - Others (to date)"
-                }
-            }
-        },
-        "state": {
-            "in_hospital": {
-                "todate": "Hospitalized (to date)"
-            },
-            "icu": "In ICU (active)",
-            "critical": "On Ventilator (active)",
-            "deceased": {
-                "todate": "Confirmed Deaths (to date)"
-            },
-            "out_of_hospital": {
-                "todate": "Discharged from Hospital (to date)"
-            }
-        },
-        "age": {
-            "male": {
-                "todate": "Total",
-                "0-4": {
-                    "todate": "0 - 4 years"
-                },
-                "5-14": {
-                    "todate": "5 - 14 years"
-                },
-                "15-24": {
-                    "todate": "15 - 24 years"
-                },
-                "25-34": {
-                    "todate": "25 - 34 years"
-                },
-                "35-44": {
-                    "todate": "35 - 44 years"
-                },
-                "45-54": {
-                    "todate": "45 - 54 years"
-                },
-                "55-64": {
-                    "todate": "55 - 64 years"
-                },
-                "65-74": {
-                    "todate": "65 - 74 years"
-                },
-                "75-84": {
-                    "todate": "75 - 84 years"
-                },
-                "85+": {
-                    "todate": "85+ years"
-                }
-            },
-            "female": {
-                "todate": "Total",
-                "0-4": {
-                    "todate": "0 - 4 years"
-                },
-                "5-14": {
-                    "todate": "5 - 14 years"
-                },
-                "15-24": {
-                    "todate": "15 - 24 years"
-                },
-                "25-34": {
-                    "todate": "25 - 34 years"
-                },
-                "35-44": {
-                    "todate": "35 - 44 years"
-                },
-                "45-54": {
-                    "todate": "45 - 54 years"
-                },
-                "55-64": {
-                    "todate": "55 - 64 years"
-                },
-                "65-74": {
-                    "todate": "65 - 74 years"
-                },
-                "75-84": {
-                    "todate": "75 - 84 years"
-                },
-                "85+": {
-                    "todate": "85+ years"
-                }
-            }
-        },
-        "region": {
-            "kr": {
-                "todate": "Upper Carniola Region"
-            },
-            "ng": {
-                "todate": "Gorizia Region"
-            },
-            "nm": {
-                "todate": "Southeast Slovenia"
-            },
-            "sg": {
-                "todate": "Carinthia"
-            },
-            "kp": {
-                "todate": "Coastal–Karst Region"
-            },
-            "lj": {
-                "todate": "Central Slovenia"
-            },
-            "mb": {
-                "todate": "Drava Region"
-            },
-            "ms": {
-                "todate": "Mura Region"
-            },
-            "kk": {
-                "todate": "Lower Sava Region"
-            },
-            "po": {
-                "todate": "Littoral–Inner Carniola"
-            },
-            "ce": {
-                "todate": "Savinja Region"
-            },
-            "za": {
-                "todate": "Central Sava Region"
-            },
-            "todate": "Total"
-        }
+        "tests_performed": "Tests",
+        "tests_performed_todate": "Tests (to date)",
+        "cases_confirmed": "Confirmed Cases",
+        "cases_confirmed_todate": "Confirmed Cases (to date)",
+        "cases_active": "Active Cases",
+        "cases_recovered_todate": "Recovered (to date)",
+        "cases_closed_todate": "Closed Cases (to date)",
+        "cases_hs_employee_confirmed_todate": "Confirmed Cases - Healthcare workers (to date)",
+        "cases_rh_employee_confirmed_todate": "Confirmed Cases - Retirement home employees (to date)",
+        "cases_rh_occupant_confirmed_todate": "Confirmed Cases - Retirement home residents (to date)",
+        "cases_unclassified_confirmed_todate": "Confirmed Cases - Others (to date)",
+        "state_in_hospital": "Hospitalized (active)",
+        "state_icu": "In ICU (active)",
+        "state_critical": "On Ventilator (active)",
+        "state_deceased_todate": "Confirmed Deaths (to date)",
+        "state_in_hospital_todate": "Hospitalized (to date)",
+        "state_out_of_hospital_todate": "Discharged from Hospital (to date)",
+        "age_male_todate": "Total",
+        "age_male_0-4_todate": "0 - 4 years",
+        "age_male_5-14_todate": "5 - 14 years",
+        "age_male_15-24_todate": "15 - 24 years",
+        "age_male_25-34_todate": "25 - 34 years",
+        "age_male_35-44_todate": "35 - 44 years",
+        "age_male_45-54_todate": "45 - 54 years",
+        "age_male_55-64_todate": "55 - 64 years",
+        "age_male_65-74_todate": "65 - 74 years",
+        "age_male_75-84_todate": "75 - 84 years",
+        "age_male_85+_todate": "85+ years",
+        "age_female_todate": "Total",
+        "age_female_0-4_todate": "0 - 4 years",
+        "age_female_5-14_todate": "5 - 14 years",
+        "age_female_15-24_todate": "15 - 24 years",
+        "age_female_25-34_todate": "25 - 34 years",
+        "age_female_35-44_todate": "35 - 44 years",
+        "age_female_45-54_todate": "45 - 54 years",
+        "age_female_55-64_todate": "55 - 64 years",
+        "age_female_65-74_todate": "65 - 74 years",
+        "age_female_75-84_todate": "75 - 84 years",
+        "age_female_85+_todate": "85+ years",
+        "region_kr_todate": "Upper Carniola Region",
+        "region_ng_todate": "Gorizia Region",
+        "region_nm_todate": "Southeast Slovenia",
+        "region_sg_todate": "Carinthia",
+        "region_kp_todate": "Coastal–Karst Region",
+        "region_lj_todate": "Central Slovenia",
+        "region_mb_todate": "Drava Region",
+        "region_ms_todate": "Mura Region",
+        "region_kk_todate": "Lower Sava Region",
+        "region_po_todate": "Littoral–Inner Carniola",
+        "region_ce_todate": "Savinja Region",
+        "region_za_todate": "Central Sava Region",
+        "region_todate": "Total"
     },
     "cm": {
         "firstCase": {
-            "description": "First confirmed case: <br>tourist returning from Morocco",
+            "description": "First confirmed case:<br>tourist returning from Morocco",
             "title": "1st case"
         },
         "liftFoodMarkets": {
@@ -454,7 +345,7 @@
         },
         "liftService": {
             "title": "Services",
-            "description": "Relaxation: construction, services, outdoor sports, <br> some regular public transport services allowed"
+            "description": "Relaxation: construction, services, outdoor sports, <br>some regular public transport services allowed"
         },
         "quarantine": {
             "description": "Mandatory 7 day quarantine when arriving from abroad",
@@ -462,11 +353,11 @@
         },
         "shops": {
             "title": "Shops",
-            "description": "Shops from 8-10 am and the last hour exclusively <br> for vulnerable groups (disabled, retired, pregnant women)"
+            "description": "Shops from 8-10 am and the last hour exclusively <br>for vulnerable groups (disabled, retired, pregnant women)"
         },
         "municipality": {
             "title": "Municipalities",
-            "description": "Prohibition of movement outside municipal borders, mandatory disinfection <br> of multi-apartment buildings, shops for vulnerable groups until 10 am"
+            "description": "Prohibition of movement outside municipal borders, mandatory disinfection <br>of multi-apartment buildings, shops for vulnerable groups until 10 am"
         },
         "gatherings": {
             "description": "Prohibition of gathering in public places",
@@ -489,7 +380,7 @@
             "title": "Transport"
         },
         "liftVacationHomes": {
-            "description": "Relaxation: movement between municipalities (vacation homes...), <br> explanations regarding the general ban on movement",
+            "description": "Relaxation: movement between municipalities (vacation homes...), <br>explanations regarding the general ban on movement",
             "title": "Vac.homes"
         },
         "publicTransport": {
@@ -497,7 +388,7 @@
             "title": "Transport"
         },
         "borders": {
-            "description": "Closing of some border crossings with Italy, <br> tighter controls on passenger cars",
+            "description": "Closing of some border crossings with Italy,<br>tighter controls on passenger cars",
             "title": "Borders"
         },
         "checkpoints": {
