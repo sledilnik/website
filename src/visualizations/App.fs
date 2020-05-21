@@ -36,7 +36,7 @@ let init (query : obj) (visualization : string option) =
               RegionsData = NotAsked
               RenderingMode = renderingMode }
 
-        initialState, Cmd.batch [Cmd.ofMsg StatsDataRequested ]
+        initialState, Cmd.batch [Cmd.ofMsg StatsDataRequested ; Cmd.ofMsg RegionsDataRequest ]
     inner
 
 let update (msg: Msg) (state: State) =
@@ -143,29 +143,29 @@ let render (state : State) (_ : Msg -> unit) =
                 | Loading -> Utils.renderLoading
                 | Failure error -> Utils.renderErrorLoading error
                 | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
-        //   { VisualizationType = Map;
-        //      ClassName = "map-chart";
-        //      Label = "Zemljevid po občinah";
-        //      Explicit = false;
-        //      Renderer = fun state ->
-        //         match state.RegionsData with
-        //         | NotAsked -> Html.none
-        //         | Loading -> Utils.renderLoading
-        //         | Failure error -> Utils.renderErrorLoading error
-        //         | Success data -> lazyView Map.mapChart {| data = data |} }
-        //   { VisualizationType = Municipalities;
-        //      ClassName = "municipalities-chart";
-        //      Label = "Primeri po občinah";
-        //      Explicit = false;
-        //      Renderer = fun state ->
-        //         match state.RegionsData with
-        //         | NotAsked -> Html.none
-        //         | Loading -> Utils.renderLoading
-        //         | Failure error -> Utils.renderErrorLoading error
-        //         | Success data ->
-        //             lazyView
-        //                 MunicipalitiesChart.municipalitiesChart
-        //                 {| query = state.Query ; data = data |} }
+          { VisualizationType = Map;
+             ClassName = "map-chart";
+             Label = "Zemljevid po občinah";
+             Explicit = false;
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data -> lazyView Map.mapChart {| data = data |} }
+          { VisualizationType = Municipalities;
+             ClassName = "municipalities-chart";
+             Label = "Primeri po občinah";
+             Explicit = false;
+             Renderer = fun state ->
+                match state.RegionsData with
+                | NotAsked -> Html.none
+                | Loading -> Utils.renderLoading
+                | Failure error -> Utils.renderErrorLoading error
+                | Success data ->
+                    lazyView
+                        MunicipalitiesChart.municipalitiesChart
+                        {| query = state.Query ; data = data |} }
           { VisualizationType = AgeGroups;
              ClassName = "age-groups-chart";
              Label = "Po starostnih skupinah";
