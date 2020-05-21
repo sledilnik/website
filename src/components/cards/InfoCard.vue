@@ -57,7 +57,7 @@ export default {
       }
     },
     iconClass() {
-      if (this.title == "Umrli" || this.title == "Confirmed Deaths") { // TODO: make it less fragile
+      if (this.title == this.$t('infocard.deceasedToDate')) {
         return "deceased";
       } else if (this.renderValues.lastDay.diff == 0) {
         return 'none';
