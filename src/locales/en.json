@@ -424,5 +424,19 @@
         "dnevom": "day",
         "dneh": "days",
         "dnevu": "day"
+    },
+    "region": {
+        "za": "Central Sava Region",
+        "ce": "Savinja Region",
+        "po": "Littoral–Inner Carniola",
+        "kk": "Lower Sava Region",
+        "ms": "Mura Region",
+        "mb": "Drava Region",
+        "lj": "Central Slovenia",
+        "kp": "Coastal–Karst Region",
+        "sg": "Carinthia",
+        "nm": "Southeast Slovenia",
+        "ng": "Gorizia Region",
+        "kr": "Upper Carniola Region"
     }
 }
