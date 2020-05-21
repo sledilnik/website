@@ -94,6 +94,20 @@
     "5": "Petek",
     "6": "Sobota"
   },
+  "region": {
+    "kr": "Gorenjska",
+    "ng": "Goriška",
+    "nm": "Jugovzhodna Slovenija",
+    "sg": "Koroška",
+    "kp": "Obalno-kraška",
+    "lj": "Osrednjeslovenska",
+    "mb": "Podravska",
+    "ms": "Pomurska",
+    "kk": "Posavska",
+    "po": "Primorsko-notranjska",
+    "ce": "Savinjska",
+    "za": "Zasavska"
+  },
   "cm": {
     "firstCase": {
       "title": "1. primer",
