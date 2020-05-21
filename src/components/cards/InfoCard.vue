@@ -182,9 +182,12 @@ export default {
       background-color: #404040;
     }
 
+    &.none {
+      display: none;
+    }
+
     &.no-change {
       background-color: #a0a0a0;
-      display: none;
     }
   }
 }
