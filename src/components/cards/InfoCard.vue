@@ -8,13 +8,13 @@
         <div class="trend-icon" :class="[diffClass, iconClass]"></div>
         <span>{{ Math.abs(renderValues.lastDay.diff) }}</span>
         <b-tooltip :target="elementId" triggers="hover"
-          >Glede na {{ renderValues.dayBefore.date | formatDate('d. MMMM') }}: {{ renderValues.dayBefore.value }}
+          >{{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
           <span v-if="renderValues.dayBefore.diff">[{{
             renderValues.dayBefore.diff | prefixDiff
           }}]</span></b-tooltip
         >
       </div>
-      <div class="data-time">{{ renderValues.lastDay.displayDate | formatDate('d. MMMM') }}</div>
+      <div class="data-time">{{ $t("infocard.lastUpdated", { date: new Date(renderValues.lastDay.displayDate) }) }}</div>
     </div>
     <div class="hp-card" v-else>
       <span class="card-title">{{ title }}</span>
@@ -57,7 +57,7 @@ export default {
       }
     },
     iconClass() {
-      if (this.title == "Umrli") {
+      if (this.field === 'state.deceased.todate') {
         return "deceased";
       } else if (this.renderValues.lastDay.diff == 0) {
         return 'none';

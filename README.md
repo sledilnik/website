@@ -1,17 +1,20 @@
 # covid19-web
 
 [![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)](https://github.com/sledilnik/website/actions)
+[![Translation status](https://hosted.weblate.org/widgets/sledilnik/-/website/svg-badge.svg)](https://hosted.weblate.org/engage/sledilnik/?utm_source=widget)
+
 ## Structure
 
-| folder | content |
-| ------ | ------- |
-| `src/assets` | Static content (images, media files) |
-| `src/components` | Reusable page components |
-| `src/content` | Markdown content for static pages |
-| `src/pages` | Actual pages of website (each page is one component, StaticPage is reused with different content). Pages are rendered inside App component (in `router-view`) |
-| `src/App.vue` | Main app component (renders `router-view`) |
-| `src/main.js` | Webpack entrypoint |
-| `.env` | Configurable values (Page name and description) |
+| folder           | content                                                                                                                                                       |
+|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `src/assets`     | Static content (images, media files)                                                                                                                          |
+| `src/components` | Reusable page components                                                                                                                                      |
+| `src/content`    | Markdown content for static pages                                                                                                                             |
+| `src/locales`    | Translation resources                                                                                                                                         |
+| `src/pages`      | Actual pages of website (each page is one component, StaticPage is reused with different content). Pages are rendered inside App component (in `router-view`) |
+| `src/App.vue`    | Main app component (renders `router-view`)                                                                                                                    |
+| `src/main.js`    | Webpack entrypoint                                                                                                                                            |
+| `.env`           | Configurable values (Page name and description)                                                                                                               |
 
 ## Deployment
 

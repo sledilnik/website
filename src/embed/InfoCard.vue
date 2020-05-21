@@ -16,6 +16,7 @@ export default {
   components: {
     InfoCard
   },
+  // TODO: could this code be deleted - because it's not used anywhere
   data() {
     return {
       title: null,
