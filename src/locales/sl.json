@@ -90,11 +90,11 @@
   "cm": {
     "firstCase": {
       "title": "1. primer",
-      "description": "Prvi potrjen primer:<br/>turist iz Maroka"
+      "description": "Prvi potrjen primer:<br>turist iz Maroka"
     },
     "retirementHomes": {
       "title": "DSO",
-      "description": "Prepoved obiskov v domovih starejših občanov,<br/>potrjena okužba zdravnika v Metliki"
+      "description": "Prepoved obiskov v domovih starejših občanov,<br>potrjena okužba zdravnika v Metliki"
     },
     "checkpoints": {
       "title": "Točke",
@@ -102,7 +102,7 @@
     },
     "borders": {
       "title": "Meje",
-      "description": "Zapora nekaterih mejnih prehodov z Italijo,<br/>poostren nadzor za osebna vozila"
+      "description": "Zapora nekaterih mejnih prehodov z Italijo,<br>poostren nadzor za osebna vozila"
     },
     "epidemic": {
       "title": "Epidemija",
@@ -122,11 +122,11 @@
     },
     "municipality": {
       "title": "Občine",
-      "description": "Prepoved gibanja izven meja občin, obvezno razkuževanje <br/>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
+      "description": "Prepoved gibanja izven meja občin, obvezno razkuževanje <br>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
     },
     "shops": {
       "title": "Trgovine",
-      "description": "Trgovine od 8-10 ure in zadnjo uro izključno <br/>za ranljive skupine (invalidi, upokojenci, nosečnice)"
+      "description": "Trgovine od 8-10 ure in zadnjo uro izključno <br>za ranljive skupine (invalidi, upokojenci, nosečnice)"
     },
     "quarantine": {
       "title": "Karantena",
@@ -134,11 +134,11 @@
     },
     "liftVacationHomes": {
       "title": "Vikendi",
-      "description": "Sproščanje: gibanje med občinami (vikendi...), <br/>pojasnila glede splošne prepovedi gibanja"
+      "description": "Sproščanje: gibanje med občinami (vikendi...), <br>pojasnila glede splošne prepovedi gibanja"
     },
     "liftService": {
       "title": "Servisi",
-      "description": "Sproščanje: gradnja, servisi, šport na prostem,<br/>dovoljeni nekateri linijski prevozi"
+      "description": "Sproščanje: gradnja, servisi, šport na prostem,<br>dovoljeni nekateri linijski prevozi"
     },
     "nationalStudy": {
       "title": "Raziskava",
