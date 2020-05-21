@@ -1,0 +1,292 @@
+{
+  "navbar": {
+    "home": "Home",
+    "tables": "Table",
+    "models": "Models",
+    "faq": "FAQ",
+    "about": "About",
+    "team": "Team",
+    "sources": "Sources",
+    "links": "Links",
+    "github": "GitHub",
+    "language": {
+      "slovenian": "Slovenian",
+      "english": "English"
+    }
+  },
+  "timestamp": {
+    "updated": "Updated {{ date, MMMM Do YYYY }}",
+    "at": "at {{ date, HH:mm }}"
+  },
+  "notice": {
+    "news001": "New chart:",
+    "news002": "share of serious cases, share of hospitalized by department and fatality rate."
+  },
+  "infocard": {
+    "confirmedToDate": "Confirmed Cases",
+    "recoveredToDate": "Recovered",
+    "inHospital": "Hospitalized",
+    "icu": "In ICU",
+    "deceasedToDate": "Confirmed Deaths",
+    "accordingTo": "According to {{ date, MMMM Do }}",
+    "lastUpdated": "{{ date, MMMM Do }}"
+  },
+  "tables": {
+    "title": "Table",
+    "tabSummary": "Summary",
+    "tabByRegion": "By region",
+    "tabByAgeMale": "By age - Male",
+    "tabByAgeFemale": "By age - Female",
+    "source": "Data source in other formats",
+    "sourceLink": "GDocs spreadsheet, CSV format or REST API",
+    "day": "{{ date, M/D }}"
+  },
+  "embedMaker": {
+    "title": "Embed a chart into your web page",
+    "chooseChart": "Choose a chart",
+    "preview": "Preview:",
+    "embedCode": "Embed code:",
+    "description": "Specific view can be adopted to your needs.  You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+    "copy": "Copy",
+    "copied": "Copied!"
+  },
+  "month": {
+    "0": "January",
+    "1": "February",
+    "2": "March",
+    "3": "April",
+    "4": "May",
+    "5": "June",
+    "6": "July",
+    "7": "August",
+    "8": "September",
+    "9": "October",
+    "10": "November",
+    "11": "December"
+  },
+  "shortMonth": {
+    "0": "Jan",
+    "1": "Feb",
+    "2": "Mar",
+    "3": "Apr",
+    "4": "May",
+    "5": "Jun",
+    "6": "Jul",
+    "7": "Aug",
+    "8": "Sep",
+    "9": "Oct",
+    "10": "Nov",
+    "11": "Dec"
+  },
+  "weekday": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "phase": {
+    "1": {
+      "title": "Phase 1"
+    },
+    "2": {
+      "title": "Phase 2",
+      "description": "epidemic, new testing methodology"
+    },
+    "3": {
+      "title": "Phase 3",
+      "description": "new testing methodology"
+    },
+    "4": {
+      "title": "Phase 4",
+      "description": "new testing methodology"
+    },
+    "5": {
+      "title": "Phase 5",
+      "description": "new testing methodology"
+    },
+    "6": {
+      "title": "Phase 6",
+      "description": "new testing methodology, study"
+    },
+    "7": {
+      "title": "Phase 7",
+      "description": "end of epidemic"
+    }
+  },
+  "charts": {
+    "common": {
+      "loading": "Loading data…",
+      "yAxis": "Y axis:",
+      "linear": "Linear",
+      "log": "Logarithmic",
+      "noteFaq": "Note: limitation of presented data is described in ",
+      "linkFaq": "FAQ"
+    },
+    "metricsComparison": {
+      "title": "COVID-19 Situation in Slovenia",
+      "tests": "Tests",
+      "testsToDate": "Tests (to date)",
+      "confirmed": "Confirmed Cases",
+      "confirmedToDate": "Confirmed Cases (to date)",
+      "active": "Active Cases",
+      "recovered": "Recovered (to date)",
+      "hospitalized": "Hospitalized",
+      "hospitalizedToDate": "Hospitalized (to date)",
+      "icu": "In ICU",
+      "ventilator": "On Ventilator",
+      "discharged": "Discharged from Hospital",
+      "dischargedToDate": "Discharged from Hospital (to date)",
+      "deceased": "Confirmed Deaths",
+      "deceasedToDate": "Confirmed Deaths (to date)"
+    },
+    "cases": {
+      "title": "Confirmed Cases",
+      "active": "Active",
+      "hospitalized": "Hospitalized",
+      "icu": "In ICU",
+      "ventilator": "On Ventilator",
+      "recovered": "Recovered",
+      "deceased": "Died"
+    },
+    "patients": {
+      "title": "Hospitalizations",
+      "structure": "Structure",
+      "byHospital": "By Hospital",
+      "hospitalizedIn": "Hospitalized In:",
+      "admitted": "Admitted",
+      "hospitalized": "Hospitalized",
+      "icu": "In ICU",
+      "ventilator": "On Ventilator",
+      "discharged": "Discharged",
+      "deceased": "Died"
+    },
+    "ratios": {
+      "title": "Share of Serious Cases",
+      "seriousCases": "Serious Cases",
+      "hospitalizations": "Hospitalizations",
+      "mortality": "Mortality",
+      "hospitalCases": "Hospitalized",
+      "icuCases": "In ICU",
+      "ventilatorCases": "On Ventilator",
+      "deceasedCases": "Deaths",
+      "icuHospital": "In ICU",
+      "ventilatorHospital": "On Ventilator",
+      "deceasedHospital": "Deaths",
+      "hospitalMortality": "Hospital mortality",
+      "icuMortality": "ICU mortality",
+      "icuDeceasedShare": "Share of ICU deaths",
+      "hospitalDeceasedShare": "Share of hospital deaths"
+    },
+    "hCenters": {
+      "title": "Healthcare Center Treatment",
+      "emergencyExamination": "Emergency Examinations",
+      "suspectedCovidExamination": "Suspected COVID-19 (examination)",
+      "suspectedCovidPhone": "Suspected COVID-19 (phone)",
+      "sentToSelfIsolation": "Sent to Self-Isolation",
+      "testsPerformed": "Tests (performed)",
+      "testsPositive": "Tests (positive*)"
+    },
+    "tests": {
+      "title": "Testing",
+      "allTesting": "All",
+      "regularTesting": "Regular",
+      "nationalStudyTesting": "Study",
+      "negativeTests": "Negative Tests",
+      "positiveTests": "Positive Tests",
+      "shareOfPositive": "Share of Positive Tests (%)"
+    },
+    "infections": {
+      "title": "Structure of Confirmed Cases",
+      "averageByDay": "By Day (average)",
+      "all": "All",
+      "relative": "Relative",
+      "hcStaff": "Healthcare Staff",
+      "rhStaff": "Retirement Home Staff",
+      "rhOccupant": "Retirement Home Occupants",
+      "allConfirmed": "All Confiermed",
+      "otherPersons": "Other Persons" 
+    },
+    "spread": {
+      "title": "Growth of Confirmed Cases"
+    },
+    "regions": {
+      "title": "Confirmed Cases by Region"
+    },
+    "map": {
+      "title": "Municipality Map"
+    },
+    "municipalities": {
+      "title": "Cases by Municipalities"
+    },
+    "ageGroups": {
+      "title": "Age Groups",
+      "male": "Male",
+      "female": "Female",
+      "absolute": "Absolute",
+      "relative": "Relative"
+    },
+    "countries": {
+      "title": "Comparison by Country"
+    }
+  },
+  "footer": {
+    "copyright": "© 2020 Sledilnik.org"
+  },
+  "tableDict": {
+    "tests.performed": "Tests",
+    "tests.performed.todate": "Tests (to date)",
+    "cases.confirmed": "Confirmed Cases",
+    "cases.confirmed.todate": "Confirmed Cases (to date)",
+    "cases.active": "Active Cases",
+    "cases.recovered.todate": "Recovered (to date)",
+    "cases.closed.todate": "Closed Cases (to date)",
+    "cases.hs.employee.confirmed.todate": "Confirmed Cases - Healthcare workers (to date)",
+    "cases.rh.employee.confirmed.todate": "Confirmed Cases - Retirement home employees (to date)",
+    "cases.rh.occupant.confirmed.todate": "Confirmed Cases - Retirement home residents (to date)",
+    "cases.unclassified.confirmed.todate": "Confirmed Cases - Others (to date)",
+    "state.in_hospital": "Hospitalized (active)",
+    "state.icu": "In ICU (active)",
+    "state.critical": "On Ventilator (active)",
+    "state.deceased.todate": "Confirmed Deaths (to date)",
+    "state.in_hospital.todate": "Hospitalized (to date)",
+    "state.out_of_hospital.todate": "Discharged from Hospital (to date)",
+    "age.male.todate": "Total",
+    "age.male.0-4.todate": "0 - 4 years",
+    "age.male.5-14.todate": "5 - 14 years",
+    "age.male.15-24.todate": "15 - 24 years",
+    "age.male.25-34.todate": "25 - 34 years",
+    "age.male.35-44.todate": "35 - 44 years",
+    "age.male.45-54.todate": "45 - 54 years",
+    "age.male.55-64.todate": "55 - 64 years",
+    "age.male.65-74.todate": "65 - 74 years",
+    "age.male.75-84.todate": "75 - 84 years",
+    "age.male.85+.todate": "85+ years",
+    "age.female.todate": "Total",
+    "age.female.0-4.todate": "0 - 4 years",
+    "age.female.5-14.todate": "5 - 14 years",
+    "age.female.15-24.todate": "15 - 24 years",
+    "age.female.25-34.todate": "25 - 34 years",
+    "age.female.35-44.todate": "35 - 44 years",
+    "age.female.45-54.todate": "45 - 54 years",
+    "age.female.55-64.todate": "55 - 64 years",
+    "age.female.65-74.todate": "65 - 74 years",
+    "age.female.75-84.todate": "75 - 84 years",
+    "age.female.85+.todate": "85+ years",
+    "region.kr.todate": "Upper Carniola Region",
+    "region.ng.todate": "Gorizia Region",
+    "region.nm.todate": "Southeast Slovenia",
+    "region.sg.todate": "Carinthia",
+    "region.kp.todate": "Coastal–Karst Region",
+    "region.lj.todate": "Central Slovenia",
+    "region.mb.todate": "Drava Region",
+    "region.ms.todate": "Mura Region",
+    "region.kk.todate": "Lower Sava Region",
+    "region.po.todate": "Littoral–Inner Carniola",
+    "region.ce.todate": "Savinja Region",
+    "region.za.todate": "Central Sava Region",
+    "region.todate": "Total"
+  }
+}

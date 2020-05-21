@@ -19,9 +19,9 @@ type DisplayType =
   with
     static member all = [ Cases; Hospital; Mortality ]
     static member getName = function
-        | Cases     -> "Resni primeri"
-        | Hospital  -> "Hospitalizirani"
-        | Mortality -> "Smrtnost"
+        | Cases     -> I18N.t "charts.ratios.seriousCases"
+        | Hospital  -> I18N.t "charts.ratios.hospitalizations"
+        | Mortality -> I18N.t "charts.ratios.mortality"
     static member getClassName = function
         | Cases     -> "covid19-ratios-cases"
         | Hospital  -> "covid19-ratios-hospital"
@@ -46,20 +46,19 @@ module Ratios =
         | Hospital  -> [ IcuHospital; CriticalHospital; DeceasedHospital]
         | Mortality -> [ DeceasedHospitalDeceasedTotal; DeceasedIcuDeceasedTotal; DeceasedIcuC; DeceasedHospitalC; ]
 
-    // color, dash, name
+    // color, dash, id
     let getSeriesInfo = function
-        | HospitalCases                 -> "#de9a5a", Solid,    "Hospitalizirirani"
-        | IcuCases                      -> "#d99a91", Solid,    "V intenzivni enoti"
-        | CriticalCases                 -> "#bf5747", Solid,    "Na respiratorju"
-        | DeceasedCases                 -> "#666666", Dot,      "Umrli"
-        | IcuHospital                   -> "#d99a91", Solid,    "V intenzivni enoti"
-        | CriticalHospital              -> "#bf5747", Solid,    "Na repiratorju"
-        | DeceasedHospital              -> "#666666", Dot,      "Umrli"
-        | DeceasedHospitalC             -> "#de9a5a", Dot,      "Smrtnost v bolnišnici"
-        | DeceasedIcuC                  -> "#d99a91", Dot,      "Smrtnost v intenzivni enoti"
-        | DeceasedIcuDeceasedTotal      -> "#d99a91", Solid,    "Delež smrti v intenzivni enoti"
-        | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "Delež smrti v bolnišnici"
-
+        | HospitalCases                 -> "#de9a5a", Solid,    "hospitalCases"
+        | IcuCases                      -> "#d99a91", Solid,    "icuCases"
+        | CriticalCases                 -> "#bf5747", Solid,    "ventilatorCases"
+        | DeceasedCases                 -> "#666666", Dot,      "deceasedCases"
+        | IcuHospital                   -> "#d99a91", Solid,    "icuHospital"
+        | CriticalHospital              -> "#bf5747", Solid,    "ventilatorHospital"
+        | DeceasedHospital              -> "#666666", Dot,      "deceasedHospital"
+        | DeceasedHospitalC             -> "#de9a5a", Dot,      "hospitalMortality"
+        | DeceasedIcuC                  -> "#d99a91", Dot,      "icuMortality"
+        | DeceasedIcuDeceasedTotal      -> "#d99a91", Solid,    "icuDeceasedShare"
+        | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "hospitalDeceasedShare"
 
 type State = {
     casesMap: Map<DateTime, int option>
@@ -100,12 +99,12 @@ let renderRatiosChart (state : State) =
     let startDate = DateTime(2020,03,10)
 
     let renderRatiosH ratio =
-        let percent (a : int option) (b : int option) = 
+        let percent (a : int option) (b : int option) =
             match a with
             | None | Some 0 -> None
             | _ ->  Some (float a.Value * 100. / float b.Value |> Utils.roundTo1Decimal)
 
-        let cases (date : DateTime) = 
+        let cases (date : DateTime) =
             match state.casesMap.TryFind date with
             | None -> None
             | Some i -> i
@@ -118,7 +117,7 @@ let renderRatiosChart (state : State) =
             | DeceasedCases                 -> fun ps -> ps.JsDate12h, percent ps.total.deceased.toDate (cases ps.Date)
             | IcuHospital                   -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate ps.total.inHospital.toDate
             | CriticalHospital              -> fun ps -> ps.JsDate12h, percent ps.total.critical.toDate ps.total.inHospital.toDate
-            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate 
+            | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
             | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate 
@@ -126,11 +125,12 @@ let renderRatiosChart (state : State) =
 
         let color, line, name = Ratios.getSeriesInfo ratio
 
+        let color, line, id = Ratios.getSeriesInfo ratio
         {|
             visible = true
             color = color
             dashStyle = line |> DashStyle.toString
-            name = name
+            name = I18N.tt "charts.ratios" id
             data =
                 state.patientsData
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate || dp.total.inHospital.toDate.IsNone)
@@ -139,7 +139,7 @@ let renderRatiosChart (state : State) =
         |}
         |> pojo
 
-        
+
     let maxValue = if state.displayType = Mortality then Some 100 else None
     let className = DisplayType.getClassName state.displayType
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
@@ -155,12 +155,12 @@ let renderRatiosChart (state : State) =
             {|
                 spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
-        yAxis = baseOptions.yAxis 
+        yAxis = baseOptions.yAxis
             |> Array.map (fun ax -> {| ax with max = maxValue ; labels = pojo {| format = "{value}%" |} |} )
 
-        series = [| 
-            for ratio in Ratios.getSeries(state.displayType) do 
-            yield renderRatiosH ratio 
+        series = [|
+            for ratio in Ratios.getSeries(state.displayType) do
+            yield renderRatiosH ratio
         |]
 
         tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = @"%A, %e. %B %Y" |}
@@ -172,7 +172,7 @@ let renderChartContainer state =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
+        prop.children [ renderRatiosChart state  |> Highcharts.chart ]
     ]
 
 let renderDisplaySelector state dt dispatch =

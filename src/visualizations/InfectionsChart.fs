@@ -22,7 +22,7 @@ type Metric =
 type MetricCfg = {
     Metric : Metric
     Color : string
-    Label : string
+    Id : string
 }
 
 type Metrics = MetricCfg list
@@ -34,11 +34,11 @@ type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
 
 module Metrics  =
     let all = [
-        { Metric=AllConfirmed;      Color="#bda506"; Label="Vsi potrjeni" }
-        { Metric=OtherPeople;       Color="#FFDBA3"; Label="Ostale osebe" }
-        { Metric=HospitalStaff;     Color="#73ccd5"; Label="Zaposleni v zdravstvu" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Label="Zaposleni v domovih za starejše občane" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Label="Oskrbovanci domov za starejše občane" }
+        { Metric=AllConfirmed;      Color="#bda506"; Id="allConfirmed" }
+        { Metric=OtherPeople;       Color="#FFDBA3"; Id="otherPersons" }
+        { Metric=HospitalStaff;     Color="#73ccd5"; Id="hcStaff" }
+        { Metric=RestHomeStaff;     Color="#20b16d"; Id="rhStaff" }
+        { Metric=RestHomeOccupant;  Color="#bf5747"; Id="rhOccupant" }
     ]
 
     let metricsToDisplay filter =
@@ -56,7 +56,7 @@ type ChartType =
     | SplineChart
 
 type DisplayType = {
-    Label: string
+    Id: string
     ValueTypes: ValueTypes
     ShowAllOrOthers: ShowAllOrOthers
     ChartType: ChartType
@@ -65,27 +65,24 @@ type DisplayType = {
 }
 
 [<Literal>]
-let DisplayTypeAverageLabel = "Po dnevih (povprečno)"
-
-[<Literal>]
 let DaysOfMovingAverage = 5
 
 let availableDisplayTypes: DisplayType array = [|
-    {   Label = DisplayTypeAverageLabel
+    {   Id = "averageByDay"
         ValueTypes = MovingAverages
         ShowAllOrOthers = ShowAllConfirmed
         ChartType = SplineChart
         ShowPhases = true
         ShowLegend = true
     }
-    {   Label = "Skupaj";
+    {   Id = "all";
         ValueTypes = RunningTotals
         ShowAllOrOthers = ShowOthers
         ChartType = StackedBarNormal
         ShowPhases = false
         ShowLegend = true
     }
-    {   Label = "Relativno";
+    {   Id = "relative";
         ValueTypes = RunningTotals
         ShowAllOrOthers = ShowOthers
         ChartType = StackedBarPercent
@@ -194,7 +191,7 @@ let renderChartOptions displayType (data : StatsData) =
                 {|
                 visible = true
                 color = metric.Color
-                name = metric.Label
+                name = I18N.tt "charts.infections" metric.Id
                 data = metricData
                 marker = pojo {| enabled = false |}
                 |}
@@ -219,7 +216,6 @@ let renderChartOptions displayType (data : StatsData) =
             verticalAlign = "top"
             borderColor = "#ddd"
             borderWidth = 1
-            //labelFormatter = string //fun series -> series.name
             layout = "vertical"
             floating = true
             x = 20
@@ -228,7 +224,8 @@ let renderChartOptions displayType (data : StatsData) =
             reversed = true
         |}
 
-    let baseOptions = basicChartOptions Linear "covid19-metrics-comparison"
+    let className = "covid19-infections"
+    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
 
     let axisWithPhases() = baseOptions.xAxis
 
@@ -240,7 +237,6 @@ let renderChartOptions displayType (data : StatsData) =
             plotLines = [||]
         |})
 
-
     {| baseOptions with
         chart = pojo
             {|
@@ -250,6 +246,8 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
+                className = className
+                events = pojo {| load = onLoadEvent(className) |}
             |}
         title = pojo {| text = None |}
         series = List.toArray allSeries
@@ -277,7 +275,7 @@ let renderChartContainer data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
-            |> chart
+            |> Highcharts.chart
         ]
     ]
 
@@ -285,7 +283,7 @@ let renderDisplaySelectors activeDisplayType dispatch =
     let renderSelector (displayType : DisplayType) =
         let active = displayType = activeDisplayType
         Html.div [
-            prop.text displayType.Label
+            prop.text (I18N.tt "charts.infections" displayType.Id)
             prop.className [
                 true, "btn btn-sm metric-selector"
                 active, "metric-selector--selected selected" ]
@@ -321,12 +319,12 @@ let render state dispatch =
         Html.div [
             prop.className "disclaimer"
             prop.children [
-                Html.text "Opomba: omejitve prikazanih podatkov so razložene v "
+                Html.text (I18N.t "charts.common.noteFaq")
                 Html.a
                     [ prop.className "faq-link"
                       prop.target "_blank"
                       prop.href "/FAQ/#infections-chart"
-                      prop.text "FAQ" ]
+                      prop.text (I18N.t "charts.common.linkFaq") ]
             ]
         ]
     ]
