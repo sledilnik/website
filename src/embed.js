@@ -15,19 +15,39 @@ import 'style/embed.scss'
 
 Vue.use(VueRouter)
 
-
 const routes = [
   {
     path: '/tables',
     component: TablesPage,
+    beforeEnter: (to, from, next) => {
+      i18next.changeLanguage('sl', (err, t) => {
+        if (err) return console.log('something went wrong loading', err)
+        moment.locale('sl')
+      })
+      return next()
+    },
   },
   {
     path: '/card/:type',
     component: InfoCardEmbed,
+    beforeEnter: (to, from, next) => {
+      i18next.changeLanguage('sl', (err, t) => {
+        if (err) return console.log('something went wrong loading', err)
+        moment.locale('sl')
+      })
+      return next()
+    },
   },
   {
     path: '/chart/:type',
     component: ChartEmbed,
+    beforeEnter: (to, from, next) => {
+      i18next.changeLanguage('sl', (err, t) => {
+        if (err) return console.log('something went wrong loading', err)
+        moment.locale('sl')
+      })
+      return next()
+    },
   },
   {
     path: '/:lang',
