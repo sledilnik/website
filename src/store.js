@@ -306,7 +306,7 @@ function processTableData(data) {
   const x = Object.keys(_.last(data)).map(dimension => {
     let newData = {}
     newData['dim'] = dimension
-    newData[' '] = i18next.t('tableDict')[dimension]
+    newData[' '] = i18next.t('tableDict')[dimension.replace(/\./g, "_")]
 
     data.slice().reverse().forEach((day, i) => {
       let date = i18next.t('tables.day', { date: new Date(day.date), interpolation: { escapeValue: false }})
