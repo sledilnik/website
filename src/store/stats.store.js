@@ -1,13 +1,7 @@
-import * as d3 from 'd3'
-import { exportTime, loadCsv } from './index'
+import _ from 'lodash'
+import { exportTime } from './index'
 import ApiService from '../services/api.service'
-// import regions from '../services/dict.regions.json'
-
-ApiService.init('https://api.sledilnik.org/api/stats')
-
-ApiService.get().then(result => {
-  return console.log(result)
-})
+import regions from '../services/dict.regions.json'
 
 export function lastChange(data, field, cumulative) {
   const result = {
@@ -33,17 +27,22 @@ export function lastChange(data, field, cumulative) {
 
   let i = data.length - 1
 
-  // console.log("lastDay found in row", i, data[i])
+  // console.log('lastDay found in row', i, data[i])
 
-  while (i >= 0 && data[i][field] == null) i--
-  result.lastDay.date = new Date(data[i]['date'])
-  result.lastDay.value = data[i][field]
+  while (i >= 0 && _.get(data, `${i}.${field}`) == null) i--
+
+  result.lastDay.date = new Date(data[i].year, data[i].month - 1, data[i].day)
+  result.lastDay.value = _.get(data, `${i}.${field}`)
 
   if (cumulative) {
-    while (i >= 0 && result.lastDay.value === data[i][field]) i--
-    let date = new Date(data[i + 1]['date'])
+    while (i >= 0 && result.lastDay.value === _.get(data, `${i}.${field}`)) i--
+    let date = new Date(
+      data[i + 1].year,
+      data[i + 1].month - 1,
+      data[i + 1].day
+    )
     if (
-      data[i + 1][field] != null &&
+      _.get(data, `${i + 1}.${field}`) != null &&
       result.lastDay.date.getTime() != date.getTime()
     ) {
       result.lastDay.firstDate = date
@@ -53,15 +52,24 @@ export function lastChange(data, field, cumulative) {
   }
 
   if (i >= 0) {
-    while (i >= 0 && data[i][field] == null) i--
-    result.dayBefore.date = new Date(data[i]['date'])
-    result.dayBefore.value = data[i][field]
+    while (i >= 0 && _.get(data, `${i}.${field}`) == null) i--
+    result.dayBefore.date = new Date(
+      data[i].year,
+      data[i].month - 1,
+      data[i].day
+    )
+    result.dayBefore.value = _.get(data, `${i}.${field}`)
   }
 
   if (cumulative) {
     if (i >= 0) {
-      while (i >= 0 && result.dayBefore.value === data[i][field]) i--
-      let date = new Date(data[i + 1]['date'])
+      while (i >= 0 && result.dayBefore.value === _.get(data, `${i}.${field}`))
+        i--
+      let date = new Date(
+        data[i + 1].year,
+        data[i + 1].month - 1,
+        data[i + 1].day
+      )
       if (result.dayBefore.date.getTime() != date.getTime()) {
         result.dayBefore.firstDate = date
       }
@@ -71,10 +79,14 @@ export function lastChange(data, field, cumulative) {
   }
 
   if (i >= 0) {
-    while (i >= 0 && data[i][field] == null) i--
+    while (i >= 0 && _.get(data, `${i}.${field}`) == null) i--
     if (data[i]) {
-      result.day2Before.date = new Date(data[i]['date'])
-      result.day2Before.value = data[i][field]
+      result.day2Before.date = new Date(
+        data[i].year,
+        data[i].month - 1,
+        data[i].day
+      )
+      result.day2Before.value = _.get(data, `${i}.${field}`)
     }
   }
 
@@ -148,18 +160,15 @@ const getters = {
 const actions = {
   fetchData: async ({ commit }) => {
     const ts = new Date().getTime()
+
+    // TODO: https://stackoverflow.com/questions/37897523/axios-get-access-to-response-header-fields
     const d = await exportTime(
       `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`
     )
-    const [data, regions] = await Promise.all([
-      loadCsv(
-        `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv?nocache=${ts}`
-      ),
-      d3.csv(
-        `https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-region.csv?nocache=${ts}`
-      ),
-    ])
-    console.log('csv', data, regions)
+    const data = await ApiService.get('https://api.sledilnik.org/api/stats').then((result) => {
+      return result.data
+    })
+
     commit('setData', data)
     commit('setRegions', regions)
     commit('setExportTime', d)

@@ -8,11 +8,11 @@
         </b-col>
       </b-row>
       <div class="cards-wrapper latest-data-boxes">
-        <Info-card :title="$t('infocard.confirmedToDate')" field="cases.confirmed.todate" series-type="state" />
-        <Info-card :title="$t('infocard.recoveredToDate')" field="cases.recovered.todate" good-trend="up" series-type="state" />
-        <Info-card :title="$t('infocard.inHospital')" field="state.in_hospital" series-type="state" />
-        <Info-card :title="$t('infocard.icu')" field="state.icu" series-type="state" />
-        <Info-card :title="$t('infocard.deceasedToDate')" field="state.deceased.todate" series-type="state" />
+        <Info-card :title="$t('infocard.confirmedToDate')" field="cases.confirmedToDate" series-type="state" />
+        <Info-card :title="$t('infocard.recoveredToDate')" field="cases.recoveredToDate" good-trend="up" series-type="state" />
+        <Info-card :title="$t('infocard.inHospital')" field="statePerTreatment.inHospital" series-type="state" />
+        <Info-card :title="$t('infocard.icu')" field="statePerTreatment.inICU" series-type="state" />
+        <Info-card :title="$t('infocard.deceasedToDate')" field="statePerTreatment.deceasedToDate" series-type="state" />
       </div>
       <b-row cols="12">
         <b-col>

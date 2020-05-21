@@ -1,5 +1,6 @@
-import * as d3 from 'd3'
-import { exportTime, loadCsv } from './index'
+import { exportTime } from './index'
+import hospitalsJSON from '../services/dict.hospitals.json'
+import ApiService from '../services/api.service'
 
 const state = {
   loaded: false,
@@ -54,19 +55,17 @@ const actions = {
   fetchData: async ({ commit }) => {
     const ts = new Date().getTime()
 
+    // TODO: https://stackoverflow.com/questions/37897523/axios-get-access-to-response-header-fields
     const d = await exportTime(
       `https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv.timestamp?nocache=${ts}`
     )
 
-    let data = await loadCsv(
-      `https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv?nocache=${ts}`
-    )
-    let hospitals = {}
-    let rawData = await d3.csv(
-      `https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-hospitals.csv?nocache=${ts}`
-    )
+    const data = await ApiService.get('https://api.sledilnik.org/api/hospitals').then((result) => {
+      return result.data
+    })
 
-    rawData.forEach((row) => {
+    let hospitals = {}
+    hospitalsJSON.forEach((row) => {
       hospitals[row.id] = row.name
     })
 
