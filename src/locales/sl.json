@@ -317,7 +317,17 @@
       "title": "Potrjeno okuženi po regijah"
     },
     "map": {
-      "title": "Zemljevid po občinah"
+      "title": "Zemljevid po občinah",
+      "confirmedCases": "Potrjeni primeri",
+      "deceased": "Umrli",
+      "view": "Prikaži:",
+      "absolute": "Absolutno",
+      "populationShare": "Delež prebivalstva",
+      "all": "Vsi",
+      "days": "dni",    
+      "populationC": "Prebivalcev",    
+      "population": "prebivalcev",    
+      "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"    
     },
     "municipalities": {
       "title": "Primeri po občinah"
