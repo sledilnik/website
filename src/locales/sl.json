@@ -50,6 +50,13 @@
     "copy": "Kopiraj",
     "copied": "Skopirano!"
   },
+  "days": {
+    "dnevu": "dnevu",
+    "dneh": "dneh",
+    "dnevom": "dnevom",
+    "dnevoma": "dnevoma",
+    "dnevi": "dnevi"
+  },  
   "month": {
     "0": "januar",
     "1": "februar",
@@ -330,7 +337,25 @@
       "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"    
     },
     "municipalities": {
-      "title": "Primeri po občinah"
+      "title": "Primeri po občinah",
+      "lastCase": "Zadnji primer: ",
+      "lastCaseBefore": "Zadnji primer pred: ",
+      "today": "danes",
+      "yesterday": "včeraj",
+      "doublesIn": "Podvojitev v ",
+      "deceased": "Umrli:",
+      "recovered": "Preboleli:",
+      "active": "Aktivni:",
+      "all": "Vsi:",
+      "showLess": "Prikaži manj občin",
+      "showAll": "Prikaži vse občine",
+      "search": "Poišči občino",
+      "allRegions": "Vse regije",
+      "sortBy": "Razvrsti:",
+      "sortActive": "Aktivni",
+      "sortTotal": "Vsi",
+      "sortDoublingTime": "Dnevih podvojitve",
+      "sortLast": "Zadnji"
     },
     "ageGroups": {
       "title": "Po starostnih skupinah",
