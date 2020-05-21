@@ -32,8 +32,8 @@ type ContentType =
 
     override this.ToString() =
        match this with
-       | ConfirmedCases -> "Potrjeni primeri"
-       | Deceased -> "Umrli"
+       | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
+       | Deceased       -> I18N.t "charts.map.deceased"
 
 type DisplayType =
     | AbsoluteValues
@@ -41,8 +41,8 @@ type DisplayType =
 
     override this.ToString() =
        match this with
-       | AbsoluteValues -> "Absolutno"
-       | RegionPopulationWeightedValues -> "Delež prebivalstva"
+       | AbsoluteValues                 -> I18N.t "charts.map.absolute"
+       | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
 
 type DataTimeInterval =
     | Complete
@@ -50,8 +50,8 @@ type DataTimeInterval =
 
     override this.ToString() =
         match this with
-        | Complete -> "Vsi"
-        | LastDays days -> sprintf "%d dni" days
+        | Complete -> I18N.t "charts.map.all"
+        | LastDays days -> sprintf "%d %s" days (I18N.t "charts.map.days")
 
 let dataTimeIntervals =
     [ LastDays 7
@@ -80,13 +80,13 @@ let loadGeoJson =
         let! (statusCode, response) = Http.get geoJsonUrl
 
         if statusCode <> 200 then
-            return GeoJsonLoaded (sprintf "Napaka pri nalaganju zemljevida: %d" statusCode |> Failure)
+            return GeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
         else
             try
                 let data = response |> Fable.Core.JS.JSON.parse
                 return GeoJsonLoaded (data |> Success)
             with
-                | ex -> return GeoJsonLoaded (sprintf "Napaka pri nalaganju zemljevida: %s" ex.Message |> Failure)
+                | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
 let init (regionsData : RegionsData) : State * Cmd<Msg> =
@@ -163,21 +163,24 @@ let seriesData (state : State) =
 
     let renderLabel population absolute totalConfirmed =
         let pctPopulation = float absolute * 100.0 / float population 
-        let mutable fmtStr = sprintf "Prebivalcev: <b>%d</b>" population
+        let mutable fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
         if state.ContentType = ConfirmedCases.ToString()
         then 
-            fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b>" absolute
+            fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
             if absolute > 0 then
-                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                    (I18N.t "charts.map.population")
         else // deceased
-            fmtStr <- fmtStr + sprintf "<br>Umrli: <b>%d</b>" absolute
+            fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                fmtStr <- fmtStr + sprintf " (%s %% prebivalcev)" 
+                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
                     (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                fmtStr <- fmtStr + sprintf "<br>Potrjeno okuženi: <b>%d</b> (%s %% prebivalcev)" 
+                    (I18N.t "charts.map.population")
+                fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b> (%s %% %s)" (I18N.t "charts.map.confirmedCases") 
                     totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                fmtStr <- fmtStr + sprintf "<br>Smrtnost potrjenih primerov: <b>%s %%</b>" 
+                    (I18N.t "charts.map.population")
+                fmtStr <- fmtStr + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.map.mortalityOfConfirmedCases")
                     (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
         fmtStr
 
@@ -279,7 +282,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (Html.text "Prikaži:" :: renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
+        prop.children (Html.text (I18N.t "charts.map.view") :: renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
     ]
 
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =

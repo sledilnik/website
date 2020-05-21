@@ -184,9 +184,9 @@ let renderMunicipality (municipality : Municipality) =
     let renderLastCase =
         let label, value =
             match municipality.DaysSinceLastCase with
-            | 0 -> "Zadnji primer: ", "danes"
-            | 1 -> "Zadnji primer: ", "včeraj"
-            | x -> "Zadnji primer pred: ", sprintf "%d %s" x (Utils.daysOrodnik x)
+            | 0 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.today"
+            | 1 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.yesterday"
+            | x -> I18N.t "charts.municipalities.lastCaseBefore", sprintf "%d %s" x (Utils.daysOrodnik x)
 
         Html.div [
             prop.className "last-case-days"
@@ -212,7 +212,7 @@ let renderMunicipality (municipality : Municipality) =
                 prop.children [
                     Html.span [
                         prop.className "label"
-                        prop.text "Podvojitev v "
+                        prop.text (I18N.t "charts.municipalities.doublesIn")
                     ]
                     Html.span [
                         prop.className "value"
@@ -272,24 +272,24 @@ let renderMunicipality (municipality : Municipality) =
                                             if (deceasedToDate > 0) then
                                                 prop.className "deceased"
                                                 prop.children [
-                                                    Html.span [ prop.text "Umrli: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
                                                     Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
                                             if (recoveredToDate > 0) then
                                                 prop.className "recovered"
                                                 prop.children [
-                                                    Html.span [ prop.text "Preboleli: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
                                                     Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
                                             if (activeCases > 0) then
                                                 prop.className "active"
                                                 prop.children [
-                                                    Html.span [ prop.text "Aktivni: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
                                                     Html.b [ prop.text activeCases ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
-                                                Html.span [ prop.text "Vsi: " ]
+                                                Html.span [ prop.text (I18N.t "charts.municipalities.all") ]
                                                 Html.b [ prop.text confirmedToDate ] ] ]
                                     ]
                                 ]
@@ -418,7 +418,7 @@ let renderShowMore showAll dispatch =
             Html.div [
                 Html.button [
                     prop.className "btn btn-primary btn-sm"
-                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži vse občine")
+                    prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
                     prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
             ]
@@ -429,7 +429,7 @@ let renderSearch (query : string) dispatch =
     Html.input [
         prop.className "form-control form-control-sm filters__query"
         prop.type' .text
-        prop.placeholder "Poišči občino"
+        prop.placeholder (I18N.t "charts.municipalities.search") 
         prop.valueOrDefault query
         prop.onChange (fun query -> SearchInputChanged query |> dispatch)
     ]
@@ -437,7 +437,7 @@ let renderSearch (query : string) dispatch =
 let renderRegionSelector (regions : Region list) (selected : string) dispatch =
     let renderedRegions = seq {
         yield Html.option [
-            prop.text "Vse regije"
+            prop.text (I18N.t "charts.municipalities.allRegions")
             prop.value ""
         ]
 
@@ -474,12 +474,12 @@ let renderSortBy (currentSortBy : SortBy) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Razvrsti:"
-            renderSelector SortBy.ActiveCases "Aktivni"
-            renderSelector SortBy.TotalConfirmedCases "Vsi"
+            Html.text (I18N.t "charts.municipalities.sortBy")
+            renderSelector SortBy.ActiveCases (I18N.t "charts.municipalities.sortActive")
+            renderSelector SortBy.TotalConfirmedCases (I18N.t "charts.municipalities.sortTotal")
             if Highcharts.showExpGrowthFeatures then
-                renderSelector SortBy.DoublingTime "Dnevih podvojitve"
-            renderSelector SortBy.LastConfirmedCase "Zadnji"
+                renderSelector SortBy.DoublingTime (I18N.t "charts.municipalities.sortDoublingTime")
+            renderSelector SortBy.LastConfirmedCase (I18N.t "charts.municipalities.sortLast")
         ]
     ]
 
