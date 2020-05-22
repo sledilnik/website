@@ -123,7 +123,8 @@
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
-            "linkFaq": "FAQ"
+            "linkFaq": "FAQ",
+            "xAxis": "X axis:"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
@@ -291,7 +292,21 @@
             "view": "Show:"
         },
         "countries": {
-            "title": "Comparison by Country"
+            "title": "Comparison by Country",
+            "dataSourceOWID": "data source: Our World In Data",
+            "nrDeathsPerMillion": "Nr. deaths per 1 million people",
+            "daysFromOneDeathPerMillion": "Nr. days since 1 died per 1 million people",
+            "daysFromFirstDeath": "Nr. days since first death",
+            "sinceOneDeathPerMillion": "Since first death per million people",
+            "deathsPerMillion": "Deaths per million people",
+            "sinceFirstDeath": "Since the first death",
+            "chronologically": "Chronological",
+            "groupEastAsiaOceania": "East Asia and Oceania",
+            "groupExYu": "Ex-Yugoslavia",
+            "groupNordic": "Nordic countries",
+            "groupCriticalWorld": "critical countries (world)",
+            "groupCriticalEU": "critical countries (EU)",
+            "groupNeighbouringWoItaly": "surroundings (excluding Italy)"
         }
     },
     "footer": {
@@ -449,5 +464,41 @@
         "nm": "Southeast Slovenia",
         "ng": "Gorizia Region",
         "kr": "Upper Carniola Region"
+    },
+    "country": {
+        "USA": "USA",
+        "TUR": "Turkey",
+        "TWN": "Taiwan",
+        "SWE": "Sweden",
+        "SVN": "Slovenia",
+        "SVK": "Slovakia",
+        "SRB": "Serbia",
+        "SGP": "Singapore",
+        "RUS": "Russia",
+        "RKS": "Kosovo",
+        "NOR": "Norway",
+        "NZL": "New Zealand",
+        "MNE": "Montenegro",
+        "MKD": "N. Macedonia",
+        "KOR": "S. Korea",
+        "JPN": "Japan",
+        "ITA": "Italy",
+        "ISL": "Iceland",
+        "IRN": "Iran",
+        "HUN": "Hungary",
+        "HRV": "Croatia",
+        "GBR": "United Kingdom",
+        "FRA": "France",
+        "FIN": "Finland",
+        "ESP": "Spain",
+        "DNK": "Denmark",
+        "DEU": "Germany",
+        "CZE": "Czech Republic",
+        "CHN": "China",
+        "CHE": "Switzerland",
+        "BIH": "Bosnia and Herzegovina",
+        "BEL": "Belgium",
+        "AUT": "Austria",
+        "AUS": "Australia"
     }
 }
