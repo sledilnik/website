@@ -161,7 +161,6 @@ const actions = {
   fetchData: async ({ commit }) => {
     const ts = new Date().getTime()
 
-    // TODO: https://stackoverflow.com/questions/37897523/axios-get-access-to-response-header-fields
     const d = await exportTime(
       `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`
     )

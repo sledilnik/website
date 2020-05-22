@@ -27,10 +27,12 @@ export default {
   created() {
     this.$store.dispatch("stats/fetchData");
     this.$store.dispatch("hospitals/fetchData");
+    this.$store.dispatch("patients/fetchData");
   },
   mounted() {
     this.$store.dispatch("stats/refreshDataEvery", 300);
     this.$store.dispatch("hospitals/refreshDataEvery", 300);
+    this.$store.dispatch("patients/refreshDataEvery", 300);
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash);
