@@ -104,7 +104,7 @@ export default {
     flex: 0 0 calc(100% / 3);
   }
 
-  @media only screen and (min-width: 1100px) {
+  @media only screen and (min-width: 1135px) {
     flex: 0 0 20%;
   }
 }
