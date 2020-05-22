@@ -4,11 +4,13 @@ open Fable.Core.JsInterop
 
 type Ii18n =
     abstract t : string -> string
+    abstract t : string * obj -> string
 
 let i18n : Ii18n = importDefault "i18n"
 
 let t key = i18n.t key
 
-let tt section id = 
-    let key = section + "." + id
-    t key
+let tOptions key options = i18n.t (key, options)
+
+let tt section key =
+    t section + "." + key
