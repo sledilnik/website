@@ -373,10 +373,21 @@
     },
     "ageGroups": {
       "title": "Po starostnih skupinah",
+      "view": "Prikaži:",
+      "absolute": "Absolutno",
+      "relative": "Relativno",
       "male": "Moški",
       "female": "Ženske",
-      "absolute": "Absolutno",
-      "relative": "Relativno"
+      "confirmedCases": "Potrjeni primeri",
+      "deceased": "Umrli",
+      "age": "Starost",
+      "confirmedCasesPerPopulation": "Delež potrjeno okuženih",
+      "deceasedPerPopulation": "Delež umrlih",
+      "deceasedPerConfirmedCases": "Umrli glede na št. okuženih",
+      "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
+      "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
+      "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
+      "populationTotal": "Prebivalcev skupaj"
     },
     "countries": {
       "title": "Primerjava po državah"
