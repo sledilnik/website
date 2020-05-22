@@ -10,7 +10,7 @@ open Feliz.ElmishComponents
 
 open Types
 
-let barMaxHeight = 50
+let barMaxHeight = 55
 let showMaxBars = 30
 let collapsedMunicipalityCount = 24
 
@@ -18,7 +18,7 @@ let excludedMunicipalities = Set.ofList ["kraj"]
 
 type Region =
     { Key : string
-      Name : string option }
+      Name : string }
 
 type TotalsForDate =
     { Date : System.DateTime
@@ -88,7 +88,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let regions =
         lastDataPoint.Regions
         |> List.filter (fun region -> Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
-        |> List.map (fun reg -> { Key = reg.Name ; Name = (Utils.Dictionaries.regions.TryFind reg.Name) |> Option.map (fun region -> region.Name) })
+        |> List.map (fun reg -> { Key = reg.Name ; Name = I18N.tt "region" reg.Name })
         |> List.sortBy (fun region -> region.Name)
 
     let query = Query(queryObj, regions)
@@ -442,12 +442,8 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         ]
 
         for region in regions do
-            let label =
-                match region.Name with
-                | None -> region.Key
-                | Some name -> name
             yield Html.option [
-                prop.text label
+                prop.text region.Name
                 prop.value region.Key
             ]
     }

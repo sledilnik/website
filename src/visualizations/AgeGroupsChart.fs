@@ -51,8 +51,9 @@ let populationOf sexLabel ageGroupLabel =
             let fromAge = Int32.Parse(label.Substring(0, i))
             let toAge = Int32.Parse(label.Substring(i+1))
             { AgeFrom = Some fromAge; AgeTo =  Some toAge }
-        else if label.Contains("nad ") then
-            let fromAge = Int32.Parse(label.Substring("nad ".Length))
+        else if label.Contains("+") then
+            let i = label.IndexOf('-')
+            let fromAge = Int32.Parse(label.Substring(0, i))
             { AgeFrom = Some fromAge; AgeTo =  None }
         else
             sprintf "Invalid age group label: %s" label
@@ -256,7 +257,7 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Prikaži:"
+            Html.text (I18N.t "charts.ageGroups.view")
             renderScaleTypeSelector Absolute activeScaleType (I18N.t "charts.ageGroups.absolute")
             renderScaleTypeSelector Relative activeScaleType (I18N.t "charts.ageGroups.relative")
         ]
@@ -276,11 +277,11 @@ let renderChartCategorySelector
             isActive, "metric-selector--selected" ]
         prop.text (
             match chartModeToRender with
-            | AbsoluteInfections -> "Potrjeno okuženi"
-            | AbsoluteDeaths -> "Umrli"
-            | InfectionsPerPopulation -> "Delež potrjeno okuženih"
-            | DeathsPerPopulation -> "Delež umrlih"
-            | DeathsPerInfections -> "Umrli glede na št. okuženih"
+            | AbsoluteInfections        -> I18N.t "charts.ageGroups.confirmedCases"
+            | AbsoluteDeaths            -> I18N.t "charts.ageGroups.deceased"
+            | InfectionsPerPopulation   -> I18N.t "charts.ageGroups.confirmedCasesPerPopulation"
+            | DeathsPerPopulation       -> I18N.t "charts.ageGroups.deceasedPerPopulation"
+            | DeathsPerInfections       -> I18N.t "charts.ageGroups.deceasedPerConfirmedCases" 
             )
     ]
 
@@ -347,35 +348,47 @@ let renderChartOptions
                  match state.ChartMode with
                  | AbsoluteInfections ->
                      sprintf
-                         "<b>%s</b><br/>Starost: %s<br/>Potrjeno okuženi: %A"
+                         "<b>%s</b><br/>%s: %s<br/>%s: %A"
                          sex
+                         (I18N.t "charts.ageGroups.age")
                          ageGroup
+                         (I18N.t "charts.ageGroups.confirmedCases")
                          (abs dataValue)
                  | InfectionsPerPopulation ->
                      sprintf
-                         "<b>%s</b><br/>Starost: %s<br/>Delež okuženega prebivalstva: %s<br/>Prebivalcev skupaj: %d"
+                         "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"
                          sex
+                         (I18N.t "charts.ageGroups.age")
                          ageGroup
+                         (I18N.t "charts.ageGroups.shareOfInfectedPopulation")
                          (percentageValuesLabelFormatter dataValue)
+                         (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->
                      sprintf
-                         "<b>%s</b><br/>Starost: %s<br/>Umrli: %A"
+                         "<b>%s</b><br/>%s: %s<br/>%s: %A"
                          sex
+                         (I18N.t "charts.ageGroups.age")
                          ageGroup
+                         (I18N.t "charts.ageGroups.deceased")
                          (abs dataValue)
                  | DeathsPerPopulation ->
                      sprintf
-                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih med prebivalstvom: %s<br/>Prebivalcev skupaj: %d"
+                         "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"
                          sex
+                         (I18N.t "charts.ageGroups.age")
                          ageGroup
+                         (I18N.t "charts.ageGroups.shareOfDeceasedPopulation")
                          (percentageValuesLabelFormatter dataValue)
+                         (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | DeathsPerInfections ->
                      sprintf
-                         "<b>%s</b><br/>Starost: %s<br/>Delež umrlih glede na št. okuženih: %s"
+                         "<b>%s</b><br/>%s: %s<br/>%s: %s"
                          sex
+                         (I18N.t "charts.ageGroups.age")
                          ageGroup
+                         (I18N.t "charts.ageGroups.shareOfDeceasedConfirmedCases")
                          (percentageValuesLabelFormatter dataValue)
             |}
         series = [|

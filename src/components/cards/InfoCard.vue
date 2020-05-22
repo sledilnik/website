@@ -150,7 +150,7 @@ export default {
     flex: 0 0 calc(100% / 3);
   }
 
-  @media only screen and (min-width: 1100px) {
+  @media only screen and (min-width: 1135px) {
     flex: 0 0 20%;
   }
 }
@@ -228,9 +228,12 @@ export default {
       background-color: #404040;
     }
 
+    &.none {
+      display: none;
+    }
+
     &.no-change {
       background-color: #a0a0a0;
-      display: none;
     }
   }
   .out {
