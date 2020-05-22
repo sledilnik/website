@@ -128,9 +128,9 @@
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
-            "tests": "Tests",
+            "tests": "Tests (daily)",
             "testsToDate": "Tests (to date)",
-            "confirmed": "Confirmed Cases",
+            "confirmed": "Confirmed Cases (daily)",
             "confirmedToDate": "Confirmed Cases (to date)",
             "active": "Active Cases",
             "recovered": "Recovered (to date)",
@@ -138,10 +138,10 @@
             "hospitalizedToDate": "Hospitalized (to date)",
             "icu": "In ICU",
             "ventilator": "On Ventilator",
-            "discharged": "Discharged from Hospital",
+            "discharged": "Discharged from Hospital (daily)",
             "dischargedToDate": "Discharged from Hospital (to date)",
-            "deceased": "Confirmed Deaths",
-            "deceasedToDate": "Confirmed Deaths (to date)"
+            "deceased": "Deaths (daily)",
+            "deceasedToDate": "Deaths (to date)"
         },
         "cases": {
             "title": "Confirmed Cases",
@@ -178,15 +178,15 @@
             "deceasedHospital": "Deaths",
             "hospitalMortality": "Hospital Mortality",
             "icuMortality": "ICU Mortality",
-            "icuDeceasedShare": "Share of ICU deaths",
-            "hospitalDeceasedShare": "Share of hospital deaths"
+            "icuDeceasedShare": "Share of ICU Deaths",
+            "hospitalDeceasedShare": "Share of Hospital Deaths"
         },
         "hCenters": {
             "title": "Healthcare Center Treatment",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
-            "sentToSelfIsolation": "Sent to Self-Isolation",
+            "sentToSelfIsolation": "Sent to Self-isolation",
             "testsPerformed": "Tests (performed)",
             "testsPositive": "Tests (positive*)"
         },
@@ -229,7 +229,7 @@
             "doublingRateLabel": "In how many days does the number of infected people double",
             "doublingRateTitle": "Exponential Growth Rate [in days]",
             "relativeLabel": "Relative Growth in %",
-            "absoluteLabel": "Confirmed Cases Daily",
+            "absoluteLabel": "Confirmed Cases (daily)",
             "absoluteTitle": "Daily Growth of Confirmed Cases",
             "explainer": "What does exponential growth mean",
             "doublingRate": "Exponential Growth in Days",
@@ -261,8 +261,8 @@
             "sortBy": "Sort by:",
             "allRegions": "All regions",
             "search": "Search municipality",
-            "showAll": "Show all",
-            "showLess": "Show less",
+            "showAll": "Show All",
+            "showLess": "Show Less",
             "all": "All:",
             "active": "Active:",
             "recovered": "Recovered:",
@@ -281,7 +281,7 @@
             "relative": "Relative",
             "populationTotal": "Population Total",
             "shareOfDeceasedConfirmedCases": "Share of Deaths in Confirmed Cases",
-            "shareOfDeceasedPopulation": "Share of deaths in population",
+            "shareOfDeceasedPopulation": "Share of Deaths in Population",
             "shareOfInfectedPopulation": "Share of Confirmed Cases in Population",
             "deceasedPerConfirmedCases": "Deaths per Confirmed Cases",
             "deceasedPerPopulation": "Deaths per Population",
@@ -295,27 +295,27 @@
             "title": "Comparison by Country",
             "dataSourceOWID": "data source: Our World In Data",
             "nrDeathsPerMillion": "Nr. deaths per 1 million people",
-            "daysFromOneDeathPerMillion": "Nr. days since 1 died per 1 million people",
+            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
             "daysFromFirstDeath": "Nr. days since first death",
             "sinceOneDeathPerMillion": "Since first death per million people",
-            "deathsPerMillion": "Deaths per million people",
+            "deathsPerMillion": "Deaths per Million People",
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological",
             "groupEastAsiaOceania": "East Asia and Oceania",
             "groupExYu": "Ex-Yugoslavia",
             "groupNordic": "Nordic countries",
-            "groupCriticalWorld": "critical countries (world)",
-            "groupCriticalEU": "critical countries (EU)",
-            "groupNeighbouringWoItaly": "surroundings (excluding Italy)"
+            "groupCriticalWorld": "Critical countries (World)",
+            "groupCriticalEU": "Critical countries (EU)",
+            "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
         }
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Tests",
+        "tests_performed": "Tests (daily)",
         "tests_performed_todate": "Tests (to date)",
-        "cases_confirmed": "Confirmed Cases",
+        "cases_confirmed": "Confirmed Cases (daily)",
         "cases_confirmed_todate": "Confirmed Cases (to date)",
         "cases_active": "Active Cases",
         "cases_recovered_todate": "Recovered (to date)",
