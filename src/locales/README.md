@@ -19,6 +19,7 @@ Statistics per language:
 - decimal points: . vs ,
 - percentage: make space consistent 5% or 5 %
 - error messages (loading...)
+- pluralization (1 day, 2 days, 0 days...)
 
 ## TODO - table 
 - language switch does not switch field names
