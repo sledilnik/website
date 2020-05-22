@@ -10,8 +10,8 @@
       <div class="cards-wrapper latest-data-boxes">
         <Info-card :title="$t('infocard.confirmedToDate')" field="cases.confirmedToDate" series-type="state" />
         <Info-card :title="$t('infocard.recoveredToDate')" field="cases.recoveredToDate" good-trend="up" series-type="state" />
-        <Info-card :title="$t('infocard.inHospital')" field="statePerTreatment.inHospital" series-type="state" />
-        <Info-card :title="$t('infocard.icu')" field="statePerTreatment.inICU" series-type="state" />
+        <Info-card :title="$t('infocard.inHospital')" field="statePerTreatment.inHospital" totalIn="total.inHospital.in" totalOut="total.inHospital.out" series-type="state" />
+        <Info-card :title="$t('infocard.icu')" field="statePerTreatment.inICU" totalIn="total.icu.in" totalOut="total.icu.out" series-type="state" />
         <Info-card :title="$t('infocard.deceasedToDate')" field="statePerTreatment.deceasedToDate" series-type="state" />
       </div>
       <b-row cols="12">
@@ -53,7 +53,10 @@ export default {
   },
   computed: {
     ...mapState('stats', {
-      cardsLoaded: 'loaded',
+      statsLoaded: 'loaded',
+    }),
+    ...mapState('patients', {
+      patientsLoaded: 'loaded',
     }),
   },
   mounted() {

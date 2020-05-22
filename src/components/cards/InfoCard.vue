@@ -2,17 +2,23 @@
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <span class="card-title">{{ title }}</span>
-      <span class="card-number">{{ renderValues.lastDay.value }}<span class="card-percentage-diff" :class="diffClass">{{ renderValues.lastDay.percentDiff | prefixDiff }}%</span></span>
-
-      <div :id="elementId" class="card-diff" :class="diffClass">
-        <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-        <span>{{ Math.abs(renderValues.lastDay.diff) }}</span>
-        <b-tooltip :target="elementId" triggers="hover"
-          >{{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
-          <span v-if="renderValues.dayBefore.diff">[{{
-            renderValues.dayBefore.diff | prefixDiff
-          }}]</span></b-tooltip
-        >
+      <span class="card-number">{{ renderValues.lastDay.value }}
+        <span class="card-percentage-diff" :class="diffClass">{{ renderValues.lastDay.percentDiff | prefixDiff }}%</span>
+      </span>
+      <div :id="elementId" class="card-diff">
+        <div v-if="showAbsolute" class="trend-icon" :class="[diffClass, iconClass]"></div>
+        <span v-if="showAbsolute" :class="diffClass">{{ Math.abs(renderValues.lastDay.diff) }}</span>
+        <div v-if="showIn" class="trend-icon" :class="[diffInOutClass(totalIn), iconInOutClass(totalIn)]"></div>
+        <span v-if="showIn" class="in" :class="diffInOutClass(totalIn)">{{ renderInOutValues(totalIn) }}</span>
+        <div v-if="showOut" class="trend-icon" :class="[diffInOutClass(totalOut), iconInOutClass(totalOut)]"></div>
+        <span v-if="showOut" class="out" :class="diffInOutClass(totalOut)">{{ renderInOutValues(totalOut) }}</span>
+        <!-- TODO: x.dayBefore values aren't calculated correctly, check stats.store.js why not -->
+        <!-- <b-tooltip :target="elementId" triggers="hover">
+          {{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
+          <span v-if="renderValues.dayBefore.diff">
+            [{{ renderValues.dayBefore.diff | prefixDiff }}]
+          </span>
+        </b-tooltip> -->
       </div>
       <div class="data-time">{{ $t("infocard.lastUpdated", { date: new Date(renderValues.lastDay.displayDate) }) }}</div>
     </div>
@@ -24,12 +30,13 @@
 </template>
 <script>
 import { mapGetters, mapState } from 'vuex';
-// import { add } from 'date-fns';
 
 export default {
   props: {
     title: String,
     field: String,
+    totalIn: String,
+    totalOut: String,
     goodTrend: {
       type: String,
       default: 'down',
@@ -46,9 +53,10 @@ export default {
   },
   computed: {
     ...mapGetters('stats', ['lastChange']),
+    ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     diffClass() {
-      if (this.renderValues.lastDay.diff == 0) {
+      if (this.renderValues.lastDay.diff === 0) {
         return 'no-change';
       } else if (this.renderValues.lastDay.diff > 0) {
         return this.goodTrend === 'down' ? 'bad' : 'good';
@@ -57,7 +65,7 @@ export default {
       }
     },
     iconClass() {
-      if (this.field === 'state.deceased.todate') {
+      if (this.field === 'statePerTreatment.deceasedToDate') {
         return "deceased";
       } else if (this.renderValues.lastDay.diff == 0) {
         return 'none';
@@ -70,6 +78,7 @@ export default {
     renderValues() {
       const x = this.lastChange(this.field, this.seriesType == 'cum');
       if (x) {
+        // TODO: x.dayBefore values aren't calculated correctly, check stats.store.js why not
         if (this.seriesType == 'cum') {
           x.lastDay.displayDate = x.lastDay.firstDate || x.lastDay.date
           x.dayBefore.displayDate = x.dayBefore.firstDate || x.dayBefore.date
@@ -82,6 +91,43 @@ export default {
     },
     elementId() {
       return this.field;
+    },
+    showAbsolute() {
+      return !this.totalIn && !this.totalOut || (this.renderInOutValues(this.totalIn) === this.renderInOutValues(this.totalOut))
+    },
+    showIn() {
+      return this.totalIn && (this.renderInOutValues(this.totalIn) !== this.renderInOutValues(this.totalOut))
+    },
+    showOut() {
+      return this.totalOut && (this.renderInOutValues(this.totalIn) !== this.renderInOutValues(this.totalOut))
+    }
+  },
+  methods: {
+    renderInOutValues(inOut) {
+      const lastDay = this.patients.filter(x => {
+        return x.day === this.renderValues.lastDay.date.getDate() &&
+               x.month === this.renderValues.lastDay.date.getMonth() + 1 &&
+               x.year === this.renderValues.lastDay.date.getFullYear()
+      })
+      return _.get(lastDay[0], inOut)
+    },
+    diffInOutClass(inOut) {
+      if (this.renderInOutValues(inOut) === 0) {
+        return 'no-change';
+      } else if (this.renderInOutValues(inOut) > 0) {
+        return this.goodTrend === 'down' ? 'bad' : 'good';
+      } else {
+        return this.goodTrend === 'down' ? 'good' : 'bad';
+      }
+    },
+    iconInOutClass(inOut) {
+      if (this.renderInOutValues(inOut) === 0) {
+        return 'none';
+      } else if (this.renderInOutValues(inOut) > 0) {
+        return 'up';
+      } else {
+        return 'down';
+      }
     },
   },
   mounted() {
@@ -186,6 +232,9 @@ export default {
       background-color: #a0a0a0;
       display: none;
     }
+  }
+  .out {
+    margin-left: 10px;
   }
 }
 
