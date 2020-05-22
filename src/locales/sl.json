@@ -108,6 +108,42 @@
     "ce": "Savinjska",
     "za": "Zasavska"
   },
+  "country": {
+    "AUS": "Avstralija",
+    "AUT": "Avstrija",
+    "BEL": "Belgija",
+    "BIH": "Bosna in Hercegovina",
+    "CHE": "Švica",
+    "CHN": "Kitajska",
+    "CZE": "Češka",
+    "DEU": "Nemčija",
+    "DNK": "Danska",
+    "ESP": "Španija",
+    "FIN": "Finska",
+    "FRA": "Francija",
+    "GBR": "Združeno kraljestvo",
+    "HRV": "Hrvaška",
+    "HUN": "Madžarska",
+    "IRN": "Iran",
+    "ISL": "Islandija",
+    "ITA": "Italija",
+    "JPN": "Japonska",
+    "KOR": "J. Koreja",
+    "MKD": "S. Makedonija",
+    "MNE": "Črna gora",
+    "NZL": "Nova Zelandija",
+    "NOR": "Norveška",
+    "RKS": "Kosovo",
+    "RUS": "Rusija",
+    "SGP": "Singapur",
+    "SRB": "Srbija",
+    "SVK": "Slovaška",
+    "SVN": "Slovenija",
+    "SWE": "Švedska",
+    "TWN": "Tajvan",
+    "TUR": "Turčija",
+    "USA": "ZDA"
+  },
   "cm": {
     "firstCase": {
       "title": "1. primer",
@@ -218,6 +254,7 @@
   "charts": {
     "common": {
       "loading": "Nalagam podatke…",
+      "xAxis": "X os:",
       "yAxis": "Y os:",
       "linear": "Linearna",
       "log": "Logaritemska",
@@ -390,7 +427,21 @@
       "populationTotal": "Prebivalcev skupaj"
     },
     "countries": {
-      "title": "Primerjava po državah"
+      "title": "Primerjava po državah",
+      "groupNeighbouringWoItaly": "okolica (brez Italije)",
+      "groupCriticalEU": "kritične države (EU)",
+      "groupCriticalWorld": "kritične države (svet)",
+      "groupNordic": "nordijske države",
+      "groupExYu": "ex-Jugoslavija",
+      "groupEastAsiaOceania": "vzh. Azija in Oceanija",
+      "chronologically": "Kronološko",
+      "sinceFirstDeath": "Od prve smrti",
+      "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
+      "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
+      "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
+      "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
+      "nrDeathsPerMillion":  "Št. umrlih na 1 milijon prebivalcev",
+      "dataSourceOWID": "vir podatkov: Our World In Data"
     }
   },
   "footer": {
