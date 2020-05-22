@@ -10,7 +10,10 @@ Statistics per language:
 
 
 ## TODO - general
-- Terminology: Deaths, Confirmed Deaths, Deceased
+- Terminology: `Deaths`, `Confirmed Deaths`, `Deceased`
+- Terminology: Confirmed Cases (`Potrjeni primeri`) vs. Confirmed Cases (`Potrjeno okuženi`)?
+- Terminology: metrics postfixes - `to date` "skupaj", `TBD` "na dan", `TBD` "aktivni"
+- English: use Capital Case consistently (only for titles or also for metrics)?
 
 ## TODO - main page
 - InfoCard: tooltip text
