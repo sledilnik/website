@@ -277,7 +277,18 @@
             "male": "Male",
             "female": "Female",
             "absolute": "Absolute",
-            "relative": "Relative"
+            "relative": "Relative",
+            "populationTotal": "Population total",
+            "shareOfDeceasedConfirmedCases": "Share of deceased confirmed cases",
+            "shareOfDeceasedPopulation": "Share of deceased population",
+            "shareOfInfectedPopulation": "Share of infected population",
+            "deceasedPerConfirmedCases": "Deceased per confirmed cases",
+            "deceasedPerPopulation": "Deceased per population",
+            "confirmedCasesPerPopulation": "Confirmed cases per population",
+            "age": "Age",
+            "deceased": "Deceased",
+            "confirmedCases": "Confirmed cases",
+            "view": "Show:"
         },
         "countries": {
             "title": "Comparison by Country"
