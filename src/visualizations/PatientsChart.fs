@@ -13,13 +13,17 @@ open Types
 open Data.Patients
 
 type Breakdown =
-    | Structure
     | ByHospital
+    | AllHospitals
+    | Facility of string
   with
-    static member all = [ Structure; ByHospital; ]
+    static member all = [ ByHospital; AllHospitals; ]
     static member getName = function
-        | Structure     -> I18N.t "charts.patients.structure"
-        | ByHospital    -> I18N.t "charts.patients.byHospital"
+        | ByHospital -> I18N.t "charts.patients.byHospital"
+        | AllHospitals -> I18N.t "charts.patients.allHospitals"
+        | Facility fcode -> 
+            let _, name = Data.Hospitals.facilitySeriesInfo fcode
+            name
 
 type Series =
     | InHospital
@@ -51,24 +55,13 @@ type State = {
     AllFacilities : string list
     Breakdown : Breakdown
   } with
-    static member SwitchBreakdown breakdown state =
-        match breakdown with
-        | Structure ->
-            { state with
-                Breakdown = breakdown
-            }
-        | ByHospital ->
-            { state with
-                Breakdown=breakdown
-            }
     static member initial =
         {
             PatientsData = [||]
             Error = None
             AllFacilities = []
-            Breakdown = Structure
+            Breakdown = AllHospitals
         }
-        |> State.SwitchBreakdown Structure
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
@@ -94,28 +87,28 @@ let getFacilitiesList (data : PatientsStats array) =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
-        { state with PatientsData = data; AllFacilities = getFacilitiesList data } |> State.SwitchBreakdown state.Breakdown, Cmd.none
+        { state with PatientsData = data; AllFacilities = getFacilitiesList data }, Cmd.none
     | ConsumePatientsData (Error err) ->
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
     | SwitchBreakdown breakdown ->
-        (state |> State.SwitchBreakdown breakdown), Cmd.none
+        { state with Breakdown = breakdown }, Cmd.none
 
 let renderByHospitalChart (state : State) =
 
     let startDate = DateTime(2020,03,10)
 
-    let renderSources fac =
+    let renderSources fcode =
         let renderPoint ps : (JsTimestamp * int option) =
             let value =
                 ps.facilities
-                |> Map.tryFind fac
+                |> Map.tryFind fcode
                 |> Option.bind (fun stats -> stats.inHospital.today)
                 |> Utils.zeroToNone
             ps.JsDate12h, value
 
-        let color, name = Data.Hospitals.facilitySeriesInfo fac
+        let color, name = Data.Hospitals.facilitySeriesInfo fcode
         {|
             visible = true
             color = color
@@ -133,7 +126,7 @@ let renderByHospitalChart (state : State) =
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
     {| baseOptions with
 
-        series = [| for fac in state.AllFacilities do yield renderSources fac |]
+        series = [| for fcode in state.AllFacilities do yield renderSources fcode |]
 
         tooltip = pojo {| shared = true; formatter = None ; xDateFormat = @"%A, %e. %B %Y" |} 
 
@@ -153,7 +146,7 @@ let renderByHospitalChart (state : State) =
             |}
 |}
 
-let renderStructureChart (state : State) =
+let renderStructureChart (state : State) (fcode : string)=
 
     let startDate = DateTime(2020,03,10)
 
@@ -265,8 +258,9 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             match state.Breakdown with 
-            | Structure     -> renderStructureChart state   |> Highcharts.chartFromWindow
-            | ByHospital    -> renderByHospitalChart state  |> Highcharts.chartFromWindow
+            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
+            | AllHospitals -> renderStructureChart state "" |> Highcharts.chartFromWindow
+            | Facility fcode -> renderStructureChart state fcode |> Highcharts.chartFromWindow
         ]
     ]
 
