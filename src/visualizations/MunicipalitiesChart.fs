@@ -186,7 +186,7 @@ let renderMunicipality (municipality : Municipality) =
             match municipality.DaysSinceLastCase with
             | 0 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.today"
             | 1 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.yesterday"
-            | x -> I18N.t "charts.municipalities.lastCaseBefore", sprintf "%d %s" x (Utils.daysOrodnik x)
+            | x -> I18N.t "charts.municipalities.lastCaseBefore", sprintf "%d %s" x (I18N.tOptions "days.instrumental" {| count = x |})
 
         Html.div [
             prop.className "last-case-days"
@@ -216,7 +216,7 @@ let renderMunicipality (municipality : Municipality) =
                     ]
                     Html.span [
                         prop.className "value"
-                        prop.text (sprintf "%d %s" displayValue (Utils.daysMestnik displayValue))
+                        prop.text (sprintf "%d %s" displayValue (I18N.tOptions "days.locative"  {| count = displayValue |}))
                     ]
                 ]
             ]

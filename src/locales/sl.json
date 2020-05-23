@@ -60,7 +60,7 @@
     "instrumental_2": "dnevi",
     "instrumental_3": "dnevi",
     "date": "{{ date, D. MMMM }}"
-  },  
+  },
   "month": {
     "0": "januar",
     "1": "februar",
