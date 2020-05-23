@@ -450,7 +450,11 @@
         "dnevoma": "days",
         "dnevom": "day",
         "dneh": "days",
-        "dnevu": "day"
+        "dnevu": "day",
+        "instrumental": "day",
+        "instrumental_plural": "days",
+        "locative": "day",
+        "locative_plural": "days"
     },
     "region": {
         "za": "Central Sava Region",
