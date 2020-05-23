@@ -188,7 +188,8 @@
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
             "sentToSelfIsolation": "Sent to Self-isolation",
             "testsPerformed": "Tests (performed)",
-            "testsPositive": "Tests (positive*)"
+            "testsPositive": "Tests (positive*)",
+            "allRegions": "All regions"
         },
         "tests": {
             "title": "Testing",
