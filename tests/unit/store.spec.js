@@ -1,5 +1,5 @@
 import { assert } from 'chai'
-import { lastChange } from '../../src/store/stats.store.js'
+import { lastChange } from '../../src/store.js'
 
 // mocha.fullTrace()
 assert.includeStack = true

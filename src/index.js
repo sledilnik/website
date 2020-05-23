@@ -3,7 +3,7 @@ import router from './router'
 import VueScrollTo from 'vue-scrollto'
 import i18n from './i18n'
 import App from './App.vue'
-import store from 'store'
+import store from './store/index'
 import '@/main.js'
 import 'style/index.scss'
 
