@@ -51,17 +51,14 @@
     "copied": "Skopirano!"
   },
   "days": {
-    "mestnik": "dnevu",
-    "mestnik_plural": "dneh",
-    "mestnik_101": "dnevu",
-    "mestnik_201": "dnevu",
-    "orodnik": "dnevom",
-    "orodnik_2": "dnevoma",
-    "orodnik_plural": "dnevi",
-    "orodnik_101": "dnevom",
-    "orodnik_102": "dnevoma",
-    "orodnik_201": "dnevom",
-    "orodnik_202": "dnevoma",
+    "locative_0": "dnevu",
+    "locative_1": "dneh",
+    "locative_2": "dneh",
+    "locative_3": "dneh",
+    "instrumental_0": "dnevom",
+    "instrumental_1": "dnevoma",
+    "instrumental_2": "dnevi",
+    "instrumental_3": "dnevi",
     "date": "{{ date, D. MMMM }}"
   },  
   "month": {
@@ -325,6 +322,7 @@
     },
     "hCenters": {
       "title": "Obravnava v ZD",
+      "allRegions": "Vse regije",
       "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
       "suspectedCovidExamination": "Sum COVID-19 (pregled)",
       "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",

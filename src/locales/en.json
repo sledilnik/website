@@ -188,7 +188,8 @@
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
             "sentToSelfIsolation": "Sent to Self-isolation",
             "testsPerformed": "Tests (performed)",
-            "testsPositive": "Tests (positive*)"
+            "testsPositive": "Tests (positive*)",
+            "allRegions": "All regions"
         },
         "tests": {
             "title": "Testing",
@@ -270,7 +271,7 @@
             "doublesIn": "Doubles in ",
             "yesterday": "yesterday",
             "today": "today",
-            "lastCaseBefore": "Last case in: ",
+            "lastCaseBefore": "Last case before: ",
             "lastCase": "Last case: "
         },
         "ageGroups": {
@@ -445,17 +446,10 @@
         }
     },
     "days": {
-        "mestnik": "day",
-        "mestnik_plural": "days",
-        "mestnik_101": "days",
-        "mestnik_201": "days",
-        "orodnik": "day",
-        "orodnik_2": "days",
-        "orodnik_101": "days",
-        "orodnik_102": "days",
-        "orodnik_201": "days",
-        "orodnik_202": "days",
-        "orodnik_plural": "days",
+        "instrumental": "day",
+        "instrumental_plural": "days",
+        "locative": "day",
+        "locative_plural": "days",
         "date": "{{ date, MMMM Do }}"
     },
     "region": {
