@@ -318,6 +318,7 @@
     },
     "hCenters": {
       "title": "Obravnava v ZD",
+      "allRegions": "Vse regije",
       "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
       "suspectedCovidExamination": "Sum COVID-19 (pregled)",
       "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",
