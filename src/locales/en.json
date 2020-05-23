@@ -447,8 +447,14 @@
     "days": {
         "mestnik": "day",
         "mestnik_plural": "days",
+        "mestnik_101": "days",
+        "mestnik_201": "days",
         "orodnik": "day",
         "orodnik_2": "days",
+        "orodnik_101": "days",
+        "orodnik_102": "days",
+        "orodnik_201": "days",
+        "orodnik_202": "days",
         "orodnik_plural": "days",
         "date": "{{ date, MMMM Do }}"
     },

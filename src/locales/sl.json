@@ -53,9 +53,15 @@
   "days": {
     "mestnik": "dnevu",
     "mestnik_plural": "dneh",
+    "mestnik_101": "dnevu",
+    "mestnik_201": "dnevu",
     "orodnik": "dnevom",
     "orodnik_2": "dnevoma",
     "orodnik_plural": "dnevi",
+    "orodnik_101": "dnevom",
+    "orodnik_102": "dnevoma",
+    "orodnik_201": "dnevom",
+    "orodnik_202": "dnevoma",
     "date": "{{ date, D. MMMM }}"
   },  
   "month": {
