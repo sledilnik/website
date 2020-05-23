@@ -17,7 +17,6 @@ type Breakdown =
     | AllHospitals
     | Facility of string
   with
-    static member all = [ ByHospital; AllHospitals; ]
     static member getName = function
         | ByHospital -> I18N.t "charts.patients.byHospital"
         | AllHospitals -> I18N.t "charts.patients.allHospitals"
@@ -42,12 +41,12 @@ module Series =
 
     // color, dash, id
     let getSeriesInfo = function
-        | InHospital            -> "#de9a5a", Solid, "hospitalized"
-        | Icu                   -> "#d99a91", Solid, "icu"
-        | Critical              -> "#bf5747", Solid, "ventilator"
-        | InHospitalIn          -> "#d5c768", Solid, "admitted"
-        | InHospitalOut         -> "#8cd4b2", Solid, "discharged"
-        | InHospitalDeceased    -> "#666666", Solid, "deceased"
+        | InHospital            -> "#de9a5a", "hospitalized"
+        | Icu                   -> "#d99a91", "icu"
+        | Critical              -> "#bf5747", "ventilator"
+        | InHospitalIn          -> "#d5c768", "admitted"
+        | InHospitalOut         -> "#8cd4b2", "discharged"
+        | InHospitalDeceased    -> "#666666", "deceased"
 
 type State = {
     PatientsData : PatientsStats []
@@ -62,6 +61,13 @@ type State = {
             AllFacilities = []
             Breakdown = AllHospitals
         }
+
+let getAllBreakdowns state = seq {         
+        yield ByHospital
+        yield AllHospitals
+        for fcode in state.AllFacilities do
+            yield Facility fcode
+    }
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
@@ -175,29 +181,47 @@ let renderStructureChart (state : State) (fcode : string)=
                     fmtStr <- fmtStr + fmtLine
         sprintf "<b>%s</b>" fmtDate + fmtStr
 
-    let renderBarSeries series =
+    let renderBarSeries series fcode =
         let subtract (a : int option) (b : int option) = Some (b.Value - a.Value)
         let negative (a : int option) = Some (- a.Value)
 
-        let getPoint : (Data.Patients.PatientsStats -> int option) =
+        let getPoint : (Data.Patients.TotalPatientStats -> int option) =
             match series with
-            | InHospital            -> fun ps -> ps.total.inHospital.today |> subtract ps.total.icu.today |> subtract ps.total.inHospital.``in`` |> Utils.zeroToNone
-            | Icu                   -> fun ps -> ps.total.icu.today |> subtract ps.total.critical.today |> Utils.zeroToNone
-            | Critical              -> fun ps -> ps.total.critical.today |> Utils.zeroToNone
-            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
-            | InHospitalOut         -> fun ps -> negative ps.total.inHospital.out |> Utils.zeroToNone
-            | InHospitalDeceased    -> fun ps -> negative ps.total.deceased.hospital.today |> Utils.zeroToNone
+            | InHospital            -> fun ps -> ps.inHospital.today |> subtract ps.icu.today |> subtract ps.inHospital.``in`` |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.icu.today |> subtract ps.critical.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> negative ps.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.deceased.hospital.today |> Utils.zeroToNone
 
-        let getPointTotal : (Data.Patients.PatientsStats -> int option) =
+        let getPointTotal : (Data.Patients.TotalPatientStats -> int option) =
             match series with
-            | InHospital            -> fun ps -> ps.total.inHospital.today |> Utils.zeroToNone
-            | Icu                   -> fun ps -> ps.total.icu.today |> Utils.zeroToNone
-            | Critical              -> fun ps -> ps.total.critical.today |> Utils.zeroToNone
-            | InHospitalIn          -> fun ps -> ps.total.inHospital.``in`` |> Utils.zeroToNone
-            | InHospitalOut         -> fun ps -> ps.total.inHospital.out |> Utils.zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.total.deceased.hospital.today |> Utils.zeroToNone
+            | InHospital            -> fun ps -> ps.inHospital.today |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.icu.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.deceased.hospital.today |> Utils.zeroToNone
 
-        let color, line, id = Series.getSeriesInfo series
+        let getFacilityPoint : (Data.Patients.PatientsByFacilityStats -> int option) =
+            match series with
+            | InHospital            -> fun ps -> ps.inHospital.today |> subtract ps.icu.today |> subtract ps.inHospital.``in`` |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.icu.today |> subtract ps.critical.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> negative ps.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> negative ps.deceased.today |> Utils.zeroToNone
+
+        let getFacilityPointTotal : (Data.Patients.PatientsByFacilityStats -> int option) =
+            match series with
+            | InHospital            -> fun ps -> ps.inHospital.today |> Utils.zeroToNone
+            | Icu                   -> fun ps -> ps.icu.today |> Utils.zeroToNone
+            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
+            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
+            | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
+            | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
+
+        let color, id = Series.getSeriesInfo series
         {|
             color = color
             name = I18N.tt "charts.patients" id
@@ -206,18 +230,23 @@ let renderStructureChart (state : State) (fcode : string)=
                 |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map (fun dp ->
                     {|
-                        x = dp.Date |> jsTime12h
-                        y = getPoint dp
-                        id = id
+                        x = dp.JsDate12h
+                        y = match fcode with
+                            | "" -> getPoint dp.total
+                            | fcode -> dp.facilities |> Map.tryFind fcode |> Option.bind getFacilityPoint
+                        fmtTotal = 
+                            match fcode with
+                            | "" -> getPointTotal dp.total |> string
+                            | fcode -> dp.facilities |> Map.tryFind fcode |> Option.bind getFacilityPointTotal |> string
                         fmtDate = dp.Date.ToString "d. M. yyyy"
-                        fmtTotal = getPointTotal dp |> string
+                        id = id
                     |}
                 )
                 |> Array.ofSeq
         |}
         |> pojo
 
-    let className = "covid19-patients-structure"
+    let className = "covid19-patients-structure" + fcode
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
     {| baseOptions with
         chart = pojo
@@ -232,7 +261,7 @@ let renderStructureChart (state : State) (fcode : string)=
                 column = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
-        series = [| for series in Series.structure do yield renderBarSeries series |]
+        series = [| for series in Series.structure do yield renderBarSeries series fcode |]
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |} 
 
@@ -275,8 +304,8 @@ let renderBreakdownSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            Breakdown.all
-            |> List.map (fun breakdown -> renderBreakdownSelector state breakdown dispatch) ) ]
+            getAllBreakdowns state
+            |> Seq.map (fun breakdown -> renderBreakdownSelector state breakdown dispatch) ) ]
 
 let render (state : State) dispatch =
     match state.PatientsData, state.Error with
