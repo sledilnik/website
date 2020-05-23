@@ -59,6 +59,13 @@ let renderChartOptions (state : State) =
     let startDate = DateTime(2020,3,18)
     let mutable startTime = startDate |> jsTime
 
+    let getRegionStats region mp = 
+        mp |> Map.find region |> Map.find "ljubljana" 
+
+    let hcData = 
+        match state.scope with
+        | Totals        -> state.hcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
+        | Region region -> state.hcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
 
     let allSeries = [
         yield pojo
@@ -67,8 +74,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#70a471"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.medicalEmergency)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.examinations.medicalEmergency)) |> Seq.toArray
             |}
 
         yield pojo
@@ -77,8 +83,7 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#a05195"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.examinations.suspectedCovid)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.examinations.suspectedCovid)) |> Seq.toArray
             |}
         yield pojo
             {|
@@ -86,32 +91,28 @@ let renderChartOptions (state : State) =
                 ``type`` = "line"
                 color = "#d45087"
                 dashStyle = Dot |> DashStyle.toString
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.phoneTriage.suspectedCovid)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.phoneTriage.suspectedCovid)) |> Seq.toArray
             |}
         yield pojo
             {|
                 name = "Napotitev v samoizolacijo"
                 ``type`` = "line"
                 color = "#665191"
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.sentTo.selfIsolation)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.sentTo.selfIsolation)) |> Seq.toArray
             |}
         yield pojo
             {|
                 name = "Test (opravljenih)"
                 ``type`` = "line"
                 color = "#19aebd"
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.tests.performed)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.tests.performed)) |> Seq.toArray
             |}
         yield pojo
             {|
                 name = "Test (pozitivnih*)"
                 ``type`` = "line"
                 color = "#d5c768"
-                data = state.hcData
-                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.all.tests.positive)) |> Seq.toArray
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.tests.positive)) |> Seq.toArray
             |}
         yield addContainmentMeasuresFlags startTime None |> pojo
 

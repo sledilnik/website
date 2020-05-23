@@ -27,7 +27,7 @@ type HcStats = {
     month: int
     day: int
     all: TotalHcStats
-    // TODO: parse municipalities (per region, hc)
+    municipalities : Map<string, Map<string,TotalHcStats>>
 } with
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate12h = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime12h
