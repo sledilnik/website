@@ -39,6 +39,7 @@ Uredniki baze in ostali sodelavci:
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
+-   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
