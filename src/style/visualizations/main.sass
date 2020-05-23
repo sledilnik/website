@@ -21,7 +21,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin-bottom: 88px
     position: relative
     padding: 46px 0 32px
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15)
+    box-shadow: $element-box-shadow
 
     &.municipalities-chart
       padding: 46px 30px 32px
@@ -126,7 +126,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         display: inline-block
         line-height: 2
         margin-left: 24px
-        color: rgba(0, 0, 0, 0.5)
+        color: rgba(0, 0, 0, 0.56)
 
         &::selection
           background: rgba(0, 0 , 0 , 0)
@@ -192,7 +192,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin-top: $gap * 2
     margin-bottom: $gap
 
-  .tests-chart, .hcenters-chart
+  .tests-chart, .ratios-chart, .hcenters-chart
     .metric-selector
       background-color: white
     .metric-selector--selected
@@ -332,13 +332,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       display: none
       position: absolute
       top: 0px
-      right: 20px
+      right: 6px
       text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white
       border: 1px solid black
       border-radius: 3px
       background: rgba(white, 0.8)
-      padding: 5px
+      padding: 2px 6px
       min-width: 120px
+      pointer-events: none
 
       .active
         font-size: $font-size
@@ -369,7 +370,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       display: flex
       align-items: flex-end
       justify-content: flex-end
-      height: 50px
+      height: 62px
       border-bottom: solid 1px $gray-300
 
     .bar-wrapper

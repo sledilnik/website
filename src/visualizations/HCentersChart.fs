@@ -70,7 +70,7 @@ let renderChartOptions (state : State) =
     let allSeries = [
         yield pojo
             {|
-                name = "Nujna medicinska pomoč (skupaj)"
+                name = I18N.t "charts.hCenters.emergencyExamination"
                 ``type`` = "line"
                 color = "#70a471"
                 dashStyle = Dot |> DashStyle.toString
@@ -79,7 +79,7 @@ let renderChartOptions (state : State) =
 
         yield pojo
             {|
-                name = "Sum COVID-19 (pregled)"
+                name = I18N.t "charts.hCenters.suspectedCovidExamination"
                 ``type`` = "line"
                 color = "#a05195"
                 dashStyle = Dot |> DashStyle.toString
@@ -87,7 +87,7 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Sum COVID-19 (telefonsko)"
+                name = I18N.t "charts.hCenters.suspectedCovidPhone"
                 ``type`` = "line"
                 color = "#d45087"
                 dashStyle = Dot |> DashStyle.toString
@@ -95,21 +95,21 @@ let renderChartOptions (state : State) =
             |}
         yield pojo
             {|
-                name = "Napotitev v samoizolacijo"
+                name = I18N.t "charts.hCenters.sentToSelfIsolation"
                 ``type`` = "line"
                 color = "#665191"
                 data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.sentTo.selfIsolation)) |> Seq.toArray
             |}
         yield pojo
             {|
-                name = "Test (opravljenih)"
+                name = I18N.t "charts.hCenters.testsPerformed"
                 ``type`` = "line"
                 color = "#19aebd"
                 data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.tests.performed)) |> Seq.toArray
             |}
         yield pojo
             {|
-                name = "Test (pozitivnih*)"
+                name = I18N.t "charts.hCenters.testsPositive"
                 ``type`` = "line"
                 color = "#d5c768"
                 data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.tests.positive)) |> Seq.toArray
@@ -166,12 +166,12 @@ let render (state : State) dispatch =
             Html.div [
                 prop.className "disclaimer"
                 prop.children [
-                    Html.text "Opomba: omejitve prikazanih podatkov so razložene v "
+                    Html.text (I18N.t "charts.common.noteFaq")
                     Html.a
                         [ prop.className "faq-link"
                           prop.target "_blank"
                           prop.href "/FAQ/#hcenters-chart"
-                          prop.text "FAQ" ]
+                          prop.text (I18N.t "charts.common.linkFaq") ]
                 ]
             ]
         ]

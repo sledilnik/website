@@ -8,14 +8,14 @@ Pravilno zbrani in ažurno ter transparentno objavljeni podatki so po izkušnjah
 
 Podatke zbiramo iz različnih javno dostopnih virov, od sobote, 28. marca dalje pa imamo vzpostavljeno tudi direktno povezavo z zdravstvenimi zavodi in [NIJZ](https://www.nijz.si/). Ti nam pošiljajo strukturirane podatke, ki jih potem validiramo in oblikujemo v obliko, primerno za vizualizacije in  predstavitev javnosti, kakor tudi za nadaljne delo pri razvoju modelov in napovedi. Ker so podatki iz medijev in nekaterih drugih virov kdaj tudi nejasni in nedosledni, [preglednica](https://tinyurl.com/sledilnik-gdocs) vključuje tudi opombe o virih in sklepanju na podlagi nepopolnih podatkov.
 
-##### Pomagajte tudi vi – nam, sebi in drugim
+## Pomagajte tudi vi – nam, sebi in drugim
 
-Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov ter programiranje zahteva vedno več pozornosti. Projekt nastaja z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer lahko prispeva vsak po svojih močeh z viri ali podatki](/team). Pridružite se in pomagajte!
+Projekt je z zbiranjem podatkov začel [Luka Renko](https://twitter.com/LukaRenko), sedaj pa v njem prostovoljno in dejavno sodeluje od 20 do 45 ljudi, saj vnašanje in preverjanje podatkov ter programiranje zahteva vedno več pozornosti. Projekt nastaja z množičnim prostovoljnim sodelovanjem (t.i. "crowdsourcing"), [kjer lahko prispeva vsak po svojih močeh z viri ali podatki](/sl/team). Pridružite se in pomagajte!
 
 
 ## Zbrani podatki
 
-Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](/sources):
+Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](/sl/sources):
 
 - število opravljenih testov in število potrjeno okuženih
 - število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
@@ -25,17 +25,17 @@ Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javn
 
 Sproti se trudimo dodajati tudi nove pomembne kategorije.
 
-Vsi podatki so na voljo v [**GDocs preglednici, CSV obliki ali preko REST API**](/datasources).
+Vsi podatki so na voljo v [**GDocs preglednici, CSV obliki ali preko REST API**](/sl/datasources).
 
 
 ## Uporaba grafov in vizualizacij
 
-[Naše grafe in prikaze](/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/embed) in ga prilagodite svoji spletni strani; če želite objavo vašega projekta na naši strani (glej [Povezave](/links)), nas prosimo kontaktirajte. 
+[Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani; če želite objavo vašega projekta na naši strani (glej [Povezave](/sl/links)), nas prosimo kontaktirajte. 
 
 
 ## Uporaba podatkov
 
-Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](/links); veseli bomo, če nas o uporabi obvestite, da lahko objavimo tudi vaš projekt. 
+Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](/sl/links); veseli bomo, če nas o uporabi obvestite, da lahko objavimo tudi vaš projekt. 
 
 **Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde. 
 Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo.

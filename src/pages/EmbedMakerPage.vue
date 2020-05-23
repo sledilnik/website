@@ -2,19 +2,18 @@
   <div class="container">
     <div class="d-flex embed-controls">
       <div class="p-3">
-        <h1>Vgradite graf v vašo spletno stran</h1>
+        <h1>{{ $t("embedMaker.title") }}</h1>
         <b-form-select v-model="chosenChartValue" :options="charts"></b-form-select>
-        Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. 
-        Podrobnejša navodila <a href="https://github.com/sledilnik/website/blob/master/examples/README.md">najdete tukaj</a>. 
-          </div>
+        <span v-html="$t('embedMaker.description')"/>
+      </div>
       <div class="p-3">
-        <h3 v-if="chosenChart">Koda za vdelavo:</h3>
+        <h3 v-if="chosenChart">{{$t('embedMaker.embedCode')}}</h3>
         <b-form-textarea @click="copy" v-if="chosenChart" v-b-tooltip.bottom.hover :title="tooltipTitle" class="copy-input" id="textarea-plaintext" readonly :value="embedString"></b-form-textarea>
       </div>
     </div>
     <hr>
     <div v-if="chosenChart" class="d-flex flex-column">
-      <h3 class="p-3">Predogled:</h3>
+      <h3 class="p-3">{{$t('embedMaker.preview')}}</h3>
       <iframe
         :src="embedUrl"
         frameborder="0"
@@ -32,66 +31,71 @@ export default {
       chosenChartValue: null,
       height: 750,
       width: 1100,
-      tooltipTitle: "Kopiraj",
-      baseEmbedUrl: "https://covid-19.sledilnik.org/embed.html#",
+      tooltipTitle: this.$t('embedMaker.copy'),
+      baseEmbedUrl: location.origin + "/embed.html#/" + this.$i18n.i18next.language,
       charts: {
         "empty": {
           value: null,
-          text: 'Izberite graf'
+          text: this.$t("embedMaker.chooseChart")
         },
         "MetricsComparison": {
           value: "MetricsComparison",
-          text: 'Stanje COVID-19 v Sloveniji',
+          text: this.$t('charts.metricsComparison.title'),
           dimensions: [1140, 780]
         },
         "Cases": {
           value: "Cases",
-          text: 'Potrjeni primeri',
+          text: this.$t('charts.cases.title'),
           dimensions: [1140, 630]
         },
         "Patients": {
           value: "Patients",
-          text: "Hospitalizirani",
+          text: this.$t('charts.patients.title'),
+          dimensions: [1140, 720]
+        },
+        "Ratios": {
+          value: "Ratios",
+          text: this.$t('charts.ratios.title'),
           dimensions: [1140, 720]
         },
         "HCenters": {
           value: "HCenters",
-          text: 'Obravnava v ZD',
+          text: this.$t('charts.hCenters.title'),
           dimensions: [1140, 720]
         },
         "Tests": {
           value: "Tests",
-          text: 'Testiranje',
+          text: this.$t('charts.tests.title'),
           dimensions: [1140, 720]
         },
         "Infections": {
           value: "Infections",
-          text: 'Struktura potrjeno okuženih',
+          text: this.$t('charts.infections.title'),
           dimensions: [1140, 720]
         },
         "Spread": {
           value: "Spread",
-          text: 'Prirast potrjeno okuženih',
+          text: this.$t('charts.spread.title'),
           dimensions: [1140, 630]
         },
         "Regions": {
           value: "Regions",
-          text: 'Potrjeno okuženi po regijah',
+          text: this.$t('charts.regions.title'),
           dimensions: [1140, 720]
         },
         "Map": {
           value: "Map",
-          text: 'Zemljevid po občinah',
+          text: this.$t('charts.map.title'),
           dimensions: [1140, 820]
         },
         "Municipalities": {
           value: "Municipalities",
-          text: 'Primeri po občinah',
+          text: this.$t('charts.municipalities.title'),
           dimensions: [1140, 1150]
         },
         "AgeGroups": {
           value: "AgeGroups",
-          text: 'Po starostnih skupinah',
+          text: this.$t('charts.ageGroups.title'),
           dimensions: [1140, 720]
         },
 //        "Hospitals": {
@@ -101,7 +105,7 @@ export default {
 //        },
         "Countries": {
           value: "Countries",
-          text: 'Primerjava po državah',
+          text: this.$t('charts.countries.title'),
           dimensions: [1140, 740]
         },
       }
@@ -125,9 +129,9 @@ export default {
       element.setSelectionRange(0, 99999); /*For mobile devices*/
       /* Copy the text inside the text field */
       document.execCommand("copy");
-      this.tooltipTitle = "Skopirano!"
+      this.tooltipTitle = this.$t('embedMaker.copied')
       setTimeout(() => {
-        this.tooltipTitle = "Kopiraj"
+        this.tooltipTitle = this.$t('embedMaker.copy')
       }, 2000)
     }
   }

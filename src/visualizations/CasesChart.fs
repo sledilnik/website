@@ -40,12 +40,12 @@ module Series =
         [ Deceased; Recovered;  ]
 
     let getSeriesInfo = function
-        | Deceased      -> "#666666",   "cs-deceased",      "Umrli"
-        | Recovered     -> "#8cd4b2",   "cs-recovered",     "Preboleli"
-        | Active        -> "#d5c768",   "cs-active",        "Aktivni"
-        | InHospital    -> "#de9a5a",   "cs-inHospital",    "Hospitalizirani"
-        | Icu           -> "#d99a91",   "cs-inHospitalICU", "V intenzivni enoti"
-        | Critical      -> "#bf5747",   "cs-critical",      "Na respiratorju"
+        | Deceased      -> "#666666",   "deceased"
+        | Recovered     -> "#8cd4b2",   "recovered"
+        | Active        -> "#d5c768",   "active"
+        | InHospital    -> "#de9a5a",   "hospitalized"
+        | Icu           -> "#d99a91",   "icu"
+        | Critical      -> "#bf5747",   "ventilator"
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -74,8 +74,8 @@ let legendFormatter jsThis =
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
-            match p?series?name with
-            | "Aktivni" | "Hospitalizirani" | "V intenzivni enoti"  -> fmtUnder <- fmtUnder + "↳ "
+            match p?point?id with
+            | "active" | "hospitalized" | "icu"  -> fmtUnder <- fmtUnder + "↳ "
             | _ -> ()
 
     fmtStr
@@ -106,11 +106,11 @@ let renderChartOptions (state : State) =
             | Icu           -> fun dp -> dp.StatePerTreatment.InICU
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
-        let color, className, name = Series.getSeriesInfo series
+        let color, id = Series.getSeriesInfo series
         {|
             ``type`` = "column"
             color = color
-            name = name
+            name = I18N.tt "charts.cases" id
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
@@ -118,6 +118,7 @@ let renderChartOptions (state : State) =
                     {|
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
+                        id = id
                         fmtDate = dp.Date.ToString "d. M. yyyy"
                         fmtTotal = getPointTotal dp |> string
                     |} |> pojo

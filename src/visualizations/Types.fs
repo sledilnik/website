@@ -54,7 +54,7 @@ type AgeGroupKey = {
         | None, None -> ""
         | None, Some b -> sprintf "0-%d" b
         | Some a, Some b -> sprintf "%d-%d" a b
-        | Some a, None -> sprintf "nad %d" a
+        | Some a, None -> sprintf "%d+" a
 
 type AgeGroup =
     { GroupKey : AgeGroupKey
@@ -99,6 +99,7 @@ type RegionsData = RegionsDataPoint list
 type VisualizationType =
     | MetricsComparison
     | Patients
+    | Ratios
     | HCenters
     | Hospitals
     | Tests
@@ -134,3 +135,4 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
+

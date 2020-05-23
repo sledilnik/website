@@ -2,14 +2,12 @@
   <div class="container">
     <a
       class="notice-link"
-      href="#hcenters-chart"
-      v-scroll-to="{ el: '#hcenters-chart', offset: -115 }"
+      href="#ratios-chart"
+      v-scroll-to="{ el: '#ratios-chart', offset: -115 }"
     >
       <div class="notice">
         <span>
-          <b>Nov graf: </b>
-          'Obravnava v ZD' prikazuje vse sume COVID-19 na vstopnih točkah in
-          napotitve na samoizolacijo. Preberi tudi FAQ.
+          <b>{{ $t("notice.news001") }}</b> <span>{{ $t("notice.news002") }}</span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
@@ -38,7 +36,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba($yellow, 0.1);
+  background: #fffbe8;
   padding: 18px;
   margin: 0px auto 48px;
   width: 100%;
@@ -46,19 +44,24 @@
   font-size: 14px;
   color: $text-c;
   text-decoration: none;
-  box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
-    0 11px 12px -12px rgba(0, 0, 0, 0.22);
+  box-shadow: $element-box-shadow;
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 20px 32px;
+    padding: 20px 24px 20px 32px;
   }
 
   &-button {
     margin-left: 16px;
   }
+
+  span b {
+    padding-right: 8px;
+  }
+
 }
+
 </style>

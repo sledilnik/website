@@ -1,0 +1,505 @@
+{
+  "navbar": {
+    "home": "Domov",
+    "tables": "Tabela",
+    "models": "Modeli",
+    "faq": "FAQ",
+    "about": "O projektu",
+    "team": "Ekipa",
+    "sources": "Viri",
+    "links": "Povezave",
+    "github": "GitHub",
+    "language": {
+      "slovenian": "Slovensko",
+      "english": "Angleško"
+    }
+  },
+  "timestamp": {
+    "updated": "Osveženo {{ date, D. MMMM YYYY }}",
+    "at": "ob {{ date, HH.mm }}"
+  },
+  "notice": {
+    "news001": "Nov graf:",
+    "news002": "prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti."
+  },
+  "infocard": {
+    "confirmedToDate": "Potrjeno okuženi",
+    "recoveredToDate": "Preboleli",
+    "inHospital": "Hospitalizirani",
+    "icu": "V intenzivni enoti",
+    "deceasedToDate": "Umrli",
+    "accordingTo": "Glede na {{ date, D. MMMM }}",
+    "lastUpdated": "{{ date, D. MMMM }}"
+  },
+  "tables": {
+    "title": "Tabela",
+    "tabSummary": "Povzetek stanja",
+    "tabByRegion": "Po regiji",
+    "tabByAgeMale": "Po starosti - Moški",
+    "tabByAgeFemale": "Po starosti - Ženske",
+    "source": "Viri podatkov in druge oblike",
+    "sourceLink": "GDocs preglednica, CSV oblika ali REST API",
+    "day": "{{ date, D.M. }}"
+  },
+  "embedMaker": {
+    "title": "Vgradite graf v vašo spletno stran",
+    "chooseChart": "Izberite graf",
+    "preview": "Predogled:",
+    "embedCode": "Koda za vdelavo:",
+    "description": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">najdete tukaj</a>.",
+    "copy": "Kopiraj",
+    "copied": "Skopirano!"
+  },
+  "days": {
+    "dnevu": "dnevu",
+    "dneh": "dneh",
+    "dnevom": "dnevom",
+    "dnevoma": "dnevoma",
+    "dnevi": "dnevi"
+  },  
+  "month": {
+    "0": "januar",
+    "1": "februar",
+    "2": "marec",
+    "3": "april",
+    "4": "maj",
+    "5": "junij",
+    "6": "julij",
+    "7": "avgust",
+    "8": "september",
+    "9": "oktober",
+    "10": "november",
+    "11": "december"
+  },
+  "shortMonth": {
+    "0": "jan",
+    "1": "feb",
+    "2": "mar",
+    "3": "apr",
+    "4": "maj",
+    "5": "jun",
+    "6": "jul",
+    "7": "avg",
+    "8": "sep",
+    "9": "okt",
+    "10": "nov",
+    "11": "dec"
+  },
+  "weekday": {
+    "0": "Nedelja",
+    "1": "Ponedeljek",
+    "2": "Torek",
+    "3": "Sreda",
+    "4": "Četrtek",
+    "5": "Petek",
+    "6": "Sobota"
+  },
+  "region": {
+    "kr": "Gorenjska",
+    "ng": "Goriška",
+    "nm": "Jugovzhodna Slovenija",
+    "sg": "Koroška",
+    "kp": "Obalno-kraška",
+    "lj": "Osrednjeslovenska",
+    "mb": "Podravska",
+    "ms": "Pomurska",
+    "kk": "Posavska",
+    "po": "Primorsko-notranjska",
+    "ce": "Savinjska",
+    "za": "Zasavska"
+  },
+  "country": {
+    "AUS": "Avstralija",
+    "AUT": "Avstrija",
+    "BEL": "Belgija",
+    "BIH": "Bosna in Hercegovina",
+    "CHE": "Švica",
+    "CHN": "Kitajska",
+    "CZE": "Češka",
+    "DEU": "Nemčija",
+    "DNK": "Danska",
+    "ESP": "Španija",
+    "FIN": "Finska",
+    "FRA": "Francija",
+    "GBR": "Združeno kraljestvo",
+    "HRV": "Hrvaška",
+    "HUN": "Madžarska",
+    "IRN": "Iran",
+    "ISL": "Islandija",
+    "ITA": "Italija",
+    "JPN": "Japonska",
+    "KOR": "J. Koreja",
+    "MKD": "S. Makedonija",
+    "MNE": "Črna gora",
+    "NZL": "Nova Zelandija",
+    "NOR": "Norveška",
+    "RKS": "Kosovo",
+    "RUS": "Rusija",
+    "SGP": "Singapur",
+    "SRB": "Srbija",
+    "SVK": "Slovaška",
+    "SVN": "Slovenija",
+    "SWE": "Švedska",
+    "TWN": "Tajvan",
+    "TUR": "Turčija",
+    "USA": "ZDA"
+  },
+  "cm": {
+    "firstCase": {
+      "title": "1. primer",
+      "description": "Prvi potrjen primer:<br>turist iz Maroka"
+    },
+    "retirementHomes": {
+      "title": "DSO",
+      "description": "Prepoved obiskov v domovih starejših občanov,<br>potrjena okužba zdravnika v Metliki"
+    },
+    "checkpoints": {
+      "title": "Točke",
+      "description": "16 vstopnih točk za testiranje"
+    },
+    "borders": {
+      "title": "Meje",
+      "description": "Zapora nekaterih mejnih prehodov z Italijo,<br>poostren nadzor za osebna vozila"
+    },
+    "epidemic": {
+      "title": "Epidemija",
+      "description": "Razglašena epidemija, predpisana splošna samoizolacija"
+    },
+    "publicTransport": {
+      "title": "Prevozi",
+      "description": "Ukinitev javnih prevozov"
+    },
+    "schools": {
+      "title": "Šole",
+      "description": "Zaprtje šol, restavracij"
+    },
+    "gatherings": {
+      "title": "Zbiranje",
+      "description": "Prepoved zbiranja na javnih mestih"
+    },
+    "municipality": {
+      "title": "Občine",
+      "description": "Prepoved gibanja izven meja občin, obvezno razkuževanje <br>večstanovanjskih zgradb, trgovine za ranljive skupine do 10h"
+    },
+    "shops": {
+      "title": "Trgovine",
+      "description": "Trgovine od 8-10 ure in zadnjo uro izključno <br>za ranljive skupine (invalidi, upokojenci, nosečnice)"
+    },
+    "quarantine": {
+      "title": "Karantena",
+      "description": "Obvezna 7 dnevna karantena pri prihodu iz tujine"
+    },
+    "liftVacationHomes": {
+      "title": "Vikendi",
+      "description": "Sproščanje: gibanje med občinami (vikendi…), <br>pojasnila glede splošne prepovedi gibanja"
+    },
+    "liftService": {
+      "title": "Servisi",
+      "description": "Sproščanje: gradnja, servisi, šport na prostem,<br>dovoljeni nekateri linijski prevozi"
+    },
+    "nationalStudy": {
+      "title": "Raziskava",
+      "description": "Začetek nacionalne raziskave 3000 naključno izbranih oseb"
+    },
+    "liftMuseums": {
+      "title": "Muzeji",
+      "description": "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
+    },
+    "liftMunicipality": {
+      "title": "Občine",
+      "description": "Sproščanje: gibanje izven meja svoje občine"
+    },
+    "liftFoodMarkets": {
+      "title": "Tržnice",
+      "description": "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+    },
+    "liftPublicTransport": {
+      "title": "Prevozi",
+      "description": "Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
+    },
+    "liftQuarantine": {
+      "title": "Karantena",
+      "description": "Sproščanje: karantena samo za tujce iz tretjih držav"
+    }
+  },
+  "phase": {
+    "1": {
+      "title": "Faza 1"
+    },
+    "2": {
+      "title": "Faza 2",
+      "description": "epidemija, nov režim testiranja"
+    },
+    "3": {
+      "title": "Faza 3",
+      "description": "nov režim testiranja"
+    },
+    "4": {
+      "title": "Faza 4",
+      "description": "nov režim testiranja"
+    },
+    "5": {
+      "title": "Faza 5",
+      "description": "nov režim testiranja"
+    },
+    "6": {
+      "title": "Faza 6",
+      "description": "nov režim testiranja, raziskava"
+    },
+    "7": {
+      "title": "Faza 7",
+      "description": "preklic epidemije"
+    }
+  },
+  "charts": {
+    "common": {
+      "loading": "Nalagam podatke…",
+      "xAxis": "X os:",
+      "yAxis": "Y os:",
+      "linear": "Linearna",
+      "log": "Logaritemska",
+      "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
+      "linkFaq": "FAQ"
+    },
+    "metricsComparison": {
+      "title": "Stanje COVID-19 v Sloveniji",
+      "tests": "Testiranja (na dan)",
+      "testsToDate": "Testiranja (skupaj)",
+      "confirmed": "Potrjeno okuženi (na dan)",
+      "confirmedToDate": "Potrjeno okuženi (skupaj)",
+      "active": "Potrjeno okuženi (aktivni)",
+      "recovered": "Preboleli (skupaj)",
+      "hospitalized": "Hospitalizirani (aktivni)",
+      "hospitalizedToDate": "Hospitalizirani (skupaj)",
+      "icu": "V intenzivni enoti (aktivni)",
+      "ventilator": "Na respiratorju (aktivni)",
+      "discharged": "Odpuščeni iz bolnišnice (na dan)",
+      "dischargedToDate": "Odpuščeni iz bolnišnice (skupaj)",
+      "deceased": "Umrli (na dan)",
+      "deceasedToDate": "Umrli (skupaj)"
+    },
+    "cases": {
+      "title": "Potrjeni primeri",
+      "active": "Aktivni",
+      "hospitalized": "Hospitalizirani",
+      "icu": "V intenzivni enoti",
+      "ventilator": "Na respiratorju",
+      "recovered": "Preboleli",
+      "deceased": "Umrli"
+    },
+    "patients": {
+      "title": "Hospitalizirani",
+      "structure": "Struktura",
+      "byHospital": "Po bolnišnicah",
+      "hospitalizedIn": "Hospitalizirani v:",
+      "admitted": "Sprejeti",
+      "hospitalized": "Hospitalizirani",
+      "icu": "V intenzivni enoti",
+      "ventilator": "Na respiratorju",
+      "discharged": "Odpuščeni",
+      "deceased": "Umrli"
+    },
+    "ratios": {
+      "title": "Delež resnih primerov",
+      "seriousCases": "Resni primeri",
+      "hospitalizations": "Hospitalizirani",
+      "mortality": "Smrtnost",
+      "hospitalCases": "Hospitalizirani",
+      "icuCases": "V intenzivni enoti",
+      "ventilatorCases": "Na respiratorju",
+      "deceasedCases": "Umrli",
+      "icuHospital": "V intenzivni enoti",
+      "ventilatorHospital": "Na respiratorju",
+      "deceasedHospital": "Umrli",
+      "hospitalMortality": "Smrtnost v bolnišnici",
+      "icuMortality": "Smrtnost v intenzivni enoti",
+      "icuDeceasedShare": "Delež smrti v intenzivni enoti",
+      "hospitalDeceasedShare": "Delež smrti v bolnišnici"
+    },
+    "hCenters": {
+      "title": "Obravnava v ZD",
+      "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
+      "suspectedCovidExamination": "Sum COVID-19 (pregled)",
+      "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",
+      "sentToSelfIsolation": "Napotitev v samoizolacijo",
+      "testsPerformed": "Test (opravljenih)",
+      "testsPositive": "Test (pozitivnih*)"
+    },
+    "tests": {
+      "title": "Testiranje",
+      "allTesting": "Skupaj",
+      "regularTesting": "Redno",
+      "nationalStudyTesting": "Raziskava",
+      "negativeTests": "Negativnih testov",
+      "positiveTests": "Pozitivnih testov",
+      "shareOfPositive": "Delež pozitivnih testov (%)"
+    },
+    "infections": {
+      "title": "Struktura potrjeno okuženih",
+      "averageByDay": "Po dnevih (povprečno)",
+      "all": "Skupaj",
+      "relative": "Relativno",
+      "hcStaff": "Zaposleni v zdravstvu",
+      "rhStaff": "Zaposleni v domovih za starejše občane",
+      "rhOccupant": "Oskrbovanci domov za starejše občane",
+      "allConfirmed": "Vsi potrjeni",
+      "otherPersons": "Ostale osebe"
+    },
+    "spread": {
+      "title": "Prirast potrjeno okuženih",
+      "absolute": "Absolutni dnevni prirast",
+      "percentage": "Relativni dnevni prirast",
+      "doublingRate": "Eksponentna rast v dnevih",
+      "explainer": "Kaj pomeni eksponenta rast",
+      "absoluteTitle": "Dnevni prirast potrjeno okuženih",
+      "absoluteLabel": "Potrjeno okuženi dnevno",
+      "relativeTitle": "Dnevni prirast okuženih",
+      "relativeLabel": "Relativen prirast v %",
+      "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
+      "doublingRateLabel":"V koliko dneh se število okuženih podvoji",
+      "everageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
+      "oneDay": "En dan",
+      "oneWeek": "En teden",
+      "oneMonth": "En mesec",
+      "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:",
+      "today": "Danes",
+      "inOneWeek": "Čez en teden",
+      "inTwoWeeks": "Čez dva tedna",
+      "inThreeWeeks": "Čez tri tedne",
+      "inFourWeeks": "Čez štiri tedne",
+      "timesAsMany": "-krat toliko",
+      "confirmedCases": "potrjeno okuženih",
+      "hospitalized": "hospitaliziranih"
+    },
+    "regions": {
+      "title": "Potrjeno okuženi po regijah"
+    },
+    "map": {
+      "title": "Zemljevid po občinah",
+      "confirmedCases": "Potrjeni primeri",
+      "deceased": "Umrli",
+      "view": "Prikaži:",
+      "absolute": "Absolutno",
+      "populationShare": "Delež prebivalstva",
+      "all": "Vsi",
+      "days": "dni",    
+      "populationC": "Prebivalcev",    
+      "population": "prebivalcev",    
+      "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"    
+    },
+    "municipalities": {
+      "title": "Primeri po občinah",
+      "lastCase": "Zadnji primer: ",
+      "lastCaseBefore": "Zadnji primer pred: ",
+      "today": "danes",
+      "yesterday": "včeraj",
+      "doublesIn": "Podvojitev v ",
+      "deceased": "Umrli:",
+      "recovered": "Preboleli:",
+      "active": "Aktivni:",
+      "all": "Vsi:",
+      "showLess": "Prikaži manj občin",
+      "showAll": "Prikaži vse občine",
+      "search": "Poišči občino",
+      "allRegions": "Vse regije",
+      "sortBy": "Razvrsti:",
+      "sortActive": "Aktivni",
+      "sortTotal": "Vsi",
+      "sortDoublingTime": "Dnevih podvojitve",
+      "sortLast": "Zadnji"
+    },
+    "ageGroups": {
+      "title": "Po starostnih skupinah",
+      "view": "Prikaži:",
+      "absolute": "Absolutno",
+      "relative": "Relativno",
+      "male": "Moški",
+      "female": "Ženske",
+      "confirmedCases": "Potrjeni primeri",
+      "deceased": "Umrli",
+      "age": "Starost",
+      "confirmedCasesPerPopulation": "Delež potrjeno okuženih",
+      "deceasedPerPopulation": "Delež umrlih",
+      "deceasedPerConfirmedCases": "Umrli glede na št. okuženih",
+      "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
+      "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
+      "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
+      "populationTotal": "Prebivalcev skupaj"
+    },
+    "countries": {
+      "title": "Primerjava po državah",
+      "groupNeighbouringWoItaly": "okolica (brez Italije)",
+      "groupCriticalEU": "kritične države (EU)",
+      "groupCriticalWorld": "kritične države (svet)",
+      "groupNordic": "nordijske države",
+      "groupExYu": "ex-Jugoslavija",
+      "groupEastAsiaOceania": "vzh. Azija in Oceanija",
+      "chronologically": "Kronološko",
+      "sinceFirstDeath": "Od prve smrti",
+      "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
+      "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
+      "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
+      "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
+      "nrDeathsPerMillion":  "Št. umrlih na 1 milijon prebivalcev",
+      "dataSourceOWID": "vir podatkov: Our World In Data"
+    }
+  },
+  "footer": {
+    "copyright": "© 2020 Sledilnik.org"
+  },
+
+  "tableDict": {
+    "tests_performed": "Testiranja (na dan)",
+    "tests_performed_todate": "Testiranja (skupaj)",
+    "cases_confirmed": "Potrjeno okuženi (na dan)",
+    "cases_confirmed_todate": "Potrjeno okuženi (skupaj)",
+    "cases_active": "Potrjeno okuženi (aktivni)",
+    "cases_recovered_todate": "Preboleli (skupaj)",
+    "cases_closed_todate": "Zaprti primeri (skupaj)",
+    "cases_hs_employee_confirmed_todate": "PO - zaposleni v zdravstvu (skupaj)",
+    "cases_rh_employee_confirmed_todate": "PO - zaposleni v DSO (skupaj)",
+    "cases_rh_occupant_confirmed_todate": "PO - oskrbovanec DSO (skupaj)",
+    "cases_unclassified_confirmed_todate": "PO - ostali (skupaj)",
+    "state_in_hospital": "Hospitalizirani (aktivni)",
+    "state_icu": "V intenzivni enoti (aktivni)",
+    "state_critical": "Na respiratorju (aktivni)",
+    "state_deceased_todate": "Umrli (skupaj)",
+    "state_in_hospital_todate": "Hospitalizirani (skupaj)",
+    "state_out_of_hospital_todate": "Odpuščeni iz bolnišnice (skupaj)",
+    "age_male_todate": "Skupno",
+    "age_male_0-4_todate": "0 - 4 leta",
+    "age_male_5-14_todate": "5 - 14 let",
+    "age_male_15-24_todate": "15 - 24 let",
+    "age_male_25-34_todate": "25 - 34 let",
+    "age_male_35-44_todate": "35 - 44 let",
+    "age_male_45-54_todate": "45 - 54 let",
+    "age_male_55-64_todate": "55 - 64 let",
+    "age_male_65-74_todate": "65 - 74 let",
+    "age_male_75-84_todate": "75 - 84 let",
+    "age_male_85+_todate": "85+ let",
+    "age_female_todate": "Skupno",
+    "age_female_0-4_todate": "0 - 4 leta",
+    "age_female_5-14_todate": "5 - 14 let",
+    "age_female_15-24_todate": "15 - 24 let",
+    "age_female_25-34_todate": "25 - 34 let",
+    "age_female_35-44_todate": "35 - 44 let",
+    "age_female_45-54_todate": "45 - 54 let",
+    "age_female_55-64_todate": "55 - 64 let",
+    "age_female_65-74_todate": "65 - 74 let",
+    "age_female_75-84_todate": "75 - 84 let",
+    "age_female_85+_todate": "85+ let",
+    "region_kr_todate": "Gorenjska",
+    "region_ng_todate": "Goriška",
+    "region_nm_todate": "Jugovzhodna Slovenija",
+    "region_sg_todate": "Koroška",
+    "region_kp_todate": "Obalno-kraška",
+    "region_lj_todate": "Osrednjeslovenska",
+    "region_mb_todate": "Podravska",
+    "region_ms_todate": "Pomurska",
+    "region_kk_todate": "Posavska",
+    "region_po_todate": "Primorsko-notranjska",
+    "region_ce_todate": "Savinjska",
+    "region_za_todate": "Zasavska",
+    "region_todate": "Skupno"
+  }
+}

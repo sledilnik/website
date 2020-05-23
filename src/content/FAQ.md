@@ -136,7 +136,7 @@ Podatek **Odpuščeni iz bolnišnice** je izračunan na podlagi podatkov, ki jih
 
 Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)) 
 
-Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo. ECDC je v svojem [poročilu](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) navedla, *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population* - zato smo izbrali 14 dnevno obdobje kot čas ko je povprečno potrjeno okuženi aktiven. 
+Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo. ECDC je v svojem [poročilu](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) navedla: *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population...*, zato smo izbrali 14-dnevno obdobje kot povprečno trajanje okužbe, torej čas, ko je potrjeno okuženi aktiven. 
 
 Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countries) poroča o številu okrevanj, a žal nam podatka, od kod črpajo te informacije, ni uspelo pridobiti. Tudi nekateri drugi viri preprosto združujejo prebolele osebe s številom odpuščenih bolnikov iz bolnišnic. Ker menimo, da ta dva podatka ne kažeta enakega stanja bolezni, smo se odločili, da jih prikazujemo ločeno; to sta  kazalnika **Odpuščeni iz bolnišnice** in **Preboleli**. 
 
@@ -267,15 +267,15 @@ Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/stats#cases-chart).
 
 
 <details>
-  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 6), ki jih vidimo v grafih?</summary>
+  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 7), ki jih vidimo v grafih?</summary>
 
-Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, uvedejo se interventni ukrepi samoizolacije, prepovedi zbiranja in gibanja oseb ter obvezne nošnje osnovne zaščite).
+Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, uvedejo se interventni ukrepi samoizolacije...).
 
 Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.
 
 * **Faza 1 (4.–12. marec 2020)**: Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti. 
 
-* **Faza 2 (13.–19. marec 2020)**: Spremeni se [metodologija testiranja](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/), uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.
+* **Faza 2 (13.–19. marec 2020)**: Spremeni se [metodologija testiranja, razglašena epidemija](https://www.gov.si/novice/2020-03-14-spremenjeno-diagnosticiranje-za-realnejse-nacrtovanje-ukrepov-za-obvladovanje-epidemije/), uvedejo se interventni ukrepi o samoizolaciji in socialnem distanciranju.
 
 * **Faza 3 (20. marec–7. april)**: Ponovno [se spremeni metodologija testiranja](https://www.gov.si/novice/2020-03-22-ministrstvo-za-zdravje-z-vrsto-ukrepov-v-boju-proti-covid-19/), vzpostavi se prepoved zbiranja več kot petih oseb na javnih površinah.
 
@@ -283,7 +283,9 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 5 (15.–21. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.
 
-* **Faza 6 (21. april–danes)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID19-Testiranje-pri-vseh-osebah-s-sumom.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
+* **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
+
+* **Faza 7 (15. maj–danes)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov ostaja do konca maja.
 
 </details>
 
@@ -293,6 +295,21 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 [Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
 Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
+
+</details>
+
+<details>
+  <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
+
+[Graf](/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani v odstotkih (%). 
+
+(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno, kolikšen delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
+
+(*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori, na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.
+
+(*Smrtnost*) nam pokaže delež smrti v bolnišnici glede na vse umrle in delež smrti v intenzivni enoti glede na vse umrle - prikazano s polno črto. S črtkano črto sta prikazani Smrtnost v bolnišnici (koliko oseb umre glede na vse hospitalizirane) in Smrtnost v intenzivni enoti (koliko oseb umre glede na vse sprejete v intenzivno enoto). 
+
+Graf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z ostalimi državami (glede na njihova poročila).
 
 </details>
 
@@ -364,10 +381,16 @@ V obdobju eksponentne rasti na prikazu **Primeri po občinah** prikazujemo oceno
 <details>
   <summary id=municipalities-chart>Kaj kaže prikaz "Primeri po občinah"?</summary>
 
-Stolpčni [prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po dnevih, pri tem da so prikazani aktivni primeri, preboleli (ocena) in umrli v posamezni občini. Pod občino pa je podatek o času od zadnje okužbe. Občine so razvrščene glede na to, kdaj je bil tam zabeležen zadnji potrjeni primer, iz česar lahko sklepamo, katere občine so trenutno bolj “okužene” in katere bolj "zdrave" kot druge.   
-Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo prikaz *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov, če pa izberemo *Vsi* pa po največjem skupnem številu potrjeno okuženih, če pa bomo z zgornjega spustnega seznama *Vse regije* izbrali posamezno regijo, si lahko ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščete z vnosom imena v iskalnik *Poišči občino*. 
+[Prikaz](/stats#municipalities-chart) po posameznih občinah bolj podrobno prikaže število potrjeno okuženih po posameznih občinah glede na to, kdaj je bil odkrit *zadnji* primer.   
+Sicer pa stolpiči kažejo tri kategorije: z rumeno barvo so označeni še vedno <span style="color:gold">*aktivni*</span> primeri, z zeleno so označeni <font color='green'>*preboleli* (ocena)</font> in s črno *umrli* v posamezni občini.   
+Številke desno poleg občine kažejo **stanje na današnji dan**, večja rumena številka kaže *trenutno aktivne* primere, manjša kaže *skupno število* vseh potrjeno okuženih primerov, vključno s prebolelimi in umrlimi. *Datum* poleg občine pa kaže, kdaj je bil odkrit zadnji potrjeno okužen primer. Na to se navezuje podatek o času od zadnje okužbe, zapisan kot *Zadnji primer pred* pod posamezno občino, ki vpliva tudi na razvrstitev občin.
 
-*Opomba: ocena prebolelih in aktivnih je narejena po poteku 14 dni pri blagi obliki bolezni. Če pa je posameznik hospitaliziran, pa bo ta prebolevanje trajalo dlje, ampak v tem primeru posameznik ni nevaren za okolico, ker je v bolnišnici. Ker v prikazu po občinah ne upoštevamo hospitaliziranih je mogoče, da se seštevek aktivnih po občinah ne ujema z oceno aktivnih za celo državo. Glej tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
+Ker so občine samodejno razvrščene po preteklem času od zadnjega potrjenega primera, lahko iz tega sklepamo, katere občine so trenutno bolj "okužene" in katere bolj "zdrave" kot druge. Nedavno se je med občinami pojavila tudi posebna kategorija TUJINA, uvedena skladno s poročanjem NIJZ, kjer so kategorijo uporabili za osebe, pri katerih občine bivanja ni bilo mogoče določiti.   
+
+Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo razvrstitev *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov. Če izberemo *Vsi*, bodo občine razvrščene po največjem *skupnem* številu potrjeno okuženih.   
+Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega spustnega seznama *Vse regije* izberemo določeno regijo in si ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščemo z vnosom imena v iskalnik *Poišči občino*. 
+
+*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/FAQ/#data-active-cases)*
 
 </details>
 
