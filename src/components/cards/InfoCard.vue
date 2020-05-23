@@ -2,9 +2,7 @@
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <span class="card-title">{{ title }}</span>
-      <span class="card-number">{{ renderValues.lastDay.value }}
-        <span class="card-percentage-diff" :class="diffClass">{{ renderValues.lastDay.percentDiff | prefixDiff }}%</span>
-      </span>
+      <span class="card-number">{{ renderValues.lastDay.value }}</span>
       <div :id="elementId" class="card-diff">
         <div v-if="showAbsolute" class="trend-icon" :class="[diffClass, iconClass]"></div>
         <span v-if="showAbsolute" :class="diffClass">{{ Math.abs(renderValues.lastDay.diff) }}</span>
@@ -12,6 +10,8 @@
         <span v-if="showIn" class="in" :class="diffInOutClass(totalIn)">{{ renderInOutValues(totalIn) }}</span>
         <div v-if="showOut" class="trend-icon" :class="[diffInOutClass(totalOut), iconInOutClass(totalOut)]"></div>
         <span v-if="showOut" class="out" :class="diffInOutClass(totalOut)">{{ renderInOutValues(totalOut) }}</span>
+        <span class="card-percentage-diff" :class="diffClass">({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
+
         <!-- TODO: x.dayBefore values aren't calculated correctly, check stats.store.js why not -->
         <!-- <b-tooltip :target="elementId" triggers="hover">
           {{ $t("infocard.accordingTo", { date: new Date(renderValues.dayBefore.date) }) }}: {{ renderValues.dayBefore.value }}
