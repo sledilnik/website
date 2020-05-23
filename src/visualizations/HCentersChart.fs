@@ -10,48 +10,52 @@ open Types
 open Data.HCenters
 open Highcharts
 
-type Scope =
-    | Totals
-    | Region of string
+type Region =
+    { Key : string
+      Name : string }
 
 type State = {
-    scope : Scope
-    hcData : HcStats []
-    error: string option
-  } with
-    static member initial =
-        {
-            scope = Totals
-            hcData = [||]
-            error = None
-        }
-
+    HcData : HcStats []
+    Error: string option
+    Regions : Region list
+    FilterByRegion : string
+  } 
+  
 type Msg =
     | ConsumeHcData of Result<HcStats [], string>
     | ConsumeServerError of exn
-    | SwitchScope of Scope
-
-let getAllScopes state = seq {
-    yield Totals, "Vse"
-    for region in Utils.Dictionaries.regions do
-        if not (Set.contains region.Key Utils.Dictionaries.excludedRegions)
-        then yield Region region.Key, region.Value.Name
-}
+    | RegionFilterChanged of string
 
 let init () : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either Data.HCenters.getOrFetch () ConsumeHcData ConsumeServerError
-    State.initial, (cmd)
+
+    let state = {
+        HcData = [| |]
+        Error = None
+        Regions = [ ]
+        FilterByRegion = "" 
+    }
+
+    state, (cmd)
+
+let getRegionList hcData =
+    hcData.municipalities
+    |> Map.toList
+    |> List.map fst        
+    |> List.map (fun reg -> { Key = reg ; Name = I18N.tt "region" reg })
+    |> List.sortBy (fun region -> region.Name)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+
     match msg with
     | ConsumeHcData (Ok data) ->
-        { state with hcData = data }, Cmd.none
+        { state with HcData = data; Regions = getRegionList (data |> Array.last) }, Cmd.none
     | ConsumeHcData (Error err) ->
-        { state with error = Some err }, Cmd.none
+        { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
-        { state with error = Some ex.Message }, Cmd.none
-    | SwitchScope scope ->
-        { state with scope = scope }, Cmd.none
+        { state with Error = Some ex.Message }, Cmd.none
+    | RegionFilterChanged region ->
+        { state with FilterByRegion = region }, Cmd.none
 
 let renderChartOptions (state : State) =
     let className = "hcenters-chart"
@@ -60,12 +64,13 @@ let renderChartOptions (state : State) =
     let mutable startTime = startDate |> jsTime
 
     let getRegionStats region mp = 
-        mp |> Map.find region |> Map.find "ljubljana" 
+            mp |> Map.find region
+            |> Map.fold ( fun total key hc -> total + hc ) TotalHcStats.None
 
     let hcData = 
-        match state.scope with
-        | Totals        -> state.hcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
-        | Region region -> state.hcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
+        match state.FilterByRegion with
+        | ""     -> state.HcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
+        | region -> state.HcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
 
     let allSeries = [
         yield pojo
@@ -138,30 +143,42 @@ let renderChartContainer (state : State) =
         ]
     ]
 
-let renderScopeSelector state scope (name:string) onClick =
-    Html.div [
-        prop.onClick onClick
-        prop.className [ true, "btn btn-sm metric-selector"; state.scope = scope, "metric-selector--selected" ]
-        prop.text name
+let renderRegionSelector (regions : Region list) (selected : string) dispatch =
+    let renderedRegions = seq {
+        yield Html.option [
+            prop.text (I18N.t "charts.hCenters.allRegions")
+            prop.value ""
+        ]
+
+        for region in regions do
+            yield Html.option [
+                prop.text region.Name
+                prop.value region.Key
+            ]
+    }
+
+    Html.select [
+        prop.value selected
+        prop.className "form-control form-control-sm filters__region"
+        prop.children renderedRegions
+        prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
-let renderScopeSelectors state dispatch =
-    Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            getAllScopes state
-            |> Seq.map (fun (scope,name) ->
-                renderScopeSelector state scope name (fun _ -> SwitchScope scope |> dispatch)
-            ) ) ]
-
 let render (state : State) dispatch =
-    match state.hcData, state.error with
+    match state.HcData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
+            Utils.renderChartTopControls [
+                Html.div [
+                    prop.className "filters"
+                    prop.children [
+                        renderRegionSelector state.Regions state.FilterByRegion dispatch
+                    ]
+                ]
+            ]
             renderChartContainer state
-            renderScopeSelectors state dispatch
 
             Html.div [
                 prop.className "disclaimer"
