@@ -445,11 +445,12 @@
         }
     },
     "days": {
-        "dnevi": "days",
-        "dnevoma": "days",
-        "dnevom": "day",
-        "dneh": "days",
-        "dnevu": "day"
+        "mestnik": "day",
+        "mestnik_plural": "days",
+        "orodnik": "day",
+        "orodnik_2": "days",
+        "orodnik_plural": "days",
+        "date": "{{ date, MMMM Do }}"
     },
     "region": {
         "za": "Central Sava Region",

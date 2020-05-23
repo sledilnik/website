@@ -51,11 +51,12 @@
     "copied": "Skopirano!"
   },
   "days": {
-    "dnevu": "dnevu",
-    "dneh": "dneh",
-    "dnevom": "dnevom",
-    "dnevoma": "dnevoma",
-    "dnevi": "dnevi"
+    "mestnik": "dnevu",
+    "mestnik_plural": "dneh",
+    "orodnik": "dnevom",
+    "orodnik_2": "dnevoma",
+    "orodnik_plural": "dnevi",
+    "date": "{{ date, D. MMMM }}"
   },  
   "month": {
     "0": "januar",

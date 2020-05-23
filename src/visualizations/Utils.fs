@@ -119,14 +119,14 @@ let monthNameOfdate (date : System.DateTime) =
 
 let daysMestnik days =
     match days % 100 with
-    | 1 -> I18N.t "days.dnevu"
-    | _ -> I18N.t "days.dneh"
+    | 1 -> I18N.t "days.mestnik"
+    | _ -> I18N.t "days.mestnik_plural"
 
 let daysOrodnik days =
     match days % 100 with
-    | 1 -> I18N.t "days.dnevom"
-    | 2 -> I18N.t "days.dnevoma"
-    | _ -> I18N.t "days.dnevi"
+    | 1 -> I18N.t "days.orodnik"
+    | 2 -> I18N.t "days.orodnik_2"
+    | _ -> I18N.t "days.orodnik_plural"
 
 let transliterateCSZ (str : string) =
     str
