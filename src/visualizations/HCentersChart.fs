@@ -139,7 +139,7 @@ let renderChartContainer (state : State) =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
