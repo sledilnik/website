@@ -166,7 +166,7 @@ let renderStructureChart (state : State) =
             match p?point?fmtTotal with
             | "null" -> ()
             | _ ->
-                match p?point?id with
+                match p?point?seriesId with
                 | "hospitalized" | "discharged" | "deceased"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
                 fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
