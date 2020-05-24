@@ -162,7 +162,8 @@
             "icu": "In ICU",
             "ventilator": "On Ventilator",
             "discharged": "Discharged",
-            "deceased": "Died"
+            "deceased": "Died",
+            "allHospitals": "All Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",
