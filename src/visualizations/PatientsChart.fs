@@ -39,7 +39,6 @@ module Series =
     let byHospital =
         [ InHospital; ]
 
-    // color, dash, id
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
         | Icu                   -> "#d99a91", "icu"
@@ -152,7 +151,7 @@ let renderByHospitalChart (state : State) =
             |}
 |}
 
-let renderStructureChart (state : State) (fcode : string)=
+let renderStructureChart (state : State) =
 
     let startDate = DateTime(2020,03,10)
 
@@ -181,7 +180,17 @@ let renderStructureChart (state : State) (fcode : string)=
                     fmtStr <- fmtStr + fmtLine
         sprintf "<b>%s</b>" fmtDate + fmtStr
 
-    let renderBarSeries series fcode =
+    let psData = 
+        match state.Breakdown with
+        | Facility fcode -> 
+            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                |> Seq.map (fun ps -> (ps.Date, ps.facilities |> Map.find fcode)) |> Seq.toArray
+        | _ -> 
+            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                |> Seq.map (fun ps -> (ps.Date, ps.total.ToFacilityStats)) |> Seq.toArray
+
+
+    let renderBarSeries series =
         let subtract (a : int option) (b : int option) = Some (b.Value - a.Value)
         let negative (a : int option) = Some (- a.Value)
 
@@ -203,13 +212,6 @@ let renderStructureChart (state : State) (fcode : string)=
             | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
 
-        let psData = 
-            match fcode with
-            | ""    -> state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
-                        |> Seq.map (fun ps -> (ps.Date, ps.total.ToFacilityStats)) 
-            | fcode -> state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
-                        |> Seq.map (fun ps -> (ps.Date, ps.facilities |> Map.find fcode))
-
         let color, id = Series.getSeriesInfo series
         {|
             color = color
@@ -224,7 +226,7 @@ let renderStructureChart (state : State) (fcode : string)=
                         fmtDate = date.ToString "d. M. yyyy"
                         id = id
                     |} )
-                |> Array.ofSeq
+                |> Seq.toArray
         |}
 
     let className = "covid19-patients-structure"
@@ -242,7 +244,7 @@ let renderStructureChart (state : State) (fcode : string)=
                 column = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
-        series = [| for series in Series.structure do yield renderBarSeries series fcode |]
+        series = [| for series in Series.structure do yield renderBarSeries series |]
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |} 
 
@@ -269,8 +271,7 @@ let renderChartContainer state =
         prop.children [
             match state.Breakdown with 
             | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
-            | AllHospitals -> renderStructureChart state "" |> Highcharts.chartFromWindow
-            | Facility fcode -> renderStructureChart state fcode |> Highcharts.chartFromWindow
+            | _ -> renderStructureChart state |> Highcharts.chartFromWindow
         ]
     ]
 
