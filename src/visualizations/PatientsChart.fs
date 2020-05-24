@@ -84,7 +84,7 @@ let getFacilitiesList (data : PatientsStats array) =
         data.[data.Length-2]
         data.[data.Length-1]
     }
-    |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map (fun (facility, stats) -> facility,stats.inHospital.toDate)) // hospital name
+    |> Seq.collect (fun stats -> stats.facilities |> Map.toSeq |> Seq.map (fun (facility, stats) -> facility,stats.inHospital.today)) // hospital name
     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
@@ -227,7 +227,7 @@ let renderStructureChart (state : State) (fcode : string)=
                 |> Array.ofSeq
         |}
 
-    let className = "covid19-patients-structure" + fcode
+    let className = "covid19-patients-structure"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
     {| baseOptions with
         chart = pojo
