@@ -297,8 +297,8 @@
     },
     "patients": {
       "title": "Hospitalizirani",
-      "structure": "Struktura",
       "byHospital": "Po bolnišnicah",
+      "allHospitals": "Vse bolnišnice",
       "hospitalizedIn": "Hospitalizirani v:",
       "admitted": "Sprejeti",
       "hospitalized": "Hospitalizirani",
