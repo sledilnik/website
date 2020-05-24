@@ -25,27 +25,34 @@ type TDeceasedCounts = {
     home : DeceasedCounts
 }
 
-type PatientCounts = {
+type DepartmentCounts = {
     ``in``: int option
     out: int option
     today: int option
     toDate: int option
 }
 
-type TotalPatientStats = {
-    outOfHospital: PatientCounts
-    inHospital: PatientCounts
-    icu: PatientCounts
-    critical: PatientCounts
-    deceased: TDeceasedCounts
-}
-
-type PatientsByFacilityStats = {
-    inHospital: PatientCounts
-    icu: PatientCounts
-    critical: PatientCounts
+type FacilityPatientStats = {
+    inHospital: DepartmentCounts
+    icu: DepartmentCounts
+    critical: DepartmentCounts
     deceased: HDeceasedCounts
 }
+
+type TotalPatientStats = 
+    {
+        outOfHospital: DepartmentCounts
+        inHospital: DepartmentCounts
+        icu: DepartmentCounts
+        critical: DepartmentCounts
+        deceased: TDeceasedCounts
+    }
+    member this.ToFacilityStats : FacilityPatientStats =
+        { inHospital = this.inHospital
+          icu = this.icu
+          critical = this.critical
+          deceased = this.deceased.hospital }
+
 
 type PatientsStats = {
     dayFromStart: int
@@ -53,9 +60,10 @@ type PatientsStats = {
     month: int
     day: int
     total: TotalPatientStats
-    facilities: Map<string,PatientsByFacilityStats>
+    facilities: Map<string,FacilityPatientStats>
   } with
     member ps.Date = new DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate12h = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime12h
+
 
 let getOrFetch = DataLoader.makeDataLoader<PatientsStats []> url

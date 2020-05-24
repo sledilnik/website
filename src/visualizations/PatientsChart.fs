@@ -185,25 +185,7 @@ let renderStructureChart (state : State) (fcode : string)=
         let subtract (a : int option) (b : int option) = Some (b.Value - a.Value)
         let negative (a : int option) = Some (- a.Value)
 
-        let getPoint : (Data.Patients.TotalPatientStats -> int option) =
-            match series with
-            | InHospital            -> fun ps -> ps.inHospital.today |> subtract ps.icu.today |> subtract ps.inHospital.``in`` |> Utils.zeroToNone
-            | Icu                   -> fun ps -> ps.icu.today |> subtract ps.critical.today |> Utils.zeroToNone
-            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
-            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
-            | InHospitalOut         -> fun ps -> negative ps.inHospital.out |> Utils.zeroToNone
-            | InHospitalDeceased    -> fun ps -> negative ps.deceased.hospital.today |> Utils.zeroToNone
-
-        let getPointTotal : (Data.Patients.TotalPatientStats -> int option) =
-            match series with
-            | InHospital            -> fun ps -> ps.inHospital.today |> Utils.zeroToNone
-            | Icu                   -> fun ps -> ps.icu.today |> Utils.zeroToNone
-            | Critical              -> fun ps -> ps.critical.today |> Utils.zeroToNone
-            | InHospitalIn          -> fun ps -> ps.inHospital.``in`` |> Utils.zeroToNone
-            | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
-            | InHospitalDeceased    -> fun ps -> ps.deceased.hospital.today |> Utils.zeroToNone
-
-        let getFacilityPoint : (Data.Patients.PatientsByFacilityStats -> int option) =
+        let getPoint : (Data.Patients.FacilityPatientStats -> int option) =
             match series with
             | InHospital            -> fun ps -> ps.inHospital.today |> subtract ps.icu.today |> subtract ps.inHospital.``in`` |> Utils.zeroToNone
             | Icu                   -> fun ps -> ps.icu.today |> subtract ps.critical.today |> Utils.zeroToNone
@@ -212,7 +194,7 @@ let renderStructureChart (state : State) (fcode : string)=
             | InHospitalOut         -> fun ps -> negative ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> negative ps.deceased.today |> Utils.zeroToNone
 
-        let getFacilityPointTotal : (Data.Patients.PatientsByFacilityStats -> int option) =
+        let getPointTotal : (Data.Patients.FacilityPatientStats -> int option) =
             match series with
             | InHospital            -> fun ps -> ps.inHospital.today |> Utils.zeroToNone
             | Icu                   -> fun ps -> ps.icu.today |> Utils.zeroToNone
@@ -221,30 +203,29 @@ let renderStructureChart (state : State) (fcode : string)=
             | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
 
+        let psData = 
+            match fcode with
+            | ""    -> state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                        |> Seq.map (fun ps -> (ps.Date, ps.total.ToFacilityStats)) 
+            | fcode -> state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+                        |> Seq.map (fun ps -> (ps.Date, ps.facilities |> Map.find fcode))
+
         let color, id = Series.getSeriesInfo series
         {|
             color = color
             name = I18N.tt "charts.patients" id
-            data =
-                state.PatientsData
-                |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-                |> Seq.map (fun dp ->
+            data = 
+                psData                
+                |> Seq.map (fun (date,ps) ->
                     {|
-                        x = dp.JsDate12h
-                        y = match fcode with
-                            | "" -> getPoint dp.total
-                            | fcode -> dp.facilities |> Map.tryFind fcode |> Option.bind getFacilityPoint
-                        fmtTotal = 
-                            match fcode with
-                            | "" -> getPointTotal dp.total |> string
-                            | fcode -> dp.facilities |> Map.tryFind fcode |> Option.bind getFacilityPointTotal |> string
-                        fmtDate = dp.Date.ToString "d. M. yyyy"
+                        x = date |> jsTime12h
+                        y = getPoint ps
+                        fmtTotal = getPointTotal ps |> string
+                        fmtDate = date.ToString "d. M. yyyy"
                         id = id
-                    |}
-                )
+                    |} )
                 |> Array.ofSeq
         |}
-        |> pojo
 
     let className = "covid19-patients-structure" + fcode
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
@@ -279,7 +260,7 @@ let renderStructureChart (state : State) (fcode : string)=
                 y = 30
                 backgroundColor = "#FFF"
             |}
-|}
+    |}
 
 let renderChartContainer state =
     Html.div [
