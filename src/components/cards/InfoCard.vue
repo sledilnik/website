@@ -95,7 +95,7 @@ export default {
   flex: 0 0 100%;
   padding: 0 15px 15px;
 
-  @media only screen and (min-width: 480px) {
+  @media only screen and (min-width: 400px) {
     flex: 0 0 calc(100% / 2);
     padding: 0 15px 30px;
   }
