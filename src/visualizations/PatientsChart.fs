@@ -174,7 +174,7 @@ let renderStructureChart (state : State) =
                     p?series?color
                     p?series?name
                     p?point?fmtTotal
-                if fmtStr.Length > 0 && p?point?id = "hospitalized" then
+                if fmtStr.Length > 0 && p?point?seriesId = "hospitalized" then
                     fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
                 else
                     fmtStr <- fmtStr + fmtLine
@@ -212,10 +212,10 @@ let renderStructureChart (state : State) =
             | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
 
-        let color, id = Series.getSeriesInfo series
+        let color, seriesid = Series.getSeriesInfo series
         {|
             color = color
-            name = I18N.tt "charts.patients" id
+            name = I18N.tt "charts.patients" seriesid
             data = 
                 psData                
                 |> Seq.map (fun (date,ps) ->
@@ -224,7 +224,7 @@ let renderStructureChart (state : State) =
                         y = getPoint ps
                         fmtTotal = getPointTotal ps |> string
                         fmtDate = date.ToString "d. M. yyyy"
-                        id = id
+                        seriesId = seriesid
                     |} )
                 |> Seq.toArray
         |} |> pojo
