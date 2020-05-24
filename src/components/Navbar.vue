@@ -421,7 +421,6 @@ export default {
   span {
     line-height: 30px;
     display: inline-block;
-    // outline: 2px solid blue;
   }
 
   &.router-link-active {
