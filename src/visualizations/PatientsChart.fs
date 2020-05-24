@@ -125,8 +125,7 @@ let renderByHospitalChart (state : State) =
                 |> Seq.map renderPoint
                 |> Array.ofSeq
             showInLegend = true
-        |}
-        |> pojo
+        |} |> pojo
 
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
     {| baseOptions with
@@ -149,7 +148,8 @@ let renderByHospitalChart (state : State) =
                 y = 30
                 backgroundColor = "#FFF"
             |}
-|}
+    |} |> pojo
+
 
 let renderStructureChart (state : State) =
 
@@ -227,7 +227,8 @@ let renderStructureChart (state : State) =
                         id = id
                     |} )
                 |> Seq.toArray
-        |}
+        |} |> pojo
+
 
     let className = "covid19-patients-structure"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
@@ -262,7 +263,8 @@ let renderStructureChart (state : State) =
                 y = 30
                 backgroundColor = "#FFF"
             |}
-    |}
+    |} |> pojo
+
 
 let renderChartContainer state =
     Html.div [
