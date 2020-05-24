@@ -24,14 +24,16 @@
         <span>{{ $t("navbar.github") }}</span>
       </a>
       <div class="router-link">
-        <a href="#"
-           class="router-link-anchor"
-           :class="{ active: $i18n.i18next.language === 'sl' }"
-           @click.prevent="changeLanguage('sl')">SL</a> /
-        <a href="#"
-           class="router-link-anchor"
-           :class="{ active: $i18n.i18next.language === 'en' }"
-           @click.prevent="changeLanguage('en')">EN</a>
+        <span>
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'sl' }"
+             @click.prevent="changeLanguage('sl')">SL</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'en' }"
+             @click.prevent="changeLanguage('en')">EN</a>
+        </span>
       </div>
     </div>
   </div>
@@ -419,6 +421,7 @@ export default {
   span {
     line-height: 30px;
     display: inline-block;
+    // outline: 2px solid blue;
   }
 
   &.router-link-active {
@@ -441,10 +444,10 @@ export default {
     border-radius: 6px;
     padding: 0 6px;
     display: inline-block;
-    margin-top: 16px;
+    margin: 16px auto;
 
     @include nav-break {
-      margin-top: 0;
+      margin: 0 0 0 32px;
     }
 
     span {
@@ -469,11 +472,15 @@ export default {
   }
 
   &-anchor {
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.56);
     text-decoration: none;
 
     &.active {
       font-weight: bold;
+    }
+
+    &:hover {
+      color: rgb(0, 0, 0);
     }
   }
 }
