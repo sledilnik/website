@@ -298,8 +298,8 @@
     },
     "patients": {
       "title": "Hospitalizirani",
-      "structure": "Struktura",
       "byHospital": "Po bolnišnicah",
+      "allHospitals": "Vse bolnišnice",
       "hospitalizedIn": "Hospitalizirani v:",
       "admitted": "Sprejeti",
       "hospitalized": "Hospitalizirani",
@@ -327,6 +327,7 @@
     },
     "hCenters": {
       "title": "Obravnava v ZD",
+      "allRegions": "Vse regije",
       "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
       "suspectedCovidExamination": "Sum COVID-19 (pregled)",
       "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",

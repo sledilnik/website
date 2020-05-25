@@ -162,7 +162,8 @@
             "icu": "In ICU",
             "ventilator": "On Ventilator",
             "discharged": "Discharged",
-            "deceased": "Died"
+            "deceased": "Died",
+            "allHospitals": "All Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",
@@ -188,7 +189,8 @@
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
             "sentToSelfIsolation": "Sent to Self-isolation",
             "testsPerformed": "Tests (performed)",
-            "testsPositive": "Tests (positive*)"
+            "testsPositive": "Tests (positive*)",
+            "allRegions": "All regions"
         },
         "tests": {
             "title": "Testing",
@@ -270,7 +272,7 @@
             "doublesIn": "Doubles in ",
             "yesterday": "yesterday",
             "today": "today",
-            "lastCaseBefore": "Last case in: ",
+            "lastCaseBefore": "Last case before: ",
             "lastCase": "Last case: "
         },
         "ageGroups": {

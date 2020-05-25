@@ -108,7 +108,7 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
         | Vents -> fun _ -> failwithf "no vents in data"
-    let extractFacilityCount : PatientsByFacilityStats -> int option =
+    let extractFacilityCount : FacilityPatientStats -> int option =
         match cType with
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
