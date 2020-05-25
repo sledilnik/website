@@ -216,7 +216,7 @@ let renderMunicipality (municipality : Municipality) =
                     ]
                     Html.span [
                         prop.className "value"
-                        prop.text ((I18N.tOptions "days.locative" {| count = displayValue |}))
+                        prop.text (I18N.tOptions "days.locative" {| count = displayValue |})
                     ]
                 ]
             ]
