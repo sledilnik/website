@@ -4,6 +4,8 @@ import axios from 'axios'
 import { statsStore } from './stats.store'
 import { hospitalsStore } from './hospitals.store'
 import { patientsStore } from './patients.store'
+import { municipalitiesStore } from './municipalities.store'
+import { healthCentersStore } from './health-centers.store'
 import { tableData } from './tables.store'
 
 Vue.use(Vuex)
@@ -18,6 +20,8 @@ const store = new Vuex.Store({
     stats: statsStore,
     hospitals: hospitalsStore,
     patients: patientsStore,
+    municipalities: municipalitiesStore,
+    healthCenters: healthCentersStore,
     tableData,
   },
 })
