@@ -32,7 +32,23 @@
           <a href="#"
              class="router-link-anchor"
              :class="{ active: $i18n.i18next.language === 'en' }"
-             @click.prevent="changeLanguage('en')">EN</a>
+             @click.prevent="changeLanguage('en')">EN</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'ru' }"
+             @click.prevent="changeLanguage('ru')">RU</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'de' }"
+             @click.prevent="changeLanguage('de')">DE</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'it' }"
+             @click.prevent="changeLanguage('it')">IT</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'hr' }"
+             @click.prevent="changeLanguage('hr')">HR</a>
         </span>
       </div>
     </div>
