@@ -19,8 +19,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New chart:",
-        "news002": "share of serious cases, share of hospitalized by department and fatality rate."
+        "news001": "New:",
+        "news002": "structure of hospitalized for each COVID-19 hospital."
     },
     "infocard": {
         "confirmedToDate": "Confirmed Cases",

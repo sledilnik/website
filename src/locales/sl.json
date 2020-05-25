@@ -19,8 +19,8 @@
     "at": "ob {{ date, HH.mm }}"
   },
   "notice": {
-    "news001": "Nov graf:",
-    "news002": "prikaz deležev resnih primerov (%), delež hospitaliziranih po posameznih oddelkih in smrtnosti."
+    "news001": "Novo:",
+    "news002": "prikaz strukture hospitaliziranih po posameznih COVID-19 bolnišnicah."
   },
   "infocard": {
     "confirmedToDate": "Potrjeno okuženi",
