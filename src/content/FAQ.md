@@ -292,7 +292,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 <details>
   <summary id=patients-chart>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-[Graf](/stats#patients-chart) ima dva prikaza, prvi (*Struktura*) nam kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Če spodaj izberemo pogled *Po bolnišnicah*, lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
+[Graf](/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
 Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
@@ -316,11 +316,11 @@ Graf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z o
 <details>
   <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
 
-[Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva). Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.
+[Graf](/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva), možen je pogled za celo Slovenijo ali po posamezni regiji. Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.
 
 Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za ostale bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej preko telefonskega pogovora, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.  
 
-*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje in SB Novo mesto).*
+*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje in SB Novo mesto). Za obdobje pred 14.4. nimamo podatkov iz teh bolnišnic.*
 
 *Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
 

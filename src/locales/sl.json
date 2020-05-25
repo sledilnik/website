@@ -55,7 +55,15 @@
     "dneh": "dneh",
     "dnevom": "dnevom",
     "dnevoma": "dnevoma",
-    "dnevi": "dnevi"
+    "dnevi": "dnevi",
+    "locative_0": "dnevu",
+    "locative_1": "dneh",
+    "locative_2": "dneh",
+    "locative_3": "dneh",
+    "instrumental_0": "dnevom",
+    "instrumental_1": "dnevoma",
+    "instrumental_2": "dnevi",
+    "instrumental_3": "dnevi"
   },  
   "month": {
     "0": "januar",
@@ -289,8 +297,8 @@
     },
     "patients": {
       "title": "Hospitalizirani",
-      "structure": "Struktura",
       "byHospital": "Po bolnišnicah",
+      "allHospitals": "Vse bolnišnice",
       "hospitalizedIn": "Hospitalizirani v:",
       "admitted": "Sprejeti",
       "hospitalized": "Hospitalizirani",
@@ -318,6 +326,7 @@
     },
     "hCenters": {
       "title": "Obravnava v ZD",
+      "allRegions": "Vse regije",
       "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
       "suspectedCovidExamination": "Sum COVID-19 (pregled)",
       "suspectedCovidPhone": "Sum COVID-19 (telefonsko)",
