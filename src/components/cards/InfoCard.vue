@@ -4,12 +4,18 @@
       <span class="card-title">{{ title }}</span>
       <span class="card-number">{{ renderValues.lastDay.value }}</span>
       <div :id="elementId" class="card-diff">
-        <div v-if="showAbsolute" class="trend-icon" :class="[diffClass, iconClass]"></div>
-        <span v-if="showAbsolute" :class="diffClass">{{ Math.abs(renderValues.lastDay.diff) }}</span>
-        <div v-if="showIn" class="trend-icon" :class="[diffInOutClass(totalIn), iconInOutClass(totalIn)]"></div>
-        <span v-if="showIn" class="in" :class="diffInOutClass(totalIn)">{{ renderInOutValues(totalIn) }}</span>
-        <div v-if="showOut" class="trend-icon" :class="[diffInOutClass(totalOut), iconInOutClass(totalOut)]"></div>
-        <span v-if="showOut" class="out" :class="diffInOutClass(totalOut)">{{ renderInOutValues(totalOut) }}</span>
+        <span v-if="showAbsolute">
+          <div class="trend-icon" :class="[diffClass, iconClass]"></div>
+          <span :class="diffClass">{{ Math.abs(renderValues.lastDay.diff) }}</span>
+        </span>
+        <span v-if="showIn">
+          <div class="trend-icon" :class="[diffInOutClass(totalIn, 'down'), iconInOutClass(totalIn, 'down')]"></div>
+          <span class="in" :class="diffInOutClass(totalIn, 'down')">+{{ renderInOutValues(totalIn) }}</span>
+        </span>
+        <span v-if="showOut">
+          <div class="trend-icon" :class="[diffInOutClass(totalOut, 'up'), iconInOutClass(totalOut, 'up')]"></div>
+          <span class="out" :class="diffInOutClass(totalOut, 'up')">+{{ renderInOutValues(totalOut) }}</span>
+        </span>
         <span class="card-percentage-diff" :class="diffClass">({{ renderValues.lastDay.percentDiff | prefixDiff }}%)</span>
 
         <!-- TODO: x.dayBefore values aren't calculated correctly, check stats.store.js why not -->
@@ -67,7 +73,7 @@ export default {
     iconClass() {
       if (this.field === 'statePerTreatment.deceasedToDate') {
         return "deceased";
-      } else if (this.renderValues.lastDay.diff == 0) {
+      } else if (this.renderValues.lastDay.diff === 0) {
         return 'none';
       } else if (this.renderValues.lastDay.diff > 0) {
         return "up";
@@ -111,22 +117,18 @@ export default {
       })
       return _.get(lastDay[0], inOut)
     },
-    diffInOutClass(inOut) {
+    diffInOutClass(inOut, goodTrend) {
       if (this.renderInOutValues(inOut) === 0) {
         return 'no-change';
-      } else if (this.renderInOutValues(inOut) > 0) {
-        return this.goodTrend === 'down' ? 'bad' : 'good';
       } else {
-        return this.goodTrend === 'down' ? 'good' : 'bad';
+        return this.goodTrend === goodTrend ? 'bad' : 'good';
       }
     },
-    iconInOutClass(inOut) {
+    iconInOutClass(inOut, goodTrend) {
       if (this.renderInOutValues(inOut) === 0) {
         return 'none';
-      } else if (this.renderInOutValues(inOut) > 0) {
-        return 'up';
       } else {
-        return 'down';
+        return this.goodTrend === goodTrend ? 'up' : 'down';
       }
     },
   },
@@ -156,7 +158,10 @@ export default {
 }
 
 .hp-card {
+  display: flex;
+  flex-direction: column;
   min-height: 195px;
+  height: 100%;
   padding: 18px;
   background: #fff;
   box-shadow: $element-box-shadow;
@@ -186,16 +191,20 @@ export default {
   font-weight: 700;
 }
 
-
 .card-percentage-diff {
   display: inline-block;
-  margin-left: 8px;
+  // margin-left: 8px;
   font-size: 14px;
   font-weight: normal;
 }
 
 .card-diff {
   font-size: 14px;
+  margin-bottom: 0.7rem;
+
+  > *:not(:last-child) {
+    margin-right: 8px;
+  }
 
   .trend-icon {
     display:inline-block;
@@ -236,9 +245,6 @@ export default {
       background-color: #a0a0a0;
     }
   }
-  .out {
-    margin-left: 10px;
-  }
 }
 
 .bad {
@@ -254,7 +260,7 @@ export default {
 }
 
 .data-time {
-  margin-top: 0.7rem;
+  margin-top: auto;
   // text-align: center;
   font-size: 12px;
   color: #a0a0a0;
