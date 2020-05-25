@@ -117,23 +117,6 @@ let monthNameOfdate (date : System.DateTime) =
     | 12 -> I18N.t "month.11"
     | _ -> failwith "Invalid month"
 
-let daysMestnik days =
-    match days with
-    | 1 -> I18N.t "days.mestnik"
-    | 101 -> I18N.t "days.mestnik_101"
-    | 201 -> I18N.t "days.mestnik_201"
-    | _ -> I18N.t "days.mestnik_plural"
-
-let daysOrodnik days =
-    match days with
-    | 1 -> I18N.t "days.orodnik"
-    | 2 -> I18N.t "days.orodnik_2"
-    | 101 -> I18N.t "days.orodnik_101"
-    | 102 -> I18N.t "days.orodnik_102"
-    | 201 -> I18N.t "days.orodnik_201"
-    | 202 -> I18N.t "days.orodnik_202"
-    | _ -> I18N.t "days.orodnik_plural"
-
 let transliterateCSZ (str : string) =
     str
         .Replace("Č",  "C")

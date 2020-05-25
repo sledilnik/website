@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import { mapState } from 'vuex';
 
 // import Loader from 'components/Loader';
@@ -57,9 +56,7 @@ export default {
       cardsLoaded: 'loaded',
     }),
   },
-  mounted() {
-    moment.locale(this.$i18n.i18next.language)
-    
+  mounted() {    
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
       Visualizations('visualizations', this.$route.query);
