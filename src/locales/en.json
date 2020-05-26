@@ -272,7 +272,8 @@
             "doubles": "Doubles ",
             "yesterday": "yesterday",
             "today": "today",
-            "lastCase": "Last case: "
+            "lastCase": "Last case: ",
+            "doublesIn": "Doubles "
         },
         "ageGroups": {
             "title": "Age Groups",
