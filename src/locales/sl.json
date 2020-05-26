@@ -59,8 +59,9 @@
     "x_days_ago_1": "Pred {{ count }} dnevoma",
     "x_days_ago_2": "Pred {{ count }} dnevi",
     "x_days_ago_3": "Pred {{ count }} dnevi",
-    "date": "{{ date, D. MMMM }}"
-  },
+    "date": "{{ date, D. MMMM }}",
+    "longerDate": "{{ date, D. MMMM YYYY }}"
+  },  
   "month": {
     "0": "januar",
     "1": "februar",
