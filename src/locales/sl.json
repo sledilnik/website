@@ -51,10 +51,10 @@
     "copied": "Skopirano!"
   },
   "days": {
-    "locative_0": "dnevu",
-    "locative_1": "dneh",
-    "locative_2": "dneh",
-    "locative_3": "dneh",
+    "in_x_days_0": "v {{ count }} dnevu",
+    "in_x_days_1": "v {{ count }} dneh",
+    "in_x_days_2": "v {{ count }} dneh",
+    "in_x_days_3": "v {{ count }} dneh",
     "x_days_ago_0": "Pred {{ count }} dnevom",
     "x_days_ago_1": "Pred {{ count }} dnevoma",
     "x_days_ago_2": "Pred {{ count }} dnevi",
@@ -397,7 +397,7 @@
       "lastCase": "Zadnji primer: ",
       "today": "danes",
       "yesterday": "včeraj",
-      "doublesIn": "Podvojitev v ",
+      "doublesIn": "Podvojitev ",
       "deceased": "Umrli:",
       "recovered": "Preboleli:",
       "active": "Aktivni:",

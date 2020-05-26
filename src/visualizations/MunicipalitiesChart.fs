@@ -212,11 +212,11 @@ let renderMunicipality (municipality : Municipality) =
                 prop.children [
                     Html.span [
                         prop.className "label"
-                        prop.text (I18N.t "charts.municipalities.doublesIn")
+                        prop.text (I18N.t "charts.municipalities.doubles")
                     ]
                     Html.span [
                         prop.className "value"
-                        prop.text (sprintf "%d %s" displayValue (I18N.tOptions "days.locative"  {| count = displayValue |}))
+                        prop.text (I18N.tOptions "days.in_x_days"  {| count = displayValue |})
                     ]
                 ]
             ]
