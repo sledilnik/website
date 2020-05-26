@@ -108,7 +108,7 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
         | Vents -> fun _ -> failwithf "no vents in data"
-    let extractFacilityCount : PatientsByFacilityStats -> int option =
+    let extractFacilityCount : FacilityPatientStats -> int option =
         match cType with
         | Beds -> fun ps -> ps.inHospital.today
         | Icus -> fun ps -> ps.icu.today
@@ -316,7 +316,6 @@ let renderChartOptions (state : State) =
                 y = 30
                 backgroundColor = "rgba(255,255,255,0.5)"
             |}
-        tooltip = pojo {| shared=true |}
         xAxis = baseOptions.xAxis |> Array.map (fun xAxis ->
             if false //state.scope = Projection
             then

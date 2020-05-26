@@ -25,11 +25,6 @@ let colors =
 
 let excludedRegions = Set.ofList ["t"]
 
-let getRegionName key =
-    match Utils.Dictionaries.regions.TryFind key with
-    | None -> key
-    | Some region -> region.Name
-
 type Metric =
     { Key : string
       Color : string
@@ -102,7 +97,7 @@ let renderChartOptions (state : State) =
             {|
                 visible = metric.Visible
                 color = metric.Color
-                name = getRegionName metric.Key
+                name = I18N.tt "region" metric.Key
                 data = state.Data |> Seq.map renderPoint |> Array.ofSeq
                 //yAxis = 0 // axis index
                 //showInLegend = true
@@ -143,7 +138,7 @@ let renderMetricSelector (metric : Metric) dispatch =
         prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
         prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
-        prop.text (getRegionName metric.Key) ]
+        prop.text (I18N.tt "region" metric.Key) ]
 
 let renderMetricsSelectors metrics dispatch =
     Html.div [

@@ -20,8 +20,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     background: #fff
     margin-bottom: 88px
     position: relative
-    padding: 0 0 32px
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15)
+    padding: 46px 0 32px
+    box-shadow: $element-box-shadow
 
     &.municipalities-chart
       padding: 10px 30px 32px
@@ -182,7 +182,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         display: inline-block
         line-height: 2
         margin-left: 24px
-        color: rgba(0, 0, 0, 0.5)
+        color: rgba(0, 0, 0, 0.56)
 
         &::selection
           background: rgba(0, 0 , 0 , 0)
@@ -248,7 +248,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin-top: $gap * 2
     margin-bottom: $gap
 
-  .tests-chart
+  .tests-chart, .ratios-chart
     .metric-selector
       background-color: white
     .metric-selector--selected
@@ -305,6 +305,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .age-groups-chart
     min-height: 579px
+
+  .hcenters-chart    
+    .filters
+      display: flex
+      flex-wrap: wrap
+
+    .filters__region
+      width: 15rem
+      margin-left: $gap / 2
+      margin-bottom: $gap / 2
+
+      @include media-breakpoint-down(md)
+        margin-left: 0
 
   .municipalities-chart
     margin-top: $gap * 2
@@ -426,7 +439,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       display: flex
       align-items: flex-end
       justify-content: flex-end
-      height: 50px
+      height: 62px
       border-bottom: solid 1px $gray-300
 
     .bar-wrapper

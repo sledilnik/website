@@ -11,23 +11,37 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
-      <router-link to="stats" class="router-link"><span>Domov</span></router-link>
-      <router-link to="tables" class="router-link"><span>Tabela</span></router-link>
-      <router-link to="models" class="router-link"><span>Modeli</span></router-link>
-      <router-link to="FAQ" class="router-link"><span>FAQ</span></router-link>
-      <router-link to="about" class="router-link"><span>O projektu</span></router-link>
-      <router-link to="team" class="router-link"><span>Ekipa</span></router-link>
-      <router-link to="sources" class="router-link"><span>Viri</span></router-link>
-      <router-link to="links" class="router-link"><span>Povezave</span></router-link>
+      <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
+      <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
+      <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
+      <router-link to="FAQ" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
+      <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
+      <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
+      <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
+      <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
       <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
-        <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
-        <span>GitHub</span>
+        <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
+        <span>{{ $t("navbar.github") }}</span>
       </a>
+      <div class="router-link">
+        <span>
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'sl' }"
+             @click.prevent="changeLanguage('sl')">SL</a> /
+          <a href="#"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'en' }"
+             @click.prevent="changeLanguage('en')">EN</a>
+        </span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'Navbar',
   props: {
@@ -61,6 +75,13 @@ export default {
       setTimeout(() => {
         this.closingMenu = false;
       }, 650);
+    },
+    changeLanguage(lang) {
+      this.$i18n.i18next.changeLanguage(lang, (err, t) => {
+        if (err) return console.log('something went wrong loading', err);
+        this.$router.push({ name: this.$route.name, params: { lang } });
+        moment.locale(lang);
+      });
     },
   },
   watch: {
@@ -234,8 +255,8 @@ export default {
   }
 
   &.scrolled {
-    padding-top: 4px;
-    padding-bottom: 4px;
+    padding-top: 7px;
+    padding-bottom: 7px;
 
     box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
   }
@@ -251,13 +272,17 @@ export default {
   left: 33%;
   z-index: 100;
   background: $yellow;
-  padding: 18px 0 0 15px;
+  padding: 20px 0 0 15px;
   overflow: auto;
   transition: all 0.4s ease-in-out;
   will-change: transform;
 
   .scrolled & {
-    padding: 6px 0 0 15px;
+    padding: 11px 0 0 15px;
+
+    @include nav-break {
+      padding: 0;
+    }
   }
 
   &:before {
@@ -368,7 +393,7 @@ export default {
 .router-link {
   position: relative;
   display: block;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.56);
   font-size: 14px;
   line-height: 20px;
   padding: 9px 0;
@@ -399,16 +424,14 @@ export default {
   }
 
   &.router-link-active {
+    font-weight: 400;
+    color: #000000 !important;
+
     span {
       line-height: 30px;
       display: inline-block;
       box-shadow: inset 0 -10px 0 #fff;
     }
-  }
-
-  &.router-link-active {
-    font-weight: 400;
-    color: #000000 !important;
 
     &:hover {
       color: #000000 !important;
@@ -416,10 +439,14 @@ export default {
   }
 
   &.router-link-icon {
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    border-radius: 6px;
+    padding: 0 6px;
+    display: inline-block;
+    margin: 16px auto;
+
     @include nav-break {
-      border: 1px solid rgba(0, 0, 0, 0.13);
-      border-radius: 8px;
-      padding: 0px 6px;
+      margin: 0 0 0 32px;
     }
 
     span {
@@ -427,9 +454,10 @@ export default {
     }
 
     img {
+      opacity: 0.5;
+      
       @include nav-break {
         display: inline-block;
-        opacity: 0.5;
         width: 18px;
       }
     }
@@ -439,6 +467,19 @@ export default {
       img {
         opacity: 0.75;
       }
+    }
+  }
+
+  &-anchor {
+    color: rgba(0, 0, 0, 0.56);
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+    }
+
+    &:hover {
+      color: rgb(0, 0, 0);
     }
   }
 }

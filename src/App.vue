@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="$route.path.slice(1)">
+  <div id="app" :class="$route.path.slice(4)">
     <Navbar v-if="!embed" />
     <main>
       <router-view :key="$route.path" />
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 
@@ -31,6 +32,7 @@ export default {
   mounted() {
     this.$store.dispatch("stats/refreshDataEvery", 300);
     this.$store.dispatch("hospitals/refreshDataEvery", 300);
+    moment.locale(this.$i18n.i18next.language)
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash);

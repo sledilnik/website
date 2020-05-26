@@ -4,6 +4,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Types.fs" />
+        <Compile Include="I18N.fs" />
         <Compile Include="Highcharts.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Statistics.fs" />
@@ -18,6 +19,7 @@
         <Compile Include="AgeGroupsChart.fs" />
         <Compile Include="RegionsChart.fs" />
         <Compile Include="PatientsChart.fs" />
+        <Compile Include="RatiosChart.fs" />
         <Compile Include="MunicipalitiesChart.fs" />
         <Compile Include="HCentersChart.fs" />
         <Compile Include="HospitalsChart.fs" />

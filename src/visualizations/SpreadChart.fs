@@ -16,9 +16,9 @@ type Scale =
   with
     static member all = [ Absolute; Percentage; DoublingRate ]
     static member getName = function
-        | Absolute -> "Absolutni dnevni prirast"
-        | Percentage -> "Relativni dnevni prirast"
-        | DoublingRate -> "Eksponentna rast v dnevih" // "Število dni do podvojitve"
+        | Absolute      -> I18N.t "charts.spread.absolute"
+        | Percentage    -> I18N.t "charts.spread.percentage"
+        | DoublingRate  -> I18N.t "charts.spread.doublingRate"
 
 type Page =
     | Chart of Scale
@@ -26,8 +26,8 @@ type Page =
   with
     static member all = (Scale.all |> List.map Chart) @ [ Explainer ]
     static member getName = function
-        | Chart scale -> Scale.getName scale
-        | Explainer -> "Kaj pomeni eksponenta rast"
+        | Chart scale   -> Scale.getName scale
+        | Explainer     -> I18N.t "charts.spread.explainer"
 
 type State = {
     page: Page
@@ -60,14 +60,11 @@ let roundDecimals (nDecimals:int) (f: float) = Math.Round(f,nDecimals)
 
 let inline yAxisBase () =
      {|
-        //index = 0
         ``type`` = "linear"
-        //min = if scaleType=Linear then None else Some 1.0
-        //floor = if scaleType=Linear then None else Some 1.0
-        opposite = true // right side
+        opposite = true
         reversed = false
-        title = {| text = null |} // "oseb" |}
-        showFirstLabel = false  // need to hide negative label for addContainmentMeasuresFlags
+        title = {| text = null |}
+        showFirstLabel = not Highcharts.showExpGrowthFeatures // need to hide negative label for addContainmentMeasuresFlags
         tickInterval = None
         gridZIndex = -1
         max = None
@@ -82,7 +79,6 @@ let inline legend title =
         verticalAlign = "middle"
         borderColor = "#aaa"
         borderWidth = 1
-        //labelFormatter = string //fun series -> series.name
         layout = "vertical"
         floating = true
         x = 8
@@ -100,15 +96,15 @@ type ChartCfg = {
     static member fromScale = function
         | Absolute ->
             {
-                legendTitle = "Dnevni prirast potrjeno okuženih"
-                seriesLabel = "Potrjeno okuženi dnevno"
+                legendTitle = I18N.t "charts.spread.absoluteTitle"
+                seriesLabel = I18N.t "charts.spread.absoluteLabel"
                 yAxis = yAxisBase ()
                 dataKey = fun dp -> (dp.Date |> jsTime12h), dp.Cases.ConfirmedToday |> Option.map float |> Option.defaultValue nan
             }
         | Percentage ->
             {
-                legendTitle = "Dnevni prirast okuženih"
-                seriesLabel = "Relativen prirast v %"
+                legendTitle = I18N.t "charts.spread.relativeTitle"
+                seriesLabel = I18N.t "charts.spread.relativeLabel"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
                     let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
@@ -126,17 +122,17 @@ type ChartCfg = {
 
         | DoublingRate ->
             {
-                legendTitle = "Hitrost eksponentne rasti [v dnevih]"
-                seriesLabel = "V koliko dneh se število okuženih podvoji"
+                legendTitle = I18N.t "charts.spread.doublingRateTitle"
+                seriesLabel = I18N.t "charts.spread.doublingRateLabel"
                 yAxis =
                     {| yAxisBase () with
                         ``type``="logarithmic"
                         reversed=true
                         plotLines=[|
-                            pojo {| value=40.0; label={| text="Povprečje Južne Koreje v preteklih dneh"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
-                            pojo {| value= 1.0; label={| text="En dan"   |}; color="#aaa"; dashStyle="ShortDash" |}
-                            pojo {| value= 7.0; label={| text="En teden" |}; color="#888"; dashStyle="ShortDash" |}
-                            pojo {| value=30.0; label={| text="En mesec" |}; color="#888"; dashStyle="ShortDash" |}
+                            pojo {| value=40.0; label={| text=I18N.t "charts.spread.averageSouthKorea"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            pojo {| value= 1.0; label={| text=I18N.t "charts.spread.oneDay"  |}; color="#aaa"; dashStyle="ShortDash" |}
+                            pojo {| value= 7.0; label={| text=I18N.t "charts.spread.oneWeek" |}; color="#888"; dashStyle="ShortDash" |}
+                            pojo {| value=30.0; label={| text=I18N.t "charts.spread.oneMonth"|}; color="#888"; dashStyle="ShortDash" |}
                         |]
                         max = Some 100
                     |}
@@ -157,15 +153,11 @@ type ChartCfg = {
                                     let rate = float active / float yesterday
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
-
-                            // printfn "val: %f" v
                             v
                         )
                         |> Option.defaultValue nan
                     dp.Date |> jsTime12h, value
             }
-
-        // yAxis.scale ScaleType.Log ; yAxis.domain (domain.auto, domain.auto); yAxis.padding (16,0,0,0)
 
 
 let renderChartOptions scaleType (data : StatsData) =
@@ -177,38 +169,18 @@ let renderChartOptions scaleType (data : StatsData) =
     let allSeries = [|
         yield pojo
             {|
-                //visible = true
                 id = "data"
                 color = "#bda506"
                 name = chartCfg.seriesLabel
                 dataLabels = pojo {| enabled = true |}
-                //className = "cs-positiveTestsToDate"
                 data =
                     data
                     |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                     |> Seq.map chartCfg.dataKey
                     |> Seq.toArray
-                //yAxis = 0 // axis index
-                //showInLegend = true
-                //fillOpacity = 0
             |}
-        yield addContainmentMeasuresFlags startTime None |> pojo
-
-        //if scaleType = Absolute then
-        (*
-        {|
-            ``type`` = "flags"
-            onSeries = "data"
-            shape = "flag"
-            showInLegend = false
-            color = "#444"
-            data = Array.map pojo [|
-                {| x = DateTime(2020,03,27) |> jsTime; title="1387 testov"; text="Petek, opravljenih 1387 testov" |}
-                {| x = DateTime(2020,03,29) |> jsTime; title="596 testov"; text="Nedelja, opravljenih 596 testov" |}
-            |]
-        |}
-        |> pojo
-        *)
+        if Highcharts.showExpGrowthFeatures then
+            yield addContainmentMeasuresFlags startTime None |> pojo 
     |]
 
     // return highcharts options
@@ -238,11 +210,11 @@ let renderExplainer (data: StatsData) =
                 Html.p [
                     match times with
                     | 0 -> Html.span ""
-                    | 1 -> Html.span (sprintf "%d-krat toliko" (1<<<times))
-                    | n -> Html.span (sprintf "%d-krat toliko" (1<<<times))
+                    | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
+                    | n -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                 ]
-                Html.div [ Html.h4 (string positive); Html.p [ Html.text "potrjeno"; Html.br []; Html.text "okuženih"  ]]
-                Html.div [ Html.h4 (string hospitalized); Html.p "hospitaliziranih" ]
+                Html.div [ Html.h4 (string positive); Html.p [ Html.text (I18N.t "charts.spread.confirmed"); Html.br []; Html.text (I18N.t "charts.spread.cases")  ]]
+                Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hoispitalized") ]
             ]
         ]
 
@@ -250,14 +222,16 @@ let renderExplainer (data: StatsData) =
         prop.className "exponential-explainer"
         prop.style [ (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
-            yield Html.h1
-                "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:"
-                //"Ob nezmanjšani eksponentni rasti s podvajanjem na 7 dni lahko pričakujemo"
+            yield Html.h1 (I18N.t "charts.spread.ifExpGrowth")
             yield Html.div [
                 prop.className "container"
                 prop.children [
                     yield!
-                        ["Danes",0; "Čez en teden",1; "Čez dva tedna",2; "Čez tri tedne",3; "Čez štiri tedne",4;]
+                        [ I18N.t "charts.spread.today", 0
+                          I18N.t "charts.spread.inOneWeek", 1
+                          I18N.t "charts.spread.inTwoWeeks", 2
+                          I18N.t "charts.spread.inThreeWeeks", 3 
+                          I18N.t "charts.spread.inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
                             box title doublings (curPositive <<< doublings) (curHospitalzed <<< doublings)
                         )

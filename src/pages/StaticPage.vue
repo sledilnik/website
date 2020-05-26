@@ -44,7 +44,7 @@ export default {
 
   @media only screen and (min-width: 768px) {
     margin: 0 auto 65px auto;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: $element-box-shadow;
   }
 }
 
@@ -84,8 +84,8 @@ export default {
     font-size: 18px;
   }
 
-  p + p {
-    margin-top: 14px;
+  p:not(:last-of-type) {
+    margin-bottom: 28px;
   }
 
   //subtitle
