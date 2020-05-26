@@ -2,8 +2,8 @@
   <div class="container">
     <a
       class="notice-link"
-      href="#ratios-chart"
-      v-scroll-to="{ el: '#ratios-chart', offset: -115 }"
+      href="#patients-chart"
+      v-scroll-to="{ el: '#patients-chart', offset: -115 }"
     >
       <div class="notice">
         <span>

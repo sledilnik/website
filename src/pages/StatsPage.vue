@@ -86,7 +86,7 @@ export default {
       patientsLoaded: 'loaded',
     }),
   },
-  mounted() {
+  mounted() {    
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
       Visualizations('visualizations', this.$route.query)

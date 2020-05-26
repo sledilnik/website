@@ -269,6 +269,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         // our data is sampled (offset) to noon: 12:00
                         // but here we force to always format dates without any time
                         // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
+                        // - https://devhints.io/datetime
                         day = @"%A, %e. %B %Y"
                         hour = @"%A, %e. %B %Y"
                         minute = @"%A, %e. %B %Y"
