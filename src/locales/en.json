@@ -19,8 +19,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New chart:",
-        "news002": "share of serious cases, share of hospitalized by department and fatality rate."
+        "news001": "New:",
+        "news002": "structure of hospitalized for each COVID-19 hospital."
     },
     "infocard": {
         "confirmedToDate": "Confirmed Cases",
@@ -269,10 +269,9 @@
             "active": "Active:",
             "recovered": "Recovered:",
             "deceased": "Deaths:",
-            "doublesIn": "Doubles in ",
+            "doubles": "Doubles ",
             "yesterday": "yesterday",
             "today": "today",
-            "lastCaseBefore": "Last case before: ",
             "lastCase": "Last case: "
         },
         "ageGroups": {
@@ -447,15 +446,12 @@
         }
     },
     "days": {
-        "dnevi": "days",
-        "dnevoma": "days",
-        "dnevom": "day",
-        "dneh": "days",
-        "dnevu": "day",
-        "instrumental": "day",
-        "instrumental_plural": "days",
-        "locative": "day",
-        "locative_plural": "days"
+        "in_x_days": "in {{ count }} day",
+        "in_x_days_plural": "in {{ count }} days",
+        "x_days_ago": "{{ count }} day ago",
+        "x_days_ago_plural": "{{ count }} days ago",
+        "date": "{{ date, MMMM Do }}",
+        "longerDate": "{{ date, MMMM Do YYYY }}"
     },
     "region": {
         "za": "Central Sava Region",

@@ -186,7 +186,7 @@ let renderMunicipality (municipality : Municipality) =
             match municipality.DaysSinceLastCase with
             | 0 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.today"
             | 1 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.yesterday"
-            | x -> I18N.t "charts.municipalities.lastCaseBefore", sprintf "%d %s" x (Utils.daysOrodnik x)
+            | x -> I18N.t "charts.municipalities.lastCase", I18N.tOptions "days.x_days_ago" {| count = x |}
 
         Html.div [
             prop.className "last-case-days"
@@ -212,11 +212,11 @@ let renderMunicipality (municipality : Municipality) =
                 prop.children [
                     Html.span [
                         prop.className "label"
-                        prop.text (I18N.t "charts.municipalities.doublesIn")
+                        prop.text (I18N.t "charts.municipalities.doubles")
                     ]
                     Html.span [
                         prop.className "value"
-                        prop.text (sprintf "%d %s" displayValue (Utils.daysMestnik displayValue))
+                        prop.text (I18N.tOptions "days.in_x_days"  {| count = displayValue |})
                     ]
                 ]
             ]
@@ -267,7 +267,7 @@ let renderMunicipality (municipality : Municipality) =
                                     prop.children [
                                         Html.div [
                                             prop.className "date"
-                                            prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date))]
+                                            prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
                                         Html.div [
                                             if (deceasedToDate > 0) then
                                                 prop.className "deceased"
@@ -325,7 +325,7 @@ let renderMunicipality (municipality : Municipality) =
                                 prop.text (sprintf "%d" municipality.MaxConfirmedCases.Value) ]
                             Html.div [
                                 prop.className "date"
-                                prop.text (sprintf "%d. %s" municipality.LastConfirmedCase.Day (Utils.monthNameOfdate municipality.LastConfirmedCase.Date)) ]
+                                prop.text (I18N.tOptions "days.date" {| date = municipality.LastConfirmedCase.Date |})]
                         ]
                     ]
                 ]
