@@ -119,7 +119,7 @@ let renderChartOptions (state : State) =
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
                         seriesId = seriesid
-                        fmtDate = dp.Date.ToString "d. M. yyyy"
+                        fmtDate = I18N.tOptions "days.longerDate" {| date = dp.Date |}
                         fmtTotal = getPointTotal dp |> string
                     |} |> pojo
                 )

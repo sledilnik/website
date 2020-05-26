@@ -118,7 +118,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
                              y = entry.TotalDeathsPerMillion
-                             date = entry.Date.ToString("dd.MM.yyyy")
+                             date = I18N.tOptions "days.longerDate" {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|

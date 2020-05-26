@@ -461,7 +461,8 @@
         "instrumental_4": "{{ count }} days",
         "instrumental_5": "{{ count }} days",
         "instrumental_plural": "{{ count }} days",
-        "date": "{{ date, MMMM Do }}"
+        "date": "{{ date, MMMM Do }}",
+        "longerDate": "{{ date, MMMM Do YYYY }}"
     },
     "region": {
         "za": "Central Sava Region",

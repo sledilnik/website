@@ -64,7 +64,8 @@
     "instrumental_3": "{{ count }} dnevi",
     "instrumental_4": "{{ count }} dnevi",
     "instrumental_plural": "{{ count }} dnevi",
-    "date": "{{ date, D. MMMM }}"
+    "date": "{{ date, D. MMMM }}",
+    "longerDate": "{{ date, D. MMMM YYYY }}"
   },  
   "month": {
     "0": "januar",
