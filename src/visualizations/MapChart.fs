@@ -255,7 +255,10 @@ let renderMap (state : State) =
                    pointFormat = "{point.label}" |}
             |}
 
-        let maxColor = if state.ContentType = Deceased.ToString() then "#808080" else "#e03000"
+        let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
+        let maxColor = 
+            if maxValue = 0. then "white" // override for empty map
+            else if state.ContentType = Deceased.ToString() then "#808080" else "#e03000"
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
