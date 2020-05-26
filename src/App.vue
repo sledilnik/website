@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import Navbar from "./components/Navbar.vue";
 import Footer from "./components/Footer.vue";
 
@@ -37,6 +38,7 @@ export default {
     this.$store.dispatch("patients/refreshDataEvery", 300);
     this.$store.dispatch("municipalities/refreshDataEvery", 300);
     this.$store.dispatch("healthCenters/refreshDataEvery", 300);
+    moment.locale(this.$i18n.i18next.language)
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash);

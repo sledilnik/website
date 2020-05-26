@@ -223,7 +223,7 @@ let renderStructureChart (state : State) =
                         x = date |> jsTime12h
                         y = getPoint ps
                         fmtTotal = getPointTotal ps |> string
-                        fmtDate = date.ToString "d. M. yyyy"
+                        fmtDate = I18N.tOptions "days.longerDate" {| date = date |}
                         seriesId = seriesid
                     |} )
                 |> Seq.toArray
