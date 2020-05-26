@@ -55,10 +55,10 @@
     "locative_1": "dneh",
     "locative_2": "dneh",
     "locative_3": "dneh",
-    "instrumental_0": "dnevom",
-    "instrumental_1": "dnevoma",
-    "instrumental_2": "dnevi",
-    "instrumental_3": "dnevi",
+    "x_days_ago_0": "Pred {{ count }} dnevom",
+    "x_days_ago_1": "Pred {{ count }} dnevoma",
+    "x_days_ago_2": "Pred {{ count }} dnevi",
+    "x_days_ago_3": "Pred {{ count }} dnevi",
     "date": "{{ date, D. MMMM }}"
   },
   "month": {
@@ -395,7 +395,6 @@
     "municipalities": {
       "title": "Primeri po občinah",
       "lastCase": "Zadnji primer: ",
-      "lastCaseBefore": "Zadnji primer pred: ",
       "today": "danes",
       "yesterday": "včeraj",
       "doublesIn": "Podvojitev v ",
