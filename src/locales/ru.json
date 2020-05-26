@@ -14,5 +14,32 @@
         "BEL": "Бельгия",
         "AUT": "Австрия",
         "AUS": "Австралия"
+    },
+    "tables": {
+        "title": "Таблица"
+    },
+    "infocard": {
+        "deceasedToDate": "Скончались",
+        "icu": "В реанимации",
+        "inHospital": "Госпитализированы",
+        "recoveredToDate": "Выздоровели",
+        "confirmedToDate": "Подтвержденные заражение"
+    },
+    "notice": {
+        "news001": "Новый график:"
+    },
+    "navbar": {
+        "language": {
+            "english": "Английский",
+            "slovenian": "Словенский"
+        },
+        "github": "GitHub",
+        "sources": "Источники",
+        "team": "Команда",
+        "about": "О проекте",
+        "faq": "ЧаВо",
+        "models": "Модели",
+        "tables": "Таблица",
+        "home": "Дома"
     }
 }

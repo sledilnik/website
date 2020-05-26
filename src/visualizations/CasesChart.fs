@@ -74,7 +74,7 @@ let legendFormatter jsThis =
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
-            match p?point?id with
+            match p?point?seriesId with
             | "active" | "hospitalized" | "icu"  -> fmtUnder <- fmtUnder + "↳ "
             | _ -> ()
 
@@ -106,11 +106,11 @@ let renderChartOptions (state : State) =
             | Icu           -> fun dp -> dp.StatePerTreatment.InICU
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
-        let color, id = Series.getSeriesInfo series
+        let color, seriesid = Series.getSeriesInfo series
         {|
             ``type`` = "column"
             color = color
-            name = I18N.tt "charts.cases" id
+            name = I18N.tt "charts.cases" seriesid
             data =
                 state.data
                 |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
@@ -118,7 +118,7 @@ let renderChartOptions (state : State) =
                     {|
                         x = dp.Date |> jsTime12h
                         y = getPoint dp
-                        id = id
+                        seriesId = seriesid
                         fmtDate = dp.Date.ToString "d. M. yyyy"
                         fmtTotal = getPointTotal dp |> string
                     |} |> pojo
