@@ -76,16 +76,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     padding: 3px 8px
     margin-right: 16px
     
-    span
+    .share-button-caption
       display: inline-block
       font-size: 14px
       line-height: 24px
       font-weight: bold
+      @media only screen and (max-width: 500px)
+        display: none
+
       
   .share-dropdown-wrapper
     position: absolute
     top: 74px
-    right: 46px
+    right: 16px
     background: #fff
     z-index: 50
     border-radius: 6px
@@ -93,9 +96,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     width: 180px
     &.share-open
       display: block
+    @media only screen and (min-width: 768px)
+      right: 46px
+
     
     .share-link
       display: block
+      cursor: pointer
       margin: 3px
       &:hover
         background: $background
