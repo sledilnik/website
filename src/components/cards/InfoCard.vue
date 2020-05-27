@@ -158,7 +158,7 @@ export default {
       )
     },
     showDeceased() {
-      return this.totalDeceased
+      return this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
     },
   },
   methods: {
