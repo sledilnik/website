@@ -107,16 +107,19 @@ export default {
       }
     },
     iconClass() {
+      let className = ''
       if (this.field === 'statePerTreatment.deceasedToDate') {
-        return 'deceased'
+        className += 'deceased'
       }
       if (this.renderValues.lastDay.diff === 0) {
-        return 'none'
+         className += ' none'
+         return className
       } else if (this.renderValues.lastDay.diff > 0) {
-        return 'up'
+         className += 'up'
       } else {
-        return 'down'
+         className += 'down'
       }
+      return className
     },
     renderValues() {
       const x = this.lastChange(this.field, this.seriesType == 'cum')
