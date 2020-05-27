@@ -66,16 +66,12 @@ export default {
     TimeStamp,
     Notice,
   },
-  props: {
-    name: String,
-    content: Promise,
-  },
   data() {
     return {
       loaded: false,
     }
   },
-  mounted() {    
+  mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
       Visualizations('visualizations', this.$route.query)
