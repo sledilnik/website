@@ -15,18 +15,12 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }) => {
-    const ts = new Date().getTime()
-
-    const d = await exportTime(
-      `https://raw.githubusercontent.com/sledilnik/data/master/csv/health_centers.csv.timestamp?nocache=${ts}`
-    )
     const data = await ApiService.get(
       'https://api.sledilnik.org/api/health-centers'
-    ).then((response) => {
-      return response.data
-    })
+    )
+    const d = exportTime(data.headers.timestamp)
 
-    commit('setData', data)
+    commit('setData', data.data)
     commit('setExportTime', d)
   },
 
