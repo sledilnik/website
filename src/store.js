@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as d3 from "d3";
+import * as d3 from 'd3'
 import _ from 'lodash'
-
+import ApiService from './services/api.service'
+import regions from './services/dict.regions.json'
 import axios from 'axios'
-import i18next from 'i18next'
 
 Vue.use(Vuex)
+
+// TODO: for some reason tests fail if store is defined modularly like in store/index.js
+// Keeping this file just so that tests don't fail until we figure this out.
 
 async function exportTime(url) {
   let x = await axios.get(url)
@@ -18,38 +21,36 @@ async function loadCsv(url) {
   const data = await d3.csv(url)
   data.forEach((row) => {
     data.columns.forEach((col) => {
-      if (col != "date") {
-        row[col] = row[col] === "" ? null : +row[col]
+      if (col != 'date') {
+        row[col] = row[col] === '' ? null : +row[col]
       } else {
         row['date'] = new Date(row['date'])
       }
     })
-
   })
   return data
 }
 
 export function lastChange(data, field, cumulative) {
-
   const result = {
     lastDay: {
       date: new Date(),
       firstDate: undefined,
       value: undefined,
       diff: undefined,
-      percentDiff: undefined
+      percentDiff: undefined,
     },
     dayBefore: {
       date: new Date(),
       firstDate: undefined,
       value: undefined,
       diff: undefined,
-      percentDiff: undefined
+      percentDiff: undefined,
     },
     day2Before: {
       date: new Date(),
       value: undefined,
-    }
+    },
   }
 
   let i = data.length - 1
@@ -61,15 +62,17 @@ export function lastChange(data, field, cumulative) {
   result.lastDay.value = data[i][field]
 
   if (cumulative) {
-    while (i >= 0 && (result.lastDay.value === data[i][field])) i--
+    while (i >= 0 && result.lastDay.value === data[i][field]) i--
     let date = new Date(data[i + 1]['date'])
-    if (data[i + 1][field] != null && result.lastDay.date.getTime() != date.getTime()) {
+    if (
+      data[i + 1][field] != null &&
+      result.lastDay.date.getTime() != date.getTime()
+    ) {
       result.lastDay.firstDate = date
     }
   } else {
     i--
   }
-
 
   if (i >= 0) {
     while (i >= 0 && data[i][field] == null) i--
@@ -89,7 +92,6 @@ export function lastChange(data, field, cumulative) {
     i--
   }
 
-
   if (i >= 0) {
     while (i >= 0 && data[i][field] == null) i--
     if (data[i]) {
@@ -98,19 +100,20 @@ export function lastChange(data, field, cumulative) {
     }
   }
 
-
   if (!result.dayBefore.value) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.lastDay.percentDiff = Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
+    result.lastDay.percentDiff =
+      Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
   }
 
   if (!result.day2Before.value) {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.dayBefore.percentDiff = Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10
+    result.dayBefore.percentDiff =
+      Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10
   }
 
   return result
@@ -122,7 +125,7 @@ const statsStore = {
     exportTime: null,
     loaded: false,
     data: [],
-    regions: []
+    regions: [],
   },
   getters: {
     data: (state) => {
@@ -135,18 +138,25 @@ const statsStore = {
       if (!date) {
         return {}
       }
-      let searchResult = getters.data.find(day => {
-        return new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
+      let searchResult = getters.data.find((day) => {
+        return (
+          new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
+        )
       })
       return { date, value: searchResult ? searchResult[field] : null }
     },
     getLastValue: (state, getters) => (field) => {
-      let result = getters.data.slice().reverse().find(day => {
-        return day[field]
-      })
+      let result = getters.data
+        .slice()
+        .reverse()
+        .find((day) => {
+          return day[field]
+        })
       return {
-        date: result ? new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
-        value: result ? result[field] : null
+        date: result
+          ? new Date(Date.parse(result.date))
+          : new Date(new Date().setHours(0, 0, 0, 0)),
+        value: result ? result[field] : null,
       }
     },
     lastChange: (state, getters) => (field, cumulative) => {
@@ -155,15 +165,17 @@ const statsStore = {
   },
   actions: {
     fetchData: async ({ commit }) => {
-
       const ts = new Date().getTime()
 
-      const d = await exportTime(`https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`)
+      const d = await exportTime(
+        `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`
+      )
 
-      const [data, regions] = await Promise.all([
-        loadCsv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv?nocache=${ts}`),
-        d3.csv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-region.csv?nocache=${ts}`),
-      ]);
+      const data = await ApiService.get(
+        'https://api.sledilnik.org/api/stats'
+      ).then((result) => {
+        return result.data
+      })
       commit('setData', data)
       commit('setRegions', regions)
       commit('setExportTime', d)
@@ -172,7 +184,7 @@ const statsStore = {
       setInterval(() => {
         dispatch('fetchData')
       }, seconds * 1000)
-    }
+    },
   },
   mutations: {
     setData: (state, data) => {
@@ -184,145 +196,15 @@ const statsStore = {
     },
     setExportTime: (state, exportTime) => {
       state.exportTime = exportTime
-    }
-  }
-}
-
-const hospitalsStore = {
-  namespaced: true,
-  state: {
-    loaded: false,
-    exportTime: null,
-    data: [],
-    hospitals: {}
-  },
-  getters: {
-    data: (state) => {
-      return state.data
-    },
-    hospitals: (state) => {
-      return state.hospitals
-    },
-    hospitalName: (state) => (id) => {
-      return state.hospitals[id]
-    },
-    getSeries: (state) => (field) => {
-      return state.data.map(row => {
-        return [
-          Date.parse(row['date']),
-          row[field]
-        ]
-      })
-    },
-    getValueOn: (state, getters) => (field, date) => {
-      if (!date) {
-        return {}
-      }
-      let searchResult = getters.data.find(day => {
-        return new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
-      })
-      return { date, value: searchResult ? searchResult[field] : null }
-    },
-    getLastValue: (state, getters) => (field) => {
-      let result = getters.data.slice().reverse().find(day => {
-        return day[field]
-      })
-      return {
-        date: result ? new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
-        value: result ? result[field] : null
-      }
     },
   },
-  actions: {
-    fetchData: async ({ commit }) => {
-
-      const ts = new Date().getTime()
-
-      const d = await exportTime(`https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv.timestamp?nocache=${ts}`)
-
-      let data = await loadCsv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv?nocache=${ts}`)
-      let hospitals = {}
-      let rawData = await d3.csv(`https://raw.githubusercontent.com/sledilnik/data/master/csv/dict-hospitals.csv?nocache=${ts}`)
-
-      rawData.forEach(row => {
-        hospitals[row.id] = row.name
-      })
-
-      commit('setData', data)
-      commit('setHospitals', hospitals)
-      commit('setExportTime', d)
-    },
-    refreshDataEvery: ({ dispatch }, seconds) => {
-      setInterval(() => {
-        dispatch('fetchData')
-      }, seconds * 1000)
-    }
-  },
-  mutations: {
-    setData: (state, data, hospitals) => {
-      state.loaded = true
-      state.data = data
-      state.hospitals = hospitals
-    },
-    setHospitals: (state, hospitals) => {
-      state.loaded = true
-      state.hospitals = hospitals
-    },
-    setExportTime: (state, d) => {
-      state.loaded = true
-      state.exportTime = d
-    },
-  }
 }
 
-const tableData = {
-  namespaced: true,
-  getters: {
-    tableData(state, getters, rootState) {
-      return rootState.stats.data.length ? processTableData(rootState.stats.data) : []
-    },
-    filterTableData: (state, getters) => (dimension) => {
-      const items = getters.tableData.filter(day => {
-        return dimension.includes(day.dim);
-      });
-      const sample = items[0];
-      const fields = Object.keys(sample).map((dimension, i) => {
-        return {
-          key: dimension,
-          label: dimension,
-          stickyColumn: dimension === ' ',
-          sortable: true
-        };
-      }).filter(item => item.key !== 'dim')
-      return {
-        items,
-        fields
-      }
-    }
-  }
-}
-
-function processTableData(data) {
-  const x = Object.keys(_.last(data)).map(dimension => {
-    let newData = {}
-    newData['dim'] = dimension
-    newData[' '] = i18next.t('tableDict')[dimension.replace(/\./g, "_")]
-
-    data.slice().reverse().forEach((day, i) => {
-      let date = i18next.t('tables.day', { date: new Date(day.date), interpolation: { escapeValue: false }})
-      newData[date] = day[dimension]
-    })
-    return newData
-  }).filter(val => val)
-  return x
-}
 
 const store = new Vuex.Store({
   modules: {
     stats: statsStore,
-    hospitals: hospitalsStore,
-    tableData
-  }
+  },
 })
 
 export default store

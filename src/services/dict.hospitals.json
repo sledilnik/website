@@ -1,0 +1,77 @@
+[
+  {
+    "id": "bse",
+    "name": "Bolnišnica Sežana",
+    "url": "https://www.bolnisnica-sezana.si/"
+  },
+  {
+    "id": "bto",
+    "name": "Bolnišnica Topolščica",
+    "url": "http://www.boltop.si/"
+  },
+  {
+    "id": "sbbr",
+    "name": "SB Brežice",
+    "url": "https://www.sb-brezice.si/"
+  },
+  {
+    "id": "sbce",
+    "name": "SB Celje",
+    "url": "https://www.sb-celje.si/"
+  },
+  {
+    "id": "sbiz",
+    "name": "SB Izola",
+    "url": "https://www.sb-izola.si/"
+  },
+  {
+    "id": "sbje",
+    "name": "SB Jesenice",
+    "url": "https://www.sb-je.si/"
+  },
+  {
+    "id": "sbms",
+    "name": "SB Murska Sobota",
+    "url": "https://www.sb-ms.si/"
+  },
+  {
+    "id": "sbng",
+    "name": "SB Nova Gorica",
+    "url": "http://www.bolnisnica-go.si/"
+  },
+  {
+    "id": "sbnm",
+    "name": "SB Novo mesto",
+    "url": "https://www.sb-nm.si/"
+  },
+  {
+    "id": "sbpt",
+    "name": "SB Ptuj",
+    "url": "http://www.sb-ptuj.si/"
+  },
+  {
+    "id": "sbsg",
+    "name": "SB Slovenj Gradec",
+    "url": "https://www.sb-sg.si/"
+  },
+  {
+    "id": "sbtr",
+    "name": "SB Trbovlje",
+    "url": "http://www.sb-trbovlje.si/"
+  },
+  {
+    "id": "ukclj",
+    "name": "UKC Ljubljana",
+    "url": "https://www.kclj.si/"
+  },
+  {
+    "id": "ukcmb",
+    "name": "UKC Maribor",
+    "url": "https://www.ukc-mb.si/"
+  },
+  {
+    "id": "ukg",
+    "name": "UK Golnik",
+    "url": "https://www.klinika-golnik.si/"
+  }
+]
