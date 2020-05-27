@@ -46,7 +46,6 @@
           <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
-      <!-- <loader v-show="!loaded"></loader> -->
     </b-container>
   </div>
 </template>
@@ -54,7 +53,6 @@
 <script>
 import { mapState } from 'vuex'
 
-// import Loader from 'components/Loader';
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
@@ -67,7 +65,6 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
-    // Loader,
   },
   props: {
     name: String,
@@ -77,14 +74,6 @@ export default {
     return {
       loaded: false,
     }
-  },
-  computed: {
-    ...mapState('stats', {
-      statsLoaded: 'loaded',
-    }),
-    ...mapState('patients', {
-      patientsLoaded: 'loaded',
-    }),
   },
   mounted() {    
     this.$nextTick(() => {

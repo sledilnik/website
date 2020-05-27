@@ -51,16 +51,6 @@
             renderTotalValues(totalDeceased)
           }}</span>
         </span>
-        <b-tooltip :target="elementId" triggers="hover">
-          {{
-            $t('infocard.accordingTo', {
-              date: new Date(renderValues.dayBefore.date),
-            })
-          }}: {{ renderValues.dayBefore.value }}
-          <span v-if="renderValues.dayBefore.diff">
-            [{{ renderValues.dayBefore.diff | prefixDiff }}]
-          </span>
-        </b-tooltip>
       </div>
       <div class="data-time">
         {{
@@ -105,6 +95,9 @@ export default {
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     diffClass() {
+      if (this.field === 'statePerTreatment.deceasedToDate') {
+        return 'deceased'
+      }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
       } else if (this.renderValues.lastDay.diff > 0) {
@@ -191,7 +184,6 @@ export default {
     },
     iconTotalClass(value, goodTrend) {
       if (this.field === 'statePerTreatment.deceasedToDate') {
-        // console.log('here', this.field, this.totalDeceased)
         return 'deceased'
       } else if (this.renderTotalValues(value) === 0) {
         return 'none'
@@ -261,7 +253,6 @@ export default {
 
 .card-percentage-diff {
   display: inline-block;
-  // margin-left: 8px;
   font-size: 14px;
   font-weight: normal;
 }
@@ -330,7 +321,6 @@ export default {
 
 .data-time {
   margin-top: auto;
-  // text-align: center;
   font-size: 12px;
   color: #a0a0a0;
 }

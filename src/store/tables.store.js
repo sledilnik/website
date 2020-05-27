@@ -1,11 +1,12 @@
 import i18next from 'i18next'
+import { exportTime, loadCsv } from './index'
 
 function processTableData(data) {
   const x = Object.keys(_.last(data))
     .map((dimension) => {
       let newData = {}
       newData['dim'] = dimension
-      newData[' '] = i18next.t('tableDict')[dimension]
+      newData[' '] = i18next.t('tableDict')[dimension.replace(/\./g, '_')]
 
       data
         .slice()
@@ -23,10 +24,19 @@ function processTableData(data) {
   return x
 }
 
+const state = {
+  exportTime: null,
+  data: [],
+}
+
 const getters = {
-  tableData(state, getters, rootState) {
-    return rootState.stats.data.length
-      ? processTableData(rootState.stats.data)
+  data: (state) => {
+    return state.data
+  },
+
+  tableData(state, getters) {
+    return getters.data.length
+      ? processTableData(getters.data)
       : []
   },
 
@@ -52,7 +62,43 @@ const getters = {
   },
 }
 
+const actions = {
+  fetchData: async ({ commit }) => {
+    const ts = new Date().getTime()
+
+    const d = await exportTime(
+      `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`
+    )
+
+    const data = await loadCsv(
+      `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv?nocache=${ts}`
+    )
+
+    commit('setData', data)
+    commit('setExportTime', d)
+  },
+  refreshDataEvery: ({ dispatch }, seconds) => {
+    setInterval(() => {
+      dispatch('fetchData')
+    }, seconds * 1000)
+  },
+}
+
+const mutations = {
+  setData: (state, data) => {
+    state.data = data
+    state.loaded = true
+  },
+
+  setExportTime: (state, exportTime) => {
+    state.exportTime = exportTime
+  },
+}
+
 export const tableData = {
   namespaced: true,
+  state,
   getters,
+  actions,
+  mutations,
 }
