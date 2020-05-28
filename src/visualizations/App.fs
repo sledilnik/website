@@ -270,7 +270,7 @@ let render (state : State) (_ : Msg -> unit) =
                               prop.children
                                 [ renderChartTitle viz
                                   renderFaqLink viz
-                                  ShareButton.dd()
+                                  ShareButton.dd (viz.ClassName) ()
                                 ]
                             ]
                           state |> viz.Renderer

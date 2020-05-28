@@ -2,7 +2,7 @@ module ShareButton
 
 open Feliz
 
-let dd = React.functionComponent(fun () ->
+let dd (className: string) = React.functionComponent(fun () ->
     let (dropdown, setDropdown) = React.useState(false)
     Html.div [
         Html.div  [
@@ -17,6 +17,8 @@ let dd = React.functionComponent(fun () ->
               [
                 Html.a [
                   prop.className "share-link"
+                  prop.target "_blank"
+                  prop.href ("https://facebook.com/sharer/sharer.php?u=https://covid-19.sledilnik.org/sl/stats%23" + className)
                   prop.children
                     [ Html.img
                         [ prop.className "share-icon"
@@ -31,6 +33,8 @@ let dd = React.functionComponent(fun () ->
                 ]
                 Html.a [
                   prop.className "share-link"
+                  prop.target "_blank"
+                  prop.href ("https://twitter.com/share?url=https://covid-19.sledilnik.org/sl/stats%23" + className)
                   prop.children
                     [ Html.img
                         [ prop.className "share-icon"
