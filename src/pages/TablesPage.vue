@@ -45,6 +45,12 @@ export default {
       tableHeight: '100%',
     };
   },
+  created() {
+    this.$store.dispatch("tableData/fetchData");
+  },
+  mounted() {
+    this.$store.dispatch("tableData/refreshDataEvery", 300);
+  }
 };
 </script>
 <style scopped lang="sass">
