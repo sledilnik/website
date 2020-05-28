@@ -19,47 +19,6 @@ type ChartState = {
     ScaleType: ScaleType
 }
 
-// source: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
-let countryNames =
-    [
-        "AUS", "Avstralija"
-        "AUT", "Avstrija"
-        "BEL", "Belgija"
-        "BIH", "Bosna in Hercegovina"
-        "CHE", "Švica"
-        "CHN", "Kitajska"
-        "CZE", "Češka"
-        "DEU", "Nemčija"
-        "DNK", "Danska"
-        "ESP", "Španija"
-        "FIN", "Finska"
-        "FRA", "Francija"
-        "GBR", "Združeno kraljestvo"
-        "HRV", "Hrvaška"
-        "HUN", "Madžarska"
-        "IRN", "Iran"
-        "ISL", "Islandija"
-        "ITA", "Italija"
-        "JPN", "Japonska"
-        "KOR", "J. Koreja"
-        "MKD", "S. Makedonija"
-        "MNE", "Črna gora"
-        "NZL", "Nova Zelandija"
-        "NOR", "Norveška"
-        "RKS", "Kosovo"
-        "RUS", "Rusija"
-        "SGP", "Singapur"
-        "SRB", "Srbija"
-        "SVK", "Slovaška"
-        "SVN", "Slovenija"
-        "SWE", "Švedska"
-        "TWN", "Tajvan"
-        "TUR", "Turčija"
-        "USA", "ZDA"
-    ]
-    |> List.map (fun (code, name) -> code,  name)
-    |> Map.ofList
-
 let ColorPalette =
     [ "#ffa600"
       "#dba51d"
@@ -171,7 +130,7 @@ let prepareChartData
             aggregated
             // assign country names
             |> Map.map (fun countryIsoCode countryData ->
-                (countryData, countryNames.[countryIsoCode]))
+                (countryData, I18N.tt "country" countryIsoCode))
             |> Map.toArray
             |> Array.map (fun (_, value) -> value)
             // sort by country names (but keep Slovenia at the top)
@@ -190,14 +149,13 @@ let prepareChartData
 
         {
             Series = series
-            DataDescription = "Umrli na 1 milijon prebivalcev"
+            DataDescription = I18N.t "charts.countries.deathsPerMillion"
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
-                | DaysSinceFirstDeath -> "Št. dni od prvega smrtnega primera"
-                | DaysSinceOneDeathPerMillion ->
-                    "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
-            YAxisTitle = "Št. umrlih na 1 milijon prebivalcev"
+                | DaysSinceFirstDeath -> I18N.t "charts.countries.daysFromFirstDeath"
+                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.daysFromOneDeathPerMillion"
+            YAxisTitle = I18N.t "charts.countries.nrDeathsPerMillion"
         }
         |> Some
     | None -> None

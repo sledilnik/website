@@ -10,7 +10,7 @@ open Feliz.ElmishComponents
 
 open Types
 
-let barMaxHeight = 50
+let barMaxHeight = 55
 let showMaxBars = 30
 let collapsedMunicipalityCount = 24
 
@@ -18,7 +18,7 @@ let excludedMunicipalities = Set.ofList ["kraj"]
 
 type Region =
     { Key : string
-      Name : string option }
+      Name : string }
 
 type TotalsForDate =
     { Date : System.DateTime
@@ -88,7 +88,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let regions =
         lastDataPoint.Regions
         |> List.filter (fun region -> Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
-        |> List.map (fun reg -> { Key = reg.Name ; Name = (Utils.Dictionaries.regions.TryFind reg.Name) |> Option.map (fun region -> region.Name) })
+        |> List.map (fun reg -> { Key = reg.Name ; Name = I18N.tt "region" reg.Name })
         |> List.sortBy (fun region -> region.Name)
 
     let query = Query(queryObj, regions)
@@ -102,14 +102,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
-                                     ConfirmedToDate = municipality.ConfirmedToDate 
+                                     ConfirmedToDate = municipality.ConfirmedToDate
                                      DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalsForDate =
                 dp
                 |> Seq.map (
-                    fun dp -> { 
+                    fun dp -> {
                         Date = dp.Date
                         ConfirmedToDate = dp.ConfirmedToDate
                         DeceasedToDate = dp.DeceasedToDate } )
@@ -121,16 +121,19 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.toList
                 |> Utils.findDoublingTime
             let maxValue =
-                dp
-                |> Seq.map (fun dp -> dp.ConfirmedToDate)
-                |> Seq.filter Option.isSome
-                |> Seq.max
+                try
+                    dp
+                    |> Seq.map (fun dp -> dp.ConfirmedToDate)
+                    |> Seq.filter Option.isSome
+                    |> Seq.max
+                with
+                    | _ -> None
             let maxDay = dp |> Seq.filter (fun p -> p.ConfirmedToDate = maxValue) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              ActiveCases = 
+              ActiveCases =
                     let dayR = totalsForDate |> Array.tryItem (totalsForDate.Length - 15)
                     let dayL = totalsForDate |> Array.tryLast
                     match dayR, dayL with
@@ -181,9 +184,9 @@ let renderMunicipality (municipality : Municipality) =
     let renderLastCase =
         let label, value =
             match municipality.DaysSinceLastCase with
-            | 0 -> "Zadnji primer: ", "danes"
-            | 1 -> "Zadnji primer: ", "včeraj"
-            | x -> "Zadnji primer pred: ", sprintf "%d %s" x (Utils.daysOrodnik x)
+            | 0 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.today"
+            | 1 -> I18N.t "charts.municipalities.lastCase", I18N.t "charts.municipalities.yesterday"
+            | x -> I18N.t "charts.municipalities.lastCase", I18N.tOptions "days.x_days_ago" {| count = x |}
 
         Html.div [
             prop.className "last-case-days"
@@ -209,11 +212,11 @@ let renderMunicipality (municipality : Municipality) =
                 prop.children [
                     Html.span [
                         prop.className "label"
-                        prop.text "Podvojitev v "
+                        prop.text (I18N.t "charts.municipalities.doubles")
                     ]
                     Html.span [
                         prop.className "value"
-                        prop.text (sprintf "%d %s" displayValue (Utils.daysMestnik displayValue))
+                        prop.text (I18N.tOptions "days.in_x_days"  {| count = displayValue |})
                     ]
                 ]
             ]
@@ -224,7 +227,7 @@ let renderMunicipality (municipality : Municipality) =
         | Some maxValue ->
             seq {
                 let dpLen = Array.length municipality.TotalsForDate
-                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0 
+                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0
                 for i = dpStart to dpLen - 1 do
                     let dp = municipality.TotalsForDate.[i]
                     match dp.ConfirmedToDate with
@@ -237,7 +240,7 @@ let renderMunicipality (municipality : Municipality) =
                             prop.className "bar-wrapper"
                             prop.children [
                                 let deceasedToDate = dp.DeceasedToDate.Value
-                                let recoveredToDate = 
+                                let recoveredToDate =
                                     if i >= 14 && municipality.TotalsForDate.[i-14].ConfirmedToDate.Value > deceasedToDate
                                     then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
                                     else 0
@@ -264,29 +267,29 @@ let renderMunicipality (municipality : Municipality) =
                                     prop.children [
                                         Html.div [
                                             prop.className "date"
-                                            prop.text (sprintf "%d. %s" dp.Date.Day (Utils.monthNameOfdate dp.Date))]
+                                            prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
                                         Html.div [
                                             if (deceasedToDate > 0) then
                                                 prop.className "deceased"
                                                 prop.children [
-                                                    Html.span [ prop.text "Umrli: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
                                                     Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
-                                            if (recoveredToDate > 0) then 
+                                            if (recoveredToDate > 0) then
                                                 prop.className "recovered"
                                                 prop.children [
-                                                    Html.span [ prop.text "Preboleli: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
                                                     Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
-                                            if (activeCases > 0) then 
+                                            if (activeCases > 0) then
                                                 prop.className "active"
                                                 prop.children [
-                                                    Html.span [ prop.text "Aktivni: " ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
                                                     Html.b [ prop.text activeCases ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
-                                                Html.span [ prop.text "Vsi: " ]
+                                                Html.span [ prop.text (I18N.t "charts.municipalities.all") ]
                                                 Html.b [ prop.text confirmedToDate ] ] ]
                                     ]
                                 ]
@@ -322,7 +325,7 @@ let renderMunicipality (municipality : Municipality) =
                                 prop.text (sprintf "%d" municipality.MaxConfirmedCases.Value) ]
                             Html.div [
                                 prop.className "date"
-                                prop.text (sprintf "%d. %s" municipality.LastConfirmedCase.Day (Utils.monthNameOfdate municipality.LastConfirmedCase.Date)) ]
+                                prop.text (I18N.tOptions "days.date" {| date = municipality.LastConfirmedCase.Date |})]
                         ]
                     ]
                 ]
@@ -415,7 +418,7 @@ let renderShowMore showAll dispatch =
             Html.div [
                 Html.button [
                     prop.className "btn btn-primary btn-sm"
-                    prop.text (if showAll then "Prikaži manj občin" else "Prikaži vse občine")
+                    prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
                     prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
             ]
@@ -426,7 +429,7 @@ let renderSearch (query : string) dispatch =
     Html.input [
         prop.className "form-control form-control-sm filters__query"
         prop.type' .text
-        prop.placeholder "Poišči občino"
+        prop.placeholder (I18N.t "charts.municipalities.search") 
         prop.valueOrDefault query
         prop.onChange (fun query -> SearchInputChanged query |> dispatch)
     ]
@@ -434,17 +437,13 @@ let renderSearch (query : string) dispatch =
 let renderRegionSelector (regions : Region list) (selected : string) dispatch =
     let renderedRegions = seq {
         yield Html.option [
-            prop.text "Vse regije"
+            prop.text (I18N.t "charts.municipalities.allRegions")
             prop.value ""
         ]
 
         for region in regions do
-            let label =
-                match region.Name with
-                | None -> region.Key
-                | Some name -> name
             yield Html.option [
-                prop.text label
+                prop.text region.Name
                 prop.value region.Key
             ]
     }
@@ -471,12 +470,12 @@ let renderSortBy (currentSortBy : SortBy) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text "Razvrsti:"
-            renderSelector SortBy.ActiveCases "Aktivni"
-            renderSelector SortBy.TotalConfirmedCases "Vsi"
+            Html.text (I18N.t "charts.municipalities.sortBy")
+            renderSelector SortBy.ActiveCases (I18N.t "charts.municipalities.sortActive")
+            renderSelector SortBy.TotalConfirmedCases (I18N.t "charts.municipalities.sortTotal")
             if Highcharts.showExpGrowthFeatures then
-                renderSelector SortBy.DoublingTime "Dnevih podvojitve"
-            renderSelector SortBy.LastConfirmedCase "Zadnji"
+                renderSelector SortBy.DoublingTime (I18N.t "charts.municipalities.sortDoublingTime")
+            renderSelector SortBy.LastConfirmedCase (I18N.t "charts.municipalities.sortLast")
         ]
     ]
 

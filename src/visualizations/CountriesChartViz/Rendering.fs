@@ -13,25 +13,22 @@ open Highcharts
 open Types
 
 let countriesDisplaySets = [|
-    { Label = "okolica (brez Italije)"
-      CountriesCodes = [|
-          "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SVK"
-      |]
+    { Label = "groupNeighbouringWoItaly"
+      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SVK" |]
     }
-    { Label = "kritične države (EU)"
+    { Label = "groupCriticalEU"
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
     }
-    { Label = "kritične države (svet)"
-      CountriesCodes =
-          [| "CHN"; "ESP"; "IRN"; "ITA"; "SWE"; "USA" |]
+    { Label = "groupCriticalWorld"
+      CountriesCodes = [| "CHN"; "ESP"; "IRN"; "ITA"; "SWE"; "USA" |]
     }
-    { Label = "nordijske države"
+    { Label = "groupNordic"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
-    { Label = "ex-Jugoslavija"
+    { Label = "groupExYu"
       CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
     }
-    { Label = "vzh. Azija in Oceanija"
+    { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
     }
 |]
@@ -121,7 +118,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
                              y = entry.TotalDeathsPerMillion
-                             date = entry.Date.ToString("dd.MM.yyyy")
+                             date = I18N.tOptions "days.longerDate" {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|
@@ -210,7 +207,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         credits = pojo
             {|
                 enabled = true
-                text = "vir podatkov: Our World In Data"
+                text = I18N.t "charts.countries.dataSourceOWID"
                 href = "https://ourworldindata.org"
             |}
     |}
@@ -227,7 +224,7 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text setToRender.Label
+            prop.text (I18N.tt "charts.countries" setToRender.Label)
             prop.className [
                 true, "btn btn-sm metric-selector"
                 active, "metric-selector--selected selected" ]
@@ -249,9 +246,9 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
         let defaultProps =
             [
                 match axisSelector with
-                | ByDate -> "Kronološko"
-                | DaysSinceFirstDeath -> "Od prve smrti"
-                | DaysSinceOneDeathPerMillion -> "Od prve smrti na milij. preb."
+                | ByDate -> I18N.t "charts.countries.chronologically"
+                | DaysSinceFirstDeath -> I18N.t "charts.countries.sinceFirstDeath"
+                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.sinceOneDeathPerMillion"
                 |> prop.text
 
                 prop.className [
@@ -271,7 +268,7 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
 
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children ((Html.text "X os: ") :: xAxisTypesSelectors)
+        prop.children ((Html.text (I18N.t "charts.common.xAxis")) :: xAxisTypesSelectors)
     ]
 
 let render state dispatch =

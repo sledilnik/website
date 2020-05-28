@@ -1,0 +1,77 @@
+[
+  {
+    "id": "si",
+    "name": "SLOVENIJA",
+    "population": 2089310
+  },
+  {
+    "id": "ms",
+    "name": "Pomurska",
+    "population": 114396
+  },
+  {
+    "id": "mb",
+    "name": "Podravska",
+    "population": 324875
+  },
+  {
+    "id": "sg",
+    "name": "Koroška",
+    "population": 70683
+  },
+  {
+    "id": "ce",
+    "name": "Savinjska",
+    "population": 257425
+  },
+  {
+    "id": "za",
+    "name": "Zasavska",
+    "population": 57059
+  },
+  {
+    "id": "kk",
+    "name": "Posavska",
+    "population": 75807
+  },
+  {
+    "id": "nm",
+    "name": "Jugovzhodna Slovenija",
+    "population": 144688
+  },
+  {
+    "id": "lj",
+    "name": "Osrednjeslovenska",
+    "population": 552221
+  },
+  {
+    "id": "kr",
+    "name": "Gorenjska",
+    "population": 205717
+  },
+  {
+    "id": "po",
+    "name": "Primorsko-notranjska",
+    "population": 52818
+  },
+  {
+    "id": "ng",
+    "name": "Goriška",
+    "population": 118008
+  },
+  {
+    "id": "kp",
+    "name": "Obalno-kraška",
+    "population": 115613
+  },
+  {
+    "id": "t",
+    "name": "TUJCI",
+    "population": ""
+  },
+  {
+    "id": "n",
+    "name": "NEZNANO",
+    "population": ""
+  }
+]
