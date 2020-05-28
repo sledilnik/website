@@ -225,6 +225,18 @@
     "liftQuarantine": {
       "title": "Karantena",
       "description": "Sproščanje: karantena samo za tujce iz tretjih držav"
+    },
+    "liftSchools1to3": {
+      "title": "Vrtci",
+      "description": "Sproščanje: vrtci in osnovna šola 1.-3., 9. razred, 4. letnik SŠ"
+    },
+    "quarantine14days": {
+      "title": "Karantena",
+      "description": "Obvezna 14 dnevna karantena pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
+    },
+    "liftSchools4to5": {
+      "title": "OŠ",
+      "description": "Sproščanje: osnovna šola 4., 5. razred, zbiranje do 200 ljudi, vse namestitve"
     }
   },
   "phase": {
