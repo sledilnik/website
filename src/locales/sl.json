@@ -232,7 +232,7 @@
     },
     "quarantine14days": {
       "title": "Karantena",
-      "description": "Obvezna 14 dnevna karantena pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
+      "description": "Obvezna 14 dnevna karantena za tujce pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
     },
     "liftSchools4to5": {
       "title": "OŠ",
