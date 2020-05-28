@@ -28,6 +28,9 @@ export default {
         { property: 'og:title', content: this.$t('meta.title') },
         { property: 'og:description', content: this.$t('meta.description') },
       ],
+      link: [
+        {rel: 'canonical', href: "https://covid-19.sledilnik.org/"+this.$i18n.i18next.language+"/"+this.$route.path.slice(4)},
+      ],
     }
   },
   props: {
