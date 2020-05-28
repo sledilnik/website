@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueMeta from 'vue-meta'
 import i18next from 'i18next'
 
 import StaticPage from './pages/StaticPage.vue'
@@ -24,6 +25,7 @@ import * as datasourcesMd from './content/datasources.md'
 import * as datasourcesMdEn from './content/datasources_en.md'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 const mdContent = {
   FAQ: { sl: contentMd, en: contentMdEn },
