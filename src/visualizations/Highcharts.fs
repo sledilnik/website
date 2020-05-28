@@ -107,6 +107,9 @@ let addContainmentMeasuresFlags
         4,  5, "#ebfaeb", "liftFoodMarkets"
         11, 5, "#ebfaeb", "liftPublicTransport"
         15, 5, "#ebfaeb", "liftQuarantine"
+        18, 5, "#ebfaeb", "liftSchools1to3"
+        26, 5, "#FFe6e6", "quarantine14days"
+        //1,  6, "#ebfaeb", "liftSchools4to5"
     |]
     {|
         ``type`` = "flags"

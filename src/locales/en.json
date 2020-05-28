@@ -447,6 +447,18 @@
         "retirementHomes": {
             "description": "The ban on visits to the retirement homes.<br>Confirmed infection of a doctor in Metlika",
             "title": "RH"
+        },
+        "liftSchools1to3": {
+            "description": "Relaxation: kindergarten and primary school 1-3, 9 grade. Secondary school 4 grade",
+            "title": "Kindergarten"
+        },
+        "quarantine14days": {
+            "title": "Quarantine",
+            "description": "Mandatory 14 day quarantine for foreigners arriving from abroad <br> (for the EU with exceptions and third countries)"
+        },
+        "liftSchools4to5": {
+            "description": "Relaxation: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
+            "title": "Schools"
         }
     },
     "days": {
