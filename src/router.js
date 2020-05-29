@@ -101,6 +101,7 @@ const routes = [
     redirect: `/${i18next.language}/data`,
   },
   {
+    // TODO: this doesn't work
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
   },
