@@ -26,11 +26,11 @@ Model lahko tudi [sami preizkusite](https://pacs.zf.uni-lj.si/shinyR/apps/projec
 <img alt="SEIR model" src="https://pacs.zf.uni-lj.si/public/coronasim/zadnja-simulacija.png"></a>
 
 ## Ocenjevanje stopnje reprodukcije
-Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov ocenila stopnjo reprodukcije, to je hitrost širjenja okužbe, med posamičnimi intervencijami. To omogoča sledenje učinkovitosti intervencij. Pri modeliranju so uporabili tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva. 
+Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov ocenila stopnjo reprodukcije, to je hitrost širjenja okužbe, med posamičnimi intervencijami. Pri modeliranju so uporabili tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva.
 
-Podrobnejši opis metodologije in izsledkov je objavljen kot [članek v Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068). 
+Podrobnejši opis prvotne metodologije in izsledkov je objavljen kot članek v [Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068).
 
-Zadnji prepračun R za potrebe alarmov pa je [objavljen tukaj](http://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji)
+Prvotni model je bil kasneje nadgrajen in se sedaj dnevni rezultati objavljajo na [tej povezavi](https://oblak8.mf.uni-lj.si/covid19/).
 
 <a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
 <img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png"></a>
