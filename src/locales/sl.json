@@ -282,8 +282,9 @@
             "linkFaq": "FAQ",
             "facebook": "Facebook",
             "twitter": "Twitter",
-            "webpage": "Webpage",
-            "share": "Deli graf na"
+            "webpage": "Spletno stran",
+            "share": "Deli graf na",
+            "close": "Zapri"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v Sloveniji",

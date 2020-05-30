@@ -24,15 +24,15 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: 'sl',
-  returnObjects: true,
   fallbackLng: 'sl',
+  returnObjects: true,
   resources: {
     sl: { translation: sl },
     en: { translation: en },
   },
   detection: detectionOptions,
   interpolation: {
-    format: function (value, format, lng) {
+    format: function(value, format, lng) {
       if (value instanceof Date) {
         return moment(value).format(format)
       }

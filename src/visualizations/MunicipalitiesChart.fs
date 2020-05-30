@@ -417,7 +417,7 @@ let renderShowMore showAll dispatch =
         prop.children [
             Html.div [
                 Html.button [
-                    prop.className "btn btn-primary btn-sm"
+                    prop.className "btn btn-primary"
                     prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
                     prop.onClick (fun _ -> dispatch ToggleShowAll)
                 ]
@@ -429,7 +429,7 @@ let renderSearch (query : string) dispatch =
     Html.input [
         prop.className "form-control form-control-sm filters__query"
         prop.type' .text
-        prop.placeholder (I18N.t "charts.municipalities.search") 
+        prop.placeholder (I18N.t "charts.municipalities.search")
         prop.valueOrDefault query
         prop.onChange (fun query -> SearchInputChanged query |> dispatch)
     ]

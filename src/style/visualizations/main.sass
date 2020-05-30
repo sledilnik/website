@@ -97,7 +97,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         @media only screen and (max-width: 500px)
           display: none
 
-        
     .share-dropdown-wrapper
       width: 220px
       height: 160px
@@ -105,7 +104,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       top: 74px
       right: 16px
       background: #fff
-      z-index: 50
+      z-index: 1
       border-radius: 6px
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
 
@@ -114,7 +113,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       @media only screen and (min-width: 768px)
         right: 46px
 
-      
       .share-link
         display: block
         width: 212px
@@ -137,6 +135,26 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         span
           font-size: 14px
           line-height: 49px
+
+  .embed-menu
+    display: none
+    position: absolute
+    left: 5%
+    top: 10%
+    width: 90%
+    border: 1px solid #e0e0e0
+    box-shadow: 0 0 2px 0 rgba(0,0,0,.12), 0 2px 2px 0 rgba(0,0,0,.24)
+    background: hsla(0,0%,100%,.95)
+    padding: 1em
+    text-align: left
+    z-index: 2
+
+    p
+      margin-bottom: .5em
+
+    textarea
+      margin-bottom: .5em
+      width: 100%
 
   p
     color: $text-c
@@ -172,6 +190,29 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       &:hover
         color: #fff
+
+  .btn.btn-primary
+    font-size: 14px
+    font-family: 'IBM Plex Sans', sans-serif
+    font-weight: 600
+    background-color: $yellow
+    color: #000
+    padding: 15px 16px
+    border-radius: 0
+    border: none
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+    &:active
+      background-color: $yellow !important
+      color: #000
+    &:hover
+      box-shadow: 0 6px 38px -14px rgba(0, 0, 0, 0.3), 0 11px 12px -10px rgba(0, 0, 0, 0.22)
+    &:focus
+      border: none
+      outline: none
+
+  .btn.btn-sm
+    font-size: 13px
+    padding: 8px 14px
 
   .disclaimer
     font-size: 13px
@@ -518,25 +559,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         @media only screen and (min-width: 768px)
           margin-top: -15px
           padding: 0 $gap
-
-      .btn
-        font-size: 14px
-        font-family: 'IBM Plex Sans', sans-serif
-        font-weight: 600
-        background-color: $yellow
-        color: #000
-        padding: 15px 16px
-        border-radius: 0
-        border: none
-        box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
-        &:active
-          background-color: $yellow !important
-          color: #000
-        &:hover
-          box-shadow: 0 6px 38px -14px rgba(0, 0, 0, 0.3), 0 11px 12px -10px rgba(0, 0, 0, 0.22)
-        &:focus
-          border: none
-          outline: none
 
     .last-case-days
       margin-top: 5px

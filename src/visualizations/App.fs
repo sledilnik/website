@@ -246,7 +246,7 @@ let render (state: State) (_: Msg -> unit) =
         | Normal ->
             Html.div
                 [ renderFaqLink visualization
-                  ShareButton.dropdown (visualization.ClassName) () ]
+                  ShareButton.dropdown visualization () ]
 
 
     let renderChartTitle (visualization: Visualization) =
