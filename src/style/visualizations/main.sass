@@ -21,7 +21,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin-bottom: 88px
     position: relative
     padding: 0 0 32px
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15)
+    box-shadow: $element-box-shadow
 
     &.municipalities-chart
       padding: 10px 30px 32px
@@ -48,7 +48,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       font-weight: bold
       padding: 22px 16px
       background: #fff
-      margin-bottom: 0
+      margin-bottom: 10px
 
       a
         color: black
@@ -79,13 +79,15 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     .share-button-caption
       display: inline-block
       font-size: 14px
-      line-height: 24px
+      line-height: 25px
       font-weight: bold
       @media only screen and (max-width: 500px)
         display: none
 
       
   .share-dropdown-wrapper
+    width: 220px
+    height: 160px
     position: absolute
     top: 74px
     right: 16px
@@ -93,7 +95,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     z-index: 50
     border-radius: 6px
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
-    width: 180px
+
     &.share-open
       display: block
     @media only screen and (min-width: 768px)
@@ -102,20 +104,26 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     
     .share-link
       display: block
+      width: 212px
+      height: 48px
       cursor: pointer
-      margin: 3px
+      margin: 4px
+      text-decoration: none
+      color: $text-c
+      border-radius: 2px
+
       &:hover
-        background: $background
-        
+        background-color: rgba(0, 0, 0, 0.1)
+
       .share-icon
         object-fit: contain
         width: 15px
         height: 20px
-        margin: 10px
-        
+        margin: 6px 12px 10px
+
       span
         font-size: 14px
-        line-height: 30px
+        line-height: 49px
 
   p
     color: $text-c
