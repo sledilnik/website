@@ -60,7 +60,7 @@ let render (state : State) (_ : Msg -> unit) =
     let allVisualizations: Visualization list =
         [ { VisualizationType = Hospitals;
              ClassName = "hospitals-chart";
-             Label = "Kapacitete bolnišnic";
+             Label = I18N.t "charts.hospitals.title";
              Explicit = true;
              Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
           { VisualizationType = MetricsComparison;
@@ -210,19 +210,19 @@ let render (state : State) (_ : Msg -> unit) =
                 [ prop.className "brand-link"
                   prop.target "_blank"
                   prop.href "https://covid-19.sledilnik.org/"
-                  prop.text "Covid-19 Sledilnik" ]
+                  prop.text (I18N.t "meta.title") ]
 
     let renderFaqLink (visualization: Visualization) =
             if visualization.Explicit
             then Html.none // we do not have FAQ for hidden charts yet
-            else 
+            else
                 Html.div [
                     prop.className "faq-link-wrapper"
                     prop.children
                         [ Html.a
                             [ prop.className "faq-link"
                               prop.target "_blank"
-                              prop.href ("/FAQ/#" + visualization.ClassName)
+                              prop.href (localStorage.getItem("i18nextLng") + "/FAQ/#" + visualization.ClassName)
                               prop.text "?"
                             ] |> Html.h3
                         ]
@@ -232,8 +232,8 @@ let render (state : State) (_ : Msg -> unit) =
         match state.RenderingMode with
         | Embedded _ -> Html.none
         | Normal ->
-            renderFaqLink visualization
-            ShareButton.dd (visualization.ClassName) ()
+            renderFaqLink visualization |> ignore
+            ShareButton.dropdown (visualization.ClassName) ()
 
     let renderChartTitle (visualization: Visualization) =
 

@@ -1,4 +1,7 @@
 {
+    "meta": {
+        "title": "Covid-19 Sledilnik"
+    },
     "navbar": {
         "home": "Domov",
         "tables": "Tabela",
@@ -276,7 +279,11 @@
             "linear": "Linearna",
             "log": "Logaritemska",
             "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
-            "linkFaq": "FAQ"
+            "linkFaq": "FAQ",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Webpage",
+            "share": "Deli graf na"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v Sloveniji",
@@ -388,6 +395,31 @@
             "timesAsMany": "-krat toliko",
             "confirmedCases": "potrjeno okuženih",
             "hospitalized": "hospitaliziranih"
+        },
+        "hospitals": {
+            "title": "Kapacitete bolnišnic",
+            "allHospitals": "Vse bolnišnice",
+            "projection": "Projekcija",
+            "projection7": "Projekcija, 7-dnevno podvajanje",
+            "projection14": "Projekcija, 14-dnevno podvajanje",
+            "projection21": "Projekcija, 21-dnevno podvajanje",
+            "beds": "Bolnišnične postelje",
+            "bedsShort": "Postelje",
+            "bedsICU": "Intenzivne postelje",
+            "bedsICUShort": "ICU postelje",
+            "bedsMax": "Postelje, maksimalno",
+            "bedsAll": "Postelje, vse",
+            "beds70": "Postelje, 70%",
+            "bedsFull": "Postelje, polne",
+            "bedsICUAll": "Intenzivne, vse",
+            "bedsICU70": "Intenzivne, 70%",
+            "bedsICUFull": "Intenzivne, polne",
+            "ventilators": "Respiratorji",
+            "empty": "Proste",
+            "full": "Polne",
+            "all": "Vse",
+            "max": "Max",
+            "data": "Podatki"
         },
         "regions": {
             "title": "Potrjeno okuženi po regijah"

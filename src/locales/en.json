@@ -1,4 +1,7 @@
 {
+    "meta": {
+        "title": "Covid-19 Tracking"
+    },
     "navbar": {
         "home": "Home",
         "tables": "Table",
@@ -124,7 +127,11 @@
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:"
+            "xAxis": "X axis:",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Webpage",
+            "share": "Share"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
