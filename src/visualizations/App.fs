@@ -223,9 +223,9 @@ let render (state: State) (_: Msg -> unit) =
                   prop.text (I18N.t "meta.title") ]
 
     let renderFaqLink (visualization: Visualization) =
-        // if visualization.Explicit then
-        //     Html.none // we do not have FAQ for hidden charts yet
-        // else
+        if visualization.Explicit then
+            Html.none // we do not have FAQ for hidden charts yet
+        else
         Html.div
             [ prop.className "faq-link-wrapper"
               prop.children
