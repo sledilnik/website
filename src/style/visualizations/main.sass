@@ -52,11 +52,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       a
         color: black
+        transition: all 0.35s ease-in-out
+        box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow
+        text-decoration: none
+        color: rgba(0, 0, 0, 0.8)
+
+        &:hover
+          text-decoration: none
+          color: rgba(0, 0, 0, 0.8)
+          box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
 
       .brand-link
         display: none
 
   .faq-link-wrapper
+    display: inline-block
 
     h3
       font-size: 18px
@@ -68,62 +78,65 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       a
         color: black
-    
-  .share-button-wrapper
-    border-radius: 6px
-    border: solid 1px rgba(0, 0, 0, 0.13)
-    cursor: pointer
-    padding: 3px 8px
-    margin-right: 16px
-    
-    .share-button-caption
-      display: inline-block
-      font-size: 14px
-      line-height: 25px
-      font-weight: bold
-      @media only screen and (max-width: 500px)
-        display: none
+
+  .share-component-wrapper
+    display: inline-block
+
+    .share-button-wrapper
+      border-radius: 6px
+      border: solid 1px rgba(0, 0, 0, 0.13)
+      cursor: pointer
+      padding: 3px 8px
+      margin-right: 16px
+      
+      .share-button-caption
+        display: inline-block
+        font-size: 14px
+        line-height: 25px
+        font-weight: bold
+        @media only screen and (max-width: 500px)
+          display: none
+
+        
+    .share-dropdown-wrapper
+      width: 220px
+      height: 160px
+      position: absolute
+      top: 74px
+      right: 16px
+      background: #fff
+      z-index: 50
+      border-radius: 6px
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+
+      &.share-open
+        display: block
+      @media only screen and (min-width: 768px)
+        right: 46px
 
       
-  .share-dropdown-wrapper
-    width: 220px
-    height: 160px
-    position: absolute
-    top: 74px
-    right: 16px
-    background: #fff
-    z-index: 50
-    border-radius: 6px
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+      .share-link
+        display: block
+        width: 212px
+        height: 48px
+        cursor: pointer
+        margin: 4px
+        text-decoration: none
+        color: $text-c
+        border-radius: 2px
 
-    &.share-open
-      display: block
-    @media only screen and (min-width: 768px)
-      right: 46px
+        &:hover
+          background-color: rgba(0, 0, 0, 0.1)
 
-    
-    .share-link
-      display: block
-      width: 212px
-      height: 48px
-      cursor: pointer
-      margin: 4px
-      text-decoration: none
-      color: $text-c
-      border-radius: 2px
+        .share-icon
+          object-fit: contain
+          width: 15px
+          height: 20px
+          margin: 6px 12px 10px
 
-      &:hover
-        background-color: rgba(0, 0, 0, 0.1)
-
-      .share-icon
-        object-fit: contain
-        width: 15px
-        height: 20px
-        margin: 6px 12px 10px
-
-      span
-        font-size: 14px
-        line-height: 49px
+        span
+          font-size: 14px
+          line-height: 49px
 
   p
     color: $text-c
