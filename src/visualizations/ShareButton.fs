@@ -3,7 +3,7 @@ module ShareButton
 open Feliz
 open Browser
 
-let dropdown (className: string) =
+let dropdown (graphName: string) =
     React.functionComponent (fun () ->
         let (dropdown, setDropdown) = React.useState (false)
 
@@ -11,7 +11,7 @@ let dropdown (className: string) =
             "https://covid-19.sledilnik.org/"
             + localStorage.getItem ("i18nextLng")
             + "/stats%23"
-            + className
+            + graphName
 
         Html.div
             [ Html.div
