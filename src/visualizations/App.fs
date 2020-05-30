@@ -232,7 +232,11 @@ let render (state: State) (_: Msg -> unit) =
                       [ Html.a
                           [ prop.className "faq-link"
                             prop.target "_blank"
-                            prop.href ("/FAQ/#" + visualization.ClassName)
+                            prop.href
+                                ("https://covid-19.sledilnik.org/"
+                                 + localStorage.getItem ("i18nextLng")
+                                 + "/FAQ#"
+                                 + visualization.ClassName)
                             prop.text "?" ]
                         |> Html.h3 ] ]
 
