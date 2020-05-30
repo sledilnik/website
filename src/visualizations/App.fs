@@ -210,8 +210,7 @@ let render (state : State) (_ : Msg -> unit) =
                 [ prop.className "brand-link"
                   prop.target "_blank"
                   prop.href "https://covid-19.sledilnik.org/"
-                  prop.text "covid-19.sledilnik.org" ]
-
+                  prop.text "Covid-19 Sledilnik" ]
 
     let renderFaqLink (visualization: Visualization) =
             if visualization.Explicit
@@ -229,6 +228,12 @@ let render (state : State) (_ : Msg -> unit) =
                         ]
                     ]
 
+    let renderFaqAndShareBtn (visualization: Visualization) =
+        match state.RenderingMode with
+        | Embedded _ -> Html.none
+        | Normal ->
+            renderFaqLink visualization
+            ShareButton.dd (visualization.ClassName) ()
 
     let renderChartTitle (visualization: Visualization) =
 
@@ -269,8 +274,7 @@ let render (state : State) (_ : Msg -> unit) =
                               prop.className "title-chart-wrapper"
                               prop.children
                                 [ renderChartTitle viz
-                                  renderFaqLink viz
-                                  ShareButton.dd (viz.ClassName) ()
+                                  renderFaqAndShareBtn viz
                                 ]
                             ]
                           state |> viz.Renderer

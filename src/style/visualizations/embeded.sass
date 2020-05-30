@@ -13,36 +13,39 @@
       padding: 70px 30px 32px
 
       @media only screen and (min-width: 768px)
-        padding: 46px 30px 32px
+        padding: 30px 30px 32px
 
     .title-brand-wrapper
       display: flex
+      width: 100%
       flex-direction: column
+      justify-content: space-between
+      align-items: center
       top: 1px
-      background: $yellow
 
       @media only screen and (min-width: 768px)
         flex-direction: row
         top: 0
+        margin-bottom: 30px
 
-      h2,
-      .brand-link
+      h2
         min-height: 47px
         display: inline-block
 
       .brand-link
-        padding: 12px 16px 12px 49px
+        display: inline-block
+        padding: 7px 12px 7px 36px
         background: $yellow
-        text-transform: uppercase
         color: #000
-        font-size: 11px
-        line-height: 2.1
+        font-size: 14px
+        font-weight: bold
         letter-spacing: 1px
         font-weight: 600
         background-image: url(../assets/logo.png)
         background-repeat: no-repeat
-        background-size: 40px 40px
-        background-position: 10px 50%
+        background-size: 24px 24px
+        background-position: 4px 50%
+        border-radius: 6px
 
         &:hover
           text-decoration: none
