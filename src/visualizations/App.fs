@@ -226,18 +226,15 @@ let render (state: State) (_: Msg -> unit) =
         if visualization.Explicit then
             Html.none // we do not have FAQ for hidden charts yet
         else
-        Html.div
-            [ prop.className "faq-link-wrapper"
-              prop.children
-                  [ Html.a
-                      [ prop.className "faq-link"
-                        prop.target "_blank"
-                        prop.href
-                            (localStorage.getItem ("i18nextLng")
-                             + "/FAQ/#"
-                             + visualization.ClassName)
-                        prop.text "?" ]
-                    |> Html.h3 ] ]
+            Html.div
+                [ prop.className "faq-link-wrapper"
+                  prop.children
+                      [ Html.a
+                          [ prop.className "faq-link"
+                            prop.target "_blank"
+                            prop.href ("/FAQ/#" + visualization.ClassName)
+                            prop.text "?" ]
+                        |> Html.h3 ] ]
 
     let renderFaqAndShareBtn (visualization: Visualization) =
         match state.RenderingMode with
