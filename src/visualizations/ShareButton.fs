@@ -8,6 +8,24 @@ let dropdown (viz: Visualization) =
     React.functionComponent (fun () ->
         let (dropdown, setDropdown) = React.useState (false)
         let (modal, setModal) = React.useState (false)
+        // TODO: needs refactoring eventually because we're just duplicating code from EmbedMakerPage.vue
+        let (width, height) =
+            match viz.VisualizationType with
+            | MetricsComparison -> (1140, 780)
+            | Cases -> (1140, 630)
+            | Patients -> (1140, 720)
+            | Ratios -> (1140, 720)
+            | HCenters -> (1140, 720)
+            | Tests -> (1140, 720)
+            | Infections -> (1140, 720)
+            | Spread -> (1140, 630)
+            | Regions -> (1140, 720)
+            | Map -> (1140, 820)
+            | Municipalities -> (1140, 1150)
+            | AgeGroups -> (1140, 720)
+            // | Hospitals -> (1140, 1130)
+            | Countries -> (1140, 740)
+            | _ -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"
@@ -26,8 +44,9 @@ let dropdown (viz: Visualization) =
             [ prop.className "share-component-wrapper"
               prop.children
                   [ Html.div
-                      [ prop.style [ if dropdown then style.display.block else style.display.none ]
-                        prop.className "share-dropdown-wrapper"
+                      [ if dropdown
+                        then prop.className "share-dropdown-wrapper show"
+                        else prop.className "share-dropdown-wrapper hide"
                         prop.children
                             [ Html.a
                                 [ prop.className "share-link"
@@ -81,6 +100,9 @@ let dropdown (viz: Visualization) =
                                       prop.text (I18N.t "charts.common.share") ] ]
                           prop.onClick (fun _ -> setDropdown (not dropdown)) ]
 
+                    // TODO:
+                    // - fix translation with links
+                    // - implement copy method
                     Html.div
                         [ prop.className "embed-menu"
                           prop.style [ if modal then style.display.block else style.display.none ]
@@ -91,55 +113,11 @@ let dropdown (viz: Visualization) =
                                     [ prop.defaultValue
                                         ("<iframe src=\""
                                          + embedUrl
-                                         + "\" frameborder=\"0\" width=\"1140\" height=\"780\"></iframe>") ]
+                                         + "\" frameborder=\"0\" width=\""
+                                         + width.ToString()
+                                         + "\" height=\""
+                                         + height.ToString () + "\"></iframe>") ]
                                 Html.button
                                     [ prop.text (I18N.t "charts.common.close")
                                       prop.className "btn btn-primary btn-sm"
                                       prop.onClick (fun _ -> setModal (not modal)) ] ] ] ] ])
-
-// TODO:
-// - fix translation with links
-// - implement copy method
-// - put these width/height values below into iframe
-//         "MetricsComparison": {
-//             dimensions: [1140, 780]
-//         },
-//         "Cases": {
-//           dimensions: [1140, 630]
-//         },
-//         "Patients": {
-//           dimensions: [1140, 720]
-//         },
-//         "Ratios": {
-//           dimensions: [1140, 720]
-//         },
-//         "HCenters": {
-//           dimensions: [1140, 720]
-//         },
-//         "Tests": {
-//           dimensions: [1140, 720]
-//         },
-//         "Infections": {
-//           dimensions: [1140, 720]
-//         },
-//         "Spread": {
-//           dimensions: [1140, 630]
-//         },
-//         "Regions": {
-//           dimensions: [1140, 720]
-//         },
-//         "Map": {
-//           dimensions: [1140, 820]
-//         },
-//         "Municipalities": {
-//           dimensions: [1140, 1150]
-//         },
-//         "AgeGroups": {
-//           dimensions: [1140, 720]
-//         },
-// //        "Hospitals": {
-// //          dimensions: [1140, 1300]
-// //        },
-//         "Countries": {
-//           dimensions: [1140, 740]
-//         },

@@ -246,13 +246,17 @@ let render (state: State) (_: Msg -> unit) =
     let renderFaqAndShareBtn (visualization: Visualization) =
         match state.RenderingMode with
         | Embedded _ ->
-            Html.div [
-                renderFaqLink visualization
-                brandLink ]
+            Html.div
+                [ prop.className "faq-and-share-wrapper"
+                  prop.children
+                      [ renderFaqLink visualization
+                        brandLink ] ]
         | Normal ->
-            Html.div [
-                renderFaqLink visualization
-                ShareButton.dropdown visualization () ]
+            Html.div
+                [ prop.className "faq-and-share-wrapper"
+                  prop.children
+                      [ renderFaqLink visualization
+                        ShareButton.dropdown visualization () ] ]
 
 
     let renderChartTitle (visualization: Visualization) =

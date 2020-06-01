@@ -38,7 +38,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   
   .title-chart-wrapper
     display: flex
-    justify-content: flex-end
+    justify-content: space-between
     align-items: center
     min-width: 100%
     height: 92px
@@ -48,12 +48,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       padding: 0
 
   .title-brand-wrapper
-    margin-right: auto
-    
-    //I am to lazy to put a wrapper class on a div pls feel free to do this
-    + div 
-      display: flex
-      align-items: center
 
     h2
       font-size: 21px
@@ -75,6 +69,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           color: rgba(0, 0, 0, 0.8)
           box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
 
+  .faq-and-share-wrapper
+    display: flex
+    align-items: center
 
   .faq-link-wrapper
     display: inline-block
@@ -97,7 +94,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-radius: 6px
       border: solid 1px rgba(0, 0, 0, 0.13)
       cursor: pointer
-      padding: 3px 8px
+      padding: 3px 12px 3px 8px
       
       .share-button-caption
         display: inline-block
@@ -108,6 +105,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           display: none
 
     .share-dropdown-wrapper
+      display: none
       width: 220px
       height: 160px
       position: absolute
@@ -118,10 +116,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-radius: 6px
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
 
-      &.share-open
+      &.show
         display: block
-      @media only screen and (min-width: 768px)
-        right: 46px
+        @media only screen and (min-width: 768px)
+          right: 46px
 
       .share-link
         display: block
@@ -149,9 +147,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .embed-menu
     display: none
     position: absolute
-    left: 5%
-    top: 10%
-    width: 90%
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
     border: 1px solid #e0e0e0
     box-shadow: 0 0 2px 0 rgba(0,0,0,.12), 0 2px 2px 0 rgba(0,0,0,.24)
     background: hsla(0,0%,100%,.95)
