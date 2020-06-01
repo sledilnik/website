@@ -98,6 +98,10 @@ export default {
       if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'
       }
+      if (this.field === 'statePerTreatment.inHospital' || this.field === 'statePerTreatment.inICU') {
+        if (this.renderTotalValues(this.totalDeceased) > 0)
+          return 'deceased'
+      }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
       } else if (this.renderValues.lastDay.diff > 0) {
@@ -138,6 +142,11 @@ export default {
       return this.field
     },
     showAbsolute() {
+      if (this.field === 'statePerTreatment.inHospital' || this.field === 'statePerTreatment.inICU') {
+        if (this.renderTotalValues(this.totalDeceased) > 0) {
+          return false
+        }
+      }
       return (
         (!this.totalIn && !this.totalOut && !this.totalDeceased) ||
         this.renderTotalValues(this.totalIn) ===
