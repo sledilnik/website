@@ -222,6 +222,7 @@ let render (state: State) (_: Msg -> unit) =
                   prop.href "https://covid-19.sledilnik.org/"
                   prop.text (I18N.t "meta.title") ]
 
+
     let renderFaqLink (visualization: Visualization) =
         if visualization.Explicit then
             Html.none // we do not have FAQ for hidden charts yet
@@ -241,13 +242,17 @@ let render (state: State) (_: Msg -> unit) =
                             prop.text "?" ]
                         |> Html.h3 ] ]
 
+
     let renderFaqAndShareBtn (visualization: Visualization) =
         match state.RenderingMode with
-        | Embedded _ -> Html.none
+        | Embedded _ ->
+            Html.div [
+                renderFaqLink visualization
+                brandLink ]
         | Normal ->
-            Html.div
-                [ renderFaqLink visualization
-                  ShareButton.dropdown visualization () ]
+            Html.div [
+                renderFaqLink visualization
+                ShareButton.dropdown visualization () ]
 
 
     let renderChartTitle (visualization: Visualization) =
@@ -279,8 +284,7 @@ let render (state: State) (_: Msg -> unit) =
                           [ Html.a
                               [ prop.href ("#" + visualization.ClassName)
                                 prop.text visualization.Label
-                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ]
-                    brandLink ] ]
+                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div
         [ prop.className
