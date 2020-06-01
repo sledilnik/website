@@ -28,6 +28,7 @@
     },
     "infocard": {
         "confirmedToDate": "Confirmed Cases",
+        "active": "Active Cases",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",

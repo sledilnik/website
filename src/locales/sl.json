@@ -28,6 +28,7 @@
     },
     "infocard": {
         "confirmedToDate": "Potrjeno okuženi",
+        "active": "Aktivni primeri",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",

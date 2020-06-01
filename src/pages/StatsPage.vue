@@ -14,8 +14,8 @@
           series-type="state"
         />
         <Info-card
-          :title="$t('infocard.recoveredToDate')"
-          field="cases.recoveredToDate"
+          :title="$t('infocard.active')"
+          field="cases.active"
           good-trend="up"
           series-type="state"
         />
