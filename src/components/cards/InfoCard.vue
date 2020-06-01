@@ -116,17 +116,21 @@ export default {
         className += 'deceased'
       }
       if (this.renderValues.lastDay.diff === 0) {
-         className += ' none'
-         return className
+        className += ' none'
+        return className
       } else if (this.renderValues.lastDay.diff > 0) {
-         className += 'up'
+        className += 'up'
       } else {
-         className += 'down'
+        className += 'down'
       }
       return className
     },
     renderValues() {
-      const x = this.lastChange(this.field, this.seriesType == 'cum')
+      let date
+      Object.keys(this.$route.query).length > 0
+        ? (date = this.$route.query.showDate)
+        : (date = null)
+      const x = this.lastChange(this.field, this.seriesType == 'cum', date)
       if (x) {
         if (this.seriesType == 'cum') {
           x.lastDay.displayDate = x.lastDay.firstDate || x.lastDay.date
@@ -170,7 +174,9 @@ export default {
       )
     },
     showDeceased() {
-      return this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
+      return (
+        this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
+      )
     },
   },
   methods: {
@@ -327,7 +333,8 @@ export default {
   color: #20b16d;
 }
 
-.no-change, .deceased {
+.no-change,
+.deceased {
   color: #a0a0a0;
 }
 

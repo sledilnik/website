@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "title": "COVID-19 Sledilnik",
+        "description": "COVID-19 Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o epidemiji COVID-19 v Sloveniji."
+    },
     "navbar": {
         "home": "Domov",
         "tables": "Tabela",

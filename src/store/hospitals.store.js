@@ -53,22 +53,15 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }) => {
-    const ts = new Date().getTime()
-
-    const d = await exportTime(
-      `https://raw.githubusercontent.com/sledilnik/data/master/csv/hospitals.csv.timestamp?nocache=${ts}`
-    )
-
-    const data = await ApiService.get('https://api.sledilnik.org/api/hospitals').then((result) => {
-      return result.data
-    })
+    const data = await ApiService.get('https://api.sledilnik.org/api/hospitals')
+    const d = exportTime(data.headers.timestamp)
 
     let hospitals = {}
     hospitalsJSON.forEach((row) => {
       hospitals[row.id] = row.name
     })
 
-    commit('setData', data)
+    commit('setData', data.data)
     commit('setHospitals', hospitals)
     commit('setExportTime', d)
   },
