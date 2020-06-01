@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Data.HCenters
@@ -187,7 +188,7 @@ let render (state : State) dispatch =
                     Html.a
                         [ prop.className "faq-link"
                           prop.target "_blank"
-                          prop.href "/FAQ/#hcenters-chart"
+                          prop.href ("/" + localStorage.getItem ("i18nextLng") + "/FAQ#hcenters-chart")
                           prop.text (I18N.t "charts.common.linkFaq") ]
                 ]
             ]

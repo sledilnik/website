@@ -323,7 +323,7 @@ let render state dispatch =
                 Html.a
                     [ prop.className "faq-link"
                       prop.target "_blank"
-                      prop.href "/FAQ/#infections-chart"
+                      prop.href ("/" + localStorage.getItem ("i18nextLng") + "/FAQ#infections-chart")
                       prop.text (I18N.t "charts.common.linkFaq") ]
             ]
         ]
