@@ -235,7 +235,7 @@ let render (state: State) (_: Msg -> unit) =
                             prop.key visualization.ClassName
                             prop.target "_blank"
                             prop.href
-                                ("https://covid-19.sledilnik.org/"
+                                ("/"
                                  + localStorage.getItem ("i18nextLng")
                                  + "/FAQ#"
                                  + visualization.ClassName)

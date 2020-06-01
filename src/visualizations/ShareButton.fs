@@ -40,6 +40,12 @@ let dropdown (viz: Visualization) =
             + "/chart/"
             + viz.VisualizationType.ToString()
 
+        // let copy (e: MouseEvent) =
+        //     let element = e.target
+        //     element.select ()
+        //     element.setSelectionRange (0, 99999)
+        //     document.execCommand ("copy")
+
         Html.div
             [ prop.className "share-component-wrapper"
               prop.children
@@ -98,25 +104,35 @@ let dropdown (viz: Visualization) =
                                 Html.span
                                     [ prop.className "share-button-caption"
                                       prop.text (I18N.t "charts.common.share") ] ]
+                          // TODO: click outside the button should close the dropdown as well
                           prop.onClick (fun _ -> setDropdown (not dropdown)) ]
 
-                    // TODO:
-                    // - fix translation with links
-                    // - implement copy method
+
                     Html.div
-                        [ prop.className "embed-menu"
-                          prop.style [ if modal then style.display.block else style.display.none ]
+                        [ if modal then prop.className "embed-menu show" else prop.className "embed-menu hide"
                           prop.children
                               [ Html.h2 [ prop.text (I18N.t "embedMaker.title") ]
-                                Html.p [ prop.text (I18N.t "embedMaker.description") ]
+                                Html.p
+                                    // TODO: refactor https://www.i18next.com/translation-function/interpolation
+                                    // check why this doesn't work: I18N.tOptions "embedMaker.description" {| interpolation = {| escapeValue = false |} }|}
+                                    [ Html.span [ prop.text (I18N.t "embedMaker.descriptionPart1") ]
+                                      Html.a
+                                          [ prop.href
+                                              "https://github.com/sledilnik/website/blob/master/examples/README.md"
+                                            prop.text (I18N.t "embedMaker.descriptionPart2") ] ]
                                 Html.textarea
-                                    [ prop.defaultValue
-                                        ("<iframe src=\""
-                                         + embedUrl
-                                         + "\" frameborder=\"0\" width=\""
-                                         + width.ToString()
-                                         + "\" height=\""
-                                         + height.ToString () + "\"></iframe>") ]
+                                    [ prop.title (I18N.t "embedMaker.copy")
+                                      prop.className "form-control"
+                                      prop.defaultValue
+                                          ("<iframe src=\""
+                                           + embedUrl
+                                           + "\" frameborder=\"0\" width=\""
+                                           + width.ToString()
+                                           + "\" height=\""
+                                           + height.ToString()
+                                           + "\"></iframe>") ]
+                                // TODO: implement copy method as it is in EmbedPageMake
+                                // prop.onClick (fun _ -> copy) ]
                                 Html.button
                                     [ prop.text (I18N.t "charts.common.close")
                                       prop.className "btn btn-primary btn-sm"

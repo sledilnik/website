@@ -51,6 +51,8 @@
         "preview": "Predogled:",
         "embedCode": "Koda za vdelavo:",
         "description": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">najdete tukaj</a>.",
+        "descriptionPart1": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila ",
+        "descriptionPart2": "najdete tukaj.",
         "copy": "Kopiraj",
         "copied": "Skopirano!"
     },

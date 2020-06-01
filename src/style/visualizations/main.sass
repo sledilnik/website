@@ -105,21 +105,26 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           display: none
 
     .share-dropdown-wrapper
-      display: none
       width: 220px
       height: 160px
       position: absolute
       top: 74px
-      right: 16px
+      right: 27px
       background: #fff
-      z-index: 1
       border-radius: 6px
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+      opacity: 0
+      visibility: hidden
+      // TODO: fix the animation glitch when using transformY
+      // transform: translateY(-10px)
+      // backface-visibility: hidden
+      transition: all 0.3s
 
       &.show
-        display: block
-        @media only screen and (min-width: 768px)
-          right: 46px
+        opacity: 1
+        visibility: visible
+        z-index: 1
+        transform: translateY(0)
 
       .share-link
         display: block
@@ -145,20 +150,27 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           line-height: 49px
 
   .embed-menu
-    display: none
     position: absolute
     left: 0
     top: 0
     width: 100%
     height: 100%
     border: 1px solid #e0e0e0
-    box-shadow: 0 0 2px 0 rgba(0,0,0,.12), 0 2px 2px 0 rgba(0,0,0,.24)
+    box-shadow: $element-box-shadow
     background: hsla(0,0%,100%,.95)
-    padding: 1em
+    padding: 32px
     text-align: left
     z-index: 2
+    opacity: 0
+    visibility: hidden
+    transition: all .3s ease-in-out
+
+    &.show
+      visibility: visible
+      opacity: 1
 
     p
+      font-size: 1rem
       margin-bottom: .5em
 
     textarea
