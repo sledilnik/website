@@ -231,6 +231,7 @@ let render (state: State) (_: Msg -> unit) =
                   prop.children
                       [ Html.a
                           [ prop.className "faq-link"
+                            prop.key visualization.ClassName
                             prop.target "_blank"
                             prop.href
                                 ("https://covid-19.sledilnik.org/"

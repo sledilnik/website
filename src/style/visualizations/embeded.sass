@@ -1,40 +1,26 @@
 // Styles that apply to the embeded components. These rewrite the styles in visualizations/main.sass.
 
 .embeded
-  margin-top: 20px
-
-  @media only screen and (min-width: 768px)
-    margin-top: 10px
+  margin-top: 0px
 
   .visualizations
     section
       margin-bottom: 0
       margin-top: 0
-      padding: 70px 30px 32px
-
-      @media only screen and (min-width: 768px)
-        padding: 30px 30px 32px
+      padding: 30px 30px 32px
 
     .title-brand-wrapper
       display: flex
       width: 100%
-      flex-direction: column
       justify-content: space-between
       align-items: center
-      top: 1px
-
-      @media only screen and (min-width: 768px)
-        flex-direction: row
-        top: 0
-        margin-bottom: 30px
-
-      h2
-        min-height: 47px
-        display: inline-block
+      flex-direction: row
+      top: 0
+      margin-bottom: 30px
 
       .brand-link
         display: inline-block
-        padding: 7px 12px 7px 36px
+        padding: 7px 1px 7px 36px
         background: $yellow
         color: #000
         font-size: 14px
@@ -46,6 +32,11 @@
         background-size: 30px 30px
         background-position: 4px 50%
         border-radius: 6px
+        text-indent: -9999px
+
+        @media only screen and (min-width: 600px)
+          text-indent: 0px
+          padding: 7px 12px 7px 36px
 
         &:hover
           text-decoration: none

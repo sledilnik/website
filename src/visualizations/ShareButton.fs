@@ -88,7 +88,7 @@ let dropdown (viz: Visualization) =
                               [ Html.h2 [ prop.text (I18N.t "embedMaker.title") ]
                                 Html.p [ prop.text (I18N.t "embedMaker.description") ]
                                 Html.textarea
-                                    [ prop.text
+                                    [ prop.defaultValue
                                         ("<iframe src=\""
                                          + embedUrl
                                          + "\" frameborder=\"0\" width=\"1140\" height=\"780\"></iframe>") ]
