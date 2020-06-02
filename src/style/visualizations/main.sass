@@ -95,6 +95,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border: solid 1px rgba(0, 0, 0, 0.13)
       cursor: pointer
       padding: 3px 12px 3px 8px
+
+      @media only screen and (max-width: 500px)
+        padding: 3px 8px
       
       .share-button-caption
         display: inline-block
@@ -158,16 +161,22 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     border: 1px solid #e0e0e0
     box-shadow: $element-box-shadow
     background: hsla(0,0%,100%,.95)
-    padding: 32px
+    padding: 18px
     text-align: left
     z-index: 2
     opacity: 0
     visibility: hidden
     transition: all .3s ease-in-out
 
+    @media only screen and (min-width: 480px)
+      padding: 26px
+
+    @media only screen and (min-width: 768px)
+      padding: 32px
+
     &.show
       visibility: visible
-      opacity: 1
+      opacity: .98
 
     p
       font-size: 1rem
@@ -176,6 +185,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     textarea
       margin-bottom: .5em
       width: 100%
+      min-height: 150px
 
   p
     color: $text-c
