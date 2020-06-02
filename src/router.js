@@ -131,6 +131,10 @@ const routes = [
     },
     children: [
       {
+        path:'/',
+        redirect: 'stats',
+      },
+      {
         path: 'stats',
         component: StatsPage,
       },
