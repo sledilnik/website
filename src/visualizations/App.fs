@@ -240,7 +240,7 @@ let render (state: State) (_: Msg -> unit) =
                                  + "/FAQ#"
                                  + visualization.ClassName)
                             prop.text "?" ]
-                        |> Html.h3 ] ]
+                        |> Html.div ] ]
 
 
     let renderFaqAndShareBtn (visualization: Visualization) =
