@@ -295,18 +295,6 @@ let render state dispatch =
     Html.div [
         renderChartContainer state.DisplayType state.Data
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
-
-        Html.div [
-            prop.className "disclaimer"
-            prop.children [
-                Html.text (I18N.t "charts.common.noteFaq")
-                Html.a
-                    [ prop.className "faq-link"
-                      prop.target "_blank"
-                      prop.href "/FAQ/#infections-chart"
-                      prop.text (I18N.t "charts.common.linkFaq") ]
-            ]
-        ]
     ]
 
 let infectionsChart (props : {| data : StatsData |}) =

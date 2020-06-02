@@ -51,6 +51,8 @@
         "preview": "Preview:",
         "embedCode": "Embed code:",
         "description": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "descriptionPart1": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, ",
+        "descriptionPart2": "check here.",
         "copy": "Copy",
         "copied": "Copied!"
     },
@@ -128,7 +130,12 @@
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:"
+            "xAxis": "X axis:",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Webpage",
+            "share": "Share",
+            "close": "Close"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
