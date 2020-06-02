@@ -61,7 +61,6 @@ type DisplayType = {
     ShowAllOrOthers: ShowAllOrOthers
     ChartType: ChartType
     ShowPhases: bool
-    ShowLegend: bool
 }
 
 [<Literal>]
@@ -73,21 +72,18 @@ let availableDisplayTypes: DisplayType array = [|
         ShowAllOrOthers = ShowAllConfirmed
         ChartType = SplineChart
         ShowPhases = true
-        ShowLegend = true
     }
     {   Id = "all";
         ValueTypes = RunningTotals
         ShowAllOrOthers = ShowOthers
         ChartType = StackedBarNormal
         ShowPhases = false
-        ShowLegend = true
     }
     {   Id = "relative";
         ValueTypes = RunningTotals
         ShowAllOrOthers = ShowOthers
         ChartType = StackedBarPercent
         ShowPhases = false
-        ShowLegend = false
     }
 |]
 
@@ -207,23 +203,7 @@ let renderChartOptions displayType (data : StatsData) =
         if displayType.ShowPhases then
             yield addContainmentMeasuresFlags startDate endDate |> pojo
     ]
-
-    let legend =
-        {|
-            enabled = true
-            title = ""
-            align = "left"
-            verticalAlign = "top"
-            borderColor = "#ddd"
-            borderWidth = 1
-            layout = "vertical"
-            floating = true
-            x = 20
-            y = 30
-            backgroundColor = "#FFF"
-            reversed = true
-        |}
-
+   
     let className = "covid19-infections"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
 
@@ -266,7 +246,7 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
-        legend = pojo {| legend with enabled = displayType.ShowLegend |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
 let renderChartContainer data metrics =
