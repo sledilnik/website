@@ -47,19 +47,17 @@ export default {
     Footer,
   },
   created() {
-    this.$store.dispatch('stats/fetchData')
-    this.$store.dispatch('hospitals/fetchData')
-    this.$store.dispatch('patients/fetchData')
-    // this.$store.dispatch("municipalities/fetchData");
-    // this.$store.dispatch("healthCenters/fetchData");
+    this.$store.dispatch("stats/fetchData");
+    this.$store.dispatch("hospitals/fetchData");
+    this.$store.dispatch("patients/fetchData");
   },
   mounted() {
-    this.$store.dispatch('stats/refreshDataEvery', 300)
-    this.$store.dispatch('hospitals/refreshDataEvery', 300)
-    this.$store.dispatch('patients/refreshDataEvery', 300)
-    // this.$store.dispatch("municipalities/refreshDataEvery", 300);
-    // this.$store.dispatch("healthCenters/refreshDataEvery", 300);
+    this.$store.dispatch("stats/refreshDataEvery", 300);
+    this.$store.dispatch("hospitals/refreshDataEvery", 300);
+    this.$store.dispatch("patients/refreshDataEvery", 300);
+    
     moment.locale(this.$i18n.i18next.language)
+
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash)

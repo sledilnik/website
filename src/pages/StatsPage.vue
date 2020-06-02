@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="checkClick($event)">
     <Time-stamp />
     <b-container class="stats-page">
       <b-row cols="12">
@@ -86,6 +86,33 @@ export default {
         clearInterval(checker)
       }
     }, 80)
+  },
+  methods: {
+    checkClick(e) {
+      const dropdownAll = this.$el.querySelectorAll('.share-dropdown-wrapper')
+
+      // ignore click if the clicked element is share button or its icon or caption
+      if (
+        e.target.classList.contains('share-button-wrapper') ||
+        e.target.classList.contains('share-button-icon') ||
+        e.target.classList.contains('share-button-caption')
+      ) {
+        return
+      }
+
+      // else check if any of the dropdowns is opened and close it/them
+      dropdownAll.forEach((el) => {
+        if (el.classList.contains('show')) {
+          el.classList.remove('show')
+          el.classList.add('hide')
+        }
+      })
+
+      // TODO: there is still an issue where if you immediatelly click on the same
+      // share button again, it won't open the dropdown because ShareButton.fs
+      // component is not aware that the dropdown was closed within this method.
+      // I think the right way to do this would be to listen for clicks within App.fs
+    },
   },
 }
 </script>

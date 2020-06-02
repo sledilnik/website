@@ -20,40 +20,189 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     background: #fff
     margin-bottom: 88px
     position: relative
-    padding: 46px 0 32px
+    padding: 0 0 32px
     box-shadow: $element-box-shadow
 
-    &.municipalities-chart
-      padding: 46px 30px 32px
-
     @media only screen and (min-width: 768px)
-      padding: 46px 30px 32px
+      padding: 0 29px 32px 32px
+
+    &.municipalities-chart
+      padding: 0 0 32px
+
+      @media only screen and (min-width: 768px)
+        padding: 0 29px 32px 32px
 
     div.loader
       min-height: 450px
       color: #fff // hide 'loading' text
+  
+  .title-chart-wrapper
+    display: flex
+    justify-content: space-between
+    align-items: center
+    min-width: 100%
+    height: 92px
+    padding: 0 18px
+
+    @media only screen and (min-width: 768px)
+      padding: 0
 
   .title-brand-wrapper
-    position: absolute
-    z-index: 10
-    left: 32px
-    top: 0
-    transform: translateY(-50%)
-    box-shadow: $box-shadow
 
     h2
-      font-size: 18px
+      font-size: 21px
+      line-height: 28px
       font-weight: bold
-      padding: 12px 16px
-      border: 1px solid $yellow
+      // padding: 22px 16px
       background: #fff
       margin-bottom: 0
 
       a
         color: black
+        transition: all 0.35s ease-in-out
+        box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow
+        text-decoration: none
+        color: rgba(0, 0, 0, 0.8)
 
-    .brand-link
-      display: none
+        &:hover
+          text-decoration: none
+          color: rgba(0, 0, 0, 0.8)
+          box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
+
+  .faq-and-share-wrapper
+    display: flex
+    align-items: center
+    margin-left: 16px
+
+  .faq-link-wrapper
+    display: inline-block
+    margin-right: 16px
+
+    @media only screen and (max-width: 500px)
+      margin-right: 8px
+
+    div
+      background: #fff
+
+      .faq-link
+        display: inline-block
+        color: black
+        font-weight: bold
+        line-height: 24px
+        font-size: 18px
+        padding: 3px 12px
+        border-radius: 6px
+        border: solid 1px rgba(0, 0, 0, 0.13)
+        cursor: pointer
+
+        &:hover
+          text-decoration: none
+
+  .share-component-wrapper
+    display: inline-block
+
+    .share-button-wrapper
+      border-radius: 6px
+      border: solid 1px rgba(0, 0, 0, 0.13)
+      cursor: pointer
+      padding: 3px 12px 3px 4px
+      display: flex
+      align-items: center
+
+      @media only screen and (max-width: 500px)
+        padding: 3px 4.5px
+      
+      @media only screen and (min-width: 501px)
+        min-width: 124px
+      
+      .share-button-caption
+        display: inline-block
+        font-size: 14px
+        line-height: 24px
+        font-weight: bold
+        margin-left: 7px
+        @media only screen and (max-width: 500px)
+          display: none
+
+    .share-dropdown-wrapper
+      width: 220px
+      height: 160px
+      position: absolute
+      top: 74px
+      right: 27px
+      background: #fff
+      border-radius: 6px
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
+      opacity: 0
+      visibility: hidden
+      // TODO: fix the animation glitch when using transformY
+      // transform: translateY(-10px)
+      // backface-visibility: hidden
+      transition: all 0.3s
+
+      &.show
+        opacity: 1
+        visibility: visible
+        z-index: 1
+        transform: translateY(0)
+
+      .share-link
+        display: block
+        width: 212px
+        height: 48px
+        cursor: pointer
+        margin: 4px
+        text-decoration: none
+        color: $text-c
+        border-radius: 2px
+
+        &:hover
+          background-color: rgba(0, 0, 0, 0.1)
+
+        .share-icon
+          object-fit: contain
+          width: 15px
+          height: 20px
+          margin: 6px 12px 10px
+
+        span
+          font-size: 14px
+          line-height: 49px
+
+  .embed-menu
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    border: 1px solid #e0e0e0
+    box-shadow: $element-box-shadow
+    background: hsla(0,0%,100%,.95)
+    padding: 18px
+    text-align: left
+    z-index: 2
+    opacity: 0
+    visibility: hidden
+    transition: all .3s ease-in-out
+
+    @media only screen and (min-width: 480px)
+      padding: 26px
+
+    @media only screen and (min-width: 768px)
+      padding: 32px
+
+    &.show
+      visibility: visible
+      opacity: .98
+
+    p
+      font-size: 1rem
+      margin-bottom: .5em
+
+    textarea
+      margin-bottom: .5em
+      width: 100%
+      min-height: 150px
 
   p
     color: $text-c
@@ -90,6 +239,29 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       &:hover
         color: #fff
 
+  .btn.btn-primary
+    font-size: 14px
+    font-family: 'IBM Plex Sans', sans-serif
+    font-weight: 600
+    background-color: $yellow
+    color: #000
+    padding: 15px 16px
+    border-radius: 0
+    border: none
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
+    &:active
+      background-color: $yellow !important
+      color: #000
+    &:hover
+      box-shadow: 0 6px 38px -14px rgba(0, 0, 0, 0.3), 0 11px 12px -10px rgba(0, 0, 0, 0.22)
+    &:focus
+      border: none
+      outline: none
+
+  .btn.btn-sm
+    font-size: 13px
+    padding: 8px 14px
+
   .disclaimer
     font-size: 13px
     color: $text-c
@@ -110,10 +282,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     justify-content: space-between
     flex-wrap: wrap
+    border-top: 1px solid $gray-300
+    padding: 22px 15px
 
     .chart-display-property-selector, .chart-data-interval-selector
-
-      margin: 0 $gap/2 $gap/2 0
       text-align: right
       color: $text-c
       font-size: 14px
@@ -297,6 +469,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       display: flex
       flex-wrap: wrap
 
+      @include media-breakpoint-down(sm)
+      padding: 0 18px
+
       .municipality
         width: calc(25% - #{$gap * 2})
         margin: $gap/2 $gap
@@ -429,31 +604,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .show-all
       margin-top: 48px
+      margin-left: 18px
       text-align: left
 
       > div
         @media only screen and (min-width: 768px)
           margin-top: -15px
           padding: 0 $gap
-
-      .btn
-        font-size: 14px
-        font-family: 'IBM Plex Sans', sans-serif
-        font-weight: 600
-        background-color: $yellow
-        color: #000
-        padding: 15px 16px
-        border-radius: 0
-        border: none
-        box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
-        &:active
-          background-color: $yellow !important
-          color: #000
-        &:hover
-          box-shadow: 0 6px 38px -14px rgba(0, 0, 0, 0.3), 0 11px 12px -10px rgba(0, 0, 0, 0.22)
-        &:focus
-          border: none
-          outline: none
 
     .last-case-days
       margin-top: 5px

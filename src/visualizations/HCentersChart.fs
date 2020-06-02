@@ -180,18 +180,6 @@ let render (state : State) dispatch =
                 ]
             ]
             renderChartContainer state
-
-            Html.div [
-                prop.className "disclaimer"
-                prop.children [
-                    Html.text (I18N.t "charts.common.noteFaq")
-                    Html.a
-                        [ prop.className "faq-link"
-                          prop.target "_blank"
-                          prop.href ("/" + localStorage.getItem ("i18nextLng") + "/FAQ#hcenters-chart")
-                          prop.text (I18N.t "charts.common.linkFaq") ]
-                ]
-            ]
         ]
 
 
