@@ -28,7 +28,7 @@ Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
-  FAQ: { sl: contentMd, en: contentMdEn },
+  faq: { sl: contentMd, en: contentMdEn },
   about: { sl: aboutMd, en: aboutMdEn },
   team: { sl: teamMd, en: teamMdEn },
   links: { sl: linksMd, en: linksMdEn },
@@ -38,7 +38,7 @@ const mdContent = {
 }
 
 function dynamicProps(route) {
-  let baseRoute = route.path.slice(4)
+  let baseRoute = route.path.slice(4).toLowerCase()
   let lang = route.params.lang
 
   return {
@@ -103,11 +103,6 @@ const routes = [
     redirect: `/${i18next.language}/data`,
   },
   {
-    // TODO: this doesn't work
-    path: '/embed',
-    redirect: `/${i18next.language}/embed`,
-  },
-  {
     path: '/datasources',
     redirect: `/${i18next.language}/datasources`,
   },
@@ -131,7 +126,7 @@ const routes = [
     },
     children: [
       {
-        path:'/',
+        path: '/',
         redirect: 'stats',
       },
       {
