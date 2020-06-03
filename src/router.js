@@ -103,6 +103,10 @@ const routes = [
     redirect: `/${i18next.language}/data`,
   },
   {
+    path: '/embed',
+    redirect: `/${i18next.language}/embed`,
+  },
+  {
     path: '/datasources',
     redirect: `/${i18next.language}/datasources`,
   },

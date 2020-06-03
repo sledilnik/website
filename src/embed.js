@@ -17,12 +17,6 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
-    beforeEnter: (to, from, next) => {
-      window.location.href = location.origin + '/' + i18next.language + '/embed'
-    }
-  },
-  {
     path: '/tables',
     component: TablesPage,
     beforeEnter: (to, from, next) => {
