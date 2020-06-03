@@ -323,7 +323,20 @@
         "hospitals": {
             "bedsShort": "Beds",
             "beds": "Hospital beds",
-            "allHospitals": "All hospitals"
+            "allHospitals": "All hospitals",
+            "data": "Data",
+            "max": "Max",
+            "all": "All",
+            "full": "Full",
+            "empty": "Empty",
+            "bedsICUFull": "ICU beds, full",
+            "bedsICU70": "ICU beds, 70%",
+            "bedsICUAll": "ICU beds, all",
+            "bedsFull": "Beds, full",
+            "beds70": "Beds, 70%",
+            "bedsAll": "Beds, all",
+            "bedsMax": "Beds, maximum",
+            "bedsICUShort": "ICU beds"
         }
     },
     "footer": {
