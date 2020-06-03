@@ -319,6 +319,11 @@
             "groupCriticalWorld": "Critical countries (World)",
             "groupCriticalEU": "Critical countries (EU)",
             "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
+        },
+        "hospitals": {
+            "bedsShort": "Beds",
+            "beds": "Hospital beds",
+            "allHospitals": "All hospitals"
         }
     },
     "footer": {
