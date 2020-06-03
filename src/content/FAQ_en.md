@@ -61,7 +61,7 @@ Currently, only the [About part](/en/about) and these FAQ are available, while t
 <details>
   <summary id=are-you-paid>Are you paid for creating the dashboard (charts, tables, models)?</summary>
 
-Not at all. Sledilnik is a non-profit initiative created to support the ongoing compiling and editing of key data on the spread of the coronavirus in Slovenia. Our database is public and freely available, free of charge, and non-commercial, and will remain so. Please check [How can I obtain and use your database?](/en/FAQ/#data-usage)
+Not at all. Sledilnik is a non-profit initiative created to support the ongoing compiling and editing of key data on the spread of the coronavirus in Slovenia. Our database is public and freely available, free of charge, and non-commercial, and will remain so. Please check [How can I obtain and use your database?](/en/faq/#data-usage)
 
 </details>
 
@@ -116,7 +116,7 @@ When we publish updated daily data, it is available on all our distribution chan
 <details>
   <summary id=data-differences>Several portals display numbers of infected people that are different from yours. Why?</summary>
 
-Sledilnik uses only validated and official data reported daily by the National Institute of Public Health (NIJZ) and all Slovenian hospitals treating COVID-19. Our data thus comes directly from verified sources, and we have also cross-compared information from the very beginning (4 March 2020). Differences usually occur because different media and portals obtain the data at different times of the day or use dubious methodology. See also [Are your data and visualizations reliable?](/en/FAQ/#data-reliability) 
+Sledilnik uses only validated and official data reported daily by the National Institute of Public Health (NIJZ) and all Slovenian hospitals treating COVID-19. Our data thus comes directly from verified sources, and we have also cross-compared information from the very beginning (4 March 2020). Differences usually occur because different media and portals obtain the data at different times of the day or use dubious methodology. See also [Are your data and visualizations reliable?](/en/faq/#data-reliability) 
 
 </details>
 
