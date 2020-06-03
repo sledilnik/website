@@ -28,7 +28,7 @@ Načeloma sta oba pravilna. Pri Sledilniku smo najprej uporabljali *ventilator*,
 <details>
   <summary id=confirmed-cases>Kakšna je razlika med izrazom novookužen in potrjeno okužen?</summary>
 
-V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni izraz …?](/faq/#chart-terminology). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
+V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni izraz …?](/sl/faq#chart-terminology). Za druge izraze, kot so novookužen, ki se pojavljajo v medijih, ne pa tudi v naših grafih, lahko pri uporabi pomaga [slovar Fran, različica covid-19](https://fran.si/o-portalu?page=Covid_19_2020). 
 
 </details>
 
@@ -113,7 +113,7 @@ Ko objavimo sveže dnevne podatke, so ti na voljo na vseh naših distribucijskih
 <details>
   <summary id=data-differences>Na drugih portalih so številke obolelih drugačne kot pri vas. Zakaj?</summary>
 
-Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (4. 3. 2020). Razlike v objavljenih podatkih se po navadi pojavijo zato, ker so bili zajeti ob različnih urah dneva. Gl. tudi vprašanje [So vaši podatki in prikazi verodostojni?](/faq/#data-reliability) 
+Sledilnik uporablja zgolj potrjene, uradne podatke, ki jih dnevno sporočajo NIJZ in vse slovenske bolnišnice, ki zdravijo bolezen COVID-19. Naši podatki tako prihajajo neposredno iz preverjenih virov, hkrati pa jih tudi sami navzkrižno primerjamo že od začetka delovanja (4. 3. 2020). Razlike v objavljenih podatkih se po navadi pojavijo zato, ker so bili zajeti ob različnih urah dneva. Gl. tudi vprašanje [So vaši podatki in prikazi verodostojni?](/sl/faq#data-reliability) 
 
 </details>
 
@@ -127,14 +127,14 @@ Bolnišnice o posameznih sprejemih ali odpustih, iz katerih bi lahko pridobili n
 <details>
   <summary id=data-hospital-out>Kako pridobivate podatke o odpuščenih iz bolnišnic?</summary>
 
-Podatek **Odpuščeni iz bolnišnice** je izračunan na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Večinoma za vse bolnišnice dobivamo dnevno število odpuščenih, iz katerega lahko sklepamo o številu novo sprejetih. Glej tudi [Kako pridobivate podatke o sprejetih v bolnišnico?](/faq/#data-hospital-in)
+Podatek **Odpuščeni iz bolnišnice** je izračunan na podlagi podatkov, ki jih dnevno dobivamo neposredno iz bolnišnic, torej iz preverjenega vira. Večinoma za vse bolnišnice dobivamo dnevno število odpuščenih, iz katerega lahko sklepamo o številu novo sprejetih. Glej tudi [Kako pridobivate podatke o sprejetih v bolnišnico?](/sl/faq#data-hospital-in)
 
 </details>
 
 <details>
   <summary id=data-recovered>Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?</summary>
 
-Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/faq/#data-active-cases)) 
+Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/sl/faq#data-active-cases)) 
 
 Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo. ECDC je v svojem [poročilu](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) navedla: *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population...*, zato smo izbrali 14-dnevno obdobje kot povprečno trajanje okužbe, torej čas, ko je potrjeno okuženi aktiven. 
 
@@ -174,7 +174,7 @@ Lahko pa uporabniki prostovoljno pomagate z zbiranjem in preverjanjem podatkov i
 
 Naša baza podatkov je javna in prosto dostopna v obliki [**CSV**, **REST** in **Google Sheet**](/datasources). Prosimo vas le, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
 
-Ker so oznake podatkov tudi v angleščini (gl. vprašanje [Ali obstaja vaša stran tudi v angleščini?](/faq/#english-translation)), je mogoča tudi njihova mednarodna uporaba (izvoz, prikaz).
+Ker so oznake podatkov tudi v angleščini (gl. vprašanje [Ali obstaja vaša stran tudi v angleščini?](/sl/faq#english-translation)), je mogoča tudi njihova mednarodna uporaba (izvoz, prikaz).
 
 </details>
 
@@ -197,7 +197,7 @@ Gre za odstotno stopnjo rasti na današnji dan v številu oseb glede na prejšnj
 <details>
   <summary id=metrics-comparison-chart>Kaj kaže graf "Stanje COVID-19 v Sloveniji"?</summary>
 
-[Graf](/stats#metrics-comparison-chart) prikazuje dnevno in skupno dinamiko širjenja okužbe od začetka do danes. Uporabljeni kazalniki (gl. [Katere kazalnike vključuje graf o stanju?](/faq/#chart-metrics-included)) nam pomagajo razumeti, kako uspešno obvladujemo širjenje virusa. Spremljamo lahko, kakšen je dnevni prirast okuženih, in posredno vidimo, ali ukrepi delujejo; iz podatka o številu hospitaliziranih in deleža teh v intenzivni enoti lahko razberemo, koliko oseb je bolezen resno ogrozila, hkrati pa nam ti podatki kažejo tudi, kolikšna je obremenjenost zdravstvenega sistema.
+[Graf](/stats#metrics-comparison-chart) prikazuje dnevno in skupno dinamiko širjenja okužbe od začetka do danes. Uporabljeni kazalniki (gl. [Katere kazalnike vključuje graf o stanju?](/sl/faq#chart-metrics-included)) nam pomagajo razumeti, kako uspešno obvladujemo širjenje virusa. Spremljamo lahko, kakšen je dnevni prirast okuženih, in posredno vidimo, ali ukrepi delujejo; iz podatka o številu hospitaliziranih in deleža teh v intenzivni enoti lahko razberemo, koliko oseb je bolezen resno ogrozila, hkrati pa nam ti podatki kažejo tudi, kolikšna je obremenjenost zdravstvenega sistema.
 
 Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega primera (4. 3. 2020) do ukrepov (po ključni besedi in datumu), sprejetih za zajezitev širjenja, ter njihovega rahljanja, kar nam pomaga spremljati dinamiko spremenljivk glede na ukrepe.  
 
@@ -218,7 +218,7 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeno okuženi (aktivni)** = Potrjeno okuženi (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
 
-* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih dva tedna pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 14 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](/faq/#data-recovered)
+* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjeno okuženih dva tedna pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 14 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](/sl/faq#data-recovered)
 
 * **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
@@ -250,7 +250,7 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 
 * **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.
 
-* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](/faq/#data-recovered)
+* **preboleli** = To je ocena števila oseb, ki so bile potrjeno okužene in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](/sl/faq#data-recovered)
   
 </details>
 
@@ -261,7 +261,7 @@ Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/stats#cases-chart).
 
 **Zaprti primeri** – seštevek vseh potrjeno okuženih, ki niso več okuženi z virusom, torej števila prebolelih in mrtvih.
 
-**Aktivni primeri** – pomenijo vse potrjene okužbe z virusom, ki so še vedno aktualne (osebe virus še vedno prebolevajo). Gl. tudi [Katere kazalnike vključuje graf o stanju?](/faq/#data-recovered)
+**Aktivni primeri** – pomenijo vse potrjene okužbe z virusom, ki so še vedno aktualne (osebe virus še vedno prebolevajo). Gl. tudi [Katere kazalnike vključuje graf o stanju?](/sl/faq#data-recovered)
 
 </details>
 
@@ -324,7 +324,7 @@ Na grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi z
 
 *Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke in da je to število previsoko.*
 
-Tudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/faq/#test-charts) 
+Tudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste - ista oseba je lahko večkrat testirana in šteta kot pozitivna večkrat. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat) - Gl. tudi [Kaj nam pove graf "Testiranje"?](/sl/faq#test-charts) 
 
 
 </details>
@@ -390,7 +390,7 @@ Ker so občine samodejno razvrščene po preteklem času od zadnjega potrjenega 
 Prikaz lahko spremenimo z izbiro različnih pogledov nad grafom: če izberemo razvrstitev *Aktivni*, bomo občine razvrstili po trenutni oceni aktivnih primerov. Če izberemo *Vsi*, bodo občine razvrščene po največjem *skupnem* številu potrjeno okuženih.   
 Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega spustnega seznama *Vse regije* izberemo določeno regijo in si ogledamo stanje potrjeno okuženih po pripadajočih ji občinah. Občino lahko tudi preprosto poiščemo z vnosom imena v iskalnik *Poišči občino*. 
 
-*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/faq/#data-active-cases)*
+*Opomba: ocena prebolelih in aktivnih temelji na ocenjenem času prebolevanja bolezni COVID-19, ki je 14 dni pri blagi obliki bolezni. Če je posameznik hospitaliziran, bo to prebolevanje najverjetneje trajalo dlje, ampak v tem primeru hospitalizirani posameznik ni nevaren za okolico, ker je v bolnišnici. Zato hospitaliziranih v tem prikazu po občinah ne upoštevamo, se pa zaradi poenostavljenosti ocen z neupoštevanjem hospitaliziranih lahko zgodi, da se seštevek aktivnih po občinah ne bo ujemal z oceno aktivnih za vso državo. Gl. tudi [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](/sl/faq#data-active-cases)*
 
 </details>
 
