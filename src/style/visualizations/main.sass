@@ -48,6 +48,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       padding: 0
 
   .title-brand-wrapper
+    @media only screen and (min-width: 501px) and (max-width: 540px)
+      max-width: 50%
 
     h2
       font-size: 21px
@@ -73,6 +75,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     align-items: center
     margin-left: 16px
+
+    @media only screen and (min-width: 501px) and (max-width: 540px)
+      max-width: 50%
+      justify-content: flex-end
 
   .faq-link-wrapper
     display: inline-block
@@ -112,15 +118,13 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       @media only screen and (max-width: 500px)
         padding: 3px 4.5px
       
-      @media only screen and (min-width: 501px)
-        min-width: 124px
-      
       .share-button-caption
         display: inline-block
         font-size: 14px
         line-height: 24px
         font-weight: bold
         margin-left: 7px
+
         @media only screen and (max-width: 500px)
           display: none
 
@@ -204,6 +208,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       width: 100%
       min-height: 150px
 
+    .btn.btn-sm
+      font-size: 13px
+      padding: 8px 14px
+
   p
     color: $text-c
 
@@ -257,10 +265,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     &:focus
       border: none
       outline: none
-
-  .btn.btn-sm
-    font-size: 13px
-    padding: 8px 14px
 
   .disclaimer
     font-size: 13px
