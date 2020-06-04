@@ -1,1 +1,24 @@
-{}
+{
+    "notice": {
+        "news001": "Новости:"
+    },
+    "timestamp": {
+        "at": "во {{ date, HH.mm }}",
+        "updated": "Освежено на {{ date, D. MMMM YYYY }}"
+    },
+    "navbar": {
+        "language": {
+            "english": "Англиски",
+            "slovenian": "Словенечки"
+        },
+        "github": "GitHub",
+        "links": "Линкови",
+        "sources": "Извори",
+        "team": "Тим",
+        "about": "За проектот",
+        "faq": "FAQ"
+    },
+    "meta": {
+        "title": "CoViD-19 Трекер"
+    }
+}
