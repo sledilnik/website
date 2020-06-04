@@ -2,7 +2,7 @@
 
 *Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, podatke zbiramo in primerjamo iz večih uradnih virov, ki jih navajamo.*
 
-Če smo kak relevanten vir spregledali, [nas, prosimo, obvestite](/team)!
+Če smo kak relevanten vir spregledali, [nas, prosimo, obvestite](/sl/team)!
 
 | Vlada                                                                                                                          | Ostale službe                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |

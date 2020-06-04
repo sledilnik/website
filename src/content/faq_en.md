@@ -213,7 +213,7 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 <details>
   <summary id=chart-metrics-included>Which indicators does the “COVID-19 Situation in Slovenia” graph include?</summary>
 
-[Graf](/stats#metrics-comparison-chart) vključuje:
+[Graf](/en/stats#metrics-comparison-chart) vključuje:
   
 * **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.
 
@@ -309,7 +309,7 @@ The graph can offer a good insight into the workload of hospitals and can be the
 <!-- <details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
-[Graf](/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
+[Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
 
 (*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
 
