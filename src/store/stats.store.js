@@ -100,15 +100,18 @@ export function lastChange(data, field, cumulative, date) {
     }
   }
 
-  if (!result.dayBefore.value) {
+  if (typeof result.dayBefore.value === undefined) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.lastDay.percentDiff =
-      Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
+    result.dayBefore.value === 0
+      ? (result.lastDay.percentDiff = 0)
+      : (result.lastDay.percentDiff =
+          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
+          10)
   }
 
-  if (!result.day2Before.value) {
+  if (typeof result.day2Before.value === undefined) {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
