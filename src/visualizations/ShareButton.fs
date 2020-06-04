@@ -94,6 +94,9 @@ let dropdown (viz: Visualization) =
                                           Html.span [ prop.text (I18N.t "charts.common.webpage") ] ]
                                     prop.onClick (fun _ -> setModal (not modal)) ] ] ]
 
+                              // TODO: add export to PNG
+                              // https://www.highcharts.com/docs/export-module/client-side-export
+
                     Html.div
                         [ prop.className "share-button-wrapper"
                           prop.children

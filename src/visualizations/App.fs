@@ -237,7 +237,7 @@ let render (state: State) (_: Msg -> unit) =
                             prop.href
                                 ("/"
                                  + localStorage.getItem ("i18nextLng")
-                                 + "/FAQ#"
+                                 + "/faq#"
                                  + visualization.ClassName)
                             prop.text "?" ]
                         |> Html.div ] ]
