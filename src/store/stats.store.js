@@ -115,8 +115,11 @@ export function lastChange(data, field, cumulative, date) {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.dayBefore.percentDiff =
-      Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10
+    result.day2Before.value === 0
+      ? (result.dayBefore.percentDiff = 0)
+      : (result.dayBefore.percentDiff =
+          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+          10)
   }
 
   return result
