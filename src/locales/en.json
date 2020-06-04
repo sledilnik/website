@@ -27,6 +27,7 @@
         "news002": "structure of hospitalized for each COVID-19 hospital."
     },
     "infocard": {
+        "tests": "Tests Today",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "recoveredToDate": "Recovered",

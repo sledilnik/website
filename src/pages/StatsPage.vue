@@ -9,8 +9,20 @@
       </b-row>
       <div class="cards-wrapper latest-data-boxes">
         <Info-card
+          :title="$t('infocard.tests')"
+          field="tests.performed.today"
+          good-trend="up"
+          series-type="state"
+        />
+        <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
+          series-type="state"
+        />
+        <Info-card
+          :title="$t('infocard.recoveredToDate')"
+          field="cases.recoveredToDate"
+          good-trend="up"
           series-type="state"
         />
         <Info-card
