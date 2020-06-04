@@ -1,5 +1,8 @@
 {
     "navbar": {
         "home": "Zuhause"
+    },
+    "country": {
+        "SVN": "Slowenien"
     }
 }
