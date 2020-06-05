@@ -292,6 +292,10 @@ export default {
     margin-bottom: 18px;
     font-size: 21px;
     font-weight: bold;
+
+    @include nav-break {
+      display: none;
+    }
   }
 
   .menuOpen & {
