@@ -38,7 +38,10 @@ const mdContent = {
 }
 
 function dynamicProps(route) {
-  let baseRoute = route.path.slice(4).toLowerCase()
+  let baseRoute = route.path
+    .slice(4)
+    .toLowerCase()
+    .replace(/\/$/, '')
   let lang = route.params.lang
 
   return {
