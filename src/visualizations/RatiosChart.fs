@@ -120,8 +120,8 @@ let renderRatiosChart (state : State) =
             | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate 
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
+            | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate
 
         let color, line, name = Ratios.getSeriesInfo ratio
 
@@ -163,7 +163,7 @@ let renderRatiosChart (state : State) =
             yield renderRatiosH ratio
         |]
 
-        tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = @"%A, %e. %B %Y" |}
+        tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = I18N.t "charts.common.dateFormat" |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}

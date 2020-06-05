@@ -136,7 +136,9 @@
             "twitter": "Twitter",
             "webpage": "Webpage",
             "share": "Share",
-            "close": "Close"
+            "close": "Close",
+            "dateFormat": "%A, %B %e, %Y",
+            "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",

@@ -288,7 +288,9 @@
             "twitter": "Twitter",
             "webpage": "Spletno stran",
             "share": "Deli graf na",
-            "close": "Zapri"
+            "close": "Zapri",
+            "dateFormat": "%A, %e. %B %Y",
+            "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v Sloveniji",
