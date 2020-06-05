@@ -16,7 +16,10 @@
         "sources": "Извори",
         "team": "Тим",
         "about": "За проектот",
-        "faq": "FAQ"
+        "faq": "FAQ",
+        "models": "Модели",
+        "tables": "Табела",
+        "home": "Дома"
     },
     "meta": {
         "title": "CoViD-19 Трекер"
