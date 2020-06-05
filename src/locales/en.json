@@ -4,6 +4,7 @@
         "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
     },
     "navbar": {
+        "menu": "Menu",
         "home": "Home",
         "tables": "Table",
         "models": "Models",

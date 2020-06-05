@@ -11,6 +11,7 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
+      <div class="nav-heading">{{ $t("navbar.menu") }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
       <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
@@ -287,9 +288,7 @@ export default {
     }
   }
 
-  &:before {
-    content: 'Meni';
-    display: block;
+  .nav-heading {
     margin-bottom: 18px;
     font-size: 21px;
     font-weight: bold;
