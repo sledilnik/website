@@ -25,17 +25,14 @@
         <span>{{ $t("navbar.github") }}</span>
       </a>
       <div class="router-link">
-        <span>
-          <a :href="'/sl/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="sl"
-             class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'sl' }"
-             @click.prevent="changeLanguage('sl')">SL</a> /
-          <a :href="'/en/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="en"
-             class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'en' }"
-             @click.prevent="changeLanguage('en')">EN</a>
+        <span v-for="(lang, index) in $i18n.i18next.languages" :key="index">
+          <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
+            :hreflang="lang"
+            class="router-link-anchor"
+            :class="{ active: $i18n.i18next.language === lang }"
+            @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
+          <span v-if="index !== Object.keys($i18n.i18next.languages).length - 1"
+                class="divider">/</span>
         </span>
       </div>
     </div>
@@ -485,6 +482,10 @@ export default {
 
     &:hover {
       color: rgb(0, 0, 0);
+    }
+
+    ~ .divider {
+      margin: 0 3.5px;
     }
   }
 }
