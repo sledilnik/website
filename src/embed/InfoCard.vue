@@ -31,9 +31,9 @@ export default {
         field: 'cases.confirmed.todate',
         goodDirection: 'down',
       },
-      'recovered': {
-        title: 'Preboleli',
-        field: 'cases.recovered.todate',
+      'active': {
+        title: 'Aktivni primeri',
+        field: 'cases.active',
         goodDirection: 'up',
       },
       'hospitalized': {
