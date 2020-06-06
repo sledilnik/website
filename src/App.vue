@@ -30,6 +30,8 @@ export default {
       ],
       link: [
         {rel: 'canonical', href: "https://covid-19.sledilnik.org/"+this.$i18n.i18next.language+"/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+        {rel: 'alternate', hreflang: "mk", href: "https://covid-19.sledilnik.org/mk/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+        {rel: 'alternate', hreflang: "sq", href: "https://covid-19.sledilnik.org/sq/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
         {rel: 'alternate', hreflang: "sl", href: "https://covid-19.sledilnik.org/sl/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
         {rel: 'alternate', hreflang: "en", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
         {rel: 'alternate', hreflang: "x-default", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},

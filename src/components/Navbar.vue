@@ -25,6 +25,16 @@
       </a>
       <div class="router-link">
         <span>
+          <a :href="'/mk/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
+             hreflang="mk"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'mk' }"
+             @click.prevent="changeLanguage('mk')">MK</a> /
+          <a :href="'/sq/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
+             hreflang="sq"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === 'sq' }"
+             @click.prevent="changeLanguage('sq')">SQ</a> /
           <a :href="'/sl/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
              hreflang="sl"
              class="router-link-anchor"

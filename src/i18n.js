@@ -3,8 +3,10 @@ import i18next from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import VueI18Next from '@panter/vue-i18next'
 import moment from 'moment'
-import en from './locales/en.json'
+import mk from './locales/mk.json'
+import sq from './locales/sq.json'
 import sl from './locales/sl.json'
+import en from './locales/en.json'
 
 Vue.use(VueI18Next)
 
@@ -27,6 +29,8 @@ i18next.use(LanguageDetector).init({
   fallbackLng: 'sl',
   returnObjects: true,
   resources: {
+    mk: { translation: mk },
+    sq: { translation: sq },
     sl: { translation: sl },
     en: { translation: en },
   },
