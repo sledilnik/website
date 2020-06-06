@@ -164,7 +164,7 @@ const routes = [
         next(path)
         return
       }
-      next({ path: '/sl/stats' })
+      next({ path: '/mk/stats' })
     },
   },
 ]
