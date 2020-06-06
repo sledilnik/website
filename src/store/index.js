@@ -12,9 +12,8 @@ import { tableData } from './tables.store'
 
 Vue.use(Vuex)
 
-export async function exportTime(url) {
-  let x = await axios.get(url)
-  return new Date(x.data * 1000)
+export function exportTime(x) {
+  return new Date(x * 1000)
 }
 
 // loads csv, converts dates to Date objects, string values to numberical

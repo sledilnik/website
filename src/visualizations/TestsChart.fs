@@ -120,16 +120,7 @@ let renderChartOptions (state : State) =
         legend = pojo
             {|
                 enabled = true
-                title = {| text = null |}
-                align = "left"
-                verticalAlign = "top"
-                x = 60
-                y = 30
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                backgroundColor = "#FFF"
+                layout = "horizontal" 
             |}
 
         responsive = pojo
@@ -139,7 +130,6 @@ let renderChartOptions (state : State) =
                         condition = {| maxWidth = 500 |}
                         chartOptions =
                             {|
-                                legend = {| enabled = false |}
                                 yAxis = [|
                                     {| labels = {| enabled = false |} |}
                                     {| labels = {| enabled = false |} |}

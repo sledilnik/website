@@ -1,4 +1,8 @@
 {
+    "meta": {
+        "title": "COVID-19 Tracking",
+        "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
+    },
     "navbar": {
         "home": "Home",
         "tables": "Table",
@@ -47,6 +51,8 @@
         "preview": "Preview:",
         "embedCode": "Embed code:",
         "description": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "descriptionPart1": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, ",
+        "descriptionPart2": "check here.",
         "copy": "Copy",
         "copied": "Copied!"
     },
@@ -124,7 +130,12 @@
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:"
+            "xAxis": "X axis:",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Webpage",
+            "share": "Share",
+            "close": "Close"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
@@ -308,6 +319,24 @@
             "groupCriticalWorld": "Critical countries (World)",
             "groupCriticalEU": "Critical countries (EU)",
             "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
+        },
+        "hospitals": {
+            "bedsShort": "Beds",
+            "beds": "Hospital beds",
+            "allHospitals": "All hospitals",
+            "data": "Data",
+            "max": "Max",
+            "all": "All",
+            "full": "Full",
+            "empty": "Empty",
+            "bedsICUFull": "ICU beds, full",
+            "bedsICU70": "ICU beds, 70%",
+            "bedsICUAll": "ICU beds, all",
+            "bedsFull": "Beds, full",
+            "beds70": "Beds, 70%",
+            "bedsAll": "Beds, all",
+            "bedsMax": "Beds, maximum",
+            "bedsICUShort": "ICU beds"
         }
     },
     "footer": {

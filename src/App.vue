@@ -10,63 +10,82 @@
 
 <script>
 import moment from 'moment'
-import Navbar from "./components/Navbar.vue";
-import Footer from "./components/Footer.vue";
+import Navbar from './components/Navbar.vue'
+import Footer from './components/Footer.vue'
 
 export default {
-  name: "app",
+  name: 'app',
+  metaInfo() {
+    return {
+      htmlAttrs: {
+        lang: this.$i18n.i18next.language,
+      },
+      title: this.$t('meta.title'),
+      meta: [
+        { name: 'description', content: this.$t('meta.description') },
+        { name: 'twitter:title', content: this.$t('meta.title') },
+        { name: 'twitter:description', content: this.$t('meta.description') },
+        { property: 'og:title', content: this.$t('meta.title') },
+        { property: 'og:description', content: this.$t('meta.description') },
+      ],
+      link: [
+        {rel: 'canonical', href: "https://covid-19.sledilnik.org/"+this.$i18n.i18next.language+"/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+        {rel: 'alternate', hreflang: "sl", href: "https://covid-19.sledilnik.org/sl/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+        {rel: 'alternate', hreflang: "en", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+        {rel: 'alternate', hreflang: "x-default", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
+      ],
+    }
+  },
   props: {
     embed: {
       default: false,
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   created() {
     this.$store.dispatch("stats/fetchData");
     this.$store.dispatch("hospitals/fetchData");
     this.$store.dispatch("patients/fetchData");
-    // this.$store.dispatch("municipalities/fetchData");
-    // this.$store.dispatch("healthCenters/fetchData");
   },
   mounted() {
     this.$store.dispatch("stats/refreshDataEvery", 300);
     this.$store.dispatch("hospitals/refreshDataEvery", 300);
     this.$store.dispatch("patients/refreshDataEvery", 300);
-    // this.$store.dispatch("municipalities/refreshDataEvery", 300);
-    // this.$store.dispatch("healthCenters/refreshDataEvery", 300);
+    
     moment.locale(this.$i18n.i18next.language)
+
     if (this.$route.hash) {
       const checker = setInterval(() => {
-        const elm = document.querySelector(this.$route.hash);
+        const elm = document.querySelector(this.$route.hash)
         if (elm) {
           // element found on page
-          clearInterval(checker);
+          clearInterval(checker)
 
-          let offset = -60;
+          let offset = -60
           // special case for charts
           if (
-            elm.tagName === "SECTION" &&
-            this.$route.hash.endsWith("-chart")
+            elm.tagName === 'SECTION' &&
+            this.$route.hash.endsWith('-chart')
           ) {
-            offset = -90;
+            offset = -90
           }
 
           this.$scrollTo(document.querySelector(this.$route.hash), 500, {
-            offset: offset
-          });
+            offset: offset,
+          })
         }
-      }, 100);
+      }, 100)
 
       setTimeout(() => {
-        clearInterval(checker);
-      }, 5000);
+        clearInterval(checker)
+      }, 5000)
     }
-  }
-};
+  },
+}
 </script>
 
 <style lang="scss">

@@ -3,7 +3,7 @@ import { exportTime } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 
-export function lastChange(data, field, cumulative) {
+export function lastChange(data, field, cumulative, date) {
   const result = {
     lastDay: {
       date: new Date(),
@@ -25,7 +25,17 @@ export function lastChange(data, field, cumulative) {
     },
   }
 
-  let i = data.length - 1
+  let index = data.findIndex((obj) => {
+    return (
+      date ===
+      `${obj.year}-${obj.month
+        .toString()
+        .padStart(2, '0')}-${obj.day.toString().padStart(2, '0')}`
+    )
+  })
+
+  let i
+  index === -1 ? (i = data.length - 1) : (i = index)
 
   // console.log('lastDay found in row', i, data[i])
 
@@ -90,20 +100,26 @@ export function lastChange(data, field, cumulative) {
     }
   }
 
-  if (!result.dayBefore.value) {
+  if (typeof result.dayBefore.value === undefined) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.lastDay.percentDiff =
-      Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
+    result.dayBefore.value === 0
+      ? (result.lastDay.percentDiff = 0)
+      : (result.lastDay.percentDiff =
+          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
+          10)
   }
 
-  if (!result.day2Before.value) {
+  if (typeof result.day2Before.value === undefined) {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.dayBefore.percentDiff =
-      Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) / 10
+    result.day2Before.value === 0
+      ? (result.dayBefore.percentDiff = 0)
+      : (result.dayBefore.percentDiff =
+          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+          10)
   }
 
   return result
@@ -129,12 +145,18 @@ const getters = {
     if (!date) {
       return {}
     }
-    let searchResult = getters.data.find((day) => {
+    let searchResult = getters.data.find((obj) => {
       return (
-        new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
+        date ===
+        `${obj.year}-${obj.month
+          .toString()
+          .padStart(2, '0')}-${obj.day.toString().padStart(2, '0')}`
       )
     })
-    return { date, value: searchResult ? searchResult[field] : null }
+    return {
+      date,
+      value: searchResult ? _.get(searchResult, field) : null,
+    }
   },
 
   getLastValue: (state, getters) => (field) => {
@@ -152,23 +174,17 @@ const getters = {
     }
   },
 
-  lastChange: (state, getters) => (field, cumulative) => {
-    return lastChange(getters.data, field, cumulative)
+  lastChange: (state, getters) => (field, cumulative, date) => {
+    return lastChange(getters.data, field, cumulative, date)
   },
 }
 
 const actions = {
   fetchData: async ({ commit }) => {
-    const ts = new Date().getTime()
+    const data = await ApiService.get('https://api.sledilnik.org/api/stats')
+    const d = exportTime(data.headers.timestamp)
 
-    const d = await exportTime(
-      `https://raw.githubusercontent.com/sledilnik/data/master/csv/stats.csv.timestamp?nocache=${ts}`
-    )
-    const data = await ApiService.get('https://api.sledilnik.org/api/stats').then((result) => {
-      return result.data
-    })
-
-    commit('setData', data)
+    commit('setData', data.data)
     commit('setRegions', regions)
     commit('setExportTime', d)
   },
