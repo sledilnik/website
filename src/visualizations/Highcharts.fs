@@ -282,4 +282,5 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |}
             |}
         credits = pojo {| enabled = false |}
+        navigator = pojo {| enabled = true |}
     |}

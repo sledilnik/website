@@ -273,7 +273,8 @@ function renderChartFromWindow(options) {
   options = wrapLabelFormatterWithThis(options);
   setHighchartsOptions(window.Highcharts);
   return React.createElement(HighchartsReact, {
-    containerProps: {style: {height:"100%"}},
+    // highcharts: Highcharts, // this needs to be uncommented for i18n
+    containerProps: { style: { height: "100%"}},
     options: {...options},
   }, null);
 }
