@@ -30,7 +30,7 @@
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
-          good-trend="up"
+          good-trend="down"
           series-type="state"
         />
         <Info-card
