@@ -272,11 +272,17 @@ function renderChart(options) {
 function renderChartFromWindow(options) {
   options = wrapLabelFormatterWithThis(options);
   setHighchartsOptions(window.Highcharts);
-  return React.createElement(HighchartsReact, {
-    // highcharts: Highcharts, // this needs to be uncommented for i18n
-    containerProps: { style: { height: "100%"}},
-    options: {...options},
-  }, null);
+  return React.createElement(
+    HighchartsReact,
+    {
+      highcharts: Highcharts,
+      // the line above needs to be uncommented for i18n and navigator to work
+      // but it breaks the mobile view: https://github.com/sledilnik/website/commit/944ec70e47e48ed7aa2ed31f3e4578f2143f7a77
+      containerProps: { style: { height: '100%' } },
+      options: { ...options },
+    },
+    null
+  )
 }
 
 function renderMap(options) {

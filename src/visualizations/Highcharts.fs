@@ -243,15 +243,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
+
+        navigator = pojo {| enabled = false |}
+
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 legend = {| enabled = false |}
                                 yAxis = [| {| labels = {| enabled = false |} |} |]
+                                navigator = pojo {| enabled = true |}
                             |}
                     |} |]
             |}
@@ -282,5 +286,4 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |}
             |}
         credits = pojo {| enabled = false |}
-        navigator = pojo {| enabled = true |}
     |}

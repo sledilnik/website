@@ -120,14 +120,14 @@ let renderChartOptions (state : State) =
         legend = pojo
             {|
                 enabled = true
-                layout = "horizontal" 
+                layout = "horizontal"
             |}
 
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 yAxis = [|
