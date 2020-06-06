@@ -23,7 +23,7 @@ Our goal is to help understand the spread of the virus and to help raise awarene
   <summary id=confirmed-cases>What is the difference between ‘new cases’ and ‘confirmed cases’?
 </summary>
 
-Terminology in use on Sledilnik is explained under [What does it mean](/en/FAQ/#chart-terminology). According to the WHO definition, a *confirmed case* is a person with laboratory confirmation of COVID-19 infection, irrespective of clinical signs and symptoms. Other terms, such as newly infected, may appear in the media but are not used in our graphs. All terms used by Sledilnik are explained in these FAQ. 
+Terminology in use on Sledilnik is explained under [What does it mean](#chart-terminology). According to the WHO definition, a *confirmed case* is a person with laboratory confirmation of COVID-19 infection, irrespective of clinical signs and symptoms. Other terms, such as newly infected, may appear in the media but are not used in our graphs. All terms used by Sledilnik are explained in these FAQ. 
 
 </details>
 
@@ -61,7 +61,7 @@ Currently, only the [About part](/en/about) and these FAQ are available, while t
 <details>
   <summary id=are-you-paid>Are you paid for creating the dashboard (charts, tables, models)?</summary>
 
-Not at all. Sledilnik is a non-profit initiative created to support the ongoing compiling and editing of key data on the spread of the coronavirus in Slovenia. Our database is public and freely available, free of charge, and non-commercial, and will remain so. Please check [How can I obtain and use your database?](/en/FAQ/#data-usage)
+Not at all. Sledilnik is a non-profit initiative created to support the ongoing compiling and editing of key data on the spread of the coronavirus in Slovenia. Our database is public and freely available, free of charge, and non-commercial, and will remain so. Please check [How can I obtain and use your database?](#data-usage)
 
 </details>
 
@@ -116,7 +116,7 @@ When we publish updated daily data, it is available on all our distribution chan
 <details>
   <summary id=data-differences>Several portals display numbers of infected people that are different from yours. Why?</summary>
 
-Sledilnik uses only validated and official data reported daily by the National Institute of Public Health (NIJZ) and all Slovenian hospitals treating COVID-19. Our data thus comes directly from verified sources, and we have also cross-compared information from the very beginning (4 March 2020). Differences usually occur because different media and portals obtain the data at different times of the day or use dubious methodology. See also [Are your data and visualizations reliable?](/en/FAQ/#data-reliability) 
+Sledilnik uses only validated and official data reported daily by the National Institute of Public Health (NIJZ) and all Slovenian hospitals treating COVID-19. Our data thus comes directly from verified sources, and we have also cross-compared information from the very beginning (4 March 2020). Differences usually occur because different media and portals obtain the data at different times of the day or use dubious methodology. See also [Are your data and visualizations reliable?](#data-reliability) 
 
 </details>
 
@@ -130,14 +130,14 @@ Hospitals do not always report individual admissions or discharges from which we
 <details>
   <summary id=data-hospital-out>How do you obtain data on hospital discharges?</summary>
 
-The information on the discharged from hospitals is calculated from data daily obtained directly from hospitals, i.e. from a verified source. We mostly get the daily number of discharges for all hospitals, from which we can deduce the number of newly admitted. See also [How do you obtain data on hospital admissions?](/en/FAQ/#data-hospital-in)
+The information on the discharged from hospitals is calculated from data daily obtained directly from hospitals, i.e. from a verified source. We mostly get the daily number of discharges for all hospitals, from which we can deduce the number of newly admitted. See also [How do you obtain data on hospital admissions?](#data-hospital-in)
 
 </details>
 
 <details>
   <summary id=data-recovered>Why did you replace the number of *cured* with the number of *recovered* patients?</summary>
 
-Sledilnik used to rely on official sources (Government of the Republic of Slovenia, media) for the number of cured people. Unfortunately, reports on when a person is totally cured from Covid-19 are scarce – for now, we only have few confirmed reports of "cured patients", and there is, as of yet, still no official definition of when a particular person is cured. A [COVID-19 national survey](https://covid19.biolab.si/) is currently underway at the *Institute of Microbiology and Immunology*, which will also, through voluntary sample testing, show how many people have already fallen ill and recovered from COVID-19. As it is not yet known what the potential consequences of COVID-19 could be (various studies are addressing this question and the results will not be known for a long time), and because health institutions are also talking about recovered rather than cured patients, we are thus changing both the terminology and the method of calculating the number of recoveries. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](/en/FAQ/#data-active-cases)) 
+Sledilnik used to rely on official sources (Government of the Republic of Slovenia, media) for the number of cured people. Unfortunately, reports on when a person is totally cured from Covid-19 are scarce – for now, we only have few confirmed reports of "cured patients", and there is, as of yet, still no official definition of when a particular person is cured. A [COVID-19 national survey](https://covid19.biolab.si/) is currently underway at the *Institute of Microbiology and Immunology*, which will also, through voluntary sample testing, show how many people have already fallen ill and recovered from COVID-19. As it is not yet known what the potential consequences of COVID-19 could be (various studies are addressing this question and the results will not be known for a long time), and because health institutions are also talking about recovered rather than cured patients, we are thus changing both the terminology and the method of calculating the number of recoveries. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](#data-active-cases)) 
 
 On April 14, the Department of Health released [Priporočila za zaključek izolacije in vrnitev na delovno mesto (Recommendations for Discontinuing Isolation and Returning to Work)](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) from which we can deduce when a person has recovered from the disease and can return to work. For people with symptoms, this is 14 days after the symptoms have subsided, and for healthcare professionals, a control swab is required after 14 days, which must be negative 2x in a row. The Government of the Republic of Slovenia regularly reports on discharges from the hospital, but we do not know if they have already recovered from the disease. The published recommendations indicate that these patients require two consecutive negative control swabs after discharge to home care in order to be considered able to return to work. [In its report](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) the ECDC stated that *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population...* – so we chose the 14-day period as the time when the average confirmed case can still be counted as an *active case*. 
 
@@ -177,9 +177,9 @@ Sledilnik does not collect users’ personal information nor information that in
 <details>
   <summary id=data-usage>How can I obtain and use your database?</summary>
 
-Our database is public and freely available in the form of  [**CSV**, **REST**, and **Google Sheet**](/datasources). Kindly let us know the purpose for which you will use the information and make sure you include Sledilnik as the source of your data.
+Our database is public and freely available in the form of  [**CSV**, **REST**, and **Google Sheet**](/en/datasources). Kindly let us know the purpose for which you will use the information and make sure you include Sledilnik as the source of your data.
 
-Since all the data in the database is already marked with English tags (see also [Is your webpage available in English?](/FAQ/#english-translation)), their international use (export, display) is also possible.
+Since all the data in the database is already marked with English tags (see also [Is your webpage available in English?](#english-translation)), their international use (export, display) is also possible.
 
 </details>
 
@@ -204,7 +204,7 @@ This is a percentage growth rate on a particular date in the number of newly con
   <summary id=metrics-comparison-chart>What does the “COVID-19 Situation in Slovenia” graph mean?
 </summary>
 
-The [graph](/en/stats#metrics-comparison-chart) shows the daily and overall dynamics of the spread of the infection from the beginning to the present. The indicators used (see [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](/en/FAQ/#chart-metrics-included)) help us understand whether and how successfully we are controlling the spread of the virus. We can monitor the daily growth rate of newly confirmed cases and indirectly see if the measures work; information on the number of hospitalizations and the proportion of those in ICU shows how many people are seriously at risk from the disease, but at the same time, this data also shows us the real burden on the health system.
+The [graph](/en/stats#metrics-comparison-chart) shows the daily and overall dynamics of the spread of the infection from the beginning to the present. The indicators used (see [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)) help us understand whether and how successfully we are controlling the spread of the virus. We can monitor the daily growth rate of newly confirmed cases and indirectly see if the measures work; information on the number of hospitalizations and the proportion of those in ICU shows how many people are seriously at risk from the disease, but at the same time, this data also shows us the real burden on the health system.
 
 The breakpoints are indicated below, on the timeline: from the first confirmed case (March 4, 2020) to the measures (by keyword and date) taken to curb the spread and their relaxation. This helps us monitor the dynamics of the variables relative to the measures.
 
@@ -213,7 +213,7 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 <details>
   <summary id=chart-metrics-included>Which indicators does the “COVID-19 Situation in Slovenia” graph include?</summary>
 
-[Graf](/stats#metrics-comparison-chart) vključuje:
+[Graf](/en/stats#metrics-comparison-chart) vključuje:
   
 * **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.
 
@@ -225,7 +225,7 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 
 * **Confirmed cases (active)** = Confirmed cases (total) – Recovered (total) – Died (total)
 
-* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](/en/FAQ/#data-recovered)
+* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
 
 * **Hospitalized (active)** = Current number of people in hospital care (either in the ordinary ward or in the ICU).
 
@@ -258,7 +258,7 @@ Sledilnik uses terminology which is consistent with the official directives of t
 
 * **On ventilator** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe. It is a subset of the *Intensive Care* and *Hospitalized* categories.
 
-* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](/en/FAQ/#data-recovered)
+* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
   
 </details>
 
@@ -270,7 +270,7 @@ All confirmed cases are shown in the [Confirmed Cases graph](/en/stats#cases-cha
 **Closed cases**  are the sum of all confirmed cases who are no longer infected with the virus, that is, the recovered and the deceased.
 
 **Active cases** are all confirmed virus infections that still haven’t recovered (are still infected with the virus). See also
- [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](/en/FAQ/#chart-metrics-included)
+ [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)
 
 </details>
 
@@ -309,7 +309,7 @@ The graph can offer a good insight into the workload of hospitals and can be the
 <!-- <details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
-[Graf](/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
+[Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
 
 (*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
 
@@ -331,7 +331,7 @@ The graph thus shows the number of all emergency medical visits (also for other 
 *Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals. 
 Note 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*
 
-When reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](/en/FAQ/#test-charts) 
+When reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#test-charts) 
 
 </details>
 
@@ -384,7 +384,7 @@ The [chart](/en/stats#municipalities-chart) shows individual municipalities in c
 
 The display can be changed by selecting different views above the graph: if you select the *Active* display, the municipalities will be sorted according to the current assessment of active cases; or if you select *All*, then the municipalities will be arranged by the largest total number of confirmed cases. If you choose *All Regions* from the dropdown menu, then confirmed cases will be shown in the municipalities belonging to that region. You can also easily search for a municipality by entering its name in the *Find Municipality* browser.
 
-*Note: the assessment of recoveries and active cases is done 14 days after the infection was confirmed, if and when the disease is in its mild form. However, if an individual is hospitalized, this recovery will last longer, but in this case the individual is not dangerous to the environment because he is in hospital. Since we do not take into account the hospitalized in the municipality presentation, it is possible that the sum of active cases by municipality does not match the estimate of the active cases for the whole country. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](/en/FAQ/#data-active-cases)*
+*Note: the assessment of recoveries and active cases is done 14 days after the infection was confirmed, if and when the disease is in its mild form. However, if an individual is hospitalized, this recovery will last longer, but in this case the individual is not dangerous to the environment because he is in hospital. Since we do not take into account the hospitalized in the municipality presentation, it is possible that the sum of active cases by municipality does not match the estimate of the active cases for the whole country. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](#data-active-cases)*
 
 </details>
 

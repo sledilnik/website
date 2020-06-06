@@ -13,8 +13,8 @@ import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
 import * as linksMd from './content/links.md'
 import * as linksMdEn from './content/links_en.md'
-import * as contentMd from './content/FAQ.md'
-import * as contentMdEn from './content/FAQ_en.md'
+import * as contentMd from './content/faq.md'
+import * as contentMdEn from './content/faq_en.md'
 import * as teamMd from './content/team.md'
 import * as teamMdEn from './content/team_en.md'
 import * as sourcesMd from './content/sources.md'
@@ -28,7 +28,7 @@ Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
-  FAQ: { sl: contentMd, en: contentMdEn },
+  faq: { sl: contentMd, en: contentMdEn },
   about: { sl: aboutMd, en: aboutMdEn },
   team: { sl: teamMd, en: teamMdEn },
   links: { sl: linksMd, en: linksMdEn },
@@ -38,7 +38,10 @@ const mdContent = {
 }
 
 function dynamicProps(route) {
-  let baseRoute = route.path.slice(4)
+  let baseRoute = route.path
+    .slice(4)
+    .toLowerCase()
+    .replace(/\/$/, '')
   let lang = route.params.lang
 
   return {
@@ -103,7 +106,6 @@ const routes = [
     redirect: `/${i18next.language}/data`,
   },
   {
-    // TODO: this doesn't work
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
   },
@@ -131,7 +133,7 @@ const routes = [
     },
     children: [
       {
-        path:'/',
+        path: '/',
         redirect: 'stats',
       },
       {

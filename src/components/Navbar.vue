@@ -14,7 +14,7 @@
       <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
       <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
-      <router-link to="FAQ" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
+      <router-link to="faq" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
@@ -25,12 +25,12 @@
       </a>
       <div class="router-link">
         <span>
-          <a :href="'/sl/'+$route.path.slice(4)"
+          <a :href="'/sl/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
              hreflang="sl"
              class="router-link-anchor"
              :class="{ active: $i18n.i18next.language === 'sl' }"
              @click.prevent="changeLanguage('sl')">SL</a> /
-          <a :href="'/en/'+$route.path.slice(4)"
+          <a :href="'/en/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
              hreflang="en"
              class="router-link-anchor"
              :class="{ active: $i18n.i18next.language === 'en' }"
