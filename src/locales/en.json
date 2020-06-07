@@ -338,7 +338,14 @@
             "beds70": "Beds, 70%",
             "bedsAll": "Beds, all",
             "bedsMax": "Beds, maximum",
-            "bedsICUShort": "ICU beds"
+            "bedsICUShort": "ICU beds",
+            "ventilators": "Respirators",
+            "bedsICU": "ICU Beds",
+            "projection21": "Projection, 21-day doubling",
+            "projection14": "Projection, 14-day doubling",
+            "projection7": "Projection, 7-day doubling",
+            "projection": "Projection",
+            "title": "Hospital capacities"
         }
     },
     "footer": {
