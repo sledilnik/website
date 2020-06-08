@@ -26,7 +26,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
     { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
+      CountriesCodes = [| "BIH"; "HRV"; "SVN"; "MNE"; "RKS"; "SRB" |]
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
@@ -54,7 +54,7 @@ let init: ChartState * Cmd<Msg> =
 
 let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
     let getCountriesCodes selectedSet =
-        "SVN" ::
+        "MKD" ::
         (selectedSet.CountriesCodes |> Array.toList)
 
     match msg with
