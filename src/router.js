@@ -67,10 +67,6 @@ function mdContentRoutes() {
 
 const routes = [
   {
-    path: '/',
-    redirect: `/${i18next.language}/stats`,
-  },
-  {
     path: '/stats',
     redirect: `/${i18next.language}/stats`,
   },
@@ -119,12 +115,18 @@ const routes = [
     redirect: `/${i18next.language}/datasources`,
   },
   {
+    path: '/',
+    beforeEnter: (to, from, next) => {
+      next(i18next.language)
+    },
+  },
+  {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
       const supportedLanguages = ['sl', 'en']
       if (!supportedLanguages.includes(language)) {
-        return next(`${i18next.language}/stats`)
+        return next(`${i18next.language}/404`)
       }
       if (i18next.language !== language) {
         i18next.changeLanguage(language)
@@ -138,7 +140,7 @@ const routes = [
     },
     children: [
       {
-        path: '/',
+        path: '',
         redirect: 'stats',
       },
       {
@@ -158,6 +160,10 @@ const routes = [
         component: EmbedMakerPage,
       },
       ...mdContentRoutes(),
+      {
+        path: '*',
+        component: PageNotFound,
+      },
     ],
   },
   {
