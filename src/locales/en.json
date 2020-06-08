@@ -552,5 +552,10 @@
         "BEL": "Belgium",
         "AUT": "Austria",
         "AUS": "Australia"
+    },
+    "page-not-found": {
+        "not_found": "404: Page not found",
+        "something_went_wrong": "oops...something went wrong",
+        "back": "Back"
     }
 }
