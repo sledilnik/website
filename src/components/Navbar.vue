@@ -25,13 +25,13 @@
         <span>{{ $t("navbar.github") }}</span>
       </a>
       <div class="router-link">
-        <span v-for="(lang, index) in $i18n.i18next.languages" :key="index">
+        <span v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
-            :hreflang="lang"
-            class="router-link-anchor"
-            :class="{ active: $i18n.i18next.language === lang }"
-            @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
-          <span v-if="index !== Object.keys($i18n.i18next.languages).length - 1"
+             :hreflang="lang"
+             class="router-link-anchor"
+             :class="{ active: $i18n.i18next.language === lang }"
+             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
+          <span v-if="index !== languages.length - 1"
                 class="divider">/</span>
         </span>
       </div>
@@ -52,6 +52,7 @@ export default {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
+      languages: this.$i18n.i18next.languages
     };
   },
   created() {
@@ -77,6 +78,7 @@ export default {
       }, 650);
     },
     changeLanguage(lang) {
+      if (this.$route.params.lang === lang) return
       this.$i18n.i18next.changeLanguage(lang, (err, t) => {
         if (err) return console.log('something went wrong loading', err);
         this.$router.push({ name: this.$route.name, params: { lang } });

@@ -126,12 +126,17 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
+            "from": "From",
+            "to": "To",
+            "zoom": "Zoom",
+            "resetZoom": "Reset zoom",
+            "resetZoomTitle": "Reset zoom level 1:1",
+            "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:",
             "facebook": "Facebook",
             "twitter": "Twitter",
             "webpage": "Webpage",

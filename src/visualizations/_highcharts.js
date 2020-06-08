@@ -14,10 +14,6 @@ import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");
 
 import i18n from "../i18n"
-import i18next from "i18next"
-import moment from 'moment'
-
-moment.locale(i18next.language)
 
 window.Highcharts = window.Highcharts || Highcharts;
 
@@ -29,15 +25,15 @@ function setHighchartsOptions (highcharts) {
             useUTC: false
         },
         lang: {
-            loading: 'Nalagam...',
+            loading: i18n.t("charts.common.loading"),
             months: i18n.t("month"),
             shortMonths: i18n.t("shortMonth"),
             weekdays: i18n.t("weekday"),
-            rangeSelectorFrom: "Od",
-            rangeSelectorTo: "do",
-            rangeSelectorZoom: "Obdobje",
-            resetZoom: "Ponastavi skalo",
-            resetZoomTitle: "Prikaži celotno časovno obdobje",
+            rangeSelectorFrom: i18n.t("charts.common.from"),
+            rangeSelectorTo: i18n.t("charts.common.to"),
+            rangeSelectorZoom: i18n.t("charts.common.zoom"),
+            resetZoom: i18n.t("charts.common.resetZoom"),
+            resetZoomTitle: i18n.t("charts.common.resetZoomTitle"),
             thousandsSep: ".",
             decimalPoint: ','
         }
@@ -276,7 +272,7 @@ function renderChartFromWindow(options) {
     HighchartsReact,
     {
       highcharts: Highcharts,
-      // the line above needs to be uncommented for i18n and navigator to work
+      // TODO: the line above needs to be uncommented for i18n and navigator to work
       // but it breaks the mobile view: https://github.com/sledilnik/website/commit/944ec70e47e48ed7aa2ed31f3e4578f2143f7a77
       containerProps: { style: { height: '100%' } },
       options: { ...options },

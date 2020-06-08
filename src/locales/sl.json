@@ -278,6 +278,11 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
+            "from": "Od",
+            "to": "Do",
+            "zoom": "Obdobje",
+            "resetZoom": "Ponastavi skalo",
+            "resetZoomTitle": "Prikaži celotno časovno obdobje",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",

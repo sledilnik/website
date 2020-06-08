@@ -214,7 +214,11 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     yield! shadedWeekendPlotBands
                 |]
                 // https://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats
-                dateTimeLabelFormats = pojo {| day = I18N.t "charts.common.shortDateFormat" |}
+                dateTimeLabelFormats = pojo
+                    {|
+                        week = I18N.t "charts.common.shortDateFormat"
+                        day = I18N.t "charts.common.shortDateFormat"
+                    |}
             |}
         |]
         yAxis = [|
@@ -245,6 +249,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             |}
 
         navigator = pojo {| enabled = false |}
+
+        rangeSelector = pojo {| enabled = true |}
 
         responsive = pojo
             {|
@@ -279,10 +285,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         // but here we force to always format dates without any time
                         // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
                         // - https://devhints.io/datetime
+                        week = I18N.t "charts.common.dateFormat"
                         day = I18N.t "charts.common.dateFormat"
-                        hour = I18N.t "charts.common.dateFormat"
-                        minute = I18N.t "charts.common.dateFormat"
-                        second = I18N.t "charts.common.dateFormat"
                     |}
             |}
         credits = pojo {| enabled = false |}
