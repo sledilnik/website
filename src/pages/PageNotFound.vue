@@ -30,7 +30,6 @@ export default {
   max-width: 1170px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
