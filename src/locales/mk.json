@@ -37,13 +37,44 @@
     },
     "cm": {
         "publicTransport": {
-            "title": "Превоз"
+            "title": "Превоз",
+            "description": "Укинување на јавен превоз"
         },
         "epidemic": {
             "title": "Епидемија"
         },
         "borders": {
             "title": "Граници"
+        },
+        "liftSchools4to5": {
+            "title": "Училишта"
+        },
+        "liftSchools1to3": {
+            "title": "Детски градинки"
+        },
+        "liftPublicTransport": {
+            "title": "Превози"
+        },
+        "liftFoodMarkets": {
+            "title": "Пазари"
+        },
+        "liftMunicipality": {
+            "title": "Општини"
+        },
+        "liftMuseums": {
+            "title": "Музеи"
+        },
+        "liftVacationHomes": {
+            "title": "Викендици"
+        },
+        "municipality": {
+            "title": "Општини"
+        },
+        "gatherings": {
+            "description": "Забрана на јавни собири"
+        },
+        "schools": {
+            "title": "Училишта"
         }
     },
     "country": {
@@ -129,5 +160,46 @@
         "tabByAgeFemale": "По возраст - Женски",
         "tabByAgeMale": "По возраст - Машки",
         "title": "Табела"
+    },
+    "charts": {
+        "metricsComparison": {
+            "hospitalized": "Хоспитализирани",
+            "recovered": "Оздравени (вкупно)",
+            "active": "Активни случаи",
+            "confirmedToDate": "Позитивни случаи (вкупно)",
+            "confirmed": "Позитивни случаи (дневно)",
+            "testsToDate": "Тестови (вкупно)",
+            "tests": "Тестови (дневно)"
+        },
+        "common": {
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "ЧПП",
+            "yAxis": "Y-оска:",
+            "xAxis": "Х-оска:"
+        }
+    },
+    "phase": {
+        "7": {
+            "title": "Фаза 7"
+        },
+        "6": {
+            "title": "Фаза 6"
+        },
+        "5": {
+            "title": "Фаза 5"
+        },
+        "4": {
+            "title": "Фаза 4"
+        },
+        "3": {
+            "title": "Фаза 3"
+        },
+        "2": {
+            "title": "Фаза 2"
+        },
+        "1": {
+            "title": "Фаза 1"
+        }
     }
 }
