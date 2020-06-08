@@ -248,12 +248,35 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 //backgroundColor = None :> string option
             |}
 
-        navigator = pojo {| enabled = false |}
-
         rangeSelector = pojo
             {|
-                allButtonsEnabled = true
                 enabled = true
+                allButtonsEnabled = true
+                selected = 1
+                inputDateFormat = I18N.t "charts.common.longDateFormat"
+                buttons =
+                    [|
+                        {|
+                            ``type`` = "month"
+                            count = 1
+                            text = I18N.t "charts.common.1m"
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.t "charts.common.2m"
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 3
+                            text = I18N.t "charts.common.3m"
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = -1
+                            text = I18N.t "charts.common.all"
+                        |}
+                    |]
             |}
 
         responsive = pojo
@@ -265,7 +288,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                             {|
                                 legend = {| enabled = false |}
                                 yAxis = [| {| labels = {| enabled = false |} |} |]
-                                navigator = pojo {| enabled = true |}
                             |}
                     |} |]
             |}
