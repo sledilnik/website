@@ -555,5 +555,10 @@
         "region_ce_todate": "Savinjska",
         "region_za_todate": "Zasavska",
         "region_todate": "Skupno"
+    },
+    "page-not-found": {
+        "not_found": "404: Stran ne obstaja",
+        "something_went_wrong": "ups...nekaj se je zalomilo",
+        "back": "Nazaj"
     }
 }

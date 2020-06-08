@@ -8,6 +8,7 @@ import StatsPage from './pages/StatsPage.vue'
 import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
+import PageNotFound from './pages/PageNotFound.vue'
 
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
@@ -65,6 +66,10 @@ function mdContentRoutes() {
 }
 
 const routes = [
+  {
+    path: '/',
+    redirect: `/${i18next.language}/stats`,
+  },
   {
     path: '/stats',
     redirect: `/${i18next.language}/stats`,
@@ -164,8 +169,9 @@ const routes = [
         next(path)
         return
       }
-      next({ path: '/sl/stats' })
+      next()
     },
+    component: PageNotFound,
   },
 ]
 
