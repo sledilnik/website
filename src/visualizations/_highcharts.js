@@ -34,8 +34,8 @@ function setHighchartsOptions (highcharts) {
             rangeSelectorZoom: i18n.t("charts.common.zoom"),
             resetZoom: i18n.t("charts.common.resetZoom"),
             resetZoomTitle: i18n.t("charts.common.resetZoomTitle"),
-            thousandsSep: ".",
-            decimalPoint: ','
+            thousandsSep: i18n.t("charts.common.thousandsSep"),
+            decimalPoint: i18n.t("charts.common.decimalPoint"),
         }
     });
 };

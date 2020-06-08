@@ -135,6 +135,8 @@
             "2m": "2m",
             "3m": "3m",
             "all": "All",
+            "thousandsSep": " ",
+            "decimalPoint": ".",
             "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "linear": "Linear",
