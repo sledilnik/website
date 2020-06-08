@@ -250,7 +250,11 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
 
         navigator = pojo {| enabled = false |}
 
-        rangeSelector = pojo {| enabled = true |}
+        rangeSelector = pojo
+            {|
+                allButtonsEnabled = true
+                enabled = true
+            |}
 
         responsive = pojo
             {|
