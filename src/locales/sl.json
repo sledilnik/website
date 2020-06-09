@@ -302,6 +302,7 @@
             "webpage": "Spletno stran",
             "share": "Deli graf na",
             "close": "Zapri",
+            "numDateFormat": "%d. %m. %Y",
             "dateFormat": "%A, %e. %B %Y",
             "longDateFormat": "%e. %B %Y",
             "shortDateFormat": "%e. %b"

@@ -150,6 +150,7 @@
             "webpage": "Webpage",
             "share": "Share",
             "close": "Close",
+            "numDateFormat": "%m/%d/%Y",
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
             "shortDateFormat": "%b %e"
