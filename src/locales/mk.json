@@ -1,7 +1,7 @@
 {
     "notice": {
         "news001": "Новости:",
-        "news002": "структура на хоспитализираните по КОВИД-19 болници."
+        "news002": "структура на хоспитализираните во КОВИД-19 болниците."
     },
     "timestamp": {
         "at": "во {{ date, HH.mm }}",
@@ -33,7 +33,9 @@
         "recoveredToDate": "Оздравени",
         "active": "Активни случаи",
         "confirmedToDate": "Потврдено заразени",
-        "tests": "Тестови на ден"
+        "tests": "Тестови на ден",
+        "lastUpdated": "{{ date, D. MMMM }}",
+        "accordingTo": "Во однос на {{ date, D. MMMM }}"
     },
     "cm": {
         "publicTransport": {
@@ -75,6 +77,9 @@
         },
         "schools": {
             "title": "Училишта"
+        },
+        "firstCase": {
+            "title": "Прв случај"
         }
     },
     "country": {
@@ -159,7 +164,10 @@
     "tables": {
         "tabByAgeFemale": "По возраст - Женски",
         "tabByAgeMale": "По возраст - Машки",
-        "title": "Табела"
+        "title": "Табела",
+        "day": "{{ date, D.M. }}",
+        "sourceLink": "GDocs табела во CSV облик или REST API",
+        "source": "Извори на податоци и други облици"
     },
     "charts": {
         "metricsComparison": {
@@ -201,5 +209,13 @@
         "1": {
             "title": "Фаза 1"
         }
+    },
+    "days": {
+        "longerDate": "{{ date, D. MMMM YYYY }}",
+        "date": "{{ date, D. MMMM }}",
+        "x_days_ago": "пред {{ count }} ден",
+        "x_days_ago_plural": "пред {{ count }} дена",
+        "in_x_days": "во {{ count }} ден",
+        "in_x_days_plural": "во {{ count }} дена"
     }
 }
