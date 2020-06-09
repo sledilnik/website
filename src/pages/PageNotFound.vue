@@ -2,7 +2,7 @@
   <div class="page-not-found">
     <h1>{{ $t("pageNotFound.notFound") }}</h1>
     <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
-    <img src="../assets/caution-tape.png" alt="two traffic cones connected by yello tape" />
+    <img src="../assets/caution-tape.png" :alt="$t('pageNotFound.somethingWentWrong')" />
     <div class="links">
       <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
       <router-link to="stats" class="link link-home">
@@ -35,7 +35,7 @@ export default {
   max-width: 730px;
   width: 90%;
   background: #fff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: $element-box-shadow;
   display: flex;
   flex-direction: column;
   align-items: center;

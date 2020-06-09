@@ -556,6 +556,7 @@
     "pageNotFound": {
         "notFound": "404: page not found",
         "somethingWentWrong": "oops... something went wrong :(",
-        "back": "Back"
+        "back": "Back",
+        "imageDescription": "two traffic cones connected by yellow tape"
     }
 }
