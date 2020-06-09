@@ -185,6 +185,12 @@
             "linkFaq": "ЧПП",
             "yAxis": "Y-оска:",
             "xAxis": "Х-оска:"
+        },
+        "municipalities": {
+            "yesterday": "Вчера"
+        },
+        "spread": {
+            "today": "Денес"
         }
     },
     "phase": {
