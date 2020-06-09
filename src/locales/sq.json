@@ -1,1 +1,60 @@
-{}
+{
+    "charts": {
+        "map": {
+            "days": "ditë"
+        }
+    },
+    "shortMonth": {
+        "1": "Shk"
+    },
+    "month": {
+        "11": "Dhjetor",
+        "10": "Nëntor",
+        "9": "Tetor",
+        "8": "Shtator",
+        "7": "Gusht",
+        "6": "Korrik",
+        "5": "Qershor",
+        "3": "Prill",
+        "2": "Mars",
+        "1": "Shkurt",
+        "0": "Janar"
+    },
+    "navbar": {
+        "team": "Ekipi",
+        "models": "Modele"
+    },
+    "country": {
+        "DEU": "Gjermani",
+        "DNK": "Danimarkë",
+        "ESP": "Spanjë",
+        "FIN": "Finlandë",
+        "FRA": "Francë",
+        "GBR": "Mbretëria e Bashkuar",
+        "HRV": "Kroaci",
+        "HUN": "Hungari",
+        "IRN": "Iran",
+        "ISL": "Islandë",
+        "ITA": "Itali",
+        "JPN": "Japoni",
+        "KOR": "S. Kore",
+        "MNE": "Mali i Zi",
+        "NZL": "Zelandë e Re",
+        "NOR": "Norvegji",
+        "RKS": "Kosovë",
+        "SGP": "Singapor",
+        "SRB": "Serbi",
+        "SVK": "Sllovaki",
+        "SVN": "Slloveni",
+        "SWE": "Suedi",
+        "TUR": "Turqi",
+        "USA": "SHBA",
+        "AUT": "Austri",
+        "BEL": "Belgjikë",
+        "BIH": "Bosnjë dhe Hercegovinë",
+        "CHE": "Zvicër",
+        "CHN": "Kinë",
+        "CZE": "Republika Çeke",
+        "AUS": "Australi"
+    }
+}
