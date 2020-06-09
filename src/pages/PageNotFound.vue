@@ -1,10 +1,10 @@
 <template>
   <div class="page-not-found">
     <div class="error-container">
-      <h1>{{ $t("page-not-found.not_found") }}</h1>
-      <p>{{ $t("page-not-found.something_went_wrong") }}</p>
+      <h1>{{ $t("pageNotFound.notFound") }}</h1>
+      <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
       <div class="links">
-        <a href="#" @click="goBack" class="link">{{ $t("page-not-found.back") }}</a>
+        <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
         <router-link to="stats" class="link link-home">
           <span>{{ $t("navbar.home") }}</span>
         </router-link>
