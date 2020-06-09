@@ -556,9 +556,9 @@
         "region_za_todate": "Zasavska",
         "region_todate": "Skupno"
     },
-    "page-not-found": {
-        "not_found": "404: Stran ne obstaja",
-        "something_went_wrong": "ups...nekaj se je zalomilo",
+    "pageNotFound": {
+        "notFound": "404: Stran ne obstaja",
+        "somethingWentWrong": "ups...nekaj se je zalomilo",
         "back": "Nazaj"
     }
 }
