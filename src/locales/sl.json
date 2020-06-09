@@ -557,8 +557,8 @@
         "region_todate": "Skupno"
     },
     "pageNotFound": {
-        "notFound": "404: Stran ne obstaja",
-        "somethingWentWrong": "ups...nekaj se je zalomilo",
+        "notFound": "404: stran ne obstaja",
+        "somethingWentWrong": "ups... nekaj se je zalomilo :(",
         "back": "Nazaj"
     }
 }

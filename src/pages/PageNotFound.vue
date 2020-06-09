@@ -1,16 +1,14 @@
 <template>
   <div class="page-not-found">
-    <div class="error-container">
-      <h1>{{ $t("pageNotFound.notFound") }}</h1>
-      <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
-      <div class="links">
-        <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
-        <router-link to="stats" class="link link-home">
-          <span>{{ $t("navbar.home") }}</span>
-        </router-link>
-      </div>
-    </div>
+    <h1>{{ $t("pageNotFound.notFound") }}</h1>
+    <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
     <img src="../assets/caution-tape.png" alt />
+    <div class="links">
+      <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
+      <router-link to="stats" class="link link-home">
+        <span>{{ $t("navbar.home") }}</span>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -34,78 +32,63 @@ export default {
 
 <style scoped lang="scss">
 .page-not-found {
-  max-width: 1170px;
+  max-width: 730px;
+  width: 90%;
+  background: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 0 auto 96px auto;
+  padding: 32px;
 
   h1 {
-    font-size: 46px;
+    font-size: 28px;
     margin: 0 auto;
-    margin-bottom: 1em;
+    margin-bottom: 24px;
   }
 
   img {
     display: block;
-    max-width: 80%;
-    margin: 0 auto;
+    width: 90%;
+    max-width: 400px;
+    margin: -70px auto 0 auto;
+
+    @media only screen and (max-width: 400px) {
+      margin: -40px auto 0 auto;
+    }
+  }
+
+  p {
+    font-style: italic;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.8);
   }
 
   .links {
-    margin: 5em auto 2em auto;
+    margin: 0 auto;
 
     .link {
       display: inline-block;
-      color: black;
+      color: #000;
       font-size: 14px;
-      letter-spacing: 1px;
+      line-height: 16px;
       font-weight: bold;
-      line-height: 24px;
       border-radius: 6px;
-      padding: 3px 16px;
+      padding: 11px 12px;
       border: solid 1px rgba(0, 0, 0, 0.13);
       cursor: pointer;
 
       &:hover {
         text-decoration: none;
-        border: solid 1px rgba(0, 0, 0, 0.56);
       }
     }
 
     .link-home {
       background: $yellow;
-      background-image: url(../assets/logo.png);
-      background-repeat: no-repeat;
-      background-size: 28px 28px;
-      background-position: 3px 50%;
-      padding: 3px 8px 3px 36px;
-      margin-left: 3em;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    h1 {
-      margin-bottom: 1em;
-    }
-
-    img {
-      width: 40%;
-    }
-
-    .error-container {
-      width: 50%;
-    }
-
-    .links {
-      .link {
-        transform: scale(1.14);
-      }
+      margin-left: 24px;
+      border: none;
     }
   }
 }
