@@ -343,7 +343,8 @@
             "icu": "V intenzivni enoti",
             "ventilator": "Na respiratorju",
             "discharged": "Odpuščeni",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "structure": "Struktura"
         },
         "ratios": {
             "title": "Delež resnih primerov",
