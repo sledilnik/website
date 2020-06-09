@@ -30,9 +30,9 @@ export default {
   max-width: 1170px;
   display: flex;
   flex-direction: column;
+  text-align: center;
   margin: 0 auto;
   padding: 20px;
-  text-align: center;
 
   h1 {
     font-size: 46px;
