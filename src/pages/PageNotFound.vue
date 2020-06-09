@@ -17,6 +17,13 @@
 <script>
 export default {
   name: "PageNotFound",
+  metaInfo() {
+    return {
+      meta: [
+        { name: 'robots', content: 'noindex' },
+      ],
+    }
+  },
   methods: {
     goBack() {
       return this.$router.go(-1);
