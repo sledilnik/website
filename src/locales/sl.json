@@ -28,7 +28,9 @@
         "news002": "prikaz strukture hospitaliziranih po posameznih COVID-19 bolnišnicah."
     },
     "infocard": {
+        "tests": "Testov na dan",
         "confirmedToDate": "Potrjeno okuženi",
+        "active": "Aktivni primeri",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",

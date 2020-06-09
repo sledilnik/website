@@ -8,6 +8,14 @@
         </b-col>
       </b-row>
       <div class="cards-wrapper latest-data-boxes">
+<!--  
+        <Info-card
+          :title="$t('infocard.tests')"
+          field="tests.performed.today"
+          good-trend="up"
+          series-type="state"
+        />
+-->
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
@@ -20,6 +28,12 @@
           series-type="state"
         />
         <Info-card
+          :title="$t('infocard.active')"
+          field="cases.active"
+          good-trend="down"
+          series-type="state"
+        />
+        <Info-card
           :title="$t('infocard.inHospital')"
           field="statePerTreatment.inHospital"
           totalIn="total.inHospital.in"
@@ -27,6 +41,7 @@
           totalDeceased="total.deceased.hospital.today"
           series-type="state"
         />
+<!--  
         <Info-card
           :title="$t('infocard.icu')"
           field="statePerTreatment.inICU"
@@ -35,6 +50,7 @@
           totalDeceased="total.deceased.hospital.icu.today"
           series-type="state"
         />
+-->
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
