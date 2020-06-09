@@ -179,7 +179,11 @@
             "testsToDate": "Тестови (вкупно)",
             "tests": "Тестови (дневно)",
             "hospitalizedToDate": "Хоспитализирани (вкупно)",
-            "title": "Состојба со COVID-19 во Република Северна Македонија"
+            "title": "Состојба со COVID-19 во Република Северна Македонија",
+            "deceasedToDate": "Починати (вкупно)",
+            "deceased": "Починати (дневно)",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега"
         },
         "common": {
             "twitter": "Twitter",
@@ -192,10 +196,109 @@
             "close": "Затвори"
         },
         "municipalities": {
-            "yesterday": "Вчера"
+            "yesterday": "Вчера",
+            "lastCase": "Последен случај: ",
+            "today": "денес",
+            "doubles": "Удвојување ",
+            "deceased": "Починати:",
+            "recovered": "Оздравени:",
+            "active": "Активни:",
+            "all": "Сите:",
+            "sortActive": "Активни",
+            "sortTotal": "Сите",
+            "sortDoublingTime": "Време на удвојување"
         },
         "spread": {
-            "today": "Денес"
+            "today": "Денес",
+            "absoluteTitle": "Дневен прираст на потврдени случаи",
+            "absoluteLabel": "Потврдени случаи (дневно)",
+            "relativeLabel": "Релативен прираст во %",
+            "doublingRateLabel": "За колку дена бројот на инфицирани се удвојува",
+            "confirmedCases": "потврдени случаи",
+            "relativeTitle": "Дневен прираст на инфицирани",
+            "oneDay": "Еден ден",
+            "oneWeek": "Една недела",
+            "oneMonth": "Еден месец",
+            "inOneWeek": "Во една недела",
+            "inTwoWeeks": "Во две недели",
+            "inThreeWeeks": "Во три недели",
+            "inFourWeeks": "Во 4 недели",
+            "hospitalized": "хоспитализирани",
+            "title": "Раст на потврдени случаи"
+        },
+        "hospitals": {
+            "data": "Податоци",
+            "allHospitals": "Сите болници",
+            "beds": "Болнички кревети",
+            "bedsShort": "Кревети"
+        },
+        "countries": {
+            "groupNordic": "Нордиски земји",
+            "groupEastAsiaOceania": "Источна Азија и Океанија",
+            "chronologically": "Хронолошки"
+        },
+        "ageGroups": {
+            "confirmedCases": "Потврдени случаи",
+            "deceased": "Починати",
+            "age": "Возраст",
+            "populationTotal": "Население (вкупно)",
+            "female": "Женски",
+            "male": "Машки"
+        },
+        "map": {
+            "confirmedCases": "Потврдени случаи",
+            "deceased": "Починати",
+            "days": "денови",
+            "all": "Сите"
+        },
+        "infections": {
+            "allConfirmed": "Сите потврдени",
+            "rhOccupant": "Штитеници на домови за згрижување на стари лица",
+            "rhStaff": "Вработени во домови за згрижување на стари лица",
+            "hcStaff": "Здравствени работници",
+            "all": "Вкупно",
+            "averageByDay": "По ден (просек)",
+            "title": "Структура на потврдените случаи"
+        },
+        "tests": {
+            "positiveTests": "Позитивни тестови",
+            "negativeTests": "Негативни тестови",
+            "allTesting": "Вкупно",
+            "title": "Тестирање"
+        },
+        "hCenters": {
+            "testsPositive": "Тестирања (позитивни*)",
+            "testsPerformed": "Тестирања (вкупно)"
+        },
+        "ratios": {
+            "deceasedHospital": "Починати",
+            "ventilatorHospital": "На респиратор",
+            "icuHospital": "На интензивна нега",
+            "deceasedCases": "Починати",
+            "ventilatorCases": "На респиратор",
+            "icuCases": "На интензивна нега",
+            "hospitalCases": "Хоспитализирани",
+            "mortality": "Смртност",
+            "hospitalizations": "Хоспитализирани"
+        },
+        "patients": {
+            "allHospitals": "Сите болници",
+            "deceased": "Починати",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега",
+            "hospitalized": "Хоспитализирани",
+            "hospitalizedIn": "Хоспитализирани во:",
+            "structure": "Структура",
+            "title": "Хоспитализирани"
+        },
+        "cases": {
+            "deceased": "Починати",
+            "recovered": "Оздравени",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега",
+            "hospitalized": "Хоспитализирани",
+            "active": "Активни",
+            "title": "Потврдени случаи"
         }
     },
     "phase": {
