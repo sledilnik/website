@@ -184,7 +184,9 @@
             "facebook": "Facebook",
             "linkFaq": "ЧПП",
             "yAxis": "Y-оска:",
-            "xAxis": "Х-оска:"
+            "xAxis": "Х-оска:",
+            "log": "Логаритамска",
+            "linear": "Линеарна"
         },
         "municipalities": {
             "yesterday": "Вчера"
