@@ -163,6 +163,17 @@ const routes = [
       {
         path: '*',
         component: PageNotFound,
+        // Vue Router supports meta tags, but for some reason this doesn't work
+        // - https://router.vuejs.org/guide/advanced/meta.html
+        // - https://alligator.io/vuejs/vue-router-modify-head/
+        // meta: {
+        //   metaTags: [
+        //     {
+        //       name: 'robots',
+        //       content: 'noindex',
+        //     },
+        //   ],
+        // },
       },
     ],
   },

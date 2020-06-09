@@ -100,7 +100,7 @@ export function lastChange(data, field, cumulative, date) {
     }
   }
 
-  if (typeof result.dayBefore.value === undefined) {
+  if (typeof result.dayBefore.value === "undefined") {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
@@ -111,7 +111,7 @@ export function lastChange(data, field, cumulative, date) {
           10)
   }
 
-  if (typeof result.day2Before.value === undefined) {
+  if (typeof result.day2Before.value === "undefined") {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
