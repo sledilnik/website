@@ -2,7 +2,7 @@
   <div class="page-not-found">
     <h1>{{ $t("pageNotFound.notFound") }}</h1>
     <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
-    <img src="../assets/caution-tape.png" alt />
+    <img src="../assets/caution-tape.png" alt="two traffic cones connected by yello tape" />
     <div class="links">
       <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
       <router-link to="stats" class="link link-home">
