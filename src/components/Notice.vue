@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+<!--  comment out
     <a
       class="notice-link"
       href="#patients-chart"
@@ -14,6 +15,7 @@
         </div>
       </div>
     </a>
+-->
   </div>
 </template>
 
