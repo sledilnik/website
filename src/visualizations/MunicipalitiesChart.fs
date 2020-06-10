@@ -395,13 +395,13 @@ let renderMunicipalities (state : State) _ =
                 | Some d1, Some d2 ->
                     if d1 > d2 then 1
                     else if d1 < d2 then -1
-                    else compareMaxCases m1 m2)
+                    else compareActiveCases m1 m2)
         | LastConfirmedCase ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
                 if m1.LastConfirmedCase < m2.LastConfirmedCase then 1
                 else if m1.LastConfirmedCase > m2.LastConfirmedCase then -1
-                else compareMaxCases m1 m2)
+                else compareActiveCases m1 m2)
 
     let truncatedData, displayShowAllButton =
         if state.ShowAll = true
