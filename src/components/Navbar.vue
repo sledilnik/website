@@ -52,7 +52,7 @@ export default {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
-      languages: this.$i18n.i18next.languages
+      languages: this.i18next.languages
     };
   },
   created() {
