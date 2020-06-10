@@ -248,6 +248,11 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 //backgroundColor = None :> string option
             |}
 
+        // navigator and scrollbar are by default shown on highstock charts,
+        // and we probably want to disable them
+        navigator = pojo {| enabled = false |}
+        scrollbar = pojo {| enabled = false |}
+
         rangeSelector = pojo
             {|
                 enabled = true
@@ -274,7 +279,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         |}
                         {|
                             ``type`` = "all"
-                            count = -1
+                            count = 1
                             text = I18N.t "charts.common.all"
                         |}
                     |]
