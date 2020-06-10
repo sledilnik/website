@@ -257,7 +257,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 enabled = true
                 allButtonsEnabled = true
-                selected = 1
+                selected = 0
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 buttons =
