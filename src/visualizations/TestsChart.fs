@@ -63,7 +63,7 @@ let renderChartOptions (state : State) =
         {|
             index = 0
             title = {| text = null |}
-            labels = pojo {| format = "{value}" |}
+            labels = pojo {| enabled = false |}
             opposite = true
             visible = true
             max = None
@@ -71,7 +71,7 @@ let renderChartOptions (state : State) =
         {|
             index = 1
             title = {| text = null |}
-            labels = pojo {| format = "{value}%" |}
+            labels = pojo {| enabled = false |}
             opposite = false
             visible = true
             max = Some 9

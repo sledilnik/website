@@ -69,6 +69,7 @@ let inline yAxisBase () =
         gridZIndex = -1
         max = None
         plotLines = [| {| value = 0; color = "black" |} |]
+        labels = [| {| enabled = false |} |]
     |}
 
 let inline legend title =
@@ -180,7 +181,7 @@ let renderChartOptions scaleType (data : StatsData) =
                     |> Seq.toArray
             |}
         if Highcharts.showExpGrowthFeatures then
-            yield addContainmentMeasuresFlags startTime None |> pojo 
+            yield addContainmentMeasuresFlags startTime None |> pojo
     |]
 
     // return highcharts options
@@ -230,7 +231,7 @@ let renderExplainer (data: StatsData) =
                         [ I18N.t "charts.spread.today", 0
                           I18N.t "charts.spread.inOneWeek", 1
                           I18N.t "charts.spread.inTwoWeeks", 2
-                          I18N.t "charts.spread.inThreeWeeks", 3 
+                          I18N.t "charts.spread.inThreeWeeks", 3
                           I18N.t "charts.spread.inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
                             box title doublings (curPositive <<< doublings) (curHospitalzed <<< doublings)

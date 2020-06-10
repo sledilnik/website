@@ -155,8 +155,6 @@ let renderRatiosChart (state : State) =
             {|
                 spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
-        yAxis = baseOptions.yAxis
-            |> Array.map (fun ax -> {| ax with max = maxValue ; labels = pojo {| format = "{value}%" |} |} )
 
         series = [|
             for ratio in Ratios.getSeries(state.displayType) do
