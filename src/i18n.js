@@ -26,7 +26,7 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: 'mk',
-  fallbackLng: ['en', 'sl'],
+  fallbackLng: 'en',
   returnObjects: true,
   resources: {
     mk: { translation: mk },
