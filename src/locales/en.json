@@ -128,8 +128,8 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
-            "from": "From",
-            "to": "To",
+            "from": "",
+            "to": "-",
             "zoom": "Zoom",
             "resetZoom": "Reset zoom",
             "resetZoomTitle": "Reset zoom level 1:1",

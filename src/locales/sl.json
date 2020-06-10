@@ -280,8 +280,8 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
-            "from": "Od",
-            "to": "Do",
+            "from": "",
+            "to": "-",
             "zoom": "Obdobje",
             "resetZoom": "Ponastavi merilo",
             "resetZoomTitle": "Prikaži celotno časovno obdobje",
