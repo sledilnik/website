@@ -1,7 +1,8 @@
 {
     "charts": {
         "map": {
-            "days": "ditë"
+            "last_x_days": "{{ count }} dita",
+            "last_x_days_plural": "{{ count }} ditë"
         }
     },
     "shortMonth": {

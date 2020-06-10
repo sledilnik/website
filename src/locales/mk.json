@@ -248,7 +248,8 @@
         "map": {
             "confirmedCases": "Потврдени случаи",
             "deceased": "Починати",
-            "days": "денови",
+            "last_x_days": "{{ count }} ден",
+            "last_x_days_plural": "{{ count }} дена",
             "all": "Сите"
         },
         "infections": {
