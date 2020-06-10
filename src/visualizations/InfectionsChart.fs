@@ -203,7 +203,7 @@ let renderChartOptions displayType (data : StatsData) =
         if displayType.ShowPhases then
             yield addContainmentMeasuresFlags startDate endDate |> pojo
     ]
-   
+
     let className = "covid19-infections"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
 
@@ -247,6 +247,18 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
+
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 500 |}
+                        chartOptions =
+                            {|
+                                legend = {| enabled = true |}
+                            |}
+                    |} |]
+            |}
     |}
 
 let renderChartContainer data metrics =
