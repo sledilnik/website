@@ -206,7 +206,9 @@
             "all": "Сите:",
             "sortActive": "Активни",
             "sortTotal": "Сите",
-            "sortDoublingTime": "Време на удвојување"
+            "sortDoublingTime": "Време на удвојување",
+            "sortBy": "Подреди по:",
+            "sortLast": "Последен"
         },
         "spread": {
             "today": "Денес",
@@ -224,13 +226,19 @@
             "inThreeWeeks": "Во три недели",
             "inFourWeeks": "Во 4 недели",
             "hospitalized": "хоспитализирани",
-            "title": "Раст на потврдени случаи"
+            "title": "Раст на потврдени случаи",
+            "absolute": "Апсолутен дневен прираст",
+            "percentage": "Релативен дневен прираст",
+            "doublingRate": "Експоненцијален раст во денови",
+            "explainer": "Што значи експоненцијален прираст"
         },
         "hospitals": {
             "data": "Податоци",
             "allHospitals": "Сите болници",
             "beds": "Болнички кревети",
-            "bedsShort": "Кревети"
+            "bedsShort": "Кревети",
+            "ventilators": "Респиратори",
+            "all": "Сите"
         },
         "countries": {
             "groupNordic": "Нордиски земји",
@@ -243,14 +251,21 @@
             "age": "Возраст",
             "populationTotal": "Население (вкупно)",
             "female": "Женски",
-            "male": "Машки"
+            "male": "Машки",
+            "view": "Прикажи:",
+            "relative": "Релативно",
+            "absolute": "Апсолутно",
+            "title": "Старосни групи"
         },
         "map": {
             "confirmedCases": "Потврдени случаи",
             "deceased": "Починати",
             "last_x_days": "{{ count }} ден",
             "last_x_days_plural": "{{ count }} дена",
-            "all": "Сите"
+            "all": "Сите",
+            "absolute": "Апсолутно",
+            "population": "население",
+            "populationC": "Население"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
