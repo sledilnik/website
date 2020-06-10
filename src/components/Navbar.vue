@@ -41,6 +41,7 @@
 
 <script>
 import moment from 'moment'
+import i18next from 'i18next'
 
 export default {
   name: 'Navbar',
@@ -52,7 +53,7 @@ export default {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
-      languages: this.i18next.languages
+      languages: i18next.languages
     };
   },
   created() {
