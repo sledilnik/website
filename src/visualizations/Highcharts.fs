@@ -289,7 +289,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 legend = {| enabled = false |}

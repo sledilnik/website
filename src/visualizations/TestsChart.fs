@@ -130,10 +130,10 @@ let renderChartOptions (state : State) =
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
-                                yAxis = [|
-                                    {| labels = {| enabled = false |} |}
-                                    {| labels = {| enabled = false |} |}
-                                |]
+                                // labels must be shown otherwise it doesn't render well on mobile
+                                // yAxis = [|
+                                //     {| labels = {| enabled = false |} |}
+                                // |]
                             |}
                     |} |]
             |}

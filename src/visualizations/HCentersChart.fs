@@ -137,7 +137,7 @@ let renderChartOptions (state : State) =
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 legend = {| enabled = true |}
