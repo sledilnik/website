@@ -69,7 +69,7 @@ let legendFormatter jsThis =
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">■</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name

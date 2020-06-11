@@ -169,7 +169,7 @@ let renderStructureChart (state : State) =
                 match p?point?seriesId with
                 | "hospitalized" | "discharged" | "deceased"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
-                fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+                fmtLine <- sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                     fmtUnder
                     p?series?color
                     p?series?name
