@@ -33,7 +33,7 @@ export default {
         {rel: 'canonical', href: `${process.env.VUE_APP_ROOT}/${this.$i18n.i18next.language}/${pathWithoutLanguage}`},
         {rel: 'alternate', hreflang: "sl", href: `${process.env.VUE_APP_ROOT}/sl/${pathWithoutLanguage}`},
         {rel: 'alternate', hreflang: "en", href: `${process.env.VUE_APP_ROOT}/en/${pathWithoutLanguage}`},
-        {rel: 'alternate', hreflang: "x-default", href: `${process.env.VUE_APP_ROOT}/en/${pathWithoutLanguage}`},
+        {rel: 'alternate', hreflang: "x-default", href: `${process.env.VUE_APP_ROOT}/${process.env.VUE_APP_DEFAULT_LANGUAGE}/${pathWithoutLanguage}`},
       ],
     }
   },
