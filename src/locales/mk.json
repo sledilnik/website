@@ -73,13 +73,27 @@
             "title": "Општини"
         },
         "gatherings": {
-            "description": "Забрана на јавни собири"
+            "description": "Забрана на јавни собири",
+            "title": "Собири"
         },
         "schools": {
-            "title": "Училишта"
+            "title": "Училишта",
+            "description": "Затворање на училишта, ресторани"
         },
         "firstCase": {
             "title": "Прв случај"
+        },
+        "quarantine14days": {
+            "title": "Карантин"
+        },
+        "liftQuarantine": {
+            "title": "Карантин"
+        },
+        "shops": {
+            "title": "Продавници"
+        },
+        "quarantine": {
+            "title": "Карантин"
         }
     },
     "country": {
@@ -159,7 +173,8 @@
         "copied": "Ископирано!",
         "copy": "Копирај",
         "descriptionPart2": "Проверете овде.",
-        "chooseChart": "Изберете графикон"
+        "chooseChart": "Изберете графикон",
+        "preview": "Преглед:"
     },
     "tables": {
         "tabByAgeFemale": "По возраст - Женски",
@@ -193,7 +208,9 @@
             "xAxis": "Х-оска:",
             "log": "Логаритамска",
             "linear": "Линеарна",
-            "close": "Затвори"
+            "close": "Затвори",
+            "webpage": "Веб страница",
+            "loading": "Вчитување на податоците…"
         },
         "municipalities": {
             "yesterday": "Вчера",
@@ -208,7 +225,11 @@
             "sortTotal": "Сите",
             "sortDoublingTime": "Време на удвојување",
             "sortBy": "Подреди по:",
-            "sortLast": "Последен"
+            "sortLast": "Последен",
+            "showLess": "Прикажи помалку општини",
+            "showAll": "Прикажи ги сите општини",
+            "search": "Барај општина",
+            "title": "Случаи по општини"
         },
         "spread": {
             "today": "Денес",
@@ -221,10 +242,10 @@
             "oneDay": "Еден ден",
             "oneWeek": "Една недела",
             "oneMonth": "Еден месец",
-            "inOneWeek": "Во една недела",
-            "inTwoWeeks": "Во две недели",
-            "inThreeWeeks": "Во три недели",
-            "inFourWeeks": "Во 4 недели",
+            "inOneWeek": "По една недела",
+            "inTwoWeeks": "По две недели",
+            "inThreeWeeks": "По три недели",
+            "inFourWeeks": "По 4 недели",
             "hospitalized": "хоспитализирани",
             "title": "Раст на потврдени случаи",
             "absolute": "Апсолутен дневен прираст",
@@ -238,12 +259,19 @@
             "beds": "Болнички кревети",
             "bedsShort": "Кревети",
             "ventilators": "Респиратори",
-            "all": "Сите"
+            "all": "Сите",
+            "title": "Болнички капацитети",
+            "projection": "Проекција",
+            "projection7": "Проекција, удвојување за 7 дена",
+            "projection14": "проекција, удвојување за 14 дена",
+            "projection21": "Проекција, удвојување за 21 ден"
         },
         "countries": {
             "groupNordic": "Нордиски земји",
             "groupEastAsiaOceania": "Источна Азија и Океанија",
-            "chronologically": "Хронолошки"
+            "chronologically": "Хронолошки",
+            "groupCriticalEU": "Критични држави (ЕУ)",
+            "groupCriticalWorld": "Критични држави (на светско ниво)"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
@@ -265,7 +293,9 @@
             "all": "Сите",
             "absolute": "Апсолутно",
             "population": "население",
-            "populationC": "Население"
+            "populationC": "Население",
+            "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
+            "view": "Прикажи:"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -274,7 +304,8 @@
             "hcStaff": "Здравствени работници",
             "all": "Вкупно",
             "averageByDay": "По ден (просек)",
-            "title": "Структура на потврдените случаи"
+            "title": "Структура на потврдените случаи",
+            "relative": "Релативно"
         },
         "tests": {
             "positiveTests": "Позитивни тестови",
@@ -347,5 +378,47 @@
         "x_days_ago_plural": "пред {{ count }} дена",
         "in_x_days": "во {{ count }} ден",
         "in_x_days_plural": "во {{ count }} дена"
+    },
+    "tableDict": {
+        "tests_performed": "Тестирања (дневно)",
+        "region_todate": "Вкупно",
+        "age_female_85+_todate": "85+ години",
+        "age_female_75-84_todate": "75 - 84 години",
+        "age_female_65-74_todate": "65 - 74 години",
+        "age_female_55-64_todate": "55 - 64 години",
+        "age_female_45-54_todate": "45 - 54 години",
+        "age_female_35-44_todate": "35 - 44 години",
+        "age_female_25-34_todate": "25 - 34 години",
+        "age_female_15-24_todate": "15 - 24 години",
+        "age_female_5-14_todate": "5 - 14 години",
+        "age_female_0-4_todate": "0 - 4 години",
+        "age_female_todate": "Вкупно",
+        "age_male_85+_todate": "85+ години",
+        "age_male_75-84_todate": "75 - 84 години",
+        "age_male_65-74_todate": "65 - 74 години",
+        "age_male_55-64_todate": "55 - 64 години",
+        "age_male_45-54_todate": "45 - 54 години",
+        "age_male_35-44_todate": "35 - 44 години",
+        "age_male_25-34_todate": "25 - 34 години",
+        "age_male_15-24_todate": "15 - 24 години",
+        "age_male_5-14_todate": "5 - 14 години",
+        "age_male_0-4_todate": "0 - 4 години",
+        "age_male_todate": "Вкупно",
+        "state_in_hospital_todate": "Хоспитализирани (вкупно)",
+        "state_deceased_todate": "Починати (вкупно)",
+        "state_critical": "На респиратор (активни)",
+        "state_icu": "На интензивна нега (активни)",
+        "state_in_hospital": "Хоспитализирани (активни)",
+        "cases_rh_occupant_confirmed_todate": "Потврдени случаи кај штитеници во домови за грижа на стари лица (вкупно)",
+        "cases_rh_employee_confirmed_todate": "Потврдени случаи кај вработени во домови за грижа на стари лица (вкупно)",
+        "cases_hs_employee_confirmed_todate": "Потврдени случаи кај здравствени работници (вкупно)",
+        "cases_recovered_todate": "Оздравени (вкупно)",
+        "cases_active": "Активни случаи",
+        "cases_confirmed_todate": "Потврдени случаи (вкупно)",
+        "cases_confirmed": "Потврдени случаи (дневно)",
+        "tests_performed_todate": "Тестирања (вкупно)"
+    },
+    "footer": {
+        "copyright": "© 2020 Sledilnik.org"
     }
 }
