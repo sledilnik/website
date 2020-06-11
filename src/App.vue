@@ -16,6 +16,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   metaInfo() {
+    var pathWithoutLanguage = this.$route.path.slice(4).toLowerCase().replace(/\/$/, "");
     return {
       htmlAttrs: {
         lang: this.$i18n.i18next.language,
@@ -29,10 +30,10 @@ export default {
         { property: 'og:description', content: this.$t('meta.description') },
       ],
       link: [
-        {rel: 'canonical', href: `https://covid-19.sledilnik.org/${this.$i18n.i18next.language}/${this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")}`},
-        {rel: 'alternate', hreflang: "sl", href: `https://covid-19.sledilnik.org/sl/${this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")}`},
-        {rel: 'alternate', hreflang: "en", href: `https://covid-19.sledilnik.org/en/${this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")}`},
-        {rel: 'alternate', hreflang: "x-default", href: `https://covid-19.sledilnik.org/en/${this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")}`},
+        {rel: 'canonical', href: `${process.env.VUE_APP_ROOT}/${this.$i18n.i18next.language}/${pathWithoutLanguage}`},
+        {rel: 'alternate', hreflang: "sl", href: `${process.env.VUE_APP_ROOT}/sl/${pathWithoutLanguage}`},
+        {rel: 'alternate', hreflang: "en", href: `${process.env.VUE_APP_ROOT}/en/${pathWithoutLanguage}`},
+        {rel: 'alternate', hreflang: "x-default", href: `${process.env.VUE_APP_ROOT}/en/${pathWithoutLanguage}`},
       ],
     }
   },
