@@ -32,7 +32,7 @@
         "inHospital": "Хоспитализирани",
         "recoveredToDate": "Оздравени",
         "active": "Активни случаи",
-        "confirmedToDate": "Потврдено заразени",
+        "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
         "lastUpdated": "{{ date, D. MMMM }}",
         "accordingTo": "Во однос на {{ date, D. MMMM }}"
