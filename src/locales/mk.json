@@ -4,8 +4,8 @@
         "news002": "структура на хоспитализираните во КОВИД-19 болниците."
     },
     "timestamp": {
-        "at": "во {{ date, HH.mm }}",
-        "updated": "Освежено на {{ date, D. MMMM YYYY }}"
+        "at": "на {{ date, HH.mm }}",
+        "updated": "Ажурирано на {{ date, D. MMMM YYYY }}"
     },
     "navbar": {
         "language": {
@@ -17,14 +17,14 @@
         "sources": "Извори",
         "team": "Тим",
         "about": "За проектот",
-        "faq": "FAQ",
+        "faq": "ЧПП",
         "models": "Модели",
         "tables": "Табела",
         "home": "Дома"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
-        "description": "КОВИД-19 Трекер Македонија - собрани, проверени, обработени, анализирани и прегледни податоци за епидемијата на КОВОД-19 кај нас."
+        "description": "КОВИД-19 Трекер Македонија - собрани, проверени, обработени, анализирани и прегледани податоци за епидемијата на КОВИД-19 кај нас."
     },
     "infocard": {
         "deceasedToDate": "Починати",
@@ -55,7 +55,7 @@
             "title": "Детски градинки"
         },
         "liftPublicTransport": {
-            "title": "Превози"
+            "title": "Превоз"
         },
         "liftFoodMarkets": {
             "title": "Пазари"
@@ -182,7 +182,7 @@
         "title": "Табела",
         "day": "{{ date, D.M. }}",
         "sourceLink": "GDocs табела во CSV облик или REST API",
-        "source": "Извори на податоци и други облици"
+        "source": "Извори на податоци во други облици"
     },
     "charts": {
         "metricsComparison": {
@@ -213,7 +213,7 @@
             "loading": "Вчитување на податоците…"
         },
         "municipalities": {
-            "yesterday": "Вчера",
+            "yesterday": "вчера",
             "lastCase": "Последен случај: ",
             "today": "денес",
             "doubles": "Удвојување ",
@@ -299,7 +299,7 @@
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
-            "rhOccupant": "Штитеници на домови за згрижување на стари лица",
+            "rhOccupant": "Штитеници во домови за згрижување на стари лица",
             "rhStaff": "Вработени во домови за згрижување на стари лица",
             "hcStaff": "Здравствени работници",
             "all": "Вкупно",
@@ -314,8 +314,8 @@
             "title": "Тестирање"
         },
         "hCenters": {
-            "testsPositive": "Тестирања (позитивни*)",
-            "testsPerformed": "Тестирања (вкупно)"
+            "testsPositive": "Тестови (позитивни*)",
+            "testsPerformed": "Тестови (вкупно)"
         },
         "ratios": {
             "deceasedHospital": "Починати",
@@ -380,7 +380,7 @@
         "in_x_days_plural": "во {{ count }} дена"
     },
     "tableDict": {
-        "tests_performed": "Тестирања (дневно)",
+        "tests_performed": "Тестови (дневно)",
         "region_todate": "Вкупно",
         "age_female_85+_todate": "85+ години",
         "age_female_75-84_todate": "75 - 84 години",
@@ -409,14 +409,14 @@
         "state_critical": "На респиратор (активни)",
         "state_icu": "На интензивна нега (активни)",
         "state_in_hospital": "Хоспитализирани (активни)",
-        "cases_rh_occupant_confirmed_todate": "Потврдени случаи кај штитеници во домови за грижа на стари лица (вкупно)",
+        "cases_rh_occupant_confirmed_todate": "Потврдени случаи кај штитеници на домови за грижа на стари лица (вкупно)",
         "cases_rh_employee_confirmed_todate": "Потврдени случаи кај вработени во домови за грижа на стари лица (вкупно)",
         "cases_hs_employee_confirmed_todate": "Потврдени случаи кај здравствени работници (вкупно)",
         "cases_recovered_todate": "Оздравени (вкупно)",
         "cases_active": "Активни случаи",
         "cases_confirmed_todate": "Потврдени случаи (вкупно)",
         "cases_confirmed": "Потврдени случаи (дневно)",
-        "tests_performed_todate": "Тестирања (вкупно)"
+        "tests_performed_todate": "Тестови (вкупно)"
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
