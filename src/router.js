@@ -164,7 +164,7 @@ const routes = [
         next(path)
         return
       }
-      next({ path: '/mk/stats' })
+      next({ path: `/${process.env.VUE_APP_DEFAULT_LANGUAGE}/stats` })
     },
   },
 ]
