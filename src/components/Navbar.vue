@@ -35,11 +35,6 @@
              class="router-link-anchor"
              :class="{ active: $i18n.i18next.language === 'sq' }"
              @click.prevent="changeLanguage('sq')">SQ</a> /
-          <a :href="'/sl/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="sl"
-             class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'sl' }"
-             @click.prevent="changeLanguage('sl')">SL</a> /
           <a :href="'/en/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
              hreflang="en"
              class="router-link-anchor"
