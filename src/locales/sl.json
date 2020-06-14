@@ -327,7 +327,8 @@
             "icu": "V intenzivni enoti",
             "ventilator": "Na respiratorju",
             "discharged": "Odpuščeni",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "structure": "Struktura"
         },
         "ratios": {
             "title": "Delež resnih primerov",
@@ -438,7 +439,10 @@
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
             "all": "Vsi",
-            "days": "dni",
+            "last_x_days_0": "{{ count }} dan",
+            "last_x_days_1": "{{ count }} dneva",
+            "last_x_days_2": "{{ count }} dni",
+            "last_x_days_3": "{{ count }} dni",
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
