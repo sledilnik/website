@@ -107,7 +107,7 @@ g.highcharts-series,
 
 .highcharts-range-selector-buttons {
     @media only screen and (max-width: 515px) {
-        transform: translate(-42px, 10px);
+        transform: translate(-60px, 10px);
     }
 }
 
@@ -121,9 +121,4 @@ g.highcharts-series,
     @media only screen and (max-width: 400px) {
         transform: translate(112px, 10px)
     }
-
-    // TODO: only the first one
-    // > .highcharts-range-input {
-    //     transform: translate(13px, 0px);
-    // }
 }

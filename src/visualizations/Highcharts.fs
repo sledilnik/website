@@ -263,12 +263,12 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         {|
                             ``type`` = "month"
                             count = 2
-                            text = I18N.t "charts.common.2m"
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
                         |}
                         {|
                             ``type`` = "month"
                             count = 3
-                            text = I18N.t "charts.common.3m"
+                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
                         |}
                         {|
                             ``type`` = "all"
