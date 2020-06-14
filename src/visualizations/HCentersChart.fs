@@ -132,18 +132,6 @@ let renderChartOptions (state : State) =
         yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-
-        responsive = pojo
-            {|
-                rules =
-                    [| {|
-                        condition = {| maxWidth = 768 |}
-                        chartOptions =
-                            {|
-                                legend = {| enabled = true |}
-                            |}
-                    |} |]
-            |}
     |}
 
 let renderChartContainer (state : State) =
@@ -152,7 +140,7 @@ let renderChartContainer (state : State) =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

@@ -140,7 +140,7 @@ let renderChartContainer scaleType data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

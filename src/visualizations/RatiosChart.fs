@@ -170,7 +170,7 @@ let renderChartContainer state =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderRatiosChart state  |> Highcharts.chart ]
+        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
     ]
 
 let renderDisplaySelector state dt dispatch =

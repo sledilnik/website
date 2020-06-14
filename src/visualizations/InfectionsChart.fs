@@ -247,18 +247,6 @@ let renderChartOptions displayType (data : StatsData) =
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-
-        responsive = pojo
-            {|
-                rules =
-                    [| {|
-                        condition = {| maxWidth = 768 |}
-                        chartOptions =
-                            {|
-                                legend = {| enabled = true |}
-                            |}
-                    |} |]
-            |}
     |}
 
 let renderChartContainer data metrics =
@@ -267,7 +255,7 @@ let renderChartContainer data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

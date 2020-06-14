@@ -63,7 +63,7 @@ let renderChartOptions (state : State) =
         {|
             index = 0
             title = {| text = null |}
-            labels = pojo {| enabled = false |}
+            labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
             opposite = true
             visible = true
             max = None
@@ -71,7 +71,7 @@ let renderChartOptions (state : State) =
         {|
             index = 1
             title = {| text = null |}
-            labels = pojo {| enabled = false |}
+            labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
             opposite = false
             visible = true
             max = Some 9
@@ -132,10 +132,9 @@ let renderChartOptions (state : State) =
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
-                                // labels must be shown otherwise it doesn't render well on mobile
-                                // yAxis = [|
-                                //     {| labels = {| enabled = false |} |}
-                                // |]
+                                yAxis = [|
+                                    {| labels = {| enabled = false |} |}
+                                |]
                             |}
                     |} |]
             |}

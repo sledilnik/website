@@ -69,7 +69,6 @@ let inline yAxisBase () =
         gridZIndex = -1
         max = None
         plotLines = [| {| value = 0; color = "black" |} |]
-        labels = [| {| enabled = false |} |]
     |}
 
 let inline legend title =
@@ -247,7 +246,7 @@ let renderChartContainer scaleType data =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

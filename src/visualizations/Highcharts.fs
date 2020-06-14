@@ -234,7 +234,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
                 plotLines = [| {| value = 0; color = "black" |} |]
-                labels = {| enabled = false |}
             |}
         |]
         legend =
@@ -249,8 +248,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 //backgroundColor = None :> string option
             |}
 
-        // navigator and scrollbar are by default shown on highstock charts,
-        // and we probably want to disable them
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
 
@@ -289,7 +286,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         chartOptions =
                             {|
                                 legend = {| enabled = false |}
-                                yAxis = [| {| labels = {| enabled = false |} |} |]
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
             |}
