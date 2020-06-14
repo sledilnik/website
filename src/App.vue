@@ -16,6 +16,15 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   metaInfo() {
+    var pathWithoutLanguage = this.$route.path.slice(4).toLowerCase().replace(/\/$/, "");
+    var links = [
+        {rel: 'canonical', href: `${process.env.VUE_APP_URL}/${this.$i18n.i18next.language}/${pathWithoutLanguage}`},
+        {rel: 'alternate', hreflang: "x-default", href: `${process.env.VUE_APP_URL}/${pathWithoutLanguage}`},
+      ];
+    this.$i18n.i18next.languages.forEach(lang => {
+      links = links.concat({rel: 'alternate', hreflang: `${lang}`, href: `${process.env.VUE_APP_URL}/${lang}/${pathWithoutLanguage}`})
+    });
+
     return {
       htmlAttrs: {
         lang: this.$i18n.i18next.language,
@@ -28,12 +37,7 @@ export default {
         { property: 'og:title', content: this.$t('meta.title') },
         { property: 'og:description', content: this.$t('meta.description') },
       ],
-      link: [
-        {rel: 'canonical', href: "https://covid-19.sledilnik.org/"+this.$i18n.i18next.language+"/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
-        {rel: 'alternate', hreflang: "sl", href: "https://covid-19.sledilnik.org/sl/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
-        {rel: 'alternate', hreflang: "en", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
-        {rel: 'alternate', hreflang: "x-default", href: "https://covid-19.sledilnik.org/en/"+this.$route.path.slice(4).toLowerCase().replace(/\/$/, "")},
-      ],
+      link: links,
     }
   },
   props: {

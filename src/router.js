@@ -28,13 +28,34 @@ Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
-  faq: { sl: contentMd, en: contentMdEn },
-  about: { sl: aboutMd, en: aboutMdEn },
-  team: { sl: teamMd, en: teamMdEn },
-  links: { sl: linksMd, en: linksMdEn },
-  sources: { sl: sourcesMd, en: sourcesMdEn },
-  models: { sl: modelsMd, en: modelsMdEn },
-  datasources: { sl: datasourcesMd, en: datasourcesMdEn },
+  faq: {
+    sl: contentMd,
+    en: contentMdEn
+  },
+  about: {
+    sl: aboutMd,
+    en: aboutMdEn
+  },
+  team: {
+    sl: teamMd,
+    en: teamMdEn
+  },
+  links: {
+    sl: linksMd,
+    en: linksMdEn
+  },
+  sources: {
+    sl: sourcesMd,
+    en: sourcesMdEn
+  },
+  models: {
+    sl: modelsMd,
+    en: modelsMdEn
+  },
+  datasources: {
+    sl: datasourcesMd,
+    en: datasourcesMdEn
+  },
 }
 
 function dynamicProps(route) {
@@ -164,7 +185,7 @@ const routes = [
         next(path)
         return
       }
-      next({ path: '/sl/stats' })
+      next({ path: `/${process.env.VUE_APP_DEFAULT_LANGUAGE}/stats` })
     },
   },
 ]
