@@ -20,7 +20,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
     }
     { Label = "groupCriticalWorld"
-      CountriesCodes = [| "CHN"; "ESP"; "IRN"; "ITA"; "SWE"; "USA" |]
+      CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
     }
     { Label = "groupNordic"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
@@ -30,6 +30,9 @@ let countriesDisplaySets = [|
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
+    }
+    { Label = "groupLatinAmerica"
+      CountriesCodes = [| "ARG"; "BRA"; "CHL"; "COL"; "ECU"; "MEX"; "PER" |]
     }
 |]
 
