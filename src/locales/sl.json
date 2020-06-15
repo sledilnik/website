@@ -576,5 +576,11 @@
         "region_ce_todate": "Savinjska",
         "region_za_todate": "Zasavska",
         "region_todate": "Skupno"
+    },
+    "pageNotFound": {
+        "notFound": "404: stran ne obstaja",
+        "somethingWentWrong": "ups... nekaj se je zalomilo :(",
+        "back": "Nazaj",
+        "imageDescription": "prometna stožca povezana z rumenim trakom"
     }
 }
