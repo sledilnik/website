@@ -272,6 +272,7 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             match state.Breakdown with
+            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
             | _ -> renderStructureChart state |> Highcharts.chartFromWindow
         ]
     ]
