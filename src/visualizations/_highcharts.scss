@@ -62,7 +62,7 @@ div.highcharts-tooltip {
 
 .highcharts-wrapper {
     @media only screen and (min-width: 768px) {
-    margin-left: -10px;
+        margin-left: -10px;
     }
 }
 
@@ -103,4 +103,22 @@ g.highcharts-series,
 .highcharts-legend-series-active .highcharts-markers:not(.highcharts-series-hover),
 .highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
     opacity: 0.2;
+}
+
+.highcharts-range-selector-buttons {
+    @media only screen and (max-width: 515px) {
+        transform: translate(-60px, 10px);
+    }
+}
+
+.highcharts-input-group {
+    @media only screen and (max-width: 515px) {
+        transform: translate(194px, 10px)
+    }
+    @media only screen and (max-width: 450px) {
+        transform: translate(150px, 10px)
+    }
+    @media only screen and (max-width: 400px) {
+        transform: translate(112px, 10px)
+    }
 }

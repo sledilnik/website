@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import * as d3 from 'd3'
-
 import { statsStore } from './stats.store'
 import { hospitalsStore } from './hospitals.store'
 import { patientsStore } from './patients.store'

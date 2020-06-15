@@ -4,6 +4,7 @@
         "description": "COVID-19 Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o epidemiji COVID-19 v Sloveniji."
     },
     "navbar": {
+        "menu": "Meni",
         "home": "Domov",
         "tables": "Tabela",
         "models": "Modeli",
@@ -279,6 +280,18 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
+            "from": "",
+            "to": "-",
+            "zoom": "Obdobje",
+            "resetZoom": "Ponastavi merilo",
+            "resetZoomTitle": "Prikaži celotno časovno obdobje",
+            "x_months_0": "{{ count }}m",
+            "x_months_1": "{{ count }}m",
+            "x_months_2": "{{ count }}m",
+            "x_months_3": "{{ count }}m",
+            "all": "Vse",
+            "thousandsSep": ".",
+            "decimalPoint": ",",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -289,7 +302,11 @@
             "twitter": "Twitter",
             "webpage": "Spletno stran",
             "share": "Deli graf na",
-            "close": "Zapri"
+            "close": "Zapri",
+            "numDateFormat": "%d. %m. %Y",
+            "dateFormat": "%A, %e. %B %Y",
+            "longDateFormat": "%e. %B %Y",
+            "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v Sloveniji",
@@ -453,10 +470,10 @@
             "today": "danes",
             "yesterday": "včeraj",
             "doubles": "Podvojitev ",
-            "deceased": "Umrli:",
-            "recovered": "Preboleli:",
-            "active": "Aktivni:",
-            "all": "Vsi:",
+            "deceased": "Umrli: ",
+            "recovered": "Preboleli: ",
+            "active": "Aktivni: ",
+            "all": "Vsi: ",
             "showLess": "Prikaži manj občin",
             "showAll": "Prikaži vse občine",
             "search": "Poišči občino",

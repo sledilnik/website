@@ -62,6 +62,7 @@ export default {
     
     moment.locale(this.$i18n.i18next.language)
 
+    // TODO: this code block is obsolete, vue router isn't in hash mode anymore
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash)

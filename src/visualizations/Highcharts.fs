@@ -213,6 +213,12 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |}
                     yield! shadedWeekendPlotBands
                 |]
+                // https://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats
+                dateTimeLabelFormats = pojo
+                    {|
+                        week = I18N.t "charts.common.shortDateFormat"
+                        day = I18N.t "charts.common.shortDateFormat"
+                    |}
             |}
         |]
         yAxis = [|
@@ -241,15 +247,46 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 layout = "vertical"
                 //backgroundColor = None :> string option
             |}
+
+        navigator = pojo {| enabled = false |}
+        scrollbar = pojo {| enabled = false |}
+
+        rangeSelector = pojo
+            {|
+                enabled = true
+                allButtonsEnabled = true
+                selected = 0
+                inputDateFormat = I18N.t "charts.common.numDateFormat"
+                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                buttons =
+                    [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 3
+                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                        |}
+                    |]
+            |}
+
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 legend = {| enabled = false |}
-                                yAxis = [| {| labels = {| enabled = false |} |} |]
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
             |}
@@ -273,10 +310,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         // but here we force to always format dates without any time
                         // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
                         // - https://devhints.io/datetime
-                        day = @"%A, %e. %B %Y"
-                        hour = @"%A, %e. %B %Y"
-                        minute = @"%A, %e. %B %Y"
-                        second = @"%A, %e. %B %Y"
+                        week = I18N.t "charts.common.dateFormat"
+                        day = I18N.t "charts.common.dateFormat"
                     |}
             |}
         credits = pojo {| enabled = false |}

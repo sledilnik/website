@@ -14,6 +14,10 @@ import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");
 
 import i18n from "../i18n"
+import moment from 'moment'
+
+// TODO: this shouldn't be hardcoded
+moment.locale('sl')
 
 window.Highcharts = window.Highcharts || Highcharts;
 
@@ -25,17 +29,17 @@ function setHighchartsOptions (highcharts) {
             useUTC: false
         },
         lang: {
-            loading: 'Nalagam...',
+            loading: i18n.t("charts.common.loading"),
             months: i18n.t("month"),
             shortMonths: i18n.t("shortMonth"),
             weekdays: i18n.t("weekday"),
-            rangeSelectorFrom: "Od",
-            rangeSelectorTo: "do",
-            rangeSelectorZoom: "Obdobje",
-            resetZoom: "Ponastavi skalo",
-            resetZoomTitle: "Prikaži celotno časovno obdobje",
-            thousandsSep: ".",
-            decimalPoint: ','
+            rangeSelectorFrom: i18n.t("charts.common.from"),
+            rangeSelectorTo: i18n.t("charts.common.to"),
+            rangeSelectorZoom: i18n.t("charts.common.zoom"),
+            resetZoom: i18n.t("charts.common.resetZoom"),
+            resetZoomTitle: i18n.t("charts.common.resetZoomTitle"),
+            thousandsSep: i18n.t("charts.common.thousandsSep"),
+            decimalPoint: i18n.t("charts.common.decimalPoint"),
         }
     });
 };
@@ -268,10 +272,16 @@ function renderChart(options) {
 function renderChartFromWindow(options) {
   options = wrapLabelFormatterWithThis(options);
   setHighchartsOptions(window.Highcharts);
-  return React.createElement(HighchartsReact, {
-    containerProps: {style: {height:"100%"}},
-    options: {...options},
-  }, null);
+  return React.createElement(
+    HighchartsReact,
+    {
+      highcharts: Highcharts,
+      constructorType: 'stockChart',
+      containerProps: { style: { height: '100%' }},
+      options: { ...options },
+    },
+    null
+  )
 }
 
 function renderMap(options) {

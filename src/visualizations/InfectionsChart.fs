@@ -203,7 +203,7 @@ let renderChartOptions displayType (data : StatsData) =
         if displayType.ShowPhases then
             yield addContainmentMeasuresFlags startDate endDate |> pojo
     ]
-   
+
     let className = "covid19-infections"
     let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
 
@@ -255,7 +255,7 @@ let renderChartContainer data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions data metrics
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

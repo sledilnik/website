@@ -63,7 +63,7 @@ let renderChartOptions (state : State) =
         {|
             index = 0
             title = {| text = null |}
-            labels = pojo {| format = "{value}" |}
+            labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
             opposite = true
             visible = true
             max = None
@@ -71,7 +71,7 @@ let renderChartOptions (state : State) =
         {|
             index = 1
             title = {| text = null |}
-            labels = pojo {| format = "{value}%" |}
+            labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
             opposite = false
             visible = true
             max = Some 9
@@ -120,18 +120,19 @@ let renderChartOptions (state : State) =
         legend = pojo
             {|
                 enabled = true
-                layout = "horizontal" 
+                layout = "horizontal"
             |}
+
+        tooltip = pojo {| shared = true; split = false |}
 
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 yAxis = [|
-                                    {| labels = {| enabled = false |} |}
                                     {| labels = {| enabled = false |} |}
                                 |]
                             |}
