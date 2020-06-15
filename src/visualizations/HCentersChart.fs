@@ -20,8 +20,8 @@ type State = {
     Error: string option
     Regions : Region list
     FilterByRegion : string
-  } 
-  
+  }
+
 type Msg =
     | ConsumeHcData of Result<HcStats [], string>
     | ConsumeServerError of exn
@@ -34,7 +34,7 @@ let init () : State * Cmd<Msg> =
         HcData = [| |]
         Error = None
         Regions = [ ]
-        FilterByRegion = "" 
+        FilterByRegion = ""
     }
 
     state, (cmd)
@@ -42,7 +42,7 @@ let init () : State * Cmd<Msg> =
 let getRegionList hcData =
     hcData.municipalities
     |> Map.toList
-    |> List.map fst        
+    |> List.map fst
     |> List.map (fun reg -> { Key = reg ; Name = I18N.tt "region" reg })
     |> List.sortBy (fun region -> region.Name)
 
@@ -64,11 +64,11 @@ let renderChartOptions (state : State) =
     let startDate = DateTime(2020,3,18)
     let mutable startTime = startDate |> jsTime
 
-    let getRegionStats region mp = 
+    let getRegionStats region mp =
             mp |> Map.find region
             |> Map.fold ( fun total key hc -> total + hc ) TotalHcStats.None
 
-    let hcData = 
+    let hcData =
         match state.FilterByRegion with
         | ""     -> state.HcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
         | region -> state.HcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
@@ -140,7 +140,7 @@ let renderChartContainer (state : State) =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

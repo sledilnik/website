@@ -140,7 +140,7 @@ let renderChartContainer scaleType data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -151,7 +151,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         else [ ]
     Html.div [
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        prop.className [ true, "btn btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 

@@ -21,12 +21,14 @@
           field="cases.confirmedToDate"
           series-type="state"
         />
+<!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
           good-trend="up"
           series-type="state"
         />
+-->
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
@@ -41,7 +43,6 @@
           totalDeceased="total.deceased.hospital.today"
           series-type="state"
         />
-<!--  
         <Info-card
           :title="$t('infocard.icu')"
           field="statePerTreatment.inICU"
@@ -50,7 +51,6 @@
           totalDeceased="total.deceased.hospital.icu.today"
           series-type="state"
         />
--->
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
@@ -108,20 +108,13 @@ export default {
       const dropdownAll = this.$el.querySelectorAll('.share-dropdown-wrapper')
 
       // ignore click if the clicked element is share button or its icon or caption
-      if (
-        e.target.classList.contains('share-button-wrapper') ||
-        e.target.classList.contains('share-button-icon') ||
-        e.target.classList.contains('share-button-caption')
-      ) {
-        return
-      }
+      if (e.target.classList.contains('share-button-')) return
 
       // else check if any of the dropdowns is opened and close it/them
       dropdownAll.forEach((el) => {
-        if (el.classList.contains('show')) {
-          el.classList.remove('show')
-          el.classList.add('hide')
-        }
+        el.classList.contains('show')
+          ? el.classList.remove('show')
+          : el.classList.add('hide')
       })
 
       // TODO: there is still an issue where if you immediatelly click on the same

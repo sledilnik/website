@@ -11,6 +11,7 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
+      <div class="nav-heading">{{ $t("navbar.menu") }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
       <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
@@ -24,22 +25,14 @@
         <span>{{ $t("navbar.github") }}</span>
       </a>
       <div class="router-link">
-        <span>
-          <a :href="'/mk/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="mk"
+        <span v-for="(lang, index) in languages" :key="index">
+          <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
+             :hreflang="lang"
              class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'mk' }"
-             @click.prevent="changeLanguage('mk')">MK</a> /
-          <a :href="'/sq/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="sq"
-             class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'sq' }"
-             @click.prevent="changeLanguage('sq')">SQ</a> /
-          <a :href="'/en/'+$route.path.slice(4).toLowerCase().replace(/\/$/, '')"
-             hreflang="en"
-             class="router-link-anchor"
-             :class="{ active: $i18n.i18next.language === 'en' }"
-             @click.prevent="changeLanguage('en')">EN</a>
+             :class="{ active: $i18n.i18next.language === lang }"
+             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
+          <span v-if="index !== languages.length - 1"
+                class="divider">/</span>
         </span>
       </div>
     </div>
@@ -48,6 +41,7 @@
 
 <script>
 import moment from 'moment'
+import i18next from 'i18next'
 
 export default {
   name: 'Navbar',
@@ -59,6 +53,7 @@ export default {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
+      languages: i18next.languages
     };
   },
   created() {
@@ -84,6 +79,7 @@ export default {
       }, 650);
     },
     changeLanguage(lang) {
+      if (this.$route.params.lang === lang) return
       this.$i18n.i18next.changeLanguage(lang, (err, t) => {
         if (err) return console.log('something went wrong loading', err);
         this.$router.push({ name: this.$route.name, params: { lang } });
@@ -292,12 +288,14 @@ export default {
     }
   }
 
-  &:before {
-    content: 'Meni';
-    display: block;
+  .nav-heading {
     margin-bottom: 18px;
     font-size: 21px;
     font-weight: bold;
+
+    @include nav-break {
+      display: none;
+    }
   }
 
   .menuOpen & {
@@ -487,6 +485,10 @@ export default {
 
     &:hover {
       color: rgb(0, 0, 0);
+    }
+
+    ~ .divider {
+      margin: 0 3.5px;
     }
   }
 }
