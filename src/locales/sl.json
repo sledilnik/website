@@ -583,7 +583,7 @@
     },
     "pageNotFound": {
         "notFound": "404: stran ne obstaja",
-        "somethingWentWrong": "ups... nekaj se je zalomilo :(",
+        "somethingWentWrong": "ups… nekaj se je zalomilo :(",
         "back": "Nazaj",
         "imageDescription": "prometna stožca povezana z rumenim trakom"
     }
