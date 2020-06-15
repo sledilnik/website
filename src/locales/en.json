@@ -509,6 +509,10 @@
         "liftSchools4to5": {
             "description": "Relaxation: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
             "title": "Schools"
+        },
+        "liftGatherings500": {
+            "title": "Up to 500",
+            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
         }
     },
     "days": {
