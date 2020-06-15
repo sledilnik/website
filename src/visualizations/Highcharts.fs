@@ -237,17 +237,15 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 plotLines = [| {| value = 0; color = "black" |} |]
             |}
         |]
-        legend =
+
+        tooltip = pojo
             {|
-                enabled = false
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                //backgroundColor = None :> string option
+                shared = true
+                split = false
+                xDateFormat = I18N.t "charts.common.dateFormat"
             |}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
@@ -258,7 +256,10 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 allButtonsEnabled = true
                 selected = 0
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
-                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
+                // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputBoxBorderColor = "#ced4da"
+                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
                 buttons =
                     [|
                         {|
@@ -292,7 +293,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |} |]
             |}
 
-
         plotOptions = pojo
             {|
                 line = pojo
@@ -302,19 +302,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         //enableMouseTracking = false
                     |}
             |}
-        tooltip = pojo
-            {|
-                shared = true
-                split = false
-                dateTimeLabelFormats = pojo
-                    {|
-                        // our data is sampled (offset) to noon: 12:00
-                        // but here we force to always format dates without any time
-                        // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
-                        // - https://devhints.io/datetime
-                        week = I18N.t "charts.common.dateFormat"
-                        day = I18N.t "charts.common.dateFormat"
-                    |}
-            |}
+
         credits = pojo {| enabled = false |}
     |}

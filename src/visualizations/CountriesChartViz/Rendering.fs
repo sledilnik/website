@@ -203,7 +203,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                           shared = true
                           useHTML = true
                         |}
-
+        rangeSelector = pojo {| enabled = false |}
         credits = pojo
             {|
                 enabled = true

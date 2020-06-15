@@ -69,7 +69,7 @@
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, D. MMMM }}",
-        "longerDate": "{{ date, D. MMMM YYYY }}"
+        "longerDate": "{{ date, dddd, D. MMMM YYYY }}"
     },
     "month": {
         "0": "januar",

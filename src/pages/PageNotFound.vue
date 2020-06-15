@@ -4,7 +4,7 @@
     <p>{{ $t("pageNotFound.somethingWentWrong") }}</p>
     <img src="../assets/caution-tape.png" :alt="$t('pageNotFound.imageDescription')" />
     <div class="links">
-      <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a>
+      <!-- <a href="#" @click="goBack" class="link">{{ $t("pageNotFound.back") }}</a> -->
       <router-link to="stats" class="link link-home">
         <span>{{ $t("navbar.home") }}</span>
       </router-link>
