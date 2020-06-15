@@ -196,6 +196,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             {|
                 series = pojo {| stacking = "" |}
             |}
+            
+        rangeSelector = pojo {| enabled = false |} 
+
         legend = legend
         tooltip = pojo {|
                           formatter = fun () ->
