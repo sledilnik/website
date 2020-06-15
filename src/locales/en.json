@@ -1,5 +1,10 @@
 {
+    "meta": {
+        "title": "COVID-19 Tracking",
+        "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
+    },
     "navbar": {
+        "menu": "Menu",
         "home": "Home",
         "tables": "Table",
         "models": "Models",
@@ -23,7 +28,9 @@
         "news002": "structure of hospitalized for each COVID-19 hospital."
     },
     "infocard": {
+        "tests": "Tests Today",
         "confirmedToDate": "Confirmed Cases",
+        "active": "Active Cases",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",
@@ -47,6 +54,8 @@
         "preview": "Preview:",
         "embedCode": "Embed code:",
         "description": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "descriptionPart1": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, ",
+        "descriptionPart2": "check here.",
         "copy": "Copy",
         "copied": "Copied!"
     },
@@ -119,12 +128,31 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
+            "from": "",
+            "to": "-",
+            "zoom": "Zoom",
+            "resetZoom": "Reset zoom",
+            "resetZoomTitle": "Reset zoom level 1:1",
+            "x_months": "{{ count }}m",
+            "x_months_plural": "{{ count }}m",
+            "all": "All",
+            "thousandsSep": " ",
+            "decimalPoint": ".",
+            "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:"
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Webpage",
+            "share": "Share",
+            "close": "Close",
+            "numDateFormat": "%m/%d/%Y",
+            "dateFormat": "%A, %B %e, %Y",
+            "longDateFormat": "%B %e, %Y",
+            "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
@@ -248,7 +276,8 @@
             "populationShare": "Population Share",
             "populationC": "Population",
             "population": "population",
-            "days": "days",
+            "last_x_days": "{{ count }} day",
+            "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
             "view": "Show:",
             "deceased": "Deaths",
@@ -265,10 +294,10 @@
             "search": "Search municipality",
             "showAll": "Show All",
             "showLess": "Show Less",
-            "all": "All:",
-            "active": "Active:",
-            "recovered": "Recovered:",
-            "deceased": "Deaths:",
+            "all": "All: ",
+            "active": "Active: ",
+            "recovered": "Recovered: ",
+            "deceased": "Deaths: ",
             "doubles": "Doubles ",
             "yesterday": "yesterday",
             "today": "today",
@@ -309,6 +338,31 @@
             "groupCriticalWorld": "Critical countries (World)",
             "groupCriticalEU": "Critical countries (EU)",
             "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
+        },
+        "hospitals": {
+            "bedsShort": "Beds",
+            "beds": "Hospital beds",
+            "allHospitals": "All hospitals",
+            "data": "Data",
+            "max": "Max",
+            "all": "All",
+            "full": "Full",
+            "empty": "Empty",
+            "bedsICUFull": "ICU beds, full",
+            "bedsICU70": "ICU beds, 70%",
+            "bedsICUAll": "ICU beds, all",
+            "bedsFull": "Beds, full",
+            "beds70": "Beds, 70%",
+            "bedsAll": "Beds, all",
+            "bedsMax": "Beds, maximum",
+            "bedsICUShort": "ICU beds",
+            "ventilators": "Respirators",
+            "bedsICU": "ICU Beds",
+            "projection21": "Projection, 21-day doubling",
+            "projection14": "Projection, 14-day doubling",
+            "projection7": "Projection, 7-day doubling",
+            "projection": "Projection",
+            "title": "Hospital capacities"
         }
     },
     "footer": {
@@ -456,6 +510,10 @@
         "liftSchools4to5": {
             "description": "Relaxation: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
             "title": "Schools"
+        },
+        "liftGatherings500": {
+            "title": "Up to 500",
+            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
         }
     },
     "days": {
@@ -464,7 +522,7 @@
         "x_days_ago": "{{ count }} day ago",
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, MMMM Do }}",
-        "longerDate": "{{ date, MMMM Do YYYY }}"
+        "longerDate": "{{ date, dddd, MMMM Do YYYY }}"
     },
     "region": {
         "za": "Central Sava Region",
@@ -522,5 +580,11 @@
         "AUT": "Austria",
         "AUS": "Australia",
         "ARG": "Argentina"
+    },
+    "pageNotFound": {
+        "notFound": "404: page not found",
+        "somethingWentWrong": "oops… something went wrong :(",
+        "back": "Back",
+        "imageDescription": "two traffic cones connected by yellow tape"
     }
 }

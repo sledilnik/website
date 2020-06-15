@@ -16,6 +16,7 @@ Uredniki baze in ostali sodelavci:
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
 -   [Demjan Vester](https://github.com/VesterDe) - spletna stran
+-   [Eva Matjašič](https://github.com/Blonduos/) - spletna stran
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije

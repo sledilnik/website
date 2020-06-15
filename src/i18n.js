@@ -23,16 +23,16 @@ const detectionOptions = {
 }
 
 i18next.use(LanguageDetector).init({
-  lng: 'sl',
+  lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
+  fallbackLng: ['en', 'sl'],
   returnObjects: true,
-  fallbackLng: 'sl',
   resources: {
     sl: { translation: sl },
     en: { translation: en },
   },
   detection: detectionOptions,
   interpolation: {
-    format: function (value, format, lng) {
+    format: function(value, format, lng) {
       if (value instanceof Date) {
         return moment(value).format(format)
       }

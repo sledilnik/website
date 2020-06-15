@@ -109,7 +109,8 @@ let addContainmentMeasuresFlags
         15, 5, "#ebfaeb", "liftQuarantine"
         18, 5, "#ebfaeb", "liftSchools1to3"
         26, 5, "#FFe6e6", "quarantine14days"
-        //1,  6, "#ebfaeb", "liftSchools4to5"
+        1,  6, "#ebfaeb", "liftSchools4to5"
+        15, 6, "#ebfaeb", "liftGatherings500"
     |]
     {|
         ``type`` = "flags"
@@ -213,6 +214,12 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |}
                     yield! shadedWeekendPlotBands
                 |]
+                // https://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats
+                dateTimeLabelFormats = pojo
+                    {|
+                        week = I18N.t "charts.common.shortDateFormat"
+                        day = I18N.t "charts.common.shortDateFormat"
+                    |}
             |}
         |]
         yAxis = [|
@@ -230,30 +237,61 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 plotLines = [| {| value = 0; color = "black" |} |]
             |}
         |]
-        legend =
+
+        tooltip = pojo
             {|
-                enabled = false
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
-                layout = "vertical"
-                //backgroundColor = None :> string option
+                shared = true
+                split = false
+                xDateFormat = I18N.t "charts.common.dateFormat"
             |}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
+        navigator = pojo {| enabled = false |}
+        scrollbar = pojo {| enabled = false |}
+
+        rangeSelector = pojo
+            {|
+                enabled = true
+                allButtonsEnabled = true
+                selected = 0
+                inputDateFormat = I18N.t "charts.common.numDateFormat"
+                // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
+                // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputBoxBorderColor = "#ced4da"
+                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                buttons =
+                    [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 3
+                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                        |}
+                    |]
+            |}
+
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 legend = {| enabled = false |}
-                                yAxis = [| {| labels = {| enabled = false |} |} |]
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
             |}
-
 
         plotOptions = pojo
             {|
@@ -264,20 +302,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         //enableMouseTracking = false
                     |}
             |}
-        tooltip = pojo
-            {|
-                shared = true
-                dateTimeLabelFormats = pojo
-                    {|
-                        // our data is sampled (offset) to noon: 12:00
-                        // but here we force to always format dates without any time
-                        // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
-                        // - https://devhints.io/datetime
-                        day = @"%A, %e. %B %Y"
-                        hour = @"%A, %e. %B %Y"
-                        minute = @"%A, %e. %B %Y"
-                        second = @"%A, %e. %B %Y"
-                    |}
-            |}
+
         credits = pojo {| enabled = false |}
     |}

@@ -117,6 +117,7 @@ let renderChartOptions (state : State) =
             |}
         series = allSeries
         yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
+        legend = {| enabled = false |}
     |}
 
 let renderChartContainer state =
@@ -125,7 +126,7 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 

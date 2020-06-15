@@ -1,0 +1,424 @@
+{
+    "notice": {
+        "news001": "Новости:",
+        "news002": "структура на хоспитализираните во КОВИД-19 болниците."
+    },
+    "timestamp": {
+        "at": "на {{ date, HH.mm }}",
+        "updated": "Ажурирано на {{ date, D. MMMM YYYY }}"
+    },
+    "navbar": {
+        "language": {
+            "english": "Англиски",
+            "slovenian": "Словенечки"
+        },
+        "github": "GitHub",
+        "links": "Линкови",
+        "sources": "Извори",
+        "team": "Тим",
+        "about": "За проектот",
+        "faq": "ЧПП",
+        "models": "Модели",
+        "tables": "Табела",
+        "home": "Дома"
+    },
+    "meta": {
+        "title": "CoViD-19 Трекер",
+        "description": "КОВИД-19 Трекер Македонија - собрани, проверени, обработени, анализирани и прегледани податоци за епидемијата на КОВИД-19 кај нас."
+    },
+    "infocard": {
+        "deceasedToDate": "Починати",
+        "icu": "На интензивна нега",
+        "inHospital": "Хоспитализирани",
+        "recoveredToDate": "Оздравени",
+        "active": "Активни случаи",
+        "confirmedToDate": "Позитивни случаи",
+        "tests": "Тестови на ден",
+        "lastUpdated": "{{ date, D. MMMM }}",
+        "accordingTo": "Во однос на {{ date, D. MMMM }}"
+    },
+    "cm": {
+        "publicTransport": {
+            "title": "Превоз",
+            "description": "Укинување на јавен превоз"
+        },
+        "epidemic": {
+            "title": "Епидемија"
+        },
+        "borders": {
+            "title": "Граници"
+        },
+        "liftSchools4to5": {
+            "title": "Училишта"
+        },
+        "liftSchools1to3": {
+            "title": "Детски градинки"
+        },
+        "liftPublicTransport": {
+            "title": "Превоз"
+        },
+        "liftFoodMarkets": {
+            "title": "Пазари"
+        },
+        "liftMunicipality": {
+            "title": "Општини"
+        },
+        "liftMuseums": {
+            "title": "Музеи"
+        },
+        "liftVacationHomes": {
+            "title": "Викендици"
+        },
+        "municipality": {
+            "title": "Општини"
+        },
+        "gatherings": {
+            "description": "Забрана на јавни собири",
+            "title": "Собири"
+        },
+        "schools": {
+            "title": "Училишта",
+            "description": "Затворање на училишта, ресторани"
+        },
+        "firstCase": {
+            "title": "Прв случај"
+        },
+        "quarantine14days": {
+            "title": "Карантин"
+        },
+        "liftQuarantine": {
+            "title": "Карантин"
+        },
+        "shops": {
+            "title": "Продавници"
+        },
+        "quarantine": {
+            "title": "Карантин"
+        }
+    },
+    "country": {
+        "USA": "САД",
+        "TUR": "Турција",
+        "TWN": "Тајван",
+        "SWE": "Шведска",
+        "SVN": "Словенија",
+        "SVK": "Словачка",
+        "SRB": "Србија",
+        "SGP": "Сингапур",
+        "RUS": "Русија",
+        "RKS": "Косово",
+        "NOR": "Норвешка",
+        "NZL": "Нов Зеланд",
+        "MNE": "Црна Гора",
+        "MKD": "С. Македонија",
+        "KOR": "Ј. Кореја",
+        "JPN": "Јапонија",
+        "ITA": "Италија",
+        "ISL": "Исланд",
+        "IRN": "Иран",
+        "HUN": "Унгарија",
+        "HRV": "Хрватска",
+        "CZE": "Чешка",
+        "GBR": "Велика Британија",
+        "FRA": "Франција",
+        "FIN": "Финска",
+        "ESP": "Шпанија",
+        "DNK": "Данска",
+        "DEU": "Германија",
+        "CHN": "НР Кина",
+        "CHE": "Швајцарија",
+        "BIH": "Босна и Херцеговина",
+        "BEL": "Белгија",
+        "AUT": "Австрија",
+        "AUS": "Австралија"
+    },
+    "shortMonth": {
+        "2": "мар",
+        "11": "дек",
+        "10": "нов",
+        "9": "окт",
+        "8": "сеп",
+        "7": "авг",
+        "6": "јул",
+        "5": "јун",
+        "4": "мај",
+        "3": "апр",
+        "1": "фев",
+        "0": "јан"
+    },
+    "weekday": {
+        "6": "сабота",
+        "5": "петок",
+        "4": "четврток",
+        "3": "среда",
+        "2": "вторник",
+        "1": "понеделник",
+        "0": "недела"
+    },
+    "month": {
+        "11": "декември",
+        "10": "ноември",
+        "9": "октомври",
+        "8": "септември",
+        "7": "август",
+        "6": "јули",
+        "5": "јуни",
+        "4": "мај",
+        "3": "април",
+        "2": "март",
+        "1": "февруари",
+        "0": "јануари"
+    },
+    "embedMaker": {
+        "copied": "Ископирано!",
+        "copy": "Копирај",
+        "descriptionPart2": "Проверете овде.",
+        "chooseChart": "Изберете графикон",
+        "preview": "Преглед:"
+    },
+    "tables": {
+        "tabByAgeFemale": "По возраст - Женски",
+        "tabByAgeMale": "По возраст - Машки",
+        "title": "Табела",
+        "day": "{{ date, D.M. }}",
+        "sourceLink": "GDocs табела во CSV облик или REST API",
+        "source": "Извори на податоци во други облици"
+    },
+    "charts": {
+        "metricsComparison": {
+            "hospitalized": "Хоспитализирани",
+            "recovered": "Оздравени (вкупно)",
+            "active": "Активни случаи",
+            "confirmedToDate": "Позитивни случаи (вкупно)",
+            "confirmed": "Позитивни случаи (дневно)",
+            "testsToDate": "Тестови (вкупно)",
+            "tests": "Тестови (дневно)",
+            "hospitalizedToDate": "Хоспитализирани (вкупно)",
+            "title": "Состојба со COVID-19 во Република Северна Македонија",
+            "deceasedToDate": "Починати (вкупно)",
+            "deceased": "Починати (дневно)",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега"
+        },
+        "common": {
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "ЧПП",
+            "yAxis": "Y-оска:",
+            "xAxis": "Х-оска:",
+            "log": "Логаритамска",
+            "linear": "Линеарна",
+            "close": "Затвори",
+            "webpage": "Веб страница",
+            "loading": "Вчитување на податоците…"
+        },
+        "municipalities": {
+            "yesterday": "вчера",
+            "lastCase": "Последен случај: ",
+            "today": "денес",
+            "doubles": "Удвојување ",
+            "deceased": "Починати:",
+            "recovered": "Оздравени:",
+            "active": "Активни:",
+            "all": "Сите:",
+            "sortActive": "Активни",
+            "sortTotal": "Сите",
+            "sortDoublingTime": "Време на удвојување",
+            "sortBy": "Подреди по:",
+            "sortLast": "Последен",
+            "showLess": "Прикажи помалку општини",
+            "showAll": "Прикажи ги сите општини",
+            "search": "Барај општина",
+            "title": "Случаи по општини"
+        },
+        "spread": {
+            "today": "Денес",
+            "absoluteTitle": "Дневен прираст на потврдени случаи",
+            "absoluteLabel": "Потврдени случаи (дневно)",
+            "relativeLabel": "Релативен прираст во %",
+            "doublingRateLabel": "За колку дена бројот на инфицирани се удвојува",
+            "confirmedCases": "потврдени случаи",
+            "relativeTitle": "Дневен прираст на инфицирани",
+            "oneDay": "Еден ден",
+            "oneWeek": "Една недела",
+            "oneMonth": "Еден месец",
+            "inOneWeek": "По една недела",
+            "inTwoWeeks": "По две недели",
+            "inThreeWeeks": "По три недели",
+            "inFourWeeks": "По 4 недели",
+            "hospitalized": "хоспитализирани",
+            "title": "Раст на потврдени случаи",
+            "absolute": "Апсолутен дневен прираст",
+            "percentage": "Релативен дневен прираст",
+            "doublingRate": "Експоненцијален раст во денови",
+            "explainer": "Што значи експоненцијален прираст"
+        },
+        "hospitals": {
+            "data": "Податоци",
+            "allHospitals": "Сите болници",
+            "beds": "Болнички кревети",
+            "bedsShort": "Кревети",
+            "ventilators": "Респиратори",
+            "all": "Сите",
+            "title": "Болнички капацитети",
+            "projection": "Проекција",
+            "projection7": "Проекција, удвојување за 7 дена",
+            "projection14": "проекција, удвојување за 14 дена",
+            "projection21": "Проекција, удвојување за 21 ден"
+        },
+        "countries": {
+            "groupNordic": "Нордиски земји",
+            "groupEastAsiaOceania": "Источна Азија и Океанија",
+            "chronologically": "Хронолошки",
+            "groupCriticalEU": "Критични држави (ЕУ)",
+            "groupCriticalWorld": "Критични држави (на светско ниво)"
+        },
+        "ageGroups": {
+            "confirmedCases": "Потврдени случаи",
+            "deceased": "Починати",
+            "age": "Возраст",
+            "populationTotal": "Население (вкупно)",
+            "female": "Женски",
+            "male": "Машки",
+            "view": "Прикажи:",
+            "relative": "Релативно",
+            "absolute": "Апсолутно",
+            "title": "Старосни групи"
+        },
+        "map": {
+            "confirmedCases": "Потврдени случаи",
+            "deceased": "Починати",
+            "last_x_days": "{{ count }} ден",
+            "last_x_days_plural": "{{ count }} дена",
+            "all": "Сите",
+            "absolute": "Апсолутно",
+            "population": "население",
+            "populationC": "Население",
+            "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
+            "view": "Прикажи:"
+        },
+        "infections": {
+            "allConfirmed": "Сите потврдени",
+            "rhOccupant": "Штитеници во домови за згрижување на стари лица",
+            "rhStaff": "Вработени во домови за згрижување на стари лица",
+            "hcStaff": "Здравствени работници",
+            "all": "Вкупно",
+            "averageByDay": "По ден (просек)",
+            "title": "Структура на потврдените случаи",
+            "relative": "Релативно"
+        },
+        "tests": {
+            "positiveTests": "Позитивни тестови",
+            "negativeTests": "Негативни тестови",
+            "allTesting": "Вкупно",
+            "title": "Тестирање"
+        },
+        "hCenters": {
+            "testsPositive": "Тестови (позитивни*)",
+            "testsPerformed": "Тестови (вкупно)"
+        },
+        "ratios": {
+            "deceasedHospital": "Починати",
+            "ventilatorHospital": "На респиратор",
+            "icuHospital": "На интензивна нега",
+            "deceasedCases": "Починати",
+            "ventilatorCases": "На респиратор",
+            "icuCases": "На интензивна нега",
+            "hospitalCases": "Хоспитализирани",
+            "mortality": "Смртност",
+            "hospitalizations": "Хоспитализирани"
+        },
+        "patients": {
+            "allHospitals": "Сите болници",
+            "deceased": "Починати",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега",
+            "hospitalized": "Хоспитализирани",
+            "hospitalizedIn": "Хоспитализирани во:",
+            "structure": "Структура",
+            "title": "Хоспитализирани"
+        },
+        "cases": {
+            "deceased": "Починати",
+            "recovered": "Оздравени",
+            "ventilator": "На респиратор",
+            "icu": "На интензивна нега",
+            "hospitalized": "Хоспитализирани",
+            "active": "Активни",
+            "title": "Потврдени случаи"
+        }
+    },
+    "phase": {
+        "7": {
+            "title": "Фаза 7"
+        },
+        "6": {
+            "title": "Фаза 6"
+        },
+        "5": {
+            "title": "Фаза 5"
+        },
+        "4": {
+            "title": "Фаза 4"
+        },
+        "3": {
+            "title": "Фаза 3"
+        },
+        "2": {
+            "title": "Фаза 2"
+        },
+        "1": {
+            "title": "Фаза 1"
+        }
+    },
+    "days": {
+        "longerDate": "{{ date, D. MMMM YYYY }}",
+        "date": "{{ date, D. MMMM }}",
+        "x_days_ago": "пред {{ count }} ден",
+        "x_days_ago_plural": "пред {{ count }} дена",
+        "in_x_days": "во {{ count }} ден",
+        "in_x_days_plural": "во {{ count }} дена"
+    },
+    "tableDict": {
+        "tests_performed": "Тестови (дневно)",
+        "region_todate": "Вкупно",
+        "age_female_85+_todate": "85+ години",
+        "age_female_75-84_todate": "75 - 84 години",
+        "age_female_65-74_todate": "65 - 74 години",
+        "age_female_55-64_todate": "55 - 64 години",
+        "age_female_45-54_todate": "45 - 54 години",
+        "age_female_35-44_todate": "35 - 44 години",
+        "age_female_25-34_todate": "25 - 34 години",
+        "age_female_15-24_todate": "15 - 24 години",
+        "age_female_5-14_todate": "5 - 14 години",
+        "age_female_0-4_todate": "0 - 4 години",
+        "age_female_todate": "Вкупно",
+        "age_male_85+_todate": "85+ години",
+        "age_male_75-84_todate": "75 - 84 години",
+        "age_male_65-74_todate": "65 - 74 години",
+        "age_male_55-64_todate": "55 - 64 години",
+        "age_male_45-54_todate": "45 - 54 години",
+        "age_male_35-44_todate": "35 - 44 години",
+        "age_male_25-34_todate": "25 - 34 години",
+        "age_male_15-24_todate": "15 - 24 години",
+        "age_male_5-14_todate": "5 - 14 години",
+        "age_male_0-4_todate": "0 - 4 години",
+        "age_male_todate": "Вкупно",
+        "state_in_hospital_todate": "Хоспитализирани (вкупно)",
+        "state_deceased_todate": "Починати (вкупно)",
+        "state_critical": "На респиратор (активни)",
+        "state_icu": "На интензивна нега (активни)",
+        "state_in_hospital": "Хоспитализирани (активни)",
+        "cases_rh_occupant_confirmed_todate": "Потврдени случаи кај штитеници на домови за грижа на стари лица (вкупно)",
+        "cases_rh_employee_confirmed_todate": "Потврдени случаи кај вработени во домови за грижа на стари лица (вкупно)",
+        "cases_hs_employee_confirmed_todate": "Потврдени случаи кај здравствени работници (вкупно)",
+        "cases_recovered_todate": "Оздравени (вкупно)",
+        "cases_active": "Активни случаи",
+        "cases_confirmed_todate": "Потврдени случаи (вкупно)",
+        "cases_confirmed": "Потврдени случаи (дневно)",
+        "tests_performed_todate": "Тестови (вкупно)"
+    },
+    "footer": {
+        "copyright": "© 2020 Sledilnik.org"
+    }
+}

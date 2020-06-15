@@ -120,8 +120,8 @@ let renderRatiosChart (state : State) =
             | DeceasedHospital              -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedHospitalC             -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.inHospital.toDate
             | DeceasedIcuC                  -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.icu.toDate
-            | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate 
-            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate 
+            | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate
+            | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate
 
         let color, line, name = Ratios.getSeriesInfo ratio
 
@@ -155,15 +155,13 @@ let renderRatiosChart (state : State) =
             {|
                 spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
-        yAxis = baseOptions.yAxis
-            |> Array.map (fun ax -> {| ax with max = maxValue ; labels = pojo {| format = "{value}%" |} |} )
 
         series = [|
             for ratio in Ratios.getSeries(state.displayType) do
             yield renderRatiosH ratio
         |]
 
-        tooltip = pojo {| shared = true; valueSuffix = " %" ; xDateFormat = @"%A, %e. %B %Y" |}
+        tooltip = pojo {| shared = true; split = false ; valueSuffix = " %" ; xDateFormat = I18N.t "charts.common.dateFormat" |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}
@@ -172,7 +170,7 @@ let renderChartContainer state =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderRatiosChart state  |> Highcharts.chart ]
+        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
     ]
 
 let renderDisplaySelector state dt dispatch =

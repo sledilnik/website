@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
 import * as d3 from 'd3'
-
 import { statsStore } from './stats.store'
 import { hospitalsStore } from './hospitals.store'
 import { patientsStore } from './patients.store'
@@ -12,9 +10,8 @@ import { tableData } from './tables.store'
 
 Vue.use(Vuex)
 
-export async function exportTime(url) {
-  let x = await axios.get(url)
-  return new Date(x.data * 1000)
+export function exportTime(x) {
+  return new Date(x * 1000)
 }
 
 // loads csv, converts dates to Date objects, string values to numberical

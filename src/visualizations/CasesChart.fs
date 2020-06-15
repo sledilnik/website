@@ -69,7 +69,7 @@ let legendFormatter jsThis =
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
@@ -144,21 +144,6 @@ let renderChartOptions (state : State) =
             {|
                 shared = true
                 formatter = fun () -> legendFormatter jsThis
-            |}
-
-        legend = pojo
-            {|
-                enabled = true
-                title = {| text = null |}
-                align = "left"
-                verticalAlign = "top"
-                x = 10
-                y = 30
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                backgroundColor = "#FFF"
             |}
     |}
 

@@ -132,6 +132,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         yAxis =
             let showFirstLabel = scaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+        legend = {| enabled = false |}
     |}
 
 let renderChartContainer scaleType data metrics =
@@ -140,7 +141,7 @@ let renderChartContainer scaleType data metrics =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -151,7 +152,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         else [ ]
     Html.div [
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        prop.className [ true, "btn btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 

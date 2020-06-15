@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueMeta from 'vue-meta'
 import i18next from 'i18next'
 
 import StaticPage from './pages/StaticPage.vue'
@@ -7,13 +8,14 @@ import StatsPage from './pages/StatsPage.vue'
 import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
+import PageNotFound from './pages/PageNotFound.vue'
 
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
 import * as linksMd from './content/links.md'
 import * as linksMdEn from './content/links_en.md'
-import * as contentMd from './content/FAQ.md'
-import * as contentMdEn from './content/FAQ_en.md'
+import * as contentMd from './content/faq.md'
+import * as contentMdEn from './content/faq_en.md'
 import * as teamMd from './content/team.md'
 import * as teamMdEn from './content/team_en.md'
 import * as sourcesMd from './content/sources.md'
@@ -24,19 +26,44 @@ import * as datasourcesMd from './content/datasources.md'
 import * as datasourcesMdEn from './content/datasources_en.md'
 
 Vue.use(VueRouter)
+Vue.use(VueMeta)
 
 const mdContent = {
-  FAQ: { sl: contentMd, en: contentMdEn },
-  about: { sl: aboutMd, en: aboutMdEn },
-  team: { sl: teamMd, en: teamMdEn },
-  links: { sl: linksMd, en: linksMdEn },
-  sources: { sl: sourcesMd, en: sourcesMdEn },
-  models: { sl: modelsMd, en: modelsMdEn },
-  datasources: { sl: datasourcesMd, en: datasourcesMdEn },
+  faq: {
+    sl: contentMd,
+    en: contentMdEn
+  },
+  about: {
+    sl: aboutMd,
+    en: aboutMdEn
+  },
+  team: {
+    sl: teamMd,
+    en: teamMdEn
+  },
+  links: {
+    sl: linksMd,
+    en: linksMdEn
+  },
+  sources: {
+    sl: sourcesMd,
+    en: sourcesMdEn
+  },
+  models: {
+    sl: modelsMd,
+    en: modelsMdEn
+  },
+  datasources: {
+    sl: datasourcesMd,
+    en: datasourcesMdEn
+  },
 }
 
 function dynamicProps(route) {
-  let baseRoute = route.path.slice(4)
+  let baseRoute = route.path
+    .slice(4)
+    .toLowerCase()
+    .replace(/\/$/, '')
   let lang = route.params.lang
 
   return {
@@ -101,7 +128,6 @@ const routes = [
     redirect: `/${i18next.language}/data`,
   },
   {
-    // TODO: this doesn't work
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
   },
@@ -110,12 +136,18 @@ const routes = [
     redirect: `/${i18next.language}/datasources`,
   },
   {
+    path: '/',
+    beforeEnter: (to, from, next) => {
+      next(i18next.language)
+    },
+  },
+  {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
-      const supportedLanguages = ['sl', 'en']
+      const supportedLanguages = i18next.languages
       if (!supportedLanguages.includes(language)) {
-        return next(`${i18next.language}/stats`)
+        return next(`${i18next.language}/404`)
       }
       if (i18next.language !== language) {
         i18next.changeLanguage(language)
@@ -128,6 +160,10 @@ const routes = [
       },
     },
     children: [
+      {
+        path: '',
+        redirect: 'stats',
+      },
       {
         path: 'stats',
         component: StatsPage,
@@ -145,6 +181,21 @@ const routes = [
         component: EmbedMakerPage,
       },
       ...mdContentRoutes(),
+      {
+        path: '*',
+        component: PageNotFound,
+        // Vue Router supports meta tags, but for some reason this doesn't work
+        // - https://router.vuejs.org/guide/advanced/meta.html
+        // - https://alligator.io/vuejs/vue-router-modify-head/
+        // meta: {
+        //   metaTags: [
+        //     {
+        //       name: 'robots',
+        //       content: 'noindex',
+        //     },
+        //   ],
+        // },
+      },
     ],
   },
   {
@@ -156,8 +207,9 @@ const routes = [
         next(path)
         return
       }
-      next({ path: '/sl/stats' })
+      next()
     },
+    component: PageNotFound,
   },
 ]
 

@@ -20,7 +20,7 @@ type Breakdown =
     static member getName = function
         | ByHospital -> I18N.t "charts.patients.byHospital"
         | AllHospitals -> I18N.t "charts.patients.allHospitals"
-        | Facility fcode -> 
+        | Facility fcode ->
             let _, name = Data.Hospitals.facilitySeriesInfo fcode
             name
 
@@ -61,7 +61,7 @@ type State = {
             Breakdown = AllHospitals
         }
 
-let getAllBreakdowns state = seq {         
+let getAllBreakdowns state = seq {
         yield ByHospital
         yield AllHospitals
         for fcode in state.AllFacilities do
@@ -88,7 +88,7 @@ let getFacilitiesList (data : PatientsStats array) =
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
     |> List.map (fst)
- 
+
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
@@ -132,22 +132,8 @@ let renderByHospitalChart (state : State) =
 
         series = [| for fcode in state.AllFacilities do yield renderSources fcode |]
 
-        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = @"%A, %e. %B %Y" |} 
+        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = I18N.t "charts.common.dateFormat" |}
 
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text=(I18N.t "charts.patients.hospitalizedIn") |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
     |} |> pojo
 
 
@@ -169,7 +155,7 @@ let renderStructureChart (state : State) =
                 match p?point?seriesId with
                 | "hospitalized" | "discharged" | "deceased"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
-                fmtLine <- sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+                fmtLine <- sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                     fmtUnder
                     p?series?color
                     p?series?name
@@ -180,13 +166,13 @@ let renderStructureChart (state : State) =
                     fmtStr <- fmtStr + fmtLine
         sprintf "<b>%s</b>" fmtDate + fmtStr
 
-    let psData = 
+    let psData =
         match state.Breakdown with
-        | Facility fcode -> 
-            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+        | Facility fcode ->
+            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map (fun ps -> (ps.Date, ps.facilities |> Map.find fcode)) |> Seq.toArray
-        | _ -> 
-            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate) 
+        | _ ->
+            state.PatientsData |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                 |> Seq.map (fun ps -> (ps.Date, ps.total.ToFacilityStats)) |> Seq.toArray
 
 
@@ -216,8 +202,8 @@ let renderStructureChart (state : State) =
         {|
             color = color
             name = I18N.tt "charts.patients" seriesid
-            data = 
-                psData                
+            data =
+                psData
                 |> Seq.map (fun (date,ps) ->
                     {|
                         x = date |> jsTime12h
@@ -247,22 +233,8 @@ let renderStructureChart (state : State) =
 
         series = [| for series in Series.structure do yield renderBarSeries series |]
 
-        tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |} 
+        tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |}
 
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text="" |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
     |} |> pojo
 
 
@@ -271,8 +243,8 @@ let renderChartContainer state =
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            match state.Breakdown with 
-            | ByHospital -> renderByHospitalChart state |> Highcharts.chart
+            match state.Breakdown with
+            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
             | _ -> renderStructureChart state |> Highcharts.chartFromWindow
         ]
     ]

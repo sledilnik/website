@@ -1,5 +1,10 @@
 {
+    "meta": {
+        "title": "COVID-19 Sledilnik",
+        "description": "COVID-19 Sledilnik Slovenija - zbrani, preverjeni, ažurirani, analizirani in pregledni podatki o epidemiji COVID-19 v Sloveniji."
+    },
     "navbar": {
+        "menu": "Meni",
         "home": "Domov",
         "tables": "Tabela",
         "models": "Modeli",
@@ -23,7 +28,9 @@
         "news002": "prikaz strukture hospitaliziranih po posameznih COVID-19 bolnišnicah."
     },
     "infocard": {
+        "tests": "Testov na dan",
         "confirmedToDate": "Potrjeno okuženi",
+        "active": "Aktivni primeri",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
@@ -47,6 +54,8 @@
         "preview": "Predogled:",
         "embedCode": "Koda za vdelavo:",
         "description": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">najdete tukaj</a>.",
+        "descriptionPart1": "Posamezen prikaz lahko prilagodite tudi svojim potrebam - spremenite lahko velikost vgrajenega prikaza, ali pa prikazujete zgolj posamezne pokrajine oz. kraje. Podrobnejša navodila ",
+        "descriptionPart2": "najdete tukaj.",
         "copy": "Kopiraj",
         "copied": "Skopirano!"
     },
@@ -60,7 +69,7 @@
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, D. MMMM }}",
-        "longerDate": "{{ date, D. MMMM YYYY }}"
+        "longerDate": "{{ date, dddd, D. MMMM YYYY }}"
     },
     "month": {
         "0": "januar",
@@ -244,6 +253,10 @@
         "liftSchools4to5": {
             "title": "OŠ",
             "description": "Sproščanje: osnovna šola 4., 5. razred, zbiranje do 200 ljudi, vse namestitve"
+        },
+        "liftGatherings500": {
+            "title": "Do 500",
+            "description": "Sproščanje: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
         }
     },
     "phase": {
@@ -278,12 +291,33 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
+            "from": "",
+            "to": "-",
+            "zoom": "Obdobje",
+            "resetZoom": "Ponastavi merilo",
+            "resetZoomTitle": "Prikaži celotno časovno obdobje",
+            "x_months_0": "{{ count }}m",
+            "x_months_1": "{{ count }}m",
+            "x_months_2": "{{ count }}m",
+            "x_months_3": "{{ count }}m",
+            "all": "Vse",
+            "thousandsSep": ".",
+            "decimalPoint": ",",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
             "log": "Logaritemska",
             "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
-            "linkFaq": "FAQ"
+            "linkFaq": "FAQ",
+            "facebook": "Facebook",
+            "twitter": "Twitter",
+            "webpage": "Spletno stran",
+            "share": "Deli graf na",
+            "close": "Zapri",
+            "numDateFormat": "%d. %m. %Y",
+            "dateFormat": "%A, %e. %B %Y",
+            "longDateFormat": "%e. %B %Y",
+            "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v Sloveniji",
@@ -321,7 +355,8 @@
             "icu": "V intenzivni enoti",
             "ventilator": "Na respiratorju",
             "discharged": "Odpuščeni",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "structure": "Struktura"
         },
         "ratios": {
             "title": "Delež resnih primerov",
@@ -396,6 +431,31 @@
             "confirmedCases": "potrjeno okuženih",
             "hospitalized": "hospitaliziranih"
         },
+        "hospitals": {
+            "title": "Kapacitete bolnišnic",
+            "allHospitals": "Vse bolnišnice",
+            "projection": "Projekcija",
+            "projection7": "Projekcija, 7-dnevno podvajanje",
+            "projection14": "Projekcija, 14-dnevno podvajanje",
+            "projection21": "Projekcija, 21-dnevno podvajanje",
+            "beds": "Bolnišnične postelje",
+            "bedsShort": "Postelje",
+            "bedsICU": "Intenzivne postelje",
+            "bedsICUShort": "ICU postelje",
+            "bedsMax": "Postelje, maksimalno",
+            "bedsAll": "Postelje, vse",
+            "beds70": "Postelje, 70%",
+            "bedsFull": "Postelje, polne",
+            "bedsICUAll": "Intenzivne, vse",
+            "bedsICU70": "Intenzivne, 70%",
+            "bedsICUFull": "Intenzivne, polne",
+            "ventilators": "Respiratorji",
+            "empty": "Proste",
+            "full": "Polne",
+            "all": "Vse",
+            "max": "Max",
+            "data": "Podatki"
+        },
         "regions": {
             "title": "Potrjeno okuženi po regijah"
         },
@@ -407,7 +467,10 @@
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
             "all": "Vsi",
-            "days": "dni",
+            "last_x_days_0": "{{ count }} dan",
+            "last_x_days_1": "{{ count }} dneva",
+            "last_x_days_2": "{{ count }} dni",
+            "last_x_days_3": "{{ count }} dni",
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
@@ -418,10 +481,10 @@
             "today": "danes",
             "yesterday": "včeraj",
             "doubles": "Podvojitev ",
-            "deceased": "Umrli:",
-            "recovered": "Preboleli:",
-            "active": "Aktivni:",
-            "all": "Vsi:",
+            "deceased": "Umrli: ",
+            "recovered": "Preboleli: ",
+            "active": "Aktivni: ",
+            "all": "Vsi: ",
             "showLess": "Prikaži manj občin",
             "showAll": "Prikaži vse občine",
             "search": "Poišči občino",
@@ -525,5 +588,11 @@
         "region_ce_todate": "Savinjska",
         "region_za_todate": "Zasavska",
         "region_todate": "Skupno"
+    },
+    "pageNotFound": {
+        "notFound": "404: stran ne obstaja",
+        "somethingWentWrong": "ups… nekaj se je zalomilo :(",
+        "back": "Nazaj",
+        "imageDescription": "prometna stožca povezana z rumenim trakom"
     }
 }

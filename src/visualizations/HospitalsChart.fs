@@ -73,8 +73,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         (state |> State.switchBreakdown breakdown), Cmd.none
 
 let getAllScopes state = seq {
-    yield Totals, "Vse bolnišnice"
-    yield Projection, "Projekcija"
+    yield Totals, I18N.t "charts.hospitals.allHospitals"
+    yield Projection, I18N.t "charts.hospitals.projection"
     for fcode in state.facilities do
         let _, name = fcode |> facilitySeriesInfo
         yield Facility fcode, name
@@ -142,7 +142,7 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "Bolnišnične postelje" |} // "oseb" |}
+            title = pojo {| text = I18N.t "charts.hospitals.bedsShort" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
@@ -157,7 +157,7 @@ let renderChartOptions (state : State) =
             min = if state.scaleType=Linear then None else Some 1.0
             //floor = if scaleType=Linear then None else Some 1.0
             opposite = true // right side
-            title = pojo {| text = "ICU postelje" |} // "oseb" |}
+            title = pojo {| text = I18N.t "charts.hospitals.bedsICUShort" |} // "oseb" |}
             //showFirstLabel = false
             tickInterval = if state.scaleType=Linear then None else Some 0.25
             gridZIndex = -1
@@ -264,32 +264,32 @@ let renderChartOptions (state : State) =
 
         let clr = "#444"
         if state.scope = Projection then
-            yield renderFacilitiesSeries state.scope Beds Max 1.0 clr Dash "Postelje, maksimalno"
+            yield renderFacilitiesSeries state.scope Beds Max 1.0 clr Dash (I18N.t "charts.hospitals.bedsMax")
         else
             yield pojo {| showInLegend = false; data=[||] |}
 
-        yield renderFacilitiesSeries state.scope Beds Total 1.0 clr Solid "Postelje, vse"
-        yield renderFacilitiesSeries state.scope Beds Total 0.7 "#777" Dash "Postelje, 70%"
+        yield renderFacilitiesSeries state.scope Beds Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsAll")
+        yield renderFacilitiesSeries state.scope Beds Total 0.7 "#777" Dash (I18N.t "charts.hospitals.beds70")
         //yield renderFacilitiesSeries state.scope Beds Free    clr ShortDot "Postelje, proste"
         //yield renderFacilitiesSeries state.scope Beds Occupied clr Solid "Postelje, zasedene"
-        yield renderPatientsSeries state.scope Beds clr Solid "Postelje, polne"
+        yield renderPatientsSeries state.scope Beds clr Solid (I18N.t "charts.hospitals.bedsFull")
 
         let clr = "#c44"
         //yield renderFacilitiesSeries state.scope Icus Max      clr Dash "Intenzivne, maksimalno"
-        yield renderFacilitiesSeries state.scope Icus Total 1.0 clr Solid "Intenzivne, vse"
-        yield renderFacilitiesSeries state.scope Icus Total 0.7 "#c88" Dash "Intenzivne, 70%"
+        yield renderFacilitiesSeries state.scope Icus Total 1.0 clr Solid (I18N.t "charts.hospitals.bedsICUAll")
+        yield renderFacilitiesSeries state.scope Icus Total 0.7 "#c88" Dash (I18N.t "charts.hospitals.bedsICU70")
         //yield renderFacilitiesSeries state.scope Icus Occupied clr Solid "Intenzivne, zasedene"
-        yield renderPatientsSeries state.scope Icus clr Solid "Intenzivne, polne"
+        yield renderPatientsSeries state.scope Icus clr Solid (I18N.t "charts.hospitals.bedsICUFull")
         if state.scope = Projection then
             let clr = "#888"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  "Projekcija, 7-dnevno podvajanje"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 "Projekcija, 14-dnevno podvajanje"
-            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 "Projekcija, 21-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf7 1100  (I18N.t "charts.hospitals.projection7")
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf14 1100 (I18N.t "charts.hospitals.projection14")
+            yield renderPatientsProjection state.scope Beds clr ShortDash gf21 1100 (I18N.t "charts.hospitals.projection21")
 
             let clr = "#c88"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130  "Projekcija, 7-dnevno podvajanje"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 "Projekcija, 14-dnevno podvajanje"
-            yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 "Projekcija, 21-dnevno podvajanje"
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf7 130  (I18N.t "charts.hospitals.projection7")
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf14 130 (I18N.t "charts.hospitals.projection14")
+            yield renderPatientsProjection state.scope Icus clr ShortDash gf21 130 (I18N.t "charts.hospitals.projection21")
 
 
         //let clr = "#4ad"
@@ -325,12 +325,12 @@ let renderChartOptions (state : State) =
                         {| ``from``=jsTime <| DateTime(2020,2,29);
                            ``to``=jsTime <| DateTime.Now
                            color="transparent"
-                           label={| align="center"; text="Podatki" |}
+                           label={| align="center"; text=I18N.t "charts.hospitals.data" |}
                         |}
                         {| ``from``=jsTime <| DateTime.Today;
                            ``to``=jsTime <| DateTime(2020,3,20) + TimeSpan.FromDays (float projectDays)
                            color="transparent"
-                           label={| align="center"; text="Projekcija" |}
+                           label={| align="center"; text=(I18N.t "charts.hospitals.projection") |}
                         |}
                     |]
                 |}
@@ -349,7 +349,7 @@ let renderChartContainer state =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state
-            |> Highcharts.chart
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -436,29 +436,29 @@ let renderTable (state: State) dispatch =
                         prop.className "text-center"
                         prop.children [
                             Html.th []
-                            Html.th [ prop.text "Postelje"; prop.colSpan 4 ]
-                            Html.th [ prop.text "Intenzivne postelje"; prop.colSpan 4 ]
-                            Html.th [ prop.text "Respiratorji"; prop.colSpan 4 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsShort"); prop.colSpan 4 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.bedsICUShort"); prop.colSpan 4 ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.ventilators"); prop.colSpan 4 ]
                         ]
                     ]
                     Html.tableRow [
                         prop.children [
                             Html.th []
                             // postelje
-                            Html.th [ prop.text "Proste" ]
-                            Html.th [ prop.text "Polne" ]
-                            Html.th [ prop.text "Vse" ]
-                            Html.th [ prop.text "Max" ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // icu
-                            Html.th [ prop.text "Proste" ]
-                            Html.th [ prop.text "Polne" ]
-                            Html.th [ prop.text "Vse" ]
-                            Html.th [ prop.text "Max" ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                             // vents
-                            Html.th [ prop.text "Prosti" ]
-                            Html.th [ prop.text "V uporabi" ]
-                            Html.th [ prop.text "Vsi" ]
-                            Html.th [ prop.text "Max" ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.empty") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.full") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.all") ]
+                            Html.th [ prop.text (I18N.t "charts.hospitals.max") ]
                         ]
                     ]
                 ]
