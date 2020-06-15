@@ -238,6 +238,13 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             |}
         |]
 
+        tooltip = pojo
+            {|
+                shared = true
+                split = false
+                xDateFormat = I18N.t "charts.common.dateFormat"
+            |}
+
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
         navigator = pojo {| enabled = false |}
@@ -286,7 +293,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                     |} |]
             |}
 
-
         plotOptions = pojo
             {|
                 line = pojo
@@ -296,19 +302,6 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         //enableMouseTracking = false
                     |}
             |}
-        tooltip = pojo
-            {|
-                shared = true
-                split = false
-                dateTimeLabelFormats = pojo
-                    {|
-                        // our data is sampled (offset) to noon: 12:00
-                        // but here we force to always format dates without any time
-                        // - https://api.highcharts.com/highcharts/tooltip.dateTimeLabelFormats
-                        // - https://devhints.io/datetime
-                        week = I18N.t "charts.common.dateFormat"
-                        day = I18N.t "charts.common.dateFormat"
-                    |}
-            |}
+
         credits = pojo {| enabled = false |}
     |}
