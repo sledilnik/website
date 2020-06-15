@@ -117,14 +117,6 @@ let renderChartOptions (state : State) =
                 series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
-        legend = pojo
-            {|
-                enabled = true
-                layout = "horizontal"
-            |}
-
-        tooltip = pojo {| shared = true; split = false |}
-
         responsive = pojo
             {|
                 rules =

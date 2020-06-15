@@ -286,7 +286,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     justify-content: space-between
     flex-wrap: wrap
-    padding: 22px 15px
+    padding: 5px 0 5px
+
+    @include media-breakpoint-down(sm)
+      padding: 5px
 
     .chart-display-property-selector, .chart-data-interval-selector
       text-align: right
@@ -322,16 +325,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         margin-left: 0
 
   .metrics-selectors
-    margin-top: $gap/2
     display: flex
     flex-wrap: wrap
-    padding: 0 $gap/2
 
     @media only screen and (max-width: 767px)
       justify-content: center
 
   .metric-selector
-    margin: 0 $gap/6 $gap/3 $gap/6
+    margin: 0 $gap/6 $gap/3 0
     font-size: $font-size
     border-color: $inactive-button-color
 
@@ -408,11 +409,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__type
       width: 10rem
-      margin-left: $gap / 2
-      margin-bottom: $gap / 2
+      margin-bottom: $gap / 6
 
-      @include media-breakpoint-down(md)
-        margin-left: $gap / 2
       @include media-breakpoint-down(sm)
         width: 8.25rem
         padding: 0
@@ -432,8 +430,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__region
       width: 15rem
-      margin-left: $gap / 2
-      margin-bottom: $gap / 2
 
       @include media-breakpoint-down(md)
         margin-left: 0
@@ -458,11 +454,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__region
       width: 15rem
-      margin-left: $gap / 2
-      margin-bottom: $gap / 2
-
-      @include media-breakpoint-down(md)
-        margin-left: 0
 
     .chart-display-property-selector
       @include media-breakpoint-down(sm)

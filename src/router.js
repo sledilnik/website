@@ -8,6 +8,7 @@ import StatsPage from './pages/StatsPage.vue'
 import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
+import PageNotFound from './pages/PageNotFound.vue'
 
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
@@ -163,12 +164,18 @@ const routes = [
     redirect: `/${i18next.language}/datasources`,
   },
   {
+    path: '/',
+    beforeEnter: (to, from, next) => {
+      next(i18next.language)
+    },
+  },
+  {
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
       const supportedLanguages = i18next.languages
       if (!supportedLanguages.includes(language)) {
-        return next(`${i18next.language}/stats`)
+        return next(`${i18next.language}/404`)
       }
       if (i18next.language !== language) {
         i18next.changeLanguage(language)
@@ -182,7 +189,7 @@ const routes = [
     },
     children: [
       {
-        path: '/',
+        path: '',
         redirect: 'stats',
       },
       {
@@ -202,6 +209,21 @@ const routes = [
         component: EmbedMakerPage,
       },
       ...mdContentRoutes(),
+      {
+        path: '*',
+        component: PageNotFound,
+        // Vue Router supports meta tags, but for some reason this doesn't work
+        // - https://router.vuejs.org/guide/advanced/meta.html
+        // - https://alligator.io/vuejs/vue-router-modify-head/
+        // meta: {
+        //   metaTags: [
+        //     {
+        //       name: 'robots',
+        //       content: 'noindex',
+        //     },
+        //   ],
+        // },
+      },
     ],
   },
   {
@@ -213,8 +235,9 @@ const routes = [
         next(path)
         return
       }
-      next({ path: `/${process.env.VUE_APP_DEFAULT_LANGUAGE}/stats` })
+      next()
     },
+    component: PageNotFound,
   },
 ]
 
