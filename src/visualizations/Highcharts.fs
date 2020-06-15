@@ -258,6 +258,8 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 selected = 0
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputBoxBorderColor = "#ced4da"
+                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
                 buttons =
                     [|
                         {|
@@ -304,6 +306,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
         tooltip = pojo
             {|
                 shared = true
+                split = false
                 dateTimeLabelFormats = pojo
                     {|
                         // our data is sampled (offset) to noon: 12:00
