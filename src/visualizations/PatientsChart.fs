@@ -134,20 +134,6 @@ let renderByHospitalChart (state : State) =
 
         tooltip = pojo {| shared = true; formatter = None ; xDateFormat = I18N.t "charts.common.dateFormat" |}
 
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text=(I18N.t "charts.patients.hospitalizedIn") |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
     |} |> pojo
 
 
@@ -249,20 +235,6 @@ let renderStructureChart (state : State) =
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |}
 
-        legend = pojo
-            {|
-                enabled = Some true
-                title = {| text="" |}
-                align = "left"
-                verticalAlign = "top"
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                x = 20
-                y = 30
-                backgroundColor = "#FFF"
-            |}
     |} |> pojo
 
 
