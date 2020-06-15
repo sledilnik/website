@@ -246,6 +246,10 @@
         "liftSchools4to5": {
             "title": "OŠ",
             "description": "Sproščanje: osnovna šola 4., 5. razred, zbiranje do 200 ljudi, vse namestitve"
+        },
+        "liftGatherings500": {
+            "title": "Do 500",
+            "description": "Sproščanje: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
         }
     },
     "phase": {
@@ -576,5 +580,11 @@
         "region_ce_todate": "Savinjska",
         "region_za_todate": "Zasavska",
         "region_todate": "Skupno"
+    },
+    "pageNotFound": {
+        "notFound": "404: stran ne obstaja",
+        "somethingWentWrong": "ups… nekaj se je zalomilo :(",
+        "back": "Nazaj",
+        "imageDescription": "prometna stožca povezana z rumenim trakom"
     }
 }
