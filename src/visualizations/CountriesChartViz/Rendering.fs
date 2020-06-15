@@ -20,7 +20,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
     }
     { Label = "groupCriticalWorld"
-      CountriesCodes = [| "BRA"; "ECU"; "ESP"; "ITA"; "SWE"; "USA" |]
+      CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
     }
     { Label = "groupNordic"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
