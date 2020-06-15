@@ -304,6 +304,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
         tooltip = pojo
             {|
                 shared = true
+                split = false
                 dateTimeLabelFormats = pojo
                     {|
                         // our data is sampled (offset) to noon: 12:00

@@ -123,8 +123,6 @@ let renderChartOptions (state : State) =
                 layout = "horizontal"
             |}
 
-        tooltip = pojo {| shared = true; split = false |}
-
         responsive = pojo
             {|
                 rules =
