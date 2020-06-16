@@ -146,20 +146,8 @@ let renderChartOptions (state : State) =
                 formatter = fun () -> legendFormatter jsThis
             |}
 
-        legend = pojo
-            {|
-                enabled = true
-                title = {| text = null |}
-                align = "left"
-                verticalAlign = "top"
-                x = 10
-                y = 30
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                backgroundColor = "#FFF"
-            |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
     |}
 
 let renderChartContainer (state : State) =
