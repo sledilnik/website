@@ -245,7 +245,17 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                 xDateFormat = I18N.t "charts.common.dateFormat"
             |}
 
-        legend = pojo {| enabled = true ; layout = "horizontal" |}
+        legend =
+            {|
+                enabled = false
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                //labelFormatter = string //fun series -> series.name
+                layout = "vertical"
+                //backgroundColor = None :> string option
+            |}
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}

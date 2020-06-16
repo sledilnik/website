@@ -145,6 +145,21 @@ let renderChartOptions (state : State) =
                 shared = true
                 formatter = fun () -> legendFormatter jsThis
             |}
+
+        legend = pojo
+            {|
+                enabled = true
+                title = {| text = null |}
+                align = "left"
+                verticalAlign = "top"
+                x = 10
+                y = 30
+                borderColor = "#ddd"
+                borderWidth = 1
+                layout = "vertical"
+                floating = true
+                backgroundColor = "#FFF"
+            |}
     |}
 
 let renderChartContainer (state : State) =

@@ -132,7 +132,6 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         yAxis =
             let showFirstLabel = scaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
-        legend = {| enabled = false |}
     |}
 
 let renderChartContainer scaleType data metrics =
