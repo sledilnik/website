@@ -287,7 +287,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
-                                legend = {| enabled = false |}
+                                // legend = {| enabled = false |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
