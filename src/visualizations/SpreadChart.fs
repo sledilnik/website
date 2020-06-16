@@ -187,7 +187,7 @@ let renderChartOptions scaleType (data : StatsData) =
     {| basicChartOptions Linear "covid19-spread" with
         series = allSeries
         yAxis=chartCfg.yAxis
-        legend=legend chartCfg.legendTitle
+        legend= pojo {| enabled = true |}
     |}
 
 let renderExplainer (data: StatsData) =
