@@ -130,6 +130,8 @@ let renderChartOptions (state : State) =
 
         // need to hide negative label for addContainmentMeasuresFlags
         yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
 let renderChartContainer (state : State) =

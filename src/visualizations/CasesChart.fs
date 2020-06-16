@@ -145,6 +145,9 @@ let renderChartOptions (state : State) =
                 shared = true
                 formatter = fun () -> legendFormatter jsThis
             |}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
     |}
 
 let renderChartContainer (state : State) =

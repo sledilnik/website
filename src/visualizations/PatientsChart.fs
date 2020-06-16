@@ -134,6 +134,8 @@ let renderByHospitalChart (state : State) =
 
         tooltip = pojo {| shared = true; formatter = None ; xDateFormat = I18N.t "charts.common.dateFormat" |}
 
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
     |} |> pojo
 
 
@@ -234,6 +236,8 @@ let renderStructureChart (state : State) =
         series = [| for series in Series.structure do yield renderBarSeries series |]
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
 
     |} |> pojo
 
