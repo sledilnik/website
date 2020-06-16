@@ -128,6 +128,7 @@ let renderChartOptions (state : State) =
                             {|
                                 yAxis = [|
                                     {| labels = {| enabled = false |} |}
+                                    {| labels = {| enabled = false |} |}
                                 |]
                             |}
                     |} |]
