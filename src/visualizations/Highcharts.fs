@@ -242,7 +242,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 shared = true
                 split = false
-                xDateFormat = I18N.t "charts.common.dateFormat"
+                xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
             |}
 
         legend =

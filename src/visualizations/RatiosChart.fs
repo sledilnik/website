@@ -161,7 +161,7 @@ let renderRatiosChart (state : State) =
             yield renderRatiosH ratio
         |]
 
-        tooltip = pojo {| shared = true; split = false ; valueSuffix = " %" ; xDateFormat = I18N.t "charts.common.dateFormat" |}
+        tooltip = pojo {| shared = true; split = false ; valueSuffix = " %" ; xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}

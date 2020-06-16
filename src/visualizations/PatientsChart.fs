@@ -132,7 +132,7 @@ let renderByHospitalChart (state : State) =
 
         series = [| for fcode in state.AllFacilities do yield renderSources fcode |]
 
-        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = I18N.t "charts.common.dateFormat" |}
+        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"|}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
