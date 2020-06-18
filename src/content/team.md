@@ -43,4 +43,5 @@ Uredniki baze in ostali sodelavci:
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
+-   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
