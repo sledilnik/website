@@ -257,6 +257,10 @@
         "liftGatherings500": {
             "title": "Do 500",
             "description": "Sproščanje: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
+        },
+        "quarantineStrict": {
+            "title": "Karantena",
+            "description": "Poostrena obvezna 14-dnevna karantena za kritične države<br>(rdeči seznam BIH, Srbijo, Kosovo)"
         }
     },
     "phase": {

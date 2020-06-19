@@ -111,6 +111,7 @@ let addContainmentMeasuresFlags
         26, 5, "#FFe6e6", "quarantine14days"
         1,  6, "#ebfaeb", "liftSchools4to5"
         15, 6, "#ebfaeb", "liftGatherings500"
+        19, 6, "#FFe6e6", "quarantineStrict"
     |]
     {|
         ``type`` = "flags"

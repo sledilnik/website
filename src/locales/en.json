@@ -514,6 +514,10 @@
         "liftGatherings500": {
             "title": "Up to 500",
             "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
+        },
+        "quarantineStrict": {
+            "title": "Quarantine",
+            "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
         }
     },
     "days": {
