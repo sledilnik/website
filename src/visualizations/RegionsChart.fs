@@ -37,7 +37,6 @@ type State =
       Metrics : Metric list }
 
 type Msg =
-    | ToggleRegionVisible of string
     | ScaleTypeChanged of ScaleType
 
 let regionTotal (region : Region) : int =
@@ -63,22 +62,10 @@ let init (data : RegionsData) : State * Cmd<Msg> =
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ToggleRegionVisible regionKey ->
-        let newMetrics =
-            state.Metrics
-            |> List.map (fun m ->
-                if m.Key = regionKey
-                then { m with Visible = not m.Visible }
-                else m)
-        { state with Metrics = newMetrics }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
 
 let renderChartOptions (state : State) =
-
-    let metricsToRender =
-        state.Metrics
-        |> List.filter (fun metric -> metric.Visible)
 
     let renderRegion metricToRender (point : RegionsDataPoint) =
         let ts = point.Date |> jsTime12h
@@ -91,11 +78,11 @@ let renderChartOptions (state : State) =
         ts,count
 
     let allSeries =
-        metricsToRender
+        state.Metrics
         |> List.map (fun metric ->
             let renderPoint = renderRegion metric
             {|
-                visible = metric.Visible
+                visible = true
                 color = metric.Color
                 name = I18N.tt "region" metric.Key
                 data = state.Data |> Seq.map renderPoint |> Array.ofSeq
@@ -117,7 +104,7 @@ let renderChartOptions (state : State) =
             |}
         series = allSeries
         yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
-        legend = {| enabled = false |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
 let renderChartContainer state =
@@ -130,33 +117,9 @@ let renderChartContainer state =
         ]
     ]
 
-let renderMetricSelector (metric : Metric) dispatch =
-    let style =
-        if metric.Visible
-        then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
-        else [ ]
-    Html.div [
-        prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
-        prop.style style
-        prop.text (I18N.tt "region" metric.Key) ]
-
-let renderMetricsSelectors metrics dispatch =
-    Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            metrics
-            |> List.map (fun metric ->
-                renderMetricSelector metric dispatch
-            ) ) ]
-
 let render (state : State) dispatch =
     Html.div [
-        Utils.renderChartTopControlRight
-            (Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch))
         renderChartContainer state
-        renderMetricsSelectors state.Metrics dispatch
     ]
 
 let regionsChart (props : {| data : RegionsData |}) =
