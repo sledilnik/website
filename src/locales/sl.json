@@ -36,7 +36,7 @@
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
         "accordingTo": "Glede na {{ date, D. MMMM }}",
-        "lastUpdated": "{{ date, D. MMMM }}"
+        "lastUpdated": "{{ date, dddd D. MMMM }}"
     },
     "tables": {
         "title": "Tabela",

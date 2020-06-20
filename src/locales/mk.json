@@ -35,7 +35,7 @@
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
         "lastUpdated": "{{ date, D. MMMM }}",
-        "accordingTo": "Во однос на {{ date, D. MMMM }}"
+        "accordingTo": "Во однос на {{ date, dddd D. MMMM }}"
     },
     "cm": {
         "publicTransport": {

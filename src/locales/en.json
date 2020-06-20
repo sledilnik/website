@@ -36,7 +36,7 @@
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
         "accordingTo": "According to {{ date, MMMM Do }}",
-        "lastUpdated": "{{ date, MMMM Do }}"
+        "lastUpdated": "{{ date, dddd MMMM Do }}"
     },
     "tables": {
         "title": "Table",
