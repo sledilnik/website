@@ -5,7 +5,7 @@
     },
     "timestamp": {
         "at": "на {{ date, HH.mm }}",
-        "updated": "Ажурирано на {{ date, D. MMMM YYYY }}"
+        "updated": "Ажурирано на {{ date, dddd, D. MMMM YYYY }}"
     },
     "navbar": {
         "language": {
@@ -35,7 +35,7 @@
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
         "lastUpdated": "{{ date, D. MMMM }}",
-        "accordingTo": "Во однос на {{ date, dddd D. MMMM }}"
+        "accordingTo": "Во однос на {{ date, dddd, D. MMMM }}"
     },
     "cm": {
         "publicTransport": {
