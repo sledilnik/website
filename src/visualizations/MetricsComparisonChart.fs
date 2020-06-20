@@ -132,11 +132,12 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         yAxis =
             let showFirstLabel = scaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
 let renderChartContainer scaleType data metrics =
     Html.div [
-        prop.style [ style.height 480 ] //; style.width 500; ]
+        prop.style [ style.height 520 ] 
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data metrics
@@ -170,7 +171,7 @@ let render state dispatch =
             (Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch))
         renderChartContainer state.ScaleType state.Data state.Metrics
-        renderMetricsSelectors state.Metrics dispatch
+        // renderMetricsSelectors state.Metrics dispatch
     ]
 
 let metricsComparisonChart (props : {| data : StatsData |}) =
