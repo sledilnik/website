@@ -159,6 +159,7 @@ let basicChartOptions
     {|
         chart = pojo
             {|
+                animation = false
                 ``type`` = "line"
                 zoomType = "x"
                 className = className

@@ -3,7 +3,6 @@ module MetricsComparisonChart
 
 open System
 open Elmish
-open Fable.Core
 open Feliz
 open Feliz.ElmishComponents
 open Browser
