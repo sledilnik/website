@@ -20,7 +20,7 @@
         }
     },
     "timestamp": {
-        "updated": "Updated {{ date, MMMM Do YYYY }}",
+        "updated": "Updated on {{ date, dddd, MMMM Do YYYY }}",
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
@@ -36,7 +36,7 @@
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
         "accordingTo": "According to {{ date, MMMM Do }}",
-        "lastUpdated": "{{ date, MMMM Do }}"
+        "lastUpdated": "{{ date, dddd, MMMM Do }}"
     },
     "tables": {
         "title": "Table",
