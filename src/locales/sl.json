@@ -20,7 +20,7 @@
         }
     },
     "timestamp": {
-        "updated": "Osveženo {{ date, D. MMMM YYYY }}",
+        "updated": "Osveženo: {{ date, dddd, D. MMMM YYYY }}",
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
@@ -36,7 +36,7 @@
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
         "accordingTo": "Glede na {{ date, D. MMMM }}",
-        "lastUpdated": "{{ date, D. MMMM }}"
+        "lastUpdated": "{{ date, dddd, D. MMMM }}"
     },
     "tables": {
         "title": "Tabela",
