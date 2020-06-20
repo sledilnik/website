@@ -12,7 +12,7 @@ open Types
 
 let barMaxHeight = 55
 let showMaxBars = 30
-let collapsedMunicipalityCount = 24
+let collapsedMunicipalityCount = 16
 
 let excludedMunicipalities = Set.ofList ["kraj"]
 
