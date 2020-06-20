@@ -205,7 +205,7 @@ let renderChartOptions scaleType state dispatch =
     |}
 
 let renderExplainer (data: StatsData) =
-    let curPositive, curHospitalzed, doublingRate =
+    let curPositive, curHospitalized =
         data
         |> List.rev
         |> Seq.choose (fun dp ->
@@ -214,7 +214,7 @@ let renderExplainer (data: StatsData) =
             | _, _ -> None)
         |> Seq.take 1
         |> Seq.toList |> List.head
-        |> fun (p, h) -> (p,h,7.0)
+        |> fun (p, h) -> (p,h)
 
     let box (title: string) times positive hospitalized =
         Html.div [
@@ -225,7 +225,7 @@ let renderExplainer (data: StatsData) =
                     match times with
                     | 0 -> Html.span ""
                     | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
-                    | n -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
+                    | _ -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                 ]
                 Html.div [ Html.h4 (string positive); Html.p [ Html.text (I18N.t "charts.spread.confirmed"); Html.br []; Html.text (I18N.t "charts.spread.cases")  ]]
                 Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hoispitalized") ]
@@ -247,7 +247,7 @@ let renderExplainer (data: StatsData) =
                           I18N.t "charts.spread.inThreeWeeks", 3
                           I18N.t "charts.spread.inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
-                            box title doublings (curPositive <<< doublings) (curHospitalzed <<< doublings)
+                            box title doublings (curPositive <<< doublings) (curHospitalized <<< doublings)
                         )
                 ]
             ]

@@ -71,7 +71,7 @@ let renderChartOptions (state : State) dispatch =
 
     let getRegionStats region mp =
             mp |> Map.find region
-            |> Map.fold ( fun total key hc -> total + hc ) TotalHcStats.None
+            |> Map.fold ( fun total _ hc -> total + hc ) TotalHcStats.None
 
     let hcData =
         match state.FilterByRegion with

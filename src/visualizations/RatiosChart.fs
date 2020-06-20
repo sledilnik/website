@@ -128,8 +128,6 @@ let renderRatiosChart (state : State) dispatch =
             | DeceasedIcuDeceasedTotal      -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.icu.toDate ps.total.deceased.toDate
             | DeceasedHospitalDeceasedTotal -> fun ps -> ps.JsDate12h, percent ps.total.deceased.hospital.toDate ps.total.deceased.toDate
 
-        let color, line, name = Ratios.getSeriesInfo ratio
-
         let color, line, id = Ratios.getSeriesInfo ratio
         {|
             visible = true

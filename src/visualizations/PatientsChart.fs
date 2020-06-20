@@ -215,10 +215,10 @@ let renderStructureChart (state : State) dispatch =
             | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
 
-        let color, seriesid = Series.getSeriesInfo series
+        let color, seriesId = Series.getSeriesInfo series
         {|
             color = color
-            name = I18N.tt "charts.patients" seriesid
+            name = I18N.tt "charts.patients" seriesId
             data =
                 psData
                 |> Seq.map (fun (date,ps) ->
@@ -227,7 +227,7 @@ let renderStructureChart (state : State) dispatch =
                         y = getPoint ps
                         fmtTotal = getPointTotal ps |> string
                         fmtDate = I18N.tOptions "days.longerDate" {| date = date |}
-                        seriesId = seriesid
+                        seriesId = seriesId
                     |} )
                 |> Seq.toArray
         |} |> pojo
