@@ -150,10 +150,16 @@ let optionsWithOnLoadEvent (className : string) =
         |}
     |}
 
-let basicChartOptions (scaleType:ScaleType) (className:string)=
+let basicChartOptions
+    (scaleType:ScaleType)
+    (className:string)
+    (selectedRangeSelectionButtonIndex: int)
+    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
+    =
     {|
         chart = pojo
             {|
+                animation = false
                 ``type`` = "line"
                 zoomType = "x"
                 className = className
@@ -265,7 +271,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 enabled = true
                 allButtonsEnabled = true
-                selected = 0
+                selected = selectedRangeSelectionButtonIndex
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
                 // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
@@ -277,16 +283,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                             ``type`` = "month"
                             count = 2
                             text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
                         |}
                         {|
                             ``type`` = "month"
                             count = 3
                             text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
                         |}
                         {|
                             ``type`` = "all"
                             count = 1
                             text = I18N.t "charts.common.all"
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
                         |}
                     |]
             |}
