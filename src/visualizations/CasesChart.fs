@@ -132,7 +132,9 @@ let renderChartOptions (state : State) =
             yield renderSeries series
     |]
 
-    let baseOptions = Highcharts.basicChartOptions scaleType className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            scaleType className 0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         series = allSeries
         plotOptions = pojo

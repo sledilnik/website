@@ -127,7 +127,10 @@ let renderByHospitalChart (state : State) =
             showInLegend = true
         |} |> pojo
 
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear "covid19-patients-by-hospital"
+            0 (fun _ -> (fun _ -> true))
     {| baseOptions with
 
         series = [| for fcode in state.AllFacilities do yield renderSources fcode |]
@@ -219,7 +222,10 @@ let renderStructureChart (state : State) =
 
 
     let className = "covid19-patients-structure"
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear className
+            0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         chart = pojo
             {|

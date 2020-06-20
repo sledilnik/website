@@ -205,7 +205,9 @@ let renderChartOptions displayType (data : StatsData) =
     ]
 
     let className = "covid19-infections"
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear className 0 (fun _ -> (fun _ -> true))
 
     let axisWithPhases() = baseOptions.xAxis
 

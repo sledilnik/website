@@ -107,7 +107,10 @@ let renderChartOptions (state : State) =
         )
         |> List.toArray
 
-    let baseOptions = Highcharts.basicChartOptions state.ScaleType "covid19-regions"
+    let baseOptions =
+        Highcharts.basicChartOptions
+            state.ScaleType "covid19-regions"
+            0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         chart = pojo
             {|

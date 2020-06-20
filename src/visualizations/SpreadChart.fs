@@ -184,7 +184,9 @@ let renderChartOptions scaleType (data : StatsData) =
     |]
 
     // return highcharts options
-    {| basicChartOptions Linear "covid19-spread" with
+    {| basicChartOptions Linear "covid19-spread"
+            0 (fun _ -> (fun _ -> true))
+        with
         series = allSeries
         yAxis=chartCfg.yAxis
         legend= pojo {| enabled = true |}

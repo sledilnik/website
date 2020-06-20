@@ -297,7 +297,9 @@ let renderChartOptions (state : State) =
         //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
     |]
 
-    let baseOptions = Highcharts.basicChartOptions state.scaleType "hospitals-chart"
+    let baseOptions =
+        Highcharts.basicChartOptions
+            state.scaleType "hospitals-chart" 0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         yAxis = yAxes
         series = series

@@ -124,7 +124,9 @@ let renderChartOptions (state : State) =
 
     ]
 
-    let baseOptions = Highcharts.basicChartOptions scaleType className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            scaleType className 0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         series = List.toArray allSeries
 
