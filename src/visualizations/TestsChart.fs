@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Highcharts
@@ -23,15 +24,18 @@ with
 type State = {
     data: StatsData
     displayType: DisplayType
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangeDisplayType of DisplayType
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
         displayType = Regular
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -39,8 +43,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType dt ->
         { state with displayType = dt }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
@@ -108,9 +114,16 @@ let renderChartOptions (state : State) =
             |}
     ]
 
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
     let baseOptions =
         Highcharts.basicChartOptions
-            scaleType className 0 (fun _ -> (fun _ -> true))
+            scaleType className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         yAxis = allYAxis
         series = List.toArray allSeries
@@ -137,12 +150,12 @@ let renderChartOptions (state : State) =
             |}
     |}
 
-let renderChartContainer (state : State) =
+let renderChartContainer (state : State) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
+            renderChartOptions state dispatch
             |> Highcharts.chartFromWindow
         ]
     ]
@@ -163,7 +176,7 @@ let renderDisplaySelectors state dispatch =
 
 let render (state: State) dispatch =
     Html.div [
-        renderChartContainer state
+        renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
     ]
 

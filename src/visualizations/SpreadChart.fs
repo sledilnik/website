@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Highcharts
@@ -32,15 +33,18 @@ type Page =
 type State = {
     page: Page
     data: StatsData
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangePage of Page
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         page = Chart Absolute
         data = data
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -48,6 +52,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
         { state with page = page }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let maxOption a b =
     match a, b with
@@ -160,7 +166,7 @@ type ChartCfg = {
             }
 
 
-let renderChartOptions scaleType (data : StatsData) =
+let renderChartOptions scaleType state dispatch =
 
     let chartCfg = ChartCfg.fromScale scaleType
     let startDate = DateTime(2020,3,4)
@@ -174,7 +180,7 @@ let renderChartOptions scaleType (data : StatsData) =
                 name = chartCfg.seriesLabel
                 dataLabels = pojo {| enabled = true |}
                 data =
-                    data
+                    state.data
                     |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                     |> Seq.map chartCfg.dataKey
                     |> Seq.toArray
@@ -183,9 +189,15 @@ let renderChartOptions scaleType (data : StatsData) =
             yield addContainmentMeasuresFlags startTime None |> pojo
     |]
 
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
     // return highcharts options
     {| basicChartOptions Linear "covid19-spread"
-            0 (fun _ -> (fun _ -> true))
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
         with
         series = allSeries
         yAxis=chartCfg.yAxis
@@ -242,12 +254,12 @@ let renderExplainer (data: StatsData) =
         ]
     ]
 
-let renderChartContainer scaleType data =
+let renderChartContainer scaleType data dispatch =
     Html.div [
         prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions scaleType data
+            renderChartOptions scaleType data dispatch
             |> Highcharts.chartFromWindow
         ]
     ]
@@ -282,9 +294,9 @@ let render (state: State) dispatch =
                 prop.children [
                     match state.page with
                     | Chart scale ->
-                        yield renderChartContainer scale state.data
+                        yield renderChartContainer scale state dispatch
                     | Explainer ->
-                        yield renderChartContainer DoublingRate state.data
+                        yield renderChartContainer DoublingRate state dispatch
                         yield renderExplainer state.data
                 ]
             ]

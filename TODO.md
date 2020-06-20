@@ -1,4 +1,6 @@
 # TODO
 
 ## Remember range selection
-- remove animation
+- disable animations
+- Struktura potrjeno okuženih doesn't work quite as it should
+- Potrjeno okuženi po regijah doesn't work - weird range selector

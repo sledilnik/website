@@ -5,7 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
-open Fable.Core.JsInterop
+open Browser
 
 open Highcharts
 open Types
@@ -65,12 +65,14 @@ type State = {
     patientsData : PatientsStats []
     error: string option
     displayType: DisplayType
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
+    | RangeSelectionChanged of int
 
 let init (data : StatsData) : State * Cmd<Msg> =
     let state = {
@@ -78,6 +80,7 @@ let init (data : StatsData) : State * Cmd<Msg> =
         patientsData = [||]
         error = None
         displayType = Cases
+        RangeSelectionButtonIndex = 0
     }
     let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
     state, cmd
@@ -92,9 +95,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with error = Some ex.Message }, Cmd.none
     | ChangeDisplayType dt ->
         { state with displayType = dt }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 
-let renderRatiosChart (state : State) =
+let renderRatiosChart (state : State) dispatch =
 
     let startDate = DateTime(2020,03,10)
 
@@ -139,15 +144,21 @@ let renderRatiosChart (state : State) =
         |}
         |> pojo
 
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
 
-    let maxValue = if state.displayType = Mortality then Some 100 else None
     let className = DisplayType.getClassName state.displayType
     let baseOptions =
         Highcharts.basicChartOptions
-            ScaleType.Linear className 0 (fun _ -> (fun _ -> true))
+            ScaleType.Linear className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         chart = pojo
             {|
+                animation = false
                 ``type`` = "spline"
                 zoomType = "x"
                 className = className
@@ -168,11 +179,13 @@ let renderRatiosChart (state : State) =
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 |}
 
-let renderChartContainer state =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderRatiosChart state  |> Highcharts.chartFromWindow ]
+        prop.children [
+            renderRatiosChart state dispatch |> Highcharts.chartFromWindow
+        ]
     ]
 
 let renderDisplaySelector state dt dispatch =
@@ -195,7 +208,7 @@ let render (state : State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
-            renderChartContainer state
+            renderChartContainer state dispatch
             renderDisplaySelectors state dispatch
         ]
 
