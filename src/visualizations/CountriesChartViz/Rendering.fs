@@ -178,6 +178,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         | DaysSinceOneDeathPerMillion -> "int"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
+                   dateTimeLabelFormats = pojo
+                    {|
+                        week = I18N.t "charts.common.shortDateFormat"
+                        day = I18N.t "charts.common.shortDateFormat"
+                    |}
             |}
         yAxis =
             pojo {|

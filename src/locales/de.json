@@ -1,8 +1,128 @@
 {
     "navbar": {
-        "home": "Zuhause"
+        "home": "Startseite",
+        "language": {
+            "english": "Englisch",
+            "slovenian": "Slowenisch"
+        },
+        "github": "GitHub",
+        "links": "Links",
+        "sources": "Quellen",
+        "team": "Team",
+        "about": "Über",
+        "menu": "Menü"
     },
     "country": {
-        "SVN": "Slowenien"
+        "SVN": "Slowenien",
+        "USA": "Vereinigte Staaten",
+        "SWE": "Schweden",
+        "TWN": "Taiwan",
+        "TUR": "Türkei",
+        "SVK": "Slowakei",
+        "RUS": "Russland",
+        "SGP": "Singapur",
+        "SRB": "Serbien",
+        "PER": "Peru",
+        "RKS": "Kosovo",
+        "MNE": "Montenegro",
+        "NZL": "Neuseeland",
+        "NOR": "Norwegen",
+        "MEX": "Mexiko",
+        "MKD": "Nordmazedonien",
+        "ITA": "Italien",
+        "JPN": "Japan",
+        "KOR": "Südkorea",
+        "IRN": "Iran",
+        "ISL": "Island",
+        "GBR": "Vereinigtes Königreich",
+        "HRV": "Kroatien",
+        "HUN": "Ungarn",
+        "FIN": "Finnland",
+        "FRA": "Frankreich",
+        "DNK": "Dänemark",
+        "ECU": "Ecuador",
+        "ESP": "Spanien",
+        "CZE": "Tschechische Republik",
+        "DEU": "Deutschland",
+        "CHL": "Chile",
+        "CHN": "China",
+        "COL": "Kolumbien",
+        "BIH": "Bosnien und Herzegowina",
+        "CHE": "Schweiz",
+        "AUT": "Österreich",
+        "BRA": "Brasilien",
+        "BEL": "Belgien",
+        "ARG": "Argentinien",
+        "AUS": "Australien"
+    },
+    "charts": {
+        "spread": {
+            "today": "Heute",
+            "oneMonth": "Ein Monat",
+            "oneDay": "Ein Tag",
+            "oneWeek": "Eine Woche"
+        }
+    },
+    "tableDict": {
+        "cases_active": "Aktive Fälle",
+        "tests_performed": "Tests (täglich)",
+        "region_todate": "Gesamtanzahl"
+    },
+    "footer": {
+        "copyright": "© 2020 Sledilnik.org"
+    },
+    "cm": {
+        "shops": {
+            "title": "Geschäfte"
+        },
+        "quarantine": {
+            "title": "Quarantäne",
+            "description": "Obligatorische 7-tägige Quarantäne bei Ankunft aus dem Ausland"
+        },
+        "liftMuseums": {
+            "title": "Museen"
+        },
+        "liftMunicipality": {
+            "title": "Gemeinden"
+        },
+        "firstCase": {
+            "description": "Erster bestätigter Fall:<br>Touristen aus Marokko zurückgekehrt",
+            "title": "1. Fall"
+        },
+        "liftFoodMarkets": {
+            "description": "Entspannung: Märkte, Service auf den Terrassen, Geschäfte bis zu 400 m2, Friseur- und Schönheitssalons",
+            "title": "Märkte"
+        }
+    },
+    "region": {
+        "kr": "Gorenjska",
+        "ng": "Goriška",
+        "nm": "Jugovzhodna Slovenija",
+        "kp": "Obalno-kraška",
+        "lj": "Osrednjeslovenska",
+        "mb": "Podravska",
+        "ms": "Pomurska",
+        "kk": "Posavska",
+        "po": "Primorsko-notranjska",
+        "ce": "Savinja",
+        "za": "Zasavska",
+        "sg": "Kärnten"
+    },
+    "meta": {
+        "description": "COVID-19 Slowenien-Verfolgung – gesammelt, verifiziert, aktualisiert, analysiert und überprüft COVID-19-Daten für Slowenien.",
+        "title": "COVID-19-Verfolgung"
+    },
+    "infocard": {
+        "recoveredToDate": "Erholt",
+        "active": "Aktive Fälle",
+        "confirmedToDate": "Bestätigte Fälle",
+        "tests": "Tests heute"
+    },
+    "notice": {
+        "news001": "Neu:"
+    },
+    "timestamp": {
+        "at": "um {{ date, HH:mm }}",
+        "updated": "Aktualisiert am {{ date, dddd, MMMM Do YYYY }}"
     }
 }
