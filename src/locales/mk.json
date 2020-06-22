@@ -20,7 +20,8 @@
         "faq": "ЧПП",
         "models": "Модели",
         "tables": "Табела",
-        "home": "Дома"
+        "home": "Дома",
+        "menu": "Мени"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
@@ -34,7 +35,7 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, D. MMMM }}",
+        "lastUpdated": "{{ date, dddd, D. MMMM }}",
         "accordingTo": "Во однос на {{ date, dddd, D. MMMM }}"
     },
     "cm": {
@@ -174,7 +175,9 @@
         "copy": "Копирај",
         "descriptionPart2": "Проверете овде.",
         "chooseChart": "Изберете графикон",
-        "preview": "Преглед:"
+        "preview": "Преглед:",
+        "embedCode": "Вгради го кодот:",
+        "title": "Вгради го графиконот во твојата веб страна"
     },
     "tables": {
         "tabByAgeFemale": "По возраст - Женски",
@@ -182,7 +185,9 @@
         "title": "Табела",
         "day": "{{ date, D.M. }}",
         "sourceLink": "GDocs табела во CSV облик или REST API",
-        "source": "Извори на податоци во други облици"
+        "source": "Извори на податоци во други облици",
+        "tabByRegion": "По регион",
+        "tabSummary": "Резиме"
     },
     "charts": {
         "metricsComparison": {
