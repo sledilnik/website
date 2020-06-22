@@ -20,7 +20,8 @@
         "faq": "ЧПП",
         "models": "Модели",
         "tables": "Табела",
-        "home": "Дома"
+        "home": "Дома",
+        "menu": "Мени"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
@@ -34,7 +35,7 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, D. MMMM }}",
+        "lastUpdated": "{{ date, dddd, D. MMMM }}",
         "accordingTo": "Во однос на {{ date, dddd, D. MMMM }}"
     },
     "cm": {
@@ -174,7 +175,11 @@
         "copy": "Копирај",
         "descriptionPart2": "Проверете овде.",
         "chooseChart": "Изберете графикон",
-        "preview": "Преглед:"
+        "preview": "Преглед:",
+        "embedCode": "Вгради го кодот:",
+        "title": "Вгради го графиконот во твојата веб страна",
+        "descriptionPart1": "Специфичниот приказ може да се прилагоди на вашите потреби. Може да ја смените големината на вградениот поглед или да ја ограничите со избран регион или општина. За повеќе, ",
+        "description": "Одредениот приказ може да се прилагоди на вашите потреби. Може да се сменат димензиите на вградениот поглед или да се ограничи специфичниот регион или општина. За повеќе, <a href=\"https://github.com/treker-mk/website/blob/master/examples/README.md\">проверете тука </a>."
     },
     "tables": {
         "tabByAgeFemale": "По возраст - Женски",
@@ -182,7 +187,9 @@
         "title": "Табела",
         "day": "{{ date, D.M. }}",
         "sourceLink": "GDocs табела во CSV облик или REST API",
-        "source": "Извори на податоци во други облици"
+        "source": "Извори на податоци во други облици",
+        "tabByRegion": "По регион",
+        "tabSummary": "Резиме"
     },
     "charts": {
         "metricsComparison": {
@@ -210,7 +217,22 @@
             "linear": "Линеарна",
             "close": "Затвори",
             "webpage": "Веб страница",
-            "loading": "Вчитување на податоците…"
+            "loading": "Вчитување на податоците…",
+            "shortDateFormat": "%e. %b",
+            "longDateFormat": "%e. %B %Y",
+            "dateFormat": "%A, %e. %B %Y",
+            "numDateFormat": "%d. %m. %Y",
+            "share": "Сподели",
+            "noteFaq": "Напомена: ограничувањата на представените податоци се опишани во ",
+            "decimalPoint": ",",
+            "thousandsSep": " . ",
+            "all": "Сите",
+            "x_months": "{{ count }}м",
+            "x_months_plural": "{{ count }}м",
+            "resetZoomTitle": "Прикажи го целиот период",
+            "resetZoom": "Почетна вредност на зголемувањето",
+            "zoom": "Период",
+            "to": "-"
         },
         "municipalities": {
             "yesterday": "вчера",
@@ -350,22 +372,28 @@
     },
     "phase": {
         "7": {
-            "title": "Фаза 7"
+            "title": "Фаза 7",
+            "description": "крај на епидемијата"
         },
         "6": {
-            "title": "Фаза 6"
+            "title": "Фаза 6",
+            "description": "нов метод на тестирање, истражување"
         },
         "5": {
-            "title": "Фаза 5"
+            "title": "Фаза 5",
+            "description": "нов метод на тестирање"
         },
         "4": {
-            "title": "Фаза 4"
+            "title": "Фаза 4",
+            "description": "нов метод на тестирање"
         },
         "3": {
-            "title": "Фаза 3"
+            "title": "Фаза 3",
+            "description": "нов метод на тестирање"
         },
         "2": {
-            "title": "Фаза 2"
+            "title": "Фаза 2",
+            "description": "епидемија, нов метод на тестирање"
         },
         "1": {
             "title": "Фаза 1"

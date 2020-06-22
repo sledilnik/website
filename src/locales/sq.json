@@ -23,7 +23,19 @@
     },
     "navbar": {
         "team": "Ekipi",
-        "models": "Modele"
+        "models": "Modele",
+        "sources": "Burimet",
+        "about": "Rreth nesh",
+        "faq": "FAQ (Pyetje të parashtruara shpesh)",
+        "tables": "Tabela",
+        "home": "Ballina",
+        "menu": "Menu",
+        "language": {
+            "english": "English",
+            "slovenian": "Shqip"
+        },
+        "github": "GitHub",
+        "links": "Linqe"
     },
     "country": {
         "DEU": "Gjermani",
@@ -57,5 +69,45 @@
         "CHN": "Kinë",
         "CZE": "Republika Çeke",
         "AUS": "Australi"
+    },
+    "meta": {
+        "description": "Ndjekja COVID-19 Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
+        "title": "Ndjekja COVID-19"
+    },
+    "embedMaker": {
+        "chooseChart": "Zgjidhni një grafikon",
+        "copied": "E kopjuar!",
+        "copy": "Kopjoni",
+        "descriptionPart2": "shihni këtu.",
+        "descriptionPart1": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, ",
+        "description": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">shihni këtu</a>."
+    },
+    "tables": {
+        "day": "{{ date, M/D }}",
+        "sourceLink": "Tabela GDocs, CSV format apo REST API",
+        "source": "Burimet e të dhënave në formate tjera",
+        "tabByAgeFemale": "Sipas moshës - Femra",
+        "tabByAgeMale": "Sipas moshës - Meshkuj",
+        "tabByRegion": "Sipas rajonit",
+        "tabSummary": "Përmbledhje",
+        "title": "Tabela"
+    },
+    "infocard": {
+        "lastUpdated": "{{ date, dddd, MMMM Do }}",
+        "accordingTo": "Sipas datës {{ date, MMMM Do }}",
+        "deceasedToDate": "Vdekje të Konfirmuara",
+        "icu": "Në Njësinë për Kujdes Intensiv",
+        "inHospital": "Të shtruar në spital",
+        "recoveredToDate": "Të shëruar",
+        "active": "Raste Aktive",
+        "confirmedToDate": "Raste të Konfirmuara",
+        "tests": "Teste Sot"
+    },
+    "notice": {
+        "news002": "struktura e të shtruarve në spital për çdo spital COVID-19."
+    },
+    "timestamp": {
+        "at": "në {{ date, HH:mm }}",
+        "updated": "Përditësuar më {{ date, dddd, MMMM Do YYYY }}"
     }
 }
