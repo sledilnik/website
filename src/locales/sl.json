@@ -299,7 +299,7 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
-            "from": "",
+            "from": " ",
             "to": "-",
             "zoom": "Obdobje",
             "resetZoom": "Ponastavi merilo",
