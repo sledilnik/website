@@ -337,6 +337,7 @@
             "groupNordic": "Nordic countries",
             "groupCriticalWorld": "Critical countries (World)",
             "groupCriticalEU": "Critical countries (EU)",
+            "groupNeighbouring": "Surroundings",
             "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
         },
         "hospitals": {
