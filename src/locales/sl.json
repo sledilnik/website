@@ -167,7 +167,11 @@
         "SWE": "Švedska",
         "TWN": "Tajvan",
         "TUR": "Turčija",
-        "USA": "ZDA"
+        "USA": "ZDA",
+        "ALB": "Albanija",
+        "BGR": "Bolgarija",
+        "GRC": "Grčija",
+        "ROU": "Romunija"
     },
     "cm": {
         "firstCase": {
