@@ -75,7 +75,12 @@
         "title": "Ndjekja COVID-19"
     },
     "embedMaker": {
-        "chooseChart": "Zgjidhni një grafikon"
+        "chooseChart": "Zgjidhni një grafikon",
+        "copied": "E kopjuar!",
+        "copy": "Kopjoni",
+        "descriptionPart2": "shihni këtu.",
+        "descriptionPart1": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, ",
+        "description": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">shihni këtu</a>."
     },
     "tables": {
         "day": "{{ date, M/D }}",
