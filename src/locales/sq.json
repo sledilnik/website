@@ -23,7 +23,13 @@
     },
     "navbar": {
         "team": "Ekipi",
-        "models": "Modele"
+        "models": "Modele",
+        "sources": "Burimet",
+        "about": "Rreth nesh",
+        "faq": "FAQ (Pyetje të parashtruara shpesh)",
+        "tables": "Tabela",
+        "home": "Ballina",
+        "menu": "Menu"
     },
     "country": {
         "DEU": "Gjermani",
@@ -57,5 +63,9 @@
         "CHN": "Kinë",
         "CZE": "Republika Çeke",
         "AUS": "Australi"
+    },
+    "meta": {
+        "description": "Ndjekja COVID-19 Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
+        "title": "Ndjekja COVID-19"
     }
 }
