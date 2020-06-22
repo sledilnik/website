@@ -28,7 +28,7 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl'],
+  fallbackLng: ['en', 'sl', 'ru', 'de', 'it', 'hr'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
