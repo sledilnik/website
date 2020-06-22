@@ -349,7 +349,9 @@
             "icuCases": "На интензивна нега",
             "hospitalCases": "Хоспитализирани",
             "mortality": "Смртност",
-            "hospitalizations": "Хоспитализирани"
+            "hospitalizations": "Хоспитализирани",
+            "hospitalMortality": "Смртност по болници",
+            "seriousCases": "Сериозни случаи"
         },
         "patients": {
             "allHospitals": "Сите болници",
@@ -359,7 +361,10 @@
             "hospitalized": "Хоспитализирани",
             "hospitalizedIn": "Хоспитализирани во:",
             "structure": "Структура",
-            "title": "Хоспитализирани"
+            "title": "Хоспитализирани",
+            "discharged": "Отпуштени",
+            "admitted": "Примени",
+            "byHospital": "По болници"
         },
         "cases": {
             "deceased": "Починати",
