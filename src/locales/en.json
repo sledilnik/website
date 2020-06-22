@@ -128,7 +128,7 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
-            "from": "",
+            "from": " ",
             "to": "-",
             "zoom": "Zoom",
             "resetZoom": "Reset zoom",
