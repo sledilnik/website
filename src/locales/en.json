@@ -20,7 +20,7 @@
         }
     },
     "timestamp": {
-        "updated": "Updated {{ date, MMMM Do YYYY }}",
+        "updated": "Updated on {{ date, dddd, MMMM Do YYYY }}",
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
@@ -36,7 +36,7 @@
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
         "accordingTo": "According to {{ date, MMMM Do }}",
-        "lastUpdated": "{{ date, MMMM Do }}"
+        "lastUpdated": "{{ date, dddd, MMMM Do }}"
     },
     "tables": {
         "title": "Table",
@@ -331,6 +331,7 @@
             "deathsPerMillion": "Deaths per Million People",
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological",
+            "groupLatinAmerica": "Latin America",
             "groupEastAsiaOceania": "East Asia and Oceania",
             "groupExYu": "Ex-Yugoslavia",
             "groupNordic": "Nordic countries",
@@ -513,6 +514,10 @@
         "liftGatherings500": {
             "title": "Up to 500",
             "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
+        },
+        "quarantineStrict": {
+            "title": "Quarantine",
+            "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
         }
     },
     "days": {
@@ -548,10 +553,12 @@
         "SGP": "Singapore",
         "RUS": "Russia",
         "RKS": "Kosovo",
+        "PER": "Peru",
         "NOR": "Norway",
         "NZL": "New Zealand",
         "MNE": "Montenegro",
         "MKD": "N. Macedonia",
+        "MEX": "Mexico",
         "KOR": "S. Korea",
         "JPN": "Japan",
         "ITA": "Italy",
@@ -563,15 +570,20 @@
         "FRA": "France",
         "FIN": "Finland",
         "ESP": "Spain",
+        "ECU": "Ecuador",
         "DNK": "Denmark",
         "DEU": "Germany",
         "CZE": "Czech Republic",
+        "COL": "Colombia",
         "CHN": "China",
+        "CHL": "Chile",
         "CHE": "Switzerland",
         "BIH": "Bosnia and Herzegovina",
         "BEL": "Belgium",
+        "BRA": "Brazil",
         "AUT": "Austria",
-        "AUS": "Australia"
+        "AUS": "Australia",
+        "ARG": "Argentina"
     },
     "pageNotFound": {
         "notFound": "404: page not found",

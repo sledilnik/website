@@ -6,6 +6,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Browser
 
 open Highcharts
 open Types
@@ -52,6 +53,7 @@ type State = {
     Error : string option
     AllFacilities : string list
     Breakdown : Breakdown
+    RangeSelectionButtonIndex: int
   } with
     static member initial =
         {
@@ -59,6 +61,7 @@ type State = {
             Error = None
             AllFacilities = []
             Breakdown = AllHospitals
+            RangeSelectionButtonIndex = 0
         }
 
 let getAllBreakdowns state = seq {
@@ -72,6 +75,7 @@ type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | SwitchBreakdown of Breakdown
+    | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
@@ -99,8 +103,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some ex.Message }, Cmd.none
     | SwitchBreakdown breakdown ->
         { state with Breakdown = breakdown }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderByHospitalChart (state : State) =
+let renderByHospitalChart (state : State) dispatch =
 
     let startDate = DateTime(2020,03,10)
 
@@ -127,17 +133,28 @@ let renderByHospitalChart (state : State) =
             showInLegend = true
         |} |> pojo
 
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear "covid19-patients-by-hospital"
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear "covid19-patients-by-hospital"
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
 
         series = [| for fcode in state.AllFacilities do yield renderSources fcode |]
 
-        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = I18N.t "charts.common.dateFormat" |}
+        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"|}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
 
     |} |> pojo
 
 
-let renderStructureChart (state : State) =
+let renderStructureChart (state : State) dispatch =
 
     let startDate = DateTime(2020,03,10)
 
@@ -198,10 +215,10 @@ let renderStructureChart (state : State) =
             | InHospitalOut         -> fun ps -> ps.inHospital.out |> Utils.zeroToNone
             | InHospitalDeceased    -> fun ps -> ps.deceased.today |> Utils.zeroToNone
 
-        let color, seriesid = Series.getSeriesInfo series
+        let color, seriesId = Series.getSeriesInfo series
         {|
             color = color
-            name = I18N.tt "charts.patients" seriesid
+            name = I18N.tt "charts.patients" seriesId
             data =
                 psData
                 |> Seq.map (fun (date,ps) ->
@@ -210,17 +227,26 @@ let renderStructureChart (state : State) =
                         y = getPoint ps
                         fmtTotal = getPointTotal ps |> string
                         fmtDate = I18N.tOptions "days.longerDate" {| date = date |}
-                        seriesId = seriesid
+                        seriesId = seriesId
                     |} )
                 |> Seq.toArray
         |} |> pojo
 
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
 
     let className = "covid19-patients-structure"
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         chart = pojo
             {|
+                animation = false
                 ``type`` = "column"
                 zoomType = "x"
                 className = className
@@ -235,17 +261,23 @@ let renderStructureChart (state : State) =
 
         tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |}
 
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
     |} |> pojo
 
 
-let renderChartContainer state =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             match state.Breakdown with
-            | ByHospital -> renderByHospitalChart state |> Highcharts.chartFromWindow
-            | _ -> renderStructureChart state |> Highcharts.chartFromWindow
+            | ByHospital ->
+                renderByHospitalChart state dispatch
+                |> Highcharts.chartFromWindow
+            | _ ->
+                renderStructureChart state dispatch
+                |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -269,7 +301,7 @@ let render (state : State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
-            renderChartContainer state
+            renderChartContainer state dispatch
             renderBreakdownSelectors state dispatch
         ]
 

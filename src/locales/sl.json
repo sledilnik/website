@@ -20,7 +20,7 @@
         }
     },
     "timestamp": {
-        "updated": "Osveženo {{ date, D. MMMM YYYY }}",
+        "updated": "Osveženo: {{ date, dddd, D. MMMM YYYY }}",
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
@@ -36,7 +36,7 @@
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
         "accordingTo": "Glede na {{ date, D. MMMM }}",
-        "lastUpdated": "{{ date, D. MMMM }}"
+        "lastUpdated": "{{ date, dddd, D. MMMM }}"
     },
     "tables": {
         "title": "Tabela",
@@ -123,15 +123,20 @@
         "za": "Zasavska"
     },
     "country": {
+        "ARG": "Argentina",
         "AUS": "Avstralija",
         "AUT": "Avstrija",
+        "BRA": "Brazilija",
         "BEL": "Belgija",
         "BIH": "Bosna in Hercegovina",
         "CHE": "Švica",
+        "CHL": "Čile",
         "CHN": "Kitajska",
+        "COL": "Kolumbija",
         "CZE": "Češka",
         "DEU": "Nemčija",
         "DNK": "Danska",
+        "ECU": "Ekvador",
         "ESP": "Španija",
         "FIN": "Finska",
         "FRA": "Francija",
@@ -143,10 +148,12 @@
         "ITA": "Italija",
         "JPN": "Japonska",
         "KOR": "J. Koreja",
+        "MEX": "Mehika",
         "MKD": "S. Makedonija",
         "MNE": "Črna gora",
         "NZL": "Nova Zelandija",
         "NOR": "Norveška",
+        "PER": "Peru",
         "RKS": "Kosovo",
         "RUS": "Rusija",
         "SGP": "Singapur",
@@ -250,6 +257,10 @@
         "liftGatherings500": {
             "title": "Do 500",
             "description": "Sproščanje: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
+        },
+        "quarantineStrict": {
+            "title": "Karantena",
+            "description": "Poostrena obvezna 14-dnevna karantena za kritične države<br>(rdeči seznam BIH, Srbijo, Kosovo)"
         }
     },
     "phase": {
@@ -514,6 +525,7 @@
             "groupNordic": "nordijske države",
             "groupExYu": "ex-Jugoslavija",
             "groupEastAsiaOceania": "vzh. Azija in Oceanija",
+            "groupLatinAmerica": "Latinska Amerika",
             "chronologically": "Kronološko",
             "sinceFirstDeath": "Od prve smrti",
             "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",

@@ -43,4 +43,5 @@ Data editors and other collaborators:
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
+-   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling

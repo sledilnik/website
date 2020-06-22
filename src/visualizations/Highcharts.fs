@@ -111,6 +111,7 @@ let addContainmentMeasuresFlags
         26, 5, "#FFe6e6", "quarantine14days"
         1,  6, "#ebfaeb", "liftSchools4to5"
         15, 6, "#ebfaeb", "liftGatherings500"
+        19, 6, "#FFe6e6", "quarantineStrict"
     |]
     {|
         ``type`` = "flags"
@@ -149,10 +150,16 @@ let optionsWithOnLoadEvent (className : string) =
         |}
     |}
 
-let basicChartOptions (scaleType:ScaleType) (className:string)=
+let basicChartOptions
+    (scaleType:ScaleType)
+    (className:string)
+    (selectedRangeSelectionButtonIndex: int)
+    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
+    =
     {|
         chart = pojo
             {|
+                animation = false
                 ``type`` = "line"
                 zoomType = "x"
                 className = className
@@ -242,10 +249,20 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 shared = true
                 split = false
-                xDateFormat = I18N.t "charts.common.dateFormat"
+                xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
             |}
 
-        legend = pojo {| enabled = true ; layout = "horizontal" |}
+        legend =
+            {|
+                enabled = false
+                align = "left"
+                verticalAlign = "top"
+                borderColor = "#ddd"
+                borderWidth = 1
+                //labelFormatter = string //fun series -> series.name
+                layout = "vertical"
+                //backgroundColor = None :> string option
+            |}
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
@@ -254,7 +271,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
             {|
                 enabled = true
                 allButtonsEnabled = true
-                selected = 0
+                selected = selectedRangeSelectionButtonIndex
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
                 // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
@@ -266,16 +283,19 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                             ``type`` = "month"
                             count = 2
                             text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
                         |}
                         {|
                             ``type`` = "month"
                             count = 3
                             text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
                         |}
                         {|
                             ``type`` = "all"
                             count = 1
                             text = I18N.t "charts.common.all"
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
                         |}
                     |]
             |}
@@ -287,7 +307,7 @@ let basicChartOptions (scaleType:ScaleType) (className:string)=
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
-                                legend = {| enabled = false |}
+                                // legend = {| enabled = false |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
