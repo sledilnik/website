@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Data.Patients
@@ -24,6 +25,7 @@ type State = {
     error: string option
     facilities: FacilityCode list
     scope: Scope
+    RangeSelectionButtonIndex: int
   } with
     static member initial =
         {
@@ -33,6 +35,7 @@ type State = {
             error = None
             facilities = []
             scope = Totals
+            RangeSelectionButtonIndex = 0
         }
     static member switchBreakdown breakdown state = { state with scope = breakdown }
 
@@ -42,6 +45,7 @@ type Msg =
     | ConsumeServerError of exn
     | ScaleTypeChanged of ScaleType
     | SwitchBreakdown of Scope
+    | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either Data.Hospitals.getOrFetch () ConsumeHospitalsData ConsumeServerError
@@ -71,6 +75,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with scaleType = scaleType }, Cmd.none
     | SwitchBreakdown breakdown ->
         (state |> State.switchBreakdown breakdown), Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let getAllScopes state = seq {
     yield Totals, I18N.t "charts.hospitals.allHospitals"
@@ -129,7 +135,7 @@ let extractPatientDataPoint scope cType : (PatientsStats -> (JsTimestamp * int o
             fa.JsDate12h, value
 
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
 
     let projectDays = 40
 
@@ -297,7 +303,16 @@ let renderChartOptions (state : State) =
         //yield renderFacilitiesSeries state.scope Vents Occupied clr Solid "Respiratorji, v uporabi"
     |]
 
-    let baseOptions = Highcharts.basicChartOptions state.scaleType "hospitals-chart"
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            state.scaleType "hospitals-chart"
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         yAxis = yAxes
         series = series
@@ -343,13 +358,13 @@ let renderChartOptions (state : State) =
                 |}
     |}
 
-let renderChartContainer state =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
-            |> Highcharts.chart
+            renderChartOptions state dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -512,7 +527,7 @@ let render (state : State) dispatch =
                 (Utils.renderScaleSelector
                     state.scaleType (ScaleTypeChanged >> dispatch))
 
-            renderChartContainer state
+            renderChartContainer state dispatch
             //Html.div [ prop.style [ style.height 10 ] ]
             renderBreakdownSelectors state dispatch
             Html.div [

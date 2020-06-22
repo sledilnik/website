@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Data.HCenters
@@ -19,12 +20,14 @@ type State = {
     Error: string option
     Regions : Region list
     FilterByRegion : string
-  } 
-  
+    RangeSelectionButtonIndex: int
+  }
+
 type Msg =
     | ConsumeHcData of Result<HcStats [], string>
     | ConsumeServerError of exn
     | RegionFilterChanged of string
+    | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either Data.HCenters.getOrFetch () ConsumeHcData ConsumeServerError
@@ -33,7 +36,8 @@ let init () : State * Cmd<Msg> =
         HcData = [| |]
         Error = None
         Regions = [ ]
-        FilterByRegion = "" 
+        FilterByRegion = ""
+        RangeSelectionButtonIndex = 0
     }
 
     state, (cmd)
@@ -41,7 +45,7 @@ let init () : State * Cmd<Msg> =
 let getRegionList hcData =
     hcData.municipalities
     |> Map.toList
-    |> List.map fst        
+    |> List.map fst
     |> List.map (fun reg -> { Key = reg ; Name = I18N.tt "region" reg })
     |> List.sortBy (fun region -> region.Name)
 
@@ -56,18 +60,20 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some ex.Message }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
     let className = "hcenters-chart"
     let scaleType = ScaleType.Linear
     let startDate = DateTime(2020,3,18)
     let mutable startTime = startDate |> jsTime
 
-    let getRegionStats region mp = 
+    let getRegionStats region mp =
             mp |> Map.find region
-            |> Map.fold ( fun total key hc -> total + hc ) TotalHcStats.None
+            |> Map.fold ( fun total _ hc -> total + hc ) TotalHcStats.None
 
-    let hcData = 
+    let hcData =
         match state.FilterByRegion with
         | ""     -> state.HcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
         | region -> state.HcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
@@ -123,7 +129,16 @@ let renderChartOptions (state : State) =
 
     ]
 
-    let baseOptions = Highcharts.basicChartOptions scaleType className
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            scaleType className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         series = List.toArray allSeries
 
@@ -133,13 +148,13 @@ let renderChartOptions (state : State) =
         legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
-let renderChartContainer (state : State) =
+let renderChartContainer (state : State) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
-            |> Highcharts.chart
+            renderChartOptions state dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -178,7 +193,7 @@ let render (state : State) dispatch =
                     ]
                 ]
             ]
-            renderChartContainer state
+            renderChartContainer state dispatch
         ]
 
 

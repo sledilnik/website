@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Highcharts
@@ -23,15 +24,18 @@ with
 type State = {
     data: StatsData
     displayType: DisplayType
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangeDisplayType of DisplayType
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
         displayType = Regular
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -39,8 +43,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType dt ->
         { state with displayType = dt }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
@@ -63,7 +69,7 @@ let renderChartOptions (state : State) =
         {|
             index = 0
             title = {| text = null |}
-            labels = pojo {| format = "{value}" |}
+            labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
             opposite = true
             visible = true
             max = None
@@ -71,7 +77,7 @@ let renderChartOptions (state : State) =
         {|
             index = 1
             title = {| text = null |}
-            labels = pojo {| format = "{value}%" |}
+            labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
             opposite = false
             visible = true
             max = Some 9
@@ -108,7 +114,16 @@ let renderChartOptions (state : State) =
             |}
     ]
 
-    let baseOptions = Highcharts.basicChartOptions scaleType className
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            scaleType className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         yAxis = allYAxis
         series = List.toArray allSeries
@@ -117,17 +132,13 @@ let renderChartOptions (state : State) =
                 series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
-        legend = pojo
-            {|
-                enabled = true
-                layout = "horizontal" 
-            |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
 
         responsive = pojo
             {|
                 rules =
                     [| {|
-                        condition = {| maxWidth = 500 |}
+                        condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
                                 yAxis = [|
@@ -139,12 +150,12 @@ let renderChartOptions (state : State) =
             |}
     |}
 
-let renderChartContainer (state : State) =
+let renderChartContainer (state : State) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
+            renderChartOptions state dispatch
             |> Highcharts.chartFromWindow
         ]
     ]
@@ -165,7 +176,7 @@ let renderDisplaySelectors state dispatch =
 
 let render (state: State) dispatch =
     Html.div [
-        renderChartContainer state
+        renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
     ]
 

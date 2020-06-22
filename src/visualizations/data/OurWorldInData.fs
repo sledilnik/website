@@ -68,6 +68,17 @@ let intOfResult row column =
             | _ -> 0
         | _ -> 0
 
+let intOfDoubleResult row column =
+    match row.Data.TryFind column with
+    | None -> 0
+    | Some value ->
+        match value with
+        | ValuePrimitive value ->
+            match value with
+            | ValueDouble value -> int value
+            | _ -> 0
+        | _ -> 0
+
 let floatOptionOfResult row column =
     match row.Data.TryFind column with
     | None -> None
@@ -84,11 +95,11 @@ let load countries msg =
         {
             CountryCode = stringOfResult row "iso_code"
             Date = stringOfResult row "date"
-            TotalCases = intOfResult row "total_cases"
+            TotalCases = intOfDoubleResult row "total_cases"
             TotalCasesPerMillion =
               floatOptionOfResult
                   row "total_cases_per_million"
-            TotalDeaths = intOfResult row "total_deaths"
+            TotalDeaths = intOfDoubleResult row "total_deaths"
             TotalDeathsPerMillion =
               floatOptionOfResult
                   row "total_deaths_per_million"

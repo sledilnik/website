@@ -16,6 +16,7 @@ Data editors and other collaborators:
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - sources, source validation, modeling
 -   [Bojan Košir](https://twitter.com/BojanKosir) - data model and validation, sources
 -   [Demjan Vester](https://github.com/VesterDe) - web page
+-   [Eva Matjašič](https://github.com/Blonduos/) - web page
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
@@ -42,4 +43,5 @@ Data editors and other collaborators:
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
+-   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling

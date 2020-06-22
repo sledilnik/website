@@ -20,7 +20,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
     }
     { Label = "groupCriticalWorld"
-      CountriesCodes = [| "CHN"; "ESP"; "IRN"; "ITA"; "SWE"; "USA" |]
+      CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
     }
     { Label = "groupNordic"
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
@@ -30,6 +30,9 @@ let countriesDisplaySets = [|
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
+    }
+    { Label = "groupLatinAmerica"
+      CountriesCodes = [| "ARG"; "BRA"; "CHL"; "COL"; "ECU"; "MEX"; "PER" |]
     }
 |]
 
@@ -155,6 +158,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
 
     let baseOptions =
         basicChartOptions state.ScaleType "covid19-metrics-comparison"
+            0 (fun _ -> (fun _ -> true))
     {| baseOptions with
         chart = pojo
             {|
@@ -174,6 +178,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         | DaysSinceOneDeathPerMillion -> "int"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
+                   dateTimeLabelFormats = pojo
+                    {|
+                        week = I18N.t "charts.common.shortDateFormat"
+                        day = I18N.t "charts.common.shortDateFormat"
+                    |}
             |}
         yAxis =
             pojo {|
@@ -203,7 +212,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                           shared = true
                           useHTML = true
                         |}
-
+        rangeSelector = pojo {| enabled = false |}
         credits = pojo
             {|
                 enabled = true

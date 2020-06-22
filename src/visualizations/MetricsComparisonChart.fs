@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Highcharts
 open Types
@@ -60,17 +61,21 @@ module Metrics  =
 type State =
     { ScaleType : ScaleType
       Data : StatsData
-      Metrics : Metrics }
+      Metrics : Metrics
+      RangeSelectionButtonIndex: int
+    }
 
 type Msg =
     | ToggleMetricVisible of Metric
     | ScaleTypeChanged of ScaleType
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         ScaleType = Linear
         Data = data
         Metrics = Metrics.initial
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -82,8 +87,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metrics) =
+let renderChartOptions state dispatch =
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
     let metricDataGenerator mc =
@@ -106,7 +113,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
 
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
-        for metric in metrics do
+        for metric in state.Metrics do
             let pointData = metricDataGenerator metric
             yield pojo
                 {|
@@ -115,7 +122,7 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
                     name = I18N.tt "charts.metricsComparison" metric.Id
                     dashStyle = metric.Line |> DashStyle.toString
                     data =
-                        data
+                        state.Data
                         |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
                         |> Seq.skipWhile (fun (ts,value) ->
                             if metric.Visible && value.IsSome then
@@ -126,21 +133,30 @@ let renderChartOptions (scaleType: ScaleType) (data : StatsData) (metrics : Metr
         yield addContainmentMeasuresFlags startTime None |> pojo
     ]
 
-    let baseOptions = basicChartOptions scaleType "covid19-metrics-comparison"
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        basicChartOptions state.ScaleType "covid19-metrics-comparison"
+            state.RangeSelectionButtonIndex
+            onRangeSelectorButtonClick
     {| baseOptions with
         series = List.toArray allSeries
         yAxis =
-            let showFirstLabel = scaleType <> Linear
+            let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
     |}
 
-let renderChartContainer scaleType data metrics =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 480 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions scaleType data metrics
-            |> Highcharts.chart
+            renderChartOptions state dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -151,7 +167,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         else [ ]
     Html.div [
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        prop.className [ true, "btn btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 
@@ -169,7 +185,7 @@ let render state dispatch =
         Utils.renderChartTopControlRight
             (Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch))
-        renderChartContainer state.ScaleType state.Data state.Metrics
+        renderChartContainer state dispatch
         renderMetricsSelectors state.Metrics dispatch
     ]
 

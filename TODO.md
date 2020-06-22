@@ -1,6 +1,6 @@
 # TODO
 
-## Countries comparison
-- shared tooltip is not working when x-axis is datetime, for some reason
-    - try fixing it 
-- add number of deaths in the tooltip
+## Remember range selection
+- disable animations
+- Struktura potrjeno okuženih doesn't work quite as it should
+- Potrjeno okuženi po regijah doesn't work - weird range selector

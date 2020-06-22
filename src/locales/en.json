@@ -4,6 +4,7 @@
         "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
     },
     "navbar": {
+        "menu": "Menu",
         "home": "Home",
         "tables": "Table",
         "models": "Models",
@@ -19,7 +20,7 @@
         }
     },
     "timestamp": {
-        "updated": "Updated {{ date, MMMM Do YYYY }}",
+        "updated": "Updated on {{ date, dddd, MMMM Do YYYY }}",
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
@@ -27,13 +28,15 @@
         "news002": "structure of hospitalized for each COVID-19 hospital."
     },
     "infocard": {
+        "tests": "Tests Today",
         "confirmedToDate": "Confirmed Cases",
+        "active": "Active Cases",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
         "accordingTo": "According to {{ date, MMMM Do }}",
-        "lastUpdated": "{{ date, MMMM Do }}"
+        "lastUpdated": "{{ date, dddd, MMMM Do }}"
     },
     "tables": {
         "title": "Table",
@@ -125,17 +128,31 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
+            "from": "",
+            "to": "-",
+            "zoom": "Zoom",
+            "resetZoom": "Reset zoom",
+            "resetZoomTitle": "Reset zoom level 1:1",
+            "x_months": "{{ count }}m",
+            "x_months_plural": "{{ count }}m",
+            "all": "All",
+            "thousandsSep": " ",
+            "decimalPoint": ".",
+            "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
-            "xAxis": "X axis:",
             "facebook": "Facebook",
             "twitter": "Twitter",
             "webpage": "Webpage",
             "share": "Share",
-            "close": "Close"
+            "close": "Close",
+            "numDateFormat": "%m/%d/%Y",
+            "dateFormat": "%A, %B %e, %Y",
+            "longDateFormat": "%B %e, %Y",
+            "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in Slovenia",
@@ -259,7 +276,8 @@
             "populationShare": "Population Share",
             "populationC": "Population",
             "population": "population",
-            "days": "days",
+            "last_x_days": "{{ count }} day",
+            "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
             "view": "Show:",
             "deceased": "Deaths",
@@ -276,10 +294,10 @@
             "search": "Search municipality",
             "showAll": "Show All",
             "showLess": "Show Less",
-            "all": "All:",
-            "active": "Active:",
-            "recovered": "Recovered:",
-            "deceased": "Deaths:",
+            "all": "All: ",
+            "active": "Active: ",
+            "recovered": "Recovered: ",
+            "deceased": "Deaths: ",
             "doubles": "Doubles ",
             "yesterday": "yesterday",
             "today": "today",
@@ -313,6 +331,7 @@
             "deathsPerMillion": "Deaths per Million People",
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological",
+            "groupLatinAmerica": "Latin America",
             "groupEastAsiaOceania": "East Asia and Oceania",
             "groupExYu": "Ex-Yugoslavia",
             "groupNordic": "Nordic countries",
@@ -336,7 +355,14 @@
             "beds70": "Beds, 70%",
             "bedsAll": "Beds, all",
             "bedsMax": "Beds, maximum",
-            "bedsICUShort": "ICU beds"
+            "bedsICUShort": "ICU beds",
+            "ventilators": "Respirators",
+            "bedsICU": "ICU Beds",
+            "projection21": "Projection, 21-day doubling",
+            "projection14": "Projection, 14-day doubling",
+            "projection7": "Projection, 7-day doubling",
+            "projection": "Projection",
+            "title": "Hospital capacities"
         }
     },
     "footer": {
@@ -484,6 +510,14 @@
         "liftSchools4to5": {
             "description": "Relaxation: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
             "title": "Schools"
+        },
+        "liftGatherings500": {
+            "title": "Up to 500",
+            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
+        },
+        "quarantineStrict": {
+            "title": "Quarantine",
+            "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
         }
     },
     "days": {
@@ -492,7 +526,7 @@
         "x_days_ago": "{{ count }} day ago",
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, MMMM Do }}",
-        "longerDate": "{{ date, MMMM Do YYYY }}"
+        "longerDate": "{{ date, dddd, MMMM Do YYYY }}"
     },
     "region": {
         "za": "Central Sava Region",
@@ -519,10 +553,12 @@
         "SGP": "Singapore",
         "RUS": "Russia",
         "RKS": "Kosovo",
+        "PER": "Peru",
         "NOR": "Norway",
         "NZL": "New Zealand",
         "MNE": "Montenegro",
         "MKD": "N. Macedonia",
+        "MEX": "Mexico",
         "KOR": "S. Korea",
         "JPN": "Japan",
         "ITA": "Italy",
@@ -534,14 +570,25 @@
         "FRA": "France",
         "FIN": "Finland",
         "ESP": "Spain",
+        "ECU": "Ecuador",
         "DNK": "Denmark",
         "DEU": "Germany",
         "CZE": "Czech Republic",
+        "COL": "Colombia",
         "CHN": "China",
+        "CHL": "Chile",
         "CHE": "Switzerland",
         "BIH": "Bosnia and Herzegovina",
         "BEL": "Belgium",
+        "BRA": "Brazil",
         "AUT": "Austria",
-        "AUS": "Australia"
+        "AUS": "Australia",
+        "ARG": "Argentina"
+    },
+    "pageNotFound": {
+        "notFound": "404: page not found",
+        "somethingWentWrong": "oops… something went wrong :(",
+        "back": "Back",
+        "imageDescription": "two traffic cones connected by yellow tape"
     }
 }

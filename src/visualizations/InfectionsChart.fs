@@ -6,7 +6,6 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
-
 open Browser
 
 open Highcharts
@@ -90,15 +89,18 @@ let availableDisplayTypes: DisplayType array = [|
 type State = {
     DisplayType : DisplayType
     Data : StatsData
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangeDisplayType of DisplayType
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
         DisplayType = availableDisplayTypes.[0]
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -106,8 +108,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType rt ->
         { state with DisplayType=rt }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions displayType (data : StatsData) =
+let renderChartOptions state dispatch =
 
     let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
@@ -137,7 +141,7 @@ let renderChartOptions displayType (data : StatsData) =
             |> skipLeadingMissing
             |> List.rev
 
-        data
+        state.Data
         |> List.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
         |> skipLeadingMissing
         |> skipTrailingMissing
@@ -164,11 +168,11 @@ let renderChartOptions displayType (data : StatsData) =
 
     let allSeries = [
         let allMetricsData =
-            Metrics.metricsToDisplay displayType.ShowAllOrOthers
+            Metrics.metricsToDisplay state.DisplayType.ShowAllOrOthers
             |> Seq.map(fun metric ->
                 let data =
                     let runningTotals = calcRunningTotals metric
-                    match displayType.ValueTypes with
+                    match state.DisplayType.ValueTypes with
                     | RunningTotals -> runningTotals |> toFloatValues
                     | MovingAverages ->
                         runningTotals |> toDailyValues
@@ -200,12 +204,21 @@ let renderChartOptions displayType (data : StatsData) =
         let startDate = allDates |> Seq.min
         let endDate = allDates |> Seq.max |> Some
 
-        if displayType.ShowPhases then
+        if state.DisplayType.ShowPhases then
             yield addContainmentMeasuresFlags startDate endDate |> pojo
     ]
-   
+
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
     let className = "covid19-infections"
-    let baseOptions = Highcharts.basicChartOptions ScaleType.Linear className
+    let baseOptions =
+        Highcharts.basicChartOptions
+            ScaleType.Linear className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
     let axisWithPhases() = baseOptions.xAxis
 
@@ -220,8 +233,9 @@ let renderChartOptions displayType (data : StatsData) =
     {| baseOptions with
         chart = pojo
             {|
+                animation = false
                 ``type`` =
-                    match displayType.ChartType with
+                    match state.DisplayType.ChartType with
                     | SplineChart -> "spline"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
@@ -232,16 +246,16 @@ let renderChartOptions displayType (data : StatsData) =
         title = pojo {| text = None |}
         series = List.toArray allSeries
         xAxis =
-            if displayType.ShowPhases then axisWithPhases()
+            if state.DisplayType.ShowPhases then axisWithPhases()
             else axisWithWithoutPhases()
         yAxis =     // need to hide negative label for addContainmentMeasuresFlags
-            let showFirstLabel = not displayType.ShowPhases
+            let showFirstLabel = not state.DisplayType.ShowPhases
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
 
         plotOptions = pojo
             {|
                 series =
-                    match displayType.ChartType with
+                    match state.DisplayType.ChartType with
                     | SplineChart -> pojo {| stacking = ""; |}
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
@@ -249,13 +263,13 @@ let renderChartOptions displayType (data : StatsData) =
         legend = pojo {| enabled = true ; layout = "horizontal" |}
     |}
 
-let renderChartContainer data metrics =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions data metrics
-            |> Highcharts.chart
+            renderChartOptions state dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -293,7 +307,7 @@ let lastDateOfGraph =
 
 let render state dispatch =
     Html.div [
-        renderChartContainer state.DisplayType state.Data
+        renderChartContainer state dispatch
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
     ]
 

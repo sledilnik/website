@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from 'store'
+import store from './store/index'
 import i18n from './i18n'
 import i18next from 'i18next'
 import moment from 'moment'
@@ -53,7 +53,7 @@ const routes = [
     path: '/:lang',
     beforeEnter: (to, from, next) => {
       const language = to.params.lang
-      const supportedLanguages = ['sl', 'en', 'ru', 'de', 'it', 'hr']
+      const supportedLanguages = i18next.languages
       if (!supportedLanguages.includes(language)) {
         return next()
       }

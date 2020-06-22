@@ -1,11 +1,11 @@
 [<RequireQualifiedAccess>]
 module CasesChart
 
-open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Browser
 
 open Types
 open Highcharts
@@ -16,10 +16,12 @@ type DisplayType =
 type State = {
     data: StatsData
     displayType: DisplayType
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangeDisplayType of DisplayType
+    | RangeSelectionChanged of int
 
 type Series =
     | Deceased
@@ -51,6 +53,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         displayType = MultiChart
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -58,6 +61,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType rt ->
         { state with displayType=rt }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let legendFormatter jsThis =
     let pts: obj[] = jsThis?points
@@ -69,7 +74,7 @@ let legendFormatter jsThis =
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">⬤</span> %s: <b>%s</b>"""
+            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
@@ -80,7 +85,7 @@ let legendFormatter jsThis =
 
     fmtStr
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
 
@@ -132,7 +137,16 @@ let renderChartOptions (state : State) =
             yield renderSeries series
     |]
 
-    let baseOptions = Highcharts.basicChartOptions scaleType className
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            scaleType className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         series = allSeries
         plotOptions = pojo
@@ -146,35 +160,23 @@ let renderChartOptions (state : State) =
                 formatter = fun () -> legendFormatter jsThis
             |}
 
-        legend = pojo
-            {|
-                enabled = true
-                title = {| text = null |}
-                align = "left"
-                verticalAlign = "top"
-                x = 10
-                y = 30
-                borderColor = "#ddd"
-                borderWidth = 1
-                layout = "vertical"
-                floating = true
-                backgroundColor = "#FFF"
-            |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+
     |}
 
-let renderChartContainer (state : State) =
+let renderChartContainer (state : State) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
+            renderChartOptions state dispatch
             |> Highcharts.chartFromWindow
         ]
     ]
 
 let render (state: State) dispatch =
     Html.div [
-        renderChartContainer state
+        renderChartContainer state dispatch
     ]
 
 let casesChart (props : {| data : StatsData |}) =

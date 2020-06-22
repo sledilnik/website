@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Types
 open Highcharts
@@ -32,15 +33,18 @@ type Page =
 type State = {
     page: Page
     data: StatsData
+    RangeSelectionButtonIndex: int
 }
 
 type Msg =
     | ChangePage of Page
+    | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         page = Chart Absolute
         data = data
+        RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
@@ -48,6 +52,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
         { state with page = page }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let maxOption a b =
     match a, b with
@@ -160,7 +166,7 @@ type ChartCfg = {
             }
 
 
-let renderChartOptions scaleType (data : StatsData) =
+let renderChartOptions scaleType state dispatch =
 
     let chartCfg = ChartCfg.fromScale scaleType
     let startDate = DateTime(2020,3,4)
@@ -174,24 +180,32 @@ let renderChartOptions scaleType (data : StatsData) =
                 name = chartCfg.seriesLabel
                 dataLabels = pojo {| enabled = true |}
                 data =
-                    data
+                    state.data
                     |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                     |> Seq.map chartCfg.dataKey
                     |> Seq.toArray
             |}
         if Highcharts.showExpGrowthFeatures then
-            yield addContainmentMeasuresFlags startTime None |> pojo 
+            yield addContainmentMeasuresFlags startTime None |> pojo
     |]
 
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
     // return highcharts options
-    {| basicChartOptions Linear "covid19-spread" with
+    {| basicChartOptions Linear "covid19-spread"
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+        with
         series = allSeries
         yAxis=chartCfg.yAxis
-        legend=legend chartCfg.legendTitle
+        legend= pojo {| enabled = true |}
     |}
 
 let renderExplainer (data: StatsData) =
-    let curPositive, curHospitalzed, doublingRate =
+    let curPositive, curHospitalized =
         data
         |> List.rev
         |> Seq.choose (fun dp ->
@@ -200,7 +214,7 @@ let renderExplainer (data: StatsData) =
             | _, _ -> None)
         |> Seq.take 1
         |> Seq.toList |> List.head
-        |> fun (p, h) -> (p,h,7.0)
+        |> fun (p, h) -> (p,h)
 
     let box (title: string) times positive hospitalized =
         Html.div [
@@ -211,7 +225,7 @@ let renderExplainer (data: StatsData) =
                     match times with
                     | 0 -> Html.span ""
                     | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
-                    | n -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
+                    | _ -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                 ]
                 Html.div [ Html.h4 (string positive); Html.p [ Html.text (I18N.t "charts.spread.confirmed"); Html.br []; Html.text (I18N.t "charts.spread.cases")  ]]
                 Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hoispitalized") ]
@@ -230,23 +244,23 @@ let renderExplainer (data: StatsData) =
                         [ I18N.t "charts.spread.today", 0
                           I18N.t "charts.spread.inOneWeek", 1
                           I18N.t "charts.spread.inTwoWeeks", 2
-                          I18N.t "charts.spread.inThreeWeeks", 3 
+                          I18N.t "charts.spread.inThreeWeeks", 3
                           I18N.t "charts.spread.inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
-                            box title doublings (curPositive <<< doublings) (curHospitalzed <<< doublings)
+                            box title doublings (curPositive <<< doublings) (curHospitalized <<< doublings)
                         )
                 ]
             ]
         ]
     ]
 
-let renderChartContainer scaleType data =
+let renderChartContainer scaleType data dispatch =
     Html.div [
         prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.absolute  ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions scaleType data
-            |> Highcharts.chart
+            renderChartOptions scaleType data dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -280,9 +294,9 @@ let render (state: State) dispatch =
                 prop.children [
                     match state.page with
                     | Chart scale ->
-                        yield renderChartContainer scale state.data
+                        yield renderChartContainer scale state dispatch
                     | Explainer ->
-                        yield renderChartContainer DoublingRate state.data
+                        yield renderChartContainer DoublingRate state dispatch
                         yield renderExplainer state.data
                 ]
             ]

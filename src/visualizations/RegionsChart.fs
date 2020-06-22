@@ -5,6 +5,7 @@ open Elmish
 
 open Feliz
 open Feliz.ElmishComponents
+open Browser
 
 open Highcharts
 open Types
@@ -34,11 +35,14 @@ type State =
     { ScaleType : ScaleType
       Data : RegionsData
       Regions : Region list
-      Metrics : Metric list }
+      Metrics : Metric list
+      RangeSelectionButtonIndex: int
+      }
 
 type Msg =
     | ToggleRegionVisible of string
     | ScaleTypeChanged of ScaleType
+    | RangeSelectionChanged of int
 
 let regionTotal (region : Region) : int =
     region.Municipalities
@@ -59,7 +63,9 @@ let init (data : RegionsData) : State * Cmd<Msg> =
               Color = color
               Visible = i <= 2 } ) colors
 
-    { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics }, Cmd.none
+    { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics
+      RangeSelectionButtonIndex = 0 },
+    Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -73,8 +79,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Metrics = newMetrics }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (state : State) =
+let renderChartOptions (state : State) dispatch =
 
     let metricsToRender =
         state.Metrics
@@ -107,25 +115,36 @@ let renderChartOptions (state : State) =
         )
         |> List.toArray
 
-    let baseOptions = Highcharts.basicChartOptions state.ScaleType "covid19-regions"
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions
+            state.ScaleType "covid19-regions"
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
         chart = pojo
             {|
+                animation = false
                 ``type`` = "line"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
         series = allSeries
         yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
+        legend = {| enabled = false |}
     |}
 
-let renderChartContainer state =
+let renderChartContainer state dispatch =
     Html.div [
         prop.style [ style.height 450 ] //; style.width 500; ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state
-            |> Highcharts.chart
+            renderChartOptions state dispatch
+            |> Highcharts.chartFromWindow
         ]
     ]
 
@@ -154,7 +173,7 @@ let render (state : State) dispatch =
         Utils.renderChartTopControlRight
             (Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch))
-        renderChartContainer state
+        renderChartContainer state dispatch
         renderMetricsSelectors state.Metrics dispatch
     ]
 
