@@ -232,17 +232,18 @@
             "resetZoomTitle": "Прикажи го целиот период",
             "resetZoom": "Почетна вредност на зголемувањето",
             "zoom": "Период",
-            "to": "-"
+            "to": "-",
+            "from": " "
         },
         "municipalities": {
             "yesterday": "вчера",
             "lastCase": "Последен случај: ",
             "today": "денес",
             "doubles": "Удвојување ",
-            "deceased": "Починати:",
-            "recovered": "Оздравени:",
-            "active": "Активни:",
-            "all": "Сите:",
+            "deceased": "Починати: ",
+            "recovered": "Оздравени: ",
+            "active": "Активни: ",
+            "all": "Сите: ",
             "sortActive": "Активни",
             "sortTotal": "Сите",
             "sortDoublingTime": "Време на удвојување",
@@ -400,7 +401,7 @@
         }
     },
     "days": {
-        "longerDate": "{{ date, D. MMMM YYYY }}",
+        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
         "date": "{{ date, D. MMMM }}",
         "x_days_ago": "пред {{ count }} ден",
         "x_days_ago_plural": "пред {{ count }} дена",
