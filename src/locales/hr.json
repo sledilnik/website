@@ -40,7 +40,11 @@
         "ECU": "Ekvador",
         "COL": "Kolumbija",
         "PER": "Peru",
-        "CHL": "Čile"
+        "CHL": "Čile",
+        "ALB": "Albanija",
+        "BGR": "Bugarska",
+        "GRC": "Grčka",
+        "ROU": "Rumunjska"
     },
     "charts": {
         "municipalities": {
