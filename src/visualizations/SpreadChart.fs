@@ -201,7 +201,7 @@ let renderChartOptions scaleType state dispatch =
         with
         series = allSeries
         yAxis=chartCfg.yAxis
-        legend= pojo {| enabled = true |}
+        legend=legend chartCfg.legendTitle
     |}
 
 let renderExplainer (data: StatsData) =
