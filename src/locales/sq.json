@@ -35,11 +35,12 @@
             "max": "Maks.",
             "data": "Të dhëna",
             "beds": "Shtretër spitalor",
-            "bedsShort": "Shtretër"
+            "bedsShort": "Shtretër",
+            "allHospitals": "Të gjithë spitalet"
         },
         "countries": {
-            "groupNeighbouringWoItaly": "Vendet fqinje (përpos Italisë)",
-            "groupNeighbouring": "Rrethina",
+            "groupNeighbouringWoItaly": "Shtetet e rajonit",
+            "groupNeighbouring": "Shtetet e rajonit",
             "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
             "groupCriticalEU": "Shtete kritike (BE)",
             "groupNordic": "Shtetet Nordike",
@@ -68,7 +69,7 @@
             "shareOfInfectedPopulation": "Përqindja e rasteve të konfirmuara në popullatë",
             "shareOfDeceasedConfirmedCases": "Përqindja e të vdekurve në rastet e konfirmuara",
             "populationTotal": "Popullata (gjithsej)",
-            "relative": "Relativ",
+            "relative": "Relative",
             "absolute": "Absolutisht",
             "female": "Femra",
             "male": "Meshkuj",
@@ -126,14 +127,15 @@
         "infections": {
             "otherPersons": "Persona tjerë",
             "allConfirmed": "Gjithsej të konfirmuar",
-            "rhStaff": "Punonjësit e Shtëpive të Pleqve",
+            "rhStaff": "Punonjësit e shtëpive të pleqve",
             "hcStaff": "Punonjësit shëndetësor",
             "all": "Gjithsej",
             "averageByDay": "Në ditë (mesatarisht)",
-            "title": "Struktura e Rasteve të Konfirmuara"
+            "title": "Struktura e Rasteve të Konfirmuara",
+            "relative": "Relative"
         },
         "tests": {
-            "shareOfPositive": "Përqindje e Testeve Pozitive (%)",
+            "shareOfPositive": "Përqindje e testeve pozitive (%)",
             "positiveTests": "Teste Pozitive",
             "negativeTests": "Teste Negative",
             "nationalStudyTesting": "Studim",
@@ -503,7 +505,13 @@
         "cases_confirmed_todate": "Raste të Konfirmuara (deri tani)",
         "cases_confirmed": "Raste të Konfirmuara (në ditë)",
         "tests_performed_todate": "Teste (deri tani)",
-        "tests_performed": "Teste (në ditë)"
+        "tests_performed": "Teste (në ditë)",
+        "region_kk_todate": "Rajoni i poshtëm i Savës",
+        "region_ms_todate": "Rajoni i Murës",
+        "region_mb_todate": "Rajoni i Dravës",
+        "region_lj_todate": "Sllovenia qendrore",
+        "region_nm_todate": "Sllovenia juglindore",
+        "region_kr_todate": "Rajoni i Karniolës së Epërme (Gorenjska)"
     },
     "phase": {
         "7": {
@@ -555,5 +563,8 @@
         "x_days_ago_plural": "{{ count }} ditë më parë",
         "in_x_days": "për {{ count }} ditë",
         "in_x_days_plural": "për {{ count }} ditë"
+    },
+    "footer": {
+        "copyright": "© 2020 Sledilnik.org"
     }
 }
