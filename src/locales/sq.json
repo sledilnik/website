@@ -376,7 +376,7 @@
         },
         "liftSchools1to3": {
             "title": "Kopshte",
-            "description": "Relaksim: kopshti dhe shkolla fillore 1-3, klasa 9. Shkolla e mesme klasa 4"
+            "description": "Relaksim: kopshtet dhe shkollat fillore 1-3, klasa e 9. Shkolla e mesme klasa e 4"
         },
         "retirementHomes": {
             "title": "Shtëpia e pl.",
@@ -423,7 +423,8 @@
             "title": "Komuna"
         },
         "shops": {
-            "title": "Shitore"
+            "title": "Shitore",
+            "description": "Shitoret nga 8-10 të mëngjesit dhe ora e fundit vetëm <br>për grupet e rrezikuara (persona me aftësi të kufizuara, pensionistë, gra shtatzëna)"
         },
         "quarantine": {
             "title": "Karantinë",
@@ -434,16 +435,16 @@
             "title": "Shërbime"
         },
         "nationalStudy": {
-            "description": "Nisja e një studimi kombëtar me 3000 individë të zgjedhur rastësisht",
+            "description": "Nismë e një studimi kombëtar me 3000 individë të zgjedhur rastësisht",
             "title": "Studim"
         },
         "liftMuseums": {
-            "description": "Relaksim: biblioteka, galeri, muze, tregti me pasuri të patundshme, spastrim oxhakësh",
+            "description": "Relaksim: biblioteka, galeri, muze, ndërmjetsim me pasuri të patundshme, spastrim oxhakësh",
             "title": "Muze"
         },
         "liftMunicipality": {
             "title": "Komuna",
-            "description": "Relaksim: lëvizje jashtë kufijve të komunës tuaj"
+            "description": "Relaksim: lëvizje jashtë kufijve të komunës suaj"
         },
         "liftFoodMarkets": {
             "description": "Relaksim: tregjet, shërbimi në tarraca, dyqanet deri në 400m2, parukeri dhe sallone bukurie",
@@ -554,7 +555,8 @@
     "pageNotFound": {
         "imageDescription": "dy kone trafiku të lidhura me shirit të verdhë",
         "back": "Prapa",
-        "notFound": "404: faqja nuk u gjet"
+        "notFound": "404: faqja nuk u gjet",
+        "somethingWentWrong": "ups...diçka shkoi keq :("
     },
     "days": {
         "longerDate": "{{ date, dddd, MMMM Do YYYY }}",
@@ -566,5 +568,11 @@
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
+    },
+    "region": {
+        "kr": "Rajoni i Karniolës së Epërme (Gorenjska)",
+        "lj": "Sllovenia qendrore",
+        "mb": "Rajoni i Dravës",
+        "ms": "Rajoni i Murës"
     }
 }
