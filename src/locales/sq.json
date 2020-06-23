@@ -2,11 +2,248 @@
     "charts": {
         "map": {
             "last_x_days": "{{ count }} dita",
-            "last_x_days_plural": "{{ count }} ditë"
+            "last_x_days_plural": "{{ count }} ditë",
+            "confirmedCases": "Raste të Konfirmuara",
+            "deceased": "Të vdekur",
+            "view": "Shfaq:",
+            "absolute": "Absolutisht",
+            "population": "popullata",
+            "populationC": "Popullata",
+            "populationShare": "Përqindja e popullatës",
+            "all": "Të gjithë",
+            "mortalityOfConfirmedCases": "Vdekshmëria e rasteve të konfirmuara",
+            "title": "Harta e komunës"
+        },
+        "hospitals": {
+            "title": "Kapacitetet spitalore",
+            "projection": "Parashikim",
+            "projection7": "Parashikim, dyfishim 7-ditor",
+            "projection14": "Parashikim, dyfishim 14-ditor",
+            "projection21": "Parashikim, dyfishim 21-ditor",
+            "bedsICU": "Shtretër të kujdesit intensiv",
+            "ventilators": "Respiratorë",
+            "bedsICUShort": "Shtretër të kujdesit intensiv",
+            "bedsMax": "Shtretër, maksimum",
+            "bedsAll": "Shtretër, gjithsej",
+            "beds70": "Shtretër, 70%",
+            "bedsFull": "Shtretër, të zënë",
+            "bedsICUAll": "Shtretër të kujdesit intensiv, gjithsej",
+            "bedsICU70": "Shtretër të kujdesit intensiv, 70%",
+            "bedsICUFull": "Shtretër në kujdesin intensiv, të zënë",
+            "empty": "Të zbrazur",
+            "all": "Të gjithë",
+            "max": "Maks.",
+            "data": "Të dhëna",
+            "beds": "Shtretër spitalor",
+            "bedsShort": "Shtretër"
+        },
+        "countries": {
+            "groupNeighbouringWoItaly": "Vendet fqinje (përpos Italisë)",
+            "groupNeighbouring": "Rrethina",
+            "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
+            "groupCriticalEU": "Shtete kritike (BE)",
+            "groupNordic": "Shtetet Nordike",
+            "groupExYu": "Ish-Jugosllavia",
+            "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
+            "groupLatinAmerica": "Amerika Latine",
+            "chronologically": "Në mënyrë kronologjike",
+            "sinceFirstDeath": "Që nga rasti i parë i vdekjes",
+            "deathsPerMillion": "Numri i të vdekurve për 1 milion banorë",
+            "sinceOneDeathPerMillion": "Që nga rasti i parë i vdekjes për 1 milion banorë",
+            "daysFromOneDeathPerMillion": "Nr. i ditëve që nga rasti i parë i vdekjes në 1 milion banorë",
+            "daysFromFirstDeath": "Nr. i ditëve që nga rasti i parë i vdekjes",
+            "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
+            "dataSourceOWID": "burim i të dhënave: Our World In Data",
+            "title": "Krahasim sipas shtetit"
+        },
+        "ageGroups": {
+            "view": "Shfaq:",
+            "confirmedCases": "Raste të Konfirmuara",
+            "deceased": "Të vdekur",
+            "age": "Mosha",
+            "confirmedCasesPerPopulation": "Rastet e konfirmuara për popullsinë",
+            "deceasedPerPopulation": "Të vdekur për popullatë",
+            "deceasedPerConfirmedCases": "Të vdekur për raste të konfirmuara",
+            "shareOfDeceasedPopulation": "Përqindja e të vdekurve në popullatë",
+            "shareOfInfectedPopulation": "Përqindja e rasteve të konfirmuara në popullatë",
+            "shareOfDeceasedConfirmedCases": "Përqindja e të vdekurve në rastet e konfirmuara",
+            "populationTotal": "Popullata (gjithsej)",
+            "relative": "Relativ",
+            "absolute": "Absolutisht",
+            "female": "Femra",
+            "male": "Meshkuj",
+            "title": "Grupmoshat"
+        },
+        "municipalities": {
+            "lastCase": "Rasti i fundit: ",
+            "today": "sot",
+            "yesterday": "dje",
+            "doubles": "Dyfishime ",
+            "deceased": "Të vdekur: ",
+            "recovered": "Të shëruar: ",
+            "active": "Aktiv: ",
+            "all": "Të gjithë: ",
+            "showLess": "Shfaq më pak",
+            "showAll": "Shfaq të gjitha",
+            "search": "Kërko komunën",
+            "allRegions": "Të gjithë rajonet",
+            "sortBy": "Rendit sipas:",
+            "sortActive": "Aktiv",
+            "sortTotal": "Të gjithë",
+            "sortDoublingTime": "Koha e dyfishimit",
+            "sortLast": "I fundit",
+            "title": "Rastet sipas komunave"
+        },
+        "regions": {
+            "title": "Rastet e konfirmuara sipas rajonit"
+        },
+        "spread": {
+            "absolute": "Rritja absolute ditore",
+            "percentage": "Rritja relative ditore",
+            "doublingRate": "Rritja eksponenciale në ditë",
+            "explainer": "Çfarë do të thotë rritje eksponenciale",
+            "absoluteTitle": "Rritja ditore e rasteve të konfirmuara",
+            "absoluteLabel": "Raste të Konfirmuara (në ditë)",
+            "relativeLabel": "Rritja relative në %",
+            "doublingRateTitle": "Shkalla e rritjes eksponenciale [në ditë]",
+            "doublingRateLabel": "Për sa ditë dyfishohet numri i njerëzve të infektuar",
+            "timesAsMany": "- shumëzuar me aq",
+            "confirmedCases": "raste të konfirmuara",
+            "relativeTitle": "Rritja ditore e të infektuarve",
+            "everageSouthKorea": "Mesatarja e Koresë së Jugut ditëve të fundit",
+            "oneDay": "Një ditë",
+            "oneWeek": "Një javë",
+            "oneMonth": "Një muaj",
+            "ifExpGrowth": "Nëse infeksioni do të përhapet në mënyrë eksponenciale me dyfishim në 7, atëherë mund të prisni:",
+            "today": "Sot",
+            "inOneWeek": "Për një javë",
+            "inTwoWeeks": "Për dy javë",
+            "inThreeWeeks": "Për tri javë",
+            "inFourWeeks": "Për katër javë",
+            "hospitalized": "të shtruar në spital",
+            "title": "Rritja e rasteve të konfirmuara"
+        },
+        "infections": {
+            "otherPersons": "Persona tjerë",
+            "allConfirmed": "Gjithsej të konfirmuar",
+            "rhStaff": "Punonjësit e Shtëpive të Pleqve",
+            "hcStaff": "Punonjësit shëndetësor",
+            "all": "Gjithsej",
+            "averageByDay": "Në ditë (mesatarisht)",
+            "title": "Struktura e Rasteve të Konfirmuara"
+        },
+        "tests": {
+            "shareOfPositive": "Përqindje e Testeve Pozitive (%)",
+            "positiveTests": "Teste Pozitive",
+            "negativeTests": "Teste Negative",
+            "nationalStudyTesting": "Studim",
+            "regularTesting": "Të rregullt",
+            "allTesting": "Të gjithë",
+            "title": "Testimi"
+        },
+        "hCenters": {
+            "allRegions": "Të gjithë rajonet",
+            "testsPositive": "Teste (pozitive*)",
+            "testsPerformed": "Teste (të kryera)",
+            "sentToSelfIsolation": "Në vetizolim",
+            "suspectedCovidPhone": "Të dyshuar për COVID-19 (telefon)",
+            "suspectedCovidExamination": "Të dyshuar për COVID-19 (kontroll)",
+            "title": "Trajtimi i Qendrës Shëndetësore"
+        },
+        "ratios": {
+            "hospitalDeceasedShare": "Përqindja e Vdekjeve në Spital",
+            "icuDeceasedShare": "Përqindja e Vdekjeve në Njësinë për Kujdes Intensiv",
+            "icuMortality": "Vdekshmëria në Njësi për Kujdes Intensiv",
+            "hospitalMortality": "Vdekshmëria për Spital",
+            "deceasedHospital": "Vdekje",
+            "ventilatorHospital": "Në Respirator",
+            "icuHospital": "Në Njësinë për Kujdes Intensiv",
+            "deceasedCases": "Vdekje",
+            "ventilatorCases": "Në Respirator",
+            "icuCases": "Në Njësinë për Kujdes Intensiv",
+            "hospitalCases": "Të shtruar në spital",
+            "mortality": "Vdekshmëria",
+            "hospitalizations": "Shtrime në spital",
+            "seriousCases": "Raste Serioze",
+            "title": "Përqindja e Rasteve Serioze"
+        },
+        "patients": {
+            "allHospitals": "Të gjithë Spitalet",
+            "deceased": "Të vdekur",
+            "discharged": "Të lëshuar prej spitali",
+            "ventilator": "Në Respirator",
+            "icu": "Në Njësinë për Kujdes Intensiv",
+            "hospitalized": "Të shtruar në spital",
+            "admitted": "Të pranuar",
+            "hospitalizedIn": "Të shtruar në spital në:",
+            "byHospital": "Sipas Spitalit",
+            "structure": "Struktura",
+            "title": "Shtrime në spital"
+        },
+        "cases": {
+            "deceased": "Të vdekur",
+            "recovered": "Të shëruar",
+            "ventilator": "Në Respirator",
+            "icu": "Në Njësinë për Kujdes Intensiv",
+            "hospitalized": "Të shtruar në spital",
+            "active": "Aktive",
+            "title": "Raste të Konfirmuara"
+        },
+        "metricsComparison": {
+            "deceasedToDate": "Vdekje (deri sot)",
+            "deceased": "Vdekje (në ditë)",
+            "discharged": "Të lëshuar prej Spitali (në ditë)",
+            "dischargedToDate": "Të lëshuar prej Spitali (deri sot)",
+            "ventilator": "Në Respirator",
+            "icu": "Në Njësinë për Kujdes Intensiv",
+            "hospitalizedToDate": "Të shtruar në spital (deri tani)",
+            "hospitalized": "Të shtruar në spital",
+            "recovered": "Të shëruar (deri tani)",
+            "active": "Raste Aktive",
+            "confirmedToDate": "Raste të Konfirmuara (deri tani)",
+            "confirmed": "Raste të Konfirmuara (në ditë)",
+            "testsToDate": "Teste (deri tani)",
+            "tests": "Teste (në ditë)",
+            "title": "Situata e COVID-19 në Maqedoninë e Veriut"
+        },
+        "common": {
+            "shortDateFormat": "%b %e",
+            "longDateFormat": "%B %e, %Y",
+            "dateFormat": "%A, %B %e, %Y",
+            "numDateFormat": "%m/%d/%Y",
+            "close": "Mbyll",
+            "share": "Shpërndaj",
+            "webpage": "Ueb faqe",
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "FAQ",
+            "noteFaq": "Shënim: kufizimi i të dhënave të paraqitura është përshkruar në ",
+            "log": "Logaritmik",
+            "linear": "Linear",
+            "yAxis": "Boshti Y:",
+            "xAxis": "Boshti X:",
+            "decimalPoint": ".",
+            "all": "Të gjithë",
+            "resetZoomTitle": "Riktheni nivelin 1:1 të zmadhimit",
+            "resetZoom": "Riktheni madhësinë",
+            "zoom": "Zmadho",
+            "to": "-",
+            "loading": "Ngarkim i të dhënave…"
         }
     },
     "shortMonth": {
-        "1": "Shk"
+        "1": "Shk",
+        "11": "Dhj",
+        "10": "Nën",
+        "9": "Tet",
+        "8": "Shta",
+        "7": "Gush",
+        "6": "Korr",
+        "5": "Qer",
+        "4": "Maj",
+        "3": "Pri",
+        "2": "Mar",
+        "0": "Jan"
     },
     "month": {
         "11": "Dhjetor",
@@ -23,7 +260,19 @@
     },
     "navbar": {
         "team": "Ekipi",
-        "models": "Modele"
+        "models": "Modele",
+        "sources": "Burimet",
+        "about": "Rreth nesh",
+        "faq": "FAQ (Pyetje të parashtruara shpesh)",
+        "tables": "Tabela",
+        "home": "Ballina",
+        "menu": "Menu",
+        "language": {
+            "english": "English",
+            "slovenian": "Shqip"
+        },
+        "github": "GitHub",
+        "links": "Linqe"
     },
     "country": {
         "DEU": "Gjermani",
@@ -57,5 +306,209 @@
         "CHN": "Kinë",
         "CZE": "Republika Çeke",
         "AUS": "Australi"
+    },
+    "meta": {
+        "description": "Ndjekja COVID-19 Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
+        "title": "Ndjekja COVID-19"
+    },
+    "embedMaker": {
+        "chooseChart": "Zgjidhni një grafikon",
+        "copied": "E kopjuar!",
+        "copy": "Kopjoni",
+        "descriptionPart2": "shihni këtu.",
+        "descriptionPart1": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, ",
+        "description": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">shihni këtu</a>."
+    },
+    "tables": {
+        "day": "{{ date, M/D }}",
+        "sourceLink": "Tabela GDocs, CSV format apo REST API",
+        "source": "Burimet e të dhënave në formate tjera",
+        "tabByAgeFemale": "Sipas moshës - Femra",
+        "tabByAgeMale": "Sipas moshës - Meshkuj",
+        "tabByRegion": "Sipas rajonit",
+        "tabSummary": "Përmbledhje",
+        "title": "Tabela"
+    },
+    "infocard": {
+        "lastUpdated": "{{ date, dddd, MMMM Do }}",
+        "accordingTo": "Sipas datës {{ date, MMMM Do }}",
+        "deceasedToDate": "Vdekje të Konfirmuara",
+        "icu": "Në Njësinë për Kujdes Intensiv",
+        "inHospital": "Të shtruar në spital",
+        "recoveredToDate": "Të shëruar",
+        "active": "Raste Aktive",
+        "confirmedToDate": "Raste të Konfirmuara",
+        "tests": "Teste Sot"
+    },
+    "notice": {
+        "news002": "struktura e të shtruarve në spital për çdo spital COVID-19."
+    },
+    "timestamp": {
+        "at": "në {{ date, HH:mm }}",
+        "updated": "Përditësuar më {{ date, dddd, MMMM Do YYYY }}"
+    },
+    "cm": {
+        "quarantine14days": {
+            "description": "Karantinë e detyrueshme 14 ditore për të huajt që vijnë nga jashtë <br> (për BE me përjashtime dhe vendet e treta)",
+            "title": "Karantinë"
+        },
+        "liftSchools1to3": {
+            "title": "Kopshte",
+            "description": "Relaksim: kopshti dhe shkolla fillore 1-3, klasa 9. Shkolla e mesme klasa 4"
+        },
+        "retirementHomes": {
+            "title": "Shtëpia e pl.",
+            "description": "Ndalimi i vizitave në shtëpitë e pleqve<br> <br> Infektim i konfirmuar i një mjeku në Metlika"
+        },
+        "checkpoints": {
+            "title": "Punktet e testimit",
+            "description": "16 punkte testimi"
+        },
+        "borders": {
+            "title": "Kufijtë",
+            "description": "Mbyllja e disa vendkalimeve kufitare me Italinë, <br> kontrolle më të detajuara për veturat e udhetarëve"
+        },
+        "publicTransport": {
+            "title": "Transporti",
+            "description": "Pezullimi i transportit publik"
+        },
+        "liftVacationHomes": {
+            "title": "Shtëpi pushimi",
+            "description": "Relaksimi: lëvizja ndërmjet komunave (shtëpitë e pushimeve ...),<br>shpjegime lidhur me ndalimin e përgjithshëm të lëvizjes"
+        },
+        "liftPublicTransport": {
+            "title": "Transporti",
+            "description": "Relaksimi: transporti publik, të gjitha shërbimet shëndetësore dhe stomatologjike"
+        },
+        "liftQuarantine": {
+            "title": "Karantinë",
+            "description": "Relaksimi: karantinë vetëm për të huajt nga vendet e treta"
+        },
+        "epidemic": {
+            "title": "Epidemi",
+            "description": "Shpallet epidemi, rekomandohet vetizolim i përgjithshëm"
+        },
+        "schools": {
+            "title": "Shkolla",
+            "description": "Mbyllje e shkollave, restoranteve"
+        },
+        "gatherings": {
+            "title": "Tubime",
+            "description": "Ndalesë i tubimeve në vende publike"
+        },
+        "municipality": {
+            "description": "Ndalimi i lëvizjes jashtë kufijve të komunës, dezinfektimi i detyrueshëm i <br>ndërtesave me shumë banesa, shitore për grupe të rrezikuara deri në orën 10 të mëngjesit",
+            "title": "Komuna"
+        },
+        "shops": {
+            "title": "Shitore"
+        },
+        "quarantine": {
+            "title": "Karantinë",
+            "description": "Karantinë e detyrueshme 7 ditore kur kthehen nga jashtë"
+        },
+        "liftService": {
+            "description": "Relaksim: ndërtimtari, shërbime, sporte në të hapur, <br>lejohen disa shërbime të rregullta të transportit publik",
+            "title": "Shërbime"
+        },
+        "nationalStudy": {
+            "description": "Nisja e një studimi kombëtar me 3000 individë të zgjedhur rastësisht",
+            "title": "Studim"
+        },
+        "liftMuseums": {
+            "description": "Relaksim: biblioteka, galeri, muze, tregti me pasuri të patundshme, spastrim oxhakësh",
+            "title": "Muze"
+        },
+        "liftMunicipality": {
+            "title": "Komuna",
+            "description": "Relaksim: lëvizje jashtë kufijve të komunës tuaj"
+        },
+        "liftFoodMarkets": {
+            "description": "Relaksim: tregjet, shërbimi në tarraca, dyqanet deri në 400m2, parukeri dhe sallone bukurie",
+            "title": "Tregjet"
+        },
+        "firstCase": {
+            "title": "Rasti i parë",
+            "description": "Rasti i parë i konfirmuar:<br> turist që kthehet prej Maroku"
+        }
+    },
+    "tableDict": {
+        "region_todate": "Gjithsej",
+        "age_female_85+_todate": "85+ vjeç",
+        "age_female_75-84_todate": "75 - 84 vjeç",
+        "age_female_65-74_todate": "65 - 74 vjeç",
+        "age_female_55-64_todate": "55 - 64 vjeç",
+        "age_female_45-54_todate": "45 - 54 vjeç",
+        "age_female_35-44_todate": "35 - 44 vjeç",
+        "age_female_25-34_todate": "25 - 34 vjeç",
+        "age_female_15-24_todate": "15 - 24 vjeç",
+        "age_female_5-14_todate": "5 - 14 vjeç",
+        "age_female_0-4_todate": "0 - 4 vjeç",
+        "age_female_todate": "Gjithsej",
+        "age_male_85+_todate": "85+ vjeç",
+        "age_male_75-84_todate": "75 - 84 vjeç",
+        "age_male_65-74_todate": "65 - 74 vjeç",
+        "age_male_55-64_todate": "55 - 64 vjeç",
+        "age_male_45-54_todate": "45 - 54 vjeç",
+        "age_male_35-44_todate": "35 - 44 vjeç",
+        "age_male_25-34_todate": "25 - 34 vjeç",
+        "age_male_15-24_todate": "15 - 24 vjeç",
+        "age_male_5-14_todate": "5 - 14 vjeç",
+        "age_male_0-4_todate": "0 - 4 vjeç",
+        "age_male_todate": "Gjithsej",
+        "state_out_of_hospital_todate": "Të lëshuar prej Spitali (deri sot)",
+        "state_in_hospital_todate": "Të shtruar në spital (deri tani)",
+        "state_deceased_todate": "Rastet e konfirmuara të të vdekurve (deri tani)",
+        "state_critical": "Në respirator (aktiv)",
+        "state_icu": "Në njësinë për kujdes shëndetësor (aktiv)",
+        "state_in_hospital": "Të shtruar në spital (aktiv)",
+        "cases_unclassified_confirmed_todate": "Raste të konfirmuara - Të tjerë (deri tani)",
+        "cases_rh_employee_confirmed_todate": "Raste të konfirmuara - punonjës në shtëpi të pleqve (deri tani)",
+        "cases_hs_employee_confirmed_todate": "Raste të konfirmuara - punonjës shëndetësor (deri tani)",
+        "cases_closed_todate": "Raste të mbyllura (deri tani)",
+        "cases_recovered_todate": "Të shëruar (deri tani)",
+        "cases_active": "Raste Aktive",
+        "cases_confirmed_todate": "Raste të Konfirmuara (deri tani)",
+        "cases_confirmed": "Raste të Konfirmuara (në ditë)",
+        "tests_performed_todate": "Teste (deri tani)",
+        "tests_performed": "Teste (në ditë)"
+    },
+    "phase": {
+        "7": {
+            "description": "përfundim i epidemisë",
+            "title": "Faza 7"
+        },
+        "6": {
+            "description": "metodologji e re testimi, studim",
+            "title": "Faza 6"
+        },
+        "5": {
+            "description": "metodologji e re testimi",
+            "title": "Faza 5"
+        },
+        "4": {
+            "description": "metodologji e re testimi",
+            "title": "Faza 4"
+        },
+        "3": {
+            "description": "metodologji e re testimi",
+            "title": "Faza 3"
+        },
+        "2": {
+            "description": "epidemi, metodologji e re testimi",
+            "title": "Faza 2"
+        },
+        "1": {
+            "title": "Faza 1"
+        }
+    },
+    "weekday": {
+        "6": "E shtunë",
+        "5": "E premte",
+        "4": "E enjte",
+        "3": "E mërkurë",
+        "2": "E martë",
+        "1": "E hënë",
+        "0": "E diel"
     }
 }

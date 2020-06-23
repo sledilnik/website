@@ -123,9 +123,11 @@
         "za": "Zasavska"
     },
     "country": {
+        "ALB": "Albania",
         "ARG": "Argentina",
         "AUS": "Avstralija",
         "AUT": "Avstrija",
+        "BGR": "Bolgarija",
         "BRA": "Brazilija",
         "BEL": "Belgija",
         "BIH": "Bosna in Hercegovina",
@@ -141,6 +143,7 @@
         "FIN": "Finska",
         "FRA": "Francija",
         "GBR": "Združeno kraljestvo",
+        "GRC": "Grčija",
         "HRV": "Hrvaška",
         "HUN": "Madžarska",
         "IRN": "Iran",
@@ -156,6 +159,7 @@
         "PER": "Peru",
         "RKS": "Kosovo",
         "RUS": "Rusija",
+        "ROU": "Romunija",
         "SGP": "Singapur",
         "SRB": "Srbija",
         "SVK": "Slovaška",
@@ -295,7 +299,7 @@
     "charts": {
         "common": {
             "loading": "Nalagam podatke…",
-            "from": "",
+            "from": " ",
             "to": "-",
             "zoom": "Obdobje",
             "resetZoom": "Ponastavi merilo",
@@ -519,6 +523,7 @@
         },
         "countries": {
             "title": "Primerjava po državah",
+            "groupNeighbouring": "okolica",
             "groupNeighbouringWoItaly": "okolica (brez Italije)",
             "groupCriticalEU": "kritične države (EU)",
             "groupCriticalWorld": "kritične države (svet)",

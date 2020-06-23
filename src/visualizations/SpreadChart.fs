@@ -201,7 +201,7 @@ let renderChartOptions scaleType state dispatch =
         with
         series = allSeries
         yAxis=chartCfg.yAxis
-        legend= pojo {| enabled = true |}
+        legend=legend chartCfg.legendTitle
     |}
 
 let renderExplainer (data: StatsData) =
@@ -227,8 +227,8 @@ let renderExplainer (data: StatsData) =
                     | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                     | _ -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                 ]
-                Html.div [ Html.h4 (string positive); Html.p [ Html.text (I18N.t "charts.spread.confirmed"); Html.br []; Html.text (I18N.t "charts.spread.cases")  ]]
-                Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hoispitalized") ]
+                Html.div [ Html.h4 (string positive); Html.p (I18N.t "charts.spread.confirmedCases") ]
+                Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hospitalized") ]
             ]
         ]
 
