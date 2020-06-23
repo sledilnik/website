@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Novo:",
-        "news002": "prikaz strukture hospitaliziranih po posameznih COVID-19 bolnišnicah."
+        "news001": "Število potrjenih primerov okužbe narašča - #kajsedogaja?",
+        "news002": "Več na Medium..."
     },
     "infocard": {
         "tests": "Testov na dan",

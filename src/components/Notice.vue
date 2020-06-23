@@ -1,10 +1,9 @@
 <template>
   <div class="container">
-<!--  comment out
+<!--  comment out  -->
     <a
       class="notice-link"
-      href="#patients-chart"
-      v-scroll-to="{ el: '#patients-chart', offset: -115 }"
+      href="https://medium.com/sledilnik"
     >
       <div class="notice">
         <span>
@@ -15,7 +14,6 @@
         </div>
       </div>
     </a>
--->
   </div>
 </template>
 

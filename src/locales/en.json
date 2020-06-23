@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New:",
-        "news002": "structure of hospitalized for each COVID-19 hospital."
+        "news001": "Number of confirmed cases is growing #whatisgoingon?",
+        "news002": "Read more on Medium..."
     },
     "infocard": {
         "tests": "Tests Today",
