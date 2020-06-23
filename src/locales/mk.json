@@ -205,7 +205,9 @@
             "deceasedToDate": "Починати (вкупно)",
             "deceased": "Починати (дневно)",
             "ventilator": "На респиратор",
-            "icu": "На интензивна нега"
+            "icu": "На интензивна нега",
+            "dischargedToDate": "Отпуштени од болница (сите)",
+            "discharged": "Отпуштени од болница (на ден)"
         },
         "common": {
             "twitter": "Twitter",
@@ -294,7 +296,19 @@
             "groupEastAsiaOceania": "Источна Азија и Океанија",
             "chronologically": "Хронолошки",
             "groupCriticalEU": "Критични држави (ЕУ)",
-            "groupCriticalWorld": "Критични држави (на светско ниво)"
+            "groupCriticalWorld": "Критични држави (на светско ниво)",
+            "groupNeighbouringWoItaly": "Држави од регионот",
+            "groupNeighbouring": "Држави од регионот",
+            "groupExYu": "Држави од бивша Југославија",
+            "groupLatinAmerica": "Латинска Америка",
+            "sinceFirstDeath": "Од првиот смртен случај",
+            "deathsPerMillion": "Бр. на починати на милион жители",
+            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
+            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
+            "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
+            "dataSourceOWID": "извор на податоците: Our World In Data",
+            "title": "Споредба по држави"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
