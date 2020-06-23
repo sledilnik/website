@@ -110,7 +110,8 @@
             "shortDateFormat": "%e. %b",
             "linkFaq": "Često postavljena pitanja",
             "decimalPoint": ",",
-            "to": " – "
+            "to": " – ",
+            "from": " "
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -143,7 +144,8 @@
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
             "deathsPerMillion": "Broj umrlih na milijun ljudi",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika",
+            "groupNeighbouring": "Susjedne zemlje"
         },
         "ageGroups": {
             "male": "Muškarci",
