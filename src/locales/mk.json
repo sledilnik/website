@@ -4,7 +4,7 @@
         "news002": "структура на хоспитализираните во КОВИД-19 болниците."
     },
     "timestamp": {
-        "at": "на {{ date, HH.mm }}",
+        "at": "во {{ date, HH.mm }}",
         "updated": "Ажурирано на {{ date, dddd, D. MMMM YYYY }}"
     },
     "navbar": {

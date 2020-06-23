@@ -9,7 +9,7 @@
             "absolute": "Absolutisht",
             "population": "popullata",
             "populationC": "Popullata",
-            "populationShare": "Përqindja e popullatës",
+            "populationShare": "Përqindja e popullsisë",
             "all": "Të gjithë",
             "mortalityOfConfirmedCases": "Vdekshmëria e rasteve të konfirmuara",
             "title": "Harta e komunës"
@@ -26,17 +26,18 @@
             "bedsMax": "Shtretër, maksimum",
             "bedsAll": "Shtretër, gjithsej",
             "beds70": "Shtretër, 70%",
-            "bedsFull": "Shtretër, të zënë",
+            "bedsFull": "Shtretër, të plotësuar",
             "bedsICUAll": "Shtretër të kujdesit intensiv, gjithsej",
             "bedsICU70": "Shtretër të kujdesit intensiv, 70%",
-            "bedsICUFull": "Shtretër në kujdesin intensiv, të zënë",
+            "bedsICUFull": "Shtretër në kujdesin intensiv, të plotësuar",
             "empty": "Të zbrazur",
             "all": "Të gjithë",
             "max": "Maks.",
             "data": "Të dhëna",
             "beds": "Shtretër spitalor",
             "bedsShort": "Shtretër",
-            "allHospitals": "Të gjithë spitalet"
+            "allHospitals": "Të gjithë spitalet",
+            "full": "Të plotësuar"
         },
         "countries": {
             "groupNeighbouringWoItaly": "Shtetet e rajonit",
@@ -68,7 +69,7 @@
             "shareOfDeceasedPopulation": "Përqindja e të vdekurve në popullatë",
             "shareOfInfectedPopulation": "Përqindja e rasteve të konfirmuara në popullatë",
             "shareOfDeceasedConfirmedCases": "Përqindja e të vdekurve në rastet e konfirmuara",
-            "populationTotal": "Popullata (gjithsej)",
+            "populationTotal": "Popullsia (gjithsej)",
             "relative": "Relative",
             "absolute": "Absolutisht",
             "female": "Femra",
@@ -132,7 +133,8 @@
             "all": "Gjithsej",
             "averageByDay": "Në ditë (mesatarisht)",
             "title": "Struktura e Rasteve të Konfirmuara",
-            "relative": "Relative"
+            "relative": "Relative",
+            "rhOccupant": "Banorë në shtëpi të pleqve"
         },
         "tests": {
             "shareOfPositive": "Përqindje e testeve pozitive (%)",
@@ -233,7 +235,9 @@
             "to": "-",
             "loading": "Ngarkim i të dhënave…",
             "x_months": "{{ count }}muaj",
-            "x_months_plural": "{{ count }}muaj"
+            "x_months_plural": "{{ count }}muaj",
+            "thousandsSep": " ",
+            "from": " "
         }
     },
     "shortMonth": {
@@ -329,14 +333,14 @@
     },
     "meta": {
         "description": "Ndjekja COVID-19 Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
-        "title": "Ndjekja COVID-19"
+        "title": "Ndjekja e COVID-19"
     },
     "embedMaker": {
         "chooseChart": "Zgjidhni një grafikon",
         "copied": "E kopjuar!",
         "copy": "Kopjoni",
         "descriptionPart2": "shihni këtu.",
-        "descriptionPart1": "Pamja e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së inkuadruar ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, ",
+        "descriptionPart1": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së inkuadruar ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, ",
         "description": "Pamje e veçantë mund të përshtatet sipas nevojave tuaja. Mund ta ndryshoni madhësinë e pamjes së përshtatur ose mund ta kufizoni vetëm për rajon apo komunë të veçantë. Për më shumë, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">shihni këtu</a>.",
         "embedCode": "Inkuadro kodin:",
         "title": "Inkuadroni një grafikon në faqen tuaj të internetit"
@@ -363,7 +367,8 @@
         "tests": "Teste Sot"
     },
     "notice": {
-        "news002": "struktura e të shtruarve në spital për çdo spital COVID-19."
+        "news002": "struktura e të shtruarve në spital për çdo spital COVID-19.",
+        "news001": "Të reja:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
@@ -396,7 +401,7 @@
         },
         "liftVacationHomes": {
             "title": "Shtëpi pushimi",
-            "description": "Relaksimi: lëvizja ndërmjet komunave (shtëpitë e pushimeve ...),<br>shpjegime lidhur me ndalimin e përgjithshëm të lëvizjes"
+            "description": "Relaksimi: lëvizje ndërmjet komunave (shtëpitë e pushimit ...),<br>shpjegime lidhur me ndalimin e përgjithshëm të lëvizjes"
         },
         "liftPublicTransport": {
             "title": "Transporti",
@@ -416,7 +421,7 @@
         },
         "gatherings": {
             "title": "Tubime",
-            "description": "Ndalesë i tubimeve në vende publike"
+            "description": "Ndalesë për tubime në vende publike"
         },
         "municipality": {
             "description": "Ndalimi i lëvizjes jashtë kufijve të komunës, dezinfektimi i detyrueshëm i <br>ndërtesave me shumë banesa, shitore për grupe të rrezikuara deri në orën 10 të mëngjesit",
@@ -455,7 +460,7 @@
             "description": "Rasti i parë i konfirmuar:<br> turist që kthehet prej Maroku"
         },
         "quarantineStrict": {
-            "description": "Karantinë më e rreptë 14 ditorë për të gjithë personat që vijnë nga vendet kritike.<br>(zona e kuqe BIH, Serbia, Kosova)",
+            "description": "Karantinë më e rreptë 14 ditore për të gjithë personat që vijnë nga vendet kritike.<br>(zona e kuqe BIH, Serbia, Kosova)",
             "title": "Karantinë"
         },
         "liftGatherings500": {
@@ -512,7 +517,8 @@
         "region_mb_todate": "Rajoni i Dravës",
         "region_lj_todate": "Sllovenia qendrore",
         "region_nm_todate": "Sllovenia juglindore",
-        "region_kr_todate": "Rajoni i Karniolës së Epërme (Gorenjska)"
+        "region_kr_todate": "Rajoni i Karniolës së Epërme (Gorenjska)",
+        "cases_rh_occupant_confirmed_todate": "Raste të konfirmuara - Banorë në shtëpi të pleqve (deri tani)"
     },
     "phase": {
         "7": {
@@ -573,6 +579,7 @@
         "kr": "Rajoni i Karniolës së Epërme (Gorenjska)",
         "lj": "Sllovenia qendrore",
         "mb": "Rajoni i Dravës",
-        "ms": "Rajoni i Murës"
+        "ms": "Rajoni i Murës",
+        "nm": "Sllovenia juglindore"
     }
 }
