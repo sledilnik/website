@@ -54,7 +54,8 @@ type DataTimeInterval =
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |} 
 
 let dataTimeIntervals =
-    [ LastDays 7
+    [ LastDays 1
+      LastDays 7
       LastDays 14
       LastDays 21
       Complete ]
