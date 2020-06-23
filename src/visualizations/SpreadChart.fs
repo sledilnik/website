@@ -44,7 +44,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         page = Chart Absolute
         data = data
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 

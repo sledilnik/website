@@ -53,7 +53,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         displayType = MultiChart
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 

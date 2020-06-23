@@ -61,7 +61,7 @@ type State = {
             Error = None
             AllFacilities = []
             Breakdown = AllHospitals
-            RangeSelectionButtonIndex = 0
+            RangeSelectionButtonIndex = 3
         }
 
 let getAllBreakdowns state = seq {

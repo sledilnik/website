@@ -64,7 +64,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
               Visible = i <= 2 } ) colors
 
     { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 3 },
     Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =

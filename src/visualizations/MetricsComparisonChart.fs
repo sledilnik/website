@@ -75,7 +75,7 @@ let init data : State * Cmd<Msg> =
         ScaleType = Linear
         Data = data
         Metrics = Metrics.initial
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 

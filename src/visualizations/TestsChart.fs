@@ -35,7 +35,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         displayType = Regular
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 

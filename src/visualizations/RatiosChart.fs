@@ -80,7 +80,7 @@ let init (data : StatsData) : State * Cmd<Msg> =
         patientsData = [||]
         error = None
         displayType = Cases
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
     let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
     state, cmd

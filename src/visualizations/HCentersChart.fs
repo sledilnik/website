@@ -37,7 +37,7 @@ let init () : State * Cmd<Msg> =
         Error = None
         Regions = [ ]
         FilterByRegion = ""
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 3
     }
 
     state, (cmd)

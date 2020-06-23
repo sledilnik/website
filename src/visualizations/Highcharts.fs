@@ -171,7 +171,8 @@ let basicChartOptions
                 index=0; crosshair=true; ``type``="datetime"
                 gridLineWidth=1 //; isX=true
                 gridZIndex = -1
-                tickInterval=86400000
+                tickInterval = 86400000
+                minRange = 86400000
                 //labels = pojo {| align = "center"; y = 30; reserveSpace = false |} // style = pojo {| marginBottom = "-30px" |}
                 labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |} // style = pojo {| marginBottom = "-30px" |}
                 //labels = {| rotation= -45 |}
@@ -279,23 +280,47 @@ let basicChartOptions
                 buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
                 buttons =
                     [|
+                        // {|
+                        //     ``type`` = "day"
+                        //     count = 1
+                        //     text = I18N.tOptions "charts.common.x_days" {| count = 1 |}
+                        //     events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
+                        // |}
+                        {|
+                            ``type`` = "day"
+                            count = 7
+                            text = I18N.tOptions "charts.common.x_days" {| count = 7 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
+                        |}
+                        {|
+                            ``type`` = "day"
+                            count = 14
+                            text = I18N.tOptions "charts.common.x_days" {| count = 14 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 1
+                            text = I18N.tOptions "charts.common.x_months" {| count = 1 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 3 |}
+                        |}
                         {|
                             ``type`` = "month"
                             count = 2
                             text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 3 |}
                         |}
                         {|
                             ``type`` = "month"
                             count = 3
                             text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 4 |}
                         |}
                         {|
                             ``type`` = "all"
                             count = 1
                             text = I18N.t "charts.common.all"
-                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 5 |}
                         |}
                     |]
             |}
