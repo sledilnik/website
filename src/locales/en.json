@@ -294,6 +294,8 @@
             "search": "Search municipality",
             "showAll": "Show All",
             "showLess": "Show Less",
+            "showActiveCases": "Show Active Cases",
+            "showAllCases": "Show All Cases",
             "all": "All: ",
             "active": "Active: ",
             "recovered": "Recovered: ",

@@ -74,6 +74,7 @@ type State =
       ShowAll : bool
       SearchQuery : string
       FilterByRegion : string
+      ShowActiveCases : bool
       SortBy : SortBy }
 
 type Msg =
@@ -81,6 +82,7 @@ type Msg =
     | SearchInputChanged of string
     | RegionFilterChanged of string
     | SortByChanged of SortBy
+    | ToggleActiveCases
 
 let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
@@ -156,6 +158,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             match query.Region with
             | None -> ""
             | Some region -> region
+          ShowActiveCases = false
           SortBy =
             match query.SortBy with
             | None -> LastConfirmedCase
@@ -178,8 +181,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with FilterByRegion = region }, Cmd.none
     | SortByChanged sortBy ->
         { state with SortBy = sortBy }, Cmd.none
+    | ToggleActiveCases ->
+        { state with ShowActiveCases = not state.ShowActiveCases }, Cmd.none
 
-let renderMunicipality (municipality : Municipality) =
+let renderMunicipality (municipality : Municipality) (showActiveCases : bool) =
 
     let renderLastCase =
         let label, value =
@@ -251,12 +256,14 @@ let renderMunicipality (municipality : Municipality) =
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
-                                        Html.div [
-                                            prop.style [ style.height dHeight ]
-                                            prop.className "bar--deceased" ]
-                                        Html.div [
-                                            prop.style [ style.height rHeight ]
-                                            prop.className "bar--recovered" ]
+                                        if showActiveCases then
+                                            Html.div [
+                                                prop.style [ style.height dHeight ]
+                                                prop.className "bar--deceased" ]
+                                            Html.div [
+                                                prop.style [ style.height rHeight ]
+                                                prop.className "bar--recovered" ]
+                                            else Html.none
                                         Html.div [
                                             prop.style [ style.height aHeight ]
                                             prop.className "bar--active" ]
@@ -409,7 +416,7 @@ let renderMunicipalities (state : State) _ =
         else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
         else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
-    (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality), displayShowAllButton)
+    (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality state.ShowActiveCases), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
     Html.div [
@@ -423,6 +430,13 @@ let renderShowMore showAll dispatch =
                 ]
             ]
         ]
+    ]
+
+let renderActiveCases showActiveCases dispatch =
+    Html.div [
+        prop.className "btn btn-sm btn-primary"
+        prop.text (if showActiveCases then I18N.t "charts.municipalities.showActiveCases" else I18N.t "charts.municipalities.showAllCases")
+        prop.onClick (fun _ -> dispatch ToggleActiveCases)
     ]
 
 let renderSearch (query : string) dispatch =
@@ -490,6 +504,7 @@ let render (state : State) dispatch =
                     prop.children [
                         renderRegionSelector state.Regions state.FilterByRegion dispatch
                         renderSearch state.SearchQuery dispatch
+                        renderActiveCases state.ShowActiveCases dispatch
                     ]
                 ]
                 renderSortBy state.SortBy dispatch

@@ -495,6 +495,8 @@
             "all": "Vsi: ",
             "showLess": "Prikaži manj občin",
             "showAll": "Prikaži vse občine",
+            "showActiveCases": "Show Active Cases",
+            "showAllCases": "Show All Cases",
             "search": "Poišči občino",
             "allRegions": "Vse regije",
             "sortBy": "Razvrsti:",
