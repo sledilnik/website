@@ -95,6 +95,12 @@
         },
         "quarantine": {
             "title": "Карантин"
+        },
+        "nationalStudy": {
+            "title": "Истражување"
+        },
+        "quarantineStrict": {
+            "title": "Карантин"
         }
     },
     "country": {
@@ -131,7 +137,18 @@
         "BIH": "Босна и Херцеговина",
         "BEL": "Белгија",
         "AUT": "Австрија",
-        "AUS": "Австралија"
+        "AUS": "Австралија",
+        "ARG": "Аргентина",
+        "BGR": "Бугарија",
+        "BRA": "Бразил",
+        "CHL": "Чиле",
+        "COL": "Колумбија",
+        "ECU": "Еквадор",
+        "GRC": "Грција",
+        "MEX": "Мексико",
+        "PER": "Перу",
+        "ROU": "Романија",
+        "ALB": "Албанија"
     },
     "shortMonth": {
         "2": "мар",
@@ -276,7 +293,9 @@
             "absolute": "Апсолутен дневен прираст",
             "percentage": "Релативен дневен прираст",
             "doublingRate": "Експоненцијален раст во денови",
-            "explainer": "Што значи експоненцијален прираст"
+            "explainer": "Што значи експоненцијален прираст",
+            "ifExpGrowth": "Ако заразата се шири експонентно со удвојување на 7, може да очекуваме:",
+            "timesAsMany": "-пати повеќе"
         },
         "hospitals": {
             "data": "Податоци",
@@ -320,7 +339,10 @@
             "view": "Прикажи:",
             "relative": "Релативно",
             "absolute": "Апсолутно",
-            "title": "Старосни групи"
+            "title": "Старосни групи",
+            "shareOfInfectedPopulation": "Дел од популацијата на заразени",
+            "shareOfDeceasedPopulation": "Дел на мртвите од популацијата",
+            "shareOfDeceasedConfirmedCases": "Дел од мртвите од бројот на заразени"
         },
         "map": {
             "confirmedCases": "Потврдени случаи",
@@ -348,7 +370,10 @@
             "positiveTests": "Позитивни тестови",
             "negativeTests": "Негативни тестови",
             "allTesting": "Вкупно",
-            "title": "Тестирање"
+            "title": "Тестирање",
+            "shareOfPositive": "Дел до позитивните тестови (%)",
+            "regularTesting": "Редовно",
+            "nationalStudyTesting": "Истражување"
         },
         "hCenters": {
             "testsPositive": "Тестови (позитивни*)",
@@ -365,7 +390,10 @@
             "mortality": "Смртност",
             "hospitalizations": "Хоспитализирани",
             "hospitalMortality": "Смртност по болници",
-            "seriousCases": "Сериозни случаи"
+            "seriousCases": "Сериозни случаи",
+            "hospitalDeceasedShare": "Дел од починатите во болници",
+            "icuDeceasedShare": "Дел од починатите од интензивна нега",
+            "title": "Дел од сериозните случаи"
         },
         "patients": {
             "allHospitals": "Сите болници",
@@ -468,5 +496,8 @@
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
+    },
+    "region": {
+        "kr": "Горењска"
     }
 }
