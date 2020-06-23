@@ -251,7 +251,8 @@ let renderMunicipality (municipality : Municipality) (showActiveCases : bool) =
                                     else 0
                                 let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
                                 let dHeight = deceasedToDate * barMaxHeight / maxValue
-                                let aHeight = activeCases * barMaxHeight / maxValue
+                                let aMaxHeight = 11 // TODO:
+                                let aHeight = if showActiveCases then (activeCases * barMaxHeight / maxValue) else (activeCases * barMaxHeight / aMaxHeight)
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
@@ -434,7 +435,7 @@ let renderShowMore showAll dispatch =
 
 let renderActiveCases showActiveCases dispatch =
     Html.div [
-        prop.className "btn btn-sm btn-primary"
+        prop.className "btn btn-sm btn-primary filters__show-all-cases"
         prop.text (if showActiveCases then I18N.t "charts.municipalities.showActiveCases" else I18N.t "charts.municipalities.showAllCases")
         prop.onClick (fun _ -> dispatch ToggleActiveCases)
     ]
