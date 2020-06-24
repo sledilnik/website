@@ -110,6 +110,7 @@ type VisualizationType =
     | Municipalities
     | AgeGroups
     | Map
+    | EuropeMap
     | Infections
     | Countries
 

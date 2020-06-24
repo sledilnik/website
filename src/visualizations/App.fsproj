@@ -28,6 +28,7 @@
         <Compile Include="CasesChart.fs" />
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
+        <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
         <Compile Include="CountriesChartViz\Analysis.fs" />
         <Compile Include="CountriesChartViz\Synthesis.fs" />
