@@ -189,7 +189,7 @@ let renderChartOptions state dispatch =
         for (metric, metricData) in allMetricsData do
             yield pojo
                 {|
-                // visible = true
+                visible = true
                 color = metric.Color
                 name = I18N.tt "charts.infections" metric.Id
                 data = metricData

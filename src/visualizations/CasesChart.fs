@@ -114,7 +114,7 @@ let renderChartOptions (state : State) dispatch =
         let visible, color, seriesid = Series.getSeriesInfo series
         {|
             ``type`` = "column"
-            // visible = visible
+            visible = visible
             color = color
             name = I18N.tt "charts.cases" seriesid
             data =

@@ -130,7 +130,7 @@ let renderRatiosChart (state : State) dispatch =
 
         let color, line, id = Ratios.getSeriesInfo ratio
         {|
-            // visible = true
+            visible = true
             color = color
             dashStyle = line |> DashStyle.toString
             name = I18N.tt "charts.ratios" id
