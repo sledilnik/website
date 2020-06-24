@@ -22,6 +22,7 @@ type Region =
 
 type TotalsForDate =
     { Date : System.DateTime
+      ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
     }
@@ -102,6 +103,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
+                                     ActiveCases = municipality.ActiveCases
                                      ConfirmedToDate = municipality.ConfirmedToDate
                                      DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
@@ -111,6 +113,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.map (
                     fun dp -> {
                         Date = dp.Date
+                        ActiveCases = dp.ActiveCases
                         ConfirmedToDate = dp.ConfirmedToDate
                         DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
@@ -134,13 +137,9 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
               ActiveCases =
-                    let dayR = totalsForDate |> Array.tryItem (totalsForDate.Length - 15)
-                    let dayL = totalsForDate |> Array.tryLast
-                    match dayR, dayL with
-                    | None, None -> Some 0
-                    | None, Some b -> b.ConfirmedToDate
-                    | Some a, None -> Some 0
-                    | Some a, Some b -> Some (b.ConfirmedToDate.Value - a.ConfirmedToDate.Value)
+                    match totalsForDate |> Array.tryLast with
+                    | None -> Some 0
+                    | Some last -> last.ActiveCases
               MaxConfirmedCases = maxValue
               LastConfirmedCase = maxDay.Date
               DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
@@ -239,14 +238,11 @@ let renderMunicipality (municipality : Municipality) =
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
-                                let deceasedToDate = dp.DeceasedToDate.Value
-                                let recoveredToDate =
-                                    if i >= 14 && municipality.TotalsForDate.[i-14].ConfirmedToDate.Value > deceasedToDate
-                                    then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
-                                    else 0
-                                let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
-                                let dHeight = deceasedToDate * barMaxHeight / maxValue
+                                let activeCases = dp.ActiveCases |> Option.defaultValue 0
+                                let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
+                                let recoveredToDate = confirmedToDate - deceasedToDate - activeCases 
                                 let aHeight = activeCases * barMaxHeight / maxValue
+                                let dHeight = deceasedToDate * barMaxHeight / maxValue
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
@@ -319,10 +315,10 @@ let renderMunicipality (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "active"
-                                prop.text (sprintf "%d" municipality.ActiveCases.Value) ]
+                                prop.text (sprintf "%d" (municipality.ActiveCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "total"
-                                prop.text (sprintf "%d" municipality.MaxConfirmedCases.Value) ]
+                                prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "date"
                                 prop.text (I18N.tOptions "days.date" {| date = municipality.LastConfirmedCase.Date |})]
