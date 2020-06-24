@@ -61,7 +61,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         |> List.mapi2 (fun i color region ->
             { Key = region.Name
               Color = color
-              Visible = i <= 2 } ) colors
+              Visible = true } ) colors
 
     { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics
       RangeSelectionButtonIndex = 0 },
