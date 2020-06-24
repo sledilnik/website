@@ -593,8 +593,8 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Novo:",
-        "news002": "structura hospitaliziranih za svaku COVID-19 bolnicu."
+        "news001": "Broj potvrđenih slučajeva raste – #whatisgoingon?",
+        "news002": "Saznaj više na Medium …"
     },
     "timestamp": {
         "at": "na {{ date, HH:mm }}",
