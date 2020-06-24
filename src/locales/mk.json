@@ -1,7 +1,7 @@
 {
     "notice": {
-        "news001": "Новости:",
-        "news002": "структура на хоспитализираните во КОВИД-19 болниците."
+        "news001": "Бројот на потврдени случаи се зголемува #whatisgoingon?",
+        "news002": "Читајте повеќе на Медиум..."
     },
     "timestamp": {
         "at": "во {{ date, HH.mm }}",
@@ -44,34 +44,44 @@
             "description": "Укинување на јавен превоз"
         },
         "epidemic": {
-            "title": "Епидемија"
+            "title": "Епидемија",
+            "description": "Прогласена епидемија, препорачана општа самоизолација"
         },
         "borders": {
-            "title": "Граници"
+            "title": "Граници",
+            "description": "Затворање на некои гранични премини со Италија, <br> построги контроли на патнички возила"
         },
         "liftSchools4to5": {
-            "title": "Училишта"
+            "title": "Училишта",
+            "description": "Опуштање: основно училиште 4-то, 5-то одделение, собирање до 200 луѓе, сите сместувачки услуги"
         },
         "liftSchools1to3": {
-            "title": "Детски градинки"
+            "title": "Детски градинки",
+            "description": "Опуштање: градинки и основни училишта 1-3, 9 одделение. Средно училиште 4-то одделение"
         },
         "liftPublicTransport": {
-            "title": "Превоз"
+            "title": "Превоз",
+            "description": "Опуштање: јавен превоз, сите здравствени и стоматолошки услуги"
         },
         "liftFoodMarkets": {
-            "title": "Пазари"
+            "title": "Пазари",
+            "description": "Опуштање: пазари, услужување на тераси, продавници до 400м2, фризерски и козметички салони"
         },
         "liftMunicipality": {
-            "title": "Општини"
+            "title": "Општини",
+            "description": "Опуштање: движење вон границите на вашата општина"
         },
         "liftMuseums": {
-            "title": "Музеи"
+            "title": "Музеи",
+            "description": "Опуштање: библиотеки, галерии, посредување со недвижнини, чистење на оџаци"
         },
         "liftVacationHomes": {
-            "title": "Викендици"
+            "title": "Викендици",
+            "description": "Опуштање: движење меѓу општините (викендички…), <br>објаснувања во врска со општата забрана за движење"
         },
         "municipality": {
-            "title": "Општини"
+            "title": "Општини",
+            "description": "Забрана за движење надвор од оптинските граници, задолжителна дезинфекција на станбени згради, продавници за ранливи групи до 10 часот"
         },
         "gatherings": {
             "description": "Забрана на јавни собири",
@@ -82,25 +92,47 @@
             "description": "Затворање на училишта, ресторани"
         },
         "firstCase": {
-            "title": "Прв случај"
+            "title": "Прв случај",
+            "description": "Првиот потврден случај:<br>турист кој се вратил од Мароко"
         },
         "quarantine14days": {
-            "title": "Карантин"
+            "title": "Карантин",
+            "description": "Задолжителен 14-дневен карантин за странци кои пристигнуваат од странство <br> (за ЕУ со исклучоци и трети земји)"
         },
         "liftQuarantine": {
-            "title": "Карантин"
+            "title": "Карантин",
+            "description": "Опуштање: карантин само за странци од трети земји"
         },
         "shops": {
-            "title": "Продавници"
+            "title": "Продавници",
+            "description": "Продавници од 8-10 часот претпладне и последниот час <br>исклучително за ранливите групи (лица со посебни потреби, пензионери, бремени жени)"
         },
         "quarantine": {
-            "title": "Карантин"
+            "title": "Карантин",
+            "description": "Задолжителен 7 дневен карантин при пристигнување од странство"
         },
         "nationalStudy": {
-            "title": "Истражување"
+            "title": "Истражување",
+            "description": "Започнување на национална студија со 3000 случајно избрани лица"
         },
         "quarantineStrict": {
-            "title": "Карантин"
+            "title": "Карантин",
+            "description": "Построг задолжителен 14-дневен карантин за сите лица кои пристигнуваат од критичните земји. <br>(црвена зона БиХ, Србија, Косово)"
+        },
+        "liftGatherings500": {
+            "title": "До 500"
+        },
+        "retirementHomes": {
+            "title": "ПД",
+            "description": "Забрана за посети на пензионерските домови. <br>Потврдено заразување на доктор во Метлика"
+        },
+        "checkpoints": {
+            "title": "ПТ",
+            "description": "16 пунктови за тестирање"
+        },
+        "liftService": {
+            "description": "Опуштање: градежништво, услуги, спорт на отворено, <br> дозволени некои редовни услуги за јавниот превоз",
+            "title": "Услуги"
         }
     },
     "country": {
@@ -271,7 +303,8 @@
             "showLess": "Прикажи помалку општини",
             "showAll": "Прикажи ги сите општини",
             "search": "Барај општина",
-            "title": "Случаи по општини"
+            "title": "Случаи по општини",
+            "allRegions": "Сите региони"
         },
         "spread": {
             "today": "Денес",
@@ -295,7 +328,9 @@
             "doublingRate": "Експоненцијален раст во денови",
             "explainer": "Што значи експоненцијален прираст",
             "ifExpGrowth": "Ако заразата се шири експонентно со удвојување на 7, може да очекуваме:",
-            "timesAsMany": "-пати повеќе"
+            "timesAsMany": "-пати повеќе",
+            "doublingRateTitle": "Стапка на експоненцијален раст [во денови]",
+            "everageSouthKorea": "Просек на Јужна Кореја во последниве денови"
         },
         "hospitals": {
             "data": "Податоци",
@@ -308,7 +343,19 @@
             "projection": "Проекција",
             "projection7": "Проекција, удвојување за 7 дена",
             "projection14": "проекција, удвојување за 14 дена",
-            "projection21": "Проекција, удвојување за 21 ден"
+            "projection21": "Проекција, удвојување за 21 ден",
+            "bedsICU": "Кревети на ОИН",
+            "bedsICUShort": "Кревети на ОИН",
+            "bedsMax": "Кревети, максимум",
+            "bedsAll": "Кревети, сите",
+            "beds70": "Кревети, 70%",
+            "bedsFull": "Кревети, исполнети",
+            "bedsICUAll": "Кревети на ОИН, сите",
+            "bedsICU70": "Кревети на ОИН, 70%",
+            "bedsICUFull": "Кревети на ОИН, исполнети",
+            "empty": "Празни",
+            "full": "Исполнети",
+            "max": "Макс"
         },
         "countries": {
             "groupNordic": "Нордиски земји",
@@ -342,7 +389,10 @@
             "title": "Старосни групи",
             "shareOfInfectedPopulation": "Дел од популацијата на заразени",
             "shareOfDeceasedPopulation": "Дел на мртвите од популацијата",
-            "shareOfDeceasedConfirmedCases": "Дел од мртвите од бројот на заразени"
+            "shareOfDeceasedConfirmedCases": "Дел од мртвите од бројот на заразени",
+            "confirmedCasesPerPopulation": "Потврдени случаи по население",
+            "deceasedPerPopulation": "Смртни случаи по население",
+            "deceasedPerConfirmedCases": "Смртни случаи според потврдените случаи"
         },
         "map": {
             "confirmedCases": "Потврдени случаи",
@@ -354,7 +404,9 @@
             "population": "население",
             "populationC": "Население",
             "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
-            "view": "Прикажи:"
+            "view": "Прикажи:",
+            "populationShare": "Удел на населението",
+            "title": "Мапа на општината"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -364,7 +416,8 @@
             "all": "Вкупно",
             "averageByDay": "По ден (просек)",
             "title": "Структура на потврдените случаи",
-            "relative": "Релативно"
+            "relative": "Релативно",
+            "otherPersons": "Други лица"
         },
         "tests": {
             "positiveTests": "Позитивни тестови",
@@ -377,7 +430,13 @@
         },
         "hCenters": {
             "testsPositive": "Тестови (позитивни*)",
-            "testsPerformed": "Тестови (вкупно)"
+            "testsPerformed": "Тестови (вкупно)",
+            "allRegions": "Сите региони",
+            "sentToSelfIsolation": "Решение за самоизолација",
+            "suspectedCovidPhone": "Сомнение за КОВИД-19 (телефон)",
+            "suspectedCovidExamination": "Сомнение за КОВИД-19 (контрола)",
+            "emergencyExamination": "Итна медицинска помош",
+            "title": "Лекување во здравствен дом"
         },
         "ratios": {
             "deceasedHospital": "Починати",
@@ -393,7 +452,8 @@
             "seriousCases": "Сериозни случаи",
             "hospitalDeceasedShare": "Дел од починатите во болници",
             "icuDeceasedShare": "Дел од починатите од интензивна нега",
-            "title": "Дел од сериозните случаи"
+            "title": "Дел од сериозните случаи",
+            "icuMortality": "Смртност на оделенија за интензивна нега"
         },
         "patients": {
             "allHospitals": "Сите болници",
@@ -416,6 +476,9 @@
             "hospitalized": "Хоспитализирани",
             "active": "Активни",
             "title": "Потврдени случаи"
+        },
+        "regions": {
+            "title": "Потврдени случаи по региони"
         }
     },
     "phase": {
@@ -492,12 +555,44 @@
         "cases_active": "Активни случаи",
         "cases_confirmed_todate": "Потврдени случаи (вкупно)",
         "cases_confirmed": "Потврдени случаи (дневно)",
-        "tests_performed_todate": "Тестови (вкупно)"
+        "tests_performed_todate": "Тестови (вкупно)",
+        "region_za_todate": "Central Sava Region",
+        "region_ce_todate": "Savinja Region",
+        "region_po_todate": "Littoral–Inner Carniola",
+        "region_kk_todate": "Lower Sava Region",
+        "region_ms_todate": "Mura Region",
+        "region_mb_todate": "Drava Region",
+        "region_lj_todate": "Central Slovenia",
+        "region_kp_todate": "Coastal–Karst Region",
+        "region_sg_todate": "Carinthia",
+        "region_nm_todate": "Southeast Slovenia",
+        "region_ng_todate": "Gorizia Region",
+        "region_kr_todate": "Upper Carniola Region",
+        "state_out_of_hospital_todate": "Отпуштени од болница (до денес)",
+        "cases_unclassified_confirmed_todate": "Потврдени случаи - други (до денес)",
+        "cases_closed_todate": "Затворени случаи (до денес)"
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
     },
     "region": {
-        "kr": "Горењска"
+        "kr": "Горењска",
+        "ng": "Gorizia Region",
+        "nm": "Southeast Slovenia",
+        "sg": "Carinthia",
+        "kp": "Coastal–Karst Region",
+        "lj": "Central Slovenia",
+        "mb": "Drava Region",
+        "ms": "Mura Region",
+        "kk": "Lower Sava Region",
+        "po": "Littoral–Inner Carniola",
+        "ce": "Savinja Region",
+        "za": "Central Sava Region"
+    },
+    "pageNotFound": {
+        "imageDescription": "два сообраќајни конуси поврзани со жолта трака",
+        "back": "Назад",
+        "somethingWentWrong": "...се случила некоја грешка:(",
+        "notFound": "404: страницата не е пронајдена"
     }
 }
