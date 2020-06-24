@@ -34,6 +34,11 @@ let parseRegionsData data =
                                             |> List.map (fun (cityKey, cityValue) ->
                                                 match cityValue with
                                                 | JObject cityMap ->
+                                                    let activeCases = None
+                                                        //match Map.tryFind "activeCases" cityMap with
+                                                        //| Some (JNumber num) -> Some (int num)
+                                                        //| Some (JNull) -> None
+                                                        //| _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in activeCases" cityKey)
                                                     let confirmedToDate =
                                                         match Map.tryFind "confirmedToDate" cityMap with
                                                         | Some (JNumber num) -> Some (int num)
@@ -44,7 +49,10 @@ let parseRegionsData data =
                                                         | Some (JNumber num) -> Some (int num)
                                                         | Some (JNull) -> None
                                                         | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in deceasedToDate" cityKey)
-                                                    { Name = cityKey ; ConfirmedToDate = confirmedToDate ; DeceasedToDate = deceasedToDate }
+                                                    { Name = cityKey 
+                                                      ConfirmedToDate = confirmedToDate
+                                                      ActiveCases = activeCases 
+                                                      DeceasedToDate = deceasedToDate }
                                                 | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s" cityKey)
                                             )
                                         | _ -> failwith (sprintf "nepričakovan format podatkov za regijo %s" regionKey)

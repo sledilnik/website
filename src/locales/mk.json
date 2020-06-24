@@ -4,7 +4,7 @@
         "news002": "структура на хоспитализираните во КОВИД-19 болниците."
     },
     "timestamp": {
-        "at": "на {{ date, HH.mm }}",
+        "at": "во {{ date, HH.mm }}",
         "updated": "Ажурирано на {{ date, dddd, D. MMMM YYYY }}"
     },
     "navbar": {
@@ -20,7 +20,8 @@
         "faq": "ЧПП",
         "models": "Модели",
         "tables": "Табела",
-        "home": "Дома"
+        "home": "Дома",
+        "menu": "Мени"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
@@ -34,7 +35,7 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, D. MMMM }}",
+        "lastUpdated": "{{ date, dddd, D. MMMM }}",
         "accordingTo": "Во однос на {{ date, dddd, D. MMMM }}"
     },
     "cm": {
@@ -94,6 +95,12 @@
         },
         "quarantine": {
             "title": "Карантин"
+        },
+        "nationalStudy": {
+            "title": "Истражување"
+        },
+        "quarantineStrict": {
+            "title": "Карантин"
         }
     },
     "country": {
@@ -130,7 +137,18 @@
         "BIH": "Босна и Херцеговина",
         "BEL": "Белгија",
         "AUT": "Австрија",
-        "AUS": "Австралија"
+        "AUS": "Австралија",
+        "ARG": "Аргентина",
+        "BGR": "Бугарија",
+        "BRA": "Бразил",
+        "CHL": "Чиле",
+        "COL": "Колумбија",
+        "ECU": "Еквадор",
+        "GRC": "Грција",
+        "MEX": "Мексико",
+        "PER": "Перу",
+        "ROU": "Романија",
+        "ALB": "Албанија"
     },
     "shortMonth": {
         "2": "мар",
@@ -174,7 +192,11 @@
         "copy": "Копирај",
         "descriptionPart2": "Проверете овде.",
         "chooseChart": "Изберете графикон",
-        "preview": "Преглед:"
+        "preview": "Преглед:",
+        "embedCode": "Вгради го кодот:",
+        "title": "Вгради го графиконот во твојата веб страна",
+        "descriptionPart1": "Специфичниот приказ може да се прилагоди на вашите потреби. Може да ја смените големината на вградениот поглед или да ја ограничите со избран регион или општина. За повеќе, ",
+        "description": "Одредениот приказ може да се прилагоди на вашите потреби. Може да се сменат димензиите на вградениот поглед или да се ограничи специфичниот регион или општина. За повеќе, <a href=\"https://github.com/treker-mk/website/blob/master/examples/README.md\">проверете тука </a>."
     },
     "tables": {
         "tabByAgeFemale": "По возраст - Женски",
@@ -182,7 +204,9 @@
         "title": "Табела",
         "day": "{{ date, D.M. }}",
         "sourceLink": "GDocs табела во CSV облик или REST API",
-        "source": "Извори на податоци во други облици"
+        "source": "Извори на податоци во други облици",
+        "tabByRegion": "По регион",
+        "tabSummary": "Резиме"
     },
     "charts": {
         "metricsComparison": {
@@ -198,7 +222,9 @@
             "deceasedToDate": "Починати (вкупно)",
             "deceased": "Починати (дневно)",
             "ventilator": "На респиратор",
-            "icu": "На интензивна нега"
+            "icu": "На интензивна нега",
+            "dischargedToDate": "Отпуштени од болница (сите)",
+            "discharged": "Отпуштени од болница (на ден)"
         },
         "common": {
             "twitter": "Twitter",
@@ -210,17 +236,33 @@
             "linear": "Линеарна",
             "close": "Затвори",
             "webpage": "Веб страница",
-            "loading": "Вчитување на податоците…"
+            "loading": "Вчитување на податоците…",
+            "shortDateFormat": "%e. %b",
+            "longDateFormat": "%e. %B %Y",
+            "dateFormat": "%A, %e. %B %Y",
+            "numDateFormat": "%d. %m. %Y",
+            "share": "Сподели",
+            "noteFaq": "Напомена: ограничувањата на представените податоци се опишани во ",
+            "decimalPoint": ",",
+            "thousandsSep": " . ",
+            "all": "Сите",
+            "x_months": "{{ count }}м",
+            "x_months_plural": "{{ count }}м",
+            "resetZoomTitle": "Прикажи го целиот период",
+            "resetZoom": "Почетна вредност на зголемувањето",
+            "zoom": "Период",
+            "to": "-",
+            "from": " "
         },
         "municipalities": {
             "yesterday": "вчера",
             "lastCase": "Последен случај: ",
             "today": "денес",
             "doubles": "Удвојување ",
-            "deceased": "Починати:",
-            "recovered": "Оздравени:",
-            "active": "Активни:",
-            "all": "Сите:",
+            "deceased": "Починати: ",
+            "recovered": "Оздравени: ",
+            "active": "Активни: ",
+            "all": "Сите: ",
             "sortActive": "Активни",
             "sortTotal": "Сите",
             "sortDoublingTime": "Време на удвојување",
@@ -251,7 +293,9 @@
             "absolute": "Апсолутен дневен прираст",
             "percentage": "Релативен дневен прираст",
             "doublingRate": "Експоненцијален раст во денови",
-            "explainer": "Што значи експоненцијален прираст"
+            "explainer": "Што значи експоненцијален прираст",
+            "ifExpGrowth": "Ако заразата се шири експонентно со удвојување на 7, може да очекуваме:",
+            "timesAsMany": "-пати повеќе"
         },
         "hospitals": {
             "data": "Податоци",
@@ -271,7 +315,19 @@
             "groupEastAsiaOceania": "Источна Азија и Океанија",
             "chronologically": "Хронолошки",
             "groupCriticalEU": "Критични држави (ЕУ)",
-            "groupCriticalWorld": "Критични држави (на светско ниво)"
+            "groupCriticalWorld": "Критични држави (на светско ниво)",
+            "groupNeighbouringWoItaly": "Држави од регионот",
+            "groupNeighbouring": "Држави од регионот",
+            "groupExYu": "Држави од бивша Југославија",
+            "groupLatinAmerica": "Латинска Америка",
+            "sinceFirstDeath": "Од првиот смртен случај",
+            "deathsPerMillion": "Бр. на починати на милион жители",
+            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
+            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
+            "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
+            "dataSourceOWID": "извор на податоците: Our World In Data",
+            "title": "Споредба по држави"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
@@ -283,7 +339,10 @@
             "view": "Прикажи:",
             "relative": "Релативно",
             "absolute": "Апсолутно",
-            "title": "Старосни групи"
+            "title": "Старосни групи",
+            "shareOfInfectedPopulation": "Дел од популацијата на заразени",
+            "shareOfDeceasedPopulation": "Дел на мртвите од популацијата",
+            "shareOfDeceasedConfirmedCases": "Дел од мртвите од бројот на заразени"
         },
         "map": {
             "confirmedCases": "Потврдени случаи",
@@ -311,7 +370,10 @@
             "positiveTests": "Позитивни тестови",
             "negativeTests": "Негативни тестови",
             "allTesting": "Вкупно",
-            "title": "Тестирање"
+            "title": "Тестирање",
+            "shareOfPositive": "Дел до позитивните тестови (%)",
+            "regularTesting": "Редовно",
+            "nationalStudyTesting": "Истражување"
         },
         "hCenters": {
             "testsPositive": "Тестови (позитивни*)",
@@ -326,7 +388,12 @@
             "icuCases": "На интензивна нега",
             "hospitalCases": "Хоспитализирани",
             "mortality": "Смртност",
-            "hospitalizations": "Хоспитализирани"
+            "hospitalizations": "Хоспитализирани",
+            "hospitalMortality": "Смртност по болници",
+            "seriousCases": "Сериозни случаи",
+            "hospitalDeceasedShare": "Дел од починатите во болници",
+            "icuDeceasedShare": "Дел од починатите од интензивна нега",
+            "title": "Дел од сериозните случаи"
         },
         "patients": {
             "allHospitals": "Сите болници",
@@ -336,7 +403,10 @@
             "hospitalized": "Хоспитализирани",
             "hospitalizedIn": "Хоспитализирани во:",
             "structure": "Структура",
-            "title": "Хоспитализирани"
+            "title": "Хоспитализирани",
+            "discharged": "Отпуштени",
+            "admitted": "Примени",
+            "byHospital": "По болници"
         },
         "cases": {
             "deceased": "Починати",
@@ -350,29 +420,35 @@
     },
     "phase": {
         "7": {
-            "title": "Фаза 7"
+            "title": "Фаза 7",
+            "description": "крај на епидемијата"
         },
         "6": {
-            "title": "Фаза 6"
+            "title": "Фаза 6",
+            "description": "нов метод на тестирање, истражување"
         },
         "5": {
-            "title": "Фаза 5"
+            "title": "Фаза 5",
+            "description": "нов метод на тестирање"
         },
         "4": {
-            "title": "Фаза 4"
+            "title": "Фаза 4",
+            "description": "нов метод на тестирање"
         },
         "3": {
-            "title": "Фаза 3"
+            "title": "Фаза 3",
+            "description": "нов метод на тестирање"
         },
         "2": {
-            "title": "Фаза 2"
+            "title": "Фаза 2",
+            "description": "епидемија, нов метод на тестирање"
         },
         "1": {
             "title": "Фаза 1"
         }
     },
     "days": {
-        "longerDate": "{{ date, D. MMMM YYYY }}",
+        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
         "date": "{{ date, D. MMMM }}",
         "x_days_ago": "пред {{ count }} ден",
         "x_days_ago_plural": "пред {{ count }} дена",
@@ -420,5 +496,8 @@
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
+    },
+    "region": {
+        "kr": "Горењска"
     }
 }

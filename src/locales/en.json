@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New:",
-        "news002": "structure of hospitalized for each COVID-19 hospital."
+        "news001": "Number of confirmed cases is growing #whatisgoingon?",
+        "news002": "Read more on Medium..."
     },
     "infocard": {
         "tests": "Tests Today",
@@ -128,7 +128,7 @@
     "charts": {
         "common": {
             "loading": "Loading data…",
-            "from": "",
+            "from": " ",
             "to": "-",
             "zoom": "Zoom",
             "resetZoom": "Reset zoom",
@@ -337,6 +337,7 @@
             "groupNordic": "Nordic countries",
             "groupCriticalWorld": "Critical countries (World)",
             "groupCriticalEU": "Critical countries (EU)",
+            "groupNeighbouring": "Surroundings",
             "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
         },
         "hospitals": {
@@ -552,6 +553,7 @@
         "SRB": "Serbia",
         "SGP": "Singapore",
         "RUS": "Russia",
+        "ROU": "Romania",
         "RKS": "Kosovo",
         "PER": "Peru",
         "NOR": "Norway",
@@ -566,6 +568,7 @@
         "IRN": "Iran",
         "HUN": "Hungary",
         "HRV": "Croatia",
+        "GRC": "Greece",
         "GBR": "United Kingdom",
         "FRA": "France",
         "FIN": "Finland",
@@ -581,9 +584,11 @@
         "BIH": "Bosnia and Herzegovina",
         "BEL": "Belgium",
         "BRA": "Brazil",
+        "BGR": "Bulgaria",
         "AUT": "Austria",
         "AUS": "Australia",
-        "ARG": "Argentina"
+        "ARG": "Argentina",
+        "ALB": "Albania"
     },
     "pageNotFound": {
         "notFound": "404: page not found",
