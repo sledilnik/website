@@ -465,7 +465,10 @@
             "data": "Podatki"
         },
         "regions": {
-            "title": "Potrjeno okuženi po regijah"
+            "title": "Primeri po regijah",
+            "activeCases": "Aktivni primeri",
+            "confirmedCases": "Potrjeno okuženi",
+            "deceased": "Umrli"
         },
         "map": {
             "title": "Zemljevid po občinah",

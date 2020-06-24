@@ -267,7 +267,10 @@
             "absolute": "Absolute Daily Growth"
         },
         "regions": {
-            "title": "Confirmed Cases by Region"
+            "title": "Cases by Region",
+            "activeCases": "Active Cases",
+            "confirmedCases": "Confirmed Cases",
+            "deceased": "Deaths"
         },
         "map": {
             "title": "Municipality Map",
