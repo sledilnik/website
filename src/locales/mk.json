@@ -109,7 +109,7 @@
         },
         "quarantine": {
             "title": "Карантин",
-            "description": "Задолжителен 7 дневен карантин при пристигнување од странство"
+            "description": "Задолжителен 14 дневен карантин при пристигнување од странство"
         },
         "nationalStudy": {
             "title": "Истражување",
@@ -406,7 +406,7 @@
             "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
             "view": "Прикажи:",
             "populationShare": "Удел на населението",
-            "title": "Мапа на општината"
+            "title": "Мапа на општини"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -567,7 +567,7 @@
         "region_sg_todate": "Carinthia",
         "region_nm_todate": "Southeast Slovenia",
         "region_ng_todate": "Gorizia Region",
-        "region_kr_todate": "Upper Carniola Region",
+        "region_kr_todate": "Горењска",
         "state_out_of_hospital_todate": "Отпуштени од болница (до денес)",
         "cases_unclassified_confirmed_todate": "Потврдени случаи - други (до денес)",
         "cases_closed_todate": "Затворени случаи (до денес)"
