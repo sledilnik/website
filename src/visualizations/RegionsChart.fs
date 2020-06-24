@@ -45,7 +45,7 @@ type Msg =
 
 let regionTotal (region : Region) : int =
     region.Municipalities
-    |> List.map (fun city -> city.ConfirmedToDate)
+    |> List.map (fun city -> city.ActiveCases)
     |> List.choose id
     |> List.sum
 
@@ -82,7 +82,7 @@ let renderChartOptions (state : State) dispatch =
             |> List.find (fun reg -> reg.Name = metricToRender.Key)
         let count =
             region.Municipalities
-            |> Seq.sumBy (fun city -> city.ConfirmedToDate |> Option.defaultValue 0)
+            |> Seq.sumBy (fun city -> city.ActiveCases |> Option.defaultValue 0)
         ts,count
 
     let allSeries =
