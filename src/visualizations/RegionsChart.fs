@@ -90,7 +90,7 @@ let renderChartOptions (state : State) dispatch =
         |> List.map (fun metric ->
             let renderPoint = renderRegion metric
             {|
-                visible = true
+                // visible = true
                 color = metric.Color
                 name = I18N.tt "region" metric.Key
                 data = state.Data |> Seq.map renderPoint |> Array.ofSeq
