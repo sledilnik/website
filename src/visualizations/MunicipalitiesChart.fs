@@ -36,7 +36,7 @@ type Municipality =
       MaxConfirmedCases : int option
       LastConfirmedCase : System.DateTime
       DaysSinceLastCase : int
-      TotalsForDate : TotalsForDate array }
+      TotalsForDate : TotalsForDate list }
 
 type SortBy =
     | ActiveCases
@@ -108,8 +108,9 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                                      DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
-            let totalsForDate =
+            let totals =
                 dp
+                |> Seq.skip ((Seq.length dp) - showMaxBars)
                 |> Seq.map (
                     fun dp -> {
                         Date = dp.Date
@@ -117,33 +118,26 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                         ConfirmedToDate = dp.ConfirmedToDate
                         DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
-                |> Seq.toArray
+                |> Seq.toList
             let doublingTime =
                 dp
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
-            let maxValue =
-                try
-                    dp
-                    |> Seq.map (fun dp -> dp.ConfirmedToDate)
-                    |> Seq.filter Option.isSome
-                    |> Seq.max
-                with
-                    | _ -> None
-            let maxDay = dp |> Seq.filter (fun p -> p.ConfirmedToDate = maxValue) |> Seq.head
+            let maxConfirmed = totals |> Seq.map (fun dp -> dp.ConfirmedToDate) |> Seq.filter Option.isSome |> Seq.max
+            let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              ActiveCases =
-                    match totalsForDate |> Array.tryLast with
+              ActiveCases = 
+                    match totals |> List.tryLast with
                     | None -> Some 0
                     | Some last -> last.ActiveCases
-              MaxConfirmedCases = maxValue
-              LastConfirmedCase = maxDay.Date
-              DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
-              TotalsForDate = totalsForDate
+              MaxConfirmedCases = maxConfirmed
+              LastConfirmedCase = lastChange.Date
+              DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
+              TotalsForDate = totals
             })
 
     let state =
@@ -225,10 +219,7 @@ let renderMunicipality (municipality : Municipality) =
         | None -> Seq.empty
         | Some maxValue ->
             seq {
-                let dpLen = Array.length municipality.TotalsForDate
-                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0
-                for i = dpStart to dpLen - 1 do
-                    let dp = municipality.TotalsForDate.[i]
+                for dp in municipality.TotalsForDate do
                     match dp.ConfirmedToDate with
                     | None ->
                         yield Html.div [
