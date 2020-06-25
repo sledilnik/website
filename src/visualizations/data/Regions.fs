@@ -34,11 +34,11 @@ let parseRegionsData data =
                                             |> List.map (fun (cityKey, cityValue) ->
                                                 match cityValue with
                                                 | JObject cityMap ->
-                                                    let activeCases = None
-                                                        //match Map.tryFind "activeCases" cityMap with
-                                                        //| Some (JNumber num) -> Some (int num)
-                                                        //| Some (JNull) -> None
-                                                        //| _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in activeCases" cityKey)
+                                                    let activeCases = 
+                                                        match Map.tryFind "activeCases" cityMap with
+                                                        | Some (JNumber num) -> Some (int num)
+                                                        | Some (JNull) -> None
+                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in activeCases" cityKey)
                                                     let confirmedToDate =
                                                         match Map.tryFind "confirmedToDate" cityMap with
                                                         | Some (JNumber num) -> Some (int num)

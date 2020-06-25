@@ -5,7 +5,7 @@
     },
     "timestamp": {
         "at": "во {{ date, HH.mm }}",
-        "updated": "Ажурирано на {{ date, dddd, D. MMMM YYYY }}"
+        "updated": "Ажурирано {{ date, dddd, D. MMMM YYYY }}"
     },
     "navbar": {
         "language": {
@@ -250,7 +250,7 @@
             "testsToDate": "Тестови (вкупно)",
             "tests": "Тестови (дневно)",
             "hospitalizedToDate": "Хоспитализирани (вкупно)",
-            "title": "Состојба со COVID-19 во Република Северна Македонија",
+            "title": "Состојба со COVID-19 во државата",
             "deceasedToDate": "Починати (вкупно)",
             "deceased": "Починати (дневно)",
             "ventilator": "На респиратор",

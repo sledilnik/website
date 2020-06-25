@@ -332,8 +332,8 @@
         "TWN": "Tajvan"
     },
     "meta": {
-        "description": "Ndjekja e COVID-19 Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
-        "title": "Ndjekja e COVID-19"
+        "description": "COVID-19 Treker Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
+        "title": "COVID-19 Treker"
     },
     "embedMaker": {
         "chooseChart": "Zgjidhni një grafikon",

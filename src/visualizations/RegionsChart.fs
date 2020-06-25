@@ -31,8 +31,19 @@ type Metric =
       Color : string
       Visible : bool }
 
+type XAxisType =
+    | ActiveCases
+    | ConfirmedCases
+    | Deceased
+  with
+    static member getName = function
+        | ActiveCases -> I18N.t "charts.regions.activeCases"
+        | ConfirmedCases -> I18N.t "charts.regions.confirmedCases"
+        | Deceased -> I18N.t "charts.regions.deceased"
+
 type State =
     { ScaleType : ScaleType
+      XAxisType : XAxisType  
       Data : RegionsData
       Regions : Region list
       Metrics : Metric list
@@ -41,12 +52,13 @@ type State =
 
 type Msg =
     | ToggleRegionVisible of string
+    | XAxisTypeChanged of XAxisType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
 let regionTotal (region : Region) : int =
     region.Municipalities
-    |> List.map (fun city -> city.ConfirmedToDate)
+    |> List.map (fun city -> city.ActiveCases)
     |> List.choose id
     |> List.sum
 
@@ -61,9 +73,9 @@ let init (data : RegionsData) : State * Cmd<Msg> =
         |> List.mapi2 (fun i color region ->
             { Key = region.Name
               Color = color
-              Visible = i <= 2 } ) colors
+              Visible = true } ) colors
 
-    { ScaleType = Linear ; Data = data ; Regions = regions ; Metrics = metrics
+    { ScaleType = Linear ; XAxisType = ActiveCases ; Data = data ; Regions = regions ; Metrics = metrics
       RangeSelectionButtonIndex = 0 },
     Cmd.none
 
@@ -77,6 +89,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
                 then { m with Visible = not m.Visible }
                 else m)
         { state with Metrics = newMetrics }, Cmd.none
+    | XAxisTypeChanged newXAxisType ->
+        { state with XAxisType = newXAxisType }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
@@ -95,7 +109,11 @@ let renderChartOptions (state : State) dispatch =
             |> List.find (fun reg -> reg.Name = metricToRender.Key)
         let count =
             region.Municipalities
-            |> Seq.sumBy (fun city -> city.ConfirmedToDate |> Option.defaultValue 0)
+            |> Seq.sumBy (fun city -> 
+                            match state.XAxisType with
+                            | ActiveCases -> city.ActiveCases |> Option.defaultValue 0
+                            | ConfirmedCases -> city.ConfirmedToDate |> Option.defaultValue 0
+                            | Deceased -> city.DeceasedToDate |> Option.defaultValue 0)
         ts,count
 
     let allSeries =
@@ -107,9 +125,6 @@ let renderChartOptions (state : State) dispatch =
                 color = metric.Color
                 name = I18N.tt "region" metric.Key
                 data = state.Data |> Seq.map renderPoint |> Array.ofSeq
-                //yAxis = 0 // axis index
-                //showInLegend = true
-                //fillOpacity = 0
             |}
             |> pojo
         )
@@ -168,11 +183,30 @@ let renderMetricsSelectors metrics dispatch =
                 renderMetricSelector metric dispatch
             ) ) ]
 
+let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
+    let renderXAxisSelector (axisSelector: XAxisType) =
+        let active = axisSelector = activeXAxisType
+        Html.div [
+            prop.onClick (fun _ -> dispatch axisSelector)
+            prop.className [ true, "chart-display-property-selector__item"; active, "selected" ]
+            prop.text (axisSelector |> XAxisType.getName)
+        ]
+
+    let xAxisTypesSelectors =
+        [ ActiveCases; ConfirmedCases; Deceased ]
+        |> List.map renderXAxisSelector
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children ((Html.text (I18N.t "charts.common.xAxis")) :: xAxisTypesSelectors)
+    ]
+
 let render (state : State) dispatch =
     Html.div [
-        Utils.renderChartTopControlRight
-            (Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch))
+        Utils.renderChartTopControls [
+            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
+            Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        ]
         renderChartContainer state dispatch
         renderMetricsSelectors state.Metrics dispatch
     ]
