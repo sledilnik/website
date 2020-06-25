@@ -173,7 +173,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | SortByChanged sortBy ->
         { state with SortBy = sortBy }, Cmd.none
 
-let renderMunicipality (municipality : Municipality) =
+let renderMunicipality (state : State) (municipality : Municipality) =
 
     let renderLastCase =
         let label, value =
@@ -216,7 +216,8 @@ let renderMunicipality (municipality : Municipality) =
             ]
 
     let renderedBars =
-        match municipality.MaxConfirmedCases with
+        let maxValue = if state.SortBy = TotalConfirmedCases then municipality.MaxConfirmedCases else municipality.MaxActiveCases
+        match maxValue with
         | None -> Seq.empty
         | Some maxValue ->
             seq {
@@ -239,12 +240,13 @@ let renderMunicipality (municipality : Municipality) =
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
-                                        Html.div [
-                                            prop.style [ style.height dHeight ]
-                                            prop.className "bar--deceased" ]
-                                        Html.div [
-                                            prop.style [ style.height rHeight ]
-                                            prop.className "bar--recovered" ]
+                                        if state.SortBy = TotalConfirmedCases then
+                                            Html.div [
+                                                prop.style [ style.height dHeight ]
+                                                prop.className "bar--deceased" ]
+                                            Html.div [
+                                                prop.style [ style.height rHeight ]
+                                                prop.className "bar--recovered" ]
                                         Html.div [
                                             prop.style [ style.height aHeight ]
                                             prop.className "bar--active" ]
@@ -257,11 +259,11 @@ let renderMunicipality (municipality : Municipality) =
                                             prop.className "date"
                                             prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
                                         Html.div [
-                                            if (deceasedToDate > 0) then
-                                                prop.className "deceased"
+                                            if (activeCases > 0) then
+                                                prop.className "active"
                                                 prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
-                                                    Html.b [ prop.text deceasedToDate ] ] ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
+                                                    Html.b [ prop.text activeCases ] ] ]
                                         Html.div [
                                             if (recoveredToDate > 0) then
                                                 prop.className "recovered"
@@ -269,11 +271,11 @@ let renderMunicipality (municipality : Municipality) =
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
                                                     Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
-                                            if (activeCases > 0) then
-                                                prop.className "active"
+                                            if (deceasedToDate > 0) then
+                                                prop.className "deceased"
                                                 prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
-                                                    Html.b [ prop.text activeCases ] ] ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
+                                                    Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
@@ -397,7 +399,7 @@ let renderMunicipalities (state : State) _ =
         else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
         else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
-    (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality), displayShowAllButton)
+    (truncatedData |> Seq.map (fun municipality -> renderMunicipality state municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
     Html.div [
