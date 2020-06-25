@@ -24,7 +24,7 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Število potrjenih primerov okužbe narašča - #kajsedogaja?",
+        "news001": "Sledilnik 3.0 - spremembe so konstanta.",
         "news002": "Več na Medium…"
     },
     "infocard": {

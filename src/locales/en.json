@@ -24,7 +24,7 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "Number of confirmed cases is growing #whatisgoingon?",
+        "news001": "Sledilnik 3.0 - change is constant",
         "news002": "Read more on Medium…"
     },
     "infocard": {
