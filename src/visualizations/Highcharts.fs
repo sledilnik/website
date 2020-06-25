@@ -233,7 +233,7 @@ let basicChartOptions
             {|
                 index = 0
                 ``type`` = if scaleType=Linear then "linear" else "logarithmic"
-                min = if scaleType=Linear then None else Some 1.0
+                min = if scaleType=Linear then None else Some 0.5
                 max = None
                 //floor = if scaleType=Linear then None else Some 1.0
                 opposite = true // right side

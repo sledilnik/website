@@ -42,16 +42,16 @@ module Metrics  =
         { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot;    Id="testsToDate" }
         { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmed" }
         { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot;    Id="confirmedToDate" }
-        { Metric=ConfirmedCases;       Color="#d5c768"; Visible=false; Line=Dash;   Id="active" }
+        { Metric=ConfirmedCases;       Color="#d5c768"; Visible=true;  Line=Dash;   Id="active" }
         { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
-        { Metric=InICU;                Color="#d99a91"; Visible=true;  Line=Solid;  Id="icu" }
+        { Metric=InICU;                Color="#d99a91"; Visible=false; Line=Solid;  Id="icu" }
         { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid;  Id="ventilator" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="discharged" }
         { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot;    Id="dischargedToDate" }
         { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid;  Id="deceased" }
-        { Metric=DeceasedToDate;       Color="#666666"; Visible=true;  Line=Dot;    Id="deceasedToDate" }
+        { Metric=DeceasedToDate;       Color="#666666"; Visible=false; Line=Dot;    Id="deceasedToDate" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -152,7 +152,7 @@ let renderChartOptions state dispatch =
 
 let renderChartContainer state dispatch =
     Html.div [
-        prop.style [ style.height 480 ] //; style.width 500; ]
+        prop.style [ style.height 480 ] 
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch

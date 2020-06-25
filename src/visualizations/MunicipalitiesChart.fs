@@ -12,7 +12,7 @@ open Types
 
 let barMaxHeight = 55
 let showMaxBars = 30
-let collapsedMunicipalityCount = 24
+let collapsedMunicipalityCount = 16
 
 let excludedMunicipalities = Set.ofList ["kraj"]
 
@@ -22,6 +22,7 @@ type Region =
 
 type TotalsForDate =
     { Date : System.DateTime
+      ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
     }
@@ -31,13 +32,15 @@ type Municipality =
       Name : string option
       RegionKey : string
       DoublingTime : float option
+      NewCases : int option
       ActiveCases : int option
+      MaxActiveCases : int option
       MaxConfirmedCases : int option
       LastConfirmedCase : System.DateTime
       DaysSinceLastCase : int
-      TotalsForDate : TotalsForDate array }
+      TotalsForDate : TotalsForDate list }
 
-type SortBy =
+type View =
     | ActiveCases
     | TotalConfirmedCases
     | LastConfirmedCase
@@ -54,7 +57,7 @@ type Query (query : obj, regions : Region list) =
         | Some (region : string) when Set.contains (region.ToLower()) this.Regions ->
             Some (region.ToLower())
         | _ -> None
-    member this.SortBy =
+    member this.View =
         match query?("sort") with
         | Some (sort : string) ->
             match sort.ToLower() with
@@ -74,13 +77,13 @@ type State =
       ShowAll : bool
       SearchQuery : string
       FilterByRegion : string
-      SortBy : SortBy }
+      View : View }
 
 type Msg =
     | ToggleShowAll
     | SearchInputChanged of string
     | RegionFilterChanged of string
-    | SortByChanged of SortBy
+    | ViewChanged of View
 
 let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
@@ -102,49 +105,47 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                             yield {| Date = regionsDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
+                                     ActiveCases = municipality.ActiveCases
                                      ConfirmedToDate = municipality.ConfirmedToDate
                                      DeceasedToDate = municipality.DeceasedToDate |} }
         |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
         |> Seq.map (fun (municipalityKey, dp) ->
-            let totalsForDate =
+            let totals =
                 dp
+                |> Seq.skip ((Seq.length dp) - showMaxBars)
                 |> Seq.map (
                     fun dp -> {
                         Date = dp.Date
+                        ActiveCases = dp.ActiveCases
                         ConfirmedToDate = dp.ConfirmedToDate
                         DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
-                |> Seq.toArray
+                |> Seq.toList
             let doublingTime =
                 dp
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
-            let maxValue =
-                try
-                    dp
-                    |> Seq.map (fun dp -> dp.ConfirmedToDate)
-                    |> Seq.filter Option.isSome
-                    |> Seq.max
-                with
-                    | _ -> None
-            let maxDay = dp |> Seq.filter (fun p -> p.ConfirmedToDate = maxValue) |> Seq.head
+            let activeCases = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
+            let maxActive = totals |> Seq.map (fun dp -> dp.ActiveCases) |> Seq.max
+            let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
+            let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
+            let dayBefore = totals |> Seq.skip (Seq.length totals - 2) |> Seq.tryHead |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
+            let newCases = 
+                match dayBefore, maxConfirmed with
+                | Some before, Some last -> if last > before then Some (last - before) else None
+                | _ -> None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              ActiveCases =
-                    let dayR = totalsForDate |> Array.tryItem (totalsForDate.Length - 15)
-                    let dayL = totalsForDate |> Array.tryLast
-                    match dayR, dayL with
-                    | None, None -> Some 0
-                    | None, Some b -> b.ConfirmedToDate
-                    | Some a, None -> Some 0
-                    | Some a, Some b -> Some (b.ConfirmedToDate.Value - a.ConfirmedToDate.Value)
-              MaxConfirmedCases = maxValue
-              LastConfirmedCase = maxDay.Date
-              DaysSinceLastCase = System.DateTime.Today.Subtract(maxDay.Date).Days
-              TotalsForDate = totalsForDate
+              NewCases = newCases
+              ActiveCases = activeCases
+              MaxActiveCases = maxActive
+              MaxConfirmedCases = maxConfirmed
+              LastConfirmedCase = lastChange.Date
+              DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
+              TotalsForDate = totals
             })
 
     let state =
@@ -156,10 +157,10 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             match query.Region with
             | None -> ""
             | Some region -> region
-          SortBy =
-            match query.SortBy with
+          View =
+            match query.View with
             | None -> LastConfirmedCase
-            | Some sortBy -> sortBy }
+            | Some view -> view }
 
     state, Cmd.none
 
@@ -176,10 +177,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with SearchQuery = query }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
-    | SortByChanged sortBy ->
-        { state with SortBy = sortBy }, Cmd.none
+    | ViewChanged view ->
+        { state with View = view }, Cmd.none
 
-let renderMunicipality (municipality : Municipality) =
+let renderMunicipality (state : State) (municipality : Municipality) =
 
     let renderLastCase =
         let label, value =
@@ -222,14 +223,12 @@ let renderMunicipality (municipality : Municipality) =
             ]
 
     let renderedBars =
-        match municipality.MaxConfirmedCases with
+        let maxValue = if state.View = TotalConfirmedCases then municipality.MaxConfirmedCases else municipality.MaxActiveCases
+        match maxValue with
         | None -> Seq.empty
         | Some maxValue ->
             seq {
-                let dpLen = Array.length municipality.TotalsForDate
-                let dpStart = if dpLen > showMaxBars then dpLen - showMaxBars else 0
-                for i = dpStart to dpLen - 1 do
-                    let dp = municipality.TotalsForDate.[i]
+                for dp in municipality.TotalsForDate do
                     match dp.ConfirmedToDate with
                     | None ->
                         yield Html.div [
@@ -239,24 +238,22 @@ let renderMunicipality (municipality : Municipality) =
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
-                                let deceasedToDate = dp.DeceasedToDate.Value
-                                let recoveredToDate =
-                                    if i >= 14 && municipality.TotalsForDate.[i-14].ConfirmedToDate.Value > deceasedToDate
-                                    then municipality.TotalsForDate.[i-14].ConfirmedToDate.Value - deceasedToDate
-                                    else 0
-                                let activeCases = confirmedToDate - deceasedToDate - recoveredToDate
-                                let dHeight = deceasedToDate * barMaxHeight / maxValue
+                                let activeCases = dp.ActiveCases |> Option.defaultValue 0
+                                let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
+                                let recoveredToDate = confirmedToDate - deceasedToDate - activeCases 
                                 let aHeight = activeCases * barMaxHeight / maxValue
+                                let dHeight = deceasedToDate * barMaxHeight / maxValue
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
-                                        Html.div [
-                                            prop.style [ style.height dHeight ]
-                                            prop.className "bar--deceased" ]
-                                        Html.div [
-                                            prop.style [ style.height rHeight ]
-                                            prop.className "bar--recovered" ]
+                                        if state.View = TotalConfirmedCases then
+                                            Html.div [
+                                                prop.style [ style.height dHeight ]
+                                                prop.className "bar--deceased" ]
+                                            Html.div [
+                                                prop.style [ style.height rHeight ]
+                                                prop.className "bar--recovered" ]
                                         Html.div [
                                             prop.style [ style.height aHeight ]
                                             prop.className "bar--active" ]
@@ -269,11 +266,11 @@ let renderMunicipality (municipality : Municipality) =
                                             prop.className "date"
                                             prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
                                         Html.div [
-                                            if (deceasedToDate > 0) then
-                                                prop.className "deceased"
+                                            if (activeCases > 0) then
+                                                prop.className "active"
                                                 prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
-                                                    Html.b [ prop.text deceasedToDate ] ] ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
+                                                    Html.b [ prop.text activeCases ] ] ]
                                         Html.div [
                                             if (recoveredToDate > 0) then
                                                 prop.className "recovered"
@@ -281,11 +278,11 @@ let renderMunicipality (municipality : Municipality) =
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
                                                     Html.b [ prop.text recoveredToDate ] ] ]
                                         Html.div [
-                                            if (activeCases > 0) then
-                                                prop.className "active"
+                                            if (deceasedToDate > 0) then
+                                                prop.className "deceased"
                                                 prop.children [
-                                                    Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
-                                                    Html.b [ prop.text activeCases ] ] ]
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
+                                                    Html.b [ prop.text deceasedToDate ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
@@ -319,10 +316,19 @@ let renderMunicipality (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "active"
-                                prop.text (sprintf "%d" municipality.ActiveCases.Value) ]
+                                prop.text (sprintf "%d" (municipality.ActiveCases |> Option.defaultValue 0)) ]
                             Html.div [
-                                prop.className "total"
-                                prop.text (sprintf "%d" municipality.MaxConfirmedCases.Value) ]
+                                prop.className "total-and-new"
+                                prop.children [
+                                    Html.div [
+                                        prop.className "total"
+                                        prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
+                                    if municipality.NewCases.IsSome then // TODO: put it in red and to the right of total    
+                                        Html.div [
+                                            prop.className "new" 
+                                            prop.text (sprintf " +%d" (municipality.NewCases |> Option.defaultValue 0)) ] 
+                                ]
+                            ]
                             Html.div [
                                 prop.className "date"
                                 prop.text (I18N.tOptions "days.date" {| date = municipality.LastConfirmedCase.Date |})]
@@ -378,7 +384,7 @@ let renderMunicipalities (state : State) _ =
         else compareStringOption m1.Name m2.Name
 
     let sortedMunicipalities =
-        match state.SortBy with
+        match state.View with
         | ActiveCases ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 -> compareActiveCases m1 m2)
@@ -409,7 +415,7 @@ let renderMunicipalities (state : State) _ =
         else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
         else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
-    (truncatedData |> Seq.map (fun municipality -> renderMunicipality municipality), displayShowAllButton)
+    (truncatedData |> Seq.map (fun municipality -> renderMunicipality state municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
     Html.div [
@@ -455,27 +461,27 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
-let renderSortBy (currentSortBy : SortBy) dispatch =
+let renderView (currentView : View) dispatch =
 
-    let renderSelector (sortBy : SortBy) (label : string) =
+    let renderSelector (view : View) (label : string) =
         let defaultProps =
             [ prop.text label
               prop.className [
                   true, "chart-display-property-selector__item"
-                  sortBy = currentSortBy, "selected" ] ]
-        if sortBy = currentSortBy
+                  view = currentView, "selected" ] ]
+        if view = currentView
         then Html.div defaultProps
-        else Html.div ((prop.onClick (fun _ -> SortByChanged sortBy |> dispatch)) :: defaultProps)
+        else Html.div ((prop.onClick (fun _ -> ViewChanged view |> dispatch)) :: defaultProps)
 
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.municipalities.sortBy")
-            renderSelector SortBy.ActiveCases (I18N.t "charts.municipalities.sortActive")
-            renderSelector SortBy.TotalConfirmedCases (I18N.t "charts.municipalities.sortTotal")
+            Html.text (I18N.t "charts.municipalities.view")
+            renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
+            renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
+            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewConfirmed")
             if Highcharts.showExpGrowthFeatures then
-                renderSelector SortBy.DoublingTime (I18N.t "charts.municipalities.sortDoublingTime")
-            renderSelector SortBy.LastConfirmedCase (I18N.t "charts.municipalities.sortLast")
+                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
         ]
     ]
 
@@ -492,7 +498,7 @@ let render (state : State) dispatch =
                         renderSearch state.SearchQuery dispatch
                     ]
                 ]
-                renderSortBy state.SortBy dispatch
+                renderView state.View dispatch
             ]
             Html.div [
                 prop.className "municipalities"
