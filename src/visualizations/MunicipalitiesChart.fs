@@ -323,10 +323,10 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                     Html.div [
                                         prop.className "total"
                                         prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
-                                    if municipality.NewCases.IsSome then // TODO: put it in red and to the right of total    
+                                    if municipality.NewCases.IsSome then    
                                         Html.div [
                                             prop.className "new" 
-                                            prop.text (sprintf " +%d" (municipality.NewCases |> Option.defaultValue 0)) ] 
+                                            prop.text (sprintf "(+%d)" (municipality.NewCases |> Option.defaultValue 0)) ] 
                                 ]
                             ]
                             Html.div [
