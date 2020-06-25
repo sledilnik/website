@@ -140,7 +140,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = (ConfirmedCases.ToString()) 
+      ContentType = ConfirmedCases 
       DisplayType = AbsoluteValues
     }, Cmd.ofMsg GeoJsonRequested
 
