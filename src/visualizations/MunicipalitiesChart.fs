@@ -33,6 +33,7 @@ type Municipality =
       RegionKey : string
       DoublingTime : float option
       ActiveCases : int option
+      MaxActiveCases : int option
       MaxConfirmedCases : int option
       LastConfirmedCase : System.DateTime
       DaysSinceLastCase : int
@@ -124,16 +125,16 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
-            let maxConfirmed = totals |> Seq.map (fun dp -> dp.ConfirmedToDate) |> Seq.filter Option.isSome |> Seq.max
+            let activeCases = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
+            let maxActive = totals |> Seq.map (fun dp -> dp.ActiveCases) |> Seq.max
+            let maxConfirmed = totals |> Seq.map (fun dp -> dp.ConfirmedToDate) |> Seq.max
             let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
-              ActiveCases = 
-                    match totals |> List.tryLast with
-                    | None -> Some 0
-                    | Some last -> last.ActiveCases
+              ActiveCases = activeCases
+              MaxActiveCases = maxActive
               MaxConfirmedCases = maxConfirmed
               LastConfirmedCase = lastChange.Date
               DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
