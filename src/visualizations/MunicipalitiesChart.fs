@@ -32,6 +32,7 @@ type Municipality =
       Name : string option
       RegionKey : string
       DoublingTime : float option
+      NewCases : int option
       ActiveCases : int option
       MaxActiveCases : int option
       MaxConfirmedCases : int option
@@ -127,12 +128,18 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Utils.findDoublingTime
             let activeCases = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
             let maxActive = totals |> Seq.map (fun dp -> dp.ActiveCases) |> Seq.max
-            let maxConfirmed = totals |> Seq.map (fun dp -> dp.ConfirmedToDate) |> Seq.max
+            let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
+            let dayBefore = totals |> Seq.skip (Seq.length totals - 2) |> Seq.tryHead |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
+            let newCases = 
+                match dayBefore, maxConfirmed with
+                | Some before, Some last -> if last > before then Some (last - before) else None
+                | _ -> None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
               DoublingTime = doublingTime
+              NewCases = newCases
               ActiveCases = activeCases
               MaxActiveCases = maxActive
               MaxConfirmedCases = maxConfirmed
@@ -313,6 +320,10 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                             Html.div [
                                 prop.className "total"
                                 prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
+                            if municipality.NewCases.IsSome then// TODO: put it in red and to the right of total    
+                                Html.div [
+                                    prop.className "new"
+                                    prop.text (sprintf "+%d" (municipality.NewCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "date"
                                 prop.text (I18N.tOptions "days.date" {| date = municipality.LastConfirmedCase.Date |})]
