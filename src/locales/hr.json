@@ -65,11 +65,16 @@
             "doubles": "Udvostručenja ",
             "title": "Slučajevi prema općinama",
             "sortActive": "Aktivni",
-            "showLess": "Prikaži manje"
+            "showLess": "Prikaži manje",
+            "view": "Prikaži:",
+            "viewActive": "Aktivne",
+            "viewTotal": "Sve",
+            "viewDoublingTime": "Vrijeme udvostručenja",
+            "viewLast": "Zadnja"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
-            "icuDeceasedShare": "Udio odjela intenzivne njege",
+            "icuDeceasedShare": "Udio umrlih u odjelima intenzivne njege",
             "ventilatorHospital": "Na respiratoru",
             "ventilatorCases": "Na respiratoru",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
@@ -82,7 +87,7 @@
             "seriousCases": "Teški slučajevi",
             "hospitalizations": "Hospitalizacija",
             "title": "Udio teških slučajeva",
-            "hospitalDeceasedShare": "Udio bolničkih smrtnih slučajeva"
+            "hospitalDeceasedShare": "Udio umrlih u bolnicama"
         },
         "common": {
             "numDateFormat": "%d. %m. %Y.",
@@ -277,7 +282,10 @@
             "allRegions": "Sve regije"
         },
         "regions": {
-            "title": "Potvrđeni slučajevi prema regiji"
+            "title": "Slučajevi prema regiji",
+            "deceased": "Umrli",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "activeCases": "Aktivni slučajevi"
         },
         "cases": {
             "active": "Aktivni",
