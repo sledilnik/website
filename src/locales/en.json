@@ -275,6 +275,7 @@
         "map": {
             "title": "Municipality Map",
             "mortalityOfConfirmedCases": "Mortality of Confirmed Cases",
+            "yesterday": "Yesterday",
             "all": "All",
             "populationShare": "Population Share",
             "populationC": "Population",

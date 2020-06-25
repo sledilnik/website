@@ -477,6 +477,7 @@
             "view": "Prikaži:",
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
+            "yesterday": "Včeraj",
             "all": "Vsi",
             "last_x_days_0": "{{ count }} dan",
             "last_x_days_1": "{{ count }} dneva",
