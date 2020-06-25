@@ -39,7 +39,7 @@ type Municipality =
       DaysSinceLastCase : int
       TotalsForDate : TotalsForDate list }
 
-type SortBy =
+type View =
     | ActiveCases
     | TotalConfirmedCases
     | LastConfirmedCase
@@ -56,7 +56,7 @@ type Query (query : obj, regions : Region list) =
         | Some (region : string) when Set.contains (region.ToLower()) this.Regions ->
             Some (region.ToLower())
         | _ -> None
-    member this.SortBy =
+    member this.View =
         match query?("sort") with
         | Some (sort : string) ->
             match sort.ToLower() with
@@ -76,13 +76,13 @@ type State =
       ShowAll : bool
       SearchQuery : string
       FilterByRegion : string
-      SortBy : SortBy }
+      View : View }
 
 type Msg =
     | ToggleShowAll
     | SearchInputChanged of string
     | RegionFilterChanged of string
-    | SortByChanged of SortBy
+    | ViewChanged of View
 
 let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
@@ -150,10 +150,10 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             match query.Region with
             | None -> ""
             | Some region -> region
-          SortBy =
-            match query.SortBy with
+          View =
+            match query.View with
             | None -> LastConfirmedCase
-            | Some sortBy -> sortBy }
+            | Some view -> view }
 
     state, Cmd.none
 
@@ -170,8 +170,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with SearchQuery = query }, Cmd.none
     | RegionFilterChanged region ->
         { state with FilterByRegion = region }, Cmd.none
-    | SortByChanged sortBy ->
-        { state with SortBy = sortBy }, Cmd.none
+    | ViewChanged view ->
+        { state with View = view }, Cmd.none
 
 let renderMunicipality (state : State) (municipality : Municipality) =
 
@@ -216,7 +216,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
             ]
 
     let renderedBars =
-        let maxValue = if state.SortBy = TotalConfirmedCases then municipality.MaxConfirmedCases else municipality.MaxActiveCases
+        let maxValue = if state.View = TotalConfirmedCases then municipality.MaxConfirmedCases else municipality.MaxActiveCases
         match maxValue with
         | None -> Seq.empty
         | Some maxValue ->
@@ -240,7 +240,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
-                                        if state.SortBy = TotalConfirmedCases then
+                                        if state.View = TotalConfirmedCases then
                                             Html.div [
                                                 prop.style [ style.height dHeight ]
                                                 prop.className "bar--deceased" ]
@@ -368,7 +368,7 @@ let renderMunicipalities (state : State) _ =
         else compareStringOption m1.Name m2.Name
 
     let sortedMunicipalities =
-        match state.SortBy with
+        match state.View with
         | ActiveCases ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 -> compareActiveCases m1 m2)
@@ -445,27 +445,27 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
     ]
 
-let renderSortBy (currentSortBy : SortBy) dispatch =
+let renderView (currentView : View) dispatch =
 
-    let renderSelector (sortBy : SortBy) (label : string) =
+    let renderSelector (view : View) (label : string) =
         let defaultProps =
             [ prop.text label
               prop.className [
                   true, "chart-display-property-selector__item"
-                  sortBy = currentSortBy, "selected" ] ]
-        if sortBy = currentSortBy
+                  view = currentView, "selected" ] ]
+        if view = currentView
         then Html.div defaultProps
-        else Html.div ((prop.onClick (fun _ -> SortByChanged sortBy |> dispatch)) :: defaultProps)
+        else Html.div ((prop.onClick (fun _ -> ViewChanged view |> dispatch)) :: defaultProps)
 
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.municipalities.sortBy")
-            renderSelector SortBy.ActiveCases (I18N.t "charts.municipalities.sortActive")
-            renderSelector SortBy.TotalConfirmedCases (I18N.t "charts.municipalities.sortTotal")
+            Html.text (I18N.t "charts.municipalities.view")
+            renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
+            renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
+            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewConfirmed")
             if Highcharts.showExpGrowthFeatures then
-                renderSelector SortBy.DoublingTime (I18N.t "charts.municipalities.sortDoublingTime")
-            renderSelector SortBy.LastConfirmedCase (I18N.t "charts.municipalities.sortLast")
+                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
         ]
     ]
 
@@ -482,7 +482,7 @@ let render (state : State) dispatch =
                         renderSearch state.SearchQuery dispatch
                     ]
                 ]
-                renderSortBy state.SortBy dispatch
+                renderView state.View dispatch
             ]
             Html.div [
                 prop.className "municipalities"

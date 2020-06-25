@@ -500,11 +500,11 @@
             "showAll": "Prikaži vse občine",
             "search": "Poišči občino",
             "allRegions": "Vse regije",
-            "sortBy": "Razvrsti:",
-            "sortActive": "Aktivni",
-            "sortTotal": "Vsi",
-            "sortDoublingTime": "Dnevih podvojitve",
-            "sortLast": "Zadnji"
+            "view": "Prikaži:",
+            "viewActive": "Aktivni",
+            "viewConfirmed": "Vsi",
+            "viewDoublingTime": "Dnevih podvojitve",
+            "viewLast": "Zadnji"
         },
         "ageGroups": {
             "title": "Po starostnih skupinah",
