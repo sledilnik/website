@@ -131,7 +131,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
             let dayBefore = totals |> Seq.skip (Seq.length totals - 2) |> Seq.tryHead |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
-            let newCases = 
+            let newCases =
                 match dayBefore, maxConfirmed with
                 | Some before, Some last -> if last > before then Some (last - before) else None
                 | _ -> None
@@ -240,7 +240,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                             prop.children [
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
-                                let recoveredToDate = confirmedToDate - deceasedToDate - activeCases 
+                                let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
                                 let aHeight = activeCases * barMaxHeight / maxValue
                                 let dHeight = deceasedToDate * barMaxHeight / maxValue
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
@@ -323,10 +323,10 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                     Html.div [
                                         prop.className "total"
                                         prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
-                                    if municipality.NewCases.IsSome then    
+                                    if municipality.NewCases.IsSome then
                                         Html.div [
-                                            prop.className "new" 
-                                            prop.text (sprintf "(+%d)" (municipality.NewCases |> Option.defaultValue 0)) ] 
+                                            prop.className "new"
+                                            prop.text (sprintf "(+%d)" (municipality.NewCases |> Option.defaultValue 0)) ]
                                 ]
                             ]
                             Html.div [
@@ -479,7 +479,7 @@ let renderView (currentView : View) dispatch =
             Html.text (I18N.t "charts.municipalities.view")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
             renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
-            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewConfirmed")
+            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
             if Highcharts.showExpGrowthFeatures then
                 renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
         ]
