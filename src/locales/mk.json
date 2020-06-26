@@ -304,7 +304,11 @@
             "showAll": "Прикажи ги сите општини",
             "search": "Барај општина",
             "title": "Случаи по општини",
-            "allRegions": "Сите региони"
+            "allRegions": "Сите региони",
+            "view": "Прикажи:",
+            "viewActive": "Активни",
+            "viewTotal": "Сите",
+            "viewLast": "Последен"
         },
         "spread": {
             "today": "Денес",
@@ -406,7 +410,8 @@
             "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
             "view": "Прикажи:",
             "populationShare": "Удел на населението",
-            "title": "Мапа на општини"
+            "title": "Мапа на општини",
+            "yesterday": "Вчера"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -478,7 +483,10 @@
             "title": "Потврдени случаи"
         },
         "regions": {
-            "title": "Потврдени случаи по региони"
+            "title": "Случаи по регион",
+            "deceased": "Починати",
+            "confirmedCases": "Потврдени случаи",
+            "activeCases": "Активни случаи"
         }
     },
     "phase": {
