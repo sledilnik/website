@@ -50,7 +50,7 @@ let init: ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
-        XAxisType = ByDate// DaysSinceFirstDeath
+        XAxisType = ByDate
         ScaleType = Linear
     }
     state, Cmd.ofMsg DataRequested
@@ -120,8 +120,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | ByDate -> entry.Date |> jsTime12h :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = entry.TotalDeathsPerMillion
-                             date = I18N.tOptions "days.longerDate" {| date = entry.Date |}
+                             y = entry.TotalCasesPerMillion
+                             date = I18N.tOptions "days.longerDate"
+                                        {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|
@@ -255,8 +256,10 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
             [
                 match axisSelector with
                 | ByDate -> I18N.t "charts.countries.chronologically"
-                | DaysSinceFirstDeath -> I18N.t "charts.countries.sinceFirstDeath"
-                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.sinceOneDeathPerMillion"
+                | DaysSinceFirstDeath ->
+                    I18N.t "charts.countries.sinceFirstDeath"
+                | DaysSinceOneDeathPerMillion ->
+                    I18N.t "charts.countries.sinceOneDeathPerMillion"
                 |> prop.text
 
                 prop.className [

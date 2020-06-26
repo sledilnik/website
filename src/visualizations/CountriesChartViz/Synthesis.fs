@@ -153,8 +153,10 @@ let prepareChartData
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
-                | DaysSinceFirstDeath -> I18N.t "charts.countries.daysFromFirstDeath"
-                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.daysFromOneDeathPerMillion"
+                | DaysSinceFirstDeath ->
+                    I18N.t "charts.countries.daysFromFirstDeath"
+                | DaysSinceOneDeathPerMillion ->
+                    I18N.t "charts.countries.daysFromOneDeathPerMillion"
             YAxisTitle = I18N.t "charts.countries.nrDeathsPerMillion"
         }
         |> Some
