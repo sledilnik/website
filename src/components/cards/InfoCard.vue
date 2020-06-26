@@ -153,24 +153,18 @@ export default {
       }
       return (
         (!this.totalIn && !this.totalOut && !this.totalDeceased) ||
-        this.renderTotalValues(this.totalIn) ===
-          this.renderTotalValues(this.totalOut)
+        (this.renderTotalValues(this.totalIn) === 0 &&
+         this.renderTotalValues(this.totalOut) === 0)
       )
     },
     showIn() {
       return (
-        this.totalIn &&
-        this.renderTotalValues(this.totalIn) !==
-          this.renderTotalValues(this.totalOut) &&
-        this.renderTotalValues(this.totalIn) > 0
+        this.totalIn && this.renderTotalValues(this.totalIn) > 0
       )
     },
     showOut() {
       return (
-        this.totalOut &&
-        this.renderTotalValues(this.totalIn) !==
-          this.renderTotalValues(this.totalOut) &&
-        this.renderTotalValues(this.totalOut) > 0
+        this.totalOut && this.renderTotalValues(this.totalOut) > 0
       )
     },
     showDeceased() {
