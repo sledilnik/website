@@ -599,5 +599,59 @@
         "somethingWentWrong": "oops… something went wrong :(",
         "back": "Back",
         "imageDescription": "two traffic cones connected by yellow tape"
+    },
+    "mk": {
+        "region": {
+            "va": "Vardarski",
+            "is": "Istočen",
+            "jz": "Jugozapaden",
+            "ji": "Jugoistočen",
+            "pe": "Pelagoniski",
+            "po": "Pološki",
+            "si": "Severoistočen",
+            "sk": "Skopski"
+        },
+        "municipality": {
+            "berovo": "Berovo",
+            "bitola": "Bitola",
+            "valandovo": "Valandovo",
+            "veles": "Veles",
+            "vinica": "Vinica",
+            "gevgelija": "Gevgelija",
+            "gostivar": "Gostivar",
+            "debar": "Debar",
+            "delcevo": "Delčevo",
+            "demir_hisar": "Demir Hisar",
+            "kavadarci": "Kavadarci",
+            "kicevo": "Kičevo",
+            "kocani": "Kočani",
+            "kratovo": "Kratovo",
+            "kriva_palanka": "Kriva Palanka",
+            "krusevo": "Kruševo",
+            "kumanovo": "Kumanovo",
+            "makedonski_brod": "Makedonski Brod",
+            "negotino": "Negotino",
+            "ohrid": "Ohrid",
+            "pehcevo": "Pehčevo",
+            "prilep": "Prilep",
+            "probistip": "Probištip",
+            "radovis": "Radoviš",
+            "resen": "Resen",
+            "sveti_nikole": "Sveti Nikole",
+            "skopje": "Skopje",
+            "struga": "Struga",
+            "strumica": "Strumica",
+            "tetovo": "Tetovo",
+            "stip": "Štip"
+        },
+        "hospital": {
+            "iksk": "Infektivna Klinika",
+            "mksk": "Montažna Bolnica",
+            "kozle": "Kozle",
+            "gob8sep": "GOB 8mi septemvri",
+            "bitola": "Bitola",
+            "stip": "Štip",
+            "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep"
+        }
     }
 }
