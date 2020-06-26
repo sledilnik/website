@@ -134,6 +134,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             let newCases =
                 match dayBefore, maxConfirmed with
                 | Some before, Some last -> if last > before then Some (last - before) else None
+                | None, Some last -> Some last
                 | _ -> None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
