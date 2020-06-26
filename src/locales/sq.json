@@ -12,7 +12,8 @@
             "populationShare": "Përqindja e popullsisë",
             "all": "Të gjithë",
             "mortalityOfConfirmedCases": "Vdekshmëria e rasteve të konfirmuara",
-            "title": "Harta e komunës"
+            "title": "Harta e komunës",
+            "yesterday": "Dje"
         },
         "hospitals": {
             "title": "Kapacitetet spitalore",
@@ -94,10 +95,18 @@
             "sortTotal": "Të gjithë",
             "sortDoublingTime": "Koha e dyfishimit",
             "sortLast": "I fundit",
-            "title": "Rastet sipas komunave"
+            "title": "Rastet sipas komunave",
+            "view": "Shfaq:",
+            "viewActive": "Aktive",
+            "viewTotal": "Të gjithe",
+            "viewDoublingTime": "Koha e dyfishimit",
+            "viewLast": "I fundit"
         },
         "regions": {
-            "title": "Rastet e konfirmuara sipas rajonit"
+            "title": "Rastet sipas rajonit",
+            "deceased": "Të vdekur",
+            "confirmedCases": "Raste të konfirmuara",
+            "activeCases": "Raste aktive"
         },
         "spread": {
             "absolute": "Rritja absolute ditore",
@@ -369,7 +378,7 @@
     },
     "notice": {
         "news002": "Lexo më shumë në Media…",
-        "news001": "Numri i rasteve të konfirmuara po rritet #whatisgoingon?"
+        "news001": "Sledilnik 3.0 - ndryshimi është konstant"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
