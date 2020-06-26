@@ -23,9 +23,9 @@
               iconTotalClass(totalIn, 'down'),
             ]"
           ></div>
-          <span class="in" :class="diffTotalClass(totalIn, 'down')">{{
-            renderTotalValues(totalIn)
-          }}</span>
+          <span class="in" :class="diffTotalClass(totalIn, 'down')">
+            {{ renderTotalValues(totalIn) }}
+          </span>
         </span>
         <span v-if="showOut">
           <div
@@ -35,9 +35,9 @@
               iconTotalClass(totalOut, 'up'),
             ]"
           ></div>
-          <span class="out" :class="diffTotalClass(totalOut, 'up')">{{
-            renderTotalValues(totalOut)
-          }}</span>
+          <span class="out" :class="diffTotalClass(totalOut, 'up')">
+            {{ renderTotalValues(totalOut) }}
+          </span>
         </span>
         <span v-if="showDeceased">
           <div
@@ -47,9 +47,9 @@
               iconTotalClass(totalDeceased),
             ]"
           ></div>
-          <span class="deceased" :class="diffTotalClass(totalDeceased)">{{
-            renderTotalValues(totalDeceased)
-          }}</span>
+          <span class="deceased" :class="diffTotalClass(totalDeceased)">
+            {{ renderTotalValues(totalDeceased) }}
+          </span>
         </span>
       </div>
       <div class="data-time">
