@@ -487,6 +487,11 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
         },
+        "europe": {
+            "title": "Stanje COVID-19 v Evropi",
+            "twoWeekIncidence": "14 dnevna incidenca na 1M prebivalcev",
+            "restrictions": "Omejitve NIJZ"
+        },
         "municipalities": {
             "title": "Primeri po občinah",
             "lastCase": "Zadnji primer: ",

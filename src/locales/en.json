@@ -287,6 +287,11 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
         },
+        "europe": {
+            "title": "COVID-19 Situation in Europe",
+            "twoWeekIncidence": "14 days incidence per million",
+            "restrictions": "Restrictions"
+        },
         "municipalities": {
             "title": "Cases by Municipalities",
             "viewLast": "Last",
