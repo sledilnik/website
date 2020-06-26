@@ -7,7 +7,7 @@ import React from 'react'
 import * as Highcharts from 'highcharts/highstock.js'
 require("highcharts/highcharts-more")(Highcharts);
 require("highcharts/modules/map.js")(Highcharts);
-//require('highcharts/modules/timeline')(Highcharts);
+
 import HighchartsReact from 'highcharts-react-official';
 
 //require("highcharts/css/highcharts.scss");

@@ -14,6 +14,7 @@ let init (query: obj) (visualization: string option) =
             | Some viz ->
                 match viz with
                 | "Map" -> Some Map
+                | "EuropeMap" -> Some EuropeMap
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Ratios" -> Some Ratios
@@ -174,7 +175,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
+                    | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }   
           { VisualizationType = Regions
             ClassName = "regions-chart"
             Label = I18N.t "charts.regions.title"
@@ -186,6 +187,17 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+          { VisualizationType = EuropeMap
+            ClassName = "europe-chart"
+            Label = I18N.t "charts.europe.title"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
           { VisualizationType = Countries
             ClassName = "countries-chart"
             Label = I18N.t "charts.countries.title"

@@ -35,6 +35,11 @@ type ContentType =
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
 
+let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
+    if str = I18N.t "charts.map.confirmedCases"
+    then ConfirmedCasesMsgCase
+    else DeceasedMsgCase
+
 type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
@@ -55,7 +60,7 @@ type DataTimeInterval =
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |} 
 
 let dataTimeIntervals =
-    [ LastDays 1      
+    [ LastDays 1
       LastDays 7
       LastDays 14
       Complete ]
@@ -66,7 +71,7 @@ type State =
     { GeoJson : GeoJson
       Data : Municipality seq
       DataTimeInterval : DataTimeInterval
-      ContentType : string 
+      ContentType : ContentType
       DisplayType : DisplayType }
 
 type Msg =
@@ -108,7 +113,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
         |> Seq.map (fun (municipalityKey, dp) ->
             let totalCases =
                 dp
-                |> Seq.map (fun dp -> 
+                |> Seq.map (fun dp ->
                     { Date = dp.Date
                       TotalConfirmedCases = dp.TotalConfirmedCases
                       TotalDeceasedCases = dp.TotalDeceasedCases } )
@@ -136,7 +141,7 @@ let init (regionsData : RegionsData) : State * Cmd<Msg> =
     { GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = (ConfirmedCases.ToString()) 
+      ContentType = ConfirmedCases 
       DisplayType = AbsoluteValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -149,41 +154,41 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | ContentTypeChanged contentType ->
-        { state with ContentType = contentType }, Cmd.none
+        let newContentType =
+            match contentType with
+            | ConfirmedCasesMsgCase -> ConfirmedCases
+            | DeceasedMsgCase -> Deceased
+        { state with ContentType = newContentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
-
-// TODO
-let chartLoadedEvent () =
-    // trigger event for iframe resize
-    let evt = document.createEvent("event")
-    evt.initEvent("chartLoaded", true, true)
-    document.dispatchEvent(evt) |> ignore
 
 let seriesData (state : State) =
 
     let renderLabel population absolute totalConfirmed =
-        let pctPopulation = float absolute * 100.0 / float population 
-        let mutable fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-        if state.ContentType = ConfirmedCases.ToString()
-        then 
-            fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+        let pctPopulation = float absolute * 100.0 / float population
+        let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+        match state.ContentType with
+        | ConfirmedCases ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
             if absolute > 0 then
-                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
-                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                    (I18N.t "charts.map.population")
-        else // deceased
-            fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+                label + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+            else
+                label
+        | Deceased ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                fmtStr <- fmtStr + sprintf " (%s %% %s)" 
-                    (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                    (I18N.t "charts.map.population")
-                fmtStr <- fmtStr + sprintf "<br>%s: <b>%d</b> (%s %% %s)" (I18N.t "charts.map.confirmedCases") 
-                    totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                    (I18N.t "charts.map.population")
-                fmtStr <- fmtStr + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.map.mortalityOfConfirmedCases")
-                    (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
-        fmtStr
+                label + sprintf " (%s %% %s)"
+                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                        (I18N.t "charts.map.confirmedCases")
+                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%s %%</b>"
+                        (I18N.t "charts.map.mortalityOfConfirmedCases")
+                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+            else
+                label
 
     seq {
         for municipalityData in state.Data do
@@ -191,12 +196,15 @@ let seriesData (state : State) =
                 match municipalityData.Cases with
                 | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                 | Some totalCases ->
-                    let valC = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
-                    let valD = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
-                    let values = if state.ContentType = Deceased.ToString() then valD else valC
+                    let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
+                    let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
+                    let values =
+                        match state.ContentType with
+                        | ConfirmedCases -> confirmedCasesValue
+                        | Deceased -> deceasedValue
 
-                    let totalConfirmed = valC |> Array.tryLast
-                   
+                    let totalConfirmed = confirmedCasesValue |> Array.tryLast
+
                     let lastValueTotal = values |> Array.tryLast
                     let lastValueRelative =
                         match state.DataTimeInterval with
@@ -213,8 +221,8 @@ let seriesData (state : State) =
                     | None -> 0., (renderLabel municipalityData.Municipality.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted = 
-                            float absolute * 1000000. / float municipalityData.Municipality.Population 
+                        let weighted =
+                            float absolute * 1000000. / float municipalityData.Municipality.Population
                             |> System.Math.Round |> int
                         let value =
                             match state.DisplayType with
@@ -257,9 +265,13 @@ let renderMap (state : State) =
             |}
 
         let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
-        let maxColor = 
-            if maxValue = 0. then "white" // override for empty map
-            else if state.ContentType = Deceased.ToString() then "#808080" else "#e03000"
+        let maxColor =
+            if maxValue = 0. then
+                "white" // override for empty map
+            else
+                match state.ContentType with
+                | Deceased -> "#808080"
+                | ConfirmedCases -> "#e03000"
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
@@ -295,7 +307,7 @@ let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
         prop.children ( Html.text "" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch )
     ]
 
-let renderContentTypeSelector (selected : string) dispatch =
+let renderContentTypeSelector selected dispatch =
     let renderedTypes = seq {
         yield Html.option [
             prop.text (ContentType.ConfirmedCases.ToString())
@@ -308,7 +320,7 @@ let renderContentTypeSelector (selected : string) dispatch =
     }
 
     Html.select [
-        prop.value selected
+        prop.value (selected.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
         prop.onChange (fun (value : string) -> ContentTypeChanged value |> dispatch)
