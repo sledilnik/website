@@ -3,7 +3,7 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="https://medium.com/sledilnik"
+      href="https://medium.com/sledilnik/sledilnik-3-0-658c56433e0d"
     >
       <div class="notice">
         <span>

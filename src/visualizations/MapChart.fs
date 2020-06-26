@@ -56,7 +56,8 @@ type DataTimeInterval =
     override this.ToString() =
         match this with
         | Complete -> I18N.t "charts.map.all"
-        | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
+        | LastDays 1 -> I18N.t "charts.map.yesterday"
+        | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |} 
 
 let dataTimeIntervals =
     [ LastDays 1
