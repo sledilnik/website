@@ -31,13 +31,13 @@ type Msg =
     | OwdDataReceived of OwdData
     | ChartTypeChanged of ChartType
 
-
-let init (regionsData : StatsData) : State * Cmd<Msg> =
-    { OwdData = NotAsked ; ChartType = TwoWeekIncidence }, Cmd.ofMsg OwdDataRequested
-
 let countries = ["ALB" ; "AND" ; "AUT" ; "BLR" ; "BEL" ; "BIH" ; "BGR" ; "HRV" ; "CYP" ; "CZE" ; "DNK" ; "EST" ; "FRO" ; "FIN" ; "FRA" ; "DEU" ; "GRC" ; "HUN" ; "ISL" ; "IRL" ; "ITA" ; "LVA" ; "LIE" ; "LTU" ; "LUX" ; "MKD" ; "MLT" ; "MDA" ; "MCO" ; "MNE" ; "NLD" ; "NOR" ; "POL" ; "PRT" ; "SRB" ; "ROU" ; "RUS" ; "SMR" ; "SVK" ; "SVN" ; "ESP" ; "SWE" ; "CHE" ; "TUR" ; "UKR" ; "GBR" ; "VAT"]
 let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
 let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "-99"; "PRT"; "ALB" ]
+let importedFrom = Map.ofList [ ("BIH", 8); ("BIH", 8); ("SRB", 7); ("SWE", 1); ("USA", 1); ]
+
+let init (regionsData : StatsData) : State * Cmd<Msg> =
+    { OwdData = NotAsked ; ChartType = TwoWeekIncidence }, Cmd.ofMsg OwdDataRequested
 
 let update (msg : Msg) (state : State) : State * Cmd<Msg> =
     match msg with
@@ -60,17 +60,6 @@ let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
             |> List.choose id
             |> List.sum
         {| code = code ; value = sum |} )
-    |> List.toArray
-
-let restrictedCountries =
-    countries
-    |> List.map (fun code ->
-        let color = 
-            if code = "SVN" then 0.0
-            else if greenCountries.Contains(code) then 1.0
-            else if redCountries.Contains(code) then 3.0 
-            else 2.0
-        {| code = code ; value = color |} )
     |> List.toArray
 
 let renderIncidenceMap state owdData =
@@ -116,6 +105,20 @@ let renderIncidenceMap state owdData =
     |}
     |> Highcharts.map
 
+
+let restrictedCountries =
+    countries
+    |> List.map (fun code ->
+        let color = 
+            if code = "SVN" then "white"
+            else if greenCountries.Contains(code) then "#C4DE6F"
+            else if redCountries.Contains(code) then "#FF5348"
+            else "#FEF65C"
+        let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
+        let label = imported > 0
+        {| code = code ; color = color ; value = imported ; dataLabels = {| enabled = label |} |} )
+    |> List.toArray
+
 let renderRestrictionsMap state =
 
     let series geoJson =
@@ -139,17 +142,6 @@ let renderRestrictionsMap state =
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
-        //legend = {| enabled = false |}
-        colorAxis = 
-            {| dataClassColor = "category"
-               dataClasses =
-                [|
-                    {| from = 0 ; color = "white" |}
-                    {| from = 1 ; color = "#C4DE6F" |}
-                    {| from = 2 ; color = "#FEF65C" |}
-                    {| from = 3 ; color = "#FF5348" |}
-                |]
-            |}
     |} 
     |> Highcharts.map
 
