@@ -104,39 +104,49 @@ let renderMap state owdData =
                pointFormat = "{point.value}" |}
         |}
 
-    let colorAxis =
-        match state.ChartType with 
-        | TwoWeekIncidence -> 
-            {| dataClasses =
-                [|
-                    {| from = 0 ; color = "white" |}
-                    {| from = 1 ; color = "#FFFFC2" |}
-                    {| from = 10 ; color = "#FEF001" |}
-                    {| from = 50 ; color = "#FFCE03" |}
-                    {| from = 100 ; color = "#FD9A01" |}
-                    {| from = 500 ; color = "#FD6104" |}
-                    {| from = 1000 ; color = "#FF2C05" |}
-                    {| from = 1500 ; color = "#F00505" |}
-                |]
-            |}
-        | Restrictions -> 
-            {| dataClasses =
-                [|
-                    {| from = 0 ; color = "white" |}
-                    {| from = 1 ; color = "#C4DE6F" |}
-                    {| from = 2 ; color = "#FEF65C" |}
-                    {| from = 3 ; color = "#FF5348" |}
-                |]
-            |}
+    let incidenceChart =
+        {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+            title = null
+            series = [| series geoJson |]
+            //legend = {| enabled = true ; layout = "vertical"  |}
+            colorAxis = 
+                {| dataClassColor = "category"
+                   dataClasses =
+                    [|
+                        {| from = 0 ; color = "white" |}
+                        {| from = 1 ; color = "#FFFFC2" |}
+                        {| from = 10 ; color = "#FEF001" |}
+                        {| from = 50 ; color = "#FFCE03" |}
+                        {| from = 100 ; color = "#FD9A01" |}
+                        {| from = 500 ; color = "#FD6104" |}
+                        {| from = 1000 ; color = "#FF2C05" |}
+                        {| from = 1500 ; color = "#F00505" |}
+                    |]
+                |}
+        |}
 
+    let restrictionsChart =
+        {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+            title = null
+            series = [| series geoJson |]
+            //legend = {| enabled = false |}
+            colorAxis = 
+                {| dataClassColor = "category"
+                   dataClasses =
+                    [|
+                        {| from = 0 ; color = "white" |}
+                        {| from = 1 ; color = "#C4DE6F" |}
+                        {| from = 2 ; color = "#FEF65C" |}
+                        {| from = 3 ; color = "#FF5348" |}
+                    |]
+                |}
+        |}
+        
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
-        title = null
-        series = [| series geoJson |]
-        legend = {| enabled = false |}
-        colorAxis = colorAxis
-    |}
-    |> Highcharts.map
+    match state.ChartType with 
+    | TwoWeekIncidence -> incidenceChart |> Highcharts.map
+    | Restrictions -> restrictionsChart |> Highcharts.map
+
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     let renderChartSelector (chartSelector: ChartType) =
