@@ -120,7 +120,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | ByDate -> entry.Date |> jsTime12h :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = entry.TotalCasesPerMillion
+                             y = entry.NewCasesPerMillion
                              date = I18N.tOptions "days.longerDate"
                                         {| date = entry.Date |}
                              dataLabels =
