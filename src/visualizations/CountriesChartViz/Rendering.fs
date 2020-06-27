@@ -26,7 +26,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
     { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
+      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "OWID_KOS"; "SRB" |]
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]

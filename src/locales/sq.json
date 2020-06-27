@@ -12,7 +12,7 @@
             "populationShare": "Përqindja e popullsisë",
             "all": "Të gjithë",
             "mortalityOfConfirmedCases": "Vdekshmëria e rasteve të konfirmuara",
-            "title": "Harta e komunës",
+            "title": "Harta e qendrave rajonale të shëndetit publik",
             "yesterday": "Dje"
         },
         "hospitals": {
@@ -315,7 +315,7 @@
         "MNE": "Mali i Zi",
         "NZL": "Zelandë e Re",
         "NOR": "Norvegji",
-        "RKS": "Kosovë",
+        "OWID_KOS": "Kosovë",
         "SGP": "Singapur",
         "SRB": "Serbi",
         "SVK": "Sllovaki",
