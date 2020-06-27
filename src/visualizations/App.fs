@@ -111,6 +111,17 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
                         lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
+          { VisualizationType = EuropeMap
+            ClassName = "europe-chart"
+            Label = I18N.t "charts.europe.title"
+            Explicit = false
+            Renderer =
+               fun state ->
+                   match state.StatsData with
+                   | NotAsked -> Html.none
+                   | Loading -> Utils.renderLoading
+                   | Failure error -> Utils.renderErrorLoading error
+                   | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
           { VisualizationType = Tests
             ClassName = "tests-chart"
             Label = I18N.t "charts.tests.title"
@@ -187,17 +198,6 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
-          { VisualizationType = EuropeMap
-            ClassName = "europe-chart"
-            Label = I18N.t "charts.europe.title"
-            Explicit = true
-            Renderer =
-               fun state ->
-                   match state.StatsData with
-                   | NotAsked -> Html.none
-                   | Loading -> Utils.renderLoading
-                   | Failure error -> Utils.renderErrorLoading error
-                   | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
           { VisualizationType = Countries
             ClassName = "countries-chart"
             Label = I18N.t "charts.countries.title"

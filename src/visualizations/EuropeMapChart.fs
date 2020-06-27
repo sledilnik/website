@@ -38,7 +38,7 @@ let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI";
 let importedFrom = Map.ofList [ ("BIH", 8); ("BIH", 8); ("SRB", 7); ("SWE", 1); ("USA", 1); ]
 
 let init (regionsData : StatsData) : State * Cmd<Msg> =
-    { OwdData = NotAsked ; ChartType = TwoWeekIncidence }, Cmd.ofMsg OwdDataRequested
+    { OwdData = NotAsked ; ChartType = Restrictions }, Cmd.ofMsg OwdDataRequested
 
 let update (msg : Msg) (state : State) : State * Cmd<Msg> =
     match msg with
@@ -183,7 +183,7 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
         ]
 
     let chartTypeSelectors =
-        [ TwoWeekIncidence; Restrictions ]
+        [ Restrictions; TwoWeekIncidence ]
         |> List.map renderChartSelector
 
     Html.div [
@@ -205,7 +205,7 @@ let render (state : State) dispatch =
                 renderChartTypeSelectors state.ChartType (ChartTypeChanged >> dispatch)
             ]
             Html.div [
-                prop.style [ style.height 600 ]
+                prop.style [ style.height 550 ]
                 prop.className "map"
                 prop.children [ chart ]
             ]
