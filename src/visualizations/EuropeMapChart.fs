@@ -79,10 +79,11 @@ let renderIncidenceMap state owdData =
            states =
             {| normal = {| animation = {| duration = 0 |} |}
                hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-           tooltip =
+           tooltip = pojo
             {| distance = 50
+               valueDecimals = 2
                headerFormat = "<b>{point.key}</b><br>"
-               pointFormat = "{point.value}" |}
+               pointFormat = "{point.value} potrjenih primerov v 14 dneh na 1M" |}
         |}
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
@@ -111,7 +112,7 @@ let renderIncidenceMap state owdData =
                     {| from = 500 ; color = "#FF2C05" |}
                     {| from = 1000 ; color = "#F00505" |}
                 |]
-            |}
+            |} |> pojo
     |}
     |> Highcharts.map
 
@@ -143,16 +144,17 @@ let renderRestrictionsMap state =
            states =
             {| normal = {| animation = {| duration = 0 |} |}
                hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-           tooltip =
+           tooltip = pojo
             {| distance = 50
+               valueDecimals = 0
                headerFormat = "<b>{point.key}</b><br>"
-               pointFormat = "{point.value}" |}
-        |}
+               pointFormat = "{point.value} importiranih primerov v 14 dneh" |}
+        |} |> pojo
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
-        legend = {| enabled = false |}
+        legend = pojo {| enabled = false |}
     |} 
     |> Highcharts.map
 
