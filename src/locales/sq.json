@@ -12,7 +12,7 @@
             "populationShare": "Përqindja e popullsisë",
             "all": "Të gjithë",
             "mortalityOfConfirmedCases": "Vdekshmëria e rasteve të konfirmuara",
-            "title": "Harta e komunës",
+            "title": "Harta e qendrave rajonale të shëndetit publik",
             "yesterday": "Dje"
         },
         "hospitals": {
@@ -121,7 +121,7 @@
             "timesAsMany": "- shumëzuar me aq",
             "confirmedCases": "raste të konfirmuara",
             "relativeTitle": "Rritja ditore e të infektuarve",
-            "everageSouthKorea": "Mesatarja në Korenë së Jugut ditëve të fundit",
+            "averageSouthKorea": "Mesatarja në Korenë së Jugut ditëve të fundit",
             "oneDay": "Një ditë",
             "oneWeek": "Një javë",
             "oneMonth": "Një muaj",
@@ -247,6 +247,11 @@
             "x_months_plural": "{{ count }}m",
             "thousandsSep": " ",
             "from": " "
+        },
+        "europe": {
+            "restrictions": "Kufizimet",
+            "twoWeekIncidence": "Incidenca 14 ditore për 1 milion banorë",
+            "title": "Situata me COVID-19 në Evropë"
         }
     },
     "shortMonth": {
@@ -604,5 +609,59 @@
         "kk": "Rajoni i Savës së Poshtme",
         "ce": "Rajoni i Savinjës",
         "za": "Rajoni i Savës qendrore"
+    },
+    "mk": {
+        "hospital": {
+            "mksk": "Spitali i montuar",
+            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë dhe Prilep",
+            "stip": "Shtip",
+            "bitola": "Manastir",
+            "gob8sep": "SPQ 8 Shtatori",
+            "kozle": "Kozle",
+            "iksk": "Klinika infektive"
+        },
+        "municipality": {
+            "stip": "Shtip",
+            "tetovo": "Tetovë",
+            "strumica": "Strumicë",
+            "struga": "Strugë",
+            "skopje": "Shkup",
+            "sveti_nikole": "Sveti Nikole",
+            "resen": "Resnjë",
+            "radovis": "Radovish",
+            "probistip": "Probishtip",
+            "prilep": "Prilep",
+            "pehcevo": "Pehçevë",
+            "ohrid": "Ohër",
+            "negotino": "Negotinë",
+            "makedonski_brod": "Makedonski Brod",
+            "kumanovo": "Kumanovë",
+            "krusevo": "Krushevë",
+            "kriva_palanka": "Kriva Pallankë",
+            "kratovo": "Kratovë",
+            "kocani": "Koçani",
+            "kicevo": "Kërçovë",
+            "kavadarci": "Kavadari",
+            "demir_hisar": "Demir Hisar",
+            "delcevo": "Dellçevë",
+            "debar": "Dibër",
+            "gostivar": "Gostivar",
+            "gevgelija": "Gjevgjeli",
+            "vinica": "Vinicë",
+            "veles": "Veles",
+            "valandovo": "Vallandovë",
+            "bitola": "Manastir",
+            "berovo": "Berovë"
+        },
+        "region": {
+            "sk": "I Shkupit",
+            "si": "Verilindor",
+            "po": "I Pollogut",
+            "pe": "I Pellagonisë",
+            "ji": "Juglindor",
+            "jz": "Jugperëndimor",
+            "is": "Lindor",
+            "va": "I Vardarit"
+        }
     }
 }

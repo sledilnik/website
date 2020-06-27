@@ -425,7 +425,7 @@
             "relativeLabel": "Relativen prirast v %",
             "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
             "doublingRateLabel": "V koliko dneh se število okuženih podvoji",
-            "everageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
+            "averageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
@@ -486,6 +486,11 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
+        },
+        "europe": {
+            "title": "Stanje COVID-19 v Evropi",
+            "twoWeekIncidence": "14 dnevna incidenca na 1M prebivalcev",
+            "restrictions": "Omejitve NIJZ"
         },
         "municipalities": {
             "title": "Primeri po občinah",
@@ -607,5 +612,59 @@
         "somethingWentWrong": "ups… nekaj se je zalomilo :(",
         "back": "Nazaj",
         "imageDescription": "prometna stožca povezana z rumenim trakom"
+    },
+    "mk": {
+        "hospital": {
+            "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "stip": "Štip",
+            "bitola": "Bitola",
+            "gob8sep": "GOB 8mi septemvri",
+            "kozle": "Kozle",
+            "mksk": "Montažna Bolnica",
+            "iksk": "Infektivna Klinika"
+        },
+        "municipality": {
+            "stip": "Štip",
+            "tetovo": "Tetovo",
+            "strumica": "Strumica",
+            "struga": "Struga",
+            "veles": "Veles",
+            "berovo": "Berovo",
+            "skopje": "Skopje",
+            "sveti_nikole": "Sveti Nikole",
+            "resen": "Resen",
+            "radovis": "Radoviš",
+            "probistip": "Probištip",
+            "prilep": "Prilep",
+            "pehcevo": "Pehčevo",
+            "ohrid": "Ohrid",
+            "negotino": "Negotino",
+            "makedonski_brod": "Makedonski Brod",
+            "kumanovo": "Kumanovo",
+            "krusevo": "Kruševo",
+            "kriva_palanka": "Kriva Palanka",
+            "kratovo": "Kratovo",
+            "kocani": "Kočani",
+            "kicevo": "Kičevo",
+            "kavadarci": "Kavadarci",
+            "demir_hisar": "Demir Hisar",
+            "delcevo": "Delčevo",
+            "debar": "Debar",
+            "gostivar": "Gostivar",
+            "gevgelija": "Gevgelija",
+            "vinica": "Vinica",
+            "valandovo": "Valandovo",
+            "bitola": "Bitola"
+        },
+        "region": {
+            "sk": "Skopski",
+            "si": "Severoistočen",
+            "po": "Pološki",
+            "pe": "Pelagoniski",
+            "ji": "Jugoistočen",
+            "jz": "Jugozapaden",
+            "is": "Istočen",
+            "va": "Vardarski"
+        }
     }
 }
