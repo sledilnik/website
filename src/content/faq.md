@@ -402,11 +402,11 @@ Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega s
 <details>
   <summary id=europe-chart>Kaj nam kaže "Stanje COVID-19 v Evropi"?</summary>
 
-[Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na podlagi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na podlagi sklepa vlade pa se določa  [seznam držav z obvezno 14 dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Posamezni državi tudi prikažemo število novo potrjenih primerov, ki smo jih v Slovenijo uvozili iz te posamezne države v zadnjih 14 dneh.
+[Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na podlagi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na podlagi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
 
-*Opomba: [NIJZ podatke o uvoženih primerih] objavlja ob ponedeljkih za pretekli teden, tako da podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+*Opomba: [NIJZ podatke o uvoženih primerih] objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
 
-Na pogledu *14 dnevna incidenca na 1M prebivalcev* pa kažemo epidemiološko ogroženost v posameznih državah na podlagi števila novih primerov v zadnjih 14 dnevih na 1 miljon prebivalcev. Podatke dobivamo preko [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
+Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na miljon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
 
 </details>
 
