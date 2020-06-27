@@ -493,11 +493,11 @@
             "restrictions": "Omejitve in uvoženi primeri",
             "incidence1M": "Novi primeri v 14 dneh na 1M",
             "importedCases": "Uvoženi primeri v 14 dneh",
-            "countryStatus": "Status države",
+            "countryStatus": "Omejitve",
             "statusNone": "-",
-            "statusGreen": "ZELENO - ni omejitev",
-            "statusYellow": "RUMENO - 14 dnevna karantena z izjemami",
-            "statusRed": "RDEČE - obvezna 14 dnevna karantena"            
+            "statusGreen": "ni omejitev",
+            "statusYellow": "14 dnevna karantena z izjemami",
+            "statusRed": "obvezna 14 dnevna karantena"            
         },
         "municipalities": {
             "title": "Primeri po občinah",
