@@ -36,7 +36,7 @@ let init (regionsData : StatsData) : State * Cmd<Msg> =
     { OwdData = NotAsked ; ChartType = TwoWeekIncidence }, Cmd.ofMsg OwdDataRequested
 
 let countries = ["ALB" ; "AND" ; "AUT" ; "BLR" ; "BEL" ; "BIH" ; "BGR" ; "HRV" ; "CYP" ; "CZE" ; "DNK" ; "EST" ; "FRO" ; "FIN" ; "FRA" ; "DEU" ; "GRC" ; "HUN" ; "ISL" ; "IRL" ; "ITA" ; "LVA" ; "LIE" ; "LTU" ; "LUX" ; "MKD" ; "MLT" ; "MDA" ; "MCO" ; "MNE" ; "NLD" ; "NOR" ; "POL" ; "PRT" ; "SRB" ; "ROU" ; "RUS" ; "SMR" ; "SVK" ; "SVN" ; "ESP" ; "SWE" ; "CHE" ; "TUR" ; "UKR" ; "GBR" ; "VAT"]
-let greenCountries = Set.ofList [ "SVN"; "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
+let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
 let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "-99"; "PRT"; "ALB" ]
 
 let update (msg : Msg) (state : State) : State * Cmd<Msg> =
@@ -66,8 +66,10 @@ let restrictedCountries =
     countries
     |> List.map (fun code ->
         let color = 
-            if greenCountries.Contains(code) then 0.0
-            else if redCountries.Contains(code) then 1.0 else 0.5
+            if code = "SVN" then 0.0
+            else if greenCountries.Contains(code) then 1.0
+            else if redCountries.Contains(code) then 3.0 
+            else 2.0
         {| code = code ; value = color |} )
     |> List.toArray
 
@@ -104,23 +106,35 @@ let renderMap state owdData =
 
     let colorAxis =
         match state.ChartType with 
-        | TwoWeekIncidence -> {| min = 0; minColor = "#FFFFFF"; maxColor = "#e03000" |}
-        | Restrictions -> {| min = 0; minColor = "#008000"; maxColor = "#e03000" |}
+        | TwoWeekIncidence -> 
+            {| dataClasses =
+                [|
+                    {| from = 0 ; color = "white" |}
+                    {| from = 1 ; color = "#FFFFC2" |}
+                    {| from = 10 ; color = "#FEF001" |}
+                    {| from = 50 ; color = "#FFCE03" |}
+                    {| from = 100 ; color = "#FD9A01" |}
+                    {| from = 500 ; color = "#FD6104" |}
+                    {| from = 1000 ; color = "#FF2C05" |}
+                    {| from = 1500 ; color = "#F00505" |}
+                |]
+            |}
+        | Restrictions -> 
+            {| dataClasses =
+                [|
+                    {| from = 0 ; color = "white" |}
+                    {| from = 1 ; color = "#C4DE6F" |}
+                    {| from = 2 ; color = "#FEF65C" |}
+                    {| from = 3 ; color = "#FF5348" |}
+                |]
+            |}
+
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
         legend = {| enabled = false |}
         colorAxis = colorAxis
-        // colorAxis =
-        //     {| dataClasses =
-        //         [|
-        //             {| from = 0 ; ``to`` = 10 ; color = "red" |}
-        //             {| from = 11 ; ``to`` = 20 ; color = "orange" |}
-        //             {| from = 21 ; ``to`` = 30 ; color = "green" |}
-        //             {| from = 31 ; ``to`` = 50 ; color = "blue" |}
-        //         |]
-        //     |}
     |}
     |> Highcharts.map
 
