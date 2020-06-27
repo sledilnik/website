@@ -290,7 +290,7 @@
         "europe": {
             "title": "COVID-19 Situation in Europe",
             "twoWeekIncidence": "14 days incidence per million",
-            "restrictions": "Restrictions"
+            "restrictions": "Restrictions and imported cases"
         },
         "municipalities": {
             "title": "Cases by Municipalities",
