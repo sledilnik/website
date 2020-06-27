@@ -489,6 +489,10 @@
             "deceased": "Починати",
             "confirmedCases": "Потврдени случаи",
             "activeCases": "Активни случаи"
+        },
+        "europe": {
+            "restrictions": "Рестрикции",
+            "title": "КОВИД-19 Ситуација во Европа"
         }
     },
     "phase": {

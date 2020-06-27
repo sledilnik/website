@@ -247,6 +247,11 @@
             "x_months_plural": "{{ count }}m",
             "thousandsSep": " ",
             "from": " "
+        },
+        "europe": {
+            "restrictions": "Kufizimet",
+            "twoWeekIncidence": "Incidenca 14 ditore për 1 milion banorë",
+            "title": "Situata me COVID-19 në Evropë"
         }
     },
     "shortMonth": {
