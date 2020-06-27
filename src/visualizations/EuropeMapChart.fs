@@ -7,6 +7,7 @@ open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 open Browser
 
+open Highcharts
 open Types
 
 let geoJson : obj = importDefault "@highcharts/map-collection/custom/europe.geo.json"
@@ -87,8 +88,18 @@ let renderIncidenceMap state owdData =
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
-        //legend = {| enabled = true ; layout = "vertical"  |}
-        colorAxis = 
+        legend = pojo
+            {|
+                enabled = true
+                title = {| text = null |}
+                align = "left"
+                verticalAlign = "top"
+                layout = "horizontal"
+                floating = true
+                borderWidth = 1
+                backgroundColor = "white"
+            |}
+        colorAxis = pojo
             {| dataClassColor = "category"
                dataClasses =
                 [|
@@ -141,6 +152,7 @@ let renderRestrictionsMap state =
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
+        legend = {| enabled = false |}
     |} 
     |> Highcharts.map
 
