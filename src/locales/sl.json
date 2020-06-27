@@ -252,7 +252,7 @@
         },
         "quarantine14days": {
             "title": "Karantena",
-            "description": "Obvezna 14 dnevna karantena za tujce pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
+            "description": "Obvezna 14-dnevna karantena za tujce pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
         },
         "liftSchools4to5": {
             "title": "OŠ",
@@ -489,15 +489,15 @@
         },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
-            "twoWeekIncidence": "14 dnevna pojavnost na 1M prebivalcev",
+            "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
             "incidence1M": "Novi primeri v 14 dneh na 1M",
             "importedCases": "Uvoženi primeri v 14 dneh",
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusYellow": "14 dnevna karantena z izjemami",
-            "statusRed": "obvezna 14 dnevna karantena"            
+            "statusYellow": "14-dnevna karantena z izjemami",
+            "statusRed": "obvezna 14-dnevna karantena"            
         },
         "municipalities": {
             "title": "Primeri po občinah",
