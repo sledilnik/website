@@ -67,6 +67,10 @@ let renderIncidenceMap state owdData =
 
     let owdIncidence = calculateOwdIncidence owdData
 
+    let pointFormat = 
+        sprintf "%s: <b>{point.value}</b>"
+            (I18N.t "charts.europe.incidence1M")
+
     let series geoJson =
         {| visible = true
            mapData = geoJson
@@ -81,9 +85,9 @@ let renderIncidenceMap state owdData =
                hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            tooltip = pojo
             {| distance = 50
-               valueDecimals = 2
+               valueDecimals = 0
                headerFormat = "<b>{point.key}</b><br>"
-               pointFormat = "{point.value} potrjenih primerov v 14 dneh na 1M" |}
+               pointFormat = pointFormat |}
         |}
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
@@ -99,6 +103,7 @@ let renderIncidenceMap state owdData =
                 floating = true
                 borderWidth = 1
                 backgroundColor = "white"
+                valueDecimals = 0
             |}
         colorAxis = pojo
             {| dataClassColor = "category"
@@ -120,17 +125,21 @@ let renderIncidenceMap state owdData =
 let restrictedCountries =
     countries
     |> List.map (fun code ->
-        let color = 
-            if code = "SVN" then "white"
-            else if greenCountries.Contains(code) then "#C4DE6F"
-            else if redCountries.Contains(code) then "#FF5348"
-            else "#FEF65C"
+        let rType, rColor = 
+            if code = "SVN" then I18N.t "charts.europe.statusNone", "white"
+            else if greenCountries.Contains(code) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
+            else if redCountries.Contains(code) then I18N.t "charts.europe.statusRed", "#FF5348"
         let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
         let label = imported > 0
-        {| code = code ; color = color ; value = imported ; dataLabels = {| enabled = label |} |} )
+        {| code = code ; value = imported ; rType = rType ; color = rColor ;  dataLabels = {| enabled = label |} |} )
     |> List.toArray
 
 let renderRestrictionsMap state =
+
+    let pointFormat = 
+        sprintf "%s: <b>{point.value}</b><br>%s: <b>{point.rType}</b>"
+            (I18N.t "charts.europe.importedCases")
+            (I18N.t "charts.europe.countryStatus")
 
     let series geoJson =
         {| visible = true
@@ -148,7 +157,7 @@ let renderRestrictionsMap state =
             {| distance = 50
                valueDecimals = 0
                headerFormat = "<b>{point.key}</b><br>"
-               pointFormat = "{point.value} importiranih primerov v 14 dneh" |}
+               pointFormat = pointFormat |}
         |} |> pojo
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with

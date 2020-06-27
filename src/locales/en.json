@@ -290,7 +290,15 @@
         "europe": {
             "title": "COVID-19 Situation in Europe",
             "twoWeekIncidence": "14 days incidence per million",
-            "restrictions": "Restrictions and imported cases"
+            "restrictions": "Restrictions and imported cases",
+            "incidence1M": "New cases in 14 days per 1M",
+            "importedCases": "Imported cases in 14 days",
+            "countryStatus": "Country status",
+            "statusNone": "-",
+            "statusGreen": "GREEN - no restrictions",
+            "statusYellow": "YELLOW - 14 day quarantine with exceptions",
+            "statusRed": "RED - strict 14 day quarantine"            
+
         },
         "municipalities": {
             "title": "Cases by Municipalities",
