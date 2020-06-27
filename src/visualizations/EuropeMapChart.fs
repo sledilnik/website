@@ -92,14 +92,13 @@ let renderIncidenceMap state owdData =
             {| dataClassColor = "category"
                dataClasses =
                 [|
-                    {| from = 0 ; color = "white" |}
-                    {| from = 1 ; color = "#FFFFC2" |}
+                    {| from = 0 ; color = "#FFFFC2" |}
                     {| from = 10 ; color = "#FEF001" |}
                     {| from = 50 ; color = "#FFCE03" |}
                     {| from = 100 ; color = "#FD9A01" |}
-                    {| from = 500 ; color = "#FD6104" |}
-                    {| from = 1000 ; color = "#FF2C05" |}
-                    {| from = 1500 ; color = "#F00505" |}
+                    {| from = 250 ; color = "#FD6104" |}
+                    {| from = 500 ; color = "#FF2C05" |}
+                    {| from = 1000 ; color = "#F00505" |}
                 |]
             |}
     |}
