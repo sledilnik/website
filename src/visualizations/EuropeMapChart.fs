@@ -129,6 +129,7 @@ let restrictedCountries =
             if code = "SVN" then I18N.t "charts.europe.statusNone", "white"
             else if greenCountries.Contains(code) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
             else if redCountries.Contains(code) then I18N.t "charts.europe.statusRed", "#FF5348"
+            else I18N.t "charts.europe.statusYellow", "#FEF65C"
         let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
         let label = imported > 0
         {| code = code ; value = imported ; rType = rType ; color = rColor ;  dataLabels = {| enabled = label |} |} )
