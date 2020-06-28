@@ -109,13 +109,13 @@ let renderIncidenceMap state owdData =
             {| dataClassColor = "category"
                dataClasses =
                 [|
-                    {| from = 0 ; color = "#FFFFC2" |}
-                    {| from = 10 ; color = "#FEF001" |}
-                    {| from = 50 ; color = "#FFCE03" |}
-                    {| from = 100 ; color = "#FD9A01" |}
-                    {| from = 250 ; color = "#FD6104" |}
-                    {| from = 500 ; color = "#FF2C05" |}
-                    {| from = 1000 ; color = "#F00505" |}
+                    {| from = 0 ; color = "#ffffb2" |}
+                    {| from = 10 ; color = "#fed976" |}
+                    {| from = 50 ; color = "#feb24c" |}
+                    {| from = 100 ; color = "#fd8d3c" |}
+                    {| from = 250 ; color = "#fc4e2a" |}
+                    {| from = 500 ; color = "#e31a1c" |}
+                    {| from = 1000 ; color = "#b10026" |}
                 |]
             |} |> pojo
     |}
