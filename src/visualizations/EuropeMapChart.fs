@@ -32,9 +32,9 @@ type Msg =
     | OwdDataReceived of OwdData
     | ChartTypeChanged of ChartType
 
-let countries = ["ALB" ; "AND" ; "AUT" ; "BLR" ; "BEL" ; "BIH" ; "BGR" ; "HRV" ; "CYP" ; "CZE" ; "DNK" ; "EST" ; "FRO" ; "FIN" ; "FRA" ; "DEU" ; "GRC" ; "HUN" ; "ISL" ; "IRL" ; "ITA" ; "LVA" ; "LIE" ; "LTU" ; "LUX" ; "MKD" ; "MLT" ; "MDA" ; "MCO" ; "MNE" ; "NLD" ; "NOR" ; "POL" ; "PRT" ; "SRB" ; "ROU" ; "RUS" ; "SMR" ; "SVK" ; "SVN" ; "ESP" ; "SWE" ; "CHE" ; "TUR" ; "UKR" ; "GBR" ; "VAT"]
+let countries = ["ALB" ; "AND" ; "AUT" ; "BLR" ; "BEL" ; "BIH" ; "BGR" ; "HRV" ; "CYP" ; "CZE" ; "DNK" ; "EST" ; "FRO" ; "FIN" ; "FRA" ; "DEU" ; "GRC" ; "HUN" ; "ISL" ; "IRL" ; "ITA" ; "LVA" ; "LIE" ; "LTU" ; "LUX" ; "MKD" ; "MLT" ; "MDA" ; "MCO" ; "MNE" ; "NLD" ; "NOR" ; "POL" ; "PRT" ; "SRB" ; "ROU" ; "RUS" ; "SMR" ; "SVK" ; "SVN" ; "ESP" ; "SWE" ; "CHE" ; "TUR" ; "UKR" ; "GBR" ; "VAT" ; "OWID_KOS" ]
 let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
-let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "-99"; "PRT"; "ALB" ]
+let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "OWID_KOS"; "PRT"; "ALB" ]
 let importedFrom = Map.ofList [ ("BIH", 8); ("BIH", 8); ("SRB", 7); ("SWE", 1); ("USA", 1); ]
 
 let init (regionsData : StatsData) : State * Cmd<Msg> =
@@ -60,7 +60,8 @@ let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
             |> List.sum
-        {| code = code ; value = sum |} )
+        let fixedCode = if code = "OWID_KOS" then "-99" else code // hack for Kosovo code
+        {| code = fixedCode ; value = sum ; color = null ; dataLabels = {| enabled = false |}|} )
     |> List.toArray
 
 let renderIncidenceMap state owdData =
@@ -126,13 +127,14 @@ let restrictedCountries =
     countries
     |> List.map (fun code ->
         let rType, rColor = 
-            if code = "SVN" then I18N.t "charts.europe.statusNone", "white"
+            if code = "SVN" then I18N.t "charts.europe.statusNone", "#10829a"
             else if greenCountries.Contains(code) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
             else if redCountries.Contains(code) then I18N.t "charts.europe.statusRed", "#FF5348"
             else I18N.t "charts.europe.statusYellow", "#FEF65C"
         let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
         let label = imported > 0
-        {| code = code ; value = imported ; rType = rType ; color = rColor ;  dataLabels = {| enabled = label |} |} )
+        let fixedCode = if code = "OWID_KOS" then "-99" else code // hack for Kosovo code
+        {| code = fixedCode ; value = imported ; rType = rType ; color = rColor ;  dataLabels = {| enabled = label |} |} )
     |> List.toArray
 
 let renderRestrictionsMap state =
