@@ -24,6 +24,7 @@ let init (query: obj) (visualization: string option) =
                 | "Regions" -> Some Regions
                 | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
+                | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
                 | "HCenters" -> Some HCenters
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
@@ -61,7 +62,21 @@ open Elmish.React
 
 let render (state: State) (_: Msg -> unit) =
     let allVisualizations: Visualization list =
-        [ { VisualizationType = Hospitals
+        [
+          { VisualizationType = AgeGroupsTimeline
+            ClassName = "age-groups-trends-chart"
+            Label = I18N.t "charts.ageGroupsTrends.title"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView AgeGroupsTimelineChart.renderChart
+                            {| data = data |} }
+          { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
             Label = I18N.t "charts.hospitals.title"
             Explicit = true

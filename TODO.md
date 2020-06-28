@@ -1,6 +1,5 @@
 # TODO
 
-## Remember range selection
-- disable animations
-- Struktura potrjeno okuženih doesn't work quite as it should
-- Potrjeno okuženi po regijah doesn't work - weird range selector
+## Age groups trends
+- chart showing age groups for new daily cases 
+- show the average age trendline
