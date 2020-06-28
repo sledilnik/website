@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "Sledilnik 3.0 - change is constant",
-        "news002": "Read more on Medium…"
+        "news001": "New map:",
+        "news002": "COVID-19 Situation in Europe - restrictions, imported cases..."
     },
     "infocard": {
         "tests": "Tests Today",

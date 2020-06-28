@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Sledilnik 3.0 - spremembe so konstanta.",
-        "news002": "Več na Medium…"
+        "news001": "Nov zemljevid:",
+        "news002": "Stanje COVID-19 v Evropi - omejitve, uvoženi primeri..."
     },
     "infocard": {
         "tests": "Testov na dan",
