@@ -246,12 +246,20 @@
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "thousandsSep": " ",
-            "from": " "
+            "from": " ",
+            "dataSource": "burim i të dhënave: ISHP, Ministria e shëndetësisë"
         },
         "europe": {
-            "restrictions": "Kufizimet",
+            "restrictions": "Kufizimet dhe rastet e importuara",
             "twoWeekIncidence": "Incidenca 14 ditore për 1 milion banorë",
-            "title": "Situata me COVID-19 në Evropë"
+            "title": "Situata me COVID-19 në Evropë",
+            "statusRed": "karantinë e rreptë 14 ditore",
+            "statusYellow": "karantinë 14 ditore me përjashtime",
+            "statusGreen": "pa kufizime",
+            "statusNone": "-",
+            "countryStatus": "Kufizimet",
+            "importedCases": "Rastet e importuara për 14 ditë",
+            "incidence1M": "Raste të reja për 14 ditë në 1M"
         }
     },
     "shortMonth": {
@@ -382,8 +390,8 @@
         "tests": "Teste sot"
     },
     "notice": {
-        "news002": "Lexo më shumë në Media…",
-        "news001": "Sledilnik 3.0 - ndryshimi është konstant"
+        "news002": "Situata me COVID-19 në Evropë - kufizimet, rastet e importuara...",
+        "news001": "Hartë e re:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
@@ -435,8 +443,8 @@
             "description": "Mbyllje e shkollave, restoranteve"
         },
         "gatherings": {
-            "title": "Tubime",
-            "description": "Ndalesë për tubime në vende publike"
+            "title": "Grumbullime",
+            "description": "Ndalesë për grumbullim në vende publike"
         },
         "municipality": {
             "description": "Ndalimi i lëvizjes jashtë kufijve të komunës, dezinfektimi i detyrueshëm i <br>ndërtesave me shumë banesa, shitore për grupe të rrezikuara deri në orën 10 të mëngjesit",
@@ -479,12 +487,12 @@
             "title": "Karantinë"
         },
         "liftGatherings500": {
-            "description": "Relaksim: tubim deri në 500 persona, shikues në ngjarje sportive. <br>Kalim i lirë kufitar jashtë pikave të kontrollit për qytetarët e SLO, AUT, ITA në HUN",
+            "description": "Relaksim: grumbullim deri në 500 persona, shikues në ngjarje sportive. <br>Kalim i lirë kufitar jashtë pikave të kontrollit për qytetarët e SLO, AUT, ITA në HUN",
             "title": "Deri në 500"
         },
         "liftSchools4to5": {
             "title": "Shkolla",
-            "description": "Relaksim: shkolla fillore klasa e 4-t, 5-të, tubim deri në 200 persona, të gjithë shërbimet e akomodimit"
+            "description": "Relaksim: shkolla fillore klasa e 4-t, 5-të, grumbullim deri në 200 persona, të gjithë shërbimet e akomodimit"
         }
     },
     "tableDict": {
@@ -662,6 +670,70 @@
             "jz": "Jugperëndimor",
             "is": "Lindor",
             "va": "I Vardarit"
+        },
+        "cm": {
+            "bordersOopen": {
+                "title": "Kufijtë e hapur",
+                "description": "Relaksim: kufijtë hapen për qytetarët e huaj"
+            },
+            "kafanasOpen": {
+                "title": "Kafenetë",
+                "description": "Relaksim: baret dhe restorantet hapen"
+            },
+            "lessMeasures": {
+                "title": "Ndërpritet ndalesa e lëvizjes",
+                "description": "Relaksim: lëvizje e lirë në tërë vendin"
+            },
+            "masksOn": {
+                "title": "Maska",
+                "description": "Maskat janë të detyrueshme kudo jashtë shtëpie"
+            },
+            "21hLockdown": {
+                "title": "Ndalim i lëvizjes",
+                "description": "Ndalim i tërësishëm i lëvizjes prej orës 21-06 çdo ditë"
+            },
+            "gatherings5": {
+                "title": "Grumbullime të 5 personave",
+                "description": "Grumbullime publike me më shumë se 5 persona janë të ndaluara"
+            },
+            "debarQuarantine": {
+                "title": "Dibra karantinë",
+                "description": "Qyteti i parë i vënë nën izolim të plotë"
+            },
+            "bordersClosure": {
+                "description": "Të gjithë kufijtë dhe aeroportet e mbyllur për hyrje të udhëtarëve ndërkombëtarë në vend",
+                "title": "kufijtë"
+            },
+            "gatheringsMass": {
+                "description": "Grumbullimet në masë si ngjarjet sportive dhe karnevalet janë ndaluar",
+                "title": "Grumbullime në masë"
+            }
+        },
+        "phase": {
+            "6": {
+                "description": "Dibra 4, Kumanova 4, Shkupi 3, Tetova 4, Resnja 3, Maqedonia 2, Shtipi 3",
+                "title": "Faza 6"
+            },
+            "5": {
+                "description": "Shkupi 4, Tetova 4, Shtipi 3, Maqedonia 2",
+                "title": "Faza 5"
+            },
+            "4": {
+                "description": "Maqedonia 3",
+                "title": "Faza 4"
+            },
+            "3": {
+                "description": "Dibra 4",
+                "title": "Faza 3"
+            },
+            "2": {
+                "description": "Shkupi 4",
+                "title": "Faza 2"
+            },
+            "1": {
+                "description": "Dibra 4, Shkupi 3, Maqedonia 2 ",
+                "title": "Faza 1"
+            }
         }
     }
 }
