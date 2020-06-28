@@ -16,7 +16,7 @@ Podrobnejši opis prvotne metodologije in izsledkov je objavljen kot članek v [
 
 Prvotni model je bil kasneje nadgrajen, dnevni rezultati pa se sedaj objavljajo na [tej povezavi](https://oblak8.mf.uni-lj.si/covid19/).
 
-<a href="http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf" class="img-link">
+<a href="https://oblak8.mf.uni-lj.si/covid19/" class="img-link">
 <img alt="R_t model" src="/docs/ibmi-model-20200627.png">
 <!--<img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png">-->
 </a>
