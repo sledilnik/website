@@ -128,8 +128,8 @@ let renderIncidenceMap state geoJson owdData =
                 enabled = true
                 title = {| text = null |}
                 align = "left"
-                verticalAlign = "top"
-                layout = "horizontal"
+                verticalAlign = "bottom"
+                layout = "vertical"
                 floating = true
                 borderWidth = 1
                 backgroundColor = "white"
