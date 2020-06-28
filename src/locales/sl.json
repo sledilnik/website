@@ -298,6 +298,7 @@
     },
     "charts": {
         "common": {
+            "dataSource": "vir podatkov: NIJZ, Ministrstvo za zdravje",
             "loading": "Nalagam podatke…",
             "from": " ",
             "to": "-",

@@ -323,5 +323,10 @@ let basicChartOptions
                     |}
             |}
 
-        credits = pojo {| enabled = false |}
+        credits = pojo 
+            {| 
+                enabled = true
+                text = I18N.t "charts.common.dataSource"
+                href = "https://www.nijz.si/sl/pojav-novega-koronavirusa-2019-ncov"
+            |}
     |}

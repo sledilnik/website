@@ -127,6 +127,7 @@
     },
     "charts": {
         "common": {
+            "dataSource": "data source: NIJZ, Ministry of Health",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
