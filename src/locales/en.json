@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New:",
-        "news002": "structure of hospitalized for each COVID-19 hospital."
+        "news001": "New map:",
+        "news002": "COVID-19 Situation in Europe - restrictions, imported cases..."
     },
     "infocard": {
         "tests": "Tests Today",
@@ -127,6 +127,7 @@
     },
     "charts": {
         "common": {
+            "dataSource": "data source: NIJZ, Ministry of Health",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
@@ -140,6 +141,7 @@
             "decimalPoint": ".",
             "xAxis": "X axis:",
             "yAxis": "Y axis:",
+            "view": "View:",
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",
@@ -252,7 +254,7 @@
             "oneMonth": "One month",
             "oneWeek": "One week",
             "oneDay": "One day",
-            "everageSouthKorea": "South Korea's average in recent days",
+            "averageSouthKorea": "South Korea's average in recent days",
             "relativeTitle": "Daily Growth of Infected",
             "confirmedCases": "confirmed cases",
             "timesAsMany": "- times as much",
@@ -267,11 +269,15 @@
             "absolute": "Absolute Daily Growth"
         },
         "regions": {
-            "title": "Confirmed Cases by Region"
+            "title": "Cases by Region",
+            "activeCases": "Active Cases",
+            "confirmedCases": "Confirmed Cases",
+            "deceased": "Deaths"
         },
         "map": {
             "title": "Municipality Map",
             "mortalityOfConfirmedCases": "Mortality of Confirmed Cases",
+            "yesterday": "Yesterday",
             "all": "All",
             "populationShare": "Population Share",
             "populationC": "Population",
@@ -279,17 +285,28 @@
             "last_x_days": "{{ count }} day",
             "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
-            "view": "Show:",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
         },
+        "europe": {
+            "title": "COVID-19 Situation in Europe",
+            "twoWeekIncidence": "14 days incidence per million",
+            "restrictions": "Restrictions and imported cases",
+            "incidence1M": "New cases in 14 days per 1M",
+            "importedCases": "Imported cases in 14 days",
+            "countryStatus": "Restrictions",
+            "statusNone": "-",
+            "statusGreen": "no restrictions",
+            "statusYellow": "14 day quarantine with exceptions",
+            "statusRed": "strict 14 day quarantine"            
+
+        },
         "municipalities": {
             "title": "Cases by Municipalities",
-            "sortLast": "Last",
-            "sortDoublingTime": "Doubling time",
-            "sortTotal": "All",
-            "sortActive": "Active",
-            "sortBy": "Sort by:",
+            "viewLast": "Last",
+            "viewDoublingTime": "Doubling time",
+            "viewTotal": "All",
+            "viewActive": "Active",
             "allRegions": "All regions",
             "search": "Search municipality",
             "showAll": "Show All",
@@ -318,8 +335,7 @@
             "confirmedCasesPerPopulation": "Confirmed Cases per Population",
             "age": "Age",
             "deceased": "Deaths",
-            "confirmedCases": "Confirmed Cases",
-            "view": "Show:"
+            "confirmedCases": "Confirmed Cases"
         },
         "countries": {
             "title": "Comparison by Country",
@@ -544,6 +560,8 @@
         "kr": "Upper Carniola Region"
     },
     "country": {
+        "VAT": "Vatikan",
+        "UKR": "Ukraine",
         "USA": "USA",
         "TUR": "Turkey",
         "TWN": "Taiwan",
@@ -552,27 +570,44 @@
         "SVK": "Slovakia",
         "SRB": "Serbia",
         "SGP": "Singapore",
+        "SMR": "San Marino",
         "RUS": "Russia",
         "ROU": "Romania",
+        "OWID_KOS": "Kosovo",
         "RKS": "Kosovo",
         "PER": "Peru",
+        "PRT": "Portugal",
+        "POL": "Poland",
+        "NMA": "Cyprus No Mans Area",
+        "NCY": "N. Cyprus",
+        "CYP": "Cyprus",
         "NOR": "Norway",
+        "NLD": "Netherlands",
         "NZL": "New Zealand",
         "MNE": "Montenegro",
         "MKD": "N. Macedonia",
         "MEX": "Mexico",
+        "MDA": "Moldova",
+        "MLT": "Malta",
         "KOR": "S. Korea",
+        "LUX": "Luxemburg",
+        "LVA": "Latvia",
+        "LTU": "Lithuania",
+        "LIE": "Liechtenstein",
         "JPN": "Japan",
         "ITA": "Italy",
         "ISL": "Iceland",
+        "IRL": "Ireland",
         "IRN": "Iran",
         "HUN": "Hungary",
         "HRV": "Croatia",
         "GRC": "Greece",
         "GBR": "United Kingdom",
         "FRA": "France",
+        "FRO": "Faroe Islands",
         "FIN": "Finland",
         "ESP": "Spain",
+        "EST": "Estonia",
         "ECU": "Ecuador",
         "DNK": "Denmark",
         "DEU": "Germany",
@@ -583,11 +618,13 @@
         "CHE": "Switzerland",
         "BIH": "Bosnia and Herzegovina",
         "BEL": "Belgium",
+        "BLR": "Belarus",
         "BRA": "Brazil",
         "BGR": "Bulgaria",
         "AUT": "Austria",
         "AUS": "Australia",
         "ARG": "Argentina",
+        "AND": "Andorra",
         "ALB": "Albania"
     },
     "pageNotFound": {
@@ -595,5 +632,123 @@
         "somethingWentWrong": "oops… something went wrong :(",
         "back": "Back",
         "imageDescription": "two traffic cones connected by yellow tape"
+    },
+    "mk": {
+        "phase": {
+            "1": {
+                "title": "Phase 1",
+                "description": "Debar 4, Skopje 3, Makedonija 2 "
+            },
+            "2": {
+                "title": "Phase 2",
+                "description": "Skopje 4"
+            },
+            "3": {
+                "title": "Phase 3",
+                "description": "Debar 4"
+            },
+            "4": {
+                "title": "Phase 4",
+                "description": "Makedonija 3"
+            },
+            "5": {
+                "title": "Phase 5",
+                "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
+            },
+            "6": {
+                "title": "Phase 6",
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
+            }  
+        },
+        "cm": {
+            "gatheringsMass": {
+                 "description": "Mass gatherings like sporting events and carnivals forbidden",
+                "title": "Mass Gatherings"
+            },
+            "bordersClosure": {
+                 "title": "borders",
+                "description": "All bordres and airports closed for international travelers to enter the country"
+            },
+            "debarQuarantine": {
+                "description": "First city put into full isolation",
+                "title": "Debar Quarantine"
+            },
+            "gatherings5": {
+                "description": "Public gatherings with more than 5 people forbidden",
+                "title": "Gatherings of 5 people"
+            },
+            "21hLockdown": {
+                "description": "Full lockdown from 21h-06h every day",
+                "title": "Lockdown"
+            },
+            "masksOn": {
+                "description": "Masks should be on everywhere outside of homes",
+                "title": "Masks"
+            },
+            "lessMeasures": {
+                "description": "Relaxation: movement free in whole country",
+                "title": "Lockdown off"
+            },
+             "kafanasOpen": {
+                "description": "Relaxation: bars and reaturants oppened",
+                "title": "Kafanas"
+            },
+            "bordersOopen": {
+                "description": "Relaxation: borders openned for foreighn citizens",
+                "title": "Borders Open"
+            }
+        },
+        "region": {
+            "va": "Vardarski",
+            "is": "Istočen",
+            "jz": "Jugozapaden",
+            "ji": "Jugoistočen",
+            "pe": "Pelagoniski",
+            "po": "Pološki",
+            "si": "Severoistočen",
+            "sk": "Skopski"
+        },
+        "municipality": {
+            "berovo": "Berovo",
+            "bitola": "Bitola",
+            "valandovo": "Valandovo",
+            "veles": "Veles",
+            "vinica": "Vinica",
+            "gevgelija": "Gevgelija",
+            "gostivar": "Gostivar",
+            "debar": "Debar",
+            "delcevo": "Delčevo",
+            "demir_hisar": "Demir Hisar",
+            "kavadarci": "Kavadarci",
+            "kicevo": "Kičevo",
+            "kocani": "Kočani",
+            "kratovo": "Kratovo",
+            "kriva_palanka": "Kriva Palanka",
+            "krusevo": "Kruševo",
+            "kumanovo": "Kumanovo",
+            "makedonski_brod": "Makedonski Brod",
+            "negotino": "Negotino",
+            "ohrid": "Ohrid",
+            "pehcevo": "Pehčevo",
+            "prilep": "Prilep",
+            "probistip": "Probištip",
+            "radovis": "Radoviš",
+            "resen": "Resen",
+            "sveti_nikole": "Sveti Nikole",
+            "skopje": "Skopje",
+            "struga": "Struga",
+            "strumica": "Strumica",
+            "tetovo": "Tetovo",
+            "stip": "Štip"
+        },
+        "hospital": {
+            "iksk": "Infektivna Klinika",
+            "mksk": "Montažna Bolnica",
+            "kozle": "Kozle",
+            "gob8sep": "GOB 8mi septemvri",
+            "bitola": "Bitola",
+            "stip": "Štip",
+            "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep"
+        }
     }
 }

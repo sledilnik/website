@@ -23,9 +23,9 @@
               iconTotalClass(totalIn, 'down'),
             ]"
           ></div>
-          <span class="in" :class="diffTotalClass(totalIn, 'down')">{{
-            renderTotalValues(totalIn)
-          }}</span>
+          <span class="in" :class="diffTotalClass(totalIn, 'down')">
+            {{ renderTotalValues(totalIn) }}
+          </span>
         </span>
         <span v-if="showOut">
           <div
@@ -35,9 +35,9 @@
               iconTotalClass(totalOut, 'up'),
             ]"
           ></div>
-          <span class="out" :class="diffTotalClass(totalOut, 'up')">{{
-            renderTotalValues(totalOut)
-          }}</span>
+          <span class="out" :class="diffTotalClass(totalOut, 'up')">
+            {{ renderTotalValues(totalOut) }}
+          </span>
         </span>
         <span v-if="showDeceased">
           <div
@@ -47,9 +47,9 @@
               iconTotalClass(totalDeceased),
             ]"
           ></div>
-          <span class="deceased" :class="diffTotalClass(totalDeceased)">{{
-            renderTotalValues(totalDeceased)
-          }}</span>
+          <span class="deceased" :class="diffTotalClass(totalDeceased)">
+            {{ renderTotalValues(totalDeceased) }}
+          </span>
         </span>
       </div>
       <div class="data-time">
@@ -153,24 +153,18 @@ export default {
       }
       return (
         (!this.totalIn && !this.totalOut && !this.totalDeceased) ||
-        this.renderTotalValues(this.totalIn) ===
-          this.renderTotalValues(this.totalOut)
+        (this.renderTotalValues(this.totalIn) === 0 &&
+         this.renderTotalValues(this.totalOut) === 0)
       )
     },
     showIn() {
       return (
-        this.totalIn &&
-        this.renderTotalValues(this.totalIn) !==
-          this.renderTotalValues(this.totalOut) &&
-        this.renderTotalValues(this.totalIn) > 0
+        this.totalIn && this.renderTotalValues(this.totalIn) > 0
       )
     },
     showOut() {
       return (
-        this.totalOut &&
-        this.renderTotalValues(this.totalIn) !==
-          this.renderTotalValues(this.totalOut) &&
-        this.renderTotalValues(this.totalOut) > 0
+        this.totalOut && this.renderTotalValues(this.totalOut) > 0
       )
     },
     showDeceased() {

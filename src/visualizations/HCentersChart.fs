@@ -83,6 +83,7 @@ let renderChartOptions (state : State) dispatch =
             {|
                 name = I18N.t "charts.hCenters.emergencyExamination"
                 ``type`` = "line"
+                visible = false
                 color = "#70a471"
                 dashStyle = Dot |> DashStyle.toString
                 data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.examinations.medicalEmergency)) |> Seq.toArray

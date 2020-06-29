@@ -23,7 +23,7 @@
         "MNE": "Crna Gora",
         "NZL": "Novi Zeland",
         "NOR": "Norveška",
-        "RKS": "Kosovo",
+        "OWID_KOS": "Kosovo",
         "RUS": "Rusija",
         "SGP": "Singapur",
         "SRB": "Srbija",
@@ -65,11 +65,15 @@
             "doubles": "Udvostručenja ",
             "title": "Slučajevi prema općinama",
             "sortActive": "Aktivni",
-            "showLess": "Prikaži manje"
+            "showLess": "Prikaži manje",
+            "viewActive": "Aktivne",
+            "viewTotal": "Sve",
+            "viewDoublingTime": "Vrijeme udvostručenja",
+            "viewLast": "Zadnja"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
-            "icuDeceasedShare": "Udio odjela intenzivne njege",
+            "icuDeceasedShare": "Udio umrlih u odjelima intenzivne njege",
             "ventilatorHospital": "Na respiratoru",
             "ventilatorCases": "Na respiratoru",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
@@ -82,7 +86,7 @@
             "seriousCases": "Teški slučajevi",
             "hospitalizations": "Hospitalizacija",
             "title": "Udio teških slučajeva",
-            "hospitalDeceasedShare": "Udio bolničkih smrtnih slučajeva"
+            "hospitalDeceasedShare": "Udio umrlih u bolnicama"
         },
         "common": {
             "numDateFormat": "%d. %m. %Y.",
@@ -98,6 +102,7 @@
             "linear": "Linearno",
             "close": "Zatvori",
             "xAxis": "Os x:",
+            "view": "Prikaži:",
             "share": "Dijeli",
             "longDateFormat": "%e. %B %Y.",
             "log": "Logaritmički",
@@ -115,7 +120,6 @@
         },
         "map": {
             "populationC": "Stanovništvo",
-            "view": "Prikaži:",
             "mortalityOfConfirmedCases": "Smrtnost u potvrđenim slučajevima",
             "title": "Karta općina",
             "confirmedCases": "Potvrđeni slučajevi",
@@ -149,7 +153,6 @@
         },
         "ageGroups": {
             "male": "Muškarci",
-            "view": "Prikaži:",
             "absolute": "Apsolutno",
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
@@ -206,7 +209,7 @@
             "doublingRateTitle": "Udio eksponencijalnog prirasta [u danima]",
             "inTwoWeeks": "U dva tjedna",
             "oneMonth": "Jedan mjesec",
-            "everageSouthKorea": "Prosjek u Južnoj Koreji zadnjih dana",
+            "averageSouthKorea": "Prosjek u Južnoj Koreji zadnjih dana",
             "inThreeWeeks": "U tri tjedna",
             "title": "Prirast potvrđenih slučajeva",
             "inOneWeek": "U tjedan dana",
@@ -277,7 +280,10 @@
             "allRegions": "Sve regije"
         },
         "regions": {
-            "title": "Potvrđeni slučajevi prema regiji"
+            "title": "Slučajevi prema regiji",
+            "deceased": "Umrli",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "activeCases": "Aktivni slučajevi"
         },
         "cases": {
             "active": "Aktivni",
@@ -593,8 +599,8 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Novo:",
-        "news002": "structura hospitaliziranih za svaku COVID-19 bolnicu."
+        "news001": "Broj potvrđenih slučajeva raste – #whatisgoingon?",
+        "news002": "Saznaj više na Medium …"
     },
     "timestamp": {
         "at": "na {{ date, HH:mm }}",

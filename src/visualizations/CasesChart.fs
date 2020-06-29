@@ -42,12 +42,12 @@ module Series =
         [ Deceased; Recovered;  ]
 
     let getSeriesInfo = function
-        | Deceased      -> "#666666",   "deceased"
-        | Recovered     -> "#8cd4b2",   "recovered"
-        | Active        -> "#d5c768",   "active"
-        | InHospital    -> "#de9a5a",   "hospitalized"
-        | Icu           -> "#d99a91",   "icu"
-        | Critical      -> "#bf5747",   "ventilator"
+        | Deceased      -> false, "#666666",   "deceased"
+        | Recovered     -> false, "#8cd4b2",   "recovered"
+        | Active        -> true,  "#d5c768",   "active"
+        | InHospital    -> true,  "#de9a5a",   "hospitalized"
+        | Icu           -> true,  "#d99a91",   "icu"
+        | Critical      -> true,  "#bf5747",   "ventilator"
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -111,9 +111,10 @@ let renderChartOptions (state : State) dispatch =
             | Icu           -> fun dp -> dp.StatePerTreatment.InICU
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
-        let color, seriesid = Series.getSeriesInfo series
+        let visible, color, seriesid = Series.getSeriesInfo series
         {|
             ``type`` = "column"
+            visible = visible
             color = color
             name = I18N.tt "charts.cases" seriesid
             data =

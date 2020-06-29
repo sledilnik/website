@@ -19,25 +19,17 @@ let datasetIdAndVersion =
 
 let (Url datasetUrl) =
     createRoutePublishedDatasetGetByIdSpecificVersion apiUrl datasetIdAndVersion
+
 let (Url dataUrl) =
     createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
-
-let createQuery (countries : string list) =
-    let countryMatch country =
-        ExactSearch
-            (Cast
-                 (QueryExpression.Column
-                      (QueryColumn.UserColumn "iso_code"),
-                      EdelweissData.Base.Types.TypeString),
-                 country)
-    { DataQuery.Default with
-        Condition = Some (Or (List.map countryMatch countries)) }
 
 type CountryIsoCode = string
 
 type DataPoint = {
     CountryCode : CountryIsoCode
     Date : string
+    NewCases : int
+    NewCasesPerMillion : float option
     TotalCases: int
     TotalCasesPerMillion : float option
     TotalDeaths: int
@@ -90,19 +82,18 @@ let floatOptionOfResult row column =
             | _ -> None
         | _ -> None
 
-let load countries msg =
+
+let load query msg =
     let mapRow row =
         {
             CountryCode = stringOfResult row "iso_code"
             Date = stringOfResult row "date"
+            NewCases = intOfDoubleResult row "new_cases"
+            NewCasesPerMillion = floatOptionOfResult row "new_cases_per_million"
             TotalCases = intOfDoubleResult row "total_cases"
-            TotalCasesPerMillion =
-              floatOptionOfResult
-                  row "total_cases_per_million"
+            TotalCasesPerMillion = floatOptionOfResult row "total_cases_per_million"
             TotalDeaths = intOfDoubleResult row "total_deaths"
-            TotalDeathsPerMillion =
-              floatOptionOfResult
-                  row "total_deaths_per_million"
+            TotalDeathsPerMillion = floatOptionOfResult row "total_deaths_per_million"
         }
 
     async {
@@ -122,9 +113,7 @@ let load countries msg =
                            (error.ToString()) |> Failure |> msg
             | Ok dataset ->
                 let! statusCode, response =
-                    Http.post dataUrl
-                        (createQuery countries
-                         |> EdelweissData.Thoth.Queries.DataQuery.toString)
+                    Http.post dataUrl (query |> EdelweissData.Thoth.Queries.DataQuery.toString)
 
                 match statusCode = 200 with
                 | false ->
@@ -140,7 +129,32 @@ let load countries msg =
                            "Napaka pri nalaganju OurWorldInData podatkov: %s"
                            (error.ToString()) |> Failure |> msg
                     | Ok data ->
-                        return
-                            data.Results |> List.map mapRow
-                            |> Success |> msg
+                        return data.Results |> List.map mapRow |> Success |> msg
     }
+
+let loadCountryComparison countries msg =
+
+    let query =
+        let countryMatch country =
+            ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
+        let countriesMatchCondition =
+            Or (List.map countryMatch countries)
+        { DataQuery.Default with
+            Condition = Some(countriesMatchCondition) }
+
+    load query msg
+
+
+let loadCountryIncidence countries fromDate msg =
+
+    let query =
+        let countryMatch country =
+            ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
+        let countriesMatchCondition =
+            Or (List.map countryMatch countries)
+        let dateCondition =
+            Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValueString fromDate))
+        { DataQuery.Default with
+            Condition = Some(And[countriesMatchCondition ; dateCondition]) }
+
+    load query msg
