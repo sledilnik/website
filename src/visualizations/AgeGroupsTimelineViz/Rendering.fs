@@ -9,40 +9,8 @@ open Browser
 open Highcharts
 open Types
 
-type Metric =
-    | HospitalStaff
-    | RestHomeStaff
-    | RestHomeOccupant
-    | OtherPeople
-    | AllConfirmed
-
-type MetricCfg = {
-    Metric : Metric
-    Color : string
-    Id : string
-}
-
-type Metrics = MetricCfg list
-
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
-
-module Metrics  =
-    let all = [
-        { Metric=AllConfirmed;      Color="#bda506"; Id="allConfirmed" }
-        { Metric=OtherPeople;       Color="#FFDBA3"; Id="otherPersons" }
-        { Metric=HospitalStaff;     Color="#73ccd5"; Id="hcStaff" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Id="rhStaff" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Id="rhOccupant" }
-    ]
-
-    let metricsToDisplay filter =
-        let without metricType =
-            all |> List.filter (fun metric -> metric.Metric <> metricType)
-
-        match filter with
-        | ShowAllConfirmed -> without OtherPeople
-        | ShowOthers -> without AllConfirmed
 
 type ChartType =
     | StackedBarNormal
@@ -220,30 +188,9 @@ let renderChartContainer state dispatch =
         ]
     ]
 
-let renderDisplaySelectors activeDisplayType dispatch =
-    let renderSelector (displayType : DisplayType) =
-        let active = displayType = activeDisplayType
-        Html.div [
-            prop.text (I18N.tt "charts.infections" displayType.Id)
-            prop.className [
-                true, "btn btn-sm metric-selector"
-                active, "metric-selector--selected selected" ]
-            if not active then prop.onClick (fun _ -> dispatch displayType)
-            if active then prop.style [ style.backgroundColor "#808080" ]
-          ]
-
-    Html.div [
-        prop.className "metrics-selectors"
-        availableDisplayTypes
-        |> Array.map renderSelector
-        |> prop.children
-    ]
-
-
 let render state dispatch =
     Html.div [
         renderChartContainer state dispatch
-        renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
     ]
 
 let renderChart (props : {| data : StatsData |}) =
