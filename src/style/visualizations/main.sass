@@ -286,19 +286,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     display: flex
     justify-content: space-between
     flex-wrap: wrap
-    padding: 5px 0 5px
+    padding: 10px 0px
 
     @include media-breakpoint-down(sm)
-      padding: 5px
+      padding: 10px 18px
 
     .chart-display-property-selector, .chart-data-interval-selector
       text-align: right
       color: $text-c
       font-size: 14px
+      margin: 0
 
       @include media-breakpoint-down(sm)
         text-align: left
-        margin: 0 $gap / 2
 
       .chart-display-property-selector__item
         display: inline-block
@@ -319,10 +319,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
           &:hover
             animation: none
-            
-    .chart-data-interval-selector .chart-display-property-selector__item:nth-child(1)
-      @include media-breakpoint-down(sm)
-        margin-left: 0
 
   .metrics-selectors
     display: flex
@@ -455,10 +451,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .filters__region
       width: 15rem
-
-    .chart-display-property-selector
-      @include media-breakpoint-down(sm)
-        margin-left: 0
 
     .municipalities
       display: flex
