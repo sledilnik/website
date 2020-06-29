@@ -477,7 +477,7 @@ let renderView (currentView : View) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.municipalities.view")
+            Html.text (I18N.t "charts.common.view")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
             renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
             renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
