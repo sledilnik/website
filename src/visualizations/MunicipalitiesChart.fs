@@ -112,7 +112,6 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         |> Seq.map (fun (municipalityKey, dp) ->
             let totals =
                 dp
-                |> Seq.skip ((Seq.length dp) - showMaxBars)
                 |> Seq.map (
                     fun dp -> {
                         Date = dp.Date
@@ -121,16 +120,17 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                         DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
+            let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList 
             let doublingTime =
                 dp
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
-            let activeCases = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
-            let maxActive = totals |> Seq.map (fun dp -> dp.ActiveCases) |> Seq.max
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
-            let lastChange = totals |> Seq.filter (fun p -> p.ConfirmedToDate = maxConfirmed) |> Seq.head
-            let dayBefore = totals |> Seq.skip (Seq.length totals - 2) |> Seq.tryHead |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
+            let lastChange = totals |> Seq.filter (fun dp -> dp.ConfirmedToDate = maxConfirmed) |> Seq.head
+            let activeCases = totalsShown |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
+            let maxActive = totalsShown |> Seq.map (fun dp -> dp.ActiveCases) |> Seq.max
+            let dayBefore = totalsShown |> Seq.skip (Seq.length totalsShown - 2) |> Seq.tryHead |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let newCases =
                 match dayBefore, maxConfirmed with
                 | Some before, Some last -> if last > before then Some (last - before) else None
@@ -146,7 +146,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               MaxConfirmedCases = maxConfirmed
               LastConfirmedCase = lastChange.Date
               DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
-              TotalsForDate = totals
+              TotalsForDate = totalsShown
             })
 
     let state =
