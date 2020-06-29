@@ -43,6 +43,11 @@ export default {
           text: this.$t('charts.metricsComparison.title'),
           dimensions: [1140, 780]
         },
+        "EuropeMap": {
+          value: "EuropeMap",
+          text: this.$t('charts.europe.title'),
+          dimensions: [1140, 780]
+        },
         "Cases": {
           value: "Cases",
           text: this.$t('charts.cases.title'),

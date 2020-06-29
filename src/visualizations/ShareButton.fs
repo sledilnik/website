@@ -21,6 +21,7 @@ let dropdown (viz: Visualization) =
             | Spread -> (1140, 630)
             | Regions -> (1140, 720)
             | Map -> (1140, 820)
+            | EuropeMap -> (1140, 780)
             | Municipalities -> (1140, 1150)
             | AgeGroups -> (1140, 720)
             // | Hospitals -> (1140, 1130)

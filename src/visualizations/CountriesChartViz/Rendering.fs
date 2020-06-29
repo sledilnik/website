@@ -26,7 +26,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
     { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "SVN"; "MNE"; "RKS"; "SRB" |]
+      CountriesCodes = [| "BIH"; "HRV"; "SVN"; "MNE"; "OWID_KOS"; "SRB" |]
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
@@ -75,7 +75,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             OwidDataState = newOwidDataState
             DisplayedCountriesSet = selectedSet
         },
-        Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
+        Cmd.OfAsync.result (Data.OurWorldInData.loadCountryComparison countriesCodes DataLoaded)
     | DataRequested ->
         let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
 
@@ -87,7 +87,7 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             | Current oldOwidData -> PreviousAndLoadingNew oldOwidData
 
         { state with OwidDataState = newOwidDataState },
-        Cmd.OfAsync.result (Data.OurWorldInData.load countriesCodes DataLoaded)
+        Cmd.OfAsync.result (Data.OurWorldInData.loadCountryComparison countriesCodes DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
     | XAxisTypeChanged newXAxisType ->
@@ -220,7 +220,6 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 href = "https://ourworldindata.org"
             |}
     |}
-
 
 let renderChartContainer state chartData =
     Html.div [

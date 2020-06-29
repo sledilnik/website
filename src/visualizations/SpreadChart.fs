@@ -79,7 +79,7 @@ let inline yAxisBase () =
 
 let inline legend title =
     {|
-        enabled = Some true
+        enabled = Highcharts.showExpGrowthFeatures
         title = {| text=title |}
         align = "left"
         verticalAlign = "middle"
