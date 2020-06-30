@@ -135,31 +135,7 @@ let renderIncidenceMap state geoJson owdData =
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
-        subtitle = pojo
-            {|
-                useHTML = true
-                text =
-                    sprintf """<a href="%s">%s: %s @ %s</a>"""
-                        "https://ourworldindata.org/coronavirus"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.t "charts.common.dsOWD")
-                        (I18N.tOptions "days.date" {| date = owdDate |})
-                align = "right"
-                verticalAlign = "bottom"
-            |}
         series = [| series geoJson |]
-        legend = pojo
-            {|
-                enabled = true
-                title = {| text = null |}
-                align = "left"
-                verticalAlign = "bottom"
-                layout = "vertical"
-                floating = true
-                borderWidth = 1
-                backgroundColor = "white"
-                valueDecimals = 0
-            |}
         colorAxis = pojo
             {| dataClassColor = "category"
                dataClasses =
@@ -173,6 +149,30 @@ let renderIncidenceMap state geoJson owdData =
                     {| from = 1000 ; color = "#b10026" |}
                 |]
             |} |> pojo
+        legend = pojo
+            {|
+                enabled = true
+                title = {| text = null |}
+                align = "left"
+                verticalAlign = "bottom"
+                layout = "vertical"
+                floating = true
+                borderWidth = 1
+                backgroundColor = "white"
+                valueDecimals = 0
+            |}
+        credits = pojo
+            {|
+                enabled = true
+                text = sprintf "%s: %s @ %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsOWD")
+                        (I18N.tOptions "days.date" {| date = owdDate |})
+                mapTextFull = ""
+                mapText = ""
+                href = "https://ourworldindata.org/coronavirus"
+            |}
+
     |}
     |> Highcharts.map
 
@@ -224,9 +224,7 @@ let renderRestrictionsMap state geoJson =
         credits = pojo
             {|
                 enabled = true
-                text =
-                    sprintf """<a href="%s">%s %s @ %s</a>"""
-                        "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                text = sprintf "%s: %s @ %s"
                         (I18N.t "charts.common.dataSource")
                         (I18N.t "charts.common.dsNIJZ")
                         (I18N.tOptions "days.date" {| date = importedDate |})
