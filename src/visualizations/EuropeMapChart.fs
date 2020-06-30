@@ -142,10 +142,10 @@ let renderIncidenceMap state geoJson owdData =
                 [|
                     {| from = 0 ; color = "#ffffb2" |}
                     {| from = 10 ; color = "#fed976" |}
-                    {| from = 50 ; color = "#feb24c" |}
+                    {| from = 80 ; color = "#feb24c" |}
                     {| from = 100 ; color = "#fd8d3c" |}
-                    {| from = 250 ; color = "#fc4e2a" |}
-                    {| from = 500 ; color = "#e31a1c" |}
+                    {| from = 300 ; color = "#fc4e2a" |}
+                    {| from = 400 ; color = "#e31a1c" |}
                     {| from = 1000 ; color = "#b10026" |}
                 |]
             |} |> pojo
