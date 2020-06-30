@@ -275,6 +275,8 @@ let basicChartOptions
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
                 // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputPosition = pojo {| x = 0 |}
+                x = 0
                 inputBoxBorderColor = "#ced4da"
                 buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
                 buttons =
@@ -307,8 +309,8 @@ let basicChartOptions
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
-                                // legend = {| enabled = false |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                                rangeSelector = pojo {| x = 8 ; inputPosition = pojo {| x = -25 |} |}
                             |}
                     |} |]
             |}
@@ -323,10 +325,10 @@ let basicChartOptions
                     |}
             |}
 
-        credits = pojo 
-            {| 
+        credits = pojo
+            {|
                 enabled = true
-                text = 
+                text =
                     sprintf "%s: %s, %s"
                         (I18N.t "charts.common.dataSource")
                         (I18N.t "charts.common.dsNIJZ")
