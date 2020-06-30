@@ -281,8 +281,7 @@ let renderMap (state : State) =
                 {|
                     enabled = true
                     text =
-                        sprintf """<a href="%s">%s %s, %s</a>"""
-                            "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                        sprintf "%s %s, %s"
                             (I18N.t "charts.common.dataSource")
                             (I18N.t "charts.common.dsNIJZ")
                             (I18N.t "charts.common.dsMZ")

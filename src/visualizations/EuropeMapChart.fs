@@ -224,7 +224,7 @@ let renderRestrictionsMap state geoJson =
         credits = pojo
             {|
                 enabled = true
-                text = sprintf "%s: %s @ %s"
+                text = sprintf "%s %s @ %s"
                         (I18N.t "charts.common.dataSource")
                         (I18N.t "charts.common.dsNIJZ")
                         (I18N.tOptions "days.date" {| date = importedDate |})
