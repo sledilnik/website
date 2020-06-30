@@ -89,6 +89,10 @@
             "hospitalDeceasedShare": "Udio umrlih u bolnicama"
         },
         "common": {
+            "dataSource": "izvor podataka",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministarstvo za zdravlje",
+            "dsOWD": "Our World in Data",
             "numDateFormat": "%d. %m. %Y.",
             "all": "Sva",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
@@ -143,7 +147,6 @@
             "groupCriticalWorld": "Kritične države (svijet)",
             "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "dataSourceOWID": "izvor podataka: Our World In Data",
             "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",

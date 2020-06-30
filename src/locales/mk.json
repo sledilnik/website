@@ -308,7 +308,11 @@
             "zoom": "Период",
             "to": "-",
             "from": " ",
-            "dataSource": "извор на податоците: ИЈЗ, Министерство за Здравје"
+            "dataSource": "извор на податоците",
+            "dsNIJZ": "ИЈЗ",
+            "dsMZ": "Министерство за Здравје",
+            "dsOWD": "Our World in Data"
+
         },
         "municipalities": {
             "yesterday": "вчера",
@@ -401,7 +405,6 @@
             "daysFromFirstDeath": "Број на денови од првиот смртен случај",
             "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
             "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
-            "dataSourceOWID": "извор на податоците: Our World In Data",
             "title": "Споредба по држави"
         },
         "ageGroups": {

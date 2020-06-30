@@ -127,7 +127,10 @@
     },
     "charts": {
         "common": {
-            "dataSource": "data source: NIJZ, Ministry of Health",
+            "dataSource": "data source",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministry of Health",
+            "dsOWD": "Our World in Data",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
@@ -339,7 +342,6 @@
         },
         "countries": {
             "title": "Comparison by Country",
-            "dataSourceOWID": "data source: Our World In Data",
             "nrDeathsPerMillion": "Nr. deaths per 1 million people",
             "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
             "daysFromFirstDeath": "Nr. days since first death",
