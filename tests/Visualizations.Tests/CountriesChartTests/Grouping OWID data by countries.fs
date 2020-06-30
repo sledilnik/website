@@ -11,9 +11,9 @@ open Swensen.Unquote
 let ``Groups entries by countries``() =
     let entries =
         [
-            "SVN", "2020-04-29", 1, None, 2, Some 3.
-            "AUT", "2020-04-29", 2, Some 5., 3, Some 4.
-            "SVN", "2020-04-30", 3, None, 4, Some 5.
+            "SVN", System.DateTime(2020, 4, 29), 1, None, 2, Some 3.
+            "AUT", System.DateTime(2020, 4, 29), 2, Some 5., 3, Some 4.
+            "SVN", System.DateTime(2020, 4, 30), 3, None, 4, Some 5.
         ]
         |> List.map(fun (code, date, cases, casesPerM, deaths, deathsPerM) ->
             ( { CountryCode = code; Date = date

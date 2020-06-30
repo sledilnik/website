@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module EuropeMap
 
+open System
 open Feliz
 open Elmish
 open Feliz.ElmishComponents
@@ -44,7 +45,8 @@ let owdCountries = countries |> List.map (fun code -> if code = "RKS" then "OWID
 
 let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
 let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "RKS"; "PRT"; "ALB" ]
-let importedFrom = Map.ofList [ ("BIH", 8); ("BIH", 8); ("SRB", 7); ("SWE", 1); ("USA", 1); ]
+let importedFrom = Map.ofList [ ("BIH", 16); ("SRB", 13); ("RKS", 4); ("HRV", 2); ("KAZ", 1); ("SWE", 1); ("USA", 1); ]
+let importedDate = DateTime(2020,6,28)
 
 let loadGeoJson =
     async {
@@ -73,12 +75,20 @@ let update (msg : Msg) (state : State) : State * Cmd<Msg> =
         { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
         let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
-        let twoWeeksAgoString = sprintf "%d-%02d-%02d" twoWeeksAgo.Year twoWeeksAgo.Month twoWeeksAgo.Day
-        { state with OwdData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgoString OwdDataReceived)
+        { state with OwdData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
         { state with OwdData = result }, Cmd.none
     | ChartTypeChanged chartType ->
         { state with ChartType = chartType }, Cmd.none
+
+let getOwdDate (data : Data.OurWorldInData.DataPoint list) =
+    data
+    |> List.groupBy (fun dp -> dp.CountryCode)
+    |> List.map (fun (code, dps) ->
+        dps
+        |> List.map (fun dp -> dp.Date)
+        |> List.max)
+    |> List.max
 
 let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
     data
@@ -90,15 +100,17 @@ let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
             |> List.choose id
             |> List.sum
         let fixedCode = if code = "OWID_KOS" then "RKS" else code // hack for Kosovo code
-        {| code = fixedCode ; value = sum ; color = null ; dataLabels = {| enabled = false |}|} )
+        let country = I18N.tt "country" code
+        {| code = fixedCode ; country = country ; value = sum ; color = null ; dataLabels = {| enabled = false |}|} )
     |> List.toArray
 
 let renderIncidenceMap state geoJson owdData =
 
+    let owdDate = getOwdDate owdData
     let owdIncidence = calculateOwdIncidence owdData
 
-    let pointFormat = 
-        sprintf "%s: <b>{point.value}</b>"
+    let pointFormat =
+        sprintf "<b>{point.country}</b><br/>%s: <b>{point.value}</b>"
             (I18N.t "charts.europe.incidence1M")
 
     let series geoJson =
@@ -116,13 +128,26 @@ let renderIncidenceMap state geoJson owdData =
            tooltip = pojo
             {| distance = 50
                valueDecimals = 0
-               headerFormat = "<b>{point.key}</b><br>"
+               headerFormat = ""
                pointFormat = pointFormat |}
         |}
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
+        colorAxis = pojo
+            {| dataClassColor = "category"
+               dataClasses =
+                [|
+                    {| from = 0 ; color = "#ffffb2" |}
+                    {| from = 10 ; color = "#fed976" |}
+                    {| from = 100 ; color = "#feb24c" |}
+                    {| from = 160 ; color = "#fd8d3c" |}
+                    {| from = 320 ; color = "#fc4e2a" |}
+                    {| from = 400 ; color = "#e31a1c" |}
+                    {| from = 800 ; color = "#b10026" |}
+                |]
+            |} |> pojo
         legend = pojo
             {|
                 enabled = true
@@ -135,19 +160,18 @@ let renderIncidenceMap state geoJson owdData =
                 backgroundColor = "white"
                 valueDecimals = 0
             |}
-        colorAxis = pojo
-            {| dataClassColor = "category"
-               dataClasses =
-                [|
-                    {| from = 0 ; color = "#ffffb2" |}
-                    {| from = 10 ; color = "#fed976" |}
-                    {| from = 50 ; color = "#feb24c" |}
-                    {| from = 100 ; color = "#fd8d3c" |}
-                    {| from = 250 ; color = "#fc4e2a" |}
-                    {| from = 500 ; color = "#e31a1c" |}
-                    {| from = 1000 ; color = "#b10026" |}
-                |]
-            |} |> pojo
+        credits = pojo
+            {|
+                enabled = true
+                text = sprintf "%s: %s @ %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsOWD")
+                        (I18N.tOptions "days.date" {| date = owdDate |})
+                mapTextFull = ""
+                mapText = ""
+                href = "https://ourworldindata.org/coronavirus"
+            |}
+
     |}
     |> Highcharts.map
 
@@ -155,20 +179,21 @@ let renderIncidenceMap state geoJson owdData =
 let restrictedCountries =
     countries
     |> List.map (fun code ->
-        let rType, rColor = 
+        let rType, rColor =
             if code = "SVN" then I18N.t "charts.europe.statusNone", "#10829a"
             else if greenCountries.Contains(code) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
             else if redCountries.Contains(code) then I18N.t "charts.europe.statusRed", "#FF5348"
             else I18N.t "charts.europe.statusYellow", "#FEF65C"
         let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
         let label = imported > 0
-        {| code = code ; value = imported ; rType = rType ; color = rColor ;  dataLabels = {| enabled = label |} |} )
+        let country = I18N.tt "country" code
+        {| code = code ; country = country ; value = imported ; rType = rType ; color = rColor ; dataLabels = {| enabled = label |} |} )
     |> List.toArray
 
 let renderRestrictionsMap state geoJson =
 
-    let pointFormat = 
-        sprintf "%s: <b>{point.value}</b><br>%s: <b>{point.rType}</b>"
+    let pointFormat =
+        sprintf "<b>{point.country}</b><br/>%s: <b>{point.value}</b><br/>%s: <b>{point.rType}</b>"
             (I18N.t "charts.europe.importedCases")
             (I18N.t "charts.europe.countryStatus")
 
@@ -187,7 +212,7 @@ let renderRestrictionsMap state geoJson =
            tooltip = pojo
             {| distance = 50
                valueDecimals = 0
-               headerFormat = "<b>{point.key}</b><br>"
+               headerFormat = ""
                pointFormat = pointFormat |}
         |} |> pojo
 
@@ -195,13 +220,24 @@ let renderRestrictionsMap state geoJson =
         title = null
         series = [| series geoJson |]
         legend = pojo {| enabled = false |}
-    |} 
+        credits = pojo
+            {|
+                enabled = true
+                text = sprintf "%s: %s @ %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.tOptions "days.date" {| date = importedDate |})
+                mapTextFull = ""
+                mapText = ""
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+            |}
+    |}
     |> Highcharts.map
 
 let renderMap state geoJson owdData =
-    match state.ChartType with 
+    match state.ChartType with
     | TwoWeekIncidence -> renderIncidenceMap state geoJson owdData
-    | Restrictions -> renderRestrictionsMap state geoJson 
+    | Restrictions -> renderRestrictionsMap state geoJson
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     let renderChartSelector (chartSelector: ChartType) =
@@ -212,18 +248,18 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
             prop.text (chartSelector.ToString())
         ]
 
-    let chartTypeSelectors =
-        [ Restrictions; TwoWeekIncidence ]
-        |> List.map renderChartSelector
-
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children ( chartTypeSelectors )
+        prop.children [
+            Html.text (I18N.t "charts.common.view")
+            renderChartSelector Restrictions
+            renderChartSelector TwoWeekIncidence
+        ]
     ]
 
 
 let render (state : State) dispatch =
-   
+
     let chart =
         match state.GeoJson, state.OwdData with
         | Success geoJson, Success owdData -> renderMap state geoJson owdData
