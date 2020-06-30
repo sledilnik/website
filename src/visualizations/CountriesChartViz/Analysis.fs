@@ -22,15 +22,7 @@ type CountriesData = Map<CountryIsoCode, CountryData>
 let groupEntriesByCountries (entries: DataPoint list): CountriesData =
 
     let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
-        let dateStr = entryRaw.Date
-        let dateWithTime = DateTime.Parse(dateStr)
-        let date = DateTime
-                    (dateWithTime.Year,
-                     dateWithTime.Month,
-                     dateWithTime.Day,
-                     0, 0, 0)
-
-        { Date = date
+        { Date = entryRaw.Date
           TotalCases = float entryRaw.TotalCases
           TotalCasesPerMillion =
               entryRaw.TotalCasesPerMillion

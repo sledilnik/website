@@ -75,8 +75,7 @@ let update (msg : Msg) (state : State) : State * Cmd<Msg> =
         { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
         let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
-        let twoWeeksAgoString = sprintf "%d-%02d-%02d" twoWeeksAgo.Year twoWeeksAgo.Month twoWeeksAgo.Day
-        { state with OwdData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgoString OwdDataReceived)
+        { state with OwdData = Loading }, Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
         { state with OwdData = result }, Cmd.none
     | ChartTypeChanged chartType ->
