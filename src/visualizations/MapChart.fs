@@ -281,7 +281,7 @@ let renderMap (state : State) =
                 {|
                     enabled = true
                     text =
-                        sprintf "%s %s, %s"
+                        sprintf "%s: %s, %s"
                             (I18N.t "charts.common.dataSource")
                             (I18N.t "charts.common.dsNIJZ")
                             (I18N.t "charts.common.dsMZ")

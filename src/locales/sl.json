@@ -319,7 +319,7 @@
     },
     "charts": {
         "common": {
-            "dataSource": "vir podatkov:",
+            "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsOWD": "Our World in Data",
