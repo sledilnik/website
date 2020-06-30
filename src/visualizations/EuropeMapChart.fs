@@ -44,7 +44,7 @@ let owdCountries = countries |> List.map (fun code -> if code = "RKS" then "OWID
 
 let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
 let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "RKS"; "PRT"; "ALB" ]
-let importedFrom = Map.ofList [ ("BIH", 8); ("BIH", 8); ("SRB", 7); ("SWE", 1); ("USA", 1); ]
+let importedFrom = Map.ofList [ ("BIH", 16); ("SRB", 13); ("RKS", 4); ("HRV", 2); ("KAZ", 1); ("SWE", 1); ("USA", 1); ]
 
 let loadGeoJson =
     async {
