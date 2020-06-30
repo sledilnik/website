@@ -106,7 +106,7 @@ let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
 
 let renderIncidenceMap state geoJson owdData =
 
-    let owdDate = DateTime.Parse (getOwdDate owdData)
+    let owdDate = getOwdDate owdData
     let owdIncidence = calculateOwdIncidence owdData
 
     let pointFormat =
