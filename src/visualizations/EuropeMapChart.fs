@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module EuropeMap
 
+open System
 open Feliz
 open Elmish
 open Feliz.ElmishComponents
@@ -45,6 +46,7 @@ let owdCountries = countries |> List.map (fun code -> if code = "RKS" then "OWID
 let greenCountries = Set.ofList [ "AUT"; "CYP"; "CZE"; "DNK"; "EST"; "FIN"; "FRA"; "GRC"; "HRV"; "IRL"; "ISL"; "ITA"; "LVA"; "LIE"; "LTU"; "HUN"; "MLT"; "DEU"; "NOR"; "SVK"; "ESP"; "CHE" ]
 let redCountries = Set.ofList [ "QAT"; "BHR"; "CHL"; "KWT"; "PER"; "ARM"; "DJI"; "OMN"; "BRA"; "PAN"; "BLR"; "AND"; "SGP"; "SWE"; "MDV"; "STP"; "ARE"; "USA"; "SAU"; "RUS"; "MDA"; "GIB"; "BOL"; "PRI"; "GAB"; "CYM"; "DOM"; "ZAF"; "IRN"; "GBR"; "MKD"; "BIH"; "SRB"; "RKS"; "PRT"; "ALB" ]
 let importedFrom = Map.ofList [ ("BIH", 16); ("SRB", 13); ("RKS", 4); ("HRV", 2); ("KAZ", 1); ("SWE", 1); ("USA", 1); ]
+let importedDate = DateTime(2020,6,28)
 
 let loadGeoJson =
     async {
@@ -79,6 +81,15 @@ let update (msg : Msg) (state : State) : State * Cmd<Msg> =
     | ChartTypeChanged chartType ->
         { state with ChartType = chartType }, Cmd.none
 
+let getOwdDate (data : Data.OurWorldInData.DataPoint list) =
+    data
+    |> List.groupBy (fun dp -> dp.CountryCode)
+    |> List.map (fun (code, dps) ->
+        dps
+        |> List.map (fun dp -> dp.Date)
+        |> List.max)
+    |> List.max
+
 let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
     data
     |> List.groupBy (fun dp -> dp.CountryCode)
@@ -95,6 +106,7 @@ let calculateOwdIncidence (data : Data.OurWorldInData.DataPoint list) =
 
 let renderIncidenceMap state geoJson owdData =
 
+    let owdDate = getOwdDate owdData
     let owdIncidence = calculateOwdIncidence owdData
 
     let pointFormat =
@@ -123,6 +135,19 @@ let renderIncidenceMap state geoJson owdData =
     {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
         title = null
         series = [| series geoJson |]
+        colorAxis = pojo
+            {| dataClassColor = "category"
+               dataClasses =
+                [|
+                    {| from = 0 ; color = "#ffffb2" |}
+                    {| from = 10 ; color = "#fed976" |}
+                    {| from = 100 ; color = "#feb24c" |}
+                    {| from = 160 ; color = "#fd8d3c" |}
+                    {| from = 320 ; color = "#fc4e2a" |}
+                    {| from = 400 ; color = "#e31a1c" |}
+                    {| from = 800 ; color = "#b10026" |}
+                |]
+            |} |> pojo
         legend = pojo
             {|
                 enabled = true
@@ -135,19 +160,18 @@ let renderIncidenceMap state geoJson owdData =
                 backgroundColor = "white"
                 valueDecimals = 0
             |}
-        colorAxis = pojo
-            {| dataClassColor = "category"
-               dataClasses =
-                [|
-                    {| from = 0 ; color = "#ffffb2" |}
-                    {| from = 10 ; color = "#fed976" |}
-                    {| from = 50 ; color = "#feb24c" |}
-                    {| from = 100 ; color = "#fd8d3c" |}
-                    {| from = 250 ; color = "#fc4e2a" |}
-                    {| from = 500 ; color = "#e31a1c" |}
-                    {| from = 1000 ; color = "#b10026" |}
-                |]
-            |} |> pojo
+        credits = pojo
+            {|
+                enabled = true
+                text = sprintf "%s: %s @ %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsOWD")
+                        (I18N.tOptions "days.date" {| date = owdDate |})
+                mapTextFull = ""
+                mapText = ""
+                href = "https://ourworldindata.org/coronavirus"
+            |}
+
     |}
     |> Highcharts.map
 
@@ -196,6 +220,17 @@ let renderRestrictionsMap state geoJson =
         title = null
         series = [| series geoJson |]
         legend = pojo {| enabled = false |}
+        credits = pojo
+            {|
+                enabled = true
+                text = sprintf "%s: %s @ %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.tOptions "days.date" {| date = importedDate |})
+                mapTextFull = ""
+                mapText = ""
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+            |}
     |}
     |> Highcharts.map
 

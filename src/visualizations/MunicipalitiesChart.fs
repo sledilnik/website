@@ -120,7 +120,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                         DeceasedToDate = dp.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
-            let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList 
+            let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
             let doublingTime =
                 dp
                 |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
@@ -505,6 +505,18 @@ let render (state : State) dispatch =
                 prop.className "municipalities"
                 prop.children renderedMunicipalities ]
             (if showMore then renderShowMore state.ShowAll dispatch else Html.none)
+            Html.div [
+                prop.className "credits"
+                prop.children [
+                    Html.a [
+                        prop.href "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                        prop.text (sprintf "%s: %s, %s"
+                            (I18N.t "charts.common.dataSource")
+                            (I18N.t "charts.common.dsNIJZ")
+                            (I18N.t "charts.common.dsMZ"))
+                    ]
+                ]
+            ]
         ]
     ]
 

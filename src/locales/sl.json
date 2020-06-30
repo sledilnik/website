@@ -319,7 +319,10 @@
     },
     "charts": {
         "common": {
-            "dataSource": "vir podatkov: NIJZ, Ministrstvo za zdravje",
+            "dataSource": "vir podatkov",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministrstvo za zdravje",
+            "dsOWD": "Our World in Data",
             "loading": "Nalagam podatke…",
             "from": " ",
             "to": "-",
@@ -573,8 +576,7 @@
             "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
             "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
             "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
-            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev",
-            "dataSourceOWID": "vir podatkov: Our World In Data"
+            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev"
         }
     },
     "footer": {

@@ -55,7 +55,6 @@
             "daysFromOneDeathPerMillion": "Nr. i ditëve që nga rasti i parë i vdekjes në 1 milion banorë",
             "daysFromFirstDeath": "Nr. i ditëve që nga rasti i parë i vdekjes",
             "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
-            "dataSourceOWID": "burim i të dhënave: Our World In Data",
             "title": "Krahasim sipas shtetit"
         },
         "ageGroups": {
@@ -245,7 +244,10 @@
             "x_months_plural": "{{ count }}m",
             "thousandsSep": " ",
             "from": " ",
-            "dataSource": "burim i të dhënave: ISHP, Ministria e shëndetësisë"
+            "dataSource": "burim i të dhënave",
+            "dsNIJZ": "ISHP",
+            "dsMZ": "Ministria e shëndetësisë",
+            "dsOWD": "Our World in Data"
         },
         "europe": {
             "restrictions": "Kufizimet dhe rastet e importuara",
