@@ -65,7 +65,7 @@ let render (state: State) (_: Msg -> unit) =
         [
           { VisualizationType = AgeGroupsTimeline
             ClassName = "age-groups-trends-chart"
-            Label = I18N.t "charts.ageGroupsTrends.title"
+            Label = I18N.t "charts.ageGroupsTimeline.title"
             Explicit = false
             Renderer =
                 fun state ->
@@ -74,7 +74,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        lazyView AgeGroupsTimelineChart.renderChart
+                        lazyView AgeGroupsTimelineViz.Rendering.renderChart
                             {| data = data |} }
           { VisualizationType = Hospitals
             ClassName = "hospitals-chart"

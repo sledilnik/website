@@ -1,9 +1,12 @@
 ﻿module AgeGroupsTimelineTests.TestHelpers
 
-open System
 open Types
 
 let buildAgeGroups(): AgeGroupsList = []
+
+let groupKey groupIndex =
+    { AgeFrom = groupIndex * 10 |> Some
+      AgeTo = groupIndex * 10 + 1 |> Some }
 
 let group
     groupIndex (male: int option) (female: int option): AgeGroup =
@@ -14,9 +17,7 @@ let group
         | None, Some female -> Some female
         | None, None -> None
 
-    { GroupKey =
-        { AgeFrom = groupIndex * 10 |> Some
-          AgeTo = groupIndex * 10 + 1 |> Some }
+    { GroupKey = groupKey groupIndex
       Male = male; Female = female; All = sum
     }
 

@@ -1,5 +1,6 @@
 ﻿module AgeGroupsTimelineViz.Analysis
 
+open System
 open System.Collections.Generic
 open Types
 
@@ -46,3 +47,22 @@ let calcCasesByAgeForDay
         // for each age group of currentDay find the group in prevDay
         // and calculate the difference
         |> List.map (fun ageGroup -> calcAgeGroupDiff prevDayGroups ageGroup)
+
+let calculateCasesByAgeTimeline
+    (totalCasesByAgeGroups: (DateTime * AgeGroupsList) list)
+    : CasesByAgeGroupsTimeline =
+
+    None :: (totalCasesByAgeGroups |> List.map Some)
+    |> List.pairwise
+    |> List.map
+           (fun (prevDayRecord, currentDayRecord) ->
+                match prevDayRecord, currentDayRecord with
+                | Some (_, prevDay), Some (date, currentDay) ->
+                    { Date = date
+                      Cases =
+                          calcCasesByAgeForDay (Some prevDay) currentDay }
+                | None, Some (date, currentDay) ->
+                    { Date = date
+                      Cases = calcCasesByAgeForDay None currentDay }
+                | _ -> invalidOp "BUG: this should never happen"
+            )

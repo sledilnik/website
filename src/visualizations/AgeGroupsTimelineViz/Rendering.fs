@@ -1,6 +1,9 @@
 [<RequireQualifiedAccess>]
-module AgeGroupsTimelineChart
+module AgeGroupsTimelineViz.Rendering
 
+open Analysis
+open Fable.Core
+open Synthesis
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -12,21 +15,12 @@ open Types
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
 
-type ChartType =
-    | StackedBarNormal
-    | StackedBarPercent
-
 type DisplayType = {
     Id: string
-    ChartType: ChartType
-    ShowPhases: bool
 }
 
 let availableDisplayTypes: DisplayType array = [|
-    {   Id = "all";
-        ChartType = StackedBarNormal
-        ShowPhases = false
-    }
+    {   Id = "all"; }
 |]
 
 type State = {
@@ -56,74 +50,48 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderChartOptions state dispatch =
 
-    let xAxisPoint (dp: StatsDataPoint) = dp.Date
-
-    let metricDataGenerator mc : (StatsDataPoint -> int option) =
-        let metricFunc =
-            match mc.Metric with
-            | HospitalStaff -> fun pt -> pt.HospitalEmployeePositiveTestsToDate
-            | RestHomeStaff -> fun pt -> pt.RestHomeEmployeePositiveTestsToDate
-            | RestHomeOccupant -> fun pt -> pt.RestHomeOccupantPositiveTestsToDate
-            | OtherPeople -> fun pt -> pt.UnclassifiedPositiveTestsToDate
-            | AllConfirmed -> fun pt -> pt.Cases.ConfirmedToDate
-
-        fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
-
-    /// <summary>
-    /// Calculates running totals for a given metric.
-    /// </summary>
-    let calcRunningTotals metric =
-        let pointData = metricDataGenerator metric
-
-        let skipLeadingMissing data =
-            data |> List.skipWhile (fun (_,value: 'T option) -> value.IsNone)
-
-        let skipTrailingMissing data =
-            data
-            |> List.rev
-            |> skipLeadingMissing
-            |> List.rev
-
+    // map state data into a list needed for calculateCasesByAgeTimeline
+    let totalCasesByAgeGroups =
         state.Data
-        |> List.map (fun dp -> ((xAxisPoint dp |> jsTime12h), pointData dp))
-        |> skipLeadingMissing
-        |> skipTrailingMissing
-        |> Seq.toArray
+        |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
 
-    let toFloatValues (series: DayValueIntMaybe[]) =
-        series
-        |> Array.map (fun (date, value) ->
-            (date, value |> Option.defaultValue 0 |> float))
+    // calculate complete merged timeline
+    let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
 
-    let allSeries = [
-        let allMetricsData =
-            invalidOp "todo igor"
-//            Metrics.metricsToDisplay state.DisplayType.ShowAllOrOthers
-//            |> Seq.map(fun metric ->
-//                let data = calcRunningTotals metric |> toFloatValues
-//                (metric, data))
+    // get keys of all age groups
+    let allGroupsKeys = listAgeGroups timeline
 
-        for (metric, metricData) in allMetricsData do
-            yield pojo
-                {|
-                visible = true
-                color = metric.Color
-                name = I18N.tt "charts.infections" metric.Id
-                data = metricData
-                marker = pojo {| enabled = false |}
-                |}
+    let mapPoint (pointData: CasesInAgeGroupForDay) =
+        let date = pointData.Date
+        let cases = pointData.Cases
 
-        let allDates =
-            allMetricsData
-            |> Seq.map (fun (_, metricData) ->
-                metricData |> Seq.map (fun (date, _) -> date))
-            |> Seq.concat
-        let startDate = allDates |> Seq.min
-        let endDate = allDates |> Seq.max |> Some
+        pojo {|
+             x = date |> jsTime12h :> obj
+             y = cases
+             date = I18N.tOptions "days.longerDate" {| date = date |}
+        |}
 
-        if state.DisplayType.ShowPhases then
-            yield addContainmentMeasuresFlags startDate endDate |> pojo
-    ]
+    let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
+        groupTimeline |> List.map mapPoint
+
+    // generate all series
+    let allSeries =
+        allGroupsKeys
+        |> List.map (fun ageGroupKey ->
+            let points =
+                timeline
+                |> extractTimelineForAgeGroup ageGroupKey
+                |> mapAllPoints
+
+            pojo {|
+                 visible = true
+                 name = ageGroupKey.Label
+                 data = points
+            |}
+        )
+
+    let msg = sprintf "allSeries.Length = %d" allSeries.Length
+    JS.console.log msg
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -137,46 +105,28 @@ let renderChartOptions state dispatch =
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    let axisWithPhases() = baseOptions.xAxis
+    LowCharts.prepareChart()
 
-    let axisWithWithoutPhases() =
-        baseOptions.xAxis
-        |> Array.map (fun ax ->
-        {| ax with
-            plotBands = shadedWeekendPlotBands
-            plotLines = [||]
-        |})
-
-    {| baseOptions with
-        chart = pojo
-            {|
-                animation = false
-                ``type`` =
-                    match state.DisplayType.ChartType with
-                    | StackedBarNormal -> "column"
-                    | StackedBarPercent -> "column"
-                zoomType = "x"
-                className = className
-                events = pojo {| load = onLoadEvent(className) |}
-            |}
-        title = pojo {| text = None |}
-        series = List.toArray allSeries
-        xAxis =
-            if state.DisplayType.ShowPhases then axisWithPhases()
-            else axisWithWithoutPhases()
-        yAxis =     // need to hide negative label for addContainmentMeasuresFlags
-            let showFirstLabel = not state.DisplayType.ShowPhases
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
-
-        plotOptions = pojo
-            {|
-                series =
-                    match state.DisplayType.ChartType with
-                    | StackedBarNormal -> pojo {| stacking = "normal" |}
-                    | StackedBarPercent -> pojo {| stacking = "percent" |}
-            |}
-        legend = pojo {| enabled = true ; layout = "horizontal" |}
-    |}
+//    {| baseOptions with
+//        chart = pojo
+//            {|
+//                animation = false
+//                ``type`` = "column"
+//                zoomType = "x"
+//                className = className
+//                events = pojo {| load = onLoadEvent(className) |}
+//            |}
+//        title = pojo {| text = None |}
+//        series = List.toArray allSeries
+//        xAxis = baseOptions.xAxis
+//        yAxis = baseOptions.yAxis
+//
+//        plotOptions = pojo
+//            {|
+//                series = pojo {| stacking = "normal" |}
+//            |}
+//        legend = pojo {| enabled = true ; layout = "horizontal" |}
+//    |}
 
 let renderChartContainer state dispatch =
     Html.div [
@@ -195,4 +145,4 @@ let render state dispatch =
 
 let renderChart (props : {| data : StatsData |}) =
     React.elmishComponent
-        ("AgeGroupsTrendsChart", init props.data, update, render)
+        ("AgeGroupsTimelineViz/Chart", init props.data, update, render)

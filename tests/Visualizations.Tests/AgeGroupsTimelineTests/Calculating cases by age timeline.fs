@@ -3,43 +3,8 @@
 open System
 open AgeGroupsTimelineViz.Analysis
 open TestHelpers
-open Types
 open Xunit
 open Swensen.Unquote
-
-//type StatsDataPoint =
-//    { DayFromStart : int
-//      Date : System.DateTime
-//      Phase : string
-//      Tests : Tests
-//      Cases : Cases
-//      StatePerTreatment : Treatment
-//      StatePerAgeToDate : AgeGroupsList
-//      DeceasedPerAgeToDate : AgeGroupsList
-//      HospitalEmployeePositiveTestsToDate : int option
-//      RestHomeEmployeePositiveTestsToDate : int option
-//      RestHomeOccupantPositiveTestsToDate : int option
-//      UnclassifiedPositiveTestsToDate : int option
-//    }
-
-let calculateCasesByAgeTimeline
-    (totalCasesByAgeGroups: (DateTime * AgeGroupsList) list)
-    : CasesByAgeGroupsTimeline =
-
-    None :: (totalCasesByAgeGroups |> List.map Some)
-    |> List.pairwise
-    |> List.map
-           (fun (prevDayRecord, currentDayRecord) ->
-                match prevDayRecord, currentDayRecord with
-                | Some (_, prevDay), Some (date, currentDay) ->
-                    { Date = date
-                      Cases =
-                          calcCasesByAgeForDay (Some prevDay) currentDay }
-                | None, Some (date, currentDay) ->
-                    { Date = date
-                      Cases = calcCasesByAgeForDay None currentDay }
-                | _ -> invalidOp "BUG: this should never happen"
-            )
 
 [<Fact>]
 let ``Can calculate timeline``() =
@@ -77,8 +42,8 @@ let ``Can calculate timeline``() =
         |> withGroup (group 1 (Some 3) (Some 10))
 
     let expectedTimeline =
-          [ { Date = baseDate; Cases = onDay0 };
-              { Date = baseDate.AddDays 1.; Cases = onDay1 };
-              { Date = baseDate.AddDays 2.; Cases = onDay2 } ]
+          [ { Date = baseDate; Cases = onDay0 }
+            { Date = baseDate.AddDays 1.; Cases = onDay1 }
+            { Date = baseDate.AddDays 2.; Cases = onDay2 } ]
 
     test <@ calculateCasesByAgeTimeline sourceData = expectedTimeline @>
