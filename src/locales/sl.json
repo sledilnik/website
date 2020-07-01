@@ -564,6 +564,9 @@
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
             "populationTotal": "Prebivalcev skupaj"
         },
+        "ageGroupsTimeline": {
+            "title": "Potrjeni primeri po starostnih skupinah"
+        },
         "countries": {
             "title": "Primerjava po državah",
             "groupNeighbouring": "okolica",

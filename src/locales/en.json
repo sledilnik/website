@@ -340,6 +340,9 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
         },
+        "ageGroupsTimeline": {
+            "title": "Confirmed Cases by Age Groups"
+        },
         "countries": {
             "title": "Comparison by Country",
             "nrDeathsPerMillion": "Nr. deaths per 1 million people",

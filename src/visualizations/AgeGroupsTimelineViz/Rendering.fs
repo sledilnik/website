@@ -2,7 +2,6 @@
 module AgeGroupsTimelineViz.Rendering
 
 open Analysis
-open Fable.Core
 open Synthesis
 open Elmish
 open Feliz
@@ -62,14 +61,10 @@ let renderChartOptions state dispatch =
     let allGroupsKeys = listAgeGroups timeline
 
     let colorOfAgeGroup ageGroupIndex =
-//        let (minColorR, minColorG, minColorB) = (0xff, 0xc0, 0xc0)
-        let minColor = (0x85, 0xe2, 0x85) //85E285
-//        let (maxColorR, maxColorG, maxColorB) = (0xb3, 0x3b, 0x3b) // 0BBC0B
-        let maxColor = (0xad, 0x7a, 0x40) // AD7A40
-
-        let mixRatio = (float ageGroupIndex)
-                        / (float allGroupsKeys.Length)
-        Utils.mixColors minColor maxColor mixRatio
+        let colors =
+            [| "#FFEEBA"; "#FFDA6B";"#E9B825";"#AEEFDB";"#52C4A2";"#33AB87"
+               "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
+        colors.[ageGroupIndex]
 
     let mapPoint (pointData: CasesInAgeGroupForDay) =
         let date = pointData.Date
