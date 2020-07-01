@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Nov zemljevid:",
-        "news002": "Stanje COVID-19 v Evropi - omejitve, uvoženi primeri..."
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik je dobil mlajšega brata..."
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -286,6 +286,10 @@
         "quarantineStrict": {
             "title": "Karantena",
             "description": "Poostrena obvezna 14-dnevna karantena za kritične države<br>(rdeči seznam BIH, Srbijo, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Do 50",
+            "description": "Prepoved zbiranja na javnih mestih nad 50 ljudi, z dovoljenjem NIJZ do 500 ljudi"
         }
     },
     "phase": {

@@ -3,8 +3,7 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="#europe-chart"
-      v-scroll-to="{ el: '#europe-chart', offset: -115 }"
+      href="https://medium.com/sledilnik/sledilnik-je-dobil-brata-treker-mk-aa8150a6e0c4"
     >
       <div class="notice">
         <span>
