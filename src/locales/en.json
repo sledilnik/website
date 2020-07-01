@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New map:",
-        "news002": "COVID-19 Situation in Europe - restrictions, imported cases..."
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik gets younger brother..."
     },
     "infocard": {
         "tests": "Tests Today",
@@ -127,7 +127,10 @@
     },
     "charts": {
         "common": {
-            "dataSource": "data source: NIJZ, Ministry of Health",
+            "dataSource": "data source",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministry of Health",
+            "dsOWD": "Our World in Data",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
@@ -339,7 +342,6 @@
         },
         "countries": {
             "title": "Comparison by Country",
-            "dataSourceOWID": "data source: Our World In Data",
             "nrDeathsPerMillion": "Nr. deaths per 1 million people",
             "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
             "daysFromFirstDeath": "Nr. days since first death",
@@ -535,6 +537,10 @@
         "quarantineStrict": {
             "title": "Quarantine",
             "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Up to 50",
+            "description": "Gathering up to 50 people, up to 500 if approved by NIJZ"
         }
     },
     "days": {

@@ -291,7 +291,7 @@ function renderMap(options) {
         highcharts: Highcharts,
         constructorType: "mapChart",
         containerProps: {style: {height:"100%"}},
-        options: {...options, credits: {enabled: false}}
+        options: {...options }
     }, null);
 }
 

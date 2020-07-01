@@ -338,7 +338,7 @@ let renderChartOptions
             {| series = pojo
                 {| stacking = "normal" |}
             |}
-        credits = pojo {| enabled = false |}
+        credits = Highcharts.defaultCredits
         tooltip = pojo
             {| formatter = fun () ->
                  let sex = jsThis?series?name
