@@ -4,7 +4,7 @@ open Browser
 
 open Highcharts
 
-let prepareChart() =
+let prepareChart series =
     let chart =
             pojo {|
                  ``type`` = "bar"
@@ -13,23 +13,17 @@ let prepareChart() =
     let title = pojo {| text = "Historic World Population by Region" |}
 
     let xAxis =
-        pojo {|
+        [| {|
              categories = [|"Africa"; "America"; "Asia"; "Europe"; "Oceania"|]
-        |}
-    let yAxis = pojo {| |}
+        |} |]
+    let yAxis = [| {| |} |]
 
-    let series =
-        [|
-            pojo {|
-                 name = "Year 1800"
-                 data = [107, 31, 635, 203, 2]
-            |}
-        |]
-
-    pojo {|
-         chart = chart
-         title = title
-         xAxis = xAxis
-         yAxis = yAxis
+    {|
+         chart = pojo
+                {|
+                ``type`` = "bar"
+                |}
+//         xAxis = xAxis
+//         yAxis = yAxis
          series = series
     |}

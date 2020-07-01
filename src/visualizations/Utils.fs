@@ -95,7 +95,7 @@ let renderLoading =
     let loadingLabel = I18N.t "charts.common.loading"
     Html.div [
         prop.className "loader"
-        prop.text loadingLabel 
+        prop.text loadingLabel
     ]
 
 let renderErrorLoading (error : string) =
@@ -125,6 +125,28 @@ let transliterateCSZ (str : string) =
         .Replace("č",  "c")
         .Replace("š",  "s")
         .Replace("ž",  "z")
+
+let mixColors
+    (minColorR, minColorG, minColorB)
+    (maxColorR, maxColorG, maxColorB)
+    mixRatio =
+
+    let colorR =
+        ((maxColorR - minColorR) |> float)
+        * mixRatio + (float minColorR)
+        |> round |> int
+    let colorG =
+        ((maxColorG - minColorG) |> float)
+        * mixRatio + (float minColorG)
+        |> round |> int
+    let colorB =
+        ((maxColorB - minColorB) |> float)
+        * mixRatio + (float minColorB)
+        |> round |> int
+
+    "#" + colorR.ToString("X2")
+        + colorG.ToString("X2")
+        + colorB.ToString("X2")
 
 module Dictionaries =
 

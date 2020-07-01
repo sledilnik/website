@@ -61,6 +61,16 @@ let renderChartOptions state dispatch =
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
 
+    let colorOfAgeGroup ageGroupIndex =
+//        let (minColorR, minColorG, minColorB) = (0xff, 0xc0, 0xc0)
+        let minColor = (0x85, 0xe2, 0x85) //85E285
+//        let (maxColorR, maxColorG, maxColorB) = (0xb3, 0x3b, 0x3b) // 0BBC0B
+        let maxColor = (0xad, 0x7a, 0x40) // AD7A40
+
+        let mixRatio = (float ageGroupIndex)
+                        / (float allGroupsKeys.Length)
+        Utils.mixColors minColor maxColor mixRatio
+
     let mapPoint (pointData: CasesInAgeGroupForDay) =
         let date = pointData.Date
         let cases = pointData.Cases
@@ -72,12 +82,12 @@ let renderChartOptions state dispatch =
         |}
 
     let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        groupTimeline |> List.map mapPoint
+        groupTimeline |> List.map mapPoint |> List.toArray
 
     // generate all series
     let allSeries =
         allGroupsKeys
-        |> List.map (fun ageGroupKey ->
+        |> List.mapi (fun index ageGroupKey ->
             let points =
                 timeline
                 |> extractTimelineForAgeGroup ageGroupKey
@@ -86,12 +96,11 @@ let renderChartOptions state dispatch =
             pojo {|
                  visible = true
                  name = ageGroupKey.Label
+                 color = colorOfAgeGroup index
                  data = points
             |}
         )
-
-    let msg = sprintf "allSeries.Length = %d" allSeries.Length
-    JS.console.log msg
+        |> List.toArray
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -105,28 +114,31 @@ let renderChartOptions state dispatch =
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    LowCharts.prepareChart()
+    {| baseOptions with
+        chart = pojo
+            {|
+                animation = false
+                ``type`` = "column"
+                zoomType = "x"
+                className = className
+                events = pojo {| load = onLoadEvent(className) |}
+            |}
+        title = pojo {| text = None |}
+        series = allSeries
+        xAxis = baseOptions.xAxis
+        yAxis = baseOptions.yAxis
 
-//    {| baseOptions with
-//        chart = pojo
-//            {|
-//                animation = false
-//                ``type`` = "column"
-//                zoomType = "x"
-//                className = className
-//                events = pojo {| load = onLoadEvent(className) |}
-//            |}
-//        title = pojo {| text = None |}
-//        series = List.toArray allSeries
-//        xAxis = baseOptions.xAxis
-//        yAxis = baseOptions.yAxis
-//
-//        plotOptions = pojo
-//            {|
-//                series = pojo {| stacking = "normal" |}
-//            |}
-//        legend = pojo {| enabled = true ; layout = "horizontal" |}
-//    |}
+        plotOptions = pojo
+            {|
+                column = pojo
+                        {|
+                          groupPadding = 0
+                          pointPadding = 0
+                          borderWidth = 0 |}
+                series = pojo {| stacking = "normal" |}
+            |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+    |}
 
 let renderChartContainer state dispatch =
     Html.div [
