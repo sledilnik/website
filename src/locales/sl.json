@@ -358,7 +358,9 @@
             "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
-            "title": "Stanje COVID-19 v Sloveniji",
+            "title": "Stanje COVID-19 v državi",
+            "title_SVN": "Stanje COVID-19 v Sloveniji",
+            "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "tests": "Testiranja (na dan)",
             "testsToDate": "Testiranja (skupaj)",
             "confirmed": "Potrjeno okuženi (na dan)",

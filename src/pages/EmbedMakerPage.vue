@@ -40,7 +40,7 @@ export default {
         },
         "MetricsComparison": {
           value: "MetricsComparison",
-          text: this.$t('charts.metricsComparison.title'),
+          text: this.$t('charts.metricsComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ), // TODO: add this context by default to all calls
           dimensions: [1140, 780]
         },
         "EuropeMap": {

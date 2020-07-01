@@ -160,7 +160,9 @@
             "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
-            "title": "COVID-19 Situation in Slovenia",
+            "title": "COVID-19 Situation in the country",
+            "title_SVN": "COVID-19 Situation in Slovenia",
+            "title_MKD": "COVID-19 Situation in N. Macedonia",
             "tests": "Tests (daily)",
             "testsToDate": "Tests (to date)",
             "confirmed": "Confirmed Cases (daily)",
