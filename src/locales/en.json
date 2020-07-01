@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New map:",
-        "news002": "COVID-19 Situation in Europe - restrictions, imported cases..."
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik gets younger brother..."
     },
     "infocard": {
         "tests": "Tests Today",
