@@ -77,7 +77,15 @@ let renderChartOptions state dispatch =
         |}
 
     let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        groupTimeline |> List.map mapPoint |> List.toArray
+        groupTimeline
+        |> List.filter
+               (fun pointData ->
+                    match pointData.Cases with
+                    | Some x when x > 0 -> true
+                    | _ -> false
+               )
+        |> List.map mapPoint
+        |> List.toArray
 
     // generate all series
     let allSeries =
