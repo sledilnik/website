@@ -537,6 +537,10 @@
         "quarantineStrict": {
             "title": "Quarantine",
             "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Up to 50",
+            "description": "Gathering up to 50 people, up to 500 if approved by NIJZ"
         }
     },
     "days": {

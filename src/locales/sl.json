@@ -286,6 +286,10 @@
         "quarantineStrict": {
             "title": "Karantena",
             "description": "Poostrena obvezna 14-dnevna karantena za kritične države<br>(rdeči seznam BIH, Srbijo, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Do 50",
+            "description": "Prepoved zbiranja na javnih mestih nad 50 ljudi, z dovoljenjem NIJZ do 500 ljudi"
         }
     },
     "phase": {
