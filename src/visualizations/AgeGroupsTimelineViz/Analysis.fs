@@ -18,7 +18,10 @@ let calcCasesByAgeForDay
 
     let calcIntOptionDiff value1 value2 =
         match value1, value2 with
-        | Some value1, Some value2 -> value2 - value1 |> Some
+        | Some value1, Some value2 ->
+            // sometimes NIJZ's data is corrected and total cases can decrease,
+            // so we need to ignore this for the purposes of our visualization
+            max (value2 - value1) 0 |> Some
         | Some _, None -> None
         | None, Some value2 -> Some value2
         | None, None -> None

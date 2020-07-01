@@ -95,3 +95,18 @@ let ``Can calculate data when current day group has missing numbers``() =
 
     test <@ resultGroup.Length = 1 @>
     test <@ resultGroup.[0] = group 2 None None @>
+
+[<Fact>]
+let ``Sets 0 for negative values``() =
+    let prevDay =
+        buildAgeGroups()
+        |> withGroup (group 2 (Some 1) (Some 20))
+        |> Some
+    let currentDay =
+        buildAgeGroups()
+        |> withGroup (group 2 (Some 0) (Some 19))
+
+    let resultGroup = calcCasesByAgeForDay prevDay currentDay
+
+    test <@ resultGroup.Length = 1 @>
+    test <@ resultGroup.[0] = group 2 (Some 0) (Some 0) @>
