@@ -36,6 +36,10 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
 
 
+## KLJUČNI IZZIVI PRI MODELIRANJU EPIDEMIJE
+"Matematično modeliranje je lahko koristno za napovedovanje razvoja nalezljivih bolezni, saj s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Za napovedovanje in simulacijo širjenja v času epidemije COVID-19 so bile uporabljene različne tehnike modeliranja, vendar vse niso bile vedno koristne za epidemiologe in odločevalce. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji ali ne." – V [preglednem članku](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract) so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli ključne izzive pri modeliranju epidemije in kaj smo se iz epidemije COVID-19 naučili do sedaj.
+
+
 ## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
 
 Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).  
