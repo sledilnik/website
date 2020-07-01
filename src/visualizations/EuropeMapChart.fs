@@ -93,7 +93,7 @@ let prepareCountryData (data : Data.OurWorldInData.DataPoint list) =
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
         let fixedCode = if code = "OWID_KOS" then "RKS" else code // hack for Kosovo code
-        let country = I18N.tt "country" code
+        let country = I18N.tt "country" code // TODO: change country code in i18n for Kosovo
         let incidence1M =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
@@ -103,10 +103,10 @@ let prepareCountryData (data : Data.OurWorldInData.DataPoint list) =
         let owdDate = dps |> List.map (fun dp -> dp.Date) |> List.max
         let rText, rColor =
             if fixedCode = "SVN" then I18N.t "charts.europe.statusNone", "#10829a"
-            else if greenCountries.Contains(code) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
-            else if redCountries.Contains(code) then I18N.t "charts.europe.statusRed", "#FF5348"
+            else if greenCountries.Contains(fixedCode) then I18N.t "charts.europe.statusGreen", "#C4DE6F"
+            else if redCountries.Contains(fixedCode) then I18N.t "charts.europe.statusRed", "#FF5348"
             else I18N.t "charts.europe.statusYellow", "#FEF65C"           
-        let imported = importedFrom.TryFind(code) |> Option.defaultValue 0
+        let imported = importedFrom.TryFind(fixedCode) |> Option.defaultValue 0
         let cd : CountryData = 
             { CountryData.Country = country 
               CountryData.TwoWeekIncidence1M = incidence1M
