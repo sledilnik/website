@@ -115,7 +115,7 @@
             "dsMZ": "Ministarstvo za zdravlje",
             "dsOWD": "Naš svijet u brojkama",
             "numDateFormat": "%d. %m. %Y.",
-            "all": "Sva",
+            "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
             "dateFormat": "%A, %e. %B %Y.",
             "webpage": "Web-stranica",
@@ -152,7 +152,7 @@
             "last_x_days_1": "{{ count }} dana",
             "last_x_days_2": "{{ count }} dana",
             "populationShare": "Udio stanovništva",
-            "all": "Sva",
+            "all": "Svi",
             "population": "stanovništvo",
             "absolute": "Apsolutno",
             "deceased": "Umrli",
@@ -424,8 +424,8 @@
             "title": "Karantena"
         },
         "gatherings": {
-            "title": "Sakupljanja",
-            "description": "Zabrana sakupljanja na javnim mjestima"
+            "title": "Okupljanja",
+            "description": "Zabrana okupljanja na javnim mjestima"
         },
         "liftVacationHomes": {
             "title": "Vikendice",
@@ -442,6 +442,10 @@
         "liftGatherings500": {
             "title": "Do 500",
             "description": "Opuštanje: okupljanje do 500 osoba, gledatelji na sportskim događajima.<br>Slobodan prijelaz preko granice izvan kontrolnih točaka za građane SLO, AUT, ITA i HUN"
+        },
+        "gatherings50": {
+            "description": "Okupljanje do 50 osoba, do 500 ako ih odobri NIJZ",
+            "title": "Do 50"
         }
     },
     "pageNotFound": {
@@ -636,8 +640,8 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Nova karta:",
-        "news002": "COVID-19 situacija u Europi – ograničenja, uvezeni slučajevi …"
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik dobiva mlađeg brata …"
     },
     "timestamp": {
         "at": "na {{ date, HH:mm }}",
