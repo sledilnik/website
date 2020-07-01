@@ -216,8 +216,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         credits = pojo
             {|
                 enabled = true
-                text = I18N.t "charts.countries.dataSourceOWID"
-                href = "https://ourworldindata.org"
+                text = 
+                    sprintf "%s: %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsOWD")
+                href = "https://ourworldindata.org/coronavirus"
             |}
     |}
 

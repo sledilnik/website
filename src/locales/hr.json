@@ -44,7 +44,28 @@
         "ALB": "Albanija",
         "BGR": "Bugarska",
         "GRC": "Grčka",
-        "ROU": "Rumunjska"
+        "ROU": "Rumunjska",
+        "AND": "Andora",
+        "BLR": "Bjelorusija",
+        "EST": "Estonija",
+        "FRO": "Farski otoci",
+        "IRL": "Irska",
+        "LIE": "Lihtenštajn",
+        "LTU": "Litva",
+        "LVA": "Latvija",
+        "LUX": "Luksemburg",
+        "MLT": "Malta",
+        "MDA": "Moldavija",
+        "NLD": "Nizozemska",
+        "CYP": "Cipar",
+        "NCY": "Sjeverni Cipar",
+        "NMA": "Cipar No Mans Area",
+        "POL": "Poljska",
+        "PRT": "Portugal",
+        "RKS": "Kosovo",
+        "SMR": "San Marino",
+        "UKR": "Ukrajina",
+        "VAT": "Vatikan"
     },
     "charts": {
         "municipalities": {
@@ -89,8 +110,12 @@
             "hospitalDeceasedShare": "Udio umrlih u bolnicama"
         },
         "common": {
+            "dataSource": "izvor podataka",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministarstvo za zdravlje",
+            "dsOWD": "Naš svijet u brojkama",
             "numDateFormat": "%d. %m. %Y.",
-            "all": "Sva",
+            "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
             "dateFormat": "%A, %e. %B %Y.",
             "webpage": "Web-stranica",
@@ -127,10 +152,11 @@
             "last_x_days_1": "{{ count }} dana",
             "last_x_days_2": "{{ count }} dana",
             "populationShare": "Udio stanovništva",
-            "all": "Sva",
+            "all": "Svi",
             "population": "stanovništvo",
             "absolute": "Apsolutno",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "yesterday": "Jučer"
         },
         "countries": {
             "groupCriticalEU": "Kritične države (EU)",
@@ -143,7 +169,6 @@
             "groupCriticalWorld": "Kritične države (svijet)",
             "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "dataSourceOWID": "izvor podataka: Our World In Data",
             "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
@@ -293,6 +318,18 @@
             "icu": "Na odjelu intenzivne njege",
             "ventilator": "Na respiratoru",
             "hospitalized": "Hospitalizirani"
+        },
+        "europe": {
+            "statusRed": "stroga 14-dnevna karantena",
+            "statusYellow": "14-dnevna karantena s iznimkama",
+            "statusGreen": "bez ograničenja",
+            "statusNone": "-",
+            "countryStatus": "Ograničenja",
+            "importedCases": "Uvezeni slučajevi u 14 dana",
+            "incidence1M": "Novih slučajeva u roku od 14 dana na milijun stanovnika",
+            "restrictions": "Ograničenja i uvezeni slučajevi",
+            "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
+            "title": "COVID-19 situacija u Europi"
         }
     },
     "shortMonth": {
@@ -387,8 +424,8 @@
             "title": "Karantena"
         },
         "gatherings": {
-            "title": "Sakupljanja",
-            "description": "Zabrana sakupljanja na javnim mjestima"
+            "title": "Okupljanja",
+            "description": "Zabrana okupljanja na javnim mjestima"
         },
         "liftVacationHomes": {
             "title": "Vikendice",
@@ -405,6 +442,10 @@
         "liftGatherings500": {
             "title": "Do 500",
             "description": "Opuštanje: okupljanje do 500 osoba, gledatelji na sportskim događajima.<br>Slobodan prijelaz preko granice izvan kontrolnih točaka za građane SLO, AUT, ITA i HUN"
+        },
+        "gatherings50": {
+            "description": "Okupljanje do 50 osoba, do 500 ako ih odobri NIJZ",
+            "title": "Do 50"
         }
     },
     "pageNotFound": {
@@ -599,11 +640,129 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Broj potvrđenih slučajeva raste – #whatisgoingon?",
-        "news002": "Saznaj više na Medium …"
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik dobiva mlađeg brata …"
     },
     "timestamp": {
         "at": "na {{ date, HH:mm }}",
         "updated": "AKtualizirano: {{ date, dddd, D. MMMM YYYY. }}"
+    },
+    "mk": {
+        "municipality": {
+            "krusevo": "Kruševo",
+            "negotino": "Negotino",
+            "probistip": "Probištip",
+            "ohrid": "Ohrid",
+            "kratovo": "Kratovo",
+            "kumanovo": "Kumanovo",
+            "skopje": "Skoplje",
+            "kicevo": "Kičevo",
+            "stip": "Štip",
+            "kriva_palanka": "Kriva Palanka",
+            "strumica": "Strumica",
+            "kavadarci": "Kavadarci",
+            "radovis": "Radoviš",
+            "kocani": "Kočani",
+            "sveti_nikole": "Sveti Nikole",
+            "struga": "Struga",
+            "resen": "Resen",
+            "prilep": "Prilep",
+            "makedonski_brod": "Makedonski Brod",
+            "tetovo": "Tetovo",
+            "pehcevo": "Pehčevo",
+            "demir_hisar": "Demir Hisar",
+            "delcevo": "Delčevo",
+            "debar": "Debar",
+            "gostivar": "Gostivar",
+            "gevgelija": "Gevgelija",
+            "vinica": "Vinica",
+            "veles": "Veles",
+            "valandovo": "Valandovo",
+            "bitola": "Bitola",
+            "berovo": "Berovo"
+        },
+        "cm": {
+            "21hLockdown": {
+                "description": "Karantena od 21 h – 06 h svaki dan",
+                "title": "Karantena"
+            },
+            "lessMeasures": {
+                "description": "Opuštanje: slobodno kretanje u cijeloj zemlji",
+                "title": "Karantena obustavljena"
+            },
+            "kafanasOpen": {
+                "description": "Opuštanje: kafići i restorani su otvoreni",
+                "title": "Kafanas"
+            },
+            "masksOn": {
+                "description": "Maske su obavezne izvan kuće",
+                "title": "Maske"
+            },
+            "bordersOopen": {
+                "description": "Opuštanje: otvorene granice za strance",
+                "title": "Granice otvorene"
+            },
+            "gatherings5": {
+                "description": "Javna okupljanja s više od 5 osoba zabranjeno",
+                "title": "Okupljanja od 5 osoba"
+            },
+            "debarQuarantine": {
+                "title": "Debar karantena",
+                "description": "Prvi grad stavljen u potpunu izolaciju"
+            },
+            "bordersClosure": {
+                "description": "Sve granice i zračne luke zatvorene su za međunarodne putnike",
+                "title": "granice"
+            },
+            "gatheringsMass": {
+                "title": "Masovna okupljanja",
+                "description": "Masovna okupljanja kao što su sportska događanja i karnevali su zabranjeni"
+            }
+        },
+        "hospital": {
+            "bitola": "Bitola",
+            "kozle": "Kozle",
+            "iksk": "Infektivna Klinika",
+            "infdrugi": "Infektivni odjeli u Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "gob8sep": "GOB 8mi rujan",
+            "stip": "Štip",
+            "mksk": "Montažna Bolnica"
+        },
+        "region": {
+            "va": "Vardar",
+            "pe": "Pelagonija",
+            "sk": "Skopski",
+            "si": "Sjeveroistočni",
+            "po": "Pološki",
+            "ji": "Jugoistočni",
+            "jz": "Jugozapadni",
+            "is": "Istočni"
+        },
+        "phase": {
+            "6": {
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
+                "title": "Šesta faza"
+            },
+            "5": {
+                "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
+                "title": "Peta faza"
+            },
+            "4": {
+                "description": "Makedonija 3",
+                "title": "Četvrta faza"
+            },
+            "3": {
+                "description": "Debar 4",
+                "title": "Treća faza"
+            },
+            "2": {
+                "description": "Skoplje 4",
+                "title": "Druga faza"
+            },
+            "1": {
+                "description": "Debar 4, Skopje 3, Makedonija 2 ",
+                "title": "Prva faza"
+            }
+        }
     }
 }
