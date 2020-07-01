@@ -37,7 +37,8 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 
 
 ## KLJUČNI IZZIVI PRI MODELIRANJU EPIDEMIJE
-"Matematično modeliranje je lahko koristno za napovedovanje razvoja nalezljivih bolezni, saj s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Za napovedovanje in simulacijo širjenja v času epidemije COVID-19 so bile uporabljene različne tehnike modeliranja, vendar vse niso bile vedno koristne za epidemiologe in odločevalce. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji ali ne." – V [preglednem članku](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract) so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli ključne izzive pri modeliranju epidemije in kaj smo se iz epidemije COVID-19 naučili do sedaj.
+
+"Matematično modeliranje s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji." – [V uvodniku revije Zdravstveno varstvo]( https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19.
 
 
 ## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
