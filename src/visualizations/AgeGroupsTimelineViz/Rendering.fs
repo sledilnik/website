@@ -3,13 +3,14 @@ module AgeGroupsTimelineViz.Rendering
 
 open Analysis
 open Synthesis
+open Highcharts
+open Types
+
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
-open Browser
-
-open Highcharts
-open Types
+open Fable.Core.JsInterop
+open Browser.Types
 
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
@@ -135,6 +136,11 @@ let renderChartOptions state dispatch =
                 series = pojo {| stacking = "normal" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
+        tooltip = pojo {|
+                          formatter = fun () -> tooltipFormatter jsThis
+                          shared = true
+                          useHTML = true
+                        |}
     |}
 
 let renderChartContainer state dispatch =
