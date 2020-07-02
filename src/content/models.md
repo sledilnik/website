@@ -26,6 +26,8 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
 
+Dodatno je narejen še model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih sledilnika in ga lahko najdete na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
+
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
 
