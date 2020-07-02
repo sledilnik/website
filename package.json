@@ -23,7 +23,7 @@
     "core-js": "^3.6.4",
     "d3": "^5.15.0",
     "date-fns": "^2.11.1",
-    "highcharts": "^8.1.0",
+    "highcharts": "^8.1.2",
     "highcharts-react-official": "^3.0.0",
     "i18next": "^19.4.4",
     "i18next-browser-languagedetector": "^4.1.1",
