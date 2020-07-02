@@ -193,6 +193,9 @@
             "shareOfDeceasedPopulation": "Udio umrlih u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi"
         },
+        "ageGroupsTimeline": {
+            "title": "Potvrđeni slučajevi po dobnim skupinama"
+        },
         "patients": {
             "structure": "Struktura",
             "deceased": "Umrli",
