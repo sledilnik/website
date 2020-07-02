@@ -17,3 +17,7 @@ updates:
     directory: "/src/visualizations" # Location of package manifests
     schedule:
       interval: "daily"
+  - package-ecosystem: "nuget" # See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem for possible values
+    directory: "/tests/Visualizations.Tests" # Location of package manifests
+    schedule:
+      interval: "daily"
