@@ -117,13 +117,10 @@ let greenCountries =
     Set.ofList
         [ "AUT"
           "CYP"
-          "CZE"
           "DNK"
           "EST"
           "FIN"
-          "FRA"
           "GRC"
-          "HRV"
           "IRL"
           "ISL"
           "ITA"
@@ -136,7 +133,9 @@ let greenCountries =
           "NOR"
           "SVK"
           "ESP"
-          "CHE" ]
+          "CHE"
+          "BEL"
+          "NLD" ]
 
 let redCountries =
     Set.ofList
