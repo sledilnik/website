@@ -82,4 +82,7 @@ let calculateCasesByAgeTimeline
             )
     // skip initial days without any cases
     |> List.skipWhile(fun x -> not (thereAreSomeCases x))
-    |> List.takeWhile(fun x -> thereAreSomeCases x)
+    // now skip trailing days without any cases
+    |> List.rev
+    |> List.skipWhile(fun x -> not (thereAreSomeCases x))
+    |> List.rev
