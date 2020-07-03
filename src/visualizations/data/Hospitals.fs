@@ -6,7 +6,7 @@ open Fable.SimpleJson
 
 open Types
 
-let url = "https://api.sledilnik.org/api/hospitals"
+let url = "https://api2.sledilnik.org/api/hospitals"
 
 type CountType =
     | Total
