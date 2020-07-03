@@ -244,7 +244,9 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
         let active = chartSelector = activeChartType
         Html.div [
             prop.onClick (fun _ -> dispatch chartSelector)
-            prop.className [ true, "chart-display-property-selector__item"; active, "selected" ]
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected")]
             prop.text (chartSelector.ToString())
         ]
 

@@ -55,13 +55,20 @@ let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |}
         | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
     | _ -> None
 
+let classes (classTuples: (bool * string) seq) =
+    classTuples
+    |> Seq.filter (fun (visible, _) -> visible)
+    |> Seq.map (fun (_, className) -> className)
+    |> Seq.toList
+    |> prop.className
+
 let renderScaleSelector scaleType dispatch =
     let renderSelector (scaleType : ScaleType) (currentScaleType : ScaleType) (label : string) =
         let defaultProps =
             [ prop.text label
-              prop.className [
-                  true,  "chart-display-property-selector__item"
-                  scaleType = currentScaleType,  "selected" ] ]
+              classes [
+                  (true, "chart-display-property-selector__item")
+                  (scaleType = currentScaleType, "selected") ] ]
         if scaleType = currentScaleType
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)

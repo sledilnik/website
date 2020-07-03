@@ -467,9 +467,9 @@ let renderView (currentView : View) dispatch =
     let renderSelector (view : View) (label : string) =
         let defaultProps =
             [ prop.text label
-              prop.className [
-                  true, "chart-display-property-selector__item"
-                  view = currentView, "selected" ] ]
+              Utils.classes [
+                  (true, "chart-display-property-selector__item")
+                  (view = currentView, "selected") ] ]
         if view = currentView
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> ViewChanged view |> dispatch)) :: defaultProps)
