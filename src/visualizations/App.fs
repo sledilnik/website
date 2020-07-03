@@ -318,16 +318,14 @@ let render (state: State) (_: Msg -> unit) =
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div
-        [ prop.className
-            [ true, "visualization container"
-              embedded, "embeded" ]
+        [ Utils.classes
+            [(true, "visualization container")
+             (embedded, "embeded") ]
           prop.children
               (visualizations
                |> List.map (fun viz ->
                    Html.section
-                       [ prop.className
-                           [ true, viz.ClassName
-                             true, "visualization-chart" ]
+                       [ prop.className [ viz.ClassName; "visualization-chart" ]
                          prop.id viz.ClassName
                          prop.children
                              [ Html.div
