@@ -5,7 +5,7 @@ open Fable.SimpleJson
 
 open Types
 
-let url = "https://api2.sledilnik.org/api/municipalities"
+let url = "https://api.sledilnik.org/api/municipalities"
 
 let parseRegionsData data =
     data

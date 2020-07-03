@@ -4,7 +4,7 @@ open System
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-let url = "https://api2.sledilnik.org/api/health-centers"
+let url = "https://api.sledilnik.org/api/health-centers"
 
 let sumOption a b =
     match a, b with

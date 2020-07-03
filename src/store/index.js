@@ -22,7 +22,7 @@ import {
 
 Vue.use(Vuex)
 
-export const ApiEndpoint = 'https://api2.sledilnik.org'
+export const ApiEndpoint = 'https://api.sledilnik.org'
 
 export function exportTime(x) {
   return new Date(x * 1000)
