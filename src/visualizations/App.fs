@@ -220,33 +220,23 @@ let render (state: State) (_: Msg -> unit) =
             Label = I18N.t "charts.countriesNewCasesPer1M.title"
             Explicit = false
             Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success _ ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { MetricToDisplay = NewCasesPer1M
-                              ChartTextsGroup = "charts.countriesNewCasesPer1M"
-                            }
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = NewCasesPer1M
+                          ChartTextsGroup = "charts.countriesNewCasesPer1M"
+                        }
           }
           { VisualizationType = CountriesDeathsPer1M
             ClassName = "countries-chart"
             Label = I18N.t "charts.countriesTotalDeathsPer1M.title"
             Explicit = false
             Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success _ ->
-                        lazyView CountriesChartViz.Rendering.renderChart
-                            { MetricToDisplay = TotalDeathsPer1M
-                              ChartTextsGroup =
-                                  "charts.countriesTotalDeathsPer1M"
-                            }
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = TotalDeathsPer1M
+                          ChartTextsGroup =
+                              "charts.countriesTotalDeathsPer1M"
+                        }
           }
           ]
 
