@@ -3,8 +3,9 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="https://medium.com/sledilnik/sledilnik-je-dobil-brata-treker-mk-aa8150a6e0c4"
-    >
+      href="#age-groups-trends-chart"
+      v-scroll-to="{ el: '#age-groups-trends-chart', offset: -115 }"
+    > 
       <div class="notice">
         <span>
           <b>{{ $t("notice.news001") }}</b> <span>{{ $t("notice.news002") }}</span>

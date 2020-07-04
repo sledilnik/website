@@ -63,7 +63,7 @@ let tooltipFormatter jsThis =
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =
                             sprintf
-                                "<td class='circle' style='background-color: %s'></td><td style='padding-left: 6px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                "<td style='color: %s'>●</td><td style='padding-left: 6px'>%s:</td><td style='text-align: right; padding-left: 6px'><b>%A</b></td>"
                                 ageGroupColor
                                 ageGroupLabel
                                 dataValue

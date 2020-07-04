@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik gets younger brother..."
+        "news001": "New chart:",
+        "news002": "Confirmed Cases by Age Groups"
     },
     "infocard": {
         "tests": "Tests Today",
@@ -295,6 +295,7 @@
             "title": "COVID-19 Situation in Europe",
             "twoWeekIncidence": "14 days incidence per million",
             "restrictions": "Restrictions and imported cases",
+            "newCases": "New cases",
             "incidence1M": "New cases in 14 days per 1M",
             "importedCases": "Imported cases in 14 days",
             "countryStatus": "Restrictions",
