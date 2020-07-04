@@ -3,6 +3,7 @@ module ShareButton
 open Feliz
 open Browser
 open Types
+open I18N
 
 let dropdown (viz: Visualization) =
     React.functionComponent (fun () ->
@@ -78,7 +79,7 @@ let dropdown (viz: Visualization) =
                                         // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
                                         ("https://twitter.com/intent/tweet/?"
                                          + "text="
-                                         + I18N.t ("charts." + viz.ChartTextsGroup + ".label")
+                                         + chartText viz.ChartTextsGroup ".title"
                                          + "&url="
                                          + graphUrl)
                                     prop.children

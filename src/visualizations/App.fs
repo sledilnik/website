@@ -6,6 +6,7 @@ open Feliz
 
 open Types
 open CountriesChartViz.Synthesis
+open I18N
 
 let init (query: obj) (visualization: string option) =
     let inner () =
@@ -223,7 +224,7 @@ let render (state: State) (_: Msg -> unit) =
                 fun _ ->
                     lazyView CountriesChartViz.Rendering.renderChart
                         { MetricToDisplay = NewCasesPer1M
-                          ChartTextsGroup = "charts.countriesNewCasesPer1M"
+                          ChartTextsGroup = "countriesNewCasesPer1M"
                         }
           }
           { VisualizationType = CountriesDeathsPer1M
@@ -234,8 +235,7 @@ let render (state: State) (_: Msg -> unit) =
                 fun _ ->
                     lazyView CountriesChartViz.Rendering.renderChart
                         { MetricToDisplay = TotalDeathsPer1M
-                          ChartTextsGroup =
-                              "charts.countriesTotalDeathsPer1M"
+                          ChartTextsGroup = "countriesTotalDeathsPer1M"
                         }
           }
           ]
@@ -329,7 +329,7 @@ let render (state: State) (_: Msg -> unit) =
                       [ prop.children
                           [ Html.a
                               [ prop.href ("#" + visualization.ClassName)
-                                prop.text (I18N.t ("charts." + visualization.ChartTextsGroup + ".title"))
+                                prop.text (chartText visualization.ChartTextsGroup ".title")
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div

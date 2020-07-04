@@ -6,6 +6,7 @@ open Fable.Core
 open Highcharts
 open JsInterop
 open Types
+open I18N
 
 type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
 
@@ -158,16 +159,17 @@ let prepareChartData
 
         {
             Series = series
-            LegendTitle = I18N.t (state.ChartTextsGroup + ".legendTitle")
+            LegendTitle = chartText state.ChartTextsGroup ".legendTitle"
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
                 | DaysSinceFirstDeath ->
-                    I18N.t (state.ChartTextsGroup + ".daysFromFirstDeath")
+                    chartText state.ChartTextsGroup ".daysFromFirstDeath"
                 | DaysSinceOneDeathPerMillion ->
-                    I18N.t
-                        (state.ChartTextsGroup + ".daysFromOneDeathPerMillion")
-            YAxisTitle = I18N.t (state.ChartTextsGroup + ".yAxisTitle")
+                    chartText
+                        state.ChartTextsGroup ".daysFromOneDeathPerMillion"
+            YAxisTitle =
+                chartText state.ChartTextsGroup ".yAxisTitle"
         }
         |> Some
     | None -> None

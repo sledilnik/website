@@ -11,6 +11,7 @@ open Fable.Core.JsInterop
 open Analysis
 open Highcharts
 open Types
+open I18N
 
 let countriesDisplaySets = [|
     { Label = "groupNeighbouringWoItaly"
@@ -244,7 +245,7 @@ let renderCountriesSetsSelectors
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text (I18N.tt chartTextsGroup setToRender.Label)
+            prop.text (chartText chartTextsGroup setToRender.Label)
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected") ]
@@ -269,11 +270,11 @@ let renderXAxisSelectors
         let defaultProps =
             [
                 match axisSelector with
-                | ByDate -> I18N.t (chartTextsGroup + ".chronologically")
+                | ByDate -> chartText chartTextsGroup ".chronologically"
                 | DaysSinceFirstDeath ->
-                    I18N.t (chartTextsGroup + ".sinceFirstDeath")
+                    chartText chartTextsGroup ".sinceFirstDeath"
                 | DaysSinceOneDeathPerMillion ->
-                    I18N.t (chartTextsGroup + ".sinceOneDeathPerMillion")
+                    chartText chartTextsGroup ".sinceOneDeathPerMillion"
                 |> prop.text
 
                 Utils.classes
