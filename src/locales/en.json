@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik gets younger brother..."
+        "news001": "New chart:",
+        "news002": "Confirmed Cases by Age Groups"
     },
     "infocard": {
         "tests": "Tests Today",
