@@ -84,7 +84,7 @@
             "deceased": "Umrli: ",
             "sortBy": "Razvrstaj prema:",
             "doubles": "Udvostručenja ",
-            "title": "Slučajevi prema općinama",
+            "title": "Slučajevi po općinama",
             "sortActive": "Aktivni",
             "showLess": "Prikaži manje",
             "viewActive": "Aktivne",
@@ -205,7 +205,7 @@
             "discharged": "Otpušteni",
             "icu": "Na odjelu intenzivne njege",
             "hospitalized": "Hospitalizirani",
-            "byHospital": "Prema bolnicama",
+            "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
             "title": "Hospitalizacija"
         },
@@ -280,11 +280,11 @@
         "tests": {
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
-            "title": "Test",
+            "title": "Testiranje",
             "regularTesting": "Regularno",
             "negativeTests": "Negativni testovi",
             "nationalStudyTesting": "Istraživanje",
-            "allTesting": "Sva"
+            "allTesting": "Sve"
         },
         "infections": {
             "rhStaff": "Osoblje staračkih domova",
@@ -295,20 +295,20 @@
             "title": "Struktura potvrđenih slučajeva",
             "hcStaff": "Zdravtsveni radnici",
             "all": "Sve",
-            "averageByDay": "Prema danu (prosjek)"
+            "averageByDay": "Po danu (prosjek)"
         },
         "hCenters": {
-            "testsPositive": "Testovi (pozitino*)",
+            "testsPositive": "Testovi (pozitivni*)",
             "title": "Liječenje u domu zdravlja",
             "emergencyExamination": "Hitni pregledi",
             "sentToSelfIsolation": "Poslani u samoizolaciju",
             "suspectedCovidExamination": "Sumnja na COVID-19 (pregled)",
             "suspectedCovidPhone": "Sumnja na COVID-19 (telefon)",
-            "testsPerformed": "Testovi (izvedeni)",
+            "testsPerformed": "Testovi (provedeni)",
             "allRegions": "Sve regije"
         },
         "regions": {
-            "title": "Slučajevi prema regiji",
+            "title": "Slučajevi po regijama",
             "deceased": "Umrli",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi"
