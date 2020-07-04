@@ -400,10 +400,14 @@ let renderMap state geoJson owdData =
         let textData =
             sprintf "<b>%s</b><br/>
             %s: <b>%s</b><br/>
-            %s: <b>%s</b> (%s)<br/>
-            %s: <b>%s</b> (%s)<br/>
-            %s: <b>%s</b><br/>" country (I18N.t "charts.europe.incidence1M") incidence1M "Novi primeri" newCases ncDate
-                (I18N.t "charts.europe.importedCases") imported impDate (I18N.t "charts.europe.countryStatus") rType
+            %s: <b>%s</b> (%s)<br/><br/>
+            %s: <b>%s</b><br/>
+            %s: <b>%s</b> (%s)<br/>"
+                country 
+                (I18N.t "charts.europe.countryStatus") rType
+                (I18N.t "charts.europe.importedCases") imported impDate 
+                (I18N.t "charts.europe.incidence1M") incidence1M
+                (I18N.t "charts.europe.newCases") newCases ncDate
 
         s.Append textData |> ignore
 
