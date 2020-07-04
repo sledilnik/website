@@ -44,7 +44,7 @@ let tooltipFormatter jsThis =
         let s = StringBuilder()
 
         let date = points.[0]?point?date
-        s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
+        s.AppendFormat ("<b>{0}</b><br/>", date.ToString()) |> ignore
 
         s.Append "<table>" |> ignore
 
@@ -52,6 +52,7 @@ let tooltipFormatter jsThis =
         |> Array.iter
                (fun ageGroup ->
                     let ageGroupLabel = ageGroup?series?name
+                    let ageGroupColor = ageGroup?series?color
                     let dataPoint = ageGroup?point
 
                     let dataValue: int = dataPoint?y
@@ -62,7 +63,8 @@ let tooltipFormatter jsThis =
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =
                             sprintf
-                                "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                                "<td style='color: %s'>●</td><td style='padding-left: 6px'>%s:</td><td style='text-align: right; padding-left: 6px'><b>%A</b></td>"
+                                ageGroupColor
                                 ageGroupLabel
                                 dataValue
                         s.Append ageGroupTooltip |> ignore

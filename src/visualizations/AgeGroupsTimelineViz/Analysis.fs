@@ -55,6 +55,17 @@ let calculateCasesByAgeTimeline
     (totalCasesByAgeGroups: (DateTime * AgeGroupsList) list)
     : CasesByAgeGroupsTimeline =
 
+    // returns True if there is at least one new infection for any
+    // age group for the given day
+    let thereAreSomeCases (forDay: CasesByAgeGroupsForDay) =
+        forDay.Cases
+        |> List.exists
+               (fun group ->
+                    match group.All with
+                    | Some cases -> cases > 0
+                    | None -> false
+               )
+
     None :: (totalCasesByAgeGroups |> List.map Some)
     |> List.pairwise
     |> List.map
@@ -69,3 +80,9 @@ let calculateCasesByAgeTimeline
                       Cases = calcCasesByAgeForDay None currentDay }
                 | _ -> invalidOp "BUG: this should never happen"
             )
+    // skip initial days without any cases
+    |> List.skipWhile(fun x -> not (thereAreSomeCases x))
+    // now skip trailing days without any cases
+    |> List.rev
+    |> List.skipWhile(fun x -> not (thereAreSomeCases x))
+    |> List.rev

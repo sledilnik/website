@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik je dobil mlajšega brata..."
+        "news001": "Nov graf:",
+        "news002": "Potrjeni primeri po starostnih skupinah"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -520,6 +520,7 @@
             "title": "Stanje COVID-19 v Evropi",
             "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
+            "newCases": "Novi primeri",
             "incidence1M": "Novi primeri v 14 dneh na 1M",
             "importedCases": "Uvoženi primeri v 14 dneh",
             "countryStatus": "Omejitve",
