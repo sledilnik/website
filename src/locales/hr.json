@@ -332,7 +332,8 @@
             "incidence1M": "Novih slučajeva u roku od 14 dana na milijun stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
             "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
-            "title": "COVID-19 situacija u Europi"
+            "title": "COVID-19 situacija u Europi",
+            "newCases": "Novih slučajeva"
         }
     },
     "shortMonth": {
@@ -643,8 +644,8 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik dobiva mlađeg brata …"
+        "news001": "Novi grafikon:",
+        "news002": "Potvrđeni slučajevi po dobnim skupinama"
     },
     "timestamp": {
         "at": "{{ date, HH:mm }}",
