@@ -26,7 +26,7 @@ let countriesDisplaySets = [|
       CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
     }
     { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "RKS"; "SRB" |]
+      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "OWID_KOS"; "SRB" |]
     }
     { Label = "groupEastAsiaOceania"
       CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
@@ -217,8 +217,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         credits = pojo
             {|
                 enabled = true
-                text = I18N.t "charts.countries.dataSourceOWID"
-                href = "https://ourworldindata.org"
+                text =
+                    sprintf "%s: %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsOWD")
+                href = "https://ourworldindata.org/coronavirus"
             |}
     |}
 
@@ -234,9 +237,9 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
         let active = setToRender = activeSet
         Html.div [
             prop.text (I18N.tt "charts.countries" setToRender.Label)
-            prop.className [
-                true, "btn btn-sm metric-selector"
-                active, "metric-selector--selected selected" ]
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected") ]
             if not active then prop.onClick (fun _ -> dispatch setToRender)
             if active then prop.style [ style.backgroundColor "#808080" ]
           ]
@@ -262,9 +265,9 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
                     I18N.t "charts.countries.sinceOneDeathPerMillion"
                 |> prop.text
 
-                prop.className [
-                    true, "chart-display-property-selector__item"
-                    active, "selected" ]
+                Utils.classes
+                    [(true, "chart-display-property-selector__item")
+                     (active, "selected") ]
             ]
 
         if active then Html.div defaultProps

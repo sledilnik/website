@@ -245,9 +245,9 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         (label : string) =
         let defaultProps =
             [ prop.text label
-              prop.className [
-                  true, "chart-display-property-selector__item"
-                  scaleType = activeScaleType, "selected" ] ]
+              Utils.classes [
+                  (true, "chart-display-property-selector__item")
+                  (scaleType = activeScaleType, "selected") ] ]
         if scaleType = activeScaleType then
             Html.div defaultProps
         else
@@ -257,7 +257,7 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.ageGroups.view")
+            Html.text (I18N.t "charts.common.view")
             renderScaleTypeSelector Absolute activeScaleType (I18N.t "charts.ageGroups.absolute")
             renderScaleTypeSelector Relative activeScaleType (I18N.t "charts.ageGroups.relative")
         ]
@@ -272,16 +272,16 @@ let renderChartCategorySelector
 
     Html.div [
         prop.onClick (fun _ -> ChartModeChanged chartModeToRender |> dispatch)
-        prop.className [
-            true, "btn btn-sm metric-selector";
-            isActive, "metric-selector--selected" ]
+        Utils.classes [
+            (true, "btn btn-sm metric-selector")
+            (isActive, "metric-selector--selected") ]
         prop.text (
             match chartModeToRender with
             | AbsoluteInfections        -> I18N.t "charts.ageGroups.confirmedCases"
             | AbsoluteDeaths            -> I18N.t "charts.ageGroups.deceased"
             | InfectionsPerPopulation   -> I18N.t "charts.ageGroups.confirmedCasesPerPopulation"
             | DeathsPerPopulation       -> I18N.t "charts.ageGroups.deceasedPerPopulation"
-            | DeathsPerInfections       -> I18N.t "charts.ageGroups.deceasedPerConfirmedCases" 
+            | DeathsPerInfections       -> I18N.t "charts.ageGroups.deceasedPerConfirmedCases"
             )
     ]
 
@@ -338,7 +338,7 @@ let renderChartOptions
             {| series = pojo
                 {| stacking = "normal" |}
             |}
-        credits = pojo {| enabled = false |}
+        credits = Highcharts.defaultCredits
         tooltip = pojo
             {| formatter = fun () ->
                  let sex = jsThis?series?name

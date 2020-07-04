@@ -400,6 +400,17 @@ Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega s
 </details>
 
 <details>
+  <summary id=europe-chart>Kaj nam kaže "Stanje COVID-19 v Evropi"?</summary>
+
+[Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
+
+*Opomba: [NIJZ podatke o uvoženih primerih] objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+
+Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
+
+</details>
+
+<details>
   <summary id=age-groups-chart>Kaj kaže graf "Po starostnih skupinah"?</summary>
 
 [Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjeno okuženih in smrtnih primerov zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjeno okuženih* se bo prikazal delež potrjeno okuženega prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. Z izbiro *Umrli glede na št. okuženih* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjeno okuženih.

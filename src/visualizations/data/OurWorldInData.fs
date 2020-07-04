@@ -27,7 +27,7 @@ type CountryIsoCode = string
 
 type DataPoint = {
     CountryCode : CountryIsoCode
-    Date : string
+    Date : System.DateTime
     NewCases : int
     NewCasesPerMillion : float option
     TotalCases: int
@@ -38,8 +38,8 @@ type DataPoint = {
 
 type OurWorldInDataRemoteData = RemoteData<DataPoint list, string>
 
-let stringOfResult row column =
-    match row.Data.TryFind column with
+let stringOfResult result column =
+    match result.Data.TryFind column with
     | None -> ""
     | Some value ->
         match value with
@@ -49,19 +49,19 @@ let stringOfResult row column =
             | _ -> ""
         | _ -> ""
 
-let intOfResult row column =
-    match row.Data.TryFind column with
-    | None -> 0
+let dateOfResult result column =
+    match result.Data.TryFind column with
+    | None -> None
     | Some value ->
         match value with
         | ValuePrimitive value ->
             match value with
-            | ValueInt value -> int value
-            | _ -> 0
-        | _ -> 0
+            | ValueDate value -> Some value
+            | _ -> None
+        | _ -> None
 
-let intOfDoubleResult row column =
-    match row.Data.TryFind column with
+let intOfDoubleResult result column =
+    match result.Data.TryFind column with
     | None -> 0
     | Some value ->
         match value with
@@ -71,8 +71,8 @@ let intOfDoubleResult row column =
             | _ -> 0
         | _ -> 0
 
-let floatOptionOfResult row column =
-    match row.Data.TryFind column with
+let floatOptionOfResult result column =
+    match result.Data.TryFind column with
     | None -> None
     | Some value ->
         match value with
@@ -82,12 +82,11 @@ let floatOptionOfResult row column =
             | _ -> None
         | _ -> None
 
-
 let load query msg =
-    let mapRow row =
+    let mapRow row date =
         {
             CountryCode = stringOfResult row "iso_code"
-            Date = stringOfResult row "date"
+            Date = date
             NewCases = intOfDoubleResult row "new_cases"
             NewCasesPerMillion = floatOptionOfResult row "new_cases_per_million"
             TotalCases = intOfDoubleResult row "total_cases"
@@ -129,7 +128,14 @@ let load query msg =
                            "Napaka pri nalaganju OurWorldInData podatkov: %s"
                            (error.ToString()) |> Failure |> msg
                     | Ok data ->
-                        return data.Results |> List.map mapRow |> Success |> msg
+                        let results =
+                            data.Results
+                            |> List.map (fun result ->
+                                match dateOfResult result "date" with
+                                | None -> None
+                                | Some date -> Some (mapRow result date))
+                            |> List.choose id
+                        return results |> Success |> msg
     }
 
 let loadCountryComparison countries msg =
@@ -145,7 +151,7 @@ let loadCountryComparison countries msg =
     load query msg
 
 
-let loadCountryIncidence countries fromDate msg =
+let loadCountryIncidence countries (fromDate : System.DateTime) msg =
 
     let query =
         let countryMatch country =
@@ -153,7 +159,7 @@ let loadCountryIncidence countries fromDate msg =
         let countriesMatchCondition =
             Or (List.map countryMatch countries)
         let dateCondition =
-            Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValueString fromDate))
+            Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValuePrimitive (ValueDate fromDate)))
         { DataQuery.Default with
             Condition = Some(And[countriesMatchCondition ; dateCondition]) }
 

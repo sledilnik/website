@@ -55,13 +55,20 @@ let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |}
         | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
     | _ -> None
 
+let classes (classTuples: (bool * string) seq) =
+    classTuples
+    |> Seq.filter (fun (visible, _) -> visible)
+    |> Seq.map (fun (_, className) -> className)
+    |> Seq.toList
+    |> prop.className
+
 let renderScaleSelector scaleType dispatch =
     let renderSelector (scaleType : ScaleType) (currentScaleType : ScaleType) (label : string) =
         let defaultProps =
             [ prop.text label
-              prop.className [
-                  true,  "chart-display-property-selector__item"
-                  scaleType = currentScaleType,  "selected" ] ]
+              classes [
+                  (true, "chart-display-property-selector__item")
+                  (scaleType = currentScaleType, "selected") ] ]
         if scaleType = currentScaleType
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
@@ -95,7 +102,7 @@ let renderLoading =
     let loadingLabel = I18N.t "charts.common.loading"
     Html.div [
         prop.className "loader"
-        prop.text loadingLabel 
+        prop.text loadingLabel
     ]
 
 let renderErrorLoading (error : string) =
@@ -125,6 +132,28 @@ let transliterateCSZ (str : string) =
         .Replace("č",  "c")
         .Replace("š",  "s")
         .Replace("ž",  "z")
+
+let mixColors
+    (minColorR, minColorG, minColorB)
+    (maxColorR, maxColorG, maxColorB)
+    mixRatio =
+
+    let colorR =
+        ((maxColorR - minColorR) |> float)
+        * mixRatio + (float minColorR)
+        |> round |> int
+    let colorG =
+        ((maxColorG - minColorG) |> float)
+        * mixRatio + (float minColorG)
+        |> round |> int
+    let colorB =
+        ((maxColorB - minColorB) |> float)
+        * mixRatio + (float minColorB)
+        |> round |> int
+
+    "#" + colorR.ToString("X2")
+        + colorG.ToString("X2")
+        + colorB.ToString("X2")
 
 module Dictionaries =
 

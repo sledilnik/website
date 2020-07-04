@@ -284,7 +284,9 @@ let renderChartContainer state dispatch =
 let renderBreakdownSelector state breakdown dispatch =
     Html.div [
         prop.onClick (fun _ -> SwitchBreakdown breakdown |> dispatch)
-        prop.className [ true, "btn btn-sm metric-selector"; state.Breakdown = breakdown, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (state.Breakdown = breakdown, "metric-selector--selected") ]
         prop.text (breakdown |> Breakdown.getName)
     ]
 

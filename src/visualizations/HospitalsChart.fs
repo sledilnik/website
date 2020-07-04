@@ -504,7 +504,9 @@ let renderTable (state: State) dispatch =
 let renderScopeSelector state scope (name:string) onClick =
     Html.div [
         prop.onClick onClick
-        prop.className [ true, "btn btn-sm metric-selector"; state.scope = scope, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (state.scope = scope, "metric-selector--selected") ]
         prop.text name
     ]
 

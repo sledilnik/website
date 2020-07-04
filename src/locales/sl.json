@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Sledilnik 3.0 - spremembe so konstanta.",
-        "news002": "Več na Medium…"
+        "news001": "Nov graf:",
+        "news002": "Potrjeni primeri po starostnih skupinah"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -123,7 +123,8 @@
         "za": "Zasavska"
     },
     "country": {
-        "ALB": "Albania",
+        "ALB": "Albanija",
+        "AND": "Andora",
         "ARG": "Argentina",
         "AUS": "Avstralija",
         "AUT": "Avstrija",
@@ -131,6 +132,7 @@
         "BRA": "Brazilija",
         "BEL": "Belgija",
         "BIH": "Bosna in Hercegovina",
+        "BLR": "Belorusija",
         "CHE": "Švica",
         "CHL": "Čile",
         "CHN": "Kitajska",
@@ -140,34 +142,53 @@
         "DNK": "Danska",
         "ECU": "Ekvador",
         "ESP": "Španija",
+        "EST": "Estonija",
         "FIN": "Finska",
         "FRA": "Francija",
+        "FRO": "Ferski otoki",
         "GBR": "Združeno kraljestvo",
         "GRC": "Grčija",
         "HRV": "Hrvaška",
         "HUN": "Madžarska",
         "IRN": "Iran",
+        "IRL": "Irska",
         "ISL": "Islandija",
         "ITA": "Italija",
         "JPN": "Japonska",
         "KOR": "J. Koreja",
+        "LVA": "Latvija",
+        "LIE": "Lihtenštajn",
+        "LTU": "Litva",
+        "LUX": "Luksemburg",
+        "MDA": "Moldavija",
         "MEX": "Mehika",
         "MKD": "S. Makedonija",
         "MNE": "Črna gora",
+        "MLT": "Malta",
+        "NLD": "Nizozemska",
         "NZL": "Nova Zelandija",
         "NOR": "Norveška",
+        "NCY": "S. Ciper",
+        "NMA": "Ciper No Mans Area",
+        "CYP": "Ciper",
         "PER": "Peru",
+        "POL": "Poljska",
+        "PRT": "Portugalska",
+        "OWID_KOS": "Kosovo",
         "RKS": "Kosovo",
         "RUS": "Rusija",
         "ROU": "Romunija",
         "SGP": "Singapur",
         "SRB": "Srbija",
+        "SMR": "San Marino",
         "SVK": "Slovaška",
         "SVN": "Slovenija",
         "SWE": "Švedska",
         "TWN": "Tajvan",
         "TUR": "Turčija",
-        "USA": "ZDA"
+        "UKR": "Ukrajina",
+        "USA": "ZDA",
+        "VAT": "Vatikan"
     },
     "cm": {
         "firstCase": {
@@ -212,7 +233,7 @@
         },
         "quarantine": {
             "title": "Karantena",
-            "description": "Obvezna 7 dnevna karantena pri prihodu iz tujine"
+            "description": "Obvezna 7-dnevna karantena pri prihodu iz tujine"
         },
         "liftVacationHomes": {
             "title": "Vikendi",
@@ -252,7 +273,7 @@
         },
         "quarantine14days": {
             "title": "Karantena",
-            "description": "Obvezna 14 dnevna karantena za tujce pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
+            "description": "Obvezna 14-dnevna karantena za tujce pri prihodu iz tujine <br>(za EU z izjemami in tretje države)"
         },
         "liftSchools4to5": {
             "title": "OŠ",
@@ -265,6 +286,10 @@
         "quarantineStrict": {
             "title": "Karantena",
             "description": "Poostrena obvezna 14-dnevna karantena za kritične države<br>(rdeči seznam BIH, Srbijo, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Do 50",
+            "description": "Prepoved zbiranja na javnih mestih nad 50 ljudi, z dovoljenjem NIJZ do 500 ljudi"
         }
     },
     "phase": {
@@ -298,6 +323,10 @@
     },
     "charts": {
         "common": {
+            "dataSource": "vir podatkov",
+            "dsNIJZ": "NIJZ",
+            "dsMZ": "Ministrstvo za zdravje",
+            "dsOWD": "Our World in Data",
             "loading": "Nalagam podatke…",
             "from": " ",
             "to": "-",
@@ -311,6 +340,7 @@
             "all": "Vse",
             "thousandsSep": ".",
             "decimalPoint": ",",
+            "view": "Prikaži:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -425,7 +455,7 @@
             "relativeLabel": "Relativen prirast v %",
             "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
             "doublingRateLabel": "V koliko dneh se število okuženih podvoji",
-            "everageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
+            "averageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
@@ -474,7 +504,6 @@
             "title": "Zemljevid po občinah",
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli",
-            "view": "Prikaži:",
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
             "yesterday": "Včeraj",
@@ -486,6 +515,19 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
+        },
+        "europe": {
+            "title": "Stanje COVID-19 v Evropi",
+            "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
+            "restrictions": "Omejitve in uvoženi primeri",
+            "newCases": "Novi primeri",
+            "incidence1M": "Novi primeri v 14 dneh na 1M",
+            "importedCases": "Uvoženi primeri v 14 dneh",
+            "countryStatus": "Omejitve",
+            "statusNone": "-",
+            "statusGreen": "brez omejitev",
+            "statusYellow": "14-dnevna karantena z izjemami",
+            "statusRed": "obvezna 14-dnevna karantena"
         },
         "municipalities": {
             "title": "Primeri po občinah",
@@ -501,7 +543,6 @@
             "showAll": "Prikaži vse občine",
             "search": "Poišči občino",
             "allRegions": "Vse regije",
-            "view": "Prikaži:",
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
             "viewDoublingTime": "Dnevih podvojitve",
@@ -509,7 +550,6 @@
         },
         "ageGroups": {
             "title": "Po starostnih skupinah",
-            "view": "Prikaži:",
             "absolute": "Absolutno",
             "relative": "Relativno",
             "male": "Moški",
@@ -524,6 +564,9 @@
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
             "populationTotal": "Prebivalcev skupaj"
+        },
+        "ageGroupsTimeline": {
+            "title": "Potrjeni primeri po starostnih skupinah"
         },
         "countries": {
             "title": "Primerjava po državah",
@@ -541,8 +584,7 @@
             "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
             "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
             "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
-            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev",
-            "dataSourceOWID": "vir podatkov: Our World In Data"
+            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev"
         }
     },
     "footer": {
@@ -607,5 +649,79 @@
         "somethingWentWrong": "ups… nekaj se je zalomilo :(",
         "back": "Nazaj",
         "imageDescription": "prometna stožca povezana z rumenim trakom"
+    },
+    "mk": {
+        "hospital": {
+            "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "stip": "Štip",
+            "bitola": "Bitola",
+            "gob8sep": "GOB 8mi septemvri",
+            "kozle": "Kozle",
+            "mksk": "Montažna Bolnica",
+            "iksk": "Infektivna Klinika"
+        },
+        "municipality": {
+            "stip": "Štip",
+            "tetovo": "Tetovo",
+            "strumica": "Strumica",
+            "struga": "Struga",
+            "veles": "Veles",
+            "berovo": "Berovo",
+            "skopje": "Skopje",
+            "sveti_nikole": "Sveti Nikole",
+            "resen": "Resen",
+            "radovis": "Radoviš",
+            "probistip": "Probištip",
+            "prilep": "Prilep",
+            "pehcevo": "Pehčevo",
+            "ohrid": "Ohrid",
+            "negotino": "Negotino",
+            "makedonski_brod": "Makedonski Brod",
+            "kumanovo": "Kumanovo",
+            "krusevo": "Kruševo",
+            "kriva_palanka": "Kriva Palanka",
+            "kratovo": "Kratovo",
+            "kocani": "Kočani",
+            "kicevo": "Kičevo",
+            "kavadarci": "Kavadarci",
+            "demir_hisar": "Demir Hisar",
+            "delcevo": "Delčevo",
+            "debar": "Debar",
+            "gostivar": "Gostivar",
+            "gevgelija": "Gevgelija",
+            "vinica": "Vinica",
+            "valandovo": "Valandovo",
+            "bitola": "Bitola"
+        },
+        "region": {
+            "sk": "Skopski",
+            "si": "Severoistočen",
+            "po": "Pološki",
+            "pe": "Pelagoniski",
+            "ji": "Jugoistočen",
+            "jz": "Jugozapaden",
+            "is": "Istočen",
+            "va": "Vardarski"
+        },
+        "phase": {
+            "6": {
+                "title": "Faza 6"
+            },
+            "5": {
+                "title": "Faza 5"
+            },
+            "4": {
+                "title": "Faza 4"
+            },
+            "3": {
+                "title": "Faza 3"
+            },
+            "2": {
+                "title": "Faza 2"
+            },
+            "1": {
+                "title": "Faza 1"
+            }
+        }
     }
 }

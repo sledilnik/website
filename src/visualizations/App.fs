@@ -24,6 +24,7 @@ let init (query: obj) (visualization: string option) =
                 | "Regions" -> Some Regions
                 | "Municipalities" -> Some Municipalities
                 | "AgeGroups" -> Some AgeGroups
+                | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
                 | "HCenters" -> Some HCenters
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
@@ -61,7 +62,8 @@ open Elmish.React
 
 let render (state: State) (_: Msg -> unit) =
     let allVisualizations: Visualization list =
-        [ { VisualizationType = Hospitals
+        [
+          { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
             Label = I18N.t "charts.hospitals.title"
             Explicit = true
@@ -111,6 +113,30 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
                         lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
+          { VisualizationType = EuropeMap
+            ClassName = "europe-chart"
+            Label = I18N.t "charts.europe.title"
+            Explicit = false
+            Renderer =
+               fun state ->
+                   match state.StatsData with
+                   | NotAsked -> Html.none
+                   | Loading -> Utils.renderLoading
+                   | Failure error -> Utils.renderErrorLoading error
+                   | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
+          { VisualizationType = AgeGroupsTimeline
+            ClassName = "age-groups-trends-chart"
+            Label = I18N.t "charts.ageGroupsTimeline.title"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView AgeGroupsTimelineViz.Rendering.renderChart
+                            {| data = data |} }
           { VisualizationType = Tests
             ClassName = "tests-chart"
             Label = I18N.t "charts.tests.title"
@@ -175,7 +201,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }   
+                    | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
           { VisualizationType = Regions
             ClassName = "regions-chart"
             Label = I18N.t "charts.regions.title"
@@ -187,17 +213,6 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
-          { VisualizationType = EuropeMap
-            ClassName = "europe-chart"
-            Label = I18N.t "charts.europe.title"
-            Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
           { VisualizationType = Countries
             ClassName = "countries-chart"
             Label = I18N.t "charts.countries.title"
@@ -303,16 +318,14 @@ let render (state: State) (_: Msg -> unit) =
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div
-        [ prop.className
-            [ true, "visualization container"
-              embedded, "embeded" ]
+        [ Utils.classes
+            [(true, "visualization container")
+             (embedded, "embeded") ]
           prop.children
               (visualizations
                |> List.map (fun viz ->
                    Html.section
-                       [ prop.className
-                           [ true, viz.ClassName
-                             true, "visualization-chart" ]
+                       [ prop.className [ viz.ClassName; "visualization-chart" ]
                          prop.id viz.ClassName
                          prop.children
                              [ Html.div

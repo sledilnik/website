@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="$route.path.slice(4)">
+  <div id="app" :class="[embed ? $route.path.slice(7) : $route.path.slice(4)]">
     <Navbar v-if="!embed" />
     <main>
       <router-view :key="$route.path" />

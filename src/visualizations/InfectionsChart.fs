@@ -278,9 +278,9 @@ let renderDisplaySelectors activeDisplayType dispatch =
         let active = displayType = activeDisplayType
         Html.div [
             prop.text (I18N.tt "charts.infections" displayType.Id)
-            prop.className [
-                true, "btn btn-sm metric-selector"
-                active, "metric-selector--selected selected" ]
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected")]
             if not active then prop.onClick (fun _ -> dispatch displayType)
             if active then prop.style [ style.backgroundColor "#808080" ]
           ]
