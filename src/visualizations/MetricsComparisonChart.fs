@@ -152,7 +152,7 @@ let renderChartOptions state dispatch =
 
 let renderChartContainer state dispatch =
     Html.div [
-        prop.style [ style.height 480 ] 
+        prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
@@ -167,7 +167,9 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         else [ ]
     Html.div [
         prop.onClick (fun _ -> ToggleMetricVisible metric.Metric |> dispatch)
-        prop.className [ true, "btn btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (metric.Visible, "metric-selector--selected")]
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 

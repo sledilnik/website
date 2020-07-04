@@ -189,7 +189,9 @@ let renderChartContainer state dispatch =
 let renderDisplaySelector state dt dispatch =
     Html.div [
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
-        prop.className [ true, "btn btn-sm metric-selector"; state.displayType = dt, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (state.displayType = dt, "metric-selector--selected") ]
         prop.text (dt |> DisplayType.getName)
     ]
 

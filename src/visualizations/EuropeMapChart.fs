@@ -403,9 +403,9 @@ let renderMap state geoJson owdData =
             %s: <b>%s</b> (%s)<br/><br/>
             %s: <b>%s</b><br/>
             %s: <b>%s</b> (%s)<br/>"
-                country 
+                country
                 (I18N.t "charts.europe.countryStatus") rType
-                (I18N.t "charts.europe.importedCases") imported impDate 
+                (I18N.t "charts.europe.importedCases") imported impDate
                 (I18N.t "charts.europe.incidence1M") incidence1M
                 (I18N.t "charts.europe.newCases") newCases ncDate
 
@@ -465,12 +465,13 @@ let renderMap state geoJson owdData =
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     let renderChartSelector (chartSelector: ChartType) =
         let active = chartSelector = activeChartType
-        Html.div
-            [ prop.onClick (fun _ -> dispatch chartSelector)
-              prop.className
-                  [ true, "chart-display-property-selector__item"
-                    active, "selected" ]
-              prop.text (chartSelector.ToString()) ]
+        Html.div [
+            prop.onClick (fun _ -> dispatch chartSelector)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected")]
+            prop.text (chartSelector.ToString())
+        ]
 
     Html.div
         [ prop.className "chart-display-property-selector"
