@@ -1,5 +1,8 @@
 import _ from 'lodash'
-import { exportTime } from './index'
+import {
+  exportTime,
+  ApiEndpoint
+} from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 
@@ -104,22 +107,22 @@ export function lastChange(data, field, cumulative, date) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.dayBefore.value === 0
-      ? (result.lastDay.percentDiff = 0)
-      : (result.lastDay.percentDiff =
-          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
-          10)
+    result.dayBefore.value === 0 ?
+      (result.lastDay.percentDiff = 0) :
+      (result.lastDay.percentDiff =
+        Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
+        10)
   }
 
   if (typeof result.day2Before.value === "undefined") {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.day2Before.value === 0
-      ? (result.dayBefore.percentDiff = 0)
-      : (result.dayBefore.percentDiff =
-          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
-          10)
+    result.day2Before.value === 0 ?
+      (result.dayBefore.percentDiff = 0) :
+      (result.dayBefore.percentDiff =
+        Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+        10)
   }
 
   return result
@@ -167,9 +170,8 @@ const getters = {
         return day[field]
       })
     return {
-      date: result
-        ? new Date(Date.parse(result.date))
-        : new Date(new Date().setHours(0, 0, 0, 0)),
+      date: result ?
+        new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
       value: result ? result[field] : null,
     }
   },
@@ -180,15 +182,19 @@ const getters = {
 }
 
 const actions = {
-  fetchData: async ({ commit }) => {
-    const data = await ApiService.get('https://api.sledilnik.org/api/stats')
+  fetchData: async ({
+    commit
+  }) => {
+    const data = await ApiService.get(`${ApiEndpoint}/api/stats`)
     const d = exportTime(data.headers.timestamp)
 
     commit('setData', data.data)
     commit('setRegions', regions)
     commit('setExportTime', d)
   },
-  refreshDataEvery: ({ dispatch }, seconds) => {
+  refreshDataEvery: ({
+    dispatch
+  }, seconds) => {
     setInterval(() => {
       dispatch('fetchData')
     }, seconds * 1000)

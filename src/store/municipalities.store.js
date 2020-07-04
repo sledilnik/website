@@ -1,5 +1,8 @@
 import ApiService from '../services/api.service'
-import { exportTime } from './index'
+import {
+  exportTime,
+  ApiEndpoint
+} from './index'
 
 const state = {
   exportTime: null,
@@ -14,17 +17,19 @@ const getters = {
 }
 
 const actions = {
-  fetchData: async ({ commit }) => {
-    const data = await ApiService.get(
-      'https://api.sledilnik.org/api/municipalities'
-    )
+  fetchData: async ({
+    commit
+  }) => {
+    const data = await ApiService.get(`${ApiEndpoint}/api/municipalities`)
     const d = exportTime(data.headers.timestamp)
 
     commit('setData', data.data)
     commit('setExportTime', d)
   },
 
-  refreshDataEvery: ({ dispatch }, seconds) => {
+  refreshDataEvery: ({
+    dispatch
+  }, seconds) => {
     setInterval(() => {
       dispatch('fetchData')
     }, seconds * 1000)

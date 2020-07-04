@@ -54,6 +54,19 @@ i18next.services.pluralResolver.addRule(
           return Number(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);
       }
   });
+  i18next.services.pluralResolver.addRule(
+    // override plural rule from
+    // https://github.com/i18next/i18next/blob/270904f6369ee9bbda059c3186fcea7baf9eb15d/src/PluralResolver.js#L58
+    // with the one from
+    // https://unicode-org.github.io/cldr-staging/charts/37/supplemental/language_plural_rules.html#mk
+    // to use plural also for 11, 111, 211, 311...
+    'mk',
+    {
+        numbers: [1,2],
+        plurals: function plurals(n) {
+          return Number(n==1 || n%10==1 && n%100!=11 ? 0 : 1);
+        }
+    });
 
 const i18n = new VueI18Next(i18next)
 

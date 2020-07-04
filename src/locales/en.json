@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik gets younger brother..."
+        "news001": "New chart:",
+        "news002": "Confirmed Cases by Age Groups"
     },
     "infocard": {
         "tests": "Tests Today",
@@ -295,6 +295,7 @@
             "title": "COVID-19 Situation in Europe",
             "twoWeekIncidence": "14 days incidence per million",
             "restrictions": "Restrictions and imported cases",
+            "newCases": "New cases",
             "incidence1M": "New cases in 14 days per 1M",
             "importedCases": "Imported cases in 14 days",
             "countryStatus": "Restrictions",
@@ -339,6 +340,9 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
+        },
+        "ageGroupsTimeline": {
+            "title": "Confirmed Cases by Age Groups"
         },
         "countries": {
             "title": "Comparison by Country",
@@ -532,7 +536,7 @@
         },
         "liftGatherings500": {
             "title": "Up to 500",
-            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
+            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA and HUN"
         },
         "quarantineStrict": {
             "title": "Quarantine",

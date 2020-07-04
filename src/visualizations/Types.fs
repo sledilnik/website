@@ -109,6 +109,7 @@ type VisualizationType =
     | Regions
     | Municipalities
     | AgeGroups
+    | AgeGroupsTimeline
     | Map
     | EuropeMap
     | Infections
