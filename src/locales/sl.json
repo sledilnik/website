@@ -569,9 +569,9 @@
             "title": "Potrjeni primeri po starostnih skupinah"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na milijon prebivalcev",
-            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
-            "legendTitle": "Novi primeri na milijon prebivalcev",
+            "title": "Države: novookuženi na milijon prebivalcev",
+            "yAxisTitle": "Št. novookuženih na milijon prebivalcev",
+            "legendTitle": "Novookuženi na milijon prebivalcev",
             "groupNeighbouring": "okolica",
             "groupNeighbouringWoItaly": "okolica (brez Italije)",
             "groupCriticalEU": "kritične države (EU)",

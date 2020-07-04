@@ -388,7 +388,10 @@
             "full": "Исполнети",
             "max": "Макс"
         },
-        "countries": {
+        "countriesNewCasesPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
             "groupNordic": "Нордиски земји",
             "groupEastAsiaOceania": "Источна Азија и Океанија",
             "chronologically": "Хронолошки",
@@ -399,12 +402,27 @@
             "groupExYu": "Држави од бивша Југославија",
             "groupLatinAmerica": "Латинска Америка",
             "sinceFirstDeath": "Од првиот смртен случај",
-            "deathsPerMillion": "Бр. на починати на милион жители",
             "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
             "daysFromFirstDeath": "Број на денови од првиот смртен случај",
-            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
-            "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
-            "title": "Споредба по држави"
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
+            "groupNordic": "Нордиски земји",
+            "groupEastAsiaOceania": "Источна Азија и Океанија",
+            "chronologically": "Хронолошки",
+            "groupCriticalEU": "Критични држави (ЕУ)",
+            "groupCriticalWorld": "Критични држави (на светско ниво)",
+            "groupNeighbouringWoItaly": "Држави од регионот",
+            "groupNeighbouring": "Држави од регионот",
+            "groupExYu": "Држави од бивша Југославија",
+            "groupLatinAmerica": "Латинска Америка",
+            "sinceFirstDeath": "Од првиот смртен случај",
+            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
+            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",

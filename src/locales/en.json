@@ -344,13 +344,31 @@
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups"
         },
-        "countries": {
-            "title": "Comparison by Country",
-            "nrDeathsPerMillion": "Nr. deaths per 1 million people",
+        "countriesNewCasesPer1M": {
+            "title": "Countries: New Cases Per 1 Million People",
+            "yAxisTitle": "New cases per 1 million people",
+            "legendTitle": "New cases per 1M people",
             "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
             "daysFromFirstDeath": "Nr. days since first death",
             "sinceOneDeathPerMillion": "Since first death per million people",
-            "deathsPerMillion": "Deaths per Million People",
+            "sinceFirstDeath": "Since the first death",
+            "chronologically": "Chronological",
+            "groupLatinAmerica": "Latin America",
+            "groupEastAsiaOceania": "East Asia and Oceania",
+            "groupExYu": "Ex-Yugoslavia",
+            "groupNordic": "Nordic countries",
+            "groupCriticalWorld": "Critical countries (World)",
+            "groupCriticalEU": "Critical countries (EU)",
+            "groupNeighbouring": "Surroundings",
+            "groupNeighbouringWoItaly": "Surroundings (excluding Italy)"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Countries: Total Deaths Per 1 Million People",
+            "yAxisTitle": "Total deaths per 1 million people",
+            "legendTitle": "Total deaths per 1M people",
+            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
+            "daysFromFirstDeath": "Nr. days since first death",
+            "sinceOneDeathPerMillion": "Since first death per million people",
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological",
             "groupLatinAmerica": "Latin America",

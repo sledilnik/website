@@ -2,9 +2,6 @@
 
 ## Countries
 - update en, hr and mk translations
-    - add new groups
-    - replace `deathsPerMillion` -> `legendTitle`
-    - replace `nrDeathsPerMillion` -> `yAxisTitle`
 - remove `Label` property of `Visualization`
 - move certain common translations to a separate group instead of copying them
     across all country charts
