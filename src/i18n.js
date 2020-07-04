@@ -5,6 +5,7 @@ import VueI18Next from '@panter/vue-i18next'
 import moment from 'moment'
 import en from './locales/en.json'
 import sl from './locales/sl.json'
+import hr from './locales/hr.json'
 
 Vue.use(VueI18Next)
 
@@ -24,11 +25,12 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl'],
+  fallbackLng: ['en', 'sl', 'hr'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
     en: { translation: en },
+    hr: { translation: hr },
   },
   detection: detectionOptions,
   interpolation: {
