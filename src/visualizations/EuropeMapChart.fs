@@ -374,7 +374,7 @@ let renderMap state geoJson owdData =
         {| dataClassColor = "category"
            dataClasses =
                [| {| from = 0; color = "#ffffb2" |}
-                  {| from = 10; color = "#fed976" |}
+                  {| from = 50; color = "#fed976" |}
                   {| from = 100; color = "#feb24c" |}
                   {| from = 160; color = "#fd8d3c" |}
                   {| from = 320; color = "#fc4e2a" |}
