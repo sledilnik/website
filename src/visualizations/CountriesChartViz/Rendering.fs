@@ -245,7 +245,7 @@ let renderCountriesSetsSelectors
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text (chartText chartTextsGroup setToRender.Label)
+            prop.text (I18N.t ("country-groups." + setToRender.Label))
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected") ]

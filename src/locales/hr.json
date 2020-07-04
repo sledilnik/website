@@ -67,6 +67,16 @@
         "UKR": "Ukrajina",
         "VAT": "Vatikan"
     },
+    "country-groups": {
+        "groupCriticalEU": "Kritične države (EU)",
+        "groupEastAsiaOceania": "Istočna Azija i Oceanija",
+        "groupNordic": "Nordijske zemlje",
+        "groupLatinAmerica": "Latinska Amerika",
+        "groupCriticalWorld": "Kritične države (svijet)",
+        "groupExYu": "Ex-Jugoslavija",
+        "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
+        "groupNeighbouring": "Susjedne zemlje"
+    },
     "charts": {
         "municipalities": {
             "sortDoublingTime": "Vrijeme udvostručenja",
@@ -162,37 +172,21 @@
             "title": "Države: novi slučajevi na milijun stanovnika",
             "yAxisTitle": "Broj novih slučajeva na milijun stanovnika",
             "legendTitle": "Novi slučajevi na milijun stanovnika",
-            "groupCriticalEU": "Kritične države (EU)",
-            "groupEastAsiaOceania": "Istočna Azija i Oceanija",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "groupNordic": "Nordijske zemlje",
-            "groupLatinAmerica": "Latinska Amerika",
-            "groupCriticalWorld": "Kritične države (svijet)",
-            "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika",
-            "groupNeighbouring": "Susjedne zemlje"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli na milijun stanovnika",
             "yAxisTitle": "Broj umrlih milijun stanovnika",
             "legendTitle": "Umrli na milijun stanovnika",
-            "groupCriticalEU": "Kritične države (EU)",
-            "groupEastAsiaOceania": "Istočna Azija i Oceanija",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "groupNordic": "Nordijske zemlje",
-            "groupLatinAmerica": "Latinska Amerika",
-            "groupCriticalWorld": "Kritične države (svijet)",
-            "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika",
-            "groupNeighbouring": "Susjedne zemlje"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
