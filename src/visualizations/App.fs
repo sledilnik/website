@@ -5,6 +5,7 @@ open Elmish
 open Feliz
 
 open Types
+open CountriesChartViz.Synthesis
 
 let init (query: obj) (visualization: string option) =
     let inner () =
@@ -28,7 +29,8 @@ let init (query: obj) (visualization: string option) =
                 | "HCenters" -> Some HCenters
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
-                | "Countries" -> Some Countries
+                | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
+                | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
                 | _ -> None
                 |> Embedded
 
@@ -213,9 +215,9 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
-          { VisualizationType = Countries
+          { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-chart"
-            Label = I18N.t "charts.countries.title"
+            Label = I18N.t "charts.countriesNewCasesPer1M.title"
             Explicit = false
             Renderer =
                 fun state ->
@@ -223,7 +225,30 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success _ -> lazyView CountriesChartViz.Rendering.renderChart () } ]
+                    | Success _ ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { MetricToDisplay = NewCasesPer1M
+                              ChartTextsGroup = "charts.countriesNewCasesPer1M"
+                            }
+          }
+          { VisualizationType = CountriesDeathsPer1M
+            ClassName = "countries-chart"
+            Label = I18N.t "charts.countriesTotalDeathsPer1M.title"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success _ ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { MetricToDisplay = TotalDeathsPer1M
+                              ChartTextsGroup =
+                                  "charts.countriesTotalDeathsPer1M"
+                            }
+          }
+          ]
 
     let embedded, visualizations =
         match state.RenderingMode with

@@ -7,6 +7,13 @@ open Highcharts
 open JsInterop
 open Types
 
+type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
+
+type CountriesChartConfig = {
+    MetricToDisplay: MetricToDisplay
+    ChartTextsGroup: string
+}
+
 type CountriesDisplaySet = {
     Label: string
     CountriesCodes: string[]
@@ -15,8 +22,10 @@ type CountriesDisplaySet = {
 type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
+    MetricToDisplay: MetricToDisplay
     XAxisType: XAxisType
     ScaleType: ScaleType
+    ChartTextsGroup: string
 }
 
 let ColorPalette =
@@ -43,7 +52,7 @@ type CountrySeries = {
 }
 
 type ChartData = {
-    DataDescription: string
+    LegendTitle: string
     XAxisTitle: string
     YAxisTitle: string
     Series: CountrySeries[]
@@ -56,7 +65,7 @@ let tooltipFormatter state chartData jsThis =
     | [||] -> ""
     | _ ->
         let dataDescription =
-            sprintf "<b>%s:</b>" chartData.DataDescription
+            sprintf "<b>%s:</b>" chartData.LegendTitle
 
         let s = StringBuilder()
         s.Append dataDescription |> ignore
@@ -149,15 +158,16 @@ let prepareChartData
 
         {
             Series = series
-            DataDescription = I18N.t "charts.countries.deathsPerMillion"
+            LegendTitle = I18N.t (state.ChartTextsGroup + ".legendTitle")
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
                 | DaysSinceFirstDeath ->
-                    I18N.t "charts.countries.daysFromFirstDeath"
+                    I18N.t (state.ChartTextsGroup + ".daysFromFirstDeath")
                 | DaysSinceOneDeathPerMillion ->
-                    I18N.t "charts.countries.daysFromOneDeathPerMillion"
-            YAxisTitle = I18N.t "charts.countries.nrDeathsPerMillion"
+                    I18N.t
+                        (state.ChartTextsGroup + ".daysFromOneDeathPerMillion")
+            YAxisTitle = I18N.t (state.ChartTextsGroup + ".yAxisTitle")
         }
         |> Some
     | None -> None

@@ -113,7 +113,8 @@ type VisualizationType =
     | Map
     | EuropeMap
     | Infections
-    | Countries
+    | CountriesCasesPer1M
+    | CountriesDeathsPer1M
 
 type RenderingMode =
     | Normal

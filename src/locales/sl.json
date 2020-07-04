@@ -568,8 +568,10 @@
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah"
         },
-        "countries": {
-            "title": "Primerjava po državah",
+        "countriesNewCasesPer1M": {
+            "title": "Države: novi primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
+            "legendTitle": "Novi primeri na milijon prebivalcev",
             "groupNeighbouring": "okolica",
             "groupNeighbouringWoItaly": "okolica (brez Italije)",
             "groupCriticalEU": "kritične države (EU)",
@@ -581,10 +583,26 @@
             "chronologically": "Kronološko",
             "sinceFirstDeath": "Od prve smrti",
             "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
             "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
-            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev"
+            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Države: umrli (skupaj) na milijon prebivalcev",
+            "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
+            "legendTitle": "Umrli (skupaj) na milijon prebivalcev",
+            "groupNeighbouring": "okolica",
+            "groupNeighbouringWoItaly": "okolica (brez Italije)",
+            "groupCriticalEU": "kritične države (EU)",
+            "groupCriticalWorld": "kritične države (svet)",
+            "groupNordic": "nordijske države",
+            "groupExYu": "ex-Jugoslavija",
+            "groupEastAsiaOceania": "vzh. Azija in Oceanija",
+            "groupLatinAmerica": "Latinska Amerika",
+            "chronologically": "Kronološko",
+            "sinceFirstDeath": "Od prve smrti",
+            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
+            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
+            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
         }
     },
     "footer": {

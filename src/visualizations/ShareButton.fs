@@ -26,7 +26,8 @@ let dropdown (viz: Visualization) =
             | AgeGroups -> (1140, 720)
             | AgeGroupsTimeline -> (1140, 720)
             // | Hospitals -> (1140, 1130)
-            | Countries -> (1140, 740)
+            | CountriesCasesPer1M -> (1140, 740)
+            | CountriesDeathsPer1M -> (1140, 740)
             | _ -> (1140, 720)
 
         let graphUrl =
