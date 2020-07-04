@@ -297,9 +297,9 @@ let renderMap (state : State) =
 let renderSelector option currentOption dispatch =
     let defaultProps =
         [ prop.text (option.ToString())
-          prop.className [
-              true, "chart-display-property-selector__item"
-              option = currentOption, "selected" ] ]
+          Utils.classes
+              [(true, "chart-display-property-selector__item")
+               (option = currentOption, "selected") ] ]
     if option = currentOption
     then Html.div defaultProps
     else Html.div ((prop.onClick (fun _ -> dispatch option)) :: defaultProps)

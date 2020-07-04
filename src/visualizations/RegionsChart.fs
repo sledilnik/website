@@ -43,7 +43,7 @@ type XAxisType =
 
 type State =
     { ScaleType : ScaleType
-      XAxisType : XAxisType  
+      XAxisType : XAxisType
       Data : RegionsData
       Regions : Region list
       Metrics : Metric list
@@ -109,7 +109,7 @@ let renderChartOptions (state : State) dispatch =
             |> List.find (fun reg -> reg.Name = metricToRender.Key)
         let count =
             region.Municipalities
-            |> Seq.sumBy (fun city -> 
+            |> Seq.sumBy (fun city ->
                             match state.XAxisType with
                             | ActiveCases -> city.ActiveCases |> Option.defaultValue 0
                             | ConfirmedCases -> city.ConfirmedToDate |> Option.defaultValue 0
@@ -170,7 +170,9 @@ let renderMetricSelector (metric : Metric) dispatch =
         else [ ]
     Html.div [
         prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
-        prop.className [ true, "btn  btn-sm metric-selector"; metric.Visible, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn  btn-sm metric-selector")
+             (metric.Visible, "metric-selector--selected") ]
         prop.style style
         prop.text (I18N.tt "region" metric.Key) ]
 
@@ -188,7 +190,9 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
         let active = axisSelector = activeXAxisType
         Html.div [
             prop.onClick (fun _ -> dispatch axisSelector)
-            prop.className [ true, "chart-display-property-selector__item"; active, "selected" ]
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
             prop.text (axisSelector |> XAxisType.getName)
         ]
 

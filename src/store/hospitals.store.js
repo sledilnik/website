@@ -1,4 +1,7 @@
-import { exportTime } from './index'
+import {
+  exportTime,
+  ApiEndpoint
+} from './index'
 import hospitalsJSON from '../services/dict.hospitals.json'
 import ApiService from '../services/api.service'
 
@@ -33,7 +36,10 @@ const getters = {
         new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
       )
     })
-    return { date, value: searchResult ? searchResult[field] : null }
+    return {
+      date,
+      value: searchResult ? searchResult[field] : null
+    }
   },
   getLastValue: (state, getters) => (field) => {
     let result = getters.data
@@ -43,17 +49,18 @@ const getters = {
         return day[field]
       })
     return {
-      date: result
-        ? new Date(Date.parse(result.date))
-        : new Date(new Date().setHours(0, 0, 0, 0)),
+      date: result ?
+        new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
       value: result ? result[field] : null,
     }
   },
 }
 
 const actions = {
-  fetchData: async ({ commit }) => {
-    const data = await ApiService.get('https://api.sledilnik.org/api/hospitals')
+  fetchData: async ({
+    commit
+  }) => {
+    const data = await ApiService.get(`${ApiEndpoint}/api/hospitals`)
     const d = exportTime(data.headers.timestamp)
 
     let hospitals = {}
@@ -65,7 +72,9 @@ const actions = {
     commit('setHospitals', hospitals)
     commit('setExportTime', d)
   },
-  refreshDataEvery: ({ dispatch }, seconds) => {
+  refreshDataEvery: ({
+    dispatch
+  }, seconds) => {
     setInterval(() => {
       dispatch('fetchData')
     }, seconds * 1000)

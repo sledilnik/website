@@ -260,6 +260,9 @@
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
             "incidence1M": "Raste të reja për 14 ditë në 1M"
+        },
+        "ageGroupsTimeline": {
+            "title": "Rastet e konfirmuara sipas grupmoshës"
         }
     },
     "shortMonth": {

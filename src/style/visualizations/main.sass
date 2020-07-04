@@ -413,7 +413,22 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     @include media-breakpoint-down(sm)
       .map
         height: inherit
-      padding-bottom: 0
+
+  .europe-chart
+    $bar-color: #d5c768
+
+    .bars, .bar-wrapper
+      display: flex
+      align-items: flex-end
+
+    .bar-wrapper
+      position: relative
+      height: 50px
+
+    .bar
+      width: 4px
+      margin-right: 1px
+      background-color: $bar-color
 
   .age-groups-chart
     min-height: 579px
@@ -440,6 +455,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       cursor: pointer
       font-size: 9px
       text-align: right
+      position: relative
+      top: 5px
+      right: 10px
 
       a 
         color: #999999
@@ -533,9 +551,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         content: ""
         display: inline-block
         position: relative
-        top: 2px
-        width: 13px
-        height: 13px
+        top: -2px
+        left: 1px
+        width: 5px
+        height: 5px
         margin-right: 6px
         border-radius: 50%
 
