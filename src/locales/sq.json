@@ -85,14 +85,14 @@
             "all": "Të gjithë: ",
             "showLess": "Shfaq më pak",
             "showAll": "Shfaq të gjitha",
-            "search": "Kërko komunën",
+            "search": "Kërko qytetin",
             "allRegions": "Të gjithë rajonet",
             "sortBy": "Rendit sipas:",
             "sortActive": "Aktive",
             "sortTotal": "Të gjithë",
             "sortDoublingTime": "Koha e dyfishimit",
             "sortLast": "I fundit",
-            "title": "Rastet sipas komunave",
+            "title": "Rastet sipas qyteteve",
             "viewActive": "Aktive",
             "viewTotal": "Të gjithe",
             "viewDoublingTime": "Koha e dyfishimit",
@@ -260,6 +260,9 @@
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
             "incidence1M": "Raste të reja për 14 ditë në 1M"
+        },
+        "ageGroupsTimeline": {
+            "title": "Rastet e konfirmuara sipas grupmoshës"
         }
     },
     "shortMonth": {
@@ -469,7 +472,7 @@
         },
         "municipality": {
             "description": "Ndalimi i lëvizjes jashtë kufijve të komunës, dezinfektimi i detyrueshëm i <br>ndërtesave me shumë banesa, shitore për grupe të rrezikuara deri në orën 10 të mëngjesit",
-            "title": "Komuna"
+            "title": "Qytete"
         },
         "shops": {
             "title": "Shitore",
@@ -492,7 +495,7 @@
             "title": "Muze"
         },
         "liftMunicipality": {
-            "title": "Komuna",
+            "title": "Qytete",
             "description": "Relaksim: lëvizje jashtë kufijve të komunës suaj"
         },
         "liftFoodMarkets": {
@@ -514,6 +517,10 @@
         "liftSchools4to5": {
             "title": "Shkolla",
             "description": "Relaksim: shkolla fillore klasa e 4-t, 5-të, grumbullim deri në 200 persona, të gjithë shërbimet e akomodimit"
+        },
+        "gatherings50": {
+            "description": "Grumbullime deri në 50 persona, deri në 500 nëse miratohet nga ISHP",
+            "title": "Deri në 50"
         }
     },
     "tableDict": {

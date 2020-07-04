@@ -115,7 +115,7 @@
             "dsMZ": "Ministarstvo za zdravlje",
             "dsOWD": "Naš svijet u brojkama",
             "numDateFormat": "%d. %m. %Y.",
-            "all": "Sva",
+            "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
             "dateFormat": "%A, %e. %B %Y.",
             "webpage": "Web-stranica",
@@ -152,7 +152,7 @@
             "last_x_days_1": "{{ count }} dana",
             "last_x_days_2": "{{ count }} dana",
             "populationShare": "Udio stanovništva",
-            "all": "Sva",
+            "all": "Svi",
             "population": "stanovništvo",
             "absolute": "Apsolutno",
             "deceased": "Umrli",
@@ -193,6 +193,9 @@
             "shareOfDeceasedPopulation": "Udio umrlih u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi"
         },
+        "ageGroupsTimeline": {
+            "title": "Potvrđeni slučajevi po dobnim skupinama"
+        },
         "patients": {
             "structure": "Struktura",
             "deceased": "Umrli",
@@ -216,7 +219,7 @@
             "hospitalizedToDate": "Hospitalizirani (do danas)",
             "icu": "Na odjelu intenzivne njege",
             "tests": "Testovi (dnevno)",
-            "dischargedToDate": "Otpušteni iz boline (do danas)",
+            "dischargedToDate": "Otpušteni iz bolnice (do danas)",
             "hospitalized": "Hospitalizirani",
             "discharged": "Otpušteni iz boline (dnevno)",
             "deceasedToDate": "Umrli (do danas)",
@@ -424,8 +427,8 @@
             "title": "Karantena"
         },
         "gatherings": {
-            "title": "Sakupljanja",
-            "description": "Zabrana sakupljanja na javnim mjestima"
+            "title": "Okupljanja",
+            "description": "Zabrana okupljanja na javnim mjestima"
         },
         "liftVacationHomes": {
             "title": "Vikendice",
@@ -442,6 +445,10 @@
         "liftGatherings500": {
             "title": "Do 500",
             "description": "Opuštanje: okupljanje do 500 osoba, gledatelji na sportskim događajima.<br>Slobodan prijelaz preko granice izvan kontrolnih točaka za građane SLO, AUT, ITA i HUN"
+        },
+        "gatherings50": {
+            "description": "Okupljanje do 50 osoba, do 500 ako ih odobri NIJZ",
+            "title": "Do 50"
         }
     },
     "pageNotFound": {
@@ -521,51 +528,51 @@
         "copied": "Kopirano!"
     },
     "tableDict": {
-        "age_female_25-34_todate": "25 – 34 godine",
+        "age_female_25-34_todate": "25 – 34 godina",
         "region_todate": "Ukupno",
-        "age_female_55-64_todate": "55 – 64 godine",
+        "age_female_55-64_todate": "55 – 64 godina",
         "state_in_hospital_todate": "Hospitalizirani (do danas)",
         "age_male_todate": "Ukupno",
-        "age_male_45-54_todate": "45 – 54 godine",
-        "age_male_5-14_todate": "5 – 14 godine",
+        "age_male_45-54_todate": "45 – 54 godina",
+        "age_male_5-14_todate": "5 – 14 godina",
         "region_lj_todate": "Osrednjeslovenska",
-        "age_male_35-44_todate": "35 – 44 godine",
+        "age_male_35-44_todate": "35 – 44 godina",
         "region_mb_todate": "Podravska",
         "region_kr_todate": "Gorenjska",
         "region_po_todate": "Notranjsko-kraška",
         "region_ng_todate": "Goriška",
-        "age_female_35-44_todate": "35 – 44 godine",
-        "age_male_75-84_todate": "75 – 84 godine",
+        "age_female_35-44_todate": "35 – 44 godina",
+        "age_male_75-84_todate": "75 – 84 godina",
         "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – osoblje staračkih domova (do danas)",
         "tests_performed": "Testovi (dnevno)",
-        "age_female_75-84_todate": "75 – 84 godine",
-        "age_male_0-4_todate": "0 – 4 godine",
+        "age_female_75-84_todate": "75 – 84 godina",
+        "age_male_0-4_todate": "0 – 4 godina",
         "cases_closed_todate": "Zatvoreni slučajevi (do danas)",
         "region_za_todate": "Zasavlje",
         "state_in_hospital": "Hospitalizirani (aktivno)",
-        "age_female_65-74_todate": "65 – 74 godine",
-        "age_female_45-54_todate": "45 – 54 godine",
-        "age_female_85+_todate": "85+ godine",
-        "age_male_25-34_todate": "25 – 34 godine",
+        "age_female_65-74_todate": "65 – 74 godina",
+        "age_female_45-54_todate": "45 – 54 godina",
+        "age_female_85+_todate": "85+ godina",
+        "age_male_25-34_todate": "25 – 34 godina",
         "cases_unclassified_confirmed_todate": "Potvrđeni slučajevi – ostali (do danas)",
-        "age_female_15-24_todate": "15 – 24 godine",
-        "age_female_0-4_todate": "0 – 4 godine",
+        "age_female_15-24_todate": "15 – 24 godina",
+        "age_female_0-4_todate": "0 – 4 godina",
         "region_ms_todate": "Pomurska",
         "region_nm_todate": "Jugoistočna Slovenija",
         "region_ce_todate": "Savinjska",
         "state_icu": "Na odjelu intenzivne njege (aktivno)",
-        "age_male_15-24_todate": "15 – 24 godine",
+        "age_male_15-24_todate": "15 – 24 godina",
         "cases_recovered_todate": "Ozdravili (do danas)",
         "cases_rh_occupant_confirmed_todate": "Potvrđeni slučajevi – stanovnici staračkih domova (do danas)",
-        "state_out_of_hospital_todate": "Otpušteni iz boline (do danas)",
+        "state_out_of_hospital_todate": "Otpušteni iz bolnice (do danas)",
         "cases_active": "Aktivni slučajevi",
-        "age_female_5-14_todate": "5 – 14 godine",
+        "age_female_5-14_todate": "5 – 14 godina",
         "region_kk_todate": "Posavska",
-        "age_male_85+_todate": "85+ godine",
-        "age_male_65-74_todate": "65 – 74 godine",
-        "cases_hs_employee_confirmed_todate": "Potvrđeni slučajevi – zdravtsveni radnici (do danas)",
+        "age_male_85+_todate": "85+ godina",
+        "age_male_65-74_todate": "65 – 74 godina",
+        "cases_hs_employee_confirmed_todate": "Potvrđeni slučajevi – zdravstveni radnici (do danas)",
         "state_deceased_todate": "Potvrđeni smrtni slučajevi (do danas)",
-        "age_male_55-64_todate": "55 – 64 godine",
+        "age_male_55-64_todate": "55 – 64 godina",
         "cases_confirmed_todate": "Potvrđeni slučajevi (do danas)",
         "region_sg_todate": "Koruška",
         "region_kp_todate": "Obalno-kraška",
@@ -636,12 +643,12 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Nova karta:",
-        "news002": "COVID-19 situacija u Europi – ograničenja, uvezeni slučajevi …"
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik dobiva mlađeg brata …"
     },
     "timestamp": {
-        "at": "na {{ date, HH:mm }}",
-        "updated": "AKtualizirano: {{ date, dddd, D. MMMM YYYY. }}"
+        "at": "{{ date, HH:mm }}",
+        "updated": "Aktualizirano: {{ date, dddd, D. MMMM YYYY. }}"
     },
     "mk": {
         "municipality": {

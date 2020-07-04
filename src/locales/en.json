@@ -24,8 +24,8 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New map:",
-        "news002": "COVID-19 Situation in Europe - restrictions, imported cases..."
+        "news001": "Treker MK 🇲🇰:",
+        "news002": "Sledilnik gets younger brother..."
     },
     "infocard": {
         "tests": "Tests Today",
@@ -340,6 +340,9 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
         },
+        "ageGroupsTimeline": {
+            "title": "Confirmed Cases by Age Groups"
+        },
         "countries": {
             "title": "Comparison by Country",
             "nrDeathsPerMillion": "Nr. deaths per 1 million people",
@@ -532,11 +535,15 @@
         },
         "liftGatherings500": {
             "title": "Up to 500",
-            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA in HUN"
+            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA and HUN"
         },
         "quarantineStrict": {
             "title": "Quarantine",
             "description": "A tighter mandatory 14-day quarantine for all entrants from critical countries.<br>(red zone BIH, Serbia, Kosovo)"
+        },
+        "gatherings50": {
+            "title": "Up to 50",
+            "description": "Gathering up to 50 people, up to 500 if approved by NIJZ"
         }
     },
     "days": {

@@ -103,6 +103,11 @@ export default {
           text: this.$t('charts.ageGroups.title'),
           dimensions: [1140, 720]
         },
+        "AgeGroupsTimeline": {
+          value: "AgeGroupsTimeline",
+          text: this.$t('charts.ageGroupsTimeline.title'),
+          dimensions: [1140, 720]
+        },
 //        "Hospitals": {
 //          value: "Hospitals",
 //          text: 'Kapacitete bolnišnic',

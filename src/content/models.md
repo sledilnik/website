@@ -26,6 +26,8 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
 
+Dodatno je narejen še model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih sledilnika in ga lahko najdete na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
+
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
 
@@ -34,6 +36,11 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 
 <a href="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" class="img-link">
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
+
+
+## Ključni izzivi pri modeliranju epidemije
+
+*Matematično modeliranje s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji.* – [V uvodniku revije Zdravstveno varstvo](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19.
 
 
 ## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 

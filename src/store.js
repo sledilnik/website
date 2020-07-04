@@ -143,7 +143,10 @@ const statsStore = {
           new Date(Date.parse(day.date)).setHours(0, 0, 0, 0) === date.getTime()
         )
       })
-      return { date, value: searchResult ? searchResult[field] : null }
+      return {
+        date,
+        value: searchResult ? searchResult[field] : null
+      }
     },
     getLastValue: (state, getters) => (field) => {
       let result = getters.data
@@ -153,9 +156,9 @@ const statsStore = {
           return day[field]
         })
       return {
-        date: result
-          ? new Date(Date.parse(result.date))
-          : new Date(new Date().setHours(0, 0, 0, 0)),
+        date: result ?
+          new Date(Date.parse(result.date)) :
+          new Date(new Date().setHours(0, 0, 0, 0)),
         value: result ? result[field] : null,
       }
     },
@@ -164,7 +167,9 @@ const statsStore = {
     },
   },
   actions: {
-    fetchData: async ({ commit }) => {
+    fetchData: async ({
+      commit
+    }) => {
       const ts = new Date().getTime()
 
       const d = await exportTime(
@@ -172,7 +177,7 @@ const statsStore = {
       )
 
       const data = await ApiService.get(
-        'https://api.sledilnik.org/api/stats'
+        'https://covid19.rthand.com/api/stats'
       ).then((result) => {
         return result.data
       })
@@ -180,7 +185,9 @@ const statsStore = {
       commit('setRegions', regions)
       commit('setExportTime', d)
     },
-    refreshDataEvery: ({ dispatch }, seconds) => {
+    refreshDataEvery: ({
+      dispatch
+    }, seconds) => {
       setInterval(() => {
         dispatch('fetchData')
       }, seconds * 1000)
