@@ -67,12 +67,12 @@ let render (state: State) (_: Msg -> unit) =
         [
           { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
-            Label = I18N.t "charts.hospitals.title"
+            ChartTextsGroup = "hospitals"
             Explicit = true
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
           { VisualizationType = MetricsComparison
             ClassName = "metrics-comparison-chart"
-            Label = I18N.t "charts.metricsComparison.title"
+            ChartTextsGroup = "metricsComparison"
             Explicit = false
             Renderer =
                 fun state ->
@@ -83,7 +83,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
           { VisualizationType = Spread
             ClassName = "spread-chart"
-            Label = I18N.t "charts.spread.title"
+            ChartTextsGroup = "spread"
             Explicit = false
             Renderer =
                 fun state ->
@@ -94,7 +94,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
           { VisualizationType = Map
             ClassName = "map-chart"
-            Label = I18N.t "charts.map.title"
+            ChartTextsGroup = "map"
             Explicit = false
             Renderer =
                 fun state ->
@@ -105,7 +105,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView Map.mapChart {| data = data |} }
           { VisualizationType = Municipalities
             ClassName = "municipalities-chart"
-            Label = I18N.t "charts.municipalities.title"
+            ChartTextsGroup = "municipalities"
             Explicit = false
             Renderer =
                 fun state ->
@@ -117,7 +117,7 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
           { VisualizationType = EuropeMap
             ClassName = "europe-chart"
-            Label = I18N.t "charts.europe.title"
+            ChartTextsGroup = "europe"
             Explicit = false
             Renderer =
                fun state ->
@@ -128,7 +128,7 @@ let render (state: State) (_: Msg -> unit) =
                    | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
           { VisualizationType = AgeGroupsTimeline
             ClassName = "age-groups-trends-chart"
-            Label = I18N.t "charts.ageGroupsTimeline.title"
+            ChartTextsGroup = "ageGroupsTimeline"
             Explicit = false
             Renderer =
                 fun state ->
@@ -141,7 +141,7 @@ let render (state: State) (_: Msg -> unit) =
                             {| data = data |} }
           { VisualizationType = Tests
             ClassName = "tests-chart"
-            Label = I18N.t "charts.tests.title"
+            ChartTextsGroup = "tests"
             Explicit = false
             Renderer =
                 fun state ->
@@ -152,12 +152,12 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView TestsChart.testsChart {| data = data |} }
           { VisualizationType = HCenters
             ClassName = "hcenters-chart"
-            Label = I18N.t "charts.hCenters.title"
+            ChartTextsGroup = "hCenters"
             Explicit = false
             Renderer = fun _ -> lazyView HCentersChart.hCentersChart () }
           { VisualizationType = Infections
             ClassName = "infections-chart"
-            Label = I18N.t "charts.infections.title"
+            ChartTextsGroup = "infections"
             Explicit = false
             Renderer =
                 fun state ->
@@ -168,7 +168,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
           { VisualizationType = Cases
             ClassName = "cases-chart"
-            Label = I18N.t "charts.cases.title"
+            ChartTextsGroup = "cases"
             Explicit = false
             Renderer =
                 fun state ->
@@ -179,12 +179,12 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView CasesChart.casesChart {| data = data |} }
           { VisualizationType = Patients
             ClassName = "patients-chart"
-            Label = I18N.t "charts.patients.title"
+            ChartTextsGroup = "patients"
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
           { VisualizationType = Ratios
             ClassName = "ratios-chart"
-            Label = I18N.t "charts.ratios.title"
+            ChartTextsGroup = "ratios"
             Explicit = false
             Renderer =
                 fun state ->
@@ -195,7 +195,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
           { VisualizationType = AgeGroups
             ClassName = "age-groups-chart"
-            Label = I18N.t "charts.ageGroups.title"
+            ChartTextsGroup = "ageGroups"
             Explicit = false
             Renderer =
                 fun state ->
@@ -206,7 +206,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
           { VisualizationType = Regions
             ClassName = "regions-chart"
-            Label = I18N.t "charts.regions.title"
+            ChartTextsGroup = "regions"
             Explicit = false
             Renderer =
                 fun state ->
@@ -217,7 +217,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-chart"
-            Label = I18N.t "charts.countriesNewCasesPer1M.title"
+            ChartTextsGroup = "countriesNewCasesPer1M"
             Explicit = false
             Renderer =
                 fun _ ->
@@ -228,7 +228,7 @@ let render (state: State) (_: Msg -> unit) =
           }
           { VisualizationType = CountriesDeathsPer1M
             ClassName = "countries-chart"
-            Label = I18N.t "charts.countriesTotalDeathsPer1M.title"
+            ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
                 fun _ ->
@@ -329,7 +329,7 @@ let render (state: State) (_: Msg -> unit) =
                       [ prop.children
                           [ Html.a
                               [ prop.href ("#" + visualization.ClassName)
-                                prop.text visualization.Label
+                                prop.text (I18N.t ("charts." + visualization.ChartTextsGroup + ".title"))
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div

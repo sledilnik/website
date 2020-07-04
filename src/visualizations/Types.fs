@@ -129,7 +129,7 @@ type State =
 type Visualization = {
     VisualizationType: VisualizationType
     ClassName: string
-    Label: string
+    ChartTextsGroup: string
     Explicit: bool
     Renderer: State -> Fable.React.ReactElement
 }
