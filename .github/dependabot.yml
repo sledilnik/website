@@ -1,3 +1,6 @@
+# Dashboard: https://github.com/sledilnik/website/network/updates
+# Pull Requests: https://github.com/sledilnik/website/pulls?q=is%3Apr+is%3Aopen+label%3Adependencies
+
 # To get started with Dependabot version updates, you'll need to specify which
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
@@ -10,16 +13,19 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+
   - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/src/visualizations" # Location of package manifests
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
+
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/tests/Visualizations.Tests" # Location of package manifests
     schedule:
