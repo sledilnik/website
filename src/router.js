@@ -12,18 +12,25 @@ import PageNotFound from './pages/PageNotFound.vue'
 
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
+import * as aboutMdHr from './content/about_hr.md'
 import * as linksMd from './content/links.md'
 import * as linksMdEn from './content/links_en.md'
+import * as linksMdHr from './content/links_hr.md'
 import * as contentMd from './content/faq.md'
 import * as contentMdEn from './content/faq_en.md'
+import * as contentMdHr from './content/faq_hr.md'
 import * as teamMd from './content/team.md'
 import * as teamMdEn from './content/team_en.md'
+import * as teamMdHr from './content/team_hr.md'
 import * as sourcesMd from './content/sources.md'
 import * as sourcesMdEn from './content/sources_en.md'
+import * as sourcesMdHr from './content/sources_hr.md'
 import * as modelsMd from './content/models.md'
 import * as modelsMdEn from './content/models_en.md'
+import * as modelsMdHr from './content/models_hr.md'
 import * as datasourcesMd from './content/datasources.md'
 import * as datasourcesMdEn from './content/datasources_en.md'
+import * as datasourcesMdHr from './content/datasources_hr.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
@@ -31,31 +38,38 @@ Vue.use(VueMeta)
 const mdContent = {
   faq: {
     sl: contentMd,
-    en: contentMdEn
+    en: contentMdEn,
+    hr: contentMdHr,
   },
   about: {
     sl: aboutMd,
-    en: aboutMdEn
+    en: aboutMdEn,
+    hr: aboutMdHr,
   },
   team: {
     sl: teamMd,
-    en: teamMdEn
+    en: teamMdEn,
+    hr: teamMdHr,
   },
   links: {
     sl: linksMd,
-    en: linksMdEn
+    en: linksMdEn,
+    hr: linksMdHr,
   },
   sources: {
     sl: sourcesMd,
-    en: sourcesMdEn
+    en: sourcesMdEn,
+    hr: sourcesMdHr,
   },
   models: {
     sl: modelsMd,
-    en: modelsMdEn
+    en: modelsMdEn,
+    hr: modelsMdHr,
   },
   datasources: {
     sl: datasourcesMd,
-    en: datasourcesMdEn
+    en: datasourcesMdEn,
+    hr: datasourcesMdHr,
   },
 }
 
