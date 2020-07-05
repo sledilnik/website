@@ -259,7 +259,9 @@
             "statusNone": "-",
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
-            "incidence1M": "Raste të reja për 14 ditë në 1M"
+            "incidence1M": "Raste të reja për 14 ditë në 1M",
+            "noData": "Nuk ka të dhëna",
+            "newCases": "Raste të reja"
         },
         "ageGroupsTimeline": {
             "title": "Rastet e konfirmuara sipas grupmoshës"
@@ -414,8 +416,8 @@
         "tests": "Teste sot"
     },
     "notice": {
-        "news002": "Situata me COVID-19 në Evropë - kufizimet, rastet e importuara...",
-        "news001": "Hartë e re:"
+        "news002": "Rastet e konfirmuara sipas grupmoshës",
+        "news001": "Grafikon i ri:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
@@ -511,7 +513,7 @@
             "title": "Karantinë"
         },
         "liftGatherings500": {
-            "description": "Relaksim: grumbullim deri në 500 persona, shikues në ngjarje sportive. <br>Kalim i lirë kufitar jashtë pikave të kontrollit për qytetarët e SLO, AUT, ITA në HUN",
+            "description": "Relaksim: grumbullim deri në 500 persona, shikues në ngjarje sportive. <br>Kalim i lirë kufitar jashtë pikave të kontrollit për qytetarët e SLO, AUT, ITA dhe HUN",
             "title": "Deri në 500"
         },
         "liftSchools4to5": {

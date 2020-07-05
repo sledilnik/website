@@ -302,8 +302,8 @@
             "statusNone": "-",
             "statusGreen": "no restrictions",
             "statusYellow": "14 day quarantine with exceptions",
-            "statusRed": "strict 14 day quarantine"            
-
+            "statusRed": "strict 14 day quarantine",
+            "noData": "No data"
         },
         "municipalities": {
             "title": "Cases by Municipalities",
