@@ -527,7 +527,8 @@
             "statusNone": "-",
             "statusGreen": "brez omejitev",
             "statusYellow": "14-dnevna karantena z izjemami",
-            "statusRed": "obvezna 14-dnevna karantena"
+            "statusRed": "obvezna 14-dnevna karantena",
+            "noData": "Ni podatkov"
         },
         "municipalities": {
             "title": "Primeri po občinah",

@@ -75,6 +75,7 @@ let inline yAxisBase () =
         gridZIndex = -1
         max = None
         plotLines = [| {| value = 0; color = "black" |} |]
+        crosshair = true
     |}
 
 let inline legend title =

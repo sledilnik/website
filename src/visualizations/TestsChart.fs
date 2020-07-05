@@ -73,6 +73,7 @@ let renderChartOptions (state : State) dispatch =
             opposite = true
             visible = true
             max = None
+            crosshair = true
         |}
         {|
             index = 1
@@ -81,6 +82,7 @@ let renderChartOptions (state : State) dispatch =
             opposite = false
             visible = true
             max = Some 9
+            crosshair = true
         |}
     |]
 
