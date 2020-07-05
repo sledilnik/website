@@ -195,6 +195,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        | Linear -> 0
                        | Logarithmic -> 1
                    opposite = true
+                   crosshair = true
                    title =
                        pojo {|
                             align = "middle"
