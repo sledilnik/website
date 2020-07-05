@@ -5,19 +5,23 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem for possible values
+  - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "docker" # See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem for possible values
+    open-pull-requests-limit: 10
+  - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "nuget" # See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem for possible values
+    open-pull-requests-limit: 10
+  - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/src/visualizations" # Location of package manifests
     schedule:
       interval: "daily"
-  - package-ecosystem: "nuget" # See https://docs.github.com/en/github/administering-a-repository/configuration-options-for-dependency-updates#package-ecosystem for possible values
+    open-pull-requests-limit: 10
+  - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/tests/Visualizations.Tests" # Location of package manifests
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 10
