@@ -53,7 +53,7 @@ export default {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
-      languages: i18next.languages
+      languages: i18next.languages.sort()
     };
   },
   created() {
