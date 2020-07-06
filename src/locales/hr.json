@@ -90,7 +90,7 @@
             "viewActive": "Aktivne",
             "viewTotal": "Sve",
             "viewDoublingTime": "Vrijeme udvostručenja",
-            "viewLast": "Zadnja"
+            "viewLast": "Zadnje"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
@@ -164,17 +164,17 @@
             "groupEastAsiaOceania": "Istočna Azija i Oceanija",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
             "nrDeathsPerMillion": "Broj umrlih na 1 milijun stanovnika",
-            "groupNordic": "Nordijske zemlje",
+            "groupNordic": "Nordijske države",
             "groupLatinAmerica": "Latinska Amerika",
             "groupCriticalWorld": "Kritične države (svijet)",
             "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
+            "groupNeighbouringWoItaly": "Susjedne države (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
             "deathsPerMillion": "Broj umrlih na milijun ljudi",
             "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika",
-            "groupNeighbouring": "Susjedne zemlje"
+            "groupNeighbouring": "Susjedne države"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -329,11 +329,12 @@
             "statusNone": "-",
             "countryStatus": "Ograničenja",
             "importedCases": "Uvezeni slučajevi u 14 dana",
-            "incidence1M": "Novih slučajeva u roku od 14 dana na milijun stanovnika",
+            "incidence1M": "Novi slučajevi u 14 dana na milijun stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
             "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
             "title": "COVID-19 situacija u Europi",
-            "newCases": "Novih slučajeva"
+            "newCases": "Novi slučajevi",
+            "noData": "Nema podataka"
         }
     },
     "shortMonth": {
@@ -417,14 +418,14 @@
         },
         "quarantine14days": {
             "title": "Karantena",
-            "description": "Obavezna 14-dnevna karantena za strance koji dolaze iz inozemstva <br>(za EU s iznimkama i treće zemlje)"
+            "description": "Obavezna 14-dnevna karantena za strance koji dolaze iz inozemstva <br>(za EU s iznimkama i treće države)"
         },
         "liftQuarantine": {
-            "description": "Opuštanje: karantena samo za strance iz trećih zemalja",
+            "description": "Opuštanje: karantena samo za strance iz trećih država",
             "title": "Karantena"
         },
         "quarantineStrict": {
-            "description": "Stroža obavezna 14-dnevna karantena za sve koji dolaze iz kritičnih zemalja.<br>(crvena zona BIH, Srbija, Kosovo)",
+            "description": "Stroža obavezna 14-dnevna karantena za sve koji dolaze iz kritičnih država.<br>(crvena zona BIH, Srbija, Kosovo)",
             "title": "Karantena"
         },
         "gatherings": {
@@ -583,13 +584,13 @@
         "state_critical": "Na respiratoru (aktivno)"
     },
     "tables": {
-        "tabByAgeMale": "Prema dobi – muškarci",
+        "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
         "day": "{{ date, D. M. }}",
-        "tabByRegion": "Prema regiji",
+        "tabByRegion": "Po regijama",
         "title": "Tablica",
-        "tabByAgeFemale": "Prema dobi – žene",
+        "tabByAgeFemale": "Po dobi – žene",
         "tabSummary": "Sažetak"
     },
     "weekday": {
@@ -607,7 +608,7 @@
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
-        "accordingTo": "Prema {{ date, D. MMMM }}",
+        "accordingTo": "Za {{ date, D. MMMM }}",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
         "lastUpdated": "{{ date, dddd, D. MMMM }}"
@@ -691,7 +692,7 @@
                 "title": "Karantena"
             },
             "lessMeasures": {
-                "description": "Opuštanje: slobodno kretanje u cijeloj zemlji",
+                "description": "Opuštanje: slobodno kretanje u cijeloj državi",
                 "title": "Karantena obustavljena"
             },
             "kafanasOpen": {
