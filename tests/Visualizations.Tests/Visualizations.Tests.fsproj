@@ -10,16 +10,20 @@
     <ItemGroup>
         <Compile Include="AgeGroupsChartTests\Merging infections and deaths.fs" />
         <Compile Include="AgeGroupsChartTests\Sorting age groups.fs" />
+        <Compile Include="AgeGroupsTimelineTests\TestHelpers.fs" />
+        <Compile Include="AgeGroupsTimelineTests\Calculating cases by age for day.fs" />
+        <Compile Include="AgeGroupsTimelineTests\Calculating cases by age timeline.fs" />
+        <Compile Include="AgeGroupsTimelineTests\Sythensizing data.fs" />
         <Compile Include="CountriesChartTests\Grouping OWID data by countries.fs" />
         <Compile Include="CountriesChartTests\Averaging country data.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
         <PackageReference Include="Unquote" Version="5.0.0" />
-        <PackageReference Include="xunit" Version="2.4.0" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.2" />
         <PackageReference Include="coverlet.collector" Version="1.2.0" />
     </ItemGroup>
 

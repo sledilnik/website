@@ -75,6 +75,7 @@ let inline yAxisBase () =
         gridZIndex = -1
         max = None
         plotLines = [| {| value = 0; color = "black" |} |]
+        crosshair = true
     |}
 
 let inline legend title =
@@ -274,7 +275,9 @@ let renderScaleSelectors state dispatch =
             else [ ]
         Html.div [
             prop.onClick (fun _ -> ChangePage page |> dispatch)
-            prop.className [ true, "btn  btn-sm metric-selector"; isActive, "metric-selector--selected" ]
+            Utils.classes
+                [(true, "btn  btn-sm metric-selector")
+                 (isActive, "metric-selector--selected")]
             prop.style style
             prop.text (page |> Page.getName) ]
 

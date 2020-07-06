@@ -112,7 +112,7 @@ let addContainmentMeasuresFlags
         1,  6, "#ebfaeb", "liftSchools4to5"
         15, 6, "#ebfaeb", "liftGatherings500"
         19, 6, "#FFe6e6", "quarantineStrict"
-        30, 6, "#FFe6e6", "gatherings50"        
+        30, 6, "#FFe6e6", "gatherings50"
     |]
     {|
         ``type`` = "flags"
@@ -254,6 +254,7 @@ let basicChartOptions
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
                 plotLines = [| {| value = 0; color = "black" |} |]
+                crosshair = true
             |}
         |]
 
@@ -337,5 +338,5 @@ let basicChartOptions
                     |}
             |}
 
-        credits = defaultCredits 
+        credits = defaultCredits
     |}

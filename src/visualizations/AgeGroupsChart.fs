@@ -245,9 +245,9 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         (label : string) =
         let defaultProps =
             [ prop.text label
-              prop.className [
-                  true, "chart-display-property-selector__item"
-                  scaleType = activeScaleType, "selected" ] ]
+              Utils.classes [
+                  (true, "chart-display-property-selector__item")
+                  (scaleType = activeScaleType, "selected") ] ]
         if scaleType = activeScaleType then
             Html.div defaultProps
         else
@@ -272,9 +272,9 @@ let renderChartCategorySelector
 
     Html.div [
         prop.onClick (fun _ -> ChartModeChanged chartModeToRender |> dispatch)
-        prop.className [
-            true, "btn btn-sm metric-selector";
-            isActive, "metric-selector--selected" ]
+        Utils.classes [
+            (true, "btn btn-sm metric-selector")
+            (isActive, "metric-selector--selected") ]
         prop.text (
             match chartModeToRender with
             | AbsoluteInfections        -> I18N.t "charts.ageGroups.confirmedCases"

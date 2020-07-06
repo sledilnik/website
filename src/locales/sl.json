@@ -24,8 +24,8 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Treker MK 🇲🇰:",
-        "news002": "Sledilnik je dobil mlajšega brata..."
+        "news001": "Nov graf:",
+        "news002": "Potrjeni primeri po starostnih skupinah"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -522,13 +522,15 @@
             "title": "Stanje COVID-19 v Evropi",
             "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
+            "newCases": "Novi primeri",
             "incidence1M": "Novi primeri v 14 dneh na 1M",
             "importedCases": "Uvoženi primeri v 14 dneh",
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
             "statusYellow": "14-dnevna karantena z izjemami",
-            "statusRed": "obvezna 14-dnevna karantena"            
+            "statusRed": "obvezna 14-dnevna karantena",
+            "noData": "Ni podatkov"
         },
         "municipalities": {
             "title": "Primeri po občinah",
@@ -565,6 +567,9 @@
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
             "populationTotal": "Prebivalcev skupaj"
+        },
+        "ageGroupsTimeline": {
+            "title": "Potrjeni primeri po starostnih skupinah"
         },
         "countries": {
             "title": "Primerjava po državah",
@@ -700,6 +705,26 @@
             "jz": "Jugozapaden",
             "is": "Istočen",
             "va": "Vardarski"
+        },
+        "phase": {
+            "6": {
+                "title": "Faza 6"
+            },
+            "5": {
+                "title": "Faza 5"
+            },
+            "4": {
+                "title": "Faza 4"
+            },
+            "3": {
+                "title": "Faza 3"
+            },
+            "2": {
+                "title": "Faza 2"
+            },
+            "1": {
+                "title": "Faza 1"
+            }
         }
     }
 }

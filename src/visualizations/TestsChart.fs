@@ -73,6 +73,7 @@ let renderChartOptions (state : State) dispatch =
             opposite = true
             visible = true
             max = None
+            crosshair = true
         |}
         {|
             index = 1
@@ -81,6 +82,7 @@ let renderChartOptions (state : State) dispatch =
             opposite = false
             visible = true
             max = Some 9
+            crosshair = true
         |}
     |]
 
@@ -164,7 +166,9 @@ let renderSelector state (dt: DisplayType) dispatch =
     Html.div [
         let isActive = state.displayType = dt
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
-        prop.className [ true, "btn btn-sm metric-selector"; isActive, "metric-selector--selected" ]
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (isActive, "metric-selector--selected")]
         prop.text (DisplayType.getName dt) ]
 
 let renderDisplaySelectors state dispatch =

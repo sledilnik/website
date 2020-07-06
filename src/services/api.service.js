@@ -1,4 +1,6 @@
 import axios from 'axios'
+import axiosETAGCache from 'axios-etag-cache'
+
 
 const ApiService = {
   init(baseURL) {
@@ -6,7 +8,7 @@ const ApiService = {
   },
 
   get(resource) {
-    return axios.get(resource)
+    return axiosETAGCache(axios).get(resource)
   },
 }
 
