@@ -58,6 +58,8 @@ i18next.services.pluralResolver.addRule(
   }
 )
 
+moment.locale(process.env.VUE_APP_DEFAULT_LANGUAGE)
+
 moment.updateLocale('hr', {
   months: [
     'siječnja',
