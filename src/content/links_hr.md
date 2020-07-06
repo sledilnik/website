@@ -1,5 +1,5 @@
 # Poveznice
 
-Nažalost, ova stranica još nije prevedena. Molimo pogledajte [izvor na slovenskom](/sl/links) ili [engleskom prijevodu](/en/links).
+Nažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/links) ili [engleski prijevod](/en/links).
 
-Ako želite, možete nam pomoći da uredimo [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/links_hr.md).
+Pomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/links_hr.md).
