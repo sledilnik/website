@@ -113,7 +113,7 @@
             "dataSource": "izvor podataka",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministarstvo za zdravlje",
-            "dsOWD": "Naš svijet u brojkama",
+            "dsOWD": "Our World in Data",
             "numDateFormat": "%d. %m. %Y.",
             "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
@@ -221,7 +221,7 @@
             "tests": "Testovi (dnevno)",
             "dischargedToDate": "Otpušteni iz bolnice (do danas)",
             "hospitalized": "Hospitalizirani",
-            "discharged": "Otpušteni iz boline (dnevno)",
+            "discharged": "Otpušteni iz bolnice (dnevno)",
             "deceasedToDate": "Umrli (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
             "confirmedToDate": "Potvrđeni slučajevi (do danas)"
@@ -697,7 +697,7 @@
             },
             "kafanasOpen": {
                 "description": "Opuštanje: kafići i restorani su otvoreni",
-                "title": "Kafanas"
+                "title": "Kafići"
             },
             "masksOn": {
                 "description": "Maske su obavezne izvan kuće",
@@ -736,12 +736,12 @@
         "region": {
             "va": "Vardar",
             "pe": "Pelagonija",
-            "sk": "Skopski",
-            "si": "Sjeveroistočni",
-            "po": "Pološki",
-            "ji": "Jugoistočni",
-            "jz": "Jugozapadni",
-            "is": "Istočni"
+            "sk": "Skopje",
+            "si": "Sjeveroistok",
+            "po": "Polog",
+            "ji": "Jugoistok",
+            "jz": "Jugozapad",
+            "is": "Istok"
         },
         "phase": {
             "6": {
