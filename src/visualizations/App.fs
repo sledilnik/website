@@ -8,7 +8,7 @@ open Types
 open CountriesChartViz.Synthesis
 open I18N
 
-let init (query: obj) (visualization: string option) =
+let init (query: obj) (visualization: string option) (page: string) =
     let inner () =
         let renderingMode =
             match visualization with
@@ -36,7 +36,9 @@ let init (query: obj) (visualization: string option) =
                 |> Embedded
 
         let initialState =
-            { Query = query
+            {
+              Page = page
+              Query = query
               StatsData = NotAsked
               RegionsData = NotAsked
               RenderingMode = renderingMode }
@@ -64,13 +66,13 @@ let update (msg: Msg) (state: State) =
 open Elmish.React
 
 let render (state: State) (_: Msg -> unit) =
-    let allVisualizations: Visualization list =
-        [
+    let hospitals =
           { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
             ChartTextsGroup = "hospitals"
             Explicit = true
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
+    let metricsComparison =
           { VisualizationType = MetricsComparison
             ClassName = "metrics-comparison-chart"
             ChartTextsGroup = "metricsComparison"
@@ -82,6 +84,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+    let spread =
           { VisualizationType = Spread
             ClassName = "spread-chart"
             ChartTextsGroup = "spread"
@@ -93,6 +96,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
+
+    let map =
           { VisualizationType = Map
             ClassName = "map-chart"
             ChartTextsGroup = "map"
@@ -104,6 +109,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView Map.mapChart {| data = data |} }
+
+    let municipalities =
           { VisualizationType = Municipalities
             ClassName = "municipalities-chart"
             ChartTextsGroup = "municipalities"
@@ -116,6 +123,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
                         lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
+
+    let europeMap =
           { VisualizationType = EuropeMap
             ClassName = "europe-chart"
             ChartTextsGroup = "europe"
@@ -127,6 +136,8 @@ let render (state: State) (_: Msg -> unit) =
                    | Loading -> Utils.renderLoading
                    | Failure error -> Utils.renderErrorLoading error
                    | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
+
+    let ageGroupsTimeline =
           { VisualizationType = AgeGroupsTimeline
             ClassName = "age-groups-trends-chart"
             ChartTextsGroup = "ageGroupsTimeline"
@@ -140,6 +151,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView AgeGroupsTimelineViz.Rendering.renderChart
                             {| data = data |} }
+
+    let tests =
           { VisualizationType = Tests
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
@@ -151,11 +164,15 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+
+    let hCenters =
           { VisualizationType = HCenters
             ClassName = "hcenters-chart"
             ChartTextsGroup = "hCenters"
             Explicit = false
             Renderer = fun _ -> lazyView HCentersChart.hCentersChart () }
+
+    let infections =
           { VisualizationType = Infections
             ClassName = "infections-chart"
             ChartTextsGroup = "infections"
@@ -167,6 +184,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView InfectionsChart.infectionsChart {| data = data |} }
+
+    let cases =
           { VisualizationType = Cases
             ClassName = "cases-chart"
             ChartTextsGroup = "cases"
@@ -178,11 +197,15 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView CasesChart.casesChart {| data = data |} }
+
+    let patients =
           { VisualizationType = Patients
             ClassName = "patients-chart"
             ChartTextsGroup = "patients"
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+
+    let ratios =
           { VisualizationType = Ratios
             ClassName = "ratios-chart"
             ChartTextsGroup = "ratios"
@@ -194,6 +217,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RatiosChart.ratiosChart {| data = data |} }
+
+    let ageGroups =
           { VisualizationType = AgeGroups
             ClassName = "age-groups-chart"
             ChartTextsGroup = "ageGroups"
@@ -205,6 +230,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
+
+    let regions =
           { VisualizationType = Regions
             ClassName = "regions-chart"
             ChartTextsGroup = "regions"
@@ -216,6 +243,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+
+    let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-chart"
             ChartTextsGroup = "countriesNewCasesPer1M"
@@ -227,6 +256,8 @@ let render (state: State) (_: Msg -> unit) =
                           ChartTextsGroup = "countriesNewCasesPer1M"
                         }
           }
+
+    let countriesDeathsPer1M =
           { VisualizationType = CountriesDeathsPer1M
             ClassName = "countries-chart"
             ChartTextsGroup = "countriesTotalDeathsPer1M"
@@ -238,21 +269,42 @@ let render (state: State) (_: Msg -> unit) =
                           ChartTextsGroup = "countriesTotalDeathsPer1M"
                         }
           }
-          ]
+
+    let sloveniaVisualizations =
+        [ hospitals; metricsComparison; spread; map; municipalities
+          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          cases; patients; ratios; ageGroups; regions
+        ]
+
+    let worldVisualizations =
+        [ europeMap; countriesCasesPer1M; countriesDeathsPer1M ]
+
+    let allVisualizations =
+        [ hospitals; metricsComparison; spread; map; municipalities
+          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          cases; patients; ratios; ageGroups; regions
+          countriesCasesPer1M; countriesDeathsPer1M
+        ]
 
     let embedded, visualizations =
-        match state.RenderingMode with
-        | Normal ->
+        match state.Page, state.RenderingMode with
+        | ("slovenia", Normal) ->
             false,
-            allVisualizations
+            sloveniaVisualizations
             |> List.filter (fun viz -> not viz.Explicit)
-        | Embedded visualizationType ->
+        | ("world", Normal) ->
+            false,
+            worldVisualizations
+            |> List.filter (fun viz -> not viz.Explicit)
+        | (_, Embedded visualizationType) ->
             match visualizationType with
             | None -> true, []
             | Some visualizationType ->
                 true,
                 allVisualizations
-                |> List.filter (fun viz -> viz.VisualizationType = visualizationType)
+                |> List.filter
+                       (fun viz -> viz.VisualizationType = visualizationType)
+        | _ -> invalidOp "BUG: this should never happen."
 
     let brandLink =
         match state.RenderingMode with

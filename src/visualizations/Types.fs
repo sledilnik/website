@@ -121,7 +121,9 @@ type RenderingMode =
     | Embedded of VisualizationType option
 
 type State =
-    { Query : obj // URL query parameters
+    {
+      Page: string
+      Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
