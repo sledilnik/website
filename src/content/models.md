@@ -26,7 +26,7 @@ V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert
 
 Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
 
-Dodatno je narejen še model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih sledilnika in ga lahko najdete na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
+Dodatno je narejen še [model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih Sledilnika](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
@@ -42,14 +42,14 @@ V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakult
 
 *Matematično modeliranje s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji.* – [V uvodniku revije Zdravstveno varstvo](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19.
 
+## Drugi modeli za Slovenijo
+
+- Model v članku [Določanje alarmov pri epidemiji COVID-19 v Sloveniji (IBMI MF UL)](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) ocenjuje, v kolikšni meri je že prišlo do ponovnega zagona epidemije. Za oceno uporablja delež potrjeno okuženih izmed testiranih in se dnevno posodablja s podatki Sledilnika.
+
+- [Dr. Matjaž Leskovar](http://r4.ijs.si/leskovar) z Odseka za reaktorsko tehniko Instituta Jožef Stefan pripravlja napoved razvoja epidemije v Sloveniji glede na javno dostopne podatke o potrjenih okužbah in trenutni zasedenosti bolnišnic. Na voljo je [opis modela, s povezavo na izvorno datoteko](http://r4.ijs.si/COVID19model), [arhiv napovedi](http://r4.ijs.si/COVID19arhiv) in [prikaz zadnjih rezultatov](http://r4.ijs.si/COVID19).
+
+- [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) je za blog Udomačena statistika napisal izvrsten pregledni članek [**Uvod v modeliranje in statistične vidike COVID-19**](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/) o ključnih modelih širjenja epidemije bolezni COVID-19, ki so nastali v Sloveniji.
 
 ## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
 
-Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).  
-
-
-## Drugi modeli za Slovenijo
-
--  [Dr. Matjaž Leskovar](http://r4.ijs.si/leskovar) z Odseka za reaktorsko tehniko Instituta Jožef Stefan pripravlja napoved razvoja epidemije v Sloveniji glede na javno dostopne podatke o potrjenih okužbah in trenutni zasedenosti bolnišnic. Na voljo je [opis modela, s povezavo na izvorno datoteko](http://r4.ijs.si/COVID19model), [arhiv napovedi](http://r4.ijs.si/COVID19arhiv) in [prikaz zadnjih rezultatov](http://r4.ijs.si/COVID19).
-
--  [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) je za blog Udomačena statistika napisal izvrsten pregledni članek [**Uvod v modeliranje in statistične vidike COVID-19**](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/) o ključnih modelih širjenja epidemije bolezni COVID-19, ki so nastali v Sloveniji.
+Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).
