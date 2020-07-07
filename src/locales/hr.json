@@ -70,12 +70,12 @@
     "country-groups": {
         "groupCriticalEU": "Kritične države (EU)",
         "groupEastAsiaOceania": "Istočna Azija i Oceanija",
-        "groupNordic": "Nordijske zemlje",
+        "groupNordic": "Nordijske države",
         "groupLatinAmerica": "Latinska Amerika",
         "groupCriticalWorld": "Kritične države (svijet)",
         "groupExYu": "Ex-Jugoslavija",
-        "groupNeighbouringWoItaly": "Susjedne zemlje (osim Italije)",
-        "groupNeighbouring": "Susjedne zemlje"
+        "groupNeighbouringWoItaly": "Susjedne države (osim Italije)",
+        "groupNeighbouring": "Susjedne države"
     },
     "charts": {
         "municipalities": {
@@ -100,7 +100,7 @@
             "viewActive": "Aktivne",
             "viewTotal": "Sve",
             "viewDoublingTime": "Vrijeme udvostručenja",
-            "viewLast": "Zadnja"
+            "viewLast": "Zadnje"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
@@ -123,7 +123,7 @@
             "dataSource": "izvor podataka",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministarstvo za zdravlje",
-            "dsOWD": "Naš svijet u brojkama",
+            "dsOWD": "Our World in Data",
             "numDateFormat": "%d. %m. %Y.",
             "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
@@ -341,11 +341,12 @@
             "statusNone": "-",
             "countryStatus": "Ograničenja",
             "importedCases": "Uvezeni slučajevi u 14 dana",
-            "incidence1M": "Novih slučajeva u roku od 14 dana na milijun stanovnika",
+            "incidence1M": "Novi slučajevi u 14 dana na milijun stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
             "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
             "title": "COVID-19 situacija u Europi",
-            "newCases": "Novih slučajeva"
+            "newCases": "Novi slučajevi",
+            "noData": "Nema podataka"
         }
     },
     "shortMonth": {
@@ -429,14 +430,14 @@
         },
         "quarantine14days": {
             "title": "Karantena",
-            "description": "Obavezna 14-dnevna karantena za strance koji dolaze iz inozemstva <br>(za EU s iznimkama i treće zemlje)"
+            "description": "Obavezna 14-dnevna karantena za strance koji dolaze iz inozemstva <br>(za EU s iznimkama i treće države)"
         },
         "liftQuarantine": {
-            "description": "Opuštanje: karantena samo za strance iz trećih zemalja",
+            "description": "Opuštanje: karantena samo za strance iz trećih država",
             "title": "Karantena"
         },
         "quarantineStrict": {
-            "description": "Stroža obavezna 14-dnevna karantena za sve koji dolaze iz kritičnih zemalja.<br>(crvena zona BIH, Srbija, Kosovo)",
+            "description": "Stroža obavezna 14-dnevna karantena za sve koji dolaze iz kritičnih država.<br>(crvena zona BIH, Srbija, Kosovo)",
             "title": "Karantena"
         },
         "gatherings": {
@@ -595,13 +596,13 @@
         "state_critical": "Na respiratoru (aktivno)"
     },
     "tables": {
-        "tabByAgeMale": "Prema dobi – muškarci",
+        "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
         "day": "{{ date, D. M. }}",
-        "tabByRegion": "Prema regiji",
+        "tabByRegion": "Po regijama",
         "title": "Tablica",
-        "tabByAgeFemale": "Prema dobi – žene",
+        "tabByAgeFemale": "Po dobi – žene",
         "tabSummary": "Sažetak"
     },
     "weekday": {
@@ -619,7 +620,7 @@
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
-        "accordingTo": "Prema {{ date, D. MMMM }}",
+        "accordingTo": "Za {{ date, D. MMMM }}",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
         "lastUpdated": "{{ date, dddd, D. MMMM }}"
@@ -703,12 +704,12 @@
                 "title": "Karantena"
             },
             "lessMeasures": {
-                "description": "Opuštanje: slobodno kretanje u cijeloj zemlji",
+                "description": "Opuštanje: slobodno kretanje u cijeloj državi",
                 "title": "Karantena obustavljena"
             },
             "kafanasOpen": {
                 "description": "Opuštanje: kafići i restorani su otvoreni",
-                "title": "Kafanas"
+                "title": "Kafići"
             },
             "masksOn": {
                 "description": "Maske su obavezne izvan kuće",

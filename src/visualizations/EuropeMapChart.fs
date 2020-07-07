@@ -23,8 +23,8 @@ type CountryData =
     { Country: string
       // OWD data
       TwoWeekIncidence1M: float
-      TwoWeekIncidenceArray: float []
-      TwoWeekIncidenceMax: float
+      TwoWeekIncidence: float []
+      TwoWeekIncidenceMaxValue: float
       NewCases: int list
       OwdDate: DateTime
       // NIJZ data
@@ -178,15 +178,14 @@ let redCountries =
 
 let importedFrom =
     Map.ofList
-        [ ("BIH", 16)
-          ("SRB", 13)
-          ("RKS", 4)
-          ("HRV", 2)
-          ("KAZ", 1)
-          ("SWE", 1)
-          ("USA", 1) ]
+        [ ("BIH", 18)
+          ("SRB", 11)
+          ("HRV", 10)
+          ("RKS", 6)
+          ("MNE", 3)
+          ("KAZ", 2) ]
 
-let importedDate = DateTime(2020, 6, 28)
+let importedDate = DateTime(2020, 7, 5)
 
 let loadGeoJson =
     async {
@@ -230,13 +229,13 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             |> List.choose id
             |> List.sum
 
-        let incidenceArray =
+        let incidence =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
             |> List.toArray
 
-        let incidenceMax =
+        let incidenceMaxValue =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
@@ -263,8 +262,8 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
         let cd: CountryData =
             { CountryData.Country = country
               CountryData.TwoWeekIncidence1M = incidence1M
-              CountryData.TwoWeekIncidenceArray = incidenceArray
-              CountryData.TwoWeekIncidenceMax = incidenceMax
+              CountryData.TwoWeekIncidence = incidence
+              CountryData.TwoWeekIncidenceMaxValue = incidenceMaxValue
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
@@ -302,8 +301,8 @@ let mapData state =
         match state.CountryData.TryFind(code) with
         | Some cd ->
             let incidence1M = cd.TwoWeekIncidence1M |> int
-            let incidenceArray = cd.TwoWeekIncidenceArray
-            let incidenceMax = cd.TwoWeekIncidenceMax
+            let incidence = cd.TwoWeekIncidence
+            let incidenceMaxValue = cd.TwoWeekIncidenceMaxValue
 
             let nc =
                 cd.NewCases
@@ -320,8 +319,8 @@ let mapData state =
                 {| code = code
                    country = cd.Country
                    incidence1M = incidence1M
-                   incidenceArray = incidenceArray
-                   incidenceMax = incidenceMax
+                   incidence = incidence
+                   incidenceMaxValue = incidenceMaxValue
                    newCases = nc
                    ncDate = ncDate
                    rType = cd.RestrictionText
@@ -346,8 +345,8 @@ let mapData state =
                color = null
                dataLabels = {| enabled = false |}
                incidence1M = 0
-               incidenceArray = null
-               incidenceMax = 0.0
+               incidence = null
+               incidenceMaxValue = 0.0
                newCases = 0
                ncDate = ""
                rType = ""
@@ -384,8 +383,8 @@ let renderMap state geoJson owdData =
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
-        let incidenceArray = points?incidenceArray
-        let maxValue = points?incidenceMax + 1 // TODO: hack - added 1 because this is an integer rounded to floor for some reason (instead of float)
+        let twoWeekIncidence = points?incidence
+        let twoWeekIncidenceMaxValue = points?incidenceMaxValue + 1 // TODO: hack - added 1 because this is an integer rounded to floor for some reason (instead of float)
         let country = points?country
         let incidence1M = points?incidence1M
         let newCases = points?newCases
@@ -397,7 +396,7 @@ let renderMap state geoJson owdData =
         let s = StringBuilder()
         let barMaxHeight = 50
 
-        let textData =
+        let textHtml =
             sprintf "<b>%s</b><br/>
             %s: <b>%s</b><br/>
             %s: <b>%s</b> (%s)<br/><br/>
@@ -409,18 +408,21 @@ let renderMap state geoJson owdData =
                 (I18N.t "charts.europe.incidence1M") incidence1M
                 (I18N.t "charts.europe.newCases") newCases ncDate
 
-        s.Append textData |> ignore
+        s.Append textHtml |> ignore
 
         s.Append "<div class='bars'>" |> ignore
 
-        incidenceArray
-        |> Array.iter (fun item ->
-            let dHeight = item * barMaxHeight / maxValue
+        match twoWeekIncidence with
+        | null -> I18N.t "charts.europe.noData"
+        | _ ->
+        twoWeekIncidence
+        |> Array.iter (fun country ->
+            let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
 
-            let itemInArray =
-                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" dHeight
+            let barHtml =
+                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" barHeight
 
-            s.Append itemInArray |> ignore)
+            s.Append barHtml |> ignore)
 
         s.Append "</div>" |> ignore
         s.ToString()
@@ -449,7 +451,8 @@ let renderMap state geoJson owdData =
            tooltip =
                pojo
                    {| formatter = fun () -> tooltipFormatter jsThis
-                      useHTML = true |}
+                      useHTML = true
+                      distance = 50 |}
            credits =
                pojo
                    {| enabled = true
