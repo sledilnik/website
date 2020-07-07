@@ -221,7 +221,7 @@
             "tests": "Testovi (dnevno)",
             "dischargedToDate": "Otpušteni iz bolnice (do danas)",
             "hospitalized": "Hospitalizirani",
-            "discharged": "Otpušteni iz boline (dnevno)",
+            "discharged": "Otpušteni iz bolnice (dnevno)",
             "deceasedToDate": "Umrli (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
             "confirmedToDate": "Potvrđeni slučajevi (do danas)"
@@ -736,12 +736,12 @@
         "region": {
             "va": "Vardar",
             "pe": "Pelagonija",
-            "sk": "Skopski",
-            "si": "Sjeveroistočni",
-            "po": "Pološki",
-            "ji": "Jugoistočni",
-            "jz": "Jugozapadni",
-            "is": "Istočni"
+            "sk": "Skopje",
+            "si": "Sjeveroistok",
+            "po": "Polog",
+            "ji": "Jugoistok",
+            "jz": "Jugozapad",
+            "is": "Istok"
         },
         "phase": {
             "6": {
