@@ -2,8 +2,9 @@
     "navbar": {
         "home": "Startseite",
         "language": {
-            "english": "Englisch",
-            "slovenian": "Slowenisch"
+            "de": "Deutsch",
+            "en": "Englisch",
+            "sl": "Slowenisch"
         },
         "github": "GitHub",
         "links": "Verknüpfungen",
