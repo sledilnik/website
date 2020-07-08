@@ -67,6 +67,16 @@
         "UKR": "Ukrajina",
         "VAT": "Vatikan"
     },
+    "country-groups": {
+        "groupCriticalEU": "Kritične države (EU)",
+        "groupEastAsiaOceania": "Istočna Azija i Oceanija",
+        "groupNordic": "Nordijske države",
+        "groupLatinAmerica": "Latinska Amerika",
+        "groupCriticalWorld": "Kritične države (svijet)",
+        "groupExYu": "Ex-Jugoslavija",
+        "groupNeighbouringWoItaly": "Susjedne države (osim Italije)",
+        "groupNeighbouring": "Susjedne države"
+    },
     "charts": {
         "municipalities": {
             "sortDoublingTime": "Vrijeme udvostručenja",
@@ -113,7 +123,7 @@
             "dataSource": "izvor podataka",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministarstvo za zdravlje",
-            "dsOWD": "Naš svijet u brojkama",
+            "dsOWD": "Our World in Data",
             "numDateFormat": "%d. %m. %Y.",
             "all": "Sve",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
@@ -153,28 +163,30 @@
             "last_x_days_2": "{{ count }} dana",
             "populationShare": "Udio stanovništva",
             "all": "Svi",
-            "population": "stanovništvo",
+            "population": "stanovništva",
             "absolute": "Apsolutno",
             "deceased": "Umrli",
             "yesterday": "Jučer"
         },
-        "countries": {
-            "groupCriticalEU": "Kritične države (EU)",
-            "title": "Usporedba po državama",
-            "groupEastAsiaOceania": "Istočna Azija i Oceanija",
+        "countriesNewCasesPer1M": {
+            "title": "Države: novi slučajevi na milijun stanovnika",
+            "yAxisTitle": "Broj novih slučajeva na milijun stanovnika",
+            "legendTitle": "Novi slučajevi na milijun stanovnika",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "nrDeathsPerMillion": "Broj umrlih na 1 milijun stanovnika",
-            "groupNordic": "Nordijske države",
-            "groupLatinAmerica": "Latinska Amerika",
-            "groupCriticalWorld": "Kritične države (svijet)",
-            "groupExYu": "Ex-Jugoslavija",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "groupNeighbouringWoItaly": "Susjedne države (osim Italije)",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
-            "deathsPerMillion": "Broj umrlih na milijun ljudi",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika",
-            "groupNeighbouring": "Susjedne države"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Države: umrli na milijun stanovnika",
+            "yAxisTitle": "Broj umrlih milijun stanovnika",
+            "legendTitle": "Umrli na milijun stanovnika",
+            "sinceFirstDeath": "Od prvog smrtnog slučaja",
+            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
+            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
+            "chronologically": "Kronološki",
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -221,7 +233,7 @@
             "tests": "Testovi (dnevno)",
             "dischargedToDate": "Otpušteni iz bolnice (do danas)",
             "hospitalized": "Hospitalizirani",
-            "discharged": "Otpušteni iz boline (dnevno)",
+            "discharged": "Otpušteni iz bolnice (dnevno)",
             "deceasedToDate": "Umrli (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
             "confirmedToDate": "Potvrđeni slučajevi (do danas)"
@@ -474,15 +486,20 @@
         "6": "srpnja"
     },
     "navbar": {
-        "tables": "Tablica",
+        "tables": "Tablice",
         "links": "Poveznice",
         "team": "Ekipa",
         "home": "Početna",
+        "world": "Svijet",
         "github": "GitHub",
         "models": "Modeli",
         "language": {
-            "slovenian": "Slovenski",
-            "english": "Engleski"
+            "en": "Engleski",
+            "hr": "Hrvatski",
+            "sl": "Slovenski",
+            "sq": "Albanski",
+            "mk": "Makedonski",
+            "de": "Njemački"
         },
         "about": "O projektu",
         "faq": "FAQ",
@@ -697,7 +714,7 @@
             },
             "kafanasOpen": {
                 "description": "Opuštanje: kafići i restorani su otvoreni",
-                "title": "Kafanas"
+                "title": "Kafići"
             },
             "masksOn": {
                 "description": "Maske su obavezne izvan kuće",
@@ -736,12 +753,12 @@
         "region": {
             "va": "Vardar",
             "pe": "Pelagonija",
-            "sk": "Skopski",
-            "si": "Sjeveroistočni",
-            "po": "Pološki",
-            "ji": "Jugoistočni",
-            "jz": "Jugozapadni",
-            "is": "Istočni"
+            "sk": "Skopje",
+            "si": "Sjeveroistok",
+            "po": "Polog",
+            "ji": "Jugoistok",
+            "jz": "Jugozapad",
+            "is": "Istok"
         },
         "phase": {
             "6": {
