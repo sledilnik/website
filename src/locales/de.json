@@ -4,7 +4,10 @@
         "language": {
             "de": "Deutsch",
             "en": "Englisch",
-            "sl": "Slowenisch"
+            "sl": "Slowenisch",
+            "sq": "Albanisch",
+            "mk": "Makedonisch",
+            "hr": "Kroatisch"
         },
         "github": "GitHub",
         "links": "Verknüpfungen",
