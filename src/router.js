@@ -13,24 +13,37 @@ import PageNotFound from './pages/PageNotFound.vue'
 import * as aboutMd from './content/about.md'
 import * as aboutMdEn from './content/about_en.md'
 import * as aboutMdHr from './content/hr/about.md'
+import * as aboutMdDe from './content/de/about.md'
+
 import * as linksMd from './content/links.md'
 import * as linksMdEn from './content/links_en.md'
 import * as linksMdHr from './content/hr/links.md'
+import * as linksMdDe from './content/de/links.md'
+
 import * as contentMd from './content/faq.md'
 import * as contentMdEn from './content/faq_en.md'
 import * as contentMdHr from './content/hr/faq.md'
+import * as contentMdDe from './content/de/faq.md'
+
 import * as teamMd from './content/team.md'
 import * as teamMdEn from './content/team_en.md'
 import * as teamMdHr from './content/hr/team.md'
+import * as teamMdDe from './content/de/team.md'
+
 import * as sourcesMd from './content/sources.md'
 import * as sourcesMdEn from './content/sources_en.md'
 import * as sourcesMdHr from './content/hr/sources.md'
+import * as sourcesMdDe from './content/de/sources.md'
+
 import * as modelsMd from './content/models.md'
 import * as modelsMdEn from './content/models_en.md'
 import * as modelsMdHr from './content/hr/models.md'
+import * as modelsMdDe from './content/de/models.md'
+
 import * as datasourcesMd from './content/datasources.md'
 import * as datasourcesMdEn from './content/datasources_en.md'
 import * as datasourcesMdHr from './content/hr/datasources.md'
+import * as datasourcesMdDe from './content/de/datasources.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
@@ -40,36 +53,43 @@ const mdContent = {
     sl: contentMd,
     en: contentMdEn,
     hr: contentMdHr,
+    de: contentMdDe,
   },
   about: {
     sl: aboutMd,
     en: aboutMdEn,
     hr: aboutMdHr,
+    de: aboutMdDe,
   },
   team: {
     sl: teamMd,
     en: teamMdEn,
     hr: teamMdHr,
+    de: teamMdDe,
   },
   links: {
     sl: linksMd,
     en: linksMdEn,
     hr: linksMdHr,
+    de: linksMdDe,
   },
   sources: {
     sl: sourcesMd,
     en: sourcesMdEn,
     hr: sourcesMdHr,
+    de: sourcesMdDe,
   },
   models: {
     sl: modelsMd,
     en: modelsMdEn,
     hr: modelsMdHr,
+    de: modelsMdDe,
   },
   datasources: {
     sl: datasourcesMd,
     en: datasourcesMdEn,
     hr: datasourcesMdHr,
+    de: datasourcesMdDe,
   },
 }
 
