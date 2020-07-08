@@ -15,8 +15,12 @@
         "links": "Povezave",
         "github": "GitHub",
         "language": {
-            "slovenian": "Slovensko",
-            "english": "Angleško"
+            "de": "Nemščina",
+            "en": "Angleščina",
+            "hr": "Hrvaščina",
+            "mk": "Makedonščina",
+            "sl": "Slovenščina",
+            "sq": "Albanščina"
         }
     },
     "timestamp": {
