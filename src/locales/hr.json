@@ -483,7 +483,10 @@
         "language": {
             "en": "Engleski",
             "hr": "Hrvatski",
-            "sl": "Slovenski"
+            "sl": "Slovenski",
+            "sq": "Albanski",
+            "mk": "Makedonski",
+            "de": "Njemački"
         },
         "about": "O projektu",
         "faq": "FAQ",
