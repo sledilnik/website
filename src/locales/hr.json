@@ -153,7 +153,7 @@
             "last_x_days_2": "{{ count }} dana",
             "populationShare": "Udio stanovništva",
             "all": "Svi",
-            "population": "stanovništvo",
+            "population": "stanovništva",
             "absolute": "Apsolutno",
             "deceased": "Umrli",
             "yesterday": "Jučer"
@@ -474,7 +474,7 @@
         "6": "srpnja"
     },
     "navbar": {
-        "tables": "Tablica",
+        "tables": "Tablice",
         "links": "Poveznice",
         "team": "Ekipa",
         "home": "Početna",
