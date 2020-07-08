@@ -6,6 +6,7 @@
     "navbar": {
         "menu": "Menu",
         "home": "Home",
+        "world": "World",
         "tables": "Table",
         "models": "Models",
         "faq": "FAQ",
