@@ -30,7 +30,7 @@
              :hreflang="lang"
              class="router-link-anchor"
              :class="{ active: $i18n.i18next.language === lang }"
-             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
+             @click.prevent="changeLanguage(lang)">{{ $t("navbar.language."+lang, {"lng": lang}) }}</a>
           <span v-if="index !== languages.length - 1"
                 class="divider">/</span>
         </span>
