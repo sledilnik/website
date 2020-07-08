@@ -117,10 +117,12 @@ let greenCountries =
     Set.ofList
         [ "AUT"
           "CYP"
+          "CZE"
           "DNK"
           "EST"
           "FIN"
           "GRC"
+          "FRA"
           "IRL"
           "ISL"
           "ITA"
