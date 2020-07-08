@@ -13,7 +13,7 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
-    default_reviewers:
+    reviewers:
       - miaerbus
       - overlordtm
       - stefanb
@@ -23,7 +23,7 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
-    default_reviewers:
+    reviewers:
       - overlordtm
       - stefanb
 
@@ -32,7 +32,7 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
-    default_reviewers:
+    reviewers:
       - joahim
       - breki
 
@@ -41,6 +41,6 @@ updates:
     schedule:
       interval: "daily"
     open-pull-requests-limit: 10
-    default_reviewers:
+    reviewers:
       - joahim
       - breki
