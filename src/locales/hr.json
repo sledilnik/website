@@ -481,8 +481,9 @@
         "github": "GitHub",
         "models": "Modeli",
         "language": {
-            "slovenian": "Slovenski",
-            "english": "Engleski"
+            "en": "Engleski",
+            "hr": "Hrvatski",
+            "sl": "Slovenski"
         },
         "about": "O projektu",
         "faq": "FAQ",
