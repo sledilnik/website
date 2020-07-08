@@ -25,6 +25,7 @@
         "models": "Модели",
         "tables": "Табела",
         "home": "Дома",
+        "world": "Светот",
         "menu": "Мени"
     },
     "meta": {
@@ -207,6 +208,16 @@
         "SMR": "Сан Марино",
         "UKR": "Украина",
         "VAT": "Ватикан"
+    },
+    "country-groups": {
+        "groupNordic": "Нордиски земји",
+        "groupEastAsiaOceania": "Источна Азија и Океанија",
+        "groupCriticalEU": "Критични држави (ЕУ)",
+        "groupCriticalWorld": "Критични држави (на светско ниво)",
+        "groupNeighbouringWoItaly": "Држави од регионот",
+        "groupNeighbouring": "Држави од регионот",
+        "groupExYu": "Држави од бивша Југославија",
+        "groupLatinAmerica": "Латинска Америка"
     },
     "shortMonth": {
         "2": "мар",
@@ -392,23 +403,25 @@
             "full": "Исполнети",
             "max": "Макс"
         },
-        "countries": {
-            "groupNordic": "Нордиски земји",
-            "groupEastAsiaOceania": "Источна Азија и Океанија",
+        "countriesNewCasesPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
             "chronologically": "Хронолошки",
-            "groupCriticalEU": "Критични држави (ЕУ)",
-            "groupCriticalWorld": "Критични држави (на светско ниво)",
-            "groupNeighbouringWoItaly": "Држави од регионот",
-            "groupNeighbouring": "Држави од регионот",
-            "groupExYu": "Држави од бивша Југославија",
-            "groupLatinAmerica": "Латинска Америка",
             "sinceFirstDeath": "Од првиот смртен случај",
-            "deathsPerMillion": "Бр. на починати на милион жители",
             "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
             "daysFromFirstDeath": "Број на денови од првиот смртен случај",
-            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
-            "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
-            "title": "Споредба по држави"
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
+            "chronologically": "Хронолошки",
+            "sinceFirstDeath": "Од првиот смртен случај",
+            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
+            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
@@ -693,7 +706,7 @@
             "vinica": "Виница"
         },
         "hospital": {
-            "infdrugi": "Инфективни оделенија во Тетово, Охрид, Велес, Куманово и Припел",
+            "infdrugi": "Инфективни оделенија во Тетово, Охрид, Велес, Куманово, Прилеп и Гостивар",
             "stip": "Штип",
             "bitola": "Битола",
             "gob8sep": "ГОБ 8ми септември",
