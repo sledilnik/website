@@ -9,8 +9,12 @@
     },
     "navbar": {
         "language": {
-            "english": "Англиски",
-            "slovenian": "Словенечки"
+            "en": "Англиски",
+            "sl": "Словенечки",
+            "mk": "Македонски",
+            "sq": "Албански",
+            "hr": "Хрватски",
+            "de": "Германски"
         },
         "github": "GitHub",
         "links": "Линкови",
@@ -21,6 +25,7 @@
         "models": "Модели",
         "tables": "Табела",
         "home": "Дома",
+        "world": "Светот",
         "menu": "Мени"
     },
     "meta": {
@@ -203,6 +208,16 @@
         "SMR": "Сан Марино",
         "UKR": "Украина",
         "VAT": "Ватикан"
+    },
+    "country-groups": {
+        "groupNordic": "Нордиски земји",
+        "groupEastAsiaOceania": "Источна Азија и Океанија",
+        "groupCriticalEU": "Критични држави (ЕУ)",
+        "groupCriticalWorld": "Критични држави (на светско ниво)",
+        "groupNeighbouringWoItaly": "Држави од регионот",
+        "groupNeighbouring": "Држави од регионот",
+        "groupExYu": "Држави од бивша Југославија",
+        "groupLatinAmerica": "Латинска Америка"
     },
     "shortMonth": {
         "2": "мар",
@@ -388,23 +403,25 @@
             "full": "Исполнети",
             "max": "Макс"
         },
-        "countries": {
-            "groupNordic": "Нордиски земји",
-            "groupEastAsiaOceania": "Источна Азија и Океанија",
+        "countriesNewCasesPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
             "chronologically": "Хронолошки",
-            "groupCriticalEU": "Критични држави (ЕУ)",
-            "groupCriticalWorld": "Критични држави (на светско ниво)",
-            "groupNeighbouringWoItaly": "Држави од регионот",
-            "groupNeighbouring": "Држави од регионот",
-            "groupExYu": "Држави од бивша Југославија",
-            "groupLatinAmerica": "Латинска Америка",
             "sinceFirstDeath": "Од првиот смртен случај",
-            "deathsPerMillion": "Бр. на починати на милион жители",
             "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
             "daysFromFirstDeath": "Број на денови од првиот смртен случај",
-            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители",
-            "nrDeathsPerMillion": "Бр. на починати на 1 милион жители",
-            "title": "Споредба по држави"
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Споредба по држави",
+            "yAxisTitle": "Бр. на починати на 1 милион жители",
+            "legendTitle": "Бр. на починати на милион жители",
+            "chronologically": "Хронолошки",
+            "sinceFirstDeath": "Од првиот смртен случај",
+            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
+            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
+            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
@@ -689,7 +706,7 @@
             "vinica": "Виница"
         },
         "hospital": {
-            "infdrugi": "Инфективни оделенија во Тетово, Охрид, Велес, Куманово и Припел",
+            "infdrugi": "Инфективни оделенија во Тетово, Охрид, Велес, Куманово, Прилеп и Гостивар",
             "stip": "Штип",
             "bitola": "Битола",
             "gob8sep": "ГОБ 8ми септември",
@@ -699,7 +716,7 @@
         },
         "cm": {
             "bordersOopen": {
-                "title": "Границите се отвараат",
+                "title": "Отворени Граници",
                 "description": "Олабавување на мерките: границите се отвараат за странски државјани"
             },
             "kafanasOpen": {
@@ -707,7 +724,7 @@
                 "description": "Олабавување на мерките: баровите и кафеаните се отвараат"
             },
             "lessMeasures": {
-                "title": "Забраната за движење престанува",
+                "title": "Без полициски",
                 "description": "Олабавување на мерките: движењето е пак слободно во целата држава"
             },
             "masksOn": {
@@ -715,15 +732,15 @@
                 "description": "Маските стануваат задолжителни секаде, надвор од дома"
             },
             "21hLockdown": {
-                "title": "Забрана за движење",
+                "title": "Полициски",
                 "description": "Целосна забрана за движење помеѓу 21 и 6 часот наутро"
             },
             "gatherings5": {
-                "title": "Собирања на 5 особи",
+                "title": "5 особи",
                 "description": "Јавни собирања со повеќе од 5 граѓани се забранети"
             },
             "debarQuarantine": {
-                "title": "Дебар карантин",
+                "title": "Дебар",
                 "description": "Првиот град во целосна изолација"
             },
             "bordersClosure": {
@@ -731,33 +748,33 @@
                 "title": "Граници"
             },
             "gatheringsMass": {
-                "title": "Масовни собирања",
+                "title": "Собирања",
                 "description": "Забранети масовни собирања како спортски настани или карневали"
             }
         },
         "phase": {
             "6": {
-                "description": "Дебар 4, Куманово 4, Скопје 3, Тетово 3, Ресен 3, Македонија 2, Штип 3",
+                "description": "DB 4, KU 4, SK 3, TE 3, RE 3, MKD 2, ST 3",
                 "title": "Фаза 6"
             },
             "5": {
-                "description": "Скопје 4, Тетово 4, Штип 3, Македонија 2",
+                "description": "SK 4, TE 4, ST 3, MKD 2",
                 "title": "Фаза 5"
             },
             "4": {
-                "description": "Македонија 3",
+                "description": "MKD 3",
                 "title": "Фаза 4"
             },
             "3": {
-                "description": "Дебар 4",
+                "description": "DB 4",
                 "title": "Фаза 3"
             },
             "2": {
-                "description": "Скопје 4",
+                "description": "SK 4",
                 "title": "Фаза 2"
             },
             "1": {
-                "description": "Дебар 4, Скопје 3, Македонија 2 ",
+                "description": "DB 4, SK 3, MKD 2 ",
                 "title": "Фаза 1"
             }
         }

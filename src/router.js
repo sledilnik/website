@@ -5,56 +5,63 @@ import i18next from 'i18next'
 
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
+import WorldStatsPage from './pages/WorldStatsPage.vue'
 import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
 
-import * as aboutMd from './content/about.md'
-import * as aboutMdEn from './content/about_en.md'
-import * as linksMd from './content/links.md'
-import * as linksMdEn from './content/links_en.md'
-import * as contentMd from './content/faq.md'
-import * as contentMdEn from './content/faq_en.md'
-import * as teamMd from './content/team.md'
-import * as teamMdEn from './content/team_en.md'
-import * as sourcesMd from './content/sources.md'
-import * as sourcesMdEn from './content/sources_en.md'
-import * as modelsMd from './content/models.md'
-import * as modelsMdEn from './content/models_en.md'
-import * as datasourcesMd from './content/datasources.md'
-import * as datasourcesMdEn from './content/datasources_en.md'
+import * as aboutMdSl from './content/sl/about.md'
+import * as aboutMdEn from './content/en/about.md'
+
+import * as linksMdSl from './content/sl/links.md'
+import * as linksMdEn from './content/en/links.md'
+
+import * as contentMdSl from './content/sl/faq.md'
+import * as contentMdEn from './content/en/faq.md'
+
+import * as teamMdSl from './content/sl/team.md'
+import * as teamMdEn from './content/en/team.md'
+
+import * as sourcesMdSl from './content/sl/sources.md'
+import * as sourcesMdEn from './content/en/sources.md'
+
+import * as modelsMdSl from './content/sl/models.md'
+import * as modelsMdEn from './content/en/models.md'
+
+import * as datasourcesMdSl from './content/sl/datasources.md'
+import * as datasourcesMdEn from './content/en/datasources.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
   faq: {
-    sl: contentMd,
+    sl: contentMdSl,
     en: contentMdEn
   },
   about: {
-    sl: aboutMd,
+    sl: aboutMdSl,
     en: aboutMdEn
   },
   team: {
-    sl: teamMd,
+    sl: teamMdSl,
     en: teamMdEn
   },
   links: {
-    sl: linksMd,
+    sl: linksMdSl,
     en: linksMdEn
   },
   sources: {
-    sl: sourcesMd,
+    sl: sourcesMdSl,
     en: sourcesMdEn
   },
   models: {
-    sl: modelsMd,
+    sl: modelsMdSl,
     en: modelsMdEn
   },
   datasources: {
-    sl: datasourcesMd,
+    sl: datasourcesMdSl,
     en: datasourcesMdEn
   },
 }
@@ -90,6 +97,10 @@ const routes = [
   {
     path: '/stats',
     redirect: `/${i18next.language}/stats`,
+  },
+  {
+    path: '/world',
+    redirect: `/${i18next.language}/world`,
   },
   {
     path: '/tables',
@@ -167,6 +178,10 @@ const routes = [
       {
         path: 'stats',
         component: StatsPage,
+      },
+      {
+        path: 'world',
+        component: WorldStatsPage,
       },
       {
         path: 'data',

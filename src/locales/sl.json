@@ -6,6 +6,7 @@
     "navbar": {
         "menu": "Meni",
         "home": "Domov",
+        "world": "Svet",
         "tables": "Tabela",
         "models": "Modeli",
         "faq": "FAQ",
@@ -15,8 +16,12 @@
         "links": "Povezave",
         "github": "GitHub",
         "language": {
-            "slovenian": "Slovensko",
-            "english": "Angleško"
+            "de": "Nemščina",
+            "en": "Angleščina",
+            "hr": "Hrvaščina",
+            "mk": "Makedonščina",
+            "sl": "Slovenščina",
+            "sq": "Albanščina"
         }
     },
     "timestamp": {
@@ -189,6 +194,16 @@
         "UKR": "Ukrajina",
         "USA": "ZDA",
         "VAT": "Vatikan"
+    },
+    "country-groups": {
+        "groupNeighbouring": "okolica",
+        "groupNeighbouringWoItaly": "okolica (brez Italije)",
+        "groupCriticalEU": "kritične države (EU)",
+        "groupCriticalWorld": "kritične države (svet)",
+        "groupNordic": "nordijske države",
+        "groupExYu": "ex-Jugoslavija",
+        "groupEastAsiaOceania": "vzh. Azija in Oceanija",
+        "groupLatinAmerica": "Latinska Amerika"
     },
     "cm": {
         "firstCase": {
@@ -569,23 +584,25 @@
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah"
         },
-        "countries": {
-            "title": "Primerjava po državah",
-            "groupNeighbouring": "okolica",
-            "groupNeighbouringWoItaly": "okolica (brez Italije)",
-            "groupCriticalEU": "kritične države (EU)",
-            "groupCriticalWorld": "kritične države (svet)",
-            "groupNordic": "nordijske države",
-            "groupExYu": "ex-Jugoslavija",
-            "groupEastAsiaOceania": "vzh. Azija in Oceanija",
-            "groupLatinAmerica": "Latinska Amerika",
+        "countriesNewCasesPer1M": {
+            "title": "Države: novookuženi na milijon prebivalcev",
+            "yAxisTitle": "Št. novookuženih na milijon prebivalcev",
+            "legendTitle": "Novookuženi na milijon prebivalcev",
             "chronologically": "Kronološko",
             "sinceFirstDeath": "Od prve smrti",
             "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "deathsPerMillion": "Umrli na 1 milijon prebivalcev",
             "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev",
-            "nrDeathsPerMillion": "Št. umrlih na 1 milijon prebivalcev"
+            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+        },
+        "countriesTotalDeathsPer1M": {
+            "title": "Države: umrli (skupaj) na milijon prebivalcev",
+            "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
+            "legendTitle": "Umrli (skupaj) na milijon prebivalcev",
+            "chronologically": "Kronološko",
+            "sinceFirstDeath": "Od prve smrti",
+            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
+            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
+            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
         }
     },
     "footer": {

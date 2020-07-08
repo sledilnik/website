@@ -28,7 +28,7 @@ export default {
          - AgeGroups
          - Hospitals
       */
-      Visualizations('visualizations', this.$route.query, this.$route.params.type);
+      Visualizations('visualizations', 'chart', this.$route.query, this.$route.params.type);
     });
   },
 };
