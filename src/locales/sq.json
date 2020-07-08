@@ -305,8 +305,8 @@
         "home": "Ballina",
         "menu": "Menu",
         "language": {
-            "english": "Angleze",
-            "slovenian": "Sllovene"
+            "en": "Angleze",
+            "sl": "Sllovene"
         },
         "github": "GitHub",
         "links": "Linqe"

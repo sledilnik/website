@@ -9,8 +9,8 @@
     },
     "navbar": {
         "language": {
-            "english": "Англиски",
-            "slovenian": "Словенечки"
+            "en": "Англиски",
+            "sl": "Словенечки"
         },
         "github": "GitHub",
         "links": "Линкови",

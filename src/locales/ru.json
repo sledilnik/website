@@ -30,8 +30,8 @@
     },
     "navbar": {
         "language": {
-            "english": "Английский",
-            "slovenian": "Словенский"
+            "en": "Английский",
+            "sl": "Словенский"
         },
         "github": "GitHub",
         "sources": "Источники",
