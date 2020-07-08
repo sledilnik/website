@@ -10,38 +10,38 @@ import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
 
-import * as aboutMd from './content/about.md'
-import * as aboutMdEn from './content/about_en.md'
+import * as aboutMdSl from './content/sl/about.md'
+import * as aboutMdEn from './content/en/about.md'
 import * as aboutMdHr from './content/hr/about.md'
 import * as aboutMdDe from './content/de/about.md'
 
-import * as linksMd from './content/links.md'
-import * as linksMdEn from './content/links_en.md'
+import * as linksMdSl from './content/sl/links.md'
+import * as linksMdEn from './content/en/links.md'
 import * as linksMdHr from './content/hr/links.md'
 import * as linksMdDe from './content/de/links.md'
 
-import * as contentMd from './content/faq.md'
-import * as contentMdEn from './content/faq_en.md'
+import * as contentMdSl from './content/sl/faq.md'
+import * as contentMdEn from './content/en/faq.md'
 import * as contentMdHr from './content/hr/faq.md'
 import * as contentMdDe from './content/de/faq.md'
 
-import * as teamMd from './content/team.md'
-import * as teamMdEn from './content/team_en.md'
+import * as teamMdSl from './content/sl/team.md'
+import * as teamMdEn from './content/en/team.md'
 import * as teamMdHr from './content/hr/team.md'
 import * as teamMdDe from './content/de/team.md'
 
-import * as sourcesMd from './content/sources.md'
-import * as sourcesMdEn from './content/sources_en.md'
+import * as sourcesMdSl from './content/sl/sources.md'
+import * as sourcesMdEn from './content/en/sources.md'
 import * as sourcesMdHr from './content/hr/sources.md'
 import * as sourcesMdDe from './content/de/sources.md'
 
-import * as modelsMd from './content/models.md'
-import * as modelsMdEn from './content/models_en.md'
+import * as modelsMdSl from './content/sl/models.md'
+import * as modelsMdEn from './content/en/models.md'
 import * as modelsMdHr from './content/hr/models.md'
 import * as modelsMdDe from './content/de/models.md'
 
-import * as datasourcesMd from './content/datasources.md'
-import * as datasourcesMdEn from './content/datasources_en.md'
+import * as datasourcesMdSl from './content/sl/datasources.md'
+import * as datasourcesMdEn from './content/en/datasources.md'
 import * as datasourcesMdHr from './content/hr/datasources.md'
 import * as datasourcesMdDe from './content/de/datasources.md'
 
@@ -50,43 +50,43 @@ Vue.use(VueMeta)
 
 const mdContent = {
   faq: {
-    sl: contentMd,
+    sl: contentMdSl,
     en: contentMdEn,
     hr: contentMdHr,
     de: contentMdDe,
   },
   about: {
-    sl: aboutMd,
+    sl: aboutMdSl,
     en: aboutMdEn,
     hr: aboutMdHr,
     de: aboutMdDe,
   },
   team: {
-    sl: teamMd,
+    sl: teamMdSl,
     en: teamMdEn,
     hr: teamMdHr,
     de: teamMdDe,
   },
   links: {
-    sl: linksMd,
+    sl: linksMdSl,
     en: linksMdEn,
     hr: linksMdHr,
     de: linksMdDe,
   },
   sources: {
-    sl: sourcesMd,
+    sl: sourcesMdSl,
     en: sourcesMdEn,
     hr: sourcesMdHr,
     de: sourcesMdDe,
   },
   models: {
-    sl: modelsMd,
+    sl: modelsMdSl,
     en: modelsMdEn,
     hr: modelsMdHr,
     de: modelsMdDe,
   },
   datasources: {
-    sl: datasourcesMd,
+    sl: datasourcesMdSl,
     en: datasourcesMdEn,
     hr: datasourcesMdHr,
     de: datasourcesMdDe,
