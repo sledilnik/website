@@ -6,7 +6,7 @@
             "confirmedCases": "Raste të konfirmuara",
             "deceased": "Të vdekur",
             "absolute": "Absolute",
-            "population": "popullsia",
+            "population": "e popullsisë",
             "populationC": "Popullsia",
             "populationShare": "Përqindja e popullsisë",
             "all": "Të gjithë",
@@ -110,7 +110,7 @@
             "doublingRate": "Rritja eksponenciale me ditë",
             "explainer": "Çfarë do të thotë rritje eksponenciale",
             "absoluteTitle": "Rritja ditore e rasteve të konfirmuara",
-            "absoluteLabel": "Raste të Konfirmuara (në ditë)",
+            "absoluteLabel": "Raste të konfirmuara (në ditë)",
             "relativeLabel": "Rritja relative në %",
             "doublingRateTitle": "Shkalla e rritjes eksponenciale [në ditë]",
             "doublingRateLabel": "Për sa ditë dyfishohet numri i njerëzve të infektuar",
@@ -210,8 +210,8 @@
             "hospitalized": "Të shtruar në spital",
             "recovered": "Të shëruar (deri sot)",
             "active": "Raste aktive",
-            "confirmedToDate": "Raste të Konfirmuara (deri sot)",
-            "confirmed": "Raste të Konfirmuara (në ditë)",
+            "confirmedToDate": "Raste të konfirmuara (deri sot)",
+            "confirmed": "Raste të konfirmuara (në ditë)",
             "testsToDate": "Teste (deri sot)",
             "tests": "Teste (në ditë)",
             "title": "Situata me COVID-19 në vend",
@@ -307,8 +307,9 @@
         "home": "Ballina",
         "menu": "Menu",
         "language": {
-            "english": "Angleze",
-            "slovenian": "Sllovene"
+            "en": "Angleze",
+            "sl": "Sllovene",
+            "sq": "Shqiptar"
         },
         "github": "GitHub",
         "links": "Linqe"

@@ -15,8 +15,12 @@
         "links": "Links",
         "github": "GitHub",
         "language": {
-            "slovenian": "Slovenian",
-            "english": "English"
+            "de": "German",
+            "en": "English",
+            "hr": "Croatian",
+            "mk": "Macedonian",
+            "sl": "Slovenian",
+            "sq": "Albanian"
         }
     },
     "timestamp": {
