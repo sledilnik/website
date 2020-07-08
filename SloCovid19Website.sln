@@ -4,6 +4,19 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "src\visualizations\A
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Visualizations.Tests", "tests\Visualizations.Tests\Visualizations.Tests.fsproj", "{037E7FEC-664B-4D24-BC9D-736AF1A83AE7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translations", "translations", "{6D278828-BDC8-4FB6-BCF6-F9F7BA41E7A5}"
+ProjectSection(SolutionItems) = preProject
+	src\locales\de.json = src\locales\de.json
+	src\locales\en.json = src\locales\en.json
+	src\locales\hr.json = src\locales\hr.json
+	src\locales\it.json = src\locales\it.json
+	src\locales\mk.json = src\locales\mk.json
+	src\locales\README.md = src\locales\README.md
+	src\locales\ru.json = src\locales\ru.json
+	src\locales\sl.json = src\locales\sl.json
+	src\locales\sq.json = src\locales\sq.json
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
