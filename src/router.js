@@ -5,6 +5,7 @@ import i18next from 'i18next'
 
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
+import WorldStatsPage from './pages/WorldStatsPage.vue'
 import EmbedMakerPage from './pages/EmbedMakerPage.vue'
 import TablesPage from './pages/TablesPage.vue'
 import DataPage from './pages/DataPage.vue'
@@ -112,6 +113,10 @@ const routes = [
     redirect: `/${i18next.language}/stats`,
   },
   {
+    path: '/world',
+    redirect: `/${i18next.language}/world`,
+  },
+  {
     path: '/tables',
     redirect: `/${i18next.language}/tables`,
   },
@@ -187,6 +192,10 @@ const routes = [
       {
         path: 'stats',
         component: StatsPage,
+      },
+      {
+        path: 'world',
+        component: WorldStatsPage,
       },
       {
         path: 'data',
