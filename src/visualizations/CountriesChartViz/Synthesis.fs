@@ -6,6 +6,14 @@ open Fable.Core
 open Highcharts
 open JsInterop
 open Types
+open I18N
+
+type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
+
+type CountriesChartConfig = {
+    MetricToDisplay: MetricToDisplay
+    ChartTextsGroup: string
+}
 
 type CountriesDisplaySet = {
     Label: string
@@ -15,8 +23,10 @@ type CountriesDisplaySet = {
 type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
+    MetricToDisplay: MetricToDisplay
     XAxisType: XAxisType
     ScaleType: ScaleType
+    ChartTextsGroup: string
 }
 
 let ColorPalette =
@@ -43,7 +53,7 @@ type CountrySeries = {
 }
 
 type ChartData = {
-    DataDescription: string
+    LegendTitle: string
     XAxisTitle: string
     YAxisTitle: string
     Series: CountrySeries[]
@@ -56,7 +66,7 @@ let tooltipFormatter state chartData jsThis =
     | [||] -> ""
     | _ ->
         let dataDescription =
-            sprintf "<b>%s:</b>" chartData.DataDescription
+            sprintf "<b>%s:</b>" chartData.LegendTitle
 
         let s = StringBuilder()
         s.Append dataDescription |> ignore
@@ -149,13 +159,17 @@ let prepareChartData
 
         {
             Series = series
-            DataDescription = I18N.t "charts.countries.deathsPerMillion"
+            LegendTitle = chartText state.ChartTextsGroup ".legendTitle"
             XAxisTitle =
                 match xAxisType with
                 | ByDate -> ""
-                | DaysSinceFirstDeath -> I18N.t "charts.countries.daysFromFirstDeath"
-                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.daysFromOneDeathPerMillion"
-            YAxisTitle = I18N.t "charts.countries.nrDeathsPerMillion"
+                | DaysSinceFirstDeath ->
+                    chartText state.ChartTextsGroup ".daysFromFirstDeath"
+                | DaysSinceOneDeathPerMillion ->
+                    chartText
+                        state.ChartTextsGroup ".daysFromOneDeathPerMillion"
+            YAxisTitle =
+                chartText state.ChartTextsGroup ".yAxisTitle"
         }
         |> Some
     | None -> None

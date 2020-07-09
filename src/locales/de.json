@@ -17,7 +17,8 @@
         "menu": "Menü",
         "models": "Modelle",
         "tables": "Tabellen",
-        "faq": "FAQ"
+        "faq": "FAQ",
+        "world": "Welt"
     },
     "country": {
         "SVN": "Slowenien",
@@ -348,6 +349,26 @@
         },
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen"
+        },
+        "countriesTotalDeathsPer1M": {
+            "chronologically": "Chronologisch",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
+            "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
+        },
+        "countriesNewCasesPer1M": {
+            "chronologically": "Chronologisch",
+            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "legendTitle": "Neue Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
+            "title": "Länder: Neue Fälle pro 1 Million Menschen"
         }
     },
     "tableDict": {
@@ -450,7 +471,7 @@
         },
         "gatherings50": {
             "title": "Bis zu 50",
-            "description": "Versammelungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
+            "description": "Versammlungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
         },
         "schools": {
             "description": "Schließung von Schulen, Restaurants",
@@ -764,5 +785,15 @@
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
         "in_x_days_plural": "in {{ count }} Tagen"
+    },
+    "country-groups": {
+        "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
+        "groupNeighbouring": "Nachbarländer",
+        "groupCriticalEU": "Kritische Länder (EU)",
+        "groupCriticalWorld": "Kritische Länder (Welt)",
+        "groupNordic": "Nordische Länder",
+        "groupExYu": "Ex-Jugoslawien",
+        "groupEastAsiaOceania": "Ostasien und Ozeanien",
+        "groupLatinAmerica": "Lateinamerika"
     }
 }
