@@ -46,16 +46,17 @@
           </transition>
         </div>
       </div>
-      <div v-if="isMobile" class="router-link">
-        <span v-for="(lang, index) in languages" :key="index">
+      <div v-if="isMobile">
+        <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
-             class="router-link-anchor"
+             class="router-link-anchor router-link xxrouter-link-icon"
              :class="{ active: $i18n.i18next.language === lang }"
-             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
-          <span v-if="index !== languages.length - 1"
-                class="divider">/</span>
-        </span>
+             @click.prevent="changeLanguage(lang)">
+              <font-awesome-icon icon="globe" />
+              {{ $t('navbar.language.' + lang, { lng: lang }) }}
+             </a>
+        </div>
       </div>
     </div>
   </div>
