@@ -20,17 +20,16 @@
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <!--
       <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      -->
-      <div v-if="!isMobile" class="router-link router-link-lang-switcher">
+      <div v-if="!isMobile" class="router-link router-link-lang-switcher router-link-icon">
         <div>
           <div class="lang" @click="toggleDropdown">
-             <font-awesome-icon icon="globe" />
+            <font-awesome-icon icon="globe" />
             <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
+            &nbsp;<font-awesome-icon icon="caret-down" />
           </div>
           <transition name="slide">
             <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
@@ -495,7 +494,7 @@ export default {
     margin: 16px auto;
 
     @include nav-break {
-      margin: 0 0 0 32px;
+      margin: 0 0 0 22px;
     }
 
     span {
@@ -568,12 +567,13 @@ export default {
   @include nav-break {
     margin: 0;
     padding: 0 10px;
-    background: rgba($yellow, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.13);
+    background: white;
+    box-shadow: $element-box-shadow;
+    border: 1px solid rgba(0, 0, 0, 0.39);
     border-radius: 6px;
     position: absolute;
-    right: -8px;
-    top: 40px;
+    right: -1px;
+    top: 32px;
     min-width: 120px;
     text-align: right;
     display: block;
