@@ -25,11 +25,12 @@
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      <div v-if="!isMobile" class="router-link router-link-lang-switcher">
+      <div v-if="!isMobile" class="router-link router-link-lang-switcher router-link-icon">
         <div>
           <div class="lang" @click="toggleDropdown">
-             <font-awesome-icon icon="globe" />
+            <font-awesome-icon icon="globe" />
             <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
+            &nbsp;<font-awesome-icon icon="caret-down" />
           </div>
           <transition name="slide">
             <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
@@ -46,16 +47,17 @@
           </transition>
         </div>
       </div>
-      <div v-if="isMobile" class="router-link">
-        <span v-for="(lang, index) in languages" :key="index">
+      <div v-if="isMobile">
+        <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
-             class="router-link-anchor"
+             class="router-link-anchor router-link xxrouter-link-icon"
              :class="{ active: $i18n.i18next.language === lang }"
-             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
-          <span v-if="index !== languages.length - 1"
-                class="divider">/</span>
-        </span>
+             @click.prevent="changeLanguage(lang)">
+              <font-awesome-icon icon="globe" />
+              {{ $t('navbar.language.' + lang, { lng: lang }) }}
+             </a>
+        </div>
       </div>
     </div>
   </div>
@@ -494,7 +496,7 @@ export default {
     margin: 16px auto;
 
     @include nav-break {
-      margin: 0 0 0 32px;
+      margin: 0 0 0 22px;
     }
 
     span {
@@ -567,12 +569,13 @@ export default {
   @include nav-break {
     margin: 0;
     padding: 0 10px;
-    background: rgba($yellow, 0.95);
-    border: 1px solid rgba(0, 0, 0, 0.13);
+    background: white;
+    box-shadow: $element-box-shadow;
+    border: 1px solid rgba(0, 0, 0, 0.39);
     border-radius: 6px;
     position: absolute;
-    right: -8px;
-    top: 40px;
+    right: -1px;
+    top: 32px;
     min-width: 120px;
     text-align: right;
     display: block;
