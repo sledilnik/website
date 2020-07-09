@@ -8,7 +8,10 @@ open JsInterop
 open Types
 open I18N
 
-type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
+type MetricToDisplay =
+    | NewCasesPer1M
+    | TotalDeathsPer1M
+    | DeathsPerCases
 
 type CountriesChartConfig = {
     MetricToDisplay: MetricToDisplay
@@ -59,6 +62,18 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
+let yAxisValueFormatter state jsThis =
+    match state.MetricToDisplay with
+    | DeathsPerCases ->
+        Utils.percentageValuesLabelFormatter jsThis?value
+    | _ -> jsThis?value
+
+let tooltipValueFormatter state value =
+    match state.MetricToDisplay with
+    | DeathsPerCases ->
+        Utils.percentageValuesWith1DecimalTrailingZeroLabelFormatter value
+    | _ -> Utils.formatTo1DecimalWithTrailingZero value
+
 let tooltipFormatter state chartData jsThis =
     let points: obj[] = jsThis?points
 
@@ -98,13 +113,13 @@ let tooltipFormatter state chartData jsThis =
                             sprintf
                                 "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
                                 countryName
-                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                                (tooltipValueFormatter state dataValue)
                         | _ ->
                             sprintf
                                 "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
                                 countryName
                                 date
-                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                                (tooltipValueFormatter state dataValue)
                     s.Append countryTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )

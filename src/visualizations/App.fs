@@ -270,6 +270,19 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
+    let countriesDeathsPerCases =
+          { VisualizationType = CountriesDeathsPer1M
+            ClassName = "countries-chart"
+            ChartTextsGroup = "countriesDeathsPerCases"
+            Explicit = false
+            Renderer =
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = DeathsPerCases
+                          ChartTextsGroup = "countriesDeathsPerCases"
+                        }
+          }
+
     let sloveniaVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
@@ -277,13 +290,14 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let worldVisualizations =
-        [ europeMap; countriesCasesPer1M; countriesDeathsPer1M ]
+        [ europeMap; countriesCasesPer1M; countriesDeathsPer1M
+          countriesDeathsPerCases ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
-          countriesCasesPer1M; countriesDeathsPer1M
+          countriesCasesPer1M; countriesDeathsPer1M; countriesDeathsPerCases
         ]
 
     let embedded, visualizations =

@@ -111,6 +111,15 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
             document.dispatchEvent(evt)
         ret
 
+    let getMetricValue entry =
+        match state.MetricToDisplay with
+        | NewCasesPer1M -> entry.NewCasesPerMillion |> Some
+        | TotalDeathsPer1M -> entry.TotalDeathsPerMillion |> Some
+        | DeathsPerCases ->
+            if entry.TotalCases > 0. then
+                entry.TotalDeaths / entry.TotalCases * 100. |> Some
+            else None
+
     let allSeries =
         chartData.Series
         |> Array.map (fun countrySeries ->
@@ -128,9 +137,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | ByDate -> entry.Date |> jsTime12h :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = match state.MetricToDisplay with
-                                 | NewCasesPer1M -> entry.NewCasesPerMillion
-                                 | TotalDeathsPer1M -> entry.TotalDeathsPerMillion
+                             y = getMetricValue entry
                              date = I18N.tOptions "days.longerDate"
                                         {| date = entry.Date |}
                              dataLabels =
@@ -205,6 +212,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        match state.ScaleType with
                        | Linear -> 0
                        | Logarithmic -> 1
+                   labels = pojo {| formatter = yAxisValueFormatter state |}
                    opposite = true
                    crosshair = true
                    title =

@@ -304,14 +304,10 @@ let renderChartCategorySelectors activeChartMode dispatch =
 let renderChartOptions
     (state : State) (chartData: AgesChartData) =
 
-    let percentageValuesLabelFormatter (value: float) =
-        // A hack to replace decimal point with decimal comma.
-        ((abs value).ToString() + "%").Replace('.', ',')
-
     let valuesLabelFormatter (value: float) =
         match ChartMode.ScaleType state.ChartMode with
         | Absolute -> (abs value).ToString()
-        | Relative -> percentageValuesLabelFormatter value
+        | Relative -> Utils.percentageValuesLabelFormatter value
 
     {| Highcharts.optionsWithOnLoadEvent "covid19-age-groups" with
         chart = pojo {| ``type`` = "bar" |}
@@ -361,7 +357,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfInfectedPopulation")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
                          (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->
@@ -379,7 +375,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfDeceasedPopulation")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
                          (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | DeathsPerInfections ->
@@ -389,7 +385,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfDeceasedConfirmedCases")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
             |}
         series = [|
             {| name = I18N.t "charts.ageGroups.male"
