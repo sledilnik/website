@@ -356,9 +356,9 @@
             "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
             "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
             "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
-            "legendTitle": "Todesälle gesamt pro 1 Million Menschen",
-            "yAxisTitle": "Todesälle gesamt pro 1 Million Menschen",
-            "title": "Länder: Todesälle gesamt pro 1 Million Menschen"
+            "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
             "chronologically": "Chronologisch",
@@ -471,7 +471,7 @@
         },
         "gatherings50": {
             "title": "Bis zu 50",
-            "description": "Versammelungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
+            "description": "Versammlungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
         },
         "schools": {
             "description": "Schließung von Schulen, Restaurants",
