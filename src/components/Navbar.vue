@@ -26,7 +26,8 @@
       </a>
       <div v-if="!isMobile" class="router-link router-link-lang-switcher">
         <div>
-          <div class="lang" @click="toggleDropdown">🌎
+          <div class="lang" @click="toggleDropdown">
+             <font-awesome-icon icon="globe" />
             <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
           </div>
           <transition name="slide">
