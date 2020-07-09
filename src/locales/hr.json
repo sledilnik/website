@@ -91,7 +91,7 @@
             "sortTotal": "Sva",
             "active": "Aktivni: ",
             "showAll": "Prikaži sve",
-            "deceased": "Umrli: ",
+            "deceased": "Smrtni slučajevi: ",
             "sortBy": "Razvrstaj prema:",
             "doubles": "Udvostručenja ",
             "title": "Slučajevi po općinama",
@@ -104,20 +104,20 @@
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
-            "icuDeceasedShare": "Udio umrlih u odjelima intenzivne njege",
+            "icuDeceasedShare": "Udio smrtnih slučajeva u odjelima intenzivne njege",
             "ventilatorHospital": "Na respiratoru",
             "ventilatorCases": "Na respiratoru",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
-            "deceasedCases": "Umrli",
+            "deceasedCases": "Smrtni slučajevi",
             "mortality": "Smrtnost",
             "icuCases": "Na odjelu intenzivne njege",
-            "deceasedHospital": "Umrli",
+            "deceasedHospital": "Smrtni slučajevi",
             "icuHospital": "Na odjelu intenzivne njege",
             "hospitalCases": "Hospitalizirani",
             "seriousCases": "Teški slučajevi",
             "hospitalizations": "Hospitalizacija",
             "title": "Udio teških slučajeva",
-            "hospitalDeceasedShare": "Udio umrlih u bolnicama"
+            "hospitalDeceasedShare": "Udio smrtnih slučajeva u bolnicama"
         },
         "common": {
             "dataSource": "izvor podataka",
@@ -165,12 +165,12 @@
             "all": "Svi",
             "population": "stanovništva",
             "absolute": "Apsolutno",
-            "deceased": "Umrli",
+            "deceased": "Smrtni slučajevi",
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi slučajevi na milijun stanovnika",
-            "yAxisTitle": "Broj novih slučajeva na milijun stanovnika",
+            "yAxisTitle": "Novi slučajevi na milijun stanovnika",
             "legendTitle": "Novi slučajevi na milijun stanovnika",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
@@ -179,11 +179,11 @@
             "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli na milijun stanovnika",
-            "yAxisTitle": "Broj umrlih milijun stanovnika",
-            "legendTitle": "Umrli na milijun stanovnika",
+            "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
+            "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
+            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
+            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
             "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
@@ -194,15 +194,15 @@
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
             "age": "Dob",
-            "deceasedPerConfirmedCases": "Umrli po potvrđenim slučajevima",
+            "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
             "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
-            "deceasedPerPopulation": "Udio umrlih u stanovništvu",
-            "deceased": "Umrli",
-            "shareOfDeceasedConfirmedCases": "Udio umrlih u potvrđenim slučajevima",
+            "deceasedPerPopulation": "Udio smrtnih slučajeva u stanovništvu",
+            "deceased": "Smrtni slučajevi",
+            "shareOfDeceasedConfirmedCases": "Udio smrtnih slučajeva u potvrđenim slučajevima",
             "female": "Žene",
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
-            "shareOfDeceasedPopulation": "Udio umrlih u stanovništvu",
+            "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi"
         },
         "ageGroupsTimeline": {
@@ -222,7 +222,7 @@
             "title": "Hospitalizacija"
         },
         "metricsComparison": {
-            "deceased": "Umrli (dnevno)",
+            "deceased": "Smrtni slučajevi (dnevno)",
             "title": "COVID-19 situacija u Sloveniji",
             "testsToDate": "Testovi (do danas)",
             "ventilator": "Na respiratoru",
@@ -234,7 +234,7 @@
             "dischargedToDate": "Otpušteni iz bolnice (do danas)",
             "hospitalized": "Hospitalizirani",
             "discharged": "Otpušteni iz bolnice (dnevno)",
-            "deceasedToDate": "Umrli (do danas)",
+            "deceasedToDate": "Smrtni slučajevi (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
             "confirmedToDate": "Potvrđeni slučajevi (do danas)"
         },
@@ -321,7 +321,7 @@
         },
         "regions": {
             "title": "Slučajevi po regijama",
-            "deceased": "Umrli",
+            "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi"
         },
