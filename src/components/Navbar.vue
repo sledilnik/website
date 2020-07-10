@@ -49,7 +49,7 @@
           </transition>
         </div>
       </div>
-      <div v-else class="router-link">
+      <div v-else class="router-link lang-mobile">
         <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
@@ -350,7 +350,9 @@ export default {
   }
 
   .menuOpen & {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     transform: translate3d(0, 0 0);
     animation: menu-transition 0.65s;
     will-change: transform;
@@ -559,6 +561,10 @@ export default {
   @include nav-break {
     display: block;
   }
+}
+
+.lang-mobile {
+  margin-top: auto;
 }
 
 .lang-selected {
