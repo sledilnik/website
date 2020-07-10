@@ -534,6 +534,8 @@ export default {
   &-anchor {
     color: rgba(0, 0, 0, 0.56);
     text-decoration: none;
+    width:100%;
+    display: block;
 
     &.active {
       font-weight: bold;
