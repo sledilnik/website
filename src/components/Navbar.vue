@@ -49,11 +49,11 @@
           </transition>
         </div>
       </div>
-      <div v-if="isMobile">
+      <div v-else class="router-link">
         <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
-             class="router-link-anchor router-link xxrouter-link-icon"
+             class="router-link router-link-anchor"
              :class="{ active: $i18n.i18next.language === lang }"
              @click.prevent="changeLanguage(lang)">
               <font-awesome-icon icon="globe" />
@@ -323,9 +323,13 @@ export default {
   z-index: 100;
   background: $yellow;
   padding: 20px 0 0 15px;
-  // overflow: auto;
+  overflow: auto;
   transition: all 0.4s ease-in-out;
   will-change: transform;
+
+  @include nav-break {
+    overflow: visible;
+  }
 
   .scrolled & {
     padding: 11px 0 0 15px;
