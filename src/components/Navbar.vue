@@ -21,20 +21,45 @@
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <a href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
+      <!--
+      <a v-if="!isMobile" href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      <div class="router-link">
-        <span v-for="(lang, index) in languages" :key="index">
+      -->
+      <div v-if="!isMobile" class="router-link router-link-lang-switcher router-link-icon">
+        <div>
+          <div class="lang" @click="toggleDropdown">
+            <font-awesome-icon icon="globe" />
+            <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
+            &nbsp;<font-awesome-icon icon="caret-down" />
+          </div>
+          <transition name="slide">
+            <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
+              <li v-for="(lang, index) in languages" :key="index" class="lang-list-item">
+                <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
+                   :hreflang="lang"
+                   class="router-link-anchor"
+                   :class="{ active: $i18n.i18next.language === lang }"
+                   @click.prevent="changeLanguage(lang)">
+                  {{ $t('navbar.language.' + lang, { lng: lang }) }}
+                </a>
+              </li>
+            </ul>
+          </transition>
+        </div>
+      </div>
+      <div v-if="isMobile">
+        <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
-             class="router-link-anchor"
+             class="router-link-anchor router-link xxrouter-link-icon"
              :class="{ active: $i18n.i18next.language === lang }"
-             @click.prevent="changeLanguage(lang)">{{ lang.toUpperCase() }}</a>
-          <span v-if="index !== languages.length - 1"
-                class="divider">/</span>
-        </span>
+             @click.prevent="changeLanguage(lang)">
+              <font-awesome-icon icon="globe" />
+              {{ $t('navbar.language.' + lang, { lng: lang }) }}
+             </a>
+        </div>
       </div>
     </div>
   </div>
@@ -43,24 +68,34 @@
 <script>
 import moment from 'moment'
 import i18next from 'i18next'
+import { mixin as clickaway } from 'vue-clickaway'
 
 export default {
+  mixins: [clickaway],
   name: 'Navbar',
-  props: {
-    msg: String,
-  },
   data() {
     return {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
-      languages: i18next.languages
+      dropdownVisible: false,
+      isMobile: false,
+      languages: i18next.languages,
+      selectedLanguage: i18next.language,
     };
   },
   created() {
     window.addEventListener('scroll', this.handleScroll);
   },
-
+  mounted () {
+    this.onResize()
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
+  beforeDestroy () {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.onResize, { passive: true })
+    }
+  },
   methods: {
     handleScroll() {
       this.scrollPosition = window.scrollY;
@@ -79,13 +114,24 @@ export default {
         this.closingMenu = false;
       }, 650);
     },
+    onResize () {
+      this.isMobile = window.innerWidth < 992
+    },
+    toggleDropdown() {
+      this.dropdownVisible = !this.dropdownVisible
+    },
+    hideDropdown() {
+      this.dropdownVisible = false
+    },
     changeLanguage(lang) {
       if (this.$route.params.lang === lang) return
       this.$i18n.i18next.changeLanguage(lang, (err, t) => {
-        if (err) return console.log('something went wrong loading', err);
-        this.$router.push({ name: this.$route.name, params: { lang } });
-        moment.locale(lang);
-      });
+        if (err) return console.log('something went wrong loading', err)
+        this.selectedLanguage = lang
+        this.dropdownVisible = false
+        this.$router.push({ name: this.$route.name, params: { lang } })
+        moment.locale(lang)
+      })
     },
   },
   watch: {
@@ -277,7 +323,7 @@ export default {
   z-index: 100;
   background: $yellow;
   padding: 20px 0 0 15px;
-  overflow: auto;
+  // overflow: auto;
   transition: all 0.4s ease-in-out;
   will-change: transform;
 
@@ -452,7 +498,7 @@ export default {
     margin: 16px auto;
 
     @include nav-break {
-      margin: 0 0 0 32px;
+      margin: 0 0 0 22px;
     }
 
     span {
@@ -490,6 +536,57 @@ export default {
 
     ~ .divider {
       margin: 0 3.5px;
+    }
+  }
+
+  &.router-link-lang-switcher {
+    display: block;
+    cursor: pointer;
+
+    @include nav-break {
+      display: inline-block;
+    }
+  }
+}
+
+.lang {
+  display: inline-block;
+
+  @include nav-break {
+    display: block;
+  }
+}
+
+.lang-selected {
+  margin-left: 5px;
+}
+
+.lang-list {
+  position: relative;
+  list-style: none;
+  margin: 0 0 0 10px;
+  padding: 0;
+  display: inline-block;
+
+  @include nav-break {
+    margin: 0;
+    padding: 0 10px;
+    background: white;
+    box-shadow: $element-box-shadow;
+    border: 1px solid rgba(0, 0, 0, 0.39);
+    border-radius: 6px;
+    position: absolute;
+    right: -1px;
+    top: 32px;
+    min-width: 120px;
+    text-align: right;
+    display: block;
+  }
+
+  &-item {
+
+    @include nav-break {
+      margin: 8px 0;
     }
   }
 }
