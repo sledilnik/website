@@ -27,29 +27,27 @@
         <span>{{ $t("navbar.github") }}</span>
       </a>
       -->
-      <div v-if="!isMobile" class="router-link router-link-lang-switcher router-link-icon">
-        <div>
-          <div class="lang" @click="toggleDropdown">
-            <font-awesome-icon icon="globe" />
-            <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
-            &nbsp;<font-awesome-icon icon="caret-down" />
-          </div>
-          <transition name="slide">
-            <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
-              <li v-for="(lang, index) in languages" :key="index" class="lang-list-item">
-                <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
-                   :hreflang="lang"
-                   class="router-link-anchor"
-                   :class="{ active: $i18n.i18next.language === lang }"
-                   @click.prevent="changeLanguage(lang)">
-                  {{ $t('navbar.language.' + lang, { lng: lang }) }}
-                </a>
-              </li>
-            </ul>
-          </transition>
+      <div v-if="!isMobile" class="router-link router-link-icon lang-switcher">
+        <div class="lang" @click="toggleDropdown">
+          <font-awesome-icon icon="globe" />
+          <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
+          &nbsp;<font-awesome-icon icon="caret-down" />
         </div>
+        <transition name="slide">
+          <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
+            <li v-for="(lang, index) in languages" :key="index" class="lang-list-item">
+              <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
+                  :hreflang="lang"
+                  class="router-link-anchor"
+                  :class="{ active: $i18n.i18next.language === lang }"
+                  @click.prevent="changeLanguage(lang)">
+                {{ $t('navbar.language.' + lang, { lng: lang }) }}
+              </a>
+            </li>
+          </ul>
+        </transition>
       </div>
-      <div v-else class="router-link lang-mobile">
+      <div v-else class="lang-switcher-mobile">
         <div v-for="(lang, index) in languages" :key="index">
           <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
              :hreflang="lang"
@@ -57,7 +55,7 @@
              :class="{ active: $i18n.i18next.language === lang }"
              @click.prevent="changeLanguage(lang)">
               <font-awesome-icon icon="globe" />
-              {{ $t('navbar.language.' + lang, { lng: lang }) }}
+              <span>{{ $t('navbar.language.' + lang, { lng: lang }) }}</span>
              </a>
         </div>
       </div>
@@ -357,6 +355,11 @@ export default {
     animation: menu-transition 0.65s;
     will-change: transform;
 
+    @include nav-break {
+      flex-direction: row;
+      align-items: center;
+    }
+
     @keyframes menu-transition {
       0% {
         transform: translate3d(100%, 0, 0);
@@ -539,65 +542,38 @@ export default {
     &:hover {
       color: rgb(0, 0, 0);
     }
-
-    ~ .divider {
-      margin: 0 3.5px;
-    }
   }
 
-  &.router-link-lang-switcher {
-    display: block;
+  &.lang-switcher {
+    display: inline-block;
     cursor: pointer;
-
-    @include nav-break {
-      display: inline-block;
-    }
   }
 }
 
-.lang {
-  display: inline-block;
-
-  @include nav-break {
-    display: block;
-  }
-}
-
-.lang-mobile {
+.lang-switcher-mobile {
   margin-top: auto;
-}
 
-.lang-selected {
-  margin-left: 5px;
+  span {
+    margin-left: 6px;
+  }
 }
 
 .lang-list {
-  position: relative;
+  position: absolute;
   list-style: none;
   margin: 0 0 0 10px;
-  padding: 0;
-  display: inline-block;
-
-  @include nav-break {
-    margin: 0;
-    padding: 0 10px;
-    background: white;
-    box-shadow: $element-box-shadow;
-    border: 1px solid rgba(0, 0, 0, 0.39);
-    border-radius: 6px;
-    position: absolute;
-    right: -1px;
-    top: 32px;
-    min-width: 120px;
-    text-align: right;
-    display: block;
-  }
+  padding: 0 10px;
+  background: white;
+  box-shadow: $element-box-shadow;
+  border: 1px solid rgba(0, 0, 0, 0.39);
+  border-radius: 6px;
+  right: -1px;
+  top: 32px;
+  min-width: 120px;
+  text-align: right;
 
   &-item {
-
-    @include nav-break {
-      margin: 8px 0;
-    }
+    margin: 8px 0;
   }
 }
 </style>
