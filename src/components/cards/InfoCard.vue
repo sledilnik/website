@@ -2,62 +2,64 @@
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <span class="card-title">{{ title }}</span>
-      <span class="card-number">
-        {{ renderValues.lastDay.value }}
-        <span class="card-percentage-diff" :class="diffClass"
-          >{{ renderValues.lastDay.percentDiff | prefixDiff }}%
-        </span>
-      </span>
-      <div :id="elementId" class="card-diff">
-        <span v-if="showAbsolute">
-          <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-          <span :class="diffClass">
-            {{ Math.abs(renderValues.lastDay.diff) }}
+      <div class="card-wrapper">
+        <span class="card-number">
+          {{ renderValues.lastDay.value }}
+          <span class="card-percentage-diff" :class="diffClass"
+            >{{ renderValues.lastDay.percentDiff | prefixDiff }}%
           </span>
         </span>
-        <span v-if="showIn">
-          <div
-            class="trend-icon in"
-            :class="[
-              diffTotalClass(totalIn, 'down'),
-              iconTotalClass(totalIn, 'down'),
-            ]"
-          ></div>
-          <span class="in" :class="diffTotalClass(totalIn, 'down')">
-            {{ renderTotalValues(totalIn) }}
+        <div :id="elementId" class="card-diff">
+          <span v-if="showAbsolute">
+            <div class="trend-icon" :class="[diffClass, iconClass]"></div>
+            <span :class="diffClass">
+              {{ Math.abs(renderValues.lastDay.diff) }}
+            </span>
           </span>
-        </span>
-        <span v-if="showOut">
-          <div
-            class="trend-icon out"
-            :class="[
-              diffTotalClass(totalOut, 'up'),
-              iconTotalClass(totalOut, 'up'),
-            ]"
-          ></div>
-          <span class="out" :class="diffTotalClass(totalOut, 'up')">
-            {{ renderTotalValues(totalOut) }}
+          <span v-if="showIn">
+            <div
+              class="trend-icon in"
+              :class="[
+                diffTotalClass(totalIn, 'down'),
+                iconTotalClass(totalIn, 'down'),
+              ]"
+            ></div>
+            <span class="in" :class="diffTotalClass(totalIn, 'down')">
+              {{ renderTotalValues(totalIn) }}
+            </span>
           </span>
-        </span>
-        <span v-if="showDeceased">
-          <div
-            class="trend-icon deceased"
-            :class="[
-              diffTotalClass(totalDeceased),
-              iconTotalClass(totalDeceased),
-            ]"
-          ></div>
-          <span class="deceased" :class="diffTotalClass(totalDeceased)">
-            {{ renderTotalValues(totalDeceased) }}
+          <span v-if="showOut">
+            <div
+              class="trend-icon out"
+              :class="[
+                diffTotalClass(totalOut, 'up'),
+                iconTotalClass(totalOut, 'up'),
+              ]"
+            ></div>
+            <span class="out" :class="diffTotalClass(totalOut, 'up')">
+              {{ renderTotalValues(totalOut) }}
+            </span>
           </span>
-        </span>
-      </div>
-      <div class="data-time">
-        {{
-          $t('infocard.lastUpdated', {
-            date: new Date(renderValues.lastDay.displayDate),
-          })
-        }}
+          <span v-if="showDeceased">
+            <div
+              class="trend-icon deceased"
+              :class="[
+                diffTotalClass(totalDeceased),
+                iconTotalClass(totalDeceased),
+              ]"
+            ></div>
+            <span class="deceased" :class="diffTotalClass(totalDeceased)">
+              {{ renderTotalValues(totalDeceased) }}
+            </span>
+          </span>
+        </div>
+        <div class="data-time">
+          {{
+            $t('infocard.lastUpdated', {
+              date: new Date(renderValues.lastDay.displayDate),
+            })
+          }}
+        </div>
       </div>
     </div>
     <div class="hp-card" v-else>
@@ -257,6 +259,10 @@ export default {
   font-weight: 700;
 }
 
+.card-wrapper {
+  margin-top: auto;
+}
+
 .card-number {
   display: block;
   font-size: 32px;
@@ -333,7 +339,6 @@ export default {
 }
 
 .data-time {
-  margin-top: auto;
   font-size: 12px;
   color: #a0a0a0;
 }

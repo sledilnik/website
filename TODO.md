@@ -1,7 +1,9 @@
 # TODO
 
 ## World page
-- add new deaths per 1M chart
+- charts:
+    - deaths per cases
+
 - can we reuse OWID data across charts?
     - locking
     - caching multiple country sets?

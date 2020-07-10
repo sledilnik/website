@@ -5,10 +5,10 @@ import VueI18Next from '@panter/vue-i18next'
 import moment from 'moment'
 import en from './locales/en.json'
 import sl from './locales/sl.json'
-import ru from './locales/ru.json'
-import de from './locales/de.json'
-import it from './locales/it.json'
 import hr from './locales/hr.json'
+import de from './locales/de.json'
+import ru from './locales/ru.json'
+import it from './locales/it.json'
 import mk from './locales/mk.json'
 import sq from './locales/sq.json'
 
@@ -30,15 +30,15 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'ru', 'de', 'it', 'hr', 'mk', 'sq'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'ru', 'it', 'mk', 'sq'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
     en: { translation: en },
-    ru: { translation: ru },
-    de: { translation: de },
-    it: { translation: it },
     hr: { translation: hr },
+    de: { translation: de },
+    ru: { translation: ru },
+    it: { translation: it },
     mk: { translation: mk },
     sq: { translation: sq },
   },
@@ -59,11 +59,33 @@ i18next.services.pluralResolver.addRule(
   // to match the one in weblate
   'sl',
   {
-      numbers: [0, 1, 2, 3],
-      plurals: function plurals(n) {
-          return Number(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);
-      }
-  });
+    numbers: [0, 1, 2, 3],
+    plurals: function plurals(n) {
+      return Number(
+        n % 100 == 1 ? 0 : n % 100 == 2 ? 1 : n % 100 == 3 || n % 100 == 4 ? 2 : 3
+      )
+    },
+  }
+)
+
+moment.locale(process.env.VUE_APP_DEFAULT_LANGUAGE)
+
+moment.updateLocale('hr', {
+  months: [
+    'siječnja',
+    'veljače',
+    'ožujka',
+    'travnja',
+    'svibnja',
+    'lipnja',
+    'srpnja',
+    'kolovoza',
+    'rujna',
+    'listopada',
+    'studenoga',
+    'prosinca',
+  ],
+})
 
 const i18n = new VueI18Next(i18next)
 

@@ -80,7 +80,7 @@ export default {
       closingMenu: false,
       dropdownVisible: false,
       isMobile: false,
-      languages: i18next.languages,
+      languages: i18next.languages.sort(),
       selectedLanguage: i18next.language,
     };
   },
