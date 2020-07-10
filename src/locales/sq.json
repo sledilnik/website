@@ -173,7 +173,7 @@
             "icuCases": "Në njësinë për kujdes intensiv",
             "hospitalCases": "Të shtruar në spital",
             "mortality": "Vdekshmëria",
-            "hospitalizations": "Shtrime në spital",
+            "hospitalizations": "Të shtruar në spital",
             "seriousCases": "Raste të rënda",
             "title": "Përqindja e rasteve serioze"
         },
@@ -188,7 +188,7 @@
             "hospitalizedIn": "Të shtruar në spital në:",
             "byHospital": "Sipas spitaleve",
             "structure": "Struktura",
-            "title": "Shtrimi në spital"
+            "title": "Të shtruar në spital"
         },
         "cases": {
             "deceased": "Të vdekur",
