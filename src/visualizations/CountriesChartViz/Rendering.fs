@@ -11,6 +11,7 @@ open Fable.Core.JsInterop
 open Analysis
 open Highcharts
 open Types
+open I18N
 
 let countriesDisplaySets = [|
     { Label = "groupNeighbouringWoItaly"
@@ -46,12 +47,15 @@ type Msg =
 [<Literal>]
 let DaysOfMovingAverage = 5
 
-let init: ChartState * Cmd<Msg> =
+let init (config: CountriesChartConfig):
+    ChartState * Cmd<Msg> =
     let state = {
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
-        XAxisType = ByDate// DaysSinceFirstDeath
+        MetricToDisplay = config.MetricToDisplay
+        XAxisType = ByDate
         ScaleType = Linear
+        ChartTextsGroup = config.ChartTextsGroup
     }
     state, Cmd.ofMsg DataRequested
 
@@ -75,7 +79,9 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             OwidDataState = newOwidDataState
             DisplayedCountriesSet = selectedSet
         },
-        Cmd.OfAsync.result (Data.OurWorldInData.loadCountryComparison countriesCodes DataLoaded)
+        Cmd.OfAsync.result
+            (Data.OurWorldInData.loadCountryComparison
+                 countriesCodes DataLoaded)
     | DataRequested ->
         let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
 
@@ -87,7 +93,9 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             | Current oldOwidData -> PreviousAndLoadingNew oldOwidData
 
         { state with OwidDataState = newOwidDataState },
-        Cmd.OfAsync.result (Data.OurWorldInData.loadCountryComparison countriesCodes DataLoaded)
+        Cmd.OfAsync.result
+            (Data.OurWorldInData.loadCountryComparison
+                 countriesCodes DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
     | XAxisTypeChanged newXAxisType ->
@@ -120,8 +128,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | ByDate -> entry.Date |> jsTime12h :> obj
                                  | DaysSinceFirstDeath -> i :> obj
                                  | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = entry.TotalDeathsPerMillion
-                             date = I18N.tOptions "days.longerDate" {| date = entry.Date |}
+                             y = match state.MetricToDisplay with
+                                 | NewCasesPer1M -> entry.NewCasesPerMillion
+                                 | TotalDeathsPer1M -> entry.TotalDeathsPerMillion
+                             date = I18N.tOptions "days.longerDate"
+                                        {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
                                     pojo {|
@@ -143,7 +154,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
     let legend =
         pojo {|
                 enabled = true
-                title = pojo {| text = chartData.DataDescription |}
+                title = pojo {| text = chartData.LegendTitle |}
                 align = "left"
                 verticalAlign = "top"
                 borderColor = "#ddd"
@@ -232,11 +243,13 @@ let renderChartContainer state chartData =
         prop.children [ renderChartCode state chartData |> chart ]
     ]
 
-let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
+let renderCountriesSetsSelectors
+    (activeSet: CountriesDisplaySet)
+    dispatch =
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text (I18N.tt "charts.countries" setToRender.Label)
+            prop.text (I18N.t ("country-groups." + setToRender.Label))
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected") ]
@@ -251,16 +264,21 @@ let renderCountriesSetsSelectors (activeSet: CountriesDisplaySet) dispatch =
         |> prop.children
     ]
 
-let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
+let renderXAxisSelectors
+    chartTextsGroup
+    (activeXAxisType: XAxisType)
+    dispatch =
     let renderXAxisSelector (axisSelector: XAxisType) =
         let active = axisSelector = activeXAxisType
 
         let defaultProps =
             [
                 match axisSelector with
-                | ByDate -> I18N.t "charts.countries.chronologically"
-                | DaysSinceFirstDeath -> I18N.t "charts.countries.sinceFirstDeath"
-                | DaysSinceOneDeathPerMillion -> I18N.t "charts.countries.sinceOneDeathPerMillion"
+                | ByDate -> chartText chartTextsGroup ".chronologically"
+                | DaysSinceFirstDeath ->
+                    chartText chartTextsGroup ".sinceFirstDeath"
+                | DaysSinceOneDeathPerMillion ->
+                    chartText chartTextsGroup ".sinceOneDeathPerMillion"
                 |> prop.text
 
                 Utils.classes
@@ -280,7 +298,11 @@ let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
 
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children ((Html.text (I18N.t "charts.common.xAxis")) :: xAxisTypesSelectors)
+        // The X-axis selectors have been disabled.
+        // I'm leaving this code for possible future reuse, if we figure out
+        // what X-axis selectors we should support for countries charts.
+//        prop.children ((Html.text (I18N.t "charts.common.xAxis"))
+//                       :: xAxisTypesSelectors)
     ]
 
 let render state dispatch =
@@ -290,7 +312,10 @@ let render state dispatch =
         state |> prepareChartData xAxisType DaysOfMovingAverage
 
     let topControls = [
-            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
+            renderXAxisSelectors
+                state.ChartTextsGroup
+                state.XAxisType
+                (XAxisTypeChanged >> dispatch)
             Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch)
     ]
@@ -310,6 +335,7 @@ let render state dispatch =
         ]
     | None -> Html.none
 
-let renderChart() =
+let renderChart (config: CountriesChartConfig) =
     React.elmishComponent
-        ("CountriesChartViz/CountriesChart", init, update, render)
+        ("CountriesChartViz/CountriesChart",
+         init config, update, render)

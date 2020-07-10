@@ -113,14 +113,17 @@ type VisualizationType =
     | Map
     | EuropeMap
     | Infections
-    | Countries
+    | CountriesCasesPer1M
+    | CountriesDeathsPer1M
 
 type RenderingMode =
     | Normal
     | Embedded of VisualizationType option
 
 type State =
-    { Query : obj // URL query parameters
+    {
+      Page: string
+      Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
@@ -128,7 +131,7 @@ type State =
 type Visualization = {
     VisualizationType: VisualizationType
     ClassName: string
-    Label: string
+    ChartTextsGroup: string
     Explicit: bool
     Renderer: State -> Fable.React.ReactElement
 }

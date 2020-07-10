@@ -161,8 +161,8 @@
             "emergencyExamination": "Kontrollet në njësinë e urgjencës"
         },
         "ratios": {
-            "hospitalDeceasedShare": "Përqindja e vdekjeve në spital",
-            "icuDeceasedShare": "Përqindja e vdekjeve në njësi për kujdes intensiv",
+            "hospitalDeceasedShare": "Përqindja e rasteve të vdekjes në spital",
+            "icuDeceasedShare": "Përqindja e rasteve të të vdekurve në njësi për kujdes intensiv",
             "icuMortality": "Vdekshmëria në njësi për kujdes intensiv",
             "hospitalMortality": "Vdekshmëria për spital",
             "deceasedHospital": "Të vdekur",
@@ -267,6 +267,26 @@
         },
         "ageGroupsTimeline": {
             "title": "Rastet e konfirmuara sipas grupmoshës"
+        },
+        "countriesTotalDeathsPer1M": {
+            "sinceFirstDeath": "Prej rastit të parë të vdekjes",
+            "sinceOneDeathPerMillion": "Prej rastit të parë të vdekjes për 1 milion banorë",
+            "daysFromFirstDeath": "Numri i ditëve prej rastit të parë të vdekjes",
+            "daysFromOneDeathPerMillion": "Numri i ditëve prej rastit të parë të vdekjes për 1 milion banorë",
+            "chronologically": "Kronologjik",
+            "legendTitle": "Gjithsej raste vdekje për 1 milion banorë",
+            "title": "Shtetet: Gjithsej raste vdekje për 1 milion banorë",
+            "yAxisTitle": "Gjuthsej raste vdekje për 1 milion banorë"
+        },
+        "countriesNewCasesPer1M": {
+            "sinceFirstDeath": "Prej rastit të parë të vdekjes",
+            "sinceOneDeathPerMillion": "Prej rastit të parë të vdekjes për 1 milion banorë",
+            "daysFromFirstDeath": "Numri i ditëve prej rastit të parë të vdekjes",
+            "daysFromOneDeathPerMillion": "Numri i ditëve prej rastit të parë të vdekjes për 1 milion banorë",
+            "chronologically": "Kronologjik",
+            "legendTitle": "Raste të reja për 1 milion banorë",
+            "yAxisTitle": "Raste të reja për 1 milion banorë",
+            "title": "Shtetet: Raste të reja për 1 milion banorë"
         }
     },
     "shortMonth": {
@@ -309,10 +329,14 @@
         "language": {
             "en": "Angleze",
             "sl": "Sllovene",
-            "sq": "Shqiptar"
+            "sq": "Shqiptar",
+            "mk": "Maqedonisht",
+            "hr": "Kroatisht",
+            "de": "Gjermanisht"
         },
         "github": "GitHub",
-        "links": "Linqe"
+        "links": "Linqe",
+        "world": "Bota"
     },
     "country": {
         "DEU": "Gjermani",
@@ -410,7 +434,7 @@
     "infocard": {
         "lastUpdated": "{{ date, dddd, D. MMMM }}",
         "accordingTo": "Sipas {{ date, MMMM Do }}",
-        "deceasedToDate": "Vdekje të konfirmuara",
+        "deceasedToDate": "Raste vdekje të konfirmuara",
         "icu": "Në njësinë për kujdes intensiv",
         "inHospital": "Të shtruar në spital",
         "recoveredToDate": "Të shëruar",
@@ -768,5 +792,15 @@
                 "title": "Faza 1"
             }
         }
+    },
+    "country-groups": {
+        "groupNeighbouringWoItaly": "Shtetet fqinje (përveç Italisë)",
+        "groupNeighbouring": "Shtetet fqinje",
+        "groupCriticalEU": "Shtetet kritike (BE)",
+        "groupCriticalWorld": "Shtetet kritike (Botë)",
+        "groupNordic": "Shtetet Nordike",
+        "groupExYu": "Ish-Jugosllavia",
+        "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
+        "groupLatinAmerica": "Amerika Latine"
     }
 }

@@ -16,8 +16,9 @@
         "about": "Über",
         "menu": "Menü",
         "models": "Modelle",
-        "tables": "Tabelle",
-        "faq": "FAQ"
+        "tables": "Tabellen",
+        "faq": "FAQ",
+        "world": "Welt"
     },
     "country": {
         "SVN": "Slowenien",
@@ -204,7 +205,7 @@
             "noteFaq": "Hinweis: Die Einschränkung der dargestellten Daten ist beschrieben in ",
             "to": " – ",
             "facebook": "Facebook",
-            "zoom": "Ansicht vergrößern",
+            "zoom": "Ansicht",
             "resetZoom": "Ansicht zurücksetzen",
             "from": " ",
             "dataSource": "Datenquelle",
@@ -275,7 +276,7 @@
             "discharged": "Aus Krankenhäusern entlassen (täglich)",
             "active": "Aktive Fälle",
             "dischargedToDate": "Aus Krankenhäusern entlassen (bis heute)",
-            "hospitalized": "Hospitalisiert",
+            "hospitalized": "Hospitalisierte",
             "ventilator": "An Beatmungsmaschinen",
             "testsToDate": "Tests (bis heute)",
             "deceasedToDate": "Todesfälle (bis heute)",
@@ -350,6 +351,26 @@
         },
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen"
+        },
+        "countriesTotalDeathsPer1M": {
+            "chronologically": "Chronologisch",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
+            "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
+            "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
+        },
+        "countriesNewCasesPer1M": {
+            "chronologically": "Chronologisch",
+            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "legendTitle": "Neue Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
+            "title": "Länder: Neue Fälle pro 1 Million Menschen"
         }
     },
     "tableDict": {
@@ -381,15 +402,15 @@
         "cases_hs_employee_confirmed_todate": "Bestätigte Fälle – Personal im Gesundheitswesen (bis heute)",
         "age_male_55-64_todate": "55 – 64 Jahre",
         "region_sg_todate": "Koroška",
-        "cases_rh_occupant_confirmed_todate": "Bestätigte Fälle – Bewohner von Altenheimen (bis heute)",
+        "cases_rh_occupant_confirmed_todate": "Bestätigte Fälle – Bewohner von Altersheimen (bis heute)",
         "age_female_55-64_todate": "55 – 64 Jahre",
         "age_male_75-84_todate": "75 – 84 Jahre",
         "age_female_25-34_todate": "25 – 34 Jahre",
         "age_male_15-24_todate": "15 – 24 Jahre",
         "age_male_85+_todate": "85+ Jahre",
         "age_male_todate": "Gesamt",
-        "state_in_hospital_todate": "Hospitalisiert (bis heute)",
-        "state_in_hospital": "Hospitalisiert (aktiv)",
+        "state_in_hospital_todate": "Hospitalisierte (bis heute)",
+        "state_in_hospital": "Hospitalisierte (aktiv)",
         "region_kp_todate": "Küste und Karst",
         "age_female_75-84_todate": "75 – 84 Jahre",
         "region_ng_todate": "Goriška",
@@ -452,7 +473,7 @@
         },
         "gatherings50": {
             "title": "Bis zu 50",
-            "description": "Versammelungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
+            "description": "Versammlungen von bis zu 50 Personen, mit Genehmigung des NIJZ bis zu 500"
         },
         "schools": {
             "description": "Schließung von Schulen, Restaurants",
@@ -483,7 +504,7 @@
             "description": "Entspannung: Kindergarten und Grundschule 1 – 3, 9. Klasse. Sekundarschule 4 Klasse"
         },
         "retirementHomes": {
-            "description": "Verbot von Besuchen in Seniorenheimen.<br>Bestätigte Infektion eines Arztes in Metlika",
+            "description": "Verbot von Besuchen in Altersheimen.<br>Bestätigte Infektion eines Arztes in Metlika",
             "title": "Altersheime"
         },
         "epidemic": {
@@ -538,7 +559,7 @@
         "icu": "Auf Intensivstationen",
         "accordingTo": "Am {{ date, D. MMMM }}",
         "deceasedToDate": "Bestätigte Todesfälle",
-        "inHospital": "Hospitalisiert"
+        "inHospital": "Hospitalisierte"
     },
     "notice": {
         "news001": "Neues Diagramm:",
@@ -725,7 +746,7 @@
     },
     "embedMaker": {
         "title": "Diagramm in deine Webseite einbetten",
-        "description": "Eine spezifische Ansicht kann an die eigenen Bedürfnisse angepasst werden. Die Größe der eingebetteten Ansicht kann geändert werden oder auf eine bestimmte Region oder Gemeinde beschränkt werden. Für alles Weitere, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">hier</a>.",
+        "description": "Eine spezifische Ansicht kann an die eigenen Bedürfnisse angepasst werden. Die Größe der eingebetteten Ansicht kann geändert werden oder auf eine bestimmte Region oder Gemeinde beschränkt werden. Weitere Informationen findest Du <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">hier</a>.",
         "copy": "Kopieren",
         "preview": "Vorschau:",
         "copied": "Kopiert!",
@@ -766,5 +787,15 @@
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
         "in_x_days_plural": "in {{ count }} Tagen"
+    },
+    "country-groups": {
+        "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
+        "groupNeighbouring": "Nachbarländer",
+        "groupCriticalEU": "Kritische Länder (EU)",
+        "groupCriticalWorld": "Kritische Länder (Welt)",
+        "groupNordic": "Nordische Länder",
+        "groupExYu": "Ex-Jugoslawien",
+        "groupEastAsiaOceania": "Ostasien und Ozeanien",
+        "groupLatinAmerica": "Lateinamerika"
     }
 }

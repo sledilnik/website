@@ -6,6 +6,8 @@ open System
 
 type CountryDataDayEntry = {
     Date: DateTime
+    NewCases: float
+    NewCasesPerMillion : float
     TotalCases: float
     TotalCasesPerMillion : float
     TotalDeaths: float
@@ -23,6 +25,10 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
 
     let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
         { Date = entryRaw.Date
+          NewCases = float entryRaw.NewCases
+          NewCasesPerMillion =
+              entryRaw.NewCasesPerMillion
+              |> Option.defaultValue 0.
           TotalCases = float entryRaw.TotalCases
           TotalCasesPerMillion =
               entryRaw.TotalCasesPerMillion
@@ -57,6 +63,8 @@ let calculateMovingAverages
     let averages: CountryDataDayEntry[] = Array.zeroCreate averagesSetLength
 
     let daysOfMovingAverageFloat = float daysOfMovingAverage
+    let mutable currentNewCasesSum = 0.
+    let mutable currentNewCases1MSum = 0.
     let mutable currentCasesSum = 0.
     let mutable currentCases1MSum = 0.
     let mutable currentDeathsSum = 0.
@@ -65,16 +73,18 @@ let calculateMovingAverages
     let movingAverageFunc index =
         let entry = countryEntries.[index]
 
-        currentCasesSum <-
-            currentCasesSum + entry.TotalCases
-        currentCases1MSum <-
-            currentCases1MSum + entry.TotalCasesPerMillion
+        currentNewCasesSum <- currentNewCasesSum + entry.NewCases
+        currentNewCases1MSum <- currentNewCases1MSum + entry.NewCasesPerMillion
+        currentCasesSum <- currentCasesSum + entry.TotalCases
+        currentCases1MSum <- currentCases1MSum + entry.TotalCasesPerMillion
         currentDeathsSum <- currentDeathsSum + entry.TotalDeaths
         currentDeaths1MSum <- currentDeaths1MSum + entry.TotalDeathsPerMillion
 
         match index with
         | index when index >= daysOfMovingAverage - 1 ->
             let date = countryEntries.[index - cutOff].Date
+            let newCasesAvg = currentNewCasesSum / daysOfMovingAverageFloat
+            let newCases1MAvg = currentNewCases1MSum / daysOfMovingAverageFloat
             let casesAvg = currentCasesSum / daysOfMovingAverageFloat
             let cases1MAvg = currentCases1MSum / daysOfMovingAverageFloat
             let deathsAvg = currentDeathsSum / daysOfMovingAverageFloat
@@ -82,13 +92,18 @@ let calculateMovingAverages
 
             averages.[index - (daysOfMovingAverage - 1)] <- {
                 Date = date
+                NewCases = newCasesAvg; NewCasesPerMillion = newCases1MAvg
                 TotalCases = casesAvg; TotalCasesPerMillion = cases1MAvg
                 TotalDeaths = deathsAvg; TotalDeathsPerMillion = deaths1MAvg
             }
 
-            let entryToRemove = countryEntries.[index - (daysOfMovingAverage - 1)]
-            currentCasesSum <-
-                currentCasesSum - entryToRemove.TotalCases
+            let entryToRemove =
+                countryEntries.[index - (daysOfMovingAverage - 1)]
+            currentNewCasesSum <-
+                currentNewCasesSum - entryToRemove.NewCases
+            currentNewCases1MSum <-
+                currentNewCases1MSum - entryToRemove.NewCasesPerMillion
+            currentCasesSum <- currentCasesSum - entryToRemove.TotalCases
             currentCases1MSum <-
                 currentCases1MSum - entryToRemove.TotalCasesPerMillion
             currentDeathsSum <- currentDeathsSum - entryToRemove.TotalDeaths
