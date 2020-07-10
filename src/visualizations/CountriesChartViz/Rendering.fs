@@ -298,7 +298,11 @@ let renderXAxisSelectors
 
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children ((Html.text (I18N.t "charts.common.xAxis")) :: xAxisTypesSelectors)
+        // The X-axis selectors have been disabled.
+        // I'm leaving this code for possible future reuse, if we figure out
+        // what X-axis selectors we should support for countries charts.
+//        prop.children ((Html.text (I18N.t "charts.common.xAxis"))
+//                       :: xAxisTypesSelectors)
     ]
 
 let render state dispatch =

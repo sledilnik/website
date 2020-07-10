@@ -585,9 +585,9 @@
             "title": "Potrjeni primeri po starostnih skupinah"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novookuženi na milijon prebivalcev",
-            "yAxisTitle": "Št. novookuženih na milijon prebivalcev",
-            "legendTitle": "Novookuženi na milijon prebivalcev",
+            "title": "Države: potrjeno okuženi na milijon prebivalcev",
+            "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
+            "legendTitle": "Potrjeno okuženi na milijon prebivalcev",
             "chronologically": "Kronološko",
             "sinceFirstDeath": "Od prve smrti",
             "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
