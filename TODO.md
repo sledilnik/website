@@ -1,6 +1,7 @@
 # TODO
 
 ## Age groups timeline - active cases
+- stop using int option
 - how to calculate?
     1. function that maps int option to int (None -> 0)
     1. function that calculates windowed sums for N-sized window

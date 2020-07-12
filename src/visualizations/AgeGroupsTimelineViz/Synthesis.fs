@@ -7,7 +7,7 @@ open System.Text
 open Fable.Core
 open JsInterop
 
-type CasesInAgeGroupForDay = int option
+type CasesInAgeGroupForDay = int
 type CasesInAgeGroupTimeline = DatedArray<CasesInAgeGroupForDay>
 type CasesInAgeGroupSeries = {
     AgeGroupKey: AgeGroupKey
@@ -31,7 +31,7 @@ let extractTimelineForAgeGroup
                 let dataForGroup =
                     dayGroupsData
                     |> List.find(fun group -> group.GroupKey = ageGroupKey)
-                dataForGroup.All
+                dataForGroup.All |> Utils.optionToInt
                 )
 
 let tooltipFormatter jsThis =
