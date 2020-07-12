@@ -27,12 +27,14 @@ let extractTimelineForAgeGroup
     : CasesInAgeGroupTimeline =
 
     casesTimeline
-    |> mapDatedArray (fun dayGroupsData ->
+    |> mapDatedArrayItems (fun dayGroupsData ->
                 let dataForGroup =
                     dayGroupsData
                     |> List.find(fun group -> group.GroupKey = ageGroupKey)
-                dataForGroup.All |> Utils.optionToInt
+                dataForGroup.All
+                |> Utils.optionToInt
                 )
+    |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points

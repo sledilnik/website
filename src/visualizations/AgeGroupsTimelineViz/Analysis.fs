@@ -52,10 +52,15 @@ let trimDatedArray trimPredicate (datedArray: DatedArray<'T>) =
 
     { StartDate = newStartDate; Data = trimmed }
 
-let mapDatedArray mapping datedArray =
+let mapDatedArrayItems mapping datedArray =
     let startDate = datedArray.StartDate
     let originalArray = datedArray.Data
     { StartDate = startDate; Data = originalArray |> Array.map mapping }
+
+let mapDatedArray mapping datedArray =
+    let startDate = datedArray.StartDate
+    let originalArray = datedArray.Data
+    { StartDate = startDate; Data = originalArray |> mapping }
 
 type CasesByAgeGroupsForDay = AgeGroupsList
 

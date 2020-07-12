@@ -99,5 +99,18 @@ let movingAverages<'T, 'TKey>
     |> Array.windowed daysOfMovingAverage
     |> Array.map (averageFunc keyFunc valueFunc)
 
+let calculateWindowedSumInt windowSize (data: int[]): int[] =
+    let len = data |> Array.length
 
+    let mutable runningSum = 0
 
+    let runningSumForItem index =
+        let addValue = data.[index]
+        if index >= windowSize then
+            let subValue = data.[index - windowSize]
+            runningSum <- runningSum + addValue - subValue
+        else
+            runningSum <- runningSum + addValue
+        runningSum
+
+    Array.init len runningSumForItem

@@ -15,10 +15,10 @@
         <Compile Include="AgeGroupsTimelineTests\Calculating cases by age for day.fs" />
         <Compile Include="AgeGroupsTimelineTests\Calculating cases by age timeline.fs" />
         <Compile Include="AgeGroupsTimelineTests\Sythensizing data.fs" />
-        <Compile Include="AgeGroupsTimelineTests\Calculating active cases.fs" />
         <Compile Include="CountriesChartTests\Grouping OWID data by countries.fs" />
         <Compile Include="CountriesChartTests\Averaging country data.fs" />
         <Compile Include="Date arithmetic.fs" />
+        <Compile Include="Calculating windowed sums.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 
