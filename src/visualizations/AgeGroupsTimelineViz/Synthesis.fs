@@ -2,14 +2,13 @@
 
 open Types
 open AgeGroupsTimelineViz.Analysis
-open System
 open System.Collections.Generic
 open System.Text
 open Fable.Core
 open JsInterop
 
-type CasesInAgeGroupForDay = { Date: DateTime; Cases: int option }
-type CasesInAgeGroupTimeline = CasesInAgeGroupForDay list
+type CasesInAgeGroupForDay = int option
+type CasesInAgeGroupTimeline = DatedArray<CasesInAgeGroupForDay>
 type CasesInAgeGroupSeries = {
     AgeGroupKey: AgeGroupKey
     Timeline: CasesInAgeGroupTimeline
@@ -18,7 +17,7 @@ type CasesInAgeGroupSeries = {
 type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
 let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
-    timeline.[0].Cases
+    timeline.Data.[0]
     |> List.map (fun group -> group.GroupKey)
     |> List.sortBy (fun groupKey -> groupKey.AgeFrom)
 
@@ -26,14 +25,14 @@ let extractTimelineForAgeGroup
     ageGroupKey
     (casesTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
+
     casesTimeline
-    |> List.map (fun dayData ->
-            let date = dayData.Date
-            let dataForGroup =
-                dayData.Cases
-                |> List.find(fun group -> group.GroupKey = ageGroupKey)
-            { Date = date; Cases = dataForGroup.All }
-            )
+    |> mapDatedArray (fun dayGroupsData ->
+                let dataForGroup =
+                    dayGroupsData
+                    |> List.find(fun group -> group.GroupKey = ageGroupKey)
+                dataForGroup.All
+                )
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points

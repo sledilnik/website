@@ -1,7 +1,9 @@
 [<RequireQualifiedAccess>]
 module AgeGroupsTimelineViz.Rendering
 
+open System
 open Analysis
+open Fable.Core
 open Synthesis
 open Highcharts
 open Types
@@ -51,9 +53,12 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 let renderChartOptions state dispatch =
 
     // map state data into a list needed for calculateCasesByAgeTimeline
-    let totalCasesByAgeGroups =
+    let totalCasesByAgeGroupsList =
         state.Data
         |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
+
+    let totalCasesByAgeGroups =
+        mapDateTuplesListToArray totalCasesByAgeGroupsList
 
     // calculate complete merged timeline
     let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
@@ -67,9 +72,13 @@ let renderChartOptions state dispatch =
                "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
         colors.[ageGroupIndex]
 
-    let mapPoint (pointData: CasesInAgeGroupForDay) =
-        let date = pointData.Date
-        let cases = pointData.Cases
+    let mapPoint
+        (startDate: DateTime)
+        (daysFromStartDate: int)
+        (cases: CasesInAgeGroupForDay) =
+        let date = startDate |> Days.add daysFromStartDate
+
+        JS.console.log date
 
         pojo {|
              x = date |> jsTime12h :> obj
@@ -78,9 +87,11 @@ let renderChartOptions state dispatch =
         |}
 
     let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        groupTimeline
-        |> List.map mapPoint
-        |> List.toArray
+        let startDate = groupTimeline.StartDate
+        let timelineArray = groupTimeline.Data
+
+        timelineArray
+        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
 
     // generate all series
     let allSeries =
