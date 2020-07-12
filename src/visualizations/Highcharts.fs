@@ -323,7 +323,7 @@ let basicChartOptions
                         chartOptions =
                             {|
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
-                                rangeSelector = pojo {| x = 8 ; inputPosition = pojo {| x = -25 |} |}
+                                rangeSelector = pojo {| x = 8 ; inputPosition = pojo {| x = -10 |} |}
                             |}
                     |} |]
             |}
