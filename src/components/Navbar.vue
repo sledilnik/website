@@ -21,12 +21,10 @@
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <!--
-      <a v-if="!isMobile" href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon">
+      <a v-if="!isMobile" href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon github">
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
-      -->
       <div v-if="!isMobile" class="router-link router-link-icon lang-switcher">
         <div class="lang" @click="toggleDropdown">
           <font-awesome-icon icon="globe" />
@@ -505,6 +503,12 @@ export default {
     padding: 0 6px;
     display: inline-block;
     margin: 16px auto;
+
+    &.github {
+      @media only screen and (max-width: 1135px) {
+        display: none;
+      }
+    }
 
     @include nav-break {
       margin: 0 0 0 22px;
