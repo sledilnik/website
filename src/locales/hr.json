@@ -465,7 +465,8 @@
             "title": "Do 50"
         },
         "gatherings10": {
-            "title": "Do 10"
+            "title": "Do 10",
+            "description": "Okupljanje do 10 osoba, do 50 s popisom sudionika, do 500 ako ih odobri NIJZ"
         }
     },
     "pageNotFound": {
