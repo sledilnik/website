@@ -18,9 +18,6 @@ let mapDateTuplesListToArray (dateTupleList: DateTupleList<'T>)
     let (firstDate, _) = dateTupleList |> List.minBy(fun (date, _) -> date.Date)
     let (lastDate, _) = dateTupleList |> List.maxBy(fun (date, _) -> date.Date)
 
-    JS.console.log firstDate
-    JS.console.log lastDate
-
     // from that, we can know the size of the resulting array
     let arraySize = (Days.between firstDate lastDate) + 1
 
@@ -46,8 +43,6 @@ let trimDatedArray trimPredicate (datedArray: DatedArray<'T>) =
         (datedArray.Data |> Array.length) - (trimmedLeading |> Array.length)
 
     let newStartDate = datedArray.StartDate |> Days.add daysToIncrement
-
-    JS.console.log newStartDate
 
     let trimmed =
         trimmedLeading

@@ -78,8 +78,6 @@ let renderChartOptions state dispatch =
         (cases: CasesInAgeGroupForDay) =
         let date = startDate |> Days.add daysFromStartDate
 
-        JS.console.log date
-
         pojo {|
              x = date |> jsTime12h :> obj
              y = cases

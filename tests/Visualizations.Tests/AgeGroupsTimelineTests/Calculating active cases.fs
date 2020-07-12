@@ -53,6 +53,6 @@ let ``Can calculate active cases``() =
     let activeCasesTimeline = calculateActiveCasesForGroupTimeline timeline
 
     let expectedActiveCasesTimeline =
-        { StartDate = baseDate; Data = [| Some 15; Some 40 |] }
+        { StartDate = baseDate; Data = [| 15; 40 |] }
 
     test <@ activeCasesTimeline = expectedActiveCasesTimeline  @>
