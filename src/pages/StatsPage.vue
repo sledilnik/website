@@ -32,7 +32,8 @@
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
-          good-trend="down"
+          fieldNewCases="cases.confirmedToday"
+          fieldDeceased="statePerTreatment.deceased"
           series-type="state"
         />
         <Info-card
