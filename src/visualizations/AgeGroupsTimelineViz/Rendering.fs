@@ -29,7 +29,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        Metrics = NewCases
+        Metrics = availableDisplayMetrics.[0]
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -87,7 +87,8 @@ let renderChartOptions state dispatch =
         |> List.mapi (fun index ageGroupKey ->
             let points =
                 timeline
-                |> extractTimelineForAgeGroup ageGroupKey state.Metrics
+                |> extractTimelineForAgeGroup
+                       ageGroupKey state.Metrics.MetricsType
                 |> mapAllPoints
 
             pojo {|
@@ -132,7 +133,10 @@ let renderChartOptions state dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = pojo {| stacking = "normal" |}
+                series =
+                    match state.Metrics.ChartType with
+                    | StackedBarNormal -> pojo {| stacking = "normal" |}
+                    | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
@@ -152,9 +156,29 @@ let renderChartContainer state dispatch =
         ]
     ]
 
+let renderMetricsSelectors activeMetrics dispatch =
+    let renderSelector (metrics : DisplayMetrics) =
+        let active = metrics = activeMetrics
+        Html.div [
+            prop.text (I18N.chartText "ageGroupsTimeline." metrics.Id)
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected")]
+            if not active then prop.onClick (fun _ -> dispatch metrics)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-selectors"
+        availableDisplayMetrics
+        |> Array.map renderSelector
+        |> prop.children
+    ]
+
 let render state dispatch =
     Html.div [
         renderChartContainer state dispatch
+        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
 let renderChart (props : {| data : StatsData |}) =

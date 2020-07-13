@@ -16,7 +16,25 @@ type CasesInAgeGroupSeries = {
 
 type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
-type DisplayMetrics = NewCases | ActiveCases
+type ChartType =
+    | StackedBarNormal
+    | StackedBarPercent
+
+type DisplayMetricsType = NewCases | ActiveCases
+type DisplayMetrics = {
+    Id: string
+    MetricsType: DisplayMetricsType
+    ChartType: ChartType
+}
+
+let availableDisplayMetrics = [|
+    { Id = "newCases"; MetricsType = NewCases
+      ChartType = StackedBarNormal }
+    { Id = "activeCases"; MetricsType = ActiveCases
+      ChartType = StackedBarNormal }
+    { Id = "activeCasesRelative"; MetricsType = ActiveCases
+      ChartType = StackedBarPercent }
+|]
 
 let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
     timeline.Data.[0]
@@ -25,7 +43,7 @@ let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
 
 let extractTimelineForAgeGroup
     ageGroupKey
-    (metrics: DisplayMetrics)
+    (metricsType: DisplayMetricsType)
     (casesTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
 
@@ -38,7 +56,7 @@ let extractTimelineForAgeGroup
                     dataForGroup.All
                     |> Utils.optionToInt
                 )
-    match metrics with
+    match metricsType with
     | NewCases -> newCasesTimeline
     | ActiveCases ->
         newCasesTimeline

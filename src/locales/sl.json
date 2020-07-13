@@ -586,7 +586,10 @@
             "populationTotal": "Prebivalcev skupaj"
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah"
+            "title": "Potrjeni primeri po starostnih skupinah",
+            "newCases": "Novi primeri",
+            "activeCases": "Aktivni primeri",
+            "activeCasesRelative": "Aktivni primeri (relativno)"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",

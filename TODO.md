@@ -1,7 +1,6 @@
 # TODO
 
 ## Age groups timeline - active cases
-- add GUI switchers  
 - tooltip should include sum + percentages of each group
 
 ## World page
