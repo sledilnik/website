@@ -36,6 +36,7 @@ Uredniki baze in ostali sodelavci:
 -   [Mia Erbus](https://github.com/miaerbus) - spletna stran
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - podatkovni model in validacija, modeliranje
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - prevodi
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije

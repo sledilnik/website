@@ -36,6 +36,7 @@ Data editors and other collaborators:
 -   [Mia Erbus](https://github.com/miaerbus) - web page
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - data model and validation, modeling
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - translations
 -   [Mitja Potočin](https://github.com/mitjapotocin) - web page
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
