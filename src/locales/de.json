@@ -528,6 +528,10 @@
         "quarantineStrict": {
             "title": "Quarantäne",
             "description": "Strengere obligatorische 14-tägige Quarantäne für alle Einreisenden aus kritischen Ländern<br>(rote Zone BIH, Serbien, Kosovo)"
+        },
+        "gatherings10": {
+            "title": "Bis zu 10",
+            "description": "Versammlungen von bis zu 10 Personen, mit Teilnehmerliste bis zu 50, mit Genehmigung des NIJZ bis zu 500"
         }
     },
     "region": {
