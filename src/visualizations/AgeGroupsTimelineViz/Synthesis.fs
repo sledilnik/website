@@ -16,6 +16,8 @@ type CasesInAgeGroupSeries = {
 
 type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
+type DisplayMetrics = NewCases | ActiveCases
+
 let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
     timeline.Data.[0]
     |> List.map (fun group -> group.GroupKey)
@@ -23,18 +25,24 @@ let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
 
 let extractTimelineForAgeGroup
     ageGroupKey
+    (metrics: DisplayMetrics)
     (casesTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
 
-    casesTimeline
-    |> mapDatedArrayItems (fun dayGroupsData ->
-                let dataForGroup =
-                    dayGroupsData
-                    |> List.find(fun group -> group.GroupKey = ageGroupKey)
-                dataForGroup.All
-                |> Utils.optionToInt
+    let newCasesTimeline =
+        casesTimeline
+        |> mapDatedArrayItems (fun dayGroupsData ->
+                    let dataForGroup =
+                        dayGroupsData
+                        |> List.find(fun group -> group.GroupKey = ageGroupKey)
+                    dataForGroup.All
+                    |> Utils.optionToInt
                 )
-    |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
+    match metrics with
+    | NewCases -> newCasesTimeline
+    | ActiveCases ->
+        newCasesTimeline
+        |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points

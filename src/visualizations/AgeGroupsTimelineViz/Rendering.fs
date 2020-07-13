@@ -3,7 +3,6 @@ module AgeGroupsTimelineViz.Rendering
 
 open System
 open Analysis
-open Fable.Core
 open Synthesis
 open Highcharts
 open Types
@@ -17,36 +16,27 @@ open Browser.Types
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
 
-type DisplayType = {
-    Id: string
-}
-
-let availableDisplayTypes: DisplayType array = [|
-    {   Id = "all"; }
-|]
-
 type State = {
-    DisplayType : DisplayType
+    Metrics : DisplayMetrics
     Data : StatsData
     RangeSelectionButtonIndex: int
 }
 
 type Msg =
-    | ChangeDisplayType of DisplayType
+    | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = availableDisplayTypes.[0]
+        Metrics = NewCases
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ChangeDisplayType rt ->
-        { state with DisplayType=rt }, Cmd.none
+    | ChangeMetrics metrics -> { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -97,7 +87,7 @@ let renderChartOptions state dispatch =
         |> List.mapi (fun index ageGroupKey ->
             let points =
                 timeline
-                |> extractTimelineForAgeGroup ageGroupKey
+                |> extractTimelineForAgeGroup ageGroupKey state.Metrics
                 |> mapAllPoints
 
             pojo {|

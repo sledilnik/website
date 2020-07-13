@@ -2,7 +2,6 @@
 
 open System
 open System.Collections.Generic
-open Fable.Core
 open Types
 
 type DateTuple<'T> = DateTime * 'T

@@ -49,7 +49,8 @@ let ``Can extract data for individual age group``() =
             Data = [| day0; day1 |]
         }
 
-    let timeline = extractTimelineForAgeGroup (groupKey 1) sourceData
+    let timeline =
+        sourceData |> extractTimelineForAgeGroup (groupKey 1) NewCases
 
     test <@ timeline.StartDate = baseDate @>
     test <@ timeline.Data = [| 15; 25 |] @>
