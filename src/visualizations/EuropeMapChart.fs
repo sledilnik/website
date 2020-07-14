@@ -180,14 +180,17 @@ let redCountries =
 
 let importedFrom =
     Map.ofList
-        [ ("BIH", 18)
-          ("SRB", 11)
-          ("HRV", 10)
-          ("RKS", 6)
+        [ ("HRV", 16)
+          ("SRB", 10)
+          ("BIH", 8)
+          ("RKS", 3)
           ("MNE", 3)
-          ("KAZ", 2) ]
+          ("KAZ", 1)
+          ("AUT", 1)
+          ("ITA", 1)
+          ("CHE", 1) ]
 
-let importedDate = DateTime(2020, 7, 5)
+let importedDate = DateTime(2020, 7, 12)
 
 let loadGeoJson =
     async {
