@@ -190,7 +190,7 @@ let importedFrom =
           ("ITA", 1)
           ("CHE", 1) ]
 
-let importedDate = DateTime(2020, 7, 5)
+let importedDate = DateTime(2020, 7, 12)
 
 let loadGeoJson =
     async {
