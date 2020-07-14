@@ -206,7 +206,10 @@
             "confirmedCases": "Potvrđeni slučajevi"
         },
         "ageGroupsTimeline": {
-            "title": "Potvrđeni slučajevi po dobnim skupinama"
+            "title": "Potvrđeni slučajevi po dobnim skupinama",
+            "newCases": "Novi slučajevi",
+            "activeCases": "Aktivni slučajevi",
+            "activeCasesRelative": "Aktivni slučajevi (relativno)"
         },
         "patients": {
             "structure": "Struktura",

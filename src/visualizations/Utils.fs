@@ -14,6 +14,11 @@ let zeroToNone value =
     | Some 0 -> None
     | _ -> value
 
+let optionToInt (value: int option) =
+    match value with
+    | Some x -> x
+    | None -> 0
+
 let roundTo1Decimal (value: float) = System.Math.Round(value, 1)
 let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
 

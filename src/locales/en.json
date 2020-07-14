@@ -347,7 +347,10 @@
             "confirmedCases": "Confirmed Cases"
         },
         "ageGroupsTimeline": {
-            "title": "Confirmed Cases by Age Groups"
+            "title": "Confirmed Cases by Age Groups",
+            "newCases": "New cases",
+            "activeCases": "Active cases",
+            "activeCasesRelative": "Active cases (relative)"
         },
         "countriesNewCasesPer1M": {
             "title": "Countries: New Cases Per 1 Million People",

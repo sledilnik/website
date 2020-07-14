@@ -348,7 +348,10 @@
             "recovered": "Genesene"
         },
         "ageGroupsTimeline": {
-            "title": "Bestätigte Fälle nach Altersgruppen"
+            "title": "Bestätigte Fälle nach Altersgruppen",
+            "newCases": "Neue Fälle",
+            "activeCases": "Aktive Fälle",
+            "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
             "chronologically": "Chronologisch",
