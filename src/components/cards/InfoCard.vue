@@ -18,43 +18,37 @@
           </span>
           <span v-if="showIn">
             <div class="trend-icon in bad up"></div>
-            <span v-if="field === 'cases.active'" class="in bad">
-              {{ renderActiveValues(fieldNewCases).lastDay.value }}
-            </span>
-            <span v-else class="in bad">
-              {{ renderTotalValues(totalIn) }}
-            </span>
+            <span v-if="field === 'cases.active'" class="in bad"
+              >{{ renderActiveValues(fieldNewCases).lastDay.value }}</span>
+            <span v-else class="in bad"
+              >{{ renderTotalValues(totalIn) }}</span>
           </span>
           <span v-if="showOut">
             <div class="trend-icon out good down"></div>
-            <span v-if="field === 'cases.active'" class="out good">
-              {{
+            <span v-if="field === 'cases.active'" class="out good"
+              >{{
                 renderActiveValues(fieldNewCases).lastDay.value -
                   renderActiveValues(field).lastDay.diff +
                   renderActiveValues(fieldDeceased).lastDay.value
-              }}
-            </span>
-            <span v-else class="out good">
-              {{ renderTotalValues(totalOut) }}
-            </span>
+              }}</span>
+            <span v-else class="out good"
+              >{{ renderTotalValues(totalOut) }}</span>
           </span>
           <span v-if="showDeceased">
             <div class="trend-icon deceased"></div>
-            <span v-if="field === 'cases.active'" class="deceased">
-              {{ renderActiveValues(fieldDeceased).lastDay.value }}
-            </span>
-            <span v-else class="deceased">
-              {{ renderTotalValues(totalDeceased) }}
+            <span v-if="field === 'cases.active'" class="deceased"
+              >{{ renderActiveValues(fieldDeceased).lastDay.value }}</span>
+            <span v-else class="deceased"
+              >{{ renderTotalValues(totalDeceased) }}
             </span>
           </span>
         </div>
-        <div class="data-time">
-          {{
+        <div class="data-time"
+          >{{
             $t('infocard.lastUpdated', {
               date: new Date(renderValues.lastDay.displayDate),
             })
-          }}
-        </div>
+          }}</div>
       </div>
     </div>
     <div class="hp-card" v-else>
