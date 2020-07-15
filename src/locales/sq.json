@@ -264,7 +264,10 @@
             "newCases": "Raste të reja"
         },
         "ageGroupsTimeline": {
-            "title": "Rastet e konfirmuara sipas grupmoshës"
+            "title": "Rastet e konfirmuara sipas grupmoshës",
+            "activeCasesRelative": "Raste aktive (relative)",
+            "activeCases": "Raste aktive",
+            "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {
             "sinceFirstDeath": "Prej rastit të parë të vdekjes",
