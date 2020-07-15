@@ -9,7 +9,7 @@
             >{{ renderValues.lastDay.percentDiff | prefixDiff }}%
           </span>
         </span>
-        <div :id="elementId" class="card-diff">
+        <div :id="field" class="card-diff">
           <span v-if="showAbsolute">
             <div class="trend-icon" :class="[diffClass, iconClass]"></div>
             <span :class="diffClass">
@@ -17,38 +17,33 @@
             </span>
           </span>
           <span v-if="showIn">
-            <div
-              class="trend-icon in"
-              :class="[
-                diffTotalClass(totalIn, 'down'),
-                iconTotalClass(totalIn, 'down'),
-              ]"
-            ></div>
-            <span class="in" :class="diffTotalClass(totalIn, 'down')">
+            <div class="trend-icon in bad up"></div>
+            <span v-if="field === 'cases.active'" class="in bad">
+              {{ renderActiveValues(fieldNewCases).lastDay.value }}
+            </span>
+            <span v-else class="in bad">
               {{ renderTotalValues(totalIn) }}
             </span>
           </span>
           <span v-if="showOut">
-            <div
-              class="trend-icon out"
-              :class="[
-                diffTotalClass(totalOut, 'up'),
-                iconTotalClass(totalOut, 'up'),
-              ]"
-            ></div>
-            <span class="out" :class="diffTotalClass(totalOut, 'up')">
+            <div class="trend-icon out good down"></div>
+            <span v-if="field === 'cases.active'" class="out good">
+              {{
+                renderActiveValues(fieldNewCases).lastDay.value -
+                  renderActiveValues(field).lastDay.diff +
+                  renderActiveValues(fieldDeceased).lastDay.value
+              }}
+            </span>
+            <span v-else class="out good">
               {{ renderTotalValues(totalOut) }}
             </span>
           </span>
           <span v-if="showDeceased">
-            <div
-              class="trend-icon deceased"
-              :class="[
-                diffTotalClass(totalDeceased),
-                iconTotalClass(totalDeceased),
-              ]"
-            ></div>
-            <span class="deceased" :class="diffTotalClass(totalDeceased)">
+            <div class="trend-icon deceased"></div>
+            <span v-if="field === 'cases.active'" class="deceased">
+              {{ renderActiveValues(fieldDeceased).lastDay.value }}
+            </span>
+            <span v-else class="deceased">
               {{ renderTotalValues(totalDeceased) }}
             </span>
           </span>
@@ -75,6 +70,8 @@ export default {
   props: {
     title: String,
     field: String,
+    fieldNewCases: String,
+    fieldDeceased: String,
     totalIn: String,
     totalOut: String,
     totalDeceased: String,
@@ -87,22 +84,23 @@ export default {
       default: 'cum',
     },
   },
-  data() {
-    return {
-      show: false,
-    }
-  },
   computed: {
     ...mapGetters('stats', ['lastChange']),
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     diffClass() {
-      if (this.field === 'statePerTreatment.deceasedToDate') {
+      if (
+        this.field === 'statePerTreatment.deceasedToDate' ||
+        (this.renderActiveValues(this.fieldDeceased) &&
+          this.renderActiveValues(this.fieldDeceased).lastDay.value > 0)
+      ) {
         return 'deceased'
       }
-      if (this.field === 'statePerTreatment.inHospital' || this.field === 'statePerTreatment.inICU') {
-        if (this.renderTotalValues(this.totalDeceased) > 0)
-          return 'deceased'
+      if (
+        this.field === 'statePerTreatment.inHospital' ||
+        this.field === 'statePerTreatment.inICU'
+      ) {
+        if (this.renderTotalValues(this.totalDeceased) > 0) return 'deceased'
       }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
@@ -144,32 +142,52 @@ export default {
       }
       return x
     },
-    elementId() {
-      return this.field
-    },
     showAbsolute() {
-      if (this.field === 'statePerTreatment.inHospital' || this.field === 'statePerTreatment.inICU') {
-        if (this.renderTotalValues(this.totalDeceased) > 0) {
-          return false
-        }
+      if (this.field === 'cases.active') {
+        return (
+          this.renderActiveValues(this.field).lastDay.value === 0 &&
+          this.renderActiveValues(this.fieldNewCases).lastDay.value === 0 &&
+          this.renderActiveValues(this.fieldDeceased).lastDay.value === 0
+        )
+      }
+      if (
+        this.field === 'statePerTreatment.inHospital' ||
+        this.field === 'statePerTreatment.inICU'
+      ) {
+        return (
+          this.renderTotalValues(this.totalIn) === 0 &&
+          this.renderTotalValues(this.totalOut) === 0 &&
+          this.renderTotalValues(this.totalDeceased) === 0
+        )
       }
       return (
         (!this.totalIn && !this.totalOut && !this.totalDeceased) ||
         (this.renderTotalValues(this.totalIn) === 0 &&
-         this.renderTotalValues(this.totalOut) === 0)
+          this.renderTotalValues(this.totalOut) === 0 &&
+          this.renderTotalValues(this.totalDeceased) !== 0 )
       )
     },
     showIn() {
-      return (
-        this.totalIn && this.renderTotalValues(this.totalIn) > 0
-      )
+      if (this.field === 'cases.active') {
+        return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
+      }
+      return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
-      return (
-        this.totalOut && this.renderTotalValues(this.totalOut) > 0
-      )
+      if (this.field === 'cases.active') {
+        return (
+          this.renderActiveValues(this.fieldNewCases).lastDay.value -
+            this.renderActiveValues(this.field).lastDay.diff +
+            this.renderActiveValues(this.fieldDeceased).lastDay.value >
+          0
+        )
+      }
+      return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
+      if (this.field === 'cases.active') {
+        return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
+      }
       return (
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
@@ -186,28 +204,17 @@ export default {
       })
       return _.get(lastDay[0], value)
     },
-    diffTotalClass(value, goodTrend) {
-      if (this.totalDeceased > 0) {
-        return
+    renderActiveValues(value) {
+      if (this.field === 'cases.active') {
+        let date
+        Object.keys(this.$route.query).length > 0
+          ? (date = this.$route.query.showDate)
+          : (date = null)
+        const x = this.lastChange(value, this.seriesType == 'cum', date)
+        return x
       }
-      if (this.renderTotalValues(value) === 0) {
-        return 'no-change'
-      } else {
-        return this.goodTrend === goodTrend ? 'bad' : 'good'
-      }
+      return null
     },
-    iconTotalClass(value, goodTrend) {
-      if (this.field === 'statePerTreatment.deceasedToDate') {
-        return 'deceased'
-      } else if (this.renderTotalValues(value) === 0) {
-        return 'none'
-      } else {
-        return this.goodTrend === goodTrend ? 'up' : 'down'
-      }
-    },
-  },
-  mounted() {
-    this.show = true
   },
 }
 </script>
