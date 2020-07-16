@@ -12,8 +12,8 @@
     "test-fsharp": "dotnet test"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.28",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.30",
+    "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "@panter/vue-i18next": "^0.15.2",
     "axios": "^0.19.2",
@@ -41,7 +41,7 @@
     "@vue/cli-plugin-eslint": "~4.3.1",
     "@vue/cli-plugin-unit-jest": "~4.3.0",
     "@vue/cli-service": "~4.3.1",
-    "@vue/test-utils": "1.0.0-beta.31",
+    "@vue/test-utils": "1.0.3",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
     "eslint": "^6.7.2",

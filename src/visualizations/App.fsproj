@@ -8,6 +8,7 @@
         <Compile Include="ShareButton.fs" />
         <Compile Include="Highcharts.fs" />
         <Compile Include="Utils.fs" />
+        <Compile Include="Days.fs" />
         <Compile Include="Statistics.fs" />
         <Compile Include="data/Loader.fs" />
         <Compile Include="data/Stats.fs" />

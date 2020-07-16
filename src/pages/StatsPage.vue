@@ -32,23 +32,24 @@
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
-          good-trend="down"
+          field-new-cases="cases.confirmedToday"
+          field-deceased="statePerTreatment.deceased"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.inHospital')"
           field="statePerTreatment.inHospital"
-          totalIn="total.inHospital.in"
-          totalOut="total.inHospital.out"
-          totalDeceased="total.deceased.hospital.today"
+          total-in="total.inHospital.in"
+          total-out="total.inHospital.out"
+          total-deceased="total.deceased.hospital.today"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.icu')"
           field="statePerTreatment.inICU"
-          totalIn="total.icu.in"
-          totalOut="total.icu.out"
-          totalDeceased="total.deceased.hospital.icu.today"
+          total-in="total.icu.in"
+          total-out="total.icu.out"
+          total-deceased="total.deceased.hospital.icu.today"
           series-type="state"
         />
         <Info-card

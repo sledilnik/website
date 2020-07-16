@@ -173,7 +173,7 @@
             "icuCases": "Në njësinë për kujdes intensiv",
             "hospitalCases": "Të shtruar në spital",
             "mortality": "Vdekshmëria",
-            "hospitalizations": "Shtrime në spital",
+            "hospitalizations": "Të shtruar në spital",
             "seriousCases": "Raste të rënda",
             "title": "Përqindja e rasteve serioze"
         },
@@ -188,7 +188,7 @@
             "hospitalizedIn": "Të shtruar në spital në:",
             "byHospital": "Sipas spitaleve",
             "structure": "Struktura",
-            "title": "Shtrimi në spital"
+            "title": "Të shtruar në spital"
         },
         "cases": {
             "deceased": "Të vdekur",
@@ -266,7 +266,10 @@
             "newCases": "Raste të reja"
         },
         "ageGroupsTimeline": {
-            "title": "Rastet e konfirmuara sipas grupmoshës"
+            "title": "Rastet e konfirmuara sipas grupmoshës",
+            "activeCasesRelative": "Raste aktive (relative)",
+            "activeCases": "Raste aktive",
+            "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {
             "sinceFirstDeath": "Prej rastit të parë të vdekjes",
@@ -329,7 +332,7 @@
         "language": {
             "en": "Angleze",
             "sl": "Sllovene",
-            "sq": "Shqiptar",
+            "sq": "Shqip",
             "mk": "Maqedonisht",
             "hr": "Kroatisht",
             "de": "Gjermanisht"
@@ -550,6 +553,10 @@
         "gatherings50": {
             "description": "Grumbullime deri në 50 persona, deri në 500 nëse miratohet nga ISHP",
             "title": "Deri në 50"
+        },
+        "gatherings10": {
+            "description": "Grumbullim deri në 10 persona, deri në 50 me listë të të pranishmëve, deri në 500 nëse është miratuar nga ISHP",
+            "title": "Deri 10"
         }
     },
     "tableDict": {
@@ -678,7 +685,7 @@
     "mk": {
         "hospital": {
             "mksk": "Spitali i montuar",
-            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë dhe Prilep",
+            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë, Prilep dhe Gostivar",
             "stip": "Shtip",
             "bitola": "Manastir",
             "gob8sep": "SPQ 8 Shtatori",
