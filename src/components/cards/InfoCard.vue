@@ -12,8 +12,8 @@
         <div :id="field" class="card-diff">
           <span v-if="showAbsolute">
             <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-            <span :class="diffClass">
-              {{ Math.abs(renderValues.lastDay.diff) }}
+            <span :class="diffClass"
+              >{{ Math.abs(renderValues.lastDay.diff) }}
             </span>
           </span>
           <span v-if="showIn">
@@ -113,9 +113,9 @@ export default {
         className += ' none'
         return className
       } else if (this.renderValues.lastDay.diff > 0) {
-        className += 'up'
+        className += ' up'
       } else {
-        className += 'down'
+        className += ' down'
       }
       return className
     },
@@ -139,7 +139,7 @@ export default {
     showAbsolute() {
       if (this.field === 'cases.active') {
         return (
-          this.renderActiveValues(this.field).lastDay.value === 0 &&
+          this.renderActiveValues(this.field).lastDay.diff === 0 &&
           this.renderActiveValues(this.fieldNewCases).lastDay.value === 0 &&
           this.renderActiveValues(this.fieldDeceased).lastDay.value === 0
         )
