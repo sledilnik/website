@@ -8,7 +8,7 @@ type Ii18n =
 
 let i18n : Ii18n = importDefault "i18n"
 
-let t key = i18n.t (key, {| context = "SVN" |}) // default context, TODO: get it from .env: process.env.VUE_APP_LOCALE_CONTEXT
+let t key = i18n.t key
 
 let tOptions key options = i18n.t (key, options)
 
