@@ -20,9 +20,10 @@ let ``Can fetch age groups from timeline``() =
 
     let baseDate = DateTime(2020, 03, 01)
 
-    let sourceData =
-        [ (baseDate, totalDay0);
-          (baseDate.AddDays 1., totalDay1) ]
+    let sourceData = {
+            StartDate = baseDate
+            Data = [| totalDay0; totalDay1 |]
+        }
 
     let timeline = calculateCasesByAgeTimeline sourceData
 
@@ -42,16 +43,15 @@ let ``Can extract data for individual age group``() =
         |> withGroup (group 1 (Some 10) (Some 15))
 
     let baseDate = DateTime(2020, 03, 01)
-    let baseDate1 = baseDate.AddDays 1.
 
-    let sourceData: CasesByAgeGroupsTimeline =
-        [ { Date = baseDate; Cases = day0 }
-          { Date = baseDate1; Cases = day1 } ]
+    let sourceData = {
+            StartDate = baseDate
+            Data = [| day0; day1 |]
+        }
 
-    let timeline = extractTimelineForAgeGroup (groupKey 1) sourceData
+    let timeline =
+        sourceData
+        |> extractTimelineForAgeGroup (groupKey 1) NewCases
 
-    test <@ timeline.Length = 2 @>
-    test <@ timeline.[0].Date = baseDate @>
-    test <@ timeline.[0].Cases = Some 15 @>
-    test <@ timeline.[1].Date = baseDate1 @>
-    test <@ timeline.[1].Cases = Some 25 @>
+    test <@ timeline.StartDate = baseDate @>
+    test <@ timeline.Data = [| 15; 25 |] @>

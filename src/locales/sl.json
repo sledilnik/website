@@ -305,6 +305,10 @@
         "gatherings50": {
             "title": "Do 50",
             "description": "Prepoved zbiranja na javnih mestih nad 50 ljudi, z dovoljenjem NIJZ do 500 ljudi"
+        },
+        "gatherings10": {
+            "title": "Do 10",
+            "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, do 50 s seznamom udeležencev, z dovoljenjem NIJZ do 500 ljudi"
         }
     },
     "phase": {
@@ -582,7 +586,10 @@
             "populationTotal": "Prebivalcev skupaj"
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah"
+            "title": "Potrjeni primeri po starostnih skupinah",
+            "newCases": "Novi primeri",
+            "activeCases": "Aktivni primeri",
+            "activeCasesRelative": "Aktivni primeri (relativno)"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",

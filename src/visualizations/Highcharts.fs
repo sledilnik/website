@@ -113,6 +113,7 @@ let addContainmentMeasuresFlags
         15, 6, "#ebfaeb", "liftGatherings500"
         19, 6, "#FFe6e6", "quarantineStrict"
         30, 6, "#FFe6e6", "gatherings50"
+        9,  7, "#FFe6e6", "gatherings10"
     |]
     {|
         ``type`` = "flags"

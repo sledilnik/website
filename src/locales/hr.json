@@ -206,7 +206,10 @@
             "confirmedCases": "Potvrđeni slučajevi"
         },
         "ageGroupsTimeline": {
-            "title": "Potvrđeni slučajevi po dobnim skupinama"
+            "title": "Potvrđeni slučajevi po dobnim skupinama",
+            "newCases": "Novi slučajevi",
+            "activeCases": "Aktivni slučajevi",
+            "activeCasesRelative": "Aktivni slučajevi (relativno)"
         },
         "patients": {
             "structure": "Struktura",
@@ -463,6 +466,10 @@
         "gatherings50": {
             "description": "Okupljanje do 50 osoba, do 500 ako ih odobri NIJZ",
             "title": "Do 50"
+        },
+        "gatherings10": {
+            "title": "Do 10",
+            "description": "Okupljanje do 10 osoba, do 50 s popisom sudionika, do 500 ako ih odobri NIJZ"
         }
     },
     "pageNotFound": {

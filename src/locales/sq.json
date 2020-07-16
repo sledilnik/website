@@ -264,7 +264,10 @@
             "newCases": "Raste të reja"
         },
         "ageGroupsTimeline": {
-            "title": "Rastet e konfirmuara sipas grupmoshës"
+            "title": "Rastet e konfirmuara sipas grupmoshës",
+            "activeCasesRelative": "Raste aktive (relative)",
+            "activeCases": "Raste aktive",
+            "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {
             "sinceFirstDeath": "Prej rastit të parë të vdekjes",
@@ -548,6 +551,10 @@
         "gatherings50": {
             "description": "Grumbullime deri në 50 persona, deri në 500 nëse miratohet nga ISHP",
             "title": "Deri në 50"
+        },
+        "gatherings10": {
+            "description": "Grumbullim deri në 10 persona, deri në 50 me listë të të pranishmëve, deri në 500 nëse është miratuar nga ISHP",
+            "title": "Deri 10"
         }
     },
     "tableDict": {
