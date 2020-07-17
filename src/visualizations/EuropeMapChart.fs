@@ -115,7 +115,10 @@ let owdCountries =
 
 let greenCountries =
     Set.ofList
-        [ "AUT"
+        [ "AND"
+          "AUS"
+          "AUT"
+          "CAN"
           "CYP"
           "CZE"
           "DNK"
@@ -123,21 +126,30 @@ let greenCountries =
           "FIN"
           "GRC"
           "FRA"
+          "GEO"
           "IRL"
-          "ISL"
           "ITA"
           "LVA"
           "LIE"
           "LTU"
           "HUN"
+          "MAR"
+          "MCO"
           "MLT"
           "DEU"
           "NOR"
+          "NZL"
+          "POL"
+          "RWA"
+          "SMR"
           "SVK"
           "ESP"
           "CHE"
           "BEL"
-          "NLD" ]
+          "NLD"
+          "GBR"
+          "URY"
+          "VAT" ]
 
 let redCountries =
     Set.ofList
@@ -152,7 +164,6 @@ let redCountries =
           "BRA"
           "PAN"
           "BLR"
-          "AND"
           "SGP"
           "SWE"
           "MDV"
@@ -170,7 +181,6 @@ let redCountries =
           "DOM"
           "ZAF"
           "IRN"
-          "GBR"
           "MKD"
           "BIH"
           "SRB"
