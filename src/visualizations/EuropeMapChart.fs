@@ -186,7 +186,31 @@ let redCountries =
           "SRB"
           "RKS"
           "PRT"
-          "ALB" ]
+          "ALB"
+          "LUX"
+          "MNE"
+          "CHN"
+          "DZA"
+          "KAZ"
+          "HND"
+          "ISR"
+          "GNQ"
+          "CPV"
+          "COL"
+          "TCA"
+          "AZE"
+          "IRQ"
+          "VIR"
+          "KGZ"
+          "ARG"
+          "SYC"
+          "CRI"
+          "ECU"
+          "GTM"
+          "MEX"
+          "SLV"
+          "SWZ"
+          "SUR" ]
 
 let importedFrom =
     Map.ofList
