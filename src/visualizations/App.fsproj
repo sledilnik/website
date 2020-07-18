@@ -30,6 +30,7 @@
         <Compile Include="SpreadChart.fs" />
         <Compile Include="MapChart.fs" />
         <Compile Include="EuropeMapChart.fs" />
+        <Compile Include="WorldMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
         <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />

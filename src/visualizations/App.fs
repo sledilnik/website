@@ -17,6 +17,7 @@ let init (query: obj) (visualization: string option) (page: string) =
                 match viz with
                 | "Map" -> Some Map
                 | "EuropeMap" -> Some EuropeMap
+                | "WorldMap" -> Some WorldMap
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Ratios" -> Some Ratios
@@ -136,6 +137,19 @@ let render (state: State) (_: Msg -> unit) =
                    | Loading -> Utils.renderLoading
                    | Failure error -> Utils.renderErrorLoading error
                    | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
+
+    let worldMap =
+          { VisualizationType = WorldMap
+            ClassName = "world-chart"
+            ChartTextsGroup = "world"
+            Explicit = false
+            Renderer =
+               fun state ->
+                   match state.StatsData with
+                   | NotAsked -> Html.none
+                   | Loading -> Utils.renderLoading
+                   | Failure error -> Utils.renderErrorLoading error
+                   | Success data -> lazyView WorldMap.mapChart {| data = data |} }
 
     let ageGroupsTimeline =
           { VisualizationType = AgeGroupsTimeline
@@ -277,11 +291,11 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let worldVisualizations =
-        [ europeMap; countriesCasesPer1M; countriesDeathsPer1M ]
+        [ europeMap; worldMap; countriesCasesPer1M; countriesDeathsPer1M ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
-          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
           countriesCasesPer1M; countriesDeathsPer1M
         ]

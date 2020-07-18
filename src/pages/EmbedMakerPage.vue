@@ -48,6 +48,11 @@ export default {
           text: this.$t('charts.europe.title'),
           dimensions: [1140, 780]
         },
+        "WorldMap": {
+          value: "WorldMap",
+          text: this.$t('charts.world.title'),
+          dimensions: [1140, 780]
+        },
         "Cases": {
           value: "Cases",
           text: this.$t('charts.cases.title'),

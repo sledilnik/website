@@ -13,6 +13,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | ----- | --- |
 | Stanje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Stanje COVID-19 v Evropi | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap |
+| Stanje COVID-19 v Svetu | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Delež resnih primerov | https://covid-19.sledilnik.org/embed.html#/chart/Ratios |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
