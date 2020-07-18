@@ -549,6 +549,9 @@
             "statusRed": "obvezna 14-dnevna karantena",
             "noData": "Ni podatkov"
         },
+        "world": {
+            "title": "Stanje COVID-19 v Svetu"
+        },
         "municipalities": {
             "title": "Primeri po občinah",
             "lastCase": "Zadnji primer: ",
