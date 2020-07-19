@@ -11,6 +11,7 @@ import ru from './locales/ru.json'
 import it from './locales/it.json'
 import mk from './locales/mk.json'
 import sq from './locales/sq.json'
+import me from './locales/me.json'
 
 Vue.use(VueI18Next)
 
@@ -30,7 +31,7 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'hr', 'de', 'ru', 'it', 'mk', 'sq'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'ru', 'it', 'mk', 'sq', 'me'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
@@ -41,6 +42,7 @@ i18next.use(LanguageDetector).init({
     it: { translation: it },
     mk: { translation: mk },
     sq: { translation: sq },
+    me: { translation: me },
   },
   detection: detectionOptions,
   interpolation: {
