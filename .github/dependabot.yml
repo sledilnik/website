@@ -27,15 +27,7 @@ updates:
       - overlordtm
       - stefanb
 
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/src/visualizations" # Location of package manifests
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    reviewers:
-      - joahim
-      - breki
-
+  # Note: tests/Visualizations.Tests/Visualizations.Tests.fsproj includes src/visualizations/App.fsproj via ProjectReference
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/tests/Visualizations.Tests" # Location of package manifests
     schedule:
