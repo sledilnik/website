@@ -338,7 +338,16 @@ let renderChartOptions
             {| series = pojo
                 {| stacking = "normal" |}
             |}
-        credits = Highcharts.defaultCredits
+        credits = pojo
+            {|
+                enabled = true
+                text =
+                    sprintf "%s: %s, %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.t "charts.common.dsMZ")
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+            |}
         tooltip = pojo
             {| formatter = fun () ->
                  let sex = jsThis?series?name
