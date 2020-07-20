@@ -28,18 +28,20 @@
       <div v-if="!isMobile" class="router-link router-link-icon lang-switcher">
         <div class="lang" @click="toggleDropdown">
           <font-awesome-icon icon="globe" />
-          <span class="lang-selected">{{ selectedLanguage.toUpperCase() }}</span>
+          <span v-if="showFullLang">{{ $t('navbar.language.' + selectedLanguage) }}</span>
+          <span v-else>{{ selectedLanguage.toUpperCase() }}</span>
           &nbsp;<font-awesome-icon icon="caret-down" />
         </div>
         <transition name="slide">
           <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
             <li v-for="(lang, index) in languages" :key="index" class="lang-list-item">
-              <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
+              <a v-if="lang!=selectedLanguage || !showFullLang" :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
                   :hreflang="lang"
                   class="router-link-anchor"
                   :class="{ active: $i18n.i18next.language === lang }"
                   @click.prevent="changeLanguage(lang)">
-                {{ $t('navbar.language.' + lang, { lng: lang }) }}
+                {{ $t('navbar.language.' + lang) }} 
+                <template v-if="lang!=selectedLanguage">/ {{ $t('navbar.language.' + lang, { lng: lang }) }}</template>
               </a>
             </li>
           </ul>
@@ -53,7 +55,7 @@
              :class="{ active: $i18n.i18next.language === lang }"
              @click.prevent="changeLanguage(lang)">
               <font-awesome-icon icon="globe" />
-              <span>{{ $t('navbar.language.' + lang, { lng: lang }) }}</span>
+              <span>{{ $t('navbar.language.' + lang) }}<template v-if="lang!=selectedLanguage"> / {{ $t('navbar.language.' + lang, { lng: lang }) }}</template></span>
              </a>
         </div>
       </div>
@@ -76,6 +78,7 @@ export default {
       closingMenu: false,
       dropdownVisible: false,
       isMobile: false,
+      showFullLang: true,
       languages: i18next.languages.sort(),
       selectedLanguage: i18next.language,
     };
@@ -112,6 +115,7 @@ export default {
     },
     onResize () {
       this.isMobile = window.innerWidth < 992
+      this.showFullLang = window.innerWidth >= 1200
     },
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible
@@ -577,6 +581,7 @@ export default {
   top: 32px;
   min-width: 120px;
   text-align: right;
+  white-space: nowrap;
 
   &-item {
     margin: 8px 0;
