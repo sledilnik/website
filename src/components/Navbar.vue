@@ -40,8 +40,7 @@
                   class="router-link-anchor"
                   :class="{ active: $i18n.i18next.language === lang }"
                   @click.prevent="changeLanguage(lang)">
-                {{ $t('navbar.language.' + lang) }} 
-                <template v-if="lang!=selectedLanguage">/ {{ $t('navbar.language.' + lang, { lng: lang }) }}</template>
+                {{ $t('navbar.language.' + lang, { lng: lang }) }} 
               </a>
             </li>
           </ul>
@@ -55,7 +54,7 @@
              :class="{ active: $i18n.i18next.language === lang }"
              @click.prevent="changeLanguage(lang)">
               <font-awesome-icon icon="globe" />
-              <span>{{ $t('navbar.language.' + lang) }}<template v-if="lang!=selectedLanguage"> / {{ $t('navbar.language.' + lang, { lng: lang }) }}</template></span>
+              <span>{{ $t('navbar.language.' + lang, { lng: lang }) }}</span>
              </a>
         </div>
       </div>
