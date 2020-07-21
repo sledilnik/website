@@ -152,16 +152,20 @@ let optionsWithOnLoadEvent (className : string) =
         |}
     |}
 
-let defaultCredits =
-    {|
-        enabled = true
-        text =
-            sprintf "%s: %s, %s"
-                (I18N.t "charts.common.dataSource")
-                (I18N.t "charts.common.dsNIJZ")
-                (I18N.t "charts.common.dsMZ")
-        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-    |} |> pojo
+let parseDate (value: String) =
+    match I18N.t "charts.common.numDateFormat" with
+    | "%m/%d/%Y" -> // EN
+        let date = value.Replace(" ", "").Split('/')
+        DateTime
+            .Parse(date.[2] + "-" + date.[0] + "-" + date.[1])
+            .Subtract(DateTime(1970,1,1))
+            .TotalMilliseconds
+    | _ -> // DE, HR, MK, SL, SQ
+        let date = value.Replace(" ", "").Split('.')
+        DateTime
+            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
+            .Subtract(DateTime(1970,1,1))
+            .TotalMilliseconds
 
 let basicChartOptions
     (scaleType:ScaleType)
@@ -287,9 +291,8 @@ let basicChartOptions
                 allButtonsEnabled = true
                 selected = selectedRangeSelectionButtonIndex
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
-                // TODO: https://www.highcharts.com/forum/viewtopic.php?t=17715
-                // inputEditDateFormat = I18N.t "charts.common.numDateFormat"
-                inputPosition = pojo {| x = 0 |}
+                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputDateParser = parseDate
                 x = 0
                 inputBoxBorderColor = "#ced4da"
                 buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
@@ -324,7 +327,6 @@ let basicChartOptions
                         chartOptions =
                             {|
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
-                                rangeSelector = pojo {| x = 8 ; inputPosition = pojo {| x = -10 |} |}
                             |}
                     |} |]
             |}
@@ -339,5 +341,14 @@ let basicChartOptions
                     |}
             |}
 
-        credits = defaultCredits
+        credits = pojo
+            {|
+                enabled = true
+                text =
+                    sprintf "%s: %s, %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.t "charts.common.dsMZ")
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+            |}
     |}
