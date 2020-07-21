@@ -40,7 +40,7 @@
                   class="router-link-anchor"
                   :class="{ active: $i18n.i18next.language === lang }"
                   @click.prevent="changeLanguage(lang)">
-                {{ $t('navbar.language.' + lang, { lng: lang }) }} 
+                {{ $t('navbar.language.' + lang, { lng: lang }) }}
               </a>
             </li>
           </ul>
