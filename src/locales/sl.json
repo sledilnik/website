@@ -732,22 +732,66 @@
         },
         "phase": {
             "6": {
-                "title": "Faza 6"
+                "title": "Faza 6",
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             },
             "5": {
-                "title": "Faza 5"
+                "title": "Faza 5",
+                "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "4": {
-                "title": "Faza 4"
+                "title": "Faza 4",
+                "description": "Makedonija 3"
             },
             "3": {
-                "title": "Faza 3"
+                "title": "Faza 3",
+                "description": "Debar 4"
             },
             "2": {
-                "title": "Faza 2"
+                "title": "Faza 2",
+                "description": "Skopje 4"
             },
             "1": {
-                "title": "Faza 1"
+                "title": "Faza 1",
+                "description": "Debar 4, Skopje 3, Makedonija 2 "
+            }
+        },
+        "cm": {
+            "bordersOopen": {
+                "title": "Meje odprte",
+                "description": "Sprostitev: meje odprte za tuje državljane"
+            },
+            "kafanasOpen": {
+                "title": "Kafane",
+                "description": "Sprostitev: odprli so se bari in restavracije"
+            },
+            "lessMeasures": {
+                "title": "Prekinitev zapore",
+                "description": "Sprostitev: prosto gibanje v celotni državi"
+            },
+            "masksOn": {
+                "title": "Maske",
+                "description": "Maske naj se nosijo povsod zunaj domov"
+            },
+            "21hLockdown": {
+                "title": "Zapora",
+                "description": "Popolna zapora vsak dan od 21h do 06h"
+            },
+            "gatherings5": {
+                "description": "Javno druženje z več kot 5 osebami je prepovedano",
+                "title": "Druženje 5 oseb"
+            },
+            "debarQuarantine": {
+                "title": "Karantena za Debar",
+                "description": "Prvo mesto v popolni izolaciji"
+            },
+            "bordersClosure": {
+                "description": "Vsi mejni prehodi in letališča so zaprta za vstop mednarodnih potnikov v državo",
+                "title": "meje"
+            },
+            "gatheringsMass": {
+                "title": "Množična srečanja",
+                "description": "Množična srečanja, kot so športne prireditve in karnevali, so prepovedana"
             }
         }
     }
