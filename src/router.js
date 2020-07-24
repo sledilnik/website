@@ -33,7 +33,7 @@ import * as teamMdSl from './content/sl/team.md'
 import * as teamMdEn from './content/en/team.md'
 import * as teamMdHr from './content/hr/team.md'
 import * as teamMdDe from './content/de/team.md'
-import * as teamMdit from './content/it/team.md'
+import * as teamMdIt from './content/it/team.md'
 
 import * as sourcesMdSl from './content/sl/sources.md'
 import * as sourcesMdEn from './content/en/sources.md'
