@@ -43,6 +43,7 @@ Uredniki baze in ostali sodelavci:
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
+-   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje

@@ -43,6 +43,7 @@ Data editors and other collaborators:
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
+-   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling
