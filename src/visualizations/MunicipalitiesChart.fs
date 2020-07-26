@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module MunicipalitiesChart
 
+open System
 open Elmish
 open Browser
 open Fable.Core.JsInterop
@@ -244,13 +245,14 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
                                 let aHeight = activeCases * barMaxHeight / maxValue
                                 let dHeight = deceasedToDate * barMaxHeight / maxValue
+                                let dHeightCeiling = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
                                             Html.div [
-                                                prop.style [ style.height dHeight ]
+                                                prop.style [ style.height (int dHeightCeiling) ]
                                                 prop.className "bar--deceased" ]
                                             Html.div [
                                                 prop.style [ style.height rHeight ]
