@@ -7,6 +7,7 @@ import en from './locales/en.json'
 import sl from './locales/sl.json'
 import hr from './locales/hr.json'
 import de from './locales/de.json'
+import it from './locales/it.json'
 
 Vue.use(VueI18Next)
 
@@ -26,13 +27,14 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'hr', 'de'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'it'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
     en: { translation: en },
     hr: { translation: hr },
     de: { translation: de },
+    it: { translation: it },
   },
   detection: detectionOptions,
   interpolation: {

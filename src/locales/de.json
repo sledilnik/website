@@ -571,8 +571,10 @@
         "inHospital": "Hospitalisierte"
     },
     "notice": {
-        "news001": "Neues Diagramm:",
-        "news002": "Bestätigte Fälle nach Altersgruppen"
+        "newChart": "Neues Diagramm:",
+        "news002": "Bestätigte Fälle nach Altersgruppen",
+        "newsText": "Welt – Lage auf der ganzen Welt und Ländervergleich",
+        "newPage": "Neue Seite:"
     },
     "timestamp": {
         "at": "um {{ date, HH:mm }}",

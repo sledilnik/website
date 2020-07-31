@@ -31,11 +31,11 @@ export default {
       },
       title: this.$t('meta.title'),
       meta: [
-        { name: 'description', content: this.$t('meta.description') },
-        { name: 'twitter:title', content: this.$t('meta.title') },
-        { name: 'twitter:description', content: this.$t('meta.description') },
-        { property: 'og:title', content: this.$t('meta.title') },
-        { property: 'og:description', content: this.$t('meta.description') },
+        { vmid: 'description', name: 'description', content: this.$t('meta.description') },
+        { vmid: 'twitter:title', name: 'twitter:title', content: this.$t('meta.title') },
+        { vmid: 'twitter:description', name: 'twitter:description', content: this.$t('meta.description') },
+        { vmid: 'og:title', property: 'og:title', content: this.$t('meta.title') },
+        { vmid: 'og:description', property: 'og:description', content: this.$t('meta.description') },
       ],
       link: links,
     }
