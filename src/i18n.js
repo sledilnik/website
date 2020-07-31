@@ -81,6 +81,8 @@ moment.updateLocale('hr', {
   ],
 })
 
+localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
+
 const i18n = new VueI18Next(i18next)
 
 export default i18n

@@ -226,7 +226,10 @@
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi (dnevno)",
-            "title": "COVID-19 situacija u Sloveniji",
+            "title": "COVID-19 situacija u državi",
+            "title_SVN": "COVID-19 situacija u Sloveniji",
+            "title_MKD": "COVID-19 situacija u S. Makedoniji",
+            "title_MNE": "COVID-19 Situacija u Crnoj Gori",
             "testsToDate": "Testovi (do danas)",
             "ventilator": "Na respiratoru",
             "recovered": "Ozdravili (do danas)",

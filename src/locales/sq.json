@@ -214,7 +214,9 @@
             "confirmed": "Raste të konfirmuara (në ditë)",
             "testsToDate": "Teste (deri sot)",
             "tests": "Teste (në ditë)",
-            "title": "Situata me COVID-19 në Maqedoninë e Veriut"
+            "title": "Situata me COVID-19 në vend",
+            "title_SVN": "Situata me COVID-19 në Slloveni",
+            "title_MKD": "Situata me COVID-19 në Maqedoninë e Veriut"
         },
         "common": {
             "shortDateFormat": "%e. %b",
