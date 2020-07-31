@@ -31,8 +31,9 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Nov graf:",
-        "news002": "Potrjeni primeri po starostnih skupinah"
+        "newChart": "Nov graf:",
+        "newPage": "Nova stran:",
+        "newsText": "Svet - stanje v svetu primerjave med državami"
     },
     "infocard": {
         "tests": "Testov na dan",

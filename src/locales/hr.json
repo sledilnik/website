@@ -671,7 +671,7 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Novi grafikon:",
+        "newChart": "Novi grafikon:",
         "news002": "Potvrđeni slučajevi po dobnim skupinama"
     },
     "timestamp": {

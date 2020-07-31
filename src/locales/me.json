@@ -166,7 +166,7 @@
     },
     "notice": {
         "news002": "Potvrdjeni slucajevi po godistima",
-        "news001": "Novi dijagram:"
+        "newChart": "Novi dijagram:"
     },
     "timestamp": {
         "at": "at {{ date, HH:mm }}",

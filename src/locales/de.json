@@ -569,7 +569,7 @@
         "inHospital": "Hospitalisierte"
     },
     "notice": {
-        "news001": "Neues Diagramm:",
+        "newChart": "Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen"
     },
     "timestamp": {

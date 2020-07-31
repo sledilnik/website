@@ -31,8 +31,9 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New chart:",
-        "news002": "Confirmed Cases by Age Groups"
+        "newChart": "New chart:",
+        "newPage": "New page:",
+        "newsText": "World - situation around the world and comparison between countries"
     },
     "infocard": {
         "tests": "Tests Today",

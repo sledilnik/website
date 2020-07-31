@@ -445,7 +445,7 @@
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
-        "news001": "Grafikon i ri:"
+        "newChart": "Grafikon i ri:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
