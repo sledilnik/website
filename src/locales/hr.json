@@ -672,7 +672,9 @@
     },
     "notice": {
         "newChart": "Novi grafikon:",
-        "news002": "Potvrđeni slučajevi po dobnim skupinama"
+        "news002": "Potvrđeni slučajevi po dobnim skupinama",
+        "newsText": "Svijet – situacija u svijetu i uspoređivanje država",
+        "newPage": "Nova stranica:"
     },
     "timestamp": {
         "at": "{{ date, HH:mm }}",
@@ -754,7 +756,7 @@
             "bitola": "Bitola",
             "kozle": "Kozle",
             "iksk": "Infektivna Klinika",
-            "infdrugi": "Infektivni odjeli u Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "infdrugi": "Infektivni odjeli gradova Tetovo, Ohrid, Veles, Kumanovo i Prilep",
             "gob8sep": "GOB 8mi rujan",
             "stip": "Štip",
             "mksk": "Montažna Bolnica"
