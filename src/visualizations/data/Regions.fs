@@ -3,6 +3,7 @@ module Data.Regions
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
+open System
 open Types
 
 let url = "https://api.sledilnik.org/api/municipalities"
@@ -68,7 +69,10 @@ let parseRegionsData data =
 
 let load =
     async {
-        let! (statusCode, response) = Http.get url
+        let startDate = DateTime.Now.AddDays -60.0
+        let urlQuery = url + "?from=" + startDate.ToShortDateString()
+
+        let! (statusCode, response) = Http.get urlQuery
 
         if statusCode <> 200 then
             return RegionsDataLoaded (sprintf "Napaka pri nalaganju statističnih podatkov: %d" statusCode |> Failure)
