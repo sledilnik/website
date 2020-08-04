@@ -29,7 +29,10 @@
             "confirmed": "Potvrdjenih slicajeva (dnevno)",
             "testsToDate": "Testova (do dana)",
             "tests": "Testova (dnevno)",
-            "title": "COVID-19 Situacija u Crnoj Gori"
+            "title": "COVID-19 Situacija u zemlji",
+            "title_SVN": "COVID-19 Situacija u Sloveniji",
+            "title_MKD": "COVID-19 Situacija u S. Makedoniji",
+            "title_MNE": "COVID-19 Situacija u Crnoj Gori"
         },
         "common": {
             "shortDateFormat": "%b %e",
@@ -166,7 +169,7 @@
     },
     "notice": {
         "news002": "Potvrdjeni slucajevi po godistima",
-        "news001": "Novi dijagram:"
+        "newChart": "Novi dijagram:"
     },
     "timestamp": {
         "at": "at {{ date, HH:mm }}",

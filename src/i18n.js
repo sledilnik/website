@@ -7,8 +7,8 @@ import en from './locales/en.json'
 import sl from './locales/sl.json'
 import hr from './locales/hr.json'
 import de from './locales/de.json'
-import ru from './locales/ru.json'
 import it from './locales/it.json'
+import ru from './locales/ru.json'
 import mk from './locales/mk.json'
 import sq from './locales/sq.json'
 import me from './locales/me.json'
@@ -31,15 +31,15 @@ const detectionOptions = {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'hr', 'de', 'ru', 'it', 'mk', 'sq', 'me'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'it', 'ru', 'mk', 'sq', 'me'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
     en: { translation: en },
     hr: { translation: hr },
     de: { translation: de },
-    ru: { translation: ru },
     it: { translation: it },
+    ru: { translation: ru },
     mk: { translation: mk },
     sq: { translation: sq },
     me: { translation: me },
@@ -88,6 +88,8 @@ moment.updateLocale('hr', {
     'prosinca',
   ],
 })
+
+localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
 
 const i18n = new VueI18Next(i18next)
 

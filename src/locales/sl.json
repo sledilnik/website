@@ -31,8 +31,9 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Nov graf:",
-        "news002": "Potrjeni primeri po starostnih skupinah"
+        "newChart": "Nov graf:",
+        "newPage": "Nova stran:",
+        "newsText": "Svet – stanje potrjenih okužb in primerjave med državami"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -379,7 +380,10 @@
             "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
-            "title": "Stanje COVID-19 v Sloveniji",
+            "title": "Stanje COVID-19 v državi",
+            "title_SVN": "Stanje COVID-19 v Sloveniji",
+            "title_MKD": "Stanje COVID-19 v S. Makedoniji",
+            "title_MNE": "Stanje COVID-19 v Črni gori",
             "tests": "Testiranja (na dan)",
             "testsToDate": "Testiranja (skupaj)",
             "confirmed": "Potrjeno okuženi (na dan)",

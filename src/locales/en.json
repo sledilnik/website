@@ -31,8 +31,9 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New chart:",
-        "news002": "Confirmed Cases by Age Groups"
+        "newChart": "New chart:",
+        "newPage": "New page:",
+        "newsText": "Coronavirus world – comparing the spread in different countries"
     },
     "infocard": {
         "tests": "Tests Today",
@@ -167,7 +168,10 @@
             "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
-            "title": "COVID-19 Situation in Slovenia",
+            "title": "COVID-19 Situation in the country",
+            "title_SVN": "COVID-19 Situation in Slovenia",
+            "title_MKD": "COVID-19 Situation in N. Macedonia",
+            "title_MNE": "COVID-19 Situation in Montenegro",
             "tests": "Tests (daily)",
             "testsToDate": "Tests (to date)",
             "confirmed": "Confirmed Cases (daily)",

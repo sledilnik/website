@@ -269,7 +269,9 @@
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
             "deceased": "Todesfälle (täglich)",
             "icu": "Auf Intensivstationen",
-            "title": "COVID-19 Situation in Slowenien",
+            "title": "COVID-19 Situation im Land",
+            "title_SVN": "COVID-19 Situation in Slowenien",
+            "title_MKD": "COVID-19-Situation in Nordmazedonien",
             "recovered": "Genesene (bis heute)",
             "tests": "Tests (täglich)",
             "confirmedToDate": "Bestätigte Fälle (bis heute)",
@@ -569,8 +571,10 @@
         "inHospital": "Hospitalisierte"
     },
     "notice": {
-        "news001": "Neues Diagramm:",
-        "news002": "Bestätigte Fälle nach Altersgruppen"
+        "newChart": "Neues Diagramm:",
+        "news002": "Bestätigte Fälle nach Altersgruppen",
+        "newsText": "Welt – Lage auf der ganzen Welt und Ländervergleich",
+        "newPage": "Neue Seite:"
     },
     "timestamp": {
         "at": "um {{ date, HH:mm }}",

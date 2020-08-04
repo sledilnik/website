@@ -154,10 +154,16 @@ let optionsWithOnLoadEvent (className : string) =
 
 let parseDate (value: String) =
     match I18N.t "charts.common.numDateFormat" with
-    | "%m/%d/%Y" -> // EN
+    | "%m/%d/%Y" -> // EN, ME
         let date = value.Replace(" ", "").Split('/')
         DateTime
             .Parse(date.[2] + "-" + date.[0] + "-" + date.[1])
+            .Subtract(DateTime(1970,1,1))
+            .TotalMilliseconds
+    | "%d/%m/%Y" -> // IT
+        let date = value.Replace(" ", "").Split('/')
+        DateTime
+            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
     | _ -> // DE, HR, MK, SL, SQ

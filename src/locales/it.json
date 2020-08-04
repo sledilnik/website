@@ -332,7 +332,7 @@
             "title": "Servizi"
         },
         "nationalStudy": {
-            "description": "Lancio di una ricerca nazionale su 3000 individui selezionati casualmente",
+            "description": "Avvio di una ricerca nazionale su 3000 individui selezionati casualmente",
             "title": "Ricerca"
         },
         "liftMuseums": {
@@ -422,7 +422,7 @@
             "mortality": "Mortalità",
             "hospitalizations": "Ricoveri",
             "seriousCases": "Casi gravi",
-            "title": "Quota di casi gravi"
+            "title": "Quota dei casi gravi"
         },
         "patients": {
             "ventilator": "Su ventilatore",
@@ -502,7 +502,7 @@
             "title": "Struttura dei casi confermati",
             "otherPersons": "Altre persone",
             "allConfirmed": "Tutti i confermati",
-            "rhOccupant": "Residenti in case di riposo",
+            "rhOccupant": "Residenti nelle case di riposo",
             "rhStaff": "Personale delle case di riposo",
             "hcStaff": "Personale sanitario",
             "all": "Tutto",
@@ -704,7 +704,7 @@
         "description": "COVID-19 Slovenia Tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
     },
     "timestamp": {
-        "updated": "Aggiornato il {{ date, dddd, D MMMM YYYY }}",
+        "updated": "Aggiornato {{ date, dddd, D MMMM YYYY }}",
         "at": "alle {{ date, HH:mm }}"
     },
     "phase": {
@@ -785,6 +785,6 @@
     },
     "notice": {
         "news002": "Casi confermati per fasce di età",
-        "news001": "Nuovo grafico:"
+        "newChart": "Nuovo grafico:"
     }
 }
