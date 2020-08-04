@@ -216,7 +216,8 @@
             "tests": "Teste (në ditë)",
             "title": "Situata me COVID-19 në vend",
             "title_SVN": "Situata me COVID-19 në Slloveni",
-            "title_MKD": "Situata me COVID-19 në Maqedoninë e Veriut"
+            "title_MKD": "Situata me COVID-19 në Maqedoninë e Veriut",
+            "title_MNE": "Situata me COVID-19 në Mal të Zi"
         },
         "common": {
             "shortDateFormat": "%e. %b",
@@ -335,7 +336,8 @@
             "sq": "Shqip",
             "mk": "Maqedonisht",
             "hr": "Kroatisht",
-            "de": "Gjermanisht"
+            "de": "Gjermanisht",
+            "it": "Italisht"
         },
         "github": "GitHub",
         "links": "Linqe",
@@ -447,7 +449,9 @@
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
-        "newChart": "Grafikon i ri:"
+        "newChart": "Grafikon i ri:",
+        "newsText": "Koronavirusi në botë - krahasimi i shpërndarjes në vende të ndryshme",
+        "newPage": "Faqe e re:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
