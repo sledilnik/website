@@ -71,7 +71,7 @@ let load =
     async {
         // quick hack to only get last 60 days - enough to show last 30 days + 14 days to calculate active cases
         let startDate = DateTime.Now.AddDays -60.0
-        let urlQuery = url + "?from=" + startDate.ToShortDateString()
+        let urlQuery = url + "?from=" + startDate.ToString("yyyy-MM-dd")
 
         let! (statusCode, response) = Http.get urlQuery
 
