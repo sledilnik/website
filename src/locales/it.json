@@ -461,7 +461,8 @@
             "confirmed": "Casi confermati (giornalieri)",
             "testsToDate": "Tamponi (ad oggi)",
             "tests": "Tamponi (giornalieri)",
-            "title": "COVID-19 Situazione in Slovenia"
+            "title": "COVID-19 Situazione nel paese",
+            "title_SVN": "COVID-19 Situazione in Slovenia"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -785,6 +786,7 @@
     },
     "notice": {
         "news002": "Casi confermati per fasce di età",
-        "newChart": "Nuovo grafico:"
+        "newChart": "Nuovo grafico:",
+        "newPage": "Nuova pagina:"
     }
 }
