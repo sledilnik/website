@@ -282,7 +282,8 @@
             "ventilator": "An Beatmungsmaschinen",
             "testsToDate": "Tests (bis heute)",
             "deceasedToDate": "Todesfälle (bis heute)",
-            "confirmed": "Bestätigte Fälle (täglich)"
+            "confirmed": "Bestätigte Fälle (täglich)",
+            "title_MNE": "COVID-19 Lage in Montenegro"
         },
         "countries": {
             "groupNordic": "Nordische Länder",
@@ -573,7 +574,7 @@
     "notice": {
         "newChart": "Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
-        "newsText": "Welt – Lage auf der ganzen Welt und Ländervergleich",
+        "newsText": "Coronavirus weltweit – Vergleich der Verbreitung in verschiedenen Ländern",
         "newPage": "Neue Seite:"
     },
     "timestamp": {
