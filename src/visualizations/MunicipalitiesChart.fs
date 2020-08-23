@@ -423,18 +423,41 @@ let renderMunicipalities (state : State) _ =
     (truncatedData |> Seq.map (fun municipality -> renderMunicipality state municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
+
+    let scrollToElement (e: MouseEvent) =
+            e.preventDefault ()
+
+            dispatch ToggleShowAll
+
+            let element =
+                document.getElementById "municipalities-chart"
+
+            let offset = -100.
+
+            let position =
+                element.getBoundingClientRect().top
+                + window.pageYOffset
+                + offset
+
+            if showAll then
+                window.scrollTo
+                    ({| top = position
+                        behavior = "auto" |}
+                     |> unbox) // behavior = smooth | auto
+
     Html.div [
         prop.className "show-all"
         prop.children [
             Html.div [
-                Html.button [
+                Html.a [
                     prop.className "btn btn-primary"
                     prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
-                    prop.onClick (fun _ -> dispatch ToggleShowAll)
+                    prop.onClick scrollToElement
                 ]
             ]
         ]
     ]
+
 
 let renderSearch (query : string) dispatch =
     Html.input [
