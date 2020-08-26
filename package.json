@@ -46,7 +46,7 @@
     "chai": "^4.2.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "fable-compiler": "^2.4.22",
+    "fable-compiler": "^2.11.0",
     "fable-loader": "^2.1.9",
     "html-loader": "^1.0.0",
     "markdown-loader": "^5.1.0",
