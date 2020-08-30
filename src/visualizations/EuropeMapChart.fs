@@ -204,7 +204,6 @@ let redCountries =
             ("SAU", "")
             ("MKD", "")
             ("SGP", "")
-            ("SRB", "")
             ("MAF", "")
             ("SUR", "")
             ("ESP", "")
