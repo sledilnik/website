@@ -13,7 +13,7 @@ open Browser
 open Highcharts
 open Types
 
-let geoJsonUrl = "/maps/world.geo.json"
+let geoJsonUrl = "/maps/world-robinson.geo.json"
 //let geoJsonUrl = "/maps/europe.geo.json"
 
 type GeoJson = RemoteData<obj, string>
