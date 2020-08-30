@@ -313,9 +313,13 @@
             "title": "Do 10",
             "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, do 50 s seznamom udeležencev, z dovoljenjem NIJZ do 500 ljudi"
         },
+        "app": {
+            "title": "#OstaniZdrav",
+            "description": "Objavljena aplikacija #OstaniZdrav za Android"
+        },
         "croatia": {
             "title": "Hrvaška",
-            "description": "Hrvaška uvrščena na rdeči seznam, obvezna 14 denvna karantena pri povratku"
+            "description": "Hrvaška uvrščena na rdeči seznam, obvezna 14 dnevna karantena pri povratku"
         }
     },
     "phase": {

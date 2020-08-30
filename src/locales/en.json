@@ -566,9 +566,13 @@
             "title": "Up to 10",
             "description": "Gathering up to 10 people, up to 50 with list of attendees, up to 500 if approved by NIJZ"
         },
+        "app": {
+            "title": "#OstaniZdrav",
+            "description": "App #OstaniZdrav published for Android"
+        },
         "croatia": {
             "title": "Croatia",
-            "description": "Croatia on the red list. Strict 14 day quarantine on return."
+            "description": "Croatia on the red list, strict 14 day quarantine on return"
         }
     },
     "days": {

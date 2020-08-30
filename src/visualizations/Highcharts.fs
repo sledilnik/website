@@ -114,7 +114,8 @@ let addContainmentMeasuresFlags
         19, 6, "#FFe6e6", "quarantineStrict"
         30, 6, "#FFe6e6", "gatherings50"
         9,  7, "#FFe6e6", "gatherings10"
-        25, 8, "#FFe6e6", "croatia"
+        17, 8, "#ebfaeb", "app"
+        21, 8, "#FFe6e6", "croatia"
     |]
     {|
         ``type`` = "flags"
