@@ -226,7 +226,10 @@
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi (dnevno)",
-            "title": "COVID-19 situacija u Sloveniji",
+            "title": "COVID-19 situacija u državi",
+            "title_SVN": "COVID-19 situacija u Sloveniji",
+            "title_MKD": "COVID-19 situacija u S. Makedoniji",
+            "title_MNE": "COVID-19 Situacija u Crnoj Gori",
             "testsToDate": "Testovi (do danas)",
             "ventilator": "Na respiratoru",
             "recovered": "Ozdravili (do danas)",
@@ -548,8 +551,8 @@
         "preview": "Pregled:",
         "chooseChart": "Odaberi dijagram",
         "title": "Ugradi dijagram u vlastitu web-stranicu",
-        "description": "Određeni prikaz može se prilagoditi po potrebi. Moguće je promijeniti veličinu ugrađenog prikaza ili prikaz ograničiti na određenu regiju ili općinu. Daljnje informacije nalaze se <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">ovdje</a>.",
-        "descriptionPart1": "Određeni prikaz može se prilagoditi po potrebi. Moguće je promijeniti veličinu ugrađenog prikaza ili prikaz ograničiti na određenu regiju ili općinu. Daljnje informacije nalaze se ",
+        "description": "Određeni prikazi mogu se prilagoditi po potrebi. Moguće je promijeniti veličinu ugrađenog prikaza ili prikaz ograničiti na određenu regiju ili općinu. Daljnje informacije nalaze se <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">ovdje</a>.",
+        "descriptionPart1": "Određeni prikazi mogu se prilagoditi po potrebi. Moguće je promijeniti veličinu ugrađenog prikaza ili prikaz ograničiti na određenu regiju ili općinu. Daljnje informacije nalaze se ",
         "embedCode": "Ugradi kȏd:",
         "copy": "Kopiraj",
         "descriptionPart2": "ovdje.",
@@ -671,8 +674,10 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "news001": "Novi grafikon:",
-        "news002": "Potvrđeni slučajevi po dobnim skupinama"
+        "newChart": "Novi grafikon:",
+        "news002": "Potvrđeni slučajevi po dobnim skupinama",
+        "newsText": "Koronavirus u svijetu – uspoređivanje širenja zaraze po državama",
+        "newPage": "Nova stranica:"
     },
     "timestamp": {
         "at": "{{ date, HH:mm }}",
@@ -754,7 +759,7 @@
             "bitola": "Bitola",
             "kozle": "Kozle",
             "iksk": "Infektivna Klinika",
-            "infdrugi": "Infektivni odjeli u Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "infdrugi": "Infektivni odjeli gradova Tetovo, Ohrid, Veles, Kumanovo i Prilep",
             "gob8sep": "GOB 8mi rujan",
             "stip": "Štip",
             "mksk": "Montažna Bolnica"

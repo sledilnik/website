@@ -1,48 +1,56 @@
-# Models *EN
+# Models and Forecasts
 
-V naši skupnosti sodelujejo tudi strokovnjaki za statistično modeliranje in računalniške simulacije.
-Na tej strani objavljamo povezave na nekatere od njihovih modelov,
-ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](https://covid-19.sledilnik.org).
+Our community includes experts in statistical modeling and computer simulations who actively participate in it. This page is dedicated to some of their models. All models are calibrated using [COVID-19 Sledilnik data](https://covid-19.sledilnik.org). The following models are introduced:
+- [Evaluating the Reproduction Rate](#reproduction-rate)
+- [Interactive SEIR Model](#seir)
+- [Model of Virus Transmission via the Social Network of Slovenia](#social_network)
+- [Other Models for Slovenia](#other)
 
-Modeli v veliki meri upoštevajo doslej znane informacije o bolezni COVID-19 in njenem širjenju v Sloveniji, a kljub temu **ne ponujajo natančnih napovedi** za prihodnji potek epidemije, **zato je potrebno skrbno prebrati vse predpostavke modela**.
-Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti.
+> **_NOTE:_**  The models take into account the information known so far about COVID-19 and its spread in Slovenia. No model can offer accurate predictions for the future course of the epidemic, but we seek to carefully disclose all the assumptions of the model. Data on the number of COVID-19 tests performed and the number of COVID-19 cases confirmed in Slovenia does not necessarily reveal the number of asymptomatic infections, so most of our models are calibrated to data on hospitalizations. The uncertainty about the exact number confirmed cases propagates to the uncertainty in the predictions.
 
-Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
+Scientists worldwide are making great efforts to combat COVID-19, but many aspects of the spread and development of the disease have not yet been fully explored. In particular, there is uncertainty about the impact of measures taken by the public and the governments around the world to control the disease. In addition, due to the time lag between the infection and the onset of symptoms, it is practically impossible to accurately estimate the actual state and the rate of spread of the infection in the population. All of these are reasons why the uncertainty associated with the models is relatively large, and, the further we look to the future, the larger it becomes.
 
-## Ocenjevanje stopnje reprodukcije
-Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) Medicinske fakultete Univerze v Ljubljani je pod vodstvom prof. Maje Pohar Perme na podlagi opaženih podatkov [ocenila stopnjo reprodukcije](http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf), to je hitrost širjenja okužbe, med posamičnimi intervencijami. Pri modeliranju so uporabili tehnike Bayesovske statistike, ki omogoča ocenjevanje kompleksnih parametrov pri omejenem številu podatkov, kar nudi možnost hitrejšega odziva.
+#### <a id="challenges"></a>Key challenges in epidemic modeling
+*Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* – In the **editorial of the Zdravstveno varstvo journal**, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the current findings and key challenges in modeling the COVID-19 epidemic.
 
-Podrobnejši opis prvotne metodologije in izsledkov je objavljen kot članek v [Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068).
 
-Prvotni model je bil kasneje nadgrajen, dnevni rezultati pa se sedaj objavljajo na [tej povezavi](https://oblak8.mf.uni-lj.si/covid19/).
+## <a id="reproduction-rate"></a>Evaluating the Reproduction Rate
+The University of Ljubljana Medical Faculty’s [*Institute for Biostatistics and Medical Informatics*](https://ibmi.mf.uni-lj.si/en) team, led by *Prof. Maja Pohar Perme*, [estimated the reproduction rate](http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf) ,  i.e. the rate of spread of the infection, on the basis of the mortality data. To create their model, they used Bayesian statistics, allowing the estimation of complex parameters with only a limited amount of data. This offers the possibility of a faster response.
+
+A more detailed description of the original methodology and results is published in an article in the [Zdravniški vestnik](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) medical journal.
+
+***The original model was later upgraded, and daily results are now posted [at this link](https://oblak8.mf.uni-lj.si/covid19/).***
 
 <a href="https://oblak8.mf.uni-lj.si/covid19/" class="img-link">
 <img alt="R_t model" src="/docs/ibmi-model-20200627.png">
 <!--<img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png">-->
 </a>
 
-## SEIR model
-V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji.
+## <a id="seir"></a>Interactive SEIR Model
+In collaboration with [*Prof. Janez Žibert*](https://pacs.zf.uni-lj.si/janez-zibert/) from the Faculty of Medicine, University of Ljubljana, the SEIR model (Susceptible, Exposed, Infected, and Recovered) with submodels for modeling hospitalizations, intensive care, and deaths was developed. The parameters of the SEIR model are consistent with data on hospitalizations and the clinical picture of COVID-19 in Slovenia.
 
-Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
+***More detailed projections of the model are to be found [at this link](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).***
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
 
-## Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
-V sodelovanju z [Žigom Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v tem delovnem dokumentu](https://arxiv.org/pdf/2005.13282.pdf), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
+## <a id="social_network"></a>Model of Virus Transmission via the Social Network of Slovenia
+In cooperation with [*Dr. Žiga Zaplotnik*](https://twitter.com/ZaplotnikZiga) from the Faculty of Mathematics and Physics of the University of Ljubljana, we prepared a probabilistic forecast of the pandemic in Slovenia. In the simulation, the virus is transmitted according to a realistic model of the social network of Slovenians, which contains more than 2 million nodes (1 for each inhabitant of Slovenia), divided into households and retirement homes. The nodes are also randomly connected outside of these units, according to the known distribution of contacts - some people have more daily contacts, others less. This allows the model to effectively simulate different virus containment strategies. A probabilistic prediction is obtained by preparing a set of simulations with slightly altered initial conditions and parameters that determine coronavirus spread and the course of the COVID-19 disease. The probabilistic prediction also varies between individuals. 
+
+***A more detailed description of the model can be found [in this working document](https://arxiv.org/pdf/2005.13282.pdf), while the history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).***
 
 <a href="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" class="img-link">
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
 
+## <a id="other"></a>Other Models for Slovenia
 
-## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
+-  The model in the [*Determining alarms in the COVID-19 epidemic in Slovenia (IBMI MF UL)*](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) article assesses the extent to which the epidemic has been restarted. It uses the proportion of confirmed infected among those tested for evaluation and is updated daily with Slednik data.
 
-Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).  
+-  [*Dr. Matjaž Leskovar*](http://r4.ijs.si/leskovar) from the Reactor Engineering Department of the Jožef Stefan Institute is preparing a forecast for the development of the epidemic in Slovenia based on publicly available data on confirmed infections and current hospitalizations. The linksto the [description of the model](http://r4.ijs.si/COVID19model#elf_l1_Lw), [an archive of previous forecasts](http://r4.ijs.si/COVID19arhiv), and a [display of the latest results](http://r4.ijs.si/COVID19) are available.
 
+-  [*Dr. Andrej Srakar*](https://sites.google.com/site/andrejsrakar1975/) wrote an excellent review article,
+ [*An Introduction to Modeling and Statistical Aspects of the COVID-19 Epidemic*](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/), for the *Tamed Statistics* blog post about key models of the spread of the COVID-19 epidemic that have developed in Slovenia.
 
-## Drugi modeli za Slovenijo
+## Meeting of Slovenian Scientists on the Topic of COVID-19 Measures
 
--  [Dr. Matjaž Leskovar](http://r4.ijs.si/leskovar) z Odseka za reaktorsko tehniko Instituta Jožef Stefan pripravlja napoved razvoja epidemije v Sloveniji glede na javno dostopne podatke o potrjenih okužbah in trenutni zasedenosti bolnišnic. Na voljo je [opis modela, s povezavo na izvorno datoteko](http://r4.ijs.si/COVID19model), [arhiv napovedi](http://r4.ijs.si/COVID19arhiv) in [prikaz zadnjih rezultatov](http://r4.ijs.si/COVID19).
-
--  [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) je za blog Udomačena statistika napisal izvrsten pregledni članek [**Uvod v modeliranje in statistične vidike COVID-19**](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/) o ključnih modelih širjenja epidemije bolezni COVID-19, ki so nastali v Sloveniji.
+On 21 April 2020, the Young Statistician Section of the  [*Statistical Society of Slovenia*](https://stat-d.si/) organized an online interview hosted by the Institute of Biostatistics and Medical Informatics (IBMI) of the Ljubljana University’s Medical Faculty. The conversation was anchored by *Dr. Andrej Srakar* and *Dr. Ana Slavec*. The Slovenian Press Agency, STA, broadcasted the event live to more than 850 participants. You can view the recording and lectures [here](https://medium.com/sledilnik/64233b35580c).  

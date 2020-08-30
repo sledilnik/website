@@ -114,117 +114,130 @@ let owdCountries =
     |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
 
 let greenCountries =
-    Set.ofList
-        [ "AND"
-          "AUS"
-          "AUT"
-          "BEL"
-          "CYP"
-          "CZE"
-          "DNK"
-          "EST"
-          "FIN"
-          "FRA"
-          "GRC"
-          "GEO"
-          "IRL"
-          "ITA"
-          "CAN"
-          "LVA"
-          "LIE"
-          "LTU"
-          "HUN"
-          "MLT"
-          "MAR"
-          "MCO"
-          "DEU"
-          "NLD"
-          "NOR"
-          "NZL"
-          "POL"
-          "RWA"
-          "SMR"
-          "SVK"
-          "ESP"
-          "CHE"
-          "URY"
-          "VAT"
-          "GBR" ]
+    Map.ofList
+        [ 
+            ("AUT", "")
+            ("CYP", "")
+            ("EST", "")
+            ("FIN", "")
+            ("GEO", "")
+            ("ITA", "")
+            ("LVA", "")
+            ("LIE", "")
+            ("LTU", "")
+            ("HUN", "")
+            ("DEU", "")
+            ("NOR", "")
+            ("NZL", "")
+            ("RWA", "")
+            ("SMR", "")
+            ("SVK", "")
+            ("URY", "")
+            ("VAT", "")
+            ("GBR", "") 
+        ]
 
 let redCountries =
-    Set.ofList
-        [ "QAT"
-          "BHR"
-          "CHL"
-          "KWT"
-          "PER"
-          "ARM"
-          "DJI"
-          "OMN"
-          "BRA"
-          "PAN"
-          "BLR"
-          "SGP"
-          "SWE"
-          "MDV"
-          "STP"
-          "ARE"
-          "USA"
-          "SAU"
-          "RUS"
-          "MDA"
-          "GIB"
-          "BOL"
-          "PRI"
-          "GAB"
-          "CYM"
-          "DOM"
-          "ZAF"
-          "IRN"
-          "MKD"
-          "BIH"
-          "SRB"
-          "RKS"
-          "PRT"
-          "ALB"
-          "LUX"
-          "MNE"
-          "CHN"
-          "DZA"
-          "KAZ"
-          "HND"
-          "ISR"
-          "GNQ"
-          "CPV"
-          "COL"
-          "TCA"
-          "AZE"
-          "IRQ"
-          "VIR"
-          "KGZ"
-          "ARG"
-          "SYC"
-          "CRI"
-          "ECU"
-          "GTM"
-          "MEX"
-          "SLV"
-          "SWZ"
-          "SUR" ]
+    Map.ofList
+        [ 
+            ("ALB", "")
+            ("AND", "")
+            ("ARG", "")
+            ("ARM", "")
+            ("AZE", "")
+            ("BAH", "")
+            ("BHR", "")
+            ("BEL", "")
+            ("BLZ", "")
+            ("BOL", "")
+            ("BIH", "")
+            ("BRA", "")
+            ("CHL", "")
+            ("MNE", "")
+            ("VIR", "")
+            ("DOM", "")
+            ("ECU", "")
+            ("GNQ", "")
+            ("SWZ", "")
+            ("FRO", "")
+            ("PHL", "")
+            ("GAB", "")
+            ("GMB", "")
+            ("GIB", "")
+            ("GTM", "")
+            ("GUM", "")
+            ("HND", "")
+            ("HRV", "")
+            ("IND", "")
+            ("IRQ", "")
+            ("IRN", "")
+            ("ISR", "")
+            ("ZAF", "")
+            ("QAT", "")
+            ("KAZ", "")
+            ("KGZ", "")
+            ("CHN", "")
+            ("COL", "")
+            ("RKS", "")
+            ("CRI", "")
+            ("KWT", "")
+            ("LBN", "")
+            ("LBY", "")
+            ("LUX", "")
+            ("MDV", "")
+            ("MLT", "")
+            ("MAR", "")
+            ("MEX", "")
+            ("MDA", "")
+            ("MCO", "")
+            ("NAM", "")
+            ("NLD", "")
+            ("OMN", "")
+            ("PAN", "")
+            ("PRY", "")
+            ("PER", "")
+            ("PRI", "")
+            ("ROU", "")
+            ("RUS", "")
+            ("SLV", "")
+            ("STP", "")
+            ("SAU", "")
+            ("MKD", "")
+            ("SGP", "")
+            ("MAF", "")
+            ("SUR", "")
+            ("ESP", "")
+            ("TCA", "")
+            ("VEN", "")
+            ("UKR", "")
+            ("CPV", "")
+            ("USA", "")
+            ("ARE", "")
+        ]
 
 let importedFrom =
     Map.ofList
-        [ ("HRV", 16)
-          ("SRB", 10)
-          ("BIH", 8)
-          ("RKS", 3)
-          ("MNE", 3)
-          ("KAZ", 1)
-          ("AUT", 1)
-          ("ITA", 1)
-          ("CHE", 1) ]
+        [ 
+            ("HRV", 134)
+            ("BIH", 18)
+            ("RKS", 7)
+            ("AUT", 5)
+            ("MKD", 3)
+            ("ESP", 3)
+            ("HUN", 2)
+            ("ITA", 1)
+            ("DEU", 1)
+            ("FRA", 1)
+            ("POL", 1)
+            ("GRC", 1)
+            ("MLT", 1)
+            ("RUS", 1)
+            ("ROM", 1)
+            ("USA", 1)
 
-let importedDate = DateTime(2020, 7, 12)
+        ]
+
+let importedDate = DateTime(2020, 8, 23)
 
 let loadGeoJson =
     async {
@@ -285,14 +298,17 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
 
-        let rText, rColor =
+        let red, green = 
+            redCountries.TryFind(fixedCode), 
+            greenCountries.TryFind(fixedCode)
+        let rText, rColor, rAltText =
             if fixedCode = "SVN"
-            then I18N.t "charts.europe.statusNone", "#10829a"
-            else if greenCountries.Contains(fixedCode)
-            then I18N.t "charts.europe.statusGreen", "#C4DE6F"
-            else if redCountries.Contains(fixedCode)
-            then I18N.t "charts.europe.statusRed", "#FF5348"
-            else I18N.t "charts.europe.statusYellow", "#FEF65C"
+            then I18N.t "charts.europe.statusNone", "#10829a", ""
+            else if red.IsSome
+            then I18N.t "charts.europe.statusRed", "#FF5348", red |> Option.defaultValue ""
+            else if green.IsSome
+            then I18N.t "charts.europe.statusGreen", "#C4DE6F", green |> Option.defaultValue ""
+            else I18N.t "charts.europe.statusYellow", "#FEF65C", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -306,7 +322,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
-              CountryData.RestrictionText = rText
+              CountryData.RestrictionText = rText + rAltText
               CountryData.ImportedFrom = imported
               CountryData.ImportedDate = importedDate }
 

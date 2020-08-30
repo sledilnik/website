@@ -1,7 +1,792 @@
 {
     "navbar": {
         "language": {
-            "it": "Italiano"
+            "it": "Italiano",
+            "me": "Montenegrino",
+            "sq": "Albanese",
+            "sl": "Sloveno",
+            "mk": "Macedone",
+            "hr": "Croato",
+            "en": "Inglese",
+            "de": "Tedesco"
+        },
+        "github": "GitHub",
+        "links": "Collegamenti",
+        "sources": "Fonti",
+        "team": "Team",
+        "about": "Il progetto",
+        "faq": "FAQ",
+        "home": "Home",
+        "menu": "Menu",
+        "models": "Modelli",
+        "tables": "Tabella",
+        "world": "Nel mondo"
+    },
+    "mk": {
+        "hospital": {
+            "infdrugi": "Reparti infettivi Tetovo, Ohrid, Veles, Kumanovo e Prilep",
+            "stip": "Štip",
+            "bitola": "Bitola",
+            "gob8sep": "GOB 8mi septemvri",
+            "kozle": "Kozle",
+            "mksk": "Ospedale da campo",
+            "iksk": "Clinica Infettiva"
+        },
+        "municipality": {
+            "stip": "Štip",
+            "tetovo": "Tetovo",
+            "strumica": "Strumica",
+            "struga": "Struga",
+            "skopje": "Skopje",
+            "sveti_nikole": "Sveti Nikole",
+            "resen": "Resen",
+            "radovis": "Radoviš",
+            "probistip": "Probištip",
+            "prilep": "Prilep",
+            "pehcevo": "Pehčevo",
+            "ohrid": "Ohrid",
+            "negotino": "Negotino",
+            "makedonski_brod": "Makedonski Brod",
+            "kumanovo": "Kumanovo",
+            "krusevo": "Kruševo",
+            "kriva_palanka": "Kriva Palanka",
+            "kratovo": "Kratovo",
+            "kocani": "Kočani",
+            "kicevo": "Kičevo",
+            "kavadarci": "Kavadarci",
+            "demir_hisar": "Demir Hisar",
+            "delcevo": "Delčevo",
+            "debar": "Debar",
+            "gostivar": "Gostivar",
+            "gevgelija": "Gevgelija",
+            "vinica": "Vinica",
+            "veles": "Veles",
+            "valandovo": "Valandovo",
+            "bitola": "Bitola",
+            "berovo": "Berovo"
+        },
+        "region": {
+            "sk": "Skopski",
+            "si": "Nordest",
+            "po": "Pološki",
+            "pe": "Pelagoniski",
+            "ji": "Sudest",
+            "jz": "Sudovest",
+            "is": "Istočen",
+            "va": "Vardarski"
+        },
+        "cm": {
+            "bordersOopen": {
+                "title": "Confini aperti",
+                "description": "Rilassamento: confini aperti per i cittadini stranieri"
+            },
+            "kafanasOpen": {
+                "title": "Bar",
+                "description": "Rilassamento: bar e ristoranti riaperti"
+            },
+            "lessMeasures": {
+                "title": "Blocco sollevato",
+                "description": "Rilassamento: spostamento libero in tutto il paese"
+            },
+            "masksOn": {
+                "title": "Mascherine",
+                "description": "Le mascherine dovrebbero essere indossate ovunque fuori dalle abitazioni"
+            },
+            "21hLockdown": {
+                "title": "Blocco",
+                "description": "Blocco completo dalle 21 alle 06 ogni giorno"
+            },
+            "gatherings5": {
+                "title": "Assembramenti di 5 persone",
+                "description": "Proibiti gli assembramenti con più di 5 persone"
+            },
+            "debarQuarantine": {
+                "title": "Quarantena di Debar",
+                "description": "Prima città messa in totale isolamento"
+            },
+            "bordersClosure": {
+                "description": "Tutte le frontiere e gli aeroporti sono chiusi per l'ingresso dei viaggiatori internazionali",
+                "title": "frontiere"
+            },
+            "gatheringsMass": {
+                "title": "Raduni di massa",
+                "description": "Sono vietati i raduni di massa come eventi sportivi e carnevali"
+            }
+        },
+        "phase": {
+            "6": {
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Macedonia del Nord 2, Štip 3",
+                "title": "Fase 6"
+            },
+            "5": {
+                "description": "Skopje 4, Tetovo 4, Štip 3, Macedonia del Nord 2",
+                "title": "Fase 5"
+            },
+            "4": {
+                "description": "Macedonia del Nord 3",
+                "title": "Fase 4"
+            },
+            "3": {
+                "description": "Debar 4",
+                "title": "Fase 3"
+            },
+            "2": {
+                "description": "Skopje 4",
+                "title": "Fase 2"
+            },
+            "1": {
+                "description": "Debar 4, Skopje 3, Macedonia del Nord 2 ",
+                "title": "Fase 1"
+            }
         }
+    },
+    "pageNotFound": {
+        "imageDescription": "due coni stradali collegati da nastro giallo",
+        "back": "Indietro",
+        "somethingWentWrong": "Oops... qualcosa è andato storto :(",
+        "notFound": "404: pagina non trovata"
+    },
+    "country-groups": {
+        "groupNeighbouringWoItaly": "Paesi limitrofi (Italia esclusa)",
+        "groupNeighbouring": "Paesi limitrofi",
+        "groupCriticalEU": "Paesi critici (UE)",
+        "groupCriticalWorld": "Paesi critici (Mondo)",
+        "groupNordic": "Paesi nordici",
+        "groupExYu": "Ex Jugoslavia",
+        "groupEastAsiaOceania": "Asia orientale e Oceania",
+        "groupLatinAmerica": "America Latina"
+    },
+    "country": {
+        "ALB": "Albania",
+        "AND": "Andorra",
+        "ARG": "Argentina",
+        "AUS": "Australia",
+        "AUT": "Austria",
+        "BGR": "Bulgaria",
+        "BRA": "Brasile",
+        "BLR": "Bielorussia",
+        "BEL": "Belgio",
+        "BIH": "Bosnia-Erzegovina",
+        "CHE": "Svizzera",
+        "CHL": "Cile",
+        "CHN": "Cina",
+        "COL": "Colombia",
+        "CZE": "Repubblica Ceca",
+        "DEU": "Germania",
+        "DNK": "Danimarca",
+        "ECU": "Ecuador",
+        "EST": "Estonia",
+        "ESP": "Spagna",
+        "FIN": "Finlandia",
+        "FRO": "Isole Fær Øer",
+        "FRA": "Francia",
+        "GBR": "Regno Unito",
+        "GRC": "Grecia",
+        "HRV": "Croazia",
+        "HUN": "Ungheria",
+        "IRN": "Iran",
+        "IRL": "Irlanda",
+        "ISL": "Islanda",
+        "ITA": "Italia",
+        "JPN": "Giappone",
+        "LIE": "Liechtenstein",
+        "LTU": "Lituania",
+        "LVA": "Lettonia",
+        "MLT": "Malta",
+        "MDA": "Moldavia",
+        "MEX": "Messico",
+        "MKD": "Macedonia del Nord",
+        "MNE": "Montenegro",
+        "NZL": "Nuova Zelanda",
+        "NLD": "Paesi Bassi",
+        "NOR": "Norvegia",
+        "CYP": "Cipro",
+        "NCY": "Cipro del Nord",
+        "NMA": "Cipro No Mans Area",
+        "POL": "Polonia",
+        "PRT": "Portogallo",
+        "PER": "Perù",
+        "RKS": "Kosovo",
+        "OWID_KOS": "Kosovo",
+        "ROU": "Romania",
+        "RUS": "Russia",
+        "SMR": "San Marino",
+        "SGP": "Singapore",
+        "SRB": "Serbia",
+        "SVK": "Slovacchia",
+        "SVN": "Slovenia",
+        "SWE": "Svezia",
+        "TWN": "Taiwan",
+        "TUR": "Turchia",
+        "USA": "USA",
+        "UKR": "Ucraina",
+        "VAT": "Vaticano",
+        "LUX": "Lussemburgo",
+        "KOR": "Corea del Sud"
+    },
+    "region": {
+        "kr": "Gorenjska",
+        "ng": "Goriška",
+        "nm": "Slovenia sudorientale",
+        "sg": "Koroška",
+        "kp": "Obalno-kraška",
+        "lj": "Slovenia centrale",
+        "mb": "Podravska",
+        "ms": "Pomurska",
+        "kk": "Posavska",
+        "po": "Primorsko-notranjska",
+        "ce": "Savinjska",
+        "za": "Zasavska"
+    },
+    "days": {
+        "longerDate": "{{ date, dddd, D MMMM YYYY }}",
+        "date": "{{ date, D MMMM }}",
+        "x_days_ago": "{{ count }} giorno fa",
+        "x_days_ago_plural": "{{ count }} giorni fa",
+        "in_x_days": "in {{ count }} giorno",
+        "in_x_days_plural": "in {{ count }} giorni"
+    },
+    "cm": {
+        "gatherings10": {
+            "description": "Assembramenti fino a 10 persone, fino a 50 con elenco dei partecipanti, fino a 500 se approvati dal NIJZ",
+            "title": "Fino a 10"
+        },
+        "gatherings50": {
+            "description": "Assembramenti fino a 50 persone, fino a 500 se approvati dal NIJZ",
+            "title": "Fino a 50"
+        },
+        "quarantineStrict": {
+            "description": "Una quarantena più rigorosa obbligatoria di 14 giorni per i paesi critici. <br> (zona rossa BIH, Serbia, Kosovo)",
+            "title": "Quarantena"
+        },
+        "liftGatherings500": {
+            "description": "Rilassamento: assembramenti fino a 500 persone, spettatori in eventi sportivi. <br> Valichi di frontiera aperti fuori dai posti di blocco per i cittadini di SLO, AUT, ITA e HUN",
+            "title": "Fino a 500"
+        },
+        "liftSchools4to5": {
+            "title": "Scuole",
+            "description": "Rilassamento: scuola elementare 4a, 5a classe, assembramenti fino a 200 persone, tutti gli alloggi"
+        },
+        "quarantine14days": {
+            "description": "Quarantena obbligatoria di 14 giorni per gli stranieri che arrivino dall'estero <br> (per l'UE con eccezioni e paesi terzi)",
+            "title": "Quarantena"
+        },
+        "liftSchools1to3": {
+            "title": "Scuola materna",
+            "description": "Rilassamento: scuola materna ed elementare 1a-3a, 9a classe. Scuola secondaria 4 anno"
+        },
+        "retirementHomes": {
+            "title": "Case di riposo",
+            "description": "Il divieto di visita nelle case di riposo. <br>Infezione confermata di un medico a Metlika"
+        },
+        "checkpoints": {
+            "title": "Punti di ingresso",
+            "description": "16 punti di ingresso per i test"
+        },
+        "borders": {
+            "title": "Frontiere",
+            "description": "Chiusura di alcuni valichi di frontiera con l'Italia, <br>controlli più rigorosi sulle autovetture"
+        },
+        "publicTransport": {
+            "title": "Trasporto",
+            "description": "La sospensione del trasporto pubblico"
+        },
+        "liftVacationHomes": {
+            "title": "Seconde case",
+            "description": "Rilassamento: spostamento tra i comuni (case di vacanza...), <br>chiarimenti sul divieto generale di spostamento"
+        },
+        "liftPublicTransport": {
+            "title": "Trasporto",
+            "description": "Rilassamento: trasporto pubblico, tutti i servizi sanitari e odontoiatrici"
+        },
+        "liftQuarantine": {
+            "title": "Quarantena",
+            "description": "Rilassamento: quarantena solo per stranieri provenienti da paesi terzi"
+        },
+        "epidemic": {
+            "title": "Epidemia",
+            "description": "Dichiarata epidemia, prescritto auto-isolamento generale"
+        },
+        "schools": {
+            "title": "Scuole",
+            "description": "Chiusura delle scuole, ristoranti"
+        },
+        "gatherings": {
+            "title": "Assembramento",
+            "description": "Divieto di assembramento in luoghi pubblici"
+        },
+        "municipality": {
+            "description": "Divieto di spostamento al di fuori dei confini comunali, disinfezione obbligatoria <br>dei condomini, negozi per gruppi vulnerabili fino alle 10 del mattino",
+            "title": "Comuni"
+        },
+        "shops": {
+            "description": "Negozi dalle 8 alle 10 del mattino e l'ultima ora esclusivamente <br>per gruppi vulnerabili (disabili, pensionati, donne incinte)",
+            "title": "Negozi"
+        },
+        "quarantine": {
+            "title": "Quarantena",
+            "description": "Quarantena obbligatoria di 7 giorni in caso di arrivo dall'estero"
+        },
+        "liftService": {
+            "description": "Rilassamento: lavori edili, servizi, sport all'aria aperta, <br>ammessi alcuni servizi di trasporto pubblico",
+            "title": "Servizi"
+        },
+        "nationalStudy": {
+            "description": "Avvio di una ricerca nazionale su 3000 individui selezionati casualmente",
+            "title": "Ricerca"
+        },
+        "liftMuseums": {
+            "description": "Rilassamento: biblioteche, gallerie, musei, intermediazione di immobili, spazzacamini",
+            "title": "Musei"
+        },
+        "liftMunicipality": {
+            "title": "Comuni",
+            "description": "Rilassamento: spostamento al di fuori dei confini del proprio comune"
+        },
+        "liftFoodMarkets": {
+            "description": "Rilassamento: mercati, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
+            "title": "Mercati"
+        },
+        "firstCase": {
+            "title": "1° caso",
+            "description": "Primo caso confermato:<br>turista di ritorno dal Marocco"
+        }
+    },
+    "tableDict": {
+        "region_todate": "Totale",
+        "region_za_todate": "Zasavska",
+        "region_ce_todate": "Savinjska",
+        "region_po_todate": "Primorsko-notranjska",
+        "region_kk_todate": "Posavska",
+        "region_ms_todate": "Pomurska",
+        "region_mb_todate": "Podravska",
+        "region_lj_todate": "Slovenia centrale",
+        "region_kp_todate": "Obalno-kraška",
+        "region_sg_todate": "Koroška",
+        "region_nm_todate": "Slovenia sudorientale",
+        "region_ng_todate": "Goriška",
+        "region_kr_todate": "Gorenjska",
+        "age_female_todate": "Totale",
+        "age_female_65-74_todate": "65 - 74 anni",
+        "age_female_0-4_todate": "0 - 4 anni",
+        "age_female_75-84_todate": "75 - 84 anni",
+        "age_female_85+_todate": "85+ anni",
+        "age_female_55-64_todate": "55 - 64 anni",
+        "age_female_45-54_todate": "45 - 54 anni",
+        "age_female_35-44_todate": "35 - 44 anni",
+        "age_female_25-34_todate": "25 - 34 anni",
+        "age_female_15-24_todate": "15 - 24 anni",
+        "age_female_5-14_todate": "5 - 14 anni",
+        "age_male_85+_todate": "85+ anni",
+        "age_male_75-84_todate": "75 - 84 anni",
+        "age_male_65-74_todate": "65 - 74 anni",
+        "age_male_55-64_todate": "55-64 anni",
+        "age_male_45-54_todate": "45 - 54 anni",
+        "age_male_35-44_todate": "35 - 44 anni",
+        "age_male_25-34_todate": "25 - 34 anni",
+        "age_male_15-24_todate": "15 - 24 anni",
+        "age_male_5-14_todate": "5 - 14 anni",
+        "age_male_0-4_todate": "0 - 4 anni",
+        "age_male_todate": "Totale",
+        "state_out_of_hospital_todate": "Dimessi dall'ospedale (ad oggi)",
+        "state_in_hospital_todate": "Ricoverati (ad oggi)",
+        "state_deceased_todate": "Decessi confermati (ad oggi)",
+        "state_critical": "Su ventilatore (attivo)",
+        "state_icu": "In terapia intensiva (attivo)",
+        "state_in_hospital": "Ricoverato (attivo)",
+        "cases_unclassified_confirmed_todate": "Casi confermati - Altri (ad oggi)",
+        "cases_rh_occupant_confirmed_todate": "Casi confermati - Residenti nelle case di riposo (ad oggi)",
+        "cases_rh_employee_confirmed_todate": "Casi confermati - Personale delle case di riposo (ad oggi)",
+        "cases_hs_employee_confirmed_todate": "Casi confermati - Personale sanitario (ad oggi)",
+        "cases_closed_todate": "Casi chiusi (ad oggi)",
+        "cases_recovered_todate": "Guariti (ad oggi)",
+        "cases_active": "Casi attivi",
+        "cases_confirmed_todate": "Casi confermati (ad oggi)",
+        "cases_confirmed": "Casi confermati (giornalieri)",
+        "tests_performed_todate": "Tamponi (ad oggi)",
+        "tests_performed": "Tamponi (giornalieri)"
+    },
+    "charts": {
+        "ratios": {
+            "ventilatorHospital": "Su ventilatore",
+            "ventilatorCases": "Su ventilatore",
+            "hospitalDeceasedShare": "Quota dei decessi in ospedale",
+            "icuDeceasedShare": "Quota dei decessi in terapia intensiva",
+            "icuMortality": "Mortalità in terapia intensiva",
+            "hospitalMortality": "Mortalità in ospedale",
+            "deceasedHospital": "Decessi",
+            "icuHospital": "In terapia intensiva",
+            "deceasedCases": "Decessi",
+            "icuCases": "In terapia intensiva",
+            "hospitalCases": "Ricoverati",
+            "mortality": "Mortalità",
+            "hospitalizations": "Ricoveri",
+            "seriousCases": "Casi gravi",
+            "title": "Quota dei casi gravi"
+        },
+        "patients": {
+            "ventilator": "Su ventilatore",
+            "allHospitals": "Tutti gli ospedali",
+            "deceased": "Deceduti",
+            "discharged": "Dimessi",
+            "icu": "In terapia intensiva",
+            "hospitalized": "Ricoverati",
+            "admitted": "Ammessi",
+            "hospitalizedIn": "Ricoverati in:",
+            "byHospital": "Per ospedale",
+            "structure": "Struttura",
+            "title": "Ricoveri"
+        },
+        "cases": {
+            "ventilator": "Su ventilatore",
+            "deceased": "Deceduti",
+            "recovered": "Guariti",
+            "icu": "Terapia intensiva",
+            "hospitalized": "Ricoverati",
+            "active": "Attivi",
+            "title": "Casi confermati"
+        },
+        "metricsComparison": {
+            "ventilator": "Su ventilatore",
+            "deceasedToDate": "Decessi (ad oggi)",
+            "deceased": "Decessi (giornalieri)",
+            "dischargedToDate": "Dimessi (ad oggi)",
+            "discharged": "Dimessi (giornalieri)",
+            "icu": "Terapia intensiva",
+            "hospitalizedToDate": "Ricoverati (ad oggi)",
+            "hospitalized": "Ricoverati",
+            "recovered": "Guariti (ad oggi)",
+            "active": "Casi attuali",
+            "confirmedToDate": "Casi confermati (ad oggi)",
+            "confirmed": "Casi confermati (giornalieri)",
+            "testsToDate": "Tamponi (ad oggi)",
+            "tests": "Tamponi (giornalieri)",
+            "title": "COVID-19 Situazione nel paese",
+            "title_SVN": "COVID-19 Situazione in Slovenia"
+        },
+        "hospitals": {
+            "title": "Capacità ospedaliere",
+            "projection": "Proiezione",
+            "projection7": "Proiezione, raddoppio a 7 giorni",
+            "projection14": "Proiezione, raddoppio a 14 giorni",
+            "projection21": "Proiezione, raddoppio a 21 giorni",
+            "bedsICU": "Posti letto in terapia intensiva",
+            "ventilators": "Respiratori",
+            "bedsICUShort": "Posti letto in terapia intensiva",
+            "bedsMax": "Posti letto, massimo",
+            "bedsAll": "Posti letto, tutti",
+            "beds": "Posti letto in ospedale",
+            "bedsShort": "Posti letto",
+            "beds70": "Posti letto, 70%",
+            "bedsFull": "Posti letto, completi",
+            "bedsICUAll": "Letti di terapia intensiva, tutti",
+            "bedsICU70": "Letti in terapia intensiva, 70%",
+            "bedsICUFull": "Letti in terapia intensiva, pieni",
+            "empty": "Vuoto",
+            "full": "Completo",
+            "all": "Tutti",
+            "max": "Max",
+            "data": "Dati",
+            "allHospitals": "Tutti gli ospedali"
+        },
+        "countriesTotalDeathsPer1M": {
+            "chronologically": "Cronologico",
+            "sinceFirstDeath": "Dal primo decesso",
+            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
+            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
+            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
+            "yAxisTitle": "Decessi totali per 1 milione di persone",
+            "legendTitle": "Decessi totali per 1 milione di persone",
+            "title": "Paesi: decessi totali per 1 milione di persone"
+        },
+        "infections": {
+            "title": "Struttura dei casi confermati",
+            "otherPersons": "Altre persone",
+            "allConfirmed": "Tutti i confermati",
+            "rhOccupant": "Residenti nelle case di riposo",
+            "rhStaff": "Personale delle case di riposo",
+            "hcStaff": "Personale sanitario",
+            "all": "Tutto",
+            "relative": "Relativo",
+            "averageByDay": "Per giorno (media)"
+        },
+        "tests": {
+            "nationalStudyTesting": "Ricerca",
+            "regularTesting": "Normale",
+            "title": "Analisi",
+            "shareOfPositive": "Percentuale tamponi positivi (%)",
+            "positiveTests": "Tamponi positivi",
+            "negativeTests": "Tamponi negativi",
+            "allTesting": "Tutti"
+        },
+        "hCenters": {
+            "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
+            "suspectedCovidExamination": "Sospetto COVID-19 (esame)",
+            "emergencyExamination": "Pronto soccorso",
+            "title": "Trattamenti nella Casa di Sanità",
+            "allRegions": "Tutte le regioni",
+            "testsPositive": "Tamponi (positivi*)",
+            "testsPerformed": "Tamponi (effettuati)",
+            "sentToSelfIsolation": "Autoisolamento"
+        },
+        "countriesNewCasesPer1M": {
+            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
+            "chronologically": "Cronologico",
+            "sinceFirstDeath": "Dal primo decesso",
+            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
+            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
+            "legendTitle": "Nuovi casi per 1M di persone",
+            "yAxisTitle": "Nuovi casi per 1 milione di persone",
+            "title": "Paesi: nuovi casi per 1 milione di persone"
+        },
+        "ageGroupsTimeline": {
+            "activeCasesRelative": "Casi attivi (relativi)",
+            "activeCases": "Casi attivi",
+            "newCases": "Nuovi casi",
+            "title": "Casi confermati per fasce di età"
+        },
+        "ageGroups": {
+            "confirmedCases": "Casi confermati",
+            "deceased": "Decessi",
+            "age": "Età",
+            "confirmedCasesPerPopulation": "Casi confermati per popolazione",
+            "deceasedPerConfirmedCases": "Decessi per casi confermati",
+            "deceasedPerPopulation": "Decessi per popolazione",
+            "shareOfInfectedPopulation": "Quota di casi confermati nella popolazione",
+            "shareOfDeceasedPopulation": "Quota di decessi nella popolazione",
+            "shareOfDeceasedConfirmedCases": "Quota di decessi nei casi confermati",
+            "populationTotal": "Popolazione totale",
+            "relative": "Relativo",
+            "absolute": "Assoluto",
+            "female": "Femmine",
+            "male": "Maschi",
+            "title": "Fasce di età"
+        },
+        "municipalities": {
+            "lastCase": "Ultimo caso: ",
+            "today": "oggi",
+            "yesterday": "ieri",
+            "doubles": "Raddoppia in ",
+            "deceased": "Deceduti: ",
+            "recovered": "Guariti: ",
+            "active": "Attivi: ",
+            "all": "Tutti: ",
+            "showLess": "Mostra meno",
+            "showAll": "Mostra tutti",
+            "search": "Cerca comune",
+            "allRegions": "Tutte le regioni",
+            "viewActive": "Attivi",
+            "viewTotal": "Tutti",
+            "viewDoublingTime": "Tempo di raddoppio",
+            "viewLast": "Ultimo",
+            "title": "Casi per comune"
+        },
+        "europe": {
+            "noData": "Nessun dato",
+            "statusRed": "quarantena rigorosa di 14 giorni",
+            "statusYellow": "Quarantena di 14 giorni con eccezioni",
+            "statusGreen": "nessuna restrizione",
+            "statusNone": "-",
+            "countryStatus": "Restrizioni",
+            "importedCases": "Casi importati in 14 giorni",
+            "incidence1M": "Nuovi casi in 14 giorni per 1M",
+            "newCases": "Nuovi casi",
+            "restrictions": "Restrizioni e casi importati",
+            "twoWeekIncidence": "Incidenza di 14 giorni per milione",
+            "title": "COVID-19 Situazione in Europa"
+        },
+        "map": {
+            "confirmedCases": "Casi confermati",
+            "deceased": "Decessi",
+            "absolute": "Assoluto",
+            "last_x_days": "{{ count }} giorno",
+            "last_x_days_plural": "{{ count }} giorni",
+            "population": "popolazione",
+            "populationShare": "Su popolazione",
+            "populationC": "Popolazione",
+            "all": "Tutto",
+            "yesterday": "Ieri",
+            "mortalityOfConfirmedCases": "Mortalità nei casi confermati",
+            "title": "Mappa dei comuni"
+        },
+        "regions": {
+            "deceased": "Decessi",
+            "confirmedCases": "Casi confermati",
+            "activeCases": "Casi attivi",
+            "title": "Casi per regione"
+        },
+        "spread": {
+            "absolute": "Crescita giornaliera assoluta",
+            "percentage": "Crescita giornaliera relativa",
+            "doublingRate": "Crescita esponenziale in giorni",
+            "explainer": "Cosa significa crescita esponenziale",
+            "absoluteTitle": "Crescita giornaliera dei casi confermati",
+            "absoluteLabel": "Casi confermati (giornalieri)",
+            "relativeLabel": "Crescita relativa in %",
+            "doublingRateTitle": "Tasso di crescita esponenziale [in giorni]",
+            "doublingRateLabel": "In quanti giorni raddoppia il numero delle persone infette",
+            "timesAsMany": "- volte tanto",
+            "confirmedCases": "casi confermati",
+            "relativeTitle": "Variazione giornaliera degli infetti",
+            "averageSouthKorea": "La media della Corea del Sud negli ultimi giorni",
+            "oneDay": "Un giorno",
+            "oneWeek": "Una settimana",
+            "oneMonth": "Un mese",
+            "ifExpGrowth": "Se l'infezione si diffondesse in modo esponenziale con la duplicazione a 7, allora ci si potrebbe aspettare:",
+            "today": "Oggi",
+            "inOneWeek": "In una settimana",
+            "inTwoWeeks": "In due settimane",
+            "inThreeWeeks": "In tre settimane",
+            "inFourWeeks": "In quattro settimane",
+            "hospitalized": "ricoverati",
+            "title": "Variazione dei casi confermati"
+        },
+        "common": {
+            "shortDateFormat": "%e %b",
+            "longDateFormat": "%e %B %Y",
+            "dateFormat": "%A, %e %B %Y",
+            "numDateFormat": "%d/%m/%Y",
+            "close": "Chiudi",
+            "share": "Condividi",
+            "webpage": "Pagina web",
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "FAQ",
+            "noteFaq": "Nota: le limitazioni dei dati presentati sono descritte in ",
+            "log": "Logaritmica",
+            "linear": "Lineare",
+            "view": "Visualizza:",
+            "yAxis": "Asse Y:",
+            "xAxis": "Asse X:",
+            "thousandsSep": " . ",
+            "decimalPoint": ",",
+            "all": "Tutto",
+            "x_months": "{{ count }}m",
+            "x_months_plural": "{{ count }}m",
+            "resetZoom": "Ripristina lo zoom",
+            "resetZoomTitle": "Ripristino dello zoom a 1:1",
+            "zoom": "Zoom",
+            "to": "-",
+            "from": " ",
+            "loading": "Caricamento dei dati …",
+            "dsOWD": "Our World in Data",
+            "dsMZ": "Ministero della Salute",
+            "dsNIJZ": "NIJZ",
+            "dataSource": "origine dei dati"
+        }
+    },
+    "footer": {
+        "copyright": "© 2020 Sledilnik.org"
+    },
+    "embedMaker": {
+        "description": "La visualizzazione specifica può essere adattata alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. Ulteriori <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">informazioni</a>.",
+        "descriptionPart1": "Visualizzazioni specifiche in base alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. ",
+        "copied": "Copiato!",
+        "copy": "Copia",
+        "descriptionPart2": "Ulteriori informazioni.",
+        "embedCode": "Includi il codice:",
+        "preview": "Anteprima:",
+        "chooseChart": "Scegliete un grafico",
+        "title": "Includere un grafico nelle proprie pagine"
+    },
+    "infocard": {
+        "accordingTo": "Il {{ date, D MMMM }}",
+        "lastUpdated": "{{ date, dddd, D MMMM }}",
+        "deceasedToDate": "Decessi confermati",
+        "icu": "Terapie intensive",
+        "inHospital": "Ricoveri",
+        "tests": "Tamponi giornalieri",
+        "recoveredToDate": "Guariti",
+        "active": "Casi attivi",
+        "confirmedToDate": "Casi confermati"
+    },
+    "meta": {
+        "title": "COVID-19 Tracking",
+        "description": "COVID-19 Slovenia Tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
+    },
+    "timestamp": {
+        "updated": "Aggiornato {{ date, dddd, D MMMM YYYY }}",
+        "at": "alle {{ date, HH:mm }}"
+    },
+    "phase": {
+        "7": {
+            "description": "fine dell'epidemia",
+            "title": "Fase 7"
+        },
+        "6": {
+            "description": "nuova metodologia dei test, studio",
+            "title": "Fase 6"
+        },
+        "5": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 5"
+        },
+        "4": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 4"
+        },
+        "3": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 3"
+        },
+        "2": {
+            "description": "epidemia, nuova metodologia dei test",
+            "title": "Fase 2"
+        },
+        "1": {
+            "title": "Fase 1"
+        }
+    },
+    "weekday": {
+        "6": "Sabato",
+        "5": "Venerdì",
+        "4": "Giovedì",
+        "3": "Mercoledì",
+        "2": "Martedì",
+        "1": "Lunedì",
+        "0": "Domenica"
+    },
+    "shortMonth": {
+        "11": "Dic",
+        "10": "Nov",
+        "9": "Ott",
+        "8": "Set",
+        "7": "Ago",
+        "6": "Lug",
+        "5": "Giu",
+        "4": "Mag",
+        "3": "Apr",
+        "2": "Mar",
+        "1": "Feb",
+        "0": "Gen"
+    },
+    "month": {
+        "11": "Dicembre",
+        "10": "Novembre",
+        "9": "Ottobre",
+        "8": "Settembre",
+        "7": "Agosto",
+        "6": "Luglio",
+        "5": "Giugno",
+        "4": "Maggio",
+        "3": "Aprile",
+        "2": "Marzo",
+        "1": "Febbraio",
+        "0": "Gennaio"
+    },
+    "tables": {
+        "day": "{{ date, D/M }}",
+        "sourceLink": "Tabella GDocs, formato CSV o API REST",
+        "source": "Dati in altri formati",
+        "tabByAgeFemale": "Per età - Femmine",
+        "tabByAgeMale": "Per età - Maschi",
+        "tabByRegion": "Per regione",
+        "tabSummary": "Sommario",
+        "title": "Tabella"
+    },
+    "notice": {
+        "news002": "Casi confermati per fasce di età",
+        "newChart": "Nuovo grafico:",
+        "newPage": "Nuova pagina:"
     }
 }

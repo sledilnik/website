@@ -31,8 +31,9 @@
         "at": "at {{ date, HH:mm }}"
     },
     "notice": {
-        "news001": "New chart:",
-        "news002": "Confirmed Cases by Age Groups"
+        "newChart": "New chart:",
+        "newPage": "New page:",
+        "newsText": "Coronavirus world – comparing the spread in different countries"
     },
     "infocard": {
         "tests": "Tests Today",
@@ -60,8 +61,8 @@
         "chooseChart": "Choose a chart",
         "preview": "Preview:",
         "embedCode": "Embed code:",
-        "description": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
-        "descriptionPart1": "Specific view can be adopted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, ",
+        "description": "Specific views can be adapted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "descriptionPart1": "Specific views can be adapted to your needs. You can change the size of the embedded view or you can limit to only specific region or municipality. For more, ",
         "descriptionPart2": "check here.",
         "copy": "Copy",
         "copied": "Copied!"
@@ -167,7 +168,10 @@
             "shortDateFormat": "%b %e"
         },
         "metricsComparison": {
-            "title": "COVID-19 Situation in Slovenia",
+            "title": "COVID-19 Situation in the country",
+            "title_SVN": "COVID-19 Situation in Slovenia",
+            "title_MKD": "COVID-19 Situation in N. Macedonia",
+            "title_MNE": "COVID-19 Situation in Montenegro",
             "tests": "Tests (daily)",
             "testsToDate": "Tests (to date)",
             "confirmed": "Confirmed Cases (daily)",
@@ -561,6 +565,14 @@
         "gatherings10": {
             "title": "Up to 10",
             "description": "Gathering up to 10 people, up to 50 with list of attendees, up to 500 if approved by NIJZ"
+        },
+        "app": {
+            "title": "#OstaniZdrav",
+            "description": "App #OstaniZdrav published for Android"
+        },
+        "croatia": {
+            "title": "Croatia",
+            "description": "Croatia on the red list, strict 14 day quarantine on return"
         }
     },
     "days": {
@@ -694,15 +706,15 @@
             "6": {
                 "title": "Phase 6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
-            }  
+            }
         },
         "cm": {
             "gatheringsMass": {
-                 "description": "Mass gatherings like sporting events and carnivals forbidden",
+                "description": "Mass gatherings like sporting events and carnivals forbidden",
                 "title": "Mass Gatherings"
             },
             "bordersClosure": {
-                 "title": "borders",
+                "title": "borders",
                 "description": "All bordres and airports closed for international travelers to enter the country"
             },
             "debarQuarantine": {
@@ -725,7 +737,7 @@
                 "description": "Relaxation: movement free in whole country",
                 "title": "Lockdown off"
             },
-             "kafanasOpen": {
+            "kafanasOpen": {
                 "description": "Relaxation: bars and reaturants oppened",
                 "title": "Kafanas"
             },
