@@ -565,6 +565,10 @@
         "gatherings10": {
             "title": "Up to 10",
             "description": "Gathering up to 10 people, up to 50 with list of attendees, up to 500 if approved by NIJZ"
+        },
+        "croatia": {
+            "title": "Croatia",
+            "description": "Croatia on the red list. Strict 14 day quarantine on return."
         }
     },
     "days": {
