@@ -116,6 +116,7 @@ let addContainmentMeasuresFlags
         9,  7, "#FFe6e6", "gatherings10"
         17, 8, "#FFFFFF", "app"
         21, 8, "#FFe6e6", "croatia"
+        1,  9, "#ebfaeb", "allSchools"
     |]
     {|
         ``type`` = "flags"

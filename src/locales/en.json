@@ -576,6 +576,10 @@
         "croatia": {
             "title": "Croatia",
             "description": "Croatia on the red list, strict 14 day quarantine on return"
+        },
+        "allSchools": {
+            "title": "Schools",
+            "description": "All schools reopened for new school year"
         }
     },
     "days": {
