@@ -540,6 +540,18 @@
         "gatherings10": {
             "title": "Bis zu 10",
             "description": "Versammlungen von bis zu 10 Personen, mit Teilnehmerliste bis zu 50, mit Genehmigung des NIJZ bis zu 500"
+        },
+        "allSchools": {
+            "description": "Wiedereröffnung aller Schulen für das neue Schuljahr",
+            "title": "Schulen"
+        },
+        "croatia": {
+            "description": "Kroatien auf der roten Liste, strenge 14-tägige Quarantäne bei Rückkehr",
+            "title": "Kroatien"
+        },
+        "app": {
+            "description": "Die App #OstaniZdrav, veröffentlicht für Android",
+            "title": "#OstaniZdrav"
         }
     },
     "region": {
