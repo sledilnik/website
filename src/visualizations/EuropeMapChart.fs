@@ -49,6 +49,7 @@ type ChartType =
 
 type State =
     { MapToDisplay : MapToDisplay
+      Countries : string list
       GeoJson: GeoJson
       OwdData: OwdData
       CountryData: CountriesMap
@@ -61,7 +62,7 @@ type Msg =
     | OwdDataReceived of OwdData
     | ChartTypeChanged of ChartType
 
-let countries =
+let worldCountries =
     [
         "AFG"
         "ALB"
@@ -312,6 +313,7 @@ let countries =
         "ZMB"
         "ZWE"
         "ALA"
+        "RKS"
     ]
     
 let euCountries =
@@ -365,10 +367,6 @@ let euCountries =
       "RKS"
       "NCY"
       "NMA" ]
-
-let owdCountries =
-    countries
-    |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
 
 let greenCountries =
     Map.ofList
@@ -536,6 +534,10 @@ let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
     { MapToDisplay = mapToDisplay 
+      Countries =
+        match mapToDisplay with
+        | Europe -> euCountries
+        | World -> worldCountries
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
@@ -606,6 +608,11 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> Map.ofList
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
+
+    let owdCountries =
+        state.Countries
+        |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
+
     match msg with
     | GeoJsonRequested -> 
         let cmd = 
@@ -632,7 +639,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 
 let mapData state =
-    countries
+    state.Countries
     |> List.map (fun code ->
         match state.CountryData.TryFind(code) with
         | Some cd ->
