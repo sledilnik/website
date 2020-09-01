@@ -473,6 +473,18 @@
         "gatherings10": {
             "title": "Do 10",
             "description": "Okupljanje do 10 osoba, do 50 s popisom sudionika, do 500 ako ih odobri NIJZ"
+        },
+        "allSchools": {
+            "description": "Sve su škole ponovno otvorene za novu školsku godinu",
+            "title": "Škole"
+        },
+        "croatia": {
+            "description": "Hrvatska na crvenoj listi, stroga 14-dnevna karantena pri povratku",
+            "title": "Hrvatska"
+        },
+        "app": {
+            "description": "Program #OstaniZdrav, izdan za Android",
+            "title": "#OstaniZdrav"
         }
     },
     "pageNotFound": {
