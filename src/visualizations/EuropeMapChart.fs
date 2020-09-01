@@ -541,7 +541,10 @@ let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType = Restrictions },
+      ChartType = 
+        match mapToDisplay with
+        | Europe -> Restrictions
+        | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
 let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =

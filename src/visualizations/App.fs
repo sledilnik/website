@@ -272,7 +272,7 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
-    let sloveniaVisualizations =
+    let localVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
@@ -283,16 +283,16 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
-          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
           countriesCasesPer1M; countriesDeathsPer1M
         ]
 
     let embedded, visualizations =
         match state.Page, state.RenderingMode with
-        | ("slovenia", Normal) ->
+        | ("local", Normal) ->
             false,
-            sloveniaVisualizations
+            localVisualizations
             |> List.filter (fun viz -> not viz.Explicit)
         | ("world", Normal) ->
             false,
