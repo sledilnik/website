@@ -320,6 +320,10 @@
         "croatia": {
             "title": "Hrvaška",
             "description": "Hrvaška uvrščena na rdeči seznam, obvezna 14 dnevna karantena pri povratku"
+        },
+        "allSchools": {
+            "title": "Šole",
+            "description": "Vse šole odprte za novo šolsko leto"
         }
     },
     "phase": {
