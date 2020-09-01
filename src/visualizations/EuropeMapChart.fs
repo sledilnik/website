@@ -13,8 +13,10 @@ open Browser
 open Highcharts
 open Types
 
-let geoJsonUrl = "/maps/world-robinson.geo.json"
-//let geoJsonUrl = "/maps/europe.geo.json"
+type MapToDisplay = Europe | World
+
+let europeGeoJsonUrl = "/maps/europe.geo.json"
+let worldGeoJsonUrl = "/maps/world-robinson.geo.json"
 
 type GeoJson = RemoteData<obj, string>
 
@@ -46,7 +48,8 @@ type ChartType =
         | Restrictions -> I18N.t "charts.europe.restrictions"
 
 type State =
-    { GeoJson: GeoJson
+    { MapToDisplay : MapToDisplay
+      GeoJson: GeoJson
       OwdData: OwdData
       CountryData: CountriesMap
       ChartType: ChartType }
@@ -493,9 +496,9 @@ let importedFrom =
 
 let importedDate = DateTime(2020, 8, 23)
 
-let loadGeoJson =
+let loadEuropeGeoJson =
     async {
-        let! (statusCode, response) = Http.get geoJsonUrl
+        let! (statusCode, response) = Http.get europeGeoJsonUrl
 
         if statusCode <> 200 then
             return GeoJsonLoaded
@@ -511,10 +514,29 @@ let loadGeoJson =
                             |> Failure)
     }
 
-let init (regionsData: StatsData): State * Cmd<Msg> =
+let loadWorldGeoJson =
+    async {
+        let! (statusCode, response) = Http.get worldGeoJsonUrl
+
+        if statusCode <> 200 then
+            return GeoJsonLoaded
+                       (sprintf "Error loading map: %d" statusCode
+                        |> Failure)
+        else
+            try
+                let data = response |> Fable.Core.JS.JSON.parse
+                return GeoJsonLoaded(data |> Success)
+            with ex ->
+                return GeoJsonLoaded
+                           (sprintf "Error loading map: %s" ex.Message
+                            |> Failure)
+    }
+
+let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
-    { GeoJson = NotAsked
+    { MapToDisplay = mapToDisplay 
+      GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
       ChartType = Restrictions },
@@ -585,7 +607,12 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
-    | GeoJsonRequested -> { state with GeoJson = Loading }, Cmd.OfAsync.result loadGeoJson
+    | GeoJsonRequested -> 
+        let cmd = 
+            match state.MapToDisplay with
+            | Europe -> Cmd.OfAsync.result loadEuropeGeoJson
+            | World -> Cmd.OfAsync.result loadWorldGeoJson
+        { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
         let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
@@ -811,5 +838,5 @@ let render (state: State) dispatch =
                     prop.children [ chart ] ] ] ]
 
 
-let mapChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("EuropeMapChart", init props.data, update, render)
+let mapChart (mapToDisplay: MapToDisplay) =
+    React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)

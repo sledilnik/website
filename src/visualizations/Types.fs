@@ -112,6 +112,7 @@ type VisualizationType =
     | AgeGroupsTimeline
     | Map
     | EuropeMap
+    | WorldMap
     | Infections
     | CountriesCasesPer1M
     | CountriesDeathsPer1M

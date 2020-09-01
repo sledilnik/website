@@ -316,6 +316,9 @@
             "statusRed": "strict 14 day quarantine",
             "noData": "No data"
         },
+        "world": {
+            "title": "COVID-19 Situation in the world"
+        },
         "municipalities": {
             "title": "Cases by Municipalities",
             "viewLast": "Last",
