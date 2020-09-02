@@ -438,7 +438,7 @@ Zato je treba te kategorije jemati z védenjem, kaj pomenijo, in interpretirati 
 
 </details>
 
-<!--<details>
+<details>
   <summary id=chart-percentage>Kako računate odstotni (%) prirast? </summary>
 
 Za odstotni prirast vzamemo trenutno vrednost spremenljivke in od nje odštejemo stanje prejšnjega dne. Dobljeno razliko delimo s stanjem prejšnjega dne in jo pomnožimo s 100, da dobimo odstotni prirast, ki ga za potrebe predstavitve zaokrožimo na eno decimalko natančno.
@@ -461,7 +461,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 
 Čas podvojitve kot kazalec hitrosti širjenja epidemije se spreminja (pada, raste), zato ga ne smemo preprosto projicirati v prihodnost; kaže nam zgolj trenutno hitrost podvajanja primerov na podlagi podatkov iz preteklosti.
 
-</details>-->
+</details>
 
 ## O projektu
 
