@@ -242,7 +242,7 @@
         "VCT": "Sveti Vincent i Grenadini",
         "VEN": "Venezuela",
         "VGB": "Britanski Djevičanski otoci",
-        "VIR": "Američki Djevičanski otoci",
+        "VIR": "Američki Djevičanski otoci, SAD",
         "VNM": "Vijetnam",
         "VUT": "Vanuatu",
         "WLF": "Wallis i Futuna",
@@ -252,7 +252,7 @@
         "YEM": "Jemen",
         "ZAF": "Južnoafrička Republika",
         "ZMB": "Zambija",
-        "ZWE": "Zimbabve"        
+        "ZWE": "Zimbabve"
     },
     "country-groups": {
         "groupCriticalEU": "Kritične države (EU)",
@@ -363,7 +363,7 @@
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
             "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
@@ -540,6 +540,9 @@
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka"
+        },
+        "world": {
+            "title": "COVID-19 stanje u svijetu"
         }
     },
     "shortMonth": {
@@ -875,7 +878,7 @@
     "notice": {
         "newChart": "Novi grafikon:",
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
-        "newsText": "Koronavirus u svijetu – uspoređivanje širenja zaraze po državama",
+        "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
         "newPage": "Nova stranica:"
     },
     "timestamp": {
