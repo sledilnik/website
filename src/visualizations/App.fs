@@ -248,7 +248,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
-            ClassName = "countries-chart"
+            ClassName = "countries-cases-chart"
             ChartTextsGroup = "countriesNewCasesPer1M"
             Explicit = false
             Renderer =
@@ -261,7 +261,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let countriesDeathsPer1M =
           { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-chart"
+            ClassName = "countries-deaths-chart"
             ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
