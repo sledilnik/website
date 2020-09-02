@@ -407,7 +407,7 @@
         "NMA": "Qipro",
         "POL": "Poloni",
         "PRT": "Portugali",
-        "RKS": "Kosovë",
+        "XKX": "Kosovë",
         "SMR": "San Marino",
         "UKR": "Ukrainë",
         "VAT": "Vatikan"
@@ -690,7 +690,7 @@
     "mk": {
         "hospital": {
             "mksk": "Spitali i montuar",
-            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë, Prilep dhe Gostivar",
+            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë, Prilep, Gostivar, Strumicë dhe Strugë",
             "stip": "Shtip",
             "bitola": "Manastir",
             "gob8sep": "SPQ 8 Shtatori",
