@@ -257,7 +257,7 @@
         "TZA": "Tansania, Vereinigte Republik",
         "UGA": "Uganda",
         "UKR": "Ukraine",
-        "UMI": "United States Minor Outlying Islands",
+        "UMI": "Kleinere abgelegene Inseln der Vereinigten Staaten",
         "URY": "Uruguay",
         "USA": "Vereinigte Staaten",
         "UZB": "Usbekistan",
@@ -275,7 +275,7 @@
         "YEM": "Jemen",
         "ZAF": "Südafrika",
         "ZMB": "Sambia",
-        "ZWE": "Simbabwe"        
+        "ZWE": "Simbabwe"
     },
     "charts": {
         "spread": {
@@ -337,7 +337,7 @@
         "ageGroups": {
             "age": "Alter",
             "female": "Frauen",
-            "confirmedCasesPerPopulation": "Bestätigte Fälle",
+            "confirmedCasesPerPopulation": "Bestätigte Fälle pro Bevölkerung",
             "deceasedPerPopulation": "Todesfälle pro Bevölkerung",
             "shareOfDeceasedConfirmedCases": "Anzahl Todesfälle in bestätigten Fällen",
             "deceased": "Todesfälle",
@@ -564,6 +564,9 @@
             "legendTitle": "Neue Fälle pro 1 Million Menschen",
             "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
             "title": "Länder: Neue Fälle pro 1 Million Menschen"
+        },
+        "world": {
+            "title": "COVID-19 Situation auf der Welt"
         }
     },
     "tableDict": {
@@ -773,7 +776,7 @@
     "notice": {
         "newChart": "Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
-        "newsText": "Coronavirus weltweit – Vergleich der Verbreitung in verschiedenen Ländern",
+        "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
         "newPage": "Neue Seite:"
     },
     "timestamp": {
