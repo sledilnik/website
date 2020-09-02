@@ -42,7 +42,7 @@ To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del po
 <details>
   <summary id=other-countries>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Na Sledilnikovi glavni strani je čisto spodaj na voljo [Primerjava po državah](/sl/stats#countries-chart), ki kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Graf prikazuje primerjave kronološko, zgoraj je mogoče pogled spremeniti pregled *od prve smrti* oziroma *od prve smrti na milijon prebivalcev*. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.     
+Na Sledilnikovi strani [Svet](/sl/world) je na voljo zemljevid sveta, ki prikazuje [Stanje COVID-19 v svetu](/sl/world#world-chart). Na tej strani sta tudi grafa [Države: potrjeno okuženi na milijon prebivalcev](/sl/world#countries-cases-chart) in [Države: umrli (skupaj) na milijon prebivalcev](/sl/world#countries-deaths-chart), ki kaže primerjavo med Slovenijo in različnimi skupinami držav glede na potrjeno okužene in število smrti zaradi COVID-19 na milijon prebivalcev.      
 
 Za podrobnejše primerjave, ki upoštevajo še druge kategorije razen umrlih, si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](/sl/links).
 
@@ -404,7 +404,7 @@ Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega s
 
 [Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
 
-*Opomba: [NIJZ podatke o uvoženih primerih] objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
 
 Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
 
@@ -421,9 +421,27 @@ Demografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila
 </details>
 
 <details>
-  <summary id=countries-chart>Kaj kaže graf "Primerjava po državah"?</summary>
+  <summary id=world-chart>Kaj nam kaže "Stanje COVID-19 v svetu"?</summary>
 
-[Graf](/sl/stats#countries-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Graf prikazuje primerjave kronološko, zgoraj je mogoče pogled spremeniti pregled *od prve smrti* oziroma *od prve smrti na milijon prebivalcev*. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
+[Stanje COVID-19 v svetu](/sl/world#world-chart) nam v osnovnem pogledu *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
+
+Pogled *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
+
+*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+
+</details>
+
+<details>
+  <summary id=countries-cases-chart>Kaj kaže graf "Države: potrjeno okuženi na milijon prebivalcev"?</summary>
+
+[Graf](/sl/world#countries-cases-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število potrjeno okuženih na milijon prebivalcev. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
+
+</details>
+
+<details>
+  <summary id=countries-deaths-chart>Kaj kaže graf "Države: umrli (skupaj) na milijon prebivalcev"?</summary>
+
+[Graf](/sl/world#countries-deaths-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
 
 </details>
 
