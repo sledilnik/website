@@ -313,7 +313,7 @@ let worldCountries =
         "ZMB"
         "ZWE"
         "ALA"
-        "RKS"
+        "XKX"
     ]
     
 let euCountries =
@@ -364,7 +364,7 @@ let euCountries =
       "UKR"
       "GBR"
       "VAT"
-      "RKS"
+      "XKX"
       "NCY"
       "NMA" ]
 
@@ -433,7 +433,7 @@ let redCountries =
             ("KGZ", "")
             ("CHN", "")
             ("COL", "")
-            ("RKS", "")
+            ("XKX", "")
             ("CRI", "")
             ("KWT", "")
             ("LBN", "")
@@ -475,7 +475,7 @@ let importedFrom =
         [ 
             ("HRV", 92)
             ("BIH", 14)
-            ("RKS", 9)
+            ("XKX", 9)
             ("AUT", 5)
             ("ITA", 3)
             ("ESP", 2)
@@ -549,7 +549,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
         let fixedCode =
-            if code = "OWID_KOS" then "RKS" else code // hack for Kosovo code
+            if code = "OWID_KOS" then "XKX" else code // hack for Kosovo code
 
         let country = I18N.tt "country" code // TODO: change country code in i18n for Kosovo
 
@@ -611,7 +611,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
     let owdCountries =
         state.Countries
-        |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
+        |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
 
     match msg with
     | GeoJsonRequested -> 
