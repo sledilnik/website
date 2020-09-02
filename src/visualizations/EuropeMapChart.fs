@@ -13,7 +13,10 @@ open Browser
 open Highcharts
 open Types
 
-let geoJsonUrl = "/maps/europe.geo.json"
+type MapToDisplay = Europe | World
+
+let europeGeoJsonUrl = "/maps/europe.geo.json"
+let worldGeoJsonUrl = "/maps/world-robinson.geo.json"
 
 type GeoJson = RemoteData<obj, string>
 
@@ -45,7 +48,9 @@ type ChartType =
         | Restrictions -> I18N.t "charts.europe.restrictions"
 
 type State =
-    { GeoJson: GeoJson
+    { MapToDisplay : MapToDisplay
+      Countries : string list
+      GeoJson: GeoJson
       OwdData: OwdData
       CountryData: CountriesMap
       ChartType: ChartType }
@@ -57,7 +62,261 @@ type Msg =
     | OwdDataReceived of OwdData
     | ChartTypeChanged of ChartType
 
-let countries =
+let worldCountries =
+    [
+        "AFG"
+        "ALB"
+        "DZA"
+        "ASM"
+        "AND"
+        "AGO"
+        "AIA"
+        "ATA"
+        "ATG"
+        "ARG"
+        "ARM"
+        "ABW"
+        "AUS"
+        "AUT"
+        "AZE"
+        "BHS"
+        "BHR"
+        "BGD"
+        "BRB"
+        "BLR"
+        "BEL"
+        "BLZ"
+        "BEN"
+        "BMU"
+        "BTN"
+        "BOL"
+        "BES"
+        "BIH"
+        "BWA"
+        "BVT"
+        "BRA"
+        "IOT"
+        "BRN"
+        "BGR"
+        "BFA"
+        "BDI"
+        "CPV"
+        "KHM"
+        "CMR"
+        "CAN"
+        "CYM"
+        "CAF"
+        "TCD"
+        "CHL"
+        "CHN"
+        "CXR"
+        "CCK"
+        "COL"
+        "COM"
+        "COD"
+        "COG"
+        "COK"
+        "CRI"
+        "HRV"
+        "CUB"
+        "CUW"
+        "CYP"
+        "CZE"
+        "CIV"
+        "DNK"
+        "DJI"
+        "DMA"
+        "DOM"
+        "ECU"
+        "EGY"
+        "SLV"
+        "GNQ"
+        "ERI"
+        "EST"
+        "SWZ"
+        "ETH"
+        "FLK"
+        "FRO"
+        "FJI"
+        "FIN"
+        "FRA"
+        "GUF"
+        "PYF"
+        "ATF"
+        "GAB"
+        "GMB"
+        "GEO"
+        "DEU"
+        "GHA"
+        "GIB"
+        "GRC"
+        "GRL"
+        "GRD"
+        "GLP"
+        "GUM"
+        "GTM"
+        "GGY"
+        "GIN"
+        "GNB"
+        "GUY"
+        "HTI"
+        "HMD"
+        "VAT"
+        "HND"
+        "HKG"
+        "HUN"
+        "ISL"
+        "IND"
+        "IDN"
+        "IRN"
+        "IRQ"
+        "IRL"
+        "IMN"
+        "ISR"
+        "ITA"
+        "JAM"
+        "JPN"
+        "JEY"
+        "JOR"
+        "KAZ"
+        "KEN"
+        "KIR"
+        "PRK"
+        "KOR"
+        "KWT"
+        "KGZ"
+        "LAO"
+        "LVA"
+        "LBN"
+        "LSO"
+        "LBR"
+        "LBY"
+        "LIE"
+        "LTU"
+        "LUX"
+        "MAC"
+        "MDG"
+        "MWI"
+        "MYS"
+        "MDV"
+        "MLI"
+        "MLT"
+        "MHL"
+        "MTQ"
+        "MRT"
+        "MUS"
+        "MYT"
+        "MEX"
+        "FSM"
+        "MDA"
+        "MCO"
+        "MNG"
+        "MNE"
+        "MSR"
+        "MAR"
+        "MOZ"
+        "MMR"
+        "NAM"
+        "NRU"
+        "NPL"
+        "NLD"
+        "NCL"
+        "NZL"
+        "NIC"
+        "NER"
+        "NGA"
+        "NIU"
+        "NFK"
+        "MNP"
+        "NOR"
+        "OMN"
+        "PAK"
+        "PLW"
+        "PSE"
+        "PAN"
+        "PNG"
+        "PRY"
+        "PER"
+        "PHL"
+        "PCN"
+        "POL"
+        "PRT"
+        "PRI"
+        "QAT"
+        "MKD"
+        "ROU"
+        "RUS"
+        "RWA"
+        "REU"
+        "BLM"
+        "SHN"
+        "KNA"
+        "LCA"
+        "MAF"
+        "SPM"
+        "VCT"
+        "WSM"
+        "SMR"
+        "STP"
+        "SAU"
+        "SEN"
+        "SRB"
+        "SYC"
+        "SLE"
+        "SGP"
+        "SXM"
+        "SVK"
+        "SVN"
+        "SLB"
+        "SOM"
+        "ZAF"
+        "SGS"
+        "SSD"
+        "ESP"
+        "LKA"
+        "SDN"
+        "SUR"
+        "SJM"
+        "SWE"
+        "CHE"
+        "SYR"
+        "TWN"
+        "TJK"
+        "TZA"
+        "THA"
+        "TLS"
+        "TGO"
+        "TKL"
+        "TON"
+        "TTO"
+        "TUN"
+        "TUR"
+        "TKM"
+        "TCA"
+        "TUV"
+        "UGA"
+        "UKR"
+        "ARE"
+        "GBR"
+        "UMI"
+        "USA"
+        "URY"
+        "UZB"
+        "VUT"
+        "VEN"
+        "VNM"
+        "VGB"
+        "VIR"
+        "WLF"
+        "ESH"
+        "YEM"
+        "ZMB"
+        "ZWE"
+        "ALA"
+        "XKX"
+    ]
+    
+let euCountries =
     [ "ALB"
       "AND"
       "AUT"
@@ -105,13 +364,9 @@ let countries =
       "UKR"
       "GBR"
       "VAT"
-      "RKS"
+      "XKX"
       "NCY"
       "NMA" ]
-
-let owdCountries =
-    countries
-    |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
 
 let greenCountries =
     Map.ofList
@@ -178,7 +433,7 @@ let redCountries =
             ("KGZ", "")
             ("CHN", "")
             ("COL", "")
-            ("RKS", "")
+            ("XKX", "")
             ("CRI", "")
             ("KWT", "")
             ("LBN", "")
@@ -220,7 +475,7 @@ let importedFrom =
         [ 
             ("HRV", 92)
             ("BIH", 14)
-            ("RKS", 9)
+            ("XKX", 9)
             ("AUT", 5)
             ("ITA", 3)
             ("ESP", 2)
@@ -236,9 +491,9 @@ let importedFrom =
 
 let importedDate = DateTime(2020, 8, 30)
 
-let loadGeoJson =
+let loadEuropeGeoJson =
     async {
-        let! (statusCode, response) = Http.get geoJsonUrl
+        let! (statusCode, response) = Http.get europeGeoJsonUrl
 
         if statusCode <> 200 then
             return GeoJsonLoaded
@@ -254,13 +509,39 @@ let loadGeoJson =
                             |> Failure)
     }
 
-let init (regionsData: StatsData): State * Cmd<Msg> =
+let loadWorldGeoJson =
+    async {
+        let! (statusCode, response) = Http.get worldGeoJsonUrl
+
+        if statusCode <> 200 then
+            return GeoJsonLoaded
+                       (sprintf "Error loading map: %d" statusCode
+                        |> Failure)
+        else
+            try
+                let data = response |> Fable.Core.JS.JSON.parse
+                return GeoJsonLoaded(data |> Success)
+            with ex ->
+                return GeoJsonLoaded
+                           (sprintf "Error loading map: %s" ex.Message
+                            |> Failure)
+    }
+
+let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
-    { GeoJson = NotAsked
+    { MapToDisplay = mapToDisplay 
+      Countries =
+        match mapToDisplay with
+        | Europe -> euCountries
+        | World -> worldCountries
+      GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType = Restrictions },
+      ChartType = 
+        match mapToDisplay with
+        | Europe -> Restrictions
+        | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
 let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
@@ -268,7 +549,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
         let fixedCode =
-            if code = "OWID_KOS" then "RKS" else code // hack for Kosovo code
+            if code = "OWID_KOS" then "XKX" else code // hack for Kosovo code
 
         let country = I18N.tt "country" code // TODO: change country code in i18n for Kosovo
 
@@ -327,8 +608,18 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> Map.ofList
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
+
+    let owdCountries =
+        state.Countries
+        |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
+
     match msg with
-    | GeoJsonRequested -> { state with GeoJson = Loading }, Cmd.OfAsync.result loadGeoJson
+    | GeoJsonRequested -> 
+        let cmd = 
+            match state.MapToDisplay with
+            | Europe -> Cmd.OfAsync.result loadEuropeGeoJson
+            | World -> Cmd.OfAsync.result loadWorldGeoJson
+        { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
         let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
@@ -348,7 +639,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 
 let mapData state =
-    countries
+    state.Countries
     |> List.map (fun code ->
         match state.CountryData.TryFind(code) with
         | Some cd ->
@@ -554,5 +845,5 @@ let render (state: State) dispatch =
                     prop.children [ chart ] ] ] ]
 
 
-let mapChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("EuropeMapChart", init props.data, update, render)
+let mapChart (mapToDisplay: MapToDisplay) =
+    React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)

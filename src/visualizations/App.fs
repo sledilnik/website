@@ -17,6 +17,7 @@ let init (query: obj) (visualization: string option) (page: string) =
                 match viz with
                 | "Map" -> Some Map
                 | "EuropeMap" -> Some EuropeMap
+                | "WorldMap" -> Some WorldMap
                 | "MetricsComparison" -> Some MetricsComparison
                 | "Patients" -> Some Patients
                 | "Ratios" -> Some Ratios
@@ -129,13 +130,14 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "europe-chart"
             ChartTextsGroup = "europe"
             Explicit = false
-            Renderer =
-               fun state ->
-                   match state.StatsData with
-                   | NotAsked -> Html.none
-                   | Loading -> Utils.renderLoading
-                   | Failure error -> Utils.renderErrorLoading error
-                   | Success data -> lazyView EuropeMap.mapChart {| data = data |} }
+            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.Europe }
+
+    let worldMap =
+          { VisualizationType = WorldMap
+            ClassName = "world-chart"
+            ChartTextsGroup = "world"
+            Explicit = false
+            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.World }
 
     let ageGroupsTimeline =
           { VisualizationType = AgeGroupsTimeline
@@ -246,7 +248,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
-            ClassName = "countries-chart"
+            ClassName = "countries-cases-chart"
             ChartTextsGroup = "countriesNewCasesPer1M"
             Explicit = false
             Renderer =
@@ -259,7 +261,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let countriesDeathsPer1M =
           { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-chart"
+            ClassName = "countries-deaths-chart"
             ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
@@ -270,27 +272,27 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
-    let sloveniaVisualizations =
+    let localVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
         ]
 
     let worldVisualizations =
-        [ europeMap; countriesCasesPer1M; countriesDeathsPer1M ]
+        [ worldMap; countriesCasesPer1M; countriesDeathsPer1M ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
-          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regions
           countriesCasesPer1M; countriesDeathsPer1M
         ]
 
     let embedded, visualizations =
         match state.Page, state.RenderingMode with
-        | ("slovenia", Normal) ->
+        | ("local", Normal) ->
             false,
-            sloveniaVisualizations
+            localVisualizations
             |> List.filter (fun viz -> not viz.Explicit)
         | ("world", Normal) ->
             false,
