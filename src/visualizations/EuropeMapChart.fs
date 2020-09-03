@@ -715,13 +715,14 @@ let renderMap state geoJson owdData =
     let colorAxis =
         {| dataClassColor = "category"
            dataClasses =
-               [| {| from = 0; color = "#ffffb2" |}
+               [| {| from = 0; color = "#ffffcc" |}
+                  {| from = 25; color = "#ffeda0" |}
                   {| from = 50; color = "#fed976" |}
                   {| from = 100; color = "#feb24c" |}
-                  {| from = 160; color = "#fd8d3c" |}
-                  {| from = 320; color = "#fc4e2a" |}
-                  {| from = 400; color = "#e31a1c" |}
-                  {| from = 800; color = "#b10026" |} |] |}
+                  {| from = 200; color = "#fd8d3c" |}
+                  {| from = 400; color = "#fc4e2a" |}
+                  {| from = 800; color = "#e31a1c" |}
+                  {| from = 1600; color = "#b10026" |} |] |}
         |> pojo
 
     let tooltipFormatter jsThis =
