@@ -28,7 +28,7 @@
             <span v-if="field === 'cases.active'" class="out good"
               >{{
                 renderActiveValues(fieldNewCases).lastDay.value -
-                  renderActiveValues(field).lastDay.diff +
+                  renderActiveValues(field).lastDay.diff -
                   renderActiveValues(fieldDeceased).lastDay.value
               }}</span>
             <span v-else class="out good"

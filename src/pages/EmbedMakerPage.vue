@@ -40,12 +40,17 @@ export default {
         },
         "MetricsComparison": {
           value: "MetricsComparison",
-          text: this.$t('charts.metricsComparison.title'),
+          text: this.$t('charts.metricsComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
           dimensions: [1140, 780]
         },
         "EuropeMap": {
           value: "EuropeMap",
           text: this.$t('charts.europe.title'),
+          dimensions: [1140, 780]
+        },
+        "WorldMap": {
+          value: "WorldMap",
+          text: this.$t('charts.world.title'),
           dimensions: [1140, 780]
         },
         "Cases": {

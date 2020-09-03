@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module MunicipalitiesChart
 
+open System
 open Elmish
 open Browser
 open Fable.Core.JsInterop
@@ -244,13 +245,14 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
                                 let aHeight = activeCases * barMaxHeight / maxValue
                                 let dHeight = deceasedToDate * barMaxHeight / maxValue
+                                let dHeightCeiling = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
                                 let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
                                             Html.div [
-                                                prop.style [ style.height dHeight ]
+                                                prop.style [ style.height (int dHeightCeiling) ]
                                                 prop.className "bar--deceased" ]
                                             Html.div [
                                                 prop.style [ style.height rHeight ]
@@ -421,18 +423,41 @@ let renderMunicipalities (state : State) _ =
     (truncatedData |> Seq.map (fun municipality -> renderMunicipality state municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
+
+    let scrollToElement (e: MouseEvent) =
+            e.preventDefault ()
+
+            dispatch ToggleShowAll
+
+            let element =
+                document.getElementById "municipalities-chart"
+
+            let offset = -100.
+
+            let position =
+                element.getBoundingClientRect().top
+                + window.pageYOffset
+                + offset
+
+            if showAll then
+                window.scrollTo
+                    ({| top = position
+                        behavior = "auto" |}
+                     |> unbox) // behavior = smooth | auto
+
     Html.div [
         prop.className "show-all"
         prop.children [
             Html.div [
-                Html.button [
+                Html.a [
                     prop.className "btn btn-primary"
                     prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
-                    prop.onClick (fun _ -> dispatch ToggleShowAll)
+                    prop.onClick scrollToElement
                 ]
             ]
         ]
     ]
+
 
 let renderSearch (query : string) dispatch =
     Html.input [

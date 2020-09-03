@@ -11,7 +11,7 @@ updates:
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     open-pull-requests-limit: 10
     reviewers:
       - miaerbus
@@ -21,25 +21,17 @@ updates:
   - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     open-pull-requests-limit: 10
     reviewers:
       - overlordtm
       - stefanb
 
-  - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/src/visualizations" # Location of package manifests
-    schedule:
-      interval: "daily"
-    open-pull-requests-limit: 10
-    reviewers:
-      - joahim
-      - breki
-
+  # Note: tests/Visualizations.Tests/Visualizations.Tests.fsproj includes src/visualizations/App.fsproj via ProjectReference
   - package-ecosystem: "nuget" # See documentation for possible values
     directory: "/tests/Visualizations.Tests" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
     open-pull-requests-limit: 10
     reviewers:
       - joahim
