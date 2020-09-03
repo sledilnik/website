@@ -40,7 +40,6 @@
             "full": "Të plotësuar"
         },
         "countries": {
-            "groupNeighbouringWoItaly": "Shtetet e rajonit",
             "groupNeighbouring": "Shtetet e rajonit",
             "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
             "groupCriticalEU": "Shtete kritike (BE)",
@@ -826,7 +825,6 @@
         }
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Shtetet fqinje (përveç Italisë)",
         "groupNeighbouring": "Shtetet fqinje",
         "groupCriticalEU": "Shtetet kritike (BE)",
         "groupCriticalWorld": "Shtetet kritike (Botë)",

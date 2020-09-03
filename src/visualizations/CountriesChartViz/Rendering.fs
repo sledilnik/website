@@ -14,8 +14,8 @@ open Types
 open I18N
 
 let countriesDisplaySets = [|
-    { Label = "groupNeighbouringWoItaly"
-      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SVK" |]
+    { Label = "groupNeighbouring"
+      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
     }
     { Label = "groupCriticalEU"
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
