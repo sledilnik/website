@@ -387,7 +387,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "okolica",
-        "groupNeighbouringWoItaly": "okolica (brez Italije)",
         "groupCriticalEU": "kritične države (EU)",
         "groupCriticalWorld": "kritične države (svet)",
         "groupNordic": "nordijske države",

@@ -486,7 +486,6 @@
             "daysFromOneDeathPerMillion": "Anzahl Tage seit dem erstem Todesfall per 1 Million Menschen",
             "groupNeighbouring": "Nachbarländer",
             "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen",
-            "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
             "groupCriticalEU": "Kritische Länder (EU)",
             "sinceFirstDeath": "Seit erstem Todesfall"
         },
@@ -1003,7 +1002,6 @@
         "in_x_days_plural": "in {{ count }} Tagen"
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
         "groupNeighbouring": "Nachbarländer",
         "groupCriticalEU": "Kritische Länder (EU)",
         "groupCriticalWorld": "Kritische Länder (Welt)",

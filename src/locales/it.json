@@ -147,7 +147,6 @@
         "notFound": "404: pagina non trovata"
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Paesi limitrofi (Italia esclusa)",
         "groupNeighbouring": "Paesi limitrofi",
         "groupCriticalEU": "Paesi critici (UE)",
         "groupCriticalWorld": "Paesi critici (Mondo)",
