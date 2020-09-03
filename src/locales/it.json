@@ -304,7 +304,7 @@
         "MKD": "Macedonia del Nord",
         "MLI": "Mali",
         "MLT": "Malta",
-        "MMR": "Birmania  Myanmar",
+        "MMR": "Myanmar (Birmania)",
         "MNE": "Montenegro",
         "MNG": "Mongolia",
         "MNP": "Isole Marianne Settentrionali",
@@ -409,7 +409,7 @@
         "YEM": "Yemen",
         "ZAF": "Sudafrica",
         "ZMB": "Zambia",
-        "ZWE": "Zimbabwe"        
+        "ZWE": "Zimbabwe"
     },
     "region": {
         "kr": "Gorenjska",
@@ -537,6 +537,12 @@
         "firstCase": {
             "title": "1° caso",
             "description": "Primo caso confermato:<br>turista di ritorno dal Marocco"
+        },
+        "allSchools": {
+            "title": "Scuole"
+        },
+        "croatia": {
+            "title": "Croazia"
         }
     },
     "tableDict": {
@@ -860,6 +866,9 @@
             "dsMZ": "Ministero della Salute",
             "dsNIJZ": "NIJZ",
             "dataSource": "origine dei dati"
+        },
+        "world": {
+            "title": "COVID-19 Situazione nel mondo"
         }
     },
     "footer": {
