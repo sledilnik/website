@@ -158,10 +158,52 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
                             Cases = Some cases }
         }
 
+    let regDataMap =
+        seq {
+            for regionsDataPoint in regionsData do
+                for region in regionsDataPoint.Regions do
+                    yield {| Date = regionsDataPoint.Date
+                             RegionKey = region.Name
+                             TotalConfirmedCases = 
+                                region.Municipalities 
+                                 |> Seq.sumBy (fun municipality -> municipality.ConfirmedToDate |> Option.defaultValue 0)
+                             TotalDeceasedCases =
+                                region.Municipalities 
+                                |> Seq.sumBy (fun municipality -> municipality.DeceasedToDate |> Option.defaultValue 0) |} }
+        |> Seq.groupBy (fun dp -> dp.RegionKey)
+        |> Seq.map (fun (regionKey, dp) ->
+            let totalCases =
+                dp
+                |> Seq.map (fun dp ->
+                    { Date = dp.Date
+                      TotalConfirmedCases = Some dp.TotalConfirmedCases
+                      TotalDeceasedCases = Some dp.TotalDeceasedCases } )
+                |> Seq.sortBy (fun dp -> dp.Date)
+            ( regionKey, totalCases ) )
+        |> Map.ofSeq
+
+    let regData =
+        seq {
+            for region in Utils.Dictionaries.regions do
+                match Map.tryFind region.Key regDataMap with
+                | None ->
+                    yield { Id = region.Key
+                            Code = region.Value.Key
+                            Name = region.Value.Name
+                            Population = region.Value.Population |> Option.defaultValue 0
+                            Cases = None }
+                | Some cases ->
+                    yield { Id = region.Key
+                            Code = region.Value.Key
+                            Name = region.Value.Name
+                            Population = region.Value.Population |> Option.defaultValue 0
+                            Cases = Some cases }
+        }
+
     let data = 
         match mapToDisplay with
         | Municipality -> munData
-        | Region -> munData  // TODO: regionData
+        | Region -> regData 
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
@@ -263,7 +305,7 @@ let seriesData (state : State) =
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
                         scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| isoid = areaData.Code ; area = areaData.Name ; value = value ; label = label |}
+            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label |}
     } |> Seq.toArray
 
 let renderMap (state : State) =
@@ -275,12 +317,17 @@ let renderMap (state : State) =
     | Success geoJson ->
         let data = seriesData state
 
+        let key = 
+            match state.MapToDisplay with
+            | Municipality -> "isoid"
+            | Region -> "code"
+
         let series geoJson =
             {| visible = true
                mapData = geoJson
                data = data
-               keys = [| "isoid" ; "value" |]  // TODO: code
-               joinBy = "isoid"
+               keys = [| "code" ; "value" |]
+               joinBy = [| key ; "code" |]
                nullColor = "white"
                borderColor = "#888"
                borderWidth = 0.5
