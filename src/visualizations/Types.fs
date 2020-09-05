@@ -111,6 +111,7 @@ type VisualizationType =
     | AgeGroups
     | AgeGroupsTimeline
     | Map
+    | RegionMap
     | EuropeMap
     | WorldMap
     | Infections

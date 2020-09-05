@@ -302,6 +302,9 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases"
         },
+        "rmap": {
+            "title": "Region Map"
+        },
         "europe": {
             "title": "COVID-19 Situation in Europe",
             "twoWeekIncidence": "14 days incidence per million",

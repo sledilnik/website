@@ -101,6 +101,20 @@ let loadMunGeoJson =
                 | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
+let loadRegGeoJson =
+    async {
+        let! (statusCode, response) = Http.get regGeoJsonUrl
+
+        if statusCode <> 200 then
+            return GeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
+        else
+            try
+                let data = response |> Fable.Core.JS.JSON.parse
+                return GeoJsonLoaded (data |> Success)
+            with
+                | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
+    }
+
 let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd<Msg> =
     let dataTimeInterval = LastDays 14
 
@@ -159,8 +173,12 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | GeoJsonRequested ->
-        { state with GeoJson = Loading }, Cmd.OfAsync.result loadMunGeoJson
+    | GeoJsonRequested -> 
+        let cmd = 
+            match state.MapToDisplay with
+            | Municipality -> Cmd.OfAsync.result loadMunGeoJson
+            | Region -> Cmd.OfAsync.result loadRegGeoJson
+        { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson ->
         { state with GeoJson = geoJson }, Cmd.none
     | DataTimeIntervalChanged dataTimeInterval ->
