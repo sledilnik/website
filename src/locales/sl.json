@@ -739,6 +739,9 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
         },
+        "rmap": {
+            "title": "Zemljevid po regijah"
+        },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
             "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",

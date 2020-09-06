@@ -98,6 +98,11 @@ export default {
           text: this.$t('charts.map.title'),
           dimensions: [1140, 820]
         },
+        "RegionMap": {
+          value: "RegionMap",
+          text: this.$t('charts.rmap.title'),
+          dimensions: [1140, 820]
+        },
         "Municipalities": {
           value: "Municipalities",
           text: this.$t('charts.municipalities.title'),
