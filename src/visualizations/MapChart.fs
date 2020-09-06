@@ -68,6 +68,7 @@ let dataTimeIntervals =
     [ LastDays 1
       LastDays 7
       LastDays 14
+      LastDays 21
       Complete ]
 
 type GeoJson = RemoteData<obj, string>
