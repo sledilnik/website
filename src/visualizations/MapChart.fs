@@ -8,8 +8,10 @@ open Fable.SimpleHttp
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Fable.Core.JsInterop
 open Browser
 
+open Highcharts
 open Types
 
 type MapToDisplay = Municipality | Region
@@ -189,14 +191,14 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
                 match Map.tryFind region.Key regDataMap with
                 | None ->
                     yield { Id = region.Key
-                            Code = region.Value.Key
-                            Name = region.Value.Name
+                            Code = region.Key
+                            Name = I18N.tt "region" region.Key
                             Population = region.Value.Population |> Option.defaultValue 0
                             Cases = None }
                 | Some cases ->
                     yield { Id = region.Key
-                            Code = region.Value.Key
-                            Name = region.Value.Name
+                            Code = region.Key
+                            Name = I18N.tt "region" region.Key
                             Population = region.Value.Population |> Option.defaultValue 0
                             Cases = Some cases }
         }
@@ -309,6 +311,7 @@ let seriesData (state : State) =
             {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label |}
     } |> Seq.toArray
 
+
 let renderMap (state : State) =
 
     match state.GeoJson with
@@ -336,11 +339,13 @@ let renderMap (state : State) =
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-               tooltip =
-                {| distance = 50
-                   headerFormat = "<b>{point.key}</b><br>"   // TODO: localized name
-                   pointFormat = "{point.label}" |}
-            |}
+           |}
+
+        let tooltipFormatter jsThis =
+            let points = jsThis?point
+            let area = points?area
+            let label = points?label
+            sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
         let maxColor =
@@ -355,6 +360,12 @@ let renderMap (state : State) =
             series = [| series geoJson |]
             legend = {| enabled = false |}
             colorAxis = {| minColor = "white" ; maxColor = maxColor |}
+            tooltip = 
+                {| 
+                    formatter = fun () -> tooltipFormatter jsThis
+                    useHTML = true
+                    distance = 50 
+                |} |> pojo
             credits =
                 {|
                     enabled = true
