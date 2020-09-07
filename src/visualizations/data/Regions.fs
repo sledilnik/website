@@ -82,5 +82,5 @@ let load =
                 let data = parseRegionsData response
                 return RegionsDataLoaded (Success data)
             with
-                | ex -> return RegionsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" ex.Message |> Failure)
+                | ex -> return RegionsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" (ex.Message.Substring(0, 1000)) |> Failure)
     }

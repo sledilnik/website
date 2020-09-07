@@ -151,6 +151,9 @@
         "gatherings50": {
             "description": "Собирање до 50 луѓе, до 500 со одобрение на ИЈЗ",
             "title": "До 50"
+        },
+        "croatia": {
+            "title": "Хрватска"
         }
     },
     "country": {
@@ -413,7 +416,6 @@
         "groupEastAsiaOceania": "Источна Азија и Океанија",
         "groupCriticalEU": "Критични држави (ЕУ)",
         "groupCriticalWorld": "Критични држави (на светско ниво)",
-        "groupNeighbouringWoItaly": "Држави од регионот",
         "groupNeighbouring": "Држави од регионот",
         "groupExYu": "Држави од бивша Југославија",
         "groupLatinAmerica": "Латинска Америка"

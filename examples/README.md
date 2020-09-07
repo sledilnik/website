@@ -22,6 +22,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
+| Zemljevid po regijah | https://covid-19.sledilnik.org/embed.html#/chart/RegionMap |
 | Zemljevid po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Primeri po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
 | Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |

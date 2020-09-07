@@ -40,7 +40,6 @@
             "full": "Të plotësuar"
         },
         "countries": {
-            "groupNeighbouringWoItaly": "Shtetet e rajonit",
             "groupNeighbouring": "Shtetet e rajonit",
             "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
             "groupCriticalEU": "Shtete kritike (BE)",
@@ -410,7 +409,21 @@
         "XKX": "Kosovë",
         "SMR": "San Marino",
         "UKR": "Ukrainë",
-        "VAT": "Vatikan"
+        "VAT": "Vatikan",
+        "BRB": "Barbados",
+        "BMU": "Bermuda",
+        "BLM": "Shën Bartolome",
+        "BHR": "Bahrein",
+        "BFA": "Burkina Faso",
+        "BEN": "Benin",
+        "AZE": "Azerbajxhan",
+        "ATF": "Territoret Jugore Franceze",
+        "ASM": "Samoa Amerikane",
+        "ARE": "Emiratet e Bashkuara Arabe",
+        "AIA": "Anguila",
+        "AFG": "Afganistan",
+        "ABW": "Aruba",
+        "ZWE": "Zimbabve"
     },
     "meta": {
         "description": "COVID-19 Treker Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
@@ -562,6 +575,12 @@
         "gatherings10": {
             "description": "Grumbullim deri në 10 persona, deri në 50 me listë të të pranishmëve, deri në 500 nëse është miratuar nga ISHP",
             "title": "Deri 10"
+        },
+        "allSchools": {
+            "title": "Shkolla"
+        },
+        "croatia": {
+            "title": "Kroaci"
         }
     },
     "tableDict": {
@@ -806,7 +825,6 @@
         }
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Shtetet fqinje (përveç Italisë)",
         "groupNeighbouring": "Shtetet fqinje",
         "groupCriticalEU": "Shtetet kritike (BE)",
         "groupCriticalWorld": "Shtetet kritike (Botë)",
