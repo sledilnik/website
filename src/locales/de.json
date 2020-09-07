@@ -449,7 +449,7 @@
             "confirmedCases": "Bestätigte Fälle",
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
-            "title": "Karte der Gemeinden",
+            "title": "Gemeindekarte",
             "all": "Alle"
         },
         "metricsComparison": {
@@ -566,6 +566,9 @@
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
+        },
+        "rmap": {
+            "title": "Regionalkarte"
         }
     },
     "tableDict": {
