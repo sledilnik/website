@@ -9,7 +9,7 @@ RUN NODE_ENV=production CADDY_BUILD=1 yarn build
 ########################################
 # webserver image
 ########################################
-FROM caddy:2.0.0-rc.3-alpine
+FROM caddy:2.1.1-alpine
 
 WORKDIR /app
 COPY --from=builder /app/dist /app
