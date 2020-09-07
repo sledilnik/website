@@ -28,7 +28,7 @@
     "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "vue": "^2.6.10",
+    "vue": "^2.6.12",
     "vue-clickaway": "^2.2.2",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.1.6",
@@ -54,7 +54,7 @@
     "remotedev": "^0.2.9",
     "sass": "^1.26.10",
     "sass-loader": "^8.0.2",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,
