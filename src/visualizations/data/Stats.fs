@@ -125,5 +125,5 @@ let load =
                 let data = parseStatsData response
                 return StatsDataLoaded (Success data)
             with
-                | ex -> return StatsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" ex.Message |> Failure)
+                | ex -> return StatsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" (ex.Message.Substring(0, 1000)) |> Failure)
     }
