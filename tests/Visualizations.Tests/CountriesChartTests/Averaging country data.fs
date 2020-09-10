@@ -21,6 +21,7 @@ let ``Calculates centered moving average of country entries data``() =
                           newCases, newCases1M) ->
             { Date = DateTime.Parse(dateStr)
               TotalCases = cases; TotalCasesPerMillion = cases1M
+              ActiveCases = 0.; ActiveCasesPerMillion = 0.
               NewCases = newCases; NewCasesPerMillion = newCases1M
               TotalDeaths = deaths; TotalDeathsPerMillion = deaths1M
             })
