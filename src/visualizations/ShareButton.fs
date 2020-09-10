@@ -32,7 +32,6 @@ let dropdown (viz: Visualization) =
             | CountriesCasesPer1M -> (1140, 740)
             | CountriesActiveCasesPer1M -> (1140, 740)
             | CountriesDeathsPer1M -> (1140, 740)
-            | _ -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"
