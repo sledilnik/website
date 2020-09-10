@@ -215,6 +215,10 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                             align = "middle"
                             text = chartData.YAxisTitle
                         |}
+                   plotLines = 
+                       match state.MetricToDisplay with
+                       | ActiveCasesPer1M -> [| {| value=400.0; label={| text=I18N.t "charts.countriesActiveCasesPer1M.red"; align="left"; color="red" |}; color="red" ; width=1; dashStyle="longdashdot"; zIndex=9 |} |]
+                       | _ -> [| |]
             |}
         plotOptions = pojo
             {|

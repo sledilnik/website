@@ -364,6 +364,12 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
+        "countriesActiveCasesPer1M": {
+            "title": "Countries: Active Cases Per 1 Million People",
+            "yAxisTitle": "Active cases per 1 million people",
+            "legendTitle": "Active cases per 1M people",
+            "red": "criteria for red list"
+        },
         "countriesNewCasesPer1M": {
             "title": "Countries: New Cases Per 1 Million People",
             "yAxisTitle": "New cases per 1 million people",
