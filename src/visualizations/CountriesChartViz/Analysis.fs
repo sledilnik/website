@@ -66,7 +66,7 @@ let calculateActiveCases (countryEntries: CountryDataDayEntry[]) =
     for i in 0 .. entriesCount-1 do
         runningActiveCases <-
             runningActiveCases + countryEntries.[i].NewCasesPerMillion
-        if i >= 24 then
+        if i >= 14 then
             runningActiveCases <-
                 runningActiveCases - countryEntries.[i - 24].NewCasesPerMillion
 
