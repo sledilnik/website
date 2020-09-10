@@ -276,7 +276,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let countriesActiveCasesPer1M =
           { VisualizationType = CountriesActiveCasesPer1M
-            ClassName = "countries-cases-chart"
+            ClassName = "countries-active-chart"
             ChartTextsGroup = "countriesActiveCasesPer1M"
             Explicit = false
             Renderer =
@@ -307,8 +307,8 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let worldVisualizations =
-        [ worldMap; countriesCasesPer1M
-          countriesActiveCasesPer1M; countriesDeathsPer1M ]
+        [ worldMap; countriesActiveCasesPer1M
+          countriesCasesPer1M; countriesDeathsPer1M ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
