@@ -68,7 +68,7 @@ let calculateActiveCases (countryEntries: CountryDataDayEntry[]) =
             runningActiveCases + countryEntries.[i].NewCasesPerMillion
         if i >= 14 then
             runningActiveCases <-
-                runningActiveCases - countryEntries.[i - 24].NewCasesPerMillion
+                runningActiveCases - countryEntries.[i - 14].NewCasesPerMillion
 
         countryEntries.[i] <-
             countryEntries.[i] |> setActiveCases runningActiveCases
