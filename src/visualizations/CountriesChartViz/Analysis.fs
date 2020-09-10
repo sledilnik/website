@@ -8,6 +8,8 @@ type CountryDataDayEntry = {
     Date: DateTime
     NewCases: float
     NewCasesPerMillion : float
+    ActiveCases: float
+    ActiveCasesPerMillion: float
     TotalCases: float
     TotalCasesPerMillion : float
     TotalDeaths: float
@@ -29,6 +31,8 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
           NewCasesPerMillion =
               entryRaw.NewCasesPerMillion
               |> Option.defaultValue 0.
+          ActiveCases = 0.
+          ActiveCasesPerMillion = 0.
           TotalCases = float entryRaw.TotalCases
           TotalCasesPerMillion =
               entryRaw.TotalCasesPerMillion
@@ -51,6 +55,25 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
 
         (isoCode, { IsoCode = isoCode; Entries = countryEntries } )
     ) |> Map.ofSeq
+
+let calculateActiveCases (countryEntries: CountryDataDayEntry[]) =
+    let setActiveCases activeCasesPer1M entry =
+        { entry with ActiveCasesPerMillion = activeCasesPer1M }
+
+    let entriesCount = countryEntries.Length
+
+    let mutable runningActiveCases = 0.
+    for i in 0 .. entriesCount-1 do
+        runningActiveCases <-
+            runningActiveCases + countryEntries.[i].NewCasesPerMillion
+        if i >= 24 then
+            runningActiveCases <-
+                runningActiveCases - countryEntries.[i - 24].NewCasesPerMillion
+
+        countryEntries.[i] <-
+            countryEntries.[i] |> setActiveCases runningActiveCases
+
+    countryEntries
 
 let calculateMovingAverages
     daysOfMovingAverage
@@ -93,14 +116,15 @@ let calculateMovingAverages
             averages.[index - (daysOfMovingAverage - 1)] <- {
                 Date = date
                 NewCases = newCasesAvg; NewCasesPerMillion = newCases1MAvg
+                ActiveCases = entry.ActiveCases
+                ActiveCasesPerMillion = entry.ActiveCasesPerMillion
                 TotalCases = casesAvg; TotalCasesPerMillion = cases1MAvg
                 TotalDeaths = deathsAvg; TotalDeathsPerMillion = deaths1MAvg
             }
 
             let entryToRemove =
                 countryEntries.[index - (daysOfMovingAverage - 1)]
-            currentNewCasesSum <-
-                currentNewCasesSum - entryToRemove.NewCases
+            currentNewCasesSum <- currentNewCasesSum - entryToRemove.NewCases
             currentNewCases1MSum <-
                 currentNewCases1MSum - entryToRemove.NewCasesPerMillion
             currentCasesSum <- currentCasesSum - entryToRemove.TotalCases
@@ -151,6 +175,7 @@ let aggregateOurWorldInData
                 |> Map.map (fun _ (countryData: CountryData) ->
                     let averagedEntries =
                         countryData.Entries
+                        |> calculateActiveCases
                         |> calculateMovingAverages daysOfMovingAverage
                         |> Array.filter filterEntries
                     { countryData with Entries = averagedEntries })

@@ -130,8 +130,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                                  | DaysSinceOneDeathPerMillion -> i :> obj
                              y = match state.MetricToDisplay with
                                  | NewCasesPer1M -> entry.NewCasesPerMillion
-                                 | TotalDeathsPer1M -> entry.TotalDeathsPerMillion
-                             date = I18N.tOptions "days.longerDate"
+                                 | ActiveCasesPer1M
+                                     -> entry.ActiveCasesPerMillion
+                                 | TotalDeathsPer1M
+                                     -> entry.TotalDeathsPerMillion
+                             date = tOptions "days.longerDate"
                                         {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
@@ -191,8 +194,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                    title = pojo {| text = chartData.XAxisTitle |}
                    dateTimeLabelFormats = pojo
                     {|
-                        week = I18N.t "charts.common.shortDateFormat"
-                        day = I18N.t "charts.common.shortDateFormat"
+                        week = t "charts.common.shortDateFormat"
+                        day = t "charts.common.shortDateFormat"
                     |}
             |}
         yAxis =
@@ -230,8 +233,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 enabled = true
                 text =
                     sprintf "%s: %s"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.t "charts.common.dsOWD")
+                        (t "charts.common.dataSource")
+                        (t "charts.common.dsOWD")
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}
@@ -249,7 +252,7 @@ let renderCountriesSetsSelectors
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text (I18N.t ("country-groups." + setToRender.Label))
+            prop.text (t ("country-groups." + setToRender.Label))
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected") ]

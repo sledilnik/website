@@ -28,8 +28,9 @@ let dropdown (viz: Visualization) =
             | Municipalities -> (1140, 1150)
             | AgeGroups -> (1140, 720)
             | AgeGroupsTimeline -> (1140, 720)
-            // | Hospitals -> (1140, 1130)
+            | Hospitals -> (1140, 1130)
             | CountriesCasesPer1M -> (1140, 740)
+            | CountriesActiveCasesPer1M -> (1140, 740)
             | CountriesDeathsPer1M -> (1140, 740)
             | _ -> (1140, 720)
 

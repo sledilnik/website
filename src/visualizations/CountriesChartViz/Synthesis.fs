@@ -8,7 +8,7 @@ open JsInterop
 open Types
 open I18N
 
-type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
+type MetricToDisplay = NewCasesPer1M | ActiveCasesPer1M | TotalDeathsPer1M
 
 type CountriesChartConfig = {
     MetricToDisplay: MetricToDisplay

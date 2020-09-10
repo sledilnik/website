@@ -33,6 +33,7 @@ let init (query: obj) (visualization: string option) (page: string) =
                 | "Hospitals" -> Some Hospitals
                 | "Infections" -> Some Infections
                 | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
+                | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
                 | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
                 | _ -> None
                 |> Embedded
@@ -273,6 +274,19 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
+    let countriesActiveCasesPer1M =
+          { VisualizationType = CountriesActiveCasesPer1M
+            ClassName = "countries-cases-chart"
+            ChartTextsGroup = "countriesActiveCasesPer1M"
+            Explicit = false
+            Renderer =
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = ActiveCasesPer1M
+                          ChartTextsGroup = "countriesActiveCasesPer1M"
+                        }
+          }
+
     let countriesDeathsPer1M =
           { VisualizationType = CountriesDeathsPer1M
             ClassName = "countries-deaths-chart"
@@ -293,13 +307,14 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let worldVisualizations =
-        [ worldMap; countriesCasesPer1M; countriesDeathsPer1M ]
+        [ worldMap; countriesCasesPer1M
+          countriesActiveCasesPer1M; countriesDeathsPer1M ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regionMap; regions
-          countriesCasesPer1M; countriesDeathsPer1M
+          countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
         ]
 
     let embedded, visualizations =
@@ -330,7 +345,7 @@ let render (state: State) (_: Msg -> unit) =
                 [ prop.className "brand-link"
                   prop.target "_blank"
                   prop.href "https://covid-19.sledilnik.org/"
-                  prop.text (I18N.t "meta.title") ]
+                  prop.text (t "meta.title") ]
 
 
     let renderFaqLink (visualization: Visualization) =
