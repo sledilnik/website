@@ -129,7 +129,7 @@ let aggregateOurWorldInData
                         | TotalDeathsPer1M ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
-                        |> Array.filter (fun entry -> entry.Value > 0.)
+                        |> Array.skipWhile (fun entry -> entry.Value < 0.1)
                     { countryData with Entries = postProcessedEntries })
 
             Some averagedAndFilteredByCountries

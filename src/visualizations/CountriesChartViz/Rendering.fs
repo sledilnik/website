@@ -45,7 +45,7 @@ type Msg =
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
-let DaysOfMovingAverage = 5
+let DaysOfMovingAverage = 7
 
 let init (config: CountriesChartConfig):
     ChartState * Cmd<Msg> =
