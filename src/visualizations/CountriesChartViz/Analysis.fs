@@ -4,16 +4,11 @@ open Data.OurWorldInData
 open Types
 open System
 
+type MetricToDisplay = NewCasesPer1M | ActiveCasesPer1M | TotalDeathsPer1M
+
 type CountryDataDayEntry = {
     Date: DateTime
-    NewCases: float
-    NewCasesPerMillion : float
-    ActiveCases: float
-    ActiveCasesPerMillion: float
-    TotalCases: float
-    TotalCasesPerMillion : float
-    TotalDeaths: float
-    TotalDeathsPerMillion : float
+    Value: float
 }
 
 type CountryData = {
@@ -23,25 +18,21 @@ type CountryData = {
 
 type CountriesData = Map<CountryIsoCode, CountryData>
 
-let groupEntriesByCountries (entries: DataPoint list): CountriesData =
+let groupEntriesByCountries
+    (metricToDisplay: MetricToDisplay) (entries: DataPoint list)
+    : CountriesData =
 
     let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
-        { Date = entryRaw.Date
-          NewCases = float entryRaw.NewCases
-          NewCasesPerMillion =
-              entryRaw.NewCasesPerMillion
-              |> Option.defaultValue 0.
-          ActiveCases = 0.
-          ActiveCasesPerMillion = 0.
-          TotalCases = float entryRaw.TotalCases
-          TotalCasesPerMillion =
-              entryRaw.TotalCasesPerMillion
-              |> Option.defaultValue 0.
-          TotalDeaths = float entryRaw.TotalDeaths
-          TotalDeathsPerMillion =
-              entryRaw.TotalDeathsPerMillion
-              |> Option.defaultValue 0.
-        }
+        let valueToUse =
+            match metricToDisplay with
+            | NewCasesPer1M ->
+                entryRaw.NewCasesPerMillion |> Option.defaultValue 0.
+            | ActiveCasesPer1M ->
+                entryRaw.NewCasesPerMillion |> Option.defaultValue 0.
+            | TotalDeathsPer1M ->
+                entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.
+
+        { Date = entryRaw.Date; Value = valueToUse }
 
     let groupedRaw =
         entries |> Seq.groupBy (fun entry -> entry.CountryCode)
@@ -57,23 +48,19 @@ let groupEntriesByCountries (entries: DataPoint list): CountriesData =
     ) |> Map.ofSeq
 
 let calculateActiveCases (countryEntries: CountryDataDayEntry[]) =
-    let setActiveCases activeCasesPer1M entry =
-        { entry with ActiveCasesPerMillion = activeCasesPer1M }
-
     let entriesCount = countryEntries.Length
 
     let mutable runningActiveCases = 0.
-    for i in 0 .. entriesCount-1 do
-        runningActiveCases <-
-            runningActiveCases + countryEntries.[i].NewCasesPerMillion
+    Array.init entriesCount (fun i ->
+        let countryEntry = countryEntries.[i]
+
+        runningActiveCases <- runningActiveCases + countryEntry.Value
         if i >= 14 then
             runningActiveCases <-
-                runningActiveCases - countryEntries.[i - 14].NewCasesPerMillion
+                runningActiveCases - countryEntries.[i - 14].Value
 
-        countryEntries.[i] <-
-            countryEntries.[i] |> setActiveCases runningActiveCases
-
-    countryEntries
+        { countryEntry with Value = runningActiveCases }
+    )
 
 let calculateMovingAverages
     daysOfMovingAverage
@@ -87,52 +74,23 @@ let calculateMovingAverages
 
     let daysOfMovingAverageFloat = float daysOfMovingAverage
     let mutable currentNewCasesSum = 0.
-    let mutable currentNewCases1MSum = 0.
-    let mutable currentCasesSum = 0.
-    let mutable currentCases1MSum = 0.
-    let mutable currentDeathsSum = 0.
-    let mutable currentDeaths1MSum = 0.
 
     let movingAverageFunc index =
         let entry = countryEntries.[index]
 
-        currentNewCasesSum <- currentNewCasesSum + entry.NewCases
-        currentNewCases1MSum <- currentNewCases1MSum + entry.NewCasesPerMillion
-        currentCasesSum <- currentCasesSum + entry.TotalCases
-        currentCases1MSum <- currentCases1MSum + entry.TotalCasesPerMillion
-        currentDeathsSum <- currentDeathsSum + entry.TotalDeaths
-        currentDeaths1MSum <- currentDeaths1MSum + entry.TotalDeathsPerMillion
+        currentNewCasesSum <- currentNewCasesSum + entry.Value
 
         match index with
         | index when index >= daysOfMovingAverage - 1 ->
             let date = countryEntries.[index - cutOff].Date
             let newCasesAvg = currentNewCasesSum / daysOfMovingAverageFloat
-            let newCases1MAvg = currentNewCases1MSum / daysOfMovingAverageFloat
-            let casesAvg = currentCasesSum / daysOfMovingAverageFloat
-            let cases1MAvg = currentCases1MSum / daysOfMovingAverageFloat
-            let deathsAvg = currentDeathsSum / daysOfMovingAverageFloat
-            let deaths1MAvg = currentDeaths1MSum / daysOfMovingAverageFloat
 
             averages.[index - (daysOfMovingAverage - 1)] <- {
-                Date = date
-                NewCases = newCasesAvg; NewCasesPerMillion = newCases1MAvg
-                ActiveCases = entry.ActiveCases
-                ActiveCasesPerMillion = entry.ActiveCasesPerMillion
-                TotalCases = casesAvg; TotalCasesPerMillion = cases1MAvg
-                TotalDeaths = deathsAvg; TotalDeathsPerMillion = deaths1MAvg
-            }
+                Date = date; Value = newCasesAvg }
 
             let entryToRemove =
                 countryEntries.[index - (daysOfMovingAverage - 1)]
-            currentNewCasesSum <- currentNewCasesSum - entryToRemove.NewCases
-            currentNewCases1MSum <-
-                currentNewCases1MSum - entryToRemove.NewCasesPerMillion
-            currentCasesSum <- currentCasesSum - entryToRemove.TotalCases
-            currentCases1MSum <-
-                currentCases1MSum - entryToRemove.TotalCasesPerMillion
-            currentDeathsSum <- currentDeathsSum - entryToRemove.TotalDeaths
-            currentDeaths1MSum <-
-                currentDeaths1MSum - entryToRemove.TotalDeathsPerMillion
+            currentNewCasesSum <- currentNewCasesSum - entryToRemove.Value
 
         | _ -> ignore()
 
@@ -141,44 +99,38 @@ let calculateMovingAverages
 
     averages
 
-
-type XAxisType =
-    | ByDate
-    | DaysSinceFirstDeath
-    | DaysSinceOneDeathPerMillion
-
 type OwidDataState =
     | NotLoaded
     | PreviousAndLoadingNew of OurWorldInDataRemoteData
     | Current of OurWorldInDataRemoteData
 
 let aggregateOurWorldInData
-    xAxisType
     daysOfMovingAverage
+    (metricToDisplay: MetricToDisplay)
     (owidDataState: OwidDataState)
     : CountriesData option =
-
-    let filterEntries (entry: CountryDataDayEntry) =
-        match xAxisType with
-        | ByDate -> entry.TotalDeaths > 0.
-        | DaysSinceFirstDeath -> entry.TotalDeaths >= 1.
-        | DaysSinceOneDeathPerMillion -> entry.TotalDeathsPerMillion  >= 1.
 
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with
         | Success dataPoints ->
             let groupedByCountries: CountriesData =
-                dataPoints |> groupEntriesByCountries
+                dataPoints |> (groupEntriesByCountries metricToDisplay)
 
             let averagedAndFilteredByCountries: CountriesData  =
                 groupedByCountries
                 |> Map.map (fun _ (countryData: CountryData) ->
-                    let averagedEntries =
-                        countryData.Entries
-                        |> calculateActiveCases
-                        |> calculateMovingAverages daysOfMovingAverage
-                        |> Array.filter filterEntries
-                    { countryData with Entries = averagedEntries })
+                    let postProcessedEntries =
+                        match metricToDisplay with
+                        | NewCasesPer1M ->
+                            countryData.Entries
+                            |> calculateMovingAverages daysOfMovingAverage
+                        | ActiveCasesPer1M ->
+                            countryData.Entries |> calculateActiveCases
+                        | TotalDeathsPer1M ->
+                            countryData.Entries
+                            |> calculateMovingAverages daysOfMovingAverage
+                        |> Array.filter (fun entry -> entry.Value > 0.)
+                    { countryData with Entries = postProcessedEntries })
 
             Some averagedAndFilteredByCountries
         | _ -> None

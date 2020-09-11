@@ -7,6 +7,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Fable.Core
 
 open Analysis
 open Highcharts
@@ -41,7 +42,6 @@ type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
-    | XAxisTypeChanged of XAxisType
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
@@ -53,7 +53,6 @@ let init (config: CountriesChartConfig):
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
         MetricToDisplay = config.MetricToDisplay
-        XAxisType = ByDate
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
     }
@@ -98,8 +97,6 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
                  countriesCodes DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
-    | XAxisTypeChanged newXAxisType ->
-        { state with XAxisType = newXAxisType }, Cmd.none
     | ScaleTypeChanged newScaleType ->
         { state with ScaleType = newScaleType }, Cmd.none
 
@@ -123,17 +120,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
                         pojo {|
-                             x =
-                                 match state.XAxisType with
-                                 | ByDate -> entry.Date |> jsTime12h :> obj
-                                 | DaysSinceFirstDeath -> i :> obj
-                                 | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = match state.MetricToDisplay with
-                                 | NewCasesPer1M -> entry.NewCasesPerMillion
-                                 | ActiveCasesPer1M
-                                     -> entry.ActiveCasesPerMillion
-                                 | TotalDeathsPer1M
-                                     -> entry.TotalDeathsPerMillion
+                             x = entry.Date |> jsTime12h :> obj
+                             y = entry.Value
                              date = tOptions "days.longerDate"
                                         {| date = entry.Date |}
                              dataLabels =
@@ -185,11 +173,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         series = allSeries
         xAxis =
             pojo {|
-                   ``type`` =
-                        match state.XAxisType with
-                        | ByDate -> "datetime"
-                        | DaysSinceFirstDeath -> "int"
-                        | DaysSinceOneDeathPerMillion -> "int"
+                   ``type`` = "datetime"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
                    dateTimeLabelFormats = pojo
@@ -215,9 +199,20 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                             align = "middle"
                             text = chartData.YAxisTitle
                         |}
-                   plotLines = 
+                   plotLines =
                        match state.MetricToDisplay with
-                       | ActiveCasesPer1M -> [| {| value=400.0; label={| text=I18N.t "charts.countriesActiveCasesPer1M.red"; align="left"; color="red" |}; color="red" ; width=1; dashStyle="longdashdot"; zIndex=9 |} |]
+                       | ActiveCasesPer1M -> [|
+                           {| value=400.0
+                              label={|
+                                       text=t "charts.countriesActiveCasesPer1M.red"
+                                       align="left"
+                                       color="red" |}
+                              color="red"
+                              width=1
+                              dashStyle="longdashdot"
+                              zIndex=9
+                            |}
+                        |]
                        | _ -> [| |]
             |}
         plotOptions = pojo
@@ -227,7 +222,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         legend = legend
         tooltip = pojo {|
                           formatter = fun () ->
-                              tooltipFormatter state chartData jsThis
+                              tooltipFormatter chartData jsThis
                           shared = true
                           useHTML = true
                         |}
@@ -271,58 +266,11 @@ let renderCountriesSetsSelectors
         |> prop.children
     ]
 
-let renderXAxisSelectors
-    chartTextsGroup
-    (activeXAxisType: XAxisType)
-    dispatch =
-    let renderXAxisSelector (axisSelector: XAxisType) =
-        let active = axisSelector = activeXAxisType
-
-        let defaultProps =
-            [
-                match axisSelector with
-                | ByDate -> chartText chartTextsGroup ".chronologically"
-                | DaysSinceFirstDeath ->
-                    chartText chartTextsGroup ".sinceFirstDeath"
-                | DaysSinceOneDeathPerMillion ->
-                    chartText chartTextsGroup ".sinceOneDeathPerMillion"
-                |> prop.text
-
-                Utils.classes
-                    [(true, "chart-display-property-selector__item")
-                     (active, "selected") ]
-            ]
-
-        if active then Html.div defaultProps
-        else
-            Html.div
-                ((prop.onClick (fun _ -> dispatch axisSelector))
-                    :: defaultProps)
-
-    let xAxisTypesSelectors =
-        [ ByDate; DaysSinceFirstDeath; DaysSinceOneDeathPerMillion]
-        |> List.map renderXAxisSelector
-
-    Html.div [
-        prop.className "chart-display-property-selector"
-        // The X-axis selectors have been disabled.
-        // I'm leaving this code for possible future reuse, if we figure out
-        // what X-axis selectors we should support for countries charts.
-//        prop.children ((Html.text (I18N.t "charts.common.xAxis"))
-//                       :: xAxisTypesSelectors)
-    ]
-
-let render state dispatch =
-    let xAxisType = state.XAxisType
-
+let render (state: ChartState) dispatch =
     let chartData =
-        state |> prepareChartData xAxisType DaysOfMovingAverage
+        state |> prepareChartData DaysOfMovingAverage
 
     let topControls = [
-            renderXAxisSelectors
-                state.ChartTextsGroup
-                state.XAxisType
-                (XAxisTypeChanged >> dispatch)
             Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch)
     ]
@@ -344,5 +292,4 @@ let render state dispatch =
 
 let renderChart (config: CountriesChartConfig) =
     React.elmishComponent
-        ("CountriesChartViz/CountriesChart",
-         init config, update, render)
+        ("CountriesChartViz/CountriesChart", init config, update, render)

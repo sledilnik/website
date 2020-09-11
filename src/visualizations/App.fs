@@ -5,7 +5,7 @@ open Elmish
 open Feliz
 
 open Types
-open CountriesChartViz.Synthesis
+open CountriesChartViz.Analysis
 open I18N
 
 let init (query: obj) (visualization: string option) (page: string) =

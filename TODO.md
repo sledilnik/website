@@ -1,7 +1,7 @@
 # TODO
 
 ## New countries chart
-- show 14 days
+- filter out starting and ending values with 0
 
 ## Age groups timeline - active cases
 - tooltip should include sum + percentages of each group
