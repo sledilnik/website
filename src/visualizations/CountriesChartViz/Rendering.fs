@@ -7,7 +7,6 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
-open Fable.Core
 
 open Analysis
 open Highcharts
@@ -271,6 +270,7 @@ let render (state: ChartState) dispatch =
         state |> prepareChartData DaysOfMovingAverage
 
     let topControls = [
+            Html.div [ prop.className "chart-display-property-selector" ]
             Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch)
     ]

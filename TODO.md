@@ -1,7 +1,8 @@
 # TODO
 
 ## New countries chart
-- filter out starting and ending values with 0
+- fix the position of y-axis selectors
+- color the upper half of the graph
 
 ## Age groups timeline - active cases
 - tooltip should include sum + percentages of each group
