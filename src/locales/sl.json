@@ -801,6 +801,12 @@
             "activeCases": "Aktivni primeri",
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
+        "countriesActiveCasesPer1M": {
+            "title": "Države: aktivni primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. aktivnih primerov na milijon prebivalcev",
+            "legendTitle": "Aktivni primeri na milijon prebivalcev",
+            "red": "meja za uvrstitev na rdeči seznam"
+        },
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",
             "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",

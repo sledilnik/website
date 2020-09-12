@@ -116,6 +116,7 @@ type VisualizationType =
     | WorldMap
     | Infections
     | CountriesCasesPer1M
+    | CountriesActiveCasesPer1M
     | CountriesDeathsPer1M
 
 type RenderingMode =
