@@ -11,16 +11,16 @@
       </div>
       <div class="social">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank">
-          <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
+          <img loading="lazy" src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
         <a href="https://twitter.com/sledilnik" target="_blank">
-          <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
+          <img loading="lazy" src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
         <a href="https://medium.com/sledilnik" target="_blank">
-          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+          <img loading="lazy" src="../assets/svg/medium-icon.svg" alt="Medium" />
         </a>
         <a href="https://github.com/sledilnik" target="_blank">
-          <img src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
+          <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
         </a>
       </div>
     </div>
