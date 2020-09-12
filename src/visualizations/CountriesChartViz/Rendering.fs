@@ -191,7 +191,11 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        match state.ScaleType with
                        | Linear -> 0
                        | Logarithmic -> 1
-                   max = 800 // double of the red condition
+//                   max =
+//                       match state.MetricToDisplay with
+//                       // double of the red condition
+//                       | ActiveCasesPer1M -> Some 800
+//                       | _ -> None
                    opposite = true
                    crosshair = true
                    title =
