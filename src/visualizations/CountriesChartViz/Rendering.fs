@@ -152,9 +152,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 layout = "vertical"
                 floating = true
                 padding = 15
-                x = 20
-                y = 30
-                backgroundColor = "rgba(255,255,255,0.5)"
+                x = 0
+                y = 0
+                backgroundColor = "rgba(255,255,255,0.9)"
         |}
 
     let baseOptions =
@@ -191,6 +191,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        match state.ScaleType with
                        | Linear -> 0
                        | Logarithmic -> 1
+                   max = 800 // double of the red condition
                    opposite = true
                    crosshair = true
                    title =
@@ -205,11 +206,20 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                               label={|
                                        text=t "charts.countriesActiveCasesPer1M.red"
                                        align="left"
-                                       color="red" |}
+                                       verticalAlign="bottom"
+                                        |}
                               color="red"
                               width=1
                               dashStyle="longdashdot"
                               zIndex=9
+                            |}
+                        |]
+                       | _ -> [| |]
+                   plotBands =
+                       match state.MetricToDisplay with
+                       | ActiveCasesPer1M -> [|
+                           {| from=400.0; ``to``=100000.0
+                              color="#FEF8F7"
                             |}
                         |]
                        | _ -> [| |]
