@@ -47,12 +47,6 @@
             "groupExYu": "Ish-Jugosllavia",
             "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
             "groupLatinAmerica": "Amerika Latine",
-            "chronologically": "Në mënyrë kronologjike",
-            "sinceFirstDeath": "Që nga rasti i parë i vdekjes",
-            "deathsPerMillion": "Numri i të vdekurve për 1 milion banorë",
-            "sinceOneDeathPerMillion": "Që nga rasti i parë i vdekjes për 1 milion banorë",
-            "daysFromOneDeathPerMillion": "Nr. i ditëve që nga rasti i parë i vdekjes në 1 milion banorë",
-            "daysFromFirstDeath": "Nr. i ditëve që nga rasti i parë i vdekjes",
             "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
             "title": "Krahasim sipas shtetit"
         },
@@ -272,21 +266,11 @@
             "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {
-            "sinceFirstDeath": "Prej rastit të parë të vdekjes",
-            "sinceOneDeathPerMillion": "Prej rastit të parë të vdekjes për 1 milion banorë",
-            "daysFromFirstDeath": "Numri i ditëve prej rastit të parë të vdekjes",
-            "daysFromOneDeathPerMillion": "Numri i ditëve prej rastit të parë të vdekjes për 1 milion banorë",
-            "chronologically": "Kronologjik",
             "legendTitle": "Gjithsej raste vdekje për 1 milion banorë",
             "title": "Shtetet: Gjithsej raste vdekje për 1 milion banorë",
             "yAxisTitle": "Gjuthsej raste vdekje për 1 milion banorë"
         },
         "countriesNewCasesPer1M": {
-            "sinceFirstDeath": "Prej rastit të parë të vdekjes",
-            "sinceOneDeathPerMillion": "Prej rastit të parë të vdekjes për 1 milion banorë",
-            "daysFromFirstDeath": "Numri i ditëve prej rastit të parë të vdekjes",
-            "daysFromOneDeathPerMillion": "Numri i ditëve prej rastit të parë të vdekjes për 1 milion banorë",
-            "chronologically": "Kronologjik",
             "legendTitle": "Raste të reja për 1 milion banorë",
             "yAxisTitle": "Raste të reja për 1 milion banorë",
             "title": "Shtetet: Raste të reja për 1 milion banorë"

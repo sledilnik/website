@@ -810,22 +810,12 @@
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",
             "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
-            "legendTitle": "Potrjeno okuženi na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Potrjeno okuženi na milijon prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
-            "legendTitle": "Umrli (skupaj) na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         }
     },
     "footer": {

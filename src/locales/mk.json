@@ -610,22 +610,12 @@
         "countriesNewCasesPer1M": {
             "title": "Споредба по држави",
             "yAxisTitle": "Бр. на починати на 1 милион жители",
-            "legendTitle": "Бр. на починати на милион жители",
-            "chronologically": "Хронолошки",
-            "sinceFirstDeath": "Од првиот смртен случај",
-            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
-            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
-            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
+            "legendTitle": "Бр. на починати на милион жители"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Споредба по држави",
             "yAxisTitle": "Бр. на починати на 1 милион жители",
-            "legendTitle": "Бр. на починати на милион жители",
-            "chronologically": "Хронолошки",
-            "sinceFirstDeath": "Од првиот смртен случај",
-            "sinceOneDeathPerMillion": "Од првиот смртен случај на милион жители",
-            "daysFromFirstDeath": "Број на денови од првиот смртен случај",
-            "daysFromOneDeathPerMillion": "Поминати денови од првата смрт на милион жители"
+            "legendTitle": "Бр. на починати на милион жители"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",

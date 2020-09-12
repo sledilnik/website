@@ -373,22 +373,12 @@
         "countriesNewCasesPer1M": {
             "title": "Countries: New Cases Per 1 Million People",
             "yAxisTitle": "New cases per 1 million people",
-            "legendTitle": "New cases per 1M people",
-            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
-            "daysFromFirstDeath": "Nr. days since first death",
-            "sinceOneDeathPerMillion": "Since first death per million people",
-            "sinceFirstDeath": "Since the first death",
-            "chronologically": "Chronological"
+            "legendTitle": "New cases per 1M people"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 1 Million People",
             "yAxisTitle": "Total deaths per 1 million people",
-            "legendTitle": "Total deaths per 1M people",
-            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
-            "daysFromFirstDeath": "Nr. days since first death",
-            "sinceOneDeathPerMillion": "Since first death per million people",
-            "sinceFirstDeath": "Since the first death",
-            "chronologically": "Chronological"
+            "legendTitle": "Total deaths per 1M people"
         },
         "hospitals": {
             "bedsShort": "Beds",

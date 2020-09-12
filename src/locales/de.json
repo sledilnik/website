@@ -475,19 +475,13 @@
         "countries": {
             "groupNordic": "Nordische Länder",
             "title": "Ländervergleich",
-            "daysFromFirstDeath": "Anzahl Tage seit dem erstem Todesfall",
             "groupEastAsiaOceania": "Ostasien und Ozeanien",
             "groupCriticalWorld": "Kritische Länder (Welt)",
             "groupLatinAmerica": "Lateinamerika",
             "groupExYu": "Ex-Jugoslawien",
-            "chronologically": "Chronologisch",
-            "deathsPerMillion": "Todesfälle pro eine Million Einwohner",
-            "sinceOneDeathPerMillion": "Seti erstem Todesfall pro eine Million Einwohner",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem erstem Todesfall per 1 Million Menschen",
             "groupNeighbouring": "Nachbarländer",
             "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen",
-            "groupCriticalEU": "Kritische Länder (EU)",
-            "sinceFirstDeath": "Seit erstem Todesfall"
+            "groupCriticalEU": "Kritische Länder (EU)"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -545,21 +539,11 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "chronologically": "Chronologisch",
-            "sinceFirstDeath": "Seit dem ersten Todesfall",
-            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
-            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
             "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
             "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
             "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
-            "chronologically": "Chronologisch",
-            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
-            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
-            "sinceFirstDeath": "Seit dem ersten Todesfall",
             "legendTitle": "Neue Fälle pro 1 Million Menschen",
             "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
             "title": "Länder: Neue Fälle pro 1 Million Menschen"

@@ -357,22 +357,12 @@
         "countriesNewCasesPer1M": {
             "title": "Države: novi slučajevi na milijun stanovnika",
             "yAxisTitle": "Novi slučajevi na milijun stanovnika",
-            "legendTitle": "Novi slučajevi na milijun stanovnika",
-            "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
-            "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
+            "legendTitle": "Novi slučajevi na milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
             "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
-            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
-            "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
+            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
