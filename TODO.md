@@ -1,5 +1,8 @@
 # TODO
 
+## Add formatting and code analysis
+- how to run dotnet-fsharplint
+
 ## New countries chart
 - deaths per cases (windowed, averaged)
 

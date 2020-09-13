@@ -315,7 +315,7 @@ let worldCountries =
         "ALA"
         "XKX"
     ]
-    
+
 let euCountries =
     [ "ALB"
       "AND"
@@ -370,7 +370,7 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ 
+        [
             ("AUT", "")
             ("CYP", "")
             ("EST", "")
@@ -389,12 +389,12 @@ let greenCountries =
             ("SVK", "")
             ("URY", "")
             ("VAT", "")
-            ("GBR", "") 
+            ("GBR", "")
         ]
 
 let redCountries =
     Map.ofList
-        [ 
+        [
             ("ALB", "")
             ("AND", "")
             ("ARG", "")
@@ -472,7 +472,7 @@ let redCountries =
 
 let importedFrom =
     Map.ofList
-        [ 
+        [
             ("HRV", 32)
             ("BIH", 8)
             ("RUS", 6)
@@ -527,7 +527,7 @@ let loadWorldGeoJson =
 let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
-    { MapToDisplay = mapToDisplay 
+    { MapToDisplay = mapToDisplay
       Countries =
         match mapToDisplay with
         | Europe -> euCountries
@@ -535,7 +535,7 @@ let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType = 
+      ChartType =
         match mapToDisplay with
         | Europe -> Restrictions
         | World -> TwoWeekIncidence },
@@ -573,8 +573,8 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
 
-        let red, green = 
-            redCountries.TryFind(fixedCode), 
+        let red, green =
+            redCountries.TryFind(fixedCode),
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
             if fixedCode = "SVN"
@@ -611,15 +611,15 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
 
     match msg with
-    | GeoJsonRequested -> 
-        let cmd = 
+    | GeoJsonRequested ->
+        let cmd =
             match state.MapToDisplay with
             | Europe -> Cmd.OfAsync.result loadEuropeGeoJson
             | World -> Cmd.OfAsync.result loadWorldGeoJson
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
+        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
         { state with OwdData = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
@@ -756,17 +756,18 @@ let renderMap state geoJson owdData =
         match twoWeekIncidence with
         | null -> I18N.t "charts.europe.noData"
         | _ ->
-        twoWeekIncidence
-        |> Array.iter (fun country ->
-            let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
+            twoWeekIncidence
+            |> Array.iter (fun country ->
+                let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
 
-            let barHtml =
-                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" barHeight
+                let barHtml =
+                    sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>"
+                            barHeight
 
-            s.Append barHtml |> ignore)
+                s.Append barHtml |> ignore)
 
-        s.Append "</div>" |> ignore
-        s.ToString()
+            s.Append "</div>" |> ignore
+            s.ToString()
 
     let series geoJson =
         {| visible = true
@@ -784,7 +785,7 @@ let renderMap state geoJson owdData =
                          animation = {| duration = 0 |} |} |} |}
         |> pojo
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+    {| optionsWithOnLoadEvent "covid19-europe-map" with
            title = null
            series = [| series geoJson |]
            colorAxis = colorAxis
@@ -803,7 +804,7 @@ let renderMap state geoJson owdData =
                       mapTextFull = ""
                       mapText = ""
                       href = "https://ourworldindata.org/coronavirus" |} |}
-    |> Highcharts.map
+    |> map
 
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
