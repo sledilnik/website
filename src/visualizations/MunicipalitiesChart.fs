@@ -122,11 +122,6 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
-            let doublingTime =
-                dp
-                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
-                |> Seq.toList
-                |> Utils.findDoublingTime
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let lastChange = totals |> Seq.filter (fun dp -> dp.ConfirmedToDate = maxConfirmed) |> Seq.head
             let activeCases = totalsShown |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
@@ -137,6 +132,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 | Some before, Some last -> if last > before then Some (last - before) else None
                 | None, Some last -> Some last
                 | _ -> None
+            let doublingTime =
+                if activeCases.IsSome && activeCases.Value >= 5 
+                then  
+                    dp
+                    |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
+                    |> Seq.toList
+                    |> Utils.findDoublingTime
+                else None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
