@@ -81,7 +81,7 @@ let shadedWeekendPlotBands =
 // - MunicipalitiesChart will showDoublesInXday
 // - SpreadChart will show exponential growth pages
 let showExpGrowthFeatures =
-    false
+    true
 
 let addContainmentMeasuresFlags
     (startDate: JsTimestamp)
