@@ -437,7 +437,7 @@
             "inOneWeek": "U tjedan dana",
             "inFourWeeks": "U četiri tjedna",
             "confirmedCases": "potvrđeni slučajevi",
-            "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7, tada se može očekivati:",
+            "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7 dana, tada se može očekivati:",
             "timesAsMany": "-put toliko",
             "today": "Danas",
             "relativeLabel": "Relativan prirast u postocima",

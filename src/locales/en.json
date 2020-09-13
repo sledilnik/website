@@ -265,7 +265,7 @@
             "inTwoWeeks": "In two weeks",
             "inOneWeek": "In one week",
             "today": "Today",
-            "ifExpGrowth": "If the infection would spread exponentially with duplication at 7, then you could expect:",
+            "ifExpGrowth": "If the infection would spread exponentially with duplication at 7 days, then you could expect:",
             "oneMonth": "One month",
             "oneWeek": "One week",
             "oneDay": "One day",
