@@ -562,11 +562,10 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             |> List.choose id
             |> List.toArray
 
-        let incidenceMaxValue =
-            dps
-            |> List.map (fun dp -> dp.NewCasesPerMillion)
-            |> List.choose id
-            |> List.max
+        let incidenceMaxValue = 
+            if incidence.Length = 0 
+            then 0. 
+            else incidence |> Array.toList |> List.max
 
         let newCases = dps |> List.map (fun dp -> dp.NewCases)
 
