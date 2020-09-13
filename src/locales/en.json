@@ -153,6 +153,7 @@
             "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "view": "View:",
+            "sortBy": "Sort by:",
             "linear": "Linear",
             "log": "Logarithmic",
             "noteFaq": "Note: limitation of presented data is described in ",

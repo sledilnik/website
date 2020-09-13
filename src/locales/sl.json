@@ -565,6 +565,7 @@
             "thousandsSep": ".",
             "decimalPoint": ",",
             "view": "Prikaži:",
+            "sortBy": "Sortiraj po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -780,7 +781,7 @@
             "allRegions": "Vse regije",
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
-            "viewDoublingTime": "Dnevih podvojitve",
+            "viewDoublingTime": "Podvojitven čas",
             "viewLast": "Zadnji"
         },
         "ageGroups": {
