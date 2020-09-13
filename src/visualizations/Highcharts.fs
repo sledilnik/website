@@ -117,6 +117,7 @@ let addContainmentMeasuresFlags
         17, 8, "#FFFFFF", "app"
         21, 8, "#FFe6e6", "croatia"
         1,  9, "#ebfaeb", "allSchools"
+        13, 9, "#ebfaeb", "quarantine10days"
     |]
     {|
         ``type`` = "flags"

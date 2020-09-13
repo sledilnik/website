@@ -510,6 +510,10 @@
         "allSchools": {
             "title": "Šole",
             "description": "Vse šole odprte za novo šolsko leto"
+        },
+        "quarantine10days": {
+            "title": "10 dni",
+            "description": "Obvezna karantena skrajšana na 10 dni"
         }
     },
     "phase": {
