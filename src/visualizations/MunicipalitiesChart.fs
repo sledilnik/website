@@ -124,7 +124,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
             let doublingTime =
                 dp
-                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
+                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
                 |> Seq.toList
                 |> Utils.findDoublingTime
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
