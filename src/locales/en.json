@@ -270,6 +270,7 @@
             "oneDay": "One day",
             "averageSouthKorea": "South Korea's average in recent days",
             "relativeTitle": "Daily Growth of Infected",
+            "activeCases": "active cases",
             "confirmedCases": "confirmed cases",
             "timesAsMany": "- times as much",
             "doublingRateLabel": "In how many days does the number of infected people double",

@@ -693,6 +693,7 @@
             "inThreeWeeks": "Čez tri tedne",
             "inFourWeeks": "Čez štiri tedne",
             "timesAsMany": "-krat toliko",
+            "activeCases": "aktivnih primerov",
             "confirmedCases": "potrjeno okuženih",
             "hospitalized": "hospitaliziranih"
         },
