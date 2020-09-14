@@ -55,6 +55,6 @@
         <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
         <PackageReference Include="FSharp.Data" Version="3.3.3" />
         <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
-        <PackageReference Include="Zanaptak.TypedCssClasses" Version="0.2.0" />
+        <PackageReference Include="Zanaptak.TypedCssClasses" Version="0.4.0" />
     </ItemGroup>
 </Project>
