@@ -42,8 +42,8 @@
         <Compile Include="Main.fs" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="EdelweissData.Base" Version="1.0.3" />
-        <PackageReference Include="EdelweissData.Thoth.Fable" Version="1.0.2" />
+        <PackageReference Include="EdelweissData.Base" Version="1.0.10" />
+        <PackageReference Include="EdelweissData.Thoth.Fable" Version="1.0.10" />
         <PackageReference Include="Fable.Browser.Dom" Version="1.2.0" />
         <PackageReference Include="Fable.Browser.Event" Version="1.0.0" />
         <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
@@ -54,7 +54,7 @@
         <PackageReference Include="Feliz" Version="1.6.0" />
         <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
         <PackageReference Include="FSharp.Data" Version="3.3.3" />
-        <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.0" />
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
         <PackageReference Include="Zanaptak.TypedCssClasses" Version="0.2.0" />
     </ItemGroup>
 </Project>

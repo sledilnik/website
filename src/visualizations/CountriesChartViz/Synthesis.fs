@@ -81,12 +81,15 @@ let tooltipFormatter chartData jsThis =
         |> Array.iter
                (fun country ->
                     let countryName = country?series?name
+                    let countryColor = country?series?color
+
                     let dataValue: float = country?point?y
 
                     s.Append "<tr>" |> ignore
                     let countryTooltip =
                         sprintf
-                            "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            "<td><span style='color:%s'>●</span></td<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            countryColor
                             countryName
                             (Utils.formatTo1DecimalWithTrailingZero dataValue)
                     s.Append countryTooltip |> ignore
