@@ -23,6 +23,10 @@ let (Url datasetUrl) =
 let (Url dataUrl) =
     createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
 
+type CountrySelection =
+    | All
+    | Countries of string list
+
 type CountryIsoCode = string
 
 type DataPoint = {
@@ -162,17 +166,23 @@ let loadCountryComparison countries msg =
 
     load query msg
 
-
-let loadCountryIncidence countries (fromDate : System.DateTime) msg =
+let loadCountryIncidence (countries : CountrySelection) (fromDate : System.DateTime) msg =
 
     let query =
         let countryMatch country =
             ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
-        let countriesMatchCondition =
-            Or (List.map countryMatch countries)
         let dateCondition =
             Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValuePrimitive (ValueDate fromDate)))
+
+        let condition =
+            match countries with
+            | All ->
+                dateCondition
+            | Countries countries ->
+                let countriesMatchCondition = Or (List.map countryMatch countries)
+                And[countriesMatchCondition ; dateCondition]
+
         { DataQuery.Default with
-            Condition = Some(And[countriesMatchCondition ; dateCondition]) }
+            Condition = Some(condition) }
 
     load query msg
