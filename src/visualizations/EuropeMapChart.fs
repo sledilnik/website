@@ -367,7 +367,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
+        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
         { state with OwdData = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
@@ -509,17 +509,18 @@ let renderMap state geoJson owdData =
         match twoWeekIncidence with
         | null -> I18N.t "charts.europe.noData"
         | _ ->
-        twoWeekIncidence
-        |> Array.iter (fun country ->
-            let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
+            twoWeekIncidence
+            |> Array.iter (fun country ->
+                let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
 
-            let barHtml =
-                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" barHeight
+                let barHtml =
+                    sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>"
+                            barHeight
 
-            s.Append barHtml |> ignore)
+                s.Append barHtml |> ignore)
 
-        s.Append "</div>" |> ignore
-        s.ToString()
+            s.Append "</div>" |> ignore
+            s.ToString()
 
     let series geoJson =
         {| visible = true
@@ -537,7 +538,7 @@ let renderMap state geoJson owdData =
                          animation = {| duration = 0 |} |} |} |}
         |> pojo
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+    {| optionsWithOnLoadEvent "covid19-europe-map" with
            title = null
            series = [| series geoJson |]
            colorAxis = colorAxis
@@ -556,7 +557,7 @@ let renderMap state geoJson owdData =
                       mapTextFull = ""
                       mapText = ""
                       href = "https://ourworldindata.org/coronavirus" |} |}
-    |> Highcharts.map
+    |> map
 
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =

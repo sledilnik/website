@@ -19,8 +19,8 @@ let optionToInt (value: int option) =
     | Some x -> x
     | None -> 0
 
-let roundTo1Decimal (value: float) = System.Math.Round(value, 1)
-let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
+let roundTo1Decimal (value: float) = Math.Round(value, 1)
+let roundTo3Decimals (value: float) = Math.Round(value, 3)
 
 let formatTo1DecimalWithTrailingZero (value: float) =
     let formatted =
@@ -42,7 +42,7 @@ let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| 
         if value < 0.0 then None
         else Some value
 
-let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |} list) =
+let findDoublingTime (values : {| Date : DateTime ; Value : int option |} list) =
     let reversedValues =
         values
         |> List.choose (fun dp ->
@@ -60,7 +60,7 @@ let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |}
         | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
     | _ -> None
 
-let classes (classTuples: (bool * string) seq) =
+let classes (classTuples: seq<bool * string>) =
     classTuples
     |> Seq.filter (fun (visible, _) -> visible)
     |> Seq.map (fun (_, className) -> className)
@@ -113,7 +113,7 @@ let renderLoading =
 let renderErrorLoading (error : string) =
     Html.text error
 
-let monthNameOfdate (date : System.DateTime) =
+let monthNameOfDate (date : DateTime) =
     match date.Month with
     | 1 -> I18N.t "month.0"
     | 2 -> I18N.t "month.1"

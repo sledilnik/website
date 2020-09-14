@@ -60,7 +60,7 @@ type DashStyle =
 
 
 let shadedWeekendPlotBands =
-    let saturday = DateTime(2020,02,22)
+    let saturday = DateTime(2020, 02, 22)
     let nWeeks = (DateTime.Today-saturday).TotalDays / 7.0 |> int
     let oneDay = 86400000.0
     let origin = jsTime saturday // - oneDay / 2.0
