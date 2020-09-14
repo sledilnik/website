@@ -380,6 +380,16 @@
             "yAxisTitle": "Total deaths per 1 million people",
             "legendTitle": "Total deaths per 1M people"
         },
+        "countriesDeathsPerCases": {
+            "title": "Countries: Total Deaths Per cases",
+            "yAxisTitle": "Total deaths per cases",
+            "legendTitle": "Total deaths per cases",
+            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
+            "daysFromFirstDeath": "Nr. days since first death",
+            "sinceOneDeathPerMillion": "Since first death per million people",
+            "sinceFirstDeath": "Since the first death",
+            "chronologically": "Chronological"
+        },
         "hospitals": {
             "bedsShort": "Beds",
             "beds": "Hospital beds",
