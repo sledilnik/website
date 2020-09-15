@@ -286,6 +286,9 @@
         },
         "rmap": {
             "title": "Harta e rajoneve"
+        },
+        "countriesDeathsPerCases": {
+            "title": "Shtetet: përqindja e vdekjeve nga rastet e konfirmuara"
         }
     },
     "shortMonth": {
@@ -633,7 +636,7 @@
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
         "newChart": "Grafikon i ri:",
-        "newsText": "Koronavirusi Botë - Harta e 🌍 - rastet aktive për 1M popullsi",
+        "newsText": "Koronavirusi Botë - Harta 🌍 - rastet aktive për 1M popullsi",
         "newPage": "Faqe e re:"
     },
     "timestamp": {
