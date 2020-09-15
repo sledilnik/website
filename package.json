@@ -18,7 +18,7 @@
     "@panter/vue-i18next": "^0.15.2",
     "axios": "^0.19.2",
     "axios-etag-cache": "^1.0.5",
-    "bootstrap-vue": "^2.16.0",
+    "bootstrap-vue": "^2.17.0",
     "d3": "^6.1.1",
     "date-fns": "^2.16.1",
     "highcharts": "^8.2.0",
