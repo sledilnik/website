@@ -225,7 +225,7 @@ let importedFrom =
           ("HUN", 5)
           ("CZE", 4)
           ("DEU", 4)
-          ("XKX", 4)      
+          ("XKX", 4)
           ("GRC", 4)
           ("ITA", 2)
           ("ITA", 1)
@@ -479,7 +479,7 @@ let renderMap state geoJson owdData =
     let tooltipFormatter jsThis =
         let points = jsThis?point
         let twoWeekIncidence = points?incidence
-        let twoWeekIncidenceMaxValue = points?incidenceMaxValue + 1 // TODO: hack - added 1 because this is an integer rounded to floor for some reason (instead of float)
+        let twoWeekIncidenceMaxValue = Math.Ceiling(float points?incidenceMaxValue)
         let country = points?country
         let incidence1M = points?incidence1M
         let newCases = points?newCases
@@ -512,14 +512,9 @@ let renderMap state geoJson owdData =
         | _ ->
             twoWeekIncidence
             |> Array.iter (fun country ->
-                let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
-
-                let barHtml =
-                    sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>"
-                            barHeight
-
+                let barHeight = Math.Ceiling(float country * float barMaxHeight / twoWeekIncidenceMaxValue)
+                let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
                 s.Append barHtml |> ignore)
-
             s.Append "</div>" |> ignore
             s.ToString()
 

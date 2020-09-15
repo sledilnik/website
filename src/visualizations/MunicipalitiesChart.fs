@@ -243,22 +243,21 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
-                                let aHeight = activeCases * barMaxHeight / maxValue
-                                let dHeight = deceasedToDate * barMaxHeight / maxValue
-                                let dHeightCeiling = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
+                                let aHeight = Math.Ceiling(float activeCases * float barMaxHeight / float maxValue)
+                                let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
                                             Html.div [
-                                                prop.style [ style.height (int dHeightCeiling) ]
+                                                prop.style [ style.height (int dHeight) ]
                                                 prop.className "bar--deceased" ]
                                             Html.div [
                                                 prop.style [ style.height rHeight ]
                                                 prop.className "bar--recovered" ]
                                         Html.div [
-                                            prop.style [ style.height aHeight ]
+                                            prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
                                     ]
                                 ]
