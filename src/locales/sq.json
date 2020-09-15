@@ -288,7 +288,14 @@
             "title": "Harta e rajoneve"
         },
         "countriesDeathsPerCases": {
-            "title": "Shtetet: përqindja e vdekjeve nga rastet e konfirmuara"
+            "title": "Shtetet: përqindja e vdekjeve nga rastet e konfirmuara",
+            "chronologically": "Kronologjike",
+            "sinceFirstDeath": "Që nga vdekja e parë",
+            "sinceOneDeathPerMillion": "Që nga vdekja e parë për 1 milion banorë",
+            "daysFromFirstDeath": "Numri i ditëve nga vdekja e parë",
+            "daysFromOneDeathPerMillion": "Numri i ditëve nga vdekja e parë për 1 milion banorë",
+            "legendTitle": "Përqindja e vdekjeve nga rastet e konfirmuara",
+            "yAxisTitle": "Gjithsej vdekje nga rastet e konfirmuara"
         }
     },
     "shortMonth": {
