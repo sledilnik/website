@@ -9,49 +9,57 @@ open CountriesChartViz.Analysis
 open I18N
 
 let init (query: obj) (visualization: string option) (page: string) =
-    let inner () =
-        let renderingMode =
-            match visualization with
-            | None -> Normal
-            | Some viz ->
-                match viz with
-                | "Map" -> Some Map
-                | "RegionMap" -> Some RegionMap
-                | "EuropeMap" -> Some EuropeMap
-                | "WorldMap" -> Some WorldMap
-                | "MetricsComparison" -> Some MetricsComparison
-                | "Patients" -> Some Patients
-                | "Ratios" -> Some Ratios
-                | "Tests" -> Some Tests
-                | "Cases" -> Some Cases
-                | "Spread" -> Some Spread
-                | "Regions" -> Some Regions
-                | "Municipalities" -> Some Municipalities
-                | "AgeGroups" -> Some AgeGroups
-                | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
-                | "HCenters" -> Some HCenters
-                | "Hospitals" -> Some Hospitals
-                | "Infections" -> Some Infections
-                | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
-                | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
-                | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
-                | _ -> None
-                |> Embedded
+    let renderingMode =
+        match visualization with
+        | None -> Normal
+        | Some viz ->
+            match viz with
+            | "Map" -> Some Map
+            | "RegionMap" -> Some RegionMap
+            | "EuropeMap" -> Some EuropeMap
+            | "WorldMap" -> Some WorldMap
+            | "MetricsComparison" -> Some MetricsComparison
+            | "Patients" -> Some Patients
+            | "Ratios" -> Some Ratios
+            | "Tests" -> Some Tests
+            | "Cases" -> Some Cases
+            | "Spread" -> Some Spread
+            | "Regions" -> Some Regions
+            | "Municipalities" -> Some Municipalities
+            | "AgeGroups" -> Some AgeGroups
+            | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
+            | "HCenters" -> Some HCenters
+            | "Hospitals" -> Some Hospitals
+            | "Infections" -> Some Infections
+            | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
+            | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
+            | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
+            | _ -> None
+            |> Embedded
 
-        let initialState =
-            {
-              Page = page
-              Query = query
-              StatsData = NotAsked
-              RegionsData = NotAsked
-              RenderingMode = renderingMode }
+    let initialState =
+        {
+          Page = page
+          Query = query
+          StatsData = NotAsked
+          RegionsData = NotAsked
+          RenderingMode = renderingMode }
 
-        initialState,
-        Cmd.batch
-            [ Cmd.ofMsg StatsDataRequested
-              Cmd.ofMsg RegionsDataRequest ]
+    // Request data loading based on the page we are on
+    let cmd =
+        match page with
+        | "local" ->
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg RegionsDataRequest ]
+        | "world" ->
+            Cmd.none
+        | _ ->
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg RegionsDataRequest ]
 
-    inner
+    initialState, cmd
 
 let update (msg: Msg) (state: State) =
     match msg with
@@ -75,6 +83,7 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "hospitals"
             Explicit = true
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
+
     let metricsComparison =
           { VisualizationType = MetricsComparison
             ClassName = "metrics-comparison-chart"
@@ -87,6 +96,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+
     let spread =
           { VisualizationType = Spread
             ClassName = "spread-chart"

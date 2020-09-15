@@ -10,7 +10,7 @@ let Visualizations
          page: string,
          query: obj,
          visualization: string option) =
-    Program.mkProgram (App.init query visualization page) App.update App.render
+    Program.mkProgram (fun () -> App.init query visualization page) App.update App.render
     #if DEBUG
     |> Program.withDebugger
     #endif
