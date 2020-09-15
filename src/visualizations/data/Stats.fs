@@ -108,8 +108,7 @@ type private TransferStatsData = TransferStatsDataPoint list
 let parseStatsData responseData =
     let transferStatsData =
         responseData
-        |> SimpleJson.parse
-        |> Json.convertFromJsonAs<TransferStatsData>
+        |> Json.parseNativeAs<TransferStatsData>
 
     transferStatsData
     |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
