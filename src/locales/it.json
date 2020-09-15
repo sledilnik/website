@@ -682,11 +682,6 @@
             "allHospitals": "Tutti gli ospedali"
         },
         "countriesTotalDeathsPer1M": {
-            "chronologically": "Cronologico",
-            "sinceFirstDeath": "Dal primo decesso",
-            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
-            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
-            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
             "yAxisTitle": "Decessi totali per 1 milione di persone",
             "legendTitle": "Decessi totali per 1 milione di persone",
             "title": "Paesi: decessi totali per 1 milione di persone"
@@ -722,11 +717,6 @@
             "sentToSelfIsolation": "Autoisolamento"
         },
         "countriesNewCasesPer1M": {
-            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
-            "chronologically": "Cronologico",
-            "sinceFirstDeath": "Dal primo decesso",
-            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
-            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
             "legendTitle": "Nuovi casi per 1M di persone",
             "yAxisTitle": "Nuovi casi per 1 milione di persone",
             "title": "Paesi: nuovi casi per 1 milione di persone"

@@ -65,6 +65,38 @@ yarn run test
 yarn run lint
 ```
 
+### FSharpLint
+
+[FSharpLint](https://github.com/fsprojects/FSharpLint) is used to check the
+F# code. In order to use it, you need to run `build.bat` script, which will
+1. install FSharpLint locally (if it was not already installed), 
+1. run it on the source code,
+1. run F# unit tests.
+
+The configuration is stored in the `fsharplint-config.json` file. You can
+find more information on how to configure or suppress various rules
+[here](https://fsprojects.github.io/FSharpLint/how-tos/rule-configuration.html).
+
+#### Using FSharpLint in Rider
+
+If you use JetBrains Rider as your IDE, you can integrate FSharpLint into 
+your workflow inside IDE by following these steps:
+
+1. Make sure you have FSharpLint installed (see the above section).
+1. Click `File` | `Settings` menu option.
+1. In the Settings window, find `Tools`/`External Tools` tree item.
+1. Press on the plus (`+`) button to add a new external tool.
+1. In the `Edit Tool` window, enter the following values:
+    - `Name`: `FSharpLint`
+    - `Program`: `dotnet`
+    - `Arguments`: `fsharplint --format msbuild lint -l fsharplint-config.json SloCovid19Website.sln`
+    - `Advanced Options`: check all checkboxes
+    - `Output filters`: `$FILE_PATH$\($LINE$\,$COLUMN$\,.*`
+1. Press `OK` button to confirm.
+
+Now you should have a new menu item under `Tools` | `External Tools` 
+| `FSharpLint`.
+
 ## Resources
 
 * vue (framework) https://vuejs.org/v2/guide/

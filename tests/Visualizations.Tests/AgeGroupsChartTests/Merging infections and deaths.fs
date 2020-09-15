@@ -50,7 +50,7 @@ let ``Merging empty groups results in empty result`` () =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [||] @>
+    test <@ result |> Array.isEmpty @>
 
 [<Fact>]
 let ``Group can have infections and no deaths``() =
@@ -70,7 +70,7 @@ let ``If group has no infections and has deaths, it is ignored as invalid``() =
     let result =
         AgeGroupsChart.mergeInfectionsAndDeathsByGroups infections deaths
 
-    test <@ result = [||] @>
+    test <@ result |> Array.isEmpty @>
 
 [<Fact>]
 let ``Merges infections and deaths together``() =

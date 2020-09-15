@@ -11,8 +11,7 @@ let inline makeDataLoader<'T>(url) =
             match code with
             | 200 ->
                 json
-                |> SimpleJson.parse
-                |> Json.convertFromJsonAs<'T>
+                |> Json.parseNativeAs<'T>
                 |> Ok
             | _ ->
                 Error (sprintf "got http %d while fetching %s" code url)

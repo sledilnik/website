@@ -364,20 +364,26 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
+        "countriesActiveCasesPer1M": {
+            "title": "Countries: Active Cases Per 1 Million People",
+            "yAxisTitle": "Active cases per 1 million people",
+            "legendTitle": "Active cases per 1M people",
+            "red": "criteria for red list"
+        },
         "countriesNewCasesPer1M": {
             "title": "Countries: New Cases Per 1 Million People",
             "yAxisTitle": "New cases per 1 million people",
-            "legendTitle": "New cases per 1M people",
-            "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
-            "daysFromFirstDeath": "Nr. days since first death",
-            "sinceOneDeathPerMillion": "Since first death per million people",
-            "sinceFirstDeath": "Since the first death",
-            "chronologically": "Chronological"
+            "legendTitle": "New cases per 1M people"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 1 Million People",
             "yAxisTitle": "Total deaths per 1 million people",
-            "legendTitle": "Total deaths per 1M people",
+            "legendTitle": "Total deaths per 1M people"
+        },
+        "countriesDeathsPerCases": {
+            "title": "Countries: Total Deaths Per cases",
+            "yAxisTitle": "Total deaths per cases",
+            "legendTitle": "Total deaths per cases",
             "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
             "daysFromFirstDeath": "Nr. days since first death",
             "sinceOneDeathPerMillion": "Since first death per million people",
@@ -583,6 +589,10 @@
         "allSchools": {
             "title": "Schools",
             "description": "All schools reopened for new school year"
+        },
+        "quarantine10days": {
+            "title": "10 days",
+            "description": "Mandatory quarantine reduced from 10 days"
         }
     },
     "days": {

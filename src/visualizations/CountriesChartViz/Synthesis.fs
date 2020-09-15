@@ -8,8 +8,6 @@ open JsInterop
 open Types
 open I18N
 
-type MetricToDisplay = NewCasesPer1M | TotalDeathsPer1M
-
 type CountriesChartConfig = {
     MetricToDisplay: MetricToDisplay
     ChartTextsGroup: string
@@ -24,7 +22,6 @@ type ChartState = {
     OwidDataState: OwidDataState
     DisplayedCountriesSet: CountriesDisplaySet
     MetricToDisplay: MetricToDisplay
-    XAxisType: XAxisType
     ScaleType: ScaleType
     ChartTextsGroup: string
 }
@@ -59,7 +56,7 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
-let tooltipFormatter state chartData jsThis =
+let tooltipFormatter chartData jsThis =
     let points: obj[] = jsThis?points
 
     match points with
@@ -72,12 +69,8 @@ let tooltipFormatter state chartData jsThis =
         s.Append dataDescription |> ignore
         s.Append "<br/>" |> ignore
 
-        match state.XAxisType with
-        | ByDate ->
-            let date = points.[0]?point?date
-            s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
-        | _ -> ignore()
-
+        let date = points.[0]?point?date
+        s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
         s.Append "<table>" |> ignore
 
         points
@@ -88,23 +81,17 @@ let tooltipFormatter state chartData jsThis =
         |> Array.iter
                (fun country ->
                     let countryName = country?series?name
-                    let date = country?point?date
+                    let countryColor = country?series?color
+
                     let dataValue: float = country?point?y
 
                     s.Append "<tr>" |> ignore
                     let countryTooltip =
-                        match state.XAxisType with
-                        | ByDate ->
-                            sprintf
-                                "<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
-                                countryName
-                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
-                        | _ ->
-                            sprintf
-                                "<td>%s</td><td style='padding-left: 10px'>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
-                                countryName
-                                date
-                                (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                        sprintf
+                            "<td><span style='color:%s'>●</span></td<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            countryColor
+                            countryName
+                            (Utils.formatTo1DecimalWithTrailingZero dataValue)
                     s.Append countryTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )
@@ -112,10 +99,7 @@ let tooltipFormatter state chartData jsThis =
         s.Append "</table>" |> ignore
         s.ToString()
 
-let prepareChartData
-    xAxisType
-    daysOfMovingAverage
-    (state: ChartState)
+let prepareChartData daysOfMovingAverage (state: ChartState)
     : ChartData option =
 
     /// <summary>
@@ -129,7 +113,7 @@ let prepareChartData
 
     let aggregated =
         state.OwidDataState
-        |> aggregateOurWorldInData xAxisType daysOfMovingAverage
+        |> aggregateOurWorldInData daysOfMovingAverage state.MetricToDisplay
 
     match aggregated with
     | Some aggregated ->
@@ -140,7 +124,7 @@ let prepareChartData
             aggregated
             // assign country names
             |> Map.map (fun countryIsoCode countryData ->
-                (countryData, I18N.tt "country" countryIsoCode))
+                (countryData, tt "country" countryIsoCode))
             |> Map.toArray
             |> Array.map (fun (_, value) -> value)
             // sort by country names (but keep Slovenia at the top)
@@ -160,14 +144,7 @@ let prepareChartData
         {
             Series = series
             LegendTitle = chartText state.ChartTextsGroup ".legendTitle"
-            XAxisTitle =
-                match xAxisType with
-                | ByDate -> ""
-                | DaysSinceFirstDeath ->
-                    chartText state.ChartTextsGroup ".daysFromFirstDeath"
-                | DaysSinceOneDeathPerMillion ->
-                    chartText
-                        state.ChartTextsGroup ".daysFromOneDeathPerMillion"
+            XAxisTitle = ""
             YAxisTitle =
                 chartText state.ChartTextsGroup ".yAxisTitle"
         }

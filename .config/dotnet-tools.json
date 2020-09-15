@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "dotnet-fsharplint": {
+      "version": "0.16.5",
+      "commands": [
+        "dotnet-fsharplint"
+      ]
+    }
+  }
+}

@@ -235,7 +235,7 @@ export default {
 .hp-card {
   display: flex;
   flex-direction: column;
-  min-height: 195px;
+  min-height: 216px;
   height: 100%;
   padding: 18px;
   background: #fff;
