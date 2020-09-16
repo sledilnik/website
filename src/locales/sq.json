@@ -268,7 +268,7 @@
         "countriesTotalDeathsPer1M": {
             "legendTitle": "Gjithsej raste vdekje për 1 milion banorë",
             "title": "Shtetet: Gjithsej raste vdekje për 1 milion banorë",
-            "yAxisTitle": "Gjuthsej raste vdekje për 1 milion banorë"
+            "yAxisTitle": "Gjithsej raste vdekje për 1 milion banorë"
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Raste të reja për 1 milion banorë",
@@ -336,8 +336,8 @@
         "home": "Ballina",
         "menu": "Menu",
         "language": {
-            "en": "Angleze",
-            "sl": "Sllovene",
+            "en": "Anglisht",
+            "sl": "Sllovenisht",
             "sq": "Shqip",
             "mk": "Maqedonisht",
             "hr": "Kroatisht",
@@ -648,7 +648,7 @@
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
-        "updated": "Përditësuar më {{ date, dddd, MMMM Do YYYY }}"
+        "updated": "Përditësuar më: {{ date, dddd, MMMM Do YYYY }}"
     },
     "cm": {
         "quarantine14days": {
