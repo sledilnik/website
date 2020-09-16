@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module MunicipalitiesChart
 
+open System
 open Elmish
 open Browser
 open Fable.Core.JsInterop
@@ -21,7 +22,7 @@ type Region =
       Name : string }
 
 type TotalsForDate =
-    { Date : System.DateTime
+    { Date : DateTime
       ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
@@ -36,7 +37,7 @@ type Municipality =
       ActiveCases : int option
       MaxActiveCases : int option
       MaxConfirmedCases : int option
-      LastConfirmedCase : System.DateTime
+      LastConfirmedCase : DateTime
       DaysSinceLastCase : int
       TotalsForDate : TotalsForDate list }
 
@@ -66,8 +67,8 @@ type Query (query : obj, regions : Region list) =
             | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
                 match Highcharts.showExpGrowthFeatures with
-                    | true -> Some DoublingTime
-                    | _ -> None
+                | true -> Some DoublingTime
+                | _ -> None
             | _ -> None
         | _ -> None
 
@@ -145,7 +146,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               MaxActiveCases = maxActive
               MaxConfirmedCases = maxConfirmed
               LastConfirmedCase = lastChange.Date
-              DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
+              DaysSinceLastCase = DateTime.Today.Subtract(lastChange.Date).Days
               TotalsForDate = totalsShown
             })
 
@@ -242,21 +243,21 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
-                                let aHeight = activeCases * barMaxHeight / maxValue
-                                let dHeight = deceasedToDate * barMaxHeight / maxValue
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
+                                let aHeight = Math.Ceiling(float activeCases * float barMaxHeight / float maxValue)
+                                let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
                                             Html.div [
-                                                prop.style [ style.height dHeight ]
+                                                prop.style [ style.height (int dHeight) ]
                                                 prop.className "bar--deceased" ]
                                             Html.div [
                                                 prop.style [ style.height rHeight ]
                                                 prop.className "bar--recovered" ]
                                         Html.div [
-                                            prop.style [ style.height aHeight ]
+                                            prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
                                     ]
                                 ]
@@ -372,7 +373,7 @@ let renderMunicipalities (state : State) _ =
         | None, None -> 0
         | Some _, None -> 1
         | None, Some _ -> -1
-        | Some s1, Some s2 -> System.String.Compare(s1, s2)
+        | Some s1, Some s2 -> String.Compare(s1, s2)
 
     let compareActiveCases m1 m2 =
         if m1.ActiveCases < m2.ActiveCases then 1
@@ -388,10 +389,10 @@ let renderMunicipalities (state : State) _ =
         match state.View with
         | ActiveCases ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> compareActiveCases m1 m2)
+            |> Seq.sortWith compareActiveCases
         | TotalConfirmedCases ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> compareMaxCases m1 m2)
+            |> Seq.sortWith compareMaxCases
         | DoublingTime ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
@@ -413,26 +414,48 @@ let renderMunicipalities (state : State) _ =
                 else compareActiveCases m1 m2)
 
     let truncatedData, displayShowAllButton =
-        if state.ShowAll = true
-        then sortedMunicipalities, true
+        if state.ShowAll then sortedMunicipalities, true
         else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
         else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
     (truncatedData |> Seq.map (fun municipality -> renderMunicipality state municipality), displayShowAllButton)
 
 let renderShowMore showAll dispatch =
+
+    let scrollToElement (e: MouseEvent) =
+            e.preventDefault ()
+
+            dispatch ToggleShowAll
+
+            let element =
+                document.getElementById "municipalities-chart"
+
+            let offset = -100.
+
+            let position =
+                element.getBoundingClientRect().top
+                + window.pageYOffset
+                + offset
+
+            if showAll then
+                window.scrollTo
+                    ({| top = position
+                        behavior = "auto" |}
+                     |> unbox) // behavior = smooth | auto
+
     Html.div [
         prop.className "show-all"
         prop.children [
             Html.div [
-                Html.button [
+                Html.a [
                     prop.className "btn btn-primary"
                     prop.text (if showAll then I18N.t "charts.municipalities.showLess" else I18N.t "charts.municipalities.showAll")
-                    prop.onClick (fun _ -> dispatch ToggleShowAll)
+                    prop.onClick scrollToElement
                 ]
             ]
         ]
     ]
+
 
 let renderSearch (query : string) dispatch =
     Html.input [
@@ -440,7 +463,7 @@ let renderSearch (query : string) dispatch =
         prop.type' .text
         prop.placeholder (I18N.t "charts.municipalities.search")
         prop.valueOrDefault query
-        prop.onChange (fun query -> SearchInputChanged query |> dispatch)
+        prop.onChange (SearchInputChanged >> dispatch)
     ]
 
 let renderRegionSelector (regions : Region list) (selected : string) dispatch =
@@ -461,7 +484,7 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.value selected
         prop.className "form-control form-control-sm filters__region"
         prop.children renderedRegions
-        prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
+        prop.onChange (RegionFilterChanged >> dispatch)
     ]
 
 let renderView (currentView : View) dispatch =

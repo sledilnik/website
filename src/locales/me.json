@@ -1,0 +1,205 @@
+{
+    "charts": {
+        "patients": {
+            "byHospital": "Po bolnicama",
+            "structure": "Struktura",
+            "title": "Hospitalizacije"
+        },
+        "cases": {
+            "deceased": "Umrli",
+            "recovered": "Oporavljeni",
+            "ventilator": "Na ventilatoru",
+            "icu": "u intezivnoj",
+            "hospitalized": "Hospitalizovani",
+            "active": "Aktivni",
+            "title": "Potvrdjeni slucajevi"
+        },
+        "metricsComparison": {
+            "deceasedToDate": "Umrli (do dana)",
+            "deceased": "Umrli (dnevni)",
+            "dischargedToDate": "Optusteni iz bolnica (do dana)",
+            "discharged": "Otpusteni iz bolnice (dnevno)",
+            "ventilator": "Na respiratoru",
+            "icu": "u Intezivnoj njezi",
+            "hospitalizedToDate": "Hospitalizovani (do dana)",
+            "hospitalized": "Hospitalizovani",
+            "recovered": "Oporavljeni (do dana)",
+            "active": "Aktivni slucajevi",
+            "confirmedToDate": "Potvrdjenih slucajeva (do dana)",
+            "confirmed": "Potvrdjenih slicajeva (dnevno)",
+            "testsToDate": "Testova (do dana)",
+            "tests": "Testova (dnevno)",
+            "title": "COVID-19 Situacija u zemlji",
+            "title_SVN": "COVID-19 Situacija u Sloveniji",
+            "title_MKD": "COVID-19 Situacija u S. Makedoniji",
+            "title_MNE": "COVID-19 Situacija u Crnoj Gori"
+        },
+        "common": {
+            "shortDateFormat": "%b %e",
+            "longDateFormat": "%B %e, %Y",
+            "dateFormat": "%A, %B %e, %Y",
+            "numDateFormat": "%m/%d/%Y",
+            "close": "Zatvori",
+            "share": "Podijeli",
+            "webpage": "Webpage",
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "FAQ",
+            "noteFaq": "Biljeska: Granice prikazanih podatka su opisani u ",
+            "log": "Logaritamski",
+            "linear": "Linearno",
+            "view": "Pogled:",
+            "yAxis": "Y osa:",
+            "xAxis": "X osa:",
+            "decimalPoint": ".",
+            "thousandsSep": " ",
+            "all": "Svi",
+            "x_months_0": "{{ count }}m",
+            "x_months_1": "Vise",
+            "x_months_2": "Ostali",
+            "resetZoom": "Reset zoom",
+            "zoom": "Zoom",
+            "resetZoomTitle": "Reset zoom level 1:1",
+            "to": "-",
+            "from": " ",
+            "loading": "Ucitavanje …",
+            "dsOWD": "Ime izvora podataka",
+            "dsMZ": "Ministarstvo zdravlja",
+            "dsNIJZ": "IJZCG",
+            "dataSource": "izvor podataka"
+        }
+    },
+    "phase": {
+        "7": {
+            "description": "kraj epidemije",
+            "title": "Faza 7"
+        },
+        "6": {
+            "description": "nova metodologija testiranja,studija",
+            "title": "Faza 6"
+        },
+        "5": {
+            "description": "nova metodologioja testiranja",
+            "title": "Faza 5"
+        },
+        "4": {
+            "description": "nova metodologija testiranja",
+            "title": "Faza 4"
+        },
+        "3": {
+            "description": "nova metodologija testiranja",
+            "title": "Faza 3"
+        },
+        "2": {
+            "description": "epidemija, nova metodologija testiranja",
+            "title": "Faza 2"
+        },
+        "1": {
+            "title": "Faza 1"
+        }
+    },
+    "weekday": {
+        "6": "Subota",
+        "5": "Petak",
+        "4": "Cetvrtak",
+        "3": "Srijeda",
+        "2": "Utorak",
+        "1": "Ponedeljak",
+        "0": "Nedelja"
+    },
+    "shortMonth": {
+        "11": "Dec",
+        "10": "Nov",
+        "9": "Okt",
+        "8": "Sep",
+        "7": "Avg",
+        "6": "Jul",
+        "5": "Jun",
+        "4": "Maj",
+        "3": "Apr",
+        "2": "Mar",
+        "1": "Feb",
+        "0": "Jan"
+    },
+    "month": {
+        "11": "Decembar",
+        "10": "Novembar",
+        "9": "Oktobar",
+        "8": "Septembar",
+        "7": "Avgust",
+        "6": "Jul",
+        "5": "Jun",
+        "4": "Maj",
+        "3": "April",
+        "2": "Mart",
+        "1": "Februar",
+        "0": "Januar"
+    },
+    "embedMaker": {
+        "copied": "Kopirano!",
+        "copy": "Kopiraj",
+        "descriptionPart2": "klikni ovdje",
+        "descriptionPart1": "Specifican izgled moze biti prilagodjen vasim potrebama. Moguce je promjeniti velicinu preuzetog dijagrama ili je moguce izbrati samo specificni region ili opstinu. Za vise, ",
+        "description": "Specifican izgled moze biti prilagodjen vasim potrebama. Moguce je promjeniti velicinu preuzetog dijagrama ili je moguce izbrati samo specificni region ili opstinu. Za vise,\n<a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">check here</a>.",
+        "embedCode": "Embed code:",
+        "preview": "Pregled",
+        "chooseChart": "Izaberi dijagram",
+        "title": "Preuzimanje dijagrama u svoju web stranicu"
+    },
+    "tables": {
+        "day": "{{ date, M/D }}",
+        "sourceLink": "GDocs spreadsheet, CSV format or REST API",
+        "source": "Izvori podataka u drugim formatima",
+        "tabByAgeFemale": "Po starosti - Zene",
+        "tabByAgeMale": "Po starosti - Muskarci",
+        "tabByRegion": "Po regionu",
+        "tabSummary": "Sumarno",
+        "title": "Tabela"
+    },
+    "infocard": {
+        "lastUpdated": "{{ date, dddd, MMMM Do }}",
+        "accordingTo": "According to {{ date, MMMM Do }}",
+        "deceasedToDate": "Potvrdjeni smrtni slucajevi",
+        "icu": "Na intezivnoj njezi",
+        "inHospital": "Hospitalizovani",
+        "recoveredToDate": "Oporavljeni",
+        "active": "Aktivni slucajevi",
+        "confirmedToDate": "Potvrdjeni slucajevi",
+        "tests": "Testova danas"
+    },
+    "notice": {
+        "news002": "Potvrdjeni slucajevi po godistima",
+        "newChart": "Novi dijagram:"
+    },
+    "timestamp": {
+        "at": "at {{ date, HH:mm }}",
+        "updated": "Azurirano"
+    },
+    "navbar": {
+        "language": {
+            "me": "Crnogorski",
+            "it": "Italijanski",
+            "sq": "Albanski",
+            "sl": "Slovenacki",
+            "mk": "Makedonski",
+            "hr": "Hrvatski",
+            "en": "Engleski",
+            "de": "Njemacki"
+        },
+        "github": "GitHub",
+        "links": "LInkovi",
+        "sources": "Izvori",
+        "team": "Tim",
+        "about": "O nama",
+        "faq": "FAQ",
+        "models": "Modeli",
+        "tables": "Tabele",
+        "world": "Svijet",
+        "home": "Kuci",
+        "menu": "Meni"
+    },
+    "meta": {
+        "description": "COVID-19 Montenegro Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Montenegro.",
+        "title": "COVID-19 Pracenje podataka"
+    }
+}

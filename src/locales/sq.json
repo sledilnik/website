@@ -40,7 +40,6 @@
             "full": "Të plotësuar"
         },
         "countries": {
-            "groupNeighbouringWoItaly": "Shtetet e rajonit",
             "groupNeighbouring": "Shtetet e rajonit",
             "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
             "groupCriticalEU": "Shtete kritike (BE)",
@@ -48,12 +47,6 @@
             "groupExYu": "Ish-Jugosllavia",
             "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
             "groupLatinAmerica": "Amerika Latine",
-            "chronologically": "Në mënyrë kronologjike",
-            "sinceFirstDeath": "Që nga rasti i parë i vdekjes",
-            "deathsPerMillion": "Numri i të vdekurve për 1 milion banorë",
-            "sinceOneDeathPerMillion": "Që nga rasti i parë i vdekjes për 1 milion banorë",
-            "daysFromOneDeathPerMillion": "Nr. i ditëve që nga rasti i parë i vdekjes në 1 milion banorë",
-            "daysFromFirstDeath": "Nr. i ditëve që nga rasti i parë i vdekjes",
             "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
             "title": "Krahasim sipas shtetit"
         },
@@ -161,8 +154,8 @@
             "emergencyExamination": "Kontrollet në njësinë e urgjencës"
         },
         "ratios": {
-            "hospitalDeceasedShare": "Përqindja e vdekjeve në spital",
-            "icuDeceasedShare": "Përqindja e vdekjeve në njësi për kujdes intensiv",
+            "hospitalDeceasedShare": "Përqindja e rasteve të vdekjes në spital",
+            "icuDeceasedShare": "Përqindja e rasteve të të vdekurve në njësi për kujdes intensiv",
             "icuMortality": "Vdekshmëria në njësi për kujdes intensiv",
             "hospitalMortality": "Vdekshmëria për spital",
             "deceasedHospital": "Të vdekur",
@@ -173,7 +166,7 @@
             "icuCases": "Në njësinë për kujdes intensiv",
             "hospitalCases": "Të shtruar në spital",
             "mortality": "Vdekshmëria",
-            "hospitalizations": "Shtrime në spital",
+            "hospitalizations": "Të shtruar në spital",
             "seriousCases": "Raste të rënda",
             "title": "Përqindja e rasteve serioze"
         },
@@ -188,7 +181,7 @@
             "hospitalizedIn": "Të shtruar në spital në:",
             "byHospital": "Sipas spitaleve",
             "structure": "Struktura",
-            "title": "Shtrimi në spital"
+            "title": "Të shtruar në spital"
         },
         "cases": {
             "deceased": "Të vdekur",
@@ -214,7 +207,10 @@
             "confirmed": "Raste të konfirmuara (në ditë)",
             "testsToDate": "Teste (deri sot)",
             "tests": "Teste (në ditë)",
-            "title": "Situata me COVID-19 në Maqedoninë e Veriut"
+            "title": "Situata me COVID-19 në vend",
+            "title_SVN": "Situata me COVID-19 në Slloveni",
+            "title_MKD": "Situata me COVID-19 në Maqedoninë e Veriut",
+            "title_MNE": "Situata me COVID-19 në Mal të Zi"
         },
         "common": {
             "shortDateFormat": "%e. %b",
@@ -264,7 +260,42 @@
             "newCases": "Raste të reja"
         },
         "ageGroupsTimeline": {
-            "title": "Rastet e konfirmuara sipas grupmoshës"
+            "title": "Rastet e konfirmuara sipas grupmoshës",
+            "activeCasesRelative": "Raste aktive (relative)",
+            "activeCases": "Raste aktive",
+            "newCases": "Raste të reja"
+        },
+        "countriesTotalDeathsPer1M": {
+            "legendTitle": "Gjithsej raste vdekje për 1 milion banorë",
+            "title": "Shtetet: Gjithsej raste vdekje për 1 milion banorë",
+            "yAxisTitle": "Gjithsej raste vdekje për 1 milion banorë"
+        },
+        "countriesNewCasesPer1M": {
+            "legendTitle": "Raste të reja për 1 milion banorë",
+            "yAxisTitle": "Raste të reja për 1 milion banorë",
+            "title": "Shtetet: Raste të reja për 1 milion banorë"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "kriteret për listën e kuqe",
+            "legendTitle": "Rastet aktive për 1M popullsi",
+            "yAxisTitle": "Rastet aktive për 1 milion popullsi",
+            "title": "Shtetet: Rastet aktive për 1 milion popullsi"
+        },
+        "world": {
+            "title": "Gjendja me COVID-19 në botë"
+        },
+        "rmap": {
+            "title": "Harta e rajoneve"
+        },
+        "countriesDeathsPerCases": {
+            "title": "Shtetet: përqindja e vdekjeve nga rastet e konfirmuara",
+            "chronologically": "Kronologjike",
+            "sinceFirstDeath": "Që nga vdekja e parë",
+            "sinceOneDeathPerMillion": "Që nga vdekja e parë për 1 milion banorë",
+            "daysFromFirstDeath": "Numri i ditëve nga vdekja e parë",
+            "daysFromOneDeathPerMillion": "Numri i ditëve nga vdekja e parë për 1 milion banorë",
+            "legendTitle": "Përqindja e vdekjeve nga rastet e konfirmuara",
+            "yAxisTitle": "Gjithsej vdekje nga rastet e konfirmuara"
         }
     },
     "shortMonth": {
@@ -305,15 +336,18 @@
         "home": "Ballina",
         "menu": "Menu",
         "language": {
-            "en": "Angleze",
-            "sl": "Sllovene",
-            "sq": "Shqiptar",
+            "en": "Anglisht",
+            "sl": "Sllovenisht",
+            "sq": "Shqip",
             "mk": "Maqedonisht",
             "hr": "Kroatisht",
-            "de": "Gjermanisht"
+            "de": "Gjermanisht",
+            "it": "Italisht",
+            "me": "Malazezisht"
         },
         "github": "GitHub",
-        "links": "Linqe"
+        "links": "Linqe",
+        "world": "Bota"
     },
     "country": {
         "DEU": "Gjermani",
@@ -378,10 +412,197 @@
         "NMA": "Qipro",
         "POL": "Poloni",
         "PRT": "Portugali",
-        "RKS": "Kosovë",
+        "XKX": "Kosovë",
         "SMR": "San Marino",
         "UKR": "Ukrainë",
-        "VAT": "Vatikan"
+        "VAT": "Vatikani",
+        "BRB": "Barbados",
+        "BMU": "Bermuda",
+        "BLM": "Shën Bartolome",
+        "BHR": "Bahrein",
+        "BFA": "Burkina Faso",
+        "BEN": "Benini",
+        "AZE": "Azerbajxhan",
+        "ATF": "Territoret Jugore Franceze",
+        "ASM": "Samoa Amerikane",
+        "ARE": "Emiratet e Bashkuara Arabe",
+        "AIA": "Anguilla",
+        "AFG": "Afganistan",
+        "ABW": "Aruba",
+        "ZWE": "Zimbabve",
+        "ZMB": "Zambia",
+        "ZAF": "Afrika Jugore",
+        "YEM": "Jemeni",
+        "WSM": "Samoa",
+        "WLF": "Valis dhe Futuna",
+        "VUT": "Vanuatu",
+        "VNM": "Vietnami",
+        "VIR": "Ishujt e Virgjëra të SHBA",
+        "VGB": "Ishujt e Virgjër Britanikë",
+        "VEN": "Venecuela",
+        "VCT": "Shën Vincenti dhe Grenadinet",
+        "UZB": "Uzbekistani",
+        "URY": "Uruguaji",
+        "UMI": "Territoret amerikane në Paqësor",
+        "UGA": "Uganda",
+        "TZA": "Tanzania",
+        "TUV": "Tuvalu",
+        "TUN": "Tunizia",
+        "TTO": "Trinidad dhe Tobago",
+        "TON": "Tonga",
+        "TLS": "Timori Lindor",
+        "TKM": "Turkmenistani",
+        "TKL": "Tokelau",
+        "TJK": "Taxhikistani",
+        "THA": "Tajlanda",
+        "TGO": "Togo",
+        "TCD": "Çadi",
+        "TCA": "Ishujt Turks dhe Kaikos",
+        "SYR": "Siria",
+        "SYC": "Sejshelet",
+        "SXM": "Shën Martini",
+        "SWZ": "Svazilandi",
+        "SUR": "Surinami",
+        "STP": "Sao Tome dhe Principe",
+        "SSD": "Sudani Jugor",
+        "SPM": "Shën Pieri dhe Mikeloni",
+        "SOM": "Somalia",
+        "SLV": "El Salvadori",
+        "SLE": "Siera Leone",
+        "SLB": "Ishujt Solomone",
+        "SJM": "Svalbard dhe Zhan Mejen",
+        "SHN": "Shën Helena",
+        "SGS": "Gjeorgjia Jugore dhe Ishujt Jugorë Sanduiç",
+        "SEN": "Senegali",
+        "SDN": "Sudani",
+        "SAU": "Arabia Saudite",
+        "RWA": "Ruanda",
+        "REU": "Reunion",
+        "QAT": "Katari",
+        "PYF": "Polinezia Franceze",
+        "PSE": "Territoret Palestineze, të Okupuara",
+        "PRY": "Paraguaji",
+        "PRK": "Koreja e Veriut",
+        "PRI": "Porto Riko",
+        "PNG": "Papua Guinea e Re",
+        "PLW": "Palau",
+        "PHL": "Filipinet",
+        "PCN": "Ishujt Pitkairn",
+        "PAN": "Panama",
+        "PAK": "Pakistani",
+        "OMN": "Omani",
+        "NRU": "Nauru",
+        "NPL": "Nepali",
+        "NIU": "Niue",
+        "NIC": "Nikaragua",
+        "NGA": "Nigeria",
+        "NFK": "Ishulli Norfolk",
+        "NER": "Nigeri",
+        "NCL": "Kaledonia e Re",
+        "NAM": "Namibia",
+        "MYT": "Majoti",
+        "MYS": "Malejzia",
+        "MWI": "Malavi",
+        "MUS": "Mauriciusi",
+        "MTQ": "Martiniku",
+        "MSR": "Monserati",
+        "MRT": "Mauritania",
+        "MOZ": "Mozambiku",
+        "MNP": "Ishujt Mariana Veriore",
+        "MNG": "Mongolia",
+        "MMR": "Mianmari",
+        "MLI": "Mali",
+        "MHL": "Ishujt Marshall",
+        "MDV": "Maldivet",
+        "MDG": "Madagaskari",
+        "MCO": "Monako",
+        "MAR": "Maroku",
+        "MAF": "Shën Martini",
+        "MAC": "Makao",
+        "LSO": "Lesoto",
+        "LKA": "Shri Lanka",
+        "LCA": "Shën Luçia",
+        "LBY": "Libia",
+        "LBR": "Liberia",
+        "LBN": "Libani",
+        "LAO": "Laosi",
+        "KWT": "Kuvajti",
+        "KNA": "Shën Kristoferi dhe Nevisi",
+        "KIR": "Kiribati",
+        "KHM": "Kamboxha",
+        "KGZ": "Kirgistani",
+        "KEN": "Kenia",
+        "KAZ": "Kazakistani",
+        "JOR": "Jordania",
+        "JEY": "Xherzi",
+        "JAM": "Xhamajka",
+        "ISR": "Izraeli",
+        "IRQ": "Iraku",
+        "IOT": "Territori Britanik i Oqeanit Indian",
+        "IND": "India",
+        "IMN": "Ishulli i Manit",
+        "IDN": "Indonezia",
+        "HTI": "Haiti",
+        "HND": "Hondurasi",
+        "HMD": "Ishujt Herd dhe Ishujt Mekdonalld",
+        "HKG": "Hong Kongu",
+        "GUY": "Guajana",
+        "GUM": "Guam",
+        "GUF": "Guinea Franceze",
+        "GTM": "Guatemala",
+        "GRL": "Grenlanda",
+        "GRD": "Grenada",
+        "GNQ": "Guinea Ekuatoriale",
+        "GNB": "Guinea-Bisau",
+        "GMB": "Gambia",
+        "GLP": "Guadalupe",
+        "GIN": "Guinea",
+        "GIB": "Gjibraltari",
+        "GHA": "Gana",
+        "GGY": "Gernzi",
+        "GEO": "Gjeorgjia",
+        "GAB": "Gaboni",
+        "FSM": "Mikronezia",
+        "FLK": "Ishujt Falkland",
+        "FJI": "Fixhi",
+        "ETH": "Etiopia",
+        "ESH": "Sahara Perëndimore",
+        "ERI": "Eritrea",
+        "EGY": "Egjipti",
+        "DZA": "Algjeria",
+        "DOM": "Republika Dominikane",
+        "DMA": "Dominika",
+        "DJI": "Xhibuti",
+        "CYM": "Ishujt Kajman",
+        "CXR": "Ishulli i Krishtlindjeve",
+        "CUW": "Kurasao",
+        "CUB": "Kuba",
+        "CRI": "Kostarika",
+        "CPV": "Kepi Verde",
+        "COM": "Ishujt Komore",
+        "COK": "Ishujt Kuk",
+        "COG": "Kongo - Brazavil",
+        "COD": "Republika Demokratike e Kongos",
+        "CMR": "Kameruni",
+        "CIV": "Bregu i Fildishtë",
+        "CCK": "Ishujt Kokos (Kiling)",
+        "CAN": "Kanada",
+        "CAF": "Republika e Afrikës Qendrore",
+        "BWA": "Botsuana",
+        "BVT": "Ishulli Bouvet",
+        "BTN": "Butani",
+        "BRN": "Brunei",
+        "BOL": "Bolivia",
+        "BLZ": "Belize",
+        "BHS": "Bahamet",
+        "BGD": "Bangladeshi",
+        "BES": "Holanda Karibiane",
+        "BDI": "Burundi",
+        "ATG": "Antigua dhe Barbuda",
+        "ATA": "Antarktiku",
+        "ARM": "Armenia",
+        "ALA": "Ishujt Oland",
+        "AGO": "Angola"
     },
     "meta": {
         "description": "COVID-19 Treker Maqedoni e Veriut - të dhëna të grumbulluara, të verifikuara, të përditësuara, të analizuara dhe të shqyrtuara për COVID-19 për Maqedoninë e Veriut.",
@@ -411,7 +632,7 @@
     "infocard": {
         "lastUpdated": "{{ date, dddd, D. MMMM }}",
         "accordingTo": "Sipas {{ date, MMMM Do }}",
-        "deceasedToDate": "Vdekje të konfirmuara",
+        "deceasedToDate": "Raste vdekje të konfirmuara",
         "icu": "Në njësinë për kujdes intensiv",
         "inHospital": "Të shtruar në spital",
         "recoveredToDate": "Të shëruar",
@@ -421,11 +642,13 @@
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
-        "news001": "Grafikon i ri:"
+        "newChart": "Grafikon i ri:",
+        "newsText": "Koronavirusi Botë - Harta 🌍 - rastet aktive për 1M popullsi",
+        "newPage": "Faqe e re:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
-        "updated": "Përditësuar më {{ date, dddd, MMMM Do YYYY }}"
+        "updated": "Përditësuar më: {{ date, dddd, MMMM Do YYYY }}"
     },
     "cm": {
         "quarantine14days": {
@@ -527,6 +750,22 @@
         "gatherings50": {
             "description": "Grumbullime deri në 50 persona, deri në 500 nëse miratohet nga ISHP",
             "title": "Deri në 50"
+        },
+        "gatherings10": {
+            "description": "Grumbullim deri në 10 persona, deri në 50 me listë të të pranishmëve, deri në 500 nëse është miratuar nga ISHP",
+            "title": "Deri 10"
+        },
+        "allSchools": {
+            "title": "Shkolla"
+        },
+        "croatia": {
+            "title": "Kroaci"
+        },
+        "quarantine10days": {
+            "title": "10 ditë"
+        },
+        "app": {
+            "title": "#OstaniZdrav"
         }
     },
     "tableDict": {
@@ -655,7 +894,7 @@
     "mk": {
         "hospital": {
             "mksk": "Spitali i montuar",
-            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë dhe Prilep",
+            "infdrugi": "Repartet infektive në Tetovë, Ohër, Veles, Kumanovë, Prilep, Gostivar, Strumicë dhe Strugë",
             "stip": "Shtip",
             "bitola": "Manastir",
             "gob8sep": "SPQ 8 Shtatori",
@@ -769,5 +1008,14 @@
                 "title": "Faza 1"
             }
         }
+    },
+    "country-groups": {
+        "groupNeighbouring": "Shtetet fqinje",
+        "groupCriticalEU": "Shtetet kritike (BE)",
+        "groupCriticalWorld": "Shtetet kritike (Botë)",
+        "groupNordic": "Shtetet Nordike",
+        "groupExYu": "Ish-Jugosllavia",
+        "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
+        "groupLatinAmerica": "Amerika Latine"
     }
 }

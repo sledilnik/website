@@ -14,8 +14,13 @@ let zeroToNone value =
     | Some 0 -> None
     | _ -> value
 
-let roundTo1Decimal (value: float) = System.Math.Round(value, 1)
-let roundTo3Decimals (value: float) = System.Math.Round(value, 3)
+let optionToInt (value: int option) =
+    match value with
+    | Some x -> x
+    | None -> 0
+
+let roundTo1Decimal (value: float) = Math.Round(value, 1)
+let roundTo3Decimals (value: float) = Math.Round(value, 3)
 
 let formatTo1DecimalWithTrailingZero (value: float) =
     let formatted = sprintf "%.1f" value
@@ -43,7 +48,7 @@ let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| 
         if value < 0.0 then None
         else Some value
 
-let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |} list) =
+let findDoublingTime (values : {| Date : DateTime ; Value : int option |} list) =
     let reversedValues =
         values
         |> List.choose (fun dp ->
@@ -61,7 +66,7 @@ let findDoublingTime (values : {| Date : System.DateTime ; Value : int option |}
         | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
     | _ -> None
 
-let classes (classTuples: (bool * string) seq) =
+let classes (classTuples: seq<bool * string>) =
     classTuples
     |> Seq.filter (fun (visible, _) -> visible)
     |> Seq.map (fun (_, className) -> className)
@@ -114,7 +119,7 @@ let renderLoading =
 let renderErrorLoading (error : string) =
     Html.text error
 
-let monthNameOfdate (date : System.DateTime) =
+let monthNameOfDate (date : DateTime) =
     match date.Month with
     | 1 -> I18N.t "month.0"
     | 2 -> I18N.t "month.1"
@@ -357,10 +362,10 @@ module Dictionaries =
           "starše", "Starše", 4011, "SI-115"
           "straža", "Straža", 3912, "SI-203"
           "sveta_ana", "Sveta Ana", 2297, "SI-181"
-          "sveta_trojica_v_slov._goricah", "Sveta Trojica v Slov. goricah", 2083, "SI-204"
-          "sveti_andraž_v_slov._goricah", "Sveti Andraž v Slov. goricah", 1187, "SI-182"
+          "sveta_trojica_v_slovenskih_goricah", "Sveta Trojica v Slov. goricah", 2083, "SI-204"
+          "sveti_andraž_v_slovenskih_goricah", "Sveti Andraž v Slov. goricah", 1187, "SI-182"
           "sveti_jurij_ob_ščavnici", "Sveti Jurij ob Ščavnici", 2788, "SI-116"
-          "sveti_jurij_v_slov._goricah", "Sveti Jurij v Slov. goricah", 2083, "SI-210"
+          "sveti_jurij_v_slovenskih_goricah", "Sveti Jurij v Slov. goricah", 2083, "SI-210"
           "sveti_tomaž", "Sveti Tomaž", 1998, "SI-205"
           "šalovci", "Šalovci", 1383, "SI-033"
           "šempeter-vrtojba", "Šempeter - Vrtojba", 6243, "SI-183"

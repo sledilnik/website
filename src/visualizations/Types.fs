@@ -111,9 +111,12 @@ type VisualizationType =
     | AgeGroups
     | AgeGroupsTimeline
     | Map
+    | RegionMap
     | EuropeMap
+    | WorldMap
     | Infections
     | CountriesCasesPer1M
+    | CountriesActiveCasesPer1M
     | CountriesDeathsPer1M
 
 type RenderingMode =

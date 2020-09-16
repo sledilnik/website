@@ -23,10 +23,10 @@ let ``Can calculate timeline``() =
 
     let baseDate = DateTime(2020, 03, 01)
 
-    let sourceData =
-        [ (baseDate, totalDay0);
-          (baseDate.AddDays 1., totalDay1);
-          (baseDate.AddDays 2., totalDay2) ]
+    let sourceData = {
+            StartDate = baseDate
+            Data = [| totalDay0; totalDay1; totalDay2 |]
+        }
 
     let onDay0 =
         buildAgeGroups()
@@ -41,10 +41,10 @@ let ``Can calculate timeline``() =
         |> withGroup (group 2 (Some 4) (Some 3))
         |> withGroup (group 1 (Some 3) (Some 10))
 
-    let expectedTimeline =
-          [ { Date = baseDate; Cases = onDay0 }
-            { Date = baseDate.AddDays 1.; Cases = onDay1 }
-            { Date = baseDate.AddDays 2.; Cases = onDay2 } ]
+    let expectedTimeline = {
+            StartDate = baseDate
+            Data = [| onDay0; onDay1; onDay2 |]
+        }
 
     test <@ calculateCasesByAgeTimeline sourceData = expectedTimeline @>
 
@@ -73,13 +73,10 @@ let ``Filters out leading and trailing days without any cases``() =
 
     let baseDate = DateTime(2020, 03, 01)
 
-    let sourceData =
-        [ (baseDate, totalDay0);
-          (baseDate.AddDays 1., totalDay1);
-          (baseDate.AddDays 2., totalDay2);
-          (baseDate.AddDays 3., totalDay3)
-          (baseDate.AddDays 4., totalDay4)
-        ]
+    let sourceData = {
+            StartDate = baseDate
+            Data = [| totalDay0; totalDay1; totalDay2; totalDay3; totalDay4 |]
+        }
 
     let onDay0 =
         buildAgeGroups()
@@ -94,10 +91,9 @@ let ``Filters out leading and trailing days without any cases``() =
         |> withGroup (group 2 (Some 4) (Some 3))
         |> withGroup (group 1 (Some 3) (Some 10))
 
-    let expectedTimeline =
-          [ { Date = baseDate.AddDays 1.; Cases = onDay0 }
-            { Date = baseDate.AddDays 2.; Cases = onDay1 }
-            { Date = baseDate.AddDays 3.; Cases = onDay2 }
-          ]
+    let expectedTimeline = {
+            StartDate = baseDate.AddDays 1.
+            Data = [| onDay0; onDay1; onDay2 |]
+        }
 
     test <@ calculateCasesByAgeTimeline sourceData = expectedTimeline @>

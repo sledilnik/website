@@ -42,7 +42,7 @@ To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del po
 <details>
   <summary id=other-countries>Kje lahko najdem primerjavo med Slovenijo in drugimi državami?</summary>
 
-Na Sledilnikovi glavni strani je čisto spodaj na voljo [Primerjava po državah](/sl/stats#countries-chart), ki kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Graf prikazuje primerjave kronološko, zgoraj je mogoče pogled spremeniti pregled *od prve smrti* oziroma *od prve smrti na milijon prebivalcev*. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.     
+Na Sledilnikovi strani [Svet](/sl/world) je na voljo zemljevid sveta, ki prikazuje [Stanje COVID-19 v svetu](/sl/world#world-chart). Na tej strani sta tudi grafa [Države: potrjeno okuženi na milijon prebivalcev](/sl/world#countries-cases-chart) in [Države: umrli (skupaj) na milijon prebivalcev](/sl/world#countries-deaths-chart), ki kaže primerjavo med Slovenijo in različnimi skupinami držav glede na potrjeno okužene in število smrti zaradi COVID-19 na milijon prebivalcev.      
 
 Za podrobnejše primerjave, ki upoštevajo še druge kategorije razen umrlih, si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/). Več priporočenih povezav si oglejte na [strani Povezave](/sl/links).
 
@@ -283,7 +283,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 5 (15.–21. april)**: Nova [sprememba metodologije testiranja](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se **po možnosti** testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom.
 
-* **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/Druga-dopolnitev-navodil-za-testiranje-na-COVID-19.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
+* **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
 * **Faza 7 (15. maj)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
     - 1.6.: sproščanje osnovna šola, zbiranje do 200 ljudi.
@@ -368,9 +368,18 @@ Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na 
 <details>
   <summary id=map-chart>Kaj nam kaže "Zemljevid po občinah"?</summary>
 
-[Zemljevid](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
+[Zemljevid po občinah](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*včeraj, 7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
+
+</details>
+
+<details>
+  <summary id=rmap-chart>Kaj nam kaže "Zemljevid po regijah"?</summary>
+
+[Zemljevid po regijah](/sl/stats#rmap-chart) nam pokaže epidemiološko sliko posameznih statističnih regij, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. 
+
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo regije pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
 
 </details>
 
@@ -404,7 +413,7 @@ Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega s
 
 [Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
 
-*Opomba: [NIJZ podatke o uvoženih primerih] objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
 
 Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
 
@@ -421,9 +430,27 @@ Demografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila
 </details>
 
 <details>
-  <summary id=countries-chart>Kaj kaže graf "Primerjava po državah"?</summary>
+  <summary id=world-chart>Kaj nam kaže "Stanje COVID-19 v svetu"?</summary>
 
-[Graf](/sl/stats#countries-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Graf prikazuje primerjave kronološko, zgoraj je mogoče pogled spremeniti pregled *od prve smrti* oziroma *od prve smrti na milijon prebivalcev*. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
+[Stanje COVID-19 v svetu](/sl/world#world-chart) nam v osnovnem pogledu *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases).
+
+Pogled *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
+
+*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*
+
+</details>
+
+<details>
+  <summary id=countries-cases-chart>Kaj kaže graf "Države: potrjeno okuženi na milijon prebivalcev"?</summary>
+
+[Graf](/sl/world#countries-cases-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število potrjeno okuženih na milijon prebivalcev. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
+
+</details>
+
+<details>
+  <summary id=countries-deaths-chart>Kaj kaže graf "Države: umrli (skupaj) na milijon prebivalcev"?</summary>
+
+[Graf](/sl/world#countries-deaths-chart) kaže primerjavo med Slovenijo in različnimi skupinami držav glede na število smrti zaradi COVID-19 na milijon prebivalcev. Spodaj lahko s klikom na ustrezne zavihke preklapljate med primerjavo Slovenije z različnimi skupinami držav.      
 
 </details>
 
@@ -438,7 +465,7 @@ Zato je treba te kategorije jemati z védenjem, kaj pomenijo, in interpretirati 
 
 </details>
 
-<!--<details>
+<details>
   <summary id=chart-percentage>Kako računate odstotni (%) prirast? </summary>
 
 Za odstotni prirast vzamemo trenutno vrednost spremenljivke in od nje odštejemo stanje prejšnjega dne. Dobljeno razliko delimo s stanjem prejšnjega dne in jo pomnožimo s 100, da dobimo odstotni prirast, ki ga za potrebe predstavitve zaokrožimo na eno decimalko natančno.
@@ -461,7 +488,7 @@ Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnj
 
 Čas podvojitve kot kazalec hitrosti širjenja epidemije se spreminja (pada, raste), zato ga ne smemo preprosto projicirati v prihodnost; kaže nam zgolj trenutno hitrost podvajanja primerov na podlagi podatkov iz preteklosti.
 
-</details>-->
+</details>
 
 ## O projektu
 

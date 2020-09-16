@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner, faGlobe, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import 'whatwg-fetch'
@@ -14,7 +14,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // fontawesome
-library.add(faArrowCircleUp, faArrowCircleDown, faArrowCircleLeft, faArrowCircleRight, faSpinner)
+library.add(faSpinner, faGlobe, faCaretDown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

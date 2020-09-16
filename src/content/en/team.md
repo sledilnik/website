@@ -27,21 +27,23 @@ Data editors and other collaborators:
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation
--   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
--   [Miha Kadunc](https://twitter.com/miha_kadunc) - data model and validation, modeling
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
+-   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - sources, data validation
 -   [Mia Erbus](https://github.com/miaerbus) - web page
+-   [Miha Kadunc](https://twitter.com/miha_kadunc) - data model and validation, modeling
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - translations
 -   [Mitja Potočin](https://github.com/mitjapotocin) - web page
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
+-   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling

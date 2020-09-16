@@ -12,8 +12,12 @@ open Browser
 
 open Highcharts
 open Types
+open Data.OurWorldInData
 
-let geoJsonUrl = "/maps/europe.geo.json"
+type MapToDisplay = Europe | World
+
+let europeGeoJsonUrl = "/maps/europe.geo.json"
+let worldGeoJsonUrl = "/maps/world-robinson.geo.json"
 
 type GeoJson = RemoteData<obj, string>
 
@@ -45,7 +49,9 @@ type ChartType =
         | Restrictions -> I18N.t "charts.europe.restrictions"
 
 type State =
-    { GeoJson: GeoJson
+    { MapToDisplay : MapToDisplay
+      Countries : CountrySelection
+      GeoJson: GeoJson
       OwdData: OwdData
       CountryData: CountriesMap
       ChartType: ChartType }
@@ -57,7 +63,10 @@ type Msg =
     | OwdDataReceived of OwdData
     | ChartTypeChanged of ChartType
 
-let countries =
+let worldCountries =
+    [ "AFG" ; "ALB" ; "DZA" ; "ASM" ; "AND" ; "AGO" ; "AIA" ; "ATA" ; "ATG" ; "ARG" ; "ARM" ; "ABW" ; "AUS" ; "AUT" ; "AZE" ; "BHS" ; "BHR" ; "BGD" ; "BRB" ; "BLR" ; "BEL" ; "BLZ" ; "BEN" ; "BMU" ; "BTN" ; "BOL" ; "BES" ; "BIH" ; "BWA" ; "BVT" ; "BRA" ; "IOT" ; "BRN" ; "BGR" ; "BFA" ; "BDI" ; "CPV" ; "KHM" ; "CMR" ; "CAN" ; "CYM" ; "CAF" ; "TCD" ; "CHL" ; "CHN" ; "CXR" ; "CCK" ; "COL" ; "COM" ; "COD" ; "COG" ; "COK" ; "CRI" ; "HRV" ; "CUB" ; "CUW" ; "CYP" ; "CZE" ; "CIV" ; "DNK" ; "DJI" ; "DMA" ; "DOM" ; "ECU" ; "EGY" ; "SLV" ; "GNQ" ; "ERI" ; "EST" ; "SWZ" ; "ETH" ; "FLK" ; "FRO" ; "FJI" ; "FIN" ; "FRA" ; "GUF" ; "PYF" ; "ATF" ; "GAB" ; "GMB" ; "GEO" ; "DEU" ; "GHA" ; "GIB" ; "GRC" ; "GRL" ; "GRD" ; "GLP" ; "GUM" ; "GTM" ; "GGY" ; "GIN" ; "GNB" ; "GUY" ; "HTI" ; "HMD" ; "VAT" ; "HND" ; "HKG" ; "HUN" ; "ISL" ; "IND" ; "IDN" ; "IRN" ; "IRQ" ; "IRL" ; "IMN" ; "ISR" ; "ITA" ; "JAM" ; "JPN" ; "JEY" ; "JOR" ; "KAZ" ; "KEN" ; "KIR" ; "PRK" ; "KOR" ; "KWT" ; "KGZ" ; "LAO" ; "LVA" ; "LBN" ; "LSO" ; "LBR" ; "LBY" ; "LIE" ; "LTU" ; "LUX" ; "MAC" ; "MDG" ; "MWI" ; "MYS" ; "MDV" ; "MLI" ; "MLT" ; "MHL" ; "MTQ" ; "MRT" ; "MUS" ; "MYT" ; "MEX" ; "FSM" ; "MDA" ; "MCO" ; "MNG" ; "MNE" ; "MSR" ; "MAR" ; "MOZ" ; "MMR" ; "NAM" ; "NRU" ; "NPL" ; "NLD" ; "NCL" ; "NZL" ; "NIC" ; "NER" ; "NGA" ; "NIU" ; "NFK" ; "MNP" ; "NOR" ; "OMN" ; "PAK" ; "PLW" ; "PSE" ; "PAN" ; "PNG" ; "PRY" ; "PER" ; "PHL" ; "PCN" ; "POL" ; "PRT" ; "PRI" ; "QAT" ; "MKD" ; "ROU" ; "RUS" ; "RWA" ; "REU" ; "BLM" ; "SHN" ; "KNA" ; "LCA" ; "MAF" ; "SPM" ; "VCT" ; "WSM" ; "SMR" ; "STP" ; "SAU" ; "SEN" ; "SRB" ; "SYC" ; "SLE" ; "SGP" ; "SXM" ; "SVK" ; "SVN" ; "SLB" ; "SOM" ; "ZAF" ; "SGS" ; "SSD" ; "ESP" ; "LKA" ; "SDN" ; "SUR" ; "SJM" ; "SWE" ; "CHE" ; "SYR" ; "TWN" ; "TJK" ; "TZA" ; "THA" ; "TLS" ; "TGO" ; "TKL" ; "TON" ; "TTO" ; "TUN" ; "TUR" ; "TKM" ; "TCA" ; "TUV" ; "UGA" ; "UKR" ; "ARE" ; "GBR" ; "UMI" ; "USA" ; "URY" ; "UZB" ; "VUT" ; "VEN" ; "VNM" ; "VGB" ; "VIR" ; "WLF" ; "ESH" ; "YEM" ; "ZMB" ; "ZWE" ; "ALA" ; "XKX"]
+
+let euCountries =
     [ "ALB"
       "AND"
       "AUT"
@@ -105,93 +114,128 @@ let countries =
       "UKR"
       "GBR"
       "VAT"
-      "RKS"
+      "XKX"
       "NCY"
       "NMA" ]
 
-let owdCountries =
-    countries
-    |> List.map (fun code -> if code = "RKS" then "OWID_KOS" else code) // hack for Kosovo code
-
 let greenCountries =
-    Set.ofList
-        [ "AUT"
-          "CYP"
-          "CZE"
-          "DNK"
-          "EST"
-          "FIN"
-          "GRC"
-          "FRA"
-          "IRL"
-          "ISL"
-          "ITA"
-          "LVA"
-          "LIE"
-          "LTU"
-          "HUN"
-          "MLT"
-          "DEU"
-          "NOR"
-          "SVK"
-          "ESP"
-          "CHE"
-          "BEL"
-          "NLD" ]
+    Map.ofList
+        [ ("AUT", "")
+          ("CYP", "")
+          ("EST", "")
+          ("FIN", "")
+          ("GEO", "")
+          ("ITA", "")
+          ("LVA", "")
+          ("LIE", "")
+          ("LTU", "")
+          ("HUN", "")
+          ("DEU", "")
+          ("NOR", "")
+          ("NZL", "")
+          ("RWA", "")
+          ("SMR", "")
+          ("SVK", "")
+          ("URY", "")
+          ("VAT", "")
+          ("GBR", "") ]
 
 let redCountries =
-    Set.ofList
-        [ "QAT"
-          "BHR"
-          "CHL"
-          "KWT"
-          "PER"
-          "ARM"
-          "DJI"
-          "OMN"
-          "BRA"
-          "PAN"
-          "BLR"
-          "AND"
-          "SGP"
-          "SWE"
-          "MDV"
-          "STP"
-          "ARE"
-          "USA"
-          "SAU"
-          "RUS"
-          "MDA"
-          "GIB"
-          "BOL"
-          "PRI"
-          "GAB"
-          "CYM"
-          "DOM"
-          "ZAF"
-          "IRN"
-          "GBR"
-          "MKD"
-          "BIH"
-          "SRB"
-          "RKS"
-          "PRT"
-          "ALB" ]
+    Map.ofList
+        [ ("ALB", "")
+          ("AND", "")
+          ("ARG", "")
+          ("ARM", "")
+          ("AZE", "")
+          ("BAH", "")
+          ("BHR", "")
+          ("BEL", "")
+          ("BLZ", "")
+          ("BOL", "")
+          ("BIH", "")
+          ("BRA", "")
+          ("CHL", "")
+          ("MNE", "")
+          ("VIR", "")
+          ("DOM", "")
+          ("ECU", "")
+          ("GNQ", "")
+          ("SWZ", "")
+          ("FRO", "")
+          ("PHL", "")
+          ("GAB", "")
+          ("GMB", "")
+          ("GIB", "")
+          ("GTM", "")
+          ("GUM", "")
+          ("HND", "")
+          ("HRV", "")
+          ("IND", "")
+          ("IRQ", "")
+          ("IRN", "")
+          ("ISR", "")
+          ("ZAF", "")
+          ("QAT", "")
+          ("KAZ", "")
+          ("KGZ", "")
+          ("CHN", "")
+          ("COL", "")
+          ("XKX", "")
+          ("CRI", "")
+          ("KWT", "")
+          ("LBN", "")
+          ("LBY", "")
+          ("LUX", "")
+          ("MDV", "")
+          ("MLT", "")
+          ("MAR", "")
+          ("MEX", "")
+          ("MDA", "")
+          ("MCO", "")
+          ("NAM", "")
+          ("NLD", "")
+          ("OMN", "")
+          ("PAN", "")
+          ("PRY", "")
+          ("PER", "")
+          ("PRI", "")
+          ("ROU", "")
+          ("RUS", "")
+          ("SLV", "")
+          ("STP", "")
+          ("SAU", "")
+          ("MKD", "")
+          ("SGP", "")
+          ("MAF", "")
+          ("SUR", "")
+          ("ESP", "")
+          ("TCA", "")
+          ("VEN", "")
+          ("UKR", "")
+          ("CPV", "")
+          ("USA", "")
+          ("ARE", "") ]
 
 let importedFrom =
     Map.ofList
-        [ ("BIH", 18)
-          ("SRB", 11)
-          ("HRV", 10)
-          ("RKS", 6)
-          ("MNE", 3)
-          ("KAZ", 2) ]
+        [ ("HRV", 14)
+          ("AUT", 9)
+          ("BIH", 8)
+          ("RUS", 6)
+          ("HUN", 5)
+          ("CZE", 4)
+          ("DEU", 4)
+          ("XKX", 4)
+          ("GRC", 4)
+          ("ITA", 2)
+          ("ITA", 1)
+          ("PAK", 1) ]
 
-let importedDate = DateTime(2020, 7, 5)
+let importedDate = DateTime(2020, 9, 13)
 
-let loadGeoJson =
+let loadEuropeGeoJson =
     async {
-        let! (statusCode, response) = Http.get geoJsonUrl
+        let! (statusCode, response) = Http.get europeGeoJsonUrl
 
         if statusCode <> 200 then
             return GeoJsonLoaded
@@ -207,13 +251,39 @@ let loadGeoJson =
                             |> Failure)
     }
 
-let init (regionsData: StatsData): State * Cmd<Msg> =
+let loadWorldGeoJson =
+    async {
+        let! (statusCode, response) = Http.get worldGeoJsonUrl
+
+        if statusCode <> 200 then
+            return GeoJsonLoaded
+                       (sprintf "Error loading map: %d" statusCode
+                        |> Failure)
+        else
+            try
+                let data = response |> Fable.Core.JS.JSON.parse
+                return GeoJsonLoaded(data |> Success)
+            with ex ->
+                return GeoJsonLoaded
+                           (sprintf "Error loading map: %s" ex.Message
+                            |> Failure)
+    }
+
+let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
-    { GeoJson = NotAsked
+    { MapToDisplay = mapToDisplay
+      Countries =
+        match mapToDisplay with
+        | Europe -> CountrySelection.Countries euCountries
+        | World -> All
+      GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType = Restrictions },
+      ChartType =
+        match mapToDisplay with
+        | Europe -> Restrictions
+        | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
 let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
@@ -221,7 +291,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
         let fixedCode =
-            if code = "OWID_KOS" then "RKS" else code // hack for Kosovo code
+            if code = "OWID_KOS" then "XKX" else code // hack for Kosovo code
 
         let country = I18N.tt "country" code // TODO: change country code in i18n for Kosovo
 
@@ -238,24 +308,26 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             |> List.toArray
 
         let incidenceMaxValue =
-            dps
-            |> List.map (fun dp -> dp.NewCasesPerMillion)
-            |> List.choose id
-            |> List.max
+            if incidence.Length = 0
+            then 0.
+            else incidence |> Array.toList |> List.max
 
         let newCases = dps |> List.map (fun dp -> dp.NewCases)
 
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
 
-        let rText, rColor =
+        let red, green =
+            redCountries.TryFind(fixedCode),
+            greenCountries.TryFind(fixedCode)
+        let rText, rColor, rAltText =
             if fixedCode = "SVN"
-            then I18N.t "charts.europe.statusNone", "#10829a"
-            else if greenCountries.Contains(fixedCode)
-            then I18N.t "charts.europe.statusGreen", "#C4DE6F"
-            else if redCountries.Contains(fixedCode)
-            then I18N.t "charts.europe.statusRed", "#FF5348"
-            else I18N.t "charts.europe.statusYellow", "#FEF65C"
+            then I18N.t "charts.europe.statusNone", "#10829a", ""
+            else if red.IsSome
+            then I18N.t "charts.europe.statusRed", "#FF5348", red |> Option.defaultValue ""
+            else if green.IsSome
+            then I18N.t "charts.europe.statusGreen", "#C4DE6F", green |> Option.defaultValue ""
+            else I18N.t "charts.europe.statusYellow", "#FEF65C", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -269,7 +341,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
-              CountryData.RestrictionText = rText
+              CountryData.RestrictionText = rText + rAltText
               CountryData.ImportedFrom = imported
               CountryData.ImportedDate = importedDate }
 
@@ -277,11 +349,26 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
     |> Map.ofList
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
+
+    let owdCountries =
+        match state.Countries with
+        | All ->
+            All
+        | Countries countries ->
+            countries
+            |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
+            |> Countries
+
     match msg with
-    | GeoJsonRequested -> { state with GeoJson = Loading }, Cmd.OfAsync.result loadGeoJson
+    | GeoJsonRequested ->
+        let cmd =
+            match state.MapToDisplay with
+            | Europe -> Cmd.OfAsync.result loadEuropeGeoJson
+            | World -> Cmd.OfAsync.result loadWorldGeoJson
+        { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
+        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
         { state with OwdData = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
@@ -298,6 +385,11 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 
 let mapData state =
+    let countries =
+        match state.Countries with
+        | Countries countries -> countries
+        | All -> worldCountries
+
     countries
     |> List.map (fun code ->
         match state.CountryData.TryFind(code) with
@@ -374,19 +466,20 @@ let renderMap state geoJson owdData =
     let colorAxis =
         {| dataClassColor = "category"
            dataClasses =
-               [| {| from = 0; color = "#ffffb2" |}
+               [| {| from = 0; color = "#ffffcc" |}
+                  {| from = 25; color = "#ffeda0" |}
                   {| from = 50; color = "#fed976" |}
                   {| from = 100; color = "#feb24c" |}
-                  {| from = 160; color = "#fd8d3c" |}
-                  {| from = 320; color = "#fc4e2a" |}
-                  {| from = 400; color = "#e31a1c" |}
-                  {| from = 800; color = "#b10026" |} |] |}
+                  {| from = 200; color = "#fd8d3c" |}
+                  {| from = 400; color = "#fc4e2a" |}
+                  {| from = 800; color = "#e31a1c" |}
+                  {| from = 1600; color = "#b10026" |} |] |}
         |> pojo
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
         let twoWeekIncidence = points?incidence
-        let twoWeekIncidenceMaxValue = points?incidenceMaxValue + 1 // TODO: hack - added 1 because this is an integer rounded to floor for some reason (instead of float)
+        let twoWeekIncidenceMaxValue = Math.Ceiling(float points?incidenceMaxValue)
         let country = points?country
         let incidence1M = points?incidence1M
         let newCases = points?newCases
@@ -417,17 +510,13 @@ let renderMap state geoJson owdData =
         match twoWeekIncidence with
         | null -> I18N.t "charts.europe.noData"
         | _ ->
-        twoWeekIncidence
-        |> Array.iter (fun country ->
-            let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
-
-            let barHtml =
-                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" barHeight
-
-            s.Append barHtml |> ignore)
-
-        s.Append "</div>" |> ignore
-        s.ToString()
+            twoWeekIncidence
+            |> Array.iter (fun country ->
+                let barHeight = Math.Ceiling(float country * float barMaxHeight / twoWeekIncidenceMaxValue)
+                let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
+                s.Append barHtml |> ignore)
+            s.Append "</div>" |> ignore
+            s.ToString()
 
     let series geoJson =
         {| visible = true
@@ -445,7 +534,7 @@ let renderMap state geoJson owdData =
                          animation = {| duration = 0 |} |} |} |}
         |> pojo
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+    {| optionsWithOnLoadEvent "covid19-europe-map" with
            title = null
            series = [| series geoJson |]
            colorAxis = colorAxis
@@ -464,7 +553,7 @@ let renderMap state geoJson owdData =
                       mapTextFull = ""
                       mapText = ""
                       href = "https://ourworldindata.org/coronavirus" |} |}
-    |> Highcharts.map
+    |> map
 
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
@@ -503,6 +592,5 @@ let render (state: State) dispatch =
                     prop.className "map"
                     prop.children [ chart ] ] ] ]
 
-
-let mapChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("EuropeMapChart", init props.data, update, render)
+let mapChart (mapToDisplay: MapToDisplay) =
+    React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)

@@ -3,12 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="#age-groups-trends-chart"
-      v-scroll-to="{ el: '#age-groups-trends-chart', offset: -115 }"
-    > 
+      href="world"
+    >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.news001") }}</b> <span>{{ $t("notice.news002") }}</span>
+          <b>{{ $t("notice.newPage") }}</b> <span>{{ $t("notice.newsText") }}</span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
@@ -46,6 +45,7 @@
   color: $text-c;
   text-decoration: none;
   box-shadow: $element-box-shadow;
+  min-height: 64px;
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
@@ -62,7 +62,6 @@
   span b {
     padding-right: 8px;
   }
-
 }
 
 </style>

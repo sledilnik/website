@@ -23,6 +23,10 @@ let (Url datasetUrl) =
 let (Url dataUrl) =
     createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
 
+type CountrySelection =
+    | All
+    | Countries of string list
+
 type CountryIsoCode = string
 
 type DataPoint = {
@@ -82,7 +86,7 @@ let floatOptionOfResult result column =
             | _ -> None
         | _ -> None
 
-let load query msg =
+let load (query : DataQuery) msg =
     let mapRow row date =
         {
             CountryCode = stringOfResult row "iso_code"
@@ -104,42 +108,54 @@ let load query msg =
                        "Napaka pri nalaganju OurWorldInData podatkov: %d"
                        statusCode |> Failure |> msg
         | true ->
-            match EdelweissData.Thoth.Datasets.PublishedDataset.fromString
-                      response with
+            match EdelweissData.Thoth.Datasets.PublishedDataset.fromString response with
             | Error error ->
-                return sprintf
-                           "Napaka pri nalaganju OurWorldInData: %s"
-                           (error.ToString()) |> Failure |> msg
+                return sprintf "Napaka pri nalaganju OurWorldInData: %s" (error.ToString()) |> Failure |> msg
             | Ok dataset ->
-                let! statusCode, response =
-                    Http.post dataUrl (query |> EdelweissData.Thoth.Queries.DataQuery.toString)
+                let columns =
+                    [ "date"
+                      "iso_code"
+                      "new_cases"
+                      "new_cases_per_million"
+                      "total_cases"
+                      "total_cases_per_million"
+                      "total_deaths"
+                      "total_deaths_per_million" ]
+                    |> List.map (EdelweissData.Base.Types.Schema.GetColumn dataset.Schema)
+                    |> FsToolkit.ErrorHandling.List.sequenceResultM
 
-                match statusCode = 200 with
-                | false ->
-                    return sprintf
-                        "Napaka pri nalaganju OurWorldInData podatkov: %d"
-                        statusCode |> Failure |> msg
-                | true ->
-                    match
-                        EdelweissData.Thoth.Queries.DataQueryResponse.fromString
-                            dataset.Schema response with
-                    | Error error ->
+                match columns with
+                | Error error ->
+                    return sprintf "Napaka pri nalaganju OurWorldInData: %s" (error.ToString()) |> Failure |> msg
+                | Ok columns ->
+                    let! statusCode, response =
+                        Http.post dataUrl ({ query with Columns = columns } |> EdelweissData.Thoth.Queries.DataQuery.toString)
+
+                    match statusCode = 200 with
+                    | false ->
                         return sprintf
-                           "Napaka pri nalaganju OurWorldInData podatkov: %s"
-                           (error.ToString()) |> Failure |> msg
-                    | Ok data ->
-                        let results =
-                            data.Results
-                            |> List.map (fun result ->
-                                match dateOfResult result "date" with
-                                | None -> None
-                                | Some date -> Some (mapRow result date))
-                            |> List.choose id
-                        return results |> Success |> msg
+                            "Napaka pri nalaganju OurWorldInData podatkov: %d"
+                            statusCode |> Failure |> msg
+                    | true ->
+                        match
+                            EdelweissData.Thoth.Queries.DataQueryResponse.fromString
+                                dataset.Schema response with
+                        | Error error ->
+                            return sprintf
+                               "Napaka pri nalaganju OurWorldInData podatkov: %s"
+                               (error.ToString()) |> Failure |> msg
+                        | Ok data ->
+                            let results =
+                                data.Results
+                                |> List.map (fun result ->
+                                    match dateOfResult result "date" with
+                                    | None -> None
+                                    | Some date -> Some (mapRow result date))
+                                |> List.choose id
+                            return results |> Success |> msg
     }
 
 let loadCountryComparison countries msg =
-
     let query =
         let countryMatch country =
             ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
@@ -150,17 +166,23 @@ let loadCountryComparison countries msg =
 
     load query msg
 
-
-let loadCountryIncidence countries (fromDate : System.DateTime) msg =
+let loadCountryIncidence (countries : CountrySelection) (fromDate : System.DateTime) msg =
 
     let query =
         let countryMatch country =
             ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
-        let countriesMatchCondition =
-            Or (List.map countryMatch countries)
         let dateCondition =
             Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValuePrimitive (ValueDate fromDate)))
+
+        let condition =
+            match countries with
+            | All ->
+                dateCondition
+            | Countries countries ->
+                let countriesMatchCondition = Or (List.map countryMatch countries)
+                And[countriesMatchCondition ; dateCondition]
+
         { DataQuery.Default with
-            Condition = Some(And[countriesMatchCondition ; dateCondition]) }
+            Condition = Some(condition) }
 
     load query msg

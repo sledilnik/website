@@ -14,10 +14,6 @@ import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");
 
 import i18n from "../i18n"
-import moment from 'moment'
-
-// TODO: this shouldn't be hardcoded
-moment.locale('sl')
 
 window.Highcharts = window.Highcharts || Highcharts;
 

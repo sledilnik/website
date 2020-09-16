@@ -187,9 +187,26 @@ let calculateChartData
     (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) chartMode
     : AgesChartData =
 
+    let mapNoneToZero x =
+        match x with
+        | None -> Some 0
+        | _ -> x
+
+    // Since HC bar chart no longer seems to accept Nones for values,
+    // we map them to zeros first.
+    let infectionsWithoutNones =
+        infectionsAndDeathsPerAge
+        |> Array.map(fun x ->
+                { GroupKey = x.GroupKey
+                  InfectionsMale = x.InfectionsMale |> mapNoneToZero
+                  InfectionsFemale = x.InfectionsFemale |> mapNoneToZero
+                  DeathsMale = x.DeathsMale |> mapNoneToZero
+                  DeathsFemale = x.DeathsFemale |> mapNoneToZero
+                }
+            )
 
     let categories =
-        infectionsAndDeathsPerAge
+        infectionsWithoutNones
         |> Array.map (fun ageGroupData ->
             let populationStats =
                 Utils.AgePopulationStats.populationStatsForAgeGroup
@@ -309,7 +326,7 @@ let renderChartOptions
         | Absolute -> (abs value).ToString()
         | Relative -> Utils.percentageValuesLabelFormatter value
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-age-groups" with
+    {| optionsWithOnLoadEvent "covid19-age-groups" with
         chart = pojo {| ``type`` = "bar" |}
         title = pojo {| text = None |}
         xAxis = [|
@@ -334,7 +351,16 @@ let renderChartOptions
             {| series = pojo
                 {| stacking = "normal" |}
             |}
-        credits = Highcharts.defaultCredits
+        credits = pojo
+            {|
+                enabled = true
+                text =
+                    sprintf "%s: %s, %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.t "charts.common.dsMZ")
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+            |}
         tooltip = pojo
             {| formatter = fun () ->
                  let sex = jsThis?series?name

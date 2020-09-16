@@ -27,21 +27,23 @@ Uredniki baze in ostali sodelavci:
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, viri, validacija podatkov
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
--   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
--   [Miha Kadunc](https://twitter.com/miha_kadunc) - podatkovni model in validacija, modeliranje
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
+-   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - viri, validacija podatkov
 -   [Mia Erbus](https://github.com/miaerbus) - spletna stran
+-   [Miha Kadunc](https://twitter.com/miha_kadunc) - podatkovni model in validacija, modeliranje
 -   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - prevodi
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
+-   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje

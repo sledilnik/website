@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module AgeGroupsTimelineViz.Rendering
 
+open System
 open Analysis
 open Synthesis
 open Highcharts
@@ -15,45 +16,39 @@ open Browser.Types
 type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
 
-type DisplayType = {
-    Id: string
-}
-
-let availableDisplayTypes: DisplayType array = [|
-    {   Id = "all"; }
-|]
-
 type State = {
-    DisplayType : DisplayType
+    Metrics : DisplayMetrics
     Data : StatsData
     RangeSelectionButtonIndex: int
 }
 
 type Msg =
-    | ChangeDisplayType of DisplayType
+    | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = availableDisplayTypes.[0]
+        Metrics = availableDisplayMetrics.[0]
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ChangeDisplayType rt ->
-        { state with DisplayType=rt }, Cmd.none
+    | ChangeMetrics metrics -> { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let renderChartOptions state dispatch =
 
     // map state data into a list needed for calculateCasesByAgeTimeline
-    let totalCasesByAgeGroups =
+    let totalCasesByAgeGroupsList =
         state.Data
         |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
+
+    let totalCasesByAgeGroups =
+        mapDateTuplesListToArray totalCasesByAgeGroupsList
 
     // calculate complete merged timeline
     let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
@@ -67,9 +62,11 @@ let renderChartOptions state dispatch =
                "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
         colors.[ageGroupIndex]
 
-    let mapPoint (pointData: CasesInAgeGroupForDay) =
-        let date = pointData.Date
-        let cases = pointData.Cases
+    let mapPoint
+        (startDate: DateTime)
+        (daysFromStartDate: int)
+        (cases: CasesInAgeGroupForDay) =
+        let date = startDate |> Days.add daysFromStartDate
 
         pojo {|
              x = date |> jsTime12h :> obj
@@ -78,9 +75,11 @@ let renderChartOptions state dispatch =
         |}
 
     let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        groupTimeline
-        |> List.map mapPoint
-        |> List.toArray
+        let startDate = groupTimeline.StartDate
+        let timelineArray = groupTimeline.Data
+
+        timelineArray
+        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
 
     // generate all series
     let allSeries =
@@ -88,7 +87,8 @@ let renderChartOptions state dispatch =
         |> List.mapi (fun index ageGroupKey ->
             let points =
                 timeline
-                |> extractTimelineForAgeGroup ageGroupKey
+                |> extractTimelineForAgeGroup
+                       ageGroupKey state.Metrics.MetricsType
                 |> mapAllPoints
 
             pojo {|
@@ -133,7 +133,10 @@ let renderChartOptions state dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = pojo {| stacking = "normal" |}
+                series =
+                    match state.Metrics.ChartType with
+                    | StackedBarNormal -> pojo {| stacking = "normal" |}
+                    | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
@@ -153,9 +156,29 @@ let renderChartContainer state dispatch =
         ]
     ]
 
+let renderMetricsSelectors activeMetrics dispatch =
+    let renderSelector (metrics : DisplayMetrics) =
+        let active = metrics = activeMetrics
+        Html.div [
+            prop.text (I18N.chartText "ageGroupsTimeline." metrics.Id)
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected")]
+            if not active then prop.onClick (fun _ -> dispatch metrics)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-selectors"
+        availableDisplayMetrics
+        |> Array.map renderSelector
+        |> prop.children
+    ]
+
 let render state dispatch =
     Html.div [
         renderChartContainer state dispatch
+        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
 let renderChart (props : {| data : StatsData |}) =

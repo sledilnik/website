@@ -21,7 +21,9 @@
             "hr": "Hrvaščina",
             "mk": "Makedonščina",
             "sl": "Slovenščina",
-            "sq": "Albanščina"
+            "sq": "Albanščina",
+            "me": "Črnogorščina",
+            "it": "Italijanščina"
         }
     },
     "timestamp": {
@@ -29,8 +31,9 @@
         "at": "ob {{ date, HH.mm }}"
     },
     "notice": {
-        "news001": "Nov graf:",
-        "news002": "Potrjeni primeri po starostnih skupinah"
+        "newChart": "Nov graf:",
+        "newPage": "Nova stran:",
+        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -128,76 +131,262 @@
         "za": "Zasavska"
     },
     "country": {
+        "ABW": "Aruba",
+        "AFG": "Afganistan",
+        "AGO": "Angola",
+        "AIA": "Angvila",
+        "ALA": "Ålandski otoki",
         "ALB": "Albanija",
         "AND": "Andora",
+        "ARE": "Združeni arabski emirati",
         "ARG": "Argentina",
+        "ARM": "Armenija",
+        "ASM": "Ameriška Samoa",
+        "ATA": "Antarktika",
+        "ATF": "Francosko južno ozemlje",
+        "ATG": "Antigva in Barbuda",
         "AUS": "Avstralija",
         "AUT": "Avstrija",
-        "BGR": "Bolgarija",
-        "BRA": "Brazilija",
+        "AZE": "Azerbajdžan",
+        "BDI": "Burundi",
         "BEL": "Belgija",
+        "BEN": "Benin",
+        "BES": "Nizozemski Karibi",
+        "BFA": "Burkina Faso",
+        "BGD": "Bangladeš",
+        "BGR": "Bolgarija",
+        "BHR": "Bahrajn",
+        "BHS": "Bahami",
         "BIH": "Bosna in Hercegovina",
+        "BLM": "Saint Barthélemy",
         "BLR": "Belorusija",
+        "BLZ": "Belize",
+        "BMU": "Bermudi",
+        "BOL": "Bolivija",
+        "BRA": "Brazilija",
+        "BRB": "Barbados",
+        "BRN": "Brunej",
+        "BTN": "Butan",
+        "BVT": "Bouvetov otok",
+        "BWA": "Bocvana",
+        "CAF": "Centralnoafriška republika",
+        "CAN": "Kanada",
+        "CCK": "Kokosovi otoki",
         "CHE": "Švica",
         "CHL": "Čile",
         "CHN": "Kitajska",
+        "CIV": "Slonokoščena obala",
+        "CMR": "Kamerun",
+        "COD": "Demokratična republika Kongo",
+        "COG": "Kongo - Brazzaville",
+        "COK": "Cookovi otoki",
         "COL": "Kolumbija",
+        "COM": "Komori",
+        "CPV": "Zelenortski otoki",
+        "CRI": "Kostarika",
+        "CUB": "Kuba",
+        "CUW": "Curaçao",
+        "CXR": "Božični otok",
+        "CYM": "Kajmanski otoki",
+        "CYP": "Ciper",
         "CZE": "Češka",
         "DEU": "Nemčija",
+        "DJI": "Džibuti",
+        "DMA": "Dominika",
         "DNK": "Danska",
+        "DOM": "Dominikanska republika",
+        "DZA": "Alžirija",
         "ECU": "Ekvador",
+        "EGY": "Egipt",
+        "ERI": "Eritreja",
+        "ESH": "Zahodna Sahara",
         "ESP": "Španija",
         "EST": "Estonija",
+        "ETH": "Etiopija",
         "FIN": "Finska",
+        "FJI": "Fidži",
+        "FLK": "Falklandski otoki",
         "FRA": "Francija",
         "FRO": "Ferski otoki",
+        "FSM": "Mikronezija",
+        "GAB": "Gabon",
         "GBR": "Združeno kraljestvo",
+        "GEO": "Gruzija",
+        "GGY": "Guernsey",
+        "GHA": "Gana",
+        "GIB": "Gibraltar",
+        "GIN": "Gvineja",
+        "GLP": "Gvadalupe",
+        "GMB": "Gambija",
+        "GNB": "Gvineja Bissau",
+        "GNQ": "Ekvatorialna Gvineja",
         "GRC": "Grčija",
+        "GRD": "Grenada",
+        "GRL": "Grenlandija",
+        "GTM": "Gvatemala",
+        "GUF": "Francoska Gvajana",
+        "GUM": "Guam",
+        "GUY": "Gvajana",
+        "HKG": "Hongkong",
+        "HMD": "Heardov otok in McDonaldovi otoki",
+        "HND": "Honduras",
         "HRV": "Hrvaška",
+        "HTI": "Haiti",
         "HUN": "Madžarska",
-        "IRN": "Iran",
+        "IDN": "Indonezija",
+        "IMN": "Otok Man",
+        "IND": "Indija",
+        "IOT": "Britansko ozemlje v Indijskem oceanu",
         "IRL": "Irska",
+        "IRN": "Iran",
+        "IRQ": "Irak",
         "ISL": "Islandija",
+        "ISR": "Izrael",
         "ITA": "Italija",
+        "JAM": "Jamajka",
+        "JEY": "Jersey",
+        "JOR": "Jordanija",
         "JPN": "Japonska",
-        "KOR": "J. Koreja",
-        "LVA": "Latvija",
+        "KAZ": "Kazahstan",
+        "KEN": "Kenija",
+        "KGZ": "Kirgizistan",
+        "KHM": "Kambodža",
+        "KIR": "Kiribati",
+        "KNA": "Saint Kitts in Nevis",
+        "KOR": "Južna Koreja",
+        "KWT": "Kuvajt",
+        "LAO": "Laos",
+        "LBN": "Libanon",
+        "LBR": "Liberija",
+        "LBY": "Libija",
+        "LCA": "Saint Lucia",
         "LIE": "Lihtenštajn",
+        "LKA": "Šrilanka",
+        "LSO": "Lesoto",
         "LTU": "Litva",
         "LUX": "Luksemburg",
+        "LVA": "Latvija",
+        "MAC": "Macao",
+        "MAF": "Saint Martin",
+        "MAR": "Maroko",
+        "MCO": "Monako",
         "MDA": "Moldavija",
+        "MDG": "Madagaskar",
+        "MDV": "Maldivi",
         "MEX": "Mehika",
-        "MKD": "S. Makedonija",
-        "MNE": "Črna gora",
+        "MHL": "Marshallovi otoki",
+        "MKD": "Severna Makedonija",
+        "MLI": "Mali",
         "MLT": "Malta",
+        "MMR": "Mjanmar (Burma)",
+        "MNE": "Črna gora",
+        "MNG": "Mongolija",
+        "MNP": "Severni Marianski otoki",
+        "MOZ": "Mozambik",
+        "MRT": "Mavretanija",
+        "MSR": "Montserrat",
+        "MTQ": "Martinik",
+        "MUS": "Mauritius",
+        "MWI": "Malavi",
+        "MYS": "Malezija",
+        "MYT": "Mayotte",
+        "NAM": "Namibija",
+        "NCL": "Nova Kaledonija",
+        "NCY": "Severni Ciper",
+        "NER": "Niger",
+        "NFK": "Norfolški otok",
+        "NGA": "Nigerija",
+        "NIC": "Nikaragva",
+        "NIU": "Niue",
         "NLD": "Nizozemska",
-        "NZL": "Nova Zelandija",
-        "NOR": "Norveška",
-        "NCY": "S. Ciper",
         "NMA": "Ciper No Mans Area",
-        "CYP": "Ciper",
+        "NOR": "Norveška",
+        "NPL": "Nepal",
+        "NRU": "Nauru",
+        "NZL": "Nova Zelandija",
+        "OMN": "Oman",
+        "PAK": "Pakistan",
+        "PAN": "Panama",
+        "PCN": "Pitcairn",
         "PER": "Peru",
+        "PHL": "Filipini",
+        "PLW": "Palau",
+        "PNG": "Papua Nova Gvineja",
         "POL": "Poljska",
+        "PRI": "Portoriko",
+        "PRK": "Severna Koreja",
         "PRT": "Portugalska",
-        "OWID_KOS": "Kosovo",
-        "RKS": "Kosovo",
-        "RUS": "Rusija",
+        "PRY": "Paragvaj",
+        "PSE": "Palestinsko ozemlje",
+        "PYF": "Francoska Polinezija",
+        "QAT": "Katar",
+        "REU": "Reunion",
         "ROU": "Romunija",
+        "RUS": "Rusija",
+        "RWA": "Ruanda",
+        "SAU": "Saudova Arabija",
+        "SDN": "Sudan",
+        "SEN": "Senegal",
         "SGP": "Singapur",
-        "SRB": "Srbija",
+        "SGS": "Južna Georgia in Južni Sandwichevi otoki",
+        "SHN": "Sveta Helena",
+        "SJM": "Svalbard in Jan Mayen",
+        "SLB": "Salomonovi otoki",
+        "SLE": "Sierra Leone",
+        "SLV": "Salvador",
         "SMR": "San Marino",
+        "SOM": "Somalija",
+        "SPM": "Saint Pierre in Miquelon",
+        "SRB": "Srbija",
+        "SSD": "Južni Sudan",
+        "STP": "Sao Tome in Principe",
+        "SUR": "Surinam",
         "SVK": "Slovaška",
         "SVN": "Slovenija",
         "SWE": "Švedska",
-        "TWN": "Tajvan",
+        "SWZ": "Svazi",
+        "SXM": "Sint Maarten",
+        "SYC": "Sejšeli",
+        "SYR": "Sirija",
+        "TCA": "Otoki Turks in Caicos",
+        "TCD": "Čad",
+        "TGO": "Togo",
+        "THA": "Tajska",
+        "TJK": "Tadžikistan",
+        "TKL": "Tokelau",
+        "TKM": "Turkmenistan",
+        "TLS": "Timor-Leste",
+        "TON": "Tonga",
+        "TTO": "Trinidad in Tobago",
+        "TUN": "Tunizija",
         "TUR": "Turčija",
+        "TUV": "Tuvalu",
+        "TWN": "Tajvan",
+        "TZA": "Tanzanija",
+        "UGA": "Uganda",
         "UKR": "Ukrajina",
+        "UMI": "Stranski zunanji otoki Združenih držav",
+        "URY": "Urugvaj",
         "USA": "ZDA",
-        "VAT": "Vatikan"
+        "UZB": "Uzbekistan",
+        "VAT": "Vatikan",
+        "VCT": "Saint Vincent in Grenadine",
+        "VEN": "Venezuela",
+        "VGB": "Britanski Deviški otoki",
+        "VIR": "Ameriški Deviški otoki",
+        "VNM": "Vietnam",
+        "VUT": "Vanuatu",
+        "WLF": "Wallis in Futuna",
+        "WSM": "Samoa",
+        "XKX": "Kosovo",
+        "OWID_KOS": "Kosovo",
+        "YEM": "Jemen",
+        "ZAF": "Južnoafriška republika",
+        "ZMB": "Zambija",
+        "ZWE": "Zimbabve"        
     },
     "country-groups": {
         "groupNeighbouring": "okolica",
-        "groupNeighbouringWoItaly": "okolica (brez Italije)",
         "groupCriticalEU": "kritične države (EU)",
         "groupCriticalWorld": "kritične države (svet)",
         "groupNordic": "nordijske države",
@@ -305,6 +494,26 @@
         "gatherings50": {
             "title": "Do 50",
             "description": "Prepoved zbiranja na javnih mestih nad 50 ljudi, z dovoljenjem NIJZ do 500 ljudi"
+        },
+        "gatherings10": {
+            "title": "Do 10",
+            "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, do 50 s seznamom udeležencev, z dovoljenjem NIJZ do 500 ljudi"
+        },
+        "app": {
+            "title": "#OstaniZdrav",
+            "description": "Objavljena aplikacija #OstaniZdrav za Android"
+        },
+        "croatia": {
+            "title": "Hrvaška",
+            "description": "Hrvaška uvrščena na rdeči seznam, obvezna 14 dnevna karantena pri povratku"
+        },
+        "allSchools": {
+            "title": "Šole",
+            "description": "Vse šole odprte za novo šolsko leto"
+        },
+        "quarantine10days": {
+            "title": "10 dni",
+            "description": "Obvezna karantena skrajšana na 10 dni"
         }
     },
     "phase": {
@@ -373,7 +582,10 @@
             "shortDateFormat": "%e. %b"
         },
         "metricsComparison": {
-            "title": "Stanje COVID-19 v Sloveniji",
+            "title": "Stanje COVID-19 v državi",
+            "title_SVN": "Stanje COVID-19 v Sloveniji",
+            "title_MKD": "Stanje COVID-19 v S. Makedoniji",
+            "title_MNE": "Stanje COVID-19 v Črni gori",
             "tests": "Testiranja (na dan)",
             "testsToDate": "Testiranja (skupaj)",
             "confirmed": "Potrjeno okuženi (na dan)",
@@ -531,6 +743,9 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
         },
+        "rmap": {
+            "title": "Zemljevid po regijah"
+        },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
             "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
@@ -544,6 +759,9 @@
             "statusYellow": "14-dnevna karantena z izjemami",
             "statusRed": "obvezna 14-dnevna karantena",
             "noData": "Ni podatkov"
+        },
+        "world": {
+            "title": "Stanje COVID-19 v svetu"
         },
         "municipalities": {
             "title": "Primeri po občinah",
@@ -582,27 +800,26 @@
             "populationTotal": "Prebivalcev skupaj"
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah"
+            "title": "Potrjeni primeri po starostnih skupinah",
+            "newCases": "Novi primeri",
+            "activeCases": "Aktivni primeri",
+            "activeCasesRelative": "Aktivni primeri (relativno)"
+        },
+        "countriesActiveCasesPer1M": {
+            "title": "Države: aktivni primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. aktivnih primerov na milijon prebivalcev",
+            "legendTitle": "Aktivni primeri na milijon prebivalcev",
+            "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",
             "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
-            "legendTitle": "Potrjeno okuženi na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Potrjeno okuženi na milijon prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
-            "legendTitle": "Umrli (skupaj) na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         }
     },
     "footer": {
@@ -723,22 +940,66 @@
         },
         "phase": {
             "6": {
-                "title": "Faza 6"
+                "title": "Faza 6",
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             },
             "5": {
-                "title": "Faza 5"
+                "title": "Faza 5",
+                "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "4": {
-                "title": "Faza 4"
+                "title": "Faza 4",
+                "description": "Makedonija 3"
             },
             "3": {
-                "title": "Faza 3"
+                "title": "Faza 3",
+                "description": "Debar 4"
             },
             "2": {
-                "title": "Faza 2"
+                "title": "Faza 2",
+                "description": "Skopje 4"
             },
             "1": {
-                "title": "Faza 1"
+                "title": "Faza 1",
+                "description": "Debar 4, Skopje 3, Makedonija 2 "
+            }
+        },
+        "cm": {
+            "bordersOopen": {
+                "title": "Meje odprte",
+                "description": "Sprostitev: meje odprte za tuje državljane"
+            },
+            "kafanasOpen": {
+                "title": "Kafane",
+                "description": "Sprostitev: odprli so se bari in restavracije"
+            },
+            "lessMeasures": {
+                "title": "Prekinitev zapore",
+                "description": "Sprostitev: prosto gibanje v celotni državi"
+            },
+            "masksOn": {
+                "title": "Maske",
+                "description": "Maske naj se nosijo povsod zunaj domov"
+            },
+            "21hLockdown": {
+                "title": "Zapora",
+                "description": "Popolna zapora vsak dan od 21h do 06h"
+            },
+            "gatherings5": {
+                "description": "Javno druženje z več kot 5 osebami je prepovedano",
+                "title": "Druženje 5 oseb"
+            },
+            "debarQuarantine": {
+                "title": "Karantena za Debar",
+                "description": "Prvo mesto v popolni izolaciji"
+            },
+            "bordersClosure": {
+                "description": "Vsi mejni prehodi in letališča so zaprta za vstop mednarodnih potnikov v državo",
+                "title": "meje"
+            },
+            "gatheringsMass": {
+                "title": "Množična srečanja",
+                "description": "Množična srečanja, kot so športne prireditve in karnevali, so prepovedana"
             }
         }
     }

@@ -13,6 +13,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | ----- | --- |
 | Stanje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
 | Stanje COVID-19 v Evropi | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap |
+| Stanje COVID-19 v svetu | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
 | Delež resnih primerov | https://covid-19.sledilnik.org/embed.html#/chart/Ratios |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
@@ -21,6 +22,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
 | Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
 | Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
+| Zemljevid po regijah | https://covid-19.sledilnik.org/embed.html#/chart/RegionMap |
 | Zemljevid po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
 | Primeri po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
 | Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
