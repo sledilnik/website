@@ -278,7 +278,7 @@
         "countriesActiveCasesPer1M": {
             "red": "kriteret për listën e kuqe",
             "legendTitle": "Rastet aktive për 1M popullsi",
-            "yAxisTitle": "Rastet aktice për 1 milion popullsi",
+            "yAxisTitle": "Rastet aktive për 1 milion popullsi",
             "title": "Shtetet: Rastet aktive për 1 milion popullsi"
         },
         "world": {
