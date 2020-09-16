@@ -185,7 +185,7 @@ const actions = {
   fetchData: async ({
     commit
   }) => {
-    const threeDaysAgo = new Date(new Date().setDate(new Date().getDate() - 3))
+    const threeDaysAgo = new Date(new Date().setDate(new Date().getDate() - 4))
     const data = await ApiService.get(`${ApiEndpoint}/api/stats`, threeDaysAgo)
     const d = exportTime(data.headers.timestamp)
 
