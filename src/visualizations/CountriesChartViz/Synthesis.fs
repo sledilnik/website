@@ -56,7 +56,19 @@ type ChartData = {
     Series: CountrySeries[]
 }
 
-let tooltipFormatter chartData jsThis =
+let yAxisValueFormatter state jsThis =
+    match state.MetricToDisplay with
+    | DeathsPerCases ->
+        Utils.percentageValuesLabelFormatter jsThis?value
+    | _ -> jsThis?value
+
+let tooltipValueFormatter state value =
+    match state.MetricToDisplay with
+    | DeathsPerCases ->
+        Utils.percentageValuesWith1DecimalTrailingZeroLabelFormatter value
+    | _ -> Utils.formatTo1DecimalWithTrailingZero value
+
+let tooltipFormatter state chartData jsThis =
     let points: obj[] = jsThis?points
 
     match points with
@@ -91,7 +103,7 @@ let tooltipFormatter chartData jsThis =
                             "<td><span style='color:%s'>●</span></td<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
                             countryColor
                             countryName
-                            (Utils.formatTo1DecimalWithTrailingZero dataValue)
+                            (tooltipValueFormatter state dataValue)
                     s.Append countryTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )

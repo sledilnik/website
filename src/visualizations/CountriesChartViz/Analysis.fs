@@ -4,7 +4,11 @@ open Data.OurWorldInData
 open Types
 open System
 
-type MetricToDisplay = NewCasesPer1M | ActiveCasesPer1M | TotalDeathsPer1M
+type MetricToDisplay =
+    | NewCasesPer1M
+    | ActiveCasesPer1M
+    | TotalDeathsPer1M
+    | DeathsPerCases
 
 type CountryDataDayEntry = {
     Date: DateTime
@@ -31,6 +35,13 @@ let groupEntriesByCountries
                 entryRaw.NewCasesPerMillion |> Option.defaultValue 0.
             | TotalDeathsPer1M ->
                 entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.
+            | DeathsPerCases ->
+                if entryRaw.TotalCases > 0 then
+                    (float entryRaw.TotalDeaths) * 100.0
+                        / (float entryRaw.TotalCases)
+                else
+                    0.
+
 
         { Date = entryRaw.Date; Value = valueToUse }
 
@@ -129,8 +140,23 @@ let aggregateOurWorldInData
                         | TotalDeathsPer1M ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
-                        |> Array.skipWhile (fun entry -> entry.Value < 0.1)
-                    { countryData with Entries = postProcessedEntries })
+                        | DeathsPerCases ->
+                            countryData.Entries
+                            |> calculateMovingAverages daysOfMovingAverage
+
+                    let minValueFilter =
+                        match metricToDisplay with
+                        | NewCasesPer1M -> 0.1
+                        | ActiveCasesPer1M -> 0.1
+                        | TotalDeathsPer1M -> 0.1
+                        | DeathsPerCases -> 0.001
+
+                    let trimmedEntries =
+                        postProcessedEntries
+                        |> Array.skipWhile
+                               (fun entry -> entry.Value < minValueFilter)
+
+                    { countryData with Entries = trimmedEntries })
 
             Some averagedAndFilteredByCountries
         | _ -> None

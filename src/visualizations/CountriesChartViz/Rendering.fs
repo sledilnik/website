@@ -187,6 +187,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        match state.ScaleType with
                        | Linear -> "linear"
                        | Logarithmic -> "logarithmic"
+                   labels = pojo {| formatter = yAxisValueFormatter state |}
                    min =
                        match state.ScaleType with
                        | Linear -> 0
@@ -235,7 +236,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         legend = legend
         tooltip = pojo {|
                           formatter = fun () ->
-                              tooltipFormatter chartData jsThis
+                              tooltipFormatter state chartData jsThis
                           shared = true
                           useHTML = true
                         |}
