@@ -286,8 +286,8 @@ export default {
 
   .trend-icon {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     vertical-align: bottom;
 
