@@ -331,8 +331,10 @@ let render (state: State) (_: Msg -> unit) =
 
     let worldVisualizations =
         [ worldMap; countriesActiveCasesPer1M
-          countriesCasesPer1M; countriesDeathsPer1M
-          countriesDeathsPerCases ]
+          countriesCasesPer1M
+          countriesDeathsPer1M
+//          countriesDeathsPerCases
+          ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; map; municipalities
