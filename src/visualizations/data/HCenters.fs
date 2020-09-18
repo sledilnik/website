@@ -1,8 +1,6 @@
 module Data.HCenters
 
 open System
-open Fable.SimpleHttp
-open Fable.SimpleJson
 
 let url = "https://api.sledilnik.org/api/health-centers"
 
@@ -21,16 +19,16 @@ type HcCounts = {
     hospital: int option            // sentTo
     selfIsolation: int option       // sentTo
 } with
-    static member ( + ) (x: HcCounts, y: HcCounts) = { 
-        medicalEmergency = sumOption x.medicalEmergency y.medicalEmergency 
-        suspectedCovid = sumOption x.suspectedCovid y.suspectedCovid 
-        performed = sumOption x.performed y.performed 
-        positive = sumOption x.positive y.positive 
-        hospital = sumOption x.hospital y.hospital 
-        selfIsolation = sumOption x.selfIsolation y.selfIsolation 
+    static member ( + ) (x: HcCounts, y: HcCounts) = {
+        medicalEmergency = sumOption x.medicalEmergency y.medicalEmergency
+        suspectedCovid = sumOption x.suspectedCovid y.suspectedCovid
+        performed = sumOption x.performed y.performed
+        positive = sumOption x.positive y.positive
+        hospital = sumOption x.hospital y.hospital
+        selfIsolation = sumOption x.selfIsolation y.selfIsolation
     }
-    static member None = { 
-        medicalEmergency = None 
+    static member None = {
+        medicalEmergency = None
         suspectedCovid = None
         performed = None
         positive = None
@@ -44,14 +42,14 @@ type TotalHcStats = {
     tests: HcCounts
     sentTo: HcCounts
 } with
-    static member ( + ) (x: TotalHcStats, y: TotalHcStats) = { 
+    static member ( + ) (x: TotalHcStats, y: TotalHcStats) = {
         examinations =  x.examinations + y.examinations
         phoneTriage =  x.phoneTriage + y.phoneTriage
         tests =  x.tests + y.tests
         sentTo =  x.sentTo + y.sentTo
     }
-    static member None = { 
-        examinations = HcCounts.None 
+    static member None = {
+        examinations = HcCounts.None
         phoneTriage = HcCounts.None
         tests = HcCounts.None
         sentTo = HcCounts.None
@@ -64,7 +62,8 @@ type HcStats = {
     all: TotalHcStats
     municipalities : Map<string, Map<string,TotalHcStats>>
 } with
-    member ps.Date = new DateTime(ps.year, ps.month, ps.day)
-    member ps.JsDate12h = new DateTime(ps.year, ps.month, ps.day) |> Highcharts.Helpers.jsTime12h
+    member ps.Date = DateTime(ps.year, ps.month, ps.day)
+    member ps.JsDate12h = DateTime(ps.year, ps.month, ps.day)
+                          |> Highcharts.Helpers.jsTime12h
 
 let getOrFetch = DataLoader.makeDataLoader<HcStats []> url

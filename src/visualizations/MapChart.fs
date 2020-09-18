@@ -101,7 +101,7 @@ let loadMunGeoJson =
                 let data = response |> Fable.Core.JS.JSON.parse
                 return GeoJsonLoaded (data |> Success)
             with
-                | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
+            | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
 let loadRegGeoJson =
@@ -115,7 +115,7 @@ let loadRegGeoJson =
                 let data = response |> Fable.Core.JS.JSON.parse
                 return GeoJsonLoaded (data |> Success)
             with
-                | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
+            | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
 let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd<Msg> =
@@ -167,11 +167,11 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
                 for region in regionsDataPoint.Regions do
                     yield {| Date = regionsDataPoint.Date
                              RegionKey = region.Name
-                             TotalConfirmedCases = 
-                                region.Municipalities 
+                             TotalConfirmedCases =
+                                region.Municipalities
                                  |> Seq.sumBy (fun municipality -> municipality.ConfirmedToDate |> Option.defaultValue 0)
                              TotalDeceasedCases =
-                                region.Municipalities 
+                                region.Municipalities
                                 |> Seq.sumBy (fun municipality -> municipality.DeceasedToDate |> Option.defaultValue 0) |} }
         |> Seq.groupBy (fun dp -> dp.RegionKey)
         |> Seq.map (fun (regionKey, dp) ->
@@ -203,10 +203,10 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
                             Cases = Some cases }
         }
 
-    let data = 
+    let data =
         match mapToDisplay with
         | Municipality -> munData
-        | Region -> regData 
+        | Region -> regData
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
@@ -218,8 +218,8 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | GeoJsonRequested -> 
-        let cmd = 
+    | GeoJsonRequested ->
+        let cmd =
             match state.MapToDisplay with
             | Municipality -> Cmd.OfAsync.result loadMunGeoJson
             | Region -> Cmd.OfAsync.result loadRegGeoJson
@@ -321,7 +321,7 @@ let renderMap (state : State) =
     | Success geoJson ->
         let data = seriesData state
 
-        let key = 
+        let key =
             match state.MapToDisplay with
             | Municipality -> "isoid"
             | Region -> "code"
@@ -360,11 +360,11 @@ let renderMap (state : State) =
             series = [| series geoJson |]
             legend = {| enabled = false |}
             colorAxis = {| minColor = "white" ; maxColor = maxColor |}
-            tooltip = 
-                {| 
+            tooltip =
+                {|
                     formatter = fun () -> tooltipFormatter jsThis
                     useHTML = true
-                    distance = 50 
+                    distance = 50
                 |} |> pojo
             credits =
                 {|
@@ -426,7 +426,7 @@ let renderContentTypeSelector selected dispatch =
         prop.value (selected.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
-        prop.onChange (fun (value : string) -> ContentTypeChanged value |> dispatch)
+        prop.onChange (ContentTypeChanged >> dispatch)
     ]
 
 let render (state : State) dispatch =

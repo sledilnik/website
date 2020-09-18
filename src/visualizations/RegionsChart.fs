@@ -66,7 +66,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
     let regions =
         lastDataPoint.Regions
-        |> List.sortByDescending (fun region -> regionTotal region)
+        |> List.sortByDescending regionTotal
     let metrics =
         regions
         |> List.filter (fun region -> not (Set.contains region.Name excludedRegions))
@@ -137,7 +137,7 @@ let renderChartOptions (state : State) dispatch =
         res
 
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             state.ScaleType "covid19-regions"
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
@@ -159,7 +159,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 

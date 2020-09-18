@@ -12,6 +12,7 @@ open Browser
 
 open Highcharts
 open Types
+open Data.OurWorldInData
 
 type MapToDisplay = Europe | World
 
@@ -49,7 +50,7 @@ type ChartType =
 
 type State =
     { MapToDisplay : MapToDisplay
-      Countries : string list
+      Countries : CountrySelection
       GeoJson: GeoJson
       OwdData: OwdData
       CountryData: CountriesMap
@@ -63,259 +64,8 @@ type Msg =
     | ChartTypeChanged of ChartType
 
 let worldCountries =
-    [
-        "AFG"
-        "ALB"
-        "DZA"
-        "ASM"
-        "AND"
-        "AGO"
-        "AIA"
-        "ATA"
-        "ATG"
-        "ARG"
-        "ARM"
-        "ABW"
-        "AUS"
-        "AUT"
-        "AZE"
-        "BHS"
-        "BHR"
-        "BGD"
-        "BRB"
-        "BLR"
-        "BEL"
-        "BLZ"
-        "BEN"
-        "BMU"
-        "BTN"
-        "BOL"
-        "BES"
-        "BIH"
-        "BWA"
-        "BVT"
-        "BRA"
-        "IOT"
-        "BRN"
-        "BGR"
-        "BFA"
-        "BDI"
-        "CPV"
-        "KHM"
-        "CMR"
-        "CAN"
-        "CYM"
-        "CAF"
-        "TCD"
-        "CHL"
-        "CHN"
-        "CXR"
-        "CCK"
-        "COL"
-        "COM"
-        "COD"
-        "COG"
-        "COK"
-        "CRI"
-        "HRV"
-        "CUB"
-        "CUW"
-        "CYP"
-        "CZE"
-        "CIV"
-        "DNK"
-        "DJI"
-        "DMA"
-        "DOM"
-        "ECU"
-        "EGY"
-        "SLV"
-        "GNQ"
-        "ERI"
-        "EST"
-        "SWZ"
-        "ETH"
-        "FLK"
-        "FRO"
-        "FJI"
-        "FIN"
-        "FRA"
-        "GUF"
-        "PYF"
-        "ATF"
-        "GAB"
-        "GMB"
-        "GEO"
-        "DEU"
-        "GHA"
-        "GIB"
-        "GRC"
-        "GRL"
-        "GRD"
-        "GLP"
-        "GUM"
-        "GTM"
-        "GGY"
-        "GIN"
-        "GNB"
-        "GUY"
-        "HTI"
-        "HMD"
-        "VAT"
-        "HND"
-        "HKG"
-        "HUN"
-        "ISL"
-        "IND"
-        "IDN"
-        "IRN"
-        "IRQ"
-        "IRL"
-        "IMN"
-        "ISR"
-        "ITA"
-        "JAM"
-        "JPN"
-        "JEY"
-        "JOR"
-        "KAZ"
-        "KEN"
-        "KIR"
-        "PRK"
-        "KOR"
-        "KWT"
-        "KGZ"
-        "LAO"
-        "LVA"
-        "LBN"
-        "LSO"
-        "LBR"
-        "LBY"
-        "LIE"
-        "LTU"
-        "LUX"
-        "MAC"
-        "MDG"
-        "MWI"
-        "MYS"
-        "MDV"
-        "MLI"
-        "MLT"
-        "MHL"
-        "MTQ"
-        "MRT"
-        "MUS"
-        "MYT"
-        "MEX"
-        "FSM"
-        "MDA"
-        "MCO"
-        "MNG"
-        "MNE"
-        "MSR"
-        "MAR"
-        "MOZ"
-        "MMR"
-        "NAM"
-        "NRU"
-        "NPL"
-        "NLD"
-        "NCL"
-        "NZL"
-        "NIC"
-        "NER"
-        "NGA"
-        "NIU"
-        "NFK"
-        "MNP"
-        "NOR"
-        "OMN"
-        "PAK"
-        "PLW"
-        "PSE"
-        "PAN"
-        "PNG"
-        "PRY"
-        "PER"
-        "PHL"
-        "PCN"
-        "POL"
-        "PRT"
-        "PRI"
-        "QAT"
-        "MKD"
-        "ROU"
-        "RUS"
-        "RWA"
-        "REU"
-        "BLM"
-        "SHN"
-        "KNA"
-        "LCA"
-        "MAF"
-        "SPM"
-        "VCT"
-        "WSM"
-        "SMR"
-        "STP"
-        "SAU"
-        "SEN"
-        "SRB"
-        "SYC"
-        "SLE"
-        "SGP"
-        "SXM"
-        "SVK"
-        "SVN"
-        "SLB"
-        "SOM"
-        "ZAF"
-        "SGS"
-        "SSD"
-        "ESP"
-        "LKA"
-        "SDN"
-        "SUR"
-        "SJM"
-        "SWE"
-        "CHE"
-        "SYR"
-        "TWN"
-        "TJK"
-        "TZA"
-        "THA"
-        "TLS"
-        "TGO"
-        "TKL"
-        "TON"
-        "TTO"
-        "TUN"
-        "TUR"
-        "TKM"
-        "TCA"
-        "TUV"
-        "UGA"
-        "UKR"
-        "ARE"
-        "GBR"
-        "UMI"
-        "USA"
-        "URY"
-        "UZB"
-        "VUT"
-        "VEN"
-        "VNM"
-        "VGB"
-        "VIR"
-        "WLF"
-        "ESH"
-        "YEM"
-        "ZMB"
-        "ZWE"
-        "ALA"
-        "XKX"
-    ]
-    
+    [ "AFG" ; "ALB" ; "DZA" ; "ASM" ; "AND" ; "AGO" ; "AIA" ; "ATA" ; "ATG" ; "ARG" ; "ARM" ; "ABW" ; "AUS" ; "AUT" ; "AZE" ; "BHS" ; "BHR" ; "BGD" ; "BRB" ; "BLR" ; "BEL" ; "BLZ" ; "BEN" ; "BMU" ; "BTN" ; "BOL" ; "BES" ; "BIH" ; "BWA" ; "BVT" ; "BRA" ; "IOT" ; "BRN" ; "BGR" ; "BFA" ; "BDI" ; "CPV" ; "KHM" ; "CMR" ; "CAN" ; "CYM" ; "CAF" ; "TCD" ; "CHL" ; "CHN" ; "CXR" ; "CCK" ; "COL" ; "COM" ; "COD" ; "COG" ; "COK" ; "CRI" ; "HRV" ; "CUB" ; "CUW" ; "CYP" ; "CZE" ; "CIV" ; "DNK" ; "DJI" ; "DMA" ; "DOM" ; "ECU" ; "EGY" ; "SLV" ; "GNQ" ; "ERI" ; "EST" ; "SWZ" ; "ETH" ; "FLK" ; "FRO" ; "FJI" ; "FIN" ; "FRA" ; "GUF" ; "PYF" ; "ATF" ; "GAB" ; "GMB" ; "GEO" ; "DEU" ; "GHA" ; "GIB" ; "GRC" ; "GRL" ; "GRD" ; "GLP" ; "GUM" ; "GTM" ; "GGY" ; "GIN" ; "GNB" ; "GUY" ; "HTI" ; "HMD" ; "VAT" ; "HND" ; "HKG" ; "HUN" ; "ISL" ; "IND" ; "IDN" ; "IRN" ; "IRQ" ; "IRL" ; "IMN" ; "ISR" ; "ITA" ; "JAM" ; "JPN" ; "JEY" ; "JOR" ; "KAZ" ; "KEN" ; "KIR" ; "PRK" ; "KOR" ; "KWT" ; "KGZ" ; "LAO" ; "LVA" ; "LBN" ; "LSO" ; "LBR" ; "LBY" ; "LIE" ; "LTU" ; "LUX" ; "MAC" ; "MDG" ; "MWI" ; "MYS" ; "MDV" ; "MLI" ; "MLT" ; "MHL" ; "MTQ" ; "MRT" ; "MUS" ; "MYT" ; "MEX" ; "FSM" ; "MDA" ; "MCO" ; "MNG" ; "MNE" ; "MSR" ; "MAR" ; "MOZ" ; "MMR" ; "NAM" ; "NRU" ; "NPL" ; "NLD" ; "NCL" ; "NZL" ; "NIC" ; "NER" ; "NGA" ; "NIU" ; "NFK" ; "MNP" ; "NOR" ; "OMN" ; "PAK" ; "PLW" ; "PSE" ; "PAN" ; "PNG" ; "PRY" ; "PER" ; "PHL" ; "PCN" ; "POL" ; "PRT" ; "PRI" ; "QAT" ; "MKD" ; "ROU" ; "RUS" ; "RWA" ; "REU" ; "BLM" ; "SHN" ; "KNA" ; "LCA" ; "MAF" ; "SPM" ; "VCT" ; "WSM" ; "SMR" ; "STP" ; "SAU" ; "SEN" ; "SRB" ; "SYC" ; "SLE" ; "SGP" ; "SXM" ; "SVK" ; "SVN" ; "SLB" ; "SOM" ; "ZAF" ; "SGS" ; "SSD" ; "ESP" ; "LKA" ; "SDN" ; "SUR" ; "SJM" ; "SWE" ; "CHE" ; "SYR" ; "TWN" ; "TJK" ; "TZA" ; "THA" ; "TLS" ; "TGO" ; "TKL" ; "TON" ; "TTO" ; "TUN" ; "TUR" ; "TKM" ; "TCA" ; "TUV" ; "UGA" ; "UKR" ; "ARE" ; "GBR" ; "UMI" ; "USA" ; "URY" ; "UZB" ; "VUT" ; "VEN" ; "VNM" ; "VGB" ; "VIR" ; "WLF" ; "ESH" ; "YEM" ; "ZMB" ; "ZWE" ; "ALA" ; "XKX"]
+
 let euCountries =
     [ "ALB"
       "AND"
@@ -370,123 +120,118 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ 
-            ("AUT", "")
-            ("CYP", "")
-            ("EST", "")
-            ("FIN", "")
-            ("GEO", "")
-            ("ITA", "")
-            ("LVA", "")
-            ("LIE", "")
-            ("LTU", "")
-            ("HUN", "")
-            ("DEU", "")
-            ("NOR", "")
-            ("NZL", "")
-            ("RWA", "")
-            ("SMR", "")
-            ("SVK", "")
-            ("URY", "")
-            ("VAT", "")
-            ("GBR", "") 
-        ]
+        [ ("AUT", "")
+          ("CYP", "")
+          ("EST", "")
+          ("FIN", "")
+          ("GEO", "")
+          ("ITA", "")
+          ("LVA", "")
+          ("LIE", "")
+          ("LTU", "")
+          ("HUN", "")
+          ("DEU", "")
+          ("NOR", "")
+          ("NZL", "")
+          ("RWA", "")
+          ("SMR", "")
+          ("SVK", "")
+          ("URY", "")
+          ("VAT", "")
+          ("GBR", "") ]
 
 let redCountries =
     Map.ofList
-        [ 
-            ("ALB", "")
-            ("AND", "")
-            ("ARG", "")
-            ("ARM", "")
-            ("AZE", "")
-            ("BAH", "")
-            ("BHR", "")
-            ("BEL", "")
-            ("BLZ", "")
-            ("BOL", "")
-            ("BIH", "")
-            ("BRA", "")
-            ("CHL", "")
-            ("MNE", "")
-            ("VIR", "")
-            ("DOM", "")
-            ("ECU", "")
-            ("GNQ", "")
-            ("SWZ", "")
-            ("FRO", "")
-            ("PHL", "")
-            ("GAB", "")
-            ("GMB", "")
-            ("GIB", "")
-            ("GTM", "")
-            ("GUM", "")
-            ("HND", "")
-            ("HRV", "")
-            ("IND", "")
-            ("IRQ", "")
-            ("IRN", "")
-            ("ISR", "")
-            ("ZAF", "")
-            ("QAT", "")
-            ("KAZ", "")
-            ("KGZ", "")
-            ("CHN", "")
-            ("COL", "")
-            ("XKX", "")
-            ("CRI", "")
-            ("KWT", "")
-            ("LBN", "")
-            ("LBY", "")
-            ("LUX", "")
-            ("MDV", "")
-            ("MLT", "")
-            ("MAR", "")
-            ("MEX", "")
-            ("MDA", "")
-            ("MCO", "")
-            ("NAM", "")
-            ("NLD", "")
-            ("OMN", "")
-            ("PAN", "")
-            ("PRY", "")
-            ("PER", "")
-            ("PRI", "")
-            ("ROU", "")
-            ("RUS", "")
-            ("SLV", "")
-            ("STP", "")
-            ("SAU", "")
-            ("MKD", "")
-            ("SGP", "")
-            ("MAF", "")
-            ("SUR", "")
-            ("ESP", "")
-            ("TCA", "")
-            ("VEN", "")
-            ("UKR", "")
-            ("CPV", "")
-            ("USA", "")
-            ("ARE", "")
-        ]
+        [ ("ALB", "")
+          ("AND", "")
+          ("ARG", "")
+          ("ARM", "")
+          ("AZE", "")
+          ("BAH", "")
+          ("BHR", "")
+          ("BEL", "")
+          ("BLZ", "")
+          ("BOL", "")
+          ("BIH", "")
+          ("BRA", "")
+          ("CHL", "")
+          ("MNE", "")
+          ("VIR", "")
+          ("DOM", "")
+          ("ECU", "")
+          ("GNQ", "")
+          ("SWZ", "")
+          ("FRO", "")
+          ("PHL", "")
+          ("GAB", "")
+          ("GMB", "")
+          ("GIB", "")
+          ("GTM", "")
+          ("GUM", "")
+          ("HND", "")
+          ("HRV", "")
+          ("IND", "")
+          ("IRQ", "")
+          ("IRN", "")
+          ("ISR", "")
+          ("ZAF", "")
+          ("QAT", "")
+          ("KAZ", "")
+          ("KGZ", "")
+          ("CHN", "")
+          ("COL", "")
+          ("XKX", "")
+          ("CRI", "")
+          ("KWT", "")
+          ("LBN", "")
+          ("LBY", "")
+          ("LUX", "")
+          ("MDV", "")
+          ("MLT", "")
+          ("MAR", "")
+          ("MEX", "")
+          ("MDA", "")
+          ("MCO", "")
+          ("NAM", "")
+          ("NLD", "")
+          ("OMN", "")
+          ("PAN", "")
+          ("PRY", "")
+          ("PER", "")
+          ("PRI", "")
+          ("ROU", "")
+          ("RUS", "")
+          ("SLV", "")
+          ("STP", "")
+          ("SAU", "")
+          ("MKD", "")
+          ("SGP", "")
+          ("MAF", "")
+          ("SUR", "")
+          ("ESP", "")
+          ("TCA", "")
+          ("VEN", "")
+          ("UKR", "")
+          ("CPV", "")
+          ("USA", "")
+          ("ARE", "") ]
 
 let importedFrom =
     Map.ofList
-        [ 
-            ("HRV", 32)
-            ("BIH", 8)
-            ("RUS", 6)
-            ("XKX", 4)
-            ("AUT", 4)
-            ("ITA", 4)
-            ("HUN", 3)
-            ("CZE", 3)
-            ("DEU", 3)
-            ("GRC", 1)
-            ("PAK", 1)
-        ]
+        [ ("HRV", 14)
+          ("AUT", 9)
+          ("BIH", 8)
+          ("RUS", 6)
+          ("HUN", 5)
+          ("CZE", 4)
+          ("DEU", 4)
+          ("XKX", 4)
+          ("GRC", 4)
+          ("ITA", 2)
+          ("ITA", 1)
+          ("PAK", 1) ]
 
-let importedDate = DateTime(2020, 9, 6)
+let importedDate = DateTime(2020, 9, 13)
 
 let loadEuropeGeoJson =
     async {
@@ -527,15 +272,15 @@ let loadWorldGeoJson =
 let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
-    { MapToDisplay = mapToDisplay 
+    { MapToDisplay = mapToDisplay
       Countries =
         match mapToDisplay with
-        | Europe -> euCountries
-        | World -> worldCountries
+        | Europe -> CountrySelection.Countries euCountries
+        | World -> All
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType = 
+      ChartType =
         match mapToDisplay with
         | Europe -> Restrictions
         | World -> TwoWeekIncidence },
@@ -562,9 +307,9 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             |> List.choose id
             |> List.toArray
 
-        let incidenceMaxValue = 
-            if incidence.Length = 0 
-            then 0. 
+        let incidenceMaxValue =
+            if incidence.Length = 0
+            then 0.
             else incidence |> Array.toList |> List.max
 
         let newCases = dps |> List.map (fun dp -> dp.NewCases)
@@ -572,8 +317,8 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
 
-        let red, green = 
-            redCountries.TryFind(fixedCode), 
+        let red, green =
+            redCountries.TryFind(fixedCode),
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
             if fixedCode = "SVN"
@@ -606,19 +351,24 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
     let owdCountries =
-        state.Countries
-        |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
+        match state.Countries with
+        | All ->
+            All
+        | Countries countries ->
+            countries
+            |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
+            |> Countries
 
     match msg with
-    | GeoJsonRequested -> 
-        let cmd = 
+    | GeoJsonRequested ->
+        let cmd =
             match state.MapToDisplay with
             | Europe -> Cmd.OfAsync.result loadEuropeGeoJson
             | World -> Cmd.OfAsync.result loadWorldGeoJson
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = System.DateTime.Today.AddDays(-14.0)
+        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
         { state with OwdData = Loading },
         Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
@@ -635,7 +385,12 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 
 let mapData state =
-    state.Countries
+    let countries =
+        match state.Countries with
+        | Countries countries -> countries
+        | All -> worldCountries
+
+    countries
     |> List.map (fun code ->
         match state.CountryData.TryFind(code) with
         | Some cd ->
@@ -724,7 +479,7 @@ let renderMap state geoJson owdData =
     let tooltipFormatter jsThis =
         let points = jsThis?point
         let twoWeekIncidence = points?incidence
-        let twoWeekIncidenceMaxValue = points?incidenceMaxValue + 1 // TODO: hack - added 1 because this is an integer rounded to floor for some reason (instead of float)
+        let twoWeekIncidenceMaxValue = Math.Ceiling(float points?incidenceMaxValue)
         let country = points?country
         let incidence1M = points?incidence1M
         let newCases = points?newCases
@@ -755,17 +510,13 @@ let renderMap state geoJson owdData =
         match twoWeekIncidence with
         | null -> I18N.t "charts.europe.noData"
         | _ ->
-        twoWeekIncidence
-        |> Array.iter (fun country ->
-            let barHeight = country * barMaxHeight / twoWeekIncidenceMaxValue
-
-            let barHtml =
-                sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" barHeight
-
-            s.Append barHtml |> ignore)
-
-        s.Append "</div>" |> ignore
-        s.ToString()
+            twoWeekIncidence
+            |> Array.iter (fun country ->
+                let barHeight = Math.Ceiling(float country * float barMaxHeight / twoWeekIncidenceMaxValue)
+                let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
+                s.Append barHtml |> ignore)
+            s.Append "</div>" |> ignore
+            s.ToString()
 
     let series geoJson =
         {| visible = true
@@ -783,7 +534,7 @@ let renderMap state geoJson owdData =
                          animation = {| duration = 0 |} |} |} |}
         |> pojo
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-europe-map" with
+    {| optionsWithOnLoadEvent "covid19-europe-map" with
            title = null
            series = [| series geoJson |]
            colorAxis = colorAxis
@@ -802,7 +553,7 @@ let renderMap state geoJson owdData =
                       mapTextFull = ""
                       mapText = ""
                       href = "https://ourworldindata.org/coronavirus" |} |}
-    |> Highcharts.map
+    |> map
 
 
 let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
@@ -840,7 +591,6 @@ let render (state: State) dispatch =
                   [ prop.style [ style.height 550 ]
                     prop.className "map"
                     prop.children [ chart ] ] ] ]
-
 
 let mapChart (mapToDisplay: MapToDisplay) =
     React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)

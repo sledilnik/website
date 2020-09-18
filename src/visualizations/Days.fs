@@ -14,8 +14,7 @@ let daysInYear year =
 let between (date1: DateTime) (date2: DateTime) =
     let yearsDays =
         seq { date1.Year .. (date2.Year - 1) }
-        |> Seq.map daysInYear
-        |> Seq.sum
+        |> Seq.sumBy daysInYear
 
     date2.DayOfYear - date1.DayOfYear + yearsDays
 

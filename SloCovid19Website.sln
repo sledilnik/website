@@ -25,6 +25,7 @@ ProjectSection(SolutionItems) = preProject
 	README.md = README.md
 	TODO.md = TODO.md
 	vue.config.js = vue.config.js
+	fsharplint-config.json = fsharplint-config.json
 EndProjectSection
 EndProject
 Global
