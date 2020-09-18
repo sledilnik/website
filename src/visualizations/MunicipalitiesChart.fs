@@ -66,7 +66,7 @@ type Query (query : obj, regions : Region list) =
             | "total-confirmed-cases" -> Some TotalConfirmedCases
             | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
-                match Highcharts.showExpGrowthFeatures with
+                match Highcharts.showDoublingTimeFeatures with
                 | true -> Some DoublingTime
                 | _ -> None
             | _ -> None
@@ -341,7 +341,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                     ]
                 ]
             ]
-            if Highcharts.showExpGrowthFeatures then
+            if Highcharts.showDoublingTimeFeatures then
                 renderedDoublingTime
             else
                 renderLastCase
@@ -506,7 +506,7 @@ let renderView (currentView : View) dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             Html.text (I18N.t "charts.common.sortBy")
-            if Highcharts.showExpGrowthFeatures then
+            if Highcharts.showDoublingTimeFeatures then
                 renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
             renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
