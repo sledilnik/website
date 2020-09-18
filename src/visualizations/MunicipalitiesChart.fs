@@ -66,7 +66,7 @@ type Query (query : obj, regions : Region list) =
             | "total-confirmed-cases" -> Some TotalConfirmedCases
             | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
-                match Highcharts.showExpGrowthFeatures with
+                match Highcharts.showDoublingTimeFeatures with
                 | true -> Some DoublingTime
                 | _ -> None
             | _ -> None
@@ -122,11 +122,6 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
-            let doublingTime =
-                dp
-                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
-                |> Seq.toList
-                |> Utils.findDoublingTime
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let lastChange = totals |> Seq.filter (fun dp -> dp.ConfirmedToDate = maxConfirmed) |> Seq.head
             let activeCases = totalsShown |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
@@ -137,6 +132,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 | Some before, Some last -> if last > before then Some (last - before) else None
                 | None, Some last -> Some last
                 | _ -> None
+            let doublingTime =
+                if activeCases.IsSome && activeCases.Value >= 5 
+                then  
+                    dp
+                    |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
+                    |> Seq.toList
+                    |> Utils.findDoublingTime
+                else None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
@@ -338,7 +341,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                     ]
                 ]
             ]
-            if Highcharts.showExpGrowthFeatures then
+            if Highcharts.showDoublingTimeFeatures then
                 renderedDoublingTime
             else
                 renderLastCase
@@ -502,12 +505,12 @@ let renderView (currentView : View) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.common.view")
+            Html.text (I18N.t "charts.common.sortBy")
+            if Highcharts.showDoublingTimeFeatures then
+                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
             renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
             renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
-            if Highcharts.showExpGrowthFeatures then
-                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
         ]
     ]
 

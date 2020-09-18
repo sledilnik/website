@@ -89,7 +89,7 @@ let inline legend title =
         layout = "vertical"
         floating = true
         x = 8
-        y = 80
+        y = 60
         backgroundColor = "#FFF"
     |}
     |> pojo
@@ -115,7 +115,7 @@ type ChartCfg = {
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
                     let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
-                    let total = dp.Cases.ConfirmedToDate |> Utils.zeroToNone
+                    let total = dp.Cases.Active |> Utils.zeroToNone
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
@@ -136,7 +136,7 @@ type ChartCfg = {
                         ``type``="logarithmic"
                         reversed=true
                         plotLines=[|
-                            pojo {| value=40.0; label={| text=I18N.t "charts.spread.averageSouthKorea"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            //pojo {| value=40.0; label={| text=I18N.t "charts.spread.averageSouthKorea"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
                             pojo {| value= 1.0; label={| text=I18N.t "charts.spread.oneDay"  |}; color="#aaa"; dashStyle="ShortDash" |}
                             pojo {| value= 7.0; label={| text=I18N.t "charts.spread.oneWeek" |}; color="#888"; dashStyle="ShortDash" |}
                             pojo {| value=30.0; label={| text=I18N.t "charts.spread.oneMonth"|}; color="#888"; dashStyle="ShortDash" |}
@@ -146,18 +146,15 @@ type ChartCfg = {
 
                 dataKey = fun dp ->
                     let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
-                    let total = dp.Cases.ConfirmedToDate |> Utils.zeroToNone
-                    let recovered = dp.StatePerTreatment.RecoveredToDate |> Option.defaultValue 0
-                    let deceased = dp.StatePerTreatment.DeceasedToDate |> Option.defaultValue 0
+                    let total = dp.Cases.Active |> Utils.zeroToNone
                     let value =
                         (daily, total)
                         ||> Option.map2 (fun daily total ->
-                            let active = total-recovered-deceased
-                            let yesterday = active-daily
+                            let yesterday = total-daily
                             let v =
                                 if yesterday < 2 then nan
                                 else
-                                    let rate = float active / float yesterday
+                                    let rate = float total / float yesterday
                                     let days = Math.Log 2.0 / Math.Log rate
                                     days |> roundDecimals 1
                             v
@@ -210,7 +207,7 @@ let renderExplainer (data: StatsData) =
         data
         |> List.rev
         |> Seq.choose (fun dp ->
-            match dp.Cases.ConfirmedToDate, dp.StatePerTreatment.InHospital with
+            match dp.Cases.Active, dp.StatePerTreatment.InHospital with
             | Some p, Some h -> Some (p, h)
             | _, _ -> None)
         |> Seq.take 1
@@ -228,7 +225,7 @@ let renderExplainer (data: StatsData) =
                     | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                     | _ -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
                 ]
-                Html.div [ Html.h4 (string positive); Html.p (I18N.t "charts.spread.confirmedCases") ]
+                Html.div [ Html.h4 (string positive); Html.p (I18N.t "charts.spread.activeCases") ]
                 Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hospitalized") ]
             ]
         ]

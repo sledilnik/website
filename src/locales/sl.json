@@ -565,6 +565,7 @@
             "thousandsSep": ".",
             "decimalPoint": ",",
             "view": "Prikaži:",
+            "sortBy": "Sortiraj po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -686,13 +687,14 @@
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
-            "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:",
+            "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7 dni, potem bi lahko pričakovali:",
             "today": "Danes",
             "inOneWeek": "Čez en teden",
             "inTwoWeeks": "Čez dva tedna",
             "inThreeWeeks": "Čez tri tedne",
             "inFourWeeks": "Čez štiri tedne",
             "timesAsMany": "-krat toliko",
+            "activeCases": "aktivnih primerov",
             "confirmedCases": "potrjeno okuženih",
             "hospitalized": "hospitaliziranih"
         },
@@ -779,7 +781,7 @@
             "allRegions": "Vse regije",
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
-            "viewDoublingTime": "Dnevih podvojitve",
+            "viewDoublingTime": "Podvojitven čas",
             "viewLast": "Zadnji"
         },
         "ageGroups": {
