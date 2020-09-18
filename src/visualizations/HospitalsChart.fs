@@ -2,6 +2,7 @@
 module HospitalsChart
 
 open System
+open DataLoader
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -40,31 +41,37 @@ type State = {
     static member switchBreakdown breakdown state = { state with scope = breakdown }
 
 type Msg =
-    | ConsumeHospitalsData of Result<FacilityAssets [], string>
-    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumeHospitalsData
+        of Result<DownloadedData<FacilityAssets[]>, string>
+    | ConsumePatientsData of Result<DownloadedData<PatientsStats []>, string>
     | ConsumeServerError of exn
     | ScaleTypeChanged of ScaleType
     | SwitchBreakdown of Scope
     | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either getOrFetch () ConsumeHospitalsData ConsumeServerError
-    let cmd2 = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    let getOrFetch = makeDataLoader<FacilityAssets []> url
+
+    let cmd = Cmd.OfAsync.either
+                  getOrFetch () ConsumeHospitalsData ConsumeServerError
+    let cmd2 = Cmd.OfAsync.either
+                   Data.Patients.getOrFetch ()
+                   ConsumePatientsData ConsumeServerError
     State.initial, (cmd @ cmd2)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumeHospitalsData (Ok data) ->
         { state with
-            facData = data
-            facilities = data |> getSortedFacilityCodes
+            facData = data.Data
+            facilities = data.Data |> getSortedFacilityCodes
         } |> State.switchBreakdown state.scope, Cmd.none
     | ConsumeHospitalsData (Error err) ->
         { state with error = Some err }, Cmd.none
 
     | ConsumePatientsData (Ok data) ->
         { state with
-            patientsData = data
+            patientsData = data.Data
         } |> State.switchBreakdown state.scope, Cmd.none
     | ConsumePatientsData (Error err) ->
         { state with error = Some err }, Cmd.none

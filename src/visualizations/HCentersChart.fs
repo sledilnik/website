@@ -2,6 +2,7 @@
 module HCentersChart
 
 open System
+open DataLoader
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -24,13 +25,15 @@ type State = {
   }
 
 type Msg =
-    | ConsumeHcData of Result<HcStats [], string>
+    | ConsumeHcData of Result<DownloadedData<HcStats[]>, string>
     | ConsumeServerError of exn
     | RegionFilterChanged of string
     | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.HCenters.getOrFetch () ConsumeHcData ConsumeServerError
+    let getOrFetch = makeDataLoader<HcStats []> url
+    let cmd = Cmd.OfAsync.either
+                  getOrFetch () ConsumeHcData ConsumeServerError
 
     let state = {
         HcData = [| |]
@@ -52,7 +55,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
     match msg with
     | ConsumeHcData (Ok data) ->
-        { state with HcData = data; Regions = getRegionList (data |> Array.last) }, Cmd.none
+        { state with HcData = data.Data
+                     Regions = getRegionList (data.Data |> Array.last) },
+        Cmd.none
     | ConsumeHcData (Error err) ->
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
@@ -136,7 +141,7 @@ let renderChartOptions (state : State) dispatch =
         res
 
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
@@ -154,7 +159,7 @@ let renderChartContainer (state : State) dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 

@@ -2,6 +2,7 @@
 module RatiosChart
 
 open System
+open DataLoader
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -69,7 +70,7 @@ type State = {
 }
 
 type Msg =
-    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumePatientsData of Result<DownloadedData<PatientsStats []>, string>
     | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
@@ -82,13 +83,14 @@ let init (data : StatsData) : State * Cmd<Msg> =
         displayType = Cases
         RangeSelectionButtonIndex = 0
     }
-    let cmd = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
+    let cmd = Cmd.OfAsync.either
+                  getOrFetch () ConsumePatientsData ConsumeServerError
     state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
-        { state with patientsData = data }, Cmd.none
+        { state with patientsData = data.Data }, Cmd.none
     | ConsumePatientsData (Error err) ->
         { state with error = Some err }, Cmd.none
     | ConsumeServerError ex ->
@@ -114,7 +116,7 @@ let renderRatiosChart (state : State) dispatch =
             | None -> None
             | Some i -> i
 
-        let renderRatioPoint : (Data.Patients.PatientsStats -> JsTimestamp * float option) =
+        let renderRatioPoint : (PatientsStats -> JsTimestamp * float option) =
             match ratio with
             | HospitalCases                 -> fun ps -> ps.JsDate12h, percent ps.total.inHospital.toDate (cases ps.Date)
             | IcuCases                      -> fun ps -> ps.JsDate12h, percent ps.total.icu.toDate (cases ps.Date)
@@ -150,7 +152,7 @@ let renderRatiosChart (state : State) dispatch =
 
     let className = DisplayType.getClassName state.displayType
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
@@ -182,7 +184,7 @@ let renderChartContainer state dispatch =
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderRatiosChart state dispatch |> Highcharts.chartFromWindow
+            renderRatiosChart state dispatch |> chartFromWindow
         ]
     ]
 
