@@ -595,6 +595,10 @@
         "quarantine10days": {
             "title": "10 days",
             "description": "Mandatory quarantine reduced from 10 days"
+        },
+        "masks": {
+            "title": "Masks",
+            "description": "Face masks required in all indoor public places and outside when distance less than 2m.<br>Restaurants open only until 22:30."
         }
     },
     "days": {

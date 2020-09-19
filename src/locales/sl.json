@@ -514,6 +514,10 @@
         "quarantine10days": {
             "title": "10 dni",
             "description": "Obvezna karantena skrajšana na 10 dni"
+        },
+        "masks": {
+            "title": "Maske",
+            "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22:30."
         }
     },
     "phase": {
