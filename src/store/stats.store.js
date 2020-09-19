@@ -1,8 +1,5 @@
 import _ from 'lodash'
-import {
-  exportTime,
-  ApiEndpoint
-} from './index'
+import { exportTime, ApiEndpoint } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 
@@ -103,26 +100,26 @@ export function lastChange(data, field, cumulative, date) {
     }
   }
 
-  if (typeof result.dayBefore.value === "undefined") {
+  if (typeof result.dayBefore.value === 'undefined') {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.dayBefore.value === 0 ?
-      (result.lastDay.percentDiff = 0) :
-      (result.lastDay.percentDiff =
-        Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
-        10)
+    result.dayBefore.value === 0
+      ? (result.lastDay.percentDiff = 0)
+      : (result.lastDay.percentDiff =
+          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
+          10)
   }
 
-  if (typeof result.day2Before.value === "undefined") {
+  if (typeof result.day2Before.value === 'undefined') {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.day2Before.value === 0 ?
-      (result.dayBefore.percentDiff = 0) :
-      (result.dayBefore.percentDiff =
-        Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
-        10)
+    result.day2Before.value === 0
+      ? (result.dayBefore.percentDiff = 0)
+      : (result.dayBefore.percentDiff =
+          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+          10)
   }
 
   return result
@@ -170,8 +167,9 @@ const getters = {
         return day[field]
       })
     return {
-      date: result ?
-        new Date(Date.parse(result.date)) : new Date(new Date().setHours(0, 0, 0, 0)),
+      date: result
+        ? new Date(Date.parse(result.date))
+        : new Date(new Date().setHours(0, 0, 0, 0)),
       value: result ? result[field] : null,
     }
   },
@@ -182,20 +180,25 @@ const getters = {
 }
 
 const actions = {
-  fetchData: async ({
-    commit
-  }) => {
-    const threeDaysAgo = new Date(new Date().setDate(new Date().getDate() - 4))
-    const data = await ApiService.get(`${ApiEndpoint}/api/stats`, threeDaysAgo)
-    const d = exportTime(data.headers.timestamp)
-
+  fetchData: async ({ commit }, to) => {
+    let data, d
+    if (typeof to !== 'undefined') {
+      const tempDate = new Date(to)
+      const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
+      data = await ApiService.get(`${ApiEndpoint}/api/stats`, from, to)
+      d = to
+    } else {
+      const threeDaysAgo = new Date(
+        new Date().setDate(new Date().getDate() - 4)
+      )
+      data = await ApiService.get(`${ApiEndpoint}/api/stats`, threeDaysAgo)
+      d = exportTime(data.headers.timestamp)
+    }
     commit('setData', data.data)
     commit('setRegions', regions)
     commit('setExportTime', d)
   },
-  refreshDataEvery: ({
-    dispatch
-  }, seconds) => {
+  refreshDataEvery: ({ dispatch }, seconds) => {
     setInterval(() => {
       dispatch('fetchData')
     }, seconds * 1000)
