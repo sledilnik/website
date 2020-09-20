@@ -114,14 +114,15 @@
             "oneDay": "Një ditë",
             "oneWeek": "Një javë",
             "oneMonth": "Një muaj",
-            "ifExpGrowth": "Nëse infeksioni do të përhapet në mënyrë eksponenciale me dyfishim në 7, atëherë mund të prisni:",
+            "ifExpGrowth": "Nëse infeksioni do të përhapet në mënyrë eksponenciale me dyfishim në 7 ditë, atëherë mund të presim:",
             "today": "Sot",
             "inOneWeek": "Për një javë",
             "inTwoWeeks": "Për dy javë",
             "inThreeWeeks": "Për tri javë",
             "inFourWeeks": "Për katër javë",
             "hospitalized": "të shtruar në spital",
-            "title": "Rritja e rasteve të konfirmuara"
+            "title": "Rritja e rasteve të konfirmuara",
+            "activeCases": "raste aktive"
         },
         "infections": {
             "otherPersons": "Persona tjerë",
@@ -243,7 +244,8 @@
             "dataSource": "burim i të dhënave",
             "dsNIJZ": "ISHP",
             "dsMZ": "Ministria e shëndetësisë",
-            "dsOWD": "Our World in Data"
+            "dsOWD": "Our World in Data",
+            "sortBy": "Rendit sipas:"
         },
         "europe": {
             "restrictions": "Kufizimet dhe rastet e importuara",
@@ -766,6 +768,10 @@
         },
         "app": {
             "title": "#OstaniZdrav"
+        },
+        "masks": {
+            "description": "Maskat janë të detyrueshme në të gjitha hapësirat e mbyllura publike dhe jashtë kur distanca është më e vogël se 2m. <br> Restorantet punojnë vetëm deri në orën 22:30.",
+            "title": "Maska"
         }
     },
     "tableDict": {
