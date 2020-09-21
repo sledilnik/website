@@ -605,6 +605,12 @@
             "deceased": "Umrli (na dan)",
             "deceasedToDate": "Umrli (skupaj)"
         },
+        "dailyComparison": {
+            "title": "Primerjava po dnevih v tednu",
+            "new": "Potrjeno okuženi",
+            "active": "Aktivni primeri",
+            "tests": "Opravljeni testi"
+        },
         "cases": {
             "title": "Potrjeni primeri",
             "active": "Aktivni",

@@ -19,6 +19,7 @@ let init (query: obj) (visualization: string option) (page: string) =
             | "EuropeMap" -> Some EuropeMap
             | "WorldMap" -> Some WorldMap
             | "MetricsComparison" -> Some MetricsComparison
+            | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
@@ -96,6 +97,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+
+    let dailyComparison =
+          { VisualizationType = DailyComparison
+            ClassName = "daily-comparison-chart"
+            ChartTextsGroup = "dailyComparison"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView DailyComparisonChart.dailyComparisonChart {| data = data |} }
 
     let spread =
           { VisualizationType = Spread
@@ -324,7 +338,7 @@ let render (state: State) (_: Msg -> unit) =
           }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; patients; map; municipalities
+        [ hospitals; metricsComparison; dailyComparison; spread; patients; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
           cases; ratios; ageGroups; regionMap; regions
         ]
@@ -337,7 +351,7 @@ let render (state: State) (_: Msg -> unit) =
           ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; map; municipalities
+        [ hospitals; metricsComparison; dailyComparison; spread; map; municipalities
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regionMap; regions
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M

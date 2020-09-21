@@ -15,5 +15,8 @@ let tOptions key options = i18n.t (key, options)
 let tt section key =
     t (section + "." + key)
 
+let dow dayOfWeek =
+    t (sprintf "weekday.%d" dayOfWeek)
+
 let chartText chartTextsGroup textId =
     t ("charts." + chartTextsGroup + textId)

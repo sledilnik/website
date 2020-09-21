@@ -13,6 +13,7 @@ let dropdown (viz: Visualization) =
         let (width, height) =
             match viz.VisualizationType with
             | MetricsComparison -> (1140, 780)
+            | DailyComparison -> (1140, 720)
             | Cases -> (1140, 630)
             | Patients -> (1140, 720)
             | Ratios -> (1140, 720)
