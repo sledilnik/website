@@ -49,7 +49,7 @@
         <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
         <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
         <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
-        <PackageReference Include="Feliz" Version="1.13.1" />
+        <PackageReference Include="Feliz" Version="1.14.0" />
         <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
         <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
         <PackageReference Include="EdelweissData.Base" Version="1.0.10" />
