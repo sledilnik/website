@@ -426,7 +426,7 @@
     },
     "days": {
         "longerDate": "{{ date, dddd, D MMMM YYYY }}",
-        "date": "{{ date, D MMMM }}",
+        "date": "{{ date, D MMM }}",
         "x_days_ago": "{{ count }} giorno fa",
         "x_days_ago_plural": "{{ count }} giorni fa",
         "in_x_days": "in {{ count }} giorno",
@@ -875,8 +875,7 @@
         "title": "Includere un grafico nelle proprie pagine"
     },
     "infocard": {
-        "accordingTo": "Il {{ date, D MMMM }}",
-        "lastUpdated": "{{ date, dddd, D MMMM }}",
+        "lastUpdated": "{{ date, ddd, D MMM }}",
         "deceasedToDate": "Decessi confermati",
         "icu": "Terapie intensive",
         "inHospital": "Ricoveri",

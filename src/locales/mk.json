@@ -44,8 +44,7 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}",
-        "accordingTo": "Во однос на {{ date, dddd, D. MMMM }}"
+        "lastUpdated": "{{ date, dddd, D. MMM }}"
     },
     "cm": {
         "publicTransport": {
@@ -794,7 +793,7 @@
     },
     "days": {
         "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
-        "date": "{{ date, D. MMMM }}",
+        "date": "{{ date, D. MMM }}",
         "x_days_ago": "пред {{ count }} ден",
         "x_days_ago_plural": "пред {{ count }} дена",
         "in_x_days": "во {{ count }} ден",

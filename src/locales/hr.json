@@ -831,10 +831,9 @@
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
-        "accordingTo": "Za {{ date, D. MMMM }}",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}"
+        "lastUpdated": "{{ date, ddd, D. MMM }}"
     },
     "region": {
         "za": "Zasavlje",
@@ -858,7 +857,7 @@
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
         "longerDate": "{{ date, dddd, D. MMMM YYYY. }}",
-        "date": "{{ date, D. MMMM }}",
+        "date": "{{ date, D. MMM }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana"

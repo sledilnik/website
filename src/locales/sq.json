@@ -632,8 +632,7 @@
         "title": "Tabela"
     },
     "infocard": {
-        "lastUpdated": "{{ date, dddd, D. MMMM }}",
-        "accordingTo": "Sipas {{ date, MMMM Do }}",
+        "lastUpdated": "{{ date, dddd, D. MMM }}",
         "deceasedToDate": "Raste vdekje të konfirmuara",
         "icu": "Në njësinë për kujdes intensiv",
         "inHospital": "Të shtruar në spital",
@@ -874,7 +873,7 @@
     },
     "days": {
         "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
-        "date": "{{ date, D. MMMM }}",
+        "date": "{{ date, D. MMM }}",
         "x_days_ago": "{{ count }} ditë më parë",
         "x_days_ago_plural": "{{ count }} ditë më parë",
         "in_x_days": "për {{ count }} ditë",

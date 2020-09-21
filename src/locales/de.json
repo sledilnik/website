@@ -753,9 +753,8 @@
         "active": "Aktive Fälle",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}",
+        "lastUpdated": "{{ date, ddd, D. MMM }}",
         "icu": "Auf Intensivstationen",
-        "accordingTo": "Am {{ date, D. MMMM }}",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte"
     },
@@ -981,7 +980,7 @@
         "0": "Sonntag"
     },
     "days": {
-        "date": "{{ date, D. MMMM }}",
+        "date": "{{ date, D. MMM }}",
         "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
         "x_days_ago": "Vor {{ count }} Tag",
         "x_days_ago_plural": "Vor {{ count }} Tagen",

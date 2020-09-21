@@ -158,7 +158,6 @@
     },
     "infocard": {
         "lastUpdated": "{{ date, dddd, MMMM Do }}",
-        "accordingTo": "According to {{ date, MMMM Do }}",
         "deceasedToDate": "Potvrdjeni smrtni slucajevi",
         "icu": "Na intezivnoj njezi",
         "inHospital": "Hospitalizovani",
