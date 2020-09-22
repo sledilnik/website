@@ -44,6 +44,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderChartOptions (state : State) dispatch =
 
+    let weeksShown = 6
+
     let getValue dp =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
@@ -52,14 +54,14 @@ let renderChartOptions (state : State) dispatch =
 
     let fourWeeks = 
         state.Data 
-        |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(-28.0))
+        |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
         |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
         |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
         |> Seq.toArray
 
     let allSeries = [
-        for i in 0..3 do    
-            let idx = i * 7
+        for weekIdx in 0 .. weeksShown-1 do    
+            let idx = weekIdx * 7
             let len = min 7 (fourWeeks.Length - idx)
 
             let desaturateColor (rgb:string) (sat:float) = 
@@ -75,22 +77,35 @@ let renderChartOptions (state : State) dispatch =
 
             let getSeriesColor dt series =
                 match dt with
-                | New -> desaturateColor "#bda506" (0.25 + float series / 4.0)
-                | Active -> desaturateColor "#dba51d" (0.25 + float series / 4.0)
-                | Tests -> desaturateColor "#19aebd" (0.25 + float series / 4.0)
+                | New -> desaturateColor "#bda506" (0.1 + float series / float (weeksShown+1))
+                | Active -> desaturateColor "#dba51d" (0.1 + float series / float (weeksShown+1))
+                | Tests -> desaturateColor "#19aebd" (0.1 + float series / float (weeksShown+1))
+
+            let percent a b =
+                match a, b with
+                | Some v, Some p -> sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
+                | _, _ -> ""
 
             yield pojo
                 {|
                     ``type`` = "column"
-                    color = getSeriesColor state.DisplayType i
+                    color = getSeriesColor state.DisplayType weekIdx
                     data = 
-                        Array.sub fourWeeks idx len 
-                        |> Array.map (fun (date, value) -> 
+                        fourWeeks
+                        |> Array.skip idx
+                        |> Array.take len 
+                        |> Array.mapi (fun i (date, value) -> 
                             {|
                                 y = value
                                 date = I18N.tOptions "days.date" {| date = date |}
-                                dataLabels =
-                                    if i = 3 then pojo {| enabled = true |}
+                                diff = 
+                                    if weekIdx > 0
+                                    then 
+                                        let _ , prev = fourWeeks.[(weekIdx-1) * 7 + i]
+                                        percent value prev 
+                                    else ""
+                                dataLabels = 
+                                    if weekIdx = weeksShown-1 then pojo {| enabled = true |}
                                     else pojo {||}
                             |} |> pojo
                         )
@@ -105,10 +120,11 @@ let renderChartOptions (state : State) dispatch =
         let mutable fmtLine = ""
         fmtStr <- fmtStr + "<table>"
         for p in pts do
-            fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td></tr>"
+            fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td><td style='text-align: right; padding-left: 10px'>%s</td></tr>"
                 p?series?color
                 p?point?date
                 p?point?y
+                p?point?diff
             fmtStr <- fmtStr + fmtLine
         fmtStr <- fmtStr + "</table>"
         fmtStr
