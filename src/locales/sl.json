@@ -609,7 +609,8 @@
             "title": "Primerjava po dnevih v tednu",
             "new": "Potrjeno okuženi",
             "active": "Aktivni primeri",
-            "tests": "Opravljeni testi"
+            "tests": "Opravljeni testi",
+            "positivePct": "Delež pozitivnih testov (%)"
         },
         "cases": {
             "title": "Potrjeni primeri",

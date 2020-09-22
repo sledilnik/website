@@ -15,12 +15,14 @@ type DisplayType =
     | Active
     | New
     | Tests
+    | PositivePct
 with
-    static member all = [ New; Active; Tests;  ]
+    static member all = [ New; Active; Tests; PositivePct; ]
     static member getName = function
         | New -> I18N.t "charts.dailyComparison.new"
         | Active -> I18N.t "charts.dailyComparison.active"
         | Tests -> I18N.t "charts.dailyComparison.tests"
+        | PositivePct -> I18N.t "charts.dailyComparison.positivePct"
 
 type State = {
     Data: StatsData
@@ -46,11 +48,40 @@ let renderChartOptions (state : State) dispatch =
 
     let weeksShown = 6
 
+    let percentageFormatter value =
+        let valueF = float value / 100.0
+        sprintf "%0.2f%%" valueF
+
+    let tooltipFormatter state jsThis =
+        let category = jsThis?x
+        let pts: obj[] = jsThis?points
+
+        let mutable fmtStr = sprintf "<b>%s</b><br>%s<br>" (DisplayType.getName state.DisplayType) category
+        let mutable fmtLine = ""
+        fmtStr <- fmtStr + "<table>"
+        for p in pts do
+            let yStr =
+                match state.DisplayType with
+                | PositivePct -> percentageFormatter p?point?y
+                | _ -> sprintf "%d" p?point?y
+            fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td><td style='text-align: right; padding-left: 10px'>%s</td></tr>"
+                p?series?color
+                p?point?date
+                yStr
+                p?point?diff
+            fmtStr <- fmtStr + fmtLine
+        fmtStr <- fmtStr + "</table>"
+        fmtStr
+
     let getValue dp =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
         | Tests -> dp.Tests.Performed.Today
+        | PositivePct -> 
+            match dp.Tests.Positive.Today, dp.Tests.Performed.Today with
+            | Some p, Some t -> Some ( (float p / float t * 100.0 * 100.0) |> int)
+            | _ -> None 
 
     let fourWeeks = 
         state.Data 
@@ -80,6 +111,7 @@ let renderChartOptions (state : State) dispatch =
                 | New -> desaturateColor "#bda506" (float (series+1) / float (weeksShown+1))
                 | Active -> desaturateColor "#dba51d" (float (series+1) / float (weeksShown+1))
                 | Tests -> desaturateColor "#19aebd" (float (series+1) / float (weeksShown+1))
+                | PositivePct -> desaturateColor "#665191" (float (series+1) / float (weeksShown+1))
 
             let percent a b =
                 match a, b with
@@ -105,29 +137,16 @@ let renderChartOptions (state : State) dispatch =
                                         percent value prev 
                                     else ""
                                 dataLabels = 
-                                    if weekIdx = weeksShown-1 then pojo {| enabled = true |}
+                                    if weekIdx = weeksShown-1 
+                                    then 
+                                        if state.DisplayType = PositivePct
+                                        then pojo {| enabled = true; formatter = fun () -> percentageFormatter jsThis?y |}
+                                        else pojo {| enabled = true |}
                                     else pojo {||}
                             |} |> pojo
                         )
                 |}
     ]
-
-    let tooltipFormatter state jsThis =
-        let category = jsThis?x
-        let pts: obj[] = jsThis?points
-
-        let mutable fmtStr = sprintf "<b>%s</b><br>%s<br>" (DisplayType.getName state.DisplayType) category
-        let mutable fmtLine = ""
-        fmtStr <- fmtStr + "<table>"
-        for p in pts do
-            fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td><td style='text-align: right; padding-left: 10px'>%s</td></tr>"
-                p?series?color
-                p?point?date
-                p?point?y
-                p?point?diff
-            fmtStr <- fmtStr + fmtLine
-        fmtStr <- fmtStr + "</table>"
-        fmtStr
 
     {| optionsWithOnLoadEvent "covid19-daily-comparison" with
         chart = pojo {| ``type`` = "column" |}
@@ -142,6 +161,10 @@ let renderChartOptions (state : State) dispatch =
             {|
                 opposite = true
                 title = {| text = null |}
+                labels = 
+                    if state.DisplayType = PositivePct 
+                    then pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
+                    else pojo {| |}
             |}
         |]
 

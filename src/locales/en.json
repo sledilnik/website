@@ -191,7 +191,8 @@
             "title": "Comparison by Day of Week",
             "new": "Confirmed Cases",
             "active": "Active Cases",
-            "tests": "Tests Performed"
+            "tests": "Tests Performed",
+            "positivePct": "Share of Positive Tests (%)"
         },
         "cases": {
             "title": "Confirmed Cases",
