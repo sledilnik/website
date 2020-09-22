@@ -5,6 +5,7 @@ open System
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
+open Fable.Core.JsInterop
 open Browser
 
 open Types
@@ -71,7 +72,7 @@ let renderChartOptions (state : State) dispatch =
     let fourWeeks = 
         state.data 
         |> Seq.skipWhile (fun dp -> dp.Date < startDate)
-        |> Seq.map (fun dp -> (getDOW dp.Date, getValue dp)) 
+        |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
         |> Seq.toArray
 
     let allSeries = [
@@ -95,13 +96,42 @@ let renderChartOptions (state : State) dispatch =
                 | New -> desaturate "#bda506" (0.25 + float i / 4.0)
                 | Active -> desaturate "#dba51d" (0.25 + float i / 4.0)
                 | Tests -> desaturate "#19aebd" (0.25 + float i / 4.0)
+
             yield pojo
                 {|
                     ``type`` = "column"
                     color = color
-                    data = Array.sub fourWeeks idx len
+                    data = 
+                        Array.sub fourWeeks idx len 
+                        |> Array.map (fun (date, value) ->
+                            pojo {|
+                                 //x = date.DayOfWeek
+                                 y = value
+                                 date = I18N.tOptions "days.date" {| date = date |}
+                            |}
+                        )
                 |}
     ]
+
+    let tooltipFormatter state jsThis =
+        let category = jsThis?x
+        let pts: obj[] = jsThis?points
+        let fmtDate = pts.[0]?fmtDate
+
+        let mutable fmtStr = sprintf "<b>%s</b><br>%s<br>" (DisplayType.getName state.displayType) category
+        let mutable fmtLine = ""
+        fmtStr <- fmtStr + "<table>"
+        for p in pts do
+            match p?point?date with
+            | "null" -> ()
+            | _ ->
+                fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%d</td></tr>"
+                    p?series?color
+                    p?point?date
+                    p?point?y
+                fmtStr <- fmtStr + fmtLine
+        fmtStr <- fmtStr + "</table>"
+        fmtStr
 
     {| optionsWithOnLoadEvent "covid19-daily-comparison" with
         chart = pojo {| ``type`` = "column" |}
@@ -109,7 +139,7 @@ let renderChartOptions (state : State) dispatch =
         xAxis = [| 
             {|
                 ``type`` = "category"
-                categories = [| I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; I18N.dow 0; |]
+                categories = [| I18N.dow 0; I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; |]
             |} 
         |]
         yAxis = [|
@@ -125,8 +155,9 @@ let renderChartOptions (state : State) dispatch =
 
         tooltip = pojo
             {|
+                formatter = fun () -> tooltipFormatter state jsThis
                 shared = true
-                split = false
+                useHTML = true
             |}
 
         credits = pojo
