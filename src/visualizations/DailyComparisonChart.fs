@@ -77,12 +77,24 @@ let renderChartOptions (state : State) dispatch =
     let allSeries = [
         for i in 0..3 do    
             let idx = i * 7
-            let len = min 7 (fourWeeks.Length - idx)         
+            let len = min 7 (fourWeeks.Length - idx)
+
+            let desaturate (rgb:string) (sat:float) = 
+                let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+                let r = (argb &&& 0x00FF0000) >>> 16
+                let g = (argb &&& 0x0000FF00) >>> 8
+                let b = (argb &&& 0x000000FF)
+                let avg = float(r + g + b) / 3.0
+                let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+                let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+                let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+                sprintf "#%02x%02x%02x" newR newG newB
+
             let color =
                 match state.displayType with
-                | New -> "#bda506"
-                | Active -> "#d5c768"
-                | Tests -> "#19aebd"
+                | New -> desaturate "#bda506" (0.3 + float i / 4.0)
+                | Active -> desaturate "#d5c768" (0.3 + float i / 4.0)
+                | Tests -> desaturate "#19aebd" (0.3 + float i / 4.0)
             yield pojo
                 {|
                     ``type`` = "column"
