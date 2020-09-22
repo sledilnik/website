@@ -170,6 +170,8 @@ let renderChartOptions (state : State) dispatch =
 
         series = List.toArray allSeries
 
+        plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
+
         legend = pojo {| enabled = false |}
 
         tooltip = pojo
