@@ -7,7 +7,7 @@
     },
     "timestamp": {
         "at": "во {{ date, HH.mm }}",
-        "updated": "Ажурирано {{ date, dddd, D. MMMM YYYY }}"
+        "updated": "Ажурирано {{ date, %A, D. %B %Y }}"
     },
     "navbar": {
         "language": {
@@ -44,7 +44,7 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, dddd, D. MMM }}"
+        "lastUpdated": "{{ date, %A, %e. %b }}"
     },
     "cm": {
         "publicTransport": {
@@ -471,7 +471,7 @@
         "tabByAgeFemale": "По возраст - Женски",
         "tabByAgeMale": "По возраст - Машки",
         "title": "Табела",
-        "day": "{{ date, D.M. }}",
+        "day": "{{ date, %e.%m. }}",
         "sourceLink": "GDocs табела во CSV облик или REST API",
         "source": "Извори на податоци во други облици",
         "tabByRegion": "По регион",
@@ -792,8 +792,8 @@
         }
     },
     "days": {
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
-        "date": "{{ date, D. MMM }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
+        "date": "{{ date, D. %b }}",
         "x_days_ago": "пред {{ count }} ден",
         "x_days_ago_plural": "пред {{ count }} дена",
         "in_x_days": "во {{ count }} ден",
