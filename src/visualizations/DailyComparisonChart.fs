@@ -164,7 +164,7 @@ let renderChartOptions (state : State) dispatch =
                 labels = 
                     if state.DisplayType = PositivePct 
                     then pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
-                    else pojo {| |}
+                    else pojo {| formatter = None |}
             |}
         |]
 
