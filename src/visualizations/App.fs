@@ -444,19 +444,26 @@ let render (state: State) (_: Msg -> unit) =
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div
-        [ Utils.classes
-            [(true, "visualization container")
-             (embedded, "embeded") ]
-          prop.children
-              (visualizations
-               |> List.map (fun viz ->
-                   Html.section
-                       [ prop.className [ viz.ClassName; "visualization-chart" ]
-                         prop.id viz.ClassName
-                         prop.children
-                             [ Html.div
-                                 [ prop.className "title-chart-wrapper"
-                                   prop.children
-                                       [ renderChartTitle viz
-                                         renderFaqAndShareBtn viz ] ]
-                               state |> viz.Renderer ] ])) ]
+        [ Utils.classes [
+            (true, "visualization container")
+            (embedded, "embeded") ]
+          prop.children (
+            visualizations
+            |> List.map (fun viz ->
+                Html.section [
+                    prop.className [ viz.ClassName ; "visualization-chart" ]
+                    prop.id viz.ClassName
+                    prop.children [
+                        Html.div [
+                            prop.className "title-chart-wrapper"
+                            prop.children [
+                                renderChartTitle viz
+                                renderFaqAndShareBtn viz
+                            ]
+                        ]
+                        IntersectionObserver.Component.intersectionObserver
+                            {| targetElementId = viz.ClassName
+                               content = state |> viz.Renderer
+                               options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
+                            |}
+                    ] ] ) ) ]
