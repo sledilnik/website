@@ -643,9 +643,9 @@
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
-        "newChart": "Grafikon i ri:",
+        "newChart": "🆕 📊 Grafikon i ri:",
         "newsText": "Koronavirusi Botë - Harta 🌍 - rastet aktive për 1M popullsi",
-        "newPage": "Faqe e re:"
+        "newPage": "🆕 Faqe e re:"
     },
     "timestamp": {
         "at": "në {{ date, HH:mm }}",
