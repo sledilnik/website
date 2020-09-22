@@ -187,6 +187,12 @@
             "deceased": "Deaths (daily)",
             "deceasedToDate": "Deaths (to date)"
         },
+        "dailyComparison": {
+            "title": "Comparison by Day of Week",
+            "new": "Confirmed Cases",
+            "active": "Active Cases",
+            "tests": "Tests Performed"
+        },
         "cases": {
             "title": "Confirmed Cases",
             "active": "Active",
