@@ -255,6 +255,14 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 </details>
 
 <details>
+  <summary id=daily-comparison-chart>Kaj kaže graf "Primerjava po dnevih v tednu"?</summary>
+
+[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeno okuženi* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).   
+Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu.  
+
+</details>
+
+<details>
   <summary id=cases-chart>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
 
 Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/sl/stats#cases-chart). Sicer pa je za spremljanje epidemije pomembno vedeti, koliko je še aktualno okuženih. Zato uporabljamo terminologijo:
