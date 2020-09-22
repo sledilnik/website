@@ -17,28 +17,6 @@ import i18n from "../i18n"
 
 window.Highcharts = window.Highcharts || Highcharts;
 
-Highcharts.lo
-
-function setHighchartsOptions (highcharts) {
-    highcharts.setOptions({
-        global: {
-            useUTC: false
-        },
-        lang: {
-            loading: i18n.t("charts.common.loading"),
-            months: i18n.t("month"),
-            shortMonths: i18n.t("shortMonth"),
-            weekdays: i18n.t("weekday"),
-            rangeSelectorFrom: i18n.t("charts.common.from"),
-            rangeSelectorTo: i18n.t("charts.common.to"),
-            rangeSelectorZoom: i18n.t("charts.common.zoom"),
-            resetZoom: i18n.t("charts.common.resetZoom"),
-            resetZoomTitle: i18n.t("charts.common.resetZoomTitle"),
-            thousandsSep: i18n.t("charts.common.thousandsSep"),
-            decimalPoint: i18n.t("charts.common.decimalPoint"),
-        }
-    });
-};
 
 (function(H) {
   H.Legend.prototype.setItemEvents = function(item, legendItem, useHTML) {
@@ -257,7 +235,6 @@ function wrapLabelFormatterWithThis({legend, ...options}) {
 
 function renderChart(options) {
   options = wrapLabelFormatterWithThis(options);
-  setHighchartsOptions(Highcharts);
   return React.createElement(HighchartsReact, {
     highcharts: Highcharts,
     containerProps: {style: {height:"100%"}},
@@ -267,7 +244,6 @@ function renderChart(options) {
 
 function renderChartFromWindow(options) {
   options = wrapLabelFormatterWithThis(options);
-  setHighchartsOptions(window.Highcharts);
   return React.createElement(
     HighchartsReact,
     {
@@ -282,7 +258,6 @@ function renderChartFromWindow(options) {
 
 function renderMap(options) {
     options = wrapLabelFormatterWithThis(options);
-    setHighchartsOptions(Highcharts);
     return React.createElement(HighchartsReact, {
         highcharts: Highcharts,
         constructorType: "mapChart",

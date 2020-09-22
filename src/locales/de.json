@@ -753,7 +753,7 @@
         "active": "Aktive Fälle",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
-        "lastUpdated": "{{ date, ddd, D. MMM }}",
+        "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte"
@@ -765,8 +765,8 @@
         "newPage": "🆕 Neue Seite:"
     },
     "timestamp": {
-        "at": "um {{ date, HH:mm }}",
-        "updated": "Aktualisiert am {{ date, dddd, MMMM Do YYYY }}"
+        "at": "um {{ date, %H:%M }}",
+        "updated": "Aktualisiert am {{ date, %A, %B %e, %Y }}"
     },
     "shortMonth": {
         "11": "Dez",
@@ -968,7 +968,7 @@
         "tabByAgeMale": "Nach Alter – Männer",
         "tabByRegion": "Nach Regionen",
         "source": "Datenquelle in anderen Formaten",
-        "day": "{{ date, D. M. }}"
+        "day": "{{ date, %e. %m. }}"
     },
     "weekday": {
         "5": "Freitag",
@@ -980,8 +980,8 @@
         "0": "Sonntag"
     },
     "days": {
-        "date": "{{ date, D. MMM }}",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
+        "date": "{{ date, %e. %b }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
         "x_days_ago": "Vor {{ count }} Tag",
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",

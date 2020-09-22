@@ -5,6 +5,7 @@
     <ItemGroup>
         <Compile Include="Types.fs" />
         <Compile Include="I18N.fs" />
+        <Compile Include="IntersectionObserver.fs" />
         <Compile Include="ShareButton.fs" />
         <Compile Include="Highcharts.fs" />
         <Compile Include="Utils.fs" />

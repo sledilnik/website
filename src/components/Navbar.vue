@@ -63,7 +63,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import i18next from 'i18next'
 import { mixin as clickaway } from 'vue-clickaway'
 
@@ -129,7 +128,6 @@ export default {
         this.selectedLanguage = lang
         this.dropdownVisible = false
         this.$router.push({ name: this.$route.name, params: { lang } })
-        moment.locale(lang)
       })
     },
   },

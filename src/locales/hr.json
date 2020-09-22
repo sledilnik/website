@@ -323,7 +323,7 @@
             "linear": "Linearno",
             "close": "Zatvori",
             "xAxis": "Os x:",
-            "view": "Prikaži:",
+            "view": "Prikaz:",
             "share": "Dijeli",
             "longDateFormat": "%e. %B %Y.",
             "log": "Logaritmički",
@@ -337,7 +337,8 @@
             "linkFaq": "Često postavljena pitanja",
             "decimalPoint": ",",
             "to": " – ",
-            "from": " "
+            "from": " ",
+            "sortBy": "Razvrstaj prema:"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -373,7 +374,7 @@
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
             "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
-            "deceasedPerPopulation": "Udio smrtnih slučajeva u stanovništvu",
+            "deceasedPerPopulation": "Smrtni slučajevi po stanovništvu",
             "deceased": "Smrtni slučajevi",
             "shareOfDeceasedConfirmedCases": "Udio smrtnih slučajeva u potvrđenim slučajevima",
             "female": "Žene",
@@ -444,7 +445,8 @@
             "absolute": "Apsolutan dnevni prirast",
             "explainer": "Što znači eksponencijalan prirast",
             "percentage": "Relativan dnevni prirast",
-            "oneWeek": "Tjedan dana"
+            "oneWeek": "Tjedan dana",
+            "activeCases": "aktivni slučajevi"
         },
         "hospitals": {
             "projection7": "Projekcija, 7-dnevno udvostručenje",
@@ -535,6 +537,22 @@
         },
         "rmap": {
             "title": "Karta regija"
+        },
+        "countriesDeathsPerCases": {
+            "legendTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
+            "yAxisTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
+            "title": "Države: Smrtni slučajevi u odnosu na broj slučajeva",
+            "chronologically": "Kronološki",
+            "sinceFirstDeath": "Od prvog smrtnog slučaja",
+            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
+            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "kriteriji za crvenu listu",
+            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
+            "title": "Države: Aktivni slučajevi na milijun stanovnika"
         }
     },
     "shortMonth": {
@@ -667,6 +685,14 @@
         "app": {
             "description": "Program #OstaniZdrav, izdan za Android",
             "title": "#OstaniZdrav"
+        },
+        "masks": {
+            "description": "Maske su obavezne u svim zatvorenim javnim mjestima kao i vani, kad je udaljenost manja od 2 m.<br>Restorani su otvoreni samo do 22:30.",
+            "title": "Maske"
+        },
+        "quarantine10days": {
+            "description": "Obavezna karantena smanjena s 10 dana",
+            "title": "10 dana"
         }
     },
     "pageNotFound": {
@@ -833,7 +859,7 @@
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, ddd, D. MMM }}"
+        "lastUpdated": "{{ date, %a, %e. %b }}"
     },
     "region": {
         "za": "Zasavlje",
@@ -856,8 +882,8 @@
         "x_days_ago_0": "Prije {{ count }} dan",
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY. }}",
-        "date": "{{ date, D. MMM }}",
+        "longerDate": "{{ date, %A, %e. %B %Y. }}",
+        "date": "{{ date, %e. %b }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana"
@@ -873,8 +899,8 @@
         "newPage": "🆕 Nova stranica:"
     },
     "timestamp": {
-        "at": "{{ date, HH:mm }}",
-        "updated": "Aktualizirano: {{ date, dddd, D. MMMM YYYY. }}"
+        "at": "{{ date, %H:%M }}",
+        "updated": "Aktualizirano: {{ date, %A, %e. %B %Y. }}"
     },
     "mk": {
         "municipality": {
