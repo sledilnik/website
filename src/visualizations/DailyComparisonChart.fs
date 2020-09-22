@@ -23,8 +23,8 @@ with
         | Tests -> I18N.t "charts.dailyComparison.tests"
 
 type State = {
-    data: StatsData
-    displayType: DisplayType
+    Data: StatsData
+    DisplayType: DisplayType
 }
 
 type Msg =
@@ -32,32 +32,26 @@ type Msg =
 
 let init data : State * Cmd<Msg> =
     let state = {
-        data = data
-        displayType = New
+        Data = data
+        DisplayType = New
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangeDisplayType dt ->
-        { state with displayType = dt }, Cmd.none
-
-type DataPoint =
-    { x : string
-      y : int
-      date : DateTime
-    }
+        { state with DisplayType = dt }, Cmd.none
 
 let renderChartOptions (state : State) dispatch =
 
     let getValue dp =
-        match state.displayType with
+        match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
         | Tests -> dp.Tests.Performed.Today
 
     let fourWeeks = 
-        state.data 
+        state.Data 
         |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(-28.0))
         |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
         |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
@@ -68,7 +62,7 @@ let renderChartOptions (state : State) dispatch =
             let idx = i * 7
             let len = min 7 (fourWeeks.Length - idx)
 
-            let desaturate (rgb:string) (sat:float) = 
+            let desaturateColor (rgb:string) (sat:float) = 
                 let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
                 let r = (argb &&& 0x00FF0000) >>> 16
                 let g = (argb &&& 0x0000FF00) >>> 8
@@ -79,31 +73,26 @@ let renderChartOptions (state : State) dispatch =
                 let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
                 sprintf "#%02x%02x%02x" newR newG newB
 
-            let color =
-                match state.displayType with
-                | New -> desaturate "#bda506" (0.25 + float i / 4.0)
-                | Active -> desaturate "#dba51d" (0.25 + float i / 4.0)
-                | Tests -> desaturate "#19aebd" (0.25 + float i / 4.0)
+            let getSeriesColor dt series =
+                match dt with
+                | New -> desaturateColor "#bda506" (0.25 + float series / 4.0)
+                | Active -> desaturateColor "#dba51d" (0.25 + float series / 4.0)
+                | Tests -> desaturateColor "#19aebd" (0.25 + float series / 4.0)
 
             yield pojo
                 {|
                     ``type`` = "column"
-                    color = color
+                    color = getSeriesColor state.DisplayType i
                     data = 
                         Array.sub fourWeeks idx len 
-                        |> Array.map (fun (date, value) ->
-                            pojo {|
+                        |> Array.map (fun (date, value) -> 
+                            {|
                                 y = value
                                 date = I18N.tOptions "days.date" {| date = date |}
                                 dataLabels =
-                                    if i = 3 then
-                                        pojo {|
-                                            enabled = true
-                                        |}
+                                    if i = 3 then pojo {| enabled = true |}
                                     else pojo {||}
-
-
-                            |}
+                            |} |> pojo
                         )
                 |}
     ]
@@ -111,20 +100,16 @@ let renderChartOptions (state : State) dispatch =
     let tooltipFormatter state jsThis =
         let category = jsThis?x
         let pts: obj[] = jsThis?points
-        let fmtDate = pts.[0]?fmtDate
 
-        let mutable fmtStr = sprintf "<b>%s</b><br>%s<br>" (DisplayType.getName state.displayType) category
+        let mutable fmtStr = sprintf "<b>%s</b><br>%s<br>" (DisplayType.getName state.DisplayType) category
         let mutable fmtLine = ""
         fmtStr <- fmtStr + "<table>"
         for p in pts do
-            match p?point?date with
-            | "null" -> ()
-            | _ ->
-                fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td></tr>"
-                    p?series?color
-                    p?point?date
-                    p?point?y
-                fmtStr <- fmtStr + fmtLine
+            fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td></tr>"
+                p?series?color
+                p?point?date
+                p?point?y
+            fmtStr <- fmtStr + fmtLine
         fmtStr <- fmtStr + "</table>"
         fmtStr
 
@@ -183,7 +168,7 @@ let renderChartContainer (state : State) dispatch =
 
 let renderSelector state (dt: DisplayType) dispatch =
     Html.div [
-        let isActive = state.displayType = dt
+        let isActive = state.DisplayType = dt
         prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
         Utils.classes
             [(true, "btn btn-sm metric-selector")
