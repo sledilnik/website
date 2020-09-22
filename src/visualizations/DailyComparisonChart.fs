@@ -49,19 +49,6 @@ type DataPoint =
     }
 
 let renderChartOptions (state : State) dispatch =
-    let startDate = DateTime.Today.AddDays(-28.0)
-
-    // TODO: ugly hack to get DayOfWeek to integer in F#
-    let getDOW (date: DateTime) =
-        match date.DayOfWeek with
-        | DayOfWeek.Sunday -> I18N.dow 0
-        | DayOfWeek.Monday -> I18N.dow 1
-        | DayOfWeek.Tuesday -> I18N.dow 2
-        | DayOfWeek.Wednesday -> I18N.dow 3
-        | DayOfWeek.Thursday -> I18N.dow 4
-        | DayOfWeek.Friday -> I18N.dow 5
-        | DayOfWeek.Saturday -> I18N.dow 6
-        | _ -> ""
 
     let getValue dp =
         match state.displayType with
@@ -71,7 +58,7 @@ let renderChartOptions (state : State) dispatch =
 
     let fourWeeks = 
         state.data 
-        |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+        |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(-28.0))
         |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
         |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
         |> Seq.toArray
@@ -106,9 +93,16 @@ let renderChartOptions (state : State) dispatch =
                         Array.sub fourWeeks idx len 
                         |> Array.map (fun (date, value) ->
                             pojo {|
-                                 //x = date.DayOfWeek
-                                 y = value
-                                 date = I18N.tOptions "days.date" {| date = date |}
+                                y = value
+                                date = I18N.tOptions "days.date" {| date = date |}
+                                dataLabels =
+                                    if i = 3 then
+                                        pojo {|
+                                            enabled = true
+                                        |}
+                                    else pojo {||}
+
+
                             |}
                         )
                 |}
