@@ -65,13 +65,14 @@ let renderChartOptions (state : State) dispatch =
 
     let getValue dp =
         match state.displayType with
-        | New -> dp.Cases.ConfirmedToday |> Option.defaultValue 0
-        | Active -> dp.Cases.Active |> Option.defaultValue 0
-        | Tests -> dp.Tests.Performed.Today |> Option.defaultValue 0
+        | New -> dp.Cases.ConfirmedToday
+        | Active -> dp.Cases.Active
+        | Tests -> dp.Tests.Performed.Today
 
     let fourWeeks = 
         state.data 
         |> Seq.skipWhile (fun dp -> dp.Date < startDate)
+        |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
         |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
         |> Seq.toArray
 
@@ -125,7 +126,7 @@ let renderChartOptions (state : State) dispatch =
             match p?point?date with
             | "null" -> ()
             | _ ->
-                fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%d</td></tr>"
+                fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%d</b></td></tr>"
                     p?series?color
                     p?point?date
                     p?point?y
@@ -139,7 +140,7 @@ let renderChartOptions (state : State) dispatch =
         xAxis = [| 
             {|
                 ``type`` = "category"
-                categories = [| I18N.dow 0; I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; |]
+                categories = [| I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; I18N.dow 0; |]
             |} 
         |]
         yAxis = [|
