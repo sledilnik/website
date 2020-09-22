@@ -100,7 +100,7 @@ let tooltipFormatter state chartData jsThis =
                     s.Append "<tr>" |> ignore
                     let countryTooltip =
                         sprintf
-                            "<td><span style='color:%s'>●</span></td<td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
                             countryColor
                             countryName
                             (tooltipValueFormatter state dataValue)
