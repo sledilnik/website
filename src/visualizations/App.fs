@@ -461,5 +461,9 @@ let render (state: State) (_: Msg -> unit) =
                                 renderFaqAndShareBtn viz
                             ]
                         ]
-                        IntersectionObserver.intersectionObserver {| targetElementId = viz.ClassName ; content = state |> viz.Renderer |}
+                        IntersectionObserver.Component.intersectionObserver
+                            {| targetElementId = viz.ClassName
+                               content = state |> viz.Renderer
+                               options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
+                            |}
                     ] ] ) ) ]

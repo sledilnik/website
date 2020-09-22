@@ -1,12 +1,24 @@
 module IntersectionObserver
 
+open System
+open Fable.Core
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
 open Feliz.UseElmish
-open Fable.Core
-open Fable.Core.JsInterop
-open Browser
+
+type Options = {
+    root : Browser.Types.Element option
+    rootMargin : string
+    threshold: float
+}
+
+let defaultOptions = {
+   root = None
+   rootMargin = "0px"
+   threshold = 0.0
+}
+
+type IntersectionObserver = obj
 
 type IntersectionObserverEntry = {
     isIntersecting : bool
@@ -14,43 +26,47 @@ type IntersectionObserverEntry = {
 }
 
 [<Import("createIntersectionObserver", from="./IntersectionObserver.js")>]
-let createIntersectionObserverJS (targetElementId : string, callback : IntersectionObserverEntry array -> obj -> unit) : unit = jsNative
+let private createIntersectionObserverJS (targetElementId : string, callback : IntersectionObserverEntry array -> obj -> unit, options : Options option) : IntersectionObserver = jsNative
 
-let createIntersectionObserver (targetElementId : string) (callback : IntersectionObserverEntry array -> unit) : unit =
-    // printfn "Created observer %s" targetElementId
-    createIntersectionObserverJS (targetElementId, fun intersectionObserverEntries _ -> callback intersectionObserverEntries)
+let createIntersectionObserver (targetElementId : string) (callback : IntersectionObserverEntry array -> unit) (options : Options option) : IntersectionObserver =
+    let callbackWrapper = fun intersectionObserverEntries _ -> callback intersectionObserverEntries
+    createIntersectionObserverJS (targetElementId, callbackWrapper, options)
 
-type Visibility =
-    | Hidden
-    | Visible
+module Component =
+    open Fable.Core.JsInterop
 
-type State = {
-    Visibility : Visibility
-}
+    type Visibility =
+        | Hidden
+        | Visible
 
-type Msg =
-    | Show
+    type State = {
+        Visibility : Visibility
+    }
 
-let init data : State * Cmd<Msg> =
-    { Visibility = Hidden }, Cmd.none
+    type Msg =
+        | Show
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
-    match msg with
-    | Show -> { state with Visibility = Visible }, Cmd.none
+    let init data : State * Cmd<Msg> =
+        { Visibility = Hidden }, Cmd.none
 
-let intersectionObserver = React.functionComponent(fun (props : {| targetElementId : string ; content : ReactElement|}) ->
-    let state, dispatch = React.useElmish(init, update, [||])
+    let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+        match msg with
+        | Show -> { state with Visibility = Visible }, Cmd.none
 
-    let subscribeToIntersectionObserver () =
-        let callback (entries : IntersectionObserverEntry array) =
-            match state.Visibility, entries.[0].isIntersecting with
-            | Hidden, true -> dispatch Show ; ()
-            | _ -> ()
-        createIntersectionObserver props.targetElementId callback
+    let intersectionObserver = React.functionComponent(fun (props : {| targetElementId : string ; content : ReactElement ; options : Options |}) ->
+        let state, dispatch = React.useElmish(init, update, [||])
 
-    React.useEffect(subscribeToIntersectionObserver)
+        let subscribeToIntersectionObserver () =
+            let callback (entries : IntersectionObserverEntry array) =
+                match state.Visibility, entries.[0].isIntersecting with
+                | Hidden, true -> dispatch Show ; ()
+                | _ -> ()
+            let observer = createIntersectionObserver props.targetElementId callback (Some props.options)
+            { new IDisposable with member this.Dispose() = observer?disconnect() }
 
-    match state.Visibility with
-    | Hidden -> Html.none
-    | Visible -> props.content
-)
+        React.useEffect(subscribeToIntersectionObserver)
+
+        match state.Visibility with
+        | Hidden -> Html.none
+        | Visible -> props.content
+    )
