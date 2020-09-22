@@ -92,9 +92,9 @@ let renderChartOptions (state : State) dispatch =
 
             let color =
                 match state.displayType with
-                | New -> desaturate "#bda506" (0.3 + float i / 4.0)
-                | Active -> desaturate "#d5c768" (0.3 + float i / 4.0)
-                | Tests -> desaturate "#19aebd" (0.3 + float i / 4.0)
+                | New -> desaturate "#bda506" (0.25 + float i / 4.0)
+                | Active -> desaturate "#dba51d" (0.25 + float i / 4.0)
+                | Tests -> desaturate "#19aebd" (0.25 + float i / 4.0)
             yield pojo
                 {|
                     ``type`` = "column"
