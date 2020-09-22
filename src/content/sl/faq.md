@@ -255,14 +255,6 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 </details>
 
 <details>
-  <summary id=daily-comparison-chart>Kaj kaže graf "Primerjava po dnevih v tednu"?</summary>
-
-[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeno okuženi* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).   
-Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu.  
-
-</details>
-
-<details>
   <summary id=cases-chart>Kaj pomenijo zaprti primeri in kaj so aktivni primeri? </summary>
 
 Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/sl/stats#cases-chart). Sicer pa je za spremljanje epidemije pomembno vedeti, koliko je še aktualno okuženih. Zato uporabljamo terminologijo:
@@ -305,6 +297,14 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 [Graf](/sl/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
 Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja je bilo spomladi stanje takšno: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
+
+</details>
+
+<details>
+  <summary id=daily-comparison-chart>Kaj kaže graf "Primerjava po dnevih v tednu"?</summary>
+
+[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeno okuženi* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).   
+Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu.  
 
 </details>
 
