@@ -75,11 +75,11 @@ let renderChartOptions (state : State) dispatch =
                 let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
                 sprintf "#%02x%02x%02x" newR newG newB
 
-            let getSeriesColor dt series =
+            let getSeriesColor dt series = // skip lowest (gray) saturation slice - +1
                 match dt with
-                | New -> desaturateColor "#bda506" (0.1 + float series / float (weeksShown+1))
-                | Active -> desaturateColor "#dba51d" (0.1 + float series / float (weeksShown+1))
-                | Tests -> desaturateColor "#19aebd" (0.1 + float series / float (weeksShown+1))
+                | New -> desaturateColor "#bda506" (float (series+1) / float (weeksShown+1))
+                | Active -> desaturateColor "#dba51d" (float (series+1) / float (weeksShown+1))
+                | Tests -> desaturateColor "#19aebd" (float (series+1) / float (weeksShown+1))
 
             let percent a b =
                 match a, b with
