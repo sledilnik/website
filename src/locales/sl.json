@@ -27,8 +27,8 @@
         }
     },
     "timestamp": {
-        "updated": "Osveženo: {{ date, dddd, D. MMMM YYYY }}",
-        "at": "ob {{ date, HH.mm }}"
+        "updated": "Osveženo: {{ date, %A, %e. %B %Y }}",
+        "at": "ob {{ date, %H.%M }}"
     },
     "notice": {
         "newChart": "Nov graf:",
@@ -43,7 +43,7 @@
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
-        "lastUpdated": "{{ date, ddd, D. MMM }}"
+        "lastUpdated": "{{ date, %a, %e. %b }}"
     },
     "tables": {
         "title": "Tabela",
@@ -53,7 +53,7 @@
         "tabByAgeFemale": "Po starosti - Ženske",
         "source": "Viri podatkov in druge oblike",
         "sourceLink": "GDocs preglednica, CSV oblika ali REST API",
-        "day": "{{ date, D.M. }}"
+        "day": "{{ date, %e.%m. }}"
     },
     "embedMaker": {
         "title": "Vgradite graf v vašo spletno stran",
@@ -75,8 +75,8 @@
         "x_days_ago_1": "Pred {{ count }} dnevoma",
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
-        "date": "{{ date, D. MMM }}",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}"
+        "date": "{{ date, %e. %b }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}"
     },
     "month": {
         "0": "januar",

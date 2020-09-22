@@ -622,7 +622,7 @@
         "preview": "Pasqyrë:"
     },
     "tables": {
-        "day": "{{ date, D.M. }}",
+        "day": "{{ date, %e.%m. }}",
         "sourceLink": "Tabela GDocs, CSV format apo REST API",
         "source": "Burimet e të dhënave në formate tjera",
         "tabByAgeFemale": "Sipas moshës - Femra",
@@ -632,7 +632,7 @@
         "title": "Tabela"
     },
     "infocard": {
-        "lastUpdated": "{{ date, dddd, D. MMM }}",
+        "lastUpdated": "{{ date, %A, %e. %b }}",
         "deceasedToDate": "Raste vdekje të konfirmuara",
         "icu": "Në njësinë për kujdes intensiv",
         "inHospital": "Të shtruar në spital",
@@ -648,8 +648,8 @@
         "newPage": "Faqe e re:"
     },
     "timestamp": {
-        "at": "në {{ date, HH:mm }}",
-        "updated": "Përditësuar më: {{ date, dddd, MMMM Do YYYY }}"
+        "at": "në {{ date, %H:%M }}",
+        "updated": "Përditësuar më: {{ date, %A, %B %e, %Y }}"
     },
     "cm": {
         "quarantine14days": {
@@ -872,8 +872,8 @@
         "somethingWentWrong": "ups...diçka shkoi keq :("
     },
     "days": {
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
-        "date": "{{ date, D. MMM }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
+        "date": "{{ date, D. %b }}",
         "x_days_ago": "{{ count }} ditë më parë",
         "x_days_ago_plural": "{{ count }} ditë më parë",
         "in_x_days": "për {{ count }} ditë",

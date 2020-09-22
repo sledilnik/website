@@ -859,7 +859,7 @@
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, ddd, D. MMM }}"
+        "lastUpdated": "{{ date, %a, %e. %b }}"
     },
     "region": {
         "za": "Zasavlje",
@@ -882,8 +882,8 @@
         "x_days_ago_0": "Prije {{ count }} dan",
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY. }}",
-        "date": "{{ date, D. MMM }}",
+        "longerDate": "{{ date, %A, %e. %B %Y. }}",
+        "date": "{{ date, %e. %b }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana"
@@ -899,8 +899,8 @@
         "newPage": "Nova stranica:"
     },
     "timestamp": {
-        "at": "{{ date, HH:mm }}",
-        "updated": "Aktualizirano: {{ date, dddd, D. MMMM YYYY. }}"
+        "at": "{{ date, %H:%M }}",
+        "updated": "Aktualizirano: {{ date, %A, %e. %B %Y. }}"
     },
     "mk": {
         "municipality": {
