@@ -83,18 +83,8 @@ export default {
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     diffClass() {
-      if (
-        this.field === 'statePerTreatment.deceasedToDate' ||
-        (this.renderActiveValues(this.fieldDeceased) &&
-          this.renderActiveValues(this.fieldDeceased).lastDay.value > 0)
-      ) {
+      if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'
-      }
-      if (
-        this.field === 'statePerTreatment.inHospital' ||
-        this.field === 'statePerTreatment.inICU'
-      ) {
-        if (this.renderTotalValues(this.totalDeceased) > 0) return 'deceased'
       }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
