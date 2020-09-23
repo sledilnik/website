@@ -9,17 +9,7 @@
     :sticky-header="tableHeight"
     :items="items"
     :fields="fields"
-  >
-    <template v-slot:head()="scope">
-      <div class="text-nowrap">{{ scope.label }}</div>
-    </template>
-    <template v-slot:cell(date)="data">
-      <div class="text-nowrap">{{ data.item.date | formatDate('dd. MMMM') }}</div>
-    </template>
-    <template v-slot:empty="scope">
-      <h4>{{ scope.emptyText }} ni podatka</h4>
-    </template>
-  </b-table>
+  ></b-table>
 </template>
 
 <script>
