@@ -100,18 +100,18 @@ let renderChartOptions (state : State) dispatch =
                 let r = (argb &&& 0x00FF0000) >>> 16
                 let g = (argb &&& 0x0000FF00) >>> 8
                 let b = (argb &&& 0x000000FF)
-                let avg = float(r + g + b) / 3.0
+                let avg = (float(r + g + b) / 3.0) * 1.6
                 let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
                 let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
                 let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
                 sprintf "#%02x%02x%02x" newR newG newB
 
-            let getSeriesColor dt series = // skip lowest (gray) saturation slice - +1
+            let getSeriesColor dt series = 
                 match dt with
-                | New -> desaturateColor "#bda506" (float (series+1) / float (weeksShown+1))
-                | Active -> desaturateColor "#dba51d" (float (series+1) / float (weeksShown+1))
-                | Tests -> desaturateColor "#19aebd" (float (series+1) / float (weeksShown+1))
-                | PositivePct -> desaturateColor "#665191" (float (series+1) / float (weeksShown+1))
+                | New -> desaturateColor "#bda506" (float (series) / float (weeksShown))
+                | Active -> desaturateColor "#dba51d" (float (series) / float (weeksShown))
+                | Tests -> desaturateColor "#19aebd" (float (series) / float (weeksShown))
+                | PositivePct -> desaturateColor "#665191" (float (series) / float (weeksShown))
 
             let percent a b =
                 match a, b with
