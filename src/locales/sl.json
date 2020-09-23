@@ -31,8 +31,8 @@
         "at": "ob {{ date, %H.%M }}"
     },
     "notice": {
-        "newChart": "Nov graf:",
-        "newPage": "Nova stran:",
+        "newChart": "🆕 📊 Nov graf:",
+        "newPage": "🆕 Nova stran:",
         "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
     },
     "infocard": {
@@ -604,6 +604,13 @@
             "dischargedToDate": "Odpuščeni iz bolnišnice (skupaj)",
             "deceased": "Umrli (na dan)",
             "deceasedToDate": "Umrli (skupaj)"
+        },
+        "dailyComparison": {
+            "title": "Primerjava po dnevih v tednu",
+            "new": "Potrjeno okuženi",
+            "active": "Aktivni primeri",
+            "tests": "Opravljeni testi",
+            "positivePct": "Delež pozitivnih testov (%)"
         },
         "cases": {
             "title": "Potrjeni primeri",

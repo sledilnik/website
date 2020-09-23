@@ -301,6 +301,14 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 </details>
 
 <details>
+  <summary id=daily-comparison-chart>Kaj kaže graf "Primerjava po dnevih v tednu"?</summary>
+
+[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeno okuženi* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).   
+Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu.  
+
+</details>
+
+<details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
 [Graf](/sl/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani v odstotkih (%). 

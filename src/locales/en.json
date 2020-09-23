@@ -31,8 +31,8 @@
         "at": "at {{ date, %H:%M }}"
     },
     "notice": {
-        "newChart": "New chart:",
-        "newPage": "New page:",
+        "newChart": "🆕 📊 New chart:",
+        "newPage": "🆕 New page:",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
     },
     "infocard": {
@@ -186,6 +186,13 @@
             "dischargedToDate": "Discharged from Hospital (to date)",
             "deceased": "Deaths (daily)",
             "deceasedToDate": "Deaths (to date)"
+        },
+        "dailyComparison": {
+            "title": "Comparison by Day of Week",
+            "new": "Confirmed Cases",
+            "active": "Active Cases",
+            "tests": "Tests Performed",
+            "positivePct": "Share of Positive Tests (%)"
         },
         "cases": {
             "title": "Confirmed Cases",

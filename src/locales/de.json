@@ -759,10 +759,10 @@
         "inHospital": "Hospitalisierte"
     },
     "notice": {
-        "newChart": "Neues Diagramm:",
+        "newChart": "🆕 📊 Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
         "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "Neue Seite:"
+        "newPage": "🆕 Neue Seite:"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
