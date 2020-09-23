@@ -28,6 +28,7 @@ Uredniki baze in ostali sodelavci:
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, viri, validacija podatkov
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
+-   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - viri, validacija podatkov
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
@@ -45,5 +46,5 @@ Uredniki baze in ostali sodelavci:
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
--   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri
+-   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri, komunikacija
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
