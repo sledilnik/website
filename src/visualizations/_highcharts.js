@@ -1,19 +1,17 @@
 /* eslint-disable */
 
-// sorry for all the junk inhere
 
 import React from 'react'
-//import * as Highcharts from 'highcharts/highcharts.js'
-import * as Highcharts from 'highcharts/highstock.js'
-require("highcharts/highcharts-more")(Highcharts);
-require("highcharts/modules/map.js")(Highcharts);
+
+import Highcharts from 'highcharts'
+import StockModule from 'highcharts/modules/stock'
+import MapModule from 'highcharts/modules/map'
+StockModule(Highcharts)
+MapModule(Highcharts)
 
 import HighchartsReact from 'highcharts-react-official';
-
 //require("highcharts/css/highcharts.scss");
 require("./_highcharts.scss");
-
-import i18n from "../i18n"
 
 window.Highcharts = window.Highcharts || Highcharts;
 
