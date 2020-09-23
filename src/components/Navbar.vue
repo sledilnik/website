@@ -3,7 +3,7 @@
     class="navbar-container"
     :class="{ scrolled: scrollPosition > 80, menuOpen: menuOpened, closingMenu: closingMenu }"
   >
-    <router-link to="stats" class="navbar-logo"></router-link>
+    <router-link to="stats" class="navbar-logo">&nbsp;</router-link>
     <div class="🍔" @click="toggleMenu">
       <div class="line line-1"></div>
       <div class="line line-2"></div>
@@ -21,7 +21,11 @@
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <a v-if="!isMobile" href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon github">
+      <a v-if="!isMobile"
+         href="https://github.com/sledilnik"
+         target="_blank"
+         rel="noreferrer"
+         class="router-link router-link-icon github">
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
