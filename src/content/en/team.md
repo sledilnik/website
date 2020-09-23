@@ -28,6 +28,7 @@ Data editors and other collaborators:
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
+-   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - sources, data validation
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation

@@ -30,13 +30,13 @@ type private TransferStatsDataPoint =
         {|
             performed : {| toDate : int option; today : int option |}
             positive : {| toDate : int option; today : int option |}
-            regular : 
-              {| 
+            regular :
+              {|
                 performed : {| toDate : int option; today : int option |}
                 positive : {| toDate : int option; today : int option |}
               |}
-            nsApr20 : 
-              {| 
+            nsApr20 :
+              {|
                 performed : {| toDate : int option; today : int option |}
                 positive : {| toDate : int option; today : int option |}
               |}
@@ -82,9 +82,9 @@ type private TransferStatsDataPoint =
           Cases =
             { ConfirmedToday = this.cases.confirmedToday
               ConfirmedToDate = this.cases.confirmedToDate
-              RecoveredToDate = this.cases.recoveredToDate 
+              RecoveredToDate = this.cases.recoveredToDate
               ClosedToDate = this.cases.closedToDate
-              Active = this.cases.active } 
+              Active = this.cases.active }
           StatePerTreatment =
             { InHospital = this.statePerTreatment.inHospital
               InHospitalToDate = this.statePerTreatment.inHospitalToDate
@@ -108,8 +108,7 @@ type private TransferStatsData = TransferStatsDataPoint list
 let parseStatsData responseData =
     let transferStatsData =
         responseData
-        |> SimpleJson.parse
-        |> Json.convertFromJsonAs<TransferStatsData>
+        |> Json.parseNativeAs<TransferStatsData>
 
     transferStatsData
     |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
@@ -125,5 +124,5 @@ let load =
                 let data = parseStatsData response
                 return StatsDataLoaded (Success data)
             with
-                | ex -> return StatsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" ex.Message |> Failure)
+            | ex -> return StatsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" (ex.Message.Substring(0, 1000)) |> Failure)
     }

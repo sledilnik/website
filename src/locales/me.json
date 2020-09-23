@@ -147,7 +147,7 @@
         "title": "Preuzimanje dijagrama u svoju web stranicu"
     },
     "tables": {
-        "day": "{{ date, M/D }}",
+        "day": "{{ date, %m/%e }}",
         "sourceLink": "GDocs spreadsheet, CSV format or REST API",
         "source": "Izvori podataka u drugim formatima",
         "tabByAgeFemale": "Po starosti - Zene",
@@ -157,8 +157,7 @@
         "title": "Tabela"
     },
     "infocard": {
-        "lastUpdated": "{{ date, dddd, MMMM Do }}",
-        "accordingTo": "According to {{ date, MMMM Do }}",
+        "lastUpdated": "{{ date, %A, %B %e }}",
         "deceasedToDate": "Potvrdjeni smrtni slucajevi",
         "icu": "Na intezivnoj njezi",
         "inHospital": "Hospitalizovani",
@@ -172,7 +171,7 @@
         "newChart": "Novi dijagram:"
     },
     "timestamp": {
-        "at": "at {{ date, HH:mm }}",
+        "at": "at {{ date, %H:%M }}",
         "updated": "Azurirano"
     },
     "navbar": {

@@ -14,8 +14,8 @@ open Types
 open I18N
 
 let countriesDisplaySets = [|
-    { Label = "groupNeighbouringWoItaly"
-      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "SVK" |]
+    { Label = "groupNeighbouring"
+      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
     }
     { Label = "groupCriticalEU"
       CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
@@ -41,11 +41,10 @@ type Msg =
     | DataRequested
     | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
-    | XAxisTypeChanged of XAxisType
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
-let DaysOfMovingAverage = 5
+let DaysOfMovingAverage = 7
 
 let init (config: CountriesChartConfig):
     ChartState * Cmd<Msg> =
@@ -53,7 +52,6 @@ let init (config: CountriesChartConfig):
         OwidDataState = NotLoaded
         DisplayedCountriesSet = countriesDisplaySets.[0]
         MetricToDisplay = config.MetricToDisplay
-        XAxisType = ByDate
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
     }
@@ -98,8 +96,6 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
                  countriesCodes DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
-    | XAxisTypeChanged newXAxisType ->
-        { state with XAxisType = newXAxisType }, Cmd.none
     | ScaleTypeChanged newScaleType ->
         { state with ScaleType = newScaleType }, Cmd.none
 
@@ -123,15 +119,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                     countrySeries.Entries
                     |> Array.mapi (fun i entry ->
                         pojo {|
-                             x =
-                                 match state.XAxisType with
-                                 | ByDate -> entry.Date |> jsTime12h :> obj
-                                 | DaysSinceFirstDeath -> i :> obj
-                                 | DaysSinceOneDeathPerMillion -> i :> obj
-                             y = match state.MetricToDisplay with
-                                 | NewCasesPer1M -> entry.NewCasesPerMillion
-                                 | TotalDeathsPer1M -> entry.TotalDeathsPerMillion
-                             date = I18N.tOptions "days.longerDate"
+                             x = entry.Date |> jsTime12h :> obj
+                             y = entry.Value
+                             date = tOptions "days.longerDate"
                                         {| date = entry.Date |}
                              dataLabels =
                                   if i = countrySeries.Entries.Length-1 then
@@ -162,9 +152,9 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 layout = "vertical"
                 floating = true
                 padding = 15
-                x = 20
-                y = 30
-                backgroundColor = "rgba(255,255,255,0.5)"
+                x = 0
+                y = 0
+                backgroundColor = "rgba(255,255,255,0.9)"
         |}
 
     let baseOptions =
@@ -182,17 +172,13 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         series = allSeries
         xAxis =
             pojo {|
-                   ``type`` =
-                        match state.XAxisType with
-                        | ByDate -> "datetime"
-                        | DaysSinceFirstDeath -> "int"
-                        | DaysSinceOneDeathPerMillion -> "int"
+                   ``type`` = "datetime"
                    allowDecimals = false
                    title = pojo {| text = chartData.XAxisTitle |}
                    dateTimeLabelFormats = pojo
                     {|
-                        week = I18N.t "charts.common.shortDateFormat"
-                        day = I18N.t "charts.common.shortDateFormat"
+                        week = t "charts.common.shortDateFormat"
+                        day = t "charts.common.shortDateFormat"
                     |}
             |}
         yAxis =
@@ -201,10 +187,16 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        match state.ScaleType with
                        | Linear -> "linear"
                        | Logarithmic -> "logarithmic"
+                   labels = pojo {| formatter = yAxisValueFormatter state |}
                    min =
                        match state.ScaleType with
                        | Linear -> 0
                        | Logarithmic -> 1
+//                   max =
+//                       match state.MetricToDisplay with
+//                       // double of the red condition
+//                       | ActiveCasesPer1M -> Some 800
+//                       | _ -> None
                    opposite = true
                    crosshair = true
                    title =
@@ -212,6 +204,30 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                             align = "middle"
                             text = chartData.YAxisTitle
                         |}
+                   plotLines =
+                       match state.MetricToDisplay with
+                       | ActiveCasesPer1M -> [|
+                           {| value=400.0
+                              label={|
+                                       text=t "charts.countriesActiveCasesPer1M.red"
+                                       align="left"
+                                       verticalAlign="bottom"
+                                        |}
+                              color="red"
+                              width=1
+                              dashStyle="longdashdot"
+                              zIndex=9
+                            |}
+                        |]
+                       | _ -> [| |]
+                   plotBands =
+                       match state.MetricToDisplay with
+                       | ActiveCasesPer1M -> [|
+                           {| from=400.0; ``to``=100000.0
+                              color="#FEF8F7"
+                            |}
+                        |]
+                       | _ -> [| |]
             |}
         plotOptions = pojo
             {|
@@ -230,8 +246,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 enabled = true
                 text =
                     sprintf "%s: %s"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.t "charts.common.dsOWD")
+                        (t "charts.common.dataSource")
+                        (t "charts.common.dsOWD")
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}
@@ -249,7 +265,7 @@ let renderCountriesSetsSelectors
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
         let active = setToRender = activeSet
         Html.div [
-            prop.text (I18N.t ("country-groups." + setToRender.Label))
+            prop.text (t ("country-groups." + setToRender.Label))
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected") ]
@@ -264,58 +280,12 @@ let renderCountriesSetsSelectors
         |> prop.children
     ]
 
-let renderXAxisSelectors
-    chartTextsGroup
-    (activeXAxisType: XAxisType)
-    dispatch =
-    let renderXAxisSelector (axisSelector: XAxisType) =
-        let active = axisSelector = activeXAxisType
-
-        let defaultProps =
-            [
-                match axisSelector with
-                | ByDate -> chartText chartTextsGroup ".chronologically"
-                | DaysSinceFirstDeath ->
-                    chartText chartTextsGroup ".sinceFirstDeath"
-                | DaysSinceOneDeathPerMillion ->
-                    chartText chartTextsGroup ".sinceOneDeathPerMillion"
-                |> prop.text
-
-                Utils.classes
-                    [(true, "chart-display-property-selector__item")
-                     (active, "selected") ]
-            ]
-
-        if active then Html.div defaultProps
-        else
-            Html.div
-                ((prop.onClick (fun _ -> dispatch axisSelector))
-                    :: defaultProps)
-
-    let xAxisTypesSelectors =
-        [ ByDate; DaysSinceFirstDeath; DaysSinceOneDeathPerMillion]
-        |> List.map renderXAxisSelector
-
-    Html.div [
-        prop.className "chart-display-property-selector"
-        // The X-axis selectors have been disabled.
-        // I'm leaving this code for possible future reuse, if we figure out
-        // what X-axis selectors we should support for countries charts.
-//        prop.children ((Html.text (I18N.t "charts.common.xAxis"))
-//                       :: xAxisTypesSelectors)
-    ]
-
-let render state dispatch =
-    let xAxisType = state.XAxisType
-
+let render (state: ChartState) dispatch =
     let chartData =
-        state |> prepareChartData xAxisType DaysOfMovingAverage
+        state |> prepareChartData DaysOfMovingAverage
 
     let topControls = [
-            renderXAxisSelectors
-                state.ChartTextsGroup
-                state.XAxisType
-                (XAxisTypeChanged >> dispatch)
+            Html.div [ prop.className "chart-display-property-selector" ]
             Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch)
     ]
@@ -337,5 +307,4 @@ let render state dispatch =
 
 let renderChart (config: CountriesChartConfig) =
     React.elmishComponent
-        ("CountriesChartViz/CountriesChart",
-         init config, update, render)
+        ("CountriesChartViz/CountriesChart", init config, update, render)

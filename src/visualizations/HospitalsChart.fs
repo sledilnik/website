@@ -48,7 +48,7 @@ type Msg =
     | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either Data.Hospitals.getOrFetch () ConsumeHospitalsData ConsumeServerError
+    let cmd = Cmd.OfAsync.either getOrFetch () ConsumeHospitalsData ConsumeServerError
     let cmd2 = Cmd.OfAsync.either Data.Patients.getOrFetch () ConsumePatientsData ConsumeServerError
     State.initial, (cmd @ cmd2)
 
@@ -57,7 +57,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ConsumeHospitalsData (Ok data) ->
         { state with
             facData = data
-            facilities = data |> Data.Hospitals.getSortedFacilityCodes
+            facilities = data |> getSortedFacilityCodes
         } |> State.switchBreakdown state.scope, Cmd.none
     | ConsumeHospitalsData (Error err) ->
         { state with error = Some err }, Cmd.none
@@ -310,7 +310,7 @@ let renderChartOptions (state : State) dispatch =
         res
 
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             state.scaleType "hospitals-chart"
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
@@ -364,7 +364,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 

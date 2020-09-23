@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import store from './store/index'
 import i18n from './i18n'
 import i18next from 'i18next'
-import moment from 'moment'
 
 import App from './App.vue'
 import TablesPage from './pages/TablesPage.vue'
@@ -22,7 +21,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       i18next.changeLanguage('sl', (err, t) => {
         if (err) return console.log('something went wrong loading', err)
-        moment.locale('sl')
       })
       return next()
     },
@@ -33,7 +31,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       i18next.changeLanguage('sl', (err, t) => {
         if (err) return console.log('something went wrong loading', err)
-        moment.locale('sl')
       })
       return next()
     },
@@ -44,7 +41,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       i18next.changeLanguage('sl', (err, t) => {
         if (err) return console.log('something went wrong loading', err)
-        moment.locale('sl')
       })
       return next()
     },
@@ -60,7 +56,6 @@ const routes = [
       if (i18n.language !== language) {
         i18next.changeLanguage(language, (err, t) => {
           if (err) return console.log('something went wrong loading', err)
-          moment.locale(language)
         })
       }
       return next()

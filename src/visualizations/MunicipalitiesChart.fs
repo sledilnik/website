@@ -22,7 +22,7 @@ type Region =
       Name : string }
 
 type TotalsForDate =
-    { Date : System.DateTime
+    { Date : DateTime
       ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
@@ -37,7 +37,7 @@ type Municipality =
       ActiveCases : int option
       MaxActiveCases : int option
       MaxConfirmedCases : int option
-      LastConfirmedCase : System.DateTime
+      LastConfirmedCase : DateTime
       DaysSinceLastCase : int
       TotalsForDate : TotalsForDate list }
 
@@ -66,9 +66,9 @@ type Query (query : obj, regions : Region list) =
             | "total-confirmed-cases" -> Some TotalConfirmedCases
             | "last-confirmed-case" -> Some LastConfirmedCase
             | "time-to-double" ->
-                match Highcharts.showExpGrowthFeatures with
-                    | true -> Some DoublingTime
-                    | _ -> None
+                match Highcharts.showDoublingTimeFeatures with
+                | true -> Some DoublingTime
+                | _ -> None
             | _ -> None
         | _ -> None
 
@@ -122,11 +122,6 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
-            let doublingTime =
-                dp
-                |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ConfirmedToDate |})
-                |> Seq.toList
-                |> Utils.findDoublingTime
             let maxConfirmed = totals |> Seq.tryLast |> Option.map (fun dp -> dp.ConfirmedToDate) |> Option.defaultValue None
             let lastChange = totals |> Seq.filter (fun dp -> dp.ConfirmedToDate = maxConfirmed) |> Seq.head
             let activeCases = totalsShown |> Seq.tryLast |> Option.map (fun dp -> dp.ActiveCases) |> Option.defaultValue None
@@ -137,6 +132,14 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 | Some before, Some last -> if last > before then Some (last - before) else None
                 | None, Some last -> Some last
                 | _ -> None
+            let doublingTime =
+                if activeCases.IsSome && activeCases.Value >= 5 
+                then  
+                    dp
+                    |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
+                    |> Seq.toList
+                    |> Utils.findDoublingTime
+                else None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
@@ -146,7 +149,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
               MaxActiveCases = maxActive
               MaxConfirmedCases = maxConfirmed
               LastConfirmedCase = lastChange.Date
-              DaysSinceLastCase = System.DateTime.Today.Subtract(lastChange.Date).Days
+              DaysSinceLastCase = DateTime.Today.Subtract(lastChange.Date).Days
               TotalsForDate = totalsShown
             })
 
@@ -243,22 +246,21 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
-                                let aHeight = activeCases * barMaxHeight / maxValue
-                                let dHeight = deceasedToDate * barMaxHeight / maxValue
-                                let dHeightCeiling = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - dHeight - aHeight
+                                let aHeight = Math.Ceiling(float activeCases * float barMaxHeight / float maxValue)
+                                let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
                                         if state.View = TotalConfirmedCases then
                                             Html.div [
-                                                prop.style [ style.height (int dHeightCeiling) ]
+                                                prop.style [ style.height (int dHeight) ]
                                                 prop.className "bar--deceased" ]
                                             Html.div [
                                                 prop.style [ style.height rHeight ]
                                                 prop.className "bar--recovered" ]
                                         Html.div [
-                                            prop.style [ style.height aHeight ]
+                                            prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
                                     ]
                                 ]
@@ -339,7 +341,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                     ]
                 ]
             ]
-            if Highcharts.showExpGrowthFeatures then
+            if Highcharts.showDoublingTimeFeatures then
                 renderedDoublingTime
             else
                 renderLastCase
@@ -374,7 +376,7 @@ let renderMunicipalities (state : State) _ =
         | None, None -> 0
         | Some _, None -> 1
         | None, Some _ -> -1
-        | Some s1, Some s2 -> System.String.Compare(s1, s2)
+        | Some s1, Some s2 -> String.Compare(s1, s2)
 
     let compareActiveCases m1 m2 =
         if m1.ActiveCases < m2.ActiveCases then 1
@@ -390,10 +392,10 @@ let renderMunicipalities (state : State) _ =
         match state.View with
         | ActiveCases ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> compareActiveCases m1 m2)
+            |> Seq.sortWith compareActiveCases
         | TotalConfirmedCases ->
             dataFilteredByRegion
-            |> Seq.sortWith (fun m1 m2 -> compareMaxCases m1 m2)
+            |> Seq.sortWith compareMaxCases
         | DoublingTime ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
@@ -415,8 +417,7 @@ let renderMunicipalities (state : State) _ =
                 else compareActiveCases m1 m2)
 
     let truncatedData, displayShowAllButton =
-        if state.ShowAll = true
-        then sortedMunicipalities, true
+        if state.ShowAll then sortedMunicipalities, true
         else if Seq.length sortedMunicipalities <= collapsedMunicipalityCount then sortedMunicipalities, false
         else Seq.take collapsedMunicipalityCount sortedMunicipalities, true
 
@@ -465,7 +466,7 @@ let renderSearch (query : string) dispatch =
         prop.type' .text
         prop.placeholder (I18N.t "charts.municipalities.search")
         prop.valueOrDefault query
-        prop.onChange (fun query -> SearchInputChanged query |> dispatch)
+        prop.onChange (SearchInputChanged >> dispatch)
     ]
 
 let renderRegionSelector (regions : Region list) (selected : string) dispatch =
@@ -486,7 +487,7 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.value selected
         prop.className "form-control form-control-sm filters__region"
         prop.children renderedRegions
-        prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
+        prop.onChange (RegionFilterChanged >> dispatch)
     ]
 
 let renderView (currentView : View) dispatch =
@@ -504,12 +505,12 @@ let renderView (currentView : View) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.common.view")
+            Html.text (I18N.t "charts.common.sortBy")
+            if Highcharts.showDoublingTimeFeatures then
+                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
             renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
             renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
-            if Highcharts.showExpGrowthFeatures then
-                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
         ]
     ]
 

@@ -99,6 +99,7 @@ type RegionsData = RegionsDataPoint list
 
 type VisualizationType =
     | MetricsComparison
+    | DailyComparison
     | Patients
     | Ratios
     | HCenters
@@ -111,10 +112,12 @@ type VisualizationType =
     | AgeGroups
     | AgeGroupsTimeline
     | Map
+    | RegionMap
     | EuropeMap
     | WorldMap
     | Infections
     | CountriesCasesPer1M
+    | CountriesActiveCasesPer1M
     | CountriesDeathsPer1M
 
 type RenderingMode =

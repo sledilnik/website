@@ -187,9 +187,26 @@ let calculateChartData
     (infectionsAndDeathsPerAge: InfectionsAndDeathsPerAge) chartMode
     : AgesChartData =
 
+    let mapNoneToZero x =
+        match x with
+        | None -> Some 0
+        | _ -> x
+
+    // Since HC bar chart no longer seems to accept Nones for values,
+    // we map them to zeros first.
+    let infectionsWithoutNones =
+        infectionsAndDeathsPerAge
+        |> Array.map(fun x ->
+                { GroupKey = x.GroupKey
+                  InfectionsMale = x.InfectionsMale |> mapNoneToZero
+                  InfectionsFemale = x.InfectionsFemale |> mapNoneToZero
+                  DeathsMale = x.DeathsMale |> mapNoneToZero
+                  DeathsFemale = x.DeathsFemale |> mapNoneToZero
+                }
+            )
 
     let categories =
-        infectionsAndDeathsPerAge
+        infectionsWithoutNones
         |> Array.map (fun ageGroupData ->
             let populationStats =
                 Utils.AgePopulationStats.populationStatsForAgeGroup
@@ -304,16 +321,12 @@ let renderChartCategorySelectors activeChartMode dispatch =
 let renderChartOptions
     (state : State) (chartData: AgesChartData) =
 
-    let percentageValuesLabelFormatter (value: float) =
-        // A hack to replace decimal point with decimal comma.
-        ((abs value).ToString() + "%").Replace('.', ',')
-
     let valuesLabelFormatter (value: float) =
         match ChartMode.ScaleType state.ChartMode with
         | Absolute -> (abs value).ToString()
-        | Relative -> percentageValuesLabelFormatter value
+        | Relative -> Utils.percentageValuesLabelFormatter value
 
-    {| Highcharts.optionsWithOnLoadEvent "covid19-age-groups" with
+    {| optionsWithOnLoadEvent "covid19-age-groups" with
         chart = pojo {| ``type`` = "bar" |}
         title = pojo {| text = None |}
         xAxis = [|
@@ -370,7 +383,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfInfectedPopulation")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
                          (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->
@@ -388,7 +401,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfDeceasedPopulation")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
                          (I18N.t "charts.ageGroups.populationTotal")
                          (populationOf sex ageGroup)
                  | DeathsPerInfections ->
@@ -398,7 +411,7 @@ let renderChartOptions
                          (I18N.t "charts.ageGroups.age")
                          ageGroup
                          (I18N.t "charts.ageGroups.shareOfDeceasedConfirmedCases")
-                         (percentageValuesLabelFormatter dataValue)
+                         (Utils.percentageValuesLabelFormatter dataValue)
             |}
         series = [|
             {| name = I18N.t "charts.ageGroups.male"

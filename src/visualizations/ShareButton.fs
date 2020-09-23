@@ -13,6 +13,7 @@ let dropdown (viz: Visualization) =
         let (width, height) =
             match viz.VisualizationType with
             | MetricsComparison -> (1140, 780)
+            | DailyComparison -> (1140, 720)
             | Cases -> (1140, 630)
             | Patients -> (1140, 720)
             | Ratios -> (1140, 720)
@@ -22,15 +23,16 @@ let dropdown (viz: Visualization) =
             | Spread -> (1140, 630)
             | Regions -> (1140, 720)
             | Map -> (1140, 820)
+            | RegionMap -> (1140, 820)
             | EuropeMap -> (1140, 780)
             | WorldMap -> (1140, 780)
             | Municipalities -> (1140, 1150)
             | AgeGroups -> (1140, 720)
             | AgeGroupsTimeline -> (1140, 720)
-            // | Hospitals -> (1140, 1130)
+            | Hospitals -> (1140, 1130)
             | CountriesCasesPer1M -> (1140, 740)
+            | CountriesActiveCasesPer1M -> (1140, 740)
             | CountriesDeathsPer1M -> (1140, 740)
-            | _ -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"

@@ -45,8 +45,7 @@ let init () : State * Cmd<Msg> =
 let getRegionList hcData =
     hcData.municipalities
     |> Map.toList
-    |> List.map fst
-    |> List.map (fun reg -> { Key = reg ; Name = I18N.tt "region" reg })
+    |> List.map (fun (reg, _) -> { Key = reg ; Name = I18N.tt "region" reg })
     |> List.sortBy (fun region -> region.Name)
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -177,7 +176,7 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
         prop.value selected
         prop.className "form-control form-control-sm filters__region"
         prop.children renderedRegions
-        prop.onChange (fun (value : string) -> RegionFilterChanged value |> dispatch)
+        prop.onChange (RegionFilterChanged >> dispatch)
     ]
 
 let render (state : State) dispatch =

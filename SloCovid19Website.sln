@@ -17,6 +17,17 @@ ProjectSection(SolutionItems) = preProject
 	src\locales\sq.json = src\locales\sq.json
 EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution files ", "solution files ", "{3D055891-6F20-4419-A4AA-6CE470B420E4}"
+ProjectSection(SolutionItems) = preProject
+	babel.config.js = babel.config.js
+	build.bat = build.bat
+	package.json = package.json
+	README.md = README.md
+	TODO.md = TODO.md
+	vue.config.js = vue.config.js
+	fsharplint-config.json = fsharplint-config.json
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

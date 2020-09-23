@@ -5,10 +5,6 @@ import i18next from 'i18next'
 
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
-import WorldStatsPage from './pages/WorldStatsPage.vue'
-import EmbedMakerPage from './pages/EmbedMakerPage.vue'
-import TablesPage from './pages/TablesPage.vue'
-import DataPage from './pages/DataPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
 
 import * as aboutMdSl from './content/sl/about.md'
@@ -223,19 +219,19 @@ const routes = [
       },
       {
         path: 'world',
-        component: WorldStatsPage,
+        component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
       },
       {
         path: 'data',
-        component: DataPage,
+        component: () => import(/* webpackChunkName: "data" */'./pages/DataPage.vue'),
       },
       {
         path: 'tables',
-        component: TablesPage,
+        component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
       },
       {
         path: 'embed',
-        component: EmbedMakerPage,
+        component: () => import('./pages/EmbedMakerPage.vue'),
       },
       ...mdContentRoutes(),
       {

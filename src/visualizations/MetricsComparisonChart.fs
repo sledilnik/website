@@ -83,7 +83,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ToggleMetricVisible metric ->
         { state with
-            Metrics = state.Metrics |> Metrics.update (fun mc -> { mc with Visible = not mc.Visible}) metric
+            Metrics = state.Metrics
+                      |> Metrics.update (fun mc -> { mc with Visible = not mc.Visible}) metric
         }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none

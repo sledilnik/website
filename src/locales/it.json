@@ -147,7 +147,6 @@
         "notFound": "404: pagina non trovata"
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Paesi limitrofi (Italia esclusa)",
         "groupNeighbouring": "Paesi limitrofi",
         "groupCriticalEU": "Paesi critici (UE)",
         "groupCriticalWorld": "Paesi critici (Mondo)",
@@ -304,7 +303,7 @@
         "MKD": "Macedonia del Nord",
         "MLI": "Mali",
         "MLT": "Malta",
-        "MMR": "Birmania  Myanmar",
+        "MMR": "Myanmar (Birmania)",
         "MNE": "Montenegro",
         "MNG": "Mongolia",
         "MNP": "Isole Marianne Settentrionali",
@@ -409,7 +408,7 @@
         "YEM": "Yemen",
         "ZAF": "Sudafrica",
         "ZMB": "Zambia",
-        "ZWE": "Zimbabwe"        
+        "ZWE": "Zimbabwe"
     },
     "region": {
         "kr": "Gorenjska",
@@ -426,8 +425,8 @@
         "za": "Zasavska"
     },
     "days": {
-        "longerDate": "{{ date, dddd, D MMMM YYYY }}",
-        "date": "{{ date, D MMMM }}",
+        "longerDate": "{{ date, %A, %e %B %Y }}",
+        "date": "{{ date, %e %b }}",
         "x_days_ago": "{{ count }} giorno fa",
         "x_days_ago_plural": "{{ count }} giorni fa",
         "in_x_days": "in {{ count }} giorno",
@@ -537,6 +536,12 @@
         "firstCase": {
             "title": "1° caso",
             "description": "Primo caso confermato:<br>turista di ritorno dal Marocco"
+        },
+        "allSchools": {
+            "title": "Scuole"
+        },
+        "croatia": {
+            "title": "Croazia"
         }
     },
     "tableDict": {
@@ -677,11 +682,6 @@
             "allHospitals": "Tutti gli ospedali"
         },
         "countriesTotalDeathsPer1M": {
-            "chronologically": "Cronologico",
-            "sinceFirstDeath": "Dal primo decesso",
-            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
-            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
-            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
             "yAxisTitle": "Decessi totali per 1 milione di persone",
             "legendTitle": "Decessi totali per 1 milione di persone",
             "title": "Paesi: decessi totali per 1 milione di persone"
@@ -717,11 +717,6 @@
             "sentToSelfIsolation": "Autoisolamento"
         },
         "countriesNewCasesPer1M": {
-            "daysFromOneDeathPerMillion": "Nr. giorni dal primo decesso per 1 milione di persone",
-            "chronologically": "Cronologico",
-            "sinceFirstDeath": "Dal primo decesso",
-            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
-            "daysFromFirstDeath": "Nr. giorni dal primo decesso",
             "legendTitle": "Nuovi casi per 1M di persone",
             "yAxisTitle": "Nuovi casi per 1 milione di persone",
             "title": "Paesi: nuovi casi per 1 milione di persone"
@@ -860,6 +855,9 @@
             "dsMZ": "Ministero della Salute",
             "dsNIJZ": "NIJZ",
             "dataSource": "origine dei dati"
+        },
+        "world": {
+            "title": "COVID-19 Situazione nel mondo"
         }
     },
     "footer": {
@@ -877,8 +875,7 @@
         "title": "Includere un grafico nelle proprie pagine"
     },
     "infocard": {
-        "accordingTo": "Il {{ date, D MMMM }}",
-        "lastUpdated": "{{ date, dddd, D MMMM }}",
+        "lastUpdated": "{{ date, %a, %e %b }}",
         "deceasedToDate": "Decessi confermati",
         "icu": "Terapie intensive",
         "inHospital": "Ricoveri",
@@ -892,8 +889,8 @@
         "description": "COVID-19 Slovenia Tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
     },
     "timestamp": {
-        "updated": "Aggiornato {{ date, dddd, D MMMM YYYY }}",
-        "at": "alle {{ date, HH:mm }}"
+        "updated": "Aggiornato {{ date, %A, %e %B %Y }}",
+        "at": "alle {{ date, %H:%M }}"
     },
     "phase": {
         "7": {
@@ -962,7 +959,7 @@
         "0": "Gennaio"
     },
     "tables": {
-        "day": "{{ date, D/M }}",
+        "day": "{{ date, %d/%m }}",
         "sourceLink": "Tabella GDocs, formato CSV o API REST",
         "source": "Dati in altri formati",
         "tabByAgeFemale": "Per età - Femmine",
@@ -973,7 +970,7 @@
     },
     "notice": {
         "news002": "Casi confermati per fasce di età",
-        "newChart": "Nuovo grafico:",
-        "newPage": "Nuova pagina:"
+        "newChart": "🆕 📊 Nuovo grafico:",
+        "newPage": "🆕 Nuova pagina:"
     }
 }

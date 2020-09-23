@@ -261,7 +261,6 @@
         "groupLatinAmerica": "Latinska Amerika",
         "groupCriticalWorld": "Kritične države (svijet)",
         "groupExYu": "Ex-Jugoslavija",
-        "groupNeighbouringWoItaly": "Susjedne države (osim Italije)",
         "groupNeighbouring": "Susjedne države"
     },
     "charts": {
@@ -324,7 +323,7 @@
             "linear": "Linearno",
             "close": "Zatvori",
             "xAxis": "Os x:",
-            "view": "Prikaži:",
+            "view": "Prikaz:",
             "share": "Dijeli",
             "longDateFormat": "%e. %B %Y.",
             "log": "Logaritmički",
@@ -338,7 +337,8 @@
             "linkFaq": "Često postavljena pitanja",
             "decimalPoint": ",",
             "to": " – ",
-            "from": " "
+            "from": " ",
+            "sortBy": "Razvrstaj prema:"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -358,22 +358,12 @@
         "countriesNewCasesPer1M": {
             "title": "Države: novi slučajevi na milijun stanovnika",
             "yAxisTitle": "Novi slučajevi na milijun stanovnika",
-            "legendTitle": "Novi slučajevi na milijun stanovnika",
-            "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun ljudi",
-            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
-            "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
+            "legendTitle": "Novi slučajevi na milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
             "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "sinceFirstDeath": "Od prvog smrtnog slučaja",
-            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
-            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
-            "chronologically": "Kronološki",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na 1 milijun stanovnika"
+            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -384,7 +374,7 @@
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
             "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
-            "deceasedPerPopulation": "Udio smrtnih slučajeva u stanovništvu",
+            "deceasedPerPopulation": "Smrtni slučajevi po stanovništvu",
             "deceased": "Smrtni slučajevi",
             "shareOfDeceasedConfirmedCases": "Udio smrtnih slučajeva u potvrđenim slučajevima",
             "female": "Žene",
@@ -448,14 +438,15 @@
             "inOneWeek": "U tjedan dana",
             "inFourWeeks": "U četiri tjedna",
             "confirmedCases": "potvrđeni slučajevi",
-            "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7, tada se može očekivati:",
+            "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7 dana, tada se može očekivati:",
             "timesAsMany": "-put toliko",
             "today": "Danas",
             "relativeLabel": "Relativan prirast u postocima",
             "absolute": "Apsolutan dnevni prirast",
             "explainer": "Što znači eksponencijalan prirast",
             "percentage": "Relativan dnevni prirast",
-            "oneWeek": "Tjedan dana"
+            "oneWeek": "Tjedan dana",
+            "activeCases": "aktivni slučajevi"
         },
         "hospitals": {
             "projection7": "Projekcija, 7-dnevno udvostručenje",
@@ -543,6 +534,25 @@
         },
         "world": {
             "title": "COVID-19 stanje u svijetu"
+        },
+        "rmap": {
+            "title": "Karta regija"
+        },
+        "countriesDeathsPerCases": {
+            "legendTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
+            "yAxisTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
+            "title": "Države: Smrtni slučajevi u odnosu na broj slučajeva",
+            "chronologically": "Kronološki",
+            "sinceFirstDeath": "Od prvog smrtnog slučaja",
+            "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
+            "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "kriteriji za crvenu listu",
+            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
+            "title": "Države: Aktivni slučajevi na milijun stanovnika"
         }
     },
     "shortMonth": {
@@ -675,6 +685,14 @@
         "app": {
             "description": "Program #OstaniZdrav, izdan za Android",
             "title": "#OstaniZdrav"
+        },
+        "masks": {
+            "description": "Maske su obavezne u svim zatvorenim javnim mjestima kao i vani, kad je udaljenost manja od 2 m.<br>Restorani su otvoreni samo do 22:30.",
+            "title": "Maske"
+        },
+        "quarantine10days": {
+            "description": "Obavezna karantena smanjena s 10 dana",
+            "title": "10 dana"
         }
     },
     "pageNotFound": {
@@ -839,10 +857,9 @@
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
-        "accordingTo": "Za {{ date, D. MMMM }}",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}"
+        "lastUpdated": "{{ date, %a, %e. %b }}"
     },
     "region": {
         "za": "Zasavlje",
@@ -865,8 +882,8 @@
         "x_days_ago_0": "Prije {{ count }} dan",
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY. }}",
-        "date": "{{ date, D. MMMM }}",
+        "longerDate": "{{ date, %A, %e. %B %Y. }}",
+        "date": "{{ date, %e. %b }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana"
@@ -876,14 +893,14 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "newChart": "Novi grafikon:",
+        "newChart": "🆕 📊 Novi grafikon:",
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
-        "newPage": "Nova stranica:"
+        "newPage": "🆕 Nova stranica:"
     },
     "timestamp": {
-        "at": "{{ date, HH:mm }}",
-        "updated": "Aktualizirano: {{ date, dddd, D. MMMM YYYY. }}"
+        "at": "{{ date, %H:%M }}",
+        "updated": "Aktualizirano: {{ date, %A, %e. %B %Y. }}"
     },
     "mk": {
         "municipality": {

@@ -83,18 +83,8 @@ export default {
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     diffClass() {
-      if (
-        this.field === 'statePerTreatment.deceasedToDate' ||
-        (this.renderActiveValues(this.fieldDeceased) &&
-          this.renderActiveValues(this.fieldDeceased).lastDay.value > 0)
-      ) {
+      if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'
-      }
-      if (
-        this.field === 'statePerTreatment.inHospital' ||
-        this.field === 'statePerTreatment.inICU'
-      ) {
-        if (this.renderTotalValues(this.totalDeceased) > 0) return 'deceased'
       }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
@@ -235,7 +225,7 @@ export default {
 .hp-card {
   display: flex;
   flex-direction: column;
-  min-height: 195px;
+  min-height: 196px;
   height: 100%;
   padding: 18px;
   background: #fff;
@@ -286,8 +276,8 @@ export default {
 
   .trend-icon {
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     object-fit: contain;
     vertical-align: bottom;
 

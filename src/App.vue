@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import Navbar from './components/Navbar.vue'
 import Footer from './components/Footer.vue'
 
@@ -51,16 +50,19 @@ export default {
     Footer,
   },
   created() {
-    this.$store.dispatch("stats/fetchData");
-    this.$store.dispatch("patients/fetchData");
+    this.$store.dispatch("stats/fetchData")
+    this.$store.dispatch("patients/fetchData")
+    
+    if (Object.keys(this.$route.query).length > 0 && this.$route.query.showDate) {
+      let date = this.$route.query.showDate
+      this.$store.dispatch("stats/fetchData", date)
+      this.$store.dispatch("patients/fetchData", date)
+    }
   },
   mounted() {
-    this.$store.dispatch("stats/refreshDataEvery", 300);
-    this.$store.dispatch("patients/refreshDataEvery", 300);
+    this.$store.dispatch("stats/refreshDataEvery", 300)
+    this.$store.dispatch("patients/refreshDataEvery", 300)
     
-    moment.locale(this.$i18n.i18next.language)
-
-    // TODO: this code block is obsolete, vue router isn't in hash mode anymore
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash)

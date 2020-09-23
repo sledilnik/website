@@ -5,51 +5,62 @@ open Elmish
 open Feliz
 
 open Types
-open CountriesChartViz.Synthesis
+open CountriesChartViz.Analysis
 open I18N
 
 let init (query: obj) (visualization: string option) (page: string) =
-    let inner () =
-        let renderingMode =
-            match visualization with
-            | None -> Normal
-            | Some viz ->
-                match viz with
-                | "Map" -> Some Map
-                | "EuropeMap" -> Some EuropeMap
-                | "WorldMap" -> Some WorldMap
-                | "MetricsComparison" -> Some MetricsComparison
-                | "Patients" -> Some Patients
-                | "Ratios" -> Some Ratios
-                | "Tests" -> Some Tests
-                | "Cases" -> Some Cases
-                | "Spread" -> Some Spread
-                | "Regions" -> Some Regions
-                | "Municipalities" -> Some Municipalities
-                | "AgeGroups" -> Some AgeGroups
-                | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
-                | "HCenters" -> Some HCenters
-                | "Hospitals" -> Some Hospitals
-                | "Infections" -> Some Infections
-                | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
-                | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
-                | _ -> None
-                |> Embedded
+    let renderingMode =
+        match visualization with
+        | None -> Normal
+        | Some viz ->
+            match viz with
+            | "Map" -> Some Map
+            | "RegionMap" -> Some RegionMap
+            | "EuropeMap" -> Some EuropeMap
+            | "WorldMap" -> Some WorldMap
+            | "MetricsComparison" -> Some MetricsComparison
+            | "DailyComparison" -> Some DailyComparison
+            | "Patients" -> Some Patients
+            | "Ratios" -> Some Ratios
+            | "Tests" -> Some Tests
+            | "Cases" -> Some Cases
+            | "Spread" -> Some Spread
+            | "Regions" -> Some Regions
+            | "Municipalities" -> Some Municipalities
+            | "AgeGroups" -> Some AgeGroups
+            | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
+            | "HCenters" -> Some HCenters
+            | "Hospitals" -> Some Hospitals
+            | "Infections" -> Some Infections
+            | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
+            | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
+            | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
+            | _ -> None
+            |> Embedded
 
-        let initialState =
-            {
-              Page = page
-              Query = query
-              StatsData = NotAsked
-              RegionsData = NotAsked
-              RenderingMode = renderingMode }
+    let initialState =
+        {
+          Page = page
+          Query = query
+          StatsData = NotAsked
+          RegionsData = NotAsked
+          RenderingMode = renderingMode }
 
-        initialState,
-        Cmd.batch
-            [ Cmd.ofMsg StatsDataRequested
-              Cmd.ofMsg RegionsDataRequest ]
+    // Request data loading based on the page we are on
+    let cmd =
+        match page with
+        | "local" ->
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg RegionsDataRequest ]
+        | "world" ->
+            Cmd.none
+        | _ ->
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg RegionsDataRequest ]
 
-    inner
+    initialState, cmd
 
 let update (msg: Msg) (state: State) =
     match msg with
@@ -73,6 +84,7 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "hospitals"
             Explicit = true
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
+
     let metricsComparison =
           { VisualizationType = MetricsComparison
             ClassName = "metrics-comparison-chart"
@@ -85,6 +97,20 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+
+    let dailyComparison =
+          { VisualizationType = DailyComparison
+            ClassName = "daily-comparison-chart"
+            ChartTextsGroup = "dailyComparison"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView DailyComparisonChart.dailyComparisonChart {| data = data |} }
+
     let spread =
           { VisualizationType = Spread
             ClassName = "spread-chart"
@@ -109,7 +135,20 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| data = data |} }
+                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Municipality; data = data |} }
+
+    let regionMap =
+          { VisualizationType = RegionMap
+            ClassName = "rmap-chart"
+            ChartTextsGroup = "rmap"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.RegionsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Region; data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities
@@ -259,6 +298,19 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
+    let countriesActiveCasesPer1M =
+          { VisualizationType = CountriesActiveCasesPer1M
+            ClassName = "countries-active-chart"
+            ChartTextsGroup = "countriesActiveCasesPer1M"
+            Explicit = false
+            Renderer =
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = ActiveCasesPer1M
+                          ChartTextsGroup = "countriesActiveCasesPer1M"
+                        }
+          }
+
     let countriesDeathsPer1M =
           { VisualizationType = CountriesDeathsPer1M
             ClassName = "countries-deaths-chart"
@@ -272,20 +324,37 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
+    let countriesDeathsPerCases =
+          { VisualizationType = CountriesDeathsPer1M
+            ClassName = "countries-deaths-per-cases"
+            ChartTextsGroup = "countriesDeathsPerCases"
+            Explicit = false
+            Renderer =
+                fun _ ->
+                    lazyView CountriesChartViz.Rendering.renderChart
+                        { MetricToDisplay = DeathsPerCases
+                          ChartTextsGroup = "countriesDeathsPerCases"
+                        }
+          }
+
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regions
+          cases; ratios; ageGroups; regionMap; regions
         ]
 
     let worldVisualizations =
-        [ worldMap; countriesCasesPer1M; countriesDeathsPer1M ]
+        [ worldMap; countriesActiveCasesPer1M
+          countriesCasesPer1M
+          countriesDeathsPer1M
+//          countriesDeathsPerCases
+          ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regions
-          countriesCasesPer1M; countriesDeathsPer1M
+          cases; patients; ratios; ageGroups; regionMap; regions
+          countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
         ]
 
     let embedded, visualizations =
@@ -316,7 +385,7 @@ let render (state: State) (_: Msg -> unit) =
                 [ prop.className "brand-link"
                   prop.target "_blank"
                   prop.href "https://covid-19.sledilnik.org/"
-                  prop.text (I18N.t "meta.title") ]
+                  prop.text (t "meta.title") ]
 
 
     let renderFaqLink (visualization: Visualization) =
@@ -389,19 +458,26 @@ let render (state: State) (_: Msg -> unit) =
                                 prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
 
     Html.div
-        [ Utils.classes
-            [(true, "visualization container")
-             (embedded, "embeded") ]
-          prop.children
-              (visualizations
-               |> List.map (fun viz ->
-                   Html.section
-                       [ prop.className [ viz.ClassName; "visualization-chart" ]
-                         prop.id viz.ClassName
-                         prop.children
-                             [ Html.div
-                                 [ prop.className "title-chart-wrapper"
-                                   prop.children
-                                       [ renderChartTitle viz
-                                         renderFaqAndShareBtn viz ] ]
-                               state |> viz.Renderer ] ])) ]
+        [ Utils.classes [
+            (true, "visualization container")
+            (embedded, "embeded") ]
+          prop.children (
+            visualizations
+            |> List.map (fun viz ->
+                Html.section [
+                    prop.className [ viz.ClassName ; "visualization-chart" ]
+                    prop.id viz.ClassName
+                    prop.children [
+                        Html.div [
+                            prop.className "title-chart-wrapper"
+                            prop.children [
+                                renderChartTitle viz
+                                renderFaqAndShareBtn viz
+                            ]
+                        ]
+                        IntersectionObserver.Component.intersectionObserver
+                            {| targetElementId = viz.ClassName
+                               content = state |> viz.Renderer
+                               options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
+                            |}
+                    ] ] ) ) ]

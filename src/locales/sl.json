@@ -27,12 +27,12 @@
         }
     },
     "timestamp": {
-        "updated": "Osveženo: {{ date, dddd, D. MMMM YYYY }}",
-        "at": "ob {{ date, HH.mm }}"
+        "updated": "Osveženo: {{ date, %A, %e. %B %Y }}",
+        "at": "ob {{ date, %H.%M }}"
     },
     "notice": {
-        "newChart": "Nov graf:",
-        "newPage": "Nova stran:",
+        "newChart": "🆕 📊 Nov graf:",
+        "newPage": "🆕 Nova stran:",
         "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
     },
     "infocard": {
@@ -43,8 +43,7 @@
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
-        "accordingTo": "Glede na {{ date, D. MMMM }}",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}"
+        "lastUpdated": "{{ date, %a., %e. %b. }}"
     },
     "tables": {
         "title": "Tabela",
@@ -54,7 +53,7 @@
         "tabByAgeFemale": "Po starosti - Ženske",
         "source": "Viri podatkov in druge oblike",
         "sourceLink": "GDocs preglednica, CSV oblika ali REST API",
-        "day": "{{ date, D.M. }}"
+        "day": "{{ date, %e.%m. }}"
     },
     "embedMaker": {
         "title": "Vgradite graf v vašo spletno stran",
@@ -76,8 +75,8 @@
         "x_days_ago_1": "Pred {{ count }} dnevoma",
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
-        "date": "{{ date, D. MMMM }}",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}"
+        "date": "{{ date, %e. %b }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}"
     },
     "month": {
         "0": "januar",
@@ -387,7 +386,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "okolica",
-        "groupNeighbouringWoItaly": "okolica (brez Italije)",
         "groupCriticalEU": "kritične države (EU)",
         "groupCriticalWorld": "kritične države (svet)",
         "groupNordic": "nordijske države",
@@ -511,6 +509,14 @@
         "allSchools": {
             "title": "Šole",
             "description": "Vse šole odprte za novo šolsko leto"
+        },
+        "quarantine10days": {
+            "title": "10 dni",
+            "description": "Obvezna karantena skrajšana na 10 dni"
+        },
+        "masks": {
+            "title": "Maske",
+            "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22:30."
         }
     },
     "phase": {
@@ -562,6 +568,7 @@
             "thousandsSep": ".",
             "decimalPoint": ",",
             "view": "Prikaži:",
+            "sortBy": "Sortiraj po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -597,6 +604,13 @@
             "dischargedToDate": "Odpuščeni iz bolnišnice (skupaj)",
             "deceased": "Umrli (na dan)",
             "deceasedToDate": "Umrli (skupaj)"
+        },
+        "dailyComparison": {
+            "title": "Primerjava po dnevih v tednu",
+            "new": "Potrjeno okuženi",
+            "active": "Aktivni primeri",
+            "tests": "Opravljeni testi",
+            "positivePct": "Delež pozitivnih testov (%)"
         },
         "cases": {
             "title": "Potrjeni primeri",
@@ -683,13 +697,14 @@
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
-            "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7, potem bi lahko pričakovali:",
+            "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7 dni, potem bi lahko pričakovali:",
             "today": "Danes",
             "inOneWeek": "Čez en teden",
             "inTwoWeeks": "Čez dva tedna",
             "inThreeWeeks": "Čez tri tedne",
             "inFourWeeks": "Čez štiri tedne",
             "timesAsMany": "-krat toliko",
+            "activeCases": "aktivnih primerov",
             "confirmedCases": "potrjeno okuženih",
             "hospitalized": "hospitaliziranih"
         },
@@ -740,6 +755,9 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
         },
+        "rmap": {
+            "title": "Zemljevid po regijah"
+        },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
             "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
@@ -773,7 +791,7 @@
             "allRegions": "Vse regije",
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
-            "viewDoublingTime": "Dnevih podvojitve",
+            "viewDoublingTime": "Podvojitven čas",
             "viewLast": "Zadnji"
         },
         "ageGroups": {
@@ -799,25 +817,21 @@
             "activeCases": "Aktivni primeri",
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
+        "countriesActiveCasesPer1M": {
+            "title": "Države: aktivni primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. aktivnih primerov na milijon prebivalcev",
+            "legendTitle": "Aktivni primeri na milijon prebivalcev",
+            "red": "meja za uvrstitev na rdeči seznam"
+        },
         "countriesNewCasesPer1M": {
             "title": "Države: potrjeno okuženi na milijon prebivalcev",
             "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
-            "legendTitle": "Potrjeno okuženi na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Potrjeno okuženi na milijon prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
-            "legendTitle": "Umrli (skupaj) na milijon prebivalcev",
-            "chronologically": "Kronološko",
-            "sinceFirstDeath": "Od prve smrti",
-            "sinceOneDeathPerMillion": "Od prve smrti na milij. preb.",
-            "daysFromFirstDeath": "Št. dni od prvega smrtnega primera",
-            "daysFromOneDeathPerMillion": "Št. dni od vrednosti 1 umrlega na 1 milijon prebivalcev"
+            "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         }
     },
     "footer": {

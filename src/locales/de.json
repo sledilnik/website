@@ -449,7 +449,7 @@
             "confirmedCases": "Bestätigte Fälle",
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
-            "title": "Karte der Gemeinden",
+            "title": "Gemeindekarte",
             "all": "Alle"
         },
         "metricsComparison": {
@@ -475,20 +475,13 @@
         "countries": {
             "groupNordic": "Nordische Länder",
             "title": "Ländervergleich",
-            "daysFromFirstDeath": "Anzahl Tage seit dem erstem Todesfall",
             "groupEastAsiaOceania": "Ostasien und Ozeanien",
             "groupCriticalWorld": "Kritische Länder (Welt)",
             "groupLatinAmerica": "Lateinamerika",
             "groupExYu": "Ex-Jugoslawien",
-            "chronologically": "Chronologisch",
-            "deathsPerMillion": "Todesfälle pro eine Million Einwohner",
-            "sinceOneDeathPerMillion": "Seti erstem Todesfall pro eine Million Einwohner",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem erstem Todesfall per 1 Million Menschen",
             "groupNeighbouring": "Nachbarländer",
             "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen",
-            "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
-            "groupCriticalEU": "Kritische Länder (EU)",
-            "sinceFirstDeath": "Seit erstem Todesfall"
+            "groupCriticalEU": "Kritische Länder (EU)"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -546,27 +539,20 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "chronologically": "Chronologisch",
-            "sinceFirstDeath": "Seit dem ersten Todesfall",
-            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
-            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
             "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
             "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
             "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
-            "chronologically": "Chronologisch",
-            "sinceOneDeathPerMillion": "Seit dem ersten Todesfall pro 1 Million Menschen",
-            "daysFromFirstDeath": "Anzahl Tage seit dem ersten Todesfall",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit dem ersten Todesfall pro 1 Million Menschen",
-            "sinceFirstDeath": "Seit dem ersten Todesfall",
             "legendTitle": "Neue Fälle pro 1 Million Menschen",
             "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
             "title": "Länder: Neue Fälle pro 1 Million Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
+        },
+        "rmap": {
+            "title": "Regionalkarte"
         }
     },
     "tableDict": {
@@ -767,21 +753,20 @@
         "active": "Aktive Fälle",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
-        "lastUpdated": "{{ date, dddd, D. MMMM }}",
+        "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
-        "accordingTo": "Am {{ date, D. MMMM }}",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte"
     },
     "notice": {
-        "newChart": "Neues Diagramm:",
+        "newChart": "🆕 📊 Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
         "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "Neue Seite:"
+        "newPage": "🆕 Neue Seite:"
     },
     "timestamp": {
-        "at": "um {{ date, HH:mm }}",
-        "updated": "Aktualisiert am {{ date, dddd, MMMM Do YYYY }}"
+        "at": "um {{ date, %H:%M }}",
+        "updated": "Aktualisiert am {{ date, %A, %B %e, %Y }}"
     },
     "shortMonth": {
         "11": "Dez",
@@ -983,7 +968,7 @@
         "tabByAgeMale": "Nach Alter – Männer",
         "tabByRegion": "Nach Regionen",
         "source": "Datenquelle in anderen Formaten",
-        "day": "{{ date, D. M. }}"
+        "day": "{{ date, %e. %m. }}"
     },
     "weekday": {
         "5": "Freitag",
@@ -995,15 +980,14 @@
         "0": "Sonntag"
     },
     "days": {
-        "date": "{{ date, D. MMMM }}",
-        "longerDate": "{{ date, dddd, D. MMMM YYYY }}",
+        "date": "{{ date, %e. %b }}",
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
         "x_days_ago": "Vor {{ count }} Tag",
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
         "in_x_days_plural": "in {{ count }} Tagen"
     },
     "country-groups": {
-        "groupNeighbouringWoItaly": "Nachbarländer (onhe Italien)",
         "groupNeighbouring": "Nachbarländer",
         "groupCriticalEU": "Kritische Länder (EU)",
         "groupCriticalWorld": "Kritische Länder (Welt)",
