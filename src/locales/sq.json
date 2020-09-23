@@ -873,7 +873,7 @@
     },
     "days": {
         "longerDate": "{{ date, %A, %e. %B %Y }}",
-        "date": "{{ date, D. %b }}",
+        "date": "{{ date, %e. %b }}",
         "x_days_ago": "{{ count }} ditë më parë",
         "x_days_ago_plural": "{{ count }} ditë më parë",
         "in_x_days": "për {{ count }} ditë",
