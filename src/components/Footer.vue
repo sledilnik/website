@@ -10,16 +10,16 @@
         </a>
       </div>
       <div class="social">
-        <a href="https://fb.me/COVID19Sledilnik" target="_blank">
+        <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
-        <a href="https://twitter.com/sledilnik" target="_blank">
+        <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
-        <a href="https://medium.com/sledilnik" target="_blank">
+        <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/medium-icon.svg" alt="Medium" />
         </a>
-        <a href="https://github.com/sledilnik" target="_blank">
+        <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
         </a>
       </div>

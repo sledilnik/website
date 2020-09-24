@@ -49,7 +49,7 @@ function setHighchartsOptions () {
 };
 
 i18next.on('languageChanged', function(lng) {
-    setHighchartsOptions(Highcharts);``
+    setHighchartsOptions(Highcharts);
 });
 
 i18next.use(LanguageDetector).init({
