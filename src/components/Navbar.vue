@@ -3,7 +3,7 @@
     class="navbar-container"
     :class="{ scrolled: scrollPosition > 80, menuOpen: menuOpened, closingMenu: closingMenu }"
   >
-    <router-link to="stats" class="navbar-logo">&nbsp;</router-link>
+    <router-link to="stats" class="navbar-logo"></router-link>
     <div class="🍔" @click="toggleMenu">
       <div class="line line-1"></div>
       <div class="line line-2"></div>

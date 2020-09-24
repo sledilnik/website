@@ -63,7 +63,6 @@ let dropdown (viz: Visualization) =
                         prop.children
                             [ Html.a
                                 [ prop.className "share-link"
-                                  prop.rel "noreferrer"
                                   prop.target "_blank"
                                   prop.href
                                       // TODO: make facebook sharing better by creating an app here:
@@ -78,7 +77,6 @@ let dropdown (viz: Visualization) =
                                         Html.span [ prop.text (I18N.t "charts.common.facebook") ] ] ]
                               Html.a
                                   [ prop.className "share-link"
-                                    prop.rel "noreferrer"
                                     prop.target "_blank"
                                     prop.href
                                         // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
@@ -95,7 +93,6 @@ let dropdown (viz: Visualization) =
                                           Html.span [ prop.text (I18N.t "charts.common.twitter") ] ] ]
                               Html.a
                                   [ prop.className "share-link"
-                                    prop.rel "noreferrer"
                                     prop.children
                                         [ Html.img
                                             [ prop.className "share-icon"
