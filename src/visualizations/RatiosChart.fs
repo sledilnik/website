@@ -49,15 +49,15 @@ module Ratios =
     // color, dash, id
     let getSeriesInfo = function
         | HospitalCases                 -> "#de9a5a", Solid,    "hospitalCases"
-        | IcuCases                      -> "#d99a91", Solid,    "icuCases"
+        | IcuCases                      -> "#d96756", Solid,    "icuCases"
         | CriticalCases                 -> "#bf5747", Solid,    "ventilatorCases"
         | DeceasedCases                 -> "#666666", Dot,      "deceasedCases"
-        | IcuHospital                   -> "#d99a91", Solid,    "icuHospital"
+        | IcuHospital                   -> "#d96756", Solid,    "icuHospital"
         | CriticalHospital              -> "#bf5747", Solid,    "ventilatorHospital"
         | DeceasedHospital              -> "#666666", Dot,      "deceasedHospital"
         | DeceasedHospitalC             -> "#de9a5a", Dot,      "hospitalMortality"
-        | DeceasedIcuC                  -> "#d99a91", Dot,      "icuMortality"
-        | DeceasedIcuDeceasedTotal      -> "#d99a91", Solid,    "icuDeceasedShare"
+        | DeceasedIcuC                  -> "#d96756", Dot,      "icuMortality"
+        | DeceasedIcuDeceasedTotal      -> "#d96756", Solid,    "icuDeceasedShare"
         | DeceasedHospitalDeceasedTotal -> "#de9a5a", Solid,    "hospitalDeceasedShare"
 
 type State = {

@@ -46,7 +46,7 @@ module Metrics  =
         { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
-        { Metric=InICU;                Color="#d99a91"; Visible=false; Line=Solid;  Id="icu" }
+        { Metric=InICU;                Color="#d96756"; Visible=false; Line=Solid;  Id="icu" }
         { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid;  Id="ventilator" }
         { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="discharged" }
         { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot;    Id="dischargedToDate" }
