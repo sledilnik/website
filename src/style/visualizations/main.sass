@@ -18,13 +18,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     
   section
     background: #fff
-    margin-bottom: 88px
+    margin-bottom: 44px
     position: relative
     padding: 0 0 32px
     box-shadow: $element-box-shadow
 
     @media only screen and (min-width: 768px)
       padding: 0 29px 32px 32px
+      margin-bottom: 88px
 
     &.municipalities-chart
       padding: 0 0 32px
@@ -335,11 +336,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     &:hover
       border-color: $button-color
 
-  .metrics-2-selectors
-    margin-top: $gap/2
-    display: flex
-    flex-wrap: wrap
-
   .metric-2-selector
     margin: 0 $gap/6 $gap/3 $gap/6
     font-size: $font-size
@@ -355,14 +351,28 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     color: white
 
   .metrics-comparison-chart
-    min-height: 689px
+    min-height: 724px
 
-  .regions-chart
-    margin-top: $gap * 2
+  .spread-chart
+    min-height: 604px
+
+  .daily-comparison-chart, .patients-chart, .age-groups-trends-chart, .tests-chart
+    min-height: 640px
+
+  .infections-chart, .cases-chart, .ratios-chart, .regions-chart
+    min-height: 450px
 
   .age-groups-chart
-    margin-top: $gap * 2
-    margin-bottom: $gap
+    min-height: 579px
+
+  .map-chart
+    min-height: 780px
+
+  .europe-chart, .world-chart
+    min-height: 722px
+
+  .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
+    min-height: 703px
 
   .tests-chart, .ratios-chart
     .metric-selector
@@ -371,12 +381,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
-  .countries-cases-chart, .countries-active-chart, .countries-deaths-chart 
-    margin-top: $gap * 2
-    margin-bottom: $gap
-
-  .patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart, .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart
-    margin-top: $gap * 2
+  .patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart,
+  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart
 
     .metric-selector
       background-color: white
@@ -389,11 +395,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     .metric-2-selector--selected
       border-color: $gray-600
       background-color: $gray-600
-
-  // .spread-chart
-
-  .hospitals-chart
-    margin-top: 0
 
   .map-chart, .rmap-chart
     .map
@@ -430,10 +431,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       margin-right: 1px
       background-color: $bar-color
 
-  .age-groups-chart
-    min-height: 579px
+  .hcenters-chart
+    min-height: 655px
 
-  .hcenters-chart    
     .filters
       display: flex
       flex-wrap: wrap
@@ -445,7 +445,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         margin-left: 0
 
   .municipalities-chart
-    margin-top: $gap * 2
+    min-height: 897px
     $bar-active-color: #d5c768
     $bar-recovered-color: #8cd4b2
     $bar-deceased-color: #666666
@@ -583,10 +583,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       align-items: flex-end
       height: 50px
 
-      //&:last-child
-      //  .bar
-      //    background-color: $bar-active-color
-
       &:hover
         .total-and-date--hover
           display: block
@@ -638,10 +634,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       .value
         font-weight: bold
         margin-left: 2px
-        // color: white
-        // padding: 1px 5px 2px 5px
-        // background-color: $button-color
-        // border-radius: 2px
 
     .doubling-time
       margin-top: 5px
