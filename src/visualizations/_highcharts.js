@@ -5,7 +5,7 @@
 import React from 'react'
 //import * as Highcharts from 'highcharts/highcharts.js'
 import * as Highcharts from 'highcharts/highstock.js'
-require("highcharts/highcharts-more")(Highcharts);
+// require("highcharts/highcharts-more")(Highcharts);
 require("highcharts/modules/map.js")(Highcharts);
 
 import HighchartsReact from 'highcharts-react-official';
