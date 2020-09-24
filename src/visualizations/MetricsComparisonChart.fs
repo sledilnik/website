@@ -10,6 +10,16 @@ open Browser
 open Highcharts
 open Types
 
+type XAxisType =
+    | Active
+    | Today
+    | ToDate
+  with
+    static member getName = function
+        | Active -> I18N.t "charts.metricsComparison.showActive"
+        | Today -> I18N.t "charts.metricsComparison.showToday"
+        | ToDate -> I18N.t "charts.metricsComparison.showToDate"
+
 type Metric =
     | PerformedTests
     | PerformedTestsToDate
@@ -37,22 +47,34 @@ type MetricCfg = {
 type Metrics = MetricCfg list
 
 module Metrics  =
-    let initial = [
-        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid;  Id="tests" }
-        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot;    Id="testsToDate" }
-        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmed" }
-        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot;    Id="confirmedToDate" }
-        { Metric=ActiveCases;          Color="#dba51d"; Visible=true;  Line=Dash;   Id="active" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
-        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
+    let metricsActive = [
+        { Metric=ActiveCases;          Color="#dba51d"; Visible=true;  Line=Dash;   Id="activeCases" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
-        { Metric=InICU;                Color="#d96756"; Visible=false; Line=Solid;  Id="icu" }
-        { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid;  Id="ventilator" }
-        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="discharged" }
-        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot;    Id="dischargedToDate" }
-        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid;  Id="deceased" }
-        { Metric=DeceasedToDate;       Color="#666666"; Visible=false; Line=Dot;    Id="deceasedToDate" }
+        { Metric=InICU;                Color="#d96756"; Visible=true;  Line=Solid;  Id="icu" }
+        { Metric=OnVentilator;         Color="#bf5747"; Visible=true;  Line=Solid;  Id="ventilator" }
     ]
+
+    let metricsToday = [
+        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid;  Id="testsPerformed" }
+        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmedCases" }
+        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="hospitalDischarged" }
+        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid;  Id="deceased" }
+    ]
+
+    let metricsToDate = [
+        { Metric=PerformedTestsToDate; Color="#19aebd"; Visible=false; Line=Dot;    Id="testsPerformed" }
+        { Metric=ConfirmedCasesToDate; Color="#bda506"; Visible=true;  Line=Dot;    Id="confirmedCases" }
+        { Metric=OutOfHospitalToDate;  Color="#20b16d"; Visible=false; Line=Dot;    Id="hospitalDischarged" }
+        { Metric=DeceasedToDate;       Color="#000000"; Visible=false; Line=Dot;    Id="deceased" }
+        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
+    ]
+
+    let byType mType =
+        match mType with
+        | Active -> metricsActive
+        | Today -> metricsToday
+        | ToDate -> metricsToDate
+
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
         metrics
@@ -60,6 +82,7 @@ module Metrics  =
 
 type State =
     { ScaleType : ScaleType
+      XAxisType : XAxisType
       Data : StatsData
       Metrics : Metrics
       RangeSelectionButtonIndex: int
@@ -68,13 +91,15 @@ type State =
 type Msg =
     | ToggleMetricVisible of Metric
     | ScaleTypeChanged of ScaleType
+    | XAxisTypeChanged of XAxisType
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         ScaleType = Linear
+        XAxisType = Active
+        Metrics = Metrics.byType(Active)
         Data = data
-        Metrics = Metrics.initial
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -88,6 +113,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
+    | XAxisTypeChanged xAxisType ->
+        { state with 
+            XAxisType = xAxisType
+            Metrics = Metrics.byType(xAxisType) }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -174,22 +203,43 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 
-let renderMetricsSelectors metrics dispatch =
+let renderMetricsSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children [
-            for mc in metrics do
+            for mc in state.Metrics do
                 yield renderMetricSelector mc dispatch
         ]
     ]
 
+let renderXAxisSelectors (activeXAxisType: XAxisType) dispatch =
+    let renderXAxisSelector (axisSelector: XAxisType) =
+        let active = axisSelector = activeXAxisType
+        Html.div [
+            prop.onClick (fun _ -> dispatch axisSelector)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text (axisSelector |> XAxisType.getName)
+        ]
+
+    let xAxisTypesSelectors =
+        [ Active; Today; ToDate ]
+        |> List.map renderXAxisSelector
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children ((Html.text (I18N.t "charts.common.xAxis")) :: xAxisTypesSelectors)
+    ]
+
 let render state dispatch =
     Html.div [
-        Utils.renderChartTopControlRight
-            (Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch))
+        Utils.renderChartTopControls [
+            renderXAxisSelectors state.XAxisType (XAxisTypeChanged >> dispatch)
+            Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+        ]
         renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics dispatch
+        renderMetricsSelectors state dispatch
     ]
 
 let metricsComparisonChart (props : {| data : StatsData |}) =
