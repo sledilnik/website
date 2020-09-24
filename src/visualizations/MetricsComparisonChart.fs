@@ -15,7 +15,7 @@ type Metric =
     | PerformedTestsToDate
     | ConfirmedCasesToday
     | ConfirmedCasesToDate
-    | ConfirmedCases
+    | ActiveCases
     | RecoveredToDate
     | InHospital
     | InHospitalToDate
@@ -42,7 +42,7 @@ module Metrics  =
         { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot;    Id="testsToDate" }
         { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmed" }
         { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot;    Id="confirmedToDate" }
-        { Metric=ConfirmedCases;       Color="#d5c768"; Visible=true;  Line=Dash;   Id="active" }
+        { Metric=ActiveCases;          Color="#dba51d"; Visible=true;  Line=Dash;   Id="active" }
         { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
         { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
         { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
@@ -101,7 +101,7 @@ let renderChartOptions state dispatch =
             | PerformedTestsToDate -> point.Tests.Performed.ToDate
             | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
-            | ConfirmedCases -> point.Cases.Active
+            | ActiveCases -> point.Cases.Active
             | RecoveredToDate -> point.Cases.RecoveredToDate
             | InHospital -> point.StatePerTreatment.InHospital
             | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
