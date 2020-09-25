@@ -131,10 +131,13 @@ export default {
 .cards-wrapper
   display: flex
   flex-wrap: wrap
-  grid-gap: 30px
+  grid-gap: 15px
+  gap: 15px
   margin: 0px 0px 58px
 
   @media only screen and (min-width: 768px)
+    grid-gap: 30px
+    gap: 30px
     margin: 0px 15px 58px
 
 $loader-width: 50px
