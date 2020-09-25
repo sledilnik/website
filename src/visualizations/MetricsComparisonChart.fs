@@ -135,24 +135,22 @@ let renderChartOptions state dispatch =
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
         for metric in state.Metrics do
-            if metric.Type = state.MetricType  
-            then
-                let pointData = metricDataGenerator metric
-                yield pojo
-                    {|
-                        visible = metric.Visible
-                        color = metric.Color
-                        name = I18N.tt "charts.metricsComparison" metric.Id
-                        dashStyle = metric.Line |> DashStyle.toString
-                        data =
-                            state.Data
-                            |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
-                            |> Seq.skipWhile (fun (ts,value) ->
-                                if metric.Visible && value.IsSome then
-                                    startTime <- min startTime ts
-                                value.IsNone)
-                            |> Seq.toArray
-                    |}
+            let pointData = metricDataGenerator metric
+            yield pojo
+                {|
+                    visible = metric.Type = state.MetricType && metric.Visible
+                    color = metric.Color
+                    name = I18N.tt "charts.metricsComparison" metric.Id
+                    dashStyle = metric.Line |> DashStyle.toString
+                    data =
+                        state.Data
+                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
+                        |> Seq.skipWhile (fun (ts,value) ->
+                            if metric.Type = state.MetricType && metric.Visible && value.IsSome then
+                                startTime <- min startTime ts
+                            value.IsNone)
+                        |> Seq.toArray
+                |}
         yield addContainmentMeasuresFlags startTime None |> pojo
     ]
 
