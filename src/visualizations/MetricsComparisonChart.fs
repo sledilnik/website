@@ -116,9 +116,9 @@ let renderChartOptions state dispatch =
     let metricDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | PerformedTests -> point.Tests.Performed.Today |> Utils.zeroToNone
+            | PerformedTests -> point.Tests.Performed.Today
             | PerformedTestsToDate -> point.Tests.Performed.ToDate
-            | ConfirmedCasesToday -> point.Cases.ConfirmedToday  |> Utils.zeroToNone
+            | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
             | ActiveCases -> point.Cases.Active
             | RecoveredToDate -> point.Cases.RecoveredToDate
@@ -126,9 +126,9 @@ let renderChartOptions state dispatch =
             | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
             | InICU -> point.StatePerTreatment.InICU
             | OnVentilator -> point.StatePerTreatment.Critical
-            | OutOfHospital -> point.StatePerTreatment.OutOfHospital  |> Utils.zeroToNone
+            | OutOfHospital -> point.StatePerTreatment.OutOfHospital
             | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate
-            | Deceased -> point.StatePerTreatment.Deceased  |> Utils.zeroToNone
+            | Deceased -> point.StatePerTreatment.Deceased
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate
 
     let allSeries = [
@@ -140,10 +140,14 @@ let renderChartOptions state dispatch =
                     visible = metric.Type = state.MetricType && metric.Visible
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
-                    marker = if state.MetricType = Today then pojo {| enabled = true; radius = 2 |} else pojo {| enabled = false |}
-                    lineWidth = if state.MetricType = Today then 0 else 3
-                    states = if state.MetricType = Today then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
-                    dashStyle = if state.MetricType = Active then "solid" else "dot"
+                    //marker = if state.MetricType = Today then pojo {| enabled = true; radius = 2 |} else pojo {| enabled = false |}
+                    //lineWidth = if state.MetricType = Today then 0 else 3
+                    //states = if state.MetricType = Today then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
+                    dashStyle = 
+                        match state.MetricType with
+                        | Active -> "Solid" 
+                        | Today -> "ShortDot"
+                        | ToDate -> "Dot"
                     data =
                         state.Data
                         |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
@@ -218,7 +222,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ Active; Today; ToDate ]
+        [ Today; Active; ToDate ]
         |> List.map renderMetricTypeSelector
 
     Html.div [
