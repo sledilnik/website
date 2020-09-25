@@ -128,7 +128,7 @@ let renderChartOptions state dispatch =
             | OnVentilator -> point.StatePerTreatment.Critical
             | OutOfHospital -> point.StatePerTreatment.OutOfHospital
             | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate
-            | Deceased -> point.StatePerTreatment.Deceased
+            | Deceased -> point.StatePerTreatment.Deceased |> Utils.zeroToNone
             | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate
 
     let allSeries = [
@@ -140,9 +140,9 @@ let renderChartOptions state dispatch =
                     visible = metric.Type = state.MetricType && metric.Visible
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
-                    //marker = if state.MetricType = Today then pojo {| enabled = true; radius = 2 |} else pojo {| enabled = false |}
-                    //lineWidth = if state.MetricType = Today then 0 else 3
-                    //states = if state.MetricType = Today then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
+                    marker = if metric.Metric = Deceased then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
+                    lineWidth = if metric.Metric = Deceased then 0 else 3
+                    states = if metric.Metric = Deceased then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
                     dashStyle = 
                         match state.MetricType with
                         | Active -> "Solid" 
