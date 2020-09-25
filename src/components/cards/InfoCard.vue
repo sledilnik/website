@@ -3,12 +3,12 @@
     <div class="hp-card" v-if="loaded">
       <span class="card-title">{{ title }}</span>
       <div class="card-wrapper">
-        <span class="card-number">
-          {{ renderValues.lastDay.value }}
-          <span class="card-percentage-diff" :class="diffClass"
-            >{{ renderValues.lastDay.percentDiff | prefixDiff }}%
-          </span>
-        </span>
+        <div class="card-number">
+          <span>{{ renderValues.lastDay.value }}</span>
+          <span class="card-percentage-diff" :class="diffClass">{{
+            renderValues.lastDay.percentDiff | prefixDiff 
+          }}%</span>
+        </div>
         <div :id="field" class="card-diff">
           <span v-if="showAbsolute">
             <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -205,21 +205,7 @@ export default {
 
 <style scoped lang="scss">
 .hp-card-holder {
-  flex: 0 0 100%;
-  padding: 0 15px 15px;
-
-  @media only screen and (min-width: 400px) {
-    flex: 0 0 calc(100% / 2);
-    padding: 0 15px 30px;
-  }
-
-  @media only screen and (min-width: 768px) {
-    flex: 0 0 calc(100% / 3);
-  }
-
-  @media only screen and (min-width: 1135px) {
-    flex: 0 0 20%;
-  }
+  flex: 1;
 }
 
 .hp-card {
@@ -255,20 +241,22 @@ export default {
 }
 
 .card-number {
-  display: block;
   font-size: 32px;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .card-percentage-diff {
   display: inline-block;
   font-size: 14px;
   font-weight: normal;
+  margin-left: 7px;
 }
 
 .card-diff {
   font-size: 14px;
   margin-bottom: 0.7rem;
+  white-space: nowrap;
 
   > *:not(:last-child) {
     margin-right: 8px;
