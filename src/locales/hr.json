@@ -553,6 +553,13 @@
             "legendTitle": "Aktivni slučajevi na milijun stanovnika",
             "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
             "title": "Države: Aktivni slučajevi na milijun stanovnika"
+        },
+        "dailyComparison": {
+            "positivePct": "Udio pozitivnih testova (%)",
+            "tests": "Provedeni testovi",
+            "active": "Aktivni slučajevi",
+            "new": "Potvrđeni slučajevi",
+            "title": "Usporedba prema danu u tjednu"
         }
     },
     "shortMonth": {
@@ -836,7 +843,7 @@
         "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
-        "day": "{{ date, D. M. }}",
+        "day": "{{ date, %d. %m. }}",
         "tabByRegion": "Po regijama",
         "title": "Tablica",
         "tabByAgeFemale": "Po dobi – žene",
