@@ -301,7 +301,7 @@ let seriesData (state : State) =
                             |> System.Math.Round |> int
                         let dlabel, value =
                             match state.DisplayType with
-                            | AbsoluteValues                 -> ((Some absolute)), absolute
+                            | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
                             | RegionPopulationWeightedValues -> (Some (weighted |> int)), weighted
                         let scaled =
                             match value with
