@@ -296,13 +296,14 @@
             "hospitalized": "Hospitalisiert",
             "doublingRateTitle": "Exponentielle Wachstumsrate [in Tagen]",
             "absolute": "Tägliches Wachstum absolut",
-            "ifExpGrowth": "Wenn sich die Infektion exponentiell ausbreiten würde mit einer Verdopplung bei 7, dann könnte man folgendes erwarten:",
+            "ifExpGrowth": "Wenn sich die Infektion exponentiell ausbreiten würde mit einer Verdopplung innerhalb von 7 Tagen, dann könnte man folgendes erwarten:",
             "inOneWeek": "In einer Woche",
             "inThreeWeeks": "In drei Wochen",
             "inTwoWeeks": "In zwei Wochen",
             "relativeLabel": "Relatives Wachstum in %",
             "timesAsMany": "- mal mehr",
-            "averageSouthKorea": "Durchschnitt in Südkorea in den vergangenen Tagen"
+            "averageSouthKorea": "Durchschnitt in Südkorea in den vergangenen Tagen",
+            "activeCases": "aktive Fälle"
         },
         "municipalities": {
             "doubles": "Verdopplung ",
@@ -399,7 +400,8 @@
             "from": " ",
             "dataSource": "Datenquelle",
             "yAxis": "Y-Achse:",
-            "loading": "Daten werden geladen …"
+            "loading": "Daten werden geladen …",
+            "sortBy": "Sortieren nach:"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -539,9 +541,9 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
-            "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
-            "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
+            "legendTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Neue Fälle pro 1 Million Menschen",
@@ -553,6 +555,29 @@
         },
         "rmap": {
             "title": "Regionalkarte"
+        },
+        "countriesDeathsPerCases": {
+            "legendTitle": "Gesamtzahl der Todesfälle pro Fall",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro Fall",
+            "title": "Länder: Gesamtzahl der Todesfälle pro Fall",
+            "chronologically": "Chronologisch",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "sinceOneDeathPerMillion": "Seit erstem Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem erstem Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "Kriterien für die rote Liste",
+            "legendTitle": "Aktive Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Aktive Fälle pro 1 Million Menschen",
+            "title": "Länder: Aktive Fälle pro 1 Million Menschen"
+        },
+        "dailyComparison": {
+            "positivePct": "Anteil der positiven Tests (%)",
+            "tests": "Durchgeführte Tests",
+            "active": "Aktive Fälle",
+            "new": "Bestätigte Fälle",
+            "title": "Vergleich nach Wochentag"
         }
     },
     "tableDict": {
@@ -728,6 +753,14 @@
         "app": {
             "description": "Die App #OstaniZdrav, veröffentlicht für Android",
             "title": "#OstaniZdrav"
+        },
+        "masks": {
+            "description": "Gesichtsmasken sind in allen öffentlichen Innenräumen und im Freien erforderlich, wenn die Entfernung weniger als 2 m beträgt.<br>Restaurants sind nur bis 22:30 Uhr geöffnet.",
+            "title": "Masken"
+        },
+        "quarantine10days": {
+            "description": "Obligatorische Quarantäne von 10 Tagen reduziert",
+            "title": "10 Tage"
         }
     },
     "region": {
