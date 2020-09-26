@@ -67,21 +67,21 @@ module Metrics  =
         { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
-        { Metric=HospitalIn;            Color="#be7A2a"; Visible=false; Type=Today;  Id="hospitalAdmitted" }
+        { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#20b16d"; Visible=false; Type=Today;  Id="hospitalDischarged" }
-        { Metric=ICUIn;                 Color="#d96756"; Visible=false; Type=Today;  Id="icuAdmitted" }
-        { Metric=ICUOut;                Color="#d99a91"; Visible=false; Type=Today;  Id="icuDischarged" }
-        { Metric=VentilatorIn;          Color="#bf5747"; Visible=false; Type=Today;  Id="ventilatorAdmitted" }
-        { Metric=VentilatorOut;         Color="#bf5747"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
+        { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" } 
+        { Metric=ICUOut;                Color="#ffb4a2"; Visible=false; Type=Today;  Id="icuDischarged" }
+        { Metric=VentilatorIn;          Color="#bf5747"; Visible=true;  Type=Today;  Id="ventilatorAdmitted" }
+        { Metric=VentilatorOut;         Color="#d99a91"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
         { Metric=DeceasedToday;         Color="#000000"; Visible=true;  Type=Today;  Id="deceased" }
         { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
-        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=false; Type=ToDate; Id="hospitalAdmitted" }
+        { Metric=RecoveredToDate;       Color="#8cd4b2"; Visible=true;  Type=ToDate; Id="recovered" }
+        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#20b16d"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#d96756"; Visible=false; Type=ToDate; Id="icuAdmitted" }
         { Metric=VentilatorToDate;      Color="#d96756"; Visible=false; Type=ToDate; Id="ventilatorAdmitted" }
         { Metric=DeceasedToDate;        Color="#000000"; Visible=true;  Type=ToDate; Id="deceased" }
-        { Metric=RecoveredToDate;       Color="#8cd4b2"; Visible=true;  Type=ToDate; Id="recovered" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
