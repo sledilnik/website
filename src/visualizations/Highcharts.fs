@@ -362,8 +362,8 @@ let basicChartOptions
                 text =
                     sprintf "%s: %s, %s"
                         (I18N.t "charts.common.dataSource")
-                        (I18N.t "charts.common.dsNIJZ")
-                        (I18N.t "charts.common.dsMZ")
+                        (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+                        (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
                 href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
             |}
     |}
