@@ -131,10 +131,14 @@ export default {
 .cards-wrapper
   display: flex
   flex-wrap: wrap
-  margin: 0px -15px 58px
+  display: grid
+  grid-gap: 15px
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)
-    margin: 0px auto 58px
+    grid-gap: 30px
+    margin: 0px 15px 58px
 
 $loader-width: 50px
 

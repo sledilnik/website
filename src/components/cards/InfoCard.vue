@@ -206,10 +206,10 @@ export default {
 <style scoped lang="scss">
 .hp-card-holder {
   flex: 1;
-  padding: 0 15px 15px;
+  // padding: 0 15px 15px;
 
   @media only screen and (min-width: 768px) {	
-    padding: 0 15px 30px;	
+    // padding: 0 15px 30px;	
   }
 }
 
