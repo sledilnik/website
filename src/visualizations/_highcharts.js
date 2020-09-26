@@ -267,5 +267,6 @@ export {
     loadScript,
     renderChart,
     renderChartFromWindow,
-    renderMap
+    renderMap,
+    Highcharts
 }

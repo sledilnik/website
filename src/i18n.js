@@ -9,7 +9,7 @@ import de from './locales/de.json'
 import it from './locales/it.json'
 
 
-import Highcharts from 'highcharts'
+import {Highcharts} from './visualizations/_highcharts'
 
 Vue.use(VueI18Next)
 
