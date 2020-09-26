@@ -185,7 +185,7 @@ let renderChartOptions state dispatch =
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
                     marker = if metric.Metric = DeceasedToday then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
-                    lineWidth = if metric.Metric = DeceasedToday then 0 else 3
+                    lineWidth = if metric.Metric = DeceasedToday then 0 else 2
                     states = if metric.Metric = DeceasedToday then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
                     dashStyle = 
                         match state.MetricType with
