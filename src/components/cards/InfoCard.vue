@@ -209,8 +209,8 @@ export default {
 .hp-card {
   display: flex;
   flex-direction: column;
-  display: grid;
-  grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
+  // display: grid;
+  // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
   min-height: 196px;
   height: 100%;
   padding: 18px;
