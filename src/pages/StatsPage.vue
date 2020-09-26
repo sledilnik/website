@@ -7,7 +7,7 @@
           <Notice />
         </b-col>
       </b-row>
-      <div class="cards-wrapper latest-data-boxes">
+      <div class="cards-wrapper">
 <!--  
         <Info-card
           :title="$t('infocard.tests')"
@@ -127,4 +127,82 @@ export default {
 }
 </script>
 
-<style lang="sass"></style>
+<style lang="sass">
+.cards-wrapper
+  display: flex
+  flex-wrap: wrap
+  display: grid
+  gap: 15px
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  margin: 0px auto 58px
+
+  @media only screen and (min-width: 768px)
+    gap: 30px
+    margin: 0px 15px 58px
+
+$loader-width: 50px
+
+.stats-page
+  margin-top: 48px
+  position: relative
+
+  &.loaded
+    section
+      &::before,
+      &::after
+        display: none
+
+  section
+    position: relative
+
+    &::before,
+    &::after
+      content: ""
+      z-index: 90
+      display: block
+      position: absolute
+      top: calc(50% - 25px)
+      left: calc(50% - 25px)
+      width: $loader-width
+      height: $loader-width
+      background-size: cover
+
+    &::after
+      background-image: url(../assets/svg/covid-animation-1.svg)
+
+      animation: rotate1 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate1
+        0%
+          transform: rotate(0deg) scale(1)
+        12.5%
+          transform: rotate(45deg) scale(1.3)
+        25%
+          transform: rotate(90deg) scale(1)
+        37.5%
+          transform: rotate(135deg) scale(1.3)
+        50%
+          transform: rotate(180deg) scale(1)
+        62.5%
+          transform: rotate(225deg) scale(1.3)
+        75%
+          transform: rotate(270deg) scale(1)
+        87.5%
+          transform: rotate(315deg) scale(1.3)
+        100%
+          transform: rotate(360deg) scale(1)
+
+    &::before
+      background-image: url(../assets/svg/covid-animation-2.svg)
+      animation: rotate2 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate2
+        0%
+          transform: rotate(0deg) scale(1)
+        50%
+          transform: rotate(-180deg) scale(1)
+        100%
+          transform: rotate(-360deg) scale(1)
+</style>
