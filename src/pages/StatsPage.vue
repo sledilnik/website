@@ -132,12 +132,12 @@ export default {
   display: flex
   flex-wrap: wrap
   display: grid
-  grid-gap: 15px
+  gap: 15px
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)
-    grid-gap: 30px
+    gap: 30px
     margin: 0px 15px 58px
 
 $loader-width: 50px
