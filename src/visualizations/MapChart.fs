@@ -267,7 +267,7 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let abs, value, label =
+            let dlabel, value, label =
                 match areaData.Cases with
                 | None -> None, 0., (renderLabel areaData.Population 0 0)
                 | Some totalCases ->
@@ -299,16 +299,16 @@ let seriesData (state : State) =
                         let weighted =
                             float absolute * 1000000. / float areaData.Population
                             |> System.Math.Round |> int
-                        let value =
+                        let dlabel, value =
                             match state.DisplayType with
-                            | AbsoluteValues                 -> absolute
-                            | RegionPopulationWeightedValues -> weighted
+                            | AbsoluteValues                 -> ((Some absolute)), absolute
+                            | RegionPopulationWeightedValues -> (Some (weighted |> int)), weighted
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        ((Some absolute) |> Utils.zeroToNone), scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; abs = abs; dataLabels = {| enabled = true; format = "{point.abs}" |} |}
+                        dlabel, scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
+            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; dlabel = dlabel; dataLabels = {| enabled = true; format = "{point.dlabel}" |} |}
     } |> Seq.toArray
 
 
