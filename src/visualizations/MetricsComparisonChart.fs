@@ -254,7 +254,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ Today; Active; ToDate ]
+        [ Active; Today; ToDate ]
         |> List.map renderMetricTypeSelector
 
     Html.div [
