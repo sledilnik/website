@@ -267,9 +267,9 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let value, label =
+            let abs, value, label =
                 match areaData.Cases with
-                | None -> 0., (renderLabel areaData.Population 0 0)
+                | None -> None, 0., (renderLabel areaData.Population 0 0)
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -293,7 +293,7 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> 0., (renderLabel areaData.Population 0 0)
+                    | None -> None, 0., (renderLabel areaData.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
                         let weighted =
@@ -307,8 +307,8 @@ let seriesData (state : State) =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label |}
+                        ((Some absolute) |> Utils.zeroToNone), scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
+            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; abs = abs; dataLabels = {| enabled = true; format = "{point.abs}" |} |}
     } |> Seq.toArray
 
 
