@@ -23,23 +23,30 @@ type MetricType =
         | ToDate -> I18N.t "charts.metricsComparison.showToDate"
 
 type Metric =
-    | PerformedTests
+    | PerformedTestsToday
     | PerformedTestsToDate
     | ConfirmedCasesToday
     | ConfirmedCasesToDate
     | ActiveCases
     | RecoveredToDate
-    | InHospital
-    | InHospitalToDate
-    | InICU
-    | OnVentilator
-    | OutOfHospital
-    | OutOfHospitalToDate
-    | Deceased
+    | HospitalIn
+    | HospitalOut
+    | HospitalToday
+    | HospitalToDate
+    | HospitalOutToDate
+    | ICUIn 
+    | ICUOut
+    | ICUToday
+    | ICUToDate
+    | VentilatorIn
+    | VentilatorOut
+    | VentilatorToday
+    | VentilatorToDate
+    | DeceasedToday
     | DeceasedToDate
     with
         static member UseStatsData metric =
-            [PerformedTests; PerformedTestsToDate; ConfirmedCasesToday; ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
+            [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday; ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
             |> List.contains metric 
 
 type MetricCfg = {
@@ -54,19 +61,27 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric=ActiveCases;          Color="#dba51d"; Visible=true;  Type=Active; Id="activeCases" }
-        { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Type=Active; Id="hospitalized" }
-        { Metric=InICU;                Color="#d96756"; Visible=true;  Type=Active; Id="icu" }
-        { Metric=OnVentilator;         Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
-        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
-        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
-        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Type=Today;  Id="hospitalDischarged" }
-        { Metric=Deceased;             Color="#000000"; Visible=true;  Type=Today;  Id="deceased" }
-        { Metric=PerformedTestsToDate; Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
-        { Metric=ConfirmedCasesToDate; Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
-        { Metric=OutOfHospitalToDate;  Color="#20b16d"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
-        { Metric=DeceasedToDate;       Color="#000000"; Visible=true;  Type=ToDate; Id="deceased" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=true;  Type=ToDate; Id="recovered" }
+        { Metric=ActiveCases;           Color="#dba51d"; Visible=true;  Type=Active; Id="activeCases" }
+        { Metric=HospitalToday;         Color="#be7A2a"; Visible=true;  Type=Active; Id="hospitalized" }
+        { Metric=ICUToday;              Color="#d96756"; Visible=true;  Type=Active; Id="icu" }
+        { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
+        { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
+        { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
+        { Metric=HospitalIn;            Color="#be7A2a"; Visible=false; Type=Today;  Id="hospitalAdmitted" }
+        { Metric=HospitalOut;           Color="#20b16d"; Visible=false; Type=Today;  Id="hospitalDischarged" }
+        { Metric=ICUIn;                 Color="#d96756"; Visible=false; Type=Today;  Id="icuAdmitted" }
+        { Metric=ICUOut;                Color="#d99a91"; Visible=false; Type=Today;  Id="icuDischarged" }
+        { Metric=VentilatorIn;          Color="#bf5747"; Visible=false; Type=Today;  Id="ventilatorAdmitted" }
+        { Metric=VentilatorOut;         Color="#bf5747"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
+        { Metric=DeceasedToday;         Color="#000000"; Visible=true;  Type=Today;  Id="deceased" }
+        { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
+        { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
+        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=false; Type=ToDate; Id="hospitalAdmitted" }
+        { Metric=HospitalOutToDate;     Color="#20b16d"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
+        { Metric=ICUToDate;             Color="#d96756"; Visible=false; Type=ToDate; Id="icuAdmitted" }
+        { Metric=VentilatorToDate;      Color="#d96756"; Visible=false; Type=ToDate; Id="ventilatorAdmitted" }
+        { Metric=DeceasedToDate;        Color="#000000"; Visible=true;  Type=ToDate; Id="deceased" }
+        { Metric=RecoveredToDate;       Color="#8cd4b2"; Visible=true;  Type=ToDate; Id="recovered" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -131,7 +146,7 @@ let renderChartOptions state dispatch =
     let statsDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | PerformedTests -> point.Tests.Performed.Today
+            | PerformedTestsToday -> point.Tests.Performed.Today
             | PerformedTestsToDate -> point.Tests.Performed.ToDate
             | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
@@ -142,13 +157,20 @@ let renderChartOptions state dispatch =
     let patientsDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | InHospital -> point.total.inHospital.today
-            | InHospitalToDate -> point.total.inHospital.toDate
-            | InICU -> point.total.icu.today
-            | OnVentilator -> point.total.critical.today
-            | OutOfHospital -> point.total.inHospital.out
-            | OutOfHospitalToDate -> point.total.outOfHospital.toDate
-            | Deceased -> point.total.deceased.today |> Utils.zeroToNone
+            | HospitalToday -> point.total.inHospital.today
+            | HospitalIn -> point.total.inHospital.``in``
+            | HospitalOut -> point.total.inHospital.out
+            | HospitalToDate -> point.total.inHospital.toDate
+            | HospitalOutToDate -> point.total.outOfHospital.toDate
+            | ICUToday -> point.total.icu.today
+            | ICUIn -> point.total.icu.``in``
+            | ICUOut -> point.total.icu.out
+            | ICUToDate -> point.total.icu.toDate
+            | VentilatorToday -> point.total.critical.today
+            | VentilatorIn -> point.total.critical.``in``
+            | VentilatorOut -> point.total.critical.out
+            | VentilatorToDate -> point.total.critical.toDate
+            | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
             | DeceasedToDate -> point.total.deceased.toDate
             | _ -> None
 
@@ -162,9 +184,9 @@ let renderChartOptions state dispatch =
                     visible = metric.Type = state.MetricType && metric.Visible
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
-                    marker = if metric.Metric = Deceased then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
-                    lineWidth = if metric.Metric = Deceased then 0 else 3
-                    states = if metric.Metric = Deceased then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
+                    marker = if metric.Metric = DeceasedToday then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
+                    lineWidth = if metric.Metric = DeceasedToday then 0 else 3
+                    states = if metric.Metric = DeceasedToday then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
                     dashStyle = 
                         match state.MetricType with
                         | Active -> "Solid" 

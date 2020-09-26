@@ -598,10 +598,14 @@
             "activeCases": "Aktivni primeri",
             "recovered": "Preboleli",
             "hospitalized": "Hospitalizirani",
-            "icu": "V intenzivni enoti",
-            "ventilator": "Na respiratorju",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icu": "V intenzivni enoti",
+            "icuAdmitted": "Sprejeti v intenzivno",
+            "icuDischarged": "Odpuščeni iz intenzivne",
+            "ventilator": "Na respiratorju",
+            "ventilatorAdmitted": "Priklopljeni na respirator",
+            "ventilatorDischarged": "Odklopljeni od respiratorja",
             "deceased": "Umrli"
         },
         "dailyComparison": {
