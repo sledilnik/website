@@ -12,7 +12,7 @@ let dropdown (viz: Visualization) =
         // TODO: needs refactoring eventually because we're just duplicating code from EmbedMakerPage.vue
         let (width, height) =
             match viz.VisualizationType with
-            | MetricsComparison -> (1140, 780)
+            | MetricsComparison -> (1140, 720)
             | DailyComparison -> (1140, 720)
             | Cases -> (1140, 630)
             | Patients -> (1140, 720)
