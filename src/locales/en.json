@@ -323,8 +323,8 @@
             "countryStatus": "Restrictions",
             "statusNone": "-",
             "statusGreen": "no restrictions",
-            "statusOrange": "10 day quarantine with exceptions",
-            "statusRed": "strict 10 day quarantine",
+            "statusOrange": "negative test or 10 day quarantine with exceptions",
+            "statusRed": "negative test or strict 10 day quarantine",
             "noData": "No data"
         },
         "world": {
@@ -605,6 +605,10 @@
         "masks": {
             "title": "Masks",
             "description": "Face masks required in all indoor public places and outside when distance less than 2m.<br>Restaurants open only until 22:30."
+        },
+        "testOrQuarantine": {
+            "title": "Test",
+            "description": "Negative test or 10-day quarantine on entrance from countries in red or orange list"
         }
     },
     "days": {

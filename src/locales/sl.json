@@ -517,6 +517,10 @@
         "masks": {
             "title": "Maske",
             "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22:30."
+        },
+        "testOrQuarantine": {
+            "title": "Test",
+            "description": "Negativen test ali 10-dnevna karantena ob vstopu iz držav na rdečem ali oranžnem seznamu"
         }
     },
     "phase": {
@@ -768,8 +772,8 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusOrange": "10-dnevna karantena z izjemami",
-            "statusRed": "obvezna 10-dnevna karantena",
+            "statusOrange": "negativen test ali 10-dnevna karantena z izjemami",
+            "statusRed": "negativen test ali obvezna 10-dnevna karantena",
             "noData": "Ni podatkov"
         },
         "world": {
