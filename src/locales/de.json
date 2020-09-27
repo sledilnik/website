@@ -411,7 +411,7 @@
             "twoWeekIncidence": "14-tägige Fälle pro 1 M",
             "statusNone": "–",
             "statusRed": "strikte 10-tägige Quarantäne",
-            "statusYellow": "10-tägige Quarantäne mit Ausnahmen",
+            "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
             "incidence1M": "Neue Fälle in 14 Tagen pro 1 M",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",

@@ -330,7 +330,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             then I18N.t "charts.europe.statusRed", "#FF5348", red |> Option.defaultValue ""
             else if green.IsSome
             then I18N.t "charts.europe.statusGreen", "#C4DE6F", green |> Option.defaultValue ""
-            else I18N.t "charts.europe.statusYellow", "#FEF65C", ""
+            else I18N.t "charts.europe.statusOrange", "#FFC65A", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)

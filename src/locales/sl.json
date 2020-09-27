@@ -768,7 +768,7 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusYellow": "10-dnevna karantena z izjemami",
+            "statusOrange": "10-dnevna karantena z izjemami",
             "statusRed": "obvezna 10-dnevna karantena",
             "noData": "Ni podatkov"
         },

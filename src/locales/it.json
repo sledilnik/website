@@ -782,7 +782,7 @@
         "europe": {
             "noData": "Nessun dato",
             "statusRed": "quarantena rigorosa di 10 giorni",
-            "statusYellow": "Quarantena di 10 giorni con eccezioni",
+            "statusOrange": "Quarantena di 10 giorni con eccezioni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
             "countryStatus": "Restrizioni",

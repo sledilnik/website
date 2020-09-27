@@ -520,7 +520,7 @@
         },
         "europe": {
             "statusRed": "stroga 10-dnevna karantena",
-            "statusYellow": "10-dnevna karantena s iznimkama",
+            "statusOrange": "10-dnevna karantena s iznimkama",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
             "countryStatus": "Ograničenja",
