@@ -323,8 +323,8 @@
             "countryStatus": "Restrictions",
             "statusNone": "-",
             "statusGreen": "no restrictions",
-            "statusYellow": "14 day quarantine with exceptions",
-            "statusRed": "strict 14 day quarantine",
+            "statusYellow": "10 day quarantine with exceptions",
+            "statusRed": "strict 10 day quarantine",
             "noData": "No data"
         },
         "world": {

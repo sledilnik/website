@@ -519,8 +519,8 @@
             "hospitalized": "Hospitalizirani"
         },
         "europe": {
-            "statusRed": "stroga 14-dnevna karantena",
-            "statusYellow": "14-dnevna karantena s iznimkama",
+            "statusRed": "stroga 10-dnevna karantena",
+            "statusYellow": "10-dnevna karantena s iznimkama",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
             "countryStatus": "Ograničenja",
