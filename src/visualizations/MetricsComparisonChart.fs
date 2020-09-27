@@ -10,27 +10,50 @@ open Browser
 open Highcharts
 open Types
 
+open Data.Patients
+
+type MetricType =
+    | Active
+    | Today
+    | ToDate
+  with
+    static member getName = function
+        | Active -> I18N.t "charts.metricsComparison.showActive"
+        | Today -> I18N.t "charts.metricsComparison.showToday"
+        | ToDate -> I18N.t "charts.metricsComparison.showToDate"
+
 type Metric =
-    | PerformedTests
+    | PerformedTestsToday
     | PerformedTestsToDate
     | ConfirmedCasesToday
     | ConfirmedCasesToDate
     | ActiveCases
     | RecoveredToDate
-    | InHospital
-    | InHospitalToDate
-    | InICU
-    | OnVentilator
-    | OutOfHospital
-    | OutOfHospitalToDate
-    | Deceased
+    | HospitalIn
+    | HospitalOut
+    | HospitalToday
+    | HospitalToDate
+    | HospitalOutToDate
+    | ICUIn 
+    | ICUOut
+    | ICUToday
+    | ICUToDate
+    | VentilatorIn
+    | VentilatorOut
+    | VentilatorToday
+    | VentilatorToDate
+    | DeceasedToday
     | DeceasedToDate
+    with
+        static member UseStatsData metric =
+            [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday; ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
+            |> List.contains metric 
 
 type MetricCfg = {
     Metric: Metric
     Color : string
     Visible : bool
-    Line : Highcharts.DashStyle
+    Type : MetricType
     Id: string
 }
 
@@ -38,49 +61,72 @@ type Metrics = MetricCfg list
 
 module Metrics  =
     let initial = [
-        { Metric=PerformedTests;       Color="#19aebd"; Visible=false; Line=Solid;  Id="tests" }
-        { Metric=PerformedTestsToDate; Color="#73ccd5"; Visible=false; Line=Dot;    Id="testsToDate" }
-        { Metric=ConfirmedCasesToday;  Color="#bda506"; Visible=true;  Line=Solid;  Id="confirmed" }
-        { Metric=ConfirmedCasesToDate; Color="#d5c768"; Visible=false; Line=Dot;    Id="confirmedToDate" }
-        { Metric=ActiveCases;          Color="#dba51d"; Visible=true;  Line=Dash;   Id="active" }
-        { Metric=RecoveredToDate;      Color="#8cd4b2"; Visible=false; Line=Dash;   Id="recovered" }
-        { Metric=InHospitalToDate;     Color="#de9a5a"; Visible=false; Line=Dot;    Id="hospitalizedToDate" }
-        { Metric=InHospital;           Color="#be7A2a"; Visible=true;  Line=Solid;  Id="hospitalized" }
-        { Metric=InICU;                Color="#d96756"; Visible=false; Line=Solid;  Id="icu" }
-        { Metric=OnVentilator;         Color="#bf5747"; Visible=false; Line=Solid;  Id="ventilator" }
-        { Metric=OutOfHospital;        Color="#20b16d"; Visible=false; Line=Solid;  Id="discharged" }
-        { Metric=OutOfHospitalToDate;  Color="#57c491"; Visible=false; Line=Dot;    Id="dischargedToDate" }
-        { Metric=Deceased;             Color="#000000"; Visible=false; Line=Solid;  Id="deceased" }
-        { Metric=DeceasedToDate;       Color="#666666"; Visible=false; Line=Dot;    Id="deceasedToDate" }
+        { Metric=ActiveCases;           Color="#dba51d"; Visible=true;  Type=Active; Id="activeCases" }
+        { Metric=HospitalToday;         Color="#be7A2a"; Visible=true;  Type=Active; Id="hospitalized" }
+        { Metric=ICUToday;              Color="#d96756"; Visible=true;  Type=Active; Id="icu" }
+        { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
+        { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
+        { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
+        { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
+        { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
+        { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" } 
+        { Metric=ICUOut;                Color="#ffb4a2"; Visible=false; Type=Today;  Id="icuDischarged" }
+        { Metric=VentilatorIn;          Color="#bf5747"; Visible=true;  Type=Today;  Id="ventilatorAdmitted" }
+        { Metric=VentilatorOut;         Color="#d99a91"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
+        { Metric=DeceasedToday;         Color="#000000"; Visible=true;  Type=Today;  Id="deceased" }
+        { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
+        { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
+        { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
+        { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
+        { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
+        { Metric=ICUToDate;             Color="#d96756"; Visible=false; Type=ToDate; Id="icuAdmitted" }
+        { Metric=VentilatorToDate;      Color="#d96756"; Visible=false; Type=ToDate; Id="ventilatorAdmitted" }
+        { Metric=DeceasedToDate;        Color="#000000"; Visible=true;  Type=ToDate; Id="deceased" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
-
+        
 type State =
     { ScaleType : ScaleType
-      Data : StatsData
+      MetricType : MetricType
       Metrics : Metrics
+      StatsData : StatsData
+      PatientsData : PatientsStats []
+      Error : string option
       RangeSelectionButtonIndex: int
     }
 
 type Msg =
+    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumeServerError of exn
     | ToggleMetricVisible of Metric
     | ScaleTypeChanged of ScaleType
+    | MetricTypeChanged of MetricType
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
+    let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
-        Data = data
+        MetricType = Active
         Metrics = Metrics.initial
+        StatsData = data
+        PatientsData = [||]
+        Error = None
         RangeSelectionButtonIndex = 0
     }
-    state, Cmd.none
+    state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | ConsumePatientsData (Ok data) ->
+        { state with PatientsData = data; }, Cmd.none
+    | ConsumePatientsData (Error err) ->
+        { state with Error = Some err }, Cmd.none
+    | ConsumeServerError ex ->
+        { state with Error = Some ex.Message }, Cmd.none
     | ToggleMetricVisible metric ->
         { state with
             Metrics = state.Metrics
@@ -88,48 +134,82 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
+    | MetricTypeChanged metricType ->
+        { state with 
+            MetricType = metricType 
+            }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let renderChartOptions state dispatch =
-    let xAxisPoint (dp: StatsDataPoint) = dp.Date
 
-    let metricDataGenerator mc =
+    let statsDataGenerator mc =
         fun point ->
             match mc.Metric with
-            | PerformedTests -> point.Tests.Performed.Today
+            | PerformedTestsToday -> point.Tests.Performed.Today
             | PerformedTestsToDate -> point.Tests.Performed.ToDate
             | ConfirmedCasesToday -> point.Cases.ConfirmedToday
             | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
             | ActiveCases -> point.Cases.Active
             | RecoveredToDate -> point.Cases.RecoveredToDate
-            | InHospital -> point.StatePerTreatment.InHospital
-            | InHospitalToDate -> point.StatePerTreatment.InHospitalToDate
-            | InICU -> point.StatePerTreatment.InICU
-            | OnVentilator -> point.StatePerTreatment.Critical
-            | OutOfHospital -> point.StatePerTreatment.OutOfHospital
-            | OutOfHospitalToDate -> point.StatePerTreatment.OutOfHospitalToDate
-            | Deceased -> point.StatePerTreatment.Deceased
-            | DeceasedToDate -> point.StatePerTreatment.DeceasedToDate
+            | _ -> None
+
+    let patientsDataGenerator mc =
+        fun point ->
+            match mc.Metric with
+            | HospitalToday -> point.total.inHospital.today
+            | HospitalIn -> point.total.inHospital.``in``
+            | HospitalOut -> point.total.inHospital.out
+            | HospitalToDate -> point.total.inHospital.toDate
+            | HospitalOutToDate -> point.total.outOfHospital.toDate
+            | ICUToday -> point.total.icu.today
+            | ICUIn -> point.total.icu.``in``
+            | ICUOut -> point.total.icu.out
+            | ICUToDate -> point.total.icu.toDate
+            | VentilatorToday -> point.total.critical.today
+            | VentilatorIn -> point.total.critical.``in``
+            | VentilatorOut -> point.total.critical.out
+            | VentilatorToDate -> point.total.critical.toDate
+            | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
+            | DeceasedToDate -> point.total.deceased.toDate
+            | _ -> None
 
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
         for metric in state.Metrics do
-            let pointData = metricDataGenerator metric
+            let statsData = statsDataGenerator metric
+            let patientsData = patientsDataGenerator metric
             yield pojo
                 {|
-                    visible = metric.Visible
+                    visible = metric.Type = state.MetricType && metric.Visible
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
-                    dashStyle = metric.Line |> DashStyle.toString
+                    marker = if metric.Metric = DeceasedToday then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
+                    lineWidth = if metric.Metric = DeceasedToday then 0 else 2
+                    states = if metric.Metric = DeceasedToday then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
+                    dashStyle = 
+                        match state.MetricType with
+                        | Active -> "Solid" 
+                        | Today -> "ShortDot"
+                        | ToDate -> "Dot"
                     data =
-                        state.Data
-                        |> Seq.map (fun dp -> (xAxisPoint dp |> jsTime12h, pointData dp))
-                        |> Seq.skipWhile (fun (ts,value) ->
-                            if metric.Visible && value.IsSome then
-                                startTime <- min startTime ts
-                            value.IsNone)
-                        |> Seq.toArray
+                        if Metric.UseStatsData metric.Metric 
+                        then
+                            state.StatsData
+                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, statsData dp))
+                            |> Seq.skipWhile (fun (ts,value) ->
+                                if metric.Type = state.MetricType && metric.Visible && value.IsSome then
+                                    startTime <- min startTime ts
+                                value.IsNone)
+                            |> Seq.toArray
+                        else
+                            state.PatientsData
+                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, patientsData dp))
+                            |> Seq.skipWhile (fun (ts,value) ->
+                                if metric.Type = state.MetricType && metric.Visible && value.IsSome then
+                                    startTime <- min startTime ts
+                                value.IsNone)
+                            |> Seq.toArray
                 |}
         yield addContainmentMeasuresFlags startTime None |> pojo
     ]
@@ -174,23 +254,49 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
         prop.style style
         prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
 
-let renderMetricsSelectors metrics dispatch =
+let renderMetricsSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children [
-            for mc in metrics do
-                yield renderMetricSelector mc dispatch
+            for mc in state.Metrics do
+                if mc.Type = state.MetricType 
+                then yield renderMetricSelector mc dispatch
         ]
     ]
 
-let render state dispatch =
+let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
+    let renderMetricTypeSelector (typeSelector: MetricType) =
+        let active = typeSelector = activeMetricType
+        Html.div [
+            prop.onClick (fun _ -> dispatch typeSelector)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text (typeSelector |> MetricType.getName)
+        ]
+
+    let metricTypesSelectors =
+        [ Active; Today; ToDate ]
+        |> List.map renderMetricTypeSelector
+
     Html.div [
-        Utils.renderChartTopControlRight
-            (Utils.renderScaleSelector
-                state.ScaleType (ScaleTypeChanged >> dispatch))
-        renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics dispatch
+        prop.className "chart-display-property-selector"
+        prop.children ((Html.text (I18N.t "charts.common.view")) :: metricTypesSelectors)
     ]
+
+let render state dispatch =
+    match state.PatientsData, state.Error with
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, None ->
+        Html.div [
+            Utils.renderChartTopControls [
+                renderMetricTypeSelectors state.MetricType (MetricTypeChanged >> dispatch)
+                Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+            ]
+            renderChartContainer state dispatch
+            renderMetricsSelectors state dispatch
+        ]
 
 let metricsComparisonChart (props : {| data : StatsData |}) =
     React.elmishComponent("MetricsComparisonChart", init props.data, update, render)

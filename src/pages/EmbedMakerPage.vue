@@ -41,7 +41,7 @@ export default {
         "MetricsComparison": {
           value: "MetricsComparison",
           text: this.$t('charts.metricsComparison.title', { context: process.env.VUE_APP_LOCALE_CONTEXT } ),
-          dimensions: [1140, 780]
+          dimensions: [1140, 720]
         },
         "DailyComparison": {
           value: "DailyComparison",
