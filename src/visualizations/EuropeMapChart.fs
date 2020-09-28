@@ -34,6 +34,7 @@ type CountryData =
       // NIJZ data
       RestrictionColor: string
       RestrictionText: string
+      RestrictionAltText: string
       ImportedFrom: int
       ImportedDate: DateTime }
 
@@ -120,101 +121,154 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ ("AUT", "")
-          ("CYP", "")
-          ("EST", "")
-          ("FIN", "")
-          ("GEO", "")
-          ("ITA", "")
-          ("LVA", "")
-          ("LIE", "")
-          ("LTU", "")
-          ("HUN", "")
-          ("DEU", "")
-          ("NOR", "")
-          ("NZL", "")
-          ("RWA", "")
-          ("SMR", "")
-          ("SVK", "")
-          ("URY", "")
-          ("VAT", "")
-          ("GBR", "") ]
+        [ 
+            ("AUT", "")
+            ("CYP", "")
+            ("FIN", "")
+            ("KOR", "")
+            ("LVA", "")
+            ("LIE", "")
+            ("LTU", "")
+            ("NZL", "")
+            ("POL", "")
+            ("SRB", "")
+            ("URY", "")
+        ]
 
 let redCountries =
     Map.ofList
-        [ ("ALB", "")
-          ("AND", "")
-          ("ARG", "")
-          ("ARM", "")
-          ("AZE", "")
-          ("BAH", "")
-          ("BHR", "")
-          ("BEL", "")
-          ("BLZ", "")
-          ("BOL", "")
-          ("BIH", "")
-          ("BRA", "")
-          ("CHL", "")
-          ("MNE", "")
-          ("VIR", "")
-          ("DOM", "")
-          ("ECU", "")
-          ("GNQ", "")
-          ("SWZ", "")
-          ("FRO", "")
-          ("PHL", "")
-          ("GAB", "")
-          ("GMB", "")
-          ("GIB", "")
-          ("GTM", "")
-          ("GUM", "")
-          ("HND", "")
-          ("HRV", "")
-          ("IND", "")
-          ("IRQ", "")
-          ("IRN", "")
-          ("ISR", "")
-          ("ZAF", "")
-          ("QAT", "")
-          ("KAZ", "")
-          ("KGZ", "")
-          ("CHN", "")
-          ("COL", "")
-          ("XKX", "")
-          ("CRI", "")
-          ("KWT", "")
-          ("LBN", "")
-          ("LBY", "")
-          ("LUX", "")
-          ("MDV", "")
-          ("MLT", "")
-          ("MAR", "")
-          ("MEX", "")
-          ("MDA", "")
-          ("MCO", "")
-          ("NAM", "")
-          ("NLD", "")
-          ("OMN", "")
-          ("PAN", "")
-          ("PRY", "")
-          ("PER", "")
-          ("PRI", "")
-          ("ROU", "")
-          ("RUS", "")
-          ("SLV", "")
-          ("STP", "")
-          ("SAU", "")
-          ("MKD", "")
-          ("SGP", "")
-          ("MAF", "")
-          ("SUR", "")
-          ("ESP", "")
-          ("TCA", "")
-          ("VEN", "")
-          ("UKR", "")
-          ("CPV", "")
-          ("USA", "")
-          ("ARE", "") ]
+        [ 
+            ("AFG", "")
+            ("ALB", "")
+            ("DZA", "")
+            ("AND", "")
+            ("AGO", "")
+            ("ARG", "")
+            ("ARM", "")
+            ("AUT", "administrativne enote: Dunaj, Predarlska, Tirolska")
+            ("AZE", "")
+            ("BAH", "")
+            ("BHR", "")
+            ("BGD", "")
+            ("BEL", "administrativna enota: Bruselj")
+            ("BLZ", "")
+            ("BLR", "")
+            ("BEN", "")
+            ("BGR", "administrativna enota: Blagoevgrad")
+            ("BOL", "")
+            ("BIH", "")
+            ("BRA", "")
+            ("BFA", "")
+            ("BDI", "")
+            ("BTN", "")
+            ("TCD", "")
+            ("CZE", "")
+            ("CHL", "")
+            ("MNE", "")
+            ("DNK", "administrativna enota: Hovedstaden, regija glavnega mesta")
+            ("DOM", "")
+            ("EGY", "")
+            ("ECU", "")
+            ("GNQ", "")
+            ("ERI", "")
+            ("SWZ", "")
+            ("ETH", "")
+            ("PHL", "")
+            ("FRA", "administrativna enota: Auvergne-Rona-Alpe, Bretanja, Center-Val de Loire, Korzika, Hauts-de-France, Île-de-France, Normandija, Nova Akvitanija, Oksitanija, Provansa-Alpe-Azurna obala; čezmorsko ozemlje: Francoska Gvajana, Guadeloupe, Sveti Martin, La Réunion")
+            ("GAB", "")
+            ("GMB", "")
+            ("GHA", "")
+            ("GUY", "")
+            ("GTM", "")
+            ("GIN", "")
+            ("GNB", "")
+            ("HTI", "")
+            ("HND", "")
+            ("HRV", "administrativne enote: Brodsko-posavska, Dubrovniško-neretvanska, Liško-senjska, Požeško-slavonska, Šibensko-kninska, Splitsko-dalmatinska, Virovitiško-podravska, Zadarska")
+            ("IND", "")
+            ("IDN", "")
+            ("IRQ", "")
+            ("IRN", "")
+            ("IRL", "administrativna enota: Dublin")
+            ("ISR", "")
+            ("JAM", "")
+            ("YEM", "")
+            ("ZAF", "")
+            ("SSD", "")
+            ("CMR", "")
+            ("QAT", "")
+            ("KAZ", "")
+            ("KEN", "")
+            ("KGZ", "")
+            ("COL", "")
+            ("COM", "")
+            ("COG", "")
+            ("COD", "")
+            ("XKX", "")
+            ("CRI", "")
+            ("KWT", "")
+            ("LSO", "")
+            ("LBN", "")
+            ("LBR", "")
+            ("LBY", "")
+            ("LUX", "")
+            ("MDG", "")
+            ("HUN", "administrativne enote: Budimpešta, Győr-Moson-Sopron")
+            ("MWL", "")
+            ("MDV", "")
+            ("MLI", "")
+            ("MAR", "")
+            ("MRT", "")
+            ("MEX", "")
+            ("MDA", "")
+            ("MNG", "")
+            ("MOZ", "")
+            ("NAM", "")
+            ("NPL", "")
+            ("NIG", "")
+            ("NGA", "")
+            ("NIC", "")
+            ("NLD", "administrativna enote: Severna Nizozemska, Južna Nizozemska, Utrecht; čezmorsko ozemlje: Aruba, Saint Maarten")
+            ("OMN", "")
+            ("PAK", "")
+            ("PAN", "")
+            ("PNG", "")
+            ("PRY", "")
+            ("PER", "")
+            ("PRT", "administrativna enota: Lizbona")
+            ("ROU", "administrativne enote: Bacău, Bihor, Brăila, Brașov, Bukarešta, Caras Severin, Covasna, Neamt, Iasi, Ilfov, Prahova, Vâlcea, Vaslui")
+            ("RUS", "")
+            ("SLV", "")
+            ("STP", "")
+            ("SAU", "")
+            ("SEN", "")
+            ("PRK", "")
+            ("MKD", "")
+            ("SLE", "")
+            ("SYR", "")
+            ("CIV", "")
+            ("SOM", "")
+            ("CAF", "")
+            ("SUR", "")
+            ("ESP", "")
+            ("CHE", "administrativne enote: Fribourg, Ženeva, Vaud")
+            ("TJK", "")
+            ("TZA", "")
+            ("TGO", "")
+            ("TTO", "")
+            ("TUR", "")
+            ("TKM", "")
+            ("UKR", "")
+            ("UZB", "")
+            ("VEN", "")
+            ("TLS", "")
+            ("ZMB", "")
+            ("USA", "")
+            ("ARE", "")
+            ("GBR", "čezmorsko ozemlje Gibraltar")
+            ("CPV", "")
+            ("ZWE", "")
+        ]
 
 let importedFrom =
     Map.ofList
@@ -324,13 +378,18 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             redCountries.TryFind(fixedCode),
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
-            if fixedCode = "SVN"
-            then I18N.t "charts.europe.statusNone", "#10829a", ""
-            else if red.IsSome
-            then I18N.t "charts.europe.statusRed", "#FF5348", red |> Option.defaultValue ""
-            else if green.IsSome
-            then I18N.t "charts.europe.statusGreen", "#C4DE6F", green |> Option.defaultValue ""
-            else I18N.t "charts.europe.statusOrange", "#FFC65A", ""
+            match fixedCode with
+            | "SVN" -> I18N.t "charts.europe.statusNone", "#10829a", ""
+            | _ -> 
+                match red with
+                | Some redNote -> 
+                    if redNote.Length > 0
+                    then I18N.t "charts.europe.statusRed", "#FF9057", redNote
+                    else I18N.t "charts.europe.statusRed", "#FF5348", redNote
+                | _ ->
+                    match green with
+                    | Some greenNote -> I18N.t "charts.europe.statusGreen", "#C4DE6F", greenNote
+                    | _ -> I18N.t "charts.europe.statusOrange", "#FFC65A", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -344,7 +403,8 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
-              CountryData.RestrictionText = rText + rAltText
+              CountryData.RestrictionText = rText 
+              CountryData.RestrictionAltText = rAltText
               CountryData.ImportedFrom = imported
               CountryData.ImportedDate = importedDate }
 
@@ -421,6 +481,7 @@ let mapData state =
                    newCases = nc
                    ncDate = ncDate
                    rType = cd.RestrictionText
+                   rAltText = cd.RestrictionAltText
                    imported = cd.ImportedFrom
                    impDate = impDate |}
 
@@ -447,6 +508,7 @@ let mapData state =
                newCases = 0
                ncDate = ""
                rType = ""
+               rAltText = ""
                imported = 0
                impDate = "" |})
     |> List.toArray
@@ -490,18 +552,19 @@ let renderMap state geoJson owdData =
         let imported = points?imported
         let impDate = points?impDate
         let rType = points?rType
+        let rAltText = points?rAltText
 
         let s = StringBuilder()
         let barMaxHeight = 50
 
         let textHtml =
             sprintf "<b>%s</b><br/>
-            %s: <b>%s</b><br/>
+            %s: <b>%s<br/>%s</br></br></b>
             %s: <b>%s</b> (%s)<br/><br/>
             %s: <b>%s</b><br/>
             %s: <b>%s</b> (%s)<br/>"
                 country
-                (I18N.t "charts.europe.countryStatus") rType
+                (I18N.t "charts.europe.countryStatus") rType rAltText
                 (I18N.t "charts.europe.importedCases") imported impDate
                 (I18N.t "charts.europe.incidence1M") incidence1M
                 (I18N.t "charts.europe.newCases") newCases ncDate
