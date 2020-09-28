@@ -195,14 +195,14 @@
         },
         "metricsComparison": {
             "deceasedToDate": "Të vdekur (deri sot)",
-            "deceased": "Të vdekur (në ditë)",
+            "deceased": "Të vdekur",
             "discharged": "Të lëshuar prej spitali (në ditë)",
             "dischargedToDate": "Të lëshuar prej spitali (deri sot)",
             "ventilator": "Në respirator",
             "icu": "Në njësinë për kujdes intensiv",
             "hospitalizedToDate": "Të shtruar në spital (deri sot)",
             "hospitalized": "Të shtruar në spital",
-            "recovered": "Të shëruar (deri sot)",
+            "recovered": "Të shëruar",
             "active": "Raste aktive",
             "confirmedToDate": "Raste të konfirmuara (deri sot)",
             "confirmed": "Raste të konfirmuara (në ditë)",
@@ -211,7 +211,19 @@
             "title": "Situata me COVID-19 në vend",
             "title_SVN": "Situata me COVID-19 në Slloveni",
             "title_MKD": "Situata me COVID-19 në Maqedoninë e Veriut",
-            "title_MNE": "Situata me COVID-19 në Mal të Zi"
+            "title_MNE": "Situata me COVID-19 në Mal të Zi",
+            "ventilatorDischarged": "Të çkyçur nga respiratori",
+            "ventilatorAdmitted": "Të kyçur në respirator",
+            "icuDischarged": "Të lëshuar nga NjKI",
+            "hospitalAdmitted": "Të pranuar në spital",
+            "icuAdmitted": "Të pranuar në NjKI",
+            "hospitalDischarged": "Të lëshuar nga spitali",
+            "activeCases": "Raste aktive",
+            "confirmedCases": "Raste të konfirmuara",
+            "testsPerformed": "Teste",
+            "showToDate": "Deri tani",
+            "showToday": "Në ditë",
+            "showActive": "Aktive"
         },
         "common": {
             "shortDateFormat": "%e. %b",
@@ -778,6 +790,9 @@
         "masks": {
             "description": "Maskat janë të detyrueshme në të gjitha hapësirat e mbyllura publike dhe jashtë kur distanca është më e vogël se 2m. <br> Restorantet punojnë vetëm deri në orën 22:30.",
             "title": "Maska"
+        },
+        "testOrQuarantine": {
+            "title": "Test"
         }
     },
     "tableDict": {
