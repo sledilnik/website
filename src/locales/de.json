@@ -456,12 +456,12 @@
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
-            "deceased": "Todesfälle (täglich)",
+            "deceased": "Todesfälle",
             "icu": "Auf Intensivstationen",
             "title": "COVID-19 Situation im Land",
             "title_SVN": "COVID-19 Situation in Slowenien",
             "title_MKD": "COVID-19-Situation in Nordmazedonien",
-            "recovered": "Genesene (bis heute)",
+            "recovered": "Genesene",
             "tests": "Tests (täglich)",
             "confirmedToDate": "Bestätigte Fälle (bis heute)",
             "discharged": "Aus Krankenhäusern entlassen (täglich)",
@@ -472,7 +472,19 @@
             "testsToDate": "Tests (bis heute)",
             "deceasedToDate": "Todesfälle (bis heute)",
             "confirmed": "Bestätigte Fälle (täglich)",
-            "title_MNE": "COVID-19 Lage in Montenegro"
+            "title_MNE": "COVID-19 Lage in Montenegro",
+            "icuDischarged": "Von der Intensivstation entlassen",
+            "hospitalDischarged": "Aus Krankenhäusern entlassen",
+            "hospitalAdmitted": "Ins Krankenhaus eingewiesen",
+            "icuAdmitted": "Auf Intensivstation eingewiesen",
+            "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
+            "ventilatorAdmitted": "An Beatmungsgerät angeschlossen",
+            "confirmedCases": "Bestätigte Fälle",
+            "testsPerformed": "Tests",
+            "showToDate": "Bis heute",
+            "showToday": "Tägliche",
+            "showActive": "Aktive",
+            "activeCases": "Aktive Fälle"
         },
         "countries": {
             "groupNordic": "Nordische Länder",
@@ -591,7 +603,7 @@
         "age_male_65-74_todate": "65 – 74 Jahre",
         "state_out_of_hospital_todate": "Aus Krankenhäusern entlassen (bis heute)",
         "cases_confirmed_todate": "Bestätigte Fälle (bis heute)",
-        "state_critical": "An Beatmungsmaschinen (aktiv)",
+        "state_critical": "An Beatmungsmaschinen (aktive)",
         "region_po_todate": "Notranjsko-kraška",
         "age_female_45-54_todate": "45 – 54 Jahre",
         "region_mb_todate": "Podravska",
@@ -617,12 +629,12 @@
         "age_male_85+_todate": "85+ Jahre",
         "age_male_todate": "Gesamt",
         "state_in_hospital_todate": "Hospitalisierte (bis heute)",
-        "state_in_hospital": "Hospitalisierte (aktiv)",
+        "state_in_hospital": "Hospitalisierte (aktive)",
         "region_kp_todate": "Küste und Karst",
         "age_female_75-84_todate": "75 – 84 Jahre",
         "region_ng_todate": "Goriška",
         "region_nm_todate": "Südostslowenien",
-        "state_icu": "Auf Intensivstationen (aktiv)",
+        "state_icu": "Auf Intensivstationen (aktive)",
         "age_female_35-44_todate": "35 – 44 Jahre",
         "cases_closed_todate": "Abgeschlossene Fälle (bis heute)",
         "state_deceased_todate": "Bestätigte Todesfälle (bis heute)",
@@ -761,6 +773,10 @@
         "quarantine10days": {
             "description": "Obligatorische Quarantäne von 10 Tagen reduziert",
             "title": "10 Tage"
+        },
+        "testOrQuarantine": {
+            "description": "Negativer Test oder 10-tägige Quarantäne bei Einreise aus Ländern der roten oder orangefarbenen Liste",
+            "title": "Test"
         }
     },
     "region": {
