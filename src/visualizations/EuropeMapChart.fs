@@ -273,22 +273,27 @@ let redCountries =
 let importedFrom =
     Map.ofList
         [  
-            ("AUT", 11)
-            ("HRV", 6)
-            ("DEU", 5)
-            ("XKX", 4)
+            ("ITA", 6)
+            ("HRV", 4)
+            ("AUT", 4)
             ("BIH", 3)
-            ("GRC", 3)
-            ("ITA", 3)
-            ("HUN", 2)
-            ("CZE", 2)
+            ("DEU", 3)
+            ("FRA", 3) 
+            ("XKX", 2)
+            ("SRB", 2)
             ("RUS", 1)
+            ("HUN", 1)
+            ("CZE", 1)
             ("MNE", 1)
-            ("FRA", 1) 
+            ("ESP", 1)
             ("EST", 1)
+            ("BGR", 1)
+            ("CHE", 1)
+            ("TUR", 1)
+            ("GBR", 1)
         ]
 
-let importedDate = DateTime(2020, 9, 20)
+let importedDate = DateTime(2020, 9, 27)
 
 let loadEuropeGeoJson =
     async {
