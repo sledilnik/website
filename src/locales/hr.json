@@ -290,7 +290,7 @@
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
-            "icuDeceasedShare": "Udio smrtnih slučajeva u odjelima intenzivne njege",
+            "icuDeceasedShare": "Udio smrtnih slučajeva na odjelima intenzivne njege",
             "ventilatorHospital": "Na respiratoru",
             "ventilatorCases": "Na respiratoru",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
@@ -402,14 +402,14 @@
             "title": "Hospitalizacija"
         },
         "metricsComparison": {
-            "deceased": "Smrtni slučajevi (dnevno)",
+            "deceased": "Smrtni slučajevi",
             "title": "COVID-19 situacija u državi",
             "title_SVN": "COVID-19 situacija u Sloveniji",
             "title_MKD": "COVID-19 situacija u S. Makedoniji",
             "title_MNE": "COVID-19 Situacija u Crnoj Gori",
             "testsToDate": "Testovi (do danas)",
             "ventilator": "Na respiratoru",
-            "recovered": "Ozdravili (do danas)",
+            "recovered": "Ozdravili",
             "active": "Aktivni slučajevi",
             "hospitalizedToDate": "Hospitalizirani (do danas)",
             "icu": "Na odjelu intenzivne njege",
@@ -419,7 +419,19 @@
             "discharged": "Otpušteni iz bolnice (dnevno)",
             "deceasedToDate": "Smrtni slučajevi (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
-            "confirmedToDate": "Potvrđeni slučajevi (do danas)"
+            "confirmedToDate": "Potvrđeni slučajevi (do danas)",
+            "icuDischarged": "Otpušteni s odjela intenzivne njege",
+            "icuAdmitted": "Primljeni na odjel intenzivne njege",
+            "ventilatorDischarged": "Odspojeni s respiratora",
+            "ventilatorAdmitted": "Spojeni na respirator",
+            "hospitalDischarged": "Otpušteni iz bolnice",
+            "hospitalAdmitted": "Primljeni u bolnici",
+            "activeCases": "Aktivni slučajevi",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "testsPerformed": "Testiranja",
+            "showToDate": "Do danas",
+            "showToday": "Dnevni",
+            "showActive": "Aktivni"
         },
         "spread": {
             "absoluteTitle": "Dnevni prirast potvrđenih slučajeva",
@@ -700,6 +712,10 @@
         "quarantine10days": {
             "description": "Obavezna karantena smanjena s 10 dana",
             "title": "10 dana"
+        },
+        "testOrQuarantine": {
+            "description": "Negativni test ili 10-dnevna karantena pri ulazu iz zemalja s crvenog ili narančastog popisa",
+            "title": "Test"
         }
     },
     "pageNotFound": {
