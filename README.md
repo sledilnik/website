@@ -20,7 +20,7 @@
 
 https://travis-ci.com/github/sledilnik/website
 
-Every push to `master` is automatically deployed (if build successfull) to https://covid-19.sledilnik.org
+Every push to `master` is automatically deployed (if build successful) to https://covid-19.sledilnik.org
 
 ## Preview deployment
 
