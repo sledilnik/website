@@ -32,7 +32,6 @@ import RegionalOverviewTable from '../components/tables/RegionalOverview';
 import AgeGroupsMalesTable from '../components/tables/AgeGroupsMales';
 import AgeGroupsFemalesTable from '../components/tables/AgeGroupsFemales';
 
-import { mapGetters } from 'vuex';
 export default {
   components: {
     TestsInfectionsTable,
@@ -76,6 +75,9 @@ $table-border: rgb(222,222 ,222)
 .table-wrapper
   background: #fff
   padding: 30px 0 15px 15px
+  min-height: 500px
+  display: flex
+  flex-direction: column
 
   @include mobile-break
     box-shadow: $element-box-shadow
@@ -135,14 +137,20 @@ $table-border: rgb(222,222 ,222)
     display: inline-block
 
     &.active
-      color: rgba(0, 0, 0)
+      color: black
       box-shadow: inset 0 -10px 0 $yellow
 
     &:hover
-      color: rgba(0, 0, 0)
+      color: black
 
     &:focus
       outline: none
+
+.tabs
+  margin-bottom: 0px
+
+  @include mobile-break
+    margin-bottom: 16px
 
 .tabs *:focus
   outline: none
@@ -226,10 +234,7 @@ thead .table-b-table-default
 
 .footnote
   font-size: 13px
-  margin-top: 15px
-
-  @include mobile-break
-    margin-top: 32px
+  margin-top: auto
 
 //alternating color
 .table-wrapper

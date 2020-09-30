@@ -1,22 +1,30 @@
 <template>
-  <b-table
-    responsive
-    bordered
-    outlined
-    hover
-    :stickyColumn="' '"
-    :sort-desc="true"
-    :sticky-header="tableHeight"
-    :items="items"
-    :fields="fields"
-  ></b-table>
+  <div>
+    <b-table
+      responsive
+      bordered
+      outlined
+      hover
+      :stickyColumn="' '"
+      :sort-desc="true"
+      :sticky-header="tableHeight"
+      :items="items"
+      :fields="fields"
+    ></b-table>
+    <Loader v-if="!loaded" />
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import _ from "lodash";
+import Loader from '../Loader';
+
 export default {
   props: ["tableHeight"],
+  components: {
+    Loader  
+  },
   data() {
     return {
       items: [],
@@ -39,7 +47,8 @@ export default {
         "state.in_hospital.todate",
         "state.out_of_hospital.todate",
         "state.deceased.todate",
-      ]
+      ],
+      loaded: false
     };
   },
   watch: {
@@ -55,10 +64,8 @@ export default {
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
+      this.loaded = true;
     }
-  },
-  mounted(){
-    this.refreshData()
   }
 };
 </script>
