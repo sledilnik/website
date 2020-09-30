@@ -100,7 +100,7 @@ footer
       transform: none
 
     @media only screen and (max-width: 480px)
-      width:100%
+      width: 100%
       position: static
       transform: none
       display: flex

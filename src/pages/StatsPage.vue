@@ -69,11 +69,9 @@
 
 <script>
 import { mapState } from 'vuex'
-
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
-
 import { Visualizations } from 'visualizations/App.fsproj'
 
 export default {
@@ -133,7 +131,7 @@ export default {
   flex-wrap: wrap
   display: grid
   gap: 15px
-  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  grid-template-columns: repeat(auto-fit, minmax(157px, 1fr))
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)
