@@ -556,6 +556,10 @@
         "app": {
             "description": "App #OstaniZdrav pubblicata per Android",
             "title": "#OstaniZdrav"
+        },
+        "testOrQuarantine": {
+            "description": "Test negativo o quarantena di 10 giorni all'ingresso dai paesi in lista rossa o arancione",
+            "title": "Tamponi"
         }
     },
     "tableDict": {
@@ -655,13 +659,13 @@
         "metricsComparison": {
             "ventilator": "Su ventilatore",
             "deceasedToDate": "Decessi (ad oggi)",
-            "deceased": "Decessi (giornalieri)",
+            "deceased": "Decessi",
             "dischargedToDate": "Dimessi (ad oggi)",
             "discharged": "Dimessi (giornalieri)",
             "icu": "Terapia intensiva",
             "hospitalizedToDate": "Ricoverati (ad oggi)",
             "hospitalized": "Ricoverati",
-            "recovered": "Guariti (ad oggi)",
+            "recovered": "Guariti",
             "active": "Casi attuali",
             "confirmedToDate": "Casi confermati (ad oggi)",
             "confirmed": "Casi confermati (giornalieri)",
@@ -670,7 +674,19 @@
             "title": "COVID-19 Situazione nel paese",
             "title_SVN": "COVID-19 Situazione in Slovenia",
             "title_MNE": "COVID-19 Situazione nel Montenegro",
-            "title_MKD": "COVID-19 Situazione nella Macedonia del Nord"
+            "title_MKD": "COVID-19 Situazione nella Macedonia del Nord",
+            "ventilatorDischarged": "Disconnessi dal ventilatore",
+            "ventilatorAdmitted": "Collegati al ventilatore",
+            "icuDischarged": "Dimessi dalla terapia intensiva",
+            "icuAdmitted": "Ammessi in terapia intensiva",
+            "hospitalDischarged": "Dimessi dall'ospedale",
+            "hospitalAdmitted": "Ammessi in ospedale",
+            "activeCases": "Casi attivi",
+            "confirmedCases": "Casi confermati",
+            "testsPerformed": "Tamponi",
+            "showToDate": "Ad oggi",
+            "showToday": "Giornalieri",
+            "showActive": "Attivi"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
