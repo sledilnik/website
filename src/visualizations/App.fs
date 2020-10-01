@@ -75,7 +75,7 @@ let update (msg: Msg) (state: State) =
     | WeeklyStatsDataRequested ->
         match state.WeeklyStatsData with
         | Loading -> state, Cmd.none
-        | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
+        | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.WeeklyStats.load
     | WeeklyStatsDataLoaded data -> { state with WeeklyStatsData = data }, Cmd.none
     | RegionsDataRequest ->
         match state.RegionsData with

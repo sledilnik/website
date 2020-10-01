@@ -89,12 +89,6 @@ type InfectionSource =
       Unknown : int option
     }
 
-type ImportedFrom =
-    { Country : string
-      ImportedCases : int option }
-
-type ImportedFromList = ImportedFrom list
-
 type WeeklyStatsDataPoint =
     { Week : string
       Date : System.DateTime
@@ -102,7 +96,7 @@ type WeeklyStatsDataPoint =
       ConfirmedCases : int option
       SentToQuarantine : int option
       Source : InfectionSource
-      ImportedFrom : ImportedFromList
+      ImportedFrom : Map<string, int option>
     }
 
 type WeeklyStatsData = WeeklyStatsDataPoint list

@@ -7,14 +7,6 @@ open Types
 
 let url = "https://api.sledilnik.org/api/stats-weekly"
 
-type private TransferCountryImport =
-    { country : string
-      imported : int option }
-
-    member this.ToDomain : ImportedFrom =
-        { Country = this.country
-          ImportedCases = this.imported }
-
 type private TransferSource =
     { quarantine : int option
       local : int option
@@ -48,7 +40,7 @@ type private TransferWStatsDataPoint =
                   quarantine : int option
               |}
         source : TransferSource
-        from : TransferCountryImport list
+        from : Map<string,int option>
     }
 
     member this.ToDomain : WeeklyStatsDataPoint =
@@ -59,17 +51,17 @@ type private TransferWStatsDataPoint =
           ConfirmedCases = this.confirmed
           SentToQuarantine = this.sentTo.quarantine
           Source = this.source.ToDomain
-          ImportedFrom = this.from |> List.map (fun item -> item.ToDomain)
+          ImportedFrom = this.from
         }
 
 type private TransferWStatsData = TransferWStatsDataPoint list
 
-let parseStatsData responseData =
-    let transferStatsData =
+let parseWStatsData responseData =
+    let transferWStatsData =
         responseData
         |> Json.parseNativeAs<TransferWStatsData>
 
-    transferStatsData
+    transferWStatsData
     |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
 
 let load =
@@ -80,7 +72,7 @@ let load =
             return WeeklyStatsDataLoaded (sprintf "Napaka pri nalaganju statističnih podatkov: %d" statusCode |> Failure)
         else
             try
-                let data = parseStatsData response
+                let data = parseWStatsData response
                 return WeeklyStatsDataLoaded (Success data)
             with
             | ex -> return WeeklyStatsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" (ex.Message.Substring(0, 1000)) |> Failure)
