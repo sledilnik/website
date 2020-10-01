@@ -1,4 +1,4 @@
-# covid19-web
+# Covid-19 Website
 
 [![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)](https://github.com/sledilnik/website/actions)
 [![Translation status](https://hosted.weblate.org/widgets/sledilnik/-/website/svg-badge.svg)](https://hosted.weblate.org/engage/sledilnik/?utm_source=widget)
