@@ -43,6 +43,7 @@ let init (query: obj) (visualization: string option) (page: string) =
           Page = page
           Query = query
           StatsData = NotAsked
+          WeeklyStatsData = NotAsked
           RegionsData = NotAsked
           RenderingMode = renderingMode }
 
@@ -52,12 +53,14 @@ let init (query: obj) (visualization: string option) (page: string) =
         | "local" ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
         | "world" ->
-            Cmd.none
+            Cmd.ofMsg WeeklyStatsDataRequested
         | _ ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
 
     initialState, cmd
@@ -69,6 +72,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with StatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
     | StatsDataLoaded data -> { state with StatsData = data }, Cmd.none
+    | WeeklyStatsDataRequested ->
+        match state.WeeklyStatsData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
+    | WeeklyStatsDataLoaded data -> { state with WeeklyStatsData = data }, Cmd.none
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
@@ -169,14 +177,26 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "europe-chart"
             ChartTextsGroup = "europe"
             Explicit = false
-            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.Europe }
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.Europe; data = data |} }
 
     let worldMap =
           { VisualizationType = WorldMap
             ClassName = "world-chart"
             ChartTextsGroup = "world"
             Explicit = false
-            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.World }
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.World; data = data |} }
 
     let ageGroupsTimeline =
           { VisualizationType = AgeGroupsTimeline
