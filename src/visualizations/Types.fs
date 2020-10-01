@@ -81,6 +81,32 @@ type StatsDataPoint =
 
 type StatsData = StatsDataPoint list
 
+type InfectionSource =
+    { FromQuarantine : int option
+      Local : int option
+      Import : int option
+      ImportRelated : int option
+      Unknown : int option
+    }
+
+type ImportedFrom =
+    { Country : string
+      ImportedCases : int option }
+
+type ImportedFromList = ImportedFrom list
+
+type WeeklyStatsDataPoint =
+    { Week : string
+      Date : System.DateTime
+      DateTo : System.DateTime
+      ConfirmedCases : int option
+      SentToQuarantine : int option
+      Source : InfectionSource
+      ImportedFrom : ImportedFromList
+    }
+
+type WeeklyStatsData = WeeklyStatsDataPoint list
+
 type Municipality =
     { Name : string
       ActiveCases : int option
@@ -129,6 +155,7 @@ type State =
       Page: string
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
+      WeeklyStatsData : RemoteData<WeeklyStatsData, string>
       RegionsData : RemoteData<RegionsData, string>
       RenderingMode : RenderingMode }
 
@@ -143,6 +170,8 @@ type Visualization = {
 type Msg =
     | StatsDataRequested
     | StatsDataLoaded of RemoteData<StatsData, string>
+    | WeeklyStatsDataRequested
+    | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
 

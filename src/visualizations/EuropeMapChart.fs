@@ -51,6 +51,7 @@ type ChartType =
 
 type State =
     { MapToDisplay : MapToDisplay
+      Data : WeeklyStatsData
       Countries : CountrySelection
       GeoJson: GeoJson
       OwdData: OwdData
@@ -333,10 +334,11 @@ let loadWorldGeoJson =
                             |> Failure)
     }
 
-let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
+let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
     { MapToDisplay = mapToDisplay
+      Data = data
       Countries =
         match mapToDisplay with
         | Europe -> CountrySelection.Countries euCountries
@@ -665,5 +667,5 @@ let render (state: State) dispatch =
                     prop.className "map"
                     prop.children [ chart ] ] ] ]
 
-let mapChart (mapToDisplay: MapToDisplay) =
-    React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)
+let mapChart (props : {| mapToDisplay : MapToDisplay; data : WeeklyStatsData |}) =
+    React.elmishComponent ("EuropeMapChart", init props.mapToDisplay props.data, update, render)
