@@ -11,20 +11,15 @@
       :items="items"
       :fields="fields"
     ></b-table>
-    <Loader v-if="!loaded" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import _ from "lodash";
-import Loader from '../Loader';
 
 export default {
   props: ["tableHeight"],
-  components: {
-    Loader  
-  },
   data() {
     return {
       items: [],
