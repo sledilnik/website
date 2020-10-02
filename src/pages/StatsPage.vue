@@ -132,6 +132,7 @@ export default {
   display: grid
   gap: 15px
   grid-template-columns: repeat(auto-fit, minmax(157px, 1fr))
+  grid-template-rows: auto auto 1fr auto
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)

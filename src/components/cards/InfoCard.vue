@@ -1,58 +1,56 @@
 <template>
-  <div :title="title" class="hp-card-holder">
-    <div class="hp-card" v-if="loaded">
-      <div class="card-title">{{ title }}</div>
-      <div class="card-number">
-        <span>{{ renderValues.lastDay.value }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
-          {{ renderValues.lastDay.percentDiff | prefixDiff }}%
-        </div>
+  <div :title="title" class="hp-card" v-if="loaded">
+    <div class="card-title">{{ title }}</div>
+    <div class="card-number">
+      <span>{{ renderValues.lastDay.value }}</span>
+      <div class="card-percentage-diff" :class="diffClass">
+        {{ renderValues.lastDay.percentDiff | prefixDiff }}%
       </div>
-      <div :id="field" class="card-diff">
-        <div v-if="showAbsolute">
-          <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-          <span :class="diffClass"
-            >{{ Math.abs(renderValues.lastDay.diff) }}
-          </span>
-        </div>
-        <div v-if="showIn" class="card-diff-item">
-          <div class="trend-icon in bad up"></div>
-          <span v-if="field === 'cases.active'" class="in bad">{{
-            renderActiveValues(fieldNewCases).lastDay.value
-          }}</span>
-          <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
-        </div>
-        <div v-if="showOut" class="card-diff-item">
-          <div class="trend-icon out good down"></div>
-          <span v-if="field === 'cases.active'" class="out good">{{
-            renderActiveValues(fieldNewCases).lastDay.value -
-              renderActiveValues(field).lastDay.diff -
-              renderActiveValues(fieldDeceased).lastDay.value
-          }}</span>
-          <span v-else class="out good">{{ renderTotalValues(totalOut) }}</span>
-        </div>
-        <div v-if="showDeceased" class="card-diff-item">
-          <div class="trend-icon deceased"></div>
-          <span v-if="field === 'cases.active'" class="deceased">{{
+    </div>
+    <div :id="field" class="card-diff">
+      <div v-if="showAbsolute">
+        <div class="trend-icon" :class="[diffClass, iconClass]"></div>
+        <span :class="diffClass"
+          >{{ Math.abs(renderValues.lastDay.diff) }}
+        </span>
+      </div>
+      <div v-if="showIn" class="card-diff-item">
+        <div class="trend-icon in bad up"></div>
+        <span v-if="field === 'cases.active'" class="in bad">{{
+          renderActiveValues(fieldNewCases).lastDay.value
+        }}</span>
+        <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
+      </div>
+      <div v-if="showOut" class="card-diff-item">
+        <div class="trend-icon out good down"></div>
+        <span v-if="field === 'cases.active'" class="out good">{{
+          renderActiveValues(fieldNewCases).lastDay.value -
+            renderActiveValues(field).lastDay.diff -
             renderActiveValues(fieldDeceased).lastDay.value
-          }}</span>
-          <span v-else class="deceased"
-            >{{ renderTotalValues(totalDeceased) }}
-          </span>
-        </div>
+        }}</span>
+        <span v-else class="out good">{{ renderTotalValues(totalOut) }}</span>
       </div>
-      <div class="data-time">
-        {{
-          $t('infocard.lastUpdated', {
-            date: new Date(renderValues.lastDay.displayDate),
-          })
-        }}
+      <div v-if="showDeceased" class="card-diff-item">
+        <div class="trend-icon deceased"></div>
+        <span v-if="field === 'cases.active'" class="deceased">{{
+          renderActiveValues(fieldDeceased).lastDay.value
+        }}</span>
+        <span v-else class="deceased"
+          >{{ renderTotalValues(totalDeceased) }}
+        </span>
       </div>
     </div>
-    <div class="hp-card" v-else>
-      <div class="card-title">{{ title }}</div>
-      <font-awesome-icon icon="spinner" spin />
+    <div class="data-time">
+      {{
+        $t('infocard.lastUpdated', {
+          date: new Date(renderValues.lastDay.displayDate),
+        })
+      }}
     </div>
+  </div>
+  <div class="hp-card" v-else>
+    <div class="card-title">{{ title }}</div>
+    <font-awesome-icon icon="spinner" spin />
   </div>
 </template>
 <script>
@@ -202,17 +200,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.hp-card-holder {
-  flex: 1;
-}
-
 .hp-card {
   display: flex;
   flex-direction: column;
-  // display: grid;
-  // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
-  min-height: 196px;
-  height: 100%;
+  display: grid;
+  grid-row: span 4;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: subgrid;
+  grid-row-gap: 0;
   padding: 18px;
   background: #fff;
   box-shadow: $element-box-shadow;
@@ -233,12 +228,14 @@ export default {
 .card-title {
   font-size: 14px;
   font-weight: 700;
+  grid-column-end: span 2;
 }
 
 .card-number {
   font-size: 32px;
   font-weight: 700;
   white-space: nowrap;
+  grid-column-end: span 2;
 }
 
 .card-percentage-diff {
@@ -251,6 +248,7 @@ export default {
 .card-diff {
   font-size: 14px;
   margin-bottom: 0.7rem;
+  grid-column-end: span 2;
 
   .card-diff-item {
     display: inline-block;
@@ -318,6 +316,7 @@ export default {
 .data-time {
   font-size: 12px;
   color: #a0a0a0;
-  margin-top: auto;
+  // margin-top: auto;
+  grid-column-end: span 2;
 }
 </style>
