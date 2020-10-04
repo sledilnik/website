@@ -26,6 +26,7 @@ let init (query: obj) (visualization: string option) (page: string) =
             | "Cases" -> Some Cases
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
+            | "Weekly" -> Some Weekly
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
             | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
@@ -304,6 +305,18 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+    let weekly =
+          { VisualizationType = Weekly
+            ClassName = "weekly-stats-chart"
+            ChartTextsGroup = "weeklyStats"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView WeeklyStatsChart.weeklyStatsChart {| data = data |} }
 
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
@@ -360,7 +373,7 @@ let render (state: State) (_: Msg -> unit) =
     let localVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; ratios; ageGroups; regionMap; regions
+          cases; ratios; ageGroups; regionMap; regions; weekly
         ]
 
     let worldVisualizations =
@@ -373,7 +386,7 @@ let render (state: State) (_: Msg -> unit) =
     let allVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regions
+          cases; patients; ratios; ageGroups; regionMap; regions; weekly
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
         ]
 

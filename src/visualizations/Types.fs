@@ -128,6 +128,7 @@ type VisualizationType =
     | Cases
     | Spread
     | Regions
+    | Weekly
     | Municipalities
     | AgeGroups
     | AgeGroupsTimeline
