@@ -38,8 +38,40 @@ export default {
     let data = cards[this.$route.params.type]
 
     this.title = data.title
+    this.setHospital(this.$route.params.hospital)
+
     this.field = data.field
     this.hospital = this.$route.params.hospital
+  },
+  methods: {
+    setHospital(hospital) {
+      switch (hospital) {
+        case 'sbce':
+          this.title = this.title.concat(' v SB Celje')
+          break
+        case 'sbje':
+          this.title = this.title.concat(' v SB Jesenice')
+          break
+        case 'sbms':
+          this.title = this.title.concat(' v SB Murska Sobota')
+          break
+        case 'sbnm':
+          this.title = this.title.concat(' v SB Novo mesto')
+          break
+        case 'ukclj':
+          this.title = this.title.concat(' v UKC Ljubljana')
+          break
+        case 'ukcmb':
+          this.title = this.title.concat(' v UKC Maribor')
+          break
+        case 'ukg':
+          this.title = this.title.concat(' v UKC Golnik')
+          break
+        default:
+          this.title = 'Neznana bolnišnica'
+          break
+      }
+    },
   },
 }
 </script>
