@@ -230,10 +230,6 @@ const routes = [
         component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
       },
       {
-        path: 'animation',
-        component: () => import(/* webpackChunkName: "tables" */'./pages/AnimationPage.vue'),
-      },
-      {
         path: 'embed',
         component: () => import('./pages/EmbedMakerPage.vue'),
       },
