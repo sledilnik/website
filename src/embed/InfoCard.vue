@@ -2,53 +2,69 @@
   <b-container class="mt-3">
     <b-row>
       <div class="d-flex flex-wrap w-100 justify-content-center">
-        <Info-card :title="title" :field="field" :good-trend="goodDirection" />
+        <Info-card
+          :title="title"
+          :field="field"
+          :field-new-cases="fieldNewCases"
+          :field-deceased="fieldDeceased"
+          :total-in="totalIn"
+          :total-out="totalOut"
+          :total-deceased="totalDeceased"
+        />
       </div>
     </b-row>
   </b-container>
 </template>
 
 <script>
-import InfoCard from "components/cards/InfoCard";
+import InfoCard from 'components/cards/InfoCard'
 
 export default {
-  name: "StatsPage",
+  name: 'InfoCardEmbed',
   components: {
-    InfoCard
+    InfoCard,
   },
   data() {
     return {
       title: null,
       field: null,
-      goodDirection: null,
+      fieldNewCases: null,
+      fieldDeceased: null,
+      totalIn: null,
+      totalOut: null,
+      totalDeceased: null,
+      hospital: null,
     }
   },
   created() {
     const cards = {
-      'confirmedCases': {
+      confirmedCases: {
         title: 'Potrjeno okuženi',
         field: 'cases.confirmed.todate',
-        goodDirection: 'down',
       },
-      'active': {
+      active: {
         title: 'Aktivni primeri',
         field: 'cases.active',
-        goodDirection: 'up',
+        fieldNewCases: 'cases.confirmedToday',
+        fieldDeceased: 'statePerTreatment.deceased',
       },
-      'hospitalized': {
+      hospitalized: {
         title: 'Hospitalizirani',
-        field: 'state.in_hospital',
-        goodDirection: 'down',
+        field: 'statePerTreatment.inHospital',
+        totalIn: 'total.inHospital.in',
+        totalOut: 'total.inHospital.out',
+        totalDeceased: 'total.deceased.hospital.today',
       },
-      'icu': {
+      icu: {
         title: 'V intenzivni enoti',
-        field: 'state.icu',
-        goodDirection: 'down',
+        field: 'statePerTreatment.inICU',
+        totalIn: 'total.icu.in',
+        totalOut: 'total.icu.out',
+        totalDeceased: 'total.deceased.hospital.icu.today',
       },
-      'deceased': {
+      deceased: {
         title: 'Umrli',
-        field: 'state.deceased.todate',
-        goodDirection: 'down',
+        field: 'statePerTreatment.deceasedToDate',
       },
     }
 
@@ -57,10 +73,9 @@ export default {
     this.title = data.title
     this.field = data.field
     this.goodDirection = data.goodDirection
-  }
-};
+  },
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass">
-</style>
+<style lang="sass"></style>
