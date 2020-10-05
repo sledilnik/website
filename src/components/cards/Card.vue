@@ -1,14 +1,6 @@
 <template>
   <div :title="title" class="hp-card" v-if="loaded">
-    <div class="card-embed">
-      <div class="card-title">{{ title }}</div>
-      <a
-        class="brand-link"
-        target="_blank"
-        href="https://covid-19.sledilnik.org/"
-        >COVID-19 Sledilnik</a
-      >
-    </div>
+    <div class="card-title">{{ title }}</div>
     <div class="card-number">
       <span>{{ renderValue(lastData) }}</span>
       <div class="card-percentage-diff"></div>
@@ -23,12 +15,20 @@
         <span class="out good">{{ renderOut(lastData) }} </span>
       </div>
     </div>
-    <div class="data-time">
-      {{
-        $t('infocard.lastUpdated', {
-          date: new Date(exportTime),
-        })
-      }}
+    <div class="card-embed">
+      <div class="data-time">
+        {{
+          $t('infocard.lastUpdated', {
+            date: new Date(exportTime),
+          })
+        }}
+      </div>
+      <a
+        class="brand-link"
+        target="_blank"
+        href="https://covid-19.sledilnik.org/"
+        >COVID-19 Sledilnik</a
+      >
     </div>
   </div>
   <div class="hp-card" v-else>
@@ -75,16 +75,11 @@ export default {
 
 <style scoped lang="scss">
 .hp-card {
-  min-width: 230px;
+  min-height: unset;
 }
 
 .card-embed {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-
-.card-title {
-  margin-bottom: 0;
 }
 </style>
