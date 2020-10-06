@@ -20,7 +20,8 @@
         "models": "Modelle",
         "tables": "Tabellen",
         "faq": "FAQ",
-        "world": "Welt"
+        "world": "Welt",
+        "animation": "Animation"
     },
     "country": {
         "ABW": "Aruba",
