@@ -58,6 +58,11 @@
           series-type="state"
         />
       </div>
+      <!-- <b-row cols="12">
+        <b-col>
+          <Youtube id="oD88hoRafug"></Youtube>
+        </b-col>
+      </b-row> -->
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
@@ -69,11 +74,10 @@
 
 <script>
 import { mapState } from 'vuex'
-
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
-
+import Youtube from 'components/Youtube'
 import { Visualizations } from 'visualizations/App.fsproj'
 
 export default {
@@ -82,6 +86,7 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
+    // Youtube
   },
   data() {
     return {
@@ -133,7 +138,7 @@ export default {
   flex-wrap: wrap
   display: grid
   gap: 15px
-  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  grid-template-columns: repeat(auto-fit, minmax(157px, 1fr))
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)

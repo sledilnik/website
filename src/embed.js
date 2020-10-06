@@ -7,6 +7,7 @@ import i18next from 'i18next'
 import App from './App.vue'
 import TablesPage from './pages/TablesPage.vue'
 import InfoCardEmbed from '@/embed/InfoCard'
+import CardEmbed from '@/embed/Card'
 import ChartEmbed from '@/embed/Chart'
 
 import '@/main.js'
@@ -28,6 +29,16 @@ const routes = [
   {
     path: '/card/:type',
     component: InfoCardEmbed,
+    beforeEnter: (to, from, next) => {
+      i18next.changeLanguage('sl', (err, t) => {
+        if (err) return console.log('something went wrong loading', err)
+      })
+      return next()
+    },
+  },
+  {
+    path: '/card/:type/:hospital',
+    component: CardEmbed,
     beforeEnter: (to, from, next) => {
       i18next.changeLanguage('sl', (err, t) => {
         if (err) return console.log('something went wrong loading', err)
@@ -73,6 +84,10 @@ const routes = [
       {
         path: 'card/:type',
         component: InfoCardEmbed,
+      },
+      {
+        path: 'card/:type/:hospital',
+        component: CardEmbed,
       },
       {
         path: 'chart/:type',

@@ -201,7 +201,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .hp-card-holder {
   flex: 1;
 }

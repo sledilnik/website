@@ -351,26 +351,18 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .metric-2-selector--selected
     color: white
 
-  .metrics-comparison-chart
-    min-height: 640px
-
   .spread-chart
     min-height: 604px
 
-  .daily-comparison-chart, .patients-chart, .age-groups-trends-chart, .tests-chart
+  .daily-comparison-chart, .patients-chart, .age-groups-trends-chart,
+  .tests-chart, .infections-chart, .metrics-comparison-chart
     min-height: 640px
 
-  .infections-chart, .cases-chart, .ratios-chart, .regions-chart
+  .cases-chart, .ratios-chart, .regions-chart
     min-height: 450px
 
   .age-groups-chart
-    min-height: 579px
-
-  .map-chart, .rmap-chart
-    min-height: 780px
-
-  .europe-chart, .world-chart
-    min-height: 722px
+    min-height: 579px    
 
   .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
     min-height: 703px
@@ -398,6 +390,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background-color: $gray-600
 
   .map-chart, .rmap-chart
+    min-height: 780px
+
+    @include media-breakpoint-down(sm)
+      min-height: 636px
+
     .map
       height: 600px
 
@@ -417,6 +414,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         height: inherit
 
   .europe-chart, .world-chart
+    min-height: 722px
     $bar-color: #d5c768
 
     .bars, .bar-wrapper
