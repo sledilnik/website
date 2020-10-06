@@ -1,7 +1,9 @@
 <template>
-  <div class="youtube-embed">
-    <iframe :src="videoId"></iframe>
-  </div>
+  <section>
+    <div class="youtube-embed">
+      <iframe :src="videoId"></iframe>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -19,6 +21,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
+section {
+  background: #fff;
+  margin: 0 0 58px;
+  position: relative;
+  padding: 0;
+  box-shadow: $element-box-shadow;
+
+  @media only screen and (min-width: 768px) {
+    padding: 48px;
+    margin: 0px 15px 58px;
+  }
+}
+
 .youtube-embed {
   position: relative;
   height: 0;

@@ -60,6 +60,11 @@
       </div>
       <b-row cols="12">
         <b-col>
+          <Youtube id="oD88hoRafug"></Youtube>
+        </b-col>
+      </b-row>
+      <b-row cols="12">
+        <b-col>
           <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
@@ -72,6 +77,7 @@ import { mapState } from 'vuex'
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
+import Youtube from 'components/Youtube'
 import { Visualizations } from 'visualizations/App.fsproj'
 
 export default {
@@ -80,6 +86,7 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
+    Youtube
   },
   data() {
     return {
