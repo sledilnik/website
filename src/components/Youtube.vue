@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <div class="section">
     <div class="youtube-embed">
       <iframe :src="videoId"></iframe>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section {
+.section {
   background: #fff;
   margin: 0 0 58px;
   position: relative;
