@@ -5,18 +5,22 @@
     </div>
     <div class="card-number">
       <span>{{ renderValue(today) }}</span>
-      <!-- <div class="card-percentage-diff" :class="diffClass">
+      <div class="card-percentage-diff" :class="diffClass">
         {{ diff(today, yesterday) | prefixDiff }}%
-      </div> -->
+      </div>
     </div>
     <div class="card-diff">
       <div v-if="renderIn(today) > 0" class="card-diff-item">
         <div class="trend-icon bad up"></div>
-        <span class="in bad">{{ renderIn(today) }} </span>
+        <span class="in bad">{{ renderIn(today) }}</span>
       </div>
       <div v-if="renderOut(today) > 0" class="card-diff-item">
         <div class="trend-icon good down"></div>
-        <span class="out good">{{ renderOut(today) }} </span>
+        <span class="out good">{{ renderOut(today) }}</span>
+      </div>
+      <div v-if="renderDeceased(today) > 0 && percentageDiff !== 0" class="card-diff-item">
+        <div class="trend-icon deceased"></div>
+        <span class="deceased">{{ renderDeceased(today) }}</span>
       </div>
     </div>
   </div>
@@ -31,6 +35,11 @@ export default {
     hospital: String,
     patients: Array,
   },
+  data() {
+    return {
+      percentageDiff: 0,
+    }
+  },
   computed: {
     today() {
       const item = this.patients[this.patients.length - 1]
@@ -41,7 +50,11 @@ export default {
       return item
     },
     diffClass() {
-      return this.diff === 0 ? 'no-change' : this.diff > 0 ? 'good' : 'bad'
+      return this.percentageDiff === 0
+        ? 'no-change'
+        : this.percentageDiff > 0
+        ? 'bad'
+        : 'good'
     },
   },
   methods: {
@@ -53,11 +66,16 @@ export default {
     },
     diff(today, yesterday) {
       const field = this.category ? this.category : this.field.category
-      const todayDiff =
-        this.renderIn(today, field) - this.renderOut(today, field)
-      const yesterdayDiff =
-        this.renderIn(yesterday, field) - this.renderOut(yesterday, field)
-      const percentageDiff = Math.round((todayDiff / yesterdayDiff) * 100) / 1      
+      const todayValue = this.renderValue(today, field)
+      const yesterdayValue = this.renderValue(yesterday, field)
+      const delta = todayValue - yesterdayValue
+
+      const percentageDiff =
+        yesterdayValue === 0
+          ? Math.round((delta - yesterdayValue) * 1000) / 10
+          : Math.round((delta / yesterdayValue) * 1000) / 10
+
+      this.percentageDiff = percentageDiff
       return percentageDiff
     },
     renderIn(item) {
@@ -72,11 +90,19 @@ export default {
       if (!value) return 0
       return value
     },
+    renderDeceased(item) {
+      const value = item.facilities[this.hospital].deceased.today
+      if (!value) return 0
+      return value
+    },
   },
 }
 </script>
 
 <style scoped lang="scss">
+// .card-content {
+//   flex: 1 1 0;
+// }
 .card-content:not(:last-child) {
   margin-right: 30px;
 }

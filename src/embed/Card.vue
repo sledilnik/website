@@ -65,7 +65,6 @@ export default {
     let data = cards[this.$route.params.type]
 
     this.title = data.title
-    this.titles = data.titles
     this.setHospital(this.$route.params.hospital)
 
     this.field = data.field
