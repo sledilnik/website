@@ -839,9 +839,9 @@
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: potrjeno okuženi na milijon prebivalcev",
-            "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
-            "legendTitle": "Potrjeno okuženi na milijon prebivalcev"
+            "title": "Države: novi primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
+            "legendTitle": "Novi primeri na milijon prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
