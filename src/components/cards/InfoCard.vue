@@ -2,7 +2,7 @@
   <div :title="cardTitle" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <div class="card-title d-flex justify-content-between">
-        {{ title }}
+        <span>{{ title }}</span>
         <div v-if="showPhaseIndicator" class="card-phase-indicator">
           <div
             class="trend-icon phase"
@@ -30,6 +30,9 @@
         </div>
       </div>
       <div :id="field" class="card-diff">
+        <div v-if="showIncidence">
+          <span class="card-note">{{ $t('infocard.per100k') }} </span>
+        </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
@@ -327,7 +330,7 @@ export default {
   // display: grid;
   // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
   height: 100%;
-  padding: 18px;
+  padding: 16px;
   background: #fff;
   box-shadow: $element-box-shadow;
 
@@ -344,6 +347,10 @@ export default {
   font-size: 13px;
   font-weight: 700;
   margin-bottom: 0.5rem !important;
+
+  span {
+    margin-right: 5px;
+  }
 }
 
 .card-number {
