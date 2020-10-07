@@ -18,20 +18,11 @@
         :title="phaseTitle"
         triggers="hover click"
       ></b-tooltip>
-      <div v-if="!showIncidence" class="card-number">
-        <span>{{ renderValues.lastDay.value }}</span>
+      <div class="card-number">
+        <span v-if="showIncidence">{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
+        <span v-else>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
-        </div>
-      </div>
-      <div v-if="showIncidence" class="card-number incidence">
-        <span>{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
-          {{
-            (Math.round((renderValues.lastDay.percentDiff / incidence) * 10) /
-              10)
-              | prefixDiff
-          }}%
         </div>
       </div>
       <div :id="name" class="card-diff">
