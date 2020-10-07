@@ -11,15 +11,22 @@
       <div v-if="showIncidence" class="card-number incidence">
         <span>{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
         <div class="card-percentage-diff" :class="diffClass">
-          {{ Math.round((renderValues.lastDay.percentDiff / incidence) * 10) / 10 | prefixDiff }}%
+          {{
+            (Math.round((renderValues.lastDay.percentDiff / incidence) * 10) /
+              10)
+              | prefixDiff
+          }}%
         </div>
       </div>
       <div :id="field" class="card-diff">
         <div v-if="showIncidence" class="card-diff-item">
           <div
-            class="trend-icon orange"
-            :title="$t('infocard.orangePhase')"
-          ></div>
+            class="trend-icon phase"
+            :class="incidenceClass"
+            :title="phaseTitle"
+          >
+            <span>{{ getPhase }}</span>
+          </div>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -51,6 +58,15 @@
           <span v-else class="deceased"
             >{{ renderTotalValues(totalDeceased) }}
           </span>
+        </div>
+        <div v-if="showIncidenceIcon" class="card-diff-item">
+          <div
+            class="trend-icon phase"
+            :class="incidenceClass"
+            :title="phaseTitle"
+          >
+            <span>{{ getPhase }}</span>
+          </div>
         </div>
       </div>
       <div class="data-time">
@@ -119,6 +135,29 @@ export default {
       } else {
         return this.goodTrend === 'down' ? 'good' : 'bad'
       }
+    },
+    incidenceClass() {
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 140) return 'orange'
+        if (incidence >= 140) return 'red'
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 250) return 'orange'
+        if (value >= 250 && value >= 360) return 'red'
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 50) return 'orange'
+        if (value >= 50) return 'red'
+      }
+      return 'unknown'
+    },
+    phaseTitle() {
+      // TODO
+      return 'Oranžna faza, 2. paket'
     },
     iconClass() {
       let className = ''
@@ -207,6 +246,44 @@ export default {
     },
     showIncidence() {
       if (this.name === 'incidence') {
+        return true
+      }
+      return false
+    },
+    getPhase() {
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 80) return 1
+        if (incidence >= 80 && incidence < 120) return 2
+        if (incidence >= 120 && incidence < 140) return 3
+        if (incidence >= 140 && incidence < 170) return 1
+        if (incidence >= 170) return 2
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 100) return 1
+        if (value >= 100 && value < 180) return 2
+        if (value >= 180 && value < 250) return 3
+        if (value >= 250 && value < 300) return 1
+        if (value >= 300 && value < 360) return 2
+        if (value >= 360) return 3
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 20) return 1
+        if (value >= 20 && value < 30) return 2
+        if (value >= 30 && value < 50) return 3
+        if (value >= 50 && value < 60) return 1
+        if (value >= 60) return 3
+      }
+      return 0
+    },
+    showIncidenceIcon() {
+      if (this.field === 'statePerTreatment.inHospital') {
+        return true
+      }
+      if (this.field === 'statePerTreatment.inICU') {
         return true
       }
       return false
@@ -308,11 +385,26 @@ export default {
       background-color: #20b16d;
     }
 
-    &.orange {
-      background-color: orange;
+    &.phase {
       border-radius: 50px;
       width: 17px;
       height: 17px;
+      color: white;
+      vertical-align: text-top;
+
+      span {
+        position: relative;
+        left: 4px;
+        top: -1px;
+      }
+    }
+
+    &.orange {
+      background-color: orange;
+    }
+
+    &.red {
+      background-color: #bf5747;
     }
 
     &.up {
