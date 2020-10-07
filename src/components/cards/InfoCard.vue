@@ -1,14 +1,38 @@
 <template>
-  <div :title="title" class="hp-card-holder">
+  <div :title="cardTitle" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
-      <div class="card-title">{{ title }}</div>
-      <div class="card-number">
+      <div class="card-title d-flex justify-content-between">
+        <span>{{ title }}</span>
+        <div v-if="showPhaseIndicator" class="card-phase-indicator">
+          <div
+            class="trend-icon phase"
+            :class="incidenceClass"
+            :title="phaseTitle"
+          >
+            <span>{{ getPhase }}</span>
+          </div>
+        </div>
+      </div>
+      <div v-if="!showIncidence" class="card-number">
         <span>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
+      <div v-if="showIncidence" class="card-number incidence">
+        <span>{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
+        <div class="card-percentage-diff" :class="diffClass">
+          {{
+            (Math.round((renderValues.lastDay.percentDiff / incidence) * 10) /
+              10)
+              | prefixDiff
+          }}%
+        </div>
+      </div>
       <div :id="field" class="card-diff">
+        <div v-if="showIncidence">
+          <span class="card-note">{{ $t('infocard.per100k') }} </span>
+        </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
@@ -71,6 +95,7 @@ export default {
       type: String,
       default: 'down',
     },
+    name: String,
     seriesType: {
       type: String,
       default: 'cum',
@@ -80,6 +105,21 @@ export default {
     ...mapGetters('stats', ['lastChange']),
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
+    incidence() {
+      switch (localStorage.getItem('contextCountry')) {
+        case 'SVN': {
+          return 20.97195
+          break
+        }
+        case 'MKD': {
+          return 20.83374
+          break
+        }
+        default:
+          return 0
+          break
+      }
+    },
     diffClass() {
       if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'
@@ -91,6 +131,59 @@ export default {
       } else {
         return this.goodTrend === 'down' ? 'good' : 'bad'
       }
+    },
+    incidenceClass() {
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 140) return 'orange'
+        if (incidence >= 140) return 'red'
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 250) return 'orange'
+        if (value >= 250 && value >= 360) return 'red'
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 50) return 'orange'
+        if (value >= 50) return 'red'
+      }
+      return 'unknown'
+    },
+    cardTitle() {
+      if (this.name === 'incidence')
+        return this.title + ' ' + this.$t('infocard.per100k')
+      return this.title
+    },
+    phaseTitle() {
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 80) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (incidence >= 80 && incidence < 120) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (incidence >= 120 && incidence < 140) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (incidence >= 140 && incidence < 170) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (incidence >= 170) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 100) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 100 && value < 180) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 180 && value < 250) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 250 && value < 300) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 300 && value < 360) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+        if (value >= 360) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 20) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 20 && value < 30) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 30 && value < 50) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 50 && value < 60) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 60) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+      }
+      return ''
     },
     iconClass() {
       let className = ''
@@ -150,12 +243,14 @@ export default {
       )
     },
     showIn() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
       }
       return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return (
           this.renderActiveValues(this.fieldNewCases).lastDay.value -
@@ -167,12 +262,60 @@ export default {
       return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
       }
       return (
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
+    },
+    showIncidence() {
+      if (this.name === 'incidence') {
+        return true
+      }
+      return false
+    },
+    getPhase() {
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 80) return 1
+        if (incidence >= 80 && incidence < 120) return 2
+        if (incidence >= 120 && incidence < 140) return 3
+        if (incidence >= 140 && incidence < 170) return 1
+        if (incidence >= 170) return 2
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 100) return 1
+        if (value >= 100 && value < 180) return 2
+        if (value >= 180 && value < 250) return 3
+        if (value >= 250 && value < 300) return 1
+        if (value >= 300 && value < 360) return 2
+        if (value >= 360) return 3
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 20) return 1
+        if (value >= 20 && value < 30) return 2
+        if (value >= 30 && value < 50) return 3
+        if (value >= 50 && value < 60) return 1
+        if (value >= 60) return 3
+      }
+      return 0
+    },
+    showPhaseIndicator() {
+      if (this.name === 'incidence') {
+        return true
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        return true
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        return true
+      }
+      return false
     },
   },
   methods: {
@@ -211,28 +354,28 @@ export default {
   flex-direction: column;
   // display: grid;
   // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
-  min-height: 196px;
   height: 100%;
-  padding: 18px;
+  padding: 16px;
   background: #fff;
   box-shadow: $element-box-shadow;
-
-  @include media-breakpoint-down(sm) {
-    min-height: 167px;
-  }
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 32px;
+    padding: 20px 32px;
   }
 }
 
 .card-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  margin-bottom: 0.5rem !important;
+
+  span {
+    margin-right: 5px;
+  }
 }
 
 .card-number {
@@ -259,46 +402,74 @@ export default {
   .card-diff-item:not(:last-child) {
     margin-right: 8px;
   }
+}
 
-  .trend-icon {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    vertical-align: bottom;
+.card-note {
+  font-size: 12px;
+}
 
-    &.bad {
-      background-color: #bf5747;
+.trend-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: bottom;
+
+  &.bad {
+    background-color: #bf5747;
+  }
+
+  &.good {
+    background-color: #20b16d;
+  }
+
+  &.phase {
+    border-radius: 50px;
+    width: 17px;
+    height: 17px;
+    color: white;
+    vertical-align: text-top;
+
+    span {
+      position: relative;
+      left: 5px;
+      top: -1px;
+      font-size: 13px;
+      font-weight: bold;
     }
+  }
 
-    &.good {
-      background-color: #20b16d;
-    }
+  &.orange {
+    background-color: orange;
+  }
 
-    &.up {
-      -webkit-mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
-      mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
-    }
+  &.red {
+    background-color: #bf5747;
+  }
 
-    &.down {
-      -webkit-mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
-      mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
-    }
+  &.up {
+    -webkit-mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+  }
 
-    &.deceased {
-      -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat
-        center;
-      mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
-      background-color: #404040;
-    }
+  &.down {
+    -webkit-mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+  }
 
-    &.none {
-      display: none;
-    }
+  &.deceased {
+    -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat
+      center;
+    mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+    background-color: #404040;
+  }
 
-    &.no-change {
-      background-color: #a0a0a0;
-    }
+  &.none {
+    display: none;
+  }
+
+  &.no-change {
+    background-color: #a0a0a0;
   }
 }
 

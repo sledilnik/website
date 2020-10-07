@@ -37,6 +37,14 @@
           series-type="state"
         />
         <Info-card
+          :title="$t('infocard.incidence')"
+          field="cases.active"
+          field-new-cases="cases.confirmedToday"
+          field-deceased="statePerTreatment.deceased"
+          name="incidence"
+          series-type="state"
+        />
+        <Info-card
           :title="$t('infocard.inHospital')"
           field="statePerTreatment.inHospital"
           total-in="total.inHospital.in"
@@ -138,10 +146,11 @@ export default {
   flex-wrap: wrap
   display: grid
   gap: 15px
-  grid-template-columns: repeat(auto-fit, minmax(157px, 1fr))
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)
+    grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 58px
 
