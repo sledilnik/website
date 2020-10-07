@@ -157,8 +157,33 @@ export default {
       return this.title
     },
     phaseTitle() {
-      // TODO
-      return 'Oranžna faza, 2. paket'
+      const value = this.renderValues.lastDay.value
+      const incidence = Math.round(
+        this.renderValues.lastDay.value / this.incidence
+      )
+      if (this.name === 'incidence') {
+        if (incidence >= 40 && incidence < 80) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (incidence >= 80 && incidence < 120) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (incidence >= 120 && incidence < 140) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (incidence >= 140 && incidence < 170) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (incidence >= 170) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+      }
+      if (this.field === 'statePerTreatment.inHospital') {
+        if (value >= 60 && value < 100) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 100 && value < 180) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 180 && value < 250) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 250 && value < 300) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 300 && value < 360) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+        if (value >= 360) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+      }
+      if (this.field === 'statePerTreatment.inICU') {
+        if (value >= 15 && value < 20) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 20 && value < 30) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 30 && value < 50) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 50 && value < 60) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 60) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+      }
+      return ''
     },
     iconClass() {
       let className = ''
