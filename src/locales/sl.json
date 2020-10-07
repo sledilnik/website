@@ -42,6 +42,8 @@
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "per100k": "na 100.000 prebivalcev",
+        "orangePhase": "Oranžna faza",
+        "redPhase": "Rdeča faza",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",

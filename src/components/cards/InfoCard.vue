@@ -9,12 +9,17 @@
         </div>
       </div>
       <div v-if="showIncidence" class="card-number incidence">
-        <span>{{ Math.round(renderValues.lastDay.value / 20.97195) }}</span>
-        <div class="card-percentage-diff"><!--{{ $t('infocard.per100k') }}--></div>
+        <span>{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
+        <div class="card-percentage-diff" :class="diffClass">
+          {{ Math.round((renderValues.lastDay.percentDiff / incidence) * 10) / 10 | prefixDiff }}%
+        </div>
       </div>
       <div :id="field" class="card-diff">
         <div v-if="showIncidence" class="card-diff-item">
-          <div class="trend-icon orange" title="Oranžna faza"></div>
+          <div
+            class="trend-icon orange"
+            :title="$t('infocard.orangePhase')"
+          ></div>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -88,6 +93,21 @@ export default {
     ...mapGetters('stats', ['lastChange']),
     ...mapGetters('patients', { patients: 'data' }),
     ...mapState('stats', ['exportTime', 'loaded']),
+    incidence() {
+      switch (localStorage.getItem('contextCountry')) {
+        case 'SVN': {
+          return 20.97195
+          break
+        }
+        case 'MKD': {
+          return 20.83374
+          break
+        }
+        default:
+          return 0
+          break
+      }
+    },
     diffClass() {
       if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'

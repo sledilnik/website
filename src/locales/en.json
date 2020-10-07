@@ -42,6 +42,8 @@
         "active": "Active Cases",
         "incidence": "14 days incidence",
         "per100k": "per 100k",
+        "orangePhase": "Orange phase",
+        "redPhase": "Red phase",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",
