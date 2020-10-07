@@ -19,8 +19,10 @@ let optionToInt (value: int option) =
     | Some x -> x
     | None -> 0
 
-let roundTo1Decimal (value: float) = Math.Round(value, 1)
-let roundTo3Decimals (value: float) = Math.Round(value, 3)
+
+let roundDecimals (decimals:int) (value: float) = Math.Round(value, decimals)
+let roundTo1Decimal = roundDecimals 1
+let roundTo3Decimals = roundDecimals 3
 
 let formatTo1DecimalWithTrailingZero (value: float) =
     let formatted = sprintf "%.1f" value
