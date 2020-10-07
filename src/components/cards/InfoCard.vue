@@ -1,5 +1,5 @@
 <template>
-  <div :title="title" class="hp-card-holder">
+  <div :title="cardTitle" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <div class="card-title d-flex justify-content-between">
         {{ title }}
@@ -147,6 +147,11 @@ export default {
         if (value >= 50) return 'red'
       }
       return 'unknown'
+    },
+    cardTitle() {
+      if (this.name === 'incidence')
+        return this.title + ' ' + this.$t('infocard.per100k')
+      return this.title
     },
     phaseTitle() {
       // TODO
