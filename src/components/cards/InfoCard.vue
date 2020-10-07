@@ -1,7 +1,18 @@
 <template>
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
-      <div class="card-title">{{ title }}</div>
+      <div class="card-title d-flex justify-content-between">
+        {{ title }}
+        <div v-if="showPhaseIndicator" class="card-phase-indicator">
+          <div
+            class="trend-icon phase"
+            :class="incidenceClass"
+            :title="phaseTitle"
+          >
+            <span>{{ getPhase }}</span>
+          </div>
+        </div>
+      </div>
       <div v-if="!showIncidence" class="card-number">
         <span>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
@@ -19,15 +30,6 @@
         </div>
       </div>
       <div :id="field" class="card-diff">
-        <div v-if="showIncidence" class="card-diff-item">
-          <div
-            class="trend-icon phase"
-            :class="incidenceClass"
-            :title="phaseTitle"
-          >
-            <span>{{ getPhase }}</span>
-          </div>
-        </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
@@ -58,15 +60,6 @@
           <span v-else class="deceased"
             >{{ renderTotalValues(totalDeceased) }}
           </span>
-        </div>
-        <div v-if="showIncidenceIcon" class="card-diff-item">
-          <div
-            class="trend-icon phase"
-            :class="incidenceClass"
-            :title="phaseTitle"
-          >
-            <span>{{ getPhase }}</span>
-          </div>
         </div>
       </div>
       <div class="data-time">
@@ -279,7 +272,10 @@ export default {
       }
       return 0
     },
-    showIncidenceIcon() {
+    showPhaseIndicator() {
+      if (this.name === 'incidence') {
+        return true
+      }
       if (this.field === 'statePerTreatment.inHospital') {
         return true
       }
@@ -342,7 +338,7 @@ export default {
 .card-title {
   font-size: 13px;
   font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem !important;
 }
 
 .card-number {
@@ -369,68 +365,74 @@ export default {
   .card-diff-item:not(:last-child) {
     margin-right: 8px;
   }
+}
 
-  .trend-icon {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-    vertical-align: bottom;
+.card-note {
+  font-size: 12px;
+}
 
-    &.bad {
-      background-color: #bf5747;
+.trend-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  vertical-align: bottom;
+
+  &.bad {
+    background-color: #bf5747;
+  }
+
+  &.good {
+    background-color: #20b16d;
+  }
+
+  &.phase {
+    border-radius: 50px;
+    width: 17px;
+    height: 17px;
+    color: white;
+    vertical-align: text-top;
+
+    span {
+      position: relative;
+      left: 5px;
+      top: -1px;
+      font-size: 13px;
+      font-weight: bold;
     }
+  }
 
-    &.good {
-      background-color: #20b16d;
-    }
+  &.orange {
+    background-color: orange;
+  }
 
-    &.phase {
-      border-radius: 50px;
-      width: 17px;
-      height: 17px;
-      color: white;
-      vertical-align: text-top;
+  &.red {
+    background-color: #bf5747;
+  }
 
-      span {
-        position: relative;
-        left: 4px;
-        top: -1px;
-      }
-    }
+  &.up {
+    -webkit-mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
+  }
 
-    &.orange {
-      background-color: orange;
-    }
+  &.down {
+    -webkit-mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
+  }
 
-    &.red {
-      background-color: #bf5747;
-    }
+  &.deceased {
+    -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat
+      center;
+    mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+    background-color: #404040;
+  }
 
-    &.up {
-      -webkit-mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
-      mask: url(../../assets/svg/close-circle-up.svg) no-repeat center;
-    }
+  &.none {
+    display: none;
+  }
 
-    &.down {
-      -webkit-mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
-      mask: url(../../assets/svg/close-circle-down.svg) no-repeat center;
-    }
-
-    &.deceased {
-      -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat
-        center;
-      mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
-      background-color: #404040;
-    }
-
-    &.none {
-      display: none;
-    }
-
-    &.no-change {
-      background-color: #a0a0a0;
-    }
+  &.no-change {
+    background-color: #a0a0a0;
   }
 }
 
