@@ -801,6 +801,7 @@
     "infocard": {
         "recoveredToDate": "Genesene",
         "active": "Aktive Fälle",
+        "incidence": "14-tägige Fälle",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
         "lastUpdated": "{{ date, %a, %e. %b }}",
