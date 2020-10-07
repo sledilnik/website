@@ -19,6 +19,7 @@
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
+          name="cases.confirmedToDate"
           series-type="state"
         />
 <!--  
@@ -34,13 +35,12 @@
           field="cases.active"
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
+          name="cases.active"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.incidence')"
           field="cases.active"
-          field-new-cases="cases.confirmedToday"
-          field-deceased="statePerTreatment.deceased"
           name="incidence"
           series-type="state"
         />
@@ -50,6 +50,7 @@
           total-in="total.inHospital.in"
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
+          name="statePerTreatment.inHospital"
           series-type="state"
         />
         <Info-card
@@ -58,11 +59,13 @@
           total-in="total.icu.in"
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
+          name="statePerTreatment.inICU"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
+          name="statePerTreatment.deceasedToDate"
           series-type="state"
         />
       </div>
