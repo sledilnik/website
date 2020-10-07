@@ -383,7 +383,7 @@
         "YEM": "Jemen",
         "ZAF": "Južnoafriška republika",
         "ZMB": "Zambija",
-        "ZWE": "Zimbabve"        
+        "ZWE": "Zimbabve"
     },
     "country-groups": {
         "groupNeighbouring": "okolica",
@@ -573,7 +573,7 @@
             "thousandsSep": ".",
             "decimalPoint": ",",
             "view": "Prikaži:",
-            "sortBy": "Sortiraj po:",
+            "sortBy": "Razvrsti po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
