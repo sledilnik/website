@@ -40,6 +40,8 @@
         "tests": "Testov na dan",
         "confirmedToDate": "Potrjeno okuženi",
         "active": "Aktivni primeri",
+        "incidence": "14-dnevna pojavnost",
+        "per100k": "na 100.000 prebivalcev",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",

@@ -2,13 +2,20 @@
   <div :title="title" class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
-      <div class="card-number">
+      <div v-if="!showIncidence" class="card-number">
         <span>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
+      <div v-if="showIncidence" class="card-number incidence">
+        <span>{{ Math.round(renderValues.lastDay.value / 20.97195) }}</span>
+        <div class="card-percentage-diff"><!--{{ $t('infocard.per100k') }}--></div>
+      </div>
       <div :id="field" class="card-diff">
+        <div v-if="showIncidence" class="card-diff-item">
+          <div class="trend-icon orange" title="Oranžna faza"></div>
+        </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
@@ -71,6 +78,7 @@ export default {
       type: String,
       default: 'down',
     },
+    name: String,
     seriesType: {
       type: String,
       default: 'cum',
@@ -150,12 +158,14 @@ export default {
       )
     },
     showIn() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
       }
       return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return (
           this.renderActiveValues(this.fieldNewCases).lastDay.value -
@@ -167,12 +177,19 @@ export default {
       return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
+      if (this.showIncidence) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
       }
       return (
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
+    },
+    showIncidence() {
+      if (this.name === 'incidence') {
+        return true
+      }
+      return false
     },
   },
   methods: {
@@ -211,28 +228,24 @@ export default {
   flex-direction: column;
   // display: grid;
   // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
-  min-height: 196px;
   height: 100%;
   padding: 18px;
   background: #fff;
   box-shadow: $element-box-shadow;
-
-  @include media-breakpoint-down(sm) {
-    min-height: 167px;
-  }
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
   }
 
   @media only screen and (min-width: 768px) {
-    padding: 32px;
+    padding: 20px 32px;
   }
 }
 
 .card-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .card-number {
@@ -273,6 +286,13 @@ export default {
 
     &.good {
       background-color: #20b16d;
+    }
+
+    &.orange {
+      background-color: orange;
+      border-radius: 50px;
+      width: 17px;
+      height: 17px;
     }
 
     &.up {

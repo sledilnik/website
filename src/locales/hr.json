@@ -877,6 +877,7 @@
     },
     "infocard": {
         "active": "Aktivni slučajevi",
+        "incidence": "14-dnevni slučajevi",
         "deceasedToDate": "Potvrđeni smrtni slučajevi",
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
