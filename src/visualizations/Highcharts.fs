@@ -124,6 +124,8 @@ let addContainmentMeasuresFlags
         13, 9, "#ebfaeb", "quarantine10days"
         19, 9, "#FFe6e6", "masks"
         28, 9, "#FFe6e6", "testOrQuarantine"
+        7, 10, "#FFe6e6", "cnk"
+        9, 10, "#FFe6e6", "gatherings10max"
     |]
     {|
         ``type`` = "flags"

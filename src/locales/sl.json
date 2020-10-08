@@ -529,6 +529,14 @@
         "testOrQuarantine": {
             "title": "Test",
             "description": "Negativen test ali 10-dnevna karantena ob vstopu iz držav na rdečem ali oranžnem seznamu"
+        },
+        "cnk": {
+            "title": "Črna",
+            "description": "Razglasitev Črne na Koroškem za ogroženo območje.<br>Obvesna namestitev razpršilnikov za razkuževanje rok v večstanovanjske stavbe"
+        },
+        "gatherings10max": {
+            "title": "Do 10",
+            "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, z dovoljenjem NIJZ do 500 ljudi.<br>Dodatne omejitve za dejavnosti v zaprtih prostorih (20m2 na osebo)."
         }
     },
     "phase": {
