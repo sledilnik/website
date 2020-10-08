@@ -26,7 +26,7 @@ $width: 50px
   width: $width
   height: $width
   margin: auto
-  z-index: 999
+  z-index: 1999
   // backdrop-filter: blur(2px)
   // background: rgba(0,0, 0, 0.03)
 

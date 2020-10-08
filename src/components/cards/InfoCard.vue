@@ -16,7 +16,7 @@
       <b-tooltip
         :target="'phase-indicator-' + name"
         :title="phaseTitle"
-        triggers="hover click"
+        triggers="hover"
       ></b-tooltip>
       <div class="card-number">
         <span v-if="showIncidence">{{ Math.round(renderValues.lastDay.value / incidence) }}</span>

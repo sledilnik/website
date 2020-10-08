@@ -160,7 +160,7 @@ export default {
   margin-right: -3px;
   position: absolute;
   right: 15px;
-  z-index: 101;
+  z-index: 1101;
   cursor: pointer;
 
   @include nav-break {
@@ -300,7 +300,7 @@ export default {
   padding: 16px 15px;
   display: flex;
   align-items: center;
-  z-index: 98;
+  z-index: 1098;
 
   @include nav-break {
     padding: 16px 32px;
@@ -322,7 +322,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 33%;
-  z-index: 100;
+  z-index: 1100;
   background: $yellow;
   padding: 20px 0 0 15px;
   overflow: auto;
@@ -408,7 +408,7 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 99;
+    z-index: 1099;
     background: rgb(0, 0, 0);
 
     @include nav-break {
