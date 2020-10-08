@@ -884,7 +884,13 @@
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, %a, %e. %b }}"
+        "lastUpdated": "{{ date, %a, %e. %b }}",
+        "package3": "paket 3",
+        "package2": "paket 2",
+        "package1": "paket 1",
+        "redPhase": "Crvena faza, ",
+        "orangePhase": "Narančasta faza, ",
+        "per100k": "po 100 tisuća"
     },
     "region": {
         "za": "Zasavlje",
