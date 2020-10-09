@@ -1,22 +1,28 @@
 <template>
   <b-container>
     <b-row class="d-flex justify-content-center">
-      <div id="validVis"></div>
-    </b-row>
-    <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.published.title") }}</h2>
       <div id="publishedVis"></div>
     </b-row>
     <b-row class="d-flex justify-content-center">
-      <div id="validByRiskVis"></div>
-    </b-row>
-    <b-row class="d-flex justify-content-center">
-      <div id="publishedByRiskVis"></div>
-    </b-row>
-    <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.usercount.title") }}</h2>
       <div id="usercountVis"></div>
     </b-row>
     <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.userPublishedByCount.title") }}</h2>
       <div id="userPublishedByCountVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.validByRisk.title") }}</h2>
+      <div id="validByRiskVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.publishedByRisk.title") }}</h2>
+      <div id="publishedByRiskVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <h2>{{ $t("charts.ostanizdrav.valid.title") }}</h2>
+      <div id="validVis"></div>
     </b-row>
   </b-container>
 </template>
