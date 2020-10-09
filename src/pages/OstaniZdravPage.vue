@@ -1,11 +1,11 @@
 <template>
   <div class="visualizations container">
-    <section id="published">
+    <section id="published-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#published">{{
-              $t("charts.ostanizdrav.published.title")
+            <a href="#published-chart" @click="smoothScroll">{{
+              $t('charts.ostanizdrav.published.title')
             }}</a>
           </h2>
         </div>
@@ -24,12 +24,12 @@
       </div>
       <div id="publishedVis"></div>
     </section>
-    <section id="usercount">
+    <section id="usercount-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#usercount">{{
-              $t("charts.ostanizdrav.usercount.title")
+            <a href="#usercount-chart" @click="smoothScroll">{{
+              $t('charts.ostanizdrav.usercount.title')
             }}</a>
           </h2>
         </div>
@@ -52,8 +52,8 @@
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#userPublishedByCount">{{
-              $t("charts.ostanizdrav.userPublishedByCount.title")
+            <a href="#userPublishedByCount-chart" @click="smoothScroll">{{
+              $t('charts.ostanizdrav.userPublishedByCount.title')
             }}</a>
           </h2>
         </div>
@@ -72,12 +72,12 @@
       </div>
       <div id="userPublishedByCountVis"></div>
     </section>
-    <section id="publishedByRisk">
+    <section id="publishedByRisk-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#publishedByRisk">{{
-              $t("charts.ostanizdrav.publishedByRisk.title")
+            <a href="#publishedByRisk-chart" @click="smoothScroll">{{
+              $t('charts.ostanizdrav.publishedByRisk.title')
             }}</a>
           </h2>
         </div>
@@ -96,12 +96,12 @@
       </div>
       <div id="publishedByRiskVis"></div>
     </section>
-    <section id="validByRisk">
+    <section id="validByRisk-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#validByRisk">{{
-              $t("charts.ostanizdrav.validByRisk.title")
+            <a href="#validByRisk-chart" @click="smoothScroll">{{
+              $t('charts.ostanizdrav.validByRisk.title')
             }}</a>
           </h2>
         </div>
@@ -120,11 +120,11 @@
       </div>
       <div id="validByRiskVis"></div>
     </section>
-    <section id="valid">
+    <section id="valid-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2>
-            <a href="#valid">{{ $t("charts.ostanizdrav.valid.title") }}</a>
+            <a href="#valid-chart" @click="smoothScroll">{{ $t('charts.ostanizdrav.valid.title') }}</a>
           </h2>
         </div>
         <div class="faq-and-share-wrapper">
@@ -225,16 +225,23 @@ export default {
       }, // https://github.com/d3/d3-format/blob/master/locale/en-US.json
     };
 
-    embed("#validVis", validPlot($t), opts);
-    embed("#publishedVis", publishedPlot($t), opts);
-    embed("#validByRiskVis", validByRiskPlot($t), opts);
-    embed("#publishedByRiskVis", publishedByRiskPlot($t), opts);
-    embed("#usercountVis", usercountPlot($t), opts);
-    embed("#userPublishedByCountVis", userPublishedByCountPlot($t), {
-      actions: false,
-    });
+    embed('#validVis', validPlot($t), opts)
+    embed('#publishedVis', publishedPlot($t), opts)
+    embed('#validByRiskVis', validByRiskPlot($t), opts)
+    embed('#publishedByRiskVis', publishedByRiskPlot($t), opts)
+    embed('#usercountVis', usercountPlot($t), opts)
+    embed('#userPublishedByCountVis', userPublishedByCountPlot($t), opts)
   },
-};
+  methods: {
+    smoothScroll(e) {
+      e.preventDefault()
+      const offset = -100
+      const position = e.target.getBoundingClientRect().top + window.pageYOffset + offset
+      window.scrollTo({ top: position, behavior: 'smooth' })
+      window.history.pushState(null, null, e.target.hash)
+    },
+  },
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -250,6 +257,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-height: 433px;
   }
 }
 
