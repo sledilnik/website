@@ -3,11 +3,22 @@
     <section id="published">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#published">{{ $t('charts.ostanizdrav.published.title') }}</a></h2>
+          <h2>
+            <a href="#published">{{
+              $t("charts.ostanizdrav.published.title")
+            }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-published`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-published`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -16,11 +27,22 @@
     <section id="usercount">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#usercount">{{ $t('charts.ostanizdrav.usercount.title') }}</a></h2>
+          <h2>
+            <a href="#usercount">{{
+              $t("charts.ostanizdrav.usercount.title")
+            }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-usercount`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-usercount`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -29,11 +51,22 @@
     <section id="userPublishedByCount">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#userPublishedByCount">{{ $t('charts.ostanizdrav.userPublishedByCount.title') }}</a></h2>
+          <h2>
+            <a href="#userPublishedByCount">{{
+              $t("charts.ostanizdrav.userPublishedByCount.title")
+            }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-userPublishedByCount`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-userPublishedByCount`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -42,11 +75,22 @@
     <section id="publishedByRisk">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#publishedByRisk">{{ $t('charts.ostanizdrav.publishedByRisk.title') }}</a></h2>
+          <h2>
+            <a href="#publishedByRisk">{{
+              $t("charts.ostanizdrav.publishedByRisk.title")
+            }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-publishedByRisk`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-publishedByRisk`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -55,11 +99,22 @@
     <section id="validByRisk">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#validByRisk">{{ $t('charts.ostanizdrav.validByRisk.title') }}</a></h2>
+          <h2>
+            <a href="#validByRisk">{{
+              $t("charts.ostanizdrav.validByRisk.title")
+            }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-validByRisk`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-validByRisk`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -68,11 +123,20 @@
     <section id="valid">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2><a href="#valid">{{ $t('charts.ostanizdrav.valid.title') }}</a></h2>
+          <h2>
+            <a href="#valid">{{ $t("charts.ostanizdrav.valid.title") }}</a>
+          </h2>
         </div>
         <div class="faq-and-share-wrapper">
           <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-valid`">?</a></div>
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-valid`"
+                >?</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -82,33 +146,83 @@
 </template>
 
 <script>
-import embed from 'vega-embed'
+import embed from "vega-embed";
+import vega from "vega";
 
-import validPlot from '@/vega/valid'
-import validByRiskPlot from '@/vega/validByRisk'
-import userPublishedByCountPlot from '@/vega/userPublishedByCount'
-import usercountPlot from '@/vega/usercount'
-import publishedByRiskPlot from '@/vega/publishedByRisk'
-import publishedPlot from '@/vega/published'
+import validPlot from "@/vega/valid";
+import validByRiskPlot from "@/vega/validByRisk";
+import userPublishedByCountPlot from "@/vega/userPublishedByCount";
+import usercountPlot from "@/vega/usercount";
+import publishedByRiskPlot from "@/vega/publishedByRisk";
+import publishedPlot from "@/vega/published";
 
-import i18n from '@/i18n'
+import i18n from "@/i18n";
 
 export default {
-  name: 'OstaniZdravPage',
+  name: "OstaniZdravPage",
   async mounted() {
+    let $t = (id) => i18n.i18next.t(id);
 
-    let $t = (id) => i18n.i18next.t(id)
-
-    embed('#validVis', validPlot($t), { actions: false })
-    embed('#publishedVis', publishedPlot($t), { actions: false })
-    embed('#validByRiskVis', validByRiskPlot($t), { actions: false })
-    embed('#publishedByRiskVis', publishedByRiskPlot($t), { actions: false })
-    embed('#usercountVis', usercountPlot($t), { actions: false })
-    embed('#userPublishedByCountVis', userPublishedByCountPlot($t), {
+    // https://github.com/vega/vega-embed#options
+    let opts = {
       actions: false,
-    })
+      // timeFormatLocale: { // https://github.com/d3/d3-time-format/blob/master/locale/de-DE.json
+      //   dateTime: "%A, der %e. %B %Y, %X",
+      //   date: "%d.%m.%Y",
+      //   time: "%H:%M:%S",
+      //   periods: ["AM", "PM"],
+      //   days: [
+      //     "Sonntag",
+      //     "Montag",
+      //     "Dienstag",
+      //     "Mittwoch",
+      //     "Donnerstag",
+      //     "Freitag",
+      //     "Samstag",
+      //   ],
+      //   shortDays: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+      //   months: [
+      //     "Januar",
+      //     "Februar",
+      //     "März",
+      //     "April",
+      //     "Mai",
+      //     "Juni",
+      //     "Juli",
+      //     "August",
+      //     "September",
+      //     "Oktober",
+      //     "November",
+      //     "Dezember",
+      //   ],
+      //   shortMonths: [
+      //     "Jan",
+      //     "Feb",
+      //     "Mrz",
+      //     "Apr",
+      //     "Mai",
+      //     "Jun",
+      //     "Jul",
+      //     "Aug",
+      //     "Sep",
+      //     "Okt",
+      //     "Nov",
+      //     "Dez",
+      //   ],
+      // },
+      // formatLocale: {}, // https://github.com/d3/d3-format/blob/master/locale/en-US.json
+    };
+
+    embed("#validVis", validPlot($t), opts);
+    embed("#publishedVis", publishedPlot($t), opts);
+    embed("#validByRiskVis", validByRiskPlot($t), opts);
+    embed("#publishedByRiskVis", publishedByRiskPlot($t), opts);
+    embed("#usercountVis", usercountPlot($t), opts);
+    embed("#userPublishedByCountVis", userPublishedByCountPlot($t), {
+      actions: false,
+    });
   },
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
