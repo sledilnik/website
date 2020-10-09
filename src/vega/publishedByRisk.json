@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "width": 700,
+  "width": "container",
   "height": 250,
   "data": {
     "url": "https://ostanizdrav.sledilnik.org/plots/dataByRisk.json"
