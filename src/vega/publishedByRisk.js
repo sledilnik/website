@@ -16,7 +16,7 @@ export default function ($t) {
       {
         "encoding": {
           "x": {
-            "title": "datum",
+            "title": $t('charts.ostanizdrav.publishedByRisk.date'),
             "timeUnit": "utcmonthdate",
             "field": "date",
             "type": "temporal",
@@ -58,11 +58,11 @@ export default function ($t) {
             "field": "published",
             "type": "quantitative",
             "axis": {
-              "title": "objavljenih ključev na dan"
+              "title": $t('charts.ostanizdrav.publishedByRisk.published')
             }
           },
           "color": {
-            "title": "tveganje",
+            "title": $t('charts.ostanizdrav.publishedByRisk.risk'),
             "field": "risk",
             "type": "ordinal"
           }

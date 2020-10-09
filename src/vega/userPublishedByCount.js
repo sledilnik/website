@@ -16,7 +16,7 @@ export default function ($t) {
       {
         "encoding": {
           "x": {
-            "title": "datum",
+            "title": $t('charts.ostanizdrav.userPublishedByCount.date'),
             "timeUnit": "utcmonthdate",
             "field": "date",
             "type": "temporal",
@@ -64,11 +64,11 @@ export default function ($t) {
               ]
             },
             "axis": {
-              "title": "(povprečno) število ključev na uporabnika na dan"
+              "title": $t('charts.ostanizdrav.userPublishedByCount.count')
             }
           },
           "color": {
-            "title": "uporabnikov",
+            "title": $t('charts.ostanizdrav.userPublishedByCount.users'),
             "field": "user_count",
             "type": "quantitative"
           }

@@ -15,7 +15,7 @@ export default function ($t) {return {
     {
       "encoding": {
         "x": {
-          "title": "datum",
+          "title": $t('charts.ostanizdrav.validByRisk.date'),
           "timeUnit": "utcmonthdate",
           "field": "date",
           "type": "temporal",
@@ -57,11 +57,11 @@ export default function ($t) {return {
           "field": "valid",
           "type": "quantitative",
           "axis": {
-            "title": "veljavnih ključev na dan"
+            "title": $t('charts.ostanizdrav.validByRisk.valid')
           }
         },
         "color": {
-          "title": "tveganje",
+          "title": $t('charts.ostanizdrav.validByRisk.risk'),
           "field": "risk",
           "type": "ordinal"
         }

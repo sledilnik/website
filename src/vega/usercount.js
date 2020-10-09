@@ -21,7 +21,7 @@ export default function ($t) {
       {
         "encoding": {
           "x": {
-            "title": "datum",
+            "title": $t('charts.ostanizdrav.usercount.date'),
             "timeUnit": "utcmonthdate",
             "field": "date",
             "type": "temporal"
@@ -30,7 +30,7 @@ export default function ($t) {
             "field": "users_published",
             "type": "quantitative",
             "axis": {
-              "title": "uporabnikov, ki so objavili ključe na dan",
+              "title": $t('charts.ostanizdrav.usercount.users'),
               "titleColor": "steelblue"
             }
           },
@@ -103,7 +103,7 @@ export default function ($t) {
             "field": "sum_published",
             "type": "quantitative",
             "axis": {
-              "title": "uporabnikov, ki so objavili ključe skupaj",
+              "title": $t('charts.ostanizdrav.usercount.runningTotal'),
               "titleColor": "#b4464b"
             }
           },

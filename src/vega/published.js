@@ -21,7 +21,7 @@ export default function ($t) {
             {
                 "encoding": {
                     "x": {
-                        "title": "datum",
+                        "title": $t('charts.ostanizdrav.published.date'),
                         "timeUnit": "utcmonthdate",
                         "field": "date",
                         "type": "temporal",
@@ -101,7 +101,7 @@ export default function ($t) {
                         "field": "sum_published",
                         "type": "quantitative",
                         "axis": {
-                            "title": "objavljenih ključev skupaj",
+                            "title": $t('charts.ostanizdrav.published.runningTotal'),
                             "titleColor": "#b4464b"
                         }
                     },

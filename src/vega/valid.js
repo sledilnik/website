@@ -17,7 +17,7 @@ export default function ($t) {
         "field": "date",
         "type": "temporal",
         "axis": {
-          "title": "datum",
+          "title": $t('charts.ostanizdrav.valid.date'),
           "labelAngle": 0,
           "tickCount": "week",
           "labelExpr": "[timeFormat(datum.value, '%d'), timeFormat(datum.value, '%d') <= '07' ? timeFormat(datum.value, '%b') : '']",
@@ -55,7 +55,7 @@ export default function ($t) {
         "field": "valid",
         "type": "quantitative",
         "axis": {
-          "title": "veljavnih ključev na dan"
+          "title": $t('charts.ostanizdrav.valid.perDay')
         }
       }
     }
