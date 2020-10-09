@@ -7,6 +7,7 @@
         "menu": "Menu",
         "home": "Home",
         "world": "World",
+        "ostanizdrav": "#OstaniZdrav",
         "tables": "Table",
         "models": "Models",
         "animation": "Animation",
@@ -433,6 +434,48 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital capacities"
+        },
+        "ostanizdrav": {
+            "title": "#OstaniZdrav application",
+            "valid": {
+                "title": "Number of keys valid per day",
+                "date": "Date",
+                "perDay":"Keys valid per day"
+            },
+            "published": {
+                "title": "Number of keys published per day",
+                "date": "Date",
+                "perDay":"Published keys per day",
+                "runningTotal": "Running total of keys published"
+            },
+            "validByRisk": {
+                "title": "Number of keys valid per day by risk level (interactive)",
+                "date": "Date",
+                "tooltip": "{0} keys with risk lvl {1}",
+                "valid": "Number of keys valid on given day",
+                "risk": "Risk"
+            },
+            "publishedByRisk": {
+                "title": "Number of keys published per day by risk level (interactive)",
+                "date": "Date",
+                "tooltip": "{0} keys with risk lvl {1}",
+                "published": "Number of keys published on given day",
+                "risk": "Risk"
+            },
+            "usercount": {
+                "title": "Estimate of number of users publishing keys per day",
+                "date": "Date",
+                "users": "Users publishing keys per day",
+                "runningTotal": "Running total of users who published keys"
+
+            },
+            "userPublishedByCount": {
+                "title": "Number of keys published per user per day (interactive)",
+                "date": "Date",
+                "tooltip": "{0} users uploaded {1} keys",
+                "count": "(average) key count per user on given day",
+                "users": "Users"
+            }
         }
     },
     "footer": {

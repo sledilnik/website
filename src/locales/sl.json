@@ -856,6 +856,48 @@
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
+        },
+        "ostanizdrav": {
+            "title": "#OstaniZdrav aplikacija",
+            "valid": {
+                "title": "Število ključev veljavnih na posamezen dan",
+                "date": "Datum",
+                "perDay":"Veljavnih ključev na dan"
+            },
+            "published": {
+                "title": "Število ključev objavljenih na posamezen dan",
+                "date": "Datum",
+                "perDay":"Objavljenih ključev na dan",
+                "runningTotal": "objavljenih ključev skupaj"
+            },
+            "validByRisk": {
+                "title": "Število ključev veljavnih na dan po stopnjah tveganja (interaktivno)",
+                "date": "Datum",
+                "tooltip": "{0} veljavnih ključev s stopnjo tveganja {1}",
+                "valid": "Veljavnih ključev na dan",
+                "risk": "Tveganje"
+            },
+            "publishedByRisk": {
+                "title": "Število ključev objavljenih na dan po stopnjah tveganja (interaktivno)",
+                "date": "Datum",
+                "tooltip": "{0} objavljenih ključev s stopnjo tveganja {1}",
+                "published": "Objavljenih ključev na dan",
+                "risk": "Tveganje"
+            },
+            "usercount": {
+                "title": "Ocena števila uporabnikov, ki so objavili ključe na posamezen dan",
+                "date": "Datum",
+                "users": "Uporabnikov, ki so objavili ključe na dan",
+                "runningTotal": "Uporabnikov, ki so objavili ključe skupaj"
+
+            },
+            "userPublishedByCount": {
+                "title": "Število ključev objavljenih na uporabnika na dan (interaktivno)",
+                "date": "Datum",
+                "tooltip": "{0} uporabnikov je objavilo {1} ključev",
+                "count": "(povprečno) število ključev na uporabnika na dan",
+                "users": "Uporabnikov"
+            }
         }
     },
     "footer": {
