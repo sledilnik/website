@@ -1,8 +1,7 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/581
-    - calculate the moving averages when requested
-    - define text for `charts.metricsComparison.show7DaysAverage`
+    - `charts.metricsComparison.show7DaysAverage`
     
 
 ## New countries chart

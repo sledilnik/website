@@ -188,6 +188,45 @@ let patientsDataGenerator metric =
         | _ -> None
 
 
+let calcRunningAverage (data: (JsTimestamp * float)[]) =
+    let daysOfMovingAverage = 7
+    let roundToDecimals = 1
+
+    let entriesCount = data.Length
+    let cutOff = daysOfMovingAverage / 2
+    let averagedDataLength = entriesCount - cutOff * 2
+
+    let averages = Array.zeroCreate averagedDataLength
+
+    let daysOfMovingAverageFloat = float daysOfMovingAverage
+    let mutable currentSum = 0.
+
+    let movingAverageFunc index =
+        let (_, entryValue) = data.[index]
+
+        currentSum <- currentSum + entryValue
+
+        match index with
+        | index when index >= daysOfMovingAverage - 1 ->
+            let date = data.[index - cutOff] |> fst
+            let average =
+                currentSum / daysOfMovingAverageFloat
+                |> Utils.roundDecimals roundToDecimals
+
+            averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
+
+            let valueToSubtract =
+                data.[index - (daysOfMovingAverage - 1)] |> snd
+            currentSum <- currentSum - valueToSubtract
+
+        | _ -> ignore()
+
+    for i in 0 .. entriesCount-1 do
+        movingAverageFunc i
+
+    averages
+
+
 let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let statsData = statsDataGenerator metric
@@ -201,12 +240,28 @@ let prepareMetricsData (metric: MetricCfg) (state: State) =
             state.PatientsData
             |> Seq.map (fun dp -> (dp.Date |> jsTime12h, patientsData dp))
 
+    let isValueMissing ((_, value): (JsTimestamp * int option)) = value.IsNone
+
+    let intOptionToFloat value =
+        match value with
+        | Some x -> float x
+        | None -> 0.
+
     let trimmedData =
         untrimmedData
-        |> Seq.skipWhile (fun (_, value) -> value.IsNone)
         |> Seq.toArray
+        |> Array.skipWhile isValueMissing
+        |> Array.rev
+        |> Array.skipWhile isValueMissing
+        |> Array.rev
+        |> Array.map(fun (date, value) -> (date, value |> intOptionToFloat))
 
-    trimmedData
+    let finalData =
+        match state.MetricType.IsAveraged with
+        | true -> trimmedData |> calcRunningAverage
+        | false -> trimmedData
+
+    finalData
 
 
 let renderChartOptions state dispatch =
@@ -214,7 +269,13 @@ let renderChartOptions state dispatch =
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
 
-        for metric in state.Metrics do
+        let visibleMetrics =
+            state.Metrics
+            |> Seq.filter (fun metric ->
+                metric.Type = state.MetricType.MetricType
+                && metric.Visible)
+
+        for metric in visibleMetrics do
             let data = prepareMetricsData metric state
 
             if data |> Array.length > 0 then
@@ -224,9 +285,7 @@ let renderChartOptions state dispatch =
 
             yield pojo
                 {|
-                    visible =
-                        metric.Type = state.MetricType.MetricType
-                        && metric.Visible
+                    visible = true
                     ``type`` =
                         if state.MetricType.IsAveraged then "spline"
                         else "line"
