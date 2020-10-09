@@ -210,7 +210,11 @@ export default {
       //     "Dez",
       //   ],
       // },
-      // formatLocale: {}, // https://github.com/d3/d3-format/blob/master/locale/en-US.json
+      formatLocale: {
+        "decimal":  $t("charts.common.decimalPoint"),
+        "thousands": $t("charts.common.thousandsSep"),
+        "grouping": [3],
+      }, // https://github.com/d3/d3-format/blob/master/locale/en-US.json
     };
 
     embed("#validVis", validPlot($t), opts);
