@@ -1,49 +1,49 @@
 <template>
   <div class="visualizations container">
-    <section>
+    <section id="published">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.published.title') }}</h2>
+          <h2><a href="#published">{{ $t('charts.ostanizdrav.published.title') }}</a></h2>
         </div>
       </div>
       <div id="publishedVis"></div>
     </section>
-    <section>
+    <section id="usercount">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.usercount.title') }}</h2>
+          <h2><a href="#usercount">{{ $t('charts.ostanizdrav.usercount.title') }}</a></h2>
         </div>
       </div>
       <div id="usercountVis"></div>
     </section>
-    <section>
+    <section id="userPublishedByCount">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.userPublishedByCount.title') }}</h2>
+          <h2><a href="#userPublishedByCount">{{ $t('charts.ostanizdrav.userPublishedByCount.title') }}</a></h2>
         </div>
       </div>
       <div id="userPublishedByCountVis"></div>
     </section>
-    <section>
+    <section id="validByRisk">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.validByRisk.title') }}</h2>
+          <h2><a href="#validByRisk">{{ $t('charts.ostanizdrav.validByRisk.title') }}</a></h2>
         </div>
       </div>
       <div id="validByRiskVis"></div>
     </section>
-    <section>
+    <section id="publishedByRisk">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.publishedByRisk.title') }}</h2>
+          <h2><a href="#publishedByRisk">{{ $t('charts.ostanizdrav.publishedByRisk.title') }}</a></h2>
         </div>
       </div>
       <div id="publishedByRiskVis"></div>
     </section>
-    <section>
+    <section id="valid">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
-          <h2>{{ $t('charts.ostanizdrav.valid.title') }}</h2>
+          <h2><a href="#valid">{{ $t('charts.ostanizdrav.valid.title') }}</a></h2>
         </div>
       </div>
       <div id="validVis"></div>
