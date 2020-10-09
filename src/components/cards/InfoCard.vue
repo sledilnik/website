@@ -1,35 +1,31 @@
 <template>
-  <div :title="cardTitle" class="hp-card-holder">
+  <div class="hp-card-holder">
     <div class="hp-card" v-if="loaded">
       <div class="card-title d-flex justify-content-between">
         <span>{{ title }}</span>
-        <div v-if="showPhaseIndicator" class="card-phase-indicator">
-          <div
-            class="trend-icon phase"
-            :class="incidenceClass"
-            :title="phaseTitle"
-          >
+        <div
+          v-if="showPhaseIndicator"
+          class="card-phase-indicator"
+          :id="'phase-indicator-' + name"
+        >
+          <div class="trend-icon phase" :class="incidenceClass">
             <span>{{ getPhase }}</span>
           </div>
         </div>
       </div>
-      <div v-if="!showIncidence" class="card-number">
-        <span>{{ renderValues.lastDay.value }}</span>
+      <b-tooltip
+        :target="'phase-indicator-' + name"
+        :title="phaseTitle"
+        triggers="hover"
+      ></b-tooltip>
+      <div class="card-number">
+        <span v-if="showIncidence">{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
+        <span v-else>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
-      <div v-if="showIncidence" class="card-number incidence">
-        <span>{{ Math.round(renderValues.lastDay.value / incidence) }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
-          {{
-            (Math.round((renderValues.lastDay.percentDiff / incidence) * 10) /
-              10)
-              | prefixDiff
-          }}%
-        </div>
-      </div>
-      <div :id="field" class="card-diff">
+      <div :id="name" class="card-diff">
         <div v-if="showIncidence">
           <span class="card-note">{{ $t('infocard.per100k') }} </span>
         </div>
@@ -162,26 +158,42 @@ export default {
         this.renderValues.lastDay.value / this.incidence
       )
       if (this.name === 'incidence') {
-        if (incidence >= 40 && incidence < 80) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
-        if (incidence >= 80 && incidence < 120) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
-        if (incidence >= 120 && incidence < 140) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
-        if (incidence >= 140 && incidence < 170) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
-        if (incidence >= 170) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+        if (incidence >= 40 && incidence < 80)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (incidence >= 80 && incidence < 120)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (incidence >= 120 && incidence < 140)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (incidence >= 140 && incidence < 170)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (incidence >= 170)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package2')
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value >= 60 && value < 100) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
-        if (value >= 100 && value < 180) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
-        if (value >= 180 && value < 250) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
-        if (value >= 250 && value < 300) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
-        if (value >= 300 && value < 360) return this.$t('infocard.redPhase') + this.$t('infocard.package2')
-        if (value >= 360) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+        if (value >= 60 && value < 100)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 100 && value < 180)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 180 && value < 250)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 250 && value < 300)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 300 && value < 360)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package2')
+        if (value >= 360)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package3')
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value >= 15 && value < 20) return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
-        if (value >= 20 && value < 30) return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
-        if (value >= 30 && value < 50) return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
-        if (value >= 50 && value < 60) return this.$t('infocard.redPhase') + this.$t('infocard.package1')
-        if (value >= 60) return this.$t('infocard.redPhase') + this.$t('infocard.package3')
+        if (value >= 15 && value < 20)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package1')
+        if (value >= 20 && value < 30)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package2')
+        if (value >= 30 && value < 50)
+          return this.$t('infocard.orangePhase') + this.$t('infocard.package3')
+        if (value >= 50 && value < 60)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package1')
+        if (value >= 60)
+          return this.$t('infocard.redPhase') + this.$t('infocard.package3')
       }
       return ''
     },
@@ -354,6 +366,7 @@ export default {
   flex-direction: column;
   // display: grid;
   // grid-template-rows: auto auto 1fr auto; // TODO: fix for other languages (hr,de)
+  min-height: 166px;
   height: 100%;
   padding: 16px;
   background: #fff;
