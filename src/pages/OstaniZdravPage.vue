@@ -39,19 +39,6 @@
       </div>
       <div id="userPublishedByCountVis"></div>
     </section>
-    <section id="validByRisk">
-      <div class="title-chart-wrapper">
-        <div class="title-brand-wrapper">
-          <h2><a href="#validByRisk">{{ $t('charts.ostanizdrav.validByRisk.title') }}</a></h2>
-        </div>
-        <div class="faq-and-share-wrapper">
-          <div class="faq-link-wrapper">
-            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-validByRisk`">?</a></div>
-          </div>
-        </div>
-      </div>
-      <div id="validByRiskVis"></div>
-    </section>
     <section id="publishedByRisk">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
@@ -64,6 +51,19 @@
         </div>
       </div>
       <div id="publishedByRiskVis"></div>
+    </section>
+    <section id="validByRisk">
+      <div class="title-chart-wrapper">
+        <div class="title-brand-wrapper">
+          <h2><a href="#validByRisk">{{ $t('charts.ostanizdrav.validByRisk.title') }}</a></h2>
+        </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-validByRisk`">?</a></div>
+          </div>
+        </div>
+      </div>
+      <div id="validByRiskVis"></div>
     </section>
     <section id="valid">
       <div class="title-chart-wrapper">
