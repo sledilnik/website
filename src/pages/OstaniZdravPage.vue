@@ -34,12 +34,12 @@ import publishedPlot from "@/vega/published.json";
 export default {
   name: "OstaniZdravPage",
   mounted() {
-    embed("#validVis", validPlot);
-    embed("#publishedVis", publishedPlot);
-    embed("#validByRiskVis", validByRiskPlot);
-    embed("#publishedByRiskVis", publishedByRiskPlot);
-    embed("#usercountVis", usercountPlot);
-    embed("#userPublishedByCountVis", userPublishedByCountPlot);
+    embed("#validVis", validPlot, {"actions": false});
+    embed("#publishedVis", publishedPlot, {"actions": false});
+    embed("#validByRiskVis", validByRiskPlot, {"actions": false});
+    embed("#publishedByRiskVis", publishedByRiskPlot, {"actions": false});
+    embed("#usercountVis", usercountPlot, {"actions": false});
+    embed("#userPublishedByCountVis", userPublishedByCountPlot, {"actions": false});
   },
 };
 </script>
