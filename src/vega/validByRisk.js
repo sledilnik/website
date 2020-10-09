@@ -1,4 +1,4 @@
-{
+export default function ($t) {return {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "width": "container",
   "height": 250,
@@ -173,4 +173,4 @@
       ]
     }
   ]
-}
+}}

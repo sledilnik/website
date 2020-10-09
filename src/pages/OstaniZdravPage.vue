@@ -54,22 +54,27 @@
 <script>
 import embed from 'vega-embed'
 
-import validPlot from '@/vega/valid.json'
-import validByRiskPlot from '@/vega/validByRisk.json'
-import userPublishedByCountPlot from '@/vega/userPublishedByCount.json'
-import usercountPlot from '@/vega/usercount.json'
-import publishedByRiskPlot from '@/vega/publishedByRisk.json'
-import publishedPlot from '@/vega/published.json'
+import validPlot from '@/vega/valid'
+import validByRiskPlot from '@/vega/validByRisk'
+import userPublishedByCountPlot from '@/vega/userPublishedByCount'
+import usercountPlot from '@/vega/usercount'
+import publishedByRiskPlot from '@/vega/publishedByRisk'
+import publishedPlot from '@/vega/published'
+
+import i18n from '@/i18n'
 
 export default {
   name: 'OstaniZdravPage',
-  mounted() {
-    embed('#validVis', validPlot, { actions: false })
-    embed('#publishedVis', publishedPlot, { actions: false })
-    embed('#validByRiskVis', validByRiskPlot, { actions: false })
-    embed('#publishedByRiskVis', publishedByRiskPlot, { actions: false })
-    embed('#usercountVis', usercountPlot, { actions: false })
-    embed('#userPublishedByCountVis', userPublishedByCountPlot, {
+  async mounted() {
+
+    let $t = (id) => i18n.i18next.t(id)
+
+    embed('#validVis', validPlot($t), { actions: false })
+    embed('#publishedVis', publishedPlot($t), { actions: false })
+    embed('#validByRiskVis', validByRiskPlot($t), { actions: false })
+    embed('#publishedByRiskVis', publishedByRiskPlot($t), { actions: false })
+    embed('#usercountVis', usercountPlot($t), { actions: false })
+    embed('#userPublishedByCountVis', userPublishedByCountPlot($t), {
       actions: false,
     })
   },
