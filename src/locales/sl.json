@@ -868,7 +868,7 @@
                 "title": "Število ključev objavljenih na posamezen dan",
                 "date": "Datum",
                 "perDay":"Objavljenih ključev na dan",
-                "runningTotal": "objavljenih ključev skupaj"
+                "runningTotal": "Objavljenih ključev skupaj"
             },
             "validByRisk": {
                 "title": "Število ključev veljavnih na dan po stopnjah tveganja (interaktivno)",
