@@ -124,6 +124,15 @@
         "5": "Petek",
         "6": "Sobota"
     },
+    "weekdayShort": {
+        "0": "Ne",
+        "1": "Po",
+        "2": "To",
+        "3": "Sr",
+        "4": "Če",
+        "5": "Pe",
+        "6": "So"
+    },
     "region": {
         "kr": "Gorenjska",
         "ng": "Goriška",
