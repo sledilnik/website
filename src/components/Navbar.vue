@@ -14,6 +14,7 @@
       <div class="nav-heading">{{ $t("navbar.menu") }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
       <router-link to="world" class="router-link"><span>{{ $t("navbar.world") }}</span></router-link>
+      <router-link to="ostanizdrav" class="router-link"><span>{{ $t("navbar.ostanizdrav") }}</span></router-link>
       <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
       <!-- <router-link to="animation" class="router-link"><span>{{ $t("navbar.animation") }}</span></router-link> -->
