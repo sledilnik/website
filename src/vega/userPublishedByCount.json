@@ -1,14 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "title": "število ključev veljavnih na dan po stopnjah tveganja (interaktivno)",
+  "title": "število ključev objavljenih na uporabnika na dan (interaktivno)",
   "width": 700,
   "height": 250,
   "data": {
-    "url": "https://ostanizdrav.sledilnik.org/plots/dataByRisk.json"
+    "url": "https://ostanizdrav.sledilnik.org/plots/usersByCount.json"
   },
   "transform": [
     {
-      "calculate": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' + datum.risk",
+      "calculate": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
       "as": "tt"
     }
   ],
@@ -55,25 +55,27 @@
           }
         },
         "y": {
-          "field": "valid",
+          "field": "key_count",
           "type": "quantitative",
+          "scale": {
+            "domain": [
+              0,
+              14
+            ]
+          },
           "axis": {
-            "title": "veljavnih ključev na dan"
+            "title": "(povprečno) število ključev na uporabnika na dan"
           }
         },
         "color": {
-          "title": "tveganje",
-          "field": "risk",
-          "type": "ordinal"
+          "title": "uporabnikov",
+          "field": "user_count",
+          "type": "quantitative"
         }
       },
       "layer": [
         {
-          "mark": {
-            "type": "line",
-            "interpolate": "monotone",
-            "point": true
-          }
+          "mark": "point"
         },
         {
           "selection": {
@@ -99,6 +101,24 @@
           }
         }
       ]
+    },
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "point": true
+      },
+      "encoding": {
+        "x": {
+          "timeUnit": "utcmonthdate",
+          "field": "date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "average_key_count_per_user",
+          "type": "quantitative"
+        }
+      }
     },
     {
       "transform": [
@@ -141,7 +161,7 @@
             },
             "y": {
               "type": "quantitative",
-              "field": "valid"
+              "field": "key_count"
             }
           },
           "layer": [
@@ -164,8 +184,17 @@
               },
               "encoding": {
                 "color": {
-                  "type": "ordinal",
-                  "field": "risk"
+                  "type": "quantitative",
+                  "field": "user_count",
+                  "scale": {
+                    "scheme": {
+                      "name": "blues",
+                      "extent": [
+                        0.25,
+                        1
+                      ]
+                    }
+                  }
                 }
               }
             }

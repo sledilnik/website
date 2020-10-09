@@ -4,7 +4,19 @@
       <div id="validVis"></div>
     </b-row>
     <b-row class="d-flex justify-content-center">
+      <div id="publishedVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
       <div id="validByRiskVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <div id="publishedByRiskVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <div id="usercountVis"></div>
+    </b-row>
+    <b-row class="d-flex justify-content-center">
+      <div id="userPublishedByCountVis"></div>
     </b-row>
   </b-container>
 </template>
@@ -14,12 +26,20 @@ import embed from "vega-embed";
 
 import validPlot from "@/vega/valid.json";
 import validByRiskPlot from "@/vega/validByRisk.json";
+import userPublishedByCountPlot from "@/vega/userPublishedByCount.json";
+import usercountPlot from "@/vega/usercount.json";
+import publishedByRiskPlot from "@/vega/publishedByRisk.json";
+import publishedPlot from "@/vega/published.json";
 
 export default {
   name: "OstaniZdravPage",
   mounted() {
     embed("#validVis", validPlot);
+    embed("#publishedVis", publishedPlot);
     embed("#validByRiskVis", validByRiskPlot);
+    embed("#publishedByRiskVis", publishedByRiskPlot);
+    embed("#usercountVis", usercountPlot);
+    embed("#userPublishedByCountVis", userPublishedByCountPlot);
   },
 };
 </script>

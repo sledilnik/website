@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "title": "število ključev veljavnih na dan po stopnjah tveganja (interaktivno)",
+  "title": "število ključev objavljenih na dan po stopnjah tveganja (interaktivno)",
   "width": 700,
   "height": 250,
   "data": {
@@ -8,7 +8,7 @@
   },
   "transform": [
     {
-      "calculate": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' + datum.risk",
+      "calculate": "datum.published + ' objavljenih ključev s stopnjo tveganja ' + datum.risk",
       "as": "tt"
     }
   ],
@@ -55,10 +55,10 @@
           }
         },
         "y": {
-          "field": "valid",
+          "field": "published",
           "type": "quantitative",
           "axis": {
-            "title": "veljavnih ključev na dan"
+            "title": "objavljenih ključev na dan"
           }
         },
         "color": {
@@ -141,7 +141,7 @@
             },
             "y": {
               "type": "quantitative",
-              "field": "valid"
+              "field": "published"
             }
           },
           "layer": [

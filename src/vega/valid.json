@@ -4,7 +4,7 @@
   "width": 700,
   "height": 250,
   "data": {
-    "url": "https://cors-anywhere.herokuapp.com/https://ostanizdrav.sledilnik.org/plots/data.json"
+    "url": "https://ostanizdrav.sledilnik.org/plots/data.json"
   },
   "mark": {
     "type": "line",
