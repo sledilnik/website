@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "število ključev veljavnih na posamezen dan",
+  "width": 700,
+  "height": 250,
+  "data": {
+    "url": "https://cors-anywhere.herokuapp.com/https://ostanizdrav.sledilnik.org/plots/data.json"
+  },
+  "mark": {
+    "type": "line",
+    "interpolate": "monotone",
+    "point": true
+  },
+  "encoding": {
+    "x": {
+      "timeUnit": "utcmonthdate",
+      "field": "date",
+      "type": "temporal",
+      "axis": {
+        "title": "datum",
+        "labelAngle": 0,
+        "tickCount": "week",
+        "labelExpr": "[timeFormat(datum.value, '%d'), timeFormat(datum.value, '%d') <= '07' ? timeFormat(datum.value, '%b') : '']",
+        "gridDash": {
+          "condition": {
+            "test": {
+              "field": "value",
+              "timeUnit": "day",
+              "equal": 1
+            },
+            "value": []
+          },
+          "value": [
+            2,
+            2
+          ]
+        },
+        "tickDash": {
+          "condition": {
+            "test": {
+              "field": "value",
+              "timeUnit": "day",
+              "equal": 1
+            },
+            "value": []
+          },
+          "value": [
+            2,
+            2
+          ]
+        }
+      }
+    },
+    "y": {
+      "field": "valid",
+      "type": "quantitative",
+      "axis": {
+        "title": "veljavnih ključev na dan"
+      }
+    }
+  }
+}
