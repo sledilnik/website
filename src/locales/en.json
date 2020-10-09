@@ -460,14 +460,14 @@
             "validByRisk": {
                 "title": "Number of keys valid per day by risk level (interactive)",
                 "date": "Date",
-                "tooltip": "{0} keys with risk lvl {1}",
+                "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
                 "valid": "Number of keys valid on given day",
                 "risk": "Risk"
             },
             "publishedByRisk": {
                 "title": "Number of keys published per day by risk level (interactive)",
                 "date": "Date",
-                "tooltip": "{0} keys with risk lvl {1}",
+                "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
                 "published": "Number of keys published on given day",
                 "risk": "Risk"
             },
@@ -481,7 +481,7 @@
             "userPublishedByCount": {
                 "title": "Number of keys published per user per day (interactive)",
                 "date": "Date",
-                "tooltip": "{0} users uploaded {1} keys",
+                "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
                 "users": "Users"
             }

@@ -8,7 +8,7 @@ export default function ($t) {
     },
     "transform": [
       {
-        "calculate": "datum.published + ' objavljenih ključev s stopnjo tveganja ' + datum.risk",
+        "calculate": $t('charts.ostanizdrav.publishedByRisk.tooltip'),
         "as": "tt"
       }
     ],

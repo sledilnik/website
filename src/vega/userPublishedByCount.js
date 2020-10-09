@@ -8,7 +8,7 @@ export default function ($t) {
     },
     "transform": [
       {
-        "calculate": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
+        "calculate": $t('charts.ostanizdrav.userPublishedByCount.tooltip'),
         "as": "tt"
       }
     ],

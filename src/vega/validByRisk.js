@@ -7,7 +7,7 @@ export default function ($t) {return {
   },
   "transform": [
     {
-      "calculate": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' + datum.risk",
+      "calculate": $t('charts.ostanizdrav.validByRisk.tooltip'),
       "as": "tt"
     }
   ],
