@@ -5,6 +5,11 @@
         <div class="title-brand-wrapper">
           <h2><a href="#published">{{ $t('charts.ostanizdrav.published.title') }}</a></h2>
         </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-published`">?</a></div>
+          </div>
+        </div>
       </div>
       <div id="publishedVis"></div>
     </section>
@@ -12,6 +17,11 @@
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2><a href="#usercount">{{ $t('charts.ostanizdrav.usercount.title') }}</a></h2>
+        </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-usercount`">?</a></div>
+          </div>
         </div>
       </div>
       <div id="usercountVis"></div>
@@ -21,6 +31,11 @@
         <div class="title-brand-wrapper">
           <h2><a href="#userPublishedByCount">{{ $t('charts.ostanizdrav.userPublishedByCount.title') }}</a></h2>
         </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-userPublishedByCount`">?</a></div>
+          </div>
+        </div>
       </div>
       <div id="userPublishedByCountVis"></div>
     </section>
@@ -28,6 +43,11 @@
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2><a href="#validByRisk">{{ $t('charts.ostanizdrav.validByRisk.title') }}</a></h2>
+        </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-validByRisk`">?</a></div>
+          </div>
         </div>
       </div>
       <div id="validByRiskVis"></div>
@@ -37,6 +57,11 @@
         <div class="title-brand-wrapper">
           <h2><a href="#publishedByRisk">{{ $t('charts.ostanizdrav.publishedByRisk.title') }}</a></h2>
         </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-publishedByRisk`">?</a></div>
+          </div>
+        </div>
       </div>
       <div id="publishedByRiskVis"></div>
     </section>
@@ -44,6 +69,11 @@
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
           <h2><a href="#valid">{{ $t('charts.ostanizdrav.valid.title') }}</a></h2>
+        </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div><a class="faq-link" target="_blank" :href="`/${$i18n.i18next.language}/faq#ostanizdrav-valid`">?</a></div>
+          </div>
         </div>
       </div>
       <div id="validVis"></div>
