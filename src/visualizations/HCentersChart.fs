@@ -77,6 +77,32 @@ let renderChartOptions (state : State) dispatch =
         | ""     -> state.HcData |> Seq.map (fun dp -> (dp.Date, dp.all)) |> Seq.toArray
         | region -> state.HcData |> Seq.map (fun dp -> (dp.Date, getRegionStats region dp.municipalities)) |> Seq.toArray
 
+    let percentPositive (dp: TotalHcStats) =
+        Math.Round(
+            float (dp.tests.positive |> Option.defaultValue 0) 
+            / float (dp.tests.performed |> Option.defaultValue 1) * float 100.0, 2)
+
+    let allYAxis = [|
+        {|
+            index = 0
+            title = {| text = null |}
+            labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
+            opposite = true
+            visible = true
+            max = None
+            crosshair = true
+        |}
+        {|
+            index = 1
+            title = {| text = null |}
+            labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
+            opposite = false
+            visible = true
+            max = Some 15
+            crosshair = true
+        |}
+    |]
+
     let allSeries = [
         yield pojo
             {|
@@ -125,6 +151,15 @@ let renderChartOptions (state : State) dispatch =
                 color = "#d5c768"
                 data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, dp.tests.positive)) |> Seq.toArray
             |}
+        yield pojo
+            {|
+                name = I18N.t "charts.tests.shareOfPositive"
+                ``type`` = "line"
+                color = "#665191"
+                yAxis = 1
+                data = hcData |> Seq.map (fun (date,dp) -> (date |> jsTime12h, percentPositive dp)) |> Seq.toArray
+            |}
+
         yield addContainmentMeasuresFlags startTime None |> pojo
 
     ]
@@ -140,6 +175,7 @@ let renderChartOptions (state : State) dispatch =
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
+        yAxis = allYAxis
         series = List.toArray allSeries
 
         // need to hide negative label for addContainmentMeasuresFlags
