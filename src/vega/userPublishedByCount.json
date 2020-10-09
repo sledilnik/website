@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "title": "število ključev objavljenih na uporabnika na dan (interaktivno)",
   "width": 700,
   "height": 250,
   "data": {

@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "title": "število ključev veljavnih na posamezen dan",
   "width": 700,
   "height": 250,
   "data": {
