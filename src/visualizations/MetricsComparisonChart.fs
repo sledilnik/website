@@ -16,11 +16,24 @@ type MetricType =
     | Active
     | Today
     | ToDate
+
+type FullMetricType = {
+    MetricType: MetricType
+    IsAveraged: bool
+}
   with
-    static member getName = function
-        | Active -> I18N.t "charts.metricsComparison.showActive"
-        | Today -> I18N.t "charts.metricsComparison.showToday"
-        | ToDate -> I18N.t "charts.metricsComparison.showToDate"
+    member this.Name =
+        match this.MetricType, this.IsAveraged with
+        | Active, _ -> I18N.t "charts.metricsComparison.showActive"
+        | Today, false -> I18N.t "charts.metricsComparison.showToday"
+        | Today, true -> I18N.t "charts.metricsComparison.show7DaysAverage"
+        | ToDate, _ -> I18N.t "charts.metricsComparison.showToDate"
+
+let availableMetricTypes =
+    [ { MetricType = Active; IsAveraged = false }
+      { MetricType = Today; IsAveraged = false }
+      { MetricType = ToDate; IsAveraged = false }
+      { MetricType = Today; IsAveraged = true } ]
 
 type Metric =
     | PerformedTestsToday
@@ -34,7 +47,7 @@ type Metric =
     | HospitalToday
     | HospitalToDate
     | HospitalOutToDate
-    | ICUIn 
+    | ICUIn
     | ICUOut
     | ICUToday
     | ICUToDate
@@ -46,8 +59,9 @@ type Metric =
     | DeceasedToDate
     with
         static member UseStatsData metric =
-            [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday; ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
-            |> List.contains metric 
+            [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
+             ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
+            |> List.contains metric
 
 type MetricCfg = {
     Metric: Metric
@@ -69,7 +83,7 @@ module Metrics  =
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
-        { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" } 
+        { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" }
         { Metric=ICUOut;                Color="#ffb4a2"; Visible=false; Type=Today;  Id="icuDischarged" }
         { Metric=VentilatorIn;          Color="#bf5747"; Visible=true;  Type=Today;  Id="ventilatorAdmitted" }
         { Metric=VentilatorOut;         Color="#d99a91"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
@@ -87,10 +101,10 @@ module Metrics  =
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
         metrics
         |> List.map (fun mc -> if mc.Metric = metric then fn mc else mc)
-        
+
 type State =
     { ScaleType : ScaleType
-      MetricType : MetricType
+      MetricType : FullMetricType
       Metrics : Metrics
       StatsData : StatsData
       PatientsData : PatientsStats []
@@ -103,14 +117,14 @@ type Msg =
     | ConsumeServerError of exn
     | ToggleMetricVisible of Metric
     | ScaleTypeChanged of ScaleType
-    | MetricTypeChanged of MetricType
+    | MetricTypeChanged of FullMetricType
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
-        MetricType = Active
+        MetricType = { MetricType = Active; IsAveraged = false }
         Metrics = Metrics.initial
         StatsData = data
         PatientsData = [||]
@@ -135,82 +149,165 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
     | MetricTypeChanged metricType ->
-        { state with 
-            MetricType = metricType 
+        { state with
+            MetricType = metricType
             }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
+
+let statsDataGenerator metric =
+    fun point ->
+        match metric.Metric with
+        | PerformedTestsToday -> point.Tests.Performed.Today
+        | PerformedTestsToDate -> point.Tests.Performed.ToDate
+        | ConfirmedCasesToday -> point.Cases.ConfirmedToday
+        | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
+        | ActiveCases -> point.Cases.Active
+        | RecoveredToDate -> point.Cases.RecoveredToDate
+        | _ -> None
+
+let patientsDataGenerator metric =
+    fun point ->
+        match metric.Metric with
+        | HospitalToday -> point.total.inHospital.today
+        | HospitalIn -> point.total.inHospital.``in``
+        | HospitalOut -> point.total.inHospital.out
+        | HospitalToDate -> point.total.inHospital.toDate
+        | HospitalOutToDate -> point.total.outOfHospital.toDate
+        | ICUToday -> point.total.icu.today
+        | ICUIn -> point.total.icu.``in``
+        | ICUOut -> point.total.icu.out
+        | ICUToDate -> point.total.icu.toDate
+        | VentilatorToday -> point.total.critical.today
+        | VentilatorIn -> point.total.critical.``in``
+        | VentilatorOut -> point.total.critical.out
+        | VentilatorToDate -> point.total.critical.toDate
+        | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
+        | DeceasedToDate -> point.total.deceased.toDate
+        | _ -> None
+
+
+let calcRunningAverage (data: (JsTimestamp * float)[]) =
+    let daysOfMovingAverage = 7
+    let roundToDecimals = 1
+
+    let entriesCount = data.Length
+    let cutOff = daysOfMovingAverage / 2
+    let averagedDataLength = entriesCount - cutOff * 2
+
+    let averages = Array.zeroCreate averagedDataLength
+
+    let daysOfMovingAverageFloat = float daysOfMovingAverage
+    let mutable currentSum = 0.
+
+    let movingAverageFunc index =
+        let (_, entryValue) = data.[index]
+
+        currentSum <- currentSum + entryValue
+
+        match index with
+        | index when index >= daysOfMovingAverage - 1 ->
+            let date = data.[index - cutOff] |> fst
+            let average =
+                currentSum / daysOfMovingAverageFloat
+                |> Utils.roundDecimals roundToDecimals
+
+            averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
+
+            let valueToSubtract =
+                data.[index - (daysOfMovingAverage - 1)] |> snd
+            currentSum <- currentSum - valueToSubtract
+
+        | _ -> ignore()
+
+    for i in 0 .. entriesCount-1 do
+        movingAverageFunc i
+
+    averages
+
+
+let prepareMetricsData (metric: MetricCfg) (state: State) =
+
+    let statsData = statsDataGenerator metric
+    let patientsData = patientsDataGenerator metric
+
+    let untrimmedData =
+        if Metric.UseStatsData metric.Metric then
+            state.StatsData
+            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, statsData dp))
+        else
+            state.PatientsData
+            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, patientsData dp))
+
+    let isValueMissing ((_, value): (JsTimestamp * int option)) = value.IsNone
+
+    let intOptionToFloat value =
+        match value with
+        | Some x -> float x
+        | None -> 0.
+
+    let trimmedData =
+        untrimmedData
+        |> Seq.toArray
+        |> Array.skipWhile isValueMissing
+        |> Array.rev
+        |> Array.skipWhile isValueMissing
+        |> Array.rev
+        |> Array.map(fun (date, value) -> (date, value |> intOptionToFloat))
+
+    let finalData =
+        match state.MetricType.IsAveraged with
+        | true -> trimmedData |> calcRunningAverage
+        | false -> trimmedData
+
+    finalData
+
+
 let renderChartOptions state dispatch =
-
-    let statsDataGenerator mc =
-        fun point ->
-            match mc.Metric with
-            | PerformedTestsToday -> point.Tests.Performed.Today
-            | PerformedTestsToDate -> point.Tests.Performed.ToDate
-            | ConfirmedCasesToday -> point.Cases.ConfirmedToday
-            | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
-            | ActiveCases -> point.Cases.Active
-            | RecoveredToDate -> point.Cases.RecoveredToDate
-            | _ -> None
-
-    let patientsDataGenerator mc =
-        fun point ->
-            match mc.Metric with
-            | HospitalToday -> point.total.inHospital.today
-            | HospitalIn -> point.total.inHospital.``in``
-            | HospitalOut -> point.total.inHospital.out
-            | HospitalToDate -> point.total.inHospital.toDate
-            | HospitalOutToDate -> point.total.outOfHospital.toDate
-            | ICUToday -> point.total.icu.today
-            | ICUIn -> point.total.icu.``in``
-            | ICUOut -> point.total.icu.out
-            | ICUToDate -> point.total.icu.toDate
-            | VentilatorToday -> point.total.critical.today
-            | VentilatorIn -> point.total.critical.``in``
-            | VentilatorOut -> point.total.critical.out
-            | VentilatorToDate -> point.total.critical.toDate
-            | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
-            | DeceasedToDate -> point.total.deceased.toDate
-            | _ -> None
 
     let allSeries = [
         let mutable startTime = DateTime.Today |> jsTime
-        for metric in state.Metrics do
-            let statsData = statsDataGenerator metric
-            let patientsData = patientsDataGenerator metric
+
+        let visibleMetrics =
+            state.Metrics
+            |> Seq.filter (fun metric ->
+                metric.Type = state.MetricType.MetricType
+                && metric.Visible)
+
+        for metric in visibleMetrics do
+            let data = prepareMetricsData metric state
+
+            if data |> Array.length > 0 then
+                let metricStartTime = data.[0] |> fst
+                if metricStartTime < startTime then
+                    startTime <- metricStartTime
+
             yield pojo
                 {|
-                    visible = metric.Type = state.MetricType && metric.Visible
+                    visible = true
+                    ``type`` =
+                        if state.MetricType.IsAveraged then "spline"
+                        else "line"
                     color = metric.Color
                     name = I18N.tt "charts.metricsComparison" metric.Id
-                    marker = if metric.Metric = DeceasedToday then pojo {| enabled = true; symbol = "diamond" |} else pojo {| enabled = false |}
+                    marker =
+                        if metric.Metric = DeceasedToday then
+                            pojo {| enabled = true; symbol = "diamond" |}
+                        else pojo {| enabled = false |}
                     lineWidth = if metric.Metric = DeceasedToday then 0 else 2
-                    states = if metric.Metric = DeceasedToday then pojo {| hover = {| lineWidthPlus = 0 |} |} else pojo {||}
-                    dashStyle = 
-                        match state.MetricType with
-                        | Active -> "Solid" 
+                    states =
+                        if metric.Metric = DeceasedToday then
+                            pojo {| hover = {| lineWidthPlus = 0 |} |}
+                        else pojo {||}
+                    dashStyle =
+                        match state.MetricType.MetricType with
+                        | Active -> "Solid"
                         | Today -> "ShortDot"
                         | ToDate -> "Dot"
-                    data =
-                        if Metric.UseStatsData metric.Metric 
-                        then
-                            state.StatsData
-                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, statsData dp))
-                            |> Seq.skipWhile (fun (ts,value) ->
-                                if metric.Type = state.MetricType && metric.Visible && value.IsSome then
-                                    startTime <- min startTime ts
-                                value.IsNone)
-                            |> Seq.toArray
-                        else
-                            state.PatientsData
-                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, patientsData dp))
-                            |> Seq.skipWhile (fun (ts,value) ->
-                                if metric.Type = state.MetricType && metric.Visible && value.IsSome then
-                                    startTime <- min startTime ts
-                                value.IsNone)
-                            |> Seq.toArray
+                    data = data
                 |}
+
         yield addContainmentMeasuresFlags startTime None |> pojo
     ]
 
@@ -237,7 +334,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 
@@ -259,29 +356,30 @@ let renderMetricsSelectors state dispatch =
         prop.className "metrics-selectors"
         prop.children [
             for mc in state.Metrics do
-                if mc.Type = state.MetricType 
-                then yield renderMetricSelector mc dispatch
+                if mc.Type = state.MetricType.MetricType then
+                    yield renderMetricSelector mc dispatch
         ]
     ]
 
-let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
-    let renderMetricTypeSelector (typeSelector: MetricType) =
-        let active = typeSelector = activeMetricType
+let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
+    let renderMetricTypeSelector (metricTypeToRender: FullMetricType) =
+        let active = metricTypeToRender = activeMetricType
         Html.div [
-            prop.onClick (fun _ -> dispatch typeSelector)
+            prop.onClick (fun _ -> dispatch metricTypeToRender)
             Utils.classes
                 [(true, "chart-display-property-selector__item")
                  (active, "selected") ]
-            prop.text (typeSelector |> MetricType.getName)
+            prop.text (metricTypeToRender.Name)
         ]
 
     let metricTypesSelectors =
-        [ Active; Today; ToDate ]
+        availableMetricTypes
         |> List.map renderMetricTypeSelector
 
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children ((Html.text (I18N.t "charts.common.view")) :: metricTypesSelectors)
+        prop.children
+            ((Html.text (I18N.t "charts.common.view")) :: metricTypesSelectors)
     ]
 
 let render state dispatch =
@@ -291,8 +389,10 @@ let render state dispatch =
     | _, None ->
         Html.div [
             Utils.renderChartTopControls [
-                renderMetricTypeSelectors state.MetricType (MetricTypeChanged >> dispatch)
-                Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+                renderMetricTypeSelectors
+                    state.MetricType (MetricTypeChanged >> dispatch)
+                Utils.renderScaleSelector
+                    state.ScaleType (ScaleTypeChanged >> dispatch)
             ]
             renderChartContainer state dispatch
             renderMetricsSelectors state dispatch

@@ -1,5 +1,9 @@
 # TODO
 
+- https://github.com/sledilnik/website/issues/581
+    - `charts.metricsComparison.show7DaysAverage`
+    
+
 ## New countries chart
 - deaths per cases (windowed, averaged)
 
