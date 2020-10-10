@@ -12,6 +12,8 @@ open Types
 
 open Data.Patients
 
+let chartText = I18N.chartText "metricsComparison"
+
 type MetricType =
     | Active
     | Today
@@ -24,10 +26,10 @@ type FullMetricType = {
   with
     member this.Name =
         match this.MetricType, this.IsAveraged with
-        | Active, _ -> I18N.t "charts.metricsComparison.showActive"
-        | Today, false -> I18N.t "charts.metricsComparison.showToday"
-        | Today, true -> I18N.t "charts.metricsComparison.show7DaysAverage"
-        | ToDate, _ -> I18N.t "charts.metricsComparison.showToDate"
+        | Active, _ -> chartText "showActive"
+        | Today, false -> chartText "showToday"
+        | Today, true -> chartText "show7DaysAverage"
+        | ToDate, _ -> chartText "showToDate"
 
 let availableMetricTypes =
     [ { MetricType = Active; IsAveraged = false }
@@ -290,7 +292,7 @@ let renderChartOptions state dispatch =
                         if state.MetricType.IsAveraged then "spline"
                         else "line"
                     color = metric.Color
-                    name = I18N.tt "charts.metricsComparison" metric.Id
+                    name = chartText metric.Id
                     marker =
                         if metric.Metric = DeceasedToday then
                             pojo {| enabled = true; symbol = "diamond" |}
@@ -349,7 +351,7 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
             [(true, "btn btn-sm metric-selector")
              (metric.Visible, "metric-selector--selected")]
         prop.style style
-        prop.text (I18N.tt "charts.metricsComparison" metric.Id) ]
+        prop.text (chartText metric.Id) ]
 
 let renderMetricsSelectors state dispatch =
     Html.div [
@@ -379,7 +381,7 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children
-            ((Html.text (I18N.t "charts.common.view")) :: metricTypesSelectors)
+            ((Html.text (I18N.chartText "common" "view")) :: metricTypesSelectors)
     ]
 
 let render state dispatch =

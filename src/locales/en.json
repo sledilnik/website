@@ -183,6 +183,7 @@
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
+            "show7DaysAverage": "7-Days Average: ",
             "testsPerformed": "Tests",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
@@ -391,9 +392,9 @@
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Cases Per 1 Million People",
-            "yAxisTitle": "New cases per 1 million people",
-            "legendTitle": "New cases per 1M people"
+            "title": "Countries: New Daily Cases Per 1 Million People",
+            "yAxisTitle": "New daily cases per 1 million people",
+            "legendTitle": "New daily cases per 1M people"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 1 Million People",
