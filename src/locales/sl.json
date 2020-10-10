@@ -845,7 +845,15 @@
         "weeklyStats": {
             "title": "Tedenska statistika",
             "sentToQuarantine": "Poslani v karanteno",
-            "confirmedCases": "Potrjeni primeri"
+            "confirmedCases": "Potrjeni primeri",
+            "confirmedFromQuarantine": "Potrjeni iz karantene",
+            "quarantine": "Karantena",
+            "bySource": "Viri okužb",
+            "bySourceCountry": "Po državah",
+            "importedCases":  "Uvoženi primeri",
+            "importRelatedCases":  "Povezani z uvoženimi",
+            "localSource":  "Lokalni vir",
+            "sourceUnknown":  "Neznan vir"
         }
     },
     "footer": {
