@@ -46,7 +46,7 @@
         "orangePhaseGenitive": "orange",
         "redPhase": "Red phase",
         "redPhaseGenitive": "red",
-        "nextCriteria": "<br/>Criteria for the phase {{ phaseNextNumber }} of the {{ phaseNextPackage }} package is {{ phaseNextCriteria }}.",
+        "nextCriteria": "<br/>Criteria for the package {{ phaseNextNumber }} of the {{ phaseNextPackage }} phase is {{ phaseNextCriteria }}.",
         "package1": "package 1",
         "package2": "package 2",
         "package3": "package 3",
