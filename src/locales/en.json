@@ -116,32 +116,41 @@
     },
     "phase": {
         "1": {
-            "title": "Phase 1"
+            "title": "phase<br>1"
         },
         "2": {
-            "title": "Phase 2",
+            "title": "phase<br>2",
             "description": "epidemic, new testing methodology"
         },
         "3": {
-            "title": "Phase 3",
+            "title": "phase<br>3",
             "description": "new testing methodology"
         },
         "4": {
-            "title": "Phase 4",
+            "title": "phase<br>4",
             "description": "new testing methodology"
         },
         "5": {
-            "title": "Phase 5",
+            "title": "phase<br>5",
             "description": "new testing methodology"
         },
         "6": {
-            "title": "Phase 6",
+            "title": "phase<br>6",
             "description": "new testing methodology, study"
         },
         "7": {
-            "title": "Phase 7",
+            "title": "phase<br>7",
             "description": "end of epidemic"
+        },
+        "8": {
+            "title": "phase<br>8",
+            "description": "new testing methodology - children"
+        },
+        "9": {
+            "title": "phase<br>9",
+            "description": "switch to partial contact tracing"
         }
+
     },
     "charts": {
         "common": {
@@ -922,27 +931,27 @@
     "mk": {
         "phase": {
             "1": {
-                "title": "Phase 1",
+                "title": "phase<br>1",
                 "description": "Debar 4, Skopje 3, Makedonija 2 "
             },
             "2": {
-                "title": "Phase 2",
+                "title": "phase<br>2",
                 "description": "Skopje 4"
             },
             "3": {
-                "title": "Phase 3",
+                "title": "phase<br>3",
                 "description": "Debar 4"
             },
             "4": {
-                "title": "Phase 4",
+                "title": "phase<br>4",
                 "description": "Makedonija 3"
             },
             "5": {
-                "title": "Phase 5",
+                "title": "phase<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "6": {
-                "title": "Phase 6",
+                "title": "phase<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             }
         },

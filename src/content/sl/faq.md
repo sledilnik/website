@@ -296,11 +296,11 @@ Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/sl/stats#cases-char
 
 
 <details>
-  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 7), ki jih vidimo v grafih?</summary>
+  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 9), ki jih vidimo v grafih?</summary>
 
-Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, uvedejo se interventni ukrepi samoizolacije...).
+Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, spremeba sledenja stikov...).
 
-Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.
+Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sledenja stikov spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.
 
 * **Faza 1 (4.–12. marec 2020)**: Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti. 
 
@@ -314,10 +314,11 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
-* **Faza 7 (15. maj)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
-    - 1.6.: sproščanje osnovna šola, zbiranje do 200 ljudi.
-    - 15.6.: sproščanje, zbiranje do 500 ljudi, prost prestop meje izven kontrolnih točk za SLO, AUT, ITA in HUN.
-    - 15.6.: poostrena obvezna 14-dnevna karantena za kritične države.
+* **Faza 7 (15. maj-10. september)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
+
+* **Faza 8 (10. september–9. oktober)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko. 
+
+* **Faza 9 (9. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiologi bodo zaradi preveč okužb z novim koronavirusom prioritetno iskali stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
 </details>
 
 <details>

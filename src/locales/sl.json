@@ -544,31 +544,39 @@
     },
     "phase": {
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
         },
         "2": {
-            "title": "Faza 2",
+            "title": "faza<br>2",
             "description": "epidemija, nov režim testiranja"
         },
         "3": {
-            "title": "Faza 3",
+            "title": "faza<br>3",
             "description": "nov režim testiranja"
         },
         "4": {
-            "title": "Faza 4",
+            "title": "faza<br>4",
             "description": "nov režim testiranja"
         },
         "5": {
-            "title": "Faza 5",
+            "title": "faza<br>5",
             "description": "nov režim testiranja"
         },
         "6": {
-            "title": "Faza 6",
+            "title": "faza<br>6",
             "description": "nov režim testiranja, raziskava"
         },
         "7": {
-            "title": "Faza 7",
+            "title": "faza<br>7",
             "description": "preklic epidemije"
+        },
+        "8": {
+            "title": "faza<br>8",
+            "description": "nov režim testiranja otrok"
+        },
+        "9": {
+            "title": "faza<br>9",
+            "description": "prehod na delno sledenje stikov"
         }
     },
     "charts": {

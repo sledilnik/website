@@ -217,6 +217,8 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -250,9 +252,19 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.6.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,5,15);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,9,10);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.7.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,9,10);
+                       ``to``=jsTime <| DateTime(2020,10,9);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.8.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,9);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.9.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
