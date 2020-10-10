@@ -356,9 +356,9 @@
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi slučajevi na milijun stanovnika",
-            "legendTitle": "Novi slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
@@ -380,7 +380,8 @@
             "female": "Žene",
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
-            "confirmedCases": "Potvrđeni slučajevi"
+            "confirmedCases": "Potvrđeni slučajevi",
+            "disclaimer": "Napomena: Za razliku od drugih podataka koji se redovito objavljuju za različite kategorije, službeni izvori dobivaju demografske podatke s vremenskim zakašnjenjem (dob, općina, …), stoga se oni dobivaju s jednodnevnim kašnjenjem. To je također razlog što u prikazu po dobnim skupinama može doći do nekih odstupanja od podataka u drugim prikazima, kao što su niže vrijednosti broja potvrđenih slučajeva i smrti."
         },
         "ageGroupsTimeline": {
             "title": "Potvrđeni slučajevi po dobnim skupinama",
@@ -431,7 +432,8 @@
             "testsPerformed": "Testiranja",
             "showToDate": "Do danas",
             "showToday": "Dnevni",
-            "showActive": "Aktivni"
+            "showActive": "Aktivni",
+            "show7DaysAverage": "Sedmodnevni prosjek"
         },
         "spread": {
             "absoluteTitle": "Dnevni prirast potvrđenih slučajeva",
@@ -765,30 +767,38 @@
     "phase": {
         "4": {
             "description": "nova metoda testiranja",
-            "title": "Faza 4"
+            "title": "faza<br>4"
         },
         "3": {
-            "title": "Faza 3",
+            "title": "faza<br>3",
             "description": "nova metoda testiranja"
         },
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
         },
         "2": {
             "description": "epidemija, nova metoda testiranja",
-            "title": "Faza 2"
+            "title": "faza<br>2"
         },
         "7": {
-            "title": "Faza 7",
+            "title": "faza<br>7",
             "description": "kraj epidemije"
         },
         "6": {
             "description": "nova metoda testiranja, istraživanje",
-            "title": "Faza 6"
+            "title": "faza<br>6"
         },
         "5": {
-            "title": "Faza 5",
+            "title": "faza<br>5",
             "description": "nova metoda testiranja"
+        },
+        "9": {
+            "description": "prebaci na djelomično praćenje kontakata",
+            "title": "faza<br>9"
+        },
+        "8": {
+            "description": "nova metodologija ispitivanja – djeca",
+            "title": "faza<br>8"
         }
     },
     "embedMaker": {
@@ -888,9 +898,12 @@
         "package3": "paket 3",
         "package2": "paket 2",
         "package1": "paket 1",
-        "redPhase": "Crvena faza, ",
-        "orangePhase": "Narančasta faza, ",
-        "per100k": "po 100 tisuća"
+        "redPhase": "Crvena faza",
+        "orangePhase": "Narančasta faza",
+        "per100k": "po 100 tisuća",
+        "nextCriteria": "<br>Kriteriji za paket {{ phaseNextNumber }} {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
+        "redPhaseGenitive": "crvene",
+        "orangePhaseGenitive": "narančaste"
     },
     "region": {
         "za": "Zasavlje",
@@ -1027,27 +1040,27 @@
         "phase": {
             "6": {
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
-                "title": "Šesta faza"
+                "title": "faza<br>6"
             },
             "5": {
                 "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
-                "title": "Peta faza"
+                "title": "faza<br>5"
             },
             "4": {
                 "description": "Makedonija 3",
-                "title": "Četvrta faza"
+                "title": "faza<br>4"
             },
             "3": {
                 "description": "Debar 4",
-                "title": "Treća faza"
+                "title": "faza<br>3"
             },
             "2": {
                 "description": "Skoplje 4",
-                "title": "Druga faza"
+                "title": "faza<br>2"
             },
             "1": {
                 "description": "Debar 4, Skopje 3, Makedonija 2 ",
-                "title": "Prva faza"
+                "title": "faza<br>1"
             }
         }
     }
