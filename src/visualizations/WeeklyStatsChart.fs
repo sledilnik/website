@@ -9,6 +9,20 @@ open Browser
 open Types
 open Highcharts
 
+let colors =
+    [ "#ffa600"
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844"
+      "#f95d6a"
+      "#d45087"
+      "#a05195"
+      "#665191"
+      "#10829a"
+      "#024a66" ]
+
 type DisplayType =
     | Quarantine
     | BySource
@@ -90,6 +104,29 @@ let splitOutFromTotal (split : int option) (total : int option)  =
     | None, Some _ -> total
     | _ -> None
 
+
+// TODO: Accumulate by country data -> sort, assign colors
+
+let renderSeriesImportedByCountry (state: State) =
+    let countries = state.data.Head.ImportedFrom |> Map.toSeq |> Seq.map (fun (countryAbbr, _) -> countryAbbr)
+    countries |> Seq.map (fun country -> {|
+                                            stack = 0
+                                            color = "#000000"
+                                            name = I18N.tt "country" (country.ToUpper())
+                                            data = state.data |> Seq.map (fun dp -> {|
+                                                                                      x = dp.Date |> jsTime
+                                                                                      y = dp.ImportedFrom.Item country
+                                                                                      fmtTotal = dp.ImportedFrom.Item country |> string
+                                                                                      fmtWeekYearFromTo =
+                                                                                          I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |}
+
+                                                                                      |} |> pojo) |> Array.ofSeq
+                                            |} |> pojo
+      )
+
+
+
+
 let renderChartOptions (state: State) dispatch =
     let renderSeries series =
         let getPoint: (WeeklyStatsDataPoint -> int option) =
@@ -155,11 +192,10 @@ let renderChartOptions (state: State) dispatch =
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series =
-               state.displayType
-               |> selectSeries
-               |> Seq.map (renderSeries)
-               |> Seq.toArray
+           series = match state.displayType with
+                    | Quarantine -> Series.quarantine |> Seq.map renderSeries |> Seq.toArray
+                    | BySource -> Series.bySource |> Seq.map renderSeries |> Seq.toArray
+                    | BySourceCountry -> renderSeriesImportedByCountry state |> Seq.toArray
            yAxis =
                baseOptions.yAxis
                |> Array.map (fun yAxis -> {| yAxis with min = None |})
