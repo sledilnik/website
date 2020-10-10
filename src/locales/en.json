@@ -186,7 +186,7 @@
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
-            "show7DaysAverage": "7-Days Average",
+            "show7DaysAverage": "7-Day Average",
             "testsPerformed": "Tests",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
@@ -902,7 +902,7 @@
         "YEM": "Yemen",
         "ZAF": "South Africa",
         "ZMB": "Zambia",
-        "ZWE": "Zimbabwe"        
+        "ZWE": "Zimbabwe"
     },
     "country-groups": {
         "groupLatinAmerica": "Latin America",
