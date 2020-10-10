@@ -160,7 +160,7 @@ let renderMetricsSelectors activeMetrics dispatch =
     let renderSelector (metrics : DisplayMetrics) =
         let active = metrics = activeMetrics
         Html.div [
-            prop.text (I18N.chartText "ageGroupsTimeline." metrics.Id)
+            prop.text (I18N.chartText "ageGroupsTimeline" metrics.Id)
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected")]

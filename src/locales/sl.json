@@ -833,7 +833,8 @@
             "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
-            "populationTotal": "Prebivalcev skupaj"
+            "populationTotal": "Prebivalcev skupaj",
+            "disclaimer": "Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih."
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",

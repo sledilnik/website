@@ -82,7 +82,7 @@ let dropdown (viz: Visualization) =
                                         // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/guides/web-intent
                                         ("https://twitter.com/intent/tweet/?"
                                          + "text="
-                                         + chartText viz.ChartTextsGroup ".title"
+                                         + chartText viz.ChartTextsGroup "title"
                                          + "&url="
                                          + graphUrl)
                                     prop.children
