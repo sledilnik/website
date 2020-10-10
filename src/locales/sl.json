@@ -656,6 +656,9 @@
             "recovered": "Preboleli",
             "deceased": "Umrli"
         },
+        "schools": {
+            "title": "Šole"
+        },
         "patients": {
             "title": "Hospitalizirani",
             "byHospital": "Po bolnišnicah",

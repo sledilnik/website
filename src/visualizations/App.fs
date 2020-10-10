@@ -21,6 +21,7 @@ let init (query: obj) (visualization: string option) (page: string) =
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "Schools" -> Some Schools
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -193,6 +194,13 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView AgeGroupsTimelineViz.Rendering.renderChart
                             {| data = data |} }
 
+    let schools =
+          { VisualizationType = Schools
+            ClassName = "schools-chart"
+            ChartTextsGroup = "schools"
+            Explicit = false
+            Renderer = lazyView SchoolsViz.Rendering.renderChart }
+
     let tests =
           { VisualizationType = Tests
             ClassName = "tests-chart"
@@ -338,7 +346,9 @@ let render (state: State) (_: Msg -> unit) =
           }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
+        [ hospitals; metricsComparison; spread
+          dailyComparison; patients; schools
+          map; municipalities
           europeMap; ageGroupsTimeline; tests; hCenters; infections
           cases; ageGroups; regionMap; regions
         ]

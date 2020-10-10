@@ -104,6 +104,7 @@ type VisualizationType =
     | Ratios
     | HCenters
     | Hospitals
+    | Schools
     | Tests
     | Cases
     | Spread

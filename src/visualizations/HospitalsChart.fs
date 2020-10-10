@@ -540,5 +540,5 @@ let render (state : State) dispatch =
             ]
         ]
 
-let hospitalsChart () =
+let hospitalsChart() =
     React.elmishComponent("HospitalsChart", init (), update, render)

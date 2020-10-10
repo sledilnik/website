@@ -68,6 +68,11 @@ export default {
           text: this.$t('charts.patients.title'),
           dimensions: [1140, 720]
         },
+        "Schools": {
+          value: "Schools",
+          text: this.$t('charts.schools.title'),
+          dimensions: [1140, 720]
+        },
         "Ratios": {
           value: "Ratios",
           text: this.$t('charts.ratios.title'),

@@ -3,7 +3,6 @@ module Data.Patients
 open System
 
 let url = "https://api.sledilnik.org/api/patients"
-//let url = "https://covid19.rthand.com/api/patients"
 
 type DeceasedCounts = {
     today: int option
