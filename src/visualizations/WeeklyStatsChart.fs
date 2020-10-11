@@ -9,18 +9,20 @@ open Types
 open Highcharts
 
 let countryColors =
-    [ "#ffa600"
+    [
+      "#f95d6a"
+      "#a05195"
+      "#024a66"
+      "#665191"
+      "#10829a"
       "#dba51d"
       "#afa53f"
       "#777c29"
       "#70a471"
       "#457844"
-      "#f95d6a"
+      "#ffa600"
       "#d45087"
-      "#a05195"
-      "#665191"
-      "#10829a"
-      "#024a66" ]
+      ]
 
 type DisplayType =
     | Quarantine
@@ -44,7 +46,7 @@ type Series =
 
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
-    let bySource = [ImportedCases; ImportRelatedCases;  LocalSource; SourceUnknown]
+    let bySource = [LocalSource; ImportedCases; ImportRelatedCases; SourceUnknown; ]
 
     let getSeriesInfo =
         function
@@ -113,7 +115,7 @@ let sumOfMaps (a: Map<string, int>) (b: Map<string, int option>) = Map.fold (fun
 let countryTotals (countriesWeekly: seq<Map<string, int option>>) = Seq.fold sumOfMaps Map.empty countriesWeekly
                                                                     |> Map.filter (fun _ v -> v > 0)
                                                                     |> Map.toArray
-                                                                    |> Array.sortBy(fun (_, v) -> v)
+                                                                    |> Array.sortByDescending(fun (_, v) -> v)
 
 let renderSeriesImportedByCountry (state: State) =
     let countryCodesSortedByTotal = state.data |> List.map (fun d -> d.ImportedFrom ) |> countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
@@ -121,9 +123,9 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       {|
                                                                       stack = 0
                                                                       animation = false
-                                                                      color = countryColors.[countryIndex % countryColors.Length]
+                                                                      legendIndex = countryIndex
+                                                                      color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" (countryCode.ToUpper())
-                                                                      legendIndex = Array.length countryCodesSortedByTotal - countryIndex
                                                                       data = state.data |> Seq.map (fun dp -> {|
                                                                                                                x = dp.Date |> jsTime
                                                                                                                y = dp.ImportedFrom.Item countryCode
@@ -140,7 +142,7 @@ let renderSeriesImportedByCountry (state: State) =
 
 
 let renderChartOptions (state: State) dispatch =
-    let renderSeries series =
+    let renderSeries legendIndex series =
         let getPoint: (WeeklyStatsDataPoint -> int option) =
             match series with
             | ConfirmedCases -> fun dp -> dp.ConfirmedCases |> splitOutFromTotal dp.Source.FromQuarantine
@@ -167,6 +169,7 @@ let renderChartOptions (state: State) dispatch =
            name = I18N.tt "charts.weeklyStats" seriesId
            stack = stack
            animation = false
+           legendIndex = legendIndex
            data =
                state.data
                |> Seq.map (fun dp ->
@@ -201,12 +204,12 @@ let renderChartOptions (state: State) dispatch =
                 events = pojo {| load = onLoadEvent(className) |}
             |}
            series = match state.displayType with
-                    | Quarantine -> Series.quarantine |> Seq.map renderSeries |> Seq.toArray
-                    | BySource -> Series.bySource |> Seq.map renderSeries |> Seq.toArray
+                    | Quarantine -> Series.quarantine |> Seq.mapi renderSeries |> Seq.toArray
+                    | BySource -> Series.bySource |> Seq.mapi renderSeries |> Seq.toArray
                     | BySourceCountry -> renderSeriesImportedByCountry state |> Seq.toArray
            yAxis =
                baseOptions.yAxis
-               |> Array.map (fun yAxis -> {| yAxis with min = None |})
+               |> Array.map (fun yAxis -> {| yAxis with min = None; reversedStacks = false |})
            xAxis =
                baseOptions.xAxis
                |> Array.map (fun xAxis ->
