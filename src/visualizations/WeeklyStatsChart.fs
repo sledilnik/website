@@ -229,7 +229,11 @@ let renderChartOptions (state: State) dispatch =
                     ) |> Seq.toArray
            yAxis =
                baseOptions.yAxis
-               |> Array.map (fun yAxis -> {| yAxis with min = None; reversedStacks = false |})
+               |> Array.map (fun yAxis -> {| yAxis with
+                                              min = None
+                                              reversedStacks = match state.displayType with
+                                                               | Quarantine -> true
+                                                               | _ -> false |})
            xAxis =
                baseOptions.xAxis
                |> Array.map (fun xAxis ->
