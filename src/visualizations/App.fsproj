@@ -19,6 +19,7 @@
         <Compile Include="data/Hospitals.fs" />
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="data\Schools.fs" />
+        <Compile Include="SchoolsViz\Synthesis.fs" />
         <Compile Include="SchoolsViz\Rendering.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="DailyComparisonChart.fs" />

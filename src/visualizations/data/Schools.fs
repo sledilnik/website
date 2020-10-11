@@ -1,6 +1,5 @@
 ﻿module Data.Schools
 
-open System
 open Fable.SimpleJson
 
 let url =
@@ -8,7 +7,7 @@ let url =
     "data/master/json/mizs-stats.json"
 
 
-type ByInstitutions = {
+type ByInstitutionType = {
     Vrtec: int
     Osnovna_sola: int
     Osnovna_sola_s_prilagojenim_programom: int
@@ -23,19 +22,19 @@ type SchoolsStatsDay = {
     month: int
     day: int
 
-    ucenci_okuzbe_nove: ByInstitutions
-    zaposleni_okuzbe_nove: ByInstitutions
+    ucenci_okuzbe_nove: ByInstitutionType
+    zaposleni_okuzbe_nove: ByInstitutionType
 
-    oddelki_v_karanteni_novi: ByInstitutions
-    ucenci_v_karanteni_novi: ByInstitutions
+    oddelki_v_karanteni_novi: ByInstitutionType
+    ucenci_v_karanteni_novi: ByInstitutionType
 
-    ucenci_okuzbe_aktivne: ByInstitutions
-    zaposleni_okuzbe_aktivne: ByInstitutions
+    ucenci_okuzbe_aktivne: ByInstitutionType
+    zaposleni_okuzbe_aktivne: ByInstitutionType
 
-    oddelki_v_karanteni_aktivne: ByInstitutions
-    ucenci_v_karanteni_aktivne: ByInstitutions
+    oddelki_v_karanteni_aktivne: ByInstitutionType
+    ucenci_v_karanteni_aktivne: ByInstitutionType
 
-    zavodi_pouk_na_daljavo: ByInstitutions
+    zavodi_pouk_na_daljavo: ByInstitutionType
 }
 
 //type ByInstitutions = {

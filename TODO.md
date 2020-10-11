@@ -1,8 +1,12 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/577
-    - reading the JSON file
-        - try writing a test that parses JSON
+    - active infections
+        - 2 series, učenci in zaposleni
+        - date as X-axis
+        - bar graph (like the one for age groups timeline) 
+    - fix todos
+        
 
 ## New countries chart
 - deaths per cases (windowed, averaged)

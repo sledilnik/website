@@ -199,7 +199,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "schools-chart"
             ChartTextsGroup = "schools"
             Explicit = false
-            Renderer = lazyView SchoolsViz.Rendering.renderChart }
+            Renderer = lazyView SchoolsViz.Rendering.renderViz }
 
     let tests =
           { VisualizationType = Tests
