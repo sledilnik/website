@@ -872,15 +872,15 @@
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         },
         "weeklyStats": {
-            "title": "Tedenska statistika",
+            "title": "Viri okužb in karantena",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
             "quarantine": "Karantena",
             "bySource": "Viri okužb",
             "bySourceRelative": "Viri okužb (relativno)",
-            "bySourceCountry": "Po državah",
-            "bySourceCountryRelative": "Po državah (relativno)",
+            "bySourceCountry": "Uvoženi primeri",
+            "bySourceCountryRelative": "Uvoženi primeri (relativno)",
             "importedCases":  "Uvoženi primeri",
             "importRelatedCases":  "Povezani z uvoženimi",
             "localSource":  "Lokalni vir",

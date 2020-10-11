@@ -450,15 +450,15 @@
             "title": "Hospital capacities"
         },
         "weeklyStats": {
-            "title": "Weekly Statistics",
+            "title": "Source of Infection and Quarantine",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
             "quarantine": "Quarantine",
             "bySource": "Sources of Infection",
             "bySourceRelative": "Sources of Infection (Relative)",
-            "bySourceCountry": "By Country",
-            "bySourceCountryRelative": "By Country (Relative)",
+            "bySourceCountry": "Imported Cases",
+            "bySourceCountryRelative": "Imported Cases (Relative)",
             "importedCases":  "Imported Cases",
             "importRelatedCases":  "Related to Imported Cases",
             "localSource":  "Local Source",
