@@ -22,6 +22,7 @@ let dropdown (viz: Visualization) =
             | Infections -> (1140, 720)
             | Spread -> (1140, 630)
             | Regions -> (1140, 720)
+            | Weekly -> (1140, 720)
             | Map -> (1140, 820)
             | RegionMap -> (1140, 820)
             | EuropeMap -> (1140, 780)

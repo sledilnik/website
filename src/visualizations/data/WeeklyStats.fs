@@ -2,7 +2,6 @@ module Data.WeeklyStats
 
 open Fable.SimpleHttp
 open Fable.SimpleJson
-
 open Types
 
 let url = "https://api.sledilnik.org/api/stats-weekly"
@@ -18,24 +17,24 @@ type private TransferSource =
     member this.ToDomain : InfectionSource =
         { FromQuarantine = this.quarantine
           Local = this.local
-          Import = this.import 
+          Import = this.import
           ImportRelated = this.``import-related``
           Unknown = this.unknown }
 
 type private TransferWStatsDataPoint =
-    { 
+    {
         week : string
         year : int
         month : int
         day : int
-        ``to`` : 
+        ``to`` :
             {|
                 year : int
                 month : int
                 day : int
             |}
         confirmed : int option
-        sentTo : 
+        sentTo :
               {|
                   quarantine : int option
               |}
@@ -44,7 +43,7 @@ type private TransferWStatsDataPoint =
     }
 
     member this.ToDomain : WeeklyStatsDataPoint =
-        { 
+        {
           Week = this.week
           Date = System.DateTime(this.year, this.month, this.day)
           DateTo = System.DateTime(this.``to``.year, this.``to``.month, this.``to``.day)

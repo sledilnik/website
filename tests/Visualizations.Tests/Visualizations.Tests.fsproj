@@ -19,6 +19,7 @@
         <Compile Include="CountriesChartTests\Averaging country data.fs" />
         <Compile Include="Date arithmetic.fs" />
         <Compile Include="Calculating windowed sums.fs" />
+        <Compile Include="WeeklyStatsChartTest\Aggregating countries.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

@@ -87,7 +87,8 @@
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
-        "longerDate": "{{ date, %A, %e. %B %Y }}"
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -614,7 +615,8 @@
             "numDateFormat": "%d. %m. %Y",
             "dateFormat": "%A, %e. %B %Y",
             "longDateFormat": "%e. %B %Y",
-            "shortDateFormat": "%e. %b"
+            "shortDateFormat": "%e. %b",
+            "weekYearDateFormat": "%W. teden %Y"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
@@ -868,6 +870,21 @@
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
+        },
+        "weeklyStats": {
+            "title": "Tedenska statistika",
+            "sentToQuarantine": "Poslani v karanteno",
+            "confirmedCases": "Potrjeni primeri",
+            "confirmedFromQuarantine": "Potrjeni iz karantene",
+            "quarantine": "Karantena",
+            "bySource": "Viri okužb",
+            "bySourceRelative": "Viri okužb (relativno)",
+            "bySourceCountry": "Po državah",
+            "bySourceCountryRelative": "Po državah (relativno)",
+            "importedCases":  "Uvoženi primeri",
+            "importRelatedCases":  "Povezani z uvoženimi",
+            "localSource":  "Lokalni vir",
+            "sourceUnknown":  "Neznan vir"
         }
     },
     "footer": {
