@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id,
+      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id + '?rel=0',
     }
   },
 }
