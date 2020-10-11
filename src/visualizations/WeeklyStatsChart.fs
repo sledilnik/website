@@ -10,6 +10,17 @@ open Highcharts
 
 let countryColors =
     [
+      "#dba51d"
+      "#afa53f"
+      "#777c29"
+      "#70a471"
+      "#457844"
+      "#f95d6a"
+      "#d45087"
+      "#a05195"
+      "#665191"
+      "#10829a"
+      "#024a66"
       "#f95d6a"
       "#a05195"
       "#024a66"
@@ -146,7 +157,7 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       stack = 0
                                                                       animation = false
                                                                       legendIndex = countryIndex
-                                                                      // color = countryColors.[countryIndex% countryColors.Length]
+                                                                      color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
                                                                       data = state.data |> Seq.map (fun dp -> {|
                                                                                                                x = dp.Date |> jsTime
