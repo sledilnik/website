@@ -450,7 +450,7 @@
             "title": "Hospital capacities"
         },
         "weeklyStats": {
-            "title": "Source of Infection and Quarantine",
+            "title": "Qurantine and Sources of Infection",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",

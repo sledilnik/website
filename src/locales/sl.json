@@ -872,7 +872,7 @@
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         },
         "weeklyStats": {
-            "title": "Viri okužb in karantena",
+            "title": "Karantena in viri okužb",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
