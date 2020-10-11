@@ -252,6 +252,10 @@ let renderChartOptions (state: State) dispatch =
                baseOptions.yAxis
                |> Array.map (fun yAxis -> {| yAxis with
                                               min = None
+                                              labels = match state.displayType with
+                                                       | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
+                                                       | _ -> pojo {| format = "{value}" |}
+
                                               reversedStacks = match state.displayType with
                                                                | Quarantine -> true
                                                                | _ -> false |})
