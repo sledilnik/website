@@ -69,11 +69,11 @@
           series-type="state"
         />
       </div>
-      <!-- <b-row cols="12">
+      <b-row cols="12">
         <b-col>
           <Youtube id="oD88hoRafug"></Youtube>
         </b-col>
-      </b-row> -->
+      </b-row>
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
@@ -97,7 +97,7 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
-    // Youtube
+    Youtube
   },
   data() {
     return {
