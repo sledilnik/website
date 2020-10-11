@@ -1,4 +1,4 @@
-module WeeklyStatsChart
+module SourcesChart
 
 open Elmish
 open Feliz
@@ -44,11 +44,11 @@ type DisplayType =
   with
     static member all = [ Quarantine; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
     static member getName = function
-        | Quarantine     -> I18N.t "charts.weeklyStats.quarantine"
-        | BySource     -> I18N.t "charts.weeklyStats.bySource"
-        | BySourceRelative     -> I18N.t "charts.weeklyStats.bySourceRelative"
-        | BySourceCountry     -> I18N.t "charts.weeklyStats.bySourceCountry"
-        | BySourceCountryRelative     -> I18N.t "charts.weeklyStats.bySourceCountryRelative"
+        | Quarantine     -> I18N.t "charts.sources.quarantine"
+        | BySource     -> I18N.t "charts.sources.bySource"
+        | BySourceRelative     -> I18N.t "charts.sources.bySourceRelative"
+        | BySourceCountry     -> I18N.t "charts.sources.bySourceCountry"
+        | BySourceCountryRelative     -> I18N.t "charts.sources.bySourceCountryRelative"
 
 // ---------------------------
 // State management
@@ -204,7 +204,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let color, seriesId, stack = Series.getSeriesInfo (series)
     {|
        color = color
-       name = I18N.tt "charts.weeklyStats" seriesId
+       name = I18N.tt "charts.sources" seriesId
        stack = stack
        animation = false
        legendIndex = legendIndex
@@ -272,8 +272,8 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true
                       formatter = match state.displayType with
                                   | Quarantine -> fun () -> tooltipFormatter jsThis
-                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.weeklyStats.totalConfirmed") jsThis
-                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.weeklyStats.totalImported") jsThis
+                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalConfirmed") jsThis
+                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalImported") jsThis
                       |}
            legend =
                pojo
@@ -324,5 +324,5 @@ let render (state: State) dispatch =
         renderDisplaySelectors state dispatch
     ]
 
-let weeklyStatsChart (props: {| data: WeeklyStatsData |}) =
-    React.elmishComponent ("WeeklyStatsChart", init props.data, update, render)
+let sourcesChart (props: {| data: WeeklyStatsData |}) =
+    React.elmishComponent ("sourcesChart", init props.data, update, render)

@@ -34,7 +34,7 @@
         <Compile Include="MapChart.fs" />
         <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
-        <Compile Include="WeeklyStatsChart.fs" />
+        <Compile Include="SourcesChart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
         <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />

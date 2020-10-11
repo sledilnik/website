@@ -871,7 +871,7 @@
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
         },
-        "weeklyStats": {
+        "sources": {
             "title": "Karantena in viri okužb",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
