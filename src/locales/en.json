@@ -430,7 +430,15 @@
         "weeklyStats": {
             "title": "Weekly Statistics",
             "sentToQuarantine": "Sent to Quarantine",
-            "confirmedCases": "Confirmed Cases"
+            "confirmedCases": "Confirmed Cases",
+            "confirmedFromQuarantine": "Confirmed from Quarantine",
+            "quarantine": "Quarantine",
+            "bySource": "Sources of Infection",
+            "bySourceCountry": "By Country",
+            "importedCases":  "Imported Cases",
+            "importRelatedCases":  "Related to Imported Cases",
+            "localSource":  "Local Source",
+            "sourceUnknown":  "Unknown Source"
         }
     },
     "footer": {
@@ -627,7 +635,7 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, Week %W of %Y}}</b> (from {{date, %b %e}} to {{dateTo, %b %e}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",

@@ -77,7 +77,7 @@
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
         "longerDate": "{{ date, %A, %e. %B %Y }}",
-        "weekYearFromToDate": "<b>{{date, %W. teden %Y}}</b> (od {{date, %e. %b}} do {{dateTo, %e. %b}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",

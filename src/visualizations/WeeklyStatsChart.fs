@@ -1,6 +1,5 @@
 module WeeklyStatsChart
 
-open System.Runtime.InteropServices
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -9,7 +8,7 @@ open Browser
 open Types
 open Highcharts
 
-let colors =
+let countryColors =
     [ "#ffa600"
       "#dba51d"
       "#afa53f"
@@ -105,24 +104,37 @@ let splitOutFromTotal (split : int option) (total : int option)  =
     | _ -> None
 
 
-// TODO: Accumulate by country data -> sort, assign colors
+let sum (a: int option) (b: int option) = match a, b with
+                                                 | None, Some b_ -> b_
+                                                 | Some a_, Some b_ -> a_ + b_
+                                                 | _ -> 0
+
+let sumOfMaps (a: Map<string, int>) (b: Map<string, int option>) = Map.fold (fun a_ key value -> Map.add key (sum (a.TryFind key) value) a_) a b
+let countryTotals (countriesWeekly: seq<Map<string, int option>>) = Seq.fold sumOfMaps Map.empty countriesWeekly
+                                                                    |> Map.filter (fun _ v -> v > 0)
+                                                                    |> Map.toArray
+                                                                    |> Array.sortBy(fun (_, v) -> v)
 
 let renderSeriesImportedByCountry (state: State) =
-    let countries = state.data.Head.ImportedFrom |> Map.toSeq |> Seq.map (fun (countryAbbr, _) -> countryAbbr)
-    countries |> Seq.map (fun country -> {|
-                                            stack = 0
-                                            color = "#000000"
-                                            name = I18N.tt "country" (country.ToUpper())
-                                            data = state.data |> Seq.map (fun dp -> {|
-                                                                                      x = dp.Date |> jsTime
-                                                                                      y = dp.ImportedFrom.Item country
-                                                                                      fmtTotal = dp.ImportedFrom.Item country |> string
-                                                                                      fmtWeekYearFromTo =
-                                                                                          I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |}
+    let countryCodesSortedByTotal = state.data |> List.map (fun d -> d.ImportedFrom ) |> countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
+    let countryToSeries (countryIndex:int) (countryCode:string) =
+                                                                      {|
+                                                                      stack = 0
+                                                                      animation = false
+                                                                      color = countryColors.[countryIndex % countryColors.Length]
+                                                                      name = I18N.tt "country" (countryCode.ToUpper())
+                                                                      legendIndex = Array.length countryCodesSortedByTotal - countryIndex
+                                                                      data = state.data |> Seq.map (fun dp -> {|
+                                                                                                               x = dp.Date |> jsTime
+                                                                                                               y = dp.ImportedFrom.Item countryCode
+                                                                                                               fmtTotal = dp.ImportedFrom.Item countryCode |> string
+                                                                                                               fmtWeekYearFromTo =
+                                                                                                                  I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |}
 
-                                                                                      |} |> pojo) |> Array.ofSeq
-                                            |} |> pojo
-      )
+                                                                                                              |} |> pojo) |> Array.ofSeq
+                                                                      |} |> pojo
+
+    countryCodesSortedByTotal |> Array.mapi countryToSeries
 
 
 
@@ -154,6 +166,7 @@ let renderChartOptions (state: State) dispatch =
            color = color
            name = I18N.tt "charts.weeklyStats" seriesId
            stack = stack
+           animation = false
            data =
                state.data
                |> Seq.map (fun dp ->
@@ -178,11 +191,6 @@ let renderChartOptions (state: State) dispatch =
     let baseOptions =
         basicChartOptions ScaleType.Linear className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    let selectSeries displayType = match displayType with
-                                   | Quarantine -> Series.quarantine
-                                   | BySource -> Series.bySource
-                                   | BySourceCountry -> Series.bySource
-
     {| baseOptions with
            chart = pojo
             {|
@@ -204,8 +212,7 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with
                           tickInterval = 86400000 * 7
-                          startOfWeek = 1 // Monday
-                          dateTimeLabelFormats = pojo {| week = I18N.t "charts.common.weekYearDateFormat" |} |})
+                         |})
            tooltip =
                pojo
                    {| shared = true
