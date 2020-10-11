@@ -167,6 +167,7 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       legendIndex = countryIndex
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
+                                                                      pointPlacement = "between"
                                                                       data = state.data |> Seq.map (fun dp -> {|
                                                                                                                x = dp.Date |> jsTime
                                                                                                                y = dp.ImportedFrom.Item countryCode
@@ -207,6 +208,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        stack = stack
        animation = false
        legendIndex = legendIndex
+       pointPlacement = "between"
        data =
            state.data
            |> Seq.map (fun dp ->
