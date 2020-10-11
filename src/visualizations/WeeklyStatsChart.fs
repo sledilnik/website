@@ -281,7 +281,30 @@ let renderChartOptions (state: State) dispatch =
                                                            | BySourceRelative | BySourceCountryRelative -> "percent"
                                                            | _ -> "normal" |}
 
-                                |}|}
+                                |}
+           rangeSelector = configureRangeSelector state.RangeSelectionButtonIndex
+                                        [|
+                                            {|
+                                                ``type`` = "week" // Customized to align x axis to exactly 9 weeks
+                                                count = 9
+                                                text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                                                events = pojo {| click = onRangeSelectorButtonClick 0 |}
+                                            |}
+                                            {|
+                                                ``type`` = "month"
+                                                count = 3
+                                                text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                                                events = pojo {| click = onRangeSelectorButtonClick 1 |}
+                                            |}
+                                            {|
+                                                ``type`` = "all"
+                                                count = 1
+                                                text = I18N.t "charts.common.all"
+                                                events = pojo {| click = onRangeSelectorButtonClick 2 |}
+                                            |}
+                                        |]
+
+                                    |}
 
 let renderChartContainer state dispatch =
     Html.div [ prop.style [ style.height 450 ]
