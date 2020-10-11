@@ -884,7 +884,9 @@
             "importedCases":  "Uvoženi primeri",
             "importRelatedCases":  "Povezani z uvoženimi",
             "localSource":  "Lokalni vir",
-            "sourceUnknown":  "Neznan vir"
+            "sourceUnknown":  "Neznan vir",
+            "totalConfirmed": "Skupaj potrjeni",
+            "totalImported": "Skupaj uvoženi"
         }
     },
     "footer": {

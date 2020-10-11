@@ -99,7 +99,7 @@ type Series =
 
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
-    let bySource = [ ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
+    let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
 
     let getSeriesInfo =
         function
@@ -121,10 +121,18 @@ let tooltipFormatter jsThis =
                                    |_ -> ""
 
     fmtWeekYearFromTo
+    + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
+           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
        |> String.concat "<br>")
+
+let tooltipFormatterWithTotal totalText jsThis =
+    let pts: obj [] = jsThis?points
+    let total = pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
+    tooltipFormatter jsThis + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" totalText (total |> string)
+
+
 
 // ---------------------------
 // Data Massaging
@@ -244,7 +252,12 @@ let renderChartOptions (state: State) dispatch =
                pojo
                    {| shared = true
                       split = false
-                      formatter = fun () -> tooltipFormatter jsThis |}
+                      useHTML = true
+                      formatter = match state.displayType with
+                                  | Quarantine -> fun () -> tooltipFormatter jsThis
+                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.weeklyStats.totalConfirmed") jsThis
+                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.weeklyStats.totalImported") jsThis
+                      |}
            legend =
                pojo
                    {| enabled = true

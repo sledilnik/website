@@ -462,7 +462,9 @@
             "importedCases":  "Imported Cases",
             "importRelatedCases":  "Related to Imported Cases",
             "localSource":  "Local Source",
-            "sourceUnknown":  "Unknown Source"
+            "sourceUnknown":  "Unknown Source",
+            "totalConfirmed": "Confirmed Cases Total",
+            "totalImported": "Imported Cases Total"
         }
     },
     "footer": {
