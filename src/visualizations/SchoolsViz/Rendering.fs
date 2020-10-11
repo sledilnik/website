@@ -10,13 +10,13 @@ open Feliz.ElmishComponents
 
 type State = {
 //    Metrics : DisplayMetrics
-    Data : SchoolsStats
+    Data : SchoolsStats option
     RangeSelectionButtonIndex: int
     Error: string option
 } with
     static member Initial = {
 //        Metrics = availableDisplayMetrics.[0]
-        Data = [||]
+        Data = None
         RangeSelectionButtonIndex = 0
         Error = None
     }
@@ -56,7 +56,7 @@ let renderChartContainer state dispatch =
 
 let render (state: State) dispatch: ReactElement =
     match state.Data, state.Error with
-    | [||], None -> Html.div [ Utils.renderLoading ]
+    | Some _, None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [

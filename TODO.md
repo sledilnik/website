@@ -2,7 +2,7 @@
 
 - https://github.com/sledilnik/website/issues/577
     - reading the JSON file
-        - do we mirror it in our data structures or map it programmatically? 
+        - try writing a test that parses JSON
 
 ## New countries chart
 - deaths per cases (windowed, averaged)

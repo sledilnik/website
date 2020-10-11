@@ -19,6 +19,7 @@ let dropdown (viz: Visualization) =
             | Ratios -> (1140, 720)
             | HCenters -> (1140, 720)
             | Tests -> (1140, 720)
+            | Schools -> (1140, 720)
             | Infections -> (1140, 720)
             | Spread -> (1140, 630)
             | Regions -> (1140, 720)
