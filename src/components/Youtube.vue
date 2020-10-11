@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="youtube-embed">
-      <iframe :src="videoId"></iframe>
+      <iframe :src="videoId" allowfullscreen="true"></iframe>
     </div>
   </section>
 </template>
