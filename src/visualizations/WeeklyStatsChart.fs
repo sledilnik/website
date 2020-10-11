@@ -99,18 +99,18 @@ type Series =
 
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
-    let bySource = [LocalSource; ImportedCases; ImportRelatedCases; SourceUnknown; ]
+    let bySource = [ ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
 
     let getSeriesInfo =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
-        | ConfirmedFromQuarantine ->  "#6f42c1", "confirmedFromQuarantine", 1
-        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
+        | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
+        | ConfirmedCases ->  "#bda506", "confirmedCases", 1
 
-        | ImportedCases -> "#007bff", "importedCases", 0
-        | ImportRelatedCases -> "#17a2b8", "importRelatedCases", 0
-        | SourceUnknown -> "#6610f2", "sourceUnknown", 0
-        | LocalSource ->"#ffc107", "localSource", 0
+        | ImportedCases -> "#d96756", "importedCases", 0
+        | ImportRelatedCases -> "#bf5747", "importRelatedCases", 0
+        | SourceUnknown -> "#cccccc", "sourceUnknown", 0
+        | LocalSource ->"#d5c768", "localSource", 0
 
 
 let tooltipFormatter jsThis =
