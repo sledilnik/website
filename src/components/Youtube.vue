@@ -1,9 +1,9 @@
 <template>
-  <div class="section">
+  <section>
     <div class="youtube-embed">
-      <iframe :src="videoId"></iframe>
+      <iframe :src="videoId" allowfullscreen="true"></iframe>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -14,14 +14,14 @@ export default {
   },
   data() {
     return {
-      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id,
+      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id + '?rel=0',
     }
   },
 }
 </script>
 
 <style scoped lang="scss">
-.section {
+section {
   background: #fff;
   margin: 0 0 58px;
   position: relative;
