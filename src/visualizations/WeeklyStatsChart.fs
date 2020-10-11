@@ -107,7 +107,7 @@ module Series =
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
         | ConfirmedCases ->  "#bda506", "confirmedCases", 1
 
-        | ImportedCases -> "#d96756", "importedCases", 0
+        | ImportedCases -> "#f95d6a", "importedCases", 0
         | ImportRelatedCases -> "#bf5747", "importRelatedCases", 0
         | SourceUnknown -> "#cccccc", "sourceUnknown", 0
         | LocalSource ->"#d5c768", "localSource", 0
