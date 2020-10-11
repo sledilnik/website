@@ -27,38 +27,21 @@ let countryColors =
 type DisplayType =
     | Quarantine
     | BySource
+    | BySourceRelative
     | BySourceCountry
+    | BySourceCountryRelative
   with
-    static member all = [ Quarantine; BySource; BySourceCountry ]
+    static member all = [ Quarantine; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
     static member getName = function
         | Quarantine     -> I18N.t "charts.weeklyStats.quarantine"
         | BySource     -> I18N.t "charts.weeklyStats.bySource"
+        | BySourceRelative     -> I18N.t "charts.weeklyStats.bySourceRelative"
         | BySourceCountry     -> I18N.t "charts.weeklyStats.bySourceCountry"
+        | BySourceCountryRelative     -> I18N.t "charts.weeklyStats.bySourceCountryRelative"
 
-type Series =
-    | ConfirmedCases
-    | SentToQuarantine
-    | ConfirmedFromQuarantine
-    | ImportedCases
-    | ImportRelatedCases
-    | SourceUnknown
-    | LocalSource
-
-module Series =
-    let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
-    let bySource = [LocalSource; ImportedCases; ImportRelatedCases; SourceUnknown; ]
-
-    let getSeriesInfo =
-        function
-        | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
-        | ConfirmedFromQuarantine ->  "#6f42c1", "confirmedFromQuarantine", 1
-        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
-
-        | ImportedCases -> "#007bff", "importedCases", 0
-        | ImportRelatedCases -> "#17a2b8", "importRelatedCases", 0
-        | SourceUnknown -> "#6610f2", "sourceUnknown", 0
-        | LocalSource ->"#ffc107", "localSource", 0
-
+// ---------------------------
+// State management
+// ---------------------------
 type State =
     { displayType: DisplayType
       data: WeeklyStatsData
@@ -86,6 +69,50 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with displayType = displayType },
         Cmd.none
 
+// ---------------------------
+// Display Type Selection
+// ---------------------------
+let renderDisplaySelector state dt dispatch =
+    Html.div [
+        prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
+        Utils.classes
+            [(true, "btn btn-sm metric-selector")
+             (state.displayType = dt, "metric-selector--selected") ]
+        prop.text (dt |> DisplayType.getName)
+    ]
+
+let renderDisplaySelectors state dispatch =
+    Html.div [
+        prop.className "metrics-selectors"
+        prop.children (
+            DisplayType.all
+            |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
+
+type Series =
+    | ConfirmedCases
+    | SentToQuarantine
+    | ConfirmedFromQuarantine
+    | ImportedCases
+    | ImportRelatedCases
+    | SourceUnknown
+    | LocalSource
+
+module Series =
+    let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
+    let bySource = [LocalSource; ImportedCases; ImportRelatedCases; SourceUnknown; ]
+
+    let getSeriesInfo =
+        function
+        | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
+        | ConfirmedFromQuarantine ->  "#6f42c1", "confirmedFromQuarantine", 1
+        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
+
+        | ImportedCases -> "#007bff", "importedCases", 0
+        | ImportRelatedCases -> "#17a2b8", "importRelatedCases", 0
+        | SourceUnknown -> "#6610f2", "sourceUnknown", 0
+        | LocalSource ->"#ffc107", "localSource", 0
+
+
 let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
@@ -99,12 +126,14 @@ let tooltipFormatter jsThis =
            sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
        |> String.concat "<br>")
 
+// ---------------------------
+// Data Massaging
+// ---------------------------
 let splitOutFromTotal (split : int option) (total : int option)  =
     match split, total with
     | Some split_, Some total_ -> Some (total_ - split_)
     | None, Some _ -> total
     | _ -> None
-
 
 let sum (a: int option) (b: int option) = match a, b with
                                                  | None, Some b_ -> b_
@@ -117,6 +146,10 @@ let countryTotals (countriesWeekly: seq<Map<string, int option>>) = Seq.fold sum
                                                                     |> Map.toArray
                                                                     |> Array.sortByDescending(fun (_, v) -> v)
 
+
+// ---------------------------
+// Chart Rendering w Highcharts
+// ---------------------------
 let renderSeriesImportedByCountry (state: State) =
     let countryCodesSortedByTotal = state.data |> List.map (fun d -> d.ImportedFrom ) |> countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
     let countryToSeries (countryIndex:int) (countryCode:string) =
@@ -136,53 +169,50 @@ let renderSeriesImportedByCountry (state: State) =
                                                                                                               |} |> pojo) |> Array.ofSeq
                                                                       |} |> pojo
 
-    countryCodesSortedByTotal |> Array.mapi countryToSeries
+    countryCodesSortedByTotal |> Seq.mapi countryToSeries
 
+let renderSeries state = Seq.mapi (fun legendIndex series ->
+    let getPoint: (WeeklyStatsDataPoint -> int option) =
+        match series with
+        | ConfirmedCases -> fun dp -> dp.ConfirmedCases |> splitOutFromTotal dp.Source.FromQuarantine
+        | SentToQuarantine -> fun dp -> dp.SentToQuarantine
+        | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
+        | ImportedCases -> fun dp -> dp.Source.Import
+        | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
+        | SourceUnknown -> fun dp -> dp.Source.Unknown
+        | LocalSource -> fun dp -> dp.Source.Local
 
+    let getPointTotal: (WeeklyStatsDataPoint -> int option) =
+        match series with
+        | ConfirmedCases -> fun dp -> dp.ConfirmedCases
+        | SentToQuarantine -> fun dp -> dp.SentToQuarantine
+        | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
+        | ImportedCases -> fun dp -> dp.Source.Import
+        | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
+        | SourceUnknown -> fun dp -> dp.Source.Unknown
+        | LocalSource -> fun dp -> dp.Source.Local
 
+    let color, seriesId, stack = Series.getSeriesInfo (series)
+    {|
+       color = color
+       name = I18N.tt "charts.weeklyStats" seriesId
+       stack = stack
+       animation = false
+       legendIndex = legendIndex
+       data =
+           state.data
+           |> Seq.map (fun dp ->
+               {| x = dp.Date |> jsTime
+                  y = getPoint dp
+                  fmtTotal = getPointTotal dp |> string
+                  seriesId = seriesId
+                  fmtWeekYearFromTo =
+                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+               |> pojo)
+           |> Array.ofSeq |}
+    |> pojo)
 
 let renderChartOptions (state: State) dispatch =
-    let renderSeries legendIndex series =
-        let getPoint: (WeeklyStatsDataPoint -> int option) =
-            match series with
-            | ConfirmedCases -> fun dp -> dp.ConfirmedCases |> splitOutFromTotal dp.Source.FromQuarantine
-            | SentToQuarantine -> fun dp -> dp.SentToQuarantine
-            | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
-            | ImportedCases -> fun dp -> dp.Source.Import
-            | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
-            | SourceUnknown -> fun dp -> dp.Source.Unknown
-            | LocalSource -> fun dp -> dp.Source.Local
-
-        let getPointTotal: (WeeklyStatsDataPoint -> int option) =
-            match series with
-            | ConfirmedCases -> fun dp -> dp.ConfirmedCases
-            | SentToQuarantine -> fun dp -> dp.SentToQuarantine
-            | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
-            | ImportedCases -> fun dp -> dp.Source.Import
-            | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
-            | SourceUnknown -> fun dp -> dp.Source.Unknown
-            | LocalSource -> fun dp -> dp.Source.Local
-
-        let color, seriesId, stack = Series.getSeriesInfo (series)
-        {|
-           color = color
-           name = I18N.tt "charts.weeklyStats" seriesId
-           stack = stack
-           animation = false
-           legendIndex = legendIndex
-           data =
-               state.data
-               |> Seq.map (fun dp ->
-                   {| x = dp.Date |> jsTime
-                      y = getPoint dp
-                      fmtTotal = getPointTotal dp |> string
-                      seriesId = seriesId
-                      fmtWeekYearFromTo =
-                          I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
-                   |> pojo)
-               |> Array.ofSeq |}
-        |> pojo
-
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
             RangeSelectionChanged buttonIndex |> dispatch
@@ -203,10 +233,11 @@ let renderChartOptions (state: State) dispatch =
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series = match state.displayType with
-                    | Quarantine -> Series.quarantine |> Seq.mapi renderSeries |> Seq.toArray
-                    | BySource -> Series.bySource |> Seq.mapi renderSeries |> Seq.toArray
-                    | BySourceCountry -> renderSeriesImportedByCountry state |> Seq.toArray
+           series = (match state.displayType with
+                    | Quarantine -> Series.quarantine |> renderSeries state
+                    | BySource | BySourceRelative -> Series.bySource |> renderSeries state
+                    | BySourceCountry | BySourceCountryRelative -> renderSeriesImportedByCountry state
+                    ) |> Seq.toArray
            yAxis =
                baseOptions.yAxis
                |> Array.map (fun yAxis -> {| yAxis with min = None; reversedStacks = false |})
@@ -227,7 +258,9 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            plotOptions = pojo {|
                                 column = pojo {|
-                                                stacking = "normal" |}
+                                                stacking = match state.displayType with
+                                                           | BySourceRelative | BySourceCountryRelative -> "percent"
+                                                           | _ -> "normal" |}
 
                                 |}|}
 
@@ -238,21 +271,7 @@ let renderChartContainer state dispatch =
                    [ renderChartOptions state dispatch
                      |> chartFromWindow ] ]
 
-let renderDisplaySelector state dt dispatch =
-    Html.div [
-        prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
-        Utils.classes
-            [(true, "btn btn-sm metric-selector")
-             (state.displayType = dt, "metric-selector--selected") ]
-        prop.text (dt |> DisplayType.getName)
-    ]
 
-let renderDisplaySelectors state dispatch =
-    Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            DisplayType.all
-            |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state dispatch
