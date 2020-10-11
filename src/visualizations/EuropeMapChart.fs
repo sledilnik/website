@@ -122,7 +122,7 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ 
+        [
             ("AUT", "")
             ("CYP", "")
             ("FIN", "")
@@ -138,7 +138,7 @@ let greenCountries =
 
 let redCountries =
     Map.ofList
-        [ 
+        [
             ("AFG", "")
             ("ALB", "")
             ("DZA", "")
@@ -271,33 +271,6 @@ let redCountries =
             ("ZWE", "")
         ]
 
-let importedFrom =
-    Map.ofList
-        [  
-            ("BIH", 14)
-            ("AUT", 4)
-            ("ITA", 4)
-            ("HRV", 3)
-            ("FRA", 3) 
-            ("XKX", 2)
-            ("RUS", 2)
-            ("GBR", 2)
-            ("SRB", 1)
-            ("DEU", 1)
-            ("HUN", 1)
-            ("MKD", 1)
-            ("MNE", 1)
-            ("ESP", 1)
-            ("POL", 1)
-            ("BGR", 1)
-            ("CHE", 1)
-            ("TUR", 1)
-            ("FSM", 1)
-            ("UKR", 1)
-        ]
-
-let importedDate = DateTime(2020, 10, 4)
-
 let loadEuropeGeoJson =
     async {
         let! (statusCode, response) = Http.get europeGeoJsonUrl
@@ -352,7 +325,11 @@ let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> 
         | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
-let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
+let prepareCountryData (data: Data.OurWorldInData.DataPoint list) (weeklyData: WeeklyStatsData) =
+    let dataForLastTwoWeeks = Array.sub weeklyData (weeklyData.Length - 2) 2
+    let importedFrom = dataForLastTwoWeeks |> Data.WeeklyStats.countryTotals |> Map.ofArray
+    let importedDate = (Array.last dataForLastTwoWeeks).DateTo
+
     data
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
@@ -389,9 +366,9 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
         let rText, rColor, rAltText =
             match fixedCode with
             | "SVN" -> I18N.t "charts.europe.statusNone", "#10829a", ""
-            | _ -> 
+            | _ ->
                 match red with
-                | Some redNote -> 
+                | Some redNote ->
                     if redNote.Length > 0
                     then I18N.t "charts.europe.statusRed", "#FF9057", redNote
                     else I18N.t "charts.europe.statusRed", "#FF5348", redNote
@@ -412,7 +389,7 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
-              CountryData.RestrictionText = rText 
+              CountryData.RestrictionText = rText
               CountryData.RestrictionAltText = rAltText
               CountryData.ImportedFrom = imported
               CountryData.ImportedDate = importedDate }
@@ -449,7 +426,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
             | Success owdData ->
                 { state with
                       OwdData = result
-                      CountryData = prepareCountryData owdData }
+                      CountryData = prepareCountryData owdData state.Data }
             | _ -> { state with OwdData = result }
 
         ret, Cmd.none

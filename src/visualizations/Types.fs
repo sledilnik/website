@@ -99,7 +99,7 @@ type WeeklyStatsDataPoint =
       ImportedFrom : Map<string, int option>
     }
 
-type WeeklyStatsData = WeeklyStatsDataPoint list
+type WeeklyStatsData = WeeklyStatsDataPoint[]
 
 type Municipality =
     { Name : string

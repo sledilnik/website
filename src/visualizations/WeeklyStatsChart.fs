@@ -135,30 +135,19 @@ let splitOutFromTotal (split : int option) (total : int option)  =
     | None, Some _ -> total
     | _ -> None
 
-let sum (a: int option) (b: int option) = match a, b with
-                                                 | None, Some b_ -> b_
-                                                 | Some a_, Some b_ -> a_ + b_
-                                                 | _ -> 0
-
-let sumOfMaps (a: Map<string, int>) (b: Map<string, int option>) = Map.fold (fun a_ key value -> Map.add key (sum (a.TryFind key) value) a_) a b
-let countryTotals (countriesWeekly: seq<Map<string, int option>>) = Seq.fold sumOfMaps Map.empty countriesWeekly
-                                                                    |> Map.filter (fun _ v -> v > 0)
-                                                                    |> Map.toArray
-                                                                    |> Array.sortByDescending(fun (_, v) -> v)
-
 
 // ---------------------------
 // Chart Rendering w Highcharts
 // ---------------------------
 let renderSeriesImportedByCountry (state: State) =
-    let countryCodesSortedByTotal = state.data |> List.map (fun d -> d.ImportedFrom ) |> countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
+    let countryCodesSortedByTotal = state.data |> Data.WeeklyStats.countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
     let countryToSeries (countryIndex:int) (countryCode:string) =
                                                                       {|
                                                                       stack = 0
                                                                       animation = false
                                                                       legendIndex = countryIndex
                                                                       color = countryColors.[countryIndex% countryColors.Length]
-                                                                      name = I18N.tt "country" (countryCode.ToUpper())
+                                                                      name = I18N.tt "country" countryCode
                                                                       data = state.data |> Seq.map (fun dp -> {|
                                                                                                                x = dp.Date |> jsTime
                                                                                                                y = dp.ImportedFrom.Item countryCode

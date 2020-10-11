@@ -21,6 +21,11 @@ type private TransferSource =
           ImportRelated = this.``import-related``
           Unknown = this.unknown }
 
+let private mapKeysToUpperCase (map: Map<string, 'T>) =
+    Map.toSeq map
+    |> Seq.map (fun (k, v) -> (k.ToUpper(), v))
+    |> Map.ofSeq
+
 type private TransferWStatsDataPoint =
     {
         week : string
@@ -50,10 +55,10 @@ type private TransferWStatsDataPoint =
           ConfirmedCases = this.confirmed
           SentToQuarantine = this.sentTo.quarantine
           Source = this.source.ToDomain
-          ImportedFrom = this.from
+          ImportedFrom = this.from |> mapKeysToUpperCase
         }
 
-type private TransferWStatsData = TransferWStatsDataPoint list
+type private TransferWStatsData = TransferWStatsDataPoint[]
 
 let parseWStatsData responseData =
     let transferWStatsData =
@@ -61,7 +66,25 @@ let parseWStatsData responseData =
         |> Json.parseNativeAs<TransferWStatsData>
 
     transferWStatsData
-    |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
+    |> Array.map (fun transferDataPoint -> transferDataPoint.ToDomain)
+
+let countryTotals (weeklyStats: seq<WeeklyStatsDataPoint>) =
+    let sum (a: int option) (b: int option) =
+        match a, b with
+        | None, Some b_ -> b_
+        | Some a_, Some b_ -> a_ + b_
+        | Some a_, None -> a_
+        | _ -> 0
+
+    let sumOfMaps (a: Map<string, int>) (b: Map<string, int option>) =
+        Map.fold (fun a_ key value -> Map.add key (sum (a.TryFind key) value) a_) a b
+
+    weeklyStats
+    |> Seq.map (fun ws -> ws.ImportedFrom)
+    |> Seq.fold sumOfMaps Map.empty
+    |> Map.filter (fun _ v -> v > 0)
+    |> Map.toArray
+    |> Array.sortByDescending (fun (_, v) -> v)
 
 let load =
     async {
