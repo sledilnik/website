@@ -347,19 +347,46 @@ let renderMap (state : State) =
             let label = points?label
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
+        let colors = [| 
+            "#ffffcc"
+            "#ffeda0"
+            "#fed976"
+            "#feb24c"
+            "#fd8d3c"
+            "#fc4e2a"
+            "#e31a1c"
+            "#b10026"
+         |] //colors from EuropeMapChart
+
         let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
-        let maxColor =
-            if maxValue = 0. then
-                "white" // override for empty map
+
+        let classes =
+            [0..7] |> Seq.map (float) |> Seq.map((*) (float maxValue)) |> Seq.map( (*) 0.125) // 8 class labels  relative to maxValue 
+
+        // let maxColor =
+        //     if maxValue = 0. then
+        //         "white" // override for empty map
+        //     else
+        //         match state.ContentType with
+        //         | Deceased -> "#808080"
+        //         | ConfirmedCases -> "#e03000"
+        
+        let colorAxis = 
+            if maxValue = 0. then 
+                {| dataClassColor = "category"; dataClasses = [| {| from = 0; color = "#ffffcc" |} |] |} |> pojo //override for empty map
             else
-                match state.ContentType with
-                | Deceased -> "#808080"
-                | ConfirmedCases -> "#e03000"
+                let dataClasses = 
+                    Seq.zip classes colors 
+                    |> Seq.map( fun (cls, clr) -> {| from = cls; color = clr |} )        
+                    |> Seq.toArray
+                {| dataClassColor = "category"; dataClasses = dataClasses |} |> pojo
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
             legend = {| enabled = false |}
-            colorAxis = {| minColor = "white" ; maxColor = maxColor |}
+            colorAxis = colorAxis
+            // colorAxis = {| minColor = "white" ; maxColor = maxColor |}
             tooltip =
                 {|
                     formatter = fun () -> tooltipFormatter jsThis
