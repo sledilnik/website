@@ -341,10 +341,13 @@ Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejav
 <details>
   <summary id=sources-chart>Kaj kaže graf "Karantena in viri okužb"?</summary>
 
-[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* prikazuje število oseb poslanih v karanteno in potrjeno okužene v določenem tednu tel delež potrjeno okuženih, ki so bili že v karanteni. 
-Na prikazu *Viri okužb* so prikazani potrjeno okuženi v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznan vir. Povečanje neznanega vira je indikator, da epidemiološko sledenje ni uspešno pri odkrivanju vira.
-Na prikazu *Uvoženi primeri* pa lahko vidite iz katerih držav so bili uvoženi posamezni primeri.
-Vsi trije pogledi so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) - tako lahko primerjate gibanje kategorij po posameznih tednih. 
+[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* (spodaj) prikazuje število oseb, poslanih v karanteno, potrjeno okužene v določenem tednu in delež potrjeno okuženih, ki so bili že v karanteni.
+
+Pozor: Prikaz podatkov o karanteni je narejen na podlagi virov NIJZ. Ker NIJZ podatkov ne objavlja redno oz. lahko prihaja do njihove zakasnitve, za njihovo točnost in popolnost ne odgovarjamo. 
+
+Če spodaj preklopimo na prikaz *Viri okužb*, so prikazani potrjeno okuženi v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznani vir. Povečanje neznanega vira je kazalnik, da epidemiološko sledenje ni uspešno pri odkrivanju vira.
+Prikaz *Uvoženi primeri* po tednih prikaže države, iz katerih so bili uvoženi posamezni primeri, in število teh primerov.
+Vsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) – tako lahko primerjate gibanje kategorij po posameznih tednih.
 
 </details>
 
