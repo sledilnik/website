@@ -339,6 +339,16 @@ Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejav
 </details>
 
 <details>
+  <summary id=sources-chart>Kaj kaže graf "Karantena in viri okužb"?</summary>
+
+[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* prikazuje število oseb poslanih v karanteno in potrjeno okužene v določenem tednu tel delež potrjeno okuženih, ki so bili že v karanteni. 
+Na prikazu *Viri okužb* so prikazani potrjeno okuženi v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznan vir. Povečanje neznanega vira je indikator, da epidemiološko sledenje ni uspešno pri odkrivanju vira.
+Na prikazu *Uvoženi primeri* pa lahko vidite iz katerih držav so bili uvoženi posamezni primeri.
+Vsi trije pogledi so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) - tako lahko primerjate gibanje kategorij po posameznih tednih. 
+
+</details>
+
+<details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
 [Graf](/sl/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani v odstotkih (%). 
