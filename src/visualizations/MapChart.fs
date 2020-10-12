@@ -361,16 +361,9 @@ let renderMap (state : State) =
         let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
 
         let classes =
-            [0..7] |> Seq.map (float) |> Seq.map((*) (float maxValue)) |> Seq.map( (*) 0.125) // 8 class labels  relative to maxValue 
+            let scale = float maxValue * 0.125
+            [0..7] |> Seq.map float |> Seq.map ( (*) scale ) 
 
-        // let maxColor =
-        //     if maxValue = 0. then
-        //         "white" // override for empty map
-        //     else
-        //         match state.ContentType with
-        //         | Deceased -> "#808080"
-        //         | ConfirmedCases -> "#e03000"
-        
         let colorAxis = 
             if maxValue = 0. then 
                 {| dataClassColor = "category"; dataClasses = [| {| from = 0; color = "#ffffcc" |} |] |} |> pojo //override for empty map
@@ -386,7 +379,6 @@ let renderMap (state : State) =
             series = [| series geoJson |]
             legend = {| enabled = false |}
             colorAxis = colorAxis
-            // colorAxis = {| minColor = "white" ; maxColor = maxColor |}
             tooltip =
                 {|
                     formatter = fun () -> tooltipFormatter jsThis
