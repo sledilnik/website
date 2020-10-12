@@ -224,19 +224,24 @@ let renderExplainer (data: StatsData) =
         |> Seq.toList |> List.head
         |> fun (p, h) -> (p,h)
 
-    let box (title: string) times positive hospitalized =
+    let box (title: string) round positive hospitalized =
         Html.div [
             prop.className "box"
             prop.children [
                 Html.h3 title
+                let times = (1<<<round)
+                let timesAsManyText = (chartText "timesAsMany")
+                let caption = sprintf "%d%s" times timesAsManyText
                 Html.p [
-                    match times with
-                    | 0 -> Html.span ""
-                    | 1 -> Html.span (sprintf "%d%s" (1<<<times) (chartText "timesAsMany"))
-                    | _ -> Html.span (sprintf "%d%s" (1<<<times) (chartText "timesAsMany"))
+                    match round with
+                    | 0 -> ""
+                    | _ -> caption
+                    |> Html.span
                 ]
-                Html.div [ Html.h4 (string positive); Html.p (chartText "activeCases") ]
-                Html.div [ Html.h4 (string hospitalized); Html.p (chartText "hospitalized") ]
+                Html.div [ Html.h4 (string positive)
+                           Html.p (chartText "activeCases") ]
+                Html.div [ Html.h4 (string hospitalized)
+                           Html.p (chartText "hospitalized") ]
             ]
         ]
 
