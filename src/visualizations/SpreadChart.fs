@@ -14,6 +14,8 @@ open Highcharts
 // - SpreadChart will show exponential growth pages
 let showExpGrowthFeatures = true
 
+let chartText = I18N.chartText "spread"
+
 type Scale =
     | Absolute
     | Percentage
@@ -21,9 +23,9 @@ type Scale =
   with
     static member all = [ Absolute; Percentage; DoublingRate ]
     static member getName = function
-        | Absolute      -> I18N.t "charts.spread.absolute"
-        | Percentage    -> I18N.t "charts.spread.percentage"
-        | DoublingRate  -> I18N.t "charts.spread.doublingRate"
+        | Absolute      -> chartText "absolute"
+        | Percentage    -> chartText "percentage"
+        | DoublingRate  -> chartText "doublingRate"
 
 type Page =
     | Chart of Scale
@@ -32,7 +34,7 @@ type Page =
     static member all = (Scale.all |> List.map Chart) @ [ Explainer ]
     static member getName = function
         | Chart scale   -> Scale.getName scale
-        | Explainer     -> I18N.t "charts.spread.explainer"
+        | Explainer     -> chartText "explainer"
 
 type State = {
     Page: Page
@@ -66,7 +68,7 @@ let maxOption a b =
     | None, Some y -> Some y
     | Some x, Some y -> Some (max x y)
 
-let inline yAxisBase () =
+let inline yAxisBase() =
      {|
         ``type`` = "linear"
         opposite = true
@@ -105,15 +107,19 @@ type ChartCfg = {
     static member fromScale = function
         | Absolute ->
             {
-                legendTitle = I18N.t "charts.spread.absoluteTitle"
-                seriesLabel = I18N.t "charts.spread.absoluteLabel"
+                legendTitle = chartText "absoluteTitle"
+                seriesLabel = chartText "absoluteLabel"
                 yAxis = yAxisBase ()
-                dataKey = fun dp -> (dp.Date |> jsTime12h), dp.Cases.ConfirmedToday |> Option.map float |> Option.defaultValue nan
+                dataKey = fun dp ->
+                    (dp.Date |> jsTime12h),
+                    dp.Cases.ConfirmedToday
+                    |> Option.map float
+                    |> Option.defaultValue nan
             }
         | Percentage ->
             {
-                legendTitle = I18N.t "charts.spread.relativeTitle"
-                seriesLabel = I18N.t "charts.spread.relativeLabel"
+                legendTitle = chartText "relativeTitle"
+                seriesLabel = chartText "relativeLabel"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
                     let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
@@ -133,17 +139,17 @@ type ChartCfg = {
 
         | DoublingRate ->
             {
-                legendTitle = I18N.t "charts.spread.doublingRateTitle"
-                seriesLabel = I18N.t "charts.spread.doublingRateLabel"
+                legendTitle = chartText "doublingRateTitle"
+                seriesLabel = chartText "doublingRateLabel"
                 yAxis =
                     {| yAxisBase () with
                         ``type``="logarithmic"
                         reversed=true
                         plotLines=[|
-                            //pojo {| value=40.0; label={| text=I18N.t "charts.spread.averageSouthKorea"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
-                            pojo {| value= 1.0; label={| text=I18N.t "charts.spread.oneDay"  |}; color="#aaa"; dashStyle="ShortDash" |}
-                            pojo {| value= 7.0; label={| text=I18N.t "charts.spread.oneWeek" |}; color="#888"; dashStyle="ShortDash" |}
-                            pojo {| value=30.0; label={| text=I18N.t "charts.spread.oneMonth"|}; color="#888"; dashStyle="ShortDash" |}
+                            //pojo {| value=40.0; label={| text=chartText "averageSouthKorea"; align="right"; y= 12; x= -300 |}; color="#408040"; width=3; dashStyle="longdashdot" |} // rotation=270; align="right"; x=12 |} |}
+                            pojo {| value= 1.0; label={| text=chartText "oneDay"  |}; color="#aaa"; dashStyle="ShortDash" |}
+                            pojo {| value= 7.0; label={| text=chartText "oneWeek" |}; color="#888"; dashStyle="ShortDash" |}
+                            pojo {| value=30.0; label={| text=chartText "oneMonth"|}; color="#888"; dashStyle="ShortDash" |}
                         |]
                         max = Some 100
                     |}
@@ -226,11 +232,11 @@ let renderExplainer (data: StatsData) =
                 Html.p [
                     match times with
                     | 0 -> Html.span ""
-                    | 1 -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
-                    | _ -> Html.span (sprintf "%d%s" (1<<<times) (I18N.t "charts.spread.timesAsMany"))
+                    | 1 -> Html.span (sprintf "%d%s" (1<<<times) (chartText "timesAsMany"))
+                    | _ -> Html.span (sprintf "%d%s" (1<<<times) (chartText "timesAsMany"))
                 ]
-                Html.div [ Html.h4 (string positive); Html.p (I18N.t "charts.spread.activeCases") ]
-                Html.div [ Html.h4 (string hospitalized); Html.p (I18N.t "charts.spread.hospitalized") ]
+                Html.div [ Html.h4 (string positive); Html.p (chartText "activeCases") ]
+                Html.div [ Html.h4 (string hospitalized); Html.p (chartText "hospitalized") ]
             ]
         ]
 
@@ -238,16 +244,16 @@ let renderExplainer (data: StatsData) =
         prop.className "exponential-explainer"
         prop.style [ (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
-            yield Html.h1 (I18N.t "charts.spread.ifExpGrowth")
+            yield Html.h1 (chartText "ifExpGrowth")
             yield Html.div [
                 prop.className "container"
                 prop.children [
                     yield!
-                        [ I18N.t "charts.spread.today", 0
-                          I18N.t "charts.spread.inOneWeek", 1
-                          I18N.t "charts.spread.inTwoWeeks", 2
-                          I18N.t "charts.spread.inThreeWeeks", 3
-                          I18N.t "charts.spread.inFourWeeks", 4 ]
+                        [ chartText "today", 0
+                          chartText "inOneWeek", 1
+                          chartText "inTwoWeeks", 2
+                          chartText "inThreeWeeks", 3
+                          chartText "inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
                             box title doublings (curPositive <<< doublings) (curHospitalized <<< doublings)
                         )
@@ -294,7 +300,11 @@ let render (state: State) dispatch =
     Html.div [
         prop.children [
             Html.div [
-                prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
+                prop.style [
+                    style.height 480
+                    (Interop.mkStyle "width" "100%")
+                    style.position.relative
+                ]
                 prop.children [
                     match state.Page with
                     | Chart scale ->
