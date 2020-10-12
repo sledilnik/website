@@ -877,6 +877,7 @@
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
             "quarantine": "Karantena",
+            "quarantineRelative": "Karantena (relativno)",
             "bySource": "Viri okužb",
             "bySourceRelative": "Viri okužb (relativno)",
             "bySourceCountry": "Uvoženi primeri",

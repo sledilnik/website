@@ -37,14 +37,16 @@ let countryColors =
 
 type DisplayType =
     | Quarantine
+    | QuarantineRelative
     | BySource
     | BySourceRelative
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ Quarantine; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
+    static member all = [ Quarantine; QuarantineRelative; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
     static member getName = function
         | Quarantine     -> I18N.t "charts.sources.quarantine"
+        | QuarantineRelative     -> I18N.t "charts.sources.quarantineRelative"
         | BySource     -> I18N.t "charts.sources.bySource"
         | BySourceRelative     -> I18N.t "charts.sources.bySourceRelative"
         | BySourceCountry     -> I18N.t "charts.sources.bySourceCountry"
@@ -110,6 +112,7 @@ type Series =
 
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
+    let quarantineRelative = [  ConfirmedCases; ConfirmedFromQuarantine ]
     let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
 
     let getSeriesInfo =
@@ -245,6 +248,7 @@ let renderChartOptions (state: State) dispatch =
             |}
            series = (match state.displayType with
                     | Quarantine -> Series.quarantine |> renderSeries state
+                    | QuarantineRelative -> Series.quarantineRelative |> renderSeries state
                     | BySource | BySourceRelative -> Series.bySource |> renderSeries state
                     | BySourceCountry | BySourceCountryRelative -> renderSeriesImportedByCountry state
                     ) |> Seq.toArray
@@ -253,11 +257,11 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun yAxis -> {| yAxis with
                                               min = None
                                               labels = match state.displayType with
-                                                       | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
+                                                       | QuarantineRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
 
                                               reversedStacks = match state.displayType with
-                                                               | Quarantine -> true
+                                                               | Quarantine | QuarantineRelative -> true
                                                                | _ -> false |})
            xAxis =
                baseOptions.xAxis
@@ -271,7 +275,7 @@ let renderChartOptions (state: State) dispatch =
                       split = false
                       useHTML = true
                       formatter = match state.displayType with
-                                  | Quarantine -> fun () -> tooltipFormatter jsThis
+                                  | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
                                   | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalConfirmed") jsThis
                                   | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalImported") jsThis
                       |}
@@ -282,7 +286,7 @@ let renderChartOptions (state: State) dispatch =
            plotOptions = pojo {|
                                 column = pojo {|
                                                 stacking = match state.displayType with
-                                                           | BySourceRelative | BySourceCountryRelative -> "percent"
+                                                           | QuarantineRelative | BySourceRelative | BySourceCountryRelative -> "percent"
                                                            | _ -> "normal" |}
 
                                 |}

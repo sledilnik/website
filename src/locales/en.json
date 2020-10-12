@@ -455,6 +455,7 @@
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
             "quarantine": "Quarantine",
+            "quarantineRelative": "Quarantine (Relative)",
             "bySource": "Sources of Infection",
             "bySourceRelative": "Sources of Infection (Relative)",
             "bySourceCountry": "Imported Cases",
