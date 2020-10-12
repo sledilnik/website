@@ -485,7 +485,8 @@
             "showToDate": "Bis heute",
             "showToday": "Tägliche",
             "showActive": "Aktive",
-            "activeCases": "Aktive Fälle"
+            "activeCases": "Aktive Fälle",
+            "show7DaysAverage": "7-Tage-Durchschnitt"
         },
         "countries": {
             "groupNordic": "Nordische Länder",
@@ -559,9 +560,9 @@
             "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
-            "title": "Länder: Neue Fälle pro 1 Million Menschen"
+            "legendTitle": "Neue tägliche Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Neue tägliche Fälle pro 1 Million Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 1 Million Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
@@ -808,12 +809,15 @@
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte",
-        "redPhase": "Rote Phase, ",
-        "orangePhase": "Orange Phase, ",
+        "redPhase": "Rote Phase",
+        "orangePhase": "Orange Phase",
         "per100k": "pro 100 tausend",
         "package3": "Paket 3",
         "package2": "Paket 2",
-        "package1": "Paket 1"
+        "package1": "Paket 1",
+        "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
+        "redPhaseGenitive": "roten",
+        "orangePhaseGenitive": "orangenen"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",
@@ -875,28 +879,28 @@
         },
         "phase": {
             "6": {
-                "title": "Phase 6",
+                "title": "Phase<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Mazedonien 2, Štip 3"
             },
             "5": {
-                "title": "Phase 5",
+                "title": "Phase<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Mazedonien 2"
             },
             "3": {
-                "title": "Phase 3",
+                "title": "Phase<br>3",
                 "description": "Debar 4"
             },
             "2": {
-                "title": "Phase 2",
+                "title": "Phase<br>2",
                 "description": "Skopje 4"
             },
             "1": {
                 "description": "Debar 4, Skopje 3, Mazedonien 2 ",
-                "title": "Phase 1"
+                "title": "Phase<br>1"
             },
             "4": {
                 "description": "Mazedonien 3",
-                "title": "Phase 4"
+                "title": "Phase<br>4"
             }
         },
         "hospital": {
@@ -973,31 +977,39 @@
     },
     "phase": {
         "2": {
-            "title": "Phase 2",
+            "title": "Phase<br>2",
             "description": "Epidemie, neue Testmethoden"
         },
         "1": {
-            "title": "Phase 1"
+            "title": "Phase<br>1"
         },
         "4": {
-            "title": "Phase 4",
+            "title": "Phase<br>4",
             "description": "neue Testmethoden"
         },
         "5": {
-            "title": "Phase 5",
+            "title": "Phase<br>5",
             "description": "neue Testmethoden"
         },
         "7": {
             "description": "Ende der Epidemie",
-            "title": "Phase 7"
+            "title": "Phase<br>7"
         },
         "6": {
             "description": "neue Testmethoden, Studie",
-            "title": "Phase 6"
+            "title": "Phase<br>6"
         },
         "3": {
             "description": "neue Testmethoden",
-            "title": "Phase 3"
+            "title": "Phase<br>3"
+        },
+        "9": {
+            "description": "umschalten auf partielle Kontaktverfolgung",
+            "title": "Phase<br>9"
+        },
+        "8": {
+            "description": "neue Testmethodik – Kinder",
+            "title": "Phase<br>8"
         }
     },
     "embedMaker": {
