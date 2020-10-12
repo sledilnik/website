@@ -1,10 +1,6 @@
 # TODO
 
-- https://github.com/sledilnik/website/issues/593
-    - disclaimer for age groups
-        - can we extract only a part of it
-        
-    - `charts.metricsComparison.show7DaysAverage`
+- https://github.com/sledilnik/website/issues/606
     
 
 ## New countries chart

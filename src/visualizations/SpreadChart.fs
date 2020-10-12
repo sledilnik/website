@@ -10,6 +10,10 @@ open Browser
 open Types
 open Highcharts
 
+// if set to true:
+// - SpreadChart will show exponential growth pages
+let showExpGrowthFeatures = true
+
 type Scale =
     | Absolute
     | Percentage
@@ -31,8 +35,8 @@ type Page =
         | Explainer     -> I18N.t "charts.spread.explainer"
 
 type State = {
-    page: Page
-    data: StatsData
+    Page: Page
+    Data: StatsData
     RangeSelectionButtonIndex: int
 }
 
@@ -42,8 +46,8 @@ type Msg =
 
 let init data : State * Cmd<Msg> =
     let state = {
-        page = Chart Absolute
-        data = data
+        Page = Chart Absolute
+        Data = data
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -51,7 +55,7 @@ let init data : State * Cmd<Msg> =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
-        { state with page = page }, Cmd.none
+        { state with Page = page }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -68,7 +72,7 @@ let inline yAxisBase () =
         opposite = true
         reversed = false
         title = {| text = null |}
-        showFirstLabel = not Highcharts.showExpGrowthFeatures // need to hide negative label for addContainmentMeasuresFlags
+        showFirstLabel = not showExpGrowthFeatures // need to hide negative label for addContainmentMeasuresFlags
         tickInterval = None
         gridZIndex = -1
         max = None
@@ -78,7 +82,7 @@ let inline yAxisBase () =
 
 let inline legend title =
     {|
-        enabled = Highcharts.showExpGrowthFeatures
+        enabled = showExpGrowthFeatures
         title = {| text=title |}
         align = "left"
         verticalAlign = "middle"
@@ -178,12 +182,12 @@ let renderChartOptions scaleType state dispatch =
                 name = chartCfg.seriesLabel
                 dataLabels = pojo {| enabled = true |}
                 data =
-                    state.data
+                    state.Data
                     |> Seq.skipWhile (fun dp -> dp.Date < startDate)
                     |> Seq.map chartCfg.dataKey
                     |> Seq.toArray
             |}
-        if Highcharts.showExpGrowthFeatures then
+        if showExpGrowthFeatures then
             yield addContainmentMeasuresFlags startTime None |> pojo
     |]
 
@@ -258,14 +262,14 @@ let renderChartContainer scaleType data dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions scaleType data dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 
 let renderScaleSelectors state dispatch =
 
     let renderScaleSelector (page: Page) dispatch =
-        let isActive = state.page = page
+        let isActive = state.Page = page
         let style =
             if isActive
             then [ style.backgroundColor "#808080" ]
@@ -292,15 +296,16 @@ let render (state: State) dispatch =
             Html.div [
                 prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
                 prop.children [
-                    match state.page with
+                    match state.Page with
                     | Chart scale ->
                         yield renderChartContainer scale state dispatch
                     | Explainer ->
                         yield renderChartContainer DoublingRate state dispatch
-                        yield renderExplainer state.data
+                        yield renderExplainer state.Data
                 ]
             ]
-            if Highcharts.showExpGrowthFeatures then
+
+            if showExpGrowthFeatures then
                 renderScaleSelectors state dispatch
         ]
     ]
