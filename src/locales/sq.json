@@ -223,7 +223,8 @@
             "testsPerformed": "Teste",
             "showToDate": "Deri tani",
             "showToday": "Në ditë",
-            "showActive": "Aktive"
+            "showActive": "Aktive",
+            "show7DaysAverage": "Mesatarja 7-ditore"
         },
         "common": {
             "shortDateFormat": "%e. %b",
@@ -285,9 +286,9 @@
             "yAxisTitle": "Gjithsej raste vdekje për 1 milion banorë"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Raste të reja për 1 milion banorë",
-            "yAxisTitle": "Raste të reja për 1 milion banorë",
-            "title": "Shtetet: Raste të reja për 1 milion banorë"
+            "legendTitle": "Raste të reja në ditë për 1 milion banorë",
+            "yAxisTitle": "Raste të reja në ditë për 1 milion banorë",
+            "title": "Shtetet: Raste të reja në ditë për 1 milion banorë"
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteret për listën e kuqe",
@@ -368,7 +369,8 @@
         },
         "github": "GitHub",
         "links": "Linqe",
-        "world": "Bota"
+        "world": "Bota",
+        "animation": "Animacion"
     },
     "country": {
         "DEU": "Gjermani",
@@ -658,7 +660,13 @@
         "recoveredToDate": "Të shëruar",
         "active": "Raste aktive",
         "confirmedToDate": "Raste të konfirmuara",
-        "tests": "Teste sot"
+        "tests": "Teste sot",
+        "redPhaseGenitive": "kuqe",
+        "redPhase": "Faza e kuqe",
+        "orangePhaseGenitive": "portokalli",
+        "orangePhase": "Faza portokalli",
+        "per100k": "për 100 mijë",
+        "incidence": "Incidenca 14 ditore"
     },
     "notice": {
         "news002": "Rastet e konfirmuara sipas grupmoshës",
@@ -852,30 +860,38 @@
     "phase": {
         "7": {
             "description": "përfundim i epidemisë",
-            "title": "Faza 7"
+            "title": "faza<br>7"
         },
         "6": {
             "description": "metodologji e re testimi, studim",
-            "title": "Faza 6"
+            "title": "faza<br>6"
         },
         "5": {
             "description": "metodologji e re testimi",
-            "title": "Faza 5"
+            "title": "faza<br>5"
         },
         "4": {
             "description": "metodologji e re testimi",
-            "title": "Faza 4"
+            "title": "faza<br>4"
         },
         "3": {
             "description": "metodologji e re testimi",
-            "title": "Faza 3"
+            "title": "faza<br>3"
         },
         "2": {
             "description": "epidemi, metodologji e re testimi",
-            "title": "Faza 2"
+            "title": "faza<br>2"
         },
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
+        },
+        "9": {
+            "description": "kalim në ndjekje të pjesshme kontaktesh",
+            "title": "faza<br>9"
+        },
+        "8": {
+            "description": "metodologji e re testimi - fëmijë",
+            "title": "faza<br>8"
         }
     },
     "weekday": {
@@ -1012,27 +1028,27 @@
         "phase": {
             "6": {
                 "description": "Dibra 4, Kumanova 4, Shkupi 3, Tetova 4, Resnja 3, Maqedonia 2, Shtipi 3",
-                "title": "Faza 6"
+                "title": "faza<br>6"
             },
             "5": {
                 "description": "Shkupi 4, Tetova 4, Shtipi 3, Maqedonia 2",
-                "title": "Faza 5"
+                "title": "faza<br>5"
             },
             "4": {
                 "description": "Maqedonia 3",
-                "title": "Faza 4"
+                "title": "faza<br>4"
             },
             "3": {
                 "description": "Dibra 4",
-                "title": "Faza 3"
+                "title": "faza<br>3"
             },
             "2": {
                 "description": "Shkupi 4",
-                "title": "Faza 2"
+                "title": "faza<br>2"
             },
             "1": {
                 "description": "Dibra 4, Shkupi 3, Maqedonia 2 ",
-                "title": "Faza 1"
+                "title": "faza<br>1"
             }
         }
     },
