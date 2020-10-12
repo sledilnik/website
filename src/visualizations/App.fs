@@ -371,9 +371,9 @@ let render (state: State) (_: Msg -> unit) =
           }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities; sources
           europeMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; ageGroups; regionMap; regions; sources
+          cases; ageGroups; regionMap; regions
         ]
 
     let worldVisualizations =
@@ -384,7 +384,7 @@ let render (state: State) (_: Msg -> unit) =
           ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; ratios; ageGroups; regionMap; regions; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
