@@ -338,7 +338,8 @@
             "decimalPoint": ",",
             "to": " – ",
             "from": " ",
-            "sortBy": "Razvrstaj prema:"
+            "sortBy": "Razvrstaj prema:",
+            "weekYearDateFormat": "Tjedan %W od %Y"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -574,6 +575,24 @@
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba prema danu u tjednu"
+        },
+        "sources": {
+            "totalImported": "Ukupno uvezenih slučajeva",
+            "totalConfirmed": "Ukupno potvrđenih slučajeva",
+            "sourceUnknown": "Nepoznat izvor",
+            "localSource": "Lokalni izvor",
+            "importRelatedCases": "U vezi s uvezenim slučajevima",
+            "importedCases": "Uvezeni slučajevi",
+            "bySourceCountryRelative": "Uvezeni slučajevi (relativno)",
+            "bySourceCountry": "Uvezeni slučajevi",
+            "bySourceRelative": "Izvori zaraze (relativno)",
+            "bySource": "Izvori zaraze",
+            "quarantineRelative": "Karantena (relativno)",
+            "quarantine": "Karantena",
+            "confirmedFromQuarantine": "Potvrđeni iz karantene",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "sentToQuarantine": "Poslani u karantenu",
+            "title": "Karantena i izvori zaraze"
         }
     },
     "shortMonth": {
@@ -894,7 +913,7 @@
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, %a, %e. %b }}",
+        "lastUpdated": "{{ date, %A, %e. %B }}",
         "package3": "paket 3",
         "package2": "paket 2",
         "package1": "paket 1",
@@ -930,7 +949,8 @@
         "date": "{{ date, %e. %b }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
-        "in_x_days_2": "za {{ count }} dana"
+        "in_x_days_2": "za {{ count }} dana",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",
