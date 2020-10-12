@@ -26,6 +26,7 @@ let init (query: obj) (visualization: string option) (page: string) =
             | "Cases" -> Some Cases
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
+            | "Weekly" -> Some Sources
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
             | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
@@ -43,6 +44,7 @@ let init (query: obj) (visualization: string option) (page: string) =
           Page = page
           Query = query
           StatsData = NotAsked
+          WeeklyStatsData = NotAsked
           RegionsData = NotAsked
           RenderingMode = renderingMode }
 
@@ -52,12 +54,14 @@ let init (query: obj) (visualization: string option) (page: string) =
         | "local" ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
         | "world" ->
-            Cmd.none
+            Cmd.ofMsg WeeklyStatsDataRequested
         | _ ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
 
     initialState, cmd
@@ -69,6 +73,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with StatsData = Loading }, Cmd.OfAsync.result Data.Stats.load
     | StatsDataLoaded data -> { state with StatsData = data }, Cmd.none
+    | WeeklyStatsDataRequested ->
+        match state.WeeklyStatsData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with WeeklyStatsData = Loading }, Cmd.OfAsync.result Data.WeeklyStats.load
+    | WeeklyStatsDataLoaded data -> { state with WeeklyStatsData = data }, Cmd.none
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
@@ -169,14 +178,26 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "europe-chart"
             ChartTextsGroup = "europe"
             Explicit = false
-            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.Europe }
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.Europe; data = data |} }
 
     let worldMap =
           { VisualizationType = WorldMap
             ClassName = "world-chart"
             ChartTextsGroup = "world"
             Explicit = false
-            Renderer = fun _ -> lazyView EuropeMap.mapChart EuropeMap.MapToDisplay.World }
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView EuropeMap.mapChart {| mapToDisplay = EuropeMap.MapToDisplay.World; data = data |} }
 
     let ageGroupsTimeline =
           { VisualizationType = AgeGroupsTimeline
@@ -284,6 +305,18 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+    let sources =
+          { VisualizationType = Sources
+            ClassName = "sources-chart"
+            ChartTextsGroup = "sources"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
@@ -339,7 +372,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
-          europeMap; ageGroupsTimeline; tests; hCenters; infections
+          europeMap; ageGroupsTimeline; tests; sources; hCenters; infections
           cases; ageGroups; regionMap; regions
         ]
 
@@ -351,9 +384,9 @@ let render (state: State) (_: Msg -> unit) =
           ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regions
+          cases; patients; ratios; ageGroups; regionMap; regions; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
         ]
 

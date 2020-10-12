@@ -185,7 +185,8 @@
             "numDateFormat": "%m/%d/%Y",
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
-            "shortDateFormat": "%b %e"
+            "shortDateFormat": "%b %e",
+            "weekYearDateFormat": "Week %W of %Y"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -447,6 +448,24 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital capacities"
+        },
+        "sources": {
+            "title": "Qurantine and Sources of Infection",
+            "sentToQuarantine": "Sent to Quarantine",
+            "confirmedCases": "Confirmed Cases",
+            "confirmedFromQuarantine": "Confirmed from Quarantine",
+            "quarantine": "Quarantine",
+            "quarantineRelative": "Quarantine (Relative)",
+            "bySource": "Sources of Infection",
+            "bySourceRelative": "Sources of Infection (Relative)",
+            "bySourceCountry": "Imported Cases",
+            "bySourceCountryRelative": "Imported Cases (Relative)",
+            "importedCases":  "Imported Cases",
+            "importRelatedCases":  "Related to Imported Cases",
+            "localSource":  "Local Source",
+            "sourceUnknown":  "Unknown Source",
+            "totalConfirmed": "Confirmed Cases Total",
+            "totalImported": "Imported Cases Total"
         }
     },
     "footer": {
@@ -642,7 +661,8 @@
         "x_days_ago": "{{ count }} day ago",
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
-        "longerDate": "{{ date, %A, %B %e, %Y }}"
+        "longerDate": "{{ date, %A, %B %e, %Y }}",
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",
