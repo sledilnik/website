@@ -362,7 +362,7 @@ let renderMap (state : State) =
 
         let classes =
             let scale = float maxValue * 0.125
-            [0..7] |> Seq.map float |> Seq.map ( (*) scale ) 
+            [0..7] |> Seq.map float |> Seq.map ( (*) scale ) //linear spacing between 0 and maxValue
 
         let colorAxis = 
             if maxValue = 0. then 
