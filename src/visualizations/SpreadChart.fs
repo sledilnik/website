@@ -122,10 +122,10 @@ type ChartCfg = {
                 seriesLabel = chartText "relativeLabel"
                 yAxis = {| yAxisBase () with ``type``="logarithmic" |}
                 dataKey = fun dp ->
-                    let daily = dp.Cases.ConfirmedToday |> Utils.zeroToNone
-                    let total = dp.Cases.Active |> Utils.zeroToNone
+                    let todayCases = dp.Cases.ConfirmedToday |> Utils.zeroToNone
+                    let activeCases = dp.Cases.Active |> Utils.zeroToNone
                     let value =
-                        (daily, total)
+                        (todayCases, activeCases)
                         ||> Option.map2 (fun daily total ->
                             let yesterday = total-daily
                             if yesterday < 2 then nan
@@ -216,12 +216,12 @@ let renderExplainer (data: StatsData) =
     let curPositive, curHospitalized =
         data
         |> List.rev
-        |> Seq.choose (fun dp ->
+        |> List.choose (fun dp ->
             match dp.Cases.Active, dp.StatePerTreatment.InHospital with
             | Some p, Some h -> Some (p, h)
             | _, _ -> None)
-        |> Seq.take 1
-        |> Seq.toList |> List.head
+        |> List.take 1
+        |> List.head
         |> fun (p, h) -> (p,h)
 
     let box (title: string) doublings positive hospitalized =
