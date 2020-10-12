@@ -13,7 +13,7 @@
         :hospital="hospital"
       />
     </div>
-    <div class="d-flex justify-content-between">
+    <div class="footer d-flex justify-content-between">
       <div class="data-time">
         {{
           $t('infocard.lastUpdated', {
@@ -55,4 +55,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.footer {	
+  margin-top: auto;	
+}
+</style>
