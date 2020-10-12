@@ -1,9 +1,9 @@
 <template>
-  <section>
+  <div class="section">
     <div class="youtube-embed">
       <iframe :src="videoId" allowfullscreen="true"></iframe>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-section {
+.section {
   background: #fff;
   margin: 0 0 58px;
   position: relative;
@@ -29,7 +29,7 @@ section {
   box-shadow: $element-box-shadow;
 
   @media only screen and (min-width: 768px) {
-    padding: 48px;
+    padding: 32px;
     margin: 0px 15px 58px;
   }
 }
