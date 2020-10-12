@@ -33,6 +33,7 @@ Data editors and other collaborators:
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
+-   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - visualisations
 -   [Matjaž Lipuš](https://twitter.com/MatjazL) - sources, data validation
 -   [Mia Erbus](https://github.com/miaerbus) - web page
 -   [Miha Kadunc](https://twitter.com/miha_kadunc) - data model and validation, modeling
