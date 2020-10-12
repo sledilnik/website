@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <div class="youtube-embed">
-      <iframe :src="videoId"></iframe>
+      <iframe :src="videoId" allowfullscreen="true"></iframe>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   },
   data() {
     return {
-      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id,
+      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id + '?rel=0',
     }
   },
 }
@@ -29,7 +29,7 @@ export default {
   box-shadow: $element-box-shadow;
 
   @media only screen and (min-width: 768px) {
-    padding: 48px;
+    padding: 32px;
     margin: 0px 15px 58px;
   }
 }

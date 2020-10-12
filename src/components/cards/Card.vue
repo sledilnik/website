@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.footer {
-  margin-top: auto;
+.footer {	
+  margin-top: auto;	
 }
 </style>
