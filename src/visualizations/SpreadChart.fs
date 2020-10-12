@@ -224,18 +224,18 @@ let renderExplainer (data: StatsData) =
         |> Seq.toList |> List.head
         |> fun (p, h) -> (p,h)
 
-    let box (title: string) round positive hospitalized =
+    let box (title: string) doublings positive hospitalized =
         Html.div [
             prop.className "box"
             prop.children [
                 Html.h3 title
-                let times = (1<<<round)
-                let timesAsManyText = (chartText "timesAsMany")
-                let caption = sprintf "%d%s" times timesAsManyText
                 Html.p [
-                    match round with
+                    match doublings with
                     | 0 -> ""
-                    | _ -> caption
+                    | _ ->
+                        let times = 1<<<doublings
+                        let timesAsManyText = chartText "timesAsMany"
+                        sprintf "%d%s" times timesAsManyText
                     |> Html.span
                 ]
                 Html.div [ Html.h4 (string positive)
@@ -260,7 +260,9 @@ let renderExplainer (data: StatsData) =
                           chartText "inThreeWeeks", 3
                           chartText "inFourWeeks", 4 ]
                         |> List.map (fun (title, doublings) ->
-                            box title doublings (curPositive <<< doublings) (curHospitalized <<< doublings)
+                            box title doublings
+                                (curPositive <<< doublings)
+                                (curHospitalized <<< doublings)
                         )
                 ]
             ]
