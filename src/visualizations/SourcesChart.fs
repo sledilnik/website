@@ -118,10 +118,10 @@ module Series =
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
         | ConfirmedCases ->  "#bda506", "confirmedCases", 1
 
-        | ImportedCases -> "#f4b2e0", "importedCases", 0
-        | ImportRelatedCases -> "#d559b0", "importRelatedCases", 0
+        | ImportedCases -> "#d559b0", "importedCases", 0
+        | ImportRelatedCases -> "#f4b2e0", "importRelatedCases", 0
         | SourceUnknown -> "#f95d6a", "sourceUnknown", 0
-        | LocalSource ->"#d5c768", "localSource", 0
+        | LocalSource ->"#F59C9C", "localSource", 0
 
 
 let tooltipFormatter jsThis =
