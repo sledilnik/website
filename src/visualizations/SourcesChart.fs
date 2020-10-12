@@ -163,6 +163,10 @@ let splitOutFromTotal (split : int option) (total : int option)  =
 // ---------------------------
 let renderSeriesImportedByCountry (state: State) =
     let countryCodesSortedByTotal = state.data |> Data.WeeklyStats.countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
+
+    let countriesToShowInLegend = Array.sub countryCodesSortedByTotal 0 10 |> Set.ofArray// Top 10
+    //let countriesToShowInLegend = countriesToShowInLegend |> Set.ofArray // All
+
     let countryToSeries (countryIndex:int) (countryCode:string) =
                                                                       {|
                                                                       stack = 0
@@ -171,6 +175,7 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
                                                                       pointPlacement = "between"
+                                                                      showInLegend = Set.contains countryCode countriesToShowInLegend
                                                                       data = state.data |> Seq.map (fun dp -> {|
                                                                                                                x = dp.Date |> jsTime
                                                                                                                y = dp.ImportedFrom.Item countryCode
