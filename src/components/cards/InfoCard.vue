@@ -133,16 +133,16 @@ export default {
         this.renderValues.lastDay.value / this.incidence
       )
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 140) return 'orange'
-        if (incidence > 140) return 'red'
+        if (incidence >= 40 && incidence < 140) return 'orange'
+        if (incidence >= 140) return 'red'
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 250) return 'orange'
-        if (value > 250 && value > 360) return 'red'
+        if (value >= 60 && value < 250) return 'orange'
+        if (value >= 250) return 'red'
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 50) return 'orange'
-        if (value > 50) return 'red'
+        if (value >= 15 && value < 50) return 'orange'
+        if (value >= 50) return 'red'
       }
       return 'unknown'
     },
@@ -161,21 +161,21 @@ export default {
       let phaseNextCriteria = 140
       let string1 = ''
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 80) {
+        if (incidence >= 40 && incidence < 80) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 80
         }
-        if (incidence > 80 && incidence <= 120) {
+        if (incidence >= 80 && incidence < 120) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 120
         }
-        if (incidence > 120 && incidence <= 140) {
+        if (incidence >= 120 && incidence < 140) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -183,7 +183,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 140
         }
-        if (incidence > 140 && incidence <= 170) {
+        if (incidence >= 140 && incidence < 170) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -191,28 +191,28 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 170
         }
-        if (incidence > 170) {
+        if (incidence >= 170) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
         }
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 100) {
+        if (value >= 60 && value < 100) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 100
         }
-        if (value > 100 && value <= 180) {
+        if (value >= 100 && value < 180) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 180
         }
-        if (value > 180 && value <= 250) {
+        if (value >= 180 && value < 250) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -220,7 +220,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 250
         }
-        if (value > 250 && value <= 300) {
+        if (value >= 250 && value < 300) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -228,7 +228,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 300
         }
-        if (value > 300 && value <= 360) {
+        if (value >= 300 && value < 360) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
@@ -236,28 +236,28 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 360
         }
-        if (value > 360) {
+        if (value >= 360) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
         }
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 20) {
+        if (value >= 15 && value < 20) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 20
         }
-        if (value > 20 && value <= 30) {
+        if (value >= 20 && value < 30) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 30
         }
-        if (value > 30 && value <= 50) {
+        if (value >= 30 && value < 50) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -265,7 +265,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 50
         }
-        if (value > 50 && value <= 60) {
+        if (value >= 50 && value < 60) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -273,7 +273,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 60
         }
-        if (value > 60) {
+        if (value >= 60) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -379,26 +379,26 @@ export default {
         this.renderValues.lastDay.value / this.incidence
       )
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 80) return 1
-        if (incidence > 80 && incidence <= 120) return 2
-        if (incidence > 120 && incidence <= 140) return 3
-        if (incidence > 140 && incidence <= 170) return 1
-        if (incidence > 170) return 2
+        if (incidence >= 40 && incidence < 80) return 1
+        if (incidence >= 80 && incidence < 120) return 2
+        if (incidence >= 120 && incidence < 140) return 3
+        if (incidence >= 140 && incidence < 170) return 1
+        if (incidence >= 170) return 2
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 100) return 1
-        if (value > 100 && value <= 180) return 2
-        if (value > 180 && value <= 250) return 3
-        if (value > 250 && value <= 300) return 1
-        if (value > 300 && value <= 360) return 2
-        if (value > 360) return 3
+        if (value >= 60 && value < 100) return 1
+        if (value >= 100 && value < 180) return 2
+        if (value >= 180 && value < 250) return 3
+        if (value >= 250 && value < 300) return 1
+        if (value >= 300 && value < 360) return 2
+        if (value >= 360) return 3
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 20) return 1
-        if (value > 20 && value <= 30) return 2
-        if (value > 30 && value <= 50) return 3
-        if (value > 50 && value <= 60) return 1
-        if (value > 60) return 3
+        if (value >= 15 && value < 20) return 1
+        if (value >= 20 && value < 30) return 2
+        if (value >= 30 && value < 50) return 3
+        if (value >= 50 && value < 60) return 1
+        if (value >= 60) return 3
       }
       return 0
     },
