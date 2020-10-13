@@ -118,7 +118,7 @@ export default {
       }, 650);
     },
     onResize () {
-      this.isMobile = window.innerWidth < 992
+      this.isMobile = window.innerWidth < 1050
       this.showFullLang = window.innerWidth >= 1200
     },
     toggleDropdown() {
@@ -149,7 +149,7 @@ export default {
 <style scoped lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1050px) {
     @content;
   }
 }
