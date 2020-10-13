@@ -160,7 +160,6 @@
             "title": "phase<br>9",
             "description": "switch to partial contact tracing"
         }
-
     },
     "charts": {
         "common": {
@@ -460,20 +459,20 @@
             "title": "Hospital capacities"
         },
         "ostanizdrav": {
-            "title": "#OstaniZdrav application",
+            "title": "The #OstaniZdrav Contact Tracing App",
             "description": "",
             "warningCurrentDay": "Warning: Data for the current day is not necessarily final.",
             "footer": "",
             "valid": {
                 "title": "Number of keys valid per day",
                 "date": "Date",
-                "perDay":"Keys valid per day",
+                "perDay": "Keys valid per day",
                 "description": ""
             },
             "published": {
                 "title": "Number of keys published per day",
                 "date": "Date",
-                "perDay":"Published keys per day",
+                "perDay": "Published keys per day",
                 "runningTotal": "Running total of keys published",
                 "description": ""
             },
@@ -520,10 +519,10 @@
             "bySourceRelative": "Sources of Infection (Relative)",
             "bySourceCountry": "Imported Cases",
             "bySourceCountryRelative": "Imported Cases (Relative)",
-            "importedCases":  "Imported Cases",
-            "importRelatedCases":  "Related to Imported Cases",
-            "localSource":  "Local Source",
-            "sourceUnknown":  "Unknown Source",
+            "importedCases": "Imported Cases",
+            "importRelatedCases": "Related to Imported Cases",
+            "localSource": "Local Source",
+            "sourceUnknown": "Unknown Source",
             "totalConfirmed": "Confirmed Cases Total",
             "totalImported": "Imported Cases Total"
         }
