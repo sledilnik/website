@@ -890,7 +890,7 @@
                 "title": "Dnevni ključi, veljavni na posamezen dan",
                 "date": "Datum",
                 "perDay":"Veljavnih ključev na dan",
-                "description": "<p>Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – gl. graf <a href='#published'>Objavljeni dnevni ključi</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
+                "description": "<p>Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – gl. graf <a href='#published-chart'>Objavljeni dnevni ključi</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
             },
             "published": {
                 "title": "Objavljeni dnevni ključi",
