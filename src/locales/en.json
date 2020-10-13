@@ -460,21 +460,21 @@
         },
         "ostanizdrav": {
             "title": "The #OstaniZdrav Contact Tracing App",
-            "description": "",
+            "description": "                                                                                                                                                                                                                                                                                                                                                                                                                ",
             "warningCurrentDay": "<p><b>Warning: Data for the current day is not necessarily complete.</b></p>",
-            "footer": "",
+            "footer": "                                                                                                    ",
             "valid": {
                 "title": "Number of keys valid per day",
                 "date": "Date",
                 "perDay": "Keys valid per day",
-                "description": ""
+                "description": "                                                                                                    "
             },
             "published": {
                 "title": "Number of keys published per day",
                 "date": "Date",
                 "perDay": "Published keys per day",
                 "runningTotal": "Running total of keys published",
-                "description": ""
+                "description": "                                                                                                    "
             },
             "validByRisk": {
                 "title": "Number of keys valid per day by risk level (interactive)",
@@ -482,7 +482,7 @@
                 "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
                 "valid": "Number of keys valid on given day",
                 "risk": "Risk",
-                "description": ""
+                "description": "                                                                                                    "
             },
             "publishedByRisk": {
                 "title": "Number of keys published per day by risk level (interactive)",
@@ -490,14 +490,14 @@
                 "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
                 "published": "Number of keys published on given day",
                 "risk": "Risk",
-                "description": ""
+                "description": "                                                                                                    "
             },
             "usercount": {
                 "title": "Estimate of number of users publishing keys per day",
                 "date": "Date",
                 "users": "Users publishing keys per day",
                 "runningTotal": "Running total of users who published keys",
-                "description": ""
+                "description": "                                                                                                    "
             },
             "userPublishedByCount": {
                 "title": "Number of keys published per user per day (interactive)",
@@ -505,7 +505,7 @@
                 "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
                 "users": "Users",
-                "description": ""
+                "description": "                                                                                                    "
             }
         },
         "sources": {
