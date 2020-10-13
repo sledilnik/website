@@ -703,7 +703,7 @@
         },
         "quarantine10days": {
             "title": "10 days",
-            "description": "Mandatory quarantine reduced from 10 days"
+            "description": "Mandatory quarantine reduced to 10 days"
         },
         "masks": {
             "title": "Masks",
