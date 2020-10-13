@@ -890,14 +890,14 @@
                 "title": "Dnevni ključi, veljavni na posamezen dan",
                 "date": "Datum",
                 "perDay":"Veljavnih ključev na dan",
-                "description": "<p>Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – gl. graf <a href='#published-chart'>Objavljeni dnevni ključi</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
+                "description": "<p>Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – glej graf <a href='#published-chart'>Objavljeni dnevni ključi</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
             },
             "published": {
                 "title": "Objavljeni dnevni ključi",
                 "date": "Datum",
                 "perDay":"Objavljenih ključev na dan",
                 "runningTotal": "Objavljenih ključev skupaj",
-                "description": "<p>Graf prikazuje število objavljenih dnevnih ključev za vsak dan (modri stolpci) ter skupno število ključev, objavljenih do tistega dne (rdeča črta). V povprečju uporabniki objavijo med 10 in 12 dnevnih ključev (gl. graf <a href='#usercount-chart'>Objavljeni dnevni ključi na uporabnika</a>) in s pomočjo te informacije lahko ocenimo njihovo število.</p>"
+                "description": "<p>Graf prikazuje število objavljenih dnevnih ključev za vsak dan (modri stolpci) ter skupno število ključev, objavljenih do tistega dne (rdeča črta). V povprečju uporabniki objavijo med 10 in 12 dnevnih ključev (glej graf <a href='#usercount-chart'>Objavljeni dnevni ključi na uporabnika</a>) in s pomočjo te informacije lahko ocenimo njihovo število.</p>"
             },
             "validByRisk": {
                 "title": "Dnevni ključi, veljavni na posamezen dan glede na stopnjo tveganja",
@@ -905,7 +905,7 @@
                 "tooltip": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' +datum.risk",
                 "valid": "Veljavnih ključev na dan",
                 "risk": "Tveganje",
-                "description": "<p>Graf prikazuje stopnjo tveganja ključev, ki so na posamezen dan veljavni — za razliko od tega, kdaj so bili objavljeni (gl. graf <a href='#publishedByRisk-chart'>Objavljeni dnevni ključi glede na stopnjo tveganja</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, toda veljavni so vsak za enega od preteklih 13 dni. To je ključno za razumevanje tega grafa, saj pomeni, da bo graf vedno padal zadnje 13 dni, ne glede spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
+                "description": "<p>Graf prikazuje stopnjo tveganja ključev, ki so na posamezen dan veljavni — za razliko od tega, kdaj so bili objavljeni (glej graf <a href='#publishedByRisk-chart'>Objavljeni dnevni ključi glede na stopnjo tveganja</a>). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, toda veljavni so vsak za enega od preteklih 13 dni. To je ključno za razumevanje tega grafa, saj pomeni, da bo graf vedno padal zadnje 13 dni, ne glede spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti.</p>"
             },
             "publishedByRisk": {
                 "title": "Objavljeni dnevni ključi glede na stopnjo tveganja",
@@ -920,7 +920,7 @@
                 "date": "Datum",
                 "users": "Uporabnikov, ki so objavili ključe na dan",
                 "runningTotal": "Uporabnikov, ki so objavili ključe skupaj",
-                "description": "<p>Graf prikazuje našo oceno števila uporabnikov, ki so na posamezen dan v aplikaciji potrdili okužbo (modri stolpci), ter skupno število uporabnikov, ki so to storili do tega dne (rdeča črta). Natančno znano je samo število dnevnih ključev, objavljenih vsak dan (glej graf Število objavljenih dnevnih ključev), toda iz njih lahko zaradi značilnega zaporedja stopenj tveganja precej natančno sklepamo o tem, koliko uporabnikov je na tisti dan v aplikacijo vneslo potrditev okužbe.</p>"
+                "description": "<p>Graf prikazuje našo oceno števila uporabnikov, ki so na posamezen dan v aplikaciji potrdili okužbo (modri stolpci), ter skupno število uporabnikov, ki so to storili do tega dne (rdeča črta). Natančno znano je samo število dnevnih ključev, objavljenih vsak dan (glej graf <a href='#published-chart'>Objavljeni dnevni ključi</a>), toda iz njih lahko zaradi značilnega zaporedja stopenj tveganja precej natančno sklepamo o tem, koliko uporabnikov je na tisti dan v aplikacijo vneslo potrditev okužbe.</p>"
 
             },
             "userPublishedByCount": {
