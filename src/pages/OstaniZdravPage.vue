@@ -7,7 +7,7 @@
         </h1>
         <div v-html="$options.filters.marked($t('charts.ostanizdrav.description'))"></div>
         <p>
-        <div v-html="$t('charts.ostanizdrav.warningCurrentDay')"></div>
+        <div v-html="$options.filters.marked($t('charts.ostanizdrav.warningCurrentDay'))"></div>
       </section>
     </div>
     <div class="visualizations container">
@@ -36,7 +36,7 @@
         <div id="publishedVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.published.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.published.description'))"
         ></div>
       </section>
       <section id="usercount-chart">
@@ -64,7 +64,7 @@
         <div id="usercountVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.usercount.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.usercount.description'))"
         ></div>
       </section>
       <section id="userPublishedByCount">
@@ -94,7 +94,7 @@
         <div id="userPublishedByCountVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.userPublishedByCount.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.userPublishedByCount.description'))"
         ></div>
       </section>
       <section id="publishedByRisk-chart">
@@ -124,7 +124,7 @@
         <div id="publishedByRiskVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.publishedByRisk.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.publishedByRisk.description'))"
         ></div>
       </section>
       <section id="valid-chart">
@@ -152,7 +152,7 @@
         <div id="validVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.valid.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.valid.description'))"
         ></div>
       </section>
       <section id="validByRisk-chart">
@@ -182,10 +182,10 @@
         <div id="validByRiskVis"></div>
         <div
           class="disclaimer"
-          v-html="$t('charts.ostanizdrav.validByRisk.description')"
+          v-html="$options.filters.marked($t('charts.ostanizdrav.validByRisk.description'))"
         ></div>
       </section>
-      <div class="footer" v-html="$t('charts.ostanizdrav.footer')"></div>
+      <div class="footer" v-html="$options.filters.marked($t('charts.ostanizdrav.footer'))"></div>
     </div>
   </div>
 </template>
