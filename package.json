@@ -25,6 +25,7 @@
     "highcharts-react-official": "^3.0.0",
     "i18next": "^19.7.0",
     "i18next-browser-languagedetector": "^6.0.1",
+    "marked": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "vega": "^5.17.0",
