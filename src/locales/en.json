@@ -459,7 +459,7 @@
             "title": "Hospital capacities"
         },
         "ostanizdrav": {
-            "title": "The #OstaniZdrav Contact Tracing App",
+            "title": "The #OstaniZdrav Exposure Notification Tracing App",
             "description": "                                                                                                                                                                                                                                                                                                                                                                                                                ",
             "warningCurrentDay": "<p><b>Warning: Data for the current day is not necessarily complete.</b></p>",
             "footer": "                                                                                                    ",
