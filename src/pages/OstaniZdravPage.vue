@@ -300,4 +300,12 @@ export default {
     padding: 0 1em 0 1em;
   }
 }
+
+.visualizations .title-chart-wrapper {
+  border-bottom: none;
+
+  .faq-and-share-wrapper {
+    display: none;
+  }
+}
 </style>
