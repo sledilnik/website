@@ -115,6 +115,31 @@
         <span v-html="$t('charts.ostanizdrav.publishedByRisk.description')"/>
       </div>
     </section>
+    <section id="valid-chart">
+      <div class="title-chart-wrapper">
+        <div class="title-brand-wrapper">
+          <h2>
+            <a href="#valid-chart" @click="smoothScroll">{{ $t('charts.ostanizdrav.valid.title') }}</a>
+          </h2>
+        </div>
+        <div class="faq-and-share-wrapper">
+          <div class="faq-link-wrapper">
+            <div>
+              <a
+                class="faq-link"
+                target="_blank"
+                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-valid`"
+                >?</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="validVis"></div>
+      <div class="chart-description">
+        <span v-html="$t('charts.ostanizdrav.valid.description')"/>
+      </div>
+    </section>
     <section id="validByRisk-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
@@ -140,31 +165,6 @@
       <div id="validByRiskVis"></div>
       <div class="chart-description">
         <span v-html="$t('charts.ostanizdrav.validByRisk.description')"/>
-      </div>
-    </section>
-    <section id="valid-chart">
-      <div class="title-chart-wrapper">
-        <div class="title-brand-wrapper">
-          <h2>
-            <a href="#valid-chart" @click="smoothScroll">{{ $t('charts.ostanizdrav.valid.title') }}</a>
-          </h2>
-        </div>
-        <div class="faq-and-share-wrapper">
-          <div class="faq-link-wrapper">
-            <div>
-              <a
-                class="faq-link"
-                target="_blank"
-                :href="`/${$i18n.i18next.language}/faq#ostanizdrav-valid`"
-                >?</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="validVis"></div>
-      <div class="chart-description">
-        <span v-html="$t('charts.ostanizdrav.valid.description')"/>
       </div>
     </section>
     <span v-html="$t('charts.ostanizdrav.footer')"/>
