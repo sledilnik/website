@@ -286,6 +286,14 @@ export default {
     justify-content: center;
     min-height: 433px;
   }
+
+  .title-chart-wrapper {
+    border-bottom: none;
+
+    .faq-and-share-wrapper {
+      display: none;
+    }
+  }
 }
 
 .vega-embed {
@@ -301,11 +309,4 @@ export default {
   }
 }
 
-.visualizations .title-chart-wrapper {
-  border-bottom: none;
-
-  .faq-and-share-wrapper {
-    display: none;
-  }
-}
 </style>
