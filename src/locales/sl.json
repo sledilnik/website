@@ -872,20 +872,20 @@
             "warningCurrentDay": "Pozor: Podatki za trenuten dan niso nujno dokončni.",
             "footer": "TODO:<br>HTML noga iz gdocs explainer",
             "valid": {
-                "title": "Število dnevnih ključev, veljavnih na posamezen dan",
+                "title": "Dnevni ključi, veljavni na posamezen dan",
                 "date": "Datum",
                 "perDay":"Veljavnih ključev na dan",
                 "description": "Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – gl. graf Število objavljenih dnevnih ključev). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti."
             },
             "published": {
-                "title": "Število objavljenih dnevnih ključev",
+                "title": "Objavljeni dnevni ključi",
                 "date": "Datum",
                 "perDay":"Objavljenih ključev na dan",
                 "runningTotal": "Objavljenih ključev skupaj",
                 "description": "Graf prikazuje število objavljenih dnevnih ključev za vsak dan (modri stolpci) ter skupno število ključev, objavljenih do tistega dne (rdeča črta). V povprečju imajo uporabniki pred vnosom teleTAN-kode aplikacijo delujočo od 10 do 12 dni, torej objavijo tudi toliko dnevnih ključev (gl. graf Število objavljenih dnevnih ključev na uporabnika)."
             },
             "validByRisk": {
-                "title": "Število dnevnih ključev, veljavnih na posamezen dan glede na stopnjo tveganja (interaktivno)",
+                "title": "Dnevni ključi, veljavnih na posamezen dan glede na stopnjo tveganja",
                 "date": "Datum",
                 "tooltip": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' +datum.risk",
                 "valid": "Veljavnih ključev na dan",
@@ -893,7 +893,7 @@
                 "description": "Graf prikazuje stopnjo tveganja ključev, ki so na posamezen dan veljavni — za razliko od tega, kdaj so bili objavljeni (gl. graf Število objavljenih dnevnih ključev glede na stopnjo tveganja). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, toda veljavni so vsak za enega od preteklih 13 dni. To je ključno za razumevanje tega grafa, saj pomeni, da bo graf vedno padal zadnje 13 dni, ne glede spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti."
             },
             "publishedByRisk": {
-                "title": "Število objavljenih dnevnih ključev glede na stopnjo tveganja (interaktivno)",
+                "title": "Objavljeni dnevni ključi glede na stopnjo tveganja",
                 "date": "Datum",
                 "tooltip": "datum.published + ' objavljenih ključev s stopnjo tveganja ' + datum.risk",
                 "published": "Objavljenih ključev na dan",
@@ -909,7 +909,7 @@
 
             },
             "userPublishedByCount": {
-                "title": "Število objavljenih dnevnih ključev na uporabnika (interaktivno)",
+                "title": "Objavljeni dnevni ključi na uporabnika",
                 "date": "Datum",
                 "tooltip": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
                 "count": "(povprečno) število ključev na uporabnika na dan",
