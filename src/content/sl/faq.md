@@ -21,7 +21,7 @@ Naš cilj je pomagati pri razumevanju širjenja virusa in pripomoči k splošni 
 <details>
   <summary id=ventilator-vs-respirator>Kakšna je razlika med ventilatorjem in respiratorjem? Kateri izraz je pravi(len)?</summary>
 
-Načeloma sta oba pravilna. Pri Sledilniku smo najprej uporabljali *ventilator*, nato pa smo se po tehtanju argumentov ter na na predlog člana strokovne skupine, ki svetuje Ministrstvu za zdravje, odločili za uporabo izraza *respirator*. Izraz "*medicinski ventilator*" je sicer ustreznejši z vidika medicinske stroke in tudi slovenskega jezika, izraz "respirator" pa se nam zdi boljši zaradi jedrnatosti in hkratne jasnosti v splošni oz. pogovorni uporabi. Več o dilemah poimenovanja lahko preberete v odličnem članku [**Respirator ali ventilator?** (STA, 24. marca 2020)](https://www.sta.si/2743782/respirator-ali-ventilator).
+Načeloma sta oba pravilna. Pri Sledilniku smo najprej uporabljali *ventilator*, nato pa smo se po tehtanju argumentov ter na predlog člana strokovne skupine, ki svetuje Ministrstvu za zdravje, odločili za uporabo izraza *respirator*. Izraz "*medicinski ventilator*" je sicer ustreznejši z vidika medicinske stroke in tudi slovenskega jezika, izraz "respirator" pa se nam zdi boljši zaradi jedrnatosti in hkratne jasnosti v splošni oz. pogovorni uporabi. Več o dilemah poimenovanja lahko preberete v odličnem članku [**Respirator ali ventilator?** (STA, 24. marca 2020)](https://www.sta.si/2743782/respirator-ali-ventilator).
 
 </details>
 
@@ -35,7 +35,7 @@ V Sledilniku uporabljamo nabor izrazov, ki so razloženi v odgovoru [Kaj pomeni 
 <details>
   <summary id=all-infected>Je kjer koli mogoče dobiti statistiko vseh obolelih, tudi asimptomatskih primerov?</summary>
 
-To trenutno ni mogoče. Razlogov je več: testiranja zajemajo le določen del populacije (bolniki z znaki in simptomi akutne okužbe dihal, ki bi lahko potrebovali zdravljenje v bolnišnici, zdravstveni delavci in oskrbovanci DSO s simptomi okužbe dihal, starejši nad 60 let po presoji zdravnika), zato je v statistiko lahko zajet le del populacije, ki očitno kaže znake okužbe, mlajša oz. netestirana populacija je torej za zdaj disproporcionalno zastopana. Statistike asimptomatskih bolnikov, ki ne kažejo simptomov in niso zato nikjer zavedeni, tako ni mogoče dobiti. 
+To trenutno ni mogoče. Razlogov je več: režim testiranja se je že večkrat spremenil (gl. [graf Stanje COVID-19 v Sloveniji](/sl/stats#chart-phases)) in vedno zajema le del populacije. Statistike asimptomatskih bolnikov, ki ne kažejo simptomov in niso zato nikjer zavedeni, tako ni mogoče dobiti. 
 
 </details>
 
@@ -51,7 +51,7 @@ Za podrobnejše primerjave, ki upoštevajo še druge kategorije razen umrlih, si
 <details>
   <summary id=english-translation>Ali obstaja vaša stran tudi v angleščini?</summary>
 
-Pomembni deli Sledilnika so že prevedeni, na primer vsi prikazi in grafi ter stran [stran O projektu](/en/about), ki zajema osnovne podatke in vire podatkov. Preostale strani bodo prevedene takoj, ko bo mogoče. Sicer sta na voljo za prosto uporabo tako besedilni del kot izvorna koda. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
+Glavni prikazi Sledilnika so že prevedeni tako v angleščino kot v nekaj drugih jezikov (DE, HR, IT), v angleščini sta na voljo tudi stran [stran O projektu](/en/about), ki zajema osnovne podatke in vire podatkov, ter [stran FAQ - Pogosta vprašanja in odgovori](/en/faq). Preostale strani bodo prevedene takoj, ko bo mogoče. Sicer sta na voljo za prosto uporabo tako besedilni del kot izvorna koda. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz).
 
 </details>
 
@@ -134,7 +134,7 @@ Podatek **Odpuščeni iz bolnišnice** je izračunan na podlagi podatkov, ki jih
 <details>
   <summary id=data-recovered>Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?</summary>
 
-Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila prebolelih. (Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](#data-active-cases)) 
+Sledilnik se je pri številu ozdravelih zanašal na uradne vire (Vlada RS, mediji). Poročanja o ozdravelih so žal še vedno redka – za zdaj imamo samo par potrjenih virov o "ozdravelih", rednih podatkov in uradnih virov pa ni, kakor tudi ne uradne defincije, kdaj je določena oseba ozdravela. V okviru Inštituta za mikrobiologijo in imunologijo je potekala [nacionalna raziskava o COVID-19](https://covid19.biolab.si/), ki bo pokazala tudi, koliko ljudi je bolezen COVID-19 že prebolelo. Ker trenutno še ni znano, kakšne so morebitne posledice prebolele bolezni COVID-19 (s tem se ukvarjajo različne študije, rezultati pa še dolgo ne bodo znani), in ker tudi zdravstvene institucije govorijo o preboleli bolezni (in ne o ozdravelih), smo skladno s tem spremenili tako terminologijo kot način izračunavanja števila *aktivnih* (trenutno stanje potrjeno okuženih) in *prebolelih* (skupaj). Gl. tudi vprašanje [Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?](#data-active-cases).
 
 Ministrstvo za zdravje je 14. aprila objavilo [Priporočila za zaključek izolacije in vrnitev na delovno mesto](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf), iz katerih lahko razberemo, kdaj se za osebo sklepa, da je prebolela okužbo in se lahko vrne na delo. Za osebe s simptomi je to 14 dni po umiritvi simptomov, za zdravstvene delavce je po 14 dneh obvezen kontrolni bris, ki mora biti negativen 2x zapored. Vlada RS sicer redno poroča o odpuščenih iz bolnišnice, za katere pa ne vemo, ali so res že preboleli bolezen. Iz objavljenih priporočil je razvidno, da sta pri teh bolnikih po odpustu v domačo oskrbo potrebna dva zaporedna negativna kontrolna brisa, da bi se oseba štela za sposobno vrnitve na delo. ECDC je v svojem [poročilu](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) navedla: *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population...*, zato smo izbrali 14-dnevno obdobje kot povprečno trajanje okužbe, torej čas, ko je potrjeno okuženi aktiven. 
 
@@ -147,16 +147,17 @@ Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countri
 <details>
   <summary id=data-active-cases>Ali vodite števec aktivnih okužb oz. ali veste, koliko je trenutno okuženih oseb?</summary>
 
-Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike – **Potrjeno okuženi (aktivni)** in **Preboleli (skupaj)**. 
+Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike. [Graf Stanje COVID-19 v Sloveniji]
+(/sl/stats#metrics-comparison-chart) kaže sliko potrjeno okuženih. Privzeti prikaz je **Aktivni** (zgoraj levo), ki nam kaže število aktivnih primerov in posebej še število hospitaliziranih, v intenzivni enoti ter na respiratorju. S spremenitvijo prikaza *Aktivnih* v prikaz **Na dan** lahko vidimo podrobnosti stanja aktivnih oz. potrjeno okuženih po posameznih dnevih (testiranja, potrjeno okuženi, sprejeti v bolnišnico in odpuščeni, sprejeti v intenzivno enoto in odpuščeni ...), če pa izberemo prikaz **Skupaj**, lahko poleg drugih podatkov vidimo tudi število prebolelih.  
 
-Pri teh prikazih ne gre za podatke iz javnih virov; oba kazalnika kažeta na osnovi uradnih podatkov izračunano vrednost, zato sta za lažje razločevanje prikazana s črtkano črto. Vrednost *Potrjeno okuženi (aktivni)* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred dvema tednoma (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen **povprečno preboli najkasneje v 14 dneh** (vir: [ECDC poročilo](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19.       
+Kazalnika *Aktivni primeri* in *Preboleli* nista podatka, pridobljena iz javnih virov; oba kažeta na osnovi uradnih podatkov izračunano vrednost. Vrednost *Aktivni primeri* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjeno okuženih pred dvema tednoma (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjeno okuženih v preteklosti na podlagi domneve, da se bolezen **povprečno preboli najkasneje v 14 dneh** (vir: [ECDC poročilo](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); tako je število prebolelih na določen dan enako številu vseh potrjeno okuženih dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19.       
 
 *Opomba: izračun prebolelih smo spremenili 9. 5. 2020, in sicer izračunavamo prebolele zdaj po 14-dnevnem obdobju od potrditve okužbe (prej 21 dni), zato je bil opazen skok v številu prebolelih. Prosimo, da v oceni števila prebolelih upoštevate to razliko v izračunu. Podrobnejša razlaga spremenjenega izračunavanja je na voljo v članku na Mediumu [Od potrjeno okuženih do prebolelih](https://medium.com/@sledilnik/94c81674718e).*
 
 Formula za izračun vrednosti:
 - Preboleli (skupaj) = Potrjeno okuženi (skupaj) pred 14 dnevi – Umrli (skupaj) do dneva izračuna
 
-- Potrjeno okuženi (aktivni) = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
+- Aktivni primeri = Potrjeno okuženi (skupaj) − Preboleli (skupaj) − Umrli (skupaj)
 
 </details>
 
@@ -192,6 +193,34 @@ Lahko! Na svojo spletno stran lahko vgradite poljuben graf ali prikaz – ob nav
 
 Gre za odstotno stopnjo rasti na današnji dan v številu oseb glede na prejšnji dan. Če je, recimo, včeraj bilo v intenzivni enoti 16 oseb, danes pa so sprejeli še štiri, je to 25 % več glede na včerajšnje stanje.  
 
+</details>
+
+<details>
+  <summary id=chart-infocard-phase>Kaj pomenijo faze, ki se pojavljajo v nekaterih informativnih okvirčkih na vrhu strani?</summary>
+
+Vlada RS je 6. 10. 2020 predstavila [načrt in ukrepe za zajezitev novega vala okužb s koronavirusom](https://www.gov.si/novice/2020-10-06-predsednik-vlade-janez-jansa-predstavil-nacrt-in-ukrepe-za-2-val-koronavirusa/). Ta ima **tri faze**. Vsaka faza nam pove, katere ukrepe moramo sprejeti, da bi zajezili širitev okužb. *Uradna verzija ukrepov je na voljo na tej [povezavi](https://www.gov.si/assets/vlada/Fotografije/PV/10-2020/ukrepi.pptx), preglednejši infogram pa [tukaj](https://infogram.com/nacrt_ukrepov_2_val-1h9j6q3y1y852gz).*
+
+**Faze temeljijo na treh dejavnikih, ki jih vključno s številko faze prikazujejo posamezne infokartice na vrhu Sledilnikove strani**:
+* Število pozitivnih prebivalcev na COVID-19 na 100.000 prebivalcev v okviru zadnjih 14 dni. Podatek je prikazan na infokartici *14-dnevna pojavnost*.
+* Število obolelih v bolnišnicah. Podatek je prikazan na infokartici *Hospitalizirani*.
+* Število obolelih v v enoti za intenzivno terapijo. Podatek je prikazan na infokartici *V intenzivni enoti*.  
+
+**Zelena faza** ni posebej opredeljena. To je faza pripravljenosti, v kateri se zavedamo, da bo koronavirus še nekaj časa med nami, zato se morajo upoštevati splošni higienski ukrepi – razkuževanje, nošenje maske in ohranjanje varnostne razdalje; epidemiološke služba deluje normalno v skladu z ZNB. NIJZ je pripravil [splošna priporočila za obdobje sproščanja ukrepov](https://www.nijz.si/sl/preprecevanje-okuzbe-z-virusom-sars-cov-2-v-obdobju-sproscanja-ukrepov), ki jih je smiselno upoštevati ves čas.
+
+**Oranžna faza** je sestavljena iz treh paketov ukrepov glede na stanje vseh treh dejavnikov.
+1. paket: **> 40** (14-dnevna pojavnost) **> 60** (hospitalizirani) **> 15** (v intenzivni enoti). Ukrepi: omejitev zbiranja 10/50/500; obvezne maske v zaprtih prostorih, na JPP in v gneči na prostem; časovna omejitev dela gostinskih lokalov; obvezni testi in karantene za [nevarne države](sl/stats#europe-chart); priporočeno delo od doma; posamične prepovedi obiskov v ogroženih domovih za ostarele.
+
+2. paket: **> 80** (14-dnevna pojavnost) **> 100** (hospitalizirani) **> 20** (v intenzivni enoti). Ukrepi: strežba samo sedečim za mizami, razredčitev miz v lokalih; zbiranje do 10 ljudi javno in zasebno (izjema: verski obredi in poroke; nadzorovane javne kulturne in športne prireditve ob upoštevanju ukrepov); prireditve brez zakusk; obvezna uporaba razkuževalnih sredstev za roke v skupnih prostorih večstanovanjskih stavb ter poslovnih stavb (obvezna namestitev razpršilnikov za razkužila); omejitev števila oseb v zaprtih javnih prostorih (trgovine, banke, pošte, uradi ipd.); prepoved obiskov v domovih za ostarele in bolnišnicah v posameznih okoljih/občinah.
+
+3. paket: **> 120** (14-dnevna pojavnost) **> 180** (hospitalizirani) **> 30** (v intenzivni enoti). Ukrepi: zapora/karantena posameznih občin ali regij; splošna prepoved obiskov v bolnišnicah in zavodih; zaprtje gostinskih lokalov; zaprtje fitnes centrov in športnih objektov za amaterje, za skupinske športe; omejitev delovanja frizerskih in kozmetičnih salonov na največ eno stranko na prostor; prepoved vseh javnih in kulturnih prireditev ter verskih obredov in porok v posameznih občinah ali regijah; zaprtje nenujne zdravstvene in zobozdravstvene dejavnosti.
+
+**Rdeča faza** je sestavljena iz treh paketov ukrepov glede na stanje vseh treh dejavnikov.
+1. paket: **> 140** (14-dnevna pojavnost) **> 250** (hospitalizirani) **> 50** (v intenzivni enoti). Ukrepi: zaprtje trgovskih centrov; šola na daljavo za srednje šole in univerze; zaprtje kulturnih ustanov; splošna prepoved verskih obredov in porok s prisotnimi gosti.
+
+2. paket: **> 170** (14-dnevna pojavnost) **> 300** (hospitalizirani) **> 50** (v intenzivni enoti). Ukrepi: šola na daljavo za vse; posebni dodatni sloti za starejše; zaprtje frizerskih in kozmetičnih salonov; zaprtje hotelov; zaprtje športnih objektov za amaterje za individualne športe ter za športno dejavnost otrok in mladostnikov; omejitev gibanja med 22.30 in 5. uro.
+
+3. paket: **> xxx** (14-dnevna pojavnost) **> 360** (hospitalizirani) **> 60** (v intenzivni enoti). Ukrepi: omejitev gibanja med občinami; zaprtje vrtcev; zaustavitev javnega prometa; zaprtje meja (razen tovorni promet in nujni prehodi); omejitev izhodov razen nujnih izjem; zapiranje posameznih gospodarskih dejavnosti. (V veljavi tudi vsi drugi sektorski ukrepi državnega načrta.)
+ 
 </details>
 
 <details>
@@ -267,11 +296,11 @@ Vse potrjeno okužene primere kaže [graf Potrjeni primeri](/sl/stats#cases-char
 
 
 <details>
-  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 7), ki jih vidimo v grafih?</summary>
+  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 9), ki jih vidimo v grafih?</summary>
 
-Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, uvedejo se interventni ukrepi samoizolacije...).
+Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, spremeba sledenja stikov...).
 
-Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.
+Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sledenja stikov spremenil tudi pomen določenih kazalcev, po katerih lahko presojamo razširjenost okužb.
 
 * **Faza 1 (4.–12. marec 2020)**: Zabeleženi so prvi primeri okužbe pri nas. Sledi se vsem primerom, testirajo se vsi kontakti. 
 
@@ -285,10 +314,11 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja spremenil 
 
 * **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
-* **Faza 7 (15. maj)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
-    - 1.6.: sproščanje osnovna šola, zbiranje do 200 ljudi.
-    - 15.6.: sproščanje, zbiranje do 500 ljudi, prost prestop meje izven kontrolnih točk za SLO, AUT, ITA in HUN.
-    - 15.6.: poostrena obvezna 14-dnevna karantena za kritične države.
+* **Faza 7 (15. maj-10. september)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
+
+* **Faza 8 (10. september–9. oktober)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko. 
+
+* **Faza 9 (9. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiologi bodo zaradi preveč okužb z novim koronavirusom prioritetno iskali stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
 </details>
 
 <details>
@@ -305,6 +335,19 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
 
 [Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeno okuženi* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).   
 Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu.  
+
+</details>
+
+<details>
+  <summary id=sources-chart>Kaj kaže graf "Karantena in viri okužb"?</summary>
+
+[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* (spodaj) prikazuje število oseb, poslanih v karanteno, potrjeno okužene v določenem tednu in delež potrjeno okuženih, ki so bili že v karanteni.
+
+Pozor: Prikaz podatkov o karanteni je narejen na podlagi virov NIJZ. Ker NIJZ podatkov ne objavlja redno oz. lahko prihaja do njihove zakasnitve, za njihovo točnost in popolnost ne odgovarjamo. 
+
+Če spodaj preklopimo na prikaz *Viri okužb*, so prikazani potrjeno okuženi v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznani vir. Povečanje neznanega vira je kazalnik, da epidemiološko sledenje ni uspešno pri odkrivanju vira.
+Prikaz *Uvoženi primeri* po tednih prikaže države, iz katerih so bili uvoženi posamezni primeri, in število teh primerov.
+Vsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) – tako lahko primerjate gibanje kategorij po posameznih tednih.
 
 </details>
 

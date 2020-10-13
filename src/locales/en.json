@@ -43,8 +43,11 @@
         "active": "Active Cases",
         "incidence": "14 days incidence",
         "per100k": "per 100k",
-        "orangePhase": "Orange phase, ",
-        "redPhase": "Red phase, ",
+        "orangePhase": "Orange phase",
+        "orangePhaseGenitive": "orange",
+        "redPhase": "Red phase",
+        "redPhaseGenitive": "red",
+        "nextCriteria": "<br/>Criteria for the package {{ phaseNextNumber }} of the {{ phaseNextPackage }} phase is {{ phaseNextCriteria }}.",
         "package1": "package 1",
         "package2": "package 2",
         "package3": "package 3",
@@ -123,32 +126,41 @@
     },
     "phase": {
         "1": {
-            "title": "Phase 1"
+            "title": "phase<br>1"
         },
         "2": {
-            "title": "Phase 2",
+            "title": "phase<br>2",
             "description": "epidemic, new testing methodology"
         },
         "3": {
-            "title": "Phase 3",
+            "title": "phase<br>3",
             "description": "new testing methodology"
         },
         "4": {
-            "title": "Phase 4",
+            "title": "phase<br>4",
             "description": "new testing methodology"
         },
         "5": {
-            "title": "Phase 5",
+            "title": "phase<br>5",
             "description": "new testing methodology"
         },
         "6": {
-            "title": "Phase 6",
+            "title": "phase<br>6",
             "description": "new testing methodology, study"
         },
         "7": {
-            "title": "Phase 7",
+            "title": "phase<br>7",
             "description": "end of epidemic"
+        },
+        "8": {
+            "title": "phase<br>8",
+            "description": "new testing methodology - children"
+        },
+        "9": {
+            "title": "phase<br>9",
+            "description": "switch to partial contact tracing"
         }
+
     },
     "charts": {
         "common": {
@@ -183,7 +195,8 @@
             "numDateFormat": "%m/%d/%Y",
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
-            "shortDateFormat": "%b %e"
+            "shortDateFormat": "%b %e",
+            "weekYearDateFormat": "Week %W of %Y"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -193,6 +206,7 @@
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
+            "show7DaysAverage": "7-Day Average",
             "testsPerformed": "Tests",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
@@ -385,7 +399,8 @@
             "confirmedCasesPerPopulation": "Confirmed Cases per Population",
             "age": "Age",
             "deceased": "Deaths",
-            "confirmedCases": "Confirmed Cases"
+            "confirmedCases": "Confirmed Cases",
+            "disclaimer": "Note: Unlike other data that is published regularly for different categories, official sources obtain demographic data with a time lapse (age, municipality ...), so these are usually known with a one-day delay. This is also the reason that in the By Age Groups display, there may be some deviations from data in other displays, such as lower values of the number of confirmed cases and deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
@@ -400,9 +415,9 @@
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Cases Per 1 Million People",
-            "yAxisTitle": "New cases per 1 million people",
-            "legendTitle": "New cases per 1M people"
+            "title": "Countries: New Daily Cases Per 1 Million People",
+            "yAxisTitle": "New daily cases per 1 million people",
+            "legendTitle": "New daily cases per 1M people"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 1 Million People",
@@ -493,6 +508,24 @@
                 "users": "Users",
                 "description": ""
             }
+        },
+        "sources": {
+            "title": "Qurantine and Sources of Infection",
+            "sentToQuarantine": "Sent to Quarantine",
+            "confirmedCases": "Confirmed Cases",
+            "confirmedFromQuarantine": "Confirmed from Quarantine",
+            "quarantine": "Quarantine",
+            "quarantineRelative": "Quarantine (Relative)",
+            "bySource": "Sources of Infection",
+            "bySourceRelative": "Sources of Infection (Relative)",
+            "bySourceCountry": "Imported Cases",
+            "bySourceCountryRelative": "Imported Cases (Relative)",
+            "importedCases":  "Imported Cases",
+            "importRelatedCases":  "Related to Imported Cases",
+            "localSource":  "Local Source",
+            "sourceUnknown":  "Unknown Source",
+            "totalConfirmed": "Confirmed Cases Total",
+            "totalImported": "Imported Cases Total"
         }
     },
     "footer": {
@@ -688,7 +721,8 @@
         "x_days_ago": "{{ count }} day ago",
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
-        "longerDate": "{{ date, %A, %B %e, %Y }}"
+        "longerDate": "{{ date, %A, %B %e, %Y }}",
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",
@@ -957,7 +991,7 @@
         "YEM": "Yemen",
         "ZAF": "South Africa",
         "ZMB": "Zambia",
-        "ZWE": "Zimbabwe"        
+        "ZWE": "Zimbabwe"
     },
     "country-groups": {
         "groupLatinAmerica": "Latin America",
@@ -977,27 +1011,27 @@
     "mk": {
         "phase": {
             "1": {
-                "title": "Phase 1",
+                "title": "phase<br>1",
                 "description": "Debar 4, Skopje 3, Makedonija 2 "
             },
             "2": {
-                "title": "Phase 2",
+                "title": "phase<br>2",
                 "description": "Skopje 4"
             },
             "3": {
-                "title": "Phase 3",
+                "title": "phase<br>3",
                 "description": "Debar 4"
             },
             "4": {
-                "title": "Phase 4",
+                "title": "phase<br>4",
                 "description": "Makedonija 3"
             },
             "5": {
-                "title": "Phase 5",
+                "title": "phase<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "6": {
-                "title": "Phase 6",
+                "title": "phase<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             }
         },

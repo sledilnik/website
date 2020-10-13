@@ -43,8 +43,11 @@
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "per100k": "na 100.000 prebivalcev",
-        "orangePhase": "Oranžna faza, ",
-        "redPhase": "Rdeča faza, ",
+        "orangePhase": "Oranžna faza",
+        "orangePhaseGenitive": "oranžne",
+        "redPhase": "Rdeča faza",
+        "redPhaseGenitive": "rdeče",
+        "nextCriteria": "<br/>Kriterij za {{ phaseNextNumber }}. paket {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
         "package1": "1. paket",
         "package2": "2. paket",
         "package3": "3. paket",
@@ -85,7 +88,8 @@
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
-        "longerDate": "{{ date, %A, %e. %B %Y }}"
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -551,31 +555,39 @@
     },
     "phase": {
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
         },
         "2": {
-            "title": "Faza 2",
+            "title": "faza<br>2",
             "description": "epidemija, nov režim testiranja"
         },
         "3": {
-            "title": "Faza 3",
+            "title": "faza<br>3",
             "description": "nov režim testiranja"
         },
         "4": {
-            "title": "Faza 4",
+            "title": "faza<br>4",
             "description": "nov režim testiranja"
         },
         "5": {
-            "title": "Faza 5",
+            "title": "faza<br>5",
             "description": "nov režim testiranja"
         },
         "6": {
-            "title": "Faza 6",
+            "title": "faza<br>6",
             "description": "nov režim testiranja, raziskava"
         },
         "7": {
-            "title": "Faza 7",
+            "title": "faza<br>7",
             "description": "preklic epidemije"
+        },
+        "8": {
+            "title": "faza<br>8",
+            "description": "nov režim testiranja otrok"
+        },
+        "9": {
+            "title": "faza<br>9",
+            "description": "prehod na delno sledenje stikov"
         }
     },
     "charts": {
@@ -613,7 +625,8 @@
             "numDateFormat": "%d. %m. %Y",
             "dateFormat": "%A, %e. %B %Y",
             "longDateFormat": "%e. %B %Y",
-            "shortDateFormat": "%e. %b"
+            "shortDateFormat": "%e. %b",
+            "weekYearDateFormat": "%W. teden %Y"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
@@ -623,6 +636,7 @@
             "showActive": "Aktivni",
             "showToday": "Na dan",
             "showToDate": "Skupaj",
+            "show7DaysAverage": "7-dnevno povprečje",
             "testsPerformed": "Testiranja",
             "confirmedCases": "Potrjeno okuženi",
             "activeCases": "Aktivni primeri",
@@ -842,7 +856,8 @@
             "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
-            "populationTotal": "Prebivalcev skupaj"
+            "populationTotal": "Prebivalcev skupaj",
+            "disclaimer": "Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih."
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
@@ -916,6 +931,24 @@
                 "users": "Uporabnikov",
                 "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
             }
+        },
+        "sources": {
+            "title": "Karantena in viri okužb",
+            "sentToQuarantine": "Poslani v karanteno",
+            "confirmedCases": "Potrjeni primeri",
+            "confirmedFromQuarantine": "Potrjeni iz karantene",
+            "quarantine": "Karantena",
+            "quarantineRelative": "Karantena (relativno)",
+            "bySource": "Viri okužb",
+            "bySourceRelative": "Viri okužb (relativno)",
+            "bySourceCountry": "Uvoženi primeri",
+            "bySourceCountryRelative": "Uvoženi primeri (relativno)",
+            "importedCases":  "Uvoženi primeri",
+            "importRelatedCases":  "Povezani z uvoženimi",
+            "localSource":  "Lokalni vir",
+            "sourceUnknown":  "Neznan vir",
+            "totalConfirmed": "Skupaj potrjeni",
+            "totalImported": "Skupaj uvoženi"
         }
     },
     "footer": {
