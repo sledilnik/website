@@ -23,6 +23,9 @@
         </div>
       </div>
       <div id="publishedVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.published.description') }}
+      </div>
     </section>
     <section id="usercount-chart">
       <div class="title-chart-wrapper">
@@ -47,6 +50,9 @@
         </div>
       </div>
       <div id="usercountVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.usercount.description') }}
+      </div>
     </section>
     <section id="userPublishedByCount">
       <div class="title-chart-wrapper">
@@ -71,6 +77,9 @@
         </div>
       </div>
       <div id="userPublishedByCountVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.userPublishedByCount.description') }}
+      </div>
     </section>
     <section id="publishedByRisk-chart">
       <div class="title-chart-wrapper">
@@ -95,6 +104,9 @@
         </div>
       </div>
       <div id="publishedByRiskVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.publishedByRisk.description') }}
+      </div>
     </section>
     <section id="validByRisk-chart">
       <div class="title-chart-wrapper">
@@ -119,6 +131,9 @@
         </div>
       </div>
       <div id="validByRiskVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.validByRisk.description') }}
+      </div>
     </section>
     <section id="valid-chart">
       <div class="title-chart-wrapper">
@@ -141,6 +156,9 @@
         </div>
       </div>
       <div id="validVis"></div>
+      <div class="chart-description">
+        {{ $t('charts.ostanizdrav.valid.description') }}
+      </div>
     </section>
   </div>
 </template>

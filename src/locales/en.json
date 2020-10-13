@@ -449,41 +449,46 @@
             "valid": {
                 "title": "Number of keys valid per day",
                 "date": "Date",
-                "perDay":"Keys valid per day"
+                "perDay":"Keys valid per day",
+                "description": ""
             },
             "published": {
                 "title": "Number of keys published per day",
                 "date": "Date",
                 "perDay":"Published keys per day",
-                "runningTotal": "Running total of keys published"
+                "runningTotal": "Running total of keys published",
+                "description": ""
             },
             "validByRisk": {
                 "title": "Number of keys valid per day by risk level (interactive)",
                 "date": "Date",
                 "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
                 "valid": "Number of keys valid on given day",
-                "risk": "Risk"
+                "risk": "Risk",
+                "description": ""
             },
             "publishedByRisk": {
                 "title": "Number of keys published per day by risk level (interactive)",
                 "date": "Date",
                 "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
                 "published": "Number of keys published on given day",
-                "risk": "Risk"
+                "risk": "Risk",
+                "description": ""
             },
             "usercount": {
                 "title": "Estimate of number of users publishing keys per day",
                 "date": "Date",
                 "users": "Users publishing keys per day",
-                "runningTotal": "Running total of users who published keys"
-
+                "runningTotal": "Running total of users who published keys",
+                "description": ""
             },
             "userPublishedByCount": {
                 "title": "Number of keys published per user per day (interactive)",
                 "date": "Date",
                 "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
-                "users": "Users"
+                "users": "Users",
+                "description": ""
             }
         }
     },
