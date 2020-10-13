@@ -7,8 +7,7 @@
         </h1>
         <div v-html="$t('charts.ostanizdrav.description')"></div>
         <p>
-          {{ $t('charts.ostanizdrav.warningCurrentDay') }}
-        </p>
+        <div v-html="$t('charts.ostanizdrav.warningCurrentDay')"></div>
       </section>
     </div>
     <div class="visualizations container">
