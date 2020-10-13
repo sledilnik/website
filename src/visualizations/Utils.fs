@@ -92,7 +92,10 @@ let renderScaleSelector scaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text yLabel
+            Html.div [
+                prop.text yLabel
+                prop.className "chart-display-property-selector__item"
+            ]
             renderSelector Linear scaleType linearLabel
             renderSelector Logarithmic scaleType logLabel
         ]

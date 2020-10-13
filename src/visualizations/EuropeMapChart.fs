@@ -618,8 +618,7 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     Html.div
         [ prop.className "chart-display-property-selector"
           prop.children
-              [ Html.text (I18N.t "charts.common.view")
-                renderChartSelector Restrictions
+              [ renderChartSelector Restrictions
                 renderChartSelector TwoWeekIncidence ] ]
 
 

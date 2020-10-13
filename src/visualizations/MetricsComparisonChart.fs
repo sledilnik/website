@@ -380,8 +380,7 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
 
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children
-            ((Html.text (I18N.chartText "common" "view")) :: metricTypesSelectors)
+        prop.children (metricTypesSelectors)
     ]
 
 let render state dispatch =
