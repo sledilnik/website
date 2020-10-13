@@ -461,7 +461,7 @@
         "ostanizdrav": {
             "title": "The #OstaniZdrav Contact Tracing App",
             "description": "",
-            "warningCurrentDay": "<p><b>Warning: Data for the current day is not necessarily final.</b></p>",
+            "warningCurrentDay": "<p><b>Warning: Data for the current day is not necessarily complete.</b></p>",
             "footer": "",
             "valid": {
                 "title": "Number of keys valid per day",
