@@ -731,7 +731,7 @@
             "title": "Maske"
         },
         "quarantine10days": {
-            "description": "Obavezna karantena smanjena s 10 dana",
+            "description": "Obavezna karantena smanjena na 10 dana",
             "title": "10 dana"
         },
         "testOrQuarantine": {
