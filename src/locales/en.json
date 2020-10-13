@@ -446,6 +446,9 @@
         },
         "ostanizdrav": {
             "title": "#OstaniZdrav application",
+            "description": "TODO:<br>HTML description from gdocs explainer",
+            "warningCurrentDay": "Warning: Data for the current day is not necessarily final.",
+            "footer": "TODO:<br>HTML footer from gdocs explainer",
             "valid": {
                 "title": "Number of keys valid per day",
                 "date": "Date",

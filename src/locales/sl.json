@@ -868,6 +868,9 @@
         },
         "ostanizdrav": {
             "title": "#OstaniZdrav aplikacija",
+            "description": "TODO:<br>HTML opis iz gdocs explainerja",
+            "warningCurrentDay": "Pozor: Podatki za trenuten dan niso nujno dokončni.",
+            "footer": "TODO:<br>HTML noga iz gdocs explainer",
             "valid": {
                 "title": "Število dnevnih ključev, veljavnih na posamezen dan",
                 "date": "Datum",

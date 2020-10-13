@@ -1,5 +1,12 @@
 <template>
   <div class="visualizations container">
+    <h1>
+      {{  $t('charts.ostanizdrav.title') }}
+    </h1>
+    <span v-html="$t('charts.ostanizdrav.description')"/>
+    <p>
+    {{  $t('charts.ostanizdrav.warningCurrentDay') }}
+    </p>
     <section id="published-chart">
       <div class="title-chart-wrapper">
         <div class="title-brand-wrapper">
@@ -160,6 +167,8 @@
         {{ $t('charts.ostanizdrav.valid.description') }}
       </div>
     </section>
+    <span v-html="$t('charts.ostanizdrav.footer')"/>
+
   </div>
 </template>
 
