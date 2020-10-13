@@ -830,18 +830,18 @@
         "updated": "Aktualisiert am {{ date, %A, %B %e, %Y }}"
     },
     "shortMonth": {
-        "11": "Dez",
-        "7": "Aug",
-        "1": "Feb",
         "0": "Jan",
-        "10": "Nov",
-        "4": "Mai",
-        "6": "Jul",
-        "5": "Jun",
-        "9": "Okt",
+        "1": "Feb",
         "2": "Mär",
+        "3": "Apr",
+        "4": "Mai",
+        "5": "Jun",
+        "6": "Jul",
+        "7": "Aug",
         "8": "Sep",
-        "3": "Apr"
+        "9": "Okt",
+        "10": "Nov",
+        "11": "Dez"
     },
     "mk": {
         "municipality": {
@@ -878,29 +878,29 @@
             "negotino": "Negotino"
         },
         "phase": {
-            "6": {
-                "title": "Phase<br>6",
-                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Mazedonien 2, Štip 3"
-            },
-            "5": {
-                "title": "Phase<br>5",
-                "description": "Skopje 4, Tetovo 4, Štip 3, Mazedonien 2"
-            },
-            "3": {
-                "title": "Phase<br>3",
-                "description": "Debar 4"
+            "1": {
+                "description": "Debar 4, Skopje 3, Mazedonien 2 ",
+                "title": "Phase<br>1"
             },
             "2": {
                 "title": "Phase<br>2",
                 "description": "Skopje 4"
             },
-            "1": {
-                "description": "Debar 4, Skopje 3, Mazedonien 2 ",
-                "title": "Phase<br>1"
+            "3": {
+                "title": "Phase<br>3",
+                "description": "Debar 4"
             },
             "4": {
                 "description": "Mazedonien 3",
                 "title": "Phase<br>4"
+            },
+            "5": {
+                "title": "Phase<br>5",
+                "description": "Skopje 4, Tetovo 4, Štip 3, Mazedonien 2"
+            },
+            "6": {
+                "title": "Phase<br>6",
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Mazedonien 2, Štip 3"
             }
         },
         "hospital": {
@@ -962,26 +962,30 @@
         }
     },
     "month": {
-        "4": "Mai",
-        "10": "November",
         "0": "Januar",
         "1": "Februar",
-        "11": "Dezember",
-        "7": "August",
-        "3": "April",
-        "8": "September",
-        "6": "Juli",
-        "5": "Juni",
         "2": "März",
-        "9": "Oktober"
+        "3": "April",
+        "4": "Mai",
+        "5": "Juni",
+        "6": "Juli",
+        "7": "August",
+        "8": "September",
+        "9": "Oktober",
+        "10": "November",
+        "11": "Dezember"
     },
     "phase": {
+        "1": {
+            "title": "Phase<br>1"
+        },
         "2": {
             "title": "Phase<br>2",
             "description": "Epidemie, neue Testmethoden"
         },
-        "1": {
-            "title": "Phase<br>1"
+        "3": {
+            "description": "neue Testmethoden",
+            "title": "Phase<br>3"
         },
         "4": {
             "title": "Phase<br>4",
@@ -991,25 +995,21 @@
             "title": "Phase<br>5",
             "description": "neue Testmethoden"
         },
-        "7": {
-            "description": "Ende der Epidemie",
-            "title": "Phase<br>7"
-        },
         "6": {
             "description": "neue Testmethoden, Studie",
             "title": "Phase<br>6"
         },
-        "3": {
-            "description": "neue Testmethoden",
-            "title": "Phase<br>3"
-        },
-        "9": {
-            "description": "umschalten auf partielle Kontaktverfolgung",
-            "title": "Phase<br>9"
+        "7": {
+            "description": "Ende der Epidemie",
+            "title": "Phase<br>7"
         },
         "8": {
             "description": "neue Testmethodik – Kinder",
             "title": "Phase<br>8"
+        },
+        "9": {
+            "description": "umschalten auf partielle Kontaktverfolgung",
+            "title": "Phase<br>9"
         }
     },
     "embedMaker": {
@@ -1040,13 +1040,13 @@
         "day": "{{ date, %e. %m. }}"
     },
     "weekday": {
-        "5": "Freitag",
+        "0": "Sonntag",
         "1": "Montag",
-        "3": "Mittwoch",
         "2": "Dienstag",
-        "6": "Samstag",
+        "3": "Mittwoch",
         "4": "Donnerstag",
-        "0": "Sonntag"
+        "5": "Freitag",
+        "6": "Samstag"
     },
     "days": {
         "date": "{{ date, %e. %b }}",
@@ -1064,5 +1064,14 @@
         "groupExYu": "Ex-Jugoslawien",
         "groupEastAsiaOceania": "Ostasien und Ozeanien",
         "groupLatinAmerica": "Lateinamerika"
+    },
+    "content": {
+        "about": "# Über\r\n\r\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/about) oder die [englische Übersetzung](/en/about).\r\n\r\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/about.md).\r\n",
+        "datasources": "## GDocs\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/datasources) oder die [englische Übersetzung](/en/datasources).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/datasources.md).\n",
+        "faq": "# FAQ\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/faq) oder die [englische Übersetzung](/en/faq).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/faq.md).\n",
+        "links": "# Verknüpfungen\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/links) oder die [englische Übersetzung](/en/links).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/links.md).\n",
+        "models": "# Modelle\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/models) oder die [englische Übersetzung](/en/models).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/models.md).\n",
+        "sources": "# Quellen\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/sources) oder die [englische Übersetzung](/en/sources).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/sources.md).\n",
+        "team": "# Team\n\nLeider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/team) oder die [englische Übersetzung](/en/team).\n\nHilf uns diese Seite zu übersetzen [auf GitHub](https://github.com/sledilnik/website/blob/master/src/content/de/team.md).\n"
     }
 }

@@ -114,29 +114,29 @@
             }
         },
         "phase": {
-            "6": {
-                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Macedonia del Nord 2, Štip 3",
-                "title": "Fase 6"
-            },
-            "5": {
-                "description": "Skopje 4, Tetovo 4, Štip 3, Macedonia del Nord 2",
-                "title": "Fase 5"
-            },
-            "4": {
-                "description": "Macedonia del Nord 3",
-                "title": "Fase 4"
-            },
-            "3": {
-                "description": "Debar 4",
-                "title": "Fase 3"
+            "1": {
+                "description": "Debar 4, Skopje 3, Macedonia del Nord 2 ",
+                "title": "Fase 1"
             },
             "2": {
                 "description": "Skopje 4",
                 "title": "Fase 2"
             },
-            "1": {
-                "description": "Debar 4, Skopje 3, Macedonia del Nord 2 ",
-                "title": "Fase 1"
+            "3": {
+                "description": "Debar 4",
+                "title": "Fase 3"
+            },
+            "4": {
+                "description": "Macedonia del Nord 3",
+                "title": "Fase 4"
+            },
+            "5": {
+                "description": "Skopje 4, Tetovo 4, Štip 3, Macedonia del Nord 2",
+                "title": "Fase 5"
+            },
+            "6": {
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Macedonia del Nord 2, Štip 3",
+                "title": "Fase 6"
             }
         }
     },
@@ -953,70 +953,70 @@
         "at": "alle {{ date, %H:%M }}"
     },
     "phase": {
-        "7": {
-            "description": "fine dell'epidemia",
-            "title": "Fase 7"
-        },
-        "6": {
-            "description": "nuova metodologia dei test, studio",
-            "title": "Fase 6"
-        },
-        "5": {
-            "description": "nuova metodologia dei test",
-            "title": "Fase 5"
-        },
-        "4": {
-            "description": "nuova metodologia dei test",
-            "title": "Fase 4"
-        },
-        "3": {
-            "description": "nuova metodologia dei test",
-            "title": "Fase 3"
+        "1": {
+            "title": "Fase 1"
         },
         "2": {
             "description": "epidemia, nuova metodologia dei test",
             "title": "Fase 2"
         },
-        "1": {
-            "title": "Fase 1"
+        "3": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 3"
+        },
+        "4": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 4"
+        },
+        "5": {
+            "description": "nuova metodologia dei test",
+            "title": "Fase 5"
+        },
+        "6": {
+            "description": "nuova metodologia dei test, studio",
+            "title": "Fase 6"
+        },
+        "7": {
+            "description": "fine dell'epidemia",
+            "title": "Fase 7"
         }
     },
     "weekday": {
-        "6": "Sabato",
-        "5": "Venerdì",
-        "4": "Giovedì",
-        "3": "Mercoledì",
-        "2": "Martedì",
+        "0": "Domenica",
         "1": "Lunedì",
-        "0": "Domenica"
+        "2": "Martedì",
+        "3": "Mercoledì",
+        "4": "Giovedì",
+        "5": "Venerdì",
+        "6": "Sabato"
     },
     "shortMonth": {
-        "11": "Dic",
-        "10": "Nov",
-        "9": "Ott",
-        "8": "Set",
-        "7": "Ago",
-        "6": "Lug",
-        "5": "Giu",
-        "4": "Mag",
-        "3": "Apr",
-        "2": "Mar",
+        "0": "Gen",
         "1": "Feb",
-        "0": "Gen"
+        "2": "Mar",
+        "3": "Apr",
+        "4": "Mag",
+        "5": "Giu",
+        "6": "Lug",
+        "7": "Ago",
+        "8": "Set",
+        "9": "Ott",
+        "10": "Nov",
+        "11": "Dic"
     },
     "month": {
-        "11": "Dicembre",
-        "10": "Novembre",
-        "9": "Ottobre",
-        "8": "Settembre",
-        "7": "Agosto",
-        "6": "Luglio",
-        "5": "Giugno",
-        "4": "Maggio",
-        "3": "Aprile",
-        "2": "Marzo",
+        "0": "Gennaio",
         "1": "Febbraio",
-        "0": "Gennaio"
+        "2": "Marzo",
+        "3": "Aprile",
+        "4": "Maggio",
+        "5": "Giugno",
+        "6": "Luglio",
+        "7": "Agosto",
+        "8": "Settembre",
+        "9": "Ottobre",
+        "10": "Novembre",
+        "11": "Dicembre"
     },
     "tables": {
         "day": "{{ date, %d/%m }}",
@@ -1033,5 +1033,14 @@
         "newChart": "🆕 📊 Nuovo grafico:",
         "newPage": "🆕 Nuova pagina:",
         "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone"
+    },
+    "content": {
+        "about": "# Il progetto\r\n\r\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/about) o la [traduzione in inglese](/en/about).\r\n\r\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/about.md).\r\n",
+        "datasources": "## GDocs\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/datasources) o la [traduzione in inglese](/en/datasources).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/datasources.md).\n",
+        "faq": "# FAQ\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/faq) o la [traduzione in inglese](/en/faq).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/faq.md).\n",
+        "links": "# Collegamenti\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/links) o la [traduzione in inglese](/en/links).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/links.md).\n",
+        "models": "# Modelli\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/models) o la [traduzione in inglese](/en/models).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/models.md).\n",
+        "sources": "# Fonti\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/sources) o la [traduzione in inglese](/en/sources).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/sources.md).\n",
+        "team": "# Team\n\nSfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/team) o la [traduzione in inglese](/en/team).\n\nAiutaci a tradurre questa pagina [su GitHub](https://github.com/sledilnik/website/blob/master/src/content/it/team.md).\n"
     }
 }

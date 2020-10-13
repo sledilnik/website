@@ -596,16 +596,16 @@
         }
     },
     "shortMonth": {
-        "8": "ruj",
-        "4": "svi",
-        "1": "velj",
         "0": "sij",
+        "1": "velj",
         "2": "ožu",
-        "5": "lip",
         "3": "tra",
-        "9": "lis",
-        "7": "kol",
+        "4": "svi",
+        "5": "lip",
         "6": "srp",
+        "7": "kol",
+        "8": "ruj",
+        "9": "lis",
         "10": "stu",
         "11": "pro"
     },
@@ -746,18 +746,18 @@
         "back": "Natrag"
     },
     "month": {
-        "10": "studenog",
         "0": "siječnja",
         "1": "veljače",
+        "2": "ožujka",
+        "3": "travnja",
+        "4": "svibnja",
+        "5": "lipnja",
+        "6": "srpnja",
+        "7": "kolovoza",
         "8": "rujna",
         "9": "listopada",
-        "11": "prosinca",
-        "4": "svibnja",
-        "3": "travnja",
-        "5": "lipnja",
-        "7": "kolovoza",
-        "2": "ožujka",
-        "6": "srpnja"
+        "10": "studenog",
+        "11": "prosinca"
     },
     "navbar": {
         "tables": "Tablice",
@@ -784,14 +784,6 @@
         "animation": "Animacija"
     },
     "phase": {
-        "4": {
-            "description": "nova metoda testiranja",
-            "title": "faza<br>4"
-        },
-        "3": {
-            "title": "faza<br>3",
-            "description": "nova metoda testiranja"
-        },
         "1": {
             "title": "faza<br>1"
         },
@@ -799,25 +791,33 @@
             "description": "epidemija, nova metoda testiranja",
             "title": "faza<br>2"
         },
-        "7": {
-            "title": "faza<br>7",
-            "description": "kraj epidemije"
+        "3": {
+            "title": "faza<br>3",
+            "description": "nova metoda testiranja"
         },
-        "6": {
-            "description": "nova metoda testiranja, istraživanje",
-            "title": "faza<br>6"
+        "4": {
+            "description": "nova metoda testiranja",
+            "title": "faza<br>4"
         },
         "5": {
             "title": "faza<br>5",
             "description": "nova metoda testiranja"
         },
-        "9": {
-            "description": "prebaci na djelomično praćenje kontakata",
-            "title": "faza<br>9"
+        "6": {
+            "description": "nova metoda testiranja, istraživanje",
+            "title": "faza<br>6"
+        },
+        "7": {
+            "title": "faza<br>7",
+            "description": "kraj epidemije"
         },
         "8": {
             "description": "nova metodologija ispitivanja – djeca",
             "title": "faza<br>8"
+        },
+        "9": {
+            "description": "prebaci na djelomično praćenje kontakata",
+            "title": "faza<br>9"
         }
     },
     "embedMaker": {
@@ -896,13 +896,13 @@
         "tabSummary": "Sažetak"
     },
     "weekday": {
-        "4": "četvrtak",
-        "6": "subota",
-        "5": "petak",
-        "3": "srijeda",
-        "1": "ponedjeljak",
         "0": "nedjelja",
-        "2": "utorak"
+        "1": "ponedjeljak",
+        "2": "utorak",
+        "3": "srijeda",
+        "4": "četvrtak",
+        "5": "petak",
+        "6": "subota"
     },
     "infocard": {
         "active": "Aktivni slučajevi",
@@ -1058,30 +1058,39 @@
             "is": "Istok"
         },
         "phase": {
-            "6": {
-                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
-                "title": "faza<br>6"
-            },
-            "5": {
-                "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
-                "title": "faza<br>5"
-            },
-            "4": {
-                "description": "Makedonija 3",
-                "title": "faza<br>4"
-            },
-            "3": {
-                "description": "Debar 4",
-                "title": "faza<br>3"
+            "1": {
+                "description": "Debar 4, Skopje 3, Makedonija 2 ",
+                "title": "faza<br>1"
             },
             "2": {
                 "description": "Skoplje 4",
                 "title": "faza<br>2"
             },
-            "1": {
-                "description": "Debar 4, Skopje 3, Makedonija 2 ",
-                "title": "faza<br>1"
+            "3": {
+                "description": "Debar 4",
+                "title": "faza<br>3"
+            },
+            "4": {
+                "description": "Makedonija 3",
+                "title": "faza<br>4"
+            },
+            "5": {
+                "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
+                "title": "faza<br>5"
+            },
+            "6": {
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
+                "title": "faza<br>6"
             }
         }
+    },
+    "content": {
+        "about": "# O projektu\r\n\r\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/about) ili [engleski prijevod](/en/about).\r\n\r\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/about.md).\r\n",
+        "datasources": "## GDocs\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/datasources) ili [engleski prijevod](/en/datasources).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/datasources.md).\n",
+        "faq": "# FAQ\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/faq) ili [engleski prijevod](/en/faq).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/faq.md).\n",
+        "links": "# Poveznice\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/links) ili [engleski prijevod](/en/links).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/links.md).\n",
+        "models": "# Modeli\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/models) ili [engleski prijevod](/en/models).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/models.md).\n",
+        "sources": "# Izvori\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/sources) ili [engleski prijevod](/en/sources).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/sources.md).\n",
+        "team": "# Ekipa\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/team) ili [engleski prijevod](/en/team).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/team.md).\n"
     }
 }
