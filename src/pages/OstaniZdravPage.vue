@@ -5,7 +5,7 @@
         <h1>
           {{ $t('charts.ostanizdrav.title') }}
         </h1>
-        <div v-html="$t('charts.ostanizdrav.description')"></div>
+        <div v-html="$options.filters.marked($t('charts.ostanizdrav.description'))"></div>
         <p>
         <div v-html="$t('charts.ostanizdrav.warningCurrentDay')"></div>
       </section>
