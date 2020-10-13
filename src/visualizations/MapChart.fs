@@ -347,33 +347,43 @@ let renderMap (state : State) =
             let label = points?label
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
-        let colors =
-            match state.ContentType with
-            | Deceased -> [|"#fcfbfd";"#efedf5";"#dadaeb";"#bcbddc";"#9e9ac8";"#807dba";"#6a51a3";"#4a1486"|] //purple scale
-            | ConfirmedCases -> [| "#ffffcc";"#ffeda0";"#fed976";"#feb24c";"#fd8d3c";"#fc4e2a";"#e31a1c";"#b10026"|] //colors from EuropeMapChart
+        // let colors =
+        //     match state.ContentType with
+        //     | Deceased -> [|"#fcfbfd";"#efedf5";"#dadaeb";"#bcbddc";"#9e9ac8";"#807dba";"#6a51a3";"#54278f";"#3f007d"|] 
+        //     | ConfirmedCases -> [|"#ffffcc";"#ffeda0";"#fed976";"#feb24c";"#fd8d3c";"#fc4e2a";"#e31a1c";"#bd0026";"#800026"|] 
 
-        let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
+        // let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
 
-        let classes = 
-            let widths = [|0.0; 0.125; 0.25; 0.375; 0.5; 0.625; 0.75; 0.875 |] 
-            let scale = float maxValue
-            widths |> Seq.map ( (*) scale ) //equal width classes between 0 and maxValue (data is logarithmic)
+        // let classes = 
+        //     let widths = [|0.0; 0.125; 0.25; 0.375; 0.5; 0.625; 0.75; 0.875 |] 
+        //     let scale = float maxValue
+        //     widths |> Seq.map ( (*) scale ) //equal width classes between 0 and maxValue (data is logarithmic)
+
+        // let colorAxis = 
+            // if maxValue = 0. then 
+            //     {| dataClassColor = "category"; dataClasses = [| {| from = 0; color = colors.[0] |} |] |} |> pojo //override for empty map with initial color
+            // else
+            //     let dataClasses = 
+            //         Seq.zip classes colors 
+            //         |> Seq.map( fun (cls, clr) -> {| from = cls; color = clr |} )        
+            //         |> Seq.toArray
+            //     {| dataClassColor = "category"; dataClasses = dataClasses |} |> pojo
+            // let scale = [0..8] |> Seq.map float |> Seq.map( fun x -> x / float 9)
+            // let pairs = Seq.zip colors scale |> Seq.toArray
+
+            // {| stops = pairs |}
 
         let colorAxis = 
-            if maxValue = 0. then 
-                {| dataClassColor = "category"; dataClasses = [| {| from = 0; color = colors.[0] |} |] |} |> pojo //override for empty map with initial color
-            else
-                let dataClasses = 
-                    Seq.zip classes colors 
-                    |> Seq.map( fun (cls, clr) -> {| from = cls; color = clr |} )        
-                    |> Seq.toArray
-                {| dataClassColor = "category"; dataClasses = dataClasses |} |> pojo
-        
+            match state.ContentType with
+                | Deceased -> {|stops = [|(0.0, "#fcfbfd"); (0.111, "#efedf5"); (0.222, "#dadaeb"); (0.333, "#bcbddc"); (0.444, "#9e9ac8"); (0.556, "#807dba"); (0.667, "#6a51a3"); (0.778, "#54278f"); (0.889, "#3f007d")|] |}
+                | ConfirmedCases -> {|stops = [|(0.0, "#ffffcc"); (0.111, "#ffeda0"); (0.222, "#fed976"); (0.333, "#feb24c"); (0.444, "#fd8d3c"); (0.556, "#fc4e2a"); (0.667, "#e31a1c"); (0.778, "#bd0026"); (0.889, "#800026")|]|}
+        // let tempColorAxis = {| stops = [| ( 0.254, "#fed976" ); ( 0.8, "#bd0026" )|] |}
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
             legend = {| enabled = false |}
-            colorAxis = colorAxis
+            colorAxis = colorAxis 
             tooltip =
                 {|
                     formatter = fun () -> tooltipFormatter jsThis
