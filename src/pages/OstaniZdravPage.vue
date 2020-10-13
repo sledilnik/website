@@ -292,4 +292,12 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+.chart-description {
+  color: $text-c;
+
+  @media only screen and (max-width: 768px) {
+    padding: 0 1em 0 1em;
+  }
+}
 </style>
