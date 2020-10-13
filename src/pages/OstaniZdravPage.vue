@@ -31,7 +31,7 @@
       </div>
       <div id="publishedVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.published.description') }}
+        <span v-html="$t('charts.ostanizdrav.published.description')"/>
       </div>
     </section>
     <section id="usercount-chart">
@@ -58,7 +58,7 @@
       </div>
       <div id="usercountVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.usercount.description') }}
+        <span v-html="$t('charts.ostanizdrav.usercount.description')"/>
       </div>
     </section>
     <section id="userPublishedByCount">
@@ -85,7 +85,7 @@
       </div>
       <div id="userPublishedByCountVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.userPublishedByCount.description') }}
+        <span v-html="$t('charts.ostanizdrav.userPublishedByCount.description')"/>
       </div>
     </section>
     <section id="publishedByRisk-chart">
@@ -112,7 +112,7 @@
       </div>
       <div id="publishedByRiskVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.publishedByRisk.description') }}
+        <span v-html="$t('charts.ostanizdrav.publishedByRisk.description')"/>
       </div>
     </section>
     <section id="validByRisk-chart">
@@ -139,7 +139,7 @@
       </div>
       <div id="validByRiskVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.validByRisk.description') }}
+        <span v-html="$t('charts.ostanizdrav.validByRisk.description')"/>
       </div>
     </section>
     <section id="valid-chart">
@@ -164,7 +164,7 @@
       </div>
       <div id="validVis"></div>
       <div class="chart-description">
-        {{ $t('charts.ostanizdrav.valid.description') }}
+        <span v-html="$t('charts.ostanizdrav.valid.description')"/>
       </div>
     </section>
     <span v-html="$t('charts.ostanizdrav.footer')"/>
