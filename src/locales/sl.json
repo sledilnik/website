@@ -900,7 +900,7 @@
                 "description": "<p>Graf prikazuje število objavljenih dnevnih ključev za vsak dan (modri stolpci) ter skupno število ključev, objavljenih do tistega dne (rdeča črta). V povprečju uporabniki objavijo med 10 in 12 dnevnih ključev (gl. graf <a href='#usercount-chart'>Objavljeni dnevni ključi na uporabnika</a>) in s pomočjo te informacije lahko ocenimo njihovo število.</p>"
             },
             "validByRisk": {
-                "title": "Dnevni ključi, veljavnih na posamezen dan glede na stopnjo tveganja",
+                "title": "Dnevni ključi, veljavni na posamezen dan glede na stopnjo tveganja",
                 "date": "Datum",
                 "tooltip": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' +datum.risk",
                 "valid": "Veljavnih ključev na dan",
