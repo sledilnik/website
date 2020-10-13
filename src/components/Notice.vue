@@ -3,11 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="stats#sources-chart"
+      href="ostanizdrav"
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.newChart") }}</b> <span>{{ $t("charts.sources.title") }}</span>
+          <b>{{ $t("notice.newPage") }}</b> <span>{{ $t("notice.ostanizdrav") }}</span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

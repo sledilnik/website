@@ -7,6 +7,7 @@
         "menu": "Menu",
         "home": "Home",
         "world": "World",
+        "ostanizdrav": "#OstaniZdrav",
         "tables": "Table",
         "models": "Models",
         "animation": "Animation",
@@ -113,6 +114,15 @@
         "4": "Thursday",
         "5": "Friday",
         "6": "Saturday"
+    },
+    "weekdayShort": {
+        "0": "Su",
+        "1": "Mo",
+        "2": "Tu",
+        "3": "We",
+        "4": "Th",
+        "5": "Fr",
+        "6": "Sa"
     },
     "phase": {
         "1": {
@@ -448,6 +458,56 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital capacities"
+        },
+        "ostanizdrav": {
+            "title": "#OstaniZdrav application",
+            "description": "",
+            "warningCurrentDay": "Warning: Data for the current day is not necessarily final.",
+            "footer": "",
+            "valid": {
+                "title": "Number of keys valid per day",
+                "date": "Date",
+                "perDay":"Keys valid per day",
+                "description": ""
+            },
+            "published": {
+                "title": "Number of keys published per day",
+                "date": "Date",
+                "perDay":"Published keys per day",
+                "runningTotal": "Running total of keys published",
+                "description": ""
+            },
+            "validByRisk": {
+                "title": "Number of keys valid per day by risk level (interactive)",
+                "date": "Date",
+                "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
+                "valid": "Number of keys valid on given day",
+                "risk": "Risk",
+                "description": ""
+            },
+            "publishedByRisk": {
+                "title": "Number of keys published per day by risk level (interactive)",
+                "date": "Date",
+                "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
+                "published": "Number of keys published on given day",
+                "risk": "Risk",
+                "description": ""
+            },
+            "usercount": {
+                "title": "Estimate of number of users publishing keys per day",
+                "date": "Date",
+                "users": "Users publishing keys per day",
+                "runningTotal": "Running total of users who published keys",
+                "description": ""
+            },
+            "userPublishedByCount": {
+                "title": "Number of keys published per user per day (interactive)",
+                "date": "Date",
+                "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
+                "count": "(average) key count per user on given day",
+                "users": "Users",
+                "description": ""
+            }
         },
         "sources": {
             "title": "Qurantine and Sources of Infection",

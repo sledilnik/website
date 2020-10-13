@@ -155,7 +155,7 @@ export default {
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 0px 15px 58px
+    margin: 0px 15px 88px
 
 $loader-width: 50px
 

@@ -30,7 +30,7 @@ export default {
 
   @media only screen and (min-width: 768px) {
     padding: 32px;
-    margin: 0px 15px 58px;
+    margin: 0px 15px 88px;
   }
 }
 
