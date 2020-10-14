@@ -239,37 +239,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let seriesData (state : State) =
 
-    let renderLabel population absolute totalConfirmed =
-        let pctPopulation = float absolute * 100.0 / float population
-        let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-        match state.ContentType with
-        | ConfirmedCases ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-            if absolute > 0 then
-                label + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-            else
-                label
-        | Deceased ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
-            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                label + sprintf " (%s %% %s)"
-                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                        (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
-                        (I18N.t "charts.map.confirmedCases")
-                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                        (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%s %%</b>"
-                        (I18N.t "charts.map.mortalityOfConfirmedCases")
-                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
-            else
-                label
-
     seq {
         for areaData in state.Data do
-            let dlabel, value, label =
+            let dlabel, value, absolute, value100k, totalConfirmed, population =
                 match areaData.Cases with
-                | None -> None, 0., (renderLabel areaData.Population 0 0)
+                | None -> None, 0., 0, 0, 0, areaData.Population
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -293,22 +267,32 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0., (renderLabel areaData.Population 0 0)
+                    | None -> None, 0., 0, 0, 0, areaData.Population
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted =
-                            float absolute * 1000000. / float areaData.Population
+                        let value100k =
+                            float absolute * 100000. / float areaData.Population
                             |> System.Math.Round |> int
                         let dlabel, value =
                             match state.DisplayType with
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None, weighted
+                            | RegionPopulationWeightedValues -> None, value100k
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        dlabel, scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; dlabel = dlabel; dataLabels = {| enabled = true; format = "{point.dlabel}" |} |}
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
+            {| 
+                code = areaData.Code
+                area = areaData.Name
+                value = value
+                absolute = absolute
+                value100k = value100k
+                totalConfirmed = totalConfirmed
+                population = population
+                dlabel = dlabel
+                dataLabels = {| enabled = true; format = "{point.dlabel}" |} 
+            |}
     } |> Seq.toArray
 
 
@@ -341,10 +325,38 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
-        let tooltipFormatter jsThis =
+        let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
-            let label = points?label
+            let absolute = points?absolute
+            let value100k = points?value100k
+            let totalConfirmed = points?totalConfirmed
+            let population = points?population
+            let pctPopulation = float absolute * 100.0 / float population
+            let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+            let label =
+                match state.ContentType with
+                | ConfirmedCases ->
+                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+                    if absolute > 0 then
+                        label + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                    else
+                        label
+                | Deceased ->
+                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+                    if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                        label + sprintf " (%s %% %s)"
+                                (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                                (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                                (I18N.t "charts.map.confirmedCases")
+                                totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                                (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%s %%</b>"
+                                (I18N.t "charts.map.mortalityOfConfirmedCases")
+                                (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+                    else
+                        label
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let colorAxis = 
@@ -384,7 +396,7 @@ let renderMap (state : State) =
             colorAxis = colorAxis 
             tooltip =
                 {|
-                    formatter = fun () -> tooltipFormatter jsThis
+                    formatter = fun () -> tooltipFormatter state jsThis
                     useHTML = true
                     distance = 50
                 |} |> pojo
