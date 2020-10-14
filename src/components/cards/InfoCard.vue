@@ -103,7 +103,7 @@ export default {
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
         case 'SVN': {
-          return 20.89310
+          return 20.95861
           break
         }
         case 'MKD': {
