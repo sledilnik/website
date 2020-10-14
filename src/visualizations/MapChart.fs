@@ -339,7 +339,9 @@ let renderMap (state : State) =
                 | ConfirmedCases ->
                     let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
                     if absolute > 0 then
-                        label + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                        label 
+                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases100k") value100k
                     else
                         label
                 | Deceased ->
