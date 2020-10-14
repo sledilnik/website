@@ -213,7 +213,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       Data = data
       DataTimeInterval = dataTimeInterval
       ContentType = ConfirmedCases
-      DisplayType = AbsoluteValues
+      DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
