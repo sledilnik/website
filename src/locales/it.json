@@ -398,7 +398,7 @@
         "VCT": "Saint Vincent e Grenadine",
         "VEN": "Venezuela",
         "VGB": "Isole Vergini Britanniche",
-        "VIR": "Isole Vergini Americane",
+        "VIR": "Isole Vergini Americane, U.S.A.",
         "VNM": "Vietnam",
         "VUT": "Vanuatu",
         "WLF": "Wallis e Futuna",
@@ -538,10 +538,28 @@
             "description": "Primo caso confermato:<br>turista di ritorno dal Marocco"
         },
         "allSchools": {
-            "title": "Scuole"
+            "title": "Scuole",
+            "description": "Riapertura di tutte le scuole per il nuovo anno scolastico"
         },
         "croatia": {
-            "title": "Croazia"
+            "title": "Croazia",
+            "description": "Croazia sulla lista rossa, quarantena rigorosa di 14 giorni al ritorno"
+        },
+        "masks": {
+            "description": "Mascherine obbligatorie in tutti gli ambienti pubblici chiusi e all'esterno se la distanza è meno di 2m.<br>Ristoranti aperti solo fino alle 22:30.",
+            "title": "Mascherine"
+        },
+        "quarantine10days": {
+            "description": "Quarantena obbligatoria ridotta a 10 giorni",
+            "title": "10 giorni"
+        },
+        "app": {
+            "description": "App #OstaniZdrav pubblicata per Android",
+            "title": "#OstaniZdrav"
+        },
+        "testOrQuarantine": {
+            "description": "Test negativo o quarantena di 10 giorni all'ingresso dai paesi in lista rossa o arancione",
+            "title": "Tamponi"
         }
     },
     "tableDict": {
@@ -641,20 +659,34 @@
         "metricsComparison": {
             "ventilator": "Su ventilatore",
             "deceasedToDate": "Decessi (ad oggi)",
-            "deceased": "Decessi (giornalieri)",
+            "deceased": "Decessi",
             "dischargedToDate": "Dimessi (ad oggi)",
             "discharged": "Dimessi (giornalieri)",
             "icu": "Terapia intensiva",
             "hospitalizedToDate": "Ricoverati (ad oggi)",
             "hospitalized": "Ricoverati",
-            "recovered": "Guariti (ad oggi)",
+            "recovered": "Guariti",
             "active": "Casi attuali",
             "confirmedToDate": "Casi confermati (ad oggi)",
             "confirmed": "Casi confermati (giornalieri)",
             "testsToDate": "Tamponi (ad oggi)",
             "tests": "Tamponi (giornalieri)",
             "title": "COVID-19 Situazione nel paese",
-            "title_SVN": "COVID-19 Situazione in Slovenia"
+            "title_SVN": "COVID-19 Situazione in Slovenia",
+            "title_MNE": "COVID-19 Situazione nel Montenegro",
+            "title_MKD": "COVID-19 Situazione nella Macedonia del Nord",
+            "ventilatorDischarged": "Disconnessi dal ventilatore",
+            "ventilatorAdmitted": "Collegati al ventilatore",
+            "icuDischarged": "Dimessi dalla terapia intensiva",
+            "icuAdmitted": "Ammessi in terapia intensiva",
+            "hospitalDischarged": "Dimessi dall'ospedale",
+            "hospitalAdmitted": "Ammessi in ospedale",
+            "activeCases": "Casi attivi",
+            "confirmedCases": "Casi confermati",
+            "testsPerformed": "Tamponi",
+            "showToDate": "Ad oggi",
+            "showToday": "Giornalieri",
+            "showActive": "Attivi"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -682,9 +714,9 @@
             "allHospitals": "Tutti gli ospedali"
         },
         "countriesTotalDeathsPer1M": {
-            "yAxisTitle": "Decessi totali per 1 milione di persone",
-            "legendTitle": "Decessi totali per 1 milione di persone",
-            "title": "Paesi: decessi totali per 1 milione di persone"
+            "yAxisTitle": "Totale decessi per 1 milione di persone",
+            "legendTitle": "Totale decessi per 1 milione di persone",
+            "title": "Paesi: totale decessi per 1 milione di persone"
         },
         "infections": {
             "title": "Struttura dei casi confermati",
@@ -765,8 +797,8 @@
         },
         "europe": {
             "noData": "Nessun dato",
-            "statusRed": "quarantena rigorosa di 14 giorni",
-            "statusYellow": "Quarantena di 14 giorni con eccezioni",
+            "statusRed": "quarantena rigorosa di 10 giorni",
+            "statusOrange": "Quarantena di 10 giorni con eccezioni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
             "countryStatus": "Restrizioni",
@@ -821,7 +853,8 @@
             "inThreeWeeks": "In tre settimane",
             "inFourWeeks": "In quattro settimane",
             "hospitalized": "ricoverati",
-            "title": "Variazione dei casi confermati"
+            "title": "Variazione dei casi confermati",
+            "activeCases": "casi attivi"
         },
         "common": {
             "shortDateFormat": "%e %b",
@@ -854,10 +887,37 @@
             "dsOWD": "Our World in Data",
             "dsMZ": "Ministero della Salute",
             "dsNIJZ": "NIJZ",
-            "dataSource": "origine dei dati"
+            "dataSource": "origine dei dati",
+            "sortBy": "Ordina per:"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo"
+        },
+        "countriesDeathsPerCases": {
+            "chronologically": "Cronologico",
+            "sinceFirstDeath": "Dal primo decesso",
+            "sinceOneDeathPerMillion": "Dal primo decesso per millione di persone",
+            "daysFromFirstDeath": "Numero di giorni dal primo decesso",
+            "daysFromOneDeathPerMillion": "Numero di giorni dal primo decesso per 1 milione di persone",
+            "legendTitle": "Totale decessi per casi",
+            "yAxisTitle": "Totale decessi per casi",
+            "title": "Paesi: totale decessi per casi"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "criteri per lista rossa",
+            "legendTitle": "Casi attivi per 1M di persone",
+            "yAxisTitle": "Casi attivi per 1 milione di persone",
+            "title": "Paesi: casi attivi per 1 milione di persone"
+        },
+        "rmap": {
+            "title": "Mappa delle regioni"
+        },
+        "dailyComparison": {
+            "title": "Confronto per giorno della settimana",
+            "positivePct": "Percentuale di tamponi positivi (%)",
+            "tests": "Tamponi effettuati",
+            "active": "Casi attivi",
+            "new": "Casi confermati"
         }
     },
     "footer": {
@@ -885,7 +945,7 @@
         "confirmedToDate": "Casi confermati"
     },
     "meta": {
-        "title": "COVID-19 Tracking",
+        "title": "Monitoraggio COVID-19",
         "description": "COVID-19 Slovenia Tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
     },
     "timestamp": {
@@ -971,6 +1031,7 @@
     "notice": {
         "news002": "Casi confermati per fasce di età",
         "newChart": "🆕 📊 Nuovo grafico:",
-        "newPage": "🆕 Nuova pagina:"
+        "newPage": "🆕 Nuova pagina:",
+        "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone"
     }
 }

@@ -42,7 +42,7 @@ module Series =
 
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
-        | Icu                   -> "#d99a91", "icu"
+        | Icu                   -> "#d96756", "icu"
         | Critical              -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
         | InHospitalOut         -> "#8cd4b2", "discharged"

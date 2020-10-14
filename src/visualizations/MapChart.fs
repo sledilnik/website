@@ -267,9 +267,9 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let value, label =
+            let dlabel, value, label =
                 match areaData.Cases with
-                | None -> 0., (renderLabel areaData.Population 0 0)
+                | None -> None, 0., (renderLabel areaData.Population 0 0)
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -293,22 +293,22 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> 0., (renderLabel areaData.Population 0 0)
+                    | None -> None, 0., (renderLabel areaData.Population 0 0)
                     | Some lastValue ->
                         let absolute = lastValue
                         let weighted =
                             float absolute * 1000000. / float areaData.Population
                             |> System.Math.Round |> int
-                        let value =
+                        let dlabel, value =
                             match state.DisplayType with
-                            | AbsoluteValues                 -> absolute
-                            | RegionPopulationWeightedValues -> weighted
+                            | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
+                            | RegionPopulationWeightedValues -> None, weighted
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label |}
+                        dlabel, scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
+            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; dlabel = dlabel; dataLabels = {| enabled = true; format = "{point.dlabel}" |} |}
     } |> Seq.toArray
 
 
@@ -401,7 +401,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (Html.text (I18N.t "charts.common.view") :: renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
+        prop.children (renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
     ]
 
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =

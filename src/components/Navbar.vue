@@ -14,14 +14,20 @@
       <div class="nav-heading">{{ $t("navbar.menu") }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
       <router-link to="world" class="router-link"><span>{{ $t("navbar.world") }}</span></router-link>
+      <router-link to="ostanizdrav" class="router-link"><span>{{ $t("navbar.ostanizdrav") }}</span></router-link>
       <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
+      <!-- <router-link to="animation" class="router-link"><span>{{ $t("navbar.animation") }}</span></router-link> -->
       <router-link to="faq" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <a v-if="!isMobile" href="https://github.com/sledilnik" target="_blank" class="router-link router-link-icon github">
+      <a v-if="!isMobile"
+         href="https://github.com/sledilnik"
+         target="_blank"
+         rel="noreferrer"
+         class="router-link router-link-icon github">
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
         <span>{{ $t("navbar.github") }}</span>
       </a>
@@ -82,7 +88,7 @@ export default {
     };
   },
   created() {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
   },
   mounted () {
     this.onResize()
@@ -112,7 +118,7 @@ export default {
       }, 650);
     },
     onResize () {
-      this.isMobile = window.innerWidth < 992
+      this.isMobile = window.innerWidth < 1050
       this.showFullLang = window.innerWidth >= 1200
     },
     toggleDropdown() {
@@ -143,7 +149,7 @@ export default {
 <style scoped lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1050px) {
     @content;
   }
 }
@@ -155,7 +161,7 @@ export default {
   margin-right: -3px;
   position: absolute;
   right: 15px;
-  z-index: 101;
+  z-index: 1101;
   cursor: pointer;
 
   @include nav-break {
@@ -295,7 +301,7 @@ export default {
   padding: 16px 15px;
   display: flex;
   align-items: center;
-  z-index: 98;
+  z-index: 1098;
 
   @include nav-break {
     padding: 16px 32px;
@@ -317,7 +323,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 33%;
-  z-index: 100;
+  z-index: 1100;
   background: $yellow;
   padding: 20px 0 0 15px;
   overflow: auto;
@@ -403,7 +409,7 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 99;
+    z-index: 1099;
     background: rgb(0, 0, 0);
 
     @include nav-break {

@@ -7,7 +7,7 @@
           <Notice />
         </b-col>
       </b-row>
-      <div class="cards-wrapper latest-data-boxes">
+      <div class="cards-wrapper">
 <!--  
         <Info-card
           :title="$t('infocard.tests')"
@@ -19,6 +19,7 @@
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
+          name="cases.confirmedToDate"
           series-type="state"
         />
 <!--  
@@ -34,6 +35,13 @@
           field="cases.active"
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
+          name="cases.active"
+          series-type="state"
+        />
+        <Info-card
+          :title="$t('infocard.incidence')"
+          field="cases.active"
+          name="incidence"
           series-type="state"
         />
         <Info-card
@@ -42,6 +50,7 @@
           total-in="total.inHospital.in"
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
+          name="statePerTreatment.inHospital"
           series-type="state"
         />
         <Info-card
@@ -50,14 +59,21 @@
           total-in="total.icu.in"
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
+          name="statePerTreatment.inICU"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
+          name="statePerTreatment.deceasedToDate"
           series-type="state"
         />
       </div>
+      <b-row cols="12">
+        <b-col>
+          <Youtube id="EXbYuxvcnT4"></Youtube>
+        </b-col>
+      </b-row>
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
@@ -69,11 +85,10 @@
 
 <script>
 import { mapState } from 'vuex'
-
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
-
+import Youtube from 'components/Youtube'
 import { Visualizations } from 'visualizations/App.fsproj'
 
 export default {
@@ -82,6 +97,7 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
+    Youtube
   },
   data() {
     return {
@@ -127,4 +143,83 @@ export default {
 }
 </script>
 
-<style lang="sass"></style>
+<style lang="sass">
+.cards-wrapper
+  display: flex
+  flex-wrap: wrap
+  display: grid
+  gap: 15px
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  margin: 0px auto 58px
+
+  @media only screen and (min-width: 768px)
+    grid-template-columns: repeat(3, minmax(165px, 1fr))
+    gap: 30px
+    margin: 0px 15px 88px
+
+$loader-width: 50px
+
+.stats-page
+  margin-top: 48px
+  position: relative
+
+  &.loaded
+    section
+      &::before,
+      &::after
+        display: none
+
+  section
+    position: relative
+
+    &::before,
+    &::after
+      content: ""
+      z-index: 90
+      display: block
+      position: absolute
+      top: calc(50% - 25px)
+      left: calc(50% - 25px)
+      width: $loader-width
+      height: $loader-width
+      background-size: cover
+
+    &::after
+      background-image: url(../assets/svg/covid-animation-1.svg)
+
+      animation: rotate1 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate1
+        0%
+          transform: rotate(0deg) scale(1)
+        12.5%
+          transform: rotate(45deg) scale(1.3)
+        25%
+          transform: rotate(90deg) scale(1)
+        37.5%
+          transform: rotate(135deg) scale(1.3)
+        50%
+          transform: rotate(180deg) scale(1)
+        62.5%
+          transform: rotate(225deg) scale(1.3)
+        75%
+          transform: rotate(270deg) scale(1)
+        87.5%
+          transform: rotate(315deg) scale(1.3)
+        100%
+          transform: rotate(360deg) scale(1)
+
+    &::before
+      background-image: url(../assets/svg/covid-animation-2.svg)
+      animation: rotate2 3s infinite
+      animation-timing-function: linear
+
+      @keyframes rotate2
+        0%
+          transform: rotate(0deg) scale(1)
+        50%
+          transform: rotate(-180deg) scale(1)
+        100%
+          transform: rotate(-360deg) scale(1)
+</style>

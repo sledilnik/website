@@ -34,6 +34,7 @@ type CountryData =
       // NIJZ data
       RestrictionColor: string
       RestrictionText: string
+      RestrictionAltText: string
       ImportedFrom: int
       ImportedDate: DateTime }
 
@@ -50,6 +51,7 @@ type ChartType =
 
 type State =
     { MapToDisplay : MapToDisplay
+      Data : WeeklyStatsData
       Countries : CountrySelection
       GeoJson: GeoJson
       OwdData: OwdData
@@ -120,121 +122,150 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ ("AUT", "")
-          ("CYP", "")
-          ("EST", "")
-          ("FIN", "")
-          ("GEO", "")
-          ("ITA", "")
-          ("LVA", "")
-          ("LIE", "")
-          ("LTU", "")
-          ("HUN", "")
-          ("DEU", "")
-          ("NOR", "")
-          ("NZL", "")
-          ("RWA", "")
-          ("SMR", "")
-          ("SVK", "")
-          ("URY", "")
-          ("VAT", "")
-          ("GBR", "") ]
+        [ 
+            ("AUS", "")
+            ("NZL", "")
+            ("SRB", "")
+            ("URY", "")
+        ]
 
 let redCountries =
     Map.ofList
-        [ ("ALB", "")
-          ("AND", "")
-          ("ARG", "")
-          ("ARM", "")
-          ("AZE", "")
-          ("BAH", "")
-          ("BHR", "")
-          ("BEL", "")
-          ("BLZ", "")
-          ("BOL", "")
-          ("BIH", "")
-          ("BRA", "")
-          ("CHL", "")
-          ("MNE", "")
-          ("VIR", "")
-          ("DOM", "")
-          ("ECU", "")
-          ("GNQ", "")
-          ("SWZ", "")
-          ("FRO", "")
-          ("PHL", "")
-          ("GAB", "")
-          ("GMB", "")
-          ("GIB", "")
-          ("GTM", "")
-          ("GUM", "")
-          ("HND", "")
-          ("HRV", "")
-          ("IND", "")
-          ("IRQ", "")
-          ("IRN", "")
-          ("ISR", "")
-          ("ZAF", "")
-          ("QAT", "")
-          ("KAZ", "")
-          ("KGZ", "")
-          ("CHN", "")
-          ("COL", "")
-          ("XKX", "")
-          ("CRI", "")
-          ("KWT", "")
-          ("LBN", "")
-          ("LBY", "")
-          ("LUX", "")
-          ("MDV", "")
-          ("MLT", "")
-          ("MAR", "")
-          ("MEX", "")
-          ("MDA", "")
-          ("MCO", "")
-          ("NAM", "")
-          ("NLD", "")
-          ("OMN", "")
-          ("PAN", "")
-          ("PRY", "")
-          ("PER", "")
-          ("PRI", "")
-          ("ROU", "")
-          ("RUS", "")
-          ("SLV", "")
-          ("STP", "")
-          ("SAU", "")
-          ("MKD", "")
-          ("SGP", "")
-          ("MAF", "")
-          ("SUR", "")
-          ("ESP", "")
-          ("TCA", "")
-          ("VEN", "")
-          ("UKR", "")
-          ("CPV", "")
-          ("USA", "")
-          ("ARE", "") ]
-
-let importedFrom =
-    Map.ofList
-        [  
-            ("AUT", 11)
-            ("HRV", 6)
-            ("DEU", 5)
-            ("XKX", 4)
-            ("BIH", 3)
-            ("GRC", 3)
-            ("ITA", 3)
-            ("HUN", 2)
-            ("CZE", 2)
-            ("RUS", 1)
-            ("MNE", 1)
-            ("FRA", 1) 
-            ("EST", 1)
+        [
+            ("AFG", "")
+            ("ALB", "")
+            ("DZA", "")
+            ("AND", "")
+            ("AGO", "")
+            ("ARG", "")
+            ("ARM", "")
+            ("AUT", "administrativne enote: Dunaj")
+            ("AZE", "")
+            ("BAH", "")
+            ("BHR", "")
+            ("BGD", "")
+            ("BEL", "")
+            ("BLZ", "")
+            ("BLR", "")
+            ("BEN", "")
+            ("BGR", "administrativna enota: Blagoevgrad")
+            ("BOL", "")
+            ("BIH", "")
+            ("BRA", "")
+            ("BFA", "")
+            ("BDI", "")
+            ("BTN", "")
+            ("TCD", "")
+            ("CZE", "")
+            ("CHL", "")
+            ("MNE", "")
+            ("DNK", "administrativna enota: Hovedstaden, regija glavnega mesta")
+            ("DOM", "")
+            ("EGY", "")
+            ("ECU", "")
+            ("GNQ", "")
+            ("ERI", "")
+            ("EST", "administrativna enota: Ida-Viru")
+            ("SWZ", "")
+            ("ETH", "")
+            ("PHL", "")
+            ("FRA", "vse administrativne enote razen Grand-Est; čezmorsko ozemlje: Francoska Gvajana, Guadeloupe, Sveti Martin, La Réunion")
+            ("GAB", "")
+            ("GMB", "")
+            ("GHA", "")
+            ("GUY", "")
+            ("GTM", "")
+            ("GIN", "")
+            ("GNB", "")
+            ("HTI", "")
+            ("HND", "")
+            ("HRV", "administrativne enote: Brodsko-posavska, Dubrovniško-neretvanska, Liško-senjska, Požeško-slavonska, Splitsko-dalmatinska, Virovitiško-podravska")
+            ("IND", "")
+            ("IDN", "")
+            ("IRQ", "")
+            ("IRN", "")
+            ("IRL", "administrativna enota: Dublin, Cavan, Donegal, Leitrim, Monaghan, Sligo")
+            ("ISL", "")
+            ("ISR", "")
+            ("JAM", "")
+            ("YEM", "")
+            ("ZAF", "")
+            ("SSD", "")
+            ("CMR", "")
+            ("QAT", "")
+            ("KAZ", "")
+            ("KEN", "")
+            ("KGZ", "")
+            ("COL", "")
+            ("COM", "")
+            ("COG", "")
+            ("COD", "")
+            ("XKX", "")
+            ("CRI", "")
+            ("KWT", "")
+            ("LSO", "")
+            ("LBN", "")
+            ("LBR", "")
+            ("LBY", "")
+            ("LTU", "administrativna enota: Šiaulių")
+            ("LUX", "")
+            ("MDG", "")
+            ("HUN", "administrativne enote: Budimpešta, Csongrád-Csanád, Győr-Moson-Sopron, Pest, Vas")
+            ("MWL", "")
+            ("MDV", "")
+            ("MLI", "")
+            ("MAR", "")
+            ("MRT", "")
+            ("MEX", "")
+            ("MDA", "")
+            ("MNG", "")
+            ("MOZ", "")
+            ("NAM", "")
+            ("NPL", "")
+            ("NIG", "")
+            ("NGA", "")
+            ("NIC", "")
+            ("NLD", "vse administrativna enote razen Zeeland in Limburg; čezmorsko ozemlje: Aruba, Saint Maarten")
+            ("OMN", "")
+            ("PAK", "")
+            ("PAN", "")
+            ("PNG", "")
+            ("PRY", "")
+            ("PER", "")
+            ("PRT", "administrativna enota: Lizbona")
+            ("ROU", "administrativne enote: Bacău, Bihor, Brăila, Brașov, Bukarešta, Caras Severin, Covasna, Neamt, Iasi, Ilfov, Prahova, Vâlcea, Vaslui")
+            ("RUS", "")
+            ("SLV", "")
+            ("STP", "")
+            ("SAU", "")
+            ("SEN", "")
+            ("PRK", "")
+            ("MKD", "")
+            ("SLE", "")
+            ("SYR", "")
+            ("CIV", "")
+            ("SOM", "")
+            ("CAF", "")
+            ("SUR", "")
+            ("ESP", "")
+            ("CHE", "administrativne enote: Ženeva, Vaud")
+            ("TJK", "")
+            ("TZA", "")
+            ("TGO", "")
+            ("TTO", "")
+            ("TUR", "")
+            ("TKM", "")
+            ("UKR", "")
+            ("UZB", "")
+            ("VEN", "")
+            ("TLS", "")
+            ("ZMB", "")
+            ("USA", "")
+            ("ARE", "")
+            ("GBR", "administrativna enota: Severna Irska, Severna Anglija, Severozahodna Anglija, Wales, Yorkshire in Humberside, Škotska; čezmorsko ozemlje Gibraltar")
+            ("CPV", "")
+            ("ZWE", "")
         ]
-
-let importedDate = DateTime(2020, 9, 20)
 
 let loadEuropeGeoJson =
     async {
@@ -272,10 +303,11 @@ let loadWorldGeoJson =
                             |> Failure)
     }
 
-let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
+let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> =
     let cmdGeoJson = Cmd.ofMsg GeoJsonRequested
     let cmdOwdData = Cmd.ofMsg OwdDataRequested
     { MapToDisplay = mapToDisplay
+      Data = data
       Countries =
         match mapToDisplay with
         | Europe -> CountrySelection.Countries euCountries
@@ -289,7 +321,11 @@ let init (mapToDisplay: MapToDisplay): State * Cmd<Msg> =
         | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
-let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
+let prepareCountryData (data: Data.OurWorldInData.DataPoint list) (weeklyData: WeeklyStatsData) =
+    let dataForLastTwoWeeks = Array.sub weeklyData (weeklyData.Length - 2) 2
+    let importedFrom = dataForLastTwoWeeks |> Data.WeeklyStats.countryTotals |> Map.ofArray
+    let importedDate = (Array.last dataForLastTwoWeeks).DateTo
+
     data
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
@@ -324,13 +360,18 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
             redCountries.TryFind(fixedCode),
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
-            if fixedCode = "SVN"
-            then I18N.t "charts.europe.statusNone", "#10829a", ""
-            else if red.IsSome
-            then I18N.t "charts.europe.statusRed", "#FF5348", red |> Option.defaultValue ""
-            else if green.IsSome
-            then I18N.t "charts.europe.statusGreen", "#C4DE6F", green |> Option.defaultValue ""
-            else I18N.t "charts.europe.statusYellow", "#FEF65C", ""
+            match fixedCode with
+            | "SVN" -> I18N.t "charts.europe.statusNone", "#10829a", ""
+            | _ ->
+                match red with
+                | Some redNote ->
+                    if redNote.Length > 0
+                    then I18N.t "charts.europe.statusRed", "#FF9057", redNote
+                    else I18N.t "charts.europe.statusRed", "#FF5348", redNote
+                | _ ->
+                    match green with
+                    | Some greenNote -> I18N.t "charts.europe.statusGreen", "#C4DE6F", greenNote
+                    | _ -> I18N.t "charts.europe.statusOrange", "#FFC65A", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -344,7 +385,8 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) =
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
-              CountryData.RestrictionText = rText + rAltText
+              CountryData.RestrictionText = rText
+              CountryData.RestrictionAltText = rAltText
               CountryData.ImportedFrom = imported
               CountryData.ImportedDate = importedDate }
 
@@ -380,7 +422,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
             | Success owdData ->
                 { state with
                       OwdData = result
-                      CountryData = prepareCountryData owdData }
+                      CountryData = prepareCountryData owdData state.Data }
             | _ -> { state with OwdData = result }
 
         ret, Cmd.none
@@ -421,6 +463,7 @@ let mapData state =
                    newCases = nc
                    ncDate = ncDate
                    rType = cd.RestrictionText
+                   rAltText = cd.RestrictionAltText
                    imported = cd.ImportedFrom
                    impDate = impDate |}
 
@@ -447,6 +490,7 @@ let mapData state =
                newCases = 0
                ncDate = ""
                rType = ""
+               rAltText = ""
                imported = 0
                impDate = "" |})
     |> List.toArray
@@ -490,18 +534,19 @@ let renderMap state geoJson owdData =
         let imported = points?imported
         let impDate = points?impDate
         let rType = points?rType
+        let rAltText = points?rAltText
 
         let s = StringBuilder()
         let barMaxHeight = 50
 
         let textHtml =
             sprintf "<b>%s</b><br/>
-            %s: <b>%s</b><br/>
+            %s: <b>%s<br/>%s</br></br></b>
             %s: <b>%s</b> (%s)<br/><br/>
             %s: <b>%s</b><br/>
             %s: <b>%s</b> (%s)<br/>"
                 country
-                (I18N.t "charts.europe.countryStatus") rType
+                (I18N.t "charts.europe.countryStatus") rType rAltText
                 (I18N.t "charts.europe.importedCases") imported impDate
                 (I18N.t "charts.europe.incidence1M") incidence1M
                 (I18N.t "charts.europe.newCases") newCases ncDate
@@ -573,8 +618,7 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     Html.div
         [ prop.className "chart-display-property-selector"
           prop.children
-              [ Html.text (I18N.t "charts.common.view")
-                renderChartSelector Restrictions
+              [ renderChartSelector Restrictions
                 renderChartSelector TwoWeekIncidence ] ]
 
 
@@ -595,5 +639,5 @@ let render (state: State) dispatch =
                     prop.className "map"
                     prop.children [ chart ] ] ] ]
 
-let mapChart (mapToDisplay: MapToDisplay) =
-    React.elmishComponent ("EuropeMapChart", init mapToDisplay, update, render)
+let mapChart (props : {| mapToDisplay : MapToDisplay; data : WeeklyStatsData |}) =
+    React.elmishComponent ("EuropeMapChart", init props.mapToDisplay props.data, update, render)

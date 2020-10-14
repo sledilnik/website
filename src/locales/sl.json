@@ -7,8 +7,10 @@
         "menu": "Meni",
         "home": "Domov",
         "world": "Svet",
+        "ostanizdrav": "#OstaniZdrav",
         "tables": "Tabela",
         "models": "Modeli",
+        "animation": "Animacija",
         "faq": "FAQ",
         "about": "O projektu",
         "team": "Ekipa",
@@ -33,12 +35,22 @@
     "notice": {
         "newChart": "🆕 📊 Nov graf:",
         "newPage": "🆕 Nova stran:",
-        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
+        "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈"
     },
     "infocard": {
         "tests": "Testov na dan",
         "confirmedToDate": "Potrjeno okuženi",
         "active": "Aktivni primeri",
+        "incidence": "14-dnevna pojavnost",
+        "per100k": "na 100.000 prebivalcev",
+        "orangePhase": "Oranžna faza",
+        "orangePhaseGenitive": "oranžne",
+        "redPhase": "Rdeča faza",
+        "redPhaseGenitive": "rdeče",
+        "nextCriteria": "<br/>Kriterij za {{ phaseNextNumber }}. paket {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
+        "package1": "1. paket",
+        "package2": "2. paket",
+        "package3": "3. paket",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
@@ -76,7 +88,8 @@
         "x_days_ago_2": "Pred {{ count }} dnevi",
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
-        "longerDate": "{{ date, %A, %e. %B %Y }}"
+        "longerDate": "{{ date, %A, %e. %B %Y }}",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -114,6 +127,15 @@
         "4": "Četrtek",
         "5": "Petek",
         "6": "Sobota"
+    },
+    "weekdayShort": {
+        "0": "Ne",
+        "1": "Po",
+        "2": "To",
+        "3": "Sr",
+        "4": "Če",
+        "5": "Pe",
+        "6": "So"
     },
     "region": {
         "kr": "Gorenjska",
@@ -382,7 +404,7 @@
         "YEM": "Jemen",
         "ZAF": "Južnoafriška republika",
         "ZMB": "Zambija",
-        "ZWE": "Zimbabve"        
+        "ZWE": "Zimbabve"
     },
     "country-groups": {
         "groupNeighbouring": "okolica",
@@ -517,35 +539,55 @@
         "masks": {
             "title": "Maske",
             "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22:30."
+        },
+        "testOrQuarantine": {
+            "title": "Test",
+            "description": "Negativen test ali 10-dnevna karantena ob vstopu iz držav na rdečem ali oranžnem seznamu"
+        },
+        "cnk": {
+            "title": "Črna",
+            "description": "Razglasitev Črne na Koroškem za ogroženo območje.<br>Obvesna namestitev razpršilnikov za razkuževanje rok v večstanovanjske stavbe"
+        },
+        "gatherings10max": {
+            "title": "Do 10",
+            "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, z dovoljenjem NIJZ do 500 ljudi.<br>Dodatne omejitve za dejavnosti v zaprtih prostorih (20m2 na osebo)."
         }
     },
     "phase": {
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
         },
         "2": {
-            "title": "Faza 2",
+            "title": "faza<br>2",
             "description": "epidemija, nov režim testiranja"
         },
         "3": {
-            "title": "Faza 3",
+            "title": "faza<br>3",
             "description": "nov režim testiranja"
         },
         "4": {
-            "title": "Faza 4",
+            "title": "faza<br>4",
             "description": "nov režim testiranja"
         },
         "5": {
-            "title": "Faza 5",
+            "title": "faza<br>5",
             "description": "nov režim testiranja"
         },
         "6": {
-            "title": "Faza 6",
+            "title": "faza<br>6",
             "description": "nov režim testiranja, raziskava"
         },
         "7": {
-            "title": "Faza 7",
+            "title": "faza<br>7",
             "description": "preklic epidemije"
+        },
+        "8": {
+            "title": "faza<br>8",
+            "description": "nov režim testiranja otrok"
+        },
+        "9": {
+            "title": "faza<br>9",
+            "description": "prehod na delno sledenje stikov"
         }
     },
     "charts": {
@@ -568,7 +610,7 @@
             "thousandsSep": ".",
             "decimalPoint": ",",
             "view": "Prikaži:",
-            "sortBy": "Sortiraj po:",
+            "sortBy": "Razvrsti po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
@@ -583,27 +625,32 @@
             "numDateFormat": "%d. %m. %Y",
             "dateFormat": "%A, %e. %B %Y",
             "longDateFormat": "%e. %B %Y",
-            "shortDateFormat": "%e. %b"
+            "shortDateFormat": "%e. %b",
+            "weekYearDateFormat": "%W. teden %Y"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
             "title_SVN": "Stanje COVID-19 v Sloveniji",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",
-            "tests": "Testiranja (na dan)",
-            "testsToDate": "Testiranja (skupaj)",
-            "confirmed": "Potrjeno okuženi (na dan)",
-            "confirmedToDate": "Potrjeno okuženi (skupaj)",
-            "active": "Potrjeno okuženi (aktivni)",
-            "recovered": "Preboleli (skupaj)",
-            "hospitalized": "Hospitalizirani (aktivni)",
-            "hospitalizedToDate": "Hospitalizirani (skupaj)",
-            "icu": "V intenzivni enoti (aktivni)",
-            "ventilator": "Na respiratorju (aktivni)",
-            "discharged": "Odpuščeni iz bolnišnice (na dan)",
-            "dischargedToDate": "Odpuščeni iz bolnišnice (skupaj)",
-            "deceased": "Umrli (na dan)",
-            "deceasedToDate": "Umrli (skupaj)"
+            "showActive": "Aktivni",
+            "showToday": "Na dan",
+            "showToDate": "Skupaj",
+            "show7DaysAverage": "7-dnevno povprečje",
+            "testsPerformed": "Testiranja",
+            "confirmedCases": "Potrjeno okuženi",
+            "activeCases": "Aktivni primeri",
+            "recovered": "Preboleli",
+            "hospitalized": "Hospitalizirani",
+            "hospitalAdmitted": "Sprejeti v bolnišnico",
+            "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icu": "V intenzivni enoti",
+            "icuAdmitted": "Sprejeti v intenzivno",
+            "icuDischarged": "Odpuščeni iz intenzivne",
+            "ventilator": "Na respiratorju",
+            "ventilatorAdmitted": "Priklopljeni na respirator",
+            "ventilatorDischarged": "Odklopljeni od respiratorja",
+            "deceased": "Umrli"
         },
         "dailyComparison": {
             "title": "Primerjava po dnevih v tednu",
@@ -768,8 +815,8 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusYellow": "14-dnevna karantena z izjemami",
-            "statusRed": "obvezna 14-dnevna karantena",
+            "statusOrange": "negativen test ali 10-dnevna karantena z izjemami",
+            "statusRed": "negativen test ali obvezna 10-dnevna karantena",
             "noData": "Ni podatkov"
         },
         "world": {
@@ -809,7 +856,8 @@
             "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
-            "populationTotal": "Prebivalcev skupaj"
+            "populationTotal": "Prebivalcev skupaj",
+            "disclaimer": "Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih."
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
@@ -824,14 +872,82 @@
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: potrjeno okuženi na milijon prebivalcev",
-            "yAxisTitle": "Št. potrjeno okuženih na milijon prebivalcev",
-            "legendTitle": "Potrjeno okuženi na milijon prebivalcev"
+            "title": "Države: novi primeri na milijon prebivalcev",
+            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
+            "legendTitle": "Novi primeri na milijon prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na milijon prebivalcev",
             "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
             "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
+        },
+        "ostanizdrav": {
+            "title": "Aplikacija #OstaniZdrav",
+            "description": "[Aplikacija #OstaniZdrav](https://www.gov.si/ostanizdrav) je namenjena obvladovanju širjenja okužb z novim koronavirusom, tako da uporabniku sporoči, ali je bil v stiku z osebo, pri kateri je bila potrjena okužba. **Med ključnimi lastnostmi aplikacije je ohranjanje anonimnosti uporabnikov in decentralizirano obdelovanje njihovih podatkov.** To pomeni, da nihče — niti MJU niti NIJZ — ne dostopa do podatkov o stikih posameznih uporabnikov, niti do podatkov o tem, ali je bila pri uporabniku potrjena okužba.\n\n[Naša analiza delovanja aplikacije](#published-chart) deluje znotraj teh omejitev in zajema samo tiste podatke, do katerih sicer dostopajo aplikacije na mobilnikih. Za njihovo interpretacijo je nujno razumevanje delovanja aplikacije in terminov, kot so dnevni ključi, stopnja tveganja ter razlika med objavljenimi in veljavnimi ključi.\n\nKo je aplikacija nameščena na mobilniku, vsak dan ustvari po en naključen, enkraten in anonimen ključ. Na podlagi tega dnevnega ključa se ustvarijo oddajne kode, ki jih mobilnik oddaja drugim mobilnikom z delujočo aplikacijo v bližini. Aplikacija istočasno sprejema in shranjuje oddajne kode drugih mobilnikov v bližini. Ko uporabnik izve, da je bil rezultat njegovega testa na prisotnost novega koronavirusa pozitiven, v aplikacijo vnese potrditveno teleTAN-kodo. Takrat se na strežnik naložijo njegovi dnevni ključi za zadnjih 14 dni, saj so tvegani predvsem stiki v tem obdobju.\n\nMobilna aplikacija s strežnika vsak dan prikliče novo objavljene ključe potrjenih primerov in preveri, ali se kateri od ključev sklada s shranjenim seznamom oddajnih kod drugih mobilnikov, s katerimi ste prišli v stik. Pri tem upošteva dolžino in bližino trajanja stika ter kakšno je bilo tveganje prenosa za tisti dan. Stopnja tveganja prenosa se pri teh 14 ključih spreminja glede na čas vnosa – najmanjša je bila 14 dni nazaj, potem se stopnjuje in je najvišja drugi, tretji in četrti dan pred vnosom potrjene okužbe. Ob upoštevanju teh treh dejavnikov aplikacija izračuna, ali je tveganje dovolj visoko, da vas o tem opozori.\n\nStopnje tveganja segajo od 1 (najnižja) do 8 (najvišja). Če je imel uporabnik ves čas nameščeno in delujočo aplikacijo, bodo ključi dobili naslednje zaporedje stopenj tveganja: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Strežnik takoj objavi prvih 13 ključev, zadnjega, ki velja za današnji dan, pa zaradi zagotavljanja večje anonimnosti objavi šele naslednji dan. Če si je uporabnik aplikacijo naložil pozneje ali jo vmes za kak dan izklopil, bo zaporedje nepopolno zaradi manjkajočih ključev. V povprečju v zaporedjih manjkajo približno trije ključi.\n\n**Zaradi zagotavljanja anonimnosti uporabnikov je nemogoče vedeti, kateri ključi pripadajo kateremu uporabniku. Lahko pa zaradi znanega tipičnega vzorca stopenj tveganja s precejšnjo gotovostjo sestavimo zaporedja, ki ustrezajo številu uporabnikov, tudi če so v teh zaporedjih manjkajoči ključi. Ne moremo vedeti, da gre za točno pravo število; naša ocena je samo zelo dober približek.**\n\nVsak dan se torej na strežniku objavi določeno število dnevnih ključev, vsak s svojo pripadajočo stopnjo tveganja in z datumom veljavnosti, ki sega do 13 dni v preteklost. To so podatki, ki jih zajemajo mobilne aplikacije, in to so isti podatki, ki jih obdeluje tudi Sledilnik.",
+            "warningCurrentDay": "**Pozor: Podatki za trenutni dan niso nujno dokončni.**",
+            "footer": "Analiza je rezultat prilagoditve nemškega [Corona Tracker Tracker](https://ctt.pfstr.de/) projekta na #OstaniZdrav. [Izvorna koda projekta](https://github.com/janpf/ctt) uporablja [orodja za analizo ključev](https://github.com/mh-/diagnosis-keys).",
+            "valid": {
+                "title": "Dnevni ključi, veljavni na posamezen dan",
+                "date": "Datum",
+                "perDay": "Veljavnih ključev na dan",
+                "description": "Graf prikazuje število ključev, ki so na posamezen dan veljavni (za razliko objavljenih na posamezen dan – glej graf [Objavljeni dnevni ključi](#published-chart)). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, vsak od njih pa je veljaven za enega od preteklih 13 dni. To pomeni, da bo ta graf vedno padal zadnjih 13 dni, ne glede na spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti. "
+            },
+            "published": {
+                "title": "Objavljeni dnevni ključi",
+                "date": "Datum",
+                "perDay": "Objavljenih ključev na dan",
+                "runningTotal": "Objavljenih ključev skupaj",
+                "description": "Graf prikazuje število objavljenih dnevnih ključev za vsak dan (modri stolpci) ter skupno število ključev, objavljenih do tistega dne (rdeča črta). V povprečju uporabniki objavijo med 10 in 12 dnevnih ključev (glej graf [Objavljeni dnevni ključi na uporabnika](#usercount-chart)) in s pomočjo te informacije lahko ocenimo njihovo število."
+            },
+            "validByRisk": {
+                "title": "Dnevni ključi, veljavni na posamezen dan glede na stopnjo tveganja",
+                "date": "Datum",
+                "tooltip": "datum.valid + ' veljavnih ključev s stopnjo tveganja ' +datum.risk",
+                "valid": "Veljavnih ključev na dan",
+                "risk": "Tveganje",
+                "description": "Graf prikazuje stopnjo tveganja ključev, ki so na posamezen dan veljavni — za razliko od tega, kdaj so bili objavljeni (glej graf [Objavljeni dnevni ključi glede na stopnjo tveganja](#publishedByRisk-chart)). Ob potrditvi okužbe v aplikaciji so vsi dnevni ključi objavljeni v istem dnevu, toda veljavni so vsak za enega od preteklih 13 dni. To je ključno za razumevanje tega grafa, saj pomeni, da bo graf vedno padal zadnje 13 dni, ne glede spreminjanje števila pozitivnih uporabnikov, saj bodo dnevni ključi, veljavni na te dni, objavljeni šele v prihodnosti. "
+            },
+            "publishedByRisk": {
+                "title": "Objavljeni dnevni ključi glede na stopnjo tveganja",
+                "date": "Datum",
+                "tooltip": "datum.published + ' objavljenih ključev s stopnjo tveganja ' + datum.risk",
+                "published": "Objavljenih ključev na dan",
+                "risk": "Tveganje",
+                "description": "Vsak objavljeni dnevni ključ ima pripadajočo stopnjo tveganja. Graf prikazuje njihovo število za vsak dan. Temnejša barva predstavlja višjo stopnjo tveganja, svetlejša nižjo. Če je imel uporabnik aplikacijo nameščeno od začetka in je bila ta ves čas dejavna, bodo ključi dobili naslednje zaporedje stopenj tveganja: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Zato je pričakovano največ ključev objavljenih s stopnjo tveganja 1 in na drugem mestu z najvišjo stopnjo 8."
+            },
+            "usercount": {
+                "title": "Ocena števila uporabnikov, ki so vnesli potrditev okužbe",
+                "date": "Datum",
+                "users": "Uporabnikov, ki so objavili ključe na dan",
+                "runningTotal": "Uporabnikov, ki so objavili ključe skupaj",
+                "description": "Graf prikazuje našo oceno števila uporabnikov, ki so na posamezen dan v aplikaciji potrdili okužbo (modri stolpci), ter skupno število uporabnikov, ki so to storili do tega dne (rdeča črta). Natančno znano je samo število dnevnih ključev, objavljenih vsak dan (glej graf [Objavljeni dnevni ključi](#published-chart)), toda iz njih lahko zaradi značilnega zaporedja stopenj tveganja precej natančno sklepamo o tem, koliko uporabnikov je na tisti dan v aplikacijo vneslo potrditev okužbe. "
+            },
+            "userPublishedByCount": {
+                "title": "Objavljeni dnevni ključi na uporabnika",
+                "date": "Datum",
+                "tooltip": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
+                "count": "(povprečno) število ključev na uporabnika na dan",
+                "users": "Uporabnikov",
+                "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
+            }
+        },
+        "sources": {
+            "title": "Karantena in viri okužb",
+            "sentToQuarantine": "Poslani v karanteno",
+            "confirmedCases": "Potrjeni primeri",
+            "confirmedFromQuarantine": "Potrjeni iz karantene",
+            "quarantine": "Karantena",
+            "quarantineRelative": "Karantena (relativno)",
+            "bySource": "Viri okužb",
+            "bySourceRelative": "Viri okužb (relativno)",
+            "bySourceCountry": "Uvoženi primeri",
+            "bySourceCountryRelative": "Uvoženi primeri (relativno)",
+            "importedCases": "Uvoženi primeri",
+            "importRelatedCases": "Povezani z uvoženimi",
+            "localSource": "Lokalni vir",
+            "sourceUnknown": "Neznan vir",
+            "totalConfirmed": "Skupaj potrjeni",
+            "totalImported": "Skupaj uvoženi"
         }
     },
     "footer": {

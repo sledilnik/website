@@ -54,9 +54,6 @@ export default {
       this.items = items;
       this.fields = fields;
     }
-  },
-  mounted() {
-    this.refreshData();
   }
 };
 </script>

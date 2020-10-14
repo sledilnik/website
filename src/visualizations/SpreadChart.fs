@@ -62,8 +62,6 @@ let maxOption a b =
     | None, Some y -> Some y
     | Some x, Some y -> Some (max x y)
 
-let roundDecimals (nDecimals:int) (f: float) = Math.Round(f,nDecimals)
-
 let inline yAxisBase () =
      {|
         ``type`` = "linear"
@@ -121,7 +119,9 @@ type ChartCfg = {
                         ||> Option.map2 (fun daily total ->
                             let yesterday = total-daily
                             if yesterday < 2 then nan
-                            else (float total / float yesterday - 1.0) * 100.0 |> roundDecimals 1
+                            else
+                                (float total / float yesterday - 1.0) * 100.0
+                                |> Utils.roundDecimals 1
                         )
                         |> Option.defaultValue nan
                     dp.Date |> jsTime12h, value
@@ -156,7 +156,7 @@ type ChartCfg = {
                                 else
                                     let rate = float total / float yesterday
                                     let days = Math.Log 2.0 / Math.Log rate
-                                    days |> roundDecimals 1
+                                    days |> Utils.roundDecimals 1
                             v
                         )
                         |> Option.defaultValue nan

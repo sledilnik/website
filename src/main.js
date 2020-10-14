@@ -1,17 +1,20 @@
+// this is common Vue initialization for index.js and embed.js (app entrypoints)
+
 import Vue from 'vue'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { LayoutPlugin, TabsPlugin, BTable, FormTextareaPlugin, BFormSelect, TooltipPlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSpinner, faGlobe, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import 'whatwg-fetch'
-// global vue filters
 import './filters'
+import './directives'
 
-// this is common Vue initialization for index.js and embed.js (app entrypoints)
-
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+Vue.use(LayoutPlugin)
+Vue.use(TabsPlugin)
+Vue.use(FormTextareaPlugin)
+Vue.use(TooltipPlugin)
+Vue.component('b-table', BTable)
+Vue.component('b-form-select', BFormSelect)
 
 // fontawesome
 library.add(faSpinner, faGlobe, faCaretDown)

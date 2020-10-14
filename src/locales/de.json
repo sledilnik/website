@@ -20,7 +20,8 @@
         "models": "Modelle",
         "tables": "Tabellen",
         "faq": "FAQ",
-        "world": "Welt"
+        "world": "Welt",
+        "animation": "Animation"
     },
     "country": {
         "ABW": "Aruba",
@@ -296,13 +297,14 @@
             "hospitalized": "Hospitalisiert",
             "doublingRateTitle": "Exponentielle Wachstumsrate [in Tagen]",
             "absolute": "Tägliches Wachstum absolut",
-            "ifExpGrowth": "Wenn sich die Infektion exponentiell ausbreiten würde mit einer Verdopplung bei 7, dann könnte man folgendes erwarten:",
+            "ifExpGrowth": "Wenn sich die Infektion exponentiell ausbreiten würde mit einer Verdopplung innerhalb von 7 Tagen, dann könnte man folgendes erwarten:",
             "inOneWeek": "In einer Woche",
             "inThreeWeeks": "In drei Wochen",
             "inTwoWeeks": "In zwei Wochen",
             "relativeLabel": "Relatives Wachstum in %",
             "timesAsMany": "- mal mehr",
-            "averageSouthKorea": "Durchschnitt in Südkorea in den vergangenen Tagen"
+            "averageSouthKorea": "Durchschnitt in Südkorea in den vergangenen Tagen",
+            "activeCases": "aktive Fälle"
         },
         "municipalities": {
             "doubles": "Verdopplung ",
@@ -399,7 +401,8 @@
             "from": " ",
             "dataSource": "Datenquelle",
             "yAxis": "Y-Achse:",
-            "loading": "Daten werden geladen …"
+            "loading": "Daten werden geladen …",
+            "sortBy": "Sortieren nach:"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -408,9 +411,9 @@
             "countryStatus": "Einschränkungen",
             "twoWeekIncidence": "14-tägige Fälle pro 1 M",
             "statusNone": "–",
-            "statusRed": "strikte 14-tägige Quarantäne",
-            "statusYellow": "14-tägige Quarantäne mit Ausnahmen",
-            "incidence1M": "Neue Fälle in 14 Tagen pro 1 M",
+            "statusRed": "strikte 10-tägige Quarantäne",
+            "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
+            "incidence1M": "Neue Fälle in 14 Tagen pro 1 Mio.",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",
             "importedCases": "Eingeschleppte Fälle in 14 Tagen"
@@ -454,12 +457,12 @@
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
-            "deceased": "Todesfälle (täglich)",
+            "deceased": "Todesfälle",
             "icu": "Auf Intensivstationen",
             "title": "COVID-19 Situation im Land",
             "title_SVN": "COVID-19 Situation in Slowenien",
             "title_MKD": "COVID-19-Situation in Nordmazedonien",
-            "recovered": "Genesene (bis heute)",
+            "recovered": "Genesene",
             "tests": "Tests (täglich)",
             "confirmedToDate": "Bestätigte Fälle (bis heute)",
             "discharged": "Aus Krankenhäusern entlassen (täglich)",
@@ -470,7 +473,20 @@
             "testsToDate": "Tests (bis heute)",
             "deceasedToDate": "Todesfälle (bis heute)",
             "confirmed": "Bestätigte Fälle (täglich)",
-            "title_MNE": "COVID-19 Lage in Montenegro"
+            "title_MNE": "COVID-19 Lage in Montenegro",
+            "icuDischarged": "Von der Intensivstation entlassen",
+            "hospitalDischarged": "Aus Krankenhäusern entlassen",
+            "hospitalAdmitted": "Ins Krankenhaus eingewiesen",
+            "icuAdmitted": "Auf Intensivstation eingewiesen",
+            "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
+            "ventilatorAdmitted": "An Beatmungsgerät angeschlossen",
+            "confirmedCases": "Bestätigte Fälle",
+            "testsPerformed": "Tests",
+            "showToDate": "Bis heute",
+            "showToday": "Tägliche",
+            "showActive": "Aktive",
+            "activeCases": "Aktive Fälle",
+            "show7DaysAverage": "7-Tage-Durchschnitt"
         },
         "countries": {
             "groupNordic": "Nordische Länder",
@@ -539,20 +555,43 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Todesfälle gesamt pro 1 Million Menschen",
-            "yAxisTitle": "Todesfälle gesamt pro 1 Million Menschen",
-            "title": "Länder: Todesfälle gesamt pro 1 Million Menschen"
+            "legendTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Neue Fälle pro 1 Million Menschen",
-            "title": "Länder: Neue Fälle pro 1 Million Menschen"
+            "legendTitle": "Neue tägliche Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Neue tägliche Fälle pro 1 Million Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 1 Million Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
         },
         "rmap": {
             "title": "Regionalkarte"
+        },
+        "countriesDeathsPerCases": {
+            "legendTitle": "Gesamtzahl der Todesfälle pro Fall",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro Fall",
+            "title": "Länder: Gesamtzahl der Todesfälle pro Fall",
+            "chronologically": "Chronologisch",
+            "sinceFirstDeath": "Seit dem ersten Todesfall",
+            "sinceOneDeathPerMillion": "Seit erstem Todesfall pro 1 Million Menschen",
+            "daysFromFirstDeath": "Anzahl Tage seit dem erstem Todesfall",
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen"
+        },
+        "countriesActiveCasesPer1M": {
+            "red": "Kriterien für die rote Liste",
+            "legendTitle": "Aktive Fälle pro 1 Million Menschen",
+            "yAxisTitle": "Aktive Fälle pro 1 Million Menschen",
+            "title": "Länder: Aktive Fälle pro 1 Million Menschen"
+        },
+        "dailyComparison": {
+            "positivePct": "Anteil der positiven Tests (%)",
+            "tests": "Durchgeführte Tests",
+            "active": "Aktive Fälle",
+            "new": "Bestätigte Fälle",
+            "title": "Vergleich nach Wochentag"
         }
     },
     "tableDict": {
@@ -566,7 +605,7 @@
         "age_male_65-74_todate": "65 – 74 Jahre",
         "state_out_of_hospital_todate": "Aus Krankenhäusern entlassen (bis heute)",
         "cases_confirmed_todate": "Bestätigte Fälle (bis heute)",
-        "state_critical": "An Beatmungsmaschinen (aktiv)",
+        "state_critical": "An Beatmungsmaschinen (aktive)",
         "region_po_todate": "Notranjsko-kraška",
         "age_female_45-54_todate": "45 – 54 Jahre",
         "region_mb_todate": "Podravska",
@@ -592,12 +631,12 @@
         "age_male_85+_todate": "85+ Jahre",
         "age_male_todate": "Gesamt",
         "state_in_hospital_todate": "Hospitalisierte (bis heute)",
-        "state_in_hospital": "Hospitalisierte (aktiv)",
+        "state_in_hospital": "Hospitalisierte (aktive)",
         "region_kp_todate": "Küste und Karst",
         "age_female_75-84_todate": "75 – 84 Jahre",
         "region_ng_todate": "Goriška",
         "region_nm_todate": "Südostslowenien",
-        "state_icu": "Auf Intensivstationen (aktiv)",
+        "state_icu": "Auf Intensivstationen (aktive)",
         "age_female_35-44_todate": "35 – 44 Jahre",
         "cases_closed_todate": "Abgeschlossene Fälle (bis heute)",
         "state_deceased_todate": "Bestätigte Todesfälle (bis heute)",
@@ -728,6 +767,18 @@
         "app": {
             "description": "Die App #OstaniZdrav, veröffentlicht für Android",
             "title": "#OstaniZdrav"
+        },
+        "masks": {
+            "description": "Gesichtsmasken sind in allen öffentlichen Innenräumen und im Freien erforderlich, wenn die Entfernung weniger als 2 m beträgt.<br>Restaurants sind nur bis 22:30 Uhr geöffnet.",
+            "title": "Masken"
+        },
+        "quarantine10days": {
+            "description": "Obligatorische Quarantäne von 10 Tagen reduziert",
+            "title": "10 Tage"
+        },
+        "testOrQuarantine": {
+            "description": "Negativer Test oder 10-tägige Quarantäne bei Einreise aus Ländern der roten oder orangefarbenen Liste",
+            "title": "Test"
         }
     },
     "region": {
@@ -751,12 +802,22 @@
     "infocard": {
         "recoveredToDate": "Genesene",
         "active": "Aktive Fälle",
+        "incidence": "14-tägige Fälle",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
         "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
-        "inHospital": "Hospitalisierte"
+        "inHospital": "Hospitalisierte",
+        "redPhase": "Rote Phase",
+        "orangePhase": "Orange Phase",
+        "per100k": "pro 100 tausend",
+        "package3": "Paket 3",
+        "package2": "Paket 2",
+        "package1": "Paket 1",
+        "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
+        "redPhaseGenitive": "roten",
+        "orangePhaseGenitive": "orangenen"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",
@@ -818,28 +879,28 @@
         },
         "phase": {
             "6": {
-                "title": "Phase 6",
+                "title": "Phase<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Mazedonien 2, Štip 3"
             },
             "5": {
-                "title": "Phase 5",
+                "title": "Phase<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Mazedonien 2"
             },
             "3": {
-                "title": "Phase 3",
+                "title": "Phase<br>3",
                 "description": "Debar 4"
             },
             "2": {
-                "title": "Phase 2",
+                "title": "Phase<br>2",
                 "description": "Skopje 4"
             },
             "1": {
                 "description": "Debar 4, Skopje 3, Mazedonien 2 ",
-                "title": "Phase 1"
+                "title": "Phase<br>1"
             },
             "4": {
                 "description": "Mazedonien 3",
-                "title": "Phase 4"
+                "title": "Phase<br>4"
             }
         },
         "hospital": {
@@ -916,31 +977,39 @@
     },
     "phase": {
         "2": {
-            "title": "Phase 2",
+            "title": "Phase<br>2",
             "description": "Epidemie, neue Testmethoden"
         },
         "1": {
-            "title": "Phase 1"
+            "title": "Phase<br>1"
         },
         "4": {
-            "title": "Phase 4",
+            "title": "Phase<br>4",
             "description": "neue Testmethoden"
         },
         "5": {
-            "title": "Phase 5",
+            "title": "Phase<br>5",
             "description": "neue Testmethoden"
         },
         "7": {
             "description": "Ende der Epidemie",
-            "title": "Phase 7"
+            "title": "Phase<br>7"
         },
         "6": {
             "description": "neue Testmethoden, Studie",
-            "title": "Phase 6"
+            "title": "Phase<br>6"
         },
         "3": {
             "description": "neue Testmethoden",
-            "title": "Phase 3"
+            "title": "Phase<br>3"
+        },
+        "9": {
+            "description": "umschalten auf partielle Kontaktverfolgung",
+            "title": "Phase<br>9"
+        },
+        "8": {
+            "description": "neue Testmethodik – Kinder",
+            "title": "Phase<br>8"
         }
     },
     "embedMaker": {

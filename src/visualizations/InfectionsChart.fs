@@ -63,7 +63,7 @@ type DisplayType = {
 }
 
 [<Literal>]
-let DaysOfMovingAverage = 5
+let DaysOfMovingAverage = 7
 
 let availableDisplayTypes: DisplayType array = [|
     {   Id = "averageByDay"
@@ -183,6 +183,7 @@ let renderChartOptions state dispatch =
                                 (fun (_, value) ->
                                     value |> Option.defaultValue 0 |> float)
                             )
+                        |> roundKeyValueFloatArray 1
 
                 (metric, data))
 
@@ -216,7 +217,7 @@ let renderChartOptions state dispatch =
 
     let className = "covid19-infections"
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
@@ -269,7 +270,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 

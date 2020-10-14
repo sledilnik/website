@@ -3,6 +3,10 @@ $yellow: #ffd922
 $text-c: rgba(0, 0, 0, 0.7)
 $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
+@mixin nav-break
+  @media only screen and (min-width: 1050px)
+    @content
+
 .visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
@@ -18,13 +22,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     
   section
     background: #fff
-    margin-bottom: 88px
+    margin-bottom: 44px
     position: relative
     padding: 0 0 32px
     box-shadow: $element-box-shadow
 
     @media only screen and (min-width: 768px)
       padding: 0 29px 32px 32px
+      margin-bottom: 88px
 
     &.municipalities-chart
       padding: 0 0 32px
@@ -303,7 +308,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       .chart-display-property-selector__item
         display: inline-block
         line-height: 2
-        margin-left: 24px
+        margin: 0 8px
         color: rgba(0, 0, 0, 0.56)
 
         &::selection
@@ -316,6 +321,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         &.selected
           color: #000
           box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+          font-weight: bold
 
           &:hover
             animation: none
@@ -335,11 +341,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     &:hover
       border-color: $button-color
 
-  .metrics-2-selectors
-    margin-top: $gap/2
-    display: flex
-    flex-wrap: wrap
-
   .metric-2-selector
     margin: 0 $gap/6 $gap/3 $gap/6
     font-size: $font-size
@@ -354,15 +355,24 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .metric-2-selector--selected
     color: white
 
-  .metrics-comparison-chart
-    min-height: 689px
+  .spread-chart
+    min-height: 604px
 
-  .regions-chart
-    margin-top: $gap * 2
+  .daily-comparison-chart, .patients-chart, .age-groups-trends-chart,
+  .tests-chart, .infections-chart, .metrics-comparison-chart
+    min-height: 640px
+
+  .cases-chart, .ratios-chart, .regions-chart
+    min-height: 450px
 
   .age-groups-chart
-    margin-top: $gap * 2
-    margin-bottom: $gap
+    min-height: 579px    
+
+  .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
+    min-height: 703px
+  
+  .sources-chart
+    min-height: 610px
 
   .tests-chart, .ratios-chart
     .metric-selector
@@ -371,12 +381,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
-  .countries-cases-chart, .countries-active-chart, .countries-deaths-chart 
-    margin-top: $gap * 2
-    margin-bottom: $gap
-
-  .patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart, .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart
-    margin-top: $gap * 2
+  .patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart,
+  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart, .sources-chart
 
     .metric-selector
       background-color: white
@@ -390,12 +396,12 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
-  // .spread-chart
-
-  .hospitals-chart
-    margin-top: 0
-
   .map-chart, .rmap-chart
+    min-height: 780px
+
+    @include media-breakpoint-down(sm)
+      min-height: 636px
+
     .map
       height: 600px
 
@@ -415,6 +421,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         height: inherit
 
   .europe-chart, .world-chart
+    min-height: 722px
     $bar-color: #d5c768
 
     .bars, .bar-wrapper
@@ -430,10 +437,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       margin-right: 1px
       background-color: $bar-color
 
-  .age-groups-chart
-    min-height: 579px
+  .hcenters-chart
+    min-height: 655px
 
-  .hcenters-chart    
     .filters
       display: flex
       flex-wrap: wrap
@@ -445,11 +451,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         margin-left: 0
 
   .municipalities-chart
-    margin-top: $gap * 2
+    min-height: 897px
     $bar-active-color: #d5c768
     $bar-recovered-color: #8cd4b2
     $bar-deceased-color: #666666
-    $bar-new-color: #BF5747
+    $bar-new-color: #bf5747
 
     .credits
       cursor: pointer
@@ -583,10 +589,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       align-items: flex-end
       height: 50px
 
-      //&:last-child
-      //  .bar
-      //    background-color: $bar-active-color
-
       &:hover
         .total-and-date--hover
           display: block
@@ -638,10 +640,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       .value
         font-weight: bold
         margin-left: 2px
-        // color: white
-        // padding: 1px 5px 2px 5px
-        // background-color: $button-color
-        // border-radius: 2px
 
     .doubling-time
       margin-top: 5px
@@ -680,14 +678,14 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         background-color: $gray-100
 
   .exponential-explainer
-    zIndex: 1000
+    z-index: 1000
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)
     background: #fff
     padding: 0
     bottom: 0
     top: -34px
 
-    @media (min-width: 992px)
+    @include nav-break
       padding: 2em
       top: 0
       bottom: 0
@@ -702,7 +700,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       margin-top: 0.5em
       padding: 0 1em 1em 1em
 
-      @media (min-width: 992px)
+      @include nav-break
         font-size: 23px
         margin-top: 1em
         padding: 0 0 1.2em 0
@@ -713,7 +711,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       padding-left: 0
       padding-right: 0
 
-      @media (min-width: 992px)
+      @include nav-break
         justify-content: space-between
         flex-flow: row nowrap
         padding-left: 15px
@@ -753,7 +751,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           margin-top: 0.8em
           font-size: 24px
 
-        @media (min-width: 992px)
+        @include nav-break
           flex: none
           flex-basis: 0
           padding: 2.2em 2.2em 1.4em 2em
@@ -784,80 +782,3 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           h4
             margin-top: 1.4em
             font-size: 24px
-
-.cards-wrapper
-  display: flex
-  max-width: 1140px
-  flex-wrap: wrap
-  margin: 0px -15px 58px
-
-  @media only screen and (min-width: 768px)
-    margin: 0px auto 58px
-
-//chart loader
-
-$loader-width: 50px
-
-.stats-page
-  margin-top: 48px
-  position: relative
-
-  &.loaded
-    section
-      &::before,
-      &::after
-        display: none
-
-  section
-    position: relative
-
-    &::before,
-    &::after
-      content: ""
-      z-index: 90
-      display: block
-      position: absolute
-      top: calc(50% - 25px)
-      left: calc(50% - 25px)
-      width: $loader-width
-      height: $loader-width
-      background-size: cover
-
-    &::after
-      background-image: url(../assets/svg/covid-animation-1.svg)
-
-      animation: rotate1 3s infinite
-      animation-timing-function: linear
-
-      @keyframes rotate1
-        0%
-          transform: rotate(0deg) scale(1)
-        12.5%
-          transform: rotate(45deg) scale(1.3)
-        25%
-          transform: rotate(90deg) scale(1)
-        37.5%
-          transform: rotate(135deg) scale(1.3)
-        50%
-          transform: rotate(180deg) scale(1)
-        62.5%
-          transform: rotate(225deg) scale(1.3)
-        75%
-          transform: rotate(270deg) scale(1)
-        87.5%
-          transform: rotate(315deg) scale(1.3)
-        100%
-          transform: rotate(360deg) scale(1)
-
-    &::before
-      background-image: url(../assets/svg/covid-animation-2.svg)
-      animation: rotate2 3s infinite
-      animation-timing-function: linear
-
-      @keyframes rotate2
-        0%
-          transform: rotate(0deg) scale(1)
-        50%
-          transform: rotate(-180deg) scale(1)
-        100%
-          transform: rotate(-360deg) scale(1)

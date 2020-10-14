@@ -155,10 +155,9 @@ let prepareChartData daysOfMovingAverage (state: ChartState)
 
         {
             Series = series
-            LegendTitle = chartText state.ChartTextsGroup ".legendTitle"
+            LegendTitle = chartText state.ChartTextsGroup "legendTitle"
             XAxisTitle = ""
-            YAxisTitle =
-                chartText state.ChartTextsGroup ".yAxisTitle"
+            YAxisTitle = chartText state.ChartTextsGroup "yAxisTitle"
         }
         |> Some
     | None -> None

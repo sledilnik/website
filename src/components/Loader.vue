@@ -18,17 +18,20 @@ export default {
 $width: 50px
 
 .wrapper
-  position: fixed
+  position: absolute
   top: 0
   left: 0
-  bottom: 0
+  bottom: 60px
   right: 0
-  z-index: 999
+  width: $width
+  height: $width
+  margin: auto
+  z-index: 1999
   // backdrop-filter: blur(2px)
   // background: rgba(0,0, 0, 0.03)
 
 .loader-container
-  margin: 40vh auto
+  margin: 0 auto
   width: $width
   height: $width
   position: relative

@@ -35,8 +35,13 @@ body {
   }
 }
 
-// override BS container
-.container {
-  max-width: 1170px !important;
-  width: 100% !important;
+.tooltip {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  .arrow:before {
+    border-top-color: #2a2a2a;
+  }
+  .tooltip-inner {
+    background-color: #2a2a2a;
+  }
 }

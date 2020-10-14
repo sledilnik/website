@@ -46,7 +46,7 @@ module Series =
         | Recovered     -> false, "#8cd4b2",   "recovered"
         | Active        -> true,  "#d5c768",   "active"
         | InHospital    -> true,  "#de9a5a",   "hospitalized"
-        | Icu           -> true,  "#d99a91",   "icu"
+        | Icu           -> true,  "#d96756",   "icu"
         | Critical      -> true,  "#bf5747",   "ventilator"
 
 let init data : State * Cmd<Msg> =

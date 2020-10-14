@@ -15,15 +15,12 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }, to) => {
-    let data, d
-    if (typeof to !== 'undefined') {
-      data = await ApiService.get(`${ApiEndpoint}/api/patients`, to, to)
-      d = exportTime(data.headers.timestamp)
-    } else {
-      const yesterday = new Date(new Date().setDate(new Date().getDate() - 2))
-      data = await ApiService.get(`${ApiEndpoint}/api/patients`, yesterday)
-      d = exportTime(data.headers.timestamp)
-    }
+    const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 3))
+    const data = await ApiService.get(`${ApiEndpoint}/api/patients`, from, to)
+    const d =
+      typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
+
     commit('setData', data.data)
     commit('setExportTime', d)
   },

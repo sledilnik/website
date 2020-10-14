@@ -19,4 +19,4 @@ let dow dayOfWeek =
     t (sprintf "weekday.%d" dayOfWeek)
 
 let chartText chartTextsGroup textId =
-    t ("charts." + chartTextsGroup + textId)
+    t ("charts." + chartTextsGroup + "." + textId)

@@ -290,7 +290,7 @@
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
-            "icuDeceasedShare": "Udio smrtnih slučajeva u odjelima intenzivne njege",
+            "icuDeceasedShare": "Udio smrtnih slučajeva na odjelima intenzivne njege",
             "ventilatorHospital": "Na respiratoru",
             "ventilatorCases": "Na respiratoru",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
@@ -338,7 +338,8 @@
             "decimalPoint": ",",
             "to": " – ",
             "from": " ",
-            "sortBy": "Razvrstaj prema:"
+            "sortBy": "Razvrstaj prema:",
+            "weekYearDateFormat": "Tjedan %W od %Y"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -356,9 +357,9 @@
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi slučajevi na milijun stanovnika",
-            "legendTitle": "Novi slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
@@ -380,7 +381,8 @@
             "female": "Žene",
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
-            "confirmedCases": "Potvrđeni slučajevi"
+            "confirmedCases": "Potvrđeni slučajevi",
+            "disclaimer": "Napomena: Za razliku od drugih podataka koji se redovito objavljuju za različite kategorije, službeni izvori dobivaju demografske podatke s vremenskim zakašnjenjem (dob, općina, …), stoga se oni dobivaju s jednodnevnim kašnjenjem. To je također razlog što u prikazu po dobnim skupinama može doći do nekih odstupanja od podataka u drugim prikazima, kao što su niže vrijednosti broja potvrđenih slučajeva i smrti."
         },
         "ageGroupsTimeline": {
             "title": "Potvrđeni slučajevi po dobnim skupinama",
@@ -402,14 +404,14 @@
             "title": "Hospitalizacija"
         },
         "metricsComparison": {
-            "deceased": "Smrtni slučajevi (dnevno)",
+            "deceased": "Smrtni slučajevi",
             "title": "COVID-19 situacija u državi",
             "title_SVN": "COVID-19 situacija u Sloveniji",
             "title_MKD": "COVID-19 situacija u S. Makedoniji",
             "title_MNE": "COVID-19 Situacija u Crnoj Gori",
             "testsToDate": "Testovi (do danas)",
             "ventilator": "Na respiratoru",
-            "recovered": "Ozdravili (do danas)",
+            "recovered": "Ozdravili",
             "active": "Aktivni slučajevi",
             "hospitalizedToDate": "Hospitalizirani (do danas)",
             "icu": "Na odjelu intenzivne njege",
@@ -419,7 +421,20 @@
             "discharged": "Otpušteni iz bolnice (dnevno)",
             "deceasedToDate": "Smrtni slučajevi (do danas)",
             "confirmed": "Potvrđeni slučajevi (dnevno)",
-            "confirmedToDate": "Potvrđeni slučajevi (do danas)"
+            "confirmedToDate": "Potvrđeni slučajevi (do danas)",
+            "icuDischarged": "Otpušteni s odjela intenzivne njege",
+            "icuAdmitted": "Primljeni na odjel intenzivne njege",
+            "ventilatorDischarged": "Odspojeni s respiratora",
+            "ventilatorAdmitted": "Spojeni na respirator",
+            "hospitalDischarged": "Otpušteni iz bolnice",
+            "hospitalAdmitted": "Primljeni u bolnici",
+            "activeCases": "Aktivni slučajevi",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "testsPerformed": "Testiranja",
+            "showToDate": "Do danas",
+            "showToday": "Dnevni",
+            "showActive": "Aktivni",
+            "show7DaysAverage": "Sedmodnevni prosjek"
         },
         "spread": {
             "absoluteTitle": "Dnevni prirast potvrđenih slučajeva",
@@ -519,8 +534,8 @@
             "hospitalized": "Hospitalizirani"
         },
         "europe": {
-            "statusRed": "stroga 14-dnevna karantena",
-            "statusYellow": "14-dnevna karantena s iznimkama",
+            "statusRed": "stroga 10-dnevna karantena",
+            "statusOrange": "10-dnevna karantena s iznimkama",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
             "countryStatus": "Ograničenja",
@@ -553,6 +568,31 @@
             "legendTitle": "Aktivni slučajevi na milijun stanovnika",
             "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
             "title": "Države: Aktivni slučajevi na milijun stanovnika"
+        },
+        "dailyComparison": {
+            "positivePct": "Udio pozitivnih testova (%)",
+            "tests": "Provedeni testovi",
+            "active": "Aktivni slučajevi",
+            "new": "Potvrđeni slučajevi",
+            "title": "Usporedba prema danu u tjednu"
+        },
+        "sources": {
+            "totalImported": "Ukupno uvezenih slučajeva",
+            "totalConfirmed": "Ukupno potvrđenih slučajeva",
+            "sourceUnknown": "Nepoznat izvor",
+            "localSource": "Lokalni izvor",
+            "importRelatedCases": "U vezi s uvezenim slučajevima",
+            "importedCases": "Uvezeni slučajevi",
+            "bySourceCountryRelative": "Uvezeni slučajevi (relativno)",
+            "bySourceCountry": "Uvezeni slučajevi",
+            "bySourceRelative": "Izvori zaraze (relativno)",
+            "bySource": "Izvori zaraze",
+            "quarantineRelative": "Karantena (relativno)",
+            "quarantine": "Karantena",
+            "confirmedFromQuarantine": "Potvrđeni iz karantene",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "sentToQuarantine": "Poslani u karantenu",
+            "title": "Karantena i izvori zaraze"
         }
     },
     "shortMonth": {
@@ -691,8 +731,12 @@
             "title": "Maske"
         },
         "quarantine10days": {
-            "description": "Obavezna karantena smanjena s 10 dana",
+            "description": "Obavezna karantena smanjena na 10 dana",
             "title": "10 dana"
+        },
+        "testOrQuarantine": {
+            "description": "Negativni test ili 10-dnevna karantena pri ulazu iz zemalja s crvenog ili narančastog popisa",
+            "title": "Test"
         }
     },
     "pageNotFound": {
@@ -736,35 +780,44 @@
         "about": "O projektu",
         "faq": "FAQ",
         "sources": "Izvori",
-        "menu": "Izbornik"
+        "menu": "Izbornik",
+        "animation": "Animacija"
     },
     "phase": {
         "4": {
             "description": "nova metoda testiranja",
-            "title": "Faza 4"
+            "title": "faza<br>4"
         },
         "3": {
-            "title": "Faza 3",
+            "title": "faza<br>3",
             "description": "nova metoda testiranja"
         },
         "1": {
-            "title": "Faza 1"
+            "title": "faza<br>1"
         },
         "2": {
             "description": "epidemija, nova metoda testiranja",
-            "title": "Faza 2"
+            "title": "faza<br>2"
         },
         "7": {
-            "title": "Faza 7",
+            "title": "faza<br>7",
             "description": "kraj epidemije"
         },
         "6": {
             "description": "nova metoda testiranja, istraživanje",
-            "title": "Faza 6"
+            "title": "faza<br>6"
         },
         "5": {
-            "title": "Faza 5",
+            "title": "faza<br>5",
             "description": "nova metoda testiranja"
+        },
+        "9": {
+            "description": "prebaci na djelomično praćenje kontakata",
+            "title": "faza<br>9"
+        },
+        "8": {
+            "description": "nova metodologija ispitivanja – djeca",
+            "title": "faza<br>8"
         }
     },
     "embedMaker": {
@@ -836,7 +889,7 @@
         "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
-        "day": "{{ date, D. M. }}",
+        "day": "{{ date, %d. %m. }}",
         "tabByRegion": "Po regijama",
         "title": "Tablica",
         "tabByAgeFemale": "Po dobi – žene",
@@ -853,13 +906,23 @@
     },
     "infocard": {
         "active": "Aktivni slučajevi",
+        "incidence": "14-dnevni slučajevi",
         "deceasedToDate": "Potvrđeni smrtni slučajevi",
         "confirmedToDate": "Potvrđeni slučajevi",
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
-        "lastUpdated": "{{ date, %a, %e. %b }}"
+        "lastUpdated": "{{ date, %A, %e. %B }}",
+        "package3": "paket 3",
+        "package2": "paket 2",
+        "package1": "paket 1",
+        "redPhase": "Crvena faza",
+        "orangePhase": "Narančasta faza",
+        "per100k": "po 100 tisuća",
+        "nextCriteria": "<br>Kriteriji za paket {{ phaseNextNumber }} {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
+        "redPhaseGenitive": "crvene",
+        "orangePhaseGenitive": "narančaste"
     },
     "region": {
         "za": "Zasavlje",
@@ -886,7 +949,8 @@
         "date": "{{ date, %e. %b }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
-        "in_x_days_2": "za {{ count }} dana"
+        "in_x_days_2": "za {{ count }} dana",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",
@@ -996,27 +1060,27 @@
         "phase": {
             "6": {
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
-                "title": "Šesta faza"
+                "title": "faza<br>6"
             },
             "5": {
                 "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
-                "title": "Peta faza"
+                "title": "faza<br>5"
             },
             "4": {
                 "description": "Makedonija 3",
-                "title": "Četvrta faza"
+                "title": "faza<br>4"
             },
             "3": {
                 "description": "Debar 4",
-                "title": "Treća faza"
+                "title": "faza<br>3"
             },
             "2": {
                 "description": "Skoplje 4",
-                "title": "Druga faza"
+                "title": "faza<br>2"
             },
             "1": {
                 "description": "Debar 4, Skopje 3, Makedonija 2 ",
-                "title": "Prva faza"
+                "title": "faza<br>1"
             }
         }
     }

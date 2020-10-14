@@ -84,24 +84,24 @@ let calculateMovingAverages
     let averages: CountryDataDayEntry[] = Array.zeroCreate averagesSetLength
 
     let daysOfMovingAverageFloat = float daysOfMovingAverage
-    let mutable currentNewCasesSum = 0.
+    let mutable currentSum = 0.
 
     let movingAverageFunc index =
         let entry = countryEntries.[index]
 
-        currentNewCasesSum <- currentNewCasesSum + entry.Value
+        currentSum <- currentSum + entry.Value
 
         match index with
         | index when index >= daysOfMovingAverage - 1 ->
             let date = countryEntries.[index - cutOff].Date
-            let newCasesAvg = currentNewCasesSum / daysOfMovingAverageFloat
+            let average = currentSum / daysOfMovingAverageFloat
 
             averages.[index - (daysOfMovingAverage - 1)] <- {
-                Date = date; Value = newCasesAvg }
+                Date = date; Value = average }
 
             let entryToRemove =
                 countryEntries.[index - (daysOfMovingAverage - 1)]
-            currentNewCasesSum <- currentNewCasesSum - entryToRemove.Value
+            currentSum <- currentSum - entryToRemove.Value
 
         | _ -> ignore()
 

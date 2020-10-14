@@ -104,22 +104,21 @@ export function lastChange(data, field, cumulative, date) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.dayBefore.value === 0
-      ? (result.lastDay.percentDiff = 0)
-      : (result.lastDay.percentDiff =
-          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
-          10)
+    result.lastDay.percentDiff =
+      result.dayBefore.value === 0
+        ? 0
+        : Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
   }
 
   if (typeof result.day2Before.value === 'undefined') {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.day2Before.value === 0
-      ? (result.dayBefore.percentDiff = 0)
-      : (result.dayBefore.percentDiff =
-          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
-          10)
+    result.dayBefore.percentDiff =
+      result.day2Before.value === 0
+        ? 0
+        : Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+          10
   }
 
   return result
@@ -181,19 +180,12 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }, to) => {
-    let data, d
-    if (typeof to !== 'undefined') {
-      const tempDate = new Date(to)
-      const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
-      data = await ApiService.get(`${ApiEndpoint}/api/stats`, from, to)
-      d = to
-    } else {
-      const threeDaysAgo = new Date(
-        new Date().setDate(new Date().getDate() - 4)
-      )
-      data = await ApiService.get(`${ApiEndpoint}/api/stats`, threeDaysAgo)
-      d = exportTime(data.headers.timestamp)
-    }
+    const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
+    const data = await ApiService.get(`${ApiEndpoint}/api/stats`, from, to)
+    const d =
+      typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
+
     commit('setData', data.data)
     commit('setRegions', regions)
     commit('setExportTime', d)
