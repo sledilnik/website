@@ -464,20 +464,20 @@
             "warningCurrentDay": "**Warning: Data for the current day is not necessarily complete.**",
             "footer": "The analysis is the result of the adaptation of the German [Corona Tracker Tracker](https://ctt.pfstr.de/) project to Slovenian #OstaniZdrav. [Source code of the project](https://github.com/janpf/ctt) is using [Diagnosis Keys analysis tools](https://github.com/mh-/diagnosis-keys).",
             "valid": {
-                "title": "Number of keys valid per day",
+                "title": "Keys valid per day",
                 "date": "Date",
                 "perDay": "Keys valid per day",
                 "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see \n the chart  [Number of keys published per day](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future. "
             },
             "published": {
-                "title": "Number of keys published per day",
+                "title": "Keys published per day",
                 "date": "Date",
                 "perDay": "Published keys per day",
                 "runningTotal": "Running total of keys published",
                 "description": "The chart shows the number of published daily keys (blue bars) and the running total of keys published to date (red line). The average user publishes between 10 and 12 daily keys (see chart [Number of keys published per user per day](#usercount-chart)) and we can use this information to estimate the number of users who have entered their confirmation code after testing positive."
             },
             "validByRisk": {
-                "title": "Number of keys valid per day by risk level (interactive)",
+                "title": "Keys valid per day by risk level",
                 "date": "Date",
                 "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
                 "valid": "Number of keys valid on given day",
@@ -485,7 +485,7 @@
                 "description": "The chart shows the transmission risk levels of the keys that are valid for each day—as opposed to being published on that day (see the chart [Number of keys published per day by risk level](#publishedByRisk-chart)). When a positive test result is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future. "
             },
             "publishedByRisk": {
-                "title": "Number of keys published per day by risk level (interactive)",
+                "title": "Keys published per day by risk level",
                 "date": "Date",
                 "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
                 "published": "Number of keys published on given day",
@@ -493,14 +493,14 @@
                 "description": "Every published daily key has an associated transmission risk level. The chart shows their numbers for each day. The darker the colour, the higher the risk level. If a user had the app installed and working for the whole period, the keys will have the following sequence of risk levels: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. It is therefore expected that keys with a transmission risk of 1 are most common, and the second most common transmission risk is 8."
             },
             "usercount": {
-                "title": "Estimate of number of users publishing keys per day",
+                "title": "Estimate of users publishing keys per day",
                 "date": "Date",
                 "users": "Users publishing keys per day",
                 "runningTotal": "Running total of users who published keys",
                 "description": "The chart shows our estimate of the number of users who entered their positive test confirmation code in the app (blue bars) and the running total of users who have done so to date (red line). Only the number of published daily keys is known for certain (see chart  [Number of keys published per day](#published-chart)), but because of the typical sequence of associated transmission risk levels, we can make a pretty good guess at how many users uploaded their keys on that day. "
             },
             "userPublishedByCount": {
-                "title": "Number of keys published per user per day (interactive)",
+                "title": "Keys published per user per day",
                 "date": "Date",
                 "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
