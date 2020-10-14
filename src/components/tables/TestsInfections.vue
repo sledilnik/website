@@ -1,20 +1,23 @@
 <template>
-  <b-table
-    responsive
-    bordered
-    outlined
-    hover
-    :stickyColumn="' '"
-    :sort-desc="true"
-    :sticky-header="tableHeight"
-    :items="items"
-    :fields="fields"
-  ></b-table>
+  <div>
+    <b-table
+      responsive
+      bordered
+      outlined
+      hover
+      :stickyColumn="' '"
+      :sort-desc="true"
+      :sticky-header="tableHeight"
+      :items="items"
+      :fields="fields"
+    ></b-table>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import _ from "lodash";
+
 export default {
   props: ["tableHeight"],
   data() {
@@ -39,7 +42,8 @@ export default {
         "state.in_hospital.todate",
         "state.out_of_hospital.todate",
         "state.deceased.todate",
-      ]
+      ],
+      loaded: false
     };
   },
   watch: {
@@ -55,10 +59,8 @@ export default {
       const { items, fields } = this.filterTableData(this.dimensions);
       this.items = items;
       this.fields = fields;
+      this.loaded = true;
     }
-  },
-  mounted(){
-    this.refreshData()
   }
 };
 </script>

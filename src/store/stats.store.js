@@ -104,22 +104,21 @@ export function lastChange(data, field, cumulative, date) {
     result.dayBefore = undefined
   } else {
     result.lastDay.diff = result.lastDay.value - result.dayBefore.value
-    result.dayBefore.value === 0
-      ? (result.lastDay.percentDiff = 0)
-      : (result.lastDay.percentDiff =
-          Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) /
-          10)
+    result.lastDay.percentDiff =
+      result.dayBefore.value === 0
+        ? 0
+        : Math.round((result.lastDay.diff / result.dayBefore.value) * 1000) / 10
   }
 
   if (typeof result.day2Before.value === 'undefined') {
     result.day2Before = undefined
   } else {
     result.dayBefore.diff = result.dayBefore.value - result.day2Before.value
-    result.day2Before.value === 0
-      ? (result.dayBefore.percentDiff = 0)
-      : (result.dayBefore.percentDiff =
-          Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
-          10)
+    result.dayBefore.percentDiff =
+      result.day2Before.value === 0
+        ? 0
+        : Math.round((result.dayBefore.diff / result.day2Before.value) * 1000) /
+          10
   }
 
   return result

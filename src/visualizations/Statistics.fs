@@ -53,7 +53,8 @@ let movingAverageCentered: MovingAverageFunc<'TKey, 'TValue> =
     | 1 ->
         let centerIndex = (values |> Seq.length) / 2
         let targetKey = values.[centerIndex] |> keyFunc
-        let averageValue = values |> Seq.averageBy valueFunc
+        let averageValue =
+            values |> Seq.averageBy valueFunc
         (targetKey, averageValue)
     | _ -> ArgumentException "values array length needs to be an odd number"
            |> raise
@@ -98,6 +99,12 @@ let movingAverages<'T, 'TKey>
     series
     |> Array.windowed daysOfMovingAverage
     |> Array.map (averageFunc keyFunc valueFunc)
+
+let roundKeyValueFloatArray<'TKey> howManyDecimals (array: ('TKey * float)[])
+    : ('TKey * float)[] =
+    array
+    |> Array.map (fun (key, value) ->
+        (key, value |> Utils.roundDecimals howManyDecimals))
 
 let calculateWindowedSumInt windowSize (data: int[]): int[] =
     let len = data |> Array.length

@@ -19,6 +19,7 @@
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
+          name="cases.confirmedToDate"
           series-type="state"
         />
 <!--  
@@ -34,6 +35,13 @@
           field="cases.active"
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
+          name="cases.active"
+          series-type="state"
+        />
+        <Info-card
+          :title="$t('infocard.incidence')"
+          field="cases.active"
+          name="incidence"
           series-type="state"
         />
         <Info-card
@@ -42,6 +50,7 @@
           total-in="total.inHospital.in"
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
+          name="statePerTreatment.inHospital"
           series-type="state"
         />
         <Info-card
@@ -50,14 +59,21 @@
           total-in="total.icu.in"
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
+          name="statePerTreatment.inICU"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
+          name="statePerTreatment.deceasedToDate"
           series-type="state"
         />
       </div>
+      <b-row cols="12">
+        <b-col>
+          <Youtube id="EXbYuxvcnT4"></Youtube>
+        </b-col>
+      </b-row>
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
@@ -69,11 +85,10 @@
 
 <script>
 import { mapState } from 'vuex'
-
 import InfoCard from 'components/cards/InfoCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
-
+import Youtube from 'components/Youtube'
 import { Visualizations } from 'visualizations/App.fsproj'
 
 export default {
@@ -82,6 +97,7 @@ export default {
     InfoCard,
     TimeStamp,
     Notice,
+    Youtube
   },
   data() {
     return {
@@ -137,8 +153,9 @@ export default {
   margin: 0px auto 58px
 
   @media only screen and (min-width: 768px)
+    grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 0px 15px 58px
+    margin: 0px 15px 88px
 
 $loader-width: 50px
 

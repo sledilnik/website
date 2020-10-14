@@ -435,7 +435,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (Html.text (I18N.t "charts.common.view") :: renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
+        prop.children (renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
     ]
 
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =

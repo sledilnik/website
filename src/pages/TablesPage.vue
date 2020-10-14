@@ -17,6 +17,7 @@
             <age-groups-females-table :table-height="tableHeight"></age-groups-females-table>
           </b-tab>
         </b-tabs>
+        <Loader v-if="!loaded" />
         <div class="footnote">
           {{ $t("tables.source") }}:
           <router-link to="datasources">{{ $t("tables.sourceLink") }}</router-link>
@@ -31,25 +32,33 @@ import TestsInfectionsTable from '../components/tables/TestsInfections';
 import RegionalOverviewTable from '../components/tables/RegionalOverview';
 import AgeGroupsMalesTable from '../components/tables/AgeGroupsMales';
 import AgeGroupsFemalesTable from '../components/tables/AgeGroupsFemales';
+import Loader from '../components/Loader';
 
-import { mapGetters } from 'vuex';
 export default {
   components: {
     TestsInfectionsTable,
     RegionalOverviewTable,
     AgeGroupsMalesTable,
     AgeGroupsFemalesTable,
+    Loader
   },
   data: function() {
     return {
       tableHeight: '100%',
+      loaded: false
     };
   },
   created() {
-    this.$store.dispatch("tableData/fetchData");
+    this.dispatch()
   },
   mounted() {
     this.$store.dispatch("tableData/refreshDataEvery", 300);
+  },
+  methods: {
+    async dispatch() {
+      await this.$store.dispatch("tableData/fetchData");
+      this.loaded = true;
+    }
   }
 };
 </script>
@@ -76,6 +85,9 @@ $table-border: rgb(222,222 ,222)
 .table-wrapper
   background: #fff
   padding: 30px 0 15px 15px
+  min-height: calc(100vh - 300px)
+  display: flex
+  flex-direction: column
 
   @include mobile-break
     box-shadow: $element-box-shadow
@@ -135,14 +147,20 @@ $table-border: rgb(222,222 ,222)
     display: inline-block
 
     &.active
-      color: rgba(0, 0, 0)
+      color: black
       box-shadow: inset 0 -10px 0 $yellow
 
     &:hover
-      color: rgba(0, 0, 0)
+      color: black
 
     &:focus
       outline: none
+
+.tabs
+  margin-bottom: 0px
+
+  @include mobile-break
+    margin-bottom: 16px
 
 .tabs *:focus
   outline: none
@@ -226,10 +244,7 @@ thead .table-b-table-default
 
 .footnote
   font-size: 13px
-  margin-top: 15px
-
-  @include mobile-break
-    margin-top: 32px
+  margin-top: auto
 
 //alternating color
 .table-wrapper

@@ -1,0 +1,40 @@
+{
+	"name": "F# (.NET Core)",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			// Update 'VARIANT' to pick a .NET Core version: 2.1, 3.1
+			"VARIANT": "3.1",
+			// Options
+			"INSTALL_NODE": "true",
+			"NODE_VERSION": "lts/*",
+			"INSTALL_AZURE_CLI": "false",
+			"UPGRADE_PACKAGES": "false"
+		}
+	},
+
+	// Set container specific defaults for F# in .NET Core 2.1+
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"FSharp.fsacRuntime": "netcore",
+		"FSharp.useSdkScripts": true
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"Ionide.Ionide-fsharp",
+		"ms-dotnettools.csharp",
+		"octref.vetur",
+		"editorconfig.editorconfig",
+		"syler.sass-indented"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "dotnet restore && yarn install",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

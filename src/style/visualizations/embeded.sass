@@ -8,26 +8,27 @@
       margin-bottom: 0
       margin-top: 0
 
-    .brand-link
-      display: inline-block
-      padding: 7px 1px 7px 36px
-      background: $yellow
-      color: #000
-      font-size: 14px
-      font-weight: bold
-      letter-spacing: 1px
-      font-weight: 600
-      background-image: url(../assets/logo.png)
-      background-repeat: no-repeat
-      background-size: 30px 30px
-      background-position: 4px 50%
-      border-radius: 6px
-      text-indent: -9999px
-      line-height: 18px
+  .brand-link
+    @media only screen and (min-width: 768px)
+      text-indent: 0px
+      padding: 7px 12px 7px 36px
 
-      @media only screen and (min-width: 768px)
-        text-indent: 0px
-        padding: 7px 12px 7px 36px
+.brand-link
+  display: inline-block
+  padding: 7px 1px 7px 36px
+  background: $yellow
+  color: #000
+  font-size: 14px
+  font-weight: bold
+  letter-spacing: 1px
+  font-weight: 600
+  background-image: url(../assets/logo.png)
+  background-repeat: no-repeat
+  background-size: 30px 30px
+  background-position: 4px 50%
+  border-radius: 6px
+  text-indent: -9999px
+  line-height: 18px
 
-      &:hover
-        text-decoration: none
+  &:hover
+    text-decoration: none

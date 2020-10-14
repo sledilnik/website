@@ -124,6 +124,8 @@ let addContainmentMeasuresFlags
         13, 9, "#ebfaeb", "quarantine10days"
         19, 9, "#FFe6e6", "masks"
         28, 9, "#FFe6e6", "testOrQuarantine"
+        7, 10, "#FFe6e6", "cnk"
+        9, 10, "#FFe6e6", "gatherings10max"
     |]
     {|
         ``type`` = "flags"
@@ -183,6 +185,19 @@ let parseDate (value: String) =
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
 
+let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
+           pojo {|
+                enabled = true
+                allButtonsEnabled = true
+                selected = selectedRangeSelectionButtonIndex
+                inputDateFormat = I18N.t "charts.common.numDateFormat"
+                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputDateParser = parseDate
+                x = 0
+                inputBoxBorderColor = "#ced4da"
+                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                buttons = buttons
+            |}
 let basicChartOptions
     (scaleType:ScaleType)
     (className:string)
@@ -215,6 +230,8 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -248,9 +265,19 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.6.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,5,15);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,9,10);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.7.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,9,10);
+                       ``to``=jsTime <| DateTime(2020,10,9);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.8.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,9);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.9.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
@@ -300,20 +327,7 @@ let basicChartOptions
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
-
-        rangeSelector = pojo
-            {|
-                enabled = true
-                allButtonsEnabled = true
-                selected = selectedRangeSelectionButtonIndex
-                inputDateFormat = I18N.t "charts.common.numDateFormat"
-                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
-                inputDateParser = parseDate
-                x = 0
-                inputBoxBorderColor = "#ced4da"
-                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
-                buttons =
-                    [|
+        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
                         {|
                             ``type`` = "month"
                             count = 2
@@ -333,7 +347,6 @@ let basicChartOptions
                             events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
                         |}
                     |]
-            |}
 
         responsive = pojo
             {|

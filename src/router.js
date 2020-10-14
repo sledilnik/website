@@ -6,6 +6,7 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
+import OstaniZdravPage from './pages/OstaniZdravPage.vue'
 
 import * as aboutMdSl from './content/sl/about.md'
 import * as aboutMdEn from './content/en/about.md'
@@ -185,6 +186,10 @@ const routes = [
     redirect: `/${i18next.language}/datasources`,
   },
   {
+    path: '/ostanizdrav',
+    redirect: `/${i18next.language}/ostanizdrav`,
+  },
+  {
     path: '/',
     beforeEnter: (to, from, next) => {
       next(i18next.language)
@@ -216,6 +221,10 @@ const routes = [
       {
         path: 'stats',
         component: StatsPage,
+      },
+      {
+        path: 'ostanizdrav',
+        component: OstaniZdravPage,
       },
       {
         path: 'world',
