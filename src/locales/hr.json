@@ -357,14 +357,14 @@
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
-            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
-            "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -565,9 +565,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteriji za crvenu listu",
-            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
-            "title": "Države: Aktivni slučajevi na milijun stanovnika"
+            "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "title": "Države: Aktivni slučajevi na 100.000 stanovnika"
         },
         "dailyComparison": {
             "positivePct": "Udio pozitivnih testova (%)",

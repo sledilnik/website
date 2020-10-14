@@ -866,20 +866,20 @@
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
         "countriesActiveCasesPer1M": {
-            "title": "Države: aktivni primeri na milijon prebivalcev",
-            "yAxisTitle": "Št. aktivnih primerov na milijon prebivalcev",
-            "legendTitle": "Aktivni primeri na milijon prebivalcev",
+            "title": "Države: aktivni primeri na 100.000 prebivalcev",
+            "yAxisTitle": "Št. aktivnih primerov na 100.000 prebivalcev",
+            "legendTitle": "Aktivni primeri na 100.000 prebivalcev",
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na milijon prebivalcev",
-            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
-            "legendTitle": "Novi primeri na milijon prebivalcev"
+            "title": "Države: novi primeri na 100.000 prebivalcev",
+            "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
+            "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli (skupaj) na milijon prebivalcev",
-            "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
-            "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
+            "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
+            "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
+            "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },
         "ostanizdrav": {
             "title": "Aplikacija #OstaniZdrav",

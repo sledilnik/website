@@ -555,14 +555,14 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "yAxisTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
+            "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "title": "Länder: Neue tägliche Fälle pro 1 Million Menschen"
+            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
@@ -582,9 +582,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "Kriterien für die rote Liste",
-            "legendTitle": "Aktive Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Aktive Fälle pro 1 Million Menschen",
-            "title": "Länder: Aktive Fälle pro 1 Million Menschen"
+            "legendTitle": "Aktive Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
+            "title": "Länder: Aktive Fälle pro 100.000 Menschen"
         },
         "dailyComparison": {
             "positivePct": "Anteil der positiven Tests (%)",
