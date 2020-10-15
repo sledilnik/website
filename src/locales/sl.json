@@ -793,6 +793,7 @@
         "map": {
             "title": "Zemljevid po občinah",
             "confirmedCases": "Potrjeni primeri",
+            "per100k": "na 100.000 prebivalcev",
             "deceased": "Umrli",
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",

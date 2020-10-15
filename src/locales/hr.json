@@ -346,6 +346,7 @@
             "mortalityOfConfirmedCases": "Smrtnost u potvrđenim slučajevima",
             "title": "Karta općina",
             "confirmedCases": "Potvrđeni slučajevi",
+            "per100k": "po 100 tisuća",
             "last_x_days_0": "{{ count }} dan",
             "last_x_days_1": "{{ count }} dana",
             "last_x_days_2": "{{ count }} dana",

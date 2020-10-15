@@ -342,7 +342,8 @@
             "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
             "deceased": "Deaths",
-            "confirmedCases": "Confirmed Cases"
+            "confirmedCases": "Confirmed Cases",
+            "per100k": "per 100k"        
         },
         "rmap": {
             "title": "Region Map"
