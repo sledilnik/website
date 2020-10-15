@@ -328,7 +328,8 @@
             "title": "Cases by Region",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
-            "deceased": "Deaths"
+            "deceased": "Deaths",
+            "red": "criteria for red list"
         },
         "map": {
             "title": "Municipality Map",
