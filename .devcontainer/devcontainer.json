@@ -24,7 +24,9 @@
 	"extensions": [
 		"Ionide.Ionide-fsharp",
 		"ms-dotnettools.csharp",
-		"octref.vetur"
+		"octref.vetur",
+		"editorconfig.editorconfig",
+		"syler.sass-indented"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

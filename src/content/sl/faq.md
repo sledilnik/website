@@ -339,6 +339,21 @@ Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejav
 </details>
 
 <details>
+  <summary id=sources-chart>Kaj kaže graf "Karantena in viri okužb"?</summary>
+
+[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* (spodaj) prikazuje število oseb, poslanih v karanteno, potrjeno okužene v določenem tednu in delež potrjeno okuženih, ki so bili že v karanteni.
+
+Pozor: Prikaz podatkov o karanteni je narejen na podlagi virov NIJZ. Ker NIJZ podatkov ne objavlja redno oz. lahko prihaja do njihove zakasnitve, za njihovo točnost in popolnost ne odgovarjamo. 
+
+Če spodaj preklopimo na prikaz *Viri okužb*, so prikazani potrjeno okuženi v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznani vir. Povečanje neznanega vira je kazalnik, da epidemiološko sledenje ni uspešno pri odkrivanju vira.
+Prikaz *Uvoženi primeri* po tednih prikaže države, iz katerih so bili uvoženi posamezni primeri, in število teh primerov.
+Vsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) – tako lahko primerjate gibanje kategorij po posameznih tednih.
+
+</details>
+
+<!---
+
+<details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
 [Graf](/sl/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani v odstotkih (%). 
@@ -353,6 +368,8 @@ Na grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejav
 Graf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z drugimi državami (glede na njihova poročila).
 
 </details>
+-->
+
 
 <details>
   <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
@@ -460,7 +477,10 @@ Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogrožen
 <details>
   <summary id=age-groups-chart>Kaj kaže graf "Po starostnih skupinah"?</summary>
 
-[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjeno okuženih in smrtnih primerov zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjeno okuženih* se bo prikazal delež potrjeno okuženega prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. Z izbiro *Umrli glede na št. okuženih* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjeno okuženih.
+[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjeno okuženih in smrtnih primerov zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjeno okuženih* se bo prikazal delež potrjeno okuženega prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. 
+<!---
+Z izbiro *Umrli glede na št. okuženih* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjeno okuženih.
+-->
 
 Demografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila in zakaj je nesorazmerno vplivala na določene starostne skupine. Po zdaj znanih podatkih naj bi bila bolezen COVID-19 bolj nevarna za starejše in tiste s pridruženimi boleznimi, po nekaterih podatkih naj bi bili bolj izpostavljeni moški. Da pa bi lahko razumeli vse dejavnike, bi morali pridobiti več podatkov: kakšne so bile pridružene bolezni, socialno ekonomsko stanje obolelih, geografsko območje ipd.  
 *Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih.*

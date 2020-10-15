@@ -13,6 +13,7 @@
         <Compile Include="Statistics.fs" />
         <Compile Include="data/Loader.fs" />
         <Compile Include="data/Stats.fs" />
+        <Compile Include="data/WeeklyStats.fs" />
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
         <Compile Include="data/HCenters.fs" />
@@ -33,6 +34,7 @@
         <Compile Include="MapChart.fs" />
         <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
+        <Compile Include="SourcesChart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
         <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />

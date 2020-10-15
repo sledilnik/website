@@ -7,6 +7,7 @@
         "menu": "Menu",
         "home": "Home",
         "world": "World",
+        "ostanizdrav": "#OstaniZdrav",
         "tables": "Table",
         "models": "Models",
         "animation": "Animation",
@@ -114,6 +115,15 @@
         "5": "Friday",
         "6": "Saturday"
     },
+    "weekdayShort": {
+        "0": "Su",
+        "1": "Mo",
+        "2": "Tu",
+        "3": "We",
+        "4": "Th",
+        "5": "Fr",
+        "6": "Sa"
+    },
     "phase": {
         "1": {
             "title": "phase<br>1"
@@ -150,7 +160,6 @@
             "title": "phase<br>9",
             "description": "switch to partial contact tracing"
         }
-
     },
     "charts": {
         "common": {
@@ -185,7 +194,8 @@
             "numDateFormat": "%m/%d/%Y",
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
-            "shortDateFormat": "%b %e"
+            "shortDateFormat": "%b %e",
+            "weekYearDateFormat": "Week %W of %Y"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -447,6 +457,73 @@
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
             "title": "Hospital capacities"
+        },
+        "ostanizdrav": {
+            "title": "The #OstaniZdrav Exposure Notification App",
+            "description": "The [mobile app #OstaniZdrav](https://www.gov.si/en/ostanizdrav) reduces the spread of infections with the the SARS-CoV-2 coronavirus by notifying the user that they have been in contact with a person with a confirmed infection. **One of the key attributes of the app is protecting the users’ anonymity and the decentralised processing of their data.** This means no one—not even the MPA and NIPH—can access data on individual users’ contacts or information on whether a user has a confirmed infection.\n\nBecause of these constraints [our analysis of the app's performance](#published-chart) is based solely on the data that can be accessed by the apps themselves. In order to interpret the charts below it is important to understand how the app works, and the meaning of terms such as daily keys, transmission risk levels, and the difference between published and valid keys.\n\nEvery day the app is installed on your phone it generates a random, unique and anonymous key. This daily key is used by the app to broadcast identifying codes to other phones in the vicinity that have the app installed . At the same time the app is receiving and saving the identifying codes of other nearby phones. When a user tests positive for the SARS-CoV-2 virus they enter the teleTAN confirmation code into the app. This action uploads their daily keys for the last 14 days to the server, as this is the period when contacts are most risky.\n\nEvery day the app downloads the newly published daily keys from the server and checks if any of them correspond to the saved identifying codes of the phones you were exposed to. Additionally it knows how long and how close these contacts were, as well as the transmission risk levels for each day. The 14 daily keys have different transmission risk levels relative to the day the confirmation code was entered: they risk is lowest 14 days ago and then increases, with the highest levels reached on days two, three, and four before the positive test was entered. The app then uses these three factors to calculate if the exposure risk was high enough to notify you. \n\nThe transmission risk levels range from 1 (lowest) to 8 (highest). If the user had the app installed and working this whole period, the keys are attached the following sequence of risk levels: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. The server immediately publishes the first 13 keys, while the last one, which is valid for today, is published the next day to ensure greater anonymity. If the user didn't have the app installed from the beginning of this period, or turned it off in between, the sequence will have missing keys. On average sequences have around three missing keys. \n\n**In order to ensure the users' anonymity it is impossible to ascertain which keys belong to a single user. But because we know the typical sequence of the associated transmission risk levels, we can reconstruct sequences which correspond to the number of users with a high degree of accuracy. We cannot be sure the number is exactly correct, our estimate is just a very educated guess.**\n\nEvery day the server publishes a number of daily keys, and their associated transmission risk levels, which are valid for the previous 13 days. This is the data that the apps have access to, and this is also the data that is used in our analysis here.\n\n**Warning: Data for the current day is not necessarily complete.**",
+            "footer": "The analysis is the result of the adaptation of the German [Corona Tracker Tracker](https://ctt.pfstr.de/) project to Slovenian #OstaniZdrav. [Source code of the project](https://github.com/janpf/ctt) is using [Diagnosis Keys analysis tools](https://github.com/mh-/diagnosis-keys).",
+            "valid": {
+                "title": "Keys valid per day",
+                "date": "Date",
+                "perDay": "Keys valid per day",
+                "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see \n the chart [$t(charts.ostanizdrav.published.title)](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
+            },
+            "published": {
+                "title": "Daily keys published per day",
+                "date": "Date",
+                "perDay": "Published keys per day",
+                "runningTotal": "Running total of keys published",
+                "description": "The chart shows the number of published daily keys (blue bars) and the running total of keys published to date (red line). The average user publishes between 10 and 12 daily keys (see chart [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)) and we can use this information to estimate the number of users who have entered their confirmation code after testing positive."
+            },
+            "validByRisk": {
+                "title": "Keys valid per day by risk level",
+                "date": "Date",
+                "tooltip": "datum.valid + ' keys with risk level ' +datum.risk",
+                "valid": "Number of keys valid on given day",
+                "risk": "Risk",
+                "description": "The chart shows the transmission risk levels of the keys that are valid for each day—as opposed to being published on that day (see the chart [$t(charts.ostanizdrav.publishedByRisk.title)](#publishedByRisk-chart)). When a positive test result is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
+            },
+            "publishedByRisk": {
+                "title": "Keys published per day by risk level",
+                "date": "Date",
+                "tooltip": "datum.published + ' keys with risk level ' + datum.risk",
+                "published": "Number of keys published on given day",
+                "risk": "Risk",
+                "description": "Every published daily key has an associated transmission risk level. The chart shows their numbers for each day. The darker the colour, the higher the risk level. If a user had the app installed and working for the whole period, the keys will have the following sequence of risk levels: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. It is therefore expected that keys with a transmission risk of 1 are most common, and the second most common transmission risk is 8."
+            },
+            "usercount": {
+                "title": "Estimate of users publishing keys per day",
+                "date": "Date",
+                "users": "Users publishing keys per day",
+                "runningTotal": "Running total of users who published keys",
+                "description": "The chart shows our estimate of the number of users who entered their positive test confirmation code in the app (blue bars) and the running total of users who have done so to date (red line). Only the number of published daily keys is known for certain (see chart [$t(charts.ostanizdrav.published.title)](#published-chart)), but because of the typical sequence of associated transmission risk levels, we can make a pretty good guess at how many users uploaded their keys on that day."
+            },
+            "userPublishedByCount": {
+                "title": "Keys published per user per day",
+                "date": "Date",
+                "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
+                "count": "(average) key count per user on given day",
+                "users": "Users",
+                "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower."
+            }
+        },
+        "sources": {
+            "title": "Qurantine and Sources of Infection",
+            "sentToQuarantine": "Sent to Quarantine",
+            "confirmedCases": "Confirmed Cases",
+            "confirmedFromQuarantine": "Confirmed from Quarantine",
+            "quarantine": "Quarantine",
+            "quarantineRelative": "Quarantine (Relative)",
+            "bySource": "Sources of Infection",
+            "bySourceRelative": "Sources of Infection (Relative)",
+            "bySourceCountry": "Imported Cases",
+            "bySourceCountryRelative": "Imported Cases (Relative)",
+            "importedCases": "Imported Cases",
+            "importRelatedCases": "Related to Imported Cases",
+            "localSource": "Local Source",
+            "sourceUnknown": "Unknown Source",
+            "totalConfirmed": "Confirmed Cases Total",
+            "totalImported": "Imported Cases Total"
         }
     },
     "footer": {
@@ -625,7 +702,7 @@
         },
         "quarantine10days": {
             "title": "10 days",
-            "description": "Mandatory quarantine reduced from 10 days"
+            "description": "Mandatory quarantine reduced to 10 days"
         },
         "masks": {
             "title": "Masks",
@@ -642,7 +719,8 @@
         "x_days_ago": "{{ count }} day ago",
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
-        "longerDate": "{{ date, %A, %B %e, %Y }}"
+        "longerDate": "{{ date, %A, %B %e, %Y }}",
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",

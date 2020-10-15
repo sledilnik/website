@@ -180,6 +180,19 @@ let parseDate (value: String) =
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
 
+let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
+           pojo {|
+                enabled = true
+                allButtonsEnabled = true
+                selected = selectedRangeSelectionButtonIndex
+                inputDateFormat = I18N.t "charts.common.numDateFormat"
+                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                inputDateParser = parseDate
+                x = 0
+                inputBoxBorderColor = "#ced4da"
+                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                buttons = buttons
+            |}
 let basicChartOptions
     (scaleType:ScaleType)
     (className:string)
@@ -309,20 +322,7 @@ let basicChartOptions
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
-
-        rangeSelector = pojo
-            {|
-                enabled = true
-                allButtonsEnabled = true
-                selected = selectedRangeSelectionButtonIndex
-                inputDateFormat = I18N.t "charts.common.numDateFormat"
-                inputEditDateFormat = I18N.t "charts.common.numDateFormat"
-                inputDateParser = parseDate
-                x = 0
-                inputBoxBorderColor = "#ced4da"
-                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
-                buttons =
-                    [|
+        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
                         {|
                             ``type`` = "month"
                             count = 2
@@ -342,7 +342,6 @@ let basicChartOptions
                             events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
                         |}
                     |]
-            |}
 
         responsive = pojo
             {|

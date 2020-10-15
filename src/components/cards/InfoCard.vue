@@ -15,57 +15,59 @@
           </div>
         </a>
       </div>
-      <div class="card-number">
-        <span v-if="showIncidence">{{
-          Math.round(renderValues.lastDay.value / incidence)
-        }}</span>
-        <span v-else>{{ renderValues.lastDay.value }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
-          {{ renderValues.lastDay.percentDiff | prefixDiff }}%
-        </div>
-      </div>
-      <div :id="name" class="card-diff">
-        <div v-if="showIncidence">
-          <span class="card-note">{{ $t('infocard.per100k') }} </span>
-        </div>
-        <div v-if="showAbsolute">
-          <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-          <span :class="diffClass"
-            >{{ Math.abs(renderValues.lastDay.diff) }}
-          </span>
-        </div>
-        <div v-if="showIn" class="card-diff-item">
-          <div class="trend-icon in bad up"></div>
-          <span v-if="field === 'cases.active'" class="in bad">{{
-            renderActiveValues(fieldNewCases).lastDay.value
+      <div class="data-wrapper">
+        <div class="card-number">
+          <span v-if="showIncidence">{{
+            Math.round(renderValues.lastDay.value / incidence)
           }}</span>
-          <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
+          <span v-else>{{ renderValues.lastDay.value }}</span>
+          <div class="card-percentage-diff" :class="diffClass">
+            {{ renderValues.lastDay.percentDiff | prefixDiff }}%
+          </div>
         </div>
-        <div v-if="showOut" class="card-diff-item">
-          <div class="trend-icon out good down"></div>
-          <span v-if="field === 'cases.active'" class="out good">{{
-            renderActiveValues(fieldNewCases).lastDay.value -
-              renderActiveValues(field).lastDay.diff -
+        <div :id="name" class="card-diff">
+          <div v-if="showIncidence">
+            <span class="card-note">{{ $t('infocard.per100k') }} </span>
+          </div>
+          <div v-if="showAbsolute">
+            <div class="trend-icon" :class="[diffClass, iconClass]"></div>
+            <span :class="diffClass"
+              >{{ Math.abs(renderValues.lastDay.diff) }}
+            </span>
+          </div>
+          <div v-if="showIn" class="card-diff-item">
+            <div class="trend-icon in bad up"></div>
+            <span v-if="field === 'cases.active'" class="in bad">{{
+              renderActiveValues(fieldNewCases).lastDay.value
+            }}</span>
+            <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
+          </div>
+          <div v-if="showOut" class="card-diff-item">
+            <div class="trend-icon out good down"></div>
+            <span v-if="field === 'cases.active'" class="out good">{{
+              renderActiveValues(fieldNewCases).lastDay.value -
+                renderActiveValues(field).lastDay.diff -
+                renderActiveValues(fieldDeceased).lastDay.value
+            }}</span>
+            <span v-else class="out good">{{ renderTotalValues(totalOut) }}</span>
+          </div>
+          <div v-if="showDeceased" class="card-diff-item">
+            <div class="trend-icon deceased"></div>
+            <span v-if="field === 'cases.active'" class="deceased">{{
               renderActiveValues(fieldDeceased).lastDay.value
-          }}</span>
-          <span v-else class="out good">{{ renderTotalValues(totalOut) }}</span>
+            }}</span>
+            <span v-else class="deceased"
+              >{{ renderTotalValues(totalDeceased) }}
+            </span>
+          </div>
         </div>
-        <div v-if="showDeceased" class="card-diff-item">
-          <div class="trend-icon deceased"></div>
-          <span v-if="field === 'cases.active'" class="deceased">{{
-            renderActiveValues(fieldDeceased).lastDay.value
-          }}</span>
-          <span v-else class="deceased"
-            >{{ renderTotalValues(totalDeceased) }}
-          </span>
+        <div class="data-time">
+          {{
+            $t('infocard.lastUpdated', {
+              date: new Date(renderValues.lastDay.displayDate),
+            })
+          }}
         </div>
-      </div>
-      <div class="data-time">
-        {{
-          $t('infocard.lastUpdated', {
-            date: new Date(renderValues.lastDay.displayDate),
-          })
-        }}
       </div>
     </div>
     <div class="hp-card" v-else>
@@ -103,7 +105,7 @@ export default {
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
         case 'SVN': {
-          return 20.89310
+          return 20.95861
           break
         }
         case 'MKD': {
@@ -133,16 +135,16 @@ export default {
         this.renderValues.lastDay.value / this.incidence
       )
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 140) return 'orange'
-        if (incidence > 140) return 'red'
+        if (incidence >= 40 && incidence < 140) return 'orange'
+        if (incidence >= 140) return 'red'
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 250) return 'orange'
-        if (value > 250 && value > 360) return 'red'
+        if (value >= 60 && value < 250) return 'orange'
+        if (value >= 250) return 'red'
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 50) return 'orange'
-        if (value > 50) return 'red'
+        if (value >= 15 && value < 50) return 'orange'
+        if (value >= 50) return 'red'
       }
       return 'unknown'
     },
@@ -161,21 +163,21 @@ export default {
       let phaseNextCriteria = 140
       let string1 = ''
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 80) {
+        if (incidence >= 40 && incidence < 80) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 80
         }
-        if (incidence > 80 && incidence <= 120) {
+        if (incidence >= 80 && incidence < 120) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 120
         }
-        if (incidence > 120 && incidence <= 140) {
+        if (incidence >= 120 && incidence < 140) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -183,7 +185,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 140
         }
-        if (incidence > 140 && incidence <= 170) {
+        if (incidence >= 140 && incidence < 170) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -191,28 +193,28 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 170
         }
-        if (incidence > 170) {
+        if (incidence >= 170) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
         }
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 100) {
+        if (value >= 60 && value < 100) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 100
         }
-        if (value > 100 && value <= 180) {
+        if (value >= 100 && value < 180) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 180
         }
-        if (value > 180 && value <= 250) {
+        if (value >= 180 && value < 250) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -220,7 +222,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 250
         }
-        if (value > 250 && value <= 300) {
+        if (value >= 250 && value < 300) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -228,7 +230,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 300
         }
-        if (value > 300 && value <= 360) {
+        if (value >= 300 && value < 360) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
@@ -236,28 +238,28 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 360
         }
-        if (value > 360) {
+        if (value >= 360) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
         }
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 20) {
+        if (value >= 15 && value < 20) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
           phaseNextNumber = 2
           phaseNextCriteria = 20
         }
-        if (value > 20 && value <= 30) {
+        if (value >= 20 && value < 30) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package2'
           )}</strong>`
           phaseNextNumber = 3
           phaseNextCriteria = 30
         }
-        if (value > 30 && value <= 50) {
+        if (value >= 30 && value < 50) {
           string1 = `<strong>${this.$t('infocard.orangePhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -265,7 +267,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 50
         }
-        if (value > 50 && value <= 60) {
+        if (value >= 50 && value < 60) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package1'
           )}</strong>`
@@ -273,7 +275,7 @@ export default {
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 60
         }
-        if (value > 60) {
+        if (value >= 60) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
             'infocard.package3'
           )}</strong>`
@@ -379,26 +381,26 @@ export default {
         this.renderValues.lastDay.value / this.incidence
       )
       if (this.name === 'incidence') {
-        if (incidence > 40 && incidence <= 80) return 1
-        if (incidence > 80 && incidence <= 120) return 2
-        if (incidence > 120 && incidence <= 140) return 3
-        if (incidence > 140 && incidence <= 170) return 1
-        if (incidence > 170) return 2
+        if (incidence >= 40 && incidence < 80) return 1
+        if (incidence >= 80 && incidence < 120) return 2
+        if (incidence >= 120 && incidence < 140) return 3
+        if (incidence >= 140 && incidence < 170) return 1
+        if (incidence >= 170) return 2
       }
       if (this.field === 'statePerTreatment.inHospital') {
-        if (value > 60 && value <= 100) return 1
-        if (value > 100 && value <= 180) return 2
-        if (value > 180 && value <= 250) return 3
-        if (value > 250 && value <= 300) return 1
-        if (value > 300 && value <= 360) return 2
-        if (value > 360) return 3
+        if (value >= 60 && value < 100) return 1
+        if (value >= 100 && value < 180) return 2
+        if (value >= 180 && value < 250) return 3
+        if (value >= 250 && value < 300) return 1
+        if (value >= 300 && value < 360) return 2
+        if (value >= 360) return 3
       }
       if (this.field === 'statePerTreatment.inICU') {
-        if (value > 15 && value <= 20) return 1
-        if (value > 20 && value <= 30) return 2
-        if (value > 30 && value <= 50) return 3
-        if (value > 50 && value <= 60) return 1
-        if (value > 60) return 3
+        if (value >= 15 && value < 20) return 1
+        if (value >= 20 && value < 30) return 2
+        if (value >= 30 && value < 50) return 3
+        if (value >= 50 && value < 60) return 1
+        if (value >= 60) return 3
       }
       return 0
     },
@@ -489,6 +491,10 @@ export default {
   margin-left: 7px;
 }
 
+.data-wrapper {
+  margin-top: auto;
+}
+
 .card-diff {
   font-size: 14px;
   margin-bottom: 0.7rem;
@@ -498,7 +504,11 @@ export default {
   }
 
   .card-diff-item:not(:last-child) {
-    margin-right: 8px;
+    margin-right: 4px;
+    
+    @media only screen and (min-width: 992px) {
+      margin-right: 8px;
+    }
   }
 }
 

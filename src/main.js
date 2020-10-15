@@ -1,13 +1,13 @@
+// this is common Vue initialization for index.js and embed.js (app entrypoints)
+
 import Vue from 'vue'
 import { LayoutPlugin, TabsPlugin, BTable, FormTextareaPlugin, BFormSelect, TooltipPlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSpinner, faGlobe, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-// global vue filters
 import './filters'
-
-// this is common Vue initialization for index.js and embed.js (app entrypoints)
+import './directives'
 
 Vue.use(LayoutPlugin)
 Vue.use(TabsPlugin)
