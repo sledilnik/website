@@ -270,18 +270,18 @@ let seriesData (state : State) =
                     | None -> None, 0., 0, 0, 0, areaData.Population
                     | Some lastValue ->
                         let absolute = lastValue
-                        let value100k =
-                            float absolute * 100000. / float areaData.Population
+                        let value1M =
+                            float absolute * 1000000. / float areaData.Population
                             |> System.Math.Round |> int
                         let dlabel, value =
                             match state.DisplayType with
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None, value100k
+                            | RegionPopulationWeightedValues -> None, value1M
                         let scaled =
                             match value with
                             | 0 -> 0.
                             | x -> float x + Math.E |> Math.Log
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
+                        dlabel, scaled, absolute, (value1M/10), totalConfirmed.Value, areaData.Population  
             {| 
                 code = areaData.Code
                 area = areaData.Name
