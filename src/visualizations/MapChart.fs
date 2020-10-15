@@ -272,13 +272,10 @@ let seriesData (state : State) =
                         let absolute = lastValue
                         let value100k =
                             float absolute * 100000. / float areaData.Population
-                        let value1M =
-                            float absolute * 1000000. / float areaData.Population
-                            |> System.Math.Round |> int
                         let dlabel, value =
                             match state.DisplayType with
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None, value1M
+                            | RegionPopulationWeightedValues -> None,  10. * value100k |> System.Math.Round |> int  //factor 10 for better resolution in graph
                         let scaled =
                             match state.ContentType with
                             | ConfirmedCases -> 
@@ -403,7 +400,7 @@ let renderMap (state : State) =
                 | ConfirmedCases -> 
                     {| 
                         ``type`` = "logarithmic"
-                        min = 1
+                        min = 1.0001
                         stops =
                             [|
                                 (0.0, "#ffffff")
