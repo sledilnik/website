@@ -281,7 +281,10 @@ let seriesData (state : State) =
                             | RegionPopulationWeightedValues -> None, value1M
                         let scaled =
                             match state.ContentType with
-                            | ConfirmedCases -> if value100k > 0.0 then value100k else 0.0001
+                            | ConfirmedCases -> 
+                                if state.DisplayType = AbsoluteValues 
+                                then if absolute > 0 then float absolute else 0.0001 
+                                else if value100k > 0.0 then value100k else 0.0001
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
@@ -383,6 +386,7 @@ let renderMap (state : State) =
             match state.ContentType with
                 | Deceased ->  
                     {| 
+                        ``type`` = "linear"
                         stops =
                             [|
                                 (0.0, "#ffffff")
