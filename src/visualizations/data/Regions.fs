@@ -31,7 +31,7 @@ let parseInt (str : string) =
     with _ ->
         None
 
-let parseRegionsCsvData (csv : string) =
+let parseRegionsData (csv : string) =
     let rows = csv.Split("\n")
     let header = rows.[0].Split(",")
 
@@ -104,6 +104,6 @@ let load =
         if statusCode <> 200 then
             return RegionsDataLoaded (sprintf "Napaka pri nalaganju podatkov o občinah: %d" statusCode |> Failure)
         else
-            let data = parseRegionsCsvData response
+            let data = parseRegionsData response
             return RegionsDataLoaded (Success data)
     }
