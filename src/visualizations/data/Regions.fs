@@ -1,86 +1,101 @@
 module Data.Regions
 
+open FsToolkit.ErrorHandling
 open Fable.SimpleHttp
-open Fable.SimpleJson
 
-open System
 open Types
 
-let url = "https://api.sledilnik.org/api/municipalities"
+let url = "https://raw.githubusercontent.com/sledilnik/data/master/csv/municipality.csv"
 
-let parseRegionsData data =
-    data
-    |> SimpleJson.parseNative
-    |> function
-        | JArray regions ->
-            regions
-            |> List.map (fun dataPoint ->
-                match dataPoint with
-                | JObject dict ->
-                    let value key = Map.tryFind key dict
-                    [value "year" ; value "month" ; value "day" ; value "regions" ]
-                    |> List.choose id
-                    |> function
-                        | [JNumber year ; JNumber month ; JNumber day ; JObject regionMap] ->
-                            let date = System.DateTime(int year, int month, int day)
-                            let regions =
-                                regionMap
-                                |> Map.toList
-                                |> List.map (fun (regionKey, regionValue) ->
-                                    let municipalities =
-                                        match regionValue with
-                                        | JObject citiesMap ->
-                                            citiesMap
-                                            |> Map.toList
-                                            |> List.map (fun (cityKey, cityValue) ->
-                                                match cityValue with
-                                                | JObject cityMap ->
-                                                    let activeCases =
-                                                        match Map.tryFind "activeCases" cityMap with
-                                                        | Some (JNumber num) -> Some (int num)
-                                                        | Some (JNull) -> None
-                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in activeCases" cityKey)
-                                                    let confirmedToDate =
-                                                        match Map.tryFind "confirmedToDate" cityMap with
-                                                        | Some (JNumber num) -> Some (int num)
-                                                        | Some (JNull) -> None
-                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in confirmedToDate" cityKey)
-                                                    let deceasedToDate =
-                                                        match Map.tryFind "deceasedToDate" cityMap with
-                                                        | Some (JNumber num) -> Some (int num)
-                                                        | Some (JNull) -> None
-                                                        | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s in deceasedToDate" cityKey)
-                                                    { Name = cityKey
-                                                      ConfirmedToDate = confirmedToDate
-                                                      ActiveCases = activeCases
-                                                      DeceasedToDate = deceasedToDate }
-                                                | _ -> failwith (sprintf "nepričakovan format podatkov za mesto %s" cityKey)
-                                            )
-                                        | _ -> failwith (sprintf "nepričakovan format podatkov za regijo %s" regionKey)
-                                    { Name = regionKey
-                                      Municipalities = municipalities }
-                                )
-                            { Date = date
-                              Regions = regions }
-                        | _ -> failwith "nepričakovan format regijskih podatkov"
-                | _ -> failwith "nepričakovan format regijskih podatkov"
-            )
-        | _ -> failwith "nepričakovan format regijskih podatkov"
+type Metric =
+    | ActiveCases
+    | ConfirmedToDate
+    | DeceasedToDate
+
+type DataPoint = {
+    Region : string
+    Municipality : string
+    Metric : Metric
+    Value : int option
+}
+
+let parseDate (str : string) =
+    try
+        System.DateTime.Parse(str) |> Ok
+    with _ ->
+        sprintf "Invalid date representation: %s" str |> Error
+
+let parseInt (str : string) =
+    try
+        System.Int32.Parse(str) |> Some
+    with _ ->
+        None
+
+let parseRegionsCsvData (csv : string) =
+    let rows = csv.Split("\n")
+    let header = rows.[0].Split(",")
+
+    let headerMunicipalities =
+        header.[1..]
+        |> Array.map (fun col ->
+            match col.Split(".") with
+            | [| "region" ; region ; municipality ; "cases" ; "active" |] ->
+                Some { Region = region ; Municipality = municipality ; Metric = ActiveCases ; Value = None }
+            | [| "region" ; region ; municipality ; "cases" ; "confirmed" ; "todate" |] ->
+                Some { Region = region ; Municipality = municipality ; Metric = ConfirmedToDate ; Value = None }
+            | [| "region" ; region ; municipality ; "deceased" ; "todate" |] ->
+                Some { Region = region ; Municipality = municipality ; Metric = DeceasedToDate ; Value = None }
+            | unknown ->
+                printfn "Error parsing municipalities header: %s" col
+                None
+        )
+
+    rows.[1..]
+    |> Array.map (fun row ->
+        result {
+            let columns = row.Split(",")
+
+            if headerMunicipalities.Length <> columns.[1..].Length then
+                return! Error ""
+            else
+                let! date = parseDate(columns.[0])
+                let data =
+                    Array.map2 (fun header value ->
+                        match header with
+                        | None _ -> None
+                        | Some header -> Some { header with Value = parseInt value }
+                    ) headerMunicipalities columns.[1..]
+                    |> Array.choose id
+                    |> Array.groupBy (fun dp -> dp.Region)
+                    |> Array.map (fun (region, dps) ->
+                        let municipalities =
+                            dps
+                            |> Array.groupBy (fun dp -> dp.Municipality)
+                            |> Array.map (fun (municipality, dps) ->
+                                dps
+                                |> Array.fold (fun state dp ->
+                                    match dp.Metric with
+                                    | ActiveCases -> { state with ActiveCases = dp.Value }
+                                    | ConfirmedToDate -> { state with ConfirmedToDate = dp.Value }
+                                    | DeceasedToDate -> { state with DeceasedToDate = dp.Value }
+                                ) { Name = municipality ; ActiveCases = None ; ConfirmedToDate = None ; DeceasedToDate = None })
+                        { Name = region ; Municipalities = municipalities |> Array.toList }
+                    )
+                return { Date = date ; Regions = data |> Array.toList }
+        })
+    |> Array.choose (fun row ->
+        match row with
+        | Ok row -> Some row
+        | Error _ -> None)
+    |> Array.toList
 
 let load =
     async {
-        // quick hack to only get last 60 days - enough to show last 30 days + 14 days to calculate active cases
-        let startDate = DateTime.Now.AddDays -60.0
-        let urlQuery = url + "?from=" + startDate.ToString("yyyy-MM-dd")
-
-        let! (statusCode, response) = Http.get urlQuery
+        let! (statusCode, response) = Http.get url
 
         if statusCode <> 200 then
-            return RegionsDataLoaded (sprintf "Napaka pri nalaganju statističnih podatkov: %d" statusCode |> Failure)
+            return RegionsDataLoaded (sprintf "Napaka pri nalaganju podatkov o občinah: %d" statusCode |> Failure)
         else
-            try
-                let data = parseRegionsData response
-                return RegionsDataLoaded (Success data)
-            with
-            | ex -> return RegionsDataLoaded (sprintf "Napaka pri branju statističnih podatkov: %s" (ex.Message.Substring(0, 1000)) |> Failure)
+            let data = parseRegionsCsvData response
+            return RegionsDataLoaded (Success data)
     }
