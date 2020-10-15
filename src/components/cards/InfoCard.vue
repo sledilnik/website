@@ -504,7 +504,11 @@ export default {
   }
 
   .card-diff-item:not(:last-child) {
-    margin-right: 8px;
+    margin-right: 4px;
+    
+    @media only screen and (min-width: 992px) {
+      margin-right: 8px;
+    }
   }
 }
 
