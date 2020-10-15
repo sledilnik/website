@@ -243,7 +243,7 @@ let seriesData (state : State) =
         for areaData in state.Data do
             let dlabel, value, absolute, value100k, totalConfirmed, population =
                 match areaData.Cases with
-                | None -> None, 0., 0, 0.0, 0, areaData.Population
+                | None -> None, 0.0001, 0, 0.0, 0, areaData.Population
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -267,7 +267,7 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0., 0, 0.0, 0, areaData.Population
+                    | None -> None, 0.0001, 0, 0.0, 0, areaData.Population
                     | Some lastValue ->
                         let absolute = lastValue
                         let value100k =
@@ -281,7 +281,7 @@ let seriesData (state : State) =
                             | RegionPopulationWeightedValues -> None, value1M
                         let scaled =
                             match state.ContentType with
-                            | ConfirmedCases -> value100k
+                            | ConfirmedCases -> if value100k > 0.0 then value100k else 0.0001
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
@@ -398,6 +398,8 @@ let renderMap (state : State) =
                     |} |> pojo
                 | ConfirmedCases -> 
                     {| 
+                        ``type`` = "logarithmic"
+                        min = 1
                         stops =
                             [|
                                 (0.0, "#ffffff")
