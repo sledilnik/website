@@ -470,7 +470,7 @@
                 "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see \n the chart  [Number of keys published per day](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future. "
             },
             "published": {
-                "title": "Keys published per day",
+                "title": "Daily keys published per day",
                 "date": "Date",
                 "perDay": "Published keys per day",
                 "runningTotal": "Running total of keys published",
