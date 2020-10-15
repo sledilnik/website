@@ -311,9 +311,11 @@ let renderChartCategorySelectors activeChartMode dispatch =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
-            [ InfectionsPerPopulation;
-            DeathsPerPopulation;
-            DeathsPerInfections; ]
+            [ 
+                InfectionsPerPopulation;
+                DeathsPerPopulation;
+                // DeathsPerInfections; 
+            ]
 
     Html.div [
         prop.className "metrics-selectors"
