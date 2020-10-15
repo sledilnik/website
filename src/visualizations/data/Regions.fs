@@ -35,6 +35,7 @@ let parseRegionsCsvData (csv : string) =
     let rows = csv.Split("\n")
     let header = rows.[0].Split(",")
 
+    // Parse municipality header (region, municipality and metric)
     let headerMunicipalities =
         header.[1..]
         |> Array.map (fun col ->
@@ -50,6 +51,7 @@ let parseRegionsCsvData (csv : string) =
                 None
         )
 
+    // Parse data rows
     rows.[1..]
     |> Array.map (fun row ->
         result {
@@ -58,7 +60,9 @@ let parseRegionsCsvData (csv : string) =
             if headerMunicipalities.Length <> columns.[1..].Length then
                 return! Error ""
             else
+                // Date is in the first column
                 let! date = parseDate(columns.[0])
+                // Merge municipality header information with data columns
                 let data =
                     Array.map2 (fun header value ->
                         match header with
@@ -66,10 +70,12 @@ let parseRegionsCsvData (csv : string) =
                         | Some header -> Some { header with Value = parseInt value }
                     ) headerMunicipalities columns.[1..]
                     |> Array.choose id
+                    // Group by region
                     |> Array.groupBy (fun dp -> dp.Region)
                     |> Array.map (fun (region, dps) ->
                         let municipalities =
                             dps
+                            // Group by municipality and combine values
                             |> Array.groupBy (fun dp -> dp.Municipality)
                             |> Array.map (fun (municipality, dps) ->
                                 dps
@@ -79,8 +85,10 @@ let parseRegionsCsvData (csv : string) =
                                     | ConfirmedToDate -> { state with ConfirmedToDate = dp.Value }
                                     | DeceasedToDate -> { state with DeceasedToDate = dp.Value }
                                 ) { Name = municipality ; ActiveCases = None ; ConfirmedToDate = None ; DeceasedToDate = None })
+                        // Region
                         { Name = region ; Municipalities = municipalities |> Array.toList }
                     )
+                // RegionsDataPoint
                 return { Date = date ; Regions = data |> Array.toList }
         })
     |> Array.choose (fun row ->
