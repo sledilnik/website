@@ -243,7 +243,7 @@ let seriesData (state : State) =
         for areaData in state.Data do
             let dlabel, value, absolute, value100k, totalConfirmed, population =
                 match areaData.Cases with
-                | None -> None, 0., 0, 0, 0, areaData.Population
+                | None -> None, 0., 0, 0.0, 0, areaData.Population
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -267,9 +267,11 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0., 0, 0, 0, areaData.Population
+                    | None -> None, 0., 0, 0.0, 0, areaData.Population
                     | Some lastValue ->
                         let absolute = lastValue
+                        let value100k =
+                            float absolute * 100000. / float areaData.Population
                         let value1M =
                             float absolute * 1000000. / float areaData.Population
                             |> System.Math.Round |> int
@@ -278,10 +280,13 @@ let seriesData (state : State) =
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
                             | RegionPopulationWeightedValues -> None, value1M
                         let scaled =
-                            match value with
-                            | 0 -> 0.
-                            | x -> float x + Math.E |> Math.Log
-                        dlabel, scaled, absolute, (value1M/10), totalConfirmed.Value, areaData.Population  
+                            match state.ContentType with
+                            | ConfirmedCases -> value100k
+                            | Deceased ->
+                                match value with
+                                | 0 -> 0.
+                                | x -> float x + Math.E |> Math.Log
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
             {| 
                 code = areaData.Code
                 area = areaData.Name
@@ -341,7 +346,7 @@ let renderMap (state : State) =
                     if absolute > 0 then
                         label 
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases100k") value100k
+                            + sprintf "<br>%s: <b>%0.1f</b>" (I18N.t "charts.map.confirmedCases100k") value100k
                     else
                         label
                 | Deceased ->
@@ -361,40 +366,59 @@ let renderMap (state : State) =
                         label
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
-        let colorAxis = 
-            let stops = 
-                match state.ContentType with
-                    | Deceased ->  
-                        [|
-                            (0.0, "#ffffff")
-                            (0.111, "#efedf5")
-                            (0.222, "#dadaeb")
-                            (0.333, "#bcbddc")
-                            (0.444, "#9e9ac8")
-                            (0.556, "#807dba")
-                            (0.667, "#6a51a3")
-                            (0.778, "#54278f")
-                            (0.889, "#3f007d")
-                        |] 
-                    | ConfirmedCases -> 
-                        [|
-                            (0.0, "#ffffff")
-                            (0.111, "#ffeda0")
-                            (0.222, "#fed976")
-                            (0.333, "#feb24c")
-                            (0.444, "#fd8d3c")
-                            (0.556, "#fc4e2a")
-                            (0.667, "#e31a1c")
-                            (0.778, "#bd0026")
-                            (0.889, "#800026")
-                        |]
+        let legend =
+            let enabled = state.ContentType = ConfirmedCases
+            {| enabled = enabled
+               title = {| text = null |}
+               align = "right"
+               verticalAlign = "bottom"
+               layout = "vertical"
+               floating = true
+               borderWidth = 1
+               backgroundColor = "white"
+               valueDecimals = 0 |}
+            |> pojo
 
-            {| stops = stops |}
+        let colorAxis = 
+            match state.ContentType with
+                | Deceased ->  
+                    {| 
+                        stops =
+                            [|
+                                (0.0, "#ffffff")
+                                (0.111, "#efedf5")
+                                (0.222, "#dadaeb")
+                                (0.333, "#bcbddc")
+                                (0.444, "#9e9ac8")
+                                (0.556, "#807dba")
+                                (0.667, "#6a51a3")
+                                (0.778, "#54278f")
+                                (0.889, "#3f007d")
+                            |] 
+                    |} |> pojo
+                | ConfirmedCases -> 
+                    {| 
+                        stops =
+                            [|
+                                (0.0, "#ffffff")
+                                (0.083, "#ffeda0")
+                                (0.166, "#fed976")
+                                (0.25, "#feb24c")
+                                (0.333, "#fd8d3c")
+                                (0.417, "#fc4e2a")
+                                (0.5, "#e31a1c")
+                                (0.583, "#bd0026")
+                                (0.666, "#800026")
+                                (0.75, "#930044")
+                                (0.833, "#5b005c")
+                                (0.917, "#26002b")
+                            |]
+                    |} |> pojo
 
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
             series = [| series geoJson |]
-            legend = {| enabled = false |}
+            legend = legend
             colorAxis = colorAxis 
             tooltip =
                 {|
