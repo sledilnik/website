@@ -328,6 +328,12 @@
             "title": "Cases by Region",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
+            "deceased": "Deaths"
+        },
+        "regions100k": {
+            "title": "Cases by Region (per 100,000 people)",
+            "activeCases": "Active Cases",
+            "confirmedCases": "Confirmed Cases",
             "deceased": "Deaths",
             "red": "criteria for red list"
         },

@@ -14,23 +14,22 @@ open Feliz.ElmishComponents
 open System.Text
 
 type RegionInfo = {
-    Population: int
     Color: string
 }
 
 let regionsInfo = dict[
-    "ce", { Population = 261851; Color = "#665191" }
-    "kk", { Population = 70067; Color = "#d45087" }
-    "kp", { Population = 115016; Color = "#70a471" }
-    "kr", { Population = 204670; Color = "#ffa600" }
-    "lj", { Population = 564527; Color = "#457844" }
-    "ng", { Population = 117616; Color = "#dba51d" }
-    "nm", { Population = 144032; Color = "#afa53f" }
-    "mb", { Population = 324104; Color = "#f95d6a" }
-    "ms", { Population = 114287; Color = "#024a66" }
-    "po", { Population = 52544; Color = "#a05195" }
-    "sg", { Population = 70588; Color = "#777c29" }
-    "za", { Population = 41606; Color = "#10829a" }
+    "ce", { Color = "#665191" }
+    "kk", { Color = "#d45087" }
+    "kp", { Color = "#70a471" }
+    "kr", { Color = "#ffa600" }
+    "lj", { Color = "#457844" }
+    "ng", { Color = "#dba51d" }
+    "nm", { Color = "#afa53f" }
+    "mb", { Color = "#f95d6a" }
+    "ms", { Color = "#024a66" }
+    "po", { Color = "#a05195" }
+    "sg", { Color = "#777c29" }
+    "za", { Color = "#10829a" }
 ]
 
 let excludedRegions = Set.ofList ["t"]
@@ -196,8 +195,12 @@ let renderChartOptions (state : State) dispatch =
             match state.ChartConfig.RelativeTo with
             | Absolute -> totalSum
             | Pop100k ->
-                let regionPopBy100k =
-                    (float regionsInfo.[region.Name].Population) / 100000.0
+                let regionPopulation =
+                    Utils.Dictionaries.regions.[region.Name].Population
+                    |> Option.get
+                    |> float
+
+                let regionPopBy100k = regionPopulation / 100000.0
                 totalSum / regionPopBy100k
 
         ts, finalValue

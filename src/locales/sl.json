@@ -786,7 +786,6 @@
         },
         "regions": {
             "title": "Primeri po regijah",
-            "title100k": "Primeri po regijah (na 100.000 prebivalcev)",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeno okuženi",
             "deceased": "Umrli"

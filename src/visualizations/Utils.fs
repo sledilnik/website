@@ -202,7 +202,9 @@ module Dictionaries =
           "kp",  "Obalno-kraška",  Some 115913
           "t",   "TUJINA",  None
           "n",   "NEZNANO",  None ]
-        |> List.map (fun (key,  name,  population) -> key,  { Key = key ; Name = name ; Population = population })
+        |> List.map
+               (fun (key,  name,  population) ->
+                    key, { Key = key ; Name = name ; Population = population })
         |> Map.ofList
 
     type Municipality = {

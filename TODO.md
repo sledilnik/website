@@ -1,10 +1,8 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/583
-    - use numbers from Utils
     - add english names
-
-    - sort selectors below by incidence
+    - sort selectors below by value
 
 - https://github.com/sledilnik/website/issues/593
     - disclaimer for age groups
