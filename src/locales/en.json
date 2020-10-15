@@ -711,6 +711,10 @@
         "testOrQuarantine": {
             "title": "Test",
             "description": "Negative test or 10-day quarantine on entrance from countries in red or orange list"
+        },
+        "regions": {
+            "title": "Regions",
+            "description": "Restrictions for red regions: movement outside municipal borders, use of masks outside, restriction of some services"
         }
     },
     "days": {

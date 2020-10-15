@@ -551,6 +551,10 @@
         "gatherings10max": {
             "title": "Do 10",
             "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, z dovoljenjem NIJZ do 500 ljudi.<br>Dodatne omejitve za dejavnosti v zaprtih prostorih (20m2 na osebo)."
+        },
+        "regions": {
+            "title": "Regije",
+            "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
         }
     },
     "phase": {
