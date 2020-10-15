@@ -551,6 +551,10 @@
         "gatherings10max": {
             "title": "Do 10",
             "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, z dovoljenjem NIJZ do 500 ljudi.<br>Dodatne omejitve za dejavnosti v zaprtih prostorih (20m2 na osebo)."
+        },
+        "regions": {
+            "title": "Regije",
+            "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
         }
     },
     "phase": {
@@ -797,6 +801,7 @@
         "map": {
             "title": "Zemljevid po občinah",
             "confirmedCases": "Potrjeni primeri",
+            "per100k": "na 100.000 prebivalcev",
             "deceased": "Umrli",
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
