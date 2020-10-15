@@ -343,7 +343,7 @@
             "absolute": "Absolute",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "confirmedCases100k": "Confirmed Cases (per 100k)"
+            "per100k": "per 100k"        
         },
         "rmap": {
             "title": "Region Map"
