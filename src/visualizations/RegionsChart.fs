@@ -3,7 +3,6 @@ module RegionsChart
 
 open Types
 
-open Browser
 open Browser.Types
 open Elmish
 open Fable.Core
@@ -13,8 +12,6 @@ open Feliz
 open Feliz.ElmishComponents
 
 open System.Text
-
-let chartText = I18N.chartText "regions"
 
 type RegionInfo = {
     Population: int
@@ -49,16 +46,22 @@ type MetricType =
     | Deceased
   with
     static member getName = function
-        | ActiveCases -> chartText "activeCases"
-        | ConfirmedCases -> chartText "confirmedCases"
-        | Deceased -> chartText "deceased"
+        | ActiveCases -> I18N.chartText "regions" "activeCases"
+        | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
+        | Deceased -> I18N.chartText "regions" "deceased"
 
 type MetricRelativeTo = Absolute | Pop100k
 
+type RegionsChartConfig = {
+    RelativeTo: MetricRelativeTo
+    ChartTextsGroup: string
+}
+
 type State =
-    { ScaleType : ScaleType
+    {
+      ChartConfig: RegionsChartConfig
+      ScaleType : ScaleType
       MetricType : MetricType
-      RelativeTo: MetricRelativeTo
       Data : RegionsData
       Regions : Region list
       Metrics : Metric list
@@ -77,7 +80,7 @@ let regionTotal (region : Region) : int =
     |> List.choose id
     |> List.sum
 
-let init (data : RegionsData) : State * Cmd<Msg> =
+let init (config: RegionsChartConfig) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
 
     let regionsWithoutExcluded =
@@ -99,7 +102,7 @@ let init (data : RegionsData) : State * Cmd<Msg> =
               Visible = true } )
 
     { ScaleType = Linear; MetricType = ActiveCases
-      RelativeTo = Pop100k
+      ChartConfig = config
       Data = data ; Regions = regionsByTotalCases ; Metrics = metrics
       RangeSelectionButtonIndex = 0 },
     Cmd.none
@@ -121,11 +124,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-
 let tooltipValueFormatter (state: State) value =
-    match state.RelativeTo with
+    match state.ChartConfig.RelativeTo with
     // todo igor: format to int for absolute values
-    | Absolute -> Utils.formatTo1DecimalWithTrailingZero value
+    | Absolute -> Utils.formatToInt value
     | Pop100k -> Utils.formatTo1DecimalWithTrailingZero value
 
 let tooltipFormatter (state: State) chartData jsThis =
@@ -190,11 +192,15 @@ let renderChartOptions (state : State) dispatch =
             |> Seq.sumBy municipalityMetricValue
             |> float
 
-        let regionPopBy100k =
-            (float regionsInfo.[region.Name].Population) / 100000.0
-        let totalSumBy100k = totalSum / regionPopBy100k
+        let finalValue =
+            match state.ChartConfig.RelativeTo with
+            | Absolute -> totalSum
+            | Pop100k ->
+                let regionPopBy100k =
+                    (float regionsInfo.[region.Name].Population) / 100000.0
+                totalSum / regionPopBy100k
 
-        ts, totalSumBy100k
+        ts, finalValue
 
     let allSeries =
         metricsToRender
@@ -225,6 +231,8 @@ let renderChartOptions (state : State) dispatch =
             baseOptions.xAxis
             |> Array.map(fun xAxis -> {| xAxis with gridZIndex = 1 |})
 
+    let chartTextGroup = state.ChartConfig.ChartTextsGroup
+
     let redThreshold = 140
     let yAxis =
             baseOptions.yAxis
@@ -234,11 +242,11 @@ let renderChartOptions (state : State) dispatch =
                        min = None
                        gridZIndex = 1
                        plotLines =
-                           match state.RelativeTo with
+                           match state.ChartConfig.RelativeTo with
                            | Pop100k -> [|
                                {| value=redThreshold
                                   label={|
-                                           text=chartText "red"
+                                           text=I18N.chartText chartTextGroup "red"
                                            align="left"
                                            verticalAlign="bottom"
                                             |}
@@ -250,7 +258,7 @@ let renderChartOptions (state : State) dispatch =
                             |]
                            | _ -> [| |]
                        plotBands =
-                           match state.RelativeTo with
+                           match state.ChartConfig.RelativeTo with
                            | Pop100k -> [|
                                {| from=redThreshold; ``to``=100000.0
                                   color="#FCD5CF30"
@@ -263,7 +271,7 @@ let renderChartOptions (state : State) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "line"
+                ``type`` = "spline"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
@@ -341,5 +349,7 @@ let render (state : State) dispatch =
         renderMetricsSelectors state.Metrics dispatch
     ]
 
-let regionsChart (props : {| data : RegionsData |}) =
-    React.elmishComponent("RegionsChart", init props.data, update, render)
+let renderChart
+    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
+    React.elmishComponent
+        ("RegionsChart", init config props.data, update, render)

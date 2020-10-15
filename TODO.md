@@ -1,8 +1,9 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/583
-    - add selector for absolute / relative
-    - fix the range selector
+    - use numbers from Utils
+    - add english names
+
     - sort selectors below by incidence
 
 - https://github.com/sledilnik/website/issues/593

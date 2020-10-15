@@ -21,8 +21,14 @@ let optionToInt (value: int option) =
 
 
 let roundDecimals (decimals:int) (value: float) = Math.Round(value, decimals)
+let roundToInt = roundDecimals 0
 let roundTo1Decimal = roundDecimals 1
 let roundTo3Decimals = roundDecimals 3
+
+let formatToInt (value: float) =
+    let formatted = sprintf "%.0f" value
+    // A hack to replace decimal point with decimal comma.
+    formatted.Replace('.', ',')
 
 let formatTo1DecimalWithTrailingZero (value: float) =
     let formatted = sprintf "%.1f" value
@@ -202,12 +208,12 @@ module Dictionaries =
     type Municipality = {
         Key : string
         Name : string
-        Code : string 
+        Code : string
         Population : int
     }
 
     let municipalities =
-        [ 
+        [
             "ajdovščina", "Ajdovščina", "SI-001", 19418
             "ankaran", "Ankaran/Ancarano", "SI-213", 3224
             "apače", "Apače", "SI-195", 3533
