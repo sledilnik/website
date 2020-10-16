@@ -388,13 +388,18 @@ let renderMap (state : State) =
                     | 14 -> 7000.
                     | 7 -> 3500.
                     | 1 -> 500.
-                    | _ -> 0.
+                    | _ -> 100.
 
         let colorAxis = 
             match state.ContentType with
                 | Deceased ->  
                     {| 
                         ``type`` = "linear"
+                        tickInterval = 0.1
+                        max = 10.
+                        min = 0 
+                        endOnTick = false 
+                        startOnTick = false  
                         stops =
                             [|
                                 (0.0, "#ffffff")
