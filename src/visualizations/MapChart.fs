@@ -379,7 +379,16 @@ let renderMap (state : State) =
                valueDecimals = 0 |}
             |> pojo
 
-        let colorMax = 7000.0
+        let colorMax = 
+            match state.DataTimeInterval with
+            | Complete -> 20000.
+            | LastDays days -> 
+                match days with
+                    | 21 -> 10500.
+                    | 14 -> 7000.
+                    | 7 -> 3500.
+                    | 1 -> 500.
+                    | _ -> 0.
 
         let colorAxis = 
             match state.ContentType with
