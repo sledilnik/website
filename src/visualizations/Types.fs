@@ -128,6 +128,7 @@ type VisualizationType =
     | Cases
     | Spread
     | Regions
+    | Regions100k
     | Sources
     | Municipalities
     | AgeGroups

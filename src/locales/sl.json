@@ -790,6 +790,13 @@
             "confirmedCases": "Potrjeno okuženi",
             "deceased": "Umrli"
         },
+        "regions100k": {
+            "title": "Primeri po regijah (na 100.000 prebivalcev)",
+            "activeCases": "Aktivni primeri",
+            "confirmedCases": "Potrjeno okuženi",
+            "deceased": "Umrli",
+            "red": "meja za uvrstitev na rdeči seznam"
+        },
         "map": {
             "title": "Zemljevid po občinah",
             "confirmedCases": "Potrjeni primeri",
