@@ -90,6 +90,7 @@ import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
 import Youtube from 'components/Youtube'
 import { Visualizations } from 'visualizations/App.fsproj'
+import { ApiEndpoint } from '@/store/index.js'
 
 export default {
   name: 'StatsPage',
@@ -107,7 +108,7 @@ export default {
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations('visualizations', 'local', this.$route.query)
+      Visualizations('visualizations', 'local', this.$route.query, ApiEndpoint())
     })
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)

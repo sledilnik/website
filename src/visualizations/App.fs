@@ -8,7 +8,7 @@ open Types
 open CountriesChartViz.Analysis
 open I18N
 
-let init (query: obj) (visualization: string option) (page: string) =
+let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
     let renderingMode =
         match visualization with
         | None -> Normal
@@ -42,6 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) =
 
     let initialState =
         {
+          ApiEndpoint = apiEndpoint
           Page = page
           Query = query
           StatsData = NotAsked
@@ -82,7 +83,7 @@ let update (msg: Msg) (state: State) =
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
-        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
+        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
 open Elmish.React
