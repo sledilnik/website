@@ -389,20 +389,26 @@ let renderMap (state : State) =
                     | 7 -> 3500.
                     | 1 -> 500.
                     | _ -> 100.
+        
+        let colorMin = 
+            match state.DisplayType with 
+                | AbsoluteValues -> 0.9
+                | RegionPopulationWeightedValues -> colorMax / 7000.
 
         let colorAxis = 
             match state.ContentType with
                 | Deceased ->  
                     {| 
                         ``type`` = "linear"
-                        tickInterval = 0.1
-                        max = 10.
+                        tickInterval = 0.4
+                        max = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                         min = 0 
+                        minColor = "#ffffff"
                         endOnTick = false 
                         startOnTick = false  
                         stops =
                             [|
-                                (0.0, "#ffffff")
+                                (0.000, "#ffffff")
                                 (0.111, "#efedf5")
                                 (0.222, "#dadaeb")
                                 (0.333, "#bcbddc")
@@ -418,12 +424,14 @@ let renderMap (state : State) =
                         ``type`` = "logarithmic"
                         tickInterval = 0.4
                         max = colorMax
-                        min = colorMax / 7000.0
+                        min = colorMin 
+                        min = 0.9
+                        minColor = "#ffffff"
                         endOnTick = false
                         startOnTick = false
                         stops =
                             [|
-                                (0.000, "#ffffff")
+                                (0.000,"#ffffff")
                                 (0.001,"#fff7db")
                                 (0.200,"#ffefb7") 
                                 (0.280,"#ffe792") 
