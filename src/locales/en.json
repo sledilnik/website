@@ -357,10 +357,10 @@
         },
         "europe": {
             "title": "COVID-19 Situation in Europe",
-            "twoWeekIncidence": "14 days incidence per million",
+            "twoWeekIncidence": "14 days incidence per 100,000 people",
             "restrictions": "Restrictions and imported cases",
             "newCases": "New cases",
-            "incidence1M": "New cases in 14 days per 1M",
+            "incidence100k": "New cases in 14 days per 100,000 people",
             "importedCases": "Imported cases in 14 days",
             "countryStatus": "Restrictions",
             "statusNone": "-",
@@ -416,20 +416,20 @@
             "activeCasesRelative": "Active cases (relative)"
         },
         "countriesActiveCasesPer1M": {
-            "title": "Countries: Active Cases Per 1 Million People",
-            "yAxisTitle": "Active cases per 1 million people",
-            "legendTitle": "Active cases per 1M people",
+            "title": "Countries: Active Cases Per 100,000 People",
+            "yAxisTitle": "Active cases per 100,000 people",
+            "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Daily Cases Per 1 Million People",
-            "yAxisTitle": "New daily cases per 1 million people",
-            "legendTitle": "New daily cases per 1M people"
+            "title": "Countries: New Daily Cases Per 100,000 People",
+            "yAxisTitle": "New daily cases per 100,000 people",
+            "legendTitle": "New daily cases per 100,000 people"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Countries: Total Deaths Per 1 Million People",
-            "yAxisTitle": "Total deaths per 1 million people",
-            "legendTitle": "Total deaths per 1M people"
+            "title": "Countries: Total Deaths Per 100,000 People",
+            "yAxisTitle": "Total deaths per 100,000 people",
+            "legendTitle": "Total deaths per 100,000 people"
         },
         "countriesDeathsPerCases": {
             "title": "Countries: Total Deaths Per cases",

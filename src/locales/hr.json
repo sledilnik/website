@@ -358,14 +358,14 @@
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
-            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
-            "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -541,9 +541,9 @@
             "statusNone": "-",
             "countryStatus": "Ograničenja",
             "importedCases": "Uvezeni slučajevi u 14 dana",
-            "incidence1M": "Novi slučajevi u 14 dana na milijun stanovnika",
+            "incidence100k": "Novi slučajevi u 14 dana na 100.000 stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
-            "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
+            "twoWeekIncidence": "14-dnevni slučajevi na 100.000 stanovnika",
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka"
@@ -566,9 +566,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteriji za crvenu listu",
-            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
-            "title": "Države: Aktivni slučajevi na milijun stanovnika"
+            "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "title": "Države: Aktivni slučajevi na 100.000 stanovnika"
         },
         "dailyComparison": {
             "positivePct": "Udio pozitivnih testova (%)",
