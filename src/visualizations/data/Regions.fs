@@ -5,8 +5,6 @@ open Fable.SimpleHttp
 
 open Types
 
-let url = "https://raw.githubusercontent.com/sledilnik/data/master/csv/municipality.csv"
-
 type Metric =
     | ActiveCases
     | ConfirmedToDate
