@@ -597,7 +597,11 @@
         },
         "ostanizdrav": {
             "userPublishedByCount": {
-                "date": "Datum"
+                "date": "Datum",
+                "title": "Ključevi objavljeni po korisniku, po danu",
+                "users": "Korisnici",
+                "count": "(prosječni) broj ključeva po korisniku na određeni dan",
+                "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'"
             },
             "usercount": {
                 "title": "Procijenjeni broj korisnika koji su objavili ključeve po danu",
@@ -666,7 +670,7 @@
         },
         "municipality": {
             "title": "Općine",
-            "description": "Zabrana kretanja izvan općinskih granica, obvezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
+            "description": "Zabrana kretanja izvan općinskih granica, obavezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
         },
         "liftService": {
             "description": "Opuštanje: gradnja, usluge, sportovi na otvorenom, <br>dopušteni su neki redovni javni prijevozi",
@@ -783,6 +787,10 @@
         "testOrQuarantine": {
             "description": "Negativni test ili 10-dnevna karantena pri ulazu iz zemalja s crvenog ili narančastog popisa",
             "title": "Test"
+        },
+        "regions": {
+            "description": "Ograničenja za crvene regije: zabrana kretanja izvan općinskih granica, upotreba maski vani, ograničenja za neke usluge",
+            "title": "Regije"
         }
     },
     "pageNotFound": {
