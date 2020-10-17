@@ -341,7 +341,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
             |> List.sum)
-            * 10.
+            / 10.
 
         let incidence =
             dps
@@ -517,13 +517,12 @@ let renderMap state geoJson _ =
         {| dataClassColor = "category"
            dataClasses =
                [| {| from = 0; color = "#ffffcc" |}
-                  {| from = 250; color = "#ffeda0" |}
-                  {| from = 500; color = "#fed976" |}
-                  {| from = 1000; color = "#feb24c" |}
-                  {| from = 2000; color = "#fd8d3c" |}
-                  {| from = 4000; color = "#fc4e2a" |}
-                  {| from = 8000; color = "#e31a1c" |}
-                  {| from = 16000; color = "#b10026" |} |] |}
+                  {| from = 12; color = "#fed976" |}
+                  {| from = 25; color = "#feb24c" |}
+                  {| from = 50; color = "#fd8d3c" |}
+                  {| from = 100; color = "#fc4e2a" |}
+                  {| from = 200; color = "#e31a1c" |}
+                  {| from = 400; color = "#b10026" |} |] |}
         |> pojo
 
     let tooltipFormatter jsThis =
