@@ -36,18 +36,18 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
-    | DoublingNumber
+    | DoublingTime
 
     override this.ToString() =
        match this with
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
-       | DoublingNumber -> I18N.t "charts.map.doublingNumber" 
+       | DoublingTime -> I18N.t "charts.map.doublingTime" 
 
-let (|ConfirmedCasesMsgCase|DeceasedMsgCase|DoublingNumberMsgCase|) str =
+let (|ConfirmedCasesMsgCase|DeceasedMsgCase|DoublingTimeMsgCase|) str =
     if str = I18N.t "charts.map.confirmedCases" then ConfirmedCasesMsgCase
     elif str = I18N.t "charts.map.deceased" then DeceasedMsgCase
-    else DoublingNumberMsgCase
+    else DoublingTimeMsgCase
 
 type DisplayType =
     | AbsoluteValues
@@ -214,7 +214,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ConfirmedCases
+      ContentType = DoublingTime //TODO: CHANGE THIS BACK TO CONFIRMED CASES BEFORE PRODUCTION  
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -235,6 +235,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             match contentType with
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
+            | DoublingTimeMsgCase -> DoublingTime 
         { state with ContentType = newContentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -253,6 +254,7 @@ let seriesData (state : State) =
                         match state.ContentType with
                         | ConfirmedCases -> confirmedCasesValue
                         | Deceased -> deceasedValue
+                        | DoublingTime -> confirmedCasesValue
 
                     let totalConfirmed = confirmedCasesValue |> Array.tryLast
 
@@ -288,6 +290,11 @@ let seriesData (state : State) =
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
+                            | DoublingTime -> 
+                                let lastTwoWeeks = values.[values.Length - 14..]
+                                let firstHalf = lastTwoWeeks.[..6] |> Seq.sum |> float
+                                let secondHalf = lastTwoWeeks.[7..] |> Seq.sum |> float 
+                                secondHalf/firstHalf - 1.
                         dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
             {| 
                 code = areaData.Code
@@ -335,6 +342,7 @@ let renderMap (state : State) =
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
+            let value = points?value
             let absolute = points?absolute
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
@@ -364,6 +372,14 @@ let renderMap (state : State) =
                             + sprintf "<br>%s: <b>%s %%</b>"
                                 (I18N.t "charts.map.mortalityOfConfirmedCases")
                                 (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+                    else
+                        label
+                | DoublingTime ->
+                    let label = fmtStr + sprintf "<br>%s: <b>%0.2f</b>" (I18N.t "charts.spread.doublingRateLabel") value 
+                    if absolute > 0 then
+                        label 
+                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                     else
                         label
             sprintf "<b>%s</b><br/>%s<br/>" area label
@@ -426,6 +442,31 @@ let renderMap (state : State) =
                         tickInterval = 0.4
                         max = colorMax
                         min = colorMin 
+                        endOnTick = false
+                        startOnTick = false
+                        stops =
+                            [|
+                                (0.000,"#ffffff")
+                                (0.001,"#fff7db")
+                                (0.200,"#ffefb7") 
+                                (0.280,"#ffe792") 
+                                (0.360,"#ffdf6c") 
+                                (0.440,"#ffb74d") 
+                                (0.520,"#ff8d3c") 
+                                (0.600,"#f85d3a") 
+                                (0.680,"#ea1641") 
+                                (0.760,"#d0004e") 
+                                (0.840,"#ad005b") 
+                                (0.920,"#800066") 
+                                (0.999,"#43006e")
+                            |]
+                    |} |> pojo
+                | DoublingTime -> 
+                    {| 
+                        ``type`` = "linear"
+                        tickInterval = 0.4
+                        max = 1 
+                        min = 0 
                         endOnTick = false
                         startOnTick = false
                         stops =
@@ -512,8 +553,8 @@ let renderContentTypeSelector selected dispatch =
             prop.value (ContentType.Deceased.ToString())
         ]
         yield Html.option [
-            prop.text(ContentType.DoublingNumber.ToString())
-            prop.value(ContentType.DoublingNumber.ToString())
+            prop.text(ContentType.DoublingTime.ToString())
+            prop.value(ContentType.DoublingTime.ToString())
         ]
     }
 
@@ -532,7 +573,8 @@ let render (state : State) dispatch =
                     prop.className "filters"
                     prop.children [
                         renderContentTypeSelector state.ContentType dispatch // TODO: for doubling number chart remove all these 
-                        renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                        if state.ContentType = ConfirmedCases || state.ContentType = Deceased then
+                            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
                 renderDisplayTypeSelector
