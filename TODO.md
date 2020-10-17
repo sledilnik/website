@@ -1,15 +1,10 @@
 # TODO
 
-- https://github.com/sledilnik/website/issues/583
-    - add english names
-    - sort selectors below by value
-
-- https://github.com/sledilnik/website/issues/593
-    - disclaimer for age groups
-        - can we extract only a part of it
-        
-    - `charts.metricsComparison.show7DaysAverage`
-    
+- https://github.com/sledilnik/website/pull/615
+    - fix EuropeMap to show on 100k as well
+        - `TwoWeekIncidence1M`
+        - fix texts    
+            - `charts.europe.incidence1M`
 
 ## New countries chart
 - deaths per cases (windowed, averaged)

@@ -14,6 +14,8 @@ open Highcharts
 open Types
 open Data.OurWorldInData
 
+let chartText = I18N.chartText "europe"
+
 type MapToDisplay = Europe | World
 
 let europeGeoJsonUrl = "/maps/europe.geo.json"
@@ -21,7 +23,7 @@ let worldGeoJsonUrl = "/maps/world-robinson.geo.json"
 
 type GeoJson = RemoteData<obj, string>
 
-type OwdData = Data.OurWorldInData.OurWorldInDataRemoteData
+type OwdData = OurWorldInDataRemoteData
 
 type CountryData =
     { Country: string
@@ -46,8 +48,8 @@ type ChartType =
 
     override this.ToString() =
         match this with
-        | TwoWeekIncidence -> I18N.t "charts.europe.twoWeekIncidence"
-        | Restrictions -> I18N.t "charts.europe.restrictions"
+        | TwoWeekIncidence -> chartText "twoWeekIncidence"
+        | Restrictions -> chartText "restrictions"
 
 type State =
     { MapToDisplay : MapToDisplay
@@ -122,7 +124,7 @@ let euCountries =
 
 let greenCountries =
     Map.ofList
-        [ 
+        [
             ("AUS", "")
             ("NZL", "")
             ("SRB", "")
@@ -321,7 +323,7 @@ let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> 
         | World -> TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
-let prepareCountryData (data: Data.OurWorldInData.DataPoint list) (weeklyData: WeeklyStatsData) =
+let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
     let dataForLastTwoWeeks = Array.sub weeklyData (weeklyData.Length - 2) 2
     let importedFrom = dataForLastTwoWeeks |> Data.WeeklyStats.countryTotals |> Map.ofArray
     let importedDate = (Array.last dataForLastTwoWeeks).DateTo
@@ -361,17 +363,17 @@ let prepareCountryData (data: Data.OurWorldInData.DataPoint list) (weeklyData: W
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
             match fixedCode with
-            | "SVN" -> I18N.t "charts.europe.statusNone", "#10829a", ""
+            | "SVN" -> chartText "statusNone", "#10829a", ""
             | _ ->
                 match red with
                 | Some redNote ->
                     if redNote.Length > 0
-                    then I18N.t "charts.europe.statusRed", "#FF9057", redNote
-                    else I18N.t "charts.europe.statusRed", "#FF5348", redNote
+                    then chartText "statusRed", "#FF9057", redNote
+                    else chartText "statusRed", "#FF5348", redNote
                 | _ ->
                     match green with
-                    | Some greenNote -> I18N.t "charts.europe.statusGreen", "#C4DE6F", greenNote
-                    | _ -> I18N.t "charts.europe.statusOrange", "#FFC65A", ""
+                    | Some greenNote -> chartText "statusGreen", "#C4DE6F", greenNote
+                    | _ -> chartText "statusOrange", "#FFC65A", ""
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -415,7 +417,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | OwdDataRequested ->
         let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
         { state with OwdData = Loading },
-        Cmd.OfAsync.result (Data.OurWorldInData.loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
+        Cmd.OfAsync.result (loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
         let ret =
             match result with
@@ -495,7 +497,7 @@ let mapData state =
                impDate = "" |})
     |> List.toArray
 
-let renderMap state geoJson owdData =
+let renderMap state geoJson _ =
 
     let legend =
         let enabled = state.ChartType = TwoWeekIncidence
@@ -546,17 +548,17 @@ let renderMap state geoJson owdData =
             %s: <b>%s</b><br/>
             %s: <b>%s</b> (%s)<br/>"
                 country
-                (I18N.t "charts.europe.countryStatus") rType rAltText
-                (I18N.t "charts.europe.importedCases") imported impDate
-                (I18N.t "charts.europe.incidence1M") incidence1M
-                (I18N.t "charts.europe.newCases") newCases ncDate
+                (chartText "countryStatus") rType rAltText
+                (chartText "importedCases") imported impDate
+                (chartText "incidence1M") incidence1M
+                (chartText "newCases") newCases ncDate
 
         s.Append textHtml |> ignore
 
         s.Append "<div class='bars'>" |> ignore
 
         match twoWeekIncidence with
-        | null -> I18N.t "charts.europe.noData"
+        | null -> chartText "noData"
         | _ ->
             twoWeekIncidence
             |> Array.iter (fun country ->
