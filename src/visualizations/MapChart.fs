@@ -36,16 +36,18 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
+    | DoublingNumber
 
     override this.ToString() =
        match this with
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
+       | DoublingNumber -> I18N.t "charts.map.doublingNumber" 
 
-let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
-    if str = I18N.t "charts.map.confirmedCases"
-    then ConfirmedCasesMsgCase
-    else DeceasedMsgCase
+let (|ConfirmedCasesMsgCase|DeceasedMsgCase|DoublingNumberMsgCase|) str =
+    if str = I18N.t "charts.map.confirmedCases" then ConfirmedCasesMsgCase
+    elif str = I18N.t "charts.map.deceased" then DeceasedMsgCase
+    else DoublingNumberMsgCase
 
 type DisplayType =
     | AbsoluteValues
@@ -509,6 +511,10 @@ let renderContentTypeSelector selected dispatch =
             prop.text (ContentType.Deceased.ToString())
             prop.value (ContentType.Deceased.ToString())
         ]
+        yield Html.option [
+            prop.text(ContentType.DoublingNumber.ToString())
+            prop.value(ContentType.DoublingNumber.ToString())
+        ]
     }
 
     Html.select [
@@ -525,7 +531,7 @@ let render (state : State) dispatch =
                 Html.div [
                     prop.className "filters"
                     prop.children [
-                        renderContentTypeSelector state.ContentType dispatch
+                        renderContentTypeSelector state.ContentType dispatch // TODO: for doubling number chart remove all these 
                         renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
