@@ -551,6 +551,10 @@
         "gatherings10max": {
             "title": "Do 10",
             "description": "Prepoved zbiranja na javnih mestih nad 10 ljudi, z dovoljenjem NIJZ do 500 ljudi.<br>Dodatne omejitve za dejavnosti v zaprtih prostorih (20m2 na osebo)."
+        },
+        "regions": {
+            "title": "Regije",
+            "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
         }
     },
     "phase": {
@@ -588,6 +592,10 @@
         "9": {
             "title": "faza<br>9",
             "description": "prehod na delno sledenje stikov"
+        },
+        "10": {
+            "title": "faza<br>10",
+            "description": "sledenje stikov prekinjeno"
         }
     },
     "charts": {
@@ -786,9 +794,17 @@
             "confirmedCases": "Potrjeno okuženi",
             "deceased": "Umrli"
         },
+        "regions100k": {
+            "title": "Primeri po regijah (na 100.000 prebivalcev)",
+            "activeCases": "Aktivni primeri",
+            "confirmedCases": "Potrjeno okuženi",
+            "deceased": "Umrli",
+            "red": "meja za uvrstitev na rdeči seznam"
+        },
         "map": {
             "title": "Zemljevid po občinah",
             "confirmedCases": "Potrjeni primeri",
+            "per100k": "na 100.000 prebivalcev",
             "deceased": "Umrli",
             "absolute": "Absolutno",
             "populationShare": "Delež prebivalstva",
@@ -807,10 +823,10 @@
         },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
-            "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
+            "twoWeekIncidence": "14-dnevna pojavnost na 100.000 prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
             "newCases": "Novi primeri",
-            "incidence1M": "Novi primeri v 14 dneh na 1M",
+            "incidence100k": "Novi primeri v 14 dneh na 100.000 prebivalcev",
             "importedCases": "Uvoženi primeri v 14 dneh",
             "countryStatus": "Omejitve",
             "statusNone": "-",
@@ -857,7 +873,7 @@
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
             "populationTotal": "Prebivalcev skupaj",
-            "disclaimer": "Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih."
+            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na tem grafu."
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
@@ -866,20 +882,20 @@
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
         "countriesActiveCasesPer1M": {
-            "title": "Države: aktivni primeri na milijon prebivalcev",
-            "yAxisTitle": "Št. aktivnih primerov na milijon prebivalcev",
-            "legendTitle": "Aktivni primeri na milijon prebivalcev",
+            "title": "Države: aktivni primeri na 100.000 prebivalcev",
+            "yAxisTitle": "Št. aktivnih primerov na 100.000 prebivalcev",
+            "legendTitle": "Aktivni primeri na 100.000 prebivalcev",
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na milijon prebivalcev",
-            "yAxisTitle": "Št. novih primerov na milijon prebivalcev",
-            "legendTitle": "Novi primeri na milijon prebivalcev"
+            "title": "Države: novi primeri na 100.000 prebivalcev",
+            "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
+            "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli (skupaj) na milijon prebivalcev",
-            "yAxisTitle": "Skupno št. umrlih na milijon prebivalcev",
-            "legendTitle": "Umrli (skupaj) na milijon prebivalcev"
+            "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
+            "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
+            "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },
         "ostanizdrav": {
             "title": "Aplikacija #OstaniZdrav",

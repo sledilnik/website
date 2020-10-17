@@ -409,11 +409,11 @@
             "statusGreen": "keine Einschränkungen",
             "restrictions": "Einschränkungen und eingeschleppte Fälle",
             "countryStatus": "Einschränkungen",
-            "twoWeekIncidence": "14-tägige Fälle pro 1 M",
+            "twoWeekIncidence": "14-tägige Fälle pro 100.000",
             "statusNone": "–",
             "statusRed": "strikte 10-tägige Quarantäne",
             "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
-            "incidence1M": "Neue Fälle in 14 Tagen pro 1 Mio.",
+            "incidence100k": "Neue Fälle in 14 Tagen pro 100.000",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",
             "importedCases": "Eingeschleppte Fälle in 14 Tagen"
@@ -450,6 +450,7 @@
             "population": "Bevölkerung",
             "mortalityOfConfirmedCases": "Sterblichkeit bei bestätigten Fällen",
             "confirmedCases": "Bestätigte Fälle",
+            "per100k": "pro 100 tausend",
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
@@ -555,14 +556,14 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "yAxisTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
+            "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "title": "Länder: Neue tägliche Fälle pro 1 Million Menschen"
+            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
@@ -582,9 +583,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "Kriterien für die rote Liste",
-            "legendTitle": "Aktive Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Aktive Fälle pro 1 Million Menschen",
-            "title": "Länder: Aktive Fälle pro 1 Million Menschen"
+            "legendTitle": "Aktive Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
+            "title": "Länder: Aktive Fälle pro 100.000 Menschen"
         },
         "dailyComparison": {
             "positivePct": "Anteil der positiven Tests (%)",
