@@ -594,6 +594,51 @@
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Karantena i izvori zaraze"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "date": "Datum"
+            },
+            "usercount": {
+                "title": "Procijenjeni broj korisnika koji su objavili ključeve po danu",
+                "runningTotal": "Ukupni broj korisnika koji su objavili ključeve",
+                "users": "Broj korisnika koji su objavili ključeve po danu",
+                "date": "Datum"
+            },
+            "publishedByRisk": {
+                "risk": "Opasnost",
+                "published": "Broj objavljenih ključeva na određeni dan",
+                "tooltip": "datum.published + ' ključevi s razinom opasnosti ' + datum.risk",
+                "date": "Datum",
+                "title": "Objavljeni ključevi po danu, po razini opasnosti"
+            },
+            "validByRisk": {
+                "risk": "Opasnost",
+                "title": "Valjani ključevi po danu, po razini opasnosti",
+                "valid": "Broj valjanih ključeva na određeni dan",
+                "tooltip": "datum.valid + ' ključevi s razinom opasnosti ' +datum.risk",
+                "date": "Datum"
+            },
+            "published": {
+                "runningTotal": "Ukupno objavljeni ključevi",
+                "perDay": "Objavljeni ključevi po danu",
+                "date": "Datum",
+                "title": "Dnevni ključevi objavljeni po danu"
+            },
+            "valid": {
+                "perDay": "Valjani ključevi po danu",
+                "date": "Datum",
+                "title": "Valjani ključevi po danu"
+            },
+            "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoze](https://github.com/mh-/diagnosis-keys).",
+            "title": "Aplikacija #OstaniZdrav za obavijesti o izloženosti"
+        },
+        "regions100k": {
+            "red": "kriteriji za crvenu listu",
+            "deceased": "Smrtni slučajevi",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "activeCases": "Aktivni slučajevi",
+            "title": "Slučajevi po regijama (po 100.000 osoba)"
         }
     },
     "shortMonth": {
@@ -782,7 +827,8 @@
         "faq": "FAQ",
         "sources": "Izvori",
         "menu": "Izbornik",
-        "animation": "Animacija"
+        "animation": "Animacija",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "phase": {
         "4": {
@@ -1084,5 +1130,14 @@
                 "title": "faza<br>1"
             }
         }
+    },
+    "weekdayShort": {
+        "6": "Su",
+        "5": "Pe",
+        "4": "Če",
+        "3": "Sr",
+        "2": "Ut",
+        "1": "Po",
+        "0": "Ne"
     }
 }
