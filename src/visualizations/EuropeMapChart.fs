@@ -517,12 +517,11 @@ let renderMap state geoJson _ =
         {| dataClassColor = "category"
            dataClasses =
                [| {| from = 0; color = "#ffffcc" |}
-                  {| from = 12; color = "#fed976" |}
                   {| from = 25; color = "#feb24c" |}
-                  {| from = 50; color = "#fd8d3c" |}
-                  {| from = 100; color = "#fc4e2a" |}
-                  {| from = 200; color = "#e31a1c" |}
-                  {| from = 400; color = "#b10026" |} |] |}
+                  {| from = 50; color = "#e31a1c" |}
+                  {| from = 100; color = "#bd0026" |}
+                  {| from = 200; color = "#800026" |}
+                  {| from = 400; color = "#930044" |} |] |}
         |> pojo
 
     let tooltipFormatter jsThis =
