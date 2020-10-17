@@ -4,6 +4,7 @@
             "last_x_days": "{{ count }} ditë",
             "last_x_days_plural": "{{ count }} ditë",
             "confirmedCases": "Raste të konfirmuara",
+            "per100k": "për 100 mijë",
             "deceased": "Të vdekur",
             "absolute": "Absolute",
             "population": "e popullsisë",

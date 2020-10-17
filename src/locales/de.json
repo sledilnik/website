@@ -450,6 +450,7 @@
             "population": "Bevölkerung",
             "mortalityOfConfirmedCases": "Sterblichkeit bei bestätigten Fällen",
             "confirmedCases": "Bestätigte Fälle",
+            "per100k": "pro 100 tausend",
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
