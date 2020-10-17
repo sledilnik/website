@@ -82,7 +82,7 @@ let update (msg: Msg) (state: State) =
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
-        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
+        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
 open Elmish.React

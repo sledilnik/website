@@ -97,9 +97,9 @@ let parseRegionsData (csv : string) =
         | Error _ -> None)
     |> Array.toList
 
-let load =
+let load(apiEndpoint: string) =
     async {
-        let! (statusCode, response) = Http.get url
+        let! (statusCode, response) = Http.get (sprintf "%s/api/municipalities?format=csv" apiEndpoint)
 
         if statusCode <> 200 then
             return RegionsDataLoaded (sprintf "Napaka pri nalaganju podatkov o občinah: %d" statusCode |> Failure)
