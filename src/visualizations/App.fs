@@ -8,7 +8,7 @@ open Types
 open CountriesChartViz.Analysis
 open I18N
 
-let init (query: obj) (visualization: string option) (page: string) =
+let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
     let renderingMode =
         match visualization with
         | None -> Normal
@@ -41,6 +41,7 @@ let init (query: obj) (visualization: string option) (page: string) =
 
     let initialState =
         {
+          ApiEndpoint = apiEndpoint
           Page = page
           Query = query
           StatsData = NotAsked

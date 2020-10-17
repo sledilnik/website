@@ -147,6 +147,7 @@ type RenderingMode =
 
 type State =
     {
+      ApiEndpoint: string
       Page: string
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>

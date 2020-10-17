@@ -13,6 +13,7 @@
 
 <script>
 import { Visualizations } from 'visualizations/App.fsproj';
+import { ApiEndpoint } from '@/store/index.js'
 
 export default {
   name: 'ChartEmbed',
@@ -28,7 +29,7 @@ export default {
          - AgeGroups
          - Hospitals
       */
-      Visualizations('visualizations', 'chart', this.$route.query, this.$route.params.type);
+      Visualizations('visualizations', 'chart', this.$route.query, ApiEndpoint(), this.$route.params.type);
     });
   },
 };
