@@ -592,6 +592,10 @@
         "9": {
             "title": "faza<br>9",
             "description": "prehod na delno sledenje stikov"
+        },
+        "10": {
+            "title": "faza<br>10",
+            "description": "sledenje stikov prekinjeno"
         }
     },
     "charts": {

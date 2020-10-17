@@ -159,6 +159,10 @@
         "9": {
             "title": "phase<br>9",
             "description": "switch to partial contact tracing"
+        },
+        "10": {
+            "title": "phase<br>10",
+            "description": "contact tracing suspended"
         }
     },
     "charts": {
