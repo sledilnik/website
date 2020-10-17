@@ -350,7 +350,7 @@
             "absolute": "Absolute",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "per100k": "per 100k"        
+            "per100k": "per 100k"
         },
         "rmap": {
             "title": "Region Map"
@@ -407,7 +407,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: Unlike other data that is published regularly for different categories, official sources obtain demographic data with a time lapse (age, municipality ...), so these are usually known with a one-day delay. This is also the reason that in the By Age Groups display, there may be some deviations from data in other displays, such as lower values of the number of confirmed cases and deaths."
+            "disclaimer": "Note: Unlike other data that is published regularly for different categories, official sources obtain demographic data with a time lapse (age, municipality …), so these are usually known with a one-day delay. This is also the reason that in the By Age Groups display, there may be some deviations from data in other displays, such as lower values of the number of confirmed cases and deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
