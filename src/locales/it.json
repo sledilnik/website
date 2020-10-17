@@ -714,9 +714,9 @@
             "allHospitals": "Tutti gli ospedali"
         },
         "countriesTotalDeathsPer1M": {
-            "yAxisTitle": "Totale decessi per 1 milione di persone",
-            "legendTitle": "Totale decessi per 1 milione di persone",
-            "title": "Paesi: totale decessi per 1 milione di persone"
+            "yAxisTitle": "Totale decessi per 100.000 di persone",
+            "legendTitle": "Totale decessi per 100.000 di persone",
+            "title": "Paesi: totale decessi per 100.000 di persone"
         },
         "infections": {
             "title": "Struttura dei casi confermati",
@@ -749,9 +749,9 @@
             "sentToSelfIsolation": "Autoisolamento"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Nuovi casi per 1M di persone",
-            "yAxisTitle": "Nuovi casi per 1 milione di persone",
-            "title": "Paesi: nuovi casi per 1 milione di persone"
+            "legendTitle": "Nuovi casi per 100.000 di persone",
+            "yAxisTitle": "Nuovi casi per 100.000 di persone",
+            "title": "Paesi: nuovi casi per 100.000 di persone"
         },
         "ageGroupsTimeline": {
             "activeCasesRelative": "Casi attivi (relativi)",
@@ -803,10 +803,10 @@
             "statusNone": "-",
             "countryStatus": "Restrizioni",
             "importedCases": "Casi importati in 14 giorni",
-            "incidence1M": "Nuovi casi in 14 giorni per 1M",
+            "incidence100k": "Nuovi casi in 14 giorni per 100.000",
             "newCases": "Nuovi casi",
             "restrictions": "Restrizioni e casi importati",
-            "twoWeekIncidence": "Incidenza di 14 giorni per milione",
+            "twoWeekIncidence": "Incidenza di 14 giorni per 100.000",
             "title": "COVID-19 Situazione in Europa"
         },
         "map": {
@@ -905,9 +905,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "criteri per lista rossa",
-            "legendTitle": "Casi attivi per 1M di persone",
-            "yAxisTitle": "Casi attivi per 1 milione di persone",
-            "title": "Paesi: casi attivi per 1 milione di persone"
+            "legendTitle": "Casi attivi per 100.000 di persone",
+            "yAxisTitle": "Casi attivi per 100.000 di persone",
+            "title": "Paesi: casi attivi per 100.000 di persone"
         },
         "rmap": {
             "title": "Mappa delle regioni"

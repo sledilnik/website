@@ -1,16 +1,5 @@
 # TODO
 
-- https://github.com/sledilnik/website/issues/583
-    - add english names
-    - sort selectors below by value
-
-- https://github.com/sledilnik/website/issues/593
-    - disclaimer for age groups
-        - can we extract only a part of it
-        
-    - `charts.metricsComparison.show7DaysAverage`
-    
-
 ## New countries chart
 - deaths per cases (windowed, averaged)
 

@@ -263,7 +263,7 @@
         },
         "europe": {
             "restrictions": "Kufizimet dhe rastet e importuara",
-            "twoWeekIncidence": "Incidenca 14 ditore për 1 milion banorë",
+            "twoWeekIncidence": "Incidenca 14 ditore për 100.000 banorë",
             "title": "Situata me COVID-19 në Evropë",
             "statusRed": "karantinë e rreptë 10 ditore",
             "statusOrange": "karantinë 10 ditore me përjashtime",
@@ -271,7 +271,7 @@
             "statusNone": "-",
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
-            "incidence1M": "Raste të reja për 14 ditë në 1M",
+            "incidence100k": "Raste të reja për 14 ditë në 100.000",
             "noData": "Nuk ka të dhëna",
             "newCases": "Raste të reja"
         },
@@ -282,20 +282,20 @@
             "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Gjithsej raste vdekje për 1 milion banorë",
-            "title": "Shtetet: Gjithsej raste vdekje për 1 milion banorë",
-            "yAxisTitle": "Gjithsej raste vdekje për 1 milion banorë"
+            "legendTitle": "Gjithsej raste vdekje për 100.000 banorë",
+            "title": "Shtetet: Gjithsej raste vdekje për 100.000 banorë",
+            "yAxisTitle": "Gjithsej raste vdekje për 100.000 banorë"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Raste të reja në ditë për 1 milion banorë",
-            "yAxisTitle": "Raste të reja në ditë për 1 milion banorë",
-            "title": "Shtetet: Raste të reja në ditë për 1 milion banorë"
+            "legendTitle": "Raste të reja në ditë për 100.000 banorë",
+            "yAxisTitle": "Raste të reja në ditë për 100.000 banorë",
+            "title": "Shtetet: Raste të reja në ditë për 100.000 banorë"
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteret për listën e kuqe",
-            "legendTitle": "Rastet aktive për 1M popullsi",
-            "yAxisTitle": "Rastet aktive për 1 milion popullsi",
-            "title": "Shtetet: Rastet aktive për 1 milion popullsi"
+            "legendTitle": "Rastet aktive për 100.000 popullsi",
+            "yAxisTitle": "Rastet aktive për 100.000 popullsi",
+            "title": "Shtetet: Rastet aktive për 100.000 popullsi"
         },
         "world": {
             "title": "Gjendja me COVID-19 në botë"

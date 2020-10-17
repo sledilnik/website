@@ -358,14 +358,14 @@
             "yesterday": "Jučer"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
-            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
-            "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -541,9 +541,9 @@
             "statusNone": "-",
             "countryStatus": "Ograničenja",
             "importedCases": "Uvezeni slučajevi u 14 dana",
-            "incidence1M": "Novi slučajevi u 14 dana na milijun stanovnika",
+            "incidence100k": "Novi slučajevi u 14 dana na 100.000 stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
-            "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
+            "twoWeekIncidence": "14-dnevni slučajevi na 100.000 stanovnika",
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka"
@@ -566,9 +566,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteriji za crvenu listu",
-            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
-            "title": "Države: Aktivni slučajevi na milijun stanovnika"
+            "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "title": "Države: Aktivni slučajevi na 100.000 stanovnika"
         },
         "dailyComparison": {
             "positivePct": "Udio pozitivnih testova (%)",
@@ -594,6 +594,55 @@
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Karantena i izvori zaraze"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "date": "Datum",
+                "title": "Ključevi objavljeni po korisniku, po danu",
+                "users": "Korisnici",
+                "count": "(prosječni) broj ključeva po korisniku na određeni dan",
+                "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'"
+            },
+            "usercount": {
+                "title": "Procijenjeni broj korisnika koji su objavili ključeve po danu",
+                "runningTotal": "Ukupni broj korisnika koji su objavili ključeve",
+                "users": "Broj korisnika koji su objavili ključeve po danu",
+                "date": "Datum"
+            },
+            "publishedByRisk": {
+                "risk": "Opasnost",
+                "published": "Broj objavljenih ključeva na određeni dan",
+                "tooltip": "datum.published + ' ključevi s razinom opasnosti ' + datum.risk",
+                "date": "Datum",
+                "title": "Objavljeni ključevi po danu, po razini opasnosti"
+            },
+            "validByRisk": {
+                "risk": "Opasnost",
+                "title": "Valjani ključevi po danu, po razini opasnosti",
+                "valid": "Broj valjanih ključeva na određeni dan",
+                "tooltip": "datum.valid + ' ključevi s razinom opasnosti ' +datum.risk",
+                "date": "Datum"
+            },
+            "published": {
+                "runningTotal": "Ukupno objavljeni ključevi",
+                "perDay": "Objavljeni ključevi po danu",
+                "date": "Datum",
+                "title": "Dnevni ključevi objavljeni po danu"
+            },
+            "valid": {
+                "perDay": "Valjani ključevi po danu",
+                "date": "Datum",
+                "title": "Valjani ključevi po danu"
+            },
+            "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoze](https://github.com/mh-/diagnosis-keys).",
+            "title": "Aplikacija #OstaniZdrav za obavijesti o izloženosti"
+        },
+        "regions100k": {
+            "red": "kriteriji za crvenu listu",
+            "deceased": "Smrtni slučajevi",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "activeCases": "Aktivni slučajevi",
+            "title": "Slučajevi po regijama (po 100.000 osoba)"
         }
     },
     "shortMonth": {
@@ -621,7 +670,7 @@
         },
         "municipality": {
             "title": "Općine",
-            "description": "Zabrana kretanja izvan općinskih granica, obvezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
+            "description": "Zabrana kretanja izvan općinskih granica, obavezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
         },
         "liftService": {
             "description": "Opuštanje: gradnja, usluge, sportovi na otvorenom, <br>dopušteni su neki redovni javni prijevozi",
@@ -738,6 +787,10 @@
         "testOrQuarantine": {
             "description": "Negativni test ili 10-dnevna karantena pri ulazu iz zemalja s crvenog ili narančastog popisa",
             "title": "Test"
+        },
+        "regions": {
+            "description": "Ograničenja za crvene regije: zabrana kretanja izvan općinskih granica, upotreba maski vani, ograničenja za neke usluge",
+            "title": "Regije"
         }
     },
     "pageNotFound": {
@@ -782,7 +835,8 @@
         "faq": "FAQ",
         "sources": "Izvori",
         "menu": "Izbornik",
-        "animation": "Animacija"
+        "animation": "Animacija",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "phase": {
         "4": {
@@ -1084,5 +1138,14 @@
                 "title": "faza<br>1"
             }
         }
+    },
+    "weekdayShort": {
+        "6": "Su",
+        "5": "Pe",
+        "4": "Če",
+        "3": "Sr",
+        "2": "Ut",
+        "1": "Po",
+        "0": "Ne"
     }
 }
