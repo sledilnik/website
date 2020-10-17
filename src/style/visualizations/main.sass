@@ -398,9 +398,23 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .map-chart, .rmap-chart
     min-height: 780px
+    $bar-color: #d5c768
 
     @include media-breakpoint-down(sm)
       min-height: 636px
+
+    .bars, .bar-wrapper
+      display: flex
+      align-items: flex-end
+
+    .bar-wrapper
+      position: relative
+      height: 50px
+
+    .bar
+      width: 3px
+      margin-right: 1px
+      background-color: $bar-color
 
     .map
       height: 600px
