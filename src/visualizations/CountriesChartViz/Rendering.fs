@@ -157,7 +157,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 backgroundColor = "rgba(255,255,255,0.9)"
         |}
 
-    let redZoneStart = 4000
+    let redZoneStart = 50
 
     let baseOptions =
         basicChartOptions state.ScaleType "covid19-metrics-comparison"
@@ -225,7 +225,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                    plotBands =
                        match state.MetricToDisplay with
                        | ActiveCasesPer1M -> [|
-                           {| from=redZoneStart; ``to``=1000000.0
+                           {| from=redZoneStart; ``to``=10000.0
                               color="#FEF8F7"
                             |}
                         |]
