@@ -263,7 +263,7 @@
         },
         "europe": {
             "restrictions": "Kufizimet dhe rastet e importuara",
-            "twoWeekIncidence": "Incidenca 14 ditore për 1 milion banorë",
+            "twoWeekIncidence": "Incidenca 14 ditore për 100.000 banorë",
             "title": "Situata me COVID-19 në Evropë",
             "statusRed": "karantinë e rreptë 10 ditore",
             "statusOrange": "karantinë 10 ditore me përjashtime",
@@ -271,7 +271,7 @@
             "statusNone": "-",
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
-            "incidence1M": "Raste të reja për 14 ditë në 1M",
+            "incidence100k": "Raste të reja për 14 ditë në 100.000",
             "noData": "Nuk ka të dhëna",
             "newCases": "Raste të reja"
         },

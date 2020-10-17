@@ -357,10 +357,10 @@
         },
         "europe": {
             "title": "COVID-19 Situation in Europe",
-            "twoWeekIncidence": "14 days incidence per million",
+            "twoWeekIncidence": "14 days incidence per 100,000 people",
             "restrictions": "Restrictions and imported cases",
             "newCases": "New cases",
-            "incidence1M": "New cases in 14 days per 1M",
+            "incidence100k": "New cases in 14 days per 100,000 people",
             "importedCases": "Imported cases in 14 days",
             "countryStatus": "Restrictions",
             "statusNone": "-",

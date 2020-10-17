@@ -409,11 +409,11 @@
             "statusGreen": "keine Einschränkungen",
             "restrictions": "Einschränkungen und eingeschleppte Fälle",
             "countryStatus": "Einschränkungen",
-            "twoWeekIncidence": "14-tägige Fälle pro 1 M",
+            "twoWeekIncidence": "14-tägige Fälle pro 100.000",
             "statusNone": "–",
             "statusRed": "strikte 10-tägige Quarantäne",
             "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
-            "incidence1M": "Neue Fälle in 14 Tagen pro 1 Mio.",
+            "incidence100k": "Neue Fälle in 14 Tagen pro 100.000",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",
             "importedCases": "Eingeschleppte Fälle in 14 Tagen"

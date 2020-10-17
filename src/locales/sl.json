@@ -819,10 +819,10 @@
         },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
-            "twoWeekIncidence": "14-dnevna pojavnost na 1M prebivalcev",
+            "twoWeekIncidence": "14-dnevna pojavnost na 100.000 prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
             "newCases": "Novi primeri",
-            "incidence1M": "Novi primeri v 14 dneh na 1M",
+            "incidence100k": "Novi primeri v 14 dneh na 100.000 prebivalcev",
             "importedCases": "Uvoženi primeri v 14 dneh",
             "countryStatus": "Omejitve",
             "statusNone": "-",

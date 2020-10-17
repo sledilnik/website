@@ -28,7 +28,7 @@ type OwdData = OurWorldInDataRemoteData
 type CountryData =
     { Country: string
       // OWD data
-      TwoWeekIncidence1M: float
+      TwoWeekIncidence100k: float
       TwoWeekIncidence: float []
       TwoWeekIncidenceMaxValue: float
       NewCases: int list
@@ -336,11 +336,12 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
 
         let country = I18N.tt "country" code // TODO: change country code in i18n for Kosovo
 
-        let incidence1M =
-            dps
+        let incidence100k =
+            (dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
-            |> List.sum
+            |> List.sum)
+            * 10.
 
         let incidence =
             dps
@@ -381,7 +382,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
 
         let cd: CountryData =
             { CountryData.Country = country
-              CountryData.TwoWeekIncidence1M = incidence1M
+              CountryData.TwoWeekIncidence100k = incidence100k
               CountryData.TwoWeekIncidence = incidence
               CountryData.TwoWeekIncidenceMaxValue = incidenceMaxValue
               CountryData.NewCases = newCases
@@ -441,7 +442,7 @@ let mapData state =
     |> List.map (fun code ->
         match state.CountryData.TryFind(code) with
         | Some cd ->
-            let incidence1M = cd.TwoWeekIncidence1M |> int
+            let incidence100k = cd.TwoWeekIncidence100k |> int
             let incidence = cd.TwoWeekIncidence
             let incidenceMaxValue = cd.TwoWeekIncidenceMaxValue
 
@@ -459,7 +460,7 @@ let mapData state =
             let baseRec =
                 {| code = code
                    country = cd.Country
-                   incidence1M = incidence1M
+                   incidence100k = incidence100k
                    incidence = incidence
                    incidenceMaxValue = incidenceMaxValue
                    newCases = nc
@@ -472,7 +473,7 @@ let mapData state =
             match state.ChartType with
             | TwoWeekIncidence ->
                 {| baseRec with
-                       value = incidence1M
+                       value = incidence100k
                        color = null
                        dataLabels = {| enabled = false |} |}
             | Restrictions ->
@@ -486,7 +487,7 @@ let mapData state =
                value = 0
                color = null
                dataLabels = {| enabled = false |}
-               incidence1M = 0
+               incidence100k = 0
                incidence = null
                incidenceMaxValue = 0.0
                newCases = 0
@@ -516,21 +517,22 @@ let renderMap state geoJson _ =
         {| dataClassColor = "category"
            dataClasses =
                [| {| from = 0; color = "#ffffcc" |}
-                  {| from = 25; color = "#ffeda0" |}
-                  {| from = 50; color = "#fed976" |}
-                  {| from = 100; color = "#feb24c" |}
-                  {| from = 200; color = "#fd8d3c" |}
-                  {| from = 400; color = "#fc4e2a" |}
-                  {| from = 800; color = "#e31a1c" |}
-                  {| from = 1600; color = "#b10026" |} |] |}
+                  {| from = 250; color = "#ffeda0" |}
+                  {| from = 500; color = "#fed976" |}
+                  {| from = 1000; color = "#feb24c" |}
+                  {| from = 2000; color = "#fd8d3c" |}
+                  {| from = 4000; color = "#fc4e2a" |}
+                  {| from = 8000; color = "#e31a1c" |}
+                  {| from = 16000; color = "#b10026" |} |] |}
         |> pojo
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
         let twoWeekIncidence = points?incidence
-        let twoWeekIncidenceMaxValue = Math.Ceiling(float points?incidenceMaxValue)
+        let twoWeekIncidenceMaxValue =
+            Math.Ceiling(float points?incidenceMaxValue)
         let country = points?country
-        let incidence1M = points?incidence1M
+        let incidence100k = points?incidence100k
         let newCases = points?newCases
         let ncDate = points?ncDate
         let imported = points?imported
@@ -550,7 +552,7 @@ let renderMap state geoJson _ =
                 country
                 (chartText "countryStatus") rType rAltText
                 (chartText "importedCases") imported impDate
-                (chartText "incidence1M") incidence1M
+                (chartText "incidence100k") incidence100k
                 (chartText "newCases") newCases ncDate
 
         s.Append textHtml |> ignore

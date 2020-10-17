@@ -803,10 +803,10 @@
             "statusNone": "-",
             "countryStatus": "Restrizioni",
             "importedCases": "Casi importati in 14 giorni",
-            "incidence1M": "Nuovi casi in 14 giorni per 1M",
+            "incidence100k": "Nuovi casi in 14 giorni per 100.000",
             "newCases": "Nuovi casi",
             "restrictions": "Restrizioni e casi importati",
-            "twoWeekIncidence": "Incidenza di 14 giorni per milione",
+            "twoWeekIncidence": "Incidenza di 14 giorni per 100.000",
             "title": "COVID-19 Situazione in Europa"
         },
         "map": {
