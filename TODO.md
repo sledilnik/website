@@ -1,6 +1,9 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/606
+    - how is doubling calculated?
+        - see municipalities
+    - show previous week, current, next 7, 14 days
     
 
 ## New countries chart
