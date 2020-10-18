@@ -354,7 +354,7 @@ let renderMap (state : State) =
                 | null -> null
                 | _ ->
                     confirmedCasesValue
-                    |> Array.skip (confirmedCasesValue.Length - 60)
+                    |> Array.skip (confirmedCasesValue.Length - 45)
                     |> Array.iter (fun area ->
                         let barHeight = Math.Ceiling(float area * float barMaxHeight / confirmedCasesMaxValue)
                         let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
