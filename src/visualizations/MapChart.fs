@@ -348,7 +348,7 @@ let renderMap (state : State) =
             let s = Text.StringBuilder()
             let barMaxHeight = 50
 
-            s.Append "<div class='bars'>" |> ignore
+            s.Append "<p><div class='bars'>" |> ignore
 
             match confirmedCasesValue with
                 | null -> null
