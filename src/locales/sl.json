@@ -555,6 +555,10 @@
         "regions": {
             "title": "Regije",
             "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
+        },
+        "schools6+": {
+            "title": "Šole 6+",
+            "description": "Šolanje na daljavo za učence osnovnih šol od 6. razreda, srednjih in glasbenih šol"
         }
     },
     "phase": {
@@ -1030,7 +1034,7 @@
     },
     "mk": {
         "hospital": {
-            "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep",
+            "infdrugi": "Infekcijski oddelek v Tetovu, Ohridu, Velesu, Kumanovu in Prilepu",
             "stip": "Štip",
             "bitola": "Bitola",
             "gob8sep": "GOB 8mi septemvri",

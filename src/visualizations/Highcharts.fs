@@ -127,6 +127,7 @@ let addContainmentMeasuresFlags
         7, 10, "#FFe6e6", "cnk"
         9, 10, "#FFe6e6", "gatherings10max"
         16,10, "#FFe6e6", "regions"
+        19,10, "#FFe6e6", "schools6+"
     |]
     {|
         ``type`` = "flags"

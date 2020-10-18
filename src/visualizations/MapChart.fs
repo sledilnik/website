@@ -325,8 +325,8 @@ let renderMap (state : State) =
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
                nullColor = "white"
-               borderColor = "#888"
-               borderWidth = 0.5
+               borderColor = "#000"
+               borderWidth = 0.2
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
@@ -354,6 +354,7 @@ let renderMap (state : State) =
                 | null -> null
                 | _ ->
                     confirmedCasesValue
+                    |> Array.skip (confirmedCasesValue.Length - 60)
                     |> Array.iter (fun area ->
                         let barHeight = Math.Ceiling(float area * float barMaxHeight / confirmedCasesMaxValue)
                         let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
@@ -403,14 +404,35 @@ let renderMap (state : State) =
                valueDecimals = 0 |}
             |> pojo
 
-        let colorAxis =
+        let colorMax = 
+            match state.DataTimeInterval with
+            | Complete -> 20000.
+            | LastDays days -> 
+                match days with
+                    | 21 -> 10500.
+                    | 14 -> 7000.
+                    | 7 -> 3500.
+                    | 1 -> 500.
+                    | _ -> 100.
+        
+        let colorMin = 
+            match state.DisplayType with 
+                | AbsoluteValues -> 0.9
+                | RegionPopulationWeightedValues -> colorMax / 7000.
+
+        let colorAxis = 
             match state.ContentType with
                 | Deceased ->
                     {|
                         ``type`` = "linear"
+                        tickInterval = 0.4
+                        max = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                        min = colorMin 
+                        endOnTick = false 
+                        startOnTick = false  
                         stops =
                             [|
-                                (0.0, "#ffffff")
+                                (0.000, "#ffffff")
                                 (0.111, "#efedf5")
                                 (0.222, "#dadaeb")
                                 (0.333, "#bcbddc")
@@ -424,21 +446,26 @@ let renderMap (state : State) =
                 | ConfirmedCases ->
                     {|
                         ``type`` = "logarithmic"
-                        min = 1.0001
+                        tickInterval = 0.4
+                        max = colorMax
+                        min = colorMin 
+                        endOnTick = false
+                        startOnTick = false
                         stops =
                             [|
-                                (0.0, "#ffffff")
-                                (0.083, "#ffeda0")
-                                (0.166, "#fed976")
-                                (0.25, "#feb24c")
-                                (0.333, "#fd8d3c")
-                                (0.417, "#fc4e2a")
-                                (0.5, "#e31a1c")
-                                (0.583, "#bd0026")
-                                (0.666, "#800026")
-                                (0.75, "#930044")
-                                (0.833, "#5b005c")
-                                (0.917, "#26002b")
+                                (0.000,"#ffffff")
+                                (0.001,"#fff7db")
+                                (0.200,"#ffefb7") 
+                                (0.280,"#ffe792") 
+                                (0.360,"#ffdf6c") 
+                                (0.440,"#ffb74d") 
+                                (0.520,"#ff8d3c") 
+                                (0.600,"#f85d3a") 
+                                (0.680,"#ea1641") 
+                                (0.760,"#d0004e") 
+                                (0.840,"#ad005b") 
+                                (0.920,"#800066") 
+                                (0.999,"#43006e")
                             |]
                     |} |> pojo
 
