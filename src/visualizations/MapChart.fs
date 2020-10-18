@@ -412,16 +412,21 @@ let renderMap (state : State) =
             |> pojo
 
         let colorMax = 
-            match state.DataTimeInterval with
-            | Complete -> 20000.
-            | LastDays days -> 
-                match days with
-                    | 21 -> 10500.
-                    | 14 -> 7000.
-                    | 7 -> 3500.
-                    | 1 -> 500.
-                    | _ -> 100.
-        
+            match state.ContentType with
+            | ConfirmedCases -> 
+                match state.DataTimeInterval with
+                | Complete -> 20000.
+                | LastDays days -> 
+                    match days with
+                        | 21 -> 10500.
+                        | 14 -> 7000.
+                        | 7 -> 3500.
+                        | 1 -> 500.
+                        | _ -> 100.
+            | Deceased -> 
+                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                if dataMax < 1. then 10. else dataMax 
+
         let colorMin = 
             match state.DisplayType with 
                 | AbsoluteValues -> 0.9
@@ -433,7 +438,7 @@ let renderMap (state : State) =
                     {|
                         ``type`` = "linear"
                         tickInterval = 0.4
-                        max = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                        max = colorMax 
                         min = colorMin 
                         endOnTick = false 
                         startOnTick = false  
