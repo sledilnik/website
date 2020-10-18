@@ -60,7 +60,7 @@ const actions = {
   fetchData: async ({
     commit
   }) => {
-    const data = await ApiService.get(`${ApiEndpoint}/api/hospitals`)
+    const data = await ApiService.get(`${ApiEndpoint()}/api/hospitals`)
     const d = exportTime(data.headers.timestamp)
 
     let hospitals = {}

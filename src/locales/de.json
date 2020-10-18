@@ -21,7 +21,8 @@
         "tables": "Tabellen",
         "faq": "FAQ",
         "world": "Welt",
-        "animation": "Animation"
+        "animation": "Animation",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "country": {
         "ABW": "Aruba",
@@ -402,7 +403,8 @@
             "dataSource": "Datenquelle",
             "yAxis": "Y-Achse:",
             "loading": "Daten werden geladen …",
-            "sortBy": "Sortieren nach:"
+            "sortBy": "Sortieren nach:",
+            "weekYearDateFormat": "%W. Woche %Y"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -593,6 +595,72 @@
             "active": "Aktive Fälle",
             "new": "Bestätigte Fälle",
             "title": "Vergleich nach Wochentag"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "count": "(durchschnittliche) Anzahl Schlüssel pro Benutzer",
+                "tooltip": "datum.user_count + ' Benutzer schickte ' + datum.key_count + ' Schlüssel'",
+                "title": "Anzahl Schlüssel pro Benutzer und Tag",
+                "users": "Anzahl Benutzer",
+                "date": "Datum"
+            },
+            "usercount": {
+                "runningTotal": "Gesamtanzahl Benutzer die Schlüssel veröffentlichen",
+                "users": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen",
+                "title": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen, pro Tag",
+                "date": "Datum"
+            },
+            "publishedByRisk": {
+                "risk": "Risikostufe",
+                "published": "Anzahl veröffentlichter Schlüssel",
+                "tooltip": "datum.published + ' Schlüssel mit Risikostufe ' + datum.risk",
+                "title": "Anzahl veröffentlichter Schlüssel pro Tag nach Risikostufe",
+                "date": "Datum"
+            },
+            "validByRisk": {
+                "valid": "Anzahl gültiger Schlüssel pro Tag",
+                "tooltip": "datum.valid + ' Schlüssel mit Risikostufe ' +datum.risk",
+                "title": "Anzahl gültiger Schlüssel pro Tag nach Risikostufe",
+                "date": "Datum",
+                "risk": "Risiko"
+            },
+            "published": {
+                "runningTotal": "Gesamtzahl veröffentlichter Tagesschlüssel",
+                "perDay": "Anzahl veröffentlichter Tagesschlüssel",
+                "title": "Anzahl veröffentlichter Tagesschlüssel pro Tag",
+                "date": "Datum"
+            },
+            "valid": {
+                "perDay": "Anzahl gültiger Schlüssel",
+                "title": "Anzahl gültiger Schlüssel pro Tag",
+                "date": "Datum"
+            },
+            "title": "Die #OstaniZdrav Benachrichtigungs-App"
+        },
+        "sources": {
+            "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
+            "confirmedCases": "Bestätigte Fälle",
+            "sentToQuarantine": "In die Quarantäne geschickt",
+            "title": "Quaratäne und Infektionsquellen",
+            "bySourceCountry": "Importierte Fälle",
+            "bySourceRelative": "Infektionsquellen (relativ)",
+            "bySource": "Infektionsquellen",
+            "quarantineRelative": "Quarantäne (relativ)",
+            "quarantine": "Quarantäne",
+            "bySourceCountryRelative": "Importierte Fälle (Relativ)",
+            "importedCases": "Importierte Fälle",
+            "importRelatedCases": "Bezogen auf importierte Fälle",
+            "localSource": "Lokale Quelle",
+            "sourceUnknown": "Unbekannte Quelle",
+            "totalConfirmed": "Bestätigte Fälle insgesamt",
+            "totalImported": "Importierte Fälle insgesamt"
+        },
+        "regions100k": {
+            "red": "Kriterum für rote Liste",
+            "deceased": "Todesfälle",
+            "confirmedCases": "Bestätigte Fälle",
+            "activeCases": "Aktive Fälle",
+            "title": "Fälle nach Regionen (pro 100,000 Einwohner)"
         }
     },
     "tableDict": {
@@ -774,12 +842,16 @@
             "title": "Masken"
         },
         "quarantine10days": {
-            "description": "Obligatorische Quarantäne von 10 Tagen reduziert",
+            "description": "Obligatorische Quarantäne auf 10 Tage reduziert",
             "title": "10 Tage"
         },
         "testOrQuarantine": {
             "description": "Negativer Test oder 10-tägige Quarantäne bei Einreise aus Ländern der roten oder orangefarbenen Liste",
             "title": "Test"
+        },
+        "regions": {
+            "description": "Einschränkungen für rote Regionen: Bewegung außerhalb der Gemeindegrenzen, Verwendung von Masken im Freien, Einschränkung einiger Dienstleistungen",
+            "title": "Regionen"
         }
     },
     "region": {
@@ -1011,6 +1083,10 @@
         "8": {
             "description": "neue Testmethodik – Kinder",
             "title": "Phase<br>8"
+        },
+        "10": {
+            "description": "Kontaktverfolgung ausgesetzt",
+            "title": "Phase<br>10"
         }
     },
     "embedMaker": {
@@ -1055,7 +1131,8 @@
         "x_days_ago": "Vor {{ count }} Tag",
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
-        "in_x_days_plural": "in {{ count }} Tagen"
+        "in_x_days_plural": "in {{ count }} Tagen",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. Woche %Y}})"
     },
     "country-groups": {
         "groupNeighbouring": "Nachbarländer",
@@ -1065,5 +1142,14 @@
         "groupExYu": "Ex-Jugoslawien",
         "groupEastAsiaOceania": "Ostasien und Ozeanien",
         "groupLatinAmerica": "Lateinamerika"
+    },
+    "weekdayShort": {
+        "6": "Sa",
+        "5": "Fr",
+        "4": "Do",
+        "3": "Mi",
+        "2": "Di",
+        "1": "Mo",
+        "0": "So"
     }
 }
