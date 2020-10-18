@@ -245,8 +245,8 @@ let renderChartOptions (state : State) dispatch =
                        min = None
                        gridZIndex = 1
                        plotLines =
-                           match state.ChartConfig.RelativeTo with
-                           | Pop100k -> [|
+                           match state.ChartConfig.RelativeTo, state.MetricType with
+                           | Pop100k, ActiveCases -> [|
                                {| value=redThreshold
                                   label={|
                                            text=I18N.chartText chartTextGroup "red"
@@ -261,8 +261,8 @@ let renderChartOptions (state : State) dispatch =
                             |]
                            | _ -> [| |]
                        plotBands =
-                           match state.ChartConfig.RelativeTo with
-                           | Pop100k -> [|
+                           match state.ChartConfig.RelativeTo, state.MetricType with
+                           | Pop100k, ActiveCases -> [|
                                {| from=redThreshold; ``to``=100000.0
                                   color="#FCD5CF30"
                                 |}
