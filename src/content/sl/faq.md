@@ -318,7 +318,9 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 
 * **Faza 8 (10. september–9. oktober)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko. 
 
-* **Faza 9 (9. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiologi bodo zaradi preveč okužb z novim koronavirusom prioritetno iskali stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
+* **Faza 9 (9.-17. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom prioritetno iskala stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
+
+* **Faza 10 (17. oktober)**: NIJZ je sporočil da [ne bo več sledil stikom](https://www.nijz.si/spremenjen-protokol-sledenja-stikom-okuzenih-z-novim-koronavirusom-sars-cov-2) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom vzpostavila kontakt z vsako osebo s potrjeno okužbo preko telefona, ji podala informacije o poteku izolacije in izdala kodo za aktivacijo v aplikaciji #OstaniZdrav. Oseba s potrjeno okužbo bo prejela tudi navodila, da sama obvesti vse osebe, s katerimi je bila v stiku. Posledično ne bo podajala predlogov za ukrep karantene.
 </details>
 
 <details>

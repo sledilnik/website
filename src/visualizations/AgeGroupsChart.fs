@@ -484,12 +484,15 @@ let render (state : State) dispatch =
         renderChartContainer state
         renderChartCategorySelectors state.ChartMode dispatch
 
-        Html.div [
-            prop.className "disclaimer"
-            prop.children [
-                Html.text (chartText "disclaimer")
+        match state.ChartMode with
+        | AbsoluteDeaths | DeathsPerPopulation | DeathsPerInfections ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (chartText "disclaimer")
+                ]
             ]
-        ]
+        | _ -> Html.none
     ]
 
 let renderChart (props : {| data : StatsData |}) =

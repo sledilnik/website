@@ -159,6 +159,10 @@
         "9": {
             "title": "phase<br>9",
             "description": "switch to partial contact tracing"
+        },
+        "10": {
+            "title": "phase<br>10",
+            "description": "contact tracing suspended"
         }
     },
     "charts": {
@@ -330,6 +334,13 @@
             "confirmedCases": "Confirmed Cases",
             "deceased": "Deaths"
         },
+        "regions100k": {
+            "title": "Cases by Region (per 100,000 people)",
+            "activeCases": "Active Cases",
+            "confirmedCases": "Confirmed Cases",
+            "deceased": "Deaths",
+            "red": "criteria for red list"
+        },
         "map": {
             "title": "Municipality Map",
             "mortalityOfConfirmedCases": "Mortality of Confirmed Cases",
@@ -342,17 +353,18 @@
             "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
             "deceased": "Deaths",
-            "confirmedCases": "Confirmed Cases"
+            "confirmedCases": "Confirmed Cases",
+            "per100k": "per 100k"
         },
         "rmap": {
             "title": "Region Map"
         },
         "europe": {
             "title": "COVID-19 Situation in Europe",
-            "twoWeekIncidence": "14 days incidence per million",
+            "twoWeekIncidence": "14 days incidence per 100,000 people",
             "restrictions": "Restrictions and imported cases",
             "newCases": "New cases",
-            "incidence1M": "New cases in 14 days per 1M",
+            "incidence100k": "New cases in 14 days per 100,000 people",
             "importedCases": "Imported cases in 14 days",
             "countryStatus": "Restrictions",
             "statusNone": "-",
@@ -399,7 +411,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: Unlike other data that is published regularly for different categories, official sources obtain demographic data with a time lapse (age, municipality ...), so these are usually known with a one-day delay. This is also the reason that in the By Age Groups display, there may be some deviations from data in other displays, such as lower values of the number of confirmed cases and deaths."
+            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about deceased is reported by instititions (healthcare, retirement homes) to NIJZ, but this data is delayed for several weeks. This is the reason that there is a deviation with total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
@@ -408,20 +420,20 @@
             "activeCasesRelative": "Active cases (relative)"
         },
         "countriesActiveCasesPer1M": {
-            "title": "Countries: Active Cases Per 1 Million People",
-            "yAxisTitle": "Active cases per 1 million people",
-            "legendTitle": "Active cases per 1M people",
+            "title": "Countries: Active Cases Per 100,000 People",
+            "yAxisTitle": "Active cases per 100,000 people",
+            "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Daily Cases Per 1 Million People",
-            "yAxisTitle": "New daily cases per 1 million people",
-            "legendTitle": "New daily cases per 1M people"
+            "title": "Countries: New Daily Cases Per 100,000 People",
+            "yAxisTitle": "New daily cases per 100,000 people",
+            "legendTitle": "New daily cases per 100,000 people"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Countries: Total Deaths Per 1 Million People",
-            "yAxisTitle": "Total deaths per 1 million people",
-            "legendTitle": "Total deaths per 1M people"
+            "title": "Countries: Total Deaths Per 100,000 People",
+            "yAxisTitle": "Total deaths per 100,000 people",
+            "legendTitle": "Total deaths per 100,000 people"
         },
         "countriesDeathsPerCases": {
             "title": "Countries: Total Deaths Per cases",
@@ -466,7 +478,7 @@
                 "title": "Keys valid per day",
                 "date": "Date",
                 "perDay": "Keys valid per day",
-                "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see \n the chart [$t(charts.ostanizdrav.published.title)](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
+                "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see the chart [$t(charts.ostanizdrav.published.title)](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
             },
             "published": {
                 "title": "Daily keys published per day",
@@ -711,6 +723,10 @@
         "testOrQuarantine": {
             "title": "Test",
             "description": "Negative test or 10-day quarantine on entrance from countries in red or orange list"
+        },
+        "regions": {
+            "title": "Regions",
+            "description": "Restrictions for red regions: movement outside municipal borders, use of masks outside, restriction of some services"
         }
     },
     "days": {
