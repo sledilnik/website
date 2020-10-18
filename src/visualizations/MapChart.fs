@@ -291,10 +291,12 @@ let seriesData (state : State) =
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
                             | DoublingTime -> 
-                                let lastTwoWeeks = values.[values.Length - 14..]
-                                let firstHalf = lastTwoWeeks.[..6] |> Seq.sum |> float
-                                let secondHalf = lastTwoWeeks.[7..] |> Seq.sum |> float 
-                                secondHalf/firstHalf - 1.
+                                let casesThisWeek = values.[values.Length - 1] |> float
+                                let casesLastWeek = values.[values.Length - 1 - 7] |> float
+                                let casesWeekBefore = values.[values.Length - 1 - 14] |> float
+                                printfn "Zdaj: %A\n -1:%A\n -2:%A" casesThisWeek casesLastWeek casesWeekBefore
+                                (casesThisWeek - casesLastWeek)/(casesLastWeek - casesWeekBefore) - 1.
+
                         dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
             {| 
                 code = areaData.Code
@@ -375,7 +377,8 @@ let renderMap (state : State) =
                     else
                         label
                 | DoublingTime ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%0.2f</b>" (I18N.t "charts.spread.doublingRateLabel") value 
+                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+                                + sprintf "<br>%s: <b>%0.2f</b>" (I18N.t "charts.spread.doublingRateLabel") value 
                     if absolute > 0 then
                         label 
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
@@ -465,7 +468,7 @@ let renderMap (state : State) =
                     {| 
                         ``type`` = "linear"
                         tickInterval = 0.4
-                        max = 1 
+                        max = 5 
                         min = 0 
                         endOnTick = false
                         startOnTick = false
