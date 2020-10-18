@@ -557,7 +557,7 @@
             "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
         },
         "schools6+": {
-            "title": "Šole-6+",
+            "title": "Šole 6+",
             "description": "Šolanje na daljavo za učence osnovnih šol od 6. razreda, srednjih in glasbenih šol"
         }
     },
