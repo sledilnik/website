@@ -17,18 +17,6 @@ type DataPoint = {
     Value : int option
 }
 
-let parseDate (str : string) =
-    try
-        System.DateTime.Parse(str) |> Ok
-    with _ ->
-        sprintf "Invalid date representation: %s" str |> Error
-
-let parseInt (str : string) =
-    try
-        System.Int32.Parse(str) |> Some
-    with _ ->
-        None
-
 let parseRegionsData (csv : string) =
     let rows = csv.Split("\n")
     let header = rows.[0].Split(",")
@@ -59,13 +47,13 @@ let parseRegionsData (csv : string) =
                 return! Error ""
             else
                 // Date is in the first column
-                let! date = parseDate(columns.[0])
+                let! date = Utils.parseDate(columns.[0])
                 // Merge municipality header information with data columns
                 let data =
                     Array.map2 (fun header value ->
                         match header with
                         | None _ -> None
-                        | Some header -> Some { header with Value = parseInt value }
+                        | Some header -> Some { header with Value = Utils.nativeParseInt value }
                     ) headerMunicipalities columns.[1..]
                     |> Array.choose id
                     // Group by region

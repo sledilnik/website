@@ -234,7 +234,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "hcenters-chart"
             ChartTextsGroup = "hCenters"
             Explicit = false
-            Renderer = fun _ -> lazyView HCentersChart.hCentersChart () }
+            Renderer = fun _ -> lazyView HCentersChart.hCentersChart state.ApiEndpoint }
 
     let infections =
           { VisualizationType = Infections
