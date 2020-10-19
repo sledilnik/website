@@ -11,48 +11,72 @@ let sumOption a b =
     | None, Some y -> Some y
     | Some x, Some y -> Some (x + y)
 
-type HcCounts = {
-    medicalEmergency: int option    // examinations
-    suspectedCovid: int option      // examinations, phoneTriage
-    performed: int option           // tests
-    positive: int option            // tests
-    hospital: int option            // sentTo
-    selfIsolation: int option       // sentTo
+type Examinations = {
+    medicalEmergency: int option
+    suspectedCovid: int option
 } with
-    static member ( + ) (x: HcCounts, y: HcCounts) = {
-        medicalEmergency = sumOption x.medicalEmergency y.medicalEmergency
-        suspectedCovid = sumOption x.suspectedCovid y.suspectedCovid
-        performed = sumOption x.performed y.performed
-        positive = sumOption x.positive y.positive
-        hospital = sumOption x.hospital y.hospital
-        selfIsolation = sumOption x.selfIsolation y.selfIsolation
+    static member (+) (a, b) = {
+        medicalEmergency = sumOption a.medicalEmergency b.medicalEmergency
+        suspectedCovid = sumOption a.suspectedCovid b.suspectedCovid
     }
     static member None = {
         medicalEmergency = None
         suspectedCovid = None
+    }
+
+type PhoneTriage = {
+    suspectedCovid: int option
+} with
+    static member (+) (a, b) = {
+        suspectedCovid = sumOption a.suspectedCovid b.suspectedCovid
+    }
+    static member None = {
+        suspectedCovid = None
+    }
+
+type Tests = {
+    performed: int option
+    positive: int option
+} with
+    static member (+) (a, b) = {
+        performed = sumOption a.performed b.performed
+        positive = sumOption a.positive b.positive
+    }
+    static member None = {
         performed = None
         positive = None
+    }
+
+type SentTo = {
+    hospital: int option
+    selfIsolation: int option
+} with
+    static member (+) (a, b) = {
+        hospital = sumOption a.hospital b.hospital
+        selfIsolation = sumOption a.selfIsolation b.selfIsolation
+    }
+    static member None = {
         hospital = None
         selfIsolation = None
     }
 
 type TotalHcStats = {
-    examinations: HcCounts
-    phoneTriage: HcCounts
-    tests: HcCounts
-    sentTo: HcCounts
+    examinations: Examinations
+    phoneTriage: PhoneTriage
+    tests: Tests
+    sentTo: SentTo
 } with
-    static member ( + ) (x: TotalHcStats, y: TotalHcStats) = {
-        examinations =  x.examinations + y.examinations
-        phoneTriage =  x.phoneTriage + y.phoneTriage
-        tests =  x.tests + y.tests
-        sentTo =  x.sentTo + y.sentTo
+    static member (+) (a, b) = {
+        examinations =  a.examinations + b.examinations
+        phoneTriage =  a.phoneTriage + b.phoneTriage
+        tests =  a.tests + b.tests
+        sentTo =  a.sentTo + b.sentTo
     }
     static member None = {
-        examinations = HcCounts.None
-        phoneTriage = HcCounts.None
-        tests = HcCounts.None
-        sentTo = HcCounts.None
+        examinations = Examinations.None
+        phoneTriage = PhoneTriage.None
+        tests = Tests.None
+        sentTo = SentTo.None
     }
 
 type HcStats = {
