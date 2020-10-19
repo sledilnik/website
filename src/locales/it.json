@@ -977,7 +977,7 @@
                 "title": "Chiavi pubblicate al giorno per livello di rischio"
             },
             "validByRisk": {
-                "description": "Il grafico mostra i livelli di rischio di trasmissione delle chiavi che sono validi per ogni giorno, invece di essere pubblicati in quel giorno (vedere il grafico [$t(charts.ostanizdrav.publishedByRisk.title)] (# publishedByRisk-chart)). Quando un risultato positivo del test viene confermato nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ciascuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per gli ultimi 13 giorni, indipendentemente dal numero di utenti che caricano le proprie chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per questo periodo verranno pubblicate solo in futuro.",
+                "description": "Il grafico mostra i livelli di rischio di trasmissione delle chiavi che sono validi per ogni giorno, invece di essere pubblicati in quel giorno (vedere il grafico [$t(charts.ostanizdrav.publishedByRisk.title)](# publishedByRisk-chart)). Quando un risultato positivo del test viene confermato nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ciascuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per gli ultimi 13 giorni, indipendentemente dal numero di utenti che caricano le proprie chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per questo periodo verranno pubblicate solo in futuro.",
                 "risk": "Rischio",
                 "valid": "Numero di chiavi valide in un determinato giorno",
                 "tooltip": "datum.valid + ' chiavi con livello di rischio ' +datum.risk",
@@ -985,14 +985,14 @@
                 "title": "Chiavi valide al giorno per livello di rischio"
             },
             "published": {
-                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate (barre blu) e il totale corrente delle chiavi pubblicate fino alla data (linea rossa). L'utente medio pubblica tra le 10 e le 12 chiavi giornaliere (vedi grafico [$t(charts.ostanizdrav.usercount.title)]](#usercount-chart)) e possiamo usare queste informazioni per stimare il numero di utenti che hanno inserito il loro codice di conferma dopo essere risultati positivi.",
+                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate (barre blu) e il totale corrente delle chiavi pubblicate fino alla data (linea rossa). L'utente medio pubblica tra le 10 e le 12 chiavi giornaliere (vedi grafico [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)) e possiamo usare queste informazioni per stimare il numero di utenti che hanno inserito il loro codice di conferma dopo essere risultati positivi.",
                 "runningTotal": "Totale delle chiavi pubblicate",
                 "perDay": "Chiavi pubblicate al giorno",
                 "date": "Data",
                 "title": "Chiavi giornaliere pubblicate al giorno"
             },
             "valid": {
-                "description": "Il grafico mostra il numero di chiavi valide in un determinato giorno - in contrapposizione al numero di chiavi pubblicate in quei giorni (vedi il grafico [$t(charts.ostanizdrav.published.title)]](#published-chart)). Quando un'infezione viene confermata nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ognuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per i 13 giorni più recenti, indipendentemente dal numero di utenti che caricano le loro chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per il periodo saranno pubblicate solo in futuro.",
+                "description": "Il grafico mostra il numero di chiavi valide in un determinato giorno - in contrapposizione al numero di chiavi pubblicate in quei giorni (vedi il grafico [$t(charts.ostanizdrav.published.title)](#published-chart)). Quando un'infezione viene confermata nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ognuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per i 13 giorni più recenti, indipendentemente dal numero di utenti che caricano le loro chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per il periodo saranno pubblicate solo in futuro.",
                 "perDay": "Chiavi valide per giorno",
                 "date": "Data",
                 "title": "Chiavi valide per giorno"
