@@ -559,6 +559,10 @@
         "schools6+": {
             "title": "Šole 6+",
             "description": "Šolanje na daljavo za učence osnovnih šol od 6. razreda, srednjih in glasbenih šol"
+        },
+        "movement": {
+            "title": "🚫21-6h",
+            "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
         }
     },
     "phase": {
@@ -600,6 +604,10 @@
         "10": {
             "title": "faza<br>10",
             "description": "sledenje stikov prekinjeno"
+        },
+        "11": {
+            "title": "faza<br>10",
+            "description": "epidemija"
         }
     },
     "charts": {

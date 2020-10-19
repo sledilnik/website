@@ -163,6 +163,10 @@
         "10": {
             "title": "phase<br>10",
             "description": "contact tracing suspended"
+        },
+        "11": {
+            "title": "phase<br>10",
+            "description": "epidemic"
         }
     },
     "charts": {
@@ -732,6 +736,10 @@
         "schools6+": {
             "title": "Schools 6+",
             "description": "Remote schooling for primary schools from grade 6, secondary and music schools"
+        },
+        "movement": {
+            "title": "🚫21-6h",
+            "description": "Movement restried between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
         }
     },
     "days": {
