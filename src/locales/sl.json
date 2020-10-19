@@ -604,6 +604,7 @@
     },
     "charts": {
         "common": {
+            "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
             "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",

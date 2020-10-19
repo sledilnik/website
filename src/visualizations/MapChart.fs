@@ -481,8 +481,22 @@ let renderMap (state : State) =
                             |]
                     |} |> pojo
 
+        let lastDate = 
+            state.Data 
+            |> Seq.map (fun a ->
+                match a.Cases with
+                | Some c -> c |> Seq.tryLast
+                |_ -> None ) 
+            |> Seq.pick (fun c -> 
+                match c with
+                | Some c -> Some c.Date
+                | _ -> None) 
+
+        let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
+            subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
             series = [| series geoJson |]
             legend = legend
             colorAxis = colorAxis
