@@ -750,7 +750,7 @@
             "absoluteLabel": "Potrjeno okuženi dnevno",
             "relativeTitle": "Dnevni prirast okuženih",
             "relativeLabel": "Relativen prirast v %",
-            "relativeWeeklyLabel": "Relativen tedenski prirast v %",
+            "relativeWeeklyLabel": "Tedenski prirast",
             "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
             "doublingRateLabel": "V koliko dneh se število okuženih podvoji",
             "averageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",

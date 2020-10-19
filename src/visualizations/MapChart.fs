@@ -312,7 +312,7 @@ let seriesData (state : State) =
                                 let increaseLastWeek = cases7dAgo - cases14dAgo 
 
                                 if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
-                                else min ( increaseThisWeek/increaseLastWeek - 1.) 5. // Set the maximum value to 5 to cut off infinities
+                                else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
                                 
 
                         dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
@@ -420,16 +420,16 @@ let renderMap (state : State) =
                 | RelativeIncrease ->
                     let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
 
-                    if value < 5. 
+                    if value < 2. 
                         then label + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") 
-                                (Utils.formatTo1DecimalWithTrailingZero (float value * 100.0))
+                                (Utils.formatTo1DecimalWithTrailingZero value)
                     else
                         label + sprintf "<br>%s: <b> > %s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel")
-                             (Utils.formatTo1DecimalWithTrailingZero (float value * 100.0))
+                             (Utils.formatTo1DecimalWithTrailingZero value)
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let legend =
-            let enabled = state.ContentType = ConfirmedCases
+            let enabled = state.ContentType = ConfirmedCases || state.ContentType = RelativeIncrease
             {| enabled = enabled
                title = {| text = null |}
                align = "right"
@@ -438,7 +438,10 @@ let renderMap (state : State) =
                floating = true
                borderWidth = 1
                backgroundColor = "white"
-               valueDecimals = 0 |}
+               valueDecimals = 0 
+               width = 75//TODO: Clean this up for confirmed and deceased cases.
+            |}
+
             |> pojo
 
         let colorMax = 
@@ -516,20 +519,27 @@ let renderMap (state : State) =
                 | RelativeIncrease -> 
                     {| 
                         ``type`` = "linear"
-                        tickInterval = 0.4
-                        max = 4 
-                        min = -2 
+                        tickInterval = 50
+                        max = 200
+                        min = -100
                         endOnTick = false
                         startOnTick = false
                         stops =
                             [|
-                                (0.066,"#2E7F18")
-                                (0.133,"#45731E")
-                                (0.299,"#675E24") 
-                                (0.440,"#8D472B") 
-                                (0.600, "#B13433")
-                                (0.800, "#C82538")
+                                (0.000,"#009e94")
+                                (0.166,"#6eb49d")
+                                (0.250,"#b2c9a7") 
+                                (0.333,"#f0deb0") 
+                                (0.500,"#e3b656")
+                                (0.600,"#cc8f00")
+                                (0.999,"#b06a00")
                             |]
+                        reversed=false
+                        labels = 
+                        {| 
+                           formatter = fun() -> sprintf "%A %%" jsThis?value
+                        |} |> pojo
+
                     |} |> pojo
 
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
