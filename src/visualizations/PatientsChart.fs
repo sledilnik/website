@@ -2,6 +2,7 @@
 module PatientsChart
 
 open System
+open DataLoader
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -72,13 +73,14 @@ let getAllBreakdowns state = seq {
     }
 
 type Msg =
-    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumePatientsData of Result<DownloadedData<PatientsStats []>, string>
     | ConsumeServerError of exn
     | SwitchBreakdown of Breakdown
     | RangeSelectionChanged of int
 
 let init () : State * Cmd<Msg> =
-    let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
+    let cmd = Cmd.OfAsync.either
+                  getOrFetch () ConsumePatientsData ConsumeServerError
     State.initial, cmd
 
 let getFacilitiesList (data : PatientsStats array) =
@@ -102,7 +104,8 @@ let getFacilitiesList (data : PatientsStats array) =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
-        { state with PatientsData = data; AllFacilities = getFacilitiesList data }, Cmd.none
+        { state with PatientsData = data.Data
+                     AllFacilities = getFacilitiesList data.Data }, Cmd.none
     | ConsumePatientsData (Error err) ->
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->

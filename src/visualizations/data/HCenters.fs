@@ -1,6 +1,7 @@
 module Data.HCenters
 
 open System
+open DataLoader
 
 let url = "https://api.sledilnik.org/api/health-centers"
 
@@ -65,5 +66,3 @@ type HcStats = {
     member ps.Date = DateTime(ps.year, ps.month, ps.day)
     member ps.JsDate12h = DateTime(ps.year, ps.month, ps.day)
                           |> Highcharts.Helpers.jsTime12h
-
-let getOrFetch = DataLoader.makeDataLoader<HcStats []> url

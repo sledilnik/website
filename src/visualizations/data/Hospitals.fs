@@ -106,6 +106,3 @@ let getSortedFacilityCodes (data: FacilityAssets []) =
             //printfn "hospital %s %A" fc cnt
             -quality, (if fc.Length = 3 then fc else "x"+fc))
         |> List.map fst
-
-
-let getOrFetch = DataLoader.makeDataLoader<FacilityAssets []> url
