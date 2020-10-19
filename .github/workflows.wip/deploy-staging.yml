@@ -1,0 +1,127 @@
+name: Deploy staging
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  IMAGE_NAME: sledilnik-web
+  DEPLOYMENT_NAME: stage-website
+  DEPLOYMENT_URL: https://stage.sledilnik.rtfm.si
+  DEPLOYMENT_ENV: staging
+  DEPLOYMENT_NAMESPACE: sledilnik-stage
+
+jobs:
+  prepare:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: login to ghcr.io
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      
+      - name: build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile-new
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:latest
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs:
+      - build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: create deployment
+        id: create_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.DEPLOYMENT_ENV }}
+          required_contexts: "[]"
+          auto_merge: true
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: set deployment status to in progress
+        id: start_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: ${{ env.DEPLOYMENT_ENV }}
+          environment_url: ${{ env.DEPLOYMENT_URL }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: deploy
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: helm upgrade ${{ env.DEPLOYMENT_NAME }} ./helm-chart 
+            --install 
+            --atomic 
+            --namespace=${{ env.DEPLOYMENT_NAMESPACE }}
+            --set=image.repository=ghcr.io/${{ github.repository_owner }}
+            --set=image.name=${{ env.IMAGE_NAME }}
+            --set=image.tag=latest
+            --values=./.deployment/values.stage.yml
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+      - name: set deployment status to success
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: ${{ env.DEPLOYMENT_ENV }}
+          environment_url: ${{ env.DEPLOYMENT_URL }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          mediaType: '{"previews": ["ant-man"]}'
+          state: success
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: set deployment status to failure
+        id: failed_deployment
+        uses: octokit/request-action@v2.x
+        if: failure()
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment: ${{ env.DEPLOYMENT_ENV }}
+          environment_url: ${{ env.DEPLOYMENT_URL }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          mediaType: '{"previews": ["ant-man"]}'
+          state: failure
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"

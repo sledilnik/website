@@ -26,7 +26,10 @@
 		"ms-dotnettools.csharp",
 		"octref.vetur",
 		"editorconfig.editorconfig",
-		"syler.sass-indented"
+		"syler.sass-indented",
+		"ms-azuretools.vscode-docker",
+		"redhat.vscode-yaml",
+		"eamodio.gitlens"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
