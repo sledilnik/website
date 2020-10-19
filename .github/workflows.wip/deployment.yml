@@ -1,0 +1,12 @@
+---
+name: Deployment test
+
+on:
+  deployment:
+
+jobs:
+  deploy-stage:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Debug print
+        uses: hmarr/debug-action
