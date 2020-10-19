@@ -1,0 +1,121 @@
+name: Deploy PR preview
+
+on: 
+  pull_request:
+    types: [synchronize, reopened, labeled, unlabeled, closed]
+
+env:
+  IMAGE_NAME: sledilnik-web
+  DEPLOYMENT_NAME: ${{ format('pr-{0}-website', github.event.pull_request.number) }}
+  DEPLOYMENT_URL: ${{ format('pr-{0}.preview.sledilnik.org', github.event.pull_request.number) }}
+  DEPLOYMENT_ENV: ${{ format('pr-{0}', github.event.pull_request.number) }}
+  DEPLOYMENT_NAMESPACE: sledilnik-pr
+
+jobs:
+  build:
+    if: contains(github.event.pull_request.labels.*.name, 'deploy-preview') && github.event.action != 'closed'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile-new
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}:pr-${{ github.event.pull_request.number }}
+
+  deploy:
+    if: contains(github.event.pull_request.labels.*.name, 'deploy-preview') && github.event.action != 'closed'
+    runs-on: ubuntu-20.04
+    needs:
+      - build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+        with:
+          ref: ${{github.event.pull_request.head.sha}}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+
+      - name: create deployment
+        id: create_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          environment: ${{ env.DEPLOYMENT_ENV }}
+          log_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          required_contexts: "[]"
+          auto_merge: true
+          transient_environment: true
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: set deployment status to in progress
+        id: start_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          state: in_progress
+          mediaType: '{"previews": ["flash", "ant-man"]}'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v2
+        with:
+          exec: helm upgrade ${{ env.DEPLOYMENT_NAME }} ./helm-chart 
+            --install 
+            --atomic 
+            --namespace=${{ env.DEPLOYMENT_NAMESPACE }}
+            --set=image.repository=ghcr.io/${{ github.repository_owner }}
+            --set=image.name=${{ env.IMAGE_NAME }}
+            --set=image.tag=pr-${{ github.event.pull_request.number }}
+            --set=ingress.rule='Host(`${{ env.DEPLOYMENT_URL }}`)'
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+      - name: set deployment status to success
+        id: successful_deployment
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment_url: http://${{ env.DEPLOYMENT_URL }}
+          mediaType: '{"previews": ["ant-man"]}'
+          state: success
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: set deployment status to failure
+        id: failed_deployment
+        uses: octokit/request-action@v2.x
+        if: failure()
+        with:
+          route: POST /repos/:repository/deployments/:deployment/statuses
+          repository: ${{ github.repository }}
+          deployment: ${{ fromJson(steps.create_deployment.outputs.data).id }}
+          environment_url: https://${{ env.DEPLOYMENT_URL }}
+          mediaType: '{"previews": ["ant-man"]}'
+          state: failure
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
