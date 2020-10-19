@@ -1,0 +1,10 @@
+---
+image:
+  # repository: ghcr.io/sledilnik/website
+  repository: ghcr.io/overlordtm/website
+ingressroute:
+  enabled: true
+  rule: Host(`stage.sledilnik.org`)
+  certResolver: letsencrypt
+
+fullnameOverride: website
