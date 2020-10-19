@@ -269,9 +269,9 @@ export default {
         }
         if (value >= 50 && value < 60) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
-            'infocard.package1'
+            'infocard.package2'
           )}</strong>`
-          phaseNextNumber = 2
+          phaseNextNumber = 3
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 60
         }
@@ -399,7 +399,7 @@ export default {
         if (value >= 15 && value < 20) return 1
         if (value >= 20 && value < 30) return 2
         if (value >= 30 && value < 50) return 3
-        if (value >= 50 && value < 60) return 1
+        if (value >= 50 && value < 60) return 2
         if (value >= 60) return 3
       }
       return 0

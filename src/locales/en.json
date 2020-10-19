@@ -167,6 +167,7 @@
     },
     "charts": {
         "common": {
+            "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
