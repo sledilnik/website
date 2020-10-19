@@ -546,7 +546,7 @@
         },
         "cnk": {
             "title": "Črna",
-            "description": "Razglasitev Črne na Koroškem za ogroženo območje.<br>Obvesna namestitev razpršilnikov za razkuževanje rok v večstanovanjske stavbe"
+            "description": "Razglasitev Črne na Koroškem za ogroženo območje.<br>Obvezna namestitev razpršilnikov za razkuževanje rok v večstanovanjske stavbe"
         },
         "gatherings10max": {
             "title": "Do 10",
@@ -555,6 +555,10 @@
         "regions": {
             "title": "Regije",
             "description": "Omejitve za rdeče regije: gibanje izven regije, uporaba mask zunaj, prepoved določenih dejavnosti"
+        },
+        "schools6+": {
+            "title": "Šole 6+",
+            "description": "Šolanje na daljavo za učence osnovnih šol od 6. razreda, srednjih in glasbenih šol"
         }
     },
     "phase": {

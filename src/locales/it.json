@@ -20,7 +20,9 @@
         "menu": "Menu",
         "models": "Modelli",
         "tables": "Tabella",
-        "world": "Nel mondo"
+        "world": "Nel mondo",
+        "animation": "Animazione",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "mk": {
         "hospital": {
@@ -116,27 +118,27 @@
         "phase": {
             "6": {
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Macedonia del Nord 2, Štip 3",
-                "title": "Fase 6"
+                "title": "fase<br>6"
             },
             "5": {
                 "description": "Skopje 4, Tetovo 4, Štip 3, Macedonia del Nord 2",
-                "title": "Fase 5"
+                "title": "fase<br>5"
             },
             "4": {
                 "description": "Macedonia del Nord 3",
-                "title": "Fase 4"
+                "title": "fase<br>4"
             },
             "3": {
                 "description": "Debar 4",
-                "title": "Fase 3"
+                "title": "fase<br>3"
             },
             "2": {
                 "description": "Skopje 4",
-                "title": "Fase 2"
+                "title": "fase<br>2"
             },
             "1": {
                 "description": "Debar 4, Skopje 3, Macedonia del Nord 2 ",
-                "title": "Fase 1"
+                "title": "fase<br>1"
             }
         }
     },
@@ -430,7 +432,8 @@
         "x_days_ago": "{{ count }} giorno fa",
         "x_days_ago_plural": "{{ count }} giorni fa",
         "in_x_days": "in {{ count }} giorno",
-        "in_x_days_plural": "in {{ count }} giorni"
+        "in_x_days_plural": "in {{ count }} giorni",
+        "weekYearFromToDate": "<b>{{date, %e %b}} - {{dateTo, %e %b}}</b> ({{date, Settimana %W del %Y}})"
     },
     "cm": {
         "gatherings10": {
@@ -560,6 +563,14 @@
         "testOrQuarantine": {
             "description": "Test negativo o quarantena di 10 giorni all'ingresso dai paesi in lista rossa o arancione",
             "title": "Tamponi"
+        },
+        "schools6+": {
+            "description": "Scuola a distanza per le scuole primarie dalla 6 classe, scuole secondarie e di musica",
+            "title": "Scuole 6+"
+        },
+        "regions": {
+            "description": "Restrizioni per le regioni rosse: movimento al di fuori dei confini comunali, uso di maschere all'esterno, restrizione di alcuni servizi",
+            "title": "Regioni"
         }
     },
     "tableDict": {
@@ -686,7 +697,8 @@
             "testsPerformed": "Tamponi",
             "showToDate": "Ad oggi",
             "showToday": "Giornalieri",
-            "showActive": "Attivi"
+            "showActive": "Attivi",
+            "show7DaysAverage": "Media 7 giorni"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -749,9 +761,9 @@
             "sentToSelfIsolation": "Autoisolamento"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Nuovi casi per 100.000 di persone",
-            "yAxisTitle": "Nuovi casi per 100.000 di persone",
-            "title": "Paesi: nuovi casi per 100.000 di persone"
+            "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
+            "yAxisTitle": "Nuovi casi giornalieri su 100.000 persone",
+            "title": "Paesi: nuovi casi giornalieri su 100.000 persone"
         },
         "ageGroupsTimeline": {
             "activeCasesRelative": "Casi attivi (relativi)",
@@ -774,7 +786,8 @@
             "absolute": "Assoluto",
             "female": "Femmine",
             "male": "Maschi",
-            "title": "Fasce di età"
+            "title": "Fasce di età",
+            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri dagli ospedali. I dati demografici (sesso, età, comune di residenza) dei defunti sono riportati dalle istituzioni (assistenza sanitaria, case di riposo) al NIJZ, ma questi dati sono in ritardo di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale di morti."
         },
         "municipalities": {
             "lastCase": "Ultimo caso: ",
@@ -821,7 +834,8 @@
             "all": "Tutto",
             "yesterday": "Ieri",
             "mortalityOfConfirmedCases": "Mortalità nei casi confermati",
-            "title": "Mappa dei comuni"
+            "title": "Mappa dei comuni",
+            "per100k": "per 100k"
         },
         "regions": {
             "deceased": "Decessi",
@@ -888,7 +902,8 @@
             "dsMZ": "Ministero della Salute",
             "dsNIJZ": "NIJZ",
             "dataSource": "origine dei dati",
-            "sortBy": "Ordina per:"
+            "sortBy": "Ordina per:",
+            "weekYearDateFormat": "Settimana %W del %Y"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo"
@@ -918,6 +933,80 @@
             "tests": "Tamponi effettuati",
             "active": "Casi attivi",
             "new": "Casi confermati"
+        },
+        "sources": {
+            "totalImported": "Totale casi importati",
+            "totalConfirmed": "Totale casi confermati",
+            "sourceUnknown": "Fonte sconosciuta",
+            "localSource": "Fonte locale",
+            "importRelatedCases": "Correlati ai casi importati",
+            "importedCases": "Casi importati",
+            "quarantineRelative": "Quarantena (relativa)",
+            "bySourceRelative": "Fonti di infezione (relative)",
+            "bySourceCountryRelative": "Casi importati (relativi)",
+            "bySourceCountry": "Casi importati",
+            "bySource": "Fonti di infezione",
+            "quarantine": "Quarantena",
+            "confirmedFromQuarantine": "Confermato dalla quarantena",
+            "confirmedCases": "Casi confermati",
+            "sentToQuarantine": "Inviato in quarantena",
+            "title": "Quarantena e fonti di infezione"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate da ogni utente che ha inserito il codice di conferma del test positivo in quel giorno. Ogni punto del grafico rappresenta un gruppo di utenti che hanno pubblicato lo stesso numero di chiavi giornaliere in un determinato giorno. La linea blu scuro è il numero medio di chiavi pubblicate per utente. L'app pubblicherà un massimo di 13 chiavi per utente, ma se non è stata attiva per tutto il periodo, il numero di chiavi pubblicate sarà adeguatamente inferiore.",
+                "users": "Utenti",
+                "count": "Numero di chiavi (medio) per utente in un determinato giorno",
+                "tooltip": "datum.user_count + ' utenti hanno caricato ' + datum.key_count + ' chiavi'",
+                "date": "Data",
+                "title": "Tasti pubblicati per utente al giorno"
+            },
+            "usercount": {
+                "description": "Il grafico mostra la nostra stima del numero di utenti che hanno inserito il codice di conferma del test positivo nell'app (barre blu) e del totale corrente degli utenti che lo hanno fatto fino ad oggi (linea rossa). Solo il numero di chiavi giornaliere pubblicate è noto per certo (vedi grafico [$t(charts.ostanizdrav.published.title)](#published-chart)), ma a causa della sequenza tipica dei livelli di rischio di trasmissione associati, possiamo fare una buona ipotesi su quanti utenti abbiano caricato le chiavi in quel giorno.",
+                "runningTotal": "Totale degli utenti che hanno pubblicato le chiavi",
+                "users": "Utenti che pubblicano chiavi al giorno",
+                "date": "Data",
+                "title": "Stima degli utenti che pubblicano le chiavi al giorno"
+            },
+            "publishedByRisk": {
+                "description": "Ogni chiave giornaliera pubblicata ha un livello di rischio di trasmissione associato. Il grafico mostra i loro numeri per ogni giorno. Più scuro è il colore, maggiore è il livello di rischio. Se un utente aveva l'app installata e funzionante per tutto il periodo, le chiavi avranno la seguente sequenza di livelli di rischio: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Si prevede quindi che le chiavi con rischio di trasmissione di 1 sono i più comuni e il secondo rischio di trasmissione più comune è 8.",
+                "risk": "Rischio",
+                "published": "Numero di chiavi pubblicate in un determinato giorno",
+                "tooltip": "datum.published + ' chiavi con livello di rischio ' + datum.risk",
+                "date": "Data",
+                "title": "Chiavi pubblicate al giorno per livello di rischio"
+            },
+            "validByRisk": {
+                "description": "Il grafico mostra i livelli di rischio di trasmissione delle chiavi che sono validi per ogni giorno, invece di essere pubblicati in quel giorno (vedere il grafico [$t(charts.ostanizdrav.publishedByRisk.title)](#publishedByRisk-chart)). Quando un risultato positivo del test viene confermato nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ciascuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per gli ultimi 13 giorni, indipendentemente dal numero di utenti che caricano le proprie chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per questo periodo verranno pubblicate solo in futuro.",
+                "risk": "Rischio",
+                "valid": "Numero di chiavi valide in un determinato giorno",
+                "tooltip": "datum.valid + ' chiavi con livello di rischio ' +datum.risk",
+                "date": "Data",
+                "title": "Chiavi valide al giorno per livello di rischio"
+            },
+            "published": {
+                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate (barre blu) e il totale corrente delle chiavi pubblicate fino alla data (linea rossa). L'utente medio pubblica tra le 10 e le 12 chiavi giornaliere (vedi grafico [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)) e possiamo usare queste informazioni per stimare il numero di utenti che hanno inserito il loro codice di conferma dopo essere risultati positivi.",
+                "runningTotal": "Totale delle chiavi pubblicate",
+                "perDay": "Chiavi pubblicate al giorno",
+                "date": "Data",
+                "title": "Chiavi giornaliere pubblicate al giorno"
+            },
+            "valid": {
+                "description": "Il grafico mostra il numero di chiavi valide in un determinato giorno - in contrapposizione al numero di chiavi pubblicate in quei giorni (vedi il grafico [$t(charts.ostanizdrav.published.title)](#published-chart)). Quando un'infezione viene confermata nell'app, tutte le chiavi giornaliere vengono pubblicate nello stesso giorno, ma ognuna di esse è valida per uno dei giorni precedenti. Ciò significa che il grafico mostrerà sempre una tendenza al ribasso per i 13 giorni più recenti, indipendentemente dal numero di utenti che caricano le loro chiavi. Questo perché la maggior parte delle chiavi giornaliere valide per il periodo saranno pubblicate solo in futuro.",
+                "perDay": "Chiavi valide per giorno",
+                "date": "Data",
+                "title": "Chiavi valide per giorno"
+            },
+            "footer": "L'analisi è il risultato dell'adattamento del progetto tedesco [Corona Tracker Tracker](https://ctt.pfstr.de/) al progetto sloveno #OstaniZdrav. [Codice sorgente del progetto](https://github.com/janpf/ctt) sta utilizzando [Diagnosis Keys analysis tools](https://github.com/mh-/diagnosis-keys).",
+            "description": "[L'applicazione mobile #OstaniZdrav](https://www.gov.si/en/ostanizdrav) riduce la diffusione delle infezioni con il coronavirus SARS-CoV-2 notificando agli utenti che sono stati in contatto con una persona con un'infezione confermata. Uno degli attributi chiave dell'app è proteggere l'anonimato degli utenti e l'elaborazione decentralizzata dei loro dati.\n\nA causa di questi vincoli [la nostra analisi delle prestazioni dell'app](#published-chart) si basa esclusivamente sui dati a cui possono accedere le app stesse. Per interpretare i grafici riportati di seguito è importante comprendere il funzionamento dell'app e il significato di termini come chiavi giornaliere, livelli di rischio di trasmissione e la differenza tra chiavi pubblicate e valide.\n\nL'applicazione installata sul telefono genera ogni giorno una chiave casuale, unica e anonima. Questa chiave giornaliera viene utilizzata dall'app per trasmettere i codici identificativi ad altri telefoni nelle vicinanze che hanno installato l'app. Allo stesso tempo, l'applicazione sta ricevendo e salvando i codici identificativi di altri telefoni nelle vicinanze. Quando un utente risulta positivo per il virus SARS-CoV-2 immette il codice di conferma teleTAN nell'applicazione. Questa azione carica le chiavi giornaliere degli ultimi 14 giorni sul server, poiché questo è il periodo in cui i contatti sono più rischiosi.\n\nOgni giorno l'app scarica le chiavi giornaliere appena pubblicate dal server e controlla se una di esse corrisponde ai codici identificativi salvati dei telefoni a cui sei stato esposto. Inoltre sa per quanto tempo e quanto vicini erano questi contatti, così come i livelli di rischio di trasmissione per ogni giorno. Le 14 chiavi giornaliere hanno diversi livelli di rischio di trasmissione rispetto al giorno in cui è stato inserito il codice di conferma: il rischio è più basso 14 giorni fa e poi aumenta, con i livelli più alti raggiunti nei giorni due, tre e quattro prima dell'inserimeto della conferma di test positivo. L'applicazione utilizza quindi questi tre fattori per calcolare se il rischio di esposizione sia abbastanza alto per generare una notifica. \n\nI livelli di rischio di trasmissione variano da 1 (più basso) a 8 (più alto). Se l'utente aveva l'applicazione installata e funzionante per tutto questo periodo, alle chiavi è allegata la seguente sequenza di livelli di rischio: 1 1 1 1 1 3 5 8 8 8 6 5. Il server pubblica immediatamente le prime 13 chiavi, mentre l'ultima, valida per oggi, viene pubblicata il giorno successivo per garantire un maggiore anonimato. Se l'utente non ha installato l'app dall'inizio di questo periodo o l'ha disattivata, la sequenza avrà chiavi mancanti. In media le sequenze hanno circa tre chiavi mancanti. \n\n**Al fine di garantire l'anonimato degli utenti è impossibile accertare quali chiavi appartengano a un singolo utente. Ma poiché conosciamo la sequenza tipica dei livelli di rischio di trasmissione associati, possiamo ricostruire sequenze che corrispondono al numero di utenti con un alto grado di precisione. Non possiamo essere sicuri che il numero sia esattamente corretto, la nostra stima è solo un'ipotesi.**\n\nOgni giorno il server pubblica un numero di chiavi giornaliere e i livelli di rischio di trasmissione associati, validi per i 13 giorni precedenti. Questi sono i dati a cui le app hanno accesso e questi sono anche i dati che vengono utilizzati nella nostra analisi qui.\n\n**Avviso: i dati per il giorno corrente non sono necessariamente completi.**",
+            "title": "L'app di notifica dell'esposizione #OstaniZdrav"
+        },
+        "regions100k": {
+            "red": "criteri per la lista rossa",
+            "deceased": "Decessi",
+            "confirmedCases": "Casi confermati",
+            "activeCases": "Casi attivi",
+            "title": "Casi per regione (per 100.000 persone)"
         }
     },
     "footer": {
@@ -942,7 +1031,17 @@
         "tests": "Tamponi giornalieri",
         "recoveredToDate": "Guariti",
         "active": "Casi attivi",
-        "confirmedToDate": "Casi confermati"
+        "confirmedToDate": "Casi confermati",
+        "package3": "pacchetto 3",
+        "package2": "pacchetto 2",
+        "package1": "pacchetto 1",
+        "nextCriteria": "<br>I criteri per il pacchetto {{ phaseNextNumber }} della fase {{ phaseNextPackage }} sono {{ phaseNextCriteria }}.",
+        "redPhaseGenitive": "rossa",
+        "redPhase": "Fase rossa",
+        "orangePhaseGenitive": "arancione",
+        "orangePhase": "Fase arancione",
+        "per100k": "per 100k",
+        "incidence": "Incidenza a 14 giorni"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
@@ -955,30 +1054,42 @@
     "phase": {
         "7": {
             "description": "fine dell'epidemia",
-            "title": "Fase 7"
+            "title": "fase<br>7"
         },
         "6": {
             "description": "nuova metodologia dei test, studio",
-            "title": "Fase 6"
+            "title": "fase<br>6"
         },
         "5": {
             "description": "nuova metodologia dei test",
-            "title": "Fase 5"
+            "title": "fase<br>5"
         },
         "4": {
             "description": "nuova metodologia dei test",
-            "title": "Fase 4"
+            "title": "fase<br>4"
         },
         "3": {
             "description": "nuova metodologia dei test",
-            "title": "Fase 3"
+            "title": "fase<br>3"
         },
         "2": {
             "description": "epidemia, nuova metodologia dei test",
-            "title": "Fase 2"
+            "title": "fase<br>2"
         },
         "1": {
-            "title": "Fase 1"
+            "title": "fase<br>1"
+        },
+        "10": {
+            "description": "tracciamento dei contatti sospeso",
+            "title": "fase<br>10"
+        },
+        "9": {
+            "description": "passaggio al tracciamento parziale dei contatti",
+            "title": "fase<br>9"
+        },
+        "8": {
+            "description": "nuova metodologia di test - bambini",
+            "title": "fase<br>8"
         }
     },
     "weekday": {
@@ -1033,5 +1144,14 @@
         "newChart": "🆕 📊 Nuovo grafico:",
         "newPage": "🆕 Nuova pagina:",
         "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone"
+    },
+    "weekdayShort": {
+        "6": "Sa",
+        "5": "Ve",
+        "4": "Gi",
+        "3": "Me",
+        "2": "Ma",
+        "1": "Lu",
+        "0": "Do"
     }
 }

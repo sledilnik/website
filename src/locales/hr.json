@@ -339,7 +339,7 @@
             "to": " – ",
             "from": " ",
             "sortBy": "Razvrstaj prema:",
-            "weekYearDateFormat": "Tjedan %W od %Y"
+            "weekYearDateFormat": "%W. tjedan %Y."
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -598,30 +598,30 @@
         "ostanizdrav": {
             "userPublishedByCount": {
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva po broju korisnika",
+                "title": "Broj objavljenih ključeva po danu i broju korisnika",
                 "users": "Broj korisnika",
                 "count": "(Prosječni) broj ključeva po broju korisnika",
                 "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'",
                 "description": "Dijagram prikazuje broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji."
             },
             "usercount": {
-                "title": "Procijenjeni broj korisnika koji su objavili ključeve",
+                "title": "Procijenjeni broj korisnika po danu koji su objavili ključeve",
                 "runningTotal": "Ukupni broj korisnika koji su objavili ključeve",
                 "users": "Broj korisnika koji su objavili ključeve",
                 "date": "Datum",
                 "description": "Dijagram prikazuje našu procjenu broja korisnika koji su u program upisali svoj potvrdni kod za pozitivni test (plave trake) i ukupnog broja korisnika koji su to do danas učinili (crvena linija). Sigurno poznat je samo broj objavljenih dnevnih ključeva (vidi dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)), no zbog tipičnog slijeda povezanih razina rizika zaraze, možemo prilično dobro pogoditi koliko je korisnika tog dana poslalo svoje ključeve."
             },
             "publishedByRisk": {
-                "risk": "Rizik",
+                "risk": "Razina rizika",
                 "published": "Broj objavljenih ključeva",
                 "tooltip": "datum.published + ' ključevi s razinom rizika ' + datum.risk",
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva po razinama rizika",
+                "title": "Broj objavljenih ključeva po danu i razinama rizika",
                 "description": "Svaki objavljeni dnevni ključ ima povezanu razinu rizika prenošenja zaraze. Dijagram prikazuje njihove brojeve za svaki dan. Što je boja tamnija, to je rizik veći. Ako je korisnik instalirao program i ako je program radio za vrijeme cijelog razdoblja, ključevi će imati sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Stoga se očekuje, da će ključevi s rizikom prenošenja zaraze od 1 biti najčešći, a drugi najčešći rizik prenošenja zaraze je 8."
             },
             "validByRisk": {
                 "risk": "Rizik",
-                "title": "Broj valjanih ključeva po razinama rizika",
+                "title": "Broj valjanih ključeva po danu i razinama rizika",
                 "valid": "Broj valjanih ključeva",
                 "tooltip": "datum.valid + ' ključevi s razinom rizika ' +datum.risk",
                 "date": "Datum",
@@ -631,24 +631,25 @@
                 "runningTotal": "Ukupno objavljeni ključevi",
                 "perDay": "Broj objavljenih ključeva",
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva",
+                "title": "Broj objavljenih ključeva po danu",
                 "description": "Dijagram prikazuje broj objavljenih dnevnih ključeva (plavi stupci) i ukupni broj ključeva koji su do danas objavljeni (crvena crta). Prosječni korisnik objavljuje između 10 i 12 dnevnih ključeva (pogledaj dijagram [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)). Pomoću tih podataka možemo procijeniti broj korisnika koji su upisali potvrdni kod nakon pozitivnog testiranja."
             },
             "valid": {
                 "perDay": "Broj valjanih ključeva",
                 "date": "Datum",
-                "title": "Broj valjanih ključeva",
+                "title": "Broj valjanih ključeva po danu",
                 "description": "Dijagram prikazuje broj ključeva koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
             },
             "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoza](https://github.com/mh-/diagnosis-keys).",
-            "title": "Aplikacija #OstaniZdrav za obavijesti o izloženosti"
+            "title": "Program #OstaniZdrav za obavijesti o izloženosti",
+            "description": "Program [#OstaniZdrav](https://www.gov.si/ostanizdrav) namijenjena je kontroliranju širenja zaraze novim koronavirusom SARS-CoV-2, obavještavanjem korisnika je li bio u kontaktu s osobom s potvrđenom zarazom. **Anonimnost korisnika i decentralizirana obradu podataka su ključna svojstva ovog programa.** To znači da nitko – čak niti MJU i NIJZ – nema pristup podacima o kontaktima korisnika niti o tome, je li korisnik ima potvrđenu zarazu.\n\nZbog tih ograničenja, [naša se analiza djelotvornosti programa](#published-chart) zasniva samo na osnovi podataka kojima programi na mobilnim telefonima inače pristupaju. Za njihovo tumačenje potrebno je razumjeti rad programa i pojmove poput dnevnih ključeva, razine rizika i razlike između objavljenih i valjanih ključeva.\n\nKada se program instalira na mobitel, on svaki dan generira jedan slučajni, jednokratni i anonimni ključ. Na temelju ovog dnevnog ključa generiraju se kodovi koje mobitel šalje na druge obližnje mobitele s pokrenutim programom. Program istovremeno prima i sprema kodove drugih obližnjih mobitela. Kad korisnik sazna da je rezultat testa na koronavirus SARS-CoV-2 bio pozitivan, tada u program upisuje potvrdni teleTAN kod. Time se njegovi dnevni ključevi zadnjih 14 dana učitavaju na poslužitelj, jer su kontakti u tom razdoblju posebno rizični.\n\nProgram svakodnevno s poslužitelja dohvaća novoobjavljene ključeve s potvrđenih poslužitelja i uspoređuje kodove mobitela s kojima je vlastiti mobitel bio u kontaktu. Pritom uzima u obzir duljinu i blizinu kontakta te razinu rizika prenošenja zaraze bio na taj dan. Razina rizika za ovih 14 ključeva varira ovisno o vremenu upisa koda – najniži rizik je prije 14 dana, a zatim eskalira do najvišeg drugog, trećeg i četvrtog dana prije upisa potvrđene zaraze. Uzimajući u obzir ova tri čimbenika, program izračunava je li rizik dovoljno velik da korisnika na to upozorio.\n\nRazine rizika kreću se od 1 (najniža) do 8 (najviša). Ako je korisnik program instalirao te ako je stalno bio pokrenut, ključevi će dobiti sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Poslužitelj odmah objavljuje prvih 13 ključeva, a zadnji ključ, koji vrijedi za danas, objavljuje se tek sljedeći dan kako bi se osigurala veća anonimnost. Ako program nije bio instaliran od početka tok razdoblja ili ako je u međuvremenu bio isključen na jedan dan, slijed ključeva će biti nepotpun. U prosjeku, slijedovima nedostaju tri ključa.\n\n**Kako bi se osigurala anonimnost korisnika nemoguće je znati koji ključevi pripadaju kojem korisniku. Međutim, zbog poznatog tipičnog slijeda povezanih razina rizika, možemo s visokom sigurnošću rekonstruirati slijedove koji odgovaraju broju korisnika. Ne možemo biti stvarno sigurni da je broj točan – naša je procjena samo vrlo dobra aproksimacija.**\n\nPoslužitelj svakodnevno objavljuje određeni broj dnevnih ključeva, svaki sa svojom razinom rizika i datumom valjanosti za prethodnih 13 dana. Tim podacima pristupaju programi na mobitelima te se koriste u našoj ovdje prikazanoj analizi.\n\n**Napomena: Podaci za tekući dan nisu nužno potpuni.**"
         },
         "regions100k": {
             "red": "kriteriji za crvenu listu",
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "title": "Slučajevi po regijama (po 100.000 osoba)"
+            "title": "Slučajevi po regijama (na 100.000 stanovnika)"
         }
     },
     "shortMonth": {

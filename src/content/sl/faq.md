@@ -425,9 +425,9 @@ Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na 
 <details>
   <summary id=map-chart>Kaj nam kaže "Zemljevid po občinah"?</summary>
 
-[Zemljevid po občinah](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*včeraj, 7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
+[Zemljevid po občinah](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*1, 7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*1, 7, 14 ali 21 dni*).
 
 </details>
 
@@ -436,7 +436,7 @@ S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogl
 
 [Zemljevid po regijah](/sl/stats#rmap-chart) nam pokaže epidemiološko sliko posameznih statističnih regij, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo regije pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo regije pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*1, 7, 14 ali 21 dni*).
 
 </details>
 
