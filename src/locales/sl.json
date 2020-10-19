@@ -750,6 +750,7 @@
             "absoluteLabel": "Potrjeno okuženi dnevno",
             "relativeTitle": "Dnevni prirast okuženih",
             "relativeLabel": "Relativen prirast v %",
+            "relativeWeeklyLabel": "Relativen tedenski prirast v %",
             "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
             "doublingRateLabel": "V koliko dneh se število okuženih podvoji",
             "averageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
@@ -820,7 +821,8 @@
             "last_x_days_3": "{{ count }} dni",
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
-            "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov"
+            "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
+            "relativeIncrease": "Relativen prirast"
         },
         "rmap": {
             "title": "Zemljevid po regijah"

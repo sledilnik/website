@@ -36,18 +36,18 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
-    | DoublingTime
+    | RelativeIncrease
 
     override this.ToString() =
        match this with
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
-       | DoublingTime -> I18N.t "charts.map.doublingTime" 
+       | RelativeIncrease -> I18N.t "charts.map.relativeIncrease" 
 
-let (|ConfirmedCasesMsgCase|DeceasedMsgCase|DoublingTimeMsgCase|) str =
+let (|ConfirmedCasesMsgCase|DeceasedMsgCase|RelativeIncreaseMsgCase|) str =
     if str = I18N.t "charts.map.confirmedCases" then ConfirmedCasesMsgCase
     elif str = I18N.t "charts.map.deceased" then DeceasedMsgCase
-    else DoublingTimeMsgCase
+    else RelativeIncreaseMsgCase 
 
 type DisplayType =
     | AbsoluteValues
@@ -214,7 +214,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = DoublingTime //TODO: CHANGE THIS BACK TO CONFIRMED CASES BEFORE PRODUCTION  
+      ContentType = RelativeIncrease //TODO: CHANGE THIS BACK TO CONFIRMED CASES BEFORE PRODUCTION  
       DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -235,7 +235,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             match contentType with
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
-            | DoublingTimeMsgCase -> DoublingTime 
+            | RelativeIncreaseMsgCase -> RelativeIncrease 
         { state with ContentType = newContentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -263,7 +263,7 @@ let seriesData (state : State) =
                         match state.ContentType with
                         | ConfirmedCases -> confirmedCasesValue
                         | Deceased -> deceasedValue
-                        | DoublingTime -> confirmedCasesValue
+                        | RelativeIncrease -> confirmedCasesValue
 
                     let totalConfirmed = confirmedCasesValue |> Array.tryLast
 
@@ -299,20 +299,24 @@ let seriesData (state : State) =
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
-<<<<<<< HEAD
-                            | DoublingTime -> 
-                                let casesThisWeek = values.[values.Length - 1] |> float
-                                let casesLastWeek = values.[values.Length - 1 - 7] |> float
-                                let casesWeekBefore = values.[values.Length - 1 - 14] |> float
-                                printfn "Zdaj: %A\n -1:%A\n -2:%A" casesThisWeek casesLastWeek casesWeekBefore
-                                (casesThisWeek - casesLastWeek)/(casesLastWeek - casesWeekBefore) - 1.
+                            | RelativeIncrease ->
+                                let parseNumber x = 
+                                    match x with 
+                                    | None -> 0.
+                                    | Some x -> x |> float  
+                                let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
+                                let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
+                                let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
+                                
+                                let increaseThisWeek = casesNow - cases7dAgo
+                                let increaseLastWeek = cases7dAgo - cases14dAgo 
 
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population  
-            {| 
-=======
+                                if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
+                                else min ( increaseThisWeek/increaseLastWeek - 1.) 5. // Set the maximum value to 5 to cut off infinities
+                                
+
                         dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
             {|
->>>>>>> origin/master
                 code = areaData.Code
                 area = areaData.Name
                 value = value
@@ -413,15 +417,15 @@ let renderMap (state : State) =
                                 (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
                     else
                         label
-                | DoublingTime ->
+                | RelativeIncrease ->
                     let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-                                + sprintf "<br>%s: <b>%0.2f</b>" (I18N.t "charts.spread.doublingRateLabel") value 
-                    if absolute > 0 then
-                        label 
-                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+
+                    if value < 5. 
+                        then label + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") 
+                                (Utils.formatTo1DecimalWithTrailingZero (float value * 100.0))
                     else
-                        label
+                        label + sprintf "<br>%s: <b> > %s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel")
+                             (Utils.formatTo1DecimalWithTrailingZero (float value * 100.0))
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let legend =
@@ -451,7 +455,10 @@ let renderMap (state : State) =
                         | _ -> 100.
             | Deceased -> 
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
-                if dataMax < 1. then 10. else dataMax 
+                if dataMax < 1. then 10. else dataMax
+            | RelativeIncrease -> 
+                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                if dataMax < 1. then 10. else dataMax
 
         let colorMin = 
             match state.DisplayType with 
@@ -506,29 +513,22 @@ let renderMap (state : State) =
                                 (0.999,"#43006e")
                             |]
                     |} |> pojo
-                | DoublingTime -> 
+                | RelativeIncrease -> 
                     {| 
                         ``type`` = "linear"
                         tickInterval = 0.4
-                        max = 5 
-                        min = 0 
+                        max = 4 
+                        min = -2 
                         endOnTick = false
                         startOnTick = false
                         stops =
                             [|
-                                (0.000,"#ffffff")
-                                (0.001,"#fff7db")
-                                (0.200,"#ffefb7") 
-                                (0.280,"#ffe792") 
-                                (0.360,"#ffdf6c") 
-                                (0.440,"#ffb74d") 
-                                (0.520,"#ff8d3c") 
-                                (0.600,"#f85d3a") 
-                                (0.680,"#ea1641") 
-                                (0.760,"#d0004e") 
-                                (0.840,"#ad005b") 
-                                (0.920,"#800066") 
-                                (0.999,"#43006e")
+                                (0.066,"#2E7F18")
+                                (0.133,"#45731E")
+                                (0.299,"#675E24") 
+                                (0.440,"#8D472B") 
+                                (0.600, "#B13433")
+                                (0.800, "#C82538")
                             |]
                     |} |> pojo
 
@@ -598,8 +598,8 @@ let renderContentTypeSelector selected dispatch =
             prop.value (ContentType.Deceased.ToString())
         ]
         yield Html.option [
-            prop.text(ContentType.DoublingTime.ToString())
-            prop.value(ContentType.DoublingTime.ToString())
+            prop.text(ContentType.RelativeIncrease.ToString())
+            prop.value(ContentType.RelativeIncrease.ToString())
         ]
     }
 
@@ -617,13 +617,14 @@ let render (state : State) dispatch =
                 Html.div [
                     prop.className "filters"
                     prop.children [
-                        renderContentTypeSelector state.ContentType dispatch // TODO: for doubling number chart remove all these 
-                        if state.ContentType = ConfirmedCases || state.ContentType = Deceased then
+                        renderContentTypeSelector state.ContentType dispatch 
+                        if state.ContentType <> RelativeIncrease then
                             renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
-                renderDisplayTypeSelector
-                    state.DisplayType (DisplayTypeChanged >> dispatch)
+                if state.ContentType <> RelativeIncrease then 
+                    renderDisplayTypeSelector
+                        state.DisplayType (DisplayTypeChanged >> dispatch)
             ]
             Html.div [
                 prop.className "map"
