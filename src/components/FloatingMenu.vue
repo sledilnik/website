@@ -1,27 +1,40 @@
 <template>
   <div>
-    <div class="float-nav" @click="toggleMenu">
-      <div class="float-nav-btn">
-        <font-awesome-icon icon="directions" />
-        <span class="float-nav-txt">Navigacija</span>
-      </div>
-    </div>
-    <transition name="fade">
-      <ul
-        v-if="active && list.length > 0"
-        class="float-list"
-        v-on-clickaway="hideMenu"
+    <transition name="slide">
+      <div
+        class="float-nav-btn"
+        :class="{ active: active }"
+        v-if="list.length > 0"
+        @click="toggleMenu"
       >
-        <li v-for="item in list" :key="item" class="float-item">
-          <a
-            :href="'#' + item"
-            v-scroll-to="{ element: '#' + item, offset: -100 }"
-            v-on-clickaway="hideMenu"
-            >{{ shortTitle(item) }}</a
-          >
-        </li>
-      </ul>
+        <img
+          src="../assets/svg/floating-close.svg"
+          alt="Close"
+          v-if="!active"
+        />
+        <img src="../assets/svg/floating-open.svg" alt="Open" v-if="active" />
+      </div>
     </transition>
+    <transition name="fade">
+      <div
+        v-if="active && list.length > 0"
+        v-on-clickaway="hideMenu"
+        class="float-list"
+      >
+        <h2>Pojdi na graf</h2>
+        <ul>
+          <li v-for="item in list" :key="item" class="float-item">
+            <a
+              :href="'#' + item"
+              v-scroll-to="{ element: '#' + item, offset: -100 }"
+              v-on-clickaway="hideMenu"
+              >{{ shortTitle(item) }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </transition>
+    <div v-if="active" class="overlay"></div>
   </div>
 </template>
 
@@ -38,26 +51,31 @@ export default {
     return {
       active: false,
       charts: {
-        'metrics-comparison-chart': 'Stanje SLO',
-        'spread-chart': 'Prirast',
-        'daily-comparison-chart': 'Dnevi – primerjava',
-        'patients-chart': 'Hospitalizirani',
-        'map-chart': 'Občine – zemljevid',
-        'municipalities-chart': 'Občine – primeri',
-        'europe-chart': 'Stanje Evropa',
-        'age-groups-trends-chart': 'Starost – delež',
-        'tests-chart': 'Testiranje',
-        'sources-chart': 'Vir okužb',
-        'hcenters-chart': 'Zdr. domovi – obravnava',
-        'infections-chart': 'Potrjeni – struktura',
-        'cases-chart': 'Potrjeni – stanje',
-        'age-groups-chart': 'Starost – spol',
-        'rmap-chart': 'Regije – zemljevid',
-        'regions-chart-100k': 'Regije – primeri',
-        'world-chart': 'Stanje',
-        'countries-active-chart': 'Aktivni',
-        'countries-cases-chart': 'Primeri',
-        'countries-deaths-chart': 'Smrti',
+        'metrics-comparison-chart': this.$t('charts.metricsComparison.title'),
+        'spread-chart': this.$t('charts.spread.title'),
+        'daily-comparison-chart': this.$t('charts.dailyComparison.title'),
+        'patients-chart': this.$t('charts.patients.title'),
+        'map-chart': this.$t('charts.map.title'),
+        'municipalities-chart': this.$t('charts.municipalities.title'),
+        'europe-chart': this.$t('charts.europe.title'),
+        'age-groups-trends-chart': this.$t('charts.ageGroups.title'),
+        'tests-chart': this.$t('charts.tests.title'),
+        'sources-chart': this.$t('charts.spread.title'),
+        'hcenters-chart': this.$t('charts.hCenters.title'),
+        'infections-chart': this.$t('charts.infections.title'),
+        'cases-chart': this.$t('charts.cases.title'),
+        'age-groups-chart': this.$t('charts.ageGroupsTimeline.title'),
+        'rmap-chart': this.$t('charts.rmap.title'),
+        'regions-chart': this.$t('charts.regions.title'),
+        'regions-chart-100k': this.$t('charts.regions100k.title'),
+        'world-chart': this.$t('charts.world.title'),
+        'countries-active-chart': this.$t(
+          'charts.countriesActiveCasesPer1M.title'
+        ),
+        'countries-cases-chart': this.$t('charts.countriesNewCasesPer1M.title'),
+        'countries-deaths-chart': this.$t(
+          'charts.countriesTotalDeathsPer1M.title'
+        ),
       },
     }
   },
@@ -75,35 +93,51 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .float-list {
   position: fixed;
-  bottom: 46px;
-  right: 15px;
-  list-style: none;
-  margin: 0;
-  padding: 10px 20px;
-  z-index: 5;
+  bottom: 80px;
+  right: 16px;
+  padding: 16px 0 16px 16px;
+  z-index: 2000;
   background: white;
   font-size: 14px;
-  font-weight: bold;
-  text-align: right;
   border-radius: 6px;
   box-shadow: $element-box-shadow;
+  min-width: 235px;
+  max-height: 600px;
 
   @media only screen and (min-width: 768px) {
-    bottom: 70px;
+    bottom: 98px;
     right: 32px;
   }
 
-  .float-item {
-    margin: 8px 0;
+  h2 {
+    font-size: 21px;
+    line-height: 28px;
+    font-weight: bold;
+    margin-bottom: 24px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
     padding: 0;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  .float-item {
+    padding: 0 16px 0 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #d8d8d8;
+    }
 
     a {
+      margin: 6px 0;
       display: block;
       cursor: pointer;
-      margin: 4px;
       text-decoration: none;
       color: rgba(0, 0, 0, 0.7);
       border-radius: 2px;
@@ -111,43 +145,28 @@ export default {
   }
 }
 
-.float-nav {
+.float-nav-btn {
   position: fixed;
-  bottom: 15px;
-  right: 15px;
-  z-index: 6;
+  bottom: 7px;
+  right: 7px;
+  z-index: 2001;
+  cursor: pointer;
+  display: inline-block;
 
   @media only screen and (min-width: 768px) {
-    right: 32px;
-    bottom: 32px;
+    right: 24px;
+    bottom: 24px;
   }
+}
 
-  .float-nav-btn {
-    background-color: white;
-    color: #212529;
-    padding: 3px 8px;
-    text-align: center;
-    border-radius: 6px;
-    border: 1px solid rgba(0, 0, 0, 0.13);
-    cursor: pointer;
-    display: inline-block;
-
-    @media only screen and (min-width: 768px) {
-      padding: 3px 12px 3px 4px;
-    }
-
-    .float-nav-txt {
-      display: none;
-      font-size: 14px;
-      line-height: 24px;
-      font-weight: bold;
-
-      @media only screen and (min-width: 768px) {
-        display: inline;
-        margin-left: 10px;
-      }
-    }
-  }
+.overlay {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.75);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1999;
 }
 
 .fade-enter,
@@ -159,6 +178,17 @@ export default {
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.4s;
-  max-height: 500px;
+  max-height: 800px;
+}
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: 0.7s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
 }
 </style>
