@@ -740,7 +740,7 @@
         },
         "movement": {
             "title": "🚫21-6h",
-            "description": "Movement restried between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
+            "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
         }
     },
     "days": {
