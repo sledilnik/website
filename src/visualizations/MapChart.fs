@@ -420,7 +420,7 @@ let renderMap (state : State) =
                 | RelativeIncrease ->
                     let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
 
-                    if value < 2. 
+                    if value < 200. 
                         then label + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") 
                                 (Utils.formatTo1DecimalWithTrailingZero value)
                     else
@@ -439,7 +439,7 @@ let renderMap (state : State) =
                borderWidth = 1
                backgroundColor = "white"
                valueDecimals = 0 
-               width = 75//TODO: Clean this up for confirmed and deceased cases.
+               width = 70//TODO: Clean this up for confirmed and deceased cases.
             |}
 
             |> pojo
@@ -537,7 +537,7 @@ let renderMap (state : State) =
                         reversed=false
                         labels = 
                         {| 
-                           formatter = fun() -> sprintf "%A %%" jsThis?value
+                           formatter = fun() -> sprintf "%A%%" jsThis?value
                         |} |> pojo
 
                     |} |> pojo
