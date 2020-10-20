@@ -236,7 +236,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             match contentType with
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
-        { state with ContentType = newContentType }, Cmd.none
+        let newDisplayType =
+            if state.DisplayType = RelativeIncrease && newContentType = Deceased
+            then DisplayType.Default
+            else state.DisplayType
+        { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -592,7 +596,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector state dispatch =
     let selectors = 
         if state.ContentType = ConfirmedCases
-        then [ AbsoluteValues; RegionPopulationWeightedValues; RelativeIncrease ]
+        then [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues ]
         else [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
         prop.className "chart-display-property-selector"
