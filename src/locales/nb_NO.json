@@ -1,1 +1,315 @@
-{}
+{
+    "charts": {
+        "spread": {
+            "absoluteLabel": "Bekreftede tilfeller (daglig)",
+            "confirmedCases": "bekreftede tilfeller",
+            "activeCases": "aktive tilfeller",
+            "today": "I dag",
+            "hospitalized": "hospitalisert",
+            "title": "Vekst i bekreftede tilfeller",
+            "explainer": ""
+        },
+        "infections": {
+            "otherPersons": "Andre personer",
+            "allConfirmed": "Alle bekreftede"
+        },
+        "tests": {
+            "shareOfPositive": "Andel positive tester (%)",
+            "positiveTests": "Positive tester",
+            "negativeTests": "Negative tester",
+            "nationalStudyTesting": "Studie",
+            "allTesting": "Alle",
+            "title": "Testing"
+        },
+        "hCenters": {
+            "allRegions": "Alle steder",
+            "testsPositive": "Tester (positive*)",
+            "testsPerformed": "Tester (utført)"
+        },
+        "cases": {
+            "icu": "På intensivavdeling",
+            "hospitalized": "Hospitalisert",
+            "active": "Aktive",
+            "title": "Bekreftede tilfeller"
+        },
+        "dailyComparison": {
+            "positivePct": "Andel positive tester (%)",
+            "tests": "Tester utført",
+            "active": "Aktive tilfeller",
+            "new": "Bekreftede tilfeller"
+        },
+        "metricsComparison": {
+            "deceased": "Dødsfall",
+            "hospitalized": "Hospitalisert",
+            "activeCases": "Aktive tilfeller",
+            "confirmedCases": "Bekreftede tilfeller",
+            "testsPerformed": "Tester",
+            "showToday": "Daglig",
+            "showActive": "Aktiv"
+        },
+        "common": {
+            "close": "Lukk",
+            "share": "Del",
+            "webpage": "Nettside",
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "O-S-S",
+            "log": "Logaritmisk",
+            "linear": "Lineær",
+            "xAxis": "X-akse:",
+            "sortBy": "Sorter etter:",
+            "view": "Vis:",
+            "yAxis": "Y-akse:",
+            "all": "Alle",
+            "resetZoomTitle": "Tilbakestill forstørrelse til 1:1",
+            "resetZoom": "Tilbakestill forstørrelse",
+            "zoom": "Forstørrelse",
+            "loading": "Laster inn data…",
+            "dsMZ": "Helseminister",
+            "dataSource": "datakilde"
+        },
+        "ostanizdrav": {
+            "publishedByRisk": {
+                "risk": "Risiko",
+                "date": "Dato"
+            },
+            "validByRisk": {
+                "risk": "Risiko",
+                "date": "Dato"
+            },
+            "published": {
+                "date": "Dato"
+            },
+            "valid": {
+                "date": "Dato"
+            }
+        },
+        "countriesActiveCasesPer1M": {
+            "legendTitle": "Aktive tilfeller per 100k folk",
+            "yAxisTitle": "Aktive tilfeller per 100k folk"
+        },
+        "ageGroupsTimeline": {
+            "activeCasesRelative": "Aktive tilfeller (relativ)",
+            "activeCases": "Aktive tilfeller",
+            "newCases": "Nye tilfeller"
+        },
+        "ageGroups": {
+            "confirmedCases": "Bekreftede tilfeller",
+            "deceased": "Dødsfall",
+            "age": "Alder",
+            "relative": "Relativ",
+            "absolute": "Absolutt",
+            "female": "Kvinnelig",
+            "male": "Mannlig",
+            "title": "Aldersgrupper"
+        },
+        "municipalities": {
+            "doubles": "Fordobling ",
+            "today": "i dag",
+            "yesterday": "i går",
+            "deceased": "Dødsfall: ",
+            "active": "Aktive: ",
+            "all": "Alle: ",
+            "showLess": "Vis færre",
+            "showAll": "Vis alle",
+            "allRegions": "Alle steder",
+            "viewActive": "Aktive",
+            "viewTotal": "Alle",
+            "viewLast": "Siste"
+        },
+        "world": {
+            "title": "COVID-19-situasjonen i verden"
+        },
+        "europe": {
+            "noData": "Ingen data",
+            "countryStatus": "",
+            "incidence100k": "",
+            "newCases": "",
+            "title": ""
+        },
+        "rmap": {
+            "title": ""
+        },
+        "map": {
+            "per100k": "",
+            "confirmedCases": "",
+            "deceased": "",
+            "absolute": "",
+            "last_x_days": "",
+            "last_x_days_plural": "",
+            "population": "",
+            "populationC": "",
+            "populationShare": "",
+            "all": "",
+            "yesterday": ""
+        },
+        "regions100k": {
+            "deceased": "",
+            "confirmedCases": "",
+            "activeCases": "",
+            "title": ""
+        },
+        "regions": {
+            "deceased": "",
+            "confirmedCases": "",
+            "activeCases": ""
+        }
+    },
+    "phase": {
+        "11": {
+            "description": "epidemi"
+        },
+        "10": {
+            "title": "fase<br>10"
+        },
+        "9": {
+            "title": "fase<br>9"
+        },
+        "8": {
+            "description": "ny testmetode - barn",
+            "title": "fase<br>8"
+        },
+        "7": {
+            "description": "epidemislutt",
+            "title": "fase<br>7"
+        },
+        "6": {
+            "description": "ny testmetode, studie",
+            "title": "fase<br>6"
+        },
+        "5": {
+            "description": "ny testmetode",
+            "title": "fase<br>5"
+        },
+        "4": {
+            "description": "ny testmetode",
+            "title": "fase<br>4"
+        },
+        "3": {
+            "description": "ny testmetode",
+            "title": "fase<br>3"
+        },
+        "2": {
+            "description": "epidemi, ny testmetode",
+            "title": "fase<br>2"
+        },
+        "1": {
+            "title": "fase<br>1"
+        }
+    },
+    "weekdayShort": {
+        "6": "Lø",
+        "5": "Fr",
+        "4": "To",
+        "3": "On",
+        "2": "Ti",
+        "1": "Ma",
+        "0": "Sø"
+    },
+    "weekday": {
+        "6": "Lørdag",
+        "5": "Fredag",
+        "4": "Torsdag",
+        "3": "Onsdag",
+        "2": "Tirsdag",
+        "1": "Mandag",
+        "0": "Søndag"
+    },
+    "shortMonth": {
+        "11": "Des",
+        "10": "Nov",
+        "9": "Okt",
+        "8": "Sep",
+        "7": "Aug",
+        "6": "Jul",
+        "5": "Jun",
+        "4": "Mai",
+        "3": "Apr",
+        "2": "Mar",
+        "1": "Feb",
+        "0": "Jan"
+    },
+    "month": {
+        "11": "Desember",
+        "10": "November",
+        "9": "Oktober",
+        "8": "September",
+        "7": "August",
+        "6": "Juli",
+        "5": "Juni",
+        "4": "Mai",
+        "3": "April",
+        "2": "Mars",
+        "1": "Februar",
+        "0": "Januar"
+    },
+    "embedMaker": {
+        "copied": "Kopiert",
+        "copy": "Kopier",
+        "embedCode": "Innebyggingskode:",
+        "preview": "Forhåndsvisning:",
+        "chooseChart": "Velg diagram",
+        "title": "Bruk et diagram i din nettside"
+    },
+    "tables": {
+        "sourceLink": "GDocs-regneark, CSV-format, eller REST-API",
+        "source": "Datakilder i andre formater",
+        "tabByAgeFemale": "Etter alder - Kvinnelig",
+        "tabByAgeMale": "Etter alder - Mannlig",
+        "tabByRegion": "Etter sted",
+        "tabSummary": "Sammendrag",
+        "title": "Tabell"
+    },
+    "infocard": {
+        "lastUpdated": "{{ date, %a, %b %e }}",
+        "deceasedToDate": "Bekreftede dødsfall",
+        "icu": "På intensivavdeling",
+        "inHospital": "Hospitalisert",
+        "redPhase": "Rød-fase",
+        "orangePhase": "Oransje stadie",
+        "redPhaseGenitive": "rød",
+        "orangePhaseGenitive": "oransje",
+        "per100k": "per 100k",
+        "active": "Aktive tilfeller",
+        "confirmedToDate": "Bekreftede tilfeller",
+        "tests": "Tester i dag"
+    },
+    "notice": {
+        "newsText": "Koronavirus-verdenskart 🌍 - aktive tilfeller mer 1M folk",
+        "newPage": "🆕 Ny side:",
+        "newChart": "🆕 📊 Nytt diagram:"
+    },
+    "timestamp": {
+        "at": "klokken {{ date, %H:%M }}",
+        "updated": "Oppdatert {{ date, %A, %B %e, %Y }}"
+    },
+    "navbar": {
+        "language": {
+            "me": "Montenegrinsk",
+            "it": "Italiensk",
+            "sq": "Albansk",
+            "sl": "Slovensk",
+            "mk": "Makedonsk",
+            "hr": "Kroatisk",
+            "en": "Engelsk",
+            "de": "Tysk"
+        },
+        "github": "GitHub",
+        "links": "Lenker",
+        "sources": "Kilder",
+        "team": "Laget",
+        "about": "Om",
+        "faq": "O-S-S",
+        "animation": "Animasjon",
+        "models": "Modeller",
+        "tables": "Tabell",
+        "ostanizdrav": "#OstaniZdrav",
+        "world": "Verden",
+        "home": "Hjem",
+        "menu": "Meny"
+    },
+    "meta": {
+        "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",
+        "title": "Sporing av COVID-19"
+    }
+}
