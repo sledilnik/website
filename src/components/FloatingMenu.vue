@@ -98,7 +98,7 @@ export default {
   position: fixed;
   bottom: 80px;
   right: 16px;
-  padding: 16px 0 16px 16px;
+  padding: 16px 0 0px 16px;
   z-index: 2000;
   background: white;
   font-size: 14px;
