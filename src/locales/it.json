@@ -574,7 +574,7 @@
             "title": "Regioni"
         },
         "movement": {
-            "description": "Restrizioni degli spostamenti tra le 21:00-6:00. Restrizione delgi spostamenti alal propria regione.<br>Assembramenti di più di 10 persone. Restrizione di tutti gli eventi.",
+            "description": "Restrizioni degli spostamenti 21:00-6:00, restrizione degli spostamenti alla propria regione.<br>Assembramenti di più di 10 persone. Restrizione di tutti gli eventi.",
             "title": "🚫21-6h"
         }
     },
