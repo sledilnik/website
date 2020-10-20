@@ -309,11 +309,9 @@ let seriesData (state : State) =
                                 match state.DisplayType with
                                 | AbsoluteValues -> 
                                     if absolute > 0 then float absolute
-                                    else if value100k > 0.0 then value100k 
                                     else 0.0001
                                 | RegionPopulationWeightedValues -> 
-                                    if absolute > 0 then float absolute
-                                    else if value100k > 0.0 then value100k 
+                                    if value100k > 0.0 then value100k 
                                     else 0.0001
                                 | RelativeIncrease -> 
                                     weeklyIncrease
@@ -492,7 +490,7 @@ let renderMap (state : State) =
                     |} |> pojo
                 | ConfirmedCases ->
                     match state.DisplayType with
-                    | AbsoluteValues | RegionPopulationWeightedValues  -> 
+                    | AbsoluteValues -> 
                         {|
                             ``type`` = "logarithmic"
                             tickInterval = 0.4
@@ -516,6 +514,38 @@ let renderMap (state : State) =
                                     (0.920,"#800066") 
                                     (0.999,"#43006e")
                                 |]
+                            reversed = true
+                            labels = 
+                                {| 
+                                    formatter = fun() -> jsThis?value
+                                |} |> pojo
+                        |} |> pojo 
+                    
+                    | RegionPopulationWeightedValues  -> 
+                        {|
+                            ``type`` = "logarithmic"
+                            tickInterval = 0.4
+                            max = colorMax
+                            min = colorMin 
+                            endOnTick = false
+                            startOnTick = false
+                            stops =
+                                [|
+                                    (0.000,"#ffffff")
+                                    (0.001,"#fff7db")
+                                    (0.200,"#ffefb7") 
+                                    (0.280,"#ffe792") 
+                                    (0.360,"#ffdf6c") 
+                                    (0.440,"#ffb74d") 
+                                    (0.520,"#ff8d3c") 
+                                    (0.600,"#f85d3a") 
+                                    (0.680,"#ea1641") 
+                                    (0.760,"#d0004e") 
+                                    (0.840,"#ad005b") 
+                                    (0.920,"#800066") 
+                                    (0.999,"#43006e")
+                                |]
+                            reversed = true
                             labels = 
                                 {| 
                                     formatter = fun() -> jsThis?value
