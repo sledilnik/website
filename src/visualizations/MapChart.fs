@@ -409,7 +409,7 @@ let renderMap (state : State) =
                 match state.ContentType with
                 | ConfirmedCases ->
                     let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-                    if absolute > 0 then
+                    if totalConfirmed > 0 then
                         label
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
