@@ -94,6 +94,12 @@ export default {
 </script>
 
 <style lang="scss">
+@mixin nav-break {
+  @media only screen and (min-width: 1150px) {
+    @content;
+  }
+}
+
 .float-list {
   position: fixed;
   bottom: 80px;
@@ -107,7 +113,7 @@ export default {
   min-width: 235px;
   max-height: 600px;
 
-  @media only screen and (min-width: 768px) {
+  @include nav-break {
     bottom: 98px;
     right: 32px;
   }
@@ -157,7 +163,7 @@ export default {
   cursor: pointer;
   display: inline-block;
 
-  @media only screen and (min-width: 768px) {
+  @include nav-break {
     right: 24px;
     bottom: 24px;
   }
