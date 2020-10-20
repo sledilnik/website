@@ -12,6 +12,7 @@ import ru from './locales/ru.json'
 import mk from './locales/mk.json'
 import sq from './locales/sq.json'
 import me from './locales/me.json'
+import nb from './locales/nb_NO.json'
 
 
 import {Highcharts} from './visualizations/_highcharts'
@@ -66,7 +67,7 @@ i18next.on('languageChanged', function(lng) {
 
 i18next.use(LanguageDetector).init({
   lng: process.env.VUE_APP_DEFAULT_LANGUAGE,
-  fallbackLng: ['en', 'sl', 'hr', 'de', 'it', 'ru', 'mk', 'sq', 'me'],
+  fallbackLng: ['en', 'sl', 'hr', 'de', 'it', 'ru', 'mk', 'sq', 'me', 'nb'],
   returnObjects: true,
   resources: {
     sl: { translation: sl },
@@ -78,6 +79,7 @@ i18next.use(LanguageDetector).init({
     mk: { translation: mk },
     sq: { translation: sq },
     me: { translation: me },
+    nb: { translation: nb },
   },
   detection: detectionOptions,
   interpolation: {
