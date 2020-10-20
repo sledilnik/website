@@ -25,7 +25,8 @@
             "sl": "Slovenian",
             "sq": "Albanian",
             "it": "Italian",
-            "me": "Montenegrin"
+            "me": "Montenegrin",
+            "nb": "Bokmål"
         }
     },
     "timestamp": {
@@ -163,10 +164,15 @@
         "10": {
             "title": "phase<br>10",
             "description": "contact tracing suspended"
+        },
+        "11": {
+            "title": "phase<br>10",
+            "description": "epidemic"
         }
     },
     "charts": {
         "common": {
+            "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
@@ -411,7 +417,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about deceased is reported by instititions (healthcare, retirement homes) to NIJZ, but this data is delayed for several weeks. This is the reason that there is a deviation with total number of deaths."
+            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
@@ -520,7 +526,7 @@
             }
         },
         "sources": {
-            "title": "Qurantine and Sources of Infection",
+            "title": "Quarantine and Sources of Infection",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -730,7 +736,11 @@
         },
         "schools6+": {
             "title": "Schools 6+",
-            "description": "Remogte schooling for primary schools from grade 6, secondary and music schools"
+            "description": "Remote schooling for primary schools from grade 6, secondary and music schools"
+        },
+        "movement": {
+            "title": "🚫21-6h",
+            "description": "Movement restried between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
         }
     },
     "days": {

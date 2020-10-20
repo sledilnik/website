@@ -35,7 +35,8 @@
     "notice": {
         "newChart": "🆕 📊 Nov graf:",
         "newPage": "🆕 Nova stran:",
-        "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈"
+        "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
+        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -559,6 +560,10 @@
         "schools6+": {
             "title": "Šole 6+",
             "description": "Šolanje na daljavo za učence osnovnih šol od 6. razreda, srednjih in glasbenih šol"
+        },
+        "movement": {
+            "title": "🚫21-6h",
+            "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
         }
     },
     "phase": {
@@ -600,10 +605,15 @@
         "10": {
             "title": "faza<br>10",
             "description": "sledenje stikov prekinjeno"
+        },
+        "11": {
+            "title": "faza<br>10",
+            "description": "epidemija"
         }
     },
     "charts": {
         "common": {
+            "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
             "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",

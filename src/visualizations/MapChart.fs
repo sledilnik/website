@@ -63,7 +63,7 @@ type DataTimeInterval =
     override this.ToString() =
         match this with
         | Complete -> I18N.t "charts.map.all"
-        | LastDays 1 -> I18N.t "charts.map.yesterday"
+        //| LastDays 1 -> I18N.t "charts.map.yesterday"
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
 
 let dataTimeIntervals =
@@ -241,12 +241,20 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, population, confirmedCasesValue, confirmedCasesMaxValue =
+            let dlabel, value, absolute, value100k, totalConfirmed, population, activeCasesValue, activeCasesMaxValue =
                 match areaData.Cases with
                 | None -> None, 0.0001, 0, 0.0, 0, areaData.Population, null, 0
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
-                    let confirmedCasesMaxValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray |> Array.toList |> List.max
+                    let activeCasesValue = 
+                        confirmedCasesValue 
+                        |> Array.mapi (fun i cc -> 
+                            if i >= 14 
+                            then cc - confirmedCasesValue.[i-14]
+                            else cc) 
+                        |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
+                        |> Seq.toArray
+                    let activeCasesMaxValue = activeCasesValue |> Seq.max
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
@@ -287,7 +295,7 @@ let seriesData (state : State) =
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, confirmedCasesValue, confirmedCasesMaxValue
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -298,8 +306,8 @@ let seriesData (state : State) =
                 population = population
                 dlabel = dlabel
                 dataLabels = {| enabled = true; format = "{point.dlabel}" |}
-                confirmedCasesValue = confirmedCasesValue
-                confirmedCasesMaxValue = confirmedCasesMaxValue
+                activeCasesValue = activeCasesValue
+                activeCasesMaxValue = activeCasesMaxValue
             |}
     } |> Seq.toArray
 
@@ -339,8 +347,8 @@ let renderMap (state : State) =
             let absolute = points?absolute
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
-            let confirmedCasesValue = points?confirmedCasesValue
-            let confirmedCasesMaxValue = points?confirmedCasesMaxValue
+            let activeCasesValue = points?activeCasesValue
+            let activeCasesMaxValue = points?activeCasesMaxValue
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
@@ -350,13 +358,12 @@ let renderMap (state : State) =
 
             s.Append "<p><div class='bars'>" |> ignore
 
-            match confirmedCasesValue with
+            match activeCasesValue with
                 | null -> null
                 | _ ->
-                    confirmedCasesValue
-                    |> Array.skip (confirmedCasesValue.Length - 45)
+                    activeCasesValue
                     |> Array.iter (fun area ->
-                        let barHeight = Math.Ceiling(float area * float barMaxHeight / confirmedCasesMaxValue)
+                        let barHeight = Math.Ceiling(float area * float barMaxHeight / activeCasesMaxValue)
                         let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
                         s.Append barHtml |> ignore)
                     s.Append "</div>" |> ignore
@@ -405,16 +412,21 @@ let renderMap (state : State) =
             |> pojo
 
         let colorMax = 
-            match state.DataTimeInterval with
-            | Complete -> 20000.
-            | LastDays days -> 
-                match days with
-                    | 21 -> 10500.
-                    | 14 -> 7000.
-                    | 7 -> 3500.
-                    | 1 -> 500.
-                    | _ -> 100.
-        
+            match state.ContentType with
+            | ConfirmedCases -> 
+                match state.DataTimeInterval with
+                | Complete -> 20000.
+                | LastDays days -> 
+                    match days with
+                        | 21 -> 10500.
+                        | 14 -> 7000.
+                        | 7 -> 3500.
+                        | 1 -> 500.
+                        | _ -> 100.
+            | Deceased -> 
+                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                if dataMax < 1. then 10. else dataMax 
+
         let colorMin = 
             match state.DisplayType with 
                 | AbsoluteValues -> 0.9
@@ -426,7 +438,7 @@ let renderMap (state : State) =
                     {|
                         ``type`` = "linear"
                         tickInterval = 0.4
-                        max = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                        max = colorMax 
                         min = colorMin 
                         endOnTick = false 
                         startOnTick = false  
@@ -469,8 +481,22 @@ let renderMap (state : State) =
                             |]
                     |} |> pojo
 
+        let lastDate = 
+            state.Data 
+            |> Seq.map (fun a ->
+                match a.Cases with
+                | Some c -> c |> Seq.tryLast
+                |_ -> None ) 
+            |> Seq.pick (fun c -> 
+                match c with
+                | Some c -> Some c.Date
+                | _ -> None) 
+
+        let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
+            subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
             series = [| series geoJson |]
             legend = legend
             colorAxis = colorAxis
