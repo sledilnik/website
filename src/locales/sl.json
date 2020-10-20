@@ -822,7 +822,7 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
-            "relativeIncrease": "Relativen prirast"
+            "relativeIncrease": "Tedenski prirast"
         },
         "rmap": {
             "title": "Zemljevid po regijah"

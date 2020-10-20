@@ -36,27 +36,26 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
-    | RelativeIncrease
 
     override this.ToString() =
        match this with
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
-       | RelativeIncrease -> I18N.t "charts.map.relativeIncrease" 
 
-let (|ConfirmedCasesMsgCase|DeceasedMsgCase|RelativeIncreaseMsgCase|) str =
+let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
     if str = I18N.t "charts.map.confirmedCases" then ConfirmedCasesMsgCase
-    elif str = I18N.t "charts.map.deceased" then DeceasedMsgCase
-    else RelativeIncreaseMsgCase 
+    else DeceasedMsgCase 
 
 type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
+    | RelativeIncrease
 
     override this.ToString() =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
+       | RelativeIncrease -> I18N.t "charts.map.relativeIncrease" 
 
 type DataTimeInterval =
     | Complete
@@ -214,8 +213,8 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = RelativeIncrease //TODO: CHANGE THIS BACK TO CONFIRMED CASES BEFORE PRODUCTION  
-      DisplayType = RegionPopulationWeightedValues
+      ContentType = ConfirmedCases 
+      DisplayType = RelativeIncrease //TODO: replace this with RelativeWeighetValues before production
     }, Cmd.ofMsg GeoJsonRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -235,7 +234,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             match contentType with
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
-            | RelativeIncreaseMsgCase -> RelativeIncrease 
         { state with ContentType = newContentType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -263,7 +261,6 @@ let seriesData (state : State) =
                         match state.ContentType with
                         | ConfirmedCases -> confirmedCasesValue
                         | Deceased -> deceasedValue
-                        | RelativeIncrease -> confirmedCasesValue
 
                     let totalConfirmed = confirmedCasesValue |> Array.tryLast
 
@@ -289,31 +286,38 @@ let seriesData (state : State) =
                             match state.DisplayType with
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
                             | RegionPopulationWeightedValues -> None,  10. * value100k |> System.Math.Round |> int  //factor 10 for better resolution in graph
+                            | RelativeIncrease               -> None, absolute  
                         let scaled =
                             match state.ContentType with
                             | ConfirmedCases ->
-                                if state.DisplayType = AbsoluteValues
-                                then if absolute > 0 then float absolute else 0.0001
-                                else if value100k > 0.0 then value100k else 0.0001
+                                match state.DisplayType with
+                                | AbsoluteValues -> 
+                                    if absolute > 0 then float absolute
+                                    else if value100k > 0.0 then value100k 
+                                    else 0.0001
+                                | RegionPopulationWeightedValues -> 
+                                    if absolute > 0 then float absolute
+                                    else if value100k > 0.0 then value100k 
+                                    else 0.0001
+                                | RelativeIncrease -> 
+                                    let parseNumber x = 
+                                        match x with 
+                                        | None -> 0.
+                                        | Some x -> x |> float  
+                                    let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
+                                    let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
+                                    let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
+                                    
+                                    let increaseThisWeek = casesNow - cases7dAgo
+                                    let increaseLastWeek = cases7dAgo - cases14dAgo 
+
+                                    if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
+                                    else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
-                            | RelativeIncrease ->
-                                let parseNumber x = 
-                                    match x with 
-                                    | None -> 0.
-                                    | Some x -> x |> float  
-                                let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
-                                let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
-                                let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
-                                
-                                let increaseThisWeek = casesNow - cases7dAgo
-                                let increaseLastWeek = cases7dAgo - cases14dAgo 
 
-                                if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
-                                else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
-                                
 
                         dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
             {|
@@ -364,7 +368,7 @@ let renderMap (state : State) =
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
-            let value = points?value
+            let value = points?value //TODO: Remove?
             let absolute = points?absolute
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
@@ -399,6 +403,7 @@ let renderMap (state : State) =
                         label
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") (if value < 200. then "" else ">") (value |> Utils.formatTo1DecimalWithTrailingZero)
                             + s.ToString()
                     else
                         label
@@ -417,19 +422,10 @@ let renderMap (state : State) =
                                 (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
                     else
                         label
-                | RelativeIncrease ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-
-                    if value < 200. 
-                        then label + sprintf "<br>%s: <b>%s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") 
-                                (Utils.formatTo1DecimalWithTrailingZero value)
-                    else
-                        label + sprintf "<br>%s: <b> > %s %%</b>" (I18N.t "charts.spread.relativeWeeklyLabel")
-                             (Utils.formatTo1DecimalWithTrailingZero value)
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let legend =
-            let enabled = state.ContentType = ConfirmedCases || state.ContentType = RelativeIncrease
+            let enabled = state.ContentType = ConfirmedCases 
             {| enabled = enabled
                title = {| text = null |}
                align = "right"
@@ -459,14 +455,14 @@ let renderMap (state : State) =
             | Deceased -> 
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
-            | RelativeIncrease -> 
-                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
-                if dataMax < 1. then 10. else dataMax
+
+
 
         let colorMin = 
             match state.DisplayType with 
                 | AbsoluteValues -> 0.9
                 | RegionPopulationWeightedValues -> colorMax / 7000.
+                | RelativeIncrease -> -100.
 
         let colorAxis = 
             match state.ContentType with
@@ -492,55 +488,60 @@ let renderMap (state : State) =
                             |]
                     |} |> pojo
                 | ConfirmedCases ->
-                    {|
-                        ``type`` = "logarithmic"
-                        tickInterval = 0.4
-                        max = colorMax
-                        min = colorMin 
-                        endOnTick = false
-                        startOnTick = false
-                        stops =
-                            [|
-                                (0.000,"#ffffff")
-                                (0.001,"#fff7db")
-                                (0.200,"#ffefb7") 
-                                (0.280,"#ffe792") 
-                                (0.360,"#ffdf6c") 
-                                (0.440,"#ffb74d") 
-                                (0.520,"#ff8d3c") 
-                                (0.600,"#f85d3a") 
-                                (0.680,"#ea1641") 
-                                (0.760,"#d0004e") 
-                                (0.840,"#ad005b") 
-                                (0.920,"#800066") 
-                                (0.999,"#43006e")
-                            |]
-                    |} |> pojo
-                | RelativeIncrease -> 
-                    {| 
-                        ``type`` = "linear"
-                        tickInterval = 50
-                        max = 200
-                        min = -100
-                        endOnTick = false
-                        startOnTick = false
-                        stops =
-                            [|
-                                (0.000,"#009e94")
-                                (0.166,"#6eb49d")
-                                (0.250,"#b2c9a7") 
-                                (0.333,"#f0deb0") 
-                                (0.500,"#e3b656")
-                                (0.600,"#cc8f00")
-                                (0.999,"#b06a00")
-                            |]
-                        reversed=false
-                        labels = 
-                        {| 
-                           formatter = fun() -> sprintf "%A%%" jsThis?value
+                    match state.DisplayType with
+                    | AbsoluteValues | RegionPopulationWeightedValues  -> 
+                        {|
+                            ``type`` = "logarithmic"
+                            tickInterval = 0.4
+                            max = colorMax
+                            min = colorMin 
+                            endOnTick = false
+                            startOnTick = false
+                            stops =
+                                [|
+                                    (0.000,"#ffffff")
+                                    (0.001,"#fff7db")
+                                    (0.200,"#ffefb7") 
+                                    (0.280,"#ffe792") 
+                                    (0.360,"#ffdf6c") 
+                                    (0.440,"#ffb74d") 
+                                    (0.520,"#ff8d3c") 
+                                    (0.600,"#f85d3a") 
+                                    (0.680,"#ea1641") 
+                                    (0.760,"#d0004e") 
+                                    (0.840,"#ad005b") 
+                                    (0.920,"#800066") 
+                                    (0.999,"#43006e")
+                                |]
+                            labels = 
+                                {| 
+                                    formatter = fun() -> jsThis?value
+                                |} |> pojo
                         |} |> pojo
-
-                    |} |> pojo
+                    | RelativeIncrease -> 
+                        {| 
+                            ``type`` = "linear"
+                            tickInterval = 50
+                            max = 200
+                            min = -100
+                            endOnTick = false
+                            startOnTick = false
+                            stops =
+                                [|
+                                    (0.000,"#009e94")
+                                    (0.166,"#6eb49d")
+                                    (0.250,"#b2c9a7") 
+                                    (0.333,"#f0deb0") 
+                                    (0.500,"#e3b656")
+                                    (0.600,"#cc8f00")
+                                    (0.999,"#b06a00")
+                                |]
+                            reversed=false
+                            labels = 
+                            {| 
+                               formatter = fun() -> sprintf "%s%%" jsThis?value
+                            |} |> pojo
+                        |} |> pojo
 
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
@@ -588,7 +589,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector currentDisplayType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues ] currentDisplayType dispatch)
+        prop.children (renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues; RelativeIncrease ] currentDisplayType dispatch)
     ]
 
 let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
@@ -607,10 +608,6 @@ let renderContentTypeSelector selected dispatch =
             prop.text (ContentType.Deceased.ToString())
             prop.value (ContentType.Deceased.ToString())
         ]
-        yield Html.option [
-            prop.text(ContentType.RelativeIncrease.ToString())
-            prop.value(ContentType.RelativeIncrease.ToString())
-        ]
     }
 
     Html.select [
@@ -628,13 +625,12 @@ let render (state : State) dispatch =
                     prop.className "filters"
                     prop.children [
                         renderContentTypeSelector state.ContentType dispatch 
-                        if state.ContentType <> RelativeIncrease then
+                        if state.DisplayType <> RelativeIncrease then
                             renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
-                if state.ContentType <> RelativeIncrease then 
-                    renderDisplayTypeSelector
-                        state.DisplayType (DisplayTypeChanged >> dispatch)
+                renderDisplayTypeSelector
+                    state.DisplayType (DisplayTypeChanged >> dispatch)
             ]
             Html.div [
                 prop.className "map"
