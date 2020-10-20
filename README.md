@@ -1,7 +1,12 @@
-# covid19-web
+# COVID-19 Sledilnik website
 
 [![Build](https://github.com/sledilnik/website/workflows/Build/badge.svg)](https://github.com/sledilnik/website/actions)
 [![Translation status](https://hosted.weblate.org/widgets/sledilnik/-/website/svg-badge.svg)](https://hosted.weblate.org/engage/sledilnik/?utm_source=widget)
+
+
+## License
+This software is licensed under [GNU Affero General Public License](LICENSE).
+
 
 ## Structure
 
