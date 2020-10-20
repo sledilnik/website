@@ -339,7 +339,8 @@
             "to": " – ",
             "from": " ",
             "sortBy": "Razvrstaj prema:",
-            "weekYearDateFormat": "%W. tjedan %Y."
+            "weekYearDateFormat": "%W. tjedan %Y.",
+            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -576,7 +577,7 @@
             "tests": "Provedeni testovi",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
-            "title": "Usporedba prema danu u tjednu"
+            "title": "Usporedba po danu u tjednu"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -599,14 +600,14 @@
         "ostanizdrav": {
             "userPublishedByCount": {
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva po danu i broju korisnika",
+                "title": "Dnevni broj objavljenih ključeva s brojem korisnika",
                 "users": "Broj korisnika",
-                "count": "(Prosječni) broj ključeva po broju korisnika",
+                "count": "(Prosječni) dnevni broj ključeva po broju korisnika",
                 "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'",
                 "description": "Dijagram prikazuje broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji."
             },
             "usercount": {
-                "title": "Procijenjeni broj korisnika po danu koji su objavili ključeve",
+                "title": "Procijenjeni broj korisnika koji su objavili ključeve",
                 "runningTotal": "Ukupni broj korisnika koji su objavili ključeve",
                 "users": "Broj korisnika koji su objavili ključeve",
                 "date": "Datum",
@@ -614,31 +615,31 @@
             },
             "publishedByRisk": {
                 "risk": "Razina rizika",
-                "published": "Broj objavljenih ključeva",
+                "published": "Dnevni broj objavljenih ključeva",
                 "tooltip": "datum.published + ' ključevi s razinom rizika ' + datum.risk",
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva po danu i razinama rizika",
+                "title": "Dnevni broj objavljenih ključeva s razinama rizika",
                 "description": "Svaki objavljeni dnevni ključ ima povezanu razinu rizika prenošenja zaraze. Dijagram prikazuje njihove brojeve za svaki dan. Što je boja tamnija, to je rizik veći. Ako je korisnik instalirao program i ako je program radio za vrijeme cijelog razdoblja, ključevi će imati sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Stoga se očekuje, da će ključevi s rizikom prenošenja zaraze od 1 biti najčešći, a drugi najčešći rizik prenošenja zaraze je 8."
             },
             "validByRisk": {
                 "risk": "Rizik",
-                "title": "Broj valjanih ključeva po danu i razinama rizika",
-                "valid": "Broj valjanih ključeva",
+                "title": "Dnevni broj valjanih ključeva s razinama rizika",
+                "valid": "Dnevni broj valjanih ključeva",
                 "tooltip": "datum.valid + ' ključevi s razinom rizika ' +datum.risk",
                 "date": "Datum",
                 "description": "Dijagram prikazuje razinu rizika prenošenja zaraze za ključeve koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.publishedByRisk.title)](#publishedByRisk-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
             },
             "published": {
-                "runningTotal": "Ukupno objavljeni ključevi",
+                "runningTotal": "Ukupno objavljenih ključeva",
                 "perDay": "Broj objavljenih ključeva",
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva po danu",
+                "title": "Broj objavljenih ključeva dnevno",
                 "description": "Dijagram prikazuje broj objavljenih dnevnih ključeva (plavi stupci) i ukupni broj ključeva koji su do danas objavljeni (crvena crta). Prosječni korisnik objavljuje između 10 i 12 dnevnih ključeva (pogledaj dijagram [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)). Pomoću tih podataka možemo procijeniti broj korisnika koji su upisali potvrdni kod nakon pozitivnog testiranja."
             },
             "valid": {
                 "perDay": "Broj valjanih ključeva",
                 "date": "Datum",
-                "title": "Broj valjanih ključeva po danu",
+                "title": "Broj valjanih ključeva dnevno",
                 "description": "Dijagram prikazuje broj ključeva koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
             },
             "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoza](https://github.com/mh-/diagnosis-keys).",
@@ -799,6 +800,14 @@
         "regions": {
             "description": "Ograničenja za crvene regije: zabrana kretanja izvan općinskih granica, upotreba maski vani, ograničenja za neke usluge",
             "title": "Regije"
+        },
+        "movement": {
+            "description": "Ograničeno kretanje između 21:00 i 6:00. Ograničeno kretanje na vlastitu regiju.<br>Skupine do 10 ljudi. Ograničenje svih događaja.",
+            "title": "🚫21 – 6 h"
+        },
+        "schools6+": {
+            "description": "Nastava na daljinu za učenike od 6. razreda osnovne škole, srednje škole i muzičkih škola",
+            "title": "Škole 6+"
         }
     },
     "pageNotFound": {
@@ -837,7 +846,8 @@
             "mk": "Makedonski",
             "de": "Njemački",
             "me": "Crnogorski",
-            "it": "Talijanski"
+            "it": "Talijanski",
+            "nb": "Bokmål"
         },
         "about": "O projektu",
         "faq": "FAQ",
@@ -884,6 +894,10 @@
         },
         "10": {
             "description": "praćenje kontakata prekinuto",
+            "title": "faza<br>10"
+        },
+        "11": {
+            "description": "epidemija",
             "title": "faza<br>10"
         }
     },
