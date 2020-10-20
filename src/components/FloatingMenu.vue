@@ -1,18 +1,12 @@
 <template>
   <div>
     <transition name="slide">
-      <div
-        class="float-nav-btn"
-        :class="{ active: active }"
-        v-if="list.length > 0"
-        @click="toggleMenu"
-      >
-        <img
-          src="../assets/svg/floating-close.svg"
-          alt="Close"
-          v-if="!active"
+      <div class="float-nav-btn" v-if="list.length > 0" @click="toggleMenu">
+        <div
+          class="float-nav-img"
+          :class="{ active: active }"
+          :alt="$t('navbar.goToGraph')"
         />
-        <img src="../assets/svg/floating-open.svg" alt="Open" v-if="active" />
       </div>
     </transition>
     <transition name="fade">
@@ -143,7 +137,7 @@ export default {
     &:last-child {
       padding-bottom: 16px;
     }
-    
+
     a {
       padding: 6px 0;
       display: block;
@@ -166,6 +160,17 @@ export default {
   @include nav-break {
     right: 24px;
     bottom: 24px;
+  }
+}
+
+.float-nav-img {
+  background-image: url('../assets/svg/floating-close.svg');
+  height: 72px;
+  width: 72px;
+  transition: all 0.3s;
+
+  &.active {
+    background-image: url('../assets/svg/floating-open.svg');
   }
 }
 
