@@ -21,7 +21,7 @@
         v-on-clickaway="hideMenu"
         class="float-list"
       >
-        <h2>Pojdi na graf</h2>
+        <h2>{{ $t('navbar.goToGraph') }}</h2>
         <ul>
           <li v-for="item in list" :key="item" class="float-item">
             <a

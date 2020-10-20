@@ -17,6 +17,7 @@
         "sources": "Sources",
         "links": "Links",
         "github": "GitHub",
+        "goToGraph": "Go to graph",
         "language": {
             "de": "German",
             "en": "English",
