@@ -422,6 +422,7 @@
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
             "newCases": "New cases",
+            "newCasesRelative": "New cases (relative)",
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },

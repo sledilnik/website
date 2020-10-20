@@ -554,6 +554,7 @@
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
             "newCases": "Neue Fälle",
+            "newCasesRelative": "Neue Fälle (relativ)",
             "activeCases": "Aktive Fälle",
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },

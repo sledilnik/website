@@ -279,6 +279,7 @@
             "title": "Rastet e konfirmuara sipas grupmoshës",
             "activeCasesRelative": "Raste aktive (relative)",
             "activeCases": "Raste aktive",
+            "newCasesRelative": "Raste të reja (relative)",
             "newCases": "Raste të reja"
         },
         "countriesTotalDeathsPer1M": {

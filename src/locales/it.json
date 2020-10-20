@@ -773,6 +773,7 @@
         "ageGroupsTimeline": {
             "activeCasesRelative": "Casi attivi (relativi)",
             "activeCases": "Casi attivi",
+            "newCasesRelative": "Nuovi casi (relativi)",
             "newCases": "Nuovi casi",
             "title": "Casi confermati per fasce di età"
         },

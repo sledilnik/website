@@ -388,6 +388,7 @@
         "ageGroupsTimeline": {
             "title": "Potvrđeni slučajevi po dobnim skupinama",
             "newCases": "Novi slučajevi",
+            "newCasesRelative": "Novi slučajevi (relativno)",
             "activeCases": "Aktivni slučajevi",
             "activeCasesRelative": "Aktivni slučajevi (relativno)"
         },

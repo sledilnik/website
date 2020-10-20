@@ -892,6 +892,7 @@
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
             "newCases": "Novi primeri",
+            "newCasesRelative": "Novi primeri (relativno)",
             "activeCases": "Aktivni primeri",
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
