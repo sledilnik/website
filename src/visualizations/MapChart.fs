@@ -43,19 +43,22 @@ type ContentType =
        | Deceased       -> I18N.t "charts.map.deceased"
 
 let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
-    if str = I18N.t "charts.map.confirmedCases" then ConfirmedCasesMsgCase
+    if str = I18N.t "charts.map.confirmedCases" 
+    then ConfirmedCasesMsgCase
     else DeceasedMsgCase 
 
 type DisplayType =
     | AbsoluteValues
     | RegionPopulationWeightedValues
     | RelativeIncrease
+with
+    static member Default = RegionPopulationWeightedValues
 
     override this.ToString() =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
-       | RelativeIncrease -> I18N.t "charts.map.relativeIncrease" 
+       | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease" 
 
 type DataTimeInterval =
     | Complete
@@ -64,7 +67,6 @@ type DataTimeInterval =
     override this.ToString() =
         match this with
         | Complete -> I18N.t "charts.map.all"
-        //| LastDays 1 -> I18N.t "charts.map.yesterday"
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
 
 let dataTimeIntervals =
@@ -214,7 +216,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       Data = data
       DataTimeInterval = dataTimeInterval
       ContentType = ConfirmedCases 
-      DisplayType = RelativeIncrease //TODO: replace this with RelativeWeighetValues before production
+      DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -242,9 +244,9 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, population, activeCasesValue, activeCasesMaxValue =
+            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, activeCasesValue, activeCasesMaxValue =
                 match areaData.Cases with
-                | None -> None, 0.0001, 0, 0.0, 0, areaData.Population, null, 0
+                | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null, 0
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let activeCasesValue = 
@@ -277,7 +279,7 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0.0001, 0, 0.0, 0, areaData.Population, null, 0
+                    | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null, 0
                     | Some lastValue ->
                         let absolute = lastValue
                         let value100k =
@@ -287,6 +289,20 @@ let seriesData (state : State) =
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
                             | RegionPopulationWeightedValues -> None,  10. * value100k |> System.Math.Round |> int  //factor 10 for better resolution in graph
                             | RelativeIncrease               -> None, absolute  
+                        let weeklyIncrease =    
+                            let parseNumber x = 
+                                match x with 
+                                | None -> 0.
+                                | Some x -> x |> float  
+                            let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
+                            let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
+                            let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
+                            
+                            let increaseThisWeek = casesNow - cases7dAgo
+                            let increaseLastWeek = cases7dAgo - cases14dAgo 
+
+                            if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
+                            else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
                         let scaled =
                             match state.ContentType with
                             | ConfirmedCases ->
@@ -300,26 +316,13 @@ let seriesData (state : State) =
                                     else if value100k > 0.0 then value100k 
                                     else 0.0001
                                 | RelativeIncrease -> 
-                                    let parseNumber x = 
-                                        match x with 
-                                        | None -> 0.
-                                        | Some x -> x |> float  
-                                    let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
-                                    let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
-                                    let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
-                                    
-                                    let increaseThisWeek = casesNow - cases7dAgo
-                                    let increaseLastWeek = cases7dAgo - cases14dAgo 
-
-                                    if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
-                                    else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
+                                    weeklyIncrease
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
 
-
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, activeCasesValue, activeCasesMaxValue
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -327,6 +330,7 @@ let seriesData (state : State) =
                 absolute = absolute
                 value100k = value100k
                 totalConfirmed = totalConfirmed
+                weeklyIncrease = weeklyIncrease
                 population = population
                 dlabel = dlabel
                 dataLabels = {| enabled = true; format = "{point.dlabel}" |}
@@ -368,10 +372,10 @@ let renderMap (state : State) =
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
-            let value = points?value //TODO: Remove?
             let absolute = points?absolute
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
+            let weeklyIncrease = points?weeklyIncrease
             let activeCasesValue = points?activeCasesValue
             let activeCasesMaxValue = points?activeCasesMaxValue
             let population = points?population
@@ -403,7 +407,7 @@ let renderMap (state : State) =
                         label
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
-                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.spread.relativeWeeklyLabel") (if value < 200. then "" else ">") (value |> Utils.formatTo1DecimalWithTrailingZero)
+                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 200. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                             + s.ToString()
                     else
                         label
@@ -437,7 +441,6 @@ let renderMap (state : State) =
                valueDecimals = 0 
                width = 70//TODO: Clean this up for confirmed and deceased cases.
             |}
-
             |> pojo
 
         let colorMax = 
