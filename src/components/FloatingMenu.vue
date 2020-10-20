@@ -134,8 +134,12 @@ export default {
       border-bottom: 1px solid #d8d8d8;
     }
 
+    &:last-child {
+      padding-bottom: 16px;
+    }
+    
     a {
-      margin: 6px 0;
+      padding: 6px 0;
       display: block;
       cursor: pointer;
       text-decoration: none;
