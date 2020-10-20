@@ -6,7 +6,8 @@
             "activeCases": "aktive tilfeller",
             "today": "I dag",
             "hospitalized": "hospitalisert",
-            "title": "Vekst i bekreftede tilfeller"
+            "title": "Vekst i bekreftede tilfeller",
+            "explainer": ""
         },
         "infections": {
             "otherPersons": "Andre personer",
@@ -66,6 +67,92 @@
             "loading": "Laster inn data…",
             "dsMZ": "Helseminister",
             "dataSource": "datakilde"
+        },
+        "ostanizdrav": {
+            "publishedByRisk": {
+                "risk": "Risiko",
+                "date": "Dato"
+            },
+            "validByRisk": {
+                "risk": "Risiko",
+                "date": "Dato"
+            },
+            "published": {
+                "date": "Dato"
+            },
+            "valid": {
+                "date": "Dato"
+            }
+        },
+        "countriesActiveCasesPer1M": {
+            "legendTitle": "Aktive tilfeller per 100k folk",
+            "yAxisTitle": "Aktive tilfeller per 100k folk"
+        },
+        "ageGroupsTimeline": {
+            "activeCasesRelative": "Aktive tilfeller (relativ)",
+            "activeCases": "Aktive tilfeller",
+            "newCases": "Nye tilfeller"
+        },
+        "ageGroups": {
+            "confirmedCases": "Bekreftede tilfeller",
+            "deceased": "Dødsfall",
+            "age": "Alder",
+            "relative": "Relativ",
+            "absolute": "Absolutt",
+            "female": "Kvinnelig",
+            "male": "Mannlig",
+            "title": "Aldersgrupper"
+        },
+        "municipalities": {
+            "doubles": "Fordobling ",
+            "today": "i dag",
+            "yesterday": "i går",
+            "deceased": "Dødsfall: ",
+            "active": "Aktive: ",
+            "all": "Alle: ",
+            "showLess": "Vis færre",
+            "showAll": "Vis alle",
+            "allRegions": "Alle steder",
+            "viewActive": "Aktive",
+            "viewTotal": "Alle",
+            "viewLast": "Siste"
+        },
+        "world": {
+            "title": "COVID-19-situasjonen i verden"
+        },
+        "europe": {
+            "noData": "Ingen data",
+            "countryStatus": "",
+            "incidence100k": "",
+            "newCases": "",
+            "title": ""
+        },
+        "rmap": {
+            "title": ""
+        },
+        "map": {
+            "per100k": "",
+            "confirmedCases": "",
+            "deceased": "",
+            "absolute": "",
+            "last_x_days": "",
+            "last_x_days_plural": "",
+            "population": "",
+            "populationC": "",
+            "populationShare": "",
+            "all": "",
+            "yesterday": ""
+        },
+        "regions100k": {
+            "deceased": "",
+            "confirmedCases": "",
+            "activeCases": "",
+            "title": ""
+        },
+        "regions": {
+            "deceased": "",
+            "confirmedCases": "",
+            "activeCases": ""
         }
     },
     "phase": {
