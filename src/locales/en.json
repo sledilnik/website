@@ -478,7 +478,7 @@
                 "title": "Keys valid per day",
                 "date": "Date",
                 "perDay": "Keys valid per day",
-                "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see \n the chart [$t(charts.ostanizdrav.published.title)](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
+                "description": "The chart shows the number of keys valid on any particular day—as opposed to the number of keys that were published on those days (see the chart [$t(charts.ostanizdrav.published.title)](#published-chart)). When an infection is confirmed in the app all the daily keys are published on the same day, but each of them is valid for one of the previous days. This means that the chart will always show a downward trend for the most recent 13 days, regardless of the number of users uploading their keys. This is because most daily keys that are valid for this period will only get published in the future."
             },
             "published": {
                 "title": "Daily keys published per day",
@@ -727,6 +727,10 @@
         "regions": {
             "title": "Regions",
             "description": "Restrictions for red regions: movement outside municipal borders, use of masks outside, restriction of some services"
+        },
+        "schools6+": {
+            "title": "Schools 6+",
+            "description": "Remogte schooling for primary schools from grade 6, secondary and music schools"
         }
     },
     "days": {
