@@ -238,11 +238,15 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             | DeceasedMsgCase -> Deceased
         let newDisplayType =
             if state.DisplayType = RelativeIncrease && newContentType = Deceased
-            then DisplayType.Default
+            then DisplayType.Default // for Deceased, RelativeIncrease not supported
             else state.DisplayType
         { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
-        { state with DisplayType = displayType }, Cmd.none
+        let newDataTimeInterval =
+            if displayType = RelativeIncrease
+            then LastDays 7 // force 7 days for weekly relative increase
+            else state.DataTimeInterval
+        { state with DisplayType = displayType; DataTimeInterval = newDataTimeInterval }, Cmd.none
 
 let seriesData (state : State) =
 
