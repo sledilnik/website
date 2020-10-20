@@ -311,5 +311,95 @@
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",
         "title": "Sporing av COVID-19"
+    },
+    "mk": {
+        "cm": {
+            "masksOn": {
+                "title": "Masker"
+            },
+            "gatherings5": {
+                "title": "Sammenkomster på 5 folk"
+            },
+            "bordersClosure": {
+                "title": "grenser"
+            }
+        }
+    },
+    "cm": {
+        "testOrQuarantine": {
+            "title": "Test"
+        },
+        "masks": {
+            "title": "Masker"
+        },
+        "quarantine10days": {
+            "title": "10 dager"
+        },
+        "allSchools": {
+            "title": "Skoler"
+        },
+        "croatia": {
+            "title": "Kroatia"
+        },
+        "app": {
+            "title": "#OstaniZdrav"
+        },
+        "gatherings10": {
+            "title": "Opptil 10"
+        },
+        "gatherings50": {
+            "title": "Opptil 50"
+        },
+        "quarantineStrict": {
+            "title": "Karantene"
+        },
+        "liftGatherings500": {
+            "title": "Opptil 500"
+        },
+        "liftSchools4to5": {
+            "title": "Skoler"
+        },
+        "quarantine14days": {
+            "title": "Karantene"
+        },
+        "liftSchools1to3": {
+            "title": "Barnehage"
+        },
+        "publicTransport": {
+            "title": "Transport"
+        },
+        "liftPublicTransport": {
+            "title": "Transport"
+        },
+        "liftQuarantine": {
+            "title": "Karantene"
+        },
+        "epidemic": {
+            "title": "Epidemi"
+        },
+        "schools": {
+            "title": "Skoler"
+        },
+        "gatherings": {
+            "title": "Sammenkomster"
+        },
+        "shops": {
+            "title": "Butikker"
+        },
+        "quarantine": {
+            "title": "Karantere"
+        },
+        "liftService": {
+            "title": "Tjenester"
+        },
+        "nationalStudy": {
+            "title": "Studie"
+        },
+        "liftMuseums": {
+            "title": "Museum"
+        },
+        "liftFoodMarkets": {
+            "title": "Markeder"
+        }
     }
 }
