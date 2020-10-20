@@ -8,7 +8,8 @@
             "mk": "Macedone",
             "hr": "Croato",
             "en": "Inglese",
-            "de": "Tedesco"
+            "de": "Tedesco",
+            "nb": "Bokmål"
         },
         "github": "GitHub",
         "links": "Collegamenti",
@@ -571,6 +572,10 @@
         "regions": {
             "description": "Restrizioni per le regioni rosse: movimento al di fuori dei confini comunali, uso di maschere all'esterno, restrizione di alcuni servizi",
             "title": "Regioni"
+        },
+        "movement": {
+            "description": "Restrizioni degli spostamenti 21:00-6:00, restrizione degli spostamenti alla propria regione.<br>Assembramenti di più di 10 persone. Restrizione di tutti gli eventi.",
+            "title": "🚫21-6h"
         }
     },
     "tableDict": {
@@ -903,7 +908,8 @@
             "dsNIJZ": "NIJZ",
             "dataSource": "origine dei dati",
             "sortBy": "Ordina per:",
-            "weekYearDateFormat": "Settimana %W del %Y"
+            "weekYearDateFormat": "Settimana %W del %Y",
+            "dataDate": "Dati fino a: {{ date, %a., %e. %b. }}"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo"
@@ -1090,6 +1096,10 @@
         "8": {
             "description": "nuova metodologia di test - bambini",
             "title": "fase<br>8"
+        },
+        "11": {
+            "description": "epidemia",
+            "title": "fase<br>10"
         }
     },
     "weekday": {

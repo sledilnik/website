@@ -852,6 +852,9 @@
         "regions": {
             "description": "Einschränkungen für rote Regionen: Bewegung außerhalb der Gemeindegrenzen, Verwendung von Masken im Freien, Einschränkung einiger Dienstleistungen",
             "title": "Regionen"
+        },
+        "movement": {
+            "title": "🚫21-6h"
         }
     },
     "region": {
@@ -1086,6 +1089,10 @@
         },
         "10": {
             "description": "Kontaktverfolgung ausgesetzt",
+            "title": "Phase<br>10"
+        },
+        "11": {
+            "description": "Epidemie",
             "title": "Phase<br>10"
         }
     },
