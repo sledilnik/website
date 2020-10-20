@@ -318,7 +318,11 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 
 * **Faza 8 (10. september–9. oktober)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko. 
 
-* **Faza 9 (9. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiologi bodo zaradi preveč okužb z novim koronavirusom prioritetno iskali stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
+* **Faza 9 (9.-17. oktober)**: NIJZ je sporočil da prehaja na [delno sledenje stikov](https://www.sta.si/2816961/zaradi-prevec-okuzb-s-koronavirusom-epidemiologi-dolocili-prioritete-pri-iskanju-stikov) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom prioritetno iskala stike okuženih v domovih starejših, socialnovarstvenih zavodih, šolstvu, zdravstvu in skupnih gospodinjstvih. Računajo na vse okužene, da sami obvestijo stike, ti pa naj ravnajo preventivno.
+
+* **Faza 10 (17.-19. oktober)**: NIJZ je sporočil da [ne bo več sledil stikom](https://www.nijz.si/spremenjen-protokol-sledenja-stikom-okuzenih-z-novim-koronavirusom-sars-cov-2) – epidemiološka služba bo zaradi preveč okužb z novim koronavirusom vzpostavila kontakt z vsako osebo s potrjeno okužbo preko telefona, ji podala informacije o poteku izolacije in izdala kodo za aktivacijo v aplikaciji #OstaniZdrav. Oseba s potrjeno okužbo bo prejela tudi navodila, da sama obvesti vse osebe, s katerimi je bila v stiku. Posledično ne bo podajala predlogov za ukrep karantene.
+
+* **Faza 11 (19. oktober)**: Vlada je razglasila [epidemijo](https://www.gov.si/novice/2020-10-18-vlada-razglasila-epidemijo-nalezljive-bolezni-covid-19-na-obmocju-republike-slovenije/).
 </details>
 
 <details>
@@ -351,6 +355,8 @@ Vsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča 
 
 </details>
 
+<!---
+
 <details>
   <summary id=ratios-chart>Kaj nam pove graf "Delež resnih primerov"?</summary>
 
@@ -366,6 +372,8 @@ Vsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča 
 Graf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z drugimi državami (glede na njihova poročila).
 
 </details>
+-->
+
 
 <details>
   <summary id=hcenters-chart>Kaj nam pove graf "Obravnava v ZD"?</summary>
@@ -419,9 +427,9 @@ Prirast okuženih zdravstvenih delavcev ne pomeni, da so bili odkriti točno na 
 <details>
   <summary id=map-chart>Kaj nam kaže "Zemljevid po občinah"?</summary>
 
-[Zemljevid po občinah](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*včeraj, 7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
+[Zemljevid po občinah](/sl/stats#map-chart) nam pokaže epidemiološko sliko posameznih občin, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*1, 7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. Za tiste občine, kjer se še vedno potrjujejo novi primeri, lahko sklepamo, da je epidemija še vedno aktivna. (Seveda to ne pomeni nujno, da v občinah brez novih primerov potrjenih okužb teh res ni, je pa to vendarle pokazatelj "zdravosti" določenega območja.) Več podrobnosti je na voljo v članku na Mediumu [Kje so “zdrave” občine?](https://medium.com/sledilnik/kje-so-zdrave-ob%C4%8Dine-613afc42b023) 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo občine pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*1, 7, 14 ali 21 dni*).
 
 </details>
 
@@ -430,7 +438,7 @@ S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogl
 
 [Zemljevid po regijah](/sl/stats#rmap-chart) nam pokaže epidemiološko sliko posameznih statističnih regij, saj omogoča prikaz po potrjenih primerih (rdeči odtenki) ali umrlih (sivi odtenki). Pri prikazu potrjenih primerov, lahko vidimo, katere so najbolj "zdrave" (bela barva) in katere bolj "okužene" (rdeči odtenki) glede na trenutno stanje – se še vedno pojavljajo novi primeri ali ne – in glede na delež prebivalstva (privzet prikaz je *Delež prebivalstva*). Na levi strani lahko z uporabo filtra (*7, 14 ali 21 dni*) določimo, za kakšno časovno obdobje si bomo ogledali podatke o novih primerih potrjeno okuženih ali umrlih. 
 
-S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo regije pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*včeraj, 7, 14 ali 21 dni*).
+S klikom na *Absolutno* v desnem zgornjem kotu lahko spremenimo prikaz in si ogledamo regije pobarvane glede na skupno število novo potrjeno okuženih ali umrlih v izbranem časovnem okviru (*1, 7, 14 ali 21 dni*).
 
 </details>
 
@@ -473,7 +481,10 @@ Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogrožen
 <details>
   <summary id=age-groups-chart>Kaj kaže graf "Po starostnih skupinah"?</summary>
 
-[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjeno okuženih in smrtnih primerov zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjeno okuženih* se bo prikazal delež potrjeno okuženega prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. Z izbiro *Umrli glede na št. okuženih* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjeno okuženih.
+[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjeno okuženih in smrtnih primerov zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjeno okuženih* se bo prikazal delež potrjeno okuženega prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. 
+<!---
+Z izbiro *Umrli glede na št. okuženih* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjeno okuženih.
+-->
 
 Demografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila in zakaj je nesorazmerno vplivala na določene starostne skupine. Po zdaj znanih podatkih naj bi bila bolezen COVID-19 bolj nevarna za starejše in tiste s pridruženimi boleznimi, po nekaterih podatkih naj bi bili bolj izpostavljeni moški. Da pa bi lahko razumeli vse dejavnike, bi morali pridobiti več podatkov: kakšne so bile pridružene bolezni, socialno ekonomsko stanje obolelih, geografsko območje ipd.  
 *Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjeno okuženih in umrlih glede na podatke v drugih prikazih.*

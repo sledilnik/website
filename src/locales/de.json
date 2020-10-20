@@ -21,7 +21,8 @@
         "tables": "Tabellen",
         "faq": "FAQ",
         "world": "Welt",
-        "animation": "Animation"
+        "animation": "Animation",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "country": {
         "ABW": "Aruba",
@@ -402,18 +403,19 @@
             "dataSource": "Datenquelle",
             "yAxis": "Y-Achse:",
             "loading": "Daten werden geladen …",
-            "sortBy": "Sortieren nach:"
+            "sortBy": "Sortieren nach:",
+            "weekYearDateFormat": "%W. Woche %Y"
         },
         "europe": {
             "newCases": "Neue Fälle",
             "statusGreen": "keine Einschränkungen",
             "restrictions": "Einschränkungen und eingeschleppte Fälle",
             "countryStatus": "Einschränkungen",
-            "twoWeekIncidence": "14-tägige Fälle pro 1 M",
+            "twoWeekIncidence": "14-tägige Fälle pro 100.000",
             "statusNone": "–",
             "statusRed": "strikte 10-tägige Quarantäne",
             "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
-            "incidence1M": "Neue Fälle in 14 Tagen pro 1 Mio.",
+            "incidence100k": "Neue Fälle in 14 Tagen pro 100.000",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",
             "importedCases": "Eingeschleppte Fälle in 14 Tagen"
@@ -450,6 +452,7 @@
             "population": "Bevölkerung",
             "mortalityOfConfirmedCases": "Sterblichkeit bei bestätigten Fällen",
             "confirmedCases": "Bestätigte Fälle",
+            "per100k": "pro 100 tausend",
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
@@ -555,14 +558,14 @@
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "yAxisTitle": "Gesamtzahl der Todesfälle pro 1 Million Menschen",
-            "title": "Länder: Gesamtzahl der Todesfälle pro 1 Million Menschen"
+            "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Neue tägliche Fälle pro 1 Million Menschen",
-            "title": "Länder: Neue tägliche Fälle pro 1 Million Menschen"
+            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen"
         },
         "world": {
             "title": "COVID-19 Situation auf der Welt"
@@ -582,9 +585,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "Kriterien für die rote Liste",
-            "legendTitle": "Aktive Fälle pro 1 Million Menschen",
-            "yAxisTitle": "Aktive Fälle pro 1 Million Menschen",
-            "title": "Länder: Aktive Fälle pro 1 Million Menschen"
+            "legendTitle": "Aktive Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
+            "title": "Länder: Aktive Fälle pro 100.000 Menschen"
         },
         "dailyComparison": {
             "positivePct": "Anteil der positiven Tests (%)",
@@ -592,6 +595,72 @@
             "active": "Aktive Fälle",
             "new": "Bestätigte Fälle",
             "title": "Vergleich nach Wochentag"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "count": "(durchschnittliche) Anzahl Schlüssel pro Benutzer",
+                "tooltip": "datum.user_count + ' Benutzer schickte ' + datum.key_count + ' Schlüssel'",
+                "title": "Anzahl Schlüssel pro Benutzer und Tag",
+                "users": "Anzahl Benutzer",
+                "date": "Datum"
+            },
+            "usercount": {
+                "runningTotal": "Gesamtanzahl Benutzer die Schlüssel veröffentlichen",
+                "users": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen",
+                "title": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen, pro Tag",
+                "date": "Datum"
+            },
+            "publishedByRisk": {
+                "risk": "Risikostufe",
+                "published": "Anzahl veröffentlichter Schlüssel",
+                "tooltip": "datum.published + ' Schlüssel mit Risikostufe ' + datum.risk",
+                "title": "Anzahl veröffentlichter Schlüssel pro Tag nach Risikostufe",
+                "date": "Datum"
+            },
+            "validByRisk": {
+                "valid": "Anzahl gültiger Schlüssel pro Tag",
+                "tooltip": "datum.valid + ' Schlüssel mit Risikostufe ' +datum.risk",
+                "title": "Anzahl gültiger Schlüssel pro Tag nach Risikostufe",
+                "date": "Datum",
+                "risk": "Risiko"
+            },
+            "published": {
+                "runningTotal": "Gesamtzahl veröffentlichter Tagesschlüssel",
+                "perDay": "Anzahl veröffentlichter Tagesschlüssel",
+                "title": "Anzahl veröffentlichter Tagesschlüssel pro Tag",
+                "date": "Datum"
+            },
+            "valid": {
+                "perDay": "Anzahl gültiger Schlüssel",
+                "title": "Anzahl gültiger Schlüssel pro Tag",
+                "date": "Datum"
+            },
+            "title": "Die #OstaniZdrav Benachrichtigungs-App"
+        },
+        "sources": {
+            "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
+            "confirmedCases": "Bestätigte Fälle",
+            "sentToQuarantine": "In die Quarantäne geschickt",
+            "title": "Quaratäne und Infektionsquellen",
+            "bySourceCountry": "Importierte Fälle",
+            "bySourceRelative": "Infektionsquellen (relativ)",
+            "bySource": "Infektionsquellen",
+            "quarantineRelative": "Quarantäne (relativ)",
+            "quarantine": "Quarantäne",
+            "bySourceCountryRelative": "Importierte Fälle (Relativ)",
+            "importedCases": "Importierte Fälle",
+            "importRelatedCases": "Bezogen auf importierte Fälle",
+            "localSource": "Lokale Quelle",
+            "sourceUnknown": "Unbekannte Quelle",
+            "totalConfirmed": "Bestätigte Fälle insgesamt",
+            "totalImported": "Importierte Fälle insgesamt"
+        },
+        "regions100k": {
+            "red": "Kriterum für rote Liste",
+            "deceased": "Todesfälle",
+            "confirmedCases": "Bestätigte Fälle",
+            "activeCases": "Aktive Fälle",
+            "title": "Fälle nach Regionen (pro 100,000 Einwohner)"
         }
     },
     "tableDict": {
@@ -773,12 +842,16 @@
             "title": "Masken"
         },
         "quarantine10days": {
-            "description": "Obligatorische Quarantäne von 10 Tagen reduziert",
+            "description": "Obligatorische Quarantäne auf 10 Tage reduziert",
             "title": "10 Tage"
         },
         "testOrQuarantine": {
             "description": "Negativer Test oder 10-tägige Quarantäne bei Einreise aus Ländern der roten oder orangefarbenen Liste",
             "title": "Test"
+        },
+        "regions": {
+            "description": "Einschränkungen für rote Regionen: Bewegung außerhalb der Gemeindegrenzen, Verwendung von Masken im Freien, Einschränkung einiger Dienstleistungen",
+            "title": "Regionen"
         }
     },
     "region": {
@@ -1010,6 +1083,10 @@
         "8": {
             "description": "neue Testmethodik – Kinder",
             "title": "Phase<br>8"
+        },
+        "10": {
+            "description": "Kontaktverfolgung ausgesetzt",
+            "title": "Phase<br>10"
         }
     },
     "embedMaker": {
@@ -1054,7 +1131,8 @@
         "x_days_ago": "Vor {{ count }} Tag",
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
-        "in_x_days_plural": "in {{ count }} Tagen"
+        "in_x_days_plural": "in {{ count }} Tagen",
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. Woche %Y}})"
     },
     "country-groups": {
         "groupNeighbouring": "Nachbarländer",
@@ -1064,5 +1142,14 @@
         "groupExYu": "Ex-Jugoslawien",
         "groupEastAsiaOceania": "Ostasien und Ozeanien",
         "groupLatinAmerica": "Lateinamerika"
+    },
+    "weekdayShort": {
+        "6": "Sa",
+        "5": "Fr",
+        "4": "Do",
+        "3": "Mi",
+        "2": "Di",
+        "1": "Mo",
+        "0": "So"
     }
 }

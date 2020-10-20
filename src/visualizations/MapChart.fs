@@ -63,7 +63,7 @@ type DataTimeInterval =
     override this.ToString() =
         match this with
         | Complete -> I18N.t "charts.map.all"
-        | LastDays 1 -> I18N.t "charts.map.yesterday"
+        //| LastDays 1 -> I18N.t "charts.map.yesterday"
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
 
 let dataTimeIntervals =
@@ -213,7 +213,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       Data = data
       DataTimeInterval = dataTimeInterval
       ContentType = ConfirmedCases
-      DisplayType = AbsoluteValues
+      DisplayType = RegionPopulationWeightedValues
     }, Cmd.ofMsg GeoJsonRequested
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
@@ -239,39 +239,22 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let seriesData (state : State) =
 
-    let renderLabel population absolute totalConfirmed =
-        let pctPopulation = float absolute * 100.0 / float population
-        let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-        match state.ContentType with
-        | ConfirmedCases ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-            if absolute > 0 then
-                label + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-            else
-                label
-        | Deceased ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
-            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                label + sprintf " (%s %% %s)"
-                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                        (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
-                        (I18N.t "charts.map.confirmedCases")
-                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                        (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%s %%</b>"
-                        (I18N.t "charts.map.mortalityOfConfirmedCases")
-                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
-            else
-                label
-
     seq {
         for areaData in state.Data do
-            let dlabel, value, label =
+            let dlabel, value, absolute, value100k, totalConfirmed, population, activeCasesValue, activeCasesMaxValue =
                 match areaData.Cases with
-                | None -> None, 0., (renderLabel areaData.Population 0 0)
+                | None -> None, 0.0001, 0, 0.0, 0, areaData.Population, null, 0
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
+                    let activeCasesValue = 
+                        confirmedCasesValue 
+                        |> Array.mapi (fun i cc -> 
+                            if i >= 14 
+                            then cc - confirmedCasesValue.[i-14]
+                            else cc) 
+                        |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
+                        |> Seq.toArray
+                    let activeCasesMaxValue = activeCasesValue |> Seq.max
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
@@ -293,22 +276,39 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0., (renderLabel areaData.Population 0 0)
+                    | None -> None, 0.0001, 0, 0.0, 0, areaData.Population, null, 0
                     | Some lastValue ->
                         let absolute = lastValue
-                        let weighted =
-                            float absolute * 1000000. / float areaData.Population
-                            |> System.Math.Round |> int
+                        let value100k =
+                            float absolute * 100000. / float areaData.Population
                         let dlabel, value =
                             match state.DisplayType with
                             | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None, weighted
+                            | RegionPopulationWeightedValues -> None,  10. * value100k |> System.Math.Round |> int  //factor 10 for better resolution in graph
                         let scaled =
-                            match value with
-                            | 0 -> 0.
-                            | x -> float x + Math.E |> Math.Log
-                        dlabel, scaled, (renderLabel areaData.Population absolute totalConfirmed.Value)
-            {| code = areaData.Code ; area = areaData.Name ; value = value ; label = label; dlabel = dlabel; dataLabels = {| enabled = true; format = "{point.dlabel}" |} |}
+                            match state.ContentType with
+                            | ConfirmedCases ->
+                                if state.DisplayType = AbsoluteValues
+                                then if absolute > 0 then float absolute else 0.0001
+                                else if value100k > 0.0 then value100k else 0.0001
+                            | Deceased ->
+                                match value with
+                                | 0 -> 0.
+                                | x -> float x + Math.E |> Math.Log
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, areaData.Population, activeCasesValue, activeCasesMaxValue
+            {|
+                code = areaData.Code
+                area = areaData.Name
+                value = value
+                absolute = absolute
+                value100k = value100k
+                totalConfirmed = totalConfirmed
+                population = population
+                dlabel = dlabel
+                dataLabels = {| enabled = true; format = "{point.dlabel}" |}
+                activeCasesValue = activeCasesValue
+                activeCasesMaxValue = activeCasesMaxValue
+            |}
     } |> Seq.toArray
 
 
@@ -333,36 +333,176 @@ let renderMap (state : State) =
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
                nullColor = "white"
-               borderColor = "#888"
-               borderWidth = 0.5
+               borderColor = "#000"
+               borderWidth = 0.2
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
-        let tooltipFormatter jsThis =
+        let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
-            let label = points?label
+            let absolute = points?absolute
+            let value100k = points?value100k
+            let totalConfirmed = points?totalConfirmed
+            let activeCasesValue = points?activeCasesValue
+            let activeCasesMaxValue = points?activeCasesMaxValue
+            let population = points?population
+            let pctPopulation = float absolute * 100.0 / float population
+            let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+
+            let s = Text.StringBuilder()
+            let barMaxHeight = 50
+
+            s.Append "<p><div class='bars'>" |> ignore
+
+            match activeCasesValue with
+                | null -> null
+                | _ ->
+                    activeCasesValue
+                    |> Array.iter (fun area ->
+                        let barHeight = Math.Ceiling(float area * float barMaxHeight / activeCasesMaxValue)
+                        let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
+                        s.Append barHtml |> ignore)
+                    s.Append "</div>" |> ignore
+                    s.ToString()
+                |> ignore
+
+            let label =
+                match state.ContentType with
+                | ConfirmedCases ->
+                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+                    if absolute > 0 then
+                        label
+                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                            + s.ToString()
+                    else
+                        label
+                | Deceased ->
+                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+                    if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                        label + sprintf " (%s %% %s)"
+                                (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                                (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                                (I18N.t "charts.map.confirmedCases")
+                                totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                                (I18N.t "charts.map.population")
+                            + sprintf "<br>%s: <b>%s %%</b>"
+                                (I18N.t "charts.map.mortalityOfConfirmedCases")
+                                (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+                    else
+                        label
             sprintf "<b>%s</b><br/>%s<br/>" area label
 
-        let maxValue = data |> Seq.map (fun dp -> dp.value) |> Seq.max
-        let maxColor =
-            if maxValue = 0. then
-                "white" // override for empty map
-            else
-                match state.ContentType with
-                | Deceased -> "#808080"
-                | ConfirmedCases -> "#e03000"
+        let legend =
+            let enabled = state.ContentType = ConfirmedCases
+            {| enabled = enabled
+               title = {| text = null |}
+               align = "right"
+               verticalAlign = "bottom"
+               layout = "vertical"
+               floating = true
+               borderWidth = 1
+               backgroundColor = "white"
+               valueDecimals = 0 |}
+            |> pojo
+
+        let colorMax = 
+            match state.ContentType with
+            | ConfirmedCases -> 
+                match state.DataTimeInterval with
+                | Complete -> 20000.
+                | LastDays days -> 
+                    match days with
+                        | 21 -> 10500.
+                        | 14 -> 7000.
+                        | 7 -> 3500.
+                        | 1 -> 500.
+                        | _ -> 100.
+            | Deceased -> 
+                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                if dataMax < 1. then 10. else dataMax 
+
+        let colorMin = 
+            match state.DisplayType with 
+                | AbsoluteValues -> 0.9
+                | RegionPopulationWeightedValues -> colorMax / 7000.
+
+        let colorAxis = 
+            match state.ContentType with
+                | Deceased ->
+                    {|
+                        ``type`` = "linear"
+                        tickInterval = 0.4
+                        max = colorMax 
+                        min = colorMin 
+                        endOnTick = false 
+                        startOnTick = false  
+                        stops =
+                            [|
+                                (0.000, "#ffffff")
+                                (0.111, "#efedf5")
+                                (0.222, "#dadaeb")
+                                (0.333, "#bcbddc")
+                                (0.444, "#9e9ac8")
+                                (0.556, "#807dba")
+                                (0.667, "#6a51a3")
+                                (0.778, "#54278f")
+                                (0.889, "#3f007d")
+                            |]
+                    |} |> pojo
+                | ConfirmedCases ->
+                    {|
+                        ``type`` = "logarithmic"
+                        tickInterval = 0.4
+                        max = colorMax
+                        min = colorMin 
+                        endOnTick = false
+                        startOnTick = false
+                        stops =
+                            [|
+                                (0.000,"#ffffff")
+                                (0.001,"#fff7db")
+                                (0.200,"#ffefb7") 
+                                (0.280,"#ffe792") 
+                                (0.360,"#ffdf6c") 
+                                (0.440,"#ffb74d") 
+                                (0.520,"#ff8d3c") 
+                                (0.600,"#f85d3a") 
+                                (0.680,"#ea1641") 
+                                (0.760,"#d0004e") 
+                                (0.840,"#ad005b") 
+                                (0.920,"#800066") 
+                                (0.999,"#43006e")
+                            |]
+                    |} |> pojo
+
+        let lastDate = 
+            state.Data 
+            |> Seq.map (fun a ->
+                match a.Cases with
+                | Some c -> c |> Seq.tryLast
+                |_ -> None ) 
+            |> Seq.pick (fun c -> 
+                match c with
+                | Some c -> Some c.Date
+                | _ -> None) 
+
+        let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
+
         {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
             title = null
+            subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
             series = [| series geoJson |]
-            legend = {| enabled = false |}
-            colorAxis = {| minColor = "white" ; maxColor = maxColor |}
+            legend = legend
+            colorAxis = colorAxis
             tooltip =
                 {|
-                    formatter = fun () -> tooltipFormatter jsThis
+                    formatter = fun () -> tooltipFormatter state jsThis
                     useHTML = true
                     distance = 50
                 |} |> pojo

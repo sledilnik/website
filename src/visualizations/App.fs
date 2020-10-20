@@ -8,7 +8,7 @@ open Types
 open CountriesChartViz.Analysis
 open I18N
 
-let init (query: obj) (visualization: string option) (page: string) =
+let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
     let renderingMode =
         match visualization with
         | None -> Normal
@@ -26,6 +26,7 @@ let init (query: obj) (visualization: string option) (page: string) =
             | "Cases" -> Some Cases
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
+            | "Regions100k" -> Some Regions100k
             | "Weekly" -> Some Sources
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
@@ -41,6 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) =
 
     let initialState =
         {
+          ApiEndpoint = apiEndpoint
           Page = page
           Query = query
           StatsData = NotAsked
@@ -81,7 +83,7 @@ let update (msg: Msg) (state: State) =
     | RegionsDataRequest ->
         match state.RegionsData with
         | Loading -> state, Cmd.none
-        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result Data.Regions.load
+        | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
 open Elmish.React
@@ -232,7 +234,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "hcenters-chart"
             ChartTextsGroup = "hCenters"
             Explicit = false
-            Renderer = fun _ -> lazyView HCentersChart.hCentersChart () }
+            Renderer = fun _ -> lazyView HCentersChart.hCentersChart state.ApiEndpoint }
 
     let infections =
           { VisualizationType = Infections
@@ -293,7 +295,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView AgeGroupsChart.renderChart {| data = data |} }
 
-    let regions =
+    let regionsAbs =
           { VisualizationType = Regions
             ClassName = "regions-chart"
             ChartTextsGroup = "regions"
@@ -304,7 +306,35 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView RegionsChart.regionsChart {| data = data |} }
+                    | Success data ->
+                        let config: RegionsChart.RegionsChartConfig =
+                            { RelativeTo = RegionsChart.MetricRelativeTo.Absolute
+                              ChartTextsGroup = "regions"
+                            }
+                        let props = {| data = data |}
+                        lazyView (RegionsChart.renderChart config) props
+            }
+
+    let regions100k =
+          { VisualizationType = Regions100k
+            ClassName = "regions-chart-100k"
+            ChartTextsGroup = "regions100k"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.RegionsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        let config: RegionsChart.RegionsChartConfig =
+                            { RelativeTo = RegionsChart.MetricRelativeTo.Pop100k
+                              ChartTextsGroup = "regions100k"
+                            }
+                        let props = {| data = data |}
+                        lazyView (RegionsChart.renderChart config) props
+         }
+
     let sources =
           { VisualizationType = Sources
             ClassName = "sources-chart"
@@ -371,9 +401,10 @@ let render (state: State) (_: Msg -> unit) =
           }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients; map; municipalities
+        [ hospitals; metricsComparison; spread; dailyComparison; patients
+          regions100k; map; municipalities
           europeMap; ageGroupsTimeline; tests; sources; hCenters; infections
-          cases; ageGroups; regionMap; regions
+          cases; ageGroups; regionMap; regionsAbs
         ]
 
     let worldVisualizations =
@@ -384,9 +415,11 @@ let render (state: State) (_: Msg -> unit) =
           ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; map; municipalities; sources
+        [ hospitals; metricsComparison; spread; dailyComparison; map
+          municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regions; sources
+          cases; patients; ratios; ageGroups; regionMap; regionsAbs
+          regions100k; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
         ]
 

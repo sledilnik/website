@@ -23,7 +23,7 @@
       <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <a v-if="!isMobile"
+      <a v-if="showFullLang"
          href="https://github.com/sledilnik"
          target="_blank"
          rel="noreferrer"
@@ -118,8 +118,8 @@ export default {
       }, 650);
     },
     onResize () {
-      this.isMobile = window.innerWidth < 1050
-      this.showFullLang = window.innerWidth >= 1200
+      this.isMobile = window.innerWidth < 1150
+      this.showFullLang = window.innerWidth >= 1250
     },
     toggleDropdown() {
       this.dropdownVisible = !this.dropdownVisible
@@ -149,7 +149,7 @@ export default {
 <style scoped lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 1050px) {
+  @media only screen and (min-width: 1150px) {
     @content;
   }
 }

@@ -30,11 +30,11 @@ let groupEntriesByCountries
         let valueToUse =
             match metricToDisplay with
             | NewCasesPer1M ->
-                entryRaw.NewCasesPerMillion |> Option.defaultValue 0.
+                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
             | ActiveCasesPer1M ->
-                entryRaw.NewCasesPerMillion |> Option.defaultValue 0.
+                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
             | TotalDeathsPer1M ->
-                entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.
+                (entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.) / 10.
             | DeathsPerCases ->
                 if entryRaw.TotalCases > 0 then
                     (float entryRaw.TotalDeaths) * 100.0

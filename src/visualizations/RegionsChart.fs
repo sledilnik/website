@@ -1,28 +1,36 @@
 [<RequireQualifiedAccess>]
 module RegionsChart
 
-open Elmish
-
-open Feliz
-open Feliz.ElmishComponents
-open Browser
-
-open Highcharts
 open Types
 
-let colors =
-    [ "#ffa600"
-      "#dba51d"
-      "#afa53f"
-      "#777c29"
-      "#70a471"
-      "#457844"
-      "#f95d6a"
-      "#d45087"
-      "#a05195"
-      "#665191"
-      "#10829a"
-      "#024a66" ]
+open Browser.Types
+open Elmish
+open Fable.Core
+open Highcharts
+open JsInterop
+open Feliz
+open Feliz.ElmishComponents
+
+open System.Text
+
+type RegionInfo = {
+    Color: string
+}
+
+let regionsInfo = dict[
+    "ce", { Color = "#665191" }
+    "kk", { Color = "#d45087" }
+    "kp", { Color = "#70a471" }
+    "kr", { Color = "#ffa600" }
+    "lj", { Color = "#457844" }
+    "ng", { Color = "#dba51d" }
+    "nm", { Color = "#afa53f" }
+    "mb", { Color = "#f95d6a" }
+    "ms", { Color = "#024a66" }
+    "po", { Color = "#a05195" }
+    "sg", { Color = "#777c29" }
+    "za", { Color = "#10829a" }
+]
 
 let excludedRegions = Set.ofList ["t"]
 
@@ -37,18 +45,27 @@ type MetricType =
     | Deceased
   with
     static member getName = function
-        | ActiveCases -> I18N.t "charts.regions.activeCases"
-        | ConfirmedCases -> I18N.t "charts.regions.confirmedCases"
-        | Deceased -> I18N.t "charts.regions.deceased"
+        | ActiveCases -> I18N.chartText "regions" "activeCases"
+        | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
+        | Deceased -> I18N.chartText "regions" "deceased"
+
+type MetricRelativeTo = Absolute | Pop100k
+
+type RegionsChartConfig = {
+    RelativeTo: MetricRelativeTo
+    ChartTextsGroup: string
+}
 
 type State =
-    { ScaleType : ScaleType
+    {
+      ChartConfig: RegionsChartConfig
+      ScaleType : ScaleType
       MetricType : MetricType
       Data : RegionsData
       Regions : Region list
       Metrics : Metric list
       RangeSelectionButtonIndex: int
-      }
+    }
 
 type Msg =
     | ToggleRegionVisible of string
@@ -62,20 +79,30 @@ let regionTotal (region : Region) : int =
     |> List.choose id
     |> List.sum
 
-let init (data : RegionsData) : State * Cmd<Msg> =
+let init (config: RegionsChartConfig) (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
-    let regions =
-        lastDataPoint.Regions
-        |> List.sortByDescending regionTotal
-    let metrics =
-        regions
-        |> List.filter (fun region -> not (Set.contains region.Name excludedRegions))
-        |> List.mapi2 (fun i color region ->
-            { Key = region.Name
-              Color = color
-              Visible = true } ) colors
 
-    { ScaleType = Linear ; MetricType = ActiveCases ; Data = data ; Regions = regions ; Metrics = metrics
+    let regionsWithoutExcluded =
+        lastDataPoint.Regions
+        |> List.filter (fun region ->
+            not (excludedRegions |> Set.contains region.Name))
+
+    let regionsByTotalCases =
+        regionsWithoutExcluded
+        |> List.sortByDescending regionTotal
+
+    let metrics =
+        regionsByTotalCases
+        |> List.map (fun region ->
+            let regionKey = region.Name
+            let color = regionsInfo.[regionKey].Color
+            { Key = regionKey
+              Color = color
+              Visible = true } )
+
+    { ScaleType = Linear; MetricType = ActiveCases
+      ChartConfig = config
+      Data = data ; Regions = regionsByTotalCases ; Metrics = metrics
       RangeSelectionButtonIndex = 0 },
     Cmd.none
 
@@ -96,6 +123,50 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
+let tooltipValueFormatter (state: State) value =
+    match state.ChartConfig.RelativeTo with
+    // todo igor: format to int for absolute values
+    | Absolute -> Utils.formatToInt value
+    | Pop100k -> Utils.formatTo1DecimalWithTrailingZero value
+
+let tooltipFormatter (state: State) chartData jsThis =
+    let points: obj[] = jsThis?points
+
+    match points with
+    | [||] -> ""
+    | _ ->
+        let s = StringBuilder()
+        // todo igor: extract date
+//        let date = points.[0]?point?date
+//        s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
+        s.Append "<table>" |> ignore
+
+        points
+        |> Array.sortByDescending
+               (fun region ->
+                    let dataValue: float = region?point?y
+                    dataValue)
+        |> Array.iter
+               (fun region ->
+                    let regionName = region?series?name
+                    let regionColor = region?series?color
+
+                    let dataValue: float = region?point?y
+
+                    s.Append "<tr>" |> ignore
+                    let regionTooltip =
+                        sprintf
+                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            regionColor
+                            regionName
+                            (tooltipValueFormatter state dataValue)
+                    s.Append regionTooltip |> ignore
+                    s.Append "</tr>" |> ignore
+                )
+
+        s.Append "</table>" |> ignore
+        s.ToString()
+
 let renderChartOptions (state : State) dispatch =
 
     let metricsToRender =
@@ -107,14 +178,32 @@ let renderChartOptions (state : State) dispatch =
         let region =
             point.Regions
             |> List.find (fun reg -> reg.Name = metricToRender.Key)
-        let count =
+
+        let municipalityMetricValue muni =
+            match state.MetricType with
+            | ActiveCases -> muni.ActiveCases
+            | ConfirmedCases -> muni.ConfirmedToDate
+            | Deceased -> muni.DeceasedToDate
+            |> Option.defaultValue 0
+
+        let totalSum =
             region.Municipalities
-            |> Seq.sumBy (fun city ->
-                            match state.MetricType with
-                            | ActiveCases -> city.ActiveCases |> Option.defaultValue 0
-                            | ConfirmedCases -> city.ConfirmedToDate |> Option.defaultValue 0
-                            | Deceased -> city.DeceasedToDate |> Option.defaultValue 0)
-        ts,count
+            |> Seq.sumBy municipalityMetricValue
+            |> float
+
+        let finalValue =
+            match state.ChartConfig.RelativeTo with
+            | Absolute -> totalSum
+            | Pop100k ->
+                let regionPopulation =
+                    Utils.Dictionaries.regions.[region.Name].Population
+                    |> Option.get
+                    |> float
+
+                let regionPopBy100k = regionPopulation / 100000.0
+                totalSum / regionPopBy100k
+
+        ts, finalValue
 
     let allSeries =
         metricsToRender
@@ -140,17 +229,65 @@ let renderChartOptions (state : State) dispatch =
         basicChartOptions
             state.ScaleType "covid19-regions"
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    let xAxis =
+            baseOptions.xAxis
+            |> Array.map(fun xAxis -> {| xAxis with gridZIndex = 1 |})
+
+    let chartTextGroup = state.ChartConfig.ChartTextsGroup
+
+    let redThreshold = 140
+    let yAxis =
+            baseOptions.yAxis
+            |> Array.map
+                   (fun yAxis ->
+                {| yAxis with
+                       min = None
+                       gridZIndex = 1
+                       plotLines =
+                           match state.ChartConfig.RelativeTo, state.MetricType with
+                           | Pop100k, ActiveCases -> [|
+                               {| value=redThreshold
+                                  label={|
+                                           text=I18N.chartText chartTextGroup "red"
+                                           align="left"
+                                           verticalAlign="bottom"
+                                            |}
+                                  color="red"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                                |}
+                            |]
+                           | _ -> [| |]
+                       plotBands =
+                           match state.ChartConfig.RelativeTo, state.MetricType with
+                           | Pop100k, ActiveCases -> [|
+                               {| from=redThreshold; ``to``=100000.0
+                                  color="#FCD5CF30"
+                                |}
+                            |]
+                           | _ -> [| |]
+                   |})
+
     {| baseOptions with
         chart = pojo
             {|
                 animation = false
-                ``type`` = "line"
+                ``type`` = "spline"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
         series = allSeries
-        yAxis = baseOptions.yAxis |> Array.map (fun yAxis -> {| yAxis with min = None |})
+        xAxis = xAxis
+        yAxis = yAxis
         legend = {| enabled = false |}
+        tooltip = pojo {|
+                          formatter = fun () ->
+                              tooltipFormatter state allSeries jsThis
+                          shared = true
+                          useHTML = true
+                        |}
     |}
 
 let renderChartContainer state dispatch =
@@ -215,5 +352,7 @@ let render (state : State) dispatch =
         renderMetricsSelectors state.Metrics dispatch
     ]
 
-let regionsChart (props : {| data : RegionsData |}) =
-    React.elmishComponent("RegionsChart", init props.data, update, render)
+let renderChart
+    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
+    React.elmishComponent
+        ("RegionsChart", init config props.data, update, render)

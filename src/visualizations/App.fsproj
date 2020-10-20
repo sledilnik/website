@@ -58,6 +58,5 @@
         <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
         <PackageReference Include="EdelweissData.Base" Version="1.0.10" />
         <PackageReference Include="EdelweissData.Thoth.Fable" Version="1.0.10" />
-        <!-- <PackageReference Include="FSharp.Data" Version="3.3.3" /> -->
     </ItemGroup>
 </Project>

@@ -31,7 +31,7 @@ let ``Groups entries by countries``() =
 
     let sampleEntry = grouped.["SVN"].Entries.[0]
     test <@ sampleEntry.Date = DateTime(2020, 04, 29) @>
-    test <@ sampleEntry.Value = 3. @>
+    test <@ sampleEntry.Value = 0.3 @>
     test <@ grouped.["SVN"].Entries.[1].Date = DateTime(2020, 04, 30) @>
 
     test <@ grouped.ContainsKey "AUT" @>
