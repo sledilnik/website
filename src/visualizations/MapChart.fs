@@ -586,17 +586,23 @@ let renderSelectors options currentOption dispatch =
     |> List.map (fun option ->
         renderSelector option currentOption dispatch)
 
-let renderDisplayTypeSelector currentDisplayType dispatch =
+let renderDisplayTypeSelector state dispatch =
+    let selectors = 
+        if state.ContentType = ConfirmedCases
+        then [ AbsoluteValues; RegionPopulationWeightedValues; RelativeIncrease ]
+        else [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
         prop.className "chart-display-property-selector"
-        prop.children (renderSelectors [ AbsoluteValues; RegionPopulationWeightedValues; RelativeIncrease ] currentDisplayType dispatch)
+        prop.children (renderSelectors selectors state.DisplayType dispatch)
     ]
 
-let renderDataTimeIntervalSelector currentDataTimeInterval dispatch =
-    Html.div [
-        prop.className "chart-data-interval-selector"
-        prop.children ( Html.text "" :: renderSelectors dataTimeIntervals currentDataTimeInterval dispatch )
-    ]
+let renderDataTimeIntervalSelector state dispatch =
+    if state.DisplayType <> RelativeIncrease then
+        Html.div [
+            prop.className "chart-data-interval-selector"
+            prop.children ( Html.text "" :: renderSelectors dataTimeIntervals state.DataTimeInterval dispatch )
+        ]
+    else Html.none
 
 let renderContentTypeSelector selected dispatch =
     let renderedTypes = seq {
@@ -625,12 +631,10 @@ let render (state : State) dispatch =
                     prop.className "filters"
                     prop.children [
                         renderContentTypeSelector state.ContentType dispatch 
-                        if state.DisplayType <> RelativeIncrease then
-                            renderDataTimeIntervalSelector state.DataTimeInterval (DataTimeIntervalChanged >> dispatch)
+                        renderDataTimeIntervalSelector state (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
-                renderDisplayTypeSelector
-                    state.DisplayType (DisplayTypeChanged >> dispatch)
+                renderDisplayTypeSelector state (DisplayTypeChanged >> dispatch)
             ]
             Html.div [
                 prop.className "map"
