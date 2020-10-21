@@ -9,7 +9,8 @@
             "mk": "Mazedonisch",
             "hr": "Kroatisch",
             "it": "Italienisch",
-            "me": "Montenegrinisch"
+            "me": "Montenegrinisch",
+            "nb": "Bokmål"
         },
         "github": "GitHub",
         "links": "Verknüpfungen",
@@ -404,7 +405,8 @@
             "yAxis": "Y-Achse:",
             "loading": "Daten werden geladen …",
             "sortBy": "Sortieren nach:",
-            "weekYearDateFormat": "%W. Woche %Y"
+            "weekYearDateFormat": "%W. Woche %Y",
+            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -554,6 +556,7 @@
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
             "newCases": "Neue Fälle",
+            "newCasesRelative": "Neue Fälle (relativ)",
             "activeCases": "Aktive Fälle",
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
@@ -854,7 +857,12 @@
             "title": "Regionen"
         },
         "movement": {
-            "title": "🚫21-6h"
+            "title": "🚫21-6h",
+            "description": "Bewegungseinschränkung von 21:00 – 6:00 Uhr. Die Bewegung ist auf die eigene Region beschränkt.<br>Versammlungen von bis zu 10 Personen. Einschränkung für aller Veranstaltungen."
+        },
+        "schools6+": {
+            "description": "Fernunterricht für Grundschulen ab Klasse 6, Sekundarschulen und Musikschulen",
+            "title": "Schulen 6+"
         }
     },
     "region": {
@@ -1093,7 +1101,7 @@
         },
         "11": {
             "description": "Epidemie",
-            "title": "Phase<br>10"
+            "title": "Phase<br>11"
         }
     },
     "embedMaker": {
