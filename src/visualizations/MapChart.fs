@@ -242,11 +242,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             else state.DisplayType
         { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
-        let newDataTimeInterval =
-            if displayType = RelativeIncrease
-            then LastDays 7 // force 7 days for weekly relative increase
-            else state.DataTimeInterval
-        { state with DisplayType = displayType; DataTimeInterval = newDataTimeInterval }, Cmd.none
+        { state with DisplayType = displayType }, Cmd.none
 
 let seriesData (state : State) =
 
@@ -276,7 +272,11 @@ let seriesData (state : State) =
 
                     let lastValueTotal = values |> Array.tryLast
                     let lastValueRelative =
-                        match state.DataTimeInterval with
+                        let dateInterval = 
+                            if state.DisplayType = RelativeIncrease 
+                            then LastDays 7     // for weekly relative increase we force 7 day interval for display in tooltip
+                            else state.DataTimeInterval
+                        match dateInterval with
                         | Complete -> lastValueTotal
                         | LastDays days ->
                             let firstValueTotal = values |> Array.tryItem (values.Length - days - 1)
