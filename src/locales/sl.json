@@ -886,7 +886,7 @@
             "confirmedCasesPerPopulation": "Delež potrjenih primerov",
             "deceasedPerPopulation": "Delež umrlih",
             "deceasedPerConfirmedCases": "Umrli glede na št. primerov",
-            "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
+            "shareOfInfectedPopulation": "Delež potrjenih primerov na prebivalca",
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
             "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. primerov",
             "populationTotal": "Prebivalcev skupaj",
