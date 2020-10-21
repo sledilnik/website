@@ -841,7 +841,8 @@
             "yesterday": "Ieri",
             "mortalityOfConfirmedCases": "Mortalità nei casi confermati",
             "title": "Mappa dei comuni",
-            "per100k": "per 100k"
+            "per100k": "per 100k",
+            "relativeIncrease": "Incremento settimanale"
         },
         "regions": {
             "deceased": "Decessi",
@@ -1100,7 +1101,7 @@
         },
         "11": {
             "description": "epidemia",
-            "title": "fase<br>10"
+            "title": "fase<br>11"
         }
     },
     "weekday": {
@@ -1154,7 +1155,8 @@
         "news002": "Casi confermati per fasce di età",
         "newChart": "🆕 📊 Nuovo grafico:",
         "newPage": "🆕 Nuova pagina:",
-        "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone"
+        "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone",
+        "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni"
     },
     "weekdayShort": {
         "6": "Sa",
