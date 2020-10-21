@@ -41,7 +41,7 @@
     },
     "infocard": {
         "tests": "Testov na dan",
-        "confirmedToDate": "Potrjeno okuženi",
+        "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "per100k": "na 100.000 prebivalcev",
@@ -424,7 +424,7 @@
         },
         "retirementHomes": {
             "title": "DSO",
-            "description": "Prepoved obiskov v domovih starejših občanov,<br>potrjena okužba zdravnika v Metliki"
+            "description": "Prepoved obiskov v domovih starejših občanov,<br>potrjen primer zdravnika v Metliki"
         },
         "checkpoints": {
             "title": "Točke",
@@ -661,7 +661,7 @@
             "showToDate": "Skupaj",
             "show7DaysAverage": "7-dnevno povprečje",
             "testsPerformed": "Testiranja",
-            "confirmedCases": "Potrjeno okuženi",
+            "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
             "recovered": "Preboleli",
             "hospitalized": "Hospitalizirani",
@@ -677,7 +677,7 @@
         },
         "dailyComparison": {
             "title": "Primerjava po dnevih v tednu",
-            "new": "Potrjeno okuženi",
+            "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
             "tests": "Opravljeni testi",
             "positivePct": "Delež pozitivnih testov (%)"
@@ -741,7 +741,7 @@
             "shareOfPositive": "Delež pozitivnih testov (%)"
         },
         "infections": {
-            "title": "Struktura potrjeno okuženih",
+            "title": "Struktura potrjenih primerov",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",
@@ -752,23 +752,23 @@
             "otherPersons": "Ostale osebe"
         },
         "spread": {
-            "title": "Prirast potrjeno okuženih",
+            "title": "Prirast potrjenih primerov",
             "absolute": "Absolutni dnevni prirast",
             "percentage": "Relativni dnevni prirast",
             "doublingRate": "Eksponentna rast v dnevih",
             "explainer": "Kaj pomeni eksponenta rast",
-            "absoluteTitle": "Dnevni prirast potrjeno okuženih",
-            "absoluteLabel": "Potrjeno okuženi dnevno",
-            "relativeTitle": "Dnevni prirast okuženih",
+            "absoluteTitle": "Dnevni prirast potrjenih primerov",
+            "absoluteLabel": "Potrjeni primeri dnevno",
+            "relativeTitle": "Dnevni prirast primerov",
             "relativeLabel": "Relativen prirast v %",
             "relativeWeeklyLabel": "Tedenski prirast",
             "doublingRateTitle": "Hitrost eksponentne rasti [v dnevih]",
-            "doublingRateLabel": "V koliko dneh se število okuženih podvoji",
+            "doublingRateLabel": "V koliko dneh se število primerov podvoji",
             "averageSouthKorea": "Povprečje Južne Koreje v preteklih dneh",
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
-            "ifExpGrowth": "Če bi se okužba širila eksponentno s podvajanjem na 7 dni, potem bi lahko pričakovali:",
+            "ifExpGrowth": "Če bi primeri naraščali eksponentno s podvajanjem na 7 dni, potem bi lahko pričakovali:",
             "today": "Danes",
             "inOneWeek": "Čez en teden",
             "inTwoWeeks": "Čez dva tedna",
@@ -776,7 +776,7 @@
             "inFourWeeks": "Čez štiri tedne",
             "timesAsMany": "-krat toliko",
             "activeCases": "aktivnih primerov",
-            "confirmedCases": "potrjeno okuženih",
+            "confirmedCases": "potrjenih primerov",
             "hospitalized": "hospitaliziranih"
         },
         "hospitals": {
@@ -807,13 +807,13 @@
         "regions": {
             "title": "Primeri po regijah",
             "activeCases": "Aktivni primeri",
-            "confirmedCases": "Potrjeno okuženi",
+            "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli"
         },
         "regions100k": {
             "title": "Primeri po regijah (na 100.000 prebivalcev)",
             "activeCases": "Aktivni primeri",
-            "confirmedCases": "Potrjeno okuženi",
+            "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli",
             "red": "meja za uvrstitev na rdeči seznam"
         },
@@ -883,12 +883,12 @@
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli",
             "age": "Starost",
-            "confirmedCasesPerPopulation": "Delež potrjeno okuženih",
+            "confirmedCasesPerPopulation": "Delež potrjenih primerov",
             "deceasedPerPopulation": "Delež umrlih",
-            "deceasedPerConfirmedCases": "Umrli glede na št. okuženih",
+            "deceasedPerConfirmedCases": "Umrli glede na št. primerov",
             "shareOfInfectedPopulation": "Delež okuženega prebivalstva",
             "shareOfDeceasedPopulation": "Delež umrlih med prebivalstvom",
-            "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. okuženih",
+            "shareOfDeceasedConfirmedCases": "Delež umrlih glede na št. primerov",
             "populationTotal": "Prebivalcev skupaj",
             "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na tem grafu."
         },
@@ -989,9 +989,9 @@
     "tableDict": {
         "tests_performed": "Testiranja (na dan)",
         "tests_performed_todate": "Testiranja (skupaj)",
-        "cases_confirmed": "Potrjeno okuženi (na dan)",
-        "cases_confirmed_todate": "Potrjeno okuženi (skupaj)",
-        "cases_active": "Potrjeno okuženi (aktivni)",
+        "cases_confirmed": "Potrjeni primeri (na dan)",
+        "cases_confirmed_todate": "Potrjeni primeri (skupaj)",
+        "cases_active": "Potrjeni primeri (aktivni)",
         "cases_recovered_todate": "Preboleli (skupaj)",
         "cases_closed_todate": "Zaprti primeri (skupaj)",
         "cases_hs_employee_confirmed_todate": "PO - zaposleni v zdravstvu (skupaj)",
