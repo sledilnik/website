@@ -360,6 +360,7 @@
             "absolute": "Absolute",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
+            "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k"
         },
         "rmap": {
