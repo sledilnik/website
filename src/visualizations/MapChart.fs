@@ -310,7 +310,7 @@ let seriesData (state : State) =
                             let increaseLastWeek = cases7dAgo - cases14dAgo 
 
                             if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
-                            else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 2. // Set the maximum value to 2 to cut off infinities
+                            else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 5. // Set the maximum value to 5 to cut off infinities
                         let scaled =
                             match state.ContentType with
                             | ConfirmedCases ->
@@ -322,7 +322,7 @@ let seriesData (state : State) =
                                     if value100k > 0.0 then value100k 
                                     else 0.0001
                                 | RelativeIncrease -> 
-                                    weeklyIncrease
+                                    min weeklyIncrease 200. // for colorAxis limit to 200%
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
@@ -413,7 +413,7 @@ let renderMap (state : State) =
                         label
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
-                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 200. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                             + s.ToString()
                     else
                         label
