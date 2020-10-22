@@ -12,12 +12,11 @@
     <div v-show="active && list.length > 0" class="float-list">
       <h2>{{ $t('navbar.goToGraph') }}</h2>
       <ul v-scroll-lock="active">
-        <li v-for="item in list" :key="item" class="float-item">
+        <li v-for="item in list" :key="item[Object.keys(item)]" class="float-item" @click="hideMenu">
           <a
-            :href="'#' + item"
-            @click="hideMenu"
-            v-scroll-to="{ element: '#' + item, offset: -100 }"
-            >{{ shortTitle(item) }}</a
+            :href="'#' + Object.keys(item)"
+            v-scroll-to="{ el: '#' + Object.keys(item), offset: -115 }"
+            >{{ item[Object.keys(item)] }}</a
           >
         </li>
       </ul>
@@ -35,29 +34,6 @@ export default {
   data() {
     return {
       active: false,
-      charts: {
-        'metrics-comparison-chart': this.$t('charts.metricsComparison.title_SVN'),
-        'spread-chart': this.$t('charts.spread.title'),
-        'daily-comparison-chart': this.$t('charts.dailyComparison.title'),
-        'patients-chart': this.$t('charts.patients.title'),
-        'map-chart': this.$t('charts.map.title'),
-        'municipalities-chart': this.$t('charts.municipalities.title'),
-        'europe-chart': this.$t('charts.europe.title'),
-        'age-groups-trends-chart': this.$t('charts.ageGroupsTimeline.title'),
-        'tests-chart': this.$t('charts.tests.title'),
-        'sources-chart': this.$t('charts.sources.title'),
-        'hcenters-chart': this.$t('charts.hCenters.title'),
-        'infections-chart': this.$t('charts.infections.title'),
-        'cases-chart': this.$t('charts.cases.title'),
-        'age-groups-chart': this.$t('charts.ageGroups.title'),
-        'rmap-chart': this.$t('charts.rmap.title'),
-        'regions-chart': this.$t('charts.regions.title'),
-        'regions-chart-100k': this.$t('charts.regions100k.title'),
-        'world-chart': this.$t('charts.world.title'),
-        'countries-active-chart': this.$t('charts.countriesActiveCasesPer1M.title'),
-        'countries-cases-chart': this.$t('charts.countriesNewCasesPer1M.title'),
-        'countries-deaths-chart': this.$t('charts.countriesTotalDeathsPer1M.title'),
-      },
     }
   },
   methods: {

@@ -69,9 +69,11 @@ export default {
       // I think the right way to do this would be to listen for clicks within App.fs
     },
     getCharts() {
-      const allCharts = this.$el.querySelectorAll('.visualization-chart')
+      const allCharts = this.$el.querySelectorAll('.visualization-chart h2 a')
       allCharts.forEach((el) => {
-        this.charts.push(el.id)
+        let obj = new Object
+        obj[el.getAttribute('href').substring(1)] = el.innerHTML
+        this.charts.push(obj)
       })
     },
   },
