@@ -42,8 +42,8 @@ module Series =
         [ Deceased; Recovered;  ]
 
     let getSeriesInfo = function
-        | Deceased      -> false, "#666666",   "deceased"
-        | Recovered     -> false, "#8cd4b2",   "recovered"
+        | Deceased      -> true,  "#666666",   "deceased"
+        | Recovered     -> true,  "#8cd4b2",   "recovered"
         | Active        -> true,  "#d5c768",   "active"
         | InHospital    -> true,  "#de9a5a",   "hospitalized"
         | Icu           -> true,  "#d96756",   "icu"

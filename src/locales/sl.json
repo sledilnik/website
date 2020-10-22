@@ -684,7 +684,7 @@
             "positivePct": "Delež pozitivnih testov (%)"
         },
         "cases": {
-            "title": "Potrjeni primeri",
+            "title": "Primeri",
             "active": "Aktivni",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni enoti",
