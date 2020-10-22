@@ -12,7 +12,12 @@
     <div v-show="active && list.length > 0" class="float-list">
       <h2>{{ $t('navbar.goToGraph') }}</h2>
       <ul v-scroll-lock="active">
-        <li v-for="item in list" :key="item[Object.keys(item)]" class="float-item" @click="hideMenu">
+        <li
+          v-for="item in list"
+          :key="item[Object.keys(item)]"
+          class="float-item"
+          @click="hideMenu"
+        >
           <a
             :href="'#' + Object.keys(item)"
             v-scroll-to="{ el: '#' + Object.keys(item), offset: -115 }"
@@ -35,6 +40,13 @@ export default {
     return {
       active: false,
     }
+  },
+  mounted() {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.active = false
+      }
+    })
   },
   methods: {
     shortTitle(title) {
