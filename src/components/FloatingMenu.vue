@@ -36,7 +36,7 @@ export default {
     return {
       active: false,
       charts: {
-        'metrics-comparison-chart': this.$t('charts.metricsComparison.title'),
+        'metrics-comparison-chart': this.$t('charts.metricsComparison.title_SVN'),
         'spread-chart': this.$t('charts.spread.title'),
         'daily-comparison-chart': this.$t('charts.dailyComparison.title'),
         'patients-chart': this.$t('charts.patients.title'),
@@ -54,13 +54,9 @@ export default {
         'regions-chart': this.$t('charts.regions.title'),
         'regions-chart-100k': this.$t('charts.regions100k.title'),
         'world-chart': this.$t('charts.world.title'),
-        'countries-active-chart': this.$t(
-          'charts.countriesActiveCasesPer1M.title'
-        ),
+        'countries-active-chart': this.$t('charts.countriesActiveCasesPer1M.title'),
         'countries-cases-chart': this.$t('charts.countriesNewCasesPer1M.title'),
-        'countries-deaths-chart': this.$t(
-          'charts.countriesTotalDeathsPer1M.title'
-        ),
+        'countries-deaths-chart': this.$t('charts.countriesTotalDeathsPer1M.title'),
       },
     }
   },

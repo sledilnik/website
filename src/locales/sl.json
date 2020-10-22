@@ -654,7 +654,7 @@
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
-            "title_SVN": "Stanje COVID-19 v Sloveniji",
+            "title_SVN": "Slovenija - stanje",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",
             "showActive": "Aktivni",
@@ -677,7 +677,7 @@
             "deceased": "Umrli"
         },
         "dailyComparison": {
-            "title": "Primerjava po dnevih v tednu",
+            "title": "Dnevi – primerjava",
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
             "tests": "Opravljeni testi",
@@ -706,7 +706,7 @@
             "structure": "Struktura"
         },
         "ratios": {
-            "title": "Delež resnih primerov",
+            "title": "Resni primeri",
             "seriousCases": "Resni primeri",
             "hospitalizations": "Hospitalizirani",
             "mortality": "Smrtnost",
@@ -723,7 +723,7 @@
             "hospitalDeceasedShare": "Delež smrti v bolnišnici"
         },
         "hCenters": {
-            "title": "Obravnava v ZD",
+            "title": "ZD - obravnava",
             "allRegions": "Vse regije",
             "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
             "suspectedCovidExamination": "Sum COVID-19 (pregled)",
@@ -742,7 +742,7 @@
             "shareOfPositive": "Delež pozitivnih testov (%)"
         },
         "infections": {
-            "title": "Struktura potrjenih primerov",
+            "title": "Primeri - struktura",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",
@@ -753,7 +753,7 @@
             "otherPersons": "Ostale osebe"
         },
         "spread": {
-            "title": "Prirast potrjenih primerov",
+            "title": "Prirast",
             "absolute": "Absolutni dnevni prirast",
             "percentage": "Relativni dnevni prirast",
             "doublingRate": "Eksponentna rast v dnevih",
@@ -806,20 +806,20 @@
             "data": "Podatki"
         },
         "regions": {
-            "title": "Primeri po regijah",
+            "title": "Regije - primeri",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli"
         },
         "regions100k": {
-            "title": "Primeri po regijah (na 100.000 prebivalcev)",
+            "title": "Regije - primerjava",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli",
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "map": {
-            "title": "Zemljevid po občinah",
+            "title": "Občine - zemljevid",
             "confirmedCases": "Potrjeni primeri",
             "per100k": "na 100.000 prebivalcev",
             "deceased": "Umrli",
@@ -837,10 +837,10 @@
             "relativeIncrease": "Tedenski prirast"
         },
         "rmap": {
-            "title": "Zemljevid po regijah"
+            "title": "Regije - zemljevid"
         },
         "europe": {
-            "title": "Stanje COVID-19 v Evropi",
+            "title": "Evropa - stanje",
             "twoWeekIncidence": "14-dnevna pojavnost na 100.000 prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
             "newCases": "Novi primeri",
@@ -854,10 +854,10 @@
             "noData": "Ni podatkov"
         },
         "world": {
-            "title": "Stanje COVID-19 v svetu"
+            "title": "Svet - stanje"
         },
         "municipalities": {
-            "title": "Primeri po občinah",
+            "title": "Občine - primeri",
             "lastCase": "Zadnji primer: ",
             "today": "danes",
             "yesterday": "včeraj",
@@ -876,7 +876,7 @@
             "viewLast": "Zadnji"
         },
         "ageGroups": {
-            "title": "Po starostnih skupinah",
+            "title": "Starost - spol",
             "absolute": "Absolutno",
             "relative": "Relativno",
             "male": "Moški",
@@ -894,25 +894,25 @@
             "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na tem grafu."
         },
         "ageGroupsTimeline": {
-            "title": "Potrjeni primeri po starostnih skupinah",
+            "title": "Starost - delež",
             "newCases": "Novi primeri",
             "newCasesRelative": "Novi primeri (relativno)",
             "activeCases": "Aktivni primeri",
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
         "countriesActiveCasesPer1M": {
-            "title": "Države: aktivni primeri na 100.000 prebivalcev",
+            "title": "Države - aktivni primeri",
             "yAxisTitle": "Št. aktivnih primerov na 100.000 prebivalcev",
             "legendTitle": "Aktivni primeri na 100.000 prebivalcev",
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na 100.000 prebivalcev",
+            "title": "Države - novi primeri",
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
+            "title": "Države - umrli",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },
@@ -966,7 +966,7 @@
             }
         },
         "sources": {
-            "title": "Karantena in viri okužb",
+            "title": "Viri okužb",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
