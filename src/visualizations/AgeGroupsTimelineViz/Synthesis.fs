@@ -30,6 +30,8 @@ type DisplayMetrics = {
 let availableDisplayMetrics = [|
     { Id = "newCases"; MetricsType = NewCases
       ChartType = StackedBarNormal }
+    { Id = "newCasesRelative"; MetricsType = NewCases
+      ChartType = StackedBarPercent }
     { Id = "activeCases"; MetricsType = ActiveCases
       ChartType = StackedBarNormal }
     { Id = "activeCasesRelative"; MetricsType = ActiveCases

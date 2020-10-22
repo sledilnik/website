@@ -39,7 +39,7 @@ export default {
   created() {
     const cards = {
       confirmedCases: {
-        title: 'Potrjeno okuženi',
+        title: 'Potrjeni primeri',
         field: 'cases.confirmed.todate',
       },
       active: {

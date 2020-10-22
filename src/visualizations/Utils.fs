@@ -18,8 +18,8 @@ let optionToInt (value: int option) =
     | Some x -> x
     | None -> 0
 
-[<Emit("parseInt($0)")>]
-let nativeParseInt (str : string) : int option = jsNative
+[<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
+let nativeParseInt (input : string) : int option = jsNative
 
 let parseDate (str : string) =
     try

@@ -37,6 +37,7 @@
     "notice": {
         "newChart": "🆕 📊 New chart:",
         "newPage": "🆕 New page:",
+        "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
     },
     "infocard": {
@@ -167,7 +168,7 @@
             "description": "contact tracing suspended"
         },
         "11": {
-            "title": "phase<br>10",
+            "title": "phase<br>11",
             "description": "epidemic"
         }
     },
@@ -361,6 +362,7 @@
             "absolute": "Absolute",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
+            "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k"
         },
         "rmap": {
@@ -423,6 +425,7 @@
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
             "newCases": "New cases",
+            "newCasesRelative": "New cases (relative)",
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
@@ -741,7 +744,7 @@
         },
         "movement": {
             "title": "🚫21-6h",
-            "description": "Movement restried between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
+            "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
         }
     },
     "days": {
