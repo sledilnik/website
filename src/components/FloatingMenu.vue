@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="slide">
-      <div class="float-nav-btn" v-if="list.length > 0" @click="toggleMenu">
+      <div class="float-nav-btn" v-show="list.length > 0" @click="toggleMenu">
         <div
           class="float-nav-img"
           :class="{ active: active }"
@@ -10,33 +10,25 @@
       </div>
     </transition>
     <transition name="fade">
-      <div
-        v-if="active && list.length > 0"
-        v-on-clickaway="hideMenu"
-        class="float-list"
-      >
+      <div v-show="active && list.length > 0" class="float-list">
         <h2>{{ $t('navbar.goToGraph') }}</h2>
         <ul>
           <li v-for="item in list" :key="item" class="float-item">
             <a
               :href="'#' + item"
               v-scroll-to="{ element: '#' + item, offset: -100 }"
-              v-on-clickaway="hideMenu"
               >{{ shortTitle(item) }}</a
             >
           </li>
         </ul>
       </div>
     </transition>
-    <div v-if="active" class="overlay"></div>
+    <div v-if="active" class="overlay" @click="hideMenu"></div>
   </div>
 </template>
 
 <script>
-import { mixin as clickaway } from 'vue-clickaway'
-
 export default {
-  mixins: [clickaway],
   name: 'FloatingMenu',
   props: {
     list: Array,
