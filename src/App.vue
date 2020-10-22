@@ -52,6 +52,7 @@ export default {
   created() {
     this.$store.dispatch("stats/fetchData")
     this.$store.dispatch("patients/fetchData")
+    this.$store.dispatch("ostaniZdrav/fetchData")
     
     if (Object.keys(this.$route.query).length > 0 && this.$route.query.showDate) {
       let date = this.$route.query.showDate

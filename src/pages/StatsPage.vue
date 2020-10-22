@@ -16,12 +16,14 @@
           series-type="state"
         />
 -->
+<!--  
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
           name="cases.confirmedToDate"
           series-type="state"
         />
+-->
 <!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
@@ -30,6 +32,9 @@
           series-type="state"
         />
 -->
+        <OstaniZdrav-card
+          :title="$t('charts.ostanizdrav.title')"
+        />
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
@@ -86,6 +91,7 @@
 <script>
 import { mapState } from 'vuex'
 import InfoCard from 'components/cards/InfoCard'
+import OstaniZdravCard from 'components/cards/OstaniZdravCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
 import Youtube from 'components/Youtube'
@@ -96,6 +102,7 @@ export default {
   name: 'StatsPage',
   components: {
     InfoCard,
+    OstaniZdravCard,
     TimeStamp,
     Notice,
     Youtube

@@ -1,34 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as d3 from 'd3'
-import {
-  statsStore
-} from './stats.store'
-import {
-  hospitalsStore
-} from './hospitals.store'
-import {
-  patientsStore
-} from './patients.store'
-import {
-  municipalitiesStore
-} from './municipalities.store'
-import {
-  healthCentersStore
-} from './health-centers.store'
-import {
-  tableData
-} from './tables.store'
+import { statsStore } from './stats.store'
+import { hospitalsStore } from './hospitals.store'
+import { patientsStore } from './patients.store'
+import { municipalitiesStore } from './municipalities.store'
+import { healthCentersStore } from './health-centers.store'
+import { tableData } from './tables.store'
+import { ostaniZdravData } from './ostani-zdrav.store'
 
 Vue.use(Vuex)
 
 export function ApiEndpoint() {
-  if(window.location.search.indexOf('stage') > 0) {
+  if (window.location.search.indexOf('stage') > 0) {
     return 'https://api-stage.sledilnik.org'
   } else {
     return 'https://api.sledilnik.org'
   }
-} 
+}
 
 export function exportTime(x) {
   return new Date(x * 1000)
@@ -57,6 +46,7 @@ const store = new Vuex.Store({
     municipalities: municipalitiesStore,
     healthCenters: healthCentersStore,
     tableData,
+    ostaniZdrav: ostaniZdravData
   },
 })
 
