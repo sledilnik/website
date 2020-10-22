@@ -45,7 +45,7 @@ export default {
         'europe-chart': this.$t('charts.europe.title'),
         'age-groups-trends-chart': this.$t('charts.ageGroups.title'),
         'tests-chart': this.$t('charts.tests.title'),
-        'sources-chart': this.$t('charts.spread.title'),
+        'sources-chart': this.$t('charts.sources.title'),
         'hcenters-chart': this.$t('charts.hCenters.title'),
         'infections-chart': this.$t('charts.infections.title'),
         'cases-chart': this.$t('charts.cases.title'),
