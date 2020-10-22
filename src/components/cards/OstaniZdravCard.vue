@@ -5,14 +5,14 @@
     </div>
     <div class="card-number">
       <span>{{ lastValue }}</span>
-      <div class="card-percentage-diff" :class="diffClass">
+      <div class="card-percentage-diff no-change">
         {{ percentageDiff | prefixDiff }}%
       </div>
     </div>
-    <div class="card-diff">
+    <!-- <div class="card-diff">
       <div class="trend-icon" :class="[diffClass, iconClass]"></div>
       <span :class="diffClass">{{ diff }}</span>
-    </div>
+    </div> -->
     <div class="data-time">
       {{ $t('infocard.lastUpdated', { date: new Date(date) }) }}
     </div>
@@ -51,8 +51,9 @@ export default {
       return lastValue - dayBeforeLastValue
     },
     percentageDiff() {
-      console.log(this.diff, this.dayBeforeValue)
-      return Math.round((this.diff / this.dayBeforeValue) * 1000) / 10
+      return this.dayBeforeValue === 0
+        ? 0
+        : Math.round((this.diff / this.dayBeforeValue) * 1000) / 10
     },
     iconClass() {
       let className = ''

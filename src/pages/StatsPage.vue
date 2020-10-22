@@ -33,7 +33,7 @@
         />
 -->
         <OstaniZdrav-card
-          :title="$t('charts.ostanizdrav.title')"
+          :title="$t('infocard.ostaniZdrav')"
         />
         <Info-card
           :title="$t('infocard.active')"

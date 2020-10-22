@@ -57,6 +57,7 @@
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
+        "ostaniZdrav": "#OstaniZdrav primeri",
         "lastUpdated": "{{ date, %a., %e. %b. }}"
     },
     "tables": {
