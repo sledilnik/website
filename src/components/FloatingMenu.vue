@@ -9,21 +9,20 @@
         />
       </div>
     </transition>
-    <transition name="fade">
-      <div v-show="active && list.length > 0" class="float-list">
-        <h2>{{ $t('navbar.goToGraph') }}</h2>
-        <ul>
-          <li v-for="item in list" :key="item" class="float-item">
-            <a
-              :href="'#' + item"
-              v-scroll-to="{ element: '#' + item, offset: -100 }"
-              >{{ shortTitle(item) }}</a
-            >
-          </li>
-        </ul>
-      </div>
-    </transition>
-    <div v-if="active" class="overlay" @click="hideMenu"></div>
+    <div v-show="active && list.length > 0" class="float-list">
+      <h2>{{ $t('navbar.goToGraph') }}</h2>
+      <ul v-scroll-lock="active">
+        <li v-for="item in list" :key="item" class="float-item">
+          <a
+            :href="'#' + item"
+            @click="hideMenu"
+            v-scroll-to="{ element: '#' + item, offset: -100 }"
+            >{{ shortTitle(item) }}</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div v-show="active" class="overlay" @click="hideMenu"></div>
   </div>
 </template>
 
@@ -91,7 +90,7 @@ export default {
   bottom: 80px;
   right: 16px;
   padding: 16px 0 0px 16px;
-  z-index: 2000;
+  z-index: 2001;
   background: white;
   font-size: 14px;
   border-radius: 6px;
@@ -145,7 +144,7 @@ export default {
   position: fixed;
   bottom: 7px;
   right: 7px;
-  z-index: 2001;
+  z-index: 2002;
   cursor: pointer;
   display: inline-block;
 
@@ -173,19 +172,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1999;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-  max-height: 0px;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.4s;
-  max-height: 800px;
+  z-index: 2000;
 }
 
 .slide-leave-active,
@@ -193,6 +180,7 @@ export default {
   transition: 0.7s;
 }
 .slide-enter {
+  will-change: transform;
   transform: translate(100%, 0);
 }
 .slide-leave-to {
