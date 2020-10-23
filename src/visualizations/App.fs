@@ -521,7 +521,10 @@ let render (state: State) (_: Msg -> unit) =
                           [ Html.a
                               [ prop.href ("#" + visualization.ClassName)
                                 prop.text (tOptions ("charts." + visualization.ChartTextsGroup + ".title") {| context = context |} )
-                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
+                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ]
+                            Html.span
+                              [ prop.text ("charts." + visualization.ChartTextsGroup + ".titleMenu")
+                                prop.className "hidden" ] ] ] ] ]
 
     Html.div
         [ Utils.classes [

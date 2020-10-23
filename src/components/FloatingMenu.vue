@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition name="slide">
-      <div class="float-nav-btn" v-show="list.length > 0" @click="toggleMenu">
+      <div class="float-nav-btn" v-show="list.length > 0" @click="toggleMenu" key="1">
         <div
           class="float-nav-img"
           :class="{ active: active }"
@@ -9,24 +9,32 @@
         />
       </div>
     </transition>
-    <div v-show="active && list.length > 0" class="float-list">
-      <h2>{{ $t('navbar.goToGraph') }}</h2>
-      <ul v-scroll-lock="active">
-        <li
-          v-for="item in list"
-          :key="item.link"
-          class="float-item"
-          @click="hideMenu"
-        >
-          <a
-            :href="'#' + item.link"
-            v-scroll-to="{ el: '#' + item.link, offset: -115 }"
-            >{{ menuTitle(item.link) }}</a
+    <transition name="slide">
+      <div v-show="active && list.length > 0" class="float-list" key="2">
+        <h2>{{ $t('navbar.goToGraph') }}</h2>
+        <ul v-scroll-lock="active">
+          <li
+            v-for="item in list"
+            :key="item.link"
+            class="float-item"
+            @click="hideMenu"
           >
-        </li>
-      </ul>
-    </div>
-    <div v-show="active" class="overlay" @click="hideMenu"></div>
+            <div
+              :class="'float-nav-icon' + ' ' + get(item.link, 'icon')"
+              :alt="$t('navbar.goToGraph')"
+            />
+            <a
+              :href="'#' + item.link"
+              v-scroll-to="{ el: '#' + item.link, offset: -115 }"
+              >{{ get(item.link, 'titleMenu') }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div v-show="active" class="overlay" @click="hideMenu" key="3"></div>
+    </transition>
   </div>
 </template>
 
@@ -40,27 +48,90 @@ export default {
     return {
       active: false,
       charts: {
-        'metrics-comparison-chart': this.$t('charts.metricsComparison.titleMenu_SVN'),
-        'spread-chart': this.$t('charts.spread.titleMenu'),
-        'daily-comparison-chart': this.$t('charts.dailyComparison.titleMenu'),
-        'patients-chart': this.$t('charts.patients.titleMenu'),
-        'map-chart': this.$t('charts.map.titleMenu'),
-        'municipalities-chart': this.$t('charts.municipalities.titleMenu'),
-        'europe-chart': this.$t('charts.europe.titleMenu'),
-        'age-groups-trends-chart': this.$t('charts.ageGroupsTimeline.titleMenu'),
-        'tests-chart': this.$t('charts.tests.titleMenu'),
-        'sources-chart': this.$t('charts.sources.titleMenu'),
-        'hcenters-chart': this.$t('charts.hCenters.titleMenu'),
-        'infections-chart': this.$t('charts.infections.titleMenu'),
-        'cases-chart': this.$t('charts.cases.titleMenu'),
-        'age-groups-chart': this.$t('charts.ageGroups.titleMenu'),
-        'rmap-chart': this.$t('charts.rmap.titleMenu'),
-        'regions-chart': this.$t('charts.regions.titleMenu'),
-        'regions-chart-100k': this.$t('charts.regions100k.titleMenu'),
-        'world-chart': this.$t('charts.world.titleMenu'),
-        'countries-active-chart': this.$t('charts.countriesActiveCasesPer1M.titleMenu'),
-        'countries-cases-chart': this.$t('charts.countriesNewCasesPer1M.titleMenu'),
-        'countries-deaths-chart': this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
+        'metrics-comparison-chart': {
+          titleMenu: this.$t('charts.metricsComparison.titleMenu_SVN'),
+          icon: 'graph',
+        },
+        'spread-chart': {
+          titleMenu: this.$t('charts.spread.titleMenu'),
+          icon: 'graph',
+        },
+        'daily-comparison-chart': {
+          titleMenu: this.$t('charts.dailyComparison.titleMenu'),
+          icon: 'column',
+        },
+        'patients-chart': {
+          titleMenu: this.$t('charts.patients.titleMenu'),
+          icon: 'column',
+        },
+        'map-chart': {
+          titleMenu: this.$t('charts.map.titleMenu'),
+          icon: 'map',
+        },
+        'municipalities-chart': {
+          titleMenu: this.$t('charts.municipalities.titleMenu'),
+          icon: 'column',
+        },
+        'europe-chart': {
+          titleMenu: this.$t('charts.europe.titleMenu'),
+          icon: 'map',
+        },
+        'age-groups-trends-chart': {
+          titleMenu: this.$t('charts.ageGroupsTimeline.titleMenu'),
+          icon: 'column',
+        },
+        'tests-chart': {
+          titleMenu: this.$t('charts.tests.titleMenu'),
+          icon: 'column',
+        },
+        'sources-chart': {
+          titleMenu: this.$t('charts.sources.titleMenu'),
+          icon: 'column',
+        },
+        'hcenters-chart': {
+          titleMenu: this.$t('charts.hCenters.titleMenu'),
+          icon: 'graph',
+        },
+        'infections-chart': {
+          titleMenu: this.$t('charts.infections.titleMenu'),
+          icon: 'graph',
+        },
+        'cases-chart': {
+          titleMenu: this.$t('charts.cases.titleMenu'),
+          icon: 'column',
+        },
+        'age-groups-chart': {
+          titleMenu: this.$t('charts.ageGroups.titleMenu'),
+          icon: 'column',
+        },
+        'rmap-chart': {
+          titleMenu: this.$t('charts.rmap.titleMenu'),
+          icon: 'map',
+        },
+        'regions-chart': {
+          titleMenu: this.$t('charts.regions.titleMenu'),
+          icon: 'graph',
+        },
+        'regions-chart-100k': {
+          titleMenu: this.$t('charts.regions100k.titleMenu'),
+          icon: 'graph',
+        },
+        'world-chart': {
+          titleMenu: this.$t('charts.world.titleMenu'),
+          icon: 'map',
+        },
+        'countries-active-chart': {
+          titleMenu: this.$t('charts.countriesActiveCasesPer1M.titleMenu'),
+          icon: 'graph',
+        },
+        'countries-cases-chart': {
+          titleMenu: this.$t('charts.countriesNewCasesPer1M.titleMenu'),
+          icon: 'graph',
+        },
+        'countries-deaths-chart': {
+          titleMenu: this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
+          icon: 'graph',
+        },
       },
     }
   },
@@ -72,8 +143,8 @@ export default {
     })
   },
   methods: {
-    menuTitle(title) {
-      return this.charts[title]
+    get(chart, value) {
+      return this.charts[chart][value]
     },
     toggleMenu() {
       this.active = !this.active
@@ -127,6 +198,8 @@ export default {
 
   .float-item {
     padding: 0 16px 0 0;
+    display: flex;
+    align-items: center;
 
     &:not(:last-child) {
       border-bottom: 1px solid #d8d8d8;
@@ -134,6 +207,24 @@ export default {
 
     &:last-child {
       padding-bottom: 16px;
+    }
+
+    .float-nav-icon {
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+
+      &.graph {
+        background-image: url('../assets/svg/graf.svg');
+      }
+
+      &.column {
+        background-image: url('../assets/svg/stolpicni.svg');
+      }
+
+      &.map {
+        background-image: url('../assets/svg/zemljevid.svg');
+      }
     }
 
     a {
@@ -183,14 +274,19 @@ export default {
 }
 
 .slide-leave-active,
-.slide-enter-active {
-  transition: 0.7s;
+.fade-leave-active {
+  transition: 0.3s;
+}
+.slide-enter-active,
+.fade-enter-active {
+  transition: 0.5s;
 }
 .slide-enter {
+  transform: translate3d(100%, 0, 0);
   will-change: transform;
-  transform: translate(100%, 0);
 }
 .slide-leave-to {
-  transform: translate(-100%, 0);
+  transform: translate3d(110%, 0, 0);
+  will-change: transform;
 }
 </style>

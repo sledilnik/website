@@ -654,9 +654,9 @@
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
-            "titleMenu_SVN": "Slovenija - stanje",
-            "titleMenu_MKD": "Makedonija - stanje",
-            "titleMenu_MNE": "Črna gora - stanje",
+            "titleMenu_SVN": "Slovenija – stanje",
+            "titleMenu_MKD": "Makedonija – stanje",
+            "titleMenu_MNE": "Črna gora – stanje",
             "title_SVN": "Stanje COVID-19 v Sloveniji",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",
@@ -752,7 +752,7 @@
         },
         "infections": {
             "title": "Struktura potrjenih primerov",
-            "titleMenu": "Primeri - struktura",
+            "titleMenu": "Primeri – struktura",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",
@@ -819,14 +819,14 @@
         },
         "regions": {
             "title": "Primeri po regijah",
-            "titleMenu": "Regije - primeri",
+            "titleMenu": "Regije – primeri",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli"
         },
         "regions100k": {
             "title": "Primeri po regijah (na 100.000 prebivalcev)",
-            "titleMenu": "Regije - primerjava",
+            "titleMenu": "Regije – primerjava",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "deceased": "Umrli",
@@ -834,7 +834,7 @@
         },
         "map": {
             "title": "Zemljevid po občinah",
-            "titleMenu": "Občine - zemljevid",
+            "titleMenu": "Občine – zemljevid",
             "confirmedCases": "Potrjeni primeri",
             "per100k": "na 100.000 prebivalcev",
             "deceased": "Umrli",
@@ -853,11 +853,11 @@
         },
         "rmap": {
             "title": "Zemljevid po regijah",
-            "titleMenu": "Regije - zemljevid"
+            "titleMenu": "Regije – zemljevid"
         },
         "europe": {
             "title": "Stanje COVID-19 v Evropi",
-            "titleMenu": "Evropa - stanje",
+            "titleMenu": "Evropa – stanje",
             "twoWeekIncidence": "14-dnevna pojavnost na 100.000 prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
             "newCases": "Novi primeri",
@@ -876,7 +876,7 @@
         },
         "municipalities": {
             "title": "Primeri po občinah",
-            "titleMenu": "Občine - primeri",
+            "titleMenu": "Občine – primeri",
             "lastCase": "Zadnji primer: ",
             "today": "danes",
             "yesterday": "včeraj",
@@ -915,7 +915,7 @@
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
-            "titleMenu": "Starost - delež",
+            "titleMenu": "Starost – delež",
             "newCases": "Novi primeri",
             "newCasesRelative": "Novi primeri (relativno)",
             "activeCases": "Aktivni primeri",
@@ -923,20 +923,20 @@
         },
         "countriesActiveCasesPer1M": {
             "title": "Države: aktivni primeri na 100.000 prebivalcev",
-            "titleMenu": "Države - aktivni primeri",
+            "titleMenu": "Države – aktivni primeri",
             "yAxisTitle": "Št. aktivnih primerov na 100.000 prebivalcev",
             "legendTitle": "Aktivni primeri na 100.000 prebivalcev",
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi primeri na 100.000 prebivalcev",
-            "titleMenu": "Države - novi primeri",
+            "titleMenu": "Države – novi primeri",
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
-            "titleMenu": "Države - umrli",
+            "titleMenu": "Države – umrli",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },
