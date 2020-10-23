@@ -530,7 +530,7 @@
             }
         },
         "sources": {
-            "title": "Quarantine and Sources of Infection",
+            "title": "Sources of Infection and Quarantine",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
