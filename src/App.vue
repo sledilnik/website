@@ -63,6 +63,7 @@ export default {
   mounted() {
     this.$store.dispatch("stats/refreshDataEvery", 300)
     this.$store.dispatch("patients/refreshDataEvery", 300)
+    this.$store.dispatch("ostaniZdrav/refreshDataEvery", 300)
     
     if (this.$route.hash) {
       const checker = setInterval(() => {

@@ -9,13 +9,16 @@
         {{ percentageDiff | prefixDiff }}%
       </div>
     </div>
-    <!-- <div class="card-diff">
-      <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-      <span :class="diffClass">{{ diff }}</span>
-    </div> -->
-    <div class="data-time">
-      {{ $t('infocard.lastUpdated', { date: new Date(date) }) }}
+    <div class="card-diff">
+      <span class="card-note">Danes že: {{ current }}</span>
     </div>
+    <div class="data-time">
+      {{ $t('infocard.lastUpdated', { date: new Date(lastValueDate) }) }}
+    </div>
+  </div>
+  <div class="hp-card" v-else>
+    <div class="card-title">{{ title }}</div>
+    <font-awesome-icon icon="spinner" spin />
   </div>
 </template>
 
@@ -29,31 +32,34 @@ export default {
   computed: {
     ...mapGetters('ostaniZdrav', ['data']),
     ...mapState('ostaniZdrav', ['loaded']),
-    date() {
+    currentDate() {
+      return this.data[this.data.length - 1].date
+    },
+    lastValueDate() {
       return this.data[this.data.length - 2].date
     },
-    lastValue() {
-      const lastValue = this.data[this.data.length - 2]
-      return lastValue.users_published
+    current() {
+      return this.data[this.data.length - 1].users_published
     },
-    dayBeforeValue() {
-      const dayBeforeValue = this.data[this.data.length - 3]
-      return dayBeforeValue.users_published
+    lastValue() {
+      return this.data[this.data.length - 2].users_published
+    },
+    dayBeforeLastValue() {
+      return this.data[this.data.length - 3].users_published
+    },
+    twoDaysBeforeLastValue() {
+      return this.data[this.data.length - 4].users_published
     },
     diff() {
-      const lastValue = this.data[this.data.length - 2].users_published
-      const dayBeforeLastValue = this.data[this.data.length - 3].users_published
-      return lastValue - dayBeforeLastValue
+      return this.lastValue - this.dayBeforeLastValue
     },
-    dayBeforeDiff() {
-      const lastValue = this.data[this.data.length - 3].users_published
-      const dayBeforeLastValue = this.data[this.data.length - 4].users_published
-      return lastValue - dayBeforeLastValue
+    dayBeforeLastDiff() {
+      return this.dayBeforeLastValue - this.twoDaysBeforeLastValue
     },
     percentageDiff() {
-      return this.dayBeforeValue === 0
+      return this.dayBeforeLastValue === 0
         ? 0
-        : Math.round((this.diff / this.dayBeforeValue) * 1000) / 10
+        : Math.round(this.diff / this.dayBeforeLastValue * 1000) / 10
     },
     iconClass() {
       let className = ''
