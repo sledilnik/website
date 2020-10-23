@@ -428,7 +428,7 @@
             "male": "Male",
             "female": "Female",
             "absolute": "Absolute",
-            "relative": "Relative",
+            "populationShare": "Population Share",
             "populationTotal": "Population Total",
             "shareOfDeceasedConfirmedCases": "Share of Deaths in Confirmed Cases",
             "shareOfDeceasedPopulation": "Share of Deaths in Population",

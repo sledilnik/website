@@ -898,7 +898,7 @@
             "title": "Po starostnih skupinah",
             "titleMenu": "Starost, spol",
             "absolute": "Absolutno",
-            "relative": "Relativno",
+            "populationShare": "Delež prebivalstva",
             "male": "Moški",
             "female": "Ženske",
             "confirmedCases": "Potrjeni primeri",

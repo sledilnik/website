@@ -280,7 +280,7 @@ let renderScaleTypeSelectors activeScaleType dispatch =
             renderScaleTypeSelector
                 Absolute activeScaleType (chartText "absolute")
             renderScaleTypeSelector
-                Relative activeScaleType (chartText "relative")
+                Relative activeScaleType (chartText "populationShare")
         ]
     ]
 

@@ -372,11 +372,11 @@
         "ageGroups": {
             "male": "Muškarci",
             "absolute": "Apsolutno",
+            "populationShare": "Udio stanovništva",
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
             "age": "Dob",
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
-            "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
             "deceasedPerPopulation": "Smrtni slučajevi po stanovništvu",
             "deceased": "Smrtni slučajevi",
