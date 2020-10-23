@@ -71,12 +71,12 @@
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="T9ndfXNiDwo"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
+          <Youtube id="T9ndfXNiDwo"></Youtube>
         </b-col>
       </b-row>
     </b-container>
