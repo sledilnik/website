@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import './filters'
 import './directives'
 
+// bootstrap
 Vue.use(LayoutPlugin)
 Vue.use(TabsPlugin)
 Vue.use(FormTextareaPlugin)

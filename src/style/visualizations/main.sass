@@ -77,6 +77,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           color: rgba(0, 0, 0, 0.8)
           box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
 
+      .hidden
+        display: none
+
   .faq-and-share-wrapper
     display: flex
     align-items: center
@@ -362,17 +365,20 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .tests-chart, .infections-chart, .metrics-comparison-chart
     min-height: 640px
 
-  .cases-chart, .ratios-chart, .regions-chart
+  .cases-chart, .ratios-chart
     min-height: 450px
 
   .age-groups-chart
-    min-height: 579px    
+    min-height: 608px    
 
   .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
     min-height: 703px
   
   .sources-chart
     min-height: 610px
+
+  .regions-chart, .regions-chart-100k
+    min-height: 694px
 
   .tests-chart, .ratios-chart
     .metric-selector
@@ -398,9 +404,23 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .map-chart, .rmap-chart
     min-height: 780px
+    $bar-color: #d5c768
 
     @include media-breakpoint-down(sm)
       min-height: 636px
+
+    .bars, .bar-wrapper
+      display: flex
+      align-items: flex-end
+
+    .bar-wrapper
+      position: relative
+      height: 50px
+
+    .bar
+      width: 4px
+      margin-right: 1px
+      background-color: $bar-color
 
     .map
       height: 600px

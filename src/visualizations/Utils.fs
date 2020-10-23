@@ -1,14 +1,13 @@
 [<RequireQualifiedAccess>]
 module Utils
 
+open Fable.Core
 open Feliz
 
 open Types
 open System
 
-/// <summary>
-/// Converts Some 0 value to None.
-/// </summary>
+// Converts Some 0 value to None
 let zeroToNone value =
     match value with
     | Some 0 -> None
@@ -19,10 +18,21 @@ let optionToInt (value: int option) =
     | Some x -> x
     | None -> 0
 
+[<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
+let nativeParseInt (input : string) : int option = jsNative
+
+let parseDate (str : string) =
+    try
+        System.DateTime.Parse(str) |> Ok
+    with _ ->
+        sprintf "Invalid date representation: %s" str |> Error
 
 let roundDecimals (decimals:int) (value: float) = Math.Round(value, decimals)
+
 let roundToInt = roundDecimals 0
+
 let roundTo1Decimal = roundDecimals 1
+
 let roundTo3Decimals = roundDecimals 3
 
 let formatToInt (value: float) =

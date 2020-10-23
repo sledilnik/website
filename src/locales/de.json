@@ -9,7 +9,8 @@
             "mk": "Mazedonisch",
             "hr": "Kroatisch",
             "it": "Italienisch",
-            "me": "Montenegrinisch"
+            "me": "Montenegrinisch",
+            "nb": "Bokmål"
         },
         "github": "GitHub",
         "links": "Verknüpfungen",
@@ -349,7 +350,7 @@
             "confirmedCases": "Bestätigte Fälle",
             "deceasedPerConfirmedCases": "Todesfälle pro bestätigte Fälle",
             "male": "Männer",
-            "relative": "Relativ",
+            "populationShare": "Anteil der Bevölkerung",
             "absolute": "Absolut",
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
             "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung"
@@ -404,7 +405,8 @@
             "yAxis": "Y-Achse:",
             "loading": "Daten werden geladen …",
             "sortBy": "Sortieren nach:",
-            "weekYearDateFormat": "%W. Woche %Y"
+            "weekYearDateFormat": "%W. Woche %Y",
+            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -456,7 +458,8 @@
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
-            "all": "Alle"
+            "all": "Alle",
+            "relativeIncrease": "Wöchentlicher Anstieg"
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
@@ -554,6 +557,7 @@
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
             "newCases": "Neue Fälle",
+            "newCasesRelative": "Neue Fälle (relativ)",
             "activeCases": "Aktive Fälle",
             "activeCasesRelative": "Aktive Fälle (relativ)"
         },
@@ -635,7 +639,8 @@
                 "title": "Anzahl gültiger Schlüssel pro Tag",
                 "date": "Datum"
             },
-            "title": "Die #OstaniZdrav Benachrichtigungs-App"
+            "title": "Die #OstaniZdrav Benachrichtigungs-App",
+            "footer": "Die Analyse ist das Ergebnis der Anpassung des deutschen Projekts [Corona Tracker Tracker](https://ctt.pfstr.de/) an das slowenische #OstaniZdrav. [Quellcode des Projekts](https://github.com/janpf/ctt) verwendet [Analysetools für Diagnoseschlüssel](https://github.com/mh-/diagnosis-keys)."
         },
         "sources": {
             "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
@@ -852,6 +857,14 @@
         "regions": {
             "description": "Einschränkungen für rote Regionen: Bewegung außerhalb der Gemeindegrenzen, Verwendung von Masken im Freien, Einschränkung einiger Dienstleistungen",
             "title": "Regionen"
+        },
+        "movement": {
+            "title": "🚫21-6h",
+            "description": "Bewegungseinschränkung von 21:00 – 6:00 Uhr. Die Bewegung ist auf die eigene Region beschränkt.<br>Versammlungen von bis zu 10 Personen. Einschränkung für aller Veranstaltungen."
+        },
+        "schools6+": {
+            "description": "Fernunterricht für Grundschulen ab Klasse 6, Sekundarschulen und Musikschulen",
+            "title": "Schulen 6+"
         }
     },
     "region": {
@@ -896,7 +909,8 @@
         "newChart": "🆕 📊 Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
         "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "🆕 Neue Seite:"
+        "newPage": "🆕 Neue Seite:",
+        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1087,6 +1101,10 @@
         "10": {
             "description": "Kontaktverfolgung ausgesetzt",
             "title": "Phase<br>10"
+        },
+        "11": {
+            "description": "Epidemie",
+            "title": "Phase<br>11"
         }
     },
     "embedMaker": {
