@@ -300,8 +300,8 @@ let renderChartCategorySelector
             match chartModeToRender with
             | AbsoluteInfections        -> chartText "confirmedCases"
             | AbsoluteDeaths            -> chartText "deceased"
-            | InfectionsPerPopulation   -> chartText "confirmedCasesPerPopulation"
-            | DeathsPerPopulation       -> chartText "deceasedPerPopulation"
+            | InfectionsPerPopulation   -> chartText "confirmedCases"
+            | DeathsPerPopulation       -> chartText "deceased"
             | DeathsPerInfections       -> chartText "deceasedPerConfirmedCases"
             )
     ]
