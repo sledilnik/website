@@ -375,6 +375,31 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
+        let sparklineFormatter activeCasesValue = 
+            let options =
+                {|
+                    chart = 
+                        {|
+                            ``type`` = "area"
+                        |} |> pojo
+                    credits = {| enabled = false |}
+                    xAxis = {| visible = false |}
+                    yAxis = {| visible = false |}
+                    title = {| text = "" |}
+                    legend = {| enabled = false |}
+                    series = 
+                        [| 
+                            {| 
+                                data = activeCasesValue 
+                                animation = false
+                                color = "#ff0000" // try to access the tooltip color here?
+                            |} |> pojo
+                        |]
+                |} |> pojo
+            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
+            """<div style="width: 100px; height: 60px;" id="tooltip-chart"></div>"""
+
+
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
@@ -415,6 +440,7 @@ let renderMap (state : State) =
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                             + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                             + s.ToString()
+                            + sparklineFormatter activeCasesValue
                     else
                         label
                 | Deceased ->

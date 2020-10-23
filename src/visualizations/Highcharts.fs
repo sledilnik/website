@@ -16,6 +16,9 @@ let chartFromWindow: obj -> ReactElement = jsNative
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
+[<Import("sparklineChart", from="./_highcharts")>]
+let sparklineChart (documentElementId : string, options : obj) : unit = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
