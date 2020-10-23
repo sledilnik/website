@@ -33,7 +33,7 @@ type Series =
 
 module Series =
     let all =
-        [ Deceased; Recovered; Active; InHospital; Icu; Critical; ]
+        [ Active; InHospital; Icu; Critical; Recovered; Deceased; ]
     let active =
         [ Active; InHospital; Icu; Critical; ]
     let inHospital =
@@ -74,32 +74,40 @@ let legendFormatter jsThis =
         match p?point?fmtTotal with
         | "null" -> ()
         | _ ->
+            match p?point?seriesId with
+            | "active" | "recovered" | "deceased"  -> fmtUnder <- ""
+            | _ -> fmtUnder <- fmtUnder + "↳ "
             fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
                 p?point?fmtTotal
-            match p?point?seriesId with
-            | "active" | "hospitalized" | "icu"  -> fmtUnder <- fmtUnder + "↳ "
-            | _ -> ()
-
     fmtStr
 
 let renderChartOptions (state : State) dispatch =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
 
-    let subtract a b = b - a
+    let subtract (a : int option) (b : int option) =
+        match a, b with
+        | Some aa, Some bb -> Some (bb - aa)
+        | Some aa, None -> -aa |> Some
+        | None, Some _ -> b
+        | _ -> None
+    let negative (a : int option) =
+        match a with
+        | Some aa -> -aa |> Some
+        | None -> None
 
     let renderSeries series =
 
         let getPoint : (StatsDataPoint -> int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate
-            | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
-            | Active        -> fun dp -> dp.Cases.Active.Value |> subtract dp.StatePerTreatment.InHospital.Value |> Some
-            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital.Value |> subtract dp.StatePerTreatment.InICU.Value |> Some
-            | Icu           -> fun dp -> dp.StatePerTreatment.InICU.Value |> subtract dp.StatePerTreatment.Critical.Value |> Some
+            | Recovered     -> fun dp -> negative dp.Cases.RecoveredToDate
+            | Deceased      -> fun dp -> negative dp.StatePerTreatment.DeceasedToDate
+            | Active        -> fun dp -> dp.Cases.Active |> subtract dp.StatePerTreatment.InHospital
+            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital |> subtract dp.StatePerTreatment.InICU
+            | Icu           -> fun dp -> dp.StatePerTreatment.InICU |> subtract dp.StatePerTreatment.Critical
             | Critical      -> fun dp -> dp.StatePerTreatment.Critical
 
         let getPointTotal : (StatsDataPoint -> int option) =
