@@ -654,7 +654,9 @@
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
-            "titleMenu": "Slovenija - stanje",
+            "titleMenu_SVN": "Slovenija - stanje",
+            "titleMenu_MKD": "Makedonija - stanje",
+            "titleMenu_MNE": "Črna gora - stanje",
             "title_SVN": "Stanje COVID-19 v Sloveniji",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",

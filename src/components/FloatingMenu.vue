@@ -14,14 +14,14 @@
       <ul v-scroll-lock="active">
         <li
           v-for="item in list"
-          :key="item[Object.keys(item)]"
+          :key="item.link"
           class="float-item"
           @click="hideMenu"
         >
           <a
-            :href="'#' + Object.keys(item)"
-            v-scroll-to="{ el: '#' + Object.keys(item), offset: -115 }"
-            >{{ item[Object.keys(item)] }}</a
+            :href="'#' + item.link"
+            v-scroll-to="{ el: '#' + item.link, offset: -115 }"
+            >{{ menuTitle(item.link) }}</a
           >
         </li>
       </ul>
@@ -39,6 +39,29 @@ export default {
   data() {
     return {
       active: false,
+      charts: {
+        'metrics-comparison-chart': this.$t('charts.metricsComparison.titleMenu_SVN'),
+        'spread-chart': this.$t('charts.spread.titleMenu'),
+        'daily-comparison-chart': this.$t('charts.dailyComparison.titleMenu'),
+        'patients-chart': this.$t('charts.patients.titleMenu'),
+        'map-chart': this.$t('charts.map.titleMenu'),
+        'municipalities-chart': this.$t('charts.municipalities.titleMenu'),
+        'europe-chart': this.$t('charts.europe.titleMenu'),
+        'age-groups-trends-chart': this.$t('charts.ageGroupsTimeline.titleMenu'),
+        'tests-chart': this.$t('charts.tests.titleMenu'),
+        'sources-chart': this.$t('charts.sources.titleMenu'),
+        'hcenters-chart': this.$t('charts.hCenters.titleMenu'),
+        'infections-chart': this.$t('charts.infections.titleMenu'),
+        'cases-chart': this.$t('charts.cases.titleMenu'),
+        'age-groups-chart': this.$t('charts.ageGroups.titleMenu'),
+        'rmap-chart': this.$t('charts.rmap.titleMenu'),
+        'regions-chart': this.$t('charts.regions.titleMenu'),
+        'regions-chart-100k': this.$t('charts.regions100k.titleMenu'),
+        'world-chart': this.$t('charts.world.titleMenu'),
+        'countries-active-chart': this.$t('charts.countriesActiveCasesPer1M.titleMenu'),
+        'countries-cases-chart': this.$t('charts.countriesNewCasesPer1M.titleMenu'),
+        'countries-deaths-chart': this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
+      },
     }
   },
   mounted() {
@@ -49,7 +72,7 @@ export default {
     })
   },
   methods: {
-    shortTitle(title) {
+    menuTitle(title) {
       return this.charts[title]
     },
     toggleMenu() {

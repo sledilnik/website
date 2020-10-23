@@ -148,7 +148,8 @@ export default {
       const allCharts = this.$el.querySelectorAll('.visualization-chart h2 a')
       allCharts.forEach((el) => {
         let obj = new Object
-        obj[el.getAttribute('href').substring(1)] = el.innerHTML
+        obj.title = el.innerHTML
+        obj.link = el.getAttribute('href').substring(1)
         this.charts.push(obj)
       })
     },
