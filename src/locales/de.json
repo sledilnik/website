@@ -350,7 +350,7 @@
             "confirmedCases": "Bestätigte Fälle",
             "deceasedPerConfirmedCases": "Todesfälle pro bestätigte Fälle",
             "male": "Männer",
-            "relative": "Relativ",
+            "populationShare": "Anteil der Bevölkerung",
             "absolute": "Absolut",
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
             "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung"

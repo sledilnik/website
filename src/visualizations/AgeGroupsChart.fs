@@ -276,11 +276,10 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.chartText "common" "view")
             renderScaleTypeSelector
                 Absolute activeScaleType (chartText "absolute")
             renderScaleTypeSelector
-                Relative activeScaleType (chartText "relative")
+                Relative activeScaleType (chartText "populationShare")
         ]
     ]
 
@@ -300,8 +299,8 @@ let renderChartCategorySelector
             match chartModeToRender with
             | AbsoluteInfections        -> chartText "confirmedCases"
             | AbsoluteDeaths            -> chartText "deceased"
-            | InfectionsPerPopulation   -> chartText "confirmedCasesPerPopulation"
-            | DeathsPerPopulation       -> chartText "deceasedPerPopulation"
+            | InfectionsPerPopulation   -> chartText "confirmedCases"
+            | DeathsPerPopulation       -> chartText "deceased"
             | DeathsPerInfections       -> chartText "deceasedPerConfirmedCases"
             )
     ]

@@ -481,8 +481,9 @@ Pogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogrožen
 <details>
   <summary id=age-groups-chart>Kaj kaže graf "Po starostnih skupinah"?</summary>
 
-[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjenih primerov in smrti zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Relativno* prikazovanje za boljši vpogled, kakšna je umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjenih primerov* se bo prikazal delež potrjenih primerov prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. 
+[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjenih primerov in smrti zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Delež prebivalstva* za prikazovanje in boljši vpogled, kakšna je okuženost in umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije. 
 <!---
+V relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjenih primerov* se bo prikazal delež potrjenih primerov prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih. 
 Z izbiro *Umrli glede na št. primerov* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjenih primerov.
 -->
 
