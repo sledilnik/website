@@ -896,7 +896,7 @@
         },
         "ageGroups": {
             "title": "Po starostnih skupinah",
-            "titleMenu": "Starost - spol",
+            "titleMenu": "Starost, spol",
             "absolute": "Absolutno",
             "relative": "Relativno",
             "male": "Moški",

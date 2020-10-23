@@ -214,6 +214,9 @@
             "title_SVN": "COVID-19 Situation in Slovenia",
             "title_MKD": "COVID-19 Situation in N. Macedonia",
             "title_MNE": "COVID-19 Situation in Montenegro",
+            "titleMenu_SVN": "Slovenia - situation",
+            "titleMenu_MKD": "N. Macedonia - situation",
+            "titleMenu_MNE": "Montenegro - situation",
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
@@ -235,6 +238,7 @@
         },
         "dailyComparison": {
             "title": "Comparison by Day of Week",
+            "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
             "tests": "Tests Performed",
@@ -242,6 +246,7 @@
         },
         "cases": {
             "title": "Confirmed Cases",
+            "titleMenu": "Cases",
             "active": "Active",
             "hospitalized": "Hospitalized",
             "icu": "In ICU",
@@ -251,6 +256,7 @@
         },
         "patients": {
             "title": "Hospitalizations",
+            "titleMenu": "Hospitalizations",
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
@@ -264,6 +270,7 @@
         },
         "ratios": {
             "title": "Share of Serious Cases",
+            "titleMenu": "Serious Cases",
             "seriousCases": "Serious Cases",
             "hospitalizations": "Hospitalizations",
             "mortality": "Mortality",
@@ -281,6 +288,7 @@
         },
         "hCenters": {
             "title": "Healthcare Center Treatment",
+            "titleMenu": "HC - treatment",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
@@ -291,6 +299,7 @@
         },
         "tests": {
             "title": "Testing",
+            "titleMenu": "Testing",
             "allTesting": "All",
             "regularTesting": "Regular",
             "nationalStudyTesting": "Study",
@@ -300,6 +309,7 @@
         },
         "infections": {
             "title": "Structure of Confirmed Cases",
+            "titleMenu": "Cases - structure",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
@@ -311,6 +321,7 @@
         },
         "spread": {
             "title": "Growth of Confirmed Cases",
+            "titleMenu": "Growth",
             "hospitalized": "hospitalized",
             "inFourWeeks": "In four weeks",
             "inThreeWeeks": "In three weeks",
@@ -338,12 +349,14 @@
         },
         "regions": {
             "title": "Cases by Region",
+            "titleMenu": "Region - cases",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "deceased": "Deaths"
         },
         "regions100k": {
             "title": "Cases by Region (per 100,000 people)",
+            "titleMenu": "Region - comparison",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "deceased": "Deaths",
@@ -351,6 +364,7 @@
         },
         "map": {
             "title": "Municipality Map",
+            "titleMenu": "Municipality - map",
             "mortalityOfConfirmedCases": "Mortality of Confirmed Cases",
             "yesterday": "Yesterday",
             "all": "All",
@@ -366,10 +380,12 @@
             "per100k": "per 100k"
         },
         "rmap": {
-            "title": "Region Map"
+            "title": "Region Map",
+            "titleMenu": "Region - map"
         },
         "europe": {
             "title": "COVID-19 Situation in Europe",
+            "titleMenu": "Europe - situation",
             "twoWeekIncidence": "14 days incidence per 100,000 people",
             "restrictions": "Restrictions and imported cases",
             "newCases": "New cases",
@@ -383,10 +399,12 @@
             "noData": "No data"
         },
         "world": {
-            "title": "COVID-19 Situation in the world"
+            "title": "COVID-19 Situation in the world",
+            "titleMenu": "World - situation"
         },
         "municipalities": {
             "title": "Cases by Municipalities",
+            "titleMenu": "Municipalities - cases",
             "viewLast": "Last",
             "viewDoublingTime": "Doubling time",
             "viewTotal": "All",
@@ -406,6 +424,7 @@
         },
         "ageGroups": {
             "title": "Age Groups",
+            "titleMenu": "Age, Gender",
             "male": "Male",
             "female": "Female",
             "absolute": "Absolute",
@@ -424,6 +443,7 @@
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
+            "titleMenu": "Age - share",
             "newCases": "New cases",
             "newCasesRelative": "New cases (relative)",
             "activeCases": "Active cases",
@@ -431,22 +451,26 @@
         },
         "countriesActiveCasesPer1M": {
             "title": "Countries: Active Cases Per 100,000 People",
+            "titleMenu": "Countries - Active Cases",
             "yAxisTitle": "Active cases per 100,000 people",
             "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
             "title": "Countries: New Daily Cases Per 100,000 People",
+            "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
             "legendTitle": "New daily cases per 100,000 people"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 100,000 People",
+            "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
             "legendTitle": "Total deaths per 100,000 people"
         },
         "countriesDeathsPerCases": {
-            "title": "Countries: Total Deaths Per cases",
+            "title": "Countries: Total Deaths per Cases",
+            "titleMenu": "Countries - Deaths per Cases",
             "yAxisTitle": "Total deaths per cases",
             "legendTitle": "Total deaths per cases",
             "daysFromOneDeathPerMillion": "Nr. days since first died per 1 million people",
@@ -478,7 +502,8 @@
             "projection14": "Projection, 14-day doubling",
             "projection7": "Projection, 7-day doubling",
             "projection": "Projection",
-            "title": "Hospital capacities"
+            "title": "Hospital Capacity",
+            "titleMenu": "Capacity"
         },
         "ostanizdrav": {
             "title": "The #OstaniZdrav Exposure Notification App",
@@ -531,6 +556,7 @@
         },
         "sources": {
             "title": "Sources of Infection and Quarantine",
+            "titleMenu": "Sources of Infection",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
