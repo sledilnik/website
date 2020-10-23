@@ -276,7 +276,6 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.chartText "common" "view")
             renderScaleTypeSelector
                 Absolute activeScaleType (chartText "absolute")
             renderScaleTypeSelector
