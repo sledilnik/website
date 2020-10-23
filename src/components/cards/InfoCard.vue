@@ -193,7 +193,7 @@ export default {
         }
         if (incidence >= 170) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
-            'infocard.package2'
+            'infocard.package3'
           )}</strong>`
         }
       }
