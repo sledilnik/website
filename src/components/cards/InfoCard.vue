@@ -383,7 +383,7 @@ export default {
         if (incidence >= 80 && incidence < 120) return 2
         if (incidence >= 120 && incidence < 140) return 3
         if (incidence >= 140 && incidence < 170) return 1
-        if (incidence >= 170) return 2
+        if (incidence >= 170) return 3
       }
       if (this.field === 'statePerTreatment.inHospital') {
         if (value >= 60 && value < 100) return 1
