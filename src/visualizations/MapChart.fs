@@ -248,20 +248,17 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, activeCasesValue, activeCasesMaxValue =
+            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, newCases, newCasesMax =
                 match areaData.Cases with
                 | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null, 0
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
-                    let activeCasesValue = 
+                    let newCases = 
                         confirmedCasesValue 
-                        |> Array.mapi (fun i cc -> 
-                            if i >= 14 
-                            then cc - confirmedCasesValue.[i-14]
-                            else cc) 
+                        |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc) 
                         |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
                         |> Seq.toArray
-                    let activeCasesMaxValue = activeCasesValue |> Seq.max
+                    let newCasesMax = newCases |> Seq.max
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
@@ -328,7 +325,7 @@ let seriesData (state : State) =
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
 
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, activeCasesValue, activeCasesMaxValue
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, newCases, newCasesMax
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -340,8 +337,8 @@ let seriesData (state : State) =
                 population = population
                 dlabel = dlabel
                 dataLabels = {| enabled = true; format = "{point.dlabel}" |}
-                activeCasesValue = activeCasesValue
-                activeCasesMaxValue = activeCasesMaxValue
+                newCases = newCases
+                newCasesMax = newCasesMax
             |}
     } |> Seq.toArray
 
@@ -382,8 +379,8 @@ let renderMap (state : State) =
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
             let weeklyIncrease = points?weeklyIncrease
-            let activeCasesValue = points?activeCasesValue
-            let activeCasesMaxValue = points?activeCasesMaxValue
+            let newCases = points?newCases
+            let newCasesMax = points?newCasesMax
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
@@ -393,12 +390,12 @@ let renderMap (state : State) =
 
             s.Append "<p><div class='bars'>" |> ignore
 
-            match activeCasesValue with
+            match newCases with
                 | null -> null
                 | _ ->
-                    activeCasesValue
+                    newCases
                     |> Array.iter (fun area ->
-                        let barHeight = Math.Ceiling(float area * float barMaxHeight / activeCasesMaxValue)
+                        let barHeight = Math.Ceiling(float area * float barMaxHeight / newCasesMax)
                         let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
                         s.Append barHtml |> ignore)
                     s.Append "</div>" |> ignore
