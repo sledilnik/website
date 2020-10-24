@@ -2,7 +2,7 @@ const glob = require('glob');
 const path = require('path');
 const fs = require('fs');
 
-const contentLanguages = ['de', 'en', 'hr', 'sl', 'it']
+const contentLanguages = ['en', 'sl']
 const localesDir = path.join('src', 'locales')
 
 function extractFile(name) {
