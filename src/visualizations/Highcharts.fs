@@ -82,11 +82,6 @@ let shadedWeekendPlotBands =
 let showDoublingTimeFeatures =
     true
 
-// if set to true:
-// - SpreadChart will show exponential growth pages
-let showExpGrowthFeatures =
-    false
-
 let addContainmentMeasuresFlags
     (startDate: JsTimestamp)
     (endDate: JsTimestamp option) =

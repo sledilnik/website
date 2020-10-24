@@ -1,5 +1,8 @@
 # TODO
 
+- https://github.com/sledilnik/website/issues/606
+    
+
 ## New countries chart
 - deaths per cases (windowed, averaged)
 
