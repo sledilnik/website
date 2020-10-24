@@ -473,18 +473,18 @@ let mapData state =
             match state.ChartType with
             | TwoWeekIncidence ->
                 {| baseRec with
-                       value = incidence100k
+                       value = max (float incidence100k) 0.001
                        color = null
                        dataLabels = {| enabled = false |} |}
             | Restrictions ->
                 {| baseRec with
-                       value = cd.ImportedFrom
+                       value = float cd.ImportedFrom
                        color = cd.RestrictionColor
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
         | _ ->
             {| code = code
                country = ""
-               value = 0
+               value = 0.1
                color = null
                dataLabels = {| enabled = false |}
                incidence100k = 0
@@ -504,8 +504,8 @@ let renderMap state geoJson _ =
         let enabled = state.ChartType = TwoWeekIncidence
         {| enabled = enabled
            title = {| text = null |}
-           align = "left"
-           verticalAlign = "bottom"
+           align = if state.MapToDisplay = World then "left" else "right"
+           verticalAlign = if state.MapToDisplay = World then "bottom" else "top"
            layout = "vertical"
            floating = true
            borderWidth = 1
@@ -514,15 +514,39 @@ let renderMap state geoJson _ =
         |> pojo
 
     let colorAxis =
-        {| dataClassColor = "category"
-           dataClasses =
-               [| {| from = 0; color = "#ffffcc" |}
-                  {| from = 25; color = "#feb24c" |}
-                  {| from = 50; color = "#e31a1c" |}
-                  {| from = 100; color = "#bd0026" |}
-                  {| from = 200; color = "#800026" |}
-                  {| from = 400; color = "#930044" |} |] |}
-        |> pojo
+            {|
+                ``type`` = 
+                    match state.ChartType with
+                    | TwoWeekIncidence  -> "logarithmic"
+                    | Restrictions      -> "linear"  
+                tickInterval = 0.4
+                max = 7000 
+                min = 1  
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7") 
+                        (0.280,"#ffe792") 
+                        (0.360,"#ffdf6c") 
+                        (0.440,"#ffb74d") 
+                        (0.520,"#ff8d3c") 
+                        (0.600,"#f85d3a") 
+                        (0.680,"#ea1641") 
+                        (0.760,"#d0004e") 
+                        (0.840,"#ad005b") 
+                        (0.920,"#800066") 
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels = 
+                    {| 
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+             
 
     let tooltipFormatter jsThis =
         let points = jsThis?point

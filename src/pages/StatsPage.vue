@@ -15,16 +15,12 @@
           good-trend="up"
           series-type="state"
         />
--->
-<!--  
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
           name="cases.confirmedToDate"
           series-type="state"
         />
--->
-<!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
@@ -76,15 +72,16 @@
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="T9ndfXNiDwo"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
+          <Youtube id="T9ndfXNiDwo"></Youtube>
         </b-col>
       </b-row>
     </b-container>
+    <FloatingMenu :list="charts" />
   </div>
 </template>
 
@@ -95,6 +92,7 @@ import OstaniZdravCard from 'components/cards/OstaniZdravCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
 import Youtube from 'components/Youtube'
+import FloatingMenu from 'components/FloatingMenu'
 import { Visualizations } from 'visualizations/App.fsproj'
 import { ApiEndpoint } from '@/store/index.js'
 
@@ -105,11 +103,13 @@ export default {
     OstaniZdravCard,
     TimeStamp,
     Notice,
-    Youtube
+    Youtube,
+    FloatingMenu,
   },
   data() {
     return {
       loaded: false,
+      charts: [],
     }
   },
   mounted() {
@@ -146,6 +146,20 @@ export default {
       // share button again, it won't open the dropdown because ShareButton.fs
       // component is not aware that the dropdown was closed within this method.
       // I think the right way to do this would be to listen for clicks within App.fs
+    },
+    getCharts() {
+      const allCharts = this.$el.querySelectorAll('.visualization-chart h2 a')
+      allCharts.forEach((el) => {
+        let obj = new Object
+        obj.title = el.innerHTML
+        obj.link = el.getAttribute('href').substring(1)
+        this.charts.push(obj)
+      })
+    },
+  },
+  watch: {
+    loaded: function() {
+      this.getCharts()
     },
   },
 }

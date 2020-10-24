@@ -356,7 +356,8 @@
             "population": "stanovništva",
             "absolute": "Apsolutno",
             "deceased": "Smrtni slučajevi",
-            "yesterday": "Jučer"
+            "yesterday": "Jučer",
+            "relativeIncrease": "Tjedni prirast"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
@@ -371,11 +372,11 @@
         "ageGroups": {
             "male": "Muškarci",
             "absolute": "Apsolutno",
+            "populationShare": "Udio stanovništva",
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
             "age": "Dob",
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
-            "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
             "deceasedPerPopulation": "Smrtni slučajevi po stanovništvu",
             "deceased": "Smrtni slučajevi",
@@ -440,29 +441,29 @@
             "show7DaysAverage": "Sedmodnevni prosjek"
         },
         "spread": {
-            "absoluteTitle": "Dnevni prirast potvrđenih slučajeva",
+            "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
             "absoluteLabel": "Potvrđeni slučajevi (dnevno)",
             "doublingRateLabel": "Broj dana, u kojem se broj zaraženih udvostručuje",
             "hospitalized": "hospitalizirani",
             "oneDay": "Jedan dan",
-            "relativeTitle": "Dnevni prirast zaraženih",
-            "doublingRate": "Eksponencijalan prirast u danima",
-            "doublingRateTitle": "Udio eksponencijalnog prirasta [u danima]",
+            "relativeTitle": "Dnevni porast zaraženih",
+            "doublingRate": "Eksponencijalan porast u danima",
+            "doublingRateTitle": "Udio eksponencijalnog porasta [u danima]",
             "inTwoWeeks": "U dva tjedna",
             "oneMonth": "Jedan mjesec",
             "averageSouthKorea": "Prosjek u Južnoj Koreji zadnjih dana",
             "inThreeWeeks": "U tri tjedna",
-            "title": "Prirast potvrđenih slučajeva",
+            "title": "Porast potvrđenih slučajeva",
             "inOneWeek": "U tjedan dana",
             "inFourWeeks": "U četiri tjedna",
             "confirmedCases": "potvrđeni slučajevi",
             "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7 dana, tada se može očekivati:",
             "timesAsMany": "-put toliko",
             "today": "Danas",
-            "relativeLabel": "Relativan prirast u postocima",
-            "absolute": "Apsolutan dnevni prirast",
-            "explainer": "Što znači eksponencijalan prirast",
-            "percentage": "Relativan dnevni prirast",
+            "relativeLabel": "Relativan porast u postocima",
+            "absolute": "Apsolutan dnevni porast",
+            "explainer": "Što znači eksponencijalan porast",
+            "percentage": "Relativan dnevni porast",
             "oneWeek": "Tjedan dana",
             "activeCases": "aktivni slučajevi"
         },
@@ -898,7 +899,7 @@
         },
         "11": {
             "description": "epidemija",
-            "title": "faza<br>10"
+            "title": "faza<br>11"
         }
     },
     "embedMaker": {
@@ -1041,7 +1042,8 @@
         "newChart": "🆕 📊 Novi dijagram:",
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
-        "newPage": "🆕 Nova stranica:"
+        "newPage": "🆕 Nova stranica:",
+        "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",

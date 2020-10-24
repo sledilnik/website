@@ -350,7 +350,7 @@
             "confirmedCases": "Bestätigte Fälle",
             "deceasedPerConfirmedCases": "Todesfälle pro bestätigte Fälle",
             "male": "Männer",
-            "relative": "Relativ",
+            "populationShare": "Anteil der Bevölkerung",
             "absolute": "Absolut",
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
             "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung"
@@ -458,7 +458,8 @@
             "last_x_days": "{{ count }} Tag",
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
-            "all": "Alle"
+            "all": "Alle",
+            "relativeIncrease": "Wöchentlicher Anstieg"
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
@@ -638,7 +639,8 @@
                 "title": "Anzahl gültiger Schlüssel pro Tag",
                 "date": "Datum"
             },
-            "title": "Die #OstaniZdrav Benachrichtigungs-App"
+            "title": "Die #OstaniZdrav Benachrichtigungs-App",
+            "footer": "Die Analyse ist das Ergebnis der Anpassung des deutschen Projekts [Corona Tracker Tracker](https://ctt.pfstr.de/) an das slowenische #OstaniZdrav. [Quellcode des Projekts](https://github.com/janpf/ctt) verwendet [Analysetools für Diagnoseschlüssel](https://github.com/mh-/diagnosis-keys)."
         },
         "sources": {
             "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
@@ -907,7 +909,8 @@
         "newChart": "🆕 📊 Neues Diagramm:",
         "news002": "Bestätigte Fälle nach Altersgruppen",
         "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "🆕 Neue Seite:"
+        "newPage": "🆕 Neue Seite:",
+        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
