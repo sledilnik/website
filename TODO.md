@@ -6,6 +6,9 @@
     - show previous week, current, next 7, 14 days
     
 
+- https://github.com/sledilnik/website/issues/606
+    
+
 ## New countries chart
 - deaths per cases (windowed, averaged)
 
