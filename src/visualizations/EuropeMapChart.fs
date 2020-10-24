@@ -127,7 +127,6 @@ let greenCountries =
         [
             ("AUS", "")
             ("NZL", "")
-            ("SRB", "")
             ("URY", "")
         ]
 
@@ -141,7 +140,7 @@ let redCountries =
             ("AGO", "")
             ("ARG", "")
             ("ARM", "")
-            ("AUT", "administrativne enote: Dunaj")
+            ("AUT", "vse razen administrativne enote Koroška (Kärnten)")
             ("AZE", "")
             ("BAH", "")
             ("BHR", "")
@@ -150,7 +149,7 @@ let redCountries =
             ("BLZ", "")
             ("BLR", "")
             ("BEN", "")
-            ("BGR", "administrativna enota: Blagoevgrad")
+            ("BGR", "administrativna enota: Blagoevgrad, Rasgrad, Sliven, Sofia (mesto Sofija), Targovishte")
             ("BOL", "")
             ("BIH", "")
             ("BRA", "")
@@ -167,30 +166,34 @@ let redCountries =
             ("ECU", "")
             ("GNQ", "")
             ("ERI", "")
-            ("EST", "administrativna enota: Ida-Viru")
+            ("EST", "administrativna enota: Jogeva")
             ("SWZ", "")
             ("ETH", "")
             ("PHL", "")
-            ("FRA", "vse administrativne enote razen Grand-Est; čezmorsko ozemlje: Francoska Gvajana, Guadeloupe, Sveti Martin, La Réunion")
+            ("FIN", "administrativna enota: Österbotten")
+            ("FRA", "vse administrativne enote celinske Francije, čezmorsko ozemlje: Francoska Gvajana, Guadeloupe, Sveti Martin, La Réunion, Martinique")
             ("GAB", "")
             ("GMB", "")
             ("GHA", "")
+            ("GEO", "")
             ("GUY", "")
             ("GTM", "")
             ("GIN", "")
             ("GNB", "")
             ("HTI", "")
             ("HND", "")
-            ("HRV", "administrativne enote: Brodsko-posavska, Dubrovniško-neretvanska, Liško-senjska, Požeško-slavonska, Splitsko-dalmatinska, Virovitiško-podravska")
+            ("HRV", "administrativne enote: Bjelovarsko-bilogorska, Dubrovniško-neretvanska, Karlovška, Krapinsko-zagorska, Liško-senjska, Medžimurska, Osiješko-baranjska, Požeško-slavonska, Sisaško-moslavška, Splitsko-dalmatinska, Varaždinska, Virovitiško-podravska, Vukovarsko-sremska, Zagreb (celotna županija, vključno z mestom Zagreb)")
             ("IND", "")
             ("IDN", "")
             ("IRQ", "")
             ("IRN", "")
-            ("IRL", "administrativna enota: Dublin, Cavan, Donegal, Leitrim, Monaghan, Sligo")
+            ("IRL", "")
             ("ISL", "")
+            ("ITA", "administrativne enote: Abruzzo, Valle d'Aosta, Campania, Emilia-Romagna, Friuli Venezia Giulia, Lazio, Liguria, Lombardia, Piedmont, Sardegna, Toscana, Umbria, Veneto, Provincia autonoma di Bolzano – Alto Adige")
             ("ISR", "")
             ("JAM", "")
             ("YEM", "")
+            ("JOR", "")
             ("ZAF", "")
             ("SSD", "")
             ("CMR", "")
@@ -209,33 +212,35 @@ let redCountries =
             ("LBN", "")
             ("LBR", "")
             ("LBY", "")
-            ("LTU", "administrativna enota: Šiaulių")
+            ("LIE", "")
+            ("LTU", "administrativna enota: Šiaulių, Kaunas")
             ("LUX", "")
             ("MDG", "")
-            ("HUN", "administrativne enote: Budimpešta, Csongrád-Csanád, Győr-Moson-Sopron, Pest, Vas")
+            ("HUN", "administrativne enote: Budimpešta, Baranya, Borsod-Abaúj-Zemplén, Csongrád-Csanád, Győr-Moson-Sopron, Pest, Hajdú-Bihar, Heves, Jász-Nagykun-Szolnok, Komárom-Esztergom, Nógrád, Pešta (Pest), Somogy, Szabolcs-Szatmár-Bereg, Vas, Veszprém, Zala")
             ("MWL", "")
             ("MDV", "")
             ("MLI", "")
+            ("MLT", "")
             ("MAR", "")
             ("MRT", "")
             ("MEX", "")
             ("MDA", "")
             ("MNG", "")
             ("MOZ", "")
-            ("NAM", "")
             ("NPL", "")
             ("NIG", "")
             ("NGA", "")
             ("NIC", "")
-            ("NLD", "vse administrativna enote razen Zeeland in Limburg; čezmorsko ozemlje: Aruba, Saint Maarten")
+            ("NLD", "")
             ("OMN", "")
             ("PAK", "")
             ("PAN", "")
             ("PNG", "")
             ("PRY", "")
             ("PER", "")
-            ("PRT", "administrativna enota: Lizbona")
-            ("ROU", "administrativne enote: Bacău, Bihor, Brăila, Brașov, Bukarešta, Caras Severin, Covasna, Neamt, Iasi, Ilfov, Prahova, Vâlcea, Vaslui")
+            ("POL", "")
+            ("PRT", "administrativna enota: Lizbona (Lisboa), Norte")
+            ("ROU", "")
             ("RUS", "")
             ("SLV", "")
             ("STP", "")
@@ -246,15 +251,18 @@ let redCountries =
             ("SLE", "")
             ("SYR", "")
             ("CIV", "")
+            ("SVK", "")
             ("SOM", "")
             ("CAF", "")
             ("SUR", "")
-            ("ESP", "")
-            ("CHE", "administrativne enote: Ženeva, Vaud")
+            ("ESP", "vse administrativne enote razen Kanarski otoki (Islas Canarias)")
+            ("SWE", "administrativne enote: Jämtland, Jönköping, Örebro, Östergötland, Stockholm, Uppsala")
+            ("CHE", "")
             ("TJK", "")
             ("TZA", "")
             ("TGO", "")
             ("TTO", "")
+            ("TUN", "")
             ("TUR", "")
             ("TKM", "")
             ("UKR", "")
@@ -264,8 +272,6 @@ let redCountries =
             ("ZMB", "")
             ("USA", "")
             ("ARE", "")
-            ("GBR", "administrativna enota: Severna Irska, Severna Anglija, Severozahodna Anglija, Wales, Yorkshire in Humberside, Škotska; čezmorsko ozemlje Gibraltar")
-            ("CPV", "")
             ("ZWE", "")
         ]
 
@@ -473,18 +479,18 @@ let mapData state =
             match state.ChartType with
             | TwoWeekIncidence ->
                 {| baseRec with
-                       value = incidence100k
+                       value = max (float incidence100k) 0.001
                        color = null
                        dataLabels = {| enabled = false |} |}
             | Restrictions ->
                 {| baseRec with
-                       value = cd.ImportedFrom
+                       value = float cd.ImportedFrom
                        color = cd.RestrictionColor
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
         | _ ->
             {| code = code
                country = ""
-               value = 0
+               value = 0.1
                color = null
                dataLabels = {| enabled = false |}
                incidence100k = 0
@@ -504,8 +510,8 @@ let renderMap state geoJson _ =
         let enabled = state.ChartType = TwoWeekIncidence
         {| enabled = enabled
            title = {| text = null |}
-           align = "left"
-           verticalAlign = "bottom"
+           align = if state.MapToDisplay = World then "left" else "right"
+           verticalAlign = if state.MapToDisplay = World then "bottom" else "top"
            layout = "vertical"
            floating = true
            borderWidth = 1
@@ -514,15 +520,39 @@ let renderMap state geoJson _ =
         |> pojo
 
     let colorAxis =
-        {| dataClassColor = "category"
-           dataClasses =
-               [| {| from = 0; color = "#ffffcc" |}
-                  {| from = 25; color = "#feb24c" |}
-                  {| from = 50; color = "#e31a1c" |}
-                  {| from = 100; color = "#bd0026" |}
-                  {| from = 200; color = "#800026" |}
-                  {| from = 400; color = "#930044" |} |] |}
-        |> pojo
+            {|
+                ``type`` = 
+                    match state.ChartType with
+                    | TwoWeekIncidence  -> "logarithmic"
+                    | Restrictions      -> "linear"  
+                tickInterval = 0.4
+                max = 7000 
+                min = 1  
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7") 
+                        (0.280,"#ffe792") 
+                        (0.360,"#ffdf6c") 
+                        (0.440,"#ffb74d") 
+                        (0.520,"#ff8d3c") 
+                        (0.600,"#f85d3a") 
+                        (0.680,"#ea1641") 
+                        (0.760,"#d0004e") 
+                        (0.840,"#ad005b") 
+                        (0.920,"#800066") 
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels = 
+                    {| 
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+             
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
