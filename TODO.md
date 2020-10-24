@@ -1,8 +1,8 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/606
-    - how is doubling calculated?
-        - see municipalities
+    - calculate doubling time of active cases
+    - use this value to show the projection
     - show previous week, current, next 7, 14 days
     
 

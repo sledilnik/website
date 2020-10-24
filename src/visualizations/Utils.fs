@@ -66,22 +66,25 @@ let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| 
         if value < 0.0 then None
         else Some value
 
-let findDoublingTime (values : {| Date : DateTime ; Value : int option |} list) =
+let findDoublingTime (values: (DateTime * int option) list) =
     let reversedValues =
         values
-        |> List.choose (fun dp ->
-            match dp.Value with
+        |> List.choose (fun (date, value) ->
+            match value with
             | None -> None
-            | Some value -> Some {| Date = dp.Date ; Value = value |}
+            | Some value -> Some (date, value)
         )
         |> List.rev
 
     match reversedValues with
-    | head :: tail ->
-        match tail |> List.tryFind (fun dp ->
-            float head.Value / 2. >= float dp.Value) with
+    | (headDate, headValue) :: tail ->
+        let halfValue = float headValue / 2.
+
+        match tail |> List.tryFind (fun (_, value) ->
+            float value <= halfValue) with
         | None -> None
-        | Some halfValue -> (head.Date - halfValue.Date).TotalDays |> Some
+        | Some (halfValuePointDate, _) ->
+            (headDate - halfValuePointDate).TotalDays |> Some
     | _ -> None
 
 let classes (classTuples: seq<bool * string>) =

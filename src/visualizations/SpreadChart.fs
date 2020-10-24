@@ -3,6 +3,7 @@ module SpreadChart
 
 open System
 open Elmish
+open Fable.Core
 open Feliz
 open Feliz.ElmishComponents
 open Browser
@@ -213,7 +214,21 @@ let renderChartOptions scaleType state dispatch =
     |}
 
 let renderExplainer (data: StatsData) =
-    let curPositive, curHospitalized =
+    // calculate the current doubling time
+
+    // get the array of active cases by days
+    let activeByDays =
+        data
+        |> List.map(fun dp -> (dp.Date, dp.Cases.Active))
+
+    let currentDoublingTime = activeByDays |> Utils.findDoublingTime
+
+    let multiplicationForDaysFromNow daysFromNow =
+        match currentDoublingTime with
+        | Some doublingTime -> Math.Pow(2., daysFromNow / doublingTime) |> Some
+        | None -> None
+
+    let curActive, curHospitalized =
         data
         |> List.rev
         |> List.choose (fun dp ->
@@ -224,32 +239,57 @@ let renderExplainer (data: StatsData) =
         |> List.head
         |> fun (p, h) -> (p,h)
 
-    let box (title: string) doublings positive hospitalized =
-        Html.div [
-            prop.className "box"
-            prop.children [
-                Html.h3 title
-                Html.p [
-                    match doublings with
-                    | 0 -> ""
-                    | _ ->
-                        let times = 1<<<doublings
-                        let timesAsManyText = chartText "timesAsMany"
-                        sprintf "%d%s" times timesAsManyText
-                    |> Html.span
+    let box (title: string) weekFromNow =
+        let multiplication =
+            weekFromNow * 7
+            |> float
+            |> multiplicationForDaysFromNow
+
+        match multiplication with
+        | Some multiplication ->
+            Html.div [
+                prop.className "box"
+                prop.children [
+                    Html.h3 title
+                    Html.p [
+                        match weekFromNow with
+                        | 0 -> ""
+                        | _ ->
+                            let timesAsMany = multiplication - 1.
+                            let timesAsManyRounded =
+                                timesAsMany
+                                |> Utils.formatTo1DecimalWithTrailingZero
+                            let timesAsManyText = chartText "timesAsMany"
+                            sprintf "%s%s" timesAsManyRounded timesAsManyText
+                        |> Html.span
+                    ]
+
+                    let activeCasesProjection =
+                        (float curActive * multiplication)
+                        |> Math.Round
+                        |> int
+
+                    let hospitalizedCasesProjection =
+                        (float curHospitalized * multiplication)
+                        |> Math.Round
+                        |> int
+
+                    Html.div [ Html.h4 (string activeCasesProjection)
+                               Html.p (chartText "activeCases") ]
+                    Html.div [ Html.h4 (string hospitalizedCasesProjection)
+                               Html.p (chartText "hospitalized") ]
                 ]
-                Html.div [ Html.h4 (string positive)
-                           Html.p (chartText "activeCases") ]
-                Html.div [ Html.h4 (string hospitalized)
-                           Html.p (chartText "hospitalized") ]
             ]
-        ]
+        | None -> Html.div []
 
     Html.div [
         prop.className "exponential-explainer"
         prop.style [ (Interop.mkStyle "width" "100%"); style.position.absolute ]
         prop.children [
-            yield Html.h1 (chartText "ifExpGrowth")
+            let explanationTextFormat = chartText "ifExpGrowth"
+            let explanationText =
+                String.Format(explanationTextFormat, currentDoublingTime)
+            yield Html.h1 explanationText
             yield Html.div [
                 prop.className "container"
                 prop.children [
@@ -259,11 +299,8 @@ let renderExplainer (data: StatsData) =
                           chartText "inTwoWeeks", 2
                           chartText "inThreeWeeks", 3
                           chartText "inFourWeeks", 4 ]
-                        |> List.map (fun (title, doublings) ->
-                            box title doublings
-                                (curPositive <<< doublings)
-                                (curHospitalized <<< doublings)
-                        )
+                        |> List.map (fun (title, weekFromNow) ->
+                            box title weekFromNow)
                 ]
             ]
         ]

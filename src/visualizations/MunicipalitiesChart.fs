@@ -136,7 +136,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 if activeCases.IsSome && activeCases.Value >= 5
                 then
                     dp
-                    |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
+                    |> Seq.map (fun dp -> (dp.Date,dp.ActiveCases))
                     |> Seq.toList
                     |> Utils.findDoublingTime
                 else None
