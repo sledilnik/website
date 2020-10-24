@@ -45,11 +45,15 @@ type CountriesMap = Map<string, CountryData>
 type ChartType =
     | TwoWeekIncidence
     | Restrictions
+    | OneWeekIncidence
+    | WeeklyIncrease
 
     override this.ToString() =
         match this with
         | TwoWeekIncidence -> chartText "twoWeekIncidence"
         | Restrictions -> chartText "restrictions"
+        | OneWeekIncidence -> chartText "oneWeekIncidence"
+        | WeeklyIncrease -> chartText "weeklyIncrease"
 
 type State =
     { MapToDisplay : MapToDisplay
@@ -487,6 +491,16 @@ let mapData state =
                        value = float cd.ImportedFrom
                        color = cd.RestrictionColor
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
+            | OneWeekIncidence -> 
+                {| baseRec with
+                       value = max (float incidence100k) 0.001
+                       color = null
+                       dataLabels = {| enabled = false |} |}
+            | WeeklyIncrease -> 
+                {| baseRec with
+                       value = max (float incidence100k) 0.001
+                       color = null
+                       dataLabels = {| enabled = false |} |}
         | _ ->
             {| code = code
                country = ""
@@ -524,7 +538,9 @@ let renderMap state geoJson _ =
                 ``type`` = 
                     match state.ChartType with
                     | TwoWeekIncidence  -> "logarithmic"
-                    | Restrictions      -> "linear"  
+                    | Restrictions      -> "linear" // I don't know why but everything breaks if this isn't linear 
+                    | OneWeekIncidence  -> "logarithmic"
+                    | WeeklyIncrease    -> "logarithmic"
                 tickInterval = 0.4
                 max = 7000 
                 min = 1  
@@ -651,7 +667,11 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
         [ prop.className "chart-display-property-selector"
           prop.children
               [ renderChartSelector Restrictions
-                renderChartSelector TwoWeekIncidence ] ]
+                renderChartSelector TwoWeekIncidence 
+                renderChartSelector OneWeekIncidence
+                renderChartSelector WeeklyIncrease
+              ] 
+        ]
 
 
 let render (state: State) dispatch =
