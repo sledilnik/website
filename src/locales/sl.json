@@ -780,7 +780,7 @@
             "oneDay": "En dan",
             "oneWeek": "En teden",
             "oneMonth": "En mesec",
-            "ifExpGrowth": "Če bi primeri naraščali eksponentno s podvajanjem na 7 dni, potem bi lahko pričakovali:",
+            "ifExpGrowth": "Če bi se okužba širila eksponentno s takšnim podvajanjem, kot je sedaj (na {0} dni), potem bi lahko pričakovali:",
             "today": "Danes",
             "inOneWeek": "Čez en teden",
             "inTwoWeeks": "Čez dva tedna",

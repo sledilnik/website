@@ -1,5 +1,14 @@
 # TODO
 
+- https://github.com/sledilnik/website/issues/606
+    - calculate doubling time of active cases
+    - use this value to show the projection
+    - show previous week, current, next 7, 14 days
+    
+
+- https://github.com/sledilnik/website/issues/606
+    
+
 ## New countries chart
 - deaths per cases (windowed, averaged)
 
