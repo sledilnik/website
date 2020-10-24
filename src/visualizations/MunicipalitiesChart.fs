@@ -11,7 +11,7 @@ open Feliz.ElmishComponents
 
 open Types
 
-let barMaxHeight = 55
+let barMaxHeight = 65
 let showMaxBars = 30
 let collapsedMunicipalityCount = 16
 
@@ -133,8 +133,8 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
                 | None, Some last -> Some last
                 | _ -> None
             let doublingTime =
-                if activeCases.IsSome && activeCases.Value >= 5 
-                then  
+                if activeCases.IsSome && activeCases.Value >= 5
+                then
                     dp
                     |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
                     |> Seq.toList

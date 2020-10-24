@@ -103,7 +103,7 @@ export default {
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
         case 'SVN': {
-          return 20.89310
+          return 20.95861
           break
         }
         case 'MKD': {
@@ -193,7 +193,7 @@ export default {
         }
         if (incidence >= 170) {
           return `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
-            'infocard.package2'
+            'infocard.package3'
           )}</strong>`
         }
       }
@@ -267,9 +267,9 @@ export default {
         }
         if (value >= 50 && value < 60) {
           string1 = `<strong>${this.$t('infocard.redPhase')}, ${this.$t(
-            'infocard.package1'
+            'infocard.package2'
           )}</strong>`
-          phaseNextNumber = 2
+          phaseNextNumber = 3
           phaseNextPackage = this.$t('infocard.redPhaseGenitive')
           phaseNextCriteria = 60
         }
@@ -383,7 +383,7 @@ export default {
         if (incidence >= 80 && incidence < 120) return 2
         if (incidence >= 120 && incidence < 140) return 3
         if (incidence >= 140 && incidence < 170) return 1
-        if (incidence >= 170) return 2
+        if (incidence >= 170) return 3
       }
       if (this.field === 'statePerTreatment.inHospital') {
         if (value >= 60 && value < 100) return 1
@@ -397,7 +397,7 @@ export default {
         if (value >= 15 && value < 20) return 1
         if (value >= 20 && value < 30) return 2
         if (value >= 30 && value < 50) return 3
-        if (value >= 50 && value < 60) return 1
+        if (value >= 50 && value < 60) return 2
         if (value >= 60) return 3
       }
       return 0
@@ -498,7 +498,11 @@ export default {
   }
 
   .card-diff-item:not(:last-child) {
-    margin-right: 8px;
+    margin-right: 4px;
+    
+    @media only screen and (min-width: 992px) {
+      margin-right: 8px;
+    }
   }
 }
 

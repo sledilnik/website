@@ -339,13 +339,15 @@
             "to": " – ",
             "from": " ",
             "sortBy": "Razvrstaj prema:",
-            "weekYearDateFormat": "Tjedan %W od %Y"
+            "weekYearDateFormat": "%W. tjedan %Y.",
+            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}"
         },
         "map": {
             "populationC": "Stanovništvo",
             "mortalityOfConfirmedCases": "Smrtnost u potvrđenim slučajevima",
             "title": "Karta općina",
             "confirmedCases": "Potvrđeni slučajevi",
+            "per100k": "po 100 tisuća",
             "last_x_days_0": "{{ count }} dan",
             "last_x_days_1": "{{ count }} dana",
             "last_x_days_2": "{{ count }} dana",
@@ -354,26 +356,27 @@
             "population": "stanovništva",
             "absolute": "Apsolutno",
             "deceased": "Smrtni slučajevi",
-            "yesterday": "Jučer"
+            "yesterday": "Jučer",
+            "relativeIncrease": "Tjedni prirast"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Novi dnevni slučajevi na milijun stanovnika",
-            "legendTitle": "Novi dnevni slučajevi na milijun stanovnika"
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na milijun stanovnika",
-            "yAxisTitle": "Ukupno smrtnih slučajeva na milijun stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na milijun stanovnika"
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika"
         },
         "ageGroups": {
             "male": "Muškarci",
             "absolute": "Apsolutno",
+            "populationShare": "Udio stanovništva",
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
             "age": "Dob",
             "deceasedPerConfirmedCases": "Smrtni slučajevi po potvrđenim slučajevima",
-            "relative": "Relativno",
             "confirmedCasesPerPopulation": "Potvrđeni slučajevi po stanovništvu",
             "deceasedPerPopulation": "Smrtni slučajevi po stanovništvu",
             "deceased": "Smrtni slučajevi",
@@ -382,11 +385,12 @@
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi",
-            "disclaimer": "Napomena: Za razliku od drugih podataka koji se redovito objavljuju za različite kategorije, službeni izvori dobivaju demografske podatke s vremenskim zakašnjenjem (dob, općina, …), stoga se oni dobivaju s jednodnevnim kašnjenjem. To je također razlog što u prikazu po dobnim skupinama može doći do nekih odstupanja od podataka u drugim prikazima, kao što su niže vrijednosti broja potvrđenih slučajeva i smrti."
+            "disclaimer": "Napomena: podatke o smrtnim slučajevima primamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o preminulima prijavljuju institucije (zdravstvo, starački domovi) NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva."
         },
         "ageGroupsTimeline": {
             "title": "Potvrđeni slučajevi po dobnim skupinama",
             "newCases": "Novi slučajevi",
+            "newCasesRelative": "Novi slučajevi (relativno)",
             "activeCases": "Aktivni slučajevi",
             "activeCasesRelative": "Aktivni slučajevi (relativno)"
         },
@@ -437,29 +441,29 @@
             "show7DaysAverage": "Sedmodnevni prosjek"
         },
         "spread": {
-            "absoluteTitle": "Dnevni prirast potvrđenih slučajeva",
+            "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
             "absoluteLabel": "Potvrđeni slučajevi (dnevno)",
             "doublingRateLabel": "Broj dana, u kojem se broj zaraženih udvostručuje",
             "hospitalized": "hospitalizirani",
             "oneDay": "Jedan dan",
-            "relativeTitle": "Dnevni prirast zaraženih",
-            "doublingRate": "Eksponencijalan prirast u danima",
-            "doublingRateTitle": "Udio eksponencijalnog prirasta [u danima]",
+            "relativeTitle": "Dnevni porast zaraženih",
+            "doublingRate": "Eksponencijalan porast u danima",
+            "doublingRateTitle": "Udio eksponencijalnog porasta [u danima]",
             "inTwoWeeks": "U dva tjedna",
             "oneMonth": "Jedan mjesec",
             "averageSouthKorea": "Prosjek u Južnoj Koreji zadnjih dana",
             "inThreeWeeks": "U tri tjedna",
-            "title": "Prirast potvrđenih slučajeva",
+            "title": "Porast potvrđenih slučajeva",
             "inOneWeek": "U tjedan dana",
             "inFourWeeks": "U četiri tjedna",
             "confirmedCases": "potvrđeni slučajevi",
             "ifExpGrowth": "Ako bi se infekcija eksponencijalno širila udvostručenjem na 7 dana, tada se može očekivati:",
             "timesAsMany": "-put toliko",
             "today": "Danas",
-            "relativeLabel": "Relativan prirast u postocima",
-            "absolute": "Apsolutan dnevni prirast",
-            "explainer": "Što znači eksponencijalan prirast",
-            "percentage": "Relativan dnevni prirast",
+            "relativeLabel": "Relativan porast u postocima",
+            "absolute": "Apsolutan dnevni porast",
+            "explainer": "Što znači eksponencijalan porast",
+            "percentage": "Relativan dnevni porast",
             "oneWeek": "Tjedan dana",
             "activeCases": "aktivni slučajevi"
         },
@@ -504,7 +508,7 @@
             "otherPersons": "Ostale osobe",
             "rhOccupant": "Stanovnici staračkih domova",
             "title": "Struktura potvrđenih slučajeva",
-            "hcStaff": "Zdravtsveni radnici",
+            "hcStaff": "Zdravstveni radnici",
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)"
         },
@@ -540,9 +544,9 @@
             "statusNone": "-",
             "countryStatus": "Ograničenja",
             "importedCases": "Uvezeni slučajevi u 14 dana",
-            "incidence1M": "Novi slučajevi u 14 dana na milijun stanovnika",
+            "incidence100k": "Novi slučajevi u 14 dana na 100.000 stanovnika",
             "restrictions": "Ograničenja i uvezeni slučajevi",
-            "twoWeekIncidence": "14-dnevni slučajevi na milijun stanovnika",
+            "twoWeekIncidence": "14-dnevni slučajevi na 100.000 stanovnika",
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka"
@@ -565,16 +569,16 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteriji za crvenu listu",
-            "legendTitle": "Aktivni slučajevi na milijun stanovnika",
-            "yAxisTitle": "Aktivni slučajevi na milijun stanovnika",
-            "title": "Države: Aktivni slučajevi na milijun stanovnika"
+            "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",
+            "title": "Države: Aktivni slučajevi na 100.000 stanovnika"
         },
         "dailyComparison": {
             "positivePct": "Udio pozitivnih testova (%)",
             "tests": "Provedeni testovi",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
-            "title": "Usporedba prema danu u tjednu"
+            "title": "Usporedba po danu u tjednu"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -593,19 +597,75 @@
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Karantena i izvori zaraze"
+        },
+        "ostanizdrav": {
+            "userPublishedByCount": {
+                "date": "Datum",
+                "title": "Dnevni broj objavljenih ključeva s brojem korisnika",
+                "users": "Broj korisnika",
+                "count": "(Prosječni) dnevni broj ključeva po broju korisnika",
+                "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'",
+                "description": "Dijagram prikazuje broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji."
+            },
+            "usercount": {
+                "title": "Procijenjeni broj korisnika koji su objavili ključeve",
+                "runningTotal": "Ukupni broj korisnika koji su objavili ključeve",
+                "users": "Broj korisnika koji su objavili ključeve",
+                "date": "Datum",
+                "description": "Dijagram prikazuje našu procjenu broja korisnika koji su u program upisali svoj potvrdni kod za pozitivni test (plave trake) i ukupnog broja korisnika koji su to do danas učinili (crvena linija). Sigurno poznat je samo broj objavljenih dnevnih ključeva (vidi dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)), no zbog tipičnog slijeda povezanih razina rizika zaraze, možemo prilično dobro pogoditi koliko je korisnika tog dana poslalo svoje ključeve."
+            },
+            "publishedByRisk": {
+                "risk": "Razina rizika",
+                "published": "Dnevni broj objavljenih ključeva",
+                "tooltip": "datum.published + ' ključevi s razinom rizika ' + datum.risk",
+                "date": "Datum",
+                "title": "Dnevni broj objavljenih ključeva s razinama rizika",
+                "description": "Svaki objavljeni dnevni ključ ima povezanu razinu rizika prenošenja zaraze. Dijagram prikazuje njihove brojeve za svaki dan. Što je boja tamnija, to je rizik veći. Ako je korisnik instalirao program i ako je program radio za vrijeme cijelog razdoblja, ključevi će imati sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Stoga se očekuje, da će ključevi s rizikom prenošenja zaraze od 1 biti najčešći, a drugi najčešći rizik prenošenja zaraze je 8."
+            },
+            "validByRisk": {
+                "risk": "Rizik",
+                "title": "Dnevni broj valjanih ključeva s razinama rizika",
+                "valid": "Dnevni broj valjanih ključeva",
+                "tooltip": "datum.valid + ' ključevi s razinom rizika ' +datum.risk",
+                "date": "Datum",
+                "description": "Dijagram prikazuje razinu rizika prenošenja zaraze za ključeve koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.publishedByRisk.title)](#publishedByRisk-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
+            },
+            "published": {
+                "runningTotal": "Ukupno objavljenih ključeva",
+                "perDay": "Broj objavljenih ključeva",
+                "date": "Datum",
+                "title": "Broj objavljenih ključeva dnevno",
+                "description": "Dijagram prikazuje broj objavljenih dnevnih ključeva (plavi stupci) i ukupni broj ključeva koji su do danas objavljeni (crvena crta). Prosječni korisnik objavljuje između 10 i 12 dnevnih ključeva (pogledaj dijagram [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)). Pomoću tih podataka možemo procijeniti broj korisnika koji su upisali potvrdni kod nakon pozitivnog testiranja."
+            },
+            "valid": {
+                "perDay": "Broj valjanih ključeva",
+                "date": "Datum",
+                "title": "Broj valjanih ključeva dnevno",
+                "description": "Dijagram prikazuje broj ključeva koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
+            },
+            "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoza](https://github.com/mh-/diagnosis-keys).",
+            "title": "Program #OstaniZdrav za obavijesti o izloženosti",
+            "description": "Program [#OstaniZdrav](https://www.gov.si/ostanizdrav) namijenjena je kontroliranju širenja zaraze novim koronavirusom SARS-CoV-2, obavještavanjem korisnika je li bio u kontaktu s osobom s potvrđenom zarazom. **Anonimnost korisnika i decentralizirana obradu podataka su ključna svojstva ovog programa.** To znači da nitko – čak niti MJU i NIJZ – nema pristup podacima o kontaktima korisnika niti o tome, je li korisnik ima potvrđenu zarazu.\n\nZbog tih ograničenja, [naša se analiza djelotvornosti programa](#published-chart) zasniva samo na osnovi podataka kojima programi na mobilnim telefonima inače pristupaju. Za njihovo tumačenje potrebno je razumjeti rad programa i pojmove poput dnevnih ključeva, razine rizika i razlike između objavljenih i valjanih ključeva.\n\nKada se program instalira na mobitel, on svaki dan generira jedan slučajni, jednokratni i anonimni ključ. Na temelju ovog dnevnog ključa generiraju se kodovi koje mobitel šalje na druge obližnje mobitele s pokrenutim programom. Program istovremeno prima i sprema kodove drugih obližnjih mobitela. Kad korisnik sazna da je rezultat testa na koronavirus SARS-CoV-2 bio pozitivan, tada u program upisuje potvrdni teleTAN kod. Time se njegovi dnevni ključevi zadnjih 14 dana učitavaju na poslužitelj, jer su kontakti u tom razdoblju posebno rizični.\n\nProgram svakodnevno s poslužitelja dohvaća novoobjavljene ključeve s potvrđenih poslužitelja i uspoređuje kodove mobitela s kojima je vlastiti mobitel bio u kontaktu. Pritom uzima u obzir duljinu i blizinu kontakta te razinu rizika prenošenja zaraze bio na taj dan. Razina rizika za ovih 14 ključeva varira ovisno o vremenu upisa koda – najniži rizik je prije 14 dana, a zatim eskalira do najvišeg drugog, trećeg i četvrtog dana prije upisa potvrđene zaraze. Uzimajući u obzir ova tri čimbenika, program izračunava je li rizik dovoljno velik da korisnika na to upozorio.\n\nRazine rizika kreću se od 1 (najniža) do 8 (najviša). Ako je korisnik program instalirao te ako je stalno bio pokrenut, ključevi će dobiti sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Poslužitelj odmah objavljuje prvih 13 ključeva, a zadnji ključ, koji vrijedi za danas, objavljuje se tek sljedeći dan kako bi se osigurala veća anonimnost. Ako program nije bio instaliran od početka tok razdoblja ili ako je u međuvremenu bio isključen na jedan dan, slijed ključeva će biti nepotpun. U prosjeku, slijedovima nedostaju tri ključa.\n\n**Kako bi se osigurala anonimnost korisnika nemoguće je znati koji ključevi pripadaju kojem korisniku. Međutim, zbog poznatog tipičnog slijeda povezanih razina rizika, možemo s visokom sigurnošću rekonstruirati slijedove koji odgovaraju broju korisnika. Ne možemo biti stvarno sigurni da je broj točan – naša je procjena samo vrlo dobra aproksimacija.**\n\nPoslužitelj svakodnevno objavljuje određeni broj dnevnih ključeva, svaki sa svojom razinom rizika i datumom valjanosti za prethodnih 13 dana. Tim podacima pristupaju programi na mobitelima te se koriste u našoj ovdje prikazanoj analizi.\n\n**Napomena: Podaci za tekući dan nisu nužno potpuni.**"
+        },
+        "regions100k": {
+            "red": "kriteriji za crvenu listu",
+            "deceased": "Smrtni slučajevi",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "activeCases": "Aktivni slučajevi",
+            "title": "Slučajevi po regijama (na 100.000 stanovnika)"
         }
     },
     "shortMonth": {
-        "0": "sij",
-        "1": "velj",
-        "2": "ožu",
-        "3": "tra",
-        "4": "svi",
-        "5": "lip",
-        "6": "srp",
-        "7": "kol",
         "8": "ruj",
+        "4": "svi",
+        "1": "velj",
+        "0": "sij",
+        "2": "ožu",
+        "5": "lip",
+        "3": "tra",
         "9": "lis",
+        "7": "kol",
+        "6": "srp",
         "10": "stu",
         "11": "pro"
     },
@@ -620,7 +680,7 @@
         },
         "municipality": {
             "title": "Općine",
-            "description": "Zabrana kretanja izvan općinskih granica, obvezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
+            "description": "Zabrana kretanja izvan općinskih granica, obavezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
         },
         "liftService": {
             "description": "Opuštanje: gradnja, usluge, sportovi na otvorenom, <br>dopušteni su neki redovni javni prijevozi",
@@ -647,7 +707,7 @@
             "description": "Opuštanje: javni prijevoz, sve zdravstvene i stomatološke usluge"
         },
         "retirementHomes": {
-            "title": "St. dom",
+            "title": "Starački dom",
             "description": "Zabrana posjeta staračkim domovima.<br>Potvrđena zaraza liječnika u Metlici"
         },
         "nationalStudy": {
@@ -737,6 +797,18 @@
         "testOrQuarantine": {
             "description": "Negativni test ili 10-dnevna karantena pri ulazu iz zemalja s crvenog ili narančastog popisa",
             "title": "Test"
+        },
+        "regions": {
+            "description": "Ograničenja za crvene regije: zabrana kretanja izvan općinskih granica, upotreba maski vani, ograničenja za neke usluge",
+            "title": "Regije"
+        },
+        "movement": {
+            "description": "Ograničeno kretanje između 21:00 i 6:00. Ograničeno kretanje na vlastitu regiju.<br>Skupine do 10 ljudi. Ograničenje svih događaja.",
+            "title": "🚫21 – 6 h"
+        },
+        "schools6+": {
+            "description": "Nastava na daljinu za učenike od 6. razreda osnovne škole, srednje škole i muzičkih škola",
+            "title": "Škole 6+"
         }
     },
     "pageNotFound": {
@@ -746,18 +818,18 @@
         "back": "Natrag"
     },
     "month": {
+        "10": "studenog",
         "0": "siječnja",
         "1": "veljače",
-        "2": "ožujka",
-        "3": "travnja",
-        "4": "svibnja",
-        "5": "lipnja",
-        "6": "srpnja",
-        "7": "kolovoza",
         "8": "rujna",
         "9": "listopada",
-        "10": "studenog",
-        "11": "prosinca"
+        "11": "prosinca",
+        "4": "svibnja",
+        "3": "travnja",
+        "5": "lipnja",
+        "7": "kolovoza",
+        "2": "ožujka",
+        "6": "srpnja"
     },
     "navbar": {
         "tables": "Tablice",
@@ -775,15 +847,25 @@
             "mk": "Makedonski",
             "de": "Njemački",
             "me": "Crnogorski",
-            "it": "Talijanski"
+            "it": "Talijanski",
+            "nb": "Bokmål"
         },
         "about": "O projektu",
         "faq": "FAQ",
         "sources": "Izvori",
         "menu": "Izbornik",
-        "animation": "Animacija"
+        "animation": "Animacija",
+        "ostanizdrav": "#OstaniZdrav"
     },
     "phase": {
+        "4": {
+            "description": "nova metoda testiranja",
+            "title": "faza<br>4"
+        },
+        "3": {
+            "title": "faza<br>3",
+            "description": "nova metoda testiranja"
+        },
         "1": {
             "title": "faza<br>1"
         },
@@ -791,33 +873,33 @@
             "description": "epidemija, nova metoda testiranja",
             "title": "faza<br>2"
         },
-        "3": {
-            "title": "faza<br>3",
-            "description": "nova metoda testiranja"
-        },
-        "4": {
-            "description": "nova metoda testiranja",
-            "title": "faza<br>4"
-        },
-        "5": {
-            "title": "faza<br>5",
-            "description": "nova metoda testiranja"
+        "7": {
+            "title": "faza<br>7",
+            "description": "kraj epidemije"
         },
         "6": {
             "description": "nova metoda testiranja, istraživanje",
             "title": "faza<br>6"
         },
-        "7": {
-            "title": "faza<br>7",
-            "description": "kraj epidemije"
+        "5": {
+            "title": "faza<br>5",
+            "description": "nova metoda testiranja"
+        },
+        "9": {
+            "description": "prebaci na djelomično praćenje kontakata",
+            "title": "faza<br>9"
         },
         "8": {
             "description": "nova metodologija ispitivanja – djeca",
             "title": "faza<br>8"
         },
-        "9": {
-            "description": "prebaci na djelomično praćenje kontakata",
-            "title": "faza<br>9"
+        "10": {
+            "description": "praćenje kontakata prekinuto",
+            "title": "faza<br>10"
+        },
+        "11": {
+            "description": "epidemija",
+            "title": "faza<br>11"
         }
     },
     "embedMaker": {
@@ -896,13 +978,13 @@
         "tabSummary": "Sažetak"
     },
     "weekday": {
-        "0": "nedjelja",
-        "1": "ponedjeljak",
-        "2": "utorak",
-        "3": "srijeda",
         "4": "četvrtak",
+        "6": "subota",
         "5": "petak",
-        "6": "subota"
+        "3": "srijeda",
+        "1": "ponedjeljak",
+        "0": "nedjelja",
+        "2": "utorak"
     },
     "infocard": {
         "active": "Aktivni slučajevi",
@@ -957,10 +1039,11 @@
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
     "notice": {
-        "newChart": "🆕 📊 Novi grafikon:",
+        "newChart": "🆕 📊 Novi dijagram:",
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
-        "newPage": "🆕 Nova stranica:"
+        "newPage": "🆕 Nova stranica:",
+        "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",
@@ -1058,39 +1141,39 @@
             "is": "Istok"
         },
         "phase": {
-            "1": {
-                "description": "Debar 4, Skopje 3, Makedonija 2 ",
-                "title": "faza<br>1"
-            },
-            "2": {
-                "description": "Skoplje 4",
-                "title": "faza<br>2"
-            },
-            "3": {
-                "description": "Debar 4",
-                "title": "faza<br>3"
-            },
-            "4": {
-                "description": "Makedonija 3",
-                "title": "faza<br>4"
+            "6": {
+                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
+                "title": "faza<br>6"
             },
             "5": {
                 "description": "Skoplje 4, Tetovo 4, Štip 3, Makedonija 2",
                 "title": "faza<br>5"
             },
-            "6": {
-                "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3",
-                "title": "faza<br>6"
+            "4": {
+                "description": "Makedonija 3",
+                "title": "faza<br>4"
+            },
+            "3": {
+                "description": "Debar 4",
+                "title": "faza<br>3"
+            },
+            "2": {
+                "description": "Skoplje 4",
+                "title": "faza<br>2"
+            },
+            "1": {
+                "description": "Debar 4, Skopje 3, Makedonija 2 ",
+                "title": "faza<br>1"
             }
         }
     },
-    "content": {
-        "about": "# O projektu\r\n\r\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/about) ili [engleski prijevod](/en/about).\r\n\r\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/about.md).\r\n",
-        "datasources": "## GDocs\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/datasources) ili [engleski prijevod](/en/datasources).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/datasources.md).\n",
-        "faq": "# FAQ\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/faq) ili [engleski prijevod](/en/faq).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/faq.md).\n",
-        "links": "# Poveznice\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/links) ili [engleski prijevod](/en/links).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/links.md).\n",
-        "models": "# Modeli\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/models) ili [engleski prijevod](/en/models).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/models.md).\n",
-        "sources": "# Izvori\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/sources) ili [engleski prijevod](/en/sources).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/sources.md).\n",
-        "team": "# Ekipa\n\nNažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/team) ili [engleski prijevod](/en/team).\n\nPomogni nam prevesti [ovu stranicu na GitHub-u](https://github.com/sledilnik/website/blob/master/src/content/hr/team.md).\n"
+    "weekdayShort": {
+        "6": "Su",
+        "5": "Pe",
+        "4": "Če",
+        "3": "Sr",
+        "2": "Ut",
+        "1": "Po",
+        "0": "Ne"
     }
 }

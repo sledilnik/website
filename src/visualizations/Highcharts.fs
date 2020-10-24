@@ -126,6 +126,9 @@ let addContainmentMeasuresFlags
         28, 9, "#FFe6e6", "testOrQuarantine"
         7, 10, "#FFe6e6", "cnk"
         9, 10, "#FFe6e6", "gatherings10max"
+        16,10, "#FFe6e6", "regions"
+        19,10, "#FFe6e6", "schools6+"
+        20,10, "#FFe6e6", "movement"
     |]
     {|
         ``type`` = "flags"
@@ -232,6 +235,8 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -275,9 +280,19 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.8.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,10,9);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,10,17);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.9.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,17);
+                       ``to``=jsTime <| DateTime(2020,10,19);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.10.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,19);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.11.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

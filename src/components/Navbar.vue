@@ -1,7 +1,11 @@
 <template>
   <div
     class="navbar-container"
-    :class="{ scrolled: scrollPosition > 80, menuOpen: menuOpened, closingMenu: closingMenu }"
+    :class="{
+      scrolled: scrollPosition > 80,
+      menuOpen: menuOpened,
+      closingMenu: closingMenu,
+    }"
   >
     <router-link to="stats" class="navbar-logo"></router-link>
     <div class="🍔" @click="toggleMenu">
@@ -11,145 +15,97 @@
     </div>
     <div class="nav-overlay"></div>
     <div class="nav-links">
-      <div class="nav-heading">{{ $t("navbar.menu") }}</div>
-      <router-link to="stats" class="router-link"><span>{{ $t("navbar.home") }}</span></router-link>
-      <router-link to="world" class="router-link"><span>{{ $t("navbar.world") }}</span></router-link>
-      <router-link to="ostanizdrav" class="router-link"><span>{{ $t("navbar.ostanizdrav") }}</span></router-link>
-      <router-link to="tables" class="router-link"><span>{{ $t("navbar.tables") }}</span></router-link>
-      <router-link to="models" class="router-link"><span>{{ $t("navbar.models") }}</span></router-link>
-      <!-- <router-link to="animation" class="router-link"><span>{{ $t("navbar.animation") }}</span></router-link> -->
-      <router-link to="faq" class="router-link"><span>{{ $t("navbar.faq") }}</span></router-link>
-      <router-link to="about" class="router-link"><span>{{ $t("navbar.about") }}</span></router-link>
-      <router-link to="team" class="router-link"><span>{{ $t("navbar.team") }}</span></router-link>
-      <router-link to="sources" class="router-link"><span>{{ $t("navbar.sources") }}</span></router-link>
-      <router-link to="links" class="router-link"><span>{{ $t("navbar.links") }}</span></router-link>
-      <a v-if="!isMobile"
-         href="https://github.com/sledilnik"
-         target="_blank"
-         rel="noreferrer"
-         class="router-link router-link-icon github">
+      <div class="nav-heading">{{ $t('navbar.menu') }}</div>
+      <router-link to="stats" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
+      <router-link to="world" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
+      <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
+      <router-link to="tables" class="router-link"><span>{{ $t('navbar.tables') }}</span></router-link>
+      <router-link to="models" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
+      <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
+      <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
+      <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
+      <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
+      <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
+      <a
+        v-if="showFullLang"
+        href="https://github.com/sledilnik"
+        target="_blank"
+        rel="noreferrer"
+        class="router-link router-link-icon github"
+      >
         <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
-        <span>{{ $t("navbar.github") }}</span>
+        <span>{{ $t('navbar.github') }}</span>
       </a>
-      <div v-if="!isMobile" class="router-link router-link-icon lang-switcher">
-        <div class="lang" @click="toggleDropdown">
-          <font-awesome-icon icon="globe" />
-          <span v-if="showFullLang">{{ $t('navbar.language.' + selectedLanguage) }}</span>
-          <span v-else>{{ selectedLanguage.toUpperCase() }}</span>
-          &nbsp;<font-awesome-icon icon="caret-down" />
-        </div>
-        <transition name="slide">
-          <ul v-if="dropdownVisible" class="lang-list" v-on-clickaway="hideDropdown">
-            <li v-for="(lang, index) in languages" :key="index" class="lang-list-item">
-              <a v-if="lang!=selectedLanguage || !showFullLang" :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
-                  :hreflang="lang"
-                  class="router-link-anchor"
-                  :class="{ active: $i18n.i18next.language === lang }"
-                  @click.prevent="changeLanguage(lang)">
-                {{ $t('navbar.language.' + lang, { lng: lang }) }}
-              </a>
-            </li>
-          </ul>
-        </transition>
-      </div>
-      <div v-else class="lang-switcher-mobile">
-        <div v-for="(lang, index) in languages" :key="index">
-          <a :href="`/${lang}/${$route.path.slice(4).toLowerCase().replace(/\/$/, '')}`"
-             :hreflang="lang"
-             class="router-link router-link-anchor"
-             :class="{ active: $i18n.i18next.language === lang }"
-             @click.prevent="changeLanguage(lang)">
-              <font-awesome-icon icon="globe" />
-              <span>{{ $t('navbar.language.' + lang, { lng: lang }) }}</span>
-             </a>
-        </div>
-      </div>
+      <LanguageSwitcher />
     </div>
   </div>
 </template>
 
 <script>
-import i18next from 'i18next'
-import { mixin as clickaway } from 'vue-clickaway'
+import { mapGetters, mapState } from 'vuex'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default {
-  mixins: [clickaway],
   name: 'Navbar',
+  components: {
+    LanguageSwitcher,
+  },
   data() {
     return {
       scrollPosition: '',
       menuOpened: false,
       closingMenu: false,
       dropdownVisible: false,
-      isMobile: false,
       showFullLang: true,
-      languages: i18next.languages.sort(),
-      selectedLanguage: i18next.language,
-    };
+    }
   },
   created() {
-    window.addEventListener('scroll', this.handleScroll, { passive: true });
+    window.addEventListener('scroll', this.handleScroll, { passive: true })
   },
-  mounted () {
+  mounted() {
     this.onResize()
     window.addEventListener('resize', this.onResize, { passive: true })
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (typeof window !== 'undefined') {
       window.removeEventListener('resize', this.onResize, { passive: true })
     }
   },
   methods: {
     handleScroll() {
-      this.scrollPosition = window.scrollY;
+      this.scrollPosition = window.scrollY
     },
     toggleMenu() {
       if (this.menuOpened) {
-        this.closeMenu();
+        this.closeMenu()
       } else {
-        this.menuOpened = true;
+        this.menuOpened = true
       }
     },
     closeMenu() {
-      this.menuOpened = false;
-      this.closingMenu = true;
+      this.menuOpened = false
+      this.closingMenu = true
       setTimeout(() => {
-        this.closingMenu = false;
-      }, 650);
+        this.closingMenu = false
+      }, 650)
     },
-    onResize () {
-      this.isMobile = window.innerWidth < 1050
-      this.showFullLang = window.innerWidth >= 1200
-    },
-    toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible
-    },
-    hideDropdown() {
-      this.dropdownVisible = false
-    },
-    changeLanguage(lang) {
-      if (this.$route.params.lang === lang) return
-      this.$i18n.i18next.changeLanguage(lang, (err, t) => {
-        if (err) return console.log('something went wrong loading', err)
-        this.selectedLanguage = lang
-        this.dropdownVisible = false
-        this.$router.push({ name: this.$route.name, params: { lang } })
-      })
+    onResize() {
+      this.showFullLang = window.innerWidth >= 1250
     },
   },
   watch: {
     $route() {
-      this.menuOpened = false;
+      this.menuOpened = false
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
+<style lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 1050px) {
+  @media only screen and (min-width: 1150px) {
     @content;
   }
 }
@@ -311,7 +267,8 @@ export default {
     padding-top: 7px;
     padding-bottom: 7px;
 
-    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3),
+      0 11px 12px -12px rgba(0, 0, 0, 0.22);
   }
 }
 
@@ -527,7 +484,7 @@ export default {
 
     img {
       opacity: 0.5;
-      
+
       @include nav-break {
         display: inline-block;
         width: 18px;
@@ -545,7 +502,7 @@ export default {
   &-anchor {
     color: rgba(0, 0, 0, 0.56);
     text-decoration: none;
-    width:100%;
+    width: 100%;
     display: block;
 
     &.active {
@@ -555,39 +512,6 @@ export default {
     &:hover {
       color: rgb(0, 0, 0);
     }
-  }
-
-  &.lang-switcher {
-    display: inline-block;
-    cursor: pointer;
-  }
-}
-
-.lang-switcher-mobile {
-  margin-top: auto;
-
-  span {
-    margin-left: 6px;
-  }
-}
-
-.lang-list {
-  position: absolute;
-  list-style: none;
-  margin: 0 0 0 10px;
-  padding: 0 10px;
-  background: white;
-  box-shadow: $element-box-shadow;
-  border: 1px solid rgba(0, 0, 0, 0.39);
-  border-radius: 6px;
-  right: -1px;
-  top: 32px;
-  min-width: 120px;
-  text-align: right;
-  white-space: nowrap;
-
-  &-item {
-    margin: 8px 0;
   }
 }
 </style>

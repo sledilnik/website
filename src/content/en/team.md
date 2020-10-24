@@ -43,6 +43,7 @@ Data editors and other collaborators:
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
+-   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
 -   [Vanja Cvelbar](https://github.com/b100w11) - translations

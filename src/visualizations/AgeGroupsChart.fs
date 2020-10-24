@@ -136,7 +136,7 @@ let mergeInfectionsAndDeathsByGroups
 /// Fetches the infections and deaths per age groups for the latest day that
 /// has both sets of data.
 /// </summary>
-let latestAgeData state: InfectionsAndDeathsPerAge =
+let latestAgeData state =
     /// <summary>
     /// Filter function for determining whether the specified AgeGroups
     /// actually has any data or just an empty record.
@@ -161,7 +161,7 @@ let latestAgeData state: InfectionsAndDeathsPerAge =
 
         match infectionsDataMaybe, deathsDataMaybe with
         | Some infectionsData, Some deathsData ->
-            mergeInfectionsAndDeathsByGroups infectionsData deathsData |> Some
+             Some (dataPoint.Date, mergeInfectionsAndDeathsByGroups infectionsData deathsData)
         | _ -> None
     )
 
@@ -276,11 +276,10 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.chartText "common" "view")
             renderScaleTypeSelector
                 Absolute activeScaleType (chartText "absolute")
             renderScaleTypeSelector
-                Relative activeScaleType (chartText "relative")
+                Relative activeScaleType (chartText "populationShare")
         ]
     ]
 
@@ -300,8 +299,8 @@ let renderChartCategorySelector
             match chartModeToRender with
             | AbsoluteInfections        -> chartText "confirmedCases"
             | AbsoluteDeaths            -> chartText "deceased"
-            | InfectionsPerPopulation   -> chartText "confirmedCasesPerPopulation"
-            | DeathsPerPopulation       -> chartText "deceasedPerPopulation"
+            | InfectionsPerPopulation   -> chartText "confirmedCases"
+            | DeathsPerPopulation       -> chartText "deceased"
             | DeathsPerInfections       -> chartText "deceasedPerConfirmedCases"
             )
     ]
@@ -311,9 +310,11 @@ let renderChartCategorySelectors activeChartMode dispatch =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
-            [ InfectionsPerPopulation;
-            DeathsPerPopulation;
-            DeathsPerInfections; ]
+            [ 
+                InfectionsPerPopulation;
+                DeathsPerPopulation;
+                // DeathsPerInfections; 
+            ]
 
     Html.div [
         prop.className "metrics-selectors"
@@ -323,16 +324,19 @@ let renderChartCategorySelectors activeChartMode dispatch =
             ) ]
 
 let renderChartOptions
-    (state : State) (chartData: AgesChartData) =
+    (state : State) (latestDate: DateTime) (chartData: AgesChartData) =
 
     let valuesLabelFormatter (value: float) =
         match ChartMode.ScaleType state.ChartMode with
         | Absolute -> (abs value).ToString()
         | Relative -> Utils.percentageValuesLabelFormatter value
 
+    let dateText = (I18N.tOptions "charts.common.dataDate" {| date = latestDate  |})
+
     {| optionsWithOnLoadEvent "covid19-age-groups" with
         chart = pojo {| ``type`` = "bar" |}
         title = pojo {| text = None |}
+        subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
         xAxis = [|
             {| categories = chartData.AgeGroupsLabels
                reversed = false
@@ -464,13 +468,15 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with ChartMode = toChartMode }, Cmd.none
 
 let renderChartContainer state =
-    let infectionsAndDeathsPerAge = latestAgeData state
+    let latest = latestAgeData state
+    let latestDate = fst (latest)
+    let infectionsAndDeathsPerAge = snd (latest)
     let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
-
+    
     Html.div [
         prop.style [ style.height 400 ]
         prop.className "highcharts-wrapper"
-        prop.children [ renderChartOptions state chartData |> chart ]
+        prop.children [ renderChartOptions state latestDate chartData |> chart ]
     ]
 
 let render (state : State) dispatch =
@@ -482,12 +488,15 @@ let render (state : State) dispatch =
         renderChartContainer state
         renderChartCategorySelectors state.ChartMode dispatch
 
-        Html.div [
-            prop.className "disclaimer"
-            prop.children [
-                Html.text (chartText "disclaimer")
+        match state.ChartMode with
+        | AbsoluteDeaths | DeathsPerPopulation | DeathsPerInfections ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (chartText "disclaimer")
+                ]
             ]
-        ]
+        | _ -> Html.none
     ]
 
 let renderChart (props : {| data : StatsData |}) =

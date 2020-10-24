@@ -6,8 +6,6 @@
           {{ $t('charts.ostanizdrav.title') }}
         </h1>
         <div v-html-md="$t('charts.ostanizdrav.description')"></div>
-        <p>
-        <div v-html-md="$t('charts.ostanizdrav.warningCurrentDay')"></div>
       </section>
     </div>
     <div class="visualizations container">
@@ -185,7 +183,7 @@
           v-html-md="$t('charts.ostanizdrav.validByRisk.description')"
         ></div>
       </section>
-      <div class="footer" v-html-md="$t('charts.ostanizdrav.footer')"></div>
+      <div class="credits" v-html-md="$t('charts.ostanizdrav.footer')"></div>
     </div>
   </div>
 </template>
