@@ -3,7 +3,7 @@
     <div class="title-chart-wrapper">
       <div class="title-brand-wrapper">
         <h2>
-          <a href="#published-chart" @click="smoothScroll">{{ title }}</a>
+          <a :href="`#${name}`" @click="smoothScroll">{{ title }}</a>
         </h2>
       </div>
       <div class="faq-and-share-wrapper">
