@@ -1,5 +1,6 @@
 ﻿module CountriesChartViz.CountrySets
 
+open CountriesChartViz.Analysis
 open Synthesis
 
 let setNeighboringCountries = {
@@ -37,13 +38,22 @@ let setLatinAmerica = {
     CountriesCodes = [| "ARG"; "BRA"; "CHL"; "COL"; "ECU"; "MEX"; "PER" |]
 }
 
-let countriesDisplaySets = [|
-    setNeighboringCountries
-    setCriticalEU
-    setCriticalWorld
-    setNordic
-    setExYU
-    setEastAsiaOceania
-    setLatinAmerica
-|]
+let countriesDisplaySets (metric: MetricToDisplay) =
+    match metric with
+    | NewCasesPer1M ->
+        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
+    | ActiveCasesPer1M ->
+        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
+    | TotalDeathsPer1M ->
+        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
+    | DeathsPerCases ->
+        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
 

@@ -24,12 +24,12 @@ type Msg =
 [<Literal>]
 let DaysOfMovingAverage = 7
 
-let init (config: CountriesChartConfig):
-    ChartState * Cmd<Msg> =
+let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
+    let metric = config.MetricToDisplay
     let state = {
         OwidDataState = NotLoaded
-        DisplayedCountriesSet = countriesDisplaySets.[0]
-        MetricToDisplay = config.MetricToDisplay
+        DisplayedCountriesSet = (countriesDisplaySets metric).[0]
+        MetricToDisplay = metric
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
     }
@@ -240,6 +240,7 @@ let renderChartContainer state chartData =
     ]
 
 let renderCountriesSetsSelectors
+    (metric: MetricToDisplay)
     (activeSet: CountriesDisplaySet)
     dispatch =
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
@@ -255,7 +256,7 @@ let renderCountriesSetsSelectors
 
     Html.div [
         prop.className "metrics-selectors"
-        countriesDisplaySets
+        countriesDisplaySets metric
         |> Array.map renderCountriesSetSelector
         |> prop.children
     ]
@@ -276,6 +277,7 @@ let render (state: ChartState) dispatch =
             Utils.renderChartTopControls topControls
             renderChartContainer state chartData
             renderCountriesSetsSelectors
+                state.MetricToDisplay
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
 
