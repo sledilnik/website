@@ -3,14 +3,24 @@ module App
 open Browser
 open Elmish
 open Feliz
+open Elmish.React
+open Feliz.Recoil
+open Feliz.UseElmish
 
 open Types
 open CountriesChartViz.Analysis
 open I18N
 
-let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
+type Props = {
+    query: obj
+    visualization: string option
+    page: string
+    apiEndpoint: string
+}
+
+let init (props : Props) =
     let renderingMode =
-        match visualization with
+        match props.visualization with
         | None -> Normal
         | Some viz ->
             match viz with
@@ -42,9 +52,9 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
     let initialState =
         {
-          ApiEndpoint = apiEndpoint
-          Page = page
-          Query = query
+          ApiEndpoint = props.apiEndpoint
+          Page = props.page
+          Query = props.query
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
           RegionsData = NotAsked
@@ -52,7 +62,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
     // Request data loading based on the page we are on
     let cmd =
-        match page with
+        match props.page with
         | "local" ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -86,8 +96,6 @@ let update (msg: Msg) (state: State) =
         | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
-open Elmish.React
-
 let render (state: State) (_: Msg -> unit) =
     let hospitals =
           { VisualizationType = Hospitals
@@ -107,7 +115,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+                    | Success data -> lazyView MetricsComparisonChart.chart {| data = data |} }
 
     let dailyComparison =
           { VisualizationType = DailyComparison
@@ -133,7 +141,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
+                    | Success data -> lazyView SpreadChart.chart {| data = data |} }
 
     let map =
           { VisualizationType = Map
@@ -411,7 +419,7 @@ let render (state: State) (_: Msg -> unit) =
         [ worldMap; countriesActiveCasesPer1M
           countriesCasesPer1M
           countriesDeathsPer1M
-//          countriesDeathsPerCases
+          // countriesDeathsPerCases
           ]
 
     let allVisualizations =
@@ -550,3 +558,14 @@ let render (state: State) (_: Msg -> unit) =
                                options = { IntersectionObserver.defaultOptions with rootMargin = "100px" }
                             |}
                     ] ] ) ) ]
+
+let innerApp = React.functionComponent(fun (props : Props) ->
+    let state, dispatch = React.useElmish(init props, update, [||])
+    render state dispatch
+)
+
+let app = React.functionComponent(fun (props : Props) ->
+    Recoil.root [
+        innerApp(props)
+    ]
+)

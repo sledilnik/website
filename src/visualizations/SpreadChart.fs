@@ -4,7 +4,8 @@ module SpreadChart
 open System
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
+open Feliz.Recoil
+open Feliz.UseElmish
 open Browser
 
 open Types
@@ -48,7 +49,7 @@ let init data : State * Cmd<Msg> =
     }
     state, Cmd.none
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (urlParams : UrlParams.GetSetState) (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
         { state with page = page }, Cmd.none
@@ -286,9 +287,12 @@ let renderScaleSelectors state dispatch =
         ]
     ]
 
-let render (state: State) dispatch =
+let render (urlParams : UrlParams.GetSetState) (state: State) dispatch =
     Html.div [
         prop.children [
+            Html.div [ Html.text (sprintf "Greeting: %A" urlParams.Get.Greeting) ]
+            Html.div [ Html.text (sprintf "Date from: %A" urlParams.Get.DateFrom) ]
+            Html.div [ Html.text (sprintf "Date to: %A" urlParams.Get.DateTo) ]
             Html.div [
                 prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
                 prop.children [
@@ -305,5 +309,8 @@ let render (state: State) dispatch =
         ]
     ]
 
-let spreadChart (props : {| data : StatsData |}) =
-    React.elmishComponent("SpreadChart", init props.data, update, render)
+let chart = React.functionComponent(fun (props : {| data : StatsData |}) ->
+    let urlParams = Recoil.useState(UrlParams.state) |> UrlParams.getSet
+    let state, dispatch = React.useElmish(init props.data, update urlParams, [||])
+    render urlParams state dispatch
+)

@@ -1,9 +1,7 @@
 module Main
 
-open Elmish
-open Elmish.React
-open Elmish.Debug
-open Elmish.HMR
+open Feliz
+open Browser.Dom
 
 let Visualizations
         (elementId: string,
@@ -11,9 +9,4 @@ let Visualizations
          query: obj,
          apiEndpoint: string,
          visualization: string option) =
-    Program.mkProgram (fun () -> App.init query visualization page apiEndpoint) App.update App.render
-    #if DEBUG
-    |> Program.withDebugger
-    #endif
-    |> Program.withReactSynchronous elementId
-    |> Program.run
+    ReactDOM.render(App.app { query = query ; visualization = visualization ; page = page ; apiEndpoint = apiEndpoint }, document.getElementById elementId)

@@ -4,7 +4,8 @@ module MetricsComparisonChart
 open System
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
+open Feliz.Recoil
+open Feliz.UseElmish
 open Browser
 
 open Highcharts
@@ -135,7 +136,7 @@ let init data : State * Cmd<Msg> =
     }
     state, cmd
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (urlParams : UrlParams.GetSetState) (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
         { state with PatientsData = data; }, Cmd.none
@@ -155,6 +156,12 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             MetricType = metricType
             }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
+        urlParams.Set { urlParams.Get with Greeting = None }
+        urlParams.Set {
+            urlParams.Get with
+                Greeting = Some "Goodbye, world!"
+                DateFrom = None
+                DateTo = Some System.DateTime.Today }
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 
@@ -383,12 +390,15 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
         prop.children (metricTypesSelectors)
     ]
 
-let render state dispatch =
+let render (urlParams : UrlParams.GetSetState) state dispatch =
     match state.PatientsData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
+            Html.div [ Html.text (sprintf "Greeting: %A" urlParams.Get.Greeting) ]
+            Html.div [ Html.text (sprintf "Date from: %A" urlParams.Get.DateFrom) ]
+            Html.div [ Html.text (sprintf "Date to: %A" urlParams.Get.DateTo) ]
             Utils.renderChartTopControls [
                 renderMetricTypeSelectors
                     state.MetricType (MetricTypeChanged >> dispatch)
@@ -399,5 +409,8 @@ let render state dispatch =
             renderMetricsSelectors state dispatch
         ]
 
-let metricsComparisonChart (props : {| data : StatsData |}) =
-    React.elmishComponent("MetricsComparisonChart", init props.data, update, render)
+let chart = React.functionComponent(fun (props : {| data : StatsData |}) ->
+    let urlParams = Recoil.useState(UrlParams.state) |> UrlParams.getSet
+    let state, dispatch = React.useElmish(init props.data, update urlParams, [||])
+    render urlParams state dispatch
+)
