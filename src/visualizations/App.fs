@@ -2,6 +2,7 @@ module App
 
 open Browser
 open Elmish
+open Elmish.React
 open Feliz
 
 open RegionsChartViz.Synthesis
@@ -10,6 +11,7 @@ open CountriesChartViz.Analysis
 open I18N
 
 let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
+
     let renderingMode =
         match visualization with
         | None -> Normal
@@ -50,6 +52,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
     let initialState =
         {
+          QueryParams = QueryParams.getState()
           ApiEndpoint = apiEndpoint
           Page = page
           Query = query
@@ -80,6 +83,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
 let update (msg: Msg) (state: State) =
     match msg with
+    | QueryParamsChanged ->
+        { state with QueryParams = QueryParams.getState() }, Cmd.none
     | StatsDataRequested ->
         match state.StatsData with
         | Loading -> state, Cmd.none
@@ -96,7 +101,11 @@ let update (msg: Msg) (state: State) =
         | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
-open Elmish.React
+let queryParamsChangedSubscription initial =
+    let sub dispatch =
+        window.addEventListener(QueryParams.queryParamsChangedEvent, (fun _ ->
+            dispatch QueryParamsChanged))
+    Cmd.ofSub sub
 
 let render (state: State) (_: Msg -> unit) =
     let hospitals =
@@ -117,7 +126,10 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
+                    | Success data ->
+                        lazyView MetricsComparisonChart.chart
+                            {| data = data
+                               queryParams = state.QueryParams |} }
 
     let dailyComparison =
           { VisualizationType = DailyComparison
@@ -143,7 +155,10 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
+                    | Success data ->
+                        lazyView SpreadChart.chart
+                            {| data = data
+                               queryParams = state.QueryParams |} }
 
     let map =
           { VisualizationType = Map

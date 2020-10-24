@@ -177,6 +177,7 @@ type RenderingMode =
 
 type State =
     {
+      QueryParams : QueryParams.State
       ApiEndpoint : string
       Page : string
       Query : obj // URL query parameters
@@ -194,6 +195,7 @@ type Visualization = {
 }
 
 type Msg =
+    | QueryParamsChanged
     | StatsDataRequested
     | StatsDataLoaded of RemoteData<StatsData, string>
     | WeeklyStatsDataRequested

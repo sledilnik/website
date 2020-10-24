@@ -4,6 +4,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Components/Slider.fs" />
+        <Compile Include="QueryParams.fs" />
         <Compile Include="Types.fs" />
         <Compile Include="I18N.fs" />
         <Compile Include="IntersectionObserver.fs" />
@@ -69,6 +70,7 @@
         <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
         <PackageReference Include="Fable.Elmish.HMR" Version="4.0.1" />
         <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
+        <PackageReference Include="Fable.Extras" Version="0.1.0" />
         <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
         <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
         <PackageReference Include="Fable.Extras" Version="0.1.0" />

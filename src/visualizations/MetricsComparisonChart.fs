@@ -6,6 +6,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
+open Feliz.UseElmish
 
 open Highcharts
 open Types
@@ -135,7 +136,7 @@ let init data : State * Cmd<Msg> =
     }
     state, cmd
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update queryParams (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
         { state with PatientsData = data; }, Cmd.none
