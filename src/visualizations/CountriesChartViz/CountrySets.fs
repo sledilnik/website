@@ -8,6 +8,11 @@ let setNeighboringCountries = {
       CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
     }
 
+let setHighestNewCasesEU = {
+    Label = "groupHighestNewCasesEU"
+    CountriesCodes = [| "BEL"; "ESP"; "CZE"; "FRA"; "NLD"; "ISL"; "MKD"; "CHE"|]
+}
+
 let setCriticalEU = {
     Label = "groupCriticalEU"
     CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
@@ -41,7 +46,7 @@ let setLatinAmerica = {
 let countriesDisplaySets (metric: MetricToDisplay) =
     match metric with
     | NewCasesPer1M ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries; setHighestNewCasesEU; setCriticalWorld
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | ActiveCasesPer1M ->
