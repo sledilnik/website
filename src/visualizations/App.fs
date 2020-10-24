@@ -559,13 +559,9 @@ let render (state: State) (_: Msg -> unit) =
                             |}
                     ] ] ) ) ]
 
-let innerApp = React.functionComponent(fun (props : Props) ->
-    let state, dispatch = React.useElmish(init props, update, [||])
-    render state dispatch
-)
-
 let app = React.functionComponent(fun (props : Props) ->
+    let state, dispatch = React.useElmish(init props, update, [||])
     Recoil.root [
-        innerApp(props)
+        render state dispatch
     ]
 )
