@@ -372,29 +372,45 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
-        let sparklineFormatter activeCasesValue = 
+        let sparklineFormatter newCases color = 
             let options =
                 {|
                     chart = 
                         {|
-                            ``type`` = "area"
+                            ``type`` = "column"
+                            backgroundColor = "transparent"
                         |} |> pojo
                     credits = {| enabled = false |}
                     xAxis = {| visible = false |}
-                    yAxis = {| visible = false |}
+                    yAxis = 
+                        {| 
+                            title = {| enabled = false|}
+                            visible = true  
+                            min = 0.
+                            max = newCases |> Array.max  
+                            endOnTick = true 
+                            startOnTick = true
+                            allowDecimals = false 
+                            showFirstLabel = true
+                            showLastLabel = true
+                            gridLineColor = "#000000"
+                            gridLineDashStyle = "dot"
+                        |} |> pojo
                     title = {| text = "" |}
                     legend = {| enabled = false |}
                     series = 
                         [| 
                             {| 
-                                data = activeCasesValue 
+                                data = newCases |> Array.map ( max 0.)
                                 animation = false
-                                color = "#ff0000" // try to access the tooltip color here?
-                            |} |> pojo
+                                color = color // try to access the tooltip color here?
+                                borderColor = color
+                                pointWidth = 15
+                            |} |> pojo 
                         |]
                 |} |> pojo
-            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
-            """<div style="width: 100px; height: 60px;" id="tooltip-chart"></div>"""
+            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 5 |> ignore
+            """<div id="tooltip-chart"; class="tooltip-chart";></div>"""
 
 
         let tooltipFormatter state jsThis =
@@ -409,7 +425,7 @@ let renderMap (state : State) =
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-
+            let color = points?color 
             let s = Text.StringBuilder()
             let barMaxHeight = 50
 
@@ -436,8 +452,8 @@ let renderMap (state : State) =
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                             + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                            + s.ToString()
-                            + sparklineFormatter activeCasesValue
+                            // + s.ToString()
+                            + sparklineFormatter newCases.[newCases.Length - 15 ..] color
                     else
                         label
                 | Deceased ->
