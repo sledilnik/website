@@ -138,6 +138,10 @@ export default {
           titleMenu: this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
           icon: 'graph',
         },
+        'youtube': {
+          titleMenu: this.$t('youtube.titleMenu'),
+          icon: 'map',
+        },
       },
     }
   },

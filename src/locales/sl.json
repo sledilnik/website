@@ -736,7 +736,7 @@
         },
         "hCenters": {
             "title": "Obravnava v ZD",
-            "titleMenu": "ZD - obravnava",
+            "titleMenu": "ZD – obravnava",
             "allRegions": "Vse regije",
             "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
             "suspectedCovidExamination": "Sum COVID-19 (pregled)",
