@@ -372,7 +372,7 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
-        let sparklineFormatter newCases color = 
+        let sparklineFormatter newCases = 
             let options =
                 {|
                     chart = 
@@ -403,13 +403,13 @@ let renderMap (state : State) =
                             {| 
                                 data = newCases |> Array.map ( max 0.)
                                 animation = false
-                                color = color // try to access the tooltip color here?
-                                borderColor = color
+                                color = "#d5c768" // try to access the tooltip color here?
+                                borderColor = "#d5c768" 
                                 pointWidth = 15
                             |} |> pojo 
                         |]
                 |} |> pojo
-            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 5 |> ignore
+            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
             """<div id="tooltip-chart"; class="tooltip-chart";></div>"""
 
 
@@ -420,28 +420,15 @@ let renderMap (state : State) =
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
             let weeklyIncrease = points?weeklyIncrease
-            let newCases = points?newCases
-            let newCasesMax = points?newCasesMax
+            let newCases= points?newCases
+            let newCasesMax = points?newCasesMax//TODO: remove
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-            let color = points?color 
-            let s = Text.StringBuilder()
-            let barMaxHeight = 50
 
-            s.Append "<p><div class='bars'>" |> ignore
+            let lastTwoWeeks = Array.sub newCases (newCases.Length - 15) 14 
 
-            match newCases with
-                | null -> null
-                | _ ->
-                    newCases
-                    |> Array.iter (fun area ->
-                        let barHeight = Math.Ceiling(float area * float barMaxHeight / newCasesMax)
-                        let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
-                        s.Append barHtml |> ignore)
-                    s.Append "</div>" |> ignore
-                    s.ToString()
-                |> ignore
+            printfn "%A" lastTwoWeeks
 
             let label =
                 match state.ContentType with
@@ -452,8 +439,7 @@ let renderMap (state : State) =
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                             + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                            // + s.ToString()
-                            + sparklineFormatter newCases.[newCases.Length - 15 ..] color
+                            + if (Array.max lastTwoWeeks) > 0. then sparklineFormatter lastTwoWeeks else ""
                     else
                         label
                 | Deceased ->
