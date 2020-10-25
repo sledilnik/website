@@ -151,8 +151,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "Paesi limitrofi",
-        "groupCriticalEU": "Paesi critici (UE)",
-        "groupCriticalWorld": "Paesi critici (Mondo)",
         "groupNordic": "Paesi nordici",
         "groupExYu": "Ex Jugoslavia",
         "groupEastAsiaOceania": "Asia orientale e Oceania",
@@ -799,7 +797,7 @@
             "lastCase": "Ultimo caso: ",
             "today": "oggi",
             "yesterday": "ieri",
-            "doubles": "Raddoppia in ",
+            "doubles": "Raddoppia ",
             "deceased": "Deceduti: ",
             "recovered": "Guariti: ",
             "active": "Attivi: ",

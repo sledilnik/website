@@ -34,8 +34,10 @@
         "at": "ob {{ date, %H.%M }}"
     },
     "notice": {
+        "newInfographics": "🆕 📇 Nova infografika:",
         "newChart": "🆕 📊 Nov graf:",
         "newPage": "🆕 Nova stran:",
+        "progressC19": "Običajen potek bolezni Covid-19. Hospitalizacije, intenzivna terapija in smrtnost.",
         "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
         "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
         "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
@@ -410,9 +412,12 @@
         "ZWE": "Zimbabve"
     },
     "country-groups": {
+        "groupHighestNewCases": "z največjimi vrednostmi",
+        "groupHighestActiveCases": "z največjimi vrednostmi",
+        "groupHighestTotalDeaths": "z največjimi vrednostmi",
+        "groupLargestEuCountries": "največje države EU*",
+        "groupLargestWorldCountries": "največje države sveta",
         "groupNeighbouring": "okolica",
-        "groupCriticalEU": "kritične države (EU)",
-        "groupCriticalWorld": "kritične države (svet)",
         "groupNordic": "nordijske države",
         "groupExYu": "ex-Jugoslavija",
         "groupEastAsiaOceania": "vzh. Azija in Oceanija",

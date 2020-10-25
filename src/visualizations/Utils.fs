@@ -23,7 +23,7 @@ let nativeParseInt (input : string) : int option = jsNative
 
 let parseDate (str : string) =
     try
-        System.DateTime.Parse(str) |> Ok
+        DateTime.Parse(str) |> Ok
     with _ ->
         sprintf "Invalid date representation: %s" str |> Error
 

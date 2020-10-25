@@ -28,6 +28,8 @@ ProjectSection(SolutionItems) = preProject
 	fsharplint-config.json = fsharplint-config.json
 EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Owid.Analyzer", "Owid.Analyzer\Owid.Analyzer.fsproj", "{D5A56421-F648-49B1-8DAD-53117E9C1BD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{037E7FEC-664B-4D24-BC9D-736AF1A83AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{037E7FEC-664B-4D24-BC9D-736AF1A83AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{037E7FEC-664B-4D24-BC9D-736AF1A83AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A56421-F648-49B1-8DAD-53117E9C1BD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A56421-F648-49B1-8DAD-53117E9C1BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A56421-F648-49B1-8DAD-53117E9C1BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A56421-F648-49B1-8DAD-53117E9C1BD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

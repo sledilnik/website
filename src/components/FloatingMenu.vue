@@ -1,7 +1,12 @@
 <template>
   <div>
     <transition name="slide">
-      <div class="float-nav-btn" v-show="list.length > 0" @click="toggleMenu" key="1">
+      <div
+        class="float-nav-btn"
+        v-show="visible && list.length > 0"
+        @click="toggleMenu"
+        key="1"
+      >
         <div
           class="float-nav-img"
           :class="{ active: active }"
@@ -47,6 +52,7 @@ export default {
   data() {
     return {
       active: false,
+      visible: true,
       charts: {
         'metrics-comparison-chart': {
           titleMenu: this.$t('charts.metricsComparison.titleMenu_SVN'),
@@ -135,12 +141,16 @@ export default {
       },
     }
   },
-  mounted() {
+  created() {
+    window.addEventListener('scroll', this.handleScroll, { passive: true })
     window.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         this.active = false
       }
     })
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll, { passive: true })
   },
   methods: {
     get(chart, value) {
@@ -152,6 +162,11 @@ export default {
     hideMenu() {
       this.active = false
     },
+    handleScroll() {
+      let footer = document.querySelector('footer').getBoundingClientRect()
+      let bottom = window.innerHeight - footer.top
+      this.visible = bottom < -50
+    }
   },
 }
 </script>
