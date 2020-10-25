@@ -2,10 +2,10 @@
 module MetricsComparisonChart
 
 open System
+open Browser
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
-open Browser
+open Feliz.UseElmish
 
 open Highcharts
 open Types
@@ -135,7 +135,7 @@ let init data : State * Cmd<Msg> =
     }
     state, cmd
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (urlParams : UrlParams.State) changeUrlParams (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
         { state with PatientsData = data; }, Cmd.none
@@ -155,8 +155,13 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             MetricType = metricType
             }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
-        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
-
+        let newUrlParams =
+            { urlParams with
+                Greeting = Some "Goodbye!"
+                DateFrom = None
+                DateTo = Some System.DateTime.Today }
+        // { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.ofSub (fun _ -> changeUrlParams newUrlParams)
 
 let statsDataGenerator metric =
     fun point ->
@@ -188,7 +193,6 @@ let patientsDataGenerator metric =
         | DeceasedToday -> point.total.deceased.today |> Utils.zeroToNone
         | DeceasedToDate -> point.total.deceased.toDate
         | _ -> None
-
 
 let calcRunningAverage (data: (JsTimestamp * float)[]) =
     let daysOfMovingAverage = 7
@@ -228,7 +232,6 @@ let calcRunningAverage (data: (JsTimestamp * float)[]) =
 
     averages
 
-
 let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let statsData = statsDataGenerator metric
@@ -264,7 +267,6 @@ let prepareMetricsData (metric: MetricCfg) (state: State) =
         | false -> trimmedData
 
     finalData
-
 
 let renderChartOptions state dispatch =
 
@@ -383,12 +385,15 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
         prop.children (metricTypesSelectors)
     ]
 
-let render state dispatch =
+let render (urlParams : UrlParams.State) state dispatch =
     match state.PatientsData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
+            Html.div [ Html.text (sprintf "Greeting: %A" urlParams.Greeting) ]
+            Html.div [ Html.text (sprintf "Date from: %A" urlParams.DateFrom) ]
+            Html.div [ Html.text (sprintf "Date to: %A" urlParams.DateTo) ]
             Utils.renderChartTopControls [
                 renderMetricTypeSelectors
                     state.MetricType (MetricTypeChanged >> dispatch)
@@ -399,5 +404,12 @@ let render state dispatch =
             renderMetricsSelectors state dispatch
         ]
 
-let metricsComparisonChart (props : {| data : StatsData |}) =
-    React.elmishComponent("MetricsComparisonChart", init props.data, update, render)
+let chart =
+    React.functionComponent(fun (props : {| data : StatsData ; urlParams : UrlParams.State ; changeUrlParams : UrlParams.State -> unit |}) ->
+        let state, dispatch =
+            React.useElmish(
+                init props.data,
+                update props.urlParams props.changeUrlParams,
+                [| props.data :> obj |])
+        render props.urlParams state dispatch
+    )

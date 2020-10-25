@@ -1,11 +1,11 @@
 [<RequireQualifiedAccess>]
 module SpreadChart
 
+open Browser
 open System
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
-open Browser
+open Feliz.UseElmish
 
 open Types
 open Highcharts
@@ -48,12 +48,18 @@ let init data : State * Cmd<Msg> =
     }
     state, Cmd.none
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (urlParams : UrlParams.State) changeUrlParams (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
         { state with page = page }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
-        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+        let newUrlParams =
+            { urlParams with
+                Greeting = Some "Goodbye!"
+                DateFrom = None
+                DateTo = Some System.DateTime.Today }
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.ofSub (fun _ -> changeUrlParams newUrlParams)
+        // { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let maxOption a b =
     match a, b with
@@ -162,7 +168,6 @@ type ChartCfg = {
                         |> Option.defaultValue nan
                     dp.Date |> jsTime12h, value
             }
-
 
 let renderChartOptions scaleType state dispatch =
 
@@ -286,9 +291,12 @@ let renderScaleSelectors state dispatch =
         ]
     ]
 
-let render (state: State) dispatch =
+let render (urlParams : UrlParams.State) (state: State) dispatch =
     Html.div [
         prop.children [
+            Html.div [ Html.text (sprintf "Greeting: %A" urlParams.Greeting) ]
+            Html.div [ Html.text (sprintf "Date from: %A" urlParams.DateFrom) ]
+            Html.div [ Html.text (sprintf "Date to: %A" urlParams.DateTo) ]
             Html.div [
                 prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
                 prop.children [
@@ -305,5 +313,12 @@ let render (state: State) dispatch =
         ]
     ]
 
-let spreadChart (props : {| data : StatsData |}) =
-    React.elmishComponent("SpreadChart", init props.data, update, render)
+let chart =
+    React.functionComponent(fun (props : {| data : StatsData ; urlParams : UrlParams.State ; changeUrlParams : UrlParams.State -> unit |}) ->
+        let state, dispatch =
+            React.useElmish(
+                init props.data,
+                update props.urlParams props.changeUrlParams,
+                [| props.data :> obj |])
+        render props.urlParams state dispatch
+    )
