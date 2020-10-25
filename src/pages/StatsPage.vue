@@ -62,11 +62,14 @@
           name="statePerTreatment.inICU"
           series-type="state"
         />
-        <Info-card
+        <!-- <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
           name="statePerTreatment.deceasedToDate"
           series-type="state"
+        /> -->
+        <Deceased-card
+          :title="$t('infocard.deceasedToDate')"
         />
       </div>
       <b-row cols="12">
@@ -87,6 +90,7 @@
 <script>
 import { mapState } from 'vuex'
 import InfoCard from 'components/cards/InfoCard'
+import DeceasedCard from 'components/cards/DeceasedCard'
 import TimeStamp from 'components/TimeStamp'
 import Notice from 'components/Notice'
 import Youtube from 'components/Youtube'
@@ -98,6 +102,7 @@ export default {
   name: 'StatsPage',
   components: {
     InfoCard,
+    DeceasedCard,
     TimeStamp,
     Notice,
     Youtube,
