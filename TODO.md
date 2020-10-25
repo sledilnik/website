@@ -1,4 +1,7 @@
 # TODO
 
-- https://github.com/sledilnik/website/issues/641
-    - each countries chart should have its own sets of countries
+- https://github.com/sledilnik/website/issues/643
+    
+- countries charts ideas:
+    - "include Slovenia" switch
+    - range selector (first wave/second wave/all)

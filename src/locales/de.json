@@ -498,12 +498,10 @@
             "groupNordic": "Nordische Länder",
             "title": "Ländervergleich",
             "groupEastAsiaOceania": "Ostasien und Ozeanien",
-            "groupCriticalWorld": "Kritische Länder (Welt)",
             "groupLatinAmerica": "Lateinamerika",
             "groupExYu": "Ex-Jugoslawien",
             "groupNeighbouring": "Nachbarländer",
-            "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen",
-            "groupCriticalEU": "Kritische Länder (EU)"
+            "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -1154,8 +1152,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "Nachbarländer",
-        "groupCriticalEU": "Kritische Länder (EU)",
-        "groupCriticalWorld": "Kritische Länder (Welt)",
         "groupNordic": "Nordische Länder",
         "groupExYu": "Ex-Jugoslawien",
         "groupEastAsiaOceania": "Ostasien und Ozeanien",

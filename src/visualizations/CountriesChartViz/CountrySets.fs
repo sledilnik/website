@@ -8,14 +8,29 @@ let setNeighboringCountries = {
       CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
     }
 
-let setCriticalEU = {
-    Label = "groupCriticalEU"
-    CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
+let setHighestNewCases = {
+    Label = "groupHighestNewCases"
+    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "ARM"; "SVN"; "FRA"; "CHE"; "MNE"; "ARG"; "ESP" |]
 }
 
-let setCriticalWorld = {
-    Label = "groupCriticalWorld"
-    CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
+let setHighestActiveCases = {
+    Label = "groupHighestActiveCases"
+    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "ARM"; "SVN"; "FRA"; "CHE"; "MNE"; "ARG"; "ESP" |]
+}
+
+let setHighestTotalDeaths = {
+    Label = "groupHighestTotalDeaths"
+    CountriesCodes = [| "PER"; "BEL"; "BOL"; "ESP"; "BRA"; "CHL"; "ECU"; "MEX"; "USA"; "GBR" |]
+}
+
+let setLargestEuCountries = {
+    Label = "groupLargestEuCountries"
+    CountriesCodes = [| "DEU"; "GBR"; "FRA"; "ITA"; "ESP"; "POL"; "ROU"; "NLD"; "BEL" |]
+}
+
+let setLargestWorldCountries = {
+    Label = "groupLargestWorldCountries"
+    CountriesCodes = [| "CHN"; "IND"; "USA"; "IDN"; "PAK"; "BRA"; "NGA"; "BGD"; "RUS"; "MEX"; "JPN" |]
 }
 
 let setNordic = {
@@ -41,19 +56,23 @@ let setLatinAmerica = {
 let countriesDisplaySets (metric: MetricToDisplay) =
     match metric with
     | NewCasesPer1M ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries; setHighestNewCases
+           setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | ActiveCasesPer1M ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries; setHighestActiveCases
+           setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | TotalDeathsPer1M ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries; setHighestTotalDeaths
+           setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | DeathsPerCases ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries
+           setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
 
