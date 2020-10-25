@@ -2,7 +2,7 @@
   <b-container class="mt-3">
     <b-row>
       <div class="d-flex flex-wrap w-100 justify-content-center">
-        <Card
+        <PatientsCard
           :title="title"
           :field="field"
           :fields="fields"
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import Card from 'components/cards/Card'
+import PatientsCard from 'components/cards/PatientsCard'
 
 export default {
   name: 'CardEmbed',
   components: {
-    Card,
+    PatientsCard,
   },
   data() {
     return {

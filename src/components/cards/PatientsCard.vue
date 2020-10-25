@@ -2,10 +2,10 @@
   <div class="hp-card" v-if="loaded">
     <div class="card-title">{{ title }}</div>
     <div v-if="!fields">
-      <CardData :category="field" :patients="patients" :hospital="hospital" />
+      <PatientsCardData :category="field" :patients="patients" :hospital="hospital" />
     </div>
     <div class="d-flex flex-wrap" v-else>
-      <CardData
+      <PatientsCardData
         v-for="field in fields"
         :key="field.category"
         :field="field"
@@ -35,12 +35,12 @@
   </div>
 </template>
 <script>
-import CardData from 'components/cards/CardData'
+import PatientsCardData from 'components/cards/PatientsCardData'
 import { mapGetters, mapState } from 'vuex'
 
 export default {
   components: {
-    CardData,
+    PatientsCardData,
   },
   props: {
     title: String,
