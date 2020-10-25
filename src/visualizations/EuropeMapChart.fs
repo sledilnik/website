@@ -256,7 +256,7 @@ let redCountries =
             ("CAF", "")
             ("SUR", "")
             ("ESP", "vse administrativne enote razen Kanarski otoki (Islas Canarias)")
-            ("SWE", "administrativne enote: Ženeva, Vaud")
+            ("SWE", "administrativne enote: Jämtland, Jönköping, Örebro, Östergötland, Stockholm, Uppsala")
             ("CHE", "")
             ("TJK", "")
             ("TZA", "")

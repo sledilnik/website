@@ -1,6 +1,5 @@
 ﻿module CountriesChartViz.Rendering
 
-open CountriesChartViz.Synthesis
 open System
 open Browser
 open Elmish
@@ -9,33 +8,12 @@ open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 
 open Analysis
+open Synthesis
+open CountrySets
 open Highcharts
 open Types
 open I18N
 
-let countriesDisplaySets = [|
-    { Label = "groupNeighbouring"
-      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
-    }
-    { Label = "groupCriticalEU"
-      CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
-    }
-    { Label = "groupCriticalWorld"
-      CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
-    }
-    { Label = "groupNordic"
-      CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
-    }
-    { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "OWID_KOS"; "SRB" |]
-    }
-    { Label = "groupEastAsiaOceania"
-      CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
-    }
-    { Label = "groupLatinAmerica"
-      CountriesCodes = [| "ARG"; "BRA"; "CHL"; "COL"; "ECU"; "MEX"; "PER" |]
-    }
-|]
 
 type Msg =
     | DataRequested
@@ -46,12 +24,12 @@ type Msg =
 [<Literal>]
 let DaysOfMovingAverage = 7
 
-let init (config: CountriesChartConfig):
-    ChartState * Cmd<Msg> =
+let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
+    let metric = config.MetricToDisplay
     let state = {
         OwidDataState = NotLoaded
-        DisplayedCountriesSet = countriesDisplaySets.[0]
-        MetricToDisplay = config.MetricToDisplay
+        DisplayedCountriesSet = (countriesDisplaySets metric).[0]
+        MetricToDisplay = metric
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
     }
@@ -262,6 +240,7 @@ let renderChartContainer state chartData =
     ]
 
 let renderCountriesSetsSelectors
+    (metric: MetricToDisplay)
     (activeSet: CountriesDisplaySet)
     dispatch =
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
@@ -277,7 +256,7 @@ let renderCountriesSetsSelectors
 
     Html.div [
         prop.className "metrics-selectors"
-        countriesDisplaySets
+        countriesDisplaySets metric
         |> Array.map renderCountriesSetSelector
         |> prop.children
     ]
@@ -298,6 +277,7 @@ let render (state: ChartState) dispatch =
             Utils.renderChartTopControls topControls
             renderChartContainer state chartData
             renderCountriesSetsSelectors
+                state.MetricToDisplay
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
 

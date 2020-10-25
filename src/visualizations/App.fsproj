@@ -42,6 +42,7 @@
         <Compile Include="AgeGroupsTimelineViz\Rendering.fs" />
         <Compile Include="CountriesChartViz\Analysis.fs" />
         <Compile Include="CountriesChartViz\Synthesis.fs" />
+        <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
