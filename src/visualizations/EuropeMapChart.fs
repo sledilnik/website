@@ -462,13 +462,14 @@ let mapData state =
                 |> Option.defaultValue 0
             
             let cases = cd.NewCases |> List.toArray
+            printfn "Cases:%A" cases
+            printfn "Last Week: %A" (Array.sub cases (cases.Length - 7) 7)
+            printfn "Before Last Week: %A" (Array.sub cases 0 7)
 
-            let casesLastWeek = Array.sub cases (cases.Length - 8) 7 |> Array.sum //safer way of doing this?
-
-            let casesWeekBefore = Array.sub cases (cases.Length - 15) 7 |> Array.sum //safer way of doing this?
-
-            let relativeIncrease = float casesLastWeek/ float casesWeekBefore - 1. |> min 5.
-
+            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum //safer way of doing this?
+            let casesWeekBefore = Array.sub cases 0 7 |> Array.sum //safer way of doing this?
+            let relativeIncrease = 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
+            printfn "%A" relativeIncrease
             let ncDate =
                 (I18N.tOptions "days.date" {| date = cd.OwdDate |})
 
@@ -482,6 +483,7 @@ let mapData state =
                    incidence = incidence
                    incidenceMaxValue = incidenceMaxValue
                    newCases = nc
+                   weeklyIncrease = relativeIncrease
                    ncDate = ncDate
                    rType = cd.RestrictionText
                    rAltText = cd.RestrictionAltText
@@ -501,7 +503,7 @@ let mapData state =
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
             | OneWeekIncidence -> 
                 {| baseRec with
-                       value = float casesLastWeek 
+                       value = max (float casesLastWeek) 0.001
                        color = null
                        dataLabels = {| enabled = false |} |}
             | WeeklyIncrease -> 
@@ -519,6 +521,7 @@ let mapData state =
                incidence = null
                incidenceMaxValue = 0.0
                newCases = 0
+               weeklyIncrease = 0.
                ncDate = ""
                rType = ""
                rAltText = ""
@@ -542,13 +545,10 @@ let renderMap state geoJson _ =
         |> pojo
 
     let colorAxis =
+        match state.ChartType with
+        | TwoWeekIncidence -> 
             {|
-                ``type`` = 
-                    match state.ChartType with
-                    | TwoWeekIncidence  -> "logarithmic"
-                    | Restrictions      -> "linear" // I don't know why but everything breaks if this isn't linear 
-                    | OneWeekIncidence  -> "linear"
-                    | WeeklyIncrease    -> "linear"
+                ``type`` = "logarithmic"
                 tickInterval = 0.4
                 max = 7000 
                 min = 1  
@@ -576,7 +576,91 @@ let renderMap state geoJson _ =
                         formatter = fun() -> jsThis?value
                     |} |> pojo
             |} |> pojo
-             
+        | Restrictions ->
+            {|
+                ``type`` = "linear"
+                tickInterval = 0.4
+                max = 7000 
+                min = 1  
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7") 
+                        (0.280,"#ffe792") 
+                        (0.360,"#ffdf6c") 
+                        (0.440,"#ffb74d") 
+                        (0.520,"#ff8d3c") 
+                        (0.600,"#f85d3a") 
+                        (0.680,"#ea1641") 
+                        (0.760,"#d0004e") 
+                        (0.840,"#ad005b") 
+                        (0.920,"#800066") 
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels = 
+                    {| 
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+        | OneWeekIncidence ->
+            {|
+                ``type`` = "linear"
+                tickInterval = 0.4
+                max = 7000 
+                min = 1  
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7") 
+                        (0.280,"#ffe792") 
+                        (0.360,"#ffdf6c") 
+                        (0.440,"#ffb74d") 
+                        (0.520,"#ff8d3c") 
+                        (0.600,"#f85d3a") 
+                        (0.680,"#ea1641") 
+                        (0.760,"#d0004e") 
+                        (0.840,"#ad005b") 
+                        (0.920,"#800066") 
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels = 
+                    {| 
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+        | WeeklyIncrease ->
+            {| 
+                ``type`` = "linear"
+                tickInterval = 50
+                max = 200
+                min = -100
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#009e94")
+                        (0.166,"#6eb49d")
+                        (0.250,"#b2c9a7") 
+                        (0.333,"#f0deb0") 
+                        (0.500,"#e3b656")
+                        (0.600,"#cc8f00")
+                        (0.999,"#b06a00")
+                    |]
+                reversed=false
+                labels = 
+                {| 
+                   formatter = fun() -> sprintf "%s%%" jsThis?value
+                |} |> pojo
+            |} |> pojo
+
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
@@ -591,6 +675,7 @@ let renderMap state geoJson _ =
         let impDate = points?impDate
         let rType = points?rType
         let rAltText = points?rAltText
+        let weeklyIncrease = points?weeklyIncrease
 
         let s = StringBuilder()
         let barMaxHeight = 50
@@ -606,7 +691,7 @@ let renderMap state geoJson _ =
                 (chartText "importedCases") imported impDate
                 (chartText "incidence100k") incidence100k
                 (chartText "newCases") newCases ncDate
-
+            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
         s.Append textHtml |> ignore
 
         s.Append "<div class='bars'>" |> ignore
