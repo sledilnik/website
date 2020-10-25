@@ -460,6 +460,14 @@ let mapData state =
                 cd.NewCases
                 |> List.tryLast
                 |> Option.defaultValue 0
+            
+            let cases = cd.NewCases |> List.toArray
+
+            let casesLastWeek = Array.sub cases (cases.Length - 8) 7 |> Array.sum //safer way of doing this?
+
+            let casesWeekBefore = Array.sub cases (cases.Length - 15) 7 |> Array.sum //safer way of doing this?
+
+            let relativeIncrease = float casesLastWeek/ float casesWeekBefore - 1. |> min 5.
 
             let ncDate =
                 (I18N.tOptions "days.date" {| date = cd.OwdDate |})
@@ -493,12 +501,12 @@ let mapData state =
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
             | OneWeekIncidence -> 
                 {| baseRec with
-                       value = max (float incidence100k) 0.001
+                       value = float casesLastWeek 
                        color = null
                        dataLabels = {| enabled = false |} |}
             | WeeklyIncrease -> 
                 {| baseRec with
-                       value = max (float incidence100k) 0.001
+                       value = relativeIncrease
                        color = null
                        dataLabels = {| enabled = false |} |}
         | _ ->
@@ -521,7 +529,7 @@ let mapData state =
 let renderMap state geoJson _ =
 
     let legend =
-        let enabled = state.ChartType = TwoWeekIncidence
+        let enabled = state.ChartType <> Restrictions
         {| enabled = enabled
            title = {| text = null |}
            align = if state.MapToDisplay = World then "left" else "right"
@@ -539,8 +547,8 @@ let renderMap state geoJson _ =
                     match state.ChartType with
                     | TwoWeekIncidence  -> "logarithmic"
                     | Restrictions      -> "linear" // I don't know why but everything breaks if this isn't linear 
-                    | OneWeekIncidence  -> "logarithmic"
-                    | WeeklyIncrease    -> "logarithmic"
+                    | OneWeekIncidence  -> "linear"
+                    | WeeklyIncrease    -> "linear"
                 tickInterval = 0.4
                 max = 7000 
                 min = 1  
