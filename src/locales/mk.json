@@ -423,8 +423,6 @@
     "country-groups": {
         "groupNordic": "Нордиски земји",
         "groupEastAsiaOceania": "Источна Азија и Океанија",
-        "groupCriticalEU": "Критични држави (ЕУ)",
-        "groupCriticalWorld": "Критични држави (на светско ниво)",
         "groupNeighbouring": "Држави од регионот",
         "groupExYu": "Држави од бивша Југославија",
         "groupLatinAmerica": "Латинска Америка"

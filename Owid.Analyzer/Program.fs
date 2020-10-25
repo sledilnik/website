@@ -9,6 +9,8 @@ type Row = string[]
 type LatestCountryData = {
     IsoCode: string
     CountryName: string
+    Continent: string
+    Population: float
     NewCasesPer100k: float
     ActiveCasesPer100k: float
     TotalDeathsPer100k: float
@@ -16,15 +18,17 @@ type LatestCountryData = {
 }
 with
     override this.ToString() =
-        sprintf "%s,%s,%f,%f,%f,%f" this.IsoCode this.CountryName
+        sprintf "%s,%s,%s,%f,%f,%f,%f,%f"
+            this.IsoCode this.CountryName this.Continent
+            this.Population
             this.NewCasesPer100k
             this.ActiveCasesPer100k
             this.TotalDeathsPer100k
             this.NewDeathsPer100k
 
     static member CsvHeader() =
-            "iso_code,country_name,new_cases_per_million," +
-            "active_cases_per_million," +
+            "iso_code,country_name,continent,population," +
+            "new_cases_per_million,active_cases_per_million," +
             "total_deaths_per_million,new_deaths_per_million"
 
 let isNotEmpty (text: string) = not(String.IsNullOrWhiteSpace(text))
@@ -33,6 +37,17 @@ let parseFloat (value: string) =
     match value with
     | "" -> 0.
     | value -> Double.Parse(value, CultureInfo.InvariantCulture)
+
+let parseInt (value: string) =
+    match value with
+    | "" -> 0
+    | value ->
+        try
+            Int32.Parse(value, CultureInfo.InvariantCulture)
+        with
+        | ex ->
+            printf "invalid value: %s\n" value
+            raise ex
 
 let parseCsvLine (line: string) : Row =
     line.Split(",")
@@ -62,9 +77,13 @@ let getLatestCountryData (countryData: (string * Row[])) =
 
         let lastRow = countryRows.[countryRows.Length - 1]
         let location = lastRow.[2]
+        let continent = lastRow.[1]
+        let population = lastRow.[26] |> parseFloat
 
         { IsoCode = iso_code
           CountryName = location
+          Continent = continent
+          Population = population
           ActiveCasesPer100k = activeCasesPer100k
           NewCasesPer100k = newCasesPer100k
           TotalDeathsPer100k = totalDeathsPer100k
@@ -72,8 +91,15 @@ let getLatestCountryData (countryData: (string * Row[])) =
     else
         None
 
+let dumpCsvPropertyNames (csvLines: string[]) =
+    let header = csvLines.[0]
+    let propertyNames = header.Split(",")
+    propertyNames
+    |> Array.iteri (fun i property -> printf "%d %s\n" i property)
+
+
 [<EntryPoint>]
-let main argv =
+let main _ =
     let csvUrl =
         "https://github.com/owid/covid-19-data/raw/master/public/data/" +
         "owid-covid-data.csv"
@@ -83,18 +109,13 @@ let main argv =
 
     let csvLines = csvContent.Split("\n")
 
-    let header = csvLines.[0]
-    let propertyNames = header.Split(",")
-
-//    propertyNames
-//    |> Array.iteri (fun i property -> printf "%d %s\n" i property)
+//    csvLines |> dumpCsvPropertyNames
 
     let dataLines = csvLines |> Array.skip(1)
     let dataRows =
         dataLines
         |> Array.filter (fun line -> line |> isNotEmpty )
         |> Array.map parseCsvLine
-
 
     let rowsByCountries =
         dataRows

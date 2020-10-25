@@ -1052,13 +1052,16 @@
         "ZWE": "Zimbabwe"
     },
     "country-groups": {
+        "groupHighestNewCases": "highest values",
+        "groupHighestActiveCases": "highest values",
+        "groupHighestTotalDeaths": "highest values",
+        "groupLargestEuCountries": "largest EU* countries",
+        "groupLargestWorldCountries": "largest World countries",
         "groupLatinAmerica": "Latin America",
         "groupEastAsiaOceania": "East Asia and Oceania",
         "groupExYu": "Ex-Yugoslavia",
         "groupNordic": "Nordic countries",
-        "groupCriticalWorld": "Critical countries (World)",
-        "groupCriticalEU": "Critical countries (EU)",
-        "groupNeighbouring": "Surroundings"
+        "groupNeighbouring": "surroundings"
     },
     "pageNotFound": {
         "notFound": "404: page not found",

@@ -42,8 +42,6 @@
         },
         "countries": {
             "groupNeighbouring": "Shtetet e rajonit",
-            "groupCriticalWorld": "Shtete kritike (në nivel botëror)",
-            "groupCriticalEU": "Shtete kritike (BE)",
             "groupNordic": "Shtetet Nordike",
             "groupExYu": "Ish-Jugosllavia",
             "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
@@ -1056,8 +1054,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "Shtetet fqinje",
-        "groupCriticalEU": "Shtetet kritike (BE)",
-        "groupCriticalWorld": "Shtetet kritike (Botë)",
         "groupNordic": "Shtetet Nordike",
         "groupExYu": "Ish-Jugosllavia",
         "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",

@@ -255,11 +255,9 @@
         "ZWE": "Zimbabve"
     },
     "country-groups": {
-        "groupCriticalEU": "Kritične države (EU)",
         "groupEastAsiaOceania": "Istočna Azija i Oceanija",
         "groupNordic": "Nordijske države",
         "groupLatinAmerica": "Latinska Amerika",
-        "groupCriticalWorld": "Kritične države (svijet)",
         "groupExYu": "Ex-Jugoslavija",
         "groupNeighbouring": "Susjedne države"
     },

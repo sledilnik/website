@@ -151,8 +151,6 @@
     },
     "country-groups": {
         "groupNeighbouring": "Paesi limitrofi",
-        "groupCriticalEU": "Paesi critici (UE)",
-        "groupCriticalWorld": "Paesi critici (Mondo)",
         "groupNordic": "Paesi nordici",
         "groupExYu": "Ex Jugoslavia",
         "groupEastAsiaOceania": "Asia orientale e Oceania",

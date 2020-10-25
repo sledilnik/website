@@ -410,9 +410,12 @@
         "ZWE": "Zimbabve"
     },
     "country-groups": {
+        "groupHighestNewCases": "z največjimi vrednostmi",
+        "groupHighestActiveCases": "z največjimi vrednostmi",
+        "groupHighestTotalDeaths": "z največjimi vrednostmi",
+        "groupLargestEuCountries": "največje države EU*",
+        "groupLargestWorldCountries": "največje države sveta",
         "groupNeighbouring": "okolica",
-        "groupCriticalEU": "kritične države (EU)",
-        "groupCriticalWorld": "kritične države (svet)",
         "groupNordic": "nordijske države",
         "groupExYu": "ex-Jugoslavija",
         "groupEastAsiaOceania": "vzh. Azija in Oceanija",
