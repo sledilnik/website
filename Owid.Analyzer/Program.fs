@@ -9,18 +9,22 @@ type Row = string[]
 type LatestCountryData = {
     IsoCode: string
     CountryName: string
-    NewCasesPerMillion: float
-    TotalDeathsPerMillion: float
-    NewDeathsPerMillion: float
+    NewCasesPer100k: float
+    ActiveCasesPer100k: float
+    TotalDeathsPer100k: float
+    NewDeathsPer100k: float
 }
 with
     override this.ToString() =
-        sprintf "%s,%s,%f,%f,%f" this.IsoCode this.CountryName
-            this.NewCasesPerMillion this.TotalDeathsPerMillion
-            this.NewDeathsPerMillion
+        sprintf "%s,%s,%f,%f,%f,%f" this.IsoCode this.CountryName
+            this.NewCasesPer100k
+            this.ActiveCasesPer100k
+            this.TotalDeathsPer100k
+            this.NewDeathsPer100k
 
     static member CsvHeader() =
             "iso_code,country_name,new_cases_per_million," +
+            "active_cases_per_million," +
             "total_deaths_per_million,new_deaths_per_million"
 
 let isNotEmpty (text: string) = not(String.IsNullOrWhiteSpace(text))
@@ -35,17 +39,38 @@ let parseCsvLine (line: string) : Row =
 
 let getLatestCountryData (countryData: (string * Row[])) =
     let (iso_code, countryRows) = countryData
-    let lastRow = countryRows.[countryRows.Length - 1]
-    let location = lastRow.[2]
-    let newCasesPerMillion = lastRow.[10]
-    let totalDeathsPerMillion = lastRow.[12]
-    let newDeathsPerMillion = lastRow.[13]
 
-    { IsoCode = iso_code
-      CountryName = location
-      NewCasesPerMillion = newCasesPerMillion |> parseFloat
-      TotalDeathsPerMillion = totalDeathsPerMillion |> parseFloat
-      NewDeathsPerMillion = newDeathsPerMillion |> parseFloat }
+    if countryRows.Length >= 14 then
+        let rowsLast14Days = countryRows |> Array.rev |> Array.take 14
+        let rowsLast7Days = countryRows |> Array.rev |> Array.take 14
+
+        let activeCasesPer100k =
+            (rowsLast14Days
+             |> Array.sumBy (fun row -> row.[11] |> parseFloat)) / 10.
+
+        let newCasesPer100k =
+            (rowsLast7Days
+             |> Array.sumBy (fun row -> row.[11] |> parseFloat)) / 70.
+
+        let totalDeathsPer100k =
+            (rowsLast7Days
+             |> Array.sumBy (fun row -> row.[13] |> parseFloat)) / 70.
+
+        let newDeathsPer100k =
+            (rowsLast7Days
+             |> Array.sumBy (fun row -> row.[14] |> parseFloat)) / 70.
+
+        let lastRow = countryRows.[countryRows.Length - 1]
+        let location = lastRow.[2]
+
+        { IsoCode = iso_code
+          CountryName = location
+          ActiveCasesPer100k = activeCasesPer100k
+          NewCasesPer100k = newCasesPer100k
+          TotalDeathsPer100k = totalDeathsPer100k
+          NewDeathsPer100k = newDeathsPer100k } |> Some
+    else
+        None
 
 [<EntryPoint>]
 let main argv =
@@ -60,6 +85,9 @@ let main argv =
 
     let header = csvLines.[0]
     let propertyNames = header.Split(",")
+
+//    propertyNames
+//    |> Array.iteri (fun i property -> printf "%d %s\n" i property)
 
     let dataLines = csvLines |> Array.skip(1)
     let dataRows =
@@ -76,6 +104,7 @@ let main argv =
     let countriesLatestData =
         rowsByCountries
         |> Array.map getLatestCountryData
+        |> Array.choose id
 
     printf "%s\n" (LatestCountryData.CsvHeader())
     countriesLatestData

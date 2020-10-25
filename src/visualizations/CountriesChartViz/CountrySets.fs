@@ -13,9 +13,19 @@ let setHighestNewCasesEU = {
     CountriesCodes = [| "BEL"; "ESP"; "CZE"; "FRA"; "NLD"; "ISL"; "MKD"; "CHE"|]
 }
 
+let setHighestActiveCasesEU = {
+    Label = "groupHighestActiveCasesEU"
+    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "SVN"; "FRA"; "CHE"; "ESP"; "SVK"; "GBR"|]
+}
+
 let setCriticalEU = {
     Label = "groupCriticalEU"
     CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
+}
+
+let setHighestActiveCasesWorld = {
+    Label = "groupHighestActiveCasesWorld"
+    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "ARM"; "SVN"; "FRA"; "CHE"; "ARG"; "ESP" |]
 }
 
 let setCriticalWorld = {
@@ -50,7 +60,8 @@ let countriesDisplaySets (metric: MetricToDisplay) =
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | ActiveCasesPer1M ->
-        [| setNeighboringCountries; setCriticalEU; setCriticalWorld
+        [| setNeighboringCountries; setHighestActiveCasesEU
+           setHighestActiveCasesWorld
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
     | TotalDeathsPer1M ->
