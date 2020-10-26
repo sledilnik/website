@@ -10,7 +10,6 @@
         "ostanizdrav": "#OstaniZdrav",
         "tables": "Table",
         "models": "Models",
-        "animation": "Animation",
         "faq": "FAQ",
         "about": "About",
         "team": "Team",
@@ -60,7 +59,13 @@
         "inHospital": "Hospitalized",
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
+        "deceasedInLast7Days": "Confirmed Deaths in the last 7 Days",
+        "total": "Total:",
         "lastUpdated": "{{ date, %a, %b %e }}"
+    },
+    "youtube": {
+        "title": "Animation of COVID-19 spread",
+        "titleMenu": "Animation"
     },
     "tables": {
         "title": "Table",

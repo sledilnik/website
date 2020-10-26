@@ -69,7 +69,8 @@
           series-type="state"
         /> -->
         <Deceased-card
-          :title="$t('infocard.deceasedToDate')"
+          :title="$t('infocard.deceasedInLast7Days')"
+          field="total.deceased.toDate"
         />
       </div>
       <b-row cols="12">

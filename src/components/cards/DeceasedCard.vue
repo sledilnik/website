@@ -1,6 +1,6 @@
 <template>
   <div class="hp-card" v-if="loaded">
-    <div class="card-title">{{ title }} v 7 dneh</div>
+    <div class="card-title">{{ title }}</div>
     <div class="card-number">
       <span>{{ runningSum(0, 7) }}</span>
       <div class="card-percentage-diff" :class="diffClass">
@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="card-diff">
-      <div class="card-note">Skupno: {{ totalDeceased }}</div>
+      <div class="card-note">{{ $t('infocard.total')}} {{ totalDeceased }}</div>
     </div>
     <div class="data-time">
       {{
@@ -29,6 +29,7 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   props: {
     title: String,
+    field: String
   },
   computed: {
     ...mapGetters('patients', ['data', 'runningSum']),

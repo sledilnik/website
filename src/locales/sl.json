@@ -10,7 +10,6 @@
         "ostanizdrav": "#OstaniZdrav",
         "tables": "Tabela",
         "models": "Modeli",
-        "animation": "Animacija",
         "faq": "FAQ",
         "about": "O projektu",
         "team": "Ekipa",
@@ -60,7 +59,13 @@
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
+        "deceasedInLast7Days": "Umrli v zadnjih 7 dneh",
+        "total": "Skupno:",
         "lastUpdated": "{{ date, %a., %e. %b. }}"
+    },
+    "youtube": {
+        "title": "Animacija širjenja COVID-19",
+        "titleMenu": "Animacija"
     },
     "tables": {
         "title": "Tabela",

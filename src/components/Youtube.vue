@@ -1,7 +1,7 @@
 <template>
   <div class="visualizations">
     <div class="visualization container">
-      <section class="visualization-chart">
+      <section class="visualization-chart" id="youtube">
         <div class="title-chart-wrapper">
           <div class="title-brand-wrapper">
             <h2><a href="#youtube">{{ $t('youtube.title') }}</a></h2>
