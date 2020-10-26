@@ -16,8 +16,11 @@ const getters = {
     return state.data
   },
 
-  runningSum: (state, getters) => (days) => {
-    let array = getters.data.slice(Math.max(getters.data.length - days, 0))
+  runningSum: (state, getters) => (start, end) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
     let sum = array.reduce(getSum, 0)
     return sum
   },
@@ -26,7 +29,7 @@ const getters = {
 const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 11))
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 16))
     const data = await ApiService.get(`${ApiEndpoint()}/api/patients`, from, to)
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
