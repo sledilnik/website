@@ -555,7 +555,9 @@ let renderMap state geoJson _ =
            floating = true
            borderWidth = 1
            backgroundColor = "white"
-           valueDecimals = 0 |}
+           valueDecimals = 0 
+           width = 70
+        |}
         |> pojo
 
     let colorAxis =
