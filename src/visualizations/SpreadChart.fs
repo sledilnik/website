@@ -2,10 +2,10 @@
 module SpreadChart
 
 open System
+open Browser
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
-open Browser
+open Feliz.UseElmish
 
 open Types
 open Highcharts
@@ -48,11 +48,12 @@ let init data : State * Cmd<Msg> =
     }
     state, Cmd.none
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update queryParams (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ChangePage page ->
         { state with page = page }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
+        QueryParams.setState { queryParams with Greeting = Some "Hello from SpreadChart" }
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let maxOption a b =
@@ -162,7 +163,6 @@ type ChartCfg = {
                         |> Option.defaultValue nan
                     dp.Date |> jsTime12h, value
             }
-
 
 let renderChartOptions scaleType state dispatch =
 
@@ -286,9 +286,10 @@ let renderScaleSelectors state dispatch =
         ]
     ]
 
-let render (state: State) dispatch =
+let render (queryParams : QueryParams.State) (state: State) dispatch =
     Html.div [
         prop.children [
+            Html.text (queryParams.Greeting.ToString())
             Html.div [
                 prop.style [ style.height 480; (Interop.mkStyle "width" "100%"); style.position.relative ]
                 prop.children [
@@ -305,5 +306,8 @@ let render (state: State) dispatch =
         ]
     ]
 
-let spreadChart (props : {| data : StatsData |}) =
-    React.elmishComponent("SpreadChart", init props.data, update, render)
+let chart =
+    React.functionComponent(fun (props : {| data : StatsData ; queryParams : QueryParams.State |}) ->
+        let state, dispatch = React.useElmish(init props.data, update props.queryParams, [| |])
+        render props.queryParams state dispatch
+    )

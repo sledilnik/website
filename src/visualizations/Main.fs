@@ -12,6 +12,7 @@ let Visualizations
          apiEndpoint: string,
          visualization: string option) =
     Program.mkProgram (fun () -> App.init query visualization page apiEndpoint) App.update App.render
+    |> Program.withSubscription App.queryParamsChangedSubscription
     #if DEBUG
     |> Program.withDebugger
     #endif
