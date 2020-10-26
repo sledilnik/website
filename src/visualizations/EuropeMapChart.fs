@@ -31,6 +31,7 @@ type CountryData =
       TwoWeekIncidence100k: float
       TwoWeekIncidence: float []
       TwoWeekIncidenceMaxValue: float
+      OneWeekIncidence100k: float
       NewCases: int list
       OwdDate: DateTime
       // NIJZ data
@@ -353,6 +354,13 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             |> List.sum)
             / 10.
 
+        let weeklyIncidence100k = 
+            let temp = (dps 
+                |> List.map(fun dp -> dp.NewCasesPerMillion)
+                |> List.choose id 
+                |> List.toArray)
+            (Array.sub temp 7 7 |> Array.sum) / 10.
+
         let incidence =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
@@ -395,6 +403,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
               CountryData.TwoWeekIncidence100k = incidence100k
               CountryData.TwoWeekIncidence = incidence
               CountryData.TwoWeekIncidenceMaxValue = incidenceMaxValue
+              CountryData.OneWeekIncidence100k = weeklyIncidence100k
               CountryData.NewCases = newCases
               CountryData.OwdDate = owdDate
               CountryData.RestrictionColor = rColor
@@ -455,6 +464,7 @@ let mapData state =
             let incidence100k = cd.TwoWeekIncidence100k |> int
             let incidence = cd.TwoWeekIncidence
             let incidenceMaxValue = cd.TwoWeekIncidenceMaxValue
+            let weeklyIncidence = cd.OneWeekIncidence100k
 
             let nc =
                 cd.NewCases
@@ -466,10 +476,14 @@ let mapData state =
             printfn "Last Week: %A" (Array.sub cases (cases.Length - 7) 7)
             printfn "Before Last Week: %A" (Array.sub cases 0 7)
 
-            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum //safer way of doing this?
-            let casesWeekBefore = Array.sub cases 0 7 |> Array.sum //safer way of doing this?
-            let relativeIncrease = 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
-            printfn "%A" relativeIncrease
+            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum 
+            let casesWeekBefore = Array.sub cases 0 7 |> Array.sum 
+            let relativeIncrease = 
+                if casesWeekBefore > 0
+                    then 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
+                else
+                    0.
+
             let ncDate =
                 (I18N.tOptions "days.date" {| date = cd.OwdDate |})
 
@@ -503,7 +517,7 @@ let mapData state =
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
             | OneWeekIncidence -> 
                 {| baseRec with
-                       value = max (float casesLastWeek) 0.001
+                       value = max (float weeklyIncidence) 0.001
                        color = null
                        dataLabels = {| enabled = false |} |}
             | WeeklyIncrease -> 
@@ -608,10 +622,10 @@ let renderMap state geoJson _ =
             |} |> pojo
         | OneWeekIncidence ->
             {|
-                ``type`` = "linear"
+                ``type`` = "logarithmic"
                 tickInterval = 0.4
-                max = 7000 
-                min = 1  
+                max = 3500 
+                min = 0.5
                 endOnTick = false
                 startOnTick = false
                 stops =
