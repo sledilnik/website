@@ -72,7 +72,6 @@ let renderChartOptions (state : State) dispatch =
             labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
             opposite = true
             visible = true
-            max = None
             crosshair = true
         |}
         {|
@@ -81,7 +80,6 @@ let renderChartOptions (state : State) dispatch =
             labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
             opposite = false
             visible = true
-            max = Some 30
             crosshair = true
         |}
     |]
