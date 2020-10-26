@@ -5,6 +5,7 @@ import { LayoutPlugin, TabsPlugin, BTable, FormTextareaPlugin, BFormSelect, Tool
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSpinner, faGlobe, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import Trend from 'vuetrend'
 
 import './filters'
 import './directives'
@@ -20,5 +21,7 @@ Vue.component('b-form-select', BFormSelect)
 // fontawesome
 library.add(faSpinner, faGlobe, faCaretDown)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.use(Trend)
 
 Vue.config.productionTip = false

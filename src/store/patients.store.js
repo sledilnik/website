@@ -16,6 +16,16 @@ const getters = {
     return state.data
   },
 
+  lastData: (state, getters) => (start, end) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
+    return array.map((obj) => {
+      return obj.total.deceased.today
+    })
+  },
+
   runningSum: (state, getters) => (start, end) => {
     let array = getters.data.slice(
       getters.data.length - end,

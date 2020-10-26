@@ -7,15 +7,30 @@
         {{ diff | prefixDiff }}%
       </div>
     </div>
-    <div class="card-diff">
-      <div class="card-note">{{ $t('infocard.total')}} {{ totalDeceased }}</div>
-    </div>
-    <div class="data-time">
-      {{
-        $t('infocard.lastUpdated', {
-          date: new Date(exportTime),
-        })
-      }}
+    <div class="d-flex flex-column flex-sm-row">
+      <div class="order-2 order-sm-1" style="flex: 0 0 30%">
+        <div class="card-diff">
+          <div class="card-note">
+            {{ $t('infocard.total') }} {{ totalDeceased }}
+          </div>
+        </div>
+        <div class="data-time">
+          {{
+            $t('infocard.lastUpdated', {
+              date: new Date(exportTime),
+            })
+          }}
+        </div>
+      </div>
+      <trend
+        :data="lastData(0, 14)"
+        :gradient="['#ffbe88', '#ffbe88', '#ffbe88']"
+        :stroke-width="4"
+        auto-draw
+        smooth
+        class="sparkline order-1 order-sm-2 mb-3 mb-sm-0"
+      >
+      </trend>
     </div>
   </div>
   <div class="hp-card" v-else>
@@ -29,10 +44,10 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   props: {
     title: String,
-    field: String
+    field: String,
   },
   computed: {
-    ...mapGetters('patients', ['data', 'runningSum']),
+    ...mapGetters('patients', ['data', 'runningSum', 'lastData']),
     ...mapState('patients', ['exportTime', 'loaded']),
     totalDeceased() {
       return this.data[this.data.length - 1].total.deceased.toDate
@@ -56,4 +71,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.sparkline {
+  height: 80%;
+}
+</style>
