@@ -44,7 +44,6 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
         {
           ApiEndpoint = apiEndpoint
           Page = page
-          UrlParams = UrlParams.initialState
           Query = query
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
@@ -71,8 +70,6 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
 let update (msg: Msg) (state: State) =
     match msg with
-    | UrlParamsChanged urlParams ->
-        { state with UrlParams = urlParams }, Cmd.none
     | StatsDataRequested ->
         match state.StatsData with
         | Loading -> state, Cmd.none
@@ -91,9 +88,7 @@ let update (msg: Msg) (state: State) =
 
 open Elmish.React
 
-let render (state: State) (dispatch : Msg -> unit) =
-    let changeUrlParams = UrlParamsChanged >> dispatch
-
+let render (state: State) (_: Msg -> unit) =
     let hospitals =
           { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
@@ -112,11 +107,7 @@ let render (state: State) (dispatch : Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        MetricsComparisonChart.chart
-                            {| data = data
-                               urlParams = state.UrlParams
-                               changeUrlParams = changeUrlParams |} }
+                    | Success data -> lazyView MetricsComparisonChart.metricsComparisonChart {| data = data |} }
 
     let dailyComparison =
           { VisualizationType = DailyComparison
@@ -142,11 +133,7 @@ let render (state: State) (dispatch : Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        SpreadChart.chart
-                            {| data = data
-                               urlParams = state.UrlParams
-                               changeUrlParams = changeUrlParams |} }
+                    | Success data -> lazyView SpreadChart.spreadChart {| data = data |} }
 
     let map =
           { VisualizationType = Map

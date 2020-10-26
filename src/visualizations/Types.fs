@@ -150,7 +150,6 @@ type State =
     {
       ApiEndpoint : string
       Page : string
-      UrlParams : UrlParams.State
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
@@ -166,7 +165,6 @@ type Visualization = {
 }
 
 type Msg =
-    | UrlParamsChanged of UrlParams.State
     | StatsDataRequested
     | StatsDataLoaded of RemoteData<StatsData, string>
     | WeeklyStatsDataRequested
