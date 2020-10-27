@@ -244,7 +244,10 @@
             "new": "Confirmed Cases",
             "active": "Active Cases",
             "tests": "Tests Performed",
-            "positivePct": "Share of Positive Tests (%)"
+            "positivePct": "Share of Positive Tests (%)",
+            "hospitalAdmitted": "Admitted to Hospital",
+            "hospitalDischarged": "Discharged from Hospital",
+            "deceased": "Deaths"
         },
         "cases": {
             "title": "Confirmed Cases",
