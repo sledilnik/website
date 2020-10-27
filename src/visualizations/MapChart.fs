@@ -371,8 +371,23 @@ let renderMap (state : State) =
            |}
 
         let sparklineFormatter newCases =
-            let temp = [|([| "#ffb74d" |] |> Array.replicate 46 |> Array.concat ); ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
-            let columnColors = [| temp; ([|"#bda506" |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
+            let desaturateColor (rgb:string) (sat:float) = 
+                let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+                let r = (argb &&& 0x00FF0000) >>> 16
+                let g = (argb &&& 0x0000FF00) >>> 8
+                let b = (argb &&& 0x000000FF)
+                let avg = (float(r + g + b) / 3.0) * 1.6
+                let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+                let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+                let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+                sprintf "#%02x%02x%02x" newR newG newB
+
+            let color1 = "#bda506"
+            let color2 = desaturateColor color1 0.6
+            let color3 = desaturateColor color1 0.3
+
+            let temp = [|([| color3 |] |> Array.replicate 46 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
+            let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
 
 
             let options =
