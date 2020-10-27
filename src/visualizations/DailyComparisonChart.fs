@@ -155,7 +155,10 @@ let renderChartOptions (state : State) dispatch =
 
             let percent a b =
                 match a, b with
-                | Some v, Some p -> sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
+                | Some v, Some p -> 
+                    if p = 0 && v = 0
+                    then ""
+                    else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
             yield pojo
