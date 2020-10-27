@@ -256,7 +256,7 @@ let seriesData (state : State) =
                     let newCases = 
                         confirmedCasesValue 
                         |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc) 
-                        |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
+                        |> Array.skip (confirmedCasesValue.Length - 56) // we only show last 56 days
                         |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
@@ -386,7 +386,7 @@ let renderMap (state : State) =
             let color2 = desaturateColor color1 0.6
             let color3 = desaturateColor color1 0.3
 
-            let temp = [|([| color3 |] |> Array.replicate 46 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
+            let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
             let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
 
 
@@ -398,11 +398,21 @@ let renderMap (state : State) =
                             backgroundColor = "transparent"
                         |} |> pojo
                     credits = {| enabled = false |}
-                    xAxis = {| visible = false |}
+                    xAxis = 
+                        {| 
+                            visible = true 
+                            labels = {| enabled = false |} 
+                            title = {| enabled = false |}
+                            tickInterval = 7 
+                            lineColor = "#696969"
+                            tickColor = "#696969"
+                            tickLength = 4
+                        |}
                     yAxis = 
                         {| 
-                            title = {| enabled = false|}
+                            title = {| enabled = false |}
                             visible = true  
+                            opposite = true 
                             min = 0.
                             max = newCases |> Array.max 
                             tickInterval = 5 
