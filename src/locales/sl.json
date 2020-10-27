@@ -694,7 +694,11 @@
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
             "tests": "Opravljeni testi",
-            "positivePct": "Delež pozitivnih testov (%)"
+            "positivePct": "Delež pozitivnih testov (%)",
+            "hospitalAdmitted": "Sprejeti v bolnišnico",
+            "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icuAdmitted": "Sprejeti v intenzivno",
+            "deceased": "Umrli"
         },
         "cases": {
             "title": "Potrjeni primeri",
