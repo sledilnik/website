@@ -161,8 +161,8 @@ let renderChartOptions (state : State) dispatch =
             let percent a b =
                 match a, b with
                 | Some v, Some p -> 
-                    if p = 0 && v = 0
-                    then ""
+                    if p = 0 
+                    then if v = 0 then "" else ">500%"     
                     else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
