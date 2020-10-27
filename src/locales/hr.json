@@ -605,7 +605,11 @@
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba po danu u tjednu",
-            "titleMenu": "Dan u tjednu – usporedba"
+            "titleMenu": "Dan u tjednu – usporedba",
+            "deceased": "Smrtni slučajevi",
+            "icuAdmitted": "Primljeni na odjel intenzivne njege",
+            "hospitalDischarged": "Otpušteni iz bolnice",
+            "hospitalAdmitted": "Primljeni u bolnici"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -838,6 +842,10 @@
         "schools6+": {
             "description": "Nastava na daljinu za učenike od 6. razreda osnovne škole, srednje škole i muzičkih škola",
             "title": "Škole 6+"
+        },
+        "municipality2": {
+            "description": "Zabrana kretanja izvan granica općine",
+            "title": "Općine"
         }
     },
     "pageNotFound": {
@@ -1074,7 +1082,7 @@
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
         "newPage": "🆕 Nova stranica:",
         "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije",
-        "progressC19": "Tipičan napredak Covida-19. Hospitalizacija, intenzivna terapija i smrtnost.",
+        "progressC19": "Tipičan napredak bolesti COVID-19. Hospitalizacija, intenzivna terapija i smrtnost.",
         "newInfographics": "🆕 📇 Nove infografike:"
     },
     "timestamp": {
