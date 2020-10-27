@@ -387,9 +387,10 @@ let renderMap (state : State) =
                             title = {| enabled = false|}
                             visible = true  
                             min = 0.
-                            max = newCases |> Array.max  
+                            max = newCases |> Array.max 
+                            tickInterval = 5 
                             endOnTick = true 
-                            startOnTick = true
+                            startOnTick = false 
                             allowDecimals = false 
                             showFirstLabel = true
                             showLastLabel = true
@@ -403,14 +404,21 @@ let renderMap (state : State) =
                             {| 
                                 data = newCases |> Array.map ( max 0.)
                                 animation = false
-                                color = "#d5c768" // try to access the tooltip color here?
-                                borderColor = "#d5c768" 
-                                pointWidth = 15
+                                colors = Array.append ([|"#bad568" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat )
+                                borderColor = Array.append ([|"#bad568" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat )
+                                pointWidth = 16
+                                colorByPoint = true
                             |} |> pojo 
                         |]
                 |} |> pojo
-            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
-            """<div id="tooltip-chart"; class="tooltip-chart";></div>"""
+            match state.MapToDisplay with 
+            | Municipality -> 
+                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
+                """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
+            | Region -> 
+                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-reg", options)) 10 |> ignore
+                """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
+
 
 
         let tooltipFormatter state jsThis =
@@ -421,14 +429,11 @@ let renderMap (state : State) =
             let totalConfirmed = points?totalConfirmed
             let weeklyIncrease = points?weeklyIncrease
             let newCases= points?newCases
-            let newCasesMax = points?newCasesMax//TODO: remove
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
 
             let lastTwoWeeks = Array.sub newCases (newCases.Length - 15) 14 
-
-            printfn "%A" lastTwoWeeks
 
             let label =
                 match state.ContentType with
