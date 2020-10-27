@@ -1,7 +1,7 @@
 {
     "meta": {
         "title": "COVID-19 Tracking",
-        "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
+        "description": "COVID-19 Slovenia tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
     },
     "navbar": {
         "menu": "Menu",
@@ -38,7 +38,7 @@
         "newInfographics": "🆕 📇 New infographics:",
         "newChart": "🆕 📊 New chart:",
         "newPage": "🆕 New page:",
-        "progressC19": "Typical Progress of Covid-19. Hospitalization, intensive therapy and mortality.",
+        "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
         "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
     },
