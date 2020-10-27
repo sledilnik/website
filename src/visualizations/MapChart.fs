@@ -476,7 +476,7 @@ let renderMap (state : State) =
                borderWidth = 1
                backgroundColor = "white"
                valueDecimals = 0 
-               width = 70//TODO: Clean this up for confirmed and deceased cases.
+               width = 70
             |}
             |> pojo
 
