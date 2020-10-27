@@ -432,7 +432,7 @@ let renderMap (state : State) =
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
 
-            let lastTwoWeeks = Array.sub newCases (newCases.Length - 15) 14 
+            let lastTwoWeeks = Array.sub newCases (newCases.Length - 14) 14 
 
             let label =
                 match state.ContentType with
