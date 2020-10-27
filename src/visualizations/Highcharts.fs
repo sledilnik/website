@@ -16,6 +16,9 @@ let chartFromWindow: obj -> ReactElement = jsNative
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
+[<Import("sparklineChart", from="./_highcharts")>]
+let sparklineChart (documentElementId : string, options : obj) : unit = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -129,6 +132,7 @@ let addContainmentMeasuresFlags
         16,10, "#FFe6e6", "regions"
         19,10, "#FFe6e6", "schools6+"
         20,10, "#FFe6e6", "movement"
+        27,10, "#FFe6e6", "municipality2"
     |]
     {|
         ``type`` = "flags"

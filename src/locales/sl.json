@@ -571,6 +571,10 @@
         "movement": {
             "title": "🚫21-6h",
             "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
+        },
+        "municipality2": {
+            "title": "Občine",
+            "description": "Prepoved gibanja izven meja občin"
         }
     },
     "phase": {

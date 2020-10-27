@@ -259,7 +259,12 @@
         "groupNordic": "Nordijske države",
         "groupLatinAmerica": "Latinska Amerika",
         "groupExYu": "Ex-Jugoslavija",
-        "groupNeighbouring": "Susjedne države"
+        "groupNeighbouring": "susjedne države",
+        "groupLargestWorldCountries": "najveće svjetske države",
+        "groupLargestEuCountries": "najveće EU* države",
+        "groupHighestTotalDeaths": "najveći broj",
+        "groupHighestActiveCases": "najveći broj",
+        "groupHighestNewCases": "najveći broj"
     },
     "charts": {
         "municipalities": {
@@ -284,7 +289,8 @@
             "viewActive": "Aktivne",
             "viewTotal": "Sve",
             "viewDoublingTime": "Vrijeme udvostručenja",
-            "viewLast": "Zadnje"
+            "viewLast": "Zadnje",
+            "titleMenu": "Općine – slučajevi"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
@@ -301,7 +307,8 @@
             "seriousCases": "Teški slučajevi",
             "hospitalizations": "Hospitalizacija",
             "title": "Udio teških slučajeva",
-            "hospitalDeceasedShare": "Udio smrtnih slučajeva u bolnicama"
+            "hospitalDeceasedShare": "Udio smrtnih slučajeva u bolnicama",
+            "titleMenu": "Teški slučajevi"
         },
         "common": {
             "dataSource": "izvor podataka",
@@ -355,17 +362,20 @@
             "absolute": "Apsolutno",
             "deceased": "Smrtni slučajevi",
             "yesterday": "Jučer",
-            "relativeIncrease": "Tjedni prirast"
+            "relativeIncrease": "Tjedni prirast",
+            "titleMenu": "Općine – karta"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
             "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
-            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika"
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "titleMenu": "Države – novi slučajevi"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
             "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
-            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika"
+            "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "titleMenu": "Države – smrtni slučajevi"
         },
         "ageGroups": {
             "male": "Muškarci",
@@ -383,14 +393,16 @@
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi",
-            "disclaimer": "Napomena: podatke o smrtnim slučajevima primamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o preminulima prijavljuju institucije (zdravstvo, starački domovi) NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva."
+            "disclaimer": "Napomena: podatke o smrtnim slučajevima primamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o preminulima prijavljuju institucije (zdravstvo, starački domovi) NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva.",
+            "titleMenu": "Dob, spol"
         },
         "ageGroupsTimeline": {
             "title": "Potvrđeni slučajevi po dobnim skupinama",
             "newCases": "Novi slučajevi",
             "newCasesRelative": "Novi slučajevi (relativno)",
             "activeCases": "Aktivni slučajevi",
-            "activeCasesRelative": "Aktivni slučajevi (relativno)"
+            "activeCasesRelative": "Aktivni slučajevi (relativno)",
+            "titleMenu": "Dob – udio"
         },
         "patients": {
             "structure": "Struktura",
@@ -403,7 +415,8 @@
             "hospitalized": "Hospitalizirani",
             "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
-            "title": "Hospitalizacija"
+            "title": "Hospitalizacije",
+            "titleMenu": "Hospitalizacije"
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
@@ -436,7 +449,10 @@
             "showToDate": "Do danas",
             "showToday": "Dnevni",
             "showActive": "Aktivni",
-            "show7DaysAverage": "Sedmodnevni prosjek"
+            "show7DaysAverage": "Sedmodnevni prosjek",
+            "titleMenu_MNE": "Crna Gora – stanje",
+            "titleMenu_MKD": "Sjeverna Makedonija – stanje",
+            "titleMenu_SVN": "Slovenija – stanje"
         },
         "spread": {
             "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
@@ -463,7 +479,8 @@
             "explainer": "Što znači eksponencijalan porast",
             "percentage": "Relativan dnevni porast",
             "oneWeek": "Tjedan dana",
-            "activeCases": "aktivni slučajevi"
+            "activeCases": "aktivni slučajevi",
+            "titleMenu": "Porast"
         },
         "hospitals": {
             "projection7": "Projekcija, 7-dnevno udvostručenje",
@@ -484,11 +501,12 @@
             "bedsICU70": "Kreveti intenzivne njege, 70 %",
             "all": "Sve",
             "full": "Pune",
-            "title": "Kapaciteti bolnica",
+            "title": "Kapacitet bolnice",
             "allHospitals": "Sve bolnice",
             "bedsICUFull": "Kreveti intenzivne njege, popunjeni",
             "bedsICUShort": "Kreveti intenzivne njege",
-            "ventilators": "Respiratori"
+            "ventilators": "Respiratori",
+            "titleMenu": "Kapacitet"
         },
         "tests": {
             "positiveTests": "Pozitivni testovi",
@@ -497,7 +515,8 @@
             "regularTesting": "Regularno",
             "negativeTests": "Negativni testovi",
             "nationalStudyTesting": "Istraživanje",
-            "allTesting": "Sve"
+            "allTesting": "Sve",
+            "titleMenu": "Testiranje"
         },
         "infections": {
             "rhStaff": "Osoblje staračkih domova",
@@ -508,7 +527,8 @@
             "title": "Struktura potvrđenih slučajeva",
             "hcStaff": "Zdravstveni radnici",
             "all": "Sve",
-            "averageByDay": "Po danu (prosjek)"
+            "averageByDay": "Po danu (prosjek)",
+            "titleMenu": "Slučajevi – struktura"
         },
         "hCenters": {
             "testsPositive": "Testovi (pozitivni*)",
@@ -518,13 +538,15 @@
             "suspectedCovidExamination": "Sumnja na COVID-19 (pregled)",
             "suspectedCovidPhone": "Sumnja na COVID-19 (telefon)",
             "testsPerformed": "Testovi (provedeni)",
-            "allRegions": "Sve regije"
+            "allRegions": "Sve regije",
+            "titleMenu": "Dom zdravlja – liječenje"
         },
         "regions": {
             "title": "Slučajevi po regijama",
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "activeCases": "Aktivni slučajevi"
+            "activeCases": "Aktivni slučajevi",
+            "titleMenu": "Regija – slučajevi"
         },
         "cases": {
             "active": "Aktivni",
@@ -533,7 +555,8 @@
             "deceased": "Umrli",
             "icu": "Na odjelu intenzivne njege",
             "ventilator": "Na respiratoru",
-            "hospitalized": "Hospitalizirani"
+            "hospitalized": "Hospitalizirani",
+            "titleMenu": "Slučajevi"
         },
         "europe": {
             "statusRed": "stroga 10-dnevna karantena",
@@ -547,36 +570,42 @@
             "twoWeekIncidence": "14-dnevni slučajevi na 100.000 stanovnika",
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
-            "noData": "Nema podataka"
+            "noData": "Nema podataka",
+            "titleMenu": "Europa – stanje"
         },
         "world": {
-            "title": "COVID-19 stanje u svijetu"
+            "title": "COVID-19 stanje u svijetu",
+            "titleMenu": "Svijet – stanje"
         },
         "rmap": {
-            "title": "Karta regija"
+            "title": "Karta regija",
+            "titleMenu": "Regije – karta"
         },
         "countriesDeathsPerCases": {
-            "legendTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
-            "yAxisTitle": "Smrtni slučajevi u odnosu na broj slučajeva",
-            "title": "Države: Smrtni slučajevi u odnosu na broj slučajeva",
+            "legendTitle": "Smrtni slučajevi po broju slučajeva",
+            "yAxisTitle": "Smrtni slučajevi po broju slučajeva",
+            "title": "Države: Ukupno smrtnih slučajevi po broju slučajeva",
             "chronologically": "Kronološki",
             "sinceFirstDeath": "Od prvog smrtnog slučaja",
             "sinceOneDeathPerMillion": "Od prvog smrtnog slučaja na milijun stanovnika",
             "daysFromFirstDeath": "Broj dana od prvog smrtnog slučaja",
-            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika"
+            "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika",
+            "titleMenu": "Države – smrtni slučajevi po broju slučajeva"
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteriji za crvenu listu",
             "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
             "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",
-            "title": "Države: Aktivni slučajevi na 100.000 stanovnika"
+            "title": "Države: Aktivni slučajevi na 100.000 stanovnika",
+            "titleMenu": "Države – aktivni slučajevi"
         },
         "dailyComparison": {
             "positivePct": "Udio pozitivnih testova (%)",
             "tests": "Provedeni testovi",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
-            "title": "Usporedba po danu u tjednu"
+            "title": "Usporedba po danu u tjednu",
+            "titleMenu": "Dan u tjednu – usporedba"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -594,7 +623,8 @@
             "confirmedFromQuarantine": "Potvrđeni iz karantene",
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
-            "title": "Karantena i izvori zaraze"
+            "title": "Izvori zaraze i karantena",
+            "titleMenu": "Izvori zaraze"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -650,7 +680,8 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "title": "Slučajevi po regijama (na 100.000 stanovnika)"
+            "title": "Slučajevi po regijama (na 100.000 stanovnika)",
+            "titleMenu": "Regija – usporedba"
         }
     },
     "shortMonth": {
@@ -853,7 +884,8 @@
         "sources": "Izvori",
         "menu": "Izbornik",
         "animation": "Animacija",
-        "ostanizdrav": "#OstaniZdrav"
+        "ostanizdrav": "#OstaniZdrav",
+        "goToGraph": "Prijeđi na dijagram"
     },
     "phase": {
         "4": {
@@ -1041,7 +1073,9 @@
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
         "newPage": "🆕 Nova stranica:",
-        "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije"
+        "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije",
+        "progressC19": "Tipičan napredak Covida-19. Hospitalizacija, intenzivna terapija i smrtnost.",
+        "newInfographics": "🆕 📇 Nove infografike:"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",

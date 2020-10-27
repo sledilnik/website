@@ -248,9 +248,9 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, newCases, newCasesMax =
+            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, newCases =
                 match areaData.Cases with
-                | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null, 0
+                | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
                     let newCases = 
@@ -258,7 +258,6 @@ let seriesData (state : State) =
                         |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc) 
                         |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
                         |> Seq.toArray
-                    let newCasesMax = newCases |> Seq.max
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
@@ -284,7 +283,7 @@ let seriesData (state : State) =
                             | Some a, Some b -> Some (b - a)
 
                     match lastValueRelative with
-                    | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null, 0
+                    | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null
                     | Some lastValue ->
                         let absolute = lastValue
                         let value100k =
@@ -325,7 +324,7 @@ let seriesData (state : State) =
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
 
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, newCases, newCasesMax
+                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, newCases
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -338,7 +337,6 @@ let seriesData (state : State) =
                 dlabel = dlabel
                 dataLabels = {| enabled = true; format = "{point.dlabel}" |}
                 newCases = newCases
-                newCasesMax = newCasesMax
             |}
     } |> Seq.toArray
 
@@ -372,6 +370,56 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
+        let sparklineFormatter newCases =
+            let columnColors = Array.append ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)  ([|"#bda506" |] |> Array.replicate 7 |> Array.concat ) 
+            let options =
+                {|
+                    chart = 
+                        {|
+                            ``type`` = "column"
+                            backgroundColor = "transparent"
+                        |} |> pojo
+                    credits = {| enabled = false |}
+                    xAxis = {| visible = false |}
+                    yAxis = 
+                        {| 
+                            title = {| enabled = false|}
+                            visible = true  
+                            min = 0.
+                            max = newCases |> Array.max 
+                            tickInterval = 5 
+                            endOnTick = true 
+                            startOnTick = false 
+                            allowDecimals = false 
+                            showFirstLabel = true
+                            showLastLabel = true
+                            gridLineColor = "#000000"
+                            gridLineDashStyle = "dot"
+                        |} |> pojo
+                    title = {| text = "" |}
+                    legend = {| enabled = false |}
+                    series = 
+                        [| 
+                            {| 
+                                data = newCases |> Array.map ( max 0.)
+                                animation = false
+                                colors = columnColors 
+                                borderColor = columnColors 
+                                pointWidth = 16
+                                colorByPoint = true
+                            |} |> pojo 
+                        |]
+                |} |> pojo
+            match state.MapToDisplay with 
+            | Municipality -> 
+                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
+                """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
+            | Region -> 
+                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-reg", options)) 10 |> ignore
+                """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
+
+
+
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
@@ -379,28 +427,12 @@ let renderMap (state : State) =
             let value100k = points?value100k
             let totalConfirmed = points?totalConfirmed
             let weeklyIncrease = points?weeklyIncrease
-            let newCases = points?newCases
-            let newCasesMax = points?newCasesMax
+            let newCases= points?newCases
             let population = points?population
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
 
-            let s = Text.StringBuilder()
-            let barMaxHeight = 50
-
-            s.Append "<p><div class='bars'>" |> ignore
-
-            match newCases with
-                | null -> null
-                | _ ->
-                    newCases
-                    |> Array.iter (fun area ->
-                        let barHeight = Math.Ceiling(float area * float barMaxHeight / newCasesMax)
-                        let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
-                        s.Append barHtml |> ignore)
-                    s.Append "</div>" |> ignore
-                    s.ToString()
-                |> ignore
+            let lastTwoWeeks = Array.sub newCases (newCases.Length - 15) 14 
 
             let label =
                 match state.ContentType with
@@ -411,7 +443,7 @@ let renderMap (state : State) =
                             + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
                             + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                             + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                            + s.ToString()
+                            + if (Array.max lastTwoWeeks) > 0. then sparklineFormatter lastTwoWeeks else ""
                     else
                         label
                 | Deceased ->
@@ -442,7 +474,7 @@ let renderMap (state : State) =
                borderWidth = 1
                backgroundColor = "white"
                valueDecimals = 0 
-               width = 70//TODO: Clean this up for confirmed and deceased cases.
+               width = 70
             |}
             |> pojo
 
