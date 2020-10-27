@@ -373,7 +373,7 @@ let renderMap (state : State) =
            |}
 
         let sparklineFormatter newCases =
-            let columnColors = Array.append ([|"#d4cea2" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat ) 
+            let columnColors = Array.append ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)  ([|"#bda506" |] |> Array.replicate 7 |> Array.concat ) 
             let options =
                 {|
                     chart = 
