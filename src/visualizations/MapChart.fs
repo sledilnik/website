@@ -372,7 +372,8 @@ let renderMap (state : State) =
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
            |}
 
-        let sparklineFormatter newCases = 
+        let sparklineFormatter newCases =
+            let columnColors = Array.append ([|"#d4cea2" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat ) 
             let options =
                 {|
                     chart = 
@@ -404,8 +405,8 @@ let renderMap (state : State) =
                             {| 
                                 data = newCases |> Array.map ( max 0.)
                                 animation = false
-                                colors = Array.append ([|"#bad568" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat )
-                                borderColor = Array.append ([|"#bad568" |] |> Array.replicate 7 |> Array.concat)  ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat )
+                                colors = columnColors 
+                                borderColor = columnColors 
                                 pointWidth = 16
                                 colorByPoint = true
                             |} |> pojo 
