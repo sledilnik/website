@@ -371,7 +371,10 @@ let renderMap (state : State) =
            |}
 
         let sparklineFormatter newCases =
-            let columnColors = Array.append ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)  ([|"#bda506" |] |> Array.replicate 7 |> Array.concat ) 
+            let temp = [|([| "#ffb74d" |] |> Array.replicate 46 |> Array.concat ); ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
+            let columnColors = [| temp; ([|"#bda506" |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
+
+
             let options =
                 {|
                     chart = 
@@ -405,7 +408,7 @@ let renderMap (state : State) =
                                 animation = false
                                 colors = columnColors 
                                 borderColor = columnColors 
-                                pointWidth = 16
+                                pointWidth = 2
                                 colorByPoint = true
                             |} |> pojo 
                         |]
@@ -432,7 +435,7 @@ let renderMap (state : State) =
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
 
-            let lastTwoWeeks = Array.sub newCases (newCases.Length - 15) 14 
+            let lastTwoWeeks = newCases 
 
             let label =
                 match state.ContentType with
