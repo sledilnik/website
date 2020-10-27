@@ -247,6 +247,7 @@
             "positivePct": "Share of Positive Tests (%)",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
+            "icuAdmitted": "Admitted to ICU",
             "deceased": "Deaths"
         },
         "cases": {

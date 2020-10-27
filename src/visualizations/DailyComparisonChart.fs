@@ -20,10 +20,11 @@ type DisplayType =
     | PositivePct
     | HospitalAdmitted
     | HospitalDischarged
+    | ICUAdmitted
     | Deceased
 with
     static member UseStatsData dType = [ Active; New; Tests; PositivePct; ] |> List.contains dType
-    static member all = [ New; Active; Tests; PositivePct; HospitalAdmitted; HospitalDischarged; Deceased; ]
+    static member all = [ New; Active; Tests; PositivePct; HospitalAdmitted; HospitalDischarged; ICUAdmitted; Deceased; ]
     static member getName = function
         | New -> I18N.t "charts.dailyComparison.new"
         | Active -> I18N.t "charts.dailyComparison.active"
@@ -31,7 +32,17 @@ with
         | PositivePct -> I18N.t "charts.dailyComparison.positivePct"
         | HospitalAdmitted -> I18N.t "charts.dailyComparison.hospitalAdmitted"
         | HospitalDischarged -> I18N.t "charts.dailyComparison.hospitalDischarged"
+        | ICUAdmitted -> I18N.t "charts.dailyComparison.icuAdmitted"
         | Deceased -> I18N.t "charts.dailyComparison.deceased"
+    static member getColor = function
+        | New -> "#bda506"
+        | Active -> "#dba51d"
+        | Tests -> "#19aebd"
+        | PositivePct -> "#665191"
+        | HospitalAdmitted -> "#be7A2a"
+        | HospitalDischarged -> "#20b16d"
+        | ICUAdmitted -> "#d96756"
+        | Deceased -> "#696969"
 
 type State = {
     StatsData: StatsData
@@ -110,6 +121,7 @@ let renderChartOptions (state : State) dispatch =
         match state.DisplayType with
         | HospitalAdmitted -> dp.total.inHospital.``in``
         | HospitalDischarged -> dp.total.inHospital.out
+        | ICUAdmitted -> dp.total.icu.``in``
         | Deceased -> dp.total.deceased.today
         | _ -> None
 
@@ -144,14 +156,7 @@ let renderChartOptions (state : State) dispatch =
                 sprintf "#%02x%02x%02x" newR newG newB
 
             let getSeriesColor dt series = 
-                match dt with
-                | New -> desaturateColor "#bda506" (float (series) / float (weeksShown))
-                | Active -> desaturateColor "#dba51d" (float (series) / float (weeksShown))
-                | Tests -> desaturateColor "#19aebd" (float (series) / float (weeksShown))
-                | PositivePct -> desaturateColor "#665191" (float (series) / float (weeksShown))
-                | HospitalAdmitted -> desaturateColor "#be7A2a" (float (series) / float (weeksShown))
-                | HospitalDischarged -> desaturateColor "#20b16d" (float (series) / float (weeksShown))
-                | Deceased -> desaturateColor "#696969" (float (series) / float (weeksShown))
+                desaturateColor (DisplayType.getColor dt) (float (series) / float (weeksShown))
 
             let percent a b =
                 match a, b with

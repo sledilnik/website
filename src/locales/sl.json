@@ -693,6 +693,7 @@
             "positivePct": "Delež pozitivnih testov (%)",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icuAdmitted": "Sprejeti v intenzivno",
             "deceased": "Umrli"
         },
         "cases": {
