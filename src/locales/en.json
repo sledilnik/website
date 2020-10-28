@@ -488,15 +488,17 @@
         "phaseDiagram": {
             "title": "Phase diagram",
             "titleMenu": "Phase diagram",
+            "cases": "Confirmed cases",
+            "deceased": "Deaths",
             "totalVsWeek": {
                 "name": "Total vs. week",
-                "xAxisTitle": "Total confirmed cases",
-                "yAxisTitle": "Confirmed cases in the last week"
+                "xAxisTitle": "Total",
+                "yAxisTitle": "In the last week"
             },
             "weekVsWeekBefore": {
                 "name": "This week vs. last week",
-                "xAxisTitle": "Confirmed cases in the last week",
-                "yAxisTitle": "Confirmed cases in the previous week"
+                "xAxisTitle": "In the last week",
+                "yAxisTitle": "In the previous week"
             }
         },
         "hospitals": {

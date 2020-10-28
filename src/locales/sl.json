@@ -956,15 +956,17 @@
         "phaseDiagram": {
             "title": "Fazni diagram",
             "titleMenu": "Fazni diagram",
+            "cases": "Potrjeni primeri",
+            "deceased": "Umrli",
             "totalVsWeek": {
                 "name": "Skupaj proti zadnjemu tednu",
-                "xAxisTitle": "Potrjeni primeri skupaj",
-                "yAxisTitle": "Potrjeni primeri v zadnjem tednu"
+                "xAxisTitle": "Skupaj",
+                "yAxisTitle": "V zadnjem tednu"
             },
             "weekVsWeekBefore": {
                 "name": "Zadnji teden proti prejšnjemu tednu",
-                "xAxisTitle": "Potrjeni primeri v zadnjem tednu",
-                "yAxisTitle": "Potrjeni primeri v prejšnjem tednu"
+                "xAxisTitle": "V zadnjem tednu",
+                "yAxisTitle": "V prejšnjem tednu"
             }
         },
         "ostanizdrav": {
