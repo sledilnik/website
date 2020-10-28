@@ -694,7 +694,11 @@
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
             "tests": "Opravljeni testi",
-            "positivePct": "Delež pozitivnih testov (%)"
+            "positivePct": "Delež pozitivnih testov (%)",
+            "hospitalAdmitted": "Sprejeti v bolnišnico",
+            "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icuAdmitted": "Sprejeti v intenzivno",
+            "deceased": "Umrli"
         },
         "cases": {
             "title": "Potrjeni primeri",
@@ -1138,27 +1142,27 @@
         },
         "phase": {
             "6": {
-                "title": "Faza 6",
+                "title": "faza<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             },
             "5": {
-                "title": "Faza 5",
+                "title": "faza<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "4": {
-                "title": "Faza 4",
+                "title": "faza<br>4",
                 "description": "Makedonija 3"
             },
             "3": {
-                "title": "Faza 3",
+                "title": "faza<br>3",
                 "description": "Debar 4"
             },
             "2": {
-                "title": "Faza 2",
+                "title": "faza<br>2",
                 "description": "Skopje 4"
             },
             "1": {
-                "title": "Faza 1",
+                "title": "faza<br>1",
                 "description": "Debar 4, Skopje 3, Makedonija 2 "
             }
         },

@@ -256,7 +256,7 @@ let seriesData (state : State) =
                     let newCases = 
                         confirmedCasesValue 
                         |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc) 
-                        |> Array.skip (confirmedCasesValue.Length - 60) // we only show last 60 days
+                        |> Array.skip (confirmedCasesValue.Length - 56) // we only show last 56 days
                         |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
@@ -371,7 +371,25 @@ let renderMap (state : State) =
            |}
 
         let sparklineFormatter newCases =
-            let columnColors = Array.append ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)  ([|"#bda506" |] |> Array.replicate 7 |> Array.concat ) 
+            let desaturateColor (rgb:string) (sat:float) = 
+                let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+                let r = (argb &&& 0x00FF0000) >>> 16
+                let g = (argb &&& 0x0000FF00) >>> 8
+                let b = (argb &&& 0x000000FF)
+                let avg = (float(r + g + b) / 3.0) * 1.6
+                let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+                let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+                let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+                sprintf "#%02x%02x%02x" newR newG newB
+
+            let color1 = "#bda506"
+            let color2 = desaturateColor color1 0.6
+            let color3 = desaturateColor color1 0.3
+
+            let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
+            let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
+
+
             let options =
                 {|
                     chart = 
@@ -380,11 +398,21 @@ let renderMap (state : State) =
                             backgroundColor = "transparent"
                         |} |> pojo
                     credits = {| enabled = false |}
-                    xAxis = {| visible = false |}
+                    xAxis = 
+                        {| 
+                            visible = true 
+                            labels = {| enabled = false |} 
+                            title = {| enabled = false |}
+                            tickInterval = 7 
+                            lineColor = "#696969"
+                            tickColor = "#696969"
+                            tickLength = 4
+                        |}
                     yAxis = 
                         {| 
-                            title = {| enabled = false|}
+                            title = {| enabled = false |}
                             visible = true  
+                            opposite = true 
                             min = 0.
                             max = newCases |> Array.max 
                             tickInterval = 5 
@@ -405,7 +433,7 @@ let renderMap (state : State) =
                                 animation = false
                                 colors = columnColors 
                                 borderColor = columnColors 
-                                pointWidth = 16
+                                pointWidth = 2
                                 colorByPoint = true
                             |} |> pojo 
                         |]
@@ -432,7 +460,11 @@ let renderMap (state : State) =
             let pctPopulation = float absolute * 100.0 / float population
             let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
 
+<<<<<<< HEAD
             let lastTwoWeeks = Array.sub newCases (newCases.Length - 14) 14 
+=======
+            let lastTwoWeeks = newCases 
+>>>>>>> origin/master
 
             let label =
                 match state.ContentType with
