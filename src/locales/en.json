@@ -491,12 +491,12 @@
             "totalVsWeek": {
                 "name": "Total vs. week",
                 "xAxisTitle": "Total confirmed cases",
-                "yAxisTitle": "Confirmed cases in this week"
+                "yAxisTitle": "Confirmed cases in the last week"
             },
             "weekVsWeekBefore": {
                 "name": "This week vs. last week",
-                "xAxisTitle": "Confirmed cases in this week",
-                "yAxisTitle": "Confirmed cases in the last week"
+                "xAxisTitle": "Confirmed cases in the last week",
+                "yAxisTitle": "Confirmed cases in the previous week"
             }
         },
         "hospitals": {
