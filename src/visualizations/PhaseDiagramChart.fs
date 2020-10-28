@@ -94,12 +94,13 @@ let weekVsWeekBeforeData statsData =
         {| Date = dp.Date
            ConfirmedToday = dp.Cases.ConfirmedToday
         |} )
+    |> List.filter (fun dp -> dp.ConfirmedToday |> Option.isSome)
     |> List.windowed (windowSize * 2)
     |> List.map (fun doubleWindow ->
         let firstWindow, secondWindow = List.splitAt windowSize doubleWindow
-        pojo {| date = (secondWindow |> List.toArray |> Array.last).Date
-                x = firstWindow |> List.map (fun dp -> dp.ConfirmedToday |> Option.defaultValue 0) |> List.sum
-                y = secondWindow |> List.map (fun dp -> dp.ConfirmedToday |> Option.defaultValue 0) |> List.sum
+        pojo {| date = (List.head secondWindow).Date
+                x = secondWindow |> List.map (fun dp -> dp.ConfirmedToday |> Option.defaultValue 0) |> List.sum
+                y = firstWindow |> List.map (fun dp -> dp.ConfirmedToday |> Option.defaultValue 0) |> List.sum
              |})
     |> List.toArray
 
