@@ -71,7 +71,6 @@ export default {
       Visualizations(
         "visualizations",
         "chart",
-        this.$route.query,
         API_ENDPOINT_BASE,
         this.$route.params.type
       );

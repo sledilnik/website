@@ -38,7 +38,6 @@ export default {
       Visualizations(
         "visualizations",
         "world",
-        this.$route.query,
         API_ENDPOINT_BASE
       );
     });

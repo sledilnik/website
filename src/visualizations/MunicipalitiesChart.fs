@@ -47,34 +47,6 @@ type View =
     | LastConfirmedCase
     | DoublingTime
 
-type Query (query : obj, regions : Region list) =
-    member this.Query = query
-    member this.Regions =
-        regions
-        |> List.map (fun region -> region.Key)
-        |> Set.ofList
-    member this.Search =
-        match query?("search") with
-        | Some (search : string) -> Some search
-        | _ -> None
-    member this.Region =
-        match query?("region") with
-        | Some (region : string) when Set.contains (region.ToLower()) this.Regions ->
-            Some (region.ToLower())
-        | _ -> None
-    member this.View =
-        match query?("sort") with
-        | Some (sort : string) ->
-            match sort.ToLower() with
-            | "active-cases" -> Some ActiveCases
-            | "total-confirmed-cases" -> Some TotalConfirmedCases
-            | "last-confirmed-case" -> Some LastConfirmedCase
-            | "time-to-double" ->
-                match Highcharts.showDoublingTimeFeatures with
-                | true -> Some DoublingTime
-                | _ -> None
-            | _ -> None
-        | _ -> None
 
 type State =
     { Municipalities : Municipality seq
@@ -85,12 +57,13 @@ type State =
       View : View }
 
 type Msg =
+    | QueryParamsUpdated of QueryParams.State
     | ToggleShowAll
     | SearchInputChanged of string
     | RegionFilterChanged of string
     | ViewChanged of View
 
-let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
+let init (data : RegionsData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
 
     let regions =
@@ -99,7 +72,6 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         |> List.map (fun reg -> { Key = reg.Name ; Name = I18N.tt "region" reg.Name })
         |> List.sortBy (fun region -> region.Name)
 
-    let query = Query(queryObj, regions)
 
     let municipalities =
         seq {
@@ -161,20 +133,41 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         { Municipalities = municipalities
           Regions = regions
           ShowAll = false
-          SearchQuery =
-            match query.Search with
-            | None -> ""
-            | Some search -> search
-          FilterByRegion =
-            match query.Region with
-            | None -> ""
-            | Some region -> region
-          View =
-            match query.View with
-            | None -> LastConfirmedCase
-            | Some view -> view }
+          SearchQuery = ""
+          FilterByRegion = ""
+          View = LastConfirmedCase }
 
     state, Cmd.none
+
+
+
+let ViewQueryParam = [
+    ("active-cases", View.ActiveCases);
+    ("total-confirmed-cases", View.TotalConfirmedCases)
+    ("last-confirmed-case", View.LastConfirmedCase)
+    ("time-to-double", View.DoublingTime)] |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
+       let state = match queryParams.MunicipalitiesChartSearch with
+                   | Some (search: string) -> { state with SearchQuery = search }
+                   | _ -> state
+
+       let state = match queryParams.MunicipalitiesChartSort with
+                   | Some (sort : string) ->
+                       match sort.ToLower() |> ViewQueryParam.TryFind with
+                       | Some View.DoublingTime -> match Highcharts.showDoublingTimeFeatures with
+                                                   | true -> {state with View=DoublingTime}
+                                                   | _ -> state
+                       | Some v -> {state with View=v}
+                       | _ -> state
+                   | _ -> state
+
+       let state = match queryParams.MunicipalitiesChartRegion with
+                   | Some (region: string) when List.exists (fun (e:Region) -> e.Key.Equals(region.ToLower())) state.Regions -> { state with FilterByRegion = region.ToLower() }
+                   | _ -> state
+
+       state, commands
+
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     // trigger event for iframe resize
@@ -191,6 +184,18 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with FilterByRegion = region }, Cmd.none
     | ViewChanged view ->
         { state with View = view }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
+
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State)
+    = { queryParams with MunicipalitiesChartRegion = match state.FilterByRegion with
+                                                     | "" -> None
+                                                     | s -> Some s
+                         MunicipalitiesChartSearch = match state.SearchQuery with
+                                                     | "" -> None
+                                                     | s -> Some s
+                         MunicipalitiesChartSort = Map.tryFindKey (fun k v -> v = state.View) ViewQueryParam
+                                                     }
 
 let renderMunicipality (state : State) (municipality : Municipality) =
 
@@ -562,5 +567,8 @@ let render (state : State) dispatch =
 
     element
 
-let municipalitiesChart (props : {| query : obj ; data : RegionsData |}) =
-    React.elmishComponent("MunicipalitiesChart", init props.query props.data, update, render)
+let chart =
+    React.functionComponent (fun (props: {| data: RegionsData |}) ->
+        let state, dispatch = QueryParams.useElmishWithQueryParams (props.data |> init) update stateToQueryParams Msg.QueryParamsUpdated
+        React.useMemo((fun () -> render state dispatch), [|state|])
+        )

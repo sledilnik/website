@@ -80,7 +80,6 @@ export default {
       Visualizations(
         "visualizations",
         "local",
-        this.$route.query,
         API_ENDPOINT_BASE
       );
     });

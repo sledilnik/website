@@ -2,10 +2,9 @@
 module MetricsComparisonChart
 
 open System
+open Browser
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
-open Browser
 open Feliz.UseElmish
 
 open Highcharts
@@ -136,7 +135,7 @@ let init data : State * Cmd<Msg> =
     }
     state, cmd
 
-let update queryParams (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
         { state with PatientsData = data; }, Cmd.none
@@ -157,7 +156,6 @@ let update queryParams (msg: Msg) (state: State) : State * Cmd<Msg> =
             }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
-
 
 let statsDataGenerator metric =
     fun point ->
@@ -345,7 +343,7 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
         prop.children (metricTypesSelectors)
     ]
 
-let render state dispatch =
+let render (state : State) dispatch =
     match state.PatientsData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
@@ -360,6 +358,8 @@ let render state dispatch =
             renderChartContainer state dispatch
             renderMetricsSelectors state dispatch
         ]
-
-let metricsComparisonChart (props : {| data : StatsData |}) =
-    React.elmishComponent("MetricsComparisonChart", init props.data, update, render)
+let chart =
+    React.functionComponent(fun (props : {| data : StatsData |}) ->
+        let state, dispatch = React.useElmish(init props.data, update, [| |])
+        render state dispatch
+    )

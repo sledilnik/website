@@ -10,7 +10,7 @@ open Types
 open CountriesChartViz.Analysis
 open I18N
 
-let init (query: obj) (visualization: string option) (page: string) (apiEndpoint: string)=
+let init (visualization: string option) (page: string) (apiEndpoint: string)=
 
     let renderingMode =
         match visualization with
@@ -52,10 +52,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
     let initialState =
         {
-          QueryParams = QueryParams.getState()
           ApiEndpoint = apiEndpoint
           Page = page
-          Query = query
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
           RegionsData = NotAsked
@@ -83,8 +81,6 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
 
 let update (msg: Msg) (state: State) =
     match msg with
-    | QueryParamsChanged ->
-        { state with QueryParams = QueryParams.getState() }, Cmd.none
     | StatsDataRequested ->
         match state.StatsData with
         | Loading -> state, Cmd.none
@@ -101,11 +97,6 @@ let update (msg: Msg) (state: State) =
         | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
 
-let queryParamsChangedSubscription initial =
-    let sub dispatch =
-        window.addEventListener(QueryParams.queryParamsChangedEvent, (fun _ ->
-            dispatch QueryParamsChanged))
-    Cmd.ofSub sub
 
 let render (state: State) (_: Msg -> unit) =
     let hospitals =
@@ -128,8 +119,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
                         lazyView MetricsComparisonChart.chart
-                            {| data = data
-                               queryParams = state.QueryParams |} }
+                            {| data = data |} }
 
     let dailyComparison =
           { VisualizationType = DailyComparison
@@ -157,8 +147,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
                         lazyView SpreadChart.chart
-                            {| data = data
-                               queryParams = state.QueryParams |} }
+                            {| data = data |} }
 
     let map =
           { VisualizationType = Map
@@ -198,7 +187,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        lazyView MunicipalitiesChart.municipalitiesChart {| query = state.Query; data = data |} }
+                        lazyView MunicipalitiesChart.chart {| data = data |} }
 
     let europeMap =
           { VisualizationType = EuropeMap
