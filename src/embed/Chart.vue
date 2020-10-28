@@ -58,7 +58,6 @@ export default {
     },
   },
   async mounted() {
-    console.log(this.$route.params, this.$route.query);
     this.$nextTick(() => {
       /* Available charts:
          - MetricsComparison

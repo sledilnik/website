@@ -138,6 +138,10 @@ export default {
           titleMenu: this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
           icon: 'graph',
         },
+        'phase-diagram-chart': {
+          titleMenu: this.$t('charts.phaseDiagram.titleMenu'),
+          icon: 'graph',
+        },
       },
     }
   },

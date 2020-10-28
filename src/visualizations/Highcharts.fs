@@ -29,6 +29,7 @@ module Helpers =
     let poja (a: 'T[]) : obj = jsNative
 
     type JsTimestamp = float
+
     [<Emit("$0.getTime()")>]
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
