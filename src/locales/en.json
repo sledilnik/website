@@ -485,6 +485,20 @@
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological"
         },
+        "phaseDiagram": {
+            "title": "Phase diagram",
+            "titleMenu": "Phase diagram",
+            "totalVsWeek": {
+                "name": "Total vs. week",
+                "xAxisTitle": "Total confirmed cases",
+                "yAxisTitle": "Confirmed cases in this week"
+            },
+            "weekVsWeekBefore": {
+                "name": "This week vs. last week",
+                "xAxisTitle": "Confirmed cases in this week",
+                "yAxisTitle": "Confirmed cases in the last week"
+            }
+        },
         "hospitals": {
             "bedsShort": "Beds",
             "beds": "Hospital beds",
