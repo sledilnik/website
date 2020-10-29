@@ -485,6 +485,26 @@
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological"
         },
+        "phaseDiagram": {
+            "title": "Phase diagram",
+            "titleMenu": "Phase diagram",
+            "cases": "Confirmed cases",
+            "deceased": "Deaths",
+            "totalVsWeek": {
+                "name": "Total vs. week",
+                "xAxisTitle": "Total",
+                "yAxisTitle": "Seven day incidence",
+                "xAxisLabel": "Total",
+                "yAxisLabel": "Seven day incidence"
+            },
+            "weekVsWeekBefore": {
+                "name": "Incidence difference",
+                "xAxisTitle": "Seven day incidence",
+                "yAxisTitle": "Incidence difference (%)",
+                "xAxisLabel": "Seven day incidence",
+                "yAxisLabel": "Incidence difference"
+            }
+        },
         "hospitals": {
             "bedsShort": "Beds",
             "beds": "Hospital beds",

@@ -141,6 +141,7 @@ type VisualizationType =
     | CountriesCasesPer1M
     | CountriesActiveCasesPer1M
     | CountriesDeathsPer1M
+    | PhaseDiagram
 
 type RenderingMode =
     | Normal

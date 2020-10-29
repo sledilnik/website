@@ -37,6 +37,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
             | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
             | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
+            | "PhaseDiagram" -> Some PhaseDiagram
             | _ -> None
             |> Embedded
 
@@ -400,19 +401,33 @@ let render (state: State) (_: Msg -> unit) =
                         }
           }
 
+    let phaseDiagram =
+          { VisualizationType = PhaseDiagram
+            ClassName = "phase-diagram-chart"
+            ChartTextsGroup = "phaseDiagram"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
+
     let localVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; patients
           regions100k; map; municipalities
           europeMap; ageGroupsTimeline; tests; sources; hCenters; infections
           cases; ageGroups; regionMap; regionsAbs
+          phaseDiagram
         ]
 
     let worldVisualizations =
         [ worldMap; countriesActiveCasesPer1M
           countriesCasesPer1M
           countriesDeathsPer1M
-//          countriesDeathsPerCases
-          ]
+          // countriesDeathsPerCases
+        ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; map
@@ -421,6 +436,7 @@ let render (state: State) (_: Msg -> unit) =
           cases; patients; ratios; ageGroups; regionMap; regionsAbs
           regions100k; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
+          phaseDiagram
         ]
 
     let embedded, visualizations =
