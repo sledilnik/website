@@ -86,7 +86,7 @@ let totalVsWeekChartOptions state =
         series = [|
             {| data = data
                color = state.Metric.Color.Light
-               marker = pojo {| symbol = "circle" ; radius = 3 |}
+               marker = pojo {| symbol = "circle" ; radius = 2 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
             {| data = [| data.[state.Day] |]
