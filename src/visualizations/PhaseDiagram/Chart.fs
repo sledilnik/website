@@ -85,12 +85,12 @@ let totalVsWeekChartOptions state =
 
         series = [|
             {| data = data
-               color = "#efd38b"
+               color = state.Metric.Color.Light
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
             {| data = [| data.[state.Day] |]
-               color = "#dba51d"
+               color = state.Metric.Color.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
@@ -128,12 +128,12 @@ let weekVsWeekBeforeOptions state =
 
         series = [|
             {| data = data
-               color = "#f5e4b9"
+               color = state.Metric.Color.Light
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
             {| data = [| data.[state.Day] |]
-               color = "#dba51d"
+               color = state.Metric.Color.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo

@@ -19,6 +19,11 @@ type DiagramKind =
 
     static member All = [TotalVsWeek ; WeekVsWeekBefore]
 
+type Color = {
+    Dark : string
+    Light : string
+}
+
 type Metric =
     | Cases
     | Deceased
@@ -29,6 +34,15 @@ type Metric =
         match this with
         | Cases -> i18n "cases"
         | Deceased -> i18n "deceased"
+
+    member this.Color =
+        match this with
+        | Cases ->
+            { Dark = "#dba51d"
+              Light = "#f2dba2" }
+        | Deceased ->
+            { Dark = "#000000"
+              Light = "#999999" }
 
 let (|CasesMetric|DeceasedMetric|UnknownMetric|) str =
     if str = Metric.Cases.ToString()
