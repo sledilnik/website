@@ -46,7 +46,7 @@
         "tests": "Tests Today",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
-        "incidence": "14 days incidence",
+        "incidence": "14-days incidence",
         "per100k": "per 100k",
         "orangePhase": "Orange phase",
         "orangePhaseGenitive": "orange",
@@ -493,15 +493,15 @@
             "totalVsWeek": {
                 "name": "Total vs. week",
                 "xAxisTitle": "Total",
-                "yAxisTitle": "Seven day incidence",
+                "yAxisTitle": "7-day incidence",
                 "xAxisLabel": "Total",
-                "yAxisLabel": "Seven day incidence"
+                "yAxisLabel": "7-day incidence"
             },
             "weekVsWeekBefore": {
                 "name": "Incidence difference",
-                "xAxisTitle": "Seven day incidence",
+                "xAxisTitle": "7-day incidence",
                 "yAxisTitle": "Incidence difference (%)",
-                "xAxisLabel": "Seven day incidence",
+                "xAxisLabel": "7-day incidence",
                 "yAxisLabel": "Incidence difference"
             }
         },
