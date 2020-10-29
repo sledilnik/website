@@ -57,6 +57,8 @@ let sharedChartOptions displayData =
 let totalVsWeekChartOptions state =
     let sharedOptions = sharedChartOptions()
 
+    let data = state.DisplayData |> Array.map (fun dp -> dp |> pojo)
+
     {| sharedOptions with
         xAxis = pojo
             {| ``type`` = "logarithmic"
@@ -82,21 +84,23 @@ let totalVsWeekChartOptions state =
                         (i18n "totalVsWeek.xAxisLabel") jsThis?y |}
 
         series = [|
-            {| data = state.DisplayData
+            {| data = data
                color = "#efd38b"
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
-            |}
-            {| data = [| state.DisplayData.[state.Day] |]
+            |} |> pojo
+            {| data = [| data.[state.Day] |]
                color = "#dba51d"
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
-            |}
+            |} |> pojo
         |]
     |} |> pojo
 
 let weekVsWeekBeforeOptions state =
     let sharedOptions = sharedChartOptions()
+
+    let data = state.DisplayData |> Array.map (fun dp -> dp |> pojo)
 
     {| sharedOptions with
         xAxis = pojo
@@ -123,16 +127,16 @@ let weekVsWeekBeforeOptions state =
                         (i18n "weekVsWeekBefore.yAxisLabel") jsThis?y |}
 
         series = [|
-            {| data = state.DisplayData
+            {| data = data
                color = "#f5e4b9"
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
-            |}
-            {| data = [| state.DisplayData.[state.Day] |]
+            |} |> pojo
+            {| data = [| data.[state.Day] |]
                color = "#dba51d"
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
-            |}
+            |} |> pojo
         |]
     |} |> pojo
 
