@@ -961,12 +961,16 @@
             "totalVsWeek": {
                 "name": "Skupaj proti zadnjemu tednu",
                 "xAxisTitle": "Skupaj",
-                "yAxisTitle": "V zadnjem tednu"
+                "yAxisTitle": "Sedem dnevna incidenca",
+                "xAxisLabel": "Skupaj",
+                "yAxisLabel": "Sedem dnevna incidenca"
             },
             "weekVsWeekBefore": {
-                "name": "Zadnji teden proti prejšnjemu tednu",
-                "xAxisTitle": "V zadnjem tednu",
-                "yAxisTitle": "V prejšnjem tednu"
+                "name": "Sprememba incidence",
+                "xAxisTitle": "Sedem dnevna incidenca",
+                "yAxisTitle": "Sprememba incidence (%)",
+                "xAxisLabel": "Sedem dnevna incidenca",
+                "yAxisLabel": "Sprememba incidence"
             }
         },
         "ostanizdrav": {

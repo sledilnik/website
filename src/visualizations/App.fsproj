@@ -3,6 +3,7 @@
         <TargetFramework>netcoreapp3.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="Components/Slider.fs" />
         <Compile Include="Types.fs" />
         <Compile Include="I18N.fs" />
         <Compile Include="IntersectionObserver.fs" />
@@ -35,7 +36,9 @@
         <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
         <Compile Include="SourcesChart.fs" />
-        <Compile Include="PhaseDiagramChart.fs" />
+        <Compile Include="PhaseDiagram/Types.fs" />
+        <Compile Include="PhaseDiagram/Data.fs" />
+        <Compile Include="PhaseDiagram/Chart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
         <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />

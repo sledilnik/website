@@ -493,12 +493,16 @@
             "totalVsWeek": {
                 "name": "Total vs. week",
                 "xAxisTitle": "Total",
-                "yAxisTitle": "In the last week"
+                "yAxisTitle": "Seven day incidence",
+                "xAxisLabel": "Total",
+                "yAxisLabel": "Seven day incidence"
             },
             "weekVsWeekBefore": {
-                "name": "This week vs. last week",
-                "xAxisTitle": "In the last week",
-                "yAxisTitle": "In the previous week"
+                "name": "Incidence difference",
+                "xAxisTitle": "Seven day incidence",
+                "yAxisTitle": "Incidence difference (%)",
+                "xAxisLabel": "Seven day incidence",
+                "yAxisLabel": "Incidence difference"
             }
         },
         "hospitals": {

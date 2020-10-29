@@ -412,7 +412,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView PhaseDiagramChart.chart {| data = data |} }
+                    | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
     let localVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; patients
