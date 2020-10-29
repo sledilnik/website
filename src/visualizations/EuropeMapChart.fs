@@ -336,6 +336,8 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
     let importedFrom = dataForLastTwoWeeks |> Data.WeeklyStats.countryTotals |> Map.ofArray
     let importedDate = (Array.last dataForLastTwoWeeks).DateTo
 
+    let last n xs = List.toSeq xs |> Seq.skip (xs.Length - n) |> Seq.toList
+
     data
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
@@ -348,26 +350,21 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             (dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
+            |> last 14 // select the last two weeks
             |> List.sum)
             / 10.
-
-        let weeklyIncidence100k = 
-            let temp = (dps 
-                |> List.map(fun dp -> dp.NewCasesPerMillion)
-                |> List.choose id 
-                |> List.toArray)
-            (Array.sub temp 7 7 |> Array.sum) / 10.
 
         let incidence =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
+            |> last 14
             |> List.toArray
 
         let incidenceMaxValue =
             if incidence.Length = 0
             then 0.
-            else incidence |> Array.toList |> List.max
+            else incidence |> Array.toList  |> last 14 |> List.max
 
         let newCases = dps |> List.map (fun dp -> dp.NewCases)
 
@@ -431,9 +428,9 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
+        let someWeeksAgo = DateTime.Today.AddDays(-21.0)
         { state with OwdData = Loading },
-        Cmd.OfAsync.result (loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
+        Cmd.OfAsync.result (loadCountryIncidence owdCountries someWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
         let ret =
             match result with
@@ -469,7 +466,7 @@ let mapData state =
             let cases = cd.NewCases |> List.toArray
 
             let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum 
-            let casesWeekBefore = Array.sub cases 0 7 |> Array.sum 
+            let casesWeekBefore = Array.sub cases (cases.Length - 14) 7 |> Array.sum 
             let relativeIncrease = 
                 if casesWeekBefore > 0
                     then 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
@@ -639,10 +636,27 @@ let renderMap state geoJson _ =
 
 
     let sparklineFormatter newCases =
-        let columnColors = Array.append ([|"#d5c768" |] |> Array.replicate 7 |> Array.concat)  ([|"#bda506" |] |> Array.replicate 7 |> Array.concat ) 
+        let desaturateColor (rgb:string) (sat:float) = 
+            let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+            let r = (argb &&& 0x00FF0000) >>> 16
+            let g = (argb &&& 0x0000FF00) >>> 8
+            let b = (argb &&& 0x000000FF)
+            let avg = (float(r + g + b) / 3.0) * 1.6
+            let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+            let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+            let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+            sprintf "#%02x%02x%02x" newR newG newB
         let maxCases = newCases |> Array.max
         let tickScale = max 1. (10. ** round (Math.Log10 (maxCases + 1.) - 1.))
 
+        let color1 = "#bda506"
+        let color2 = desaturateColor color1 0.6
+        let color3 = desaturateColor color1 0.3
+
+        printfn "%A" newCases
+
+        let temp = [|([| color3 |] |> Array.replicate 7 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
+        let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
         let options =
             {|
                 chart = 
@@ -651,14 +665,24 @@ let renderMap state geoJson _ =
                         backgroundColor = "transparent"
                     |} |> pojo
                 credits = {| enabled = false |}
-                xAxis = {| visible = false |}
+                xAxis = 
+                    {| 
+                        visible = true 
+                        labels = {| enabled = false |} 
+                        title = {| enabled = false |}
+                        tickInterval = 7 
+                        lineColor = "#696969"
+                        tickColor = "#696969"
+                        tickLength = 4
+                    |}
                 yAxis = 
                     {| 
-                        title = {| enabled = false|}
+                        title = {| enabled = false |}
                         visible = true  
+                        opposite = true 
                         min = 0.
-                        max = maxCases 
-                        tickInterval = tickScale
+                        max = newCases |> Array.max 
+                        tickInterval = tickScale 
                         endOnTick = true 
                         startOnTick = false 
                         allowDecimals = false 
@@ -672,16 +696,15 @@ let renderMap state geoJson _ =
                 series = 
                     [| 
                         {| 
-                            data = newCases |> Array.map (max 0.)
+                            data = newCases |> Array.map ( max 0.)
                             animation = false
                             colors = columnColors 
                             borderColor = columnColors 
-                            pointWidth = 16
+                            pointWidth = 7
                             colorByPoint = true
                         |} |> pojo 
                     |]
             |} |> pojo
-
         match state.MapToDisplay with 
         | Europe -> 
             Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-eur", options)) 10 |> ignore
