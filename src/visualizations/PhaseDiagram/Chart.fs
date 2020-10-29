@@ -81,27 +81,22 @@ let totalVsWeekChartOptions state =
                         (i18n "totalVsWeek.xAxisLabel") jsThis?x
                         (i18n "totalVsWeek.xAxisLabel") jsThis?y |}
 
-        plotOptions = pojo
-            {| series = pojo
-                {| lineWidth = 0
-                   marker = pojo {| enabled = true ; symbol = "circle" ; radius = 2 |}
-                   states = pojo {| hover = pojo {| lineWidth = 0 |} |}
-                |}
-            |}
-
         series = [|
-            {| data = state.DisplayData.[0..state.Day]
-               color = "#dba51d" |}
+            {| data = state.DisplayData
+               color = "#efd38b"
+               marker = pojo {| symbol = "circle" ; radius = 3 |}
+               states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+            |}
+            {| data = [| state.DisplayData.[state.Day] |]
+               color = "#dba51d"
+               marker = pojo {| symbol = "circle" ; radius = 8 |}
+               states = pojo {| hover = pojo {| lineWidth = 0 |} |}
+            |}
         |]
     |} |> pojo
 
 let weekVsWeekBeforeOptions state =
     let sharedOptions = sharedChartOptions()
-
-    let bracketWidth = 10
-
-    let dayLeft = max 0 (state.Day - bracketWidth)
-    let dayRight = min (state.Day + bracketWidth) (state.DisplayData.Length - 1)
 
     {| sharedOptions with
         xAxis = pojo
