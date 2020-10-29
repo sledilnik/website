@@ -47,11 +47,15 @@ Parameters:
 - `ng` (Goriška)
 - `kp` (Obalno-kraška)
 
+`search`=
+- `search string`
+
 | Chart | Url |
 | ----- | --- |
 | Občine - Pomurska | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms |
 | Občine - Savinjska, podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=time-to-double |
 | Občine - podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double |
+| Občine - Medvode | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?search=medvode |
 
 ### Resize
 

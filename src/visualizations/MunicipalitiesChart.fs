@@ -53,6 +53,10 @@ type Query (query : obj, regions : Region list) =
         regions
         |> List.map (fun region -> region.Key)
         |> Set.ofList
+    member this.Search =
+        match query?("search") with
+        | Some (search : string) -> Some search
+        | _ -> None
     member this.Region =
         match query?("region") with
         | Some (region : string) when Set.contains (region.ToLower()) this.Regions ->
@@ -157,7 +161,10 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         { Municipalities = municipalities
           Regions = regions
           ShowAll = false
-          SearchQuery = ""
+          SearchQuery = 
+            match query.Search with
+            | None -> ""
+            | Some search -> search
           FilterByRegion =
             match query.Region with
             | None -> ""
