@@ -81,7 +81,7 @@ let totalVsWeekChartOptions state =
                     sprintf "<b>%s</b><br>%s: %d<br>%s: %d"
                         date
                         (i18n "totalVsWeek.xAxisLabel") jsThis?x
-                        (i18n "totalVsWeek.xAxisLabel") jsThis?y |}
+                        (i18n "totalVsWeek.yAxisLabel") jsThis?y |}
 
         series = [|
             {| data = data
