@@ -389,6 +389,17 @@ The display can be changed by selecting different views above the graph: if you 
 </details>
 
 <details>
+  <summary id=phase-diagram-chart>What does the "Phase diagram" graph mean?</summary>
+
+[Phase diagram](/sl/stats#phase-diagram-chart) is a visualization which shows the state of the epidemic in a coordinate space that does not have time as one of its axis; axes are used for quantities that help visualize and compare the state of the epidemic regardless of the time at which this state was reached. The position of a point in such a visualization changes with time, typically following predictable patterns; this can help us understand the dynamics and decipher the phase of the epidemic. The diagram has two displays: "Total vs. week" and "Incidence growth".
+
+**Total vs. weekly** shows the total number of cases on the x axis, and new cases in the last week on the y axis. Both axes are logarithmic. When an epidemic grows exponentially, the point on this diagram will move upwards and to the right in a straight line; the faster the exponential growth, the steeper the slope of this line. When the growth slows down, the point first starts moving horizontally (a longer period of such dynamics would mean a plateau - linear growth of new cases), and with strong deceleration of the epidemic the curve turns sharply downwards and stops when the epidemic completes.
+
+**Incidence growth** shows the state of the epidemic using 7-day incidence on the x axis and its relative weekly growth on the y axis. Horizontal position of the point shows the spread of the virus in the population, while vertical position is related to the speed of the epidemic's exponential growth. When the point is above 100% vertically, the epidemic is growing exponentially and the point will move towards the right (incidence will increase). When the point is below 100%, the epidemic is dying out, and the point will move towards the left.
+
+</details>
+
+<details>
   <summary id=age-groups-chart>What does the “Age Groups” graph show?</summary>
 
 The [graph](/en/stats#age-groups-chart) shows the age structure of all confirmed coronavirus cases and deaths. The graph also displays demarcations by gender. The display shows absolute values and can be changed at the top right to the *Relative* display for a better insight into what the mortality rate from COVID-19 is relative to the general population throughout the epidemic period. In the Relative view, there are the options for different views below: by selecting *Proportion of confirmed cases*, the share of confirmed cases within a certain age group will be displayed. By selecting the *Death rate*, we will see the number of deaths per population size. 
