@@ -41,6 +41,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         let newState =
             match metric with
             | CasesMetric -> { state with Metric = Cases }
+            | HospitalizedMetric -> { state with Metric = Hospitalized }
             | DeceasedMetric -> { state with Metric = Deceased }
             | UnknownMetric -> state
         let newDisplayData = displayData newState.Metric state.DiagramKind state.StatsData
@@ -141,16 +142,14 @@ let weekVsWeekBeforeOptions state =
     |} |> pojo
 
 let renderMetricSelector (selected : Metric) dispatch =
-    let options = seq {
-        yield Html.option [
-            prop.text Metric.Cases.Name
-            prop.value (Metric.Cases.ToString())
-        ]
-        yield Html.option [
-            prop.text Metric.Deceased.Name
-            prop.value (Metric.Deceased.ToString())
-        ]
-    }
+    let options =
+        Metric.AllMetrics
+        |> List.map (fun metric ->
+            Html.option [
+                prop.text metric.Name
+                prop.value (metric.ToString())
+            ]
+        )
 
     Html.select [
         prop.value (selected.ToString())

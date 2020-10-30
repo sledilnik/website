@@ -492,6 +492,7 @@
             "title": "Phase diagram",
             "titleMenu": "Phase diagram",
             "cases": "Confirmed cases",
+            "hospitalized": "Hospitalized",
             "deceased": "Deaths",
             "totalVsWeek": {
                 "name": "Total vs. week",

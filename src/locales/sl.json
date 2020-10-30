@@ -960,6 +960,7 @@
             "title": "Fazni diagram",
             "titleMenu": "Fazni diagram",
             "cases": "Potrjeni primeri",
+            "hospitalized": "Hospitalizirani",
             "deceased": "Umrli",
             "totalVsWeek": {
                 "name": "Skupaj proti zadnjemu tednu",

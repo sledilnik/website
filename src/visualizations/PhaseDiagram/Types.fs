@@ -26,6 +26,7 @@ type Color = {
 
 type Metric =
     | Cases
+    | Hospitalized
     | Deceased
 
     with
@@ -33,6 +34,7 @@ type Metric =
     member this.Name =
         match this with
         | Cases -> i18n "cases"
+        | Hospitalized -> i18n "hospitalized"
         | Deceased -> i18n "deceased"
 
     member this.Color =
@@ -40,15 +42,20 @@ type Metric =
         | Cases ->
             { Dark = "#dba51d"
               Light = "#f2dba2" }
+        | Hospitalized ->
+            { Dark = "#be7A2a"
+              Light = "#eacaa3" }
         | Deceased ->
             { Dark = "#000000"
               Light = "#999999" }
 
-let (|CasesMetric|DeceasedMetric|UnknownMetric|) str =
-    if str = Metric.Cases.ToString()
-    then CasesMetric
-    elif str = Metric.Deceased.ToString()
-    then DeceasedMetric
+    static member AllMetrics =
+        [ Cases ; Hospitalized ; Deceased ]
+
+let (|CasesMetric|HospitalizedMetric|DeceasedMetric|UnknownMetric|) str =
+    if str = Metric.Cases.ToString() then CasesMetric
+    elif str = Metric.Hospitalized.ToString() then HospitalizedMetric
+    elif str = Metric.Deceased.ToString() then DeceasedMetric
     else UnknownMetric
 
 type DisplayData = {

@@ -5,20 +5,41 @@ open Types
 let totalVsWeekData metric statsData =
     let windowSize = 7
 
-    statsData
-    |> List.map (fun (dp : StatsDataPoint) ->
+    let normalizedData =
         match metric with
         | Cases ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
             {| Date = dp.Date
                Count = dp.Cases.ConfirmedToday
                CountToDate = dp.Cases.ConfirmedToDate
-            |}
+            |})
         | Deceased ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
             {| Date = dp.Date
                Count = dp.StatePerTreatment.Deceased
                CountToDate = dp.StatePerTreatment.DeceasedToDate
-            |}
-        )
+            |})
+        | Hospitalized ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
+            {| Date = dp.Date
+               Count = dp.StatePerTreatment.InHospital
+               CountToDate = dp.StatePerTreatment.InHospitalToDate
+            |})
+            |> List.pairwise
+            |> List.map (fun (a, b) ->
+                match a.Count, b.Count, b.CountToDate with
+                | Some aCount, Some bCount, Some bCountToDate ->
+                    {| Date = b.Date
+                       Count = Some (bCount - aCount)
+                       CountToDate = Some bCountToDate
+                    |} |> Some
+                | _ -> None)
+            |> List.choose id
+
+    normalizedData
     |> List.windowed windowSize
     |> List.map (fun window ->
         let last =
@@ -44,14 +65,37 @@ let totalVsWeekData metric statsData =
 let weekVsWeekBeforeData metric statsData =
     let windowSize = 7
 
-    statsData
-    |> List.map (fun (dp : StatsDataPoint) ->
-        {| Date = dp.Date
-           Count =
-            match metric with
-            | Cases -> dp.Cases.ConfirmedToday
-            | Deceased -> dp.StatePerTreatment.Deceased
-        |} )
+    let normalizedData =
+        match metric with
+        | Cases ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
+            {| Date = dp.Date
+               Count = dp.Cases.ConfirmedToday
+            |})
+        | Deceased ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
+            {| Date = dp.Date
+               Count = dp.StatePerTreatment.Deceased
+            |})
+        | Hospitalized ->
+            statsData
+            |> List.map (fun (dp : StatsDataPoint) ->
+            {| Date = dp.Date
+               Count = dp.StatePerTreatment.InHospital
+            |})
+            |> List.pairwise
+            |> List.map (fun (a, b) ->
+                match a.Count, b.Count with
+                | Some aCount, Some bCount ->
+                    {| Date = b.Date
+                       Count = Some (bCount - aCount)
+                    |} |> Some
+                | _ -> None)
+            |> List.choose id
+
+    normalizedData
     |> List.filter (fun dp -> dp.Count |> Option.isSome)
     |> List.windowed (windowSize * 2)
     |> List.map (fun doubleWindow ->
