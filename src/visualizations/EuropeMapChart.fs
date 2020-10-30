@@ -428,7 +428,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let someWeeksAgo = DateTime.Today.AddDays(-21.0)
+        let someWeeksAgo = DateTime.Today.AddDays(-21.0) // increased to 21 days from 14
         { state with OwdData = Loading },
         Cmd.OfAsync.result (loadCountryIncidence owdCountries someWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
@@ -472,7 +472,14 @@ let mapData state =
                     then 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
                 else
                     0.
-            let twoWeekCaseNumbers = cd.NewCases |> List.toArray |> Array.map float
+            
+            let last n xs = List.toSeq xs |> Seq.skip (xs.Length - n) |> Seq.toList
+            let twoWeekCaseNumbers = 
+                cd.NewCases 
+                |> List.filter(fun x -> x > 0) // filter out date with missing data
+                |> last 14 // take the last 14 non zero datapoints
+                |> List.toArray 
+                |> Array.map float
 
             let ncDate =
                 (I18N.tOptions "days.date" {| date = cd.OwdDate |})
@@ -646,17 +653,14 @@ let renderMap state geoJson _ =
             let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
             let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
             sprintf "#%02x%02x%02x" newR newG newB
+
         let maxCases = newCases |> Array.max
         let tickScale = max 1. (10. ** round (Math.Log10 (maxCases + 1.) - 1.))
 
         let color1 = "#bda506"
         let color2 = desaturateColor color1 0.6
-        let color3 = desaturateColor color1 0.3
 
-        printfn "%A" newCases
-
-        let temp = [|([| color3 |] |> Array.replicate 7 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
-        let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
+        let columnColors = [| ([|color2 |] |> Array.replicate 7 |> Array.concat); ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
         let options =
             {|
                 chart = 
@@ -700,7 +704,7 @@ let renderMap state geoJson _ =
                             animation = false
                             colors = columnColors 
                             borderColor = columnColors 
-                            pointWidth = 7
+                            pointWidth = 15 //
                             colorByPoint = true
                         |} |> pojo 
                     |]
