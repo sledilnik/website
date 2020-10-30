@@ -11,6 +11,8 @@ open Browser
 open Highcharts
 open Types
 
+let chartText = I18N.chartText "infections"
+
 type Metric =
     | HospitalStaff
     | RestHomeStaff
@@ -192,7 +194,7 @@ let renderChartOptions state dispatch =
                 {|
                 visible = true
                 color = metric.Color
-                name = I18N.tt "charts.infections" metric.Id
+                name = chartText metric.Id
                 data = metricData
                 marker = pojo {| enabled = false |}
                 |}
@@ -278,7 +280,7 @@ let renderDisplaySelectors activeDisplayType dispatch =
     let renderSelector (displayType : DisplayType) =
         let active = displayType = activeDisplayType
         Html.div [
-            prop.text (I18N.tt "charts.infections" displayType.Id)
+            prop.text (chartText displayType.Id)
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected")]
@@ -310,7 +312,15 @@ let render state dispatch =
     Html.div [
         renderChartContainer state dispatch
         renderDisplaySelectors state.DisplayType (ChangeDisplayType >> dispatch)
+
+        Html.div [
+            prop.className "disclaimer"
+            prop.children [
+                Html.text (chartText "disclaimer")
+            ]
+        ]
     ]
+
 
 let infectionsChart (props : {| data : StatsData |}) =
     React.elmishComponent("InfectionsChart", init props.data, update, render)

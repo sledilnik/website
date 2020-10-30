@@ -745,6 +745,7 @@
         "hCenters": {
             "title": "Obravnava v ZD",
             "titleMenu": "ZD - obravnava",
+            "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 25. oktobra nam Ministrstvo za zdravje ne posreduje več podatkov iz zdravstvenih domov, ker jih ne zbirajo več.",
             "allRegions": "Vse regije",
             "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
             "suspectedCovidExamination": "Sum COVID-19 (pregled)",
@@ -766,6 +767,7 @@
         "infections": {
             "title": "Struktura potrjenih primerov",
             "titleMenu": "Primeri – struktura",
+            "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 11. oktobra nam NIJZ ne posreduje več podatkov za DSO in zaposlene v zdravstvu.",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",

@@ -11,6 +11,8 @@ open Types
 open Data.HCenters
 open Highcharts
 
+let chartText = I18N.chartText "hCenters"
+
 type Region =
     { Key : string
       Name : string }
@@ -80,7 +82,7 @@ let renderChartOptions (state : State) dispatch =
     let allSeries = [
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.emergencyExamination"
+                name = chartText "emergencyExamination"
                 ``type`` = "line"
                 visible = false
                 color = "#70a471"
@@ -90,7 +92,7 @@ let renderChartOptions (state : State) dispatch =
 
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.suspectedCovidExamination"
+                name = chartText "suspectedCovidExamination"
                 ``type`` = "line"
                 color = "#a05195"
                 dashStyle = Dot |> DashStyle.toString
@@ -98,7 +100,7 @@ let renderChartOptions (state : State) dispatch =
             |}
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.suspectedCovidPhone"
+                name = chartText "suspectedCovidPhone"
                 ``type`` = "line"
                 color = "#d45087"
                 dashStyle = Dot |> DashStyle.toString
@@ -106,21 +108,21 @@ let renderChartOptions (state : State) dispatch =
             |}
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.sentToSelfIsolation"
+                name = chartText "sentToSelfIsolation"
                 ``type`` = "line"
                 color = "#665191"
                 data = hcData |> Seq.map (fun (date, dp) -> (date |> jsTime12h, dp.SentTo.SelfIsolation)) |> Seq.toArray
             |}
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.testsPerformed"
+                name = chartText "testsPerformed"
                 ``type`` = "line"
                 color = "#19aebd"
                 data = hcData |> Seq.map (fun (date, dp) -> (date |> jsTime12h, dp.Tests.Performed)) |> Seq.toArray
             |}
         yield pojo
             {|
-                name = I18N.t "charts.hCenters.testsPositive"
+                name = chartText "testsPositive"
                 ``type`` = "line"
                 color = "#d5c768"
                 data = hcData |> Seq.map (fun (date, dp) -> (date |> jsTime12h, dp.Tests.Positive)) |> Seq.toArray
@@ -161,7 +163,7 @@ let renderChartContainer (state : State) dispatch =
 let renderRegionSelector (regions : Region list) (selected : string) dispatch =
     let renderedRegions = seq {
         yield Html.option [
-            prop.text (I18N.t "charts.hCenters.allRegions")
+            prop.text (chartText "allRegions")
             prop.value ""
         ]
 
@@ -194,6 +196,13 @@ let render (state : State) dispatch =
                 ]
             ]
             renderChartContainer state dispatch
+
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (chartText "disclaimer")
+                ]
+            ]
         ]
 
 

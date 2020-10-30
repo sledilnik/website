@@ -295,6 +295,7 @@
         "hCenters": {
             "title": "Healthcare Center Treatment",
             "titleMenu": "HC - treatment",
+            "disclaimer": "Note: this chart is not up-to-date. From October 25, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
@@ -316,6 +317,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
+            "disclaimer": "Note: this chart is not up-to-date. From October 11, NIJZ does not report the data about retirement homes and heltcare employees anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
