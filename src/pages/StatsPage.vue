@@ -1,6 +1,6 @@
 <template>
   <div @click="checkClick($event)">
-    <Time-stamp />
+    <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <b-row cols="12">
         <b-col>
@@ -124,6 +124,11 @@ export default {
         clearInterval(checker)
       }
     }, 80)
+  },
+  computed: {
+    ...mapState('stats', {
+      exportTime: 'exportTime'
+    }),
   },
   methods: {
     checkClick(e) {

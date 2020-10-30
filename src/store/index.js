@@ -19,6 +19,7 @@ import {
 import {
   tableData
 } from './tables.store'
+import ostanizdravStore from './ostanizdrav.store'
 
 Vue.use(Vuex)
 
@@ -56,6 +57,7 @@ const store = new Vuex.Store({
     patients: patientsStore,
     municipalities: municipalitiesStore,
     healthCenters: healthCentersStore,
+    ostanizdrav: ostanizdravStore,
     tableData,
   },
 })
