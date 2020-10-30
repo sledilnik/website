@@ -468,6 +468,18 @@ Prikaz občin lahko filtriramo tudi po posameznih regijah, tako da z zgornjega s
 </details>
 
 <details>
+  <summary id=phase-diagram-chart>Kaj kaže prikaz "Fazni diagram"?</summary>
+
+[Fazni diagram](/sl/stats#phase-diagram-chart) je prikaz, ki stanje epidemije prikaže v koordinatnem prostoru, v katerem čas ni ena od osi; osi so uporabljene za količine, ki pomagajo opisati stanje epidemije ne glede na to, kdaj je bilo to stanje doseženo.
+Položaj točke v takem prikazu se s časom spreminja, tipično po predvidljivih vzorcih, in to nam pomaga razumeti dogajanje oziroma razbrati, v kateri fazi je epidemija (od tod tudi ime diagrama). Prikaz ima dva načina: "Skupaj proti zadnjemu tednu" in "Sprememba pojavnosti".
+
+**Skupaj proti zadnjemu tednu** je prikaz, kjer je vodoravni (x) položaj točke odvisen od skupnega števila primerov od začetka epidemije, navpični (y) položaj pa od števila novih primerov v zadnjem tednu. Obe osi diagrama sta logaritemski. Kadar je epidemija v fazi eksponentne rasti, se točka na diagramu pomika desno in navzgor po ravni črti; hitrejša, kot je rast, bolj strmo je vzpenjanje. Ko rast epidemija začne upadati, se premikanje točke najprej spremeni v vodoravno (daljše obdobje take dinamike bi pomenilo plato oz. linearno rast primerov), ob nadaljnjem močnem upočasnjevanju širjenja pa krivulja zavije ostro navzdol in se ob koncu epidemije ustavi.
+
+**Sprememba pojavnosti** prikazuje stanje epidemije s 7-dnevno pojavnostjo na vodoravni osi in relativno tedensko rastjo pojavnosti na navpični osi. Vodoravni položaj točke je povezan z razširjenostjo virusa v populaciji ob nekem času, navpični pa s hitrostjo eksponentnega širjenja. Kadar je točka po navpični osi nad 100%, se epidemija širi (točka se bo premikala v desno), položaj pod 100% pa pomeni, da je epidemija v upadanju (točka se bo premikala v levo).
+
+</details>
+
+<details>
   <summary id=europe-chart>Kaj nam kaže "Stanje COVID-19 v Evropi"?</summary>
 
 [Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.
