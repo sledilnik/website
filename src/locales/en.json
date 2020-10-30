@@ -60,6 +60,7 @@
         "inHospital": "Hospitalized",
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
+        "ostaniZdrav": "#OstaniZdrav Cases",
         "lastUpdated": "{{ date, %a, %b %e }}"
     },
     "tables": {
