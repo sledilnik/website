@@ -98,18 +98,19 @@ let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     State.initial hTypeToDisplay, cmd
 
 let getFacilitiesList (state : State) (data : PatientsStats array) =
-    seq { // take few samples
-        data.[data.Length/2]
-        data.[data.Length-2]
-        data.[data.Length-1]
-    }
-    |> Seq.collect
-           (fun stats ->
-                stats.facilities
-                |> Map.toSeq
-                |> Seq.map
-                       (fun (facility, stats) ->
-                            facility, if state.HTypeToDisplay = CareHospitals then stats.care.today else stats.inHospital.today)) // hospital name
+    data.[data.Length-1].facilities
+    |> Map.toSeq
+    |> Seq.filter 
+       (fun (facility, stats) -> 
+            if state.HTypeToDisplay = CareHospitals 
+            then stats.care.toDate.IsSome 
+            else stats.inHospital.toDate.IsSome)
+    |> Seq.map
+       (fun (facility, stats) ->
+            facility, 
+            if state.HTypeToDisplay = CareHospitals 
+            then stats.care.today
+            else stats.inHospital.today)
     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
