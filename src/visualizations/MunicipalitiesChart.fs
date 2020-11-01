@@ -505,7 +505,6 @@ let renderView (currentView : View) dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.t "charts.common.sortBy")
             if Highcharts.showDoublingTimeFeatures then
                 renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
             renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")

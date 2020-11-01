@@ -196,10 +196,21 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 inputDateParser = parseDate
-                x = 0
-                inputBoxBorderColor = "#ced4da"
-                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                buttonTheme = pojo
+                    {|
+                        r = 6
+                        width = 50
+                        height = 20
+                        fill="#ededed"
+                        style = {| fill="#767676"; fontSize="14px"; fontFamily="'IBM Plex Sans', sans-serif" |}
+                        states = pojo
+                            {|
+                                hover = pojo {| style={| color="black" |} |}
+                                select = pojo {| fill="white"; style={| color="black" |} |}
+                            |}
+                    |}
                 buttons = buttons
+                x = 0
             |}
 let basicChartOptions
     (scaleType:ScaleType)
