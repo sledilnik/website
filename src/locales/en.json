@@ -592,6 +592,7 @@
         "sources": {
             "title": "Sources of Infection and Quarantine",
             "titleMenu": "Sources of Infection",
+            "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
