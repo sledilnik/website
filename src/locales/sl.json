@@ -620,6 +620,10 @@
         "11": {
             "title": "faza<br>11",
             "description": "epidemija"
+        },
+        "12": {
+            "title": "faza<br>12",
+            "description": "nov režim testiranja"
         }
     },
     "charts": {

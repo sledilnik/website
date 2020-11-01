@@ -172,7 +172,12 @@
         "11": {
             "title": "phase<br>11",
             "description": "epidemic"
+        },
+        "12": {
+            "title": "phase<br>12",
+            "description": "new testing methodology"
         }
+
     },
     "charts": {
         "common": {
