@@ -1,8 +1,8 @@
 <template>
   <div class="time-stamp">
-    <p v-if="exportTime">
-      {{ $t("timestamp.updated", { date: new Date(exportTime) }) }}
-      {{ $t("timestamp.at", { date: new Date(exportTime) }) }}
+    <p v-if="date">
+      {{ $t("timestamp.updated", { date }) }}
+      {{ $t("timestamp.at", { date }) }}
     </p>
   </div>
 </template>
@@ -10,8 +10,10 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: {
-    ...mapState('stats', ['exportTime']),
+  props: {
+    date: {
+      type: Date,
+    },
   },
 };
 </script>

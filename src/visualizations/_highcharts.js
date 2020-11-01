@@ -130,11 +130,16 @@ function renderMap(options) {
     }, null);
 }
 
+function sparklineChart (documentElementId, options) {
+  Highcharts.chart(documentElementId, options)
+}
+
 export {
     genericArray,
     loadScript,
     renderChart,
     renderChartFromWindow,
     renderMap,
+    sparklineChart,
     Highcharts
 }

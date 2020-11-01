@@ -11,36 +11,69 @@ open Browser
 open Types
 open Highcharts
 
+open Data.Patients
+
 type DisplayType =
     | Active
     | New
     | Tests
     | PositivePct
+    | HospitalAdmitted
+    | HospitalDischarged
+    | ICUAdmitted
+    | Deceased
 with
-    static member all = [ New; Active; Tests; PositivePct; ]
+    static member UseStatsData dType = [ Active; New; Tests; PositivePct; ] |> List.contains dType
+    static member all = [ New; Active; Tests; PositivePct; HospitalAdmitted; HospitalDischarged; ICUAdmitted; Deceased; ]
     static member getName = function
         | New -> I18N.t "charts.dailyComparison.new"
         | Active -> I18N.t "charts.dailyComparison.active"
         | Tests -> I18N.t "charts.dailyComparison.tests"
         | PositivePct -> I18N.t "charts.dailyComparison.positivePct"
+        | HospitalAdmitted -> I18N.t "charts.dailyComparison.hospitalAdmitted"
+        | HospitalDischarged -> I18N.t "charts.dailyComparison.hospitalDischarged"
+        | ICUAdmitted -> I18N.t "charts.dailyComparison.icuAdmitted"
+        | Deceased -> I18N.t "charts.dailyComparison.deceased"
+    static member getColor = function
+        | New -> "#bda506"
+        | Active -> "#dba51d"
+        | Tests -> "#19aebd"
+        | PositivePct -> "#665191"
+        | HospitalAdmitted -> "#be7A2a"
+        | HospitalDischarged -> "#20b16d"
+        | ICUAdmitted -> "#d96756"
+        | Deceased -> "#696969"
 
 type State = {
-    Data: StatsData
+    StatsData: StatsData
+    PatientsData : PatientsStats []
+    Error : string option
     DisplayType: DisplayType
 }
 
 type Msg =
+    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
 
 let init data : State * Cmd<Msg> =
+    let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
-        Data = data
+        StatsData = data
+        PatientsData = [||]
+        Error = None
         DisplayType = New
     }
-    state, Cmd.none
+    state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | ConsumePatientsData (Ok data) ->
+        { state with PatientsData = data; }, Cmd.none
+    | ConsumePatientsData (Error err) ->
+        { state with Error = Some err }, Cmd.none
+    | ConsumeServerError ex ->
+        { state with Error = Some ex.Message }, Cmd.none
     | ChangeDisplayType dt ->
         { state with DisplayType = dt }, Cmd.none
 
@@ -73,7 +106,7 @@ let renderChartOptions (state : State) dispatch =
         fmtStr <- fmtStr + "</table>"
         fmtStr
 
-    let getValue dp =
+    let getStatsValue dp =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
@@ -82,13 +115,29 @@ let renderChartOptions (state : State) dispatch =
             match dp.Tests.Positive.Today, dp.Tests.Performed.Today with
             | Some p, Some t -> Some ( (float p / float t * 100.0 * 100.0) |> int)
             | _ -> None 
+        | _ -> None
+
+    let getPatientsValue dp =
+        match state.DisplayType with
+        | HospitalAdmitted -> dp.total.inHospital.``in``
+        | HospitalDischarged -> dp.total.inHospital.out
+        | ICUAdmitted -> dp.total.icu.``in``
+        | Deceased -> dp.total.deceased.today
+        | _ -> None
 
     let fourWeeks = 
-        state.Data 
-        |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
-        |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
-        |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
-        |> Seq.toArray
+        if DisplayType.UseStatsData state.DisplayType then
+            state.StatsData 
+            |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
+            |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
+            |> Seq.map (fun dp -> (dp.Date, getStatsValue dp)) 
+            |> Seq.toArray
+        else
+            state.PatientsData 
+            |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
+            |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
+            |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp)) 
+            |> Seq.toArray
 
     let allSeries = [
         for weekIdx in 0 .. weeksShown-1 do    
@@ -107,15 +156,14 @@ let renderChartOptions (state : State) dispatch =
                 sprintf "#%02x%02x%02x" newR newG newB
 
             let getSeriesColor dt series = 
-                match dt with
-                | New -> desaturateColor "#bda506" (float (series) / float (weeksShown))
-                | Active -> desaturateColor "#dba51d" (float (series) / float (weeksShown))
-                | Tests -> desaturateColor "#19aebd" (float (series) / float (weeksShown))
-                | PositivePct -> desaturateColor "#665191" (float (series) / float (weeksShown))
+                desaturateColor (DisplayType.getColor dt) (float (series) / float (weeksShown))
 
             let percent a b =
                 match a, b with
-                | Some v, Some p -> sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
+                | Some v, Some p -> 
+                    if p = 0 
+                    then if v = 0 then "" else ">500%"     
+                    else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
             yield pojo
@@ -224,10 +272,14 @@ let renderDisplaySelectors state dispatch =
             |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
 
 let render (state: State) dispatch =
-    Html.div [
-        renderChartContainer state dispatch
-        renderDisplaySelectors state dispatch
-    ]
+    match state.PatientsData, state.Error with
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, None ->
+        Html.div [
+            renderChartContainer state dispatch
+            renderDisplaySelectors state dispatch
+        ]
 
 let dailyComparisonChart (props : {| data : StatsData |}) =
     React.elmishComponent("DailyComparisonChart", init props.data, update, render)

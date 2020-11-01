@@ -16,6 +16,9 @@ let chartFromWindow: obj -> ReactElement = jsNative
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
+[<Import("sparklineChart", from="./_highcharts")>]
+let sparklineChart (documentElementId : string, options : obj) : unit = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -26,6 +29,7 @@ module Helpers =
     let poja (a: 'T[]) : obj = jsNative
 
     type JsTimestamp = float
+
     [<Emit("$0.getTime()")>]
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
@@ -129,6 +133,7 @@ let addContainmentMeasuresFlags
         16,10, "#FFe6e6", "regions"
         19,10, "#FFe6e6", "schools6+"
         20,10, "#FFe6e6", "movement"
+        27,10, "#FFe6e6", "municipality2"
     |]
     {|
         ``type`` = "flags"
@@ -212,6 +217,17 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttons = buttons
                 x = 0
             |}
+
+let credictsOptions =
+    {| enabled = true
+       text = sprintf "%s: %s, %s"
+            (I18N.t "charts.common.dataSource")
+            (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+            (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+       href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+    |} |> pojo
+
+
 let basicChartOptions
     (scaleType:ScaleType)
     (className:string)
@@ -396,14 +412,5 @@ let basicChartOptions
                     |}
             |}
 
-        credits = pojo
-            {|
-                enabled = true
-                text =
-                    sprintf "%s: %s, %s"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
-                        (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-            |}
+        credits = credictsOptions
     |}

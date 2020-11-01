@@ -576,6 +576,10 @@
         "movement": {
             "title": "🚫21-6h",
             "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
+        },
+        "municipality2": {
+            "title": "Občine",
+            "description": "Prepoved gibanja izven meja občin"
         }
     },
     "phase": {
@@ -695,7 +699,11 @@
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
             "tests": "Opravljeni testi",
-            "positivePct": "Delež pozitivnih testov (%)"
+            "positivePct": "Delež pozitivnih testov (%)",
+            "hospitalAdmitted": "Sprejeti v bolnišnico",
+            "hospitalDischarged": "Odpuščeni iz bolnišnice",
+            "icuAdmitted": "Sprejeti v intenzivno",
+            "deceased": "Umrli"
         },
         "cases": {
             "title": "Potrjeni primeri",
@@ -742,6 +750,7 @@
         "hCenters": {
             "title": "Obravnava v ZD",
             "titleMenu": "ZD – obravnava",
+            "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 25. oktobra nam Ministrstvo za zdravje ne posreduje več podatkov iz zdravstvenih domov, ker jih ne zbirajo več.",
             "allRegions": "Vse regije",
             "emergencyExamination": "Nujna medicinska pomoč (skupaj)",
             "suspectedCovidExamination": "Sum COVID-19 (pregled)",
@@ -763,6 +772,7 @@
         "infections": {
             "title": "Struktura potrjenih primerov",
             "titleMenu": "Primeri – struktura",
+            "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 11. oktobra nam NIJZ ne posreduje več podatkov za DSO in zaposlene v zdravstvu.",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",
@@ -870,6 +880,7 @@
             "titleMenu": "Evropa – stanje",
             "twoWeekIncidence": "14-dnevna pojavnost na 100.000 prebivalcev",
             "restrictions": "Omejitve in uvoženi primeri",
+            "weeklyIncrease": "Tedenski prirast",
             "newCases": "Novi primeri",
             "incidence100k": "Novi primeri v 14 dneh na 100.000 prebivalcev",
             "importedCases": "Uvoženi primeri v 14 dneh",
@@ -949,6 +960,27 @@
             "titleMenu": "Države – umrli",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
+        },
+        "phaseDiagram": {
+            "title": "Fazni diagram",
+            "titleMenu": "Fazni diagram",
+            "cases": "Potrjeni primeri",
+            "hospitalized": "Hospitalizirani",
+            "deceased": "Umrli",
+            "totalVsWeek": {
+                "name": "Skupaj proti zadnjemu tednu",
+                "xAxisTitle": "Skupaj",
+                "yAxisTitle": "7-dnevna pojavnost",
+                "xAxisLabel": "Skupaj",
+                "yAxisLabel": "7-dnevna pojavnost"
+            },
+            "weekVsWeekBefore": {
+                "name": "Sprememba pojavnosti",
+                "xAxisTitle": "7-dnevna pojavnost",
+                "yAxisTitle": "Sprememba pojavnosti (%)",
+                "xAxisLabel": "7-dnevna pojavnost",
+                "yAxisLabel": "Sprememba pojavnosti"
+            }
         },
         "ostanizdrav": {
             "title": "Aplikacija #OstaniZdrav",
@@ -1137,27 +1169,27 @@
         },
         "phase": {
             "6": {
-                "title": "Faza 6",
+                "title": "faza<br>6",
                 "description": "Debar 4, Kumanovo 4, Skopje 3, Tetovo 4, Resen 3, Makedonija 2, Štip 3"
             },
             "5": {
-                "title": "Faza 5",
+                "title": "faza<br>5",
                 "description": "Skopje 4, Tetovo 4, Štip 3, Makedonija 2"
             },
             "4": {
-                "title": "Faza 4",
+                "title": "faza<br>4",
                 "description": "Makedonija 3"
             },
             "3": {
-                "title": "Faza 3",
+                "title": "faza<br>3",
                 "description": "Debar 4"
             },
             "2": {
-                "title": "Faza 2",
+                "title": "faza<br>2",
                 "description": "Skopje 4"
             },
             "1": {
-                "title": "Faza 1",
+                "title": "faza<br>1",
                 "description": "Debar 4, Skopje 3, Makedonija 2 "
             }
         },

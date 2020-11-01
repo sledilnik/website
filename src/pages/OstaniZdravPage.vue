@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TimeStamp :date="exportTime" />
     <div class="custom-container">
       <section class="static-page-wrapper">
         <h1>
@@ -21,6 +22,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
+import TimeStamp from '@/components/TimeStamp'
 import PublishedChart from "@/components/charts/ostanizdrav/PublishedChart";
 import UserCountChart from "@/components/charts/ostanizdrav/UserCountChart";
 import UserPublishedByCountChart from "@/components/charts/ostanizdrav/UserPublishedByCountChart";
@@ -31,6 +35,7 @@ import ValidByRiskChart from "@/components/charts/ostanizdrav/ValidByRiskChart";
 export default {
   name: "OstaniZdravPage",
   components: {
+    TimeStamp,
     PublishedChart,
     UserCountChart,
     UserPublishedByCountChart,
@@ -38,11 +43,32 @@ export default {
     ValidChart,
     ValidByRiskChart,
   },
+  beforeCreate() {
+    this.$store.dispatch("ostanizdrav/fetchData")
+  },
+  computed: {
+    ...mapState("ostanizdrav", {
+      exportTime: "exportTime",
+    }),
+  },
+  
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+
+.custom-container {
+  margin: -24px auto 0 auto;
+  max-width: 730px;
+
+  @media only screen and (min-width: 768px) {
+    margin: 0 auto 65px auto;
+    box-shadow: $element-box-shadow;
+  }
+}
+
+
 .visualizations {
   display: flex;
   flex-direction: column;

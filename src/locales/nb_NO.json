@@ -293,7 +293,8 @@
             "mk": "Makedonsk",
             "hr": "Kroatisk",
             "en": "Engelsk",
-            "de": "Tysk"
+            "de": "Tysk",
+            "nb": "Norsk bokmål"
         },
         "github": "GitHub",
         "links": "Lenker",
@@ -307,7 +308,8 @@
         "ostanizdrav": "#OstaniZdrav",
         "world": "Verden",
         "home": "Hjem",
-        "menu": "Meny"
+        "menu": "Meny",
+        "goToGraph": "Gå til diagram"
     },
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",

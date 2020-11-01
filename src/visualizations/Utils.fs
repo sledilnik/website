@@ -7,6 +7,17 @@ open Feliz
 open Types
 open System
 
+let memoize f =
+    let cache = new System.Collections.Generic.Dictionary<_,_>()
+    (fun x ->
+        match cache.TryGetValue x with
+        | true, value ->
+            value
+        | false, _ ->
+            let value = f x
+            cache.Add(x, value)
+            value)
+
 // Converts Some 0 value to None
 let zeroToNone value =
     match value with

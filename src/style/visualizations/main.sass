@@ -4,6 +4,8 @@ $text-c: rgba(0, 0, 0, 0.7)
 $text-d: rgba(0, 0, 0, 0.5)
 $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
+@import "slider"
+
 @mixin nav-break
   @media only screen and (min-width: 1150px)
     @content
@@ -21,7 +23,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   @media only screen and (min-width: 768px)
     margin: 0
-    
+
   section
     background: #fff
     margin-bottom: 44px
@@ -42,7 +44,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     div.loader
       min-height: 450px
       color: #fff // hide 'loading' text
-  
+
   .title-chart-wrapper
     display: flex
     justify-content: space-between
@@ -127,8 +129,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background: $yellow
 
       @media only screen and (max-width: 500px)
-        padding: 4px 4.5px
-      
+        padding: 3px 4.5px
+
       .share-button-caption
         display: inline-block
         font-size: 14px
@@ -397,11 +399,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     min-height: 450px
 
   .age-groups-chart
-    min-height: 608px    
+    min-height: 608px
 
   .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
     min-height: 703px
-  
+
   .sources-chart
     min-height: 610px
 
@@ -436,6 +438,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     @include media-breakpoint-down(sm)
       min-height: 636px
+
+    .tooltip-chart
+      display: flex
+      position: relative
+      height: 100px
 
     .bars, .bar-wrapper
       display: flex
@@ -475,19 +482,12 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     min-height: 722px
     $bar-color: #d5c768
 
-    .bars, .bar-wrapper
+    .tooltip-chart
       display: flex
-      align-items: flex-end
-
-    .bar-wrapper
       position: relative
-      height: 50px
-
-    .bar
-      width: 4px
-      margin-right: 1px
-      background-color: $bar-color
-
+      height: 100px
+      max-width: 300px
+    
   .hcenters-chart
     min-height: 655px
 
@@ -500,6 +500,23 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       @include media-breakpoint-down(md)
         margin-left: 0
+
+  .phase-diagram-chart
+    min-height: 700px
+
+    .slider
+      margin-top: 10px
+      display: flex
+      justify-content: space-between
+      align-items: center
+
+      .date
+        white-space: nowrap
+        margin-right: 1rem
+        font-size: $font-size * 1.2
+        padding: 7px 12px
+        border-radius: 4px
+        background-color: $yellow
 
   .municipalities-chart
     min-height: 897px
@@ -516,7 +533,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       top: 5px
       right: 10px
 
-      a 
+      a
         color: #999999
         text-decoration: none
 
@@ -650,11 +667,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         .bar
           &--active
             background-color: rgba($bar-active-color, 0.8)
-          
+
           &--recovered
             background-color: rgba($bar-recovered-color, 0.8)
-          
-          &--deceased 
+
+          &--deceased
             background-color: rgba($bar-deceased-color, 0.8)
 
     .bar

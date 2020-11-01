@@ -142,6 +142,10 @@ export default {
           titleMenu: this.$t('youtube.titleMenu'),
           icon: 'map',
         },
+        'phase-diagram-chart': {
+          titleMenu: this.$t('charts.phaseDiagram.titleMenu'),
+          icon: 'graph',
+        },
       },
     }
   },

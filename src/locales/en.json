@@ -1,7 +1,7 @@
 {
     "meta": {
         "title": "COVID-19 Tracking",
-        "description": "COVID-19 Slovenia Tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
+        "description": "COVID-19 Slovenia tracking - collected, verified, updated, analyzed and reviewed COVID-19 data for Slovenia."
     },
     "navbar": {
         "menu": "Menu",
@@ -37,7 +37,7 @@
         "newInfographics": "🆕 📇 New infographics:",
         "newChart": "🆕 📊 New chart:",
         "newPage": "🆕 New page:",
-        "progressC19": "Typical Progress of Covid-19. Hospitalization, intensive therapy and mortality.",
+        "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
         "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
     },
@@ -45,7 +45,7 @@
         "tests": "Tests Today",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
-        "incidence": "14 days incidence",
+        "incidence": "14-days incidence",
         "per100k": "per 100k",
         "orangePhase": "Orange phase",
         "orangePhaseGenitive": "orange",
@@ -249,7 +249,11 @@
             "new": "Confirmed Cases",
             "active": "Active Cases",
             "tests": "Tests Performed",
-            "positivePct": "Share of Positive Tests (%)"
+            "positivePct": "Share of Positive Tests (%)",
+            "hospitalAdmitted": "Admitted to Hospital",
+            "hospitalDischarged": "Discharged from Hospital",
+            "icuAdmitted": "Admitted to ICU",
+            "deceased": "Deaths"
         },
         "cases": {
             "title": "Confirmed Cases",
@@ -296,6 +300,7 @@
         "hCenters": {
             "title": "Healthcare Center Treatment",
             "titleMenu": "HC - treatment",
+            "disclaimer": "Note: this chart is not up-to-date. From October 25, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
@@ -317,6 +322,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
+            "disclaimer": "Note: this chart is not up-to-date. From October 11, NIJZ does not report the data about retirement homes and heltcare employees anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
@@ -395,6 +401,7 @@
             "titleMenu": "Europe - situation",
             "twoWeekIncidence": "14 days incidence per 100,000 people",
             "restrictions": "Restrictions and imported cases",
+            "weeklyIncrease": "Weekly increase",
             "newCases": "New cases",
             "incidence100k": "New cases in 14 days per 100,000 people",
             "importedCases": "Imported cases in 14 days",
@@ -485,6 +492,27 @@
             "sinceOneDeathPerMillion": "Since first death per million people",
             "sinceFirstDeath": "Since the first death",
             "chronologically": "Chronological"
+        },
+        "phaseDiagram": {
+            "title": "Phase diagram",
+            "titleMenu": "Phase diagram",
+            "cases": "Confirmed cases",
+            "hospitalized": "Hospitalized",
+            "deceased": "Deaths",
+            "totalVsWeek": {
+                "name": "Total vs. week",
+                "xAxisTitle": "Total",
+                "yAxisTitle": "7-day incidence",
+                "xAxisLabel": "Total",
+                "yAxisLabel": "7-day incidence"
+            },
+            "weekVsWeekBefore": {
+                "name": "Incidence difference",
+                "xAxisTitle": "7-day incidence",
+                "yAxisTitle": "Incidence difference (%)",
+                "xAxisLabel": "7-day incidence",
+                "yAxisLabel": "Incidence difference"
+            }
         },
         "hospitals": {
             "bedsShort": "Beds",
@@ -778,6 +806,10 @@
         "movement": {
             "title": "🚫21-6h",
             "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
+        },
+        "municipality2": {
+            "title": "Municipalities",
+            "description": "Prohibition of movement outside municipal borders"
         }
     },
     "days": {

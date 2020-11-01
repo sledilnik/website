@@ -45,11 +45,13 @@ type CountriesMap = Map<string, CountryData>
 type ChartType =
     | TwoWeekIncidence
     | Restrictions
+    | WeeklyIncrease
 
     override this.ToString() =
         match this with
         | TwoWeekIncidence -> chartText "twoWeekIncidence"
         | Restrictions -> chartText "restrictions"
+        | WeeklyIncrease -> chartText "weeklyIncrease"
 
 type State =
     { MapToDisplay : MapToDisplay
@@ -334,6 +336,8 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
     let importedFrom = dataForLastTwoWeeks |> Data.WeeklyStats.countryTotals |> Map.ofArray
     let importedDate = (Array.last dataForLastTwoWeeks).DateTo
 
+    let last n xs = List.toSeq xs |> Seq.skip (xs.Length - n) |> Seq.toList
+
     data
     |> List.groupBy (fun dp -> dp.CountryCode)
     |> List.map (fun (code, dps) ->
@@ -346,6 +350,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             (dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
+            |> last 14 // select the last two weeks
             |> List.sum)
             / 10.
 
@@ -353,12 +358,13 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             dps
             |> List.map (fun dp -> dp.NewCasesPerMillion)
             |> List.choose id
+            |> last 14
             |> List.toArray
 
         let incidenceMaxValue =
             if incidence.Length = 0
             then 0.
-            else incidence |> Array.toList |> List.max
+            else incidence |> Array.toList  |> last 14 |> List.max
 
         let newCases = dps |> List.map (fun dp -> dp.NewCases)
 
@@ -422,9 +428,9 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
-        let twoWeeksAgo = DateTime.Today.AddDays(-14.0)
+        let someWeeksAgo = DateTime.Today.AddDays(-21.0) // increased to 21 days from 14
         { state with OwdData = Loading },
-        Cmd.OfAsync.result (loadCountryIncidence owdCountries twoWeeksAgo OwdDataReceived)
+        Cmd.OfAsync.result (loadCountryIncidence owdCountries someWeeksAgo OwdDataReceived)
     | OwdDataReceived result ->
         let ret =
             match result with
@@ -456,6 +462,24 @@ let mapData state =
                 cd.NewCases
                 |> List.tryLast
                 |> Option.defaultValue 0
+            
+            let cases = cd.NewCases |> List.toArray
+
+            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum 
+            let casesWeekBefore = Array.sub cases (cases.Length - 14) 7 |> Array.sum 
+            let relativeIncrease = 
+                if casesWeekBefore > 0
+                    then 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
+                else
+                    0.
+            
+            let last n xs = List.toSeq xs |> Seq.skip (xs.Length - n) |> Seq.toList
+            let twoWeekCaseNumbers = 
+                cd.NewCases 
+                |> List.filter(fun x -> x > 0) // filter out date with missing data
+                |> last 14 // take the last 14 non zero datapoints
+                |> List.toArray 
+                |> Array.map float
 
             let ncDate =
                 (I18N.tOptions "days.date" {| date = cd.OwdDate |})
@@ -470,6 +494,8 @@ let mapData state =
                    incidence = incidence
                    incidenceMaxValue = incidenceMaxValue
                    newCases = nc
+                   weeklyIncrease = relativeIncrease
+                   twoWeekCases = twoWeekCaseNumbers
                    ncDate = ncDate
                    rType = cd.RestrictionText
                    rAltText = cd.RestrictionAltText
@@ -487,6 +513,11 @@ let mapData state =
                        value = float cd.ImportedFrom
                        color = cd.RestrictionColor
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
+            | WeeklyIncrease -> 
+                {| baseRec with
+                       value = relativeIncrease
+                       color = null
+                       dataLabels = {| enabled = false |} |}
         | _ ->
             {| code = code
                country = ""
@@ -497,6 +528,8 @@ let mapData state =
                incidence = null
                incidenceMaxValue = 0.0
                newCases = 0
+               weeklyIncrease = 0.
+               twoWeekCases = [| |]
                ncDate = ""
                rType = ""
                rAltText = ""
@@ -507,7 +540,7 @@ let mapData state =
 let renderMap state geoJson _ =
 
     let legend =
-        let enabled = state.ChartType = TwoWeekIncidence
+        let enabled = state.ChartType <> Restrictions
         {| enabled = enabled
            title = {| text = null |}
            align = if state.MapToDisplay = World then "left" else "right"
@@ -516,15 +549,16 @@ let renderMap state geoJson _ =
            floating = true
            borderWidth = 1
            backgroundColor = "white"
-           valueDecimals = 0 |}
+           valueDecimals = 0 
+           width = 70
+        |}
         |> pojo
 
     let colorAxis =
+        match state.ChartType with
+        | TwoWeekIncidence -> 
             {|
-                ``type`` = 
-                    match state.ChartType with
-                    | TwoWeekIncidence  -> "logarithmic"
-                    | Restrictions      -> "linear"  
+                ``type`` = "logarithmic"
                 tickInterval = 0.4
                 max = 7000 
                 min = 1  
@@ -552,24 +586,151 @@ let renderMap state geoJson _ =
                         formatter = fun() -> jsThis?value
                     |} |> pojo
             |} |> pojo
-             
+        | Restrictions ->
+            {|
+                ``type`` = "linear"
+                tickInterval = 0.4
+                max = 7000 
+                min = 1  
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7") 
+                        (0.280,"#ffe792") 
+                        (0.360,"#ffdf6c") 
+                        (0.440,"#ffb74d") 
+                        (0.520,"#ff8d3c") 
+                        (0.600,"#f85d3a") 
+                        (0.680,"#ea1641") 
+                        (0.760,"#d0004e") 
+                        (0.840,"#ad005b") 
+                        (0.920,"#800066") 
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels = 
+                    {| 
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+        | WeeklyIncrease ->
+            {| 
+                ``type`` = "linear"
+                tickInterval = 50
+                max = 200
+                min = -100
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#009e94")
+                        (0.166,"#6eb49d")
+                        (0.250,"#b2c9a7") 
+                        (0.333,"#f0deb0") 
+                        (0.500,"#e3b656")
+                        (0.600,"#cc8f00")
+                        (0.999,"#b06a00")
+                    |]
+                reversed=false
+                labels = 
+                {| 
+                   formatter = fun() -> sprintf "%s%%" jsThis?value
+                |} |> pojo
+            |} |> pojo
+
+
+    let sparklineFormatter newCases =
+        let desaturateColor (rgb:string) (sat:float) = 
+            let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+            let r = (argb &&& 0x00FF0000) >>> 16
+            let g = (argb &&& 0x0000FF00) >>> 8
+            let b = (argb &&& 0x000000FF)
+            let avg = (float(r + g + b) / 3.0) * 1.6
+            let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+            let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+            let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+            sprintf "#%02x%02x%02x" newR newG newB
+
+        let maxCases = newCases |> Array.max
+        let tickScale = max 1. (10. ** round (Math.Log10 (maxCases + 1.) - 1.))
+
+        let color1 = "#bda506"
+        let color2 = desaturateColor color1 0.6
+
+        let columnColors = [| ([|color2 |] |> Array.replicate 7 |> Array.concat); ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
+        let options =
+            {|
+                chart = 
+                    {|
+                        ``type`` = "column"
+                        backgroundColor = "transparent"
+                    |} |> pojo
+                credits = {| enabled = false |}
+                xAxis = 
+                    {| 
+                        visible = true 
+                        labels = {| enabled = false |} 
+                        title = {| enabled = false |}
+                        tickInterval = 7 
+                        lineColor = "#696969"
+                        tickColor = "#696969"
+                        tickLength = 4
+                    |}
+                yAxis = 
+                    {| 
+                        title = {| enabled = false |}
+                        visible = true  
+                        opposite = true 
+                        min = 0.
+                        max = newCases |> Array.max 
+                        tickInterval = tickScale 
+                        endOnTick = true 
+                        startOnTick = false 
+                        allowDecimals = false 
+                        showFirstLabel = true
+                        showLastLabel = true
+                        gridLineColor = "#000000"
+                        gridLineDashStyle = "dot"
+                    |} |> pojo
+                title = {| text = "" |}
+                legend = {| enabled = false |}
+                series = 
+                    [| 
+                        {| 
+                            data = newCases |> Array.map ( max 0.)
+                            animation = false
+                            colors = columnColors 
+                            borderColor = columnColors 
+                            pointWidth = 15 //
+                            colorByPoint = true
+                        |} |> pojo 
+                    |]
+            |} |> pojo
+        match state.MapToDisplay with 
+        | Europe -> 
+            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-eur", options)) 10 |> ignore
+            """<div id="tooltip-chart-eur"; class="tooltip-chart";></div>"""
+        | World -> 
+            Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-world", options)) 10 |> ignore
+            """<div id="tooltip-chart-world"; class="tooltip-chart";></div>"""
 
     let tooltipFormatter jsThis =
         let points = jsThis?point
         let twoWeekIncidence = points?incidence
-        let twoWeekIncidenceMaxValue =
-            Math.Ceiling(float points?incidenceMaxValue)
         let country = points?country
         let incidence100k = points?incidence100k
         let newCases = points?newCases
+        let twoWeekCases = points?twoWeekCases
         let ncDate = points?ncDate
         let imported = points?imported
         let impDate = points?impDate
         let rType = points?rType
         let rAltText = points?rAltText
+        let weeklyIncrease = points?weeklyIncrease
 
-        let s = StringBuilder()
-        let barMaxHeight = 50
 
         let textHtml =
             sprintf "<b>%s</b><br/>
@@ -582,21 +743,15 @@ let renderMap state geoJson _ =
                 (chartText "importedCases") imported impDate
                 (chartText "incidence100k") incidence100k
                 (chartText "newCases") newCases ncDate
-
-        s.Append textHtml |> ignore
-
-        s.Append "<div class='bars'>" |> ignore
+            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
 
         match twoWeekIncidence with
         | null -> chartText "noData"
-        | _ ->
-            twoWeekIncidence
-            |> Array.iter (fun country ->
-                let barHeight = Math.Ceiling(float country * float barMaxHeight / twoWeekIncidenceMaxValue)
-                let barHtml = sprintf "<div class='bar-wrapper'><div class='bar' style='height: %Apx'></div></div>" (int barHeight)
-                s.Append barHtml |> ignore)
-            s.Append "</div>" |> ignore
-            s.ToString()
+        | _ -> 
+            if (twoWeekCases |> Array.max) > 0. then
+                textHtml + sparklineFormatter twoWeekCases
+            else 
+                textHtml
 
     let series geoJson =
         {| visible = true
@@ -651,7 +806,10 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
         [ prop.className "chart-display-property-selector"
           prop.children
               [ renderChartSelector Restrictions
-                renderChartSelector TwoWeekIncidence ] ]
+                renderChartSelector TwoWeekIncidence 
+                renderChartSelector WeeklyIncrease
+              ] 
+        ]
 
 
 let render (state: State) dispatch =
