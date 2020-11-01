@@ -716,6 +716,7 @@
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
+            "care": "V oskrbi",
             "admitted": "Sprejeti",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni enoti",
@@ -723,6 +724,10 @@
             "discharged": "Odpuščeni",
             "deceased": "Umrli",
             "structure": "Struktura"
+        },
+        "carePatients": {
+            "title": "Negovalne bolnišnice",
+            "titleMenu": "Negovalne bolnišnice"
         },
         "ratios": {
             "title": "Delež resnih primerov",

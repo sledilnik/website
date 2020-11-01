@@ -70,6 +70,10 @@ export default {
           titleMenu: this.$t('charts.patients.titleMenu'),
           icon: 'column',
         },
+        'care-patients-chart': {
+          titleMenu: this.$t('charts.carePatients.titleMenu'),
+          icon: 'column',
+        },
         'map-chart': {
           titleMenu: this.$t('charts.map.titleMenu'),
           icon: 'map',

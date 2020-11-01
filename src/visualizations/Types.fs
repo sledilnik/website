@@ -121,6 +121,7 @@ type VisualizationType =
     | MetricsComparison
     | DailyComparison
     | Patients
+    | CarePatients
     | Ratios
     | HCenters
     | Hospitals

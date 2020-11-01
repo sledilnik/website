@@ -21,6 +21,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "CarePatients" -> Some CarePatients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -268,7 +269,14 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "patients-chart"
             ChartTextsGroup = "patients"
             Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+
+    let patientsCare =
+          { VisualizationType = CarePatients
+            ClassName = "care-patients-chart"
+            ChartTextsGroup = "carePatients"
+            Explicit = false
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
     let ratios =
           { VisualizationType = Ratios
@@ -415,7 +423,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients
+        [ hospitals; metricsComparison; spread; dailyComparison; patients; patientsCare
           regions100k; map; municipalities
           europeMap; ageGroupsTimeline; tests; sources
           cases; ageGroups; regionMap; regionsAbs
@@ -434,7 +442,7 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
           regions100k; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
           phaseDiagram
