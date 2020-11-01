@@ -60,6 +60,15 @@
           </span>
         </div>
       </div>
+      <!-- <trend
+        :data="lastData(0, 14, field)"
+        :gradient="['#ffbe88', '#ffbe88', '#ffbe88']"
+        :stroke-width="4"
+        auto-draw
+        smooth
+        class="sparkline"
+      >
+      </trend> -->
       <div class="data-time">
         {{
           $t('infocard.lastUpdated', {
@@ -98,7 +107,7 @@ export default {
   },
   computed: {
     ...mapGetters('stats', ['lastChange']),
-    ...mapGetters('patients', { patients: 'data' }),
+    ...mapGetters('patients', { patients: 'data' }, ['lastData']),
     ...mapState('stats', ['exportTime', 'loaded']),
     incidence() {
       switch (localStorage.getItem('contextCountry')) {

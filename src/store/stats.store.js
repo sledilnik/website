@@ -181,7 +181,7 @@ const getters = {
 const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 17))
     const data = await ApiService.get(`${ApiEndpoint()}/api/stats`, from, to)
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to

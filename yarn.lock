@@ -11648,6 +11648,11 @@ vue@^2.6.12:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
+vuetrend@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/vuetrend/-/vuetrend-0.3.4.tgz#35e1dafb0f7cf4d66f69e289ee7028b9e12783d9"
+  integrity sha512-UaOJhMnkoiRBlGB9k2FX5GqotJyoyYUpyTAjfBiB7K5ESt3KzRoaplfG7j7SAnH4ITk4DjVDC9WB2IX80TVYmQ==
+
 vuex@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.5.1.tgz#f1b8dcea649bc25254cf4f4358081dbf5da18b3d"

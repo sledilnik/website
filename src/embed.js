@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: '/card/:type/:hospital',
-    component: CardEmbed,
+    component: PatientsCardEmbed,
     beforeEnter: (to, from, next) => {
       i18next.changeLanguage('sl', (err, t) => {
         if (err) return console.log('something went wrong loading', err)

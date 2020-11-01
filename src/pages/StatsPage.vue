@@ -70,7 +70,7 @@
         /> -->
         <Deceased-card
           :title="$t('infocard.deceasedInLast7Days')"
-          field="total.deceased.toDate"
+          field="total.deceased.today"
         />
       </div>
       <b-row cols="12">

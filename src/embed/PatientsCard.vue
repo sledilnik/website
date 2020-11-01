@@ -17,7 +17,7 @@
 import PatientsCard from 'components/cards/PatientsCard'
 
 export default {
-  name: 'CardEmbed',
+  name: 'PatientsCardEmbed',
   components: {
     PatientsCard,
   },

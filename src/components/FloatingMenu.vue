@@ -298,7 +298,7 @@ export default {
 }
 .slide-enter-active,
 .fade-enter-active {
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .slide-enter {
   transform: translate3d(100%, 0, 0);

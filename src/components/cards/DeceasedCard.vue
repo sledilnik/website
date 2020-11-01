@@ -1,19 +1,22 @@
 <template>
   <div class="hp-card" v-if="loaded">
-    <div class="card-title">{{ title }}</div>
+    <div class="d-flex justify-content-between">
+      <div class="card-title">{{ title }}</div>
+    </div>
     <div class="card-number">
-      <span>{{ runningSum(0, 7) }}</span>
+      <span>{{ runningSum(0, 7, field) }}</span>
       <div class="card-percentage-diff" :class="diffClass">
         {{ diff | prefixDiff }}%
       </div>
     </div>
-    <div class="d-flex flex-column flex-sm-row">
-      <div class="order-2 order-sm-1" style="flex: 0 0 30%">
-        <div class="card-diff">
-          <div class="card-note">
-            {{ $t('infocard.total') }} {{ totalDeceased }}
-          </div>
-        </div>
+    <div class="card-diff">
+      <!-- <div class="card-diff-item">
+        <div class="trend-icon deceased"></div>
+        <span class="deceased">{{ total }} </span>
+      </div> -->
+    </div>
+    <div class="d-flex flex-column flex-sm-row justify-content-between">
+      <div class="card-data order-2 order-sm-1">
         <div class="data-time">
           {{
             $t('infocard.lastUpdated', {
@@ -23,7 +26,7 @@
         </div>
       </div>
       <trend
-        :data="lastData(0, 14)"
+        :data="lastData(0, 14, field)"
         :gradient="['#ffbe88', '#ffbe88', '#ffbe88']"
         :stroke-width="4"
         auto-draw
@@ -49,12 +52,12 @@ export default {
   computed: {
     ...mapGetters('patients', ['data', 'runningSum', 'lastData']),
     ...mapState('patients', ['exportTime', 'loaded']),
-    totalDeceased() {
+    total() {
       return this.data[this.data.length - 1].total.deceased.toDate
     },
     diff() {
-      const thisWeek = this.runningSum(0, 7)
-      const previousWeek = this.runningSum(7, 14)
+      const thisWeek = this.runningSum(0, 7, this.field)
+      const previousWeek = this.runningSum(7, 14, this.field)
       const delta = thisWeek - previousWeek
 
       const percentageDiff =
@@ -72,7 +75,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card-data {
+  flex: 0 0 66%;
+}
 .sparkline {
-  height: 80%;
+  height: 100%;
 }
 </style>
