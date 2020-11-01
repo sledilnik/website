@@ -172,7 +172,12 @@
         "11": {
             "title": "phase<br>11",
             "description": "epidemic"
+        },
+        "12": {
+            "title": "phase<br>12",
+            "description": "new testing methodology"
         }
+
     },
     "charts": {
         "common": {
@@ -587,6 +592,7 @@
         "sources": {
             "title": "Sources of Infection and Quarantine",
             "titleMenu": "Sources of Infection",
+            "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -801,6 +807,10 @@
         "movement": {
             "title": "🚫21-6h",
             "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
+        },
+        "restaurants": {
+            "title": "Restaurants",
+            "description": "Closure of restaurants, hotels, shopping centers, hair and beauty shops.<br>Closure of student homes, reduced public transportation."
         },
         "municipality2": {
             "title": "Municipalities",

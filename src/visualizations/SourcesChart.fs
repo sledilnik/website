@@ -8,6 +8,8 @@ open Browser
 open Types
 open Highcharts
 
+let chartText = I18N.chartText "sources"
+
 let countryColors =
     [
       "#dba51d"
@@ -43,14 +45,14 @@ type DisplayType =
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ Quarantine; QuarantineRelative; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
+    static member all = [ BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Quarantine; QuarantineRelative ]
     static member getName = function
-        | Quarantine     -> I18N.t "charts.sources.quarantine"
-        | QuarantineRelative     -> I18N.t "charts.sources.quarantineRelative"
-        | BySource     -> I18N.t "charts.sources.bySource"
-        | BySourceRelative     -> I18N.t "charts.sources.bySourceRelative"
-        | BySourceCountry     -> I18N.t "charts.sources.bySourceCountry"
-        | BySourceCountryRelative     -> I18N.t "charts.sources.bySourceCountryRelative"
+        | Quarantine                -> chartText "quarantine"
+        | QuarantineRelative        -> chartText "quarantineRelative"
+        | BySource                  -> chartText "bySource"
+        | BySourceRelative          -> chartText "bySourceRelative"
+        | BySourceCountry           -> chartText "bySourceCountry"
+        | BySourceCountryRelative   -> chartText "bySourceCountryRelative"
 
 // ---------------------------
 // State management
@@ -66,7 +68,7 @@ type Msg =
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = Quarantine
+        { displayType = BySource
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -212,7 +214,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let color, seriesId, stack = Series.getSeriesInfo (series)
     {|
        color = color
-       name = I18N.tt "charts.sources" seriesId
+       name = chartText seriesId
        stack = stack
        animation = false
        legendIndex = legendIndex
@@ -281,8 +283,8 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true
                       formatter = match state.displayType with
                                   | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
-                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalConfirmed") jsThis
-                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalImported") jsThis
+                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
+                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
                       |}
            legend =
                pojo
@@ -331,6 +333,17 @@ let render (state: State) dispatch =
     Html.div [
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
+
+        match state.displayType with
+        | Quarantine | QuarantineRelative ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (chartText "disclaimer")
+                ]
+            ]
+        | _ -> Html.none
+
     ]
 
 let sourcesChart (props: {| data: WeeklyStatsData |}) =

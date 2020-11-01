@@ -572,6 +572,10 @@
             "title": "🚫21-6h",
             "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
         },
+        "restaurants": {
+            "title": "Gostilne",
+            "description": "Zaprtje gostinskih lokalov, hotelov, trgovskih centrov, frizerski in kozmetični saloni.<br>Zaprti dijaški in študentski domovi, zmanjšan javni prevoz."
+        },
         "municipality2": {
             "title": "Občine",
             "description": "Prepoved gibanja izven meja občin"
@@ -620,6 +624,10 @@
         "11": {
             "title": "faza<br>11",
             "description": "epidemija"
+        },
+        "12": {
+            "title": "faza<br>12",
+            "description": "nov režim testiranja"
         }
     },
     "charts": {
@@ -1034,6 +1042,7 @@
         "sources": {
             "title": "Viri okužb in karantena",
             "titleMenu": "Viri okužb",
+            "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
