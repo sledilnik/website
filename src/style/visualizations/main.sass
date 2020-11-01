@@ -152,9 +152,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
       opacity: 0
       visibility: hidden
-      // TODO: fix the animation glitch when using transformY
-      // transform: translateY(-10px)
-      // backface-visibility: hidden
       transition: all 0.3s
 
       &.show
@@ -234,10 +231,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     background-color: rgba(0, 0, 0, 0.07)
     transition: all 0.2s
 
-    &:hover
-      // box-shadow: 0 3px 11px rgba(0,0,0,0.20)
-
     &.metric-selector--selected
+      background-color: #6c757d
       box-shadow: none
 
       &:hover
@@ -292,6 +287,19 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       text-decoration-color: $yellow
 
 
+  .filters
+    display: flex
+    flex-wrap: wrap
+    gap: 10px
+
+    select, input
+      width: 11rem
+      height: 28px
+      border-radius: 6px
+
+      @include media-breakpoint-down(sm)
+        width: 8.25rem
+
   .table
     td, th
       padding: 6px 9px
@@ -299,13 +307,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .chart-display-properties
     display: flex
     flex-wrap: wrap
+    gap: 10px
     padding: 10px 0px
 
     @include media-breakpoint-down(sm)
       padding: 10px 18px
-
-    .chart-display-property-selector .chart-display-property-selector__item
-      min-width: 120px
 
     .chart-display-property-selector, .chart-data-interval-selector
       text-align: right
@@ -316,9 +322,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-radius: 8px
       display: flex
       flex-wrap: wrap
-
-      &:not(:first-child)
-        margin-top: 10px
 
       @include media-breakpoint-down(sm)
         text-align: left
@@ -336,7 +339,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         overflow: hidden
         white-space: nowrap
         text-overflow: ellipsis
-        flex: 1 1 0
+        flex: 1 1 auto
         
         &::selection
           background: rgba(0, 0, 0, 0)
@@ -366,10 +369,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     margin: 0 $gap/6 $gap/3 0
     font-size: 14px
     border-color: $inactive-button-color
-    padding: 4px 24px
+    padding: $gap/6 $gap/2
 
     @include media-breakpoint-down(sm)
-      padding: 4px 12px
+      padding: $gap/6 $gap/3
 
     &:hover
       border-color: $button-color
@@ -460,20 +463,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     .map
       height: 600px
 
-    .filters
-      display: flex
-      flex-wrap: wrap
-
-    .filters__type
-      width: 10rem
-      margin-bottom: $gap / 6
-      height: 28px
-      border-radius: 6px
-      margin-right: 16px
-
-      @include media-breakpoint-down(sm)
-        width: 8.25rem
-
     @include media-breakpoint-down(sm)
       .map
         height: inherit
@@ -490,16 +479,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     
   .hcenters-chart
     min-height: 655px
-
-    .filters
-      display: flex
-      flex-wrap: wrap
-
-    .filters__region
-      width: 15rem
-
-      @include media-breakpoint-down(md)
-        margin-left: 0
 
   .phase-diagram-chart
     min-height: 700px
@@ -536,21 +515,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       a
         color: #999999
         text-decoration: none
-
-    .filters
-      display: flex
-      flex-wrap: wrap
-
-    .filters__query
-      margin-left: $gap/2
-      width: 15rem
-      margin-bottom: $gap / 2
-
-      @include media-breakpoint-down(sm)
-        margin-left: 0
-
-    .filters__region
-      width: 15rem
 
     .municipalities
       display: flex

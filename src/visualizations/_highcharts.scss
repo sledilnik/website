@@ -127,7 +127,7 @@ g.highcharts-series,
         &.highcharts-button-hover {
             cursor: pointer;
             .highcharts-button-box {
-                stroke: white;            
+                stroke: $yellow;            
             }
         }
         &.highcharts-button-pressed {
@@ -149,10 +149,14 @@ g.highcharts-series,
 // second, style the input 
 .highcharts-input-group {
 
-    // style the date inputs
+    // position the input group
+    // transform: translate(204px, 11px);
+
+    // style the date input fields
     .highcharts-label.highcharts-range-input {
         text {
             font-family: 'IBM Plex Sans', sans-serif !important;
+            font-size: 14px !important;
             fill: #767676 !important;
         }
     }
@@ -163,7 +167,7 @@ g.highcharts-series,
         ry: 6;
     }
 
-    // center the separator "-" between the date inputs
+    // center the separator "-" between the date input fields
     .highcharts-label.highcharts-range-label:nth-child(3) {
         transform: translate(110px, 0px);
     }

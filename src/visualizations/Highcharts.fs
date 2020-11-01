@@ -198,6 +198,7 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 enabled = true
                 allButtonsEnabled = true
                 selected = selectedRangeSelectionButtonIndex
+                // inputPosition = {| align = "left"; x=0; y=0 |}
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 inputDateParser = parseDate
@@ -207,10 +208,10 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                         width = 50
                         height = 20
                         fill="#ededed"
-                        style = {| fill="#767676"; fontSize="14px"; fontFamily="'IBM Plex Sans', sans-serif" |}
+                        style = {| cursor="pointer"; fill="#767676"; fontSize="14px"; fontFamily="'IBM Plex Sans', sans-serif" |}
                         states = pojo
                             {|
-                                hover = pojo {| style={| color="black" |} |}
+                                hover = pojo {| fill="white"; style={| color="black" |} |}
                                 select = pojo {| fill="white"; style={| color="black" |} |}
                             |}
                     |}
