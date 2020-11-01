@@ -461,9 +461,9 @@ let render (state: State) (_: Msg -> unit) =
         | _ -> invalidOp "BUG: this should never happen."
 
     let brandLink =
-        match state.RenderingMode with
-        | Normal -> Html.none
-        | Embedded _ ->
+        // match state.RenderingMode with
+        // | Normal -> Html.none
+        // | Embedded _ ->
             Html.a
                 [ prop.className "brand-link"
                   prop.target "_blank"
@@ -504,7 +504,8 @@ let render (state: State) (_: Msg -> unit) =
                 [ prop.className "faq-and-share-wrapper"
                   prop.children
                       [ renderFaqLink visualization
-                        ShareButton.dropdown visualization () ] ]
+                        ShareButton.dropdown visualization ()
+                        brandLink ] ]
 
 
     let renderChartTitle (visualization: Visualization) =

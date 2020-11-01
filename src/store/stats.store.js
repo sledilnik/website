@@ -143,7 +143,7 @@ const getters = {
     )
     let array1 = array.map((obj) => _.get(obj, field))
 
-    return array1.filter((el) => el !== null)
+    return array1.filter((el) => typeof el !== 'undefined')
   },
 
   regions: (state) => {

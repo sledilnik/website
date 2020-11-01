@@ -113,10 +113,10 @@ let dropdown (viz: Visualization) =
                               [ Html.img
                                   [ prop.className "share-button-icon"
                                     prop.src "/images/share-icon.svg"
-                                    prop.alt (I18N.t "charts.common.share") ]
-                                Html.span
-                                    [ prop.className "share-button-caption"
-                                      prop.text (I18N.t "charts.common.share") ] ]
+                                    prop.alt (I18N.t "charts.common.share") ] ]
+                                // Html.span
+                                //     [ prop.className "share-button-caption"
+                                //       prop.text (I18N.t "charts.common.share") ] ]
                           // TODO: click outside the button should close the dropdown as well
                           prop.onClick (fun _ -> setDropdown (not dropdown)) ]
 

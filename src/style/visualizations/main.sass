@@ -121,14 +121,16 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .share-button-wrapper
       border-radius: 8px
-      box-shadow: $element-box-shadow
+      margin-right: 16px
       cursor: pointer
-      padding: 4px 12px 4px 4px
+      padding: 3px 4px
       display: flex
       align-items: center
-      background: $yellow
+      background: white
+      border: 1px solid $yellow
 
       @media only screen and (max-width: 500px)
+        margin-right: 8px
         padding: 3px 4.5px
 
       .share-button-caption
@@ -146,7 +148,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       width: 220px
       position: absolute
       top: 74px
-      right: 27px
+      right: 57px
       background: #fff
       border-radius: 6px
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.12)
@@ -817,3 +819,28 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
           h4
             margin-top: 1.4em
             font-size: 24px
+
+.brand-link
+  display: inline-block
+  padding: 7px 1px 7px 36px
+  background: $yellow
+  color: #000
+  font-size: 14px
+  font-weight: bold
+  letter-spacing: 1px
+  font-weight: 600
+  background-image: url(../assets/logo.png)
+  background-repeat: no-repeat
+  background-size: 30px 30px
+  background-position: 4px 50%
+  border-radius: 6px
+  text-indent: -9999px
+  line-height: 18px
+
+  @media only screen and (min-width: 768px)
+    text-indent: 0px
+    padding: 7px 12px 7px 36px
+
+  &:hover
+    text-decoration: none
+    color: #000
