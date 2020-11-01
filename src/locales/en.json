@@ -807,6 +807,10 @@
             "title": "🚫21-6h",
             "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
         },
+        "restaurants": {
+            "title": "Restaurants",
+            "description": "Closure of restaurants, hotels, shopping centers, hair and beauty shops.<br>Closure of student homes, reduced public transportation."
+        },
         "municipality2": {
             "title": "Municipalities",
             "description": "Prohibition of movement outside municipal borders"

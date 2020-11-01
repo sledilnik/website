@@ -133,6 +133,7 @@ let addContainmentMeasuresFlags
         16,10, "#FFe6e6", "regions"
         19,10, "#FFe6e6", "schools6+"
         20,10, "#FFe6e6", "movement"
+        24,10, "#FFe6e6", "restaurants"
         27,10, "#FFe6e6", "municipality2"
     |]
     {|
