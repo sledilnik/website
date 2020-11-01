@@ -136,6 +136,16 @@ const getters = {
     return state.data
   },
 
+  lastData1: (state, getters) => (start, end, field) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
+    let array1 = array.map((obj) => _.get(obj, field))
+
+    return array1.filter((el) => el !== null)
+  },
+
   regions: (state) => {
     return state.regions
   },
