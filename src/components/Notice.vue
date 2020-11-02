@@ -3,11 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="https://medium.com/sledilnik/5-mitov-o-testih-cf269172267"
+      href="https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c"
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.checked") }}</b> <span>{{ $t("notice.tests") }}</span>
+          <b>{{ $t("notice.newMedium") }}</b> <span><b>{{ $t("notice.weKnowWeDoNotKnow") }}</b></span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
