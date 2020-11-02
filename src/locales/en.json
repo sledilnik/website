@@ -273,6 +273,7 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "care": "In Care",
             "admitted": "Admitted",
             "hospitalized": "Hospitalized",
             "icu": "In ICU",
@@ -280,6 +281,10 @@
             "discharged": "Discharged",
             "deceased": "Died",
             "allHospitals": "All Hospitals"
+        },
+        "carePatients": {
+            "title": "Care Hospitals",
+            "titleMenu": "Care Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",

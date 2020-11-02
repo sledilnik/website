@@ -3,7 +3,6 @@ module Data.Patients
 open System
 
 let url = "https://api.sledilnik.org/api/patients"
-//let url = "https://covid19.rthand.com/api/patients"
 
 type DeceasedCounts = {
     today: int option
@@ -34,6 +33,8 @@ type FacilityPatientStats = {
     inHospital: DepartmentCounts
     icu: DepartmentCounts
     critical: DepartmentCounts
+    care: DepartmentCounts
+    deceasedCare: DeceasedCounts
     deceased: HDeceasedCounts
 }
 
@@ -43,12 +44,16 @@ type TotalPatientStats =
         inHospital: DepartmentCounts
         icu: DepartmentCounts
         critical: DepartmentCounts
+        care: DepartmentCounts
+        deceasedCare: DeceasedCounts
         deceased: TDeceasedCounts
     }
     member this.ToFacilityStats : FacilityPatientStats =
         { inHospital = this.inHospital
           icu = this.icu
           critical = this.critical
+          care = this.care
+          deceasedCare = this.deceasedCare
           deceased = this.deceased.hospital }
 
 
