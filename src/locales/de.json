@@ -23,7 +23,8 @@
         "faq": "FAQ",
         "world": "Welt",
         "animation": "Animation",
-        "ostanizdrav": "#OstaniZdrav"
+        "ostanizdrav": "#OstaniZdrav",
+        "goToGraph": "Gehe zum Diagramm"
     },
     "country": {
         "ABW": "Aruba",
@@ -306,7 +307,8 @@
             "relativeLabel": "Relatives Wachstum in %",
             "timesAsMany": "- mal mehr",
             "averageSouthKorea": "Durchschnitt in Südkorea in den vergangenen Tagen",
-            "activeCases": "aktive Fälle"
+            "activeCases": "aktive Fälle",
+            "titleMenu": "Wachstum"
         },
         "municipalities": {
             "doubles": "Verdopplung ",
@@ -325,7 +327,8 @@
             "today": "heute",
             "title": "Fälle nach Gemeinden",
             "viewLast": "Letzter",
-            "all": "Alle: "
+            "all": "Alle: ",
+            "titleMenu": "Gemeinden – Fälle"
         },
         "infections": {
             "title": "Struktur der bestätigten Fälle",
@@ -336,7 +339,8 @@
             "hcStaff": "Personal im Gesundheitswesen",
             "all": "Alle",
             "rhOccupant": "Bewohner von Altersheimen",
-            "otherPersons": "Andere Personen"
+            "otherPersons": "Andere Personen",
+            "titleMenu": "Fälle – Struktur"
         },
         "ageGroups": {
             "age": "Alter",
@@ -353,7 +357,8 @@
             "populationShare": "Anteil der Bevölkerung",
             "absolute": "Absolut",
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
-            "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung"
+            "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung",
+            "titleMenu": "Alter, Geschlecht"
         },
         "ratios": {
             "icuDeceasedShare": "Anteil der Todesfälle auf Intensivstationen",
@@ -370,7 +375,8 @@
             "icuHospital": "Auf Intensivstationen",
             "ventilatorCases": "An Beatmungsmaschinen",
             "icuMortality": "Sterblichkeit auf Intensivstationen",
-            "hospitalDeceasedShare": "Anteil der Todesfälle in Krankenhäusern"
+            "hospitalDeceasedShare": "Anteil der Todesfälle in Krankenhäusern",
+            "titleMenu": "Schwere Fälle"
         },
         "common": {
             "close": "Schließen",
@@ -413,14 +419,16 @@
             "statusGreen": "keine Einschränkungen",
             "restrictions": "Einschränkungen und eingeschleppte Fälle",
             "countryStatus": "Einschränkungen",
-            "twoWeekIncidence": "14-tägige Fälle pro 100.000",
+            "twoWeekIncidence": "14-Tage-Inzidenz pro 100.000",
             "statusNone": "–",
             "statusRed": "strikte 10-tägige Quarantäne",
             "statusOrange": "10-tägige Quarantäne mit Ausnahmen",
             "incidence100k": "Neue Fälle in 14 Tagen pro 100.000",
             "noData": "Keine Daten",
             "title": "COVID-19 Situation in Europa",
-            "importedCases": "Eingeschleppte Fälle in 14 Tagen"
+            "importedCases": "Eingeschleppte Fälle in 14 Tagen",
+            "weeklyIncrease": "Wöchentlicher Anstieg",
+            "titleMenu": "Europa – Lage"
         },
         "patients": {
             "discharged": "Entlassene",
@@ -433,7 +441,9 @@
             "title": "Hospitalisiert",
             "allHospitals": "Alle Krankenhäuser",
             "hospitalized": "Hospitalisierte",
-            "ventilator": "An Beatmungsmaschinen"
+            "ventilator": "An Beatmungsmaschinen",
+            "care": "In Pflege",
+            "titleMenu": "Hospitalisiert"
         },
         "hCenters": {
             "suspectedCovidPhone": "Verdacht auf COVID-19 (Telefon)",
@@ -443,7 +453,8 @@
             "emergencyExamination": "Notfall-Untersuchungen",
             "sentToSelfIsolation": "In Selbstisolation geschickt",
             "testsPerformed": "Tests (durchgeführt)",
-            "allRegions": "Alle Regionen"
+            "allRegions": "Alle Regionen",
+            "titleMenu": "HC – Behandlung"
         },
         "map": {
             "populationShare": "Anteil der Bevölkerung",
@@ -459,7 +470,8 @@
             "last_x_days_plural": "{{ count }} Tage",
             "title": "Gemeindekarte",
             "all": "Alle",
-            "relativeIncrease": "Wöchentlicher Anstieg"
+            "relativeIncrease": "Wöchentlicher Anstieg",
+            "titleMenu": "Gemeinde – Karte"
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
@@ -492,7 +504,10 @@
             "showToday": "Tägliche",
             "showActive": "Aktive",
             "activeCases": "Aktive Fälle",
-            "show7DaysAverage": "7-Tage-Durchschnitt"
+            "show7DaysAverage": "7-Tage-Durchschnitt",
+            "titleMenu_MNE": "Montenegro – Lage",
+            "titleMenu_MKD": "N. Mazedonien – Lage",
+            "titleMenu_SVN": "Slowenien – Lage"
         },
         "countries": {
             "groupNordic": "Nordische Länder",
@@ -526,7 +541,8 @@
             "allHospitals": "Alle Krankenhäuser",
             "bedsFull": "Betten, voll",
             "bedsICUShort": "Intensivbetten",
-            "projection7": "Projektion, 7-tägige Verdopplung"
+            "projection7": "Projektion, 7-tägige Verdopplung",
+            "titleMenu": "Kapazität"
         },
         "tests": {
             "nationalStudyTesting": "Studie",
@@ -535,13 +551,15 @@
             "title": "Testung",
             "regularTesting": "Regelmäßige",
             "positiveTests": "Positive Tests",
-            "negativeTests": "Negative Tests"
+            "negativeTests": "Negative Tests",
+            "titleMenu": "Testung"
         },
         "regions": {
             "activeCases": "Aktive Fälle",
             "confirmedCases": "Bestätigte Fälle",
             "deceased": "Todesfälle",
-            "title": "Fälle nach Gemeinden"
+            "title": "Fälle nach Gemeinden",
+            "titleMenu": "Region – Fälle"
         },
         "cases": {
             "hospitalized": "Hospitalisierte",
@@ -550,53 +568,66 @@
             "title": "Bestätigte Fälle",
             "icu": "Auf Intensivstationen",
             "ventilator": "An Beatmungsmaschinen",
-            "recovered": "Genesene"
+            "recovered": "Genesene",
+            "titleMenu": "Fälle"
         },
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
             "newCases": "Neue Fälle",
             "newCasesRelative": "Neue Fälle (relativ)",
             "activeCases": "Aktive Fälle",
-            "activeCasesRelative": "Aktive Fälle (relativ)"
+            "activeCasesRelative": "Aktive Fälle (relativ)",
+            "titleMenu": "Alter – Anteil"
         },
         "countriesTotalDeathsPer1M": {
             "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
-            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen"
+            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "titleMenu": "Länder – Todesfälle"
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
             "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
-            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen"
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen",
+            "titleMenu": "Länder – Neue Fälle"
         },
         "world": {
-            "title": "COVID-19 Situation auf der Welt"
+            "title": "COVID-19 Situation auf der Welt",
+            "titleMenu": "Welt – Lage"
         },
         "rmap": {
-            "title": "Regionalkarte"
+            "title": "Regionalkarte",
+            "titleMenu": "Region – Karte"
         },
         "countriesDeathsPerCases": {
             "legendTitle": "Gesamtzahl der Todesfälle pro Fall",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro Fall",
-            "title": "Länder: Gesamtzahl der Todesfälle pro Fall",
+            "title": "Länder: Gesamtzahl der Todesfälle pro Fälle",
             "chronologically": "Chronologisch",
             "sinceFirstDeath": "Seit dem ersten Todesfall",
             "sinceOneDeathPerMillion": "Seit erstem Todesfall pro 1 Million Menschen",
             "daysFromFirstDeath": "Anzahl Tage seit dem erstem Todesfall",
-            "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen"
+            "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen",
+            "titleMenu": "Länder – Todesfälle pro Fälle"
         },
         "countriesActiveCasesPer1M": {
             "red": "Kriterien für die rote Liste",
             "legendTitle": "Aktive Fälle pro 100.000 Menschen",
             "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
-            "title": "Länder: Aktive Fälle pro 100.000 Menschen"
+            "title": "Länder: Aktive Fälle pro 100.000 Menschen",
+            "titleMenu": "Länder – Aktive Fälle"
         },
         "dailyComparison": {
             "positivePct": "Anteil der positiven Tests (%)",
             "tests": "Durchgeführte Tests",
             "active": "Aktive Fälle",
             "new": "Bestätigte Fälle",
-            "title": "Vergleich nach Wochentag"
+            "title": "Vergleich nach Wochentag",
+            "hospitalAdmitted": "Ins Krankenhaus eingewiesen",
+            "deceased": "Todesfälle",
+            "icuAdmitted": "Auf Intensivstation eingewiesen",
+            "hospitalDischarged": "Aus Krankenhäusern entlassen",
+            "titleMenu": "Wochentag – Vergleich"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -644,7 +675,7 @@
             "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
             "confirmedCases": "Bestätigte Fälle",
             "sentToQuarantine": "In die Quarantäne geschickt",
-            "title": "Quaratäne und Infektionsquellen",
+            "title": "Infektionsquellen und Quaratäne",
             "bySourceCountry": "Importierte Fälle",
             "bySourceRelative": "Infektionsquellen (relativ)",
             "bySource": "Infektionsquellen",
@@ -656,14 +687,41 @@
             "localSource": "Lokale Quelle",
             "sourceUnknown": "Unbekannte Quelle",
             "totalConfirmed": "Bestätigte Fälle insgesamt",
-            "totalImported": "Importierte Fälle insgesamt"
+            "totalImported": "Importierte Fälle insgesamt",
+            "titleMenu": "Infektionsquellen"
         },
         "regions100k": {
             "red": "Kriterum für rote Liste",
             "deceased": "Todesfälle",
             "confirmedCases": "Bestätigte Fälle",
             "activeCases": "Aktive Fälle",
-            "title": "Fälle nach Regionen (pro 100,000 Einwohner)"
+            "title": "Fälle nach Regionen (pro 100,000 Einwohner)",
+            "titleMenu": "Region – Vergleich"
+        },
+        "phaseDiagram": {
+            "weekVsWeekBefore": {
+                "yAxisLabel": "Inzidenz-Unterschied",
+                "xAxisLabel": "7-Tage-Inzidenz",
+                "yAxisTitle": "Inzidenz-Unterschied (%)",
+                "xAxisTitle": "7-Tage-Inzidenz",
+                "name": "Inzidenz-Unterschied"
+            },
+            "totalVsWeek": {
+                "yAxisLabel": "7-Tage-Inzidenz",
+                "yAxisTitle": "7-Tage-Inzidenz",
+                "xAxisLabel": "Gesamt",
+                "xAxisTitle": "Gesamt",
+                "name": "Gesamt vs. Woche"
+            },
+            "deceased": "Todesfälle",
+            "hospitalized": "Hospitalisiert",
+            "cases": "Bestätigte Fälle",
+            "titleMenu": "Phasendiagramm",
+            "title": "Phasendiagramm"
+        },
+        "carePatients": {
+            "titleMenu": "Pflege-Krankenhäuser",
+            "title": "Pflege-Krankenhäuser"
         }
     },
     "tableDict": {
@@ -863,6 +921,14 @@
         "schools6+": {
             "description": "Fernunterricht für Grundschulen ab Klasse 6, Sekundarschulen und Musikschulen",
             "title": "Schulen 6+"
+        },
+        "municipality2": {
+            "description": "Bewegungsverbot außerhalb der Gemeindegrenzen",
+            "title": "Gemeinden"
+        },
+        "restaurants": {
+            "description": "Schließung von Restaurants, Hotels, Einkaufszentren, Friseur- und Kosmetikgeschäften.<br>Schließung von Studentenwohnheimen, eingeschränkter öffentlicher Nahverkehr.",
+            "title": "Restaurants"
         }
     },
     "region": {
@@ -886,7 +952,7 @@
     "infocard": {
         "recoveredToDate": "Genesene",
         "active": "Aktive Fälle",
-        "incidence": "14-tägige Fälle",
+        "incidence": "14-Tage-Inzidenz",
         "confirmedToDate": "Bestätigte Fälle",
         "tests": "Tests heute",
         "lastUpdated": "{{ date, %a, %e. %b }}",
@@ -908,7 +974,13 @@
         "news002": "Bestätigte Fälle nach Altersgruppen",
         "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
         "newPage": "🆕 Neue Seite:",
-        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens"
+        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens",
+        "progressC19": "Typische COVID-19 Entwicklung. Krankenhausaufenthalt, Intensivtherapie und Mortalität.",
+        "tests": "Fünf Mythen über Tests …",
+        "weKnowWeDoNotKnow": "Wir wissen, dass Daten manchmal lügen. Woher wissen wir, dass wir (nicht) wissen? 🤔📉🧐📈🤷 ♂️🤷 ♀️",
+        "checked": "🆕 Geprüft:",
+        "newMedium": "🆕 📝 Neuer Medium Nachricht:",
+        "newInfographics": "🆕 📇 Neue Infografiken:"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1103,6 +1175,10 @@
         "11": {
             "description": "Epidemie",
             "title": "Phase<br>11"
+        },
+        "12": {
+            "description": "neue Testmethode",
+            "title": "Phase<br>12"
         }
     },
     "embedMaker": {
@@ -1155,7 +1231,12 @@
         "groupNordic": "Nordische Länder",
         "groupExYu": "Ex-Jugoslawien",
         "groupEastAsiaOceania": "Ostasien und Ozeanien",
-        "groupLatinAmerica": "Lateinamerika"
+        "groupLatinAmerica": "Lateinamerika",
+        "groupLargestWorldCountries": "größte Länder der Welt",
+        "groupLargestEuCountries": "größte Länder der EU*",
+        "groupHighestTotalDeaths": "höchste Werte",
+        "groupHighestActiveCases": "höchste Werte",
+        "groupHighestNewCases": "höchste Werte"
     },
     "weekdayShort": {
         "6": "Sa",
