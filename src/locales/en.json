@@ -318,13 +318,13 @@
             "testsPositive": "Tests (positive*)",
             "allRegions": "All regions"
         },
-        "healthcareWorkers": {
-            "title": "Infections among healthcare workers",
-            "titleMenu": "Healthcare workers",
+        "hcCases": {
+            "title": "Confirmed Cases among Health Care Employees",
+            "titleMenu": "HC Employees - cases",
             "confirmedCases": "Confirmed Cases",
-            "healthcareWorkerCases": "Confirmed Health Care Employees",
-            "healthcareWorkers": "Health Care Employees",
-            "healthcareWorkersRelative": "Health Care Employees (Relative)",
+            "healthcareEmployeeCases": "Confirmed Health Care Employees",
+            "healthcareEmployee": "Health Care Employees",
+            "healthcareEmployeeRelative": "Health Care Employees (Relative)",
             "totalConfirmed": "Confirmed Cases Total"
         },
         "tests": {

@@ -1,4 +1,4 @@
-module HealthcareWorkersChart
+module HcCasesChart
 
 open Elmish
 open Feliz
@@ -8,7 +8,7 @@ open Browser
 open Types
 open Highcharts
 
-let chartText = I18N.chartText "healthcareWorkers"
+let chartText = I18N.chartText "hcCases"
 
 type DisplayType =
     | Healthcare
@@ -16,8 +16,8 @@ type DisplayType =
   with
     static member all = [ Healthcare; HealthcareRelative; ]
     static member getName = function
-        | Healthcare                -> chartText "healthcareWorkers"
-        | HealthcareRelative        -> chartText "healthcareWorkersRelative"
+        | Healthcare                -> chartText "healthcareEmployees"
+        | HealthcareRelative        -> chartText "healthcareEmployeesRelative"
 
 // ---------------------------
 // State management
@@ -82,14 +82,14 @@ module Series =
 
     let getSeriesInfo =
         function
-        | HealthcareCases ->  "#73ccd5", "healthcareWorkerCases", 1
+        | HealthcareCases ->  "#73ccd5", "healthcareEmployeesCases", 1
         | ConfirmedCases ->  "#d5c768", "totalConfirmed", 1
 
 let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
     let arrows p = match p?point?seriesId with
-                                   | "healthcareWorkerCases" -> "↳ "
+                                   | "healthcareEmployeesCases" -> "↳ "
                                    |_ -> ""
 
     fmtWeekYearFromTo
@@ -157,7 +157,7 @@ let renderChartOptions (state: State) dispatch =
 
         res
 
-    let className = "covid19-healthcare-workers"
+    let className = "covid19-healthcare-employees"
     let baseOptions =
         basicChartOptions (scaleType state) className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
@@ -183,7 +183,7 @@ let renderChartOptions (state: State) dispatch =
                                                     | Linear -> Some 0
                                                     | _ -> None
                                               labels = match state.displayType with
-                                                       |  HealthcareRelative  ->pojo {| format = "{value} %" |}
+                                                       |  HealthcareRelative  -> pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
 
                                               reversedStacks = true
@@ -199,8 +199,7 @@ let renderChartOptions (state: State) dispatch =
                    {| shared = true
                       split = false
                       useHTML = true
-                      formatter = match state.displayType with
-                                  | Healthcare | HealthcareRelative -> fun () -> tooltipFormatter jsThis
+                      formatter = fun () -> tooltipFormatter jsThis
                       |}
            legend =
                pojo
@@ -257,5 +256,5 @@ let render (state: State) dispatch =
         renderDisplaySelectors state dispatch
     ]
 
-let healthcareWorkersChart (props: {| data: WeeklyStatsData |}) =
-    React.elmishComponent ("healthcareWorkersChart", init props.data, update, render)
+let hcCasesChart (props: {| data: WeeklyStatsData |}) =
+    React.elmishComponent ("hcCasesChart", init props.data, update, render)

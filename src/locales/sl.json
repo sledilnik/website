@@ -849,13 +849,13 @@
             "max": "Max",
             "data": "Podatki"
         },
-        "healthcareWorkers": {
-            "title": "Zdravstveni delavci",
-            "titleMenu": "Zdravstveni delavci",
+        "hcCases": {
+            "title": "Potrjeni primeri med zdravstvenimi delavci",
+            "titleMenu": "Zdravstveni delavci - primeri",
             "confirmedCases": "Potrjeni primeri",
-            "healthcareWorkerCases": "Potrjeni zdravstveni delavci",
-            "healthcareWorkers": "Zdravstveni delavci",
-            "healthcareWorkersRelative": "Zdravstveni delavci (relativno)",
+            "healthcareEmployeesCases": "Potrjeni zdravstveni delavci",
+            "healthcareEmployees": "Zdravstveni delavci",
+            "healthcareEmployeesRelative": "Zdravstveni delavci (relativno)",
             "totalConfirmed": "Skupaj potrjeni"
         },
         "regions": {
