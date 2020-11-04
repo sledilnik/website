@@ -242,6 +242,7 @@ let renderChartContainer state dispatch =
                prop.children
                    [ renderChartOptions state dispatch
                      |> chartFromWindow ] ]
+    
 
 
 let render (state: State) dispatch =
@@ -254,6 +255,13 @@ let render (state: State) dispatch =
                     state.scaleType (ScaleTypeChanged >> dispatch)])
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
+        
+        Html.div [
+            prop.className "disclaimer"
+            prop.children [
+                Html.text (chartText "disclaimer")
+            ]
+        ]
     ]
 
 let hcCasesChart (props: {| data: WeeklyStatsData |}) =

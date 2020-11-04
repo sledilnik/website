@@ -321,6 +321,7 @@
         "hcCases": {
             "title": "Confirmed Cases among Health Care Employees",
             "titleMenu": "HC Employees - cases",
+            "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
             "confirmedCases": "Confirmed Cases",
             "healthcareEmployeesCases": "Confirmed Health Care Employees",
             "healthcareEmployees": "Health Care Employees",

@@ -852,6 +852,7 @@
         "hcCases": {
             "title": "Potrjeni primeri med zdravstvenimi delavci",
             "titleMenu": "Zdravstveni delavci - primeri",
+            "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
             "confirmedCases": "Potrjeni primeri",
             "healthcareEmployeesCases": "Potrjeni zdravstveni delavci",
             "healthcareEmployees": "Zdravstveni delavci",
