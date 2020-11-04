@@ -128,7 +128,7 @@ module Series =
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
         | HealthcareCases ->  "#73ccd5", "healthcareCases", 1
-        | ConfirmedCases ->  "#bda506", "confirmedCases", 1
+        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
 
         | ImportedCases -> "#d559b0", "importedCases", 0
         | ImportRelatedCases -> "#f4b2e0", "importRelatedCases", 0
