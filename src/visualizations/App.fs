@@ -29,6 +29,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Weekly" -> Some Sources
+            | "HealthcareWorkers" -> Some HealthcareWorkers
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
             | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
@@ -357,6 +358,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
+    let healthcareWorkers =
+          { VisualizationType = HealthcareWorkers
+            ClassName = "healthcare-workers-chart"
+            ChartTextsGroup = "healthcareWorkers"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView HealthcareWorkersChart.healthcareWorkersChart {| data = data |} }
+
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-cases-chart"
@@ -425,8 +439,8 @@ let render (state: State) (_: Msg -> unit) =
     let localVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; patients; patientsCare
           regions100k; map; municipalities
-          ageGroupsTimeline; tests; 
-          europeMap; sources
+          ageGroupsTimeline; tests;
+          europeMap; healthcareWorkers; sources
           cases; ageGroups; regionMap; regionsAbs
           phaseDiagram
           hCenters; infections
@@ -444,7 +458,7 @@ let render (state: State) (_: Msg -> unit) =
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; sources
+          regions100k; healthcareWorkers; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
           phaseDiagram
         ]

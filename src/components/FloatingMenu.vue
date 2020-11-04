@@ -94,6 +94,10 @@ export default {
           titleMenu: this.$t('charts.tests.titleMenu'),
           icon: 'column',
         },
+        'healthcare-workers-chart': {
+          titleMenu: this.$t('charts.healthcareWorkers.titleMenu'),
+          icon: 'column',
+        },
         'sources-chart': {
           titleMenu: this.$t('charts.sources.titleMenu'),
           icon: 'column',

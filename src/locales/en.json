@@ -318,6 +318,15 @@
             "testsPositive": "Tests (positive*)",
             "allRegions": "All regions"
         },
+        "healthcareWorkers": {
+            "title": "Infections among healthcare workers",
+            "titleMenu": "Healthcare workers",
+            "confirmedCases": "Confirmed Cases",
+            "healthcareWorkerCases": "Confirmed Health Care Employees",
+            "healthcareWorkers": "Health Care Employees",
+            "healthcareWorkersRelative": "Health Care Employees (Relative)",
+            "totalConfirmed": "Confirmed Cases Total"
+        },
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
@@ -605,9 +614,6 @@
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
-            "healthcareCases": "Confirmed Health Care Employees",
-            "healthcare": "Health Care Employees",
-            "healthcareRelative": "Health Care Employees (Relative)",
             "quarantine": "Quarantine",
             "quarantineRelative": "Quarantine (Relative)",
             "bySource": "Sources of Infection",

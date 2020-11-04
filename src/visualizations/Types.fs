@@ -127,6 +127,7 @@ type VisualizationType =
     | Ratios
     | HCenters
     | Hospitals
+    | HealthcareWorkers
     | Tests
     | Cases
     | Spread

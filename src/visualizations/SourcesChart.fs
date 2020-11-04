@@ -40,19 +40,15 @@ let countryColors =
 type DisplayType =
     | Quarantine
     | QuarantineRelative
-    | Healthcare
-    | HealthcareRelative
     | BySource
     | BySourceRelative
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Healthcare; HealthcareRelative; Quarantine; QuarantineRelative ]
+    static member all = [ BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Quarantine; QuarantineRelative ]
     static member getName = function
         | Quarantine                -> chartText "quarantine"
         | QuarantineRelative        -> chartText "quarantineRelative"
-        | Healthcare                -> chartText "healthcare"
-        | HealthcareRelative        -> chartText "healthcareRelative"
         | BySource                  -> chartText "bySource"
         | BySourceRelative          -> chartText "bySourceRelative"
         | BySourceCountry           -> chartText "bySourceCountry"
@@ -109,7 +105,6 @@ let renderDisplaySelectors state dispatch =
 
 type Series =
     | ConfirmedCases
-    | HealthcareCases
     | SentToQuarantine
     | ConfirmedFromQuarantine
     | ImportedCases
@@ -120,14 +115,12 @@ type Series =
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
     let quarantineRelative = [  ConfirmedCases; ConfirmedFromQuarantine ]
-    let healthcare = [ ConfirmedCases; HealthcareCases ]
     let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
 
     let getSeriesInfo =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
-        | HealthcareCases ->  "#73ccd5", "healthcareCases", 1
         | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
 
         | ImportedCases -> "#d559b0", "importedCases", 0
@@ -140,7 +133,7 @@ let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
     let arrows p = match p?point?seriesId with
-                                   | "confirmedFromQuarantine" | "healthcareCases" -> "↳ "
+                                   | "confirmedFromQuarantine"  -> "↳ "
                                    |_ -> ""
 
     fmtWeekYearFromTo
@@ -160,12 +153,7 @@ let tooltipFormatterWithTotal totalText jsThis =
 // ---------------------------
 // Data Massaging
 // ---------------------------
-let splitOutFromTotal (state : State) (dp : WeeklyStatsDataPoint) (total : int option)  =
-    let split =
-        match state.displayType with
-        | Quarantine | QuarantineRelative -> dp.Source.FromQuarantine
-        | Healthcare | HealthcareRelative -> dp.HealthcareCases
-        | _ -> None
+let splitOutFromTotal (split : int option) (total : int option)  =
     match split, total with
     | Some split_, Some total_ -> Some (total_ - split_)
     | None, Some _ -> total
@@ -205,8 +193,7 @@ let renderSeriesImportedByCountry (state: State) =
 let renderSeries state = Seq.mapi (fun legendIndex series ->
     let getPoint: (WeeklyStatsDataPoint -> int option) =
         match series with
-        | ConfirmedCases -> fun dp -> dp.ConfirmedCases |> splitOutFromTotal state dp
-        | HealthcareCases -> fun dp -> dp.HealthcareCases
+        | ConfirmedCases -> fun dp -> dp.ConfirmedCases |> splitOutFromTotal dp.Source.FromQuarantine
         | SentToQuarantine -> fun dp -> dp.SentToQuarantine
         | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
         | ImportedCases -> fun dp -> dp.Source.Import
@@ -217,7 +204,6 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let getPointTotal: (WeeklyStatsDataPoint -> int option) =
         match series with
         | ConfirmedCases -> fun dp -> dp.ConfirmedCases
-        | HealthcareCases -> fun dp -> dp.HealthcareCases
         | SentToQuarantine -> fun dp -> dp.SentToQuarantine
         | ConfirmedFromQuarantine -> fun dp -> dp.Source.FromQuarantine
         | ImportedCases -> fun dp -> dp.Source.Import
@@ -270,8 +256,6 @@ let renderChartOptions (state: State) dispatch =
            series = (match state.displayType with
                     | Quarantine -> Series.quarantine |> renderSeries state
                     | QuarantineRelative -> Series.quarantineRelative |> renderSeries state
-                    | Healthcare -> Series.healthcare |> renderSeries state
-                    | HealthcareRelative -> Series.healthcare |> renderSeries state
                     | BySource | BySourceRelative -> Series.bySource |> renderSeries state
                     | BySourceCountry | BySourceCountryRelative -> renderSeriesImportedByCountry state
                     ) |> Seq.toArray
@@ -280,11 +264,11 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun yAxis -> {| yAxis with
                                               min = None
                                               labels = match state.displayType with
-                                                       | QuarantineRelative | HealthcareRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
+                                                       | QuarantineRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
 
                                               reversedStacks = match state.displayType with
-                                                               | Quarantine | QuarantineRelative | Healthcare | HealthcareRelative -> true
+                                                               | Quarantine | QuarantineRelative -> true
                                                                | _ -> false |})
            xAxis =
                baseOptions.xAxis
@@ -299,7 +283,6 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true
                       formatter = match state.displayType with
                                   | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
-                                  | Healthcare | HealthcareRelative -> fun () -> tooltipFormatter jsThis
                                   | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
                                   | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
                       |}
@@ -310,7 +293,7 @@ let renderChartOptions (state: State) dispatch =
            plotOptions = pojo {|
                                 column = pojo {|
                                                 stacking = match state.displayType with
-                                                           | QuarantineRelative | HealthcareRelative | BySourceRelative | BySourceCountryRelative -> "percent"
+                                                           | QuarantineRelative | BySourceRelative | BySourceCountryRelative -> "percent"
                                                            | _ -> "normal" |}
 
                                 |}
