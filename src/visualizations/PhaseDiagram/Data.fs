@@ -107,7 +107,7 @@ let weekVsWeekBeforeData metric statsData =
         else
             Some { x = firstWindowSum
                    y = (float secondWindowSum) / (float firstWindowSum) * 100.0 |> System.Convert.ToInt32
-                   date = (List.head secondWindow).Date })
+                   date = (secondWindow |> List.rev |> List.head ).Date })
     |> List.choose id
     |> List.toArray
 
