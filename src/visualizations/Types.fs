@@ -94,6 +94,8 @@ type WeeklyStatsDataPoint =
       Date : System.DateTime
       DateTo : System.DateTime
       ConfirmedCases : int option
+      InvestigatedCases : int option
+      HealthcareCases : int option
       SentToQuarantine : int option
       Source : InfectionSource
       ImportedFrom : Map<string, int option>
