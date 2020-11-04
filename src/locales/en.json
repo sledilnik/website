@@ -322,9 +322,9 @@
             "title": "Confirmed Cases among Health Care Employees",
             "titleMenu": "HC Employees - cases",
             "confirmedCases": "Confirmed Cases",
-            "healthcareEmployeeCases": "Confirmed Health Care Employees",
-            "healthcareEmployee": "Health Care Employees",
-            "healthcareEmployeeRelative": "Health Care Employees (Relative)",
+            "healthcareEmployeesCases": "Confirmed Health Care Employees",
+            "healthcareEmployees": "Health Care Employees",
+            "healthcareEmployeesRelative": "Health Care Employees (Relative)",
             "totalConfirmed": "Confirmed Cases Total"
         },
         "tests": {
