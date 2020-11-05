@@ -638,20 +638,23 @@
                 "tooltip": "datum.user_count + ' Benutzer schickte ' + datum.key_count + ' Schlüssel'",
                 "title": "Anzahl Schlüssel pro Benutzer und Tag",
                 "users": "Anzahl Benutzer",
-                "date": "Datum"
+                "date": "Datum",
+                "description": "Die Tabelle zeigt die Anzahl der Tagesschlüssel, die von jedem Benutzer veröffentlicht wurden, der an diesem Tag seinen positiven Testbestätigungscode eingegeben hat. Jeder Punkt im Diagramm repräsentiert eine Gruppe von Benutzern, die an einem bestimmten Tag die gleiche Anzahl von Tagesschlüsseln veröffentlicht haben. Die dunkelblaue Linie gibt die durchschnittliche Anzahl der pro Benutzer veröffentlichten Schlüssel an. Die App veröffentlicht maximal 13 Schlüssel pro Benutzer. Wenn sie jedoch nicht während des gesamten Zeitraums aktiv war, ist die Anzahl der veröffentlichten Schlüssel entsprechend geringer."
             },
             "usercount": {
                 "runningTotal": "Gesamtanzahl Benutzer die Schlüssel veröffentlichen",
                 "users": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen",
                 "title": "Geschätzte Anzahl Benutzer die Schlüssel veröffentlichen, pro Tag",
-                "date": "Datum"
+                "date": "Datum",
+                "description": "Die Tabelle zeigt unsere Schätzung über die Anzahl der Benutzer, die die Bestätigung ihres positiven Tests in die App eingegeben haben (blaue Balken), und über die laufende Gesamtzahl der Benutzer, die dies bisher getan haben (rote Linie). Nur die Anzahl der veröffentlichten Tagesschlüssel ist sicher bekannt (siehe Diagramm [$t(charts.ostanizdrav.published.title)](#published-chart)), aber aufgrund der typischen Reihenfolge der zugehörigen Übertragungsrisikostufen können wir eine gute Einschätzung darüber abgeben, wie viele Benutzer an diesem Tag ihre Schlüssel hochgeladen haben."
             },
             "publishedByRisk": {
                 "risk": "Risikostufe",
                 "published": "Anzahl veröffentlichter Schlüssel",
                 "tooltip": "datum.published + ' Schlüssel mit Risikostufe ' + datum.risk",
                 "title": "Anzahl veröffentlichter Schlüssel pro Tag nach Risikostufe",
-                "date": "Datum"
+                "date": "Datum",
+                "description": "Jedem veröffentlichten Tagesschlüssel ist ein Übertragungsrisiko zugeordnet. Die Tabelle zeigt ihre Zahlen für jeden Tag. Je dunkler die Farbe, desto höher das Risiko. Wenn ein Benutzer die App installiert hat und während des gesamten Zeitraums arbeitet, haben die Schlüssel die folgende Reihenfolge von Risikostufen: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Es wird daher erwartet, dass Schlüssel mit einem Übertragungsrisiko von 1 am häufigsten sind und das zweithäufigste Übertragungsrisiko 8 ist."
             },
             "validByRisk": {
                 "valid": "Anzahl gültiger Schlüssel pro Tag",
@@ -671,7 +674,8 @@
             "valid": {
                 "perDay": "Anzahl gültiger Schlüssel",
                 "title": "Anzahl gültiger Schlüssel pro Tag",
-                "date": "Datum"
+                "date": "Datum",
+                "description": "Die Grafik zeigt die Anzahl der Schlüssel, die an einem bestimmten Tag gültig sind (im Gegensatz zu den an einem einzelnen Tag veröffentlichten Schlüsseln - siehe Grafik [[$t(charts.ostanizdrav.published.title)](#published-chart)). Nach Bestätigung der Infektion in der App werden alle Schlüssel der letzten 13 Tage am gleichzeitig veröffentlicht. Jeder von ihnen ist für einen der letzten 13 Tage gültig. Dies bedeutet, dass dieses Diagramm unabhängig von der Änderung der Anzahl der positiv getesteten Benutzer immer für die letzten 13 Tage abfällt, weil die meisten Schlüssel für diesen Zeitraum erst in der Zukunft veröffentlicht werden."
             },
             "title": "Die #OstaniZdrav Benachrichtigungs-App",
             "footer": "Die Analyse ist das Ergebnis der Anpassung des deutschen Projekts [Corona Tracker Tracker](https://ctt.pfstr.de/) an das slowenische #OstaniZdrav. [Quellcode des Projekts](https://github.com/janpf/ctt) verwendet [Analysetools für Diagnoseschlüssel](https://github.com/mh-/diagnosis-keys).",
@@ -694,7 +698,9 @@
             "sourceUnknown": "Unbekannte Quelle",
             "totalConfirmed": "Bestätigte Fälle insgesamt",
             "totalImported": "Importierte Fälle insgesamt",
-            "titleMenu": "Infektionsquellen"
+            "titleMenu": "Infektionsquellen",
+            "disclaimer": "Hinweis: Seit dem 17. Oktober werden durch die Epidemiologen keine individuellen Kontakte mehr verfolgt und keine Quarantäneanordnungen mehr ausgestellt. Das ist der Grund, warum wir diese Daten nicht mehr zeigen.",
+            "disclaimerGeneral": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der importierten Fälle könnte hier niedriger dargestellt sein, als er eigentlich ist."
         },
         "regions100k": {
             "red": "Kriterum für rote Liste",
@@ -728,6 +734,16 @@
         "carePatients": {
             "titleMenu": "Pflege-Krankenhäuser",
             "title": "Pflege-Krankenhäuser"
+        },
+        "hcCases": {
+            "totalConfirmed": "Bestätigte Fälle insgesamt",
+            "healthcareEmployeesRelative": "Angestellte im Gesundheitswesen (Relativ)",
+            "healthcareEmployees": "Angestellte im Gesundheitswesen",
+            "healthcareEmployeesCases": "Bestätigt bei Angestellten im Gesundheitswesen",
+            "confirmedCases": "Bestätigte Fälle",
+            "disclaimer": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der Angestellten im Gesundheitswesen könnte hier geringer ausfallen, als er eigentlich ist.",
+            "titleMenu": "Fälle Angestellte Gesundheitswesen",
+            "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
         }
     },
     "tableDict": {
