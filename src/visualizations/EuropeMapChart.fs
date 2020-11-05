@@ -320,8 +320,8 @@ let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> 
       Data = data
       Countries =
         match mapToDisplay with
-        | Europe -> CountrySelection.Countries euCountries
-        | World -> All
+        | World -> CountrySelection.All
+        | Europe -> CountrySelection.Selected euCountries
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
@@ -412,12 +412,12 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
     let owdCountries =
         match state.Countries with
-        | All ->
-            All
-        | Countries countries ->
+        | CountrySelection.All ->
+            CountrySelection.All
+        | CountrySelection.Selected countries ->
             countries
             |> List.map (fun code -> if code = "XKX" then "OWID_KOS" else code) // hack for Kosovo code
-            |> Countries
+            |> CountrySelection.Selected
 
     match msg with
     | GeoJsonRequested ->
@@ -429,8 +429,11 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | GeoJsonLoaded geoJson -> { state with GeoJson = geoJson }, Cmd.none
     | OwdDataRequested ->
         let someWeeksAgo = DateTime.Today.AddDays(-21.0) // increased to 21 days from 14
-        { state with OwdData = Loading },
-        Cmd.OfAsync.result (loadCountryIncidence owdCountries someWeeksAgo OwdDataReceived)
+        let cmd = Cmd.OfAsync.result (loadData {
+            Countries = owdCountries
+            DateFrom = Some someWeeksAgo
+            DateTo = None }  OwdDataReceived)
+        { state with OwdData = Loading }, cmd
     | OwdDataReceived result ->
         let ret =
             match result with
@@ -447,8 +450,8 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 let mapData state =
     let countries =
         match state.Countries with
-        | Countries countries -> countries
-        | All -> worldCountries
+        | CountrySelection.All -> worldCountries
+        | CountrySelection.Selected countries -> countries
 
     countries
     |> List.map (fun code ->
@@ -462,23 +465,23 @@ let mapData state =
                 cd.NewCases
                 |> List.tryLast
                 |> Option.defaultValue 0
-            
+
             let cases = cd.NewCases |> List.toArray
 
-            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum 
-            let casesWeekBefore = Array.sub cases (cases.Length - 14) 7 |> Array.sum 
-            let relativeIncrease = 
+            let casesLastWeek = Array.sub cases (cases.Length - 7) 7 |> Array.sum
+            let casesWeekBefore = Array.sub cases (cases.Length - 14) 7 |> Array.sum
+            let relativeIncrease =
                 if casesWeekBefore > 0
                     then 100. * (float casesLastWeek/ float casesWeekBefore - 1.) |> min 500.
                 else
                     0.
-            
+
             let last n xs = List.toSeq xs |> Seq.skip (xs.Length - n) |> Seq.toList
-            let twoWeekCaseNumbers = 
-                cd.NewCases 
+            let twoWeekCaseNumbers =
+                cd.NewCases
                 |> List.filter(fun x -> x > 0) // filter out date with missing data
                 |> last 14 // take the last 14 non zero datapoints
-                |> List.toArray 
+                |> List.toArray
                 |> Array.map float
 
             let ncDate =
@@ -513,7 +516,7 @@ let mapData state =
                        value = float cd.ImportedFrom
                        color = cd.RestrictionColor
                        dataLabels = {| enabled = cd.ImportedFrom > 0 |} |}
-            | WeeklyIncrease -> 
+            | WeeklyIncrease ->
                 {| baseRec with
                        value = relativeIncrease
                        color = null
@@ -549,40 +552,40 @@ let renderMap state geoJson _ =
            floating = true
            borderWidth = 1
            backgroundColor = "white"
-           valueDecimals = 0 
+           valueDecimals = 0
            width = 70
         |}
         |> pojo
 
     let colorAxis =
         match state.ChartType with
-        | TwoWeekIncidence -> 
+        | TwoWeekIncidence ->
             {|
                 ``type`` = "logarithmic"
                 tickInterval = 0.4
-                max = 7000 
-                min = 1  
+                max = 7000
+                min = 1
                 endOnTick = false
                 startOnTick = false
                 stops =
                     [|
                         (0.000,"#ffffff")
                         (0.001,"#fff7db")
-                        (0.200,"#ffefb7") 
-                        (0.280,"#ffe792") 
-                        (0.360,"#ffdf6c") 
-                        (0.440,"#ffb74d") 
-                        (0.520,"#ff8d3c") 
-                        (0.600,"#f85d3a") 
-                        (0.680,"#ea1641") 
-                        (0.760,"#d0004e") 
-                        (0.840,"#ad005b") 
-                        (0.920,"#800066") 
+                        (0.200,"#ffefb7")
+                        (0.280,"#ffe792")
+                        (0.360,"#ffdf6c")
+                        (0.440,"#ffb74d")
+                        (0.520,"#ff8d3c")
+                        (0.600,"#f85d3a")
+                        (0.680,"#ea1641")
+                        (0.760,"#d0004e")
+                        (0.840,"#ad005b")
+                        (0.920,"#800066")
                         (0.999,"#43006e")
                     |]
                 reversed = true
-                labels = 
-                    {| 
+                labels =
+                    {|
                         formatter = fun() -> jsThis?value
                     |} |> pojo
             |} |> pojo
@@ -590,34 +593,34 @@ let renderMap state geoJson _ =
             {|
                 ``type`` = "linear"
                 tickInterval = 0.4
-                max = 7000 
-                min = 1  
+                max = 7000
+                min = 1
                 endOnTick = false
                 startOnTick = false
                 stops =
                     [|
                         (0.000,"#ffffff")
                         (0.001,"#fff7db")
-                        (0.200,"#ffefb7") 
-                        (0.280,"#ffe792") 
-                        (0.360,"#ffdf6c") 
-                        (0.440,"#ffb74d") 
-                        (0.520,"#ff8d3c") 
-                        (0.600,"#f85d3a") 
-                        (0.680,"#ea1641") 
-                        (0.760,"#d0004e") 
-                        (0.840,"#ad005b") 
-                        (0.920,"#800066") 
+                        (0.200,"#ffefb7")
+                        (0.280,"#ffe792")
+                        (0.360,"#ffdf6c")
+                        (0.440,"#ffb74d")
+                        (0.520,"#ff8d3c")
+                        (0.600,"#f85d3a")
+                        (0.680,"#ea1641")
+                        (0.760,"#d0004e")
+                        (0.840,"#ad005b")
+                        (0.920,"#800066")
                         (0.999,"#43006e")
                     |]
                 reversed = true
-                labels = 
-                    {| 
+                labels =
+                    {|
                         formatter = fun() -> jsThis?value
                     |} |> pojo
             |} |> pojo
         | WeeklyIncrease ->
-            {| 
+            {|
                 ``type`` = "linear"
                 tickInterval = 50
                 max = 200
@@ -628,22 +631,22 @@ let renderMap state geoJson _ =
                     [|
                         (0.000,"#009e94")
                         (0.166,"#6eb49d")
-                        (0.250,"#b2c9a7") 
-                        (0.333,"#f0deb0") 
+                        (0.250,"#b2c9a7")
+                        (0.333,"#f0deb0")
                         (0.500,"#e3b656")
                         (0.600,"#cc8f00")
                         (0.999,"#b06a00")
                     |]
                 reversed=false
-                labels = 
-                {| 
+                labels =
+                {|
                    formatter = fun() -> sprintf "%s%%" jsThis?value
                 |} |> pojo
             |} |> pojo
 
 
     let sparklineFormatter newCases =
-        let desaturateColor (rgb:string) (sat:float) = 
+        let desaturateColor (rgb:string) (sat:float) =
             let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
             let r = (argb &&& 0x00FF0000) >>> 16
             let g = (argb &&& 0x0000FF00) >>> 8
@@ -663,33 +666,33 @@ let renderMap state geoJson _ =
         let columnColors = [| ([|color2 |] |> Array.replicate 7 |> Array.concat); ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
         let options =
             {|
-                chart = 
+                chart =
                     {|
                         ``type`` = "column"
                         backgroundColor = "transparent"
                     |} |> pojo
                 credits = {| enabled = false |}
-                xAxis = 
-                    {| 
-                        visible = true 
-                        labels = {| enabled = false |} 
+                xAxis =
+                    {|
+                        visible = true
+                        labels = {| enabled = false |}
                         title = {| enabled = false |}
-                        tickInterval = 7 
+                        tickInterval = 7
                         lineColor = "#696969"
                         tickColor = "#696969"
                         tickLength = 4
                     |}
-                yAxis = 
-                    {| 
+                yAxis =
+                    {|
                         title = {| enabled = false |}
-                        visible = true  
-                        opposite = true 
+                        visible = true
+                        opposite = true
                         min = 0.
-                        max = newCases |> Array.max 
-                        tickInterval = tickScale 
-                        endOnTick = true 
-                        startOnTick = false 
-                        allowDecimals = false 
+                        max = newCases |> Array.max
+                        tickInterval = tickScale
+                        endOnTick = true
+                        startOnTick = false
+                        allowDecimals = false
                         showFirstLabel = true
                         showLastLabel = true
                         gridLineColor = "#000000"
@@ -697,23 +700,23 @@ let renderMap state geoJson _ =
                     |} |> pojo
                 title = {| text = "" |}
                 legend = {| enabled = false |}
-                series = 
-                    [| 
-                        {| 
+                series =
+                    [|
+                        {|
                             data = newCases |> Array.map ( max 0.)
                             animation = false
-                            colors = columnColors 
-                            borderColor = columnColors 
+                            colors = columnColors
+                            borderColor = columnColors
                             pointWidth = 15 //
                             colorByPoint = true
-                        |} |> pojo 
+                        |} |> pojo
                     |]
             |} |> pojo
-        match state.MapToDisplay with 
-        | Europe -> 
+        match state.MapToDisplay with
+        | Europe ->
             Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-eur", options)) 10 |> ignore
             """<div id="tooltip-chart-eur"; class="tooltip-chart";></div>"""
-        | World -> 
+        | World ->
             Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-world", options)) 10 |> ignore
             """<div id="tooltip-chart-world"; class="tooltip-chart";></div>"""
 
@@ -747,10 +750,10 @@ let renderMap state geoJson _ =
 
         match twoWeekIncidence with
         | null -> chartText "noData"
-        | _ -> 
+        | _ ->
             if (twoWeekCases |> Array.max) > 0. then
                 textHtml + sparklineFormatter twoWeekCases
-            else 
+            else
                 textHtml
 
     let series geoJson =
@@ -806,9 +809,9 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
         [ prop.className "chart-display-property-selector"
           prop.children
               [ renderChartSelector Restrictions
-                renderChartSelector TwoWeekIncidence 
+                renderChartSelector TwoWeekIncidence
                 renderChartSelector WeeklyIncrease
-              ] 
+              ]
         ]
 
 

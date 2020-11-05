@@ -32,6 +32,9 @@ let optionToInt (value: int option) =
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
+[<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
+let nativeParseFloat (input : string) : float option = jsNative
+
 let parseDate (str : string) =
     try
         DateTime.Parse(str) |> Ok

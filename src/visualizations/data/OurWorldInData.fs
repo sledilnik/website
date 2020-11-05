@@ -1,188 +1,91 @@
 module Data.OurWorldInData
 
+open System
 open Fable.SimpleHttp
-
-open EdelweissData.Base.Identifiers
-open EdelweissData.Base.Routes
-open EdelweissData.Base.Queries
-open EdelweissData.Base.Values
+open Fable.Extras.Web
 
 open Types
 
-let apiUrl = Url "https://api.edelweissdata.com/"
-
-let datasetId = PublishedDatasetId (Guid "b55b229d-6338-4e41-a507-0cf4d3297b54")
-
-let datasetIdAndVersion =
-    { Id = datasetId
-      VersionOrLatest = Latest }
-
-let (Url datasetUrl) =
-    createRoutePublishedDatasetGetByIdSpecificVersion apiUrl datasetIdAndVersion
-
-let (Url dataUrl) =
-    createRoutePublishedDatasetGetData apiUrl datasetIdAndVersion
-
-type CountrySelection =
-    | All
-    | Countries of string list
+let apiUrl = "https://api.sledilnik.org/api/owid"
 
 type CountryIsoCode = string
 
 type DataPoint = {
     CountryCode : CountryIsoCode
-    Date : System.DateTime
+    Date : DateTime
     NewCases : int
     NewCasesPerMillion : float option
-    TotalCases: int
+    TotalCases : int
     TotalCasesPerMillion : float option
-    TotalDeaths: int
+    TotalDeaths : int
     TotalDeathsPerMillion : float option
 }
 
-type OurWorldInDataRemoteData = RemoteData<DataPoint list, string>
+[<RequireQualifiedAccess>]
+type CountrySelection =
+    | All
+    | Selected of CountryIsoCode list
 
-let stringOfResult result column =
-    match result.Data.TryFind column with
-    | None -> ""
-    | Some value ->
-        match value with
-        | ValuePrimitive value ->
-            match value with
-            | ValueString value -> value
-            | _ -> ""
-        | _ -> ""
-
-let dateOfResult result column =
-    match result.Data.TryFind column with
-    | None -> None
-    | Some value ->
-        match value with
-        | ValuePrimitive value ->
-            match value with
-            | ValueDate value -> Some value
-            | _ -> None
-        | _ -> None
-
-let intOfDoubleResult result column =
-    match result.Data.TryFind column with
-    | None -> 0
-    | Some value ->
-        match value with
-        | ValuePrimitive value ->
-            match value with
-            | ValueDouble value -> int value
-            | _ -> 0
-        | _ -> 0
-
-let floatOptionOfResult result column =
-    match result.Data.TryFind column with
-    | None -> None
-    | Some value ->
-        match value with
-        | ValuePrimitive value ->
-            match value with
-            | ValueDouble value -> Some value
-            | _ -> None
-        | _ -> None
-
-let load (query : DataQuery) msg =
-    let mapRow row date =
-        {
-            CountryCode = stringOfResult row "iso_code"
-            Date = date
-            NewCases = intOfDoubleResult row "new_cases"
-            NewCasesPerMillion = floatOptionOfResult row "new_cases_per_million"
-            TotalCases = intOfDoubleResult row "total_cases"
-            TotalCasesPerMillion = floatOptionOfResult row "total_cases_per_million"
-            TotalDeaths = intOfDoubleResult row "total_deaths"
-            TotalDeathsPerMillion = floatOptionOfResult row "total_deaths_per_million"
-        }
-
-    async {
-        let! statusCode, response = Http.get datasetUrl
-
-        match statusCode = 200 with
-        | false ->
-            return sprintf
-                       "Napaka pri nalaganju OurWorldInData podatkov: %d"
-                       statusCode |> Failure |> msg
-        | true ->
-            match EdelweissData.Thoth.Datasets.PublishedDataset.fromString response with
-            | Error error ->
-                return sprintf "Napaka pri nalaganju OurWorldInData: %s" (error.ToString()) |> Failure |> msg
-            | Ok dataset ->
-                let columns =
-                    [ "date"
-                      "iso_code"
-                      "new_cases"
-                      "new_cases_per_million"
-                      "total_cases"
-                      "total_cases_per_million"
-                      "total_deaths"
-                      "total_deaths_per_million" ]
-                    |> List.map (EdelweissData.Base.Types.Schema.GetColumn dataset.Schema)
-                    |> FsToolkit.ErrorHandling.List.sequenceResultM
-
-                match columns with
-                | Error error ->
-                    return sprintf "Napaka pri nalaganju OurWorldInData: %s" (error.ToString()) |> Failure |> msg
-                | Ok columns ->
-                    let! statusCode, response =
-                        Http.post dataUrl ({ query with Columns = columns } |> EdelweissData.Thoth.Queries.DataQuery.toString)
-
-                    match statusCode = 200 with
-                    | false ->
-                        return sprintf
-                            "Napaka pri nalaganju OurWorldInData podatkov: %d"
-                            statusCode |> Failure |> msg
-                    | true ->
-                        match
-                            EdelweissData.Thoth.Queries.DataQueryResponse.fromString
-                                dataset.Schema response with
-                        | Error error ->
-                            return sprintf
-                               "Napaka pri nalaganju OurWorldInData podatkov: %s"
-                               (error.ToString()) |> Failure |> msg
-                        | Ok data ->
-                            let results =
-                                data.Results
-                                |> List.map (fun result ->
-                                    match dateOfResult result "date" with
-                                    | None -> None
-                                    | Some date -> Some (mapRow result date))
-                                |> List.choose id
-                            return results |> Success |> msg
+type Query =
+    { DateFrom : DateTime option
+      DateTo : DateTime option
+      Countries : CountrySelection
     }
 
-let loadCountryComparison countries msg =
-    let query =
-        let countryMatch country =
-            ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
-        let countriesMatchCondition =
-            Or (List.map countryMatch countries)
-        { DataQuery.Default with
-            Condition = Some(countriesMatchCondition) }
+    with
 
-    load query msg
+    member this.URLSearchParams =
+        [ this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
+          this.DateTo |> Option.map (fun date-> ("to", date.ToString("yyyy-MM-dd")))
+          match this.Countries with
+            | CountrySelection.All -> None
+            | CountrySelection.Selected countries -> Some ("countries", (String.Join(",", countries))) ]
+        |> List.choose id
+        |> JSe.URLSearchParams
 
-let loadCountryIncidence (countries : CountrySelection) (fromDate : System.DateTime) msg =
+type OurWorldInDataRemoteData = RemoteData<DataPoint list, string>
 
-    let query =
-        let countryMatch country =
-            ExactSearch(QueryExpression.Column(QueryColumn.UserColumn "iso_code"), country)
-        let dateCondition =
-            Relation(GreaterThan, QueryExpression.Column(QueryColumn.UserColumn "date"), Constant(ValuePrimitive (ValueDate fromDate)))
+let parseInt = Utils.nativeParseInt >> Utils.optionToInt
 
-        let condition =
-            match countries with
-            | All ->
-                dateCondition
-            | Countries countries ->
-                let countriesMatchCondition = Or (List.map countryMatch countries)
-                And[countriesMatchCondition ; dateCondition]
+let parseFloat = Utils.nativeParseFloat
 
-        { DataQuery.Default with
-            Condition = Some(condition) }
+let loadData (query : Query) msg =
+    async {
+        let url = JSe.URL apiUrl
+        url.Search <- query.URLSearchParams.ToString()
 
-    load query msg
+        let! response =
+            Http.request (url.ToString())
+            |> Http.method GET
+            |> Http.header (Headers.accept "text/csv")
+            |>Http.send
+
+        match response.statusCode = 200 with
+        | false ->
+            return sprintf
+                "Napaka pri nalaganju OurWorldInData podatkov: %d" response.statusCode |> Failure |> msg
+        | true ->
+            let csv = response.content.ToString()
+            let data =
+                csv.Split("\n").[1..]
+                |> Array.map (fun rowString ->
+                    let row = rowString.Split(";")
+                    try
+                        Some {
+                            Date = DateTime.Parse(row.[0])
+                            CountryCode = row.[1]
+                            NewCases = parseInt row.[2]
+                            NewCasesPerMillion = parseFloat row.[3]
+                            TotalCases = parseInt row.[4]
+                            TotalCasesPerMillion = parseFloat row.[5]
+                            TotalDeaths = parseInt row.[6]
+                            TotalDeathsPerMillion = parseFloat row.[7]
+                        }
+                    with
+                    | _ -> None
+                )
+                |> Array.choose id
+                |> Array.toList
+
+            return data |> Success |> msg
+    }
