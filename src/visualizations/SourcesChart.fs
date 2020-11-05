@@ -240,6 +240,8 @@ let renderChartOptions (state: State) dispatch =
 
         res
 
+    let lastWeek = state.data.[state.data.Length-1]
+
     let className = "covid19-weekly-stats"
     let baseOptions =
         basicChartOptions ScaleType.Linear className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
@@ -275,6 +277,13 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with
                           tickInterval = 86400000 * 7
+                          plotBands =
+                                [|
+                                   {| from=jsTime <| lastWeek.Date 
+                                      ``to``=jsTime <| lastWeek.DateTo
+                                      color="#ffffe0"
+                                    |}
+                                |]
                          |})
            tooltip =
                pojo
@@ -330,20 +339,21 @@ let renderChartContainer state dispatch =
 
 
 let render (state: State) dispatch =
+    let disclaimer = 
+        match state.displayType with
+        | Quarantine | QuarantineRelative -> "disclaimer"
+        | _ -> "disclaimerGeneral"
+
     Html.div [
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
 
-        match state.displayType with
-        | Quarantine | QuarantineRelative ->
-            Html.div [
-                prop.className "disclaimer"
-                prop.children [
-                    Html.text (chartText "disclaimer")
-                ]
+        Html.div [
+            prop.className "disclaimer"
+            prop.children [
+                Html.text (chartText disclaimer) 
             ]
-        | _ -> Html.none
-
+        ]
     ]
 
 let sourcesChart (props: {| data: WeeklyStatsData |}) =
