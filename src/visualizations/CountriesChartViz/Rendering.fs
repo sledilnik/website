@@ -7,13 +7,13 @@ open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 
+open Data.OurWorldInData
 open Analysis
 open Synthesis
 open CountrySets
 open Highcharts
 open Types
 open I18N
-
 
 type Msg =
     | DataRequested
@@ -56,8 +56,11 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             DisplayedCountriesSet = selectedSet
         },
         Cmd.OfAsync.result
-            (Data.OurWorldInData.loadCountryComparison
-                 countriesCodes DataLoaded)
+            (loadData {
+                DateFrom = None
+                DateTo = None
+                Countries = CountrySelection.Selected countriesCodes
+            } DataLoaded)
     | DataRequested ->
         let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
 
@@ -70,8 +73,11 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
 
         { state with OwidDataState = newOwidDataState },
         Cmd.OfAsync.result
-            (Data.OurWorldInData.loadCountryComparison
-                 countriesCodes DataLoaded)
+            (loadData {
+                DateFrom = None
+                DateTo = None
+                Countries = CountrySelection.Selected countriesCodes
+            } DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
     | ScaleTypeChanged newScaleType ->
