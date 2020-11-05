@@ -9,6 +9,7 @@ open Types
 open I18N
 
 type CountriesChartConfig = {
+    StatsData: StatsData
     MetricToDisplay: MetricToDisplay
     ChartTextsGroup: string
 }
@@ -20,6 +21,7 @@ type CountriesDisplaySet = {
 
 type ChartState = {
     OwidDataState: OwidDataState
+    StatsData: StatsData
     DisplayedCountriesSet: CountriesDisplaySet
     MetricToDisplay: MetricToDisplay
     ScaleType: ScaleType
@@ -124,8 +126,12 @@ let prepareChartData daysOfMovingAverage (state: ChartState)
         | _ -> countryNameA.CompareTo countryNameB
 
     let aggregated =
-        state.OwidDataState
-        |> aggregateOurWorldInData daysOfMovingAverage state.MetricToDisplay
+        aggregateOurWorldInData
+            daysOfMovingAverage
+            state.MetricToDisplay
+            state.OwidDataState
+            state.StatsData
+
 
     match aggregated with
     | Some aggregated ->

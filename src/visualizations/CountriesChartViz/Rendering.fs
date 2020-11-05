@@ -17,7 +17,7 @@ open I18N
 
 type Msg =
     | DataRequested
-    | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
+    | DataLoaded of OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
     | ScaleTypeChanged of ScaleType
 
@@ -28,6 +28,7 @@ let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
     let metric = config.MetricToDisplay
     let state = {
         OwidDataState = NotLoaded
+        StatsData = config.StatsData
         DisplayedCountriesSet = (countriesDisplaySets metric).[0]
         MetricToDisplay = metric
         ScaleType = Linear

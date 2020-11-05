@@ -115,17 +115,65 @@ type OwidDataState =
     | PreviousAndLoadingNew of OurWorldInDataRemoteData
     | Current of OurWorldInDataRemoteData
 
+let SloveniaPopulation = 2.084301
+
+let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
+        : DataPoint =
+    let domesticDataForDate =
+        statsData
+        |> List.tryFind(fun dataForDate -> dataForDate.Date = date)
+
+    match domesticDataForDate with
+    | Some domesticDataForDate ->
+        let newCases = domesticDataForDate.Cases.ConfirmedToday
+                       |> Utils.optionToInt
+        let newCasesPerMillion = (float newCases) / SloveniaPopulation |> Some
+        let totalCases = domesticDataForDate.Cases.ConfirmedToDate
+                         |> Utils.optionToInt
+        let totalCasesPerMillion = (float totalCases) / SloveniaPopulation
+                                   |> Some
+        let totalDeaths = domesticDataForDate.StatePerTreatment.DeceasedToDate
+                          |> Utils.optionToInt
+        let totalDeathsPerMillion = (float totalDeaths) / SloveniaPopulation
+                                    |> Some
+
+        {
+            CountryCode = "SVN"; Date = date
+            NewCases = newCases; NewCasesPerMillion = newCasesPerMillion
+            TotalCases = totalCases; TotalCasesPerMillion = totalCasesPerMillion
+            TotalDeaths = totalDeaths; TotalDeathsPerMillion = totalDeathsPerMillion
+        }
+    | None ->
+        {
+            CountryCode = "SVN"; Date = date
+            NewCases = 0; NewCasesPerMillion = None
+            TotalCases = 0; TotalCasesPerMillion = None
+            TotalDeaths = 0; TotalDeathsPerMillion = None
+        }
+
+let updateWithSloveniaDomesticData
+        (statsData: StatsData) (countryData: DataPoint): DataPoint =
+    match countryData.CountryCode with
+    | "SVN" -> countryData.Date |> buildFromSloveniaDomesticData statsData
+    | _ -> countryData
+
 let aggregateOurWorldInData
     daysOfMovingAverage
     (metricToDisplay: MetricToDisplay)
     (owidDataState: OwidDataState)
+    (statsData: StatsData)
     : CountriesData option =
 
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with
         | Success dataPoints ->
+            let dataPointsWithLocalSloveniaData =
+                dataPoints
+                |> List.map (updateWithSloveniaDomesticData statsData)
+
             let groupedByCountries: CountriesData =
-                dataPoints |> (groupEntriesByCountries metricToDisplay)
+                dataPointsWithLocalSloveniaData
+                |> (groupEntriesByCountries metricToDisplay)
 
             let averagedAndFilteredByCountries: CountriesData  =
                 groupedByCountries
