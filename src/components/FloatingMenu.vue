@@ -94,6 +94,10 @@ export default {
           titleMenu: this.$t('charts.tests.titleMenu'),
           icon: 'column',
         },
+        'hc-cases-chart': {
+          titleMenu: this.$t('charts.hcCases.titleMenu'),
+          icon: 'graph',
+        },
         'sources-chart': {
           titleMenu: this.$t('charts.sources.titleMenu'),
           icon: 'column',

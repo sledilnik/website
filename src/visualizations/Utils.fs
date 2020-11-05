@@ -154,6 +154,14 @@ let renderLoading =
 let renderErrorLoading (error : string) =
     Html.text error
 
+let renderMaybeVisible (visible: bool) (children: ReactElement seq) =
+    Html.div [
+        prop.className (match visible with
+                        | true -> ""
+                        | false -> "invisible" )
+        prop.children children
+    ]
+
 let monthNameOfDate (date : DateTime) =
     match date.Month with
     | 1 -> I18N.t "month.0"

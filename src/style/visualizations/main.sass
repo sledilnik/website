@@ -9,6 +9,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   @media only screen and (min-width: 1150px)
     @content
 
+.invisible
+  visibility: hidden
+  pointer-events: none
+  
 .visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
@@ -375,6 +379,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
     min-height: 703px
 
+  .hc-cases-chart
+    min-height: 626px
+    
   .sources-chart
     min-height: 610px
 
@@ -389,7 +396,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background-color: $gray-600
 
   .patients-chart, .care-patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart,
-  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart, .sources-chart
+  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart, .sources-chart, .hc-cases-chart
 
     .metric-selector
       background-color: white

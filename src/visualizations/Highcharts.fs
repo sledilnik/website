@@ -35,6 +35,11 @@ module Helpers =
 
     let jsNoon : JsTimestamp = 43200000.0
     let jsTime12h = jsTime >> ( + ) jsNoon
+    [<Emit("(new Date($0.getFullYear(), $0.getMonth(), $0.getDate())).getTime()")>]
+    let jsTimeMidnight (x: DateTime): JsTimestamp = jsNative
+
+    /// Given two dates it calculates the middle point between the midnight for the first date and end of day for the second date
+    let jsDatesMiddle (a: DateTime) (b: DateTime): JsTimestamp = ( + ) (0.5 * jsTimeMidnight a) (0.5 * jsTimeMidnight b) + 43200000.0
 
 type DashStyle =
     | Solid

@@ -849,6 +849,16 @@
             "max": "Max",
             "data": "Podatki"
         },
+        "hcCases": {
+            "title": "Potrjeni primeri med zdravstvenimi delavci",
+            "titleMenu": "Zdravstveni delavci - primeri",
+            "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
+            "confirmedCases": "Potrjeni primeri",
+            "healthcareEmployeesCases": "Potrjeni zdravstveni delavci",
+            "healthcareEmployees": "Zdravstveni delavci",
+            "healthcareEmployeesRelative": "Zdravstveni delavci (relativno)",
+            "totalConfirmed": "Skupaj potrjeni"
+        },
         "regions": {
             "title": "Primeri po regijah",
             "titleMenu": "Regije – primeri",
@@ -1046,6 +1056,7 @@
         "sources": {
             "title": "Viri okužb in karantena",
             "titleMenu": "Viri okužb",
+            "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato so uvoženi primeri lahko manjši kot dejansko.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",

@@ -121,7 +121,7 @@ module Series =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
-        | ConfirmedCases ->  "#bda506", "confirmedCases", 1
+        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
 
         | ImportedCases -> "#d559b0", "importedCases", 0
         | ImportRelatedCases -> "#f4b2e0", "importRelatedCases", 0
@@ -133,7 +133,7 @@ let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
     let arrows p = match p?point?seriesId with
-                                   | "confirmedFromQuarantine" -> "↳ "
+                                   | "confirmedFromQuarantine"  -> "↳ "
                                    |_ -> ""
 
     fmtWeekYearFromTo
@@ -176,10 +176,9 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       legendIndex = countryIndex
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
-                                                                      pointPlacement = "between"
                                                                       showInLegend = Set.contains countryCode countriesToShowInLegend
                                                                       data = state.data |> Seq.map (fun dp -> {|
-                                                                                                               x = dp.Date |> jsTime
+                                                                                                               x = jsDatesMiddle dp.Date dp.DateTo
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
                                                                                                                fmtWeekYearFromTo =
@@ -218,11 +217,10 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        stack = stack
        animation = false
        legendIndex = legendIndex
-       pointPlacement = "between"
        data =
            state.data
            |> Seq.map (fun dp ->
-               {| x = dp.Date |> jsTime
+               {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
@@ -239,6 +237,8 @@ let renderChartOptions (state: State) dispatch =
             true
 
         res
+
+    let lastWeek = state.data.[state.data.Length-1]
 
     let className = "covid19-weekly-stats"
     let baseOptions =
@@ -275,6 +275,13 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with
                           tickInterval = 86400000 * 7
+                          plotBands =
+                                [|
+                                   {| from=jsTime <| lastWeek.Date
+                                      ``to``=jsTime <| lastWeek.DateTo
+                                      color="#ffffe0"
+                                    |}
+                                |]
                          |})
            tooltip =
                pojo
@@ -330,20 +337,21 @@ let renderChartContainer state dispatch =
 
 
 let render (state: State) dispatch =
+    let disclaimer =
+        match state.displayType with
+        | Quarantine | QuarantineRelative -> "disclaimer"
+        | _ -> "disclaimerGeneral"
+
     Html.div [
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
 
-        match state.displayType with
-        | Quarantine | QuarantineRelative ->
-            Html.div [
-                prop.className "disclaimer"
-                prop.children [
-                    Html.text (chartText "disclaimer")
-                ]
+        Html.div [
+            prop.className "disclaimer"
+            prop.children [
+                Html.text (chartText disclaimer)
             ]
-        | _ -> Html.none
-
+        ]
     ]
 
 let sourcesChart (props: {| data: WeeklyStatsData |}) =

@@ -36,6 +36,7 @@
         <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
         <Compile Include="SourcesChart.fs" />
+        <Compile Include="HcCasesChart.fs" />
         <Compile Include="PhaseDiagram/Types.fs" />
         <Compile Include="PhaseDiagram/Data.fs" />
         <Compile Include="PhaseDiagram/Chart.fs" />
