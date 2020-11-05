@@ -134,7 +134,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        data =
            state.data
            |> Seq.map (fun dp ->
-               {| x = dp.Date |> jsTime
+               {| x = (if state.displayType = Healthcare then dp.DateTo else dp.Date) |> jsTime
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
@@ -160,6 +160,8 @@ let renderChartOptions (state: State) dispatch =
     let className = "covid19-healthcare-employees"
     let baseOptions =
         basicChartOptions (scaleType state) className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    let lastWeek = state.data.[state.data.Length-1]
 
     {| baseOptions with
            chart = pojo
@@ -193,7 +195,14 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with
                           tickInterval = 86400000 * 7
-                         |})
+                          plotBands =
+                                [|
+                                   {| from=jsTime <| lastWeek.Date 
+                                      ``to``=jsTime <| lastWeek.DateTo
+                                      color="#ffffe0"
+                                    |}
+                                |]
+                             |})
            tooltip =
                pojo
                    {| shared = true
