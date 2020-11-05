@@ -169,7 +169,7 @@ let renderChartOptions (state: State) dispatch =
                 animation = false
                 ``type`` = (match state.displayType with
                             | HealthcareRelative -> "column"
-                            | _ -> "area")
+                            | _ -> "line")
                 zoomType = "x"
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
