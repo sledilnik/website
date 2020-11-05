@@ -115,7 +115,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
         | ConfirmedCases -> fun dp -> (match state.displayType with
                                        | Healthcare -> dp.ConfirmedCases
                                        | HealthcareRelative -> dp.ConfirmedCases |> splitOutFromTotal dp.HealthcareCases) // Because "relative" is a stacked bar chart
-                                       
+
         | HealthcareCases -> fun dp -> dp.HealthcareCases
 
     let getPointTotal: (WeeklyStatsDataPoint -> int option) =
@@ -130,11 +130,10 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        stack = stack
        animation = false
        legendIndex = legendIndex
-       pointPlacement = "between"
        data =
            state.data
            |> Seq.map (fun dp ->
-               {| x = (if state.displayType = Healthcare then dp.DateTo else dp.Date) |> jsTime
+               {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
@@ -197,7 +196,7 @@ let renderChartOptions (state: State) dispatch =
                           tickInterval = 86400000 * 7
                           plotBands =
                                 [|
-                                   {| from=jsTime <| lastWeek.Date 
+                                   {| from=jsTime <| lastWeek.Date
                                       ``to``=jsTime <| lastWeek.DateTo
                                       color="#ffffe0"
                                     |}
@@ -251,7 +250,7 @@ let renderChartContainer state dispatch =
                prop.children
                    [ renderChartOptions state dispatch
                      |> chartFromWindow ] ]
-    
+
 
 
 let render (state: State) dispatch =
@@ -264,7 +263,7 @@ let render (state: State) dispatch =
                     state.scaleType (ScaleTypeChanged >> dispatch)])
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
-        
+
         Html.div [
             prop.className "disclaimer"
             prop.children [

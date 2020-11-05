@@ -176,10 +176,9 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       legendIndex = countryIndex
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
-                                                                      pointPlacement = "between"
                                                                       showInLegend = Set.contains countryCode countriesToShowInLegend
                                                                       data = state.data |> Seq.map (fun dp -> {|
-                                                                                                               x = dp.Date |> jsTime
+                                                                                                               x = jsDatesMiddle dp.Date dp.DateTo
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
                                                                                                                fmtWeekYearFromTo =
@@ -218,11 +217,10 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        stack = stack
        animation = false
        legendIndex = legendIndex
-       pointPlacement = "between"
        data =
            state.data
            |> Seq.map (fun dp ->
-               {| x = dp.Date |> jsTime
+               {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
@@ -279,7 +277,7 @@ let renderChartOptions (state: State) dispatch =
                           tickInterval = 86400000 * 7
                           plotBands =
                                 [|
-                                   {| from=jsTime <| lastWeek.Date 
+                                   {| from=jsTime <| lastWeek.Date
                                       ``to``=jsTime <| lastWeek.DateTo
                                       color="#ffffe0"
                                     |}
@@ -339,7 +337,7 @@ let renderChartContainer state dispatch =
 
 
 let render (state: State) dispatch =
-    let disclaimer = 
+    let disclaimer =
         match state.displayType with
         | Quarantine | QuarantineRelative -> "disclaimer"
         | _ -> "disclaimerGeneral"
@@ -351,7 +349,7 @@ let render (state: State) dispatch =
         Html.div [
             prop.className "disclaimer"
             prop.children [
-                Html.text (chartText disclaimer) 
+                Html.text (chartText disclaimer)
             ]
         ]
     ]
