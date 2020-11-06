@@ -263,26 +263,36 @@ export default {
 
 .float-nav-btn {
   position: fixed;
-  bottom: 7px;
-  right: 7px;
+  bottom: 16px;
+  right: 16px;
   z-index: 2002;
   cursor: pointer;
   display: inline-block;
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  background: $yellow;
+  box-shadow: $element-box-shadow;
 
   @include nav-break {
-    right: 24px;
-    bottom: 24px;
+    right: 32px;
+    bottom: 32px;
   }
 }
 
 .float-nav-img {
-  background-image: url('../assets/svg/floating-close.svg');
-  height: 72px;
-  width: 72px;
+  background: url('../assets/svg/close.svg') no-repeat;
+  background-size: 24px 24px;
   transition: all 0.3s;
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   &.active {
-    background-image: url('../assets/svg/floating-open.svg');
+    background: url('../assets/svg/graph.svg') no-repeat;
   }
 }
 
