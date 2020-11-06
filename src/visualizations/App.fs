@@ -389,6 +389,7 @@ let render (state: State) (_: Msg -> unit) =
                             { StatsData = data
                               MetricToDisplay = NewCasesPer1M
                               ChartTextsGroup = "countriesNewCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
                             }
           }
 
@@ -408,6 +409,7 @@ let render (state: State) (_: Msg -> unit) =
                             { StatsData = data
                               MetricToDisplay = ActiveCasesPer1M
                               ChartTextsGroup = "countriesActiveCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
                             }
           }
 
@@ -427,6 +429,7 @@ let render (state: State) (_: Msg -> unit) =
                             { StatsData = data
                               MetricToDisplay = TotalDeathsPer1M
                               ChartTextsGroup = "countriesTotalDeathsPer1M"
+                              DataSource = "dsOWD_MZ"
                             }
           }
 

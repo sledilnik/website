@@ -33,6 +33,7 @@ let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
         MetricToDisplay = metric
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
+        DataSource = config.DataSource
     }
     state, Cmd.ofMsg DataRequested
 
@@ -234,7 +235,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 text =
                     sprintf "%s: %s"
                         (t "charts.common.dataSource")
-                        (t "charts.common.dsOWD_NIJZ")
+                        (t ("charts.common." + state.DataSource))
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}

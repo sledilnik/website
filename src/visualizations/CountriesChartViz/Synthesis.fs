@@ -12,6 +12,7 @@ type CountriesChartConfig = {
     StatsData: StatsData
     MetricToDisplay: MetricToDisplay
     ChartTextsGroup: string
+    DataSource: string
 }
 
 type CountriesDisplaySet = {
@@ -26,6 +27,7 @@ type ChartState = {
     MetricToDisplay: MetricToDisplay
     ScaleType: ScaleType
     ChartTextsGroup: string
+    DataSource: string
 }
 
 let ColorPalette =
