@@ -7,7 +7,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 @import "slider"
 
 @mixin nav-break
-  @media only screen and (min-width: 1150px)
+  @media only screen and (min-width: 1300px)
     @content
 
 .visualizations
@@ -282,6 +282,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     color: $text-c
     padding: 15px 15px 0 15px
 
+    @media only screen and (min-width: 768px)
+      padding: 15px 0 0
+
     a
       color: black
       font-weight: bold
@@ -292,12 +295,16 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .filters
     display: flex
     flex-wrap: wrap
-    gap: 10px
+    margin: 0 6px 6px 0
+
+    @include media-breakpoint-down(sm)
+      margin: 0
 
     select, input
-      width: 11rem
+      width: 12rem
       height: 28px
       border-radius: 6px
+      margin: 0 6px 6px 0
 
       @include media-breakpoint-down(sm)
         width: 8.25rem
@@ -309,7 +316,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .chart-display-properties
     display: flex
     flex-wrap: wrap
-    gap: 10px
     padding: 10px 0px
 
     @include media-breakpoint-down(sm)
@@ -320,7 +326,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       color: $text-d
       font-size: 14px
       margin: 0
-      background-color: rgba(0, 0, 0, 0.07)
       border-radius: 8px
       display: flex
       flex-wrap: wrap
@@ -331,17 +336,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       .chart-display-property-selector__item
         display: inline-block
         line-height: 1.85
-        margin: 0
+        height: 28px
+        margin: 0 6px 6px 0
         padding: 0 15px
         color: rgba(0, 0, 0, 0.5)
         border: solid 1px transparent
+        background-color: rgba(0, 0, 0, 0.07)
         border-radius: 6px
         text-align: center
         font-size: 14px
         overflow: hidden
         white-space: nowrap
         text-overflow: ellipsis
-        flex: 1 1 auto
+
+        @include media-breakpoint-down(sm)
+          margin: 0 5px 5px 0
         
         &::selection
           background: rgba(0, 0, 0, 0)
@@ -353,6 +362,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         &.selected
           color: #000
           border: solid 1px $yellow
+          font-weight: bold
           background-color: #ffffff
 
           &:hover
@@ -360,7 +370,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
   .metrics-selectors
     display: flex
-    flex-wrap: wrap
     flex-wrap: wrap
     padding: 10px 0px
 
@@ -821,7 +830,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
             font-size: 24px
 
 .brand-link
-  display: inline-block
+  display: none
   padding: 7px 1px 7px 36px
   background: $yellow
   color: #000
@@ -838,6 +847,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   line-height: 18px
 
   @media only screen and (min-width: 768px)
+    display: inline-block
     text-indent: 0px
     padding: 7px 12px 7px 36px
 

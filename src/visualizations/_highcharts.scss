@@ -121,13 +121,13 @@ g.highcharts-series,
         // fix the colors that cannot be changed through the API
         &.highcharts-button-normal {
             .highcharts-button-box {
-                stroke: white;            
+                stroke: white;
             }
         }
         &.highcharts-button-hover {
             cursor: pointer;
             .highcharts-button-box {
-                stroke: $yellow;            
+                stroke: $yellow;
             }
         }
         &.highcharts-button-pressed {
@@ -150,7 +150,10 @@ g.highcharts-series,
 .highcharts-input-group {
 
     // position the input group
-    // transform: translate(204px, 11px);
+    // transform: translate(8px, 44px);
+    // @media only screen and (min-width: 768px) {
+    //     transform: translate(0px, 44px);
+    // }
 
     // style the date input fields
     .highcharts-label.highcharts-range-input {
@@ -158,6 +161,7 @@ g.highcharts-series,
             font-family: 'IBM Plex Sans', sans-serif !important;
             font-size: 14px !important;
             fill: #767676 !important;
+            transform: translate(0px, 3px) !important;
         }
     }
 

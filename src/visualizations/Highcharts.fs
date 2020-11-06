@@ -198,7 +198,8 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 enabled = true
                 allButtonsEnabled = true
                 selected = selectedRangeSelectionButtonIndex
-                // inputPosition = {| align = "left"; x=0; y=0 |}
+                inputPosition = {| align = "left"; x = 204; y = -34 |}
+                inputBoxHeight = 19
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 inputDateParser = parseDate
@@ -207,12 +208,12 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                         r = 6
                         width = 50
                         height = 20
-                        fill="#ededed"
+                        fill = "#ededed"
                         style = {| cursor="pointer"; fill="#767676"; fontSize="14px"; fontFamily="'IBM Plex Sans', sans-serif" |}
                         states = pojo
                             {|
-                                hover = pojo {| fill="white"; style={| color="black" |} |}
-                                select = pojo {| fill="white"; style={| color="black" |} |}
+                                hover = pojo {| fill = "white"; style = {| color="black"; fontWeight="bold" |} |}
+                                select = pojo {| fill = "white"; style = {| color="black"; fontWeight="bold" |} |}
                             |}
                     |}
                 buttons = buttons
@@ -398,6 +399,7 @@ let basicChartOptions
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
+                                rangeSelector = {| inputPosition = {| align = "left"; x = 0; y = 0 |} |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]
