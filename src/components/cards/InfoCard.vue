@@ -226,8 +226,8 @@ export default {
     },
     sparklineData() {
       return this.sparkline === 'cases.confirmedToday' || this.sparkline === 'cases.active'
-        ? this.lastData1(0, 14, this.sparkline)
-        : this.lastData(0, 14, this.sparkline)
+        ? this.lastData1(0, 30, this.sparkline)
+        : this.lastData(0, 30, this.sparkline)
     }
   },
   methods: {
@@ -405,7 +405,7 @@ export default {
 .data-time {
   font-size: 12px;
   color: #a0a0a0;
-  margin-top: 10px;
+  margin: 10px 5px 0 0;
 }
 
 .sparkline {
