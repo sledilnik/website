@@ -21,6 +21,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "CarePatients" -> Some CarePatients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -28,6 +29,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Weekly" -> Some Sources
+            | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
             | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
@@ -268,7 +270,14 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "patients-chart"
             ChartTextsGroup = "patients"
             Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+
+    let patientsCare =
+          { VisualizationType = CarePatients
+            ClassName = "care-patients-chart"
+            ChartTextsGroup = "carePatients"
+            Explicit = false
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
     let ratios =
           { VisualizationType = Ratios
@@ -349,6 +358,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
+    let hcCases =
+          { VisualizationType = HcCases
+            ClassName = "hc-cases-chart"
+            ChartTextsGroup = "hcCases"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
+
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-cases-chart"
@@ -415,11 +437,12 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients
+        [ hospitals; metricsComparison; dailyComparison; patients; patientsCare
           regions100k; map; municipalities
-          europeMap; ageGroupsTimeline; tests; sources
-          cases; ageGroups; regionMap; regionsAbs
-          phaseDiagram
+          ageGroupsTimeline; tests; ageGroups; hcCases; 
+          europeMap; sources
+          cases; regionMap; regionsAbs
+          phaseDiagram; spread; 
           hCenters; infections
         ]
 
@@ -434,8 +457,8 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; sources
+          cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
+          regions100k; hcCases; sources
           countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
           phaseDiagram
         ]

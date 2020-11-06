@@ -32,6 +32,9 @@ let optionToInt (value: int option) =
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
+[<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
+let nativeParseFloat (input : string) : float option = jsNative
+
 let parseDate (str : string) =
     try
         DateTime.Parse(str) |> Ok
@@ -150,6 +153,14 @@ let renderLoading =
 
 let renderErrorLoading (error : string) =
     Html.text error
+
+let renderMaybeVisible (visible: bool) (children: ReactElement seq) =
+    Html.div [
+        prop.className (match visible with
+                        | true -> ""
+                        | false -> "invisible" )
+        prop.children children
+    ]
 
 let monthNameOfDate (date : DateTime) =
     match date.Month with

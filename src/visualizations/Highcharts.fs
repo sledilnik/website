@@ -35,6 +35,11 @@ module Helpers =
 
     let jsNoon : JsTimestamp = 43200000.0
     let jsTime12h = jsTime >> ( + ) jsNoon
+    [<Emit("(new Date($0.getFullYear(), $0.getMonth(), $0.getDate())).getTime()")>]
+    let jsTimeMidnight (x: DateTime): JsTimestamp = jsNative
+
+    /// Given two dates it calculates the middle point between the midnight for the first date and end of day for the second date
+    let jsDatesMiddle (a: DateTime) (b: DateTime): JsTimestamp = ( + ) (0.5 * jsTimeMidnight a) (0.5 * jsTimeMidnight b) + 43200000.0
 
 type DashStyle =
     | Solid
@@ -133,6 +138,7 @@ let addContainmentMeasuresFlags
         16,10, "#FFe6e6", "regions"
         19,10, "#FFe6e6", "schools6+"
         20,10, "#FFe6e6", "movement"
+        24,10, "#FFe6e6", "restaurants"
         27,10, "#FFe6e6", "municipality2"
     |]
     {|
@@ -266,6 +272,7 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -319,9 +326,14 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.10.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,10,19);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,10,26);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.11.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,26);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.12.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

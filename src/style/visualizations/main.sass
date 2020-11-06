@@ -10,6 +10,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   @media only screen and (min-width: 1300px)
     @content
 
+.invisible
+  visibility: hidden
+  pointer-events: none
+  
 .visualizations
   $gap: $grid-gutter-width
   $font-size: 12px
@@ -291,7 +295,6 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       text-decoration: underline
       text-decoration-color: $yellow
 
-
   .filters
     display: flex
     flex-wrap: wrap
@@ -405,7 +408,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .spread-chart
     min-height: 604px
 
-  .daily-comparison-chart, .patients-chart, .age-groups-trends-chart,
+  .daily-comparison-chart, .patients-chart, .care-patients-chart, .age-groups-trends-chart,
   .tests-chart, .infections-chart, .metrics-comparison-chart
     min-height: 640px
 
@@ -418,6 +421,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
   .countries-active-chart, .countries-cases-chart, .countries-deaths-chart
     min-height: 703px
 
+  .hc-cases-chart
+    min-height: 626px
+    
   .sources-chart
     min-height: 610px
 
@@ -431,8 +437,8 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       border-color: $gray-600
       background-color: $gray-600
 
-  .patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart,
-  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart, .sources-chart
+  .patients-chart, .care-patients-chart, .age-groups-chart, .hospitals-chart, .countries-cases-chart,
+  .countries-active-chart, .countries-deaths-chart, .daily-comparison-chart, .sources-chart, .hc-cases-chart
 
     .metric-selector
       background-color: white
@@ -487,7 +493,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       position: relative
       height: 100px
       max-width: 300px
-    
+
   .hcenters-chart
     min-height: 655px
 
@@ -507,6 +513,9 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         padding: 7px 12px
         border-radius: 4px
         background-color: $yellow
+
+      @media only screen and (max-width: 767px)
+        padding: 0 1rem
 
   .municipalities-chart
     min-height: 897px

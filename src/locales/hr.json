@@ -362,7 +362,7 @@
             "absolute": "Apsolutno",
             "deceased": "Smrtni slučajevi",
             "yesterday": "Jučer",
-            "relativeIncrease": "Tjedni prirast",
+            "relativeIncrease": "Tjedni rast",
             "titleMenu": "Općine – karta"
         },
         "countriesNewCasesPer1M": {
@@ -416,7 +416,8 @@
             "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
             "title": "Hospitalizacije",
-            "titleMenu": "Hospitalizacije"
+            "titleMenu": "Hospitalizacije",
+            "care": "Na njezi"
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
@@ -528,7 +529,8 @@
             "hcStaff": "Zdravstveni radnici",
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
-            "titleMenu": "Slučajevi – struktura"
+            "titleMenu": "Slučajevi – struktura",
+            "disclaimer": "Napomena: ovaj dijagram nije aktualan. NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zaposlenicima u zdravstvu."
         },
         "hCenters": {
             "testsPositive": "Testovi (pozitivni*)",
@@ -539,7 +541,8 @@
             "suspectedCovidPhone": "Sumnja na COVID-19 (telefon)",
             "testsPerformed": "Testovi (provedeni)",
             "allRegions": "Sve regije",
-            "titleMenu": "Dom zdravlja – liječenje"
+            "titleMenu": "Dom zdravlja – liječenje",
+            "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
         },
         "regions": {
             "title": "Slučajevi po regijama",
@@ -571,7 +574,8 @@
             "title": "COVID-19 situacija u Europi",
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka",
-            "titleMenu": "Europa – stanje"
+            "titleMenu": "Europa – stanje",
+            "weeklyIncrease": "Tjedni rast"
         },
         "world": {
             "title": "COVID-19 stanje u svijetu",
@@ -628,7 +632,8 @@
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Izvori zaraze i karantena",
-            "titleMenu": "Izvori zaraze"
+            "titleMenu": "Izvori zaraze",
+            "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke."
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -686,6 +691,31 @@
             "activeCases": "Aktivni slučajevi",
             "title": "Slučajevi po regijama (na 100.000 stanovnika)",
             "titleMenu": "Regija – usporedba"
+        },
+        "phaseDiagram": {
+            "totalVsWeek": {
+                "xAxisLabel": "Ukupno",
+                "yAxisLabel": "7-dnevni slučajevi",
+                "yAxisTitle": "7-dnevni slučajevi",
+                "xAxisTitle": "Ukupno",
+                "name": "Ukupno u odnosu na tjedan"
+            },
+            "weekVsWeekBefore": {
+                "yAxisLabel": "Razlika u broju slučajeva",
+                "xAxisLabel": "7-dnevni slučajevi",
+                "yAxisTitle": "Razlika u broju slučajeva (%)",
+                "xAxisTitle": "7-dnevni slučajevi",
+                "name": "Razlika u broju slučajeva"
+            },
+            "deceased": "Smrtni slučajevi",
+            "hospitalized": "Hospitalizirani",
+            "cases": "Potvrđeni slučajevi",
+            "titleMenu": "Dijagram faza",
+            "title": "Dijagram faza"
+        },
+        "carePatients": {
+            "titleMenu": "Bolnice za njegu",
+            "title": "Bolnice za njegu"
         }
     },
     "shortMonth": {
@@ -846,6 +876,10 @@
         "municipality2": {
             "description": "Zabrana kretanja izvan granica općine",
             "title": "Općine"
+        },
+        "restaurants": {
+            "description": "Zatvaranje restorana, hotela, trgovačkih centara, frizerskih i kozmetičkih salona.<br>Zatvaranje studentskih domova, smanjen javni prijevoz.",
+            "title": "Restorani"
         }
     },
     "pageNotFound": {
@@ -928,7 +962,7 @@
             "title": "faza<br>9"
         },
         "8": {
-            "description": "nova metodologija ispitivanja – djeca",
+            "description": "nova metoda ispitivanja – djeca",
             "title": "faza<br>8"
         },
         "10": {
@@ -938,6 +972,10 @@
         "11": {
             "description": "epidemija",
             "title": "faza<br>11"
+        },
+        "12": {
+            "description": "nova metoda testiranja",
+            "title": "faza<br>12"
         }
     },
     "embedMaker": {
@@ -1072,9 +1110,13 @@
         "news002": "Potvrđeni slučajevi po dobnim skupinama",
         "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
         "newPage": "🆕 Nova stranica:",
-        "weeklyIncrease": "Tjedni prirast na kartama općina i regija Slovenije",
+        "weeklyIncrease": "Tjedni rast na kartama općina i regija Slovenije",
         "progressC19": "Tipičan napredak bolesti COVID-19. Hospitalizacija, intenzivna terapija i smrtnost.",
-        "newInfographics": "🆕 📇 Nove infografike:"
+        "newInfographics": "🆕 📇 Nove infografike:",
+        "tests": "Pet mitova o testiranjima …",
+        "weKnowWeDoNotKnow": "Znamo, da podaci ponekad lažu. Kako znamo, da (ne) znamo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
+        "checked": "🆕 Provjereno:",
+        "newMedium": "🆕 📝 Nova Medium objava:"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",

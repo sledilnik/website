@@ -36,6 +36,10 @@
         "newInfographics": "🆕 📇 Nova infografika:",
         "newChart": "🆕 📊 Nov graf:",
         "newPage": "🆕 Nova stran:",
+        "newMedium": "🆕 📝 Nova Medium objava:",
+        "checked": "🆕 Preverjeno:",
+        "weKnowWeDoNotKnow": "Vemo, da podatki včasih lažejo. Kako vemo, da (ne) vemo? \ud83e\udd14\ud83d\udcc9\ud83e\uddd0\ud83d\udcc8\ud83e\udd37\u200d\u2642\ufe0f\ud83e\udd37\u200d\u2640\ufe0f",
+        "tests": "5 mitov o testih...",
         "progressC19": "Običajen potek bolezni Covid-19. Hospitalizacije, intenzivna terapija in smrtnost.",
         "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
         "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
@@ -569,6 +573,10 @@
             "title": "🚫21-6h",
             "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
         },
+        "restaurants": {
+            "title": "Gostilne",
+            "description": "Zaprtje gostinskih lokalov, hotelov, trgovskih centrov, frizerski in kozmetični saloni.<br>Zaprti dijaški in študentski domovi, zmanjšan javni prevoz."
+        },
         "municipality2": {
             "title": "Občine",
             "description": "Prepoved gibanja izven meja občin"
@@ -617,6 +625,10 @@
         "11": {
             "title": "faza<br>11",
             "description": "epidemija"
+        },
+        "12": {
+            "title": "faza<br>12",
+            "description": "nov režim testiranja"
         }
     },
     "charts": {
@@ -713,6 +725,7 @@
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
+            "care": "V oskrbi",
             "admitted": "Sprejeti",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni enoti",
@@ -720,6 +733,10 @@
             "discharged": "Odpuščeni",
             "deceased": "Umrli",
             "structure": "Struktura"
+        },
+        "carePatients": {
+            "title": "Negovalne bolnišnice",
+            "titleMenu": "Negovalne bolnišnice"
         },
         "ratios": {
             "title": "Delež resnih primerov",
@@ -828,6 +845,16 @@
             "all": "Vse",
             "max": "Max",
             "data": "Podatki"
+        },
+        "hcCases": {
+            "title": "Potrjeni primeri med zdravstvenimi delavci",
+            "titleMenu": "Zdravstveni delavci - primeri",
+            "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
+            "confirmedCases": "Potrjeni primeri",
+            "healthcareEmployeesCases": "Potrjeni zdravstveni delavci",
+            "healthcareEmployees": "Zdravstveni delavci",
+            "healthcareEmployeesRelative": "Zdravstveni delavci (relativno)",
+            "totalConfirmed": "Skupaj potrjeni"
         },
         "regions": {
             "title": "Primeri po regijah",
@@ -1026,6 +1053,8 @@
         "sources": {
             "title": "Viri okužb in karantena",
             "titleMenu": "Viri okužb",
+            "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato so uvoženi primeri lahko manjši kot dejansko.",
+            "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",

@@ -3,11 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="https://medium.com/sledilnik/kaksen-je-obicajni-potek-covid-19-a707f8322b5c"
+      href="https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c"
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.newInfographics") }}</b> <span>{{ $t("notice.progressC19") }}</span>
+          <b>{{ $t("notice.newMedium") }}</b> <span><b>{{ $t("notice.weKnowWeDoNotKnow") }}</b></span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

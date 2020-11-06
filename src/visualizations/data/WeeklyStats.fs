@@ -39,6 +39,8 @@ type private TransferWStatsDataPoint =
                 day : int
             |}
         confirmed : int option
+        investigated : int option
+        healthcare : int option
         sentTo :
               {|
                   quarantine : int option
@@ -53,6 +55,8 @@ type private TransferWStatsDataPoint =
           Date = System.DateTime(this.year, this.month, this.day)
           DateTo = System.DateTime(this.``to``.year, this.``to``.month, this.``to``.day)
           ConfirmedCases = this.confirmed
+          InvestigatedCases = this.investigated
+          HealthcareCases = this.healthcare
           SentToQuarantine = this.sentTo.quarantine
           Source = this.source.ToDomain
           ImportedFrom = this.from |> mapKeysToUpperCase

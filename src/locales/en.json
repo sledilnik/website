@@ -37,6 +37,10 @@
         "newInfographics": "🆕 📇 New infographics:",
         "newChart": "🆕 📊 New chart:",
         "newPage": "🆕 New page:",
+        "newMedium": "🆕 📝 New Medium post:",
+        "checked": "🆕 Checked:",
+        "weKnowWeDoNotKnow": "We know that data sometimes lies. How do we know, that we do (not) know? \ud83e\udd14\ud83d\udcc9\ud83e\uddd0\ud83d\udcc8\ud83e\udd37\u200d\u2642\ufe0f\ud83e\udd37\u200d\u2640\ufe0f",
+        "tests": "5 myths about tests ...",
         "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
         "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
@@ -169,7 +173,12 @@
         "11": {
             "title": "phase<br>11",
             "description": "epidemic"
+        },
+        "12": {
+            "title": "phase<br>12",
+            "description": "new testing methodology"
         }
+
     },
     "charts": {
         "common": {
@@ -263,6 +272,7 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
+            "care": "In Care",
             "admitted": "Admitted",
             "hospitalized": "Hospitalized",
             "icu": "In ICU",
@@ -270,6 +280,10 @@
             "discharged": "Discharged",
             "deceased": "Died",
             "allHospitals": "All Hospitals"
+        },
+        "carePatients": {
+            "title": "Care Hospitals",
+            "titleMenu": "Care Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",
@@ -300,6 +314,16 @@
             "testsPerformed": "Tests (performed)",
             "testsPositive": "Tests (positive*)",
             "allRegions": "All regions"
+        },
+        "hcCases": {
+            "title": "Confirmed Cases among Health Care Employees",
+            "titleMenu": "HC Employees - cases",
+            "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
+            "confirmedCases": "Confirmed Cases",
+            "healthcareEmployeesCases": "Confirmed Health Care Employees",
+            "healthcareEmployees": "Health Care Employees",
+            "healthcareEmployeesRelative": "Health Care Employees (Relative)",
+            "totalConfirmed": "Confirmed Cases Total"
         },
         "tests": {
             "title": "Testing",
@@ -584,6 +608,8 @@
         "sources": {
             "title": "Sources of Infection and Quarantine",
             "titleMenu": "Sources of Infection",
+            "disclaimerGeneral": "Note: data for last week are not complete yet - share of imported cases may be smaller than actual.",
+            "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -798,6 +824,10 @@
         "movement": {
             "title": "🚫21-6h",
             "description": "Movement restricted between 21:00-6:00. Movement restricted to own region.<br>Gathering up to 10 people. Restriction of all events."
+        },
+        "restaurants": {
+            "title": "Restaurants",
+            "description": "Closure of restaurants, hotels, shopping centers, hair and beauty shops.<br>Closure of student homes, reduced public transportation."
         },
         "municipality2": {
             "title": "Municipalities",
