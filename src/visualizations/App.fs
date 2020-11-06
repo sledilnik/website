@@ -399,7 +399,6 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    printf "state: %A" state
                     match state.StatsData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
