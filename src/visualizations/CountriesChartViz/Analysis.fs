@@ -122,48 +122,48 @@ let SloveniaPopulationInM =
     / 1000000.
 
 let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
-        : DataPoint =
+        : DataPoint option =
     let domesticDataForDate =
         statsData
         |> List.tryFind(fun dataForDate -> dataForDate.Date = date)
 
     match domesticDataForDate with
     | Some domesticDataForDate ->
-        let newCases =
-            domesticDataForDate.Cases.ConfirmedToday
-            |> Utils.optionToInt
-        let newCasesPerMillion =
-            (float newCases) / SloveniaPopulationInM |> Some
-        let totalCases =
-            domesticDataForDate.Cases.ConfirmedToDate
-            |> Utils.optionToInt
-        let totalCasesPerMillion =
-            (float totalCases) / SloveniaPopulationInM |> Some
-        let totalDeaths =
-            domesticDataForDate.StatePerTreatment.DeceasedToDate
-            |> Utils.optionToInt
-        let totalDeathsPerMillion =
-            (float totalDeaths) / SloveniaPopulationInM |> Some
+        match
+            domesticDataForDate.Cases.ConfirmedToday,
+            domesticDataForDate.Cases.ConfirmedToDate,
+            domesticDataForDate.StatePerTreatment.DeceasedToDate with
+        | Some newCases, Some totalCases, Some totalDeaths ->
+            let newCasesPerMillion =
+                (float newCases) / SloveniaPopulationInM |> Some
 
-        {
-            CountryCode = "SVN"; Date = date
-            NewCases = newCases; NewCasesPerMillion = newCasesPerMillion
-            TotalCases = totalCases; TotalCasesPerMillion = totalCasesPerMillion
-            TotalDeaths = totalDeaths; TotalDeathsPerMillion = totalDeathsPerMillion
-        }
-    | None ->
-        {
-            CountryCode = "SVN"; Date = date
-            NewCases = 0; NewCasesPerMillion = None
-            TotalCases = 0; TotalCasesPerMillion = None
-            TotalDeaths = 0; TotalDeathsPerMillion = None
-        }
+            let totalCasesPerMillion =
+                (float totalCases) / SloveniaPopulationInM |> Some
+
+            let totalDeathsPerMillion =
+                (float totalDeaths) / SloveniaPopulationInM |> Some
+
+            printf "%A new=%d" date newCases
+
+            {
+                CountryCode = "SVN"; Date = date
+                NewCases = newCases
+                NewCasesPerMillion = newCasesPerMillion
+                TotalCases = totalCases
+                TotalCasesPerMillion = totalCasesPerMillion
+                TotalDeaths = totalDeaths
+                TotalDeathsPerMillion = totalDeathsPerMillion
+            } |> Some
+        | _, _, _ -> None
+    | None -> None
 
 let updateWithSloveniaDomesticData
-        (statsData: StatsData) (countryData: DataPoint): DataPoint =
+        (statsData: StatsData) (countryData: DataPoint): DataPoint option =
     match countryData.CountryCode with
-    | "SVN" -> countryData.Date |> buildFromSloveniaDomesticData statsData
-    | _ -> countryData
+    | "SVN" ->
+        printf "OWID %A new=%A" countryData.Date countryData.NewCases
+        countryData.Date |> buildFromSloveniaDomesticData statsData
+    | _ -> Some countryData
 
 let aggregateOurWorldInData
     daysOfMovingAverage
@@ -177,7 +177,7 @@ let aggregateOurWorldInData
         | Success dataPoints ->
             let dataPointsWithLocalSloveniaData =
                 dataPoints
-                |> List.map (updateWithSloveniaDomesticData statsData)
+                |> List.choose (updateWithSloveniaDomesticData statsData)
 
             let groupedByCountries: CountriesData =
                 dataPointsWithLocalSloveniaData
