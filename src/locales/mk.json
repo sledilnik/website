@@ -30,7 +30,8 @@
         "tables": "Табела",
         "home": "Дома",
         "world": "Свет",
-        "menu": "Мени"
+        "menu": "Мени",
+        "goToGraph": "Оди на графиконот"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
@@ -44,7 +45,9 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, %A, %e. %b }}"
+        "lastUpdated": "{{ date, %A, %e. %b }}",
+        "incidence": "14-дневна инциденца",
+        "per100k": "на 100 илјади"
     },
     "cm": {
         "publicTransport": {
@@ -505,7 +508,20 @@
             "dischargedToDate": "Отпуштени од болница (сите)",
             "discharged": "Отпуштени од болница (на ден)",
             "title_MNE": "Ситуацијата со КОВИД-19 во Црна Гора",
-            "titleMenu_MKD": "Македонија - состојба"
+            "titleMenu_MKD": "Македонија - состојба",
+            "ventilatorDischarged": "Ослободени од респиратор",
+            "ventilatorAdmitted": "Поврзани на респоратот",
+            "icuDischarged": "Отпуштени од интензивна нега",
+            "icuAdmitted": "Примени на интензивна нега",
+            "hospitalDischarged": "Отпуштени од болници",
+            "hospitalAdmitted": "Примени во болници",
+            "activeCases": "Активни случаи",
+            "confirmedCases": "Потврдени случаи",
+            "testsPerformed": "Тестови",
+            "show7DaysAverage": "7-дневен просек",
+            "showToDate": "До денес",
+            "showToday": "Дневно",
+            "showActive": "Активни"
         },
         "common": {
             "twitter": "Twitter",
@@ -539,7 +555,8 @@
             "dsNIJZ": "ИЈЗ",
             "dsMZ": "Министерство за Здравје",
             "dsOWD": "Our World in Data",
-            "sortBy": "Прикажи според:"
+            "sortBy": "Прикажи според:",
+            "dataDate": "До: {{ date, %a., %e. %b. }}"
         },
         "municipalities": {
             "yesterday": "вчера",
@@ -663,7 +680,9 @@
             "populationShare": "Удел на населението",
             "title": "Регионални центри на јавно здравје",
             "yesterday": "Вчера",
-            "titleMenu": "Општини - карта"
+            "titleMenu": "Општини - карта",
+            "per100k": "на 100 илјади",
+            "relativeIncrease": "Неделна раст"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -760,7 +779,8 @@
             "twoWeekIncidence": "14 дневна инциденца на 100.000 жители",
             "noData": "Нема податоци",
             "newCases": "Нови случаи",
-            "titleMenu": "Европа - ситуација"
+            "titleMenu": "Европа - ситуација",
+            "weeklyIncrease": "Неделна раст"
         },
         "ageGroupsTimeline": {
             "title": "Потврдени случаи по старосни групи",
@@ -802,7 +822,8 @@
             "active": "Активни случаи",
             "new": "Потврдени случаи",
             "title": "Споредба според ден на неделата",
-            "titleMenu": "Ден во неделата - споредба"
+            "titleMenu": "Ден во неделата - споредба",
+            "deceased": "Починати"
         },
         "regions100k": {
             "titleMenu": "Регии - споредба"
