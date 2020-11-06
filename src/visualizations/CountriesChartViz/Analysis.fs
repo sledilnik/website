@@ -115,7 +115,11 @@ type OwidDataState =
     | PreviousAndLoadingNew of OurWorldInDataRemoteData
     | Current of OurWorldInDataRemoteData
 
-let SloveniaPopulation = 2.084301
+let SloveniaPopulationInM =
+    (Utils.Dictionaries.regions.["si"].Population
+    |> Utils.optionToInt
+    |> float)
+    / 1000000.
 
 let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
         : DataPoint =
@@ -125,17 +129,21 @@ let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
 
     match domesticDataForDate with
     | Some domesticDataForDate ->
-        let newCases = domesticDataForDate.Cases.ConfirmedToday
-                       |> Utils.optionToInt
-        let newCasesPerMillion = (float newCases) / SloveniaPopulation |> Some
-        let totalCases = domesticDataForDate.Cases.ConfirmedToDate
-                         |> Utils.optionToInt
-        let totalCasesPerMillion = (float totalCases) / SloveniaPopulation
-                                   |> Some
-        let totalDeaths = domesticDataForDate.StatePerTreatment.DeceasedToDate
-                          |> Utils.optionToInt
-        let totalDeathsPerMillion = (float totalDeaths) / SloveniaPopulation
-                                    |> Some
+        let newCases =
+            domesticDataForDate.Cases.ConfirmedToday
+            |> Utils.optionToInt
+        let newCasesPerMillion =
+            (float newCases) / SloveniaPopulationInM |> Some
+        let totalCases =
+            domesticDataForDate.Cases.ConfirmedToDate
+            |> Utils.optionToInt
+        let totalCasesPerMillion =
+            (float totalCases) / SloveniaPopulationInM |> Some
+        let totalDeaths =
+            domesticDataForDate.StatePerTreatment.DeceasedToDate
+            |> Utils.optionToInt
+        let totalDeathsPerMillion =
+            (float totalDeaths) / SloveniaPopulationInM |> Some
 
         {
             CountryCode = "SVN"; Date = date
