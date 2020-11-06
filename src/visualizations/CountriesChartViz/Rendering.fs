@@ -234,7 +234,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 text =
                     sprintf "%s: %s"
                         (t "charts.common.dataSource")
-                        (t "charts.common.dsOWD")
+                        (t "charts.common.dsOWD_NIJZ")
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}

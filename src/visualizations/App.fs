@@ -62,7 +62,9 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
                   Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
         | "world" ->
-            Cmd.ofMsg WeeklyStatsDataRequested
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested ]
         | _ ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -397,6 +399,7 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
+                    printf "state: %A" state
                     match state.StatsData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
