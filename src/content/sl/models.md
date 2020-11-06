@@ -14,11 +14,13 @@ Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta ob
 Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
 
 ## <a id="seir"></a>Interaktivni SEIR model
-V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji.
+V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji. 
 
-Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
+Vsakodnevne projekcije modela se izračunavajo ob 13.00 in 17.00. Bolj podroben prikaz projekcij je na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
 
-Dodatno je narejen še [model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih Sledilnika](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
+Dodatne projekcije so narejene še [na spletni strani](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/), kjer se izvajajo simulacije na deterministični in stohastični verziji SEIR modela in se rezultati združujejo skupaj. 
+
+Pri interpretaciji rezultatov je potrebno upoštevati omejitve takšnih modelov. 
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
