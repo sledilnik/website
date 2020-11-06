@@ -108,6 +108,7 @@ footer
 
     img
       width: 40px
+      opacity: .25
 
       @media only screen and (min-width: 768px)
         width: 32px
