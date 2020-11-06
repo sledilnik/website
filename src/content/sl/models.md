@@ -8,8 +8,10 @@ ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](https://
 - [Model prenosa virusa po socialnem omrežju prebivalcev Slovenije](#social_network)
 - [Drugi modeli za Slovenijo](#other)
 
+Za osnovno razumevanje modelov o epidemiji priporočamo članek [Epidemija in modeli... - Osnove epidemiološkega modeliranja](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a).
+
 Modeli v veliki meri upoštevajo doslej znane informacije o bolezni COVID-19 in njenem širjenju v Sloveniji, a kljub temu **ne ponujajo natančnih napovedi** za prihodnji potek epidemije, **zato je potrebno skrbno prebrati vse predpostavke modela**.
-Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti.
+Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti. Zaradi sprememb v metodologiji testiranja pa se lahko predpostavke tudi popolnoma spremenijo - več lahko preberete v članku [Kako vemo, da ne vemo?](https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c)
 
 Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
 
