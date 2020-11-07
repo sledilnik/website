@@ -190,6 +190,8 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsOWD": "Our World in Data",
+            "dsOWD_NIJZ": "Our World in Data & NIJZ",
+            "dsOWD_MZ": "Our World in Data & Min. Health",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
@@ -490,13 +492,13 @@
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Daily Cases Per 100,000 People",
+            "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
             "legendTitle": "New daily cases per 100,000 people"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Countries: Total Deaths Per 100,000 People",
+            "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
             "legendTitle": "Total deaths per 100,000 people"

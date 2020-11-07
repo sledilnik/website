@@ -17,7 +17,7 @@ open I18N
 
 type Msg =
     | DataRequested
-    | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
+    | DataLoaded of OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
     | ScaleTypeChanged of ScaleType
 
@@ -28,10 +28,12 @@ let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
     let metric = config.MetricToDisplay
     let state = {
         OwidDataState = NotLoaded
+        StatsData = config.StatsData
         DisplayedCountriesSet = (countriesDisplaySets metric).[0]
         MetricToDisplay = metric
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
+        DataSource = config.DataSource
     }
     state, Cmd.ofMsg DataRequested
 
@@ -233,7 +235,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 text =
                     sprintf "%s: %s"
                         (t "charts.common.dataSource")
-                        (t "charts.common.dsOWD")
+                        (t ("charts.common." + state.DataSource))
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}

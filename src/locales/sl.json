@@ -641,6 +641,8 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsOWD": "Our World in Data",
+            "dsOWD_NIJZ": "Our World in Data, NIJZ",
+            "dsOWD_MZ": "Our World in Data, Min. za zdravje",
             "loading": "Nalagam podatke…",
             "from": " ",
             "to": "-",
@@ -972,13 +974,13 @@
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na 100.000 prebivalcev",
+            "title": "Države: novi primeri na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – novi primeri",
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
+            "title": "Države: umrli (skupaj) na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – umrli",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"

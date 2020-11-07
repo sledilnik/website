@@ -13,11 +13,11 @@ type CountryIsoCode = string
 type DataPoint = {
     CountryCode : CountryIsoCode
     Date : DateTime
-    NewCases : int
+    NewCases : int option
     NewCasesPerMillion : float option
-    TotalCases : int
+    TotalCases : int option
     TotalCasesPerMillion : float option
-    TotalDeaths : int
+    TotalDeaths : int option
     TotalDeathsPerMillion : float option
 }
 
@@ -45,7 +45,7 @@ type Query =
 
 type OurWorldInDataRemoteData = RemoteData<DataPoint list, string>
 
-let parseInt = Utils.nativeParseInt >> Utils.optionToInt
+let parseInt = Utils.nativeParseInt
 
 let parseFloat = Utils.nativeParseFloat
 

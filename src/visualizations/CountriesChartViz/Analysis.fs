@@ -26,24 +26,30 @@ let groupEntriesByCountries
     (metricToDisplay: MetricToDisplay) (entries: DataPoint list)
     : CountriesData =
 
-    let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
-        let valueToUse =
-            match metricToDisplay with
-            | NewCasesPer1M ->
-                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
-            | ActiveCasesPer1M ->
-                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
-            | TotalDeathsPer1M ->
-                (entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.) / 10.
-            | DeathsPerCases ->
-                if entryRaw.TotalCases > 0 then
-                    (float entryRaw.TotalDeaths) * 100.0
-                        / (float entryRaw.TotalCases)
+    let transformFromRawOwid (entryRaw: DataPoint)
+            : CountryDataDayEntry option =
+        match metricToDisplay with
+        | NewCasesPer1M ->
+            match entryRaw.NewCasesPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | ActiveCasesPer1M ->
+            match entryRaw.NewCasesPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | TotalDeathsPer1M ->
+            match entryRaw.TotalDeathsPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | DeathsPerCases ->
+            match entryRaw.TotalDeaths, entryRaw.TotalCases with
+            | Some totalDeaths, Some totalCases ->
+                if totalCases > 0 then
+                    let value = (float totalDeaths) * 100.0 / (float totalCases)
+                    Some { Date = entryRaw.Date; Value = value }
                 else
-                    0.
-
-
-        { Date = entryRaw.Date; Value = valueToUse }
+                    None
+            | _ -> None
 
     let groupedRaw =
         entries |> Seq.groupBy (fun entry -> entry.CountryCode)
@@ -52,7 +58,7 @@ let groupEntriesByCountries
     |> Seq.map (fun (isoCode, countryEntriesRaw) ->
         let countryEntries =
             countryEntriesRaw
-            |> Seq.map transformFromRawOwid
+            |> Seq.choose transformFromRawOwid
             |> Seq.toArray
 
         (isoCode, { IsoCode = isoCode; Entries = countryEntries } )
@@ -115,17 +121,70 @@ type OwidDataState =
     | PreviousAndLoadingNew of OurWorldInDataRemoteData
     | Current of OurWorldInDataRemoteData
 
+let SloveniaPopulationInM =
+    (Utils.Dictionaries.regions.["si"].Population
+    |> Utils.optionToInt
+    |> float)
+    / 1000000.
+
+let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
+        : DataPoint option =
+    let domesticDataForDate =
+        statsData
+        |> List.tryFind(fun dataForDate -> dataForDate.Date = date)
+
+    let extractMetricIfPresent (metricValue: int option)
+            : (int option * float option) =
+        match metricValue with
+        | Some value ->
+            (Some value, (float value) / SloveniaPopulationInM |> Some)
+        | None -> (None, None)
+
+    match domesticDataForDate with
+    | Some domesticDataForDate ->
+        let newCases, newCasesPerM =
+            extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToday
+        let totalCases, totalCasesPerM =
+            extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToDate
+        let totalDeaths, totalDeathsPerM =
+            extractMetricIfPresent
+                domesticDataForDate.StatePerTreatment.DeceasedToDate
+
+        {
+            CountryCode = "SVN"; Date = date
+            NewCases = newCases
+            NewCasesPerMillion = newCasesPerM
+            TotalCases = totalCases
+            TotalCasesPerMillion = totalCasesPerM
+            TotalDeaths = totalDeaths
+            TotalDeathsPerMillion = totalDeathsPerM
+        } |> Some
+    | None -> None
+
+let updateWithSloveniaDomesticData
+        (statsData: StatsData) (countryData: DataPoint): DataPoint option =
+    match countryData.CountryCode with
+    | "SVN" ->
+        countryData.Date |> buildFromSloveniaDomesticData statsData
+    | _ -> Some countryData
+
 let aggregateOurWorldInData
     daysOfMovingAverage
     (metricToDisplay: MetricToDisplay)
     (owidDataState: OwidDataState)
+    (statsData: StatsData)
     : CountriesData option =
 
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with
         | Success dataPoints ->
+            let dataPointsWithLocalSloveniaData =
+                dataPoints
+                |> List.choose (updateWithSloveniaDomesticData statsData)
+
             let groupedByCountries: CountriesData =
-                dataPoints |> (groupEntriesByCountries metricToDisplay)
+                dataPointsWithLocalSloveniaData
+                |> (groupEntriesByCountries metricToDisplay)
 
             let averagedAndFilteredByCountries: CountriesData  =
                 groupedByCountries
