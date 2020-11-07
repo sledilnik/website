@@ -143,12 +143,9 @@ let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
             let totalDeathsPerMillion =
                 (float totalDeaths) / SloveniaPopulationInM |> Some
 
-            printf "%A new=%d" date newCases
-
             {
                 CountryCode = "SVN"; Date = date
-                NewCases = newCases
-                NewCasesPerMillion = newCasesPerMillion
+                NewCases = newCases; NewCasesPerMillion = newCasesPerMillion
                 TotalCases = totalCases
                 TotalCasesPerMillion = totalCasesPerMillion
                 TotalDeaths = totalDeaths
@@ -161,7 +158,6 @@ let updateWithSloveniaDomesticData
         (statsData: StatsData) (countryData: DataPoint): DataPoint option =
     match countryData.CountryCode with
     | "SVN" ->
-        printf "OWID %A new=%A" countryData.Date countryData.NewCases
         countryData.Date |> buildFromSloveniaDomesticData statsData
     | _ -> Some countryData
 
