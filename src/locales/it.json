@@ -748,7 +748,6 @@
         "countriesTotalDeathsPer1M": {
             "yAxisTitle": "Totale decessi per 100.000 di persone",
             "legendTitle": "Totale decessi per 100.000 di persone",
-            "title": "Paesi: totale decessi per 100.000 di persone",
             "titleMenu": "Paesi - Decessi"
         },
         "infections": {
@@ -787,7 +786,6 @@
         "countriesNewCasesPer1M": {
             "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
             "yAxisTitle": "Nuovi casi giornalieri su 100.000 persone",
-            "title": "Paesi: nuovi casi giornalieri su 100.000 persone",
             "titleMenu": "Paesi - Nuovi casi"
         },
         "ageGroupsTimeline": {

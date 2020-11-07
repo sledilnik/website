@@ -583,13 +583,13 @@
             "titleMenu": "Alter – Anteil"
         },
         "countriesTotalDeathsPer1M": {
-            "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
             "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen",
             "titleMenu": "Länder – Todesfälle"
         },
         "countriesNewCasesPer1M": {
-            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
             "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen",
             "titleMenu": "Länder – Neue Fälle"

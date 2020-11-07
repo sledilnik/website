@@ -26,25 +26,30 @@ let groupEntriesByCountries
     (metricToDisplay: MetricToDisplay) (entries: DataPoint list)
     : CountriesData =
 
-    let transformFromRawOwid (entryRaw: DataPoint): CountryDataDayEntry =
-        let valueToUse =
-            match metricToDisplay with
-            | NewCasesPer1M ->
-                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
-            | ActiveCasesPer1M ->
-                (entryRaw.NewCasesPerMillion |> Option.defaultValue 0.) / 10.
-            | TotalDeathsPer1M ->
-                (entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.) / 10.
-            | DeathsPerCases ->
-                match entryRaw.TotalDeaths, entryRaw.TotalCases with
-                | Some totalDeaths, Some totalCases ->
-                    if totalCases > 0 then
-                        (float totalDeaths) * 100.0 / (float totalCases)
-                    else
-                        0.
-                | _ -> 0.
-
-        { Date = entryRaw.Date; Value = valueToUse }
+    let transformFromRawOwid (entryRaw: DataPoint)
+            : CountryDataDayEntry option =
+        match metricToDisplay with
+        | NewCasesPer1M ->
+            match entryRaw.NewCasesPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | ActiveCasesPer1M ->
+            match entryRaw.NewCasesPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | TotalDeathsPer1M ->
+            match entryRaw.TotalDeathsPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | DeathsPerCases ->
+            match entryRaw.TotalDeaths, entryRaw.TotalCases with
+            | Some totalDeaths, Some totalCases ->
+                if totalCases > 0 then
+                    let value = (float totalDeaths) * 100.0 / (float totalCases)
+                    Some { Date = entryRaw.Date; Value = value }
+                else
+                    None
+            | _ -> None
 
     let groupedRaw =
         entries |> Seq.groupBy (fun entry -> entry.CountryCode)
@@ -53,7 +58,7 @@ let groupEntriesByCountries
     |> Seq.map (fun (isoCode, countryEntriesRaw) ->
         let countryEntries =
             countryEntriesRaw
-            |> Seq.map transformFromRawOwid
+            |> Seq.choose transformFromRawOwid
             |> Seq.toArray
 
         (isoCode, { IsoCode = isoCode; Entries = countryEntries } )
@@ -128,32 +133,32 @@ let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
         statsData
         |> List.tryFind(fun dataForDate -> dataForDate.Date = date)
 
+    let extractMetricIfPresent (metricValue: int option)
+            : (int option * float option) =
+        match metricValue with
+        | Some value ->
+            (Some value, (float value) / SloveniaPopulationInM |> Some)
+        | None -> (None, None)
+
     match domesticDataForDate with
     | Some domesticDataForDate ->
-        match
-            domesticDataForDate.Cases.ConfirmedToday,
-            domesticDataForDate.Cases.ConfirmedToDate,
-            domesticDataForDate.StatePerTreatment.DeceasedToDate with
-        | Some newCases, Some totalCases, Some totalDeaths ->
-            let newCasesPerMillion =
-                (float newCases) / SloveniaPopulationInM |> Some
+        let newCases, newCasesPerM =
+            extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToday
+        let totalCases, totalCasesPerM =
+            extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToDate
+        let totalDeaths, totalDeathsPerM =
+            extractMetricIfPresent
+                domesticDataForDate.StatePerTreatment.DeceasedToDate
 
-            let totalCasesPerMillion =
-                (float totalCases) / SloveniaPopulationInM |> Some
-
-            let totalDeathsPerMillion =
-                (float totalDeaths) / SloveniaPopulationInM |> Some
-
-            {
-                CountryCode = "SVN"; Date = date
-                NewCases = Some newCases
-                NewCasesPerMillion = newCasesPerMillion
-                TotalCases = Some totalCases
-                TotalCasesPerMillion = totalCasesPerMillion
-                TotalDeaths = Some totalDeaths
-                TotalDeathsPerMillion = totalDeathsPerMillion
-            } |> Some
-        | _, _, _ -> None
+        {
+            CountryCode = "SVN"; Date = date
+            NewCases = newCases
+            NewCasesPerMillion = newCasesPerM
+            TotalCases = totalCases
+            TotalCasesPerMillion = totalCasesPerM
+            TotalDeaths = totalDeaths
+            TotalDeathsPerMillion = totalDeathsPerM
+        } |> Some
     | None -> None
 
 let updateWithSloveniaDomesticData
