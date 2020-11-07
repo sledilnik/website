@@ -30,7 +30,8 @@
         "tables": "Табела",
         "home": "Дома",
         "world": "Свет",
-        "menu": "Мени"
+        "menu": "Мени",
+        "goToGraph": "Оди на графиконот"
     },
     "meta": {
         "title": "CoViD-19 Трекер",
@@ -44,7 +45,9 @@
         "active": "Активни случаи",
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
-        "lastUpdated": "{{ date, %A, %e. %b }}"
+        "lastUpdated": "{{ date, %A, %e. %b }}",
+        "incidence": "14-дневна инциденца",
+        "per100k": "на 100 илјади"
     },
     "cm": {
         "publicTransport": {
@@ -504,7 +507,21 @@
             "icu": "На интензивна нега",
             "dischargedToDate": "Отпуштени од болница (сите)",
             "discharged": "Отпуштени од болница (на ден)",
-            "title_MNE": "Ситуацијата со КОВИД-19 во Црна Гора"
+            "title_MNE": "Ситуацијата со КОВИД-19 во Црна Гора",
+            "titleMenu_MKD": "Македонија - состојба",
+            "ventilatorDischarged": "Ослободени од респиратор",
+            "ventilatorAdmitted": "Поврзани на респоратот",
+            "icuDischarged": "Отпуштени од интензивна нега",
+            "icuAdmitted": "Примени на интензивна нега",
+            "hospitalDischarged": "Отпуштени од болници",
+            "hospitalAdmitted": "Примени во болници",
+            "activeCases": "Активни случаи",
+            "confirmedCases": "Потврдени случаи",
+            "testsPerformed": "Тестови",
+            "show7DaysAverage": "7-дневен просек",
+            "showToDate": "До денес",
+            "showToday": "Дневно",
+            "showActive": "Активни"
         },
         "common": {
             "twitter": "Twitter",
@@ -538,7 +555,8 @@
             "dsNIJZ": "ИЈЗ",
             "dsMZ": "Министерство за Здравје",
             "dsOWD": "Our World in Data",
-            "sortBy": "Прикажи според:"
+            "sortBy": "Прикажи според:",
+            "dataDate": "До: {{ date, %a., %e. %b. }}"
         },
         "municipalities": {
             "yesterday": "вчера",
@@ -562,7 +580,8 @@
             "viewActive": "Активни",
             "viewTotal": "Сите",
             "viewLast": "Последен",
-            "viewDoublingTime": "Период на удвојување"
+            "viewDoublingTime": "Период на удвојување",
+            "titleMenu": "Општини - случаи"
         },
         "spread": {
             "today": "Денес",
@@ -589,7 +608,8 @@
             "timesAsMany": "-пати повеќе",
             "doublingRateTitle": "Стапка на експоненцијален раст [во денови]",
             "averageSouthKorea": "Просек на Јужна Кореја во последниве денови",
-            "activeCases": "активни случаи"
+            "activeCases": "активни случаи",
+            "titleMenu": "Растеж"
         },
         "hospitals": {
             "data": "Податоци",
@@ -614,17 +634,20 @@
             "bedsICUFull": "Кревети на ОИН, исполнети",
             "empty": "Празни",
             "full": "Исполнети",
-            "max": "Макс"
+            "max": "Макс",
+            "titleMenu": "Капацитет"
         },
         "countriesNewCasesPer1M": {
             "title": "Држави: нови случаи на 100.000 жители",
             "yAxisTitle": "Нови случаи на 100.000 жители",
-            "legendTitle": "Нови случаи на 100.000 жители"
+            "legendTitle": "Нови случаи на 100.000 жители",
+            "titleMenu": "Држави - нови случаи"
         },
         "countriesTotalDeathsPer1M": {
             "title": "Држави: вкупно починати на 100.000 жители",
             "yAxisTitle": "Вкупно починати на 100.000 жители",
-            "legendTitle": "Вкупно починати на 100.000 жители"
+            "legendTitle": "Вкупно починати на 100.000 жители",
+            "titleMenu": "Држави - починати"
         },
         "ageGroups": {
             "confirmedCases": "Потврдени случаи",
@@ -641,7 +664,8 @@
             "shareOfDeceasedConfirmedCases": "Дел од мртвите од бројот на заразени",
             "confirmedCasesPerPopulation": "Потврдени случаи по население",
             "deceasedPerPopulation": "Смртни случаи по население",
-            "deceasedPerConfirmedCases": "Смртни случаи според потврдените случаи"
+            "deceasedPerConfirmedCases": "Смртни случаи според потврдените случаи",
+            "titleMenu": "Старост, пол"
         },
         "map": {
             "confirmedCases": "Потврдени случаи",
@@ -655,7 +679,10 @@
             "mortalityOfConfirmedCases": "Смртност на позитивни случаи",
             "populationShare": "Удел на населението",
             "title": "Регионални центри на јавно здравје",
-            "yesterday": "Вчера"
+            "yesterday": "Вчера",
+            "titleMenu": "Општини - карта",
+            "per100k": "на 100 илјади",
+            "relativeIncrease": "Неделна раст"
         },
         "infections": {
             "allConfirmed": "Сите потврдени",
@@ -666,7 +693,8 @@
             "averageByDay": "По ден (просек)",
             "title": "Структура на потврдените случаи",
             "relative": "Релативно",
-            "otherPersons": "Други лица"
+            "otherPersons": "Други лица",
+            "titleMenu": "Случаи - структура"
         },
         "tests": {
             "positiveTests": "Позитивни тестови",
@@ -675,7 +703,8 @@
             "title": "Тестирање",
             "shareOfPositive": "Дел до позитивните тестови (%)",
             "regularTesting": "Редовно",
-            "nationalStudyTesting": "Истражување"
+            "nationalStudyTesting": "Истражување",
+            "titleMenu": "Тестирање"
         },
         "hCenters": {
             "testsPositive": "Тестови (позитивни*)",
@@ -685,7 +714,8 @@
             "suspectedCovidPhone": "Сомнение за КОВИД-19 (телефон)",
             "suspectedCovidExamination": "Сомнение за КОВИД-19 (контрола)",
             "emergencyExamination": "Итна медицинска помош",
-            "title": "Лекување во здравствен дом"
+            "title": "Лекување во здравствен дом",
+            "titleMenu": "Здравствени домови - лекување"
         },
         "ratios": {
             "deceasedHospital": "Починати",
@@ -702,7 +732,8 @@
             "hospitalDeceasedShare": "Дел од починатите во болници",
             "icuDeceasedShare": "Дел од починатите од интензивна нега",
             "title": "Дел од сериозните случаи",
-            "icuMortality": "Смртност на оделенија за интензивна нега"
+            "icuMortality": "Смртност на оделенија за интензивна нега",
+            "titleMenu": "Сериозни случаи"
         },
         "patients": {
             "allHospitals": "Сите болници",
@@ -715,7 +746,8 @@
             "title": "Хоспитализирани",
             "discharged": "Отпуштени",
             "admitted": "Примени",
-            "byHospital": "По болници"
+            "byHospital": "По болници",
+            "titleMenu": "Хоспитализации"
         },
         "cases": {
             "deceased": "Починати",
@@ -724,13 +756,15 @@
             "icu": "На интензивна нега",
             "hospitalized": "Хоспитализирани",
             "active": "Активни",
-            "title": "Потврдени случаи"
+            "title": "Потврдени случаи",
+            "titleMenu": "Случаи"
         },
         "regions": {
             "title": "Случаи по регион",
             "deceased": "Починати",
             "confirmedCases": "Потврдени случаи",
-            "activeCases": "Активни случаи"
+            "activeCases": "Активни случаи",
+            "titleMenu": "Регии - случаи"
         },
         "europe": {
             "restrictions": "Рестрикции и увезени случаи",
@@ -744,14 +778,17 @@
             "incidence100k": "Нови случаи во 14 дена на 100.000 жители",
             "twoWeekIncidence": "14 дневна инциденца на 100.000 жители",
             "noData": "Нема податоци",
-            "newCases": "Нови случаи"
+            "newCases": "Нови случаи",
+            "titleMenu": "Европа - ситуација",
+            "weeklyIncrease": "Неделна раст"
         },
         "ageGroupsTimeline": {
             "title": "Потврдени случаи по старосни групи",
             "activeCasesRelative": "Активни случаи (релативно)",
             "activeCases": "Активни случаи",
             "newCasesRelative": "Нови случаи (релативно)",
-            "newCases": "Нови случаи"
+            "newCases": "Нови случаи",
+            "titleMenu": "Старост - удел"
         },
         "countriesDeathsPerCases": {
             "title": "Држави: процент на починати од потврдените случаи",
@@ -761,26 +798,44 @@
             "daysFromFirstDeath": "Број на денови од првиот починат",
             "daysFromOneDeathPerMillion": "Број на денови од првиот починат на 100.000 жители",
             "legendTitle": "Процент на починати од потврдените случаи",
-            "yAxisTitle": "Процент на починати од потврдените случаи"
+            "yAxisTitle": "Процент на починати од потврдените случаи",
+            "titleMenu": "Држави - процент на смртни случаи"
         },
         "countriesActiveCasesPer1M": {
             "title": "Држави: Активни случаи на 100.000 жители",
             "red": "Критериум за црвената листа",
             "legendTitle": "Активни случаи на 100.000 жители",
-            "yAxisTitle": "Активни случаи на 100.000 жители"
+            "yAxisTitle": "Активни случаи на 100.000 жители",
+            "titleMenu": "Држави - активни случаи"
         },
         "world": {
-            "title": "Состојба со COVID-19 во светот"
+            "title": "Состојба со COVID-19 во светот",
+            "titleMenu": "Свет - ситуација"
         },
         "rmap": {
-            "title": "Мапа на регионот"
+            "title": "Мапа на регионот",
+            "titleMenu": "Региони - карта"
         },
         "dailyComparison": {
             "positivePct": "Удел од позитивните тестови (%)",
             "tests": "Направени тестови",
             "active": "Активни случаи",
             "new": "Потврдени случаи",
-            "title": "Споредба според ден на неделата"
+            "title": "Споредба според ден на неделата",
+            "titleMenu": "Ден во неделата - споредба",
+            "deceased": "Починати"
+        },
+        "regions100k": {
+            "titleMenu": "Регии - споредба"
+        },
+        "hcCases": {
+            "titleMenu": "Здравствени работници - случаи"
+        },
+        "sources": {
+            "titleMenu": "Извори на зараза"
+        },
+        "phaseDiagram": {
+            "titleMenu": "Фазен диаграм"
         }
     },
     "phase": {

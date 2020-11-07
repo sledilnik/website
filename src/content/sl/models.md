@@ -3,22 +3,26 @@
 V naši skupnosti sodelujejo tudi strokovnjaki za statistično modeliranje in računalniške simulacije.
 Na tej strani objavljamo povezave na nekatere od njihovih modelov,
 ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](https://covid-19.sledilnik.org).
-- [Interaktivni SEIR model](#seir)
+- [SEIR model](#seir)
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
 - [Model prenosa virusa po socialnem omrežju prebivalcev Slovenije](#social_network)
 - [Drugi modeli za Slovenijo](#other)
 
+Za osnovno razumevanje modelov o epidemiji priporočamo članek [Epidemija in modeli... - Osnove epidemiološkega modeliranja](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a).
+
 Modeli v veliki meri upoštevajo doslej znane informacije o bolezni COVID-19 in njenem širjenju v Sloveniji, a kljub temu **ne ponujajo natančnih napovedi** za prihodnji potek epidemije, **zato je potrebno skrbno prebrati vse predpostavke modela**.
-Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti.
+Podatki o testih in potrjenih okuženih osebah v Sloveniji so skopi, zato sta oba predstavljena modela umerjena na podatke o hospitalizacijah. Pomanjkanje natančnih podatkov o primerih je eden glavnih razlogov za nedoločenosti. Zaradi sprememb v metodologiji testiranja pa se lahko predpostavke tudi popolnoma spremenijo - več lahko preberete v članku [Kako vemo, da ne vemo?](https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c)
 
 Svetovna znanost vlaga velike napore v boj z boleznijo COVID-19, a vendar mnogi vidiki širjenja in razvoja bolezni še niso raziskani. Še posebno velika je negotovost glede učinka ukrepov, ki jih vlade po svetu izvajajo za omejitev bolezni. Poleg tega je, zaradi časovnih zamikov med okužbo in potrditvijo, praktično nemogoče točno oceniti dejansko stanje okuženosti in hitrost širjenja okužbe v populaciji. Vse to so razlogi, da so modelom pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot gledamo v prihodnost, hitreje rastejo.
 
-## <a id="seir"></a>Interaktivni SEIR model
-V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji.
+## <a id="seir"></a>SEIR model
+V sodelovanju s [prof. Janezom Žibertom](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani smo pripravili model SEIR (Susceptible, Exposed, Infected, and Recovered) s podmodeli za modeliranje bolnišničnih obravnav, obravnav na intenzivni negi in smrti, ki ima parametre usklajene s podatki o hospitalizacijah in klinično sliko COVID-19 v Sloveniji. 
 
-Bolj podrobne projekcije modela so na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
+Vsakodnevne projekcije modela se izračunavajo ob 13.00 in 17.00. Bolj podroben prikaz projekcij je na [naslednji povezavi](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/).
 
-Dodatno je narejen še [model SIR, ki je namenjen spremljanju začetne dinamike epidemije drugega vala po podatkih Sledilnika](https://apps.lusy.fri.uni-lj.si/appsR/CoronaV2/). Pri interpretaciji rezultatov je potrebno upoštevati omejitve modelov SIR.
+Dodatne projekcije so narejene še [na spletni strani](https://apps.lusy.fri.uni-lj.si/appsR/CoronaSimV2/), kjer se izvajajo simulacije na deterministični in stohastični verziji SEIR modela in se rezultati združujejo skupaj. 
+
+Pri interpretaciji rezultatov je potrebno upoštevati omejitve takšnih modelov. 
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
