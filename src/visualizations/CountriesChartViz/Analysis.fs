@@ -36,12 +36,13 @@ let groupEntriesByCountries
             | TotalDeathsPer1M ->
                 (entryRaw.TotalDeathsPerMillion |> Option.defaultValue 0.) / 10.
             | DeathsPerCases ->
-                if entryRaw.TotalCases > 0 then
-                    (float entryRaw.TotalDeaths) * 100.0
-                        / (float entryRaw.TotalCases)
-                else
-                    0.
-
+                match entryRaw.TotalDeaths, entryRaw.TotalCases with
+                | Some totalDeaths, Some totalCases ->
+                    if totalCases > 0 then
+                        (float totalDeaths) * 100.0 / (float totalCases)
+                    else
+                        0.
+                | _ -> 0.
 
         { Date = entryRaw.Date; Value = valueToUse }
 
@@ -145,10 +146,11 @@ let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
 
             {
                 CountryCode = "SVN"; Date = date
-                NewCases = newCases; NewCasesPerMillion = newCasesPerMillion
-                TotalCases = totalCases
+                NewCases = Some newCases
+                NewCasesPerMillion = newCasesPerMillion
+                TotalCases = Some totalCases
                 TotalCasesPerMillion = totalCasesPerMillion
-                TotalDeaths = totalDeaths
+                TotalDeaths = Some totalDeaths
                 TotalDeathsPerMillion = totalDeathsPerMillion
             } |> Some
         | _, _, _ -> None
