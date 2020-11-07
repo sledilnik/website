@@ -289,7 +289,7 @@ export default {
 }
 
 .float-nav-img {
-  background: url('../assets/svg/close.svg') no-repeat;
+  background: url('../assets/svg/graph.svg') no-repeat;
   background-size: 24px 24px;
   transition: all 0.3s;
   height: 24px;
@@ -300,7 +300,7 @@ export default {
   transform: translate(-50%, -50%);
 
   &.active {
-    background: url('../assets/svg/graph.svg') no-repeat;
+    background: url('../assets/svg/close.svg') no-repeat;
   }
 }
 
