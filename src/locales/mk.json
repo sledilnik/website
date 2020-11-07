@@ -428,7 +428,12 @@
         "groupEastAsiaOceania": "Источна Азија и Океанија",
         "groupNeighbouring": "Држави од регионот",
         "groupExYu": "Држави од бивша Југославија",
-        "groupLatinAmerica": "Латинска Америка"
+        "groupLatinAmerica": "Латинска Америка",
+        "groupLargestWorldCountries": "најголемите земји во светот",
+        "groupLargestEuCountries": "најголемите земји во ЕУ*",
+        "groupHighestTotalDeaths": "највисоки вредности",
+        "groupHighestActiveCases": "највисоки вредности",
+        "groupHighestNewCases": "највисоки вредности"
     },
     "shortMonth": {
         "2": "мар",
@@ -556,7 +561,9 @@
             "dsMZ": "Министерство за Здравје",
             "dsOWD": "Our World in Data",
             "sortBy": "Прикажи според:",
-            "dataDate": "До: {{ date, %a., %e. %b. }}"
+            "dataDate": "До: {{ date, %a., %e. %b. }}",
+            "dsOWD_MZ": "Our World in Data и МЗ",
+            "dsOWD_NIJZ": "Our World in Data &amp; ИЈЗ"
         },
         "municipalities": {
             "yesterday": "вчера",
@@ -833,7 +840,25 @@
             "titleMenu": "Извори на зараза"
         },
         "phaseDiagram": {
-            "titleMenu": "Фазен диаграм"
+            "titleMenu": "Фазен диаграм",
+            "weekVsWeekBefore": {
+                "yAxisLabel": "Разлика во инциденцата",
+                "xAxisLabel": "7-дневна инциденца",
+                "yAxisTitle": "Разлика во инциденцата (%)",
+                "xAxisTitle": "7-дневна инциденца",
+                "name": "Разлика во инциденцата"
+            },
+            "totalVsWeek": {
+                "yAxisLabel": "7-дневна инциденца",
+                "xAxisLabel": "Вкупно",
+                "yAxisTitle": "7-дневна инциденца",
+                "xAxisTitle": "Вкупно",
+                "name": "Сите во однос на недела"
+            },
+            "deceased": "Починати",
+            "hospitalized": "Хоспитализирани",
+            "cases": "Потврдени случаи",
+            "title": "Фазен диаграм"
         }
     },
     "phase": {
