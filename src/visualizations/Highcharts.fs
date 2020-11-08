@@ -140,6 +140,8 @@ let addContainmentMeasuresFlags
         20,10, "#FFe6e6", "movement"
         24,10, "#FFe6e6", "restaurants"
         27,10, "#FFe6e6", "municipality2"
+        31,10, "#ebfaeb", "liftLibraries"
+        6, 11, "#ebfaeb", "liftShops"
     |]
     {|
         ``type`` = "flags"

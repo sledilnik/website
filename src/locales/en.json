@@ -840,6 +840,14 @@
         "municipality2": {
             "title": "Municipalities",
             "description": "Prohibition of movement outside municipal borders"
+        },
+        "liftLibraries": {
+            "title": "Libraries",
+            "description": "Relaxation: libraries, service workshops, construction and maintenance services, servisne delavnice, gradbena, vzdrževalna dela,..."
+        },
+        "liftShops": {
+            "title": "Shops",
+            "description": "Relaxation: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
         }
     },
     "days": {

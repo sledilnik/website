@@ -583,6 +583,14 @@
         "municipality2": {
             "title": "Občine",
             "description": "Prepoved gibanja izven meja občin"
+        },
+        "liftLibraries": {
+            "title": "Knjižnice",
+            "description": "Sproščanje: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,..."
+        },
+        "liftShops": {
+            "title": "Prodajalne",
+            "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
         }
     },
     "phase": {
