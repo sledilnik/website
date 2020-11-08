@@ -60,6 +60,10 @@ div.highcharts-tooltip {
 }
 */
 
+svg.highcharts-root {
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
 .highcharts-wrapper {
     @media only screen and (min-width: 768px) {
         margin-left: -10px;
@@ -165,7 +169,7 @@ g.highcharts-series,
         }
     }
 
-    // round the date input fields
+    // round the date input fields, TODO: doesn't work in Safari
     .highcharts-label-box {
         rx: 6;
         ry: 6;
