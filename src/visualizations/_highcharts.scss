@@ -64,6 +64,13 @@ svg.highcharts-root {
     font-family: 'IBM Plex Sans', sans-serif !important;
 }
 
+.highcharts-subtitle {
+    transform: translate(8px, 0px);
+    @media only screen and (min-width: 768px) {
+        transform: translate(0px, 0px);
+    }
+}
+
 .highcharts-wrapper {
     @media only screen and (min-width: 768px) {
         margin-left: -10px;

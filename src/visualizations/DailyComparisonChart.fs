@@ -245,6 +245,17 @@ let renderChartOptions (state : State) dispatch =
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
         rangeSelector = pojo {| enabled = false |}
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                credits = {| position = {| x = 18 |} |}
+                            |}
+                    |} |]
+            |}
     |}
 
 let renderChartContainer (state : State) dispatch =

@@ -414,6 +414,7 @@ let basicChartOptions
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
+                                credits = {| position = {| x = 18 |} |}
                                 rangeSelector = {| inputPosition = {| align = "left"; x = 0; y = 0 |} |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}

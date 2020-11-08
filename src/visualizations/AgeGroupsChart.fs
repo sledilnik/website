@@ -446,6 +446,17 @@ let renderChartOptions
                data = chartData.FemaleValues
                 |}
         |]
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                credits = {| position = {| x = 18 |} |}
+                            |}
+                    |} |]
+            |}
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =

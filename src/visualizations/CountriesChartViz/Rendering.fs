@@ -238,6 +238,17 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
                 style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |}
             |}
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                credits = {| position = {| x = 18 |} |}
+                            |}
+                    |} |]
+            |}
     |}
 
 let renderChartContainer state chartData =
