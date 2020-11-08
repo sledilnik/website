@@ -366,13 +366,13 @@
             "titleMenu": "Općine – karta"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika",
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (sedmodnevni prosjek)",
             "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "titleMenu": "Države – novi slučajevi"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika",
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika (sedmodnevni prosjek)",
             "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
             "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
             "titleMenu": "Države – smrtni slučajevi"

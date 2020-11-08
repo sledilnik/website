@@ -2,7 +2,6 @@
 module EuropeMap
 
 open System
-open System.Text
 open Feliz
 open Elmish
 open Feliz.ElmishComponents
@@ -366,7 +365,8 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             then 0.
             else incidence |> Array.toList  |> last 14 |> List.max
 
-        let newCases = dps |> List.map (fun dp -> dp.NewCases)
+        let newCases =
+            dps |> List.map (fun dp -> dp.NewCases |> Utils.optionToInt)
 
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
@@ -480,7 +480,7 @@ let mapData state =
             let twoWeekCaseNumbers =
                 cd.NewCases
                 |> List.filter(fun x -> x > 0) // filter out date with missing data
-                |> last 14 // take the last 14 non zero datapoints
+                |> last 14 // take the last 14 non zero data points
                 |> List.toArray
                 |> Array.map float
 

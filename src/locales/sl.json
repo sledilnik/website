@@ -580,6 +580,14 @@
         "municipality2": {
             "title": "Občine",
             "description": "Prepoved gibanja izven meja občin"
+        },
+        "liftLibraries": {
+            "title": "Knjižnice",
+            "description": "Sproščanje: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,..."
+        },
+        "liftShops": {
+            "title": "Prodajalne",
+            "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
         }
     },
     "phase": {
@@ -629,6 +637,10 @@
         "12": {
             "title": "faza<br>12",
             "description": "nov režim testiranja"
+        },
+        "13": {
+            "title": "faza<br>13",
+            "description": "nov režim testiranja"
         }
     },
     "charts": {
@@ -638,6 +650,8 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsOWD": "Our World in Data",
+            "dsOWD_NIJZ": "Our World in Data, NIJZ",
+            "dsOWD_MZ": "Our World in Data, Min. za zdravje",
             "loading": "Nalagam podatke…",
             "from": " ",
             "to": "–",
@@ -969,13 +983,13 @@
             "red": "meja za uvrstitev na rdeči seznam"
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi primeri na 100.000 prebivalcev",
+            "title": "Države: novi primeri na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – novi primeri",
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: umrli (skupaj) na 100.000 prebivalcev",
+            "title": "Države: umrli (skupaj) na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – umrli",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"

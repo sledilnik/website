@@ -62,7 +62,9 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
                   Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
         | "world" ->
-            Cmd.ofMsg WeeklyStatsDataRequested
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested ]
         | _ ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -377,11 +379,18 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "countriesNewCasesPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = NewCasesPer1M
-                          ChartTextsGroup = "countriesNewCasesPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = NewCasesPer1M
+                              ChartTextsGroup = "countriesNewCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
+                            }
           }
 
     let countriesActiveCasesPer1M =
@@ -390,11 +399,18 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "countriesActiveCasesPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = ActiveCasesPer1M
-                          ChartTextsGroup = "countriesActiveCasesPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = ActiveCasesPer1M
+                              ChartTextsGroup = "countriesActiveCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
+                            }
           }
 
     let countriesDeathsPer1M =
@@ -403,25 +419,32 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = TotalDeathsPer1M
-                          ChartTextsGroup = "countriesTotalDeathsPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = TotalDeathsPer1M
+                              ChartTextsGroup = "countriesTotalDeathsPer1M"
+                              DataSource = "dsOWD_MZ"
+                            }
           }
 
-    let countriesDeathsPerCases =
-          { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-deaths-per-cases"
-            ChartTextsGroup = "countriesDeathsPerCases"
-            Explicit = false
-            Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = DeathsPerCases
-                          ChartTextsGroup = "countriesDeathsPerCases"
-                        }
-          }
+//    let countriesDeathsPerCases =
+//          { VisualizationType = CountriesDeathsPer1M
+//            ClassName = "countries-deaths-per-cases"
+//            ChartTextsGroup = "countriesDeathsPerCases"
+//            Explicit = false
+//            Renderer =
+//                fun _ ->
+//                    lazyView CountriesChartViz.Rendering.renderChart
+//                        { MetricToDisplay = DeathsPerCases
+//                          ChartTextsGroup = "countriesDeathsPerCases"
+//                        }
+//          }
 
     let phaseDiagram =
           { VisualizationType = PhaseDiagram
@@ -439,15 +462,16 @@ let render (state: State) (_: Msg -> unit) =
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; patients; patientsCare
           regions100k; map; municipalities
-          ageGroupsTimeline; tests; ageGroups; hcCases; 
+          ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
-          phaseDiagram; spread; 
+          phaseDiagram; spread;
           hCenters; infections
         ]
 
     let worldVisualizations =
-        [ worldMap; countriesActiveCasesPer1M
+        [ worldMap
+          countriesActiveCasesPer1M
           countriesCasesPer1M
           countriesDeathsPer1M
           // countriesDeathsPerCases
@@ -459,7 +483,9 @@ let render (state: State) (_: Msg -> unit) =
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
-          countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
+          countriesCasesPer1M
+          countriesActiveCasesPer1M
+          countriesDeathsPer1M
           phaseDiagram
         ]
 

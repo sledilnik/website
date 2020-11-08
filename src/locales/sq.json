@@ -302,14 +302,12 @@
         },
         "countriesTotalDeathsPer1M": {
             "legendTitle": "Gjithsej raste vdekje për 100.000 banorë",
-            "title": "Shtetet: Gjithsej raste vdekje për 100.000 banorë",
             "yAxisTitle": "Gjithsej raste vdekje për 100.000 banorë",
             "titleMenu": "Shtetet - rastet e vdekjes"
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Raste të reja në ditë për 100.000 banorë",
             "yAxisTitle": "Raste të reja në ditë për 100.000 banorë",
-            "title": "Shtetet: Raste të reja në ditë për 100.000 banorë",
             "titleMenu": "Shtetet - raste të reja"
         },
         "countriesActiveCasesPer1M": {
@@ -454,7 +452,8 @@
         "github": "GitHub",
         "links": "Linqe",
         "world": "Bota",
-        "animation": "Animacion"
+        "animation": "Animacion",
+        "goToGraph": "Kalo në grafikun"
     },
     "country": {
         "DEU": "Gjermani",

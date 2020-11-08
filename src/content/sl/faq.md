@@ -324,8 +324,9 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 
 * **Faza 11 (19.-26. oktober)**: Vlada je razglasila [epidemijo](https://www.gov.si/novice/2020-10-18-vlada-razglasila-epidemijo-nalezljive-bolezni-covid-19-na-obmocju-republike-slovenije/).
 
-* **Faza 12 (26. oktober-)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). – testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.
+* **Faza 12 (26. oktober-6. november)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). – testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.
 
+* **Faza 13 (6. november-)**: Glede na nedavno vključitev večjega števila mest za odvzem brisov se skladno s priporočili strokovno svetovalne skupine [spremeni metodologija testiranja](https://www.gov.si/novice/2020-11-06-spremenjen-nacin-testiranja-na-covid-19/) – brisi nosno-žrelnega predela ponovno jemljejo pri vseh osebah s sumom na covid-19.
 
 </details>
 

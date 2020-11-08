@@ -177,8 +177,11 @@
         "12": {
             "title": "phase<br>12",
             "description": "new testing methodology"
+        },
+        "13": {
+            "title": "phase<br>13",
+            "description": "new testing methodology"
         }
-
     },
     "charts": {
         "common": {
@@ -187,6 +190,8 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsOWD": "Our World in Data",
+            "dsOWD_NIJZ": "Our World in Data & NIJZ",
+            "dsOWD_MZ": "Our World in Data & Min. Health",
             "loading": "Loading data…",
             "from": " ",
             "to": "-",
@@ -487,13 +492,13 @@
             "red": "criteria for red list"
         },
         "countriesNewCasesPer1M": {
-            "title": "Countries: New Daily Cases Per 100,000 People",
+            "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
             "legendTitle": "New daily cases per 100,000 people"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Countries: Total Deaths Per 100,000 People",
+            "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
             "legendTitle": "Total deaths per 100,000 people"
@@ -832,6 +837,14 @@
         "municipality2": {
             "title": "Municipalities",
             "description": "Prohibition of movement outside municipal borders"
+        },
+        "liftLibraries": {
+            "title": "Libraries",
+            "description": "Relaxation: libraries, service workshops, construction and maintenance services, servisne delavnice, gradbena, vzdrževalna dela,..."
+        },
+        "liftShops": {
+            "title": "Shops",
+            "description": "Relaxation: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
         }
     },
     "days": {
