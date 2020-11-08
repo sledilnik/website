@@ -28,16 +28,16 @@
       <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
       <div class="social">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/fb-icon.svg" alt="Facebook" />
+          <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
         <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/tw-icon.svg" alt="Twitter" />
+          <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
         </a>
         <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/medium-icon.svg" alt="Medium" />
+          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
         </a>
         <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
         </a>
       </div>
       <LanguageSwitcher />
@@ -357,6 +357,30 @@ export default {
       display: none;
     }
   }
+
+  .social {
+    display: inline-block;
+    margin-left: 0;
+    padding: 9px 0 36px;
+
+    @include nav-break {
+      margin-left: 32px;
+      padding: 0;
+    }
+
+    img {
+      width: 24px;
+      opacity: .56;
+    }
+
+    a + a {
+      margin-left: 16px;
+
+      @media only screen and (max-width: 480px) {
+        margin-left: 16px;
+      }
+    }
+  }
 }
 
 .nav-overlay {
@@ -515,34 +539,6 @@ export default {
 
     &:hover {
       color: rgb(0, 0, 0);
-    }
-  }
-}
-
-.social {
-  display: inline-block;
-  margin-left: 0;
-  padding: 9px 0 36px;
-
-  @include nav-break {
-    margin-left: 32px;
-    padding: 0;
-  }
-
-  img {
-    width: 40px;
-    opacity: .56;
-
-    @media only screen and (min-width: 768px) {
-      width: 32px;
-    }
-  }
-
-  a + a {
-    margin-left: 16px;
-
-    @media only screen and (max-width: 480px) {
-      margin-left: 16px;
     }
   }
 }
