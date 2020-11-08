@@ -206,6 +206,7 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 selected = selectedRangeSelectionButtonIndex
                 inputPosition = {| align = "left"; x = 204; y = -34 |}
                 inputBoxHeight = 19
+                inputStyle = {| rx = 6; ry = 6 |}
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 inputDateParser = parseDate
@@ -233,6 +234,8 @@ let credictsOptions =
             (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
             (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+       position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
+       style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |}
     |} |> pojo
 
 

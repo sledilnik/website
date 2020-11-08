@@ -790,7 +790,9 @@ let renderMap state geoJson _ =
                               (I18N.t "charts.common.dsOWD")
                       mapTextFull = ""
                       mapText = ""
-                      href = "https://ourworldindata.org/coronavirus" |} |}
+                      href = "https://ourworldindata.org/coronavirus"
+                      position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
+                      style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |} |} |}
     |> map
 
 

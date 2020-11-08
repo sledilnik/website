@@ -235,6 +235,8 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         (t "charts.common.dataSource")
                         (t "charts.common.dsOWD")
                 href = "https://ourworldindata.org/coronavirus"
+                position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
+                style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |}
             |}
     |}
 
