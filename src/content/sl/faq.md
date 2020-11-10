@@ -89,7 +89,7 @@ Urejanje podatkov bolnišnične oskrbe – [tabela Pacienti](https://docs.google
 
 - Dobivamo dnevna poročila in spremljamo objave vseh bolnišnic za COVID-19 (UKC Ljubljana, UKC Maribor, UK Golnik, SB Celje) – okoli 8h.
 
-- Spremljamo število hospitaliziranih: vsi oddelki, v intenzivni enoti in na respiratorju.
+- Spremljamo število hospitaliziranih: vsi oddelki, v intenzivni enoti in na respiratorju (intubirani).
 
 - Iz podatkov evidentiramo tudi prehode (sprejem/odpust) med posameznimi stanji (kadar je to mogoče zaznati).
 
@@ -148,7 +148,7 @@ Opazili smo, da [Worldometer](https://www.worldometers.info/coronavirus/#countri
   <summary id=data-active-cases>Ali vodite števec aktivnih primerih oz. ali veste, koliko je trenutno okuženih oseb?</summary>
 
 Da, od konca aprila naprej grafično prikazujemo tudi te kazalnike. [Graf Stanje COVID-19 v Sloveniji]
-(/sl/stats#metrics-comparison-chart) kaže sliko potrjenih primerov. Privzeti prikaz je **Aktivni** (zgoraj levo), ki nam kaže število aktivnih primerov in posebej še število hospitaliziranih, v intenzivni enoti ter na respiratorju. S spremenitvijo prikaza *Aktivnih* v prikaz **Na dan** lahko vidimo podrobnosti stanja aktivnih oz. potrjenih primerov po posameznih dnevih (testiranja, potrjeni primeri, sprejeti v bolnišnico in odpuščeni, sprejeti v intenzivno enoto in odpuščeni ...), če pa izberemo prikaz **Skupaj**, lahko poleg drugih podatkov vidimo tudi število prebolelih.  
+(/sl/stats#metrics-comparison-chart) kaže sliko potrjenih primerov. Privzeti prikaz je **Aktivni** (zgoraj levo), ki nam kaže število aktivnih primerov in posebej še število hospitaliziranih, v intenzivni enoti ter na respiratorju (intubirani). S spremenitvijo prikaza *Aktivnih* v prikaz **Na dan** lahko vidimo podrobnosti stanja aktivnih oz. potrjenih primerov po posameznih dnevih (testiranja, potrjeni primeri, sprejeti v bolnišnico in odpuščeni, sprejeti v intenzivno enoto in odpuščeni ...), če pa izberemo prikaz **Skupaj**, lahko poleg drugih podatkov vidimo tudi število prebolelih.  
 
 Kazalnika *Aktivni primeri* in *Preboleli* nista podatka, pridobljena iz javnih virov; oba kažeta na osnovi uradnih podatkov izračunano vrednost. Vrednost *Aktivni primeri* je izračunana s preprostim odštevanjem uradnih podatkov za relevantno kategorijo, vrednost *Preboleli (skupaj)* odslikava stanje vseh potrjenih primerov pred dvema tednoma (minus umrli). Število prebolelih je preprosta ocena, ki temelji na vrednosti vseh potrjenih primerov v preteklosti na podlagi domneve, da se bolezen **povprečno preboli najkasneje v 14 dneh** (vir: [ECDC poročilo](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); tako je število prebolelih na določen dan enako številu vseh potrjenih primerov dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Ocena je poenostavljena v smislu, da ne upošteva primerov resnejših dolgotrajnih komplikacij bolezni COVID-19.       
 
@@ -245,17 +245,17 @@ Spodaj na časovnem traku so označene prelomne točke: od prvega potrjenega pri
 
 * **Potrjeni primeri (skupaj)** = Skupno število vseh potrjenih primerov do določenega dne.
 
-* **Potrjeni primeri (aktivni)** = Potrjeni primeri (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
+* **Aktivni primeri** = Potrjeni primeri (skupaj) – Preboleli (skupaj) – Umrli (skupaj)
 
 * **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjenih primerov dva tedna pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 14 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)
 
-* **Hospitalizirani (aktivni)** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
+* **Hospitalizirani** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).
 
 * **Hospitalizirani (skupaj)** = Vsota vseh do sedaj sprejetih v bolnišnico do dne.
 
-* **V intenzivni enoti (aktivni)** = Trenutno število oseb v enotah intenzivne terapije.
+* **V intenzivni enoti** = Trenutno število oseb v enotah intenzivne terapije.
 
-* **Na respiratorju (aktivni)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
+* **Na respiratorju (intubirani)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).
 
 * **Odpuščeni iz bolnišnice (na dan)** = Število odpuščenih iz bolnišnice na ta dan.
 
@@ -277,7 +277,7 @@ Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernica
 
 * **v intenzivni enoti** = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije *Hospitalizirani*. 
 
-* **na respiratorju** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.
+* **na respiratorju (intubirani)** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator) z intubacijo (invazivna mehanska ventilacija). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.
 
 * **preboleli** = To je ocena števila oseb, pri katerih je bila potrjena okužba in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjenih primerov dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)
   
@@ -333,7 +333,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 <details>
   <summary id=patients-chart>Kaj nam pove graf "Hospitalizirani"?</summary>
 
-[Graf](/sl/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju. Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
+[Graf](/sl/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju (intubirani). Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.  
 
 Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja je bilo spomladi stanje takšno: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic. 
 
