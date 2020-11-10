@@ -223,17 +223,17 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 
 * **Confirmed cases (total)** = Total number of all confirmed cases by a given day.
 
-* **Confirmed cases (active)** = Confirmed cases (total) – Recovered (total) – Died (total)
+* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)
 
 * **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
 
-* **Hospitalized (active)** = Current number of people in hospital care (either in the ordinary ward or in the ICU).
+* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).
 
 * **Hospitalized (total) ** = Sum of hospital admissions by date.
 
-* **ICU (active)** = Current number of people in ICUs (intensive care units).
+* **ICU** = Current number of people in ICUs (intensive care units).
 
-* **On ventilator (active) ** = Current number of persons in need of a ventilator.
+* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.
 
 * **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.
 
@@ -256,7 +256,7 @@ Sledilnik uses terminology which is consistent with the official directives of t
 
 * **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category. 
 
-* **On ventilator** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe. It is a subset of the *Intensive Care* and *Hospitalized* categories.
+* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.
 
 * **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
   
@@ -311,7 +311,7 @@ The graph can offer a good insight into the workload of hospitals and can be the
 
 [Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
 
-(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
+(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju (intubirani) in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
 
 (*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.
 
