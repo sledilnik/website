@@ -233,7 +233,7 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 
 * **ICU** = Current number of people in ICUs (intensive care units).
 
-* **On ventilator (intubated) ** = Current number of persons in need of a ventilator.
+* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.
 
 * **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.
 
@@ -311,7 +311,7 @@ The graph can offer a good insight into the workload of hospitals and can be the
 
 [Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
 
-(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
+(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju (intubirani) in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
 
 (*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.
 
