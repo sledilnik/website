@@ -1,11 +1,7 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/680
-    - absolutebubbles
-        - reduce the size of bubbles (1 is one pixel)
-        - do not axis-color bubbles on absolute bubbles  
-            - and hide the color axis 
-            
+    - color the bubbles according to the share
 
     - z=value / z=population
     - include municipalities (without coloring)

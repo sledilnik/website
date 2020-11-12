@@ -49,7 +49,7 @@ let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
 
 type DisplayType =
     | AbsoluteValues
-    | AbsoluteBubbles
+    | Bubbles
     | RegionPopulationWeightedValues
     | RelativeIncrease
 with
@@ -58,7 +58,7 @@ with
     override this.ToString() =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
-       | AbsoluteBubbles                -> I18N.t "charts.map.absoluteBubbles"
+       | Bubbles                        -> I18N.t "charts.map.bubbles"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
        | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease"
 
@@ -250,7 +250,9 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, newCases =
+            let dlabel, value, absolute, value100k, totalConfirmed,
+                    weeklyIncrease, population, newCases =
+
                 match areaData.Cases with
                 | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null
                 | Some totalCases ->
@@ -294,7 +296,8 @@ let seriesData (state : State) =
                             match state.DisplayType with
                             | AbsoluteValues ->
                                 ((Some absolute) |> Utils.zeroToNone), absolute
-                            | AbsoluteBubbles -> None, absolute
+                            | Bubbles ->
+                                None, absolute
                             | RegionPopulationWeightedValues ->
                                 // factor 10 for better resolution in graph
                                 None,  10. * value100k |> Math.Round |> int
@@ -321,7 +324,7 @@ let seriesData (state : State) =
                                 | AbsoluteValues ->
                                     if absolute > 0 then float absolute
                                     else 0.0001
-                                | AbsoluteBubbles ->
+                                | Bubbles ->
                                     if absolute > 0 then float absolute
                                     else 0.0001
                                 | RegionPopulationWeightedValues ->
@@ -334,7 +337,9 @@ let seriesData (state : State) =
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
 
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, newCases
+                        dlabel, scaled, absolute, value100k,
+                        totalConfirmed.Value, weeklyIncrease,
+                        areaData.Population, newCases
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -374,6 +379,7 @@ let renderMap (state : State) =
                data = data
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
+               colorKey = "value"
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
@@ -387,7 +393,7 @@ let renderMap (state : State) =
                    match state.DisplayType with
                    // white-ish background color for municipalities when we use
                    // bubbles
-                   | AbsoluteBubbles -> 2
+                   | Bubbles -> 1
                    | _ -> 0
            |}
 
@@ -398,6 +404,7 @@ let renderMap (state : State) =
                data = data
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
+               colorKey = "value100k"
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
@@ -407,7 +414,7 @@ let renderMap (state : State) =
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-               colorAxis = 1
+               colorAxis = 0
            |}
 
         let sparklineFormatter newCases =
@@ -564,12 +571,10 @@ let renderMap (state : State) =
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
 
-
-
         let colorMin =
             match state.DisplayType with
                 | AbsoluteValues -> 0.9
-                | AbsoluteBubbles -> 0.9
+                | Bubbles -> colorMax / 7000.
                 | RegionPopulationWeightedValues -> colorMax / 7000.
                 | RelativeIncrease -> -100.
 
@@ -580,12 +585,37 @@ let renderMap (state : State) =
                 stops = [| (0.000, "#f8f8f8") |]
             |} |> pojo
 
-        let absoluteBubblesColorAxis =
+        let relativeColorAxis =
             {|
-                ``type`` = "linear"
-                visible = false
-                stops = [| (0.000, "#FFA848") |]
+                ``type`` = "logarithmic"
+                tickInterval = 0.4
+                max = colorMax
+                min = colorMin
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7")
+                        (0.280,"#ffe792")
+                        (0.360,"#ffdf6c")
+                        (0.440,"#ffb74d")
+                        (0.520,"#ff8d3c")
+                        (0.600,"#f85d3a")
+                        (0.680,"#ea1641")
+                        (0.760,"#d0004e")
+                        (0.840,"#ad005b")
+                        (0.920,"#800066")
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels =
+                    {|
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
             |} |> pojo
+
 
         let colorAxis =
             match state.ContentType with
@@ -643,67 +673,8 @@ let renderMap (state : State) =
                                 |} |> pojo
                         |} |> pojo
 
-                    | AbsoluteBubbles ->
-                        {|
-                            ``type`` = "logarithmic"
-                            tickInterval = 0.4
-                            max = colorMax
-                            min = colorMin
-                            endOnTick = false
-                            startOnTick = false
-                            stops =
-                                [|
-                                    (0.000,"#ffffff")
-                                    (0.001,"#fff7db")
-                                    (0.200,"#ffefb7")
-                                    (0.280,"#ffe792")
-                                    (0.360,"#ffdf6c")
-                                    (0.440,"#ffb74d")
-                                    (0.520,"#ff8d3c")
-                                    (0.600,"#f85d3a")
-                                    (0.680,"#ea1641")
-                                    (0.760,"#d0004e")
-                                    (0.840,"#ad005b")
-                                    (0.920,"#800066")
-                                    (0.999,"#43006e")
-                                |]
-                            reversed = true
-                            labels =
-                                {|
-                                    formatter = fun() -> jsThis?value
-                                |} |> pojo
-                        |} |> pojo
-
-                    | RegionPopulationWeightedValues  ->
-                        {|
-                            ``type`` = "logarithmic"
-                            tickInterval = 0.4
-                            max = colorMax
-                            min = colorMin
-                            endOnTick = false
-                            startOnTick = false
-                            stops =
-                                [|
-                                    (0.000,"#ffffff")
-                                    (0.001,"#fff7db")
-                                    (0.200,"#ffefb7")
-                                    (0.280,"#ffe792")
-                                    (0.360,"#ffdf6c")
-                                    (0.440,"#ffb74d")
-                                    (0.520,"#ff8d3c")
-                                    (0.600,"#f85d3a")
-                                    (0.680,"#ea1641")
-                                    (0.760,"#d0004e")
-                                    (0.840,"#ad005b")
-                                    (0.920,"#800066")
-                                    (0.999,"#43006e")
-                                |]
-                            reversed = true
-                            labels =
-                                {|
-                                    formatter = fun() -> jsThis?value
-                                |} |> pojo
-                        |} |> pojo
+                    | Bubbles -> relativeColorAxis
+                    | RegionPopulationWeightedValues -> relativeColorAxis
                     | RelativeIncrease ->
                         {|
                             ``type`` = "linear"
@@ -747,11 +718,11 @@ let renderMap (state : State) =
             subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
             series =
                 match state.DisplayType with
-                | AbsoluteBubbles -> [| series geoJson; bubbleSeries geoJson |]
+                | Bubbles -> [| series geoJson; bubbleSeries geoJson |]
                 | _ -> [| series geoJson |]
             legend = legend
             colorAxis = [|
-                colorAxis; absoluteBubblesColorAxis; whiteMuniColorAxis
+                colorAxis; whiteMuniColorAxis
             |]
             tooltip =
                 {|
@@ -794,7 +765,7 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector state dispatch =
     let selectors =
         if state.ContentType = ConfirmedCases
-        then [ RelativeIncrease; AbsoluteValues; AbsoluteBubbles
+        then [ RelativeIncrease; AbsoluteValues; Bubbles
                RegionPopulationWeightedValues ]
         else [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
