@@ -49,6 +49,7 @@ let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
 
 type DisplayType =
     | AbsoluteValues
+    | AbsoluteBubbles
     | RegionPopulationWeightedValues
     | RelativeIncrease
 with
@@ -57,6 +58,7 @@ with
     override this.ToString() =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
+       | AbsoluteBubbles                -> I18N.t "charts.map.absoluteBubbles"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
        | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease"
 
@@ -290,9 +292,14 @@ let seriesData (state : State) =
                             float absolute * 100000. / float areaData.Population
                         let dlabel, value =
                             match state.DisplayType with
-                            | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None,  10. * value100k |> Math.Round |> int  //factor 10 for better resolution in graph
-                            | RelativeIncrease               -> None, absolute
+                            | AbsoluteValues ->
+                                ((Some absolute) |> Utils.zeroToNone), absolute
+                            | AbsoluteBubbles -> None, absolute
+                            | RegionPopulationWeightedValues ->
+                                // factor 10 for better resolution in graph
+                                None,  10. * value100k |> Math.Round |> int
+                            | RelativeIncrease ->
+                                None, absolute
                         let weeklyIncrease =
                             let parseNumber x =
                                 match x with
@@ -312,6 +319,9 @@ let seriesData (state : State) =
                             | ConfirmedCases ->
                                 match state.DisplayType with
                                 | AbsoluteValues ->
+                                    if absolute > 0 then float absolute
+                                    else 0.0001
+                                | AbsoluteBubbles ->
                                     if absolute > 0 then float absolute
                                     else 0.0001
                                 | RegionPopulationWeightedValues ->
@@ -359,6 +369,7 @@ let renderMap (state : State) =
 
         let series geoJson =
             {| visible = true
+               ``type`` = null
                mapData = geoJson
                data = data
                keys = [| "code" ; "value" |]
@@ -366,10 +377,18 @@ let renderMap (state : State) =
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
+               minSize = 1
+               maxSize = "6%"
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+               colorAxis =
+                   match state.DisplayType with
+                   // white-ish background color for municipalities when we use
+                   // bubbles
+                   | AbsoluteBubbles -> 2
+                   | _ -> 0
            |}
 
         let bubbleSeries geoJson =
@@ -382,10 +401,13 @@ let renderMap (state : State) =
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
+               minSize = 1
+               maxSize = "10%"
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+               colorAxis = 1
            |}
 
         let sparklineFormatter newCases =
@@ -468,7 +490,6 @@ let renderMap (state : State) =
                 """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
 
 
-
         let tooltipFormatter state jsThis =
             let points = jsThis?point
             let area = points?area
@@ -548,8 +569,23 @@ let renderMap (state : State) =
         let colorMin =
             match state.DisplayType with
                 | AbsoluteValues -> 0.9
+                | AbsoluteBubbles -> 0.9
                 | RegionPopulationWeightedValues -> colorMax / 7000.
                 | RelativeIncrease -> -100.
+
+        let whiteMuniColorAxis =
+            {|
+                ``type`` = "linear"
+                visible = false
+                stops = [| (0.000, "#f8f8f8") |]
+            |} |> pojo
+
+        let absoluteBubblesColorAxis =
+            {|
+                ``type`` = "linear"
+                visible = false
+                stops = [| (0.000, "#FFA848") |]
+            |} |> pojo
 
         let colorAxis =
             match state.ContentType with
@@ -577,6 +613,37 @@ let renderMap (state : State) =
                 | ConfirmedCases ->
                     match state.DisplayType with
                     | AbsoluteValues ->
+                        {|
+                            ``type`` = "logarithmic"
+                            tickInterval = 0.4
+                            max = colorMax
+                            min = colorMin
+                            endOnTick = false
+                            startOnTick = false
+                            stops =
+                                [|
+                                    (0.000,"#ffffff")
+                                    (0.001,"#fff7db")
+                                    (0.200,"#ffefb7")
+                                    (0.280,"#ffe792")
+                                    (0.360,"#ffdf6c")
+                                    (0.440,"#ffb74d")
+                                    (0.520,"#ff8d3c")
+                                    (0.600,"#f85d3a")
+                                    (0.680,"#ea1641")
+                                    (0.760,"#d0004e")
+                                    (0.840,"#ad005b")
+                                    (0.920,"#800066")
+                                    (0.999,"#43006e")
+                                |]
+                            reversed = true
+                            labels =
+                                {|
+                                    formatter = fun() -> jsThis?value
+                                |} |> pojo
+                        |} |> pojo
+
+                    | AbsoluteBubbles ->
                         {|
                             ``type`` = "logarithmic"
                             tickInterval = 0.4
@@ -678,10 +745,14 @@ let renderMap (state : State) =
         {| optionsWithOnLoadEvent "covid19-map" with
             title = null
             subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
-//            series = [| series geoJson; bubbleSeries geoJson |]
-            series = [| bubbleSeries geoJson |]
+            series =
+                match state.DisplayType with
+                | AbsoluteBubbles -> [| series geoJson; bubbleSeries geoJson |]
+                | _ -> [| series geoJson |]
             legend = legend
-            colorAxis = colorAxis
+            colorAxis = [|
+                colorAxis; absoluteBubblesColorAxis; whiteMuniColorAxis
+            |]
             tooltip =
                 {|
                     formatter = fun () -> tooltipFormatter state jsThis
@@ -723,7 +794,8 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector state dispatch =
     let selectors =
         if state.ContentType = ConfirmedCases
-        then [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues ]
+        then [ RelativeIncrease; AbsoluteValues; AbsoluteBubbles
+               RegionPopulationWeightedValues ]
         else [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
         prop.className "chart-display-property-selector"
