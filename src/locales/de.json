@@ -369,13 +369,13 @@
             "title": "Anteil der schweren Fälle",
             "deceasedCases": "Todesfälle",
             "hospitalizations": "Hospitalisiert",
-            "ventilatorHospital": "An Beatmungsmaschinen",
+            "ventilatorHospital": "An Beatmungsgeräten",
             "deceasedHospital": "Todesfälle",
             "hospitalMortality": "Sterblichkeit in Krankenhäusern",
             "seriousCases": "Schwere Fälle",
             "icuCases": "Auf Intensivstationen",
             "icuHospital": "Auf Intensivstationen",
-            "ventilatorCases": "An Beatmungsmaschinen",
+            "ventilatorCases": "An Beatmungsgeräten",
             "icuMortality": "Sterblichkeit auf Intensivstationen",
             "hospitalDeceasedShare": "Anteil der Todesfälle in Krankenhäusern",
             "titleMenu": "Schwere Fälle"
@@ -414,7 +414,9 @@
             "loading": "Daten werden geladen …",
             "sortBy": "Sortieren nach:",
             "weekYearDateFormat": "%W. Woche %Y",
-            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}"
+            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}",
+            "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
+            "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -443,7 +445,7 @@
             "title": "Hospitalisiert",
             "allHospitals": "Alle Krankenhäuser",
             "hospitalized": "Hospitalisierte",
-            "ventilator": "An Beatmungsmaschinen",
+            "ventilator": "An Beatmungsgeräten",
             "care": "In Pflege",
             "titleMenu": "Hospitalisiert"
         },
@@ -490,7 +492,7 @@
             "active": "Aktive Fälle",
             "dischargedToDate": "Aus Krankenhäusern entlassen (bis heute)",
             "hospitalized": "Hospitalisierte",
-            "ventilator": "An Beatmungsmaschinen",
+            "ventilator": "An Beatmungsgeräten",
             "testsToDate": "Tests (bis heute)",
             "deceasedToDate": "Todesfälle (bis heute)",
             "confirmed": "Bestätigte Fälle (täglich)",
@@ -500,7 +502,7 @@
             "hospitalAdmitted": "Ins Krankenhaus eingewiesen",
             "icuAdmitted": "Auf Intensivstation eingewiesen",
             "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
-            "ventilatorAdmitted": "An Beatmungsgerät angeschlossen",
+            "ventilatorAdmitted": "An Beatmungsgerät",
             "confirmedCases": "Bestätigte Fälle",
             "testsPerformed": "Tests",
             "showToDate": "Bis heute",
@@ -530,7 +532,7 @@
             "projection": "Projektion",
             "bedsShort": "Betten",
             "bedsICUAll": "Intensivbetten, alle",
-            "ventilators": "Beatmungsmaschinen",
+            "ventilators": "Beatmungsgeräte",
             "bedsMax": "Betten, maksimal",
             "bedsICUFull": "Intensivbetten, voll",
             "beds70": "Betten, 70 %",
@@ -570,7 +572,7 @@
             "active": "Aktive",
             "title": "Bestätigte Fälle",
             "icu": "Auf Intensivstationen",
-            "ventilator": "An Beatmungsmaschinen",
+            "ventilator": "An Beatmungsgeräten",
             "recovered": "Genesene",
             "titleMenu": "Fälle"
         },
@@ -585,13 +587,13 @@
         "countriesTotalDeathsPer1M": {
             "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
-            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen",
+            "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder – Todesfälle"
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
-            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen",
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)",
             "titleMenu": "Länder – Neue Fälle"
         },
         "world": {
@@ -757,7 +759,7 @@
         "age_male_65-74_todate": "65 – 74 Jahre",
         "state_out_of_hospital_todate": "Aus Krankenhäusern entlassen (bis heute)",
         "cases_confirmed_todate": "Bestätigte Fälle (bis heute)",
-        "state_critical": "An Beatmungsmaschinen (aktive)",
+        "state_critical": "An Beatmungsgeräten",
         "region_po_todate": "Notranjsko-kraška",
         "age_female_45-54_todate": "45 – 54 Jahre",
         "region_mb_todate": "Podravska",
@@ -783,12 +785,12 @@
         "age_male_85+_todate": "85+ Jahre",
         "age_male_todate": "Gesamt",
         "state_in_hospital_todate": "Hospitalisierte (bis heute)",
-        "state_in_hospital": "Hospitalisierte (aktive)",
+        "state_in_hospital": "Hospitalisierte",
         "region_kp_todate": "Küste und Karst",
         "age_female_75-84_todate": "75 – 84 Jahre",
         "region_ng_todate": "Goriška",
         "region_nm_todate": "Südostslowenien",
-        "state_icu": "Auf Intensivstationen (aktive)",
+        "state_icu": "Auf Intensivstationen",
         "age_female_35-44_todate": "35 – 44 Jahre",
         "cases_closed_todate": "Abgeschlossene Fälle (bis heute)",
         "state_deceased_todate": "Bestätigte Todesfälle (bis heute)",
@@ -951,6 +953,14 @@
         "restaurants": {
             "description": "Schließung von Restaurants, Hotels, Einkaufszentren, Friseur- und Kosmetikgeschäften.<br>Schließung von Studentenwohnheimen, eingeschränkter öffentlicher Nahverkehr.",
             "title": "Restaurants"
+        },
+        "liftShops": {
+            "description": "Erholung: Elektro-, KFZ-, Möbel- und Kindergeschäfte, Pedikür- und Copyshops, Juweliere und Uhrenläden",
+            "title": "Geschäfte"
+        },
+        "liftLibraries": {
+            "description": "Erholung: Bibliotheken, Dienstleistungsbetriebe, Bau- und Handwerksdienstleistungen…",
+            "title": "Bibliotheken"
         }
     },
     "region": {
@@ -1002,7 +1012,8 @@
         "weKnowWeDoNotKnow": "Wir wissen, dass Daten manchmal lügen. Woher wissen wir, dass wir (nicht) wissen? 🤔📉🧐📈🤷 ♂️🤷 ♀️",
         "checked": "🆕 Geprüft:",
         "newMedium": "🆕 📝 Neuer Medium Nachricht:",
-        "newInfographics": "🆕 📇 Neue Infografiken:"
+        "newInfographics": "🆕 📇 Neue Infografiken:",
+        "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1201,6 +1212,10 @@
         "12": {
             "description": "neue Testmethode",
             "title": "Phase<br>12"
+        },
+        "13": {
+            "description": "Neue Testmethode",
+            "title": "Phase<br>13"
         }
     },
     "embedMaker": {
