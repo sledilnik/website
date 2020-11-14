@@ -850,6 +850,14 @@
         "liftShops": {
             "title": "Shops",
             "description": "Relaxation: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
+        },
+        "gatherings2": {
+            "title": "Gatherings",
+            "description": "Prohibition of gathering in public places (except for close family members)"
+        },
+        "services": {
+            "title": "Services",
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
         }
     },
     "days": {

@@ -594,6 +594,14 @@
         "liftShops": {
             "title": "Prodajalne",
             "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
+        },
+        "gatherings2": {
+            "title": "Zbiranje",
+            "description": "Prepoved zbiranja na javnih mestih (razen za ožje družinske člane in člane istega gospodinjstva)"
+        },
+        "services": {
+            "title": "Storitve",
+            "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....)<br>Začasna ukinitev javnega prometa (razen taksijev). Črtanje določenih izjem za prehode meja."
         }
     },
     "phase": {

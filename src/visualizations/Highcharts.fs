@@ -142,6 +142,8 @@ let addContainmentMeasuresFlags
         27,10, "#FFe6e6", "municipality2"
         31,10, "#ebfaeb", "liftLibraries"
         6, 11, "#ebfaeb", "liftShops"
+        13,11, "#FFe6e6", "gatherings2"
+        16,11, "#FFe6e6", "services"
     |]
     {|
         ``type`` = "flags"
@@ -160,7 +162,7 @@ let addContainmentMeasuresFlags
                 let title = "cm." + i18n + ".title"
                 let text = "cm." + i18n + ".description"
                 if showMeasure then
-                    Some {| x=ts; fillColor=color; title=I18N.t title; text=I18N.t text |}
+                    Some {| x=ts;fillColor=color; title=I18N.t title; text=I18N.t text |}
                 else None
             )
     |}
