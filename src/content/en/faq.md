@@ -123,7 +123,7 @@ Sledilnik uses only validated and official data reported daily by the National I
 <details>
   <summary id=data-hospital-in>How do you obtain data on hospital admissions?</summary>
 
-Hospitals do not always report individual admissions or discharges from which we can obtain accurate data. The number of admissions is usually calculated from data on the currently hospitalized and from the difference compared to the previous day, to which we add the number of discharged and dead on a given day. We keep records of admissions and discharges in intensive care units and for connection and disconnection to/from ventilators in a similar way.
+Hospitals do not always report individual admissions or discharges from which we can obtain accurate data. The number of admissions is usually calculated from data on the currently hospitalized and from the difference compared to the previous day, to which we add the number of discharged and dead on a given day. We keep records of admissions and discharges in intensive care units and for connection and disconnection to/from ventilators (intubated) in a similar way.
 
 </details>
 
@@ -150,17 +150,17 @@ We noticed that the [Worldometer](https://www.worldometers.info/coronavirus/#cou
 <details>
   <summary id=data-active-cases>Do you keep an Active Case counter and do you know how many people are currently infected?</summary>
 
-Yes, these indicators have been graphically displayed as **Confirmed Cases (active)** and **Recovered (total)** from the end of April.
+Yes, these indicators have been graphically displayed as **Active Cases** and **Recovered (total)** from the end of April.
  
 
-These visualizations are not data from public sources; both indicators show the calculated value on the basis of official data, so they are indicated by a dashed line for easier distinguishing. The value of the confirmed cases (active) is calculated by simply subtracting the official data for the relevant category, the value of the Recovered (total) reflects the status of all confirmed cases three weeks ago (minus the dead). The number of recoveries is a simple estimate based on the value of all those confirmed infected in the past – based on the assumption that patients recover from the disease on average within 14 days (source: [the ECDC Report](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); thus, the number of recoveries on a given day equals the number of all confirmed cases three weeks prior to a given date, from which the number of deaths by that day is deducted. This simplified estimation does not take into account the more serious cases of COVID-19 with longer recovery times.     
+These visualizations are not data from public sources; both indicators show the calculated value on the basis of official data, so they are indicated by a dashed line for easier distinguishing. The value of the active cases is calculated by simply subtracting the official data for the relevant category, the value of the Recovered (total) reflects the status of all confirmed cases three weeks ago (minus the dead). The number of recoveries is a simple estimate based on the value of all those confirmed infected in the past – based on the assumption that patients recover from the disease on average within 14 days (source: [the ECDC Report](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); thus, the number of recoveries on a given day equals the number of all confirmed cases three weeks prior to a given date, from which the number of deaths by that day is deducted. This simplified estimation does not take into account the more serious cases of COVID-19 with longer recovery times.     
 
 *Note: The calculation of recoveries was changed on 9 May 2020. We now consider a patient has recovered in 14 days after their infection was confirmed (previously 21 days), so there was be a noticeable jump in the number of survivors. Please take this difference into account when estimating the number of survivors. A more detailed explanation of the changed calculation is available in the Medium article [Od potrjeno okuženih do prebolelih (From Confirmed Case to Recovery )](https://medium.com/@sledilnik/94c81674718e).*
 
 Value formula:
 - Recovered (total) = Confirmed cases (total) 21 days ago – Died (total) by the day of calculation
 
-- Confirmed cases (active) = Confirmed cases (total) - Recovered (total) - Died (total)
+- Active cases = Confirmed cases (total) - Recovered (total) - Died (total)
 
 </details>
 
@@ -223,17 +223,17 @@ The breakpoints are indicated below, on the timeline: from the first confirmed c
 
 * **Confirmed cases (total)** = Total number of all confirmed cases by a given day.
 
-* **Confirmed cases (active)** = Confirmed cases (total) – Recovered (total) – Died (total)
+* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)
 
 * **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
 
-* **Hospitalized (active)** = Current number of people in hospital care (either in the ordinary ward or in the ICU).
+* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).
 
 * **Hospitalized (total) ** = Sum of hospital admissions by date.
 
-* **ICU (active)** = Current number of people in ICUs (intensive care units).
+* **ICU** = Current number of people in ICUs (intensive care units).
 
-* **On ventilator (active) ** = Current number of persons in need of a ventilator.
+* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.
 
 * **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.
 
@@ -256,7 +256,7 @@ Sledilnik uses terminology which is consistent with the official directives of t
 
 * **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category. 
 
-* **On ventilator** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe. It is a subset of the *Intensive Care* and *Hospitalized* categories.
+* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.
 
 * **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)
   
@@ -301,7 +301,7 @@ The phases are shown because the change in testing methodology has also changed 
 <details>
   <summary id=patients-chart>What does the “Hospitalizations” graph tell us?</summary>
 
-The [graph](/en/stats#patients-chart) in the default view *All Hospitals* shows us the whole picture of hospitalizations by date arranged by the condition of patients: columns with a positive value (those above the horizontal axis) show the number admitted to hospital, the number hospitalized, shades of red are used to demark individuals in ICUs, specifically depicting how many of these are in critical condition on the ventilators. Columns with a negative value (those below the horizontal axis) show the number of discharges and deaths that day. You can also select specific hospital and see only hospitalizations there. If you select the *By Hospitals* view below, you can see the number of people in hospital care by day for each of the COVID-19 hospitals.  
+The [graph](/en/stats#patients-chart) in the default view *All Hospitals* shows us the whole picture of hospitalizations by date arranged by the condition of patients: columns with a positive value (those above the horizontal axis) show the number admitted to hospital, the number hospitalized, shades of red are used to demark individuals in ICUs, specifically depicting how many of these are in critical condition on the ventilators (intubated). Columns with a negative value (those below the horizontal axis) show the number of discharges and deaths that day. You can also select specific hospital and see only hospitalizations there. If you select the *By Hospitals* view below, you can see the number of people in hospital care by day for each of the COVID-19 hospitals.  
 The graph can offer a good insight into the workload of hospitals and can be the basis for assessing hospital capacity and planning their possible increase.
 
 </details>
@@ -311,7 +311,7 @@ The graph can offer a good insight into the workload of hospitals and can be the
 
 [Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%). 
 
-(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
+(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju (intubirani) in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.
 
 (*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.
 
