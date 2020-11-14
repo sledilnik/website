@@ -6,7 +6,8 @@ open Fable.Extras.Web
 
 open Types
 
-let apiUrl = "https://api.sledilnik.org/api/owid"
+//let apiUrl = "https://api.sledilnik.org/api/owid"
+let apiUrl = "https://api-stage.sledilnik.org/api/owid"
 
 type CountryIsoCode = string
 
@@ -35,7 +36,8 @@ type Query =
     with
 
     member this.URLSearchParams =
-        [ this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
+        [ ("columns", "")
+          this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
           this.DateTo |> Option.map (fun date-> ("to", date.ToString("yyyy-MM-dd")))
           match this.Countries with
             | CountrySelection.All -> None
