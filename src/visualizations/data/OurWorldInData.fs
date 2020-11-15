@@ -18,6 +18,8 @@ type DataPoint = {
     NewCasesPerMillion : float option
     TotalCases : int option
     TotalCasesPerMillion : float option
+    NewDeaths : int option
+    NewDeathsPerMillion : float option
     TotalDeaths : int option
     TotalDeathsPerMillion : float option
 }
@@ -36,7 +38,11 @@ type Query =
     with
 
     member this.URLSearchParams =
-        [ Some ("columns", "new_cases,new_cases_per_million,total_cases,total_cases_per_million,total_deaths,total_deaths_per_million")
+        [ Some ("columns",
+                "new_cases,new_cases_per_million," +
+                "total_cases,total_cases_per_million," +
+                "new_deaths,new_deaths_per_million" +
+                "total_deaths,total_deaths_per_million")
           this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
           this.DateTo |> Option.map (fun date-> ("to", date.ToString("yyyy-MM-dd")))
           match this.Countries with
@@ -97,6 +103,10 @@ let loadData (query : Query) msg =
                     csvColumns |> findIndexOfColumn "total_cases"
                 let totalCasesPerMIndex =
                     csvColumns |> findIndexOfColumn "total_cases_per_million"
+                let newDeathsIndex =
+                    csvColumns |> findIndexOfColumn "new_deaths"
+                let newDeathsPerMIndex =
+                    csvColumns |> findIndexOfColumn "new_deaths_per_million"
                 let totalDeathsIndex =
                     csvColumns |> findIndexOfColumn "total_deaths"
                 let totalDeathsPerMIndex =
@@ -115,6 +125,9 @@ let loadData (query : Query) msg =
                             TotalCases = parseInt row.[totalCasesIndex]
                             TotalCasesPerMillion =
                                 parseFloat row.[totalCasesPerMIndex]
+                            NewDeaths = parseInt row.[newDeathsIndex]
+                            NewDeathsPerMillion =
+                                parseFloat row.[newDeathsPerMIndex]
                             TotalDeaths = parseInt row.[totalDeathsIndex]
                             TotalDeathsPerMillion =
                                 parseFloat row.[totalDeathsPerMIndex]

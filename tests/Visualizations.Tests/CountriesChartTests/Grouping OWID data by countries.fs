@@ -19,6 +19,7 @@ let ``Groups entries by countries``() =
             ( { CountryCode = code; Date = date
                 NewCases = Some 0; NewCasesPerMillion = None
                 TotalCases = Some cases; TotalCasesPerMillion = casesPerM
+                NewDeaths = Some 0; NewDeathsPerMillion = None
                 TotalDeaths = Some deaths; TotalDeathsPerMillion = deathsPerM })
             )
 

@@ -152,6 +152,9 @@ let buildFromSloveniaDomesticData
             extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToday
         let totalCases, totalCasesPerM =
             extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToDate
+        let newDeaths, newDeathsPerM =
+            extractMetricIfPresent
+                domesticDataForDate.StatePerTreatment.Deceased
         let totalDeaths, totalDeathsPerM =
             extractMetricIfPresent
                 domesticDataForDate.StatePerTreatment.DeceasedToDate
@@ -162,6 +165,8 @@ let buildFromSloveniaDomesticData
             NewCasesPerMillion = newCasesPerM
             TotalCases = totalCases
             TotalCasesPerMillion = totalCasesPerM
+            NewDeaths = newDeaths
+            NewDeathsPerMillion = newDeathsPerM
             TotalDeaths = totalDeaths
             TotalDeathsPerMillion = totalDeathsPerM
         } |> Some

@@ -1,7 +1,6 @@
 # TODO
 
 - new OWID export
-    - extend data model to collect deaths
     - new chart
     - remove properties from DataPoint that we don't use
     - adjust API query for each individual chart
