@@ -596,6 +596,14 @@
         "restaurants": {
             "description": "Chiusura di ristoranti, hotel, centri commerciali, parrucchieri e centri estetici. <br> Chiusura delle Case degli studenti, trasporto pubblico ridotto.",
             "title": "Ristoranti"
+        },
+        "services": {
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ....) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
+            "title": "Servizi"
+        },
+        "gatherings2": {
+            "description": "Divieto di ritrovo in luoghi pubblici (ad eccezione dei familiari stretti)",
+            "title": "Assembramento"
         }
     },
     "tableDict": {
