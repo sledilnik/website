@@ -36,7 +36,7 @@ type Query =
     with
 
     member this.URLSearchParams =
-        [ ("columns", "")
+        [ Some ("columns", "new_cases,new_cases_per_million,total_cases,total_cases_per_million,total_deaths,total_deaths_per_million")
           this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
           this.DateTo |> Option.map (fun date-> ("to", date.ToString("yyyy-MM-dd")))
           match this.Countries with
@@ -71,6 +71,8 @@ let loadData (query : Query) msg =
             let data =
                 csv.Split("\n").[1..]
                 |> Array.map (fun rowString ->
+                    printf "row=%A" rowString
+
                     let row = rowString.Split(";")
                     try
                         Some {
