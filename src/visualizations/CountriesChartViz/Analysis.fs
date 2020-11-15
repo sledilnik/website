@@ -127,11 +127,17 @@ let SloveniaPopulationInM =
     |> float)
     / 1000000.
 
-let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
+let buildFromSloveniaDomesticData
+        (statsData: StatsData)
+        (offsetDays: int)
+        (date: DateTime)
         : DataPoint option =
+    let actualTargetDate = date.AddDays(float offsetDays)
+
     let domesticDataForDate =
         statsData
-        |> List.tryFind(fun dataForDate -> dataForDate.Date = date)
+        |> List.tryFind
+               (fun dataForDate -> dataForDate.Date = actualTargetDate)
 
     let extractMetricIfPresent (metricValue: int option)
             : (int option * float option) =
@@ -162,11 +168,55 @@ let buildFromSloveniaDomesticData (statsData: StatsData) (date: DateTime)
     | None -> None
 
 let updateWithSloveniaDomesticData
-        (statsData: StatsData) (countryData: DataPoint): DataPoint option =
+        (statsData: StatsData)
+        (offsetDays: int)
+        (countryData: DataPoint): DataPoint option =
     match countryData.CountryCode with
     | "SVN" ->
-        countryData.Date |> buildFromSloveniaDomesticData statsData
+        countryData.Date
+        |> buildFromSloveniaDomesticData statsData offsetDays
     | _ -> Some countryData
+
+let findLatestDateWithDomesticData metricToDisplay statsData: DateTime =
+    let hasData (dataPoint: StatsDataPoint) =
+        match metricToDisplay with
+        | NewCasesPer1M ->
+            dataPoint.Cases.ConfirmedToday.IsSome
+        | ActiveCasesPer1M ->
+            dataPoint.Cases.ConfirmedToDate.IsSome
+        | TotalDeathsPer1M ->
+            dataPoint.StatePerTreatment.DeceasedToDate.IsSome
+        | DeathsPerCases ->
+            dataPoint.StatePerTreatment.DeceasedToDate.IsSome
+            && dataPoint.Cases.ConfirmedToDate.IsSome
+
+    let foundDataPoint =
+        statsData
+        |> List.rev
+        |> List.find hasData
+
+    foundDataPoint.Date.Date
+
+let findLatestDateWithOwidData metricToDisplay owidData: DateTime =
+    let hasData (dataPoint: DataPoint) =
+        match metricToDisplay with
+        | NewCasesPer1M ->
+            dataPoint.NewCasesPerMillion.IsSome
+        | ActiveCasesPer1M ->
+            dataPoint.NewCasesPerMillion.IsSome
+        | TotalDeathsPer1M ->
+            dataPoint.TotalDeathsPerMillion.IsSome
+        | DeathsPerCases ->
+            dataPoint.TotalDeathsPerMillion.IsSome
+            && dataPoint.NewCasesPerMillion.IsSome
+
+    let foundDataPoint =
+        owidData
+        |> List.rev
+        |> List.find hasData
+
+    foundDataPoint.Date.Date
+
 
 let aggregateOurWorldInData
     daysOfMovingAverage
@@ -175,12 +225,32 @@ let aggregateOurWorldInData
     (statsData: StatsData)
     : CountriesData option =
 
+    let determineDayDifferenceBetweenOwidAndDomesticData owidData =
+        // First calculate the difference between the latest OWID date
+        // that has the target metric and the latest Slovenian domestic
+        // date that has the target metric.
+        // This is done so we can move the Slovenian data one
+        // day forward to ensure the charts include Slovenia for the latest
+        // date (so the countries can be easily compared by users).
+        // See https://github.com/sledilnik/website/issues/689
+        let latestDateWithDomesticData =
+            statsData |> findLatestDateWithDomesticData metricToDisplay
+
+        let latestDateWithOwidData =
+            owidData |> findLatestDateWithOwidData metricToDisplay
+
+        Days.between latestDateWithOwidData latestDateWithDomesticData
+
     let doAggregate (owidData: OurWorldInDataRemoteData): CountriesData option =
         match owidData with
-        | Success dataPoints ->
+        | Success owidData ->
+            let dayDiff = determineDayDifferenceBetweenOwidAndDomesticData
+                              owidData
+
             let dataPointsWithLocalSloveniaData =
-                dataPoints
-                |> List.choose (updateWithSloveniaDomesticData statsData)
+                owidData
+                |> List.choose
+                       (updateWithSloveniaDomesticData statsData dayDiff)
 
             let groupedByCountries: CountriesData =
                 dataPointsWithLocalSloveniaData
