@@ -18,6 +18,11 @@ let setHighestActiveCases = {
     CountriesCodes = [| "MNE"; "CZE"; "CHE"; "AUT"; "SVN"; "BEL"; "GEO"; "FRA"; "ARM"; "POL" |]
 }
 
+let setHighestNewDeaths = {
+    Label = "groupHighestNewDeaths"
+    CountriesCodes = [| "CZE"; "BEL"; "BIH"; "MKD"; "ARM"; "MNE"; "HUN"; "SVN"; "BGR"; "FRA" |]
+}
+
 let setHighestTotalDeaths = {
     Label = "groupHighestTotalDeaths"
     CountriesCodes = [| "BEL"; "PER"; "ESP"; "BRA"; "CHL"; "BOL"; "ARG"; "MEX"; "ECU" |]
@@ -62,6 +67,11 @@ let countriesDisplaySets (metric: MetricToDisplay) =
         |]
     | ActiveCasesPer1M ->
         [| setNeighboringCountries; setHighestActiveCases
+           setLargestEuCountries; setLargestWorldCountries
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
+    | NewDeathsPer1M ->
+        [| setNeighboringCountries; setHighestNewDeaths
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]

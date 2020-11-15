@@ -41,7 +41,7 @@ type Query =
         [ Some ("columns",
                 "new_cases,new_cases_per_million," +
                 "total_cases,total_cases_per_million," +
-                "new_deaths,new_deaths_per_million" +
+                "new_deaths,new_deaths_per_million," +
                 "total_deaths,total_deaths_per_million")
           this.DateFrom |> Option.map (fun date-> ("from", date.ToString("yyyy-MM-dd")))
           this.DateTo |> Option.map (fun date-> ("to", date.ToString("yyyy-MM-dd")))
@@ -58,9 +58,17 @@ let parseInt = Utils.nativeParseInt
 let parseFloat = Utils.nativeParseFloat
 
 let findIndexOfColumn columnName (csvColumns: string[]): int =
-    csvColumns
-    |> Array.findIndex(fun currentColumnName
-                        ->  currentColumnName.Equals(columnName))
+    let index =
+        csvColumns
+        |> Array.findIndex(fun currentColumnName
+                            ->  currentColumnName.Equals(columnName))
+    match index with
+    | -1 ->
+        let message =
+            sprintf "CSV column '%s' not found in the results" columnName
+        printf "CSV column '%s' not found in the results" columnName
+        raise (InvalidOperationException(message))
+    | _ -> index
 
 let loadData (query : Query) msg =
     async {

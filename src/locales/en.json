@@ -502,6 +502,12 @@
             "yAxisTitle": "New daily cases per 100,000 people",
             "legendTitle": "New daily cases per 100,000 people"
         },
+        "countriesNewDeathsPer100k": {
+            "title": "Countries: New Daily Deaths Per 100,000 People (7-day average)",
+            "titleMenu": "Countries - New Deaths",
+            "yAxisTitle": "New daily deaths per 100,000 people",
+            "legendTitle": "New daily deaths per 100,000 people"
+        },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
@@ -1141,6 +1147,7 @@
     "country-groups": {
         "groupHighestNewCases": "highest values",
         "groupHighestActiveCases": "highest values",
+        "groupHighestNewDeaths": "highest values",
         "groupHighestTotalDeaths": "highest values",
         "groupLargestEuCountries": "largest EU* countries",
         "groupLargestWorldCountries": "largest World countries",
