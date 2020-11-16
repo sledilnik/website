@@ -413,6 +413,7 @@
             "last_x_days": "{{ count }} day",
             "last_x_days_plural": "{{ count }} days",
             "absolute": "Absolute",
+            "bubbles": "Distribution",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",

@@ -360,14 +360,157 @@ let seriesData (state : State) =
     } |> Seq.toArray
 
 
-let renderMap (state : State) =
 
+let sparklineFormatter newCases state =
+    let desaturateColor (rgb:string) (sat:float) =
+        let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+        let r = (argb &&& 0x00FF0000) >>> 16
+        let g = (argb &&& 0x0000FF00) >>> 8
+        let b = (argb &&& 0x000000FF)
+        let avg = (float(r + g + b) / 3.0) * 1.6
+        let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+        let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+        let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+        sprintf "#%02x%02x%02x" newR newG newB
+
+    let color1 = "#bda506"
+    let color2 = desaturateColor color1 0.6
+    let color3 = desaturateColor color1 0.3
+
+    let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat )
+                 ([|color2 |] |> Array.replicate 7 |> Array.concat)|]
+               |> Array.concat
+    let columnColors =
+        [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |]
+        |> Array.concat
+
+    let options =
+        {|
+            chart =
+                {|
+                    ``type`` = "column"
+                    backgroundColor = "transparent"
+                |} |> pojo
+            credits = {| enabled = false |}
+            xAxis =
+                {|
+                    visible = true
+                    labels = {| enabled = false |}
+                    title = {| enabled = false |}
+                    tickInterval = 7
+                    lineColor = "#696969"
+                    tickColor = "#696969"
+                    tickLength = 4
+                |}
+            yAxis =
+                {|
+                    title = {| enabled = false |}
+                    visible = true
+                    opposite = true
+                    min = 0.
+                    max = newCases |> Array.max
+                    tickInterval = 5
+                    endOnTick = true
+                    startOnTick = false
+                    allowDecimals = false
+                    showFirstLabel = true
+                    showLastLabel = true
+                    gridLineColor = "#000000"
+                    gridLineDashStyle = "dot"
+                |} |> pojo
+            title = {| text = "" |}
+            legend = {| enabled = false |}
+            series =
+                [|
+                    {|
+                        data = newCases |> Array.map ( max 0.)
+                        animation = false
+                        colors = columnColors
+                        borderColor = columnColors
+                        pointWidth = 2
+                        colorByPoint = true
+                    |} |> pojo
+                |]
+        |} |> pojo
+    match state.MapToDisplay with
+    | Municipality ->
+        Fable.Core.JS.setTimeout
+            (fun () -> sparklineChart("tooltip-chart-mun", options)) 10
+        |> ignore
+        """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
+    | Region ->
+        Fable.Core.JS.setTimeout
+            (fun () -> sparklineChart("tooltip-chart-reg", options)) 10
+        |> ignore
+        """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
+
+
+
+let tooltipFormatter state jsThis =
+    let points = jsThis?point
+    let area = points?area
+    let absolute = points?absolute
+    let value100k = points?value100k
+    let totalConfirmed = points?totalConfirmed
+    let weeklyIncrease = points?weeklyIncrease
+    let newCases= points?newCases
+    let population = points?population
+    let pctPopulation = float absolute * 100.0 / float population
+    let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+
+    let lastTwoWeeks = newCases
+
+    let label =
+        match state.ContentType with
+        | ConfirmedCases ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+            if totalConfirmed > 0 then
+                label
+                    + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                    + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                    + if (Array.max lastTwoWeeks) > 0. then
+                        state |> sparklineFormatter lastTwoWeeks else ""
+            else
+                label
+        | Deceased ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                label + sprintf " (%s %% %s)"
+                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                        (I18N.t "charts.map.confirmedCases")
+                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%s %%</b>"
+                        (I18N.t "charts.map.mortalityOfConfirmedCases")
+                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+            else
+                label
+    sprintf "<b>%s</b><br/>%s<br/>" area label
+
+
+
+let renderMap (state : State) =
     match state.GeoJson with
     | NotAsked
     | Loading -> Html.none
     | Failure str -> Html.text str
     | Success geoJson ->
         let data = seriesData state
+
+        // needed to calculate the color scale for bubbles adjusted to
+        // actual numbers
+        let minValue100k() =
+            (data
+             // for bubbles, do not include municipalities without
+             // any covid cases
+             |> Array.filter (fun x -> x.value100k > 0.)
+             |> Array.minBy (fun x -> x.value100k)).value100k
+        let maxValue100k() =
+            (data |> Array.maxBy (fun x -> x.value100k)).value100k
+
 
         let key =
             match state.MapToDisplay with
@@ -397,6 +540,8 @@ let renderMap (state : State) =
                    // bubbles
                    | Bubbles -> 1
                    | _ -> 0
+               enableMouseTracking = true
+               stickyTracking = (state.DisplayType = Bubbles)
            |}
 
         let bubbleSeries geoJson =
@@ -410,137 +555,16 @@ let renderMap (state : State) =
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
-               minSize = 1
+               minSize = 0 // minimal size of a bubble - 0 means it won't be shown for 0
                maxSize = "10%"
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
                colorAxis = 0
+               enableMouseTracking = true
+               stickyTracking = false
            |}
-
-        let sparklineFormatter newCases =
-            let desaturateColor (rgb:string) (sat:float) =
-                let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
-                let r = (argb &&& 0x00FF0000) >>> 16
-                let g = (argb &&& 0x0000FF00) >>> 8
-                let b = (argb &&& 0x000000FF)
-                let avg = (float(r + g + b) / 3.0) * 1.6
-                let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
-                let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
-                let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
-                sprintf "#%02x%02x%02x" newR newG newB
-
-            let color1 = "#bda506"
-            let color2 = desaturateColor color1 0.6
-            let color3 = desaturateColor color1 0.3
-
-            let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat )
-                         ([|color2 |] |> Array.replicate 7 |> Array.concat)|]
-                       |> Array.concat
-            let columnColors =
-                [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |]
-                |> Array.concat
-
-            let options =
-                {|
-                    chart =
-                        {|
-                            ``type`` = "column"
-                            backgroundColor = "transparent"
-                        |} |> pojo
-                    credits = {| enabled = false |}
-                    xAxis =
-                        {|
-                            visible = true
-                            labels = {| enabled = false |}
-                            title = {| enabled = false |}
-                            tickInterval = 7
-                            lineColor = "#696969"
-                            tickColor = "#696969"
-                            tickLength = 4
-                        |}
-                    yAxis =
-                        {|
-                            title = {| enabled = false |}
-                            visible = true
-                            opposite = true
-                            min = 0.
-                            max = newCases |> Array.max
-                            tickInterval = 5
-                            endOnTick = true
-                            startOnTick = false
-                            allowDecimals = false
-                            showFirstLabel = true
-                            showLastLabel = true
-                            gridLineColor = "#000000"
-                            gridLineDashStyle = "dot"
-                        |} |> pojo
-                    title = {| text = "" |}
-                    legend = {| enabled = false |}
-                    series =
-                        [|
-                            {|
-                                data = newCases |> Array.map ( max 0.)
-                                animation = false
-                                colors = columnColors
-                                borderColor = columnColors
-                                pointWidth = 2
-                                colorByPoint = true
-                            |} |> pojo
-                        |]
-                |} |> pojo
-            match state.MapToDisplay with
-            | Municipality ->
-                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
-                """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
-            | Region ->
-                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-reg", options)) 10 |> ignore
-                """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
-
-
-        let tooltipFormatter state jsThis =
-            let points = jsThis?point
-            let area = points?area
-            let absolute = points?absolute
-            let value100k = points?value100k
-            let totalConfirmed = points?totalConfirmed
-            let weeklyIncrease = points?weeklyIncrease
-            let newCases= points?newCases
-            let population = points?population
-            let pctPopulation = float absolute * 100.0 / float population
-            let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-
-            let lastTwoWeeks = newCases
-
-            let label =
-                match state.ContentType with
-                | ConfirmedCases ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-                    if totalConfirmed > 0 then
-                        label
-                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
-                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                            + if (Array.max lastTwoWeeks) > 0. then sparklineFormatter lastTwoWeeks else ""
-                    else
-                        label
-                | Deceased ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
-                    if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                        label + sprintf " (%s %% %s)"
-                                (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                                (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
-                                (I18N.t "charts.map.confirmedCases")
-                                totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                                (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%s %%</b>"
-                                (I18N.t "charts.map.mortalityOfConfirmedCases")
-                                (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
-                    else
-                        label
-            sprintf "<b>%s</b><br/>%s<br/>" area label
 
         let legend =
             let enabled = state.ContentType = ConfirmedCases
@@ -558,8 +582,9 @@ let renderMap (state : State) =
             |> pojo
 
         let colorMax =
-            match state.ContentType with
-            | ConfirmedCases ->
+            match state.ContentType, state.DisplayType with
+            | ConfirmedCases, Bubbles -> maxValue100k()
+            | ConfirmedCases, _ ->
                 match state.DataTimeInterval with
                 | Complete -> 20000.
                 | LastDays days ->
@@ -569,14 +594,14 @@ let renderMap (state : State) =
                         | 7 -> 3500.
                         | 1 -> 500.
                         | _ -> 100.
-            | Deceased ->
+            | Deceased, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
 
         let colorMin =
             match state.DisplayType with
                 | AbsoluteValues -> 0.9
-                | Bubbles -> colorMax / 7000.
+                | Bubbles -> minValue100k()
                 | RegionPopulationWeightedValues -> colorMax / 7000.
                 | RelativeIncrease -> -100.
 
@@ -584,7 +609,8 @@ let renderMap (state : State) =
             {|
                 ``type`` = "linear"
                 visible = false
-                stops = [| (0.000, "#f8f8f8") |]
+                stops = [| (0.000, "#ffffff") |]
+//                stops = [| (0.000, "#f8f8f8") |]
             |} |> pojo
 
         let relativeColorAxis =

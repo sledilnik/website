@@ -1,8 +1,9 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/680
-    - color the bubbles according to the share
-    - rename "Balončki" to something else
+    - stronger minimum color
+    - fix problems with bubble tooltips
+    - try removing the bubble outline    
     - check comments
     
 
