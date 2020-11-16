@@ -6,6 +6,8 @@ on:
       - master
     tags:
       - v*
+  pull_request:
+    types: [synchronize, reopened, labeled, unlabeled, closed]
 
 env:
   IMAGE_NAME: website
