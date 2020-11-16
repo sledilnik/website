@@ -842,18 +842,18 @@
         "phaseDiagram": {
             "titleMenu": "Фазен диаграм",
             "weekVsWeekBefore": {
-                "yAxisLabel": "Разлика во инциденцата",
-                "xAxisLabel": "7-дневна инциденца",
-                "yAxisTitle": "Разлика во инциденцата (%)",
-                "xAxisTitle": "7-дневна инциденца",
-                "name": "Разлика во инциденцата"
+                "yAxisLabel": "Разлика во инциденцијата",
+                "xAxisLabel": "7-дневна инциденција",
+                "yAxisTitle": "Разлика во инциденцијата (%)",
+                "xAxisTitle": "7-дневна инциденција",
+                "name": "Разлика во инциденцијата"
             },
             "totalVsWeek": {
-                "yAxisLabel": "7-дневна инциденца",
+                "yAxisLabel": "7-дневна инциденција",
                 "xAxisLabel": "Вкупно",
-                "yAxisTitle": "7-дневна инциденца",
+                "yAxisTitle": "7-дневна инциденција",
                 "xAxisTitle": "Вкупно",
-                "name": "Сите во однос на недела"
+                "name": "Сите vs. недела"
             },
             "deceased": "Починати",
             "hospitalized": "Хоспитализирани",
