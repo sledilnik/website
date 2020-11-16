@@ -142,7 +142,11 @@ export default {
           titleMenu: this.$t('charts.countriesNewCasesPer1M.titleMenu'),
           icon: 'graph',
         },
-        'countries-deaths-chart': {
+        'countries-new-deaths-chart': {
+          titleMenu: this.$t('charts.countriesNewDeathsPer1M.titleMenu'),
+          icon: 'graph',
+        },
+        'countries-total-deaths-chart': {
           titleMenu: this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
           icon: 'graph',
         },

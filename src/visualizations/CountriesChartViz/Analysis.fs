@@ -290,7 +290,7 @@ let aggregateOurWorldInData
                         match metricToDisplay with
                         | NewCasesPer1M -> 0.1
                         | ActiveCasesPer1M -> 0.1
-                        | NewDeathsPer1M -> 0.1
+                        | NewDeathsPer1M -> 0.001
                         | TotalDeathsPer1M -> 0.1
                         | DeathsPerCases -> 0.001
 
