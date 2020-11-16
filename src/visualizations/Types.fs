@@ -144,7 +144,8 @@ type VisualizationType =
     | Infections
     | CountriesCasesPer1M
     | CountriesActiveCasesPer1M
-    | CountriesDeathsPer1M
+    | CountriesNewDeathsPer1M
+    | CountriesTotalDeathsPer1M
     | PhaseDiagram
 
 type RenderingMode =

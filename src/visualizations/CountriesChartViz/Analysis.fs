@@ -7,6 +7,7 @@ open System
 type MetricToDisplay =
     | NewCasesPer1M
     | ActiveCasesPer1M
+    | NewDeathsPer1M
     | TotalDeathsPer1M
     | DeathsPerCases
 
@@ -35,6 +36,10 @@ let groupEntriesByCountries
             | None -> None
         | ActiveCasesPer1M ->
             match entryRaw.NewCasesPerMillion with
+            | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
+            | None -> None
+        | NewDeathsPer1M ->
+            match entryRaw.NewDeathsPerMillion with
             | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
             | None -> None
         | TotalDeathsPer1M ->
@@ -152,6 +157,9 @@ let buildFromSloveniaDomesticData
             extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToday
         let totalCases, totalCasesPerM =
             extractMetricIfPresent domesticDataForDate.Cases.ConfirmedToDate
+        let newDeaths, newDeathsPerM =
+            extractMetricIfPresent
+                domesticDataForDate.StatePerTreatment.Deceased
         let totalDeaths, totalDeathsPerM =
             extractMetricIfPresent
                 domesticDataForDate.StatePerTreatment.DeceasedToDate
@@ -162,6 +170,8 @@ let buildFromSloveniaDomesticData
             NewCasesPerMillion = newCasesPerM
             TotalCases = totalCases
             TotalCasesPerMillion = totalCasesPerM
+            NewDeaths = newDeaths
+            NewDeathsPerMillion = newDeathsPerM
             TotalDeaths = totalDeaths
             TotalDeathsPerMillion = totalDeathsPerM
         } |> Some
@@ -184,6 +194,8 @@ let findLatestDateWithDomesticData metricToDisplay statsData: DateTime =
             dataPoint.Cases.ConfirmedToday.IsSome
         | ActiveCasesPer1M ->
             dataPoint.Cases.ConfirmedToDate.IsSome
+        | NewDeathsPer1M ->
+            dataPoint.StatePerTreatment.Deceased.IsSome
         | TotalDeathsPer1M ->
             dataPoint.StatePerTreatment.DeceasedToDate.IsSome
         | DeathsPerCases ->
@@ -200,12 +212,10 @@ let findLatestDateWithDomesticData metricToDisplay statsData: DateTime =
 let findLatestDateWithOwidData metricToDisplay owidData: DateTime =
     let hasData (dataPoint: DataPoint) =
         match metricToDisplay with
-        | NewCasesPer1M ->
-            dataPoint.NewCasesPerMillion.IsSome
-        | ActiveCasesPer1M ->
-            dataPoint.NewCasesPerMillion.IsSome
-        | TotalDeathsPer1M ->
-            dataPoint.TotalDeathsPerMillion.IsSome
+        | NewCasesPer1M -> dataPoint.NewCasesPerMillion.IsSome
+        | ActiveCasesPer1M -> dataPoint.NewCasesPerMillion.IsSome
+        | NewDeathsPer1M -> dataPoint.NewDeathsPerMillion.IsSome
+        | TotalDeathsPer1M -> dataPoint.TotalDeathsPerMillion.IsSome
         | DeathsPerCases ->
             dataPoint.TotalDeathsPerMillion.IsSome
             && dataPoint.NewCasesPerMillion.IsSome
@@ -266,6 +276,9 @@ let aggregateOurWorldInData
                             |> calculateMovingAverages daysOfMovingAverage
                         | ActiveCasesPer1M ->
                             countryData.Entries |> calculateActiveCases
+                        | NewDeathsPer1M ->
+                            countryData.Entries
+                            |> calculateMovingAverages daysOfMovingAverage
                         | TotalDeathsPer1M ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
@@ -277,6 +290,7 @@ let aggregateOurWorldInData
                         match metricToDisplay with
                         | NewCasesPer1M -> 0.1
                         | ActiveCasesPer1M -> 0.1
+                        | NewDeathsPer1M -> 0.1
                         | TotalDeathsPer1M -> 0.1
                         | DeathsPerCases -> 0.001
 
