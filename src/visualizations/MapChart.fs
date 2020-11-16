@@ -58,9 +58,9 @@ with
     override this.ToString() =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
-       | Bubbles                        -> I18N.t "charts.map.bubbles"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
        | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease"
+       | Bubbles                        -> I18N.t "charts.map.bubbles"
 
 type DataTimeInterval =
     | Complete
@@ -239,9 +239,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
         let newDisplayType =
-            if state.DisplayType = RelativeIncrease && newContentType = Deceased
-            then DisplayType.Default // for Deceased, RelativeIncrease not supported
-            else state.DisplayType
+            match newContentType, state.DisplayType with
+            // for Deceased, RelativeIncrease not supported
+            | Deceased, RelativeIncrease -> DisplayType.Default
+            | Deceased, Bubbles -> DisplayType.Default
+            | _ -> state.DisplayType
         { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -764,10 +766,15 @@ let renderSelectors options currentOption dispatch =
 
 let renderDisplayTypeSelector state dispatch =
     let selectors =
-        if state.ContentType = ConfirmedCases
-        then [ RelativeIncrease; AbsoluteValues; Bubbles
-               RegionPopulationWeightedValues ]
-        else [ AbsoluteValues; RegionPopulationWeightedValues ]
+        match state.MapToDisplay, state.ContentType with
+        | Municipality, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues
+              RegionPopulationWeightedValues; Bubbles ]
+        | Region, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues
+              RegionPopulationWeightedValues ]
+        | _, Deceased ->
+            [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children (renderSelectors selectors state.DisplayType dispatch)
@@ -821,4 +828,5 @@ let render (state : State) dispatch =
     ]
 
 let mapChart (props : {| mapToDisplay : MapToDisplay; data : RegionsData |}) =
-    React.elmishComponent("MapChart", init props.mapToDisplay props.data, update, render)
+    React.elmishComponent
+        ("MapChart", init props.mapToDisplay props.data, update, render)
