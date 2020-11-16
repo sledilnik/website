@@ -10,17 +10,22 @@ let setNeighboringCountries = {
 
 let setHighestNewCases = {
     Label = "groupHighestNewCases"
-    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "ARM"; "SVN"; "FRA"; "CHE"; "MNE"; "ARG"; "ESP" |]
+    CountriesCodes = [| "MNE"; "CZE"; "CHE"; "AUT"; "SVN"; "BEL"; "GEO"; "FRA"; "ARM"; "POL" |]
 }
 
 let setHighestActiveCases = {
     Label = "groupHighestActiveCases"
-    CountriesCodes = [| "CZE"; "BEL"; "NLD"; "ARM"; "SVN"; "FRA"; "CHE"; "MNE"; "ARG"; "ESP" |]
+    CountriesCodes = [| "MNE"; "CZE"; "CHE"; "AUT"; "SVN"; "BEL"; "GEO"; "FRA"; "ARM"; "POL" |]
+}
+
+let setHighestNewDeaths = {
+    Label = "groupHighestNewDeaths"
+    CountriesCodes = [| "CZE"; "BEL"; "BIH"; "MKD"; "ARM"; "MNE"; "HUN"; "SVN"; "BGR"; "FRA" |]
 }
 
 let setHighestTotalDeaths = {
     Label = "groupHighestTotalDeaths"
-    CountriesCodes = [| "PER"; "BEL"; "BOL"; "ESP"; "BRA"; "CHL"; "ECU"; "MEX"; "USA"; "GBR" |]
+    CountriesCodes = [| "BEL"; "PER"; "ESP"; "BRA"; "CHL"; "BOL"; "ARG"; "MEX"; "ECU" |]
 }
 
 let setLargestEuCountries = {
@@ -62,6 +67,11 @@ let countriesDisplaySets (metric: MetricToDisplay) =
         |]
     | ActiveCasesPer1M ->
         [| setNeighboringCountries; setHighestActiveCases
+           setLargestEuCountries; setLargestWorldCountries
+           setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
+        |]
+    | NewDeathsPer1M ->
+        [| setNeighboringCountries; setHighestNewDeaths
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]

@@ -421,6 +421,7 @@
     "country-groups": {
         "groupHighestNewCases": "z največjimi vrednostmi",
         "groupHighestActiveCases": "z največjimi vrednostmi",
+        "groupHighestNewDeaths": "z največjimi vrednostmi",
         "groupHighestTotalDeaths": "z največjimi vrednostmi",
         "groupLargestEuCountries": "največje države EU*",
         "groupLargestWorldCountries": "največje države sveta",
@@ -594,6 +595,14 @@
         "liftShops": {
             "title": "Prodajalne",
             "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
+        },
+        "gatherings2": {
+            "title": "Zbiranje",
+            "description": "Prepoved zbiranja na javnih mestih (razen za ožje družinske člane in člane istega gospodinjstva)"
+        },
+        "services": {
+            "title": "Storitve",
+            "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....)<br>Začasna ukinitev javnega prometa (razen taksijev). Črtanje določenih izjem za prehode meja."
         }
     },
     "phase": {
@@ -995,9 +1004,15 @@
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
+        "countriesNewDeathsPer100k": {
+            "title": "Države: dnevno umrli na 100.000 prebivalcev (7-dnevno povprečje)",
+            "titleMenu": "Države – umrli (dnevno)",
+            "yAxisTitle": "Št. dnevno umrlih na 100.000 prebivalcev",
+            "legendTitle": "Umrli (dnevno) na 100.000 prebivalcev"
+        },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na 100.000 prebivalcev (7-dnevno povprečje)",
-            "titleMenu": "Države – umrli",
+            "titleMenu": "Države – umrli (skupaj)",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },

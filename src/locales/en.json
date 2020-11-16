@@ -502,6 +502,12 @@
             "yAxisTitle": "New daily cases per 100,000 people",
             "legendTitle": "New daily cases per 100,000 people"
         },
+        "countriesNewDeathsPer100k": {
+            "title": "Countries: New Daily Deaths Per 100,000 People (7-day average)",
+            "titleMenu": "Countries - New Deaths",
+            "yAxisTitle": "New daily deaths per 100,000 people",
+            "legendTitle": "New daily deaths per 100,000 people"
+        },
         "countriesTotalDeathsPer1M": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
@@ -850,6 +856,14 @@
         "liftShops": {
             "title": "Shops",
             "description": "Relaxation: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
+        },
+        "gatherings2": {
+            "title": "Gatherings",
+            "description": "Prohibition of gathering in public places (except for close family members)"
+        },
+        "services": {
+            "title": "Services",
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
         }
     },
     "days": {
@@ -1133,6 +1147,7 @@
     "country-groups": {
         "groupHighestNewCases": "highest values",
         "groupHighestActiveCases": "highest values",
+        "groupHighestNewDeaths": "highest values",
         "groupHighestTotalDeaths": "highest values",
         "groupLargestEuCountries": "largest EU* countries",
         "groupLargestWorldCountries": "largest World countries",
