@@ -78,17 +78,41 @@ export default {
         this.title = this.title.concat(' - ')
       }
       switch (hospital) {
+        case 'bto':
+          this.title = this.title.concat('B Topolšica')
+          break
+        case 'bse':
+          this.title = this.title.concat('B Sežana')
+          break
         case 'sbce':
           this.title = this.title.concat('SB Celje')
-          break
-        case 'sbje':
-          this.title = this.title.concat('SB Jesenice')
           break
         case 'sbms':
           this.title = this.title.concat('SB Murska Sobota')
           break
         case 'sbnm':
           this.title = this.title.concat('SB Novo mesto')
+          break
+        case 'sbsg':
+          this.title = this.title.concat('SB Slovenj Gradec')
+          break
+        case 'sbje':
+          this.title = this.title.concat('SB Jesenice')
+          break
+        case 'sbpt':
+          this.title = this.title.concat('SB Ptuj')
+          break
+        case 'sbbr':
+          this.title = this.title.concat('SB Brežice')
+          break
+        case 'sbng':
+          this.title = this.title.concat('SB Nova Gorica')
+          break
+        case 'sbiz':
+          this.title = this.title.concat('SB Izola')
+          break
+        case 'sbtr':
+          this.title = this.title.concat('SB Trbovlje')
           break
         case 'ukclj':
           this.title = this.title.concat('UKC Ljubljana')

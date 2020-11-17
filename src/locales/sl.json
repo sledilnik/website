@@ -26,7 +26,8 @@
             "sl": "Slovenščina",
             "sq": "Albanščina",
             "me": "Črnogorščina",
-            "it": "Italijanščina"
+            "it": "Italijanščina",
+            "nb": "Bokmål"
         }
     },
     "timestamp": {
@@ -39,9 +40,11 @@
         "newPage": "🆕 Nova stran:",
         "newMedium": "🆕 📝 Nova Medium objava:",
         "checked": "🆕 Preverjeno:",
-        "weKnowWeDoNotKnow": "Vemo, da podatki včasih lažejo. Kako vemo, da (ne) vemo? \ud83e\udd14\ud83d\udcc9\ud83e\uddd0\ud83d\udcc8\ud83e\udd37\u200d\u2642\ufe0f\ud83e\udd37\u200d\u2640\ufe0f",
+        "presentation": "Kako lahko znanost pomaga odločevalcem - predstavitev v Državnem zboru RS",
+        "bubble": "Ostanimo v mehurčku… Kako v času epidemije omejiti stike in ne ostati sam? 💭",
+        "weKnowWeDoNotKnow": "Vemo, da podatki včasih lažejo. Kako vemo, da (ne) vemo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
         "tests": "5 mitov o testih...",
-        "progressC19": "Običajen potek bolezni Covid-19. Hospitalizacije, intenzivna terapija in smrtnost.",
+        "progressC19": "Običajen potek bolezni COVID-19. Hospitalizacije, intenzivna terapija in smrtnost.",
         "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
         "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
         "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
@@ -416,6 +419,7 @@
     "country-groups": {
         "groupHighestNewCases": "z največjimi vrednostmi",
         "groupHighestActiveCases": "z največjimi vrednostmi",
+        "groupHighestNewDeaths": "z največjimi vrednostmi",
         "groupHighestTotalDeaths": "z največjimi vrednostmi",
         "groupLargestEuCountries": "največje države EU*",
         "groupLargestWorldCountries": "največje države sveta",
@@ -584,11 +588,19 @@
         },
         "liftLibraries": {
             "title": "Knjižnice",
-            "description": "Sproščanje: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,..."
+            "description": "Sproščanje: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,…"
         },
         "liftShops": {
             "title": "Prodajalne",
             "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
+        },
+        "gatherings2": {
+            "title": "Zbiranje",
+            "description": "Prepoved zbiranja na javnih mestih (razen za ožje družinske člane in člane istega gospodinjstva)"
+        },
+        "services": {
+            "title": "Storitve",
+            "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....)<br>Začasna ukinitev javnega prometa (razen taksijev). Črtanje določenih izjem za prehode meja."
         }
     },
     "phase": {
@@ -707,9 +719,9 @@
             "icu": "V intenzivni enoti",
             "icuAdmitted": "Sprejeti v intenzivno",
             "icuDischarged": "Odpuščeni iz intenzivne",
-            "ventilator": "Na respiratorju",
-            "ventilatorAdmitted": "Priklopljeni na respirator",
-            "ventilatorDischarged": "Odklopljeni od respiratorja",
+            "ventilator": "Na respiratorju (intubirani)",
+            "ventilatorAdmitted": "Priklopljeni na respirator (intubirani)",
+            "ventilatorDischarged": "Odklopljeni od respiratorja (intubirani)",
             "deceased": "Umrli"
         },
         "dailyComparison": {
@@ -730,7 +742,7 @@
             "active": "Aktivni",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni enoti",
-            "ventilator": "Na respiratorju",
+            "ventilator": "Na respiratorju (intubirani)",
             "recovered": "Preboleli",
             "deceased": "Umrli"
         },
@@ -744,7 +756,7 @@
             "admitted": "Sprejeti",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni enoti",
-            "ventilator": "Na respiratorju",
+            "ventilator": "Na respiratorju (intubirani)",
             "discharged": "Odpuščeni",
             "deceased": "Umrli",
             "structure": "Struktura"
@@ -761,10 +773,10 @@
             "mortality": "Smrtnost",
             "hospitalCases": "Hospitalizirani",
             "icuCases": "V intenzivni enoti",
-            "ventilatorCases": "Na respiratorju",
+            "ventilatorCases": "Na respiratorju (intubirani)",
             "deceasedCases": "Umrli",
             "icuHospital": "V intenzivni enoti",
-            "ventilatorHospital": "Na respiratorju",
+            "ventilatorHospital": "Na respiratorju (intubirani)",
             "deceasedHospital": "Umrli",
             "hospitalMortality": "Smrtnost v bolnišnici",
             "icuMortality": "Smrtnost v intenzivni enoti",
@@ -989,9 +1001,15 @@
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
             "legendTitle": "Novi primeri na 100.000 prebivalcev"
         },
+        "countriesNewDeathsPer100k": {
+            "title": "Države: dnevno umrli na 100.000 prebivalcev (7-dnevno povprečje)",
+            "titleMenu": "Države – umrli (dnevno)",
+            "yAxisTitle": "Št. dnevno umrlih na 100.000 prebivalcev",
+            "legendTitle": "Umrli (dnevno) na 100.000 prebivalcev"
+        },
         "countriesTotalDeathsPer1M": {
             "title": "Države: umrli (skupaj) na 100.000 prebivalcev (7-dnevno povprečje)",
-            "titleMenu": "Države – umrli",
+            "titleMenu": "Države – umrli (skupaj)",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (skupaj) na 100.000 prebivalcev"
         },
@@ -1102,9 +1120,9 @@
         "cases_rh_employee_confirmed_todate": "PO - zaposleni v DSO (skupaj)",
         "cases_rh_occupant_confirmed_todate": "PO - oskrbovanec DSO (skupaj)",
         "cases_unclassified_confirmed_todate": "PO - ostali (skupaj)",
-        "state_in_hospital": "Hospitalizirani (aktivni)",
-        "state_icu": "V intenzivni enoti (aktivni)",
-        "state_critical": "Na respiratorju (aktivni)",
+        "state_in_hospital": "Hospitalizirani",
+        "state_icu": "V intenzivni enoti",
+        "state_critical": "Na respiratorju (intubirani)",
         "state_deceased_todate": "Umrli (skupaj)",
         "state_in_hospital_todate": "Hospitalizirani (skupaj)",
         "state_out_of_hospital_todate": "Odpuščeni iz bolnišnice (skupaj)",

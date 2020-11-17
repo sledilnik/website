@@ -38,7 +38,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Infections" -> Some Infections
             | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
             | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
-            | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
+            | "CountriesNewDeathsPer1M" -> Some CountriesNewDeathsPer1M
+            | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | _ -> None
             |> Embedded
@@ -413,9 +414,29 @@ let render (state: State) (_: Msg -> unit) =
                             }
           }
 
-    let countriesDeathsPer1M =
-          { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-deaths-chart"
+    let countriesNewDeathsPer1M =
+          { VisualizationType = CountriesNewDeathsPer1M
+            ClassName = "countries-new-deaths-chart"
+            ChartTextsGroup = "countriesNewDeathsPer100k"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = NewDeathsPer1M
+                              ChartTextsGroup = "countriesNewDeathsPer100k"
+                              DataSource = "dsOWD_MZ"
+                            }
+          }
+
+    let countriesTotalDeathsPer1M =
+          { VisualizationType = CountriesTotalDeathsPer1M
+            ClassName = "countries-total-deaths-chart"
             ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
@@ -473,7 +494,8 @@ let render (state: State) (_: Msg -> unit) =
         [ worldMap
           countriesActiveCasesPer1M
           countriesCasesPer1M
-          countriesDeathsPer1M
+          countriesNewDeathsPer1M
+          countriesTotalDeathsPer1M
           // countriesDeathsPerCases
         ]
 
@@ -485,7 +507,8 @@ let render (state: State) (_: Msg -> unit) =
           regions100k; hcCases; sources
           countriesCasesPer1M
           countriesActiveCasesPer1M
-          countriesDeathsPer1M
+          countriesNewDeathsPer1M
+          countriesTotalDeathsPer1M
           phaseDiagram
         ]
 

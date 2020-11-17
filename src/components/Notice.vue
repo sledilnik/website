@@ -3,11 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c"
+      href="https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898"
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.newMedium") }}</b> <span><b>{{ $t("notice.weKnowWeDoNotKnow") }}</b></span>
+          <b>{{ $t("notice.newMedium") }}</b> <span><b>{{ $t("notice.presentation") }}</b></span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

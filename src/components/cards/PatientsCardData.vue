@@ -18,7 +18,7 @@
         <div class="trend-icon good down"></div>
         <span class="out good">{{ renderOut(today) }}</span>
       </div>
-      <div v-if="renderDeceased(today) > 0 && percentageDiff !== 0" class="card-diff-item">
+      <div v-if="renderDeceased(today) > 0" class="card-diff-item">
         <div class="trend-icon deceased"></div>
         <span class="deceased">{{ renderDeceased(today) }}</span>
       </div>
@@ -91,7 +91,13 @@ export default {
       return value
     },
     renderDeceased(item) {
-      const value = item.facilities[this.hospital].deceased.today
+      const field = this.category ? this.category : this.field.category
+      let value
+      if (field === 'icu') {
+        value = item.facilities[this.hospital].deceased.icu.today
+      } else {
+        value = item.facilities[this.hospital].deceased.today
+      }
       if (!value) return 0
       return value
     },

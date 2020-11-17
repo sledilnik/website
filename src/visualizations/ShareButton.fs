@@ -36,7 +36,8 @@ let dropdown (viz: Visualization) =
             | Hospitals -> (1140, 1130)
             | CountriesCasesPer1M -> (1140, 740)
             | CountriesActiveCasesPer1M -> (1140, 740)
-            | CountriesDeathsPer1M -> (1140, 740)
+            | CountriesNewDeathsPer1M -> (1140, 740)
+            | CountriesTotalDeathsPer1M -> (1140, 740)
             | PhaseDiagram -> (1140, 720)
 
         let graphUrl =

@@ -128,13 +128,13 @@ let renderChartOptions (state : State) dispatch =
     let fourWeeks =
         if DisplayType.UseStatsData state.DisplayType then
             state.StatsData
-            |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- weeksShown * 7 - 1)))
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
             |> Seq.map (fun dp -> (dp.Date, getStatsValue dp))
             |> Seq.toArray
         else
             state.PatientsData
-            |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- (weeksShown * 7 - 1))))
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
             |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp))
             |> Seq.toArray
