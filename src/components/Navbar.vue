@@ -26,6 +26,7 @@
       <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
+      <router-link to="medium" class="router-link"><span>{{ $t('navbar.medium') }}</span></router-link>
       <div class="social">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
           <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
