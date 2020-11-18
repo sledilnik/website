@@ -264,7 +264,8 @@
         "groupLargestEuCountries": "najveće EU* države",
         "groupHighestTotalDeaths": "najveći broj",
         "groupHighestActiveCases": "najveći broj",
-        "groupHighestNewCases": "najveći broj"
+        "groupHighestNewCases": "najveći broj",
+        "groupHighestNewDeaths": "najveći broj"
     },
     "charts": {
         "municipalities": {
@@ -295,8 +296,8 @@
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
             "icuDeceasedShare": "Udio smrtnih slučajeva na odjelima intenzivne njege",
-            "ventilatorHospital": "Na respiratoru",
-            "ventilatorCases": "Na respiratoru",
+            "ventilatorHospital": "Na respiratoru (intubirani)",
+            "ventilatorCases": "Na respiratoru (intubirani)",
             "icuMortality": "Smrtnost na odjelima intenzivne njege",
             "deceasedCases": "Smrtni slučajevi",
             "mortality": "Smrtnost",
@@ -345,7 +346,9 @@
             "from": " ",
             "sortBy": "Razvrstaj prema:",
             "weekYearDateFormat": "%W. tjedan %Y.",
-            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}"
+            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}",
+            "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
+            "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -407,7 +410,7 @@
         "patients": {
             "structure": "Struktura",
             "deceased": "Umrli",
-            "ventilator": "Na respiratoru",
+            "ventilator": "Na respiratoru (intubirani)",
             "hospitalizedIn": "Hospitalizirani u:",
             "allHospitals": "Sve bolnice",
             "discharged": "Otpušteni",
@@ -426,7 +429,7 @@
             "title_MKD": "COVID-19 situacija u S. Makedoniji",
             "title_MNE": "COVID-19 Situacija u Crnoj Gori",
             "testsToDate": "Testovi (do danas)",
-            "ventilator": "Na respiratoru",
+            "ventilator": "Na respiratoru (intubirani)",
             "recovered": "Ozdravili",
             "active": "Aktivni slučajevi",
             "hospitalizedToDate": "Hospitalizirani (do danas)",
@@ -440,8 +443,8 @@
             "confirmedToDate": "Potvrđeni slučajevi (do danas)",
             "icuDischarged": "Otpušteni s odjela intenzivne njege",
             "icuAdmitted": "Primljeni na odjel intenzivne njege",
-            "ventilatorDischarged": "Odspojeni s respiratora",
-            "ventilatorAdmitted": "Spojeni na respirator",
+            "ventilatorDischarged": "Odspojeni s respiratora (intubirani)",
+            "ventilatorAdmitted": "Spojeni na respirator (intubirani)",
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "activeCases": "Aktivni slučajevi",
@@ -557,7 +560,7 @@
             "title": "Potvrđeni slučajevi",
             "deceased": "Umrli",
             "icu": "Na odjelu intenzivne njege",
-            "ventilator": "Na respiratoru",
+            "ventilator": "Na respiratoru (intubirani)",
             "hospitalized": "Hospitalizirani",
             "titleMenu": "Slučajevi"
         },
@@ -716,6 +719,21 @@
         "carePatients": {
             "titleMenu": "Bolnice za njegu",
             "title": "Bolnice za njegu"
+        },
+        "countriesNewDeathsPer100k": {
+            "title": "Države: Novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
+            "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
+            "titleMenu": "Države – novi smrtni slučajevi"
+        },
+        "hcCases": {
+            "totalConfirmed": "Ukupno potvrđenih slučajeva",
+            "healthcareEmployeesRelative": "Zaposlenici u zdravstvu (relativno)",
+            "healthcareEmployees": "Zaposlenici u zdravstvu",
+            "healthcareEmployeesCases": "Potvrđeni slučajevi zaposlenika u zdravstvu",
+            "confirmedCases": "Potvrđeni slučajevi",
+            "titleMenu": "Zaposlenici u zdravstvu – slučajevi",
+            "title": "Potvrđeni slučajevi među zaposlenicima u zdravstvu"
         }
     },
     "shortMonth": {
@@ -880,6 +898,19 @@
         "restaurants": {
             "description": "Zatvaranje restorana, hotela, trgovačkih centara, frizerskih i kozmetičkih salona.<br>Zatvaranje studentskih domova, smanjen javni prijevoz.",
             "title": "Restorani"
+        },
+        "gatherings2": {
+            "description": "Zabrana okupljanja na javnim mjestima (osim za članove uže obitelji)",
+            "title": "Okupljanja"
+        },
+        "services": {
+            "title": "Usluge"
+        },
+        "liftShops": {
+            "title": "Dućani"
+        },
+        "liftLibraries": {
+            "title": "Knjižnice"
         }
     },
     "pageNotFound": {
@@ -976,6 +1007,10 @@
         "12": {
             "description": "nova metoda testiranja",
             "title": "faza<br>12"
+        },
+        "13": {
+            "description": "nova metoda testiranja",
+            "title": "faza<br>13"
         }
     },
     "embedMaker": {
@@ -1011,7 +1046,7 @@
         "age_male_0-4_todate": "0 – 4 godina",
         "cases_closed_todate": "Zatvoreni slučajevi (do danas)",
         "region_za_todate": "Zasavlje",
-        "state_in_hospital": "Hospitalizirani (aktivno)",
+        "state_in_hospital": "Hospitalizirani",
         "age_female_65-74_todate": "65 – 74 godina",
         "age_female_45-54_todate": "45 – 54 godina",
         "age_female_85+_todate": "85+ godina",
@@ -1022,7 +1057,7 @@
         "region_ms_todate": "Pomurska",
         "region_nm_todate": "Jugoistočna Slovenija",
         "region_ce_todate": "Savinjska",
-        "state_icu": "Na odjelu intenzivne njege (aktivno)",
+        "state_icu": "Na odjelu intenzivne njege",
         "age_male_15-24_todate": "15 – 24 godina",
         "cases_recovered_todate": "Ozdravili (do danas)",
         "cases_rh_occupant_confirmed_todate": "Potvrđeni slučajevi – stanovnici staračkih domova (do danas)",
@@ -1041,7 +1076,7 @@
         "tests_performed_todate": "Testovi (do danas)",
         "age_female_todate": "Ukupno",
         "cases_confirmed": "Potvrđeni slučajevi (dnevno)",
-        "state_critical": "Na respiratoru (aktivno)"
+        "state_critical": "Na respiratoru (intubirani)"
     },
     "tables": {
         "tabByAgeMale": "Po dobi – muškarci",
@@ -1125,7 +1160,9 @@
         "tests": "Pet mitova o testiranjima …",
         "weKnowWeDoNotKnow": "Znamo, da podaci ponekad lažu. Kako znamo, da (ne) znamo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
         "checked": "🆕 Provjereno:",
-        "newMedium": "🆕 📝 Nova Medium objava:"
+        "newMedium": "🆕 📝 Nova Medium objava:",
+        "presentation": "Kako znanost pomaže donositeljima odluka – prezentacija u Nacionalnoj skupštini",
+        "bubble": "Živjeti u balonu … Kako ograničiti kontakte i ne ostati sam? 💭"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",
