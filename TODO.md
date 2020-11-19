@@ -1,8 +1,6 @@
 # TODO
 
 - CasesChart
-    - clean up code
-    - fix tooltips
 
 - new OWID export
     - return back the official URL, once it has been pushed to production

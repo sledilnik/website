@@ -125,55 +125,39 @@ let renderChartOptions (state : State) dispatch =
 
     let renderSeries series =
 
-        let getPoint : (StatsDataPoint -> PatientsStats -> int option) =
+        let getPoint sdp pdp : int option =
             match series with
-            | Recovered ->
-                fun sdp pdp -> negative sdp.Cases.RecoveredToDate
-            | DeceasedInIcu ->
-                fun sdp pdp -> negative pdp.total.deceased.hospital.icu.toDate
+            | Recovered -> negative sdp.Cases.RecoveredToDate
+            | DeceasedInIcu -> negative pdp.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals ->
-                fun sdp pdp ->
                     pdp.total.deceased.hospital.toDate
                     |> subtract pdp.total.deceased.hospital.icu.toDate
                     |> negative
             | DeceasedOther ->
-                fun sdp pdp ->
                     sdp.StatePerTreatment.DeceasedToDate
                     |> subtract pdp.total.deceased.hospital.toDate
                     |> negative
             | Active ->
-                fun sdp pdp ->
                     sdp.Cases.Active
                     |> subtract sdp.StatePerTreatment.InHospital
             | InHospital ->
-                fun sdp pdp ->
                     sdp.StatePerTreatment.InHospital
                     |> subtract sdp.StatePerTreatment.InICU
             | Icu ->
-                fun sdp pdp ->
                     sdp.StatePerTreatment.InICU
                     |> subtract sdp.StatePerTreatment.Critical
-            | Critical ->
-                fun sdp pdp -> sdp.StatePerTreatment.Critical
+            | Critical -> sdp.StatePerTreatment.Critical
 
-        let getPointTotal : (StatsDataPoint -> PatientsStats -> int option) =
+        let getPointTotal sdp pdp : int option =
             match series with
-            | Recovered ->
-                fun sdp pdp -> sdp.Cases.RecoveredToDate
-            | DeceasedInIcu ->
-                fun sdp pdp -> pdp.total.deceased.hospital.icu.toDate
-            | DeceasedInHospitals ->
-                fun sdp pdp -> pdp.total.deceased.hospital.toDate
-            | DeceasedOther ->
-                fun sdp pdp -> sdp.StatePerTreatment.DeceasedToDate
-            | Active ->
-                fun sdp pdp -> sdp.Cases.Active
-            | InHospital ->
-                fun sdp pdp -> sdp.StatePerTreatment.InHospital
-            | Icu ->
-                fun sdp pdp -> sdp.StatePerTreatment.InICU
-            | Critical ->
-                fun sdp pdp -> sdp.StatePerTreatment.Critical
+            | Recovered -> sdp.Cases.RecoveredToDate
+            | DeceasedInIcu -> pdp.total.deceased.hospital.icu.toDate
+            | DeceasedInHospitals -> pdp.total.deceased.hospital.toDate
+            | DeceasedOther -> sdp.StatePerTreatment.DeceasedToDate
+            | Active -> sdp.Cases.Active
+            | InHospital -> sdp.StatePerTreatment.InHospital
+            | Icu -> sdp.StatePerTreatment.InICU
+            | Critical -> sdp.StatePerTreatment.Critical
 
         let statsDataDict = state.data |> Seq.map(fun x -> x.Date, x) |> dict
 
