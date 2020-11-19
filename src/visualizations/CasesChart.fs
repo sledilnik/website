@@ -132,7 +132,10 @@ let renderChartOptions (state : State) dispatch =
             | DeceasedInIcu ->
                 fun sdp pdp -> negative pdp.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals ->
-                fun sdp pdp -> negative pdp.total.deceased.hospital.toDate
+                fun sdp pdp ->
+                    pdp.total.deceased.hospital.toDate
+                    |> subtract pdp.total.deceased.hospital.icu.toDate
+                    |> negative
             | DeceasedOther ->
                 fun sdp pdp ->
                     sdp.StatePerTreatment.DeceasedToDate
@@ -162,9 +165,7 @@ let renderChartOptions (state : State) dispatch =
             | DeceasedInHospitals ->
                 fun sdp pdp -> pdp.total.deceased.hospital.toDate
             | DeceasedOther ->
-                fun sdp pdp ->
-                    sdp.StatePerTreatment.DeceasedToDate
-                    |> subtract pdp.total.deceased.hospital.toDate
+                fun sdp pdp -> sdp.StatePerTreatment.DeceasedToDate
             | Active ->
                 fun sdp pdp -> sdp.Cases.Active
             | InHospital ->

@@ -1,8 +1,6 @@
 # TODO
 
 - CasesChart
-    - update Slovenian texts
-    - subtract ICU from hospitals
     - clean up code
     - fix tooltips
 

@@ -276,7 +276,7 @@
             "recovered": "Recovered",
             "deceased-icu": "Died (in ICU)",
             "deceased-hospital": "Died (hospital)",
-            "deceased-rest": "Died (rest)"
+            "deceased-rest": "Died"
         },
         "patients": {
             "title": "Hospitalizations",
