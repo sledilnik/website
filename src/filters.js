@@ -19,6 +19,13 @@ Vue.filter('limit', function(value, size) {
   return value.substr(0, size) + '...'
 })
 
+Vue.filter('strip', function(value) {
+  const div = document.createElement('div')
+  div.innerHTML = value
+  const text = div.textContent || div.innerText || ''
+  return text
+})
+
 /**
  * markdown filter
  * you can use it in Vue template and it will render markdown in user's browser

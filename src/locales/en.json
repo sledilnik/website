@@ -32,7 +32,8 @@
     },
     "timestamp": {
         "updated": "Updated on {{ date, %A, %B %e, %Y }}",
-        "at": "at {{ date, %H:%M }}"
+        "at": "at {{ date, %H:%M }}",
+        "medium": "{{ date, %A, %B %e, %Y  }}"
     },
     "notice": {
         "newInfographics": "🆕 📇 New infographics:",

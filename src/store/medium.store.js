@@ -29,8 +29,14 @@ const actions = {
     const avatar = response.data.feed.image
     const profileLink = response.data.feed.link
     const posts = response.data.items
+    const filteredPosts = posts.filter(post => {
+      if (!post.link.includes('@')) {
+        return post
+      }
+    })
+
     commit('setAvatar', { avatar, profileLink })
-    commit('setFeed', posts)
+    commit('setFeed', filteredPosts)
     commit('setExportTime', new Date())
   },
   refreshDataEvery: ({ dispatch }, seconds) => {

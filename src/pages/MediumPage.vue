@@ -13,9 +13,12 @@
           tag="article"
         >
           <b-card-text>
-            {{ post.description | limit(100) }}
+            {{ post.description | strip | limit(200) }}
           </b-card-text>
           <a :href="post.link">Preberi več</a>
+          <template #footer>
+            <small class="text-muted">{{ $t("timestamp.medium", { date: new Date(post.pubDate) }) }}</small>
+          </template>
         </b-card>
       </b-card-group>
     </div>

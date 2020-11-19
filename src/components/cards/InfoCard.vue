@@ -306,7 +306,6 @@ export default {
 
 .card-diff {
   font-size: 14px;
-  margin-bottom: 0.7rem;
   min-height: 44px; // TODO: fix this hack
 
   .card-diff-item {

@@ -32,7 +32,8 @@
     },
     "timestamp": {
         "updated": "Osveženo: {{ date, %A, %e. %B %Y }}",
-        "at": "ob {{ date, %H.%M }}"
+        "at": "ob {{ date, %H.%M }}",
+        "medium": "{{ date, %A, %e. %B %Y }}"
     },
     "notice": {
         "newInfographics": "🆕 📇 Nova infografika:",
