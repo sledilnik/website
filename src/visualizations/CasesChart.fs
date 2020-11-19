@@ -44,12 +44,6 @@ module Series =
     let all =
         [ Active; InHospital; Icu; Critical; Recovered
           DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
-    let active =
-        [ Active; InHospital; Icu; Critical; ]
-    let inHospital =
-        [ InHospital; Icu; Critical; ]
-    let closed =
-        [ DeceasedInHospitals; DeceasedOther; DeceasedInIcu; Recovered;  ]
 
     let getSeriesInfo = function
         | DeceasedInIcu        -> true,  "#666666",   "deceased-icu"
@@ -99,9 +93,11 @@ let legendFormatter jsThis =
         | "null" -> ()
         | _ ->
             match p?point?seriesId with
-            | "active" | "recovered" | "deceased"  -> fmtUnder <- ""
+            | "active" | "recovered" | "deceased-rest"
+             -> fmtUnder <- ""
             | _ -> fmtUnder <- fmtUnder + "↳ "
-            fmtStr <- fmtStr + sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
+            fmtStr <- fmtStr + sprintf
+                """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                 fmtUnder
                 p?series?color
                 p?series?name
