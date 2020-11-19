@@ -274,7 +274,9 @@
             "icu": "In ICU",
             "ventilator": "On Ventilator (intubated)",
             "recovered": "Recovered",
-            "deceased": "Died"
+            "deceased-icu": "Died (in ICU)",
+            "deceased-hospital": "Died (hospital)",
+            "deceased-rest": "Died (rest)"
         },
         "patients": {
             "title": "Hospitalizations",

@@ -1,6 +1,9 @@
 [<RequireQualifiedAccess>]
 module CasesChart
 
+open System
+open System.Collections.Generic
+open Data.Patients
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -15,16 +18,22 @@ type DisplayType =
 
 type State = {
     data: StatsData
+    PatientsData : PatientsStats []
     displayType: DisplayType
     RangeSelectionButtonIndex: int
+    Error : string option
 }
 
 type Msg =
+    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
 
 type Series =
-    | Deceased
+    | DeceasedInIcu
+    | DeceasedInHospitals
+    | DeceasedOther
     | Recovered
     | Active
     | InHospital
@@ -33,16 +42,19 @@ type Series =
 
 module Series =
     let all =
-        [ Active; InHospital; Icu; Critical; Recovered; Deceased; ]
+        [ Active; InHospital; Icu; Critical; Recovered
+          DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
     let active =
         [ Active; InHospital; Icu; Critical; ]
     let inHospital =
         [ InHospital; Icu; Critical; ]
     let closed =
-        [ Deceased; Recovered;  ]
+        [ DeceasedInHospitals; DeceasedOther; DeceasedInIcu; Recovered;  ]
 
     let getSeriesInfo = function
-        | Deceased      -> true,  "#666666",   "deceased"
+        | DeceasedInIcu        -> true,  "#666666",   "deceased-icu"
+        | DeceasedInHospitals  -> true,  "#888888",   "deceased-hospital"
+        | DeceasedOther        -> true,  "#aaaaaa",   "deceased-rest"
         | Recovered     -> true,  "#8cd4b2",   "recovered"
         | Active        -> true,  "#d5c768",   "active"
         | InHospital    -> true,  "#de9a5a",   "hospitalized"
@@ -52,13 +64,25 @@ module Series =
 let init data : State * Cmd<Msg> =
     let state = {
         data = data
+        PatientsData = [||]
         displayType = MultiChart
         RangeSelectionButtonIndex = 0
+        Error = None
     }
-    state, Cmd.none
+
+    let cmd = Cmd.OfAsync.either getOrFetch ()
+                   ConsumePatientsData ConsumeServerError
+
+    state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | ConsumePatientsData (Ok data) ->
+        { state with PatientsData = data }, Cmd.none
+    | ConsumePatientsData (Error err) ->
+        { state with Error = Some err }, Cmd.none
+    | ConsumeServerError ex ->
+        { state with Error = Some ex.Message }, Cmd.none
     | ChangeDisplayType rt ->
         { state with displayType=rt }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
@@ -101,40 +125,91 @@ let renderChartOptions (state : State) dispatch =
 
     let renderSeries series =
 
-        let getPoint : (StatsDataPoint -> int option) =
+        let getPoint : (StatsDataPoint -> PatientsStats -> int option) =
             match series with
-            | Recovered     -> fun dp -> negative dp.Cases.RecoveredToDate
-            | Deceased      -> fun dp -> negative dp.StatePerTreatment.DeceasedToDate
-            | Active        -> fun dp -> dp.Cases.Active |> subtract dp.StatePerTreatment.InHospital
-            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital |> subtract dp.StatePerTreatment.InICU
-            | Icu           -> fun dp -> dp.StatePerTreatment.InICU |> subtract dp.StatePerTreatment.Critical
-            | Critical      -> fun dp -> dp.StatePerTreatment.Critical
+            | Recovered ->
+                fun sdp pdp -> negative sdp.Cases.RecoveredToDate
+            | DeceasedInIcu ->
+                fun sdp pdp -> negative pdp.total.deceased.hospital.icu.toDate
+            | DeceasedInHospitals ->
+                fun sdp pdp -> negative pdp.total.deceased.hospital.toDate
+            | DeceasedOther ->
+                fun sdp pdp ->
+                    sdp.StatePerTreatment.DeceasedToDate
+                    |> subtract pdp.total.deceased.hospital.toDate
+                    |> negative
+            | Active ->
+                fun sdp pdp ->
+                    sdp.Cases.Active
+                    |> subtract sdp.StatePerTreatment.InHospital
+            | InHospital ->
+                fun sdp pdp ->
+                    sdp.StatePerTreatment.InHospital
+                    |> subtract sdp.StatePerTreatment.InICU
+            | Icu ->
+                fun sdp pdp ->
+                    sdp.StatePerTreatment.InICU
+                    |> subtract sdp.StatePerTreatment.Critical
+            | Critical ->
+                fun sdp pdp -> sdp.StatePerTreatment.Critical
 
-        let getPointTotal : (StatsDataPoint -> int option) =
+        let getPointTotal : (StatsDataPoint -> PatientsStats -> int option) =
             match series with
-            | Recovered     -> fun dp -> dp.Cases.RecoveredToDate
-            | Deceased      -> fun dp -> dp.StatePerTreatment.DeceasedToDate
-            | Active        -> fun dp -> dp.Cases.Active
-            | InHospital    -> fun dp -> dp.StatePerTreatment.InHospital
-            | Icu           -> fun dp -> dp.StatePerTreatment.InICU
-            | Critical      -> fun dp -> dp.StatePerTreatment.Critical
+            | Recovered ->
+                fun sdp pdp -> sdp.Cases.RecoveredToDate
+            | DeceasedInIcu ->
+                fun sdp pdp -> pdp.total.deceased.hospital.icu.toDate
+            | DeceasedInHospitals ->
+                fun sdp pdp -> pdp.total.deceased.hospital.toDate
+            | DeceasedOther ->
+                fun sdp pdp ->
+                    sdp.StatePerTreatment.DeceasedToDate
+                    |> subtract pdp.total.deceased.hospital.toDate
+            | Active ->
+                fun sdp pdp -> sdp.Cases.Active
+            | InHospital ->
+                fun sdp pdp -> sdp.StatePerTreatment.InHospital
+            | Icu ->
+                fun sdp pdp -> sdp.StatePerTreatment.InICU
+            | Critical ->
+                fun sdp pdp -> sdp.StatePerTreatment.Critical
 
-        let visible, color, seriesid = Series.getSeriesInfo series
+        let statsDataDict = state.data |> Seq.map(fun x -> x.Date, x) |> dict
+
+        let patientsDataDict
+            = state.PatientsData |> Seq.map(fun x -> x.Date, x) |> dict
+
+        let mergeFunc (pair: KeyValuePair<DateTime, StatsDataPoint>) =
+            let date = pair.Key
+            let stateDp = pair.Value
+            match patientsDataDict.TryGetValue date with
+            | true, patientsDp -> Some (date, stateDp, patientsDp)
+            | false, _ -> None
+
+        let mergedData =
+            statsDataDict
+            |> Seq.map mergeFunc
+            |> Seq.choose id
+            |> Seq.toList
+            |> List.sortBy (fun (date, _, _) -> date)
+
+        let visible, color, seriesId = Series.getSeriesInfo series
         {|
             ``type`` = "column"
             visible = visible
             color = color
-            name = I18N.tt "charts.cases" seriesid
+            name = I18N.tt "charts.cases" seriesId
             data =
-                state.data
-                |> Seq.filter (fun dp -> dp.Cases.Active.IsSome)
-                |> Seq.map (fun dp ->
+                mergedData
+                |> Seq.filter (fun (_, dp, _) -> dp.Cases.Active.IsSome)
+                |> Seq.map (fun (date, statsDp, patientsDp) ->
                     {|
-                        x = dp.Date |> jsTime12h
-                        y = getPoint dp
-                        seriesId = seriesid
-                        fmtDate = I18N.tOptions "days.longerDate" {| date = dp.Date |}
-                        fmtTotal = getPointTotal dp |> string
+                        x = date |> jsTime12h
+                        y = getPoint statsDp patientsDp
+                        seriesId = seriesId
+                        fmtDate = I18N.tOptions "days.longerDate"
+                                      {| date = date |}
+                        fmtTotal = getPointTotal statsDp patientsDp |> string
                     |} |> pojo
                 )
                 |> Array.ofSeq
@@ -153,7 +228,7 @@ let renderChartOptions (state : State) dispatch =
         res
 
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
@@ -179,7 +254,7 @@ let renderChartContainer (state : State) dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 
