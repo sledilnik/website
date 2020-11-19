@@ -746,6 +746,12 @@
             "disclaimer": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der Angestellten im Gesundheitswesen könnte hier geringer ausfallen, als er eigentlich ist.",
             "titleMenu": "Fälle Angestellte Gesundheitswesen",
             "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
+        },
+        "countriesNewDeathsPer100k": {
+            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "yAxisTitle": "Neue tägliche Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
+            "titleMenu": "Länder - neue Todesfälle",
+            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
         }
     },
     "tableDict": {
@@ -961,6 +967,13 @@
         "liftLibraries": {
             "description": "Erholung: Bibliotheken, Dienstleistungsbetriebe, Bau- und Handwerksdienstleistungen…",
             "title": "Bibliotheken"
+        },
+        "services": {
+            "title": "Dienstleistungen"
+        },
+        "gatherings2": {
+            "description": "Verbot von Versammlungen im öffentlichen Raum (außer nahe Familienangehörige)",
+            "title": "Versammlungen"
         }
     },
     "region": {
@@ -1004,7 +1017,8 @@
         "checked": "🆕 Geprüft:",
         "newMedium": "🆕 📝 Neuer Medium Nachricht:",
         "newInfographics": "🆕 📇 Neue Infografiken:",
-        "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭"
+        "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭",
+        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1264,7 +1278,8 @@
         "groupLargestEuCountries": "größte Länder der EU*",
         "groupHighestTotalDeaths": "höchste Werte",
         "groupHighestActiveCases": "höchste Werte",
-        "groupHighestNewCases": "höchste Werte"
+        "groupHighestNewCases": "höchste Werte",
+        "groupHighestNewDeaths": "höchste Werte"
     },
     "weekdayShort": {
         "6": "Sa",

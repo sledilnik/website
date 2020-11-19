@@ -100,15 +100,15 @@ let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
 let getFacilitiesList (state : State) (data : PatientsStats array) =
     data.[data.Length-1].facilities
     |> Map.toSeq
-    |> Seq.filter 
-       (fun (facility, stats) -> 
-            if state.HTypeToDisplay = CareHospitals 
-            then stats.care.toDate.IsSome 
+    |> Seq.filter
+       (fun (facility, stats) ->
+            if state.HTypeToDisplay = CareHospitals
+            then stats.care.toDate.IsSome
             else stats.inHospital.toDate.IsSome)
     |> Seq.map
        (fun (facility, stats) ->
-            facility, 
-            if state.HTypeToDisplay = CareHospitals 
+            facility,
+            if state.HTypeToDisplay = CareHospitals
             then stats.care.today
             else stats.inHospital.today)
     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
@@ -138,8 +138,8 @@ let renderByHospitalChart (state : State) dispatch =
             let value =
                 ps.facilities
                 |> Map.tryFind fcode
-                |> Option.bind (fun stats -> 
-                    if state.HTypeToDisplay = CareHospitals 
+                |> Option.bind (fun stats ->
+                    if state.HTypeToDisplay = CareHospitals
                     then stats.care.today
                     else stats.inHospital.today
                 )
@@ -318,7 +318,7 @@ let renderStructureChart (state : State) dispatch =
         series = [| for series in Series.structure state.HTypeToDisplay
                         do yield renderBarSeries series |]
 
-        tooltip = pojo {| shared = true; formatter = (fun () -> tooltipFormatter jsThis) |}
+        tooltip = pojo {| shared = true; split = false ; formatter = (fun () -> tooltipFormatter jsThis) |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
