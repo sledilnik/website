@@ -1287,7 +1287,8 @@
         "groupLargestEuCountries": "größte Länder der EU*",
         "groupHighestTotalDeaths": "höchste Werte",
         "groupHighestActiveCases": "höchste Werte",
-        "groupHighestNewCases": "höchste Werte"
+        "groupHighestNewCases": "höchste Werte",
+        "groupHighestNewDeaths": "höchste Werte"
     },
     "weekdayShort": {
         "6": "Sa",
