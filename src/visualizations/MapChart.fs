@@ -22,7 +22,7 @@ let regGeoJsonUrl = "/maps/statistical-regions-gurs-simplified-3857.geojson"
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 
 type TotalCasesForDate =
-    { Date : System.DateTime
+    { Date : DateTime
       TotalConfirmedCases : int option
       TotalDeceasedCases : int option }
 
@@ -43,12 +43,13 @@ type ContentType =
        | Deceased       -> I18N.t "charts.map.deceased"
 
 let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
-    if str = I18N.t "charts.map.confirmedCases" 
+    if str = I18N.t "charts.map.confirmedCases"
     then ConfirmedCasesMsgCase
-    else DeceasedMsgCase 
+    else DeceasedMsgCase
 
 type DisplayType =
     | AbsoluteValues
+    | Bubbles
     | RegionPopulationWeightedValues
     | RelativeIncrease
 with
@@ -58,7 +59,8 @@ with
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
-       | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease" 
+       | RelativeIncrease               -> I18N.t "charts.map.relativeIncrease"
+       | Bubbles                        -> I18N.t "charts.map.bubbles"
 
 type DataTimeInterval =
     | Complete
@@ -215,7 +217,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ConfirmedCases 
+      ContentType = ConfirmedCases
       DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -237,9 +239,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             | ConfirmedCasesMsgCase -> ConfirmedCases
             | DeceasedMsgCase -> Deceased
         let newDisplayType =
-            if state.DisplayType = RelativeIncrease && newContentType = Deceased
-            then DisplayType.Default // for Deceased, RelativeIncrease not supported
-            else state.DisplayType
+            match newContentType, state.DisplayType with
+            // for Deceased, RelativeIncrease not supported
+            | Deceased, RelativeIncrease -> DisplayType.Default
+            | Deceased, Bubbles -> DisplayType.Default
+            | _ -> state.DisplayType
         { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -248,14 +252,16 @@ let seriesData (state : State) =
 
     seq {
         for areaData in state.Data do
-            let dlabel, value, absolute, value100k, totalConfirmed, weeklyIncrease, population, newCases =
+            let dlabel, value, absolute, value100k, totalConfirmed,
+                    weeklyIncrease, population, newCases =
+
                 match areaData.Cases with
                 | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
-                    let newCases = 
-                        confirmedCasesValue 
-                        |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc) 
+                    let newCases =
+                        confirmedCasesValue
+                        |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc)
                         |> Array.skip (confirmedCasesValue.Length - 56) // we only show last 56 days
                         |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
@@ -268,8 +274,8 @@ let seriesData (state : State) =
 
                     let lastValueTotal = values |> Array.tryLast
                     let lastValueRelative =
-                        let dateInterval = 
-                            if state.DisplayType = RelativeIncrease 
+                        let dateInterval =
+                            if state.DisplayType = RelativeIncrease
                             then LastDays 7     // for weekly relative increase we force 7 day interval for display in tooltip
                             else state.DataTimeInterval
                         match dateInterval with
@@ -290,20 +296,26 @@ let seriesData (state : State) =
                             float absolute * 100000. / float areaData.Population
                         let dlabel, value =
                             match state.DisplayType with
-                            | AbsoluteValues                 -> ((Some absolute) |> Utils.zeroToNone), absolute
-                            | RegionPopulationWeightedValues -> None,  10. * value100k |> System.Math.Round |> int  //factor 10 for better resolution in graph
-                            | RelativeIncrease               -> None, absolute  
-                        let weeklyIncrease =    
-                            let parseNumber x = 
-                                match x with 
+                            | AbsoluteValues ->
+                                ((Some absolute) |> Utils.zeroToNone), absolute
+                            | Bubbles ->
+                                None, absolute
+                            | RegionPopulationWeightedValues ->
+                                // factor 10 for better resolution in graph
+                                None,  10. * value100k |> Math.Round |> int
+                            | RelativeIncrease ->
+                                None, absolute
+                        let weeklyIncrease =
+                            let parseNumber x =
+                                match x with
                                 | None -> 0.
-                                | Some x -> x |> float  
-                            let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber 
+                                | Some x -> x |> float
+                            let casesNow = values |> Array.tryItem(values.Length - 1) |> parseNumber
                             let cases7dAgo = values |> Array.tryItem(values.Length - 8) |> parseNumber
                             let cases14dAgo = values |> Array.tryItem(values.Length - 15) |> parseNumber
-                            
+
                             let increaseThisWeek = casesNow - cases7dAgo
-                            let increaseLastWeek = cases7dAgo - cases14dAgo 
+                            let increaseLastWeek = cases7dAgo - cases14dAgo
 
                             if (increaseThisWeek, increaseLastWeek) = (0.,0.) then 0.
                             else 100. * min ( increaseThisWeek/increaseLastWeek - 1.) 5. // Set the maximum value to 5 to cut off infinities
@@ -311,20 +323,25 @@ let seriesData (state : State) =
                             match state.ContentType with
                             | ConfirmedCases ->
                                 match state.DisplayType with
-                                | AbsoluteValues -> 
+                                | AbsoluteValues ->
                                     if absolute > 0 then float absolute
                                     else 0.0001
-                                | RegionPopulationWeightedValues -> 
-                                    if value100k > 0.0 then value100k 
+                                | Bubbles ->
+                                    if absolute > 0 then float absolute
                                     else 0.0001
-                                | RelativeIncrease -> 
+                                | RegionPopulationWeightedValues ->
+                                    if value100k > 0.0 then value100k
+                                    else 0.0001
+                                | RelativeIncrease ->
                                     min weeklyIncrease 200. // for colorAxis limit to 200%
                             | Deceased ->
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
 
-                        dlabel, scaled, absolute, value100k, totalConfirmed.Value, weeklyIncrease, areaData.Population, newCases
+                        dlabel, scaled, absolute, value100k,
+                        totalConfirmed.Value, weeklyIncrease,
+                        areaData.Population, newCases
             {|
                 code = areaData.Code
                 area = areaData.Name
@@ -337,18 +354,163 @@ let seriesData (state : State) =
                 dlabel = dlabel
                 dataLabels = {| enabled = true; format = "{point.dlabel}" |}
                 newCases = newCases
+                z = value
+                name = dlabel
             |}
     } |> Seq.toArray
 
 
-let renderMap (state : State) =
 
+let sparklineFormatter newCases state =
+    let desaturateColor (rgb:string) (sat:float) =
+        let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
+        let r = (argb &&& 0x00FF0000) >>> 16
+        let g = (argb &&& 0x0000FF00) >>> 8
+        let b = (argb &&& 0x000000FF)
+        let avg = (float(r + g + b) / 3.0) * 1.6
+        let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
+        let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
+        let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
+        sprintf "#%02x%02x%02x" newR newG newB
+
+    let color1 = "#bda506"
+    let color2 = desaturateColor color1 0.6
+    let color3 = desaturateColor color1 0.3
+
+    let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat )
+                 ([|color2 |] |> Array.replicate 7 |> Array.concat)|]
+               |> Array.concat
+    let columnColors =
+        [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |]
+        |> Array.concat
+
+    let options =
+        {|
+            chart =
+                {|
+                    ``type`` = "column"
+                    backgroundColor = "transparent"
+                |} |> pojo
+            credits = {| enabled = false |}
+            xAxis =
+                {|
+                    visible = true
+                    labels = {| enabled = false |}
+                    title = {| enabled = false |}
+                    tickInterval = 7
+                    lineColor = "#696969"
+                    tickColor = "#696969"
+                    tickLength = 4
+                |}
+            yAxis =
+                {|
+                    title = {| enabled = false |}
+                    visible = true
+                    opposite = true
+                    min = 0.
+                    max = newCases |> Array.max
+                    tickInterval = 5
+                    endOnTick = true
+                    startOnTick = false
+                    allowDecimals = false
+                    showFirstLabel = true
+                    showLastLabel = true
+                    gridLineColor = "#000000"
+                    gridLineDashStyle = "dot"
+                |} |> pojo
+            title = {| text = "" |}
+            legend = {| enabled = false |}
+            series =
+                [|
+                    {|
+                        data = newCases |> Array.map ( max 0.)
+                        animation = false
+                        colors = columnColors
+                        borderColor = columnColors
+                        pointWidth = 2
+                        colorByPoint = true
+                    |} |> pojo
+                |]
+        |} |> pojo
+    match state.MapToDisplay with
+    | Municipality ->
+        Fable.Core.JS.setTimeout
+            (fun () -> sparklineChart("tooltip-chart-mun", options)) 10
+        |> ignore
+        """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
+    | Region ->
+        Fable.Core.JS.setTimeout
+            (fun () -> sparklineChart("tooltip-chart-reg", options)) 10
+        |> ignore
+        """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
+
+
+
+let tooltipFormatter state jsThis =
+    let points = jsThis?point
+    let area = points?area
+    let absolute = points?absolute
+    let value100k = points?value100k
+    let totalConfirmed = points?totalConfirmed
+    let weeklyIncrease = points?weeklyIncrease
+    let newCases= points?newCases
+    let population = points?population
+    let pctPopulation = float absolute * 100.0 / float population
+    let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+
+    let lastTwoWeeks = newCases
+
+    let label =
+        match state.ContentType with
+        | ConfirmedCases ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+            if totalConfirmed > 0 then
+                label
+                    + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                    + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                    + if (Array.max lastTwoWeeks) > 0. then
+                        state |> sparklineFormatter lastTwoWeeks else ""
+            else
+                label
+        | Deceased ->
+            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                label + sprintf " (%s %% %s)"
+                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                        (I18N.t "charts.map.confirmedCases")
+                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%s %%</b>"
+                        (I18N.t "charts.map.mortalityOfConfirmedCases")
+                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+            else
+                label
+    sprintf "<b>%s</b><br/>%s<br/>" area label
+
+
+
+let renderMap (state : State) =
     match state.GeoJson with
     | NotAsked
     | Loading -> Html.none
     | Failure str -> Html.text str
     | Success geoJson ->
         let data = seriesData state
+
+        // needed to calculate the color scale for bubbles adjusted to
+        // actual numbers
+        let minValue100k() =
+            (data
+             // for bubbles, do not include municipalities without
+             // any covid cases
+             |> Array.filter (fun x -> x.value100k > 0.)
+             |> Array.minBy (fun x -> x.value100k)).value100k
+        let maxValue100k() =
+            (data |> Array.maxBy (fun x -> x.value100k)).value100k
+
 
         let key =
             match state.MapToDisplay with
@@ -357,142 +519,55 @@ let renderMap (state : State) =
 
         let series geoJson =
             {| visible = true
+               ``type`` = null
                mapData = geoJson
                data = data
                keys = [| "code" ; "value" |]
                joinBy = [| key ; "code" |]
+               colorKey = "value"
                nullColor = "white"
                borderColor = "#000"
                borderWidth = 0.2
+               minSize = 1
+               maxSize = "6%"
                mapline = {| animation = {| duration = 0 |} |}
                states =
                 {| normal = {| animation = {| duration = 0 |} |}
                    hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+               colorAxis =
+                   match state.DisplayType with
+                   // white-ish background color for municipalities when we use
+                   // bubbles
+                   | Bubbles -> 1
+                   | _ -> 0
+               enableMouseTracking = true
+               stickyTracking = (state.DisplayType = Bubbles)
            |}
 
-        let sparklineFormatter newCases =
-            let desaturateColor (rgb:string) (sat:float) = 
-                let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
-                let r = (argb &&& 0x00FF0000) >>> 16
-                let g = (argb &&& 0x0000FF00) >>> 8
-                let b = (argb &&& 0x000000FF)
-                let avg = (float(r + g + b) / 3.0) * 1.6
-                let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
-                let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
-                let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
-                sprintf "#%02x%02x%02x" newR newG newB
-
-            let color1 = "#bda506"
-            let color2 = desaturateColor color1 0.6
-            let color3 = desaturateColor color1 0.3
-
-            let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat ); ([|color2 |] |> Array.replicate 7 |> Array.concat)|] |> Array.concat
-            let columnColors = [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |] |> Array.concat
-
-
-            let options =
-                {|
-                    chart = 
-                        {|
-                            ``type`` = "column"
-                            backgroundColor = "transparent"
-                        |} |> pojo
-                    credits = {| enabled = false |}
-                    xAxis = 
-                        {| 
-                            visible = true 
-                            labels = {| enabled = false |} 
-                            title = {| enabled = false |}
-                            tickInterval = 7 
-                            lineColor = "#696969"
-                            tickColor = "#696969"
-                            tickLength = 4
-                        |}
-                    yAxis = 
-                        {| 
-                            title = {| enabled = false |}
-                            visible = true  
-                            opposite = true 
-                            min = 0.
-                            max = newCases |> Array.max 
-                            tickInterval = 5 
-                            endOnTick = true 
-                            startOnTick = false 
-                            allowDecimals = false 
-                            showFirstLabel = true
-                            showLastLabel = true
-                            gridLineColor = "#000000"
-                            gridLineDashStyle = "dot"
-                        |} |> pojo
-                    title = {| text = "" |}
-                    legend = {| enabled = false |}
-                    series = 
-                        [| 
-                            {| 
-                                data = newCases |> Array.map ( max 0.)
-                                animation = false
-                                colors = columnColors 
-                                borderColor = columnColors 
-                                pointWidth = 2
-                                colorByPoint = true
-                            |} |> pojo 
-                        |]
-                |} |> pojo
-            match state.MapToDisplay with 
-            | Municipality -> 
-                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
-                """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
-            | Region -> 
-                Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-reg", options)) 10 |> ignore
-                """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
-
-
-
-        let tooltipFormatter state jsThis =
-            let points = jsThis?point
-            let area = points?area
-            let absolute = points?absolute
-            let value100k = points?value100k
-            let totalConfirmed = points?totalConfirmed
-            let weeklyIncrease = points?weeklyIncrease
-            let newCases= points?newCases
-            let population = points?population
-            let pctPopulation = float absolute * 100.0 / float population
-            let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
-
-            let lastTwoWeeks = newCases 
-
-            let label =
-                match state.ContentType with
-                | ConfirmedCases ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
-                    if totalConfirmed > 0 then
-                        label
-                            + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
-                            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                            + if (Array.max lastTwoWeeks) > 0. then sparklineFormatter lastTwoWeeks else ""
-                    else
-                        label
-                | Deceased ->
-                    let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
-                    if absolute > 0 && state.DataTimeInterval = Complete then // deceased
-                        label + sprintf " (%s %% %s)"
-                                (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
-                                (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
-                                (I18N.t "charts.map.confirmedCases")
-                                totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
-                                (I18N.t "charts.map.population")
-                            + sprintf "<br>%s: <b>%s %%</b>"
-                                (I18N.t "charts.map.mortalityOfConfirmedCases")
-                                (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
-                    else
-                        label
-            sprintf "<b>%s</b><br/>%s<br/>" area label
+        let bubbleSeries geoJson =
+            {| visible = true
+               ``type`` = "mapbubble"
+               mapData = geoJson
+               data = data
+               keys = [| "code" ; "value" |]
+               joinBy = [| key ; "code" |]
+               colorKey = "value100k"
+               nullColor = "white"
+               borderColor = "#000"
+               borderWidth = 0.2
+               minSize = 0 // minimal size of a bubble - 0 means it won't be shown for 0
+               maxSize = "10%"
+               mapline = {| animation = {| duration = 0 |} |}
+               states =
+                {| normal = {| animation = {| duration = 0 |} |}
+                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+               colorAxis = 0
+               enableMouseTracking = true
+               stickyTracking = false
+           |}
 
         let legend =
-            let enabled = state.ContentType = ConfirmedCases 
+            let enabled = state.ContentType = ConfirmedCases
             {| enabled = enabled
                title = {| text = null |}
                align = "right"
@@ -501,45 +576,85 @@ let renderMap (state : State) =
                floating = true
                borderWidth = 1
                backgroundColor = "white"
-               valueDecimals = 0 
+               valueDecimals = 0
                width = 70
             |}
             |> pojo
 
-        let colorMax = 
-            match state.ContentType with
-            | ConfirmedCases -> 
+        let colorMax =
+            match state.ContentType, state.DisplayType with
+            | ConfirmedCases, Bubbles -> maxValue100k()
+            | ConfirmedCases, _ ->
                 match state.DataTimeInterval with
                 | Complete -> 20000.
-                | LastDays days -> 
+                | LastDays days ->
                     match days with
                         | 21 -> 10500.
                         | 14 -> 7000.
                         | 7 -> 3500.
                         | 1 -> 500.
                         | _ -> 100.
-            | Deceased -> 
+            | Deceased, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
 
-
-
-        let colorMin = 
-            match state.DisplayType with 
+        let colorMin =
+            match state.DisplayType with
                 | AbsoluteValues -> 0.9
+                | Bubbles -> minValue100k()
                 | RegionPopulationWeightedValues -> colorMax / 7000.
                 | RelativeIncrease -> -100.
 
-        let colorAxis = 
+        let whiteMuniColorAxis =
+            {|
+                ``type`` = "linear"
+                visible = false
+                stops = [| (0.000, "#ffffff") |]
+//                stops = [| (0.000, "#f8f8f8") |]
+            |} |> pojo
+
+        let relativeColorAxis =
+            {|
+                ``type`` = "logarithmic"
+                tickInterval = 0.4
+                max = colorMax
+                min = colorMin
+                endOnTick = false
+                startOnTick = false
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7")
+                        (0.280,"#ffe792")
+                        (0.360,"#ffdf6c")
+                        (0.440,"#ffb74d")
+                        (0.520,"#ff8d3c")
+                        (0.600,"#f85d3a")
+                        (0.680,"#ea1641")
+                        (0.760,"#d0004e")
+                        (0.840,"#ad005b")
+                        (0.920,"#800066")
+                        (0.999,"#43006e")
+                    |]
+                reversed = true
+                labels =
+                    {|
+                        formatter = fun() -> jsThis?value
+                    |} |> pojo
+            |} |> pojo
+
+
+        let colorAxis =
             match state.ContentType with
                 | Deceased ->
                     {|
                         ``type`` = "linear"
                         tickInterval = 0.4
-                        max = colorMax 
-                        min = colorMin 
-                        endOnTick = false 
-                        startOnTick = false  
+                        max = colorMax
+                        min = colorMin
+                        endOnTick = false
+                        startOnTick = false
                         stops =
                             [|
                                 (0.000, "#ffffff")
@@ -555,69 +670,41 @@ let renderMap (state : State) =
                     |} |> pojo
                 | ConfirmedCases ->
                     match state.DisplayType with
-                    | AbsoluteValues -> 
+                    | AbsoluteValues ->
                         {|
                             ``type`` = "logarithmic"
                             tickInterval = 0.4
                             max = colorMax
-                            min = colorMin 
+                            min = colorMin
                             endOnTick = false
                             startOnTick = false
                             stops =
                                 [|
                                     (0.000,"#ffffff")
                                     (0.001,"#fff7db")
-                                    (0.200,"#ffefb7") 
-                                    (0.280,"#ffe792") 
-                                    (0.360,"#ffdf6c") 
-                                    (0.440,"#ffb74d") 
-                                    (0.520,"#ff8d3c") 
-                                    (0.600,"#f85d3a") 
-                                    (0.680,"#ea1641") 
-                                    (0.760,"#d0004e") 
-                                    (0.840,"#ad005b") 
-                                    (0.920,"#800066") 
+                                    (0.200,"#ffefb7")
+                                    (0.280,"#ffe792")
+                                    (0.360,"#ffdf6c")
+                                    (0.440,"#ffb74d")
+                                    (0.520,"#ff8d3c")
+                                    (0.600,"#f85d3a")
+                                    (0.680,"#ea1641")
+                                    (0.760,"#d0004e")
+                                    (0.840,"#ad005b")
+                                    (0.920,"#800066")
                                     (0.999,"#43006e")
                                 |]
                             reversed = true
-                            labels = 
-                                {| 
-                                    formatter = fun() -> jsThis?value
-                                |} |> pojo
-                        |} |> pojo 
-                    
-                    | RegionPopulationWeightedValues  -> 
-                        {|
-                            ``type`` = "logarithmic"
-                            tickInterval = 0.4
-                            max = colorMax
-                            min = colorMin 
-                            endOnTick = false
-                            startOnTick = false
-                            stops =
-                                [|
-                                    (0.000,"#ffffff")
-                                    (0.001,"#fff7db")
-                                    (0.200,"#ffefb7") 
-                                    (0.280,"#ffe792") 
-                                    (0.360,"#ffdf6c") 
-                                    (0.440,"#ffb74d") 
-                                    (0.520,"#ff8d3c") 
-                                    (0.600,"#f85d3a") 
-                                    (0.680,"#ea1641") 
-                                    (0.760,"#d0004e") 
-                                    (0.840,"#ad005b") 
-                                    (0.920,"#800066") 
-                                    (0.999,"#43006e")
-                                |]
-                            reversed = true
-                            labels = 
-                                {| 
+                            labels =
+                                {|
                                     formatter = fun() -> jsThis?value
                                 |} |> pojo
                         |} |> pojo
-                    | RelativeIncrease -> 
-                        {| 
+
+                    | Bubbles -> relativeColorAxis
+                    | RegionPopulationWeightedValues -> relativeColorAxis
+                    | RelativeIncrease ->
+                        {|
                             ``type`` = "linear"
                             tickInterval = 50
                             max = 200
@@ -628,38 +715,43 @@ let renderMap (state : State) =
                                 [|
                                     (0.000,"#009e94")
                                     (0.166,"#6eb49d")
-                                    (0.250,"#b2c9a7") 
-                                    (0.333,"#f0deb0") 
+                                    (0.250,"#b2c9a7")
+                                    (0.333,"#f0deb0")
                                     (0.500,"#e3b656")
                                     (0.600,"#cc8f00")
                                     (0.999,"#b06a00")
                                 |]
                             reversed=false
-                            labels = 
-                            {| 
+                            labels =
+                            {|
                                formatter = fun() -> sprintf "%s%%" jsThis?value
                             |} |> pojo
                         |} |> pojo
 
-        let lastDate = 
-            state.Data 
+        let lastDate =
+            state.Data
             |> Seq.map (fun a ->
                 match a.Cases with
                 | Some c -> c |> Seq.tryLast
-                |_ -> None ) 
-            |> Seq.pick (fun c -> 
+                |_ -> None )
+            |> Seq.pick (fun c ->
                 match c with
                 | Some c -> Some c.Date
-                | _ -> None) 
+                | _ -> None)
 
         let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
 
-        {| Highcharts.optionsWithOnLoadEvent "covid19-map" with
+        {| optionsWithOnLoadEvent "covid19-map" with
             title = null
             subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
-            series = [| series geoJson |]
+            series =
+                match state.DisplayType with
+                | Bubbles -> [| series geoJson; bubbleSeries geoJson |]
+                | _ -> [| series geoJson |]
             legend = legend
-            colorAxis = colorAxis
+            colorAxis = [|
+                colorAxis; whiteMuniColorAxis
+            |]
             tooltip =
                 {|
                     formatter = fun () -> tooltipFormatter state jsThis
@@ -681,7 +773,7 @@ let renderMap (state : State) =
                     style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "9px" |}
                 |}
         |}
-        |> Highcharts.map
+        |> map
 
 let renderSelector option currentOption dispatch =
     let defaultProps =
@@ -699,10 +791,16 @@ let renderSelectors options currentOption dispatch =
         renderSelector option currentOption dispatch)
 
 let renderDisplayTypeSelector state dispatch =
-    let selectors = 
-        if state.ContentType = ConfirmedCases
-        then [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues ]
-        else [ AbsoluteValues; RegionPopulationWeightedValues ]
+    let selectors =
+        match state.MapToDisplay, state.ContentType with
+        | Municipality, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues
+              RegionPopulationWeightedValues; Bubbles ]
+        | Region, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues
+              RegionPopulationWeightedValues ]
+        | _, Deceased ->
+            [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children (renderSelectors selectors state.DisplayType dispatch)
@@ -742,7 +840,7 @@ let render (state : State) dispatch =
                 Html.div [
                     prop.className "filters"
                     prop.children [
-                        renderContentTypeSelector state.ContentType dispatch 
+                        renderContentTypeSelector state.ContentType dispatch
                         renderDataTimeIntervalSelector state (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
@@ -756,4 +854,5 @@ let render (state : State) dispatch =
     ]
 
 let mapChart (props : {| mapToDisplay : MapToDisplay; data : RegionsData |}) =
-    React.elmishComponent("MapChart", init props.mapToDisplay props.data, update, render)
+    React.elmishComponent
+        ("MapChart", init props.mapToDisplay props.data, update, render)
