@@ -116,16 +116,16 @@ let renderScaleSelector scaleType dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
 
-    let yLabel = I18N.t "charts.common.yAxis"
+    // let yLabel = I18N.t "charts.common.yAxis"
     let linearLabel = I18N.t "charts.common.linear"
     let logLabel = I18N.t "charts.common.log"
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.div [
-                prop.text yLabel
-                prop.className "chart-display-property-selector__item"
-            ]
+            // Html.div [
+            //     prop.text yLabel
+            //     prop.className "chart-display-property-selector__item"
+            // ]
             renderSelector Linear scaleType linearLabel
             renderSelector Logarithmic scaleType logLabel
         ]
@@ -133,13 +133,13 @@ let renderScaleSelector scaleType dispatch =
 
 let renderChartTopControls (children: ReactElement seq) =
     Html.div [
-        prop.className "chart-display-properties"
+        prop.className "chart-display-properties justify-content-between"
         prop.children children
     ]
 
 let renderChartTopControlRight (topControl: ReactElement) =
     Html.div [
-        prop.className "chart-display-properties"
+        prop.className "chart-display-properties justify-content-between"
         prop.style [ style.justifyContent.flexEnd ]
         prop.children [ topControl ]
     ]

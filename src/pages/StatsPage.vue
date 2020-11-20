@@ -8,7 +8,7 @@
         </b-col>
       </b-row>
       <div class="cards-wrapper">
-        <!--  
+<!--  
         <Info-card
           :title="$t('infocard.tests')"
           field="tests.performed.today"
@@ -19,10 +19,11 @@
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
+          sparkline="cases.confirmedToday"
           name="cases.confirmedToDate"
           series-type="state"
         />
-        <!--  
+<!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
@@ -35,12 +36,14 @@
           field="cases.active"
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
+          sparkline="cases.active"
           name="cases.active"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.incidence')"
           field="cases.active"
+          sparkline="cases.active"
           name="incidence"
           series-type="state"
         />
@@ -50,6 +53,7 @@
           total-in="total.inHospital.in"
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
+          sparkline="total.inHospital.today"
           name="statePerTreatment.inHospital"
           series-type="state"
         />
@@ -59,15 +63,21 @@
           total-in="total.icu.in"
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
+          sparkline="total.icu.today"
           name="statePerTreatment.inICU"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
+          sparkline="total.deceased.today"
           name="statePerTreatment.deceasedToDate"
           series-type="state"
         />
+        <!-- <Deceased-card
+          :title="$t('infocard.deceasedInLast7Days')"
+          field="total.deceased.today"
+        /> -->
       </div>
       <b-row cols="12">
         <b-col>

@@ -6,7 +6,6 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
-import OstaniZdravPage from './pages/OstaniZdravPage.vue'
 
 import * as aboutMdSl from './content/sl/about.md'
 import * as aboutMdEn from './content/en/about.md'
@@ -190,6 +189,10 @@ const routes = [
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
+    path: '/medium',
+    redirect: `/${i18next.language}/medium`,
+  },
+  {
     path: '/',
     beforeEnter: (to, from, next) => {
       next(i18next.language)
@@ -224,19 +227,28 @@ const routes = [
       },
       {
         path: 'ostanizdrav',
-        component: OstaniZdravPage,
+        component: () =>
+          import(/* webpackChunkName: "world" */ './pages/OstaniZdravPage.vue'),
+      },
+      {
+        path: 'medium',
+        component: () =>
+          import(/* webpackChunkName: "world" */ './pages/MediumPage.vue'),
       },
       {
         path: 'world',
-        component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
+        component: () =>
+          import(/* webpackChunkName: "world" */ './pages/WorldStatsPage.vue'),
       },
       {
         path: 'data',
-        component: () => import(/* webpackChunkName: "data" */'./pages/DataPage.vue'),
+        component: () =>
+          import(/* webpackChunkName: "data" */ './pages/DataPage.vue'),
       },
       {
         path: 'tables',
-        component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
+        component: () =>
+          import(/* webpackChunkName: "tables" */ './pages/TablesPage.vue'),
       },
       {
         path: 'embed',

@@ -208,13 +208,27 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 enabled = true
                 allButtonsEnabled = true
                 selected = selectedRangeSelectionButtonIndex
+                inputPosition = {| align = "left"; x = 204; y = -34 |}
+                inputBoxHeight = 19
+                inputStyle = {| rx = 6; ry = 6 |}
                 inputDateFormat = I18N.t "charts.common.numDateFormat"
                 inputEditDateFormat = I18N.t "charts.common.numDateFormat"
                 inputDateParser = parseDate
-                x = 0
-                inputBoxBorderColor = "#ced4da"
-                buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                buttonTheme = pojo
+                    {|
+                        r = 6
+                        width = 50
+                        height = 20
+                        fill = "#ededed"
+                        style = {| cursor="pointer"; fill="#767676"; fontSize="14px"; fontFamily="'IBM Plex Sans', sans-serif" |}
+                        states = pojo
+                            {|
+                                hover = pojo {| fill = "white"; style = {| color="black"; fontWeight="bold" |} |}
+                                select = pojo {| fill = "white"; style = {| color="black"; fontWeight="bold" |} |}
+                            |}
+                    |}
                 buttons = buttons
+                x = 0
             |}
 
 let credictsOptions =
@@ -224,6 +238,8 @@ let credictsOptions =
             (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
             (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+       position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
+       style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |}
     |} |> pojo
 
 
@@ -408,6 +424,8 @@ let basicChartOptions
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
+                                credits = {| position = {| x = 18 |} |}
+                                rangeSelector = {| inputPosition = {| align = "left"; x = 0; y = 0 |} |}
                                 yAxis = [| {| labels = pojo {| enabled = false |} |} |]
                             |}
                     |} |]

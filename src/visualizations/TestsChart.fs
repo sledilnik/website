@@ -141,6 +141,7 @@ let renderChartOptions (state : State) dispatch =
                         condition = {| maxWidth = 768 |}
                         chartOptions =
                             {|
+                                rangeSelector = {| inputPosition = {| align = "left"; x = 0; y = 0 |} |}
                                 yAxis = [|
                                     {| labels = {| enabled = false |} |}
                                     {| labels = {| enabled = false |} |}

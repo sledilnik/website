@@ -1003,16 +1003,7 @@
         "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
-        "inHospital": "Hospitalisierte",
-        "redPhase": "Rote Phase",
-        "orangePhase": "Orange Phase",
-        "per100k": "pro 100 tausend",
-        "package3": "Paket 3",
-        "package2": "Paket 2",
-        "package1": "Paket 1",
-        "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
-        "redPhaseGenitive": "roten",
-        "orangePhaseGenitive": "orangenen"
+        "inHospital": "Hospitalisierte"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",

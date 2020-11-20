@@ -73,8 +73,8 @@ export default {
   },
   methods: {
     onResize() {
-      this.isMobile = window.innerWidth < 1150
-      this.showFullLang = window.innerWidth >= 1250
+      this.isMobile = window.innerWidth < 1300
+      this.showFullLang = window.innerWidth >= 1400
     },
     toggleDropdown() {
       this.active = !this.active
@@ -112,6 +112,7 @@ export default {
 
 .lang-switcher-mobile {
   margin-top: auto;
+  padding-top: 9px;
 
   span {
     margin-left: 6px;

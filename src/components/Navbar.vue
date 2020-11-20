@@ -26,16 +26,21 @@
       <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
       <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
-      <a
-        v-if="showFullLang"
-        href="https://github.com/sledilnik"
-        target="_blank"
-        rel="noreferrer"
-        class="router-link router-link-icon github"
-      >
-        <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
-        <span>{{ $t('navbar.github') }}</span>
-      </a>
+      <router-link to="medium" class="router-link"><span>{{ $t('navbar.medium') }}</span></router-link>
+      <div class="social">
+        <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
+        </a>
+        <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
+        </a>
+        <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+        </a>
+        <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
+        </a>
+      </div>
       <LanguageSwitcher />
     </div>
   </div>
@@ -105,7 +110,7 @@ export default {
 <style lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 1300px) {
     @content;
   }
 }
@@ -351,6 +356,30 @@ export default {
 
     &:before {
       display: none;
+    }
+  }
+
+  .social {
+    display: inline-block;
+    margin-left: 0;
+    padding: 9px 0 36px;
+
+    @include nav-break {
+      margin-left: 32px;
+      padding: 0;
+    }
+
+    img {
+      width: 24px;
+      opacity: .56;
+    }
+
+    a + a {
+      margin-left: 16px;
+
+      @media only screen and (max-width: 480px) {
+        margin-left: 16px;
+      }
     }
   }
 }

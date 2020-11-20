@@ -53,7 +53,18 @@ let sharedChartOptions displayData =
     {| title = None
        chart = pojo {| ``type`` = "scatter" ; animation = false ; zoomType = None |}
        legend = {| |}
-       credits = Highcharts.credictsOptions |}
+       credits = Highcharts.credictsOptions
+       responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                credits = {| position = {| x = 18 |} |}
+                            |}
+                    |} |]
+            |} |}
 
 let totalVsWeekChartOptions state =
     let sharedOptions = sharedChartOptions()

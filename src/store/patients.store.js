@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import ApiService from '../services/api.service'
 import { exportTime, ApiEndpoint } from './index'
 
@@ -11,12 +12,31 @@ const getters = {
   data: (state) => {
     return state.data
   },
+
+  lastData: (state, getters) => (start, end, field) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
+    return array.map((obj) => {
+      return _.get(obj, field)
+    })
+  },
+
+  runningSum: (state, getters) => (start, end, field) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
+    let sum = array.reduce((total, num) => total + _.get(num, field), 0)
+    return sum
+  },
 }
 
 const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 3))
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 33))
     const data = await ApiService.get(`${ApiEndpoint()}/api/patients`, {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to

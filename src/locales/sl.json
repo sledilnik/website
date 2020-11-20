@@ -10,11 +10,11 @@
         "ostanizdrav": "#OstaniZdrav",
         "tables": "Tabela",
         "models": "Modeli",
-        "animation": "Animacija",
         "faq": "FAQ",
         "about": "O projektu",
         "team": "Ekipa",
         "sources": "Viri",
+        "medium": "Medium",
         "links": "Povezave",
         "github": "GitHub",
         "goToGraph": "Pojdi na graf",
@@ -32,7 +32,8 @@
     },
     "timestamp": {
         "updated": "Osveženo: {{ date, %A, %e. %B %Y }}",
-        "at": "ob {{ date, %H.%M }}"
+        "at": "ob {{ date, %H.%M }}",
+        "medium": "{{ date, %A, %e. %B %Y }}"
     },
     "notice": {
         "newInfographics": "🆕 📇 Nova infografika:",
@@ -55,19 +56,17 @@
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
         "per100k": "na 100.000 prebivalcev",
-        "orangePhase": "Oranžna faza",
-        "orangePhaseGenitive": "oranžne",
-        "redPhase": "Rdeča faza",
-        "redPhaseGenitive": "rdeče",
-        "nextCriteria": "<br/>Kriterij za {{ phaseNextNumber }}. paket {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
-        "package1": "1. paket",
-        "package2": "2. paket",
-        "package3": "3. paket",
         "recoveredToDate": "Preboleli",
         "inHospital": "Hospitalizirani",
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
+        "deceasedInLast7Days": "Umrli v zadnjih 7 dneh",
+        "total": "Skupno:",
         "lastUpdated": "{{ date, %a., %e. %b. }}"
+    },
+    "youtube": {
+        "title": "Animacija širjenja COVID-19",
+        "titleMenu": "Animacija"
     },
     "tables": {
         "title": "Tabela",
@@ -669,8 +668,8 @@
             "dsOWD_MZ": "Our World in Data, Min. za zdravje",
             "loading": "Nalagam podatke…",
             "from": " ",
-            "to": "-",
-            "zoom": "Obdobje",
+            "to": "–",
+            "zoom": "",
             "resetZoom": "Ponastavi merilo",
             "resetZoomTitle": "Prikaži celotno časovno obdobje",
             "x_months_0": "{{ count }}m",
@@ -789,7 +788,7 @@
         },
         "hCenters": {
             "title": "Obravnava v ZD",
-            "titleMenu": "ZD - obravnava",
+            "titleMenu": "ZD – obravnava",
             "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 25. oktobra nam Ministrstvo za zdravje ne posreduje več podatkov iz zdravstvenih domov, ker jih ne zbirajo več.",
             "allRegions": "Vse regije",
             "emergencyExamination": "Nujna medicinska pomoč (skupaj)",

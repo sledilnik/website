@@ -47,12 +47,25 @@
           </span>
         </div>
       </div>
-      <div class="data-time">
-        {{
-          $t('infocard.lastUpdated', {
-            date: new Date(renderValues.lastDay.displayDate),
-          })
-        }}
+      <div class="card-data">
+        <div class="date-container">
+          <div class="data-time">
+            {{
+              $t('infocard.lastUpdated', {
+                date: new Date(renderValues.lastDay.displayDate),
+              })
+            }}
+          </div>
+        </div>
+        <trend
+          :data="sparklineData"
+          :gradient="['#ffbe88', '#ffbe88', '#ffbe88']"
+          :stroke-width="4"
+          auto-draw
+          smooth
+          class="sparkline"
+        >
+        </trend>
       </div>
     </div>
     <div class="hp-card" v-else>
@@ -78,14 +91,15 @@ export default {
       default: 'down',
     },
     name: String,
+    sparkline: String,
     seriesType: {
       type: String,
       default: 'cum',
     },
   },
   computed: {
-    ...mapGetters('stats', ['lastChange']),
-    ...mapGetters('patients', { patients: 'data' }),
+    ...mapGetters('stats', ['lastChange', 'lastData1']),
+    ...mapGetters('patients', ['data', 'lastData']),
     ...mapState('stats', ['exportTime', 'loaded']),
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
@@ -113,25 +127,6 @@ export default {
       } else {
         return this.goodTrend === 'down' ? 'good' : 'bad'
       }
-    },
-    incidenceClass() {
-      const value = this.renderValues.lastDay.value
-      const incidence = Math.round(
-        this.renderValues.lastDay.value / this.incidence
-      )
-      if (this.name === 'incidence') {
-        if (incidence >= 40 && incidence < 140) return 'orange'
-        if (incidence >= 140) return 'red'
-      }
-      if (this.field === 'statePerTreatment.inHospital') {
-        if (value >= 60 && value < 250) return 'orange'
-        if (value >= 250) return 'red'
-      }
-      if (this.field === 'statePerTreatment.inICU') {
-        if (value >= 15 && value < 50) return 'orange'
-        if (value >= 50) return 'red'
-      }
-      return 'unknown'
     },
     cardTitle() {
       if (this.name === 'incidence')
@@ -229,10 +224,15 @@ export default {
       }
       return false
     },
+    sparklineData() {
+      return this.sparkline === 'cases.confirmedToday' || this.sparkline === 'cases.active'
+        ? this.lastData1(0, 30, this.sparkline)
+        : this.lastData(0, 30, this.sparkline)
+    }
   },
   methods: {
     renderTotalValues(value) {
-      const lastDay = this.patients.filter((x) => {
+      const lastDay = this.data.filter((x) => {
         return (
           x.day === this.renderValues.lastDay.date.getDate() &&
           x.month === this.renderValues.lastDay.date.getMonth() + 1 &&
@@ -251,7 +251,7 @@ export default {
         return x
       }
       return null
-    },
+    }
   },
 }
 </script>
@@ -306,7 +306,7 @@ export default {
 
 .card-diff {
   font-size: 14px;
-  margin-bottom: 0.7rem;
+  min-height: 44px; // TODO: fix this hack
 
   .card-diff-item {
     display: inline-block;
@@ -379,9 +379,35 @@ export default {
   color: #a0a0a0;
 }
 
+.card-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  @media only screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-end;
+  }  
+}
+
+.date-container {
+  flex: 0 0 50%;
+  order: 1;
+  margin-top: auto;
+
+  @media only screen and (min-width: 768px) {
+    order: 0;
+  }
+}
+
 .data-time {
   font-size: 12px;
   color: #a0a0a0;
-  margin-top: auto;
+  margin: 10px 5px 0 0;
+}
+
+.sparkline {
+  height: 100%;
 }
 </style>

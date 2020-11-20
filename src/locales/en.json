@@ -10,13 +10,13 @@
         "ostanizdrav": "#OstaniZdrav",
         "tables": "Table",
         "models": "Models",
-        "animation": "Animation",
         "faq": "FAQ",
         "about": "About",
         "team": "Team",
         "sources": "Sources",
         "links": "Links",
         "github": "GitHub",
+        "medium": "Medium",
         "goToGraph": "Go to graph",
         "language": {
             "de": "German",
@@ -32,7 +32,8 @@
     },
     "timestamp": {
         "updated": "Updated on {{ date, %A, %B %e, %Y }}",
-        "at": "at {{ date, %H:%M }}"
+        "at": "at {{ date, %H:%M }}",
+        "medium": "{{ date, %A, %B %e, %Y  }}"
     },
     "notice": {
         "newInfographics": "🆕 📇 New infographics:",
@@ -54,19 +55,17 @@
         "active": "Active Cases",
         "incidence": "14-days incidence",
         "per100k": "per 100k",
-        "orangePhase": "Orange phase",
-        "orangePhaseGenitive": "orange",
-        "redPhase": "Red phase",
-        "redPhaseGenitive": "red",
-        "nextCriteria": "<br/>Criteria for the package {{ phaseNextNumber }} of the {{ phaseNextPackage }} phase is {{ phaseNextCriteria }}.",
-        "package1": "package 1",
-        "package2": "package 2",
-        "package3": "package 3",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",
         "deceasedToDate": "Confirmed Deaths",
+        "deceasedInLast7Days": "Confirmed Deaths in the last 7 Days",
+        "total": "Total:",
         "lastUpdated": "{{ date, %a, %b %e }}"
+    },
+    "youtube": {
+        "title": "Animation of COVID-19 spread",
+        "titleMenu": "Animation"
     },
     "tables": {
         "title": "Table",

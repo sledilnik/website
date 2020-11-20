@@ -60,6 +60,17 @@ div.highcharts-tooltip {
 }
 */
 
+svg.highcharts-root {
+    font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+.highcharts-subtitle {
+    transform: translate(8px, 0px);
+    @media only screen and (min-width: 768px) {
+        transform: translate(0px, 0px);
+    }
+}
+
 .highcharts-wrapper {
     @media only screen and (min-width: 768px) {
         margin-left: -10px;
@@ -104,3 +115,76 @@ g.highcharts-series,
 .highcharts-legend-series-active .highcharts-data-labels:not(.highcharts-series-hover) {
     opacity: 0.2;
 }
+
+// range selector styling
+
+// first, style the buttons
+.highcharts-range-selector-buttons {
+
+    // fix the position of the buttons 
+    transform: translate(3px, 10px);
+    @media only screen and (min-width: 768px) {
+        transform: translate(-5px, 10px);
+    }
+
+    .highcharts-button {
+
+        // fix the colors that cannot be changed through the API
+        &.highcharts-button-normal {
+            .highcharts-button-box {
+                stroke: white;
+            }
+        }
+        &.highcharts-button-hover {
+            cursor: pointer;
+            .highcharts-button-box {
+                stroke: $yellow;
+            }
+        }
+        &.highcharts-button-pressed {
+            .highcharts-button-box {
+                stroke: $yellow;
+            }
+        }
+
+        // position buttons closer
+        // &:nth-child(3) {
+        //     transform: translate(70px, 0);
+        // }
+        // &:nth-child(4) {
+        //     transform: translate(125px, 0);
+        // }
+    }
+}
+
+// second, style the input 
+.highcharts-input-group {
+
+    // position the input group
+    // transform: translate(8px, 44px);
+    // @media only screen and (min-width: 768px) {
+    //     transform: translate(0px, 44px);
+    // }
+
+    // style the date input fields
+    .highcharts-label.highcharts-range-input {
+        text {
+            font-family: 'IBM Plex Sans', sans-serif !important;
+            font-size: 14px !important;
+            fill: #767676 !important;
+            transform: translate(0px, 3px) !important;
+        }
+    }
+
+    // round the date input fields, TODO: doesn't work in Safari
+    .highcharts-label-box {
+        rx: 6;
+        ry: 6;
+    }
+
+    // center the separator "-" between the date input fields
+    .highcharts-label.highcharts-range-label:nth-child(3) {
+        transform: translate(110px, 0px);
+    }
+}
+

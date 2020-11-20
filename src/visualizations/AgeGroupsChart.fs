@@ -310,10 +310,10 @@ let renderChartCategorySelectors activeChartMode dispatch =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
-            [ 
+            [
                 InfectionsPerPopulation;
                 DeathsPerPopulation;
-                // DeathsPerInfections; 
+                // DeathsPerInfections;
             ]
 
     Html.div [
@@ -368,6 +368,8 @@ let renderChartOptions
                         (I18N.chartText "common" "dsNIJZ")
                         (I18N.chartText "common" "dsMZ")
                 href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                position = {| align = "left" ; verticalAlign = "bottom" ; x = 10 ; y = -5 |}
+                style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "12px" |}
             |}
         tooltip = pojo
             {| formatter = fun () ->
@@ -444,6 +446,17 @@ let renderChartOptions
                data = chartData.FemaleValues
                 |}
         |]
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                credits = {| position = {| x = 18 |} |}
+                            |}
+                    |} |]
+            |}
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =
@@ -472,7 +485,7 @@ let renderChartContainer state =
     let latestDate = fst (latest)
     let infectionsAndDeathsPerAge = snd (latest)
     let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
-    
+
     Html.div [
         prop.style [ style.height 400 ]
         prop.className "highcharts-wrapper"

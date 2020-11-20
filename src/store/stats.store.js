@@ -136,6 +136,16 @@ const getters = {
     return state.data
   },
 
+  lastData1: (state, getters) => (start, end, field) => {
+    let array = getters.data.slice(
+      getters.data.length - end,
+      getters.data.length - start
+    )
+    let array1 = array.map((obj) => _.get(obj, field))
+
+    return array1.filter((el) => typeof el !== 'undefined')
+  },
+
   regions: (state) => {
     return state.regions
   },
@@ -181,7 +191,7 @@ const getters = {
 const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 33))
     const data = await ApiService.get(`${ApiEndpoint()}/api/stats`, {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to

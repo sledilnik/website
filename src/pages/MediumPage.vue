@@ -1,0 +1,47 @@
+<template>
+  <div class="custom-container">
+    <div class="static-page-wrapper">
+      <h1>{{ $t('navbar.medium') }}</h1>
+      <b-card-group deck>
+        <b-card
+          v-for="post in feed"
+          :key="post.title"
+          :title="post.title"
+          :img-src="post.thumbnail"
+          :img-alt="post.title"
+          img-top
+          tag="article"
+        >
+          <b-card-text>
+            {{ post.description | strip | limit(200) }}
+          </b-card-text>
+          <a :href="post.link">Preberi več</a>
+          <template #footer>
+            <small class="text-muted">{{ $t("timestamp.medium", { date: new Date(post.pubDate) }) }}</small>
+          </template>
+        </b-card>
+      </b-card-group>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState('medium', { feed: 'feed' }),
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card {
+  margin-bottom: 30px;
+}
+</style>
