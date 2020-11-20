@@ -746,7 +746,9 @@
             "icu": "V intenzivni enoti",
             "ventilator": "Na respiratorju (intubirani)",
             "recovered": "Preboleli",
-            "deceased": "Umrli"
+            "deceased-icu": "Umrli (intenzivna terapija)",
+            "deceased-hospital": "Umrli (hospitalizirani)",
+            "deceased-rest": "Umrli"
         },
         "patients": {
             "title": "Hospitalizirani",

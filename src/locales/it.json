@@ -160,7 +160,8 @@
         "groupLargestEuCountries": "i più grandi paesi dell'UE*",
         "groupHighestTotalDeaths": "valori massimi",
         "groupHighestActiveCases": "valori massimi",
-        "groupHighestNewCases": "valori massimi"
+        "groupHighestNewCases": "valori massimi",
+        "groupHighestNewDeaths": "valori massimi"
     },
     "country": {
         "ABW": "Aruba",
@@ -702,7 +703,10 @@
             "hospitalized": "Ricoverati",
             "active": "Attivi",
             "title": "Casi confermati",
-            "titleMenu": "Casi"
+            "titleMenu": "Casi",
+            "deceased-hospital": "Deceduti (in ospedale)",
+            "deceased-icu": "Deceduti (in terapia intensiva)",
+            "deceased-rest": "Deceduti"
         },
         "metricsComparison": {
             "ventilator": "Su ventilatore (intubati)",
@@ -1117,6 +1121,12 @@
         "carePatients": {
             "titleMenu": "Ospedali di cura",
             "title": "Ospedali di cura"
+        },
+        "countriesNewDeathsPer100k": {
+            "legendTitle": "Nuovi decessi giornalieri per 100.000 persone",
+            "yAxisTitle": "Nuovi decessi giornalieri per 100.000 persone",
+            "titleMenu": "Paesi - Nuovi decessi",
+            "title": "Paesi: nuovi decessi per 100.000 persone (media di 7 giorni)"
         }
     },
     "footer": {
