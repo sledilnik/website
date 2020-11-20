@@ -533,7 +533,7 @@
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
             "titleMenu": "Slučajevi – struktura",
-            "disclaimer": "Napomena: ovaj dijagram nije aktualan. NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zaposlenicima u zdravstvu."
+            "disclaimer": "Napomena: ovaj dijagram nije aktualan. NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zdravstvenim radnicima."
         },
         "hCenters": {
             "testsPositive": "Testovi (pozitivni*)",
@@ -562,7 +562,10 @@
             "icu": "Na odjelu intenzivne njege",
             "ventilator": "Na respiratoru (intubirani)",
             "hospitalized": "Hospitalizirani",
-            "titleMenu": "Slučajevi"
+            "titleMenu": "Slučajevi",
+            "deceased-rest": "Umrli",
+            "deceased-icu": "Umrli (na odjelu intenzivne njege)",
+            "deceased-hospital": "Umrli (bolinca)"
         },
         "europe": {
             "statusRed": "stroga 10-dnevna karantena",
@@ -636,7 +639,8 @@
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Izvori zaraze i karantena",
             "titleMenu": "Izvori zaraze",
-            "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke."
+            "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
+            "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – udio uvezenih slučajeva može biti manji od stvarnog."
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -728,12 +732,13 @@
         },
         "hcCases": {
             "totalConfirmed": "Ukupno potvrđenih slučajeva",
-            "healthcareEmployeesRelative": "Zaposlenici u zdravstvu (relativno)",
-            "healthcareEmployees": "Zaposlenici u zdravstvu",
-            "healthcareEmployeesCases": "Potvrđeni slučajevi zaposlenika u zdravstvu",
+            "healthcareEmployeesRelative": "Zdravstveni radnici (relativno)",
+            "healthcareEmployees": "Zdravstveni radnici",
+            "healthcareEmployeesCases": "Potvrđeni slučajevi zdravstvenih radnika",
             "confirmedCases": "Potvrđeni slučajevi",
-            "titleMenu": "Zaposlenici u zdravstvu – slučajevi",
-            "title": "Potvrđeni slučajevi među zaposlenicima u zdravstvu"
+            "titleMenu": "Zdravstveni radnici – slučajevi",
+            "title": "Potvrđeni slučajevi zdravstvenih radnika",
+            "disclaimer": "Napomena: podaci za prošli tjedan još nisu cjeloviti – udio zdravstvenih radnika može biti manji od stvarnog."
         }
     },
     "shortMonth": {
@@ -904,13 +909,16 @@
             "title": "Okupljanja"
         },
         "services": {
-            "title": "Usluge"
+            "title": "Usluge",
+            "description": "Zabrana rada svih trgovina i usluga (iznimke: namirnice, ljekarne, banke, pošta, …)<br>Obustava javnog prijevoza (iznimka: taksi). Uklanjanje nekih iznimaka za granične prijelaze."
         },
         "liftShops": {
-            "title": "Dućani"
+            "title": "Dućani",
+            "description": "Opuštanje: tehnički, auto, namještaj u dječjim trgovinama, pedikura, fotokopiraonice, zlatarnice i trgovine satovima"
         },
         "liftLibraries": {
-            "title": "Knjižnice"
+            "title": "Knjižnice",
+            "description": "Opuštanje: knjižnice, servisne radionice, usluge gradnje i održavanja, …"
         }
     },
     "pageNotFound": {
