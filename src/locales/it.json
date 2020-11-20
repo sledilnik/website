@@ -703,7 +703,10 @@
             "hospitalized": "Ricoverati",
             "active": "Attivi",
             "title": "Casi confermati",
-            "titleMenu": "Casi"
+            "titleMenu": "Casi",
+            "deceased-hospital": "Deceduti (in ospedale)",
+            "deceased-icu": "Deceduti (in terapia intensiva)",
+            "deceased-rest": "Deceduti"
         },
         "metricsComparison": {
             "ventilator": "Su ventilatore (intubati)",
