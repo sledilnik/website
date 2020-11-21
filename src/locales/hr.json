@@ -421,7 +421,8 @@
             "admitted": "Prihvaćeni",
             "title": "Hospitalizacije",
             "titleMenu": "Hospitalizacije",
-            "care": "Na njezi"
+            "care": "Na njezi",
+            "icu-deceased": "Umrli (na odjelu intenzivne njege)"
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
