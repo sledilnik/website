@@ -765,6 +765,7 @@
             "ventilator": "Na respiratorju (intubirani)",
             "discharged": "Odpuščeni",
             "deceased": "Umrli",
+            "icu-deceased": "Umrli (intenzivna terapija)",
             "structure": "Struktura"
         },
         "carePatients": {

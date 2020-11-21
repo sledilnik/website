@@ -293,6 +293,7 @@
             "ventilator": "On Ventilator (intubated)",
             "discharged": "Discharged",
             "deceased": "Died",
+            "icu-deceased": "Died (ICU)",
             "allHospitals": "All Hospitals"
         },
         "carePatients": {

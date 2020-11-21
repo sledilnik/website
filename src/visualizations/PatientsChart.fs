@@ -32,6 +32,7 @@ type Breakdown =
 type Series =
     | InHospital
     | Icu
+    | IcuDeceased
     | Critical
     | InHospitalIn
     | InHospitalOut
@@ -45,7 +46,8 @@ module Series =
     let structure hTypeToDisplay =
         if hTypeToDisplay = CareHospitals
         then [ CareIn; Care; CareOut; CareDeceased; ]
-        else [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; ]
+        else [ InHospitalIn; InHospital; Icu
+               Critical; InHospitalOut; InHospitalDeceased; IcuDeceased ]
 
     let byHospital =
         [ InHospital; ]
@@ -53,10 +55,11 @@ module Series =
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
         | Icu                   -> "#d96756", "icu"
+        | IcuDeceased           -> "#666666", "icu-deceased"
         | Critical              -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
         | InHospitalOut         -> "#8cd4b2", "discharged"
-        | InHospitalDeceased    -> "#666666", "deceased"
+        | InHospitalDeceased    -> "#888888", "deceased"
         | Care                  -> "#dba51d", "care"
         | CareIn                -> "#d5c768", "admitted"
         | CareOut               -> "#8cd4b2", "discharged"
@@ -101,7 +104,7 @@ let getFacilitiesList (state : State) (data : PatientsStats array) =
     data.[data.Length-1].facilities
     |> Map.toSeq
     |> Seq.filter
-       (fun (facility, stats) ->
+       (fun (_, stats) ->
             if state.HTypeToDisplay = CareHospitals
             then stats.care.toDate.IsSome
             else stats.inHospital.toDate.IsSome)
@@ -237,33 +240,35 @@ let renderStructureChart (state : State) dispatch =
             | Some aa -> -aa |> Some
             | None -> None
 
-        let getPoint : (FacilityPatientStats -> int option) =
+        let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital ->
-                fun ps ->
-                    ps.inHospital.today
-                    |> subtract ps.icu.today
-                    |> subtract ps.inHospital.``in``
+                ps.inHospital.today
+                |> subtract ps.icu.today
+                |> subtract ps.inHospital.``in``
             | Icu ->
-                fun ps ->
-                    ps.icu.today
-                    |> subtract ps.critical.today
-            | Critical -> fun ps -> ps.critical.today
-            | InHospitalIn -> fun ps -> ps.inHospital.``in``
-            | InHospitalOut -> fun ps -> negative ps.inHospital.out
-            | InHospitalDeceased -> fun ps -> negative ps.deceased.today
+                ps.icu.today
+                |> subtract ps.critical.today
+            | IcuDeceased -> negative ps.deceased.icu.today
+            | Critical -> ps.critical.today
+            | InHospitalIn -> ps.inHospital.``in``
+            | InHospitalOut -> negative ps.inHospital.out
+            | InHospitalDeceased ->
+                ps.deceased.today
+                |> subtract ps.deceased.icu.today
+                |> negative
             | Care ->
-                fun ps ->
-                    ps.care.today
-                    |> subtract ps.care.``in``
-            | CareIn -> fun ps -> ps.care.``in``
-            | CareOut -> fun ps -> negative ps.care.out
-            | CareDeceased -> fun ps -> negative ps.deceasedCare.today
+                ps.care.today
+                |> subtract ps.care.``in``
+            | CareIn -> ps.care.``in``
+            | CareOut -> negative ps.care.out
+            | CareDeceased -> negative ps.deceasedCare.today
 
         let getPointTotal : (FacilityPatientStats -> int option) =
             match series with
             | InHospital            -> fun ps -> ps.inHospital.today
             | Icu                   -> fun ps -> ps.icu.today
+            | IcuDeceased           -> fun ps -> ps.deceased.icu.today
             | Critical              -> fun ps -> ps.critical.today
             | InHospitalIn          -> fun ps -> ps.inHospital.``in``
             | InHospitalOut         -> fun ps -> ps.inHospital.out
