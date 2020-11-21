@@ -2,6 +2,10 @@
 
 *In order to ensure a maximum accuracy and reliability of the data, Sledilnik community uses (cross-checked) publicly available data from __official governemnt sources__, such as the NIJZ, the Government of the Republic of Slovenia, the Ministry of Health, etc., from __health system sources__, such as UKC Ljubljana, UKC Maribor, UK Golnik and others, __Civil protection services__ and from the __national and local media__.*
 
+<a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
+" alt="Ministrstvo za zdravje" width="300"/></a>
+
 Collected and cross-checked data is available in the form of **CSV files**, **REST API** and **Google Docs sheets**. Reuse of data and visualizations is welcome and encouraged. For more information about the terms of reuse please see the [About page](/en/about).
 
 You can also inspect the data directly on the [Tables page](/en/tables).
@@ -55,13 +59,7 @@ More information on how to use the API and the API source code are available on 
 
 ## Data sources
 
-To ensure the precision and reliability of our data, we collect and cross-check the data from different official sources:
-
-<a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
-" alt="Ministrstvo za zdravje" width="300"/></a>
-
-In case we owerlooked any relevant source, please let us know at [info@sledilnik.org](mailto:info@sledilnik.org)
+To ensure the precision and reliability of our data, we collect and cross-check the data from different official sources. In case we owerlooked any relevant source, please let us know at [info@sledilnik.org](mailto:info@sledilnik.org)
 
 | Government                                                                                                                     | Civil protection and disaster relief services                                             |
 | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
