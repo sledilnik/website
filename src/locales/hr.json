@@ -1301,5 +1301,9 @@
         "2": "Ut",
         "1": "Po",
         "0": "Ne"
+    },
+    "youtube": {
+        "titleMenu": "Animacija",
+        "title": "Animacija širenja zaraze COVID-19"
     }
 }
