@@ -19,8 +19,11 @@
         <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
           <img loading="lazy" src="../assets/svg/medium-icon.svg" alt="Medium" />
         </a>
+        <a href="https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos" target="_blank" rel="noreferrer">
+          <img loading="lazy" src="../assets/svg/youtube.svg" alt="YouTube" />
+        </a>
         <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
-          <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" class="gh-icon" />
+          <img loading="lazy" src="../assets/svg/gh-icon.svg" alt="GitHub" />
         </a>
       </div>
     </div>
@@ -108,6 +111,7 @@ footer
 
     img
       width: 40px
+      opacity: 0.25
 
       @media only screen and (min-width: 768px)
         width: 32px
@@ -117,7 +121,4 @@ footer
 
       @media only screen and (max-width: 480px)
         margin-left: 16px
-
-    .gh-icon
-      opacity: .25
 </style>
