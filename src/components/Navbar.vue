@@ -23,7 +23,7 @@
       <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
-      <div class="social">
+      <div class="social" v-if="showIcons">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
           <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
         </a>
@@ -60,10 +60,20 @@ export default {
       menuOpened: false,
       closingMenu: false,
       dropdownVisible: false,
+      showIcons: true,
     }
   },
   created() {
     window.addEventListener('scroll', this.handleScroll, { passive: true })
+  },
+  mounted() {	
+    this.onResize()	
+    window.addEventListener('resize', this.onResize, { passive: true })	
+  },	
+  beforeDestroy() {	
+    if (typeof window !== 'undefined') {	
+      window.removeEventListener('resize', this.onResize, { passive: true })	
+    }	
   },
   methods: {
     handleScroll() {
@@ -83,6 +93,9 @@ export default {
         this.closingMenu = false
       }, 650)
     },
+    onResize() {	
+      this.showIcons = window.innerWidth < 850 || window.innerWidth >= 1100	
+    },
   },
   watch: {
     $route() {
@@ -96,7 +109,7 @@ export default {
 <style lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 850px) {
     @content;
   }
 }
