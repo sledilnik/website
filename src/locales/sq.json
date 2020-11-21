@@ -431,12 +431,10 @@
         "4": "Maj"
     },
     "navbar": {
-        "team": "Ekipi",
         "models": "Modele",
-        "sources": "Burimet",
         "about": "Rreth nesh",
         "faq": "PPSH",
-        "tables": "Tabela",
+        "data": "Të dhënat",
         "home": "Ballina",
         "menu": "Menu",
         "language": {

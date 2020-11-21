@@ -8,13 +8,11 @@
         "home": "Domov",
         "world": "Svet",
         "ostanizdrav": "#OstaniZdrav",
-        "tables": "Tabela",
+        "data": "Podatki",
         "models": "Modeli",
         "animation": "Animacija",
         "faq": "FAQ",
         "about": "O projektu",
-        "team": "Ekipa",
-        "sources": "Viri",
         "links": "Povezave",
         "github": "GitHub",
         "goToGraph": "Pojdi na graf",
@@ -68,6 +66,10 @@
         "icu": "V intenzivni enoti",
         "deceasedToDate": "Umrli",
         "lastUpdated": "{{ date, %a., %e. %b. }}"
+    },
+    "youtube": {
+        "title": "Animacija širjenja COVID-19",
+        "titleMenu": "Animacija"
     },
     "tables": {
         "title": "Tabela",

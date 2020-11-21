@@ -154,6 +154,10 @@ export default {
           titleMenu: this.$t('charts.phaseDiagram.titleMenu'),
           icon: 'graph',
         },
+        'youtube': {
+          titleMenu: this.$t('youtube.titleMenu'),
+          icon: 'map',
+        },
       },
     }
   },
@@ -189,7 +193,7 @@ export default {
 
 <style lang="scss">
 @mixin nav-break {
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 850px) {
     @content;
   }
 }
@@ -273,7 +277,7 @@ export default {
   position: fixed;
   bottom: 7px;
   right: 7px;
-  z-index: 2002;
+  z-index: 1097;
   cursor: pointer;
   display: inline-block;
 

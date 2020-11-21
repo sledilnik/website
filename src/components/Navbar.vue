@@ -18,24 +18,28 @@
       <div class="nav-heading">{{ $t('navbar.menu') }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
       <router-link to="world" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
-      <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
-      <router-link to="tables" class="router-link"><span>{{ $t('navbar.tables') }}</span></router-link>
+      <router-link to="data" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
+      <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
-      <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
-      <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
-      <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
-      <a
-        v-if="showFullLang"
-        href="https://github.com/sledilnik"
-        target="_blank"
-        rel="noreferrer"
-        class="router-link router-link-icon github"
-      >
-        <img src="../assets/svg/gh-icon.svg" :alt="$t('navbar.github')" />
-        <span>{{ $t('navbar.github') }}</span>
-      </a>
+      <div class="social" v-if="showIcons">
+        <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
+        </a>
+        <a href="https://twitter.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/tw-icon.svg" alt="Twitter" />
+        </a>
+        <a href="https://medium.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/medium-icon.svg" alt="Medium" />
+        </a>
+        <a href="https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/youtube.svg" alt="YouTube" />
+        </a>
+        <a href="https://github.com/sledilnik" target="_blank" rel="noreferrer">
+          <img src="../assets/svg/gh-icon.svg" alt="GitHub" />
+        </a>
+      </div>
       <LanguageSwitcher />
     </div>
   </div>
@@ -56,20 +60,20 @@ export default {
       menuOpened: false,
       closingMenu: false,
       dropdownVisible: false,
-      showFullLang: true,
+      showIcons: true,
     }
   },
   created() {
     window.addEventListener('scroll', this.handleScroll, { passive: true })
   },
-  mounted() {
-    this.onResize()
-    window.addEventListener('resize', this.onResize, { passive: true })
-  },
-  beforeDestroy() {
-    if (typeof window !== 'undefined') {
-      window.removeEventListener('resize', this.onResize, { passive: true })
-    }
+  mounted() {	
+    this.onResize()	
+    window.addEventListener('resize', this.onResize, { passive: true })	
+  },	
+  beforeDestroy() {	
+    if (typeof window !== 'undefined') {	
+      window.removeEventListener('resize', this.onResize, { passive: true })	
+    }	
   },
   methods: {
     handleScroll() {
@@ -89,8 +93,8 @@ export default {
         this.closingMenu = false
       }, 650)
     },
-    onResize() {
-      this.showFullLang = window.innerWidth >= 1250
+    onResize() {	
+      this.showIcons = window.innerWidth < 850 || window.innerWidth >= 1100	
     },
   },
   watch: {
@@ -105,7 +109,7 @@ export default {
 <style lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 1150px) {
+  @media only screen and (min-width: 850px) {
     @content;
   }
 }
@@ -351,6 +355,26 @@ export default {
 
     &:before {
       display: none;
+    }
+  }
+
+  .social {
+    display: inline-block;
+    margin-left: 0;
+    padding: 9px 0 36px;
+    @include nav-break {
+      margin-left: 32px;
+      padding: 0;
+    }
+    img {
+      width: 24px;
+      opacity: .56;
+    }
+    a + a {
+      margin-left: 16px;
+      @media only screen and (max-width: 480px) {
+        margin-left: 16px;
+      }
     }
   }
 }

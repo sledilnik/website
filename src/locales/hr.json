@@ -943,9 +943,8 @@
         "6": "srpnja"
     },
     "navbar": {
-        "tables": "Tablice",
+        "data": "Podaci",
         "links": "Poveznice",
-        "team": "Ekipa",
         "home": "Početna",
         "world": "Svijet",
         "github": "GitHub",
@@ -963,7 +962,6 @@
         },
         "about": "O projektu",
         "faq": "FAQ",
-        "sources": "Izvori",
         "menu": "Izbornik",
         "animation": "Animacija",
         "ostanizdrav": "#OstaniZdrav",
