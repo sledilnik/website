@@ -445,7 +445,8 @@
             "hospitalized": "Hospitalisierte",
             "ventilator": "An Beatmungsgeräten",
             "care": "In Pflege",
-            "titleMenu": "Hospitalisiert"
+            "titleMenu": "Hospitalisiert",
+            "icu-deceased": "Verstorbene (Intensivstationen)"
         },
         "hCenters": {
             "suspectedCovidPhone": "Verdacht auf COVID-19 (Telefon)",
