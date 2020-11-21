@@ -25,7 +25,6 @@
       <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
       <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
-      <router-link to="links" class="router-link"><span>{{ $t('navbar.links') }}</span></router-link>
       <a
         v-if="showFullLang"
         href="https://github.com/sledilnik"

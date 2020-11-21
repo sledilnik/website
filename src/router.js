@@ -14,12 +14,6 @@ import * as aboutMdHr from './content/hr/about.md'
 import * as aboutMdDe from './content/de/about.md'
 import * as aboutMdIt from './content/it/about.md'
 
-import * as linksMdSl from './content/sl/links.md'
-import * as linksMdEn from './content/en/links.md'
-import * as linksMdHr from './content/hr/links.md'
-import * as linksMdDe from './content/de/links.md'
-import * as linksMdIt from './content/it/links.md'
-
 import * as contentMdSl from './content/sl/faq.md'
 import * as contentMdEn from './content/en/faq.md'
 import * as contentMdHr from './content/hr/faq.md'
@@ -74,13 +68,6 @@ const mdContent = {
     hr: teamMdHr,
     de: teamMdDe,
     it: teamMdIt,
-  },
-  links: {
-    sl: linksMdSl,
-    en: linksMdEn,
-    hr: linksMdHr,
-    de: linksMdDe,
-    it: linksMdIt,
   },
   sources: {
     sl: sourcesMdSl,
@@ -168,10 +155,6 @@ const routes = [
   {
     path: '/sources',
     redirect: `/${i18next.language}/sources`,
-  },
-  {
-    path: '/links',
-    redirect: `/${i18next.language}/links`,
   },
   {
     path: '/data',

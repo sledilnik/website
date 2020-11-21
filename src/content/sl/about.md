@@ -30,14 +30,14 @@ Vsi podatki so na voljo v [**GDocs preglednici, CSV obliki ali preko REST API**]
 
 ## Uporaba grafov in vizualizacij
 
-[Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani; če želite objavo vašega projekta na naši strani (glej [Povezave](/sl/links)), nas prosimo kontaktirajte. 
+[Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani.
 
 
 ## Uporaba podatkov
 
-Naše podatke uporabljajo tudi nekateri drugi portali - navedeni so na strani [Povezave](/sl/links); veseli bomo, če nas o uporabi obvestite, da lahko objavimo tudi vaš projekt. 
+Naše podatke že uporabljajo tudi drugi portali; veseli bomo, če se jim boste pridružili.
 
-**Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde. 
+**Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde.
 Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo.
  Kljub temu ne moremo 100 % oz. v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
 
@@ -49,4 +49,3 @@ Uporaba podatkov, grafov in sodelovanje so zaželjeni: podatki so zbrani iz viro
 Za izvoz podatkov v drugih oblikah, uporabo za vizualizacije ali druge oblike sodelovanja nas kontaktirajte na info@sledilnik.org.
 
 Uporaba Sledilnika ne bi bila možna brez spletnega servisa CloudFlare, preko katerega pretakamo podatke in ki za svoje nemoteno delovanje na vaš računalnik vstavi en sam piškotek, ki tam ostane največ 30 dni. Več informacij o varovanju zasebnosti [najdete na njihovi spletni strani]([https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies#12345682](https://support.cloudflare.com/hc/en-us/articles/200170156-Understanding-the-Cloudflare-Cookies#12345682).
-
