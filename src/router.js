@@ -151,17 +151,14 @@ const routes = [
     path: '/ostanizdrav',
     redirect: `/${i18next.language}/ostanizdrav`,
   },
-
-  // Removed pages
   {
-    path: '/links',
+    path: '/links', // Page retired
     redirect: `/${i18next.language}/about`,
   },
   {
-    path: '/team',
+    path: '/team', // Page retired
     redirect: `/${i18next.language}/about`,
   },
-
   {
     path: '/',
     beforeEnter: (to, from, next) => {
@@ -210,6 +207,14 @@ const routes = [
       {
         path: 'embed',
         component: () => import('./pages/EmbedMakerPage.vue'),
+      },
+      {
+        path: 'links', // Page retired
+        redirect: `about`,
+      },
+      {
+        path: 'team', // Page retired
+        redirect: `about`,
       },
       ...mdContentRoutes(),
       {
