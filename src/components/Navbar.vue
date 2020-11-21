@@ -18,12 +18,11 @@
       <div class="nav-heading">{{ $t('navbar.menu') }}</div>
       <router-link to="stats" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
       <router-link to="world" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
-      <router-link to="tables" class="router-link"><span>{{ $t('navbar.tables') }}</span></router-link>
+      <router-link to="data" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
       <router-link to="models" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
       <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
-      <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
       <a
         v-if="showFullLang"
         href="https://github.com/sledilnik"

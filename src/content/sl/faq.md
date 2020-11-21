@@ -74,7 +74,7 @@ Stran je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F
 <details>
   <summary id=data-reliability>So vaši podatki in prikazi verodostojni?</summary>
 
-Podatke zbiramo iz različnih uradnih in drugih javnih virov – navedeni so v [zavihku Viri](/sl/sources).
+Podatke zbiramo iz različnih uradnih in drugih javnih virov – navedeni so na [strani Podatki](/sl/data).
 
 Od 28. marca 2020 imamo vzpostavljeno tudi povezavo z Ministrstvom za zdravje, NIJZ in zdravstvenimi zavodi, od katerih zdaj neposredno dobivamo strukturirane podatke. Ekipa Sledilnika ne nadzoruje točnosti izvirnih podatkov in ne objavlja podatkov, ki niso pridobljeni iz uradnih virov ali sredstev javnega obveščanja, zato pa vse podatke navzkrižno preverja, da so pravilni in skladni z izvornimi.
 
@@ -173,7 +173,7 @@ Lahko pa uporabniki prostovoljno pomagate z zbiranjem in preverjanjem podatkov i
 <details>
   <summary id=data-usage>Kako lahko pridobim in uporabim vašo bazo podatkov?</summary>
 
-Naša baza podatkov je javna in prosto dostopna v obliki [**CSV**, **REST** in **Google Sheet**](/sl/datasources). Prosimo vas le, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
+Naša baza podatkov je javna in prosto dostopna v obliki [**CSV datotek**, **REST API-ja** in **Google Docs preglednic**](/sl/data). Prosimo vas, da nam sporočite, s kakšnim namenom boste podatke uporabili, ter Sledilnik obvezno navedete kot vir.
 
 Ker so oznake podatkov tudi v angleščini (gl. vprašanje [Ali obstaja vaša stran tudi v angleščini?](#english-translation)), je mogoča tudi njihova mednarodna uporaba (izvoz, prikaz).
 

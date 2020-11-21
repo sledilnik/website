@@ -17,7 +17,7 @@ Imaš idejo za nov prikaz, bi urejal/a podatke ali pomagal/a pri kodiranju vizua
 
 ## Zbrani podatki
 
-Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](/sl/sources):
+Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javnih virov](/sl/data):
 
 - število opravljenih testov in število potrjeno okuženih
 - število potrjeno okuženih po kategorijah: po starosti, spolu, regijah in občinah
@@ -27,12 +27,7 @@ Vključeni so naslednji dnevni podatki (z zgodovino) iz [NIJZ in različnih javn
 
 Sproti se trudimo dodajati tudi nove pomembne kategorije.
 
-Vsi podatki so na voljo v [**GDocs preglednici, CSV obliki ali preko REST API**](/sl/datasources).
-
-
-## Uporaba grafov in vizualizacij
-
-[Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani.
+Vsi podatki so na voljo v obliki [**CSV datotek, REST API-ja in Google Docs preglednic**](/sl/data).
 
 
 ## Uporaba podatkov
@@ -42,6 +37,11 @@ Naše podatke že uporabljajo tudi drugi portali; veseli bomo, če se jim boste 
 **Pozor**: Informacije, objavljene na naši spletni strani, vključno s povezavami na modele in druge strani, s katerimi nismo neposredno povezani, so pripravljene z največjo mogočo skrbnostjo ob uporabi razpoložljivih virov podatkov, znanja, metodologij in tehnologij, upoštevajoč znanstvene standarde.
 Verjamemo, da lahko prikazi in modeli pomagajo razložiti različne dejavnike širjenja virusa, med drugim tudi vpliv sprejetih in mogočih nadaljnjih ukrepov, s čimer želimo poudariti, da imamo v tej pandemiji vsi pomembno vlogo.
  Kljub temu ne moremo 100 % oz. v celoti zagotoviti točnosti, popolnosti ali uporabnosti informacij na teh spletnih straneh, in izrecno zavračamo kakršno koli odgovornost za nadaljnje interpretacije in simulacije, ki naše prikaze navajajo kot vir.
+
+
+## Uporaba grafov in vizualizacij
+
+[Naše grafe in prikaze](/sl/stats) lahko na svojo spletni strani uporabite tudi vi. [Vgradite lahko poljuben graf ali prikaz](/sl/embed) in ga prilagodite svoji spletni strani.
 
 
 ## Pogoji uporabe

@@ -23,7 +23,7 @@ The following data from the NIJZ and various public sources is included in datab
 -   healthcare system capacity: number of beds, intensive care units, respirators for ventilation...
 
     We are also constantly striving to add new important categories.
-    All data is collected and available in form of [GSheets, CSV or via REST API.](/en/datasources)
+    All data is collected and available in the form of [CSV files, REST API and Google Docs Sheets](/en/data).
 
 
 <details>

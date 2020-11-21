@@ -942,7 +942,7 @@
         "6": "srpnja"
     },
     "navbar": {
-        "tables": "Podaci",
+        "data": "Podaci",
         "links": "Poveznice",
         "home": "Početna",
         "world": "Svijet",
@@ -961,7 +961,6 @@
         },
         "about": "O projektu",
         "faq": "FAQ",
-        "sources": "Izvori",
         "menu": "Izbornik",
         "animation": "Animacija",
         "ostanizdrav": "#OstaniZdrav",

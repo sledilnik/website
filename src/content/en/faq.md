@@ -77,7 +77,7 @@ The site is in JavaScript using Vue.js, the visualizations and graphs are made i
 <details>
   <summary id=data-reliability>Are your data and visualizations reliable?</summary>
 
-Data is collected from verified public sources, which are listed in the [Resources tab](/en/sources).
+Data is collected from verified public sources, which are listed on the [Data page](/en/data).
 
 Sledilnik receives official data on COVID-19 directly from the Ministry of Health, the NIJZ (National Institute for Public Health), and other national health institutions. The Sledilnik team does not guarantee the accuracy of the original data and publishes solely data obtained from official sources or the media, but we do cross-check if all data is correct and consistent with the given source.
 
@@ -177,7 +177,7 @@ Sledilnik does not collect users’ personal information nor information that in
 <details>
   <summary id=data-usage>How can I obtain and use your database?</summary>
 
-Our database is public and freely available in the form of  [**CSV**, **REST**, and **Google Sheet**](/en/datasources). Kindly let us know the purpose for which you will use the information and make sure you include Sledilnik as the source of your data.
+Our database is public and freely available in the form of  [**CSV files**, **REST API**, and **Google Sheet**](/en/data). Kindly let us know the purpose for which you will use the information and make sure you include Sledilnik as the source of your data.
 
 Since all the data in the database is already marked with English tags (see also [Is your webpage available in English?](#english-translation)), their international use (export, display) is also possible.
 

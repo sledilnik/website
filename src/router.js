@@ -20,23 +20,17 @@ import * as contentMdHr from './content/hr/faq.md'
 import * as contentMdDe from './content/de/faq.md'
 import * as contentMdIt from './content/it/faq.md'
 
-import * as sourcesMdSl from './content/sl/sources.md'
-import * as sourcesMdEn from './content/en/sources.md'
-import * as sourcesMdHr from './content/hr/sources.md'
-import * as sourcesMdDe from './content/de/sources.md'
-import * as sourcesMdIt from './content/it/sources.md'
+import * as dataMdSl from './content/sl/data.md'
+import * as dataMdEn from './content/en/data.md'
+import * as dataMdHr from './content/hr/data.md'
+import * as dataMdDe from './content/de/data.md'
+import * as dataMdIt from './content/it/data.md'
 
 import * as modelsMdSl from './content/sl/models.md'
 import * as modelsMdEn from './content/en/models.md'
 import * as modelsMdHr from './content/hr/models.md'
 import * as modelsMdDe from './content/de/models.md'
 import * as modelsMdIt from './content/it/models.md'
-
-import * as datasourcesMdSl from './content/sl/datasources.md'
-import * as datasourcesMdEn from './content/en/datasources.md'
-import * as datasourcesMdHr from './content/hr/datasources.md'
-import * as datasourcesMdDe from './content/de/datasources.md'
-import * as datasourcesMdIt from './content/it/datasources.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
@@ -56,12 +50,12 @@ const mdContent = {
     de: aboutMdDe,
     it: aboutMdIt,
   },
-  sources: {
-    sl: sourcesMdSl,
-    en: sourcesMdEn,
-    hr: sourcesMdHr,
-    de: sourcesMdDe,
-    it: sourcesMdIt,
+  data: {
+    sl: dataMdSl,
+    en: dataMdEn,
+    hr: dataMdHr,
+    de: dataMdDe,
+    it: dataMdIt,
   },
   models: {
     sl: modelsMdSl,
@@ -69,13 +63,6 @@ const mdContent = {
     hr: modelsMdHr,
     de: modelsMdDe,
     it: modelsMdIt,
-  },
-  datasources: {
-    sl: datasourcesMdSl,
-    en: datasourcesMdEn,
-    hr: datasourcesMdHr,
-    de: datasourcesMdDe,
-    it: datasourcesMdIt,
   },
 }
 
@@ -136,28 +123,28 @@ const routes = [
     redirect: `/en/about`,
   },
   {
-    path: '/sources',
-    redirect: `/${i18next.language}/sources`,
-  },
-  {
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
-  },
-  {
-    path: '/datasources',
-    redirect: `/${i18next.language}/datasources`,
   },
   {
     path: '/ostanizdrav',
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
-    path: '/links', // Page retired
+    path: '/links', // Retired page
     redirect: `/${i18next.language}/about`,
   },
   {
-    path: '/team', // Page retired
+    path: '/team', // Retired page
     redirect: `/${i18next.language}/about`,
+  },
+  {
+    path: '/sources', // Retired page
+    redirect: `/${i18next.language}/data`,
+  },
+  {
+    path: '/datasources', // Retired page
+    redirect: `/${i18next.language}/data`,
   },
   {
     path: '/',
@@ -209,12 +196,20 @@ const routes = [
         component: () => import('./pages/EmbedMakerPage.vue'),
       },
       {
-        path: 'links', // Page retired
+        path: 'links', // Retired page
         redirect: `about`,
       },
       {
-        path: 'team', // Page retired
+        path: 'team', // Retired page
         redirect: `about`,
+      },
+      {
+        path: 'sources', // Retired page
+        redirect: `data`,
+      },
+      {
+        path: 'datasources', // Retired page
+        redirect: `data`,
       },
       ...mdContentRoutes(),
       {
