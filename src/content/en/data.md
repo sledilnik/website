@@ -72,7 +72,7 @@ To ensure the precision and reliability of our data, we collect and cross-check 
 | [Krizni štab RS](https://twitter.com/KrizniStabRS/with_replies) - ukinjen                                                      | [CZ Gorenjska](https://www.facebook.com/stabczgorenjska)                                  |
 
 
-| Healt system                                                                     | National media                                                                                                                                       |
+| Health system                                                                    | National media                                                                                                                                       |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [UKC Ljubljana](https://twitter.com/ukclj/with_replies)                          | [Delo](https://www.delo.si/tag/koronavirus)                                                                                                          |
 | [UKC Maribor](https://twitter.com/UKCMaribor/with_replies)                       | [RTVSLO.si](https://www.rtvslo.si/zdravje/novi-koronavirus)                                                                                          |
