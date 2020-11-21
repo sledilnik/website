@@ -67,6 +67,10 @@
         "deceasedToDate": "Umrli",
         "lastUpdated": "{{ date, %a., %e. %b. }}"
     },
+    "youtube": {
+        "title": "Animacija širjenja COVID-19",
+        "titleMenu": "Animacija"
+    },
     "tables": {
         "title": "Tabela",
         "tabSummary": "Povzetek stanja",

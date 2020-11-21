@@ -66,6 +66,10 @@
         "deceasedToDate": "Confirmed Deaths",
         "lastUpdated": "{{ date, %a, %b %e }}"
     },
+    "youtube": {
+        "title": "Animation of COVID-19 spread",
+        "titleMenu": "Animation"
+    },
     "tables": {
         "title": "Table",
         "tabSummary": "Summary",
