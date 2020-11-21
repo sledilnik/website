@@ -1301,5 +1301,9 @@
         "2": "Di",
         "1": "Mo",
         "0": "So"
+    },
+    "youtube": {
+        "titleMenu": "Animation",
+        "title": "Animation der Verbreitung von COVID-19"
     }
 }
