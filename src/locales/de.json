@@ -476,7 +476,8 @@
             "title": "Gemeindekarte",
             "all": "Alle",
             "relativeIncrease": "Wöchentlicher Anstieg",
-            "titleMenu": "Gemeinde – Karte"
+            "titleMenu": "Gemeinde – Karte",
+            "bubbles": "Verteilung"
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
@@ -574,7 +575,10 @@
             "icu": "Auf Intensivstationen",
             "ventilator": "An Beatmungsgeräten",
             "recovered": "Genesene",
-            "titleMenu": "Fälle"
+            "titleMenu": "Fälle",
+            "deceased-icu": "Verstorbene (auf Intensivstationen)",
+            "deceased-rest": "Verstorbene",
+            "deceased-hospital": "Verstorbene (Krankenhaus)"
         },
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
@@ -969,7 +973,8 @@
             "title": "Bibliotheken"
         },
         "services": {
-            "title": "Dienstleistungen"
+            "title": "Dienstleistungen",
+            "description": "Verbot aller Geschäfte und Dienstleistungen für Verbraucher (Ausnahmen: Lebensmittelgeschäfte, Apotheken, Banken, Postämter, …)<br>Sperrung des öffentlichen Verkehrs (Ausnahme: Taxi). Aufhebung einiger Ausnahmen für Grenzübergänge."
         },
         "gatherings2": {
             "description": "Verbot von Versammlungen im öffentlichen Raum (außer nahe Familienangehörige)",
