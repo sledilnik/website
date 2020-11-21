@@ -366,7 +366,8 @@
             "deceased": "Smrtni slučajevi",
             "yesterday": "Jučer",
             "relativeIncrease": "Tjedni rast",
-            "titleMenu": "Općine – karta"
+            "titleMenu": "Općine – karta",
+            "bubbles": "Distribucija"
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (sedmodnevni prosjek)",
