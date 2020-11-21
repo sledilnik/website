@@ -140,10 +140,6 @@ const routes = [
     redirect: `/${i18next.language}/sources`,
   },
   {
-    path: '/data',
-    redirect: `/${i18next.language}/data`,
-  },
-  {
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
   },
@@ -206,10 +202,6 @@ const routes = [
       {
         path: 'world',
         component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
-      },
-      {
-        path: 'data',
-        component: () => import(/* webpackChunkName: "data" */'./pages/DataPage.vue'),
       },
       {
         path: 'tables',
