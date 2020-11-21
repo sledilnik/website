@@ -23,7 +23,6 @@
       <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
-      <router-link to="team" class="router-link"><span>{{ $t('navbar.team') }}</span></router-link>
       <router-link to="sources" class="router-link"><span>{{ $t('navbar.sources') }}</span></router-link>
       <a
         v-if="showFullLang"

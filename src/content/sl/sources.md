@@ -8,7 +8,7 @@ Skupnost Sledilnik dnevno prejema podatke od:
 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
 " alt="Ministrstvo za zdravje" width="300"/></a>
 
-Če smo kak relevanten vir spregledali, [nas, prosimo, obvestite](/sl/team)!
+Če smo kak relevanten vir spregledali, nas, prosimo, obvestite na [info@sledilnik.org](mailto:info@sledilnik.org)
 
 | Vlada                                                                                                                          | Ostale službe                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |

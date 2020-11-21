@@ -20,12 +20,6 @@ import * as contentMdHr from './content/hr/faq.md'
 import * as contentMdDe from './content/de/faq.md'
 import * as contentMdIt from './content/it/faq.md'
 
-import * as teamMdSl from './content/sl/team.md'
-import * as teamMdEn from './content/en/team.md'
-import * as teamMdHr from './content/hr/team.md'
-import * as teamMdDe from './content/de/team.md'
-import * as teamMdIt from './content/it/team.md'
-
 import * as sourcesMdSl from './content/sl/sources.md'
 import * as sourcesMdEn from './content/en/sources.md'
 import * as sourcesMdHr from './content/hr/sources.md'
@@ -61,13 +55,6 @@ const mdContent = {
     hr: aboutMdHr,
     de: aboutMdDe,
     it: aboutMdIt,
-  },
-  team: {
-    sl: teamMdSl,
-    en: teamMdEn,
-    hr: teamMdHr,
-    de: teamMdDe,
-    it: teamMdIt,
   },
   sources: {
     sl: sourcesMdSl,
@@ -149,10 +136,6 @@ const routes = [
     redirect: `/en/about`,
   },
   {
-    path: '/team',
-    redirect: `/${i18next.language}/team`,
-  },
-  {
     path: '/sources',
     redirect: `/${i18next.language}/sources`,
   },
@@ -172,6 +155,17 @@ const routes = [
     path: '/ostanizdrav',
     redirect: `/${i18next.language}/ostanizdrav`,
   },
+
+  // Removed pages
+  {
+    path: '/links',
+    redirect: `/${i18next.language}/about`,
+  },
+  {
+    path: '/team',
+    redirect: `/${i18next.language}/about`,
+  },
+
   {
     path: '/',
     beforeEnter: (to, from, next) => {

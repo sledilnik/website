@@ -63,9 +63,61 @@ Our data is also freely avaliable and is already used by other portals and proje
 
 ## Lend a helping hand – to us, yourself and others
 
-The project was initiated by [Luka Renko](https://twitter.com/LukaRenko) who began collecting data in the begining of COVID-19 epidemiy and has grown steadily into a team of 20 to 45 volunteers and active participants due to increasing need for data input and verification, as well as programming. It is a crowdsourcing project, supported by massive voluntary participation, where everyone can contribute with their resources or data to the best of their ability. Join in and lend a helping hand.
+The project was initiated by [Luka Renko](https://twitter.com/LukaRenko) who began collecting data in the begining of COVID-19 epidemiy and has grown steadily into a team of 20 to 45 volunteers and active participants due to increasing need for data input and verification, as well as programming. It is a crowdsourcing project, supported by massive voluntary participation, where everyone can contribute with their resources or data to the best of their ability.
+
+Do you have a suggestion, would like to help with organising the data or contribute to the project code? Please [send us a message](mailto:info@sledilnik.org) or join our [Slack](https://sledilnik.slack.com). Join in and lend a helping hand!
 
 ## Terms of use
 
 Use and collaboration are desired: the data is collected from sources in the public domain and can be freely used, edited, processed or incorporated into any non-marketable content if citing the source – covid-19.sledilnik.org.
 To export data to other formats, or use for visualization use please contact us at info@sledilnik.org.
+
+
+
+## Covid-19 Tracker Team
+
+COVID-19 Sledilnik in an open source project that would not be possible without the hard work of the community members as well as numerous suggestions, comments and contributions from other people. THANK YOU!
+
+Project collaborators:
+
+-   [Aleks Jakulin](https://twitter.com/aleksj) - modeling coordination, modeling, sources
+-   [Andraž Vrhovec](https://github.com/overlordtm) - web page, CSV format
+-   [Andrej Srakar](http://www.ier.si/) - sources, modeling
+-   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeling
+-   [Anže Voh Boštic](https://podcrto.si/author/anze/) - sources, source validation, modeling
+-   [Bojan Košir](https://twitter.com/BojanKosir) - data model and validation, sources
+-   [Demjan Vester](https://github.com/VesterDe) - web page
+-   [Eva Matjašič](https://github.com/Blonduos/) - web page
+-   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
+-   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
+-   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling
+-   [Joh Dokler](https://github.com/joahim) - visualisations
+-   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
+-   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
+-   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
+-   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation
+-   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
+-   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - sources, data validation
+-   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
+-   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
+-   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
+-   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
+-   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - visualisations
+-   [Matjaž Lipuš](https://twitter.com/MatjazL) - sources, data validation
+-   [Mia Erbus](https://github.com/miaerbus) - web page
+-   [Miha Kadunc](https://twitter.com/miha_kadunc) - data model and validation, modeling
+-   [Miha Markič](https://twitter.com/MihaMarkic) - REST API
+-   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - translations
+-   [Mitja Potočin](https://github.com/mitjapotocin) - web page
+-   [Nace Štruc](https://www.nace.si/) - visualisations
+-   [Peter Keše](https://twitter.com/pkese/) - visualisations
+-   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
+-   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
+-   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
+-   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
+-   [Vanja Cvelbar](https://github.com/b100w11) - translations
+-   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
+-   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling
