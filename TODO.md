@@ -1,6 +1,9 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/700
+    - remove hierarchy, for now
+    - show the deaths for the last day, too
+        - do we need the second dataset?
     - split into three files
     - add css for "deaths-chart"
     - define texts for "deaths" - english

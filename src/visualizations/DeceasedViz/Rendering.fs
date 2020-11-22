@@ -33,26 +33,15 @@ type Series =
     | DeceasedInIcu
     | DeceasedInHospitals
     | DeceasedOther
-    | Recovered
-    | Active
-    | InHospital
-    | Icu
-    | Critical
 
 module Series =
     let all =
-        [ Active; InHospital; Icu; Critical; Recovered
-          DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
+        [ DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
 
     let getSeriesInfo = function
-        | DeceasedInIcu        -> true,  "#666666",   "deceased-icu"
-        | DeceasedInHospitals  -> true,  "#888888",   "deceased-hospital"
-        | DeceasedOther        -> true,  "#aaaaaa",   "deceased-rest"
-        | Recovered     -> true,  "#8cd4b2",   "recovered"
-        | Active        -> true,  "#d5c768",   "active"
-        | InHospital    -> true,  "#de9a5a",   "hospitalized"
-        | Icu           -> true,  "#d96756",   "icu"
-        | Critical      -> true,  "#bf5747",   "ventilator"
+        | DeceasedInIcu        -> true,  "#663961",   "deceased-icu"
+        | DeceasedInHospitals  -> true,  "#96548F",   "deceased-hospital"
+        | DeceasedOther        -> true,  "#BC69B4",   "deceased-rest"
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -113,46 +102,24 @@ let renderChartOptions (state : State) dispatch =
         | Some aa, None -> -aa |> Some
         | None, Some _ -> b
         | _ -> None
-    let negative (a : int option) =
-        match a with
-        | Some aa -> -aa |> Some
-        | None -> None
 
     let renderSeries series =
 
         let getPoint sdp pdp : int option =
             match series with
-            | Recovered -> negative sdp.Cases.RecoveredToDate
-            | DeceasedInIcu -> negative pdp.total.deceased.hospital.icu.toDate
+            | DeceasedInIcu -> pdp.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals ->
                     pdp.total.deceased.hospital.toDate
                     |> subtract pdp.total.deceased.hospital.icu.toDate
-                    |> negative
             | DeceasedOther ->
                     sdp.StatePerTreatment.DeceasedToDate
                     |> subtract pdp.total.deceased.hospital.toDate
-                    |> negative
-            | Active ->
-                    sdp.Cases.Active
-                    |> subtract sdp.StatePerTreatment.InHospital
-            | InHospital ->
-                    sdp.StatePerTreatment.InHospital
-                    |> subtract sdp.StatePerTreatment.InICU
-            | Icu ->
-                    sdp.StatePerTreatment.InICU
-                    |> subtract sdp.StatePerTreatment.Critical
-            | Critical -> sdp.StatePerTreatment.Critical
 
         let getPointTotal sdp pdp : int option =
             match series with
-            | Recovered -> sdp.Cases.RecoveredToDate
             | DeceasedInIcu -> pdp.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals -> pdp.total.deceased.hospital.toDate
             | DeceasedOther -> sdp.StatePerTreatment.DeceasedToDate
-            | Active -> sdp.Cases.Active
-            | InHospital -> sdp.StatePerTreatment.InHospital
-            | Icu -> sdp.StatePerTreatment.InICU
-            | Critical -> sdp.StatePerTreatment.Critical
 
         let statsDataDict = state.data |> Seq.map(fun x -> x.Date, x) |> dict
 
@@ -215,14 +182,17 @@ let renderChartOptions (state : State) dispatch =
         series = allSeries
         plotOptions = pojo
             {|
-                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0  |}
+                series = {| stacking = "normal"; crisp = true
+                            borderWidth = 0
+                            pointPadding = 0; groupPadding = 0
+                            |}
             |}
 
-        tooltip = pojo
-            {|
-                shared = true
-                formatter = fun () -> legendFormatter jsThis
-            |}
+//        tooltip = pojo
+//            {|
+//                shared = true
+//                formatter = fun () -> legendFormatter jsThis
+//            |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
