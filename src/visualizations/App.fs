@@ -490,8 +490,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
     let localVisualizations =
-        [ deceased; hospitals; metricsComparison; dailyComparison
-          patients; patientsCare
+        [ hospitals; metricsComparison; dailyComparison
+          patients; patientsCare; deceased 
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -510,10 +510,10 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ deceased; hospitals; metricsComparison; spread; dailyComparison; map
+        [ hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
           countriesCasesPer1M
           countriesActiveCasesPer1M
