@@ -1,12 +1,14 @@
 # Podatki
 
-*Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, skupnost Sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz __uradnih virov__, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz __administrativnih virov zdravstvenega sistema__, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, __virov Civilne zaščite__ ter iz __nacionalnih in lokalnih medijev__.*
+Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, skupnost Sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz __uradnih virov__, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz __administrativnih virov zdravstvenega sistema__, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, __virov Civilne zaščite__ ter iz __nacionalnih in lokalnih medijev__.
 
 <a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
 " alt="Ministrstvo za zdravje" width="300"/></a>
 
 Zbrani in preverjeni podatki so na voljo v obliki **CSV datotek**, **REST API-ja** in **Google Docs preglednic**. Nadaljna uporaba podatkov kot tudi grafov in sodelovanje pri zbiranju, obdelavi in prikazu so dobrodošli in zaželjeni. Več informacij o načinu in pogojih uporabe ter sodelovanju je na voljo v poglavju [O projektu](/sl/about).
+
+## Tabela
 
 Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 
