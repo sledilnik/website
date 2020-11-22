@@ -42,7 +42,7 @@ with
         | HospitalAdmitted -> "#be7A2a"
         | HospitalDischarged -> "#20b16d"
         | ICUAdmitted -> "#d96756"
-        | Deceased -> "#696969"
+        | Deceased -> "#6d5b80"
 
 type State = {
     StatsData: StatsData
