@@ -1,4 +1,4 @@
-# Quellen
+# Daten
 
 Leider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/data) oder die [englische Übersetzung](/en/data).
 
