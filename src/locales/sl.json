@@ -740,6 +740,13 @@
             "icuAdmitted": "Sprejeti v intenzivno",
             "deceased": "Umrli"
         },
+        "deceased": {
+            "title": "Umrli",
+            "titleMenu": "Umrli",
+            "deceased-icu": "Umrli (intenzivna terapija)",
+            "deceased-hospital": "Umrli (hospitalizirani)",
+            "deceased-rest": "Umrli"
+        },
         "cases": {
             "title": "Potrjeni primeri",
             "titleMenu": "Primeri",
