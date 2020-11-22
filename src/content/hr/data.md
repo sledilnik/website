@@ -1,4 +1,4 @@
-## GDocs
+# Podaci
 
 Nažalost, ova stranica još nije prevedena. Pogledaj [izvorni tekst na slovenskom](/sl/data) ili [engleski prijevod](/en/data).
 

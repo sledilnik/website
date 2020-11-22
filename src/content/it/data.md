@@ -1,4 +1,4 @@
-# Fonti
+# Dati
 
 Sfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/data) o la [traduzione in inglese](/en/data).
 
