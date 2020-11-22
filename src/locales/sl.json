@@ -743,9 +743,10 @@
         "deceased": {
             "title": "Umrli",
             "titleMenu": "Umrli",
-            "deceased-icu": "Umrli (intenzivna terapija)",
-            "deceased-hospital": "Umrli (hospitalizirani, izven int. terap.)",
-            "deceased-rest": "Umrli (izven bolnišnic)"
+            "deceased-icu": "Intenzivna terapija",
+            "deceased-acute": "Akutni oddelek",
+            "deceased-care": "Negovalni oddelek",
+            "deceased-rest": "Izven bolnišnice"
         },
         "cases": {
             "title": "Potrjeni primeri",

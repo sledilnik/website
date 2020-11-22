@@ -29,17 +29,19 @@ type Msg =
 
 type Series =
     | DeceasedInIcu
-    | DeceasedInHospitals
+    | DeceasedAcute
+    | DeceasedCare
     | DeceasedOther
 
 module Series =
     let all =
-        [ DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
+        [ DeceasedOther; DeceasedCare; DeceasedAcute; DeceasedInIcu ]
 
     let getSeriesInfo = function
-        | DeceasedInIcu        -> true,  "#6D5B80",   "deceased-icu"
-        | DeceasedInHospitals  -> true,  "#8C71A8",   "deceased-hospital"
-        | DeceasedOther        -> true,  "#A483C7",   "deceased-rest"
+        | DeceasedInIcu  -> true,  "#6D5B80",   "deceased-icu"
+        | DeceasedAcute  -> true,  "#8C71A8",   "deceased-acute"
+        | DeceasedCare   -> true,  "#A483C7",   "deceased-care"
+        | DeceasedOther  -> true,  "#C59EEF",   "deceased-rest"
 
 let init() : State * Cmd<Msg> =
     let state = {
@@ -105,17 +107,20 @@ let renderChartOptions (state : State) dispatch =
         let getPoint dataPoint : int option =
             match series with
             | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-            | DeceasedInHospitals ->
+            | DeceasedAcute ->
                     dataPoint.total.deceased.hospital.toDate
                     |> subtract dataPoint.total.deceased.hospital.icu.toDate
+            | DeceasedCare -> dataPoint.total.deceasedCare.toDate
             | DeceasedOther ->
                     dataPoint.total.deceased.toDate
                     |> subtract dataPoint.total.deceased.hospital.toDate
+                    |> subtract dataPoint.total.deceasedCare.toDate
 
         let getPointTotal dataPoint : int option =
             match series with
             | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-            | DeceasedInHospitals -> dataPoint.total.deceased.hospital.toDate
+            | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
+            | DeceasedCare -> dataPoint.total.deceasedCare.toDate
             | DeceasedOther -> dataPoint.total.deceased.toDate
 
         let visible, color, seriesId = Series.getSeriesInfo series
@@ -159,6 +164,11 @@ let renderChartOptions (state : State) dispatch =
         series = allSeries
         plotOptions = pojo
             {|
+                column = pojo
+                        {|
+                          groupPadding = 0
+                          pointPadding = 0
+                          borderWidth = 0 |}
                 series = {| stacking = "normal"; crisp = true
                             borderWidth = 0
                             pointPadding = 0; groupPadding = 0

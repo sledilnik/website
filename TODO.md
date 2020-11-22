@@ -1,10 +1,5 @@
 # TODO
 
-- https://github.com/sledilnik/website/issues/700
-    - split into three files
-    - add css for "deaths-chart"
-    - define texts for "deaths" - english
-
 - new OWID export
     - return back the official URL, once it has been pushed to production
     - remove properties from DataPoint that we don't use
