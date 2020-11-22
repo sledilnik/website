@@ -1,7 +1,6 @@
 module DeceasedViz.Rendering
 
 open System
-open System.Collections.Generic
 open Data.Patients
 open Elmish
 open Feliz
@@ -16,7 +15,6 @@ type DisplayType =
     | MultiChart
 
 type State = {
-    data: StatsData
     PatientsData : PatientsStats []
     displayType: DisplayType
     RangeSelectionButtonIndex: int
@@ -43,9 +41,8 @@ module Series =
         | DeceasedInHospitals  -> true,  "#96548F",   "deceased-hospital"
         | DeceasedOther        -> true,  "#BC69B4",   "deceased-rest"
 
-let init data : State * Cmd<Msg> =
+let init() : State * Cmd<Msg> =
     let state = {
-        data = data
         PatientsData = [||]
         displayType = MultiChart
         RangeSelectionButtonIndex = 0
@@ -105,40 +102,21 @@ let renderChartOptions (state : State) dispatch =
 
     let renderSeries series =
 
-        let getPoint sdp pdp : int option =
+        let getPoint dataPoint : int option =
             match series with
-            | DeceasedInIcu -> pdp.total.deceased.hospital.icu.toDate
+            | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals ->
-                    pdp.total.deceased.hospital.toDate
-                    |> subtract pdp.total.deceased.hospital.icu.toDate
+                    dataPoint.total.deceased.hospital.toDate
+                    |> subtract dataPoint.total.deceased.hospital.icu.toDate
             | DeceasedOther ->
-                    sdp.StatePerTreatment.DeceasedToDate
-                    |> subtract pdp.total.deceased.hospital.toDate
+                    dataPoint.total.deceased.toDate
+                    |> subtract dataPoint.total.deceased.hospital.toDate
 
-        let getPointTotal sdp pdp : int option =
+        let getPointTotal dataPoint : int option =
             match series with
-            | DeceasedInIcu -> pdp.total.deceased.hospital.icu.toDate
-            | DeceasedInHospitals -> pdp.total.deceased.hospital.toDate
-            | DeceasedOther -> sdp.StatePerTreatment.DeceasedToDate
-
-        let statsDataDict = state.data |> Seq.map(fun x -> x.Date, x) |> dict
-
-        let patientsDataDict
-            = state.PatientsData |> Seq.map(fun x -> x.Date, x) |> dict
-
-        let mergeFunc (pair: KeyValuePair<DateTime, StatsDataPoint>) =
-            let date = pair.Key
-            let stateDp = pair.Value
-            match patientsDataDict.TryGetValue date with
-            | true, patientsDp -> Some (date, stateDp, patientsDp)
-            | false, _ -> None
-
-        let mergedData =
-            statsDataDict
-            |> Seq.map mergeFunc
-            |> Seq.choose id
-            |> Seq.toList
-            |> List.sortBy (fun (date, _, _) -> date)
+            | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
+            | DeceasedInHospitals -> dataPoint.total.deceased.hospital.toDate
+            | DeceasedOther -> dataPoint.total.deceased.toDate
 
         let visible, color, seriesId = Series.getSeriesInfo series
         {|
@@ -147,16 +125,15 @@ let renderChartOptions (state : State) dispatch =
             color = color
             name = I18N.tt "charts.deceased" seriesId
             data =
-                mergedData
-                |> Seq.filter (fun (_, dp, _) -> dp.Cases.Active.IsSome)
-                |> Seq.map (fun (date, statsDp, patientsDp) ->
+                state.PatientsData
+                |> Seq.map (fun dataPoint ->
                     {|
-                        x = date |> jsTime12h
-                        y = getPoint statsDp patientsDp
+                        x = dataPoint.Date |> jsTime12h
+                        y = getPoint dataPoint
                         seriesId = seriesId
                         fmtDate = I18N.tOptions "days.longerDate"
-                                      {| date = date |}
-                        fmtTotal = getPointTotal statsDp patientsDp |> string
+                                      {| date = dataPoint.Date |}
+                        fmtTotal = getPointTotal dataPoint |> string
                     |} |> pojo
                 )
                 |> Array.ofSeq
@@ -213,5 +190,5 @@ let render (state: State) dispatch =
         renderChartContainer state dispatch
     ]
 
-let renderChart (props : {| data : StatsData |}) =
-    React.elmishComponent("CasesChart", init props.data, update, render)
+let renderChart() =
+    React.elmishComponent("CasesChart", init(), update, render)

@@ -380,15 +380,8 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "deceased-chart"
             ChartTextsGroup = "deceased"
             Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data ->
-                        lazyView DeceasedViz.Rendering.renderChart
-                            {| data = data |} }
+            Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
+         }
 
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
