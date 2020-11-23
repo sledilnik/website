@@ -79,7 +79,7 @@ let tooltipFormatter jsThis =
     + (pts
        |> Seq.map (fun p ->
            sprintf """<span style="color:%s">●</span> %s: <b>%s</b>""" 
-                p?series?color p?series?name p?point?fmtTotal)
+                p?series?color p?series?name p?point?y)
        |> String.concat "<br>")
     + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" 
         (I18N.t "charts.deceased.deceased-total") 
