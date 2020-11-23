@@ -69,27 +69,21 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let legendFormatter jsThis =
-    let pts: obj[] = jsThis?points
+let tooltipFormatter jsThis =
+    let pts: obj [] = jsThis?points
+    let total = pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
     let fmtDate = pts.[0]?point?fmtDate
 
-    let mutable fmtUnder = ""
-    let mutable fmtStr = sprintf "<b>%s</b>" fmtDate
-    for p in pts do
-        match p?point?fmtTotal with
-        | "null" -> ()
-        | _ ->
-            match p?point?seriesId with
-            | "active" | "recovered" | "deceased-rest"
-             -> fmtUnder <- ""
-            | _ -> fmtUnder <- fmtUnder + "↳ "
-            fmtStr <- fmtStr + sprintf
-                """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
-                fmtUnder
-                p?series?color
-                p?series?name
-                p?point?fmtTotal
-    fmtStr
+    fmtDate
+    + "<br>"
+    + (pts
+       |> Seq.map (fun p ->
+           sprintf """<span style="color:%s">●</span> %s: <b>%s</b>""" 
+                p?series?color p?series?name p?point?fmtTotal)
+       |> String.concat "<br>")
+    + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" 
+        (I18N.t "charts.deceased.deceased-total") 
+        (total |> string)
 
 let renderChartOptions (state : State) dispatch =
     let className = "cases-chart"
@@ -175,11 +169,11 @@ let renderChartOptions (state : State) dispatch =
                             |}
             |}
 
-//        tooltip = pojo
-//            {|
-//                shared = true
-//                formatter = fun () -> legendFormatter jsThis
-//            |}
+        tooltip = pojo
+            {|
+                shared = true
+                formatter = fun () -> tooltipFormatter jsThis
+            |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 

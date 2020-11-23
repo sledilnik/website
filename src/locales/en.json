@@ -274,7 +274,8 @@
             "deceased-icu": "ICU",
             "deceased-acute": "Acute medical unit",
             "deceased-care": "Care hospital",
-            "deceased-rest": "Outside of hospital"
+            "deceased-rest": "Outside of hospital",
+            "deceased-total": "Died total"
         },
         "cases": {
             "title": "Confirmed Cases",
