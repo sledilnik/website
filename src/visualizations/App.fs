@@ -41,6 +41,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesNewDeathsPer1M" -> Some CountriesNewDeathsPer1M
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
+            | "Deceased" -> Some Deceased
             | _ -> None
             |> Embedded
 
@@ -374,6 +375,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
 
+    let deceased =
+          { VisualizationType = Deceased
+            ClassName = "deceased-chart"
+            ChartTextsGroup = "deceased"
+            Explicit = false
+            Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
+         }
+
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-cases-chart"
@@ -481,7 +490,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; patients; patientsCare
+        [ hospitals; metricsComparison; dailyComparison
+          patients; patientsCare; deceased 
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -503,7 +513,7 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsCare; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
           countriesCasesPer1M
           countriesActiveCasesPer1M

@@ -268,6 +268,15 @@
             "icuAdmitted": "Admitted to ICU",
             "deceased": "Deaths"
         },
+        "deceased": {
+            "title": "Deceased",
+            "titleMenu": "Deceased",
+            "deceased-icu": "ICU",
+            "deceased-acute": "Acute medical unit",
+            "deceased-care": "Care hospital",
+            "deceased-rest": "Outside of hospital",
+            "deceased-total": "Died total"
+        },
         "cases": {
             "title": "Confirmed Cases",
             "titleMenu": "Cases",

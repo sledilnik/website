@@ -46,9 +46,9 @@ module Series =
           DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
 
     let getSeriesInfo = function
-        | DeceasedInIcu        -> true,  "#666666",   "deceased-icu"
-        | DeceasedInHospitals  -> true,  "#888888",   "deceased-hospital"
-        | DeceasedOther        -> true,  "#aaaaaa",   "deceased-rest"
+        | DeceasedInIcu        -> true,  "#6d5b80",   "deceased-icu"
+        | DeceasedInHospitals  -> true,  "#8c71a8",   "deceased-hospital"
+        | DeceasedOther        -> true,  "#c59eef",   "deceased-rest"
         | Recovered     -> true,  "#8cd4b2",   "recovered"
         | Active        -> true,  "#d5c768",   "active"
         | InHospital    -> true,  "#de9a5a",   "hospitalized"

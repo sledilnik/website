@@ -48,6 +48,7 @@
         <Compile Include="CountriesChartViz\Synthesis.fs" />
         <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
+        <Compile Include="DeceasedViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
