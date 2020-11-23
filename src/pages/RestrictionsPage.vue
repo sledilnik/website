@@ -1,11 +1,6 @@
 <template>
   <div class="custom-container">
     <div class="static-page-wrapper">
-      <ul id="restrictionsIndex">
-        <li v-for="item in index" :key="item.index">
-          <a :href="`#restriction-${item.index}`" >{{ item.title }}</a>
-        </li>
-      </ul>
       <ul id="restrictionsList">
         <li v-for="item in restrictions" :key="item.index" :id="`restriction-${item.index}`">
           <h2>{{ item.name }}</h2>
@@ -17,24 +12,25 @@
         </li>
       </ul>
     </div>
+    <FloatingMenu :list="floatingMenu" />
   </div>
 </template>
 
 <script>
 import { GoogleSpreadsheet } from "@/libs/google-spreadsheet.js";
+import FloatingMenu from 'components/FloatingMenu'
 
 window.GoogleSpreadsheet = GoogleSpreadsheet;
 
 export default {
   name: "RestrictionsPage",
-  props: {
-    name: String,
-    content: String,
+  components: {
+    FloatingMenu,
   },
   data() {
     return {
+      floatingMenu: [],
       lastUpdate: null,
-      index: [],
       restrictions: [],
     };
   },
@@ -46,18 +42,15 @@ export default {
     googleSpreadsheet.load((result) => {
       var i, j;
 
-      // kazalo
-      for (i = 1; i <= 14; i++) {
-        this.index.push({
-          index: i,
-          title: result["data"][i]
-        })
-      }
-
       this.lastUpdate = result["data"][0];
 
       // the real thing
       for (i = 1; i <= 13; i++) {
+        this.floatingMenu.push({
+          title: result['data'][i],
+          link: `restriction-${i}`,
+        })
+
         let restriction = {
           index: i,
           name: result['data'][i],
