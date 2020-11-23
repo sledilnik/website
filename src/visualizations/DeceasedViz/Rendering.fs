@@ -38,10 +38,10 @@ module Series =
         [ DeceasedOther; DeceasedCare; DeceasedAcute; DeceasedInIcu ]
 
     let getSeriesInfo = function
-        | DeceasedInIcu  -> true,  "#6D5B80",   "deceased-icu"
-        | DeceasedAcute  -> true,  "#8C71A8",   "deceased-acute"
-        | DeceasedCare   -> true,  "#A483C7",   "deceased-care"
-        | DeceasedOther  -> true,  "#C59EEF",   "deceased-rest"
+        | DeceasedInIcu  -> true,  "#6d5b80",   "deceased-icu"
+        | DeceasedAcute  -> true,  "#8c71a8",   "deceased-acute"
+        | DeceasedCare   -> true,  "#a483c7",   "deceased-care"
+        | DeceasedOther  -> true,  "#c59eef",   "deceased-rest"
 
 let init() : State * Cmd<Msg> =
     let state = {

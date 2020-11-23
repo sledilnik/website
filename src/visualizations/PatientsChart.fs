@@ -55,15 +55,15 @@ module Series =
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
         | Icu                   -> "#d96756", "icu"
-        | IcuDeceased           -> "#666666", "icu-deceased"
+        | IcuDeceased           -> "#6d5b80", "icu-deceased"
         | Critical              -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
         | InHospitalOut         -> "#8cd4b2", "discharged"
-        | InHospitalDeceased    -> "#888888", "deceased"
+        | InHospitalDeceased    -> "#8c71a8", "deceased"
         | Care                  -> "#dba51d", "care"
         | CareIn                -> "#d5c768", "admitted"
         | CareOut               -> "#8cd4b2", "discharged"
-        | CareDeceased          -> "#666666", "deceased"
+        | CareDeceased          -> "#a483c7", "deceased"
 
 type State = {
     PatientsData : PatientsStats []
