@@ -691,7 +691,8 @@
             "structure": "Struttura",
             "title": "Ricoveri",
             "titleMenu": "Ricoveri",
-            "care": "In cura"
+            "care": "In cura",
+            "icu-deceased": "Deceduti (in terapia intensiva)"
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -894,7 +895,8 @@
             "title": "Mappa dei comuni",
             "per100k": "per 100k",
             "relativeIncrease": "Incremento settimanale",
-            "titleMenu": "Comuni - mappa"
+            "titleMenu": "Comuni - mappa",
+            "bubbles": "Distribuzione"
         },
         "regions": {
             "deceased": "Decessi",
@@ -1292,5 +1294,9 @@
         "2": "Ma",
         "1": "Lu",
         "0": "Do"
+    },
+    "youtube": {
+        "titleMenu": "Animazione",
+        "title": "Animazione della diffusione del COVID-19"
     }
 }
