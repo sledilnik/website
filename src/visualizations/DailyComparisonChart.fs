@@ -125,16 +125,16 @@ let renderChartOptions (state : State) dispatch =
         | Deceased -> dp.total.deceased.today
         | _ -> None
 
-    let fourWeeks = 
+    let dataShown = 
         if DisplayType.UseStatsData state.DisplayType then
             state.StatsData 
-            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- weeksShown * 7 - 1)))
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- weeksShown * 7 - 1))) // last day empty
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
             |> Seq.map (fun dp -> (dp.Date, getStatsValue dp)) 
             |> Seq.toArray
         else
             state.PatientsData 
-            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- (weeksShown * 7 - 1))))
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- (weeksShown * 7))))
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
             |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp)) 
             |> Seq.toArray
@@ -142,7 +142,7 @@ let renderChartOptions (state : State) dispatch =
     let allSeries = [
         for weekIdx in 0 .. weeksShown-1 do    
             let idx = weekIdx * 7
-            let len = min 7 (fourWeeks.Length - idx)
+            let len = min 7 (dataShown.Length - idx)
 
             let desaturateColor (rgb:string) (sat:float) = 
                 let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
@@ -171,7 +171,7 @@ let renderChartOptions (state : State) dispatch =
                     ``type`` = "column"
                     color = getSeriesColor state.DisplayType weekIdx
                     data = 
-                        fourWeeks
+                        dataShown
                         |> Array.skip idx
                         |> Array.take len 
                         |> Array.mapi (fun i (date, value) -> 
@@ -181,11 +181,11 @@ let renderChartOptions (state : State) dispatch =
                                 diff = 
                                     if weekIdx > 0
                                     then 
-                                        let _ , prev = fourWeeks.[(weekIdx-1) * 7 + i]
+                                        let _ , prev = dataShown.[(weekIdx-1) * 7 + i]
                                         percent value prev 
                                     else ""
                                 dataLabels = 
-                                    if weekIdx = weeksShown-1 
+                                    if weekIdx = weeksShown-1
                                     then 
                                         if state.DisplayType = PositivePct
                                         then pojo {| enabled = true; formatter = fun () -> percentageFormatter jsThis?y |}
