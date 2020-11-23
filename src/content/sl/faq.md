@@ -296,7 +296,7 @@ Vse potrjene primere kaže [graf Potrjeni primeri](/sl/stats#cases-chart). Sicer
 
 
 <details>
-  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 9), ki jih vidimo v grafih?</summary>
+  <summary id=chart-phases>Kaj pomenijo različne faze (faze 1–faza 13), ki jih vidimo v grafih?</summary>
 
 Navpične črte delijo faze, zamejene z datumi, ko so odgovorni organi spremenili način zbiranja informacij o širjenju okužbe (spremeni se način testiranja, razglašena ali preklicana epidemija, spremeba sledenja stikov...).
 
@@ -336,6 +336,21 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 [Graf](/sl/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju (intubirani). Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.
 
 Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja je bilo spomladi stanje takšno: "Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj." Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic.
+
+</details>
+
+<details>
+  <summary id=care-patients-chart>Kaj nam pove graf "Negovalne bolnišnice"?</summary>
+
+[Graf](/sl/stats#care-patients-chart) nam prikazuje število oseb, ki so nameščeni v negovalne oddelke v bolnišnicah. Te osebe ne potrebujejo hospitalizacijo, zato niso nameščene na akutni oddelek ali intenzivno terapijo ampak so nameščene na negovalnem oddelku začasno.
+Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni na negovalni oddelek za čas ko se v njihovem DSO pripravlja reorganizacija na rdečo in sivo cono. Podobno gre za potrjene primere v psihiatričnih bolnišnicah. 
+
+</details>
+
+<details>
+  <summary id=deceased-chart>Kaj nam pove graf "Umrli"?</summary>
+
+[Graf](/sl/stats#deceased-chart) nam prikazuje strukturo umrlih po lokaciji. Tako je prikazano, koliko ljudi je umrlo izven bolnišnic (večinoma gre za umrle v domovih za ostarele), na negovalnih oddelkih (začasno nameščeni), na akutnih oddelkih (hospitalizirani) in v intenzivni terapiji.
 
 </details>
 
@@ -423,7 +438,14 @@ Prirast primerov med zdravstvenimi delavci ne pomeni, da so bili odkriti točno 
 </details>
 
 <details>
-  <summary id=regions-chart>Kaj nam pove graf "Potrjeni primeri po regijah"?</summary>
+  <summary id=regions-chart-100k>Kaj nam pove graf "Primeri po regijah (na 100.000 prebivalcev)"?</summary>
+
+[Graf](/sl/stats#regions-chart-100k) kaže dinamiko rasti potrjenih primerov po izbranih regijah, uteženo na 100.000 prebivalcev. Posamezne regije je mogoče enostavno primerjati tako, da pod grafom s klikom na določene regije izberemo tiste, ki jih želimo prikazati na grafu. Iz krivulje lahko hitro razberemo, katere regije imajo največ in katere najmanj potrjenih primerov ter kako se to število spreminja skozi čas.
+
+</details>
+
+<details>
+  <summary id=regions-chart>Kaj nam pove graf "Primeri po regijah"?</summary>
 
 [Graf](/sl/stats#regions-chart) kaže dinamiko rasti potrjenih primerov po izbranih regijah. Posamezne regije je mogoče enostavno primerjati tako, da pod grafom s klikom na določene regije izberemo tiste, ki jih želimo prikazati na grafu. Iz krivulje lahko hitro razberemo, katere regije imajo največ in katere najmanj potrjenih primerov ter kako se to število spreminja skozi čas.
 
