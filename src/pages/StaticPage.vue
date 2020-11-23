@@ -39,11 +39,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .custom-container {
-  margin: -24px auto 0 auto;
+  margin: 24px auto 0 auto;
   max-width: 730px;
 
   @media only screen and (min-width: 768px) {
-    margin: 0 auto 65px auto;
+    margin: 48px auto 65px auto;
     box-shadow: $element-box-shadow;
   }
 }

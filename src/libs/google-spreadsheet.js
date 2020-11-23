@@ -3,10 +3,6 @@ Updated versions can be found at https://github.com/mikeymckay/google-spreadshee
 */
 // var GoogleSpreadsheet, GoogleUrl;
 
-// import {$} from 'jquery';
-
-// window.$ = $;
-
 export const GoogleUrl = (function() {
   function GoogleUrl(sourceIdentifier) {
     this.sourceIdentifier = sourceIdentifier;
@@ -20,8 +16,8 @@ export const GoogleUrl = (function() {
     } else {
       this.key = this.sourceIdentifier;
     }
-    this.jsonCellsUrl = "https://spreadsheets.google.com/feeds/cells/" + this.key + "/od6/public/basic?alt=json-in-script";
-    this.jsonListUrl = "https://spreadsheets.google.com/feeds/list/" + this.key + "/od6/public/basic?alt=json-in-script";
+    this.jsonCellsUrl = "https://spreadsheets.google.com/feeds/cells/" + this.key + "/1/public/basic?alt=json-in-script";
+    this.jsonListUrl = "https://spreadsheets.google.com/feeds/list/" + this.key + "/1/public/basic?alt=json-in-script";
     this.jsonUrl = this.jsonCellsUrl;
   }
   return GoogleUrl;

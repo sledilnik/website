@@ -1,24 +1,32 @@
 <template>
-  <div class="custom-container">
-    <div class="static-page-wrapper">
-      <ul id="restrictionsList">
-        <li v-for="item in restrictions" :key="item.index" :id="`restriction-${item.index}`">
-          <h2>{{ item.name }}</h2>
-          <p>Geografska veljavnost: {{ item.geoValidity }}</p>
-          <p>Trenutno pravilo: <span v-html="item.rule" /></p>
-          <p>Izjeme: <br><span v-html="item.exceptions" /></p>
-          <p>Veljavnost: <abbr>{{ item.validity }}</abbr></p>
-          <p>Povezavae: <br><span v-html="item.links"/></p>
-        </li>
-      </ul>
+  <div>
+    <Time-stamp :date="lastUpdate" />
+    <div class="custom-container">
+      <div class="static-page-wrapper">
+        <ul id="restrictionsList">
+          <li
+            v-for="item in restrictions"
+            :key="item.index"
+            :id="`restriction-${item.index}`"
+          >
+            <h2>{{ item.name }}</h2>
+            <div><h3>Geografska veljavnost:</h3><span v-html="item.geoValidity" /></div>
+            <div><h3>Trenutno pravilo:</h3><span v-html="item.rule" /></div>
+            <div><h3>Izjeme:</h3><span v-html="item.exceptions" /></div>
+            <div><h3>Veljavnost:</h3><span v-html="item.validity" /></div>
+            <div><h3>Povezave</h3><span v-html="item.links" /></div>
+          </li>
+        </ul>
+      </div>
+      <FloatingMenu :list="floatingMenu" />
     </div>
-    <FloatingMenu :list="floatingMenu" />
   </div>
 </template>
 
 <script>
 import { GoogleSpreadsheet } from "@/libs/google-spreadsheet.js";
-import FloatingMenu from 'components/FloatingMenu'
+import FloatingMenu from "components/FloatingMenu";
+import TimeStamp from "components/TimeStamp";
 
 window.GoogleSpreadsheet = GoogleSpreadsheet;
 
@@ -26,35 +34,36 @@ export default {
   name: "RestrictionsPage",
   components: {
     FloatingMenu,
+    TimeStamp,
   },
   data() {
     return {
       floatingMenu: [],
-      lastUpdate: null,
+      lastUpdate: new Date(),
       restrictions: [],
     };
   },
   mounted() {
-    var url =
-      "https://spreadsheets.google.com/pub?key=19-B0xrd_oFMPWpfT1zMyy2213U7isyZxojTQcIhsbCA&hl=en&output=html";
+    const url = 'https://spreadsheets.google.com/pub?key=1k2-MOUqiI4qVWIkwx3Bm-1S-t_fLruESh_Shf5rTUYE&hl=en&output=html';
     var googleSpreadsheet = new GoogleSpreadsheet();
     googleSpreadsheet.url(url);
     googleSpreadsheet.load((result) => {
       var i, j;
 
-      this.lastUpdate = result["data"][0];
+      // TODO get date somwhere
+      this.lastUpdate = new Date(Date.parse(result["data"][0]));
 
       // the real thing
       for (i = 1; i <= 13; i++) {
         this.floatingMenu.push({
-          title: result['data'][i],
+          title: result["data"][i],
           link: `restriction-${i}`,
-        })
+        });
 
         let restriction = {
           index: i,
-          name: result['data'][i],
-        }
+          name: result["data"][i],
+        };
         for (j = 1; j <= 7; j++) {
           // 1 Geografska veljavnost
           // 2 Trenutno pravilo
@@ -72,13 +81,12 @@ export default {
           if (j == 1) {
             //georgrafska veljavnost
             restriction.geoValidity = text;
-          }
-          else if (j == 5) {
+          } else if (j == 5) {
             // veljavnost (datum)
             restriction.validity = text;
           } else if (j == 3) {
             // izjeme are often lists
-            
+
             var list = text.replace(/(\W) (\d+\.)/g, "$1<br />\n$2");
             // console.log("izjeme", text, list)
             restriction.exceptions = list;
@@ -118,32 +126,25 @@ export default {
     padding: 32px 32px 27px 32px;
   }
 
-  h1 {
-    margin-bottom: 32px;
-  }
-
-  .dropdown + h2,
-  .dropdown + h3,
-  h1 + h2 {
-    margin-top: 64px;
-  }
-
-  h2,
-  h3,
-  h4 {
-    margin-bottom: 24px;
+  li {
+    list-style: none;
   }
 
   h1 {
     font-size: 28px;
+    margin-top: 32px;
   }
 
   h2 {
-    font-size: 21px;
+    font-size: 24px;
+    margin-top: 32px;
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 17px;
+    font-style: italic;
+    margin-top: 24px;
+    margin-bottom: 5px;
   }
 
   p:not(:last-of-type) {
@@ -172,146 +173,6 @@ export default {
     font-size: 14px;
     color: $text-c;
     line-height: 1.7;
-  }
-
-  * + h1,
-  * + h2,
-  * + h3,
-  * + table {
-    margin-top: 48px;
-  }
-
-  tr + tr {
-    margin-top: 27px;
-  }
-
-  table {
-    width: 100%;
-    table-layout: fixed;
-    text-align: left;
-  }
-
-  table {
-    table-layout: fixed;
-    text-align: left;
-    td {
-      padding: 15px 0;
-      width: 50%;
-      border-top: 1px solid rgba(0, 0, 0, 0.45);
-    }
-  }
-
-  //dropdown HTML in MD
-  h1 + details,
-  h2 + details,
-  h3 + details {
-    margin-top: 48px;
-  }
-
-  details,
-  .dropdown {
-    margin-bottom: 24px;
-
-    & + details,
-    & + .dropdown {
-      border-top: 1px solid #dedede;
-      padding-top: 24px;
-    }
-
-    summary,
-    .dd-title {
-      cursor: pointer;
-      user-select: none;
-      font-weight: bold;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: 1.71;
-      color: rgba(0, 0, 0, 0.75);
-      position: relative;
-      padding-right: 10%;
-
-      &:after {
-        content: url("../assets/svg/expand-dd.svg");
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
-  .dropdown .dd-content {
-    display: none;
-    margin: 2px 0;
-    padding-top: 12px;
-    width: 90%;
-    position: relative;
-  }
-
-  details > *:not(summary) {
-    position: relative;
-    display: none;
-    width: 90%;
-  }
-
-  details > *:nth-child(2) {
-    margin-top: 2px;
-    padding-top: 12px;
-  }
-
-  details[open] {
-    & > *:not(summary) {
-      display: block;
-      animation: show-dd 0.5s ease-out;
-    }
-
-    summary {
-      &:after {
-        content: url("../assets/svg/close-dd.svg");
-      }
-    }
-  }
-
-  .dropdown.dd-show {
-    .dd-content {
-      display: block;
-      animation: show-dd 0.5s ease-out;
-    }
-
-    .dd-title {
-      &:after {
-        content: url("../assets/svg/close-dd.svg");
-      }
-    }
-  }
-
-  @keyframes show-dd {
-    from {
-      transform: translateY(-8px);
-      opacity: 0.1;
-    }
-    to {
-      transform: translateY(0px);
-      opacity: 1;
-    }
-  }
-
-  .img-link {
-    display: block;
-    box-shadow: none;
-    margin-bottom: 24px;
-
-    &:hover {
-      box-shadow: none;
-    }
-
-    img {
-      width: 100%;
-    }
   }
 }
 
