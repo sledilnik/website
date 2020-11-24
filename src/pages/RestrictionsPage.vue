@@ -18,7 +18,7 @@
           </li>
         </ul>
       </div>
-      <FloatingMenu :list="floatingMenu" />
+      <FloatingMenu :list="floatingMenu" title="Ukrepi" />
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       floatingMenu: [],
-      lastUpdate: new Date(),
+      lastUpdate: null,
       restrictions: [],
     };
   },
@@ -51,7 +51,8 @@ export default {
       var i, j;
 
       // TODO get date somwhere
-      this.lastUpdate = new Date(Date.parse(result["data"][0]));
+      console.log(result["data"][0])
+      this.lastUpdate = new Date(Date.parse(result["data"][0].replace(/\s/g, '')));
 
       // the real thing
       for (i = 1; i <= 13; i++) {

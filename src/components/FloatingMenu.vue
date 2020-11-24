@@ -10,13 +10,13 @@
         <div
           class="float-nav-img"
           :class="{ active: active }"
-          :alt="$t('navbar.goToGraph')"
+          :alt="title"
         />
       </div>
     </transition>
     <transition name="slide">
       <div v-show="active && list.length > 0" class="float-list" key="2">
-        <h2>{{ $t('navbar.goToGraph') }}</h2>
+        <h2>{{ title }}</h2>
         <ul v-scroll-lock="active">
           <li
             v-for="item in list"
@@ -52,6 +52,10 @@ export default {
       type: Array,
       required: true
     },
+    title: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {

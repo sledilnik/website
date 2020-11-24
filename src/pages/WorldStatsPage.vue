@@ -8,7 +8,7 @@
         </b-col>
       </b-row>
     </b-container>
-    <FloatingMenu :list="charts" />
+    <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
 </template>
 
