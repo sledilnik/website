@@ -743,6 +743,10 @@
         "deceased": {
             "title": "Umrli",
             "titleMenu": "Umrli",
+            "deceasedToday": "Umrli na dan",
+            "deceasedTodayRelative": "Umrli na dan (relativno)",
+            "deceasedToDate": "Umrli",
+            "deceasedToDateRelative": "Umrli (relativno)",
             "deceased-icu": "Intenzivna terapija",
             "deceased-acute": "Akutni oddelek",
             "deceased-care": "Negovalni oddelek",
