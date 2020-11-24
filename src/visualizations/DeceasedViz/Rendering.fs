@@ -243,10 +243,14 @@ let renderMetricsSelectors activeMetrics dispatch =
     ]
 
 let render (state: State) dispatch =
-    Html.div [
-        renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
-    ]
+    match state.PatientsData, state.Error with
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, None ->
+        Html.div [
+            renderChartContainer state dispatch
+            renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
+        ]
 
 let renderChart() =
     React.elmishComponent("CasesChart", init(), update, render)

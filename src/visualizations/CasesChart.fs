@@ -241,9 +241,13 @@ let renderChartContainer (state : State) dispatch =
     ]
 
 let render (state: State) dispatch =
-    Html.div [
-        renderChartContainer state dispatch
-    ]
+    match state.PatientsData, state.Error with
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, None ->
+        Html.div [
+            renderChartContainer state dispatch
+        ]
 
 let casesChart (props : {| data : StatsData |}) =
     React.elmishComponent("CasesChart", init props.data, update, render)
