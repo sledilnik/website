@@ -156,7 +156,7 @@ export default {
         },
         'deceased-chart': {
           titleMenu: this.$t('charts.deceased.titleMenu'),
-          icon: 'graph',
+          icon: 'column',
         },
         'youtube': {
           titleMenu: this.$t('youtube.titleMenu'),
