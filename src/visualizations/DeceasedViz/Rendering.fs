@@ -78,11 +78,11 @@ let tooltipFormatter jsThis =
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """<span style="color:%s">●</span> %s: <b>%s</b>""" 
+           sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
                 p?series?color p?series?name p?point?y)
        |> String.concat "<br>")
-    + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" 
-        (I18N.t "charts.deceased.deceased-total") 
+    + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>"""
+        (I18N.t "charts.deceased.deceased-total")
         (total |> string)
 
 let renderChartOptions (state : State) dispatch =
@@ -160,6 +160,7 @@ let renderChartOptions (state : State) dispatch =
             {|
                 column = pojo
                         {|
+                          dataGrouping = pojo {| enabled = false |}
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
