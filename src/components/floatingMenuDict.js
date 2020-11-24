@@ -99,6 +99,10 @@ export default {
       titleKey: 'charts.phaseDiagram.titleMenu',
       icon: 'graph',
     },
+    'deceased-chart': {
+      titleMenu: 'charts.deceased.titleMenu',
+      icon: 'column',
+    },
     'youtube': {
       titleKey: 'youtube.titleMenu',
       icon: 'map',
