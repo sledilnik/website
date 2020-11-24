@@ -111,10 +111,10 @@ let renderChartOptions (state : State) dispatch =
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
         | Tests -> dp.Tests.Performed.Today
-        | PositivePct -> 
+        | PositivePct ->
             match dp.Tests.Positive.Today, dp.Tests.Performed.Today with
             | Some p, Some t -> Some ( (float p / float t * 100.0 * 100.0) |> int)
-            | _ -> None 
+            | _ -> None
         | _ -> None
 
     let getPatientsValue dp =
@@ -125,26 +125,26 @@ let renderChartOptions (state : State) dispatch =
         | Deceased -> dp.total.deceased.today
         | _ -> None
 
-    let dataShown = 
+    let dataShown =
         if DisplayType.UseStatsData state.DisplayType then
-            state.StatsData 
+            state.StatsData
             |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- weeksShown * 7 - 1))) // last day empty
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
-            |> Seq.map (fun dp -> (dp.Date, getStatsValue dp)) 
+            |> Seq.map (fun dp -> (dp.Date, getStatsValue dp))
             |> Seq.toArray
         else
-            state.PatientsData 
+            state.PatientsData
             |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- (weeksShown * 7))))
             |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
-            |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp)) 
+            |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp))
             |> Seq.toArray
 
     let allSeries = [
-        for weekIdx in 0 .. weeksShown-1 do    
+        for weekIdx in 0 .. weeksShown-1 do
             let idx = weekIdx * 7
             let len = min 7 (dataShown.Length - idx)
 
-            let desaturateColor (rgb:string) (sat:float) = 
+            let desaturateColor (rgb:string) (sat:float) =
                 let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
                 let r = (argb &&& 0x00FF0000) >>> 16
                 let g = (argb &&& 0x0000FF00) >>> 8
@@ -155,14 +155,14 @@ let renderChartOptions (state : State) dispatch =
                 let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
                 sprintf "#%02x%02x%02x" newR newG newB
 
-            let getSeriesColor dt series = 
+            let getSeriesColor dt series =
                 desaturateColor (DisplayType.getColor dt) (float (series) / float (weeksShown))
 
             let percent a b =
                 match a, b with
-                | Some v, Some p -> 
-                    if p = 0 
-                    then if v = 0 then "" else ">500%"     
+                | Some v, Some p ->
+                    if p = 0
+                    then if v = 0 then "" else ">500%"
                     else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
@@ -170,23 +170,23 @@ let renderChartOptions (state : State) dispatch =
                 {|
                     ``type`` = "column"
                     color = getSeriesColor state.DisplayType weekIdx
-                    data = 
+                    data =
                         dataShown
                         |> Array.skip idx
-                        |> Array.take len 
-                        |> Array.mapi (fun i (date, value) -> 
+                        |> Array.take len
+                        |> Array.mapi (fun i (date, value) ->
                             {|
                                 y = value
                                 date = I18N.tOptions "days.date" {| date = date |}
-                                diff = 
+                                diff =
                                     if weekIdx > 0
-                                    then 
+                                    then
                                         let _ , prev = dataShown.[(weekIdx-1) * 7 + i]
-                                        percent value prev 
+                                        percent value prev
                                     else ""
-                                dataLabels = 
+                                dataLabels =
                                     if weekIdx = weeksShown-1
-                                    then 
+                                    then
                                         if state.DisplayType = PositivePct
                                         then pojo {| enabled = true; formatter = fun () -> percentageFormatter jsThis?y |}
                                         else pojo {| enabled = true |}
@@ -199,18 +199,18 @@ let renderChartOptions (state : State) dispatch =
     {| optionsWithOnLoadEvent "covid19-daily-comparison" with
         chart = pojo {| ``type`` = "column" |}
         title = pojo {| text = None |}
-        xAxis = [| 
+        xAxis = [|
             {|
                 ``type`` = "category"
                 categories = [| I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; I18N.dow 0; |]
-            |} 
+            |}
         |]
         yAxis = [|
             {|
                 opposite = true
                 title = {| text = null |}
-                labels = 
-                    if state.DisplayType = PositivePct 
+                labels =
+                    if state.DisplayType = PositivePct
                     then pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
                     else pojo {| formatter = None |}
             |}

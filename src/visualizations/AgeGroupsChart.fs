@@ -310,10 +310,10 @@ let renderChartCategorySelectors activeChartMode dispatch =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
-            [ 
+            [
                 InfectionsPerPopulation;
                 DeathsPerPopulation;
-                // DeathsPerInfections; 
+                // DeathsPerInfections;
             ]
 
     Html.div [
@@ -472,7 +472,7 @@ let renderChartContainer state =
     let latestDate = fst (latest)
     let infectionsAndDeathsPerAge = snd (latest)
     let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
-    
+
     Html.div [
         prop.style [ style.height 400 ]
         prop.className "highcharts-wrapper"

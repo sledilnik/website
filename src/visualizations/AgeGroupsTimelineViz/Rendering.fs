@@ -130,6 +130,7 @@ let renderChartOptions state dispatch =
             {|
                 column = pojo
                         {|
+                          dataGrouping = pojo {| enabled = false |}
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}

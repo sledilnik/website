@@ -129,6 +129,7 @@ let renderChartOptions (state : State) dispatch =
         series = List.toArray allSeries
         plotOptions = pojo
             {|
+                column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                 series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
