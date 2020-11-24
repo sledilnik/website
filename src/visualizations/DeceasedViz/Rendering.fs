@@ -11,12 +11,24 @@ open Browser
 open Types
 open Highcharts
 
-type DisplayType =
-    | MultiChart
+type DisplayMetricsType = Today | ToDate
+
+type DisplayMetrics = {
+    Id: string
+    MetricsType: DisplayMetricsType
+    ChartType: string
+}
+
+let availableDisplayMetrics = [|
+    { Id = "deceasedToDate"; MetricsType = ToDate; ChartType = "normal" }
+    { Id = "deceasedToDateRelative"; MetricsType = ToDate; ChartType = "percent" }
+    { Id = "deceasedToday"; MetricsType = Today; ChartType = "normal" }
+    { Id = "deceasedTodayRelative"; MetricsType = Today; ChartType = "percent" }
+|]
 
 type State = {
     PatientsData : PatientsStats []
-    displayType: DisplayType
+    Metrics: DisplayMetrics
     RangeSelectionButtonIndex: int
     Error : string option
 }
@@ -24,7 +36,7 @@ type State = {
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
-    | ChangeDisplayType of DisplayType
+    | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
 
 type Series =
@@ -46,7 +58,7 @@ module Series =
 let init() : State * Cmd<Msg> =
     let state = {
         PatientsData = [||]
-        displayType = MultiChart
+        Metrics = availableDisplayMetrics.[0]
         RangeSelectionButtonIndex = 0
         Error = None
     }
@@ -64,8 +76,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeDisplayType rt ->
-        { state with displayType=rt }, Cmd.none
+    | ChangeMetrics metrics -> 
+        { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -99,23 +111,44 @@ let renderChartOptions (state : State) dispatch =
     let renderSeries series =
 
         let getPoint dataPoint : int option =
-            match series with
-            | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-            | DeceasedAcute ->
-                    dataPoint.total.deceased.hospital.toDate
-                    |> subtract dataPoint.total.deceased.hospital.icu.toDate
-            | DeceasedCare -> dataPoint.total.deceasedCare.toDate
-            | DeceasedOther ->
-                    dataPoint.total.deceased.toDate
-                    |> subtract dataPoint.total.deceased.hospital.toDate
-                    |> subtract dataPoint.total.deceasedCare.toDate
+            match state.Metrics.MetricsType with
+            | Today ->
+                match series with
+                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
+                | DeceasedAcute ->
+                        dataPoint.total.deceased.hospital.today
+                        |> subtract dataPoint.total.deceased.hospital.icu.today
+                | DeceasedCare -> dataPoint.total.deceasedCare.today
+                | DeceasedOther ->
+                        dataPoint.total.deceased.today
+                        |> subtract dataPoint.total.deceased.hospital.today
+                        |> subtract dataPoint.total.deceasedCare.today
+            | ToDate -> 
+                match series with
+                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
+                | DeceasedAcute ->
+                        dataPoint.total.deceased.hospital.toDate
+                        |> subtract dataPoint.total.deceased.hospital.icu.toDate
+                | DeceasedCare -> dataPoint.total.deceasedCare.toDate
+                | DeceasedOther ->
+                        dataPoint.total.deceased.toDate
+                        |> subtract dataPoint.total.deceased.hospital.toDate
+                        |> subtract dataPoint.total.deceasedCare.toDate
 
         let getPointTotal dataPoint : int option =
-            match series with
-            | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-            | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
-            | DeceasedCare -> dataPoint.total.deceasedCare.toDate
-            | DeceasedOther -> dataPoint.total.deceased.toDate
+            match state.Metrics.MetricsType with
+            | Today ->
+                match series with
+                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
+                | DeceasedAcute -> dataPoint.total.deceased.hospital.today
+                | DeceasedCare -> dataPoint.total.deceasedCare.today
+                | DeceasedOther -> dataPoint.total.deceased.today
+            | ToDate ->
+                match series with
+                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
+                | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
+                | DeceasedCare -> dataPoint.total.deceasedCare.toDate
+                | DeceasedOther -> dataPoint.total.deceased.toDate
 
         let visible, color, seriesId = Series.getSeriesInfo series
         {|
@@ -164,7 +197,7 @@ let renderChartOptions (state : State) dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = {| stacking = "normal"; crisp = true
+                series = {| stacking = state.Metrics.ChartType; crisp = true
                             borderWidth = 0
                             pointPadding = 0; groupPadding = 0
                             |}
@@ -190,9 +223,29 @@ let renderChartContainer (state : State) dispatch =
         ]
     ]
 
+let renderMetricsSelectors activeMetrics dispatch =
+    let renderSelector (metrics : DisplayMetrics) =
+        let active = metrics = activeMetrics
+        Html.div [
+            prop.text (I18N.chartText "deceased" metrics.Id)
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected")]
+            if not active then prop.onClick (fun _ -> dispatch metrics)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-selectors"
+        availableDisplayMetrics
+        |> Array.map renderSelector
+        |> prop.children
+    ]
+
 let render (state: State) dispatch =
     Html.div [
         renderChartContainer state dispatch
+        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
 let renderChart() =
