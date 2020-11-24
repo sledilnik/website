@@ -154,6 +154,10 @@ export default {
           titleMenu: this.$t('charts.phaseDiagram.titleMenu'),
           icon: 'graph',
         },
+        'deceased-chart': {
+          titleMenu: this.$t('charts.deceased.titleMenu'),
+          icon: 'graph',
+        },
         'youtube': {
           titleMenu: this.$t('youtube.titleMenu'),
           icon: 'map',
