@@ -4,9 +4,24 @@
     
     <div class="custom-container">
       <div class="static-page-wrapper">
-        <ul id="restrictionsList">
           <p>Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo covid-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije, ki naše podatke navajajo kot vir.</p>
           <p><a href="https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml">Zbirna tabela</p>
+
+<!-- executive summary -->
+          <h1>Povzetek</h1>
+        <ul id="summaryList">          
+          <li
+            v-for="item in restrictions"
+            :key="item.index"
+            :id="`restriction-${item.index}`"
+          >
+            <div><h3><span v-html="item.rule" /></h3></div>
+          </li>
+        </ul>
+
+		<hr />
+          <!-- body -->
+        <ul id="restrictionsList">          
           <li
             v-for="item in restrictions"
             :key="item.index"
@@ -103,7 +118,8 @@ export default {
             restriction.validity = text;
           } else if (j == 3) {
             // izjeme are often lists
-            var list = text.replace(/(\W) (\d+\.)/g, "$1<br />\n$2");
+            //var list = text.replace(/(\W) (\d+\.)/g, "$1<br />\n$2");
+            var list = text.replace(/\n/g, "<br />\n");
             // console.log("izjeme", text, list)
             restriction.exceptions = list;
           } else if (j == 7) {
