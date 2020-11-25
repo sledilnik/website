@@ -83,7 +83,7 @@ let renderChartOptions (state : State) dispatch =
 
     let percentageFormatter value =
         let valueF = float value / 100.0
-        sprintf "%0.2f%%" valueF
+        sprintf "%0.0f%%" valueF
 
     let tooltipFormatter state jsThis =
         let category = jsThis?x
