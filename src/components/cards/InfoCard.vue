@@ -114,25 +114,6 @@ export default {
         return this.goodTrend === 'down' ? 'good' : 'bad'
       }
     },
-    incidenceClass() {
-      const value = this.renderValues.lastDay.value
-      const incidence = Math.round(
-        this.renderValues.lastDay.value / this.incidence
-      )
-      if (this.name === 'incidence') {
-        if (incidence >= 40 && incidence < 140) return 'orange'
-        if (incidence >= 140) return 'red'
-      }
-      if (this.field === 'statePerTreatment.inHospital') {
-        if (value >= 60 && value < 250) return 'orange'
-        if (value >= 250) return 'red'
-      }
-      if (this.field === 'statePerTreatment.inICU') {
-        if (value >= 15 && value < 50) return 'orange'
-        if (value >= 50) return 'red'
-      }
-      return 'unknown'
-    },
     cardTitle() {
       if (this.name === 'incidence')
         return this.title + ' ' + this.$t('infocard.per100k')
@@ -172,11 +153,12 @@ export default {
     },
     showAbsolute() {
       if (this.field === 'cases.active') {
-        return (
-          this.renderActiveValues(this.field).lastDay.diff === 0 &&
-          this.renderActiveValues(this.fieldNewCases).lastDay.value === 0 &&
-          this.renderActiveValues(this.fieldDeceased).lastDay.value === 0
-        )
+        // return (
+        //   this.renderActiveValues(this.field).lastDay.diff === 0 &&
+        //   this.renderActiveValues(this.fieldNewCases).lastDay.value === 0 &&
+        //   this.renderActiveValues(this.fieldDeceased).lastDay.value === 0
+        // )
+        return false
       }
       if (
         this.field === 'statePerTreatment.inHospital' ||
