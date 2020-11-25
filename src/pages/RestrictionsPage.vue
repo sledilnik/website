@@ -1,6 +1,7 @@
 <template>
   <div>
     <Time-stamp :date="lastUpdate" />
+    <p>Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo covid-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije, ki naše podatke navajajo kot vir.</p>
     <div class="custom-container">
       <div class="static-page-wrapper">
         <ul id="restrictionsList">
@@ -10,11 +11,15 @@
             :id="`restriction-${item.index}`"
           >
             <h2>{{ item.name }}</h2>
-            <div><h3>Geografska veljavnost:</h3><span v-html="item.geoValidity" /></div>
-            <div><h3>Trenutno pravilo:</h3><span v-html="item.rule" /></div>
+
+            <div><h3><span v-html="item.rule" /></h3></div>
+            <div><p>Geografska veljavnost: <span v-html="item.geoValidity" /></p></div>
+            <div><p>Veljavnost: <span v-html="item.validity" /></p></div>
+
+            <div><h3>Dodatna pravila / tolmačenja:</h3><span v-html="item.extrarule" /></div>
             <div><h3>Izjeme:</h3><span v-html="item.exceptions" /></div>
-            <div><h3>Veljavnost:</h3><span v-html="item.validity" /></div>
-            <div><h3>Povezave</h3><span v-html="item.links" /></div>
+            <div><h3>Opombe:</h3><span v-html="item.notes" /></div>
+            <div><h3>Povezava do odloka (prečiščeno besedilo): <span v-html="item.links" /></h3></div>
           </li>
         </ul>
       </div>
@@ -44,18 +49,23 @@ export default {
     };
   },
   mounted() {
-    const url = 'https://spreadsheets.google.com/pub?key=1k2-MOUqiI4qVWIkwx3Bm-1S-t_fLruESh_Shf5rTUYE&hl=en&output=html';
+  	// note: the spreadsheet must have all cells full, so add "/" to empty cells
+  	
+    // const url = 'https://spreadsheets.google.com/pub?key=1k2-MOUqiI4qVWIkwx3Bm-1S-t_fLruESh_Shf5rTUYE&hl=en&output=html';
+    const url = 'https://spreadsheets.google.com/pub?key=1NBeTl9d154KHggAAuzjNOrIPriqjBVeU-UIkYo0ZRCY&hl=en&output=html';
     var googleSpreadsheet = new GoogleSpreadsheet();
     googleSpreadsheet.url(url);
     googleSpreadsheet.load((result) => {
       var i, j;
 
-      // TODO get date somwhere
-      console.log(result["data"][0])
-      this.lastUpdate = new Date(Date.parse(result["data"][0].replace(/\s/g, '')));
+      // TODO get date somewhere
+      // date is manually stored in the first cell of the second row
+      console.log(result["data"][1])
+      this.lastUpdate = new Date(Date.parse(result["data"][1].replace(/\s/g, '')));
 
       // the real thing
-      for (i = 1; i <= 13; i++) {
+      // first, iterate the columns, they become chapters
+      for (i = 2; i <= 14; i++) {
         this.floatingMenu.push({
           title: result["data"][i],
           link: `restriction-${i}`,
@@ -65,6 +75,9 @@ export default {
           index: i,
           name: result["data"][i],
         };
+        
+        // then, iterate rows, they become the data for each chapter
+        // first row is (c) so skip
         for (j = 1; j <= 7; j++) {
           // 1 Geografska veljavnost
           // 2 Trenutno pravilo
@@ -75,11 +88,12 @@ export default {
           // 7 Povezava do odloka (prečiščeno besedilo) oz. novice
 
           var text = result["data"][j * 14 + i];
+		  var cat = result['data'][j * 14 + 1]; // header of the row, +1 for the (c) cell
           if (text == "_" || text == "/" || text == null) {
             continue;
           } // skip empty categories
 
-          if (j == 1) {
+          if (j == 2) {
             //georgrafska veljavnost
             restriction.geoValidity = text;
           } else if (j == 5) {
@@ -87,7 +101,6 @@ export default {
             restriction.validity = text;
           } else if (j == 3) {
             // izjeme are often lists
-
             var list = text.replace(/(\W) (\d+\.)/g, "$1<br />\n$2");
             // console.log("izjeme", text, list)
             restriction.exceptions = list;
@@ -96,8 +109,19 @@ export default {
             var list = text.replace(/  /g, "\n<br />") + "\n";
             var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
             restriction.links = links;
-          } else {
-            restriction.rule = text;
+          } else if (j == 1) {
+          	// pravilo
+          	restriction.rule = text;
+          } else if (j == 4) {
+          	// dodatna pravila
+          	restriction.extrarule = text;
+          } else if (j == 6) { 
+          	// opombe
+            var list = text.replace(/  /g, "\n<br />") + "\n";
+            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
+            restriction.notes = links;
+          } else { 
+          	console.log("too much data"); 
           }
         }
         this.restrictions.push(restriction);
