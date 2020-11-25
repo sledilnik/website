@@ -18,8 +18,8 @@
             <div><p>Geografska veljavnost: <span v-html="item.geoValidity" /></p></div>
             <div><p>Veljavnost: <span v-html="item.validity" /></p></div>
 
-            <div><h3>Dodatna pravila / tolmačenja:</h3><span v-html="item.extrarule" /></div>
             <div><h3>Izjeme:</h3><span v-html="item.exceptions" /></div>
+            <div><h3>Dodatna pravila / tolmačenja:</h3><span v-html="item.extrarule" /></div>
             <div><h3>Opombe:</h3><span v-html="item.notes" /></div>
             <div><h3>Povezava do odloka (prečiščeno besedilo): <span v-html="item.links" /></h3></div>
           </li>
