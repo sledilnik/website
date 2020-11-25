@@ -1127,6 +1127,19 @@
             "yAxisTitle": "Nuovi decessi giornalieri per 100.000 persone",
             "titleMenu": "Paesi - Nuovi decessi",
             "title": "Paesi: nuovi decessi per 100.000 persone (media di 7 giorni)"
+        },
+        "deceased": {
+            "deceased-total": "Decessi totali",
+            "deceased-rest": "Fuori dagli ospedali",
+            "deceased-care": "Ospedali di cura",
+            "deceased-acute": "Unità di medicina per acuti",
+            "deceased-icu": "Terapia intensiva",
+            "deceasedToDateRelative": "Decessi ad oggi (relativo)",
+            "deceasedToDate": "Decessi ad oggi",
+            "deceasedTodayRelative": "Decessi al giorno (relativo)",
+            "deceasedToday": "Decessi al giorno",
+            "titleMenu": "Decessi",
+            "title": "Decessi"
         }
     },
     "footer": {
