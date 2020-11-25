@@ -41,35 +41,7 @@
             <p><b>Izjeme:</b><br> <span v-html="item.exceptions" /></p>
             <p><b>Dodatna pravila / tolmačenja:</b> <span v-html="item.extrarule" /></p>
             <p><b>Opombe:</b> <span v-html="item.notes" /></p>
-            <p><b>Povezava do odloka (prečiščeno besedilo):</b> <span v-html="item.links" /></p>
-            <!-- <div>
-              <h3><span v-html="item.rule" /></h3>
-            </div>
-            <div>
-              <p>Geografska veljavnost: <span v-html="item.geoValidity" /></p>
-            </div>
-            <div>
-              <p>Veljavnost: <span v-html="item.validity" /></p>
-            </div>
-
-            <div>
-              <h3>Izjeme:</h3>
-              <span v-html="item.exceptions" />
-            </div>
-            <div>
-              <h3>Dodatna pravila / tolmačenja:</h3>
-              <span v-html="item.extrarule" />
-            </div>
-            <div>
-              <h3>Opombe:</h3>
-              <span v-html="item.notes" />
-            </div>
-            <div>
-              <h3>
-                Povezava do odloka (prečiščeno besedilo):
-                <span v-html="item.links" />
-              </h3>
-            </div> -->
+            <p><a :href="item.link" targe="_blank">Povezava do odloka (prečiščeno besedilo)</a></p>
           </div>
           </details>
       </div>
@@ -159,9 +131,11 @@ export default {
             restriction.exceptions = list;
           } else if (j == 7) {
             // povezave
-            var list = text.replace(/  /g, "\n<br />") + "\n";
-            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
-            restriction.links = links;
+            // var list = text.replace(/  /g, "\n<br />") + "\n";
+            console.log("povezve", text)
+            const link = text.replace(/(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g, "$1");
+            console.log("parsed", link)
+            restriction.link = link;
           } else if (j == 1) {
             // pravilo
             restriction.rule = text;
