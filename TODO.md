@@ -1,5 +1,9 @@
 # TODO
 
+- https://github.com/sledilnik/website/issues/699
+    - extra axis for deceased
+        - move axis to the left
+
 - new OWID export
     - return back the official URL, once it has been pushed to production
     - remove properties from DataPoint that we don't use

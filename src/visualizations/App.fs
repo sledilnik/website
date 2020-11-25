@@ -42,6 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
+            | "MetricsCorrelation" -> Some MetricsCorrelation
             | _ -> None
             |> Embedded
 
@@ -489,9 +490,24 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
+    let metricsCorrelation =
+          { VisualizationType = MetricsCorrelation
+            ClassName = "metrics-correlation-chart"
+            ChartTextsGroup = "metricsCorrelation"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView MetricsCorrelationViz.Rendering.renderChart
+                            {| data = data |} }
+
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison
-          patients; patientsCare; deceased 
+        [ metricsCorrelation; hospitals; metricsComparison; dailyComparison
+          patients; patientsCare; deceased
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -510,7 +526,8 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; map
+        [ metricsCorrelation; hospitals; metricsComparison; spread
+          dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs

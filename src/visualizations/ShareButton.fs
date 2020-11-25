@@ -40,6 +40,7 @@ let dropdown (viz: Visualization) =
             | CountriesTotalDeathsPer1M -> (1140, 740)
             | PhaseDiagram -> (1140, 720)
             | Deceased -> (1140, 720)
+            | MetricsCorrelation -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"
@@ -80,8 +81,8 @@ let dropdown (viz: Visualization) =
                                       [ Html.img
                                           [ prop.className "share-icon"
                                             prop.src "/images/facebook-f.svg"
-                                            prop.alt (I18N.t "charts.common.facebook") ]
-                                        Html.span [ prop.text (I18N.t "charts.common.facebook") ] ] ]
+                                            prop.alt (t "charts.common.facebook") ]
+                                        Html.span [ prop.text (t "charts.common.facebook") ] ] ]
                               Html.a
                                   [ prop.className "share-link"
                                     prop.target "_blank"
@@ -96,16 +97,16 @@ let dropdown (viz: Visualization) =
                                         [ Html.img
                                             [ prop.className "share-icon"
                                               prop.src "/images/twitter.svg"
-                                              prop.alt (I18N.t "charts.common.twitter") ]
-                                          Html.span [ prop.text (I18N.t "charts.common.twitter") ] ] ]
+                                              prop.alt (t "charts.common.twitter") ]
+                                          Html.span [ prop.text (t "charts.common.twitter") ] ] ]
                               Html.a
                                   [ prop.className "share-link"
                                     prop.children
                                         [ Html.img
                                             [ prop.className "share-icon"
                                               prop.src "/images/code.svg"
-                                              prop.alt (I18N.t "charts.common.webpage") ]
-                                          Html.span [ prop.text (I18N.t "charts.common.webpage") ] ]
+                                              prop.alt (t "charts.common.webpage") ]
+                                          Html.span [ prop.text (t "charts.common.webpage") ] ]
                                     prop.onClick (fun _ -> setModal (not modal)) ] ] ]
 
                               // TODO: add export to PNG
@@ -117,10 +118,10 @@ let dropdown (viz: Visualization) =
                               [ Html.img
                                   [ prop.className "share-button-icon"
                                     prop.src "/images/share-icon.svg"
-                                    prop.alt (I18N.t "charts.common.share") ]
+                                    prop.alt (t "charts.common.share") ]
                                 Html.span
                                     [ prop.className "share-button-caption"
-                                      prop.text (I18N.t "charts.common.share") ] ]
+                                      prop.text (t "charts.common.share") ] ]
                           // TODO: click outside the button should close the dropdown as well
                           prop.onClick (fun _ -> setDropdown (not dropdown)) ]
 
@@ -128,17 +129,17 @@ let dropdown (viz: Visualization) =
                     Html.div
                         [ if modal then prop.className "embed-menu show" else prop.className "embed-menu hide"
                           prop.children
-                              [ Html.h2 [ prop.text (I18N.t "embedMaker.title") ]
+                              [ Html.h2 [ prop.text (t "embedMaker.title") ]
                                 Html.p
                                     // TODO: refactor https://www.i18next.com/translation-function/interpolation
                                     // check why this doesn't work: I18N.tOptions "embedMaker.description" {| interpolation = {| escapeValue = false |} }|}
-                                    [ Html.span [ prop.text (I18N.t "embedMaker.descriptionPart1") ]
+                                    [ Html.span [ prop.text (t "embedMaker.descriptionPart1") ]
                                       Html.a
                                           [ prop.href
                                               "https://github.com/sledilnik/website/blob/master/examples/README.md"
-                                            prop.text (I18N.t "embedMaker.descriptionPart2") ] ]
+                                            prop.text (t "embedMaker.descriptionPart2") ] ]
                                 Html.textarea
-                                    [ prop.title (I18N.t "embedMaker.copy")
+                                    [ prop.title (t "embedMaker.copy")
                                       prop.className "form-control"
                                       prop.defaultValue
                                           ("<iframe src=\""
@@ -151,6 +152,6 @@ let dropdown (viz: Visualization) =
                                 // TODO: implement copy method as it is in EmbedPageMake
                                 // prop.onClick (fun _ -> copy) ]
                                 Html.button
-                                    [ prop.text (I18N.t "charts.common.close")
+                                    [ prop.text (t "charts.common.close")
                                       prop.className "btn btn-primary btn-sm"
                                       prop.onClick (fun _ -> setModal (not modal)) ] ] ] ] ])

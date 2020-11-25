@@ -838,6 +838,14 @@
             "allConfirmed": "Vsi potrjeni",
             "otherPersons": "Ostale osebe"
         },
+        "metricsCorrelation": {
+            "title": "Soodvisnost okužb in umrlih",
+            "titleMenu": "Soodvisnost okužb in umrlih",
+            "averageByDay": "Po dnevih (7-dnevno povprečje)",
+            "all": "Skupaj",
+            "cases": "Potrjeni primeri",
+            "deceased": "Umrli"
+        },
         "spread": {
             "title": "Prirast potrjenih primerov",
             "titleMenu": "Prirast",
