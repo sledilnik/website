@@ -45,14 +45,13 @@
           </div>
           </details>
       </div>
-      <FloatingMenu :list="floatingMenu" title="Ukrepi" />
+      <!-- <FloatingMenu :list="floatingMenu" title="Ukrepi" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import { GoogleSpreadsheet } from "@/libs/google-spreadsheet.js";
-import FloatingMenu from "components/FloatingMenu";
 import TimeStamp from "components/TimeStamp";
 
 window.GoogleSpreadsheet = GoogleSpreadsheet;
@@ -60,7 +59,6 @@ window.GoogleSpreadsheet = GoogleSpreadsheet;
 export default {
   name: "RestrictionsPage",
   components: {
-    FloatingMenu,
     TimeStamp,
   },
   data() {
