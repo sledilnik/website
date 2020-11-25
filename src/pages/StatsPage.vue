@@ -80,22 +80,23 @@
         </b-col>
       </b-row>
     </b-container>
-    <FloatingMenu :list="charts" />
+    <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import InfoCard from 'components/cards/InfoCard'
-import TimeStamp from 'components/TimeStamp'
-import Notice from 'components/Notice'
-import Youtube from 'components/Youtube'
-import FloatingMenu from 'components/FloatingMenu'
-import { Visualizations } from 'visualizations/App.fsproj'
-import { ApiEndpoint } from '@/store/index.js'
+import { mapState } from "vuex";
+import InfoCard from "components/cards/InfoCard";
+import TimeStamp from "components/TimeStamp";
+import Notice from "components/Notice";
+import Youtube from "components/Youtube";
+import FloatingMenu from "components/FloatingMenu";
+import { Visualizations } from "visualizations/App.fsproj";
+import { ApiEndpoint } from "@/store/index.js";
+import chartsFloatMenu from "components/floatingMenuDict";
 
 export default {
-  name: 'StatsPage',
+  name: "StatsPage",
   components: {
     InfoCard,
     TimeStamp,
@@ -107,42 +108,47 @@ export default {
     return {
       loaded: false,
       charts: [],
-    }
+    };
   },
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations('visualizations', 'local', this.$route.query, ApiEndpoint())
-    })
+      Visualizations(
+        "visualizations",
+        "local",
+        this.$route.query,
+        ApiEndpoint()
+      );
+    });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
-      let elm = document.querySelector('.highcharts-point')
+      let elm = document.querySelector(".highcharts-point");
       if (elm) {
-        document.querySelector('.stats-page').classList.add('loaded')
-        this.loaded = true
-        clearInterval(checker)
+        document.querySelector(".stats-page").classList.add("loaded");
+        this.loaded = true;
+        clearInterval(checker);
       }
-    }, 80)
+    }, 80);
   },
   computed: {
-    ...mapState('stats', {
-      exportTime: 'exportTime'
+    ...mapState("stats", {
+      exportTime: "exportTime",
     }),
   },
   methods: {
     checkClick(e) {
-      const dropdownAll = this.$el.querySelectorAll('.share-dropdown-wrapper')
+      const dropdownAll = this.$el.querySelectorAll(".share-dropdown-wrapper");
 
       // ignore click if the clicked element is share button or its icon or caption
-      if (e.target.classList.contains('share-button-')) return
+      if (e.target.classList.contains("share-button-")) return;
 
       // else check if any of the dropdowns is opened and close it/them
       dropdownAll.forEach((el) => {
-        el.classList.contains('show')
-          ? el.classList.remove('show')
-          : el.classList.add('hide')
-      })
+        el.classList.contains("show")
+          ? el.classList.remove("show")
+          : el.classList.add("hide");
+      });
 
       // TODO: there is still an issue where if you immediately click on the same
       // share button again, it won't open the dropdown because ShareButton.fs
@@ -150,24 +156,29 @@ export default {
       // I think the right way to do this would be to listen for clicks within App.fs
     },
     getCharts() {
-      const allCharts = this.$el.querySelectorAll('.visualization-chart h2 a')
-      allCharts.forEach((el) => {
-        let obj = new Object
-        obj.title = el.innerHTML
-        obj.link = el.getAttribute('href').substring(1)
-        this.charts.push(obj)
-      })
+      this.$el.querySelectorAll(".visualization-chart h2 a").forEach((el) => {
+        const key = el.getAttribute("href").substring(1);
+        const item = chartsFloatMenu[key];
+        this.charts.push({
+          title: item && item.titleKey ? this.$t(item.titleKey) : el.innerHTML,
+          link: key,
+          icon: item ? item.icon : undefined,
+        });
+      });
     },
   },
   watch: {
-    loaded: function() {
-      this.getCharts()
+    loaded: function () {
+      this.getCharts();
     },
   },
-}
+};
 </script>
 
 <style lang="sass">
+
+$loader-width: 50px
+
 .cards-wrapper
   display: flex
   flex-wrap: wrap
@@ -180,8 +191,6 @@ export default {
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 88px
-
-$loader-width: 50px
 
 .stats-page
   margin-top: 48px
