@@ -218,7 +218,7 @@ let renderChartOptions (state : State) dispatch =
 
         series = List.toArray allSeries
 
-        plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
+        plotOptions = pojo {| series = {| pointPadding = 0.0; groupPadding = 0.02 |} |}
 
         legend = pojo {| enabled = false |}
 
