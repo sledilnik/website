@@ -70,14 +70,7 @@ export default {
           // element found on page
           clearInterval(checker)
 
-          let offset = -60
-          // special case for charts
-          if (
-            elm.tagName === 'SECTION' &&
-            this.$route.hash.endsWith('-chart')
-          ) {
-            offset = -90
-          }
+          const offset = -90
 
           this.$scrollTo(document.querySelector(this.$route.hash), 500, {
             offset: offset,
