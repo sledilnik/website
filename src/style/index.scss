@@ -9,21 +9,4 @@ $footerHeight: 66px;
 #app {
   padding-top: $navHeight;
   min-height: 100vh;
-
-  main {
-    padding-top: 24px;
-
-    // need to interpolate in calc()
-    // min-height: calc(100vh - #{$navHeight} - #{$footerHeight});
-
-    @media only screen and (min-width: 768px) {
-      padding-top: 48px;
-    }
-  }
-}
-
-#app.stats, #app.world, #app.ostanizdrav {
-  main {
-    padding-top: 0;
-  }
 }

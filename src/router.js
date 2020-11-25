@@ -196,6 +196,10 @@ const routes = [
         component: () => import('./pages/EmbedMakerPage.vue'),
       },
       {
+        path: 'restrictions',
+        component: () => import('./pages/RestrictionsPage.vue'),
+      },
+      {
         path: 'links', // Retired page
         redirect: `about`,
       },
