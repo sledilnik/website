@@ -10,16 +10,12 @@
 <!-- executive summary -->
           <h1>Povzetek</h1>
         <ul id="summaryList">          
-          <li
-            v-for="item in restrictions"
-            :key="item.index"
-            :id="`restriction-${item.index}`"
-          >
+          <li>
             <div><h3><span v-html="item.rule" /></h3></div>
           </li>
         </ul>
 
-		<hr />
+		<h1>Podrobnosti</h1>
           <!-- body -->
         <ul id="restrictionsList">          
           <li
