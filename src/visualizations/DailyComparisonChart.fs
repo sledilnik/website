@@ -229,6 +229,18 @@ let renderChartOptions (state : State) dispatch =
                 useHTML = true
             |}
 
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                            |}
+                    |} |]
+            |}
+
         credits = pojo
             {|
                 enabled = true
