@@ -59,6 +59,11 @@ let formatTo1DecimalWithTrailingZero (value: float) =
     // A hack to replace decimal point with decimal comma.
     formatted.Replace('.', ',')
 
+let formatTo2DecimalWithTrailingZero (value: float) =
+    let formatted = sprintf "%.2f" value
+    // A hack to replace decimal point with decimal comma.
+    formatted.Replace('.', ',')
+
 let formatTo3DecimalWithTrailingZero (value: float) =
     let formatted = sprintf "%.3f" value
     // A hack to replace decimal point with decimal comma.
