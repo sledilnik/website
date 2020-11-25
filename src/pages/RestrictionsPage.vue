@@ -4,6 +4,7 @@
 
     <div class="custom-container">
       <div class="static-page-wrapper">
+        <h1>Ukrepi in omejitve</h1>
         <p>
           Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da
           celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je
@@ -24,30 +25,24 @@
           >
         </p>
 
-        <!-- executive summary -->
-        <h1>Povzetek</h1>
-        <ul id="summaryList">
-          <li
-            v-for="item in restrictions"
-            :key="item.index"
-          >
-            <div>
-              <h3><span v-html="item.name" />: <span v-html="item.rule" /> <a :href="`#restriction-${item.index}`" v-scroll-to="{ el: `#restriction-${item.index}`, offset: -90 }">Podrobnosti</a></h3>
-            </div>
-          </li>
-        </ul>
-
-        <h1>Podrobnosti</h1>
         <!-- body -->
-        <ul id="restrictionsList">
-          <li
+          <details
             v-for="item in restrictions"
             :key="item.index"
             :id="`restriction-${item.index}`"
           >
-            <h2>{{ item.name }}</h2>
-
-            <div>
+          <summary>
+            {{ item.name }}<br>
+             <span v-html="item.rule" />
+          </summary>
+          <div>
+            <p><b>Geografska veljavnost:</b> <span v-html="item.geoValidity" /></p>
+            <p><b>Veljavnost:</b> <span v-html="item.validity" /></p>
+            <p><b>Izjeme:</b><br> <span v-html="item.exceptions" /></p>
+            <p><b>Dodatna pravila / tolmačenja:</b> <span v-html="item.extrarule" /></p>
+            <p><b>Opombe:</b> <span v-html="item.notes" /></p>
+            <p><b>Povezava do odloka (prečiščeno besedilo):</b> <span v-html="item.links" /></p>
+            <!-- <div>
               <h3><span v-html="item.rule" /></h3>
             </div>
             <div>
@@ -74,9 +69,9 @@
                 Povezava do odloka (prečiščeno besedilo):
                 <span v-html="item.links" />
               </h3>
-            </div>
-          </li>
-        </ul>
+            </div> -->
+          </div>
+          </details>
       </div>
       <FloatingMenu :list="floatingMenu" title="Ukrepi" />
     </div>
