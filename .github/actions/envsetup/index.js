@@ -13,15 +13,15 @@ function debug() {
 
 async function abort() {
     try {
-        debug()
         const params = {
-            owner: context.repository.owner.login,
-            repo: context.repository.name,
+            owner: context.repo.owner.login,
+            repo: context.repo.name,
             run_id: process.env.GITHUB_RUN_ID,
         }
         core.info(`Aborting current workflow: ${JSON.stringify(params)}`)
         await gh.actions.cancelWorkflowRun(params)
     } catch (ex) {
+        debug()
         core.setFailed(`Failed to abort workflow: ${ex}`)
     }
 }
@@ -80,22 +80,26 @@ function setup(config) {
 }
 
 function main() {
-    // debug()
-    const event = process.env['GITHUB_EVENT_NAME']
-    core.info(`Configuring build environment for event ${event}`)
+    try {
+        const event = process.env['GITHUB_EVENT_NAME']
+        core.info(`Configuring build environment for event ${event}`)
 
-    if (event === 'pull_request') {
-        setup(pullRequestConfig())
-    } else if (event === 'push') {
-        if (github.context.ref === 'refs/heads/master') {
-            setup(stageConfig())
-        } else if (github.context.ref.startsWith('refs/tags/')) {
-            setup(prodConfig())
+        if (event === 'pull_request') {
+            setup(pullRequestConfig())
+        } else if (event === 'push') {
+            if (github.context.ref === 'refs/heads/master') {
+                setup(stageConfig())
+            } else if (github.context.ref.startsWith('refs/tags/')) {
+                setup(prodConfig())
+            } else {
+                core.setFailed('Unknown GitHub event. Supported');
+            }
         } else {
-            core.setFailed('Unknown GitHub event. Supported');
+            core.setFailed('Unknown GitHub event. Supported: push, pull_request');
         }
-    } else {
-        core.setFailed('Unknown GitHub event. Supported: push, pull_request');
+    } catch (ex) {
+        debug()
+        core.setFailed(`Error: ${ex.message}`);
     }
 }
 
