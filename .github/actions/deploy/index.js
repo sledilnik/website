@@ -19,7 +19,7 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    let x = await execFileSync("helm", ["--list"])
+    let x = execFileSync("helm", ["--list"])
     core.info(x)
 }
 
