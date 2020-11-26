@@ -5,8 +5,8 @@ import { toUpper, snakeCase, forOwn } from 'lodash';
 const context = github.context;
 
 function debug() {
-    core.info(`Environment: ${JSON.stringify(process.env)}`)
-    core.info(`Context: ${JSON.stringify(context)}`)
+    core.info(`Environment: ${JSON.stringify(process.env, null, 1)}`)
+    core.info(`Context: ${JSON.stringify(context, null, 1)}`)
 }
 
 function getTag() {
@@ -23,9 +23,9 @@ function prNumber() {
 }
 
 function pullRequestConfig() {
-    core.info(`PR Labels ${context.event.pull_request.labels}`)
+    core.info(`PR Labels ${context.payload.pull_request.labels}`)
 
-    const shouldDeploy = context.event.action != 'closed'
+    const shouldDeploy = context.payload.action != 'closed'
 
     return {
         ImageTag: `pr-${prNumber()}`,
