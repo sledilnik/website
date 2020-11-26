@@ -1,7 +1,7 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
 
-const ghToken = process.env['ACTIONS_RUNTIME_TOKEN']
+const ghToken = process.env['INPUT_TOKEN']
 
 console.log("ghToken", ghToken)
 
