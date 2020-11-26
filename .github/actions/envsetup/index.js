@@ -1,24 +1,31 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+import { toHtml } from '@fortawesome/fontawesome-svg-core';
 import { toUpper, snakeCase, forOwn, map } from 'lodash';
 
 const context = github.context;
 
 const gh = github.getOctokit(core.getInput('token'))
 
+/**
+ * Print env variables and event context to help debugging
+ */
 function debug() {
     core.info(`Environment: ${JSON.stringify(process.env, null, 1)}`)
     core.info(`Context: ${JSON.stringify(context, null, 1)}`)
 }
 
-async function abort() {
+/**
+ * Aborts current workflow (in case it does not need to be finsihed)
+ */
+async function abort(reason) {
     try {
         const params = {
             owner: context.payload.repository.owner.login,
             repo: context.payload.repository.name,
             run_id: context.runId
         }
-        core.info(`Aborting current workflow: ${JSON.stringify(params)}`)
+        core.info(`Aborting current workflow: ${reason}`)
         await gh.actions.cancelWorkflowRun(params)
     } catch (ex) {
         debug()
@@ -26,19 +33,35 @@ async function abort() {
     }
 }
 
+/**
+ * Get tag of current build.
+ * 
+ * @throws Error if current build is not tagged
+ */
 function getTag() {
     const ref = context.ref
     if (!ref)
-        throw "GITHUB_REF is not defined"
+        throw new Error("GITHUB_REF is not defined")
     if (!ref.startsWith("refs/tags/"))
-        throw `Not a tag ref (${ref})`
+        throw new Error(`Not a tag ref (${ref})`)
     return ref.replace(/^refs\/tags\//, "")
 }
 
+/**
+ * Get current build's PR number
+ */
 function prNumber() {
+    if (!context.payload.pull_request) {
+        throw new Error('Not a pull request!')
+    }
     return context.payload.pull_request.number
 }
 
+/**
+ * Check if current build's PR has given label
+ * 
+ * @param String label 
+ */
 function hasLabel(label) {
     return map(context.payload.pull_request.labels, (label) => label.name).includes(label)
 }
@@ -47,10 +70,8 @@ function pullRequestConfig() {
 
     const deployLabel = core.getInput('prDeployLabel')
 
-    const shouldDeploy = context.payload.action != 'closed' && hasLabel(deployLabel)
-
-    if (!shouldDeploy) {
-        abort()
+    if (!hasLabel(deployLabel)) {
+        abort(`PR does not have label '${deployLabel}'`)
     }
 
     return {
