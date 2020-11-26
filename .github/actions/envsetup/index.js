@@ -4,6 +4,11 @@ import { toUpper, snakeCase, forOwn } from 'lodash';
 
 const context = github.context;
 
+function debug() {
+    core.info(`Environment: ${JSON.stringify(process.env)}`)
+    core.info(`Context: ${JSON.stringify(context)}`)
+}
+
 function getTag() {
     const ref = context.ref
     if (!ref)
@@ -19,9 +24,12 @@ function prNumber() {
 
 function pullRequestConfig() {
     core.info(`PR Labels ${context.event.pull_request.labels}`)
+
+    const shouldDeploy = context.event.action != 'closed'
+
     return {
         ImageTag: `pr-${prNumber()}`,
-        ShoudlDeploy: true
+        ShoudlDeploy: ShoudlDeploy
     }
 }
 
@@ -49,6 +57,7 @@ function setup(config) {
 }
 
 function main() {
+    debug()
     const event = process.env['GITHUB_EVENT_NAME']
     core.info(`Configuring build environment for event ${event}`)
 

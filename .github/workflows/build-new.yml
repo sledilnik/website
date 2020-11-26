@@ -48,7 +48,6 @@ jobs:
       
       - name: build and push
         uses: docker/build-push-action@v2
-        if: ${{ env.IMAGE_TAG }} != ''
         with:
           push: true
           context: .
