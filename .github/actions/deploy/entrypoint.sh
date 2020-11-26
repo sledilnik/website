@@ -8,4 +8,4 @@ mkdir -p ${HOME}/.kube/
 echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 chmod 400 ${HOME}/.kube/config
 
-node /index.js deploy
+exec node /index.js deploy
