@@ -2,7 +2,6 @@ const github = require('@actions/github')
 const core = require('@actions/core')
 const { execSync, spawnSync, execFileSync, execFile } = require('child_process')
 
-const helmBin = '/usr/bin/helm'
 const ghToken = process.env['INPUT_TOKEN']
 const context = github.context;
 const gh = github.getOctokit(ghToken)
@@ -39,7 +38,8 @@ async function helmUndeploy(releaseName) {
 
 async function deploy() {
     core.info("Starting deploy")
-    // createDeployment()
+    const deployment = await createDeployment()
+    core.info(JSON.stringify(deployment))
     // set deploy status to pending
     helmDeploy('testrelase', 'some/chart')
     // set deploy status to success/fail
