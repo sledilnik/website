@@ -3,6 +3,8 @@ const core = require('@actions/core')
 
 const ghToken = process.env['ACTIONS_RUNTIME_TOKEN']
 
+console.log("ghToken", ghToken)
+
 const context = github.context;
 const gh = github.getOctokit(ghToken)
 
