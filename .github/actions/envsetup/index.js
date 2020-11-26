@@ -14,9 +14,9 @@ function debug() {
 async function abort() {
     try {
         const params = {
-            owner: context.repo.owner.login,
-            repo: context.repo.name,
-            run_id: process.env.GITHUB_RUN_ID,
+            owner: context.payload.repository.owner.login,
+            repo: context.payload.repository.name,
+            run_id: context.runId
         }
         core.info(`Aborting current workflow: ${JSON.stringify(params)}`)
         await gh.actions.cancelWorkflowRun(params)
