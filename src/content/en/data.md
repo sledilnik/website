@@ -58,7 +58,11 @@ More information on how to use the API and the API source code are available on 
 - [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
 
 
-## Data sources
+## Measures and Restrictions
+
+For collection of current measures and restrictions, see page [Measures and Restritions](/sl/restrictions).
+
+## Data Sources
 
 To ensure the precision and reliability of our data, we collect and cross-check the data from different official sources. In case we owerlooked any relevant source, please let us know at [info@sledilnik.org](mailto:info@sledilnik.org)
 

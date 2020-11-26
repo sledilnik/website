@@ -56,6 +56,9 @@ Izvorna kodo in več informacij o REST API-ju je na voljo na [GitHub](https://gi
 
 - [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
 
+## Ukrepi in omejitve
+
+Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo covid-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Trenutni ukrepi so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
 
 ## Viri podatkov
 
