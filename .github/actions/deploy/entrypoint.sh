@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
-mkdir -p ~/.kube/
-echo "${INPUT_KUBECONFIG}" > ~/.kube/config
+mkdir -p ${HOME}/.kube/
+echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
 helm list --namespace ${INPUT_NAMESPACE}
 
