@@ -1,6 +1,6 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
-const { execSync } = require('child_process')
+const { execSync, spawnSync, execFileSync, execFile } = require('child_process')
 
 const helmBin = '/usr/bin/helm'
 const ghToken = process.env['INPUT_TOKEN']
@@ -19,24 +19,27 @@ async function createDeployment() {
     })
 }
 
-async function helmDeploy() {
+async function helmDeploy(releaseName) {
     try {
-        let x = execSync(helmBin, ["list"], {
-            'stdio': 'inherit'
-        })
-        core.info("neki", x)
-    } catch(ex) {
+        execFileSync("helm", ['upgrade', '--install', '--atomic', releaseName], {'stdio': [0, 1, 2]})
+    } catch (ex) {
         core.error(`Error running helm ${ex}`)
     }
-    
-    
+}
+
+async function helmUndeploy(releaseName) {
+    try {
+        execFileSync("helm", ['uninstall', releaseName], {'stdio': [0, 1, 2]})
+    } catch (ex) {
+        core.error(`Error running helm ${ex}`)
+    }
 }
 
 async function deploy() {
     core.info("Starting deploy")
     // createDeployment()
     // set deploy status to pending
-    helmDeploy()
+    helmDeploy('testrelase')
     // set deploy status to success/fail
 }
 
