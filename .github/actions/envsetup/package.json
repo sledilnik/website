@@ -1,0 +1,14 @@
+{
+  "name": "envsetup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.2.0"
+  }
+}
