@@ -5,18 +5,7 @@ echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
 
 create_deployment() {
-    curl -s -X POST \
-        --url https://api.github.com/repos/overlordtm/data-api/deployments \
-        --header "Authorization: Bearer ${INPUT_TOKEN}" \
-        --header 'Content-Type: application/json' \
-        --data '{
-            "ref": "${GITHUB_REF}",
-            "environment": "pr-1",
-            "payload": {
-                "releaseName": "data-api-pr-1",
-                "namespace": "default"
-            }
-        }'
+    node dist/index.js createDeployment
 }
 
 create_deployment
