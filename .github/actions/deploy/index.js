@@ -24,7 +24,7 @@ async function helmDeploy(releaseName, chartName) {
         execFileSync("helm", ['upgrade', releaseName, chartName, '--install', '--atomic'], {'stdio': [0, 1, 2]})
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
-        throw ex
+        core.setFailed(ex)
     }
 }
 
@@ -33,7 +33,7 @@ async function helmUndeploy(releaseName) {
         execFileSync("helm", ['uninstall', releaseName], {'stdio': [0, 1, 2]})
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
-        throw ex
+        core.setFailed(ex)
     }
 }
 
