@@ -43,5 +43,5 @@ jobs:
         id: deploy
         uses: ./.github/actions/deploy
         with:
-          releaseName: ${{ steps.envsetup.ReleaseName }}
+          releaseName: ${{ steps.envsetup.outputs.ReleaseName }}
           chartName: website
