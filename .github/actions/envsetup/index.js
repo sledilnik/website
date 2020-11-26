@@ -4,9 +4,22 @@ import { toUpper, snakeCase, forOwn, map } from 'lodash';
 
 const context = github.context;
 
+const gh = github.getOctokit(core.getInput('token'))
+
 function debug() {
     core.info(`Environment: ${JSON.stringify(process.env, null, 1)}`)
     core.info(`Context: ${JSON.stringify(context, null, 1)}`)
+}
+
+function abort() {
+    const owner = context.repo.owner.name
+    const repo = context.repo.name
+    const run_id = process.env.GITHUB_RUN_ID
+    gh.actions.cancelWorkflowRun({
+        owner,
+        repo,
+        run_id,
+    })
 }
 
 function getTag() {
@@ -29,23 +42,27 @@ function hasLabel(label) {
 function pullRequestConfig() {
     const shouldDeploy = context.payload.action != 'closed' && hasLabel('deploy-preview')
 
+    if (!shouldDeploy) {
+        abort()
+    }
+
     return {
         ImageTag: `pr-${prNumber()}`,
-        DoDeploy: shouldDeploy
+        // DoDeploy: shouldDeploy
     }
 }
 
 function stageConfig() {
     return {
         ImageTag: "latest",
-        DoDeploy: true
+        // DoDeploy: true
     }
 }
 
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
-        DoDeploy: true
+        // DoDeploy: true
     }
 }
 

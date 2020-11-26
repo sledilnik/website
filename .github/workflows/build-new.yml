@@ -17,6 +17,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Setup environment
+        id: envsetup
         uses: ./.github/actions/envsetup
 
       - name: set up Docker Buildx
@@ -28,23 +29,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GHCR_TOKEN }}
-
-      # - name: Get current tag
-      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-      #   id: tag
-      #   uses: dawidd6/action-get-tag@v1
-
-      # - name: Set environment (tagged build)
-      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-      #   run: echo "IMAGE_TAG=${{ steps.tag.outputs.tag }}" >> $GITHUB_ENV
-
-      # - name: Set environment (master build)
-      #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')
-      #   run: echo "IMAGE_TAG=latest" >> $GITHUB_ENV
-
-      # - name: Set environment (PR build)
-      #   if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy-preview') && github.event.action != 'closed'
-      #   run: echo "IMAGE_TAG=pr-${{ github.event.pull_request.number }}" >> $GITHUB_ENV
       
       - name: build and push
         uses: docker/build-push-action@v2

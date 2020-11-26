@@ -1,5 +1,10 @@
 name: 'Environment setup'
 description: 'Setup build environment'
+inputs:
+  token:
+    description: 'Github token'
+    required: false
+    default: ${{ github.token }}
 runs:
   using: 'node12'
   main: 'dist/index.js'
