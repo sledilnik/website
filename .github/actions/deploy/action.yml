@@ -1,0 +1,24 @@
+# action.yml
+name: 'Deploy'
+description: 'Helm deploy action'
+inputs:
+  releaseName:
+    description: 'Helm release name'
+    required: true
+    default: 'World'
+  chartName:
+    description: 'Chart name'
+    required: true
+  chartVersion:
+    description: 'Chart version'
+    required: false
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.releaseName }}
+    - ${{ inputs.chartName }}
+    - ${{ inputs.chartVersion }}
