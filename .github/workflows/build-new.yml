@@ -45,4 +45,4 @@ jobs:
         with:
           releaseName: ${{ steps.envsetup.outputs.ReleaseName }}
           chartName: website
-          kubeconfig: ${{ secrets.KUBECONFIG }}
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
