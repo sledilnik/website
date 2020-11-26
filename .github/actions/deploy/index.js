@@ -10,9 +10,6 @@ const gh = github.getOctokit(ghToken)
 
 function createDeployment() {
     console.log(JSON.stringify(context.payload, null, 1))
-    // gh.repos.createDeployment({
-
-    // })
 }
 
 function main() {
