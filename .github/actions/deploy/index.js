@@ -19,11 +19,12 @@ async function createDeployment() {
     })
 }
 
-async function helmDeploy(releaseName) {
+async function helmDeploy(releaseName, chartName) {
     try {
-        execFileSync("helm", ['upgrade', '--install', '--atomic', releaseName], {'stdio': [0, 1, 2]})
+        execFileSync("helm", ['upgrade', releaseName, chartName, '--install', '--atomic'], {'stdio': [0, 1, 2]})
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
+        throw ex
     }
 }
 
@@ -32,6 +33,7 @@ async function helmUndeploy(releaseName) {
         execFileSync("helm", ['uninstall', releaseName], {'stdio': [0, 1, 2]})
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
+        throw ex
     }
 }
 
@@ -39,7 +41,7 @@ async function deploy() {
     core.info("Starting deploy")
     // createDeployment()
     // set deploy status to pending
-    helmDeploy('testrelase')
+    helmDeploy('testrelase', 'some/chart')
     // set deploy status to success/fail
 }
 
