@@ -5,6 +5,8 @@ echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
 helm list --namespace ${INPUT_NAMESPACE}
 
+echo `which curl`
+
 # helm upgrade ${INPUT_RELEASE_NAME} ./helm-chart \
 #     --install \
 #     --atomic \
