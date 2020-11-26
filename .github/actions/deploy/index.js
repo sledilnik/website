@@ -1,6 +1,6 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
-const { execFileSync } = require('child_process')
+const { execSync } = require('child_process')
 
 const ghToken = process.env['INPUT_TOKEN']
 
@@ -19,7 +19,7 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    let x = execFileSync("/usr/bin/helm", ["--list"], {
+    let x = execSync("/usr/bin/helm", ["--list"], {
         'stdio': 'inherit'
     })
     core.info("neki", x)
