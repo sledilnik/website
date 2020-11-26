@@ -8,6 +8,12 @@ const gh = github.getOctokit(ghToken)
 
 function createDeployment() {
     core.info(JSON.stringify(context.payload, null, 1))
+    gh.repos.createDeployment({
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+        ref: context.ref,
+        environment: "testenv",
+    })
 }
 
 function main() {
