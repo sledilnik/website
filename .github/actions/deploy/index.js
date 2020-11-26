@@ -20,14 +20,13 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    console.log(`helm deploying`, helmBin)
     try {
         let x = execSync(helmBin, ["list"], {
             'stdio': 'inherit'
         })
         core.info("neki", x)
     } catch(ex) {
-        core.error(ex)
+        core.error(`Error running helm ${ex}`)
     }
     
     
