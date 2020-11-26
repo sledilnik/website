@@ -6,7 +6,7 @@ const ghToken = process.env['ACTIONS_RUNTIME_TOKEN']
 console.log("ghToken", ghToken)
 
 const context = github.context;
-const gh = github.getOctokit(ghToken)
+// const gh = github.getOctokit(ghToken)
 
 function createDeployment() {
     console.log(JSON.stringify(context.payload, null, 1))
