@@ -43,7 +43,7 @@ function main() {
         var args = process.argv.slice(2);
         switch (args[0]) {
             case 'deploy':
-                createDeployment()
+                deploy()
                 break;
             case 'undeploy':
                 undeploy()
