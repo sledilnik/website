@@ -20,6 +20,7 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
+    console.log(`helm deploying`, helmBin)
     let x = execSync(helmBin, ["list"], {
         'stdio': 'inherit'
     })
