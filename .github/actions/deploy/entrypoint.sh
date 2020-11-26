@@ -1,7 +1,7 @@
 #!/bin/sh -l
 
 set -e
-set -v # print commands, do not expand variables
+#set -v # print commands, do not expand variables
 #set -x # print commands, expand vars
 
 env
