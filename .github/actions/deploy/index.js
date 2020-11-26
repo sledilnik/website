@@ -1,9 +1,10 @@
-const github = require('@actions/github');
-const core = require('@actions/core');
+const github = require('@actions/github')
+const core = require('@actions/core')
 
+const ghToken = process.env['INPUT_TOKEN']
 
 const context = github.context;
-const gh = github.getOctokit(process.env['GH_TOKEN'])
+const gh = github.getOctokit(ghToken)
 
 function createDeployment() {
     console.log(JSON.stringify(context.payload, null, 1))
