@@ -25,7 +25,7 @@ async function abort(reason) {
             repo: context.payload.repository.name,
             run_id: context.runId
         }
-        core.info(`Aborting current workflow: ${reason}`)
+        core.warning(`Aborting current workflow: ${reason}`)
         await gh.actions.cancelWorkflowRun(params)
     } catch (ex) {
         debug()
