@@ -18,6 +18,14 @@ async function createDeployment() {
     })
 }
 
+async function setDeploymentState(id, state) {
+    core.info(`Setting deployment state ${id} ${state}`)
+    return await gh.repos.setDeploymentState({
+        id,
+        state
+    })
+}
+
 async function helmDeploy(releaseName, chartName) {
     try {
         execFileSync("helm", ['upgrade', releaseName, chartName, '--install', '--atomic'], {'stdio': [0, 1, 2]})
@@ -38,11 +46,15 @@ async function helmUndeploy(releaseName) {
 
 async function deploy() {
     core.info("Starting deploy")
-    const deployment = await createDeployment()
-    core.info(JSON.stringify(deployment.data))
-    // set deploy status to pending
-    helmDeploy('testrelase', 'some/chart')
-    // set deploy status to success/fail
+    try {
+        const deployment = await createDeployment()
+        setDeploymentState(deployment.data.id, "pending")
+        helmDeploy('testrelase', 'some/chart')
+        setDeploymentState(deployment.data.id, "success")
+    } catch (ex) {
+        setDeploymentState(deployment.data.id, "failed")
+        core.setFailed(ex)
+    }
 }
 
 async function undeploy() {
