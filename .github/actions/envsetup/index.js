@@ -13,12 +13,13 @@ function debug() {
 
 async function abort() {
     try {
+        debug()
         const params = {
             owner: context.repo.owner.name,
             repo: context.repo.name,
             run_id: process.env.GITHUB_RUN_ID,
         }
-        core.info(`Aborting current workflow: ${params}`)
+        core.info(`Aborting current workflow: ${JSON.stringify(params)}`)
         await gh.actions.cancelWorkflowRun(params)
     } catch (ex) {
         core.setFailed(`Failed to abort workflow: ${ex}`)
