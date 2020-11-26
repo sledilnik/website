@@ -20,7 +20,7 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    let x = execSync(helmBin, ["--list"], {
+    let x = execSync(helmBin, ["list"], {
         'stdio': 'inherit'
     })
     core.info("neki", x)
