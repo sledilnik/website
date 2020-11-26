@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Setup environment
-        uses: .github/actions/envsetup
+        uses: ./.github/actions/envsetup
 
 
       # - name: set up Docker Buildx
