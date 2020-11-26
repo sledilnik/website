@@ -1,5 +1,6 @@
 #!/bin/sh -l
 
+mkdir -p ~/.kube/
 echo "${INPUT_KUBECONFIG}" > ~/.kube/config
 
 helm upgrade ${INPUT_RELEASE_NAME} ./helm-chart \
