@@ -21,15 +21,21 @@ async function createDeployment() {
 
 async function helmDeploy() {
     console.log(`helm deploying`, helmBin)
-    let x = execSync(helmBin, ["list"], {
-        'stdio': 'inherit'
-    })
-    core.info("neki", x)
+    try {
+        let x = execSync(helmBin, ["list"], {
+            'stdio': 'inherit'
+        })
+        core.info("neki", x)
+    } catch(ex) {
+        core.error(ex)
+    }
+    
+    
 }
 
 async function deploy() {
     core.info("Starting deploy")
-    createDeployment()
+    // createDeployment()
     // set deploy status to pending
     helmDeploy()
     // set deploy status to success/fail
