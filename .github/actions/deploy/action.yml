@@ -15,6 +15,9 @@ inputs:
     description: 'Kubernetes namespace to deploy to'
     required: false
     default: 'default'
+ kubeconfig:
+    description: 'Kubeconfig'
+    required: true
 outputs:
   time: # id of output
     description: 'The time we greeted you'
