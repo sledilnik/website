@@ -138,7 +138,9 @@ export default {
             restriction.rule = text;
           } else if (j == 4) {
             // dodatna pravila
-            restriction.extrarule = text;
+            var list = text.replace(/  /g, "\n<br />") + "\n";
+            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
+            restriction.extrarule = links;
           } else if (j == 6) {
             // opombe
             var list = text.replace(/  /g, "\n<br />") + "\n";
