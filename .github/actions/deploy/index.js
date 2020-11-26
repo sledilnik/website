@@ -19,7 +19,9 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    let x = execFileSync("/usr/bin/helm", ["--list"])
+    let x = execFileSync("/usr/bin/helm", ["--list"], {
+        'stdio': 'inherit'
+    })
     core.info("neki", x)
 }
 
@@ -40,16 +42,16 @@ function main() {
     try {
         var args = process.argv.slice(2);
         switch (args[0]) {
-        case 'deploy':
-            createDeployment()
-            break;
-        case 'undeploy':
-            undeploy()
-            break;
-        default:
-            core.setFailed("Unknown action")
+            case 'deploy':
+                createDeployment()
+                break;
+            case 'undeploy':
+                undeploy()
+                break;
+            default:
+                core.setFailed("Unknown action")
         }
-    } catch(ex) {
+    } catch (ex) {
         core.setFailed(ex)
     }
 }
