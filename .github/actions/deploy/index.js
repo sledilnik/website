@@ -2,11 +2,12 @@ const github = require('@actions/github')
 const core = require('@actions/core')
 const { execSync } = require('child_process')
 
+const helmBin = '/usr/bin/helm'
 const ghToken = process.env['INPUT_TOKEN']
-
 const context = github.context;
-// core.info(JSON.stringify(context.payload, null, 1))
 const gh = github.getOctokit(ghToken)
+
+// core.info(JSON.stringify(context.payload, null, 1))
 
 async function createDeployment() {
     core.info("Creating deployment")
@@ -19,7 +20,7 @@ async function createDeployment() {
 }
 
 async function helmDeploy() {
-    let x = execSync("/usr/bin/helm", ["--list"], {
+    let x = execSync(helmBin, ["--list"], {
         'stdio': 'inherit'
     })
     core.info("neki", x)
