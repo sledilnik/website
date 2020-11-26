@@ -18,6 +18,10 @@ inputs:
   kubeconfig:
     description: 'Kubeconfig'
     required: true
+  token:
+    description: 'Github token'
+    required: false
+    default: ${{ github.token }}
 outputs:
   time: # id of output
     description: 'The time we greeted you'
