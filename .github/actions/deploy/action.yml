@@ -5,20 +5,19 @@ inputs:
   releaseName:
     description: 'Helm release name'
     required: true
-    default: 'World'
   chartName:
     description: 'Chart name'
     required: true
   chartVersion:
     description: 'Chart version'
     required: false
+  namespace:
+    description: 'Kubernetes namespace to deploy to'
+    required: false
+    default: 'default'
 outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.releaseName }}
-    - ${{ inputs.chartName }}
-    - ${{ inputs.chartVersion }}
