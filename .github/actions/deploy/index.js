@@ -31,7 +31,6 @@ async function deploy() {
     createDeployment()
     // set deploy status to pending
     helmDeploy()
-
     // set deploy status to success/fail
 }
 
