@@ -23,27 +23,27 @@ function prNumber() {
 }
 
 function pullRequestConfig() {
-    core.info(`PR Labels ${context.payload.pull_request.labels}`)
+    core.info(`PR Labels ${JSON.stringify(context.payload.pull_request.labels)}`)
 
     const shouldDeploy = context.payload.action != 'closed'
 
     return {
         ImageTag: `pr-${prNumber()}`,
-        ShoudlDeploy: ShoudlDeploy
+        DoDeploy: shouldDeploy
     }
 }
 
 function stageConfig() {
     return {
         ImageTag: "latest",
-        ShoudlDeploy: true
+        DoDeploy: true
     }
 }
 
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
-        ShoudlDeploy: true
+        DoDeploy: true
     }
 }
 
@@ -57,7 +57,7 @@ function setup(config) {
 }
 
 function main() {
-    debug()
+    // debug()
     const event = process.env['GITHUB_EVENT_NAME']
     core.info(`Configuring build environment for event ${event}`)
 
