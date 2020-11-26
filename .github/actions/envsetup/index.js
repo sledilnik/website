@@ -76,18 +76,21 @@ function pullRequestConfig() {
 
     return {
         ImageTag: `pr-${prNumber()}`,
+        IngressRule: `Host(\`pr-${prNumber()}.sledilnik.org\`)`
     }
 }
 
 function stageConfig() {
     return {
         ImageTag: "latest",
+        IngressRule: `Host(\`stage.sledilnik.org\`)`
     }
 }
 
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
+        IngressRule: `Host(\`www.sledilnik.org\`) || Host(\`sledilnik.org\`) || Host(\`covid-19.sledilnik.org\`) || Host(\`www.covid-19.sledilnik.org\`)`
     }
 }
 
