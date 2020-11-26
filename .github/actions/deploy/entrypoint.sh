@@ -7,13 +7,10 @@ set -e
 mkdir -p ${HOME}/.kube/
 echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
-create_deployment() {
-    node /index.js createDeployment
-}
+node /index.js createDeployment
 
-create_deployment
 
-helm list --namespace ${INPUT_NAMESPACE}
+# helm list --namespace ${INPUT_NAMESPACE}
 
 # helm upgrade ${INPUT_RELEASE_NAME} ./helm-chart \
 #     --install \
