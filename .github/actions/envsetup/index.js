@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-import { snakeCase, forOwn } from 'lodash';
+import { toUpper, snakeCase, forOwn } from 'lodash';
 
 const context = github.context;
 
@@ -37,17 +37,15 @@ function prodConfig() {
 
 function setup(config) {
     forOwn(config, (value, key) => {
-        const varName = snakeCase(key)
+        const varName = toUpper(snakeCase(key))
         core.info(`Exporting ${varName}=${value}`)
         core.exportVariable(varName, value)
-        core.setOutput(key, value);
+        core.setOutput(key, value)
     });
 }
 
 function main() {
     const event = process.env['GITHUB_EVENT_NAME']
-
-    const config = {}
 
     if (event === 'pull_request') {
         setup(pullRequestConfig())
@@ -59,12 +57,9 @@ function main() {
         } else {
             core.setFailed('Unknown GitHub event. Supported');
         }
-        setup(pushConfig())
     } else {
         core.setFailed('Unknown GitHub event. Supported: push, pull_request');
     }
-
-    setup(config)
 }
 
 main()
