@@ -18,20 +18,24 @@ function prNumber() {
 }
 
 function pullRequestConfig() {
+
     return {
-        ImageTag: `pr-${prNumber()}`
+        ImageTag: `pr-${prNumber()}`,
+        ShoudlDeploy: true
     }
 }
 
 function stageConfig() {
     return {
-        ImageTag: "latest"
+        ImageTag: "latest",
+        ShoudlDeploy: true
     }
 }
 
 function prodConfig() {
     return {
-        ImageTag: `pr-${getTag()}`
+        ImageTag: `pr-${getTag()}`,
+        ShoudlDeploy: true
     }
 }
 
