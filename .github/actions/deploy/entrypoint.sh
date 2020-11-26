@@ -7,7 +7,7 @@ set -e
 mkdir -p ${HOME}/.kube/
 echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
-node /index.js createDeployment
+node /index.js deploy
 
 
 # helm list --namespace ${INPUT_NAMESPACE}
