@@ -6,10 +6,10 @@ const context = github.context;
 
 function getTag() {
     const ref = context.ref
-    if(!ref)
-      throw "GITHUB_REF is not defined"
-    if(!ref.startsWith("refs/tags/"))
-      throw `Not a tag ref (${ref})`
+    if (!ref)
+        throw "GITHUB_REF is not defined"
+    if (!ref.startsWith("refs/tags/"))
+        throw `Not a tag ref (${ref})`
     return ref.replace(/^refs\/tags\//, "")
 }
 
@@ -46,6 +46,7 @@ function setup(config) {
 
 function main() {
     const event = process.env['GITHUB_EVENT_NAME']
+    core.info(`Configuring build environment for event ${event}`)
 
     if (event === 'pull_request') {
         setup(pullRequestConfig())
