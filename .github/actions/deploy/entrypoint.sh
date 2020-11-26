@@ -4,7 +4,7 @@ mkdir -p ${HOME}/.kube/
 echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
 create_deployment() {
-    node dist/index.js createDeployment
+    node index.js createDeployment
 }
 
 create_deployment
