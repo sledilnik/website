@@ -5,6 +5,10 @@ inputs:
     description: 'Github token'
     required: false
     default: ${{ github.token }}
+  prDeployLabel:
+    description: 'Label which PR has to have in order to be build'
+    required: false
+    default: deploy-preview
 runs:
   using: 'node12'
   main: 'dist/index.js'

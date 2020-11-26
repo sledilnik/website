@@ -40,7 +40,10 @@ function hasLabel(label) {
 }
 
 function pullRequestConfig() {
-    const shouldDeploy = context.payload.action != 'closed' && hasLabel('deploy-preview')
+
+    const deployLabel = core.getInput('prDeployLabel')
+
+    const shouldDeploy = context.payload.action != 'closed' && hasLabel(deployLabel)
 
     if (!shouldDeploy) {
         abort()
@@ -48,21 +51,18 @@ function pullRequestConfig() {
 
     return {
         ImageTag: `pr-${prNumber()}`,
-        // DoDeploy: shouldDeploy
     }
 }
 
 function stageConfig() {
     return {
         ImageTag: "latest",
-        // DoDeploy: true
     }
 }
 
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
-        // DoDeploy: true
     }
 }
 
