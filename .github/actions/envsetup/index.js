@@ -18,7 +18,7 @@ function prNumber() {
 }
 
 function pullRequestConfig() {
-
+    core.info(`PR Labels ${context.event.pull_request.labels}`)
     return {
         ImageTag: `pr-${prNumber()}`,
         ShoudlDeploy: true
