@@ -39,7 +39,7 @@ async function helmUndeploy(releaseName) {
 async function deploy() {
     core.info("Starting deploy")
     const deployment = await createDeployment()
-    core.info(JSON.stringify(deployment))
+    core.info(JSON.stringify(deployment.data))
     // set deploy status to pending
     helmDeploy('testrelase', 'some/chart')
     // set deploy status to success/fail
