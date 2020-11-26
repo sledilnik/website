@@ -1,4 +1,4 @@
-#!/bin/sh -l -x
+#!/bin/sh -l
 
 mkdir -p ~/.kube/
 echo "${INPUT_KUBECONFIG}" > ~/.kube/config
