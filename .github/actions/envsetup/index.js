@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-import { toUpper, snakeCase, forOwn } from 'lodash';
+import { toUpper, snakeCase, forOwn, map } from 'lodash';
 
 const context = github.context;
 
@@ -22,10 +22,12 @@ function prNumber() {
     return context.payload.pull_request.number
 }
 
-function pullRequestConfig() {
-    core.info(`PR Labels ${JSON.stringify(context.payload.pull_request.labels)}`)
+function hasLabel(label) {
+    return map(context.payload.pull_request.labels, (label) => label.name).includes(label)
+}
 
-    const shouldDeploy = context.payload.action != 'closed'
+function pullRequestConfig() {
+    const shouldDeploy = context.payload.action != 'closed' && hasLabel('deploy-preview')
 
     return {
         ImageTag: `pr-${prNumber()}`,
