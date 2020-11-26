@@ -11,15 +11,18 @@ function debug() {
     core.info(`Context: ${JSON.stringify(context, null, 1)}`)
 }
 
-function abort() {
-    const owner = context.repo.owner.name
-    const repo = context.repo.name
-    const run_id = process.env.GITHUB_RUN_ID
-    gh.actions.cancelWorkflowRun({
-        owner,
-        repo,
-        run_id,
-    })
+async function abort() {
+    try {
+        const params = {
+            owner: context.repo.owner.name,
+            repo: context.repo.name,
+            run_id: process.env.GITHUB_RUN_ID,
+        }
+        core.info(`Aborting current workflow: ${params}`)
+        await gh.actions.cancelWorkflowRun(params)
+    } catch (ex) {
+        core.setFailed(`Failed to abort workflow: ${ex}`)
+    }
 }
 
 function getTag() {
