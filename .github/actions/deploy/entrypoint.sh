@@ -5,7 +5,7 @@ echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 
 
 create_deployment() {
-    curl --request POST \
+    curl -s -X POST \
         --url https://api.github.com/repos/overlordtm/data-api/deployments \
         --header "Authorization: Bearer ${INPUT_TOKEN}" \
         --header 'Content-Type: application/json' \
@@ -19,7 +19,7 @@ create_deployment() {
         }'
 }
 
-create_deployment 
+create_deployment
 
 helm list --namespace ${INPUT_NAMESPACE}
 

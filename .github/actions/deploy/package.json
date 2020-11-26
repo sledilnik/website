@@ -1,0 +1,17 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "webpack": "^5.6.0"
+  }
+}
