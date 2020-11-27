@@ -66,7 +66,12 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
        yAxis = {| title = {| text = null |} |}
        xAxis = {| labels = {| formatter = fun x -> Utils.monthNameOfIndex x?value |} |> pojo |}
        series = series
-       credits = Highcharts.credictsOptions
+       credits = {| enabled = true
+                    text = sprintf "%s: %s, %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+                        (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+                    href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |} |> pojo
     |} |> pojo
 
 let renderChart (data : MonthlyDeathsData) (state : State) dispatch =
