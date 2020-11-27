@@ -11,6 +11,9 @@ inputs:
   releaseName:
     description: 'Helm release name'
     required: true
+  chartValues:
+    description: 'Values file for chart'
+    required: true
   namespace:
     description: 'Kubernetes namespace to deploy to'
     required: true

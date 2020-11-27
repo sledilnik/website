@@ -58,6 +58,7 @@ async function deploy() {
     const releaseName = process.env['INPUT_RELEASENAME']
     const chartName = process.env['INPUT_CHARTNAME']
     const chartVersion = process.env['INPUT_CHARTVERSION']
+    const chartValues = process.env['INPUT_CHARTVALUES']
 
     let deployment = undefined;
     try {
@@ -76,7 +77,7 @@ async function deploy() {
 
     try {
         setDeploymentState(deployment.data.id, "pending")
-        helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion])
+        helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         setDeploymentState(deployment.data.id, "failed")
