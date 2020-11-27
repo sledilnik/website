@@ -9,7 +9,13 @@ const gh = github.getOctokit(ghToken)
 // core.info(JSON.stringify(context.payload, null, 1))
 
 async function createDeployment() {
-    core.info("Creating deployment")
+    const payload = {
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
+        ref: context.ref,
+        environment: "testenv",
+    }
+    core.info(`Creating deployment: ${JSON.stringify(payload)}`)
     return await gh.repos.createDeployment({
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
@@ -18,12 +24,21 @@ async function createDeployment() {
     })
 }
 
+async function deleteDeployment(id) {
+    const payload = {
+        id
+    }
+    core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
+    return await gh.repos.deleteDeployment(payload)
+}
+
 async function setDeploymentState(id, state) {
-    core.info(`Setting deployment state ${id} ${state}`)
-    return await gh.repos.setDeploymentState({
+    const payload = {
         id,
         state
-    })
+    }
+    core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
+    return await gh.repos.setDeploymentState(payload)
 }
 
 async function helmDeploy(releaseName, chartName) {
@@ -46,10 +61,23 @@ async function helmUndeploy(releaseName) {
 
 async function deploy() {
     core.info("Starting deploy")
+
+    const namespace = process.env['INPUT_NAMESPACE']
+    const releaseName = process.env['INPUT_RELEASENAME']
+    const chartName = process.env['INPUT_CHARTNAME']
+    const chartVersion = process.env['INPUT_CHARTVERSION']
+
+    let deployment = undefined;
     try {
-        const deployment = await createDeployment()
+        deployment = await createDeployment()
+    } catch {
+        core.error("Failed to create deployment")
+        core.setFailed(ex)
+    }
+
+    try {
         setDeploymentState(deployment.data.id, "pending")
-        helmDeploy('testrelase', 'some/chart')
+        helmDeploy(namespace, releaseName, chartName, chartVersion)
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         setDeploymentState(deployment.data.id, "failed")
