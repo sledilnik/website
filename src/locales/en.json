@@ -197,6 +197,8 @@
             "dataSource": "data source",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data & NIJZ",
             "dsOWD_MZ": "Our World in Data & Min. Health",

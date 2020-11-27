@@ -18,7 +18,7 @@ type Msg =
     | MonthlyDeathsDataReceived of Result<MonthlyDeathsData, string>
 
 let colors = {|
-    CurrentYear = "#ff3030"
+    CurrentYear = "#a483c7"
     BaselineYear = "#e0e0e0"
 |}
 
@@ -69,9 +69,9 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
        credits = {| enabled = true
                     text = sprintf "%s: %s, %s"
                         (I18N.t "charts.common.dataSource")
-                        (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
-                        (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-                    href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |} |> pojo
+                        (I18N.tOptions ("charts.common.dsSURS") {| context = localStorage.getItem ("contextCountry") |})
+                        (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
+                    href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
     |} |> pojo
 
 let renderChart (data : MonthlyDeathsData) (state : State) dispatch =

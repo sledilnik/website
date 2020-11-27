@@ -667,6 +667,8 @@
             "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
             "dsOWD_MZ": "Our World in Data, Min. za zdravje",
