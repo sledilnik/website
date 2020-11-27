@@ -63,8 +63,8 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
 
     {| title = None
        legend = {| enabled = false |}
-       yAxis = {| title = {| text = null |} |}
        xAxis = {| labels = {| formatter = fun x -> Utils.monthNameOfIndex x?value |} |> pojo |}
+       yAxis = {| min =0 ; title = {| text = null |} |}
        series = series
        credits = {| enabled = true
                     text = sprintf "%s: %s, %s"
