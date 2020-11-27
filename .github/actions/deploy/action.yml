@@ -5,6 +5,9 @@ inputs:
   chartName:
     description: 'Chart name'
     required: true
+  chartVersion:
+    description: 'Chart version'
+    required: true
   releaseName:
     description: 'Helm release name'
     # default: ${{ env.RELEASE_NAME }}
