@@ -44,5 +44,9 @@ jobs:
         uses: ./.github/actions/deploy
         with:
           releaseName: ${{ steps.envsetup.outputs.ReleaseName }}
-          chartName: website
-          kubeconfig: '${{ secrets.KUBECONFIG }}'          
+          namespace: ${{ steps.envsetup.outputs.DeployNamespace }}
+          chartName: sledilnik/website
+          helmRepoName: sledilnik
+          helmRepoUrl: https://helm-repo.sledilnik.org
+          kubeconfig: '${{ secrets.KUBECONFIG }}'        
+          deployEnv: ${{ steps.envsetup.outputs.DeployEnv }}  

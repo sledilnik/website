@@ -7,22 +7,20 @@ inputs:
     required: true
   releaseName:
     description: 'Helm release name'
-    default: ${{ env.RELEASE_NAME }}
+    # default: ${{ env.RELEASE_NAME }}
   namespace:
     description: 'Kubernetes namespace to deploy to'
-    default: ${{ env.DEPLOY_NAMESPACE }}
+    # default: ${{ env.DEPLOY_NAMESPACE }}
   helmRepoName:
     description: 'Helm repo name'
-    default: 'sledilnik' 
   helmRepoUrl:
     description: 'Helm repository URL'
-    default: 'https://helm-repo.sledilnik.org' 
   kubeconfig:
     description: 'Kubeconfig'
     required: true
   deployEnv:
     description: 'Deploy environment (for GH deployments)'
-    default: ${{ env.DEPLOY_ENV }}
+    # default: ${{ env.DEPLOY_ENV }}
   token:
     description: 'Github token'
     required: false
