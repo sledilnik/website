@@ -38,6 +38,18 @@ let update state msg =
 
 let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
 
+    let tooltipFormatter jsThis =
+        let pts: obj [] = jsThis?points
+        let fmtDate = pts.[0]?point?name
+
+        sprintf "<b>%s</b><br>" fmtDate
+        + (pts 
+           |> Seq.rev
+           |> Seq.take 20
+           |> Seq.map (fun p ->
+              sprintf """<span style="color:%s">●</span> %s: <b>%s</b>""" p?series?color p?series?name p?point?y)
+           |> String.concat "<br>")
+
     let series =
         data
         |> List.groupBy (fun dp -> dp.year)
@@ -66,6 +78,7 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
        xAxis = {| labels = {| formatter = fun x -> Utils.monthNameOfIndex x?value |} |> pojo |}
        yAxis = {| min =0 ; title = {| text = null |} |}
        series = series
+       tooltip = pojo {| shared = true; useHTML = true; formatter = fun () -> tooltipFormatter jsThis |}
        credits = {| enabled = true
                     text = sprintf "%s: %s, %s"
                         (I18N.t "charts.common.dataSource")
