@@ -78,6 +78,7 @@ function pullRequestConfig() {
         ImageTag: `pr-${prNumber()}`,
         ReleaseName: `website-pr-${prNumber()}`,
         DeployEnv: `pr-${prNumber()}`,
+        ChartValuesFile: '.helm/values.pr.yml',
         DeployNamespace: 'sledilnik-pr',
         IngressRule: `Host(\`pr-${prNumber()}.sledilnik.org\`)`
     }
@@ -88,6 +89,7 @@ function stageConfig() {
         ImageTag: 'latest',
         ReleaseName: 'website-stage',
         DeployEnv: 'stagging',
+        ChartValuesFile: '.helm/values.stage.yml',
         DeployNamespace: 'sledilnik-stage',
         IngressRule: `Host(\`stage.sledilnik.org\`)`
     }
@@ -98,6 +100,7 @@ function prodConfig() {
         ImageTag: `pr-${getTag()}`,
         ReleaseName: 'website-prod',
         DeployEnv: 'production',
+        ChartValuesFile: '.helm/values.prod.yml',
         DeployNamespace: 'sledilnik-prod',
         IngressRule: `Host(\`www.sledilnik.org\`) || Host(\`sledilnik.org\`) || Host(\`covid-19.sledilnik.org\`) || Host(\`www.covid-19.sledilnik.org\`)`
     }

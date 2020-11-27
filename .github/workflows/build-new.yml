@@ -47,6 +47,7 @@ jobs:
           namespace: ${{ steps.envsetup.outputs.DeployNamespace }}
           chartName: sledilnik/website
           chartVersion: '1.0.0'
+          chartValues: ${{ steps.envsetup.outputs.ChartValuesFile }}
           helmRepoName: sledilnik
           helmRepoUrl: https://helm-repo.sledilnik.org
           kubeconfig: '${{ secrets.KUBECONFIG }}'        
