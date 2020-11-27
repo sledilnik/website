@@ -2,19 +2,15 @@
 name: 'Deploy'
 description: 'Helm deploy action'
 inputs:
-  releaseName:
-    description: 'Helm release name'
-    required: true
   chartName:
     description: 'Chart name'
     required: true
-  chartVersion:
-    description: 'Chart version'
-    required: false
+  releaseName:
+    description: 'Helm release name'
+    default: ${{ env.RELEASE_NAME }}
   namespace:
     description: 'Kubernetes namespace to deploy to'
-    required: false
-    default: 'default'
+    default: ${{ env.DEPLOY_NAMESPACE }}
   helmRepoName:
     description: 'Helm repo name'
     default: 'sledilnik' 
@@ -24,6 +20,9 @@ inputs:
   kubeconfig:
     description: 'Kubeconfig'
     required: true
+  deployEnv:
+    description: 'Deploy environment (for GH deployments)'
+    default: ${{ env.DEPLOY_ENV }}
   token:
     description: 'Github token'
     required: false

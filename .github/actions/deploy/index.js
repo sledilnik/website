@@ -14,7 +14,7 @@ async function createDeployment() {
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
         ref: context.ref,
-        environment: "testenv",
+        environment: process.env['INPUT_DEPLOYENV'],
     }
     core.info(`Creating deployment: ${JSON.stringify(payload)}`)
     return await gh.repos.createDeployment({
