@@ -43,7 +43,9 @@ async function setDeploymentState(id, state) {
 
 async function helmDeploy(releaseName, chartName) {
     try {
-        execFileSync("helm", ['upgrade', releaseName, chartName, '--install', '--atomic'], {'stdio': [0, 1, 2]})
+        const args = ['upgrade', releaseName, chartName, '--install', '--atomic']
+        core.info(`running: helm ${args.join(' ')}`)
+        execFileSync("helm", args, {'stdio': [0, 1, 2]})
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
         core.setFailed(ex)
