@@ -51,7 +51,8 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
                 |> List.toArray
             {| name = year
                data = seriesData
-               color = if year = 2020 then colors.CurrentYear else colors.BaselineYear
+               color = if year = System.DateTime.Now.Year then colors.CurrentYear else colors.BaselineYear
+               lineWidth = 1.7
                marker =
                 {| enabled = true
                    symbol = "circle"
