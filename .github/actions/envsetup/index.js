@@ -96,9 +96,9 @@ function stageConfig() {
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
+        ReleaseName: 'website-prod',
         DeployEnv: 'production',
         DeployNamespace: 'sledilnik-prod',
-        ReleaseName: 'website-prod',
         IngressRule: `Host(\`www.sledilnik.org\`) || Host(\`sledilnik.org\`) || Host(\`covid-19.sledilnik.org\`) || Host(\`www.covid-19.sledilnik.org\`)`
     }
 }

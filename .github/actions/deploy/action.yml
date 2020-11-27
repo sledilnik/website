@@ -10,20 +10,22 @@ inputs:
     required: true
   releaseName:
     description: 'Helm release name'
-    # default: ${{ env.RELEASE_NAME }}
+    required: true
   namespace:
     description: 'Kubernetes namespace to deploy to'
-    # default: ${{ env.DEPLOY_NAMESPACE }}
+    required: true
   helmRepoName:
     description: 'Helm repo name'
+    required: true
   helmRepoUrl:
     description: 'Helm repository URL'
+    required: true
   kubeconfig:
     description: 'Kubeconfig'
     required: true
   deployEnv:
     description: 'Deploy environment (for GH deployments)'
-    # default: ${{ env.DEPLOY_ENV }}
+    required: true
   token:
     description: 'Github token'
     required: false
