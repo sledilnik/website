@@ -103,6 +103,10 @@ export default {
       titleMenu: 'charts.deceased.titleMenu',
       icon: 'column',
     },
+    'monthly-deaths-chart': {
+      titleMenu: 'charts.monthlyDeaths.titleMenu',
+      icon: 'graph',
+    },
     'youtube': {
       titleKey: 'youtube.titleMenu',
       icon: 'map',

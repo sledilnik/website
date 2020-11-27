@@ -566,6 +566,10 @@
                 "yAxisLabel": "Incidence difference"
             }
         },
+        "monthlyDeaths": {
+            "title": "Yearly deaths comparison",
+            "titleMenu": "Yearly deaths"
+        },
         "hospitals": {
             "bedsShort": "Beds",
             "beds": "Hospital beds",

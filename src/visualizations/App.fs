@@ -42,6 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
+            | "MonthlyDeaths" -> Some MonthlyDeaths
             | _ -> None
             |> Embedded
 
@@ -489,15 +490,29 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
+    let monthlyDeaths =
+          { VisualizationType = MonthlyDeaths
+            ClassName = "monthly-deaths-chart"
+            ChartTextsGroup = "monthlyDeaths"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> MonthlyDeathsChart.chart {| statsData = data |} }
+
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison
-          patients; patientsCare; deceased 
+          patients; patientsCare; deceased
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
           hCenters; infections
+          monthlyDeaths
         ]
 
     let worldVisualizations =
@@ -520,6 +535,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesNewDeathsPer1M
           countriesTotalDeathsPer1M
           phaseDiagram
+          monthlyDeaths
         ]
 
     let embedded, visualizations =

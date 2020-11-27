@@ -13,6 +13,9 @@ let chart: obj -> ReactElement = jsNative
 [<Import("renderChartFromWindow", from="./_highcharts")>]
 let chartFromWindow: obj -> ReactElement = jsNative
 
+[<Import("renderPlainChart", from="./_highcharts")>]
+let plainChart: obj -> ReactElement = jsNative
+
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
@@ -34,7 +37,9 @@ module Helpers =
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
     let jsNoon : JsTimestamp = 43200000.0
+
     let jsTime12h = jsTime >> ( + ) jsNoon
+
     [<Emit("(new Date($0.getFullYear(), $0.getMonth(), $0.getDate())).getTime()")>]
     let jsTimeMidnight (x: DateTime): JsTimestamp = jsNative
 

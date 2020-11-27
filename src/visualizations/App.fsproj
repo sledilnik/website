@@ -20,6 +20,7 @@
         <Compile Include="data/HCenters.fs" />
         <Compile Include="data/Hospitals.fs" />
         <Compile Include="data/OurWorldInData.fs" />
+        <Compile Include="data/MonthlyDeaths.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="DailyComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
@@ -49,6 +50,7 @@
         <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
+        <Compile Include="MonthlyDeathsChart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
