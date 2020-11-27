@@ -96,6 +96,7 @@ Project collaborators:
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling
 -   [Joh Dokler](https://github.com/joahim) - visualisations, web page
+-   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
