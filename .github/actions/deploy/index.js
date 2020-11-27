@@ -47,7 +47,6 @@ async function helm(args) {
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, { 'stdio': [0, 1, 2] })
     } catch (ex) {
-        core.error(`Error running helm ${ex}`)
         core.setFailed(ex)
     }
 }
@@ -64,8 +63,7 @@ async function deploy() {
     try {
         deployment = await createDeployment()
     } catch {
-        core.error("Failed to create deployment")
-        core.setFailed(ex)
+        core.setFailed(`Failed to create deployment: ${ex}`)
     }
 
     const opts = {
