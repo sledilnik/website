@@ -1,6 +1,7 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
-const { execSync, spawnSync, execFileSync, execFile } = require('child_process')
+const { execSync, spawnSync, execFileSync, execFile } = require('child_process');
+const { version } = require('os');
 
 const ghToken = process.env['INPUT_TOKEN']
 const context = github.context;
@@ -38,12 +39,12 @@ async function setDeploymentState(id, state) {
         state
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
-    return await gh.repos.setDeploymentState(payload)
+    return await gh.repos.createDeploymentStatus(payload)
 }
 
-async function helmDeploy(namespace, releaseName, chartName) {
+async function helmDeploy(namespace, releaseName, chartName, chartVersion) {
     try {
-        const args = ['upgrade', releaseName, chartName, `--namespace ${namespace}`, '--install', '--atomic']
+        const args = ['upgrade', releaseName, chartName, '--install', '--atomic', `--namespace ${namespace}`, `--version ${chartVersion}`]
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, {'stdio': [0, 1, 2]})
     } catch (ex) {
