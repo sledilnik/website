@@ -76,7 +76,7 @@ function pullRequestConfig() {
 
     return {
         ImageTag: `pr-${prNumber()}`,
-        ReleaseName: `website-pr-${prnumber()}`,
+        ReleaseName: `website-pr-${prNumber()}`,
         DeployEnv: `pr-${prNumber()}`,
         DeployNamespace: 'sledilnik-pr',
         IngressRule: `Host(\`pr-${prNumber()}.sledilnik.org\`)`
