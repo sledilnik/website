@@ -45,7 +45,7 @@ async function setDeploymentState(id, state) {
 async function helm(args) {
     try {
         core.info(`running: helm ${args.join(' ')}`)
-        execFileSync("helm", args, { 'stdio': [0, 1, 2] })
+        execFileSync("helm", args, { 'stdio': [0, 1, 1] })
     } catch (ex) {
         core.setFailed(ex)
     }
