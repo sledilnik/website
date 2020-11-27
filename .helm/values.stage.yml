@@ -1,0 +1,3 @@
+---
+ingressroute:
+  rule: Host(`stage.sledilnik.org`)

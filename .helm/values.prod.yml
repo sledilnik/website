@@ -1,0 +1,3 @@
+---
+ingressroute:
+  rule: Host(`sledilnik.org`) || Host(`www.sledilnik.org`) || Host(`covid-19.sledilnik.org`) || Host(`www.covid-19.sledilnik.org`)
