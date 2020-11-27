@@ -15,7 +15,10 @@ inputs:
     description: 'Kubernetes namespace to deploy to'
     required: false
     default: 'default'
-  helmRepo:
+  helmRepoName:
+    description: 'Helm repo name'
+    default: 'sledilnik' 
+  helmRepoUrl:
     description: 'Helm repository URL'
     default: 'https://helm-repo.sledilnik.org' 
   kubeconfig:
