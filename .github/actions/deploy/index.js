@@ -42,20 +42,10 @@ async function setDeploymentState(id, state) {
     return await gh.repos.createDeploymentStatus(payload)
 }
 
-async function helmDeploy(namespace, releaseName, chartName, chartVersion) {
+async function helm(args) {
     try {
-        const args = ['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion]
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, { 'stdio': [0, 1, 2] })
-    } catch (ex) {
-        core.error(`Error running helm ${ex}`)
-        core.setFailed(ex)
-    }
-}
-
-async function helmUndeploy(releaseName) {
-    try {
-        execFileSync("helm", ['uninstall', releaseName], { 'stdio': [0, 1, 2] })
     } catch (ex) {
         core.error(`Error running helm ${ex}`)
         core.setFailed(ex)
@@ -78,8 +68,17 @@ async function deploy() {
         core.setFailed(ex)
     }
 
+    const opts = {
+        namespace,
+        releaseName,
+        chartName,
+        chartVersion
+    }
+    core.info(`Helm deploy opts ${opts}`)
+
     try {
         setDeploymentState(deployment.data.id, "pending")
+        helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion])
         helmDeploy(namespace, releaseName, chartName, chartVersion)
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
