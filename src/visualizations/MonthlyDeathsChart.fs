@@ -45,7 +45,7 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
         sprintf "<b>%s</b><br>" fmtDate
         + (pts 
            |> Seq.rev
-           |> Seq.take 20
+           |> Seq.take 10
            |> Seq.map (fun p ->
               sprintf """<span style="color:%s">●</span> %s: <b>%s</b>""" p?series?color p?series?name p?point?y)
            |> String.concat "<br>")
