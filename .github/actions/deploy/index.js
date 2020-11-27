@@ -41,9 +41,9 @@ async function setDeploymentState(id, state) {
     return await gh.repos.setDeploymentState(payload)
 }
 
-async function helmDeploy(releaseName, chartName) {
+async function helmDeploy(namespace, releaseName, chartName) {
     try {
-        const args = ['upgrade', releaseName, chartName, '--install', '--atomic']
+        const args = ['upgrade', releaseName, chartName, `--namespace ${namespace}`, '--install', '--atomic']
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, {'stdio': [0, 1, 2]})
     } catch (ex) {
