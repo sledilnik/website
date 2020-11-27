@@ -79,7 +79,6 @@ async function deploy() {
     try {
         setDeploymentState(deployment.data.id, "pending")
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion])
-        helmDeploy(namespace, releaseName, chartName, chartVersion)
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         setDeploymentState(deployment.data.id, "failed")
