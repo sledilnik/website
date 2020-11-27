@@ -78,7 +78,7 @@ let renderChart (data : MonthlyDeathsData) (state : State) dispatch =
     Html.div [ prop.style [ style.height 450 ]
                prop.className "highcharts-wrapper"
                prop.children [
-                   renderChartOptions data state dispatch |> plainChart ] ]
+                   renderChartOptions data state dispatch |> Highcharts.chart ] ]
 
 let chart = React.functionComponent("MonthlyDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
     let (state, dispatch) = React.useReducer(update, init props.statsData)

@@ -120,20 +120,6 @@ function renderChartFromWindow(options) {
   )
 }
 
-function renderPlainChart(options) {
-  options = wrapLabelFormatterWithThis(options);
-  return React.createElement(
-    HighchartsReact,
-    {
-      highcharts: Highcharts,
-      constructorType: 'chart',
-      containerProps: { style: { height: '100%' }},
-      options: { ...options },
-    },
-    null
-  )
-}
-
 function renderMap(options) {
     options = wrapLabelFormatterWithThis(options);
     return React.createElement(HighchartsReact, {
@@ -153,7 +139,6 @@ export {
     loadScript,
     renderChart,
     renderChartFromWindow,
-    renderPlainChart,
     renderMap,
     sparklineChart,
     Highcharts

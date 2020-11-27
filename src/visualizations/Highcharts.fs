@@ -13,9 +13,6 @@ let chart: obj -> ReactElement = jsNative
 [<Import("renderChartFromWindow", from="./_highcharts")>]
 let chartFromWindow: obj -> ReactElement = jsNative
 
-[<Import("renderPlainChart", from="./_highcharts")>]
-let plainChart: obj -> ReactElement = jsNative
-
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
