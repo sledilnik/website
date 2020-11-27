@@ -74,7 +74,7 @@ async function deploy() {
         chartName,
         chartVersion
     }
-    core.info(`Helm deploy opts ${opts}`)
+    core.info(`Helm deploy opts ${JSON.stringify(opts)}`)
 
     try {
         setDeploymentState(deployment.data.id, "pending")
