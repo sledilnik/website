@@ -8,7 +8,7 @@ mkdir -p ${HOME}/.kube/
 echo "${INPUT_KUBECONFIG}" > ${HOME}/.kube/config
 chmod 400 ${HOME}/.kube/config
 
-helm repo add ${INPUT_HELMREPONAME} ${INPUT_HELMREPO}
+helm repo add ${INPUT_HELMREPONAME} ${INPUT_HELMREPOURL}
 helm repo update
 
 exec node /index.js deploy
