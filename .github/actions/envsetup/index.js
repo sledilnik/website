@@ -76,13 +76,15 @@ function pullRequestConfig() {
 
     return {
         ImageTag: `pr-${prNumber()}`,
+        DeployEnv: 'sledilnik-prod',
         IngressRule: `Host(\`pr-${prNumber()}.sledilnik.org\`)`
     }
 }
 
 function stageConfig() {
     return {
-        ImageTag: "latest",
+        ImageTag: 'latest',
+        DeployEnv: 'sledilnik-stage',
         IngressRule: `Host(\`stage.sledilnik.org\`)`
     }
 }
@@ -90,6 +92,7 @@ function stageConfig() {
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
+        DeployEnv: 'sledilnik-prod',
         IngressRule: `Host(\`www.sledilnik.org\`) || Host(\`sledilnik.org\`) || Host(\`covid-19.sledilnik.org\`) || Host(\`www.covid-19.sledilnik.org\`)`
     }
 }

@@ -44,7 +44,7 @@ async function setDeploymentState(id, state) {
 
 async function helmDeploy(namespace, releaseName, chartName, chartVersion) {
     try {
-        const args = ['upgrade', releaseName, chartName, '--install', '--atomic', `--namespace ${namespace}`, `--version ${chartVersion}`]
+        const args = ['upgrade', releaseName, chartName, '--install', '--atomic', `--namespace`, namespace, `--version`, chartVersion]
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, {'stdio': [0, 1, 2]})
     } catch (ex) {
