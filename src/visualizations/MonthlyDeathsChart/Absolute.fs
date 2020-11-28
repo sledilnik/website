@@ -1,40 +1,12 @@
-module MonthlyDeathsChart
+module MonthlyDeathsChart.Absolute
 
 open Feliz
 open Browser
 open Fable.Core.JsInterop
 
-open Types
 open Highcharts
 
-type MonthlyDeathsData = Data.MonthlyDeaths.DataPoint list
-
-type State = {
-    StatsData : StatsData
-    MonthlyDeathsData : RemoteData<MonthlyDeathsData, string>
-}
-
-type Msg =
-    | MonthlyDeathsDataReceived of Result<MonthlyDeathsData, string>
-
-let colors = {|
-    CurrentYear = "#a483c7"
-    BaselineYear = "#d5d5d5"
-|}
-
-let init statsData =
-    { StatsData = statsData
-      MonthlyDeathsData = Loading
-    }
-
-let update state msg =
-    match msg with
-    | MonthlyDeathsDataReceived data ->
-        match data with
-        | Error err ->
-            { state with MonthlyDeathsData = Failure err }
-        | Ok data ->
-            { state with MonthlyDeathsData = Success data }
+open Types
 
 let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
 
@@ -75,23 +47,3 @@ let renderChart (data : MonthlyDeathsData) (state : State) dispatch =
                prop.className "highcharts-wrapper"
                prop.children [
                    renderChartOptions data state dispatch |> Highcharts.chart ] ]
-
-let chart = React.functionComponent("MonthlyDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
-    let (state, dispatch) = React.useReducer(update, init props.statsData)
-
-    let loadData () = async {
-        let! data = Data.MonthlyDeaths.loadData ()
-        dispatch (MonthlyDeathsDataReceived data)
-    }
-
-    React.useEffect(loadData >> Async.StartImmediate, [| |])
-
-    match state.MonthlyDeathsData with
-    | NotAsked
-    | Loading -> React.fragment [ ]
-    | Failure error -> Html.div [ Html.text error ]
-    | Success data ->
-        Html.div [
-            renderChart data state dispatch
-        ]
-)

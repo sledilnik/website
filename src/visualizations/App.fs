@@ -501,7 +501,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> MonthlyDeathsChart.chart {| statsData = data |} }
+                    | Success data -> MonthlyDeathsChart.Chart.chart {| statsData = data |} }
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison
