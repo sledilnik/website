@@ -24,18 +24,18 @@ async function createDeployment() {
     })
 }
 
-async function deleteDeployment(id) {
+async function deleteDeployment(deployment_id) {
     const payload = {
-        id
+        deployment_id
     }
     core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
     setDeploymentState(deployment.data.id, "pending")
     return await gh.repos.deleteDeployment(payload)
 }
 
-async function setDeploymentState(id, state) {
+async function setDeploymentState(deployment_id, state) {
     const payload = {
-        id,
+        deployment_id,
         state
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
