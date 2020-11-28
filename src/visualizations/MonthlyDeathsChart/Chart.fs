@@ -11,8 +11,7 @@ open Highcharts
 let init statsData =
     { StatsData = statsData
       MonthlyDeathsData = Loading
-    //   DisplayType = AbsoluteDeaths
-      DisplayType = ExcessDeaths
+      DisplayType = AbsoluteDeaths
     }
 
 let update state msg =
