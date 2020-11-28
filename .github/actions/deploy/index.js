@@ -45,7 +45,7 @@ async function setDeploymentState(id, state) {
 async function helm(args) {
     try {
         core.info(`running: helm ${args.join(' ')}`)
-        execFileSync("helm", args, { 'stdio': [0, 1, 1] , env: process.env})
+        execFileSync("helm", args, { 'stdio': [0, 1, 1], env: process.env })
     } catch (ex) {
         core.setFailed(ex)
     }
@@ -91,16 +91,18 @@ async function undeploy() {
 
 function main() {
     try {
-        var args = process.argv.slice(2);
-        switch (args[0]) {
-            case 'deploy':
-                deploy()
-                break;
-            case 'undeploy':
-                undeploy()
-                break;
-            default:
-                core.setFailed("Unknown action")
+        const event = process.env['GITHUB_EVENT_NAME']
+        if (event === 'pull_request') {
+            switch (event) {
+                case 'pull_request':
+                    deploy()
+                    break;
+                case 'push':
+                    deploy()
+                    break;
+                default:
+                    core.setFailed("Unknown action")
+            }
         }
     } catch (ex) {
         core.setFailed(ex)

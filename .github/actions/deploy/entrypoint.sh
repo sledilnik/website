@@ -11,4 +11,4 @@ chmod 400 ${HOME}/.kube/config
 helm repo add ${INPUT_HELMREPONAME} ${INPUT_HELMREPOURL}
 helm repo update
 
-exec node /index.js deploy
+exec node /index.js

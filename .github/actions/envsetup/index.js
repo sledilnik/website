@@ -70,11 +70,14 @@ function pullRequestConfig() {
 
     const deployLabel = core.getInput('prDeployLabel')
 
-    if (!hasLabel(deployLabel)) {
-        abort(`PR does not have label '${deployLabel}'`)
-    }
+    // if (!hasLabel(deployLabel)) {
+    //     abort(`PR does not have label '${deployLabel}'`)
+    // }
+
+    const build = context.action != 'closed' && hasLabel(deployLabel)
 
     return {
+        Build: build,
         ImageTag: `pr-${prNumber()}`,
         ReleaseName: `website-pr-${prNumber()}`,
         DeployEnv: `pr-${prNumber()}`,
@@ -87,6 +90,7 @@ function pullRequestConfig() {
 function stageConfig() {
     return {
         ImageTag: 'latest',
+        Build: true,
         ReleaseName: 'website-stage',
         DeployEnv: 'stagging',
         ChartValuesFile: '.helm/values.stage.yml',
@@ -98,6 +102,7 @@ function stageConfig() {
 function prodConfig() {
     return {
         ImageTag: `pr-${getTag()}`,
+        Build: true,
         ReleaseName: 'website-prod',
         DeployEnv: 'production',
         ChartValuesFile: '.helm/values.prod.yml',
