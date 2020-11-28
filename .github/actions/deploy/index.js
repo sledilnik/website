@@ -16,12 +16,16 @@ async function createDeployment() {
         environment: process.env['INPUT_DEPLOYENV'],
     }
     core.info(`Creating deployment: ${JSON.stringify(payload)}`)
-    return await gh.repos.createDeployment({
-        owner: context.payload.repository.owner.login,
-        repo: context.payload.repository.name,
-        ref: context.ref,
-        environment: "testenv",
-    })
+    try {
+        return await gh.repos.createDeployment({
+            owner: context.payload.repository.owner.login,
+            repo: context.payload.repository.name,
+            ref: context.ref,
+            environment: "testenv",
+        })
+    } catch (ex) {
+        return new Error(ex)
+    }
 }
 
 async function deleteDeployment(deployment_id) {
@@ -30,7 +34,11 @@ async function deleteDeployment(deployment_id) {
     }
     core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
     setDeploymentState(deployment.data.id, "pending")
-    return await gh.repos.deleteDeployment(payload)
+    try {
+        return await gh.repos.deleteDeployment(payload)
+    } catch (ex) {
+        throw new Error(ex)
+    }
 }
 
 async function setDeploymentState(deployment_id, state) {
@@ -39,7 +47,11 @@ async function setDeploymentState(deployment_id, state) {
         state
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
-    return await gh.repos.createDeploymentStatus(payload)
+    try {
+        return await gh.repos.createDeploymentStatus(payload)
+    } catch (ex) {
+        throw new Error(ex)
+    }
 }
 
 async function helm(args) {
@@ -86,17 +98,17 @@ async function undeploy() {
     const releaseName = process.env['INPUT_RELEASENAME']
     core.info("Starting undeploy")
     try {
-        helm(['uninstall', releaseName,  '--namespace', namespace])
+        helm(['uninstall', releaseName, '--namespace', namespace])
     } catch (ex) {
         core.setFailed(`Helm uninstall failed: ${ex}`)
     }
 
     try {
         deleteDeployment()
-    } catch(ex) {
+    } catch (ex) {
         core.setFailed(`Failed to delete deployment: ${ex}`)
     }
-    
+
 }
 
 function main() {
