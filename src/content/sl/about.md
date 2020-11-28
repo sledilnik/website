@@ -85,7 +85,7 @@ Sodelavci projekta:
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - koordinacija, podatkovni model in validacija, viri
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
--   [Maruša Gorišek](www.linkedin.com/in/marusagorisek) - spletna stran, viri
+-   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - spletna stran, viri
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - vizualizacije

@@ -105,7 +105,7 @@ Project collaborators:
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - coordination, data model and validation
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
--   [Maruša Gorišek](www.linkedin.com/in/marusagorisek) - web page, sources
+-   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - web page, sources
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - visualisations
