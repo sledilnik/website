@@ -2,6 +2,9 @@
 name: 'Deploy'
 description: 'Helm deploy action'
 inputs:
+  action:
+    description: 'Action to perform. deploy|undeploy'
+    default: deploy
   chartName:
     description: 'Chart name'
     required: true
