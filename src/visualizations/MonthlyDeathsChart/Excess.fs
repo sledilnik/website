@@ -22,15 +22,16 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
         |> List.map (fun (month, dps) ->
             (month, (List.sumBy (fun (dp : Data.MonthlyDeaths.DataPoint) -> float dp.deceased) dps) / float (baselineEndYear - baselineStartYear + 1)) )
 
+    let deceasedBaselineMap =
+        deceasedBaseline
+        |> FSharp.Collections.Map
+
     let deceasedCurrentYear =
         data
         |> List.filter (fun dp -> dp.year = System.DateTime.Today.Year)
         |> List.map (fun dp -> (dp.month, dp.deceased))
 
     let deceasedCurrentYearRelativeToBaseline =
-        let deceasedBaselineMap =
-            deceasedBaseline
-            |> FSharp.Collections.Map
 
         deceasedCurrentYear
         |> List.map (fun (month, deceased) ->
@@ -59,13 +60,9 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
             (month, deceasedSum) )
 
     let deceasedCovidCurrentYearPercent =
-        let deceasedCurrentYearMap =
-            deceasedCurrentYear
-            |> FSharp.Collections.Map
-
         deceasedCovidCurrentYear
         |> List.map (fun (month, deceasedCovid) ->
-            match deceasedCurrentYearMap.TryFind(month) with
+            match deceasedBaselineMap.TryFind(month) with
             | None -> None
             | Some deceasedTotal ->
                 Some (month, float deceasedCovid / float deceasedTotal * 100.) )
