@@ -3,7 +3,7 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="/sl/restrictions"
+      href="restrictions"
     >
       <div class="notice">
         <span>
