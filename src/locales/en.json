@@ -570,7 +570,15 @@
         },
         "monthlyDeaths": {
             "title": "Yearly deaths comparison",
-            "titleMenu": "Yearly deaths comparison"
+            "titleMenu": "Yearly deaths comparison",
+            "absolute": {
+                "title": "absolute"
+            },
+            "excess": {
+                "title": "excess",
+                "excessDeaths": "excess",
+                "covidDeaths": "covid"
+            }
         },
         "hospitals": {
             "bedsShort": "Beds",

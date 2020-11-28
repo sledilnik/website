@@ -1,14 +1,15 @@
 module MonthlyDeathsChart.Absolute
 
-open Feliz
-open Browser
-open Fable.Core.JsInterop
-
 open Highcharts
 
 open Types
 
-let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
+let colors = {|
+    CurrentYear = "#a483c7"
+    BaselineYear = "#d5d5d5"
+|}
+
+let renderChartOptions (data : MonthlyDeathsData) =
 
     let series =
         data
@@ -21,7 +22,8 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
                    y = dp.deceased
                    name = Utils.monthNameOfIndex dp.month |} |> pojo)
                 |> List.toArray
-            {| name = year
+            {| ``type`` = "line"
+               name = year
                data = seriesData
                color = if year = System.DateTime.Now.Year then colors.CurrentYear else colors.BaselineYear
                lineWidth = if year = System.DateTime.Now.Year then 2 else 1
@@ -29,21 +31,7 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
             |} |> pojo)
         |> List.toArray
 
-    {| title = None
-       legend = {| enabled = false |}
-       xAxis = {| labels = {| formatter = fun x -> Utils.monthNameOfIndex x?value |} |> pojo |}
-       yAxis = {| min =0 ; title = {| text = null |} |}
-       series = series
-       credits = {| enabled = true
-                    text = sprintf "%s: %s, %s"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.tOptions ("charts.common.dsSURS") {| context = localStorage.getItem ("contextCountry") |})
-                        (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-                    href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
-    |} |> pojo
-
-let renderChart (data : MonthlyDeathsData) (state : State) dispatch =
-    Html.div [ prop.style [ style.height 450 ]
-               prop.className "highcharts-wrapper"
-               prop.children [
-                   renderChartOptions data state dispatch |> Highcharts.chart ] ]
+    {| baseOptions with
+        legend = {| enabled = false |}
+        yAxis = {| min = 0 ; title = {| text = "" |} |}
+        series = series |} |> pojo

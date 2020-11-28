@@ -1060,7 +1060,15 @@
         },
         "monthlyDeaths": {
             "title": "Primerjava smrti po letih",
-            "titleMenu": "Primerjava smrti po letih"
+            "titleMenu": "Primerjava smrti po letih",
+            "absolute": {
+                "title": "absolute"
+            },
+            "excess": {
+                "title": "excess",
+                "excessDeaths": "excess",
+                "covidDeaths": "covid"
+            }
         },
         "ostanizdrav": {
             "title": "Aplikacija #OstaniZdrav",
