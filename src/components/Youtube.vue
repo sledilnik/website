@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      videoId: 'https://www.youtube.com/embed/' + this.id + '?rel=0',
+      videoId: 'https://www.youtube-nocookie.com/embed/' + this.id + '?rel=0',
     }
   },
 }
