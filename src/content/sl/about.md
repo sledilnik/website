@@ -61,11 +61,13 @@ COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mo
 Sodelavci projekta:
 
 -   [Aleks Jakulin](https://twitter.com/aleksj) - koordinacija za modeliranje, modeliranje, viri
--   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, CSV oblika
+-   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, infrastuktura
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
+-   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno skrejpanje, komunikacija
+-   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
 -   [Demjan Vester](https://github.com/VesterDe) - spletna stran
 -   [Eva Matjašič](https://github.com/Blonduos/) - spletna stran
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
@@ -73,15 +75,17 @@ Sodelavci projekta:
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeliranje
--   [Joh Dokler](https://github.com/joahim) - vizualizacije
+-   [Joh Dokler](https://github.com/joahim) - vizualizacije, spletna stran
+-   [Jure Novak](http://jurenovak.org/) - tekstopisje, viri
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, viri, validacija podatkov
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
--   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - viri, validacija podatkov
+-   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - koordinacija, podatkovni model in validacija, viri
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
+-   [Maruša Gorišek](www.linkedin.com/in/marusagorisek) - spletna stran, viri
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - vizualizacije
@@ -93,6 +97,7 @@ Sodelavci projekta:
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
+-   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - skriptanje, statistika
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Sebastjan Cizel](https://sebastjancizel.github.io) - vizualizacije
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi

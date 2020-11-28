@@ -19,28 +19,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-.custom-container {
-  margin: -24px auto 0 auto;
-  max-width: 730px;
-
-  @media only screen and (min-width: 768px) {
-    margin: 0 auto 65px auto;
-    box-shadow: $element-box-shadow;
-  }
-}
-
-.static-page-wrapper {
-  padding: 32px 17px 27px 17px;
-  background: #fff;
-
-  @media only screen and (min-width: 768px) {
-    padding: 32px 32px 27px 32px;
-  }
-
-  h1 {
-    margin-bottom: 32px;
-    font-size: 28px;
-  }
-}
-</style>
+<style lang="scss"></style>

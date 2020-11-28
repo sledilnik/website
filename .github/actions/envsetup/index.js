@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-import { toHtml } from '@fortawesome/fontawesome-svg-core';
 import { toUpper, snakeCase, forOwn, map } from 'lodash';
 
 const context = github.context;

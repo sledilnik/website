@@ -69,6 +69,13 @@ Stran je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F
 
 </details>
 
+<details>
+  <summary id=restrictions>Ali zbirate tudi podatke o trenutno veljavnih ukrepih in omejitvah?</summary>
+
+Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja.
+Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Trenutni ukrepi so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
+</details>
+
 ## O podatkih
 
 <details>
@@ -219,6 +226,8 @@ Vlada RS je 6. 10. 2020 predstavila [načrt in ukrepe za zajezitev novega vala o
 2. paket: **> 170** (14-dnevna pojavnost) **> 300** (hospitalizirani) **> 50** (v intenzivni enoti). Ukrepi: šola na daljavo za vse; posebni dodatni sloti za starejše; zaprtje frizerskih in kozmetičnih salonov; zaprtje hotelov; zaprtje športnih objektov za amaterje za individualne športe ter za športno dejavnost otrok in mladostnikov; omejitev gibanja med 22.30 in 5. uro.
 
 3. paket: **> xxx** (14-dnevna pojavnost) **> 360** (hospitalizirani) **> 60** (v intenzivni enoti). Ukrepi: omejitev gibanja med občinami; zaprtje vrtcev; zaustavitev javnega prometa; zaprtje meja (razen tovorni promet in nujni prehodi); omejitev izhodov razen nujnih izjem; zapiranje posameznih gospodarskih dejavnosti. (V veljavi tudi vsi drugi sektorski ukrepi državnega načrta.)
+
+Vsi trenutno veljavni ukrepi in omejitve so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
 
 </details>
 

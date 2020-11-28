@@ -8,7 +8,7 @@
         <p>
           Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da
           celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je
-          sprejela slovenska vlada kot odgovor na pandemijo covid-19, predvsem
+          sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem
           na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja.
           Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami
           na druge strani, so zbrane iz številnih uradnih virov, s katerimi
@@ -16,13 +16,11 @@
           informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne
           zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter
           izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije,
-          ki naše podatke navajajo kot vir.
-        </p>
-        <p>
+          ki naše podatke navajajo kot vir. 
+          Podatke zbiramo v 
           <a
             href="https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml"
-            >Zbirna tabela</a
-          >
+            >Zbirni tabeli</a>.
         </p>
 
         <!-- body -->
@@ -45,14 +43,13 @@
           </div>
           </details>
       </div>
-      <FloatingMenu :list="floatingMenu" title="Ukrepi" />
+      <!-- <FloatingMenu :list="floatingMenu" title="Ukrepi" /> -->
     </div>
   </div>
 </template>
 
 <script>
 import { GoogleSpreadsheet } from "@/libs/google-spreadsheet.js";
-import FloatingMenu from "components/FloatingMenu";
 import TimeStamp from "components/TimeStamp";
 
 window.GoogleSpreadsheet = GoogleSpreadsheet;
@@ -60,7 +57,6 @@ window.GoogleSpreadsheet = GoogleSpreadsheet;
 export default {
   name: "RestrictionsPage",
   components: {
-    FloatingMenu,
     TimeStamp,
   },
   data() {
@@ -141,7 +137,9 @@ export default {
             restriction.rule = text;
           } else if (j == 4) {
             // dodatna pravila
-            restriction.extrarule = text;
+            var list = text.replace(/  /g, "\n<br />") + "\n";
+            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
+            restriction.extrarule = links;
           } else if (j == 6) {
             // opombe
             var list = text.replace(/  /g, "\n<br />") + "\n";
@@ -159,98 +157,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-.custom-container {
-  margin: -24px auto 0 auto;
-  max-width: 730px;
-
-  @media only screen and (min-width: 768px) {
-    margin: 0 auto 65px auto;
-    box-shadow: $element-box-shadow;
-  }
-}
-
-.static-page-wrapper {
-  padding: 32px 17px 27px 17px;
-  background: #fff;
-
-  @media only screen and (min-width: 768px) {
-    padding: 32px 32px 27px 32px;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  h1 {
-    font-size: 28px;
-    margin-top: 32px;
-  }
-
-  h2 {
-    font-size: 24px;
-    margin-top: 32px;
-  }
-
-  h3 {
-    font-size: 17px;
-    font-style: italic;
-    margin-top: 24px;
-    margin-bottom: 5px;
-  }
-
-  p:not(:last-of-type) {
-    margin-bottom: 28px;
-  }
-
-  //subtitle
-  h1 + p > em {
-    display: block;
-    font-size: 16px;
-    font-style: italic;
-    color: rgba(0, 0, 0, 0.8);
-    font-weight: 400;
-    line-height: 1.7;
-    margin-bottom: 48px;
-
-    a {
-      font-size: 16px;
-    }
-  }
-
-  p,
-  a,
-  span,
-  strong {
-    font-size: 14px;
-    color: $text-c;
-    line-height: 1.7;
-  }
-}
-
-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.static-page-wrapper,
-.footnote {
-  a {
-    font-weight: 600;
-    transition: all 0.35s ease-in-out;
-    box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow;
-    text-decoration: none;
-    color: rgba(0, 0, 0, 0.8);
-
-    &:hover {
-      text-decoration: none;
-      color: rgba(0, 0, 0, 0.8);
-      font-weight: 600;
-      box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow;
-    }
-
-    strong {
-      font-weight: 600;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>
