@@ -167,8 +167,8 @@ let renderMaybeVisible (visible: bool) (children: ReactElement seq) =
         prop.children children
     ]
 
-let monthNameOfDate (date : DateTime) =
-    match date.Month with
+let monthNameOfIndex (index : int) =
+    match index with
     | 1 -> I18N.t "month.0"
     | 2 -> I18N.t "month.1"
     | 3 -> I18N.t "month.2"
@@ -182,6 +182,9 @@ let monthNameOfDate (date : DateTime) =
     | 11 -> I18N.t "month.10"
     | 12 -> I18N.t "month.11"
     | _ -> failwith "Invalid month"
+
+let monthNameOfDate (date : DateTime) =
+    monthNameOfIndex date.Month
 
 let transliterateCSZ (str : string) =
     str

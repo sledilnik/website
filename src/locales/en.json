@@ -197,6 +197,8 @@
             "dataSource": "data source",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data & NIJZ",
             "dsOWD_MZ": "Our World in Data & Min. Health",
@@ -564,6 +566,18 @@
                 "yAxisTitle": "Incidence difference (%)",
                 "xAxisLabel": "7-day incidence",
                 "yAxisLabel": "Incidence difference"
+            }
+        },
+        "excessDeaths": {
+            "title": "Yearly deaths comparison",
+            "titleMenu": "Yearly deaths comparison",
+            "absolute": {
+                "title": "Yearly comparison"
+            },
+            "excess": {
+                "title": "Excess relative to the last 5 years",
+                "excessDeaths": "Excess deaths (compared to 2015-19)",
+                "covidDeaths": "Confirmed COVID-19 deaths"
             }
         },
         "hospitals": {

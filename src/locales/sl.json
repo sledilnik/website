@@ -667,6 +667,8 @@
             "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
             "dsOWD_MZ": "Our World in Data, Min. za zdravje",
@@ -1054,6 +1056,18 @@
                 "yAxisTitle": "Sprememba pojavnosti (%)",
                 "xAxisLabel": "7-dnevna pojavnost",
                 "yAxisLabel": "Sprememba pojavnosti"
+            }
+        },
+        "excessDeaths": {
+            "title": "Presežne smrti",
+            "titleMenu": "Presežne smrti",
+            "absolute": {
+                "title": "Primerjava po letih"
+            },
+            "excess": {
+                "title": "Presežek glede na zadnjih 5 let",
+                "excessDeaths": "Presežne smrti (glede na 2015-19)",
+                "covidDeaths": "Potrjene COVID-19 smrti"
             }
         },
         "ostanizdrav": {

@@ -34,7 +34,6 @@ Highcharts.dateFormats.W = function (timestamp) {
   return getWeek(timestamp, {weekStartsOn: 1}).toString()
 };
 
-
 function setHighchartsOptions () {
     (window.Highcharts || Highcharts).setOptions({
         global: {

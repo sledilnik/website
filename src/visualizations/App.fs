@@ -42,6 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
+            | "ExcessDeaths" -> Some ExcessDeaths
             | _ -> None
             |> Embedded
 
@@ -489,9 +490,22 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
+    let excessDeaths =
+          { VisualizationType = ExcessDeaths
+            ClassName = "excess-deaths-chart"
+            ChartTextsGroup = "excessDeaths"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> ExcessDeathsChart.Chart.chart {| statsData = data |} }
+
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison
-          patients; patientsCare; deceased 
+          patients; patientsCare; deceased ; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -520,6 +534,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesNewDeathsPer1M
           countriesTotalDeathsPer1M
           phaseDiagram
+          excessDeaths
         ]
 
     let embedded, visualizations =
