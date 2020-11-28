@@ -351,7 +351,7 @@ Prikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje nj
   <summary id=care-patients-chart>Kaj nam pove graf "Negovalne bolnišnice"?</summary>
 
 [Graf](/sl/stats#care-patients-chart) nam prikazuje število oseb, ki so nameščeni v negovalne oddelke v bolnišnicah. Te osebe ne potrebujejo hospitalizacijo, zato niso nameščene na akutni oddelek ali intenzivno terapijo ampak so nameščene na negovalnem oddelku začasno.
-Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni na negovalni oddelek za čas ko se v njihovem DSO pripravlja reorganizacija na rdečo in sivo cono. Podobno gre za potrjene primere v psihiatričnih bolnišnicah. 
+Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni na negovalni oddelek za čas ko se v njihovem DSO pripravlja reorganizacija na rdečo in sivo cono. Podobno gre za potrjene primere v psihiatričnih bolnišnicah.
 
 </details>
 
@@ -363,9 +363,9 @@ Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni n
 </details>
 
 <details>
-  <summary id=monthly-deaths-chart>Kaj nam pove graf "Presežne smrti"?</summary>
+  <summary id=excess-deaths-chart>Kaj nam pove graf "Presežne smrti"?</summary>
 
-[Graf](/sl/stats#monthly-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 1977-2019 ter Presežek glede na zadnjih 5 let. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev.
+[Graf](/sl/stats#excess-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 1977-2019 ter Presežek glede na zadnjih 5 let. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev.
 
 </details>
 
