@@ -1060,7 +1060,7 @@
         },
         "monthlyDeaths": {
             "title": "Primerjava smrti po letih",
-            "titleMenu": "Smrti po letih"
+            "titleMenu": "Primerjava smrti po letih"
         },
         "ostanizdrav": {
             "title": "Aplikacija #OstaniZdrav",

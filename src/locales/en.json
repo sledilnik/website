@@ -570,7 +570,7 @@
         },
         "monthlyDeaths": {
             "title": "Yearly deaths comparison",
-            "titleMenu": "Yearly deaths"
+            "titleMenu": "Yearly deaths comparison"
         },
         "hospitals": {
             "bedsShort": "Beds",
