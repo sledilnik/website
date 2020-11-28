@@ -23,6 +23,7 @@ let renderChartOptions (data : MonthlyDeathsData) =
                 |> List.toArray
             {| ``type`` = "line"
                name = year
+               showInLegend = year = System.DateTime.Now.Year
                data = seriesData
                color = if year = System.DateTime.Now.Year then colors.CurrentYear else colors.BaselineYear
                lineWidth = if year = System.DateTime.Now.Year then 2 else 1
@@ -31,6 +32,5 @@ let renderChartOptions (data : MonthlyDeathsData) =
         |> List.toArray
 
     {| baseOptions with
-        legend = {| enabled = false |}
         yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
         series = series |} |> pojo
