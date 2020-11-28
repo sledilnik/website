@@ -1059,14 +1059,14 @@
             }
         },
         "monthlyDeaths": {
-            "title": "Primerjava smrti po letih",
-            "titleMenu": "Primerjava smrti po letih",
+            "title": "Presežne smrti",
+            "titleMenu": "Presežne smrti",
             "absolute": {
                 "title": "Absolutno"
             },
             "excess": {
                 "title": "Relativno",
-                "excessDeaths": "Presežek smrti (glede na 2015-19)",
+                "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeaths": "Potrjene COVID-19 smrti"
             }
         },
