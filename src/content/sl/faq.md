@@ -363,6 +363,13 @@ Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni n
 </details>
 
 <details>
+  <summary id=monthly-deaths-chart>Kaj nam pove graf "Presežne smrti"?</summary>
+
+[Graf](/sl/stats#monthly-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 1977-2019 ter Presežek glede na zadnjih 5 let. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev.
+
+</details>
+
+<details>
   <summary id=daily-comparison-chart>Kaj kaže graf "Primerjava po dnevih v tednu"?</summary>
 
 [Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).
