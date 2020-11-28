@@ -1,7 +1,6 @@
 const github = require('@actions/github')
 const core = require('@actions/core')
-const { execSync, spawnSync, execFileSync, execFile } = require('child_process');
-const { version } = require('os');
+const { execFileSync } = require('child_process');
 
 const ghToken = process.env['INPUT_TOKEN']
 const context = github.context;
@@ -30,6 +29,7 @@ async function deleteDeployment(id) {
         id
     }
     core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
+    setDeploymentState(deployment.data.id, "pending")
     return await gh.repos.deleteDeployment(payload)
 }
 
@@ -63,46 +63,44 @@ async function deploy() {
     let deployment = undefined;
     try {
         deployment = await createDeployment()
+        setDeploymentState(deployment.data.id, "pending")
     } catch {
         core.setFailed(`Failed to create deployment: ${ex}`)
     }
 
-    const opts = {
-        namespace,
-        releaseName,
-        chartName,
-        chartVersion
-    }
-    core.info(`Helm deploy opts ${JSON.stringify(opts)}`)
-
     try {
-        setDeploymentState(deployment.data.id, "pending")
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         setDeploymentState(deployment.data.id, "failed")
-        core.setFailed(ex)
+        core.setFailed(`Helm install failed: ${ex}`)
     }
 }
 
 async function undeploy() {
+    const namespace = process.env['INPUT_NAMESPACE']
+    const releaseName = process.env['INPUT_RELEASENAME']
     core.info("Starting undeploy")
+    try {
+        helm(['uninstall', releaseName,  '--namespace', namespace])
+    } catch (ex) {
+        core.setFailed(`Helm uninstall failed: ${ex}`)
+    }
+
+    try {
+        deleteDeployment()
+    } catch(ex) {
+        core.setFailed(`Failed to delete deployment: ${ex}`)
+    }
+    
 }
 
 function main() {
     try {
-        const event = process.env['GITHUB_EVENT_NAME']
-        if (event === 'pull_request') {
-            switch (event) {
-                case 'pull_request':
-                    deploy()
-                    break;
-                case 'push':
-                    deploy()
-                    break;
-                default:
-                    core.setFailed("Unknown action")
-            }
+        if (process.env['INPUT_ACTION'] == 'undeploy') {
+            undeploy()
+        } else {
+            deploy()
         }
     } catch (ex) {
         core.setFailed(ex)
