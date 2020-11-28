@@ -43,23 +43,34 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
         |> List.choose id
 
     let deceasedCovidCurrentYear =
-        statsData
-        // Filter the data to the current year
-        |> List.filter (fun dp -> dp.Date.Year = YEAR)
-        // Select only the non-empty deceased data points
-        |> List.map (fun dp ->
-            match dp.StatePerTreatment.Deceased with
-            | None -> None
-            | Some deceased -> Some (dp.Date.Month, deceased) )
-        |> List.choose id
-        |> List.groupBy (fun (month, deceased) -> month)
-        |> List.map (fun (month, deceased) ->
-            let deceasedSum =
-                deceased
-                |> List.map (fun (month, deceased) -> deceased)
-                |> List.sum
-            (month, deceasedSum) )
-        |> List.sort
+        let data =
+            statsData
+            // Filter the data to the current year
+            |> List.filter (fun dp -> dp.Date.Year = YEAR)
+            // Select only the non-empty deceased data points
+            |> List.map (fun dp ->
+                match dp.StatePerTreatment.Deceased with
+                | None -> None
+                | Some deceased -> Some (dp.Date.Month, deceased) )
+            |> List.choose id
+            |> List.groupBy (fun (month, deceased) -> month)
+            |> List.map (fun (month, deceased) ->
+                let deceasedSum =
+                    deceased
+                    |> List.map (fun (month, deceased) -> deceased)
+                    |> List.sum
+                (month, deceasedSum) )
+            |> List.sort
+
+        // Add 0 to the month before the first month to smooth the area
+        match data with
+        | [ ] -> data
+        | _ ->
+            let (firstMonth, _) = data.Head
+            if firstMonth = 1 then
+                data
+            else
+                List.append [firstMonth - 1, 0] data
 
     let deceasedCovidCurrentYearPercent =
         deceasedCovidCurrentYear
@@ -89,6 +100,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
                name = (I18N.t "charts.excessDeaths.excess.covidDeaths")
                marker = {| enabled = false |} |> pojo
                color = colors.CovidDeaths
+               lineWidth = 0
                data =
                    deceasedCovidCurrentYearPercent
                    |> List.map (fun (month, percent) ->
