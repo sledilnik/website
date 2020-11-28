@@ -11,6 +11,8 @@ let colors = {|
     CovidDeaths = "#a483c7"
 |}
 
+let YEAR = 2020
+
 let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
 
     let baselineStartYear, baselineEndYear = 2015, 2019
@@ -28,11 +30,10 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
 
     let deceasedCurrentYear =
         data
-        |> List.filter (fun dp -> dp.year = System.DateTime.Today.Year)
+        |> List.filter (fun dp -> dp.year = YEAR)
         |> List.map (fun dp -> (dp.month, dp.deceased))
 
     let deceasedCurrentYearRelativeToBaseline =
-
         deceasedCurrentYear
         |> List.map (fun (month, deceased) ->
             match deceasedBaselineMap.TryFind(month) with
@@ -44,20 +45,21 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
     let deceasedCovidCurrentYear =
         statsData
         // Filter the data to the current year
-        |> List.filter (fun dp -> dp.Date.Year = System.DateTime.Today.Year)
+        |> List.filter (fun dp -> dp.Date.Year = YEAR)
         // Select only the non-empty deceased data points
         |> List.map (fun dp ->
             match dp.StatePerTreatment.Deceased with
             | None -> None
-            | Some deceased -> Some {| Date = dp.Date ; Deceased = deceased |} )
+            | Some deceased -> Some (dp.Date.Month, deceased) )
         |> List.choose id
-        |> List.groupBy (fun dp -> dp.Date.Month)
+        |> List.groupBy (fun (month, deceased) -> month)
         |> List.map (fun (month, deceased) ->
             let deceasedSum =
                 deceased
-                |> List.map (fun dp -> dp.Deceased)
+                |> List.map (fun (month, deceased) -> deceased)
                 |> List.sum
             (month, deceasedSum) )
+        |> List.sort
 
     let deceasedCovidCurrentYearPercent =
         deceasedCovidCurrentYear
@@ -99,9 +101,6 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
         |]
 
     {| baseOptions with
-        yAxis =
-            {| title = {| text = "" |}
-               labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo
-            |}
+        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
         tooltip = {| formatter = fun () -> sprintf "%s<br>%.2f %%" (Utils.monthNameOfIndex jsThis?x) jsThis?y |} |> pojo
         series = series |} |> pojo

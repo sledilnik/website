@@ -10,7 +10,6 @@ let colors = {|
 |}
 
 let renderChartOptions (data : MonthlyDeathsData) =
-
     let series =
         data
         |> List.groupBy (fun dp -> dp.year)
@@ -33,5 +32,5 @@ let renderChartOptions (data : MonthlyDeathsData) =
 
     {| baseOptions with
         legend = {| enabled = false |}
-        yAxis = {| min = 0 ; title = {| text = "" |} |}
+        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
         series = series |} |> pojo
