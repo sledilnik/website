@@ -4,24 +4,10 @@
 
     <div class="custom-container">
       <div class="static-page-wrapper">
-        <h1>Ukrepi in omejitve</h1>
-        <p>
-          Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da
-          celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je
-          sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem
-          na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja.
-          Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami
-          na druge strani, so zbrane iz številnih uradnih virov, s katerimi
-          nismo neposredno povezani, zato se je treba zavedati, da so zgolj
-          informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne
-          zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter
-          izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije,
-          ki naše podatke navajajo kot vir. 
-          Podatke zbiramo v 
-          <a
-            href="https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml"
-            >Zbirni tabeli</a>.
-        </p>
+        <h1>
+          {{ $t("restrictionsPage.title") }}
+        </h1>
+        <div v-html-md="$t('restrictionsPage.description')"></div>
 
         <!-- body -->
           <details
@@ -34,12 +20,12 @@
              <span v-html="item.rule" />
           </summary>
           <div>
-            <p><b>Geografska veljavnost:</b> <span v-html="item.geoValidity" /></p>
-            <p><b>Veljavnost:</b> <span v-html="item.validity" /></p>
-            <p><b>Izjeme:</b><br> <span v-html="item.exceptions" /></p>
-            <p><b>Dodatna pravila / tolmačenja:</b> <span v-html="item.extrarule" /></p>
-            <p><b>Opombe:</b> <span v-html="item.notes" /></p>
-            <p><a :href="item.link" targe="_blank">Povezava do odloka (prečiščeno besedilo)</a></p>
+            <p><b>{{ $t("restrictionsPage.geoValidity") }}:</b> <span v-html="item.geoValidity" /></p>
+            <p><b>{{ $t("restrictionsPage.validity") }}:</b> <span v-html="item.validity" /></p>
+            <p><b>{{ $t("restrictionsPage.exceptions") }}:</b><br> <span v-html="item.exceptions" /></p>
+            <p><b>{{ $t("restrictionsPage.extrarule") }}:</b> <span v-html="item.extrarule" /></p>
+            <p><b>{{ $t("restrictionsPage.notes") }}:</b> <span v-html="item.notes" /></p>
+            <p><a :href="item.link" targe="_blank">{{ $t("restrictionsPage.link") }}</a></p>
           </div>
           </details>
       </div>
