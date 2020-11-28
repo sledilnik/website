@@ -72,7 +72,11 @@ async function deploy() {
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
-        setDeploymentState(deployment.data.id, "failed")
+        try {
+            setDeploymentState(deployment.data.id, "failed")
+        } catch (ex) {
+            core.warning(`Failed to set deployment state to failed: ${ex}`)
+        }
         core.setFailed(`Helm install failed: ${ex}`)
     }
 }
