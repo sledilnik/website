@@ -32,7 +32,7 @@ jobs:
       
       - name: build and push
         uses: docker/build-push-action@v2
-        if: {{ steps.envsetup.outputs.Build }} == true
+        if: ${{ steps.envsetup.outputs.Build }} == true
         with:
           push: true
           context: .
