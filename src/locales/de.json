@@ -755,6 +755,19 @@
             "yAxisTitle": "Neue tägliche Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder - neue Todesfälle",
             "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
+        },
+        "deceased": {
+            "deceased-total": "Todesfälle insgesamt",
+            "deceased-rest": "Außerhalb des Krankenhauses",
+            "deceased-care": "Pflege-Krankenhaus",
+            "deceased-acute": "Akutmedizinische Abteilung",
+            "deceased-icu": "Intensivstation",
+            "deceasedToDateRelative": "Todesfälle bis heute (relativ)",
+            "deceasedToDate": "Todesfälle bis heute",
+            "deceasedTodayRelative": "Todesfälle pro Tag (relativ)",
+            "deceasedToday": "Todesfälle pro Tag",
+            "titleMenu": "Todesfälle",
+            "title": "Todesfälle"
         }
     },
     "tableDict": {
@@ -1031,7 +1044,8 @@
         "newMedium": "🆕 📝 Neuer Medium Nachricht:",
         "newInfographics": "🆕 📇 Neue Infografiken:",
         "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭",
-        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung"
+        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung",
+        "restrictions": "Aktuelle Maßnahmen und Beschränkungen"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1306,5 +1320,14 @@
     "youtube": {
         "titleMenu": "Animation",
         "title": "Animation der Verbreitung von COVID-19"
+    },
+    "restrictionsPage": {
+        "link": "Link zur Verordnung (offizieller Text)",
+        "notes": "Anmerkungen",
+        "extrarule": "Zusätzliche Regeln/Interpretationen",
+        "exceptions": "Ausnahmen",
+        "validity": "Gültigkeit",
+        "geoValidity": "Geografische Gültigkeit",
+        "title": "Maßnahmen und Einschränkungen"
     }
 }
