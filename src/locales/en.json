@@ -572,10 +572,10 @@
             "title": "Yearly deaths comparison",
             "titleMenu": "Yearly deaths comparison",
             "absolute": {
-                "title": "Absolute"
+                "title": "Yearly comparison"
             },
             "excess": {
-                "title": "Relative",
+                "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths"
             }

@@ -1062,10 +1062,10 @@
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
             "absolute": {
-                "title": "Absolutno"
+                "title": "Primerjava po letih"
             },
             "excess": {
-                "title": "Relativno",
+                "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeaths": "Potrjene COVID-19 smrti"
             }
