@@ -568,7 +568,7 @@
                 "yAxisLabel": "Incidence difference"
             }
         },
-        "monthlyDeaths": {
+        "excessDeaths": {
             "title": "Yearly deaths comparison",
             "titleMenu": "Yearly deaths comparison",
             "absolute": {

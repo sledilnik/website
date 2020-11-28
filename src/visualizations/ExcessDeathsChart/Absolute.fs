@@ -1,4 +1,4 @@
-module MonthlyDeathsChart.Absolute
+module ExcessDeathsChart.Absolute
 
 open Highcharts
 

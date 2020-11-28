@@ -1,4 +1,4 @@
-module MonthlyDeathsChart.Chart
+module ExcessDeathsChart.Chart
 
 open Feliz
 open Browser
@@ -41,7 +41,7 @@ let renderDisplayTypeSelectors state dispatch =
         prop.children selectors
     ]
 
-let chart = React.functionComponent("MonthlyDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
+let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
     let (state, dispatch) = React.useReducer(update, init props.statsData)
 
     let loadData () = async {
@@ -72,7 +72,7 @@ let chart = React.functionComponent("MonthlyDeathsChart", fun (props : {| statsD
                     Html.span [
                         Utils.classes [ not(state.DisplayType = ExcessDeaths), "hidden" ]
                         prop.children [
-                            Excess.renderChartOptions data state.StatsData |> Highcharts.chart
+                            Relative.renderChartOptions data state.StatsData |> Highcharts.chart
                         ]
                     ]
                 ]

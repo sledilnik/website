@@ -42,7 +42,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
-            | "MonthlyDeaths" -> Some MonthlyDeaths
+            | "ExcessDeaths" -> Some ExcessDeaths
             | _ -> None
             |> Embedded
 
@@ -490,10 +490,10 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
-    let monthlyDeaths =
-          { VisualizationType = MonthlyDeaths
-            ClassName = "monthly-deaths-chart"
-            ChartTextsGroup = "monthlyDeaths"
+    let excessDeaths =
+          { VisualizationType = ExcessDeaths
+            ClassName = "excess-deaths-chart"
+            ChartTextsGroup = "excessDeaths"
             Explicit = false
             Renderer =
                 fun state ->
@@ -501,11 +501,11 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> MonthlyDeathsChart.Chart.chart {| statsData = data |} }
+                    | Success data -> ExcessDeathsChart.Chart.chart {| statsData = data |} }
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison
-          patients; patientsCare; deceased ; monthlyDeaths
+          patients; patientsCare; deceased ; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -534,7 +534,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesNewDeathsPer1M
           countriesTotalDeathsPer1M
           phaseDiagram
-          monthlyDeaths
+          excessDeaths
         ]
 
     let embedded, visualizations =

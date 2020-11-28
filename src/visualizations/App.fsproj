@@ -50,10 +50,10 @@
         <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
-        <Compile Include="MonthlyDeathsChart/Types.fs" />
-        <Compile Include="MonthlyDeathsChart/Absolute.fs" />
-        <Compile Include="MonthlyDeathsChart/Excess.fs" />
-        <Compile Include="MonthlyDeathsChart/Chart.fs" />
+        <Compile Include="ExcessDeathsChart/Types.fs" />
+        <Compile Include="ExcessDeathsChart/Absolute.fs" />
+        <Compile Include="ExcessDeathsChart/Relative.fs" />
+        <Compile Include="ExcessDeathsChart/Chart.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

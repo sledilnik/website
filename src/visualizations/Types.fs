@@ -148,7 +148,7 @@ type VisualizationType =
     | CountriesTotalDeathsPer1M
     | PhaseDiagram
     | Deceased
-    | MonthlyDeaths
+    | ExcessDeaths
 
 type RenderingMode =
     | Normal

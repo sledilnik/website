@@ -103,8 +103,8 @@ export default {
     titleKey: 'charts.deceased.titleMenu',
     icon: 'column',
   },
-  'monthly-deaths-chart': {
-    titleKey: 'charts.monthlyDeaths.titleMenu',
+  'excess-deaths-chart': {
+    titleKey: 'charts.excessDeaths.titleMenu',
     icon: 'graph',
   },
   youtube: {

@@ -1,4 +1,4 @@
-module MonthlyDeathsChart.Excess
+module ExcessDeathsChart.Relative
 
 open Browser
 open Highcharts
@@ -73,7 +73,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
     let series =
         [|
             {| ``type`` = "line"
-               name = (I18N.t "charts.monthlyDeaths.excess.excessDeaths")
+               name = (I18N.t "charts.excessDeaths.excess.excessDeaths")
                marker = {| enabled = false |} |> pojo
                color = colors.ExcessDeaths
                data =
@@ -86,7 +86,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
                    |> List.toArray
             |} |> pojo
             {| ``type`` = "area"
-               name = (I18N.t "charts.monthlyDeaths.excess.covidDeaths")
+               name = (I18N.t "charts.excessDeaths.excess.covidDeaths")
                marker = {| enabled = false |} |> pojo
                color = colors.CovidDeaths
                data =

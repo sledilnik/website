@@ -1058,7 +1058,7 @@
                 "yAxisLabel": "Sprememba pojavnosti"
             }
         },
-        "monthlyDeaths": {
+        "excessDeaths": {
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
             "absolute": {
