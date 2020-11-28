@@ -19,7 +19,7 @@ type Msg =
 
 let colors = {|
     CurrentYear = "#a483c7"
-    BaselineYear = "#e0e0e0"
+    BaselineYear = "#d5d5d5"
 |}
 
 let init statsData =
@@ -52,12 +52,8 @@ let renderChartOptions (data : MonthlyDeathsData) (state : State) dispatch =
             {| name = year
                data = seriesData
                color = if year = System.DateTime.Now.Year then colors.CurrentYear else colors.BaselineYear
-               lineWidth = 1.7
-               marker =
-                {| enabled = true
-                   symbol = "circle"
-                   radius = 2
-                |} |> pojo
+               lineWidth = if year = System.DateTime.Now.Year then 2 else 1
+               marker = {| enabled = true ; symbol = "circle" ; radius = 2 |} |> pojo
             |} |> pojo)
         |> List.toArray
 
