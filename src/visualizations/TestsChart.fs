@@ -60,7 +60,7 @@ let getLabsList (data : LabTestsStats array) =
     data.[data.Length-1].labs
     |> Map.toSeq
     |> Seq.filter (fun (_, stats) -> stats.performed.toDate.IsSome)
-    |> Seq.map (fun (lab, stats) -> lab, stats.performed.today)
+    |> Seq.map (fun (lab, stats) -> lab, stats.performed.toDate)
     |> Seq.fold (fun labs (lab,cnt) -> labs |> Map.add lab cnt) Map.empty // all
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
@@ -87,12 +87,12 @@ let renderChartOptions (state : State) dispatch =
         match state.DisplayType with
         | Total     -> dp.total.positive.today |> Option.defaultValue 0
         | Data typ  -> dp.data.[typ].positive.today |> Option.defaultValue 0
-        | Lab lab   -> dp.labs.[lab].positive.today |> Option.defaultValue 0
+        | Lab lab   -> dp.labs.[lab].positive.today |> Option.defaultValue 0    
     let negativeTests (dp: LabTestsStats) =
         match state.DisplayType with
         | Total     -> (dp.total.performed.today |> Option.defaultValue 0) - (dp.total.positive.today |> Option.defaultValue 0)
         | Data typ  -> (dp.data.[typ].performed.today |> Option.defaultValue 0) - (dp.data.[typ].positive.today |> Option.defaultValue 0)
-        | Lab lab   -> (dp.data.[lab].performed.today |> Option.defaultValue 0) - (dp.data.[lab].positive.today |> Option.defaultValue 0)
+        | Lab lab   -> (dp.labs.[lab].performed.today |> Option.defaultValue 0) - (dp.labs.[lab].positive.today |> Option.defaultValue 0)
     let percentPositive (dp: LabTestsStats) =
         let positive = positiveTests dp
         let performed = positiveTests dp + negativeTests dp
