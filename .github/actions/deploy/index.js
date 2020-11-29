@@ -30,6 +30,8 @@ async function createDeployment() {
 
 async function deleteDeployment(deployment_id) {
     const payload = {
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
         deployment_id
     }
     core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
@@ -43,6 +45,8 @@ async function deleteDeployment(deployment_id) {
 
 async function setDeploymentState(deployment_id, state) {
     const payload = {
+        owner: context.payload.repository.owner.login,
+        repo: context.payload.repository.name,
         deployment_id,
         state
     }
