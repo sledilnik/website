@@ -32,6 +32,9 @@ inputs:
   deployEnv:
     description: 'Deploy environment (for GH deployments)'
     required: true
+  deployUrl:
+    description: 'URL of actual deployment'
+    required: true
   token:
     description: 'Github token'
     required: false
