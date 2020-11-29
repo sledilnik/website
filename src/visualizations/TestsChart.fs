@@ -32,7 +32,7 @@ type State = {
 
 let GetAllDisplayTypes state =  
     seq {
-        for typ in [ "regular"; "nsapr20" ] do
+        for typ in [ "regular"; "ns-apr20" ] do
             yield Data typ
         yield Total
         for lab in state.AllLabs do

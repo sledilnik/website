@@ -823,7 +823,7 @@
             "titleMenu": "Testiranje",
             "allTesting": "Skupaj",
             "regular": "Redno",
-            "nsapr20": "Raziskava",
+            "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",
             "positiveTests": "Pozitivnih testov",
             "shareOfPositive": "Delež pozitivnih testov (%)"

@@ -361,7 +361,7 @@
             "titleMenu": "Testing",
             "allTesting": "All",
             "regular": "Regular",
-            "nsapr20": "Study",
+            "ns-apr20": "Study",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"

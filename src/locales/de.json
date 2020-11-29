@@ -550,7 +550,7 @@
             "titleMenu": "Kapazität"
         },
         "tests": {
-            "nsapr20": "Studie",
+            "ns-apr20": "Studie",
             "shareOfPositive": "Anteil der positiven Tests (%)",
             "allTesting": "Alle",
             "title": "Testung",
