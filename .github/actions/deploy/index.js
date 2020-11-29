@@ -46,7 +46,9 @@ async function deleteDeployment() {
 
 async function setDeploymentState(deployment_id, state) {
 
-    const log_url = `https://github.com/overlordtm/website/runs/${process.env['GITHUB_ACTION']}`
+    const actionId = process.env['GITHUB_ACTION']
+    const log_url = `https://github.com/overlordtm/website/runs/${actionId}`
+    const environment_url = `https://sledilnik.org`
 
     const payload = {
         owner: context.payload.repository.owner.login,
@@ -54,7 +56,7 @@ async function setDeploymentState(deployment_id, state) {
         deployment_id,
         state,
         log_url,
-
+        environment_url,
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
     try {
