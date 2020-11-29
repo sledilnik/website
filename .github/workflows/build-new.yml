@@ -55,4 +55,5 @@ jobs:
           helmRepoName: sledilnik
           helmRepoUrl: https://helm-repo.sledilnik.org
           kubeconfig: '${{ secrets.KUBECONFIG }}'        
-          deployEnv: ${{ steps.envsetup.outputs.DeployEnv }}  
+          deployEnv: ${{ steps.envsetup.outputs.DeployEnv }}
+          deployUrl: ${{ steps.envsetup.outputs.DeployUrl }}

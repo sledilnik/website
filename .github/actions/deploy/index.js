@@ -52,7 +52,7 @@ async function setDeploymentState(deployment_id, state) {
 
     const actionId = context.runId
     const log_url = `https://github.com/overlordtm/website/runs/${actionId}`
-    const environment_url = `https://sledilnik.org`
+    const environment_url = process.env['INPUT_DEPLOYURL']
 
     const payload = {
         owner: context.payload.repository.owner.login,
