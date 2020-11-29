@@ -24,7 +24,7 @@ async function createDeployment() {
     try {
         return await gh.repos.createDeployment(payload)
     } catch (ex) {
-        return new Error(`Failed to create deployment: ${ex}`)
+        throw new Error(`Failed to create deployment: ${ex}`)
     }
 }
 
@@ -45,6 +45,7 @@ async function deleteDeployment() {
         });        
     } catch (ex) {
         core.info(`Failed to delete deployment envrionment '${env}': ${ex}`)
+        throw new Error(`Failed to delete deployment: ${ex}`)
     }
 }
 
@@ -69,7 +70,7 @@ async function setDeploymentState(deployment_id, state) {
         core.info(`Deployment status created: ${JSON.stringify(status)}`)
         return status
     } catch (ex) {
-        throw new Error(ex)
+        throw new Error(`Failed to create deployment status: ${ex}`)
     }
 }
 
