@@ -96,7 +96,7 @@ async function deploy() {
         deployment = await createDeployment()
         setDeploymentState(deployment.data.id, "in_progress")
     } catch (ex) {
-        core.setFailed(`Failed to create deployment: ${ex}`)
+        core.setFailed(`Failed to set deployment state to 'in_progress: ${ex}`)
     }
 
     try {
