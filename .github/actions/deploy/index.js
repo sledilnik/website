@@ -34,7 +34,7 @@ async function deleteDeployment(deployment_id) {
         repo: context.payload.repository.name,
         deployment_id
     }
-    core.info(`Deliting deployment: ${JSON.stringify(payload)}`)
+    core.info(`Deleting deployment: ${JSON.stringify(payload)}`)
     setDeploymentState(deployment.data.id, "pending")
     try {
         return await gh.repos.deleteDeployment(payload)
@@ -84,11 +84,8 @@ async function deploy() {
         core.setFailed(`Failed to create deployment: ${ex}`)
     }
 
-    core.info(`Deplying: ${JSON.stringify(deployment)}`)
-
     try {
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
-
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         try {
