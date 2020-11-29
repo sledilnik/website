@@ -23,18 +23,25 @@ async function createDeployment() {
     }
 }
 
-async function deleteDeployment(deployment_id) {
-    const payload = {
-        owner: context.payload.repository.owner.login,
-        repo: context.payload.repository.name,
-        deployment_id
-    }
-    core.info(`Deleting deployment: ${JSON.stringify(payload)}`)
-    setDeploymentState(deployment.data.id, "pending")
+async function deleteDeployment() {
+
+    const env = process.env['INPUT_DEPLOYENV']
+
+    core.info(`Deleting deployment environment: ${env}`)
     try {
-        return await gh.repos.deleteDeployment(payload)
-    } catch (ex) {
-        throw new Error(ex)
+        deployments = await gh.repos.listDeployments({
+            owner: context.payload.repository.owner.login,
+            repo: context.payload.repository.name,
+            environment: env,
+        })
+
+        deployments.array.forEach(deployment => {
+            setDeploymentState(deployment.data.id, 'inactive').then(() => {
+                gh.repos.deleteDeployment(deployment.data.id)
+            })
+        });        
+    } catch {
+        core.info(`Failed to delete deployment envrionment: ${env}`)
     }
 }
 
