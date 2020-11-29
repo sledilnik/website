@@ -9,13 +9,16 @@ const gh = github.getOctokit(ghToken)
 // core.info(JSON.stringify(context.payload, null, 1))
 
 async function createDeployment() {
+
+    const transient_environment = process.env['GITHUB_EVENT_NAME'] === 'pull_request'
+
     const payload = {
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
         ref: context.ref,
         environment: process.env['INPUT_DEPLOYENV'],
         auto_inactive: true,
-        transient_environment: true,
+        transient_environment
     }
     core.info(`Creating deployment: ${JSON.stringify(payload)}`)
     try {
