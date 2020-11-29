@@ -360,8 +360,10 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "allTesting": "All",
-            "regularTesting": "Regular",
-            "nationalStudyTesting": "Study",
+            "byLab": "By Laboratory: Tests",
+            "byLabPercent": "By Laboratory: % positive",
+            "regular": "Regular",
+            "ns-apr20": "Study",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"

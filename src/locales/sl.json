@@ -822,8 +822,10 @@
             "title": "Testiranje",
             "titleMenu": "Testiranje",
             "allTesting": "Skupaj",
-            "regularTesting": "Redno",
-            "nationalStudyTesting": "Raziskava",
+            "byLab": "Po laboratorijih: testi",
+            "byLabPercent": "Po laboratorijih: % pozitivnih",
+            "regular": "Redno",
+            "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",
             "positiveTests": "Pozitivnih testov",
             "shareOfPositive": "Delež pozitivnih testov (%)"

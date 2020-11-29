@@ -147,8 +147,8 @@
             "shareOfPositive": "Përqindje e testeve pozitive (%)",
             "positiveTests": "Teste pozitive",
             "negativeTests": "Teste negative",
-            "nationalStudyTesting": "Studim",
-            "regularTesting": "Të rregullt",
+            "ns-apr20": "Studim",
+            "regular": "Të rregullt",
             "allTesting": "Gjithsej",
             "title": "Testimi",
             "titleMenu": "Testimi"

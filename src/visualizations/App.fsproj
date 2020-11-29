@@ -17,6 +17,7 @@
         <Compile Include="data/WeeklyStats.fs" />
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
+        <Compile Include="data/LabTests.fs" />
         <Compile Include="data/HCenters.fs" />
         <Compile Include="data/Hospitals.fs" />
         <Compile Include="data/OurWorldInData.fs" />

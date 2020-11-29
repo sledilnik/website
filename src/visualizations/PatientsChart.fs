@@ -25,9 +25,7 @@ type Breakdown =
     static member getName = function
         | ByHospital -> I18N.t "charts.patients.byHospital"
         | AllHospitals -> I18N.t "charts.patients.allHospitals"
-        | Facility fcode ->
-            let _, name = Data.Hospitals.facilitySeriesInfo fcode
-            name
+        | Facility facility -> Utils.Dictionaries.GetFacilityName(facility)
 
 type Series =
     | InHospital
@@ -148,11 +146,10 @@ let renderByHospitalChart (state : State) dispatch =
                 )
             ps.JsDate12h, value
 
-        let color, name = Data.Hospitals.facilitySeriesInfo fcode
         {|
             visible = true
-            color = color
-            name = name
+            name = Utils.Dictionaries.GetFacilityName(fcode)
+            color = Utils.Dictionaries.GetFacilityColor(fcode)
             dashStyle = Solid |> DashStyle.toString
             data =
                 state.PatientsData

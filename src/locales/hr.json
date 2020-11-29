@@ -520,9 +520,9 @@
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
             "title": "Testiranje",
-            "regularTesting": "Regularno",
+            "regular": "Regularno",
             "negativeTests": "Negativni testovi",
-            "nationalStudyTesting": "Istraživanje",
+            "ns-apr20": "Istraživanje",
             "allTesting": "Sve",
             "titleMenu": "Testiranje"
         },
