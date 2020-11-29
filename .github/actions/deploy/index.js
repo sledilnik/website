@@ -61,7 +61,9 @@ async function setDeploymentState(deployment_id, state) {
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
     try {
-        return await gh.repos.createDeploymentStatus(payload)
+        const status = await gh.repos.createDeploymentStatus(payload)
+        core.info(`Deployment status created: ${JSON.stringify(status)}`)
+        return status
     } catch (ex) {
         throw new Error(ex)
     }
