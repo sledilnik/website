@@ -44,8 +44,7 @@ async function deleteDeployment() {
             })
         });        
     } catch (ex) {
-        core.info(`Failed to delete deployment envrionment '${env}': ${ex}`)
-        throw new Error(`Failed to delete deployment: ${ex}`)
+        throw new Error(`Failed to delete deployment ${env}: ${ex}`)
     }
 }
 
@@ -67,7 +66,7 @@ async function setDeploymentState(deployment_id, state) {
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
     try {
         const status = await gh.repos.createDeploymentStatus(payload)
-        core.info(`Deployment status created: ${JSON.stringify(status)}`)
+        // core.info(`Deployment status created: ${JSON.stringify(status)}`)
         return status
     } catch (ex) {
         throw new Error(`Failed to create deployment status: ${ex}`)
@@ -79,7 +78,8 @@ async function helm(args) {
         core.info(`running: helm ${args.join(' ')}`)
         execFileSync("helm", args, { 'stdio': [0, 1, 1], env: process.env })
     } catch (ex) {
-        core.setFailed(ex)
+        // core.setFailed(ex)
+        throw ex
     }
 }
 
@@ -98,6 +98,7 @@ async function deploy() {
         setDeploymentState(deployment.data.id, "in_progress")
     } catch (ex) {
         core.setFailed(`Failed to set deployment state to 'in_progress: ${ex}`)
+        throw ex
     }
 
     try {
@@ -110,6 +111,7 @@ async function deploy() {
             core.warning(`Failed to set deployment state to failed: ${ex}`)
         }
         core.setFailed(`Helm install failed: ${ex}`)
+        throw ex
     }
 }
 
@@ -120,13 +122,16 @@ async function undeploy() {
     try {
         helm(['uninstall', releaseName, '--namespace', namespace])
     } catch (ex) {
-        core.setFailed(`Helm uninstall failed: ${ex}`)
+        ex = new Error(`Helm uninstall failed: ${ex}`)
+        core.setFailed(ex)
+        throw ex
     }
 
     try {
         deleteDeployment()
     } catch (ex) {
         core.setFailed(`Failed to delete deployment: ${ex}`)
+        throw ex
     }
 
 }
