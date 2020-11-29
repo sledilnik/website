@@ -57,6 +57,7 @@ async function setDeploymentState(deployment_id, state) {
         state,
         log_url,
         environment_url,
+        mediaType: {"previews": ["flash", "ant-man"]}
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
     try {
@@ -87,7 +88,7 @@ async function deploy() {
     var deployment = undefined;
     try {
         deployment = await createDeployment()
-        setDeploymentState(deployment.data.id, "pending")
+        setDeploymentState(deployment.data.id, "in_progress")
     } catch {
         core.setFailed(`Failed to create deployment: ${ex}`)
     }
