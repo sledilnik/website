@@ -15,6 +15,7 @@ async function createDeployment() {
         ref: context.ref,
         environment: process.env['INPUT_DEPLOYENV'],
         auto_inactive: true,
+        transient_environment: true,
     }
     core.info(`Creating deployment: ${JSON.stringify(payload)}`)
     try {
