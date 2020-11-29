@@ -360,8 +360,8 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "allTesting": "All",
-            "regularTesting": "Regular",
-            "nationalStudyTesting": "Study",
+            "regular": "Regular",
+            "nsapr20": "Study",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"

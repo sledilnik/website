@@ -789,8 +789,8 @@
             "disclaimer": "Nota: questo grafico non è aggiornato. Dall'11 ottobre, la NIJZ non riporta più i dati relativi alle case di riposo e agli operatori sanitari."
         },
         "tests": {
-            "nationalStudyTesting": "Ricerca",
-            "regularTesting": "Normale",
+            "nsapr20": "Ricerca",
+            "regular": "Normale",
             "title": "Analisi",
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
