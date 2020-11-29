@@ -146,23 +146,26 @@ let renderTestsChart (state : State) dispatch =
         let performed = positiveTests dp + negativeTests dp
         Math.Round(float positive / float performed * float 100.0, 2)
 
-    let allYAxis = [|
+    let allYAxis = [|   
         {|
             index = 0
             title = {| text = null |}
             labels = pojo {| format = "{value}"; align = "center"; x = -15; reserveSpace = false; |}
+            showFirstLabel = false
             opposite = true
             visible = true
             crosshair = true
-        |}
+        |} |> pojo
         {|
             index = 1
             title = {| text = null |}
             labels = pojo {| format = "{value}%"; align = "center"; x = 10; reserveSpace = false; |}
+            max = 64
+            showFirstLabel = false
             opposite = false
             visible = true
             crosshair = true
-        |}
+        |} |> pojo
     |]
 
     let allSeries = [
