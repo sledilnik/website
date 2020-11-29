@@ -80,9 +80,12 @@ async function deploy() {
         core.setFailed(`Failed to create deployment: ${ex}`)
     }
 
+    core.info(`Deplying: ${JSON.stringify(deployment)}`)
+
     try {
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
-        // setDeploymentState(deployment.data.id, "success")
+        
+        setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         try {
             setDeploymentState(deployment.data.id, "failed")
