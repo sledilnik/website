@@ -822,6 +822,7 @@
             "title": "Testiranje",
             "titleMenu": "Testiranje",
             "allTesting": "Skupaj",
+            "byLab": "Po laboratorijih",
             "regular": "Redno",
             "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",

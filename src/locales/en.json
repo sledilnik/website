@@ -360,6 +360,7 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "allTesting": "All",
+            "byLab": "By Laboratory",
             "regular": "Regular",
             "ns-apr20": "Study",
             "negativeTests": "Negative Tests",

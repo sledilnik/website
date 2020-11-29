@@ -15,11 +15,13 @@ open Data.LabTests
 type DisplayType =
     | Total
     | Data of string
+    | ByLab
     | Lab of string
 with
     static member GetName = function
         | Total -> I18N.t "charts.tests.allTesting"
         | Data typ -> I18N.tt "charts.tests" typ
+        | ByLab -> I18N.t "charts.tests.byLab"
         | Lab facility -> Utils.Dictionaries.GetFacilityName(facility)
 
 type State = {
@@ -35,6 +37,7 @@ let GetAllDisplayTypes state =
         for typ in [ "regular"; "ns-apr20" ] do
             yield Data typ
         yield Total
+        yield ByLab
         for lab in state.AllLabs do
             yield Lab lab
     }
@@ -79,20 +82,65 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let renderChartOptions (state : State) dispatch =
+
+let renderByLabChart (state : State) dispatch =
+    let className = "tests-by-lab"
+    let scaleType = ScaleType.Linear
+
+    let renderSources lab =
+        let renderPoint ls : (JsTimestamp * int option) =
+            let value =
+                ls.labs
+                |> Map.tryFind lab
+                |> Option.bind (fun stats -> stats.performed.today)
+            ls.JsDate12h, value
+
+        {|
+            visible = true
+            ``type`` = "line"
+            name = Utils.Dictionaries.GetFacilityName(lab)
+            color = Utils.Dictionaries.GetFacilityColor(lab)
+            dashStyle = Solid |> DashStyle.toString
+            data =
+                state.LabData
+                |> Seq.map renderPoint
+                |> Array.ofSeq
+            showInLegend = true
+        |} |> pojo
+
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        basicChartOptions
+            scaleType className
+            state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+    {| baseOptions with
+        series = [| for lab in state.AllLabs do yield renderSources lab |]
+
+        tooltip = pojo {| shared = true; formatter = None ; xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"|}
+
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+    |} |> pojo
+
+
+let renderTestsChart (state : State) dispatch =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
     let positiveTests (dp: LabTestsStats) =
         match state.DisplayType with
-        | Total     -> dp.total.positive.today |> Option.defaultValue 0
         | Data typ  -> dp.data.[typ].positive.today |> Option.defaultValue 0
-        | Lab lab   -> dp.labs.[lab].positive.today |> Option.defaultValue 0    
+        | Lab lab   -> dp.labs.[lab].positive.today |> Option.defaultValue 0   
+        | _         -> dp.total.positive.today |> Option.defaultValue 0
     let negativeTests (dp: LabTestsStats) =
         match state.DisplayType with
-        | Total     -> (dp.total.performed.today |> Option.defaultValue 0) - (dp.total.positive.today |> Option.defaultValue 0)
         | Data typ  -> (dp.data.[typ].performed.today |> Option.defaultValue 0) - (dp.data.[typ].positive.today |> Option.defaultValue 0)
         | Lab lab   -> (dp.labs.[lab].performed.today |> Option.defaultValue 0) - (dp.labs.[lab].positive.today |> Option.defaultValue 0)
+        | _         -> (dp.total.performed.today |> Option.defaultValue 0) - (dp.total.positive.today |> Option.defaultValue 0)
     let percentPositive (dp: LabTestsStats) =
         let positive = positiveTests dp
         let performed = positiveTests dp + negativeTests dp
@@ -184,13 +232,19 @@ let renderChartOptions (state : State) dispatch =
             |}
     |}
 
+
 let renderChartContainer (state : State) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
         prop.children [
-            renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            match state.DisplayType with
+            | ByLab ->
+                renderByLabChart state dispatch
+                |> Highcharts.chartFromWindow
+            | _ -> 
+                renderTestsChart state dispatch
+                |> Highcharts.chartFromWindow
         ]
     ]
 
