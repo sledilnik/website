@@ -5,6 +5,7 @@ inputs:
   action:
     description: 'Action to perform. deploy|undeploy'
     default: deploy
+    required: true
   chartName:
     description: 'Chart name'
     required: true
