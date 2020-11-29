@@ -14,6 +14,7 @@ async function createDeployment() {
         repo: context.payload.repository.name,
         ref: context.ref,
         environment: process.env['INPUT_DEPLOYENV'],
+        auto_inactive: true,
     }
     core.info(`Creating deployment: ${JSON.stringify(payload)}`)
     try {
@@ -24,9 +25,7 @@ async function createDeployment() {
 }
 
 async function deleteDeployment() {
-
     const env = process.env['INPUT_DEPLOYENV']
-
     core.info(`Deleting deployment environment: ${env}`)
     try {
         deployments = await gh.repos.listDeployments({
@@ -46,11 +45,16 @@ async function deleteDeployment() {
 }
 
 async function setDeploymentState(deployment_id, state) {
+
+    const log_url = `https://github.com/overlordtm/website/runs/${process.env['GITHUB_ACTION']}`
+
     const payload = {
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
         deployment_id,
-        state
+        state,
+        log_url,
+
     }
     core.info(`Setting deployment state: ${JSON.stringify(payload)}`)
     try {
