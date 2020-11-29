@@ -348,7 +348,9 @@
             "weekYearDateFormat": "%W. tjedan %Y.",
             "dataDate": "Podaci do: {{ date, %a., %e. %b. }}",
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
-            "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ"
+            "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
+            "dsMNZ": "MNZ",
+            "dsSURS": "SURS"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -754,6 +756,18 @@
             "deceasedToDate": "Smrtni slučajevi do danas",
             "titleMenu": "Smrtni slučajevi",
             "title": "Smrtni slučajevi"
+        },
+        "excessDeaths": {
+            "excess": {
+                "excessDeaths": "Više smrtnih slučajeva (u usporedbi s 2015. do 2019.)",
+                "title": "Više slučajeva u odnosu na zadnjih 5 godina",
+                "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19"
+            },
+            "titleMenu": "Godišnja usporedba smrtnih slučajeva",
+            "title": "Godišnja usporedba smrtnih slučajeva",
+            "absolute": {
+                "title": "Godišnja usporedba"
+            }
         }
     },
     "shortMonth": {
