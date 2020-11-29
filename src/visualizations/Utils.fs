@@ -247,6 +247,13 @@ module Dictionaries =
             "pbvo",     "PB Vojnik",            None
             "pbor",     "PB Ormož",             None
             "pbid",     "PB Idrija",            None
+            "imi",      "IMI Ljubljana",        None
+            "nlzohkp",  "NLZOH Koper",          None
+            "nlzohkr",  "NLZOH Kranj",          None
+            "nlzohlj",  "NLZOH Ljubljana",      None
+            "nlzohmb",  "NLZOH Maribor",        None
+            "nlzohms",  "NLZOH Murska Sobota",  None
+            "nlzohnm",  "NLZOH Novo mesto",     None
         ]
         |> List.map (fun (key, name, color) -> key, { Key = key ; Name = name ; Color = color })
         |> Map.ofList
