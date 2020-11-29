@@ -16,6 +16,7 @@ async function createDeployment() {
         owner: context.payload.repository.owner.login,
         repo: context.payload.repository.name,
         ref: context.ref,
+        required_contexts: [],
         environment: process.env['INPUT_DEPLOYENV'],
         auto_inactive: true,
         transient_environment
