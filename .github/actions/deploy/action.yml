@@ -1,0 +1,47 @@
+# action.yml
+name: 'Deploy'
+description: 'Helm deploy action'
+inputs:
+  action:
+    description: 'Action to perform. deploy|undeploy'
+    default: deploy
+  chartName:
+    description: 'Chart name'
+    required: true
+  chartVersion:
+    description: 'Chart version'
+    required: true
+  releaseName:
+    description: 'Helm release name'
+    required: true
+  chartValues:
+    description: 'Values file for chart'
+    required: true
+  namespace:
+    description: 'Kubernetes namespace to deploy to'
+    required: true
+  helmRepoName:
+    description: 'Helm repo name'
+    required: true
+  helmRepoUrl:
+    description: 'Helm repository URL'
+    required: true
+  kubeconfig:
+    description: 'Kubeconfig'
+    required: true
+  deployEnv:
+    description: 'Deploy environment (for GH deployments)'
+    required: true
+  deployUrl:
+    description: 'URL of actual deployment'
+    required: true
+  token:
+    description: 'Github token'
+    required: false
+    default: ${{ github.token }}
+outputs:
+  time: # id of output
+    description: 'The time we greeted you'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
