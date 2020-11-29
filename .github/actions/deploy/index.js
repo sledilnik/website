@@ -46,7 +46,7 @@ async function deleteDeployment() {
 
 async function setDeploymentState(deployment_id, state) {
 
-    const actionId = process.env['GITHUB_ACTION']
+    const actionId = context.runId
     const log_url = `https://github.com/overlordtm/website/runs/${actionId}`
     const environment_url = `https://sledilnik.org`
 
