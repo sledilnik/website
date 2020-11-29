@@ -82,8 +82,7 @@ let getAllScopes state = seq {
     yield Totals, I18N.t "charts.hospitals.allHospitals"
     yield Projection, I18N.t "charts.hospitals.projection"
     for fcode in state.facilities do
-        let _, name = fcode |> facilitySeriesInfo
-        yield Facility fcode, name
+        yield Facility fcode, Utils.Dictionaries.GetFacilityName(fcode)
 }
 
 

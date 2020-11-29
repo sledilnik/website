@@ -219,6 +219,48 @@ let mixColors
 
 module Dictionaries =
 
+    type Facility = {
+        Key : string
+        Name : string
+        Color : string option
+    }
+
+    let facilities =
+        [ 
+            "bse",      "B Sežana",             None
+            "bto",      "B Topolšica",          None
+            "sbbr",     "SB Brežice",           None
+            "sbce",     "SB Celje",             Some "#70a471"
+            "sbje",     "SB Jesenice",          None
+            "sbiz",     "SB Izola",             None
+            "sbms",     "SB Murska Sobota",     None
+            "sbng",     "SB Nova Gorica",       None
+            "sbnm",     "SB Novo mesto",        None
+            "sbpt",     "SB Ptuj",              None
+            "sbsg",     "SB Slovenj Gradec",    None
+            "sbtr",     "SB Trbovlje",          None
+            "ukclj",    "UKC Ljubljana",        Some "#10829a"
+            "ukcmb",    "UKC Maribor",          Some "#003f5c"
+            "ukg",      "UK Golnik",            Some "#7B7226"
+            "upklj",    "UPK Ljubljana",        None
+            "pbbe",     "PB Begunje",           None
+            "pbvo",     "PB Vojnik",            None
+            "pbor",     "PB Ormož",             None
+            "pbid",     "PB Idrija",            None
+        ]
+        |> List.map (fun (key, name, color) -> key, { Key = key ; Name = name ; Color = color })
+        |> Map.ofList
+   
+    let GetFacilityName key =
+        match facilities.TryFind(key) with
+        | Some facility -> facility.Name
+        | None -> key
+
+    let GetFacilityColor key =
+        match facilities.TryFind(key) with
+        | Some facility -> facility.Color
+        | None -> None
+
     type Region = {
         Key : string
         Name : string
