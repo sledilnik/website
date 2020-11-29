@@ -84,7 +84,7 @@ async function deploy() {
 
     try {
         helm(['upgrade', releaseName, chartName, '--install', '--atomic', '--namespace', namespace, '--version', chartVersion, '-f', chartValues])
-        
+
         setDeploymentState(deployment.data.id, "success")
     } catch (ex) {
         try {
@@ -114,16 +114,12 @@ async function undeploy() {
 
 }
 
-function main() {
-    try {
-        if (process.env['INPUT_ACTION'] == 'undeploy') {
-            undeploy()
-        } else {
-            deploy()
-        }
-    } catch (ex) {
-        core.setFailed(ex)
+try {
+    if (process.env['INPUT_ACTION'] == 'undeploy') {
+        undeploy()
+    } else {
+        deploy()
     }
+} catch (ex) {
+    core.setFailed(ex)
 }
-
-main()
