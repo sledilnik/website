@@ -171,19 +171,21 @@ let renderByLabChart (state: State) dispatch =
            series =
                [| for lab in state.AllLabs do
                    yield renderSources lab |]
+           plotOptions = pojo {| series = {| stacking = None |} |}
+           legend = pojo {| enabled = true; layout = "horizontal" |}
            tooltip =
                pojo
                    {| shared = true
-                      formatter = None
+                      split = false
                       valueSuffix = if state.DisplayType = ByLabPercent then "%" else ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
-           plotOptions =
-               pojo
-                   {| series = {| stacking = None |} |}
-           legend =
-               pojo
-                   {| enabled = true
-                      layout = "horizontal" |} |}
+           responsive = pojo
+                   {| rules =
+                          [| {| condition = {| maxWidth = 768 |}
+                                chartOptions =
+                                    {| yAxis =
+                                           [| {| labels = {| enabled = false |} |}
+                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |} 
     |> pojo
 
 
@@ -310,6 +312,12 @@ let renderTestsChart (state: State) dispatch =
                pojo
                    {| enabled = true
                       layout = "horizontal" |}
+           tooltip =
+               pojo
+                   {| shared = true
+                      split = false
+                      valueSuffix = ""
+                      xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            responsive =
                pojo
                    {| rules =
@@ -318,6 +326,7 @@ let renderTestsChart (state: State) dispatch =
                                     {| yAxis =
                                            [| {| labels = {| enabled = false |} |}
                                               {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+    |> pojo
 
 
 let renderChartContainer (state: State) dispatch =
