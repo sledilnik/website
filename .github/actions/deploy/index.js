@@ -72,7 +72,7 @@ async function deploy() {
     const chartVersion = process.env['INPUT_CHARTVERSION']
     const chartValues = process.env['INPUT_CHARTVALUES']
 
-    let deployment = undefined;
+    var deployment = undefined;
     try {
         deployment = await createDeployment()
         setDeploymentState(deployment.data.id, "pending")
