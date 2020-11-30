@@ -60,7 +60,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         regionsWithoutExcluded
         |> List.sortByDescending regionTotal
 
-    let metrics =
+    let regionsConfig =
         regionsByTotalCases
         |> List.map (fun region ->
             let regionKey = region.Name
@@ -71,7 +71,9 @@ let init (config: RegionsChartConfig) (data : RegionsData)
 
     { ScaleType = Linear; MetricType = ActiveCases
       ChartConfig = config
-      Data = data ; Regions = regionsByTotalCases ; Metrics = metrics
+      Data = data
+      Regions = regionsByTotalCases
+      RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
     Cmd.none
 
@@ -79,13 +81,13 @@ let update (msg: Msg) (state: RegionsChartState)
     : RegionsChartState * Cmd<Msg> =
     match msg with
     | ToggleRegionVisible regionKey ->
-        let newMetrics =
-            state.Metrics
+        let newRegionsConfig =
+            state.RegionsConfig
             |> List.map (fun m ->
                 if m.Key = regionKey
                 then { m with Visible = not m.Visible }
                 else m)
-        { state with Metrics = newMetrics }, Cmd.none
+        { state with RegionsConfig = newRegionsConfig }, Cmd.none
     | MetricTypeChanged newMetricType ->
         { state with MetricType = newMetricType }, Cmd.none
     | ScaleTypeChanged scaleType ->
@@ -220,26 +222,27 @@ let renderChartContainer state dispatch =
         ]
     ]
 
-let renderMetricSelector (metric : RegionsChartMetric) dispatch =
+let renderRegionSelector (regionConfig: RegionRenderingConfiguration) dispatch =
     let style =
-        if metric.Visible
-        then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
+        if regionConfig.Visible
+        then [ style.backgroundColor regionConfig.Color
+               style.borderColor regionConfig.Color ]
         else [ ]
     Html.div [
-        prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
+        prop.onClick (fun _ -> ToggleRegionVisible regionConfig.Key |> dispatch)
         Utils.classes
             [(true, "btn  btn-sm metric-selector")
-             (metric.Visible, "metric-selector--selected") ]
+             (regionConfig.Visible, "metric-selector--selected") ]
         prop.style style
-        prop.text (I18N.tt "region" metric.Key) ]
+        prop.text (I18N.tt "region" regionConfig.Key) ]
 
-let renderMetricsSelectors metrics dispatch =
+let renderRegionsSelectors metrics dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
             metrics
             |> List.map (fun metric ->
-                renderMetricSelector metric dispatch
+                renderRegionSelector metric dispatch
             ) ) ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
@@ -271,7 +274,7 @@ let render (state : RegionsChartState) dispatch =
                 state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics dispatch
+        renderRegionsSelectors state.RegionsConfig dispatch
     ]
 
 let renderChart

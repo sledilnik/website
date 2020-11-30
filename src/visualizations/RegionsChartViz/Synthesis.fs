@@ -9,7 +9,7 @@ type RegionsChartConfig = {
     ChartTextsGroup: string
 }
 
-type RegionsChartMetric =
+type RegionRenderingConfiguration =
     { Key : string
       Color : string
       Visible : bool }
@@ -21,7 +21,7 @@ type RegionsChartState =
       MetricType : MetricType
       Data : RegionsData
       Regions : Region list
-      Metrics : RegionsChartMetric list
+      RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
     }
 
@@ -31,15 +31,15 @@ type RegionSeries = {
     Values: (JsTimestamp * float)[]
 }
 
-let metricsToRender state =
-    state.Metrics
-    |> List.filter (fun metric -> metric.Visible)
+let visibleRegions state =
+    state.RegionsConfig
+    |> List.filter (fun regionConfig -> regionConfig.Visible)
 
-let renderRegionPoint state metricToRender (point : RegionsDataPoint) =
+let renderRegionPoint state regionConfig (point : RegionsDataPoint) =
     let ts = point.Date |> jsTime12h
     let region =
         point.Regions
-        |> List.find (fun reg -> reg.Name = metricToRender.Key)
+        |> List.find (fun reg -> reg.Name = regionConfig.Key)
 
     let municipalityMetricValue muni =
         match state.MetricType with
@@ -68,10 +68,13 @@ let renderRegionPoint state metricToRender (point : RegionsDataPoint) =
 
     ts, finalValue
 
+//let regionSeries state region =
+
+
 let allSeries state =
-    metricsToRender state
-    |> List.map (fun metric ->
-        let renderPoint = renderRegionPoint state metric
+    visibleRegions state
+    |> List.map (fun regionConfig ->
+        let renderPoint = renderRegionPoint state regionConfig
 
         let data =
             state.Data
@@ -79,9 +82,9 @@ let allSeries state =
             |> Array.ofSeq
 
         {|
-            visible = metric.Visible
-            color = metric.Color
-            name = I18N.tt "region" metric.Key
+            visible = regionConfig.Visible
+            color = regionConfig.Color
+            name = I18N.tt "region" regionConfig.Key
             data = data
         |}
         |> pojo
