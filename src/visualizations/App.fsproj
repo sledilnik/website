@@ -54,6 +54,8 @@
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
         <Compile Include="ExcessDeathsChart/Relative.fs" />
         <Compile Include="ExcessDeathsChart/Chart.fs" />
+        <Compile Include="RegionsChartViz\Analysis.fs" />
+        <Compile Include="RegionsChartViz\Synthesis.fs" />
         <Compile Include="RegionsChartViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />

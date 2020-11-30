@@ -4,6 +4,7 @@ open Browser
 open Elmish
 open Feliz
 
+open RegionsChartViz.Synthesis
 open Types
 open CountriesChartViz.Analysis
 open I18N
@@ -316,9 +317,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChartViz.Rendering
-                                        .RegionsChartConfig =
-                            { RelativeTo = RegionsChartViz.Rendering
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
                                                .MetricRelativeTo.Absolute
                               ChartTextsGroup = "regions"
                             }
@@ -339,9 +339,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChartViz
-                                        .Rendering.RegionsChartConfig =
-                            { RelativeTo = RegionsChartViz.Rendering
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
                                                .MetricRelativeTo.Pop100k
                               ChartTextsGroup = "regions100k"
                             }
