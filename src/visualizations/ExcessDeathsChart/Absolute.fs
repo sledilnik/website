@@ -23,6 +23,7 @@ let renderChartOptions (data : MonthlyDeathsData) =
                 |> List.toArray
             {| ``type`` = "line"
                name = year
+               animation = false
                showInLegend = year = System.DateTime.Now.Year
                data = seriesData
                color = if year = System.DateTime.Now.Year then colors.CurrentYear else colors.BaselineYear

@@ -60,31 +60,25 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
             Utils.renderChartTopControls [
                 renderDisplayTypeSelectors state dispatch ]
             Html.div [
-                prop.style [ style.height 450 ]
                 prop.className "highcharts-wrapper"
                 prop.children [
-                    Html.span [
-                        Utils.classes [ not(state.DisplayType = AbsoluteDeaths), "hidden" ]
-                        prop.children [
-                            Absolute.renderChartOptions data |> Highcharts.chart
-                        ]
-                    ]
-                    Html.span [
-                        Utils.classes [ not(state.DisplayType = ExcessDeaths), "hidden" ]
-                        prop.children [
-                            Relative.renderChartOptions data state.StatsData |> Highcharts.chart
-                        ]
-                    ]
+                    match state.DisplayType with
+                    | AbsoluteDeaths ->
+                        React.keyedFragment (1, [
+                            Html.div [
+                                prop.style [ style.height 450 ]
+                                prop.children [
+                                    Absolute.renderChartOptions data |> Highcharts.chart ] ] ] )
+                    | ExcessDeaths ->
+                        React.keyedFragment (2, [
+                            Html.div [
+                                prop.style [ style.height 397 ]
+                                prop.children [ Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] ]
+                            Html.div [
+                                prop.className "disclaimer"
+                                prop.children [
+                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer") ] ] ] )
                 ]
             ]
-            match state.DisplayType with
-            | AbsoluteDeaths -> Html.none
-            | ExcessDeaths ->
-                Html.div [
-                    prop.className "disclaimer"
-                    prop.children [
-                        Html.text (I18N.chartText "excessDeaths" "excess.disclaimer")
-                    ]
-                ]
         ]
     )

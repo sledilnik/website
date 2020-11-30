@@ -85,6 +85,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
         [|
             {| ``type`` = "line"
                name = (I18N.t "charts.excessDeaths.excess.excessDeaths")
+               animation = false
                marker = {| enabled = false |} |> pojo
                color = colors.ExcessDeaths
                data =
@@ -98,6 +99,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
             |} |> pojo
             {| ``type`` = "area"
                name = (I18N.t "charts.excessDeaths.excess.covidDeaths")
+               animation = false
                marker = {| enabled = false |} |> pojo
                color = colors.CovidDeaths
                lineWidth = 0
