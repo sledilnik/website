@@ -1,5 +1,4 @@
-[<RequireQualifiedAccess>]
-module RegionsChart
+module RegionsChartViz.Rendering
 
 open Types
 
@@ -42,11 +41,13 @@ type Metric =
 type MetricType =
     | ActiveCases
     | ConfirmedCases
+    | NewCases7Days
     | Deceased
   with
     static member getName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
         | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
+        | NewCases7Days -> I18N.chartText "regions" "newCases7Days"
         | Deceased -> I18N.chartText "regions" "deceased"
 
 type MetricRelativeTo = Absolute | Pop100k
@@ -129,7 +130,7 @@ let tooltipValueFormatter (state: State) value =
     | Absolute -> Utils.formatToInt value
     | Pop100k -> Utils.formatTo1DecimalWithTrailingZero value
 
-let tooltipFormatter (state: State) chartData jsThis =
+let tooltipFormatter (state: State) _ jsThis =
     let points: obj[] = jsThis?points
 
     match points with
@@ -173,7 +174,7 @@ let renderChartOptions (state : State) dispatch =
         state.Metrics
         |> List.filter (fun metric -> metric.Visible)
 
-    let renderRegion metricToRender (point : RegionsDataPoint) =
+    let renderRegionPoint metricToRender (point : RegionsDataPoint) =
         let ts = point.Date |> jsTime12h
         let region =
             point.Regions
@@ -183,6 +184,7 @@ let renderChartOptions (state : State) dispatch =
             match state.MetricType with
             | ActiveCases -> muni.ActiveCases
             | ConfirmedCases -> muni.ConfirmedToDate
+            | NewCases7Days -> muni.ConfirmedToDate
             | Deceased -> muni.DeceasedToDate
             |> Option.defaultValue 0
 
@@ -208,12 +210,18 @@ let renderChartOptions (state : State) dispatch =
     let allSeries =
         metricsToRender
         |> List.map (fun metric ->
-            let renderPoint = renderRegion metric
+            let renderPoint = renderRegionPoint metric
+
+            let data =
+                state.Data
+                |> Seq.map renderPoint
+                |> Array.ofSeq
+
             {|
                 visible = metric.Visible
                 color = metric.Color
                 name = I18N.tt "region" metric.Key
-                data = state.Data |> Seq.map renderPoint |> Array.ofSeq
+                data = data
             |}
             |> pojo
         )
@@ -334,7 +342,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ ActiveCases; ConfirmedCases; Deceased ]
+        [ ActiveCases; ConfirmedCases; NewCases7Days; Deceased ]
         |> List.map renderMetricTypeSelector
 
     Html.div [
@@ -345,8 +353,10 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
 let render (state : State) dispatch =
     Html.div [
         Utils.renderChartTopControls [
-            renderMetricTypeSelectors state.MetricType (MetricTypeChanged >> dispatch)
-            Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+            renderMetricTypeSelectors
+                state.MetricType (MetricTypeChanged >> dispatch)
+            Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
         renderMetricsSelectors state.Metrics dispatch

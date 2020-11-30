@@ -316,12 +316,15 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Absolute
+                        let config: RegionsChartViz.Rendering
+                                        .RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Rendering
+                                               .MetricRelativeTo.Absolute
                               ChartTextsGroup = "regions"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
             }
 
     let regions100k =
@@ -336,12 +339,15 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Pop100k
+                        let config: RegionsChartViz
+                                        .Rendering.RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Rendering
+                                               .MetricRelativeTo.Pop100k
                               ChartTextsGroup = "regions100k"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
          }
 
     let sources =
