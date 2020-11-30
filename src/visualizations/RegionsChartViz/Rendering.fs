@@ -139,63 +139,6 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
 
 let renderChartOptions (state : RegionsChartState) dispatch =
 
-    let metricsToRender =
-        state.Metrics
-        |> List.filter (fun metric -> metric.Visible)
-
-    let renderRegionPoint metricToRender (point : RegionsDataPoint) =
-        let ts = point.Date |> jsTime12h
-        let region =
-            point.Regions
-            |> List.find (fun reg -> reg.Name = metricToRender.Key)
-
-        let municipalityMetricValue muni =
-            match state.MetricType with
-            | ActiveCases -> muni.ActiveCases
-            | ConfirmedCases -> muni.ConfirmedToDate
-            | NewCases7Days -> muni.ConfirmedToDate
-            | MetricType.Deceased -> muni.DeceasedToDate
-            |> Option.defaultValue 0
-
-        let totalSum =
-            region.Municipalities
-            |> Seq.sumBy municipalityMetricValue
-            |> float
-
-        let finalValue =
-            match state.ChartConfig.RelativeTo with
-            | Absolute -> totalSum
-            | Pop100k ->
-                let regionPopulation =
-                    Utils.Dictionaries.regions.[region.Name].Population
-                    |> Option.get
-                    |> float
-
-                let regionPopBy100k = regionPopulation / 100000.0
-                totalSum / regionPopBy100k
-
-        ts, finalValue
-
-    let allSeries =
-        metricsToRender
-        |> List.map (fun metric ->
-            let renderPoint = renderRegionPoint metric
-
-            let data =
-                state.Data
-                |> Seq.map renderPoint
-                |> Array.ofSeq
-
-            {|
-                visible = metric.Visible
-                color = metric.Color
-                name = I18N.tt "region" metric.Key
-                data = data
-            |}
-            |> pojo
-        )
-        |> List.toArray
-
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
             RangeSelectionChanged buttonIndex |> dispatch
@@ -255,7 +198,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
-        series = allSeries
+        series = allSeries state
         xAxis = xAxis
         yAxis = yAxis
         legend = {| enabled = false |}
