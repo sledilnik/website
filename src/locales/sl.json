@@ -1069,7 +1069,8 @@
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
-                "covidDeaths": "Potrjene COVID-19 smrti"
+                "covidDeaths": "Potrjene COVID-19 smrti",
+                "disclaimer": "Opomba: izračun presežnih smrti združuje podatke SURS (2015-2018) in MNZ (2019-2020), ki pa niso povsem kompatibilni. Ker so podatki SURS za leto 2020 samo začasni in ne vključujejo podatkov za zadnji mesec, je zaradi ažurnosti prikaza to združevanje nujno. Delamo na tem, da pridobimo podatke MNZ za celotno obdobje."
             }
         },
         "ostanizdrav": {
