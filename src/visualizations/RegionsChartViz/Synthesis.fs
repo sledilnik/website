@@ -26,8 +26,6 @@ type RegionsChartState =
     }
 
 type RegionSeries = {
-    Name: string
-    Color: string
     Values: (JsTimestamp * float)[]
 }
 
@@ -68,24 +66,25 @@ let renderRegionPoint state regionConfig (point : RegionsDataPoint) =
 
     ts, finalValue
 
-//let regionSeries state region =
+let regionSeries state regionConfig: RegionSeries =
+    let renderPoint = renderRegionPoint state regionConfig
 
+    let seriesValues =
+        state.Data
+        |> Seq.map renderPoint
+        |> Array.ofSeq
+
+    { Values = seriesValues }
 
 let allSeries state =
     visibleRegions state
     |> List.map (fun regionConfig ->
-        let renderPoint = renderRegionPoint state regionConfig
-
-        let data =
-            state.Data
-            |> Seq.map renderPoint
-            |> Array.ofSeq
+        let regionSeries = regionSeries state regionConfig
 
         {|
-            visible = regionConfig.Visible
-            color = regionConfig.Color
             name = I18N.tt "region" regionConfig.Key
-            data = data
+            color = regionConfig.Color
+            data = regionSeries.Values
         |}
         |> pojo
     )
