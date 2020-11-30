@@ -77,5 +77,14 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                     ]
                 ]
             ]
+            match state.DisplayType with
+            | AbsoluteDeaths -> Html.none
+            | ExcessDeaths ->
+                Html.div [
+                    prop.className "disclaimer"
+                    prop.children [
+                        Html.text (I18N.chartText "excessDeaths" "excess.disclaimer")
+                    ]
+                ]
         ]
     )
