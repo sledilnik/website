@@ -3,6 +3,7 @@ module Utils
 
 open Fable.Core
 open Feliz
+open Fable.Core.JsInterop
 
 open Types
 open System
@@ -34,6 +35,9 @@ let nativeParseInt (input : string) : int option = jsNative
 
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseFloat (input : string) : float option = jsNative
+
+let getISOWeekYear (date : System.DateTime) : int =
+    importDefault "date-fns/getISOWeekYear"
 
 let parseDate (str : string) =
     try
@@ -226,7 +230,7 @@ module Dictionaries =
     }
 
     let facilities =
-        [ 
+        [
             "bse",      "B Sežana",             None
             "bto",      "B Topolšica",          None
             "sbbr",     "SB Brežice",           None
@@ -257,7 +261,7 @@ module Dictionaries =
         ]
         |> List.map (fun (key, name, color) -> key, { Key = key ; Name = name ; Color = color })
         |> Map.ofList
-   
+
     let GetFacilityName key =
         match facilities.TryFind(key) with
         | Some facility -> facility.Name

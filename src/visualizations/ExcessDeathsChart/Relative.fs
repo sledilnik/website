@@ -3,6 +3,7 @@ module ExcessDeathsChart.Relative
 open Browser
 open Highcharts
 open Fable.Core.JsInterop
+open Fable.DateFunctions
 
 open Types
 
@@ -13,16 +14,16 @@ let colors = {|
 
 let YEAR = 2020
 
-let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
+let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
 
     let baselineStartYear, baselineEndYear = 2015, 2019
 
     let deceasedBaseline =
         data
-        |> List.filter (fun dp -> dp.year >= baselineStartYear && dp.year <= baselineEndYear)
-        |> List.groupBy (fun dp -> dp.month)
-        |> List.map (fun (month, dps) ->
-            (month, (List.sumBy (fun (dp : Data.MonthlyDeaths.DataPoint) -> float dp.deceased) dps) / float (baselineEndYear - baselineStartYear + 1)) )
+        |> List.filter (fun dp -> dp.Year >= baselineStartYear && dp.Year <= baselineEndYear)
+        |> List.groupBy (fun dp -> dp.Week)
+        |> List.map (fun (week, dps) ->
+            (week, (List.sumBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps) / float (baselineEndYear - baselineStartYear + 1)) )
 
     let deceasedBaselineMap =
         deceasedBaseline
@@ -30,55 +31,43 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
 
     let deceasedCurrentYear =
         data
-        |> List.filter (fun dp -> dp.year = YEAR && dp.month < 11)
-        |> List.map (fun dp -> (dp.month, dp.deceased))
+        |> List.filter (fun dp -> dp.Year = YEAR)
+        |> List.map (fun dp -> (dp.Week, dp.Deceased))
 
     let deceasedCurrentYearRelativeToBaseline =
         deceasedCurrentYear
-        |> List.map (fun (month, deceased) ->
-            match deceasedBaselineMap.TryFind(month) with
+        |> List.map (fun (week, deceased) ->
+            match deceasedBaselineMap.TryFind(week) with
             | None -> None
             | Some baseline ->
-                Some (month, (float deceased - baseline) / baseline * 100.) )
+                Some (week, (float deceased - baseline) / baseline * 100.) )
         |> List.choose id
 
     let deceasedCovidCurrentYear =
-        let data =
-            statsData
-            // Filter the data to the current year
-            |> List.filter (fun dp -> dp.Date.Year = YEAR)
-            // Select only the non-empty deceased data points
-            |> List.map (fun dp ->
-                match dp.StatePerTreatment.Deceased with
-                | None -> None
-                | Some deceased -> Some (dp.Date.Month, deceased) )
-            |> List.choose id
-            |> List.groupBy (fun (month, deceased) -> month)
-            |> List.map (fun (month, deceased) ->
-                let deceasedSum =
-                    deceased
-                    |> List.map (fun (month, deceased) -> deceased)
-                    |> List.sum
-                (month, deceasedSum) )
-            |> List.sort
-
-        // Add 0 to the month before the first month to smooth the area
-        match data with
-        | [ ] -> data
-        | _ ->
-            let (firstMonth, _) = data.Head
-            if firstMonth = 1 then
-                data
-            else
-                List.append [firstMonth - 1, 0] data
+        statsData
+        // Filter the data to the current year
+        |> List.filter (fun dp -> dp.Date.Year = YEAR)
+        // Select only the non-empty deceased data points
+        |> List.map (fun dp ->
+            match dp.StatePerTreatment.Deceased with
+            | None -> None
+            | Some deceased -> Some (dp.Date, deceased) )
+        |> List.choose id
+        |> List.map (fun (date, deceased) ->
+                (Utils.getISOWeekYear(date), date.GetISOWeek(), deceased) )
+        |> List.groupBy (fun (year, week, _) -> (year, week))
+        |> List.map (fun ((year, week), dps) ->
+            { Year = year
+              Week = week
+              Deceased = dps |> List.sumBy (fun (_, _, deceased) -> deceased) } )
 
     let deceasedCovidCurrentYearPercent =
         deceasedCovidCurrentYear
-        |> List.map (fun (month, deceasedCovid) ->
-            match deceasedBaselineMap.TryFind(month) with
+        |> List.map (fun dp ->
+            match deceasedBaselineMap.TryFind(dp.Week) with
             | None -> None
             | Some deceasedTotal ->
-                Some (month, float deceasedCovid / float deceasedTotal * 100.) )
+                Some (dp.Week, float dp.Deceased / float deceasedTotal * 100.) )
         |> List.choose id
 
     let series =
@@ -90,11 +79,9 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
                color = colors.ExcessDeaths
                data =
                    deceasedCurrentYearRelativeToBaseline
-                   |> List.map (fun (month, percent) ->
-                       {| x = month
-                          y = percent
-                          name = Utils.monthNameOfIndex month
-                       |} |> pojo)
+                   |> List.map (fun (week, percent) ->
+                       {| x = week
+                          y = System.Math.Round(percent, 1) |} |> pojo)
                    |> List.toArray
             |} |> pojo
             {| ``type`` = "area"
@@ -105,16 +92,22 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
                lineWidth = 0
                data =
                    deceasedCovidCurrentYearPercent
-                   |> List.map (fun (month, percent) ->
-                       {| x = month
-                          y = percent
-                          name = Utils.monthNameOfIndex month
-                       |} |> pojo)
+                   |> List.map (fun (week, percent) ->
+                       {| x = week
+                          y = System.Math.Round(percent, 1) |} |> pojo)
                    |> List.toArray
             |} |> pojo
         |]
 
-    {| baseOptions with
-        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
-        tooltip = {| formatter = fun () -> sprintf "%s<br>%.2f %%" (Utils.monthNameOfIndex jsThis?x) jsThis?y |} |> pojo
-        series = series |} |> pojo
+    {| title = ""
+       yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
+       tooltip = {| formatter = fun () -> sprintf "<b>%s %d</b>: %.1f %%" (I18N.t "week") jsThis?x jsThis?y |} |> pojo
+       series = series
+       credits =
+        {| enabled = true
+           text = sprintf "%s: %s, %s"
+                (I18N.t "charts.common.dataSource")
+                (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
+                (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+           href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
+    |} |> pojo
