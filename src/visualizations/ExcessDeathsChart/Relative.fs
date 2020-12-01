@@ -30,7 +30,7 @@ let renderChartOptions (data : MonthlyDeathsData) (statsData : StatsData) =
 
     let deceasedCurrentYear =
         data
-        |> List.filter (fun dp -> dp.year = YEAR)
+        |> List.filter (fun dp -> dp.year = YEAR && dp.month < 11)
         |> List.map (fun dp -> (dp.month, dp.deceased))
 
     let deceasedCurrentYearRelativeToBaseline =

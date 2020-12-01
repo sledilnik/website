@@ -68,7 +68,7 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                             Html.div [
                                 prop.style [ style.height 450 ]
                                 prop.children [
-                                    Absolute.renderChartOptions data |> Highcharts.chart ] ] ] )
+                                    Absolute.renderChartOptions data |> Highcharts.chart ] ]
                             Html.div [
                                 prop.className "disclaimer"
                                 prop.children [
