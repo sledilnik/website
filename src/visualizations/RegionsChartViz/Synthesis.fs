@@ -33,6 +33,20 @@ let visibleRegions state =
     |> List.filter (fun regionConfig -> regionConfig.Visible)
 
 
+let newCases (regionMetricData: RegionMetricData): RegionMetricData =
+    let totalCasesArray = regionMetricData.MetricValues
+    let valuesLength = totalCasesArray.Length
+
+    let newCasesArray =
+        Array.init valuesLength
+            (fun i ->
+                match i with
+                | 0 -> totalCasesArray.[i]
+                | _ -> totalCasesArray.[i] - totalCasesArray.[i - 1]
+            )
+
+    { regionMetricData with MetricValues = newCasesArray }
+
 let allSeries state =
     let startDate =
         match state.RegionsData with
@@ -53,8 +67,14 @@ let allSeries state =
             |> float
         let regionPopBy100k = regionPopulation / 100000.0
 
+        let regionMetrics2nStep =
+            regionMetrics
+            |> match state.MetricType with
+               | NewCases7Days -> newCases
+               | _ -> id
+
         let seriesValuesHc: RegionSeriesValues =
-            regionMetrics.MetricValues
+            regionMetrics2nStep.MetricValues
             |> Array.mapi (fun i metricValue ->
                 let ts = startDate |> Days.add i |> jsTime12h
 
