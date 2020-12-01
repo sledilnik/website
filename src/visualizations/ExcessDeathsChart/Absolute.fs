@@ -1,25 +1,27 @@
 module ExcessDeathsChart.Absolute
 
+open Fable.Core.JsInterop
 open Highcharts
 
 open Types
+open Browser
 
 let colors = {|
     CurrentYear = "#a483c7"
     BaselineYear = "#d5d5d5"
 |}
 
-let renderChartOptions (data : MonthlyDeathsData) =
+let renderChartOptions (data : WeeklyDeathsData) =
     let series =
         data
-        |> List.groupBy (fun dp -> dp.year)
+        |> List.groupBy (fun dp -> dp.Year)
         |> List.map (fun (year, data) ->
             let seriesData =
                 data
                 |> List.map (fun dp ->
-                {| x = dp.month
-                   y = dp.deceased
-                   name = Utils.monthNameOfIndex dp.month |} |> pojo)
+                {| x = dp.Week
+                   y = dp.Deceased
+                   name = sprintf "%s %d" (I18N.t "week") dp.Week |} |> pojo)
                 |> List.toArray
             {| ``type`` = "line"
                name = year
@@ -34,4 +36,5 @@ let renderChartOptions (data : MonthlyDeathsData) =
 
     {| baseOptions with
         yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
+        tooltip = {| formatter = fun () -> sprintf "<b>%s, %s %d</b>: %d umrlih" jsThis?series?name ((I18N.t "week").ToLower()) jsThis?x jsThis?y |} |> pojo
         series = series |} |> pojo
