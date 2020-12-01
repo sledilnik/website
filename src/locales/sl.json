@@ -1064,7 +1064,8 @@
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
             "absolute": {
-                "title": "Primerjava po letih"
+                "title": "Primerjava po letih",
+                "disclaimer": "Opomba: podatki za november so nepopolni."
             },
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",

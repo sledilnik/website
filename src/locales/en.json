@@ -574,7 +574,8 @@
             "title": "Yearly deaths comparison",
             "titleMenu": "Yearly deaths comparison",
             "absolute": {
-                "title": "Yearly comparison"
+                "title": "Yearly comparison",
+                "disclaimer": "Note: Data for November is provisional."
             },
             "excess": {
                 "title": "Excess relative to the last 5 years",

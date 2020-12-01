@@ -170,3 +170,4 @@ sketch
 .firebase/
 
 # End of https://www.gitignore.io/api/firebase
+.Rproj.user
