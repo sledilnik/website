@@ -35,17 +35,3 @@ type State = {
 type Msg =
     | DailyDeathsDataReceived of Result<DailyDeathsData, string>
     | DisplayTypeChanged of DisplayType
-
-open Browser
-open Highcharts
-
-let baseOptions =
-    {| title = ""
-       credits =
-            {| enabled = true
-               text = sprintf "%s: %s, %s"
-                    (I18N.t "charts.common.dataSource")
-                    (I18N.tOptions ("charts.common.dsSURS") {| context = localStorage.getItem ("contextCountry") |})
-                    (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-               href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
-    |}
