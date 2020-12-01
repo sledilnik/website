@@ -100,6 +100,7 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
         |]
 
     {| title = ""
+       xAxis = {| labels = {| formatter = fun (x) -> sprintf "%s %s" x?value ((I18N.t "week").ToLower()) |} |> pojo |}
        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
        tooltip = {| formatter = fun () -> sprintf "<b>%s %d</b>: %.1f %%" (I18N.t "week") jsThis?x jsThis?y |} |> pojo
        series = series

@@ -35,8 +35,9 @@ let renderChartOptions (data : WeeklyDeathsData) =
         |> List.toArray
 
     {| title = ""
+       xAxis = {| labels = {| formatter = fun (x) -> sprintf "%s %s" x?value ((I18N.t "week").ToLower()) |} |> pojo |}
        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
-       tooltip = {| formatter = fun () -> sprintf "<b>%s, %s %d</b>: %d umrlih" jsThis?series?name ((I18N.t "week").ToLower()) jsThis?x jsThis?y |} |> pojo
+       tooltip = {| formatter = fun () -> sprintf "<b>%s</b> | <b>%s %d</b>: %d umrlih" jsThis?series?name (I18N.t "week") jsThis?x jsThis?y |} |> pojo
        series = series
        credits =
         {| enabled = true
