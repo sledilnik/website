@@ -66,7 +66,7 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                     | AbsoluteDeaths ->
                         React.keyedFragment (1, [
                             Html.div [
-                                prop.style [ style.height 450 ]
+                                // prop.style [ style.height 450 ]
                                 prop.children [
                                     Absolute.renderChartOptions data |> Highcharts.chart ] ]
                             Html.div [
@@ -76,12 +76,8 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                     | ExcessDeaths ->
                         React.keyedFragment (2, [
                             Html.div [
-                                prop.style [ style.height 397 ]
-                                prop.children [ Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] ]
-                            Html.div [
-                                prop.className "disclaimer"
-                                prop.children [
-                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer") ] ] ] )
+                                prop.style [ style.height 450 ]
+                                prop.children [ Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] ] ] )
                 ]
             ]
         ]
