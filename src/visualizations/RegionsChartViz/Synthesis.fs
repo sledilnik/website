@@ -47,6 +47,7 @@ let newCases (regionMetricData: RegionMetricData): RegionMetricData =
 
     { regionMetricData with MetricValues = newCasesArray }
 
+
 let allSeries state =
     let startDate =
         match state.RegionsData with
@@ -86,10 +87,16 @@ let allSeries state =
                 ts, finalValue
             )
 
+        let seriesValuesHc2nStep =
+            seriesValuesHc
+            |> match state.MetricType with
+               | NewCases7Days -> Statistics.calcRunningAverage
+               | _ -> id
+
         {|
             name = I18N.tt "region" regionConfig.Key
             color = regionConfig.Color
-            data = seriesValuesHc
+            data = seriesValuesHc2nStep
         |}
         |> pojo
     )
