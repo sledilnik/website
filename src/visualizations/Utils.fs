@@ -8,7 +8,7 @@ open Types
 open System
 
 let memoize f =
-    let cache = new System.Collections.Generic.Dictionary<_,_>()
+    let cache = System.Collections.Generic.Dictionary<_,_>()
     (fun x ->
         match cache.TryGetValue x with
         | true, value ->
@@ -28,6 +28,11 @@ let optionToInt (value: int option) =
     match value with
     | Some x -> x
     | None -> 0
+
+let noneToZeroFloat (value: float option) =
+    match value with
+    | Some x -> x
+    | None -> 0.
 
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
@@ -226,7 +231,7 @@ module Dictionaries =
     }
 
     let facilities =
-        [ 
+        [
             "bse",      "B Sežana",             None
             "bto",      "B Topolšica",          None
             "sbbr",     "SB Brežice",           None
@@ -257,7 +262,7 @@ module Dictionaries =
         ]
         |> List.map (fun (key, name, color) -> key, { Key = key ; Name = name ; Color = color })
         |> Map.ofList
-   
+
     let GetFacilityName key =
         match facilities.TryFind(key) with
         | Some facility -> facility.Name

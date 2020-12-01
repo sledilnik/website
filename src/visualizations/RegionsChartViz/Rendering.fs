@@ -71,7 +71,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
 
     { ScaleType = Linear; MetricType = ActiveCases
       ChartConfig = config
-      Data = data
+      RegionsData = data
       Regions = regionsByTotalCases
       RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
