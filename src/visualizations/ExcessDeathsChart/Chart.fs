@@ -69,6 +69,10 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                                 prop.style [ style.height 450 ]
                                 prop.children [
                                     Absolute.renderChartOptions data |> Highcharts.chart ] ] ] )
+                            Html.div [
+                                prop.className "disclaimer"
+                                prop.children [
+                                    Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer") ] ] ] )
                     | ExcessDeaths ->
                         React.keyedFragment (2, [
                             Html.div [
