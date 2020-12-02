@@ -120,6 +120,7 @@
         "10": "Nov",
         "11": "Dec"
     },
+    "week": "Week",
     "weekday": {
         "0": "Sunday",
         "1": "Monday",
@@ -441,7 +442,8 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
-            "per100k": "per 100k"
+            "per100k": "per 100k",
+            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -572,17 +574,18 @@
             }
         },
         "excessDeaths": {
-            "title": "Yearly deaths comparison",
-            "titleMenu": "Yearly deaths comparison",
+            "title": "Excess deaths",
+            "titleMenu": "Excess deaths",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
             "absolute": {
                 "title": "Yearly comparison",
-                "disclaimer": "Note: Data for November is provisional."
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
             },
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths",
-                "disclaimer": "Note: the excess deaths calculation combines data from SURS (2015-2018) and MNZ (2019-2020) that are not completely comparable. Since SURS data for 2020 is only provisional and does not include data for the previous month this is the only way to present current data. We are working on getting MNZ data for the whole period."
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
             }
         },
         "hospitals": {

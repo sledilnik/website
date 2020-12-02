@@ -3,6 +3,7 @@ module Utils
 
 open Fable.Core
 open Feliz
+open Fable.Core.JsInterop
 
 open Types
 open System
@@ -39,6 +40,9 @@ let nativeParseInt (input : string) : int option = jsNative
 
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseFloat (input : string) : float option = jsNative
+
+let getISOWeekYear (date : System.DateTime) : int =
+    importDefault "date-fns/getISOWeekYear"
 
 let parseDate (str : string) =
     try

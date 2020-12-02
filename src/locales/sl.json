@@ -134,6 +134,7 @@
         "10": "nov",
         "11": "dec"
     },
+    "week": "Teden",
     "weekday": {
         "0": "Nedelja",
         "1": "Ponedeljek",
@@ -942,7 +943,8 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
-            "relativeIncrease": "Tedenski prirast"
+            "relativeIncrease": "Tedenski prirast",
+            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
@@ -1064,15 +1066,16 @@
         "excessDeaths": {
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
             "absolute": {
                 "title": "Primerjava po letih",
-                "disclaimer": "Opomba: podatki za november so nepopolni."
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni."
             },
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeaths": "Potrjene COVID-19 smrti",
-                "disclaimer": "Opomba: izračun presežnih smrti združuje podatke SURS (2015-2018) in MNZ (2019-2020), ki pa niso povsem kompatibilni. Ker so podatki SURS za leto 2020 samo začasni in ne vključujejo podatkov za zadnji mesec, je zaradi ažurnosti prikaza to združevanje nujno. Delamo na tem, da pridobimo podatke MNZ za celotno obdobje."
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni."
             }
         },
         "ostanizdrav": {

@@ -28,11 +28,7 @@
               :class="'float-nav-icon' + ' ' + item.icon"
               :alt="$t('navbar.goToGraph')"
             />
-            <a
-              :href="'#' + item.link"
-              v-scroll-to="{ el: '#' + item.link, offset: -115 }"
-              >{{ item.title }}</a
-            >
+            <a :href="'#' + item.link" @click="scrollTo">{{ item.title }}</a>
           </li>
         </ul>
       </div>
@@ -85,6 +81,15 @@ export default {
       let footer = document.querySelector('footer').getBoundingClientRect()
       let bottom = window.innerHeight - footer.top
       this.visible = bottom < -50
+    },
+    scrollTo(e) {
+      this.$scrollTo(
+        document.querySelector(e.target.getAttribute('href')),
+        500,
+        {
+          offset: -90,
+        }
+      )
     }
   },
 }
