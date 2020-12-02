@@ -1,7 +1,7 @@
-[<RequireQualifiedAccess>]
-module RegionsChart
+module RegionsChartViz.Rendering
 
-open Types
+open RegionsChartViz.Analysis
+open RegionsChartViz.Synthesis
 
 open Browser.Types
 open Elmish
@@ -12,6 +12,7 @@ open Feliz
 open Feliz.ElmishComponents
 
 open System.Text
+open Types
 
 type RegionInfo = {
     Color: string
@@ -34,39 +35,6 @@ let regionsInfo = dict[
 
 let excludedRegions = Set.ofList ["t"]
 
-type Metric =
-    { Key : string
-      Color : string
-      Visible : bool }
-
-type MetricType =
-    | ActiveCases
-    | ConfirmedCases
-    | Deceased
-  with
-    static member getName = function
-        | ActiveCases -> I18N.chartText "regions" "activeCases"
-        | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
-        | Deceased -> I18N.chartText "regions" "deceased"
-
-type MetricRelativeTo = Absolute | Pop100k
-
-type RegionsChartConfig = {
-    RelativeTo: MetricRelativeTo
-    ChartTextsGroup: string
-}
-
-type State =
-    {
-      ChartConfig: RegionsChartConfig
-      ScaleType : ScaleType
-      MetricType : MetricType
-      Data : RegionsData
-      Regions : Region list
-      Metrics : Metric list
-      RangeSelectionButtonIndex: int
-    }
-
 type Msg =
     | ToggleRegionVisible of string
     | MetricTypeChanged of MetricType
@@ -79,7 +47,8 @@ let regionTotal (region : Region) : int =
     |> List.choose id
     |> List.sum
 
-let init (config: RegionsChartConfig) (data : RegionsData) : State * Cmd<Msg> =
+let init (config: RegionsChartConfig) (data : RegionsData)
+    : RegionsChartState * Cmd<Msg> =
     let lastDataPoint = List.last data
 
     let regionsWithoutExcluded =
@@ -91,7 +60,7 @@ let init (config: RegionsChartConfig) (data : RegionsData) : State * Cmd<Msg> =
         regionsWithoutExcluded
         |> List.sortByDescending regionTotal
 
-    let metrics =
+    let regionsConfig =
         regionsByTotalCases
         |> List.map (fun region ->
             let regionKey = region.Name
@@ -102,20 +71,23 @@ let init (config: RegionsChartConfig) (data : RegionsData) : State * Cmd<Msg> =
 
     { ScaleType = Linear; MetricType = ActiveCases
       ChartConfig = config
-      Data = data ; Regions = regionsByTotalCases ; Metrics = metrics
+      RegionsData = data
+      Regions = regionsByTotalCases
+      RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
     Cmd.none
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (msg: Msg) (state: RegionsChartState)
+    : RegionsChartState * Cmd<Msg> =
     match msg with
     | ToggleRegionVisible regionKey ->
-        let newMetrics =
-            state.Metrics
+        let newRegionsConfig =
+            state.RegionsConfig
             |> List.map (fun m ->
                 if m.Key = regionKey
                 then { m with Visible = not m.Visible }
                 else m)
-        { state with Metrics = newMetrics }, Cmd.none
+        { state with RegionsConfig = newRegionsConfig }, Cmd.none
     | MetricTypeChanged newMetricType ->
         { state with MetricType = newMetricType }, Cmd.none
     | ScaleTypeChanged scaleType ->
@@ -123,13 +95,13 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let tooltipValueFormatter (state: State) value =
+let tooltipValueFormatter (state: RegionsChartState) value =
     match state.ChartConfig.RelativeTo with
     // todo igor: format to int for absolute values
     | Absolute -> Utils.formatToInt value
     | Pop100k -> Utils.formatTo1DecimalWithTrailingZero value
 
-let tooltipFormatter (state: State) chartData jsThis =
+let tooltipFormatter (state: RegionsChartState) _ jsThis =
     let points: obj[] = jsThis?points
 
     match points with
@@ -167,57 +139,7 @@ let tooltipFormatter (state: State) chartData jsThis =
         s.Append "</table>" |> ignore
         s.ToString()
 
-let renderChartOptions (state : State) dispatch =
-
-    let metricsToRender =
-        state.Metrics
-        |> List.filter (fun metric -> metric.Visible)
-
-    let renderRegion metricToRender (point : RegionsDataPoint) =
-        let ts = point.Date |> jsTime12h
-        let region =
-            point.Regions
-            |> List.find (fun reg -> reg.Name = metricToRender.Key)
-
-        let municipalityMetricValue muni =
-            match state.MetricType with
-            | ActiveCases -> muni.ActiveCases
-            | ConfirmedCases -> muni.ConfirmedToDate
-            | Deceased -> muni.DeceasedToDate
-            |> Option.defaultValue 0
-
-        let totalSum =
-            region.Municipalities
-            |> Seq.sumBy municipalityMetricValue
-            |> float
-
-        let finalValue =
-            match state.ChartConfig.RelativeTo with
-            | Absolute -> totalSum
-            | Pop100k ->
-                let regionPopulation =
-                    Utils.Dictionaries.regions.[region.Name].Population
-                    |> Option.get
-                    |> float
-
-                let regionPopBy100k = regionPopulation / 100000.0
-                totalSum / regionPopBy100k
-
-        ts, finalValue
-
-    let allSeries =
-        metricsToRender
-        |> List.map (fun metric ->
-            let renderPoint = renderRegion metric
-            {|
-                visible = metric.Visible
-                color = metric.Color
-                name = I18N.tt "region" metric.Key
-                data = state.Data |> Seq.map renderPoint |> Array.ofSeq
-            |}
-            |> pojo
-        )
-        |> List.toArray
+let renderChartOptions (state : RegionsChartState) dispatch =
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -278,7 +200,7 @@ let renderChartOptions (state : State) dispatch =
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
-        series = allSeries
+        series = allSeries state
         xAxis = xAxis
         yAxis = yAxis
         legend = {| enabled = false |}
@@ -300,26 +222,27 @@ let renderChartContainer state dispatch =
         ]
     ]
 
-let renderMetricSelector (metric : Metric) dispatch =
+let renderRegionSelector (regionConfig: RegionRenderingConfiguration) dispatch =
     let style =
-        if metric.Visible
-        then [ style.backgroundColor metric.Color ; style.borderColor metric.Color ]
+        if regionConfig.Visible
+        then [ style.backgroundColor regionConfig.Color
+               style.borderColor regionConfig.Color ]
         else [ ]
     Html.div [
-        prop.onClick (fun _ -> ToggleRegionVisible metric.Key |> dispatch)
+        prop.onClick (fun _ -> ToggleRegionVisible regionConfig.Key |> dispatch)
         Utils.classes
             [(true, "btn  btn-sm metric-selector")
-             (metric.Visible, "metric-selector--selected") ]
+             (regionConfig.Visible, "metric-selector--selected") ]
         prop.style style
-        prop.text (I18N.tt "region" metric.Key) ]
+        prop.text (I18N.tt "region" regionConfig.Key) ]
 
-let renderMetricsSelectors metrics dispatch =
+let renderRegionsSelectors metrics dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
             metrics
             |> List.map (fun metric ->
-                renderMetricSelector metric dispatch
+                renderRegionSelector metric dispatch
             ) ) ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
@@ -334,7 +257,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ ActiveCases; ConfirmedCases; Deceased ]
+        [ ActiveCases; ConfirmedCases; NewCases7Days; MetricType.Deceased ]
         |> List.map renderMetricTypeSelector
 
     Html.div [
@@ -342,14 +265,16 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         prop.children (metricTypesSelectors)
     ]
 
-let render (state : State) dispatch =
+let render (state : RegionsChartState) dispatch =
     Html.div [
         Utils.renderChartTopControls [
-            renderMetricTypeSelectors state.MetricType (MetricTypeChanged >> dispatch)
-            Utils.renderScaleSelector state.ScaleType (ScaleTypeChanged >> dispatch)
+            renderMetricTypeSelectors
+                state.MetricType (MetricTypeChanged >> dispatch)
+            Utils.renderScaleSelector
+                state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics dispatch
+        renderRegionsSelectors state.RegionsConfig dispatch
     ]
 
 let renderChart

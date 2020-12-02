@@ -415,6 +415,7 @@
             "titleMenu": "Region - cases",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
+            "newCases7Days": "New Cases (7-day avg.)",
             "deceased": "Deaths"
         },
         "regions100k": {
