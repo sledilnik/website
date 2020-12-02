@@ -898,7 +898,8 @@
             "per100k": "per 100k",
             "relativeIncrease": "Incremento settimanale",
             "titleMenu": "Comuni - mappa",
-            "bubbles": "Distribuzione"
+            "bubbles": "Distribuzione",
+            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali. I dati demografici (sesso, età, comune) sui deceduti sono riportati dalle istituzioni (sanità, case di riposo) al NIJZ, ma questi dati sono ritardati di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
         },
         "regions": {
             "deceased": "Decessi",
@@ -1153,7 +1154,8 @@
                 "title": "Eccedenza rispetto agli ultimi 5 anni"
             },
             "absolute": {
-                "title": "Confronto annuale"
+                "title": "Confronto annuale",
+                "disclaimer": "Nota: i dati di novembre sono provvisori."
             },
             "titleMenu": "Confronto dei decessi su base annua",
             "title": "Confronto dei decessi su base annua"
@@ -1339,5 +1341,6 @@
         "geoValidity": "Validità geografica",
         "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte. I dati vengono raccolti in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
         "title": "Misure e restrizioni"
-    }
+    },
+    "week": "Settimana"
 }
