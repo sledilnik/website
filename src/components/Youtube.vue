@@ -30,6 +30,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+section {
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
 .youtube-embed {
   position: relative;
   height: 0;
