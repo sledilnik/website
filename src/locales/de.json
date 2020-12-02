@@ -414,7 +414,9 @@
             "weekYearDateFormat": "%W. Woche %Y",
             "dataDate": "Daten bis: {{ date, %a., %e. %b. }}",
             "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
-            "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ"
+            "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ",
+            "dsMNZ": "MNZ",
+            "dsSURS": "SURS"
         },
         "europe": {
             "newCases": "Neue Fälle",

@@ -120,6 +120,7 @@
         "10": "Nov",
         "11": "Dec"
     },
+    "week": "Week",
     "weekday": {
         "0": "Sunday",
         "1": "Monday",
@@ -574,13 +575,13 @@
             "title": "Yearly deaths comparison",
             "titleMenu": "Yearly deaths comparison",
             "absolute": {
-                "title": "Yearly comparison"
+                "title": "Yearly comparison",
+                "disclaimer": "Note: Data for November is provisional."
             },
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
-                "covidDeaths": "Confirmed COVID-19 deaths",
-                "disclaimer": "Note: the excess deaths calculation combines data from SURS (2015-2018) and MNZ (2019-2020) that are not completely comparable. Since SURS data for 2020 is only provisional and does not include data for the previous month this is the only way to present current data. We are working on getting MNZ data for the whole period."
+                "covidDeaths": "Confirmed COVID-19 deaths"
             }
         },
         "hospitals": {

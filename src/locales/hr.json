@@ -524,7 +524,9 @@
             "negativeTests": "Negativni testovi",
             "ns-apr20": "Istraživanje",
             "allTesting": "Sve",
-            "titleMenu": "Testiranje"
+            "titleMenu": "Testiranje",
+            "byLabPercent": "Po laboratoriju: % pozitivno",
+            "byLab": "Po laboratoriju: Testiranja"
         },
         "infections": {
             "rhStaff": "Osoblje staračkih domova",
@@ -766,7 +768,8 @@
             "titleMenu": "Godišnja usporedba smrtnih slučajeva",
             "title": "Godišnja usporedba smrtnih slučajeva",
             "absolute": {
-                "title": "Godišnja usporedba"
+                "title": "Godišnja usporedba",
+                "disclaimer": "Napomena: Podaci za studeni su privremeni."
             }
         }
     },
@@ -1343,5 +1346,6 @@
         "validity": "Valjanost",
         "geoValidity": "Geografska valjanost",
         "title": "Mjere i ograničenja"
-    }
+    },
+    "week": "Tjedan"
 }

@@ -2,7 +2,15 @@ module ExcessDeathsChart.Types
 
 open Types
 
-type MonthlyDeathsData = Data.MonthlyDeaths.DataPoint list
+type DailyDeathsData = Data.DailyDeaths.DataPoint list
+
+type WeeklyDeaths = {
+    Year : int
+    Week : int
+    Deceased : int
+}
+
+type WeeklyDeathsData = WeeklyDeaths list
 
 type DisplayType =
     | AbsoluteDeaths
@@ -20,26 +28,10 @@ with
 
 type State = {
     StatsData : StatsData
-    MonthlyDeathsData : RemoteData<MonthlyDeathsData, string>
+    WeeklyDeathsData : RemoteData<WeeklyDeathsData, string>
     DisplayType : DisplayType
 }
 
 type Msg =
-    | MonthlyDeathsDataReceived of Result<MonthlyDeathsData, string>
+    | DailyDeathsDataReceived of Result<DailyDeathsData, string>
     | DisplayTypeChanged of DisplayType
-
-open Browser
-open Fable.Core.JsInterop
-open Highcharts
-
-let baseOptions =
-    {| title = ""
-       xAxis = {| labels = {| formatter = fun x -> Utils.monthNameOfIndex x?value |} |> pojo |}
-       credits =
-            {| enabled = true
-               text = sprintf "%s: %s, %s"
-                    (I18N.t "charts.common.dataSource")
-                    (I18N.tOptions ("charts.common.dsSURS") {| context = localStorage.getItem ("contextCountry") |})
-                    (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-               href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
-    |}
