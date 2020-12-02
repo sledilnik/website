@@ -850,6 +850,15 @@ let render (state : State) dispatch =
                 prop.className "map"
                 prop.children [ renderMap state ]
             ]
+            match state.ContentType with
+            | Deceased ->
+                Html.div [
+                    prop.className "disclaimer"
+                    prop.children [
+                        Html.text (I18N.t "charts.map.disclaimer")
+                    ]
+                ]
+            | _ -> Html.none
         ]
     ]
 

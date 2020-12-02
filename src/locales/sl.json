@@ -942,7 +942,8 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
-            "relativeIncrease": "Tedenski prirast"
+            "relativeIncrease": "Tedenski prirast",
+            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
