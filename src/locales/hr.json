@@ -369,7 +369,8 @@
             "yesterday": "Jučer",
             "relativeIncrease": "Tjedni rast",
             "titleMenu": "Općine – karta",
-            "bubbles": "Distribucija"
+            "bubbles": "Distribucija",
+            "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o umrlima, institucije (zdravstvo, starački domovi) prijavljuju NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog odstupanja u odnosu na ukupan broj umrlih."
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -558,7 +559,8 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "titleMenu": "Regija – slučajevi"
+            "titleMenu": "Regija – slučajevi",
+            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)"
         },
         "cases": {
             "active": "Aktivni",
@@ -761,16 +763,18 @@
         },
         "excessDeaths": {
             "excess": {
-                "excessDeaths": "Više smrtnih slučajeva (u usporedbi s 2015. do 2019.)",
-                "title": "Više slučajeva u odnosu na zadnjih 5 godina",
-                "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19"
+                "excessDeaths": "Višak smrtnih slučajeva (u usporedbi s 2015. do 2019.)",
+                "title": "Višak u odnosu na zadnjih 5 godina",
+                "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19",
+                "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni."
             },
-            "titleMenu": "Godišnja usporedba smrtnih slučajeva",
-            "title": "Godišnja usporedba smrtnih slučajeva",
+            "titleMenu": "Višak smrtnih slučajeva",
+            "title": "Višak smrtnih slučajeva",
             "absolute": {
                 "title": "Godišnja usporedba",
-                "disclaimer": "Napomena: Podaci za studeni su privremeni."
-            }
+                "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni."
+            },
+            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
         }
     },
     "shortMonth": {
