@@ -27,12 +27,14 @@ let update state msg =
                 data
                 |> List.map (fun dp ->
                     let date = System.DateTime(dp.year, dp.month, dp.day)
-                    (Utils.getISOWeekYear(date), date.GetISOWeek(), dp.deceased) )
-                |> List.groupBy (fun (year, week, _) -> (year, week))
+                    {| year = Utils.getISOWeekYear(date) ; week = date.GetISOWeek() ; date = date ; deceased = dp.deceased |} )
+                |> List.groupBy (fun dp -> (dp.year, dp.week))
                 |> List.map (fun ((year, week), dps) ->
                     { Year = year
                       Week = week
-                      Deceased = dps |> List.sumBy (fun (_, _, deceased) -> deceased) } )
+                      WeekStartDate = dps |> List.map (fun dp -> dp.date) |> List.head
+                      WeekEndDate = dps |> List.map (fun dp -> dp.date) |> List.last
+                      Deceased = dps |> List.sumBy (fun dp -> dp.deceased) } )
 
             { state with WeeklyDeathsData = Success weeklyDeathsData }
 
@@ -76,9 +78,25 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                 prop.children [
                     match state.DisplayType with
                     | AbsoluteDeaths ->
-                        React.keyedFragment (1, [ Absolute.renderChartOptions data |> Highcharts.chart ] )
+                        React.keyedFragment (1, [
+                            Html.div [
+                                prop.style [ style.height 420 ]
+                                prop.children [
+                                    Absolute.renderChartOptions data |> Highcharts.chart ] ]
+                            Html.div [
+                                prop.className "disclaimer"
+                                prop.children [
+                                    Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer") ] ] ] )
                     | ExcessDeaths ->
-                        React.keyedFragment (2, [ Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] )
+                        React.keyedFragment (2, [
+                            Html.div [
+                                prop.style [ style.height 420 ]
+                                prop.children [
+                                    Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] ]
+                            Html.div [
+                                prop.className "disclaimer"
+                                prop.children [
+                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer") ] ] ] )
                 ]
             ]
         ]

@@ -1065,14 +1065,16 @@
         "excessDeaths": {
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
             "absolute": {
                 "title": "Primerjava po letih",
-                "disclaimer": "Opomba: podatki za november so nepopolni."
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni."
             },
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
-                "covidDeaths": "Potrjene COVID-19 smrti"
+                "covidDeaths": "Potrjene COVID-19 smrti",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni."
             }
         },
         "ostanizdrav": {

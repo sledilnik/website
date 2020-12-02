@@ -573,16 +573,18 @@
             }
         },
         "excessDeaths": {
-            "title": "Yearly deaths comparison",
-            "titleMenu": "Yearly deaths comparison",
+            "title": "Excess deaths",
+            "titleMenu": "Excess deaths",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
             "absolute": {
                 "title": "Yearly comparison",
-                "disclaimer": "Note: Data for November is provisional."
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
             },
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
-                "covidDeaths": "Confirmed COVID-19 deaths"
+                "covidDeaths": "Confirmed COVID-19 deaths",
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
             }
         },
         "hospitals": {

@@ -19,9 +19,10 @@ let renderChartOptions (data : WeeklyDeathsData) =
             let seriesData =
                 data
                 |> List.map (fun dp ->
-                {| x = dp.Week
-                   y = dp.Deceased
-                   name = sprintf "%s %d" (I18N.t "week") dp.Week |} |> pojo)
+                    {| x = dp.Week
+                       y = dp.Deceased
+                       name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDate
+                    |} |> pojo)
                 |> List.toArray
             {| ``type`` = "line"
                name = year
@@ -35,9 +36,9 @@ let renderChartOptions (data : WeeklyDeathsData) =
         |> List.toArray
 
     {| title = ""
-       xAxis = {| labels = {| formatter = fun (x) -> sprintf "%s %s" x?value ((I18N.t "week").ToLower()) |} |> pojo |}
+       xAxis = {| labels = {| formatter = fun (x) -> sprintf "%s %s" (I18N.t "week") x?value |} |> pojo |}
        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
-       tooltip = {| formatter = fun () -> sprintf "<b>%s</b> | <b>%s %d</b>: %d umrlih" jsThis?series?name (I18N.t "week") jsThis?x jsThis?y |} |> pojo
+       tooltip = {| formatter = fun () -> sprintf "%s<br>%s: <b>%d</b>" jsThis?series?name jsThis?key jsThis?y |} |> pojo
        series = series
        credits =
         {| enabled = true
