@@ -11,6 +11,7 @@
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
+      <span class="card-average"><strong>{{ renderRunningSum }}</strong> (7d avg)</span>
       <div :id="name" class="card-diff">
         <div v-if="showIncidence">
           <span class="card-note">{{ $t('infocard.per100k') }} </span>
@@ -78,14 +79,15 @@ export default {
       default: 'down',
     },
     name: String,
+    runningSumField: String,
     seriesType: {
       type: String,
       default: 'cum',
     },
   },
   computed: {
-    ...mapGetters('stats', ['lastChange']),
-    ...mapGetters('patients', { patients: 'data' }),
+    ...mapGetters('stats', ['lastChange', 'runningSum']),
+    ...mapGetters('patients', { patients: 'data', runningSumPatients: 'runningSumPatients' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
@@ -211,6 +213,11 @@ export default {
       }
       return false
     },
+    renderRunningSum() {
+      if (isNaN(this.runningSum(0, 7, this.runningSumField).toFixed(1)))
+        return this.runningSumPatients(0, 7, this.runningSumField).toFixed(1)
+      return this.runningSum(0, 7, this.runningSumField).toFixed(1)
+    }
   },
   methods: {
     renderTotalValues(value) {
@@ -305,6 +312,11 @@ export default {
 
 .card-note {
   font-size: 12px;
+}
+
+.card-average {
+  font-size: 12px;
+  margin-bottom: 4px;
 }
 
 .trend-icon {
