@@ -753,10 +753,10 @@
             "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
         },
         "countriesNewDeathsPer100k": {
-            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
             "yAxisTitle": "Neue tägliche Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder - neue Todesfälle",
-            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
+            "title": "Länder: Neue tägliche Todesfälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
         },
         "deceased": {
             "deceased-total": "Todesfälle insgesamt",
