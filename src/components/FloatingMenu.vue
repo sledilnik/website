@@ -3,7 +3,7 @@
     <transition name="slide">
       <div
         class="float-nav-btn"
-        v-show="visible && list.length > 0"
+        v-show="!isMenuOpened && visible && list.length > 0"
         @click="toggleMenu"
         key="1"
       >
@@ -40,6 +40,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'FloatingMenu',
@@ -58,6 +59,9 @@ export default {
       active: false,
       visible: true,
     }
+  },
+  computed: {
+    ...mapGetters('general', ['isMenuOpened'])
   },
   created() {
     window.addEventListener('scroll', this.handleScroll, { passive: true })
@@ -181,7 +185,7 @@ export default {
   position: fixed;
   bottom: 7px;
   right: 7px;
-  z-index: 1097;
+  z-index: 2001;
   cursor: pointer;
   display: inline-block;
 
