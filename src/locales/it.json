@@ -906,7 +906,8 @@
             "confirmedCases": "Casi confermati",
             "activeCases": "Casi attivi",
             "title": "Casi per regione",
-            "titleMenu": "Regioni - casi"
+            "titleMenu": "Regioni - casi",
+            "newCases7Days": "Nuovi casi (media di 7 giorni)"
         },
         "spread": {
             "absolute": "Crescita giornaliera assoluta",
@@ -1155,10 +1156,11 @@
             },
             "absolute": {
                 "title": "Confronto annuale",
-                "disclaimer": "Nota: i dati di novembre sono provvisori."
+                "disclaimer": "Nota: i dati dell'ultima settimana visualizzata sono incompleti."
             },
-            "titleMenu": "Confronto dei decessi su base annua",
-            "title": "Confronto dei decessi su base annua"
+            "titleMenu": "Eccesso di mortalità",
+            "title": "Eccesso di mortalità",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
         }
     },
     "footer": {
