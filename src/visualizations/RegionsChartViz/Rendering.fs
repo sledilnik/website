@@ -196,7 +196,8 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                //``type`` = "spline"
+                ``type`` = "column"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
@@ -204,6 +205,11 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         xAxis = xAxis
         yAxis = yAxis
         legend = {| enabled = false |}
+        plotOptions = pojo
+            {|
+                column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0  |}
+            |}
         tooltip = pojo {|
                           formatter = fun () ->
                               tooltipFormatter state allSeries jsThis
