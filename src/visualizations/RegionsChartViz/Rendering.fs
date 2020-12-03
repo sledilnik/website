@@ -41,11 +41,25 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
-let regionTotal (region : Region) : int =
+let regionTotal (region : Region) : float =
     region.Municipalities
     |> List.map (fun city -> city.ActiveCases)
     |> List.choose id
     |> List.sum
+    |> float
+
+let regionTotalPop (region : Region) : float =
+    let regionPopulation =
+        Utils.Dictionaries.regions.[region.Name].Population
+        |> Option.get
+        |> float
+    let total =
+        region.Municipalities
+        |> List.map (fun city -> city.ActiveCases)
+        |> List.choose id
+        |> List.sum
+    (float total) / regionPopulation
+
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -56,9 +70,10 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         |> List.filter (fun region ->
             not (excludedRegions |> Set.contains region.Name))
 
+    let sortBy = if config.RelativeTo = Pop100k then regionTotalPop else regionTotal
     let regionsByTotalCases =
         regionsWithoutExcluded
-        |> List.sortByDescending regionTotal
+        |> List.sortBy sortBy
 
     let regionsConfig =
         regionsByTotalCases
