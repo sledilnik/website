@@ -89,7 +89,7 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                                     Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer")
                                     Html.text " "
                                     Html.a [
-                                        prop.href "https://medium.com/sledilnik/koliko-preve%C4%8D-a9afd320653b"
+                                        prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
                                         prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
                     | ExcessDeaths ->
                         React.keyedFragment (2, [
@@ -100,7 +100,11 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                             Html.div [
                                 prop.className "disclaimer"
                                 prop.children [
-                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer") ] ] ] )
+                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer")
+                                    Html.text " "
+                                    Html.a [
+                                        prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
+                                        prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
                 ]
             ]
         ]

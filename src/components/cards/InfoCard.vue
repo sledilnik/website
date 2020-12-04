@@ -47,7 +47,7 @@
           </span>
         </div>
       </div>
-      <div class="data-time">
+      <div class="data-time" :class="(new Date()-1000*3600*48)>renderValues.lastDay.displayDate? 'outdated':''">
         {{
           $t('infocard.lastUpdated', {
             date: new Date(renderValues.lastDay.displayDate),
@@ -365,5 +365,9 @@ export default {
   font-size: 12px;
   color: #a0a0a0;
   margin-top: auto;
+
+  &.outdated {
+    color: #bf5747;
+  }
 }
 </style>
