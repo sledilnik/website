@@ -190,45 +190,6 @@ let patientsDataGenerator metric =
         | _ -> None
 
 
-let calcRunningAverage (data: (JsTimestamp * float)[]) =
-    let daysOfMovingAverage = 7
-    let roundToDecimals = 1
-
-    let entriesCount = data.Length
-    let cutOff = daysOfMovingAverage / 2
-    let averagedDataLength = entriesCount - cutOff * 2
-
-    let averages = Array.zeroCreate averagedDataLength
-
-    let daysOfMovingAverageFloat = float daysOfMovingAverage
-    let mutable currentSum = 0.
-
-    let movingAverageFunc index =
-        let (_, entryValue) = data.[index]
-
-        currentSum <- currentSum + entryValue
-
-        match index with
-        | index when index >= daysOfMovingAverage - 1 ->
-            let date = data.[index - cutOff] |> fst
-            let average =
-                currentSum / daysOfMovingAverageFloat
-                |> Utils.roundDecimals roundToDecimals
-
-            averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
-
-            let valueToSubtract =
-                data.[index - (daysOfMovingAverage - 1)] |> snd
-            currentSum <- currentSum - valueToSubtract
-
-        | _ -> ignore()
-
-    for i in 0 .. entriesCount-1 do
-        movingAverageFunc i
-
-    averages
-
-
 let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let statsData = statsDataGenerator metric
@@ -260,7 +221,7 @@ let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let finalData =
         match state.MetricType.IsAveraged with
-        | true -> trimmedData |> calcRunningAverage
+        | true -> trimmedData |> Statistics.calcRunningAverage
         | false -> trimmedData
 
     finalData

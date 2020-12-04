@@ -3,12 +3,13 @@ module Utils
 
 open Fable.Core
 open Feliz
+open Fable.Core.JsInterop
 
 open Types
 open System
 
 let memoize f =
-    let cache = new System.Collections.Generic.Dictionary<_,_>()
+    let cache = System.Collections.Generic.Dictionary<_,_>()
     (fun x ->
         match cache.TryGetValue x with
         | true, value ->
@@ -29,11 +30,19 @@ let optionToInt (value: int option) =
     | Some x -> x
     | None -> 0
 
+let noneToZeroFloat (value: float option) =
+    match value with
+    | Some x -> x
+    | None -> 0.
+
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseFloat (input : string) : float option = jsNative
+
+let getISOWeekYear (date : System.DateTime) : int =
+    importDefault "date-fns/getISOWeekYear"
 
 let parseDate (str : string) =
     try
@@ -167,8 +176,8 @@ let renderMaybeVisible (visible: bool) (children: ReactElement seq) =
         prop.children children
     ]
 
-let monthNameOfDate (date : DateTime) =
-    match date.Month with
+let monthNameOfIndex (index : int) =
+    match index with
     | 1 -> I18N.t "month.0"
     | 2 -> I18N.t "month.1"
     | 3 -> I18N.t "month.2"
@@ -182,6 +191,9 @@ let monthNameOfDate (date : DateTime) =
     | 11 -> I18N.t "month.10"
     | 12 -> I18N.t "month.11"
     | _ -> failwith "Invalid month"
+
+let monthNameOfDate (date : DateTime) =
+    monthNameOfIndex date.Month
 
 let transliterateCSZ (str : string) =
     str
@@ -215,6 +227,55 @@ let mixColors
         + colorB.ToString("X2")
 
 module Dictionaries =
+
+    type Facility = {
+        Key : string
+        Name : string
+        Color : string option
+    }
+
+    let facilities =
+        [
+            "bse",      "B Sežana",             None
+            "bto",      "B Topolšica",          None
+            "sbbr",     "SB Brežice",           None
+            "sbce",     "SB Celje",             Some "#70a471"
+            "sbje",     "SB Jesenice",          None
+            "sbiz",     "SB Izola",             None
+            "sbms",     "SB Murska Sobota",     None
+            "sbng",     "SB Nova Gorica",       None
+            "sbnm",     "SB Novo mesto",        None
+            "sbpt",     "SB Ptuj",              None
+            "sbsg",     "SB Slovenj Gradec",    None
+            "sbtr",     "SB Trbovlje",          None
+            "ukclj",    "UKC Ljubljana",        Some "#10829a"
+            "ukcmb",    "UKC Maribor",          Some "#003f5c"
+            "ukg",      "UK Golnik",            Some "#7B7226"
+            "upklj",    "UPK Ljubljana",        None
+            "pbbe",     "PB Begunje",           None
+            "pbvo",     "PB Vojnik",            None
+            "pbor",     "PB Ormož",             None
+            "pbid",     "PB Idrija",            None
+            "imi",      "IMI Ljubljana",        None
+            "nlzohkp",  "NLZOH Koper",          None
+            "nlzohkr",  "NLZOH Kranj",          None
+            "nlzohlj",  "NLZOH Ljubljana",      None
+            "nlzohmb",  "NLZOH Maribor",        None
+            "nlzohms",  "NLZOH Murska Sobota",  None
+            "nlzohnm",  "NLZOH Novo mesto",     None
+        ]
+        |> List.map (fun (key, name, color) -> key, { Key = key ; Name = name ; Color = color })
+        |> Map.ofList
+
+    let GetFacilityName key =
+        match facilities.TryFind(key) with
+        | Some facility -> facility.Name
+        | None -> key
+
+    let GetFacilityColor key =
+        match facilities.TryFind(key) with
+        | Some facility -> facility.Color
+        | None -> None
 
     type Region = {
         Key : string

@@ -414,7 +414,9 @@
             "weekYearDateFormat": "%W. Woche %Y",
             "dataDate": "Daten bis: {{ date, %a., %e. %b. }}",
             "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
-            "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ"
+            "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ",
+            "dsMNZ": "MNZ",
+            "dsSURS": "SURS"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -550,21 +552,24 @@
             "titleMenu": "Kapazität"
         },
         "tests": {
-            "nationalStudyTesting": "Studie",
+            "ns-apr20": "Studie",
             "shareOfPositive": "Anteil der positiven Tests (%)",
             "allTesting": "Alle",
             "title": "Testung",
-            "regularTesting": "Regelmäßige",
+            "regular": "Regelmäßige",
             "positiveTests": "Positive Tests",
             "negativeTests": "Negative Tests",
-            "titleMenu": "Testung"
+            "titleMenu": "Testung",
+            "byLabPercent": "Nach Labor: % positiv",
+            "byLab": "Nach Labor: Tests"
         },
         "regions": {
             "activeCases": "Aktive Fälle",
             "confirmedCases": "Bestätigte Fälle",
             "deceased": "Todesfälle",
             "title": "Fälle nach Gemeinden",
-            "titleMenu": "Region – Fälle"
+            "titleMenu": "Region – Fälle",
+            "newCases7Days": "Neue Fälle (7-Tage-Durchschnitt)"
         },
         "cases": {
             "hospitalized": "Hospitalisierte",
@@ -751,10 +756,38 @@
             "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
         },
         "countriesNewDeathsPer100k": {
-            "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen",
+            "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
             "yAxisTitle": "Neue tägliche Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder - neue Todesfälle",
-            "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
+            "title": "Länder: Neue tägliche Todesfälle pro 100.000 Menschen (7-Tages-Durchschnitt)"
+        },
+        "deceased": {
+            "deceased-total": "Todesfälle insgesamt",
+            "deceased-rest": "Außerhalb des Krankenhauses",
+            "deceased-care": "Pflege-Krankenhaus",
+            "deceased-acute": "Akutmedizinische Abteilung",
+            "deceased-icu": "Intensivstation",
+            "deceasedToDateRelative": "Todesfälle bis heute (relativ)",
+            "deceasedToDate": "Todesfälle bis heute",
+            "deceasedTodayRelative": "Todesfälle pro Tag (relativ)",
+            "deceasedToday": "Todesfälle pro Tag",
+            "titleMenu": "Todesfälle",
+            "title": "Todesfälle"
+        },
+        "excessDeaths": {
+            "excess": {
+                "excessDeaths": "Sterberate (im Vergleich zu 2015 bis 2019)",
+                "title": "Sterberate im Vergleich zu den letzten 5 Jahren",
+                "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
+                "covidDeaths": "Bestätigte COVID-19-Todesfälle"
+            },
+            "titleMenu": "Sterberate",
+            "title": "Sterberate",
+            "absolute": {
+                "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
+                "title": "Jahresvergleich"
+            },
+            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
         }
     },
     "tableDict": {
@@ -1031,7 +1064,8 @@
         "newMedium": "🆕 📝 Neuer Medium Nachricht:",
         "newInfographics": "🆕 📇 Neue Infografiken:",
         "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭",
-        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung"
+        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung",
+        "restrictions": "Aktuelle Maßnahmen und Beschränkungen"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1306,5 +1340,15 @@
     "youtube": {
         "titleMenu": "Animation",
         "title": "Animation der Verbreitung von COVID-19"
-    }
+    },
+    "restrictionsPage": {
+        "link": "Link zur Verordnung (offizieller Text)",
+        "notes": "Anmerkungen",
+        "extrarule": "Zusätzliche Regeln/Interpretationen",
+        "exceptions": "Ausnahmen",
+        "validity": "Gültigkeit",
+        "geoValidity": "Geografische Gültigkeit",
+        "title": "Maßnahmen und Einschränkungen"
+    },
+    "week": "Woche"
 }

@@ -81,8 +81,10 @@ export default {
     },
     toggleMenu() {
       if (this.menuOpened) {
+        this.$store.commit('general/closeMenu')
         this.closeMenu()
       } else {
+        this.$store.commit('general/openMenu')
         this.menuOpened = true
       }
     },
@@ -99,6 +101,7 @@ export default {
   },
   watch: {
     $route() {
+      this.$store.commit('general/closeMenu')
       this.menuOpened = false
     },
   },

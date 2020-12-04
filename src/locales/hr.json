@@ -348,7 +348,9 @@
             "weekYearDateFormat": "%W. tjedan %Y.",
             "dataDate": "Podaci do: {{ date, %a., %e. %b. }}",
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
-            "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ"
+            "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
+            "dsMNZ": "MNZ",
+            "dsSURS": "SURS"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -367,16 +369,17 @@
             "yesterday": "Jučer",
             "relativeIncrease": "Tjedni rast",
             "titleMenu": "Općine – karta",
-            "bubbles": "Distribucija"
+            "bubbles": "Distribucija",
+            "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o umrlima, institucije (zdravstvo, starački domovi) prijavljuju NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog odstupanja u odnosu na ukupan broj umrlih."
         },
         "countriesNewCasesPer1M": {
-            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (sedmodnevni prosjek)",
+            "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
             "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "titleMenu": "Države – novi slučajevi"
         },
         "countriesTotalDeathsPer1M": {
-            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika (sedmodnevni prosjek)",
+            "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika (7-dnevni prosjek)",
             "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
             "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
             "titleMenu": "Države – smrtni slučajevi"
@@ -518,11 +521,13 @@
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
             "title": "Testiranje",
-            "regularTesting": "Regularno",
+            "regular": "Regularno",
             "negativeTests": "Negativni testovi",
-            "nationalStudyTesting": "Istraživanje",
+            "ns-apr20": "Istraživanje",
             "allTesting": "Sve",
-            "titleMenu": "Testiranje"
+            "titleMenu": "Testiranje",
+            "byLabPercent": "Po laboratoriju: % pozitivno",
+            "byLab": "Po laboratoriju: Testiranja"
         },
         "infections": {
             "rhStaff": "Osoblje staračkih domova",
@@ -554,7 +559,8 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "titleMenu": "Regija – slučajevi"
+            "titleMenu": "Regija – slučajevi",
+            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)"
         },
         "cases": {
             "active": "Aktivni",
@@ -647,9 +653,9 @@
         "ostanizdrav": {
             "userPublishedByCount": {
                 "date": "Datum",
-                "title": "Dnevni broj objavljenih ključeva s brojem korisnika",
+                "title": "Broj objavljenih ključeva po broju korisnika",
                 "users": "Broj korisnika",
-                "count": "(Prosječni) dnevni broj ključeva po broju korisnika",
+                "count": "(prosječni) dnevni broj ključeva po broju korisnika",
                 "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'",
                 "description": "Dijagram prikazuje broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji."
             },
@@ -662,10 +668,10 @@
             },
             "publishedByRisk": {
                 "risk": "Razina rizika",
-                "published": "Dnevni broj objavljenih ključeva",
+                "published": "Broj objavljenih ključeva",
                 "tooltip": "datum.published + ' ključevi s razinom rizika ' + datum.risk",
                 "date": "Datum",
-                "title": "Dnevni broj objavljenih ključeva s razinama rizika",
+                "title": "Broj objavljenih dnevnih ključeva s razinama rizika",
                 "description": "Svaki objavljeni dnevni ključ ima povezanu razinu rizika prenošenja zaraze. Dijagram prikazuje njihove brojeve za svaki dan. Što je boja tamnija, to je rizik veći. Ako je korisnik instalirao program i ako je program radio za vrijeme cijelog razdoblja, ključevi će imati sljedeći slijed razina rizika: 1 1 1 1 1 1 1 3 5 8 8 8 6 5. Stoga se očekuje, da će ključevi s rizikom prenošenja zaraze od 1 biti najčešći, a drugi najčešći rizik prenošenja zaraze je 8."
             },
             "validByRisk": {
@@ -680,13 +686,13 @@
                 "runningTotal": "Ukupno objavljenih ključeva",
                 "perDay": "Broj objavljenih ključeva",
                 "date": "Datum",
-                "title": "Broj objavljenih ključeva dnevno",
+                "title": "Broj objavljenih dnevnih ključeva",
                 "description": "Dijagram prikazuje broj objavljenih dnevnih ključeva (plavi stupci) i ukupni broj ključeva koji su do danas objavljeni (crvena crta). Prosječni korisnik objavljuje između 10 i 12 dnevnih ključeva (pogledaj dijagram [$t(charts.ostanizdrav.usercount.title)](#usercount-chart)). Pomoću tih podataka možemo procijeniti broj korisnika koji su upisali potvrdni kod nakon pozitivnog testiranja."
             },
             "valid": {
-                "perDay": "Broj valjanih ključeva",
+                "perDay": "Broj dnevnih valjanih ključeva",
                 "date": "Datum",
-                "title": "Broj valjanih ključeva dnevno",
+                "title": "Broj dnevnih valjanih ključeva",
                 "description": "Dijagram prikazuje broj ključeva koji vrijede određenog dana – za razliku od broja ključeva objavljenih tih dana (pogledaj dijagram [$t(charts.ostanizdrav.published.title)](#published-chart)). Kad se u programu potvrdi zaraza, svi se dnevni ključevi objavljuju istog dana, ali svaki od njih vrijedi za jedan od prethodnih dana. To znači da će dijagram uvijek prikazivati trend pada u posljednjih 13 dana, bez obzira na broj korisnika koji su poslali svoje ključeve. Razlog tome je, što će većina dnevnih ključeva koji vrijede za to razdoblje biti objavljeni tek u budućnosti."
             },
             "footer": "Analiza je rezultat prilagodbe njemačkog projekta [Corona Tracker Tracker](https://ctt.pfstr.de/) slovenskom #OstaniZdrav. [Izvorni kod projekta](https://github.com/janpf/ctt) koristi [alate za analizu ključeva dijagnoza](https://github.com/mh-/diagnosis-keys).",
@@ -741,6 +747,34 @@
             "titleMenu": "Zdravstveni radnici – slučajevi",
             "title": "Potvrđeni slučajevi zdravstvenih radnika",
             "disclaimer": "Napomena: podaci za prošli tjedan još nisu cjeloviti – udio zdravstvenih radnika može biti manji od stvarnog."
+        },
+        "deceased": {
+            "deceased-acute": "Medicinska jedinica za akutne slučajeve",
+            "deceased-icu": "Odjel intenzivne njege",
+            "deceasedTodayRelative": "Dnevni smrtni slučajevi (relativno)",
+            "deceasedToday": "Dnevni smrtni slučajevi",
+            "deceased-total": "Ukupno smrtnih slučajeva",
+            "deceased-rest": "Izvan bolnice",
+            "deceased-care": "Bolnica za njegu",
+            "deceasedToDateRelative": "Smrtni slučajevi do danas (relativni)",
+            "deceasedToDate": "Smrtni slučajevi do danas",
+            "titleMenu": "Smrtni slučajevi",
+            "title": "Smrtni slučajevi"
+        },
+        "excessDeaths": {
+            "excess": {
+                "excessDeaths": "Mortalitet (u usporedbi s 2015. do 2019.)",
+                "title": "Mortalitet u odnosu na zadnjih 5 godina",
+                "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19",
+                "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
+            },
+            "titleMenu": "Mortalitet",
+            "title": "Mortalitet",
+            "absolute": {
+                "title": "Godišnja usporedba",
+                "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
+            },
+            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
         }
     },
     "shortMonth": {
@@ -1170,7 +1204,8 @@
         "checked": "🆕 Provjereno:",
         "newMedium": "🆕 📝 Nova Medium objava:",
         "presentation": "Kako znanost pomaže donositeljima odluka – prezentacija u Nacionalnoj skupštini",
-        "bubble": "Živjeti u balonu … Kako ograničiti kontakte i ne ostati sam? 💭"
+        "bubble": "Živjeti u balonu … Kako ograničiti kontakte i ne ostati sam? 💭",
+        "restrictions": "Trenutačne mjere i ograničenja"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",
@@ -1306,5 +1341,16 @@
     "youtube": {
         "titleMenu": "Animacija",
         "title": "Animacija širenja zaraze COVID-19"
-    }
+    },
+    "restrictionsPage": {
+        "link": "Poveznica na uredbu (službeni tekst)",
+        "notes": "Napomene",
+        "extrarule": "Dodatna pravila/tumačenja",
+        "exceptions": "Iznimke",
+        "validity": "Valjanost",
+        "geoValidity": "Geografska valjanost",
+        "title": "Mjere i ograničenja",
+        "description": "Koristeći se dostupnim izvorima podataka, pokušali smo prikupiti i sažeti trenutno važeće mjere koje je slovenska vlada usvojila kao odgovor na pandemiju COVID-19, naročito u odabranim područjima koja su najvažnija za svakodnevni život. Podaci koji su dostupni putem ovog programa za praćenje zaraze COVID-19, uključujući poveznice na druge web-stranice, prikupljaju se iz niza službenih izvora s kojima nismo povezani, pa treba imati na umu da služe samo u informativne svrhe i mogu se mijenjati s vremenom na vrijeme. Program za praćenje stoga ne jamči točnost i cjelovitost podataka prikupljenih o mjerama i izričito se odriče svake odgovornosti za daljnja tumačenja koja kao izvor navode naše podatke. Podaci se prikupljaju u [tablici sažetka](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml)."
+    },
+    "week": "Tjedan"
 }

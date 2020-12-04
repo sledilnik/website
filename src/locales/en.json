@@ -44,7 +44,8 @@
         "tests": "5 myths about tests ...",
         "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
         "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
-        "newsText": "Coronavirus World Map 🌍- active cases per 1M people"
+        "newsText": "Coronavirus World Map 🌍- active cases per 1M people",
+        "restrictions": "Current measures and restrictions"
     },
     "infocard": {
         "tests": "Tests Today",
@@ -119,6 +120,7 @@
         "10": "Nov",
         "11": "Dec"
     },
+    "week": "Week",
     "weekday": {
         "0": "Sunday",
         "1": "Monday",
@@ -196,6 +198,8 @@
             "dataSource": "data source",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data & NIJZ",
             "dsOWD_MZ": "Our World in Data & Min. Health",
@@ -357,8 +361,10 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "allTesting": "All",
-            "regularTesting": "Regular",
-            "nationalStudyTesting": "Study",
+            "byLab": "By Laboratory: Tests",
+            "byLabPercent": "By Laboratory: % positive",
+            "regular": "Regular",
+            "ns-apr20": "Study",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"
@@ -409,6 +415,7 @@
             "titleMenu": "Region - cases",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
+            "newCases7Days": "New Cases (7-day avg.)",
             "deceased": "Deaths"
         },
         "regions100k": {
@@ -435,7 +442,8 @@
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
-            "per100k": "per 100k"
+            "per100k": "per 100k",
+            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -563,6 +571,21 @@
                 "yAxisTitle": "Incidence difference (%)",
                 "xAxisLabel": "7-day incidence",
                 "yAxisLabel": "Incidence difference"
+            }
+        },
+        "excessDeaths": {
+            "title": "Excess deaths",
+            "titleMenu": "Excess deaths",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "absolute": {
+                "title": "Yearly comparison",
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
+            },
+            "excess": {
+                "title": "Excess relative to the last 5 years",
+                "excessDeaths": "Excess deaths (compared to 2015-19)",
+                "covidDeaths": "Confirmed COVID-19 deaths",
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             }
         },
         "hospitals": {
@@ -1299,5 +1322,15 @@
             "stip": "Štip",
             "infdrugi": "Infektivni oddelenija vo Tetovo, Ohrid, Veles, Kumanovo i Prilep"
         }
+    },
+    "restrictionsPage": {
+      "title": "Measures and restrictions",
+      "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
+      "geoValidity": "Geographical validity",
+      "validity": "Validity",
+      "exceptions": "Exceptions",
+      "extrarule": "Additional rules / interpretations",
+      "notes": "Notes",
+      "link": "Link to decree (official text)"
     }
 }

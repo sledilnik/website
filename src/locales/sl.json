@@ -45,7 +45,8 @@
         "progressC19": "Običajen potek bolezni COVID-19. Hospitalizacije, intenzivna terapija in smrtnost.",
         "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
         "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
-        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev"
+        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev",
+        "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
         "tests": "Testov na dan",
@@ -133,6 +134,7 @@
         "10": "nov",
         "11": "dec"
     },
+    "week": "Teden",
     "weekday": {
         "0": "Nedelja",
         "1": "Ponedeljek",
@@ -666,6 +668,8 @@
             "dataSource": "vir podatkov",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
+            "dsSURS": "SURS",
+            "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
             "dsOWD_MZ": "Our World in Data, Min. za zdravje",
@@ -819,8 +823,10 @@
             "title": "Testiranje",
             "titleMenu": "Testiranje",
             "allTesting": "Skupaj",
-            "regularTesting": "Redno",
-            "nationalStudyTesting": "Raziskava",
+            "byLab": "Po laboratorijih: testi",
+            "byLabPercent": "Po laboratorijih: % pozitivnih",
+            "regular": "Redno",
+            "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",
             "positiveTests": "Pozitivnih testov",
             "shareOfPositive": "Delež pozitivnih testov (%)"
@@ -916,6 +922,7 @@
             "titleMenu": "Regije – primeri",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
+            "newCases7Days": "Novi primeri (7-dnevno povpr.)",
             "deceased": "Umrli"
         },
         "regions100k": {
@@ -944,7 +951,8 @@
             "populationC": "Prebivalcev",
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
-            "relativeIncrease": "Tedenski prirast"
+            "relativeIncrease": "Tedenski prirast",
+            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic. Demografske podatke (spol, starost, občina) o umrlih morajo zavodi (zdravstveni, DSO...) poročati NIJZ, vendar pa ti podatki zamujajo tudi več mesecev. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
@@ -1061,6 +1069,21 @@
                 "yAxisTitle": "Sprememba pojavnosti (%)",
                 "xAxisLabel": "7-dnevna pojavnost",
                 "yAxisLabel": "Sprememba pojavnosti"
+            }
+        },
+        "excessDeaths": {
+            "title": "Presežne smrti",
+            "titleMenu": "Presežne smrti",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "absolute": {
+                "title": "Primerjava po letih",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
+            },
+            "excess": {
+                "title": "Presežek glede na zadnjih 5 let",
+                "excessDeaths": "Presežne smrti (glede na 2015-19)",
+                "covidDeaths": "Potrjene COVID-19 smrti",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
             }
         },
         "ostanizdrav": {
@@ -1314,5 +1337,15 @@
                 "description": "Množična srečanja, kot so športne prireditve in karnevali, so prepovedana"
             }
         }
+    },
+    "restrictionsPage": {
+      "title": "Ukrepi in omejitve",
+      "description": "Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije, ki naše podatke navajajo kot vir. Podatke zbiramo v [Zbirni tabeli](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
+      "geoValidity": "Geografska veljavnost",
+      "validity": "Veljavnost",
+      "exceptions": "Izjeme",
+      "extrarule": "Dodatna pravila / tolmačenja",
+      "notes": "Opombe",
+      "link": "Povezava do odloka (prečiščeno besedilo)"
     }
 }

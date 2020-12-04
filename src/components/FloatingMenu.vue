@@ -3,20 +3,20 @@
     <transition name="slide">
       <div
         class="float-nav-btn"
-        v-show="visible && list.length > 0"
+        v-show="!isMenuOpened && visible && list.length > 0"
         @click="toggleMenu"
         key="1"
       >
         <div
           class="float-nav-img"
           :class="{ active: active }"
-          :alt="$t('navbar.goToGraph')"
+          :alt="title"
         />
       </div>
     </transition>
     <transition name="slide">
       <div v-show="active && list.length > 0" class="float-list" key="2">
-        <h2>{{ $t('navbar.goToGraph') }}</h2>
+        <h2>{{ title }}</h2>
         <ul v-scroll-lock="active">
           <li
             v-for="item in list"
@@ -25,14 +25,10 @@
             @click="hideMenu"
           >
             <div
-              :class="'float-nav-icon' + ' ' + get(item.link, 'icon')"
+              :class="'float-nav-icon' + ' ' + item.icon"
               :alt="$t('navbar.goToGraph')"
             />
-            <a
-              :href="'#' + item.link"
-              v-scroll-to="{ el: '#' + item.link, offset: -115 }"
-              >{{ get(item.link, 'titleMenu') }}</a
-            >
+            <a :href="'#' + item.link" @click="scrollTo">{{ item.title }}</a>
           </li>
         </ul>
       </div>
@@ -44,126 +40,28 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'FloatingMenu',
   props: {
-    list: Array,
+    list: {
+      type: Array,
+      required: true
+    },
+    title: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
       active: false,
       visible: true,
-      charts: {
-        'metrics-comparison-chart': {
-          titleMenu: this.$t('charts.metricsComparison.titleMenu_SVN'),
-          icon: 'graph',
-        },
-        'spread-chart': {
-          titleMenu: this.$t('charts.spread.titleMenu'),
-          icon: 'graph',
-        },
-        'daily-comparison-chart': {
-          titleMenu: this.$t('charts.dailyComparison.titleMenu'),
-          icon: 'column',
-        },
-        'patients-chart': {
-          titleMenu: this.$t('charts.patients.titleMenu'),
-          icon: 'column',
-        },
-        'care-patients-chart': {
-          titleMenu: this.$t('charts.carePatients.titleMenu'),
-          icon: 'column',
-        },
-        'map-chart': {
-          titleMenu: this.$t('charts.map.titleMenu'),
-          icon: 'map',
-        },
-        'municipalities-chart': {
-          titleMenu: this.$t('charts.municipalities.titleMenu'),
-          icon: 'column',
-        },
-        'europe-chart': {
-          titleMenu: this.$t('charts.europe.titleMenu'),
-          icon: 'map',
-        },
-        'age-groups-trends-chart': {
-          titleMenu: this.$t('charts.ageGroupsTimeline.titleMenu'),
-          icon: 'column',
-        },
-        'tests-chart': {
-          titleMenu: this.$t('charts.tests.titleMenu'),
-          icon: 'column',
-        },
-        'hc-cases-chart': {
-          titleMenu: this.$t('charts.hcCases.titleMenu'),
-          icon: 'graph',
-        },
-        'sources-chart': {
-          titleMenu: this.$t('charts.sources.titleMenu'),
-          icon: 'column',
-        },
-        'hcenters-chart': {
-          titleMenu: this.$t('charts.hCenters.titleMenu'),
-          icon: 'graph',
-        },
-        'infections-chart': {
-          titleMenu: this.$t('charts.infections.titleMenu'),
-          icon: 'graph',
-        },
-        'cases-chart': {
-          titleMenu: this.$t('charts.cases.titleMenu'),
-          icon: 'column',
-        },
-        'age-groups-chart': {
-          titleMenu: this.$t('charts.ageGroups.titleMenu'),
-          icon: 'column',
-        },
-        'rmap-chart': {
-          titleMenu: this.$t('charts.rmap.titleMenu'),
-          icon: 'map',
-        },
-        'regions-chart': {
-          titleMenu: this.$t('charts.regions.titleMenu'),
-          icon: 'graph',
-        },
-        'regions-chart-100k': {
-          titleMenu: this.$t('charts.regions100k.titleMenu'),
-          icon: 'graph',
-        },
-        'world-chart': {
-          titleMenu: this.$t('charts.world.titleMenu'),
-          icon: 'map',
-        },
-        'countries-active-chart': {
-          titleMenu: this.$t('charts.countriesActiveCasesPer1M.titleMenu'),
-          icon: 'graph',
-        },
-        'countries-cases-chart': {
-          titleMenu: this.$t('charts.countriesNewCasesPer1M.titleMenu'),
-          icon: 'graph',
-        },
-        'countries-new-deaths-chart': {
-          titleMenu: this.$t('charts.countriesNewDeathsPer100k.titleMenu'),
-          icon: 'graph',
-        },
-        'countries-total-deaths-chart': {
-          titleMenu: this.$t('charts.countriesTotalDeathsPer1M.titleMenu'),
-          icon: 'graph',
-        },
-        'phase-diagram-chart': {
-          titleMenu: this.$t('charts.phaseDiagram.titleMenu'),
-          icon: 'graph',
-        },
-        'deceased-chart': {
-          titleMenu: this.$t('charts.deceased.titleMenu'),
-          icon: 'column',
-        },
-        'youtube': {
-          titleMenu: this.$t('youtube.titleMenu'),
-          icon: 'map',
-        },
-      },
     }
+  },
+  computed: {
+    ...mapGetters('general', ['isMenuOpened'])
   },
   created() {
     window.addEventListener('scroll', this.handleScroll, { passive: true })
@@ -177,9 +75,6 @@ export default {
     window.removeEventListener('scroll', this.handleScroll, { passive: true })
   },
   methods: {
-    get(chart, value) {
-      return this.charts[chart][value]
-    },
     toggleMenu() {
       this.active = !this.active
     },
@@ -190,6 +85,15 @@ export default {
       let footer = document.querySelector('footer').getBoundingClientRect()
       let bottom = window.innerHeight - footer.top
       this.visible = bottom < -50
+    },
+    scrollTo(e) {
+      this.$scrollTo(
+        document.querySelector(e.target.getAttribute('href')),
+        500,
+        {
+          offset: -90,
+        }
+      )
     }
   },
 }
@@ -281,7 +185,7 @@ export default {
   position: fixed;
   bottom: 7px;
   right: 7px;
-  z-index: 1097;
+  z-index: 2001;
   cursor: pointer;
   display: inline-block;
 

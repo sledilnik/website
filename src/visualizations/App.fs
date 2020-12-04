@@ -4,6 +4,7 @@ open Browser
 open Elmish
 open Feliz
 
+open RegionsChartViz.Synthesis
 open Types
 open CountriesChartViz.Analysis
 open I18N
@@ -42,6 +43,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
+            | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
             | _ -> None
             |> Embedded
@@ -229,13 +231,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
             Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+            Renderer = fun _ -> lazyView TestsChart.testsChart () }
 
     let hCenters =
           { VisualizationType = HCenters
@@ -322,12 +318,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Absolute
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
+                                               .MetricRelativeTo.Absolute
                               ChartTextsGroup = "regions"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
             }
 
     let regions100k =
@@ -342,12 +340,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Pop100k
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
+                                               .MetricRelativeTo.Pop100k
                               ChartTextsGroup = "regions100k"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
          }
 
     let sources =
@@ -490,6 +490,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
 
+    let excessDeaths =
+          { VisualizationType = ExcessDeaths
+            ClassName = "excess-deaths-chart"
+            ChartTextsGroup = "excessDeaths"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> ExcessDeathsChart.Chart.chart {| statsData = data |} }
+
     let metricsCorrelation =
           { VisualizationType = MetricsCorrelation
             ClassName = "metrics-correlation-chart"
@@ -507,7 +520,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ metricsCorrelation; hospitals; metricsComparison; dailyComparison
-          patients; patientsCare; deceased
+          patients; patientsCare; deceased; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; tests; ageGroups; hcCases;
           europeMap; sources
@@ -526,8 +539,7 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ metricsCorrelation; hospitals; metricsComparison; spread
-          dailyComparison; map
+        [ metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
@@ -537,6 +549,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesNewDeathsPer1M
           countriesTotalDeathsPer1M
           phaseDiagram
+          excessDeaths
         ]
 
     let embedded, visualizations =

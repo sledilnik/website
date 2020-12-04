@@ -40,6 +40,7 @@ let dropdown (viz: Visualization) =
             | CountriesTotalDeathsPer1M -> (1140, 740)
             | PhaseDiagram -> (1140, 720)
             | Deceased -> (1140, 720)
+            | ExcessDeaths -> (1140, 720)
             | MetricsCorrelation -> (1140, 720)
 
         let graphUrl =

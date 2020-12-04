@@ -28,8 +28,8 @@ with
 
     static member CsvHeader() =
             "iso_code,country_name,continent,population," +
-            "new_cases_per_million,active_cases_per_million," +
-            "total_deaths_per_million,new_deaths_per_million"
+            "new_cases_per_100k,active_cases_per_100k," +
+            "total_deaths_per_100k,new_deaths_per_100k"
 
 let isNotEmpty (text: string) = not(String.IsNullOrWhiteSpace(text))
 
@@ -57,7 +57,7 @@ let getLatestCountryData (countryData: (string * Row[])) =
 
     if countryRows.Length >= 14 then
         let rowsLast14Days = countryRows |> Array.rev |> Array.take 14
-        let rowsLast7Days = countryRows |> Array.rev |> Array.take 14
+        let rowsLast7Days = countryRows |> Array.rev |> Array.take 7
 
         let activeCasesPer100k =
             (rowsLast14Days

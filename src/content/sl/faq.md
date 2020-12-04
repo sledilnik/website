@@ -69,6 +69,13 @@ Stran je v JavaScriptu s pomočjo Vue.js, vizualizacije in grafi so narejeni v F
 
 </details>
 
+<details>
+  <summary id=restrictions>Ali zbirate tudi podatke o trenutno veljavnih ukrepih in omejitvah?</summary>
+
+Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja.
+Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Trenutni ukrepi so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
+</details>
+
 ## O podatkih
 
 <details>
@@ -220,6 +227,8 @@ Vlada RS je 6. 10. 2020 predstavila [načrt in ukrepe za zajezitev novega vala o
 
 3. paket: **> xxx** (14-dnevna pojavnost) **> 360** (hospitalizirani) **> 60** (v intenzivni enoti). Ukrepi: omejitev gibanja med občinami; zaprtje vrtcev; zaustavitev javnega prometa; zaprtje meja (razen tovorni promet in nujni prehodi); omejitev izhodov razen nujnih izjem; zapiranje posameznih gospodarskih dejavnosti. (V veljavi tudi vsi drugi sektorski ukrepi državnega načrta.)
 
+Vsi trenutno veljavni ukrepi in omejitve so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
+
 </details>
 
 <details>
@@ -323,7 +332,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 
 * **Faza 11 (19.-26. oktober)**: Vlada je razglasila [epidemijo](https://www.gov.si/novice/2020-10-18-vlada-razglasila-epidemijo-nalezljive-bolezni-covid-19-na-obmocju-republike-slovenije/).
 
-* **Faza 12 (26. oktober-6. november)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). – testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.
+* **Faza 12 (26. oktober-6. november)**: Zaradi preobremenjenosti laboratorijev je prišlo do [spremembe metodologije testiranja](https://zd-sentjur.si/wp-content/uploads/2020/10/Nova_navodila_glede_testiranja_in_i_P.pdf). Testira se samo *osebe pri katerih se predvideva težji potek bolezni* in *osebe z epidemiološko indikacijo* (izpostavljena delovna mesta - zdravstvo, DSO, poklici z veliko stiki...). V družini z več bolnimi člani se testira najbolj bolnega oz. tistega, ki hodi na delo.
 
 * **Faza 13 (6. november-)**: Glede na nedavno vključitev večjega števila mest za odvzem brisov se skladno s priporočili strokovno svetovalne skupine [spremeni metodologija testiranja](https://www.gov.si/novice/2020-11-06-spremenjen-nacin-testiranja-na-covid-19/) – brisi nosno-žrelnega predela ponovno jemljejo pri vseh osebah s sumom na covid-19.
 
@@ -350,6 +359,13 @@ Ponavadi gre za bolnike iz domov starejših občanov (DSO), ki so prestavljeni n
   <summary id=deceased-chart>Kaj nam pove graf "Umrli"?</summary>
 
 [Graf](/sl/stats#deceased-chart) nam prikazuje strukturo umrlih po lokaciji. Tako je prikazano, koliko ljudi je umrlo izven bolnišnic (večinoma gre za umrle v domovih za ostarele), na negovalnih oddelkih (začasno nameščeni), na akutnih oddelkih (hospitalizirani) in v intenzivni terapiji.
+
+</details>
+
+<details>
+  <summary id=excess-deaths-chart>Kaj nam pove graf "Presežne smrti"?</summary>
+
+[Graf](/sl/stats#excess-deaths-chart) prikazuje mesečno število umrlih v letu 2020 glede na podatke prejšnjih let. Izbirate lahko med dvema pogledoma: Primerjava po letih, kjer so letošnji podatki prikazani skupaj s podatki za leta 2010-2019 ter Presežek glede na zadnjih 5 let. Presežne smrti so izračunane kot odstotek povprečja za leta 2015-2019. Na tem grafu so tudi potrjene COVID-19 smrti, ki pa jih je manj kot vseh presežnih smrti. Razlog za to je, da COVID-19 smrti zunaj bolnišnic in DSO-jev (še) niso registrirane kot take, del presežka pa lahko predstavljajo tudi dodatne smrti kot posledica ukrepov, denimo slabšega dostopa do zdravstvenih storitev. Vir podatkov je centralni register prebivalstva pri MNZ in zajema vse smrti na področju Republike Slovenije kot tudi Slovencev v tujini, kar se razlikuje od podobnih podatkov, ki jih sicer objavlja SURS. Za zadnjih nekaj tednov so podatki še nepopolni in so možni še popravki. Potrjene COVID-19 smrti temeljijo na vladnih podatkih. 
 
 </details>
 

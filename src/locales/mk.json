@@ -708,8 +708,8 @@
             "allTesting": "Вкупно",
             "title": "Тестирање",
             "shareOfPositive": "Дел до позитивните тестови (%)",
-            "regularTesting": "Редовно",
-            "nationalStudyTesting": "Истражување",
+            "regular": "Редовно",
+            "ns-apr20": "Истражување",
             "titleMenu": "Тестирање"
         },
         "hCenters": {
