@@ -845,11 +845,12 @@
             "otherPersons": "Ostale osebe"
         },
         "metricsCorrelation": {
-            "title": "Soodvisnost okužb in umrlih",
-            "titleMenu": "Soodvisnost okužb in umrlih",
+            "title": "Soodvisnost okužb, hospitaliziranih in umrlih",
+            "titleMenu": "Soodvisnost okužb, hospitaliziranih in umrlih",
             "averageByDay": "Po dnevih (7-dnevno povprečje)",
             "all": "Skupaj",
             "cases": "Potrjeni primeri",
+            "hospitalized": "Hospitalizirani",
             "deceased": "Umrli"
         },
         "spread": {

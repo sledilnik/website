@@ -14,6 +14,7 @@ let chartText = I18N.chartText "metricsCorrelation"
 
 type Metric =
     | Cases
+    | Hospitalized
     | Deceased
 
 type MetricCfg = {
@@ -31,7 +32,9 @@ type DayValueFloat = JsTimestamp*float
 module Metrics  =
     let all = [
         { Metric=Cases; Color="#bda506";Id="cases"; YAxisIndex = 0 }
-        { Metric=Deceased; Color="red"; Id="deceased"; YAxisIndex = 1  }
+        { Metric=Hospitalized; Color="#76CAFE"
+          Id="hospitalized"; YAxisIndex = 1 }
+        { Metric=Deceased; Color="red"; Id="deceased"; YAxisIndex = 2 }
     ]
 
 type ValueTypes = RunningTotals | MovingAverages
@@ -96,6 +99,7 @@ let renderChartOptions state dispatch =
         let metricFunc =
             match mc.Metric with
             | Cases -> fun pt -> pt.Cases.ConfirmedToDate
+            | Hospitalized -> fun pt -> pt.StatePerTreatment.InHospitalToDate
             | Deceased -> fun pt -> pt.StatePerTreatment.DeceasedToDate
 
         fun pt -> (pt |> metricFunc |> Utils.zeroToNone)
@@ -207,16 +211,24 @@ let renderChartOptions state dispatch =
         |})
 
     let casesYAxis = {|
+        title = pojo {| text = chartText Metrics.all.[0].Id |}
         index = 0
         opposite = false
     |}
 
-    let deceasedYAxis = {|
+    let hospitalizedYAxis = {|
+        title = pojo {| text = chartText Metrics.all.[1].Id |}
         index = 1
         opposite = true
     |}
 
-    let yAxes = [| casesYAxis; deceasedYAxis |]
+    let deceasedYAxis = {|
+        title = pojo {| text = chartText Metrics.all.[2].Id |}
+        index = 2
+        opposite = true
+    |}
+
+    let yAxes = [| casesYAxis; hospitalizedYAxis; deceasedYAxis |]
 
     {| baseOptions with
         chart = pojo
