@@ -30,10 +30,10 @@ let totalVsWeekData metric statsData =
             |})
             |> List.pairwise
             |> List.map (fun (a, b) ->
-                match a.Count, b.Count, b.CountToDate with
-                | Some aCount, Some bCount, Some bCountToDate ->
+                match a.CountToDate, b.CountToDate with
+                | Some aCountToDate, Some bCountToDate ->
                     {| Date = b.Date
-                       Count = Some (bCount - aCount)
+                       Count = Some (bCountToDate - aCountToDate)
                        CountToDate = Some bCountToDate
                     |} |> Some
                 | _ -> None)
@@ -83,14 +83,14 @@ let weekVsWeekBeforeData metric statsData =
             statsData
             |> List.map (fun (dp : StatsDataPoint) ->
             {| Date = dp.Date
-               Count = dp.StatePerTreatment.InHospital
+               CountToDate = dp.StatePerTreatment.InHospitalToDate
             |})
             |> List.pairwise
             |> List.map (fun (a, b) ->
-                match a.Count, b.Count with
-                | Some aCount, Some bCount ->
+                match a.CountToDate, b.CountToDate with
+                | Some aCountToDate, Some bCountToDate ->
                     {| Date = b.Date
-                       Count = Some (bCount - aCount)
+                       Count = Some (bCountToDate - aCountToDate)
                     |} |> Some
                 | _ -> None)
             |> List.choose id
