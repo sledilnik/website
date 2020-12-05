@@ -4,11 +4,11 @@
     <b-container class="stats-page">
       <b-row cols="12">
         <b-col>
-          <Notice />
+          <Posts />
         </b-col>
       </b-row>
       <div class="cards-wrapper">
-        <!--  
+        <!--
         <Info-card
           :title="$t('infocard.tests')"
           field="tests.performed.today"
@@ -22,7 +22,7 @@
           name="cases.confirmedToDate"
           series-type="state"
         />
-        <!--  
+        <!--
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
@@ -89,6 +89,7 @@ import { mapState } from "vuex";
 import InfoCard from "components/cards/InfoCard";
 import TimeStamp from "components/TimeStamp";
 import Notice from "components/Notice";
+import Posts from "components/Posts";
 import Youtube from "components/Youtube";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
@@ -100,7 +101,8 @@ export default {
   components: {
     InfoCard,
     TimeStamp,
-    Notice,
+    Posts,
+    // Notice,
     Youtube,
     FloatingMenu,
   },
