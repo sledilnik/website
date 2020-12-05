@@ -308,6 +308,7 @@ let renderTestsChart (state: State) dispatch =
                    data =
                        if DisplayType.UseStatsData(state.DisplayType) then
                            state.StatsData
+                           |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTestsStats dp))
                            |> Seq.toArray
                        else
@@ -322,7 +323,8 @@ let renderTestsChart (state: State) dispatch =
                      yAxis = 0
                      data =
                          if DisplayType.UseStatsData(state.DisplayType) then
-                             state.StatsData
+                             state.StatsData 
+                             |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                              |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTestsStats dp))
                              |> Seq.toArray
                          else
@@ -338,6 +340,7 @@ let renderTestsChart (state: State) dispatch =
                      data =
                          if DisplayType.UseStatsData(state.DisplayType) then
                              state.StatsData
+                             |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                              |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositiveStats dp))
                              |> Seq.toArray
                          else
