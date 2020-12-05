@@ -25,6 +25,7 @@ type DisplayType =
         | ByLab -> I18N.t "charts.tests.byLab"
         | ByLabPercent -> I18N.t "charts.tests.byLabPercent"
         | Lab facility -> Utils.Dictionaries.GetFacilityName(facility)
+
     static member UseStatsData dType =
         match dType with
         | Total | Data "regular" | Data "ns-apr20" -> true
@@ -103,12 +104,14 @@ let renderByLabChart (state: State) dispatch =
 
         let toFloat num =
             match num with
-            | Some n -> Some (float n)
+            | Some n -> Some(float n)
             | _ -> None
 
         let percentPositive stats =
             match stats.positive.today, stats.performed.today with
-            | Some pos, Some perf -> Math.Round(float pos / float perf * 100., 2) |> Some
+            | Some pos, Some perf ->
+                Math.Round(float pos / float perf * 100., 2)
+                |> Some
             | None, Some perf -> Math.Round(0. / float perf * 100., 2) |> Some
             | _ -> None
 
@@ -119,7 +122,7 @@ let renderByLabChart (state: State) dispatch =
                 |> Option.bind (fun stats ->
                     match state.DisplayType with
                     | ByLabPercent -> percentPositive stats
-                    | _ -> toFloat stats.performed.today )
+                    | _ -> toFloat stats.performed.today)
 
             ls.JsDate12h, value
 
@@ -138,8 +141,7 @@ let renderByLabChart (state: State) dispatch =
     let allYAxis =
         match state.DisplayType with
         | ByLabPercent ->
-            [|
-               {| index = 0
+            [| {| index = 0
                   title = {| text = null |}
                   labels = pojo {| format = "{value}%" |}
                   max = 64
@@ -147,11 +149,9 @@ let renderByLabChart (state: State) dispatch =
                   opposite = true
                   visible = true
                   crosshair = true |}
-               |> pojo 
-           |]
+               |> pojo |]
         | _ ->
-            [| 
-               {| index = 0
+            [| {| index = 0
                   title = {| text = null |}
                   labels = pojo {| format = "{value}" |}
                   max = None
@@ -159,8 +159,7 @@ let renderByLabChart (state: State) dispatch =
                   opposite = true
                   visible = true
                   crosshair = true |}
-               |> pojo
-           |]
+               |> pojo |]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -178,19 +177,21 @@ let renderByLabChart (state: State) dispatch =
                [| for lab in state.AllLabs do
                    yield renderSources lab |]
            plotOptions = pojo {| series = {| stacking = None |} |}
-           legend = pojo {| enabled = true; layout = "horizontal" |}
+           legend =
+               pojo
+                   {| enabled = true
+                      layout = "horizontal" |}
            tooltip =
                pojo
                    {| shared = true
                       split = false
                       valueSuffix = if state.DisplayType = ByLabPercent then "%" else ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
-           responsive = pojo
+           responsive =
+               pojo
                    {| rules =
                           [| {| condition = {| maxWidth = 768 |}
-                                chartOptions =
-                                    {| yAxis =
-                                           [| {| labels = {| enabled = false |} |} |] |} |} |] |} |} 
+                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
 
@@ -207,9 +208,7 @@ let renderTestsChart (state: State) dispatch =
         | Lab lab ->
             dp.labs.[lab].positive.today
             |> Option.defaultValue 0
-        | _ -> 
-            dp.total.positive.today 
-            |> Option.defaultValue 0
+        | _ -> dp.total.positive.today |> Option.defaultValue 0
 
     let negativeTests (dp: LabTestsStats) =
         match state.DisplayType with
@@ -235,9 +234,7 @@ let renderTestsChart (state: State) dispatch =
     // data from stats - only totals
     let positiveTestsStats (dp: StatsDataPoint) =
         match state.DisplayType with
-        | Total -> 
-            dp.Tests.Positive.Today 
-            |> Option.defaultValue 0
+        | Total -> dp.Tests.Positive.Today |> Option.defaultValue 0
         | Data "regular" ->
             dp.Tests.Regular.Positive.Today
             |> Option.defaultValue 0
@@ -248,11 +245,9 @@ let renderTestsChart (state: State) dispatch =
 
     let negativeTestsStats (dp: StatsDataPoint) =
         match state.DisplayType with
-        | Total -> 
-            (dp.Tests.Performed.Today 
-             |> Option.defaultValue 0)
-            - (dp.Tests.Positive.Today 
-               |> Option.defaultValue 0)
+        | Total ->
+            (dp.Tests.Performed.Today |> Option.defaultValue 0)
+            - (dp.Tests.Positive.Today |> Option.defaultValue 0)
         | Data "regular" ->
             (dp.Tests.Regular.Performed.Today
              |> Option.defaultValue 0)
@@ -267,7 +262,10 @@ let renderTestsChart (state: State) dispatch =
 
     let percentPositiveStats (dp: StatsDataPoint) =
         let positive = positiveTestsStats dp
-        let performed = positiveTestsStats dp + negativeTestsStats dp
+
+        let performed =
+            positiveTestsStats dp + negativeTestsStats dp
+
         Math.Round(float positive / float performed * float 100.0, 2)
 
     let allYAxis =
@@ -308,44 +306,44 @@ let renderTestsChart (state: State) dispatch =
                    color = "#19aebd"
                    yAxis = 0
                    data =
-                        if DisplayType.UseStatsData(state.DisplayType) then
-                            state.StatsData
-                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTestsStats dp))
-                            |> Seq.toArray
-                        else
-                            state.LabData
-                            |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
-                            |> Seq.toArray |}
+                       if DisplayType.UseStatsData(state.DisplayType) then
+                           state.StatsData
+                           |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTestsStats dp))
+                           |> Seq.toArray
+                       else
+                           state.LabData
+                           |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
+                           |> Seq.toArray |}
           yield
-            pojo
-                {| name = I18N.t "charts.tests.positiveTests"
-                   ``type`` = "column"
-                   color = "#d5c768"
-                   yAxis = 0
-                   data =
-                        if DisplayType.UseStatsData(state.DisplayType) then
-                            state.StatsData
-                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTestsStats dp))
-                            |> Seq.toArray
+              pojo
+                  {| name = I18N.t "charts.tests.positiveTests"
+                     ``type`` = "column"
+                     color = "#d5c768"
+                     yAxis = 0
+                     data =
+                         if DisplayType.UseStatsData(state.DisplayType) then
+                             state.StatsData
+                             |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTestsStats dp))
+                             |> Seq.toArray
                          else
-                            state.LabData
-                            |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
-                            |> Seq.toArray |}
+                             state.LabData
+                             |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
+                             |> Seq.toArray |}
           yield
-            pojo
-                {| name = I18N.t "charts.tests.shareOfPositive"
-                   ``type`` = "line"
-                   color = "#665191"
-                   yAxis = 1
-                   data =
-                        if DisplayType.UseStatsData(state.DisplayType) then
-                            state.StatsData
-                            |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositiveStats dp))
-                            |> Seq.toArray
-                        else
-                            state.LabData
-                            |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
-                            |> Seq.toArray |} ]
+              pojo
+                  {| name = I18N.t "charts.tests.shareOfPositive"
+                     ``type`` = "line"
+                     color = "#665191"
+                     yAxis = 1
+                     data =
+                         if DisplayType.UseStatsData(state.DisplayType) then
+                             state.StatsData
+                             |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositiveStats dp))
+                             |> Seq.toArray
+                         else
+                             state.LabData
+                             |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
+                             |> Seq.toArray |} ]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -394,7 +392,8 @@ let renderChartContainer (state: State) dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
                prop.children [ match state.DisplayType with
-                               | ByLab | ByLabPercent ->
+                               | ByLab
+                               | ByLabPercent ->
                                    renderByLabChart state dispatch
                                    |> Highcharts.chartFromWindow
                                | _ ->
@@ -419,8 +418,20 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ renderChartContainer state dispatch
-                   renderDisplaySelectors state dispatch ]
+        Html.div [ 
+            renderChartContainer state dispatch
+            renderDisplaySelectors state dispatch 
 
-let testsChart (props : {| data : StatsData |}) =
+            if DisplayType.UseStatsData(state.DisplayType) then
+                Html.none
+            else    
+                Html.div [
+                    prop.className "disclaimer"
+                    prop.children [
+                        Html.text (I18N.t "charts.tests.disclaimer")
+                    ]
+                ]
+        ]
+
+let testsChart (props: {| data: StatsData |}) =
     React.elmishComponent ("TestsChart", init props.data, update, render)

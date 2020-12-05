@@ -822,6 +822,7 @@
         "tests": {
             "title": "Testiranje",
             "titleMenu": "Testiranje",
+            "disclaimer": "Opomba: Od 3. decembra ne prejemamo več podatkov po posameznih laboratorijih.",
             "allTesting": "Skupaj",
             "byLab": "Po laboratorijih: testi",
             "byLabPercent": "Po laboratorijih: % pozitivnih",

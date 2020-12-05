@@ -360,6 +360,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
+            "disclaimer": "Note: From December 3, we do not received data per laboratory.",
             "allTesting": "All",
             "byLab": "By Laboratory: Tests",
             "byLabPercent": "By Laboratory: % positive",
