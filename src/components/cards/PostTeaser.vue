@@ -21,7 +21,6 @@
   </div>
 </template>
 <script>
-import i18next from "i18next";
 import { format, parseISO } from "date-fns";
 export default {
   props: {
