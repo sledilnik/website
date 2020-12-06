@@ -117,7 +117,6 @@ const routes = [
   },
   {
     path: '/about',
-    name: 'about',
     redirect: `/${i18next.language}/about`,
   },
   {
