@@ -102,10 +102,14 @@ let weekVsWeekBeforeData metric statsData =
         let firstWindow, secondWindow = List.splitAt windowSize doubleWindow
         let firstWindowSum = firstWindow |> List.map (fun dp -> dp.Count |> Option.defaultValue 0) |> List.sum
         let secondWindowSum = secondWindow |> List.map (fun dp -> dp.Count |> Option.defaultValue 0) |> List.sum
+
+        let middleWindow = Array.sub (doubleWindow |> List.toArray) (windowSize / 2) windowSize
+        let middleWindowSum = middleWindow |> Array.map (fun dp -> dp.Count |> Option.defaultValue 0) |> Array.sum
+
         if firstWindowSum = 0 then
             None
         else
-            Some { x = firstWindowSum
+            Some { x = middleWindowSum
                    y = (float secondWindowSum) / (float firstWindowSum) * 100.0 |> System.Convert.ToInt32
                    date = (secondWindow |> List.rev |> List.head ).Date })
     |> List.choose id
