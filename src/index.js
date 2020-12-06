@@ -5,9 +5,11 @@ import VScrollLock from 'v-scroll-lock'
 import i18n from './i18n'
 import App from './App.vue'
 import store from './store/index'
+import plugins from './plugins/index'
 import './main.js'
 import 'style/index.scss'
 
+Vue.use(plugins)
 Vue.use(VueScrollTo, { offset: 60 })
 Vue.use(VScrollLock)
 

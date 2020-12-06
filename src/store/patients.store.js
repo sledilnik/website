@@ -1,5 +1,7 @@
-import ApiService, { API_ENDPOINT_BASE } from '../services/api.service'
+import ApiService from '../services/api.service'
 import { exportTime } from './index'
+
+const dataApi = new ApiService({})
 
 const state = {
   exportTime: null,
@@ -17,7 +19,7 @@ const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
     const from = new Date(tempDate.setDate(tempDate.getDate() - 3))
-    const data = await ApiService.get(`${API_ENDPOINT_BASE}/api/patients`, {params: {from, to}})
+    const data = await dataApi.get('/api/patients', {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
 

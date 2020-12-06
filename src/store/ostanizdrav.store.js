@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import ApiService from '../services/api.service'
+const dataApi = new ApiService('https://ostanizdrav.sledilnik.org')
 
 const state = {
   exportTime: null,
@@ -11,7 +12,7 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }, to) => {
-    const resp = await ApiService.get('https://ostanizdrav.sledilnik.org/plots/timestamp.json')
+    const resp = await dataApi.get('/plots/timestamp.json')
     commit('setExportTime', new Date(resp.data.unix * 1000))
   },
   refreshDataEvery: ({ dispatch }, seconds) => {

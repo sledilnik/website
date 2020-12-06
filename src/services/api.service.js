@@ -1,20 +1,14 @@
-import axios from 'axios'
-import axiosETAGCache from 'axios-etag-cache'
+import axiosETAGCache from "axios-etag-cache";
 
-export const API_ENDPOINT_BASE = window.location.search.indexOf('stage') > 0 ? 'https://api-stage.sledilnik.org' : 'https://api.sledilnik.org'
-
-const ApiService = {
-  init(baseURL) {
-    axios.defaults.baseURL = baseURL
-  },
+export const API_ENDPOINT_BASE = process.env.VUE_APP_API_ENDPOINT_BASE;
+class ApiService {
+  constructor({ baseURL = API_ENDPOINT_BASE }) {
+    this.axios = axiosETAGCache({ baseURL });
+  }
 
   get(resource, opts) {
-    return axiosETAGCache(axios).get(resource, opts)
-  },
-
-  fetchPosts() {
-    
+    return this.axios.get(resource, opts);
   }
 }
 
-export default ApiService
+export default ApiService;

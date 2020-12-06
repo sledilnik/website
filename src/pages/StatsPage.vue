@@ -3,8 +3,8 @@
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <b-row cols="12">
-        <b-col>
-          <Posts />
+        <b-col v-if="headerNotice">
+          <Notice :post="headerNotice" />
         </b-col>
       </b-row>
       <div class="cards-wrapper">
@@ -101,8 +101,7 @@ export default {
   components: {
     InfoCard,
     TimeStamp,
-    Posts,
-    // Notice,
+    Notice,
     Youtube,
     FloatingMenu,
   },
@@ -110,7 +109,11 @@ export default {
     return {
       loaded: false,
       charts: [],
+      headerNotice: false
     };
+  },
+  created(){
+    this.getPost()
   },
   mounted() {
     this.$nextTick(() => {
@@ -139,6 +142,9 @@ export default {
     }),
   },
   methods: {
+    async getPost(){
+      this.headerNotice = await this.contentApi.get('/posts/1') //Todo somehow fetch the right thing
+    },
     checkClick(e) {
       const dropdownAll = this.$el.querySelectorAll(".share-dropdown-wrapper");
 
