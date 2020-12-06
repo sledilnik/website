@@ -4,7 +4,7 @@
     :title="post.title"
     :img-src="post.image"
     :img-alt="post.title"
-    img-left
+    img-top
     tag="article"
   >
     <b-card-text v-html="post.blurb"></b-card-text>
