@@ -3,7 +3,7 @@
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
-        <span v-if="showIncidence">{{
+        <span v-if="showRunningSum">{{
           renderRunningSum
         }}</span>
         <span v-else>{{ renderValues.lastDay.value }}</span>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div :id="name" class="card-diff">
-        <div v-if="showIncidence">
+        <div v-if="showRunningSum">
           <span class="card-note">{{ $t('infocard.newCases7dInfo') }}</span>
         </div>
         <div v-if="showAbsolute">
@@ -179,14 +179,14 @@ export default {
       )
     },
     showIn() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
       }
       return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return (
           this.renderActiveValues(this.fieldNewCases).lastDay.value -
@@ -198,7 +198,7 @@ export default {
       return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
       }
@@ -206,8 +206,8 @@ export default {
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
     },
-    showIncidence() {
-      if (this.name === 'incidence') {
+    showRunningSum() {
+      if (this.name === 'newCases7d') {
         return true
       }
       return false
