@@ -1,10 +1,12 @@
 <template>
-  <div class="container">
-    <h1>Objave</h1>
-    <div class="d-flex flex-wrap row" v-if="posts">
-      <PostTeaser class="col-md-6" v-for="post in posts" :post="post" :key="post.id" />
+  <div class="custom-container">
+    <div class="static-page-wrapper">
+      <h1>Objave</h1>
+      <b-card-group deck v-if="posts">
+        <PostTeaser v-for="post in posts" :post="post" :key="post.id" />
+      </b-card-group>
+      <Loader v-else/>
     </div>
-    <Loader v-else/>
   </div>
 </template>
 

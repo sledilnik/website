@@ -1,23 +1,20 @@
 <template>
   <div>
-    <div class="card mb-3" style="max-width: 540px;">
-      <div class="d-flex">
-        <div class="col-md-4 px-0" v-if="post.image">
-          <img :src="post.image" class="card-img" :alt="post.title" />
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text" v-html="post.blurb"></p>
-            <p class="card-text">
-              <small class="text-muted">Objavljeno {{ created }}</small>
-            </p>
-            <a v-if="post.link_to" :href="post.link_to" target="_blank">Preberi več</a>
-            <router-link v-else :to="postLink">Preberi več</router-link>
-          </div>
-        </div>
-      </div>
-    </div>
+    <b-card
+      :key="post.id"
+      :title="post.title"
+      :img-src="post.image"
+      :img-alt="post.title"
+      img-top
+      tag="article"
+    >
+      <b-card-text>{{ post.blurb }}</b-card-text>
+      <a v-if="post.link_to" :href="post.link_to" target="_blank">Preberi več</a>
+      <router-link v-else :to="postLink">Preberi več</router-link>
+      <template #footer>
+        <small class="text-muted">{{ created }}</small>
+      </template>
+    </b-card>
   </div>
 </template>
 <script>
@@ -42,4 +39,8 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.card {
+  margin-bottom: 30px;
+}
+</style>

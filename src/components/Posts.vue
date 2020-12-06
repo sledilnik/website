@@ -18,3 +18,9 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+</style>
