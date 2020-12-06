@@ -25,7 +25,7 @@ export default {
     //TODO
   },
   async created() {
-    const postId = _.get(this.$route, "params.id", false);
+    const postId = _.get(this.$route, "params.postId", false);
     if (!postId) {
       // 404
     }

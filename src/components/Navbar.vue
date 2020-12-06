@@ -7,7 +7,7 @@
       closingMenu: closingMenu,
     }"
   >
-    <router-link to="stats" class="navbar-logo"></router-link>
+    <router-link :to="{name: 'stats'}" class="navbar-logo"></router-link>
     <div class="🍔" @click="toggleMenu">
       <div class="line line-1"></div>
       <div class="line line-2"></div>
@@ -16,13 +16,13 @@
     <div class="nav-overlay"></div>
     <div class="nav-links">
       <div class="nav-heading">{{ $t('navbar.menu') }}</div>
-      <router-link to="stats" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
-      <router-link to="world" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
-      <router-link to="data" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
-      <router-link to="models" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
-      <router-link to="ostanizdrav" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
-      <router-link to="faq" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
-      <router-link to="about" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
+      <router-link :to="{ name: 'stats' }" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
+      <router-link :to="{ name: 'world' }" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
+      <router-link :to="{ name: 'data' }" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
+      <router-link :to="{ name: 'models' }" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
+      <router-link :to="{ name: 'ostanizdrav' }" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
+      <router-link :to="{ name: 'faq' }" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
+      <router-link :to="{ name: 'about' }" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
       <div class="social" v-if="showIcons">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
           <img src="../assets/svg/fb-icon.svg" alt="Facebook" />

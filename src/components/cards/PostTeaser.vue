@@ -32,7 +32,12 @@ export default {
       return format(parseISO(this.post.created), "d.M.Y, H:mm");
     },
     postLink() {
-      return `/${i18next.language}/posts/${this.post.id}`;
+      return {
+        name: 'post',
+        params: {
+          postId: this.post.id
+        }
+      };
     },
   },
 };

@@ -85,6 +85,7 @@ function mdContentRoutes() {
   Object.keys(mdContent).forEach((key) => {
     mdContentRoutes.push({
       path: key,
+      name: key,
       component: StaticPage,
       props: dynamicProps,
     })
@@ -116,6 +117,7 @@ const routes = [
   },
   {
     path: '/about',
+    name: 'about',
     redirect: `/${i18next.language}/about`,
   },
   {
@@ -125,6 +127,10 @@ const routes = [
   {
     path: '/posts',
     redirect: `/${i18next.language}/posts`,
+  },
+  {
+    path: '/posts/:postId',
+    redirect: `/${i18next.language}/posts/:postId`,
   },
   {
     path: '/embed',
@@ -181,34 +187,42 @@ const routes = [
       },
       {
         path: 'stats',
+        name: 'stats',
         component: StatsPage,
       },
       {
         path: 'ostanizdrav',
+        name: 'ostanizdrav',
         component: OstaniZdravPage,
       },
       {
         path: 'world',
+        name: 'world',
         component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
       },
       {
         path: 'tables',
+        name: 'tables',
         component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
       },
       {
         path: 'embed',
+        name: 'embed',
         component: () => import('./pages/EmbedMakerPage.vue'),
       },
       {
         path: 'restrictions',
+        name: 'restrictions',
         component: () => import('./pages/RestrictionsPage.vue'),
       },
       {
         path: 'posts',
+        name: 'posts',
         component: () => import('./pages/PostsPage.vue'),
       },
       {
-        path: 'posts/:id',
+        path: 'posts/:postId',
+        name: 'post',
         component: () => import('./pages/PostSingle.vue'),
       },
       {
