@@ -2,11 +2,9 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <b-row cols="12">
-        <b-col v-if="headerNotice">
-          <Notice :post="headerNotice" />
-        </b-col>
-      </b-row>
+      <div class="d-flex" v-if="headerTeasers">
+          <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.link_to" />
+      </div>
       <div class="cards-wrapper">
         <!--
         <Info-card
@@ -87,6 +85,7 @@
 <script>
 import { mapState } from "vuex";
 import InfoCard from "components/cards/InfoCard";
+import PostTeaser from "components/cards/PostTeaser";
 import TimeStamp from "components/TimeStamp";
 import Notice from "components/Notice";
 import Posts from "components/Posts";
@@ -101,7 +100,7 @@ export default {
   components: {
     InfoCard,
     TimeStamp,
-    Notice,
+    PostTeaser,
     Youtube,
     FloatingMenu,
   },
@@ -109,7 +108,7 @@ export default {
     return {
       loaded: false,
       charts: [],
-      headerNotice: false
+      headerTeasers: false
     };
   },
   created(){
@@ -143,7 +142,8 @@ export default {
   },
   methods: {
     async getPost(){
-      this.headerNotice = await this.contentApi.get('/posts/1') //Todo somehow fetch the right thing
+      const { objects } = await this.contentApi.get('/posts/set/1;2')
+      this.headerTeasers = objects
     },
     checkClick(e) {
       const dropdownAll = this.$el.querySelectorAll(".share-dropdown-wrapper");
