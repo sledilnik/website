@@ -6,7 +6,6 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
-import OstaniZdravPage from './pages/OstaniZdravPage.vue'
 
 import * as aboutMdSl from './content/sl/about.md'
 import * as aboutMdEn from './content/en/about.md'
@@ -192,7 +191,7 @@ const routes = [
       {
         path: 'ostanizdrav',
         name: 'ostanizdrav',
-        component: OstaniZdravPage,
+        component: () => import('./pages/OstaniZdravPage.vue'),
       },
       {
         path: 'world',
