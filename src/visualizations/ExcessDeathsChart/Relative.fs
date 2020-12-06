@@ -10,22 +10,27 @@ open Types
 let colors = {|
     ExcessDeaths = "#ff3333"
     CovidDeaths = "#a483c7"
+    ConfidenceInterval = "#a0a0a0"
 |}
 
 let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
 
     let baselineStartYear, baselineEndYear = 2015, 2019
 
-    let deceasedBaseline =
+    let deceasedBaseline, deceasedminMax =
         data
         |> List.filter (fun dp -> dp.Year >= baselineStartYear && dp.Year <= baselineEndYear)
         |> List.groupBy (fun dp -> dp.Week)
         |> List.map (fun (week, dps) ->
-            (week, (List.sumBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps) / float (baselineEndYear - baselineStartYear + 1)) )
+            let baseline = (List.sumBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps) / float (baselineEndYear - baselineStartYear + 1)
+            let min = (List.minBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps).Deceased
+            let max = (List.maxBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps).Deceased
+            (week, baseline), ((week, (float min / float baseline - 1.) * 100.), (week, (float max / float baseline - 1.) * 100.)))
+        |> List.unzip
 
-    let deceasedBaselineMap =
-        deceasedBaseline
-        |> FSharp.Collections.Map
+    let deceasedBaselineMap = deceasedBaseline |> FSharp.Collections.Map
+    let deceasedMin, deceasedMax = List.unzip deceasedminMax
+    let deceasedMinMap, deceasedMaxMap = deceasedMin |> FSharp.Collections.Map, deceasedMax |> FSharp.Collections.Map
 
     let deceasedCurrentYear =
         data
@@ -77,8 +82,58 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
                 Some (dp, System.Math.Round(float dp.Deceased / float deceasedTotal * 100., 1)) )
         |> List.choose id
 
+    let deceasedMinPercent =
+        deceasedCurrentYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
+        |> List.map (fun (week, weekStartDate) ->
+            match deceasedMinMap.TryFind(week) with
+            | None -> None
+            | Some percent -> Some (weekStartDate, percent) )
+        |> List.choose id
+
+    let deceasedMaxPercent =
+        deceasedCurrentYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
+        |> List.map (fun (week, weekStartDate) ->
+            match deceasedMaxMap.TryFind(week) with
+            | None -> None
+            | Some percent -> Some (weekStartDate, percent) )
+        |> List.choose id
+
     let series =
         [|
+            {| ``type`` = "line"
+               animation = false
+               marker = {| enabled = false |} |> pojo
+               lineWidth = 1
+               color = colors.ConfidenceInterval
+               dashStyle = "Dash"
+               enableMouseTracking = false
+               showInLegend = false
+               data =
+                   deceasedMinPercent
+                   |> List.map (fun (weekStartDate, percent) ->
+                        {| x = weekStartDate
+                           y = percent
+                        |} |> pojo)
+                   |> List.toArray
+            |} |> pojo
+
+            {| ``type`` = "line"
+               animation = false
+               marker = {| enabled = false |} |> pojo
+               lineWidth = 1
+               color = colors.ConfidenceInterval
+               dashStyle = "Dash"
+               enableMouseTracking = false
+               showInLegend = false
+               data =
+                   deceasedMaxPercent
+                   |> List.map (fun (weekStartDate, percent) ->
+                        {| x = weekStartDate
+                           y = percent
+                        |} |> pojo)
+                   |> List.toArray
+            |} |> pojo
+
             {| ``type`` = "line"
                name = (I18N.t "charts.excessDeaths.excess.excessDeaths")
                animation = false
@@ -93,6 +148,7 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
                         |} |> pojo)
                    |> List.toArray
             |} |> pojo
+
             {| ``type`` = "area"
                name = (I18N.t "charts.excessDeaths.excess.covidDeaths")
                animation = false
