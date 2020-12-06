@@ -559,14 +559,17 @@
             "regular": "Regelmäßige",
             "positiveTests": "Positive Tests",
             "negativeTests": "Negative Tests",
-            "titleMenu": "Testung"
+            "titleMenu": "Testung",
+            "byLabPercent": "Nach Labor: % positiv",
+            "byLab": "Nach Labor: Tests"
         },
         "regions": {
             "activeCases": "Aktive Fälle",
             "confirmedCases": "Bestätigte Fälle",
             "deceased": "Todesfälle",
             "title": "Fälle nach Gemeinden",
-            "titleMenu": "Region – Fälle"
+            "titleMenu": "Region – Fälle",
+            "newCases7Days": "Neue Fälle (7-Tage-Durchschnitt)"
         },
         "cases": {
             "hospitalized": "Hospitalisierte",
@@ -770,6 +773,21 @@
             "deceasedToday": "Todesfälle pro Tag",
             "titleMenu": "Todesfälle",
             "title": "Todesfälle"
+        },
+        "excessDeaths": {
+            "excess": {
+                "excessDeaths": "Sterberate (im Vergleich zu 2015 bis 2019)",
+                "title": "Sterberate im Vergleich zu den letzten 5 Jahren",
+                "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
+                "covidDeaths": "Bestätigte COVID-19-Todesfälle"
+            },
+            "titleMenu": "Sterberate",
+            "title": "Sterberate",
+            "absolute": {
+                "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
+                "title": "Jahresvergleich"
+            },
+            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
         }
     },
     "tableDict": {
@@ -1331,5 +1349,6 @@
         "validity": "Gültigkeit",
         "geoValidity": "Geografische Gültigkeit",
         "title": "Maßnahmen und Einschränkungen"
-    }
+    },
+    "week": "Woche"
 }

@@ -1149,14 +1149,14 @@
         },
         "excessDeaths": {
             "excess": {
-                "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo.",
+                "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo. Nell'articolo trovate un approfondimento sul grafico",
                 "covidDeaths": "Decessi confermati per COVID-19",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
                 "title": "Eccedenza rispetto agli ultimi 5 anni"
             },
             "absolute": {
                 "title": "Confronto annuale",
-                "disclaimer": "Nota: i dati dell'ultima settimana visualizzata sono incompleti."
+                "disclaimer": "Nota: i dati dell'ultima settimana visualizzata sono incompleti. Nell'articolo trovate un approfondimento sul grafico"
             },
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",

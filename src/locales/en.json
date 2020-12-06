@@ -360,6 +360,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
+            "disclaimer": "Note: From December 3, we do not received data per laboratory.",
             "allTesting": "All",
             "byLab": "By Laboratory: Tests",
             "byLabPercent": "By Laboratory: % positive",
@@ -579,13 +580,13 @@
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
             "absolute": {
                 "title": "Yearly comparison",
-                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths",
-                "disclaimer": "Note: data on deaths for the last displayed week is incomplete."
+                "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             }
         },
         "hospitals": {

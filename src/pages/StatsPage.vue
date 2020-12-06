@@ -77,19 +77,14 @@
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="R_VftBj375I"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
-        </b-col>
-      </b-row>
-      <!-- <b-row cols="12">
-        <b-col>
           <Youtube id="R_VftBj375I"></Youtube>
         </b-col>
-      </b-row> -->
+      </b-row>
     </b-container>
     <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
