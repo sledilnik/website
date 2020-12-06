@@ -4,17 +4,16 @@
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
         <span v-if="showIncidence">{{
-          Math.round(renderValues.lastDay.value / incidence)
+          renderRunningSum
         }}</span>
         <span v-else>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
-      <span class="card-average"><strong>{{ renderRunningSum }}</strong> (7d avg)</span>
       <div :id="name" class="card-diff">
         <div v-if="showIncidence">
-          <span class="card-note">{{ $t('infocard.per100k') }} </span>
+          <span class="card-note">{{ $t('infocard.incidence7dInfo') }}</span>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -214,8 +213,8 @@ export default {
       return false
     },
     renderRunningSum() {
-      if (isNaN(this.runningSum(0, 7, this.runningSumField).toFixed(1)))
-        return this.runningSumPatients(0, 7, this.runningSumField).toFixed(1)
+      // if (isNaN(this.runningSum(0, 7, this.runningSumField).toFixed(1)))
+      //   return this.runningSumPatients(0, 7, this.runningSumField).toFixed(1)
       return this.runningSum(0, 7, this.runningSumField).toFixed(1)
     }
   },

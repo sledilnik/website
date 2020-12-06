@@ -53,6 +53,8 @@
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
+        "incidence7d": "Novi primeri",
+        "incidence7dInfo": "povprečje zadnjih 7 dni",
         "per100k": "na 100.000 prebivalcev",
         "orangePhase": "Oranžna faza",
         "orangePhaseGenitive": "oranžne",

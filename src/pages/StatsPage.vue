@@ -40,8 +40,17 @@
           running-sum-field="cases.confirmedToday"
           series-type="state"
         />
+        <!--
         <Info-card
           :title="$t('infocard.incidence')"
+          field="cases.active"
+          name="incidence"
+          running-sum-field="cases.confirmedToday"
+          series-type="state"
+        />
+        -->
+        <Info-card
+          :title="$t('infocard.incidence7d')"
           field="cases.active"
           name="incidence"
           running-sum-field="cases.confirmedToday"
