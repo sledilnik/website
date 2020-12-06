@@ -54,6 +54,8 @@
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
+        "newCases7d": "Novi primeri",
+        "newCases7dInfo": "povprečje zadnjih 7 dni",
         "per100k": "na 100.000 prebivalcev",
         "orangePhase": "Oranžna faza",
         "orangePhaseGenitive": "oranžne",
@@ -608,6 +610,14 @@
         "services": {
             "title": "Storitve",
             "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....)<br>Začasna ukinitev javnega prometa (razen taksijev). Črtanje določenih izjem za prehode meja."
+        },
+        "planRelaxation": {
+            "title": "Načrt",
+            "description": "Vlada sprejela načrt sproščanja ukrepov v petih fazah."
+        },
+        "alcoDrinks": {
+            "title": "Alkohol",
+            "description": "Prepovedan osebni prevzem alkohola in alkoholnih pijač v gostinskih obratih."
         }
     },
     "phase": {
