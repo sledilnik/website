@@ -17,7 +17,9 @@ export default {
     PostTeaser,
     Loader
   },
-  metaInfo() {},
+  metaInfo() {
+    //TODO
+  },
   data(){
     return {
       posts: false

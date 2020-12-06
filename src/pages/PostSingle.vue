@@ -21,7 +21,9 @@ export default {
       post: false,
     };
   },
-  metaInfo() {},
+  metaInfo() {
+    //TODO
+  },
   async created() {
     const postId = _.get(this.$route, "params.id", false);
     if (!postId) {
