@@ -909,6 +909,14 @@
         "services": {
             "title": "Services",
             "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
+        },
+        "planRelaxation": {
+            "title": "Plan",
+            "description": "Government has accepted the plan of relaxation of measures in five phases."
+        },
+        "alcoDrinks": {
+            "title": "Alcohol",
+            "description": "Prohibition of alcohol and alcohol drinks in take away restaurants and similar."
         }
     },
     "days": {
