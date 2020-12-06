@@ -264,6 +264,7 @@ export default {
 }
 
 .card-title {
+  color: rgba(0, 0, 0, 0.8);
   font-size: 13px;
   font-weight: 700;
   margin-bottom: 0.5rem !important;
@@ -274,6 +275,7 @@ export default {
 }
 
 .card-number {
+  color: rgba(0, 0, 0, 0.8);
   font-size: 32px;
   font-weight: 700;
   white-space: nowrap;
@@ -304,6 +306,7 @@ export default {
 }
 
 .card-note {
+  color: rgba(0, 0, 0, 0.8);
   font-size: 12px;
 }
 
