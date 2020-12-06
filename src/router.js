@@ -123,6 +123,10 @@ const routes = [
     redirect: `/en/about`,
   },
   {
+    path: '/posts',
+    redirect: `/${i18next.language}/posts`,
+  },
+  {
     path: '/embed',
     redirect: `/${i18next.language}/embed`,
   },
@@ -198,6 +202,14 @@ const routes = [
       {
         path: 'restrictions',
         component: () => import('./pages/RestrictionsPage.vue'),
+      },
+      {
+        path: 'posts',
+        component: () => import('./pages/PostsPage.vue'),
+      },
+      {
+        path: 'posts/:id',
+        component: () => import('./pages/PostSingle.vue'),
       },
       {
         path: 'links', // Retired page

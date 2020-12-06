@@ -8,6 +8,10 @@ class ContentApiService extends ApiService {
   }
 
   async get(resource, opts) {
+    // Django wants trailing slashes.
+    if (resource.substr(-1) != "/") {
+      resource += "/";
+    }
     const { data } = await this.axios.get(resource, opts);
     return data;
   }

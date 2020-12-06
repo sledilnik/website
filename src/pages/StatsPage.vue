@@ -3,7 +3,7 @@
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <div class="d-flex" v-if="headerTeasers">
-          <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.link_to" />
+          <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.id" />
       </div>
       <div class="cards-wrapper">
         <!--
