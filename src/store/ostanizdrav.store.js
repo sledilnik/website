@@ -1,8 +1,5 @@
 import _ from 'lodash'
-import { exportTime, ApiEndpoint } from './index'
 import ApiService from '../services/api.service'
-import regions from '../services/dict.regions.json'
-import axios from 'axios'
 
 const state = {
   exportTime: null,

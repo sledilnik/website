@@ -11,14 +11,6 @@ import ostanizdravStore from './ostanizdrav.store'
 
 Vue.use(Vuex)
 
-export function ApiEndpoint() {
-  if (window.location.search.indexOf('stage') > 0) {
-    return 'https://api-stage.sledilnik.org'
-  } else {
-    return 'https://api.sledilnik.org'
-  }
-}
-
 export function exportTime(x) {
   return new Date(x * 1000)
 }

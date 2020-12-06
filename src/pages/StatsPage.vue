@@ -93,8 +93,8 @@ import Posts from "components/Posts";
 import Youtube from "components/Youtube";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
-import { ApiEndpoint } from "@/store/index.js";
 import chartsFloatMenu from "components/floatingMenuDict";
+import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {
   name: "StatsPage",
@@ -119,7 +119,7 @@ export default {
         "visualizations",
         "local",
         this.$route.query,
-        ApiEndpoint()
+        API_ENDPOINT_BASE
       );
     });
 

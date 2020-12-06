@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import { exportTime, ApiEndpoint } from './index'
-import ApiService from '../services/api.service'
+import { exportTime } from './index'
+import ApiService, { API_ENDPOINT_BASE } from '../services/api.service'
 import regions from '../services/dict.regions.json'
 
 export function lastChange(data, field, cumulative, date) {
@@ -182,7 +182,7 @@ const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
     const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
-    const data = await ApiService.get(`${ApiEndpoint()}/api/stats`, {params: {from, to}})
+    const data = await ApiService.get(`${API_ENDPOINT_BASE}/api/stats`, {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
 
