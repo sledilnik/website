@@ -12,8 +12,13 @@ class ContentApiService extends ApiService {
     if (resource.substr(-1) != "/") {
       resource += "/";
     }
-    const { data } = await this.axios.get(resource, opts);
-    return data;
+    try {
+      const { data } = await this.axios.get(resource, opts);
+      return data;
+    } catch (error) {
+      console.log('Content API error', error)
+      return {}
+    }
   }
 }
 
