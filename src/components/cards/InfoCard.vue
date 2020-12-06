@@ -3,8 +3,8 @@
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
-        <span v-if="showIncidence">{{
-          Math.round(renderValues.lastDay.value / incidence)
+        <span v-if="showRunningSum">{{
+          renderRunningSum
         }}</span>
         <span v-else>{{ renderValues.lastDay.value }}</span>
         <div class="card-percentage-diff" :class="diffClass">
@@ -12,8 +12,8 @@
         </div>
       </div>
       <div :id="name" class="card-diff">
-        <div v-if="showIncidence">
-          <span class="card-note">{{ $t('infocard.per100k') }} </span>
+        <div v-if="showRunningSum">
+          <span class="card-note">{{ $t('infocard.newCases7dInfo') }}</span>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -78,14 +78,15 @@ export default {
       default: 'down',
     },
     name: String,
+    runningSumField: String,
     seriesType: {
       type: String,
       default: 'cum',
     },
   },
   computed: {
-    ...mapGetters('stats', ['lastChange']),
-    ...mapGetters('patients', { patients: 'data' }),
+    ...mapGetters('stats', ['lastChange', 'runningSum']),
+    ...mapGetters('patients', { patients: 'data', runningSumPatients: 'runningSumPatients' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
@@ -178,14 +179,14 @@ export default {
       )
     },
     showIn() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
       }
       return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return (
           this.renderActiveValues(this.fieldNewCases).lastDay.value -
@@ -197,7 +198,7 @@ export default {
       return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
       }
@@ -205,12 +206,17 @@ export default {
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
     },
-    showIncidence() {
-      if (this.name === 'incidence') {
+    showRunningSum() {
+      if (this.name === 'newCases7d') {
         return true
       }
       return false
     },
+    renderRunningSum() {
+      // if (isNaN(this.runningSum(0, 7, this.runningSumField).toFixed(1)))
+      //   return this.runningSumPatients(0, 7, this.runningSumField).toFixed(1)
+      return this.runningSum(0, 7, this.runningSumField).toFixed(1)
+    }
   },
   methods: {
     renderTotalValues(value) {
@@ -305,6 +311,11 @@ export default {
 
 .card-note {
   font-size: 12px;
+}
+
+.card-average {
+  font-size: 12px;
+  margin-bottom: 4px;
 }
 
 .trend-icon {

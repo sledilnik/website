@@ -53,6 +53,8 @@
         "active": "Active Cases",
         "incidence": "14-days incidence",
         "per100k": "per 100k",
+        "newCases7d": "New Cases",
+        "newCases7dInfo": "average of last 7 days",
         "orangePhase": "Orange phase",
         "orangePhaseGenitive": "orange",
         "redPhase": "Red phase",
