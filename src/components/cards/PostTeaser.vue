@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <b-card
-      :key="post.id"
-      :title="post.title"
-      :img-src="post.image"
-      :img-alt="post.title"
-      img-top
-      tag="article"
-    >
-      <b-card-text>{{ post.blurb }}</b-card-text>
-      <a v-if="post.link_to" :href="post.link_to" target="_blank">Preberi več</a>
-      <router-link v-else :to="postLink">Preberi več</router-link>
-      <template #footer>
-        <small class="text-muted">{{ created }}</small>
-      </template>
-    </b-card>
-  </div>
+  <b-card
+    :key="post.id"
+    :title="post.title"
+    :img-src="post.image"
+    :img-alt="post.title"
+    img-left
+    tag="article"
+  >
+    <b-card-text v-html="post.blurb"></b-card-text>
+    <a v-if="post.link_to" :href="post.link_to" target="_blank">Preberi več</a>
+    <router-link v-else :to="postLink">Preberi več</router-link>
+    <template #footer>
+      <small class="text-muted">{{ created }}</small>
+    </template>
+  </b-card>
 </template>
 <script>
 import { format, parseISO } from "date-fns";
