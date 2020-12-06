@@ -30,10 +30,10 @@ let totalVsWeekData metric statsData =
             |})
             |> List.pairwise
             |> List.map (fun (a, b) ->
-                match a.Count, b.Count, b.CountToDate with
-                | Some aCount, Some bCount, Some bCountToDate ->
+                match a.CountToDate, b.CountToDate with
+                | Some aCountToDate, Some bCountToDate ->
                     {| Date = b.Date
-                       Count = Some (bCount - aCount)
+                       Count = Some (bCountToDate - aCountToDate)
                        CountToDate = Some bCountToDate
                     |} |> Some
                 | _ -> None)
@@ -83,14 +83,14 @@ let weekVsWeekBeforeData metric statsData =
             statsData
             |> List.map (fun (dp : StatsDataPoint) ->
             {| Date = dp.Date
-               Count = dp.StatePerTreatment.InHospital
+               CountToDate = dp.StatePerTreatment.InHospitalToDate
             |})
             |> List.pairwise
             |> List.map (fun (a, b) ->
-                match a.Count, b.Count with
-                | Some aCount, Some bCount ->
+                match a.CountToDate, b.CountToDate with
+                | Some aCountToDate, Some bCountToDate ->
                     {| Date = b.Date
-                       Count = Some (bCount - aCount)
+                       Count = Some (bCountToDate - aCountToDate)
                     |} |> Some
                 | _ -> None)
             |> List.choose id
@@ -102,13 +102,18 @@ let weekVsWeekBeforeData metric statsData =
         let firstWindow, secondWindow = List.splitAt windowSize doubleWindow
         let firstWindowSum = firstWindow |> List.map (fun dp -> dp.Count |> Option.defaultValue 0) |> List.sum
         let secondWindowSum = secondWindow |> List.map (fun dp -> dp.Count |> Option.defaultValue 0) |> List.sum
+
+        let middleWindow = Array.sub (doubleWindow |> List.toArray) (windowSize / 2) windowSize
+        let middleWindowSum = middleWindow |> Array.map (fun dp -> dp.Count |> Option.defaultValue 0) |> Array.sum
+
         if firstWindowSum = 0 then
             None
         else
-            Some { x = firstWindowSum
+            Some { x = middleWindowSum
                    y = (float secondWindowSum) / (float firstWindowSum) * 100.0 |> System.Convert.ToInt32
                    date = (secondWindow |> List.rev |> List.head ).Date })
     |> List.choose id
+    |> List.filter (fun dp -> dp.y > 0)
     |> List.toArray
 
 let displayData metric diagramKind statsData =

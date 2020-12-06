@@ -54,6 +54,8 @@
         "active": "Active Cases",
         "incidence": "14-days incidence",
         "per100k": "per 100k",
+        "newCases7d": "New Cases",
+        "newCases7dInfo": "average of last 7 days",
         "orangePhase": "Orange phase",
         "orangePhaseGenitive": "orange",
         "redPhase": "Red phase",
@@ -908,6 +910,14 @@
         "services": {
             "title": "Services",
             "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
+        },
+        "planRelaxation": {
+            "title": "Plan",
+            "description": "Government has accepted the plan of relaxation of measures in five phases."
+        },
+        "alcoDrinks": {
+            "title": "Alcohol",
+            "description": "Prohibition of alcohol and alcohol drinks in take away restaurants and similar."
         }
     },
     "days": {
