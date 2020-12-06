@@ -13,7 +13,7 @@
       </div>
       <div :id="name" class="card-diff">
         <div v-if="showIncidence">
-          <span class="card-note">{{ $t('infocard.incidence7dInfo') }}</span>
+          <span class="card-note">{{ $t('infocard.newCases7dInfo') }}</span>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>

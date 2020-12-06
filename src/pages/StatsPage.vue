@@ -50,9 +50,9 @@
         />
         -->
         <Info-card
-          :title="$t('infocard.incidence7d')"
+          :title="$t('infocard.newCases7d')"
           field="cases.active"
-          name="incidence"
+          name="newCases7d"
           running-sum-field="cases.confirmedToday"
           series-type="state"
         />
