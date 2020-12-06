@@ -113,6 +113,7 @@ let weekVsWeekBeforeData metric statsData =
                    y = (float secondWindowSum) / (float firstWindowSum) * 100.0 |> System.Convert.ToInt32
                    date = (secondWindow |> List.rev |> List.head ).Date })
     |> List.choose id
+    |> List.filter (fun dp -> dp.y > 0)
     |> List.toArray
 
 let displayData metric diagramKind statsData =
