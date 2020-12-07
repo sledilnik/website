@@ -1,0 +1,101 @@
+name: Build and deploy (production)
+
+on:
+  release: 
+    types: [published]
+
+env:
+  RELEASE_NAME: website
+  CHART_VALUES_FILE: .helm/values.prod.yml
+  DEPLOY_NAMESPACE: sledilnik-prod
+  DEPLOY_ENV: production
+  DEPLOY_URL: https://covid-19.sledilnik.org
+  IMAGE_TAG: ${{ github.event.release.tag_name }}
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Debug
+        uses: hmarr/debug-action@v1.0.0
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
+      - run: yarn
+      - run: yarn lint
+      - run: yarn test
+      - run: yarn dotnet-restore
+      - run: yarn test-fsharp
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: test
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      
+      - name: Build and push docker container image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: .
+          file: ./Dockerfile
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/website:${{ env.IMAGE_TAG}}
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        uses: sledilnik/action-helm-deploy@v1
+        with:
+          chartName: sledilnik/website
+          chartVersion: '0.9.0'
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+      - name: Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          icon_url: 'https;//github.com/sledilnik.png?size=32'
+          author_name: 'Deploy bot'
+          status: custom
+          fields: repo,workflow,job
+          custom_payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Production deploy finished with status: ${{ job.status }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "URL: ${{ env.DEPLOY_URL }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

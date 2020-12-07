@@ -1,0 +1,4 @@
+---
+ingressroute:
+  enabled: true
+  certResolver: letsencrypt
