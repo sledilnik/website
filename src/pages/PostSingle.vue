@@ -56,6 +56,12 @@ export default {
 };
 </script>
 
+<style lang="sass">
+.content img
+  max-width: 100%
+  height: auto
+</style>
+
 <style scoped lang="scss">
 .info-text {
   font-size: 14px;

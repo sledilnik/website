@@ -1,6 +1,6 @@
 <template>
   <div class="custom-container">
-    <div class="static-page-wrapper">
+    <div class="static-page-wrapper posts-page">
       <h1>Objave</h1>
       <b-card-group deck v-if="posts">
         <PostTeaser v-for="post in posts" :post="post" :key="post.id" />
@@ -34,4 +34,23 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="sass">
+.post
+  width: 100%
+
+  @media only screen and (max-width: 768px)
+    padding: 0
+    margin-bottom: 32px
+    &:first-child
+      margin-left: 0px
+    &:last-child
+      margin-right: 0px
+</style>
+
+<style lang="sass">
+.posts-page
+  .card-text
+  p,
+  p:first-child
+    display: block
+</style>

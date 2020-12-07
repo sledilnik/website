@@ -19,8 +19,8 @@
       <router-link :to="{ name: 'stats' }" class="router-link"><span>{{ $t('navbar.home') }}</span></router-link>
       <router-link :to="{ name: 'world' }" class="router-link"><span>{{ $t('navbar.world') }}</span></router-link>
       <router-link :to="{ name: 'data' }" class="router-link"><span>{{ $t('navbar.data') }}</span></router-link>
-      <router-link :to="{ name: 'posts' }" class="router-link"><span>{{ $t('navbar.posts') }}</span></router-link>
       <router-link :to="{ name: 'models' }" class="router-link"><span>{{ $t('navbar.models') }}</span></router-link>
+      <router-link :to="{ name: 'posts' }" class="router-link"><span>{{ $t('navbar.posts') }}</span></router-link>
       <router-link :to="{ name: 'ostanizdrav' }" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link :to="{ name: 'faq' }" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link :to="{ name: 'about' }" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
@@ -67,14 +67,14 @@ export default {
   created() {
     window.addEventListener('scroll', this.handleScroll, { passive: true })
   },
-  mounted() {	
-    this.onResize()	
-    window.addEventListener('resize', this.onResize, { passive: true })	
-  },	
-  beforeDestroy() {	
-    if (typeof window !== 'undefined') {	
-      window.removeEventListener('resize', this.onResize, { passive: true })	
-    }	
+  mounted() {
+    this.onResize()
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
+  beforeDestroy() {
+    if (typeof window !== 'undefined') {
+      window.removeEventListener('resize', this.onResize, { passive: true })
+    }
   },
   methods: {
     handleScroll() {
@@ -96,8 +96,8 @@ export default {
         this.closingMenu = false
       }, 650)
     },
-    onResize() {	
-      this.showIcons = window.innerWidth < 850 || window.innerWidth >= 1100	
+    onResize() {
+      this.showIcons = window.innerWidth < 850 || window.innerWidth >= 1100
     },
   },
   watch: {

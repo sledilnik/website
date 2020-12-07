@@ -2,7 +2,7 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="d-flex" v-if="headerTeasers">
+      <div class="posts d-flex" v-if="headerTeasers">
           <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.id" />
       </div>
       <div class="cards-wrapper">
@@ -192,6 +192,10 @@ export default {
 <style lang="sass">
 
 $loader-width: 50px
+
+.posts
+    @media only screen and (max-width: 480px)
+      flex-direction: column
 
 .cards-wrapper
   display: flex
