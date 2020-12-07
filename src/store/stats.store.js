@@ -184,7 +184,7 @@ const getters = {
     )
 
     // if /patients is published before /stats, we need to go one more day in the past
-    if (!_.get(array[end - 1], field)) {
+    if (!_.get(array[end - start - 1], field)) {
       array = getters.data.slice(
         getters.data.length - end - 2,
         getters.data.length - start - 2
@@ -199,7 +199,7 @@ const getters = {
 const actions = {
   fetchData: async ({ commit }, to) => {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 10))
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 11))
     const data = await ApiService.get(`${ApiEndpoint()}/api/stats`, {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
