@@ -3,11 +3,12 @@
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
-        <span v-if="showRunningSum">{{
-          renderRunningSum
-        }}</span>
+        <span v-if="showRunningSum">{{ renderRunningSum }}</span>
         <span v-else>{{ renderValues.lastDay.value }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
+        <div v-if="showRunningSum" class="card-percentage-diff" :class="diffClass">
+          {{ renderRunningSumDiff | prefixDiff }}%
+        </div>
+        <div v-else class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
@@ -213,9 +214,14 @@ export default {
       return false
     },
     renderRunningSum() {
-      // if (isNaN(this.runningSum(0, 7, this.runningSumField).toFixed(1)))
-      //   return this.runningSumPatients(0, 7, this.runningSumField).toFixed(1)
       return this.runningSum(0, 7, this.runningSumField).toFixed(1)
+    },
+    renderRunningSumDiff() {
+      const today = this.runningSum(0, 7, this.runningSumField)
+      const yesterday = this.runningSum(1, 8, this.runningSumField)
+      const diff = today - yesterday
+
+      return Math.round((diff / yesterday) * 1000) / 10
     }
   },
   methods: {
