@@ -19,7 +19,7 @@
     "axios": "^0.19.2",
     "axios-etag-cache": "^1.0.5",
     "bootstrap-vue": "^2.16.0",
-    "d3": "^6.1.1",
+    "d3": "^6.3.0",
     "date-fns": "^2.16.1",
     "highcharts": "^8.2.0",
     "highcharts-react-official": "^3.0.0",
