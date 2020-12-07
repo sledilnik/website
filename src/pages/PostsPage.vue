@@ -50,7 +50,7 @@ export default {
 <style lang="sass">
 .posts-page
   .card-text
-  p,
-  p:first-child
-    display: block
+    p,
+    p:first-child
+      display: block
 </style>
