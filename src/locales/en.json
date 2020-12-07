@@ -33,6 +33,10 @@
         "updated": "Updated on {{ date, %A, %B %e, %Y }}",
         "at": "at {{ date, %H:%M }}"
     },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min read"
+    },
     "notice": {
         "newInfographics": "🆕 📇 New infographics:",
         "newChart": "🆕 📊 New chart:",
