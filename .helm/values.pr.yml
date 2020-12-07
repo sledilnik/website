@@ -1,6 +1,4 @@
 ---
-image:
-  repository: ghcr.io/overlordtm/website
 ingressroute:
   enabled: true
-  certResolver: letsencrypttest
+  certResolver: letsencrypt

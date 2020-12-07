@@ -1,2 +1,0 @@
-ingress:
-  rule: Host(`www.sledilnik.rtfm.si`)

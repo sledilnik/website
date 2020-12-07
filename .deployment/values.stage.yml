@@ -1,2 +1,0 @@
-ingress:
-  rule: Host(`stage.sledilnik.org`)
