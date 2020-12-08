@@ -97,7 +97,7 @@ export default {
       }, 650)
     },
     onResize() {
-      this.showIcons = window.innerWidth < 850 || window.innerWidth >= 1100
+      this.showIcons = window.innerWidth < 900 || window.innerWidth >= 1150
     },
   },
   watch: {
@@ -113,7 +113,7 @@ export default {
 <style lang="scss">
 // @include nav-greak
 @mixin nav-break {
-  @media only screen and (min-width: 850px) {
+  @media only screen and (min-width: 900px) {
     @content;
   }
 }

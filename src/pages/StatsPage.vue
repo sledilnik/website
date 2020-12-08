@@ -194,8 +194,11 @@ export default {
 $loader-width: 50px
 
 .posts
-    @media only screen and (max-width: 480px)
-      flex-direction: column
+  margin: 0px auto 30px
+  @media only screen and (min-width: 768px)
+    margin: 0px auto 60px
+  @media only screen and (max-width: 480px)
+    flex-direction: column
 
 .cards-wrapper
   display: flex
@@ -203,12 +206,12 @@ $loader-width: 50px
   display: grid
   gap: 15px
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
-  margin: 0px auto 58px
+  margin: 0px auto 30px
 
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 0px 15px 88px
+    margin: 0px 15px 60px
 
 .stats-page
   margin-top: 48px

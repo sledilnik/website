@@ -1,7 +1,7 @@
 <template>
   <div class="custom-container">
     <div class="static-page-wrapper posts-page">
-      <h1>Objave</h1>
+      <h1>{{ $t('navbar.posts') }}</h1>
       <b-card-group deck v-if="posts">
         <PostTeaser v-for="post in posts" :post="post" :key="post.id" />
       </b-card-group>

@@ -265,6 +265,7 @@ export default {
   padding: 16px;
   background: #fff;
   box-shadow: $element-box-shadow;
+  border-radius: 6px;
 
   @media only screen and (min-width: 480px) {
     padding: 26px;

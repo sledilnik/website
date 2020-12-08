@@ -3,7 +3,12 @@
     <b-card no-body class="overflow-hidden">
       <b-row no-gutters>
         <b-col lg="4" class="d-none d-lg-block">
-          <div class="image" v-bind:style="{'background-image': `url(${post.image})`}"></div>
+          <a v-if="post.link_to" :href="post.link_to">
+            <div class="image" v-bind:style="{'background-image': `url(${post.image})`}"></div>
+          </a>
+          <router-link v-else :to="postLink">
+            <div class="image" v-bind:style="{'background-image': `url(${post.image})`}"></div>
+          </router-link>
         </b-col>
         <b-col lg="8">
           <b-card-body :title="post.title">
@@ -40,12 +45,12 @@ export default {
 
 <style lang="sass" scoped>
 .post
-  margin-bottom: 30px
+  //margin-bottom: 30px
 
   @media only screen and (max-width: 768px)
     padding-left: 7.5px
     padding-right: 7.5px
-    margin-bottom: 15px
+    //margin-bottom: 15px
     &:first-child
       margin-left: -7.5px
     &:last-child
@@ -61,7 +66,7 @@ export default {
 
 .card
   height: 100%
-  border-radius: 0px
+  border-radius: 6px
   border: none
   box-shadow: $element-box-shadow
 
