@@ -1,6 +1,6 @@
 <template>
   <div @click="checkClick($event)">
-    <Time-stamp />
+    <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <b-row cols="12">
         <b-col>
@@ -8,7 +8,7 @@
         </b-col>
       </b-row>
       <div class="cards-wrapper">
-<!--  
+        <!--  
         <Info-card
           :title="$t('infocard.tests')"
           field="tests.performed.today"
@@ -20,9 +20,10 @@
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
           name="cases.confirmedToDate"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
-<!--  
+        <!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
@@ -36,12 +37,14 @@
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
           name="cases.active"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
         <Info-card
-          :title="$t('infocard.incidence')"
+          :title="$t('infocard.newCases7d')"
           field="cases.active"
-          name="incidence"
+          name="newCases7d"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
         <Info-card
@@ -51,6 +54,7 @@
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
           name="statePerTreatment.inHospital"
+          running-sum-field="total.inHospital.in"
           series-type="state"
         />
         <Info-card
@@ -60,91 +64,127 @@
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
           name="statePerTreatment.inICU"
+          running-sum-field="total.icu.in"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
           name="statePerTreatment.deceasedToDate"
+          running-sum-field="statePerTreatment.deceased"
           series-type="state"
         />
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="T9ndfXNiDwo"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
+          <Youtube id="R_VftBj375I"></Youtube>
         </b-col>
       </b-row>
     </b-container>
+    <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import InfoCard from 'components/cards/InfoCard'
-import TimeStamp from 'components/TimeStamp'
-import Notice from 'components/Notice'
-import Youtube from 'components/Youtube'
-import { Visualizations } from 'visualizations/App.fsproj'
-import { ApiEndpoint } from '@/store/index.js'
+import { mapState } from "vuex";
+import InfoCard from "components/cards/InfoCard";
+import TimeStamp from "components/TimeStamp";
+import Notice from "components/Notice";
+import Youtube from "components/Youtube";
+import FloatingMenu from "components/FloatingMenu";
+import { Visualizations } from "visualizations/App.fsproj";
+import { ApiEndpoint } from "@/store/index.js";
+import chartsFloatMenu from "components/floatingMenuDict";
 
 export default {
-  name: 'StatsPage',
+  name: "StatsPage",
   components: {
     InfoCard,
     TimeStamp,
     Notice,
-    Youtube
+    Youtube,
+    FloatingMenu,
   },
   data() {
     return {
       loaded: false,
-    }
+      charts: [],
+    };
   },
   mounted() {
     this.$nextTick(() => {
       // must use next tick, so whole DOM is ready and div#id=visualizations exists
-      Visualizations('visualizations', 'local', this.$route.query, ApiEndpoint())
-    })
+      Visualizations(
+        "visualizations",
+        "local",
+        this.$route.query,
+        ApiEndpoint()
+      );
+    });
 
     // stupid spinner impl, but i do not know better (charts are react component, no clue when they are rendered)
     let checker = setInterval(() => {
-      let elm = document.querySelector('.highcharts-point')
+      let elm = document.querySelector(".highcharts-point");
       if (elm) {
-        document.querySelector('.stats-page').classList.add('loaded')
-        this.loaded = true
-        clearInterval(checker)
+        document.querySelector(".stats-page").classList.add("loaded");
+        this.loaded = true;
+        clearInterval(checker);
       }
-    }, 80)
+    }, 80);
+  },
+  computed: {
+    ...mapState("stats", {
+      exportTime: "exportTime",
+    }),
   },
   methods: {
     checkClick(e) {
-      const dropdownAll = this.$el.querySelectorAll('.share-dropdown-wrapper')
+      const dropdownAll = this.$el.querySelectorAll(".share-dropdown-wrapper");
 
       // ignore click if the clicked element is share button or its icon or caption
-      if (e.target.classList.contains('share-button-')) return
+      if (e.target.classList.contains("share-button-")) return;
 
       // else check if any of the dropdowns is opened and close it/them
       dropdownAll.forEach((el) => {
-        el.classList.contains('show')
-          ? el.classList.remove('show')
-          : el.classList.add('hide')
-      })
+        el.classList.contains("show")
+          ? el.classList.remove("show")
+          : el.classList.add("hide");
+      });
 
       // TODO: there is still an issue where if you immediately click on the same
       // share button again, it won't open the dropdown because ShareButton.fs
       // component is not aware that the dropdown was closed within this method.
       // I think the right way to do this would be to listen for clicks within App.fs
     },
+    getCharts() {
+      this.$el.querySelectorAll(".visualization-chart h2 a").forEach((el) => {
+        const key = el.getAttribute("href").substring(1);
+        const item = chartsFloatMenu[key];
+        this.charts.push({
+          title: item && item.titleKey ? this.$t(item.titleKey) : el.innerHTML,
+          link: key,
+          icon: item ? item.icon : undefined,
+        });
+      });
+    },
   },
-}
+  watch: {
+    loaded: function () {
+      this.getCharts();
+    },
+  },
+};
 </script>
 
 <style lang="sass">
+
+$loader-width: 50px
+
 .cards-wrapper
   display: flex
   flex-wrap: wrap
@@ -157,8 +197,6 @@ export default {
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 88px
-
-$loader-width: 50px
 
 .stats-page
   margin-top: 48px

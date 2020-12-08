@@ -276,11 +276,10 @@ let renderScaleTypeSelectors activeScaleType dispatch =
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children [
-            Html.text (I18N.chartText "common" "view")
             renderScaleTypeSelector
                 Absolute activeScaleType (chartText "absolute")
             renderScaleTypeSelector
-                Relative activeScaleType (chartText "relative")
+                Relative activeScaleType (chartText "populationShare")
         ]
     ]
 
@@ -300,8 +299,8 @@ let renderChartCategorySelector
             match chartModeToRender with
             | AbsoluteInfections        -> chartText "confirmedCases"
             | AbsoluteDeaths            -> chartText "deceased"
-            | InfectionsPerPopulation   -> chartText "confirmedCasesPerPopulation"
-            | DeathsPerPopulation       -> chartText "deceasedPerPopulation"
+            | InfectionsPerPopulation   -> chartText "confirmedCases"
+            | DeathsPerPopulation       -> chartText "deceased"
             | DeathsPerInfections       -> chartText "deceasedPerConfirmedCases"
             )
     ]
@@ -311,10 +310,10 @@ let renderChartCategorySelectors activeChartMode dispatch =
         match ChartMode.ScaleType chartMode with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
-            [ 
+            [
                 InfectionsPerPopulation;
                 DeathsPerPopulation;
-                // DeathsPerInfections; 
+                // DeathsPerInfections;
             ]
 
     Html.div [
@@ -473,7 +472,7 @@ let renderChartContainer state =
     let latestDate = fst (latest)
     let infectionsAndDeathsPerAge = snd (latest)
     let chartData = calculateChartData infectionsAndDeathsPerAge state.ChartMode
-    
+
     Html.div [
         prop.style [ style.height 400 ]
         prop.className "highcharts-wrapper"

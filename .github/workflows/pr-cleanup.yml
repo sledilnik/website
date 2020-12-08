@@ -1,0 +1,49 @@
+name: PR Cleanup
+
+on:
+  pull_request:
+    types: [closed, unlabeled]
+
+env:
+  DEPLOY_NAMESPACE: sledilnik-pr
+  RELEASE_NAME: website-pr-${{ github.event.pull_request.number }}
+  DEPLOY_ENV: pr-${{ github.event.pull_request.number }}
+
+jobs:
+  undeploy:
+    if: "github.event.action == 'closed' || !contains(github.event.pull_request.labels.*.name, 'deploy-preview')"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Debug
+        uses: hmarr/debug-action@v1.0.0
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      
+      - name: Undeploy
+        uses: sledilnik/action-helm-deploy@v1
+        with:
+          action: undeploy
+          chartName: sledilnik/website
+          chartVersion: '0.9.0'
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+      - name: Leave success comment on PR
+        uses: mshick/add-pr-comment@v1
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            Undeployed PR
+          allow-repeats: true
+
+      - name: Leave failure comment on PR
+        uses: mshick/add-pr-comment@v1
+        if: ${{ failure() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          message: |
+            Undeploy failed
+          allow-repeats: true

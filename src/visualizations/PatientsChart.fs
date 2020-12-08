@@ -13,6 +13,10 @@ open Types
 
 open Data.Patients
 
+type HospitalType =
+    | CovidHospitals
+    | CareHospitals
+
 type Breakdown =
     | ByHospital
     | AllHospitals
@@ -21,21 +25,27 @@ type Breakdown =
     static member getName = function
         | ByHospital -> I18N.t "charts.patients.byHospital"
         | AllHospitals -> I18N.t "charts.patients.allHospitals"
-        | Facility fcode ->
-            let _, name = Data.Hospitals.facilitySeriesInfo fcode
-            name
+        | Facility facility -> Utils.Dictionaries.GetFacilityName(facility)
 
 type Series =
     | InHospital
     | Icu
+    | IcuDeceased
     | Critical
     | InHospitalIn
     | InHospitalOut
     | InHospitalDeceased
+    | Care
+    | CareIn
+    | CareOut
+    | CareDeceased
 
 module Series =
-    let structure =
-        [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; ]
+    let structure hTypeToDisplay =
+        if hTypeToDisplay = CareHospitals
+        then [ CareIn; Care; CareOut; CareDeceased; ]
+        else [ InHospitalIn; InHospital; Icu
+               Critical; InHospitalOut; InHospitalDeceased; IcuDeceased ]
 
     let byHospital =
         [ InHospital; ]
@@ -43,23 +53,30 @@ module Series =
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
         | Icu                   -> "#d96756", "icu"
+        | IcuDeceased           -> "#6d5b80", "icu-deceased"
         | Critical              -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
         | InHospitalOut         -> "#8cd4b2", "discharged"
-        | InHospitalDeceased    -> "#666666", "deceased"
+        | InHospitalDeceased    -> "#8c71a8", "deceased"
+        | Care                  -> "#dba51d", "care"
+        | CareIn                -> "#d5c768", "admitted"
+        | CareOut               -> "#8cd4b2", "discharged"
+        | CareDeceased          -> "#a483c7", "deceased"
 
 type State = {
     PatientsData : PatientsStats []
     Error : string option
     AllFacilities : string list
+    HTypeToDisplay : HospitalType
     Breakdown : Breakdown
     RangeSelectionButtonIndex: int
   } with
-    static member initial =
+    static member initial hTypeToDisplay =
         {
             PatientsData = [||]
             Error = None
             AllFacilities = []
+            HTypeToDisplay = hTypeToDisplay
             Breakdown = AllHospitals
             RangeSelectionButtonIndex = 0
         }
@@ -77,23 +94,24 @@ type Msg =
     | SwitchBreakdown of Breakdown
     | RangeSelectionChanged of int
 
-let init () : State * Cmd<Msg> =
+let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
-    State.initial, cmd
+    State.initial hTypeToDisplay, cmd
 
-let getFacilitiesList (data : PatientsStats array) =
-    seq { // take few samples
-        data.[data.Length/2]
-        data.[data.Length-2]
-        data.[data.Length-1]
-    }
-    |> Seq.collect
-           (fun stats ->
-                stats.facilities
-                |> Map.toSeq
-                |> Seq.map
-                       (fun (facility, stats) ->
-                            facility,stats.inHospital.today)) // hospital name
+let getFacilitiesList (state : State) (data : PatientsStats array) =
+    data.[data.Length-1].facilities
+    |> Map.toSeq
+    |> Seq.filter
+       (fun (_, stats) ->
+            if state.HTypeToDisplay = CareHospitals
+            then stats.care.toDate.IsSome
+            else stats.inHospital.toDate.IsSome)
+    |> Seq.map
+       (fun (facility, stats) ->
+            facility,
+            if state.HTypeToDisplay = CareHospitals
+            then stats.care.today
+            else stats.inHospital.today)
     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
@@ -102,7 +120,7 @@ let getFacilitiesList (data : PatientsStats array) =
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
-        { state with PatientsData = data; AllFacilities = getFacilitiesList data }, Cmd.none
+        { state with PatientsData = data; AllFacilities = getFacilitiesList state data }, Cmd.none
     | ConsumePatientsData (Error err) ->
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
@@ -121,14 +139,17 @@ let renderByHospitalChart (state : State) dispatch =
             let value =
                 ps.facilities
                 |> Map.tryFind fcode
-                |> Option.bind (fun stats -> stats.inHospital.today)
+                |> Option.bind (fun stats ->
+                    if state.HTypeToDisplay = CareHospitals
+                    then stats.care.today
+                    else stats.inHospital.today
+                )
             ps.JsDate12h, value
 
-        let color, name = Data.Hospitals.facilitySeriesInfo fcode
         {|
             visible = true
-            color = color
-            name = name
+            name = Utils.Dictionaries.GetFacilityName(fcode)
+            color = Utils.Dictionaries.GetFacilityColor(fcode)
             dashStyle = Solid |> DashStyle.toString
             data =
                 state.PatientsData
@@ -163,7 +184,7 @@ let renderStructureChart (state : State) dispatch =
 
     let startDate = DateTime(2020,03,10)
 
-    let legendFormatter jsThis =
+    let tooltipFormatter jsThis =
         let pts: obj[] = jsThis?points
         let fmtDate = pts.[0]?point?fmtDate
 
@@ -175,14 +196,14 @@ let renderStructureChart (state : State) dispatch =
             | "null" -> ()
             | _ ->
                 match p?point?seriesId with
-                | "hospitalized" | "discharged" | "deceased"  -> fmtUnder <- ""
+                | "hospitalized" | "care" | "discharged" | "deceased"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
                 fmtLine <- sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                     fmtUnder
                     p?series?color
                     p?series?name
                     p?point?fmtTotal
-                if fmtStr.Length > 0 && p?point?seriesId = "hospitalized" then
+                if fmtStr.Length > 0 && List.contains p?point?seriesId [ "hospitalized"; "care" ] then
                     fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
                 else
                     fmtStr <- fmtStr + fmtLine
@@ -216,30 +237,43 @@ let renderStructureChart (state : State) dispatch =
             | Some aa -> -aa |> Some
             | None -> None
 
-        let getPoint : (FacilityPatientStats -> int option) =
+        let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital ->
-                fun ps ->
-                    ps.inHospital.today
-                    |> subtract ps.icu.today
-                    |> subtract ps.inHospital.``in``
+                ps.inHospital.today
+                |> subtract ps.icu.today
+                |> subtract ps.inHospital.``in``
             | Icu ->
-                fun ps ->
-                    ps.icu.today
-                    |> subtract ps.critical.today
-            | Critical -> fun ps -> ps.critical.today
-            | InHospitalIn -> fun ps -> ps.inHospital.``in``
-            | InHospitalOut -> fun ps -> negative ps.inHospital.out
-            | InHospitalDeceased -> fun ps -> negative ps.deceased.today
+                ps.icu.today
+                |> subtract ps.critical.today
+            | IcuDeceased -> negative ps.deceased.icu.today
+            | Critical -> ps.critical.today
+            | InHospitalIn -> ps.inHospital.``in``
+            | InHospitalOut -> negative ps.inHospital.out
+            | InHospitalDeceased ->
+                ps.deceased.today
+                |> subtract ps.deceased.icu.today
+                |> negative
+            | Care ->
+                ps.care.today
+                |> subtract ps.care.``in``
+            | CareIn -> ps.care.``in``
+            | CareOut -> negative ps.care.out
+            | CareDeceased -> negative ps.deceasedCare.today
 
         let getPointTotal : (FacilityPatientStats -> int option) =
             match series with
             | InHospital            -> fun ps -> ps.inHospital.today
             | Icu                   -> fun ps -> ps.icu.today
+            | IcuDeceased           -> fun ps -> ps.deceased.icu.today
             | Critical              -> fun ps -> ps.critical.today
             | InHospitalIn          -> fun ps -> ps.inHospital.``in``
             | InHospitalOut         -> fun ps -> ps.inHospital.out
             | InHospitalDeceased    -> fun ps -> ps.deceased.today
+            | Care                  -> fun ps -> ps.care.today
+            | CareIn                -> fun ps -> ps.care.``in``
+            | CareOut               -> fun ps -> ps.care.out
+            | CareDeceased          -> fun ps -> ps.deceasedCare.today
 
         let color, seriesId = Series.getSeriesInfo series
         {|
@@ -280,13 +314,13 @@ let renderStructureChart (state : State) dispatch =
             |}
         plotOptions = pojo
             {|
-                column = pojo {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
+                column = pojo {| dataGrouping = pojo {| enabled = false |} ; stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0 |}
             |}
 
-        series = [| for series in Series.structure
+        series = [| for series in Series.structure state.HTypeToDisplay
                         do yield renderBarSeries series |]
 
-        tooltip = pojo {| shared = true; formatter = (fun () -> legendFormatter jsThis) |}
+        tooltip = pojo {| shared = true; split = false ; formatter = (fun () -> tooltipFormatter jsThis) |}
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
@@ -334,5 +368,5 @@ let render (state : State) dispatch =
             renderBreakdownSelectors state dispatch
         ]
 
-let patientsChart () =
-    React.elmishComponent("PatientsChart", init (), update, render)
+let patientsChart (props : {| hTypeToDisplay : HospitalType |}) =
+    React.elmishComponent("PatientsChart", init props.hTypeToDisplay, update, render)

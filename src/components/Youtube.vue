@@ -1,7 +1,16 @@
 <template>
-  <div class="section">
-    <div class="youtube-embed">
-      <iframe :src="videoId" allowfullscreen="true"></iframe>
+  <div class="visualizations">
+    <div class="visualization container">
+      <section class="visualization-chart" id="youtube">
+        <div class="title-chart-wrapper">
+          <div class="title-brand-wrapper">
+            <h2><a href="#youtube">{{ $t('youtube.title') }}</a></h2>
+          </div>
+        </div>
+        <div class="youtube-embed">
+          <iframe :src="videoId" allowfullscreen="true"></iframe>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -21,16 +30,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.section {
-  background: #fff;
-  margin: 0 0 58px;
-  position: relative;
-  padding: 0;
-  box-shadow: $element-box-shadow;
-
-  @media only screen and (min-width: 768px) {
-    padding: 32px;
-    margin: 0px 15px 88px;
+section {
+  &::before,
+  &::after {
+    display: none !important;
   }
 }
 

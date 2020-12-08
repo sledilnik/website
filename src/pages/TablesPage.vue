@@ -72,7 +72,7 @@ $table-border: rgb(222,222 ,222)
     @content
 
 .table-container
-  margin: -24px auto 0
+  margin: 24px auto 0
   max-width: 1110px
   background: #fff
 
@@ -80,7 +80,7 @@ $table-border: rgb(222,222 ,222)
     position: static
     background: none
     padding: 0 15px
-    margin: 0 auto 64px
+    margin: 48px auto 64px
 
 .table-wrapper
   background: #fff

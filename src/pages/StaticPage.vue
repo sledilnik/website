@@ -39,11 +39,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 .custom-container {
-  margin: -24px auto 0 auto;
+  margin: 24px auto 0 auto;
   max-width: 730px;
 
   @media only screen and (min-width: 768px) {
-    margin: 0 auto 65px auto;
+    margin: 48px auto 65px auto;
     box-shadow: $element-box-shadow;
   }
 }
@@ -275,46 +275,6 @@ details summary::-webkit-details-marker {
 
     strong {
       font-weight: 600;
-    }
-  }
-}
-
-//scoped only to links page
-.links .static-page-wrapper {
-  table {
-    thead {
-      display: none;
-    }
-
-    td {
-      display: block;
-      width: 100%;
-      border: none;
-    }
-
-    td:first-child {
-      padding: 0;
-      a {
-        color: #000;
-        font-size: 16px;
-        &:hover {
-          color: #000;
-        }
-      }
-    }
-    td:nth-child(2) {
-      padding: 0;
-    }
-
-    tr {
-      padding-bottom: 24px;
-      display: block;
-
-      & + tr {
-        padding-top: 24px;
-        margin: 0;
-        border-top: 1px solid #dedede;
-      }
     }
   }
 }

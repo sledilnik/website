@@ -68,6 +68,11 @@ export default {
           text: this.$t('charts.patients.title'),
           dimensions: [1140, 720]
         },
+        "CarePatients": {
+          value: "Patients",
+          text: this.$t('charts.carePatients.title'),
+          dimensions: [1140, 720]
+        },
         "Ratios": {
           value: "Ratios",
           text: this.$t('charts.ratios.title'),
@@ -132,6 +137,36 @@ export default {
           value: "Countries",
           text: this.$t('charts.countries.title'),
           dimensions: [1140, 740]
+        },
+        "OstaniZdravPublished": {
+          value: "OstaniZdravPublished",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.published.title')}`,
+          dimensions: [1140, 720]
+        },
+        "OstaniZdravUserCount": {
+          value: "OstaniZdravUserCount",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.usercount.title')}`,
+          dimensions: [1140, 720]
+        },
+        "OstaniZdravUserPublishedByCount": {
+          value: "OstaniZdravUserPublishedByCount",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.userPublishedByCount.title')}`,
+          dimensions: [1140, 720]
+        },
+        "OstaniZdravPublishedByRisk": {
+          value: "OstaniZdravPublishedByRisk",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.publishedByRisk.title')}`,
+          dimensions: [1140, 720]
+        },
+        "OstaniZdravValid": {
+          value: "OstaniZdravValid",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.valid.title')}`,
+          dimensions: [1140, 720]
+        },
+        "OstaniZdravValidByRisk": {
+          value: "OstaniZdravValidByRisk",
+          text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.validByRisk.title')}`,
+          dimensions: [1140, 720]
         },
       }
     };

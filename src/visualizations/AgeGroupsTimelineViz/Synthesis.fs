@@ -70,6 +70,12 @@ let tooltipFormatter jsThis =
     match points with
     | [||] -> ""
     | _ ->
+        // points.[0].point.y
+
+        let totalCases =
+            points
+            |> Array.sumBy(fun point -> float point?point?y)
+
         let s = StringBuilder()
 
         let date = points.[0]?point?date
@@ -89,13 +95,26 @@ let tooltipFormatter jsThis =
                     match dataValue with
                     | 0 -> ignore()
                     | _ ->
+                        let format =
+                            "<td style='color: {0}'>●</td>"+
+                            "<td style='text-align: center; padding-left: 6px'>{1}:</td>"+
+                            "<td style='text-align: right; padding-left: 6px'>"+
+                            "<b>{2}</b></td>" +
+                            "<td style='text-align: right; padding-left: 10px'>" +
+                            "{3}</td>"
+
+                        let percentage =
+                            (float dataValue) * 100. / totalCases
+                            |> Utils.percentageValuesWith1DecimalTrailingZeroLabelFormatter
+
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =
-                            sprintf
-                                "<td style='color: %s'>●</td><td style='padding-left: 6px'>%s:</td><td style='text-align: right; padding-left: 6px'><b>%A</b></td>"
-                                ageGroupColor
-                                ageGroupLabel
-                                dataValue
+                            System.String.Format
+                                (format,
+                                 ageGroupColor,
+                                 ageGroupLabel,
+                                 dataValue,
+                                 percentage)
                         s.Append ageGroupTooltip |> ignore
                         s.Append "</tr>" |> ignore
                 )

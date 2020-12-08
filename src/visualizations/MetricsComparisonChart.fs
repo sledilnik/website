@@ -89,7 +89,7 @@ module Metrics  =
         { Metric=ICUOut;                Color="#ffb4a2"; Visible=false; Type=Today;  Id="icuDischarged" }
         { Metric=VentilatorIn;          Color="#bf5747"; Visible=true;  Type=Today;  Id="ventilatorAdmitted" }
         { Metric=VentilatorOut;         Color="#d99a91"; Visible=false; Type=Today;  Id="ventilatorDischarged" }
-        { Metric=DeceasedToday;         Color="#000000"; Visible=true;  Type=Today;  Id="deceased" }
+        { Metric=DeceasedToday;         Color="#6d5b80"; Visible=true;  Type=Today;  Id="deceased" }
         { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
@@ -97,7 +97,7 @@ module Metrics  =
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#d96756"; Visible=false; Type=ToDate; Id="icuAdmitted" }
         { Metric=VentilatorToDate;      Color="#d96756"; Visible=false; Type=ToDate; Id="ventilatorAdmitted" }
-        { Metric=DeceasedToDate;        Color="#000000"; Visible=true;  Type=ToDate; Id="deceased" }
+        { Metric=DeceasedToDate;        Color="#6d5b80"; Visible=true;  Type=ToDate; Id="deceased" }
     ]
     /// Find a metric in the list and apply provided function to modify its value
     let update (fn: MetricCfg -> MetricCfg) metric metrics =
@@ -190,45 +190,6 @@ let patientsDataGenerator metric =
         | _ -> None
 
 
-let calcRunningAverage (data: (JsTimestamp * float)[]) =
-    let daysOfMovingAverage = 7
-    let roundToDecimals = 1
-
-    let entriesCount = data.Length
-    let cutOff = daysOfMovingAverage / 2
-    let averagedDataLength = entriesCount - cutOff * 2
-
-    let averages = Array.zeroCreate averagedDataLength
-
-    let daysOfMovingAverageFloat = float daysOfMovingAverage
-    let mutable currentSum = 0.
-
-    let movingAverageFunc index =
-        let (_, entryValue) = data.[index]
-
-        currentSum <- currentSum + entryValue
-
-        match index with
-        | index when index >= daysOfMovingAverage - 1 ->
-            let date = data.[index - cutOff] |> fst
-            let average =
-                currentSum / daysOfMovingAverageFloat
-                |> Utils.roundDecimals roundToDecimals
-
-            averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
-
-            let valueToSubtract =
-                data.[index - (daysOfMovingAverage - 1)] |> snd
-            currentSum <- currentSum - valueToSubtract
-
-        | _ -> ignore()
-
-    for i in 0 .. entriesCount-1 do
-        movingAverageFunc i
-
-    averages
-
-
 let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let statsData = statsDataGenerator metric
@@ -260,7 +221,7 @@ let prepareMetricsData (metric: MetricCfg) (state: State) =
 
     let finalData =
         match state.MetricType.IsAveraged with
-        | true -> trimmedData |> calcRunningAverage
+        | true -> trimmedData |> Statistics.calcRunningAverage
         | false -> trimmedData
 
     finalData

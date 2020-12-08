@@ -1,6 +1,5 @@
 ﻿module CountriesChartViz.Rendering
 
-open CountriesChartViz.Synthesis
 open System
 open Browser
 open Elmish
@@ -8,52 +7,33 @@ open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 
+open Data.OurWorldInData
 open Analysis
+open Synthesis
+open CountrySets
 open Highcharts
 open Types
 open I18N
 
-let countriesDisplaySets = [|
-    { Label = "groupNeighbouring"
-      CountriesCodes = [| "AUT"; "CZE"; "DEU"; "HRV"; "HUN"; "ITA"; "SVK" |]
-    }
-    { Label = "groupCriticalEU"
-      CountriesCodes = [| "BEL"; "ESP"; "FRA"; "GBR"; "ITA"; "SWE" |]
-    }
-    { Label = "groupCriticalWorld"
-      CountriesCodes = [| "BRA"; "ECU"; "ITA"; "RUS"; "SWE"; "USA" |]
-    }
-    { Label = "groupNordic"
-      CountriesCodes = [| "DNK"; "FIN"; "ISL"; "NOR"; "SWE" |]
-    }
-    { Label = "groupExYu"
-      CountriesCodes = [| "BIH"; "HRV"; "MKD"; "MNE"; "OWID_KOS"; "SRB" |]
-    }
-    { Label = "groupEastAsiaOceania"
-      CountriesCodes = [| "AUS"; "CHN"; "JPN"; "KOR"; "NZL"; "SGP"; "TWN" |]
-    }
-    { Label = "groupLatinAmerica"
-      CountriesCodes = [| "ARG"; "BRA"; "CHL"; "COL"; "ECU"; "MEX"; "PER" |]
-    }
-|]
-
 type Msg =
     | DataRequested
-    | DataLoaded of Data.OurWorldInData.OurWorldInDataRemoteData
+    | DataLoaded of OurWorldInDataRemoteData
     | CountriesSelectionChanged of CountriesDisplaySet
     | ScaleTypeChanged of ScaleType
 
 [<Literal>]
 let DaysOfMovingAverage = 7
 
-let init (config: CountriesChartConfig):
-    ChartState * Cmd<Msg> =
+let init (config: CountriesChartConfig): ChartState * Cmd<Msg> =
+    let metric = config.MetricToDisplay
     let state = {
         OwidDataState = NotLoaded
-        DisplayedCountriesSet = countriesDisplaySets.[0]
-        MetricToDisplay = config.MetricToDisplay
+        StatsData = config.StatsData
+        DisplayedCountriesSet = (countriesDisplaySets metric).[0]
+        MetricToDisplay = metric
         ScaleType = Linear
         ChartTextsGroup = config.ChartTextsGroup
+        DataSource = config.DataSource
     }
     state, Cmd.ofMsg DataRequested
 
@@ -78,8 +58,11 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
             DisplayedCountriesSet = selectedSet
         },
         Cmd.OfAsync.result
-            (Data.OurWorldInData.loadCountryComparison
-                 countriesCodes DataLoaded)
+            (loadData {
+                DateFrom = None
+                DateTo = None
+                Countries = CountrySelection.Selected countriesCodes
+            } DataLoaded)
     | DataRequested ->
         let countriesCodes = getCountriesCodes state.DisplayedCountriesSet
 
@@ -92,8 +75,11 @@ let update (msg: Msg) (state: ChartState) : ChartState * Cmd<Msg> =
 
         { state with OwidDataState = newOwidDataState },
         Cmd.OfAsync.result
-            (Data.OurWorldInData.loadCountryComparison
-                 countriesCodes DataLoaded)
+            (loadData {
+                DateFrom = None
+                DateTo = None
+                Countries = CountrySelection.Selected countriesCodes
+            } DataLoaded)
     | DataLoaded remoteData ->
         { state with OwidDataState = Current remoteData }, Cmd.none
     | ScaleTypeChanged newScaleType ->
@@ -249,7 +235,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                 text =
                     sprintf "%s: %s"
                         (t "charts.common.dataSource")
-                        (t "charts.common.dsOWD")
+                        (t ("charts.common." + state.DataSource))
                 href = "https://ourworldindata.org/coronavirus"
             |}
     |}
@@ -262,6 +248,7 @@ let renderChartContainer state chartData =
     ]
 
 let renderCountriesSetsSelectors
+    (metric: MetricToDisplay)
     (activeSet: CountriesDisplaySet)
     dispatch =
     let renderCountriesSetSelector (setToRender: CountriesDisplaySet) =
@@ -277,7 +264,7 @@ let renderCountriesSetsSelectors
 
     Html.div [
         prop.className "metrics-selectors"
-        countriesDisplaySets
+        countriesDisplaySets metric
         |> Array.map renderCountriesSetSelector
         |> prop.children
     ]
@@ -298,6 +285,7 @@ let render (state: ChartState) dispatch =
             Utils.renderChartTopControls topControls
             renderChartContainer state chartData
             renderCountriesSetsSelectors
+                state.MetricToDisplay
                 state.DisplayedCountriesSet
                 (CountriesSelectionChanged >> dispatch)
 

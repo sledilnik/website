@@ -17,9 +17,10 @@ let ``Groups entries by countries``() =
         ]
         |> List.map(fun (code, date, cases, casesPerM, deaths, deathsPerM) ->
             ( { CountryCode = code; Date = date
-                NewCases = 0; NewCasesPerMillion = None
-                TotalCases = cases; TotalCasesPerMillion = casesPerM
-                TotalDeaths = deaths; TotalDeathsPerMillion = deathsPerM })
+                NewCases = Some 0; NewCasesPerMillion = None
+                TotalCases = Some cases; TotalCasesPerMillion = casesPerM
+                NewDeaths = Some 0; NewDeathsPerMillion = None
+                TotalDeaths = Some deaths; TotalDeathsPerMillion = deathsPerM })
             )
 
     let grouped = groupEntriesByCountries TotalDeathsPer1M entries

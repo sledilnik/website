@@ -67,12 +67,19 @@ let parseRegionsData (csv : string) =
                                 dps
                                 |> Array.fold (fun state dp ->
                                     match dp.Metric with
-                                    | ActiveCases -> { state with ActiveCases = dp.Value }
-                                    | ConfirmedToDate -> { state with ConfirmedToDate = dp.Value }
-                                    | DeceasedToDate -> { state with DeceasedToDate = dp.Value }
-                                ) { Name = municipality ; ActiveCases = None ; ConfirmedToDate = None ; DeceasedToDate = None })
+                                    | ActiveCases ->
+                                        { state with ActiveCases = dp.Value }
+                                    | ConfirmedToDate ->
+                                        { state with ConfirmedToDate = dp.Value }
+                                    | DeceasedToDate ->
+                                        { state with DeceasedToDate = dp.Value }
+                                ) { Name = municipality
+                                    ActiveCases = None
+                                    ConfirmedToDate = None
+                                    DeceasedToDate = None })
                         // Region
-                        { Name = region ; Municipalities = municipalities |> Array.toList }
+                        { Name = region
+                          Municipalities = municipalities |> Array.toList }
                     )
                 // RegionsDataPoint
                 return { Date = date ; Regions = data |> Array.toList }

@@ -13,17 +13,16 @@
         },
         "github": "GitHub",
         "links": "Collegamenti",
-        "sources": "Fonti",
-        "team": "Team",
         "about": "Il progetto",
         "faq": "FAQ",
         "home": "Home",
         "menu": "Menu",
         "models": "Modelli",
-        "tables": "Tabella",
+        "data": "Dati",
         "world": "Nel mondo",
         "animation": "Animazione",
-        "ostanizdrav": "#OstaniZdrav"
+        "ostanizdrav": "#OstaniZdrav",
+        "goToGraph": "Vai al grafico"
     },
     "mk": {
         "hospital": {
@@ -150,13 +149,17 @@
         "notFound": "404: pagina non trovata"
     },
     "country-groups": {
-        "groupNeighbouring": "Paesi limitrofi",
-        "groupCriticalEU": "Paesi critici (UE)",
-        "groupCriticalWorld": "Paesi critici (Mondo)",
+        "groupNeighbouring": "paesi limitrofi",
         "groupNordic": "Paesi nordici",
         "groupExYu": "Ex Jugoslavia",
         "groupEastAsiaOceania": "Asia orientale e Oceania",
-        "groupLatinAmerica": "America Latina"
+        "groupLatinAmerica": "America Latina",
+        "groupLargestWorldCountries": "i più grandi paesi del mondo",
+        "groupLargestEuCountries": "i più grandi paesi dell'UE*",
+        "groupHighestTotalDeaths": "valori massimi",
+        "groupHighestActiveCases": "valori massimi",
+        "groupHighestNewCases": "valori massimi",
+        "groupHighestNewDeaths": "valori massimi"
     },
     "country": {
         "ABW": "Aruba",
@@ -576,6 +579,30 @@
         "movement": {
             "description": "Restrizioni degli spostamenti 21:00-6:00, restrizione degli spostamenti alla propria regione.<br>Assembramenti di più di 10 persone. Restrizione di tutti gli eventi.",
             "title": "🚫21-6h"
+        },
+        "municipality2": {
+            "description": "Divieto di spostamento al di fuori dei confini comunali",
+            "title": "Comuni"
+        },
+        "liftShops": {
+            "description": "Rilassamento: negozi di materiale tecnico, auto, mobili e articoli per bambini, pedicure, copisterie, orologerie e gioiellerie",
+            "title": "Negozi"
+        },
+        "liftLibraries": {
+            "description": "Rilassamento: biblioteche, officine, servizi di costruzione e manutenzione, …",
+            "title": "Librerie"
+        },
+        "restaurants": {
+            "description": "Chiusura di ristoranti, hotel, centri commerciali, parrucchieri e centri estetici. <br> Chiusura delle Case degli studenti, trasporto pubblico ridotto.",
+            "title": "Ristoranti"
+        },
+        "services": {
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ....) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
+            "title": "Servizi"
+        },
+        "gatherings2": {
+            "description": "Divieto di ritrovo in luoghi pubblici (ad eccezione dei familiari stretti)",
+            "title": "Assembramento"
         }
     },
     "tableDict": {
@@ -617,9 +644,9 @@
         "state_out_of_hospital_todate": "Dimessi dall'ospedale (ad oggi)",
         "state_in_hospital_todate": "Ricoverati (ad oggi)",
         "state_deceased_todate": "Decessi confermati (ad oggi)",
-        "state_critical": "Su ventilatore (attivo)",
-        "state_icu": "In terapia intensiva (attivo)",
-        "state_in_hospital": "Ricoverato (attivo)",
+        "state_critical": "Su ventilatore (intubati)",
+        "state_icu": "In terapia intensiva",
+        "state_in_hospital": "Ricoverati",
         "cases_unclassified_confirmed_todate": "Casi confermati - Altri (ad oggi)",
         "cases_rh_occupant_confirmed_todate": "Casi confermati - Residenti nelle case di riposo (ad oggi)",
         "cases_rh_employee_confirmed_todate": "Casi confermati - Personale delle case di riposo (ad oggi)",
@@ -634,8 +661,8 @@
     },
     "charts": {
         "ratios": {
-            "ventilatorHospital": "Su ventilatore",
-            "ventilatorCases": "Su ventilatore",
+            "ventilatorHospital": "Su ventilatore (intubati)",
+            "ventilatorCases": "Su ventilatore (intubati)",
             "hospitalDeceasedShare": "Quota dei decessi in ospedale",
             "icuDeceasedShare": "Quota dei decessi in terapia intensiva",
             "icuMortality": "Mortalità in terapia intensiva",
@@ -648,10 +675,11 @@
             "mortality": "Mortalità",
             "hospitalizations": "Ricoveri",
             "seriousCases": "Casi gravi",
-            "title": "Quota dei casi gravi"
+            "title": "Quota dei casi gravi",
+            "titleMenu": "Casi gravi"
         },
         "patients": {
-            "ventilator": "Su ventilatore",
+            "ventilator": "Su ventilatore (intubati)",
             "allHospitals": "Tutti gli ospedali",
             "deceased": "Deceduti",
             "discharged": "Dimessi",
@@ -661,19 +689,26 @@
             "hospitalizedIn": "Ricoverati in:",
             "byHospital": "Per ospedale",
             "structure": "Struttura",
-            "title": "Ricoveri"
+            "title": "Ricoveri",
+            "titleMenu": "Ricoveri",
+            "care": "In cura",
+            "icu-deceased": "Deceduti (in terapia intensiva)"
         },
         "cases": {
-            "ventilator": "Su ventilatore",
+            "ventilator": "Su ventilatore (intubati)",
             "deceased": "Deceduti",
             "recovered": "Guariti",
             "icu": "Terapia intensiva",
             "hospitalized": "Ricoverati",
             "active": "Attivi",
-            "title": "Casi confermati"
+            "title": "Casi confermati",
+            "titleMenu": "Casi",
+            "deceased-hospital": "Deceduti (in ospedale)",
+            "deceased-icu": "Deceduti (in terapia intensiva)",
+            "deceased-rest": "Deceduti"
         },
         "metricsComparison": {
-            "ventilator": "Su ventilatore",
+            "ventilator": "Su ventilatore (intubati)",
             "deceasedToDate": "Decessi (ad oggi)",
             "deceased": "Decessi",
             "dischargedToDate": "Dimessi (ad oggi)",
@@ -691,8 +726,8 @@
             "title_SVN": "COVID-19 Situazione in Slovenia",
             "title_MNE": "COVID-19 Situazione nel Montenegro",
             "title_MKD": "COVID-19 Situazione nella Macedonia del Nord",
-            "ventilatorDischarged": "Disconnessi dal ventilatore",
-            "ventilatorAdmitted": "Collegati al ventilatore",
+            "ventilatorDischarged": "Disconnessi dal ventilatore (intubati)",
+            "ventilatorAdmitted": "Collegati al ventilatore (intubati)",
             "icuDischarged": "Dimessi dalla terapia intensiva",
             "icuAdmitted": "Ammessi in terapia intensiva",
             "hospitalDischarged": "Dimessi dall'ospedale",
@@ -703,7 +738,10 @@
             "showToDate": "Ad oggi",
             "showToday": "Giornalieri",
             "showActive": "Attivi",
-            "show7DaysAverage": "Media 7 giorni"
+            "show7DaysAverage": "Media 7 giorni",
+            "titleMenu_MNE": "Montenegro - situazione",
+            "titleMenu_MKD": "Macedonia del Nord - situazione",
+            "titleMenu_SVN": "Slovenia - situazione"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -712,7 +750,7 @@
             "projection14": "Proiezione, raddoppio a 14 giorni",
             "projection21": "Proiezione, raddoppio a 21 giorni",
             "bedsICU": "Posti letto in terapia intensiva",
-            "ventilators": "Respiratori",
+            "ventilators": "Ventilatori",
             "bedsICUShort": "Posti letto in terapia intensiva",
             "bedsMax": "Posti letto, massimo",
             "bedsAll": "Posti letto, tutti",
@@ -728,12 +766,14 @@
             "all": "Tutti",
             "max": "Max",
             "data": "Dati",
-            "allHospitals": "Tutti gli ospedali"
+            "allHospitals": "Tutti gli ospedali",
+            "titleMenu": "Capacità"
         },
         "countriesTotalDeathsPer1M": {
             "yAxisTitle": "Totale decessi per 100.000 di persone",
             "legendTitle": "Totale decessi per 100.000 di persone",
-            "title": "Paesi: totale decessi per 100.000 di persone"
+            "titleMenu": "Paesi - Decessi",
+            "title": "Paesi: totale decessi per 100.000 persone (media di 7 giorni)"
         },
         "infections": {
             "title": "Struttura dei casi confermati",
@@ -744,16 +784,21 @@
             "hcStaff": "Personale sanitario",
             "all": "Tutto",
             "relative": "Relativo",
-            "averageByDay": "Per giorno (media)"
+            "averageByDay": "Per giorno (media)",
+            "titleMenu": "Casi - struttura",
+            "disclaimer": "Nota: questo grafico non è aggiornato. Dall'11 ottobre, la NIJZ non riporta più i dati relativi alle case di riposo e agli operatori sanitari."
         },
         "tests": {
-            "nationalStudyTesting": "Ricerca",
-            "regularTesting": "Normale",
+            "ns-apr20": "Ricerca",
+            "regular": "Normale",
             "title": "Analisi",
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
             "negativeTests": "Tamponi negativi",
-            "allTesting": "Tutti"
+            "allTesting": "Tutti",
+            "titleMenu": "Tamponi",
+            "byLabPercent": "Per laboratorio:% positivi",
+            "byLab": "Per laboratorio: test"
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -763,19 +808,23 @@
             "allRegions": "Tutte le regioni",
             "testsPositive": "Tamponi (positivi*)",
             "testsPerformed": "Tamponi (effettuati)",
-            "sentToSelfIsolation": "Autoisolamento"
+            "sentToSelfIsolation": "Autoisolamento",
+            "titleMenu": "CS - trattamento",
+            "disclaimer": "Nota: questo grafico non è aggiornato. Dal 25 ottobre il Ministero della Salute non riporta più i dati relativi ai centri sanitari in quanto non vengono più raccolti."
         },
         "countriesNewCasesPer1M": {
             "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
             "yAxisTitle": "Nuovi casi giornalieri su 100.000 persone",
-            "title": "Paesi: nuovi casi giornalieri su 100.000 persone"
+            "titleMenu": "Paesi - Nuovi casi",
+            "title": "Paesi: nuovi casi giornalieri su 100.000 persone (media di 7 giorni)"
         },
         "ageGroupsTimeline": {
             "activeCasesRelative": "Casi attivi (relativi)",
             "activeCases": "Casi attivi",
             "newCasesRelative": "Nuovi casi (relativi)",
             "newCases": "Nuovi casi",
-            "title": "Casi confermati per fasce di età"
+            "title": "Casi confermati per fasce di età",
+            "titleMenu": "Età - quota"
         },
         "ageGroups": {
             "confirmedCases": "Casi confermati",
@@ -793,13 +842,15 @@
             "female": "Femmine",
             "male": "Maschi",
             "title": "Fasce di età",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri dagli ospedali. I dati demografici (sesso, età, comune di residenza) dei defunti sono riportati dalle istituzioni (assistenza sanitaria, case di riposo) al NIJZ, ma questi dati sono in ritardo di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale di morti."
+            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri dagli ospedali. I dati demografici (sesso, età, comune di residenza) dei defunti sono riportati dalle istituzioni (assistenza sanitaria, case di riposo) al NIJZ, ma questi dati sono in ritardo di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale di morti.",
+            "populationShare": "Quota di popolazione",
+            "titleMenu": "Età, Sesso"
         },
         "municipalities": {
             "lastCase": "Ultimo caso: ",
             "today": "oggi",
             "yesterday": "ieri",
-            "doubles": "Raddoppia in ",
+            "doubles": "Raddoppia ",
             "deceased": "Deceduti: ",
             "recovered": "Guariti: ",
             "active": "Attivi: ",
@@ -812,7 +863,8 @@
             "viewTotal": "Tutti",
             "viewDoublingTime": "Tempo di raddoppio",
             "viewLast": "Ultimo",
-            "title": "Casi per comune"
+            "title": "Casi per comune",
+            "titleMenu": "Comuni - casi"
         },
         "europe": {
             "noData": "Nessun dato",
@@ -826,7 +878,9 @@
             "newCases": "Nuovi casi",
             "restrictions": "Restrizioni e casi importati",
             "twoWeekIncidence": "Incidenza di 14 giorni per 100.000",
-            "title": "COVID-19 Situazione in Europa"
+            "title": "COVID-19 Situazione in Europa",
+            "titleMenu": "Europa - situazione",
+            "weeklyIncrease": "Aumento settimanale"
         },
         "map": {
             "confirmedCases": "Casi confermati",
@@ -842,13 +896,18 @@
             "mortalityOfConfirmedCases": "Mortalità nei casi confermati",
             "title": "Mappa dei comuni",
             "per100k": "per 100k",
-            "relativeIncrease": "Incremento settimanale"
+            "relativeIncrease": "Incremento settimanale",
+            "titleMenu": "Comuni - mappa",
+            "bubbles": "Distribuzione",
+            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali. I dati demografici (sesso, età, comune) sui deceduti sono riportati dalle istituzioni (sanità, case di riposo) al NIJZ, ma questi dati sono ritardati di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
         },
         "regions": {
             "deceased": "Decessi",
             "confirmedCases": "Casi confermati",
             "activeCases": "Casi attivi",
-            "title": "Casi per regione"
+            "title": "Casi per regione",
+            "titleMenu": "Regioni - casi",
+            "newCases7Days": "Nuovi casi (media di 7 giorni)"
         },
         "spread": {
             "absolute": "Crescita giornaliera assoluta",
@@ -875,7 +934,8 @@
             "inFourWeeks": "In quattro settimane",
             "hospitalized": "ricoverati",
             "title": "Variazione dei casi confermati",
-            "activeCases": "casi attivi"
+            "activeCases": "casi attivi",
+            "titleMenu": "Crescita"
         },
         "common": {
             "shortDateFormat": "%e %b",
@@ -911,10 +971,15 @@
             "dataSource": "origine dei dati",
             "sortBy": "Ordina per:",
             "weekYearDateFormat": "Settimana %W del %Y",
-            "dataDate": "Dati fino a: {{ date, %a., %e. %b. }}"
+            "dataDate": "Dati fino a: {{ date, %a., %e. %b. }}",
+            "dsOWD_MZ": "Our World in Data &amp; Min. Salute",
+            "dsOWD_NIJZ": "Our World in Data &amp; NIJZ",
+            "dsMNZ": "MNZ",
+            "dsSURS": "SURS"
         },
         "world": {
-            "title": "COVID-19 Situazione nel mondo"
+            "title": "COVID-19 Situazione nel mondo",
+            "titleMenu": "Mondo - situazione"
         },
         "countriesDeathsPerCases": {
             "chronologically": "Cronologico",
@@ -924,23 +989,31 @@
             "daysFromOneDeathPerMillion": "Numero di giorni dal primo decesso per 1 milione di persone",
             "legendTitle": "Totale decessi per casi",
             "yAxisTitle": "Totale decessi per casi",
-            "title": "Paesi: totale decessi per casi"
+            "title": "Paesi: totale decessi per casi",
+            "titleMenu": "Paesi: decessi su casi"
         },
         "countriesActiveCasesPer1M": {
             "red": "criteri per lista rossa",
             "legendTitle": "Casi attivi per 100.000 di persone",
             "yAxisTitle": "Casi attivi per 100.000 di persone",
-            "title": "Paesi: casi attivi per 100.000 di persone"
+            "title": "Paesi: casi attivi per 100.000 di persone",
+            "titleMenu": "Paesi - Casi attivi"
         },
         "rmap": {
-            "title": "Mappa delle regioni"
+            "title": "Mappa delle regioni",
+            "titleMenu": "Regioni - mappa"
         },
         "dailyComparison": {
             "title": "Confronto per giorno della settimana",
             "positivePct": "Percentuale di tamponi positivi (%)",
             "tests": "Tamponi effettuati",
             "active": "Casi attivi",
-            "new": "Casi confermati"
+            "new": "Casi confermati",
+            "titleMenu": "Giorni della settimana - confronto",
+            "deceased": "Decessi",
+            "icuAdmitted": "Ammessi in terapia intensiva",
+            "hospitalDischarged": "Dimessi dall'ospedale",
+            "hospitalAdmitted": "Ammessi in ospedale"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -958,7 +1031,10 @@
             "confirmedFromQuarantine": "Confermato dalla quarantena",
             "confirmedCases": "Casi confermati",
             "sentToQuarantine": "Inviato in quarantena",
-            "title": "Quarantena e fonti di infezione"
+            "title": "Fonti di infezione e quarantena",
+            "titleMenu": "Fonti di infezione",
+            "disclaimer": "Nota: dal 17 ottobre, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
+            "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - la quota di casi importati potrebbe essere inferiore a quella effettiva."
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -1014,7 +1090,77 @@
             "deceased": "Decessi",
             "confirmedCases": "Casi confermati",
             "activeCases": "Casi attivi",
-            "title": "Casi per regione (per 100.000 persone)"
+            "title": "Casi per regione (per 100.000 persone)",
+            "titleMenu": "Regioni - confronto"
+        },
+        "phaseDiagram": {
+            "weekVsWeekBefore": {
+                "yAxisLabel": "Differenza di incidenza",
+                "xAxisLabel": "Incidenza a 7 giorni",
+                "yAxisTitle": "Differenza di incidenza (%)",
+                "xAxisTitle": "Incidenza a 7 giorni",
+                "name": "Differenza di incidenza"
+            },
+            "totalVsWeek": {
+                "yAxisLabel": "Incidenza a 7 giorni",
+                "xAxisLabel": "Totale",
+                "yAxisTitle": "Incidenza a 7 giorni",
+                "xAxisTitle": "Totale",
+                "name": "Totale rispetto alla settimana precedente"
+            },
+            "deceased": "Decessi",
+            "hospitalized": "Ricoverati",
+            "cases": "Casi confermati",
+            "titleMenu": "Diagramma delle fasi",
+            "title": "Diagramma delle fasi"
+        },
+        "hcCases": {
+            "totalConfirmed": "Totale casi confermati",
+            "healthcareEmployeesRelative": "Operatori sanitari (relativi)",
+            "healthcareEmployees": "Operatori sanitari",
+            "healthcareEmployeesCases": "Operatori sanitari confermati",
+            "confirmedCases": "Casi confermati",
+            "disclaimer": "Nota: i dati della scorsa settimana non sono ancora completi - la quota dei dipendenti sanitari potrebbe essere inferiore a quella effettiva.",
+            "titleMenu": "Operatori sanitari - casi",
+            "title": "Casi confermati tra i dipendenti sanitari"
+        },
+        "carePatients": {
+            "titleMenu": "Ospedali di cura",
+            "title": "Ospedali di cura"
+        },
+        "countriesNewDeathsPer100k": {
+            "legendTitle": "Nuovi decessi giornalieri per 100.000 persone",
+            "yAxisTitle": "Nuovi decessi giornalieri per 100.000 persone",
+            "titleMenu": "Paesi - Nuovi decessi",
+            "title": "Paesi: nuovi decessi per 100.000 persone (media di 7 giorni)"
+        },
+        "deceased": {
+            "deceased-total": "Decessi totali",
+            "deceased-rest": "Fuori dagli ospedali",
+            "deceased-care": "Ospedali di cura",
+            "deceased-acute": "Unità di medicina per acuti",
+            "deceased-icu": "Terapia intensiva",
+            "deceasedToDateRelative": "Decessi ad oggi (relativo)",
+            "deceasedToDate": "Decessi ad oggi",
+            "deceasedTodayRelative": "Decessi al giorno (relativo)",
+            "deceasedToday": "Decessi al giorno",
+            "titleMenu": "Decessi",
+            "title": "Decessi"
+        },
+        "excessDeaths": {
+            "excess": {
+                "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo. Nell'articolo trovate un approfondimento sul grafico",
+                "covidDeaths": "Decessi confermati per COVID-19",
+                "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
+                "title": "Eccedenza rispetto agli ultimi 5 anni"
+            },
+            "absolute": {
+                "title": "Confronto annuale",
+                "disclaimer": "Nota: i dati dell'ultima settimana visualizzata sono incompleti. Nell'articolo trovate un approfondimento sul grafico"
+            },
+            "titleMenu": "Eccesso di mortalità",
+            "title": "Eccesso di mortalità",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
         }
     },
     "footer": {
@@ -1053,7 +1199,7 @@
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
-        "description": "COVID-19 Slovenia Tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
+        "description": "COVID-19 Slovenia tracking - dati sul COVID-19 in Slovenia raccolti, verificati, aggiornati, analizzati e controllati."
     },
     "timestamp": {
         "updated": "Aggiornato {{ date, %A, %e %B %Y }}",
@@ -1102,6 +1248,14 @@
         "11": {
             "description": "epidemia",
             "title": "fase<br>11"
+        },
+        "13": {
+            "description": "nuova metodologia dei test",
+            "title": "fase<br>13"
+        },
+        "12": {
+            "description": "nuova metodologia dei test",
+            "title": "fase<br>12"
         }
     },
     "weekday": {
@@ -1156,7 +1310,16 @@
         "newChart": "🆕 📊 Nuovo grafico:",
         "newPage": "🆕 Nuova pagina:",
         "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone",
-        "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni"
+        "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni",
+        "progressC19": "Progresso tipico del COVID-19. Ricovero, terapia intensiva e mortalità.",
+        "newInfographics": "🆕 📇 Nuova infografica:",
+        "tests": "5 miti sui test ...",
+        "weKnowWeDoNotKnow": "Sappiamo che i dati a volte mentono. Come facciamo a sapere, che (non) lo sappiamo? 🤔📉🧐📈🤷♂️🤷♀️",
+        "checked": "🆕 Verificato:",
+        "presentation": "Come la scienza aiuta i responsabili delle decisioni - presentazione all'Assemblea Nazionale RS",
+        "bubble": "Vivere nella bolla… Come limitare i contatti e non restare soli? 💭",
+        "newMedium": "🆕 📝 Nuovo post Medium:",
+        "restrictions": "Misure e restrizioni attuali"
     },
     "weekdayShort": {
         "6": "Sa",
@@ -1166,5 +1329,20 @@
         "2": "Ma",
         "1": "Lu",
         "0": "Do"
-    }
+    },
+    "youtube": {
+        "titleMenu": "Animazione",
+        "title": "Animazione della diffusione del COVID-19"
+    },
+    "restrictionsPage": {
+        "link": "Link al decreto (testo ufficiale)",
+        "notes": "Note",
+        "extrarule": "Ulteriori regole / interpretazioni",
+        "exceptions": "Eccezioni",
+        "validity": "Validità",
+        "geoValidity": "Validità geografica",
+        "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte. I dati vengono raccolti in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
+        "title": "Misure e restrizioni"
+    },
+    "week": "Settimana"
 }

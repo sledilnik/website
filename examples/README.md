@@ -15,6 +15,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Stanje COVID-19 v Evropi | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap |
 | Stanje COVID-19 v svetu | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
+| Negovalne bolnišnice | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients |
 | Delež resnih primerov | https://covid-19.sledilnik.org/embed.html#/chart/Ratios |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
 | Obravnava v ZD | https://covid-19.sledilnik.org/embed.html#/chart/HCenters |
@@ -47,11 +48,15 @@ Parameters:
 - `ng` (Goriška)
 - `kp` (Obalno-kraška)
 
+`search`=
+- `search string`
+
 | Chart | Url |
 | ----- | --- |
 | Občine - Pomurska | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms |
 | Občine - Savinjska, podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=time-to-double |
 | Občine - podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double |
+| Občine - Medvode | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?search=medvode |
 
 ### Resize
 

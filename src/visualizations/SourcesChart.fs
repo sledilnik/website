@@ -8,6 +8,8 @@ open Browser
 open Types
 open Highcharts
 
+let chartText = I18N.chartText "sources"
+
 let countryColors =
     [
       "#dba51d"
@@ -43,14 +45,14 @@ type DisplayType =
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ Quarantine; QuarantineRelative; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative ]
+    static member all = [ BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Quarantine; QuarantineRelative ]
     static member getName = function
-        | Quarantine     -> I18N.t "charts.sources.quarantine"
-        | QuarantineRelative     -> I18N.t "charts.sources.quarantineRelative"
-        | BySource     -> I18N.t "charts.sources.bySource"
-        | BySourceRelative     -> I18N.t "charts.sources.bySourceRelative"
-        | BySourceCountry     -> I18N.t "charts.sources.bySourceCountry"
-        | BySourceCountryRelative     -> I18N.t "charts.sources.bySourceCountryRelative"
+        | Quarantine                -> chartText "quarantine"
+        | QuarantineRelative        -> chartText "quarantineRelative"
+        | BySource                  -> chartText "bySource"
+        | BySourceRelative          -> chartText "bySourceRelative"
+        | BySourceCountry           -> chartText "bySourceCountry"
+        | BySourceCountryRelative   -> chartText "bySourceCountryRelative"
 
 // ---------------------------
 // State management
@@ -66,7 +68,7 @@ type Msg =
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = Quarantine
+        { displayType = BySource
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -119,7 +121,7 @@ module Series =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
         | ConfirmedFromQuarantine ->  "#665191", "confirmedFromQuarantine", 1
-        | ConfirmedCases ->  "#bda506", "confirmedCases", 1
+        | ConfirmedCases ->  "#d5c768", "confirmedCases", 1
 
         | ImportedCases -> "#d559b0", "importedCases", 0
         | ImportRelatedCases -> "#f4b2e0", "importRelatedCases", 0
@@ -131,7 +133,7 @@ let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
     let arrows p = match p?point?seriesId with
-                                   | "confirmedFromQuarantine" -> "↳ "
+                                   | "confirmedFromQuarantine"  -> "↳ "
                                    |_ -> ""
 
     fmtWeekYearFromTo
@@ -174,10 +176,9 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       legendIndex = countryIndex
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
-                                                                      pointPlacement = "between"
                                                                       showInLegend = Set.contains countryCode countriesToShowInLegend
                                                                       data = state.data |> Seq.map (fun dp -> {|
-                                                                                                               x = dp.Date |> jsTime
+                                                                                                               x = jsDatesMiddle dp.Date dp.DateTo
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
                                                                                                                fmtWeekYearFromTo =
@@ -212,15 +213,14 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let color, seriesId, stack = Series.getSeriesInfo (series)
     {|
        color = color
-       name = I18N.tt "charts.sources" seriesId
+       name = chartText seriesId
        stack = stack
        animation = false
        legendIndex = legendIndex
-       pointPlacement = "between"
        data =
            state.data
            |> Seq.map (fun dp ->
-               {| x = dp.Date |> jsTime
+               {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
@@ -237,6 +237,8 @@ let renderChartOptions (state: State) dispatch =
             true
 
         res
+
+    let lastWeek = state.data.[state.data.Length-1]
 
     let className = "covid19-weekly-stats"
     let baseOptions =
@@ -273,6 +275,13 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun xAxis ->
                    {| xAxis with
                           tickInterval = 86400000 * 7
+                          plotBands =
+                                [|
+                                   {| from=jsTime <| lastWeek.Date
+                                      ``to``=jsTime <| lastWeek.DateTo
+                                      color="#ffffe0"
+                                    |}
+                                |]
                          |})
            tooltip =
                pojo
@@ -281,8 +290,8 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true
                       formatter = match state.displayType with
                                   | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
-                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalConfirmed") jsThis
-                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (I18N.t "charts.sources.totalImported") jsThis
+                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
+                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
                       |}
            legend =
                pojo
@@ -328,9 +337,21 @@ let renderChartContainer state dispatch =
 
 
 let render (state: State) dispatch =
+    let disclaimer =
+        match state.displayType with
+        | Quarantine | QuarantineRelative -> "disclaimer"
+        | _ -> "disclaimerGeneral"
+
     Html.div [
         renderChartContainer state dispatch
         renderDisplaySelectors state dispatch
+
+        Html.div [
+            prop.className "disclaimer"
+            prop.children [
+                Html.text (chartText disclaimer)
+            ]
+        ]
     ]
 
 let sourcesChart (props: {| data: WeeklyStatsData |}) =

@@ -11,36 +11,69 @@ open Browser
 open Types
 open Highcharts
 
+open Data.Patients
+
 type DisplayType =
     | Active
     | New
     | Tests
     | PositivePct
+    | HospitalAdmitted
+    | HospitalDischarged
+    | ICUAdmitted
+    | Deceased
 with
-    static member all = [ New; Active; Tests; PositivePct; ]
+    static member UseStatsData dType = [ Active; New; Tests; PositivePct; ] |> List.contains dType
+    static member all = [ New; Active; Tests; PositivePct; HospitalAdmitted; HospitalDischarged; ICUAdmitted; Deceased; ]
     static member getName = function
         | New -> I18N.t "charts.dailyComparison.new"
         | Active -> I18N.t "charts.dailyComparison.active"
         | Tests -> I18N.t "charts.dailyComparison.tests"
         | PositivePct -> I18N.t "charts.dailyComparison.positivePct"
+        | HospitalAdmitted -> I18N.t "charts.dailyComparison.hospitalAdmitted"
+        | HospitalDischarged -> I18N.t "charts.dailyComparison.hospitalDischarged"
+        | ICUAdmitted -> I18N.t "charts.dailyComparison.icuAdmitted"
+        | Deceased -> I18N.t "charts.dailyComparison.deceased"
+    static member getColor = function
+        | New -> "#bda506"
+        | Active -> "#dba51d"
+        | Tests -> "#19aebd"
+        | PositivePct -> "#665191"
+        | HospitalAdmitted -> "#be7A2a"
+        | HospitalDischarged -> "#20b16d"
+        | ICUAdmitted -> "#d96756"
+        | Deceased -> "#6d5b80"
 
 type State = {
-    Data: StatsData
+    StatsData: StatsData
+    PatientsData : PatientsStats []
+    Error : string option
     DisplayType: DisplayType
 }
 
 type Msg =
+    | ConsumePatientsData of Result<PatientsStats [], string>
+    | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
 
 let init data : State * Cmd<Msg> =
+    let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
-        Data = data
+        StatsData = data
+        PatientsData = [||]
+        Error = None
         DisplayType = New
     }
-    state, Cmd.none
+    state, cmd
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
+    | ConsumePatientsData (Ok data) ->
+        { state with PatientsData = data; }, Cmd.none
+    | ConsumePatientsData (Error err) ->
+        { state with Error = Some err }, Cmd.none
+    | ConsumeServerError ex ->
+        { state with Error = Some ex.Message }, Cmd.none
     | ChangeDisplayType dt ->
         { state with DisplayType = dt }, Cmd.none
 
@@ -73,29 +106,45 @@ let renderChartOptions (state : State) dispatch =
         fmtStr <- fmtStr + "</table>"
         fmtStr
 
-    let getValue dp =
+    let getStatsValue dp =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
         | Tests -> dp.Tests.Performed.Today
-        | PositivePct -> 
+        | PositivePct ->
             match dp.Tests.Positive.Today, dp.Tests.Performed.Today with
             | Some p, Some t -> Some ( (float p / float t * 100.0 * 100.0) |> int)
-            | _ -> None 
+            | _ -> None
+        | _ -> None
 
-    let fourWeeks = 
-        state.Data 
-        |> Seq.skipWhile (fun dp -> dp.Date < DateTime.Today.AddDays(float (- weeksShown * 7)))
-        |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
-        |> Seq.map (fun dp -> (dp.Date, getValue dp)) 
-        |> Seq.toArray
+    let getPatientsValue dp =
+        match state.DisplayType with
+        | HospitalAdmitted -> dp.total.inHospital.``in``
+        | HospitalDischarged -> dp.total.inHospital.out
+        | ICUAdmitted -> dp.total.icu.``in``
+        | Deceased -> dp.total.deceased.today
+        | _ -> None
+
+    let dataShown =
+        if DisplayType.UseStatsData state.DisplayType then
+            state.StatsData
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- weeksShown * 7 - 1))) // last day empty
+            |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
+            |> Seq.map (fun dp -> (dp.Date, getStatsValue dp))
+            |> Seq.toArray
+        else
+            state.PatientsData
+            |> Seq.skipWhile (fun dp -> dp.Date <= DateTime.Today.AddDays(float (- (weeksShown * 7))))
+            |> Seq.skipWhile (fun dp -> dp.Date.DayOfWeek <> DayOfWeek.Monday)
+            |> Seq.map (fun dp -> (dp.Date, getPatientsValue dp))
+            |> Seq.toArray
 
     let allSeries = [
-        for weekIdx in 0 .. weeksShown-1 do    
+        for weekIdx in 0 .. weeksShown-1 do
             let idx = weekIdx * 7
-            let len = min 7 (fourWeeks.Length - idx)
+            let len = min 7 (dataShown.Length - idx)
 
-            let desaturateColor (rgb:string) (sat:float) = 
+            let desaturateColor (rgb:string) (sat:float) =
                 let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
                 let r = (argb &&& 0x00FF0000) >>> 16
                 let g = (argb &&& 0x0000FF00) >>> 8
@@ -106,39 +155,38 @@ let renderChartOptions (state : State) dispatch =
                 let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
                 sprintf "#%02x%02x%02x" newR newG newB
 
-            let getSeriesColor dt series = 
-                match dt with
-                | New -> desaturateColor "#bda506" (float (series) / float (weeksShown))
-                | Active -> desaturateColor "#dba51d" (float (series) / float (weeksShown))
-                | Tests -> desaturateColor "#19aebd" (float (series) / float (weeksShown))
-                | PositivePct -> desaturateColor "#665191" (float (series) / float (weeksShown))
+            let getSeriesColor dt series =
+                desaturateColor (DisplayType.getColor dt) (float (series) / float (weeksShown))
 
             let percent a b =
                 match a, b with
-                | Some v, Some p -> sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
+                | Some v, Some p ->
+                    if p = 0
+                    then if v = 0 then "" else ">500%"
+                    else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
             yield pojo
                 {|
                     ``type`` = "column"
                     color = getSeriesColor state.DisplayType weekIdx
-                    data = 
-                        fourWeeks
+                    data =
+                        dataShown
                         |> Array.skip idx
-                        |> Array.take len 
-                        |> Array.mapi (fun i (date, value) -> 
+                        |> Array.take len
+                        |> Array.mapi (fun i (date, value) ->
                             {|
                                 y = value
                                 date = I18N.tOptions "days.date" {| date = date |}
-                                diff = 
+                                diff =
                                     if weekIdx > 0
-                                    then 
-                                        let _ , prev = fourWeeks.[(weekIdx-1) * 7 + i]
-                                        percent value prev 
+                                    then
+                                        let _ , prev = dataShown.[(weekIdx-1) * 7 + i]
+                                        percent value prev
                                     else ""
-                                dataLabels = 
-                                    if weekIdx = weeksShown-1 
-                                    then 
+                                dataLabels =
+                                    if weekIdx = weeksShown-1
+                                    then
                                         if state.DisplayType = PositivePct
                                         then pojo {| enabled = true; formatter = fun () -> percentageFormatter jsThis?y |}
                                         else pojo {| enabled = true |}
@@ -151,18 +199,18 @@ let renderChartOptions (state : State) dispatch =
     {| optionsWithOnLoadEvent "covid19-daily-comparison" with
         chart = pojo {| ``type`` = "column" |}
         title = pojo {| text = None |}
-        xAxis = [| 
+        xAxis = [|
             {|
                 ``type`` = "category"
                 categories = [| I18N.dow 1; I18N.dow 2; I18N.dow 3; I18N.dow 4; I18N.dow 5; I18N.dow 6; I18N.dow 0; |]
-            |} 
+            |}
         |]
         yAxis = [|
             {|
                 opposite = true
                 title = {| text = null |}
-                labels = 
-                    if state.DisplayType = PositivePct 
+                labels =
+                    if state.DisplayType = PositivePct
                     then pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
                     else pojo {| formatter = None |}
             |}
@@ -224,10 +272,14 @@ let renderDisplaySelectors state dispatch =
             |> List.map (fun dt -> renderSelector state dt dispatch) ) ]
 
 let render (state: State) dispatch =
-    Html.div [
-        renderChartContainer state dispatch
-        renderDisplaySelectors state dispatch
-    ]
+    match state.PatientsData, state.Error with
+    | [||], None -> Html.div [ Utils.renderLoading ]
+    | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
+    | _, None ->
+        Html.div [
+            renderChartContainer state dispatch
+            renderDisplaySelectors state dispatch
+        ]
 
 let dailyComparisonChart (props : {| data : StatsData |}) =
     React.elmishComponent("DailyComparisonChart", init props.data, update, render)

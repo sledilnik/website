@@ -4,6 +4,7 @@ open Browser
 open Elmish
 open Feliz
 
+open RegionsChartViz.Synthesis
 open Types
 open CountriesChartViz.Analysis
 open I18N
@@ -21,6 +22,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "CarePatients" -> Some CarePatients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
             | "Cases" -> Some Cases
@@ -28,6 +30,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Weekly" -> Some Sources
+            | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
             | "AgeGroupsTimeline" -> Some AgeGroupsTimeline
@@ -36,7 +39,11 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Infections" -> Some Infections
             | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
             | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
-            | "CountriesDeathsPer1M" -> Some CountriesDeathsPer1M
+            | "CountriesNewDeathsPer1M" -> Some CountriesNewDeathsPer1M
+            | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
+            | "PhaseDiagram" -> Some PhaseDiagram
+            | "Deceased" -> Some Deceased
+            | "ExcessDeaths" -> Some ExcessDeaths
             | _ -> None
             |> Embedded
 
@@ -59,7 +66,9 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
                   Cmd.ofMsg WeeklyStatsDataRequested
                   Cmd.ofMsg RegionsDataRequest ]
         | "world" ->
-            Cmd.ofMsg WeeklyStatsDataRequested
+            Cmd.batch
+                [ Cmd.ofMsg StatsDataRequested
+                  Cmd.ofMsg WeeklyStatsDataRequested ]
         | _ ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -267,7 +276,14 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "patients-chart"
             ChartTextsGroup = "patients"
             Explicit = false
-            Renderer = fun _ -> lazyView PatientsChart.patientsChart () }
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+
+    let patientsCare =
+          { VisualizationType = CarePatients
+            ClassName = "care-patients-chart"
+            ChartTextsGroup = "carePatients"
+            Explicit = false
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
     let ratios =
           { VisualizationType = Ratios
@@ -307,12 +323,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Absolute
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
+                                               .MetricRelativeTo.Absolute
                               ChartTextsGroup = "regions"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
             }
 
     let regions100k =
@@ -327,12 +345,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data ->
-                        let config: RegionsChart.RegionsChartConfig =
-                            { RelativeTo = RegionsChart.MetricRelativeTo.Pop100k
+                        let config: RegionsChartConfig =
+                            { RelativeTo = RegionsChartViz.Analysis
+                                               .MetricRelativeTo.Pop100k
                               ChartTextsGroup = "regions100k"
                             }
                         let props = {| data = data |}
-                        lazyView (RegionsChart.renderChart config) props
+                        lazyView
+                            (RegionsChartViz.Rendering.renderChart config) props
          }
 
     let sources =
@@ -348,17 +368,45 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
+    let hcCases =
+          { VisualizationType = HcCases
+            ClassName = "hc-cases-chart"
+            ChartTextsGroup = "hcCases"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.WeeklyStatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView HcCasesChart.hcCasesChart {| data = data |} }
+
+    let deceased =
+          { VisualizationType = Deceased
+            ClassName = "deceased-chart"
+            ChartTextsGroup = "deceased"
+            Explicit = false
+            Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
+         }
+
     let countriesCasesPer1M =
           { VisualizationType = CountriesCasesPer1M
             ClassName = "countries-cases-chart"
             ChartTextsGroup = "countriesNewCasesPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = NewCasesPer1M
-                          ChartTextsGroup = "countriesNewCasesPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = NewCasesPer1M
+                              ChartTextsGroup = "countriesNewCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
+                            }
           }
 
     let countriesActiveCasesPer1M =
@@ -367,60 +415,131 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "countriesActiveCasesPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = ActiveCasesPer1M
-                          ChartTextsGroup = "countriesActiveCasesPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = ActiveCasesPer1M
+                              ChartTextsGroup = "countriesActiveCasesPer1M"
+                              DataSource = "dsOWD_NIJZ"
+                            }
           }
 
-    let countriesDeathsPer1M =
-          { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-deaths-chart"
+    let countriesNewDeathsPer1M =
+          { VisualizationType = CountriesNewDeathsPer1M
+            ClassName = "countries-new-deaths-chart"
+            ChartTextsGroup = "countriesNewDeathsPer100k"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = NewDeathsPer1M
+                              ChartTextsGroup = "countriesNewDeathsPer100k"
+                              DataSource = "dsOWD_MZ"
+                            }
+          }
+
+    let countriesTotalDeathsPer1M =
+          { VisualizationType = CountriesTotalDeathsPer1M
+            ClassName = "countries-total-deaths-chart"
             ChartTextsGroup = "countriesTotalDeathsPer1M"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = TotalDeathsPer1M
-                          ChartTextsGroup = "countriesTotalDeathsPer1M"
-                        }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView CountriesChartViz.Rendering.renderChart
+                            { StatsData = data
+                              MetricToDisplay = TotalDeathsPer1M
+                              ChartTextsGroup = "countriesTotalDeathsPer1M"
+                              DataSource = "dsOWD_MZ"
+                            }
           }
 
-    let countriesDeathsPerCases =
-          { VisualizationType = CountriesDeathsPer1M
-            ClassName = "countries-deaths-per-cases"
-            ChartTextsGroup = "countriesDeathsPerCases"
+//    let countriesDeathsPerCases =
+//          { VisualizationType = CountriesDeathsPer1M
+//            ClassName = "countries-deaths-per-cases"
+//            ChartTextsGroup = "countriesDeathsPerCases"
+//            Explicit = false
+//            Renderer =
+//                fun _ ->
+//                    lazyView CountriesChartViz.Rendering.renderChart
+//                        { MetricToDisplay = DeathsPerCases
+//                          ChartTextsGroup = "countriesDeathsPerCases"
+//                        }
+//          }
+
+    let phaseDiagram =
+          { VisualizationType = PhaseDiagram
+            ClassName = "phase-diagram-chart"
+            ChartTextsGroup = "phaseDiagram"
             Explicit = false
             Renderer =
-                fun _ ->
-                    lazyView CountriesChartViz.Rendering.renderChart
-                        { MetricToDisplay = DeathsPerCases
-                          ChartTextsGroup = "countriesDeathsPerCases"
-                        }
-          }
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView PhaseDiagram.Chart.chart {| data = data |} }
+
+    let excessDeaths =
+          { VisualizationType = ExcessDeaths
+            ClassName = "excess-deaths-chart"
+            ChartTextsGroup = "excessDeaths"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> ExcessDeathsChart.Chart.chart {| statsData = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; spread; dailyComparison; patients
+        [ hospitals; metricsComparison; dailyComparison
+          patients; patientsCare; deceased ; excessDeaths
           regions100k; map; municipalities
-          europeMap; ageGroupsTimeline; tests; sources; hCenters; infections
-          cases; ageGroups; regionMap; regionsAbs
+          ageGroupsTimeline; tests; ageGroups; hcCases;
+          europeMap; sources
+          cases; regionMap; regionsAbs
+          phaseDiagram; spread;
+          hCenters; infections
         ]
 
     let worldVisualizations =
-        [ worldMap; countriesActiveCasesPer1M
+        [ worldMap
+          countriesActiveCasesPer1M
           countriesCasesPer1M
-          countriesDeathsPer1M
-//          countriesDeathsPerCases
-          ]
+          countriesNewDeathsPer1M
+          countriesTotalDeathsPer1M
+          // countriesDeathsPerCases
+        ]
 
     let allVisualizations =
         [ hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; sources
-          countriesCasesPer1M; countriesActiveCasesPer1M; countriesDeathsPer1M
+          cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
+          regions100k; hcCases; sources
+          countriesCasesPer1M
+          countriesActiveCasesPer1M
+          countriesNewDeathsPer1M
+          countriesTotalDeathsPer1M
+          phaseDiagram
+          excessDeaths
         ]
 
     let embedded, visualizations =
@@ -521,7 +640,10 @@ let render (state: State) (_: Msg -> unit) =
                           [ Html.a
                               [ prop.href ("#" + visualization.ClassName)
                                 prop.text (tOptions ("charts." + visualization.ChartTextsGroup + ".title") {| context = context |} )
-                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ] ] ] ] ]
+                                prop.onClick (fun e -> scrollToElement e visualization.ClassName) ]
+                            Html.span
+                              [ prop.text ("charts." + visualization.ChartTextsGroup + ".titleMenu")
+                                prop.className "hidden" ] ] ] ] ]
 
     Html.div
         [ Utils.classes [

@@ -16,6 +16,9 @@ let chartFromWindow: obj -> ReactElement = jsNative
 [<Import("renderMap", from="./_highcharts")>]
 let map: obj -> ReactElement = jsNative
 
+[<Import("sparklineChart", from="./_highcharts")>]
+let sparklineChart (documentElementId : string, options : obj) : unit = jsNative
+
 [<AutoOpen>]
 module Helpers =
     // Plain-Old-Javascript-Object (i.e. box)
@@ -26,11 +29,19 @@ module Helpers =
     let poja (a: 'T[]) : obj = jsNative
 
     type JsTimestamp = float
+
     [<Emit("$0.getTime()")>]
     let jsTime (x: DateTime): JsTimestamp = jsNative
 
     let jsNoon : JsTimestamp = 43200000.0
+
     let jsTime12h = jsTime >> ( + ) jsNoon
+
+    [<Emit("(new Date($0.getFullYear(), $0.getMonth(), $0.getDate())).getTime()")>]
+    let jsTimeMidnight (x: DateTime): JsTimestamp = jsNative
+
+    /// Given two dates it calculates the middle point between the midnight for the first date and end of day for the second date
+    let jsDatesMiddle (a: DateTime) (b: DateTime): JsTimestamp = ( + ) (0.5 * jsTimeMidnight a) (0.5 * jsTimeMidnight b) + 43200000.0
 
 type DashStyle =
     | Solid
@@ -129,6 +140,14 @@ let addContainmentMeasuresFlags
         16,10, "#FFe6e6", "regions"
         19,10, "#FFe6e6", "schools6+"
         20,10, "#FFe6e6", "movement"
+        24,10, "#FFe6e6", "restaurants"
+        27,10, "#FFe6e6", "municipality2"
+        31,10, "#ebfaeb", "liftLibraries"
+        6, 11, "#ebfaeb", "liftShops"
+        13,11, "#FFe6e6", "gatherings2"
+        16,11, "#FFe6e6", "services"
+        3, 12, "#FFFFFF", "planRelaxation"
+        7, 12, "#FFe6e6", "alcoDrinks"
     |]
     {|
         ``type`` = "flags"
@@ -147,7 +166,7 @@ let addContainmentMeasuresFlags
                 let title = "cm." + i18n + ".title"
                 let text = "cm." + i18n + ".description"
                 if showMeasure then
-                    Some {| x=ts; fillColor=color; title=I18N.t title; text=I18N.t text |}
+                    Some {| x=ts;fillColor=color; title=I18N.t title; text=I18N.t text |}
                 else None
             )
     |}
@@ -201,6 +220,17 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
                 buttons = buttons
             |}
+
+let credictsOptions =
+    {| enabled = true
+       text = sprintf "%s: %s, %s"
+            (I18N.t "charts.common.dataSource")
+            (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+            (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+       href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+    |} |> pojo
+
+
 let basicChartOptions
     (scaleType:ScaleType)
     (className:string)
@@ -237,6 +267,8 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -290,9 +322,19 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.10.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,10,19);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,10,26);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.11.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,10,26);
+                       ``to``=jsTime <| DateTime(2020,11,6);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.12.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,11,6);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.13.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
@@ -385,14 +427,5 @@ let basicChartOptions
                     |}
             |}
 
-        credits = pojo
-            {|
-                enabled = true
-                text =
-                    sprintf "%s: %s, %s"
-                        (I18N.t "charts.common.dataSource")
-                        (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
-                        (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-            |}
+        credits = credictsOptions
     |}

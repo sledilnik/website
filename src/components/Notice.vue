@@ -3,11 +3,11 @@
 <!--  comment out  -->
     <a
       class="notice-link"
-      href="#map-chart"
+      href="restrictions"
     >
       <div class="notice">
         <span>
-          <b>{{ $t("notice.newChart") }}</b> <span>{{ $t("notice.weeklyIncrease") }}</span>
+          <b>{{ $t("notice.newPage") }}</b> <span><b>{{ $t("notice.restrictions") }}</b></span>
         </span>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />

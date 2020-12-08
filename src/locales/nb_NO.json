@@ -17,7 +17,7 @@
             "shareOfPositive": "Andel positive tester (%)",
             "positiveTests": "Positive tester",
             "negativeTests": "Negative tester",
-            "nationalStudyTesting": "Studie",
+            "ns-apr20": "Studie",
             "allTesting": "Alle",
             "title": "Testing"
         },
@@ -293,21 +293,21 @@
             "mk": "Makedonsk",
             "hr": "Kroatisk",
             "en": "Engelsk",
-            "de": "Tysk"
+            "de": "Tysk",
+            "nb": "Norsk bokmål"
         },
         "github": "GitHub",
         "links": "Lenker",
-        "sources": "Kilder",
-        "team": "Laget",
         "about": "Om",
         "faq": "O-S-S",
         "animation": "Animasjon",
         "models": "Modeller",
-        "tables": "Tabell",
+        "data": "Data",
         "ostanizdrav": "#OstaniZdrav",
         "world": "Verden",
         "home": "Hjem",
-        "menu": "Meny"
+        "menu": "Meny",
+        "goToGraph": "Gå til diagram"
     },
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",

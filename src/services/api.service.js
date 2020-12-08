@@ -7,8 +7,8 @@ const ApiService = {
     axios.defaults.baseURL = baseURL
   },
 
-  get(resource, from, to) {
-    return axiosETAGCache(axios).get(resource, { params: { from, to } })
+  get(resource, opts) {
+    return axiosETAGCache(axios).get(resource, opts)
   },
 }
 

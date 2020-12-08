@@ -31,8 +31,6 @@ export default {
       title: this.$t('meta.title'),
       meta: [
         { vmid: 'description', name: 'description', content: this.$t('meta.description') },
-        { vmid: 'twitter:title', name: 'twitter:title', content: this.$t('meta.title') },
-        { vmid: 'twitter:description', name: 'twitter:description', content: this.$t('meta.description') },
         { vmid: 'og:title', property: 'og:title', content: this.$t('meta.title') },
         { vmid: 'og:description', property: 'og:description', content: this.$t('meta.description') },
       ],
@@ -70,14 +68,7 @@ export default {
           // element found on page
           clearInterval(checker)
 
-          let offset = -60
-          // special case for charts
-          if (
-            elm.tagName === 'SECTION' &&
-            this.$route.hash.endsWith('-chart')
-          ) {
-            offset = -90
-          }
+          const offset = -90
 
           this.$scrollTo(document.querySelector(this.$route.hash), 500, {
             offset: offset,

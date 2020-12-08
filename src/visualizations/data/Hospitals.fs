@@ -46,26 +46,6 @@ type Assets = {
 
 type FacilityCode = string // ukclj, sbce, ukg, ...
 
-/// return (seriesName * color) based on facility name
-let facilitySeriesInfo : FacilityCode -> (string option * string) = function
-    | "bse"   -> None          , "B Sežana"
-    | "bto"   -> None          , "B Topolšica"
-    | "sbbr"  -> None          , "SB Brežice"
-    | "sbce"  -> Some "#70a471", "SB Celje"
-    | "sbje"  -> None          , "SB Jesenice"
-    | "sbiz"  -> None          , "SB Izola"
-    | "sbms"  -> None          , "SB Murska Sobota"
-    | "sbng"  -> None          , "SB Nova Gorica"
-    | "sbnm"  -> None          , "SB Novo mesto"
-    | "sbpt"  -> None          , "SB Ptuj"
-    | "sbsg"  -> None          , "SB Slovenj Gradec"
-    | "sbtr"  -> None          , "SB Trbovlje"
-    | "ukclj" -> Some "#10829a", "UKC Ljubljana"
-    | "ukcmb" -> Some "#003f5c", "UKC Maribor"
-    | "ukg"   -> Some "#7B7226", "UK Golnik"
-    | other   -> None          , other
-
-
 type FacilityAssets = {
     year: int
     month: int
