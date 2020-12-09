@@ -8,7 +8,8 @@
           <span class="date-time">{{ $t("posts.timestamp", { date }) }}</span>
           <reading-time :content="post.body"></reading-time>
         </div>
-        <div class="content" v-html="post.body"></div>
+        <img v-if="post.image" :src="post.image">
+        <div class="content" v-html="$options.filters.marked(post.body)"></div>
         <div class="btn-wrapper">
           <a class="btn" @click="goBack">{{ $t("pageNotFound.back") }}</a>
         </div>
@@ -63,6 +64,12 @@ export default {
 </style>
 
 <style scoped lang="scss">
+img {
+  margin-top: 30px;
+  max-width: 100%;
+  height: auto;
+}
+
 .info-text {
   font-size: 14px;
   color: rgba(117, 117, 117, 1);

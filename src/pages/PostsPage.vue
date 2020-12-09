@@ -37,6 +37,7 @@ export default {
 <style scoped lang="sass">
 .post
   width: 100%
+  margin-bottom: 30px
 
   @media only screen and (max-width: 768px)
     padding: 0
@@ -45,6 +46,7 @@ export default {
       margin-left: 0px
     &:last-child
       margin-right: 0px
+
 </style>
 
 <style lang="sass">
@@ -53,4 +55,5 @@ export default {
     p,
     p:first-child
       display: block
+      margin-bottom: 28px
 </style>

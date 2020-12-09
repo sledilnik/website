@@ -12,7 +12,7 @@
         </b-col>
         <b-col lg="8">
           <b-card-body :title="post.title">
-            <div class="text-muted small card-text" v-html="post.blurb"></div>
+            <div class="text-muted small card-text" v-html="$options.filters.marked(post.blurb)"></div>
             <div class="link small">
             <a v-if="post.link_to" :href="post.link_to">Preberi več</a>
             <router-link v-else :to="postLink">Preberi več</router-link>
@@ -45,12 +45,11 @@ export default {
 
 <style lang="sass" scoped>
 .post
-  //margin-bottom: 30px
 
   @media only screen and (max-width: 768px)
     padding-left: 7.5px
     padding-right: 7.5px
-    //margin-bottom: 15px
+
     &:first-child
       margin-left: -7.5px
     &:last-child
@@ -99,6 +98,7 @@ export default {
 .card-text
   p
     display: none
+
   p:first-child
     display: block
     margin-bottom: 0
