@@ -179,15 +179,15 @@ const getters = {
 
   runningSum: (state, getters) => (start, end, field) => {
     let array = getters.data.slice(
-      getters.data.length - end,
-      getters.data.length - start
+      getters.data.length - end - 1,
+      getters.data.length - start - 1
     )
 
     // if /patients is published before /stats, we need to go one more day in the past
     if (!_.get(array[end - start - 1], field)) {
       array = getters.data.slice(
-        getters.data.length - end - 1,
-        getters.data.length - start - 1
+        getters.data.length - end - 2,
+        getters.data.length - start - 2
       )
     }
     let sum = array.reduce((total, num) => total + _.get(num, field), 0)
