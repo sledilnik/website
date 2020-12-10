@@ -9,7 +9,7 @@
           <reading-time :content="post.body"></reading-time>
         </div>
         <img v-if="post.image" :src="post.image">
-        <div class="content" v-html="$options.filters.marked(post.body)"></div>
+        <div v-if="post.body" class="content" v-html="$options.filters.marked(post.body)"></div>
         <div class="btn-wrapper">
           <a class="btn" @click="goBack">{{ $t("pageNotFound.back") }}</a>
         </div>
@@ -47,7 +47,7 @@ export default {
     if (!postId) {
       // 404
     }
-    this.post = await this.contentApi.get(`/posts/${postId}`);
+    this.post = await this.contentApi.get(`/posts/${postId}/`);
   },
   methods: {
     goBack() {
