@@ -102,7 +102,7 @@ Sodelavci projekta:
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Sebastjan Cizel](https://sebastjancizel.github.io) - vizualizacije
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
--   Tanja Ambrožič - validacija podatkov
+-   [Tanja Ambrožič]() - validacija podatkov
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje

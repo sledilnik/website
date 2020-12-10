@@ -122,7 +122,7 @@ Project collaborators:
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - scripting, statistics
 -   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
--   Tanja Ambrožič - data validation
+-   [Tanja Ambrožič]()- data validation
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
 -   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
