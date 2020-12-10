@@ -28,7 +28,7 @@ export default {
     }
   },
   async created() {
-    const { objects } = await this.contentApi.get("/posts");
+    const { objects } = await this.contentApi.get("/posts/");
     this.posts = objects;
   },
 };

@@ -148,7 +148,7 @@ export default {
   },
   methods: {
     async getPost(){
-      const { objects } = await this.contentApi.get('/posts/set/1;2')
+      const { objects } = await this.contentApi.get('/posts/?limit=2')
       this.headerTeasers = objects
     },
     checkClick(e) {
