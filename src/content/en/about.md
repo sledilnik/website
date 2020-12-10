@@ -116,11 +116,13 @@ Project collaborators:
 -   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - translations
 -   [Mitja Potočin](https://github.com/mitjapotocin) - web page
 -   [Nace Štruc](https://www.nace.si/) - visualisations
+-   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - scripting, statistics
 -   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
+-   Tanja Ambrožič - data validation
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - visualisations
 -   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
