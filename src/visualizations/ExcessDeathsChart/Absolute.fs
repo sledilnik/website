@@ -40,6 +40,17 @@ let renderChartOptions (data : WeeklyDeathsData) =
        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
        tooltip = {| formatter = fun () -> sprintf "%s<br>%s: <b>%d</b>" jsThis?series?name jsThis?key jsThis?y |} |> pojo
        series = series
+       responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                            |}
+                    |} |]
+            |}
        credits =
         {| enabled = true
            text = sprintf "%s: %s"
