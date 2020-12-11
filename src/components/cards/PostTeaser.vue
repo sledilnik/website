@@ -59,6 +59,7 @@ export default {
     &:first-child
       padding: 0
       margin-left: 0
+      margin-bottom: 15px
     &:last-child
       padding: 0
       margin-right: 0

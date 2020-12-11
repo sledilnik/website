@@ -2,7 +2,7 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="posts d-flex" v-if="headerTeasers">
+      <div class="posts d-flex" v-show="headerTeasers">
           <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.id" />
       </div>
       <div class="cards-wrapper">
@@ -194,11 +194,13 @@ export default {
 $loader-width: 50px
 
 .posts
-  margin: 0px auto 30px
+  margin: 0px auto 44px
+  min-height: 163px
   @media only screen and (min-width: 768px)
-    margin: 0px auto 60px
+    margin: 0px auto 88px
   @media only screen and (max-width: 480px)
     flex-direction: column
+    min-height: 247px
 
 .cards-wrapper
   display: flex
@@ -206,12 +208,12 @@ $loader-width: 50px
   display: grid
   gap: 15px
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
-  margin: 0px auto 30px
+  margin: 0px auto 44px
 
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 0px 15px 60px
+    margin: 0px 15px 88px
 
 .stats-page
   margin-top: 48px
