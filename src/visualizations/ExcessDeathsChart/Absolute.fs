@@ -12,9 +12,12 @@ let colors = {|
 |}
 
 let renderChartOptions (data : WeeklyDeathsData) =
+    let minYear = 2010 // used to filter out 2009 data tail
+
     let series =
         data
         |> List.groupBy (fun dp -> dp.Year)
+        |> List.filter (fun (year, _) -> year >= minYear)
         |> List.map (fun (year, data) ->
             let seriesData =
                 data
