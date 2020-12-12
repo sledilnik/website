@@ -2,7 +2,7 @@
   <div class="teaser__post">
     <b-card no-body class="card overflow-hidden">
       <b-row no-gutters class="h-100">
-        <b-col lg="4" class="h-100 d-none d-lg-block p-2 pr-0">
+        <b-col lg="4" class="h-100 d-none d-lg-block py-2 pl-2">
           <a v-if="post.link_to" :href="post.link_to">
             <div
               class="teaser__image"
