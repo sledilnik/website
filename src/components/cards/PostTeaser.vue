@@ -1,21 +1,30 @@
 <template>
-  <div class="post">
-    <b-card no-body class="overflow-hidden">
-      <b-row no-gutters>
-        <b-col lg="4" class="d-none d-lg-block">
+  <div class="teaser__post">
+    <b-card no-body class="card overflow-hidden">
+      <b-row no-gutters class="h-100">
+        <b-col lg="4" class="h-100 d-none d-lg-block p-2 pr-0">
           <a v-if="post.link_to" :href="post.link_to">
-            <div class="image" v-bind:style="{'background-image': `url(${post.image})`}"></div>
+            <div
+              class="teaser__image"
+              v-bind:style="{ 'background-image': `url(${post.image})` }"
+            ></div>
           </a>
           <router-link v-else :to="postLink">
-            <div class="image" v-bind:style="{'background-image': `url(${post.image})`}"></div>
+            <div
+              class="teaser__image"
+              v-bind:style="{ 'background-image': `url(${post.image})` }"
+            ></div>
           </router-link>
         </b-col>
         <b-col lg="8">
           <b-card-body :title="post.title">
-            <div class="text-muted small card-text" v-html="$options.filters.marked(post.blurb)"></div>
+            <div
+              class="text-muted small card-text"
+              v-html="$options.filters.marked(post.blurb)"
+            ></div>
             <div class="link small">
-            <a v-if="post.link_to" :href="post.link_to">Preberi več</a>
-            <router-link v-else :to="postLink">Preberi več</router-link>
+              <a v-if="post.link_to" :href="post.link_to">Preberi več</a>
+              <router-link v-else :to="postLink">Preberi več</router-link>
             </div>
           </b-card-body>
         </b-col>
@@ -33,18 +42,35 @@ export default {
   computed: {
     postLink() {
       return {
-        name: 'post',
+        name: "post",
         params: {
-          postId: this.post.id
-        }
+          postId: this.post.id,
+        },
       };
     },
   },
 };
 </script>
 
-<style lang="sass" scoped>
-.post
+<style lang="sass">
+.teaser__post
+  .card
+    height: 100%
+    border-radius: 6px
+    border: none
+    box-shadow: $element-box-shadow
+
+    .row
+      align-items: stretch
+
+  .card-body
+    padding: 32px
+
+    @media only screen and (max-width: 768px)
+      padding: 26px
+
+    @media only screen and (max-width: 480px)
+      padding: 16px
 
   @media only screen and (max-width: 768px)
     padding-left: 7.5px
@@ -64,39 +90,8 @@ export default {
       padding: 0
       margin-right: 0
 
-.card
-  height: 100%
-  border-radius: 6px
-  border: none
-  box-shadow: $element-box-shadow
-
-  .row
-    align-items: stretch
-
-.image
-  margin: 8px
-  margin-right: 0
-  height: calc(100% - 16px)
-  background-size: cover
-  background-repeat: no-repeat
-  background-position: top left
-
-.card-body
-  padding: 32px
-
-  @media only screen and (max-width: 768px)
-    padding: 26px
-
-  @media only screen and (max-width: 480px)
-    padding: 16px
-
 .card-text
   margin-bottom: 4px
-
-</style>
-
-<style lang="sass">
-.card-text
   p
     display: none
 
@@ -108,4 +103,12 @@ export default {
     display: -webkit-box
     -webkit-line-clamp: 2
     -webkit-box-orient: vertical
+
+.teaser__image
+  margin-right: 0
+  height: 100%
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: top left
+
 </style>
