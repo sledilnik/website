@@ -58,6 +58,7 @@
     "remotedev": "^0.2.9",
     "sass": "^1.26.11",
     "sass-loader": "^8.0.2",
+    "vue-cli-plugin-webpack-bundle-analyzer": "~2.0.0",
     "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
