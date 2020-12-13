@@ -15,6 +15,7 @@ indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.htm
 console.log("Using template", indexTemplate)
 
 module.exports = {
+  productionSourceMap: process.env.NODE_ENV != 'production',
   publicPath: process.env.C19_PUBLIC_PATH || '/',
   outputDir: process.env.C19_OUTPUT_DIR || 'dist',
   devServer: {
