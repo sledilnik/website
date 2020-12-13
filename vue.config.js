@@ -43,6 +43,13 @@ module.exports = {
     }
   },
   chainWebpack: config => {
+    if (config.plugins.has('prefetch-index')) {
+      config.plugin('prefetch-index').tap(options => {
+          options[0].fileBlacklist = options.fileBlacklist || [];
+          options[0].fileBlacklist.push(/.*\.route\./);
+          return options;
+      });
+  }
     // Markdown Loader
     config.module
       .rule('md')

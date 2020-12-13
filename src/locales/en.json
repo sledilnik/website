@@ -9,6 +9,7 @@
         "world": "World",
         "ostanizdrav": "#OstaniZdrav",
         "data": "Data",
+        "posts": "Posts",
         "models": "Models",
         "animation": "Animation",
         "faq": "FAQ",
@@ -31,6 +32,10 @@
     "timestamp": {
         "updated": "Updated on {{ date, %A, %B %e, %Y }}",
         "at": "at {{ date, %H:%M }}"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min read"
     },
     "notice": {
         "newInfographics": "🆕 📇 New infographics:",

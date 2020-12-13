@@ -9,6 +9,7 @@
         "world": "Svet",
         "ostanizdrav": "#OstaniZdrav",
         "data": "Podatki",
+        "posts": "Objave",
         "models": "Modeli",
         "animation": "Animacija",
         "faq": "FAQ",
@@ -31,6 +32,10 @@
     "timestamp": {
         "updated": "Osveženo: {{ date, %A, %e. %B %Y }}",
         "at": "ob {{ date, %H.%M }}"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min"
     },
     "notice": {
         "newInfographics": "🆕 📇 Nova infografika:",
