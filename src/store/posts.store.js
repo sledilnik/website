@@ -15,9 +15,19 @@ const getters = {
   lastestTwoPosts(state, getters) {
     return _.take(getters.postsByDateDescending, 2);
   },
+  postById: (state) => (id) => {
+    if (!id || !state.posts) {
+      return;
+    }
+    return state.posts.find((post) => post && post.id.toString() === id);
+  },
 };
 
 const actions = {
+  async fetchPost({ commit }, id) {
+    const post = await contentApi.get(`/posts/${id}/`);
+    commit("FRESH_POSTS", [post]);
+  },
   async fetchLatestPosts({ dispatch }) {
     dispatch("fetchPosts", { limit: 2 }, { timeout: 900 });
   },

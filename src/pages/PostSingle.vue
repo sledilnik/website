@@ -23,21 +23,26 @@
 import _ from "lodash";
 import Loader from "components/Loader";
 import ReadingTime from "components/ReadingTime";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
     Loader,
     ReadingTime
   },
-  data() {
+  data(){
     return {
-      post: false,
-    };
+      postId: undefined
+    }
   },
   metaInfo() {
     //TODO
   },
   computed: {
+    ...mapGetters('posts', ['postById']),
+    post(){
+      return this.postById(this.postId)
+    },
     date() {
       return new Date(this.post.created);
     },
@@ -47,7 +52,8 @@ export default {
     if (!postId) {
       // 404
     }
-    this.post = await this.contentApi.get(`/posts/${postId}/`);
+    this.postId = postId
+    this.$store.dispatch('posts/fetchPost', postId)
   },
   methods: {
     goBack() {
