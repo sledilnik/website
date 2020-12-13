@@ -2,9 +2,12 @@
 # Intermediate builder image (used only for build, discarded in final stage)
 ########################################
 FROM ghcr.io/sledilnik/website-base AS builder
+
+ARG BUILD_MODE=production
+
 ADD . /app
 RUN yarn
-RUN NODE_ENV=production CADDY_BUILD=1 yarn build
+RUN CADDY_BUILD=1 yarn build --mode ${BUILD_MODE}
 
 ########################################
 # Actual webserver image
