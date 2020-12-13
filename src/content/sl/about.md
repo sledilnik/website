@@ -96,11 +96,13 @@ Sodelavci projekta:
 -   [Milo Ivir](https://hosted.weblate.org/user/milotype/) - prevodi
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
+-   [Nejc Davidović](https://twitter.com/NejcDavidovic) - tekstopisje, viri
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - skriptanje, statistika
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Sebastjan Cizel](https://sebastjancizel.github.io) - vizualizacije
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
+-   [Tanja Ambrožič]() - validacija podatkov
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje

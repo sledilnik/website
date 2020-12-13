@@ -12,9 +12,12 @@ let colors = {|
 |}
 
 let renderChartOptions (data : WeeklyDeathsData) =
+    let minYear = 2010 // used to filter out 2009 data tail
+
     let series =
         data
         |> List.groupBy (fun dp -> dp.Year)
+        |> List.filter (fun (year, _) -> year >= minYear)
         |> List.map (fun (year, data) ->
             let seriesData =
                 data
@@ -40,6 +43,17 @@ let renderChartOptions (data : WeeklyDeathsData) =
        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
        tooltip = {| formatter = fun () -> sprintf "%s<br>%s: <b>%d</b>" jsThis?series?name jsThis?key jsThis?y |} |> pojo
        series = series
+       responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                            |}
+                    |} |]
+            |}
        credits =
         {| enabled = true
            text = sprintf "%s: %s"

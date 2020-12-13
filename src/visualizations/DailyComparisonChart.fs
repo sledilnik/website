@@ -240,6 +240,18 @@ let renderChartOptions (state : State) dispatch =
                 href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
             |}
 
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                            |}
+                    |} |]
+            |}
+
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
         rangeSelector = pojo {| enabled = false |}
