@@ -40,7 +40,7 @@ jobs:
 
       - run: yarn
       - run: yarn lint
-      - run: yarn test
+      # - run: yarn test
       - run: yarn dotnet-restore
       - run: yarn test-fsharp
 
