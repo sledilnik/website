@@ -1,11 +1,11 @@
 <template>
   <div class="custom-container">
     <div class="static-page-wrapper posts-page">
-      <h1>{{ $t('navbar.posts') }}</h1>
-      <b-card-group deck v-if="posts">
-        <PostTeaser v-for="post in posts" :post="post" :key="post.id" />
+      <h1>{{ $t("navbar.posts") }}</h1>
+      <b-card-group deck v-if="postsByDateDescending && postsByDateDescending.length">
+        <PostTeaser v-for="post in postsByDateDescending" :post="post" :key="post.id" />
       </b-card-group>
-      <Loader v-else/>
+      <Loader v-else />
     </div>
   </div>
 </template>
@@ -13,29 +13,27 @@
 <script>
 import PostTeaser from "components/cards/PostTeaser";
 import Loader from "components/Loader";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
     PostTeaser,
-    Loader
+    Loader,
   },
   metaInfo() {
     //TODO
   },
-  data(){
-    return {
-      posts: false
-    }
+  created(){
+    this.$store.dispatch('posts/fetchAllPosts')
   },
-  async created() {
-    const { objects } = await this.contentApi.get("/posts/");
-    this.posts = objects;
+  computed: {
+    ...mapGetters("posts", ["postsByDateDescending"]),
   },
 };
 </script>
 
 <style scoped lang="sass">
-.post
+.teaser__post
   width: 100%
   margin-bottom: 30px
 
@@ -46,7 +44,6 @@ export default {
       margin-left: 0px
     &:last-child
       margin-right: 0px
-
 </style>
 
 <style lang="sass">

@@ -2,8 +2,8 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="posts d-flex" v-if="headerTeasers">
-          <PostTeaser class="col-md-6" v-for="post in headerTeasers" :post="post" :key="post.id" />
+      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
+          <PostTeaser class="col-md-6" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
       </div>
       <div class="posts d-flex" v-else>
           <PostTeaserSkeleton class="col-md-6" v-for="i in 2" :key="i" />
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import InfoCard from "components/cards/InfoCard";
 import PostTeaser from "components/cards/PostTeaser";
 import PostTeaserSkeleton from "components/cards/PostTeaserSkeleton";
@@ -123,7 +123,7 @@ export default {
     };
   },
   created(){
-    this.getPost()
+    this.$store.dispatch('posts/fetchLatestPosts')
   },
   mounted() {
     this.$nextTick(() => {
@@ -150,14 +150,11 @@ export default {
     ...mapState("stats", {
       exportTime: "exportTime",
     }),
+    ...mapGetters('posts', [
+      'lastestTwoPosts'
+    ])
   },
   methods: {
-    async getPost(){
-      const { objects } = await this.contentApi.get('/posts/?limit=2')
-      setTimeout(() => {
-          this.headerTeasers = objects
-      }, 2000)
-    },
     checkClick(e) {
       const dropdownAll = this.$el.querySelectorAll(".share-dropdown-wrapper");
 
