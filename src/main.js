@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import './filters'
 import './directives'
+import './store/fsharpInterop'
 
 // bootstrap
 Vue.use(LayoutPlugin)
