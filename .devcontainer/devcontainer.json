@@ -1,5 +1,5 @@
 {
-	"name": "F# (.NET Core)",
+	"name": "website",
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": { 
@@ -36,7 +36,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "dotnet restore && yarn install",
+	"postCreateCommand": "yarn install && yarn dotnet-restore",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
