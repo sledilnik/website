@@ -45,7 +45,7 @@ Workflow `.github/workflows/prod.yml` is responsible for deployment.
 
 ### Staging
 
-[Stagging environment](https://github.com/sledilnik/website/deployments/activity_log?environment=stagging) is deployed on every push to `master` (if tests pass and build is successful).
+[Staging environment](https://github.com/sledilnik/website/deployments/activity_log?environment=staging) is deployed on every push to `master` (if tests pass and build is successful).
 
 Workflow `.github/workflows/stage.yml` is responsible for deployment.
 
