@@ -83,7 +83,7 @@ let renderChartOptions (state : State) dispatch =
 
     let percentageFormatter value =
         let valueF = float value / 100.0
-        sprintf "%0.2f%%" valueF
+        sprintf "%0.0f%%" valueF
 
     let tooltipFormatter state jsThis =
         let category = jsThis?x
@@ -218,7 +218,7 @@ let renderChartOptions (state : State) dispatch =
 
         series = List.toArray allSeries
 
-        plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
+        plotOptions = pojo {| series = {| pointPadding = 0.0; groupPadding = 0.02 |} |}
 
         legend = pojo {| enabled = false |}
 
@@ -227,6 +227,18 @@ let renderChartOptions (state : State) dispatch =
                 formatter = fun () -> tooltipFormatter state jsThis
                 shared = true
                 useHTML = true
+            |}
+
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
+                            |}
+                    |} |]
             |}
 
         credits = pojo
