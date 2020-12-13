@@ -16,6 +16,7 @@
           series-type="state"
         />
 -->
+        <a href="#municipalities-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
@@ -23,6 +24,7 @@
           running-sum-field="cases.confirmedToday"
           series-type="state"
         />
+        </a>
         <!--  
         <Info-card
           :title="$t('infocard.recoveredToDate')"
@@ -31,6 +33,7 @@
           series-type="state"
         />
 -->
+        <a href="#municipalities-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.active')"
           field="cases.active"
@@ -40,6 +43,8 @@
           running-sum-field="cases.confirmedToday"
           series-type="state"
         />
+        </a>
+        <a href="#municipalities-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.newCases7d')"
           field="cases.active"
@@ -47,6 +52,8 @@
           running-sum-field="cases.confirmedToday"
           series-type="state"
         />
+        </a>
+        <a href="#patients-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.inHospital')"
           field="statePerTreatment.inHospital"
@@ -57,6 +64,8 @@
           running-sum-field="total.inHospital.in"
           series-type="state"
         />
+        </a>
+        <a href="#patients-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.icu')"
           field="statePerTreatment.inICU"
@@ -67,6 +76,8 @@
           running-sum-field="total.icu.in"
           series-type="state"
         />
+        </a>
+        <a href="#deceased-chart" @click="scrollTo">
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
@@ -74,6 +85,7 @@
           running-sum-field="statePerTreatment.deceased"
           series-type="state"
         />
+        </a>
       </div>
       <b-row cols="12">
         <b-col>
@@ -91,6 +103,7 @@
 </template>
 
 <script>
+import i18n from '@/i18n'
 import { mapState } from "vuex";
 import InfoCard from "components/cards/InfoCard";
 import TimeStamp from "components/TimeStamp";
@@ -172,6 +185,17 @@ export default {
         });
       });
     },
+    scrollTo() {
+      if (!this.$route.hash)
+        return
+      this.$scrollTo(
+        document.querySelector(this.$route.hash),
+        500,
+        {
+          offset: -90,
+        }
+      )
+    }
   },
   watch: {
     loaded: function () {
@@ -197,6 +221,10 @@ $loader-width: 50px
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 88px
+
+  a:hover
+    color: rgba(0, 0, 0, 0.8)
+    text-decoration: none
 
 .stats-page
   margin-top: 48px
