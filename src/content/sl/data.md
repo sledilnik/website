@@ -54,7 +54,12 @@ Izvorna kodo in več informacij o REST API-ju je na voljo na [GitHub](https://gi
 
 ## Google Docs preglednica
 
+Izvirna Google Docs preglednica, ki jo je začel sestavljati Luka Renko 11.3.2020, je še vedno dostopna na prvotni povezavi:
+
 - [https://tinyurl.com/sledilnik-gdocs](https://tinyurl.com/sledilnik-gdocs)
+
+Zaradi obsežnosti in tehničnih omejitev smo jo 11.12.2020 prenehali osveževati, podatke pa migrirali in prilagodili novim potrebam.
+
 
 ## Ukrepi in omejitve
 

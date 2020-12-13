@@ -1,4 +1,4 @@
-name: Build and deploy (stagging)
+name: Build and deploy (staging)
 
 on:
   push:
@@ -9,7 +9,7 @@ env:
   RELEASE_NAME: website
   CHART_VALUES_FILE: .helm/values.stage.yml
   DEPLOY_NAMESPACE: sledilnik-stage
-  DEPLOY_ENV: stagging
+  DEPLOY_ENV: staging
   DEPLOY_URL: https://stage.sledilnik.org
 
 jobs:
@@ -70,6 +70,8 @@ jobs:
           file: ./Dockerfile
           tags: |
             ghcr.io/${{ github.repository_owner }}/website:latest
+          build-args: |
+            BUILD_MODE=staging
 
   deploy:
     runs-on: ubuntu-20.04

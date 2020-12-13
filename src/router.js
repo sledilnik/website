@@ -191,37 +191,37 @@ const routes = [
       {
         path: 'ostanizdrav',
         name: 'ostanizdrav',
-        component: () => import('./pages/OstaniZdravPage.vue'),
+        component: () => import(/* webpackChunkName: "OstaniZdrav.route" */ './pages/OstaniZdravPage.vue'),
       },
       {
         path: 'world',
         name: 'world',
-        component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
+        component: () => import(/* webpackChunkName: "World.route" */ './pages/WorldStatsPage.vue'),
       },
       {
         path: 'tables',
         name: 'tables',
-        component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
+        component: () => import(/* webpackChunkName: "Tables.route" */ './pages/TablesPage.vue'),
       },
       {
         path: 'embed',
         name: 'embed',
-        component: () => import('./pages/EmbedMakerPage.vue'),
+        component: () => import(/* webpackChunkName: "Embed.route" */ './pages/EmbedMakerPage.vue'),
       },
       {
         path: 'restrictions',
         name: 'restrictions',
-        component: () => import('./pages/RestrictionsPage.vue'),
+        component: () => import(/* webpackChunkName: "Restrictions.route" */ './pages/RestrictionsPage.vue'),
       },
       {
         path: 'posts',
         name: 'posts',
-        component: () => import('./pages/PostsPage.vue'),
+        component: () => import(/* webpackChunkName: "Posts.route" */ './pages/PostsPage.vue'),
       },
       {
         path: 'posts/:postId',
         name: 'post',
-        component: () => import('./pages/PostSingle.vue'),
+        component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
       },
       {
         path: 'links', // Retired page

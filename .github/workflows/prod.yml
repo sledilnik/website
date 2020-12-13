@@ -56,6 +56,8 @@ jobs:
           file: ./Dockerfile
           tags: |
             ghcr.io/${{ github.repository_owner }}/website:${{ env.IMAGE_TAG}}
+          build-args: |
+            BUILD_MODE=production
 
   deploy:
     runs-on: ubuntu-20.04

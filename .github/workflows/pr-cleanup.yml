@@ -10,9 +10,25 @@ env:
   DEPLOY_ENV: pr-${{ github.event.pull_request.number }}
 
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Check if PR is labeled
+        id: label
+        run: echo ::set-output name=has_label::${{ contains(github.event.pull_request.labels.*.name, 'deploy-preview') }}
+
+      - name: Check if PR is deployed
+      - id: http
+        run: echo ::set-output name=status_code::$(curl -o /dev/null -s -k -w "%{http_code}\n" https://pr-${{ github.event.pull_request.number }}.preview.sledilnik.org)
+    outputs:
+      status_code: ${{ steps.http.outputs.status_code }}
+      has_label: ${{ steps.label.outputs.has_label }}
+
   undeploy:
-    if: "github.event.action == 'closed' || !contains(github.event.pull_request.labels.*.name, 'deploy-preview')"
     runs-on: ubuntu-20.04
+    needs: [check]
+    if: "needs.check.status_code != '404' && (github.event.action == 'closed' || !has_label)"
     steps:
       - name: Debug
         uses: hmarr/debug-action@v1.0.0

@@ -603,6 +603,14 @@
         "gatherings2": {
             "description": "Divieto di ritrovo in luoghi pubblici (ad eccezione dei familiari stretti)",
             "title": "Assembramento"
+        },
+        "alcoDrinks": {
+            "description": "Divieto di vendita di alcol e bevande alcoliche per asporto negli esercizi pubblici .",
+            "title": "Alcol"
+        },
+        "planRelaxation": {
+            "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
+            "title": "Piano"
         }
     },
     "tableDict": {
@@ -798,7 +806,8 @@
             "allTesting": "Tutti",
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
-            "byLab": "Per laboratorio: test"
+            "byLab": "Per laboratorio: test",
+            "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio."
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -1195,7 +1204,9 @@
         "orangePhaseGenitive": "arancione",
         "orangePhase": "Fase arancione",
         "per100k": "per 100k",
-        "incidence": "Incidenza a 14 giorni"
+        "incidence": "Incidenza a 14 giorni",
+        "newCases7dInfo": "media degli ultimi 7 giorni",
+        "newCases7d": "Casi nuovi"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",

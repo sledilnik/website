@@ -25,9 +25,6 @@
 </template>
 
 <script>
-import embed from "vega-embed";
-import vega from "vega";
-
 import opts from "@/vega/opts";
 
 export default {
@@ -60,12 +57,17 @@ export default {
     },
   },
   async mounted() {
-    embed(document.getElementById(this.visualizationId), this.data, opts);
+    import('vega-embed').then(embed => {
+      embed.default(document.getElementById(this.visualizationId), this.data, opts);
+    })
   },
   methods: {
     toCamel(s) {
       return s.replace(/([-_][a-z])/gi, ($1) => {
-        return $1.toUpperCase().replace("-", "").replace("_", "");
+        return $1
+          .toUpperCase()
+          .replace("-", "")
+          .replace("_", "");
       });
     },
     smoothScroll(e) {

@@ -526,8 +526,9 @@
             "ns-apr20": "Istraživanje",
             "allTesting": "Sve",
             "titleMenu": "Testiranje",
-            "byLabPercent": "Po laboratoriju: % pozitivno",
-            "byLab": "Po laboratoriju: Testiranja"
+            "byLabPercent": "Po laboratorijima: % pozitivno",
+            "byLab": "Po laboratorijima: Testiranja",
+            "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima."
         },
         "infections": {
             "rhStaff": "Osoblje staračkih domova",
@@ -955,6 +956,14 @@
         "liftLibraries": {
             "title": "Knjižnice",
             "description": "Opuštanje: knjižnice, servisne radionice, usluge gradnje i održavanja, …"
+        },
+        "alcoDrinks": {
+            "description": "Zabrana alkohola i alkoholnih pića u restoranima brze hrane i sl.",
+            "title": "Alkohol"
+        },
+        "planRelaxation": {
+            "description": "Vlada je prihvatila plan ublažavanja mjera u pet faza.",
+            "title": "Plan"
         }
     },
     "pageNotFound": {
@@ -1157,7 +1166,9 @@
         "per100k": "po 100 tisuća",
         "nextCriteria": "<br>Kriteriji za paket {{ phaseNextNumber }} {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
         "redPhaseGenitive": "crvene",
-        "orangePhaseGenitive": "narančaste"
+        "orangePhaseGenitive": "narančaste",
+        "newCases7dInfo": "prosjek zadnjih 7 dana",
+        "newCases7d": "Novi slučajevi"
     },
     "region": {
         "za": "Zasavlje",
