@@ -286,7 +286,7 @@
             "statusNone": "-",
             "countryStatus": "Kufizimet",
             "importedCases": "Rastet e importuara për 14 ditë",
-            "incidence100k": "Raste të reja për 14 ditë në 100.000",
+            "incidence100k": "Raste të reja për 14 ditë për 100.000 banorë",
             "noData": "Nuk ka të dhëna",
             "newCases": "Raste të reja",
             "weeklyIncrease": "Rritja javore",
@@ -312,9 +312,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "kriteret për listën e kuqe",
-            "legendTitle": "Rastet aktive për 100.000 popullsi",
-            "yAxisTitle": "Rastet aktive për 100.000 popullsi",
-            "title": "Shtetet: Rastet aktive për 100.000 popullsi",
+            "legendTitle": "Rastet aktive për 100.000 banorë",
+            "yAxisTitle": "Rastet aktive për 100.000 banorë",
+            "title": "Shtetet: Rastet aktive për 100.000 banorë",
             "titleMenu": "Shtetet - rastet aktive"
         },
         "world": {
