@@ -4,7 +4,6 @@ import { setupCache } from "axios-cache-adapter";
 const FIFTEEN_MINUTES = 15 * 60 * 1000;
 const defaultCache = setupCache({
   maxAge: FIFTEEN_MINUTES,
-  debug: true,
   exclude: {
     query: false
   }
