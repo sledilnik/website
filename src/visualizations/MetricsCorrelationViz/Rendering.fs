@@ -32,9 +32,9 @@ type DayValueFloat = JsTimestamp*float
 module Metrics  =
     let all = [
         { Metric=Cases; Color="#bda506";Id="cases"; YAxisIndex = 0 }
-        { Metric=Hospitalized; Color="#76CAFE"
+        { Metric=Hospitalized; Color="#D96756"
           Id="hospitalized"; YAxisIndex = 1 }
-        { Metric=Deceased; Color="red"; Id="deceased"; YAxisIndex = 2 }
+        { Metric=Deceased; Color="#8C71A8"; Id="deceased"; YAxisIndex = 2 }
     ]
 
 type ValueTypes = RunningTotals | MovingAverages

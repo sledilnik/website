@@ -861,8 +861,8 @@
             "otherPersons": "Ostale osebe"
         },
         "metricsCorrelation": {
-            "title": "Soodvisnost okužb, hospitaliziranih in umrlih",
-            "titleMenu": "Soodvisnost okužb, hospitaliziranih in umrlih",
+            "title": "Soodvisnost primerov, hospitaliziranih in umrlih",
+            "titleMenu": "Soodvisnost primerov, hospitaliziranih in umrlih",
             "averageByDay": "Po dnevih (7-dnevno povprečje)",
             "all": "Skupaj",
             "cases": "Potrjeni primeri",
