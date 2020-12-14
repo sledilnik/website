@@ -58,6 +58,7 @@
         <Compile Include="RegionsChartViz\Analysis.fs" />
         <Compile Include="RegionsChartViz\Synthesis.fs" />
         <Compile Include="RegionsChartViz\Rendering.fs" />
+        <Compile Include="MetricsCorrelationViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

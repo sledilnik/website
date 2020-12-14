@@ -390,6 +390,15 @@
             "allConfirmed": "All Confirmed",
             "otherPersons": "Other Persons"
         },
+        "metricsCorrelation": {
+            "title": "Correlation between cases, hospitalized and deceased",
+            "titleMenu": "Correlation between cases, hospitalized and deceased",
+            "averageByDay": "By Day (average)",
+            "all": "Total",
+            "cases": "Confirmed cases",
+            "hospitalized": "Hospitalized",
+            "deceased": "Deceased"
+        },
         "spread": {
             "title": "Growth of Confirmed Cases",
             "titleMenu": "Growth",
