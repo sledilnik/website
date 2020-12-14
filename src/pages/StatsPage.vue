@@ -2,13 +2,14 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <b-row cols="12">
-        <b-col>
-          <Notice />
-        </b-col>
-      </b-row>
+      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
+          <PostTeaser class="col-md-6" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
+      </div>
+      <div class="posts d-flex" v-else>
+          <PostTeaserSkeleton class="col-md-6" v-for="i in 2" :key="i" />
+      </div>
       <div class="cards-wrapper">
-        <!--  
+        <!--
         <Info-card
           :title="$t('infocard.tests')"
           field="tests.performed.today"
@@ -20,9 +21,10 @@
           :title="$t('infocard.confirmedToDate')"
           field="cases.confirmedToDate"
           name="cases.confirmedToDate"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
-        <!--  
+        <!--
         <Info-card
           :title="$t('infocard.recoveredToDate')"
           field="cases.recoveredToDate"
@@ -36,12 +38,14 @@
           field-new-cases="cases.confirmedToday"
           field-deceased="statePerTreatment.deceased"
           name="cases.active"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
         <Info-card
-          :title="$t('infocard.incidence')"
+          :title="$t('infocard.newCases7d')"
           field="cases.active"
-          name="incidence"
+          name="newCases7d"
+          running-sum-field="cases.confirmedToday"
           series-type="state"
         />
         <Info-card
@@ -51,6 +55,7 @@
           total-out="total.inHospital.out"
           total-deceased="total.deceased.hospital.today"
           name="statePerTreatment.inHospital"
+          running-sum-field="total.inHospital.in"
           series-type="state"
         />
         <Info-card
@@ -60,52 +65,53 @@
           total-out="total.icu.out"
           total-deceased="total.deceased.hospital.icu.today"
           name="statePerTreatment.inICU"
+          running-sum-field="total.icu.in"
           series-type="state"
         />
         <Info-card
           :title="$t('infocard.deceasedToDate')"
           field="statePerTreatment.deceasedToDate"
           name="statePerTreatment.deceasedToDate"
+          running-sum-field="statePerTreatment.deceased"
           series-type="state"
         />
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="R_VftBj375I"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
-        </b-col>
-      </b-row>
-      <!-- <b-row cols="12">
-        <b-col>
           <Youtube id="R_VftBj375I"></Youtube>
         </b-col>
-      </b-row> -->
+      </b-row>
     </b-container>
     <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import InfoCard from "components/cards/InfoCard";
+import PostTeaser from "components/cards/PostTeaser";
+import PostTeaserSkeleton from "components/cards/PostTeaserSkeleton";
 import TimeStamp from "components/TimeStamp";
 import Notice from "components/Notice";
+import Posts from "components/Posts";
 import Youtube from "components/Youtube";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
-import { ApiEndpoint } from "@/store/index.js";
 import chartsFloatMenu from "components/floatingMenuDict";
+import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {
   name: "StatsPage",
   components: {
     InfoCard,
     TimeStamp,
-    Notice,
+    PostTeaser,
+    PostTeaserSkeleton,
     Youtube,
     FloatingMenu,
   },
@@ -113,7 +119,11 @@ export default {
     return {
       loaded: false,
       charts: [],
+      headerTeasers: false
     };
+  },
+  created(){
+    this.$store.dispatch('posts/fetchLatestPosts')
   },
   mounted() {
     this.$nextTick(() => {
@@ -122,7 +132,7 @@ export default {
         "visualizations",
         "local",
         this.$route.query,
-        ApiEndpoint()
+        API_ENDPOINT_BASE
       );
     });
 
@@ -140,6 +150,9 @@ export default {
     ...mapState("stats", {
       exportTime: "exportTime",
     }),
+    ...mapGetters('posts', [
+      'lastestTwoPosts'
+    ])
   },
   methods: {
     checkClick(e) {
@@ -184,13 +197,22 @@ export default {
 
 $loader-width: 50px
 
+.posts
+  margin: 0px auto 44px
+  min-height: 163px
+  @media only screen and (min-width: 768px)
+    margin: 0px auto 88px
+  @media only screen and (max-width: 480px)
+    flex-direction: column
+    min-height: 247px
+
 .cards-wrapper
   display: flex
   flex-wrap: wrap
   display: grid
   gap: 15px
   grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
-  margin: 0px auto 58px
+  margin: 0px auto 44px
 
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))

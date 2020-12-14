@@ -23,13 +23,38 @@ This software is licensed under [GNU Affero General Public License](LICENSE).
 
 ## Deployment
 
-https://travis-ci.com/github/sledilnik/website
+Overview of current [deployments](https://github.com/overlordtm/website/deployments)
 
-Every push to `master` is automatically deployed (if build successful) to https://covid-19.sledilnik.org
+Deployment is done using GitHub actions in `.github/workflows`
 
-## Preview deployment
+| file | about |
+| ---- | ----- |
+| prod.yml | Deploy producition when GitHub release is created |
+| stage.yml | Deploy staging on every commit pushed to `master` |
+| pr.yml | Deploy PRs with label `deploy-peview` |
+| pr-cleanup.yml | Undeploy PRs when label is removed or PR closed |
 
-Create PR from a branch (in this repo, not fork) to master. Label PR with label `deploy-preview` and wait few minutes. Deployment should be available at https://pr-NUM.sledilnik.org where NUM is number of your PR.
+Actions consist mostly of 3 jobs, `test`, `build` and `deploy`. Each job depends on previous job (`needs` keyword in action's YAML).
+When deploy job finishes, it also sends Slack notification to #devops chanel, and adds comment on PR (if PR build)
+
+### Production
+
+[Production environment](https://github.com/sledilnik/website/deployments/activity_log?environment=production) is deployed every time a new GitHub release is created.
+
+Workflow `.github/workflows/prod.yml` is responsible for deployment.
+
+### Staging
+
+[Staging environment](https://github.com/sledilnik/website/deployments/activity_log?environment=staging) is deployed on every push to `master` (if tests pass and build is successful).
+
+Workflow `.github/workflows/stage.yml` is responsible for deployment.
+
+Use `NOBUILD` keyworkd in commit message to skip build (and deploy) for this commit (tests will still be ran). Use `NODEPLOY` keyworkd in commit message to skip deploy for this commit (image will still be build and pushed). 
+
+
+### Preview deployment (pull requests)
+
+Create PR from a branch (in this repo, not fork) to master. Label PR with label `deploy-preview` and wait few minutes. Deployment should be available at https://pr-NUM.preview.sledilnik.org where NUM is number of your PR.
 
 Only open PR with label `deploy-preview` are deployed. When PR is closed or label removed, deployment is stopped.
 

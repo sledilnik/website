@@ -1,0 +1,118 @@
+name: Build and deploy (staging)
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  RELEASE_NAME: website
+  CHART_VALUES_FILE: .helm/values.stage.yml
+  DEPLOY_NAMESPACE: sledilnik-stage
+  DEPLOY_ENV: staging
+  DEPLOY_URL: https://stage.sledilnik.org
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Debug
+        uses: hmarr/debug-action@v1.0.0
+
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn config get cacheFolder)"
+
+      - uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - run: yarn
+      - run: yarn lint
+      # - run: yarn test
+      - run: yarn dotnet-restore
+      - run: yarn test-fsharp
+
+  build:
+    runs-on: ubuntu-20.04
+    needs: test
+    if: "!contains(github.event.head_commit.message, 'NOBUILD')"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+      
+      - name: Build and push docker container image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: .
+          file: ./Dockerfile
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/website:latest
+          build-args: |
+            BUILD_MODE=staging
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: build
+    if: "!contains(github.event.head_commit.message, 'NODEPLOY')"
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Deploy
+        uses: sledilnik/action-helm-deploy@v1
+        with:
+          chartName: sledilnik/website
+          chartVersion: '1.0.0'
+          kubeconfig: '${{ secrets.KUBECONFIG }}'
+
+      - name: Slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          icon_url: 'https;//github.com/sledilnik.png?size=32'
+          author_name: 'Deploy bot'
+          status: custom
+          fields: repo,workflow,job
+          custom_payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Staging deploy finished with status: ${{ job.status }}"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "URL: ${{ env.DEPLOY_URL }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}

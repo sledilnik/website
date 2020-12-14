@@ -74,6 +74,7 @@ let totalVsWeekChartOptions state =
                title = pojo {| text = i18n "totalVsWeek.yAxisTitle" |}
                min = 1
                max = (state.DisplayData |> Array.maxBy (fun dp -> dp.y)).y
+               plotLines = [| |]
             |}
 
         tooltip = pojo
@@ -113,10 +114,10 @@ let weekVsWeekBeforeOptions state =
             |}
 
         yAxis = pojo
-            {| ``type`` = "linear"
+            {| ``type`` = "logarithmic"
                title = pojo {| text = i18n "weekVsWeekBefore.yAxisTitle" |}
-               min = 0
                max = (state.DisplayData |> Array.maxBy (fun dp -> dp.y)).y
+               plotLines = [| {| color = "#e03030" ; value = 100 ; width = 2 ; dashStyle = "LongDash" |} |> pojo |]
             |}
 
         tooltip = pojo

@@ -561,7 +561,8 @@
             "negativeTests": "Negative Tests",
             "titleMenu": "Testung",
             "byLabPercent": "Nach Labor: % positiv",
-            "byLab": "Nach Labor: Tests"
+            "byLab": "Nach Labor: Tests",
+            "disclaimer": "Hinweis: Ab dem 3. Dezember erhalten wir keine Daten einzelner Laboratorien."
         },
         "regions": {
             "activeCases": "Aktive Fälle",
@@ -1011,6 +1012,14 @@
         "gatherings2": {
             "description": "Verbot von Versammlungen im öffentlichen Raum (außer nahe Familienangehörige)",
             "title": "Versammlungen"
+        },
+        "alcoDrinks": {
+            "description": "Verbot von Alkohol und alkoholischen Getränken in Take-away-Restaurants und ähnlichen Einrichtungen.",
+            "title": "Alkohol"
+        },
+        "planRelaxation": {
+            "description": "Die Regierung hat den Plan der Lockerung der Maßnahmen in fünf Phasen akzeptiert.",
+            "title": "Plan"
         }
     },
     "region": {
@@ -1049,7 +1058,9 @@
         "package1": "Paket 1",
         "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
         "redPhaseGenitive": "roten",
-        "orangePhaseGenitive": "orangenen"
+        "orangePhaseGenitive": "orangenen",
+        "newCases7dInfo": "Durchschnitt der letzten 7 Tage",
+        "newCases7d": "Neue Fälle"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",

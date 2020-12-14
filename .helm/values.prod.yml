@@ -1,0 +1,5 @@
+---
+ingressroute:
+  enabled: false
+
+fullnameOverride: website

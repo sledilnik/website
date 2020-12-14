@@ -3,17 +3,18 @@
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
-        <span v-if="showIncidence">{{
-          Math.round(renderValues.lastDay.value / incidence)
-        }}</span>
+        <span v-if="showRunningSum">{{ renderRunningSum }}</span>
         <span v-else>{{ renderValues.lastDay.value }}</span>
-        <div class="card-percentage-diff" :class="diffClass">
+        <div v-if="showRunningSum" class="card-percentage-diff" :class="diffClass">
+          {{ renderRunningSumDiff | prefixDiff }}%
+        </div>
+        <div v-else class="card-percentage-diff" :class="diffClass">
           {{ renderValues.lastDay.percentDiff | prefixDiff }}%
         </div>
       </div>
       <div :id="name" class="card-diff">
-        <div v-if="showIncidence">
-          <span class="card-note">{{ $t('infocard.per100k') }} </span>
+        <div v-if="showRunningSum">
+          <span class="card-note">{{ $t('infocard.newCases7dInfo') }}</span>
         </div>
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
@@ -47,7 +48,7 @@
           </span>
         </div>
       </div>
-      <div class="data-time" :class="(new Date()-1000*3600*48)>renderValues.lastDay.displayDate? 'outdated':''">
+      <div class="data-time" :class="(new Date()-1000*3600*60)>renderValues.lastDay.displayDate? 'outdated':''">
         {{
           $t('infocard.lastUpdated', {
             date: new Date(renderValues.lastDay.displayDate),
@@ -78,14 +79,15 @@ export default {
       default: 'down',
     },
     name: String,
+    runningSumField: String,
     seriesType: {
       type: String,
       default: 'cum',
     },
   },
   computed: {
-    ...mapGetters('stats', ['lastChange']),
-    ...mapGetters('patients', { patients: 'data' }),
+    ...mapGetters('stats', ['lastChange', 'runningSum']),
+    ...mapGetters('patients', { patients: 'data', runningSumPatients: 'runningSumPatients' }),
     ...mapState('stats', ['exportTime', 'loaded']),
     incidence() {
       switch (localStorage.getItem('contextCountry')) {
@@ -178,14 +180,14 @@ export default {
       )
     },
     showIn() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
       }
       return this.totalIn && this.renderTotalValues(this.totalIn) > 0
     },
     showOut() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return (
           this.renderActiveValues(this.fieldNewCases).lastDay.value -
@@ -197,7 +199,7 @@ export default {
       return this.totalOut && this.renderTotalValues(this.totalOut) > 0
     },
     showDeceased() {
-      if (this.showIncidence) return false
+      if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
         return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
       }
@@ -205,12 +207,22 @@ export default {
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
       )
     },
-    showIncidence() {
-      if (this.name === 'incidence') {
+    showRunningSum() {
+      if (this.name === 'newCases7d') {
         return true
       }
       return false
     },
+    renderRunningSum() {
+      return this.runningSum(0, 7, this.runningSumField).toFixed(1)
+    },
+    renderRunningSumDiff() {
+      const today = this.runningSum(0, 7, this.runningSumField)
+      const yesterday = this.runningSum(1, 8, this.runningSumField)
+      const diff = today - yesterday
+
+      return Math.round((diff / yesterday) * 1000) / 10
+    }
   },
   methods: {
     renderTotalValues(value) {
@@ -253,6 +265,7 @@ export default {
   padding: 16px;
   background: #fff;
   box-shadow: $element-box-shadow;
+  border-radius: 6px;
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
@@ -305,6 +318,11 @@ export default {
 
 .card-note {
   font-size: 12px;
+}
+
+.card-average {
+  font-size: 12px;
+  margin-bottom: 4px;
 }
 
 .trend-icon {

@@ -1,7 +1,7 @@
 // rest of SASS
-@import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import 'node_modules/bootstrap-vue/src/index.scss';
-@import 'typography.sass';
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "node_modules/bootstrap-vue/src/index.scss";
+@import "typography.sass";
 
 // common styles form main page (index) and embedded version (embed)
 
@@ -36,12 +36,17 @@ body {
 }
 
 .tooltip {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
   font-size: 12px;
   .arrow:before {
     border-top-color: #2a2a2a;
   }
   .tooltip-inner {
     background-color: #2a2a2a;
+  }
+}
+.notice {
+  p {
+    margin-bottom: 0;
   }
 }

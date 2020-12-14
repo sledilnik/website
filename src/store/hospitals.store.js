@@ -1,9 +1,9 @@
 import {
   exportTime,
-  ApiEndpoint
 } from './index'
 import hospitalsJSON from '../services/dict.hospitals.json'
 import ApiService from '../services/api.service'
+const dataApi = new ApiService({})
 
 const state = {
   loaded: false,
@@ -60,7 +60,7 @@ const actions = {
   fetchData: async ({
     commit
   }) => {
-    const data = await ApiService.get(`${ApiEndpoint()}/api/hospitals`)
+    const data = await dataApi.get('/api/hospitals')
     const d = exportTime(data.headers.timestamp)
 
     let hospitals = {}

@@ -58,8 +58,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("stats/refreshDataEvery", 300)
-    this.$store.dispatch("patients/refreshDataEvery", 300)
+    this.$store.dispatch("stats/refreshDataEvery", 900)
+    this.$store.dispatch("patients/refreshDataEvery", 900)
     
     if (this.$route.hash) {
       const checker = setInterval(() => {

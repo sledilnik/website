@@ -1,13 +1,16 @@
 ########################################
-# builder image
+# Intermediate builder image (used only for build, discarded in final stage)
 ########################################
-FROM docker.pkg.github.com/sledilnik/docker-base/web-base:latest AS builder
+FROM ghcr.io/sledilnik/website-base AS builder
+
+ARG BUILD_MODE=production
+
 ADD . /app
 RUN yarn
-RUN NODE_ENV=production CADDY_BUILD=1 yarn build
+RUN CADDY_BUILD=1 yarn build --mode ${BUILD_MODE}
 
 ########################################
-# webserver image
+# Actual webserver image
 ########################################
 FROM caddy:2.2.1-alpine
 

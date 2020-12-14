@@ -26,10 +26,6 @@ with
         | AbsoluteDeaths -> I18N.t "charts.excessDeaths.absolute.title"
         | ExcessDeaths -> I18N.t "charts.excessDeaths.excess.title"
 
-    static member getColor = function
-        | AbsoluteDeaths -> "gray"
-        | ExcessDeaths -> "hotpink"
-
 type State = {
     StatsData : StatsData
     WeeklyDeathsData : RemoteData<WeeklyDeathsData, string>

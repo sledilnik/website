@@ -146,6 +146,8 @@ let addContainmentMeasuresFlags
         6, 11, "#ebfaeb", "liftShops"
         13,11, "#FFe6e6", "gatherings2"
         16,11, "#FFe6e6", "services"
+        3, 12, "#FFFFFF", "planRelaxation"
+        7, 12, "#FFe6e6", "alcoDrinks"
     |]
     {|
         ``type`` = "flags"

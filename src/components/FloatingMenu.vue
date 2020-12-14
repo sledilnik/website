@@ -101,7 +101,7 @@ export default {
 
 <style lang="scss">
 @mixin nav-break {
-  @media only screen and (min-width: 850px) {
+  @media only screen and (min-width: 900px) {
     @content;
   }
 }

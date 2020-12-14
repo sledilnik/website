@@ -1,7 +1,9 @@
 import _ from 'lodash'
-import { exportTime, ApiEndpoint } from './index'
+import { exportTime } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
+
+const dataApi = new ApiService({})
 
 export function lastChange(data, field, cumulative, date) {
   const result = {
@@ -176,13 +178,31 @@ const getters = {
   lastChange: (state, getters) => (field, cumulative, date) => {
     return lastChange(getters.data, field, cumulative, date)
   },
+
+  runningSum: (state, getters) => (start, end, field) => {
+    let array = getters.data.slice(
+      getters.data.length - end - 1,
+      getters.data.length - start - 1
+    )
+
+    // if /patients is published before /stats, we need to go one more day in the past
+    if (!_.get(array[end - start - 1], field)) {
+      array = getters.data.slice(
+        getters.data.length - end - 2,
+        getters.data.length - start - 2
+      )
+    }
+    let sum = array.reduce((total, num) => total + _.get(num, field), 0)
+    let x = end - start
+    return sum / x
+  },
 }
 
 const actions = {
-  fetchData: async ({ commit }, to) => {
+  fetchData: async function({ commit }, to) {
     const tempDate = typeof to === 'undefined' ? new Date() : new Date(to)
-    const from = new Date(tempDate.setDate(tempDate.getDate() - 4))
-    const data = await ApiService.get(`${ApiEndpoint()}/api/stats`, {params: {from, to}})
+    const from = new Date(tempDate.setDate(tempDate.getDate() - 11))
+    const data = await dataApi.get('/api/stats', {params: {from, to}})
     const d =
       typeof to === 'undefined' ? exportTime(data.headers.timestamp) : to
 

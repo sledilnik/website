@@ -231,7 +231,13 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
             Explicit = false
-            Renderer = fun _ -> lazyView TestsChart.testsChart () }
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView TestsChart.testsChart {| data = data |} }
 
     let hCenters =
           { VisualizationType = HCenters
@@ -501,7 +507,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> ExcessDeathsChart.Chart.chart {| statsData = data |} }
+                    | Success data -> ExcessDeathsChart.Main.chart {| statsData = data |} }
 
     let metricsCorrelation =
           { VisualizationType = MetricsCorrelation

@@ -1,4 +1,4 @@
-module ExcessDeathsChart.Chart
+module ExcessDeathsChart.Main
 
 open Feliz
 open Browser

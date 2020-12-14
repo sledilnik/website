@@ -1,8 +1,6 @@
 import _ from 'lodash'
-import { exportTime, ApiEndpoint } from './index'
 import ApiService from '../services/api.service'
-import regions from '../services/dict.regions.json'
-import axios from 'axios'
+const dataApi = new ApiService({ baseURL: 'https://ostanizdrav.sledilnik.org' })
 
 const state = {
   exportTime: null,
@@ -14,7 +12,7 @@ const getters = {
 
 const actions = {
   fetchData: async ({ commit }, to) => {
-    const resp = await ApiService.get('https://ostanizdrav.sledilnik.org/plots/timestamp.json')
+    const resp = await dataApi.get('/plots/timestamp.json')
     commit('setExportTime', new Date(resp.data.unix * 1000))
   },
   refreshDataEvery: ({ dispatch }, seconds) => {
