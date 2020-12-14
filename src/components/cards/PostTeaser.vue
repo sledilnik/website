@@ -19,7 +19,7 @@
         <b-col lg="8">
           <b-card-body :title="post.title">
             <div
-              class="text-muted small card-text"
+              class="text-muted card-text"
               v-html="$options.filters.marked(post.blurb)"
             ></div>
             <div class="link small">
@@ -54,6 +54,10 @@ export default {
 
 <style lang="sass">
 .teaser__post
+  .card-title
+    font-size: 18px
+    line-height: 24px
+
   .card
     height: 100%
     border-radius: 6px
@@ -91,6 +95,7 @@ export default {
       margin-right: 0
 
 .card-text
+  font-size: 14px
   margin-bottom: 4px
   p
     display: none

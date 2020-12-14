@@ -39,7 +39,7 @@
 }
 p.skeleton {
   border-radius: 15px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   height: 20px;
 }
 @keyframes loading {

@@ -199,7 +199,7 @@ $loader-width: 50px
 
 .posts
   margin: 0px auto 44px
-  min-height: 163px
+  min-height: 179px
   @media only screen and (min-width: 768px)
     margin: 0px auto 88px
   @media only screen and (max-width: 480px)
