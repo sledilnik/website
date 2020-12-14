@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import ApiService from '../services/api.service'
-const dataApi = new ApiService('https://ostanizdrav.sledilnik.org')
+const dataApi = new ApiService({ baseURL: 'https://ostanizdrav.sledilnik.org' })
 
 const state = {
   exportTime: null,
