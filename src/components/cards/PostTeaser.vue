@@ -54,6 +54,8 @@ export default {
 
 <style lang="sass">
 .teaser__post
+  .card-title
+    font-size: 18px
   .card
     height: 100%
     border-radius: 6px
@@ -91,6 +93,7 @@ export default {
       margin-right: 0
 
 .card-text
+  font-size: 14px
   margin-bottom: 4px
   p
     display: none
