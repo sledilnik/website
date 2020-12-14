@@ -3,6 +3,6 @@ ingressroute:
   enabled: true
   tls:
     certResolver: letsencrypt
-    main: "stage.sledilnik.org"
+    main: preview.sledilnik.org
     sans:
       - "*.preview.sledilnik.org"
