@@ -1,7 +1,5 @@
 ---
 ingressroute:
-  enabled: true
-  rule: Host(`sledilnik.org`) || Host(`www.sledilnik.org`) || Host(`covid-19.sledilnik.org`) || Host(`www.covid-19.sledilnik.org`)
-  certResolver: letsencrypt
+  enabled: false
 
 fullnameOverride: website

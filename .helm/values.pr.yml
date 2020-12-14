@@ -1,4 +1,8 @@
 ---
 ingressroute:
   enabled: true
-  certResolver: letsencrypt
+  tls:
+    certResolver: letsencrypt
+    main: "stage.sledilnik.org"
+    sans:
+      - "*.preview.sledilnik.org"

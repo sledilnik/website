@@ -70,7 +70,7 @@ jobs:
         uses: sledilnik/action-helm-deploy@v1
         with:
           chartName: sledilnik/website
-          chartVersion: '0.9.0'
+          chartVersion: '1.0.0'
           kubeconfig: '${{ secrets.KUBECONFIG }}'
 
       - name: Slack notification
