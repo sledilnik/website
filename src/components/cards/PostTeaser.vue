@@ -19,7 +19,7 @@
         <b-col lg="8">
           <b-card-body :title="post.title">
             <div
-              class="text-muted small card-text"
+              class="text-muted card-text"
               v-html="$options.filters.marked(post.blurb)"
             ></div>
             <div class="link small">
