@@ -56,6 +56,8 @@ export default {
 .teaser__post
   .card-title
     font-size: 18px
+    line-height: 24px
+
   .card
     height: 100%
     border-radius: 6px
