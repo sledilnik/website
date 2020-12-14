@@ -23,8 +23,8 @@
               v-html="$options.filters.marked(post.blurb)"
             ></div>
             <div class="link small">
-              <a class="stretched-link" v-if="post.link_to" :href="post.link_to" target="_blank">Preberi več</a>
-              <router-link class="stretched-link" v-else :to="postLink">Preberi več</router-link>
+              <a v-if="post.link_to" class="stretched-link" :href="post.link_to" target="_blank">Preberi več</a>
+              <router-link v-else class="stretched-link" :to="postLink">Preberi več</router-link>
             </div>
           </b-card-body>
         </b-col>
