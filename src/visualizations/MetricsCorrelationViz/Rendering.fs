@@ -80,7 +80,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         Data = data
         DisplayType = availableDisplayTypes.[0]
-        RangeSelectionButtonIndex = 0
+        RangeSelectionButtonIndex = 1
     }
     state, Cmd.none
 
@@ -211,24 +211,41 @@ let renderChartOptions state dispatch =
         |})
 
     let casesYAxis = {|
+        gridLineWidth = 0
         title = pojo {| text = chartText Metrics.all.[0].Id |}
         index = 0
         opposite = false
     |}
 
     let hospitalizedYAxis = {|
+        gridLineWidth = 0
         title = pojo {| text = chartText Metrics.all.[1].Id |}
         index = 1
         opposite = true
     |}
 
     let deceasedYAxis = {|
+        gridLineWidth = 0
         title = pojo {| text = chartText Metrics.all.[2].Id |}
         index = 2
         opposite = true
     |}
 
     let yAxes = [| casesYAxis; hospitalizedYAxis; deceasedYAxis |]
+
+    let yAxesResponsive =
+        [|
+            {| visible = false |}
+            {| visible = false |}
+            {| visible = false |}
+        |]
+
+    let responsive =
+        {| rules =
+           [| {|
+                 condition = {| maxWidth = 1000 |}
+                 chartOptions = {| yAxis = yAxesResponsive |}
+           |} |] |}
 
     {| baseOptions with
         chart = pojo
@@ -259,6 +276,7 @@ let renderChartOptions state dispatch =
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
+        responsive = responsive
     |}
 
 let renderChartContainer state dispatch =
