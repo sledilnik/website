@@ -931,6 +931,10 @@
         "alcoDrinks": {
             "title": "Alcohol",
             "description": "Prohibition of alcohol and alcohol drinks in take away restaurants and similar."
+        },
+        "liftServices": {
+            "title": "Services",
+            "description": "Relaxation: public transport (limited service), some services (florist, car-wash, cleaners)<br>In 4 regions relaxation of shops with cloths and shoes and movement inside region borders with app."
         }
     },
     "days": {

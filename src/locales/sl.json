@@ -622,6 +622,10 @@
         "alcoDrinks": {
             "title": "Alkohol",
             "description": "Prepovedan osebni prevzem alkohola in alkoholnih pijač v gostinskih obratih."
+        },
+        "liftServices": {
+            "title": "Storitve",
+            "description": "Sproščanje: javni promet (v omejenem obsegu), nekatere storitve (cvetličarne, avtopralnice, kemične čistilnice)<br>V 4 regijah se sprostijo prodajalne z oblačili in obutvijo in prehodi med občinami z aplikacijo."
         }
     },
     "phase": {
