@@ -9,11 +9,13 @@ import plugins from './plugins/index'
 import './main.js'
 import 'style/index.scss'
 import VueDateFns from "vue-date-fns";
+import VueFuse from 'vue-fuse';
 
 Vue.use(plugins);
 Vue.use(VueScrollTo, { offset: 60 });
 Vue.use(VScrollLock);
 Vue.use(VueDateFns);
+Vue.use(VueFuse);
 
 new Vue({
   render: (h) => h(App),
