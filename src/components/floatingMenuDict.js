@@ -111,4 +111,8 @@ export default {
     titleKey: 'youtube.titleMenu',
     icon: 'map',
   },
+  'metrics-correlation-chart': {
+    titleKey: 'charts.metricsCorrelation.titleMenu',
+    icon: 'graph',
+  },
 }
