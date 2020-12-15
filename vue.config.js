@@ -18,6 +18,7 @@ module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
   publicPath: process.env.C19_PUBLIC_PATH || '/',
   outputDir: process.env.C19_OUTPUT_DIR || 'dist',
+  filenameHashing: true,
   devServer: {
     disableHostCheck: true,
   },
@@ -50,6 +51,10 @@ module.exports = {
     },
   },
   chainWebpack: config => {
+
+    config.output.filename('[name].[hash:8].js')
+    config.output.chunkFilename('[name].[hash:8].js')
+
     if (config.plugins.has('prefetch-index')) {
       config.plugin('prefetch-index').tap(options => {
         options[0].fileBlacklist = options.fileBlacklist || [];
