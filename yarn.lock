@@ -4302,7 +4302,7 @@ data-urls@^1.0.0, data-urls@^1.1.0:
     whatwg-mimetype "^2.2.0"
     whatwg-url "^7.0.0"
 
-date-fns@^2.16.1:
+date-fns@^2.0.0, date-fns@^2.16.1:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.16.1.tgz#05775792c3f3331da812af253e1a935851d3834b"
   integrity sha512-sAJVKx/FqrLYHAQeN7VpJrPhagZc9R4ImZIWYRFZaaohR3KzmuK88touwsSwSVT8Qcbd4zoDsnGfX4GFB4imyQ==
@@ -11651,6 +11651,13 @@ vue-clickaway@^2.2.2:
   integrity sha512-25SpjXKetL06GLYoLoC8pqAV6Cur9cQ//2g35GRFBV4FgoljbZZjTINR8g2NuVXXDMLSUXaKx5dutgO4PaDE7A==
   dependencies:
     loose-envify "^1.2.0"
+
+vue-date-fns@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vue-date-fns/-/vue-date-fns-2.0.1.tgz#a2a0d42552badd57f9ffd9a7a09d75331933495a"
+  integrity sha512-j2G97bVOKO0mVfFEnzCu5dQU0dgD8jLAAVU0dGRDqxZzzNXqep7d3WEGuuJ6mNOP5PM7GE+UqpKYfkL/LNmDKQ==
+  dependencies:
+    date-fns "^2.0.0"
 
 vue-eslint-parser@^7.0.0:
   version "7.0.0"
