@@ -402,7 +402,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
                 | _ ->
                     match green with
                     | Some greenNote -> chartText "statusGreen", "#C4DE6F", greenNote
-                    | _ -> chartText "statusOrange", "#FFC65A", ""
+                    | _ -> chartText "statusGreen", "#FFC65A", ""  // orange is w/o restrictions now
 
         let imported =
             importedFrom.TryFind(fixedCode)
