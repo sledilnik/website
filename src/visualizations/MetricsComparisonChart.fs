@@ -37,6 +37,12 @@ let availableMetricTypes =
       { MetricType = ToDate; IsAveraged = false }
       { MetricType = Today; IsAveraged = true } ]
 
+let MetricQueryParam = [
+    ("active", availableMetricTypes.[0]);
+    ("today", availableMetricTypes.[1])
+    ("7-days-average", availableMetricTypes.[3])
+    ("to-date", availableMetricTypes.[2])] |> Map.ofList
+
 type Metric =
     | PerformedTestsToday
     | PerformedTestsToDate
@@ -121,6 +127,7 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | MetricTypeChanged of FullMetricType
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
 
 let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
@@ -134,6 +141,23 @@ let init data : State * Cmd<Msg> =
         RangeSelectionButtonIndex = 0
     }
     state, cmd
+
+
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
+       let state = match queryParams.MetricsComparisonType with
+                   | Some (sort : string) ->
+                       match sort.ToLower() |> MetricQueryParam.TryFind with
+                       | Some v -> {state with MetricType=v}
+                       | _ -> state
+                   | _ -> state
+
+       state, commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State)
+    = { queryParams with
+                        MetricsComparisonType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricQueryParam
+                                                     }
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -156,6 +180,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let statsDataGenerator metric =
     fun point ->
@@ -360,6 +385,6 @@ let render (state : State) dispatch =
         ]
 let chart =
     React.functionComponent(fun (props : {| data : StatsData |}) ->
-        let state, dispatch = React.useElmish(init props.data, update, [| |])
+        let state, dispatch = QueryParams.useElmishWithQueryParams (props.data |> init) update stateToQueryParams Msg.QueryParamsUpdated
         render state dispatch
     )
