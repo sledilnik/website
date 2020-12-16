@@ -11,7 +11,7 @@
 
         <vue-fuse
           class="form-control my-4"
-          :placeholder="$t('restrictions.searchPlaceholder')"
+          :placeholder="$t('restrictionsPage.searchPlaceholder')"
           :keys="searchKeys"
           :list="restrictions"
           :defaultAll="true"

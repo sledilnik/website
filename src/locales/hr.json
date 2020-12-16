@@ -1367,7 +1367,9 @@
         "titleMenu": "Animacija",
         "title": "Animacija širenja zaraze COVID-19"
     },
+    "week": "Tjedan",
     "restrictionsPage": {
+        "searchPlaceholder": "Unesite niz za pretraživanje",
         "link": "Poveznica na uredbu (službeni tekst)",
         "notes": "Napomene",
         "extrarule": "Dodatna pravila/tumačenja",
@@ -1384,6 +1386,7 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "Nažalost, ova stranica još nije prevedena."
+        "intro": "Nažalost, ova stranica još nije prevedena.",
+        "searchPlaceholder": "Unesite niz za pretraživanje"
     }
 }
