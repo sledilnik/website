@@ -854,7 +854,7 @@
         "infections": {
             "title": "Struktura potrjenih primerov",
             "titleMenu": "Primeri – struktura",
-            "disclaimer": "Opomba: ta graf se ne osvežuje več. Od 11. oktobra nam NIJZ ne posreduje več podatkov za DSO in zaposlene v zdravstvu.",
+            "disclaimer": "Opomba: Od 11. oktobra nam NIJZ ne posreduje več podatkov za zaposlene v zdravstvu in DSO",
             "averageByDay": "Po dnevih (povprečno)",
             "all": "Skupaj",
             "relative": "Relativno",

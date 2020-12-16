@@ -380,7 +380,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
-            "disclaimer": "Note: this chart is not up-to-date. From October 11, NIJZ does not report the data about retirement homes and heltcare employees anymore.",
+            "disclaimer": "Note: from October 11, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
