@@ -1361,5 +1361,9 @@
         "geoValidity": "Geografische Gültigkeit",
         "title": "Maßnahmen und Einschränkungen"
     },
-    "week": "Woche"
+    "week": "Woche",
+    "faq": {
+        "pageTitle": "FAQ",
+        "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+    }
 }

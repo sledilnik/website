@@ -37,7 +37,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Undeploy
-        uses: sledilnik/action-helm-deploy@v1
+        uses: sledilnik/action-helm-deploy@v1.0.1
         with:
           action: undeploy
           chartName: sledilnik/website
