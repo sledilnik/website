@@ -1,5 +1,5 @@
 <template>
-  <div class="teaser__post">
+  <div class="post__teaser">
     <b-card no-body class="card overflow-hidden">
       <b-row no-gutters class="h-100">
         <b-col lg="4" class="h-100 d-none d-lg-block py-2 pl-2">
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="sass">
-.teaser__post
+.post__teaser
   .card-title
     font-size: 18px
     line-height: 24px
@@ -76,14 +76,11 @@ export default {
     @media only screen and (max-width: 480px)
       padding: 16px
 
-  @media only screen and (max-width: 768px)
-    padding-left: 7.5px
-    padding-right: 7.5px
-
+  @media only screen and (max-width: 768px) and (min-width: 481px)
     &:first-child
-      margin-left: -7.5px
+      padding-right: 7.5px !important
     &:last-child
-      margin-right: -7.5px
+      padding-left: 7.5px !important
 
   @media only screen and (max-width: 480px)
     &:first-child
