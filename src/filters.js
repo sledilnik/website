@@ -1,5 +1,7 @@
 import Vue from "vue";
 import marked from "marked"
+import { langCodeMap } from "./i18n";
+import i18next from 'i18next'
 
 Vue.filter("prefixDiff", function (value) {
   if (value > 0) {
@@ -9,6 +11,9 @@ Vue.filter("prefixDiff", function (value) {
   }
 });
 
+Vue.filter('number', function(value) {
+  return Intl.NumberFormat(_.get(langCodeMap, i18next.language, 'sl-SI')).format(value)
+})
 
 /**
  * markdown filter

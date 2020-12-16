@@ -9,8 +9,15 @@ import hr from './locales/hr.json'
 import de from './locales/de.json'
 import it from './locales/it.json'
 
-
 import {Highcharts} from './visualizations/_highcharts'
+
+export const langCodeMap = {
+  en: 'en-EN',
+  sl: 'sl-SI',
+  hr: 'hr-HR',
+  de: 'de-DE',
+  it: 'it-IT',
+}
 
 Vue.use(VueI18Next)
 
