@@ -1373,5 +1373,9 @@
     "posts": {
         "readingTime": "min. lettura",
         "timestamp": "{{ date, %e. %B %Y }}"
+    },
+    "faq": {
+        "pageTitle": "FAQ",
+        "into": "_Sfortunatamente, questa pagina non è stata ancora tradotta. Vedere il [testo originale in lingua slovena](/sl/faq) o la [traduzione in inglese](/en/faq)._"
     }
 }

@@ -104,7 +104,6 @@ export default {
     // fetch data
     this.fetchAll();
     this.$on("searchResults", (results) => {
-      console.log("search results", results, this.restrictions)
       this.searchResults = results;
     });
   },
