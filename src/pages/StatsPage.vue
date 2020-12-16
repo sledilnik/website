@@ -3,10 +3,10 @@
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
-          <PostTeaser class="col-md-6 p-2 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
+          <PostTeaser class="col-md-6 p-1 p-sm-2 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
       </div>
       <div class="posts d-flex" v-else>
-          <PostTeaserSkeleton class="col-md-6 p-2 p-md-3" v-for="i in 2" :key="i" />
+          <PostTeaserSkeleton class="col-md-6 p-1 p-sm-2 p-md-3" v-for="i in 2" :key="i" />
       </div>
       <div class="cards-wrapper">
         <!--

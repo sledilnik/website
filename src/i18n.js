@@ -56,14 +56,28 @@ function setHighchartsOptions () {
             rangeSelectorZoom: i18next.t("charts.common.zoom"),
             resetZoom: i18next.t("charts.common.resetZoom"),
             resetZoomTitle: i18next.t("charts.common.resetZoomTitle"),
-            thousandsSep: i18next.t("charts.common.thousandsSep"),
-            decimalPoint: i18next.t("charts.common.decimalPoint"),
+            thousandsSep: i18next.separators.decimal,
+            decimalPoint: i18next.separators.group,
         }
     });
 };
 
+export function getSeparator(locale, separatorType) {
+  const numberWithGroupAndDecimalSeparator = 1000.1;
+  return Intl.NumberFormat(locale)
+      .formatToParts(numberWithGroupAndDecimalSeparator)
+      .find(part => part.type === separatorType)
+      .value;
+}
+
 i18next.on('languageChanged', function(lng) {
-    setHighchartsOptions(Highcharts);
+  const newLang = Object.keys(langCodeMap).includes(lng) ? lng : 'sl'
+  i18next.langCode = langCodeMap[newLang]
+  i18next.separators = {
+    decimal: getSeparator(i18next.langCode, 'decimal'),
+    group: getSeparator(i18next.langCode, 'group')
+  }
+  setHighchartsOptions(Highcharts);
 });
 
 i18next.use(LanguageDetector).init({
@@ -106,7 +120,7 @@ localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
 const i18n = new VueI18Next(i18next)
 
 export function formatNumber(number){
-  return Intl.NumberFormat(_.get(langCodeMap, i18next.language, 'sl-SI')).format(number)
+  return Intl.NumberFormat(i18next.langCode || 'sl-SI').format(number)
 }
 
 export default i18n
