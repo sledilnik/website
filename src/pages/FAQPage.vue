@@ -1,8 +1,8 @@
 <template>
   <div class="custom-container">
-    <div class="static-page-wrapper">
+    <div class="faq-page-wrapper">
       <h1>{{ $t("faq.pageTitle") }}</h1>
-      <span v-html-md="$t('faq.intro')" />
+      <div class="intro" v-html-md="$t('faq.intro')" />
       <vue-fuse
         class="form-control my-4"
         :placeholder="$t('faq.searchPlaceholder')"
@@ -67,8 +67,6 @@ export default {
       });
     });
 
-    console.log(this.database);
-
     this.$on("searchResults", (results) => {
       this.searchResults = results;
     });
@@ -94,9 +92,12 @@ export default {
   }
 }
 
-.static-page-wrapper {
+.faq-page-wrapper {
   padding: 32px 17px 27px 17px;
   background: #fff;
+  font-size: 14px;
+  color: $text-c;
+  line-height: 1.7;
 
   @media only screen and (min-width: 768px) {
     padding: 32px 32px 27px 32px;
@@ -104,41 +105,17 @@ export default {
 
   h1 {
     margin-bottom: 32px;
-  }
-
-  .dropdown + h2,
-  .dropdown + h3,
-  h1 + h2 {
-    margin-top: 64px;
-  }
-
-  h2,
-  h3,
-  h4 {
-    margin-bottom: 24px;
-  }
-
-  h1 {
     font-size: 28px;
   }
 
   h2 {
     font-size: 21px;
-  }
-
-  h3 {
-    font-size: 18px;
-  }
-
-  p:not(:last-of-type) {
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   //subtitle
-  h1 + p > em {
-    display: block;
+  .intro {
     font-size: 16px;
-    font-style: italic;
     color: rgba(0, 0, 0, 0.8);
     font-weight: 400;
     line-height: 1.7;
@@ -149,65 +126,24 @@ export default {
     }
   }
 
-  p,
-  a,
-  span,
-  strong {
-    font-size: 14px;
-    color: $text-c;
-    line-height: 1.7;
-  }
+  // p,
+  // a,
+  // span,
+  // strong {
+  //   font-size: 14px;
+  //   color: $text-c;
+  //   line-height: 1.7;
+  // }
 
-  * + h1,
-  * + h2,
-  * + h3,
-  * + table {
-    margin-top: 48px;
-  }
-
-  tr + tr {
-    margin-top: 27px;
-  }
-
-  table {
-    width: 100%;
-    table-layout: fixed;
-    text-align: left;
-  }
-
-  table {
-    table-layout: fixed;
-    text-align: left;
-    td {
-      padding: 15px 0;
-      width: 50%;
-      border-top: 1px solid rgba(0, 0, 0, 0.45);
-    }
-  }
-
-  //dropdown HTML in MD
-  h1 + details,
-  h2 + details,
-  h3 + details {
-    margin-top: 48px;
-  }
-
-  .img-link {
-    display: block;
-    box-shadow: none;
-    margin-bottom: 24px;
-
-    &:hover {
-      box-shadow: none;
-    }
-
-    img {
-      width: 100%;
-    }
-  }
+  // * + h1,
+  // * + h2,
+  // * + h3,
+  // * + table {
+  //   margin-top: 48px;
+  // }
 }
 
-.static-page-wrapper,
+.faq-page-wrapper,
 .footnote,
 .link {
   a {
