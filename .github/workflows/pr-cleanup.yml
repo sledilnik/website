@@ -43,23 +43,3 @@ jobs:
           chartName: sledilnik/website
           chartVersion: '0.9.0'
           kubeconfig: '${{ secrets.KUBECONFIG }}'
-
-      - name: Leave success comment on PR
-        uses: mshick/add-pr-comment@v1
-        if: ${{ success() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            Undeployed PR
-          allow-repeats: true
-
-      - name: Leave failure comment on PR
-        uses: mshick/add-pr-comment@v1
-        if: ${{ failure() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            Undeploy failed
-          allow-repeats: true
