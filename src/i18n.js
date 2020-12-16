@@ -48,8 +48,8 @@ function setHighchartsOptions () {
             rangeSelectorZoom: i18next.t("charts.common.zoom"),
             resetZoom: i18next.t("charts.common.resetZoom"),
             resetZoomTitle: i18next.t("charts.common.resetZoomTitle"),
-            thousandsSep: i18next.separators.decimal,
-            decimalPoint: i18next.separators.group,
+            thousandsSep: i18next.separators.group,
+            decimalPoint: i18next.separators.decimal,
         }
     });
 };
