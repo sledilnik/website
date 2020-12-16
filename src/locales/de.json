@@ -1364,6 +1364,6 @@
     "week": "Woche",
     "faq": {
         "pageTitle": "FAQ",
-        "into": "_Leider ist diese Seite noch nicht übersetzt. Siehe den [Originaltext in slowenischer Sprache](/sl/faq) oder die [englische Übersetzung](/en/faq)._"
+        "intro": "_Leider ist diese Seite noch nicht übersetzt._"
     }
 }

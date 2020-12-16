@@ -11,13 +11,13 @@
 
         <vue-fuse
           class="form-control my-4"
-          placeholder="Vnesite iskani niz"
+          :placeholder="$t('restrictions.searchPlaceholder')"
           :keys="searchKeys"
           :list="restrictions"
           :defaultAll="true"
-          min-match-char-length="4"
-          threshold="0.3"
-          distance="1000"
+          :min-match-char-length="4"
+          :threshold="0.3"
+          :distance="1000"
           event-name="searchResults"
         ></vue-fuse>
         <!-- body -->

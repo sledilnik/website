@@ -2,10 +2,10 @@
   <div class="custom-container">
     <div class="static-page-wrapper">
       <h1>{{ $t("faq.pageTitle") }}</h1>
-      <span v-html-md="$t('faq.into')" />
+      <span v-html-md="$t('faq.intro')" />
       <vue-fuse
         class="form-control my-4"
-        placeholder="Vnesite iskani niz"
+        :placeholder="$t('faq.searchPlaceholder')"
         :keys="searchKeys"
         :list="database"
         :defaultAll="false"

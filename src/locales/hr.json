@@ -1381,5 +1381,9 @@
     "posts": {
         "readingTime": "min",
         "timestamp": "{{ date, %e. %B %Y. }}"
+    },
+    "faq": {
+        "pageTitle": "FAQ",
+        "intro": "Nažalost, ova stranica još nije prevedena."
     }
 }

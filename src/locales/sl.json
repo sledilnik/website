@@ -1369,9 +1369,13 @@
       "notes": "Opombe",
       "link": "Povezava do odloka (prečiščeno besedilo)"
     },
+    "restrictions": {
+        "searchPlaceholder": "Vnesite iskalni niz"
+    },
     "faq": {
+        "searchPlaceholder": "Vnesite iskalni niz",
         "pageTitle": "FAQ - Pogosta vprašanja in odgovori",
-        "into": "_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_",
+        "intro": "_Namen Sledilnikovih prikazov je združiti in predstaviti obstoječe podatke v vsakomur razumljivi obliki, ki pa vseeno potrebujejo določena pojasnila. Zbrali smo odgovore na nekatera najpogostejša vprašanja. Seznam sproti dopolnjujemo; če imate kakršna koli vprašanja glede naših prikazov (ali predlog za boljše pojasnilo) in jih ne najdete v FAQ, nam pišite na info@sledilnik.org. (Veseli smo tudi pohval, povratnih informacij ali predlogov!)_",
         "section": {
             "general": "Splošno",
             "data": "O podatkih",

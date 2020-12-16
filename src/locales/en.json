@@ -1362,9 +1362,13 @@
       "notes": "Notes",
       "link": "Link to decree (official text)"
     },
+    "restrictions": {
+        "searchPlaceholder": "Enter search query"
+    },
     "faq": {
+        "searchPlaceholder": "Enter search query",
         "pageTitle": "Frequently Asked Questions",
-        "into": "_The purpose of the Sledilnik project and all its statistical graphs and tables/presentations is to display all existing data about the COVID19 epidemic in Slovenia in an understandable fashion. We've compiled some of the most frequently asked questions. The FAQ list is not exhaustive at this moment, but it is updated frequently so keep checking back. In case of any questions, please contact us: info@slednik.org. (We also look forward to your compliments, feedback, or suggestions!)_",
+        "intro": "_The purpose of the Sledilnik project and all its statistical graphs and tables/presentations is to display all existing data about the COVID19 epidemic in Slovenia in an understandable fashion. We've compiled some of the most frequently asked questions. The FAQ list is not exhaustive at this moment, but it is updated frequently so keep checking back. In case of any questions, please contact us: info@slednik.org. (We also look forward to your compliments, feedback, or suggestions!)_",
         "section": {
             "general": "General Information",
             "data": "About the data",
@@ -1373,7 +1377,7 @@
         },
         "why-sledilnik": {
             "question": "Why Sledilnik?",
-            "answer": "Our goal is to help understand the spread of the virus and to help raise awareness, responsiveness, and the effectiveness of the measures implemented to curb the virus. You can find more about the project in the [About tab](/en/about)."
+            "answer": "_Our goal is to help understand the spread of the virus and to help raise awareness, responsiveness, and the effectiveness of the measures implemented to curb the virus. You can find more about the project in the [About tab](/en/about)._"
         },
         "virus-vs-disease": {
             "question": "What is the difference between SARS-CoV-2 and COVID-19?",
