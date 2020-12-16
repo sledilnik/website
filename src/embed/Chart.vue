@@ -29,7 +29,6 @@
 
 <script>
 import { Visualizations } from "visualizations/App.fsproj";
-import { ApiEndpoint } from "@/store/index.js";
 
 // components containing #ostanizdrav charts
 import PublishedChart from "@/components/charts/ostanizdrav/PublishedChart";
@@ -38,6 +37,7 @@ import UserPublishedByCountChart from "@/components/charts/ostanizdrav/UserPubli
 import PublishedByRiskChart from "@/components/charts/ostanizdrav/PublishedByRiskChart";
 import ValidChart from "@/components/charts/ostanizdrav/ValidChart";
 import ValidByRiskChart from "@/components/charts/ostanizdrav/ValidByRiskChart";
+import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {
   name: "ChartEmbed",
@@ -72,7 +72,7 @@ export default {
         "visualizations",
         "chart",
         this.$route.query,
-        ApiEndpoint(),
+        API_ENDPOINT_BASE,
         this.$route.params.type
       );
     });

@@ -6,18 +6,12 @@ import { hospitalsStore } from './hospitals.store'
 import { patientsStore } from './patients.store'
 import { municipalitiesStore } from './municipalities.store'
 import { healthCentersStore } from './health-centers.store'
+import { postsStore } from './posts.store'
 import { tableData } from './tables.store'
+import restrictionsStore from './restrictions.store'
 import ostanizdravStore from './ostanizdrav.store'
 
 Vue.use(Vuex)
-
-export function ApiEndpoint() {
-  if (window.location.search.indexOf('stage') > 0) {
-    return 'https://api-stage.sledilnik.org'
-  } else {
-    return 'https://api.sledilnik.org'
-  }
-}
 
 export function exportTime(x) {
   return new Date(x * 1000)
@@ -67,8 +61,10 @@ const store = new Vuex.Store({
     municipalities: municipalitiesStore,
     healthCenters: healthCentersStore,
     ostanizdrav: ostanizdravStore,
+    posts: postsStore,
+    restrictions: restrictionsStore,
     tableData,
-  },
+  }
 })
 
 export default store

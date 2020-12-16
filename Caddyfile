@@ -4,5 +4,6 @@
   file_server {
     index index.html
   }
+  header * Cache-Control public, max-age=60, s-maxage=60
   templates
 }

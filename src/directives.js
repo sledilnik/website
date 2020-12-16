@@ -3,6 +3,6 @@ import marked from "marked"
 
 Vue.directive("htmlMd", {
     bind(el, binding) {
-        el.innerHTML = marked(binding.value)
+        el.innerHTML = marked(binding.value || '')
     }
 })

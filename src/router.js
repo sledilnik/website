@@ -6,43 +6,30 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
-import OstaniZdravPage from './pages/OstaniZdravPage.vue'
+import FAQPage from './pages/FAQPage.vue'
 
-import * as aboutMdSl from './content/sl/about.md'
-import * as aboutMdEn from './content/en/about.md'
-import * as aboutMdHr from './content/hr/about.md'
-import * as aboutMdDe from './content/de/about.md'
-import * as aboutMdIt from './content/it/about.md'
+import aboutMdSl from './content/sl/about.md'
+import aboutMdEn from './content/en/about.md'
+import aboutMdHr from './content/hr/about.md'
+import aboutMdDe from './content/de/about.md'
+import aboutMdIt from './content/it/about.md'
 
-import * as contentMdSl from './content/sl/faq.md'
-import * as contentMdEn from './content/en/faq.md'
-import * as contentMdHr from './content/hr/faq.md'
-import * as contentMdDe from './content/de/faq.md'
-import * as contentMdIt from './content/it/faq.md'
+import dataMdSl from './content/sl/data.md'
+import dataMdEn from './content/en/data.md'
+import dataMdHr from './content/hr/data.md'
+import dataMdDe from './content/de/data.md'
+import dataMdIt from './content/it/data.md'
 
-import * as dataMdSl from './content/sl/data.md'
-import * as dataMdEn from './content/en/data.md'
-import * as dataMdHr from './content/hr/data.md'
-import * as dataMdDe from './content/de/data.md'
-import * as dataMdIt from './content/it/data.md'
-
-import * as modelsMdSl from './content/sl/models.md'
-import * as modelsMdEn from './content/en/models.md'
-import * as modelsMdHr from './content/hr/models.md'
-import * as modelsMdDe from './content/de/models.md'
-import * as modelsMdIt from './content/it/models.md'
+import modelsMdSl from './content/sl/models.md'
+import modelsMdEn from './content/en/models.md'
+import modelsMdHr from './content/hr/models.md'
+import modelsMdDe from './content/de/models.md'
+import modelsMdIt from './content/it/models.md'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
-  faq: {
-    sl: contentMdSl,
-    en: contentMdEn,
-    hr: contentMdHr,
-    de: contentMdDe,
-    it: contentMdIt,
-  },
   about: {
     sl: aboutMdSl,
     en: aboutMdEn,
@@ -85,6 +72,7 @@ function mdContentRoutes() {
   Object.keys(mdContent).forEach((key) => {
     mdContentRoutes.push({
       path: key,
+      name: key,
       component: StaticPage,
       props: dynamicProps,
     })
@@ -121,6 +109,14 @@ const routes = [
   {
     path: '/about/en',
     redirect: `/en/about`,
+  },
+  {
+    path: '/posts',
+    redirect: `/${i18next.language}/posts`,
+  },
+  {
+    path: '/posts/:postId',
+    redirect: `/${i18next.language}/posts/:postId`,
   },
   {
     path: '/embed',
@@ -177,27 +173,48 @@ const routes = [
       },
       {
         path: 'stats',
+        name: 'stats',
         component: StatsPage,
       },
       {
         path: 'ostanizdrav',
-        component: OstaniZdravPage,
+        name: 'ostanizdrav',
+        component: () => import(/* webpackChunkName: "OstaniZdrav.route" */ './pages/OstaniZdravPage.vue'),
       },
       {
         path: 'world',
-        component: () => import(/* webpackChunkName: "world" */'./pages/WorldStatsPage.vue'),
+        name: 'world',
+        component: () => import(/* webpackChunkName: "World.route" */ './pages/WorldStatsPage.vue'),
       },
       {
         path: 'tables',
-        component: () => import(/* webpackChunkName: "tables" */'./pages/TablesPage.vue'),
+        name: 'tables',
+        component: () => import(/* webpackChunkName: "Tables.route" */ './pages/TablesPage.vue'),
       },
       {
         path: 'embed',
-        component: () => import('./pages/EmbedMakerPage.vue'),
+        name: 'embed',
+        component: () => import(/* webpackChunkName: "Embed.route" */ './pages/EmbedMakerPage.vue'),
       },
       {
         path: 'restrictions',
-        component: () => import('./pages/RestrictionsPage.vue'),
+        name: 'restrictions',
+        component: () => import(/* webpackChunkName: "Restrictions.route" */ './pages/RestrictionsPage.vue'),
+      },
+      {
+        path: 'posts',
+        name: 'posts',
+        component: () => import(/* webpackChunkName: "Posts.route" */ './pages/PostsPage.vue'),
+      },
+      {
+        path: 'posts/:postId',
+        name: 'post',
+        component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
+      },
+      {
+        path: 'faq',
+        name: 'faq',
+        component: FAQPage,
       },
       {
         path: 'links', // Retired page

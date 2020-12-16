@@ -52,7 +52,7 @@ export default {
     this.dispatch()
   },
   mounted() {
-    this.$store.dispatch("tableData/refreshDataEvery", 300);
+    this.$store.dispatch("tableData/refreshDataEvery", 1200);
   },
   methods: {
     async dispatch() {

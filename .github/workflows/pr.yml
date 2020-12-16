@@ -41,7 +41,7 @@ jobs:
 
       - run: yarn
       - run: yarn lint
-      - run: yarn test
+      # - run: yarn test
       - run: yarn dotnet-restore
       - run: yarn test-fsharp
     
@@ -71,6 +71,8 @@ jobs:
           file: ./Dockerfile
           tags: |
             ghcr.io/${{ github.repository_owner }}/website:${{ env.IMAGE_TAG}}
+          build-args: |
+            BUILD_MODE=staging
 
   deploy:
     runs-on: ubuntu-20.04
@@ -81,31 +83,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy
-        uses: sledilnik/action-helm-deploy@v1
+        uses: sledilnik/action-helm-deploy@v1.0.1
         with:
           chartName: sledilnik/website
-          chartVersion: '0.9.0'
+          chartVersion: '1.0.0'
           kubeconfig: '${{ secrets.KUBECONFIG }}'
-  
-      - name: PR comment (success)
-        uses: mshick/add-pr-comment@v1
-        if: ${{ success() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            Deployed PR-${{ github.event.pull_request.number }} to ${{ env.DEPLOY_URL }}
-          allow-repeats: true
-
-      - name: PR comment (failure)
-        uses: mshick/add-pr-comment@v1
-        if: ${{ failure() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          message: |
-            Deploy of PR-${{ github.event.pull_request.number }} failed
-          allow-repeats: true
 
       - name: Slack notification
         uses: 8398a7/action-slack@v3

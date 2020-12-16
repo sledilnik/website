@@ -9,25 +9,64 @@
         </h1>
         <div v-html-md="$t('restrictionsPage.description')"></div>
 
+        <vue-fuse
+          class="form-control my-4"
+          :placeholder="$t('restrictionsPage.searchPlaceholder')"
+          :keys="searchKeys"
+          :list="restrictions"
+          :defaultAll="true"
+          :min-match-char-length="4"
+          :threshold="0.3"
+          :distance="1000"
+          event-name="searchResults"
+        ></vue-fuse>
         <!-- body -->
-          <details
-            v-for="item in restrictions"
-            :key="item.index"
-            :id="`restriction-${item.index}`"
-          >
+        <details
+          v-for="item in searchResults"
+          :key="item.id"
+          :id="`restriction-${item.id}`"
+        >
           <summary>
-            {{ item.name }}<br>
-             <span v-html="item.rule" />
+            {{ item.title }}<br />
+            <span v-html-md="item.rule" />
           </summary>
           <div>
-            <p><b>{{ $t("restrictionsPage.geoValidity") }}:</b> <span v-html="item.geoValidity" /></p>
-            <p><b>{{ $t("restrictionsPage.validity") }}:</b> <span v-html="item.validity" /></p>
-            <p><b>{{ $t("restrictionsPage.exceptions") }}:</b><br> <span v-html="item.exceptions" /></p>
-            <p><b>{{ $t("restrictionsPage.extrarule") }}:</b> <span v-html="item.extrarule" /></p>
-            <p><b>{{ $t("restrictionsPage.notes") }}:</b> <span v-html="item.notes" /></p>
-            <p><a :href="item.link" targe="_blank">{{ $t("restrictionsPage.link") }}</a></p>
+            <p>
+              <b>{{ $t("restrictionsPage.geoValidity") }}:</b>
+              <span v-html-md="item.regions" />
+            </p>
+            <p>
+              <b>{{ $t("restrictionsPage.validity") }}:</b>&nbsp;
+              <span v-if="item.valid_since"
+                >od {{ item.valid_since | date("dd. MM. yyyy") }}</span
+              >
+              <span v-if="item.valid_until">
+                do {{ item.valid_until | date("dd. MM. yyyy") }}</span
+              >
+              <span
+                v-if="item.validity_comment"
+                v-html-md="item.validity_comment"
+              />
+            </p>
+            <p>
+              <b>{{ $t("restrictionsPage.exceptions") }}:</b><br />
+              <span v-html-md="item.exceptions" />
+            </p>
+            <p>
+              <b>{{ $t("restrictionsPage.extrarule") }}:</b>
+              <span v-html-md="item.extra_rules" />
+            </p>
+            <p>
+              <b>{{ $t("restrictionsPage.notes") }}:</b>
+              <span v-html-md="item.comments" />
+            </p>
+            <p>
+              <a :href="item.legal_link" targe="_blank">{{
+                $t("restrictionsPage.link")
+              }}</a>
+            </p>
           </div>
-          </details>
+        </details>
       </div>
       <!-- <FloatingMenu :list="floatingMenu" title="Ukrepi" /> -->
     </div>
@@ -35,10 +74,8 @@
 </template>
 
 <script>
-import { GoogleSpreadsheet } from "@/libs/google-spreadsheet.js";
+import { mapActions, mapState } from "vuex";
 import TimeStamp from "components/TimeStamp";
-
-window.GoogleSpreadsheet = GoogleSpreadsheet;
 
 export default {
   name: "RestrictionsPage",
@@ -47,96 +84,27 @@ export default {
   },
   data() {
     return {
+      searchKeys: ["title", "rule", "validity_comment", "extra_rules", "exceptions", "comments"],
+      searchResults: [],
       floatingMenu: [],
-      lastUpdate: null,
-      restrictions: [],
     };
   },
-  mounted() {
-    // note: the spreadsheet must have all cells full, so add "/" to empty cells
-
-    // const url = 'https://spreadsheets.google.com/pub?key=1k2-MOUqiI4qVWIkwx3Bm-1S-t_fLruESh_Shf5rTUYE&hl=en&output=html';
-    const url =
-      "https://spreadsheets.google.com/pub?key=1NBeTl9d154KHggAAuzjNOrIPriqjBVeU-UIkYo0ZRCY&hl=en&output=html";
-    var googleSpreadsheet = new GoogleSpreadsheet();
-    googleSpreadsheet.url(url);
-    googleSpreadsheet.load((result) => {
-      var i, j;
-
-      // TODO get date somewhere
-      // date is manually stored in the first cell of the second row
-      this.lastUpdate = new Date(
-        Date.parse(result["data"][1].replace(/\s/g, ""))
-      );
-
-      // the real thing
-      // first, iterate the columns, they become chapters
-      for (i = 2; i <= 14; i++) {
-        this.floatingMenu.push({
-          title: result["data"][i],
-          link: `restriction-${i}`,
-        });
-
-        let restriction = {
-          index: i,
-          name: result["data"][i],
-        };
-
-        // then, iterate rows, they become the data for each chapter
-        // first row is (c) so skip
-        for (j = 1; j <= 7; j++) {
-          // 1 Geografska veljavnost
-          // 2 Trenutno pravilo
-          // 3 Izjeme
-          // 4 Dodatna pravila/ tolmačenja
-          // 5 Veljavnost:
-          // 6 Opombe in več info:
-          // 7 Povezava do odloka (prečiščeno besedilo) oz. novice
-
-          var text = result["data"][j * 14 + i];
-          var cat = result["data"][j * 14 + 1]; // header of the row, +1 for the (c) cell
-          if (text == "_" || text == "/" || text == null) {
-            continue;
-          } // skip empty categories
-
-          if (j == 2) {
-            //georgrafska veljavnost
-            restriction.geoValidity = text;
-          } else if (j == 5) {
-            // veljavnost (datum)
-            restriction.validity = text;
-          } else if (j == 3) {
-            // izjeme are often lists
-            //var list = text.replace(/(\W) (\d+\.)/g, "$1<br />\n$2");
-            var list = text.replace(/\n/g, "<br />\n");
-            // console.log("izjeme", text, list)
-            restriction.exceptions = list;
-          } else if (j == 7) {
-            // povezave
-            // var list = text.replace(/  /g, "\n<br />") + "\n";
-            console.log("povezve", text)
-            const link = text.replace(/(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*))/g, "$1");
-            console.log("parsed", link)
-            restriction.link = link;
-          } else if (j == 1) {
-            // pravilo
-            restriction.rule = text;
-          } else if (j == 4) {
-            // dodatna pravila
-            var list = text.replace(/  /g, "\n<br />") + "\n";
-            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
-            restriction.extrarule = links;
-          } else if (j == 6) {
-            // opombe
-            var list = text.replace(/  /g, "\n<br />") + "\n";
-            var links = list.replace(/(http.*?)[ \n$]/g, "<a href='$1'>$1</a>");
-            restriction.notes = links;
-          } else {
-            console.log("too much data");
-          }
-        }
-        this.restrictions.push(restriction);
-      }
+  methods: {
+    ...mapActions("restrictions", {
+      fetchAll: "fetchAll",
+    }),
+  },
+  computed: {
+    ...mapState("restrictions", {
+      restrictions: "restrictions",
+      lastUpdate: "lastUpdate",
+    }),
+  },
+  created() {
+    // fetch data
+    this.fetchAll();
+    this.$on("searchResults", (results) => {
+      this.searchResults = results;
     });
   },
 };

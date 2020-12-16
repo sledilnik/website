@@ -17,8 +17,8 @@ import { mapState } from "vuex";
 import TimeStamp from "components/TimeStamp";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
-import { ApiEndpoint } from "@/store/index.js";
 import chartsFloatMenu from "components/floatingMenuDict";
+import { API_ENDPOINT_BASE } from '../services/api.service';
 
 export default {
   name: "WorldStatsPage",
@@ -39,7 +39,7 @@ export default {
         "visualizations",
         "world",
         this.$route.query,
-        ApiEndpoint()
+        API_ENDPOINT_BASE
       );
     });
 

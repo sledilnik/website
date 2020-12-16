@@ -22,7 +22,8 @@
         "world": "Nel mondo",
         "animation": "Animazione",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Vai al grafico"
+        "goToGraph": "Vai al grafico",
+        "posts": "Post"
     },
     "mk": {
         "hospital": {
@@ -603,6 +604,18 @@
         "gatherings2": {
             "description": "Divieto di ritrovo in luoghi pubblici (ad eccezione dei familiari stretti)",
             "title": "Assembramento"
+        },
+        "alcoDrinks": {
+            "description": "Divieto di vendita di alcol e bevande alcoliche per asporto negli esercizi pubblici .",
+            "title": "Alcol"
+        },
+        "planRelaxation": {
+            "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
+            "title": "Piano"
+        },
+        "liftServices": {
+            "description": "Rilassamento: trasporto pubblico (servizio limitato), alcuni servizi (fiorai, autolavaggi, tintorie)<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
+            "title": "Servizi"
         }
     },
     "tableDict": {
@@ -770,10 +783,10 @@
             "titleMenu": "Capacità"
         },
         "countriesTotalDeathsPer1M": {
-            "yAxisTitle": "Totale decessi per 100.000 di persone",
-            "legendTitle": "Totale decessi per 100.000 di persone",
+            "yAxisTitle": "Totale decessi su 100.000 persone",
+            "legendTitle": "Totale decessi su 100.000 persone",
             "titleMenu": "Paesi - Decessi",
-            "title": "Paesi: totale decessi per 100.000 persone (media di 7 giorni)"
+            "title": "Paesi: totale decessi su 100.000 persone (media di 7 giorni)"
         },
         "infections": {
             "title": "Struttura dei casi confermati",
@@ -798,7 +811,8 @@
             "allTesting": "Tutti",
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
-            "byLab": "Per laboratorio: test"
+            "byLab": "Per laboratorio: test",
+            "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio."
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -874,10 +888,10 @@
             "statusNone": "-",
             "countryStatus": "Restrizioni",
             "importedCases": "Casi importati in 14 giorni",
-            "incidence100k": "Nuovi casi in 14 giorni per 100.000",
+            "incidence100k": "Nuovi casi in 14 giorni su 100.000 persone",
             "newCases": "Nuovi casi",
             "restrictions": "Restrizioni e casi importati",
-            "twoWeekIncidence": "Incidenza di 14 giorni per 100.000",
+            "twoWeekIncidence": "Incidenza di 14 giorni su 100.000",
             "title": "COVID-19 Situazione in Europa",
             "titleMenu": "Europa - situazione",
             "weeklyIncrease": "Aumento settimanale"
@@ -984,9 +998,9 @@
         "countriesDeathsPerCases": {
             "chronologically": "Cronologico",
             "sinceFirstDeath": "Dal primo decesso",
-            "sinceOneDeathPerMillion": "Dal primo decesso per millione di persone",
+            "sinceOneDeathPerMillion": "Dal primo decesso per milione di persone",
             "daysFromFirstDeath": "Numero di giorni dal primo decesso",
-            "daysFromOneDeathPerMillion": "Numero di giorni dal primo decesso per 1 milione di persone",
+            "daysFromOneDeathPerMillion": "Numero di giorni dal primo decesso su 1 milione di persone",
             "legendTitle": "Totale decessi per casi",
             "yAxisTitle": "Totale decessi per casi",
             "title": "Paesi: totale decessi per casi",
@@ -994,9 +1008,9 @@
         },
         "countriesActiveCasesPer1M": {
             "red": "criteri per lista rossa",
-            "legendTitle": "Casi attivi per 100.000 di persone",
-            "yAxisTitle": "Casi attivi per 100.000 di persone",
-            "title": "Paesi: casi attivi per 100.000 di persone",
+            "legendTitle": "Casi attivi su 100.000 persone",
+            "yAxisTitle": "Casi attivi su 100.000 persone",
+            "title": "Paesi: casi attivi su 100.000 persone",
             "titleMenu": "Paesi - Casi attivi"
         },
         "rmap": {
@@ -1090,7 +1104,7 @@
             "deceased": "Decessi",
             "confirmedCases": "Casi confermati",
             "activeCases": "Casi attivi",
-            "title": "Casi per regione (per 100.000 persone)",
+            "title": "Casi per regione (su 100.000 persone)",
             "titleMenu": "Regioni - confronto"
         },
         "phaseDiagram": {
@@ -1129,10 +1143,10 @@
             "title": "Ospedali di cura"
         },
         "countriesNewDeathsPer100k": {
-            "legendTitle": "Nuovi decessi giornalieri per 100.000 persone",
-            "yAxisTitle": "Nuovi decessi giornalieri per 100.000 persone",
+            "legendTitle": "Nuovi decessi giornalieri su 100.000 persone",
+            "yAxisTitle": "Nuovi decessi giornalieri su 100.000 persone",
             "titleMenu": "Paesi - Nuovi decessi",
-            "title": "Paesi: nuovi decessi per 100.000 persone (media di 7 giorni)"
+            "title": "Paesi: nuovi decessi su 100.000 persone (media di 7 giorni)"
         },
         "deceased": {
             "deceased-total": "Decessi totali",
@@ -1161,6 +1175,15 @@
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
+        },
+        "metricsCorrelation": {
+            "deceased": "Deceduti",
+            "hospitalized": "Ricoverati",
+            "cases": "Casi confermati",
+            "all": "Totale",
+            "averageByDay": "Per giorno (media)",
+            "titleMenu": "Correlazione tra casi, ricoveri e decessi",
+            "title": "Correlazione tra casi, ricoveri e decessi"
         }
     },
     "footer": {
@@ -1195,7 +1218,9 @@
         "orangePhaseGenitive": "arancione",
         "orangePhase": "Fase arancione",
         "per100k": "per 100k",
-        "incidence": "Incidenza a 14 giorni"
+        "incidence": "Incidenza a 14 giorni",
+        "newCases7dInfo": "media degli ultimi 7 giorni",
+        "newCases7d": "Casi nuovi"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
@@ -1344,5 +1369,13 @@
         "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte. I dati vengono raccolti in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
         "title": "Misure e restrizioni"
     },
-    "week": "Settimana"
+    "week": "Settimana",
+    "posts": {
+        "readingTime": "min. lettura",
+        "timestamp": "{{ date, %e. %B %Y }}"
+    },
+    "faq": {
+        "pageTitle": "FAQ",
+        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._"
+    }
 }

@@ -1,7 +1,5 @@
 ---
 ingressroute:
-  enabled: true
-  rule: Host(`stage.sledilnik.org`)
-  certResolver: letsencrypt
+  enabled: false
 
 fullnameOverride: website

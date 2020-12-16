@@ -33,8 +33,6 @@ let regionsInfo = dict[
     "za", { Color = "#10829a" }
 ]
 
-let excludedRegions = Set.ofList ["t"]
-
 type Msg =
     | ToggleRegionVisible of string
     | MetricTypeChanged of MetricType
@@ -54,7 +52,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
     let regionsWithoutExcluded =
         lastDataPoint.Regions
         |> List.filter (fun region ->
-            not (excludedRegions |> Set.contains region.Name))
+            Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
     let regionsByTotalCases =
         regionsWithoutExcluded

@@ -54,10 +54,11 @@
         <Compile Include="ExcessDeathsChart/Types.fs" />
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
         <Compile Include="ExcessDeathsChart/Relative.fs" />
-        <Compile Include="ExcessDeathsChart/Chart.fs" />
+        <Compile Include="ExcessDeathsChart/Main.fs" />
         <Compile Include="RegionsChartViz\Analysis.fs" />
         <Compile Include="RegionsChartViz\Synthesis.fs" />
         <Compile Include="RegionsChartViz\Rendering.fs" />
+        <Compile Include="MetricsCorrelationViz\Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

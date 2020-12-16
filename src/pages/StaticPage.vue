@@ -258,7 +258,8 @@ details summary::-webkit-details-marker {
 }
 
 .static-page-wrapper,
-.footnote {
+.footnote,
+.link {
   a {
     font-weight: 600;
     transition: all 0.35s ease-in-out;

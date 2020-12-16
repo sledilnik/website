@@ -1,14 +1,8 @@
 <template>
   <div class="container">
-<!--  comment out  -->
-    <a
-      class="notice-link"
-      href="restrictions"
-    >
+    <a class="notice-link" :href="post.link_to">
       <div class="notice">
-        <span>
-          <b>{{ $t("notice.newPage") }}</b> <span><b>{{ $t("notice.restrictions") }}</b></span>
-        </span>
+        <div v-html="post.blurb"></div>
         <div class="notice-button">
           <img src="../assets/svg/go-to.svg" alt="Go to news" />
         </div>
@@ -16,6 +10,13 @@
     </a>
   </div>
 </template>
+<script>
+export default {
+  props: {
+    post: Object,
+  },
+};
+</script>
 
 <style scoped lang="scss">
 .container {
@@ -47,6 +48,10 @@
   box-shadow: $element-box-shadow;
   min-height: 64px;
 
+  p {
+    margin-bottom: 0 !important;
+  }
+
   @media only screen and (min-width: 480px) {
     padding: 26px;
   }
@@ -63,5 +68,4 @@
     padding-right: 8px;
   }
 }
-
 </style>
