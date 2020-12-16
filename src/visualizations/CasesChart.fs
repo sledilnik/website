@@ -101,7 +101,7 @@ let legendFormatter jsThis =
                 fmtUnder
                 p?series?color
                 p?series?name
-                p?point?fmtTotal
+                (I18N.NumberFormat.formatNumber(p?point?fmtTotal:int))
     fmtStr
 
 let renderChartOptions (state : State) dispatch =

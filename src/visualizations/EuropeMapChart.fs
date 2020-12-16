@@ -761,8 +761,8 @@ let renderMap state geoJson _ =
                 (chartText "countryStatus") rType rAltText
                 (chartText "importedCases") imported impDate
                 (chartText "incidence100k") incidence100k
-                (chartText "newCases") newCases ncDate
-            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                (chartText "newCases") (I18N.NumberFormat.formatNumber(newCases:int)) ncDate
+            + sprintf "<br>%s: <b>%s%s %%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
 
         match twoWeekIncidence with
         | null -> chartText "noData"

@@ -24,7 +24,9 @@ let chartText chartTextsGroup textId =
 
 type NumberFormat =
     abstract formatNumber : int -> string
+    abstract formatNumber : int * obj -> string
     abstract formatNumber : float -> string
+    abstract formatNumber : float * obj -> string
 
 [<ImportAll("i18n")>]
 let NumberFormat : NumberFormat = jsNative

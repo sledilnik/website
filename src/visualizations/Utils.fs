@@ -59,32 +59,22 @@ let roundTo1Decimal = roundDecimals 1
 let roundTo3Decimals = roundDecimals 3
 
 let formatToInt (value: float) =
-    let formatted = sprintf "%.0f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value)
 
 let formatTo1DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.1f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let formatTo2DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.2f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=2; maximumFractionDigits=2 |})
 
 let formatTo3DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.3f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=3; maximumFractionDigits=3 |})
 
 let percentageValuesWith1DecimalTrailingZeroLabelFormatter (value: float) =
-    let formatted = sprintf "%.1f" value
-    formatted.Replace('.', ',') + "%"
+    I18N.NumberFormat.formatNumber(value, {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let percentageValuesLabelFormatter (value: float) =
-    // A hack to replace decimal point with decimal comma.
-    ((abs value).ToString() + "%").Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value, {| style="percent"; maximumFractionDigits=2 |})
 
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)

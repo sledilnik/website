@@ -456,17 +456,17 @@ let tooltipFormatter state jsThis =
     let newCases= points?newCases
     let population = points?population
     let pctPopulation = float absolute * 100.0 / float population
-    let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+    let fmtStr = sprintf "%s: <b>%s</b>" (I18N.t "charts.map.populationC") (I18N.NumberFormat.formatNumber(population : int))
 
     let lastTwoWeeks = newCases
 
     let label =
         match state.ContentType with
         | ConfirmedCases ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.confirmedCases") (I18N.NumberFormat.formatNumber(absolute : int))
             if totalConfirmed > 0 then
                 label
-                    + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
+                    + sprintf " (%s %% %s)" (I18N.NumberFormat.formatNumber(pctPopulation)) (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
                     + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                     + if (Array.max lastTwoWeeks) > 0. then
@@ -474,18 +474,18 @@ let tooltipFormatter state jsThis =
             else
                 label
         | Deceased ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (I18N.NumberFormat.formatNumber(absolute : int))
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
                 label + sprintf " (%s %% %s)"
-                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                        (I18N.NumberFormat.formatNumber pctPopulation)
                         (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                    + sprintf "<br>%s: <b>%s</b> (%s %% %s)"
                         (I18N.t "charts.map.confirmedCases")
-                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                        (I18N.NumberFormat.formatNumber totalConfirmed) (I18N.NumberFormat.formatNumber (float totalConfirmed * 100.0 / float population))
                         (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%s %%</b>"
                         (I18N.t "charts.map.mortalityOfConfirmedCases")
-                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+                        (I18N.NumberFormat.formatNumber(float absolute * 100.0 / float totalConfirmed))
             else
                 label
     sprintf "<b>%s</b><br/>%s<br/>" area label

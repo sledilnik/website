@@ -328,7 +328,7 @@ let renderChartOptions
 
     let valuesLabelFormatter (value: float) =
         match ChartMode.ScaleType state.ChartMode with
-        | Absolute -> (abs value).ToString()
+        | Absolute -> (I18N.NumberFormat.formatNumber (abs value))
         | Relative -> Utils.percentageValuesLabelFormatter value
 
     let dateText = (I18N.tOptions "charts.common.dataDate" {| date = latestDate  |})
@@ -383,7 +383,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "confirmedCases")
-                         (abs dataValue)
+                         (I18N.NumberFormat.formatNumber (abs dataValue))
                  | InfectionsPerPopulation ->
                      sprintf
                          "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"
@@ -401,7 +401,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "deceased")
-                         (abs dataValue)
+                         (I18N.NumberFormat.formatNumber (abs dataValue))
                  | DeathsPerPopulation ->
                      sprintf
                          "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"

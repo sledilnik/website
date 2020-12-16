@@ -126,10 +126,10 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
                     s.Append "<tr>" |> ignore
                     let regionTooltip =
                         sprintf
-                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%s</td>"
                             regionColor
                             regionName
-                            (tooltipValueFormatter state dataValue)
+                            (I18N.NumberFormat.formatNumber(dataValue))
                     s.Append regionTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )

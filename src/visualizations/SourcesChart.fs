@@ -140,13 +140,13 @@ let tooltipFormatter jsThis =
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
+           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name (I18N.NumberFormat.formatNumber (p?point?fmtTotal : int)))
        |> String.concat "<br>")
 
 let tooltipFormatterWithTotal totalText jsThis =
     let pts: obj [] = jsThis?points
     let total = pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
-    tooltipFormatter jsThis + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" totalText (total |> string)
+    tooltipFormatter jsThis + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" totalText (I18N.NumberFormat.formatNumber total)
 
 
 

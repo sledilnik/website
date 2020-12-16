@@ -80,10 +80,10 @@ let totalVsWeekChartOptions state =
         tooltip = pojo
             {| formatter = fun () ->
                     let date = I18N.tOptions "days.longerDate" {| date = jsThis?point?date |}
-                    sprintf "<b>%s</b><br>%s: %d<br>%s: %d"
+                    sprintf "<b>%s</b><br>%s: %s<br>%s: %s"
                         date
-                        (i18n "totalVsWeek.xAxisLabel") jsThis?x
-                        (i18n "totalVsWeek.yAxisLabel") jsThis?y |}
+                        (i18n "totalVsWeek.xAxisLabel") (I18N.NumberFormat.formatNumber(jsThis?x : int))
+                        (i18n "totalVsWeek.yAxisLabel") (I18N.NumberFormat.formatNumber(jsThis?y : int)) |}
 
         series = [|
             {| data = data

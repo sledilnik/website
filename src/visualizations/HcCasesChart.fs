@@ -96,7 +96,7 @@ let tooltipFormatter jsThis =
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
+           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name (I18N.NumberFormat.formatNumber(p?point?fmtTotal:int)))
        |> String.concat "<br>")
 
 

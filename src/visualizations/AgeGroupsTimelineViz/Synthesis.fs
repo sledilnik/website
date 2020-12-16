@@ -113,7 +113,7 @@ let tooltipFormatter jsThis =
                                 (format,
                                  ageGroupColor,
                                  ageGroupLabel,
-                                 dataValue,
+                                 I18N.NumberFormat.formatNumber(dataValue),
                                  percentage)
                         s.Append ageGroupTooltip |> ignore
                         s.Append "</tr>" |> ignore
