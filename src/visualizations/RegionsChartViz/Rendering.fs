@@ -129,7 +129,7 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
                             "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%s</td>"
                             regionColor
                             regionName
-                            (I18N.NumberFormat.formatNumber(dataValue))
+                            (I18N.NumberFormat.formatNumber(dataValue, {| maximumFractionDigits=1 |}))
                     s.Append regionTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )
