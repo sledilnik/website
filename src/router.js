@@ -6,18 +6,13 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
+import FAQPage from './pages/FAQPage.vue'
 
 import aboutMdSl from './content/sl/about.md'
 import aboutMdEn from './content/en/about.md'
 import aboutMdHr from './content/hr/about.md'
 import aboutMdDe from './content/de/about.md'
 import aboutMdIt from './content/it/about.md'
-
-import contentMdSl from './content/sl/faq.md'
-import contentMdEn from './content/en/faq.md'
-import contentMdHr from './content/hr/faq.md'
-import contentMdDe from './content/de/faq.md'
-import contentMdIt from './content/it/faq.md'
 
 import dataMdSl from './content/sl/data.md'
 import dataMdEn from './content/en/data.md'
@@ -35,13 +30,6 @@ Vue.use(VueRouter)
 Vue.use(VueMeta)
 
 const mdContent = {
-  faq: {
-    sl: contentMdSl,
-    en: contentMdEn,
-    hr: contentMdHr,
-    de: contentMdDe,
-    it: contentMdIt,
-  },
   about: {
     sl: aboutMdSl,
     en: aboutMdEn,
@@ -222,6 +210,11 @@ const routes = [
         path: 'posts/:postId',
         name: 'post',
         component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
+      },
+      {
+        path: 'faq',
+        name: 'faq',
+        component: FAQPage,
       },
       {
         path: 'links', // Retired page
