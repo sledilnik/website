@@ -8,10 +8,12 @@ import store from './store/index'
 import plugins from './plugins/index'
 import './main.js'
 import 'style/index.scss'
+import VueDateFns from "vue-date-fns";
 
-Vue.use(plugins)
-Vue.use(VueScrollTo, { offset: 60 })
-Vue.use(VScrollLock)
+Vue.use(plugins);
+Vue.use(VueScrollTo, { offset: 60 });
+Vue.use(VScrollLock);
+Vue.use(VueDateFns);
 
 new Vue({
   render: (h) => h(App),

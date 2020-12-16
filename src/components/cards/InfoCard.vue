@@ -5,7 +5,7 @@
       <div class="card-number">
         <span v-if="showRunningSum">{{ renderRunningSum | number }}</span>
         <span v-else>{{ renderValues.lastDay.value | number }}</span>
-        <div v-if="showRunningSum" class="card-percentage-diff" :class="diffClass">
+        <div v-if="showRunningSum" class="card-percentage-diff" :class="diffSumClass">
           {{ renderRunningSumDiff | prefixDiff | number }}%
         </div>
         <div v-else class="card-percentage-diff" :class="diffClass">
@@ -114,6 +114,15 @@ export default {
         return this.goodTrend === 'down' ? 'bad' : 'good'
       } else {
         return this.goodTrend === 'down' ? 'good' : 'bad'
+      }
+    },
+    diffSumClass() {
+      if (this.renderRunningSumDiff === 0) {
+        return 'no-change'
+      } else if (this.renderRunningSumDiff > 0) {
+        return 'bad'
+      } else {
+        return 'good'
       }
     },
     cardTitle() {

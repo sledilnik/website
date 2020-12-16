@@ -32,7 +32,7 @@ type DayValueFloat = JsTimestamp*float
 module Metrics  =
     let all = [
         { Metric=Cases; Color="#bda506";Id="cases"; YAxisIndex = 0 }
-        { Metric=Hospitalized; Color="#D96756"
+        { Metric=Hospitalized; Color="#be7A2a"
           Id="hospitalized"; YAxisIndex = 1 }
         { Metric=Deceased; Color="#8C71A8"; Id="deceased"; YAxisIndex = 2 }
     ]

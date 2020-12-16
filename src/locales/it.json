@@ -612,6 +612,10 @@
         "planRelaxation": {
             "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
             "title": "Piano"
+        },
+        "liftServices": {
+            "description": "Rilassamento: trasporto pubblico (servizio limitato), alcuni servizi (fiorai, autolavaggi, tintorie)<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
+            "title": "Servizi"
         }
     },
     "tableDict": {
@@ -1171,6 +1175,15 @@
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
+        },
+        "metricsCorrelation": {
+            "deceased": "Deceduti",
+            "hospitalized": "Ricoverati",
+            "cases": "Casi confermati",
+            "all": "Totale",
+            "averageByDay": "Per giorno (media)",
+            "titleMenu": "Correlazione tra casi, ricoveri e decessi",
+            "title": "Correlazione tra casi, ricoveri e decessi"
         }
     },
     "footer": {

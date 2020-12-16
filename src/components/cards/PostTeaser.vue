@@ -6,13 +6,13 @@
           <a v-if="post.link_to" :href="post.link_to" target="_blank">
             <div
               class="teaser__image"
-              v-bind:style="{ 'background-image': `url(${post.image})` }"
+              v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
             ></div>
           </a>
           <router-link v-else :to="postLink">
             <div
               class="teaser__image"
-              v-bind:style="{ 'background-image': `url(${post.image})` }"
+              v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
             ></div>
           </router-link>
         </b-col>

@@ -28,7 +28,7 @@ jobs:
   undeploy:
     runs-on: ubuntu-20.04
     needs: [check]
-    if: "needs.check.status_code != '404' && (github.event.action == 'closed' || !has_label)"
+    if: "needs.check.status_code != '404' && (github.event.action == 'closed' || !needs.check.has_label)"
     steps:
       - name: Debug
         uses: hmarr/debug-action@v1.0.0
