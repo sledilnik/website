@@ -15,6 +15,8 @@ type State =
       MunicipalitiesChartSearch : string option
       MunicipalitiesChartSort : string option
       MetricsComparisonType: string option
+      RegionsMetricType: string option
+      PatientsBreakdown: string option
       DateFrom : string option }
 
     with
@@ -25,6 +27,8 @@ type State =
           MunicipalitiesChartSearch = None
           MunicipalitiesChartSort = None
           MetricsComparisonType = None
+          RegionsMetricType = None
+          PatientsBreakdown = None
           DateFrom = None }
 
 let getState () =
@@ -39,6 +43,10 @@ let getState () =
             { state with MunicipalitiesChartSort = Some value }
         | "metrics-comparison" ->
             { state with MetricsComparisonType = Some value }
+        | "regions-metric" ->
+            { state with RegionsMetricType = Some value }
+        | "patients" ->
+            { state with PatientsBreakdown = Some value }
         | "dateFrom" ->
             { state with DateFrom = Some value }
         | _ -> state
@@ -51,6 +59,8 @@ let setState state =
             yield state.MunicipalitiesChartSearch |> Option.map (fun value -> ("search", value))
             yield state.MunicipalitiesChartSort |> Option.map (fun value -> ("sort", value))
             yield state.MetricsComparisonType |> Option.map (fun value -> ("metrics-comparison", value))
+            yield state.RegionsMetricType |> Option.map(fun value -> ("regions-metric", value))
+            yield state.PatientsBreakdown |> Option.map(fun value -> ("patients", value))
             yield state.DateFrom |> Option.map (fun value -> ("dateFrom", value))
         }
         |> Seq.choose id

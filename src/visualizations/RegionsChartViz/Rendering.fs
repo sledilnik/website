@@ -38,12 +38,35 @@ type Msg =
     | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
 
 let regionTotal (region : Region) : int =
     region.Municipalities
     |> List.map (fun city -> city.ActiveCases)
     |> List.choose id
     |> List.sum
+
+let MetricTypeQueryParam = [
+                        ("active-cases", MetricType.ActiveCases)
+                        ("confirmed-cases", MetricType.ConfirmedCases)
+                        ("new-cases-7-days", MetricType.NewCases7Days)
+                        ("deceased", MetricType.Deceased)] |> Map.ofList
+
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: RegionsChartState, commands: Cmd<Msg>): RegionsChartState * Cmd<Msg>=
+       let state = match queryParams.RegionsMetricType with
+                   | Some (sort : string) ->
+                       match sort.ToLower() |> MetricTypeQueryParam.TryFind with
+                       | Some v -> {state with MetricType=v}
+                       | _ -> state
+                   | _ -> state
+
+       state, commands
+
+let stateToQueryParams (state: RegionsChartState) (queryParams: QueryParams.State)
+    = { queryParams with
+                        RegionsMetricType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricTypeQueryParam
+                                                     }
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -92,6 +115,7 @@ let update (msg: Msg) (state: RegionsChartState)
         { state with ScaleType = scaleType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let tooltipValueFormatter (state: RegionsChartState) value =
     match state.ChartConfig.RelativeTo with
@@ -275,7 +299,13 @@ let render (state : RegionsChartState) dispatch =
         renderRegionsSelectors state.RegionsConfig dispatch
     ]
 
-let renderChart
-    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
-    React.elmishComponent
-        ("RegionsChart", init config props.data, update, render)
+//let renderChart
+//    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
+//    React.elmishComponent
+//        ("RegionsChart", init config props.data, update, render)
+
+let renderChart (config: RegionsChartConfig) (props : {| data : RegionsData |})  =
+    React.functionComponent(fun (props : {| data : RegionsData |}) ->
+        let state, dispatch = QueryParams.useElmishWithQueryParams (init config props.data) update stateToQueryParams Msg.QueryParamsUpdated
+        render state dispatch
+    ) props

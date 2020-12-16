@@ -38,7 +38,7 @@ let availableMetricTypes =
       { MetricType = Today; IsAveraged = true } ]
 
 let MetricQueryParam = [
-    ("active", availableMetricTypes.[0]);
+    ("active", availableMetricTypes.[0])
     ("today", availableMetricTypes.[1])
     ("7-days-average", availableMetricTypes.[3])
     ("to-date", availableMetricTypes.[2])] |> Map.ofList

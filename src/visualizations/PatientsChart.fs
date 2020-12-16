@@ -88,11 +88,35 @@ let getAllBreakdowns state = seq {
             yield Facility fcode
     }
 
+
+
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | SwitchBreakdown of Breakdown
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
+
+let PatientsBreakdownQueryParam = List.append [
+                                   ("by-hospital", Breakdown.ByHospital)
+                                   ("all-hospitals", Breakdown.AllHospitals)]
+                                   (Utils.Dictionaries.facilities
+                                    |> Map.toList
+                                    |> List.map (fun (k, v) -> ( "facility-" + k, Breakdown.Facility k)))
+                                   |> Map.ofList
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
+       let state = match queryParams.PatientsBreakdown with
+                   | Some (sort : string) ->
+                       match sort.ToLower() |> PatientsBreakdownQueryParam.TryFind with
+                       | Some v -> {state with Breakdown=v}
+                       | _ -> state
+                   | _ -> state
+
+       state, commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State)
+    = { queryParams with
+                        PatientsBreakdown = Map.tryFindKey (fun k v -> v = state.Breakdown) PatientsBreakdownQueryParam }
 
 let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
@@ -129,6 +153,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Breakdown = breakdown }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let renderByHospitalChart (state : State) dispatch =
 
@@ -368,5 +393,7 @@ let render (state : State) dispatch =
             renderBreakdownSelectors state dispatch
         ]
 
-let patientsChart (props : {| hTypeToDisplay : HospitalType |}) =
-    React.elmishComponent("PatientsChart", init props.hTypeToDisplay, update, render)
+let patientsChart = React.functionComponent(fun (props : {| hTypeToDisplay : HospitalType |}) ->
+        let state, dispatch = QueryParams.useElmishWithQueryParams (init props.hTypeToDisplay) update stateToQueryParams Msg.QueryParamsUpdated
+        React.useMemo((fun () -> render state dispatch), [|state|])
+        )
