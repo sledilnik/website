@@ -11,14 +11,6 @@ import it from './locales/it.json'
 
 import {Highcharts} from './visualizations/_highcharts'
 
-export const langCodeMap = {
-  en: 'en-EN',
-  sl: 'sl-SI',
-  hr: 'hr-HR',
-  de: 'de-DE',
-  it: 'it-IT',
-}
-
 Vue.use(VueI18Next)
 
 const detectionOptions = {
@@ -71,11 +63,9 @@ export function getSeparator(locale, separatorType) {
 }
 
 i18next.on('languageChanged', function(lng) {
-  const newLang = Object.keys(langCodeMap).includes(lng) ? lng : 'sl'
-  i18next.langCode = langCodeMap[newLang]
   i18next.separators = {
-    decimal: getSeparator(i18next.langCode, 'decimal'),
-    group: getSeparator(i18next.langCode, 'group')
+    decimal: getSeparator(lng, 'decimal'),
+    group: getSeparator(lng, 'group')
   }
   setHighchartsOptions(Highcharts);
 });
@@ -120,7 +110,7 @@ localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
 const i18n = new VueI18Next(i18next)
 
 export function formatNumber(number){
-  return Intl.NumberFormat(i18next.langCode || 'sl-SI').format(number)
+  return Intl.NumberFormat(i18next.language || 'sl-SI').format(number)
 }
 
 export default i18n
