@@ -2,12 +2,6 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
-          <PostTeaser class="col-md-6 p-0 p-sm-2 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
-      </div>
-      <div class="posts d-flex" v-else>
-          <PostTeaserSkeleton class="col-md-6 p-0 p-sm-2 p-md-3" v-for="i in 2" :key="i" />
-      </div>
       <div class="cards-wrapper">
         <!--
         <Info-card
@@ -75,6 +69,12 @@
           running-sum-field="statePerTreatment.deceased"
           series-type="state"
         />
+      </div>
+      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
+          <PostTeaser class="col-md-6 p-0 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
+      </div>
+      <div class="posts d-flex" v-else>
+          <PostTeaserSkeleton class="col-md-6 p-0 p-md-3" v-for="i in 2" :key="i" />
       </div>
       <b-row cols="12">
         <b-col>
