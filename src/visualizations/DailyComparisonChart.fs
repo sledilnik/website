@@ -96,7 +96,7 @@ let renderChartOptions (state : State) dispatch =
             let yStr =
                 match state.DisplayType with
                 | PositivePct -> percentageFormatter p?point?y
-                | _ -> sprintf "%d" p?point?y
+                | _ -> I18N.NumberFormat.formatNumber (p?point?y : float)
             fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td><td style='text-align: right; padding-left: 10px'>%s</td></tr>"
                 p?series?color
                 p?point?date
