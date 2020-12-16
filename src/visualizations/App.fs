@@ -532,7 +532,7 @@ let render (state: State) (_: Msg -> unit) =
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
-          hCenters; infections
+          infections; hCenters 
         ]
 
     let worldVisualizations =
