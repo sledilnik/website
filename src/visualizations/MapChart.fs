@@ -697,7 +697,7 @@ let renderMap (state : State) =
                             reversed = true
                             labels =
                                 {|
-                                    formatter = fun() -> jsThis?value
+                                    formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
                                 |} |> pojo
                         |} |> pojo
 
