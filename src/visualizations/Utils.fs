@@ -74,13 +74,13 @@ let percentageValuesWith0DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
 let percentageValuesWith1DecimalTrailingZeroLabelFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
+    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1; signDisplay="always" |})
 
 let percentageValuesLabelFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2 |})
+    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2; signDisplay="always" |})
 
 let percentageValuesWith3DecimalLabelFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=3 |})
+    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=3; signDisplay="always" |})
 
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)
