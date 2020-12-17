@@ -467,7 +467,7 @@ let tooltipFormatter state jsThis =
             if totalConfirmed > 0 then
                 label
                     + sprintf " (%s %% %s)" (I18N.NumberFormat.formatNumber(pctPopulation)) (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                    + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.map.confirmedCases") (I18N.NumberFormat.formatNumber(value100k:float)) (I18N.t "charts.map.per100k")
                     + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                     + if (Array.max lastTwoWeeks) > 0. then
                         state |> sparklineFormatter lastTwoWeeks else ""
