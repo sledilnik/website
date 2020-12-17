@@ -329,7 +329,7 @@ let renderChartOptions
     let valuesLabelFormatter (value: float) =
         match ChartMode.ScaleType state.ChartMode with
         | Absolute -> (I18N.NumberFormat.formatNumber (abs value))
-        | Relative -> Utils.percentageValuesLabelFormatter value
+        | Relative -> Utils.percentageValuesWith3DecimalLabelFormatter value
 
     let dateText = (I18N.tOptions "charts.common.dataDate" {| date = latestDate  |})
 

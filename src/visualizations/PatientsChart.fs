@@ -202,7 +202,7 @@ let renderStructureChart (state : State) dispatch =
                     fmtUnder
                     p?series?color
                     p?series?name
-                    p?point?fmtTotal
+                    (I18N.NumberFormat.formatNumber(p?point?fmtTotal : int))
                 if fmtStr.Length > 0 && List.contains p?point?seriesId [ "hospitalized"; "care" ] then
                     fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
                 else

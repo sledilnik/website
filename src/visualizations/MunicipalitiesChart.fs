@@ -328,13 +328,13 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "active"
-                                prop.text (sprintf "%s" (I18N.NumberFormat.formatNumber(municipality.ActiveCases |> Option.defaultValue 0))) ]
+                                prop.text (I18N.NumberFormat.formatNumber(municipality.ActiveCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "total-and-new"
                                 prop.children [
                                     Html.div [
                                         prop.className "total"
-                                        prop.text (sprintf "%s" (I18N.NumberFormat.formatNumber(municipality.MaxConfirmedCases |> Option.defaultValue 0))) ]
+                                        prop.text (I18N.NumberFormat.formatNumber(municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
                                     if municipality.NewCases.IsSome then
                                         Html.div [
                                             prop.className "new"
