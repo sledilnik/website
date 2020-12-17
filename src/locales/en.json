@@ -681,15 +681,17 @@
             }
         },
         "sources": {
-            "title": "Sources of Infection and Quarantine",
+            "title": "Sources of Infection and Location",
             "titleMenu": "Sources of Infection",
-            "disclaimerGeneral": "Note: data for last week are not complete yet - share of imported cases may be smaller than actual.",
+            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases maybe be lower than actual.",
             "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
             "quarantine": "Quarantine",
             "quarantineRelative": "Quarantine (Relative)",
+            "byLocation": "By Location",
+            "byLocationRelative": "By Location (Relative)",
             "bySource": "Sources of Infection",
             "bySourceRelative": "Sources of Infection (Relative)",
             "bySourceCountry": "Imported Cases",
@@ -699,7 +701,23 @@
             "localSource": "Local Source",
             "sourceUnknown": "Unknown Source",
             "totalConfirmed": "Confirmed Cases Total",
-            "totalImported": "Imported Cases Total"
+            "totalImported": "Imported Cases Total",
+            "family": "Family",
+            "work": "Work",
+            "school": "Educational Institution",
+            "hospital": "Hospital",
+            "otherHealthcare": "Other Healthcare Institution",
+            "retirementHome": "Retirement Home",
+            "prison": "Prison",
+            "transport": "Public Transport",
+            "shop": "Shop",
+            "restaurant": "Restaurant",
+            "sport": "Sport Activity",
+            "gatheringPrivate": "Private Gathering",
+            "gatheringOrganized": "Organized Gathering",
+            "locationOther": "Other",
+            "locationUnknown": "Unknown"
+
         }
     },
     "footer": {

@@ -1157,15 +1157,17 @@
             }
         },
         "sources": {
-            "title": "Viri okužb in karantena",
+            "title": "Viri okužb in lokacija",
             "titleMenu": "Viri okužb",
-            "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato so uvoženi primeri lahko manjši kot dejansko.",
+            "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato je posamezno število primerov lahko manjše kot dejansko.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",
             "confirmedCases": "Potrjeni primeri",
             "confirmedFromQuarantine": "Potrjeni iz karantene",
             "quarantine": "Karantena",
             "quarantineRelative": "Karantena (relativno)",
+            "byLocation": "Po lokaciji",
+            "byLocationRelative": "Po lokaciji (relativno)",
             "bySource": "Viri okužb",
             "bySourceRelative": "Viri okužb (relativno)",
             "bySourceCountry": "Uvoženi primeri",
@@ -1175,7 +1177,22 @@
             "localSource": "Lokalni vir",
             "sourceUnknown": "Neznan vir",
             "totalConfirmed": "Skupaj potrjeni",
-            "totalImported": "Skupaj uvoženi"
+            "totalImported": "Skupaj uvoženi",
+            "family": "družina, skupno gospodinjstvo",
+            "work": "delovno mesto",
+            "school": "vzgojno-izobraževalna institucija",
+            "hospital": "bolnišnica",
+            "otherHealthcare": "druga zdravstvena ustanova",
+            "retirementHome": "DSO/SVZ",
+            "prison": "zapor",
+            "transport": "javni prevoz",
+            "shop": "trgovina",
+            "restaurant": "gostinski obrat",
+            "sport": "športna dejavnost",
+            "gatheringPrivate": "zasebno druženje",
+            "gatheringOrganized": "organizirano druženje",
+            "locationOther": "drugo",
+            "locationUnknown": "neznano"
         }
     },
     "footer": {
