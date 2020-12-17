@@ -10,9 +10,18 @@ Vue.filter("prefixDiff", function (value) {
   }
 });
 
-Vue.filter('number', function(value) {
-  return formatNumber(value)
-})
+Vue.filter("number", function(value) {
+  return formatNumber(value);
+});
+
+Vue.filter("percent", function(value) {
+  return formatNumber(value / 100, {
+    style: "percent",
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 2,
+    signDisplay: "always",
+  });
+});
 
 /**
  * markdown filter

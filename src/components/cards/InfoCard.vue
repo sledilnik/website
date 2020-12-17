@@ -6,10 +6,10 @@
         <span v-if="showRunningSum">{{ renderRunningSum | number }}</span>
         <span v-else>{{ renderValues.lastDay.value | number }}</span>
         <div v-if="showRunningSum" class="card-percentage-diff" :class="diffSumClass">
-          {{ renderRunningSumDiff | prefixDiff | number }}%
+          {{ renderRunningSumDiff | percent }}
         </div>
         <div v-else class="card-percentage-diff" :class="diffClass">
-          {{ renderValues.lastDay.percentDiff | prefixDiff | number }}%
+          {{ renderValues.lastDay.percentDiff | percent }}
         </div>
       </div>
       <div :id="name" class="card-diff">
