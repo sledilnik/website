@@ -35,8 +35,7 @@
         </div>
         <div v-if="showOut && field === 'cases.active'" class="card-diff-item">
           <div class="trend-icon deceased down"></div>
-          <span class="out deceased">{{ renderActiveValues(fieldNewCases).lastDay.value -
-              renderActiveValues(field).lastDay.diff | number }}</span>
+          <span class="out deceased">{{ renderActiveValues(fieldRecovered).lastDay.diff | number }}</span>
         </div>
         <div v-if="showDeceased" class="card-diff-item">
           <div class="trend-icon deceased"></div>
@@ -68,6 +67,7 @@ export default {
     field: String,
     fieldNewCases: String,
     fieldDeceased: String,
+    fieldRecovered: String,
     totalIn: String,
     totalOut: String,
     totalDeceased: String,
