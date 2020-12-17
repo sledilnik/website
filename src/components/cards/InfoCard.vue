@@ -3,13 +3,13 @@
     <div class="hp-card" v-if="loaded">
       <div class="card-title">{{ title }}</div>
       <div class="card-number">
-        <span v-if="showRunningSum">{{ renderRunningSum }}</span>
-        <span v-else>{{ renderValues.lastDay.value }}</span>
+        <span v-if="showRunningSum">{{ renderRunningSum | number }}</span>
+        <span v-else>{{ renderValues.lastDay.value | number }}</span>
         <div v-if="showRunningSum" class="card-percentage-diff" :class="diffSumClass">
-          {{ renderRunningSumDiff | prefixDiff }}%
+          {{ renderRunningSumDiff | prefixDiff | number }}%
         </div>
         <div v-else class="card-percentage-diff" :class="diffClass">
-          {{ renderValues.lastDay.percentDiff | prefixDiff }}%
+          {{ renderValues.lastDay.percentDiff | prefixDiff | number }}%
         </div>
       </div>
       <div :id="name" class="card-diff">
@@ -19,13 +19,13 @@
         <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
-            >{{ Math.abs(renderValues.lastDay.diff) }}
+            >{{ Math.abs(renderValues.lastDay.diff) | number }}
           </span>
         </div>
         <div v-if="showIn" class="card-diff-item">
           <div class="trend-icon in bad up"></div>
           <span v-if="field === 'cases.active'" class="in bad">{{
-            renderActiveValues(fieldNewCases).lastDay.value
+            renderActiveValues(fieldNewCases).lastDay.value | number
           }}</span>
           <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
         </div>
@@ -34,17 +34,17 @@
           <span v-if="field === 'cases.active'" class="out good">{{
             renderActiveValues(fieldNewCases).lastDay.value -
               renderActiveValues(field).lastDay.diff -
-              renderActiveValues(fieldDeceased).lastDay.value
+              renderActiveValues(fieldDeceased).lastDay.value | number
           }}</span>
-          <span v-else class="out good">{{ renderTotalValues(totalOut) }}</span>
+          <span v-else class="out good">{{ renderTotalValues(totalOut) | number }}</span>
         </div>
         <div v-if="showDeceased" class="card-diff-item">
           <div class="trend-icon deceased"></div>
           <span v-if="field === 'cases.active'" class="deceased">{{
-            renderActiveValues(fieldDeceased).lastDay.value
+            renderActiveValues(fieldDeceased).lastDay.value | number
           }}</span>
           <span v-else class="deceased"
-            >{{ renderTotalValues(totalDeceased) }}
+            >{{ renderTotalValues(totalDeceased) | number }}
           </span>
         </div>
       </div>

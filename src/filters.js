@@ -1,5 +1,6 @@
 import Vue from "vue";
 import marked from "marked"
+import { formatNumber } from "./i18n";
 
 Vue.filter("prefixDiff", function (value) {
   if (value > 0) {
@@ -9,6 +10,9 @@ Vue.filter("prefixDiff", function (value) {
   }
 });
 
+Vue.filter('number', function(value) {
+  return formatNumber(value)
+})
 
 /**
  * markdown filter

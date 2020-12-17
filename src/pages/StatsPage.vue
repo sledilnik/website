@@ -2,12 +2,6 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
-          <PostTeaser class="col-md-6" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
-      </div>
-      <div class="posts d-flex" v-else>
-          <PostTeaserSkeleton class="col-md-6" v-for="i in 2" :key="i" />
-      </div>
       <div class="cards-wrapper">
         <!--
         <Info-card
@@ -75,6 +69,12 @@
           running-sum-field="statePerTreatment.deceased"
           series-type="state"
         />
+      </div>
+      <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
+          <PostTeaser class="col-md-6 p-0 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
+      </div>
+      <div class="posts d-flex" v-else>
+          <PostTeaserSkeleton class="col-md-6 p-0 p-md-3" v-for="i in 2" :key="i" />
       </div>
       <b-row cols="12">
         <b-col>
@@ -201,23 +201,27 @@ $loader-width: 50px
   margin: 0px auto 44px
   min-height: 179px
   @media only screen and (min-width: 768px)
-    margin: 0px auto 88px
+    margin: 0px auto 44px
   @media only screen and (max-width: 480px)
     flex-direction: column
     min-height: 247px
+    
 
 .cards-wrapper
-  display: flex
-  flex-wrap: wrap
   display: grid
   gap: 15px
-  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  grid-template-columns: repeat(1, minmax(165px, 1fr))
   margin: 0px auto 44px
 
+  @media only screen and (min-width: 480px)
+    grid-template-columns: repeat(2, minmax(165px, 1fr))
+
   @media only screen and (min-width: 768px)
-    grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 0px 15px 88px
+    margin: 0px 15px 44px
+
+  @media only screen and (min-width: 992px)
+    grid-template-columns: repeat(3, minmax(165px, 1fr))
 
 .stats-page
   margin-top: 48px

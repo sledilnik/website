@@ -76,7 +76,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeMetrics metrics -> 
+    | ChangeMetrics metrics ->
         { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
@@ -91,11 +91,11 @@ let tooltipFormatter jsThis =
     + (pts
        |> Seq.map (fun p ->
            sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
-                p?series?color p?series?name p?point?y)
+                p?series?color p?series?name (I18N.NumberFormat.formatNumber(p?point?y : float)))
        |> String.concat "<br>")
     + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>"""
         (I18N.t "charts.deceased.deceased-total")
-        (total |> string)
+        (total |> I18N.NumberFormat.formatNumber)
 
 let renderChartOptions (state : State) dispatch =
     let className = "cases-chart"
@@ -123,7 +123,7 @@ let renderChartOptions (state : State) dispatch =
                         dataPoint.total.deceased.today
                         |> subtract dataPoint.total.deceased.hospital.today
                         |> subtract dataPoint.total.deceasedCare.today
-            | ToDate -> 
+            | ToDate ->
                 match series with
                 | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
                 | DeceasedAcute ->

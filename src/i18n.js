@@ -9,7 +9,6 @@ import hr from './locales/hr.json'
 import de from './locales/de.json'
 import it from './locales/it.json'
 
-
 import {Highcharts} from './visualizations/_highcharts'
 
 Vue.use(VueI18Next)
@@ -49,14 +48,26 @@ function setHighchartsOptions () {
             rangeSelectorZoom: i18next.t("charts.common.zoom"),
             resetZoom: i18next.t("charts.common.resetZoom"),
             resetZoomTitle: i18next.t("charts.common.resetZoomTitle"),
-            thousandsSep: i18next.t("charts.common.thousandsSep"),
-            decimalPoint: i18next.t("charts.common.decimalPoint"),
+            thousandsSep: i18next.separators.group,
+            decimalPoint: i18next.separators.decimal,
         }
     });
 };
 
+export function getSeparator(locale, separatorType) {
+  const numberWithGroupAndDecimalSeparator = 1000.1;
+  return Intl.NumberFormat(locale)
+      .formatToParts(numberWithGroupAndDecimalSeparator)
+      .find(part => part.type === separatorType)
+      .value;
+}
+
 i18next.on('languageChanged', function(lng) {
-    setHighchartsOptions(Highcharts);
+  i18next.separators = {
+    decimal: getSeparator(lng, 'decimal'),
+    group: getSeparator(lng, 'group')
+  }
+  setHighchartsOptions(Highcharts);
 });
 
 i18next.use(LanguageDetector).init({
@@ -97,5 +108,9 @@ i18next.services.pluralResolver.addRule(
 localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
 
 const i18n = new VueI18Next(i18next)
+
+export function formatNumber(number, opts = {}){
+  return Intl.NumberFormat(i18next.language || 'sl-SI', opts).format(number)
+}
 
 export default i18n

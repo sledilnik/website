@@ -1,9 +1,9 @@
 <template>
-  <div class="teaser__post">
+  <div class="post__teaser">
     <b-card no-body class="card overflow-hidden">
-      <b-row no-gutters class="h-100">
-        <b-col lg="4" class="h-100 d-none d-lg-block py-2 pl-2">
-          <a v-if="post.link_to" :href="post.link_to" target="_blank">
+      <div class="d-flex h-100 flex-column flex-lg-row h-100">
+        <div class="col-lg-4 h-100 d-block py-2 pl-2 pr-0">
+          <a class="h-100" v-if="post.link_to" :href="post.link_to" target="_blank">
             <div
               class="teaser__image"
               v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
@@ -15,8 +15,8 @@
               v-bind:style="{ 'background-image': `url(${post.image_thumb})` }"
             ></div>
           </router-link>
-        </b-col>
-        <b-col lg="8">
+        </div>
+        <div class="col-lg-8 p-0">
           <b-card-body :title="post.title">
             <div
               class="text-muted card-text"
@@ -27,8 +27,8 @@
               <router-link v-else class="stretched-link" :to="postLink">Preberi več</router-link>
             </div>
           </b-card-body>
-        </b-col>
-      </b-row>
+        </div>
+      </div>
     </b-card>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style lang="sass">
-.teaser__post
+.post__teaser
   .card-title
     font-size: 18px
     line-height: 24px
@@ -76,14 +76,11 @@ export default {
     @media only screen and (max-width: 480px)
       padding: 16px
 
-  @media only screen and (max-width: 768px)
-    padding-left: 7.5px
-    padding-right: 7.5px
-
+  @media only screen and (max-width: 768px) and (min-width: 481px)
     &:first-child
-      margin-left: -7.5px
+      padding-right: 7.5px !important
     &:last-child
-      margin-right: -7.5px
+      padding-left: 7.5px !important
 
   @media only screen and (max-width: 480px)
     &:first-child
@@ -110,10 +107,11 @@ export default {
     -webkit-box-orient: vertical
 
 .teaser__image
+  min-height: 130px
   margin-right: 0
   height: 100%
   background-size: cover
   background-repeat: no-repeat
-  background-position: top left
+  background-position: bottom center
 
 </style>
