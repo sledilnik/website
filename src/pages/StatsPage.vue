@@ -71,10 +71,10 @@
         />
       </div>
       <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
-          <PostTeaser class="col-md-6 p-0 p-md-3" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
+          <PostTeaser class="col-md-6" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
       </div>
       <div class="posts d-flex" v-else>
-          <PostTeaserSkeleton class="col-md-6 p-0 p-md-3" v-for="i in 2" :key="i" />
+          <PostTeaserSkeleton class="col-md-6" v-for="i in 2" :key="i" />
       </div>
       <b-row cols="12">
         <b-col>
@@ -200,7 +200,7 @@ $loader-width: 50px
   margin: 0px auto 44px
   min-height: 179px
   @media only screen and (min-width: 768px)
-    margin: 0px auto 44px
+    margin: 0px auto 88px
   @media only screen and (max-width: 480px)
     flex-direction: column
     min-height: 247px
@@ -217,7 +217,7 @@ $loader-width: 50px
 
   @media only screen and (min-width: 768px)
     gap: 30px
-    margin: 0px 15px 44px
+    margin: 0px 15px 88px
 
   @media only screen and (min-width: 992px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
