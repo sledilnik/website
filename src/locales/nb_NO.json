@@ -266,11 +266,6 @@
         "deceasedToDate": "Bekreftede dødsfall",
         "icu": "På intensivavdeling",
         "inHospital": "Hospitalisert",
-        "redPhase": "Rød-fase",
-        "orangePhase": "Oransje stadie",
-        "redPhaseGenitive": "rød",
-        "orangePhaseGenitive": "oransje",
-        "per100k": "per 100k",
         "active": "Aktive tilfeller",
         "confirmedToDate": "Bekreftede tilfeller",
         "tests": "Tester i dag"

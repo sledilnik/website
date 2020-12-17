@@ -98,7 +98,6 @@ import PostTeaser from "components/cards/PostTeaser";
 import PostTeaserSkeleton from "components/cards/PostTeaserSkeleton";
 import TimeStamp from "components/TimeStamp";
 import Notice from "components/Notice";
-import Posts from "components/Posts";
 import Youtube from "components/Youtube";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
