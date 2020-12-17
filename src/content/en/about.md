@@ -85,6 +85,7 @@ Project collaborators:
 -   [Andrej Srakar](http://www.ier.si/) - sources, modeling
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeling
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - sources, source validation, modeling
+-   [Barbara Krajnc](https://twitter.com/bakrajnc) - content, communication
 -   [Bojan Košir](https://twitter.com/BojanKosir) - data model and validation, sources
 -   [Boštjan Špetič](https://www.igzebedze.com/) - data scraping, communication
 -   [Darja Potočan](http://www.marsowci.net/) - social networks, sources
@@ -99,7 +100,7 @@ Project collaborators:
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
--   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
+-   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, data validation, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - coordination, data model and validation
@@ -117,9 +118,11 @@ Project collaborators:
 -   [Mitja Potočin](https://github.com/mitjapotocin) - web page
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
+-   [Nina Rolih](https://www.facebook.com/tanoranina) - content, graphic design
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - scripting, statistics
+-   [Sebastian Pleško](https://twitter.com/seba1337) - sources
 -   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tanja Ambrožič]()- data validation
@@ -127,4 +130,5 @@ Project collaborators:
 -   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
+-   [Žiga Brenčič](https://zigabrencic.com) - modeling
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling

@@ -65,6 +65,7 @@ Sodelavci projekta:
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
+-   [Barbara Krajnc](https://twitter.com/bakrajnc) - vsebina, komunikacija
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
 -   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno skrejpanje, komunikacija
 -   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
@@ -79,7 +80,7 @@ Sodelavci projekta:
 -   [Jure Novak](http://jurenovak.org/) - tekstopisje, viri
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
--   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, viri, validacija podatkov
+-   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, validacija podatkov, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - koordinacija, podatkovni model in validacija, viri
@@ -97,9 +98,11 @@ Sodelavci projekta:
 -   [Mitja Potočin](https://github.com/mitjapotocin) - spletna stran
 -   [Nace Štruc](https://www.nace.si/) - vizualizacije
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - tekstopisje, viri
+-   [Nina Rolih](https://www.facebook.com/tanoranina) - vsebine, grafično oblikovanje
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - skriptanje, statistika
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
+-   [Sebastian Pleško](https://twitter.com/seba1337) - viri
 -   [Sebastjan Cizel](https://sebastjancizel.github.io) - vizualizacije
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
 -   [Tanja Ambrožič]() - validacija podatkov
@@ -107,4 +110,5 @@ Sodelavci projekta:
 -   [Vanja Cvelbar](https://github.com/b100w11) - prevodi
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri, komunikacija
+-   [Žiga Brenčič](https://zigabrencic.com) - modeliranje
 -   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
