@@ -45,6 +45,18 @@
             >{{ cardData.subValues.deceased | number }}
           </span>
         </div>
+        <div v-if="cardData.extraFields">
+          <div
+            v-for="(field, fieldName, i) in cardData.extraFields"
+            :key="i"
+            class="card-diff-item"
+          >
+            <div class="trend-icon" :class="field.class"></div>
+            <span class="deceased"
+              >{{ cardData.subValues[fieldName] | number }}
+            </span>
+          </div>
+        </div>
       </div>
       <div class="data-time" :class="{ outdated }">
         {{

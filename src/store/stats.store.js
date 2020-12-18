@@ -29,6 +29,14 @@ const infoCardConfig = () => {
     },
     testsToday: {
       title: i18n.t('infocard.tests'),
+      extraFields: {
+        positive: {
+          class: 'bad up',
+        },
+        percent: {
+          class: 'neutral percent',
+        }
+      }
     },
   } 
 }
