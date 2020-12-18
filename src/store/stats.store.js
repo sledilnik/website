@@ -71,7 +71,7 @@ const actions = {
 
   refreshDataEvery: ({ dispatch }, seconds) => {
     setInterval(() => {
-      dispatch('fetchSummary')
+      dispatch('fetchData')
     }, seconds * 1000)
   },
 }
