@@ -30,7 +30,7 @@
           :title="$t('infocard.active')"
           field="cases.active"
           field-new-cases="cases.confirmedToday"
-          field-recovered="cases.recoveredToDate"
+          field-closed="cases.closedToDate"
           field-deceased="statePerTreatment.deceased"
           name="cases.active"
           running-sum-field="cases.confirmedToday"
