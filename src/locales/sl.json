@@ -1157,8 +1157,8 @@
             }
         },
         "sources": {
-            "title": "Viri okužb in lokacija",
-            "titleMenu": "Viri okužb",
+            "title": "Viri in lokacije okužb",
+            "titleMenu": "Viri in lokacije okužb",
             "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato je posamezno število primerov lahko manjše kot dejansko.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
             "sentToQuarantine": "Poslani v karanteno",

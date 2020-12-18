@@ -681,9 +681,9 @@
             }
         },
         "sources": {
-            "title": "Sources of Infection and Location",
-            "titleMenu": "Sources of Infection",
-            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases maybe be lower than actual.",
+            "title": "Sources and Locations of Infection",
+            "titleMenu": "Sources and Locations of Infection",
+            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
             "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
