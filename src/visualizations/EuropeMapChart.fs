@@ -176,6 +176,7 @@ let redCountries =
             ("ECU", "")
             ("GNQ", "")
             ("ERI", "")
+            ("EST", "")
             ("SWZ", "")
             ("ETH", "")
             ("PHL", "")
