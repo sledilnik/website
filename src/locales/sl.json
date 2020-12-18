@@ -866,7 +866,7 @@
         },
         "metricsCorrelation": {
             "title": "Soodvisnost primerov, hospitaliziranih in umrlih",
-            "titleMenu": "Soodvisnost primerov, hospitaliziranih in umrlih",
+            "titleMenu": "Soodvisnost",
             "averageByDay": "Po dnevih (7-dnevno povprečje)",
             "all": "Skupaj",
             "cases": "Potrjeni primeri",
