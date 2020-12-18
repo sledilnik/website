@@ -31,19 +31,12 @@
         </div>
         <div v-if="showOut" class="card-diff-item">
           <div class="trend-icon out good down"></div>
-          <span v-if="field === 'cases.active'" class="out good">{{
-            renderActiveValues(fieldNewCases).lastDay.value -
-              renderActiveValues(field).lastDay.diff -
-              renderActiveValues(fieldDeceased).lastDay.value | number
-          }}</span>
-          <span v-else class="out good">{{ renderTotalValues(totalOut) | number }}</span>
+          <span v-if="field !== 'cases.active'" class="out good">{{ renderTotalValues(totalOut) | number }}</span>
+          <span v-else class="out good">{{ renderActiveValues(fieldRecovered).lastDay.diff | number }}</span>
         </div>
         <div v-if="showDeceased" class="card-diff-item">
           <div class="trend-icon deceased"></div>
-          <span v-if="field === 'cases.active'" class="deceased">{{
-            renderActiveValues(fieldDeceased).lastDay.value | number
-          }}</span>
-          <span v-else class="deceased"
+          <span class="deceased"
             >{{ renderTotalValues(totalDeceased) | number }}
           </span>
         </div>
@@ -71,6 +64,7 @@ export default {
     field: String,
     fieldNewCases: String,
     fieldDeceased: String,
+    fieldRecovered: String,
     totalIn: String,
     totalOut: String,
     totalDeceased: String,
@@ -210,7 +204,7 @@ export default {
     showDeceased() {
       if (this.showRunningSum) return false
       if (this.field === 'cases.active') {
-        return this.renderActiveValues(this.fieldDeceased).lastDay.value > 0
+        return false
       }
       return (
         this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
