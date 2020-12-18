@@ -1,256 +1,95 @@
 <template>
   <div class="hp-card-holder">
-    <div class="hp-card" v-if="loaded">
-      <div class="card-title">{{ title }}</div>
+    <div class="hp-card" v-if="!loading">
+      <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
-        <span v-if="showRunningSum">{{ renderRunningSum | number }}</span>
-        <span v-else>{{ renderValues.lastDay.value | number }}</span>
-        <div v-if="showRunningSum" class="card-percentage-diff" :class="diffSumClass">
-          {{ renderRunningSumDiff | percent }}
-        </div>
-        <div v-else class="card-percentage-diff" :class="diffClass">
-          {{ renderValues.lastDay.percentDiff | percent }}
+        <span>{{ cardData.value | number }}</span>
+        <div
+          v-if="cardData.diffPercentage"
+          class="card-percentage-diff"
+          :class="percentageDirection"
+        >
+          {{ cardData.diffPercentage | percent }}
         </div>
       </div>
-      <div :id="name" class="card-diff">
-        <div v-if="showRunningSum">
-          <span class="card-note">{{ $t('infocard.newCases7dInfo') }}</span>
+      <div :id="cardName" class="card-diff">
+        <div v-if="cardData.subTitle">
+          <span class="card-note">{{ cardData.subTitle }}</span>
         </div>
-        <div v-if="showAbsolute">
+        <!-- <div v-if="showAbsolute">
           <div class="trend-icon" :class="[diffClass, iconClass]"></div>
           <span :class="diffClass"
             >{{ Math.abs(renderValues.lastDay.diff) | number }}
           </span>
-        </div>
-        <div v-if="showIn" class="card-diff-item">
+        </div> -->
+        <div
+          v-if="cardData.subValues && cardData.subValues.in"
+          class="card-diff-item"
+        >
           <div class="trend-icon in bad up"></div>
-          <span v-if="field === 'cases.active'" class="in bad">{{
-            renderActiveValues(fieldNewCases).lastDay.value | number
-          }}</span>
-          <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
+          <span class="in bad">{{ cardData.subValues.in | number }}</span>
         </div>
-        <div v-if="showOut" class="card-diff-item">
+        <div
+          v-if="cardData.subValues && cardData.subValues.out"
+          class="card-diff-item"
+        >
           <div class="trend-icon out good down"></div>
-          <span v-if="field !== 'cases.active'" class="out good">{{ renderTotalValues(totalOut) | number }}</span>
-          <span v-else class="out good">{{ renderActiveValues(fieldClosed).lastDay.diff | number }}</span>
+          <span class="out good">{{ cardData.subValues.out | number }}</span>
         </div>
-        <div v-if="showDeceased" class="card-diff-item">
+        <div
+          v-if="cardData.subValues && cardData.subValues.deceased"
+          class="card-diff-item"
+        >
           <div class="trend-icon deceased"></div>
           <span class="deceased"
-            >{{ renderTotalValues(totalDeceased) | number }}
+            >{{ cardData.subValues.deceased | number }}
           </span>
         </div>
       </div>
-      <div class="data-time" :class="(new Date()-1000*3600*60)>renderValues.lastDay.displayDate? 'outdated':''">
+      <div class="data-time" :class="{ outdated }">
         {{
-          $t('infocard.lastUpdated', {
-            date: new Date(renderValues.lastDay.displayDate),
+          $t("infocard.lastUpdated", {
+            date: date,
           })
         }}
       </div>
     </div>
     <div class="hp-card" v-else>
-      <div class="card-title">{{ title }}</div>
+      <div class="card-title">{{ cardData.title }}</div>
       <font-awesome-icon icon="spinner" spin />
     </div>
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapGetters, mapState } from "vuex";
 
 export default {
   props: {
-    title: String,
-    field: String,
-    fieldNewCases: String,
-    fieldDeceased: String,
-    fieldClosed: String,
-    totalIn: String,
-    totalOut: String,
-    totalDeceased: String,
-    goodTrend: {
-      type: String,
-      default: 'down',
-    },
-    name: String,
-    runningSumField: String,
-    seriesType: {
-      type: String,
-      default: 'cum',
-    },
+    cardData: Object,
+    loading: Boolean,
+    cardName: String,
   },
   computed: {
-    ...mapGetters('stats', ['lastChange', 'runningSum']),
-    ...mapGetters('patients', { patients: 'data', runningSumPatients: 'runningSumPatients' }),
-    ...mapState('stats', ['exportTime', 'loaded']),
-    incidence() {
-      switch (localStorage.getItem('contextCountry')) {
-        case 'SVN': {
-          return 20.95861
-          break
-        }
-        case 'MKD': {
-          return 20.83374
-          break
-        }
-        default:
-          return 0
-          break
-      }
+    date() {
+      const date = new Date();
+      date.setFullYear(this.cardData.year);
+      date.setMonth(this.cardData.month - 1); // Javascript thinks January is 0
+      date.setDate(this.cardData.day);
+      return date;
     },
-    diffClass() {
-      if (this.field === 'statePerTreatment.deceasedToDate') {
-        return 'deceased'
-      }
-      if (this.renderValues.lastDay.diff === 0) {
-        return 'no-change'
-      } else if (this.renderValues.lastDay.diff > 0) {
-        return this.goodTrend === 'down' ? 'bad' : 'good'
-      } else {
-        return this.goodTrend === 'down' ? 'good' : 'bad'
-      }
+    outdated() {
+      return new Date() - 1000 * 3600 * 60 > this.date;
     },
-    diffSumClass() {
-      if (this.renderRunningSumDiff === 0) {
-        return 'no-change'
-      } else if (this.renderRunningSumDiff > 0) {
-        return 'bad'
-      } else {
-        return 'good'
+    percentageDirection() {
+      if (this.cardData.diffPercentage === 0) {
+        return "no-change";
+      } else if (this.cardData.diffPercentage > 0) {
+        return "bad";
       }
-    },
-    cardTitle() {
-      if (this.name === 'incidence')
-        return this.title + ' ' + this.$t('infocard.per100k')
-      return this.title
-    },
-    iconClass() {
-      let className = ''
-      if (this.field === 'statePerTreatment.deceasedToDate') {
-        className += 'deceased'
-      }
-      if (this.renderValues.lastDay.diff === 0) {
-        className += ' none'
-        return className
-      } else if (this.renderValues.lastDay.diff > 0) {
-        className += ' up'
-      } else {
-        className += ' down'
-      }
-      return className
-    },
-    renderValues() {
-      let date
-      Object.keys(this.$route.query).length > 0
-        ? (date = this.$route.query.showDate)
-        : (date = null)
-      const x = this.lastChange(this.field, this.seriesType == 'cum', date)
-      if (x) {
-        if (this.seriesType == 'cum') {
-          x.lastDay.displayDate = x.lastDay.firstDate || x.lastDay.date
-          x.dayBefore.displayDate = x.dayBefore.firstDate || x.dayBefore.date
-        } else {
-          x.lastDay.displayDate = x.lastDay.date
-          x.dayBefore.displayDate = x.dayBefore.date
-        }
-      }
-      return x
-    },
-    showAbsolute() {
-      if (this.field === 'cases.active') {
-        // return (
-        //   this.renderActiveValues(this.field).lastDay.diff === 0 &&
-        //   this.renderActiveValues(this.fieldNewCases).lastDay.value === 0 &&
-        //   this.renderActiveValues(this.fieldDeceased).lastDay.value === 0
-        // )
-        return false
-      }
-      if (
-        this.field === 'statePerTreatment.inHospital' ||
-        this.field === 'statePerTreatment.inICU'
-      ) {
-        return (
-          this.renderTotalValues(this.totalIn) === 0 &&
-          this.renderTotalValues(this.totalOut) === 0 &&
-          this.renderTotalValues(this.totalDeceased) === 0
-        )
-      }
-      return (
-        (!this.totalIn && !this.totalOut && !this.totalDeceased) ||
-        (this.renderTotalValues(this.totalIn) === 0 &&
-          this.renderTotalValues(this.totalOut) === 0 &&
-          this.renderTotalValues(this.totalDeceased) !== 0)
-      )
-    },
-    showIn() {
-      if (this.showRunningSum) return false
-      if (this.field === 'cases.active') {
-        return this.renderActiveValues(this.fieldNewCases).lastDay.value > 0
-      }
-      return this.totalIn && this.renderTotalValues(this.totalIn) > 0
-    },
-    showOut() {
-      if (this.showRunningSum) return false
-      if (this.field === 'cases.active') {
-        return (
-          this.renderActiveValues(this.fieldNewCases).lastDay.value -
-            this.renderActiveValues(this.field).lastDay.diff +
-            this.renderActiveValues(this.fieldDeceased).lastDay.value >
-          0
-        )
-      }
-      return this.totalOut && this.renderTotalValues(this.totalOut) > 0
-    },
-    showDeceased() {
-      if (this.showRunningSum) return false
-      if (this.field === 'cases.active') {
-        return false
-      }
-      return (
-        this.totalDeceased && this.renderTotalValues(this.totalDeceased) > 0
-      )
-    },
-    showRunningSum() {
-      if (this.name === 'newCases7d') {
-        return true
-      }
-      return false
-    },
-    renderRunningSum() {
-      return this.runningSum(0, 7, this.runningSumField).toFixed(1)
-    },
-    renderRunningSumDiff() {
-      const today = this.runningSum(0, 7, this.runningSumField)
-      const yesterday = this.runningSum(1, 8, this.runningSumField)
-      const diff = today - yesterday
-
-      return Math.round((diff / yesterday) * 1000) / 10
-    }
-  },
-  methods: {
-    renderTotalValues(value) {
-      const lastDay = this.patients.filter((x) => {
-        return (
-          x.day === this.renderValues.lastDay.date.getDate() &&
-          x.month === this.renderValues.lastDay.date.getMonth() + 1 &&
-          x.year === this.renderValues.lastDay.date.getFullYear()
-        )
-      })
-      return _.get(lastDay[0], value)
-    },
-    renderActiveValues(value) {
-      if (this.field === 'cases.active') {
-        let date
-        Object.keys(this.$route.query).length > 0
-          ? (date = this.$route.query.showDate)
-          : (date = null)
-        const x = this.lastChange(value, this.seriesType == 'cum', date)
-        return x
-      }
-      return null
+      return "good";
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -312,7 +151,7 @@ export default {
 
   .card-diff-item:not(:last-child) {
     margin-right: 4px;
-    
+
     @media only screen and (min-width: 992px) {
       margin-right: 8px;
     }

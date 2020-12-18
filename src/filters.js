@@ -11,7 +11,7 @@ Vue.filter("prefixDiff", function (value) {
 });
 
 Vue.filter("number", function(value) {
-  return formatNumber(value);
+  return formatNumber(value, { maximumFractionDigits: 1 });
 });
 
 Vue.filter("percent", function(value) {
