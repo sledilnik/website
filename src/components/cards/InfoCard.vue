@@ -29,13 +29,10 @@
           }}</span>
           <span v-else class="in bad">{{ renderTotalValues(totalIn) }}</span>
         </div>
-        <div v-if="showOut && field !== 'cases.active'" class="card-diff-item">
+        <div v-if="showOut" class="card-diff-item">
           <div class="trend-icon out good down"></div>
-          <span class="out good">{{ renderTotalValues(totalOut) | number }}</span>
-        </div>
-        <div v-if="showOut && field === 'cases.active'" class="card-diff-item">
-          <div class="trend-icon deceased down"></div>
-          <span class="out deceased">{{ renderActiveValues(fieldRecovered).lastDay.diff | number }}</span>
+          <span v-if="field !== 'cases.active'" class="out good">{{ renderTotalValues(totalOut) | number }}</span>
+          <span v-else class="out good">{{ renderActiveValues(fieldRecovered).lastDay.diff | number }}</span>
         </div>
         <div v-if="showDeceased" class="card-diff-item">
           <div class="trend-icon deceased"></div>
@@ -104,11 +101,6 @@ export default {
     diffClass() {
       if (this.field === 'statePerTreatment.deceasedToDate') {
         return 'deceased'
-      }
-      if (this.field === 'cases.active') {
-        if (this.renderActiveValues(this.fieldDeceased).lastDay.value > 0) {
-          return 'deceased'
-        }
       }
       if (this.renderValues.lastDay.diff === 0) {
         return 'no-change'
@@ -366,11 +358,6 @@ export default {
       center;
     mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
     background-color: #404040;
-  }
-
-  &.down.deceased {
-    -webkit-mask: url(../../assets/svg/close-circle-down-deceased.svg) no-repeat center;
-    mask: url(../../assets/svg/close-circle-down-deceased.svg) no-repeat center;
   }
 
   &.none {
