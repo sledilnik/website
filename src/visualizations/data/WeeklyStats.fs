@@ -6,6 +6,42 @@ open Types
 
 let url = "https://api.sledilnik.org/api/stats-weekly"
 
+type private TransferLocation =
+    { family : int option
+      work : int option
+      school : int option
+      hospital : int option
+      otherhc : int option
+      rh : int option
+      prison : int option
+      transport : int option
+      shop : int option
+      restaurant : int option
+      sport : int option
+      gathering_private : int option
+      gathering_organized : int option
+      other : int option
+      unknown : int option
+    }
+
+    member this.ToDomain : InfectionLocation =
+        { Family = this.family
+          Work = this.work
+          School = this.school
+          Hospital = this.hospital
+          OtherHealthcare = this.otherhc
+          RetirementHome = this.rh
+          Prison = this.prison
+          Transport = this.transport
+          Shop = this.shop
+          Restaurant = this.restaurant
+          Sport = this.sport
+          GatheringPrivate = this.gathering_private
+          GatheringOrganized = this.gathering_organized
+          Other = this.other
+          Unknown = this.unknown }
+
+
 type private TransferSource =
     { quarantine : int option
       local : int option
@@ -41,10 +77,12 @@ type private TransferWStatsDataPoint =
         confirmed : int option
         investigated : int option
         healthcare : int option
+        ``rh-occupant`` : int option
         sentTo :
               {|
                   quarantine : int option
               |}
+        locations : TransferLocation
         source : TransferSource
         from : Map<string,int option>
     }
@@ -57,7 +95,9 @@ type private TransferWStatsDataPoint =
           ConfirmedCases = this.confirmed
           InvestigatedCases = this.investigated
           HealthcareCases = this.healthcare
+          RetirementHomeOccupantCases = this.``rh-occupant``
           SentToQuarantine = this.sentTo.quarantine
+          Location = this.locations.ToDomain
           Source = this.source.ToDomain
           ImportedFrom = this.from |> mapKeysToUpperCase
         }
