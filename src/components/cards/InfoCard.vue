@@ -3,7 +3,7 @@
     <div class="hp-card" v-if="!loading">
       <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
-        <span>{{ cardData.value | number }} <span class="card-number-extra">{{ valueExtraText | percent }}</span> </span>
+        <span>{{ cardData.value | number }}<span class="card-number-extra" v-if="valueExtraText"> {{ valueExtraText | percent }}</span></span>
         <div
           v-if="cardData.diffPercentage"
           class="card-percentage-diff"
