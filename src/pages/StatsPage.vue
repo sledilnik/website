@@ -72,7 +72,6 @@ export default {
     };
   },
   created(){
-    this.$store.dispatch('stats/fetchSummary')
     this.$store.dispatch('posts/fetchLatestPosts')
   },
   mounted() {

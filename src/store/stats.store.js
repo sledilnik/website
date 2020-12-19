@@ -3,6 +3,7 @@ import { exportTime } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 import i18n from '../i18n'
+import Axios from 'axios'
 
 const dataApi = new ApiService({})
 
@@ -59,12 +60,12 @@ const getters = {
 }
 
 const actions = {
-  fetchSummary: async ({ dispatch, commit }) => {
-    const { data } = await dataApi.get('/api/summary', { responseType: 'json' })
+  fetchSummary: async ({ dispatch, commit }, date) => {
+    const { data } = await dataApi.get('/api/summary', { params: { toDate: date } })
     commit('setSummary', _.defaultsDeep({}, data, infoCardConfig()))
 
     // This is just to get the timestamp from the header. Remove on better solution.
-    dispatch('fetchTimestamp')
+    dispatch('fetchTimestamp', date)
   },
 
   fetchTimestamp: async({ commit }, to) => {
