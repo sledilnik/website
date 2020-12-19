@@ -3,7 +3,7 @@
     <div class="hp-card" v-if="!loading">
       <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
-        <span>{{ cardData.value | number }}</span>
+        <span>{{ cardData.value | number }} <span class="card-number-extra">{{ valueExtraText | percent }}</span> </span>
         <div
           v-if="cardData.diffPercentage"
           class="card-percentage-diff"
@@ -12,17 +12,11 @@
           {{ cardData.diffPercentage | percent }}
         </div>
       </div>
-      <div :id="cardName" class="card-diff">
+      <div :id="cardName" class="card-diff" :class="['card-'+cardName]">
         <div v-if="cardData.subTitle">
-          <span class="card-note">{{ cardData.subTitle }}</span>
+          <span class="card-note">{{ cardData.subTitle }} <span>{{ subLabelExtraText }}</span></span>
         </div>
-        <!-- <div v-if="showAbsolute">
-          <div class="trend-icon" :class="[diffClass, iconClass]"></div>
-          <span :class="diffClass"
-            >{{ Math.abs(renderValues.lastDay.diff) | number }}
-          </span>
-        </div> -->
-        <div
+        <divw
           v-if="cardData.subValues && cardData.subValues.in"
           class="card-diff-item"
         >
@@ -44,18 +38,6 @@
           <span class="deceased"
             >{{ cardData.subValues.deceased | number }}
           </span>
-        </div>
-        <div v-if="cardData.extraFields">
-          <div
-            v-for="(field, fieldName, i) in cardData.extraFields"
-            :key="i"
-            class="card-diff-item"
-          >
-            <div class="trend-icon" :class="field.class"></div>
-            <span class="deceased"
-              >{{ cardData.subValues[fieldName] | number }}
-            </span>
-          </div>
         </div>
       </div>
       <div class="data-time" :class="{ outdated }">
@@ -82,6 +64,16 @@ export default {
     cardName: String,
   },
   computed: {
+    subLabelExtraText(){
+      const fieldNameToPut = _.get(this.cardData, 'extraFields.withSubLabel')
+      const value = _.get(this.cardData, `subValues.${fieldNameToPut}`)
+      return value
+    },
+    valueExtraText(){
+      const fieldNameToPut = _.get(this.cardData, 'extraFields.withValue')
+      const value = _.get(this.cardData, `subValues.${fieldNameToPut}`)
+      return value
+    },
     date() {
       const date = new Date();
       date.setFullYear(this.cardData.year);
@@ -144,6 +136,9 @@ export default {
   font-size: 32px;
   font-weight: 700;
   white-space: nowrap;
+}
+.card-number-extra{
+  font-size: 14px;
 }
 
 .card-percentage-diff {
@@ -242,4 +237,15 @@ export default {
     color: #bf5747;
   }
 }
+
+/**
+  SPECIAL CARD STYLES
+ */
+.card-testsToday{
+  .card-note {
+    color: #bf5747;
+    font-size: 14px;
+  }
+}
+
 </style>

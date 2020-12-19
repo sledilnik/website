@@ -6,6 +6,7 @@ import i18n from '../i18n'
 
 const dataApi = new ApiService({})
 
+// This is a function so that the translations are changed when a language change happend.
 const infoCardConfig = () => { 
   return {
     casesActive: {
@@ -29,13 +30,11 @@ const infoCardConfig = () => {
     },
     testsToday: {
       title: i18n.t('infocard.tests'),
+      subTitle: i18n.t('infocard.totalTests'),
       extraFields: {
-        positive: {
-          class: 'bad up',
-        },
-        percent: {
-          class: 'neutral percent',
-        }
+        // Keys are predefined locations on the card, values are keys inside cardData.subFields
+        withValue: 'percent',
+        withSubLabel: 'positive'
       }
     },
   } 

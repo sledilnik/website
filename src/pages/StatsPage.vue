@@ -6,7 +6,6 @@
         <InfoCard
           v-for="cardName in displayedInfoCards"
           :key="cardName"
-          :data-title="cardName"
           :cardName="cardName"
           :cardData="summary[cardName]"
           :loading="!summary || !summary[cardName] || !summary[cardName].value"
