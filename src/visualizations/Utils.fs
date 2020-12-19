@@ -73,6 +73,9 @@ let formatTo3DecimalWithTrailingZero (value: float) =
 let percentageValuesWith0DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
+let percentageValuesWith1DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
+
 let percentageValuesWith1DecimalTrailingZeroLabelFormatter (value: float) =
     I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1; signDisplay="always" |})
 
