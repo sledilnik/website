@@ -16,7 +16,7 @@
         <div v-if="cardData.subTitle">
           <span class="card-note">{{ cardData.subTitle }} <span>{{ subLabelExtraText }}</span></span>
         </div>
-        <divw
+        <div
           v-if="cardData.subValues && cardData.subValues.in"
           class="card-diff-item"
         >
