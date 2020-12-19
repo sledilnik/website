@@ -941,7 +941,11 @@
         },
         "liftServices": {
             "title": "Services",
-            "description": "Relaxation: public transport (limited service), some services (florist, car-wash, cleaners)<br>In 4 regions relaxation of shops with cloths and shoes and movement inside region borders with app."
+            "description": "Relaxation: public transport (limited service), florist, car-wash, cleaners.<br>In 4 regions also shops with cloths and shoes and movement inside region borders with app."
+        },
+        "liftReligiousCeremonies": {
+            "title": "Rel.c.",
+            "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
         }
     },
     "days": {

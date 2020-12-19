@@ -149,6 +149,7 @@ let addContainmentMeasuresFlags
         3, 12, "#FFFFFF", "planRelaxation"
         7, 12, "#FFe6e6", "alcoDrinks"
         15,12, "#ebfaeb", "liftServices"
+        19,12, "#ebfaeb", "liftReligiousCeremonies"
     |]
     {|
         ``type`` = "flags"

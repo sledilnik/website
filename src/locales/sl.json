@@ -616,7 +616,11 @@
         },
         "liftServices": {
             "title": "Storitve",
-            "description": "Sproščanje: javni promet (v omejenem obsegu), nekatere storitve (cvetličarne, avtopralnice, kemične čistilnice)<br>V 4 regijah se sprostijo prodajalne z oblačili in obutvijo in prehodi med občinami z aplikacijo."
+            "description": "Sproščanje: javni promet (v omejenem obsegu), cvetličarne, avtopralnice, kemične čistilnice.<br>V 4 regijah tudi prodajalne z oblačili in obutvijo in prehodi med občinami z aplikacijo."
+        },
+        "liftReligiousCeremonies": {
+            "title": "V.obredi",
+            "description": "Sproščanje: ob določenih omejitvah dovoljeni verski obredi. Knjižnice, servisi in montaže.<br>V 4 regijah tudi muzeji, knjigarne, specializirane prodajalne."
         }
     },
     "phase": {
