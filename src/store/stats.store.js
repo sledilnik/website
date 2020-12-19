@@ -55,7 +55,7 @@ const getters = {
 
   regions: (state) => {
     return state.regions
-  },
+  }
 }
 
 const actions = {

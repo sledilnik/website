@@ -799,7 +799,7 @@
             "relative": "Relativo",
             "averageByDay": "Per giorno (media)",
             "titleMenu": "Casi - struttura",
-            "disclaimer": "Nota: questo grafico non è aggiornato. Dall'11 ottobre, la NIJZ non riporta più i dati relativi alle case di riposo e agli operatori sanitari."
+            "disclaimer": "Nota: dall'11 ottobre, la NIJZ non riporta più i dati relativi agli operatori sanitari e nelle case di riposo."
         },
         "tests": {
             "ns-apr20": "Ricerca",
@@ -1043,10 +1043,27 @@
             "confirmedFromQuarantine": "Confermato dalla quarantena",
             "confirmedCases": "Casi confermati",
             "sentToQuarantine": "Inviato in quarantena",
-            "title": "Fonti di infezione e quarantena",
-            "titleMenu": "Fonti di infezione",
+            "title": "Fonti e luoghi di infezione",
+            "titleMenu": "Fonti e luoghi di infezione",
             "disclaimer": "Nota: dal 17 ottobre, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
-            "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - la quota di casi importati potrebbe essere inferiore a quella effettiva."
+            "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - il numero dei casi potrebbe essere inferiore a quello effettivo.",
+            "locationUnknown": "Sconosciuto",
+            "locationOther": "Altro",
+            "gatheringOrganized": "Raduno organizzato",
+            "gatheringPrivate": "Raduno privato",
+            "sport": "Attività sportiva",
+            "restaurant": "Ristorante",
+            "shop": "Negozio",
+            "transport": "Trasporto pubblico",
+            "prison": "Carcere",
+            "retirementHome": "Casa di riposo",
+            "otherHealthcare": "Altro istituto sanitario",
+            "hospital": "Ospedale",
+            "school": "Istituto scolastico",
+            "work": "Lavoro",
+            "family": "Famiglia",
+            "byLocationRelative": "Per luogo (relativo)",
+            "byLocation": "Per luogo"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -1180,7 +1197,7 @@
             "cases": "Casi confermati",
             "all": "Totale",
             "averageByDay": "Per giorno (media)",
-            "titleMenu": "Correlazione tra casi, ricoveri e decessi",
+            "titleMenu": "Correlazione",
             "title": "Correlazione tra casi, ricoveri e decessi"
         }
     },
@@ -1356,7 +1373,8 @@
         "validity": "Validità",
         "geoValidity": "Validità geografica",
         "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte. I dati vengono raccolti in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-        "title": "Misure e restrizioni"
+        "title": "Misure e restrizioni",
+        "searchPlaceholder": "Immettere la query di ricerca"
     },
     "week": "Settimana",
     "posts": {
@@ -1365,6 +1383,81 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._"
+        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._",
+        "chart-infocard-percent": {
+            "question": "Cosa significano le percentuali nelle schede informative nella parte superiore della pagina web?"
+        },
+        "chart-usage": {
+            "answer": "Certo! Potete incorporare qualsiasi grafico o visualizzazione nel vostro sito, citando la fonte, ovviamente. [Cliccare qui](/ it/embed) e selezionare dall'elenco il grafico che si desidera incorporare.",
+            "question": "Posso usare i vostri grafici sul mio sito web? Come?"
+        },
+        "data-usage": {
+            "question": "Come posso ottenere e utilizzare il vostro database?"
+        },
+        "data-contribute": {
+            "question": "In che modo gli utenti possono essere coinvolti attivamente nella raccolta dei dati? Come posso partecipare?"
+        },
+        "data-hospital-out": {
+            "question": "Come ottenete i dati sulle dimissioni ospedaliere?"
+        },
+        "data-hospital-in": {
+            "question": "Come ottenete i dati sui ricoveri ospedalieri?"
+        },
+        "data-differences": {
+            "question": "Diversi portali visualizzano un numero di persone infette diverso dal vostro. Perché?"
+        },
+        "data-publish-time": {
+            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati ...) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/COVID19Sledilnik) e [ Twitter](https://twitter.com/sledilnik)).",
+            "question": "Quando pubblicate i dati? Perché le date nelle visualizzazioni sono diverse?"
+        },
+        "how-to-help": {
+            "question": "Vorrei aiutare, da dove posso iniziare?",
+            "answer": "Contattateci su info@sledilnik.org e descrivete brevemente chi siete e come potete contribuire al progetto. Il vostro aiuto è ben gradito."
+        },
+        "data-collection": {
+            "question": "Come raccogliete e modificate i dati?"
+        },
+        "data-reliability": {
+            "answer": "I dati vengono raccolti da fonti pubbliche verificate, elencate nella [Pagina dati](/it/data).\n\nLo Sledilnik riceve i dati ufficiali su COVID-19 direttamente dal Ministero della Salute, dal NIJZ (Istituto Nazionale per la Salute Pubblica) e da altre istituzioni sanitarie nazionali. Il team dello Sledilnik non garantisce l'accuratezza dei dati originali e pubblica esclusivamente i dati ottenuti da fonti ufficiali o dai media, ma verifichiamo che tutti i dati siano corretti e coerenti con la fonte fornita.",
+            "question": "I vostri dati e le vostre visualizzazioni sono affidabili?"
+        },
+        "tech-used": {
+            "answer": "Il sito è in JavaScript utilizzando Vue.js, le visualizzazioni e i grafici sono realizzati in F# utilizzando le librerie Highcharts e il progetto è aperto e disponibile su [GitHub - Sledilnik](https://github.com/sledilnik).",
+            "question": "Quali strumenti avete utilizzato per creare il sito web/la web app?"
+        },
+        "are-you-paid": {
+            "answer": "Niente affatto. Lo Sledilnik è un'iniziativa senza scopo di lucro creata per supportare la compilazione e la modifica in corso dei dati chiave sulla diffusione del coronavirus in Slovenia. Il nostro database è pubblico e liberamente disponibile, gratuito e non commerciale, e rimarrà così. Vedere anche [Come è possibile ottenere e utilizzare il database?](#data-usage)",
+            "question": "Siete pagati per la creazione della dashboard (grafici, tabelle, modelli)?"
+        },
+        "english-translation": {
+            "question": "La vostra pagina web è disponibile in inglese?"
+        },
+        "other-countries": {
+            "answer": "Nella parte inferiore della dashboard è possibile trovare [un grafico di confronto](/it/stats#countries-chart). Il grafico mostra un confronto tra la Slovenia e i diversi cluster di paesi in relazione al *numero di decessi* causati dal COVID-19 *per milione di abitanti*.\nI gruppi di paesi che vengono confrontati con la Slovenia sono i seguenti:\n- Paesi limitrofi (esclusa l'Italia)\n- Paesi critici (UE)\n- Paesi critici (globale)\n- Paesi nordici\n- ex paesi Iugoslavi\n- Paesi dell'Asia orientale e Oceania\n\nIl grafico è disposto cronologicamente, dal 1° gennaio, dalla prima morte e dalla prima morte per milione, rispettivamente. È possibile modificare la visualizzazione di diverse visualizzazioni cronologiche dei confronti di diversi cluster di paesi cliccando sulle schede appropriate.",
+            "question": "Dove posso trovare un confronto tra la Slovenia e gli altri paesi?"
+        },
+        "all-infected": {
+            "answer": "Purtroppo, per ora questi dati non sono disponibili. Ci sono diversi motivi: in precedenza, i test coprivano solo una certa percentuale della popolazione (pazienti con segni e sintomi di infezione respiratoria acuta che potrebbero aver bisogno di cure ospedaliere, operatori sanitari, residenti in case di riposo con sintomi respiratori e persone sopra i 60 anni se il loro medico lo richiedeva). Anche se ora le linee guida ai test per COVID-19 sono state ampliate per includere chiunque mostri i sintomi della malattia, molti potrebbero essere portatori senza sintomi o solo con sintomi lievi. Per questo motivo, le nostre statistiche possono coprire solo una parte della popolazione che mostra chiaramente i segni di infezione. Pertanto, le popolazioni più giovani e quelle non testate sono rappresentate in modo sproporzionato. Non è quindi possibile ottenere dati per pazienti asintomatici che non mostrano sintomi e non sono registrati da nessuna parte.",
+            "question": "È possibile ottenere informazioni statistiche su tutte le persone infette, anche sui casi asintomatici?"
+        },
+        "confirmed-cases": {
+            "answer": "La terminologia in uso sullo Sledilnik è spiegata in [Cosa significa](# chart-terminology). Secondo la definizione dell'OMS, un *caso confermato* è una persona con conferma di laboratorio dell'infezione da COVID-19, indipendentemente dai segni e sintomi clinici. Altri termini, come i nuovi infetti, possono apparire nei media ma non vengono utilizzati nei nostri grafici. Tutti i termini utilizzati dallo Sledilnik sono spiegati in queste FAQ.",
+            "question": "Qual è la differenza tra \"casi nuovi\" e \"casi confermati\"?"
+        },
+        "virus-vs-disease": {
+            "answer": "** SARS-CoV-2 ** è l'abbreviazione di \"Sindrome respiratoria acuta grave Coronavirus 2\" - è il nome accettato a livello internazionale del virus che causa la malattia denominata ** COVID-19 **. Quest'ultimo nome è anche un acronimo, coniato dalle parole COrona VIrus Disease e 2019, l'anno in cui la malattia si è diffusa per la prima volta.",
+            "question": "Qual è la differenza tra SARS-CoV-2 e COVID-19?"
+        },
+        "why-sledilnik": {
+            "answer": "_Il nostro obiettivo è aiutare a comprendere la diffusione del virus e contribuire ad aumentare la consapevolezza, la reattività e l'efficacia delle misure implementate per frenare il virus. Potete trovare ulteriori informazioni sul progetto nella [scheda Informazioni] (/it/about) ._",
+            "question": "Perché Sledilnik?"
+        },
+        "section": {
+            "project": "Informazioni sul progetto",
+            "charts": "Informazioni sui calcoli e sui grafici",
+            "data": "Informazioni sui dati",
+            "general": "Informazioni generali"
+        },
+        "searchPlaceholder": "Immettere la query di ricerca"
     }
 }
