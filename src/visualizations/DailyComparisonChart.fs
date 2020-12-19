@@ -83,7 +83,7 @@ let renderChartOptions (state : State) dispatch =
 
     let percentageFormatter value =
         let valueF = float value / 100.0
-        Utils.percentageValuesWith1DecimalFormatter(valueF)
+        Utils.percentWith1DecimalFormatter(valueF)
 
     let tooltipFormatter state jsThis =
         let category = jsThis?x
@@ -163,7 +163,7 @@ let renderChartOptions (state : State) dispatch =
                 | Some v, Some p ->
                     if p = 0
                     then if v = 0 then "" else ">500%"
-                    else Utils.percentageValuesWith1DecimalTrailingZeroLabelFormatter(float(v) / float(p) * 100.0 - 100.0)
+                    else Utils.percentWith1DecimalSignFormatter(float(v) / float(p) * 100.0 - 100.0)
                 | _, _ -> ""
 
             yield pojo
