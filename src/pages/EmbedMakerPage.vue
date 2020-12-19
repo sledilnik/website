@@ -133,11 +133,6 @@ export default {
 //          text: 'Kapacitete bolnišnic',
 //          dimensions: [1140, 1300]
 //        },
-        "Countries": {
-          value: "Countries",
-          text: this.$t('charts.countries.title'),
-          dimensions: [1140, 740]
-        },
         "OstaniZdravPublished": {
           value: "OstaniZdravPublished",
           text: `${this.$t("charts.ostanizdrav.title")} - ${this.$t('charts.ostanizdrav.published.title')}`,

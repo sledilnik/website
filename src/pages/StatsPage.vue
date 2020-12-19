@@ -3,72 +3,12 @@
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
       <div class="cards-wrapper">
-        <!--
-        <Info-card
-          :title="$t('infocard.tests')"
-          field="tests.performed.today"
-          good-trend="up"
-          series-type="state"
-        />
--->
-        <Info-card
-          :title="$t('infocard.confirmedToDate')"
-          field="cases.confirmedToDate"
-          name="cases.confirmedToDate"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <!--
-        <Info-card
-          :title="$t('infocard.recoveredToDate')"
-          field="cases.recoveredToDate"
-          good-trend="up"
-          series-type="state"
-        />
--->
-        <Info-card
-          :title="$t('infocard.active')"
-          field="cases.active"
-          field-new-cases="cases.confirmedToday"
-          field-closed="cases.closedToDate"
-          field-deceased="statePerTreatment.deceased"
-          name="cases.active"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.newCases7d')"
-          field="cases.active"
-          name="newCases7d"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.inHospital')"
-          field="statePerTreatment.inHospital"
-          total-in="total.inHospital.in"
-          total-out="total.inHospital.out"
-          total-deceased="total.deceased.hospital.today"
-          name="statePerTreatment.inHospital"
-          running-sum-field="total.inHospital.in"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.icu')"
-          field="statePerTreatment.inICU"
-          total-in="total.icu.in"
-          total-out="total.icu.out"
-          total-deceased="total.deceased.hospital.icu.today"
-          name="statePerTreatment.inICU"
-          running-sum-field="total.icu.in"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.deceasedToDate')"
-          field="statePerTreatment.deceasedToDate"
-          name="statePerTreatment.deceasedToDate"
-          running-sum-field="statePerTreatment.deceased"
-          series-type="state"
+        <InfoCard
+          v-for="cardName in displayedInfoCards"
+          :key="cardName"
+          :cardName="cardName"
+          :cardData="summary[cardName]"
+          :loading="!summary || !summary[cardName] || !summary[cardName].value"
         />
       </div>
       <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
@@ -119,10 +59,20 @@ export default {
     return {
       loaded: false,
       charts: [],
-      headerTeasers: false
+      headerTeasers: false,
+      displayedInfoCards: [
+        'casesToDateSummary',
+        'casesActive',
+        'casesAvg7Days',
+        'hospitalizedCurrent',
+        'icuCurrent',
+        'deceasedToDate',
+        // 'testsToday'
+      ]
     };
   },
   created(){
+    this.$store.dispatch('stats/fetchSummary')
     this.$store.dispatch('posts/fetchLatestPosts')
   },
   mounted() {
@@ -149,6 +99,7 @@ export default {
   computed: {
     ...mapState("stats", {
       exportTime: "exportTime",
+      summary: "summary",
     }),
     ...mapGetters('posts', [
       'lastestTwoPosts'

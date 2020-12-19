@@ -11,14 +11,14 @@ Vue.filter("prefixDiff", function (value) {
 });
 
 Vue.filter("number", function(value) {
-  return formatNumber(value);
+  return formatNumber(value, { maximumFractionDigits: 1 });
 });
 
 Vue.filter("percent", function(value) {
   return formatNumber(value / 100, {
     style: "percent",
     minimumFractionDigits: 1,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 1,
     signDisplay: "always",
   });
 });
