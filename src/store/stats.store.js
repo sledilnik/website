@@ -3,7 +3,6 @@ import { exportTime } from './index'
 import ApiService from '../services/api.service'
 import regions from '../services/dict.regions.json'
 import i18n from '../i18n'
-import Axios from 'axios'
 
 const dataApi = new ApiService({})
 
