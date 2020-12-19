@@ -67,7 +67,7 @@ export default {
         'hospitalizedCurrent',
         'icuCurrent',
         'deceasedToDate',
-        'testsToday'
+        // 'testsToday'
       ]
     };
   },
