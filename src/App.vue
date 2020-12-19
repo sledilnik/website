@@ -48,11 +48,13 @@ export default {
     Footer,
   },
   created() {
-    this.$store.dispatch("patients/fetchData")
-
     if (Object.keys(this.$route.query).length > 0 && this.$route.query.showDate) {
       let date = this.$route.query.showDate
       this.$store.dispatch("patients/fetchData", date)
+      this.$store.dispatch('stats/fetchSummary', date)
+    } else {
+      this.$store.dispatch('stats/fetchSummary')
+      this.$store.dispatch("patients/fetchData")
     }
   },
   mounted() {

@@ -59,12 +59,12 @@ const getters = {
 }
 
 const actions = {
-  fetchSummary: async ({ dispatch, commit }) => {
-    const { data } = await dataApi.get('/api/summary', { responseType: 'json' })
+  fetchSummary: async ({ dispatch, commit }, date) => {
+    const { data } = await dataApi.get('/api/summary', { params: { toDate: date } })
     commit('setSummary', _.defaultsDeep({}, data, infoCardConfig()))
 
     // This is just to get the timestamp from the header. Remove on better solution.
-    dispatch('fetchTimestamp')
+    dispatch('fetchTimestamp', date)
   },
 
   fetchTimestamp: async({ commit }, to) => {
