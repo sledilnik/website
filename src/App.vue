@@ -48,19 +48,14 @@ export default {
     Footer,
   },
   created() {
-    this.$store.dispatch("stats/fetchData")
     this.$store.dispatch("patients/fetchData")
-    
+
     if (Object.keys(this.$route.query).length > 0 && this.$route.query.showDate) {
       let date = this.$route.query.showDate
-      this.$store.dispatch("stats/fetchData", date)
       this.$store.dispatch("patients/fetchData", date)
     }
   },
   mounted() {
-    this.$store.dispatch("stats/refreshDataEvery", 900)
-    this.$store.dispatch("patients/refreshDataEvery", 900)
-    
     if (this.$route.hash) {
       const checker = setInterval(() => {
         const elm = document.querySelector(this.$route.hash)
