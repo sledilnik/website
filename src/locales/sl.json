@@ -1371,15 +1371,15 @@
         }
     },
     "restrictionsPage": {
-      "searchPlaceholder": "Vnesite iskalni niz",
-      "title": "Ukrepi in omejitve",
-      "description": "Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije, ki naše podatke navajajo kot vir. Podatke zbiramo v [Zbirni tabeli](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-      "geoValidity": "Geografska veljavnost",
-      "validity": "Veljavnost",
-      "exceptions": "Izjeme",
-      "extrarule": "Dodatna pravila / tolmačenja",
-      "notes": "Opombe",
-      "link": "Povezava do odloka (prečiščeno besedilo)"
+        "searchPlaceholder": "Vnesite iskalni niz",
+        "title": "Ukrepi in omejitve",
+        "description": "Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo COVID-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Informacije, dostopne prek spletnega Sledilnika, vključno s povezavami na druge strani, so zbrane iz številnih uradnih virov, s katerimi nismo neposredno povezani, zato se je treba zavedati, da so zgolj informativne narave in se lahko občasno spreminjajo. Sledilnik zato ne zagotavlja točnosti in popolnosti zbranih informacij o ukrepih ter izrecno zavrača kakršno koli odgovornost za nadaljnje interpretacije, ki naše podatke navajajo kot vir. Podatke zbiramo v [Zbirni tabeli](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
+        "geoValidity": "Geografska veljavnost",
+        "validity": "Veljavnost",
+        "exceptions": "Izjeme",
+        "extrarule": "Dodatna pravila / tolmačenja",
+        "notes": "Opombe",
+        "link": "Povezava do odloka (prečiščeno besedilo)"
     },
     "faq": {
         "searchPlaceholder": "Vnesite iskalni niz",
@@ -1413,11 +1413,11 @@
         },
         "other-countries": {
             "question": "Kje lahko najdem primerjavo med Slovenijo in drugimi državami?",
-            "answer": "Na Sledilnikovi strani [Svet](/sl/world) je na voljo zemljevid sveta, ki prikazuje [Stanje COVID-19 v svetu](/sl/world#world-chart). Na tej strani sta tudi grafa [Države: potrjen primeri na milijon prebivalcev](/sl/world#countries-cases-chart) in [Države: umrli (skupaj) na milijon prebivalcev](/sl/world#countries-deaths-chart), ki kaže primerjavo med Slovenijo in različnimi skupinami držav glede na potrjene primere in število smrti zaradi COVID-19 na milijon prebivalcev.\n\nZa podrobnejše primerjave, ki upoštevajo še druge kategorije razen umrlih, si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/)."
+            "answer": "Na Sledilnikovi strani [Svet](/sl/world) so na voljo zemljevid sveta, ki prikazuje [Stanje COVID-19 v svetu](/sl/world#world-chart), in grafi [Države: aktivni primeri na 100.000 prebivalcev](/sl/world#countries-cases-chart), [Države: novi primeri na 100.000 prebivalcev (7-dnevno povprečje)](/sl/world#countries-cases-chart),  [Države: dnevno umrli na 100.000 prebivalcev](/sl/world#countries-new-deaths-chart) in [Države: umrli (skupaj) na 100.000 prebivalcev](/sl/world#world#countries-total-deaths-chart). Stran je namenjena primerjavi med Slovenijo in različnimi skupinami držav glede na potrjene in aktivne primere in ter številom smrti zaradi COVID-19 na 100.000 prebivalcev.\n\nZa podrobnejše primerjave, ki upoštevajo še druge kategorije, si lahko vedno ogledate katero od strani, kot sta [Coronavirus Pandemic](https://ourworldindata.org/coronavirus), stran raziskovalne skupine Our World in Data univerze v Oxfordu, ki omogoča prikaz in primerjavo podatkov za izbrane države, ter [COVID-19 Dashboard](https://coronavirus.jhu.edu/map.html), stran univerze Johns Hopkins (ene vodilnih raziskovalnih institucij v ZDA). Zaradi nezanesljivih podatkov je manj priporočljiva stran [Worldometer](https://www.worldometers.info/coronavirus/)."
         },
         "english-translation": {
             "question": "Ali obstaja vaša stran tudi v angleščini?",
-            "answer": "Glavni prikazi Sledilnika so že prevedeni tako v angleščino kot v nekaj drugih jezikov (DE, HR, IT), v angleščini sta na voljo tudi stran [stran O projektu](/en/about), ki zajema osnovne podatke in vire podatkov, ter [stran FAQ - Pogosta vprašanja in odgovori](/en/faq). Preostale strani bodo prevedene takoj, ko bo mogoče. Sicer sta na voljo za prosto uporabo tako besedilni del kot izvorna koda. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz)."
+            "answer": "Glavni prikazi Sledilnika so že prevedeni tako v angleščino kot v nekaj drugih jezikov (DE, HR, IT), v angleščini so na voljo tudi strani [Models and Forecasts](/en/models), ki prikazuje nekatere modele s povezavami, [Tracking data on the COVID-19 spread in Slovenia](/en/about), ki zajema osnovne podatke o projektu, ter [stran FAQ - Pogosta vprašanja in odgovori](/en/faq). Preostale strani bodo prevedene takoj, ko bo mogoče. Sicer sta na voljo za prosto uporabo tako besedilni del kot izvorna koda. Vsi podatki so v bazi že zavedeni tudi z angleškimi oznakami, zato je mogoča tudi njihova mednarodna uporaba (izvoz)."
         },
         "are-you-paid": {
             "question": "Kdo vas plačuje za izdelavo teh preglednic oz. ali s temi podatki kaj zaslužite?",
@@ -1619,5 +1619,5 @@
             "question": "Želim pomagati, kje lahko začnem?",
             "answer": "Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!"
         }
-    }    
+    }
 }
