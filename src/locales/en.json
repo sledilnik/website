@@ -53,7 +53,7 @@
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
-        "tests": "Positive Tests Today",
+        "tests": "Tests Today",
         "totalTests": "Total tests:",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",

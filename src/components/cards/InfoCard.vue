@@ -39,6 +39,20 @@
             >{{ cardData.subValues.deceased | number }}
           </span>
         </div>
+        <div
+          v-if="cardData.subValues && cardData.subValues.positive"
+          class="card-diff-item"
+        >
+          <div class="trend-icon positive"></div>
+          <span class="positive bad">{{ cardData.subValues.positive | number }}</span>
+        </div>
+        <div
+          v-if="cardData.subValues && cardData.subValues.percent"
+          class="card-diff-item"
+        >
+          <div class="trend-icon percent"></div>
+          <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
+        </div>
       </div>
       <div class="data-time" :class="{ outdated }">
         {{
@@ -206,6 +220,18 @@ export default {
     background-color: #404040;
   }
 
+  &.positive {
+    -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+    background-color: #bf5747;
+  }
+
+  &.percent {
+    -webkit-mask: url(../../assets/svg/close-dd.svg) no-repeat center;
+    mask: url(../../assets/svg/close-dd.svg) no-repeat center;
+    background-color: #665191;
+  }
+
   &.none {
     display: none;
   }
@@ -221,6 +247,10 @@ export default {
 
 .good {
   color: #20b16d;
+}
+
+.percent {
+  color: #665191;
 }
 
 .no-change,
