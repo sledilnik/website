@@ -7,7 +7,6 @@ open Fable.SimpleHttp
 
 open Elmish
 open Feliz
-open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 open Browser
 
@@ -36,6 +35,8 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
+
+    static member Default = ConfirmedCases
 
     override this.ToString() =
        match this with
@@ -94,6 +95,50 @@ type Msg =
     | DataTimeIntervalChanged of DataTimeInterval
     | ContentTypeChanged of string
     | DisplayTypeChanged of DisplayType
+    | QueryParamsUpdated of QueryParams.State
+
+let displayTypeQueryParam (state: State) = [
+                                                  ("absolute", DisplayType.AbsoluteValues)
+                                                  ("bubbles", DisplayType.Bubbles)
+                                                  ("weighted-by-population", DisplayType.RegionPopulationWeightedValues)
+                                                  ("relative-increase", DisplayType.RelativeIncrease)]
+                                               |> Map.ofList
+let contentTypeQueryParam (state: State) = [
+                                                  ("confirmed-cases", ContentType.ConfirmedCases)
+                                                  ("deceased", ContentType.Deceased)]
+                                               |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    state, List.concat [
+        match queryParams.MapContentType with
+        | Some (sort: string) ->
+            match sort.ToLower()
+                  |> (contentTypeQueryParam state).TryFind with
+            | Some v -> [ Msg.ContentTypeChanged (v.ToString()) |> Cmd.ofMsg ]
+            | _ -> []
+        | _ -> []
+
+        match queryParams.MapDisplayType with
+        | Some (sort: string) ->
+            match sort.ToLower()
+                  |> (displayTypeQueryParam state).TryFind with
+            | Some v -> [ Msg.DisplayTypeChanged v |> Cmd.ofMsg ]
+            | _ -> []
+        | _ -> []
+    ] |> Cmd.batch
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          MapContentType =
+              if state.ContentType = ContentType.Default
+              then None
+              else Map.tryFindKey (fun k v -> v = state.ContentType) (contentTypeQueryParam state)
+
+          MapDisplayType =
+              if state.DisplayType = DisplayType.Default
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DisplayType) (displayTypeQueryParam state)
+              }
 
 let loadMunGeoJson =
     async {
@@ -217,7 +262,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ConfirmedCases
+      ContentType = ContentType.Default
       DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -247,6 +292,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let seriesData (state : State) =
 
@@ -862,6 +908,13 @@ let render (state : State) dispatch =
         ]
     ]
 
-let mapChart (props : {| mapToDisplay : MapToDisplay; data : RegionsData |}) =
-    React.elmishComponent
-        ("MapChart", init props.mapToDisplay props.data, update, render)
+let mapChart =
+    React.functionComponent (fun (props: {| mapToDisplay: MapToDisplay; data: RegionsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.mapToDisplay props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

@@ -26,6 +26,8 @@ let availableDisplayMetrics = [|
     { Id = "deceasedTodayRelative"; MetricsType = Today; ChartType = "percent" }
 |]
 
+let defaultMetrics = availableDisplayMetrics.[0]
+
 let displayMetricsQueryParam =
     [ ("to-date", availableDisplayMetrics.[0])
       ("to-date-relative", availableDisplayMetrics.[1])
@@ -70,18 +72,21 @@ let incorporateQueryParams (queryParams: QueryParams.State) (state: State, comma
             match q.ToLower() |> displayMetricsQueryParam.TryFind with
             | Some v -> { state with Metrics = v }
             | _ -> state
-        | _ -> state
+        | _ -> { state with Metrics = defaultMetrics }
 
     state, commands
 
 let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
     { queryParams with
-          DeceasedMetrics = Map.tryFindKey (fun k v -> v = state.Metrics) displayMetricsQueryParam }
+          DeceasedMetrics =
+              if state.Metrics = defaultMetrics
+              then None
+              else Map.tryFindKey (fun k v -> v = state.Metrics) displayMetricsQueryParam }
 
 let init() : State * Cmd<Msg> =
     let state = {
         PatientsData = [||]
-        Metrics = availableDisplayMetrics.[0]
+        Metrics = defaultMetrics
         RangeSelectionButtonIndex = 0
         Error = None
     }

@@ -57,6 +57,22 @@ type DisplayType =
         | BySourceRelative          -> chartText "bySourceRelative"
         | BySourceCountry           -> chartText "bySourceCountry"
         | BySourceCountryRelative   -> chartText "bySourceCountryRelative"
+    static member Default = ByLocation
+
+let displayTypeQueryParam =
+    DisplayType.all
+    |> List.map (fun dt ->
+        ((match dt with
+          | ByLocation -> "by-location"
+          | ByLocationRelative -> "by-location-relative"
+          | BySource -> "by-source"
+          | BySourceRelative -> "by-source-relative"
+          | BySourceCountry -> "by-source-country"
+          | BySourceCountryRelative -> "by-source-country-relative"
+          | Quarantine -> "quarantine"
+          | QuarantineRelative -> "quarantine-relative"),
+         dt))
+    |> Map.ofList
 
 // ---------------------------
 // State management
@@ -69,10 +85,30 @@ type State =
 type Msg =
     | RangeSelectionChanged of int
     | ChangeDisplayType of DisplayType
+    | QueryParamsUpdated of QueryParams.State
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    { state with
+          displayType =
+              match queryParams.SourcesDisplayType with
+              | Some (q: string) ->
+                  match q.ToLower() |> displayTypeQueryParam.TryFind with
+                  | Some v -> v
+                  | None -> state.displayType
+              | _ -> DisplayType.Default },
+    commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          SourcesDisplayType =
+              if state.displayType = DisplayType.Default
+              then None
+              else Map.tryFindKey (fun k v -> v = state.displayType) displayTypeQueryParam
+              }
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = ByLocation
+        { displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -87,6 +123,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | ChangeDisplayType displayType ->
         { state with displayType = displayType },
         Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 // ---------------------------
 // Display Type Selection
@@ -136,7 +173,7 @@ module Series =
     let quarantineRelative = [  ConfirmedCases; ConfirmedFromQuarantine ]
     let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
     let byLocation = [Family; Work; School; Hospital; OtherHealthcare; RetirementHome; Prison; Transport; Shop; Restaurant; Sport; GatheringPrivate; GatheringOrganized; LocationOther; LocationUnknown ]
-    
+
     let getSeriesInfo =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0
@@ -421,5 +458,13 @@ let render (state: State) dispatch =
         ]
     ]
 
-let sourcesChart (props: {| data: WeeklyStatsData |}) =
-    React.elmishComponent ("sourcesChart", init props.data, update, render)
+let sourcesChart =
+    React.functionComponent (fun (props: {| data: WeeklyStatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

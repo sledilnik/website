@@ -9,7 +9,6 @@ open Fable.Core
 open Highcharts
 open JsInterop
 open Feliz
-open Feliz.ElmishComponents
 
 open System.Text
 open Types
@@ -53,6 +52,7 @@ let MetricTypeQueryParam =
       ("deceased", MetricType.Deceased) ]
     |> Map.ofList
 
+let defaultMetricType = ActiveCases
 
 let incorporateQueryParams (queryParams: QueryParams.State)
                            (state: RegionsChartState, commands: Cmd<Msg>)
@@ -63,13 +63,18 @@ let incorporateQueryParams (queryParams: QueryParams.State)
             match sort.ToLower() |> MetricTypeQueryParam.TryFind with
             | Some v -> { state with MetricType = v }
             | _ -> state
-        | _ -> state
+        | _ ->
+            { state with
+                  MetricType = defaultMetricType }
 
     state, commands
 
 let stateToQueryParams (state: RegionsChartState) (queryParams: QueryParams.State) =
     { queryParams with
-          RegionsMetricType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricTypeQueryParam }
+          RegionsMetricType =
+              if state.MetricType = defaultMetricType
+              then None
+              else Map.tryFindKey (fun k v -> v = state.MetricType) MetricTypeQueryParam }
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -93,7 +98,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
               Color = color
               Visible = true } )
 
-    { ScaleType = Linear; MetricType = ActiveCases
+    { ScaleType = Linear; MetricType = defaultMetricType
       ChartConfig = config
       RegionsData = data
       Regions = regionsByTotalCases
@@ -312,4 +317,4 @@ let renderChart (config: RegionsChartConfig) (props: {| data: RegionsData |}) =
                 stateToQueryParams
                 Msg.QueryParamsUpdated
 
-        render state dispatch) props
+        React.useMemo ((fun () -> render state dispatch), [| state |])) props

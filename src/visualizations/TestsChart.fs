@@ -31,6 +31,8 @@ type DisplayType =
         | Total | Data "regular" | Data "ns-apr20" -> true
         | _ -> false
 
+    static member Default = Data "regular"
+
 type State =
     { StatsData: StatsData
       LabData: LabTestsStats array
@@ -55,6 +57,39 @@ type Msg =
     | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
+
+let displayTypeQueryParam (state: State) =
+    GetAllDisplayTypes state
+    |> Seq.map (fun dt ->
+        ((match dt with
+          | Data x -> sprintf "data-%s" x
+          | Lab x -> sprintf "lab-%s" x
+          | Total -> "total"
+          | ByLab -> "by-lab"
+          | ByLabPercent -> "by-lab-percent"),
+         dt))
+    |> Map.ofSeq
+
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    { state with
+          DisplayType =
+              match queryParams.TestsDisplayType with
+              | Some (q: string) ->
+                  match q.ToLower()
+                        |> (displayTypeQueryParam state).TryFind with
+                  | Some v -> v
+                  | None -> state.DisplayType
+              | _ -> DisplayType.Default },
+    commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          TestsDisplayType =
+              if state.DisplayType = DisplayType.Default
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DisplayType) (displayTypeQueryParam state) }
 
 let init data: State * Cmd<Msg> =
     let cmd =
@@ -65,7 +100,7 @@ let init data: State * Cmd<Msg> =
           LabData = [||]
           Error = None
           AllLabs = []
-          DisplayType = Data "regular"
+          DisplayType = DisplayType.Default
           RangeSelectionButtonIndex = 0 }
 
     state, cmd
@@ -94,6 +129,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with
               RangeSelectionButtonIndex = buttonIndex },
         Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 
 let renderByLabChart (state: State) dispatch =
@@ -323,7 +359,7 @@ let renderTestsChart (state: State) dispatch =
                      yAxis = 0
                      data =
                          if DisplayType.UseStatsData(state.DisplayType) then
-                             state.StatsData 
+                             state.StatsData
                              |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
                              |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTestsStats dp))
                              |> Seq.toArray
@@ -421,13 +457,13 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ 
+        Html.div [
             renderChartContainer state dispatch
-            renderDisplaySelectors state dispatch 
+            renderDisplaySelectors state dispatch
 
             if DisplayType.UseStatsData(state.DisplayType) then
                 Html.none
-            else    
+            else
                 Html.div [
                     prop.className "disclaimer"
                     prop.children [
@@ -436,5 +472,13 @@ let render (state: State) dispatch =
                 ]
         ]
 
-let testsChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("TestsChart", init props.data, update, render)
+let testsChart =
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

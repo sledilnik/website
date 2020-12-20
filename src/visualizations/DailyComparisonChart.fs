@@ -57,7 +57,9 @@ type Msg =
     | ChangeDisplayType of DisplayType
     | QueryParamsUpdated of QueryParams.State
 
-let DisplayTypeQueryParam = [
+let defaultDisplayType = New
+
+let displayTypeQueryParam = [
       ("active", DisplayType.Active)
       ("new", DisplayType.New)
       ("tests", DisplayType.Tests)
@@ -67,26 +69,31 @@ let DisplayTypeQueryParam = [
       ("icu-admitted", DisplayType.ICUAdmitted)
       ("deceased", DisplayType.Deceased)] |> Map.ofList
 
-let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
-       let state = match queryParams.DailyComparisonType with
-                   | Some (sort : string) ->
-                       match sort.ToLower() |> DisplayTypeQueryParam.TryFind with
-                       | Some v -> {state with DisplayType=v}
-                       | _ -> state
-                   | _ -> state
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    let state =
+        match queryParams.DailyComparisonDisplayType with
+        | Some (sort: string) ->
+            match sort.ToLower() |> displayTypeQueryParam.TryFind with
+            | Some v -> { state with DisplayType = v }
+            | _ -> state
+        | _ -> { state with DisplayType = defaultDisplayType }
 
-       state, commands
+    state, commands
 
-let stateToQueryParams (state: State) (queryParams: QueryParams.State)
-    = { queryParams with
-                        DailyComparisonType = Map.tryFindKey (fun k v -> v = state.DisplayType) DisplayTypeQueryParam }
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          DailyComparisonDisplayType =
+              if state.DisplayType = defaultDisplayType
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
+
 let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         StatsData = data
         PatientsData = [||]
         Error = None
-        DisplayType = New
+        DisplayType = defaultDisplayType
     }
     state, cmd
 
@@ -188,7 +195,7 @@ let renderChartOptions (state : State) dispatch =
                 | Some v, Some p ->
                     if p = 0
                     then if v = 0 then "" else ">500%"
-                    else sprintf "%+0.1f %%" (float(v) / float(p) * 100.0 - 100.0) 
+                    else sprintf "%+0.1f %%" (float(v) / float(p) * 100.0 - 100.0)
                         // Utils.percentWith1DecimalSignFormatter((float(v) / float(p) * 100.) - 100.)
                 | _, _ -> ""
 

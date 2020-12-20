@@ -65,6 +65,9 @@ let availableDisplayTypes: DisplayType array = [|
         ShowPhases = true
     }
 |]
+
+let defaultDisplayType = availableDisplayTypes.[0]
+
 let displayTypeQueryParam = [("average-by-day", availableDisplayTypes.[0])
                              ("all", availableDisplayTypes.[1])] |> Map.ofList
 
@@ -81,23 +84,28 @@ type Msg =
 
 let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
     let state =
-        match queryParams.MetricsCorrelationType with
+        match queryParams.MetricsCorrelationDisplayType with
         | Some (q: string) ->
             match q.ToLower() |> displayTypeQueryParam.TryFind with
             | Some v -> { state with DisplayType = v }
             | _ -> state
-        | _ -> state
+        | _ ->
+            { state with
+                  DisplayType = defaultDisplayType }
 
     state, commands
 
 let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
     { queryParams with
-          MetricsCorrelationType = Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
+          MetricsCorrelationDisplayType =
+              if state.DisplayType = defaultDisplayType
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = availableDisplayTypes.[0]
+        DisplayType = defaultDisplayType
         RangeSelectionButtonIndex = 1
     }
     state, Cmd.none

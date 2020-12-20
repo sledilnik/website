@@ -2,15 +2,16 @@ module ExcessDeathsChart.Main
 
 open Feliz
 open Browser
-open Fable.Core.JsInterop
 open Fable.DateFunctions
 
 open Types
 
+let defaultDisplayType = AbsoluteDeaths
 let displayTypeQueryParam =
     [ ("absolute", DisplayType.AbsoluteDeaths)
       ("excess", DisplayType.ExcessDeaths) ]
     |> Map.ofList
+
 
 let incorporateQueryParams (queryParams: QueryParams.State) (state: State): State =
     let state =
@@ -19,18 +20,23 @@ let incorporateQueryParams (queryParams: QueryParams.State) (state: State): Stat
             match q.ToLower() |> displayTypeQueryParam.TryFind with
             | Some v -> { state with DisplayType = v }
             | _ -> state
-        | _ -> state
+        | _ ->
+            { state with
+                  DisplayType = defaultDisplayType }
 
     state
 
 let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
     { queryParams with
-          ExcessDeathsDisplayType = Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
+          ExcessDeathsDisplayType =
+              if state.DisplayType = defaultDisplayType
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
 
 let init statsData =
     { StatsData = statsData
       WeeklyDeathsData = Loading
-      DisplayType = AbsoluteDeaths
+      DisplayType = defaultDisplayType
     }
 
 let update state msg =

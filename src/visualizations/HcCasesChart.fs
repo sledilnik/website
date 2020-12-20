@@ -5,6 +5,7 @@ open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 open Browser
+open SourcesChart
 open Types
 open Highcharts
 
@@ -19,6 +20,8 @@ type DisplayType =
         | Healthcare                -> chartText "healthcareEmployees"
         | HealthcareRelative        -> chartText "healthcareEmployeesRelative"
 
+    static member Default = Healthcare
+
 // ---------------------------
 // State management
 // ---------------------------
@@ -32,11 +35,36 @@ type Msg =
     | RangeSelectionChanged of int
     | ScaleTypeChanged of ScaleType
     | ChangeDisplayType of DisplayType
+    | QueryParamsUpdated of QueryParams.State
+
+let displayTypeQueryParam =
+    [ ("absolute", DisplayType.Healthcare)
+      ("relative", DisplayType.HealthcareRelative)]
+    |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    { state with
+          displayType =
+              match queryParams.HcCasesDisplayType with
+              | Some (q: string) ->
+                  match q.ToLower() |> displayTypeQueryParam.TryFind with
+                  | Some v -> v
+                  | None -> state.displayType
+              | _ -> DisplayType.Default },
+    commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          HcCasesDisplayType =
+              if state.displayType = DisplayType.Default
+              then None
+              else Map.tryFindKey (fun k v -> v = state.displayType) displayTypeQueryParam
+              }
 
 let init data: State * Cmd<Msg> =
     let state =
         { scaleType = Linear
-          displayType = Healthcare
+          displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -53,6 +81,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | ChangeDisplayType displayType ->
         { state with displayType = displayType },
         Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 // ---------------------------
 // Display Type Selection
@@ -272,5 +301,13 @@ let render (state: State) dispatch =
         ]
     ]
 
-let hcCasesChart (props: {| data: WeeklyStatsData |}) =
-    React.elmishComponent ("hcCasesChart", init props.data, update, render)
+let hcCasesChart =
+    React.functionComponent (fun (props: {| data: WeeklyStatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

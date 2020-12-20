@@ -13,9 +13,46 @@ open Highcharts
 open Types
 open Data
 
+let defaultDiagramKind = TotalVsWeek
+let defaultMetric = Cases
+
+
+let diagramKindQueryParam =
+    DiagramKind.All
+    |> List.map (fun dk ->
+        ((match dk with
+          | TotalVsWeek -> "total-vs-week"
+          | WeekVsWeekBefore -> "week-vs-week-before"),
+         dk))
+    |> Map.ofList
+
+let metricQueryParam =
+    Metric.AllMetrics
+    |> List.map (fun m ->
+        ((match m with
+          | Cases -> "cases"
+          | Hospitalized -> "hospitalized"
+          | Deceased -> "deceased"),
+         m))
+    |> Map.ofList
+
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          PhaseDiagramKind =
+              if state.DiagramKind = defaultDiagramKind
+              then None
+              else Map.tryFindKey (fun k v -> v = state.DiagramKind) diagramKindQueryParam
+
+          PhaseDiagramMetric =
+              if state.Metric = defaultMetric
+              then None
+              else Map.tryFindKey (fun k v -> v = state.Metric) metricQueryParam
+              }
+
 let init statsData : State * Cmd<Msg> =
-    let metric = Cases
-    let diagramKind = TotalVsWeek
+    let metric = defaultMetric
+    let diagramKind = defaultDiagramKind
     let displayData = totalVsWeekData metric statsData
 
     let state = {
@@ -27,7 +64,7 @@ let init statsData : State * Cmd<Msg> =
     }
     state, Cmd.none
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let rec update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | DayChanged day ->
         { state with Day = day }, Cmd.none
@@ -48,6 +85,67 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { newState with
             DisplayData = newDisplayData
             Day = newDisplayData.Length - 1 }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
+
+and incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    // TODO: This is ugly
+    //  - cannot directly update state because diagramKind and Metric have extra logic
+    //  - need to call `update` instead of Cmd.ofMsg or dispatching to avoid flickering
+    //
+    List.fold (fun s m -> update m s |> fst) state (List.concat [
+                  match queryParams.PhaseDiagramKind with
+                  | Some (q: string) ->
+                      match q.ToLower() |> diagramKindQueryParam.TryFind with
+                      | Some v -> [ Msg.DiagramKindSelected v ]
+                      | None -> []
+                  | _ -> []
+                  match queryParams.PhaseDiagramMetric with
+                  | Some (q: string) ->
+                      match q.ToLower() |> metricQueryParam.TryFind with
+                      | Some v -> [ Msg.MetricSelected(v.ToString()) ]
+                      | None -> []
+                  | _ -> [] ])
+    , commands
+
+
+type QueryParamStateMapping<'S, 'M> = {
+    toQueryParam: 'S -> string option
+    toMsg: 'S -> string option -> 'M option
+    getQueryParam: QueryParams.State -> string option
+    updateQueryParam: QueryParams.State -> string option -> QueryParams.State
+}
+
+
+// TODO: Refactor query params to use Query Param Definitions instead of a pair of functions
+let qpDefinitions =
+    [ { toQueryParam =
+            (fun s ->
+                match s.DiagramKind with
+                | k when k = defaultDiagramKind -> None
+                | TotalVsWeek -> Some "total-vs-week"
+                | WeekVsWeekBefore -> Some "week-vs-week-before")
+        toMsg =
+            fun s dk ->
+                match dk with
+                | Some "total-vs-week" -> Msg.DiagramKindSelected TotalVsWeek |> Some
+                | Some "week-vs-week-before" -> Msg.DiagramKindSelected WeekVsWeekBefore |> Some
+                | _ -> None
+        getQueryParam = fun qp -> qp.PhaseDiagramKind
+        updateQueryParam = fun qp v -> { qp with PhaseDiagramKind = v } } ]
+
+let queryParamsToMessages<'S, 'M> (qpDefinitions: QueryParamStateMapping<'S, 'M> list)
+                                  (qp: QueryParams.State)
+                                  (state: 'S)
+                                  =
+    qpDefinitions
+    |> List.choose (fun qpd ->
+        let currentQp = qpd.getQueryParam qp
+        let oldQp = qpd.toQueryParam state
+        if currentQp <> oldQp then qpd.toMsg state currentQp else None)
+
+let stateToQueryParams_<'S, 'M> (qpDefinitions: QueryParamStateMapping<'S, 'M> list) (qp: QueryParams.State) (state: 'S) =
+    qpDefinitions
+    |> List.fold (fun qp qpd -> qpd.updateQueryParam qp (qpd.toQueryParam state)) qp
 
 let sharedChartOptions displayData =
     {| title = None
@@ -223,7 +321,12 @@ let renderChart state dispatch =
     ]
 
 let chart =
-    React.functionComponent(fun (props : {| data : StatsData |}) ->
-        let state, dispatch = React.useElmish(init props.data, update, [| |])
-        renderChart state dispatch
-    )
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> renderChart state dispatch), [| state |]))

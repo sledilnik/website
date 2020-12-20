@@ -76,3 +76,4 @@ type Msg =
     | DiagramKindSelected of DiagramKind
     | MetricSelected of string
     | DayChanged of int
+    | QueryParamsUpdated of QueryParams.State

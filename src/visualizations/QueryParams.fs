@@ -13,26 +13,44 @@ type State =
     { MunicipalitiesChartRegion: string option
       MunicipalitiesChartSearch: string option
       MunicipalitiesChartSort: string option
-      MetricsComparisonType: string option
-      MetricsCorrelationType: string option
+      MetricsComparisonMetricType: string option
+      MetricsCorrelationDisplayType: string option
       RegionsMetricType: string option
       PatientsBreakdown: string option
-      DailyComparisonType: string option
+      DailyComparisonDisplayType: string option
       DeceasedMetrics: string option
       ExcessDeathsDisplayType: string option
+      MapContentType: string option
+      MapDisplayType: string option
+      AgeGroupsChartMode: string option
+      AgeGroupsTimelineMetrics: string option
+      TestsDisplayType: string option
+      HcCasesDisplayType: string option
+      SourcesDisplayType: string option
+      PhaseDiagramKind: string option
+      PhaseDiagramMetric: string option
       DateFrom: string option }
 
     static member Empty =
         { MunicipalitiesChartRegion = None
           MunicipalitiesChartSearch = None
           MunicipalitiesChartSort = None
-          MetricsComparisonType = None
-          MetricsCorrelationType = None
+          MetricsComparisonMetricType = None
+          MetricsCorrelationDisplayType = None
           RegionsMetricType = None
           PatientsBreakdown = None
-          DailyComparisonType = None
+          DailyComparisonDisplayType = None
           DeceasedMetrics = None
           ExcessDeathsDisplayType = None
+          MapContentType = None
+          MapDisplayType = None
+          AgeGroupsChartMode = None
+          AgeGroupsTimelineMetrics = None
+          TestsDisplayType = None
+          HcCasesDisplayType = None
+          SourcesDisplayType = None
+          PhaseDiagramKind = None
+          PhaseDiagramMetric = None
           DateFrom = None }
 
 let getState () =
@@ -52,10 +70,10 @@ let getState () =
                   MunicipalitiesChartSort = Some value }
         | "metrics-comparison" ->
             { state with
-                  MetricsComparisonType = Some value }
+                  MetricsComparisonMetricType = Some value }
         | "metrics-correlation" ->
             { state with
-                  MetricsCorrelationType = Some value }
+                  MetricsCorrelationDisplayType = Some value }
         | "regions-metric" ->
             { state with
                   RegionsMetricType = Some value }
@@ -64,13 +82,40 @@ let getState () =
                   PatientsBreakdown = Some value }
         | "daily-comparison" ->
             { state with
-                  DailyComparisonType = Some value }
+                  DailyComparisonDisplayType = Some value }
         | "deceased" ->
             { state with
                   DeceasedMetrics = Some value }
         | "excess-deaths" ->
             { state with
                   ExcessDeathsDisplayType = Some value }
+        | "map-content" ->
+            { state with
+                  MapContentType = Some value }
+        | "map-display" ->
+            { state with
+                  MapDisplayType = Some value }
+        | "age-groups" ->
+            { state with
+                  AgeGroupsChartMode = Some value }
+        | "age-groups-timeline" ->
+            { state with
+                  AgeGroupsTimelineMetrics = Some value }
+        | "tests" ->
+            { state with
+                  TestsDisplayType = Some value }
+        | "hc-cases" ->
+            { state with
+                  HcCasesDisplayType = Some value }
+        | "sources" ->
+            { state with
+                  SourcesDisplayType = Some value }
+        | "phase-diagram-kind" ->
+            { state with
+                  PhaseDiagramKind = Some value }
+        | "phase-diagram-metric" ->
+            { state with
+                  PhaseDiagramMetric = Some value }
         | "dateFrom" -> { state with DateFrom = Some value }
         | _ -> state) State.Empty
 
@@ -90,11 +135,11 @@ let setState state =
                 |> Option.map (fun value -> ("sort", value))
 
             yield
-                state.MetricsComparisonType
+                state.MetricsComparisonMetricType
                 |> Option.map (fun value -> ("metrics-comparison", value))
 
             yield
-                state.MetricsCorrelationType
+                state.MetricsCorrelationDisplayType
                 |> Option.map (fun value -> ("metrics-correlation", value))
 
             yield
@@ -106,7 +151,7 @@ let setState state =
                 |> Option.map (fun value -> ("patients", value))
 
             yield
-                state.DailyComparisonType
+                state.DailyComparisonDisplayType
                 |> Option.map (fun value -> ("daily-comparison", value))
 
             yield
@@ -116,6 +161,42 @@ let setState state =
             yield
                 state.ExcessDeathsDisplayType
                 |> Option.map (fun value -> ("excess-deaths", value))
+
+            yield
+                state.MapContentType
+                |> Option.map (fun value -> ("map-content", value))
+
+            yield
+                state.MapDisplayType
+                |> Option.map (fun value -> ("map-display", value))
+
+            yield
+                state.AgeGroupsChartMode
+                |> Option.map (fun value -> ("age-groups", value))
+
+            yield
+                state.AgeGroupsTimelineMetrics
+                |> Option.map (fun value -> ("age-groups-timeline", value))
+
+            yield
+                state.TestsDisplayType
+                |> Option.map (fun value -> ("tests", value))
+
+            yield
+                state.HcCasesDisplayType
+                |> Option.map (fun value -> ("hc-cases", value))
+
+            yield
+                state.SourcesDisplayType
+                |> Option.map (fun value -> ("sources", value))
+
+            yield
+                state.PhaseDiagramKind
+                |> Option.map (fun value -> ("phase-diagram-kind", value))
+
+            yield
+                state.PhaseDiagramMetric
+                |> Option.map (fun value -> ("phase-diagram-metric", value))
 
             yield
                 state.DateFrom
@@ -161,7 +242,6 @@ let useQueryParams<'M, 'S when 'S: equality> (state: 'S)
 
     React.useEffectOnce (fun unit ->
         window.addEventListener (queryParamsChangedEvent, onQueryParamsChanged)
-
         { new IDisposable with
             member x.Dispose() =
                 window.removeEventListener (queryParamsChangedEvent, onQueryParamsChanged) })
@@ -206,7 +286,6 @@ let useElmishWithQueryParams<'M, 'S when 'S: equality> (init: 'S * Elmish.Cmd<'M
 
     React.useEffectOnce (fun unit ->
         window.addEventListener (queryParamsChangedEvent, onQueryParamsChanged)
-
         { new IDisposable with
             member x.Dispose() =
                 window.removeEventListener (queryParamsChangedEvent, onQueryParamsChanged) })
@@ -247,7 +326,6 @@ let useReducerWithQueryParams<'M, 'S when 'S: equality> (update: 'S -> 'M -> 'S)
 
     React.useEffectOnce (fun unit ->
         window.addEventListener (queryParamsChangedEvent, onQueryParamsChanged)
-
         { new IDisposable with
             member x.Dispose() =
                 window.removeEventListener (queryParamsChangedEvent, onQueryParamsChanged) })
@@ -257,3 +335,17 @@ let useReducerWithQueryParams<'M, 'S when 'S: equality> (update: 'S -> 'M -> 'S)
     // previousState is only updated when the state changes according to F#'s equality semantics
     // See conditional call to setPreviousState(state) above
     (previousState, dispatch)
+
+
+
+// TODO: Newest design prototype in PhaseDiagram/Chart
+// queryParamsToMessages, stateToQueryParams defined from query params definition:
+// {toQueryParam; toMsg; getQueryParam; updateQueryParam}
+
+// ?query=params -> QueryParams.State -> _list of messages_ -> dispatch/update -> new state
+// state change -> ?query=params
+
+//
+
+
+

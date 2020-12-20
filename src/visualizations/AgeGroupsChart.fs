@@ -36,6 +36,36 @@ type State = {
 type Msg =
     | ChartModeChanged of ChartMode
     | ScaleTypeChanged of ScaleType
+    | QueryParamsUpdated of QueryParams.State
+
+let defaultChartMode = ChartMode.AbsoluteInfections
+
+let ageGroupsChartModeQueryParam =
+    [ ("absolute-infections", ChartMode.AbsoluteInfections)
+      ("absolute-deaths", ChartMode.AbsoluteDeaths)
+      ("infections-per-population", ChartMode.InfectionsPerPopulation)
+      ("deaths-per-population", ChartMode.DeathsPerPopulation)
+      ("deaths-per-infections", ChartMode.DeathsPerInfections) ]
+    |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    { state with
+          ChartMode =
+              match queryParams.AgeGroupsChartMode with
+              | Some (q: string) ->
+                  match q.ToLower() |> ageGroupsChartModeQueryParam.TryFind with
+                  | Some v -> v
+                  | None -> state.ChartMode
+              | _ -> defaultChartMode },
+    commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          AgeGroupsChartMode =
+              if state.ChartMode = defaultChartMode
+              then None
+              else Map.tryFindKey (fun k v -> v = state.ChartMode) ageGroupsChartModeQueryParam
+              }
 
 let maybeFloat = Option.map float
 
@@ -447,7 +477,7 @@ let renderChartOptions
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =
-    { ChartMode = AbsoluteInfections; Data = data }, Cmd.none
+    { ChartMode = defaultChartMode; Data = data }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -466,6 +496,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
                 | AbsoluteInfections -> InfectionsPerPopulation
                 | _ -> DeathsPerPopulation
         { state with ChartMode = toChartMode }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let renderChartContainer state =
     let latest = latestAgeData state
@@ -499,5 +530,13 @@ let render (state : State) dispatch =
         | _ -> Html.none
     ]
 
-let renderChart (props : {| data : StatsData |}) =
-    React.elmishComponent("AgeGroupsChart", init props.data, update, render)
+let renderChart =
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

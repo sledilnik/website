@@ -71,13 +71,14 @@ type State = {
     Breakdown : Breakdown
     RangeSelectionButtonIndex: int
   } with
+    static member defaultBreakdown = AllHospitals
     static member initial hTypeToDisplay =
         {
             PatientsData = [||]
             Error = None
             AllFacilities = []
             HTypeToDisplay = hTypeToDisplay
-            Breakdown = AllHospitals
+            Breakdown = State.defaultBreakdown
             RangeSelectionButtonIndex = 0
         }
 
@@ -103,19 +104,24 @@ let PatientsBreakdownQueryParam (state: State) = List.append [
                                                   ( state.AllFacilities |> List.map (fun k -> ( "facility-" + k, Breakdown.Facility k)))
                                                |> Map.ofList
 
-let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
-       let state = match queryParams.PatientsBreakdown with
-                   | Some (sort : string) ->
-                       match sort.ToLower() |> (PatientsBreakdownQueryParam state).TryFind with
-                       | Some v -> {state with Breakdown=v}
-                       | _ -> state
-                   | _ -> state
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    let state =
+        match queryParams.PatientsBreakdown with
+        | Some (sort: string) ->
+            match sort.ToLower()
+                  |> (PatientsBreakdownQueryParam state).TryFind with
+            | Some v -> { state with Breakdown = v }
+            | _ -> state
+        | _ -> { state with Breakdown = State.defaultBreakdown }
 
-       state, commands
+    state, commands
 
-let stateToQueryParams (state: State) (queryParams: QueryParams.State)
-    = { queryParams with
-                        PatientsBreakdown = Map.tryFindKey (fun k v -> v = state.Breakdown) (PatientsBreakdownQueryParam state) }
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          PatientsBreakdown =
+              if state.Breakdown = State.defaultBreakdown
+              then None
+              else Map.tryFindKey (fun k v -> v = state.Breakdown) (PatientsBreakdownQueryParam state) }
 
 let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
@@ -392,7 +398,13 @@ let render (state : State) dispatch =
             renderBreakdownSelectors state dispatch
         ]
 
-let patientsChart = React.functionComponent(fun (props : {| hTypeToDisplay : HospitalType |}) ->
-        let state, dispatch = QueryParams.useElmishWithQueryParams (init props.hTypeToDisplay) update stateToQueryParams Msg.QueryParamsUpdated
-        React.useMemo((fun () -> render state dispatch), [|state|])
-        )
+let patientsChart =
+    React.functionComponent (fun (props: {| hTypeToDisplay: HospitalType |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.hTypeToDisplay)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

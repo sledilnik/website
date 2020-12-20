@@ -47,6 +47,7 @@ type View =
     | LastConfirmedCase
     | DoublingTime
 
+let defaultView = LastConfirmedCase
 
 type State =
     { Municipalities : Municipality seq
@@ -135,13 +136,13 @@ let init (data : RegionsData) : State * Cmd<Msg> =
           ShowAll = false
           SearchQuery = ""
           FilterByRegion = ""
-          View = LastConfirmedCase }
+          View = defaultView }
 
     state, Cmd.none
 
 
 
-let ViewQueryParam = [
+let viewQueryParam = [
     ("active-cases", View.ActiveCases);
     ("total-confirmed-cases", View.TotalConfirmedCases)
     ("last-confirmed-case", View.LastConfirmedCase)
@@ -154,13 +155,13 @@ let incorporateQueryParams (queryParams: QueryParams.State) (state: State, comma
 
        let state = match queryParams.MunicipalitiesChartSort with
                    | Some (sort : string) ->
-                       match sort.ToLower() |> ViewQueryParam.TryFind with
+                       match sort.ToLower() |> viewQueryParam.TryFind with
                        | Some View.DoublingTime -> match Highcharts.showDoublingTimeFeatures with
                                                    | true -> {state with View=DoublingTime}
                                                    | _ -> state
                        | Some v -> {state with View=v}
                        | _ -> state
-                   | _ -> state
+                   | _ -> { state with View = defaultView }
 
        let state = match queryParams.MunicipalitiesChartRegion with
                    | Some (region: string) when List.exists (fun (e:Region) -> e.Key.Equals(region.ToLower())) state.Regions -> { state with FilterByRegion = region.ToLower() }
@@ -187,15 +188,20 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 
-let stateToQueryParams (state: State) (queryParams: QueryParams.State)
-    = { queryParams with MunicipalitiesChartRegion = match state.FilterByRegion with
-                                                     | "" -> None
-                                                     | s -> Some s
-                         MunicipalitiesChartSearch = match state.SearchQuery with
-                                                     | "" -> None
-                                                     | s -> Some s
-                         MunicipalitiesChartSort = Map.tryFindKey (fun k v -> v = state.View) ViewQueryParam
-                                                     }
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          MunicipalitiesChartRegion =
+              match state.FilterByRegion with
+              | "" -> None
+              | s -> Some s
+          MunicipalitiesChartSearch =
+              match state.SearchQuery with
+              | "" -> None
+              | s -> Some s
+          MunicipalitiesChartSort =
+              if state.View = defaultView
+              then None
+              else Map.tryFindKey (fun k v -> v = state.View) viewQueryParam }
 
 let renderMunicipality (state : State) (municipality : Municipality) =
 

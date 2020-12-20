@@ -25,11 +25,39 @@ type State = {
 type Msg =
     | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
+
+let defaultMetrics = availableDisplayMetrics.[0]
+
+let metricsQueryParam = [
+    ("new-cases", availableDisplayMetrics.[0])
+    ("new-cases-relative", availableDisplayMetrics.[1])
+    ("active-cases", availableDisplayMetrics.[2])
+    ("active-cases-relative", availableDisplayMetrics.[3])] |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    { state with
+          Metrics =
+              match queryParams.AgeGroupsTimelineMetrics with
+              | Some (q: string) ->
+                  match q.ToLower() |> metricsQueryParam.TryFind with
+                  | Some v -> v
+                  | None -> state.Metrics
+              | _ -> defaultMetrics },
+    commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          AgeGroupsTimelineMetrics =
+              if state.Metrics = defaultMetrics
+              then None
+              else Map.tryFindKey (fun k v -> v = state.Metrics) metricsQueryParam
+              }
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        Metrics = availableDisplayMetrics.[0]
+        Metrics = defaultMetrics
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -39,6 +67,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | ChangeMetrics metrics -> { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let renderChartOptions state dispatch =
 
@@ -182,6 +211,13 @@ let render state dispatch =
         renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
-let renderChart (props : {| data : StatsData |}) =
-    React.elmishComponent
-        ("AgeGroupsTimelineViz/Chart", init props.data, update, render)
+let renderChart =
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

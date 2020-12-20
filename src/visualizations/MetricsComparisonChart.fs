@@ -37,6 +37,8 @@ let availableMetricTypes =
       { MetricType = ToDate; IsAveraged = false }
       { MetricType = Today; IsAveraged = true } ]
 
+let defaultMetricType =  { MetricType = Active; IsAveraged = false }
+
 let MetricQueryParam = [
     ("active", availableMetricTypes.[0])
     ("today", availableMetricTypes.[1])
@@ -133,7 +135,7 @@ let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
-        MetricType = { MetricType = Active; IsAveraged = false }
+        MetricType = defaultMetricType
         Metrics = Metrics.initial
         StatsData = data
         PatientsData = [||]
@@ -142,22 +144,25 @@ let init data : State * Cmd<Msg> =
     }
     state, cmd
 
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    let state =
+        match queryParams.MetricsComparisonMetricType with
+        | Some (sort: string) ->
+            match sort.ToLower() |> MetricQueryParam.TryFind with
+            | Some v -> { state with MetricType = v }
+            | _ -> state
+        | _ ->
+            { state with
+                  MetricType = defaultMetricType }
 
+    state, commands
 
-let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
-       let state = match queryParams.MetricsComparisonType with
-                   | Some (sort : string) ->
-                       match sort.ToLower() |> MetricQueryParam.TryFind with
-                       | Some v -> {state with MetricType=v}
-                       | _ -> state
-                   | _ -> state
-
-       state, commands
-
-let stateToQueryParams (state: State) (queryParams: QueryParams.State)
-    = { queryParams with
-                        MetricsComparisonType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricQueryParam
-                                                     }
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          MetricsComparisonMetricType =
+              if state.MetricType = defaultMetricType
+              then None
+              else Map.tryFindKey (fun k v -> v = state.MetricType) MetricQueryParam }
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -383,8 +388,11 @@ let render (state : State) dispatch =
             renderChartContainer state dispatch
             renderMetricsSelectors state dispatch
         ]
+
 let chart =
-    React.functionComponent(fun (props : {| data : StatsData |}) ->
-        let state, dispatch = QueryParams.useElmishWithQueryParams (props.data |> init) update stateToQueryParams Msg.QueryParamsUpdated
-        render state dispatch
-    )
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams (props.data |> init) update stateToQueryParams Msg.QueryParamsUpdated
+
+        React.useMemo((fun () -> render state dispatch), [|state|])
+        )
