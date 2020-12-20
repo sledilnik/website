@@ -26,6 +26,13 @@ let availableDisplayMetrics = [|
     { Id = "deceasedTodayRelative"; MetricsType = Today; ChartType = "percent" }
 |]
 
+let displayMetricsQueryParam =
+    [ ("to-date", availableDisplayMetrics.[0])
+      ("to-date-relative", availableDisplayMetrics.[1])
+      ("today", availableDisplayMetrics.[2])
+      ("today-relative", availableDisplayMetrics.[3]) ]
+    |> Map.ofList
+
 type State = {
     PatientsData : PatientsStats []
     Metrics: DisplayMetrics
@@ -38,6 +45,7 @@ type Msg =
     | ConsumeServerError of exn
     | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
 
 type Series =
     | DeceasedInIcu
@@ -54,6 +62,21 @@ module Series =
         | DeceasedAcute  -> true,  "#8c71a8",   "deceased-acute"
         | DeceasedCare   -> true,  "#a483c7",   "deceased-care"
         | DeceasedOther  -> true,  "#c59eef",   "deceased-rest"
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    let state =
+        match queryParams.DeceasedMetrics with
+        | Some (q: string) ->
+            match q.ToLower() |> displayMetricsQueryParam.TryFind with
+            | Some v -> { state with Metrics = v }
+            | _ -> state
+        | _ -> state
+
+    state, commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          DeceasedMetrics = Map.tryFindKey (fun k v -> v = state.Metrics) displayMetricsQueryParam }
 
 let init() : State * Cmd<Msg> =
     let state = {
@@ -80,6 +103,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Metrics=metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
@@ -252,5 +276,9 @@ let render (state: State) dispatch =
             renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
         ]
 
-let renderChart() =
-    React.elmishComponent("CasesChart", init(), update, render)
+let renderChart =
+    React.functionComponent (fun () ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams (init ()) update stateToQueryParams Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

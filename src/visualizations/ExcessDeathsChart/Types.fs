@@ -35,3 +35,4 @@ type State = {
 type Msg =
     | DailyDeathsDataReceived of Result<DailyDeathsData, string>
     | DisplayTypeChanged of DisplayType
+    | QueryParamsUpdated of QueryParams.State

@@ -7,6 +7,26 @@ open Fable.DateFunctions
 
 open Types
 
+let displayTypeQueryParam =
+    [ ("absolute", DisplayType.AbsoluteDeaths)
+      ("excess", DisplayType.ExcessDeaths) ]
+    |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State): State =
+    let state =
+        match queryParams.ExcessDeathsDisplayType with
+        | Some (q: string) ->
+            match q.ToLower() |> displayTypeQueryParam.TryFind with
+            | Some v -> { state with DisplayType = v }
+            | _ -> state
+        | _ -> state
+
+    state
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          ExcessDeathsDisplayType = Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
+
 let init statsData =
     { StatsData = statsData
       WeeklyDeathsData = Loading
@@ -37,6 +57,7 @@ let update state msg =
                       Deceased = dps |> List.sumBy (fun dp -> dp.deceased) } )
 
             { state with WeeklyDeathsData = Success weeklyDeathsData }
+    | QueryParamsUpdated queryParams -> state |> incorporateQueryParams queryParams
 
 let renderDisplayTypeSelectors state dispatch =
     let selectors =
@@ -55,7 +76,7 @@ let renderDisplayTypeSelectors state dispatch =
     ]
 
 let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
-    let (state, dispatch) = React.useReducer(update, init props.statsData)
+    let (state, dispatch) = QueryParams.useReducerWithQueryParams update (init props.statsData) stateToQueryParams Msg.QueryParamsUpdated
 
     let loadData () = async {
         let! data = Data.DailyDeaths.loadData ()

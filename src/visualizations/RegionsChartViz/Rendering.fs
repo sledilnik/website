@@ -46,27 +46,30 @@ let regionTotal (region : Region) : int =
     |> List.choose id
     |> List.sum
 
-let MetricTypeQueryParam = [
-                        ("active-cases", MetricType.ActiveCases)
-                        ("confirmed-cases", MetricType.ConfirmedCases)
-                        ("new-cases-7-days", MetricType.NewCases7Days)
-                        ("deceased", MetricType.Deceased)] |> Map.ofList
+let MetricTypeQueryParam =
+    [ ("active-cases", MetricType.ActiveCases)
+      ("confirmed-cases", MetricType.ConfirmedCases)
+      ("new-cases-7-days", MetricType.NewCases7Days)
+      ("deceased", MetricType.Deceased) ]
+    |> Map.ofList
 
 
-let incorporateQueryParams (queryParams: QueryParams.State) (state: RegionsChartState, commands: Cmd<Msg>): RegionsChartState * Cmd<Msg>=
-       let state = match queryParams.RegionsMetricType with
-                   | Some (sort : string) ->
-                       match sort.ToLower() |> MetricTypeQueryParam.TryFind with
-                       | Some v -> {state with MetricType=v}
-                       | _ -> state
-                   | _ -> state
+let incorporateQueryParams (queryParams: QueryParams.State)
+                           (state: RegionsChartState, commands: Cmd<Msg>)
+                           : RegionsChartState * Cmd<Msg> =
+    let state =
+        match queryParams.RegionsMetricType with
+        | Some (sort: string) ->
+            match sort.ToLower() |> MetricTypeQueryParam.TryFind with
+            | Some v -> { state with MetricType = v }
+            | _ -> state
+        | _ -> state
 
-       state, commands
+    state, commands
 
-let stateToQueryParams (state: RegionsChartState) (queryParams: QueryParams.State)
-    = { queryParams with
-                        RegionsMetricType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricTypeQueryParam
-                                                     }
+let stateToQueryParams (state: RegionsChartState) (queryParams: QueryParams.State) =
+    { queryParams with
+          RegionsMetricType = Map.tryFindKey (fun k v -> v = state.MetricType) MetricTypeQueryParam }
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -299,13 +302,14 @@ let render (state : RegionsChartState) dispatch =
         renderRegionsSelectors state.RegionsConfig dispatch
     ]
 
-//let renderChart
-//    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
-//    React.elmishComponent
-//        ("RegionsChart", init config props.data, update, render)
 
-let renderChart (config: RegionsChartConfig) (props : {| data : RegionsData |})  =
-    React.functionComponent(fun (props : {| data : RegionsData |}) ->
-        let state, dispatch = QueryParams.useElmishWithQueryParams (init config props.data) update stateToQueryParams Msg.QueryParamsUpdated
-        render state dispatch
-    ) props
+let renderChart (config: RegionsChartConfig) (props: {| data: RegionsData |}) =
+    React.functionComponent (fun (props: {| data: RegionsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams
+                (init config props.data)
+                update
+                stateToQueryParams
+                Msg.QueryParamsUpdated
+
+        render state dispatch) props

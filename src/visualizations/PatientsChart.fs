@@ -97,17 +97,16 @@ type Msg =
     | RangeSelectionChanged of int
     | QueryParamsUpdated of QueryParams.State
 
-let PatientsBreakdownQueryParam = List.append [
-                                   ("by-hospital", Breakdown.ByHospital)
-                                   ("all-hospitals", Breakdown.AllHospitals)]
-                                   (Utils.Dictionaries.facilities
-                                    |> Map.toList
-                                    |> List.map (fun (k, v) -> ( "facility-" + k, Breakdown.Facility k)))
-                                   |> Map.ofList
+let PatientsBreakdownQueryParam (state: State) = List.append [
+                                                  ("by-hospital", Breakdown.ByHospital)
+                                                  ("all-hospitals", Breakdown.AllHospitals)]
+                                                  ( state.AllFacilities |> List.map (fun k -> ( "facility-" + k, Breakdown.Facility k)))
+                                               |> Map.ofList
+
 let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
        let state = match queryParams.PatientsBreakdown with
                    | Some (sort : string) ->
-                       match sort.ToLower() |> PatientsBreakdownQueryParam.TryFind with
+                       match sort.ToLower() |> (PatientsBreakdownQueryParam state).TryFind with
                        | Some v -> {state with Breakdown=v}
                        | _ -> state
                    | _ -> state
@@ -116,7 +115,7 @@ let incorporateQueryParams (queryParams: QueryParams.State) (state: State, comma
 
 let stateToQueryParams (state: State) (queryParams: QueryParams.State)
     = { queryParams with
-                        PatientsBreakdown = Map.tryFindKey (fun k v -> v = state.Breakdown) PatientsBreakdownQueryParam }
+                        PatientsBreakdown = Map.tryFindKey (fun k v -> v = state.Breakdown) (PatientsBreakdownQueryParam state) }
 
 let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError

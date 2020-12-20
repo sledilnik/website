@@ -65,6 +65,8 @@ let availableDisplayTypes: DisplayType array = [|
         ShowPhases = true
     }
 |]
+let displayTypeQueryParam = [("average-by-day", availableDisplayTypes.[0])
+                             ("all", availableDisplayTypes.[1])] |> Map.ofList
 
 type State = {
     DisplayType : DisplayType
@@ -75,6 +77,22 @@ type State = {
 type Msg =
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
+    | QueryParamsUpdated of QueryParams.State
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg> =
+    let state =
+        match queryParams.MetricsCorrelationType with
+        | Some (q: string) ->
+            match q.ToLower() |> displayTypeQueryParam.TryFind with
+            | Some v -> { state with DisplayType = v }
+            | _ -> state
+        | _ -> state
+
+    state, commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State) =
+    { queryParams with
+          MetricsCorrelationType = Map.tryFindKey (fun k v -> v = state.DisplayType) displayTypeQueryParam }
 
 let init data : State * Cmd<Msg> =
     let state = {
@@ -90,6 +108,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with DisplayType=rt }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let renderChartOptions state dispatch =
 
@@ -328,5 +347,9 @@ let render state dispatch =
     ]
 
 
-let renderChart (props : {| data : StatsData |}) =
-    React.elmishComponent("InfectionsChart", init props.data, update, render)
+let renderChart =
+    React.functionComponent (fun (props: {| data: StatsData |}) ->
+        let state, dispatch =
+            QueryParams.useElmishWithQueryParams (init props.data) update stateToQueryParams Msg.QueryParamsUpdated
+
+        React.useMemo ((fun () -> render state dispatch), [| state |]))

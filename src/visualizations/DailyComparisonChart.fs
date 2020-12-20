@@ -55,7 +55,31 @@ type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ChangeDisplayType of DisplayType
+    | QueryParamsUpdated of QueryParams.State
 
+let DisplayTypeQueryParam = [
+      ("active", DisplayType.Active)
+      ("new", DisplayType.New)
+      ("tests", DisplayType.Tests)
+      ("positive-pct", DisplayType.PositivePct)
+      ("hospital-admitted", DisplayType.HospitalAdmitted)
+      ("hospital-discharged", DisplayType.HospitalDischarged)
+      ("icu-admitted", DisplayType.ICUAdmitted)
+      ("deceased", DisplayType.Deceased)] |> Map.ofList
+
+let incorporateQueryParams (queryParams: QueryParams.State) (state: State, commands: Cmd<Msg>): State * Cmd<Msg>=
+       let state = match queryParams.DailyComparisonType with
+                   | Some (sort : string) ->
+                       match sort.ToLower() |> DisplayTypeQueryParam.TryFind with
+                       | Some v -> {state with DisplayType=v}
+                       | _ -> state
+                   | _ -> state
+
+       state, commands
+
+let stateToQueryParams (state: State) (queryParams: QueryParams.State)
+    = { queryParams with
+                        DailyComparisonType = Map.tryFindKey (fun k v -> v = state.DisplayType) DisplayTypeQueryParam }
 let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
@@ -76,6 +100,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some ex.Message }, Cmd.none
     | ChangeDisplayType dt ->
         { state with DisplayType = dt }, Cmd.none
+    | QueryParamsUpdated queryParams -> (state, Cmd.none) |> incorporateQueryParams queryParams
 
 let renderChartOptions (state : State) dispatch =
 
@@ -293,6 +318,7 @@ let render (state: State) dispatch =
             renderChartContainer state dispatch
             renderDisplaySelectors state dispatch
         ]
-
-let dailyComparisonChart (props : {| data : StatsData |}) =
-    React.elmishComponent("DailyComparisonChart", init props.data, update, render)
+let dailyComparisonChart = React.functionComponent(fun (props : {| data : StatsData |}) ->
+        let state, dispatch = QueryParams.useElmishWithQueryParams (init props.data) update stateToQueryParams Msg.QueryParamsUpdated
+        React.useMemo((fun () -> render state dispatch), [|state|])
+        )
