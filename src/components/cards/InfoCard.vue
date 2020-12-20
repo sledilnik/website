@@ -221,14 +221,14 @@ export default {
   }
 
   &.positive {
-    -webkit-mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
-    mask: url(../../assets/svg/close-circle-deceased.svg) no-repeat center;
+    -webkit-mask: url(../../assets/svg/close-circle-plus.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-plus.svg) no-repeat center;
     background-color: #bf5747;
   }
 
   &.percent {
-    -webkit-mask: url(../../assets/svg/close-dd.svg) no-repeat center;
-    mask: url(../../assets/svg/close-dd.svg) no-repeat center;
+    -webkit-mask: url(../../assets/svg/close-circle-percent.svg) no-repeat center;
+    mask: url(../../assets/svg/close-circle-percent.svg) no-repeat center;
     background-color: #665191;
   }
 
