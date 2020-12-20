@@ -29,13 +29,7 @@ const infoCardConfig = () => {
       title: i18n.t('infocard.icu'),
     },
     testsToday: {
-      title: i18n.t('infocard.tests'),
-      subTitle: i18n.t('infocard.totalTests'),
-      extraFields: {
-        // Keys are predefined locations on the card, values are keys inside cardData.subFields
-        withValue: 'percent',
-        withSubLabel: 'positive'
-      }
+      title: i18n.t('infocard.tests')
     },
   } 
 }

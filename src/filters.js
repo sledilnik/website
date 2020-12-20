@@ -10,15 +10,15 @@ Vue.filter("prefixDiff", function (value) {
   }
 });
 
-Vue.filter("number", function(value) {
-  return formatNumber(value, { maximumFractionDigits: 1 });
+Vue.filter("number", function(value, minimumFractionDigits = 0, maximumFractionDigits = 1) {
+  return formatNumber(value, { minimumFractionDigits, maximumFractionDigits });
 });
 
-Vue.filter("percent", function(value) {
+Vue.filter("percent", function(value, minimumFractionDigits = 1, maximumFractionDigits = 1) {
   return formatNumber(value / 100, {
     style: "percent",
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
+    minimumFractionDigits,
+    maximumFractionDigits,
     signDisplay: "always",
   });
 });

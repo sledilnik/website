@@ -61,13 +61,13 @@ export default {
       charts: [],
       headerTeasers: false,
       displayedInfoCards: [
-        'casesToDateSummary',
+        'testsToday',
+        // 'casesToDateSummary',
         'casesActive',
         'casesAvg7Days',
         'hospitalizedCurrent',
         'icuCurrent',
-        'deceasedToDate',
-        // 'testsToday'
+        'deceasedToDate'
       ]
     };
   },
