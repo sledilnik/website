@@ -19,12 +19,12 @@
       </div>
       <b-row cols="12">
         <b-col>
-          <Youtube id="zJtKZ82jXAI"></Youtube>
+          <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
       <b-row cols="12">
         <b-col>
-          <div id="visualizations" class="visualizations"></div>
+          <Youtube id="zJtKZ82jXAI"></Youtube>
         </b-col>
       </b-row>
     </b-container>
