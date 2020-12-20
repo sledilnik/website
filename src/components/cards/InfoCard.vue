@@ -51,7 +51,7 @@
           class="card-diff-item"
         >
           <div class="trend-icon percent"></div>
-          <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
+          <span class="percent tests"> {{ cardData.subValues.percent | number }}</span>
         </div>
       </div>
       <div class="data-time" :class="{ outdated }">
