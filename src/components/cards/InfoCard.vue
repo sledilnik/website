@@ -43,14 +43,14 @@
           v-if="cardData.subValues && cardData.subValues.positive"
           class="card-diff-item"
         >
-          <div class="trend-icon positive"></div>
+          <div class="trend-icon positive bad"></div>
           <span class="positive bad">{{ cardData.subValues.positive | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.percent"
           class="card-diff-item"
         >
-          <div class="trend-icon percent"></div>
+          <div class="trend-icon percent tests"></div>
           <span class="percent tests"> {{ cardData.subValues.percent | number }}</span>
         </div>
       </div>
@@ -249,7 +249,7 @@ export default {
   color: #20b16d;
 }
 
-.percent {
+.tests {
   color: #665191;
 }
 
@@ -271,11 +271,4 @@ export default {
 /**
   SPECIAL CARD STYLES
  */
-.card-testsToday{
-  .card-note {
-    color: #bf5747;
-    font-size: 14px;
-  }
-}
-
 </style>
