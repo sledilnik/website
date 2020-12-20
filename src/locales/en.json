@@ -450,7 +450,7 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals and retirement homes. Deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -513,7 +513,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimer": "Note: Demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
