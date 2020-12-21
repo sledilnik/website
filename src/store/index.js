@@ -8,6 +8,7 @@ import { municipalitiesStore } from './municipalities.store'
 import { healthCentersStore } from './health-centers.store'
 import { postsStore } from './posts.store'
 import { tableData } from './tables.store'
+import restrictionsStore from './restrictions.store'
 import ostanizdravStore from './ostanizdrav.store'
 
 Vue.use(Vuex)
@@ -61,6 +62,7 @@ const store = new Vuex.Store({
     healthCenters: healthCentersStore,
     ostanizdrav: ostanizdravStore,
     posts: postsStore,
+    restrictions: restrictionsStore,
     tableData,
   }
 })

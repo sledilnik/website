@@ -81,6 +81,24 @@ type StatsDataPoint =
 
 type StatsData = StatsDataPoint list
 
+type InfectionLocation =
+    { Family : int option
+      Work : int option
+      School : int option
+      Hospital : int option
+      OtherHealthcare : int option
+      RetirementHome : int option
+      Prison : int option
+      Transport : int option
+      Shop : int option
+      Restaurant : int option
+      Sport : int option
+      GatheringPrivate : int option
+      GatheringOrganized : int option
+      Other : int option
+      Unknown : int option
+    }
+
 type InfectionSource =
     { FromQuarantine : int option
       Local : int option
@@ -96,7 +114,9 @@ type WeeklyStatsDataPoint =
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
+      RetirementHomeOccupantCases : int option
       SentToQuarantine : int option
+      Location : InfectionLocation
       Source : InfectionSource
       ImportedFrom : Map<string, int option>
     }

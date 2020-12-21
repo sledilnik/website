@@ -33,8 +33,6 @@ let regionsInfo = dict[
     "za", { Color = "#10829a" }
 ]
 
-let excludedRegions = Set.ofList ["t"]
-
 type Msg =
     | ToggleRegionVisible of string
     | MetricTypeChanged of MetricType
@@ -54,7 +52,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
     let regionsWithoutExcluded =
         lastDataPoint.Regions
         |> List.filter (fun region ->
-            not (excludedRegions |> Set.contains region.Name))
+            Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
     let regionsByTotalCases =
         regionsWithoutExcluded
@@ -128,10 +126,10 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
                     s.Append "<tr>" |> ignore
                     let regionTooltip =
                         sprintf
-                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%A</td>"
+                            "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'>%s</td>"
                             regionColor
                             regionName
-                            (tooltipValueFormatter state dataValue)
+                            (I18N.NumberFormat.formatNumber(dataValue, {| maximumFractionDigits=1 |}))
                     s.Append regionTooltip |> ignore
                     s.Append "</tr>" |> ignore
                 )

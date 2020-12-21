@@ -384,11 +384,9 @@
             "linear": "Linear",
             "longDateFormat": "%e. %B %Y",
             "view": "Ansicht:",
-            "decimalPoint": ".",
             "linkFaq": "FAQ",
             "share": "Teilen",
             "dateFormat": "%A, %e. %B %Y",
-            "thousandsSep": " ",
             "dsOWD": "Our World in Data",
             "webpage": "Internetseite",
             "shortDateFormat": "%e. %b",
@@ -1050,15 +1048,6 @@
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte",
-        "redPhase": "Rote Phase",
-        "orangePhase": "Orange Phase",
-        "per100k": "pro 100 tausend",
-        "package3": "Paket 3",
-        "package2": "Paket 2",
-        "package1": "Paket 1",
-        "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
-        "redPhaseGenitive": "roten",
-        "orangePhaseGenitive": "orangenen",
         "newCases7dInfo": "Durchschnitt der letzten 7 Tage",
         "newCases7d": "Neue Fälle"
     },
@@ -1361,5 +1350,9 @@
         "geoValidity": "Geografische Gültigkeit",
         "title": "Maßnahmen und Einschränkungen"
     },
-    "week": "Woche"
+    "week": "Woche",
+    "faq": {
+        "pageTitle": "FAQ",
+        "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+    }
 }

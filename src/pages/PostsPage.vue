@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style scoped lang="sass">
-.teaser__post
+.post__teaser
   width: 100%
   margin-bottom: 30px
 

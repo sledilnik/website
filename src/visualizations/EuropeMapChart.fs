@@ -127,8 +127,11 @@ let greenCountries =
     Map.ofList
         [
             ("AUS", "")
+            ("DNK", "pokrajina Grenlandija")
+            ("FIN", "administrativna enota Aland")
             ("JPN", "")
             ("KOR", "")
+            ("NOR", "administrativna enota Trøndelag")
             ("NZL", "")
             ("RWA", "")
             ("SGP", "")
@@ -167,21 +170,22 @@ let redCountries =
             ("CZE", "")
             ("CHL", "")
             ("MNE", "")
-            ("DNK", "administrativna enota: Hovedstaden, regija glavnega mesta, Nordjylland")
+            ("DNK", "administrativna enota: vse razen Nordjylland ter pokrajin Ferski otoki in Grenlandija")
             ("DOM", "")
             ("EGY", "")
             ("ECU", "")
             ("GNQ", "")
             ("ERI", "")
+            ("EST", "")
             ("SWZ", "")
             ("ETH", "")
             ("PHL", "")
-            ("FIN", "administrativna enota: Österbotten")
-            ("FRA", "vse administrativne enote celinske Francije, čezmorsko ozemlje: Francoska Gvajana, Guadeloupe, Sveti Martin, La Réunion, Martinique")
+            ("FIN", "administrativna enota: Uusimaa")
+            ("FRA", "vse administrativne enote celinske Francije, razen Bretanje in Korzike, ter vsa čezmorska ozemlja, razen ozemelj Guadeloupe, Martinique in La Reunion")
             ("GAB", "")
             ("GMB", "")
             ("GHA", "")
-            ("GRC", "adminstrativna enota: Dhitikí Makedhonía (Zahodna Makedonija)")
+            ("GRC", "vse administrativne enote, razen Južnoegejskih otokov in Jonskih otokov")
             ("GEO", "")
             ("GUY", "")
             ("GTM", "")
@@ -194,9 +198,7 @@ let redCountries =
             ("IDN", "")
             ("IRQ", "")
             ("IRN", "")
-            ("IRL", "administrativne enote: Dublin, Border, Midlands, Mid-East, Mid-East, South-West, West ")
-            ("ISL", "")
-            ("ITA", "vse administrativne enote razen enote: Calabria")
+            ("ITA", "")
             ("ISR", "")
             ("JAM", "")
             ("YEM", "")
@@ -215,12 +217,13 @@ let redCountries =
             ("XKX", "")
             ("CRI", "")
             ("KWT", "")
-            ("LVA", "administrativne enote: Latgale, Riga, Vidzeme")
+            ("LVA", "")
             ("LSO", "")
             ("LBN", "")
             ("LBR", "")
             ("LBY", "")
-            ("LTU", "administrativna enota: Kaunas, Klaipéda, Marijanpolé, Šiaulių, Telšiai, Vilnius")
+            ("LIE", "")
+            ("LTU", "")
             ("LUX", "")
             ("MDG", "")
             ("HUN", "")
@@ -235,19 +238,21 @@ let redCountries =
             ("MNG", "")
             ("MOZ", "")
             ("MCO", "")
+            ("DEU", "")
             ("NPL", "")
             ("NIG", "")
             ("NGA", "")
             ("NIC", "")
             ("NLD", "")
+            ("NOR", "administrativni enoti: Oslo, Viken")
             ("OMN", "")
             ("PAK", "")
             ("PAN", "")
             ("PNG", "")
             ("PRY", "")
             ("PER", "")
-            ("POL", "administrativne enote: Kujawsko-pomorskie, Małopolskie, Podlaski, Pomorskie, Świętokrzyskie")
-            ("PRT", "administrativna enota: Centro, Lizbona (Lisboa), Norte")
+            ("POL", "")
+            ("PRT", "")
             ("ROU", "")
             ("RUS", "")
             ("SLV", "")
@@ -265,8 +270,8 @@ let redCountries =
             ("SRB", "")
             ("CAF", "")
             ("SUR", "")
-            ("ESP", "")
-            ("SWE", "administrativne enote: Dalarna, Halland, Jämtland, Jönköping, Kronoberg, Örebro, Östergötland, Skåne, Stockholm, Uppsala, Västmanland, Västra Götaland")
+            ("ESP", "administrativne enote: vse razen Kanarskih otokov")
+            ("SWE", "")
             ("CHE", "")
             ("TJK", "")
             ("TZA", "")
@@ -283,6 +288,8 @@ let redCountries =
             ("ZMB", "")
             ("USA", "")
             ("ARE", "")
+            ("GBR", "")
+            ("CPV", "")
             ("ZWE", "")
         ]
 
@@ -396,7 +403,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
                 | _ ->
                     match green with
                     | Some greenNote -> chartText "statusGreen", "#C4DE6F", greenNote
-                    | _ -> chartText "statusOrange", "#FFC65A", ""
+                    | _ -> chartText "statusGreen", "#FFC65A", ""  // orange is w/o restrictions now
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -755,8 +762,8 @@ let renderMap state geoJson _ =
                 (chartText "countryStatus") rType rAltText
                 (chartText "importedCases") imported impDate
                 (chartText "incidence100k") incidence100k
-                (chartText "newCases") newCases ncDate
-            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                (chartText "newCases") (I18N.NumberFormat.formatNumber(newCases:int)) ncDate
+            + sprintf "<br>%s: <b>%s%s %%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
 
         match twoWeekIncidence with
         | null -> chartText "noData"

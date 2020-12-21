@@ -337,11 +337,9 @@
             "x_months_0": "{{ count }} mj.",
             "x_months_1": "{{ count }} mj.",
             "x_months_2": "{{ count }} mj.",
-            "thousandsSep": ".",
             "zoom": "Razdoblje",
             "shortDateFormat": "%e. %b",
             "linkFaq": "Često postavljena pitanja",
-            "decimalPoint": ",",
             "to": " – ",
             "from": " ",
             "sortBy": "Razvrstaj prema:",
@@ -776,6 +774,15 @@
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
             "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+        },
+        "metricsCorrelation": {
+            "titleMenu": "Korelacija između slučajeva, hospitaliziranih i umrlih",
+            "title": "Korelacija između slučajeva, hospitaliziranih i umrlih",
+            "deceased": "Umrli",
+            "hospitalized": "Hospitalizirani",
+            "cases": "Potvrđeni slučajevi",
+            "all": "Ukupno",
+            "averageByDay": "Po danu (prosjek)"
         }
     },
     "shortMonth": {
@@ -964,6 +971,10 @@
         "planRelaxation": {
             "description": "Vlada je prihvatila plan ublažavanja mjera u pet faza.",
             "title": "Plan"
+        },
+        "liftServices": {
+            "description": "Opuštanje: javni prijevoz (ograničena usluga), neke usluge (cvjećarnice, praonice automobila, čistionice)<br>U četiri regije opuštanje za trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
+            "title": "Usluge"
         }
     },
     "pageNotFound": {
@@ -1009,7 +1020,8 @@
         "menu": "Izbornik",
         "animation": "Animacija",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Prijeđi na dijagram"
+        "goToGraph": "Prijeđi na dijagram",
+        "posts": "Objave"
     },
     "phase": {
         "4": {
@@ -1158,15 +1170,6 @@
         "inHospital": "Hospitalizirani",
         "tests": "Testovi danas",
         "lastUpdated": "{{ date, %A, %e. %B }}",
-        "package3": "paket 3",
-        "package2": "paket 2",
-        "package1": "paket 1",
-        "redPhase": "Crvena faza",
-        "orangePhase": "Narančasta faza",
-        "per100k": "po 100 tisuća",
-        "nextCriteria": "<br>Kriteriji za paket {{ phaseNextNumber }} {{ phaseNextPackage }} faze je {{ phaseNextCriteria }}.",
-        "redPhaseGenitive": "crvene",
-        "orangePhaseGenitive": "narančaste",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi"
     },
@@ -1353,7 +1356,9 @@
         "titleMenu": "Animacija",
         "title": "Animacija širenja zaraze COVID-19"
     },
+    "week": "Tjedan",
     "restrictionsPage": {
+        "searchPlaceholder": "Unesite niz za pretraživanje",
         "link": "Poveznica na uredbu (službeni tekst)",
         "notes": "Napomene",
         "extrarule": "Dodatna pravila/tumačenja",
@@ -1363,5 +1368,14 @@
         "title": "Mjere i ograničenja",
         "description": "Koristeći se dostupnim izvorima podataka, pokušali smo prikupiti i sažeti trenutno važeće mjere koje je slovenska vlada usvojila kao odgovor na pandemiju COVID-19, naročito u odabranim područjima koja su najvažnija za svakodnevni život. Podaci koji su dostupni putem ovog programa za praćenje zaraze COVID-19, uključujući poveznice na druge web-stranice, prikupljaju se iz niza službenih izvora s kojima nismo povezani, pa treba imati na umu da služe samo u informativne svrhe i mogu se mijenjati s vremenom na vrijeme. Program za praćenje stoga ne jamči točnost i cjelovitost podataka prikupljenih o mjerama i izričito se odriče svake odgovornosti za daljnja tumačenja koja kao izvor navode naše podatke. Podaci se prikupljaju u [tablici sažetka](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml)."
     },
-    "week": "Tjedan"
+    "week": "Tjedan",
+    "posts": {
+        "readingTime": "min",
+        "timestamp": "{{ date, %e. %B %Y. }}"
+    },
+    "faq": {
+        "pageTitle": "FAQ",
+        "intro": "Nažalost, ova stranica još nije prevedena.",
+        "searchPlaceholder": "Unesite niz za pretraživanje"
+    }
 }

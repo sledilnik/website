@@ -1,5 +1,5 @@
 <template>
-  <div class="teaser__post">
+  <div class="post__teaser">
     <b-card no-body class="overflow-hidden h-100">
       <b-row no-gutters class="h-100">
         <b-col lg="4" class="d-none d-lg-block h-100 p-2 pr-0">

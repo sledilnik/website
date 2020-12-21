@@ -59,8 +59,8 @@ export default {
         ],
     },
     formatLocale: {
-        decimal: $t('charts.common.decimalPoint'),
-        thousands: $t('charts.common.thousandsSep'),
+        decimal: i18n.i18next.separators.decimal,
+        thousands: i18n.i18next.separators.group,
         grouping: [3],
     }, // https://github.com/d3/d3-format/blob/master/locale/en-US.json
 }

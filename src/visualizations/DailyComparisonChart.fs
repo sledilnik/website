@@ -83,7 +83,7 @@ let renderChartOptions (state : State) dispatch =
 
     let percentageFormatter value =
         let valueF = float value / 100.0
-        sprintf "%0.2f%%" valueF
+        Utils.percentWith1DecimalFormatter(valueF)
 
     let tooltipFormatter state jsThis =
         let category = jsThis?x
@@ -96,7 +96,7 @@ let renderChartOptions (state : State) dispatch =
             let yStr =
                 match state.DisplayType with
                 | PositivePct -> percentageFormatter p?point?y
-                | _ -> sprintf "%d" p?point?y
+                | _ -> I18N.NumberFormat.formatNumber (p?point?y : float)
             fmtLine <- sprintf "<tr><td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td><td style='text-align: right; padding-left: 10px'>%s</td></tr>"
                 p?series?color
                 p?point?date
@@ -163,7 +163,8 @@ let renderChartOptions (state : State) dispatch =
                 | Some v, Some p ->
                     if p = 0
                     then if v = 0 then "" else ">500%"
-                    else sprintf "%+0.0f%%" (float(v) / float(p) * 100.0 - 100.0)
+                    else sprintf "%+0.1f %%" (float(v) / float(p) * 100.0 - 100.0) 
+                        // Utils.percentWith1DecimalSignFormatter((float(v) / float(p) * 100.) - 100.)
                 | _, _ -> ""
 
             yield pojo

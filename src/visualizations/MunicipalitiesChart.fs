@@ -161,7 +161,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         { Municipalities = municipalities
           Regions = regions
           ShowAll = false
-          SearchQuery = 
+          SearchQuery =
             match query.Search with
             | None -> ""
             | Some search -> search
@@ -282,24 +282,24 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                                 prop.className "active"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
-                                                    Html.b [ prop.text activeCases ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(activeCases)) ] ] ]
                                         Html.div [
                                             if (recoveredToDate > 0) then
                                                 prop.className "recovered"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
-                                                    Html.b [ prop.text recoveredToDate ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(recoveredToDate)) ] ] ]
                                         Html.div [
                                             if (deceasedToDate > 0) then
                                                 prop.className "deceased"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
-                                                    Html.b [ prop.text deceasedToDate ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(deceasedToDate)) ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
                                                 Html.span [ prop.text (I18N.t "charts.municipalities.all") ]
-                                                Html.b [ prop.text confirmedToDate ] ] ]
+                                                Html.b [ prop.text (I18N.NumberFormat.formatNumber(confirmedToDate)) ] ] ]
                                     ]
                                 ]
                             ]
@@ -328,17 +328,17 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "active"
-                                prop.text (sprintf "%d" (municipality.ActiveCases |> Option.defaultValue 0)) ]
+                                prop.text (I18N.NumberFormat.formatNumber(municipality.ActiveCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "total-and-new"
                                 prop.children [
                                     Html.div [
                                         prop.className "total"
-                                        prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
+                                        prop.text (I18N.NumberFormat.formatNumber(municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
                                     if municipality.NewCases.IsSome then
                                         Html.div [
                                             prop.className "new"
-                                            prop.text (sprintf "(+%d)" (municipality.NewCases |> Option.defaultValue 0)) ]
+                                            prop.text (sprintf "(+%s)" (I18N.NumberFormat.formatNumber(municipality.NewCases |> Option.defaultValue 0))) ]
                                 ]
                             ]
                             Html.div [
