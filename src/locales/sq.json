@@ -43,15 +43,6 @@
             "full": "Të plotësuar",
             "titleMenu": "Kapaciteti"
         },
-        "countries": {
-            "groupNeighbouring": "Shtetet e rajonit",
-            "groupNordic": "Shtetet Nordike",
-            "groupExYu": "Ish-Jugosllavia",
-            "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
-            "groupLatinAmerica": "Amerika Latine",
-            "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
-            "title": "Krahasim sipas shtetit"
-        },
         "ageGroups": {
             "confirmedCases": "Raste të konfirmuara",
             "deceased": "Të vdekur",
