@@ -155,7 +155,6 @@ $loader-width: 50px
   @media only screen and (max-width: 480px)
     flex-direction: column
     min-height: 247px
-    
 
 .cards-wrapper
   display: grid
@@ -163,7 +162,7 @@ $loader-width: 50px
   grid-template-columns: repeat(1, minmax(165px, 1fr))
   margin: 0px auto 44px
 
-  @media only screen and (min-width: 480px)
+  @media only screen and (min-width: 411px)
     grid-template-columns: repeat(2, minmax(165px, 1fr))
 
   @media only screen and (min-width: 768px)

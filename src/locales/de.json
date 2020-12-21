@@ -514,15 +514,6 @@
             "titleMenu_MKD": "N. Mazedonien – Lage",
             "titleMenu_SVN": "Slowenien – Lage"
         },
-        "countries": {
-            "groupNordic": "Nordische Länder",
-            "title": "Ländervergleich",
-            "groupEastAsiaOceania": "Ostasien und Ozeanien",
-            "groupLatinAmerica": "Lateinamerika",
-            "groupExYu": "Ex-Jugoslawien",
-            "groupNeighbouring": "Nachbarländer",
-            "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen"
-        },
         "hospitals": {
             "bedsICU": "Intensivbetten",
             "title": "Krankenhauskapazität",

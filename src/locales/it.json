@@ -614,8 +614,12 @@
             "title": "Piano"
         },
         "liftServices": {
-            "description": "Rilassamento: trasporto pubblico (servizio limitato), alcuni servizi (fiorai, autolavaggi, tintorie)<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
+            "description": "Rilassamento: trasporto pubblico (servizio limitato), fiorai, autolavaggi, tintorie,<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
             "title": "Servizi"
+        },
+        "liftReligiousCeremonies": {
+            "description": "Rilassamento: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, libreriw, negozi specializzati.",
+            "title": "Funz.Rel."
         }
     },
     "tableDict": {
@@ -856,7 +860,7 @@
             "female": "Femmine",
             "male": "Maschi",
             "title": "Fasce di età",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri dagli ospedali. I dati demografici (sesso, età, comune di residenza) dei defunti sono riportati dalle istituzioni (assistenza sanitaria, case di riposo) al NIJZ, ma questi dati sono in ritardo di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale di morti.",
+            "disclaimer": "Nota: I dati demografici (sesso, età) dei defunti sono riportati dal NIJZ settimanalmente. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
             "populationShare": "Quota di popolazione",
             "titleMenu": "Età, Sesso"
         },
@@ -913,7 +917,7 @@
             "relativeIncrease": "Incremento settimanale",
             "titleMenu": "Comuni - mappa",
             "bubbles": "Distribuzione",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali. I dati demografici (sesso, età, comune) sui deceduti sono riportati dalle istituzioni (sanità, case di riposo) al NIJZ, ma questi dati sono ritardati di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
+            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali e delle case di riposo. I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
         },
         "regions": {
             "deceased": "Decessi",
@@ -1220,13 +1224,14 @@
         "deceasedToDate": "Decessi confermati",
         "icu": "Terapie intensive",
         "inHospital": "Ricoveri",
-        "tests": "Tamponi giornalieri",
+        "tests": "Tamponi oggi",
         "recoveredToDate": "Guariti",
         "active": "Casi attivi",
         "confirmedToDate": "Casi confermati",
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
-        "newCases7d": "Casi nuovi"
+        "newCases7d": "Casi nuovi",
+        "totalTests": "Tamponi totali:"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",

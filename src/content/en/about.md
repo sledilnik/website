@@ -80,7 +80,7 @@ COVID-19 Sledilnik in an open source project that would not be possible without 
 
 Project collaborators:
 
--   [Aleks Jakulin](https://twitter.com/aleksj) - modeling coordination, modeling, sources
+-   [Aleks Jakulin](https://twitter.com/aleksj) - modeling, sources
 -   [Andraž Vrhovec](https://github.com/overlordtm) - web page, infrastructure
 -   [Andrej Srakar](http://www.ier.si/) - sources, modeling
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeling
@@ -95,7 +95,7 @@ Project collaborators:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
--   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model
 -   [Joh Dokler](https://github.com/joahim) - visualisations, web page
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
