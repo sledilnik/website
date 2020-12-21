@@ -51,6 +51,7 @@ export default {
     const postId = _.get(this.$route, "params.postId", false);
     if (!postId) {
       // 404
+      return
     }
     this.postId = postId
     this.$store.dispatch('posts/fetchPost', postId)
