@@ -345,14 +345,15 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Confirmed Cases among Health Care Employees",
-            "titleMenu": "HC Employees - cases",
+            "title": "Cases in Health Care and Retiremenst Homes",
+            "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
-            "confirmedCases": "Confirmed Cases",
-            "healthcareEmployeesCases": "Confirmed Health Care Employees",
-            "healthcareEmployees": "Health Care Employees",
-            "healthcareEmployeesRelative": "Health Care Employees (Relative)",
-            "totalConfirmed": "Confirmed Cases Total"
+            "all": "All",
+            "relative": "Relative",
+            "healthcareEmployeesCases": "Health Care Employees",
+            "rhOccupantCases": "Retirement Home Residents",
+            "totalConfirmed": "All Confirmed",
+            "otherCases": "Other Persons"
         },
         "tests": {
             "title": "Testing",
