@@ -398,7 +398,7 @@
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi",
-            "disclaimer": "Napomena: podatke o smrtnim slučajevima primamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o preminulima prijavljuju institucije (zdravstvo, starački domovi) NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva.",
+            "disclaimer": "Napomena: Demografske podatke (spol, dob) o preminulima NIJZ prijavljuje tjedno. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva.",
             "titleMenu": "Dob, spol"
         },
         "ageGroupsTimeline": {
@@ -529,26 +529,26 @@
             "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima."
         },
         "infections": {
-            "rhStaff": "Osoblje staračkih domova",
+            "rhStaff": "Osoblje domova umirovljenika",
             "relative": "Relativno",
             "allConfirmed": "Svi potvrđeni",
             "otherPersons": "Ostale osobe",
-            "rhOccupant": "Stanovnici staračkih domova",
+            "rhOccupant": "Stanovnici domova umirovljenika",
             "title": "Struktura potvrđenih slučajeva",
             "hcStaff": "Zdravstveni radnici",
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
             "titleMenu": "Slučajevi – struktura",
-            "disclaimer": "Napomena: ovaj dijagram nije aktualan. NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zdravstvenim radnicima."
+            "disclaimer": "Napomena: NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zdravstvenim radnicima."
         },
         "hCenters": {
-            "testsPositive": "Testovi (pozitivni*)",
+            "testsPositive": "Testiranja (pozitivni*)",
             "title": "Liječenje u domu zdravlja",
             "emergencyExamination": "Hitni pregledi",
             "sentToSelfIsolation": "Poslani u samoizolaciju",
             "suspectedCovidExamination": "Sumnja na COVID-19 (pregled)",
             "suspectedCovidPhone": "Sumnja na COVID-19 (telefon)",
-            "testsPerformed": "Testovi (provedeni)",
+            "testsPerformed": "Testiranja (provedena)",
             "allRegions": "Sve regije",
             "titleMenu": "Dom zdravlja – liječenje",
             "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
@@ -617,8 +617,8 @@
             "titleMenu": "Države – aktivni slučajevi"
         },
         "dailyComparison": {
-            "positivePct": "Udio pozitivnih testova (%)",
-            "tests": "Provedeni testovi",
+            "positivePct": "Udio pozitivnih testiranja (%)",
+            "tests": "Provedena testiranja",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba po danu u tjednu",
@@ -644,10 +644,27 @@
             "confirmedFromQuarantine": "Potvrđeni iz karantene",
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
-            "title": "Izvori zaraze i karantena",
-            "titleMenu": "Izvori zaraze",
+            "title": "Izvori i mjesta zaraze",
+            "titleMenu": "Izvori i mjesta zaraze",
             "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
-            "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – udio uvezenih slučajeva može biti manji od stvarnog."
+            "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – broj slučajeva je možda manji od stvarnog.",
+            "retirementHome": "Dom umirovljenika",
+            "locationUnknown": "Nepoznato",
+            "locationOther": "Ostalo",
+            "gatheringOrganized": "Organizirano okupljanje",
+            "gatheringPrivate": "Privatno okupljanje",
+            "sport": "Sportska aktivnost",
+            "restaurant": "Restoran",
+            "shop": "Trgovina",
+            "transport": "Javni prijevoz",
+            "prison": "Zatvor",
+            "otherHealthcare": "Druge zdravstvene ustanove",
+            "hospital": "Bolnica",
+            "school": "Obrazovna ustanova",
+            "work": "Radno mjesto",
+            "family": "Obitelj",
+            "byLocationRelative": "Po mjestu (relativno)",
+            "byLocation": "Po mjestu"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -776,7 +793,7 @@
             "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
         },
         "metricsCorrelation": {
-            "titleMenu": "Korelacija između slučajeva, hospitaliziranih i umrlih",
+            "titleMenu": "Korelacija",
             "title": "Korelacija između slučajeva, hospitaliziranih i umrlih",
             "deceased": "Umrli",
             "hospitalized": "Hospitalizirani",
@@ -837,8 +854,8 @@
             "description": "Opuštanje: javni prijevoz, sve zdravstvene i stomatološke usluge"
         },
         "retirementHomes": {
-            "title": "Starački dom",
-            "description": "Zabrana posjeta staračkim domovima.<br>Potvrđena zaraza liječnika u Metlici"
+            "title": "Domovi umirovljenika",
+            "description": "Zabrana posjeta domova umirovljenika.<br>Potvrđena zaraza liječnika u Metlici"
         },
         "nationalStudy": {
             "title": "Istraživanje",
@@ -973,7 +990,7 @@
             "title": "Plan"
         },
         "liftServices": {
-            "description": "Opuštanje: javni prijevoz (ograničena usluga), neke usluge (cvjećarnice, praonice automobila, čistionice)<br>U četiri regije opuštanje za trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
+            "description": "Opuštanje: javni prijevoz (ograničena usluga), cvjećarnice, praonice automobila, čistionice.<br>U četiri regije također trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
             "title": "Usluge"
         }
     },
@@ -1103,8 +1120,8 @@
         "region_ng_todate": "Goriška",
         "age_female_35-44_todate": "35 – 44 godina",
         "age_male_75-84_todate": "75 – 84 godina",
-        "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – osoblje staračkih domova (do danas)",
-        "tests_performed": "Testovi (dnevno)",
+        "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – osoblje domova umirovljenika (do danas)",
+        "tests_performed": "Testiranja (dnevno)",
         "age_female_75-84_todate": "75 – 84 godina",
         "age_male_0-4_todate": "0 – 4 godina",
         "cases_closed_todate": "Zatvoreni slučajevi (do danas)",
@@ -1123,7 +1140,7 @@
         "state_icu": "Na odjelu intenzivne njege",
         "age_male_15-24_todate": "15 – 24 godina",
         "cases_recovered_todate": "Ozdravili (do danas)",
-        "cases_rh_occupant_confirmed_todate": "Potvrđeni slučajevi – stanovnici staračkih domova (do danas)",
+        "cases_rh_occupant_confirmed_todate": "Potvrđeni slučajevi – stanovnici domova umirovljenika (do danas)",
         "state_out_of_hospital_todate": "Otpušteni iz bolnice (do danas)",
         "cases_active": "Aktivni slučajevi",
         "age_female_5-14_todate": "5 – 14 godina",
@@ -1136,7 +1153,7 @@
         "cases_confirmed_todate": "Potvrđeni slučajevi (do danas)",
         "region_sg_todate": "Koruška",
         "region_kp_todate": "Obalno-kraška",
-        "tests_performed_todate": "Testovi (do danas)",
+        "tests_performed_todate": "Testiranja (do danas)",
         "age_female_todate": "Ukupno",
         "cases_confirmed": "Potvrđeni slučajevi (dnevno)",
         "state_critical": "Na respiratoru (intubirani)"
@@ -1168,10 +1185,11 @@
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
-        "tests": "Testovi danas",
+        "tests": "Testiranja danas",
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
-        "newCases7d": "Novi slučajevi"
+        "newCases7d": "Novi slučajevi",
+        "totalTests": "Testiranja ukupno:"
     },
     "region": {
         "za": "Zasavlje",
@@ -1368,7 +1386,6 @@
         "title": "Mjere i ograničenja",
         "description": "Koristeći se dostupnim izvorima podataka, pokušali smo prikupiti i sažeti trenutno važeće mjere koje je slovenska vlada usvojila kao odgovor na pandemiju COVID-19, naročito u odabranim područjima koja su najvažnija za svakodnevni život. Podaci koji su dostupni putem ovog programa za praćenje zaraze COVID-19, uključujući poveznice na druge web-stranice, prikupljaju se iz niza službenih izvora s kojima nismo povezani, pa treba imati na umu da služe samo u informativne svrhe i mogu se mijenjati s vremenom na vrijeme. Program za praćenje stoga ne jamči točnost i cjelovitost podataka prikupljenih o mjerama i izričito se odriče svake odgovornosti za daljnja tumačenja koja kao izvor navode naše podatke. Podaci se prikupljaju u [tablici sažetka](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml)."
     },
-    "week": "Tjedan",
     "posts": {
         "readingTime": "min",
         "timestamp": "{{ date, %e. %B %Y. }}"
@@ -1376,6 +1393,19 @@
     "faq": {
         "pageTitle": "FAQ",
         "intro": "Nažalost, ova stranica još nije prevedena.",
-        "searchPlaceholder": "Unesite niz za pretraživanje"
+        "searchPlaceholder": "Unesite niz za pretraživanje",
+        "what-is-sledilnik": {
+            "question": "Što je Sledilnik?",
+            "answer": "[Sledilnik](/hr/about) je projekt slobodno dostupnih podataka i otvorenog koda koji prikuplja, analizira i prikazuje neke od najkorisnijih podataka za bolje razumijevanje širenja pandemije koronavirusa i bolesti COVID-19, zajedno s njezinom dinamikom i opsegom. Želimo prikazati jasne grafičke i statističke vizualizacije onoga što nam aktualni podaci govore o širenju virusa u Sloveniji, te osigurati da informacije o veličini i težini problema COVID-19 u Sloveniji postanu dostupne i razumljive svima."
+        },
+        "why-sledilnik": {
+            "question": "Zašto Sledilnik?"
+        },
+        "section": {
+            "project": "O projektu",
+            "charts": "O izračunima i dijagramima",
+            "data": "O podacima",
+            "general": "Opće informacije"
+        }
     }
 }
