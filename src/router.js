@@ -224,6 +224,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
       },
       {
+        path: 'faq',
+        name: 'faq',
+        component: import(/* webpackChunkName: "Faq.route" */ './pages/FAQPage.vue'),
+      },
+      {
         path: 'links', // Retired page
         redirect: `about`,
       },
