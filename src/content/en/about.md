@@ -95,7 +95,7 @@ Project collaborators:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
--   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model, modeling
 -   [Joh Dokler](https://github.com/joahim) - visualisations, web page
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
@@ -131,4 +131,4 @@ Project collaborators:
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
 -   [Žiga Brenčič](https://zigabrencic.com) - modeling
--   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - network model, modeling

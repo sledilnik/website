@@ -75,7 +75,7 @@ Sodelavci projekta:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
--   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model, modeliranje
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije, spletna stran
 -   [Jure Novak](http://jurenovak.org/) - tekstopisje, viri
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
@@ -111,4 +111,4 @@ Sodelavci projekta:
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri, komunikacija
 -   [Žiga Brenčič](https://zigabrencic.com) - modeliranje
--   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - mrežni model, modeliranje
