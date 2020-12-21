@@ -19,7 +19,9 @@ const getters = {
     if (!id || !state.posts) {
       return;
     }
-    return state.posts.find((post) => post && post.id.toString() === id);
+    return state.posts.find((post) => {
+      return post && post.id.toString() === id.toString();
+    });
   },
 };
 
