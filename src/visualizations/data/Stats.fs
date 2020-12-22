@@ -63,6 +63,9 @@ type private TransferStatsDataPoint =
            recoveredToDate : int option |}
       statePerAgeToDate : TransferAgeGroup list
       deceasedPerAgeToDate : TransferAgeGroup list
+      deceasedPerType :
+        {| rhOccupant : int option
+           other : int option |}
     }
 
     member this.ToDomain : StatsDataPoint =
@@ -97,6 +100,9 @@ type private TransferStatsDataPoint =
               RecoveredToDate = this.statePerTreatment.recoveredToDate }
           StatePerAgeToDate = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain)
           DeceasedPerAgeToDate = this.deceasedPerAgeToDate |> List.map (fun item -> item.ToDomain)
+          DeceasedPerType =
+            { RhOccupant = this.deceasedPerType.rhOccupant
+              Other = this.deceasedPerType.other }
           HospitalEmployeePositiveTestsToDate = this.cases.hs.employeeConfirmedToDate
           RestHomeEmployeePositiveTestsToDate = this.cases.rh.employeeConfirmedToDate
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate

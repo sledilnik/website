@@ -44,6 +44,10 @@ type Treatment =
       OutOfHospital : int option
       RecoveredToDate : int option }
 
+type PersonTypeCount =
+    { RhOccupant : int option
+      Other : int option }
+
 type AgeGroupKey = {
     AgeFrom : int option
     AgeTo : int option
@@ -73,6 +77,7 @@ type StatsDataPoint =
       StatePerTreatment : Treatment
       StatePerAgeToDate : AgeGroupsList
       DeceasedPerAgeToDate : AgeGroupsList
+      DeceasedPerType : PersonTypeCount
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
