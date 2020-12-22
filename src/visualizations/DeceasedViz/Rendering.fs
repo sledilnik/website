@@ -33,22 +33,6 @@ type Msg =
     | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
 
-type Series =
-    | DeceasedInIcu
-    | DeceasedAcute
-    | DeceasedCare
-    | DeceasedOther
-
-module Series =
-    let all =
-        [ DeceasedOther; DeceasedCare; DeceasedAcute; DeceasedInIcu ]
-
-    let getSeriesInfo = function
-        | DeceasedInIcu  -> true,  "#6d5b80",   "deceased-icu"
-        | DeceasedAcute  -> true,  "#8c71a8",   "deceased-acute"
-        | DeceasedCare   -> true,  "#a483c7",   "deceased-care"
-        | DeceasedOther  -> true,  "#c59eef",   "deceased-rest"
-
 let init(statsData : StatsData) : DeceasedVizState * Cmd<Msg> =
     let state = {
         StatsData = statsData
@@ -97,20 +81,18 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
     let scaleType = ScaleType.Linear
 
     let renderSeries series =
-
-        let visible, color, seriesId = Series.getSeriesInfo series
         {|
             ``type`` = "column"
-            visible = visible
-            color = color
-            name = I18N.tt "charts.deceased" seriesId
+            visible = true
+            color = series.Color
+            name = I18N.tt "charts.deceased" series.SeriesId
             data =
                 state.PatientsData
                 |> Seq.map (fun dataPoint ->
                     {|
                         x = dataPoint.Date |> jsTime12h
                         y = getPoint state series dataPoint
-                        seriesId = seriesId
+                        seriesId = series.SeriesId
                         fmtDate = I18N.tOptions "days.longerDate"
                                       {| date = dataPoint.Date |}
                         fmtTotal =
@@ -122,7 +104,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
         |> pojo
 
     let allSeries = [|
-        for series in Series.all do
+        for series in hospitalSeries() do
             yield renderSeries series
     |]
 

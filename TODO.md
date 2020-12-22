@@ -1,8 +1,7 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - find out where the data is
-    - add pages buttons
+    - we cannot have single Series for different types of metrics
 
 - new OWID export
     - return back the official URL, once it has been pushed to production
