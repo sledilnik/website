@@ -1230,8 +1230,7 @@
         "confirmedToDate": "Casi confermati",
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
-        "newCases7d": "Casi nuovi",
-        "totalTests": "Tamponi totali:"
+        "newCases7d": "Casi nuovi"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",

@@ -53,8 +53,7 @@
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
-        "tests": "Tests Today",
-        "totalTests": "Total tests:",
+        "tests": "PCR Tests Today",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",

@@ -54,8 +54,7 @@
         "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
-        "tests": "Testov na dan",
-        "totalTests": "Vseh testov:",
+        "tests": "PCR testov na dan",
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",

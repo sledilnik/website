@@ -1188,8 +1188,7 @@
         "tests": "Testiranja danas",
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
-        "newCases7d": "Novi slučajevi",
-        "totalTests": "Testiranja ukupno:"
+        "newCases7d": "Novi slučajevi"
     },
     "region": {
         "za": "Zasavlje",
