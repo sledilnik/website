@@ -368,7 +368,7 @@
             "relativeIncrease": "Tjedni rast",
             "titleMenu": "Općine – karta",
             "bubbles": "Distribucija",
-            "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica. Demografske podatke (spol, dob, općina) o umrlima, institucije (zdravstvo, starački domovi) prijavljuju NIJZ-u, ali ti podaci kasne nekoliko tjedana. To je razlog odstupanja u odnosu na ukupan broj umrlih."
+            "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica i domova umirovljenika). Podaci preminulih po općinama NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih."
         },
         "countriesNewCasesPer1M": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -539,7 +539,7 @@
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
             "titleMenu": "Slučajevi – struktura",
-            "disclaimer": "Napomena: NIJZ je 11. listopada prekinuo izvještavati o domovima umirovljenika i zdravstvenim radnicima."
+            "disclaimer": "Napomena: NIJZ je 11. listopada prekinuo izvještavati o zaposlenicima u domovima umirovljenika i zdravstvenim radnicima."
         },
         "hCenters": {
             "testsPositive": "Testiranja (pozitivni*)",
@@ -755,14 +755,18 @@
             "titleMenu": "Države – novi smrtni slučajevi"
         },
         "hcCases": {
-            "totalConfirmed": "Ukupno potvrđenih slučajeva",
+            "totalConfirmed": "Svi potvrđeni",
             "healthcareEmployeesRelative": "Zdravstveni radnici (relativno)",
             "healthcareEmployees": "Zdravstveni radnici",
-            "healthcareEmployeesCases": "Potvrđeni slučajevi zdravstvenih radnika",
+            "healthcareEmployeesCases": "Zdravstveni radnici",
             "confirmedCases": "Potvrđeni slučajevi",
-            "titleMenu": "Zdravstveni radnici – slučajevi",
-            "title": "Potvrđeni slučajevi zdravstvenih radnika",
-            "disclaimer": "Napomena: podaci za prošli tjedan još nisu cjeloviti – udio zdravstvenih radnika može biti manji od stvarnog."
+            "titleMenu": "Zdravstvo i domovi umirovljenika – slučajevi",
+            "title": "Slučajevi u zdravstvu i domovima umirovljenika",
+            "disclaimer": "Napomena: podaci za prošli tjedan još nisu potpuni – udio zdravstvenih radnika može biti manji od stvarnog.",
+            "otherCases": "Ostale osobe",
+            "rhOccupantCases": "Stanovnici domova umirovljenika",
+            "relative": "Relativno",
+            "all": "Svi"
         },
         "deceased": {
             "deceased-acute": "Medicinska jedinica za akutne slučajeve",
@@ -992,6 +996,10 @@
         "liftServices": {
             "description": "Opuštanje: javni prijevoz (ograničena usluga), cvjećarnice, praonice automobila, čistionice.<br>U četiri regije također trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
             "title": "Usluge"
+        },
+        "liftReligiousCeremonies": {
+            "title": "Vjerski obredi",
+            "description": "Opuštanje: vjerski obredi su dopušteni s nekim ograničenjima. Knjižnice, usluge održavanja i instalacija.<br>U četiri regije također muzeji, knjižare, specijalizirane trgovine."
         }
     },
     "pageNotFound": {
@@ -1120,7 +1128,7 @@
         "region_ng_todate": "Goriška",
         "age_female_35-44_todate": "35 – 44 godina",
         "age_male_75-84_todate": "75 – 84 godina",
-        "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – osoblje domova umirovljenika (do danas)",
+        "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – zaposlenici u domovima umirovljenika (do danas)",
         "tests_performed": "Testiranja (dnevno)",
         "age_female_75-84_todate": "75 – 84 godina",
         "age_male_0-4_todate": "0 – 4 godina",
@@ -1392,7 +1400,7 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "Nažalost, ova stranica još nije prevedena.",
+        "intro": "_Svrha projekta Sledilnik i svih njegovih statističkih dijagrama i tablica/prikaza je prikazati sve postojeće podatke o epidemiji COVID19 u Sloveniji na razumljiv način. Sastavili smo popis često postavljenih pitanja. Popis često postavljenih pitanja trenutačno nije iscrpan, ali se često aktualizira. U slučaju bilo kakvih pitanja, kontaktiraj nas na: info@slednik.org. (Radujemo se pohvalama, povratnim informacijama i prijedlozima!)_",
         "searchPlaceholder": "Unesite niz za pretraživanje",
         "what-is-sledilnik": {
             "question": "Što je Sledilnik?",
