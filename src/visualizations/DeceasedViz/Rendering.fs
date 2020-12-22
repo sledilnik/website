@@ -11,6 +11,7 @@ open Fable.Core.JsInterop
 open Browser
 
 open Highcharts
+open Types
 
 
 let availableDisplayMetrics = [|
@@ -48,8 +49,9 @@ module Series =
         | DeceasedCare   -> true,  "#a483c7",   "deceased-care"
         | DeceasedOther  -> true,  "#c59eef",   "deceased-rest"
 
-let init() : DeceasedVizState * Cmd<Msg> =
+let init(statsData : StatsData) : DeceasedVizState * Cmd<Msg> =
     let state = {
+        StatsData = statsData
         PatientsData = [||]
         Metrics = availableDisplayMetrics.[0]
         RangeSelectionButtonIndex = 0
@@ -92,7 +94,7 @@ let tooltipFormatter jsThis =
 
 let renderChartOptions (state : DeceasedVizState) dispatch =
     let className = "cases-chart"
-    let scaleType = Types.ScaleType.Linear
+    let scaleType = ScaleType.Linear
 
     let renderSeries series =
 
@@ -199,5 +201,5 @@ let render (state: DeceasedVizState) dispatch =
             renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
         ]
 
-let renderChart() =
-    React.elmishComponent("CasesChart", init(), update, render)
+let renderChart(statsData: StatsData) =
+    React.elmishComponent("CasesChart", init statsData, update, render)

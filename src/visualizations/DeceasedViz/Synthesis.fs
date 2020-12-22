@@ -2,8 +2,10 @@
 
 open Data.Patients
 open DeceasedViz.Analysis
+open Types
 
 type DeceasedVizState = {
+    StatsData: StatsData
     PatientsData : PatientsStats []
     Metrics: DisplayMetrics
     RangeSelectionButtonIndex: int
