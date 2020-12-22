@@ -2,36 +2,29 @@ module DeceasedViz.Rendering
 
 open System
 open Data.Patients
+open DeceasedViz.Analysis
+open DeceasedViz.Synthesis
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 open Browser
 
-open Types
 open Highcharts
 
-type DisplayMetricsType = Today | ToDate
-
-type DisplayMetrics = {
-    Id: string
-    MetricsType: DisplayMetricsType
-    ChartType: string
-}
 
 let availableDisplayMetrics = [|
-    { Id = "deceasedToDate"; MetricsType = ToDate; ChartType = "normal" }
-    { Id = "deceasedToDateRelative"; MetricsType = ToDate; ChartType = "percent" }
-    { Id = "deceasedToday"; MetricsType = Today; ChartType = "normal" }
-    { Id = "deceasedTodayRelative"; MetricsType = Today; ChartType = "percent" }
+    { Id = "deceasedToDate"
+      MetricsType = HospitalsToDate; ChartType = "normal" }
+    { Id = "deceasedToDateRelative"
+      MetricsType = HospitalsToDate; ChartType = "percent" }
+    { Id = "deceasedToday"
+      MetricsType = HospitalsToday; ChartType = "normal" }
+    { Id = "deceasedTodayRelative"
+      MetricsType = HospitalsToday; ChartType = "percent" }
+    { Id = "deceasedToDateByAge"
+      MetricsType = ByAgeToDate; ChartType = "percent" }
 |]
-
-type State = {
-    PatientsData : PatientsStats []
-    Metrics: DisplayMetrics
-    RangeSelectionButtonIndex: int
-    Error : string option
-}
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
@@ -55,7 +48,7 @@ module Series =
         | DeceasedCare   -> true,  "#a483c7",   "deceased-care"
         | DeceasedOther  -> true,  "#c59eef",   "deceased-rest"
 
-let init() : State * Cmd<Msg> =
+let init() : DeceasedVizState * Cmd<Msg> =
     let state = {
         PatientsData = [||]
         Metrics = availableDisplayMetrics.[0]
@@ -68,7 +61,7 @@ let init() : State * Cmd<Msg> =
 
     state, cmd
 
-let update (msg: Msg) (state: State) : State * Cmd<Msg> =
+let update (msg: Msg) (state: DeceasedVizState) : DeceasedVizState * Cmd<Msg> =
     match msg with
     | ConsumePatientsData (Ok data) ->
         { state with PatientsData = data }, Cmd.none
@@ -97,58 +90,11 @@ let tooltipFormatter jsThis =
         (I18N.t "charts.deceased.deceased-total")
         (total |> I18N.NumberFormat.formatNumber)
 
-let renderChartOptions (state : State) dispatch =
+let renderChartOptions (state : DeceasedVizState) dispatch =
     let className = "cases-chart"
-    let scaleType = ScaleType.Linear
-
-    let subtract (a : int option) (b : int option) =
-        match a, b with
-        | Some aa, Some bb -> Some (bb - aa)
-        | Some aa, None -> -aa |> Some
-        | None, Some _ -> b
-        | _ -> None
+    let scaleType = Types.ScaleType.Linear
 
     let renderSeries series =
-
-        let getPoint dataPoint : int option =
-            match state.Metrics.MetricsType with
-            | Today ->
-                match series with
-                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
-                | DeceasedAcute ->
-                        dataPoint.total.deceased.hospital.today
-                        |> subtract dataPoint.total.deceased.hospital.icu.today
-                | DeceasedCare -> dataPoint.total.deceasedCare.today
-                | DeceasedOther ->
-                        dataPoint.total.deceased.today
-                        |> subtract dataPoint.total.deceased.hospital.today
-                        |> subtract dataPoint.total.deceasedCare.today
-            | ToDate ->
-                match series with
-                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-                | DeceasedAcute ->
-                        dataPoint.total.deceased.hospital.toDate
-                        |> subtract dataPoint.total.deceased.hospital.icu.toDate
-                | DeceasedCare -> dataPoint.total.deceasedCare.toDate
-                | DeceasedOther ->
-                        dataPoint.total.deceased.toDate
-                        |> subtract dataPoint.total.deceased.hospital.toDate
-                        |> subtract dataPoint.total.deceasedCare.toDate
-
-        let getPointTotal dataPoint : int option =
-            match state.Metrics.MetricsType with
-            | Today ->
-                match series with
-                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
-                | DeceasedAcute -> dataPoint.total.deceased.hospital.today
-                | DeceasedCare -> dataPoint.total.deceasedCare.today
-                | DeceasedOther -> dataPoint.total.deceased.today
-            | ToDate ->
-                match series with
-                | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
-                | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
-                | DeceasedCare -> dataPoint.total.deceasedCare.toDate
-                | DeceasedOther -> dataPoint.total.deceased.toDate
 
         let visible, color, seriesId = Series.getSeriesInfo series
         {|
@@ -161,11 +107,12 @@ let renderChartOptions (state : State) dispatch =
                 |> Seq.map (fun dataPoint ->
                     {|
                         x = dataPoint.Date |> jsTime12h
-                        y = getPoint dataPoint
+                        y = getPoint state series dataPoint
                         seriesId = seriesId
                         fmtDate = I18N.tOptions "days.longerDate"
                                       {| date = dataPoint.Date |}
-                        fmtTotal = getPointTotal dataPoint |> string
+                        fmtTotal =
+                            getPointTotal state series dataPoint |> string
                     |} |> pojo
                 )
                 |> Array.ofSeq
@@ -178,7 +125,7 @@ let renderChartOptions (state : State) dispatch =
     |]
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
-        let res (_ : Event) =
+        let res (_ : Browser.Types.Event) =
             RangeSelectionChanged buttonIndex |> dispatch
             true
         res
@@ -213,7 +160,7 @@ let renderChartOptions (state : State) dispatch =
 
     |}
 
-let renderChartContainer (state : State) dispatch =
+let renderChartContainer (state : DeceasedVizState) dispatch =
     Html.div [
         prop.style [ style.height 480 ]
         prop.className "highcharts-wrapper"
@@ -242,7 +189,7 @@ let renderMetricsSelectors activeMetrics dispatch =
         |> prop.children
     ]
 
-let render (state: State) dispatch =
+let render (state: DeceasedVizState) dispatch =
     match state.PatientsData, state.Error with
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]

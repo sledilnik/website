@@ -50,6 +50,8 @@
         <Compile Include="CountriesChartViz\Synthesis.fs" />
         <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
+        <Compile Include="DeceasedViz\Analysis.fs" />
+        <Compile Include="DeceasedViz\Synthesis.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
         <Compile Include="ExcessDeathsChart/Types.fs" />
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
