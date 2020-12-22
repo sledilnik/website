@@ -54,7 +54,7 @@
         "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
-        "tests": "PCR testov na dan",
+        "tests": "Testi na dan: PCR",
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
@@ -838,7 +838,7 @@
             "totalPCR": "Skupaj PCR",
             "byLab": "Po laboratorijih: testi PCR",
             "byLabPercent": "Po laboratorijih: % pozitivnih",
-            "hagt": "Redno HAGT",
+            "hagt": "Redno HAT",
             "regular": "Redno PCR",
             "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",
@@ -1538,7 +1538,7 @@
         },
         "tests-chart": {
             "question": "Kaj nam pove graf \"Testiranje\"?",
-            "answer": "[Graf](/sl/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno PCR*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih.\n\nOd Decembra 2020 pa spremljamo tudi hitre antigenske teste (HAGT) - število testiranj in število odkritih pozitivnih oseb (prikaz *Redno HAGT*)."
+            "answer": "[Graf](/sl/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno PCR*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih.\n\nOd Decembra 2020 pa spremljamo tudi hitre antigenske teste (HAT) - število testiranj in število odkritih pozitivnih oseb (prikaz *Redno HAT*)."
         },
         "infections-chart": {
             "question": "Kaj nam pove graf \"Struktura potrjenih primerov?",
