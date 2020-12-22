@@ -26,14 +26,8 @@ type DisplayType =
         | ByLabPercent -> I18N.t "charts.tests.byLabPercent"
         | Lab facility -> Utils.Dictionaries.GetFacilityName(facility)
 
-    static member UseStatsData dType =
-        match dType with
-        | Total | Data "regular" | Data "ns-apr20" -> true
-        | _ -> false
-
 type State =
-    { StatsData: StatsData
-      LabData: LabTestsStats array
+    { LabData: LabTestsStats array
       Error: string option
       AllLabs: string list
       DisplayType: DisplayType
@@ -56,13 +50,12 @@ type Msg =
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
 
-let init data: State * Cmd<Msg> =
+let init: State * Cmd<Msg> =
     let cmd =
         Cmd.OfAsync.either getOrFetch () ConsumeLabTestsData ConsumeServerError
 
     let state =
-        { StatsData = data
-          LabData = [||]
+        { LabData = [||]
           Error = None
           AllLabs = []
           DisplayType = Data "regular"
@@ -199,7 +192,6 @@ let renderTestsChart (state: State) dispatch =
     let className = "tests-chart"
     let scaleType = ScaleType.Linear
 
-
     let positiveTests (dp: LabTestsStats) =
         match state.DisplayType with
         | Data typ ->
@@ -229,43 +221,6 @@ let renderTestsChart (state: State) dispatch =
     let percentPositive (dp: LabTestsStats) =
         let positive = positiveTests dp
         let performed = positiveTests dp + negativeTests dp
-        Math.Round(float positive / float performed * float 100.0, 2)
-
-    // data from stats - only totals
-    let positiveTestsStats (dp: StatsDataPoint) =
-        match state.DisplayType with
-        | Total -> dp.Tests.Positive.Today |> Option.defaultValue 0
-        | Data "regular" ->
-            dp.Tests.Regular.Positive.Today
-            |> Option.defaultValue 0
-        | Data "ns-apr20" ->
-            dp.Tests.NsApr20.Positive.Today
-            |> Option.defaultValue 0
-        | _ -> 0
-
-    let negativeTestsStats (dp: StatsDataPoint) =
-        match state.DisplayType with
-        | Total ->
-            (dp.Tests.Performed.Today |> Option.defaultValue 0)
-            - (dp.Tests.Positive.Today |> Option.defaultValue 0)
-        | Data "regular" ->
-            (dp.Tests.Regular.Performed.Today
-             |> Option.defaultValue 0)
-            - (dp.Tests.Regular.Positive.Today
-               |> Option.defaultValue 0)
-        | Data "ns-apr20" ->
-            (dp.Tests.NsApr20.Performed.Today
-             |> Option.defaultValue 0)
-            - (dp.Tests.NsApr20.Positive.Today
-               |> Option.defaultValue 0)
-        | _ -> 0
-
-    let percentPositiveStats (dp: StatsDataPoint) =
-        let positive = positiveTestsStats dp
-
-        let performed =
-            positiveTestsStats dp + negativeTestsStats dp
-
         Math.Round(float positive / float performed * float 100.0, 2)
 
     let allYAxis =
@@ -306,15 +261,9 @@ let renderTestsChart (state: State) dispatch =
                    color = "#19aebd"
                    yAxis = 0
                    data =
-                       if DisplayType.UseStatsData(state.DisplayType) then
-                           state.StatsData
-                           |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
-                           |> Seq.map (fun dp -> (dp.Date |> jsTime12h, negativeTestsStats dp))
-                           |> Seq.toArray
-                       else
-                           state.LabData
-                           |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
-                           |> Seq.toArray |}
+                       state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                       |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
+                       |> Seq.toArray |}
           yield
               pojo
                   {| name = I18N.t "charts.tests.positiveTests"
@@ -322,15 +271,9 @@ let renderTestsChart (state: State) dispatch =
                      color = "#d5c768"
                      yAxis = 0
                      data =
-                         if DisplayType.UseStatsData(state.DisplayType) then
-                             state.StatsData 
-                             |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
-                             |> Seq.map (fun dp -> (dp.Date |> jsTime12h, positiveTestsStats dp))
-                             |> Seq.toArray
-                         else
-                             state.LabData
-                             |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
-                             |> Seq.toArray |}
+                         state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                         |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
+                         |> Seq.toArray |}
           yield
               pojo
                   {| name = I18N.t "charts.tests.shareOfPositive"
@@ -338,15 +281,9 @@ let renderTestsChart (state: State) dispatch =
                      color = "#665191"
                      yAxis = 1
                      data =
-                         if DisplayType.UseStatsData(state.DisplayType) then
-                             state.StatsData
-                             |> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
-                             |> Seq.map (fun dp -> (dp.Date |> jsTime12h, percentPositiveStats dp))
-                             |> Seq.toArray
-                         else
-                             state.LabData
-                             |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
-                             |> Seq.toArray |} ]
+                         state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                         |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
+                         |> Seq.toArray |} ]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -421,20 +358,8 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ 
-            renderChartContainer state dispatch
-            renderDisplaySelectors state dispatch 
+        Html.div [ renderChartContainer state dispatch
+                   renderDisplaySelectors state dispatch ]
 
-            if DisplayType.UseStatsData(state.DisplayType) then
-                Html.none
-            else    
-                Html.div [
-                    prop.className "disclaimer"
-                    prop.children [
-                        Html.text (I18N.t "charts.tests.disclaimer")
-                    ]
-                ]
-        ]
-
-let testsChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("TestsChart", init props.data, update, render)
+let testsChart () =
+    React.elmishComponent ("TestsChart", init, update, render)
