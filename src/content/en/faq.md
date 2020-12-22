@@ -331,7 +331,7 @@ The graph thus shows the number of all emergency medical visits (also for other 
 *Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.
 Note 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*
 
-When reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#test-charts)
+When reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#tests-charts)
 
 </details>
 
