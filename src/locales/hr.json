@@ -525,8 +525,9 @@
             "totalPCR": "Sve: PCR",
             "titleMenu": "Testiranje",
             "byLabPercent": "Po laboratorijima: % pozitivno",
-            "byLab": "Po laboratorijima: Testiranja",
-            "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima."
+            "byLab": "Po laboratorijima: PCR testovi",
+            "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima.",
+            "hagt": "Regularno: RAT"
         },
         "infections": {
             "rhStaff": "Osoblje domova umirovljenika",
@@ -617,8 +618,8 @@
             "titleMenu": "Države – aktivni slučajevi"
         },
         "dailyComparison": {
-            "positivePct": "Udio pozitivnih testiranja (%)",
-            "tests": "Provedena testiranja",
+            "positivePct": "Udio pozitivnih testiranja: PCR (%)",
+            "tests": "Provedena testiranja: PCR",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba po danu u tjednu",
