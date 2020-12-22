@@ -17,8 +17,8 @@
             "shareOfPositive": "Andel positive tester (%)",
             "positiveTests": "Positive tester",
             "negativeTests": "Negative tester",
-            "ns-apr20": "Studie",
-            "totalPCR": "Alle PCR",
+            "ns-apr20": "Studie: PCR",
+            "totalPCR": "Alle: PCR",
             "title": "Testing"
         },
         "hCenters": {

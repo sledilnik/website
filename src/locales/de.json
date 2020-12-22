@@ -541,11 +541,11 @@
             "titleMenu": "Kapazität"
         },
         "tests": {
-            "ns-apr20": "Studie",
+            "ns-apr20": "Studie: PCR",
             "shareOfPositive": "Anteil der positiven Tests (%)",
-            "totalPCR": "Alle PCR",
+            "totalPCR": "Alle: PCR",
             "title": "Testung",
-            "regular": "Regelmäßige",
+            "regular": "Regelmäßige: PCR",
             "positiveTests": "Positive Tests",
             "negativeTests": "Negative Tests",
             "titleMenu": "Testung",
