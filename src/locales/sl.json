@@ -54,8 +54,7 @@
         "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
-        "tests": "Testov na dan",
-        "totalTests": "Vseh testov:",
+        "tests": "Testi na dan: PCR",
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
@@ -750,8 +749,8 @@
             "titleMenu": "Dnevi – primerjava",
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
-            "tests": "Opravljeni testi",
-            "positivePct": "Delež pozitivnih testov (%)",
+            "tests": "Opravljeni testi: PCR",
+            "positivePct": "Delež pozitivnih testov: PCR (%)",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
             "icuAdmitted": "Sprejeti v intenzivno",
@@ -836,10 +835,11 @@
             "title": "Testiranje",
             "titleMenu": "Testiranje",
             "disclaimer": "Opomba: Od 3. decembra ne prejemamo več podatkov po posameznih laboratorijih.",
-            "allTesting": "Skupaj",
-            "byLab": "Po laboratorijih: testi",
+            "totalPCR": "Skupaj PCR",
+            "byLab": "Po laboratorijih: testi PCR",
             "byLabPercent": "Po laboratorijih: % pozitivnih",
-            "regular": "Redno",
+            "hagt": "Redno HAT",
+            "regular": "Redno PCR",
             "ns-apr20": "Raziskava",
             "negativeTests": "Negativnih testov",
             "positiveTests": "Pozitivnih testov",
@@ -1534,11 +1534,11 @@
         },
         "hcenters-chart": {
             "question": "Kaj nam pove graf \"Obravnava v ZD\"?",
-            "answer": "[Graf](/sl/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva), možen je pogled za celo Slovenijo ali po posamezni regiji. Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.\n\nNa grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za druge bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej s telefonskim pogovorom, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.\n\n*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje in SB Novo mesto). Za obdobje pred 14.4. nimamo podatkov iz teh bolnišnic.*\n\n*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke, in da je to število previsoko.*\n\nTudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste – ista oseba je lahko večkrat testirana in šteta kot pozitivna. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat). Gl. tudi [Kaj nam pove graf \"Testiranje\"?](#test-charts)"
+            "answer": "[Graf](/sl/stats#hcenters-chart) prikazuje obravnavo sumov za COVID-19 v zdravstvenih domovih (primarna raven zdravstva), možen je pogled za celo Slovenijo ali po posamezni regiji. Zdravstveni domovi so prva vstopna točka za odvzem brisov za testiranje za prisotnost virusa, zato je porast števila sumov in napotitev na samoizolacijo lahko zgodnji indikator, da je prišlo do novih izbruhov.\n\nNa grafu zato prikazujemo število vseh obiskov nujne medicinske pomoči (tudi za druge bolezni) v zdravstvenih domovih*, številov sumov za COVID-19 na podlagi pregleda na vstopni točki COVID-19 in vse sume na okužbo, ki so bili zaznani na podlagi telefonskega pogovora. Nekatere osebe so tako lahko zavedene večkrat, najprej s telefonskim pogovorom, potem pa še med pregledom. Prikazujemo tudi skupno število napotitev v samoizolacijo.\n\n*Opomba 1: v nekaterih občinah je kontrolna točka za COVID-19 v sklopu bolnišnice (recimo SB Celje in SB Novo mesto). Za obdobje pred 14.4. nimamo podatkov iz teh bolnišnic.*\n\n*Opomba 2: metodologija beleženja sumov preko telefonskega pogovora se je spreminjala, zato so bili na začetku zavedeni vsi sumi, od 23.4. pa naj bi se pri telefonskem pogovoru beležili samo sumi, ko ni bil odrejen pregled in vzem brisa (testiranje). Iz tega razloga je mogoče, da so razlike v tem, kako posamezni zdravstveni domovi poročajo te podatke, in da je to število previsoko.*\n\nTudi v številu opravljenih testov so zavedena vsa testiranja (tudi ponovitvena), tako da število pozitivnih testov šteje vse pozitivne teste – ista oseba je lahko večkrat testirana in šteta kot pozitivna. Število opravljenih testov je zato lahko večje od števila pozitivnih testov, ki jih poročajo laboratoriji (tam je vsaka oseba zavedena samo enkrat). Gl. tudi [Kaj nam pove graf \"Testiranje\"?](#tests-charts)"
         },
         "tests-chart": {
             "question": "Kaj nam pove graf \"Testiranje\"?",
-            "answer": "[Graf](/sl/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih.\n\nVse pomembne zdravstvene organizacije in ustanove se zavedajo, da je testiranje za okužbo s koronavirusom eden najpomembnejši dejavnikov, saj lahko le s testiranjem razumemo potek in razsežnost pandemije ter s tem ustrezno odgovorimo na grožnjo, ki jo predstavlja. Se pa vsaka država po svoje spopada s pomanjkanjem testov. Slovenija je *14. marca 2020* spremenila način spremljanja širjenja okužbe (https://www.gov.si/teme/koronavirus/koronavirus-simptomi-okuzbe-in-zdravljenje/), po katerem se ni več testiralo ljudi z okužbo dihal, ki niso potrebovali bolnišnične oskrbe (stanje se zato ocenjuje le na podlagi števila obolelih), testirale pa so se vse osebe z blago okužbo dihal, ki so starejše od 60 let, osebe s potrjenimi drugimi boleznimi (visok krvni tlak, sladkorna bolezen, srčno-žilne, pljučne, ledvične, težje jetrne bolezni) ter osebe z imunskimi pomanjkljivostmi (ne glede na starost). *21. aprila 2020* se je način testiranja spremenil, saj so zdravstveni delavci dobili [navodilo](https://www.gov.si/assets/ministrstva/MZ/DOKUMENTI/Koronavirus/Dodatno-k-Drugi-dopolnitvi-navodil-za-testiranje-na-COVID-19-Testiranje-pri-vseh-osebah-s-sumom.pdf), naj se testirajo vsi pacienti s sumom na okužbo dihal (tudi taki z blažjimi simptomi in ne glede na njihovo starost)."
+            "answer": "[Graf](/sl/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno PCR*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih.\n\nOd Decembra 2020 pa spremljamo tudi hitre antigenske teste (HAT) - število testiranj in število odkritih pozitivnih oseb (prikaz *Redno HAT*)."
         },
         "infections-chart": {
             "question": "Kaj nam pove graf \"Struktura potrjenih primerov?",

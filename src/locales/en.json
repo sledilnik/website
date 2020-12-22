@@ -53,8 +53,7 @@
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
-        "tests": "Tests Today",
-        "totalTests": "Total tests:",
+        "tests": "Tests Today: PCR",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
@@ -262,8 +261,8 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
-            "tests": "Tests Performed",
-            "positivePct": "Share of Positive Tests (%)",
+            "tests": "Tests Performed: PCR",
+            "positivePct": "Share of Positive Tests: PCR (%)",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
             "icuAdmitted": "Admitted to ICU",
@@ -359,10 +358,11 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "disclaimer": "Note: From December 3, we do not received data per laboratory.",
-            "allTesting": "All",
-            "byLab": "By Laboratory: Tests",
+            "totalPCR": "All PCR",
+            "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
-            "regular": "Regular",
+            "hagt": "Regular RAT",
+            "regular": "Regular PCR",
             "ns-apr20": "Study",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
@@ -1496,11 +1496,11 @@
         },
         "hcenters-chart": {
             "question": "What does the “Healthcare Center Treatment” graph mean?",
-            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#test-charts)"
+            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#tests-charts)"
         },
         "tests-chart": {
             "question": "What does the “Testing” graph tell us?",
-            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nAll important health organizations and institutions are aware of the fact that testing for coronavirus infection is one of the most important factors, as only through testing can we understand the course and extent of the pandemic and thus respond appropriately to the threat it poses. However, each country deals with the lack of testing capacities in its own way. On *March 14*, 2020, Slovenia changed the method of monitoring the spread of the infection. From that point on, people with a respiratory infection who did not require hospital care (the situation is therefore only assessed on the basis of the number of diseased patients) were no longer tested. However, all persons with a mild respiratory infection older than 60 years, persons with other confirmed diseases (hypertension, diabetes, and cardiovascular, lung, kidney, and severe liver diseases) and people with immune deficiencies (regardless of age) were tested. On *April 21*, 2020, the method of testing changed again as healthcare professionals were instructed to test all patients with suspected respiratory infection (including those with milder symptoms and regardless of their age)."
+            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular PCR* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nSince December 2020 we are also tracking rapid antigen tests (RAT) - see *Regular RAT* display."
         },
         "infections-chart": {
             "question": "What does the “Structure of Confirmed Cases” graph tell us?",
