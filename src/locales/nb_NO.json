@@ -18,7 +18,7 @@
             "positiveTests": "Positive tester",
             "negativeTests": "Negative tester",
             "ns-apr20": "Studie",
-            "allTesting": "Alle",
+            "totalPCR": "Alle PCR",
             "title": "Testing"
         },
         "hCenters": {

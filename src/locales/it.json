@@ -812,7 +812,7 @@
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
             "negativeTests": "Tamponi negativi",
-            "allTesting": "Tutti",
+            "totalPCR": "Tutti PCR",
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
             "byLab": "Per laboratorio: test",

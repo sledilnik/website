@@ -13,14 +13,14 @@ open Highcharts
 open Data.LabTests
 
 type DisplayType =
-    | Total
+    | TotalPCR
     | Data of string
     | ByLab
     | ByLabPercent
     | Lab of string
     static member GetName =
         function
-        | Total -> I18N.t "charts.tests.allTesting"
+        | TotalPCR -> I18N.t "charts.tests.totalPCR"
         | Data typ -> I18N.tt "charts.tests" typ
         | ByLab -> I18N.t "charts.tests.byLab"
         | ByLabPercent -> I18N.t "charts.tests.byLabPercent"
@@ -35,9 +35,9 @@ type State =
 
 let GetAllDisplayTypes state =
     seq {
-        for typ in [ "regular"; "ns-apr20" ] do
+        for typ in [ "hagt"; "regular"; "ns-apr20" ] do
             yield Data typ
-        yield Total
+        yield TotalPCR
         yield ByLab
         yield ByLabPercent
         for lab in state.AllLabs do
@@ -64,7 +64,7 @@ let init: State * Cmd<Msg> =
     state, cmd
 
 let getLabsList (data: LabTestsStats array) =
-    data.[data.Length - 1].labs
+    data.[data.Length / 2].labs
     |> Map.toSeq
     |> Seq.filter (fun (_, stats) -> stats.performed.toDate.IsSome)
     |> Seq.map (fun (lab, stats) -> lab, stats.performed.toDate)

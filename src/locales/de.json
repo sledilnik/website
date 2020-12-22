@@ -543,7 +543,7 @@
         "tests": {
             "ns-apr20": "Studie",
             "shareOfPositive": "Anteil der positiven Tests (%)",
-            "allTesting": "Alle",
+            "totalPCR": "Alle PCR",
             "title": "Testung",
             "regular": "Regelmäßige",
             "positiveTests": "Positive Tests",
