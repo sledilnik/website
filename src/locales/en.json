@@ -361,7 +361,7 @@
             "totalPCR": "All PCR",
             "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
-            "hagt": "Regular RAT",
+            "hagt": "Regular RAGT",
             "regular": "Regular PCR",
             "ns-apr20": "Study",
             "negativeTests": "Negative Tests",
@@ -1500,7 +1500,7 @@
         },
         "tests-chart": {
             "question": "What does the “Testing” graph tell us?",
-            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular PCR* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nSince December 2020 we are also tracking rapid antigen tests (RAT) - see *Regular RAT* display."
+            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular PCR* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nSince December 2020 we are also tracking rapid antigen tests (RAGT) - see *Regular RAGT* display."
         },
         "infections-chart": {
             "question": "What does the “Structure of Confirmed Cases” graph tell us?",
