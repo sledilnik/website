@@ -80,19 +80,6 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
 
-    let renderSeriesData series =
-        {|
-            ``type`` = "column"
-            visible = true
-            color = series.Color
-            name = I18N.tt "charts.deceased" series.SeriesId
-            data = constructSeriesData state series
-        |}
-        |> pojo
-
-    let allSeriesData =
-        pageSeries state |> Array.map renderSeriesData
-
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Browser.Types.Event) =
             RangeSelectionChanged buttonIndex |> dispatch
@@ -104,7 +91,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
-        series = allSeriesData
+        series = renderAllSeriesData state
         plotOptions = pojo
             {|
                 column = pojo

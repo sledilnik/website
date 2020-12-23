@@ -105,9 +105,8 @@ let constructSeriesData state series =
         |> Array.ofSeq
     | AgeGroupSeriesType -> invalidOp "todo"
 
-let pageSeries state =
-    match state.Page.MetricsType with
-    | HospitalMetricsType ->
+let renderAllHospitalSeriesData state =
+    let hospitalSeries =
         [|
           { SeriesType = DeceasedInIcu
             SeriesId = "deceased-icu"; Color = "#6d5b80" }
@@ -118,5 +117,21 @@ let pageSeries state =
           { SeriesType = DeceasedOther
             SeriesId = "deceased-rest"; Color = "#c59eef" }
          |]
+
+    let renderSeriesData series =
+        {|
+            ``type`` = "column"
+            visible = true
+            color = series.Color
+            name = I18N.tt "charts.deceased" series.SeriesId
+            data = constructSeriesData state series
+        |}
+        |> pojo
+
+    hospitalSeries |> Array.map renderSeriesData
+
+let renderAllSeriesData state =
+    match state.Page.MetricsType with
+    | HospitalMetricsType -> renderAllHospitalSeriesData state
     | AgeGroupsMetricsType -> invalidOp "todo"
     | _ -> invalidOp "todo"

@@ -4,6 +4,8 @@
     - for age groups, we cannot have pre-determined list of series, 
         they should be based on the actual data - only those with actual
         deceased should be present
+        - instead of exposing `pageSeries` function, we need a function that
+            generates _all_ of series data based on the `MetricsType`
 
 - new OWID export
     - return back the official URL, once it has been pushed to production
