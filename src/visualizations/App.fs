@@ -519,10 +519,10 @@ let render (state: State) (_: Msg -> unit) =
                             {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison
+        [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; tests; ageGroups; hcCases;
+          ageGroupsTimeline; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
