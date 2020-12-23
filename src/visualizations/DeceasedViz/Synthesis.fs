@@ -3,11 +3,12 @@
 open Data.Patients
 open DeceasedViz.Analysis
 open Types
+open Highcharts
 
 type DeceasedVizState = {
     StatsData: StatsData
     PatientsData : PatientsStats []
-    Metrics: DisplayMetrics
+    Page: VisualizationPage
     RangeSelectionButtonIndex: int
     Error : string option
 }
@@ -32,7 +33,7 @@ let subtract (a : int option) (b : int option) =
     | _ -> None
 
 let getPoint state (series: SeriesInfo) dataPoint : int option =
-    match state.Metrics.MetricsType with
+    match state.Page.MetricsType with
     | HospitalsToday ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
@@ -57,7 +58,7 @@ let getPoint state (series: SeriesInfo) dataPoint : int option =
                 |> subtract dataPoint.total.deceasedCare.toDate
 
 let getPointTotal state series dataPoint : int option =
-    match state.Metrics.MetricsType with
+    match state.Page.MetricsType with
     | HospitalsToday ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
@@ -71,10 +72,31 @@ let getPointTotal state series dataPoint : int option =
         | DeceasedCare -> dataPoint.total.deceasedCare.toDate
         | DeceasedOther -> dataPoint.total.deceased.toDate
 
-let hospitalSeries() =
-    [
-      { SeriesType = DeceasedInIcu; SeriesId = "deceased-icu"; Color = "#6d5b80" }
-      { SeriesType = DeceasedAcute; SeriesId = "deceased-acute"; Color = "#8c71a8" }
-      { SeriesType = DeceasedCare; SeriesId = "deceased-care"; Color = "#a483c7" }
-      { SeriesType = DeceasedOther; SeriesId = "deceased-rest"; Color = "#c59eef" }
-     ]
+let constructSeriesData state series =
+    state.PatientsData
+    |> Seq.map (fun dataPoint ->
+        {|
+            x = dataPoint.Date |> jsTime12h
+            y = getPoint state series dataPoint
+            seriesId = series.SeriesId
+            fmtDate = I18N.tOptions "days.longerDate"
+                          {| date = dataPoint.Date |}
+            fmtTotal = getPointTotal state series dataPoint |> string
+        |} |> pojo
+    )
+    |> Array.ofSeq
+
+let pageSeries state =
+    match state.Page.MetricsType with
+    | HospitalMetricsType ->
+        [
+          { SeriesType = DeceasedInIcu
+            SeriesId = "deceased-icu"; Color = "#6d5b80" }
+          { SeriesType = DeceasedAcute
+            SeriesId = "deceased-acute"; Color = "#8c71a8" }
+          { SeriesType = DeceasedCare
+            SeriesId = "deceased-care"; Color = "#a483c7" }
+          { SeriesType = DeceasedOther
+            SeriesId = "deceased-rest"; Color = "#c59eef" }
+         ]
+    | _ -> invalidOp "todo"

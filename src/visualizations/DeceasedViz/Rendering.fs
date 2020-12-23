@@ -14,7 +14,7 @@ open Highcharts
 open Types
 
 
-let availableDisplayMetrics = [|
+let availablePages = [|
     { Id = "deceasedToDate"
       MetricsType = HospitalsToDate; ChartType = "normal" }
     { Id = "deceasedToDateRelative"
@@ -30,14 +30,14 @@ let availableDisplayMetrics = [|
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
-    | ChangeMetrics of DisplayMetrics
+    | ChangePage of VisualizationPage
     | RangeSelectionChanged of int
 
 let init(statsData : StatsData) : DeceasedVizState * Cmd<Msg> =
     let state = {
         StatsData = statsData
         PatientsData = [||]
-        Metrics = availableDisplayMetrics.[0]
+        Page = availablePages.[0]
         RangeSelectionButtonIndex = 0
         Error = None
     }
@@ -55,8 +55,8 @@ let update (msg: Msg) (state: DeceasedVizState) : DeceasedVizState * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeMetrics metrics ->
-        { state with Metrics=metrics }, Cmd.none
+    | ChangePage page ->
+        { state with Page = page }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -80,33 +80,18 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
 
-    let renderSeries series =
+    let renderSeriesData series =
         {|
             ``type`` = "column"
             visible = true
             color = series.Color
             name = I18N.tt "charts.deceased" series.SeriesId
-            data =
-                state.PatientsData
-                |> Seq.map (fun dataPoint ->
-                    {|
-                        x = dataPoint.Date |> jsTime12h
-                        y = getPoint state series dataPoint
-                        seriesId = series.SeriesId
-                        fmtDate = I18N.tOptions "days.longerDate"
-                                      {| date = dataPoint.Date |}
-                        fmtTotal =
-                            getPointTotal state series dataPoint |> string
-                    |} |> pojo
-                )
-                |> Array.ofSeq
+            data = constructSeriesData state series
         |}
         |> pojo
 
-    let allSeries = [|
-        for series in hospitalSeries() do
-            yield renderSeries series
-    |]
+    let allSeriesData =
+        pageSeries state |> List.map renderSeriesData
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Browser.Types.Event) =
@@ -119,7 +104,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
     {| baseOptions with
-        series = allSeries
+        series = allSeriesData
         plotOptions = pojo
             {|
                 column = pojo
@@ -128,7 +113,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = {| stacking = state.Metrics.ChartType; crisp = true
+                series = {| stacking = state.Page.ChartType; crisp = true
                             borderWidth = 0
                             pointPadding = 0; groupPadding = 0
                             |}
@@ -154,22 +139,22 @@ let renderChartContainer (state : DeceasedVizState) dispatch =
         ]
     ]
 
-let renderMetricsSelectors activeMetrics dispatch =
-    let renderSelector (metrics : DisplayMetrics) =
-        let active = metrics = activeMetrics
+let renderPagesSwitchers activePage dispatch =
+    let renderPageSwitcher (page: VisualizationPage) =
+        let active = page = activePage
         Html.div [
-            prop.text (I18N.chartText "deceased" metrics.Id)
+            prop.text (I18N.chartText "deceased" page.Id)
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected")]
-            if not active then prop.onClick (fun _ -> dispatch metrics)
+            if not active then prop.onClick (fun _ -> dispatch page)
             if active then prop.style [ style.backgroundColor "#808080" ]
           ]
 
     Html.div [
         prop.className "metrics-selectors"
-        availableDisplayMetrics
-        |> Array.map renderSelector
+        availablePages
+        |> Array.map renderPageSwitcher
         |> prop.children
     ]
 
@@ -180,7 +165,7 @@ let render (state: DeceasedVizState) dispatch =
     | _, None ->
         Html.div [
             renderChartContainer state dispatch
-            renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
+            renderPagesSwitchers state.Page (ChangePage >> dispatch)
         ]
 
 let renderChart(statsData: StatsData) =
