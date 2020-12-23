@@ -13,14 +13,23 @@ type DeceasedVizState = {
     Error : string option
 }
 
-type Series =
+type SeriesType =
     | DeceasedInIcu
     | DeceasedAcute
     | DeceasedCare
     | DeceasedOther
+    | DeceasedAgeGroup of int
+
+let (|HospitalSeriesType|AgeGroupSeriesType|) (seriesType: SeriesType) =
+    match seriesType with
+    | DeceasedInIcu -> HospitalSeriesType
+    | DeceasedAcute -> HospitalSeriesType
+    | DeceasedCare -> HospitalSeriesType
+    | DeceasedOther -> HospitalSeriesType
+    | DeceasedAgeGroup _ -> AgeGroupSeriesType
 
 type SeriesInfo = {
-    SeriesType: Series
+    SeriesType: SeriesType
     SeriesId: string
     Color: string
 }
@@ -32,7 +41,7 @@ let subtract (a : int option) (b : int option) =
     | None, Some _ -> b
     | _ -> None
 
-let getPoint state (series: SeriesInfo) dataPoint : int option =
+let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
     match state.Page.MetricsType with
     | HospitalsToday ->
         match series.SeriesType with
@@ -45,6 +54,7 @@ let getPoint state (series: SeriesInfo) dataPoint : int option =
                 dataPoint.total.deceased.today
                 |> subtract dataPoint.total.deceased.hospital.today
                 |> subtract dataPoint.total.deceasedCare.today
+        | _ -> invalidOp "bug"
     | HospitalsToDate ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
@@ -56,8 +66,10 @@ let getPoint state (series: SeriesInfo) dataPoint : int option =
                 dataPoint.total.deceased.toDate
                 |> subtract dataPoint.total.deceased.hospital.toDate
                 |> subtract dataPoint.total.deceasedCare.toDate
+        | _ -> invalidOp "bug"
+    | _ -> invalidOp "bug"
 
-let getPointTotal state series dataPoint : int option =
+let getHospitalsPointTotalValue state series dataPoint : int option =
     match state.Page.MetricsType with
     | HospitalsToday ->
         match series.SeriesType with
@@ -65,31 +77,38 @@ let getPointTotal state series dataPoint : int option =
         | DeceasedAcute -> dataPoint.total.deceased.hospital.today
         | DeceasedCare -> dataPoint.total.deceasedCare.today
         | DeceasedOther -> dataPoint.total.deceased.today
+        | _ -> invalidOp "bug"
     | HospitalsToDate ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
         | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
         | DeceasedCare -> dataPoint.total.deceasedCare.toDate
         | DeceasedOther -> dataPoint.total.deceased.toDate
+        | _ -> invalidOp "bug"
+    | _ -> invalidOp "bug"
 
 let constructSeriesData state series =
-    state.PatientsData
-    |> Seq.map (fun dataPoint ->
-        {|
-            x = dataPoint.Date |> jsTime12h
-            y = getPoint state series dataPoint
-            seriesId = series.SeriesId
-            fmtDate = I18N.tOptions "days.longerDate"
-                          {| date = dataPoint.Date |}
-            fmtTotal = getPointTotal state series dataPoint |> string
-        |} |> pojo
-    )
-    |> Array.ofSeq
+    match series.SeriesType with
+    | HospitalSeriesType ->
+        state.PatientsData
+        |> Seq.map (fun dataPoint ->
+            {|
+                x = dataPoint.Date |> jsTime12h
+                y = getHospitalsPointValue state series dataPoint
+                seriesId = series.SeriesId
+                fmtDate = I18N.tOptions "days.longerDate"
+                              {| date = dataPoint.Date |}
+                fmtTotal = getHospitalsPointTotalValue state series dataPoint
+                           |> string
+            |} |> pojo
+        )
+        |> Array.ofSeq
+    | AgeGroupSeriesType -> invalidOp "todo"
 
 let pageSeries state =
     match state.Page.MetricsType with
     | HospitalMetricsType ->
-        [
+        [|
           { SeriesType = DeceasedInIcu
             SeriesId = "deceased-icu"; Color = "#6d5b80" }
           { SeriesType = DeceasedAcute
@@ -98,5 +117,6 @@ let pageSeries state =
             SeriesId = "deceased-care"; Color = "#a483c7" }
           { SeriesType = DeceasedOther
             SeriesId = "deceased-rest"; Color = "#c59eef" }
-         ]
+         |]
+    | AgeGroupsMetricsType -> invalidOp "todo"
     | _ -> invalidOp "todo"

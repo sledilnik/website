@@ -64,7 +64,13 @@ type AgeGroup =
     { GroupKey : AgeGroupKey
       Male : int option
       Female : int option
-      All : int option }
+      All : int option } with
+
+    static member ColorOfAgeGroup ageGroupIndex =
+        let colors =
+            [| "#FFEEBA"; "#FFDA6B";"#E9B825";"#AEEFDB";"#52C4A2";"#33AB87"
+               "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
+        colors.[ageGroupIndex]
 
 type AgeGroupsList = AgeGroup list
 

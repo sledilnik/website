@@ -91,7 +91,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
         |> pojo
 
     let allSeriesData =
-        pageSeries state |> List.map renderSeriesData
+        pageSeries state |> Array.map renderSeriesData
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Browser.Types.Event) =

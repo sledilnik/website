@@ -56,12 +56,6 @@ let renderChartOptions state dispatch =
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
 
-    let colorOfAgeGroup ageGroupIndex =
-        let colors =
-            [| "#FFEEBA"; "#FFDA6B";"#E9B825";"#AEEFDB";"#52C4A2";"#33AB87"
-               "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
-        colors.[ageGroupIndex]
-
     let mapPoint
         (startDate: DateTime)
         (daysFromStartDate: int)
@@ -94,7 +88,7 @@ let renderChartOptions state dispatch =
             pojo {|
                  visible = true
                  name = ageGroupKey.Label
-                 color = colorOfAgeGroup index
+                 color = AgeGroup.ColorOfAgeGroup index
                  data = points
             |}
         )
@@ -108,7 +102,7 @@ let renderChartOptions state dispatch =
 
     let className = "covid19-infections"
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
@@ -153,7 +147,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 
