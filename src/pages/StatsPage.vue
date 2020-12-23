@@ -62,6 +62,7 @@ export default {
       headerTeasers: false,
       displayedInfoCards: [
         'testsToday',
+        'testsTodayHAT',
         // 'casesToDateSummary',
         'casesActive',
         'casesAvg7Days',

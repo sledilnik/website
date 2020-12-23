@@ -54,6 +54,7 @@
     },
     "infocard": {
         "tests": "Tests Today: PCR",
+        "testsHAT": "Tests Today: HAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",

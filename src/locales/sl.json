@@ -55,6 +55,7 @@
     },
     "infocard": {
         "tests": "Testi na dan: PCR",
+        "testsHAT": "Testi na dan: HAT",
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
