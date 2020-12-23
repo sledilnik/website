@@ -17,8 +17,8 @@
             "shareOfPositive": "Andel positive tester (%)",
             "positiveTests": "Positive tester",
             "negativeTests": "Negative tester",
-            "ns-apr20": "Studie",
-            "allTesting": "Alle",
+            "ns-apr20": "Studie: PCR",
+            "totalPCR": "Alle: PCR",
             "title": "Testing"
         },
         "hCenters": {
@@ -43,7 +43,7 @@
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester",
+            "testsPerformed": "Tester: PCR",
             "showToday": "Daglig",
             "showActive": "Aktiv"
         },

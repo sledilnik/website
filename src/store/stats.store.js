@@ -31,6 +31,9 @@ const infoCardConfig = () => {
     testsToday: {
       title: i18n.t('infocard.tests')
     },
+    testsTodayHAT: {
+      title: i18n.t('infocard.testsHAT')
+    },
   } 
 }
 

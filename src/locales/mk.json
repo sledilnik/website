@@ -702,7 +702,7 @@
         "tests": {
             "positiveTests": "Позитивни тестови",
             "negativeTests": "Негативни тестови",
-            "allTesting": "Вкупно",
+            "totalPCR": "Вкупно",
             "title": "Тестирање",
             "shareOfPositive": "Дел до позитивните тестови (%)",
             "regular": "Редовно",

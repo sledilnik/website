@@ -231,13 +231,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
             Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+            Renderer = fun _ -> lazyView TestsChart.testsChart () }
 
     let hCenters =
           { VisualizationType = HCenters
@@ -532,10 +526,10 @@ let render (state: State) (_: Msg -> unit) =
                             {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison
+        [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; tests; ageGroups; hcCases;
+          ageGroupsTimeline; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
