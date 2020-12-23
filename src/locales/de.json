@@ -504,7 +504,7 @@
             "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
             "ventilatorAdmitted": "An Beatmungsgerät",
             "confirmedCases": "Bestätigte Fälle",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "showToDate": "Bis heute",
             "showToday": "Tägliche",
             "showActive": "Aktive",

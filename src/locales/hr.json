@@ -452,7 +452,7 @@
             "hospitalAdmitted": "Primljeni u bolnici",
             "activeCases": "Aktivni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "testsPerformed": "Testiranja",
+            "testsPerformed": "Testiranja: PCR",
             "showToDate": "Do danas",
             "showToday": "Dnevni",
             "showActive": "Aktivni",

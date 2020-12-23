@@ -43,7 +43,7 @@
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester",
+            "testsPerformed": "Tester: PCR",
             "showToday": "Daglig",
             "showActive": "Aktiv"
         },

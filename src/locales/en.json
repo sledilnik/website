@@ -242,7 +242,7 @@
             "showToday": "Daily",
             "showToDate": "To Date",
             "show7DaysAverage": "7-Day Average",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",

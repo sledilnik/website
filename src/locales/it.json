@@ -751,7 +751,7 @@
             "hospitalAdmitted": "Ammessi in ospedale",
             "activeCases": "Casi attivi",
             "confirmedCases": "Casi confermati",
-            "testsPerformed": "Tamponi",
+            "testsPerformed": "Tamponi: PCR",
             "showToDate": "Ad oggi",
             "showToday": "Giornalieri",
             "showActive": "Attivi",
