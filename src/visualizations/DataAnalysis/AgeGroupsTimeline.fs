@@ -1,8 +1,10 @@
 ﻿module DataAnalysis.AgeGroupsTimeline
 
+open System
 open System.Collections.Generic
 open DataAnalysis.DatedTypes
 open Types
+open Highcharts
 
 type CasesByAgeGroupsForDay = AgeGroupsList
 
@@ -86,3 +88,89 @@ let calculateCasesByAgeTimeline
     }
     // skip initial and trailing days without any cases
     |> trimDatedArray thereAreNoCases
+
+let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
+    timeline.Data.[0]
+    |> List.map (fun group -> group.GroupKey)
+    |> List.sortBy (fun groupKey -> groupKey.AgeFrom)
+
+type CasesInAgeGroupForDay = int
+type CasesInAgeGroupTimeline = DatedArray<CasesInAgeGroupForDay>
+type CasesInAgeGroupSeries = {
+    AgeGroupKey: AgeGroupKey
+    Timeline: CasesInAgeGroupTimeline
+}
+
+type CasesMetricsType = NewCases | ActiveCases
+
+let extractTimelineForAgeGroup
+    ageGroupKey
+    (casesMetricsType: CasesMetricsType)
+    (casesTimeline: CasesByAgeGroupsTimeline)
+    : CasesInAgeGroupTimeline =
+
+    let newCasesTimeline =
+        casesTimeline
+        |> mapDatedArrayItems (fun dayGroupsData ->
+                    let dataForGroup =
+                        dayGroupsData
+                        |> List.find(fun group -> group.GroupKey = ageGroupKey)
+                    dataForGroup.All
+                    |> Utils.optionToInt
+                )
+    match casesMetricsType with
+    | NewCases -> newCasesTimeline
+    | ActiveCases ->
+        newCasesTimeline
+        |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
+
+let getAgeGroupTimelineAllSeriesData
+        (statsData: StatsData)
+        (casesMetricsType: CasesMetricsType) =
+    let totalCasesByAgeGroupsList =
+        statsData
+        |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
+
+    let totalCasesByAgeGroups =
+        mapDateTuplesListToArray totalCasesByAgeGroupsList
+
+    // calculate complete merged timeline
+    let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
+
+    // get keys of all age groups
+    let allGroupsKeys = listAgeGroups timeline
+
+    let mapPoint
+        (startDate: DateTime)
+        (daysFromStartDate: int)
+        (cases: CasesInAgeGroupForDay) =
+        let date = startDate |> Days.add daysFromStartDate
+
+        pojo {|
+             x = date |> jsTime12h :> obj
+             y = cases
+             date = I18N.tOptions "days.longerDate" {| date = date |}
+        |}
+
+    let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
+        let startDate = groupTimeline.StartDate
+        let timelineArray = groupTimeline.Data
+
+        timelineArray
+        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
+
+    allGroupsKeys
+    |> List.mapi (fun index ageGroupKey ->
+        let points =
+            timeline
+            |> extractTimelineForAgeGroup ageGroupKey casesMetricsType
+            |> mapAllPoints
+
+        pojo {|
+             visible = true
+             name = ageGroupKey.Label
+             color = AgeGroup.ColorOfAgeGroup index
+             data = points
+        |}
+    )
+    |> List.toArray

@@ -1,67 +1,28 @@
 ﻿module AgeGroupsTimelineViz.Synthesis
 
 open DataAnalysis.AgeGroupsTimeline
-open DataAnalysis.DatedTypes
 open DataVisualization.ChartingTypes
-open Types
-open System.Collections.Generic
 open System.Text
 open Fable.Core
 open JsInterop
 
-type CasesInAgeGroupForDay = int
-type CasesInAgeGroupTimeline = DatedArray<CasesInAgeGroupForDay>
-type CasesInAgeGroupSeries = {
-    AgeGroupKey: AgeGroupKey
-    Timeline: CasesInAgeGroupTimeline
-}
 
-type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
-
-
-type DisplayMetricsType = NewCases | ActiveCases
 type DisplayMetrics = {
     Id: string
-    MetricsType: DisplayMetricsType
+    CasesMetricsType: CasesMetricsType
     ChartType: ChartType
 }
 
 let availableDisplayMetrics = [|
-    { Id = "newCases"; MetricsType = NewCases
+    { Id = "newCases"; CasesMetricsType = NewCases
       ChartType = StackedBarNormal }
-    { Id = "newCasesRelative"; MetricsType = NewCases
+    { Id = "newCasesRelative"; CasesMetricsType = NewCases
       ChartType = StackedBarPercent }
-    { Id = "activeCases"; MetricsType = ActiveCases
+    { Id = "activeCases"; CasesMetricsType = ActiveCases
       ChartType = StackedBarNormal }
-    { Id = "activeCasesRelative"; MetricsType = ActiveCases
+    { Id = "activeCasesRelative"; CasesMetricsType = ActiveCases
       ChartType = StackedBarPercent }
 |]
-
-let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
-    timeline.Data.[0]
-    |> List.map (fun group -> group.GroupKey)
-    |> List.sortBy (fun groupKey -> groupKey.AgeFrom)
-
-let extractTimelineForAgeGroup
-    ageGroupKey
-    (metricsType: DisplayMetricsType)
-    (casesTimeline: CasesByAgeGroupsTimeline)
-    : CasesInAgeGroupTimeline =
-
-    let newCasesTimeline =
-        casesTimeline
-        |> mapDatedArrayItems (fun dayGroupsData ->
-                    let dataForGroup =
-                        dayGroupsData
-                        |> List.find(fun group -> group.GroupKey = ageGroupKey)
-                    dataForGroup.All
-                    |> Utils.optionToInt
-                )
-    match metricsType with
-    | NewCases -> newCasesTimeline
-    | ActiveCases ->
-        newCasesTimeline
-        |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points

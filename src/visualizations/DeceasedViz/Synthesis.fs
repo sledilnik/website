@@ -130,8 +130,11 @@ let renderAllHospitalSeriesData state =
 
     hospitalSeries |> Array.map renderSeriesData
 
+let renderAllAgeGroupsSeriesData state =
+    invalidOp "todo"
+
 let renderAllSeriesData state =
     match state.Page.MetricsType with
     | HospitalMetricsType -> renderAllHospitalSeriesData state
-    | AgeGroupsMetricsType -> invalidOp "todo"
+    | AgeGroupsMetricsType -> renderAllAgeGroupsSeriesData state
     | _ -> invalidOp "todo"

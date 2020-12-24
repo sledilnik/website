@@ -1,8 +1,6 @@
 [<RequireQualifiedAccess>]
 module AgeGroupsTimelineViz.Rendering
 
-open System
-open DataAnalysis.DatedTypes
 open DataAnalysis.AgeGroupsTimeline
 open DataVisualization.ChartingTypes
 open Synthesis
@@ -43,58 +41,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let renderChartOptions state dispatch =
-
-    // map state data into a list needed for calculateCasesByAgeTimeline
-    let totalCasesByAgeGroupsList =
-        state.Data
-        |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
-
-    let totalCasesByAgeGroups =
-        mapDateTuplesListToArray totalCasesByAgeGroupsList
-
-    // calculate complete merged timeline
-    let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
-
-    // get keys of all age groups
-    let allGroupsKeys = listAgeGroups timeline
-
-    let mapPoint
-        (startDate: DateTime)
-        (daysFromStartDate: int)
-        (cases: CasesInAgeGroupForDay) =
-        let date = startDate |> Days.add daysFromStartDate
-
-        pojo {|
-             x = date |> jsTime12h :> obj
-             y = cases
-             date = I18N.tOptions "days.longerDate" {| date = date |}
-        |}
-
-    let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        let startDate = groupTimeline.StartDate
-        let timelineArray = groupTimeline.Data
-
-        timelineArray
-        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
-
-    // generate all series
     let allSeries =
-        allGroupsKeys
-        |> List.mapi (fun index ageGroupKey ->
-            let points =
-                timeline
-                |> extractTimelineForAgeGroup
-                       ageGroupKey state.Metrics.MetricsType
-                |> mapAllPoints
-
-            pojo {|
-                 visible = true
-                 name = ageGroupKey.Label
-                 color = AgeGroup.ColorOfAgeGroup index
-                 data = points
-            |}
-        )
-        |> List.toArray
+        getAgeGroupTimelineAllSeriesData
+            state.Data state.Metrics.CasesMetricsType
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
