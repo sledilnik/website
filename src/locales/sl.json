@@ -622,6 +622,10 @@
         "liftReligiousCeremonies": {
             "title": "V.obredi",
             "description": "Sproščanje: ob določenih omejitvah dovoljeni verski obredi. Knjižnice, servisi in montaže.<br>V 4 regijah tudi muzeji, knjigarne, specializirane prodajalne."
+        },
+        "services2": {
+            "title": "Storitve",
+            "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....).<br>Do 25.12. 20:00 so odpravljene nekatere omejitve glede zbiranja in gibanja."
         }
     },
     "phase": {

@@ -150,6 +150,7 @@ let addContainmentMeasuresFlags
         7, 12, "#FFe6e6", "alcoDrinks"
         15,12, "#ebfaeb", "liftServices"
         19,12, "#ebfaeb", "liftReligiousCeremonies"
+        24,12, "#FFe6e6", "services2"
     |]
     {|
         ``type`` = "flags"

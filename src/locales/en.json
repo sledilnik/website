@@ -932,7 +932,7 @@
         },
         "services": {
             "title": "Services",
-            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
         },
         "planRelaxation": {
             "title": "Plan",
@@ -949,6 +949,10 @@
         "liftReligiousCeremonies": {
             "title": "Rel.c.",
             "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
+        },
+        "services2": {
+            "title": "Storitve",
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
         }
     },
     "days": {
