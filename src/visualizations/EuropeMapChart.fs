@@ -124,20 +124,7 @@ let euCountries =
       "NMA" ]
 
 let greenCountries =
-    Map.ofList
-        [
-            ("AUS", "")
-            ("DNK", "pokrajina Grenlandija")
-            ("FIN", "administrativna enota Aland")
-            ("JPN", "")
-            ("KOR", "")
-            ("NOR", "administrativna enota Trøndelag")
-            ("NZL", "")
-            ("RWA", "")
-            ("SGP", "")
-            ("THA", "")
-            ("URY", "")
-        ]
+    Map.empty
 
 let redCountries =
     Map.ofList
@@ -161,16 +148,17 @@ let redCountries =
             ("BGR", "")
             ("BOL", "")
             ("BIH", "")
+            ("BWA", "")
             ("BRA", "")
             ("BFA", "")
             ("BDI", "")
             ("BTN", "")
-            ("TCD", "")
             ("CYP", "")
+            ("TCD", "")
             ("CZE", "")
             ("CHL", "")
             ("MNE", "")
-            ("DNK", "administrativna enota: vse razen Nordjylland ter pokrajin Ferski otoki in Grenlandija")
+            ("DNK", "administrativna enota: vse razen pokrajina Grenlandija")
             ("DOM", "")
             ("EGY", "")
             ("ECU", "")
@@ -206,6 +194,7 @@ let redCountries =
             ("ZAF", "")
             ("SSD", "")
             ("CMR", "")
+            ("CAN", "")
             ("QAT", "")
             ("KAZ", "")
             ("KEN", "")
@@ -251,8 +240,8 @@ let redCountries =
             ("PNG", "")
             ("PRY", "")
             ("PER", "")
-            ("POL", "")
-            ("PRT", "")
+            ("POL", "vse administrativne enote, razen Podkarpatske administrativne enote")
+            ("PRT", "vse administrativne enote, razen avtonomne regije Madeira")
             ("ROU", "")
             ("RUS", "")
             ("SLV", "")
@@ -281,6 +270,7 @@ let redCountries =
             ("TUR", "")
             ("TKM", "")
             ("UKR", "")
+            ("URY", "")
             ("UZB", "")
             ("VAT", "")
             ("VEN", "")
@@ -341,10 +331,7 @@ let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> 
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType =
-        match mapToDisplay with
-        | Europe -> Restrictions
-        | World -> TwoWeekIncidence },
+      ChartType = TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
 let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
@@ -400,10 +387,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
                     if redNote.Length > 0
                     then chartText "statusRed", "#FF9057", redNote
                     else chartText "statusRed", "#FF5348", redNote
-                | _ ->
-                    match green with
-                    | Some greenNote -> chartText "statusGreen", "#C4DE6F", greenNote
-                    | _ -> chartText "statusGreen", "#FFC65A", ""  // orange is w/o restrictions now
+                | _ -> chartText "statusGreen", "#F8F8F8", ""  // all non-red are open now
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -825,9 +809,10 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
     Html.div
         [ prop.className "chart-display-property-selector"
           prop.children
-              [ renderChartSelector Restrictions
+              [
                 renderChartSelector TwoWeekIncidence
                 renderChartSelector WeeklyIncrease
+                renderChartSelector Restrictions
               ]
         ]
 
