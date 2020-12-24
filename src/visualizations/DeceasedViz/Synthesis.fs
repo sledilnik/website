@@ -2,6 +2,7 @@
 
 open Data.Patients
 open DeceasedViz.Analysis
+open DataAnalysis.AgeGroupsTimeline
 open Types
 open Highcharts
 
@@ -131,7 +132,9 @@ let renderAllHospitalSeriesData state =
     hospitalSeries |> Array.map renderSeriesData
 
 let renderAllAgeGroupsSeriesData state =
-    invalidOp "todo"
+    getAgeGroupTimelineAllSeriesData
+        state.StatsData Daily
+        (fun dataPoint -> dataPoint.DeceasedPerAgeToDate)
 
 let renderAllSeriesData state =
     match state.Page.MetricsType with

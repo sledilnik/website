@@ -43,7 +43,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 let renderChartOptions state dispatch =
     let allSeries =
         getAgeGroupTimelineAllSeriesData
-            state.Data state.Metrics.CasesMetricsType
+            state.Data state.Metrics.ValueCalculation
+            (fun dataPoint -> dataPoint.StatePerAgeToDate)
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =

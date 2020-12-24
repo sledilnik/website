@@ -101,11 +101,11 @@ type CasesInAgeGroupSeries = {
     Timeline: CasesInAgeGroupTimeline
 }
 
-type CasesMetricsType = NewCases | ActiveCases
+type ValueCalculationFormula = Daily | Active | Total
 
 let extractTimelineForAgeGroup
     ageGroupKey
-    (casesMetricsType: CasesMetricsType)
+    (calculationFormula: ValueCalculationFormula)
     (casesTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
 
@@ -118,18 +118,21 @@ let extractTimelineForAgeGroup
                     dataForGroup.All
                     |> Utils.optionToInt
                 )
-    match casesMetricsType with
-    | NewCases -> newCasesTimeline
-    | ActiveCases ->
+    match calculationFormula with
+    | Daily -> newCasesTimeline
+    | Active ->
         newCasesTimeline
         |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
+    | Total -> invalidOp "todo"
 
 let getAgeGroupTimelineAllSeriesData
         (statsData: StatsData)
-        (casesMetricsType: CasesMetricsType) =
+        (valueCalculationFormula: ValueCalculationFormula)
+        (pointAgeGroupListSelector: StatsDataPoint -> AgeGroupsList) =
     let totalCasesByAgeGroupsList =
         statsData
-        |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
+        |> List.map (fun point -> (point.Date,
+                                   point |> pointAgeGroupListSelector))
 
     let totalCasesByAgeGroups =
         mapDateTuplesListToArray totalCasesByAgeGroupsList
@@ -163,10 +166,11 @@ let getAgeGroupTimelineAllSeriesData
     |> List.mapi (fun index ageGroupKey ->
         let points =
             timeline
-            |> extractTimelineForAgeGroup ageGroupKey casesMetricsType
+            |> extractTimelineForAgeGroup ageGroupKey valueCalculationFormula
             |> mapAllPoints
 
         pojo {|
+             ``type`` = "column"
              visible = true
              name = ageGroupKey.Label
              color = AgeGroup.ColorOfAgeGroup index

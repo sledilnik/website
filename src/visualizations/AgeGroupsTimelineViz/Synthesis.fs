@@ -9,18 +9,18 @@ open JsInterop
 
 type DisplayMetrics = {
     Id: string
-    CasesMetricsType: CasesMetricsType
+    ValueCalculation: ValueCalculationFormula
     ChartType: ChartType
 }
 
 let availableDisplayMetrics = [|
-    { Id = "newCases"; CasesMetricsType = NewCases
+    { Id = "newCases"; ValueCalculation = Daily
       ChartType = StackedBarNormal }
-    { Id = "newCasesRelative"; CasesMetricsType = NewCases
+    { Id = "newCasesRelative"; ValueCalculation = Daily
       ChartType = StackedBarPercent }
-    { Id = "activeCases"; CasesMetricsType = ActiveCases
+    { Id = "activeCases"; ValueCalculation = Active
       ChartType = StackedBarNormal }
-    { Id = "activeCasesRelative"; CasesMetricsType = ActiveCases
+    { Id = "activeCasesRelative"; ValueCalculation = Active
       ChartType = StackedBarPercent }
 |]
 

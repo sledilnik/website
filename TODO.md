@@ -1,7 +1,7 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - try to reuse code from AgeGroupsTimeline
+    - remove age groups that don't have any deceased
 
 - new OWID export
     - return back the official URL, once it has been pushed to production
