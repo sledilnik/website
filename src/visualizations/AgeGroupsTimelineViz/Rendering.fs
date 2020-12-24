@@ -4,6 +4,7 @@ module AgeGroupsTimelineViz.Rendering
 open System
 open DataAnalysis.DatedTypes
 open DataAnalysis.AgeGroupsTimeline
+open DataVisualization.ChartingTypes
 open Synthesis
 open Highcharts
 open Types
@@ -133,6 +134,7 @@ let renderChartOptions state dispatch =
                     match state.Metrics.ChartType with
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
+                    | _ -> invalidOp "not supported"
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|

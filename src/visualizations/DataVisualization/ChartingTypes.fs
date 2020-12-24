@@ -3,3 +3,4 @@
 type ChartType =
     | StackedBarNormal
     | StackedBarPercent
+    | SplineChart
