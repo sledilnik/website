@@ -1,7 +1,8 @@
 ﻿module AgeGroupsTimelineTests.``Sythensizing data``
 
 open System
-open AgeGroupsTimelineViz.Analysis
+open DataAnalysis.DatedTypes
+open DataAnalysis.AgeGroupsTimeline
 open AgeGroupsTimelineViz.Synthesis
 open TestHelpers
 open Xunit

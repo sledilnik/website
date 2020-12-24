@@ -1,7 +1,9 @@
 ﻿module AgeGroupsTimelineViz.Synthesis
 
+open DataAnalysis.AgeGroupsTimeline
+open DataAnalysis.DatedTypes
+open DataVisualization.ChartingTypes
 open Types
-open AgeGroupsTimelineViz.Analysis
 open System.Collections.Generic
 open System.Text
 open Fable.Core
@@ -16,9 +18,6 @@ type CasesInAgeGroupSeries = {
 
 type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
-type ChartType =
-    | StackedBarNormal
-    | StackedBarPercent
 
 type DisplayMetricsType = NewCases | ActiveCases
 type DisplayMetrics = {
@@ -93,7 +92,7 @@ let tooltipFormatter jsThis =
                     let dataValue: int = dataPoint?y
 
                     match dataValue with
-                    | 0 -> ignore()
+                    | 0 -> ()
                     | _ ->
                         let format =
                             "<td style='color: {0}'>●</td>"+

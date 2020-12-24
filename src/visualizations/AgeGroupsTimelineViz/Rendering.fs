@@ -2,7 +2,8 @@
 module AgeGroupsTimelineViz.Rendering
 
 open System
-open Analysis
+open DataAnalysis.DatedTypes
+open DataAnalysis.AgeGroupsTimeline
 open Synthesis
 open Highcharts
 open Types

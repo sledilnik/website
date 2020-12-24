@@ -1,11 +1,8 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - for age groups, we cannot have pre-determined list of series, 
-        they should be based on the actual data - only those with actual
-        deceased should be present
-        - instead of exposing `pageSeries` function, we need a function that
-            generates _all_ of series data based on the `MetricsType`
+    - move AgeGroupsTimeline analysis and synthesis code to a common namespace
+    - try to reuse code from AgeGroupsTimeline
 
 - new OWID export
     - return back the official URL, once it has been pushed to production

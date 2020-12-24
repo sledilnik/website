@@ -23,6 +23,9 @@
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="data/DailyDeaths.fs" />
         <Compile Include="data/MonthlyDeaths.fs" />
+        <Compile Include="DataAnalysis/DatedTypes.fs" />
+        <Compile Include="DataAnalysis/AgeGroupsTimeline.fs" />
+        <Compile Include="DataVisualization/ChartingTypes.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="DailyComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
@@ -43,7 +46,6 @@
         <Compile Include="PhaseDiagram/Data.fs" />
         <Compile Include="PhaseDiagram/Chart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
-        <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Rendering.fs" />
         <Compile Include="CountriesChartViz\Analysis.fs" />
