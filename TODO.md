@@ -1,7 +1,6 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - move AgeGroupsTimeline analysis and synthesis code to a common namespace
     - try to reuse code from AgeGroupsTimeline
 
 - new OWID export

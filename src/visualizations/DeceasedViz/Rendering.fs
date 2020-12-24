@@ -2,6 +2,7 @@ module DeceasedViz.Rendering
 
 open System
 open Data.Patients
+open DataVisualization.ChartingTypes
 open DeceasedViz.Analysis
 open DeceasedViz.Synthesis
 open Elmish
@@ -16,15 +17,15 @@ open Types
 
 let availablePages = [|
     { Id = "deceasedToDate"
-      MetricsType = HospitalsToDate; ChartType = "normal" }
+      MetricsType = HospitalsToDate; ChartType = StackedBarNormal }
     { Id = "deceasedToDateRelative"
-      MetricsType = HospitalsToDate; ChartType = "percent" }
+      MetricsType = HospitalsToDate; ChartType = StackedBarPercent }
     { Id = "deceasedToday"
-      MetricsType = HospitalsToday; ChartType = "normal" }
+      MetricsType = HospitalsToday; ChartType = StackedBarNormal }
     { Id = "deceasedTodayRelative"
-      MetricsType = HospitalsToday; ChartType = "percent" }
+      MetricsType = HospitalsToday; ChartType = StackedBarPercent }
     { Id = "deceasedToDateByAge"
-      MetricsType = ByAgeToDate; ChartType = "percent" }
+      MetricsType = ByAgeToDate; ChartType = StackedBarPercent }
 |]
 
 type Msg =
@@ -86,6 +87,12 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
             true
         res
 
+    let stacking =
+        match state.Page.ChartType with
+        | StackedBarNormal -> "normal"
+        | StackedBarPercent -> "percent"
+        | _ -> invalidOp "not supported"
+
     let baseOptions =
         basicChartOptions
             scaleType className
@@ -100,7 +107,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
                           groupPadding = 0
                           pointPadding = 0
                           borderWidth = 0 |}
-                series = {| stacking = state.Page.ChartType; crisp = true
+                series = {| stacking = stacking; crisp = true
                             borderWidth = 0
                             pointPadding = 0; groupPadding = 0
                             |}

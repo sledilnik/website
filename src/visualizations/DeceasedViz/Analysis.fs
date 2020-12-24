@@ -1,5 +1,7 @@
 ﻿module DeceasedViz.Analysis
 
+open DataVisualization.ChartingTypes
+
 type DisplayMetricsType =
     | HospitalsToDate
     | HospitalsToday
@@ -9,7 +11,7 @@ type DisplayMetricsType =
 type VisualizationPage = {
     Id: string
     MetricsType: DisplayMetricsType
-    ChartType: string
+    ChartType: ChartType
 }
 
 let (|HospitalMetricsType|_|) (metricsType: DisplayMetricsType) =
