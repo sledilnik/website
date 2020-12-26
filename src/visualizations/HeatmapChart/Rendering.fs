@@ -106,46 +106,70 @@ let renderChartOptions state dispatch =
             true
         res
 
+
+    let temp0 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[0] state.Metrics.MetricsType ).Data
+    let temp1 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[1] state.Metrics.MetricsType ).Data
+
+    printfn "%A" (temp0 |> Array.length)
+    printfn "%A" (temp1 |> Array.length)
+    
+    let data0 = temp0 |> Array.mapi ( fun index number ->  poja [|index;0;number|])
+    let data1 = temp1 |> Array.mapi ( fun index number ->  poja [|index;1;number|])
+    printfn "%A" (data0 )
+    printfn "%A" (data1 )
+
     let className = "covid19-infections"
     let baseOptions =
         Highcharts.basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    {| baseOptions with
-        chart = pojo
-            {|
-                animation = false
-                ``type`` = "column"
-                zoomType = "x"
-                className = className
-                events = pojo {| load = onLoadEvent(className) |}
-            |}
-        title = pojo {| text = None |}
-        series = allSeries
-        xAxis = baseOptions.xAxis
-        yAxis = baseOptions.yAxis
+    // let data = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] |> Array.map poja |> poja 
+    let data = Array.concat [|data0; data1|]
 
-        plotOptions = pojo
-            {|
-                column = pojo
-                        {|
-                          dataGrouping = pojo {| enabled = false |}
-                          groupPadding = 0
-                          pointPadding = 0
-                          borderWidth = 0 |}
-                series =
-                    match state.Metrics.ChartType with
-                    | StackedBarNormal -> pojo {| stacking = "normal" |}
-                    | StackedBarPercent -> pojo {| stacking = "percent" |}
-            |}
-        legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter jsThis
-                          shared = true
-                          useHTML = true
-                        |}
+
+    {| optionsWithOnLoadEvent "covid19-heatmap" with
+        chart = pojo {| ``type`` = "heatmap" |}
+
+        colorAxis = pojo {| min = 0 |}
+        
+        series = [| {| data = data|}|> pojo |]
     |}
+
+    // {| baseOptions with
+    //     chart = pojo
+    //         {|
+    //             animation = false
+    //             ``type`` = "column"
+    //             zoomType = "x"
+    //             className = className
+    //             events = pojo {| load = onLoadEvent(className) |}
+    //         |}
+    //     title = pojo {| text = None |}
+    //     series = allSeries
+    //     xAxis = baseOptions.xAxis
+    //     yAxis = baseOptions.yAxis
+
+    //     plotOptions = pojo
+    //         {|
+    //             column = pojo
+    //                     {|
+    //                       dataGrouping = pojo {| enabled = false |}
+    //                       groupPadding = 0
+    //                       pointPadding = 0
+    //                       borderWidth = 0 |}
+    //             series =
+    //                 match state.Metrics.ChartType with
+    //                 | StackedBarNormal -> pojo {| stacking = "normal" |}
+    //                 | StackedBarPercent -> pojo {| stacking = "percent" |}
+    //         |}
+    //     legend = pojo {| enabled = true ; layout = "horizontal" |}
+    //     tooltip = pojo {|
+    //                       formatter = fun () -> tooltipFormatter jsThis
+    //                       shared = true
+    //                       useHTML = true
+    //                     |}
+    // |}
 
 let renderChartContainer state dispatch =
     Html.div [
