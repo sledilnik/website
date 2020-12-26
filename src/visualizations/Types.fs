@@ -175,6 +175,7 @@ type VisualizationType =
     | Deceased
     | ExcessDeaths
     | MetricsCorrelation
+    | HeatmapChart
 
 type RenderingMode =
     | Normal

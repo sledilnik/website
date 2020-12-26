@@ -4,8 +4,11 @@ import React from 'react'
 import Highcharts from 'highcharts'
 import StockModule from 'highcharts/modules/stock'
 import MapModule from 'highcharts/modules/map'
+import Heatmap from 'highcharts/modules/heatmap'
 StockModule(Highcharts)
 MapModule(Highcharts)
+Heatmap(Highcharts)
+
 
 import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");

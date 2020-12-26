@@ -45,6 +45,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
+            | "HeatmapChart" -> Some HeatmapChart
             | _ -> None
             |> Embedded
 
@@ -518,8 +519,21 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MetricsCorrelationViz.Rendering.renderChart
                             {| data = data |} }
 
+    let heatmap =
+          { VisualizationType = DailyComparison
+            ClassName = "heatmap-chart"
+            ChartTextsGroup = "heatmap"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView HeatmapChart.Rendering.renderChart {| data = data |} }
+
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests;
+        [ heatmap; hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; ageGroups; hcCases;
@@ -550,6 +564,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesTotalDeathsPer1M
           phaseDiagram
           excessDeaths
+          heatmap
         ]
 
     let embedded, visualizations =
