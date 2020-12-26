@@ -709,7 +709,6 @@
             "gatheringOrganized": "Organized Gathering",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
-
         }
     },
     "footer": {
@@ -951,7 +950,7 @@
             "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
         },
         "services2": {
-            "title": "Storitve",
+            "title": "Services",
             "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
         }
     },
@@ -1371,15 +1370,15 @@
         }
     },
     "restrictionsPage": {
-      "searchPlaceholder": "Enter search query",  
-      "title": "Measures and restrictions",
-      "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-      "geoValidity": "Geographical validity",
-      "validity": "Validity",
-      "exceptions": "Exceptions",
-      "extrarule": "Additional rules / interpretations",
-      "notes": "Notes",
-      "link": "Link to decree (official text)"
+        "searchPlaceholder": "Enter search query",
+        "title": "Measures and restrictions",
+        "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
+        "geoValidity": "Geographical validity",
+        "validity": "Validity",
+        "exceptions": "Exceptions",
+        "extrarule": "Additional rules / interpretations",
+        "notes": "Notes",
+        "link": "Link to decree (official text)"
     },
     "faq": {
         "searchPlaceholder": "Enter search query",
@@ -1551,5 +1550,5 @@
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
         }
-    }    
+    }
 }
