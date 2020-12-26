@@ -47,7 +47,7 @@ let ``Can calculate timeline``() =
             Data = [| onDay0; onDay1; onDay2 |]
         }
 
-    test <@ calculateCasesByAgeTimeline sourceData = expectedTimeline @>
+    test <@ calculateDailyCasesByAgeTimeline sourceData = expectedTimeline @>
 
 [<Fact>]
 let ``Filters out leading and trailing days without any cases``() =
@@ -97,4 +97,4 @@ let ``Filters out leading and trailing days without any cases``() =
             Data = [| onDay0; onDay1; onDay2 |]
         }
 
-    test <@ calculateCasesByAgeTimeline sourceData = expectedTimeline @>
+    test <@ calculateDailyCasesByAgeTimeline sourceData = expectedTimeline @>

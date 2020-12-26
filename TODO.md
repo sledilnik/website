@@ -1,7 +1,10 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - remove age groups that don't have any deceased
+    - remove animations
+    - add relative page
+    - add translations for page switches
+    - try using different colors
 
 - new OWID export
     - return back the official URL, once it has been pushed to production

@@ -26,7 +26,7 @@ let ``Can fetch age groups from timeline``() =
             Data = [| totalDay0; totalDay1 |]
         }
 
-    let timeline = calculateCasesByAgeTimeline sourceData
+    let timeline = calculateDailyCasesByAgeTimeline sourceData
 
     let ageGroupsKeys = listAgeGroups timeline
 

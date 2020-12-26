@@ -10,6 +10,8 @@ type CasesByAgeGroupsForDay = AgeGroupsList
 
 type CasesByAgeGroupsTimeline = DatedArray<AgeGroupsList>
 
+/// Calculates the difference of total cases by age groups between two
+/// consecutive days which represents new cases by age groups.
 let calcCasesByAgeForDay
     (prevDay: AgeGroupsList option)
     (currentDay: AgeGroupsList): AgeGroupsList =
@@ -49,7 +51,9 @@ let calcCasesByAgeForDay
         // and calculate the difference
         |> List.map (fun ageGroup -> calcAgeGroupDiff prevDayGroups ageGroup)
 
-let calculateCasesByAgeTimeline
+/// Converts total cases by age groups timeline into daily new cases by
+/// age groups timeline.
+let calculateDailyCasesByAgeTimeline
     (totalCasesByAgeGroups: CasesByAgeGroupsTimeline)
     : CasesByAgeGroupsTimeline =
 
@@ -65,11 +69,16 @@ let calculateCasesByAgeTimeline
                )
         |> not
 
+    // converts AgeGroupsList array to an array of options, with None as
+    //  the first value in the array. We need this so we can apply pairwise
+    //  function below.
     let totalCasesTimelineArray: AgeGroupsList option[] =
         Array.append
             [| None |]
             (totalCasesByAgeGroups.Data |> Array.map Some)
 
+    // converts the array of total AgeGroupsList values into diffs, which
+    //  represent daily new cases
     let newCasesTimelineArray =
         totalCasesTimelineArray
         |> Array.pairwise
@@ -103,14 +112,17 @@ type CasesInAgeGroupSeries = {
 
 type ValueCalculationFormula = Daily | Active | Total
 
+/// Calculates the timeline for an age group specified by its index.
+/// The source data is the timeline of all age groups.
+/// The metric/value of the timeline is defined by the calculation formula.
 let extractTimelineForAgeGroup
     ageGroupKey
     (calculationFormula: ValueCalculationFormula)
-    (casesTimeline: CasesByAgeGroupsTimeline)
+    (allAgeGroupsTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
 
     let newCasesTimeline =
-        casesTimeline
+        allAgeGroupsTimeline
         |> mapDatedArrayItems (fun dayGroupsData ->
                     let dataForGroup =
                         dayGroupsData
@@ -129,19 +141,23 @@ let getAgeGroupTimelineAllSeriesData
         (statsData: StatsData)
         (valueCalculationFormula: ValueCalculationFormula)
         (pointAgeGroupListSelector: StatsDataPoint -> AgeGroupsList) =
+    // extract just a list of date + AgeGroupsList tuples
     let totalCasesByAgeGroupsList =
         statsData
         |> List.map (fun point -> (point.Date,
                                    point |> pointAgeGroupListSelector))
 
+    // convert to DatedArray that has just a start date
+    //  and an array of AgeGroupsList values
     let totalCasesByAgeGroups =
         mapDateTuplesListToArray totalCasesByAgeGroupsList
 
-    // calculate complete merged timeline
-    let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
+    // converts total new cases to daily cases
+    let dailyCasesTimeline =
+        calculateDailyCasesByAgeTimeline totalCasesByAgeGroups
 
     // get keys of all age groups
-    let allGroupsKeys = listAgeGroups timeline
+    let allGroupsKeys = listAgeGroups dailyCasesTimeline
 
     let mapPoint
         (startDate: DateTime)
@@ -160,21 +176,33 @@ let getAgeGroupTimelineAllSeriesData
         let timelineArray = groupTimeline.Data
 
         timelineArray
-        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
+        |> Array.mapi (mapPoint startDate)
+
+    let renderAgeGroupSeriesMaybe index ageGroupKey =
+        let ageGroupTimeline =
+            dailyCasesTimeline
+            |> extractTimelineForAgeGroup ageGroupKey valueCalculationFormula
+
+        // if the timeline has just zero values, we will skip it so it doesn't
+        //  show up in the chart
+        let hasAnyNonZeroValues =
+            ageGroupTimeline.Data |> Array.exists (fun value -> value > 0)
+
+        if hasAnyNonZeroValues then
+            let points = ageGroupTimeline |> mapAllPoints
+
+            pojo {|
+                 ``type`` = "column"
+                 visible = true
+                 name = ageGroupKey.Label
+                 color = AgeGroup.ColorOfAgeGroup index
+                 data = points
+            |} |> Some
+        else
+            None
 
     allGroupsKeys
-    |> List.mapi (fun index ageGroupKey ->
-        let points =
-            timeline
-            |> extractTimelineForAgeGroup ageGroupKey valueCalculationFormula
-            |> mapAllPoints
-
-        pojo {|
-             ``type`` = "column"
-             visible = true
-             name = ageGroupKey.Label
-             color = AgeGroup.ColorOfAgeGroup index
-             data = points
-        |}
-    )
+    |> List.mapi renderAgeGroupSeriesMaybe
+    // skip series which do not have any non-0 data
+    |> List.choose id
     |> List.toArray
