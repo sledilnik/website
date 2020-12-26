@@ -525,14 +525,14 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",
             "titleMenu": "Countries - Active Cases",
             "yAxisTitle": "Active cases per 100,000 people",
             "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
@@ -544,7 +544,7 @@
             "yAxisTitle": "New daily deaths per 100,000 people",
             "legendTitle": "New daily deaths per 100,000 people"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",

@@ -790,7 +790,7 @@
             "allHospitals": "Tutti gli ospedali",
             "titleMenu": "Capacità"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "yAxisTitle": "Totale decessi su 100.000 persone",
             "legendTitle": "Totale decessi su 100.000 persone",
             "titleMenu": "Paesi - Decessi",
@@ -835,7 +835,7 @@
             "titleMenu": "CS - trattamento",
             "disclaimer": "Nota: questo grafico non è aggiornato. Dal 25 ottobre il Ministero della Salute non riporta più i dati relativi ai centri sanitari in quanto non vengono più raccolti."
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
             "yAxisTitle": "Nuovi casi giornalieri su 100.000 persone",
             "titleMenu": "Paesi - Nuovi casi",
@@ -1013,7 +1013,7 @@
             "title": "Paesi: totale decessi per casi",
             "titleMenu": "Paesi: decessi su casi"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "criteri per lista rossa",
             "legendTitle": "Casi attivi su 100.000 persone",
             "yAxisTitle": "Casi attivi su 100.000 persone",

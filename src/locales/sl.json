@@ -1046,14 +1046,14 @@
             "activeCases": "Aktivni primeri",
             "activeCasesRelative": "Aktivni primeri (relativno)"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Države: aktivni primeri na 100.000 prebivalcev",
             "titleMenu": "Države – aktivni primeri",
             "yAxisTitle": "Št. aktivnih primerov na 100.000 prebivalcev",
             "legendTitle": "Aktivni primeri na 100.000 prebivalcev",
             "red": "meja za uvrstitev na rdeči seznam"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Države: novi primeri na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – novi primeri",
             "yAxisTitle": "Št. novih primerov na 100.000 prebivalcev",
@@ -1065,7 +1065,7 @@
             "yAxisTitle": "Št. dnevno umrlih na 100.000 prebivalcev",
             "legendTitle": "Umrli (dnevno) na 100.000 prebivalcev"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Države: umrli (skupaj) na 100.000 prebivalcev (7-dnevno povprečje)",
             "titleMenu": "Države – umrli (skupaj)",
             "yAxisTitle": "Skupno št. umrlih na 100.000 prebivalcev",

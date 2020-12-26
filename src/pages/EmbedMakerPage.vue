@@ -158,24 +158,24 @@ export default {
           text: this.$t('charts.metricsCorrelation.title'),
           dimensions: [1140, 720]
         },
-        "CountriesCasesPer1M": {
-          value: "CountriesCasesPer1M",
-          text: this.$t('charts.countriesNewCasesPer1M.title'),
+        "CountriesCasesPer100k": {
+          value: "CountriesCasesPer100k",
+          text: this.$t('charts.countriesNewCasesPer100k.title'),
           dimensions: [1140, 720]
         },
-        "CountriesActiveCasesPer1M": {
-          value: "CountriesActiveCasesPer1M",
-          text: this.$t('charts.countriesActiveCasesPer1M.title'),
+        "CountriesActiveCasesPer100k": {
+          value: "CountriesActiveCasesPer100k",
+          text: this.$t('charts.countriesActiveCasesPer100k.title'),
           dimensions: [1140, 720]
         },
-        "CountriesNewDeathsPer1M": {
-          value: "CountriesNewDeathsPer1M",
+        "CountriesNewDeathsPer100k": {
+          value: "CountriesNewDeathsPer100k",
           text: this.$t('charts.countriesNewDeathsPer100k.title'),
           dimensions: [1140, 720]
         },
-        "CountriesTotalDeathsPer1M": {
-          value: "CountriesTotalDeathsPer1M",
-          text: this.$t('charts.countriesTotalDeathsPer1M.title'),
+        "CountriesTotalDeathsPer100k": {
+          value: "CountriesTotalDeathsPer100k",
+          text: this.$t('charts.countriesTotalDeathsPer100k.title'),
           dimensions: [1140, 720]
         },
 //        "Hospitals": {
