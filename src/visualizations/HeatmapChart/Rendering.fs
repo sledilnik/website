@@ -107,6 +107,19 @@ let renderChartOptions state dispatch =
         res
 
 
+    let dataSeries = 
+        let timelines = 
+            allGroupsKeys
+            |> List.mapi( fun index ageGroupKey -> 
+                let points = 
+                    (timeline |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType).Data //TODO: REMOVE THIS METRICS SELECTOR FROM SYNTHESIS
+                
+                points |> Array.mapi( fun date number -> poja [| date; index; number |]) // TODO: Do logs of numbers
+            )
+        
+        Array.concat timelines
+
+    //TODO: REMOVE THIS
     let temp0 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[0] state.Metrics.MetricsType ).Data
     let temp1 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[1] state.Metrics.MetricsType ).Data
 
@@ -125,12 +138,13 @@ let renderChartOptions state dispatch =
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
     // let data = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] |> Array.map poja |> poja 
-    let data = Array.concat [|data0; data1|]
+    let data = dataSeries
 
 
     {| optionsWithOnLoadEvent "covid19-heatmap" with
         chart = pojo {| ``type`` = "heatmap" |}
 
+        yAxis = pojo {| categories = allGroupsKeys; ``max`` = 10|}
         colorAxis = pojo {| min = 0 |}
         
         series = [| {| data = data|}|> pojo |]
