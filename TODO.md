@@ -1,8 +1,9 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - tooltips
     - try using different colors
+        - using color mixing function
+    - tooltips
 
 - new OWID export
     - return back the official URL, once it has been pushed to production

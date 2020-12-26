@@ -9,6 +9,7 @@
         <Compile Include="IntersectionObserver.fs" />
         <Compile Include="ShareButton.fs" />
         <Compile Include="Highcharts.fs" />
+        <Compile Include="Colors.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Days.fs" />
         <Compile Include="Statistics.fs" />
