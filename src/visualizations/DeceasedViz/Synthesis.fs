@@ -126,6 +126,7 @@ let renderAllHospitalSeriesData state =
             color = series.Color
             name = I18N.tt "charts.deceased" series.SeriesId
             data = constructSeriesData state series
+            animation = false
         |}
         |> pojo
 

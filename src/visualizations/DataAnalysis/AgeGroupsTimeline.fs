@@ -197,6 +197,7 @@ let getAgeGroupTimelineAllSeriesData
                  name = ageGroupKey.Label
                  color = AgeGroup.ColorOfAgeGroup index
                  data = points
+                 animation = false
             |} |> Some
         else
             None
