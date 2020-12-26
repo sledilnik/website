@@ -73,11 +73,11 @@ export default {
           text: this.$t('charts.carePatients.title'),
           dimensions: [1140, 720]
         },
-        "Ratios": {
-          value: "Ratios",
-          text: this.$t('charts.ratios.title'),
-          dimensions: [1140, 720]
-        },
+//        "Ratios": {
+//          value: "Ratios",
+//          text: this.$t('charts.ratios.title'),
+//          dimensions: [1140, 720]
+//        },
         "HCenters": {
           value: "HCenters",
           text: this.$t('charts.hCenters.title'),
@@ -98,9 +98,24 @@ export default {
           text: this.$t('charts.spread.title'),
           dimensions: [1140, 630]
         },
+        "Deceased": {
+          value: "Deceased",
+          text: this.$t('charts.deceased.title'),
+          dimensions: [1140, 720]
+        },
+        "Sources": {
+          value: "Sources",
+          text: this.$t('charts.sources.title'),
+          dimensions: [1140, 720]
+        },
         "Regions": {
           value: "Regions",
           text: this.$t('charts.regions.title'),
+          dimensions: [1140, 720]
+        },
+        "Regions100k": {
+          value: "Regions100k",
+          text: this.$t('charts.regions100k.title'),
           dimensions: [1140, 720]
         },
         "Map": {
@@ -126,6 +141,41 @@ export default {
         "AgeGroupsTimeline": {
           value: "AgeGroupsTimeline",
           text: this.$t('charts.ageGroupsTimeline.title'),
+          dimensions: [1140, 720]
+        },
+        "PhaseDiagram": {
+          value: "PhaseDiagram",
+          text: this.$t('charts.phaseDiagram.title'),
+          dimensions: [1140, 720]
+        },
+        "ExcessDeaths": {
+          value: "ExcessDeaths",
+          text: this.$t('charts.excessDeaths.title'),
+          dimensions: [1140, 720]
+        },
+        "MetricsCorrelation": {
+          value: "MetricsCorrelation",
+          text: this.$t('charts.metricsCorrelation.title'),
+          dimensions: [1140, 720]
+        },
+        "CountriesCasesPer1M": {
+          value: "CountriesCasesPer1M",
+          text: this.$t('charts.countriesNewCasesPer1M.title'),
+          dimensions: [1140, 720]
+        },
+        "CountriesActiveCasesPer1M": {
+          value: "CountriesActiveCasesPer1M",
+          text: this.$t('charts.countriesActiveCasesPer1M.title'),
+          dimensions: [1140, 720]
+        },
+        "CountriesNewDeathsPer1M": {
+          value: "CountriesNewDeathsPer1M",
+          text: this.$t('charts.countriesNewDeathsPer100k.title'),
+          dimensions: [1140, 720]
+        },
+        "CountriesTotalDeathsPer1M": {
+          value: "CountriesTotalDeathsPer1M",
+          text: this.$t('charts.countriesTotalDeathsPer1M.title'),
           dimensions: [1140, 720]
         },
 //        "Hospitals": {

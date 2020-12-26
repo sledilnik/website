@@ -29,7 +29,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
-            | "Weekly" -> Some Sources
+            | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
