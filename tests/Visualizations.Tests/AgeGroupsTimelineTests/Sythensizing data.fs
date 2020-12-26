@@ -3,7 +3,6 @@
 open System
 open DataAnalysis.DatedTypes
 open DataAnalysis.AgeGroupsTimeline
-open AgeGroupsTimelineViz.Synthesis
 open TestHelpers
 open Xunit
 open Swensen.Unquote
@@ -45,14 +44,13 @@ let ``Can extract data for individual age group``() =
 
     let baseDate = DateTime(2020, 03, 01)
 
-    let sourceData = {
+    let sourceData: CasesByAgeGroupsTimeline = {
             StartDate = baseDate
             Data = [| day0; day1 |]
         }
 
     let timeline =
-        sourceData
-        |> extractTimelineForAgeGroup (groupKey 1) Daily
+        extractTimelineForAgeGroup (groupKey 1) Daily sourceData sourceData
 
     test <@ timeline.StartDate = baseDate @>
     test <@ timeline.Data = [| 15; 25 |] @>
