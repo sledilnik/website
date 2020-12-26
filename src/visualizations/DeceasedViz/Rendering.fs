@@ -24,8 +24,14 @@ let availablePages = [|
       MetricsType = HospitalsToday; ChartType = StackedBarNormal }
     { Id = "deceasedTodayRelative"
       MetricsType = HospitalsToday; ChartType = StackedBarPercent }
-    { Id = "deceasedTodayByAge"
+    { Id = "deceasedByAgeToDate"
       MetricsType = ByAgeToDate; ChartType = StackedBarNormal }
+    { Id = "deceasedByAgeToDateRelative"
+      MetricsType = ByAgeToDate; ChartType = StackedBarPercent }
+    { Id = "deceasedByAgeToday"
+      MetricsType = ByAgeToday; ChartType = StackedBarNormal }
+    { Id = "deceasedByAgeTodayRelative"
+      MetricsType = ByAgeToday; ChartType = StackedBarPercent }
 |]
 
 type Msg =

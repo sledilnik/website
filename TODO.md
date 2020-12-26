@@ -1,9 +1,7 @@
 # TODO
 
 - https://github.com/sledilnik/website/issues/770
-    - remove animations
-    - add relative page
-    - add translations for page switches
+    - tooltips
     - try using different colors
 
 - new OWID export

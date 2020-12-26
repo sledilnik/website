@@ -133,8 +133,14 @@ let renderAllHospitalSeriesData state =
     hospitalSeries |> Array.map renderSeriesData
 
 let renderAllAgeGroupsSeriesData state =
+    let calculationFormula =
+        match state.Page.MetricsType with
+        | ByAgeToDate -> Total
+        | ByAgeToday -> Daily
+        | _ -> invalidOp "not supported"
+
     getAgeGroupTimelineAllSeriesData
-        state.StatsData Daily
+        state.StatsData calculationFormula
         (fun dataPoint -> dataPoint.DeceasedPerAgeToDate)
 
 let renderAllSeriesData state =

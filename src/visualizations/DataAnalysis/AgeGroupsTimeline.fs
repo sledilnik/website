@@ -118,10 +118,11 @@ type ValueCalculationFormula = Daily | Active | Total
 let extractTimelineForAgeGroup
     ageGroupKey
     (calculationFormula: ValueCalculationFormula)
-    (allAgeGroupsTimeline: CasesByAgeGroupsTimeline)
+    (totalValuesAllAgeGroupsTimeline: CasesByAgeGroupsTimeline)
+    (dailyValuesAllAgeGroupsTimeline: CasesByAgeGroupsTimeline)
     : CasesInAgeGroupTimeline =
 
-    let newCasesTimeline =
+    let extractDataForSingleAgeGroup allAgeGroupsTimeline =
         allAgeGroupsTimeline
         |> mapDatedArrayItems (fun dayGroupsData ->
                     let dataForGroup =
@@ -131,33 +132,33 @@ let extractTimelineForAgeGroup
                     |> Utils.optionToInt
                 )
     match calculationFormula with
-    | Daily -> newCasesTimeline
+    | Daily -> extractDataForSingleAgeGroup dailyValuesAllAgeGroupsTimeline
     | Active ->
-        newCasesTimeline
+        extractDataForSingleAgeGroup dailyValuesAllAgeGroupsTimeline
         |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
-    | Total -> invalidOp "todo"
+    | Total -> extractDataForSingleAgeGroup totalValuesAllAgeGroupsTimeline
 
 let getAgeGroupTimelineAllSeriesData
         (statsData: StatsData)
         (valueCalculationFormula: ValueCalculationFormula)
         (pointAgeGroupListSelector: StatsDataPoint -> AgeGroupsList) =
     // extract just a list of date + AgeGroupsList tuples
-    let totalCasesByAgeGroupsList =
+    let totalValuesByAgeGroupsList =
         statsData
         |> List.map (fun point -> (point.Date,
                                    point |> pointAgeGroupListSelector))
 
     // convert to DatedArray that has just a start date
     //  and an array of AgeGroupsList values
-    let totalCasesByAgeGroups =
-        mapDateTuplesListToArray totalCasesByAgeGroupsList
+    let totalValuesByAgeGroupsTimeline: CasesByAgeGroupsTimeline =
+        mapDateTuplesListToArray totalValuesByAgeGroupsList
 
     // converts total new cases to daily cases
-    let dailyCasesTimeline =
-        calculateDailyCasesByAgeTimeline totalCasesByAgeGroups
+    let dailyValuesByAgeGroupsTimeline =
+        calculateDailyCasesByAgeTimeline totalValuesByAgeGroupsTimeline
 
     // get keys of all age groups
-    let allGroupsKeys = listAgeGroups dailyCasesTimeline
+    let allGroupsKeys = listAgeGroups dailyValuesByAgeGroupsTimeline
 
     let mapPoint
         (startDate: DateTime)
@@ -180,8 +181,8 @@ let getAgeGroupTimelineAllSeriesData
 
     let renderAgeGroupSeriesMaybe index ageGroupKey =
         let ageGroupTimeline =
-            dailyCasesTimeline
-            |> extractTimelineForAgeGroup ageGroupKey valueCalculationFormula
+            extractTimelineForAgeGroup ageGroupKey valueCalculationFormula
+                totalValuesByAgeGroupsTimeline dailyValuesByAgeGroupsTimeline
 
         // if the timeline has just zero values, we will skip it so it doesn't
         //  show up in the chart
