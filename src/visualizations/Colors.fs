@@ -1,5 +1,7 @@
 ﻿module Colors
 
+open System
+
 type RgbaColor = uint32
 
 let inline r(color: RgbaColor) = byte (color >>> 24)
@@ -35,3 +37,36 @@ let inline toHex(color: RgbaColor): string =
     match alpha with
     | 0xffuy -> sprintf "#%02x%02x%02x" (r color) (g color) (b color)
     | _ -> sprintf "#%02x%02x%02x%02x" alpha (r color) (g color) (b color)
+
+let fromHex (hexValue: string): RgbaColor =
+    let rec parseNextChar
+            (accumulatedValue: uint32) (hexChars: char list): uint32 =
+        match hexChars.Length with
+        | 0 -> accumulatedValue
+        | _ ->
+            let chr = Char.ToLower(hexChars.[0])
+            let digitValue: uint32 =
+                match chr with
+                | chr when chr >= '0' && chr <= '9' -> (uint32)chr - (uint32)'0'
+                | chr when chr >= 'a' && chr <= 'f' ->
+                    (uint32)chr - (uint32)'a' + 10u
+                | _ -> invalidArg "hexValue" "Unsupported hex color value."
+
+            let accumulatedValueShifted =
+                (accumulatedValue <<< 4) ||| digitValue
+
+            parseNextChar accumulatedValueShifted (hexChars |> List.tail)
+
+    let parseToInt() =
+        match hexValue.[0] with
+        | '#' ->
+            let hexChars = hexValue |> Seq.toList |> List.tail
+            parseNextChar 0u hexChars
+        | _ -> invalidArg "hexValue" "Unsupported hex color value."
+
+    match hexValue.Length with
+    | 7 ->
+        let intValue = parseToInt()
+        (intValue <<< 8) ||| 0xffu
+
+    | _ -> invalidArg "hexValue" "Unsupported hex color value."

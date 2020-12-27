@@ -192,11 +192,21 @@ let getAgeGroupTimelineAllSeriesData
         if hasAnyNonZeroValues then
             let points = ageGroupTimeline |> mapAllPoints
 
+            let baseColorOfAgeGroupHex = AgeGroup.colorOfAgeGroup index
+            let baseColorOfAgeGroup = Colors.fromHex baseColorOfAgeGroupHex
+            printfn "color=%A" baseColorOfAgeGroup
+            let mixinColor = Colors.fromHex "#8C71A8"
+            printfn "mixinColor=%A" mixinColor
+            let mixedColor =
+                Colors.mixColors baseColorOfAgeGroup mixinColor 0.3
+            let mixedColorHex = Colors.toHex mixedColor
+            printfn "mixedColorHex=%A" mixedColorHex
+
             pojo {|
                  ``type`` = "column"
                  visible = true
                  name = ageGroupKey.Label
-                 color = AgeGroup.ColorOfAgeGroup index
+                 color = mixedColorHex
                  data = points
                  animation = false
             |} |> Some
