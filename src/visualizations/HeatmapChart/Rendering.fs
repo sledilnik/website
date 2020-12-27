@@ -67,7 +67,7 @@ let renderChartOptions state dispatch =
         let temp = startDate |> Days.add daysFromStartDate
 
         {|
-             x = date
+             x = temp |> jsTime12h
              y = ageGroup 
              value = Math.Log (float cases + 1.)
              cases = cases
@@ -78,6 +78,7 @@ let renderChartOptions state dispatch =
         (ageGroup: int)
         (groupTimeline: CasesInAgeGroupTimeline) =
         let startDate = groupTimeline.StartDate
+        printfn "%A" startDate
         let timelineArray = groupTimeline.Data
 
         timelineArray
@@ -93,9 +94,10 @@ let renderChartOptions state dispatch =
                        ageGroupKey state.Metrics.MetricsType
                 |> mapAllPoints index
             {|
-                 visible = true
-                 name = ageGroupKey.Label
-                 data = points
+                colsize = 3600* 1000 * 24
+                visible = true
+                name = ageGroupKey.Label
+                data = points
             |} |> pojo
         )
         |> List.toArray
@@ -108,38 +110,33 @@ let renderChartOptions state dispatch =
         res
 
 
-    let dataSeries = 
-        let timelines = 
-            allGroupsKeys
-            |> List.mapi( fun index ageGroupKey -> 
-                let points = 
-                    (timeline |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType).Data //TODO: REMOVE THIS METRICS SELECTOR FROM SYNTHESIS
-                
-                points.[250..] |> Array.mapi( fun date number ->  pojo {| x=date; y=index; value=number|}) // TODO: Do logs of numbers
-            )
-        
-        Array.concat timelines
+    let className = "covid19-infection-heatmap"
+
+    // let testData = 
+    //     let df = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] 
+
+    //     let arr = 
+    //         df |> Array.map (fun arr -> 
+    //             {|
+    //                 // x = arr.[0]
+    //                 x = jsTime12h <| DateTime( 2020, 12, 1 + arr.[0])
+    //                 y = arr.[1]
+    //                 value = arr.[2] 
+    //             |} |> pojo
+    //         ) 
+
+    //     {|
+    //         colsize = 24 * 3600 * 100 * 12
+    //         visible = true
+    //         data = arr
+    //     |}
 
 
-    let className = "covid19-infections"
+
     let baseOptions =
         Highcharts.basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
-
-    let testData = 
-        let df = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] 
-
-        df |> Array.map (fun arr -> 
-                {|
-                    x = arr.[0]
-                    y = arr.[1]
-                    value = arr.[2] 
-                |} |> pojo
-            ) 
-
-
-
 
 
     let data = allSeries 
@@ -148,8 +145,16 @@ let renderChartOptions state dispatch =
 
     // printfn "%A" dataSeries
 
-    {| optionsWithOnLoadEvent "covid19-heatmap" with
+    {| baseOptions  with
         chart = pojo {| ``type`` = "heatmap" |}
+       
+        // series = [| testData |]
+        series = allSeries
+
+        xAxis = pojo
+            {|
+                ``type`` = "datetime"
+            |}
 
         yAxis = pojo 
             {| 
@@ -182,18 +187,19 @@ let renderChartOptions state dispatch =
                     |]
             |}
         
-        xAxis = pojo {| ``type``= "datetime"|}
-
-        turboThreshold = 1000 
+        tooltip = pojo {|
+                          formatter = fun () -> tooltipFormatter jsThis
+                          shared = true
+                          useHTML = true
+                        |}
 
         boost = {| useGPUTranslations = true|} |> pojo
 
         // tooltip = {|enabled = false|}
         
-        series = allSeries
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
-        rangeSelector = pojo {| enabled = false |}
+        // rangeSelector = pojo {| enabled = false |}
     |}
 
     // {| baseOptions with
