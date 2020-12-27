@@ -56,30 +56,32 @@ let renderChartOptions state dispatch =
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
 
-    let colorOfAgeGroup ageGroupIndex =
-        let colors =
-            [| "#FFEEBA"; "#FFDA6B";"#E9B825";"#AEEFDB";"#52C4A2";"#33AB87"
-               "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
-        colors.[ageGroupIndex]
-
     let mapPoint
         (startDate: DateTime)
         (daysFromStartDate: int)
+        (ageGroup: int)
         (cases: CasesInAgeGroupForDay) =
-        let date = startDate |> Days.add daysFromStartDate
+        // let date = startDate |> Days.add (daysFromStartDate + 200)
+        let date = daysFromStartDate
 
-        pojo {|
-             x = date |> jsTime12h :> obj
-             y = cases
+        let temp = startDate |> Days.add daysFromStartDate
+
+        {|
+             x = date
+             y = ageGroup 
+             value = Math.Log (float cases + 1.)
+             cases = cases
              date = I18N.tOptions "days.longerDate" {| date = date |}
-        |}
+        |} |> pojo
 
-    let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
+    let mapAllPoints 
+        (ageGroup: int)
+        (groupTimeline: CasesInAgeGroupTimeline) =
         let startDate = groupTimeline.StartDate
         let timelineArray = groupTimeline.Data
 
         timelineArray
-        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
+        |> Array.mapi (fun i cases -> mapPoint startDate i ageGroup cases)
 
     // generate all series
     let allSeries =
@@ -89,16 +91,15 @@ let renderChartOptions state dispatch =
                 timeline
                 |> extractTimelineForAgeGroup
                        ageGroupKey state.Metrics.MetricsType
-                |> mapAllPoints
-
-            pojo {|
+                |> mapAllPoints index
+            {|
                  visible = true
                  name = ageGroupKey.Label
-                 color = colorOfAgeGroup index
                  data = points
-            |}
+            |} |> pojo
         )
         |> List.toArray
+        // |> Array.concat
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -114,22 +115,11 @@ let renderChartOptions state dispatch =
                 let points = 
                     (timeline |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType).Data //TODO: REMOVE THIS METRICS SELECTOR FROM SYNTHESIS
                 
-                points |> Array.mapi( fun date number -> poja [| date; index; number |]) // TODO: Do logs of numbers
+                points.[250..] |> Array.mapi( fun date number ->  pojo {| x=date; y=index; value=number|}) // TODO: Do logs of numbers
             )
         
         Array.concat timelines
 
-    //TODO: REMOVE THIS
-    let temp0 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[0] state.Metrics.MetricsType ).Data
-    let temp1 = (timeline |> extractTimelineForAgeGroup allGroupsKeys.[1] state.Metrics.MetricsType ).Data
-
-    printfn "%A" (temp0 |> Array.length)
-    printfn "%A" (temp1 |> Array.length)
-    
-    let data0 = temp0 |> Array.mapi ( fun index number ->  poja [|index;0;number|])
-    let data1 = temp1 |> Array.mapi ( fun index number ->  poja [|index;1;number|])
-    printfn "%A" (data0 )
-    printfn "%A" (data1 )
 
     let className = "covid19-infections"
     let baseOptions =
@@ -137,17 +127,73 @@ let renderChartOptions state dispatch =
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    // let data = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] |> Array.map poja |> poja 
-    let data = dataSeries
+    let testData = 
+        let df = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] 
 
+        df |> Array.map (fun arr -> 
+                {|
+                    x = arr.[0]
+                    y = arr.[1]
+                    value = arr.[2] 
+                |} |> pojo
+            ) 
+
+
+
+
+
+    let data = allSeries 
+    let categ = allGroupsKeys |> List.toArray
+
+
+    // printfn "%A" dataSeries
 
     {| optionsWithOnLoadEvent "covid19-heatmap" with
         chart = pojo {| ``type`` = "heatmap" |}
 
-        yAxis = pojo {| categories = allGroupsKeys; ``max`` = 10|}
-        colorAxis = pojo {| min = 0 |}
+        yAxis = pojo 
+            {| 
+                max = 9 
+                opposite = true
+                labels = 
+                    {|
+                        reserveSpace= false 
+                    |}
+            |}
+        colorAxis = pojo 
+            {| 
+                ``type`` = "linear"
+                min = 0.0 
+                stops =
+                    [|
+                        (0.000,"#ffffff")
+                        (0.001,"#fff7db")
+                        (0.200,"#ffefb7")
+                        (0.280,"#ffe792")
+                        (0.360,"#ffdf6c")
+                        (0.440,"#ffb74d")
+                        (0.520,"#ff8d3c")
+                        (0.600,"#f85d3a")
+                        (0.680,"#ea1641")
+                        (0.760,"#d0004e")
+                        (0.840,"#ad005b")
+                        (0.920,"#800066")
+                        (0.999,"#43006e")
+                    |]
+            |}
         
-        series = [| {| data = data|}|> pojo |]
+        xAxis = pojo {| ``type``= "datetime"|}
+
+        turboThreshold = 1000 
+
+        boost = {| useGPUTranslations = true|} |> pojo
+
+        // tooltip = {|enabled = false|}
+        
+        series = allSeries
+        navigator = pojo {| enabled = false |}
+        scrollbar = pojo {| enabled = false |}
+        rangeSelector = pojo {| enabled = false |}
     |}
 
     // {| baseOptions with
@@ -217,7 +263,7 @@ let renderMetricsSelectors activeMetrics dispatch =
 let render state dispatch =
     Html.div [
         renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
+        // renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
 let renderChart (props : {| data : StatsData |}) =
