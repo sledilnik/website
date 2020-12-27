@@ -70,7 +70,7 @@ let tooltipValueFormatter state value =
     match state.MetricToDisplay with
     | DeathsPerCases ->
         Utils.percentWith1DecimalSignFormatter value
-    | NewDeathsPer1M -> Utils.formatTo2DecimalWithTrailingZero value
+    | NewDeathsPer100k -> Utils.formatTo2DecimalWithTrailingZero value
     | _ -> Utils.formatTo1DecimalWithTrailingZero value
 
 let tooltipFormatter state chartData jsThis =

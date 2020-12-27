@@ -34,7 +34,6 @@ export default [
             "data-usage",
             "chart-usage",
             "chart-infocard-percent",
-            "chart-infocard-phase",
             "metrics-comparison-chart",
             "chart-metrics-included",
             "chart-terminology",

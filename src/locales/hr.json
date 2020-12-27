@@ -370,13 +370,13 @@
             "bubbles": "Distribucija",
             "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica i domova umirovljenika). Podaci preminulih po općinama NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih."
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
             "yAxisTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "legendTitle": "Novi dnevni slučajevi na 100.000 stanovnika",
             "titleMenu": "Države – novi slučajevi"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Države: ukupno smrtnih slučajeva na 100.000 stanovnika (7-dnevni prosjek)",
             "yAxisTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
             "legendTitle": "Ukupno smrtnih slučajeva na 100.000 stanovnika",
@@ -610,7 +610,7 @@
             "daysFromOneDeathPerMillion": "Broj dana od prvog smrtnog slučaja na milijun stanovnika",
             "titleMenu": "Države – smrtni slučajevi po broju slučajeva"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "kriteriji za crvenu listu",
             "legendTitle": "Aktivni slučajevi na 100.000 stanovnika",
             "yAxisTitle": "Aktivni slučajevi na 100.000 stanovnika",

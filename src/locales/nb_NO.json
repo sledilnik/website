@@ -84,7 +84,7 @@
                 "date": "Dato"
             }
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "legendTitle": "Aktive tilfeller per 100k folk",
             "yAxisTitle": "Aktive tilfeller per 100k folk"
         },

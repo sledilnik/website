@@ -29,7 +29,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
-            | "Weekly" -> Some Sources
+            | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
@@ -37,10 +37,10 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "HCenters" -> Some HCenters
             | "Hospitals" -> Some Hospitals
             | "Infections" -> Some Infections
-            | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
-            | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
-            | "CountriesNewDeathsPer1M" -> Some CountriesNewDeathsPer1M
-            | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
+            | "CountriesCasesPer100k" -> Some CountriesCasesPer100k
+            | "CountriesActiveCasesPer100k" -> Some CountriesActiveCasesPer100k
+            | "CountriesNewDeathsPer100k" -> Some CountriesNewDeathsPer100k
+            | "CountriesTotalDeathsPer100k" -> Some CountriesTotalDeathsPer100k
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
@@ -385,10 +385,10 @@ let render (state: State) (_: Msg -> unit) =
             Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
          }
 
-    let countriesCasesPer1M =
-          { VisualizationType = CountriesCasesPer1M
+    let countriesCasesPer100k =
+          { VisualizationType = CountriesCasesPer100k
             ClassName = "countries-cases-chart"
-            ChartTextsGroup = "countriesNewCasesPer1M"
+            ChartTextsGroup = "countriesNewCasesPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -399,16 +399,16 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = NewCasesPer1M
-                              ChartTextsGroup = "countriesNewCasesPer1M"
+                              MetricToDisplay = NewCasesPer100k
+                              ChartTextsGroup = "countriesNewCasesPer100k"
                               DataSource = "dsOWD_NIJZ"
                             }
           }
 
-    let countriesActiveCasesPer1M =
-          { VisualizationType = CountriesActiveCasesPer1M
+    let countriesActiveCasesPer100k =
+          { VisualizationType = CountriesActiveCasesPer100k
             ClassName = "countries-active-chart"
-            ChartTextsGroup = "countriesActiveCasesPer1M"
+            ChartTextsGroup = "countriesActiveCasesPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -419,14 +419,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = ActiveCasesPer1M
-                              ChartTextsGroup = "countriesActiveCasesPer1M"
+                              MetricToDisplay = ActiveCasesPer100k
+                              ChartTextsGroup = "countriesActiveCasesPer100k"
                               DataSource = "dsOWD_NIJZ"
                             }
           }
 
-    let countriesNewDeathsPer1M =
-          { VisualizationType = CountriesNewDeathsPer1M
+    let countriesNewDeathsPer100k =
+          { VisualizationType = CountriesNewDeathsPer100k
             ClassName = "countries-new-deaths-chart"
             ChartTextsGroup = "countriesNewDeathsPer100k"
             Explicit = false
@@ -439,16 +439,16 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = NewDeathsPer1M
+                              MetricToDisplay = NewDeathsPer100k
                               ChartTextsGroup = "countriesNewDeathsPer100k"
                               DataSource = "dsOWD_MZ"
                             }
           }
 
-    let countriesTotalDeathsPer1M =
-          { VisualizationType = CountriesTotalDeathsPer1M
+    let countriesTotalDeathsPer100k =
+          { VisualizationType = CountriesTotalDeathsPer100k
             ClassName = "countries-total-deaths-chart"
-            ChartTextsGroup = "countriesTotalDeathsPer1M"
+            ChartTextsGroup = "countriesTotalDeathsPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -459,14 +459,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = TotalDeathsPer1M
-                              ChartTextsGroup = "countriesTotalDeathsPer1M"
+                              MetricToDisplay = TotalDeathsPer100k
+                              ChartTextsGroup = "countriesTotalDeathsPer100k"
                               DataSource = "dsOWD_MZ"
                             }
           }
 
 //    let countriesDeathsPerCases =
-//          { VisualizationType = CountriesDeathsPer1M
+//          { VisualizationType = CountriesDeathsPer100k
 //            ClassName = "countries-deaths-per-cases"
 //            ChartTextsGroup = "countriesDeathsPerCases"
 //            Explicit = false
@@ -545,10 +545,10 @@ let render (state: State) (_: Msg -> unit) =
 
     let worldVisualizations =
         [ worldMap
-          countriesActiveCasesPer1M
-          countriesCasesPer1M
-          countriesNewDeathsPer1M
-          countriesTotalDeathsPer1M
+          countriesActiveCasesPer100k
+          countriesCasesPer100k
+          countriesNewDeathsPer100k
+          countriesTotalDeathsPer100k
           // countriesDeathsPerCases
         ]
 
@@ -558,10 +558,10 @@ let render (state: State) (_: Msg -> unit) =
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
-          countriesCasesPer1M
-          countriesActiveCasesPer1M
-          countriesNewDeathsPer1M
-          countriesTotalDeathsPer1M
+          countriesCasesPer100k
+          countriesActiveCasesPer100k
+          countriesNewDeathsPer100k
+          countriesTotalDeathsPer100k
           phaseDiagram
           excessDeaths
           heatmap
