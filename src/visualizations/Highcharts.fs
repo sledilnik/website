@@ -151,6 +151,7 @@ let addContainmentMeasuresFlags
         15,12, "#ebfaeb", "liftServices"
         19,12, "#ebfaeb", "liftReligiousCeremonies"
         24,12, "#FFe6e6", "services2"
+        28,12, "#ebfaeb", "liftFoodMarkets2"
     |]
     {|
         ``type`` = "flags"

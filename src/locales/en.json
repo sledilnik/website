@@ -775,7 +775,7 @@
         },
         "liftFoodMarkets": {
             "title": "Markets",
-            "description": "Relaxation: markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
+            "description": "Relaxation: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
         },
         "liftMunicipality": {
             "description": "Relaxation: movement outside the boundaries of your municipality",
@@ -952,6 +952,10 @@
         "services2": {
             "title": "Services",
             "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
+        },
+        "liftFoodMarkets2": {
+            "title": "Markets",
+            "description": "Relaxation: food markets, news-stands, hairdressing salons."
         }
     },
     "days": {

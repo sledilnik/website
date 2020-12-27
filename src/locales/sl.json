@@ -626,6 +626,10 @@
         "services2": {
             "title": "Storitve",
             "description": "Prepoved ponujanja blaga in storitev potrošnikom (izjeme: živilske trgovine, lekarne, banke, pošte, ....).<br>Do 25.12. 20:00 so odpravljene nekatere omejitve glede zbiranja in gibanja."
+        },
+        "liftFoodMarkets2": {
+            "title": "Tržnice",
+            "description": "Sproščanje: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
         }
     },
     "phase": {
