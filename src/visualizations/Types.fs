@@ -173,10 +173,10 @@ type VisualizationType =
     | EuropeMap
     | WorldMap
     | Infections
-    | CountriesCasesPer1M
-    | CountriesActiveCasesPer1M
-    | CountriesNewDeathsPer1M
-    | CountriesTotalDeathsPer1M
+    | CountriesCasesPer100k
+    | CountriesActiveCasesPer100k
+    | CountriesNewDeathsPer100k
+    | CountriesTotalDeathsPer100k
     | PhaseDiagram
     | Deceased
     | ExcessDeaths

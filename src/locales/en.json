@@ -189,6 +189,10 @@
         "13": {
             "title": "phase<br>13",
             "description": "new testing methodology"
+        },
+        "14": {
+            "title": "phase<br>14",
+            "description": "rapid antigen tests"
         }
     },
     "charts": {
@@ -527,14 +531,14 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",
             "titleMenu": "Countries - Active Cases",
             "yAxisTitle": "Active cases per 100,000 people",
             "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
@@ -546,7 +550,7 @@
             "yAxisTitle": "New daily deaths per 100,000 people",
             "legendTitle": "New daily deaths per 100,000 people"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
@@ -711,7 +715,6 @@
             "gatheringOrganized": "Organized Gathering",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
-
         }
     },
     "footer": {
@@ -778,7 +781,7 @@
         },
         "liftFoodMarkets": {
             "title": "Markets",
-            "description": "Relaxation: markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
+            "description": "Relaxation: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
         },
         "liftMunicipality": {
             "description": "Relaxation: movement outside the boundaries of your municipality",
@@ -953,8 +956,12 @@
             "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
         },
         "services2": {
-            "title": "Storitve",
+            "title": "Services",
             "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
+        },
+        "liftFoodMarkets2": {
+            "title": "Markets",
+            "description": "Relaxation: food markets, news-stands, hairdressing salons."
         }
     },
     "days": {
@@ -1373,15 +1380,15 @@
         }
     },
     "restrictionsPage": {
-      "searchPlaceholder": "Enter search query",  
-      "title": "Measures and restrictions",
-      "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-      "geoValidity": "Geographical validity",
-      "validity": "Validity",
-      "exceptions": "Exceptions",
-      "extrarule": "Additional rules / interpretations",
-      "notes": "Notes",
-      "link": "Link to decree (official text)"
+        "searchPlaceholder": "Enter search query",
+        "title": "Measures and restrictions",
+        "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source.",
+        "geoValidity": "Geographical validity",
+        "validity": "Validity",
+        "exceptions": "Exceptions",
+        "extrarule": "Additional rules / interpretations",
+        "notes": "Notes",
+        "link": "Link to decree (official text)"
     },
     "faq": {
         "searchPlaceholder": "Enter search query",
@@ -1553,5 +1560,5 @@
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
         }
-    }    
+    }
 }

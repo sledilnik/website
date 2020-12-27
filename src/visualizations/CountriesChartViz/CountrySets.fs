@@ -60,22 +60,22 @@ let setLatinAmerica = {
 
 let countriesDisplaySets (metric: MetricToDisplay) =
     match metric with
-    | NewCasesPer1M ->
+    | NewCasesPer100k ->
         [| setNeighboringCountries; setHighestNewCases
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
-    | ActiveCasesPer1M ->
+    | ActiveCasesPer100k ->
         [| setNeighboringCountries; setHighestActiveCases
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
-    | NewDeathsPer1M ->
+    | NewDeathsPer100k ->
         [| setNeighboringCountries; setHighestNewDeaths
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
         |]
-    | TotalDeathsPer1M ->
+    | TotalDeathsPer100k ->
         [| setNeighboringCountries; setHighestTotalDeaths
            setLargestEuCountries; setLargestWorldCountries
            setNordic; setExYU; setEastAsiaOceania; setLatinAmerica
