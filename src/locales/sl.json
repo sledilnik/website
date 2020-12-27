@@ -683,6 +683,10 @@
         "13": {
             "title": "faza<br>13",
             "description": "nov režim testiranja"
+        },
+        "14": {
+            "title": "faza<br>14",
+            "description": "hitri antigenski testi"
         }
     },
     "charts": {
