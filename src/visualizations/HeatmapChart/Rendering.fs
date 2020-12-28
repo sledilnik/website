@@ -29,7 +29,7 @@ type Msg =
 let init data: State * Cmd<Msg> =
     let state =
         { Data = data
-          Metrics = availableDisplayMetrics.[1]
+          Metrics = availableDisplayMetrics.[0]
           RangeSelectionButtonIndex = 2
           }
 
@@ -65,9 +65,8 @@ let renderChartOptions state dispatch =
 
         {| x = date |> jsTime12h
            y = ageGroup
-           value = Math.Log(float cases + 1.)
+           value = Math.Log(cases + 1.)
            cases = cases
-           week = weeksFromStartDate
            dateSpan =
               I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} |}
         |> pojo
@@ -115,48 +114,51 @@ let renderChartOptions state dispatch =
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    {| baseOptions with
-           chart = pojo {| ``type`` = "heatmap" |}
-           series = allSeries
-           xAxis = 
-                pojo 
-                    {| 
-                        ``type`` = "datetime"
-                        max = endDate |> jsTime12h
-                    |}
-           yAxis =
-               pojo
-                    {| 
-                        categories = allGroupsKeys |> List.map (fun x -> x.Label) |> List.toArray 
-                        opposite = true 
-                        tickWidth = 1
-                        tickLength = 60
-                        labels =
-                            {|
-                                align="center"
-                                y =5
-                            |} |> pojo
-                    |}
-                    //   labels = {| reserveSpace = false |} |}
-           colorAxis =
-               pojo
-                   {| ``type`` = "linear"
-                      min = 0.0
-                      stops =
-                          [| (0.000, "#009e94")
-                             (0.166, "#6eb49d")
-                             (0.250, "#b2c9a7")
-                             (0.433, "#f0deb0")
-                             (0.700, "#e3b656")
-                             (0.900, "#cc8f00")
-                             (0.999, "#b06a00") |] |}
-           tooltip =
-               pojo
-                   {| formatter = fun () -> tooltipFormatter jsThis
-                      shared = true
-                      useHTML = true |}
-           credits = credictsOptions 
-           boost = {| useGPUTranslations = true |} |> pojo
+    {|  
+    // baseOptions with
+        chart = pojo {| ``type`` = "heatmap" |}
+        series = allSeries
+        xAxis = 
+            pojo 
+                {| 
+                    ``type`` = "datetime"
+                    max = endDate |> jsTime12h
+                |}
+        yAxis =
+           pojo
+                {| 
+                    categories = allGroupsKeys |> List.map (fun x -> x.Label) |> List.toArray 
+                    opposite = true 
+                    tickWidth = 1
+                    tickLength = 60
+                    labels =
+                        {|
+                            align="center"
+                            y =5
+                        |} |> pojo
+                |}
+                //   labels = {| reserveSpace = false |} |}
+        colorAxis =
+           pojo
+               {| ``type`` = "linear"
+                  min = 0.0
+                  stops =
+                      [| (0.000, "#009e94")
+                         (0.166, "#6eb49d")
+                         (0.250, "#b2c9a7")
+                         (0.433, "#f0deb0")
+                         (0.700, "#e3b656")
+                         (0.900, "#cc8f00")
+                         (0.999, "#b06a00") |] |}
+        tooltip =
+           pojo
+               {| formatter = fun () -> tooltipFormatter jsThis
+                  shared = true
+                  useHTML = true |}
+        credits = credictsOptions 
+        // boost = {| useGPUTranslations = true |} |> pojo
+        navigator = pojo {| enabled = false |}
+        scrollbar = pojo {| enabled = false |}
     |}
 
 
@@ -170,7 +172,7 @@ let renderMetricsSelectors activeMetrics dispatch =
     let renderSelector (metrics: DisplayMetrics) =
         let active = metrics = activeMetrics
 
-        Html.div [ prop.text (I18N.chartText "ageGroupsTimeline" metrics.Id)
+        Html.div [ prop.text (I18N.chartText "heatmapChart" metrics.Id)
                    Utils.classes [ (true, "btn btn-sm metric-selector")
                                    (active, "metric-selector--selected selected") ]
                    if not active then prop.onClick (fun _ -> dispatch metrics)
@@ -184,7 +186,7 @@ let renderMetricsSelectors activeMetrics dispatch =
 
 let render state dispatch =
     Html.div [ renderChartContainer state dispatch
-               // renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
+               renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
                 ]
 
 let renderChart (props: {| data: StatsData |}) =

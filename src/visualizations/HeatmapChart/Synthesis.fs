@@ -3,14 +3,10 @@
 open Types
 open HeatmapChart.Analysis
 open System.Collections.Generic
-open System.Text
 open Fable.Core
 open JsInterop
 
 open Utils.AgePopulationStats
-
-//TODO: might wanna think about displaying the infections relative to the total population
-// and having a switch for male/female/all
 
 
 type CasesInAgeGroupForDay = float
@@ -25,7 +21,7 @@ type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
 
 type DisplayMetricsType =
-    | AbsoluteCases
+    | DifferenceInCases
     | RelativeCases
 
 type DisplayMetrics =
@@ -33,10 +29,10 @@ type DisplayMetrics =
       MetricsType: DisplayMetricsType }
 
 let availableDisplayMetrics =
-    [| { Id = "absolute"
-         MetricsType = AbsoluteCases }
-       { Id = "relative"
-         MetricsType = RelativeCases } |]
+    [| 
+       { Id = "relative"; MetricsType = RelativeCases } 
+       { Id = "difference"; MetricsType = DifferenceInCases }
+    |]
 
 let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list =
     timeline.Data.[0]
@@ -48,26 +44,64 @@ let extractTimelineForAgeGroup ageGroupKey
                                (casesTimeline: CasesByAgeGroupsTimeline)
                                : CasesInAgeGroupTimeline =
 
-    let newCasesTimeline =
-        casesTimeline
-        |> mapDatedArrayItems
-            (fun dayGroupsData ->
-                let dataForGroup =
-                    dayGroupsData
-                    |> List.find (fun group -> group.GroupKey = ageGroupKey)
-
-                dataForGroup.All |> Utils.optionToInt |> float)
-
+    let populationStats = populationStatsForAgeGroup ageGroupKey
+    
     match metricsType with
-    | AbsoluteCases -> newCasesTimeline
     | RelativeCases ->
-        let populationStats = populationStatsForAgeGroup ageGroupKey
 
         let totalPopulation =
             float (populationStats.Female + populationStats.Male)
 
+        let newCasesTimeline =
+            casesTimeline
+            |> mapDatedArrayItems
+                (fun dayGroupsData ->
+                    let dataForGroup =
+                        dayGroupsData
+                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
+
+                    dataForGroup.All |> Utils.optionToInt |> float)
+
         newCasesTimeline
         |> mapDatedArrayItems (fun x -> float x * 100000. / totalPopulation)
+
+    | DifferenceInCases ->
+
+        let femalePopulation = populationStats.Female |> float
+        let malePopulation = populationStats.Male |> float
+
+        let newCasesTimelineMale =
+            casesTimeline
+            |> mapDatedArrayItems
+                (fun dayGroupsData ->
+                    let dataForGroup =
+                        dayGroupsData
+                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
+
+                    dataForGroup.Male |> Utils.optionToInt |> float) 
+            |> mapDatedArrayItems ((*) (100000./malePopulation))
+        
+        let newCasesTimelineFemale =
+            casesTimeline
+            |> mapDatedArrayItems
+                (fun dayGroupsData ->
+                    let dataForGroup =
+                        dayGroupsData
+                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
+
+                    dataForGroup.Female |> Utils.optionToInt |> float) 
+            |> mapDatedArrayItems ((*) (100000./femalePopulation))
+        
+        let difference = 
+            newCasesTimelineMale.Data
+            |> Array.map2 ( - ) newCasesTimelineFemale.Data
+
+        let minimumOfDifference = difference |> Array.min |> abs
+
+        let shiftedDifference = difference |> Array.map ((+) (minimumOfDifference)) //to avoid negative numbers when taking logs
+
+        {StartDate = newCasesTimelineFemale.StartDate; Data = shiftedDifference}
+
 
 
 
@@ -99,10 +133,16 @@ let tooltipFormatter jsThis =
     let point = jsThis?point
     let date = point?dateSpan
     let name = point?name
+    let cases = point?cases
+    let color = point?z
 
     let label = sprintf "<b> %s </b><br/>" (date.ToString())
 
     label 
+        + sprintf "%s<br/>" point?x 
+        + sprintf "%s<br/>" cases 
+        + sprintf "%s<br/>" point?value 
+        + sprintf "%s" point?y
         // + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.map.confirmedCases") (I18N.NumberFormat.formatNumber(value100k:float)) (I18N.t "charts.map.per100k")
 
 
