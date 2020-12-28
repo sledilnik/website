@@ -452,7 +452,7 @@
             "hospitalAdmitted": "Primljeni u bolnici",
             "activeCases": "Aktivni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "testsPerformed": "Testiranja: PCR",
+            "testsPerformed": "Testiranja: Lančana reakcija polimeraze",
             "showToDate": "Do danas",
             "showToday": "Dnevni",
             "showActive": "Aktivni",
@@ -519,13 +519,13 @@
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
             "title": "Testiranje",
-            "regular": "Regularno: PCR",
+            "regular": "Regularno: Lančana reakcija polimeraze",
             "negativeTests": "Negativni testovi",
-            "ns-apr20": "Istraživanje: PCR",
-            "totalPCR": "Sve: PCR",
+            "ns-apr20": "Istraživanje: Lančana reakcija polimeraze",
+            "totalPCR": "Sve: Lančana reakcija polimeraze",
             "titleMenu": "Testiranje",
             "byLabPercent": "Po laboratorijima: % pozitivno",
-            "byLab": "Po laboratorijima: PCR testovi",
+            "byLab": "Po laboratorijima: Testovi lančane reakcije polimeraze",
             "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima.",
             "hagt": "Regularno: RAT"
         },
@@ -618,8 +618,8 @@
             "titleMenu": "Države – aktivni slučajevi"
         },
         "dailyComparison": {
-            "positivePct": "Udio pozitivnih testiranja: PCR (%)",
-            "tests": "Provedena testiranja: PCR",
+            "positivePct": "Udio pozitivnih testiranja: Lančana reakcija polimeraze (%)",
+            "tests": "Provedena testiranja: Lančana reakcija polimeraze",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba po danu u tjednu",
@@ -1001,6 +1001,14 @@
         "liftReligiousCeremonies": {
             "title": "Vjerski obredi",
             "description": "Opuštanje: vjerski obredi su dopušteni s nekim ograničenjima. Knjižnice, usluge održavanja i instalacija.<br>U četiri regije također muzeji, knjižare, specijalizirane trgovine."
+        },
+        "services2": {
+            "description": "Zabrana za sve trgovine i usluge (iznimke: namirnice, ljekarne, banke, poštanski uredi …).<br>Opuštanje za neka ograničenja okupljanja i kretanja do 25.12. 20:00.",
+            "title": "Usluge"
+        },
+        "liftFoodMarkets2": {
+            "description": "Opuštanje: tržnice, kiosci, frizerski saloni.",
+            "title": "Tržnice"
         }
     },
     "pageNotFound": {
@@ -1100,6 +1108,10 @@
         "13": {
             "description": "nova metoda testiranja",
             "title": "faza<br>13"
+        },
+        "14": {
+            "description": "brzo testiranje antigena",
+            "title": "faza<br>14"
         }
     },
     "embedMaker": {
@@ -1194,10 +1206,11 @@
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
-        "tests": "Testiranja danas: PCR",
+        "tests": "Testiranja danas: Lančana reakcija polimeraze",
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
-        "newCases7d": "Novi slučajevi"
+        "newCases7d": "Novi slučajevi",
+        "testsHAT": "Testiranja danas: Brzo testiranje antigena"
     },
     "region": {
         "za": "Zasavlje",
