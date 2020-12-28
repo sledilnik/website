@@ -322,7 +322,7 @@ Faze so prikazane zato, ker se je s spremembo metodologije testiranja ali sleden
 
 * **Faza 6 (21. april–15. maj)**: Nova [sprememba metodologije testiranja](https://www.nijz.si/sites/www.nijz.si/files/uploaded/testiranje-pacientov-na-covid-19_21_4_2020.pdf) – ponovno se testirajo **vse** osebe, pri katerih obstaja sum za mogočo okužbo s SARS-CoV-2 virusom. Začne se [nacionalna raziskava](https://www.gov.si/novice/slovenija-bo-kot-prva-drzava-izvedla-raziskavo-koliko-ljudi-je-bolezen-covid19-nevede-prebolelo/) 3000 naključnih oseb (dodatna testiranja, testiranje krvi na prisotnost protiteles).
 
-* **Faza 7 (15. maj-10. september)**: Vlada [prekliče epidemijo](https:https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
+* **Faza 7 (15. maj-10. september)**: Vlada [prekliče epidemijo](https://www.gov.si/novice/2020-05-15-vlada-preklicala-epidemijo-nalezljive-bolezni-sars-cov-2-covid-19/) – nadaljne sproščanje ukrepov (karantena samo za državljane tretjih držav), večina ukrepov je ostala do konca maja.
 
 * **Faza 8 (10. september–9. oktober)**: [Sprememba metodologije testiranja otrok](https://www.24ur.com/novice/korona/otrok-do-konca-prve-triade-z-blagimi-znaki-okuzbe-dihal-ne-bodo-vec-testirali.html) – mlajši otroci (do konca prve triade) se ne bodo več testirali samo ob simptomih prehlada, ampak šele ko bi imeli tako znake okužbe dihal kot tudi vročino in drisko.
 

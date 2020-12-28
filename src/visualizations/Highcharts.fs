@@ -151,6 +151,7 @@ let addContainmentMeasuresFlags
         15,12, "#ebfaeb", "liftServices"
         19,12, "#ebfaeb", "liftReligiousCeremonies"
         24,12, "#FFe6e6", "services2"
+        28,12, "#ebfaeb", "liftFoodMarkets2"
     |]
     {|
         ``type`` = "flags"
@@ -272,6 +273,7 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -335,9 +337,14 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.12.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,11,6);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,12,21);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.13.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,12,21);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.14.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
