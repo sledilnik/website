@@ -22,7 +22,8 @@
         "world": "Welt",
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Gehe zum Diagramm"
+        "goToGraph": "Gehe zum Diagramm",
+        "posts": "Objave"
     },
     "country": {
         "ABW": "Aruba",
@@ -1345,5 +1346,9 @@
     "faq": {
         "pageTitle": "FAQ",
         "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min"
     }
 }
