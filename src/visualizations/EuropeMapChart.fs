@@ -46,7 +46,9 @@ type ChartType =
     | Restrictions
     | WeeklyIncrease
 
-    override this.ToString() =
+    static member All = [ TwoWeekIncidence; WeeklyIncrease; Restrictions ]
+    static member Default = TwoWeekIncidence
+    member this.GetName =
         match this with
         | TwoWeekIncidence -> chartText "twoWeekIncidence"
         | Restrictions -> chartText "restrictions"
@@ -803,17 +805,12 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
             Utils.classes
                 [(true, "chart-display-property-selector__item")
                  (active, "selected")]
-            prop.text (chartSelector.ToString())
+            prop.text chartSelector.GetName
         ]
 
     Html.div
         [ prop.className "chart-display-property-selector"
-          prop.children
-              [
-                renderChartSelector TwoWeekIncidence
-                renderChartSelector WeeklyIncrease
-                renderChartSelector Restrictions
-              ]
+          prop.children (ChartType.All |> Seq.map renderChartSelector)
         ]
 
 

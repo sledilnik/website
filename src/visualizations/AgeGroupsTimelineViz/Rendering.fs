@@ -29,7 +29,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        Metrics = availableDisplayMetrics.[0]
+        Metrics = DisplayMetrics.Default
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -118,7 +118,7 @@ let renderMetricsSelectors activeMetrics dispatch =
 
     Html.div [
         prop.className "metrics-selectors"
-        availableDisplayMetrics
+        DisplayMetrics.All
         |> Array.map renderSelector
         |> prop.children
     ]

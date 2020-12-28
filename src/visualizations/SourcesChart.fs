@@ -47,8 +47,20 @@ type DisplayType =
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ ByLocation; ByLocationRelative; BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Quarantine; QuarantineRelative ]
-    static member getName = function
+    static member All =
+        [ ByLocation
+          ByLocationRelative
+          BySource
+          BySourceRelative
+          BySourceCountry
+          BySourceCountryRelative
+          Quarantine
+          QuarantineRelative ]
+
+    static member Default = ByLocation
+
+    member this.GetName =
+        match this with
         | Quarantine                -> chartText "quarantine"
         | QuarantineRelative        -> chartText "quarantineRelative"
         | ByLocation                -> chartText "byLocation"
@@ -72,7 +84,7 @@ type Msg =
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = ByLocation
+        { displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -97,14 +109,14 @@ let renderDisplaySelector state dt dispatch =
         Utils.classes
             [(true, "btn btn-sm metric-selector")
              (state.displayType = dt, "metric-selector--selected") ]
-        prop.text (dt |> DisplayType.getName)
+        prop.text dt.GetName
     ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            DisplayType.All
             |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
 
 type Series =
@@ -136,7 +148,7 @@ module Series =
     let quarantineRelative = [  ConfirmedCases; ConfirmedFromQuarantine ]
     let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
     let byLocation = [Family; Work; School; Hospital; OtherHealthcare; RetirementHome; Prison; Transport; Shop; Restaurant; Sport; GatheringPrivate; GatheringOrganized; LocationOther; LocationUnknown ]
-    
+
     let getSeriesInfo =
         function
         | SentToQuarantine ->  "#cccccc", "sentToQuarantine", 0

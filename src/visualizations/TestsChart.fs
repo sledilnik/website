@@ -18,6 +18,17 @@ type DisplayType =
     | ByLab
     | ByLabPercent
     | Lab of string
+    static member All state =
+        seq {
+            for typ in [ "hagt"; "regular"; "ns-apr20" ] do
+                yield Data typ
+            yield TotalPCR
+            yield ByLab
+            yield ByLabPercent
+            for lab in state.AllLabs do
+                yield Lab lab
+        }
+    static member Default = Data "regular"
     static member GetName =
         function
         | TotalPCR -> I18N.t "charts.tests.totalPCR"
@@ -26,23 +37,13 @@ type DisplayType =
         | ByLabPercent -> I18N.t "charts.tests.byLabPercent"
         | Lab facility -> Utils.Dictionaries.GetFacilityName(facility)
 
-type State =
+and State =
     { LabData: LabTestsStats array
       Error: string option
       AllLabs: string list
       DisplayType: DisplayType
       RangeSelectionButtonIndex: int }
 
-let GetAllDisplayTypes state =
-    seq {
-        for typ in [ "hagt"; "regular"; "ns-apr20" ] do
-            yield Data typ
-        yield TotalPCR
-        yield ByLab
-        yield ByLabPercent
-        for lab in state.AllLabs do
-            yield Lab lab
-    }
 
 type Msg =
     | ConsumeLabTestsData of Result<LabTestsStats array, string>
@@ -58,7 +59,7 @@ let init: State * Cmd<Msg> =
         { LabData = [||]
           Error = None
           AllLabs = []
-          DisplayType = Data "regular"
+          DisplayType = DisplayType.Default
           RangeSelectionButtonIndex = 0 }
 
     state, cmd
@@ -350,7 +351,7 @@ let renderSelector state (dt: DisplayType) dispatch =
 let renderDisplaySelectors state dispatch =
     Html.div [ prop.className "metrics-selectors"
                prop.children
-                   (GetAllDisplayTypes state
+                   (DisplayType.All state
                     |> Seq.map (fun dt -> renderSelector state dt dispatch)) ]
 
 let render (state: State) dispatch =
