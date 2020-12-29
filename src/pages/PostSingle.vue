@@ -26,25 +26,28 @@
 import _ from "lodash";
 import Loader from "components/Loader";
 import ReadingTime from "components/ReadingTime";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     Loader,
-    ReadingTime
+    ReadingTime,
   },
-  data(){
+  data() {
     return {
-      postId: undefined
-    }
+      postId: undefined,
+    };
   },
   metaInfo() {
-    title: post.title
+    return {
+      title: this.post ? this.post.title : 'Sledilnik objava'
+      // title: this.post.title, // this throws NPE, rpobably because it is not initalized at load
+    };
   },
   computed: {
-    ...mapGetters('posts', ['postById']),
-    post(){
-      return this.postById(this.postId)
+    ...mapGetters("posts", ["postById"]),
+    post() {
+      return this.postById(this.postId);
     },
     date() {
       return new Date(this.post.created);
@@ -54,16 +57,16 @@ export default {
     const postId = _.get(this.$route, "params.postId", false);
     if (!postId) {
       // 404
-      return
+      return;
     }
-    this.postId = postId
-    this.$store.dispatch('posts/fetchPost', postId)
+    this.postId = postId;
+    this.$store.dispatch("posts/fetchPost", postId);
   },
   methods: {
     goBack() {
       return this.$router.go(-1);
-    }
-  }
+    },
+  },
 };
 </script>
 
