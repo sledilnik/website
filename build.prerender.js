@@ -28,7 +28,7 @@ module.exports = (api, options) => {
                 staticDir: path.join(__dirname, 'dist'),
                 routes: prerenderRoutes,
 
-                maxConcurrentRoutes: 1,
+                maxConcurrentRoutes: 8,
 
                 postProcess(renderedRoute) {
                     // console.log('renderedRoute', JSON.stringify(renderedRoute))
