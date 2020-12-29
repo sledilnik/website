@@ -12,18 +12,18 @@ if (process.env.NODE_ENV != 'production') {
   process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
 }
 
-indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.html'
-
 const cartesian =
   (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
 
 function generatePrerenderRoutes() {
   const langs = ['sl', 'en']
   const paths = ['stats', 'world', 'restrictions', 'about', 'faq']
-  return cartesian(langs, paths).map(pair => pair.join('/'))
+  return cartesian(langs, paths).map(pair => `/${pair.join('/')}`)
 }
 
-console.log("Using template", indexTemplate)
+console.log("preprender", generatePrerenderRoutes())
+
+// console.log("Using template", indexTemplate)
 
 module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
@@ -36,12 +36,12 @@ module.exports = {
   pages: {
     index: {
       entry: ['src/index.js'],
-      template: indexTemplate,
+      template: 'index.html',
       filename: 'index.html',
     },
     embed: {
       entry: ['src/embed.js'],
-      template: indexTemplate,
+      template: 'index.html',
       filename: 'embed.html',
     },
   },
@@ -65,8 +65,8 @@ module.exports = {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        // routes: generatePrerenderRoutes(),
-        routes: ['/sl/stats'],
+        routes: generatePrerenderRoutes(),
+        // routes: ['/sl/stats'],
   
         renderer: new Renderer({
           inject: {
