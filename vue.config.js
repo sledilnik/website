@@ -1,4 +1,6 @@
 const path = require('path');
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 const paths = {
   src: path.resolve(path.join(__dirname, 'src')),
@@ -11,6 +13,15 @@ if (process.env.NODE_ENV != 'production') {
 }
 
 indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.html'
+
+const cartesian =
+  (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
+
+function generatePrerenderRoutes() {
+  const langs = ['sl', 'en']
+  const paths = ['stats', 'world', 'restrictions', 'about', 'faq']
+  return cartesian(langs, paths).map(pair => pair.join('/'))
+}
 
 console.log("Using template", indexTemplate)
 
@@ -50,10 +61,27 @@ module.exports = {
       openAnalyzer: process.env.DISPLAY ? true : false,
     },
   },
+  configureWebpack: {
+    plugins: [
+      new PrerenderSPAPlugin({
+        staticDir: path.join(__dirname, 'dist'),
+        // routes: generatePrerenderRoutes(),
+        routes: ['/sl/stats'],
+  
+        renderer: new Renderer({
+          inject: {
+            foo: 'bar'
+          },
+          headless: true,
+          // renderAfterDocumentEvent: 'render-event'
+        })
+      })
+    ]
+  },
   chainWebpack: config => {
 
-    config.output.filename('[name].[hash:8].js')
-    config.output.chunkFilename('[name].[hash:8].js')
+    // config.output.filename('[name].[hash:8].js')
+    // config.output.chunkFilename('[name].[hash:8].js')
 
     if (config.plugins.has('prefetch-index')) {
       config.plugin('prefetch-index').tap(options => {

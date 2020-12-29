@@ -1,7 +1,7 @@
 ########################################
 # Intermediate builder image (used only for build, discarded in final stage)
 ########################################
-FROM ghcr.io/sledilnik/website-base AS builder
+FROM ghcr.io/sledilnik/website-base:v2 AS builder
 
 ARG BUILD_MODE=production
 
