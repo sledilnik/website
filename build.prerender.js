@@ -7,8 +7,8 @@ const cartesian =
     (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
 
 async function generatePrerenderRoutes() {
-    const langs = ['en', 'sl', 'hr', 'de', 'it']
-    const paths = ['stats', 'world', 'restrictions', 'about', 'faq', 'posts', 'data', 'ostanizdrav']
+    const langs = ['en', 'sl']
+    const paths = ['stats', 'world', 'restrictions', 'about', 'faq', 'posts', 'data', 'ostanizdrav', 'embed']
     const basicRoutes = cartesian(langs, paths).map(pair => `/${pair.join('/')}`)
 
     const { data } = await axios.get('https://backend.sledilnik.org/api/v1/posts')
