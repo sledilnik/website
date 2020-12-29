@@ -7,13 +7,8 @@ const state = {
 };
 
 const getters = {
-  postsByDateDescending(state) {
-    return state.posts.sort((el1, el2) => {
-      return new Date(el2.created) - new Date(el1.created);
-    });
-  },
-  lastestTwoPosts(state, getters) {
-    return _.take(getters.postsByDateDescending, 2);
+  lastestTwoPosts(state) {
+    return _.take(state.posts, 2);
   },
   postById: (state) => (id) => {
     if (!id || !state.posts) {
