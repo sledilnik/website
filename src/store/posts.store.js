@@ -3,6 +3,7 @@ import _ from "lodash";
 
 const contentApi = new ContentApiService();
 const state = {
+  // API will return posts, ordered by created date and pinned status (first pinned, everything ordered by date DESC)
   posts: [],
 };
 
