@@ -23,8 +23,6 @@ function generatePrerenderRoutes() {
 
 console.log("preprender", generatePrerenderRoutes())
 
-// console.log("Using template", indexTemplate)
-
 module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
   publicPath: process.env.C19_PUBLIC_PATH || '/',
