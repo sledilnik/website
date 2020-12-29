@@ -14,8 +14,7 @@ async function generatePrerenderRoutes() {
     const { data } = await axios.get('https://backend.sledilnik.org/api/v1/posts')
     const postRoutes = cartesian(langs, data.objects.map(post => `posts/${post.id}`)).map(pair => `/${pair.join('/')}`)
 
-    // return basicRoutes.concat(postRoutes)
-    return basicRoutes
+    return basicRoutes.concat(postRoutes)
 }
 
 module.exports = (api, options) => {
