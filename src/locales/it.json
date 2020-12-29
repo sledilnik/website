@@ -1202,7 +1202,7 @@
             },
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",
-            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
         },
         "metricsCorrelation": {
             "deceased": "Deceduti",
