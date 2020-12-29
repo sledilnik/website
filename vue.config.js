@@ -17,16 +17,16 @@ const cartesian =
 
 function generatePrerenderRoutes() {
   const langs = ['sl', 'en']
-  const paths = ['stats', 'world', 'restrictions', 'about', 'faq']
-  return cartesian(langs, paths).map(pair => `/${pair.join('/')}`)
+  const paths = ['stats', 'world', 'restrictions', 'about', 'faq', 'posts']
+  return cartesian(langs, paths).map(pair => `/${pair.join('/')}`).map(s => s.replace(/\/$/, ''))
 }
 
-console.log("preprender", generatePrerenderRoutes())
+console.log(`Prerendering URLs ${generatePrerenderRoutes().join(', ')}`)
 
 module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
-  publicPath: process.env.C19_PUBLIC_PATH || '/',
-  outputDir: process.env.C19_OUTPUT_DIR || 'dist',
+  publicPath: process.env.SLEDILNIK_PUBLIC_PATH || '/',
+  outputDir: 'dist',
   filenameHashing: true,
   devServer: {
     disableHostCheck: true,
@@ -55,8 +55,8 @@ module.exports = {
   },
   pluginOptions: {
     webpackBundleAnalyzer: {
-      analyzerMode: process.env.DISPLAY ? 'server' : 'disabled',
-      openAnalyzer: process.env.DISPLAY ? true : false,
+      analyzerMode: process.env.SLEDILNIK_WBA || 'disabled',
+      openAnalyzer: process.env.SLEDILNIK_WBA === 'server',
     },
   },
   configureWebpack: {
