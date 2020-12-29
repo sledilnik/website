@@ -53,7 +53,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 export default {
   name: 'Navbar',
   components: {
-    LanguageSwitcher,
+    LanguageSwitcher
   },
   data() {
     return {

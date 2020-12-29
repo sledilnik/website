@@ -40,8 +40,7 @@ export default {
   },
   metaInfo() {
     return {
-      title: this.post ? this.post.title : 'Sledilnik objava'
-      // title: this.post.title, // this throws NPE, rpobably because it is not initalized at load
+      title: this.post ? this.post.title : undefined
     };
   },
   computed: {
