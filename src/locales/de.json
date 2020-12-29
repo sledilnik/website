@@ -778,7 +778,7 @@
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
                 "title": "Jahresvergleich"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
         }
     },
     "tableDict": {

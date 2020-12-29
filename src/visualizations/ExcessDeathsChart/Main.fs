@@ -2,7 +2,6 @@ module ExcessDeathsChart.Main
 
 open Feliz
 open Browser
-open Fable.Core.JsInterop
 open Fable.DateFunctions
 
 open Types

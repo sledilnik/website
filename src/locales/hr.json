@@ -795,7 +795,7 @@
                 "title": "Godišnja usporedba",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
         },
         "metricsCorrelation": {
             "titleMenu": "Korelacija",

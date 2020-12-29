@@ -589,7 +589,7 @@
         "excessDeaths": {
             "title": "Excess deaths",
             "titleMenu": "Excess deaths",
-            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDate": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
             "absolute": {
                 "title": "Yearly comparison",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
