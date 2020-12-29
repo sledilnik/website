@@ -7,7 +7,7 @@ ARG BUILD_MODE=production
 
 ADD . /app
 RUN yarn
-RUN CADDY_BUILD=1 yarn build --mode ${BUILD_MODE}
+RUN yarn build --mode ${BUILD_MODE}
 
 ########################################
 # Actual webserver image
