@@ -538,7 +538,7 @@
             "description": "Distensione: spostamento al di fuori dei confini del proprio comune"
         },
         "liftFoodMarkets": {
-            "description": "Distensione: mercati, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
+            "description": "Distensione: mercati alimentari, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
             "title": "Mercati"
         },
         "firstCase": {
@@ -624,6 +624,9 @@
         "services2": {
             "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ...).<br>Distensione di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
             "title": "Servizi"
+        },
+        "liftFoodMarkets2": {
+            "title": "Mercati"
         }
     },
     "tableDict": {
@@ -1302,6 +1305,9 @@
         "12": {
             "description": "nuova metodologia dei test",
             "title": "fase<br>12"
+        },
+        "14": {
+            "title": "fase<br>14"
         }
     },
     "weekday": {
@@ -1511,7 +1517,7 @@
             "question": "Cosa ci dice il grafico \"Ricoveri\"?"
         },
         "chart-phases": {
-            "question": "Cosa significano le diverse fasi (fasi 1-7) nel grafico?"
+            "question": "Cosa significano le diverse fasi (fasi 1-14) nel grafico?"
         },
         "cases-chart": {
             "answer": "Tutti i casi confermati sono visualizzati nel grafico [Casi confermati](/it/stats#cases-chart). Per poter monitorare l'epidemia, è importante sapere quanti sono ancora infetti. Per questo motivo, usiamo la terminologia seguente:\n\n**Casi chiusi** sono la somma di tutti i casi confermati che non sono più infetti dal virus, cioè il ristabilito e il defunto.\n\n**I casi attivi** sono tutte infezioni da virus confermate che non sono ancora state recuperate (sono ancora infettate dal virus). Vedi anche\n [Quali indicatori include il grafico \"COVID-19 Situazione in Slovenia\"?] (#chart-metrics-included)",
