@@ -9,7 +9,7 @@ const state = {
 const getters = {
   postsByDateDescending(state) {
     return state.posts.sort((el1, el2) => {
-      return new Date(el1.created) > new Date(el2.created);
+      return new Date(el2.created) - new Date(el1.created);
     });
   },
   lastestTwoPosts(state, getters) {
