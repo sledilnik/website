@@ -15,5 +15,5 @@ RUN yarn build --mode ${BUILD_MODE}
 FROM caddy:2.2.1-alpine
 
 WORKDIR /app
-COPY --from=builder /app/dist /app
+COPY /dist /app
 COPY Caddyfile /etc/caddy/Caddyfile
