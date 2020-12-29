@@ -39,7 +39,7 @@ export default {
     }
   },
   metaInfo() {
-    //TODO
+    title: post.title
   },
   computed: {
     ...mapGetters('posts', ['postById']),

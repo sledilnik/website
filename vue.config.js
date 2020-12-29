@@ -1,6 +1,4 @@
 const path = require('path');
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
-const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 const paths = {
   src: path.resolve(path.join(__dirname, 'src')),
@@ -11,17 +9,6 @@ if (process.env.NODE_ENV != 'production') {
   process.env.VUE_APP_TITLE = process.env.VUE_APP_TITLE + ' (preview)'
   process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
 }
-
-const cartesian =
-  (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
-
-function generatePrerenderRoutes() {
-  const langs = ['sl', 'en']
-  const paths = ['stats', 'world', 'restrictions', 'about', 'faq', 'posts']
-  return cartesian(langs, paths).map(pair => `/${pair.join('/')}`).map(s => s.replace(/\/$/, ''))
-}
-
-console.log(`Prerendering URLs ${generatePrerenderRoutes().join(', ')}`)
 
 module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
@@ -59,27 +46,10 @@ module.exports = {
       openAnalyzer: process.env.SLEDILNIK_WBA === 'server',
     },
   },
-  configureWebpack: {
-    plugins: [
-      new PrerenderSPAPlugin({
-        staticDir: path.join(__dirname, 'dist'),
-        routes: generatePrerenderRoutes(),
-        // routes: ['/sl/stats'],
-  
-        renderer: new Renderer({
-          inject: {
-            foo: 'bar'
-          },
-          headless: true,
-          // renderAfterDocumentEvent: 'render-event'
-        })
-      })
-    ]
-  },
   chainWebpack: config => {
 
-    // config.output.filename('[name].[hash:8].js')
-    // config.output.chunkFilename('[name].[hash:8].js')
+    config.output.filename('[name].[hash:8].js')
+    config.output.chunkFilename('[name].[hash:8].js')
 
     if (config.plugins.has('prefetch-index')) {
       config.plugin('prefetch-index').tap(options => {
