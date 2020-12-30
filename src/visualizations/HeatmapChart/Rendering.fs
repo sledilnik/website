@@ -13,6 +13,8 @@ open Feliz.ElmishComponents
 open Fable.Core.JsInterop
 open Browser.Types
 
+open Utils.AgePopulationStats
+
 type DayValueIntMaybe = JsTimestamp * int option
 type DayValueFloat = JsTimestamp * float
 
@@ -58,49 +60,156 @@ let renderChartOptions state dispatch =
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
 
-    let mapPoint (startDate: DateTime) (weeksFromStartDate: int) (ageGroup: int) (cases: CasesInAgeGroupForDay) =
+    // let mapPoint 
+    //     (startDate: DateTime) 
+    //     (weeksFromStartDate: int) 
+    //     (ageGroup: int) 
+    //     (ageGroupKey: AgeGroupKey)
+    //     (cases) =
+
+
+
+    //     let value = 
+    //         match state.Metrics.MetricsType with
+    //         | DifferenceInCases -> cases
+    //         | RelativeCases -> 
+    //             let populationStats = populationStatsForAgeGroup ageGroupKey
+    //             let totalPopulation = populationStats.Female + populationStats.Male |> float
+    //             let relCases = cases * 100000./totalPopulation
+
+    //             Math.Log(relCases + Math.E)
+
+
+    // let mapAllPoints 
+    //     (ageGroup: int) 
+    //     (ageGroupKey: AgeGroupKey) 
+    //     (groupTimeline)=
+
+    //     let startDate = groupTimeline.StartDate
+    //     let timelineArray = groupTimeline.Data
+
+    //     timelineArray
+    //     |> Array.mapi (fun i cases -> mapPoint startDate i ageGroup ageGroupKey cases)
+
+    // generate all series
+
+    let processedTimelineData =
+        allGroupsKeys
+        |> List.map    
+            ( fun ageGroupKey ->
+                timeline 
+                |> newExtractTimelineForAgeGroup ageGroupKey)
+    
+
+    let mapPoint startDate weeksFromStartDate ageGroupId ageGroupKey value=
 
         let date = startDate |> Days.add  (7 *  weeksFromStartDate)
         let dateTo = date |> Days.add 6
 
-        {| x = date |> jsTime12h
-           y = ageGroup
-           value = Math.Log(cases + 1.)
-           cases = cases
-           dateSpan =
-              I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} |}
-        |> pojo
+        let point = {|
+            x = date |> jsTime12h
+            // x = weeksFromStartDate
+            y = ageGroupId
+            value = value
+            weeks = weeksFromStartDate
+            ageGroupKey = ageGroupKey
+            dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} 
+        |} 
 
-    let mapAllPoints (ageGroup: int) (groupTimeline: CasesInAgeGroupTimeline) =
-        let startDate = groupTimeline.StartDate
-        let timelineArray = groupTimeline.Data
+        // printfn "%A" point
 
-        timelineArray
-        |> Array.mapi (fun i cases -> mapPoint startDate i ageGroup cases)
+        point |> pojo
+        // |> pojo
 
-    // generate all series
-    let allSeries =
-        allGroupsKeys
-        |> List.mapi
-            (fun index ageGroupKey ->
-                let points =
-                    timeline
-                    |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType
-                    |> accumulateWeeklyCases // chunks the data into weeks and sums to get weekly case number
-                    |> mapAllPoints index
 
-                {| colsize = 3600 * 1000 * 24 * 7 // set column size to 1 week  (default is 1px = 1ms)
-                   visible = true
-                   name = ageGroupKey.Label
-                   data = points |}
-                |> pojo)
+    let generateSeries 
+        (ageGroupId:int) 
+        (ageGroupData:ProcessedAgeGroupData)
+        : obj = 
+
+        let ageGroupKey = ageGroupData.AgeGroupKey
+        let populationStats = populationStatsForAgeGroup ageGroupKey
+        let startDate = ageGroupData.StartDate
+
+        let timelineArray = 
+            match state.Metrics.MetricsType with
+            | RelativeCases -> 
+                let totalPopulation = populationStats.Male + populationStats.Female |> float
+
+                Array.map (((*) (100000./ totalPopulation)) >> (fun x -> Math.Log (x + Math.E))) ageGroupData.Data.All
+
+            | DifferenceInCases -> 
+                let malePopulation = populationStats.Male |> float
+                let femalePopulation = populationStats.Female |> float
+
+                let relMaleCases = 
+                    ageGroupData.Data.Male 
+                    |> Array.map ((*) (100000./malePopulation))
+                let relFemaleCases = 
+                    ageGroupData.Data.Female 
+                    |> Array.map ((*) (100000./femalePopulation))
+
+                Array.map2 (/) relFemaleCases relMaleCases 
+
+
+        let points = 
+            timelineArray 
+            |> Array.mapi (fun index value -> mapPoint startDate index ageGroupId ageGroupKey value)
+
+
+        let series = {|
+            colsize = 3600 * 1000 * 24 * 7 
+            visible = true
+            name = ageGroupKey.Label
+            data = points
+        |} 
+        
+        series |> pojo
+
+
+
+    let allSeries = 
+        processedTimelineData 
+        |> List.mapi (fun index data -> generateSeries index data)
         |> List.toArray
+
+    // let allSeries =  
+    //     let df = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] 
+
+    //     df |> Array.map (fun arr -> 
+    //             {|
+    //                 x = arr.[0]
+    //                 y = arr.[1]
+    //                 value = arr.[2] 
+    //             |} |> pojo
+    //         ) 
+        
+
+
+    // let allSeries =
+    //     allGroupsKeys
+    //     |> List.mapi
+    //         (fun index ageGroupKey ->
+    //             let points =
+    //                 timeline
+    //                 // |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType //TODO: transfer this logic to synthesis
+    //                 // |> accumulateWeeklyCases // chunks the data into weeks and sums to get weekly case number
+    //                 |> newExtractTimelineForAgeGroup ageGroupKey
+    //                 |> mapAllPoints index ageGroupKey
+    //             {| 
+    //                 colsize = 3600 * 1000 * 24 * 7 // set column size to 1 week  (default is 1px = 1ms)
+    //                 visible = true
+    //                 name = ageGroupKey.Label
+    //                 data = points 
+    //             |}
+    //             |> pojo)
+    //     |> List.toArray
 
     let className = "covid19-infection-heatmap"
 
     let startDate = timeline.StartDate 
     let daysFromStartDate = Array.length timeline.Data
-    let endDate = startDate |> Days.add (daysFromStartDate - (daysFromStartDate % 7)-2) // We drop the data for the incomplete week. 
+    let endDate = startDate |> Days.add (daysFromStartDate - (daysFromStartDate % 7)) // We drop the data for the incomplete week. 
     
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -108,22 +217,55 @@ let renderChartOptions state dispatch =
             true
         res
 
+    let colorAxis = 
+        match state.Metrics.MetricsType with
+            | RelativeCases -> 
+                   {| 
+                        ``type`` = "linear"
+                        min = 1.0
+                        stops =
+                            [|    
+                                (0.000, "#009e94")
+                                (0.256, "#6eb49d")
+                                (0.350, "#b2c9a7")
+                                (0.433, "#f0deb0")
+                                (0.700, "#e3b656")
+                                (0.900, "#cc8f00")
+                                (0.999, "#b06a00") 
+                            |]
+                    |} |>pojo
+            | DifferenceInCases -> 
+                    {|
+                        ``type`` = "linear"
+                        min = 0.
+                        stops =
+                            [|    
+                                (0.001, "#b2182b")
+                                (0.050, "#d6604d")
+                                (0.150, "#f4a582")
+                                (0.275, "#fddbc7")
+                                (0.500, "#ffffff")
+                                (0.725, "#d1e5f0")
+                                (0.850, "#92c5de")
+                                (0.950, "#4393c3")
+                                (0.999, "#2166ac") 
+                            |] 
+                    |} |> pojo
 
     let baseOptions =
         Highcharts.basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    {|  
-    // baseOptions with
+    {| 
+    baseOptions with
         chart = pojo {| ``type`` = "heatmap" |}
         series = allSeries
         xAxis = 
-            pojo 
-                {| 
-                    ``type`` = "datetime"
-                    max = endDate |> jsTime12h
-                |}
+            {| 
+                ``type`` = "datetime"
+                max = endDate |> jsTime12h
+            |} |> pojo
         yAxis =
            pojo
                 {| 
@@ -138,27 +280,52 @@ let renderChartOptions state dispatch =
                         |} |> pojo
                 |}
                 //   labels = {| reserveSpace = false |} |}
-        colorAxis =
-           pojo
-               {| ``type`` = "linear"
-                  min = 0.0
-                  stops =
-                      [| (0.000, "#009e94")
-                         (0.166, "#6eb49d")
-                         (0.250, "#b2c9a7")
-                         (0.433, "#f0deb0")
-                         (0.700, "#e3b656")
-                         (0.900, "#cc8f00")
-                         (0.999, "#b06a00") |] |}
+        colorAxis = colorAxis
         tooltip =
            pojo
                {| formatter = fun () -> tooltipFormatter jsThis
                   shared = true
                   useHTML = true |}
         credits = credictsOptions 
-        // boost = {| useGPUTranslations = true |} |> pojo
+        boost = {| useGPUTranslations = true |} |> pojo
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
+
+        responsive = pojo {| |}
+        rangeSelector =
+            pojo 
+                {|
+                    enabled = true
+                    allButtonsEnabled = true
+                    selected = 2
+                    inputDateFormat = I18N.t "charts.common.numDateFormat"
+                    inputEditDateFormat = I18N.t "charts.common.numDateFormat"
+                    inputDateParser = parseDate
+                    x = 0
+                    inputBoxBorderColor = "#ced4da"
+                    buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
+                    buttons = [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            // events = pojo {| click = onRangeSelectorButtonClick 0 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 3
+                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                            // events = pojo {| click = onRangeSelectorButtonClick 1 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                            // events = pojo {| click = onRangeSelectorButtonClick 2 |}
+                        |}
+                    |]
+                |}
+
     |}
 
 
@@ -190,4 +357,4 @@ let render state dispatch =
                 ]
 
 let renderChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("heatmapChart", init props.data, update, render)
+    React.elmishComponent ("heatmap", init props.data, update, render)
