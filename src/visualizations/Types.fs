@@ -44,6 +44,10 @@ type Treatment =
       OutOfHospital : int option
       RecoveredToDate : int option }
 
+type PersonTypeCount =
+    { RhOccupant : int option
+      Other : int option }
+
 type AgeGroupKey = {
     AgeFrom : int option
     AgeTo : int option
@@ -73,6 +77,7 @@ type StatsDataPoint =
       StatePerTreatment : Treatment
       StatePerAgeToDate : AgeGroupsList
       DeceasedPerAgeToDate : AgeGroupsList
+      DeceasedPerType : PersonTypeCount
       HospitalEmployeePositiveTestsToDate : int option
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
@@ -162,10 +167,10 @@ type VisualizationType =
     | EuropeMap
     | WorldMap
     | Infections
-    | CountriesCasesPer1M
-    | CountriesActiveCasesPer1M
-    | CountriesNewDeathsPer1M
-    | CountriesTotalDeathsPer1M
+    | CountriesCasesPer100k
+    | CountriesActiveCasesPer100k
+    | CountriesNewDeathsPer100k
+    | CountriesTotalDeathsPer100k
     | PhaseDiagram
     | Deceased
     | ExcessDeaths

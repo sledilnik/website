@@ -140,7 +140,7 @@
             "negativeTests": "Teste negative",
             "ns-apr20": "Studim",
             "regular": "Të rregullt",
-            "allTesting": "Gjithsej",
+            "totalPCR": "Gjithsej",
             "title": "Testimi",
             "titleMenu": "Testimi"
         },
@@ -289,17 +289,17 @@
             "newCases": "Raste të reja",
             "titleMenu": "Mosha - përqindja"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "legendTitle": "Gjithsej raste vdekje për 100.000 banorë",
             "yAxisTitle": "Gjithsej raste vdekje për 100.000 banorë",
             "titleMenu": "Shtetet - rastet e vdekjes"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Raste të reja në ditë për 100.000 banorë",
             "yAxisTitle": "Raste të reja në ditë për 100.000 banorë",
             "titleMenu": "Shtetet - raste të reja"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "kriteret për listën e kuqe",
             "legendTitle": "Rastet aktive për 100.000 banorë",
             "yAxisTitle": "Rastet aktive për 100.000 banorë",

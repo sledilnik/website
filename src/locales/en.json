@@ -53,8 +53,8 @@
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
-        "tests": "Tests Today",
-        "totalTests": "Total tests:",
+        "tests": "Tests Today: PCR",
+        "testsHAT": "Tests Today: HAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
@@ -189,6 +189,10 @@
         "13": {
             "title": "phase<br>13",
             "description": "new testing methodology"
+        },
+        "14": {
+            "title": "phase<br>14",
+            "description": "rapid antigen tests"
         }
     },
     "charts": {
@@ -242,7 +246,7 @@
             "showToday": "Daily",
             "showToDate": "To Date",
             "show7DaysAverage": "7-Day Average",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
@@ -262,8 +266,8 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
-            "tests": "Tests Performed",
-            "positivePct": "Share of Positive Tests (%)",
+            "tests": "Tests Performed: PCR",
+            "positivePct": "Share of Positive Tests: PCR (%)",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
             "icuAdmitted": "Admitted to ICU",
@@ -345,24 +349,26 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Confirmed Cases among Health Care Employees",
-            "titleMenu": "HC Employees - cases",
+            "title": "Cases in Health Care and Retiremenst Homes",
+            "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
-            "confirmedCases": "Confirmed Cases",
-            "healthcareEmployeesCases": "Confirmed Health Care Employees",
-            "healthcareEmployees": "Health Care Employees",
-            "healthcareEmployeesRelative": "Health Care Employees (Relative)",
-            "totalConfirmed": "Confirmed Cases Total"
+            "all": "All",
+            "relative": "Relative",
+            "healthcareEmployeesCases": "Health Care Employees",
+            "rhOccupantCases": "Retirement Home Residents",
+            "totalConfirmed": "All Confirmed",
+            "otherCases": "Other Persons"
         },
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
             "disclaimer": "Note: From December 3, we do not received data per laboratory.",
-            "allTesting": "All",
-            "byLab": "By Laboratory: Tests",
+            "totalPCR": "All: PCR",
+            "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
-            "regular": "Regular",
-            "ns-apr20": "Study",
+            "hagt": "Regular: RAT",
+            "regular": "Regular: PCR",
+            "ns-apr20": "Study: PCR",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"
@@ -523,14 +529,14 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",
             "titleMenu": "Countries - Active Cases",
             "yAxisTitle": "Active cases per 100,000 people",
             "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
@@ -542,7 +548,7 @@
             "yAxisTitle": "New daily deaths per 100,000 people",
             "legendTitle": "New daily deaths per 100,000 people"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
@@ -584,6 +590,7 @@
             "title": "Excess deaths",
             "titleMenu": "Excess deaths",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
             "absolute": {
                 "title": "Yearly comparison",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
@@ -707,7 +714,6 @@
             "gatheringOrganized": "Organized Gathering",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
-
         }
     },
     "footer": {
@@ -774,7 +780,7 @@
         },
         "liftFoodMarkets": {
             "title": "Markets",
-            "description": "Relaxation: markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
+            "description": "Relaxation: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
         },
         "liftMunicipality": {
             "description": "Relaxation: movement outside the boundaries of your municipality",
@@ -930,7 +936,7 @@
         },
         "services": {
             "title": "Services",
-            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
         },
         "planRelaxation": {
             "title": "Plan",
@@ -947,6 +953,14 @@
         "liftReligiousCeremonies": {
             "title": "Rel.c.",
             "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
+        },
+        "services2": {
+            "title": "Services",
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ...).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
+        },
+        "liftFoodMarkets2": {
+            "title": "Markets",
+            "description": "Relaxation: food markets, news-stands, hairdressing salons."
         }
     },
     "days": {
@@ -1365,15 +1379,15 @@
         }
     },
     "restrictionsPage": {
-      "searchPlaceholder": "Enter search query",  
-      "title": "Measures and restrictions",
-      "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-      "geoValidity": "Geographical validity",
-      "validity": "Validity",
-      "exceptions": "Exceptions",
-      "extrarule": "Additional rules / interpretations",
-      "notes": "Notes",
-      "link": "Link to decree (official text)"
+        "searchPlaceholder": "Enter search query",
+        "title": "Measures and restrictions",
+        "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source.",
+        "geoValidity": "Geographical validity",
+        "validity": "Validity",
+        "exceptions": "Exceptions",
+        "extrarule": "Additional rules / interpretations",
+        "notes": "Notes",
+        "link": "Link to decree (official text)"
     },
     "faq": {
         "searchPlaceholder": "Enter search query",
@@ -1482,7 +1496,7 @@
             "answer": "All confirmed cases are shown in the [Confirmed Cases graph](/en/stats#cases-chart). In order to be able to monitor the epidemic, it is important to know how many are still infected. For this reason, we use the following terminology:\n\n**Closed cases**  are the sum of all confirmed cases who are no longer infected with the virus, that is, the recovered and the deceased.\n\n**Active cases** are all confirmed virus infections that still haven’t recovered (are still infected with the virus). See also\n [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)"
         },
         "chart-phases": {
-            "question": "What do the different phases (phases 1-7) in the graph mean?",
+            "question": "What do the different phases (phases 1-14) in the graph mean?",
             "answer": "The vertical lines divide the stages, delimited by the dates, when the authorities changed the way information about the spread of the infection was collected (the test method was changed, self-isolation interventions were introduced, bans on gathering and movement of persons, and mandatory basic protection were required).\n\nThe phases are shown because the change in testing methodology has also changed the importance of certain indicators by which the prevalence of infections can be judged.\n\n* **Phase 1 (March 4-12, 2020)**: The first cases of infection in Slovenia are recorded. All cases are followed, all contacts are tested.\n\n* **Phase 2 (March 13-19, 2020)**: The testing methodology is changed, and self-isolation and social distancing measures are introduced.\n\n* **Phase 3 (March 20-April 7)**: The testing methodology is revised and a ban on gathering more than five people in public areas is put in place.\n\n* **Phase 4 (April 8-15)**: New change in testing methodology – people with mild symptoms from households with more than one respiratory infections are also tested.\n\n* **Phase 5 (April 15-21)**: New change in testing methodology – re-testing, if possible, of **all suspected SARS-CoV-2 virus infections**.\n\n* ** Phase 6 (April 21–May 15**: New change in testing methodology – All persons **suspected of being infected with SARS-CoV-2** are tested again. A national survey of 3000 randomly sampled persons (additional testing, blood testing for the presence of antibodies) begins.\n\n* **Phase 7 (May 15–present)**: The Slovenian government called an official end to its coronavirus epidemic – a quarantine of at least 14 days will remain in place for people from non-EU states, except for some exemptions (diplomats, cargo). Citizens still have to follow basic rules to prevent a possible spread of infection."
         },
         "patients-chart": {
@@ -1495,11 +1509,11 @@
         },
         "hcenters-chart": {
             "question": "What does the “Healthcare Center Treatment” graph mean?",
-            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#test-charts)"
+            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#tests-charts)"
         },
         "tests-chart": {
             "question": "What does the “Testing” graph tell us?",
-            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nAll important health organizations and institutions are aware of the fact that testing for coronavirus infection is one of the most important factors, as only through testing can we understand the course and extent of the pandemic and thus respond appropriately to the threat it poses. However, each country deals with the lack of testing capacities in its own way. On *March 14*, 2020, Slovenia changed the method of monitoring the spread of the infection. From that point on, people with a respiratory infection who did not require hospital care (the situation is therefore only assessed on the basis of the number of diseased patients) were no longer tested. However, all persons with a mild respiratory infection older than 60 years, persons with other confirmed diseases (hypertension, diabetes, and cardiovascular, lung, kidney, and severe liver diseases) and people with immune deficiencies (regardless of age) were tested. On *April 21*, 2020, the method of testing changed again as healthcare professionals were instructed to test all patients with suspected respiratory infection (including those with milder symptoms and regardless of their age)."
+            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular PCR* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nSince December 2020 we are also tracking rapid antigen tests (RAT) - see *Regular RAT* display."
         },
         "infections-chart": {
             "question": "What does the “Structure of Confirmed Cases” graph tell us?",
@@ -1545,5 +1559,5 @@
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
         }
-    }    
+    }
 }

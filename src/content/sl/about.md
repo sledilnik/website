@@ -60,12 +60,13 @@ COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mo
 
 Sodelavci projekta:
 
+-   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeliranje, viri
 -   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, infrastuktura
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
--   [Barbara Krajnc](https://twitter.com/bakrajnc) - vsebina, komunikacija
+-   [Barbara Krajnc](https://twitter.com/bakrajnc) - vsebine, komunikacija
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
 -   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno skrejpanje, komunikacija
 -   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
@@ -74,8 +75,9 @@ Sodelavci projekta:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
+-   [Jana Javornik](https://twitter.com/JanaSvenska) - vsebine, viri
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
--   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model, modeliranje
 -   [Joh Dokler](https://github.com/joahim) - vizualizacije, spletna stran
 -   [Jure Novak](http://jurenovak.org/) - tekstopisje, viri
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
@@ -100,6 +102,7 @@ Sodelavci projekta:
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - tekstopisje, viri
 -   [Nina Rolih](https://www.facebook.com/tanoranina) - vsebine, grafično oblikovanje
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
+-   [Pika Založnik]() - vsebine, viri
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - skriptanje, statistika
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Sebastian Pleško](https://twitter.com/seba1337) - viri
@@ -111,4 +114,4 @@ Sodelavci projekta:
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - podatkovni model, modeliranje
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeliranje, validacija, viri, komunikacija
 -   [Žiga Brenčič](https://zigabrencic.com) - modeliranje
--   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeliranje
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - mrežni model, modeliranje

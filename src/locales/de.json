@@ -22,7 +22,8 @@
         "world": "Welt",
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Gehe zum Diagramm"
+        "goToGraph": "Gehe zum Diagramm",
+        "posts": "Objave"
     },
     "country": {
         "ABW": "Aruba",
@@ -504,7 +505,7 @@
             "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
             "ventilatorAdmitted": "An Beatmungsgerät",
             "confirmedCases": "Bestätigte Fälle",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "showToDate": "Bis heute",
             "showToday": "Tägliche",
             "showActive": "Aktive",
@@ -541,11 +542,11 @@
             "titleMenu": "Kapazität"
         },
         "tests": {
-            "ns-apr20": "Studie",
+            "ns-apr20": "Studie: PCR",
             "shareOfPositive": "Anteil der positiven Tests (%)",
-            "allTesting": "Alle",
+            "totalPCR": "Alle: PCR",
             "title": "Testung",
-            "regular": "Regelmäßige",
+            "regular": "Regelmäßige: PCR",
             "positiveTests": "Positive Tests",
             "negativeTests": "Negative Tests",
             "titleMenu": "Testung",
@@ -582,13 +583,13 @@
             "activeCasesRelative": "Aktive Fälle (relativ)",
             "titleMenu": "Alter – Anteil"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
             "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder – Todesfälle"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
             "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)",
@@ -613,7 +614,7 @@
             "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen",
             "titleMenu": "Länder – Todesfälle pro Fälle"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "Kriterien für die rote Liste",
             "legendTitle": "Aktive Fälle pro 100.000 Menschen",
             "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
@@ -777,7 +778,8 @@
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
                 "title": "Jahresvergleich"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
         }
     },
     "tableDict": {
@@ -1345,5 +1347,9 @@
     "faq": {
         "pageTitle": "FAQ",
         "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min"
     }
 }

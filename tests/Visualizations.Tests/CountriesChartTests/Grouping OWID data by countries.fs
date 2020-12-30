@@ -23,7 +23,7 @@ let ``Groups entries by countries``() =
                 TotalDeaths = Some deaths; TotalDeathsPerMillion = deathsPerM })
             )
 
-    let grouped = groupEntriesByCountries TotalDeathsPer1M entries
+    let grouped = groupEntriesByCountries TotalDeathsPer100k entries
 
     test <@ grouped |> Map.count = 2 @>
 

@@ -183,7 +183,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
 //                   max =
 //                       match state.MetricToDisplay with
 //                       // double of the red condition
-//                       | ActiveCasesPer1M -> Some 800
+//                       | ActiveCasesPer100k -> Some 800
 //                       | _ -> None
                    opposite = true
                    crosshair = true
@@ -194,10 +194,10 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                         |}
                    plotLines =
                        match state.MetricToDisplay with
-                       | ActiveCasesPer1M -> [|
+                       | ActiveCasesPer100k -> [|
                            {| value=redZoneStart
                               label={|
-                                       text=t "charts.countriesActiveCasesPer1M.red"
+                                       text=t "charts.countriesActiveCasesPer100k.red"
                                        align="left"
                                        verticalAlign="bottom"
                                         |}
@@ -210,7 +210,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
                        | _ -> [| |]
                    plotBands =
                        match state.MetricToDisplay with
-                       | ActiveCasesPer1M -> [|
+                       | ActiveCasesPer100k -> [|
                            {| from=redZoneStart; ``to``=10000.0
                               color="#FEF8F7"
                             |}
