@@ -21,7 +21,8 @@ type DayValueFloat = JsTimestamp * float
 type State =
     { Metrics: DisplayMetrics
       Data: StatsData
-      RangeSelectionButtonIndex: int}
+      RangeSelectionButtonIndex: int
+      }
 
 
 type Msg =
@@ -70,11 +71,12 @@ let renderChartOptions state dispatch =
     
 
     let mapPoint 
-        startDate 
-        weeksFromStartDate 
-        ageGroupId 
-        (ageGroupKey:AgeGroupKey) 
-        value
+        (startDate: DateTime)
+        (weeksFromStartDate: int) 
+        (ageGroupId: int)
+        (ageGroupKey:AgeGroupKey)
+        (ageGroupData:ProcessedAgeGroupData) 
+        (value: float)
         :obj=
 
         let date = startDate |> Days.add  (7 *  weeksFromStartDate)
@@ -86,9 +88,10 @@ let renderChartOptions state dispatch =
             value = value
             weeks = weeksFromStartDate
             ageGroupKey = ageGroupKey.Label
+            maleCases = ageGroupData.Data.Male
+            femaleCases = ageGroupData.Data.Female
             dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} 
         |} 
-
 
         point |> pojo
 
@@ -124,25 +127,33 @@ let renderChartOptions state dispatch =
                     (x:float)
                     (y:float)
                     :float = 
-                    match y with
-                    | 0. -> 
-                        match x with
-                        | 0. -> 1.
-                        | _ -> 2.
-                    | _ -> min (x / y) 2. |> max (0.5)
+                    match x, y with
+                    | 0., 0. -> 1.
+                    | _, 0. -> 2. 
+                    | _, _ -> min (x / y) 2. |> max (0.5)
 
 
                 let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases 
 
-                ratio
-                |> Array.windowed 3
-                |> Array.map Array.average
+                let movingAverage =
+                    Array.concat [|[|0.|]; ratio |] // pad with zero so that moving averege array is of the same length as original
+                    |> Array.windowed 2 
+                    |> Array.map Array.average
+
+                let filter x y z =
+                    match y, z with
+                    | 0., 0. -> 1.
+                    | _,_ -> x
+                
+                Array.map3 filter movingAverage relFemaleCases relMaleCases
+
+
                 
 
 
         let points = 
             timelineArray 
-            |> Array.mapi (fun index value -> mapPoint startDate index ageGroupId ageGroupKey value)
+            |> Array.mapi (fun index value -> mapPoint startDate index ageGroupId ageGroupKey ageGroupData value)
 
 
         let series = {|
@@ -230,7 +241,7 @@ let renderChartOptions state dispatch =
         colorAxis = colorAxis
         tooltip =
            pojo
-               {| formatter = fun () -> tooltipFormatter jsThis
+               {| formatter = fun () -> tooltipFormatter jsThis 
                   shared = true
                   useHTML = true |}
         credits = credictsOptions 

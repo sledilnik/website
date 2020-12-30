@@ -107,155 +107,90 @@ let newExtractTimelineForAgeGroup
     processedData
 
 
-let sparklineFormatter jsThis casesMale casesFemale = 
+let sparklineFormatter jsThis maleCases femaleCases = 
 
-    let options =
+    let maleData = 
+        // [|1;2;3;4|]
+        maleCases
+        |> Array.mapi (fun i x -> {| x=i; y=x |} |> pojo)
+
+    let femaleData = 
+        // [|1;2;3;4|]
+        femaleCases
+        |> Array.mapi (fun i x -> {| x=i; y=x |} |> pojo)
+    
+    let options = 
         {|
-            credits = {| enabled = false |}
-            xAxis = {| visible = false |}
-            yAxis = {| visible = false |}
-            title = {| text = "" |}
-            legend = {| enabled = false |}
-            series = [| {| data = [| 1 ; 2 ; 3 |] |} |]
-        |} |> pojo
-    Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
-    """<div style="width: 100px; height: 60px;" id="tooltip-chart">"""
+            chart = 
+                {| 
+                    ``type`` = "column" 
+                    backgroundColor = "transparent"
+                |}|> pojo
+            legend = {|enable = false|}
 
-    // let options = 
-    //         {|
-    //             chart = {|``type`` = "column"|} |> pojo
+            title = {| enable = false|}
+            series = 
+                [| 
+                    {| 
+                        animation = false 
+                        data = maleData
+                        color = "#73CCD5"
+                    |}|> pojo 
+                    {| 
+                        animation = false 
+                        data = femaleData 
+                        color = "#D99A91"
+                    |}|> pojo 
+                |]
+            
+            plotOptions = 
+                {|
+                    column = {| stacking = "normal"|} |> pojo
+                |}|>pojo
 
-    //             plotOptions = 
-    //                 {|
-    //                     stacking = "normal"
-    //                 |} |> pojo
-                
-    //             series = 
-    //                 [|
-    //                     {| data = casesFemale |} |> pojo
-    //                     {| data = casesMale |} |> pojo
-    //                 |]
-    //         |}
+            xAxis = 
+                {|
+                    visible = true
+                    labels = {| enabled = false|}
+                    title = {| enabled = false|}
+                    stack = "A"
+                |}
+            yAxis = 
+                {|
+                    visible = true
+                    labels = {| enabled = false|}
+                    title = {| enabled = false|}
+                    stack = "A"
+                |}
 
-    // Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
+            credits = {| enable  = false|}
+        |}
 
-    // """<div id="tooltip-chart-heatmap"; class="tooltip-chart";></div>"""
+    Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-heatmap", options)) 10 |> ignore
+    """<div style="width: 350px; height: 200px;"id="tooltip-chart-heatmap">"""
 
-// let sparklineFormatter jsThis allSeries = 
-//     0
-
-// let sparklineFormatter newCases state =
-//     let desaturateColor (rgb:string) (sat:float) =
-//         let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
-//         let r = (argb &&& 0x00FF0000) >>> 16
-//         let g = (argb &&& 0x0000FF00) >>> 8
-//         let b = (argb &&& 0x000000FF)
-//         let avg = (float(r + g + b) / 3.0) * 1.6
-//         let newR = int (Math.Round (float(r) * sat + avg * (1.0 - sat)))
-//         let newG = int (Math.Round (float(g) * sat + avg * (1.0 - sat)))
-//         let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
-//         sprintf "#%02x%02x%02x" newR newG newB
-
-//     let color1 = "#bda506"
-//     let color2 = desaturateColor color1 0.6
-//     let color3 = desaturateColor color1 0.3
-
-//     let temp = [|([| color3 |] |> Array.replicate 42 |> Array.concat )
-//                  ([|color2 |] |> Array.replicate 7 |> Array.concat)|]
-//                |> Array.concat
-//     let columnColors =
-//         [| temp; ([| color1 |] |> Array.replicate 7 |> Array.concat)  |]
-//         |> Array.concat
-
-//     let options =
-//         {|
-//             chart =
-//                 {|
-//                     ``type`` = "column"
-//                     backgroundColor = "transparent"
-//                 |} |> pojo
-//             credits = {| enabled = false |}
-//             xAxis =
-//                 {|
-//                     visible = true
-//                     labels = {| enabled = false |}
-//                     title = {| enabled = false |}
-//                     tickInterval = 7
-//                     lineColor = "#696969"
-//                     tickColor = "#696969"
-//                     tickLength = 4
-//                 |}
-//             yAxis =
-//                 {|
-//                     title = {| enabled = false |}
-//                     visible = true
-//                     opposite = true
-//                     min = 0.
-//                     max = newCases |> Array.max
-//                     tickInterval = 5
-//                     endOnTick = true
-//                     startOnTick = false
-//                     allowDecimals = false
-//                     showFirstLabel = true
-//                     showLastLabel = true
-//                     gridLineColor = "#000000"
-//                     gridLineDashStyle = "dot"
-//                 |} |> pojo
-//             title = {| text = "" |}
-//             legend = {| enabled = false |}
-//             series =
-//                 [|
-//                     {|
-//                         data = newCases |> Array.map ( max 0.)
-//                         animation = false
-//                         colors = columnColors
-//                         borderColor = columnColors
-//                         pointWidth = 2
-//                         colorByPoint = true
-//                     |} |> pojo
-//                 |]
-//         |} |> pojo
-//     match state.MapToDisplay with
-//     | Municipality ->
-//         Fable.Core.JS.setTimeout
-//             (fun () -> sparklineChart("tooltip-chart-mun", options)) 10
-//         |> ignore
-//         """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
-//     | Region ->
-//         Fable.Core.JS.setTimeout
-//             (fun () -> sparklineChart("tooltip-chart-reg", options)) 10
-//         |> ignore
-//         """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
 
 let tooltipFormatter jsThis =
 
     let point = jsThis?point
     let date = point?dateSpan
-    // let weeks = point?weeks
     let value = point?value
-    // let ageGroupId = point?y
     let (ageGroupKey:AgeGroupKey) = point?ageGroupKey
+    let maleCases = point?maleCases
+    let femaleCases = point?femaleCases
 
+    let colorCategories = {| Male = "#73CCD5" ; Female = "#D99A91" |}
 
-    // printfn "%A" processedTimelineData
-
-    // let ageGroupData:ProcessedTimeline =processedTimelineData.[ageGroupId].Data
-
-    // let casesMale = ageGroupData.Male
-    // let casesFemale = ageGroupData.Male
-
-    let colorsCategories = {| Male = "#73CCD5" ; Female = "#D99A91" |}
-
-    // let sparkline = sparklineFormatter jsThis casesFemale casesMale
+    let sparkline = sparklineFormatter jsThis maleCases femaleCases
 
     let label = sprintf "<b> %s </b>" (date.ToString())
 
     label 
         + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.heatmap.age") (ageGroupKey.Label)
         // + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.heatmap.confirmedCases") ("confirmed cases") (I18N.t "charts.heatmap.per100k")
-        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Male) (I18N.t "charts.heatmap.male") ("male cases") (I18N.t "charts.heatmap.per100k")
-        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Female) (I18N.t "charts.heatmap.female") ("female cases") (I18N.t "charts.heatmap.per100k")
-        + sprintf "<br>%s" value
-        // + sparkline
+        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Male) (I18N.t "charts.heatmap.male") ("male cases") (I18N.t "charts.heatmap.per100k")
+        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Female) (I18N.t "charts.heatmap.female") ("female cases") (I18N.t "charts.heatmap.per100k")
+        // + sprintf "<br>%s" value
+        + sparkline
     
     
