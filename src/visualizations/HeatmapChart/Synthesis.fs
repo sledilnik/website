@@ -107,96 +107,39 @@ let newExtractTimelineForAgeGroup
     processedData
 
 
-let extractTimelineForAgeGroup ageGroupKey
-                               (metricsType: DisplayMetricsType)
-                               (casesTimeline: CasesByAgeGroupsTimeline)
-                               : CasesInAgeGroupTimeline =
+let sparklineFormatter jsThis casesMale casesFemale = 
 
-    newExtractTimelineForAgeGroup ageGroupKey casesTimeline |> ignore
+    let options =
+        {|
+            credits = {| enabled = false |}
+            xAxis = {| visible = false |}
+            yAxis = {| visible = false |}
+            title = {| text = "" |}
+            legend = {| enabled = false |}
+            series = [| {| data = [| 1 ; 2 ; 3 |] |} |]
+        |} |> pojo
+    Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart", options)) 10 |> ignore
+    """<div style="width: 100px; height: 60px;" id="tooltip-chart">"""
 
-    let populationStats = populationStatsForAgeGroup ageGroupKey
-    
-    match metricsType with
-    | RelativeCases ->
-        let newCasesTimeline =
-            casesTimeline
-            |> mapDatedArrayItems
-                (fun dayGroupsData ->
-                    let dataForGroup =
-                        dayGroupsData
-                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
+    // let options = 
+    //         {|
+    //             chart = {|``type`` = "column"|} |> pojo
 
-                    dataForGroup.All |> Utils.optionToInt |> float)
+    //             plotOptions = 
+    //                 {|
+    //                     stacking = "normal"
+    //                 |} |> pojo
+                
+    //             series = 
+    //                 [|
+    //                     {| data = casesFemale |} |> pojo
+    //                     {| data = casesMale |} |> pojo
+    //                 |]
+    //         |}
 
-        newCasesTimeline
+    // Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-mun", options)) 10 |> ignore
 
-    | DifferenceInCases ->
-
-        let femalePopulation = populationStats.Female |> float
-        let malePopulation = populationStats.Male |> float
-
-        let newCasesTimelineMale =
-            casesTimeline
-            |> mapDatedArrayItems
-                (fun dayGroupsData ->
-                    let dataForGroup =
-                        dayGroupsData
-                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
-
-                    dataForGroup.Male |> Utils.optionToInt |> float) 
-            |> mapDatedArrayItems ((*) (100000./malePopulation))
-        
-        let newCasesTimelineFemale =
-            casesTimeline
-            |> mapDatedArrayItems
-                (fun dayGroupsData ->
-                    let dataForGroup =
-                        dayGroupsData
-                        |> List.find (fun group -> group.GroupKey = ageGroupKey)
-
-                    dataForGroup.Female |> Utils.optionToInt |> float) 
-            |> mapDatedArrayItems ((*) (100000./femalePopulation))
-        
-        let difference = Array.map2 ( / ) newCasesTimelineFemale.Data newCasesTimelineMale.Data
-
-
-        {StartDate = newCasesTimelineFemale.StartDate; Data = difference}
-
-
-
-
-let accumulateWeeklyCases (casesTimeline: CasesInAgeGroupTimeline): CasesInAgeGroupTimeline =
-
-    //hack to ensure that the data starts on a Monday instead of Wednesday
-    let padding = [| 0.; 0. |]
-
-    let paddedCases =
-        Array.concat [ padding
-                       casesTimeline.Data ]
-
-    let paddedLen = Array.length paddedCases
-    
-    let cases = 
-        let chunks = Seq.chunkBySize 7 paddedCases
-
-        let trimmedChunks = 
-            match paddedLen % 7 with
-            | 0 -> chunks
-            | _ -> Seq.truncate ((Seq.length chunks) - 1) chunks // truncate the end if not full week's worth of data 
-        
-        trimmedChunks
-        |> Seq.map Seq.sum
-        |> Seq.toArray
-
-
-    let shiftedStartDate = casesTimeline.StartDate |> Days.add -2 // shift the start date to Monday
-
-    { StartDate = shiftedStartDate
-      Data = cases }
-
-
-
-let sparklineFormatter jsThis = 0
+    // """<div id="tooltip-chart-heatmap"; class="tooltip-chart";></div>"""
 
 // let sparklineFormatter jsThis allSeries = 
 //     0
@@ -284,22 +227,35 @@ let sparklineFormatter jsThis = 0
 //         |> ignore
 //         """<div id="tooltip-chart-reg"; class="tooltip-chart";></div>"""
 
-let tooltipFormatter jsThis=
+let tooltipFormatter jsThis =
 
     let point = jsThis?point
     let date = point?dateSpan
-    let weeks = point?weeks
-    let ageGroupKey:AgeGroupKey = point?ageGroupKey
+    // let weeks = point?weeks
+    let value = point?value
+    // let ageGroupId = point?y
+    let (ageGroupKey:AgeGroupKey) = point?ageGroupKey
+
+
+    // printfn "%A" processedTimelineData
+
+    // let ageGroupData:ProcessedTimeline =processedTimelineData.[ageGroupId].Data
+
+    // let casesMale = ageGroupData.Male
+    // let casesFemale = ageGroupData.Male
 
     let colorsCategories = {| Male = "#73CCD5" ; Female = "#D99A91" |}
 
+    // let sparkline = sparklineFormatter jsThis casesFemale casesMale
 
     let label = sprintf "<b> %s </b>" (date.ToString())
 
     label 
         + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.heatmap.age") (ageGroupKey.Label)
-        + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.heatmap.confirmedCases") ("confirmed cases") ("per 100 000")
-        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Male) (I18N.t "charts.heatmap.male") ("male cases") ("per 100 000")
-        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Female) (I18N.t "charts.heatmap.female") ("female cases") ("per 100 000")
+        // + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.heatmap.confirmedCases") ("confirmed cases") (I18N.t "charts.heatmap.per100k")
+        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Male) (I18N.t "charts.heatmap.male") ("male cases") (I18N.t "charts.heatmap.per100k")
+        + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorsCategories.Female) (I18N.t "charts.heatmap.female") ("female cases") (I18N.t "charts.heatmap.per100k")
+        + sprintf "<br>%s" value
+        // + sparkline
     
     

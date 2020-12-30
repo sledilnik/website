@@ -60,38 +60,6 @@ let renderChartOptions state dispatch =
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
 
-    // let mapPoint 
-    //     (startDate: DateTime) 
-    //     (weeksFromStartDate: int) 
-    //     (ageGroup: int) 
-    //     (ageGroupKey: AgeGroupKey)
-    //     (cases) =
-
-
-
-    //     let value = 
-    //         match state.Metrics.MetricsType with
-    //         | DifferenceInCases -> cases
-    //         | RelativeCases -> 
-    //             let populationStats = populationStatsForAgeGroup ageGroupKey
-    //             let totalPopulation = populationStats.Female + populationStats.Male |> float
-    //             let relCases = cases * 100000./totalPopulation
-
-    //             Math.Log(relCases + Math.E)
-
-
-    // let mapAllPoints 
-    //     (ageGroup: int) 
-    //     (ageGroupKey: AgeGroupKey) 
-    //     (groupTimeline)=
-
-    //     let startDate = groupTimeline.StartDate
-    //     let timelineArray = groupTimeline.Data
-
-    //     timelineArray
-    //     |> Array.mapi (fun i cases -> mapPoint startDate i ageGroup ageGroupKey cases)
-
-    // generate all series
 
     let processedTimelineData =
         allGroupsKeys
@@ -101,25 +69,28 @@ let renderChartOptions state dispatch =
                 |> newExtractTimelineForAgeGroup ageGroupKey)
     
 
-    let mapPoint startDate weeksFromStartDate ageGroupId ageGroupKey value=
+    let mapPoint 
+        startDate 
+        weeksFromStartDate 
+        ageGroupId 
+        (ageGroupKey:AgeGroupKey) 
+        value
+        :obj=
 
         let date = startDate |> Days.add  (7 *  weeksFromStartDate)
         let dateTo = date |> Days.add 6
 
         let point = {|
             x = date |> jsTime12h
-            // x = weeksFromStartDate
             y = ageGroupId
             value = value
             weeks = weeksFromStartDate
-            ageGroupKey = ageGroupKey
+            ageGroupKey = ageGroupKey.Label
             dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} 
         |} 
 
-        // printfn "%A" point
 
         point |> pojo
-        // |> pojo
 
 
     let generateSeries 
@@ -149,7 +120,24 @@ let renderChartOptions state dispatch =
                     ageGroupData.Data.Female 
                     |> Array.map ((*) (100000./femalePopulation))
 
-                Array.map2 (/) relFemaleCases relMaleCases 
+                let computeRatio 
+                    (x:float)
+                    (y:float)
+                    :float = 
+                    match y with
+                    | 0. -> 
+                        match x with
+                        | 0. -> 1.
+                        | _ -> 2.
+                    | _ -> min (x / y) 2. |> max (0.5)
+
+
+                let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases 
+
+                ratio
+                |> Array.windowed 3
+                |> Array.map Array.average
+                
 
 
         let points = 
@@ -166,44 +154,10 @@ let renderChartOptions state dispatch =
         
         series |> pojo
 
-
-
     let allSeries = 
         processedTimelineData 
         |> List.mapi (fun index data -> generateSeries index data)
         |> List.toArray
-
-    // let allSeries =  
-    //     let df = [| [|0;0;1|];[|1;0;2|]; [|0;1;3|]; [|1;1;4|]|] 
-
-    //     df |> Array.map (fun arr -> 
-    //             {|
-    //                 x = arr.[0]
-    //                 y = arr.[1]
-    //                 value = arr.[2] 
-    //             |} |> pojo
-    //         ) 
-        
-
-
-    // let allSeries =
-    //     allGroupsKeys
-    //     |> List.mapi
-    //         (fun index ageGroupKey ->
-    //             let points =
-    //                 timeline
-    //                 // |> extractTimelineForAgeGroup ageGroupKey state.Metrics.MetricsType //TODO: transfer this logic to synthesis
-    //                 // |> accumulateWeeklyCases // chunks the data into weeks and sums to get weekly case number
-    //                 |> newExtractTimelineForAgeGroup ageGroupKey
-    //                 |> mapAllPoints index ageGroupKey
-    //             {| 
-    //                 colsize = 3600 * 1000 * 24 * 7 // set column size to 1 week  (default is 1px = 1ms)
-    //                 visible = true
-    //                 name = ageGroupKey.Label
-    //                 data = points 
-    //             |}
-    //             |> pojo)
-    //     |> List.toArray
 
     let className = "covid19-infection-heatmap"
 
@@ -237,19 +191,12 @@ let renderChartOptions state dispatch =
             | DifferenceInCases -> 
                     {|
                         ``type`` = "linear"
-                        min = 0.
-                        stops =
-                            [|    
-                                (0.001, "#b2182b")
-                                (0.050, "#d6604d")
-                                (0.150, "#f4a582")
-                                (0.275, "#fddbc7")
-                                (0.500, "#ffffff")
-                                (0.725, "#d1e5f0")
-                                (0.850, "#92c5de")
-                                (0.950, "#4393c3")
-                                (0.999, "#2166ac") 
-                            |] 
+                        min = 0.6
+                        stops = [|
+                            (0.000, "#0288d1")
+                            (0.500, "#FFFFFF")
+                            (0.999, "#D99A91")
+                        |]
                     |} |> pojo
 
     let baseOptions =
