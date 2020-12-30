@@ -88,7 +88,7 @@ let getHospitalsPointTotalValue state series dataPoint : int option =
         | _ -> invalidOp "bug"
     | _ -> invalidOp "bug"
 
-let constructSeriesData state series =
+let constructHospitalsSeriesData state series =
     match series.SeriesType with
     | HospitalSeriesType ->
         state.PatientsData
@@ -97,7 +97,7 @@ let constructSeriesData state series =
                 x = dataPoint.Date |> jsTime12h
                 y = getHospitalsPointValue state series dataPoint
                 seriesId = series.SeriesId
-                fmtDate = I18N.tOptions "days.longerDate"
+                date = I18N.tOptions "days.longerDate"
                               {| date = dataPoint.Date |}
                 fmtTotal = getHospitalsPointTotalValue state series dataPoint
                            |> string
@@ -125,7 +125,7 @@ let renderAllHospitalSeriesData state =
             visible = true
             color = series.Color
             name = I18N.tt "charts.deceased" series.SeriesId
-            data = constructSeriesData state series
+            data = constructHospitalsSeriesData state series
             animation = false
         |}
         |> pojo

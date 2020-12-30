@@ -69,15 +69,17 @@ let update (msg: Msg) (state: DeceasedVizState) : DeceasedVizState * Cmd<Msg> =
 
 let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
-    let total = pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
-    let fmtDate = pts.[0]?point?fmtDate
+    let total =
+        pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
+    let fmtDate = pts.[0]?point?date
 
     fmtDate
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
            sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
-                p?series?color p?series?name (I18N.NumberFormat.formatNumber(p?point?y : float)))
+                p?series?color p?series?name
+                (I18N.NumberFormat.formatNumber(p?point?y : float)))
        |> String.concat "<br>")
     + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>"""
         (I18N.t "charts.deceased.deceased-total")
