@@ -25,8 +25,7 @@ let update state msg =
             let weeklyDeathsData =
                 data
                 |> List.map (fun dp ->
-                    let date = System.DateTime(dp.year, dp.month, dp.day)
-                    {| year = Utils.getISOWeekYear(date) ; week = date.GetISOWeek() ; date = date ; deceased = dp.deceased |} )
+                    {| year = Utils.getISOWeekYear(dp.Date) ; week = dp.Date.GetISOWeek() ; date = dp.Date ; deceased = dp.Deceased |} )
                 |> List.groupBy (fun dp -> (dp.year, dp.week))
                 |> List.map (fun ((year, week), dps) ->
                     { Year = year
