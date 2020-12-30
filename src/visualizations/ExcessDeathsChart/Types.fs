@@ -2,9 +2,9 @@ module ExcessDeathsChart.Types
 
 open Types
 
-let CURRENT_YEAR = 2020
-
 type DailyDeathsData = Data.DailyDeaths.DataPoint list
+
+let START_YEAR = 2020
 
 type WeeklyDeaths = {
     Year : int

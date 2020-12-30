@@ -256,6 +256,7 @@ module Dictionaries =
             "pbor",     "PB Ormož",             None
             "pbid",     "PB Idrija",            None
             "imi",      "IMI Ljubljana",        None
+            "nlzohce",  "NLZOH Celje",          None
             "nlzohkp",  "NLZOH Koper",          None
             "nlzohkr",  "NLZOH Kranj",          None
             "nlzohlj",  "NLZOH Ljubljana",      None

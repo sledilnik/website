@@ -22,7 +22,8 @@
         "world": "Welt",
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Gehe zum Diagramm"
+        "goToGraph": "Gehe zum Diagramm",
+        "posts": "Objave"
     },
     "country": {
         "ABW": "Aruba",
@@ -777,7 +778,8 @@
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
                 "title": "Jahresvergleich"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
         }
     },
     "tableDict": {
@@ -1345,5 +1347,9 @@
     "faq": {
         "pageTitle": "FAQ",
         "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min"
     }
 }
