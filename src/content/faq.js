@@ -64,7 +64,9 @@ export default [
             "countries-deaths-chart",
             "chart-reality",
             "chart-percentage",
-            "chart-log-scale"
+            "chart-log-scale",
+            "chart-correlation",
+            "chart-cases-by-age-group"
         ]
     },
     {
