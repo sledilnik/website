@@ -9,6 +9,7 @@
         <Compile Include="IntersectionObserver.fs" />
         <Compile Include="ShareButton.fs" />
         <Compile Include="Highcharts.fs" />
+        <Compile Include="Colors.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Days.fs" />
         <Compile Include="Statistics.fs" />
@@ -23,6 +24,9 @@
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="data/DailyDeaths.fs" />
         <Compile Include="data/MonthlyDeaths.fs" />
+        <Compile Include="DataAnalysis/DatedTypes.fs" />
+        <Compile Include="DataAnalysis/AgeGroupsTimeline.fs" />
+        <Compile Include="DataVisualization/ChartingTypes.fs" />
         <Compile Include="MetricsComparisonChart.fs" />
         <Compile Include="DailyComparisonChart.fs" />
         <Compile Include="AgeGroupsChart.fs" />
@@ -43,13 +47,14 @@
         <Compile Include="PhaseDiagram/Data.fs" />
         <Compile Include="PhaseDiagram/Chart.fs" />
         <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
-        <Compile Include="AgeGroupsTimelineViz\Analysis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />
         <Compile Include="AgeGroupsTimelineViz\Rendering.fs" />
         <Compile Include="CountriesChartViz\Analysis.fs" />
         <Compile Include="CountriesChartViz\Synthesis.fs" />
         <Compile Include="CountriesChartViz\CountrySets.fs" />
         <Compile Include="CountriesChartViz\Rendering.fs" />
+        <Compile Include="DeceasedViz\Analysis.fs" />
+        <Compile Include="DeceasedViz\Synthesis.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
         <Compile Include="ExcessDeathsChart/Types.fs" />
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
@@ -71,7 +76,7 @@
         <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
         <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
         <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
-        <PackageReference Include="Fable.Extras" Version="0.1.0" />
+        <PackageReference Include="Fable.Extras" Version="0.2.4" />
         <PackageReference Include="Feliz" Version="1.16.0" />
         <PackageReference Include="Feliz.UseElmish" Version="1.4.1" />
         <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
