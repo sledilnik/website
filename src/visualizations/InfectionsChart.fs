@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module InfectionsChart
 
+open DataVisualization.ChartingTypes
 open Statistics
 open System
 open Elmish
@@ -51,10 +52,6 @@ module Metrics  =
         | ShowOthers -> without AllConfirmed
 
 type ValueTypes = RunningTotals | MovingAverages
-type ChartType =
-    | StackedBarNormal
-    | StackedBarPercent
-    | SplineChart
 
 type DisplayType = {
     Id: string

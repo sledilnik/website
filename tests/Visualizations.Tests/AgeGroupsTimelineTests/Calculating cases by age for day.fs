@@ -1,6 +1,6 @@
 ﻿module AgeGroupsTimelineTests.``Calculating cases by age for day``
 
-open AgeGroupsTimelineViz.Analysis
+open DataAnalysis.AgeGroupsTimeline
 open AgeGroupsTimelineTests.TestHelpers
 open Xunit
 open Swensen.Unquote
