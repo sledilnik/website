@@ -24,7 +24,6 @@ type State =
       RangeSelectionButtonIndex: int
       }
 
-
 type Msg =
     | ChangeMetrics of DisplayMetrics
     | RangeSelectionChanged of int
@@ -60,7 +59,6 @@ let renderChartOptions state dispatch =
 
     // get keys of all age groups
     let allGroupsKeys = listAgeGroups timeline
-
 
     let processedTimelineData =
         allGroupsKeys
@@ -107,12 +105,12 @@ let renderChartOptions state dispatch =
 
         let timelineArray = 
             match state.Metrics.MetricsType with
-            | RelativeCases -> 
+            | NewCases -> 
                 let totalPopulation = populationStats.Male + populationStats.Female |> float
 
                 Array.map (((*) (100000./ totalPopulation)) >> (fun x -> Math.Log (x + Math.E))) ageGroupData.Data.All
 
-            | DifferenceInCases -> 
+            | CasesRatio -> 
                 let malePopulation = populationStats.Male |> float
                 let femalePopulation = populationStats.Female |> float
 
@@ -135,17 +133,19 @@ let renderChartOptions state dispatch =
 
                 let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases 
 
-                let movingAverage =
-                    Array.concat [|[|0.|]; ratio |] // pad with zero so that moving averege array is of the same length as original
-                    |> Array.windowed 2 
-                    |> Array.map Array.average
+                ratio
 
-                let filter x y z =
-                    match y, z with
-                    | 0., 0. -> 1.
-                    | _,_ -> x
+                // let movingAverage =
+                //     Array.concat [|[|0.|]; ratio |] // pad with zero so that moving averege array is of the same length as original
+                //     |> Array.windowed 2 
+                //     |> Array.map Array.average
+
+                // let filter x y z =
+                //     match y, z with
+                //     | 0., 0. -> 1.
+                //     | _,_ -> x
                 
-                Array.map3 filter movingAverage relFemaleCases relMaleCases
+                // Array.map3 filter movingAverage relFemaleCases relMaleCases
 
 
                 
@@ -167,24 +167,152 @@ let renderChartOptions state dispatch =
 
     let allSeries = 
         processedTimelineData 
-        |> List.mapi (fun index data -> generateSeries index data)
+        |> List.mapi (generateSeries)
         |> List.toArray
 
-    let className = "covid19-infection-heatmap"
-
-    let startDate = timeline.StartDate 
-    let daysFromStartDate = Array.length timeline.Data
-    let endDate = startDate |> Days.add (daysFromStartDate - (daysFromStartDate % 7)) // We drop the data for the incomplete week. 
     
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
             RangeSelectionChanged buttonIndex |> dispatch
             true
         res
+    
+    let sparklineFormatter 
+        ( state: State ) 
+        ( maleCases: float[] )
+        ( femaleCases: float[] ) = 
+
+        let series =
+            let maleData = 
+                maleCases
+                |> Array.mapi (fun i value -> {| x=i; y=value |} |> pojo)
+
+            let femaleData = 
+                match state.Metrics.MetricsType with
+                | NewCases -> 
+                    femaleCases
+                    |> Array.mapi (fun i value -> 
+                        {| 
+                            x=i 
+                            y= -value 
+                        |} |> pojo)
+                | CasesRatio -> 
+                    femaleCases
+                    |> Array.mapi (fun i value -> 
+                        {| 
+                            x=i 
+                            y= value 
+                        |} |> pojo)
+
+
+
+            [| 
+                {| 
+                    animation = false 
+                    data = maleData
+                    color = "#73CCD5"
+                    borderColor = "#73CCD5"
+                    pointWidth=2
+                |}|> pojo 
+                {| 
+                    animation = false 
+                    data = femaleData 
+                    color = "#D99A91"
+                    borderColor = "#D99A91"
+                    pointWidth=2
+                |}|> pojo 
+            |]
+
+        let maximum = 
+            match state.Metrics.MetricsType with 
+            | NewCases -> max (Array.max femaleCases) (Array.max maleCases)
+            | CasesRatio -> 100.
+        let minimum = 
+            match state.Metrics.MetricsType with
+            | NewCases -> - maximum
+            | CasesRatio -> 0.
+
+        let options = 
+            {|
+                chart = 
+                    {| 
+                        ``type`` = "column" 
+                        backgroundColor = "transparent"
+                    |}|> pojo
+                legend = {|enable = false|}
+
+                title = {| enable = false|}
+                series = series 
+                
+                plotOptions = 
+                    {|
+                        column = 
+                            match state.Metrics.MetricsType with
+                            | NewCases -> {| stacking = "normal"|} |> pojo
+                            | CasesRatio -> {| stacking = "percent" |} |> pojo
+                    |}|>pojo
+
+                xAxis = 
+                    {|
+                        visible = false 
+                        labels = {| enabled = false|}
+                        title = {| enabled = false|}
+                        linkedto = Some 0.
+                        // plotBands = [|
+                        //         {| color = "#ff0000"; from = -1. ;``to``= 22. |} |> pojo
+                        //     |] 
+                    |} |> pojo
+                yAxis = 
+                    {|
+                        min = minimum
+                        max = maximum 
+                        opposite = true
+                        labels = {| enabled = false|}
+                        visible = true
+                        title = {| enabled = false|}
+                        allowDecimals = false
+                        showFirstLabel = true
+                        showLastLabel = true
+                        gridLineColor = "#000000"
+                        gridLineDashStyle = "dot"
+                    |}
+
+                credits = {| enable  = false|}
+            |}
+
+        Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-heatmap", options)) 10 |> ignore
+        """<div id="tooltip-chart-heatmap"; class="tooltip-chart";><div/>"""
+
+
+    let tooltipFormatter 
+        ( jsThis: obj ) 
+        ( state: State ) =
+
+        let ( point:obj ) = jsThis?point
+        let ( date:string ) = point?dateSpan
+        let ( ageGroupKey:string ) = point?ageGroupKey
+        let ( maleCases:float[] ) = point?maleCases
+        let ( femaleCases:float[] ) = point?femaleCases
+        let ( week:int ) = point?weeks
+
+        let maleCasesForWeek = maleCases.[week]
+        let femaleCasesForWeek = femaleCases.[week]
+
+        let colorCategories = {| Male = "#73CCD5" ; Female = "#D99A91" |}
+
+        let sparkline = sparklineFormatter state maleCases femaleCases
+
+        let label = sprintf "<b> %s </b>" (date.ToString())
+
+        label 
+            + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.heatmap.ageGroup") (ageGroupKey)
+            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Male) (I18N.t "charts.heatmap.male") (Utils.formatTo1DecimalWithTrailingZero (maleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
+            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Female) (I18N.t "charts.heatmap.female") (Utils.formatTo1DecimalWithTrailingZero(femaleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
+            + sparkline
 
     let colorAxis = 
         match state.Metrics.MetricsType with
-            | RelativeCases -> 
+            | NewCases -> 
                    {| 
                         ``type`` = "linear"
                         min = 1.0
@@ -199,16 +327,19 @@ let renderChartOptions state dispatch =
                                 (0.999, "#b06a00") 
                             |]
                     |} |>pojo
-            | DifferenceInCases -> 
+            | CasesRatio -> 
                     {|
                         ``type`` = "linear"
                         min = 0.6
                         stops = [|
-                            (0.000, "#0288d1")
+                            (0.000, "#73CCD5")
                             (0.500, "#FFFFFF")
                             (0.999, "#D99A91")
                         |]
                     |} |> pojo
+
+    let className = "covid19-infection-heatmap"
+
 
     let baseOptions =
         Highcharts.basicChartOptions
@@ -222,7 +353,7 @@ let renderChartOptions state dispatch =
         xAxis = 
             {| 
                 ``type`` = "datetime"
-                max = endDate |> jsTime12h
+                // max = endDate |> jsTime12h
             |} |> pojo
         yAxis =
            pojo
@@ -241,48 +372,13 @@ let renderChartOptions state dispatch =
         colorAxis = colorAxis
         tooltip =
            pojo
-               {| formatter = fun () -> tooltipFormatter jsThis 
+               {| formatter = fun () -> tooltipFormatter jsThis state
                   shared = true
                   useHTML = true |}
         credits = credictsOptions 
         boost = {| useGPUTranslations = true |} |> pojo
-        navigator = pojo {| enabled = false |}
-        scrollbar = pojo {| enabled = false |}
 
         responsive = pojo {| |}
-        rangeSelector =
-            pojo 
-                {|
-                    enabled = true
-                    allButtonsEnabled = true
-                    selected = 2
-                    inputDateFormat = I18N.t "charts.common.numDateFormat"
-                    inputEditDateFormat = I18N.t "charts.common.numDateFormat"
-                    inputDateParser = parseDate
-                    x = 0
-                    inputBoxBorderColor = "#ced4da"
-                    buttonTheme = pojo {| r = 6; states = pojo {| select = pojo {| fill = "#ffd922" |} |} |}
-                    buttons = [|
-                        {|
-                            ``type`` = "month"
-                            count = 2
-                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
-                            // events = pojo {| click = onRangeSelectorButtonClick 0 |}
-                        |}
-                        {|
-                            ``type`` = "month"
-                            count = 3
-                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
-                            // events = pojo {| click = onRangeSelectorButtonClick 1 |}
-                        |}
-                        {|
-                            ``type`` = "all"
-                            count = 1
-                            text = I18N.t "charts.common.all"
-                            // events = pojo {| click = onRangeSelectorButtonClick 2 |}
-                        |}
-                    |]
-                |}
 
     |}
 
@@ -297,7 +393,7 @@ let renderMetricsSelectors activeMetrics dispatch =
     let renderSelector (metrics: DisplayMetrics) =
         let active = metrics = activeMetrics
 
-        Html.div [ prop.text (I18N.chartText "heatmapChart" metrics.Id)
+        Html.div [ prop.text (I18N.chartText "heatmap" metrics.Id)
                    Utils.classes [ (true, "btn btn-sm metric-selector")
                                    (active, "metric-selector--selected selected") ]
                    if not active then prop.onClick (fun _ -> dispatch metrics)

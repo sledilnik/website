@@ -1201,7 +1201,17 @@
             "gatheringOrganized": "organizirano druženje",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
+        },
+        "heatmap": {
+            "title": "Primerjava po tednih",
+            "ageGroup": "Starostna skupina",
+            "male": "Moški",
+            "female":"Ženske",
+            "per100k":"na 100.000 prebivalcev",
+            "newCases": "Novi primeri",
+            "ratio": "Razmerje primerov M/Ž"
         }
+
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
