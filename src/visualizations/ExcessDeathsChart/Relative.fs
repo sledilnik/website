@@ -32,12 +32,12 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
     let deceasedMin, deceasedMax = List.unzip deceasedminMax
     let deceasedMinMap, deceasedMaxMap = deceasedMin |> FSharp.Collections.Map, deceasedMax |> FSharp.Collections.Map
 
-    let deceasedCurrentYear =
+    let deceasedFromStartYear =
         data
-        |> List.filter (fun dp -> dp.Year = CURRENT_YEAR)
+        |> List.filter (fun dp -> dp.Year >= START_YEAR)
 
-    let deceasedCurrentYearRelativeToBaseline =
-        deceasedCurrentYear
+    let deceasedFromStartYearRelativeToBaseline =
+        deceasedFromStartYear
         |> List.map (fun dp ->
             match deceasedBaselineMap.TryFind(dp.Week) with
             | None -> None
@@ -45,10 +45,10 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
                 Some (dp, System.Math.Round((float dp.Deceased - baseline) / baseline * 100.)) )
         |> List.choose id
 
-    let deceasedCovidCurrentYear =
+    let deceasedCovidFromStartYear =
         statsData
         // Filter the data to the current year
-        |> List.filter (fun dp -> dp.Date.Year = CURRENT_YEAR)
+        |> List.filter (fun dp -> dp.Date.Year = START_YEAR)
         // Select only the non-empty deceased data points
         |> List.map (fun dp ->
             match dp.StatePerTreatment.Deceased with
@@ -73,8 +73,8 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
               WeekEndDate = dps |> List.map (fun dp -> dp.date) |> List.last
               Deceased = dps |> List.sumBy (fun dp -> dp.deceased) } )
 
-    let deceasedCovidCurrentYearPercent =
-        deceasedCovidCurrentYear
+    let deceasedCovidFromStartYearPercent =
+        deceasedCovidFromStartYear
         |> List.map (fun dp ->
             match deceasedBaselineMap.TryFind(dp.Week) with
             | None -> None
@@ -83,7 +83,7 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
         |> List.choose id
 
     let deceasedMinPercent =
-        deceasedCurrentYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
+        deceasedFromStartYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
         |> List.map (fun (week, weekStartDate) ->
             match deceasedMinMap.TryFind(week) with
             | None -> None
@@ -91,7 +91,7 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
         |> List.choose id
 
     let deceasedMaxPercent =
-        deceasedCurrentYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
+        deceasedFromStartYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
         |> List.map (fun (week, weekStartDate) ->
             match deceasedMaxMap.TryFind(week) with
             | None -> None
@@ -140,11 +140,11 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
                marker = {| enabled = false |} |> pojo
                color = colors.ExcessDeaths
                data =
-                   deceasedCurrentYearRelativeToBaseline
+                   deceasedFromStartYearRelativeToBaseline
                    |> List.map (fun (dp, percent) ->
                         {| x = dp.WeekStartDate
                            y = percent
-                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDate
+                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDateWithYear
                         |} |> pojo)
                    |> List.toArray
             |} |> pojo
@@ -156,18 +156,18 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
                color = colors.CovidDeaths
                lineWidth = 0
                data =
-                   deceasedCovidCurrentYearPercent
+                   deceasedCovidFromStartYearPercent
                    |> List.map (fun (dp, percent) ->
                         {| x = dp.WeekStartDate
                            y = System.Math.Round(percent, 1)
-                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDate
+                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDateWithYear
                         |} |> pojo)
                    |> List.toArray
             |} |> pojo
         |]
 
     {| title = ""
-       xAxis = {| ``type`` = "datetime" ; dateTimeLabelFormats = {| day = "%e. %b" |} |> pojo |}
+       xAxis = {| ``type`` = "datetime" |}
        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
        tooltip = {| formatter = fun () -> sprintf "%s: <b>%.1f %%</b>" jsThis?key jsThis?y |} |> pojo
        series = series

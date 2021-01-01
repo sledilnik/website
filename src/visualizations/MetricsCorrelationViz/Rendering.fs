@@ -1,5 +1,6 @@
 module MetricsCorrelationViz.Rendering
 
+open DataVisualization.ChartingTypes
 open Statistics
 open System
 open Elmish
@@ -38,10 +39,6 @@ module Metrics  =
     ]
 
 type ValueTypes = RunningTotals | MovingAverages
-type ChartType =
-    | StackedBarNormal
-    | StackedBarPercent
-    | SplineChart
 
 type DisplayType = {
     Id: string

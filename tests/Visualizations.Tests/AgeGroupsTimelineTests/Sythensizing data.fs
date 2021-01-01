@@ -1,8 +1,8 @@
 ﻿module AgeGroupsTimelineTests.``Sythensizing data``
 
 open System
-open AgeGroupsTimelineViz.Analysis
-open AgeGroupsTimelineViz.Synthesis
+open DataAnalysis.DatedTypes
+open DataAnalysis.AgeGroupsTimeline
 open TestHelpers
 open Xunit
 open Swensen.Unquote
@@ -25,7 +25,7 @@ let ``Can fetch age groups from timeline``() =
             Data = [| totalDay0; totalDay1 |]
         }
 
-    let timeline = calculateCasesByAgeTimeline sourceData
+    let timeline = calculateDailyCasesByAgeTimeline sourceData
 
     let ageGroupsKeys = listAgeGroups timeline
 
@@ -44,14 +44,13 @@ let ``Can extract data for individual age group``() =
 
     let baseDate = DateTime(2020, 03, 01)
 
-    let sourceData = {
+    let sourceData: CasesByAgeGroupsTimeline = {
             StartDate = baseDate
             Data = [| day0; day1 |]
         }
 
     let timeline =
-        sourceData
-        |> extractTimelineForAgeGroup (groupKey 1) NewCases
+        extractTimelineForAgeGroup (groupKey 1) Daily sourceData sourceData
 
     test <@ timeline.StartDate = baseDate @>
     test <@ timeline.Data = [| 15; 25 |] @>

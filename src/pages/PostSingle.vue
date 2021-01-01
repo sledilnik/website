@@ -8,7 +8,10 @@
           <span class="date-time">{{ $t("posts.timestamp", { date }) }}</span>
           <reading-time :content="post.body"></reading-time>
         </div>
-        <img v-if="post.image" :src="post.image">
+        <figure v-if="post.image">
+          <img class="figure-img img-fluid rounded" :src="post.image">
+          <figcaption v-if="post.image_caption" class="figure-caption text-right font-italic">{{ post.image_caption }}</figcaption>
+        </figure>
         <div v-if="post.body" class="content" v-html="$options.filters.marked(post.body)"></div>
         <div class="btn-wrapper">
           <a class="btn" @click="goBack">{{ $t("pageNotFound.back") }}</a>

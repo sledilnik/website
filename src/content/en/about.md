@@ -80,6 +80,7 @@ COVID-19 Sledilnik in an open source project that would not be possible without 
 
 Project collaborators:
 
+-   [Ana Slavec](https://twitter.com/aslavec) - surveys, analysis, content
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeling, sources
 -   [Andraž Vrhovec](https://github.com/overlordtm) - web page, infrastructure
 -   [Andrej Srakar](http://www.ier.si/) - sources, modeling
@@ -94,6 +95,7 @@ Project collaborators:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model, modeling
 -   [Joh Dokler](https://github.com/joahim) - visualisations, web page
@@ -120,6 +122,7 @@ Project collaborators:
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
 -   [Nina Rolih](https://www.facebook.com/tanoranina) - content, graphic design
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
+-   [Pika Založnik]() - content, sources
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - scripting, statistics
 -   [Sebastian Pleško](https://twitter.com/seba1337) - sources

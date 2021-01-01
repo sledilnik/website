@@ -2,8 +2,8 @@
   <div class="custom-container">
     <div class="static-page-wrapper posts-page">
       <h1>{{ $t("navbar.posts") }}</h1>
-      <b-card-group deck v-if="postsByDateDescending && postsByDateDescending.length">
-        <PostTeaser v-for="post in postsByDateDescending" :post="post" :key="post.id" />
+      <b-card-group deck v-if="posts && posts.length">
+        <PostTeaser v-for="post in posts" :post="post" :key="post.id" />
       </b-card-group>
       <Loader v-else />
     </div>
@@ -13,7 +13,7 @@
 <script>
 import PostTeaser from "components/cards/PostTeaser";
 import Loader from "components/Loader";
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -27,7 +27,7 @@ export default {
     this.$store.dispatch('posts/fetchAllPosts')
   },
   computed: {
-    ...mapGetters("posts", ["postsByDateDescending"]),
+    ...mapState("posts", ["posts"]),
   },
 };
 </script>

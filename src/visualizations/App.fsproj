@@ -81,3 +81,87 @@
     <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
   </ItemGroup>
 </Project>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Components/Slider.fs" />
+        <Compile Include="Types.fs" />
+        <Compile Include="I18N.fs" />
+        <Compile Include="IntersectionObserver.fs" />
+        <Compile Include="ShareButton.fs" />
+        <Compile Include="Highcharts.fs" />
+        <Compile Include="Colors.fs" />
+        <Compile Include="Utils.fs" />
+        <Compile Include="Days.fs" />
+        <Compile Include="Statistics.fs" />
+        <Compile Include="data/Loader.fs" />
+        <Compile Include="data/Stats.fs" />
+        <Compile Include="data/WeeklyStats.fs" />
+        <Compile Include="data/Regions.fs" />
+        <Compile Include="data/Patients.fs" />
+        <Compile Include="data/LabTests.fs" />
+        <Compile Include="data/HCenters.fs" />
+        <Compile Include="data/Hospitals.fs" />
+        <Compile Include="data/OurWorldInData.fs" />
+        <Compile Include="data/DailyDeaths.fs" />
+        <Compile Include="data/MonthlyDeaths.fs" />
+        <Compile Include="DataAnalysis/DatedTypes.fs" />
+        <Compile Include="DataAnalysis/AgeGroupsTimeline.fs" />
+        <Compile Include="DataVisualization/ChartingTypes.fs" />
+        <Compile Include="MetricsComparisonChart.fs" />
+        <Compile Include="DailyComparisonChart.fs" />
+        <Compile Include="AgeGroupsChart.fs" />
+        <Compile Include="PatientsChart.fs" />
+        <Compile Include="RatiosChart.fs" />
+        <Compile Include="MunicipalitiesChart.fs" />
+        <Compile Include="HCentersChart.fs" />
+        <Compile Include="HospitalsChart.fs" />
+        <Compile Include="TestsChart.fs" />
+        <Compile Include="CasesChart.fs" />
+        <Compile Include="SpreadChart.fs" />
+        <Compile Include="MapChart.fs" />
+        <Compile Include="EuropeMapChart.fs" />
+        <Compile Include="InfectionsChart.fs" />
+        <Compile Include="SourcesChart.fs" />
+        <Compile Include="HcCasesChart.fs" />
+        <Compile Include="PhaseDiagram/Types.fs" />
+        <Compile Include="PhaseDiagram/Data.fs" />
+        <Compile Include="PhaseDiagram/Chart.fs" />
+        <Compile Include="AgeGroupsTimelineViz\LowCharts.fs" />
+        <Compile Include="AgeGroupsTimelineViz\Synthesis.fs" />
+        <Compile Include="AgeGroupsTimelineViz\Rendering.fs" />
+        <Compile Include="CountriesChartViz\Analysis.fs" />
+        <Compile Include="CountriesChartViz\Synthesis.fs" />
+        <Compile Include="CountriesChartViz\CountrySets.fs" />
+        <Compile Include="CountriesChartViz\Rendering.fs" />
+        <Compile Include="DeceasedViz\Analysis.fs" />
+        <Compile Include="DeceasedViz\Synthesis.fs" />
+        <Compile Include="DeceasedViz\Rendering.fs" />
+        <Compile Include="ExcessDeathsChart/Types.fs" />
+        <Compile Include="ExcessDeathsChart/Absolute.fs" />
+        <Compile Include="ExcessDeathsChart/Relative.fs" />
+        <Compile Include="ExcessDeathsChart/Main.fs" />
+        <Compile Include="RegionsChartViz\Analysis.fs" />
+        <Compile Include="RegionsChartViz\Synthesis.fs" />
+        <Compile Include="RegionsChartViz\Rendering.fs" />
+        <Compile Include="MetricsCorrelationViz\Rendering.fs" />
+        <Compile Include="App.fs" />
+        <Compile Include="Main.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Fable.Browser.Dom" Version="1.2.0" />
+        <PackageReference Include="Fable.Browser.Event" Version="1.0.0" />
+        <PackageReference Include="Fable.DateFunctions" Version="3.2.0" />
+        <PackageReference Include="Fable.Elmish.Debugger" Version="3.0.3" />
+        <PackageReference Include="Fable.Elmish.HMR" Version="4.0.1" />
+        <PackageReference Include="Fable.Elmish.React" Version="3.0.1" />
+        <PackageReference Include="Fable.SimpleHttp" Version="3.0.0" />
+        <PackageReference Include="Fable.SimpleJson" Version="3.11.0" />
+        <PackageReference Include="Fable.Extras" Version="0.1.0" />
+        <PackageReference Include="Feliz" Version="1.16.0" />
+        <PackageReference Include="Feliz.UseElmish" Version="1.4.1" />
+        <PackageReference Include="Feliz.ElmishComponents" Version="1.2.0" />
+        <PackageReference Include="FsToolkit.ErrorHandling" Version="1.4.3" />
+    </ItemGroup>
+</Project>

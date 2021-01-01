@@ -276,10 +276,12 @@
         "deceased": {
             "title": "Deaths",
             "titleMenu": "Deaths",
-            "deceasedToday": "Deaths per Day",
-            "deceasedTodayRelative": "Deaths per Day (relative)",
-            "deceasedToDate": "Deaths to Date",
-            "deceasedToDateRelative": "Deaths to Date (relative)",
+            "deceasedToday": "Deaths per day",
+            "deceasedTodayRelative": "Deaths per day (relative)",
+            "deceasedToDate": "Deaths to date",
+            "deceasedToDateRelative": "Deaths to date (relative)",
+            "deceasedByAgeToday": "Deaths by age (daily)",
+            "deceasedByAgeTodayRelative": "Deaths by age (daily, relative)",
             "deceased-icu": "ICU",
             "deceased-acute": "Acute Medical Unit",
             "deceased-care": "Care Hospital",
@@ -590,6 +592,7 @@
             "title": "Excess deaths",
             "titleMenu": "Excess deaths",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
             "absolute": {
                 "title": "Yearly comparison",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
@@ -1495,7 +1498,7 @@
             "answer": "All confirmed cases are shown in the [Confirmed Cases graph](/en/stats#cases-chart). In order to be able to monitor the epidemic, it is important to know how many are still infected. For this reason, we use the following terminology:\n\n**Closed cases**  are the sum of all confirmed cases who are no longer infected with the virus, that is, the recovered and the deceased.\n\n**Active cases** are all confirmed virus infections that still haven’t recovered (are still infected with the virus). See also\n [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)"
         },
         "chart-phases": {
-            "question": "What do the different phases (phases 1-7) in the graph mean?",
+            "question": "What do the different phases (phases 1-14) in the graph mean?",
             "answer": "The vertical lines divide the stages, delimited by the dates, when the authorities changed the way information about the spread of the infection was collected (the test method was changed, self-isolation interventions were introduced, bans on gathering and movement of persons, and mandatory basic protection were required).\n\nThe phases are shown because the change in testing methodology has also changed the importance of certain indicators by which the prevalence of infections can be judged.\n\n* **Phase 1 (March 4-12, 2020)**: The first cases of infection in Slovenia are recorded. All cases are followed, all contacts are tested.\n\n* **Phase 2 (March 13-19, 2020)**: The testing methodology is changed, and self-isolation and social distancing measures are introduced.\n\n* **Phase 3 (March 20-April 7)**: The testing methodology is revised and a ban on gathering more than five people in public areas is put in place.\n\n* **Phase 4 (April 8-15)**: New change in testing methodology – people with mild symptoms from households with more than one respiratory infections are also tested.\n\n* **Phase 5 (April 15-21)**: New change in testing methodology – re-testing, if possible, of **all suspected SARS-CoV-2 virus infections**.\n\n* ** Phase 6 (April 21–May 15**: New change in testing methodology – All persons **suspected of being infected with SARS-CoV-2** are tested again. A national survey of 3000 randomly sampled persons (additional testing, blood testing for the presence of antibodies) begins.\n\n* **Phase 7 (May 15–present)**: The Slovenian government called an official end to its coronavirus epidemic – a quarantine of at least 14 days will remain in place for people from non-EU states, except for some exemptions (diplomats, cargo). Citizens still have to follow basic rules to prevent a possible spread of infection."
         },
         "patients-chart": {
@@ -1549,6 +1552,14 @@
         "chart-reality": {
             "question": "Do your graphs represent the real picture?",
             "answer": "Yes, as far as they can, given the limitations of the current displays and of the data itself: the graphs on this page only show what can be deduced from the information given. For example, the total number of tests represents the number of tests performed to date, but does not reflect the total number of people tested, as some people, such as healthcare professionals and people suspected of being infected, have been repeatedly tested.\n\nHowever, the number of confirmed cases depends solely on testing. Since the majority of infected people, who have mild or no symptoms, have not been tested for COVID-19 at all, the number of confirmed cases is significantly lower than the actual number of infected people."
+        },
+        "chart-correlation": {
+            "question": "What does the \"Correlation between confirmed cases, hospitalization, and deaths\" graph mean?",
+            "answer": "The [correlation graph](/en/stats#metrics-correlation-chart) shows the temporal correlation between the number of confirmed cases, the number of hospitalized patients with, and the number of deaths caused by COVID-19. Each of the three graphs is shown on its scale, as this is the easiest way to show how long after the growth of new confirmed cases of infections we can expect an increase in the number of hospitalized and how much later also an increase in death.\n\nThe graph offers two view menus. In the menu directly below the graph, you can turn an individual curve on or off by clicking on “Confirmed cases”, “Hospitalized”, or “Dead”. Under the first menu, you can switch between the seven-day average and the total number of confirmed cases, hospitalized, or deceased by clicking on the icons \"By days (7-day average)\" and \"Total\"."
+        },
+        "chart-cases-by-age-group": {
+            "question":  "What does the \"Confirmed cases by age groups\" graph mean?",
+            "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases, divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
         },
         "what-is-sledilnik": {
             "question": "What is Sledilnik?",
