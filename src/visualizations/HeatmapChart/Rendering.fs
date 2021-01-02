@@ -39,7 +39,7 @@ let init data: State * Cmd<Msg> =
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
-    | ChangeMetrics metrics -> { state with Metrics = metrics }, Cmd.none    
+    | ChangeMetrics metrics -> { state with Metrics = metrics }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -62,18 +62,18 @@ let renderChartOptions state dispatch =
 
     let processedTimelineData =
         allGroupsKeys
-        |> List.map    
+        |> List.map
             ( fun ageGroupKey ->
-                timeline 
+                timeline
                 |> newExtractTimelineForAgeGroup ageGroupKey)
-    
 
-    let mapPoint 
+
+    let mapPoint
         (startDate: DateTime)
-        (weeksFromStartDate: int) 
+        (weeksFromStartDate: int)
         (ageGroupId: int)
         (ageGroupKey:AgeGroupKey)
-        (ageGroupData:ProcessedAgeGroupData) 
+        (ageGroupData:ProcessedAgeGroupData)
         (value: float)
         :obj=
 
@@ -88,184 +88,184 @@ let renderChartOptions state dispatch =
             ageGroupKey = ageGroupKey.Label
             maleCases = ageGroupData.Data.Male
             femaleCases = ageGroupData.Data.Female
-            dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |} 
-        |} 
+            dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |}
+        |}
 
         point |> pojo
 
 
-    let generateSeries 
-        (ageGroupId:int) 
+    let generateSeries
+        (ageGroupId:int)
         (ageGroupData:ProcessedAgeGroupData)
-        : obj = 
+        : obj =
 
         let ageGroupKey = ageGroupData.AgeGroupKey
         let populationStats = populationStatsForAgeGroup ageGroupKey
         let startDate = ageGroupData.StartDate
 
-        let timelineArray = 
+        let timelineArray =
             match state.Metrics.MetricsType with
-            | NewCases -> 
+            | NewCases ->
                 let totalPopulation = populationStats.Male + populationStats.Female |> float
 
                 Array.map (((*) (100000./ totalPopulation)) >> (fun x -> Math.Log (x + Math.E))) ageGroupData.Data.All
 
-            | CasesRatio -> 
+            | CasesRatio ->
                 let malePopulation = populationStats.Male |> float
                 let femalePopulation = populationStats.Female |> float
 
-                let relMaleCases = 
-                    ageGroupData.Data.Male 
+                let relMaleCases =
+                    ageGroupData.Data.Male
                     |> Array.map ((*) (100000./malePopulation))
-                let relFemaleCases = 
-                    ageGroupData.Data.Female 
+                let relFemaleCases =
+                    ageGroupData.Data.Female
                     |> Array.map ((*) (100000./femalePopulation))
 
-                let computeRatio 
+                let computeRatio
                     (x:float)
                     (y:float)
-                    :float = 
+                    :float =
                     match x, y with
                     | 0., 0. -> 1.
-                    | _, 0. -> 2. 
+                    | _, 0. -> 2.
                     | _, _ -> min (x / y) 2. |> max (0.5)
 
 
-                let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases 
+                let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases
 
                 ratio
 
                 // let movingAverage =
                 //     Array.concat [|[|0.|]; ratio |] // pad with zero so that moving averege array is of the same length as original
-                //     |> Array.windowed 2 
+                //     |> Array.windowed 2
                 //     |> Array.map Array.average
 
                 // let filter x y z =
                 //     match y, z with
                 //     | 0., 0. -> 1.
                 //     | _,_ -> x
-                
+
                 // Array.map3 filter movingAverage relFemaleCases relMaleCases
 
 
-                
 
 
-        let points = 
-            timelineArray 
+
+        let points =
+            timelineArray
             |> Array.mapi (fun index value -> mapPoint startDate index ageGroupId ageGroupKey ageGroupData value)
 
 
         let series = {|
-            colsize = 3600 * 1000 * 24 * 7 
+            colsize = 3600 * 1000 * 24 * 7
             visible = true
             name = ageGroupKey.Label
             data = points
-        |} 
-        
+        |}
+
         series |> pojo
 
-    let allSeries = 
-        processedTimelineData 
+    let allSeries =
+        processedTimelineData
         |> List.mapi (generateSeries)
         |> List.toArray
 
-    
+
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
             RangeSelectionChanged buttonIndex |> dispatch
             true
         res
-    
-    let sparklineFormatter 
-        ( state: State ) 
+
+    let sparklineFormatter
+        ( state: State )
         ( maleCases: float[] )
-        ( femaleCases: float[] ) = 
+        ( femaleCases: float[] ) =
 
         let series =
-            let maleData = 
+            let maleData =
                 maleCases
                 |> Array.mapi (fun i value -> {| x=i; y=value |} |> pojo)
 
-            let femaleData = 
+            let femaleData =
                 match state.Metrics.MetricsType with
-                | NewCases -> 
+                | NewCases ->
                     femaleCases
-                    |> Array.mapi (fun i value -> 
-                        {| 
-                            x=i 
-                            y= -value 
+                    |> Array.mapi (fun i value ->
+                        {|
+                            x=i
+                            y= -value
                         |} |> pojo)
-                | CasesRatio -> 
+                | CasesRatio ->
                     femaleCases
-                    |> Array.mapi (fun i value -> 
-                        {| 
-                            x=i 
-                            y= value 
+                    |> Array.mapi (fun i value ->
+                        {|
+                            x=i
+                            y= value
                         |} |> pojo)
 
 
 
-            [| 
-                {| 
-                    animation = false 
+            [|
+                {|
+                    animation = false
                     data = maleData
                     color = "#73CCD5"
                     borderColor = "#73CCD5"
                     pointWidth=2
-                |}|> pojo 
-                {| 
-                    animation = false 
-                    data = femaleData 
+                |}|> pojo
+                {|
+                    animation = false
+                    data = femaleData
                     color = "#D99A91"
                     borderColor = "#D99A91"
                     pointWidth=2
-                |}|> pojo 
+                |}|> pojo
             |]
 
-        let maximum = 
-            match state.Metrics.MetricsType with 
+        let maximum =
+            match state.Metrics.MetricsType with
             | NewCases -> max (Array.max femaleCases) (Array.max maleCases)
             | CasesRatio -> 100.
-        let minimum = 
+        let minimum =
             match state.Metrics.MetricsType with
             | NewCases -> - maximum
             | CasesRatio -> 0.
 
-        let options = 
+        let options =
             {|
-                chart = 
-                    {| 
-                        ``type`` = "column" 
+                chart =
+                    {|
+                        ``type`` = "column"
                         backgroundColor = "transparent"
                     |}|> pojo
                 legend = {|enable = false|}
 
                 title = {| enable = false|}
-                series = series 
-                
-                plotOptions = 
+                series = series
+
+                plotOptions =
                     {|
-                        column = 
+                        column =
                             match state.Metrics.MetricsType with
                             | NewCases -> {| stacking = "normal"|} |> pojo
                             | CasesRatio -> {| stacking = "percent" |} |> pojo
                     |}|>pojo
 
-                xAxis = 
+                xAxis =
                     {|
-                        visible = false 
+                        visible = false
                         labels = {| enabled = false|}
                         title = {| enabled = false|}
                         linkedto = Some 0.
                         // plotBands = [|
                         //         {| color = "#ff0000"; from = -1. ;``to``= 22. |} |> pojo
-                        //     |] 
+                        //     |]
                     |} |> pojo
-                yAxis = 
+                yAxis =
                     {|
                         min = minimum
-                        max = maximum 
+                        max = maximum
                         opposite = true
                         labels = {| enabled = false|}
                         visible = true
@@ -284,8 +284,8 @@ let renderChartOptions state dispatch =
         """<div id="tooltip-chart-heatmap"; class="tooltip-chart";><div/>"""
 
 
-    let tooltipFormatter 
-        ( jsThis: obj ) 
+    let tooltipFormatter
+        ( jsThis: obj )
         ( state: State ) =
 
         let ( point:obj ) = jsThis?point
@@ -304,30 +304,30 @@ let renderChartOptions state dispatch =
 
         let label = sprintf "<b> %s </b>" (date.ToString())
 
-        label 
+        label
             + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.heatmap.ageGroup") (ageGroupKey)
             + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Male) (I18N.t "charts.heatmap.male") (Utils.formatTo1DecimalWithTrailingZero (maleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
             + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Female) (I18N.t "charts.heatmap.female") (Utils.formatTo1DecimalWithTrailingZero(femaleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
             + sparkline
 
-    let colorAxis = 
+    let colorAxis =
         match state.Metrics.MetricsType with
-            | NewCases -> 
-                   {| 
+            | NewCases ->
+                   {|
                         ``type`` = "linear"
                         min = 1.0
                         stops =
-                            [|    
+                            [|
                                 (0.000, "#009e94")
                                 (0.256, "#6eb49d")
                                 (0.350, "#b2c9a7")
                                 (0.433, "#f0deb0")
                                 (0.700, "#e3b656")
                                 (0.900, "#cc8f00")
-                                (0.999, "#b06a00") 
+                                (0.999, "#b06a00")
                             |]
                     |} |>pojo
-            | CasesRatio -> 
+            | CasesRatio ->
                     {|
                         ``type`` = "linear"
                         min = 0.6
@@ -346,20 +346,20 @@ let renderChartOptions state dispatch =
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    {| 
+    {|
     baseOptions with
-        chart = pojo {| ``type`` = "heatmap" |}
+        chart = pojo {| ``type`` = "heatmap" ; animation = false|}
         series = allSeries
-        xAxis = 
-            {| 
+        xAxis =
+            {|
                 ``type`` = "datetime"
                 // max = endDate |> jsTime12h
             |} |> pojo
         yAxis =
            pojo
-                {| 
-                    categories = allGroupsKeys |> List.map (fun x -> x.Label) |> List.toArray 
-                    opposite = true 
+                {|
+                    categories = allGroupsKeys |> List.map (fun x -> x.Label) |> List.toArray
+                    opposite = true
                     tickWidth = 1
                     tickLength = 60
                     labels =
@@ -375,7 +375,7 @@ let renderChartOptions state dispatch =
                {| formatter = fun () -> tooltipFormatter jsThis state
                   shared = true
                   useHTML = true |}
-        credits = credictsOptions 
+        credits = credictsOptions
         boost = {| useGPUTranslations = true |} |> pojo
 
         responsive = pojo {| |}
