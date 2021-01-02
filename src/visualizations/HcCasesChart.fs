@@ -11,12 +11,14 @@ open Highcharts
 let chartText = I18N.chartText "hcCases"
 
 type DisplayType =
-    | All
+    | Absolute
     | Relative
   with
-    static member all = [ All; Relative; ]
-    static member getName = function
-        | All      -> chartText "all"
+    static member All = [ Absolute; Relative; ]
+    static member Default = Absolute
+    member this.GetName =
+        match this with
+        | Absolute -> chartText "all"
         | Relative -> chartText "relative"
 
 // ---------------------------
@@ -36,7 +38,7 @@ type Msg =
 let init data: State * Cmd<Msg> =
     let state =
         { scaleType = Linear
-          displayType = All
+          displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -63,14 +65,14 @@ let renderDisplaySelector state dt dispatch =
         Utils.classes
             [(true, "btn btn-sm metric-selector")
              (state.displayType = dt, "metric-selector--selected") ]
-        prop.text (dt |> DisplayType.getName)
+        prop.text dt.GetName
     ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            DisplayType.All
             |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
 
 type Series =
@@ -85,17 +87,17 @@ module Series =
         match series with
         | HealthcareCases ->  "#73ccd5", "healthcareEmployeesCases", 1
         | RhOccupantCases ->  "#bf5747", "rhOccupantCases", 1
-        | ConfirmedCases ->  
-            match state.displayType with 
-            | All      -> "#d5c768", "totalConfirmed", 1
+        | ConfirmedCases ->
+            match state.displayType with
+            | Absolute      -> "#d5c768", "totalConfirmed", 1
             | Relative -> "#d5c768", "otherCases", 1
 
 let tooltipFormatter jsThis dt =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
-    let arrows p = 
+    let arrows p =
         match dt with
-        | All -> 
+        | Absolute ->
             match p?point?seriesId with
             | "healthcareEmployeesCases" -> "↳ "
             | "rhOccupantCases" -> "↳ "
@@ -123,9 +125,9 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let getPoint: (WeeklyStatsDataPoint -> int option) =
         match series with
         | ConfirmedCases -> fun dp -> (match state.displayType with
-                                       | All -> dp.ConfirmedCases
-                                       | Relative -> 
-                                            dp.ConfirmedCases 
+                                       | Absolute -> dp.ConfirmedCases
+                                       | Relative ->
+                                            dp.ConfirmedCases
                                             |> splitOutFromTotal dp.HealthcareCases
                                             |> splitOutFromTotal dp.RetirementHomeOccupantCases) // Because "relative" is a stacked bar chart
 

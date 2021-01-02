@@ -9,7 +9,7 @@ open Types
 let init statsData =
     { StatsData = statsData
       WeeklyDeathsData = Loading
-      DisplayType = AbsoluteDeaths
+      DisplayType = DisplayType.Default
     }
 
 let update state msg =
@@ -39,14 +39,14 @@ let update state msg =
 
 let renderDisplayTypeSelectors state dispatch =
     let selectors =
-        DisplayType.available
+        DisplayType.All
         |> List.map (fun dt ->
             Html.div [
                 prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
                 Utils.classes
                     [(true, "chart-display-property-selector__item")
                      (state.DisplayType = dt, "selected")]
-                prop.text (DisplayType.getName dt) ] )
+                prop.text dt.GetName ] )
 
     Html.div [
         prop.className "chart-display-property-selector"

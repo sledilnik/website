@@ -20,9 +20,12 @@ type DisplayType =
     | AbsoluteDeaths
     | ExcessDeaths
 with
-    static member available = [ AbsoluteDeaths ; ExcessDeaths ]
+    static member All = [ AbsoluteDeaths ; ExcessDeaths ]
 
-    static member getName = function
+    static member Default = AbsoluteDeaths
+
+    member this.GetName =
+        match this with
         | AbsoluteDeaths -> I18N.t "charts.excessDeaths.absolute.title"
         | ExcessDeaths -> I18N.t "charts.excessDeaths.excess.title"
 
