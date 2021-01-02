@@ -134,6 +134,14 @@ function sparklineChart (documentElementId, options) {
   Highcharts.chart(documentElementId, options)
 }
 
+fetch("https://gist.githubusercontent.com/wavded/1200773/raw/e122cf709898c09758aecfef349964a8d73a83f3/sample.json")
+// fetch("http://localhost:8080/maps/municipalities-gurs-simplified.geojson")
+.then(res => res.json())
+.then((out) => {
+  console.log(Highcharts.geojson(out, 'map'))
+})
+.catch(err => { throw err });
+
 export {
     genericArray,
     loadScript,

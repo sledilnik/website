@@ -17,6 +17,7 @@ open Types
 type MapToDisplay = Municipality | Region
 
 let munGeoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
+
 let regGeoJsonUrl = "/maps/statistical-regions-gurs-simplified-3857.geojson"
 
 let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
@@ -82,7 +83,8 @@ type GeoJson = RemoteData<obj, string>
 
 type State =
     { MapToDisplay : MapToDisplay
-      GeoJson : GeoJson
+      MunicipalitiesGeoJson : GeoJson
+      RegionsGeoJson : GeoJson
       Data : Area seq
       DataTimeInterval : DataTimeInterval
       ContentType : ContentType
@@ -90,7 +92,8 @@ type State =
 
 type Msg =
     | GeoJsonRequested
-    | GeoJsonLoaded of GeoJson
+    | MunicipalitiesGeoJsonLoaded of GeoJson
+    | RegionsGeoJsonLoaded of GeoJson
     | DataTimeIntervalChanged of DataTimeInterval
     | ContentTypeChanged of ContentType
     | DisplayTypeChanged of DisplayType
@@ -100,13 +103,13 @@ let loadMunGeoJson =
         let! (statusCode, response) = Http.get munGeoJsonUrl
 
         if statusCode <> 200 then
-            return GeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
+            return MunicipalitiesGeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
         else
             try
                 let data = response |> Fable.Core.JS.JSON.parse
-                return GeoJsonLoaded (data |> Success)
+                return MunicipalitiesGeoJsonLoaded (data |> Success)
             with
-            | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
+            | ex -> return MunicipalitiesGeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
 let loadRegGeoJson =
@@ -114,13 +117,13 @@ let loadRegGeoJson =
         let! (statusCode, response) = Http.get regGeoJsonUrl
 
         if statusCode <> 200 then
-            return GeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
+            return RegionsGeoJsonLoaded (sprintf "Error loading map: %d" statusCode |> Failure)
         else
             try
                 let data = response |> Fable.Core.JS.JSON.parse
-                return GeoJsonLoaded (data |> Success)
+                return RegionsGeoJsonLoaded (data |> Success)
             with
-            | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
+            | ex -> return RegionsGeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
 let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd<Msg> =
@@ -214,7 +217,8 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
         | Region -> regData
 
     { MapToDisplay = mapToDisplay
-      GeoJson = NotAsked
+      MunicipalitiesGeoJson = NotAsked
+      RegionsGeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
       ContentType = ContentType.Default
@@ -226,11 +230,13 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | GeoJsonRequested ->
         let cmd =
             match state.MapToDisplay with
-            | Municipality -> Cmd.OfAsync.result loadMunGeoJson
+            | Municipality -> Cmd.batch [Cmd.OfAsync.result loadMunGeoJson ; Cmd.OfAsync.result loadRegGeoJson]
             | Region -> Cmd.OfAsync.result loadRegGeoJson
-        { state with GeoJson = Loading }, cmd
-    | GeoJsonLoaded geoJson ->
-        { state with GeoJson = geoJson }, Cmd.none
+        { state with MunicipalitiesGeoJson = Loading ; RegionsGeoJson = Loading }, cmd
+    | MunicipalitiesGeoJsonLoaded geoJson ->
+        { state with MunicipalitiesGeoJson = geoJson }, Cmd.none
+    | RegionsGeoJsonLoaded geoJson ->
+        { state with RegionsGeoJson = geoJson }, Cmd.none
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | ContentTypeChanged contentType ->
@@ -428,6 +434,7 @@ let sparklineFormatter newCases state =
                     |} |> pojo
                 |]
         |} |> pojo
+
     match state.MapToDisplay with
     | Municipality ->
         Fable.Core.JS.setTimeout
@@ -486,166 +493,179 @@ let tooltipFormatter state jsThis =
                 label
     sprintf "<b>%s</b><br/>%s<br/>" area label
 
+let renderMapAux (state : State) geoJson regionsOutlineGeoJson =
+    let data = seriesData state
 
+    // needed to calculate the color scale for bubbles adjusted to
+    // actual numbers
+    let minValue100k() =
+        (data
+         // for bubbles, do not include municipalities without
+         // any covid cases
+         |> Array.filter (fun x -> x.value100k > 0.)
+         |> Array.minBy (fun x -> x.value100k)).value100k
+    let maxValue100k() =
+        (data |> Array.maxBy (fun x -> x.value100k)).value100k
 
-let renderMap (state : State) =
-    match state.GeoJson with
-    | NotAsked
-    | Loading -> Html.none
-    | Failure str -> Html.text str
-    | Success geoJson ->
-        let data = seriesData state
+    let key =
+        match state.MapToDisplay with
+        | Municipality -> "isoid"
+        | Region -> "code"
 
-        // needed to calculate the color scale for bubbles adjusted to
-        // actual numbers
-        let minValue100k() =
-            (data
-             // for bubbles, do not include municipalities without
-             // any covid cases
-             |> Array.filter (fun x -> x.value100k > 0.)
-             |> Array.minBy (fun x -> x.value100k)).value100k
-        let maxValue100k() =
-            (data |> Array.maxBy (fun x -> x.value100k)).value100k
+    let series geoJson =
+        {| visible = true
+           ``type`` = null
+           mapData = geoJson
+           data = data
+           keys = [| "code" ; "value" |]
+           joinBy = [| key ; "code" |]
+           colorKey = "value"
+           nullColor = "white"
+           borderColor = "#000"
+           borderWidth = 0.2
+           minSize = 1
+           maxSize = "6%"
+           mapline = {| animation = {| duration = 0 |} |}
+           states =
+            {| normal = {| animation = {| duration = 0 |} |}
+               hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+           colorAxis =
+               match state.DisplayType with
+               // white-ish background color for municipalities when we use
+               // bubbles
+               | Bubbles -> 1
+               | _ -> 0
+           enableMouseTracking = true
+           stickyTracking = (state.DisplayType = Bubbles)
+       |}
 
+    let bubbleSeries geoJson =
+        {| visible = true
+           ``type`` = "mapbubble"
+           mapData = geoJson
+           data = data
+           keys = [| "code" ; "value" |]
+           joinBy = [| key ; "code" |]
+           colorKey = "value100k"
+           nullColor = "white"
+           borderColor = "#000"
+           borderWidth = 0.2
+           minSize = 0 // minimal size of a bubble - 0 means it won't be shown for 0
+           maxSize = "10%"
+           mapline = {| animation = {| duration = 0 |} |}
+           states =
+            {| normal = {| animation = {| duration = 0 |} |}
+               hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
+           colorAxis = 0
+           enableMouseTracking = true
+           stickyTracking = false
+       |}
 
-        let key =
-            match state.MapToDisplay with
-            | Municipality -> "isoid"
-            | Region -> "code"
+    let legend =
+        let enabled = state.ContentType = ConfirmedCases
+        {| enabled = enabled
+           title = {| text = null |}
+           align = "right"
+           verticalAlign = "bottom"
+           layout = "vertical"
+           floating = true
+           borderWidth = 1
+           backgroundColor = "white"
+           valueDecimals = 0
+           width = 70
+        |}
+        |> pojo
 
-        let series geoJson =
-            {| visible = true
-               ``type`` = null
-               mapData = geoJson
-               data = data
-               keys = [| "code" ; "value" |]
-               joinBy = [| key ; "code" |]
-               colorKey = "value"
-               nullColor = "white"
-               borderColor = "#000"
-               borderWidth = 0.2
-               minSize = 1
-               maxSize = "6%"
-               mapline = {| animation = {| duration = 0 |} |}
-               states =
-                {| normal = {| animation = {| duration = 0 |} |}
-                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-               colorAxis =
-                   match state.DisplayType with
-                   // white-ish background color for municipalities when we use
-                   // bubbles
-                   | Bubbles -> 1
-                   | _ -> 0
-               enableMouseTracking = true
-               stickyTracking = (state.DisplayType = Bubbles)
-           |}
+    let colorMax =
+        match state.ContentType, state.DisplayType with
+        | ConfirmedCases, Bubbles -> maxValue100k()
+        | ConfirmedCases, _ ->
+            match state.DataTimeInterval with
+            | Complete -> 20000.
+            | LastDays days ->
+                match days with
+                    | 21 -> 10500.
+                    | 14 -> 7000.
+                    | 7 -> 3500.
+                    | 1 -> 500.
+                    | _ -> 100.
+        | Deceased, _ ->
+            let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+            if dataMax < 1. then 10. else dataMax
 
-        let bubbleSeries geoJson =
-            {| visible = true
-               ``type`` = "mapbubble"
-               mapData = geoJson
-               data = data
-               keys = [| "code" ; "value" |]
-               joinBy = [| key ; "code" |]
-               colorKey = "value100k"
-               nullColor = "white"
-               borderColor = "#000"
-               borderWidth = 0.2
-               minSize = 0 // minimal size of a bubble - 0 means it won't be shown for 0
-               maxSize = "10%"
-               mapline = {| animation = {| duration = 0 |} |}
-               states =
-                {| normal = {| animation = {| duration = 0 |} |}
-                   hover = {| borderColor = "black" ; animation = {| duration = 0 |} |} |}
-               colorAxis = 0
-               enableMouseTracking = true
-               stickyTracking = false
-           |}
+    let colorMin =
+        match state.DisplayType with
+            | AbsoluteValues -> 0.9
+            | Bubbles -> minValue100k()
+            | RegionPopulationWeightedValues -> colorMax / 7000.
+            | RelativeIncrease -> -100.
 
-        let legend =
-            let enabled = state.ContentType = ConfirmedCases
-            {| enabled = enabled
-               title = {| text = null |}
-               align = "right"
-               verticalAlign = "bottom"
-               layout = "vertical"
-               floating = true
-               borderWidth = 1
-               backgroundColor = "white"
-               valueDecimals = 0
-               width = 70
-            |}
-            |> pojo
+    let whiteMuniColorAxis =
+        {|
+            ``type`` = "linear"
+            visible = false
+            stops = [| (0.000, "#ffffff") |]
+        |} |> pojo
 
-        let colorMax =
-            match state.ContentType, state.DisplayType with
-            | ConfirmedCases, Bubbles -> maxValue100k()
-            | ConfirmedCases, _ ->
-                match state.DataTimeInterval with
-                | Complete -> 20000.
-                | LastDays days ->
-                    match days with
-                        | 21 -> 10500.
-                        | 14 -> 7000.
-                        | 7 -> 3500.
-                        | 1 -> 500.
-                        | _ -> 100.
-            | Deceased, _ ->
-                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
-                if dataMax < 1. then 10. else dataMax
+    let relativeColorAxis =
+        {|
+            ``type`` = "logarithmic"
+            tickInterval = 0.4
+            max = colorMax
+            min = colorMin
+            endOnTick = false
+            startOnTick = false
+            stops =
+                [|
+                    (0.000,"#ffffff")
+                    (0.001,"#fff7db")
+                    (0.200,"#ffefb7")
+                    (0.280,"#ffe792")
+                    (0.360,"#ffdf6c")
+                    (0.440,"#ffb74d")
+                    (0.520,"#ff8d3c")
+                    (0.600,"#f85d3a")
+                    (0.680,"#ea1641")
+                    (0.760,"#d0004e")
+                    (0.840,"#ad005b")
+                    (0.920,"#800066")
+                    (0.999,"#43006e")
+                |]
+            reversed = true
+            labels =
+                {|
+                    formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
+                |} |> pojo
+        |} |> pojo
 
-        let colorMin =
-            match state.DisplayType with
-                | AbsoluteValues -> 0.9
-                | Bubbles -> minValue100k()
-                | RegionPopulationWeightedValues -> colorMax / 7000.
-                | RelativeIncrease -> -100.
-
-        let whiteMuniColorAxis =
-            {|
-                ``type`` = "linear"
-                visible = false
-                stops = [| (0.000, "#ffffff") |]
-//                stops = [| (0.000, "#f8f8f8") |]
-            |} |> pojo
-
-        let relativeColorAxis =
-            {|
-                ``type`` = "logarithmic"
-                tickInterval = 0.4
-                max = colorMax
-                min = colorMin
-                endOnTick = false
-                startOnTick = false
-                stops =
-                    [|
-                        (0.000,"#ffffff")
-                        (0.001,"#fff7db")
-                        (0.200,"#ffefb7")
-                        (0.280,"#ffe792")
-                        (0.360,"#ffdf6c")
-                        (0.440,"#ffb74d")
-                        (0.520,"#ff8d3c")
-                        (0.600,"#f85d3a")
-                        (0.680,"#ea1641")
-                        (0.760,"#d0004e")
-                        (0.840,"#ad005b")
-                        (0.920,"#800066")
-                        (0.999,"#43006e")
-                    |]
-                reversed = true
-                labels =
+    let colorAxis =
+        match state.ContentType with
+            | Deceased ->
+                {|
+                    ``type`` = "linear"
+                    tickInterval = 0.4
+                    max = colorMax
+                    min = colorMin
+                    endOnTick = false
+                    startOnTick = false
+                    stops =
+                        [|
+                            (0.000, "#ffffff")
+                            (0.111, "#efedf5")
+                            (0.222, "#dadaeb")
+                            (0.333, "#bcbddc")
+                            (0.444, "#9e9ac8")
+                            (0.556, "#807dba")
+                            (0.667, "#6a51a3")
+                            (0.778, "#54278f")
+                            (0.889, "#3f007d")
+                        |]
+                |} |> pojo
+            | ConfirmedCases ->
+                match state.DisplayType with
+                | AbsoluteValues ->
                     {|
-                        formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
-                    |} |> pojo
-            |} |> pojo
-
-
-        let colorAxis =
-            match state.ContentType with
-                | Deceased ->
-                    {|
-                        ``type`` = "linear"
+                        ``type`` = "logarithmic"
                         tickInterval = 0.4
                         max = colorMax
                         min = colorMin
@@ -653,123 +673,137 @@ let renderMap (state : State) =
                         startOnTick = false
                         stops =
                             [|
-                                (0.000, "#ffffff")
-                                (0.111, "#efedf5")
-                                (0.222, "#dadaeb")
-                                (0.333, "#bcbddc")
-                                (0.444, "#9e9ac8")
-                                (0.556, "#807dba")
-                                (0.667, "#6a51a3")
-                                (0.778, "#54278f")
-                                (0.889, "#3f007d")
+                                (0.000,"#ffffff")
+                                (0.001,"#fff7db")
+                                (0.200,"#ffefb7")
+                                (0.280,"#ffe792")
+                                (0.360,"#ffdf6c")
+                                (0.440,"#ffb74d")
+                                (0.520,"#ff8d3c")
+                                (0.600,"#f85d3a")
+                                (0.680,"#ea1641")
+                                (0.760,"#d0004e")
+                                (0.840,"#ad005b")
+                                (0.920,"#800066")
+                                (0.999,"#43006e")
                             |]
-                    |} |> pojo
-                | ConfirmedCases ->
-                    match state.DisplayType with
-                    | AbsoluteValues ->
-                        {|
-                            ``type`` = "logarithmic"
-                            tickInterval = 0.4
-                            max = colorMax
-                            min = colorMin
-                            endOnTick = false
-                            startOnTick = false
-                            stops =
-                                [|
-                                    (0.000,"#ffffff")
-                                    (0.001,"#fff7db")
-                                    (0.200,"#ffefb7")
-                                    (0.280,"#ffe792")
-                                    (0.360,"#ffdf6c")
-                                    (0.440,"#ffb74d")
-                                    (0.520,"#ff8d3c")
-                                    (0.600,"#f85d3a")
-                                    (0.680,"#ea1641")
-                                    (0.760,"#d0004e")
-                                    (0.840,"#ad005b")
-                                    (0.920,"#800066")
-                                    (0.999,"#43006e")
-                                |]
-                            reversed = true
-                            labels =
-                                {|
-                                    formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
-                                |} |> pojo
-                        |} |> pojo
-
-                    | Bubbles -> relativeColorAxis
-                    | RegionPopulationWeightedValues -> relativeColorAxis
-                    | RelativeIncrease ->
-                        {|
-                            ``type`` = "linear"
-                            tickInterval = 50
-                            max = 200
-                            min = -100
-                            endOnTick = false
-                            startOnTick = false
-                            stops =
-                                [|
-                                    (0.000,"#009e94")
-                                    (0.166,"#6eb49d")
-                                    (0.250,"#b2c9a7")
-                                    (0.333,"#f0deb0")
-                                    (0.500,"#e3b656")
-                                    (0.600,"#cc8f00")
-                                    (0.999,"#b06a00")
-                                |]
-                            reversed=false
-                            labels =
+                        reversed = true
+                        labels =
                             {|
-                               formatter = fun() -> sprintf "%s%%" jsThis?value
+                                formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
                             |} |> pojo
+                    |} |> pojo
+
+                | Bubbles -> relativeColorAxis
+                | RegionPopulationWeightedValues -> relativeColorAxis
+                | RelativeIncrease ->
+                    {|
+                        ``type`` = "linear"
+                        tickInterval = 50
+                        max = 200
+                        min = -100
+                        endOnTick = false
+                        startOnTick = false
+                        stops =
+                            [|
+                                (0.000,"#009e94")
+                                (0.166,"#6eb49d")
+                                (0.250,"#b2c9a7")
+                                (0.333,"#f0deb0")
+                                (0.500,"#e3b656")
+                                (0.600,"#cc8f00")
+                                (0.999,"#b06a00")
+                            |]
+                        reversed=false
+                        labels =
+                        {|
+                           formatter = fun() -> sprintf "%s%%" jsThis?value
                         |} |> pojo
+                    |} |> pojo
 
-        let lastDate =
-            state.Data
-            |> Seq.map (fun a ->
-                match a.Cases with
-                | Some c -> c |> Seq.tryLast
-                |_ -> None )
-            |> Seq.pick (fun c ->
-                match c with
-                | Some c -> Some c.Date
-                | _ -> None)
+    let lastDate =
+        state.Data
+        |> Seq.map (fun a ->
+            match a.Cases with
+            | Some c -> c |> Seq.tryLast
+            |_ -> None )
+        |> Seq.pick (fun c ->
+            match c with
+            | Some c -> Some c.Date
+            | _ -> None)
 
-        let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
+    let dateText = (I18N.tOptions "charts.common.dataDate" {| date = lastDate  |})
 
-        {| optionsWithOnLoadEvent "covid19-map" with
-            title = null
-            subtitle = {| text = dateText ; align="left"; verticalAlign="bottom" |}
-            series =
-                match state.DisplayType with
-                | Bubbles -> [| series geoJson; bubbleSeries geoJson |]
-                | _ -> [| series geoJson |]
-            legend = legend
-            colorAxis = [|
-                colorAxis; whiteMuniColorAxis
-            |]
-            tooltip =
-                {|
-                    formatter = fun () -> tooltipFormatter state jsThis
-                    useHTML = true
-                    distance = 50
-                |} |> pojo
-            credits =
-                {|
-                    enabled = true
-                    text =
-                        sprintf "%s: %s, %s"
-                            (I18N.t "charts.common.dataSource")
-                            (I18N.t "charts.common.dsNIJZ")
-                            (I18N.t "charts.common.dsMZ")
-                    mapTextFull = ""
-                    mapText = ""
-                    href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-                    position = {| align = "right" ; verticalAlign = "bottom" ; x = -10 ; y = -5 |}
-                    style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "9px" |}
-                |}
-        |}
-        |> map
+    let series =
+        match state.DisplayType with
+        | Bubbles ->
+            [| series geoJson |> pojo
+               bubbleSeries geoJson |> pojo |]
+        | _ ->
+            seq {
+                yield series geoJson |> pojo
+                match regionsOutlineGeoJson with
+                | None -> ()
+                | Some geoJson ->
+                    // console.log(Highcharts.HighCharts?geojson(geoJson, "mapline"))
+                    yield
+                        {| ``type`` = "mapline"
+                           backgroundColor = "red"
+                           borderColor = "#000"
+                           borderWidth = 1.5
+                           data = [||]
+                           nullColor = "transparent"
+                        |} |> pojo
+            } |> Seq.toArray
+
+    {| optionsWithOnLoadEvent "covid19-map" with
+        title = null
+        subtitle = {| text = dateText ; align="left" ; verticalAlign="bottom" |}
+        series = series
+        legend = legend
+        colorAxis = [|
+            colorAxis; whiteMuniColorAxis
+        |]
+        tooltip =
+            {|
+                formatter = fun () -> tooltipFormatter state jsThis
+                useHTML = true
+                distance = 50
+            |} |> pojo
+        credits =
+            {|
+                enabled = true
+                text =
+                    sprintf "%s: %s, %s"
+                        (I18N.t "charts.common.dataSource")
+                        (I18N.t "charts.common.dsNIJZ")
+                        (I18N.t "charts.common.dsMZ")
+                mapTextFull = ""
+                mapText = ""
+                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+                position = {| align = "right" ; verticalAlign = "bottom" ; x = -10 ; y = -5 |}
+                style = {| color = "#999999" ; cursor = "pointer" ; fontSize = "9px" |}
+            |}
+    |}
+    |> map
+
+let renderMap (state : State) =
+    match state.MapToDisplay with
+    | Region ->
+        match state.RegionsGeoJson with
+        | NotAsked
+        | Loading -> Html.none
+        | Failure str -> Html.text str
+        | Success geoJson -> renderMapAux state geoJson None
+    | Municipality ->
+        match state.MunicipalitiesGeoJson, state.RegionsGeoJson with
+        | NotAsked, _
+        | Loading, _
+        | _, NotAsked
+        | _, Loading -> Html.none
+        | Failure str, _
+        | _, Failure str -> Html.text str
+        | Success municipalitiesGeoJson, Success regionsGeoJson -> renderMapAux state municipalitiesGeoJson (Some regionsGeoJson)
 
 let inline renderSelector (option: ^T when ^T : (member GetName: string)) (currentOption: ^T) dispatch =
     let defaultProps =
