@@ -52,8 +52,10 @@
         <Compile Include="CountriesChartViz\Rendering.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
         <Compile Include="ExcessDeathsChart/Types.fs" />
+        <Compile Include="ExcessDeathsChart/ChartOptions.fs" />
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
         <Compile Include="ExcessDeathsChart/Relative.fs" />
+        <Compile Include="ExcessDeathsChart/RelativeByAgeGroup.fs" />
         <Compile Include="ExcessDeathsChart/Main.fs" />
         <Compile Include="RegionsChartViz\Analysis.fs" />
         <Compile Include="RegionsChartViz\Synthesis.fs" />

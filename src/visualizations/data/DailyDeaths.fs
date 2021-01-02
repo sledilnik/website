@@ -2,6 +2,8 @@ module Data.DailyDeaths
 
 open FsToolkit.ErrorHandling
 
+let apiUrl = "https://api.sledilnik.org/api/age-daily-deaths-slovenia"
+
 type private SourceAgeGroupsDataPoint = {
     ``0-3`` : int option
     ``4-18`` : int option
@@ -24,22 +26,22 @@ type private SourceDataPoint = {
 type AgeGroupDataPoint = {
     DeceasedAgeGroupFrom0to3 : int option
     DeceasedAgeGroupFrom4to18 : int option
-    DeceasedAgeGroupFrom1tto31 : int option
-    DeceasedAgeGroupFrom3tto41 : int option
-    DeceasedAgeGroupFrom4tto51 : int option
-    DeceasedAgeGroupFrom5tto61 : int option
-    DeceasedAgeGroupFrom6tto71 : int option
-    DeceasedAgeGroupOver72 : int option
+    DeceasedAgeGroupFrom18to31 : int option
+    DeceasedAgeGroupFrom32to41 : int option
+    DeceasedAgeGroupFrom42to51 : int option
+    DeceasedAgeGroupFrom52to61 : int option
+    DeceasedAgeGroupFrom62to71 : int option
+    DeceasedAgeGroup72AndMore : int option
 } with
     member this.sum =
         [ this.DeceasedAgeGroupFrom0to3
           this.DeceasedAgeGroupFrom4to18
-          this.DeceasedAgeGroupFrom1tto31
-          this.DeceasedAgeGroupFrom3tto41
-          this.DeceasedAgeGroupFrom4tto51
-          this.DeceasedAgeGroupFrom5tto61
-          this.DeceasedAgeGroupFrom6tto71
-          this.DeceasedAgeGroupOver72 ]
+          this.DeceasedAgeGroupFrom18to31
+          this.DeceasedAgeGroupFrom32to41
+          this.DeceasedAgeGroupFrom42to51
+          this.DeceasedAgeGroupFrom52to61
+          this.DeceasedAgeGroupFrom62to71
+          this.DeceasedAgeGroup72AndMore ]
         |> List.sumBy (fun x -> Option.defaultValue 0 x)
 
 type DataPoint = {
@@ -48,8 +50,6 @@ type DataPoint = {
     DeceasedMale : AgeGroupDataPoint
     DeceasedFemale : AgeGroupDataPoint
 }
-
-let apiUrl = "https://api.sledilnik.org/api/age-daily-deaths-slovenia"
 
 let loadData () =
     asyncResult {
@@ -62,12 +62,12 @@ let loadData () =
             let deceasedSex data = {
                 DeceasedAgeGroupFrom0to3 = data.``0-3``
                 DeceasedAgeGroupFrom4to18 = data.``4-18``
-                DeceasedAgeGroupFrom1tto31 = data.``19-31``
-                DeceasedAgeGroupFrom3tto41 = data.``32-41``
-                DeceasedAgeGroupFrom4tto51 = data.``42-51``
-                DeceasedAgeGroupFrom5tto61 = data.``52-61``
-                DeceasedAgeGroupFrom6tto71 = data.``62-71``
-                DeceasedAgeGroupOver72 = data.``72+``
+                DeceasedAgeGroupFrom18to31 = data.``19-31``
+                DeceasedAgeGroupFrom32to41 = data.``32-41``
+                DeceasedAgeGroupFrom42to51 = data.``42-51``
+                DeceasedAgeGroupFrom52to61 = data.``52-61``
+                DeceasedAgeGroupFrom62to71 = data.``62-71``
+                DeceasedAgeGroup72AndMore = data.``72+``
             }
 
             let deceasedMale = deceasedSex dp.male

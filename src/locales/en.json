@@ -599,6 +599,15 @@
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
+            },
+            "excessByAgeGroup": {
+                "title": "Excess relative to the last 5 years by age group",
+                "disclaimer": "Note: data on deaths for the last month is incomplete. You can read more about the chart in the article",
+                "sex": {
+                    "both": "All",
+                    "male": "Male",
+                    "female": "Female"
+                }
             }
         },
         "hospitals": {

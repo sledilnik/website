@@ -13,9 +13,9 @@ let colors = {|
     ConfidenceInterval = "#a0a0a0"
 |}
 
-let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
+let baselineStartYear, baselineEndYear = 2015, 2019
 
-    let baselineStartYear, baselineEndYear = 2015, 2019
+let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
 
     let deceasedBaseline, deceasedminMax =
         data
@@ -170,18 +170,8 @@ let renderChartOptions (data : WeeklyDeathsData) (statsData : StatsData) =
        xAxis = {| ``type`` = "datetime" |}
        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
        tooltip = {| formatter = fun () -> sprintf "%s: <b>%.1f %%</b>" jsThis?key jsThis?y |} |> pojo
+       responsive = ChartOptions.responsive
        series = series
-       responsive = pojo
-            {|
-                rules =
-                    [| {|
-                        condition = {| maxWidth = 768 |}
-                        chartOptions =
-                            {|
-                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
-                            |}
-                    |} |]
-            |}
        credits =
         {| enabled = true
            text = sprintf "%s: %s, %s"
