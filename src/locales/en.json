@@ -604,7 +604,7 @@
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excessByAgeGroup": {
-                "title": "Excess relative to the last 5 years by age group",
+                "title": "Excess relative to the last 5 years by age groups",
                 "disclaimer": "Note: data on deaths for the last month is incomplete. You can read more about the chart in the article",
                 "totalDeceased": "Total deceased",
                 "sex": {
