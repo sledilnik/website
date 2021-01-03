@@ -1209,6 +1209,7 @@
         },
         "heatmap": {
             "title": "Primerjava po tednih",
+            "titleMenu": "Starost – po tednih",
             "ageGroup": "Starostna skupina",
             "male": "Moški",
             "female":"Ženske",

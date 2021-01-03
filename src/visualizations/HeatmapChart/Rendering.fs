@@ -69,15 +69,13 @@ let renderChartOptions state dispatch =
 
 
     let mapPoint
-        (startDate: DateTime)
         (weeksFromStartDate: int)
         (ageGroupId: int)
-        (ageGroupKey:AgeGroupKey)
-        (ageGroupData:ProcessedAgeGroupData)
+        (ageGroupData: ProcessedAgeGroupData)
         (value: float)
         :obj=
 
-        let date = startDate |> Days.add  (7 *  weeksFromStartDate)
+        let date = ageGroupData.StartDate |> Days.add  (7 *  weeksFromStartDate)
         let dateTo = date |> Days.add 6
 
         let point = {|
@@ -85,7 +83,7 @@ let renderChartOptions state dispatch =
             y = ageGroupId
             value = value
             weeks = weeksFromStartDate
-            ageGroupKey = ageGroupKey.Label
+            ageGroupKey = ageGroupData.AgeGroupKey.Label
             maleCases = ageGroupData.Data.Male
             femaleCases = ageGroupData.Data.Female
             dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |}
@@ -95,13 +93,13 @@ let renderChartOptions state dispatch =
 
 
     let generateSeries
+        (state: State)
         (ageGroupId:int)
         (ageGroupData:ProcessedAgeGroupData)
         : obj =
 
         let ageGroupKey = ageGroupData.AgeGroupKey
         let populationStats = populationStatsForAgeGroup ageGroupKey
-        let startDate = ageGroupData.StartDate
 
         let timelineArray =
             match state.Metrics.MetricsType with
@@ -135,25 +133,9 @@ let renderChartOptions state dispatch =
 
                 ratio
 
-                // let movingAverage =
-                //     Array.concat [|[|0.|]; ratio |] // pad with zero so that moving averege array is of the same length as original
-                //     |> Array.windowed 2
-                //     |> Array.map Array.average
-
-                // let filter x y z =
-                //     match y, z with
-                //     | 0., 0. -> 1.
-                //     | _,_ -> x
-
-                // Array.map3 filter movingAverage relFemaleCases relMaleCases
-
-
-
-
-
         let points =
             timelineArray
-            |> Array.mapi (fun index value -> mapPoint startDate index ageGroupId ageGroupKey ageGroupData value)
+            |> Array.mapi (fun index value -> mapPoint index ageGroupId ageGroupData value)
 
 
         let series = {|
@@ -167,7 +149,7 @@ let renderChartOptions state dispatch =
 
     let allSeries =
         processedTimelineData
-        |> List.mapi (generateSeries)
+        |> List.mapi (generateSeries state)
         |> List.toArray
 
 
@@ -258,9 +240,6 @@ let renderChartOptions state dispatch =
                         labels = {| enabled = false|}
                         title = {| enabled = false|}
                         linkedto = Some 0.
-                        // plotBands = [|
-                        //         {| color = "#ff0000"; from = -1. ;``to``= 22. |} |> pojo
-                        //     |]
                     |} |> pojo
                 yAxis =
                     {|
@@ -273,8 +252,6 @@ let renderChartOptions state dispatch =
                         allowDecimals = false
                         showFirstLabel = true
                         showLastLabel = true
-                        gridLineColor = "#000000"
-                        gridLineDashStyle = "dot"
                     |}
 
                 credits = {| enable  = false|}

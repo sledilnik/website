@@ -115,4 +115,8 @@ export default {
     titleKey: 'charts.metricsCorrelation.titleMenu',
     icon: 'graph',
   },
+  'heatmap-chart': {
+    titleKey: 'charts.heatmap.titleMenu',
+    icon: 'map',
+  }
 }

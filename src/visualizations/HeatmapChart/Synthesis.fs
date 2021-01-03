@@ -18,11 +18,11 @@ type CasesInAgeGroupSeries =
 
 type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
 
-type ProcessedTimeline = 
+type ProcessedTimeline =
     { All:float[]; Male:float[]; Female:float[]}
 
 type ProcessedAgeGroupData ={
-    AgeGroupKey: AgeGroupKey 
+    AgeGroupKey: AgeGroupKey
     Data: ProcessedTimeline
     StartDate:DateTime
 }
@@ -36,8 +36,8 @@ type DisplayMetrics =
       MetricsType: DisplayMetricsType }
 
 let availableDisplayMetrics =
-    [| 
-       { Id = "newCases"; MetricsType = NewCases } 
+    [|
+       { Id = "newCases"; MetricsType = NewCases }
        { Id = "ratio"; MetricsType = CasesRatio }
     |]
 
@@ -47,19 +47,19 @@ let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list =
     |> List.sortBy (fun groupKey -> groupKey.AgeFrom)
 
 
-let newExtractTimelineForAgeGroup 
+let newExtractTimelineForAgeGroup
     (ageGroupKey: AgeGroupKey)
     (casesTimeline: CasesByAgeGroupsTimeline)=
-    
-    let newCasesTimeline = 
-        casesTimeline 
-        |> mapDatedArrayItems  
+
+    let newCasesTimeline =
+        casesTimeline
+        |> mapDatedArrayItems
             (fun dayGroupsData ->
                 dayGroupsData
                 |> List.find (fun group -> group.GroupKey = ageGroupKey))
 
-    let optionToFloat (value: int option) : float = 
-        match value with 
+    let optionToFloat (value: int option) : float =
+        match value with
         | Some x -> float x
         | None -> 0.
 
@@ -67,45 +67,43 @@ let newExtractTimelineForAgeGroup
     let femaleCaseCount = newCasesTimeline.Data |> Array.map ((fun dp -> dp.Female) >> optionToFloat)
     let totalCaseCount = newCasesTimeline.Data |> Array.map ((fun dp -> dp.All) >> optionToFloat)
 
-    let padCases (cases: CasesInAgeGroupForDay[]): CasesInAgeGroupForDay[] = 
+    let padCases (cases: CasesInAgeGroupForDay[]): CasesInAgeGroupForDay[] =
         Array.concat [|[|0.;0.|]; cases|]
 
-    let accumulateWeekly (cases: CasesInAgeGroupForDay[]): float[] = 
+    let accumulateWeekly (cases: CasesInAgeGroupForDay[]): float[] =
         let chunks =
-            cases 
+            cases
             |> Seq.chunkBySize 7
 
         let numberOfWeeks = Seq.length chunks
 
-        let lastWeek = chunks |> Seq.skip (numberOfWeeks - 2) |> Seq.concat 
+        let lastWeek = chunks |> Seq.skip (numberOfWeeks - 2) |> Seq.concat
 
         let truncatedChunks = // check if there's complete data available for last week otherwise truncate
             match Seq.length lastWeek with
             | 7 -> chunks
             | _ -> Seq.truncate (numberOfWeeks - 1) chunks
 
-        truncatedChunks 
+        truncatedChunks
         |> Seq.map Seq.sum
         |> Seq.toArray
-         
+
     let (shiftedStartDate:DateTime) = casesTimeline.StartDate |> Days.add -2
 
-    let data = 
-        { 
+    let data =
+        {
             All = totalCaseCount |> padCases |> accumulateWeekly
             Male = maleCaseCount |> padCases |> accumulateWeekly
             Female = femaleCaseCount |> padCases |> accumulateWeekly
         }
 
-    let processedData = 
-        {
-           AgeGroupKey = ageGroupKey
-           Data = data
-           StartDate = shiftedStartDate
-        }
-
-    processedData
+    {
+       AgeGroupKey = ageGroupKey
+       Data = data
+       StartDate = shiftedStartDate
+    }
 
 
-    
-    
+
+
+

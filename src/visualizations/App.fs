@@ -540,10 +540,10 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView HeatmapChart.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ heatmap; hospitals; metricsComparison; dailyComparison; tests;
+        [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; ageGroups; hcCases;
+          ageGroupsTimeline; heatmap; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
