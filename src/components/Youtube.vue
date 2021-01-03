@@ -1,5 +1,5 @@
 <template>
-  <div class="visualizations">
+  <div class="visualizations" v-b-visible.once.350="handleVisibility">
     <div class="visualization container">
       <section class="visualization-chart" id="youtube">
         <div class="title-chart-wrapper">
@@ -7,8 +7,8 @@
             <h2><a href="#youtube">{{ $t('youtube.title') }}</a></h2>
           </div>
         </div>
-        <div class="youtube-embed">
-          <iframe :src="videoId" allowfullscreen="true"></iframe>
+        <div class="youtube-embed" v-if="isVisible">
+          <iframe :src="videoId" allowfullscreen="true" loading="lazy"></iframe>
         </div>
       </section>
     </div>
@@ -23,7 +23,13 @@ export default {
   },
   data() {
     return {
+      isVisible: false,
       videoId: 'https://www.youtube-nocookie.com/embed/' + this.id + '?rel=0',
+    }
+  },
+  methods: {
+    handleVisibility(isVisible){
+      this.isVisible = isVisible
     }
   },
 }

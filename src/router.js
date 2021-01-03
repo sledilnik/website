@@ -6,7 +6,6 @@ import i18next from 'i18next'
 import StaticPage from './pages/StaticPage.vue'
 import StatsPage from './pages/StatsPage.vue'
 import PageNotFound from './pages/PageNotFound.vue'
-import FAQPage from './pages/FAQPage.vue'
 
 import aboutMdSl from './content/sl/about.md'
 import aboutMdEn from './content/en/about.md'
@@ -214,7 +213,7 @@ const routes = [
       {
         path: 'faq',
         name: 'faq',
-        component: FAQPage,
+        component: import(/* webpackChunkName: "Faq.route" */ './pages/FAQPage.vue'),
       },
       {
         path: 'links', // Retired page
