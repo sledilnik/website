@@ -22,9 +22,9 @@ type Sex =
 
         member this.Label =
             match this with
-            | Both -> chartText ("excessByAgeGroup.sex.both")
-            | Male -> chartText ("excessByAgeGroup.sex.male")
-            | Female -> chartText ("excessByAgeGroup.sex.female")
+            | Both -> chartText "excessByAgeGroup.sex.both"
+            | Male -> chartText "excessByAgeGroup.sex.male"
+            | Female -> chartText "excessByAgeGroup.sex.female"
 
 type WeeklyDeaths = {
     Year : int

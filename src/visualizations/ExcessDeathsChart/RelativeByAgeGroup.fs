@@ -3,7 +3,6 @@ module ExcessDeathsChart.RelativeByAgeGroup
 open Browser
 open Highcharts
 open Fable.Core.JsInterop
-open Fable.DateFunctions
 
 open Types
 
@@ -61,12 +60,33 @@ let averageDataPoint dataPoints =
       AgeGroup72AndMore = (dataPoints|> List.sumBy (fun dp -> dp.AgeGroup72AndMore) |> float) / countDays }
 
 let dataPointDifference deceased baseline =
-    let difference deceased baseline = (float deceased - float baseline) / (float baseline) * 100.0
+    let difference deceased baseline = System.Math.Round((float deceased - float baseline) / (float baseline) * 100.0, 1)
     { AgeGroupFrom0to51 = difference deceased.AgeGroupFrom0to51 baseline.AgeGroupFrom0to51
       AgeGroupFrom52to71 = difference deceased.AgeGroupFrom52to71 baseline.AgeGroupFrom52to71
       AgeGroup72AndMore = difference deceased.AgeGroup72AndMore baseline.AgeGroup72AndMore }
 
-let calculateDataSeties sex data =
+let dataPointTotal (deceased : AgeGroupsDataPoint<int> list) =
+    { AgeGroupFrom0to51 = deceased |> List.sumBy (fun dp -> dp.AgeGroupFrom0to51)
+      AgeGroupFrom52to71 = deceased |> List.sumBy (fun dp -> dp.AgeGroupFrom52to71)
+      AgeGroup72AndMore = deceased |> List.sumBy (fun dp -> dp.AgeGroup72AndMore) }
+
+let ageGroupProportions (ageGroupsDataPoints : AgeGroupsDataPoint<int> list) =
+    let sum =
+        { AgeGroupFrom0to51 = ageGroupsDataPoints |> List.sumBy (fun dp -> dp.AgeGroupFrom0to51)
+          AgeGroupFrom52to71 = ageGroupsDataPoints |> List.sumBy (fun dp -> dp.AgeGroupFrom52to71)
+          AgeGroup72AndMore = ageGroupsDataPoints |> List.sumBy (fun dp -> dp.AgeGroup72AndMore) }
+
+    let total = sum.AgeGroupFrom0to51 + sum.AgeGroupFrom52to71 + sum.AgeGroup72AndMore
+
+    let daysInMonthFactor = float(List.length ageGroupsDataPoints) / 30.0
+
+    { AgeGroupFrom0to51 = float sum.AgeGroupFrom0to51 / float total * daysInMonthFactor
+      AgeGroupFrom52to71 = float sum.AgeGroupFrom52to71 / float total * daysInMonthFactor
+      AgeGroup72AndMore = float sum.AgeGroup72AndMore / float total * daysInMonthFactor }
+
+let calculateDataSeries sex data =
+
+    let lastDataPoint = List.last data
 
     let collapsedData =
         data
@@ -77,26 +97,55 @@ let calculateDataSeties sex data =
         |> List.filter (fun dp -> dp.Date.Year >= baselineStartYear && dp.Date.Year <= baselineEndYear)
         |> List.groupBy (fun dp -> dp.Date.Month)
         |> List.map (fun (month, dps) ->
-            month, {| Deceased = dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint
+            month, {| DeceasedRelative = dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint
                       DeceasedMale = dps |> List.map (fun dp -> dp.DeceasedMale) |> averageDataPoint
                       DeceasedFemale = dps |> List.map (fun dp -> dp.DeceasedFemale) |> averageDataPoint
                    |} )
         |> FSharp.Collections.Map
+
+    let averageByMonthForLastMonth =
+        let filtered =
+            collapsedData
+            |> List.filter (fun dp -> dp.Date.Year >= baselineStartYear && dp.Date.Year <= baselineEndYear)
+            |> List.filter (fun dp ->
+                match dp.Date, lastDataPoint.Date with
+                | dp, lastDp when dp.Month = lastDp.Month && dp.Day <= lastDp.Day -> true
+                | _ -> false)
+        {| DeceasedRelative = filtered |> List.map (fun dp -> dp.Deceased) |> averageDataPoint
+           DeceasedMale = filtered |> List.map (fun dp -> dp.DeceasedMale) |> averageDataPoint
+           DeceasedFemale = filtered |> List.map (fun dp -> dp.DeceasedFemale) |> averageDataPoint
+        |}
 
     let difference =
         collapsedData
         |> List.filter (fun dp -> dp.Date.Year > baselineEndYear)
         |> List.groupBy (fun dp -> dp.Date.Year, dp.Date.Month)
         |> List.map (fun ((year, month), dps) ->
-            let averageBaseline = averageByMonth.Item month
+            let averageBaseline =
+                if (year, month) = (lastDataPoint.Date.Year, lastDataPoint.Date.Month) then
+                    averageByMonthForLastMonth
+                else
+                    averageByMonth.Item month
             {| Date = System.DateTime(year, month, 1)
-               Deceased =
+               DeceasedRelative =
                 match sex with
-                | Both -> dataPointDifference (dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint) averageBaseline.Deceased
+                | Both -> dataPointDifference (dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint) averageBaseline.DeceasedRelative
                 | Male -> dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedMale) |> averageDataPoint) averageBaseline.DeceasedMale
                 | Female -> dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedFemale) |> averageDataPoint) averageBaseline.DeceasedFemale
+               DeceasedTotal =
+                match sex with
+                | Both -> dataPointTotal (dps |> List.map (fun dp -> dp.Deceased))
+                | Male -> dataPointTotal (dps |> List.map (fun dp -> dp.DeceasedMale))
+                | Female -> dataPointTotal (dps |> List.map (fun dp -> dp.DeceasedFemale))
+               DeceasedAgeGroupProportions =
+                match sex with
+                | Both -> dps |> List.map (fun dp -> dp.Deceased) |> ageGroupProportions
+                | Male -> dps |> List.map (fun dp -> dp.DeceasedMale) |> ageGroupProportions
+                | Female -> dps |> List.map (fun dp -> dp.DeceasedFemale) |> ageGroupProportions
             |}
         )
+
+    let width = 20.0
 
     [|
         {| ``type`` = "column"
@@ -106,7 +155,9 @@ let calculateDataSeties sex data =
                difference
                |> List.map (fun dp ->
                     {| x = dp.Date |> jsTime12h
-                       y = dp.Deceased.AgeGroupFrom0to51
+                       y = dp.DeceasedRelative.AgeGroupFrom0to51
+                       deceasedTotal = dp.DeceasedTotal.AgeGroupFrom0to51
+                       pointWidth = width * dp.DeceasedAgeGroupProportions.AgeGroupFrom0to51
                     |} |> pojo)
                |> List.toArray
         |} |> pojo
@@ -117,7 +168,9 @@ let calculateDataSeties sex data =
                difference
                |> List.map (fun dp ->
                     {| x = dp.Date |> jsTime12h
-                       y = dp.Deceased.AgeGroupFrom52to71
+                       y = dp.DeceasedRelative.AgeGroupFrom52to71
+                       deceasedTotal = dp.DeceasedTotal.AgeGroupFrom52to71
+                       pointWidth = width * dp.DeceasedAgeGroupProportions.AgeGroupFrom52to71
                     |} |> pojo)
                |> List.toArray
         |} |> pojo
@@ -128,25 +181,27 @@ let calculateDataSeties sex data =
                difference
                |> List.map (fun dp ->
                     {| x = dp.Date |> jsTime12h
-                       y = dp.Deceased.AgeGroup72AndMore
+                       y = dp.DeceasedRelative.AgeGroup72AndMore
+                       deceasedTotal = dp.DeceasedTotal.AgeGroup72AndMore
+                       pointWidth = width * dp.DeceasedAgeGroupProportions.AgeGroup72AndMore
                     |} |> pojo)
                |> List.toArray
         |} |> pojo
     |]
 
 let renderChartOptions sex (data : DailyDeathsData) =
-    {| chart = {| ``type`` = "column " |} |> pojo
+    {| chart = {| ``type`` = "column" |} |> pojo
        title = ""
        xAxis = {| ``type`` = "datetime" |}
        yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
-       tooltip = {| formatter = fun () -> sprintf "%s: <b>%.1f %%</b>" jsThis?key jsThis?y |} |> pojo
+       tooltip = {| valueSuffix = " %" ; xDateFormat = "%B %Y" ; footerFormat = chartText "excessByAgeGroup.totalDeceased" + ": <b>{point.deceasedTotal}</b>" |} |> pojo
        responsive = ChartOptions.responsive
-       series = calculateDataSeties sex data
+       plotOptions = {| series = {| pointPadding = 0 ; borderWidth = 0 |} |> pojo |} |> pojo
+       series = calculateDataSeries sex data
        credits =
         {| enabled = true
-           text = sprintf "%s: %s, %s"
+           text = sprintf "%s: %s"
                 (I18N.t "charts.common.dataSource")
                 (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-                (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-           href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
+           href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" |} |> pojo
     |} |> pojo
