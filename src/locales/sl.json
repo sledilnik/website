@@ -776,6 +776,10 @@
             "deceasedTodayRelative": "Umrli na dan (relativno)",
             "deceasedToDate": "Umrli",
             "deceasedToDateRelative": "Umrli (relativno)",
+            "deceasedByAgeToDate": "Po starosti",
+            "deceasedByAgeToDateRelative": "Po starosti (rel.)",
+            "deceasedByAgeToday": "Po starosti na dan",
+            "deceasedByAgeTodayRelative": "Po starosti na dan (rel.)",
             "deceased-icu": "Intenzivna terapija",
             "deceased-acute": "Akutni oddelek",
             "deceased-care": "Negovalni oddelek",
@@ -1103,7 +1107,8 @@
         "excessDeaths": {
             "title": "Presežne smrti",
             "titleMenu": "Presežne smrti",
-            "weekDate": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
             "absolute": {
                 "title": "Primerjava po letih",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
@@ -1634,6 +1639,14 @@
         "chart-exp-growth": {
             "question": "Kaj pomeni “eksponentna rast primerov”? Kako lahko merimo, s kakšno hitrostjo se širi epidemija?",
             "answer": "Pri epidemijah nalezljivih bolezni je zelo pomembna hitrost širjenja oz. stopnja rasti primerov, saj to vpliva tudi na število obolelih in smrti. Če se število primerov v nekem določenem času povečuje za enako število, npr. za 10 vsake tri dni – 10, 20, 30, 40 ..., gre za *linearno rast primerov*; če pa se število primerov v določenem časovnem obdobju podvoji, recimo podvojitev za 10 vsake 3 dni – 10, 20, 40, 80 …, pa govorimo o *eksponentni rasti*, ki v kratkem času privede do zelo velikega števila obolelih.\n\nČas podvojitve kot kazalec hitrosti širjenja epidemije se spreminja (pada, raste), zato ga ne smemo preprosto projicirati v prihodnost; kaže nam zgolj trenutno hitrost podvajanja primerov na podlagi podatkov iz preteklosti."
+        },
+        "chart-correlation": {
+            "question": "Kaj nam kaže \"Soodvisnost primerov, hospitaliziranih in umrlih\"?",
+            "answer": "[Graf soodvisnosti](/sl/stats#metrics-correlation-chart) prikazuje časovno soodvisnost med številom potrjenih primerov, številom hospitaliziranih pacientov s COVID-19 ter številom umrih zaradi te bolezni. Vsak od treh grafov je prikazan na svoji številčnici, saj na ta način najlažje prikažemo, koliko časa po rasti novih potrjenih primerov okužb lahko pričakujemo porast števila hospitaliziranih ter koliko časa kasneje tudi rast smrti.\n\nGraf ponuja dva menija pogledov. Na meniju neposredno pod grafom lahko s klikom na “Potrjeni primeri”, na “Hospitalizirani” ali na “Umrli” vključimo ali izključimo posamično krivuljo. Pod prvim menijem pa lahko s klikom na ikoni “Po dnevih (7-dnevno povprečje)” in “Skupaj” menjamo med sedemdnevnim povprečjem in skupnim številom potrjenih primerov, hospitaliziranih ali umrlih."
+        },
+        "chart-cases-by-age-group": {
+            "question":  "Kaj nam kaže \"Potrjeni primeri po starostnih skupinah\"?",
+            "answer": "[Graf](/sl/stats#age-groups-trends-chart) vsakodnevno število potrjenih primerov razdeli na starostne skupine, in sicer po desetletnih starostnih intervalih. Izjemi sta prvi interval (od 0 do 4 leta) ter zadnji odprti interval (85+). V izhodiščnem pogledu vidimo absolutno število dnevno potrjenih primerov, razdeljeno na starostne skupine.\n\nPod grafom sta dva menija pogledov. Meni neposredno pod grafom nam ponuja pogled posamične starostne skupine, meni pod njim pa še možnost preklapljanja pogleda med absolutnimi in relativnimi vrednostmi različnih starostnih skupin pri dnevnem številu potrjenih primerov ter pri številu aktivno okuženimi."
         },
         "what-is-sledilnik": {
             "question": "Kaj je Sledilnik?",

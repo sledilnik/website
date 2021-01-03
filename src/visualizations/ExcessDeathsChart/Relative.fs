@@ -144,7 +144,7 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
                    |> List.map (fun (dp, percent) ->
                         {| x = dp.WeekStartDate
                            y = percent
-                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDate
+                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDateWithYear
                         |} |> pojo)
                    |> List.toArray
             |} |> pojo
@@ -160,7 +160,7 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
                    |> List.map (fun (dp, percent) ->
                         {| x = dp.WeekStartDate
                            y = System.Math.Round(percent, 1)
-                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDate
+                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDateWithYear
                         |} |> pojo)
                    |> List.toArray
             |} |> pojo

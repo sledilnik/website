@@ -16,7 +16,7 @@ export default function ($t) {return {
       "encoding": {
         "x": {
           "title": $t('charts.ostanizdrav.validByRisk.date'),
-          "timeUnit": "utcmonthdate",
+          "timeUnit": "utcyearmonthdate",
           "field": "date",
           "type": "temporal",
           "axis": {
@@ -115,7 +115,7 @@ export default function ($t) {return {
           },
           "encoding": {
             "x": {
-              "timeUnit": "utcmonthdate",
+              "timeUnit": "utcyearmonthdate",
               "field": "date",
               "type": "temporal",
               "axis": {
@@ -131,7 +131,7 @@ export default function ($t) {return {
               "field": "tt"
             },
             "x": {
-              "timeUnit": "utcmonthdate",
+              "timeUnit": "utcyearmonthdate",
               "field": "date",
               "type": "temporal",
               "axis": {

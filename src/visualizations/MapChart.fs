@@ -36,9 +36,9 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
-
-    override this.ToString() =
-       match this with
+    with
+    static member Default = ConfirmedCases
+    static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
 
@@ -55,7 +55,7 @@ type DisplayType =
 with
     static member Default = RegionPopulationWeightedValues
 
-    override this.ToString() =
+    member this.GetName =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
@@ -65,18 +65,18 @@ with
 type DataTimeInterval =
     | Complete
     | LastDays of int
+    with
+    static member All =
+        [ LastDays 1
+          LastDays 7
+          LastDays 14
+          LastDays 21
+          Complete ]
 
-    override this.ToString() =
+    member this.GetName =
         match this with
         | Complete -> I18N.t "charts.map.all"
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
-
-let dataTimeIntervals =
-    [ LastDays 1
-      LastDays 7
-      LastDays 14
-      LastDays 21
-      Complete ]
 
 type GeoJson = RemoteData<obj, string>
 
@@ -92,7 +92,7 @@ type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
     | DataTimeIntervalChanged of DataTimeInterval
-    | ContentTypeChanged of string
+    | ContentTypeChanged of ContentType
     | DisplayTypeChanged of DisplayType
 
 let loadMunGeoJson =
@@ -217,7 +217,7 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ConfirmedCases
+      ContentType = ContentType.Default
       DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -234,17 +234,13 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | ContentTypeChanged contentType ->
-        let newContentType =
-            match contentType with
-            | ConfirmedCasesMsgCase -> ConfirmedCases
-            | DeceasedMsgCase -> Deceased
         let newDisplayType =
-            match newContentType, state.DisplayType with
+            match contentType, state.DisplayType with
             // for Deceased, RelativeIncrease not supported
             | Deceased, RelativeIncrease -> DisplayType.Default
             | Deceased, Bubbles -> DisplayType.Default
             | _ -> state.DisplayType
-        { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
+        { state with ContentType = contentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -775,9 +771,9 @@ let renderMap (state : State) =
         |}
         |> map
 
-let renderSelector option currentOption dispatch =
+let inline renderSelector (option: ^T when ^T : (member GetName: string)) (currentOption: ^T) dispatch =
     let defaultProps =
-        [ prop.text (option.ToString())
+        [ prop.text ( (^T: (member GetName: string) option))
           Utils.classes
               [(true, "chart-display-property-selector__item")
                (option = currentOption, "selected") ] ]
@@ -785,7 +781,7 @@ let renderSelector option currentOption dispatch =
     then Html.div defaultProps
     else Html.div ((prop.onClick (fun _ -> dispatch option)) :: defaultProps)
 
-let renderSelectors options currentOption dispatch =
+let inline renderSelectors options currentOption dispatch =
     options
     |> List.map (fun option ->
         renderSelector option currentOption dispatch)
@@ -810,27 +806,24 @@ let renderDataTimeIntervalSelector state dispatch =
     if state.DisplayType <> RelativeIncrease then
         Html.div [
             prop.className "chart-data-interval-selector"
-            prop.children ( Html.text "" :: renderSelectors dataTimeIntervals state.DataTimeInterval dispatch )
+            prop.children ( Html.text "" :: renderSelectors DataTimeInterval.All state.DataTimeInterval dispatch )
         ]
     else Html.none
 
 let renderContentTypeSelector selected dispatch =
-    let renderedTypes = seq {
-        yield Html.option [
-            prop.text (ContentType.ConfirmedCases.ToString())
-            prop.value (ContentType.ConfirmedCases.ToString())
-        ]
-        yield Html.option [
-            prop.text (ContentType.Deceased.ToString())
-            prop.value (ContentType.Deceased.ToString())
-        ]
-    }
+    let contentTypes = [("ConfirmedCases", ContentType.ConfirmedCases)
+                        ("Deceased", ContentType.Deceased)]
+    let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
+        Html.option [
+            prop.text (ContentType.GetName ct)
+            prop.value (id)
+        ])
 
     Html.select [
         prop.value (selected.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
-        prop.onChange (ContentTypeChanged >> dispatch)
+        prop.onChange ( fun ct ->  Map.find ct (contentTypes |> Map.ofList) |> ContentTypeChanged |> dispatch)
     ]
 
 let render (state : State) dispatch =

@@ -30,12 +30,12 @@ type FullMetricType = {
         | Today, false -> chartText "showToday"
         | Today, true -> chartText "show7DaysAverage"
         | ToDate, _ -> chartText "showToDate"
-
-let availableMetricTypes =
-    [ { MetricType = Active; IsAveraged = false }
-      { MetricType = Today; IsAveraged = false }
-      { MetricType = ToDate; IsAveraged = false }
-      { MetricType = Today; IsAveraged = true } ]
+    static member All =
+        [ { MetricType = Active; IsAveraged = false }
+          { MetricType = Today; IsAveraged = false }
+          { MetricType = ToDate; IsAveraged = false }
+          { MetricType = Today; IsAveraged = true } ]
+    static member Default = { MetricType = Active; IsAveraged = false }
 
 type Metric =
     | PerformedTestsToday
@@ -126,7 +126,7 @@ let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
-        MetricType = { MetricType = Active; IsAveraged = false }
+        MetricType = FullMetricType.Default
         Metrics = Metrics.initial
         StatsData = data
         PatientsData = [||]
@@ -336,7 +336,7 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        availableMetricTypes
+        FullMetricType.All
         |> List.map renderMetricTypeSelector
 
     Html.div [

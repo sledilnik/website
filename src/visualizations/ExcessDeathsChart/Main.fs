@@ -7,7 +7,7 @@ open Fable.DateFunctions
 open Types
 
 let init statsData =
-    { DisplayType = ExcessDeathsByAgeGroup Both
+    { DisplayType = DisplayType.Default
       StatsData = statsData
       DailyDeathsData = Loading
       WeeklyDeathsData = Loading
@@ -50,10 +50,10 @@ let renderDisplayTypeSelectors state dispatch =
 
             Html.div [
                 prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
+                prop.text dt.GetName
                 Utils.classes
-                    [(true, "chart-display-property-selector__item")
-                     (selected, "selected")]
-                prop.text (DisplayType.GetName dt) ] )
+                    [ (true, "chart-display-property-selector__item")
+                      (selected, "selected") ] ] )
 
     Html.div [
         prop.className "chart-display-property-selector"

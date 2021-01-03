@@ -47,6 +47,26 @@ type View =
     | LastConfirmedCase
     | DoublingTime
 
+    static member All =
+        if Highcharts.showDoublingTimeFeatures then
+            [ DoublingTime
+              LastConfirmedCase
+              ActiveCases
+              TotalConfirmedCases ]
+        else
+            [ LastConfirmedCase
+              ActiveCases
+              TotalConfirmedCases ]
+
+    static member Default = LastConfirmedCase
+
+    member this.GetName =
+        match this with
+        | DoublingTime -> I18N.t "charts.municipalities.viewDoublingTime"
+        | ActiveCases -> I18N.t "charts.municipalities.viewActive"
+        | TotalConfirmedCases -> I18N.t "charts.municipalities.viewTotal"
+        | LastConfirmedCase -> I18N.t "charts.municipalities.viewLast"
+
 type Query (query : obj, regions : Region list) =
     member this.Query = query
     member this.Regions =
@@ -171,7 +191,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             | Some region -> region
           View =
             match query.View with
-            | None -> LastConfirmedCase
+            | None -> View.Default
             | Some view -> view }
 
     state, Cmd.none
@@ -499,9 +519,9 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
 
 let renderView (currentView : View) dispatch =
 
-    let renderSelector (view : View) (label : string) =
+    let renderSelector (view : View) =
         let defaultProps =
-            [ prop.text label
+            [ prop.text view.GetName
               Utils.classes [
                   (true, "chart-display-property-selector__item")
                   (view = currentView, "selected") ] ]
@@ -509,17 +529,11 @@ let renderView (currentView : View) dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> ViewChanged view |> dispatch)) :: defaultProps)
 
-    Html.div [
-        prop.className "chart-display-property-selector"
-        prop.children [
-            Html.text (I18N.t "charts.common.sortBy")
-            if Highcharts.showDoublingTimeFeatures then
-                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
-            renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
-            renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
-            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
-        ]
-    ]
+    Html.div [ prop.className "chart-display-property-selector"
+               prop.children
+                   (Seq.append
+                       (Seq.singleton (Html.text (I18N.t "charts.common.sortBy")))
+                        (Seq.map renderSelector View.All)) ]
 
 let render (state : State) dispatch =
     let renderedMunicipalities, showMore = renderMunicipalities state dispatch

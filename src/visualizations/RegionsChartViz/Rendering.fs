@@ -67,7 +67,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
               Color = color
               Visible = true } )
 
-    { ScaleType = Linear; MetricType = ActiveCases
+    { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
       Regions = regionsByTotalCases
@@ -251,7 +251,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
             Utils.classes
                 [(true, "chart-display-property-selector__item")
                  (active, "selected") ]
-            prop.text (typeSelector |> MetricType.getName)
+            prop.text (typeSelector |> MetricType.GetName)
         ]
 
     let metricTypesSelectors =

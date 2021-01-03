@@ -41,9 +41,12 @@ type DisplayType =
     | ExcessDeaths
     | ExcessDeathsByAgeGroup of Sex
 with
-    static member All = [ AbsoluteDeaths ; ExcessDeaths ; ExcessDeathsByAgeGroup Both ]
+    static member All = [ AbsoluteDeaths ; ExcessDeaths ;  ExcessDeathsByAgeGroup Both ]
 
-    static member GetName = function
+    static member Default = AbsoluteDeaths
+
+    member this.GetName =
+        match this with
         | AbsoluteDeaths -> I18N.t "charts.excessDeaths.absolute.title"
         | ExcessDeaths -> I18N.t "charts.excessDeaths.excess.title"
         | ExcessDeathsByAgeGroup _ -> I18N.t "charts.excessDeaths.excessByAgeGroup.title"

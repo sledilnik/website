@@ -381,8 +381,15 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "deceased-chart"
             ChartTextsGroup = "deceased"
             Explicit = false
-            Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
-         }
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success statsData ->
+                        lazyView DeceasedViz.Rendering.renderChart statsData
+          }
 
     let countriesCasesPer100k =
           { VisualizationType = CountriesCasesPer100k
@@ -526,7 +533,7 @@ let render (state: State) (_: Msg -> unit) =
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
-          infections; hCenters 
+          infections; hCenters
         ]
 
     let worldVisualizations =

@@ -167,11 +167,12 @@ $loader-width: 50px
     grid-template-columns: repeat(2, minmax(165px, 1fr))
 
   @media only screen and (min-width: 768px)
+    grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 88px
 
   @media only screen and (min-width: 992px)
-    grid-template-columns: repeat(3, minmax(165px, 1fr))
+    grid-template-columns: repeat(4, minmax(165px, 1fr))
 
 .stats-page
   margin-top: 48px
