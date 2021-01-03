@@ -551,7 +551,7 @@
             "negativeTests": "Negative Tests",
             "titleMenu": "Testung",
             "byLabPercent": "Nach Labor: % positiv",
-            "byLab": "Nach Labor: Tests",
+            "byLab": "Nach Labor: Tests PCR",
             "disclaimer": "Hinweis: Ab dem 3. Dezember erhalten wir keine Daten einzelner Laboratorien."
         },
         "regions": {
@@ -622,8 +622,8 @@
             "titleMenu": "Länder – Aktive Fälle"
         },
         "dailyComparison": {
-            "positivePct": "Anteil der positiven Tests (%)",
-            "tests": "Durchgeführte Tests",
+            "positivePct": "Anteil der positiven Tests: PCR (%)",
+            "tests": "Durchgeführte Tests: PCR",
             "active": "Aktive Fälle",
             "new": "Bestätigte Fälle",
             "title": "Vergleich nach Wochentag",
@@ -1036,7 +1036,7 @@
         "active": "Aktive Fälle",
         "incidence": "14-Tage-Inzidenz",
         "confirmedToDate": "Bestätigte Fälle",
-        "tests": "Tests heute",
+        "tests": "Tests heute: PCR",
         "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
