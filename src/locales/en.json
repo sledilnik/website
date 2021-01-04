@@ -54,7 +54,7 @@
     },
     "infocard": {
         "tests": "Tests Today: PCR",
-        "testsHAT": "Tests Today: HAT",
+        "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
@@ -1558,7 +1558,7 @@
             "answer": "The [correlation graph](/en/stats#metrics-correlation-chart) shows the temporal correlation between the number of confirmed cases, the number of hospitalized patients with, and the number of deaths caused by COVID-19. Each of the three graphs is shown on its scale, as this is the easiest way to show how long after the growth of new confirmed cases of infections we can expect an increase in the number of hospitalized and how much later also an increase in death.\n\nThe graph offers two view menus. In the menu directly below the graph, you can turn an individual curve on or off by clicking on “Confirmed cases”, “Hospitalized”, or “Dead”. Under the first menu, you can switch between the seven-day average and the total number of confirmed cases, hospitalized, or deceased by clicking on the icons \"By days (7-day average)\" and \"Total\"."
         },
         "chart-cases-by-age-group": {
-            "question":  "What does the \"Confirmed cases by age groups\" graph mean?",
+            "question": "What does the \"Confirmed cases by age groups\" graph mean?",
             "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases, divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
         },
         "what-is-sledilnik": {
