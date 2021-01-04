@@ -141,11 +141,7 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                         Html.div [
                             prop.className "disclaimer"
                             prop.children [
-                                Html.text (I18N.chartText "excessDeaths" "excessByAgeGroup.disclaimer")
-                                Html.text " "
-                                Html.a [
-                                    prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
-                                    prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
+                                Html.text (I18N.chartText "excessDeaths" "excessByAgeGroup.disclaimer") ] ] ] )
             ]
         ]
     ]

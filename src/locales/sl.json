@@ -1121,7 +1121,7 @@
             },
             "excessByAgeGroup": {
                 "title": "Presežek glede na zadnjih 5 let po starostnih skupinah",
-                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani mesec niso popolni. Več o grafu lahko preberete v članku",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani mesec niso popolni. Širina stolpca predstavlja razmerje med smrtmi v starostni skupini stolpca in vsemi smrtmi v posameznem mesecu.",
                 "totalDeceased": "Skupaj umrlih",
                 "sex": {
                     "both": "Vsi",
