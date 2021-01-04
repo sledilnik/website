@@ -314,7 +314,14 @@
             "discharged": "Discharged",
             "deceased": "Died",
             "icu-deceased": "Died (ICU)",
+            "icu-admitted": "Admitted in ICU",
+            "icu-discharged": "Discharged from ICU",
+            "icu-minus": "In ICU",
             "allHospitals": "All Hospitals"
+        },
+        "icuPatients": {
+            "title": "Intensive Care",
+            "titleMenu": "Intensive Care"
         },
         "carePatients": {
             "title": "Care Hospitals",

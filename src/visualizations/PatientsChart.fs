@@ -15,9 +15,10 @@ open Data.Patients
 
 type HospitalType =
     | CovidHospitals
+    | CovidHospitalsICU
     | CareHospitals
 
-    static member All = [ CovidHospitals; CareHospitals ]
+    static member All = [ CovidHospitals; CovidHospitalsICU; CareHospitals ]
 
 type Breakdown =
     | ByHospital
@@ -58,6 +59,9 @@ and State = {
 type Series =
     | InHospital
     | Icu
+    | IcuMinus
+    | IcuIn
+    | IcuOut
     | IcuDeceased
     | Critical
     | InHospitalIn
@@ -70,10 +74,10 @@ type Series =
 
 module Series =
     let structure hTypeToDisplay =
-        if hTypeToDisplay = CareHospitals
-        then [ CareIn; Care; CareOut; CareDeceased; ]
-        else [ InHospitalIn; InHospital; Icu
-               Critical; InHospitalOut; InHospitalDeceased; IcuDeceased ]
+        match hTypeToDisplay with
+        | CareHospitals -> [ CareIn; Care; CareOut; CareDeceased; ]
+        | CovidHospitals -> [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; IcuDeceased ]
+        | CovidHospitalsICU -> [ IcuIn; IcuMinus; Critical; IcuOut; IcuDeceased ]
 
     let byHospital =
         [ InHospital; ]
@@ -81,6 +85,9 @@ module Series =
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
         | Icu                   -> "#d96756", "icu"
+        | IcuMinus              -> "#d96756", "icu-minus"
+        | IcuIn                 -> "#d5c768", "icu-admitted"
+        | IcuOut                -> "#de9a5a", "icu-discharged"
         | IcuDeceased           -> "#6d5b80", "icu-deceased"
         | Critical              -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
@@ -103,20 +110,23 @@ let init (hTypeToDisplay : HospitalType) : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     State.initial hTypeToDisplay, cmd
 
+let hasToDateValue (state : State) (ps: FacilityPatientStats) =
+    match state.HTypeToDisplay with
+    | CareHospitals -> ps.care.toDate.IsSome
+    | CovidHospitals -> ps.inHospital.toDate.IsSome
+    | CovidHospitalsICU -> ps.icu.toDate.IsSome
+
+let getDailyValue (state : State) (ps: FacilityPatientStats) =
+    match state.HTypeToDisplay with
+    | CareHospitals -> ps.care.today
+    | CovidHospitals -> ps.inHospital.today
+    | CovidHospitalsICU -> ps.icu.today
+
 let getFacilitiesList (state : State) (data : PatientsStats array) =
     data.[data.Length-1].facilities
     |> Map.toSeq
-    |> Seq.filter
-       (fun (_, stats) ->
-            if state.HTypeToDisplay = CareHospitals
-            then stats.care.toDate.IsSome
-            else stats.inHospital.toDate.IsSome)
-    |> Seq.map
-       (fun (facility, stats) ->
-            facility,
-            if state.HTypeToDisplay = CareHospitals
-            then stats.care.today
-            else stats.inHospital.today)
+    |> Seq.filter (fun (_, ps) -> hasToDateValue state ps)
+    |> Seq.map (fun (facility, ps) -> facility, getDailyValue state ps)
     |> Seq.fold (fun hospitals (hospital,cnt) -> hospitals |> Map.add hospital cnt) Map.empty // all
     |> Map.toList
     |> List.sortBy (fun (_,cnt) -> cnt |> Option.defaultValue -1 |> ( * ) -1)
@@ -144,11 +154,7 @@ let renderByHospitalChart (state : State) dispatch =
             let value =
                 ps.facilities
                 |> Map.tryFind fcode
-                |> Option.bind (fun stats ->
-                    if state.HTypeToDisplay = CareHospitals
-                    then stats.care.today
-                    else stats.inHospital.today
-                )
+                |> Option.bind (fun ps -> getDailyValue state ps)
             ps.JsDate12h, value
 
         {|
@@ -201,14 +207,14 @@ let renderStructureChart (state : State) dispatch =
             | "null" -> ()
             | _ ->
                 match p?point?seriesId with
-                | "hospitalized" | "care" | "discharged" | "deceased"  -> fmtUnder <- ""
+                | "hospitalized" | "care" | "icu-minus" | "icu-discharged" | "discharged" | "deceased"  -> fmtUnder <- ""
                 | _ -> fmtUnder <- fmtUnder + "↳ "
                 fmtLine <- sprintf """<br>%s<span style="color:%s">●</span> %s: <b>%s</b>"""
                     fmtUnder
                     p?series?color
                     p?series?name
                     (I18N.NumberFormat.formatNumber(p?point?fmtTotal : int))
-                if fmtStr.Length > 0 && List.contains p?point?seriesId [ "hospitalized"; "care" ] then
+                if fmtStr.Length > 0 && List.contains p?point?seriesId [ "hospitalized"; "care"; "icu-minus" ] then
                     fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
                 else
                     fmtStr <- fmtStr + fmtLine
@@ -251,6 +257,12 @@ let renderStructureChart (state : State) dispatch =
             | Icu ->
                 ps.icu.today
                 |> subtract ps.critical.today
+            | IcuMinus ->
+                ps.icu.today
+                |> subtract ps.critical.today
+                |> subtract ps.icu.``in``
+            | IcuIn -> ps.icu.``in``
+            | IcuOut -> negative ps.icu.out
             | IcuDeceased -> negative ps.deceased.icu.today
             | Critical -> ps.critical.today
             | InHospitalIn -> ps.inHospital.``in``
@@ -270,6 +282,9 @@ let renderStructureChart (state : State) dispatch =
             match series with
             | InHospital            -> fun ps -> ps.inHospital.today
             | Icu                   -> fun ps -> ps.icu.today
+            | IcuMinus              -> fun ps -> ps.icu.today
+            | IcuIn                 -> fun ps -> ps.icu.``in``
+            | IcuOut                -> fun ps -> ps.icu.out
             | IcuDeceased           -> fun ps -> ps.deceased.icu.today
             | Critical              -> fun ps -> ps.critical.today
             | InHospitalIn          -> fun ps -> ps.inHospital.``in``

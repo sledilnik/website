@@ -16,6 +16,7 @@ let dropdown (viz: Visualization) =
             | DailyComparison -> (1140, 720)
             | Cases -> (1140, 630)
             | Patients -> (1140, 720)
+            | IcuPatients -> (1140, 720)
             | CarePatients -> (1140, 720)
             | Ratios -> (1140, 720)
             | HCenters -> (1140, 720)

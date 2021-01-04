@@ -40,6 +40,7 @@ export default [
             "cases-chart",
             "chart-phases",
             "patients-chart",
+            "icu-patients-chart",
             "care-patients-chart",
             "deceased-chart",
             "excess-deaths-chart",

@@ -22,6 +22,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "IcuPatients" -> Some IcuPatients
             | "CarePatients" -> Some CarePatients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
@@ -272,6 +273,13 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "patients"
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+
+    let patientsICU =
+          { VisualizationType = IcuPatients
+            ClassName = "icu-patients-chart"
+            ChartTextsGroup = "icuPatients"
+            Explicit = false
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitalsICU |} }
 
     let patientsCare =
           { VisualizationType = CarePatients
@@ -527,7 +535,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests;
-          patients; patientsCare; deceased; metricsCorrelation; excessDeaths
+          patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; ageGroups; hcCases;
           europeMap; sources
