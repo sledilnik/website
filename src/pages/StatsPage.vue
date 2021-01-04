@@ -68,7 +68,8 @@ export default {
         'casesAvg7Days',
         'hospitalizedCurrent',
         'icuCurrent',
-        'deceasedToDate'
+        'deceasedToDate',
+        'vaccinationSummary'
       ]
     };
   },
