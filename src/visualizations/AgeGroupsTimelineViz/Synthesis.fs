@@ -65,7 +65,7 @@ let tooltipFormatter jsThis =
 
                         let percentage =
                             (float dataValue) * 100. / totalCases
-                            |> Utils.percentWith1DecimalSignFormatter
+                            |> Utils.percentWith1DecimalFormatter
 
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =
