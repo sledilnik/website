@@ -162,7 +162,7 @@ let calculateDataSeries sex data =
                |> List.toArray
         |} |> pojo
         {| ``type`` = "column"
-           name = "51-71"
+           name = "52-71"
            color = "#189a73"
            data =
                difference
