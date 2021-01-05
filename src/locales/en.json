@@ -975,6 +975,10 @@
         "liftFoodMarkets2": {
             "title": "Markets",
             "description": "Relaxation: food markets, news-stands, hairdressing salons."
+        },
+        "liftGym": {
+            "title": "Gym",
+            "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
         }
     },
     "days": {

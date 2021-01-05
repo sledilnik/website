@@ -632,6 +632,10 @@
         "liftFoodMarkets2": {
             "title": "Tržnice",
             "description": "Sproščanje: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
+        },
+        "liftGym": {
+            "title": "Fitnes",
+            "description": "Sproščanje: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
         }
     },
     "phase": {
