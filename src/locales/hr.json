@@ -344,7 +344,7 @@
             "from": " ",
             "sortBy": "Razvrstaj prema:",
             "weekYearDateFormat": "%W. tjedan %Y.",
-            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}",
+            "dataDate": "Podaci do: {{ date, %A, %e. %B }}",
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
             "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
             "dsMNZ": "MNZ",
@@ -777,26 +777,31 @@
             "deceased-total": "Ukupno smrtnih slučajeva",
             "deceased-rest": "Izvan bolnice",
             "deceased-care": "Bolnica za njegu",
-            "deceasedToDateRelative": "Smrtni slučajevi do danas (relativni)",
-            "deceasedToDate": "Smrtni slučajevi do danas",
+            "deceasedToDateRelative": "Smrtni slučajevi do datuma (relativno)",
+            "deceasedToDate": "Smrtni slučajevi do datuma",
             "titleMenu": "Smrtni slučajevi",
-            "title": "Smrtni slučajevi"
+            "title": "Smrtni slučajevi",
+            "deceasedByAgeTodayRelative": "Smrtni slučajevi po starosti (dnevno, relativno)",
+            "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)"
         },
         "excessDeaths": {
             "excess": {
-                "excessDeaths": "Mortalitet (u usporedbi s 2015. do 2019.)",
-                "title": "Mortalitet u odnosu na zadnjih 5 godina",
+                "excessDeaths": "Prekomjerni mortalitet (u usporedbi s 2015. do 2019.)",
+                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina",
                 "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
-            "titleMenu": "Mortalitet",
-            "title": "Mortalitet",
+            "titleMenu": "Prekomjerni mortalitet",
+            "title": "Prekomjerni mortalitet",
             "absolute": {
                 "title": "Godišnja usporedba",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
-            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
+            "weekDate": "{{ dateFrom, %e. %m. }} – {{ dateTo, %e. %m. }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %m. %Y. }} – {{ dateTo, %e. %m. %Y. }}",
+            "excessByAgeGroup": {
+                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina po dobnim skupinama"
+            }
         },
         "metricsCorrelation": {
             "titleMenu": "Korelacija",
@@ -1211,7 +1216,9 @@
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi",
-        "testsHAT": "Testiranja danas: Brzo testiranje antigena"
+        "testsHAT": "Testiranja danas: Brzo testiranje antigena",
+        "vaccinationSummaryInfo": "u sedam dana",
+        "vaccinationSummary": "Cijepljene osobe"
     },
     "region": {
         "za": "Zasavlje",
@@ -1235,11 +1242,11 @@
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
         "longerDate": "{{ date, %A, %e. %B %Y. }}",
-        "date": "{{ date, %e. %b }}",
+        "date": "{{ date, %e. %B }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. tjedan %Y.}})"
+        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{date, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",
