@@ -97,8 +97,10 @@
     }
   },
   "browserslist": [
-    "> 1%",
-    "last 2 versions"
+    "defaults",
+    "ios 6",
+    "last 2 versions",
+    "ie >= 8"
   ],
   "vuePlugins": {
     "service": [
