@@ -54,7 +54,6 @@
     },
     "infocard": {
         "vaccinationSummary": "People Vaccinated",
-        "vaccinationSummaryInfo": "in 7 days",
         "tests": "Tests Today: PCR",
         "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",

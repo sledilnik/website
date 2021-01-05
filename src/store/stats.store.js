@@ -35,8 +35,7 @@ const infoCardConfig = () => {
       title: i18n.t('infocard.testsHAT')
     },
     vaccinationSummary: {
-      title: i18n.t('infocard.vaccinationSummary'),
-      subTitle: i18n.t('infocard.vaccinationSummaryInfo')
+      title: i18n.t('infocard.vaccinationSummary')
     },
   } 
 }

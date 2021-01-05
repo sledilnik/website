@@ -55,7 +55,6 @@
     },
     "infocard": {
         "vaccinationSummary": "Cepljenih oseb",
-        "vaccinationSummaryInfo": "v 7 dneh",
         "tests": "Testi na dan: PCR",
         "testsHAT": "Testi na dan: HAT",
         "confirmedToDate": "Potrjeni primeri",
