@@ -17,12 +17,21 @@ let baselineStartYear, baselineEndYear = 2015, 2019
 
 let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
 
-    let deceasedBaseline, deceasedminMax =
+    let baselineData =
         data
         |> List.filter (fun dp -> dp.Year >= baselineStartYear && dp.Year <= baselineEndYear)
+
+    let deceasedBaseline, deceasedminMax =
+        baselineData
         |> List.groupBy (fun dp -> dp.Week)
         |> List.map (fun (week, dps) ->
-            let baseline = (List.sumBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps) / float (baselineEndYear - baselineStartYear + 1)
+            let baseline =
+                let sum = (List.sumBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps)
+                let countWeeks =
+                    baselineData
+                    |> List.filter (fun dataDp -> dataDp.Week = week)
+                    |> List.length
+                float sum / float countWeeks
             let min = (List.minBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps).Deceased
             let max = (List.maxBy (fun (dp : WeeklyDeaths) -> float dp.Deceased) dps).Deceased
             (week, baseline), ((week, (float min / float baseline - 1.) * 100.), (week, (float max / float baseline - 1.) * 100.)))
@@ -48,7 +57,8 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
     let deceasedCovidFromStartYear =
         statsData
         // Filter the data to the current year
-        |> List.filter (fun dp -> dp.Date.Year = START_YEAR)
+        |> List.filter (fun dp -> dp.Date.Year >= START_YEAR)
+
         // Select only the non-empty deceased data points
         |> List.map (fun dp ->
             match dp.StatePerTreatment.Deceased with
@@ -66,6 +76,7 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
         |> List.map (fun (i, x) -> x)
         |> List.rev
 
+        // Sum the data by week
         |> List.map (fun ((year, week), dps) ->
             { Year = year
               Week = week
