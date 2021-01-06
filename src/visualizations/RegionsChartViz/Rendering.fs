@@ -39,11 +39,25 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
-let regionTotal (region : Region) : int =
+let regionTotal (region : Region) : float =
     region.Municipalities
     |> List.map (fun city -> city.ActiveCases)
     |> List.choose id
     |> List.sum
+    |> float
+
+let regionTotalPop (region : Region) : float =
+    let regionPopulation =
+        Utils.Dictionaries.regions.[region.Name].Population
+        |> Option.get
+        |> float
+    let total =
+        region.Municipalities
+        |> List.map (fun city -> city.ActiveCases)
+        |> List.choose id
+        |> List.sum
+    (float total) / regionPopulation
+
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -54,9 +68,10 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         |> List.filter (fun region ->
             Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
+    let sortBy = if config.RelativeTo = Pop100k then regionTotalPop else regionTotal
     let regionsByTotalCases =
         regionsWithoutExcluded
-        |> List.sortByDescending regionTotal
+        |> List.sortBy sortBy
 
     let regionsConfig =
         regionsByTotalCases
@@ -194,7 +209,8 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                //``type`` = "spline"
+                ``type`` = "column"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
@@ -202,6 +218,11 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         xAxis = xAxis
         yAxis = yAxis
         legend = {| enabled = false |}
+        plotOptions = pojo
+            {|
+                column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                series = {| stacking = "normal"; crisp = false; borderWidth = 0; pointPadding = 0; groupPadding = 0  |}
+            |}
         tooltip = pojo {|
                           formatter = fun () ->
                               tooltipFormatter state allSeries jsThis
