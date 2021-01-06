@@ -75,6 +75,7 @@ export default {
   },
   created(){
     this.$store.dispatch('posts/fetchLatestPosts')
+    this.$store.dispatch('stats/fetchSummary')
   },
   mounted() {
     this.$nextTick(() => {

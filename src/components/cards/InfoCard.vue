@@ -99,7 +99,6 @@ export default {
       return new Date() - 1000 * 3600 * 60 > this.date;
     },
     percentageDirection() {
-      console.log(this.cardData.reverseGoodDirection);
       if (this.cardData.diffPercentage === 0) {
         return "no-change";
       } else if (this.cardData.diffPercentage > 0 && !this.cardData.reverseGoodDirection) {
