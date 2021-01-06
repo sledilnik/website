@@ -278,7 +278,7 @@ export default {
       background-color: #20b16d;
     }
     &.tests {
-      color: #20b16d;
+      color: #a0a0a0;
     }
   }
 }
