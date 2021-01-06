@@ -1227,8 +1227,8 @@
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Testiranja (na dan)",
-        "tests_performed_todate": "Testiranja (skupaj)",
+        "tests_performed": "PCR testiranja (na dan)",
+        "tests_performed_todate": "PCR testiranja (skupaj)",
         "cases_confirmed": "Potrjeni primeri (na dan)",
         "cases_confirmed_todate": "Potrjeni primeri (skupaj)",
         "cases_active": "Potrjeni primeri (aktivni)",

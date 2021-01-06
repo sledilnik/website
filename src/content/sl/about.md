@@ -60,8 +60,8 @@ COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mo
 
 Sodelavci projekta:
 
--   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeliranje, viri
+-   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, infrastuktura
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
