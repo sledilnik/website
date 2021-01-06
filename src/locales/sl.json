@@ -751,6 +751,7 @@
             "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
             "recovered": "Preboleli",
+            "vaccinationAdministered": "Cepljeni",
             "hospitalized": "Hospitalizirani",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
