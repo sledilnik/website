@@ -126,12 +126,32 @@ let calculateDataSeries sex data =
                     averageByMonthForLastMonth
                 else
                     averageByMonth.Item month
+
+            let both, male, female = (
+                dataPointDifference (dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint) averageBaseline.DeceasedRelative,
+                dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedMale) |> averageDataPoint) averageBaseline.DeceasedMale,
+                dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedFemale) |> averageDataPoint) averageBaseline.DeceasedFemale )
+
+            let allValues = [
+                both.AgeGroupFrom0to51
+                both.AgeGroupFrom52to71
+                both.AgeGroup72AndMore
+                male.AgeGroupFrom0to51
+                male.AgeGroupFrom52to71
+                male.AgeGroup72AndMore
+                female.AgeGroupFrom0to51
+                female.AgeGroupFrom52to71
+                female.AgeGroup72AndMore
+            ]
+
             {| Date = System.DateTime(year, month, 1)
+               DeceasedRelativeMin = List.min allValues
+               DeceasedRelativeMax = List.max allValues
                DeceasedRelative =
                 match sex with
-                | Both -> dataPointDifference (dps |> List.map (fun dp -> dp.Deceased) |> averageDataPoint) averageBaseline.DeceasedRelative
-                | Male -> dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedMale) |> averageDataPoint) averageBaseline.DeceasedMale
-                | Female -> dataPointDifference (dps |> List.map (fun dp -> dp.DeceasedFemale) |> averageDataPoint) averageBaseline.DeceasedFemale
+                | Both -> both
+                | Male -> male
+                | Female -> female
                DeceasedTotal =
                 match sex with
                 | Both -> dataPointTotal (dps |> List.map (fun dp -> dp.Deceased))
@@ -147,7 +167,7 @@ let calculateDataSeries sex data =
 
     let width = 20.0
 
-    [|
+    let series = [|
         {| ``type`` = "column"
            name = "0-51"
            color = "#e9b825"
@@ -189,15 +209,22 @@ let calculateDataSeries sex data =
         |} |> pojo
     |]
 
+    let deceasedRelativeMin = (difference |> List.minBy (fun dp -> dp.DeceasedRelativeMin)).DeceasedRelativeMin
+    let deceasedRelativeMax = (difference |> List.maxBy (fun dp -> dp.DeceasedRelativeMax)).DeceasedRelativeMax
+
+    series, deceasedRelativeMin, deceasedRelativeMax
+
 let renderChartOptions sex (data : DailyDeathsData) =
+    let series, deceasedRelativeMin, deceasedRelativeMax = calculateDataSeries sex data
+
     {| chart = {| ``type`` = "column" |} |> pojo
        title = ""
        xAxis = {| ``type`` = "datetime" |}
-       yAxis = {| title = {| text = None |} ; opposite = true ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
+       yAxis = {| title = {| text = None |} ; opposite = true ; min = deceasedRelativeMin ; max = deceasedRelativeMax ; labels = {| formatter = fun (x) -> x?value + " %" |} |> pojo |}
        tooltip = {| valueSuffix = " %" ; xDateFormat = "%B %Y" ; footerFormat = chartText "excessByAgeGroup.totalDeceased" + ": <b>{point.deceasedTotal}</b>" |} |> pojo
        responsive = ChartOptions.responsive
        plotOptions = {| series = {| pointPadding = 0 ; borderWidth = 0 |} |> pojo |} |> pojo
-       series = calculateDataSeries sex data
+       series = series
        credits =
         {| enabled = true
            text = sprintf "%s: %s"
