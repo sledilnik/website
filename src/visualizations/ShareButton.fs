@@ -42,6 +42,7 @@ let dropdown (viz: Visualization) =
             | Deceased -> (1140, 720)
             | ExcessDeaths -> (1140, 720)
             | MetricsCorrelation -> (1140, 720)
+            | WeeklyDemographics -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"

@@ -1221,7 +1221,18 @@
             "gatheringOrganized": "organizirano druženje",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
+        },
+        "weeklyDemographics": {
+            "title": "Demografija potrjenih primerov, tedensko",
+            "titleMenu": "Starost – po tednih",
+            "ageGroup": "Starostna skupina",
+            "male": "Moški",
+            "female":"Ženske",
+            "per100k":"na 100.000 prebivalcev",
+            "newCases": "Novi primeri",
+            "ratio": "Razmerje primerov M/Ž"
         }
+
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
@@ -1652,6 +1663,10 @@
         "chart-cases-by-age-group": {
             "question":  "Kaj nam kaže \"Potrjeni primeri po starostnih skupinah\"?",
             "answer": "[Graf](/sl/stats#age-groups-trends-chart) vsakodnevno število potrjenih primerov razdeli na starostne skupine, in sicer po desetletnih starostnih intervalih. Izjemi sta prvi interval (od 0 do 4 leta) ter zadnji odprti interval (85+). V izhodiščnem pogledu vidimo absolutno število dnevno potrjenih primerov, razdeljeno na starostne skupine.\n\nPod grafom sta dva menija pogledov. Meni neposredno pod grafom nam ponuja pogled posamične starostne skupine, meni pod njim pa še možnost preklapljanja pogleda med absolutnimi in relativnimi vrednostmi različnih starostnih skupin pri dnevnem številu potrjenih primerov ter pri številu aktivno okuženimi."
+        },
+        "weekly-demographics-chart":{
+            "question": "Kaj nam kaže \"Demografija potrjenih primerov, tedensko\"?",
+            "answer": "[Demografija potrjenih primerov, tedensko](/sl/stats#weekly-demographics-chart) v osnovnem pogledu *Novi primeri* prikazuje tedensko število novih primerov razdeljenih po starostnih skupinah, izraženo kot delež prebivalstva. Podatki so prikazani v obliki t.i. *toplotne karte*.  Polja v odtenkih zelene pomenijo, da je bilo v danem tednu zabeleženih malo primerov, medtem ko rjavi odtenki pomenijo večje število potrjenih primerov.\n\n S klikom na gumb *Razmerje primerov M/Ž*, ki se nahaja v levem spodnjem kotu, pogled preklopimo v prikaz razmerja med tedenskimi potrjenimi primeri po spolu. Barva polja nam pove, da je bilo v posameznem tednu zaznanih več primerov bodisi med moško populacijo (modra barva), bodisi med žensko populacijo (rdeča barva) v starostni skupini. Odstopanje od ravnovesja se izraža v intenziteti barvnega odtenka."
         },
         "what-is-sledilnik": {
             "question": "Kaj je Sledilnik?",

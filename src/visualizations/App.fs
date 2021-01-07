@@ -45,6 +45,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
+            | "WeeklyDemographics" -> Some WeeklyDemographics
             | _ -> None
             |> Embedded
 
@@ -525,11 +526,24 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MetricsCorrelationViz.Rendering.renderChart
                             {| data = data |} }
 
+    let weeklyDemographics =
+          { VisualizationType = DailyComparison
+            ClassName = "weekly-demographics-chart"
+            ChartTextsGroup = "weeklyDemographics"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
+
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; ageGroups; hcCases;
+          ageGroupsTimeline; weeklyDemographics; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
@@ -557,6 +571,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesTotalDeathsPer100k
           phaseDiagram
           excessDeaths
+          weeklyDemographics
         ]
 
     let embedded, visualizations =
