@@ -275,7 +275,7 @@ export default {
 .cardtype-vaccinationSummary {
   .percent {
     &.trend-icon {
-      background-color: #20b16d;
+      background-color: #a0a0a0;
     }
     &.tests {
       color: #a0a0a0;
