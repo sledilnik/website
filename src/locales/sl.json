@@ -54,6 +54,7 @@
         "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
+        "vaccinationSummary": "Cepljenih oseb",
         "tests": "Testi na dan: PCR",
         "testsHAT": "Testi na dan: HAT",
         "confirmedToDate": "Potrjeni primeri",
@@ -630,6 +631,10 @@
         "liftFoodMarkets2": {
             "title": "Tržnice",
             "description": "Sproščanje: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
+        },
+        "liftGym": {
+            "title": "Fitnes",
+            "description": "Sproščanje: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
         }
     },
     "phase": {
@@ -1118,6 +1123,16 @@
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeaths": "Potrjene COVID-19 smrti",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
+            },
+            "excessByAgeGroup": {
+                "title": "Presežek glede na zadnjih 5 let po starostnih skupinah",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani mesec niso popolni. Širina stolpca predstavlja razmerje med smrtmi v starostni skupini stolpca in vsemi smrtmi v posameznem mesecu.",
+                "totalDeceased": "Skupaj umrlih",
+                "sex": {
+                    "both": "Vsi",
+                    "male": "Moški",
+                    "female": "Ženske"
+                }
             }
         },
         "ostanizdrav": {
@@ -1223,8 +1238,8 @@
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Testiranja (na dan)",
-        "tests_performed_todate": "Testiranja (skupaj)",
+        "tests_performed": "PCR testiranja (na dan)",
+        "tests_performed_todate": "PCR testiranja (skupaj)",
         "cases_confirmed": "Potrjeni primeri (na dan)",
         "cases_confirmed_todate": "Potrjeni primeri (skupaj)",
         "cases_active": "Potrjeni primeri (aktivni)",

@@ -214,7 +214,8 @@ const routes = [
       {
         path: 'faq',
         name: 'faq',
-        component: FAQPage,
+        // component: import(/* webpackChunkName: "Faq.route" */ './pages/FAQPage.vue'),
+        component: FAQPage
       },
       {
         path: 'links', // Retired page

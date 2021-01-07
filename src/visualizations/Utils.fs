@@ -62,28 +62,44 @@ let formatToInt (value: float) =
     I18N.NumberFormat.formatNumber(value)
 
 let formatTo1DecimalWithTrailingZero (value: float) =
-    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=1; maximumFractionDigits=1 |})
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let formatTo2DecimalWithTrailingZero (value: float) =
-    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=2; maximumFractionDigits=2 |})
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=2; maximumFractionDigits=2 |})
 
 let formatTo3DecimalWithTrailingZero (value: float) =
-    I18N.NumberFormat.formatNumber(value, {| minimumFractionDigits=3; maximumFractionDigits=3 |})
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=3; maximumFractionDigits=3 |})
 
 let percentWith0DecimalFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
 let percentWith1DecimalFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let percentWith1DecimalSignFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1; signDisplay="always" |})
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1
+           maximumFractionDigits=1; signDisplay="always" |})
 
 let percentWith2DecimalSignFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2; signDisplay="always" |})
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1
+           maximumFractionDigits=2; signDisplay="always" |})
 
 let percentWith3DecimalSignFormatter (value: float) =
-    I18N.NumberFormat.formatNumber((abs (value / 100.)), {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=3; signDisplay="always" |})
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=0
+           maximumFractionDigits=3; signDisplay="always" |})
 
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)

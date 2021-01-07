@@ -11,18 +11,18 @@ type DisplayMetrics = {
     Id: string
     ValueCalculation: ValueCalculationFormula
     ChartType: ChartType
-}
-
-let availableDisplayMetrics = [|
-    { Id = "newCases"; ValueCalculation = Daily
-      ChartType = StackedBarNormal }
-    { Id = "newCasesRelative"; ValueCalculation = Daily
-      ChartType = StackedBarPercent }
-    { Id = "activeCases"; ValueCalculation = Active
-      ChartType = StackedBarNormal }
-    { Id = "activeCasesRelative"; ValueCalculation = Active
-      ChartType = StackedBarPercent }
-|]
+} with
+    static member All = [|
+        { Id = "newCases"; ValueCalculation = Daily
+          ChartType = StackedBarNormal }
+        { Id = "newCasesRelative"; ValueCalculation = Daily
+          ChartType = StackedBarPercent }
+        { Id = "activeCases"; ValueCalculation = Active
+          ChartType = StackedBarNormal }
+        { Id = "activeCasesRelative"; ValueCalculation = Active
+          ChartType = StackedBarPercent }
+    |]
+    static member Default = DisplayMetrics.All.[0]
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points
@@ -65,7 +65,7 @@ let tooltipFormatter jsThis =
 
                         let percentage =
                             (float dataValue) * 100. / totalCases
-                            |> Utils.percentWith1DecimalSignFormatter
+                            |> Utils.percentWith1DecimalFormatter
 
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =

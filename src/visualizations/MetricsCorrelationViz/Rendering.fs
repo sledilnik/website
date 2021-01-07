@@ -45,23 +45,23 @@ type DisplayType = {
     ValueTypes: ValueTypes
     ChartType: ChartType
     ShowPhases: bool
-}
+} with
+    static member All = [|
+        {   Id = "averageByDay"
+            ValueTypes = MovingAverages
+            ChartType = SplineChart
+            ShowPhases = true
+        }
+        {   Id = "all";
+            ValueTypes = RunningTotals
+            ChartType = SplineChart
+            ShowPhases = true
+        }
+    |]
+    static member Default = DisplayType.All.[0]
 
 [<Literal>]
 let DaysOfMovingAverage = 7
-
-let availableDisplayTypes: DisplayType array = [|
-    {   Id = "averageByDay"
-        ValueTypes = MovingAverages
-        ChartType = SplineChart
-        ShowPhases = true
-    }
-    {   Id = "all";
-        ValueTypes = RunningTotals
-        ChartType = SplineChart
-        ShowPhases = true
-    }
-|]
 
 type State = {
     DisplayType : DisplayType
@@ -76,7 +76,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        DisplayType = availableDisplayTypes.[0]
+        DisplayType = DisplayType.Default
         RangeSelectionButtonIndex = 1
     }
     state, Cmd.none
@@ -300,7 +300,7 @@ let renderDisplaySelectors activeDisplayType dispatch =
 
     Html.div [
         prop.className "metrics-selectors"
-        availableDisplayTypes
+        DisplayType.All
         |> Array.map renderSelector
         |> prop.children
     ]

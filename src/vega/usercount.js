@@ -22,7 +22,7 @@ export default function ($t) {
         "encoding": {
           "x": {
             "title": $t('charts.ostanizdrav.usercount.date'),
-            "timeUnit": "utcmonthdate",
+            "timeUnit": "utcyearmonthdate",
             "field": "date",
             "type": "temporal"
           },
@@ -62,7 +62,7 @@ export default function ($t) {
       {
         "encoding": {
           "x": {
-            "timeUnit": "utcmonthdate",
+            "timeUnit": "utcyearmonthdate",
             "field": "date",
             "type": "temporal",
             "axis": {

@@ -344,7 +344,7 @@
             "from": " ",
             "sortBy": "Razvrstaj prema:",
             "weekYearDateFormat": "%W. tjedan %Y.",
-            "dataDate": "Podaci do: {{ date, %a., %e. %b. }}",
+            "dataDate": "Podaci do: {{ date, %A, %e. %B }}",
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
             "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
             "dsMNZ": "MNZ",
@@ -777,26 +777,38 @@
             "deceased-total": "Ukupno smrtnih slučajeva",
             "deceased-rest": "Izvan bolnice",
             "deceased-care": "Bolnica za njegu",
-            "deceasedToDateRelative": "Smrtni slučajevi do danas (relativni)",
-            "deceasedToDate": "Smrtni slučajevi do danas",
+            "deceasedToDateRelative": "Smrtni slučajevi do datuma (relativno)",
+            "deceasedToDate": "Smrtni slučajevi do datuma",
             "titleMenu": "Smrtni slučajevi",
-            "title": "Smrtni slučajevi"
+            "title": "Smrtni slučajevi",
+            "deceasedByAgeTodayRelative": "Smrtni slučajevi po starosti (dnevno, relativno)",
+            "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)"
         },
         "excessDeaths": {
             "excess": {
-                "excessDeaths": "Mortalitet (u usporedbi s 2015. do 2019.)",
-                "title": "Mortalitet u odnosu na zadnjih 5 godina",
+                "excessDeaths": "Prekomjerni mortalitet (u usporedbi s 2015. do 2019.)",
+                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina",
                 "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
-            "titleMenu": "Mortalitet",
-            "title": "Mortalitet",
+            "titleMenu": "Prekomjerni mortalitet",
+            "title": "Prekomjerni mortalitet",
             "absolute": {
                 "title": "Godišnja usporedba",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
-            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
+            "weekDate": "{{ dateFrom, %e. %m. }} – {{ dateTo, %e. %m. }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %m. %Y. }} – {{ dateTo, %e. %m. %Y. }}",
+            "excessByAgeGroup": {
+                "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina po dobnim skupinama",
+                "disclaimer": "Napomena: podaci o smrtnim slučajevima za posljednji mjesec nisu potpuni. Širine stupaca predstavljaju omjer između umrlih u dobnoj skupini stupca i svih umrlih u danom mjesecu.",
+                "sex": {
+                    "female": "Žene",
+                    "male": "Muškarci",
+                    "both": "Svi"
+                },
+                "totalDeceased": "Ukupno preminuli"
+            }
         },
         "metricsCorrelation": {
             "titleMenu": "Korelacija",
@@ -1010,6 +1022,10 @@
         "liftFoodMarkets2": {
             "description": "Opuštanje: tržnice, kiosci, frizerski saloni.",
             "title": "Tržnice"
+        },
+        "liftGym": {
+            "description": "Opuštanje: individualna i vođena rekreacija s ograničenjima<br>(1 osoba na 50 m² i razmak između osoba od 5 m).",
+            "title": "Fitness"
         }
     },
     "pageNotFound": {
@@ -1211,7 +1227,8 @@
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi",
-        "testsHAT": "Testiranja danas: Brzo testiranje antigena"
+        "testsHAT": "Testiranja danas: Brzo testiranje antigena",
+        "vaccinationSummary": "Cijepljene osobe"
     },
     "region": {
         "za": "Zasavlje",
@@ -1235,11 +1252,11 @@
         "x_days_ago_1": "Prije {{ count }} dana",
         "x_days_ago_2": "Prije {{ count }} dana",
         "longerDate": "{{ date, %A, %e. %B %Y. }}",
-        "date": "{{ date, %e. %b }}",
+        "date": "{{ date, %e. %B }}",
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. tjedan %Y.}})"
+        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{date, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",
@@ -1421,13 +1438,18 @@
             "answer": "[Sledilnik](/hr/about) je projekt slobodno dostupnih podataka i otvorenog koda koji prikuplja, analizira i prikazuje neke od najkorisnijih podataka za bolje razumijevanje širenja pandemije koronavirusa i bolesti COVID-19, zajedno s njezinom dinamikom i opsegom. Želimo prikazati jasne grafičke i statističke vizualizacije onoga što nam aktualni podaci govore o širenju virusa u Sloveniji, te osigurati da informacije o veličini i težini problema COVID-19 u Sloveniji postanu dostupne i razumljive svima."
         },
         "why-sledilnik": {
-            "question": "Zašto Sledilnik?"
+            "question": "Zašto Sledilnik?",
+            "answer": "_Cilj nam je, pomoći razumjeti širenje virusa i pomoći u podizanju svijesti, reagiranja, kao i učinkovitosti mjera provedenih za suzbijanje virusa. Daljnje informacije o projektu nalaze se na stranici [O projektu](/hr/about)._"
         },
         "section": {
             "project": "O projektu",
             "charts": "O izračunima i dijagramima",
             "data": "O podacima",
             "general": "Opće informacije"
+        },
+        "how-to-help": {
+            "answer": "Obrati nam se info@sledilnik.org i ukratko opiši tko si i kako možeš pridonijeti projektu. Svaka pomoć je dobrodošla.",
+            "question": "Želim pomoći. Gdje mogu početi?"
         }
     }
 }

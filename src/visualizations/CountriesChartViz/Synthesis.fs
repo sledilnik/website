@@ -69,7 +69,7 @@ let yAxisValueFormatter state jsThis =
 let tooltipValueFormatter state value =
     match state.MetricToDisplay with
     | DeathsPerCases ->
-        Utils.percentWith1DecimalSignFormatter value
+        Utils.percentWith1DecimalFormatter value
     | NewDeathsPer100k -> Utils.formatTo2DecimalWithTrailingZero value
     | _ -> Utils.formatTo1DecimalWithTrailingZero value
 

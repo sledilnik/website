@@ -12,7 +12,7 @@
           {{ cardData.diffPercentage | percent }}
         </div>
       </div>
-      <div :id="cardName" class="card-diff" :class="['card-'+cardName]">
+      <div :id="cardName" class="card-diff" :class="['cardtype-'+cardName]">
         <div v-if="cardData.subTitle">
           <span class="card-note">{{ cardData.subTitle }} <span>{{ subLabelExtraText }}</span></span>
         </div>
@@ -20,8 +20,8 @@
           v-if="cardData.subValues && cardData.subValues.in"
           class="card-diff-item"
         >
-          <div class="trend-icon in bad up"></div>
-          <span class="in bad">{{ cardData.subValues.in | number }}</span>
+          <div class="trend-icon in" :class="[cardData.flipGoodDirection ? 'good up' : 'bad up']"></div>
+          <span class="in" :class="[cardData.flipGoodDirection ? 'good' : 'bad']">{{ cardData.subValues.in | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.out"
@@ -101,7 +101,7 @@ export default {
     percentageDirection() {
       if (this.cardData.diffPercentage === 0) {
         return "no-change";
-      } else if (this.cardData.diffPercentage > 0) {
+      } else if (this.cardData.diffPercentage > 0 && !this.cardData.reverseGoodDirection) {
         return "bad";
       }
       return "good";
@@ -271,4 +271,15 @@ export default {
 /**
   SPECIAL CARD STYLES
  */
+
+.cardtype-vaccinationSummary {
+  .percent {
+    &.trend-icon {
+      background-color: #a0a0a0;
+    }
+    &.tests {
+      color: #a0a0a0;
+    }
+  }
+}
 </style>

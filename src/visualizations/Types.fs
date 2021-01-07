@@ -41,8 +41,7 @@ type Treatment =
       DeceasedToDate : int option
       Deceased : int option
       OutOfHospitalToDate : int option
-      OutOfHospital : int option
-      RecoveredToDate : int option }
+      OutOfHospital : int option }
 
 type PersonTypeCount =
     { RhOccupant : int option

@@ -10,22 +10,22 @@ let setNeighboringCountries = {
 
 let setHighestNewCases = {
     Label = "groupHighestNewCases"
-    CountriesCodes = [| "TUR"; "SRB"; "GEO"; "LTU"; "HRV"; "MNE"; "USA"; "SWE"; "BLZ"; "PAN" |]
+    CountriesCodes = [| "CZE"; "LTU"; "GBR"; "PAN"; "CYP"; "ISR"; "USA"; "SWE"; "MNE"; "SVK" |]
 }
 
 let setHighestActiveCases = {
     Label = "groupHighestActiveCases"
-    CountriesCodes = [| "TUR"; "GEO"; "SRB"; "LTU"; "HRV"; "MNE"; "BLZ"; "USA"; "SWE"; "HUN" |]
+    CountriesCodes = [| "LTU"; "CZE"; "PAN"; "GBR"; "USA"; "MNE"; "NLD"; "ISR"; "CYP"; "SWE" |]
 }
 
 let setHighestNewDeaths = {
     Label = "groupHighestNewDeaths"
-    CountriesCodes = [| "BGR"; "BIH"; "HUN"; "HRV"; "MKD"; "MNE"; "CHE"; "ITA"; "POL"; "GEO" |]
+    CountriesCodes = [| "LTU"; "SVK"; "HRV"; "HUN"; "CZE"; "BGR"; "PAN"; "LVA"; "GBR"; "CHE" |]
 }
 
 let setHighestTotalDeaths = {
     Label = "groupHighestTotalDeaths"
-    CountriesCodes = [| "BEL"; "PER"; "ITA"; "ESP"; "MKD"; "BIH"; "GBR"; "MNE"; "ARG"; "USA" |]
+    CountriesCodes = [| "BEL"; "BIH"; "ITA"; "MKD"; "PER"; "MNE"; "ESP"; "BGR"; "GBR"; "CZE" |]
 }
 
 let setLargestEuCountries = {

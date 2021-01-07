@@ -15,16 +15,22 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 ## CSV datoteke
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
-- [municipality.csv](https://github.com/sledilnik/data/blob/master/csv/municipality.csv)
-    - [regions.csv](https://github.com/sledilnik/data/blob/master/csv/regions.csv)
-    - [deceased-regions.csv](https://github.com/sledilnik/data/blob/master/csv/deceased-regions.csv)
+- [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
+    - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
+    - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
+    - [region-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/region-deceased.csv)
+- [municipality-cases.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-cases.csv)
+    - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
+    - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
+    - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+- [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
 - [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
-- **Slovarji**:
+- **Dictionaries**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
     - [dict-region.csv](https://github.com/sledilnik/data/blob/master/csv/dict-region.csv)
@@ -37,10 +43,10 @@ Celotni podatki skupaj z izvorno kodo za njihovo obdelavo so na voljo na [GitHub
 
 
 ## REST API
+- [summary](https://api.sledilnik.org/api/summary)
 - [stats](https://api.sledilnik.org/api/stats)
+- [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
 - [municipalities](https://api.sledilnik.org/api/municipalities)
-    - [regions](https://api.sledilnik.org/api/regions)
-    - [deceased-regions](https://api.sledilnik.org/api/deceased-regions)
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
