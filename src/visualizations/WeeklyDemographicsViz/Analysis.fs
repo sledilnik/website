@@ -1,10 +1,9 @@
-﻿module HeatmapChart.Analysis
+﻿module WeeklyDemographicsViz.Analysis
 
 open System
 open System.Collections.Generic
 open Types
 
-//TODO: implement weekly aggregation of cases for the heatmap
 
 type DateTuple<'T> = DateTime * 'T
 type DateTupleList<'T> = DateTuple<'T> list

@@ -45,7 +45,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
-            | "HeatmapChart" -> Some HeatmapChart
+            | "WeeklyDemographics" -> Some WeeklyDemographics
             | _ -> None
             |> Embedded
 
@@ -526,10 +526,10 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MetricsCorrelationViz.Rendering.renderChart
                             {| data = data |} }
 
-    let heatmap =
+    let weeklyDemographics =
           { VisualizationType = DailyComparison
-            ClassName = "heatmap-chart"
-            ChartTextsGroup = "heatmap"
+            ClassName = "weekly-demographics-chart"
+            ChartTextsGroup = "weeklyDemographics"
             Explicit = false
             Renderer =
                 fun state ->
@@ -537,13 +537,13 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView HeatmapChart.Rendering.renderChart {| data = data |} }
+                    | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; heatmap; ageGroups; hcCases;
+          ageGroupsTimeline; weeklyDemographics; ageGroups; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
@@ -571,7 +571,7 @@ let render (state: State) (_: Msg -> unit) =
           countriesTotalDeathsPer100k
           phaseDiagram
           excessDeaths
-          heatmap
+          weeklyDemographics
         ]
 
     let embedded, visualizations =

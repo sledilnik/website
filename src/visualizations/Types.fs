@@ -180,7 +180,7 @@ type VisualizationType =
     | Deceased
     | ExcessDeaths
     | MetricsCorrelation
-    | HeatmapChart
+    | WeeklyDemographics
 
 type RenderingMode =
     | Normal

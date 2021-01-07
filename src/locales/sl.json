@@ -1222,8 +1222,8 @@
             "locationOther": "drugo",
             "locationUnknown": "neznano"
         },
-        "heatmap": {
-            "title": "Primerjava po tednih",
+        "weeklyDemographics": {
+            "title": "Demografija potrjenih primerov, tedensko",
             "titleMenu": "Starost – po tednih",
             "ageGroup": "Starostna skupina",
             "male": "Moški",

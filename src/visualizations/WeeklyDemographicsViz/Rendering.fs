@@ -1,5 +1,5 @@
 [<RequireQualifiedAccess>]
-module HeatmapChart.Rendering
+module WeeklyDemographicsViz.Rendering
 
 open System
 open Analysis
@@ -257,8 +257,8 @@ let renderChartOptions state dispatch =
                 credits = {| enable  = false|}
             |}
 
-        Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-heatmap", options)) 10 |> ignore
-        """<div id="tooltip-chart-heatmap"; class="tooltip-chart";><div/>"""
+        Fable.Core.JS.setTimeout (fun () -> sparklineChart("tooltip-chart-weekly-demographics", options)) 10 |> ignore
+        """<div id="tooltip-chart-weekly-demographics"; class="tooltip-chart";><div/>"""
 
 
     let tooltipFormatter
@@ -282,9 +282,9 @@ let renderChartOptions state dispatch =
         let label = sprintf "<b> %s </b>" (date.ToString())
 
         label
-            + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.heatmap.ageGroup") (ageGroupKey)
-            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Male) (I18N.t "charts.heatmap.male") (Utils.formatTo1DecimalWithTrailingZero (maleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
-            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Female) (I18N.t "charts.heatmap.female") (Utils.formatTo1DecimalWithTrailingZero(femaleCasesForWeek:float)) (I18N.t "charts.heatmap.per100k")
+            + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.weeklyDemographics.ageGroup") (ageGroupKey)
+            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Male) (I18N.t "charts.weeklyDemographics.male") (Utils.formatTo1DecimalWithTrailingZero (maleCasesForWeek:float)) (I18N.t "charts.weeklyDemographics.per100k")
+            + sprintf "<br><span style='color: %s'>●</span> %s: <b>%s</b> %s" (colorCategories.Female) (I18N.t "charts.weeklyDemographics.female") (Utils.formatTo1DecimalWithTrailingZero(femaleCasesForWeek:float)) (I18N.t "charts.weeklyDemographics.per100k")
             + sparkline
 
     let colorAxis =
@@ -315,7 +315,7 @@ let renderChartOptions state dispatch =
                         |]
                     |} |> pojo
 
-    let className = "covid19-infection-heatmap"
+    let className = "covid19-infection-weekly-demographics"
 
 
     let baseOptions =
@@ -370,7 +370,7 @@ let renderMetricsSelectors activeMetrics dispatch =
     let renderSelector (metrics: DisplayMetrics) =
         let active = metrics = activeMetrics
 
-        Html.div [ prop.text (I18N.chartText "heatmap" metrics.Id)
+        Html.div [ prop.text (I18N.chartText "weeklyDemographics" metrics.Id)
                    Utils.classes [ (true, "btn btn-sm metric-selector")
                                    (active, "metric-selector--selected selected") ]
                    if not active then prop.onClick (fun _ -> dispatch metrics)
@@ -388,4 +388,4 @@ let render state dispatch =
                 ]
 
 let renderChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("heatmap", init props.data, update, render)
+    React.elmishComponent ("weeklyDemographics", init props.data, update, render)

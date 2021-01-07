@@ -66,9 +66,9 @@
         <Compile Include="RegionsChartViz\Synthesis.fs" />
         <Compile Include="RegionsChartViz\Rendering.fs" />
         <Compile Include="MetricsCorrelationViz\Rendering.fs" />
-        <Compile Include="HeatmapChart/Analysis.fs" />
-        <Compile Include="HeatmapChart/Synthesis.fs" />
-        <Compile Include="HeatmapChart/Rendering.fs" />
+        <Compile Include="WeeklyDemographicsViz/Analysis.fs" />
+        <Compile Include="WeeklyDemographicsViz/Synthesis.fs" />
+        <Compile Include="WeeklyDemographicsViz/Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

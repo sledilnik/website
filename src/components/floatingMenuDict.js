@@ -115,8 +115,8 @@ export default {
     titleKey: 'charts.metricsCorrelation.titleMenu',
     icon: 'graph',
   },
-  'heatmap-chart': {
-    titleKey: 'charts.heatmap.titleMenu',
+  'weekly-demographics-chart': {
+    titleKey: 'charts.weeklyDemographics.titleMenu',
     icon: 'map',
   }
 }

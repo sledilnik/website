@@ -1,11 +1,9 @@
-﻿module HeatmapChart.Synthesis
+﻿module WeeklyDemographicsViz.Synthesis
 
 open System
 open System.Collections.Generic
 open Types
-open HeatmapChart.Analysis
-open Fable.Core
-
+open WeeklyDemographicsViz.Analysis
 
 
 type CasesInAgeGroupForDay = float
@@ -67,6 +65,7 @@ let newExtractTimelineForAgeGroup
     let femaleCaseCount = newCasesTimeline.Data |> Array.map ((fun dp -> dp.Female) >> optionToFloat)
     let totalCaseCount = newCasesTimeline.Data |> Array.map ((fun dp -> dp.All) >> optionToFloat)
 
+    // a hack to ensure that the weekly counts start on Monday
     let padCases (cases: CasesInAgeGroupForDay[]): CasesInAgeGroupForDay[] =
         Array.concat [|[|0.;0.|]; cases|]
 
