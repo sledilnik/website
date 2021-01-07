@@ -34,6 +34,7 @@ let regionsInfo = dict[
 ]
 
 type Msg =
+    | ToggleAllRegions of bool
     | ToggleRegionVisible of string
     | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
@@ -72,12 +73,21 @@ let init (config: RegionsChartConfig) (data : RegionsData)
       RegionsData = data
       Regions = regionsByTotalCases
       RegionsConfig = regionsConfig
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 0
+      ShowAll = true },
     Cmd.none
 
 let update (msg: Msg) (state: RegionsChartState)
     : RegionsChartState * Cmd<Msg> =
     match msg with
+    | ToggleAllRegions visibleOrHidden ->
+        let newRegionsConfig =
+            state.RegionsConfig
+            |> List.map (fun region ->
+                { Key = region.Key
+                  Color = region.Color
+                  Visible = visibleOrHidden } )
+        { state with RegionsConfig = newRegionsConfig; ShowAll = not state.ShowAll }, Cmd.none
     | ToggleRegionVisible regionKey ->
         let newRegionsConfig =
             state.RegionsConfig
@@ -229,19 +239,25 @@ let renderRegionSelector (regionConfig: RegionRenderingConfiguration) dispatch =
     Html.div [
         prop.onClick (fun _ -> ToggleRegionVisible regionConfig.Key |> dispatch)
         Utils.classes
-            [(true, "btn  btn-sm metric-selector")
+            [(true, "btn btn-sm metric-selector")
              (regionConfig.Visible, "metric-selector--selected") ]
         prop.style style
         prop.text (I18N.tt "region" regionConfig.Key) ]
 
-let renderRegionsSelectors metrics dispatch =
+let renderRegionsSelectors (state: RegionsChartState) dispatch =
     Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            metrics
-            |> List.map (fun metric ->
-                renderRegionSelector metric dispatch
-            ) ) ]
+        prop.children [
+            Html.div [
+                prop.onClick (fun _ -> ToggleAllRegions ( if state.ShowAll then false else true ) |> dispatch)
+                prop.className "btn btn-sm metric-selector"
+                prop.text ( if state.ShowAll then "Skrij vse regije" else "Vse regije" ) ]
+            Html.div [
+                prop.className "metrics-selectors"
+                prop.children (
+                    state.RegionsConfig
+                    |> List.map (fun metric ->
+                        renderRegionSelector metric dispatch
+                   ) ) ] ] ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
     let renderMetricTypeSelector (typeSelector: MetricType) =
@@ -272,7 +288,7 @@ let render (state : RegionsChartState) dispatch =
                 state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
-        renderRegionsSelectors state.RegionsConfig dispatch
+        renderRegionsSelectors state dispatch
     ]
 
 let renderChart
