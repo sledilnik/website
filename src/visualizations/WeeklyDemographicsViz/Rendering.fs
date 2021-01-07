@@ -355,7 +355,17 @@ let renderChartOptions state dispatch =
         credits = credictsOptions
         boost = {| useGPUTranslations = true |} |> pojo
 
-        responsive = pojo {| |}
+        responsive = pojo
+            {|
+                rules =
+                    [| {|
+                        condition = {| maxWidth = 768 |}
+                        chartOptions =
+                            {|
+                                yAxis = [| {| visible = false |} |]
+                            |}
+                    |} |]
+            |}
 
     |}
 
