@@ -527,7 +527,7 @@ let render (state: State) (_: Msg -> unit) =
                             {| data = data |} }
 
     let weeklyDemographics =
-          { VisualizationType = DailyComparison
+          { VisualizationType = WeeklyDemographics
             ClassName = "weekly-demographics-chart"
             ChartTextsGroup = "weeklyDemographics"
             Explicit = false

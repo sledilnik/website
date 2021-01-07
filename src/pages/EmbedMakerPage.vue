@@ -143,6 +143,11 @@ export default {
           text: this.$t('charts.ageGroupsTimeline.title'),
           dimensions: [1140, 720]
         },
+        "WeeklyDemographics": {
+          value: "WeeklyDemographics",
+          text: this.$t('charts.weeklyDemographics.title'),
+          dimensions: [1140, 720]
+        },
         "PhaseDiagram": {
           value: "PhaseDiagram",
           text: this.$t('charts.phaseDiagram.title'),
