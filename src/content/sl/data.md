@@ -15,6 +15,7 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 ## CSV datoteke
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
+- [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
 - [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
     - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
     - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
@@ -30,7 +31,7 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
 - [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
-- **Dictionaries**:
+- **Slovarji**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
     - [dict-region.csv](https://github.com/sledilnik/data/blob/master/csv/dict-region.csv)
@@ -46,11 +47,15 @@ Celotni podatki skupaj z izvorno kodo za njihovo obdelavo so na voljo na [GitHub
 - [summary](https://api.sledilnik.org/api/summary)
 - [stats](https://api.sledilnik.org/api/stats)
 - [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
+- [lab-tests](https://api.sledilnik.org/api/lab-tests)
+- [regions](https://api.sledilnik.org/api/regions)
 - [municipalities](https://api.sledilnik.org/api/municipalities)
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
-- [retirement-homes](https://api.sledilnik.org/api/retirement-homes)
+- [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
+- [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
+- [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
 - **Slovarji**:
     - [hospitals-list](https://api.sledilnik.org/api/hospitals-list)
     - [retirement-homes-list](https://api.sledilnik.org/api/retirement-homes-list)
