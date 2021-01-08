@@ -112,12 +112,14 @@ type State =
       PatientsData : PatientsStats []
       Error : string option
       RangeSelectionButtonIndex: int
+      ShowAll : bool
     }
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ToggleMetricVisible of Metric
+    | ToggleAllMetrics of bool
     | ScaleTypeChanged of ScaleType
     | MetricTypeChanged of FullMetricType
     | RangeSelectionChanged of int
@@ -132,6 +134,7 @@ let init data : State * Cmd<Msg> =
         PatientsData = [||]
         Error = None
         RangeSelectionButtonIndex = 0
+        ShowAll = true
     }
     state, cmd
 
@@ -148,6 +151,18 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             Metrics = state.Metrics
                       |> Metrics.update (fun mc -> { mc with Visible = not mc.Visible}) metric
         }, Cmd.none
+    | ToggleAllMetrics visibleOrHidden ->
+        let newMetricsConfig =
+            state.Metrics
+            |> List.map (fun m ->
+                { Metric = m.Metric
+                  Color = m.Color
+                  Type = m.Type
+                  Id = m.Id
+                  Visible = visibleOrHidden } )
+        { state with
+            Metrics = newMetricsConfig
+            ShowAll = not state.ShowAll }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
     | MetricTypeChanged metricType ->
@@ -317,12 +332,16 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
 let renderMetricsSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
-        prop.children [
-            for mc in state.Metrics do
-                if mc.Type = state.MetricType.MetricType then
-                    yield renderMetricSelector mc dispatch
-        ]
-    ]
+        prop.children (
+            state.Metrics
+            |> List.map (fun metric ->
+                if metric.Type = state.MetricType.MetricType then renderMetricSelector metric dispatch else Html.none)
+            |> List.append [ Html.div [
+                prop.onClick (fun _ -> ToggleAllMetrics ( if state.ShowAll then false else true ) |> dispatch)
+                prop.className "btn btn-sm metric-selector"
+                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" )
+             ] ]
+        ) ]
 
 let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
     let renderMetricTypeSelector (metricTypeToRender: FullMetricType) =

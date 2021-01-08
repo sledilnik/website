@@ -254,8 +254,7 @@ let renderRegionsSelectors (state: RegionsChartState) dispatch =
                 [ Html.div [
                     prop.onClick (fun _ -> ToggleAllRegions ( if state.ShowAll then false else true ) |> dispatch)
                     prop.className "btn btn-sm metric-selector"
-                    prop.style [ style.backgroundColor "#ffd922" ]
-                    prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.selectAll" ) ] ] ) ]
+                    prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ] ) ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
     let renderMetricTypeSelector (typeSelector: MetricType) =

@@ -735,7 +735,7 @@
             "shortDateFormat": "%e. %b",
             "weekYearDateFormat": "%W. teden %Y",
             "hideAll": "Skrij vse",
-            "selectAll": "Izberi vse"
+            "showAll": "Prikaži vse"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
