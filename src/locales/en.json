@@ -1595,9 +1595,9 @@
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC code"
         },
-        "title": "Donation",
         "monthly": {
-            "title": "Monthly recurring donation"
+            "title": "Monthly recurring donation",
+             "donateButton": "{{amount}} EUR / month"
         }
     }
 }

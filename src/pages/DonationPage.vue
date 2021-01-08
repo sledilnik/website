@@ -6,17 +6,19 @@
 
       <h2>{{ $t("donation.monthly.title") }}</h2>
       <div v-html-md="$t('donation.monthly.description')" />
+
+      <stripe-checkout
+        ref="checkoutRef"
+        mode="subscription"
+        :pk="publishableKey"
+        :success-url="successURL"
+        :cancel-url="cancelURL"
+        @loading="v => loading = v"
+      />
       <div>
-        <stripe-checkout
-          ref="checkoutRef"
-          mode="subscription"
-          :pk="publishableKey"
-          :line-items="lineItems"
-          :success-url="successURL"
-          :cancel-url="cancelURL"
-          @loading="v => loading = v"
-        />
-        <button @click="submit">{{ $t("donation.buttonSubscribe") }}</button>
+        <span v-for="(item) in stripeSubscriptions" :key="item.price">
+          <button @click="submit(item)">{{ $t("donation.monthly.donateButton", {amount: item.amount}) }}</button>
+        </span>
       </div>
 
       <h2>{{ $t("donation.banktransfer.title") }}</h2>
@@ -55,7 +57,6 @@
 
 <script>
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
-import AgeGroupsFemales from '../components/tables/AgeGroupsFemales.vue';
 
 export default {
   name: 'DonationPage',
@@ -66,10 +67,42 @@ export default {
     this.publishableKey = 'pk_test_51I6cVwEUtJJGJFIUgsLpXxbk4DHr2g8Q2ZCIUlzSWbVBtWbcEZJdJuRhyjCxO0xFZdBecREiHx2zirBDPFN1qoeQ00A5Wd3bak' // process.env.STRIPE_PUBLISHABLE_KEY;
     return {
       loading: false,
-      lineItems: [
+      stripeSubscriptions: [
         {
-          price: 'price_1I6dUEEUtJJGJFIUeXsfJpCV', // The id of the recurring price you created in your Stripe dashboard
-          quantity: 1,
+          amount: 5,
+          lineItems:[
+            {
+              price: 'price_1I6dUEEUtJJGJFIUM4slrZ9g', // The id of the recurring price you created in your Stripe dashboard
+              quantity: 1,
+            },
+          ]
+        },
+        {
+          amount: 20,
+          lineItems:[
+            {
+              price: 'price_1I6dUEEUtJJGJFIURHozzi1V', // The id of the recurring price you created in your Stripe dashboard
+              quantity: 1,
+            },
+          ]
+        },
+        {
+          amount: 50,
+          lineItems:[
+            {
+              price: 'price_1I6dUEEUtJJGJFIUnmagHiRR', // The id of the recurring price you created in your Stripe dashboard
+              quantity: 1,
+            },
+          ]
+        },
+        {
+          amount: 100,
+          lineItems:[
+            {
+              price: 'price_1I6dUFEUtJJGJFIUcWNRbSDC', // The id of the recurring price you created in your Stripe dashboard
+              quantity: 1,
+            },
+          ]
         },
       ],
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate/thanks`,
@@ -78,7 +111,8 @@ export default {
   },
   methods: {
     // You will be redirected to Stripe's secure checkout page
-    submit () {
+    submit (item) {
+      this.$refs.checkoutRef.lineItems = item.lineItems;
       this.$refs.checkoutRef.redirectToCheckout();
     },
   },
@@ -89,15 +123,24 @@ export default {
 <style lang="scss">
 
 img {
+  max-width: 100%;
+
   &.upn {
-    max-width: 100%;
     padding: 10px 0px;
   }
+
   &.qr {
-    max-width: 100%;
     float: right;
     padding: 0 0 20px 20px, 
   }
+}
+
+button {
+  padding: 10px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: $yellow;
+  border: none;
 }
 
 </style>

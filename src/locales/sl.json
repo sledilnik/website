@@ -1689,7 +1689,8 @@
             "bankBicSwift": "BIC/SWIFT koda banke"
         },
         "monthly": {
-            "title": "Ponavljajoča mesečna donacija"
+            "title": "Ponavljajoča mesečna donacija",
+            "donateButton": "{{amount}} EUR / mesec"
         }
     }
 }
