@@ -298,7 +298,7 @@ module Dictionaries =
         Name : string
         Population : int option }
 
-    let excludedRegions = Set.ofList ["si" ; "t" ; "n"]
+    let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"]
 
     let regions =
         [ "si",  "SLOVENIJA",  Some 2095861
@@ -314,8 +314,8 @@ module Dictionaries =
           "po",  "Primorsko-notranjska",  Some 52841
           "ng",  "Goriška",  Some 118041
           "kp",  "Obalno-kraška",  Some 115913
-          "t",   "TUJINA",  None
-          "n",   "NEZNANO",  None ]
+          "unknown", "TUJINA", None
+          "foreign", "NEZNANO", None ]
         |> List.map
                (fun (key,  name,  population) ->
                     key, { Key = key ; Name = name ; Population = population })

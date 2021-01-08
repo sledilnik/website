@@ -165,7 +165,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Municipality; data = data |} }
+                    | Success data -> lazyView Map.mapMunicipalitiesChart {| data = data |} }
 
     let regionMap =
           { VisualizationType = RegionMap
@@ -174,11 +174,11 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.MunicipalitiesData with
+                    match state.RegionsData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Region; data = data |} }
+                    | Success data -> lazyView Map.mapRegionChart {| data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities
@@ -322,7 +322,7 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.MunicipalitiesData with
+                    match state.RegionsData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
@@ -344,7 +344,7 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.MunicipalitiesData with
+                    match state.RegionsData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error

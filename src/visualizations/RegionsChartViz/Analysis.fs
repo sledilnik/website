@@ -27,42 +27,39 @@ type RegionMetricData = {
 
 
 let findRegionData
-    (municipalitiesDataPoint: MunicipalitiesDataPoint)
+    (regionsDataPoint: RegionsDataPoint)
     (regionName: string)
-    : RegionMunicipalities =
-    municipalitiesDataPoint.Regions
+    : AreaCases =
+    regionsDataPoint.Regions
     |> List.find (fun regionDayData -> regionDayData.Name = regionName)
 
 let metricForRegionForDay
-    (municipalitiesDataPoint: MunicipalitiesDataPoint)
+    (regionsDataPoint: RegionsDataPoint)
     (regionName: string)
     (metricType: MetricType)
     : int =
 
     let regionDayData =
-        findRegionData municipalitiesDataPoint regionName
+        findRegionData regionsDataPoint regionName
 
-    regionDayData.Municipalities
-    |> List.sumBy
-           (fun municipalitiesData ->
-                match metricType with
-                | ActiveCases -> municipalitiesData.ActiveCases
-                | ConfirmedCases -> municipalitiesData.ConfirmedToDate
-                | NewCases7Days -> municipalitiesData.ConfirmedToDate
-                | Deceased -> municipalitiesData.DeceasedToDate
-                |> Utils.optionToInt)
+    match metricType with
+    | ActiveCases -> regionDayData.ActiveCases
+    | ConfirmedCases -> regionDayData.ConfirmedToDate
+    | NewCases7Days -> regionDayData.ConfirmedToDate
+    | Deceased -> regionDayData.DeceasedToDate
+    |> Utils.optionToInt
 
 let metricForRegion
-    (municipalitiesData: MunicipalitiesData)
+    (regionsData: RegionsData)
     (startDate: DateTime)
     (regionName: string)
     (metricType: MetricType)
     : RegionMetricData =
 
     let metricValues =
-        municipalitiesData
-        |> List.map (fun municipalitiesDataForDay ->
-             metricForRegionForDay municipalitiesDataForDay regionName metricType)
+        regionsData
+        |> List.map (fun regionsDataForDay ->
+             metricForRegionForDay regionsDataForDay regionName metricType)
 
     { Name = regionName
       StartDate = startDate

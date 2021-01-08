@@ -39,13 +39,7 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
-let regionTotal (region : RegionMunicipalities) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.ActiveCases)
-    |> List.choose id
-    |> List.sum
-
-let init (config: RegionsChartConfig) (data : MunicipalitiesData)
+let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
     let lastDataPoint = List.last data
 
@@ -54,12 +48,12 @@ let init (config: RegionsChartConfig) (data : MunicipalitiesData)
         |> List.filter (fun region ->
             Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
-    let regionsByTotalCases =
+    let regionsSorted =
         regionsWithoutExcluded
-        |> List.sortByDescending regionTotal
+        |> List.sortByDescending (fun region -> region.ActiveCases)
 
     let regionsConfig =
-        regionsByTotalCases
+        regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
             let color = regionsInfo.[regionKey].Color
@@ -69,8 +63,8 @@ let init (config: RegionsChartConfig) (data : MunicipalitiesData)
 
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
-      MunicipalitiesData = data
-      Regions = regionsByTotalCases
+      RegionsData = data
+      RegionsSorted = regionsSorted
       RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
     Cmd.none
@@ -276,6 +270,6 @@ let render (state : RegionsChartState) dispatch =
     ]
 
 let renderChart
-    (config: RegionsChartConfig) (props : {| data : MunicipalitiesData |}) =
+    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
     React.elmishComponent
         ("RegionsChart", init config props.data, update, render)
