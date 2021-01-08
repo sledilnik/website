@@ -459,7 +459,8 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals and retirement homes. Deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimerRegion": "Note: deceased by municipality data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
+            "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",

@@ -838,10 +838,14 @@ let render (state : State) dispatch =
             ]
             match state.ContentType with
             | Deceased ->
+                let disclaimerID = 
+                    if state.MapToDisplay = RegionMap 
+                    then "charts.map.disclaimerRegion" 
+                    else "charts.map.disclaimer"
                 Html.div [
                     prop.className "disclaimer"
                     prop.children [
-                        Html.text (I18N.t "charts.map.disclaimer")
+                        Html.text (I18N.t disclaimerID)
                     ]
                 ]
             | _ -> Html.none
