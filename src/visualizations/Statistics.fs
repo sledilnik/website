@@ -107,39 +107,42 @@ let calcRunningAverage (data: (JsTimestamp * float)[]) =
     let roundToDecimals = 1
 
     let entriesCount = data.Length
-    let cutOff = daysOfMovingAverage / 2
-    let averagedDataLength = entriesCount - cutOff * 2
 
-    let averages = Array.zeroCreate averagedDataLength
+    if entriesCount >= daysOfMovingAverage then
+        let cutOff = daysOfMovingAverage / 2
+        let averagedDataLength = entriesCount - cutOff * 2
 
-    let daysOfMovingAverageFloat = float daysOfMovingAverage
-    let mutable currentSum = 0.
+        let averages = Array.zeroCreate averagedDataLength
 
-    let movingAverageFunc index =
-        let (_, entryValue) = data.[index]
+        let daysOfMovingAverageFloat = float daysOfMovingAverage
+        let mutable currentSum = 0.
 
-        currentSum <- currentSum + entryValue
+        let movingAverageFunc index =
+            let (_, entryValue) = data.[index]
 
-        match index with
-        | index when index >= daysOfMovingAverage - 1 ->
-            let date = data.[index - cutOff] |> fst
-            let average =
-                currentSum / daysOfMovingAverageFloat
-                |> Utils.roundDecimals roundToDecimals
+            currentSum <- currentSum + entryValue
 
-            averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
+            match index with
+            | index when index >= daysOfMovingAverage - 1 ->
+                let date = data.[index - cutOff] |> fst
+                let average =
+                    currentSum / daysOfMovingAverageFloat
+                    |> Utils.roundDecimals roundToDecimals
 
-            let valueToSubtract =
-                data.[index - (daysOfMovingAverage - 1)] |> snd
-            currentSum <- currentSum - valueToSubtract
+                averages.[index - (daysOfMovingAverage - 1)] <- (date, average)
 
-        | _ -> ignore()
+                let valueToSubtract =
+                    data.[index - (daysOfMovingAverage - 1)] |> snd
+                currentSum <- currentSum - valueToSubtract
 
-    for i in 0 .. entriesCount-1 do
-        movingAverageFunc i
+            | _ -> ignore()
 
-    averages
+        for i in 0 .. entriesCount-1 do
+            movingAverageFunc i
 
+        averages
+    else
+        [||]
 
 let roundKeyValueFloatArray<'TKey> howManyDecimals (array: ('TKey * float)[])
     : ('TKey * float)[] =
