@@ -1584,5 +1584,18 @@
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
         }
+    },
+    "donation": {
+        "banktransfer": {
+            "title": "One-time bank transfer",
+            "recipient": "Recipient",
+            "iban": "IBAN Account",
+            "bank": "Bank",
+            "bankBicSwift": "Bank SWIFT/BIC code"
+        },
+        "title": "Donation",
+        "monthly": {
+            "title": "Monthly recurring donation"
+        }
     }
 }

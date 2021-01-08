@@ -1676,5 +1676,19 @@
             "question": "Želim pomagati, kje lahko začnem?",
             "answer": "Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!"
         }
+    },
+    "donation": {
+        "title": "Donacija",
+        "banktransfer": {
+            "title": "Enkratno bančno nakazilo",
+            "recipient": "Prejemnik",
+            "purpose": "Koda namena",
+            "iban": "Račun IBAN",
+            "bank": "Banka",
+            "bankBicSwift": "BIC/SWIFT koda banke"
+        },
+        "monthly": {
+            "title": "Ponavljajoča mesečna donacija"
+        }
     }
 }
