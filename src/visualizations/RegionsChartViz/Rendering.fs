@@ -39,7 +39,7 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
-let regionTotal (region : Region) : int =
+let regionTotal (region : RegionMunicipalities) : int =
     region.Municipalities
     |> List.map (fun city -> city.ActiveCases)
     |> List.choose id

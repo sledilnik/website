@@ -21,7 +21,7 @@ type RegionsChartState =
       ScaleType : ScaleType
       MetricType : MetricType
       MunicipalitiesData : MunicipalitiesData
-      Regions : Region list
+      Regions : RegionMunicipalities list
       RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
     }

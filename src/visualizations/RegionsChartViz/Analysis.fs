@@ -29,7 +29,7 @@ type RegionMetricData = {
 let findRegionData
     (municipalitiesDataPoint: MunicipalitiesDataPoint)
     (regionName: string)
-    : Region =
+    : RegionMunicipalities =
     municipalitiesDataPoint.Regions
     |> List.find (fun regionDayData -> regionDayData.Name = regionName)
 

@@ -139,13 +139,13 @@ type Municipality =
       ConfirmedToDate : int option
       DeceasedToDate : int option }
 
-type Region =
+type RegionMunicipalities =
     { Name : string
       Municipalities : Municipality list }
 
 type MunicipalitiesDataPoint =
     { Date : System.DateTime
-      Regions : Region list }
+      Regions : RegionMunicipalities list }
 
 type MunicipalitiesData = MunicipalitiesDataPoint list
 
