@@ -10,17 +10,17 @@ type RemoteData<'data, 'error> =
     | Failure of 'error
     | Success of 'data
 
-type TestMeasure =
+type TodayToDate =
     { ToDate : int option
       Today : int option }
 
 type TestGroup =
-    { Performed : TestMeasure
-      Positive : TestMeasure }
+    { Performed : TodayToDate
+      Positive : TodayToDate }
 
 type Tests =
-    { Performed : TestMeasure
-      Positive : TestMeasure
+    { Performed : TodayToDate
+      Positive : TodayToDate
       Regular : TestGroup
       NsApr20 : TestGroup
     }
@@ -32,6 +32,9 @@ type Cases =
       ClosedToDate : int option
       Active : int option
     }
+
+type Vaccination =
+    { Administered : TodayToDate }
 
 type Treatment =
     { InHospital : int option
@@ -87,6 +90,7 @@ type StatsDataPoint =
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
       UnclassifiedPositiveTestsToDate : int option
+      Vaccination : Vaccination
     }
 
 type StatsData = StatsDataPoint list

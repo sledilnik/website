@@ -65,6 +65,10 @@ type private TransferStatsDataPoint =
       deceasedPerType :
         {| rhOccupant : int option
            other : int option |}
+      vaccination :
+        {|
+            administered : {| toDate : int option; today : int option |} 
+        |}
     }
 
     member this.ToDomain : StatsDataPoint =
@@ -105,6 +109,8 @@ type private TransferStatsDataPoint =
           RestHomeEmployeePositiveTestsToDate = this.cases.rh.employeeConfirmedToDate
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
           UnclassifiedPositiveTestsToDate = this.cases.unclassified.confirmedToDate
+          Vaccination =
+            { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today } }
         }
 
 type private TransferStatsData = TransferStatsDataPoint list
