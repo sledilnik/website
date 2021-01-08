@@ -743,8 +743,8 @@
             "healthcareEmployeesCases": "Bestätigt bei Angestellten im Gesundheitswesen",
             "confirmedCases": "Bestätigte Fälle",
             "disclaimer": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der Angestellten im Gesundheitswesen könnte hier geringer ausfallen, als er eigentlich ist.",
-            "titleMenu": "Fälle Angestellte Gesundheitswesen",
-            "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
+            "titleMenu": "Fälle in Krankenhäsern und Altersheimen",
+            "title": "Fälle im Gesundheitswesens und in Altersheimen"
         },
         "countriesNewDeathsPer100k": {
             "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
@@ -763,7 +763,9 @@
             "deceasedTodayRelative": "Todesfälle pro Tag (relativ)",
             "deceasedToday": "Todesfälle pro Tag",
             "titleMenu": "Todesfälle",
-            "title": "Todesfälle"
+            "title": "Todesfälle",
+            "deceasedByAgeTodayRelative": "Tägliche Todesfälle nach Alter (relativ)",
+            "deceasedByAgeToday": "Tägliche Todesfälle nach Alter"
         },
         "excessDeaths": {
             "excess": {
@@ -1042,7 +1044,9 @@
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte",
         "newCases7dInfo": "Durchschnitt der letzten 7 Tage",
-        "newCases7d": "Neue Fälle"
+        "newCases7d": "Neue Fälle",
+        "testsHAT": "Tests heute: Schnelltests",
+        "vaccinationSummary": "Geimpfte Personen"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",
@@ -1261,6 +1265,10 @@
         "13": {
             "description": "Neue Testmethode",
             "title": "Phase<br>13"
+        },
+        "14": {
+            "description": "Schnelltests",
+            "title": "Phase<br>14"
         }
     },
     "embedMaker": {
