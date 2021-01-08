@@ -147,14 +147,14 @@ type MunicipalitiesDataPoint =
     { Date : System.DateTime
       Regions : RegionMunicipalities list }
 
+type MunicipalitiesData = MunicipalitiesDataPoint list
+
 type RegionsDataPoint =
     { Date : System.DateTime
       Regions : AreaCases list }
 
 type RegionsData = RegionsDataPoint list
 
-
-type MunicipalitiesData = MunicipalitiesDataPoint list
 
 type VisualizationType =
     | MetricsComparison
