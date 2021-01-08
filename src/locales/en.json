@@ -980,6 +980,10 @@
         "liftGym": {
             "title": "Gym",
             "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+        },
+        "planRelaxation2": {
+            "title": "Plan",
+            "description": "Government has accepted the revised plan of relaxation of measures in five phases."
         }
     },
     "days": {
