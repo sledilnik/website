@@ -248,13 +248,12 @@ let renderRegionsSelectors (state: RegionsChartState) dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            state.RegionsConfig
-            |> List.map (fun metric -> renderRegionSelector metric dispatch )
-            |> List.append
-                [ Html.div [
-                    prop.onClick (fun _ -> ToggleAllRegions ( if state.ShowAll then false else true ) |> dispatch)
-                    prop.className "btn btn-sm metric-selector"
-                    prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ] ) ]
+            [ Html.div [
+                prop.onClick (fun _ -> ToggleAllRegions ( if state.ShowAll then false else true ) |> dispatch)
+                prop.className "btn btn-sm metric-selector"
+                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ]
+            |> List.append ( state.RegionsConfig |> List.map (fun metric -> renderRegionSelector metric dispatch ) )
+        ) ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
     let renderMetricTypeSelector (typeSelector: MetricType) =

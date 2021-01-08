@@ -333,15 +333,12 @@ let renderMetricsSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            state.Metrics
-            |> List.map (fun metric ->
-                if metric.Type = state.MetricType.MetricType then renderMetricSelector metric dispatch else Html.none)
-            |> List.append [ Html.div [
+            [ Html.div [
                 prop.onClick (fun _ -> ToggleAllMetrics ( if state.ShowAll then false else true ) |> dispatch)
                 prop.className "btn btn-sm metric-selector"
-                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" )
-             ] ]
-        ) ]
+                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ]
+            |> List.append ( state.Metrics |> List.map (fun metric -> if metric.Type = state.MetricType.MetricType then renderMetricSelector metric dispatch else Html.none) )
+        )  ]
 
 let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
     let renderMetricTypeSelector (metricTypeToRender: FullMetricType) =
