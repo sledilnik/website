@@ -133,7 +133,7 @@ type WeeklyStatsDataPoint =
 
 type WeeklyStatsData = WeeklyStatsDataPoint[]
 
-type Municipality =
+type AreaCases =
     { Name : string
       ActiveCases : int option
       ConfirmedToDate : int option
@@ -141,11 +141,18 @@ type Municipality =
 
 type RegionMunicipalities =
     { Name : string
-      Municipalities : Municipality list }
+      Municipalities : AreaCases list }
 
 type MunicipalitiesDataPoint =
     { Date : System.DateTime
       Regions : RegionMunicipalities list }
+
+type RegionsDataPoint =
+    { Date : System.DateTime
+      Regions : AreaCases list }
+
+type RegionsData = RegionsDataPoint list
+
 
 type MunicipalitiesData = MunicipalitiesDataPoint list
 
@@ -193,6 +200,7 @@ type State =
       Query : obj // URL query parameters
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
+      RegionsData : RemoteData<RegionsData, string>
       MunicipalitiesData : RemoteData<MunicipalitiesData, string>
       RenderingMode : RenderingMode }
 
@@ -209,5 +217,7 @@ type Msg =
     | StatsDataLoaded of RemoteData<StatsData, string>
     | WeeklyStatsDataRequested
     | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
+    | RegionsDataRequest
+    | RegionsDataLoaded of RemoteData<RegionsData, string>
     | MunicipalitiesDataRequest
     | MunicipalitiesDataLoaded of RemoteData<MunicipalitiesData, string>

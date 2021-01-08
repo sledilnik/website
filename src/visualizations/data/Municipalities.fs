@@ -81,8 +81,8 @@ let parseMunicipalitiesData (csv : string) =
                         { Name = region
                           Municipalities = municipalities |> Array.toList }
                     )
-                // MunicipalitiesDataPoint
-                return { Date = date ; Regions = data |> Array.toList }
+                let dataPoint : MunicipalitiesDataPoint = { Date = date ; Regions = data |> Array.toList } 
+                return dataPoint
         })
     |> Array.choose (fun row ->
         match row with
