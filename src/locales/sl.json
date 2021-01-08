@@ -1681,7 +1681,7 @@
         "title": "Podpri Sledilnik z donacijo",
         "banktransfer": {
             "title": "Enkratno bančno nakazilo",
-            "description": "Lorem ipsum dolor sit amet, **consectetur** adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Za večje donacije ali če potrebujete donatorsko pogodbo, nam prosimo pišite na drustvo@sledilnik.org.",
             "recipient": "Prejemnik",
             "purpose": "Koda namena",
             "iban": "Račun IBAN",
