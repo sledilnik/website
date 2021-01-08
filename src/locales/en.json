@@ -1586,9 +1586,11 @@
         }
     },
     "donation": {
+        "title": "Support Sledilnik with Donation",
         "banktransfer": {
             "title": "One-time bank transfer",
             "recipient": "Recipient",
+            "purpose": "Purpose code",
             "iban": "IBAN Account",
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC code"
