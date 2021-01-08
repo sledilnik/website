@@ -1593,7 +1593,7 @@
             "purpose": "Purpose code",
             "iban": "IBAN Account",
             "bank": "Bank",
-            "bankBicSwift": "Bank SWIFT/BIC code"
+            "bankBicSwift": "Bank SWIFT/BIC"
         },
         "monthly": {
             "title": "Monthly recurring donation",

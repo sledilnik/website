@@ -22,12 +22,12 @@
       </div>
 
       <h2>{{ $t("donation.banktransfer.title") }}</h2>
-      <img src="../assets/donate-qr.png" class="qr" float="right" />
-      <span v-html-md="$t('donation.banktransfer.description')" />
-      <table>
+      <div v-html-md="$t('donation.banktransfer.description')" />
+      <img src="../assets/donate-qr.png" class="qr" />
+      <table class="bankDetails">
         <tr>
           <td>{{ $t("donation.banktransfer.recipient") }}</td>
-          <td>Znanstveno društvo Sledilnik<br>Celovška cesta 111<br>Ljubljana<br>Slovenija</td>
+          <td>Znanstveno društvo Sledilnik<br>Celovška cesta 111<br>Ljubljana, Slovenija</td>
         </tr>
         <tr>
           <td>{{ $t("donation.banktransfer.iban") }}</td>
@@ -43,7 +43,7 @@
         </tr>
         <tr>
           <td>{{ $t("donation.banktransfer.bank") }}</td>
-          <td>Delavska hranilnica d.d.<br>Miklošičeva 5<br>Ljubljana<br>Slovenija</td>
+          <td>Delavska hranilnica d.d.<br>Miklošičeva 5<br>Ljubljana, Slovenija</td>
         </tr>
 
       </table>
@@ -122,6 +122,24 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 
+table.bankDetails {
+  font-size: 14px;
+  margin: 0;
+  width:auto;
+  min-width: 350px;
+
+  @media only screen and (max-width: 633px) {
+    width: 100%;
+    padding: 0;
+    min-width: auto;
+  }
+
+  td {
+    padding: 5px 0;
+    width: auto;
+  }
+}
+
 img {
   max-width: 100%;
 
@@ -131,7 +149,12 @@ img {
 
   &.qr {
     float: right;
-    padding: 0 0 20px 20px, 
+    padding: 0 0 20px 20px;
+
+    @media only screen and (max-width: 400px) {
+      width: 100%;
+      padding: 0 0 20px 0;
+    }
   }
 }
 
