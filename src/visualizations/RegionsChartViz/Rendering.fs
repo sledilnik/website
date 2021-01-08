@@ -267,6 +267,16 @@ let render (state : RegionsChartState) dispatch =
         ]
         renderChartContainer state dispatch
         renderRegionsSelectors state.RegionsConfig dispatch
+
+        match state.MetricType with
+        | MetricType.Deceased ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (I18N.t "charts.regions.disclaimer")
+                ]
+            ]
+        | _ -> Html.none
     ]
 
 let renderChart
