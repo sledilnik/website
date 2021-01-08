@@ -434,7 +434,8 @@
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "newCases7Days": "New Cases (7-day avg.)",
-            "deceased": "Deaths"
+            "deceased": "Deaths",
+            "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
             "title": "Cases by Region (per 100,000 people)",
@@ -461,7 +462,8 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals and retirement homes. Deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
+            "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -980,6 +982,10 @@
         "liftGym": {
             "title": "Gym",
             "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+        },
+        "planRelaxation2": {
+            "title": "Plan",
+            "description": "Government has accepted the revised plan of relaxation of measures in five phases."
         }
     },
     "days": {
@@ -989,7 +995,7 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo fs, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",

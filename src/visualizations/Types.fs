@@ -133,21 +133,28 @@ type WeeklyStatsDataPoint =
 
 type WeeklyStatsData = WeeklyStatsDataPoint[]
 
-type Municipality =
+type AreaCases =
     { Name : string
       ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option }
 
-type Region =
+type RegionMunicipalities =
     { Name : string
-      Municipalities : Municipality list }
+      Municipalities : AreaCases list }
+
+type MunicipalitiesDataPoint =
+    { Date : System.DateTime
+      Regions : RegionMunicipalities list }
+
+type MunicipalitiesData = MunicipalitiesDataPoint list
 
 type RegionsDataPoint =
     { Date : System.DateTime
-      Regions : Region list }
+      Regions : AreaCases list }
 
 type RegionsData = RegionsDataPoint list
+
 
 type VisualizationType =
     | MetricsComparison
@@ -180,6 +187,7 @@ type VisualizationType =
     | Deceased
     | ExcessDeaths
     | MetricsCorrelation
+    | WeeklyDemographics
 
 type RenderingMode =
     | Normal
@@ -193,6 +201,7 @@ type State =
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
       RegionsData : RemoteData<RegionsData, string>
+      MunicipalitiesData : RemoteData<MunicipalitiesData, string>
       RenderingMode : RenderingMode }
 
 type Visualization = {
@@ -210,3 +219,5 @@ type Msg =
     | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
+    | MunicipalitiesDataRequest
+    | MunicipalitiesDataLoaded of RemoteData<MunicipalitiesData, string>

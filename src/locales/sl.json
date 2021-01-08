@@ -104,7 +104,7 @@
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
         "longerDate": "{{ date, %A, %e. %B %Y }}",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{dateTo, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -635,6 +635,10 @@
         "liftGym": {
             "title": "Fitnes",
             "description": "Sproščanje: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
+        },
+        "planRelaxation2": {
+            "title": "Načrt",
+            "description": "Vlada sprejela popravljen načrt sproščanja ukrepov v petih fazah."
         }
     },
     "phase": {
@@ -963,7 +967,8 @@
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "newCases7Days": "Novi primeri (7-dnevno povpr.)",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
             "title": "Primeri po regijah (na 100.000 prebivalcev)",
@@ -992,7 +997,8 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
             "relativeIncrease": "Tedenski prirast",
-            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic in DSO. Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
+            "disclaimerRegion": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu.",
+            "disclaimer": "Opomba: Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
@@ -1223,7 +1229,18 @@
             "gatheringOrganized": "organizirano druženje",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
+        },
+        "weeklyDemographics": {
+            "title": "Demografija potrjenih primerov, tedensko",
+            "titleMenu": "Starost – po tednih",
+            "ageGroup": "Starostna skupina",
+            "male": "Moški",
+            "female":"Ženske",
+            "per100k":"na 100.000 prebivalcev",
+            "newCases": "Novi primeri",
+            "ratio": "Razmerje primerov M/Ž"
         }
+
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
@@ -1654,6 +1671,10 @@
         "chart-cases-by-age-group": {
             "question":  "Kaj nam kaže \"Potrjeni primeri po starostnih skupinah\"?",
             "answer": "[Graf](/sl/stats#age-groups-trends-chart) vsakodnevno število potrjenih primerov razdeli na starostne skupine, in sicer po desetletnih starostnih intervalih. Izjemi sta prvi interval (od 0 do 4 leta) ter zadnji odprti interval (85+). V izhodiščnem pogledu vidimo absolutno število dnevno potrjenih primerov, razdeljeno na starostne skupine.\n\nPod grafom sta dva menija pogledov. Meni neposredno pod grafom nam ponuja pogled posamične starostne skupine, meni pod njim pa še možnost preklapljanja pogleda med absolutnimi in relativnimi vrednostmi različnih starostnih skupin pri dnevnem številu potrjenih primerov ter pri številu aktivno okuženimi."
+        },
+        "weekly-demographics-chart":{
+            "question": "Kaj nam kaže \"Demografija potrjenih primerov, tedensko\"?",
+            "answer": "[Demografija potrjenih primerov, tedensko](/sl/stats#weekly-demographics-chart) v osnovnem pogledu *Novi primeri* prikazuje tedensko število novih primerov razdeljenih po starostnih skupinah, izraženo kot delež prebivalstva. Podatki so prikazani v obliki t.i. *toplotne karte*.  Polja v odtenkih zelene pomenijo, da je bilo v danem tednu zabeleženih malo primerov, medtem ko rjavi odtenki pomenijo večje število potrjenih primerov.\n\n S klikom na gumb *Razmerje primerov M/Ž*, ki se nahaja v levem spodnjem kotu, pogled preklopimo v prikaz razmerja med tedenskimi potrjenimi primeri po spolu. Barva polja nam pove, da je bilo v posameznem tednu zaznanih več primerov bodisi med moško populacijo (modra barva), bodisi med žensko populacijo (rdeča barva) v starostni skupini. Odstopanje od ravnovesja se izraža v intenziteti barvnega odtenka."
         },
         "what-is-sledilnik": {
             "question": "Kaj je Sledilnik?",
