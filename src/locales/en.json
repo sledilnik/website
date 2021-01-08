@@ -233,7 +233,9 @@
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
             "shortDateFormat": "%b %e",
-            "weekYearDateFormat": "Week %W of %Y"
+            "weekYearDateFormat": "Week %W of %Y",
+            "hideAll": "Hide all",
+            "showAll": "Show all"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",

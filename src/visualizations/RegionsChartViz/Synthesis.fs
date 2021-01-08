@@ -24,6 +24,7 @@ type RegionsChartState =
       RegionsSorted : AreaCases list
       RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
+      ShowAll : bool
     }
 
 type RegionSeriesValues = (JsTimestamp * float)[]
