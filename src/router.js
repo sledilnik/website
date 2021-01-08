@@ -127,6 +127,10 @@ const routes = [
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
+    path: '/donate',
+    redirect: `/${i18next.language}/donate`,
+  },
+  {
     path: '/links', // Retired page
     redirect: `/${i18next.language}/about`,
   },
@@ -210,6 +214,16 @@ const routes = [
         path: 'posts/:postId',
         name: 'post',
         component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
+      },
+      {
+        path: 'donate',
+        name: 'donate',
+        component: () => import(/* webpackChunkName: "Donation.route" */ './pages/DonationPage.vue'),
+      },
+      {
+        path: 'donate/thanks',
+        name: 'donateThanks',
+        component: () => import(/* webpackChunkName: "DonationThanks.route" */ './pages/DonationThanksPage.vue'),
       },
       {
         path: 'faq',
