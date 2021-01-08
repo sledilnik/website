@@ -39,12 +39,6 @@ type Msg =
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
-let regionTotal (region : Region) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.ActiveCases)
-    |> List.choose id
-    |> List.sum
-
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
     let lastDataPoint = List.last data
@@ -54,12 +48,12 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         |> List.filter (fun region ->
             Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
-    let regionsByTotalCases =
+    let regionsSorted =
         regionsWithoutExcluded
-        |> List.sortByDescending regionTotal
+        |> List.sortByDescending (fun region -> region.ActiveCases)
 
     let regionsConfig =
-        regionsByTotalCases
+        regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
             let color = regionsInfo.[regionKey].Color
@@ -70,7 +64,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
-      Regions = regionsByTotalCases
+      RegionsSorted = regionsSorted
       RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
     Cmd.none
@@ -273,6 +267,16 @@ let render (state : RegionsChartState) dispatch =
         ]
         renderChartContainer state dispatch
         renderRegionsSelectors state.RegionsConfig dispatch
+
+        match state.MetricType with
+        | MetricType.Deceased ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (I18N.t "charts.regions.disclaimer")
+                ]
+            ]
+        | _ -> Html.none
     ]
 
 let renderChart

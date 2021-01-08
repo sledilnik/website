@@ -961,7 +961,8 @@
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "newCases7Days": "Novi primeri (7-dnevno povpr.)",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
             "title": "Primeri po regijah (na 100.000 prebivalcev)",
@@ -990,7 +991,8 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
             "relativeIncrease": "Tedenski prirast",
-            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic in DSO. Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
+            "disclaimerRegion": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu.",
+            "disclaimer": "Opomba: Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
