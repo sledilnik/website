@@ -131,6 +131,10 @@ const routes = [
     redirect: `/${i18next.language}/donate`,
   },
   {
+    path: '/donate/thanks',
+    redirect: `/${i18next.language}/donate/thanks`,
+  },
+  {
     path: '/links', // Retired page
     redirect: `/${i18next.language}/about`,
   },
