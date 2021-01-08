@@ -20,7 +20,7 @@ type RegionsChartState =
       ChartConfig: RegionsChartConfig
       ScaleType : ScaleType
       MetricType : MetricType
-      RegionsData : RegionsData
+      MunicipalitiesData : MunicipalitiesData
       Regions : Region list
       RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
@@ -50,7 +50,7 @@ let newCases (regionMetricData: RegionMetricData): RegionMetricData =
 
 let allSeries state =
     let startDate =
-        match state.RegionsData with
+        match state.MunicipalitiesData with
         | head :: _ -> head.Date
         | _ -> raise (InvalidOperationException())
 
@@ -59,7 +59,7 @@ let allSeries state =
         let regionName = regionConfig.Key
 
         let regionMetrics =
-            metricForRegion state.RegionsData
+            metricForRegion state.MunicipalitiesData
                 startDate regionName state.MetricType
 
         let regionPopulation =

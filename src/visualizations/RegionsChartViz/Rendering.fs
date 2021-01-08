@@ -45,7 +45,7 @@ let regionTotal (region : Region) : int =
     |> List.choose id
     |> List.sum
 
-let init (config: RegionsChartConfig) (data : RegionsData)
+let init (config: RegionsChartConfig) (data : MunicipalitiesData)
     : RegionsChartState * Cmd<Msg> =
     let lastDataPoint = List.last data
 
@@ -69,7 +69,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
 
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
-      RegionsData = data
+      MunicipalitiesData = data
       Regions = regionsByTotalCases
       RegionsConfig = regionsConfig
       RangeSelectionButtonIndex = 0 },
@@ -276,6 +276,6 @@ let render (state : RegionsChartState) dispatch =
     ]
 
 let renderChart
-    (config: RegionsChartConfig) (props : {| data : RegionsData |}) =
+    (config: RegionsChartConfig) (props : {| data : MunicipalitiesData |}) =
     React.elmishComponent
         ("RegionsChart", init config props.data, update, render)

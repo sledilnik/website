@@ -1,4 +1,4 @@
-module Data.Regions
+module Data.Municipalities
 
 open FsToolkit.ErrorHandling
 open Fable.SimpleHttp
@@ -17,7 +17,7 @@ type DataPoint = {
     Value : int option
 }
 
-let parseRegionsData (csv : string) =
+let parseMunicipalitiesData (csv : string) =
     let rows = csv.Split("\n")
     let header = rows.[0].Split(",")
 
@@ -81,7 +81,7 @@ let parseRegionsData (csv : string) =
                         { Name = region
                           Municipalities = municipalities |> Array.toList }
                     )
-                // RegionsDataPoint
+                // MunicipalitiesDataPoint
                 return { Date = date ; Regions = data |> Array.toList }
         })
     |> Array.choose (fun row ->
@@ -95,8 +95,8 @@ let load(apiEndpoint: string) =
         let! (statusCode, response) = Http.get (sprintf "%s/api/municipalities?format=csv" apiEndpoint)
 
         if statusCode <> 200 then
-            return RegionsDataLoaded (sprintf "Napaka pri nalaganju podatkov o občinah: %d" statusCode |> Failure)
+            return MunicipalitiesDataLoaded (sprintf "Napaka pri nalaganju podatkov o občinah: %d" statusCode |> Failure)
         else
-            let data = parseRegionsData response
-            return RegionsDataLoaded (Success data)
+            let data = parseMunicipalitiesData response
+            return MunicipalitiesDataLoaded (Success data)
     }

@@ -123,16 +123,16 @@ let loadRegGeoJson =
             | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
-let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd<Msg> =
+let init (mapToDisplay : MapToDisplay) (municipalitiesData : MunicipalitiesData) : State * Cmd<Msg> =
     let dataTimeInterval = LastDays 14
 
     let municipalityDataMap =
         seq {
-            for regionsDataPoint in regionsData do
-                for region in regionsDataPoint.Regions do
+            for municipalitiesDataPoint in municipalitiesData do
+                for region in municipalitiesDataPoint.Regions do
                     for municipality in region.Municipalities do
                         if not (Set.contains municipality.Name excludedMunicipalities) then
-                            yield {| Date = regionsDataPoint.Date
+                            yield {| Date = municipalitiesDataPoint.Date
                                      MunicipalityKey = municipality.Name
                                      TotalConfirmedCases = municipality.ConfirmedToDate
                                      TotalDeceasedCases = municipality.DeceasedToDate |} }
@@ -168,9 +168,9 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
 
     let regDataMap =
         seq {
-            for regionsDataPoint in regionsData do
-                for region in regionsDataPoint.Regions do
-                    yield {| Date = regionsDataPoint.Date
+            for municipalitiesDataPoint in municipalitiesData do
+                for region in municipalitiesDataPoint.Regions do
+                    yield {| Date = municipalitiesDataPoint.Date
                              RegionKey = region.Name
                              TotalConfirmedCases =
                                 region.Municipalities
@@ -855,6 +855,6 @@ let render (state : State) dispatch =
         ]
     ]
 
-let mapChart (props : {| mapToDisplay : MapToDisplay; data : RegionsData |}) =
+let mapChart (props : {| mapToDisplay : MapToDisplay; data : MunicipalitiesData |}) =
     React.elmishComponent
         ("MapChart", init props.mapToDisplay props.data, update, render)
