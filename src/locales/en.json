@@ -1605,9 +1605,14 @@
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC"
         },
-        "monthly": {
-            "title": "Monthly recurring donation",
-             "donateButton": "{{amount}} EUR / month"
+        "stripe": {
+            "monthly": {
+                "title": "Monthly recurring donation",
+                "donateButton": "{{amount}} EUR / month",
+                "success": {
+                    "title": "Thank you for your monthly recurring donation"
+                }
+            }
         }
     }
 }

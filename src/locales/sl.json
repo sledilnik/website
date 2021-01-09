@@ -1689,6 +1689,8 @@
     },
     "donation": {
         "title": "Podpri Sledilnik z donacijo",
+        "intro": "Vaše donacije nam pomagajo s plačevanjem stroškov, ki jih imamo pri delovanju društva... TODO",
+        "outro": "V kolikor na tej strani ne najdete sebi primernega načina donacije, vas prosimo, da nam to sporočite na drustvo@sledilnik.org in z veseljem bomo našli rešitev.",
         "banktransfer": {
             "title": "Bančno nakazilo",
             "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Če potrebujete donatorsko pogodbo, nam na drustvo@sledilnik.org prosimo sporočite vaše podatke in znesek donacije.",
@@ -1698,10 +1700,16 @@
             "bank": "Banka",
             "bankBicSwift": "BIC/SWIFT banke"
         },
-        "monthly": {
-            "title": "Redna mesečna donacija",
-            "description": "Redna mesečna donacija prek **kreditne kartice** nam omogoča predvidljiv prihodek, vam pa strošek enakomerno porazdeli skozi leto. Izberite kakšen znesek ste nam pripravljeni podariti vsak mesec. Za zaustavitev vaših donacij nam pišite na drustvo@sledilnik.org.",
-            "donateButton": "{{amount}} EUR / mesec"
+        "stripe": {
+            "monthly": {
+                "title": "Redna mesečna donacija",
+                "description": "Redna mesečna donacija prek **kreditne kartice** nam omogoča predvidljiv prihodek, vam pa strošek enakomerno porazdeli skozi leto. Izberite s kakšnim zneskom ste pripravljeni podpreti naše delovanje vsak mesec. Za zaustavitev vaših donacij nam pišite na drustvo@sledilnik.org.",
+                "donateButton": "{{amount}} EUR / mesec",
+                "success": {
+                    "title": "Hvala za redno mesečno donacijo",
+                    "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi vaše znance in prijatelje.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."
+                }
+            }
         }
     }
 }

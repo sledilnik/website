@@ -4,8 +4,8 @@
       <h1>{{ $t("donation.title") }}</h1>
       <div v-html-md="$t('donation.intro')" />
 
-      <h2>{{ $t("donation.monthly.title") }}</h2>
-      <div v-html-md="$t('donation.monthly.description')" />
+      <h2>{{ $t("donation.stripe.monthly.title") }}</h2>
+      <div v-html-md="$t('donation.stripe.monthly.description')" />
 
       <stripe-checkout
         ref="checkoutRef"
@@ -17,7 +17,7 @@
       />
       <div>
         <span v-for="(item) in stripeSubscriptions" :key="item.price">
-          <button @click="submit(item)">{{ $t("donation.monthly.donateButton", {amount: item.amount}) }}</button>
+          <button @click="submit(item)">{{ $t("donation.stripe.monthly.donateButton", {amount: item.amount}) }}</button>
         </span>
       </div>
 
@@ -50,7 +50,7 @@
 
       <img src="../assets/donate-upn.png" class="upn" />
 
-      <div v-html-md="$t('donation.outro')" />
+      <div class="outro" v-html-md="$t('donation.outro')" />
     </div>
   </div>
 </template>
@@ -142,6 +142,10 @@ button {
   margin-bottom: 20px;
   background-color: $yellow;
   border: none;
+}
+
+.outro {
+  margin-top:50px;
 }
 
 </style>
