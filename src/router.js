@@ -127,6 +127,10 @@ const routes = [
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
+    path: '/podpri',
+    redirect: `/${i18next.language}/donate`,
+  },
+  {
     path: '/donate',
     redirect: `/${i18next.language}/donate`,
   },
