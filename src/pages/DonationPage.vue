@@ -3,6 +3,10 @@
     <div v-if="isStripeSuccess" class="static-page-wrapper">
       <h1>{{ $t("donation.stripe.monthly.success.title") }}</h1>
       <div v-html-md="$t('donation.stripe.monthly.success.description')" />
+      <div class="session">
+        {{ $t("donation.stripe.monthly.success.session") }}
+        {{ stripeSessionId }}
+      </div>
     </div>
 
     <div v-else class="static-page-wrapper">
@@ -162,6 +166,12 @@ button {
 
 .outro {
   margin-top:50px;
+}
+
+.session {
+  margin-top: 50px;
+  font-size: 10px;
+  color: #999999;
 }
 
 </style>

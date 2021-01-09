@@ -1610,7 +1610,8 @@
                 "title": "Monthly recurring donation",
                 "donateButton": "{{amount}} EUR / month",
                 "success": {
-                    "title": "Thank you for your monthly recurring donation"
+                    "title": "Thank you for your monthly recurring donation",
+                    "session": "Payment session ID:"
                 }
             }
         }

@@ -1707,7 +1707,8 @@
                 "donateButton": "{{amount}} EUR / mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
-                    "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi vaše znance in prijatelje.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."
+                    "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi vaše znance in prijatelje.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org.",
+                    "session": "ID seje plačila:"
                 }
             }
         }
