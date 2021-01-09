@@ -18,6 +18,7 @@
         :pk="publishableKey"
         :success-url="successURL"
         :cancel-url="cancelURL"
+        :locale="language"
         @loading="v => loading = v"
       />
       <div>
@@ -99,6 +100,7 @@ export default {
       stripeSubscriptions: items,
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
+      language: `${this.$i18n.i18next.language}`,
     };
   },
   methods: {
