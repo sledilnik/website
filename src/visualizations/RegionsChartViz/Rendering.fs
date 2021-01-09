@@ -160,7 +160,13 @@ let renderChartOptions (state : RegionsChartState) dispatch =
 
     let chartTextGroup = state.ChartConfig.ChartTextsGroup
 
-    let redThreshold = 140
+    let threshold100k value =
+        (value * 100000.) 
+        / (Utils.Dictionaries.regions.["si"].Population |> Utils.optionToInt |> float)
+    let redThreshold = threshold100k 1350.
+    let orangeThreshold = threshold100k 1000.
+    let yellowThreshold = threshold100k 600.
+    let greenThreshold = threshold100k 300.
     let yAxis =
             baseOptions.yAxis
             |> Array.map
@@ -170,26 +176,48 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                        gridZIndex = 1
                        plotLines =
                            match state.ChartConfig.RelativeTo, state.MetricType with
-                           | Pop100k, ActiveCases -> [|
+                           | Pop100k, NewCases7Days -> [|
                                {| value=redThreshold
-                                  label={|
-                                           text=I18N.chartText chartTextGroup "red"
-                                           align="left"
-                                           verticalAlign="bottom"
-                                            |}
+                                  color="black"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
+                               {| value=orangeThreshold
                                   color="red"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
-                                |}
+                               |}
+                               {| value=yellowThreshold
+                                  color="orange"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
+                               {| value=greenThreshold
+                                  color="yellow"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
                             |]
                            | _ -> [| |]
                        plotBands =
                            match state.ChartConfig.RelativeTo, state.MetricType with
-                           | Pop100k, ActiveCases -> [|
-                               {| from=redThreshold; ``to``=100000.0
-                                  color="#FCD5CF30"
-                                |}
+                           | Pop100k, NewCases7Days -> [|
+                               {| from=orangeThreshold; ``to``=redThreshold
+                                  color="#ffd8d8"
+                               |}
+                               {| from=yellowThreshold; ``to``=orangeThreshold
+                                  color="#ffeac4"
+                               |}
+                               {| from=greenThreshold; ``to``=yellowThreshold
+                                  color="#ffffc4"
+                               |}
+                               {| from=0.; ``to``=greenThreshold
+                                  color="#d8ffd8"
+                               |}
                             |]
                            | _ -> [| |]
                    |})
