@@ -348,7 +348,9 @@
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
             "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
             "dsMNZ": "MNZ",
-            "dsSURS": "SURS"
+            "dsSURS": "SURS",
+            "showAll": "Prikaži sve",
+            "hideAll": "Sakrij sve"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -368,7 +370,8 @@
             "relativeIncrease": "Tjedni rast",
             "titleMenu": "Općine – karta",
             "bubbles": "Distribucija",
-            "disclaimer": "Napomena: podatke o smrtnim slučajevima dobivamo iz dnevnih izvještaja bolnica i domova umirovljenika). Podaci preminulih po općinama NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih."
+            "disclaimer": "Napomena: podatke o preminulima po općinama, NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih.",
+            "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva."
         },
         "countriesNewCasesPer100k": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -452,14 +455,15 @@
             "hospitalAdmitted": "Primljeni u bolnici",
             "activeCases": "Aktivni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "testsPerformed": "Testiranja: Lančana reakcija polimeraze",
+            "testsPerformed": "Testovi: Lančana reakcija polimeraze",
             "showToDate": "Do danas",
             "showToday": "Dnevni",
             "showActive": "Aktivni",
             "show7DaysAverage": "Sedmodnevni prosjek",
             "titleMenu_MNE": "Crna Gora – stanje",
             "titleMenu_MKD": "Sjeverna Makedonija – stanje",
-            "titleMenu_SVN": "Slovenija – stanje"
+            "titleMenu_SVN": "Slovenija – stanje",
+            "vaccinationAdministered": "Cijepljeni"
         },
         "spread": {
             "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
@@ -519,10 +523,10 @@
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
             "title": "Testiranje",
-            "regular": "Regularno: Lančana reakcija polimeraze",
+            "regular": "Regularni: Lančana reakcija polimeraze",
             "negativeTests": "Negativni testovi",
             "ns-apr20": "Istraživanje: Lančana reakcija polimeraze",
-            "totalPCR": "Sve: Lančana reakcija polimeraze",
+            "totalPCR": "Svi: Lančana reakcija polimeraze",
             "titleMenu": "Testiranje",
             "byLabPercent": "Po laboratorijima: % pozitivno",
             "byLab": "Po laboratorijima: Testovi lančane reakcije polimeraze",
@@ -560,7 +564,8 @@
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
             "titleMenu": "Regija – slučajevi",
-            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)"
+            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)",
+            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna."
         },
         "cases": {
             "active": "Aktivni",
@@ -618,8 +623,8 @@
             "titleMenu": "Države – aktivni slučajevi"
         },
         "dailyComparison": {
-            "positivePct": "Udio pozitivnih testiranja: Lančana reakcija polimeraze (%)",
-            "tests": "Provedena testiranja: Lančana reakcija polimeraze",
+            "positivePct": "Udio pozitivnih: Lančana reakcija polimeraze (%)",
+            "tests": "Provedeni testovi: Lančana reakcija polimeraze",
             "active": "Aktivni slučajevi",
             "new": "Potvrđeni slučajevi",
             "title": "Usporedba po danu u tjednu",
@@ -627,7 +632,9 @@
             "deceased": "Smrtni slučajevi",
             "icuAdmitted": "Primljeni na odjel intenzivne njege",
             "hospitalDischarged": "Otpušteni iz bolnice",
-            "hospitalAdmitted": "Primljeni u bolnici"
+            "hospitalAdmitted": "Primljeni u bolnici",
+            "positivePctHAT": "Udio pozitivnih: HAT (%)",
+            "testsHAT": "Provedeni testovi: HAT"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -782,7 +789,8 @@
             "titleMenu": "Smrtni slučajevi",
             "title": "Smrtni slučajevi",
             "deceasedByAgeTodayRelative": "Smrtni slučajevi po starosti (dnevno, relativno)",
-            "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)"
+            "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)",
+            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna."
         },
         "excessDeaths": {
             "excess": {
@@ -1026,6 +1034,10 @@
         "liftGym": {
             "description": "Opuštanje: individualna i vođena rekreacija s ograničenjima<br>(1 osoba na 50 m² i razmak između osoba od 5 m).",
             "title": "Fitness"
+        },
+        "planRelaxation2": {
+            "description": "Vlada je prihvatila revidirani plan popuštanja mjera u pet faza.",
+            "title": "Plan"
         }
     },
     "pageNotFound": {
@@ -1159,7 +1171,7 @@
         "age_female_35-44_todate": "35 – 44 godina",
         "age_male_75-84_todate": "75 – 84 godina",
         "cases_rh_employee_confirmed_todate": "Potvrđeni slučajevi – zaposlenici u domovima umirovljenika (do danas)",
-        "tests_performed": "Testiranja (dnevno)",
+        "tests_performed": "Testovi lančane reakcije polimeraze (dnevno)",
         "age_female_75-84_todate": "75 – 84 godina",
         "age_male_0-4_todate": "0 – 4 godina",
         "cases_closed_todate": "Zatvoreni slučajevi (do danas)",
@@ -1191,10 +1203,11 @@
         "cases_confirmed_todate": "Potvrđeni slučajevi (do danas)",
         "region_sg_todate": "Koruška",
         "region_kp_todate": "Obalno-kraška",
-        "tests_performed_todate": "Testiranja (do danas)",
+        "tests_performed_todate": "Testovi lančane reakcije polimeraze (do danas)",
         "age_female_todate": "Ukupno",
         "cases_confirmed": "Potvrđeni slučajevi (dnevno)",
-        "state_critical": "Na respiratoru (intubirani)"
+        "state_critical": "Na respiratoru (intubirani)",
+        "vaccination_administered_todate": "Broj cijepljenih (do danas)"
     },
     "tables": {
         "tabByAgeMale": "Po dobi – muškarci",
@@ -1223,7 +1236,7 @@
         "recoveredToDate": "Ozdravili",
         "icu": "Na odjelu intenzivne njege",
         "inHospital": "Hospitalizirani",
-        "tests": "Testiranja danas: Lančana reakcija polimeraze",
+        "tests": "Testovi danas: Lančana reakcija polimeraze",
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi",
