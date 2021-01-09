@@ -1680,8 +1680,8 @@
     "donation": {
         "title": "Podpri Sledilnik z donacijo",
         "banktransfer": {
-            "title": "Enkratno bančno nakazilo",
-            "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Za večje donacije ali če potrebujete donatorsko pogodbo, nam prosimo pišite na drustvo@sledilnik.org.",
+            "title": "Bančno nakazilo",
+            "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Če potrebujete donatorsko pogodbo, nam na drustvo@sledilnik.org prosimo sporočite vaše podatke in znesek donacije.",
             "recipient": "Prejemnik",
             "purpose": "Koda namena",
             "iban": "Račun IBAN",
@@ -1689,7 +1689,8 @@
             "bankBicSwift": "BIC/SWIFT banke"
         },
         "monthly": {
-            "title": "Ponavljajoča mesečna donacija",
+            "title": "Redna mesečna donacija",
+            "description": "Redna mesečna donacija prek **kreditne kartice** nam omogoča predvidljiv prihodek, vam pa strošek enakomerno porazdeli skozi leto. Izberite kakšen znesek ste nam pripravljeni podariti vsak mesec. Za zaustavitev vaših donacij nam pišite na drustvo@sledilnik.org.",
             "donateButton": "{{amount}} EUR / mesec"
         }
     }

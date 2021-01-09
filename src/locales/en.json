@@ -1588,7 +1588,7 @@
     "donation": {
         "title": "Support Sledilnik with Donation",
         "banktransfer": {
-            "title": "One-time bank transfer",
+            "title": "Bank transfer",
             "recipient": "Recipient",
             "purpose": "Purpose code",
             "iban": "IBAN Account",
