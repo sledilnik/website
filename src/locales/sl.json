@@ -786,6 +786,7 @@
         "deceased": {
             "title": "Umrli",
             "titleMenu": "Umrli",
+            "disclaimer": "Opomba: podatke o umrlih po starosti prejemamo tedensko, zato so za zadnja dva tedna nepopolni.",
             "deceasedToday": "Umrli na dan",
             "deceasedTodayRelative": "Umrli na dan (relativno)",
             "deceasedToDate": "Umrli",

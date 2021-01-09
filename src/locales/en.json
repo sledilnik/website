@@ -282,6 +282,7 @@
         "deceased": {
             "title": "Deaths",
             "titleMenu": "Deaths",
+            "disclaimer": "Note: deceased by age data is provided weekly, therefore it is not complete for last two weeks.",
             "deceasedToday": "Deaths per day",
             "deceasedTodayRelative": "Deaths per day (relative)",
             "deceasedToDate": "Deaths to date",
