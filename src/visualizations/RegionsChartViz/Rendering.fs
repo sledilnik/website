@@ -237,7 +237,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                                   color="#fff1d8"
                                |}
                                {| from=greenThreshold; ``to``=yellowThreshold
-                                  color="#ffffd8    "
+                                  color="#ffffd8"
                                |}
                                {| from=0.0001; ``to``=greenThreshold
                                   color="#ebffeb"
