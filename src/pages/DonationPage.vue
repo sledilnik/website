@@ -64,47 +64,25 @@ export default {
       StripeCheckout
   },
   data () {
-    this.publishableKey = 'pk_test_51I6cVwEUtJJGJFIUgsLpXxbk4DHr2g8Q2ZCIUlzSWbVBtWbcEZJdJuRhyjCxO0xFZdBecREiHx2zirBDPFN1qoeQ00A5Wd3bak' // process.env.STRIPE_PUBLISHABLE_KEY;
+    this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
+    var items = [];
+    var configItems = process.env.VUE_APP_STRIPE_PRODUCTS.split(";");
+    configItems.forEach((configItem) => {
+      var pair = configItem.split(":")
+      items.push({
+          amount: pair[0],
+          lineItems:[
+            {
+              price: pair[1],
+              quantity: 1,
+            },
+          ]
+        })
+      
+    });
     return {
       loading: false,
-      stripeSubscriptions: [
-        {
-          amount: 5,
-          lineItems:[
-            {
-              price: 'price_1I6dUEEUtJJGJFIUM4slrZ9g', // The id of the recurring price you created in your Stripe dashboard
-              quantity: 1,
-            },
-          ]
-        },
-        {
-          amount: 20,
-          lineItems:[
-            {
-              price: 'price_1I6dUEEUtJJGJFIURHozzi1V', // The id of the recurring price you created in your Stripe dashboard
-              quantity: 1,
-            },
-          ]
-        },
-        {
-          amount: 50,
-          lineItems:[
-            {
-              price: 'price_1I6dUEEUtJJGJFIUnmagHiRR', // The id of the recurring price you created in your Stripe dashboard
-              quantity: 1,
-            },
-          ]
-        },
-        {
-          amount: 100,
-          lineItems:[
-            {
-              price: 'price_1I6dUFEUtJJGJFIUcWNRbSDC', // The id of the recurring price you created in your Stripe dashboard
-              quantity: 1,
-            },
-          ]
-        },
-      ],
+      stripeSubscriptions: items,
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate/thanks`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
     };
