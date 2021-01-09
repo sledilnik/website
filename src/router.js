@@ -135,10 +135,6 @@ const routes = [
     redirect: `/${i18next.language}/donate`,
   },
   {
-    path: '/donate/thanks',
-    redirect: `/${i18next.language}/donate/thanks`,
-  },
-  {
     path: '/links', // Retired page
     redirect: `/${i18next.language}/about`,
   },
@@ -227,11 +223,6 @@ const routes = [
         path: 'donate',
         name: 'donate',
         component: () => import(/* webpackChunkName: "Donation.route" */ './pages/DonationPage.vue'),
-      },
-      {
-        path: 'donate/thanks',
-        name: 'donateThanks',
-        component: () => import(/* webpackChunkName: "DonationThanks.route" */ './pages/DonationThanksPage.vue'),
       },
       {
         path: 'faq',

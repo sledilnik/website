@@ -1,6 +1,11 @@
 <template>
   <div class="custom-container">
-    <div class="static-page-wrapper">
+    <div v-if="isStripeSuccess" class="static-page-wrapper">
+      <h1>{{ $t("donation.stripe.monthly.success.title") }}</h1>
+      <div v-html-md="$t('donation.stripe.monthly.success.description')" />
+    </div>
+
+    <div v-else class="static-page-wrapper">
       <h1>{{ $t("donation.title") }}</h1>
       <div v-html-md="$t('donation.intro')" />
 
@@ -80,10 +85,16 @@ export default {
         })
       
     });
+
+    let urlParams = new URLSearchParams(window.location.search);
+    var stripeSessionId = urlParams.get('stripeSessionId')
+    var stripeSuccess = urlParams.has('stripeSessionId')
     return {
+      isStripeSuccess: stripeSuccess,
+      stripeSessionId: stripeSessionId,
       loading: false,
       stripeSubscriptions: items,
-      successURL: `${location.origin}/${this.$i18n.i18next.language}/donate/thanks`,
+      successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
     };
   },
