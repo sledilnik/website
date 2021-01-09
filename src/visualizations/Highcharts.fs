@@ -153,6 +153,7 @@ let addContainmentMeasuresFlags
         24,12, 2020, "#FFe6e6", "services2"
         28,12, 2020, "#ebfaeb", "liftFoodMarkets2"
         4,  1, 2021, "#ebfaeb", "liftGym"
+        8,  1, 2021, "#FFFFFF", "planRelaxation2"
     |]
     {|
         ``type`` = "flags"

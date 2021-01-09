@@ -21,9 +21,10 @@ type RegionsChartState =
       ScaleType : ScaleType
       MetricType : MetricType
       RegionsData : RegionsData
-      Regions : Region list
+      RegionsSorted : AreaCases list
       RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
+      ShowAll : bool
     }
 
 type RegionSeriesValues = (JsTimestamp * float)[]

@@ -10,17 +10,17 @@ type RemoteData<'data, 'error> =
     | Failure of 'error
     | Success of 'data
 
-type TestMeasure =
+type TodayToDate =
     { ToDate : int option
       Today : int option }
 
 type TestGroup =
-    { Performed : TestMeasure
-      Positive : TestMeasure }
+    { Performed : TodayToDate
+      Positive : TodayToDate }
 
 type Tests =
-    { Performed : TestMeasure
-      Positive : TestMeasure
+    { Performed : TodayToDate
+      Positive : TodayToDate
       Regular : TestGroup
       NsApr20 : TestGroup
     }
@@ -32,6 +32,9 @@ type Cases =
       ClosedToDate : int option
       Active : int option
     }
+
+type Vaccination =
+    { Administered : TodayToDate }
 
 type Treatment =
     { InHospital : int option
@@ -87,6 +90,7 @@ type StatsDataPoint =
       RestHomeEmployeePositiveTestsToDate : int option
       RestHomeOccupantPositiveTestsToDate : int option
       UnclassifiedPositiveTestsToDate : int option
+      Vaccination : Vaccination
     }
 
 type StatsData = StatsDataPoint list
@@ -133,21 +137,28 @@ type WeeklyStatsDataPoint =
 
 type WeeklyStatsData = WeeklyStatsDataPoint[]
 
-type Municipality =
+type AreaCases =
     { Name : string
       ActiveCases : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option }
 
-type Region =
+type RegionMunicipalities =
     { Name : string
-      Municipalities : Municipality list }
+      Municipalities : AreaCases list }
+
+type MunicipalitiesDataPoint =
+    { Date : System.DateTime
+      Regions : RegionMunicipalities list }
+
+type MunicipalitiesData = MunicipalitiesDataPoint list
 
 type RegionsDataPoint =
     { Date : System.DateTime
-      Regions : Region list }
+      Regions : AreaCases list }
 
 type RegionsData = RegionsDataPoint list
+
 
 type VisualizationType =
     | MetricsComparison
@@ -194,6 +205,7 @@ type State =
       StatsData : RemoteData<StatsData, string>
       WeeklyStatsData : RemoteData<WeeklyStatsData, string>
       RegionsData : RemoteData<RegionsData, string>
+      MunicipalitiesData : RemoteData<MunicipalitiesData, string>
       RenderingMode : RenderingMode }
 
 type Visualization = {
@@ -211,3 +223,5 @@ type Msg =
     | WeeklyStatsDataLoaded of RemoteData<WeeklyStatsData, string>
     | RegionsDataRequest
     | RegionsDataLoaded of RemoteData<RegionsData, string>
+    | MunicipalitiesDataRequest
+    | MunicipalitiesDataLoaded of RemoteData<MunicipalitiesData, string>

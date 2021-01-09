@@ -1314,7 +1314,7 @@
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
         "in_x_days_plural": "in {{ count }} Tagen",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. Woche %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{dateTo, %W. Woche %Y}})"
     },
     "country-groups": {
         "groupNeighbouring": "Nachbarländer",

@@ -36,6 +36,7 @@ export default {
         "cases.active",
         "cases.recovered.todate",
         "cases.closed.todate",
+        "vaccination.administered.todate",
         "state.in_hospital",
         "state.icu",
         "state.critical",

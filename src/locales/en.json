@@ -233,7 +233,9 @@
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
             "shortDateFormat": "%b %e",
-            "weekYearDateFormat": "Week %W of %Y"
+            "weekYearDateFormat": "Week %W of %Y",
+            "hideAll": "Hide all",
+            "showAll": "Show all"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -251,6 +253,7 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
+            "vaccinationAdministered": "Vaccinated",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -432,7 +435,8 @@
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "newCases7Days": "New Cases (7-day avg.)",
-            "deceased": "Deaths"
+            "deceased": "Deaths",
+            "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
             "title": "Cases by Region (per 100,000 people)",
@@ -459,7 +463,8 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals and retirement homes. Deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
+            "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -733,13 +738,14 @@
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Tests (daily)",
-        "tests_performed_todate": "Tests (to date)",
+        "tests_performed": "Tests PCR (daily)",
+        "tests_performed_todate": "Tests PCR (to date)",
         "cases_confirmed": "Confirmed Cases (daily)",
         "cases_confirmed_todate": "Confirmed Cases (to date)",
         "cases_active": "Active Cases",
         "cases_recovered_todate": "Recovered (to date)",
         "cases_closed_todate": "Closed Cases (to date)",
+        "vaccination_administered_todate": "People Vaccinated (to date)",
         "cases_hs_employee_confirmed_todate": "Confirmed Cases - Healthcare Staff (to date)",
         "cases_rh_employee_confirmed_todate": "Confirmed Cases - Retirement Home Staff (to date)",
         "cases_rh_occupant_confirmed_todate": "Confirmed Cases - Retirement Home Residents (to date)",
@@ -978,6 +984,10 @@
         "liftGym": {
             "title": "Gym",
             "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+        },
+        "planRelaxation2": {
+            "title": "Plan",
+            "description": "Government has accepted the revised plan of relaxation of measures in five phases."
         }
     },
     "days": {
@@ -987,7 +997,7 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo fs, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",

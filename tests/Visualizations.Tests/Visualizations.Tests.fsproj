@@ -17,6 +17,7 @@
         <Compile Include="CountriesChartTests\Grouping OWID data by countries.fs" />
         <Compile Include="CountriesChartTests\Averaging country data.fs" />
         <Compile Include="DataAnalysisTests\Working with dated arrays.fs" />
+        <Compile Include="StatisticsTests\calcRunningAverage tests.fs" />
         <Compile Include="Date arithmetic.fs" />
         <Compile Include="Calculating windowed sums.fs" />
         <Compile Include="Program.fs" />

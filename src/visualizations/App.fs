@@ -57,6 +57,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
           RegionsData = NotAsked
+          MunicipalitiesData = NotAsked
           RenderingMode = renderingMode }
 
     // Request data loading based on the page we are on
@@ -66,7 +67,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
-                  Cmd.ofMsg RegionsDataRequest ]
+                  Cmd.ofMsg RegionsDataRequest
+                  Cmd.ofMsg MunicipalitiesDataRequest ]
         | "world" ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -75,7 +77,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
-                  Cmd.ofMsg RegionsDataRequest ]
+                  Cmd.ofMsg RegionsDataRequest
+                  Cmd.ofMsg MunicipalitiesDataRequest ]
 
     initialState, cmd
 
@@ -96,6 +99,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
+    | MunicipalitiesDataRequest ->
+        match state.MunicipalitiesData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with MunicipalitiesData = Loading }, Cmd.OfAsync.result (Data.Municipalities.load state.ApiEndpoint)
+    | MunicipalitiesDataLoaded data -> { state with MunicipalitiesData = data }, Cmd.none
 
 open Elmish.React
 
@@ -153,11 +161,11 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.RegionsData with
+                    match state.MunicipalitiesData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Municipality; data = data |} }
+                    | Success data -> lazyView Map.mapMunicipalitiesChart {| data = data |} }
 
     let regionMap =
           { VisualizationType = RegionMap
@@ -170,7 +178,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Region; data = data |} }
+                    | Success data -> lazyView Map.mapRegionChart {| data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities
@@ -179,7 +187,7 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.RegionsData with
+                    match state.MunicipalitiesData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
