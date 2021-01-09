@@ -41,11 +41,12 @@ Prvotni model je bil kasneje nadgrajen, dnevni rezultati pa se sedaj objavljajo 
 </a>
 
 ## <a id="social_network"></a>Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
-V sodelovanju z [dr. Žigo Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v tem delovnem dokumentu](https://arxiv.org/pdf/2005.13282.pdf), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
+V sodelovanju z [dr. Žigo Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani smo pripravili verjetnostno napoved poteka pandemije v Sloveniji. V simulaciji se virus prenaša po realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije), razdeljenih v gospodinjstva in domove oskrbovancev. Vozlišča naključno povežemo tudi izven teh enot, glede na znane porazdelitve kontaktov – nekatere  osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom efektivno simuliramo različne strategije zajezitve virusa.Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19. Ta se tudi med posameznimi osebami razlikuje. Podrobnejši opis modela se nahaja [v članku](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090), zgodovina izračunov pa [tule](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).
 
+<!--
 <a href="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" class="img-link">
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
-
+-->
 
 ## <a id="other"></a>Drugi modeli za Slovenijo
 
@@ -55,11 +56,12 @@ V sodelovanju z [dr. Žigo Zaplotnikom](https://twitter.com/ZaplotnikZiga) s Fak
 
 - [Dr. Andrej Srakar](https://sites.google.com/site/andrejsrakar1975/) je za blog Udomačena statistika napisal izvrsten pregledni članek [**Uvod v modeliranje in statistične vidike COVID-19**](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/) o ključnih modelih širjenja epidemije bolezni COVID-19, ki so nastali v Sloveniji.
 
-## <a id="challenges"></a>Ključni izzivi pri modeliranju epidemije
+## <a id="articles"></a>Zanimivi prispevki na temo modeliranja epidemije
 
-*Matematično modeliranje s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji.* – [V uvodniku revije Zdravstveno varstvo](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19.
+- [Kaj ima matematika z epidemijo?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221): članek, ki razloži osnovne pojme in predstavi matematični vidik modeliranja. Napisano na podlagi predavanja prof.Janeza Žiberta.
 
+- *Predstavitev modeliranja epidemije v Državnem zboru RS*: 12. novembra 2020 so sodelavci Sledilnika predstavili pomen podatkov in modeliranja v Državnem zboru RS. Na voljo so tudi [povzetek in posnetki nastopov](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898).
 
-## Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov 
+- *Matematično modeliranje s prikazom možnih izidov epidemije pomaga oblikovati javnozdravstvene ukrepe. Da bi bili rezultati modeliranja zanesljivejši, je zelo pomembno kritično ovrednotiti uporabljene podatke ter preveriti, ali so bili upoštevani različni načini širjenja bolezni v populaciji.* – [V uvodniku revije Zdravstveno varstvo](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19.
 
-Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).
+- *Srečanje slovenskih znanstvenikov na temo COVID-19 ukrepov*: Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala spletni pogovor, ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. Posnetek in predavanja si lahko [preberete tukaj](https://medium.com/sledilnik/64233b35580c).
