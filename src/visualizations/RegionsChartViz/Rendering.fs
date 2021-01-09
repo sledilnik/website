@@ -227,6 +227,9 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                        plotBands =
                            match state.ChartConfig.RelativeTo, state.MetricType with
                            | Pop100k, NewCases7Days -> [|
+                               {| from=redThreshold; ``to``=1000000.
+                                  color="#e0e0e0"
+                               |}
                                {| from=orangeThreshold; ``to``=redThreshold
                                   color="#ffd8d8"
                                |}
