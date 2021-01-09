@@ -37,10 +37,12 @@ A more detailed description of the original methodology and results is published
 ## <a id="social_network"></a>Model of Virus Transmission via the Social Network of Slovenia
 In cooperation with [*Dr. Žiga Zaplotnik*](https://twitter.com/ZaplotnikZiga) from the Faculty of Mathematics and Physics of the University of Ljubljana, we prepared a probabilistic forecast of the pandemic in Slovenia. In the simulation, the virus is transmitted according to a realistic model of the social network of Slovenians, which contains more than 2 million nodes (1 for each inhabitant of Slovenia), divided into households and retirement homes. The nodes are also randomly connected outside of these units, according to the known distribution of contacts - some people have more daily contacts, others less. This allows the model to effectively simulate different virus containment strategies. A probabilistic prediction is obtained by preparing a set of simulations with slightly altered initial conditions and parameters that determine coronavirus spread and the course of the COVID-19 disease. The probabilistic prediction also varies between individuals. 
 
-***A more detailed description of the model can be found [in this working document](https://arxiv.org/pdf/2005.13282.pdf), while the history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).***
+***A more detailed description of the model can be found [in this article](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090), while the history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).***
 
+<!--
 <a href="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" class="img-link">
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
+-->
 
 
 ## <a id="other"></a>Other Models for Slovenia
