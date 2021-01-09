@@ -1600,7 +1600,9 @@
         "banktransfer": {
             "title": "Bank transfer",
             "recipient": "Recipient",
-            "purpose": "Purpose code",
+            "purposeCode": "Purpose code",
+            "purpose": "Purpose",
+            "reference": "Reference",
             "iban": "IBAN Account",
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC"

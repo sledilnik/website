@@ -1695,7 +1695,9 @@
             "title": "Bančno nakazilo",
             "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Če potrebujete donatorsko pogodbo, nam na drustvo@sledilnik.org prosimo sporočite vaše podatke in znesek donacije.",
             "recipient": "Prejemnik",
-            "purpose": "Koda namena",
+            "purposeCode": "Koda namena",
+            "purpose": "Namen",
+            "reference": "Referenca",
             "iban": "Račun IBAN",
             "bank": "Banka",
             "bankBicSwift": "BIC/SWIFT banke"

@@ -33,32 +33,50 @@
 
       <h2>{{ $t("donation.banktransfer.title") }}</h2>
       <div v-html-md="$t('donation.banktransfer.description')" />
-      <img src="../assets/donate-qr.png" class="qr" />
+      <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
       <table class="bankDetails">
         <tr>
           <td>{{ $t("donation.banktransfer.recipient") }}</td>
-          <td>Znanstveno društvo Sledilnik<br>Celovška cesta 111<br>Ljubljana, Slovenija</td>
+          <td>
+            Znanstveno društvo Sledilnik
+            <br>Celovška cesta 111
+            <br>1000 Ljubljana
+            <span v-if="language!='sl'"><br>Slovenia</span>
+          </td>
         </tr>
         <tr>
           <td>{{ $t("donation.banktransfer.iban") }}</td>
           <td>SI56 6100 0002 5152 059</td>
         </tr>
         <tr>
-          <td>{{ $t("donation.banktransfer.purpose") }}</td>
+          <td>{{ $t("donation.banktransfer.purposeCode") }}</td>
           <td>CHAR</td>
         </tr>
-        <tr>
+        <tr v-if="language=='sl'">
+          <td>{{ $t("donation.banktransfer.purpose") }}</td>
+          <td>Donacija</td>
+        </tr>
+        <tr v-if="language=='sl'">
+          <td>{{ $t("donation.banktransfer.reference") }}</td>
+          <td>SI99</td>
+        </tr>
+        <tr v-if="language!='sl'">
           <td>{{ $t("donation.banktransfer.bankBicSwift") }}</td>
           <td>HDELSI22</td>
         </tr>
-        <tr>
+        <tr v-if="language!='sl'">
           <td>{{ $t("donation.banktransfer.bank") }}</td>
-          <td>Delavska hranilnica d.d.<br>Miklošičeva 5<br>Ljubljana, Slovenija</td>
+          <td>
+            Delavska hranilnica d.d.
+            <br>Miklošičeva 5
+            <br>1000 Ljubljana
+            <span v-if="language!='sl'"><br>Slovenia</span>
+          </td>
         </tr>
 
       </table>
 
-      <img src="../assets/donate-upn.png" class="upn" />
+      <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
 
       <div class="outro" v-html-md="$t('donation.outro')" />
     </div>
