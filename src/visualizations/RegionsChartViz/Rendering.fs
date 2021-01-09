@@ -154,9 +154,31 @@ let renderChartOptions (state : RegionsChartState) dispatch =
             state.ScaleType "covid19-regions"
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
+    let getLastSunday (d : System.DateTime) =
+        let mutable date = d
+        while date.DayOfWeek <> System.DayOfWeek.Sunday do
+          date <- date.AddDays -1.0
+        date
+
+    let lastDataPoint = state.RegionsData |> List.last
+    let previousSunday = getLastSunday (lastDataPoint.Date.AddDays(-7.))
+
     let xAxis =
             baseOptions.xAxis
-            |> Array.map(fun xAxis -> {| xAxis with gridZIndex = 1 |})
+            |> Array.map(fun xAxis -> 
+               {| xAxis with
+                      gridZIndex = 1
+                      plotBands =
+                        match state.MetricType with
+                        | MetricType.Deceased ->
+                            [|
+                               {| from=jsTime <| previousSunday
+                                  ``to``=jsTime <| lastDataPoint.Date
+                                  color="#ffffe0"
+                                |}
+                            |]
+                        | _ -> [| |]
+                 |})
 
     let chartTextGroup = state.ChartConfig.ChartTextsGroup
 
@@ -172,7 +194,6 @@ let renderChartOptions (state : RegionsChartState) dispatch =
             |> Array.map
                    (fun yAxis ->
                 {| yAxis with
-                       min = None
                        gridZIndex = 1
                        plotLines =
                            match state.ChartConfig.RelativeTo, state.MetricType with
