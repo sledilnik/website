@@ -87,8 +87,11 @@ export default {
     });
 
     let urlParams = new URLSearchParams(window.location.search);
-    var stripeSessionId = urlParams.get('stripeSessionId')
     var stripeSuccess = urlParams.has('stripeSessionId')
+    if (stripeSuccess) {
+      var stripeSessionId = urlParams.get('stripeSessionId')
+      window.history.replaceState({}, '', `${location.pathname}`);
+    }
     return {
       isStripeSuccess: stripeSuccess,
       stripeSessionId: stripeSessionId,
