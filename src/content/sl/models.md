@@ -7,6 +7,7 @@ ki so jih pripravili in umerili z uporabo podatkov [COVID-19 Sledilnik](https://
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
 - [Model prenosa virusa po socialnem omrežju prebivalcev Slovenije](#social_network)
 - [Drugi modeli za Slovenijo](#other)
+- [Zanimivi prispevki na temo modeliranja epidemije](#articles)
 
 Za osnovno razumevanje modelov o epidemiji priporočamo članek [Epidemija in modeli... - Osnove epidemiološkega modeliranja](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a).
 

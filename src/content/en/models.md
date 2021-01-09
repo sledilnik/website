@@ -5,6 +5,7 @@ Our community includes experts in statistical modeling and computer simulations 
 - [Evaluating the Reproduction Rate](#reproduction-rate)
 - [Model of Virus Transmission via the Social Network of Slovenia](#social_network)
 - [Other Models for Slovenia](#other)
+- [Interesting Articles about Epidemic Modeling](#articles)
 
 > **_NOTE:_**  The models take into account the information known so far about COVID-19 and its spread in Slovenia. No model can offer accurate predictions for the future course of the epidemic, but we seek to carefully disclose all the assumptions of the model. Data on the number of COVID-19 tests performed and the number of COVID-19 cases confirmed in Slovenia does not necessarily reveal the number of asymptomatic infections, so most of our models are calibrated to data on hospitalizations. The uncertainty about the exact number confirmed cases propagates to the uncertainty in the predictions.
 
@@ -56,9 +57,9 @@ A more detailed description of the model can be found [in this article](https://
 
 ## <a id="articles"></a>Interesting Articles about Epidemic Modeling
 
-- [Kaj ima matematika z epidemijo?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221): članek, ki razloži osnovne pojme in predstavi matematični vidik modeliranja. Napisano na podlagi predavanja prof.Janeza Žiberta.
+- [What has math to do with epidemic?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) - basic ideas and mathematics behind the modeling. Written based on the lecture of prof.Janeza Žiberta.
 
-- *Predstavitev modeliranja epidemije v Državnem zboru RS*: 12. novembra 2020 so sodelavci Sledilnika predstavili pomen podatkov in modeliranja v Državnem zboru RS. Na voljo so tudi [povzetek in posnetki nastopov](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898).
+- *Presentation of modeling in Slovenian Parliament*: on November 12, 2020 members of Sledilni presented the nead for data and modeling in Slovenian Parliament. You can see [abstract and recordings](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898).
 
 - *Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* – In the **editorial of the Zdravstveno varstvo journal**, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the current findings and key challenges in modeling the COVID-19 epidemic.
 
