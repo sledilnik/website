@@ -73,8 +73,9 @@ let tooltipFormatter jsThis =
         pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
     let fmtDate = pts.[0]?point?date
 
-    fmtDate
-    + "<br>"
+    "<b>"
+    + fmtDate
+    + "</b><br>"
     + (pts
        |> Seq.map (fun p ->
            sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
