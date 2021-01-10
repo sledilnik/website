@@ -626,7 +626,16 @@
             "title": "Servizi"
         },
         "liftFoodMarkets2": {
-            "title": "Mercati"
+            "title": "Mercati",
+            "description": "Distensione: mercati alimentari, edicole, parrucchieri."
+        },
+        "planRelaxation2": {
+            "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
+            "title": "Piano"
+        },
+        "liftGym": {
+            "description": "Distensione: ricreazione individuale e guidata con restrizioni<br> (1 persona per 50m2 e 5m di distanza interpersonale).",
+            "title": "Palestra"
         }
     },
     "tableDict": {
@@ -680,8 +689,9 @@
         "cases_active": "Casi attivi",
         "cases_confirmed_todate": "Casi confermati (ad oggi)",
         "cases_confirmed": "Casi confermati (giornalieri)",
-        "tests_performed_todate": "Tamponi (ad oggi)",
-        "tests_performed": "Tamponi (giornalieri)"
+        "tests_performed_todate": "Tamponi PCR (ad oggi)",
+        "tests_performed": "Tamponi PCR (giornalieri)",
+        "vaccination_administered_todate": "Persone vaccinate (ad oggi)"
     },
     "charts": {
         "ratios": {
@@ -765,7 +775,8 @@
             "show7DaysAverage": "Media 7 giorni",
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
-            "titleMenu_SVN": "Slovenia - situazione"
+            "titleMenu_SVN": "Slovenia - situazione",
+            "vaccinationAdministered": "Vaccinati"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -824,7 +835,11 @@
             "byLabPercent": "Per laboratorio:% positivi",
             "byLab": "Per laboratorio: test PCR",
             "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio.",
-            "hagt": "Ordinario: TAR"
+            "hagt": "Ordinario: TAR",
+            "positiveTotal": "Totale positivi",
+            "positivePCR": "PCR positivi",
+            "positiveHAT": "TAR positivi",
+            "positiveSplit": "PCR e TAR positivi"
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -925,7 +940,8 @@
             "relativeIncrease": "Incremento settimanale",
             "titleMenu": "Comuni - mappa",
             "bubbles": "Distribuzione",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali e delle case di riposo. I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
+            "disclaimer": "Nota: I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
+            "disclaimerRegion": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane. Questo è il motivo per cui c'è una deviazione dal numero totale di morti."
         },
         "regions": {
             "deceased": "Decessi",
@@ -933,7 +949,8 @@
             "activeCases": "Casi attivi",
             "title": "Casi per regione",
             "titleMenu": "Regioni - casi",
-            "newCases7Days": "Nuovi casi (media di 7 giorni)"
+            "newCases7Days": "Nuovi casi (media di 7 giorni)",
+            "disclaimer": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane."
         },
         "spread": {
             "absolute": "Crescita giornaliera assoluta",
@@ -999,7 +1016,9 @@
             "dsOWD_MZ": "Our World in Data &amp; Min. Salute",
             "dsOWD_NIJZ": "Our World in Data &amp; NIJZ",
             "dsMNZ": "MNZ",
-            "dsSURS": "SURS"
+            "dsSURS": "SURS",
+            "showAll": "Mostra tutto",
+            "hideAll": "Nascondi tutto"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1029,7 +1048,7 @@
         },
         "dailyComparison": {
             "title": "Confronto per giorno della settimana",
-            "positivePct": "Percentuale di tamponi positivi: PCR (%)",
+            "positivePct": "Percentuale positivi: PCR (%)",
             "tests": "Tamponi effettuati: PCR",
             "active": "Casi attivi",
             "new": "Casi confermati",
@@ -1037,7 +1056,9 @@
             "deceased": "Decessi",
             "icuAdmitted": "Ammessi in terapia intensiva",
             "hospitalDischarged": "Dimessi dall'ospedale",
-            "hospitalAdmitted": "Ammessi in ospedale"
+            "hospitalAdmitted": "Ammessi in ospedale",
+            "positivePctHAT": "Percentuale positivi: TAR (%)",
+            "testsHAT": "Test eseguiti: TAR"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -1190,7 +1211,10 @@
             "deceasedTodayRelative": "Decessi al giorno (relativo)",
             "deceasedToday": "Decessi al giorno",
             "titleMenu": "Decessi",
-            "title": "Decessi"
+            "title": "Decessi",
+            "deceasedByAgeToday": "Decessi per età (giornalieri)",
+            "deceasedByAgeTodayRelative": "Decessi per età (giornalieri, relativi)",
+            "disclaimer": "Nota: i dati sui decessi per età vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane."
         },
         "excessDeaths": {
             "excess": {
@@ -1206,7 +1230,17 @@
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
-            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}"
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
+            "excessByAgeGroup": {
+                "sex": {
+                    "female": "Femmine",
+                    "male": "Maschi",
+                    "both": "Tutti"
+                },
+                "totalDeceased": "Totale decessi",
+                "disclaimer": "Nota: i dati sui decessi dell'ultimo mese sono incompleti. La larghezze delle colonne rappresenta il rapporto tra i decessi nella fascia di età della colonna e tutti i decessi in un determinato mese.",
+                "title": "Eccesso rispetto agli ultimi 5 anni per classi di età"
+            }
         },
         "metricsCorrelation": {
             "deceased": "Deceduti",
@@ -1244,7 +1278,8 @@
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
         "newCases7d": "Casi nuovi",
-        "testsHAT": "Tamponi oggi: TAR"
+        "testsHAT": "Tamponi oggi: TAR",
+        "vaccinationSummary": "Persone vaccinate"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
@@ -1307,7 +1342,8 @@
             "title": "fase<br>12"
         },
         "14": {
-            "title": "fase<br>14"
+            "title": "fase<br>14",
+            "description": "test rapidi antigenici"
         }
     },
     "weekday": {
@@ -1539,6 +1575,9 @@
         },
         "data-recovered": {
             "question": "Perché avete sostituito il numero di *curati* con il numero di pazienti *ristabiliti*?"
+        },
+        "chart-reality": {
+            "question": "I vostri grafici rappresentano la situazione reale?"
         }
     }
 }
