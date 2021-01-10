@@ -25,6 +25,7 @@ type MetricCfg = {
     Metric : Metric
     Color : string
     Id : string
+    Visible : bool
 }
 
 type Metrics = MetricCfg list
@@ -36,11 +37,11 @@ type ShowAllOrOthers = ShowAllConfirmed | ShowOthers
 
 module Metrics  =
     let All = [
-        { Metric=AllConfirmed;      Color="#bda506"; Id="allConfirmed" }
-        { Metric=OtherPeople;       Color="#FFDBA3"; Id="otherPersons" }
-        { Metric=HospitalStaff;     Color="#73ccd5"; Id="hcStaff" }
-        { Metric=RestHomeStaff;     Color="#20b16d"; Id="rhStaff" }
-        { Metric=RestHomeOccupant;  Color="#bf5747"; Id="rhOccupant" }
+        { Metric=AllConfirmed;      Visible=false;  Color="#bda506"; Id="allConfirmed" }
+        { Metric=OtherPeople;       Visible=true;   Color="#FFDBA3"; Id="otherPersons" }
+        { Metric=HospitalStaff;     Visible=true;   Color="#73ccd5"; Id="hcStaff" }
+        { Metric=RestHomeStaff;     Visible=true;   Color="#20b16d"; Id="rhStaff" }
+        { Metric=RestHomeOccupant;  Visible=true;   Color="#bf5747"; Id="rhOccupant" }
     ]
 
     let metricsToDisplay filter =
@@ -190,7 +191,7 @@ let renderChartOptions state dispatch =
         for (metric, metricData) in allMetricsData do
             yield pojo
                 {|
-                visible = true
+                visible = metric.Visible
                 color = metric.Color
                 name = chartText metric.Id
                 data = metricData
