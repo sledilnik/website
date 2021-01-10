@@ -60,8 +60,9 @@ let allSeries state =
         let regionName = regionConfig.Key
 
         let regionMetrics =
-            metricForRegion state.RegionsData
-                startDate regionName state.MetricType
+            match regionName with
+            | "si"  -> metricForAllRegions state.RegionsData startDate regionName state.MetricType
+            | _     -> metricForRegion state.RegionsData startDate regionName state.MetricType
 
         let regionPopulation =
             Utils.Dictionaries.regions.[regionName].Population
