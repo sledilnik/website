@@ -194,6 +194,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
             |> Array.map
                    (fun yAxis ->
                 {| yAxis with
+                       min = if state.ScaleType = Linear then 0. else 0.1
                        gridZIndex = 1
                        plotLines =
                            match state.ChartConfig.RelativeTo, state.MetricType with
