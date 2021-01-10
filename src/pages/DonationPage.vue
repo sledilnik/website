@@ -226,7 +226,7 @@ export default {
 
 table.bankDetails {
   font-size: 14px;
-  margin: 0;
+  margin: 10px 0;
   width:auto;
   min-width: 350px;
 
