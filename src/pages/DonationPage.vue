@@ -1,10 +1,10 @@
 <template>
   <div class="custom-container">
     <div v-if="isStripeSuccess" class="static-page-wrapper">
-      <h1>{{ $t("donation.stripe.monthly.success.title") }}</h1>
-      <div v-html-md="$t('donation.stripe.monthly.success.description')" />
+      <h1>{{ $t("donation.monthly.stripe.success.title") }}</h1>
+      <div v-html-md="$t('donation.monthly.stripe.success.description')" />
       <div class="session">
-        {{ $t("donation.stripe.monthly.success.session") }}
+        {{ $t("donation.monthly.stripe.success.session") }}
         {{ stripeSessionId }}
       </div>
     </div>
@@ -13,72 +13,148 @@
       <h1>{{ $t("donation.title") }}</h1>
       <div v-html-md="$t('donation.intro')" />
 
-      <h2>{{ $t("donation.stripe.monthly.title") }}</h2>
-      <div v-html-md="$t('donation.stripe.monthly.description')" />
-
-      <stripe-checkout
-        ref="checkoutRef"
-        mode="subscription"
-        :pk="publishableKey"
-        :success-url="successURL"
-        :cancel-url="cancelURL"
-        :locale="language"
-        @loading="v => loading = v"
-      />
       <div>
-        <span v-for="(item) in stripeSubscriptions" :key="item.price">
-          <button @click="submit(item)">{{ $t("donation.stripe.monthly.donateButton", {amount: item.amount}) }}</button>
-        </span>
+        <h2>{{ $t("donation.monthly.title") }}</h2>
+        <div v-html-md="$t('donation.monthly.description')" />
+
+        <div>
+          <h3>{{ $t("donation.monthly.stripe.title") }}</h3>
+          <div>
+            <stripe-checkout
+              ref="checkoutRef"
+              mode="subscription"
+              :pk="publishableKey"
+              :success-url="successURL"
+              :cancel-url="cancelURL"
+              :locale="language"
+              @loading="v => loading = v"
+            />
+            <span v-for="(item) in stripeSubscriptions" :key="item.price">
+              <button @click="submit(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount}) }}</button>
+            </span>
+          </div>
+          <div v-html-md="$t('donation.monthly.stripe.description')" />
+        </div>
+
+        <div v-if="language=='sl'">
+          <h3>{{ $t("donation.monthly.permanentBankTransferOrder.title") }}</h3>
+          <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
+          <table class="bankDetails">
+            <tr>
+              <td>{{ $t("donation.bankDetails.recipient") }}</td>
+              <td>
+                Znanstveno društvo Sledilnik
+                <br>Celovška cesta 111
+                <br>1000 Ljubljana
+                <span v-if="language!='sl'"><br>Slovenia</span>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ $t("donation.bankDetails.iban") }}</td>
+              <td>SI56 6100 0002 5152 059</td>
+            </tr>
+            <tr>
+              <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
+              <td>CHAR</td>
+            </tr>
+            <tr v-if="language=='sl'">
+              <td>{{ $t("donation.bankDetails.purpose") }}</td>
+              <td>Donacija</td>
+            </tr>
+            <tr v-if="language=='sl'">
+              <td>{{ $t("donation.bankDetails.reference") }}</td>
+              <td>SI99</td>
+            </tr>
+            <tr v-if="language!='sl'">
+              <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
+              <td>HDELSI22</td>
+            </tr>
+            <tr v-if="language!='sl'">
+              <td>{{ $t("donation.bankDetails.bank") }}</td>
+              <td>
+                Delavska hranilnica d.d.
+                <br>Miklošičeva 5
+                <br>1000 Ljubljana
+                <span v-if="language!='sl'"><br>Slovenia</span>
+              </td>
+            </tr>
+
+          </table>
+          <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.authorisation')" />
+        </div>
       </div>
 
-      <h2>{{ $t("donation.banktransfer.title") }}</h2>
-      <div v-html-md="$t('donation.banktransfer.description')" />
-      <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
-      <table class="bankDetails">
-        <tr>
-          <td>{{ $t("donation.banktransfer.recipient") }}</td>
-          <td>
-            Znanstveno društvo Sledilnik
-            <br>Celovška cesta 111
-            <br>1000 Ljubljana
-            <span v-if="language!='sl'"><br>Slovenia</span>
-          </td>
-        </tr>
-        <tr>
-          <td>{{ $t("donation.banktransfer.iban") }}</td>
-          <td>SI56 6100 0002 5152 059</td>
-        </tr>
-        <tr>
-          <td>{{ $t("donation.banktransfer.purposeCode") }}</td>
-          <td>CHAR</td>
-        </tr>
-        <tr v-if="language=='sl'">
-          <td>{{ $t("donation.banktransfer.purpose") }}</td>
-          <td>Donacija</td>
-        </tr>
-        <tr v-if="language=='sl'">
-          <td>{{ $t("donation.banktransfer.reference") }}</td>
-          <td>SI99</td>
-        </tr>
-        <tr v-if="language!='sl'">
-          <td>{{ $t("donation.banktransfer.bankBicSwift") }}</td>
-          <td>HDELSI22</td>
-        </tr>
-        <tr v-if="language!='sl'">
-          <td>{{ $t("donation.banktransfer.bank") }}</td>
-          <td>
-            Delavska hranilnica d.d.
-            <br>Miklošičeva 5
-            <br>1000 Ljubljana
-            <span v-if="language!='sl'"><br>Slovenia</span>
-          </td>
-        </tr>
+      <div>
+      <h2>{{ $t("donation.onetime.title") }}</h2>
+        <div>
+          <!-- <h3>{{ $t("donation.onetime.banktransfer.title") }}</h3> -->
+          <div v-html-md="$t('donation.onetime.banktransfer.description')" />
+          <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
+          <table class="bankDetails">
+            <tr>
+              <td>{{ $t("donation.bankDetails.recipient") }}</td>
+              <td>
+                Znanstveno društvo Sledilnik
+                <br>Celovška cesta 111
+                <br>1000 Ljubljana
+                <span v-if="language!='sl'"><br>Slovenia</span>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ $t("donation.bankDetails.iban") }}</td>
+              <td>SI56 6100 0002 5152 059</td>
+            </tr>
+            <tr>
+              <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
+              <td>CHAR</td>
+            </tr>
+            <tr v-if="language=='sl'">
+              <td>{{ $t("donation.bankDetails.purpose") }}</td>
+              <td>Donacija</td>
+            </tr>
+            <tr v-if="language=='sl'">
+              <td>{{ $t("donation.bankDetails.reference") }}</td>
+              <td>SI99</td>
+            </tr>
+            <tr v-if="language!='sl'">
+              <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
+              <td>HDELSI22</td>
+            </tr>
+            <tr v-if="language!='sl'">
+              <td>{{ $t("donation.bankDetails.bank") }}</td>
+              <td>
+                Delavska hranilnica d.d.
+                <br>Miklošičeva 5
+                <br>1000 Ljubljana
+                <span v-if="language!='sl'"><br>Slovenia</span>
+              </td>
+            </tr>
 
-      </table>
+          </table>
+          <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+        </div>
 
-      <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+        <!--
+        </div>
+          TODO: one-time credit card donation
+        </div> 
+        -->
+      </div>
 
-      <div class="outro" v-html-md="$t('donation.outro')" />
+      <div v-if="language=='sl'">
+        <h2>{{ $t("donation.incomeTax.title") }}</h2>
+        <div v-html-md="$t('donation.incomeTax.description')" />
+      </div>
+
+      <div>
+        <h2>{{ $t("donation.companies.title") }}</h2>
+        <div v-html-md="$t('donation.companies.description')" />
+      </div>
+
+      <div>
+        <h2>{{ $t("donation.other.title") }}</h2>
+        <div v-html-md="$t('donation.other.description')" />
+      </div>
     </div>
   </div>
 </template>
@@ -180,10 +256,6 @@ button {
   margin-bottom: 20px;
   background-color: $yellow;
   border: none;
-}
-
-.outro {
-  margin-top:50px;
 }
 
 .session {

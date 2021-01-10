@@ -1599,9 +1599,8 @@
         }
     },
     "donation": {
-        "title": "Support Sledilnik with Donation",
-        "banktransfer": {
-            "title": "Bank transfer",
+        "title": "Support Sledilnik!",
+        "bankDetails": {
             "recipient": "Recipient",
             "purposeCode": "Purpose code",
             "purpose": "Purpose",
@@ -1610,15 +1609,31 @@
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC"
         },
-        "stripe": {
-            "monthly": {
-                "title": "Monthly recurring donation",
+        "onetime": {
+            "title": "One time support",
+            "banktransfer": {
+                "title": "Bank transfer",
+                "description": "Our activities can be supported by a **bank transfer**. The payment instructions are below."
+            }
+        },
+        "monthly": {
+            "title": "Monthly recurring donation",
+            "stripe": {
+                "title": "With credit card",
                 "donateButton": "{{amount}} EUR / month",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
                     "session": "Payment session ID:"
                 }
             }
+        },
+        "companies": {
+            "title": "For companies",
+            "description": "Please contact us at drustvo@sledilnik.org to prepare a donation contract and/or other necessary documentation by arrangement."
+        },
+        "other": {
+            "title": "Other ways of support",
+            "description": "If you have a different proposal to support our activities or for cooperation, please do not hesitate and contact us at drustvo@sledilnik.org and we will be happy to find a solution."
         }
     }
 }
