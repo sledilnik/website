@@ -111,8 +111,8 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
     | _ ->
         let s = StringBuilder()
         // todo igor: extract date
-//        let date = points.[0]?point?date
-//        s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
+        let date = points.[0]?point?date
+        s.AppendFormat ("<b>{0}</b><br/>", date.ToString()) |> ignore
         s.Append "<table>" |> ignore
 
         points
