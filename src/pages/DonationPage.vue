@@ -262,6 +262,8 @@ button {
   margin-top: 50px;
   font-size: 10px;
   color: #999999;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 </style>
