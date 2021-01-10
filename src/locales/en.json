@@ -270,6 +270,7 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
+            "vaccinated": "People Vaccinated",
             "tests": "Tests Performed: PCR",
             "positivePct": "Share of Positive: PCR (%)",
             "testsHAT": "Tests Performed: HAT",
