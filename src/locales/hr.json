@@ -634,7 +634,8 @@
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "positivePctHAT": "Udio pozitivnih: HAT (%)",
-            "testsHAT": "Provedeni testovi: HAT"
+            "testsHAT": "Provedeni testovi: HAT",
+            "vaccinated": "Cijepljene osobe"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -769,7 +770,7 @@
             "healthcareEmployeesCases": "Zdravstveni radnici",
             "confirmedCases": "Potvrđeni slučajevi",
             "titleMenu": "Zdravstvo i domovi umirovljenika – slučajevi",
-            "title": "Slučajevi u zdravstvu i domovima umirovljenika",
+            "title": "Slučajevi u zdravstvu i domovima umirovljenika, tjedno",
             "disclaimer": "Napomena: podaci za prošli tjedan još nisu potpuni – udio zdravstvenih radnika može biti manji od stvarnog.",
             "otherCases": "Ostale osobe",
             "rhOccupantCases": "Stanovnici domova umirovljenika",
