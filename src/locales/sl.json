@@ -1710,7 +1710,7 @@
             "title": "Enkratna donacija",
             "banktransfer": {
                 "title": "Bančno nakazilo",
-                "description": "Donacijo nam lahko nakažete z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici.\nV kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**. Če potrebujete donatorsko pogodbo, nam na drustvo@sledilnik.org prosimo sporočite vaše podatke in znesek donacije."
+                "description": "Donacijo nam lahko **nakažete iz bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
             }
         },
         "monthly": {
