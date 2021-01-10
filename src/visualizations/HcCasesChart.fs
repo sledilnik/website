@@ -40,7 +40,7 @@ let init data: State * Cmd<Msg> =
         { scaleType = Linear
           displayType = DisplayType.Default
           data = data
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 }
 
     state, Cmd.none
 
@@ -85,12 +85,12 @@ module Series =
 
     let getSeriesInfo (state, series) =
         match series with
-        | HealthcareCases ->  "#73ccd5", "healthcareEmployeesCases", 1
-        | RhOccupantCases ->  "#bf5747", "rhOccupantCases", 1
+        | HealthcareCases   -> true,  "#73ccd5", "healthcareEmployeesCases", 1
+        | RhOccupantCases   -> true,  "#bf5747", "rhOccupantCases", 1
         | ConfirmedCases ->
             match state.displayType with
-            | Absolute      -> "#d5c768", "totalConfirmed", 1
-            | Relative -> "#d5c768", "otherCases", 1
+            | Absolute      -> false, "#d5c768", "totalConfirmed", 1
+            | Relative      -> true,  "#d5c768", "otherCases", 1
 
 let tooltipFormatter jsThis dt =
     let pts: obj [] = jsThis?points
@@ -140,8 +140,9 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
         | HealthcareCases -> fun dp -> dp.HealthcareCases
         | RhOccupantCases -> fun dp -> dp.RetirementHomeOccupantCases
 
-    let color, seriesId, stack = Series.getSeriesInfo (state, series)
+    let visible, color, seriesId, stack = Series.getSeriesInfo (state, series)
     {|
+       visible = visible
        color = color
        name = chartText seriesId
        stack = stack
