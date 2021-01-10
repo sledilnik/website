@@ -341,10 +341,11 @@ let renderPositiveChart (state: State) dispatch =
         let pts: obj [] = jsThis?points
         let total =
             pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
-        let fmtDate = pts.[0]?point?date
+        let date = pts.[0]?point?date
 
-        fmtDate
-        + "<br>"
+        "<b>"
+        + date
+        + "</b><br>"
         + (pts
            |> Seq.map (fun p ->
                sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
