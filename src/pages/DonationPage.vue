@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div v-else class="static-page-wrapper">
+    <div v-else class="static-page-wrapper donation">
       <h1>{{ $t("donation.title") }}</h1>
       <div v-html-md="$t('donation.intro')" />
 
@@ -213,6 +213,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+
+.donation {
+  h2 {
+    margin-top: 48px;
+  }
+
+  h3 {
+    margin-top: 36px;
+  }
+}
 
 table.bankDetails {
   font-size: 14px;
