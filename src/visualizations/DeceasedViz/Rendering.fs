@@ -101,12 +101,39 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
         | StackedBarPercent -> "percent"
         | _ -> invalidOp "not supported"
 
+    let getLastSunday (d : System.DateTime) =
+        let mutable date = d
+        while date.DayOfWeek <> System.DayOfWeek.Sunday do
+          date <- date.AddDays -1.0
+        date
+
+    let lastDataPoint = state.StatsData |> List.last
+    let previousSunday = getLastSunday (lastDataPoint.Date.AddDays(-7.))
+
     let baseOptions =
         basicChartOptions
             scaleType className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    let xAxis =
+            baseOptions.xAxis
+            |> Array.map(fun xAxis -> 
+               {| xAxis with
+                      plotBands =
+                        match state.Page.MetricsType with
+                        | AgeGroupsMetricsType ->
+                            [|
+                               {| from=jsTime <| previousSunday
+                                  ``to``=jsTime <| lastDataPoint.Date
+                                  color="#ffffe0"
+                                |}
+                            |]
+                        | _ -> [| |]
+                 |})
+
     {| baseOptions with
         series = renderAllSeriesData state
+        xAxis = xAxis
         plotOptions = pojo
             {|
                 column = pojo
@@ -168,6 +195,17 @@ let render (state: DeceasedVizState) dispatch =
         Html.div [
             renderChartContainer state dispatch
             renderPagesSwitchers state.Page (ChangePage >> dispatch)
+
+            match state.Page.MetricsType with
+            | AgeGroupsMetricsType ->
+                Html.div [
+                    prop.className "disclaimer"
+                    prop.children [
+                        Html.text (I18N.chartText "deceased" "disclaimer")
+                    ]
+                ]
+            | _ -> Html.none
+
         ]
 
 let renderChart(statsData: StatsData) =

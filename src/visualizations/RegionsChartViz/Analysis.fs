@@ -9,7 +9,7 @@ type MetricType =
     | NewCases7Days
     | Deceased
   with
-    static member Default = MetricType.ActiveCases
+    static member Default = MetricType.NewCases7Days
     static member GetName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
         | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
