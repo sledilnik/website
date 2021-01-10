@@ -262,13 +262,24 @@ img {
 }
 
 .stripeCheckout {
-  button {
-    padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-right: -20px;
+
+  span {
+    flex-grow: 1;
     margin-right: 20px;
     margin-bottom: 20px;
-    background-color: $yellow;
-    border: none;
-    box-shadow: $element-box-shadow;
+
+    button {
+      width: 100%;
+      white-space: nowrap;
+      padding: 10px;
+      background-color: $yellow;
+      border: none;
+      box-shadow: $element-box-shadow;
+    }
   }
 }
 
