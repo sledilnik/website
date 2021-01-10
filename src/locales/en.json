@@ -704,7 +704,7 @@
             }
         },
         "sources": {
-            "title": "Sources and Locations of Infection",
+            "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
             "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
             "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
