@@ -250,7 +250,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
