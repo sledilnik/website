@@ -262,7 +262,7 @@
             "icuDischarged": "Discharged from ICU",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
-            "ventilatorDischarged": "Disconnected from Ventilator (intubated)",
+            "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
             "deceased": "Deaths"
         },
         "dailyComparison": {

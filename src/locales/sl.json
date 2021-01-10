@@ -766,7 +766,7 @@
             "icuDischarged": "Odpuščeni iz intenzivne",
             "ventilator": "Na respiratorju (intubirani)",
             "ventilatorAdmitted": "Priklopljeni na respirator (intubirani)",
-            "ventilatorDischarged": "Odklopljeni od respiratorja (intubirani)",
+            "ventilatorDischarged": "Odklopljeni od respiratorja (ekstubirani)",
             "deceased": "Umrli"
         },
         "dailyComparison": {
