@@ -449,7 +449,7 @@
             "confirmedToDate": "Potvrđeni slučajevi (do danas)",
             "icuDischarged": "Otpušteni s odjela intenzivne njege",
             "icuAdmitted": "Primljeni na odjel intenzivne njege",
-            "ventilatorDischarged": "Odspojeni s respiratora (intubirani)",
+            "ventilatorDischarged": "Odspojeni s respiratora (ekstubirani)",
             "ventilatorAdmitted": "Spojeni na respirator (intubirani)",
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",

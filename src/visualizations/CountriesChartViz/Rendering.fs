@@ -152,7 +152,7 @@ let renderChartCode (state: ChartState) (chartData: ChartData) =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 events = {| load = myLoadEvent("countries") |}
             |}

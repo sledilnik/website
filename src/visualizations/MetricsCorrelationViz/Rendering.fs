@@ -49,12 +49,12 @@ type DisplayType = {
     static member All = [|
         {   Id = "averageByDay"
             ValueTypes = MovingAverages
-            ChartType = SplineChart
+            ChartType = LineChart
             ShowPhases = true
         }
         {   Id = "all";
             ValueTypes = RunningTotals
-            ChartType = SplineChart
+            ChartType = LineChart
             ShowPhases = true
         }
     |]
@@ -250,7 +250,7 @@ let renderChartOptions state dispatch =
                 animation = false
                 ``type`` =
                     match state.DisplayType.ChartType with
-                    | SplineChart -> "spline"
+                    | LineChart -> "line"
                     | StackedBarNormal -> "column"
                     | StackedBarPercent -> "column"
                 zoomType = "x"
@@ -268,7 +268,7 @@ let renderChartOptions state dispatch =
             {|
                 series =
                     match state.DisplayType.ChartType with
-                    | SplineChart -> pojo {| stacking = ""; |}
+                    | LineChart -> pojo {| stacking = ""; |}
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
             |}

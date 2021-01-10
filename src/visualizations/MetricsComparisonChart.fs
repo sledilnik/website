@@ -271,9 +271,7 @@ let renderChartOptions state dispatch =
             yield pojo
                 {|
                     visible = true
-                    ``type`` =
-                        if state.MetricType.IsAveraged then "spline"
-                        else "line"
+                    ``type`` = "line"
                     color = metric.Color
                     name = chartText metric.Id
                     marker =

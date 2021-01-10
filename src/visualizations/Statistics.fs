@@ -101,8 +101,8 @@ let movingAverages<'T, 'TKey>
     |> Array.windowed daysOfMovingAverage
     |> Array.map (averageFunc keyFunc valueFunc)
 
-
-let calcRunningAverage (data: (JsTimestamp * float)[]) =
+/// running average is calculated for end date of the interval (last 7 days)
+let calcRunningAverage (data: ('a * float)[]) =
     let daysOfMovingAverage = 7
     let roundToDecimals = 1
 
@@ -124,7 +124,7 @@ let calcRunningAverage (data: (JsTimestamp * float)[]) =
 
             match index with
             | index when index >= daysOfMovingAverage - 1 ->
-                let date = data.[index - cutOff] |> fst
+                let date = data.[index] |> fst
                 let average =
                     currentSum / daysOfMovingAverageFloat
                     |> Utils.roundDecimals roundToDecimals

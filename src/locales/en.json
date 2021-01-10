@@ -262,7 +262,7 @@
             "icuDischarged": "Discharged from ICU",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
-            "ventilatorDischarged": "Disconnected from Ventilator (intubated)",
+            "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
             "deceased": "Deaths"
         },
         "dailyComparison": {
@@ -270,6 +270,7 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
+            "vaccinated": "People Vaccinated",
             "tests": "Tests Performed: PCR",
             "positivePct": "Share of Positive: PCR (%)",
             "testsHAT": "Tests Performed: HAT",
@@ -372,6 +373,10 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "disclaimer": "Note: From December 3, we do not received data per laboratory.",
+            "positiveSplit": "Positive PCR and HAT",
+            "positiveHAT": "Positive HAT",
+            "positivePCR": "Positive PCR",
+            "positiveTotal": "Positive Total",
             "totalPCR": "All: PCR",
             "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
