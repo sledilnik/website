@@ -740,6 +740,16 @@
             "gatheringOrganized": "Organized Gathering",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
+        },
+        "weeklyDemographics": {
+            "title": "Weekly Cases – Demographics",
+            "titleMenu": "Age Groups – Weekly",
+            "ageGroup": "Age Group",
+            "male": "Male",
+            "female": "Female",
+            "per100k": "per 100,000 people",
+            "newCases": "New Cases",
+            "ratio": "Cases Ratio M/F"
         }
     },
     "footer": {
@@ -1005,7 +1015,7 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo fs, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo, Week %W of %Y}})"
     },
     "region": {
         "za": "Central Sava Region",
@@ -1593,6 +1603,10 @@
         "chart-cases-by-age-group": {
             "question": "What does the \"Confirmed cases by age groups\" graph mean?",
             "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases, divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
+        },
+        "weekly-demographics-chart": {
+            "question": "What does the \"Weekly Cases - Demographics\" graph mean?",
+            "answer": "[Weekly Cases - Demographics](/en/stats#weekly-demographics-chart) is a heatmap displaying the demographic data of confirmed cases accumulated on a weekly basis. In the default view, the graph shows the case numbers in each age group per 100,000 people. The shades of green indicate low case numbers in the given week, whereas beige and brown colors indicate a large amount of confirmed cases.\n\n Clicking on the *Cases Ratio M/F* button in the lower-left corner, switches to the display of the ratio between confirmed cases amongst males and females. The color scale now ranges between blue (more male confirmed cases) and red (more female confirmed cases)."
         },
         "what-is-sledilnik": {
             "question": "What is Sledilnik?",
