@@ -1,6 +1,6 @@
 <template>
   <div class="custom-container">
-    <div v-if="isStripeSuccess" class="static-page-wrapper">
+    <div v-if="isStripeSuccess" class="static-page-wrapper stripeSuccess">
       <h1>{{ $t("donation.monthly.stripe.success.title") }}</h1>
       <div v-html-md="$t('donation.monthly.stripe.success.description')" />
       <div class="session">
@@ -19,7 +19,7 @@
 
         <div>
           <h3>{{ $t("donation.monthly.stripe.title") }}</h3>
-          <div>
+          <div class="stripeCheckout">
             <stripe-checkout
               ref="checkoutRef"
               mode="subscription"
@@ -236,7 +236,8 @@ img {
   max-width: 100%;
 
   &.upn {
-    padding: 10px 0px;
+    margin: 10px 0px;
+    box-shadow: $element-box-shadow;
   }
 
   &.qr {
@@ -250,20 +251,24 @@ img {
   }
 }
 
-button {
-  padding: 10px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  background-color: $yellow;
-  border: none;
+.stripeCheckout {
+  button {
+    padding: 10px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    background-color: $yellow;
+    border: none;
+    box-shadow: $element-box-shadow;
+  }
 }
 
-.session {
-  margin-top: 50px;
-  font-size: 10px;
-  color: #999999;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
+.stripeSuccess {
+  .session {
+    margin-top: 50px;
+    font-size: 10px;
+    color: #999999;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
 }
-
 </style>
