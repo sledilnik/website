@@ -330,7 +330,6 @@ let renderChartOptions state dispatch =
         xAxis =
             {|
                 ``type`` = "datetime"
-                // max = endDate |> jsTime12h
             |} |> pojo
         yAxis =
            pojo
@@ -345,14 +344,12 @@ let renderChartOptions state dispatch =
                             y =5
                         |} |> pojo
                 |}
-                //   labels = {| reserveSpace = false |} |}
         colorAxis = colorAxis
         tooltip =
            pojo
                {| formatter = fun () -> tooltipFormatter jsThis state
                   shared = true
                   useHTML = true |}
-        credits = credictsOptions
         boost = {| useGPUTranslations = true |} |> pojo
 
         responsive = pojo
