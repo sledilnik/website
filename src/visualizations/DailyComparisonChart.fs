@@ -25,13 +25,15 @@ type DisplayType =
     | HospitalDischarged
     | ICUAdmitted
     | Deceased
-    static member UseStatsData dType = [ Active; New ] |> List.contains dType
+    | Vaccinated
+    static member UseStatsData dType = [ Active; New; Vaccinated ] |> List.contains dType
 
     static member UseLabTestsData dType =[ TestsPCR; PositivePctPCR; TestsHAT; PositivePctHAT ] |> List.contains dType
 
     static member All =
         [ New
           Active
+          Vaccinated
           TestsPCR
           PositivePctPCR
           TestsHAT
@@ -55,6 +57,7 @@ type DisplayType =
         | HospitalDischarged -> I18N.t "charts.dailyComparison.hospitalDischarged"
         | ICUAdmitted -> I18N.t "charts.dailyComparison.icuAdmitted"
         | Deceased -> I18N.t "charts.dailyComparison.deceased"
+        | Vaccinated -> I18N.t "charts.dailyComparison.vaccinated"
 
     member this.GetColor =
         match this with
@@ -68,6 +71,7 @@ type DisplayType =
         | HospitalDischarged -> "#20b16d"
         | ICUAdmitted -> "#d96756"
         | Deceased -> "#6d5b80"
+        | Vaccinated -> "#189a73"
 
 type State =
     { StatsData: StatsData
@@ -148,6 +152,7 @@ let renderChartOptions (state: State) dispatch =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
+        | Vaccinated -> dp.Vaccination.Administered.Today
         | _ -> None
 
     let getTestsValue (dp: LabTestsStats) =

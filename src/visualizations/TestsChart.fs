@@ -183,6 +183,7 @@ let renderByLabChart (state: State) dispatch =
                pojo
                    {| shared = true
                       split = false
+                      formatter = None
                       valueSuffix = if state.DisplayType = ByLabPercent then "%" else ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            responsive =
@@ -320,6 +321,7 @@ let renderTestsChart (state: State) dispatch =
                pojo
                    {| shared = true
                       split = false
+                      formatter = None
                       valueSuffix = ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            responsive =
@@ -343,8 +345,9 @@ let renderPositiveChart (state: State) dispatch =
             pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
         let fmtDate = pts.[0]?point?date
 
-        fmtDate
-        + "<br>"
+        "<b>"
+        + fmtDate
+        + "</b><br>"
         + (pts
            |> Seq.map (fun p ->
                sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
