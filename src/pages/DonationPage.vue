@@ -18,7 +18,7 @@
         <div v-html-md="$t('donation.monthly.description')" />
 
         <div>
-          <h3>{{ $t("donation.monthly.stripe.title") }}</h3>
+          <h3 v-if="language=='sl'">{{ $t("donation.monthly.stripe.title") }}</h3>
           <div class="stripeCheckout">
             <stripe-checkout
               ref="checkoutRef"

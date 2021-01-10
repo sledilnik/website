@@ -1618,8 +1618,10 @@
         },
         "monthly": {
             "title": "Monthly recurring donation",
+            "description": "A regular monthly donation gives us a stable income and distributes your cost evenly throughout the year. Please choose your monthly amount of support below to be paid **by a credit card**:",
             "stripe": {
                 "title": "With credit card",
+                "description": "Your recurring monthly donation can be canceled at any time. Just let us know at drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} EUR / month",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
