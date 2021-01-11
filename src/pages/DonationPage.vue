@@ -80,7 +80,8 @@
             </tr>
 
           </table>
-          <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.authorisation')" />
+
+          <!-- <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.authorisation')" /> -->
         </div>
       </div>
 
@@ -129,8 +130,8 @@
                 <span v-if="language!='sl'"><br>Slovenia</span>
               </td>
             </tr>
-
           </table>
+
           <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
         </div>
 
