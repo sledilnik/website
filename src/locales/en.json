@@ -1018,7 +1018,7 @@
         "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo, Week %W of %Y}})"
     },
     "region": {
-        "si": "Slovenija (all regions)",
+        "si": "Slovenia (all regions)",
         "za": "Central Sava Region",
         "ce": "Savinja Region",
         "po": "Littoral–Inner Carniola",
