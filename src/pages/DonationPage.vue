@@ -170,7 +170,7 @@ export default {
   data () {
     this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
     var items = [];
-    var configItems = process.env.VUE_APP_STRIPE_PRODUCTS.split(";");
+    var configItems = process.env.VUE_APP_STRIPE_SUBSCRIPTIONS.split(";");
     configItems.forEach((configItem) => {
       var pair = configItem.split(":")
       items.push({
