@@ -21,7 +21,7 @@
           <h3 v-if="language=='sl'">{{ $t("donation.monthly.stripe.title") }}</h3>
           <div class="stripeCheckout">
             <stripe-checkout
-              ref="checkoutRef"
+              ref="checkoutSubscriptionRef"
               mode="subscription"
               :pk="publishableKey"
               :success-url="successURL"
@@ -30,7 +30,7 @@
               @loading="v => loading = v"
             />
             <span v-for="(item) in stripeSubscriptions" :key="item.price">
-              <button @click="submit(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount}) }}</button>
+              <button @click="submitSubscription(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount}) }}</button>
             </span>
           </div>
           <div v-html-md="$t('donation.monthly.stripe.description')" />
@@ -203,9 +203,9 @@ export default {
   },
   methods: {
     // You will be redirected to Stripe's secure checkout page
-    submit (item) {
-      this.$refs.checkoutRef.lineItems = item.lineItems;
-      this.$refs.checkoutRef.redirectToCheckout();
+    submitSubscription (item) {
+      this.$refs.checkoutSubscriptionRef.lineItems = item.lineItems;
+      this.$refs.checkoutSubscriptionRef.redirectToCheckout();
     },
   },
 };
