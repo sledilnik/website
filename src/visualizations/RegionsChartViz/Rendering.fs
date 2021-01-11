@@ -53,7 +53,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         regionsWithoutExcluded
         |> List.sortByDescending (fun region -> region.ActiveCases)
 
-    let regionsConfig =
+    let regConfig = 
         regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
@@ -62,6 +62,14 @@ let init (config: RegionsChartConfig) (data : RegionsData)
               Color = color
               Visible = true } )
 
+    let regionsConfig =
+        match config.RelativeTo with
+        | Pop100k ->
+            [ { Key = "si"; Color = "#696969"; Visible = true } ]
+            |> List.append regConfig
+        | _ ->
+            regConfig
+             
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
