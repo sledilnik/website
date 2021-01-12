@@ -523,15 +523,19 @@
             "positiveTests": "Pozitivni testovi",
             "shareOfPositive": "Udio pozitivnih testova (%)",
             "title": "Testiranje",
-            "regular": "Regularni: Lančana reakcija polimeraze",
+            "regular": "Regularni: PCR",
             "negativeTests": "Negativni testovi",
-            "ns-apr20": "Istraživanje: Lančana reakcija polimeraze",
-            "totalPCR": "Svi: Lančana reakcija polimeraze",
+            "ns-apr20": "Istraživanje: PCR",
+            "totalPCR": "Svi: PCR",
             "titleMenu": "Testiranje",
-            "byLabPercent": "Po laboratorijima: % pozitivno",
-            "byLab": "Po laboratorijima: Testovi lančane reakcije polimeraze",
+            "byLabPercent": "Po laboratorijima: postotak pozitivnih",
+            "byLab": "Po laboratorijima: PCR testovi",
             "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima.",
-            "hagt": "Regularno: RAT"
+            "hagt": "Regularni: RAT",
+            "positiveTotal": "Pozitivni ukupno",
+            "positivePCR": "Pozitivni PCR",
+            "positiveHAT": "Pozitivni HAT",
+            "positiveSplit": "Pozitivni PCR i HAT"
         },
         "infections": {
             "rhStaff": "Osoblje domova umirovljenika",
@@ -653,7 +657,7 @@
             "confirmedFromQuarantine": "Potvrđeni iz karantene",
             "confirmedCases": "Potvrđeni slučajevi",
             "sentToQuarantine": "Poslani u karantenu",
-            "title": "Izvori i mjesta zaraze",
+            "title": "Izvori i mjesta zaraze, tjedno",
             "titleMenu": "Izvori i mjesta zaraze",
             "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
             "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – broj slučajeva je možda manji od stvarnog.",
@@ -827,6 +831,16 @@
             "cases": "Potvrđeni slučajevi",
             "all": "Ukupno",
             "averageByDay": "Po danu (prosjek)"
+        },
+        "weeklyDemographics": {
+            "ratio": "Omjer slučajeva M/Ž",
+            "newCases": "Novi slučajevi",
+            "per100k": "na 100.000 stanovnika",
+            "female": "Žene",
+            "male": "Muškarci",
+            "ageGroup": "Dobna skupina",
+            "titleMenu": "Dobne skupine – tjedno",
+            "title": "Demografija potvrđenih slučajeva, tjedno"
         }
     },
     "shortMonth": {
@@ -1256,7 +1270,8 @@
         "kr": "Gorenjska",
         "ce": "Savinjska",
         "po": "Notranjsko-kraška",
-        "kp": "Obalno-kraška"
+        "kp": "Obalno-kraška",
+        "si": "Slovenija (sve regije)"
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
@@ -1429,7 +1444,7 @@
     },
     "week": "Tjedan",
     "restrictionsPage": {
-        "searchPlaceholder": "Unesite niz za pretraživanje",
+        "searchPlaceholder": "Upiši traženi pojam",
         "link": "Poveznica na uredbu (službeni tekst)",
         "notes": "Napomene",
         "extrarule": "Dodatna pravila/tumačenja",
@@ -1446,7 +1461,7 @@
     "faq": {
         "pageTitle": "FAQ",
         "intro": "_Svrha projekta Sledilnik i svih njegovih statističkih dijagrama i tablica/prikaza je prikazati sve postojeće podatke o epidemiji COVID19 u Sloveniji na razumljiv način. Sastavili smo popis često postavljenih pitanja. Popis često postavljenih pitanja trenutačno nije iscrpan, ali se često aktualizira. U slučaju bilo kakvih pitanja, kontaktiraj nas na: info@slednik.org. (Radujemo se pohvalama, povratnim informacijama i prijedlozima!)_",
-        "searchPlaceholder": "Unesite niz za pretraživanje",
+        "searchPlaceholder": "Upiši traženi pojam",
         "what-is-sledilnik": {
             "question": "Što je Sledilnik?",
             "answer": "[Sledilnik](/hr/about) je projekt slobodno dostupnih podataka i otvorenog koda koji prikuplja, analizira i prikazuje neke od najkorisnijih podataka za bolje razumijevanje širenja pandemije koronavirusa i bolesti COVID-19, zajedno s njezinom dinamikom i opsegom. Želimo prikazati jasne grafičke i statističke vizualizacije onoga što nam aktualni podaci govore o širenju virusa u Sloveniji, te osigurati da informacije o veličini i težini problema COVID-19 u Sloveniji postanu dostupne i razumljive svima."
