@@ -63,7 +63,7 @@ type ChartData = {
 let yAxisValueFormatter state jsThis =
     match state.MetricToDisplay with
     | DeathsPerCases ->
-        Utils.percentWith2DecimalSignFormatter jsThis?value
+        Utils.percentWith2DecimalFormatter jsThis?value
     | _ -> jsThis?value
 
 let tooltipValueFormatter state value =
