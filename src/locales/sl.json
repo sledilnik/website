@@ -1696,8 +1696,8 @@
         }
     },
     "donation": {
-        "title": "Podpri Sledilnik!",
-        "intro": "Vsak lahko pomaga pri delovanju Sledilnika.<br>\nZačeli smo spontano, z mini ekipo in mini stroški, a potrebe uporabnikov po informacijah so rasle, z njimi pa tudi naš projekt. Danes nas je že več kot 40, ki se redno, dnevno in tedensko v “prostem” času ukvarjamo s pridobivanjem, analiziranjem in vizualizacijo podatkov ter ustvarjanjem informativnih vsebin.\n\nBrez podpore vas, sledilcev, bralcev in uporabnikov, nam ne bi uspelo biti to, kar smo  - veseli smo vaših pohval, predlogov in predvsem pomoči v obliki deljenja naših informacij na Twitterju, Facebooku, Instagramu in ostalih platformah in pogovorih.\n\n**A za nas vse prihajajo nove nevarnosti in novi izzivi, zato imamo že nove in drzne načrte, ki pa jih ne bomo mogli uresničiti na enak, popolnoma prostovoljni način.<br>\nZato vas prosimo, da naše bodoče delovanje po svojih močeh podprete tudi z donacijo.**\n\nZ vašo podporo bomo krilipoplačali stroške delovanja tehnične infrastrukture in društva, predvsem pa bomo z njimi financirali delovanje novega Sledilnik projekta, ki se bo ukvarjal s podnebnimi in okoljskimi spremembami - in njihovimi posledicami za Slovenijo.\n\nPo vzoru Covid-19 Sledilnika bo projekt _**zbiral, analiziral in objavljal podatke o podnebnih spremembah in njihovih posledicah v Sloveniji. Prav tako bomo analizirali izvajanje ukrepov za blaženje podnebnih sprememb in za prilagajanje nanje, kajti tudi tu bomo potrebovali  boljši pregled nad razsežnostjo težave, pravilne ocene tveganj - hkrati pa odločevalcem pomagali pri snovanju odločitev na podlagi podatkov.**_\n\nIzziv ni majhen, saj je občutek osebne ogroženosti manjši, posledice naših ravnanj pa še bolj dolgoročne, kot smo to izkusili v epidemiji - zato je vaša podpora rednemu delu na tem projektu še toliko bolj cenjena.\n\nKonec leta bomo na teh straneh objavili tudi poročilo, kako smo sredstva porabili.",
+        "title": "Podpiram Sledilnik",
+        "intro": "Vsak lahko pomaga pri delovanju Sledilnika. Prerasli smo spontane začetke in se razvili v široko in raznoliko skupnost, ki se ukvarja s pridobivanjem, analiziranjem in vizualizacijo podatkov ter ustvarjanjem informativnih vsebin na temo akutnih problemov, ki vplivajo na naša življenja.\n\nSmo neprofitno društvo in z vašo podporo bomo  nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih človeškega delovanja. Vsak prispevek pomeni vložek v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj, veseli pa smo tudi vaših pohval, predlogov in deljenja naših informacij na Twitterju, Facebooku, Instagramu in ostalih platformah.\n\nPomagajte nam ostati to, kar smo: znanstvena skupnost, ki nudi javne in prosto dostopne informacije ter analize za vse – za boljši danes in jutri vseh nas.\n\nHvala!",
         "bankDetails": {
             "recipient": "Prejemnik",
             "purposeCode": "Koda namena",
@@ -1711,7 +1711,7 @@
             "title": "Enkratna donacija",
             "banktransfer": {
                 "title": "Bančno nakazilo",
-                "description": "Donacijo nam lahko **nakažete iz bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+                "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
             }
         },
         "monthly": {
