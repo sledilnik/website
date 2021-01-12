@@ -15,7 +15,7 @@ let barMaxHeight = 65
 let showMaxBars = 30
 let collapsedMunicipalityCount = 16
 
-let excludedMunicipalities = Set.ofList ["kraj"]
+let excludedMunicipalities = Set.ofList [ "neznano" ]
 
 type Region =
     { Key : string
