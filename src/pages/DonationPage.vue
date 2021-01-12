@@ -1,10 +1,12 @@
 <template>
   <div class="custom-container">
     <div v-if="isStripeSuccess" class="static-page-wrapper stripeSuccess">
-      <h1>{{ $t("donation.monthly.stripe.success.title") }}</h1>
-      <div v-html-md="$t('donation.monthly.stripe.success.description')" />
+      <h1 v-if="successTranslationKey!=null">{{ $t(`donation.${successTranslationKey}success.title`) }}</h1>
+      <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
+      
+      <div v-html-md="$t('donation.success.description')" />
       <div class="session">
-        {{ $t("donation.monthly.stripe.success.session") }}
+        {{ $t("donation.success.session") }}
         {{ stripeSessionId }}
       </div>
     </div>
@@ -24,7 +26,7 @@
               ref="checkoutSubscriptionRef"
               mode="subscription"
               :pk="publishableKey"
-              :success-url="successURL"
+              :success-url="successURL+'&type=monthly'"
               :cancel-url="cancelURL"
               :locale="language"
               @loading="v => loading = v"
@@ -88,7 +90,7 @@
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
         <div>
-          <!-- <h3>{{ $t("donation.onetime.banktransfer.title") }}</h3> -->
+          <h3>{{ $t("donation.onetime.banktransfer.title") }}</h3>
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -135,11 +137,24 @@
           <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
         </div>
 
-        <!--
+        <div>
+          <h3>{{ $t("donation.onetime.stripe.title") }}</h3>
+          <div v-html-md="$t('donation.onetime.stripe.description')" />
+          <div class="stripeCheckout">
+            <stripe-checkout
+              ref="checkoutOneTimeDonationRef"
+              mode="payment"
+              :pk="publishableKey"
+              :success-url="successURL+'&type=onetime'"
+              :cancel-url="cancelURL"
+              :locale="language"
+              @loading="v => loading = v"
+            />
+            <span v-for="(item) in stripeOneTimeDonations" :key="item.price">
+              <button @click="submitOneTimeDonation(item)">{{ item.amount + " EUR" }}</button>
+            </span>
+          </div>
         </div>
-          TODO: one-time credit card donation
-        </div> 
-        -->
       </div>
 
       <div v-if="language=='sl'">
@@ -190,16 +205,22 @@ export default {
     this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
 
     let urlParams = new URLSearchParams(window.location.search);
-    var stripeSuccess = urlParams.has('stripeSessionId')
+    var stripeSuccess = urlParams.has('stripeSessionId');
+    var successTranslationKey;
     if (stripeSuccess) {
       var stripeSessionId = urlParams.get('stripeSessionId')
+      if (urlParams.has('type')) {
+        successTranslationKey = urlParams.get('type') + '.stripe.'
+      }
       window.history.replaceState({}, '', `${location.pathname}`);
     }
     return {
       isStripeSuccess: stripeSuccess,
       stripeSessionId: stripeSessionId,
+      successTranslationKey: successTranslationKey,
       loading: false,
       stripeSubscriptions: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_SUBSCRIPTIONS),
+      stripeOneTimeDonations: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_ONETIME),
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
       language: `${this.$i18n.i18next.language}`,
@@ -210,6 +231,10 @@ export default {
     submitSubscription (item) {
       this.$refs.checkoutSubscriptionRef.lineItems = item.lineItems;
       this.$refs.checkoutSubscriptionRef.redirectToCheckout();
+    },
+    submitOneTimeDonation (item) {
+      this.$refs.checkoutOneTimeDonationRef.lineItems = item.lineItems;
+      this.$refs.checkoutOneTimeDonationRef.redirectToCheckout();
     },
   },
 };

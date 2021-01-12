@@ -1629,11 +1629,23 @@
             "bank": "Bank",
             "bankBicSwift": "Bank SWIFT/BIC"
         },
+        "success": {
+            "title": "Thank you for your donation",
+            "description": "TODO Your donation will help us with our work ... drustvo@sledilnik.org.",
+            "session": "Payment session ID:"
+        },
         "onetime": {
             "title": "One time support",
             "banktransfer": {
                 "title": "Bank transfer",
                 "description": "Our activities can be supported by a **bank transfer**. The payment instructions are below."
+            },
+            "stripe": {
+                "title": "With credit card",
+                "description": "Choose the amount that you would like to donate:",
+                "success": {
+                    "title": "Thank you for your one-time donation"
+                }
             }
         },
         "monthly": {
@@ -1644,8 +1656,7 @@
                 "description": "Your recurring monthly donation can be canceled at any time. Just let us know at drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / month",
                 "success": {
-                    "title": "Thank you for your monthly recurring donation",
-                    "session": "Payment session ID:"
+                    "title": "Thank you for your monthly recurring donation"
                 }
             }
         },

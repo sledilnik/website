@@ -1707,11 +1707,23 @@
             "bank": "Banka",
             "bankBicSwift": "BIC/SWIFT banke"
         },
+        "success": {
+            "title": "Hvala za vašo donacijo",
+            "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.\n\nČe bi želeli 2-4x letno prejeti novice in povzetke delovanja, nam prosim pišite na donator@sledilnik.org.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org.",
+            "session": "ID seje plačila:"
+        },
         "onetime" : {
             "title": "Enkratna donacija",
             "banktransfer": {
                 "title": "Bančno nakazilo",
                 "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+            },
+            "stripe": {
+                "title": "S kreditno kartico",
+                "description": "Izberite znesek, ki bi nam ga radi donirali:",
+                "success": {
+                    "title": "Hvala za enkratno donacijo"
+                }
             }
         },
         "monthly": {
@@ -1722,9 +1734,7 @@
                 "description": "Vaše redne mesečne donacije lahko kadarkoli prekličete tako, da nam to sporočite na drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / mesec",
                 "success": {
-                    "title": "Hvala za redno mesečno donacijo",
-                    "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.\n\nČe bi želeli 2-4x letno prejeti novice in povzetke delovanja, nam prosim pišite na donator@sledilnik.org.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org.",
-                    "session": "ID seje plačila:"
+                    "title": "Hvala za redno mesečno donacijo"
                 }
             },
             "permanentBankTransferOrder": {
