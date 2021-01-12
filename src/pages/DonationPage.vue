@@ -157,10 +157,12 @@
         </div>
       </div>
 
+      <!--
       <div v-if="language=='sl'">
         <h2>{{ $t("donation.incomeTax.title") }}</h2>
         <div v-html-md="$t('donation.incomeTax.description')" />
       </div>
+      -->
 
       <div>
         <h2>{{ $t("donation.companies.title") }}</h2>
