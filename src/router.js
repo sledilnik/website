@@ -127,7 +127,7 @@ const routes = [
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
-    path: '/podpri',
+    path: '/podpri', // Friendly redirect
     redirect: `/${i18next.language}/donate`,
   },
   {
@@ -229,6 +229,10 @@ const routes = [
         name: 'faq',
         // component: import(/* webpackChunkName: "Faq.route" */ './pages/FAQPage.vue'),
         component: FAQPage
+      },
+      {
+        path: 'podpri', // Friendly redirect
+        redirect: `donate`,
       },
       {
         path: 'links', // Retired page
