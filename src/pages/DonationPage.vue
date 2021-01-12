@@ -5,6 +5,8 @@
       <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
       
       <div v-html-md="$t('donation.success.description')" />
+      <div v-if="successTranslationKey!=null" v-html-md="$t(`donation.${successTranslationKey}success.description`)" />
+
       <div class="session">
         {{ $t("donation.success.session") }}
         {{ stripeSessionId }}

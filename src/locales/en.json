@@ -1631,7 +1631,7 @@
         },
         "success": {
             "title": "Thank you for your donation",
-            "description": "TODO Your donation will help us with our work ... drustvo@sledilnik.org.",
+            "description": "Your donation will help us with our future work.<br>We kindly ask you to encourage others to donate as well.",
             "session": "Payment session ID:"
         },
         "onetime": {
@@ -1644,7 +1644,8 @@
                 "title": "With credit card",
                 "description": "Choose the amount that you would like to donate:",
                 "success": {
-                    "title": "Thank you for your one-time donation"
+                    "title": "Thank you for your one-time donation",
+                    "description": ""
                 }
             }
         },
@@ -1653,10 +1654,11 @@
             "description": "A regular monthly donation gives us a stable income and distributes your cost evenly throughout the year. Please choose your monthly amount of support below to be paid **by a credit card**:",
             "stripe": {
                 "title": "With credit card",
-                "description": "Your recurring monthly donation can be canceled at any time. Just let us know at drustvo@sledilnik.org.",
+                "description": "Your recurring monthly donation can be stopped at any time. Just let us know at drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / month",
                 "success": {
-                    "title": "Thank you for your monthly recurring donation"
+                    "title": "Thank you for your monthly recurring donation",
+                    "description": "If you would like to stop your recurring donation please let us know at drustvo@sledilnik.org."
                 }
             }
         },

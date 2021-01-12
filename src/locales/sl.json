@@ -1709,7 +1709,7 @@
         },
         "success": {
             "title": "Hvala za vašo donacijo",
-            "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.\n\nČe bi želeli 2-4x letno prejeti novice in povzetke delovanja, nam prosim pišite na donator@sledilnik.org.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org.",
+            "description": "Vaša donacija nam bo pomagala pri našem delu.<br>Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.",
             "session": "ID seje plačila:"
         },
         "onetime" : {
@@ -1722,7 +1722,9 @@
                 "title": "S kreditno kartico",
                 "description": "Enkratni znesek podpore nam lahko namenite tudi z uporabo kreditne kartice. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje:",
                 "success": {
-                    "title": "Hvala za enkratno donacijo"
+                    "title": "Hvala za enkratno donacijo",
+                    "description": ""
+
                 }
             }
         },
@@ -1734,7 +1736,8 @@
                 "description": "Vaše redne mesečne donacije lahko kadarkoli prekličete tako, da nam to sporočite na drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / mesec",
                 "success": {
-                    "title": "Hvala za redno mesečno donacijo"
+                    "title": "Hvala za redno mesečno donacijo",
+                    "description": "V kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."
                 }
             },
             "permanentBankTransferOrder": {
