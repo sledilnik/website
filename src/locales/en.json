@@ -1642,7 +1642,7 @@
             "stripe": {
                 "title": "With credit card",
                 "description": "Your recurring monthly donation can be canceled at any time. Just let us know at drustvo@sledilnik.org.",
-                "donateButton": "{{amount}} EUR / month",
+                "donateButton": "{{amount}} / month",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
                     "session": "Payment session ID:"

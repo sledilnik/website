@@ -30,7 +30,7 @@
               @loading="v => loading = v"
             />
             <span v-for="(item) in stripeSubscriptions" :key="item.price">
-              <button @click="submitSubscription(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount}) }}</button>
+              <button @click="submitSubscription(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount + " EUR"}) }}</button>
             </span>
           </div>
           <div v-html-md="$t('donation.monthly.stripe.description')" />

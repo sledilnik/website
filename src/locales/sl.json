@@ -1720,7 +1720,7 @@
             "stripe": {
                 "title": "S kreditno kartico",
                 "description": "Vaše redne mesečne donacije lahko kadarkoli prekličete tako, da nam to sporočite na drustvo@sledilnik.org.",
-                "donateButton": "{{amount}} EUR / mesec",
+                "donateButton": "{{amount}} / mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
                     "description": "Vaša donacija nam bo pomagala pri našem delu. Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.\n\nČe bi želeli 2-4x letno prejeti novice in povzetke delovanja, nam prosim pišite na donator@sledilnik.org.\n\nV kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org.",
