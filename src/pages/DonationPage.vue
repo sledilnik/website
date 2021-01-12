@@ -163,6 +163,24 @@
 <script>
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
 
+function parseStripeItemsFromConfig(config) {
+  var items = [];
+  var configItems = config.split(";");
+  configItems.forEach((configItem) => {
+    var pair = configItem.split(":")
+    items.push({
+        amount: pair[0],
+        lineItems:[
+          {
+            price: pair[1],
+            quantity: 1,
+          },
+        ]
+      })
+    });
+  return items
+}
+
 export default {
   name: 'DonationPage',
   components: {
@@ -170,21 +188,6 @@ export default {
   },
   data () {
     this.publishableKey = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY;
-    var items = [];
-    var configItems = process.env.VUE_APP_STRIPE_SUBSCRIPTIONS.split(";");
-    configItems.forEach((configItem) => {
-      var pair = configItem.split(":")
-      items.push({
-          amount: pair[0],
-          lineItems:[
-            {
-              price: pair[1],
-              quantity: 1,
-            },
-          ]
-        })
-      
-    });
 
     let urlParams = new URLSearchParams(window.location.search);
     var stripeSuccess = urlParams.has('stripeSessionId')
@@ -196,7 +199,7 @@ export default {
       isStripeSuccess: stripeSuccess,
       stripeSessionId: stripeSessionId,
       loading: false,
-      stripeSubscriptions: items,
+      stripeSubscriptions: parseStripeItemsFromConfig(process.env.VUE_APP_STRIPE_SUBSCRIPTIONS),
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
       language: `${this.$i18n.i18next.language}`,
