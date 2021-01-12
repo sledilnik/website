@@ -1720,7 +1720,7 @@
             },
             "stripe": {
                 "title": "S kreditno kartico",
-                "description": "Izberite znesek, ki bi nam ga radi donirali:",
+                "description": "Enkratni znesek podpore nam lahko namenite tudi z uporabo kreditne kartice. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje:",
                 "success": {
                     "title": "Hvala za enkratno donacijo"
                 }
