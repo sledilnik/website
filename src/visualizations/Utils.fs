@@ -83,6 +83,16 @@ let percentWith1DecimalFormatter (value: float) =
         (abs (value / 100.)),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
 
+let percentWith2DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2 |})
+
+let percentWith3DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=3 |})
+
 let percentWith1DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
         (abs (value / 100.)),
@@ -298,7 +308,7 @@ module Dictionaries =
         Name : string
         Population : int option }
 
-    let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"]
+    let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"; "t" ; "n"]
 
     let regions =
         [ "si",  "SLOVENIJA",  Some 2095861

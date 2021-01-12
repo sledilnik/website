@@ -340,7 +340,7 @@ let renderChartOptions
     let valuesLabelFormatter (value: float) =
         match state.ChartMode.ScaleType with
         | Absolute -> (I18N.NumberFormat.formatNumber (abs value))
-        | Relative -> Utils.percentWith3DecimalSignFormatter value
+        | Relative -> Utils.percentWith3DecimalFormatter value
 
     let dateText = (I18N.tOptions "charts.common.dataDate" {| date = latestDate  |})
 
@@ -402,7 +402,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfInfectedPopulation")
-                         (Utils.percentWith2DecimalSignFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
                          (chartText "populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->
@@ -420,7 +420,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfDeceasedPopulation")
-                         (Utils.percentWith2DecimalSignFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
                          (chartText "populationTotal")
                          (populationOf sex ageGroup)
                  | DeathsPerInfections ->
@@ -430,7 +430,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfDeceasedConfirmedCases")
-                         (Utils.percentWith2DecimalSignFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
             |}
         series = [|
             {| name = chartText "male"
