@@ -1715,25 +1715,21 @@
         "onetime" : {
             "title": "Enkratna donacija",
             "banktransfer": {
-                "title": "Bančno nakazilo",
                 "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
             },
             "stripe": {
-                "title": "S kreditno kartico",
-                "description": "Enkratni znesek podpore nam lahko namenite tudi z uporabo kreditne kartice. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje:",
+                "description": "<br>\n\nEnkratni znesek podpore nam lahko namenite tudi **z uporabo kreditne kartice**. Izberite s kakšnim zneskom ste pripravljeni enkratno podpreti naše delovanje:",
                 "success": {
                     "title": "Hvala za enkratno donacijo",
                     "description": ""
-
                 }
             }
         },
         "monthly": {
             "title": "Redna mesečna donacija",
-            "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vam pa strošek podpore enakomerno porazdeli skozi leto. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje.",
             "stripe": {
-                "title": "S kreditno kartico",
-                "description": "Vaše redne mesečne donacije lahko kadarkoli prekličete tako, da nam to sporočite na drustvo@sledilnik.org.",
+                "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vam pa strošek podpore enakomerno porazdeli skozi leto. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
+                "stopping": "Takšno donacijo lahko kadarkoli ustavite tako, da nam to željo sporočite na drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
@@ -1741,8 +1737,7 @@
                 }
             },
             "permanentBankTransferOrder": {
-                "title": "Z nakazilom z bančnega računa",
-                "description": "Redna mesečna donacija je mogoča z vzpostavitvijo trajnega naloga, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
+                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
                 "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi."
             }
         },

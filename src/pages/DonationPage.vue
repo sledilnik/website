@@ -19,10 +19,9 @@
 
       <div>
         <h2>{{ $t("donation.monthly.title") }}</h2>
-        <div v-html-md="$t('donation.monthly.description')" />
 
         <div>
-          <h3 v-if="language=='sl'">{{ $t("donation.monthly.stripe.title") }}</h3>
+          <div v-html-md="$t('donation.monthly.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
               ref="checkoutSubscriptionRef"
@@ -37,11 +36,10 @@
               <button @click="submitSubscription(item)">{{ $t("donation.monthly.stripe.donateButton", {amount: item.amount + " EUR"}) }}</button>
             </span>
           </div>
-          <div v-html-md="$t('donation.monthly.stripe.description')" />
+          <div v-html-md="$t('donation.monthly.stripe.stopping')" />
         </div>
 
         <div v-if="language=='sl'">
-          <h3>{{ $t("donation.monthly.permanentBankTransferOrder.title") }}</h3>
           <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
           <table class="bankDetails">
             <tr>
@@ -92,7 +90,6 @@
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
         <div>
-          <h3>{{ $t("donation.onetime.banktransfer.title") }}</h3>
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -140,7 +137,6 @@
         </div>
 
         <div>
-          <h3>{{ $t("donation.onetime.stripe.title") }}</h3>
           <div v-html-md="$t('donation.onetime.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
@@ -250,10 +246,6 @@ export default {
 .donation {
   h2 {
     margin-top: 48px;
-  }
-
-  h3 {
-    margin-top: 36px;
   }
 }
 
