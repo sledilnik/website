@@ -10,14 +10,10 @@ if (process.env.NODE_ENV != 'production') {
   process.env.VUE_APP_DESC = process.env.VUE_APP_DESC + ' (preview)'
 }
 
-indexTemplate = process.env.CADDY_BUILD == '1' ? 'index_caddy.html' : 'index.html'
-
-console.log("Using template", indexTemplate)
-
 module.exports = {
   productionSourceMap: process.env.NODE_ENV != 'production',
-  publicPath: process.env.C19_PUBLIC_PATH || '/',
-  outputDir: process.env.C19_OUTPUT_DIR || 'dist',
+  publicPath: process.env.SLEDILNIK_PUBLIC_PATH || '/',
+  outputDir: 'dist',
   filenameHashing: true,
   devServer: {
     disableHostCheck: true,
@@ -25,12 +21,12 @@ module.exports = {
   pages: {
     index: {
       entry: ['src/index.js'],
-      template: indexTemplate,
+      template: 'index.html',
       filename: 'index.html',
     },
     embed: {
       entry: ['src/embed.js'],
-      template: indexTemplate,
+      template: 'index.html',
       filename: 'embed.html',
     },
   },
@@ -46,8 +42,8 @@ module.exports = {
   },
   pluginOptions: {
     webpackBundleAnalyzer: {
-      analyzerMode: process.env.DISPLAY ? 'server' : 'disabled',
-      openAnalyzer: process.env.DISPLAY ? true : false,
+      analyzerMode: process.env.SLEDILNIK_WBA || 'disabled',
+      openAnalyzer: process.env.SLEDILNIK_WBA === 'server',
     },
   },
   chainWebpack: config => {

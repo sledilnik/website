@@ -22,4 +22,7 @@ new Vue({
   router,
   store,
   i18n,
+  mounted() {
+    document.dispatchEvent(new Event('render-event'))
+  }
 }).$mount('#app')
