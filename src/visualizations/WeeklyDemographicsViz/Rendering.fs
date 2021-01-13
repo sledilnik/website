@@ -84,6 +84,7 @@ let renderChartOptions state dispatch =
             value = value
             weeks = weeksFromStartDate
             ageGroupKey = ageGroupData.AgeGroupKey.Label
+            totalCases = ageGroupData.Data.All
             maleCases = ageGroupData.Data.Male
             femaleCases = ageGroupData.Data.Female
             dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |}
@@ -101,24 +102,25 @@ let renderChartOptions state dispatch =
         let ageGroupKey = ageGroupData.AgeGroupKey
         let populationStats = populationStatsForAgeGroup ageGroupKey
 
+        let totalPopulation = populationStats.Male + populationStats.Female |> float
+        let malePopulation = populationStats.Male |> float
+        let femalePopulation = populationStats.Female |> float
+
+        let totalRelCases =
+            ageGroupData.Data.All
+            |> Array.map ((*)  (100000./totalPopulation))
+        let relMaleCases =
+            ageGroupData.Data.Male
+            |> Array.map ((*) (100000./malePopulation))
+        let relFemaleCases =
+            ageGroupData.Data.Female
+            |> Array.map ((*) (100000./femalePopulation))
+
         let timelineArray =
             match state.Metrics.MetricsType with
             | NewCases ->
-                let totalPopulation = populationStats.Male + populationStats.Female |> float
-
-                Array.map (((*) (100000./ totalPopulation)) >> (fun x -> Math.Log (x + Math.E))) ageGroupData.Data.All
-
+                Array.map (( ( * ) (100000./ totalPopulation)) >> (fun x -> Math.Log (x + Math.E))) ageGroupData.Data.All
             | CasesRatio ->
-                let malePopulation = populationStats.Male |> float
-                let femalePopulation = populationStats.Female |> float
-
-                let relMaleCases =
-                    ageGroupData.Data.Male
-                    |> Array.map ((*) (100000./malePopulation))
-                let relFemaleCases =
-                    ageGroupData.Data.Female
-                    |> Array.map ((*) (100000./femalePopulation))
-
                 let computeRatio
                     (x:float)
                     (y:float)
@@ -126,16 +128,15 @@ let renderChartOptions state dispatch =
                     match x, y with
                     | 0., 0. -> 1.
                     | _, 0. -> 2.
-                    | _, _ -> min (x / y) 2. |> max (0.5)
+                    | _, _ -> min (x / y) 2. |> max (0.5) // Trims the values to avoid infinities
 
+                Array.map2 (computeRatio) relFemaleCases relMaleCases
 
-                let ratio = Array.map2 (computeRatio) relFemaleCases relMaleCases
-
-                ratio
+        let tooltipAgeGroupData = { ageGroupData with Data = {All = totalRelCases; Male = relMaleCases; Female = relFemaleCases}}
 
         let points =
             timelineArray
-            |> Array.mapi (fun index value -> mapPoint index ageGroupId ageGroupData value)
+            |> Array.mapi (fun index value -> mapPoint index ageGroupId tooltipAgeGroupData value)
 
 
         let series = {|
@@ -160,9 +161,10 @@ let renderChartOptions state dispatch =
         res
 
     let sparklineFormatter
-        ( state: State )
-        ( maleCases: float[] )
-        ( femaleCases: float[] ) =
+        (state: State)
+        (maleCases: float[])
+        (femaleCases: float[])
+        : string =
 
         let series =
             let maleData =
@@ -262,15 +264,15 @@ let renderChartOptions state dispatch =
 
 
     let tooltipFormatter
-        ( jsThis: obj )
-        ( state: State ) =
+        (jsThis: obj)
+        (state: State) =
 
-        let ( point:obj ) = jsThis?point
-        let ( date:string ) = point?dateSpan
-        let ( ageGroupKey:string ) = point?ageGroupKey
-        let ( maleCases:float[] ) = point?maleCases
-        let ( femaleCases:float[] ) = point?femaleCases
-        let ( week:int ) = point?weeks
+        let (point:obj) = jsThis?point
+        let (date:string) = point?dateSpan
+        let (ageGroupKey:string) = point?ageGroupKey
+        let (maleCases:float[]) = point?maleCases
+        let (femaleCases:float[]) = point?femaleCases
+        let (week:int) = point?weeks
 
         let maleCasesForWeek = maleCases.[week]
         let femaleCasesForWeek = femaleCases.[week]
@@ -279,7 +281,7 @@ let renderChartOptions state dispatch =
 
         let sparkline = sparklineFormatter state maleCases femaleCases
 
-        let label = sprintf "<b> %s </b>" (date.ToString())
+        let label = sprintf "<b> %s </b>" date
 
         label
             + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.weeklyDemographics.ageGroup") (ageGroupKey)
