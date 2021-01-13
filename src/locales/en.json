@@ -1620,7 +1620,7 @@
     },
     "donation": {
         "title": "I support Sledilnik",
-        "intro": " We're **Sledilnik scientific society** _**TODO:**_ in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Z vašo donacijo boste investirali v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj.\n\nWith your contribution you will help us stay what we are: scientific society, offering public open data and analyses – **for better present and future of us all**.\n\nThank you for caring!",
+        "intro": " We're **Sledilnik scientific society** _**TODO:** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Z vašo donacijo boste investirali v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj_.\n\nWith your contribution you will help us stay what we are: scientific society, offering public open data and analyses – **for better present and future of us all**. Thank you for caring!",
         "bankDetails": {
             "recipient": "Recipient",
             "purposeCode": "Purpose code",
