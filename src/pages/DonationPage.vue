@@ -47,7 +47,7 @@
               <td>
                 Znanstveno društvo Sledilnik
                 <br>Celovška cesta 111
-                <br>Ljubljana
+                <br><span v-if="language!='sl'">1000 </span>Ljubljana
                 <span v-if="language!='sl'"><br>Slovenia</span>
               </td>
             </tr>
@@ -76,7 +76,7 @@
               <td>
                 Delavska hranilnica d.d.
                 <br>Miklošičeva 5
-                <br>Ljubljana
+                <br><span v-if="language!='sl'">1000 </span>Ljubljana
                 <span v-if="language!='sl'"><br>Slovenia</span>
               </td>
             </tr>
@@ -98,7 +98,7 @@
               <td>
                 Znanstveno društvo Sledilnik
                 <br>Celovška cesta 111
-                <br>Ljubljana
+                <br><span v-if="language!='sl'">1000 </span>Ljubljana
                 <span v-if="language!='sl'"><br>Slovenia</span>
               </td>
             </tr>
@@ -127,7 +127,7 @@
               <td>
                 Delavska hranilnica d.d.
                 <br>Miklošičeva 5
-                <br>Ljubljana
+                <br><span v-if="language!='sl'">1000 </span>Ljubljana
                 <span v-if="language!='sl'"><br>Slovenia</span>
               </td>
             </tr>
