@@ -1718,7 +1718,7 @@
                 "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
             },
             "stripe": {
-                "description": "<br>\n\nEnkratni znesek podpore nam lahko namenite tudi **z uporabo kreditne kartice**. Izberite s kakšnim zneskom ste pripravljeni enkratno podpreti naše delovanje:",
+                "description": "Enkratni znesek podpore nam lahko namenite tudi **z uporabo kreditne kartice**. Izberite s kakšnim zneskom ste pripravljeni enkratno podpreti naše delovanje:",
                 "success": {
                     "title": "Hvala za enkratno donacijo",
                     "description": ""

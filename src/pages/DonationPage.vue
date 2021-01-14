@@ -271,17 +271,17 @@ img {
   max-width: 100%;
 
   &.upn {
-    margin: 10px 0px;
+    margin: 0 0 20px;
     box-shadow: $element-box-shadow;
   }
 
   &.qr {
     float: right;
-    padding: 0 0 20px 20px;
+    margin: 0 0 20px 20px;
 
     @media only screen and (max-width: 400px) {
       width: 100%;
-      padding: 0 0 20px 0;
+      margin: 0 0 20px 0;
     }
   }
 }
