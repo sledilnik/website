@@ -114,13 +114,13 @@ let renderAllHospitalSeriesData state =
     let hospitalSeries =
         [|
           { SeriesType = DeceasedInIcu
-            SeriesId = "deceased-icu"; Color = "#6d5b80" }
+            SeriesId = "deceased-icu"; Color = "#c59eef" }
           { SeriesType = DeceasedAcute
-            SeriesId = "deceased-acute"; Color = "#8c71a8" }
+            SeriesId = "deceased-acute"; Color = "#a483c7" }
           { SeriesType = DeceasedCare
-            SeriesId = "deceased-care"; Color = "#a483c7" }
+            SeriesId = "deceased-care"; Color = "#8c71a8" }
           { SeriesType = DeceasedOther
-            SeriesId = "deceased-rest"; Color = "#c59eef" }
+            SeriesId = "deceased-rest"; Color = "#6d5b80" }
          |]
 
     let renderSeriesData series =
@@ -181,9 +181,9 @@ let renderAllPersonTypeSeriesData state =
     let ptSeries =
         [|
           { SeriesType = DeceasedTypeOther
-            SeriesId = "deceased-other"; Color = "#8c71a8" }
+            SeriesId = "deceased-other"; Color = "#c59eef" }
           { SeriesType = DeceasedTypeRhOccupant
-            SeriesId = "deceased-rhoccupant"; Color = "#c59eef" }
+            SeriesId = "deceased-rhoccupant"; Color = "#8c71a8" }
          |]
 
     let renderSeriesData series =
