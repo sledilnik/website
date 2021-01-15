@@ -7,6 +7,8 @@ type DisplayMetricsType =
     | HospitalsToday
     | ByAgeToDate
     | ByAgeToday
+    | ByTypeToDate
+    | ByTypeToday
 
 type VisualizationPage = {
     Id: string
@@ -23,4 +25,9 @@ let (|AgeGroupsMetricsType|_|) (metricsType: DisplayMetricsType) =
     match metricsType with
     | ByAgeToDate -> Some AgeGroupsMetricsType
     | ByAgeToday -> Some AgeGroupsMetricsType
+    | _ -> None
+let (|PersonTypeMetricsType|_|) (metricsType: DisplayMetricsType) =
+    match metricsType with
+    | ByTypeToDate -> Some PersonTypeMetricsType
+    | ByTypeToday -> Some PersonTypeMetricsType
     | _ -> None

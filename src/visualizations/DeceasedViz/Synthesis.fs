@@ -20,14 +20,18 @@ type SeriesType =
     | DeceasedCare
     | DeceasedOther
     | DeceasedAgeGroup of int
+    | DeceasedTypeRhOccupant
+    | DeceasedTypeOther
 
-let (|HospitalSeriesType|AgeGroupSeriesType|) (seriesType: SeriesType) =
+let (|HospitalSeriesType|AgeGroupSeriesType|PersonTypeSeriesType|) (seriesType: SeriesType) =
     match seriesType with
     | DeceasedInIcu -> HospitalSeriesType
     | DeceasedAcute -> HospitalSeriesType
     | DeceasedCare -> HospitalSeriesType
     | DeceasedOther -> HospitalSeriesType
     | DeceasedAgeGroup _ -> AgeGroupSeriesType
+    | DeceasedTypeRhOccupant -> PersonTypeSeriesType 
+    | DeceasedTypeOther -> PersonTypeSeriesType
 
 type SeriesInfo = {
     SeriesType: SeriesType
@@ -104,7 +108,7 @@ let constructHospitalsSeriesData state series =
             |} |> pojo
         )
         |> Array.ofSeq
-    | AgeGroupSeriesType -> invalidOp "todo"
+    | _ -> invalidOp "todo"
 
 let renderAllHospitalSeriesData state =
     let hospitalSeries =
@@ -132,6 +136,69 @@ let renderAllHospitalSeriesData state =
 
     hospitalSeries |> Array.map renderSeriesData
 
+let constructPersonTypeSeriesData state series =
+
+    let getPersonTypeSeries state series =
+        let data =
+            state.StatsData
+            |> Seq.map (fun dataPoint ->
+                {| date = dataPoint.Date 
+                   value =
+                        match series.SeriesType with
+                        | DeceasedTypeRhOccupant -> dataPoint.DeceasedPerType.RhOccupant
+                        | DeceasedTypeOther -> dataPoint.DeceasedPerType.Other
+                        | _ -> invalidOp "bug"
+                   |} )
+        match state.Page.MetricsType with
+        | ByTypeToday ->
+            data 
+            |> Seq.pairwise
+            |> Seq.map
+                   (fun (prevDay, currDay) ->
+                        {| date = currDay.date
+                           value =  match currDay.value with
+                                    | Some value -> currDay.value |> subtract prevDay.value 
+                                    | None -> None |} )
+        | ByTypeToDate -> data
+        | _ -> invalidOp "bug"
+
+    match series.SeriesType with
+    | PersonTypeSeriesType ->
+        getPersonTypeSeries state series
+        |> Seq.map (fun dp ->
+            {|
+                x = dp.date |> jsTime12h
+                y = dp.value
+                seriesId = series.SeriesId
+                date = I18N.tOptions "days.longerDate" {| date = dp.date |}
+                fmtTotal = dp.value |> string
+            |} |> pojo
+        )
+        |> Array.ofSeq
+    | _ -> invalidOp "todo"
+
+let renderAllPersonTypeSeriesData state =
+    let ptSeries =
+        [|
+          { SeriesType = DeceasedTypeOther
+            SeriesId = "deceased-other"; Color = "#8c71a8" }
+          { SeriesType = DeceasedTypeRhOccupant
+            SeriesId = "deceased-rhoccupant"; Color = "#c59eef" }
+         |]
+
+    let renderSeriesData series =
+        {|
+            ``type`` = "column"
+            visible = true
+            color = series.Color
+            name = I18N.tt "charts.deceased" series.SeriesId
+            data = constructPersonTypeSeriesData state series
+            animation = false
+        |}
+        |> pojo
+
+    ptSeries |> Array.map renderSeriesData
+
 let renderAllAgeGroupsSeriesData state =
     let calculationFormula =
         match state.Page.MetricsType with
@@ -147,4 +214,5 @@ let renderAllSeriesData state =
     match state.Page.MetricsType with
     | HospitalMetricsType -> renderAllHospitalSeriesData state
     | AgeGroupsMetricsType -> renderAllAgeGroupsSeriesData state
+    | PersonTypeMetricsType -> renderAllPersonTypeSeriesData state
     | _ -> invalidOp "todo"

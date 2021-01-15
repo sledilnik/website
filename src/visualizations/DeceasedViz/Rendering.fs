@@ -32,6 +32,14 @@ let availablePages = [|
       MetricsType = ByAgeToday; ChartType = StackedBarNormal }
     { Id = "deceasedByAgeTodayRelative"
       MetricsType = ByAgeToday; ChartType = StackedBarPercent }
+    { Id = "deceasedByTypeToDate"
+      MetricsType = ByTypeToDate; ChartType = StackedBarNormal }
+    { Id = "deceasedByTypeToDateRelative"
+      MetricsType = ByTypeToDate; ChartType = StackedBarPercent }
+    { Id = "deceasedByTypeToday"
+      MetricsType = ByTypeToday; ChartType = StackedBarNormal }
+    { Id = "deceasedByTypeTodayRelative"
+      MetricsType = ByTypeToday; ChartType = StackedBarPercent }
 |]
 
 type Msg =
@@ -122,7 +130,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
                {| xAxis with
                       plotBands =
                         match state.Page.MetricsType with
-                        | AgeGroupsMetricsType ->
+                        | AgeGroupsMetricsType | PersonTypeMetricsType ->
                             [|
                                {| from=jsTime <| previousSunday
                                   ``to``=jsTime <| lastDataPoint.Date
@@ -198,7 +206,7 @@ let render (state: DeceasedVizState) dispatch =
             renderPagesSwitchers state.Page (ChangePage >> dispatch)
 
             match state.Page.MetricsType with
-            | AgeGroupsMetricsType ->
+            | AgeGroupsMetricsType | PersonTypeMetricsType ->
                 Html.div [
                     prop.className "disclaimer"
                     prop.children [
