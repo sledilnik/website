@@ -1620,7 +1620,7 @@
     },
     "donation": {
         "title": "I support Sledilnik",
-        "intro": "**Sledilnik scientific not-for-profit society** encourages you to recognize our endeavors and efforts by contributing at your abilities. With your support, we will be able to continue analyzing and processing critical and society important datasets and making it publicly available in a representable and easy-to-understand manner.\n\nWith your contribution you will help us stay what we are: scientific society, offering public open data and analyses – **for better present and future of us all**. Thank you for caring!",
+        "intro": "Here at the **Sledilnik scientific non-profit society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
         "bankDetails": {
             "recipient": "Recipient",
             "purposeCode": "Purpose code",
@@ -1638,10 +1638,10 @@
         "onetime": {
             "title": "One-time support",
             "banktransfer": {
-                "description": "Our activities can be supported **by a bank transfer**. The payment instructions are as follows:"
+                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:"
             },
             "stripe": {
-                "description": "You can also donate **by credit card**. Choose the amout for your one-time support below:",
+                "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
                 "success": {
                     "title": "Thank you for your one-time donation",
                     "description": ""
@@ -1651,9 +1651,9 @@
         "monthly": {
             "title": "Monthly recurring donation",
             "stripe": {
-                "description": "A regular monthly donation gives us a stable income and distributes your cost evenly throughout the year. Please choose your monthly amount of support below to be paid **by a credit card**:",
+                "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
                 "donateButton": "{{amount}} / month",
-                "stopping": "Such donation can be stopped at any time. Just let us know at drustvo@sledilnik.org.",
+                "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
                     "description": "If you would like to stop your recurring donation please let us know at drustvo@sledilnik.org."
@@ -1662,11 +1662,11 @@
         },
         "companies": {
             "title": "For companies",
-            "description": "Please contact us at drustvo@sledilnik.org to prepare a donation contract and/or other necessary documentation by arrangement."
+            "description": "Please contact us at drustvo@sledilnik.org to prepare a donation contract and/or other necessary documentation as required."
         },
         "other": {
             "title": "Other ways of support",
-            "description": "For a few more ways to support us from within Slovenia you might want to check [slovenian translation of this page](/sl/donate).\n\nWe're grateful for open data, suggestions and shares of our posts on Twitter, Facebook, Instagram and other platforms, as well as new features and source code fixes on GitHub.\n\nIf you have a different proposal to support our activities or for cooperation, please do not hesitate and contact us at drustvo@sledilnik.org and we will be happy to find a solution."
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for open data, suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
         }
     }
 }
