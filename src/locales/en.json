@@ -1620,7 +1620,7 @@
     },
     "donation": {
         "title": "I support Sledilnik",
-        "intro": " We're **Sledilnik scientific society** _**TODO:** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Z vašo donacijo boste investirali v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj_.\n\nWith your contribution you will help us stay what we are: scientific society, offering public open data and analyses – **for better present and future of us all**. Thank you for caring!",
+        "intro": "**Sledilnik scientific not-for-profit society** encourages you to recognize our endeavors and efforts by contributing at your abilities. With your support, we will be able to continue analyzing and processing critical and society important datasets and making it publicly available in a representable and easy-to-understand manner.\n\nWith your contribution you will help us stay what we are: scientific society, offering public open data and analyses – **for better present and future of us all**. Thank you for caring!",
         "bankDetails": {
             "recipient": "Recipient",
             "purposeCode": "Purpose code",
