@@ -86,7 +86,7 @@ module Metrics  =
         { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
-        { Metric=VacAdministeredToday;  Color="#189a73"; Visible=true;  Type=Today;  Id="vaccinationAdministered" }
+        // DISABLED { Metric=VacAdministeredToday;  Color="#189a73"; Visible=true;  Type=Today;  Id="vaccinationAdministered" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
         { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" }

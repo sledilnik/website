@@ -33,7 +33,7 @@ type DisplayType =
     static member All =
         [ New
           Active
-          Vaccinated
+          // DISABLED Vaccinated 
           TestsPCR
           PositivePctPCR
           TestsHAT
