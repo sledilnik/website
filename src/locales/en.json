@@ -322,6 +322,7 @@
             "admitted": "Admitted",
             "hospitalized": "Hospitalized",
             "icu": "In ICU",
+            "niVentilator": "On Ventilator (non-invasive)",
             "ventilator": "On Ventilator (intubated)",
             "discharged": "Discharged",
             "deceased": "Died",

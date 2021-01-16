@@ -827,6 +827,7 @@
             "admitted": "Sprejeti",
             "hospitalized": "Hospitalizirani",
             "icu": "V intenzivni terapiji",
+            "niVentilator": "Na respiratorju (neinvazivno)",
             "ventilator": "Na respiratorju (intubirani)",
             "discharged": "Odpuščeni",
             "deceased": "Umrli",

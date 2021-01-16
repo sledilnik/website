@@ -63,7 +63,8 @@ type Series =
     | IcuIn
     | IcuOut
     | IcuDeceased
-    | Critical
+    | NivVentilator
+    | InvVentilator
     | InHospitalIn
     | InHospitalOut
     | InHospitalDeceased
@@ -76,20 +77,21 @@ module Series =
     let structure hTypeToDisplay =
         match hTypeToDisplay with
         | CareHospitals -> [ CareIn; Care; CareOut; CareDeceased; ]
-        | CovidHospitals -> [ InHospitalIn; InHospital; Icu; Critical; InHospitalOut; InHospitalDeceased; IcuDeceased ]
-        | CovidHospitalsICU -> [ IcuIn; IcuMinus; Critical; IcuOut; IcuDeceased ]
+        | CovidHospitals -> [ InHospitalIn; InHospital; Icu; NivVentilator; InvVentilator; InHospitalOut; InHospitalDeceased; IcuDeceased ]
+        | CovidHospitalsICU -> [ IcuIn; IcuMinus; NivVentilator; InvVentilator; IcuOut; IcuDeceased ]
 
     let byHospital =
         [ InHospital; ]
 
     let getSeriesInfo = function
         | InHospital            -> "#de9a5a", "hospitalized"
-        | Icu                   -> "#d96756", "icu"
-        | IcuMinus              -> "#d96756", "icu-minus"
-        | IcuIn                 -> "#d5c768", "icu-admitted"
+        | Icu                   -> "#e79f94", "icu"
+        | IcuMinus              -> "#d97d56", "icu-minus"
+        | IcuIn                 -> "#d97d56", "icu-admitted"
         | IcuOut                -> "#de9a5a", "icu-discharged"
         | IcuDeceased           -> "#6d5b80", "icu-deceased"
-        | Critical              -> "#bf5747", "ventilator"
+        | NivVentilator         -> "#d96756", "niVentilator"
+        | InvVentilator         -> "#bf5747", "ventilator"
         | InHospitalIn          -> "#d5c768", "admitted"
         | InHospitalOut         -> "#8cd4b2", "discharged"
         | InHospitalDeceased    -> "#8c71a8", "deceased"
@@ -259,12 +261,14 @@ let renderStructureChart (state : State) dispatch =
                 |> subtract ps.critical.today
             | IcuMinus ->
                 ps.icu.today
+                |> subtract ps.niv.today
                 |> subtract ps.critical.today
                 |> subtract ps.icu.``in``
             | IcuIn -> ps.icu.``in``
             | IcuOut -> negative ps.icu.out
             | IcuDeceased -> negative ps.deceased.icu.today
-            | Critical -> ps.critical.today
+            | NivVentilator -> ps.niv.today
+            | InvVentilator -> ps.critical.today
             | InHospitalIn -> ps.inHospital.``in``
             | InHospitalOut -> negative ps.inHospital.out
             | InHospitalDeceased ->
@@ -286,7 +290,8 @@ let renderStructureChart (state : State) dispatch =
             | IcuIn                 -> fun ps -> ps.icu.``in``
             | IcuOut                -> fun ps -> ps.icu.out
             | IcuDeceased           -> fun ps -> ps.deceased.icu.today
-            | Critical              -> fun ps -> ps.critical.today
+            | NivVentilator         -> fun ps -> ps.niv.today
+            | InvVentilator         -> fun ps -> ps.critical.today
             | InHospitalIn          -> fun ps -> ps.inHospital.``in``
             | InHospitalOut         -> fun ps -> ps.inHospital.out
             | InHospitalDeceased    -> fun ps -> ps.deceased.today
