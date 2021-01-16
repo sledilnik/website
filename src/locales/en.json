@@ -1620,7 +1620,7 @@
     },
     "donation": {
         "title": "I support Sledilnik",
-        "intro": "Here at the **Sledilnik scientific non-profit society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
+        "intro": "Here at the **Sledilnik non-profit scientific society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
         "bankDetails": {
             "recipient": "Recipient",
             "purposeCode": "Purpose code",
