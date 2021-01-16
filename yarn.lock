@@ -1656,9 +1656,9 @@
     "@types/yargs-parser" "*"
 
 "@vue-stripe/vue-stripe@^4.0.0-beta.0":
-  version "4.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@vue-stripe/vue-stripe/-/vue-stripe-4.0.0-beta.0.tgz#54b177adcf9a0a4ab399fb77f915f703a40efefd"
-  integrity sha512-Cf4/G1IQ2IhjeWoVIg+fdvxrXI+syyP84y7VEy3t3SQGwrnI7drcnjBrKEcJU7OZJJGPj0+bs5R8qxZxogO1IA==
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@vue-stripe/vue-stripe/-/vue-stripe-4.0.3.tgz#4d503434857757fdaeb848f1efd7027f1d58212b"
+  integrity sha512-+GoKNZ4Hf02LIKNCBui86RvJnzsWjGun+lMLhEr+hYI2NT7OsiKgPJe9fkjUYfemlmD5yASBfVI1n24B+HqIDw==
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
