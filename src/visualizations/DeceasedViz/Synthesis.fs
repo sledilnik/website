@@ -6,10 +6,13 @@ open DataAnalysis.AgeGroupsTimeline
 open Types
 open Highcharts
 
+
 type DeceasedVizState = {
     StatsData: StatsData
     PatientsData : PatientsStats []
-    Page: VisualizationPage
+    MetricType : MetricType
+    ChartType : ChartType
+    Page: PageType
     RangeSelectionButtonIndex: int
     Error : string option
 }
@@ -47,8 +50,8 @@ let subtract (a : int option) (b : int option) =
     | _ -> None
 
 let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
-    match state.Page.MetricsType with
-    | HospitalsToday ->
+    match state.MetricType with
+    | Today ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
         | DeceasedAcute ->
@@ -60,7 +63,7 @@ let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
                 |> subtract dataPoint.total.deceased.hospital.today
                 |> subtract dataPoint.total.deceasedCare.today
         | _ -> invalidOp "bug"
-    | HospitalsToDate ->
+    | ToDate ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
         | DeceasedAcute ->
@@ -72,25 +75,23 @@ let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
                 |> subtract dataPoint.total.deceased.hospital.toDate
                 |> subtract dataPoint.total.deceasedCare.toDate
         | _ -> invalidOp "bug"
-    | _ -> invalidOp "bug"
 
 let getHospitalsPointTotalValue state series dataPoint : int option =
-    match state.Page.MetricsType with
-    | HospitalsToday ->
+    match state.MetricType with
+    | Today ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
         | DeceasedAcute -> dataPoint.total.deceased.hospital.today
         | DeceasedCare -> dataPoint.total.deceasedCare.today
         | DeceasedOther -> dataPoint.total.deceased.today
         | _ -> invalidOp "bug"
-    | HospitalsToDate ->
+    | ToDate ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
         | DeceasedAcute -> dataPoint.total.deceased.hospital.toDate
         | DeceasedCare -> dataPoint.total.deceasedCare.toDate
         | DeceasedOther -> dataPoint.total.deceased.toDate
         | _ -> invalidOp "bug"
-    | _ -> invalidOp "bug"
 
 let constructHospitalsSeriesData state series =
     match series.SeriesType with
@@ -149,8 +150,8 @@ let constructPersonTypeSeriesData state series =
                         | DeceasedTypeOther -> dataPoint.DeceasedPerType.Other
                         | _ -> invalidOp "bug"
                    |} )
-        match state.Page.MetricsType with
-        | ByTypeToday ->
+        match state.MetricType with
+        | Today ->
             data 
             |> Seq.pairwise
             |> Seq.map
@@ -159,8 +160,7 @@ let constructPersonTypeSeriesData state series =
                            value =  match currDay.value with
                                     | Some value -> currDay.value |> subtract prevDay.value 
                                     | None -> None |} )
-        | ByTypeToDate -> data
-        | _ -> invalidOp "bug"
+        | ToDate -> data
 
     match series.SeriesType with
     | PersonTypeSeriesType ->
@@ -201,18 +201,16 @@ let renderAllPersonTypeSeriesData state =
 
 let renderAllAgeGroupsSeriesData state =
     let calculationFormula =
-        match state.Page.MetricsType with
-        | ByAgeToDate -> Total
-        | ByAgeToday -> Daily
-        | _ -> invalidOp "not supported"
+        match state.MetricType with
+        | ToDate -> Total
+        | Today -> Daily
 
     getAgeGroupTimelineAllSeriesData
         state.StatsData calculationFormula
         (fun dataPoint -> dataPoint.DeceasedPerAgeToDate)
 
 let renderAllSeriesData state =
-    match state.Page.MetricsType with
-    | HospitalMetricsType -> renderAllHospitalSeriesData state
-    | AgeGroupsMetricsType -> renderAllAgeGroupsSeriesData state
-    | PersonTypeMetricsType -> renderAllPersonTypeSeriesData state
-    | _ -> invalidOp "todo"
+    match state.Page with
+    | HospitalsPage -> renderAllHospitalSeriesData state
+    | AgeGroupsPage -> renderAllAgeGroupsSeriesData state
+    | PersonTypePage -> renderAllPersonTypeSeriesData state
