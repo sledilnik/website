@@ -127,6 +127,14 @@ const routes = [
     redirect: `/${i18next.language}/ostanizdrav`,
   },
   {
+    path: '/podpri', // Friendly redirect
+    redirect: `/${i18next.language}/donate`,
+  },
+  {
+    path: '/donate',
+    redirect: `/${i18next.language}/donate`,
+  },
+  {
     path: '/links', // Retired page
     redirect: `/${i18next.language}/about`,
   },
@@ -212,10 +220,19 @@ const routes = [
         component: () => import(/* webpackChunkName: "Post.route" */ './pages/PostSingle.vue'),
       },
       {
+        path: 'donate',
+        name: 'donate',
+        component: () => import(/* webpackChunkName: "Donation.route" */ './pages/DonationPage.vue'),
+      },
+      {
         path: 'faq',
         name: 'faq',
         // component: import(/* webpackChunkName: "Faq.route" */ './pages/FAQPage.vue'),
         component: FAQPage
+      },
+      {
+        path: 'podpri', // Friendly redirect
+        redirect: `donate`,
       },
       {
         path: 'links', // Retired page

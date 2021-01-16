@@ -14,6 +14,7 @@
         "animation": "Animation",
         "faq": "FAQ",
         "about": "About",
+        "donate": "Donate!",
         "links": "Links",
         "github": "GitHub",
         "goToGraph": "Go to graph",
@@ -1619,6 +1620,57 @@
         "how-to-help": {
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
+        }
+    },
+    "donation": {
+        "title": "I support Sledilnik",
+        "intro": "Here at the **Sledilnik non-profit scientific society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
+        "bankDetails": {
+            "recipient": "Recipient",
+            "purposeCode": "Purpose code",
+            "purpose": "Purpose",
+            "reference": "Reference",
+            "iban": "IBAN Account",
+            "bank": "Bank",
+            "bankBicSwift": "Bank SWIFT/BIC"
+        },
+        "success": {
+            "title": "Thank you for your donation",
+            "description": "Your donation will help us with our future work.<br>We kindly ask you to encourage others to donate as well.",
+            "session": "Payment session ID:"
+        },
+        "onetime": {
+            "title": "One-time support",
+            "banktransfer": {
+                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:"
+            },
+            "stripe": {
+                "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
+                "success": {
+                    "title": "Thank you for your one-time donation",
+                    "description": ""
+                }
+            }
+        },
+        "monthly": {
+            "title": "Monthly recurring donation",
+            "stripe": {
+                "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
+                "donateButton": "{{amount}} / month",
+                "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
+                "success": {
+                    "title": "Thank you for your monthly recurring donation",
+                    "description": "If you would like to stop your recurring donation please let us know at drustvo@sledilnik.org."
+                }
+            }
+        },
+        "companies": {
+            "title": "For companies",
+            "description": "Please contact us at drustvo@sledilnik.org to prepare a donation contract and/or other necessary documentation as required."
+        },
+        "other": {
+            "title": "Other ways of support",
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for open data, suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
         }
     }
 }

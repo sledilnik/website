@@ -14,6 +14,7 @@
         "animation": "Animacija",
         "faq": "FAQ",
         "about": "O projektu",
+        "donate": "Podpri!",
         "links": "Povezave",
         "github": "GitHub",
         "goToGraph": "Pojdi na graf",
@@ -1694,6 +1695,65 @@
         "how-to-help": {
             "question": "Želim pomagati, kje lahko začnem?",
             "answer": "Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!"
+        }
+    },
+    "donation": {
+        "title": "Podpiram Sledilnik",
+        "intro": "Smo **Znanstveno društvo Sledilnik** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Z vašo donacijo boste investirali v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj.\n\nZ vašim prispevkom nam pomagate ostati to, kar smo: znanstvena skupnost, ki nudi javne in prosto dostopne informacije ter analize za vse – **za boljši danes in jutri vseh nas**. Hvala, ker vam ni vseeno!",
+        "bankDetails": {
+            "recipient": "Prejemnik",
+            "purposeCode": "Koda namena",
+            "purpose": "Namen",
+            "reference": "Referenca",
+            "iban": "Račun IBAN",
+            "bank": "Banka",
+            "bankBicSwift": "BIC/SWIFT banke"
+        },
+        "success": {
+            "title": "Hvala za vašo donacijo",
+            "description": "Vaša donacija nam bo pomagala pri našem delu.<br>Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.",
+            "session": "ID seje plačila:"
+        },
+        "onetime" : {
+            "title": "Enkratna donacija",
+            "banktransfer": {
+                "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+            },
+            "stripe": {
+                "description": "Enkratni znesek podpore nam lahko namenite tudi **z uporabo kreditne kartice**. Izberite s kakšnim zneskom ste pripravljeni enkratno podpreti naše delovanje:",
+                "success": {
+                    "title": "Hvala za enkratno donacijo",
+                    "description": ""
+                }
+            }
+        },
+        "monthly": {
+            "title": "Redna mesečna donacija",
+            "stripe": {
+                "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vam pa strošek podpore enakomerno porazdeli skozi leto. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
+                "stopping": "Takšno donacijo lahko kadarkoli ustavite tako, da nam to željo sporočite na drustvo@sledilnik.org.",
+                "donateButton": "{{amount}} / mesec",
+                "success": {
+                    "title": "Hvala za redno mesečno donacijo",
+                    "description": "V kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."
+                }
+            },
+            "permanentBankTransferOrder": {
+                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
+                "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi."
+            }
+        },
+        "incomeTax": {
+            "title": "Namenite nam delež dohodnine",
+            "description": "Urejamo vse potrebno, da bo to v prihodnosti mogoče, trenutno pa nam deleža dohodnine žal ne morete nameniti."
+        },
+        "companies": {
+            "title": "Donacije pravnih oseb",
+            "description": "Prosimo, kontaktirajte nas na drustvo@sledilnik.org, da vam pripravimo donatorsko pogodbo oz. drugo potrebno dokumentacijo po dogovoru."
+        },
+        "other": {
+            "title": "Drugi načini podpore",
+            "description": "Dodatne podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, npr v [angleščini](/en/donate).\n\nVeseli smo odprtih podatkov, vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/COVID19Sledilnik), [YouTubeu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in ostalih platformah, kakor tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nČe imate drugačen predlog podpore našemu delovanju oz. za sodelovanje, vas prosimo, da nas kontaktirate na drustvo@sledilnik.org in z veseljem bomo našli rešitev."
         }
     }
 }
