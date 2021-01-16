@@ -95,6 +95,7 @@ Project collaborators:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Jaka Daneu](https://github.com/jalezi) -  web page
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model, modeling
@@ -109,6 +110,7 @@ Project collaborators:
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
 -   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - web page, sources
+-   [Matej Aleksov](https://www.linkedin.com/in/matej-aleksov/) - social networks, graphic design
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - visualisations

@@ -34,6 +34,10 @@ const infoCardConfig = () => {
     testsTodayHAT: {
       title: i18n.t('infocard.testsHAT')
     },
+    vaccinationSummary: {
+      title: i18n.t('infocard.vaccinationSummary'),
+      flipGoodDirection: true
+    },
   } 
 }
 

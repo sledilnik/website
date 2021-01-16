@@ -16,6 +16,7 @@
         <Compile Include="data/Loader.fs" />
         <Compile Include="data/Stats.fs" />
         <Compile Include="data/WeeklyStats.fs" />
+        <Compile Include="data/Municipalities.fs" />
         <Compile Include="data/Regions.fs" />
         <Compile Include="data/Patients.fs" />
         <Compile Include="data/LabTests.fs" />
@@ -57,13 +58,18 @@
         <Compile Include="DeceasedViz\Synthesis.fs" />
         <Compile Include="DeceasedViz\Rendering.fs" />
         <Compile Include="ExcessDeathsChart/Types.fs" />
+        <Compile Include="ExcessDeathsChart/ChartOptions.fs" />
         <Compile Include="ExcessDeathsChart/Absolute.fs" />
         <Compile Include="ExcessDeathsChart/Relative.fs" />
+        <Compile Include="ExcessDeathsChart/RelativeByAgeGroup.fs" />
         <Compile Include="ExcessDeathsChart/Main.fs" />
         <Compile Include="RegionsChartViz\Analysis.fs" />
         <Compile Include="RegionsChartViz\Synthesis.fs" />
         <Compile Include="RegionsChartViz\Rendering.fs" />
         <Compile Include="MetricsCorrelationViz\Rendering.fs" />
+        <Compile Include="WeeklyDemographicsViz/Analysis.fs" />
+        <Compile Include="WeeklyDemographicsViz/Synthesis.fs" />
+        <Compile Include="WeeklyDemographicsViz/Rendering.fs" />
         <Compile Include="App.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

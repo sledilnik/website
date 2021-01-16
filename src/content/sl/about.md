@@ -60,8 +60,8 @@ COVID-19 Sledilnik je odprto podatkovni in odprto kodni projekt, ki ne bi bil mo
 
 Sodelavci projekta:
 
--   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Aleks Jakulin](https://twitter.com/aleksj) - modeliranje, viri
+-   [Ana Slavec](https://twitter.com/aslavec) - ankete, analize, vsebine
 -   [Andraž Vrhovec](https://github.com/overlordtm) - spletna stran, infrastuktura
 -   [Andrej Srakar](http://www.ier.si/) - viri, modeliranje
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeliranje
@@ -75,6 +75,7 @@ Sodelavci projekta:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
+-   [Jaka Daneu](https://github.com/jalezi) -  spletna stran
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - vsebine, viri
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model, modeliranje
@@ -89,6 +90,7 @@ Sodelavci projekta:
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
 -   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
 -   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - spletna stran, viri
+-   [Matej Aleksov](https://www.linkedin.com/in/matej-aleksov/) - družabna omrežja, grafično oblikovanje
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - koordinacija, podatkovni model in validacija
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - vizualizacije

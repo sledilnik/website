@@ -53,6 +53,7 @@
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
+        "vaccinationSummary": "People Vaccinated",
         "tests": "Tests Today: PCR",
         "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
@@ -232,7 +233,9 @@
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
             "shortDateFormat": "%b %e",
-            "weekYearDateFormat": "Week %W of %Y"
+            "weekYearDateFormat": "Week %W of %Y",
+            "hideAll": "Hide all",
+            "showAll": "Show all"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -250,6 +253,7 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
+            "vaccinationAdministered": "Vaccinated",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -258,7 +262,7 @@
             "icuDischarged": "Discharged from ICU",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
-            "ventilatorDischarged": "Disconnected from Ventilator (intubated)",
+            "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
             "deceased": "Deaths"
         },
         "dailyComparison": {
@@ -266,8 +270,11 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
+            "vaccinated": "People Vaccinated",
             "tests": "Tests Performed: PCR",
-            "positivePct": "Share of Positive Tests: PCR (%)",
+            "positivePct": "Share of Positive: PCR (%)",
+            "testsHAT": "Tests Performed: HAT",
+            "positivePctHAT": "Share of Positive: HAT (%)",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
             "icuAdmitted": "Admitted to ICU",
@@ -276,12 +283,16 @@
         "deceased": {
             "title": "Deaths",
             "titleMenu": "Deaths",
-            "deceasedToday": "Deaths per day",
-            "deceasedTodayRelative": "Deaths per day (relative)",
-            "deceasedToDate": "Deaths to date",
-            "deceasedToDateRelative": "Deaths to date (relative)",
-            "deceasedByAgeToday": "Deaths by age (daily)",
-            "deceasedByAgeTodayRelative": "Deaths by age (daily, relative)",
+            "disclaimer": "Note: deceased by age and retirement homes data is provided weekly, therefore it is not complete for last two weeks.",
+            "showToday": "Daily",
+            "showToDate": "To Date",
+            "showNormal": "Absolute",
+            "showPercent": "Proportion",
+            "deceasedHospitals": "Place of Death",
+            "deceasedByType": "Retirement Homes",
+            "deceasedByAge": "Age",
+            "deceased-rhoccupant": "Retirement Home Occupants",
+            "deceased-other": "Other",
             "deceased-icu": "ICU",
             "deceased-acute": "Acute Medical Unit",
             "deceased-care": "Care Hospital",
@@ -358,7 +369,7 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Cases in Health Care and Retiremenst Homes",
+            "title": "Cases in Health Care and Retirement Homes, weekly",
             "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
             "all": "All",
@@ -372,6 +383,10 @@
             "title": "Testing",
             "titleMenu": "Testing",
             "disclaimer": "Note: From December 3, we do not received data per laboratory.",
+            "positiveSplit": "Positive PCR and HAT",
+            "positiveHAT": "Positive HAT",
+            "positivePCR": "Positive PCR",
+            "positiveTotal": "Positive Total",
             "totalPCR": "All: PCR",
             "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
@@ -438,7 +453,8 @@
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "newCases7Days": "New Cases (7-day avg.)",
-            "deceased": "Deaths"
+            "deceased": "Deaths",
+            "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
             "title": "Cases by Region (per 100,000 people)",
@@ -465,7 +481,8 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals and retirement homes. Deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
+            "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -609,6 +626,16 @@
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
+            },
+            "excessByAgeGroup": {
+                "title": "Excess relative to the last 5 years by age groups",
+                "disclaimer": "Note: data on deaths for the last month is incomplete. Column widths represent the ratio between deaths in the age group of the column versus all deaths in a given month.",
+                "totalDeceased": "Total deceased",
+                "sex": {
+                    "both": "All",
+                    "male": "Male",
+                    "female": "Female"
+                }
             }
         },
         "hospitals": {
@@ -687,7 +714,7 @@
             }
         },
         "sources": {
-            "title": "Sources and Locations of Infection",
+            "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
             "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
             "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
@@ -723,19 +750,30 @@
             "gatheringOrganized": "Organized Gathering",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
+        },
+        "weeklyDemographics": {
+            "title": "Weekly Cases – Demographics",
+            "titleMenu": "Age Groups – Weekly",
+            "ageGroup": "Age Group",
+            "male": "Male",
+            "female": "Female",
+            "per100k": "per 100,000 people",
+            "newCases": "New Cases",
+            "ratio": "Cases Ratio M/F"
         }
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Tests (daily)",
-        "tests_performed_todate": "Tests (to date)",
+        "tests_performed": "Tests PCR (daily)",
+        "tests_performed_todate": "Tests PCR (to date)",
         "cases_confirmed": "Confirmed Cases (daily)",
         "cases_confirmed_todate": "Confirmed Cases (to date)",
         "cases_active": "Active Cases",
         "cases_recovered_todate": "Recovered (to date)",
         "cases_closed_todate": "Closed Cases (to date)",
+        "vaccination_administered_todate": "People Vaccinated (to date)",
         "cases_hs_employee_confirmed_todate": "Confirmed Cases - Healthcare Staff (to date)",
         "cases_rh_employee_confirmed_todate": "Confirmed Cases - Retirement Home Staff (to date)",
         "cases_rh_occupant_confirmed_todate": "Confirmed Cases - Retirement Home Residents (to date)",
@@ -970,6 +1008,14 @@
         "liftFoodMarkets2": {
             "title": "Markets",
             "description": "Relaxation: food markets, news-stands, hairdressing salons."
+        },
+        "liftGym": {
+            "title": "Gym",
+            "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+        },
+        "planRelaxation2": {
+            "title": "Plan",
+            "description": "Government has accepted the revised plan of relaxation of measures in five phases."
         }
     },
     "days": {
@@ -979,9 +1025,10 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo, Week %W of %Y}})"
     },
     "region": {
+        "si": "Slovenia (all regions)",
         "za": "Central Sava Region",
         "ce": "Savinja Region",
         "po": "Littoral–Inner Carniola",
@@ -1494,11 +1541,11 @@
         },
         "chart-metrics-included": {
             "question": "Which indicators does the “COVID-19 Situation in Slovenia” graph include?",
-            "answer": "[Graf](/en/stats#metrics-comparison-chart) vključuje:\n\n* **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.\n\n* **Tests (total)** = Sum of tests up to; data is useful in terms of comparison or in terms of the proportion of the entire population tested, but it can be misleading as certain individuals can be tested several times (eg. health professionals, retirement home employees, etc.).\n\n* **Confirmed Cases (per day)** = Number of confirmed infected per day based on tests. This indicator does not reflect the actual dynamics of newly infected people in the population, as the tests do not sample the entire population but target the at-risk people and certain occupational groups.\n\n* **Confirmed cases (total)** = Total number of all confirmed cases by a given day.\n\n* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)\n\n* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)\n\n* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).\n\n* **Hospitalized (total) ** = Sum of hospital admissions by date.\n\n* **ICU** = Current number of people in ICUs (intensive care units).\n\n* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.\n\n* **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.\n\n* **Discharged from hospital (total)** = Sum of all discharged from a hospital up to this day.\n\n* **Deaths (per day) ** = Number of deaths due to COVID-19 on that day.\n\n* **Deaths (total) ** = Sum of all deaths to date."
+            "answer": "[Graf](/en/stats#metrics-comparison-chart) vključuje:\n\n* **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.\n\n* **Tests (total)** = Sum of tests up to; data is useful in terms of comparison or in terms of the proportion of the entire population tested, but it can be misleading as certain individuals can be tested several times (eg. health professionals, retirement home employees, etc.).\n\n* **Confirmed Cases (per day)** = Number of confirmed infected per day based on tests (from 21.12.2020 PCR and RAT). This indicator does not reflect the actual dynamics of newly infected people in the population, as the tests do not sample the entire population but target the at-risk people and certain occupational groups.\n\n* **Confirmed cases (total)** = Total number of all confirmed cases by a given day.\n\n* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)\n\n* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)\n\n* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).\n\n* **Hospitalized (total) ** = Sum of hospital admissions by date.\n\n* **ICU** = Current number of people in ICUs (intensive care units).\n\n* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.\n\n* **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.\n\n* **Discharged from hospital (total)** = Sum of all discharged from a hospital up to this day.\n\n* **Deaths (per day) ** = Number of deaths due to COVID-19 on that day.\n\n* **Deaths (total) ** = Sum of all deaths to date."
         },
         "chart-terminology": {
             "question": "What does it mean?",
-            "answer": "Sledilnik uses terminology which is consistent with the official directives of the WHO and ECDC (European Center for Disease Prevention and Control). We use the following tags in the displays:\n* **Confirmed cases** = This is the number of people who tested positive for the SARS-CoV-2 virus. Since the number of confirmed cases depends solely on testing, the number of confirmed cases is significantly lower than the actual number of infected people.\n\n* **Hospitalized** = This is the number of confirmed cases such severe symptoms of COVID-19 that they have been admitted to hospital.\n\n* **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category.\n\n* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.\n\n* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)"
+            "answer": "Sledilnik uses terminology which is consistent with the official directives of the WHO and ECDC (European Center for Disease Prevention and Control). We use the following tags in the displays:\n* **Confirmed cases** = This is the number of people who tested positive for the SARS-CoV-2 virus (from 21.12.2020 PCR and RAT). Since the number of confirmed cases depends solely on testing, the number of confirmed cases is significantly lower than the actual number of infected people.\n\n* **Hospitalized** = This is the number of confirmed cases such severe symptoms of COVID-19 that they have been admitted to hospital.\n\n* **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category.\n\n* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.\n\n* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)"
         },
         "cases-chart": {
             "question": "What are the Closed cases and what are the Active cases?",
@@ -1530,7 +1577,7 @@
         },
         "spread-chart": {
             "question": "What does the “Growth of Confirmed Cases” graph mean?",
-            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
+            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From 21.12.2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
             "question": "What does the “Confirmed Cases by Region” tell us?",
@@ -1558,15 +1605,19 @@
         },
         "chart-reality": {
             "question": "Do your graphs represent the real picture?",
-            "answer": "Yes, as far as they can, given the limitations of the current displays and of the data itself: the graphs on this page only show what can be deduced from the information given. For example, the total number of tests represents the number of tests performed to date, but does not reflect the total number of people tested, as some people, such as healthcare professionals and people suspected of being infected, have been repeatedly tested.\n\nHowever, the number of confirmed cases depends solely on testing. Since the majority of infected people, who have mild or no symptoms, have not been tested for COVID-19 at all, the number of confirmed cases is significantly lower than the actual number of infected people."
+            "answer": "Yes, as far as they can, given the limitations of the current displays and of the data itself: the graphs on this page only show what can be deduced from the information given. For example, the total number of tests represents the number of tests performed to date, but does not reflect the total number of people tested, as some people, such as healthcare professionals and people suspected of being infected, have been repeatedly tested.\n\nHowever, the number of confirmed cases depends solely on testing. Since the majority of infected people, who have mild or no symptoms, have not been tested for COVID-19 at all, the number of confirmed cases is significantly lower than the actual number of infected people (from 21.12.2020 people testing positive on rapid antigen tests (RAT) also count as confirmed cases)."
         },
         "chart-correlation": {
             "question": "What does the \"Correlation between confirmed cases, hospitalization, and deaths\" graph mean?",
-            "answer": "The [correlation graph](/en/stats#metrics-correlation-chart) shows the temporal correlation between the number of confirmed cases, the number of hospitalized patients with, and the number of deaths caused by COVID-19. Each of the three graphs is shown on its scale, as this is the easiest way to show how long after the growth of new confirmed cases of infections we can expect an increase in the number of hospitalized and how much later also an increase in death.\n\nThe graph offers two view menus. In the menu directly below the graph, you can turn an individual curve on or off by clicking on “Confirmed cases”, “Hospitalized”, or “Dead”. Under the first menu, you can switch between the seven-day average and the total number of confirmed cases, hospitalized, or deceased by clicking on the icons \"By days (7-day average)\" and \"Total\"."
+            "answer": "The [correlation graph](/en/stats#metrics-correlation-chart) shows the temporal correlation between the number of confirmed cases (from 21.12.2020 PCR and RAT), the number of hospitalized patients with, and the number of deaths caused by COVID-19. Each of the three graphs is shown on its scale, as this is the easiest way to show how long after the growth of new confirmed cases of infections we can expect an increase in the number of hospitalized and how much later also an increase in death.\n\nThe graph offers two view menus. In the menu directly below the graph, you can turn an individual curve on or off by clicking on “Confirmed cases”, “Hospitalized”, or “Dead”. Under the first menu, you can switch between the seven-day average and the total number of confirmed cases, hospitalized, or deceased by clicking on the icons \"By days (7-day average)\" and \"Total\"."
         },
         "chart-cases-by-age-group": {
             "question": "What does the \"Confirmed cases by age groups\" graph mean?",
-            "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases, divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
+            "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases (from 21.12.2020 PCR and RAT), divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
+        },
+        "weekly-demographics-chart": {
+            "question": "What does the \"Weekly Cases - Demographics\" graph mean?",
+            "answer": "[Weekly Cases - Demographics](/en/stats#weekly-demographics-chart) is a heatmap displaying the demographic data of confirmed cases accumulated on a weekly basis (from 21.12.2020 PCR and RAT). In the default view, the graph shows the case numbers in each age group per 100,000 people. The shades of green indicate low case numbers in the given week, whereas beige and brown colors indicate a large amount of confirmed cases.\n\n Clicking on the *Cases Ratio M/F* button in the lower-left corner, switches to the display of the ratio between confirmed cases amongst males and females. The color scale now ranges between blue (more male confirmed cases) and red (more female confirmed cases)."
         },
         "what-is-sledilnik": {
             "question": "What is Sledilnik?",

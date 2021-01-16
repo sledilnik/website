@@ -47,19 +47,9 @@ let renderChartOptions (data : WeeklyDeathsData) =
     {| title = ""
        xAxis = {| labels = {| formatter = fun (x) -> sprintf "%s %s" (I18N.t "week") x?value |} |> pojo |}
        yAxis = {| min = 0 ; title = {| text = None |} ; opposite = true |}
+       responsive = ChartOptions.responsive
        tooltip = {| formatter = fun () -> sprintf "%s<br>%s: <b>%d</b>" jsThis?series?name jsThis?key jsThis?y |} |> pojo
        series = series
-       responsive = pojo
-            {|
-                rules =
-                    [| {|
-                        condition = {| maxWidth = 768 |}
-                        chartOptions =
-                            {|
-                                yAxis = [| {| labels = pojo {| enabled = false |} |} |]
-                            |}
-                    |} |]
-            |}
        credits =
         {| enabled = true
            text = sprintf "%s: %s"

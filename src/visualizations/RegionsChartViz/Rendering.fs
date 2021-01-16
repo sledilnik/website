@@ -34,16 +34,11 @@ let regionsInfo = dict[
 ]
 
 type Msg =
+    | ToggleAllRegions of bool
     | ToggleRegionVisible of string
     | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
-
-let regionTotal (region : Region) : int =
-    region.Municipalities
-    |> List.map (fun city -> city.ActiveCases)
-    |> List.choose id
-    |> List.sum
 
 let init (config: RegionsChartConfig) (data : RegionsData)
     : RegionsChartState * Cmd<Msg> =
@@ -54,12 +49,12 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         |> List.filter (fun region ->
             Set.contains region.Name Utils.Dictionaries.excludedRegions |> not)
 
-    let regionsByTotalCases =
+    let regionsSorted =
         regionsWithoutExcluded
-        |> List.sortByDescending regionTotal
+        |> List.sortByDescending (fun region -> region.ActiveCases)
 
-    let regionsConfig =
-        regionsByTotalCases
+    let regConfig = 
+        regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
             let color = regionsInfo.[regionKey].Color
@@ -67,17 +62,34 @@ let init (config: RegionsChartConfig) (data : RegionsData)
               Color = color
               Visible = true } )
 
+    let regionsConfig =
+        match config.RelativeTo with
+        | Pop100k ->
+            [ { Key = "si"; Color = "#696969"; Visible = true } ]
+            |> List.append regConfig
+        | _ ->
+            regConfig
+             
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
-      Regions = regionsByTotalCases
+      RegionsSorted = regionsSorted
       RegionsConfig = regionsConfig
-      RangeSelectionButtonIndex = 0 },
+      RangeSelectionButtonIndex = 0
+      ShowAll = true },
     Cmd.none
 
 let update (msg: Msg) (state: RegionsChartState)
     : RegionsChartState * Cmd<Msg> =
     match msg with
+    | ToggleAllRegions visibleOrHidden ->
+        let newRegionsConfig =
+            state.RegionsConfig
+            |> List.map (fun region ->
+                { Key = region.Key
+                  Color = region.Color
+                  Visible = visibleOrHidden } )
+        { state with RegionsConfig = newRegionsConfig; ShowAll = not state.ShowAll }, Cmd.none
     | ToggleRegionVisible regionKey ->
         let newRegionsConfig =
             state.RegionsConfig
@@ -106,9 +118,8 @@ let tooltipFormatter (state: RegionsChartState) _ jsThis =
     | [||] -> ""
     | _ ->
         let s = StringBuilder()
-        // todo igor: extract date
-//        let date = points.[0]?point?date
-//        s.AppendFormat ("{0}<br/>", date.ToString()) |> ignore
+        let date = points.[0]?point?date
+        s.AppendFormat ("<b>{0}</b><br/>", date.ToString()) |> ignore
         s.Append "<table>" |> ignore
 
         points
@@ -150,42 +161,95 @@ let renderChartOptions (state : RegionsChartState) dispatch =
             state.ScaleType "covid19-regions"
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
+    let getLastSunday (d : System.DateTime) =
+        let mutable date = d
+        while date.DayOfWeek <> System.DayOfWeek.Sunday do
+          date <- date.AddDays -1.0
+        date
+
+    let lastDataPoint = state.RegionsData |> List.last
+    let previousSunday = getLastSunday (lastDataPoint.Date.AddDays(-7.))
+
     let xAxis =
             baseOptions.xAxis
-            |> Array.map(fun xAxis -> {| xAxis with gridZIndex = 1 |})
+            |> Array.map(fun xAxis -> 
+               {| xAxis with
+                      gridZIndex = 1
+                      plotBands =
+                        match state.MetricType with
+                        | MetricType.Deceased ->
+                            [|
+                               {| from=jsTime <| previousSunday
+                                  ``to``=jsTime <| lastDataPoint.Date
+                                  color="#ffffe0"
+                                |}
+                            |]
+                        | _ -> [| |]
+                 |})
 
     let chartTextGroup = state.ChartConfig.ChartTextsGroup
 
-    let redThreshold = 140
+    let threshold100k value =
+        (value * 100000.) 
+        / (Utils.Dictionaries.regions.["si"].Population |> Utils.optionToInt |> float)
+    let redThreshold = threshold100k 1350.
+    let orangeThreshold = threshold100k 1000.
+    let yellowThreshold = threshold100k 600.
+    let greenThreshold = threshold100k 300.
     let yAxis =
             baseOptions.yAxis
             |> Array.map
                    (fun yAxis ->
                 {| yAxis with
-                       min = None
+                       min = if state.ScaleType = Linear then 0. else 0.1
                        gridZIndex = 1
                        plotLines =
                            match state.ChartConfig.RelativeTo, state.MetricType with
-                           | Pop100k, ActiveCases -> [|
+                           | Pop100k, NewCases7Days -> [|
                                {| value=redThreshold
-                                  label={|
-                                           text=I18N.chartText chartTextGroup "red"
-                                           align="left"
-                                           verticalAlign="bottom"
-                                            |}
                                   color="red"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
-                                |}
+                               |}
+                               {| value=orangeThreshold
+                                  color="orange"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
+                               {| value=yellowThreshold
+                                  color="#d8d800"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
+                               {| value=greenThreshold
+                                  color="green"
+                                  width=1
+                                  dashStyle="longdashdot"
+                                  zIndex=2
+                               |}
                             |]
                            | _ -> [| |]
                        plotBands =
                            match state.ChartConfig.RelativeTo, state.MetricType with
-                           | Pop100k, ActiveCases -> [|
-                               {| from=redThreshold; ``to``=100000.0
-                                  color="#FCD5CF30"
-                                |}
+                           | Pop100k, NewCases7Days -> [|
+                               {| from=redThreshold; ``to``=1000000.
+                                  color="#e0e0e0"
+                               |}
+                               {| from=orangeThreshold; ``to``=redThreshold
+                                  color="#ffd8d8"
+                               |}
+                               {| from=yellowThreshold; ``to``=orangeThreshold
+                                  color="#fff1d8"
+                               |}
+                               {| from=greenThreshold; ``to``=yellowThreshold
+                                  color="#ffffd8"
+                               |}
+                               {| from=0.0001; ``to``=greenThreshold
+                                  color="#ebffeb"
+                               |}
                             |]
                            | _ -> [| |]
                    |})
@@ -194,7 +258,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 styledMode = false // <- set this to 'true' for CSS styling
             |}
@@ -229,19 +293,21 @@ let renderRegionSelector (regionConfig: RegionRenderingConfiguration) dispatch =
     Html.div [
         prop.onClick (fun _ -> ToggleRegionVisible regionConfig.Key |> dispatch)
         Utils.classes
-            [(true, "btn  btn-sm metric-selector")
+            [(true, "btn btn-sm metric-selector")
              (regionConfig.Visible, "metric-selector--selected") ]
         prop.style style
         prop.text (I18N.tt "region" regionConfig.Key) ]
 
-let renderRegionsSelectors metrics dispatch =
+let renderRegionsSelectors (state: RegionsChartState) dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            metrics
-            |> List.map (fun metric ->
-                renderRegionSelector metric dispatch
-            ) ) ]
+            [ Html.div [
+                prop.onClick (fun _ -> ToggleAllRegions ( if state.ShowAll then false else true ) |> dispatch)
+                prop.className "btn btn-sm metric-selector"
+                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ]
+            |> List.append ( state.RegionsConfig |> List.map (fun metric -> renderRegionSelector metric dispatch ) )
+        ) ]
 
 let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
     let renderMetricTypeSelector (typeSelector: MetricType) =
@@ -255,7 +321,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ ActiveCases; ConfirmedCases; NewCases7Days; MetricType.Deceased ]
+        [ NewCases7Days; ActiveCases; ConfirmedCases;  MetricType.Deceased ]
         |> List.map renderMetricTypeSelector
 
     Html.div [
@@ -272,7 +338,17 @@ let render (state : RegionsChartState) dispatch =
                 state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
-        renderRegionsSelectors state.RegionsConfig dispatch
+        renderRegionsSelectors state dispatch
+
+        match state.MetricType with
+        | MetricType.Deceased ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (I18N.t "charts.regions.disclaimer")
+                ]
+            ]
+        | _ -> Html.none
     ]
 
 let renderChart

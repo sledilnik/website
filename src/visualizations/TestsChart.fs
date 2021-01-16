@@ -6,6 +6,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
+open Fable.Core.JsInterop
 
 open Types
 open Highcharts
@@ -13,6 +14,7 @@ open Highcharts
 open Data.LabTests
 
 type DisplayType =
+    | PositiveSplit
     | TotalPCR
     | Data of string
     | ByLab
@@ -20,6 +22,7 @@ type DisplayType =
     | Lab of string
     static member All state =
         seq {
+            yield PositiveSplit
             for typ in [ "hagt"; "regular"; "ns-apr20" ] do
                 yield Data typ
             yield TotalPCR
@@ -31,6 +34,7 @@ type DisplayType =
     static member Default = Data "regular"
     static member GetName =
         function
+        | PositiveSplit -> I18N.t "charts.tests.positiveSplit"
         | TotalPCR -> I18N.t "charts.tests.totalPCR"
         | Data typ -> I18N.tt "charts.tests" typ
         | ByLab -> I18N.t "charts.tests.byLab"
@@ -179,6 +183,7 @@ let renderByLabChart (state: State) dispatch =
                pojo
                    {| shared = true
                       split = false
+                      formatter = None
                       valueSuffix = if state.DisplayType = ByLabPercent then "%" else ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            responsive =
@@ -316,8 +321,98 @@ let renderTestsChart (state: State) dispatch =
                pojo
                    {| shared = true
                       split = false
+                      formatter = None
                       valueSuffix = ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+           responsive =
+               pojo
+                   {| rules =
+                          [| {| condition = {| maxWidth = 768 |}
+                                chartOptions =
+                                    {| yAxis =
+                                           [| {| labels = {| enabled = false |} |}
+                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+    |> pojo
+
+
+let renderPositiveChart (state: State) dispatch =
+    let className = "tests-chart"
+    let scaleType = ScaleType.Linear
+
+    let tooltipFormatter jsThis =
+        let pts: obj [] = jsThis?points
+        let total =
+            pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
+        let fmtDate = pts.[0]?point?date
+
+        "<b>"
+        + fmtDate
+        + "</b><br>"
+        + (pts
+           |> Seq.map (fun p ->
+               sprintf """<span style="color:%s">●</span> %s: <b>%s</b>"""
+                    p?series?color p?series?name
+                    (I18N.NumberFormat.formatNumber(p?point?y : float)))
+           |> String.concat "<br>")
+        + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>"""
+            (I18N.t "charts.tests.positiveTotal")
+            (total |> I18N.NumberFormat.formatNumber)
+
+    let allSeries =
+        [
+          yield
+            pojo
+              {| name = I18N.t "charts.tests.positiveHAT"
+                 ``type`` = "column"
+                 color = "#fae343"
+                 data =
+                     state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                     |> Seq.map (fun dp -> (pojo {| x = dp.JsDate12h
+                                                    y = dp.data.["hagt"].positive.today
+                                                    date = I18N.tOptions "days.longerDate" {| date = dp.Date |} |} ) )
+                     |> Seq.toArray |}
+          yield
+            pojo
+                {| name = I18N.t "charts.tests.positivePCR"
+                   ``type`` = "column"
+                   color = "#d5c768"
+                   data =
+                       state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                     |> Seq.map (fun dp -> (pojo {| x = dp.JsDate12h
+                                                    y = dp.total.positive.today
+                                                    date = I18N.tOptions "days.longerDate" {| date = dp.Date |} |} ) )
+                       |> Seq.toArray |}
+        ]
+
+    let onRangeSelectorButtonClick (buttonIndex: int) =
+        let res (_: Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        Highcharts.basicChartOptions scaleType className state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    {| baseOptions with
+           series = List.toArray allSeries
+           plotOptions =
+               pojo
+                   {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                      series =
+                          {| stacking = "normal"
+                             crisp = false
+                             borderWidth = 0
+                             pointPadding = 0
+                             groupPadding = 0 |} |}
+           legend =
+               pojo
+                   {| enabled = true
+                      layout = "horizontal" |}
+           tooltip =
+               pojo
+                   {| shared = true
+                      split = false
+                      formatter = fun () -> tooltipFormatter jsThis |}
            responsive =
                pojo
                    {| rules =
@@ -333,6 +428,9 @@ let renderChartContainer (state: State) dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
                prop.children [ match state.DisplayType with
+                               | PositiveSplit ->
+                                   renderPositiveChart state dispatch
+                                   |> Highcharts.chartFromWindow
                                | ByLab
                                | ByLabPercent ->
                                    renderByLabChart state dispatch

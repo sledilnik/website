@@ -119,4 +119,8 @@ export default {
     titleKey: 'charts.metricsCorrelation.titleMenu',
     icon: 'graph',
   },
+  'weekly-demographics-chart': {
+    titleKey: 'charts.weeklyDemographics.titleMenu',
+    icon: 'map',
+  }
 }

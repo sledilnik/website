@@ -54,6 +54,7 @@
         "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
     },
     "infocard": {
+        "vaccinationSummary": "Cepljenih oseb",
         "tests": "Testi na dan: PCR",
         "testsHAT": "Testi na dan: HAT",
         "confirmedToDate": "Potrjeni primeri",
@@ -103,7 +104,7 @@
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
         "longerDate": "{{ date, %A, %e. %B %Y }}",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{dateTo, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -153,6 +154,7 @@
         "6": "So"
     },
     "region": {
+        "si": "Slovenija (vse regije)",
         "kr": "Gorenjska",
         "ng": "Goriška",
         "nm": "Jugovzhodna Slovenija",
@@ -630,6 +632,14 @@
         "liftFoodMarkets2": {
             "title": "Tržnice",
             "description": "Sproščanje: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
+        },
+        "liftGym": {
+            "title": "Fitnes",
+            "description": "Sproščanje: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
+        },
+        "planRelaxation2": {
+            "title": "Načrt",
+            "description": "Vlada sprejela popravljen načrt sproščanja ukrepov v petih fazah."
         }
     },
     "phase": {
@@ -728,7 +738,9 @@
             "dateFormat": "%A, %e. %B %Y",
             "longDateFormat": "%e. %B %Y",
             "shortDateFormat": "%e. %b",
-            "weekYearDateFormat": "%W. teden %Y"
+            "weekYearDateFormat": "%W. teden %Y",
+            "hideAll": "Skrij vse",
+            "showAll": "Prikaži vse"
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
@@ -746,6 +758,7 @@
             "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
             "recovered": "Preboleli",
+            "vaccinationAdministered": "Cepljeni",
             "hospitalized": "Hospitalizirani",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
@@ -754,7 +767,7 @@
             "icuDischarged": "Odpuščeni iz intenzivne",
             "ventilator": "Na respiratorju (intubirani)",
             "ventilatorAdmitted": "Priklopljeni na respirator (intubirani)",
-            "ventilatorDischarged": "Odklopljeni od respiratorja (intubirani)",
+            "ventilatorDischarged": "Odklopljeni od respiratorja (ekstubirani)",
             "deceased": "Umrli"
         },
         "dailyComparison": {
@@ -762,8 +775,11 @@
             "titleMenu": "Dnevi – primerjava",
             "new": "Potrjeni primeri",
             "active": "Aktivni primeri",
-            "tests": "Opravljeni testi: PCR",
-            "positivePct": "Delež pozitivnih testov: PCR (%)",
+            "vaccinated": "Cepljenih oseb",
+            "tests": "Testi: PCR",
+            "positivePct": "Delež pozitivnih: PCR (%)",
+            "testsHAT": "Testi: HAT",
+            "positivePctHAT": "Delež pozitivnih: HAT (%)",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
             "icuAdmitted": "Sprejeti v intenzivno",
@@ -772,14 +788,16 @@
         "deceased": {
             "title": "Umrli",
             "titleMenu": "Umrli",
-            "deceasedToday": "Umrli na dan",
-            "deceasedTodayRelative": "Umrli na dan (relativno)",
-            "deceasedToDate": "Umrli",
-            "deceasedToDateRelative": "Umrli (relativno)",
-            "deceasedByAgeToDate": "Po starosti",
-            "deceasedByAgeToDateRelative": "Po starosti (rel.)",
-            "deceasedByAgeToday": "Po starosti na dan",
-            "deceasedByAgeTodayRelative": "Po starosti na dan (rel.)",
+            "disclaimer": "Opomba: podatke o umrlih po starosti in v DSO prejemamo tedensko, zato so za zadnja dva tedna nepopolni.",
+            "showToday": "Na dan",
+            "showToDate": "Skupaj",
+            "showNormal": "Absolutno",
+            "showPercent": "Delež",
+            "deceasedHospitals": "Kraj smrti",
+            "deceasedByType": "DSO status",
+            "deceasedByAge": "Starost",
+            "deceased-rhoccupant": "Oskrbovanci domov za starejše občane",
+            "deceased-other": "Ostali",
             "deceased-icu": "Intenzivna terapija",
             "deceased-acute": "Akutni oddelek",
             "deceased-care": "Negovalni oddelek",
@@ -859,6 +877,10 @@
             "title": "Testiranje",
             "titleMenu": "Testiranje",
             "disclaimer": "Opomba: Od 3. decembra ne prejemamo več podatkov po posameznih laboratorijih.",
+            "positiveSplit": "Pozitivnih PCR in HAT",
+            "positiveHAT": "Pozitivnih HAT",
+            "positivePCR": "Pozitivnih PCR",
+            "positiveTotal": "Pozitivnih skupaj",
             "totalPCR": "Skupaj: PCR",
             "byLab": "Po laboratorijih: testi PCR",
             "byLabPercent": "Po laboratorijih: % pozitivnih",
@@ -947,7 +969,7 @@
             "data": "Podatki"
         },
         "hcCases": {
-            "title": "Primeri v zdravstvu in domovih za starejše občane",
+            "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
             "titleMenu": "Zdravstvo in DSO - primeri",
             "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
             "all": "Skupaj",
@@ -963,7 +985,8 @@
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "newCases7Days": "Novi primeri (7-dnevno povpr.)",
-            "deceased": "Umrli"
+            "deceased": "Umrli",
+            "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
             "title": "Primeri po regijah (na 100.000 prebivalcev)",
@@ -992,7 +1015,8 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
             "relativeIncrease": "Tedenski prirast",
-            "disclaimer": "Opomba: podatke o številu umrlih prejemamo dnevno iz poročil bolnišnic in DSO. Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
+            "disclaimerRegion": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu.",
+            "disclaimer": "Opomba: Podatke o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
             "title": "Zemljevid po regijah",
@@ -1125,6 +1149,16 @@
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
                 "covidDeaths": "Potrjene COVID-19 smrti",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
+            },
+            "excessByAgeGroup": {
+                "title": "Presežek glede na zadnjih 5 let po starostnih skupinah",
+                "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani mesec niso popolni. Širina stolpca predstavlja razmerje med smrtmi v starostni skupini stolpca in vsemi smrtmi v posameznem mesecu.",
+                "totalDeceased": "Skupaj umrlih",
+                "sex": {
+                    "both": "Vsi",
+                    "male": "Moški",
+                    "female": "Ženske"
+                }
             }
         },
         "ostanizdrav": {
@@ -1177,7 +1211,7 @@
             }
         },
         "sources": {
-            "title": "Viri in lokacije okužb",
+            "title": "Viri in lokacije okužb, tedensko",
             "titleMenu": "Viri in lokacije okužb",
             "disclaimerGeneral": "Opomba: podatki za zadnji teden še niso dokončni, zato je posamezno število primerov lahko manjše kot dejansko.",
             "disclaimer": "Opomba: epidemiološka služba od 17. oktobra ne sledi več stikom in ne izdaja predlogov za karanteno, zato teh podatkov več ne prikazujemo.",
@@ -1213,19 +1247,30 @@
             "gatheringOrganized": "organizirano druženje",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
+        },
+        "weeklyDemographics": {
+            "title": "Demografija potrjenih primerov, tedensko",
+            "titleMenu": "Starost – po tednih",
+            "ageGroup": "Starostna skupina",
+            "male": "Moški",
+            "female": "Ženske",
+            "per100k": "na 100.000 prebivalcev",
+            "newCases": "Novi primeri",
+            "ratio": "Razmerje primerov M/Ž"
         }
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Testiranja (na dan)",
-        "tests_performed_todate": "Testiranja (skupaj)",
+        "tests_performed": "Testi PCR (na dan)",
+        "tests_performed_todate": "Testi PCR (skupaj)",
         "cases_confirmed": "Potrjeni primeri (na dan)",
         "cases_confirmed_todate": "Potrjeni primeri (skupaj)",
         "cases_active": "Potrjeni primeri (aktivni)",
         "cases_recovered_todate": "Preboleli (skupaj)",
         "cases_closed_todate": "Zaprti primeri (skupaj)",
+        "vaccination_administered_todate": "Cepljenih oseb (skupaj)",
         "cases_hs_employee_confirmed_todate": "PO - zaposleni v zdravstvu (skupaj)",
         "cases_rh_employee_confirmed_todate": "PO - zaposleni v DSO (skupaj)",
         "cases_rh_occupant_confirmed_todate": "PO - oskrbovanec DSO (skupaj)",
@@ -1515,11 +1560,11 @@
         },
         "chart-metrics-included": {
             "question": "Katere kazalnike vključuje graf \"Stanje COVID-19 v Sloveniji\"?",
-            "answer": "[Graf](/sl/stats#metrics-comparison-chart) vključuje:\n\n* **Testiranja (na dan)** = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19. V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.\n\n* **Testiranja (skupaj)** = Vsota testiranj do dne; podatek je uporaben v smislu primerjave oz. deleža celotne populacije, vendar je zavajajoč, saj so določene osebe lahko testirane večkrat (npr. zdravstveni delavci, zaposleni v DSO ipd.).\n\n* **Potrjeni primeri (na dan)** = Število potrjenih primerov na dan na podlagi testov. Ta kazalec ne odraža dejanskega gibanja novih okužb v populaciji, saj se s testi ne vzorči celotne populacije, ampak se ciljno testira rizične in poklicne skupine.\n\n* **Potrjeni primeri (skupaj)** = Skupno število vseh potrjenih primerov do določenega dne.\n\n* **Aktivni primeri** = Potrjeni primeri (skupaj) – Preboleli (skupaj) – Umrli (skupaj)\n\n* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjenih primerov dva tedna pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 14 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)\n\n* **Hospitalizirani** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).\n\n* **Hospitalizirani (skupaj)** = Vsota vseh do sedaj sprejetih v bolnišnico do dne.\n\n* **V intenzivni enoti** = Trenutno število oseb v enotah intenzivne terapije.\n\n* **Na respiratorju (intubirani)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).\n\n* **Odpuščeni iz bolnišnice (na dan)** = Število odpuščenih iz bolnišnice na ta dan.\n\n* **Odpuščeni iz bolnišnice (skupaj)** = Vsota vseh odpuščenih iz bolnišnice do tega dne.\n\n* **Umrli (na dan)** = Število umrlih za posledicami COVID-19 na ta dan.\n\n* **Umrli (skupaj)** = Vsota vseh umrlih do tega dne."
+            "answer": "[Graf](/sl/stats#metrics-comparison-chart) vključuje:\n\n* **Testiranja (na dan)** = Število opravljenih testiranj na prisotnost virusa SARS-CoV-2, ki povzroča bolezen COVID-19. V prvih fazah epidemije je to bil pomemben pokazatelj razširjenosti virusa, a se je s spremembo metodologije testiranja oz. vzorca testiranih to spremenilo v kazalec kapacitete zdravstvenega oz. diagnostičnega sistema.\n\n* **Testiranja (skupaj)** = Vsota testiranj do dne; podatek je uporaben v smislu primerjave oz. deleža celotne populacije, vendar je zavajajoč, saj so določene osebe lahko testirane večkrat (npr. zdravstveni delavci, zaposleni v DSO ipd.).\n\n* **Potrjeni primeri (na dan)** = Število potrjenih primerov na dan na podlagi testov (od 21.12.2020 PCR in HAT). Ta kazalec ne odraža dejanskega gibanja novih okužb v populaciji, saj se s testi ne vzorči celotne populacije, ampak se ciljno testira rizične in poklicne skupine.\n\n* **Potrjeni primeri (skupaj)** = Skupno število vseh potrjenih primerov do določenega dne.\n\n* **Aktivni primeri** = Potrjeni primeri (skupaj) – Preboleli (skupaj) – Umrli (skupaj)\n\n* **Preboleli (skupaj)** = Število prebolelih na določen dan je preprosta ocena, enaka številu vseh potrjenih primerov dva tedna pred danim datumom (ob predpostavki, da se bolezen povprečno preboli najkasneje v 14 dneh), od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)\n\n* **Hospitalizirani** = Trenutno število oseb v bolnišnični oskrbi (na navadnem oddelku ali v enoti za intenzivno terapijo).\n\n* **Hospitalizirani (skupaj)** = Vsota vseh do sedaj sprejetih v bolnišnico do dne.\n\n* **V intenzivni enoti** = Trenutno število oseb v enotah intenzivne terapije.\n\n* **Na respiratorju (intubirani)** = Trenutno število oseb, ki za dihanje potrebujejo respirator (medicinski ventilator).\n\n* **Odpuščeni iz bolnišnice (na dan)** = Število odpuščenih iz bolnišnice na ta dan.\n\n* **Odpuščeni iz bolnišnice (skupaj)** = Vsota vseh odpuščenih iz bolnišnice do tega dne.\n\n* **Umrli (na dan)** = Število umrlih za posledicami COVID-19 na ta dan.\n\n* **Umrli (skupaj)** = Vsota vseh umrlih do tega dne."
         },
         "chart-terminology": {
             "question": "Kaj pomeni izraz …?",
-            "answer": "Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernicami WHO in ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni). V prikazih se uporabljajo naslednje oznake:\n* **potrjeni primeri** = To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2. Ker je število potrjenih primerov odvisno zgolj od testiranja in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi.\n\n* **hospitalizirani** = To je število potrjenih primerov, ki imajo tako resne simptome bolezni COVID-19, da so bile sprejete v bolnišnično oskrbo.\n\n* **v intenzivni enoti** = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije *Hospitalizirani*.\n\n* **na respiratorju (intubirani)** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator) z intubacijo (invazivna mehanska ventilacija). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.\n\n* **preboleli** = To je ocena števila oseb, pri katerih je bila potrjena okužba in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjenih primerov dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)"
+            "answer": "Sledilnik uporablja terminologijo, ki je skladna z uradnimi oznakami in smernicami WHO in ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni). V prikazih se uporabljajo naslednje oznake:\n* **potrjeni primeri** = To je število oseb, ki so bile pozitivne na testu prisotnosti virusa SARS-CoV-2 (od 21.12.2020 PCR in HAT). Ker je število potrjenih primerov odvisno zgolj od testiranja in ker zaradi spremenjene politike testiranja večina okuženih z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi.\n\n* **hospitalizirani** = To je število potrjenih primerov, ki imajo tako resne simptome bolezni COVID-19, da so bile sprejete v bolnišnično oskrbo.\n\n* **v intenzivni enoti** = Označuje število hospitaliziranih oseb, ki so zaradi simptomov bolezni COVID-19 v življenjski nevarnosti in potrebujejo namestitev v enoti za intenzivno terapijo. Gre za podmnožico kategorije *Hospitalizirani*.\n\n* **na respiratorju (intubirani)** = Označuje število hospitaliziranih oseb v intenzivni enoti, ki za dihanje potrebujejo respirator (medicinski ventilator) z intubacijo (invazivna mehanska ventilacija). Gre za podmnožico kategorije *V intenzivni enoti* in kategorije *Hospitalizirani*.\n\n* **preboleli** = To je ocena števila oseb, pri katerih je bila potrjena okužba in naj bi po 14 dneh prebolele bolezen. Število prebolelih je tako enako številu vseh potrjenih primerov dva tedna pred danim datumom, od katerega se odšteje še število umrlih do istega dne, ko se ugotavlja število prebolelih. Gl. tudi [Zakaj tako dolgo niste prikazovali števila ozdravelih in zakaj zdaj namesto teh prikazujete prebolele?](#data-recovered)"
         },
         "cases-chart": {
             "question": "Kaj pomenijo zaprti primeri in kaj so aktivni primeri?",
@@ -1575,7 +1620,7 @@
         },
         "spread-chart": {
             "question": "Kaj kaže graf \"Prirast potrjenih primerov\"?",
-            "answer": "[Graf](/sl/stats#spread-chart) prikazuje število novih prijavljenih primerov okužbe na določen dan, pri čemer upošteva oznako WHO in  [ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni)](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov), da so potrjeni primeri \"osebe z laboratorijsko potrjeno okužbo s COVID-19\". Ker je število potrjenih primerov oseb še vedno odvisno zgolj od testiranja, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi."
+            "answer": "[Graf](/sl/stats#spread-chart) prikazuje število novih prijavljenih primerov okužbe na določen dan, pri čemer upošteva oznako WHO in  [ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni)](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov), da so potrjeni primeri \"osebe z laboratorijsko potrjeno okužbo s COVID-19\". Od 21.12.2020 to vključuje tudi primere potrjene s hitrim antigenskim testom (HAT). Ker je število potrjenih primerov oseb še vedno odvisno zgolj od testiranja, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi."
         },
         "regions-chart-100k": {
             "question": "Kaj nam pove graf \"Primeri po regijah (na 100.000 prebivalcev)\"?",
@@ -1611,7 +1656,7 @@
         },
         "age-groups-chart": {
             "question": "Kaj kaže graf \"Po starostnih skupinah\"?",
-            "answer": "[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjenih primerov in smrti zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Delež prebivalstva* za prikazovanje in boljši vpogled, kakšna je okuženost in umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije.\n<!---\nV relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjenih primerov* se bo prikazal delež potrjenih primerov prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih.\nZ izbiro *Umrli glede na št. primerov* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjenih primerov.\n-->\n\nDemografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila in zakaj je nesorazmerno vplivala na določene starostne skupine. Po zdaj znanih podatkih naj bi bila bolezen COVID-19 bolj nevarna za starejše in tiste s pridruženimi boleznimi, po nekaterih podatkih naj bi bili bolj izpostavljeni moški. Da pa bi lahko razumeli vse dejavnike, bi morali pridobiti več podatkov: kakšne so bile pridružene bolezni, socialno ekonomsko stanje obolelih, geografsko območje ipd.\n*Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjenih primerov in umrlih glede na podatke v drugih prikazih.*"
+            "answer": "[Graf](/sl/stats#age-groups-chart) prikazuje starostno strukturo vseh potrjenih primerov (od 21.12.2020 PCR in HAT) in smrti zaradi koronavirusa, ločeno tudi po spolu. Prikaz kaže absolutne vrednosti in ga desno zgoraj lahko spremenimo v *Delež prebivalstva* za prikazovanje in boljši vpogled, kakšna je okuženost in umrljivost zaradi bolezni COVID-19 glede na število prebivalcev v celotnem obdobju epidemije.\n<!---\nV relativnem prikazu so spodaj možnosti različnih pogledov: z izbiro *Delež potrjenih primerov* se bo prikazal delež potrjenih primerov prebivalstva glede na določeno starostno skupino. Z izbiro *Delež umrlih* bomo videli skupno število smrti v tem obdobju glede na število prebivalcev, izraženo v odstotkih.\nZ izbiro *Umrli glede na št. primerov* lahko razberemo, kakšen je bil delež umrlih v določeni starostni skupini glede na število potrjenih primerov.\n-->\n\nDemografski podatki nam lahko pomagajo razumeti, kako se je pandemija razširila in zakaj je nesorazmerno vplivala na določene starostne skupine. Po zdaj znanih podatkih naj bi bila bolezen COVID-19 bolj nevarna za starejše in tiste s pridruženimi boleznimi, po nekaterih podatkih naj bi bili bolj izpostavljeni moški. Da pa bi lahko razumeli vse dejavnike, bi morali pridobiti več podatkov: kakšne so bile pridružene bolezni, socialno ekonomsko stanje obolelih, geografsko območje ipd.\n*Opomba: Za razliko od drugih podatkov, ki se objavljajo redno za različne kategorije, uradni viri pridobivajo demografske podatke z zamudo (starost, občina ...), zato so ti praviloma znani z enodnevnim zamikom. To je tudi razlog, da lahko v prikazu Po starostnih skupinah prihaja do odstopanja oz. manjših vrednosti števila potrjenih primerov in umrlih glede na podatke v drugih prikazih.*"
         },
         "world-chart": {
             "question": "Kaj nam kaže \"Stanje COVID-19 v svetu\"?",
@@ -1627,7 +1672,7 @@
         },
         "chart-reality": {
             "question": "So vaši grafi slika realnega stanja?",
-            "answer": "Da, kolikor so lahko, če se zavedamo omejitev trenutnih prikazov: grafi na tej strani prikazujejo le tisto, kar je mogoče ugotoviti glede na dane podatke. Tako recimo skupno število testiranj pomeni število vseh opravljenih testov do danes, ne izraža pa skupnega števila vseh testiranih oseb, saj so nekatere osebe, na primer zdravstveni delavci in osebe, pri katerih sumijo na okužbo, testirane večkrat.\n\nPo drugi strani je število potrjenih primerov odvisno zgolj od testiranja, in ker zaradi spremenjene politike testiranja večina primerov z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi.\n\nZato je treba te kategorije jemati z védenjem, kaj pomenijo, in interpretirati grafe z zrncem soli."
+            "answer": "Da, kolikor so lahko, če se zavedamo omejitev trenutnih prikazov: grafi na tej strani prikazujejo le tisto, kar je mogoče ugotoviti glede na dane podatke. Tako recimo skupno število testiranj pomeni število vseh opravljenih testov do danes, ne izraža pa skupnega števila vseh testiranih oseb, saj so nekatere osebe, na primer zdravstveni delavci in osebe, pri katerih sumijo na okužbo, testirane večkrat.\n\nPo drugi strani je število potrjenih primerov odvisno zgolj od testiranja, in ker zaradi spremenjene politike testiranja večina primerov z blagimi simptomi sploh ne bo testirana na prisotnost COVID-19, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi (od 21.12.2020 se med potrjene primere štejejo tudi pozitivni na hitrih testih - HAT).\n\nZato je treba te kategorije jemati z védenjem, kaj pomenijo, in interpretirati grafe z zrncem soli."
         },
         "chart-percentage": {
             "question": "Kako računate odstotni (%) prirast?",
@@ -1643,11 +1688,15 @@
         },
         "chart-correlation": {
             "question": "Kaj nam kaže \"Soodvisnost primerov, hospitaliziranih in umrlih\"?",
-            "answer": "[Graf soodvisnosti](/sl/stats#metrics-correlation-chart) prikazuje časovno soodvisnost med številom potrjenih primerov, številom hospitaliziranih pacientov s COVID-19 ter številom umrih zaradi te bolezni. Vsak od treh grafov je prikazan na svoji številčnici, saj na ta način najlažje prikažemo, koliko časa po rasti novih potrjenih primerov okužb lahko pričakujemo porast števila hospitaliziranih ter koliko časa kasneje tudi rast smrti.\n\nGraf ponuja dva menija pogledov. Na meniju neposredno pod grafom lahko s klikom na “Potrjeni primeri”, na “Hospitalizirani” ali na “Umrli” vključimo ali izključimo posamično krivuljo. Pod prvim menijem pa lahko s klikom na ikoni “Po dnevih (7-dnevno povprečje)” in “Skupaj” menjamo med sedemdnevnim povprečjem in skupnim številom potrjenih primerov, hospitaliziranih ali umrlih."
+            "answer": "[Graf soodvisnosti](/sl/stats#metrics-correlation-chart) prikazuje časovno soodvisnost med številom potrjenih primerov (od 21.12.2020 PCR in HAT), številom hospitaliziranih pacientov s COVID-19 ter številom umrih zaradi te bolezni. Vsak od treh grafov je prikazan na svoji številčnici, saj na ta način najlažje prikažemo, koliko časa po rasti novih potrjenih primerov okužb lahko pričakujemo porast števila hospitaliziranih ter koliko časa kasneje tudi rast smrti.\n\nGraf ponuja dva menija pogledov. Na meniju neposredno pod grafom lahko s klikom na “Potrjeni primeri”, na “Hospitalizirani” ali na “Umrli” vključimo ali izključimo posamično krivuljo. Pod prvim menijem pa lahko s klikom na ikoni “Po dnevih (7-dnevno povprečje)” in “Skupaj” menjamo med sedemdnevnim povprečjem in skupnim številom potrjenih primerov, hospitaliziranih ali umrlih."
         },
         "chart-cases-by-age-group": {
-            "question":  "Kaj nam kaže \"Potrjeni primeri po starostnih skupinah\"?",
-            "answer": "[Graf](/sl/stats#age-groups-trends-chart) vsakodnevno število potrjenih primerov razdeli na starostne skupine, in sicer po desetletnih starostnih intervalih. Izjemi sta prvi interval (od 0 do 4 leta) ter zadnji odprti interval (85+). V izhodiščnem pogledu vidimo absolutno število dnevno potrjenih primerov, razdeljeno na starostne skupine.\n\nPod grafom sta dva menija pogledov. Meni neposredno pod grafom nam ponuja pogled posamične starostne skupine, meni pod njim pa še možnost preklapljanja pogleda med absolutnimi in relativnimi vrednostmi različnih starostnih skupin pri dnevnem številu potrjenih primerov ter pri številu aktivno okuženimi."
+            "question": "Kaj nam kaže \"Potrjeni primeri po starostnih skupinah\"?",
+            "answer": "[Graf](/sl/stats#age-groups-trends-chart) vsakodnevno število potrjenih primerov razdeli na starostne skupine, in sicer po desetletnih starostnih intervalih. Izjemi sta prvi interval (od 0 do 4 leta) ter zadnji odprti interval (85+). V izhodiščnem pogledu vidimo absolutno število dnevno potrjenih primerov (od 21.12.2020 PCR in HAT), razdeljeno na starostne skupine.\n\nPod grafom sta dva menija pogledov. Meni neposredno pod grafom nam ponuja pogled posamične starostne skupine, meni pod njim pa še možnost preklapljanja pogleda med absolutnimi in relativnimi vrednostmi različnih starostnih skupin pri dnevnem številu potrjenih primerov ter pri številu aktivno okuženimi."
+        },
+        "weekly-demographics-chart": {
+            "question": "Kaj nam kaže \"Demografija potrjenih primerov, tedensko\"?",
+            "answer": "[Demografija potrjenih primerov, tedensko](/sl/stats#weekly-demographics-chart) v osnovnem pogledu *Novi primeri* prikazuje tedensko število novih primerov razdeljenih po starostnih skupinah, izraženo kot delež prebivalstva (od 21.12.2020 PCR in HAT). Podatki so prikazani v obliki t.i. *toplotne karte*.  Polja v odtenkih zelene pomenijo, da je bilo v danem tednu zabeleženih malo primerov, medtem ko rjavi odtenki pomenijo večje število potrjenih primerov.\n\n S klikom na gumb *Razmerje primerov M/Ž*, ki se nahaja v levem spodnjem kotu, pogled preklopimo v prikaz razmerja med tedenskimi potrjenimi primeri po spolu. Barva polja nam pove, da je bilo v posameznem tednu zaznanih več primerov bodisi med moško populacijo (modra barva), bodisi med žensko populacijo (rdeča barva) v starostni skupini. Odstopanje od ravnovesja se izraža v intenziteti barvnega odtenka."
         },
         "what-is-sledilnik": {
             "question": "Kaj je Sledilnik?",

@@ -15,7 +15,7 @@ let barMaxHeight = 65
 let showMaxBars = 30
 let collapsedMunicipalityCount = 16
 
-let excludedMunicipalities = Set.ofList ["kraj"]
+let excludedMunicipalities = Set.ofList [ "neznano" ]
 
 type Region =
     { Key : string
@@ -110,7 +110,7 @@ type Msg =
     | RegionFilterChanged of string
     | ViewChanged of View
 
-let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
+let init (queryObj : obj) (data : MunicipalitiesData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
 
     let regions =
@@ -123,11 +123,11 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
 
     let municipalities =
         seq {
-            for regionsDataPoint in data do
-                for region in regionsDataPoint.Regions do
+            for municipalitiesDataPoint in data do
+                for region in municipalitiesDataPoint.Regions do
                     for municipality in region.Municipalities do
                         if not (Set.contains municipality.Name excludedMunicipalities) then
-                            yield {| Date = regionsDataPoint.Date
+                            yield {| Date = municipalitiesDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
                                      ActiveCases = municipality.ActiveCases
@@ -576,5 +576,5 @@ let render (state : State) dispatch =
 
     element
 
-let municipalitiesChart (props : {| query : obj ; data : RegionsData |}) =
+let municipalitiesChart (props : {| query : obj ; data : MunicipalitiesData |}) =
     React.elmishComponent("MunicipalitiesChart", init props.query props.data, update, render)

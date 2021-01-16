@@ -5,6 +5,7 @@ Our community includes experts in statistical modeling and computer simulations 
 - [Evaluating the Reproduction Rate](#reproduction-rate)
 - [Model of Virus Transmission via the Social Network of Slovenia](#social_network)
 - [Other Models for Slovenia](#other)
+- [Interesting Articles about Epidemic Modeling](#articles)
 
 > **_NOTE:_**  The models take into account the information known so far about COVID-19 and its spread in Slovenia. No model can offer accurate predictions for the future course of the epidemic, but we seek to carefully disclose all the assumptions of the model. Data on the number of COVID-19 tests performed and the number of COVID-19 cases confirmed in Slovenia does not necessarily reveal the number of asymptomatic infections, so most of our models are calibrated to data on hospitalizations. The uncertainty about the exact number confirmed cases propagates to the uncertainty in the predictions.
 
@@ -37,11 +38,12 @@ A more detailed description of the original methodology and results is published
 ## <a id="social_network"></a>Model of Virus Transmission via the Social Network of Slovenia
 In cooperation with [*Dr. Žiga Zaplotnik*](https://twitter.com/ZaplotnikZiga) from the Faculty of Mathematics and Physics of the University of Ljubljana, we prepared a probabilistic forecast of the pandemic in Slovenia. In the simulation, the virus is transmitted according to a realistic model of the social network of Slovenians, which contains more than 2 million nodes (1 for each inhabitant of Slovenia), divided into households and retirement homes. The nodes are also randomly connected outside of these units, according to the known distribution of contacts - some people have more daily contacts, others less. This allows the model to effectively simulate different virus containment strategies. A probabilistic prediction is obtained by preparing a set of simulations with slightly altered initial conditions and parameters that determine coronavirus spread and the course of the COVID-19 disease. The probabilistic prediction also varies between individuals. 
 
-***A more detailed description of the model can be found [in this working document](https://arxiv.org/pdf/2005.13282.pdf), while the history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).***
+A more detailed description of the model can be found [in this article](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090), while the history of the calculations can be found [here](https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/).s
 
+<!--
 <a href="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png" class="img-link">
 <img alt="Omrežje model" src="https://fiz.fmf.uni-lj.si/~zaplotnikz/korona/last_forecast/potek_pandemije.png"></a>
-
+-->
 
 ## <a id="other"></a>Other Models for Slovenia
 
@@ -53,10 +55,12 @@ In cooperation with [*Dr. Žiga Zaplotnik*](https://twitter.com/ZaplotnikZiga) f
  [*An Introduction to Modeling and Statistical Aspects of the COVID-19 Epidemic*](https://udomacenastatistika.wordpress.com/2020/04/20/uvod-v-modeliranje-in-statisticne-vidike-covid-19/), for the *Tamed Statistics* blog post about key models of the spread of the COVID-19 epidemic that have developed in Slovenia.
 
 
-## <a id="challenges"></a>Key challenges in epidemic modeling
-*Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* – In the **editorial of the Zdravstveno varstvo journal**, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the current findings and key challenges in modeling the COVID-19 epidemic.
+## <a id="articles"></a>Interesting Articles about Epidemic Modeling
 
+- [What has math to do with epidemic?](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) - basic ideas and mathematics behind the modeling. Written based on the lecture of prof.Janeza Žiberta.
 
-## Meeting of Slovenian Scientists on the Topic of COVID-19 Measures
+- *Presentation of modeling in Slovenian Parliament*: on November 12, 2020 members of Sledilni presented the nead for data and modeling in Slovenian Parliament. You can see [abstract and recordings](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898).
 
-On 21 April 2020, the Young Statistician Section of the  [*Statistical Society of Slovenia*](https://stat-d.si/) organized an online interview hosted by the Institute of Biostatistics and Medical Informatics (IBMI) of the Ljubljana University’s Medical Faculty. The conversation was anchored by *Dr. Andrej Srakar* and *Dr. Ana Slavec*. The Slovenian Press Agency, STA, broadcasted the event live to more than 850 participants. You can view the recording and lectures [here](https://medium.com/sledilnik/64233b35580c).  
+- *Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* – In the **editorial of the Zdravstveno varstvo journal**, which is published by the Slovenian National Institute of Public Health (NIJZ), Eržen et al. summarized the current findings and key challenges in modeling the COVID-19 epidemic.
+
+- *Meeting of Slovenian Scientists on the Topic of COVID-19 Measures*: On 21 April 2020, the Young Statistician Section of the  [*Statistical Society of Slovenia*](https://stat-d.si/) organized an online interview hosted by the Institute of Biostatistics and Medical Informatics (IBMI) of the Ljubljana University’s Medical Faculty. The conversation was anchored by *Dr. Andrej Srakar* and *Dr. Ana Slavec*. The Slovenian Press Agency, STA, broadcasted the event live to more than 850 participants. You can view the recording and lectures [here](https://medium.com/sledilnik/64233b35580c).  

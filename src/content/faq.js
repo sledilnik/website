@@ -67,7 +67,8 @@ export default [
             "chart-percentage",
             "chart-log-scale",
             "chart-correlation",
-            "chart-cases-by-age-group"
+            "chart-cases-by-age-group",
+            "weekly-demographics-chart"
         ]
     },
     {
