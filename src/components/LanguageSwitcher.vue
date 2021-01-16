@@ -73,8 +73,8 @@ export default {
   },
   methods: {
     onResize() {
-      this.isMobile = window.innerWidth < 900
-      this.showFullLang = window.innerWidth >= 1200
+      this.isMobile = window.innerWidth < 1000
+      this.showFullLang = window.innerWidth >= 1100
     },
     toggleDropdown() {
       this.active = !this.active
