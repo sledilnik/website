@@ -2,7 +2,7 @@ module Data.Patients
 
 open System
 
-let url = "https://api.sledilnik.org/api/patients"
+let url = "https://api-stage.sledilnik.org/api/patients"
 
 type DeceasedCounts = {
     today: int option
