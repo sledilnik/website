@@ -795,7 +795,16 @@
             "title": "Smrtni slučajevi",
             "deceasedByAgeTodayRelative": "Smrtni slučajevi po starosti (dnevno, relativno)",
             "deceasedByAgeToday": "Smrtni slučajevi po starosti (dnevno)",
-            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna."
+            "disclaimer": "Napomena: podaci o preminulima prema dobi i domovima umirovljenika pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna.",
+            "deceased-other": "Ostalo",
+            "deceased-rhoccupant": "Stanovnici domova umirovljenika",
+            "deceasedByAge": "Dob",
+            "deceasedByType": "Domovi umirovljenika",
+            "deceasedHospitals": "Mjesto umiranja",
+            "showPercent": "Proporcija",
+            "showNormal": "Apsolutno",
+            "showToDate": "Do danas",
+            "showToday": "Dnevno"
         },
         "excessDeaths": {
             "excess": {
