@@ -53,6 +53,7 @@ type Metric =
     | ICUOut
     | ICUToday
     | ICUToDate
+    | NiVentilatorToday
     | VentilatorIn
     | VentilatorOut
     | VentilatorToday
@@ -83,6 +84,7 @@ module Metrics  =
         { Metric=ActiveCases;           Color="#dba51d"; Visible=true;  Type=Active; Id="activeCases" }
         { Metric=HospitalToday;         Color="#be7A2a"; Visible=true;  Type=Active; Id="hospitalized" }
         { Metric=ICUToday;              Color="#d96756"; Visible=true;  Type=Active; Id="icu" }
+        { Metric=NiVentilatorToday;     Color="#d95666"; Visible=true;  Type=Active; Id="niVentilator" }
         { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
@@ -203,6 +205,7 @@ let patientsDataGenerator metric =
         | ICUIn -> point.total.icu.``in``
         | ICUOut -> point.total.icu.out
         | ICUToDate -> point.total.icu.toDate
+        | NiVentilatorToday -> point.total.niv.today
         | VentilatorToday -> point.total.critical.today
         | VentilatorIn -> point.total.critical.``in``
         | VentilatorOut -> point.total.critical.out

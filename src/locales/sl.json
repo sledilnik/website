@@ -765,6 +765,7 @@
             "icu": "V intenzivni enoti",
             "icuAdmitted": "Sprejeti v intenzivno",
             "icuDischarged": "Odpuščeni iz intenzivne",
+            "niVentilator": "Na respiratorju (neinvazivno)",
             "ventilator": "Na respiratorju (intubirani)",
             "ventilatorAdmitted": "Priklopljeni na respirator (intubirani)",
             "ventilatorDischarged": "Odklopljeni od respiratorja (ekstubirani)",

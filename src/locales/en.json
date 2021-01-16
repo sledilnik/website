@@ -260,6 +260,7 @@
             "icu": "In ICU",
             "icuAdmitted": "Admitted to ICU",
             "icuDischarged": "Discharged from ICU",
+            "niVentilator": "On Ventilator (non-invasive)",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
             "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
