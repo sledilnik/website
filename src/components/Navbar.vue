@@ -24,6 +24,7 @@
       <router-link :to="{ name: 'ostanizdrav' }" class="router-link"><span>{{ $t('navbar.ostanizdrav') }}</span></router-link>
       <router-link :to="{ name: 'faq' }" class="router-link"><span>{{ $t('navbar.faq') }}</span></router-link>
       <router-link :to="{ name: 'about' }" class="router-link"><span>{{ $t('navbar.about') }}</span></router-link>
+      <router-link :to="{ name: 'donate' }" class="router-link"><span>{{ $t('navbar.donate') }}</span></router-link>
       <div class="social" v-if="showIcons">
         <a href="https://fb.me/COVID19Sledilnik" target="_blank" rel="noreferrer">
           <img src="../assets/svg/fb-icon.svg" alt="Facebook" />
