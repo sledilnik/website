@@ -14,37 +14,21 @@ open Browser
 open Highcharts
 open Types
 
-
-let availablePages = [|
-    { Id = "deceasedToDate"
-      MetricsType = HospitalsToDate; ChartType = StackedBarNormal }
-    { Id = "deceasedToDateRelative"
-      MetricsType = HospitalsToDate; ChartType = StackedBarPercent }
-    { Id = "deceasedToday"
-      MetricsType = HospitalsToday; ChartType = StackedBarNormal }
-    { Id = "deceasedTodayRelative"
-      MetricsType = HospitalsToday; ChartType = StackedBarPercent }
-    { Id = "deceasedByAgeToDate"
-      MetricsType = ByAgeToDate; ChartType = StackedBarNormal }
-    { Id = "deceasedByAgeToDateRelative"
-      MetricsType = ByAgeToDate; ChartType = StackedBarPercent }
-    { Id = "deceasedByAgeToday"
-      MetricsType = ByAgeToday; ChartType = StackedBarNormal }
-    { Id = "deceasedByAgeTodayRelative"
-      MetricsType = ByAgeToday; ChartType = StackedBarPercent }
-|]
-
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
-    | ChangePage of VisualizationPage
+    | MetricTypeChanged of MetricType
+    | ChartTypeChanged of ChartType
+    | ChangePage of PageType
     | RangeSelectionChanged of int
 
 let init(statsData : StatsData) : DeceasedVizState * Cmd<Msg> =
     let state = {
         StatsData = statsData
         PatientsData = [||]
-        Page = availablePages.[0]
+        MetricType = MetricType.Default
+        ChartType = ChartType.Default
+        Page = PageType.Default
         RangeSelectionButtonIndex = 0
         Error = None
     }
@@ -62,6 +46,10 @@ let update (msg: Msg) (state: DeceasedVizState) : DeceasedVizState * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
+    | MetricTypeChanged mt ->
+        { state with MetricType = mt }, Cmd.none
+    | ChartTypeChanged ct ->
+        { state with ChartType = ct }, Cmd.none
     | ChangePage page ->
         { state with Page = page }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
@@ -97,10 +85,9 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
         res
 
     let stacking =
-        match state.Page.ChartType with
-        | StackedBarNormal -> "normal"
-        | StackedBarPercent -> "percent"
-        | _ -> invalidOp "not supported"
+        match state.ChartType with
+        | StackedNormal -> "normal"
+        | StackedPercent -> "percent"
 
     let getLastSunday (d : System.DateTime) =
         let mutable date = d
@@ -121,8 +108,8 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
             |> Array.map(fun xAxis -> 
                {| xAxis with
                       plotBands =
-                        match state.Page.MetricsType with
-                        | AgeGroupsMetricsType ->
+                        match state.Page with
+                        | AgeGroupsPage | PersonTypePage ->
                             [|
                                {| from=jsTime <| previousSunday
                                   ``to``=jsTime <| lastDataPoint.Date
@@ -169,11 +156,51 @@ let renderChartContainer (state : DeceasedVizState) dispatch =
         ]
     ]
 
+let renderMetricTypeSelectors (activeMetric: MetricType) dispatch =
+    let renderMetricTypeSelector (metric: MetricType) =
+        let active = metric = activeMetric
+        Html.div [
+            prop.text metric.GetName
+            prop.onClick (fun _ -> dispatch metric)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+        ]
+
+    let metricTypesSelectors =
+        MetricType.All
+        |> List.map renderMetricTypeSelector
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (metricTypesSelectors)
+    ]
+
+let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
+    let renderChartTypeSelector (chartType: ChartType) =
+        let active = chartType = activeChartType
+        Html.div [
+            prop.text chartType.GetName
+            prop.onClick (fun _ -> dispatch chartType)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+        ]
+
+    let chartTypesSelectors =
+        ChartType.All
+        |> List.map renderChartTypeSelector
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (chartTypesSelectors)
+    ]
+
 let renderPagesSwitchers activePage dispatch =
-    let renderPageSwitcher (page: VisualizationPage) =
+    let renderPageSwitcher (page: PageType) =
         let active = page = activePage
         Html.div [
-            prop.text (I18N.chartText "deceased" page.Id)
+            prop.text page.GetName
             Utils.classes
                 [(true, "btn btn-sm metric-selector")
                  (active, "metric-selector--selected selected")]
@@ -183,8 +210,8 @@ let renderPagesSwitchers activePage dispatch =
 
     Html.div [
         prop.className "metrics-selectors"
-        availablePages
-        |> Array.map renderPageSwitcher
+        PageType.All
+        |> List.map renderPageSwitcher
         |> prop.children
     ]
 
@@ -194,15 +221,21 @@ let render (state: DeceasedVizState) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
+            Utils.renderChartTopControls [
+                renderMetricTypeSelectors
+                    state.MetricType (MetricTypeChanged >> dispatch)
+                renderChartTypeSelectors
+                    state.ChartType (ChartTypeChanged >> dispatch)
+            ]
             renderChartContainer state dispatch
             renderPagesSwitchers state.Page (ChangePage >> dispatch)
 
-            match state.Page.MetricsType with
-            | AgeGroupsMetricsType ->
+            match state.Page with
+            | AgeGroupsPage | PersonTypePage ->
                 Html.div [
                     prop.className "disclaimer"
                     prop.children [
-                        Html.text (I18N.chartText "deceased" "disclaimer")
+                        Html.text (chartText "disclaimer")
                     ]
                 ]
             | _ -> Html.none
