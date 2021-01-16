@@ -1,9 +1,14 @@
 <template>
   <div class="custom-container">
     <div v-if="isStripeSuccess" class="static-page-wrapper stripeSuccess">
-      <h1 v-if="successTranslationKey!=null">{{ $t(`donation.${successTranslationKey}success.title`) }}</h1>
-      <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
-      
+      <div class="header-wrapper">
+          <div>
+            <img src="../assets/donate-thanks.png" />
+          </div>
+          <h1 v-if="successTranslationKey!=null">{{ $t(`donation.${successTranslationKey}success.title`) }}</h1>
+          <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
+      </div>
+
       <div v-html-md="$t('donation.success.description')" />
       <div v-if="successTranslationKey!=null" v-html-md="$t(`donation.${successTranslationKey}success.description`)" />
 
@@ -309,6 +314,33 @@ img {
 }
 
 .stripeSuccess {
+  .header-wrapper {
+    position: relative;
+    div {
+      text-align:center;
+      img {
+          width: 100%;
+          height: 100%;
+          max-width:300px;
+          margin: 16px 0;
+
+          @media only screen and (max-width: 300px) {
+            margin-top: 48px;
+          }
+          @media only screen and (min-width: 768px) {
+            margin-top: 64px;
+          }
+      }
+    }
+
+    h1{
+      position: absolute;
+      width: 100%;
+      top: 0;
+      margin-top:0;
+    }
+  }
+
   .session {
     margin-top: 50px;
     font-size: 10px;
