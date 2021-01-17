@@ -243,6 +243,8 @@ let renderStructureChart (state: State) dispatch =
     let tooltipFormatter jsThis =
         let points: obj [] = jsThis?points
 
+        let mutable curGroup = 0
+        let mutable sum = 0.
         match points with
         | [||] -> ""
         | _ ->
@@ -259,7 +261,24 @@ let renderStructureChart (state: State) dispatch =
                 (fun dp ->
                     let name = dp?series?name
                     let color = dp?series?color
+                    let group = dp?point?group
                     let value: float = dp?point?y
+
+                    if group > curGroup then
+                        s.Append "<tr>" |> ignore
+                        let sumStr =
+                            sprintf
+                                "<td></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
+                                "SKUPAJ"
+                                (I18N.NumberFormat.formatNumber (abs sum))
+
+                        s.Append sumStr |> ignore
+                        s.Append "</tr><tr></tr>" |> ignore
+
+                        curGroup <- group
+                        sum <- 0.
+                    else
+                        sum <- sum + value
 
                     s.Append "<tr>" |> ignore
 
@@ -268,7 +287,7 @@ let renderStructureChart (state: State) dispatch =
                             "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
                             color
                             name
-                            (I18N.NumberFormat.formatNumber (value))
+                            (I18N.NumberFormat.formatNumber (abs value))
 
                     s.Append tooltip |> ignore
                     s.Append "</tr>" |> ignore)
@@ -324,41 +343,18 @@ let renderStructureChart (state: State) dispatch =
             | CareOut -> negative ps.care.out
             | CareDeceased -> negative ps.deceasedCare.today
 
-        let getPointTotal: (FacilityPatientStats -> int option) =
-            match series with
-            | InHospital -> fun ps -> ps.inHospital.today
-            | Acute -> fun ps -> ps.inHospital.today |> subtract ps.icu.today
-            | Icu -> fun ps -> ps.icu.today
-            | IcuOther ->
-                fun ps ->
-                    ps.icu.today
-                    |> subtract ps.niv.today
-                    |> subtract ps.critical.today
-            | IcuIn -> fun ps -> ps.icu.``in``
-            | IcuOut -> fun ps -> ps.icu.out
-            | IcuDeceased -> fun ps -> ps.deceased.icu.today
-            | NivVentilator -> fun ps -> ps.niv.today
-            | InvVentilator -> fun ps -> ps.critical.today
-            | InHospitalIn -> fun ps -> ps.inHospital.``in``
-            | InHospitalOut -> fun ps -> ps.inHospital.out
-            | InHospitalDeceased -> fun ps -> ps.deceased.today
-            | Care -> fun ps -> ps.care.today
-            | CareIn -> fun ps -> ps.care.``in``
-            | CareOut -> fun ps -> ps.care.out
-            | CareDeceased -> fun ps -> ps.deceasedCare.today
-
-        let color, seriesId, index = Series.getSeriesInfo series
+        let color, seriesId, seriesIdx = Series.getSeriesInfo series
 
         {| color = color
            name = I18N.tt "charts.patients" seriesId
-           yAxis = index
+           yAxis = seriesIdx
            data =
                psData
                |> Seq.map
                    (fun (date, ps) ->
                        {| x = date |> jsTime12h
                           y = getPoint ps
-                          fmtTotal = getPointTotal ps |> string
+                          group = seriesIdx
                           date = I18N.tOptions "days.longerDate" {| date = date |} |})
                |> Seq.toArray |}
         |> pojo
