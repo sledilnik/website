@@ -10,6 +10,7 @@ Negotovosti v modele in analize epidemije COVID-19 vstopajo na različne načine
 - nepredvidljiva je družbena povezanost in učinki ukrepov nanjo,
 - imamo pomanjkanje natančnih, globokih in strojno berljivih podatkov ter
 - vsakršna sprememba metodologije testiranja lahko popolnoma spremeni pretekle predpostavke, na katerih so modeli in analize sloneli - več lahko preberete v članku [Kako vemo, da ne vemo?](https://medium.com/sledilnik/kako-vemo-da-ne-vemo-6570b92a8b3c)
+
 Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot projiciramo v prihodnost, hitreje rastejo.
 
 ## <a id="tableOfContent"></a>Vsebina
@@ -27,6 +28,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
+
 Oglejte si tudi [podrobnejše prikaze projekcij in simulacij](https://apps.lusy.fri.uni-lj.si/~janezz/reports/report_latest.html).
 
 ## <a id="social_network"></a>Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
@@ -51,6 +53,7 @@ Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.u
 <!--<img alt="R_t model" src="/docs/ibmi-model-20200627.png">-->
 <!--<img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png">-->
 </a>
+
 Več o metodologiji in izsledkih najdete v člankih v [Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([povzetek](https://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf)) in znanstveni reviji [Mathematical Biosciences](https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
 
 <!--# Simulacije-->
