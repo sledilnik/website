@@ -102,12 +102,12 @@ module Series =
         function
         | InHospital -> "#de9a5a", "hospitalized", 0
         | Acute -> "#de9a5a", "acute", 0
-        | Icu -> "#e53b21", "icu", 0
-        | IcuOther -> "#e53b21", "icu-other", 0
-        | NivVentilator -> "#d43219", "niVentilator", 0
-        | InvVentilator -> "#a62713", "ventilator", 0
+        | Icu -> "#de2d26", "icu", 0
+        | IcuOther -> "#fb6a4a", "icu-other", 0
+        | NivVentilator -> "#de2d26", "niVentilator", 0
+        | InvVentilator -> "#a50f15", "ventilator", 0
         | Care -> "#dba51d", "care", 0
-        | IcuIn -> "#e53b21", "icu-admitted", 1
+        | IcuIn -> "#fb6a4a", "icu-admitted", 1
         | IcuOut -> "#de9a5a", "icu-discharged", 1
         | IcuDeceased -> "#8c71a8", "icu-deceased", 1
         | InHospitalIn -> "#d5c768", "admitted", 1
