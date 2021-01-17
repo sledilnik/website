@@ -381,7 +381,7 @@ let renderStructureChart (state: State) dispatch =
                       events = pojo {| load = onLoadEvent (className) |} |}
            yAxis =
                [| {| index = 0
-                     height = "55%"
+                     height = "60%"
                      top = "0%"
                      offset = 0
                      title = {| text = null |}
@@ -391,8 +391,8 @@ let renderStructureChart (state: State) dispatch =
                      visible = true
                      plotLines = [| {| value = 0; color = "black" |} |] |}
                   {| index = 1
-                     height = "40%"
-                     top = "60%"
+                     height = "35%"
+                     top = "65%"
                      offset = 0
                      title = {| text = null |}
                      ``type`` = "linear"
