@@ -32,6 +32,7 @@ type DepartmentCounts = {
 type FacilityPatientStats = {
     inHospital: DepartmentCounts
     icu: DepartmentCounts
+    niv: DepartmentCounts
     critical: DepartmentCounts
     care: DepartmentCounts
     deceasedCare: DeceasedCounts
@@ -43,6 +44,7 @@ type TotalPatientStats =
         outOfHospital: DepartmentCounts
         inHospital: DepartmentCounts
         icu: DepartmentCounts
+        niv: DepartmentCounts
         critical: DepartmentCounts
         care: DepartmentCounts
         deceasedCare: DeceasedCounts
@@ -51,6 +53,7 @@ type TotalPatientStats =
     member this.ToFacilityStats : FacilityPatientStats =
         { inHospital = this.inHospital
           icu = this.icu
+          niv = this.niv
           critical = this.critical
           care = this.care
           deceasedCare = this.deceasedCare

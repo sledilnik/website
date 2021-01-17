@@ -15,6 +15,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Stanje COVID-19 v Evropi | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap |
 | Stanje COVID-19 v svetu | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap |
 | Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
+| Intenzivna terapija | https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients |
 | Negovalne bolnišnice | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients |
 | Delež resnih primerov | https://covid-19.sledilnik.org/embed.html#/chart/Ratios |
 | Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |

@@ -766,6 +766,7 @@
             "icu": "V intenzivni enoti",
             "icuAdmitted": "Sprejeti v intenzivno",
             "icuDischarged": "Odpuščeni iz intenzivne",
+            "niVentilator": "Na respiratorju (neinvazivno)",
             "ventilator": "Na respiratorju (intubirani)",
             "ventilatorAdmitted": "Priklopljeni na respirator (intubirani)",
             "ventilatorDischarged": "Odklopljeni od respiratorja (ekstubirani)",
@@ -823,15 +824,24 @@
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
-            "care": "V oskrbi",
+            "acute": "Akutni oddelek",
+            "care": "Negovalni oddelek",
             "admitted": "Sprejeti",
             "hospitalized": "Hospitalizirani",
-            "icu": "V intenzivni enoti",
+            "icu": "Intenzivna terapija",
+            "niVentilator": "Na respiratorju (neinvazivno)",
             "ventilator": "Na respiratorju (intubirani)",
             "discharged": "Odpuščeni",
             "deceased": "Umrli",
-            "icu-deceased": "Umrli (intenzivna terapija)",
+            "icu-deceased": "Umrli",
+            "icu-admitted": "Sprejeti v EIT",
+            "icu-discharged": "Odpuščeni iz EIT",
+            "icu-other": "Brez respiratorja",
             "structure": "Struktura"
+        },
+        "icuPatients": {
+            "title": "Intenzivna terapija",
+            "titleMenu": "Intenzivna terapija"
         },
         "carePatients": {
             "title": "Negovalne bolnišnice",
@@ -1571,6 +1581,10 @@
         "patients-chart": {
             "question": "Kaj nam pove graf \"Hospitalizirani\"?",
             "answer": "[Graf](/sl/stats#patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih, število hospitaliziranih, z rdečimi odtenki so označeni posamezniki v enoti intenzivne terapije ter koliko od teh je v kritičnem stanju na respiratorju (intubirani). Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število odpuščenih in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v bolnišnični oskrbi po dnevih.\n\nPrikaz je lahko osnova za presojo bolnišničnih zmogljivosti in načrtovanje njihovega morebitnega povečanja. Po besedah ministra za zdravje Tomaža Gantarja je bilo spomladi stanje takšno: \"Za bolnike s COVID-19 imamo v bolnišnicah pripravljenih 539 postelj, po potrebi se ta zmogljivost lahko poveča do 1000 postelj, ... Za intenzivno terapijo imamo trenutno na razpolago 113 postelj.\" Če vemo, da traja hospitalizacija nekoga v intenzivni enoti pri nas pribl. 14 dni ([po besedah dr. Matjaža Jereba](https://www.rtvslo.si/zdravje/novi-koronavirus/matjaz-jereb-smrtnost-kriticno-bolnih-na-oddelku-ni-velika/519962); svetovno povprečje je 3–6 tednov), lahko graf ponudi dober uvid o obremenitvi bolnišnic."
+        },
+        "icu-patients-chart": {
+            "question": "Kaj nam pove graf \"Intenzivna terapija\"?",
+            "answer": "[Graf](/sl/stats#icu-patients-chart) nam v prikazu (*Vse bolnišnice*) kaže celotno sliko hospitalizacij v enotah intenzivne terapije glede na stanje pacientov po dnevih: stolpci s pozitivno vrednostjo (tisti nad vodoravno osjo) prikazujejo število sprejetih na oddelek, število na oddelku in koliko od teh je v kritičnem stanju na respiratorju (intubirani). Stolpci z negativno vrednostjo (tisti pod vodoravno osjo) prikazujejo število premeščenih na akutni oddelek in umrlih ta dan. Spodaj lahko izberemo tudi posamezno COVID-19 bolnišnico in tako pogled omejimo. Če spodaj izberemo pogled *Po bolnišnicah*, pa lahko za vsako od COVID-19 bolnišnic vidimo število oseb v intenzivni terapiji po dnevih."
         },
         "care-patients-chart": {
             "question": "Kaj nam pove graf \"Negovalne bolnišnice\"?",

@@ -164,6 +164,7 @@ type VisualizationType =
     | MetricsComparison
     | DailyComparison
     | Patients
+    | IcuPatients
     | CarePatients
     | Ratios
     | HCenters
