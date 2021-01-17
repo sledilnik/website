@@ -59,11 +59,11 @@ Več o metodologiji in izsledkih najdete v člankih v [Zdravniškem vestniku](ht
 <!--# Simulacije-->
 
 ## <a id="alarms"></a>Določanje alarmov
-Dr. Janez Stare in dr. Nina Ružić Gorenjec (IBMI MF UL) v analizi [Določanje alarmov pri epidemiji COVID-19 v Sloveniji](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) ocenjujeta zgornje meje pragov, ko je že prišlo do ponovnega zagona epidemije. Rezultati so relevantni predvsem za obdobja nizke pojavnosti virusa v populaciji. Za oceno uporabljata delež potrjeno okuženih izmed testiranih.
+Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) MF UL) v analizi [Določanje alarmov pri epidemiji COVID-19 v Sloveniji](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) ocenjujeta zgornje meje pragov, ko je že prišlo do ponovnega zagona epidemije. Rezultati so relevantni predvsem za obdobja nizke pojavnosti virusa v populaciji. Za oceno uporabljata delež potrjeno okuženih izmed testiranih.
 
 ## <a id="articles"></a>Prispevki
 
-- Raziskovalci [Inštituta za biostatistiko in medicinsko informatiko](https://ibmi.mf.uni-lj.si/) (IBMI MF LJ) so pod vodstvom dr. Nine Ružić Gorenjec v svoji analizi ["Od zgodbe o uspehu do katastrofe"](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1) poudaril, kako zelo važna sta naša mobilnost in epidemiološko sledenje stikom za uspešen odziv proti epidemiji. (13. 1. 2021)
+- Raziskovalci IBMI so pod vodstvom dr. Nine Ružić Gorenjec v svoji analizi ["Od zgodbe o uspehu do katastrofe"](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1) poudaril, kako zelo važna sta naša mobilnost in epidemiološko sledenje stikom za uspešen odziv proti epidemiji. (13. 1. 2021)
 
 - ["Kaj ima matematika z epidemijo?"](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) Članek razloži osnovne pojme in predstavi matematični vidik modeliranja. Povzeto po predavanju prof. Janeza Žiberta. (17. 12. 2020)
 
@@ -75,7 +75,7 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec (IBMI MF UL) v analizi [Določanje 
 
 - ["Epidemija in modeli - Osnove epidemiološkega modeliranja"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) vam v krajših posnetkih predstavi osnovne pojme, ki so najnujnejši za razumevanje epidemije v številkah. (3. 11. 2020)
 
-- [V uvodniku revije Zdravstveno varstvo](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract), ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19. (25. 6. 2020)
+- V uvodniku revije Zdravstveno varstvo, ki jo izdaja NIJZ, so I. Eržen, T. Kamenšek, M. Fošnarič in J. Žibert povzeli [trenutna spoznanja in ključne izzive pri modeliranju epidemije COVID-19](https://content.sciendo.com/view/journals/sjph/59/3/article-p117.xml?tab_body=abstract). (25. 6. 2020)
 
 - Mlada sekcija Statističnega društva Slovenije je 21. aprila 2020 organizirala [največji spletni pogovor slovenskih znanstvenikov na temo COVID-19](https://medium.com/sledilnik/najve%C4%8Dji-posvet-znanstvenikov-zdru%C5%BEiti-je-treba-mo%C4%8D-institucij-in-znanstvene-skupnosti-v-boju-64233b35580c), ki ga je gostil Inštitut za biostatistiko in medicinsko informatiko (IBMI) Medicinske fakultete Univerze v Ljubljani. Pogovor sta vodila dr. Andrej Srakar in dr. Ana Slavec. STA je dogodek prenašala v živo več kot 850 udeležencem. (22. 4. 2020)
 
