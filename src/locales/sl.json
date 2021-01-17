@@ -1713,7 +1713,7 @@
     },
     "donation": {
         "title": "Podpiram Sledilnik",
-        "intro": "Smo **Znanstveno društvo Sledilnik** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Z vašo donacijo boste investirali v prihodnost, boljšo ozaveščenost o razsežnostih težav in pravilno oceno tveganj.\n\nZ vašim prispevkom nam pomagate ostati to, kar smo: znanstvena skupnost, ki nudi javne in prosto dostopne informacije ter analize za vse – **za boljši danes in jutri vseh nas**. Hvala, ker vam ni vseeno!",
+        "intro": "Smo **Znanstveno društvo Sledilnik** in vabimo vas, da po svojih močeh podprete naša prizadevanja. Z vašo podporo bomo lahko nadaljevali z analiziranjem in obdelavo podatkov na kritičnih področjih družbenega delovanja. Vsak prispevek pomeni vložek v prihodnost, boljšo ozaveščenost o razsežnostih težave in pravilno oceno tveganj.\n\nZ vašim prispevkom nam pomagate ostati to, kar smo: znanstvena skupnost, ki nudi javne in prosto dostopne informacije ter analize za vse – **za boljši danes in jutri vseh nas**. Hvala, ker vam ni vseeno!",
         "bankDetails": {
             "recipient": "Prejemnik",
             "purposeCode": "Koda namena",
@@ -1731,10 +1731,10 @@
         "onetime": {
             "title": "Enkratna donacija",
             "banktransfer": {
-                "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**."
             },
             "stripe": {
-                "description": "Enkratni znesek podpore nam lahko namenite tudi **z uporabo kreditne kartice**. Izberite s kakšnim zneskom ste pripravljeni enkratno podpreti naše delovanje:",
+                "description": "Enkratni prispevek Sledilniku lahko vplačate tudi **s kreditno kartico**. Izberite znesek, s katerim želite podpreti naše delovanje:",
                 "success": {
                     "title": "Hvala za enkratno donacijo",
                     "description": ""
@@ -1744,8 +1744,8 @@
         "monthly": {
             "title": "Redna mesečna donacija",
             "stripe": {
-                "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vam pa strošek podpore enakomerno porazdeli skozi leto. Izberite s kakšnim zneskom ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
-                "stopping": "Takšno donacijo lahko kadarkoli ustavite tako, da nam to željo sporočite na drustvo@sledilnik.org.",
+                "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vaš strošek podpore pa se enakomerno porazdeli skozi leto. Izberite znesek, s katerim ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
+                "stopping": "Donacijo lahko prekinete kadarkoli tako, da nam to sporočite na drustvo@sledilnik.org.",
                 "donateButton": "{{amount}} / mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
@@ -1763,11 +1763,11 @@
         },
         "companies": {
             "title": "Donacije pravnih oseb",
-            "description": "Prosimo, kontaktirajte nas na drustvo@sledilnik.org, da vam pripravimo donatorsko pogodbo oz. drugo potrebno dokumentacijo po dogovoru."
+            "description": "Prosimo, kontaktirajte nas na drustvo@sledilnik.org in pripravili bomo donatorsko pogodbo ali drugo potrebno dokumentacijo po dogovoru."
         },
         "other": {
             "title": "Drugi načini podpore",
-            "description": "Dodatne podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, npr v [angleščini](/en/donate).\n\nVeseli smo odprtih podatkov, vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/COVID19Sledilnik), [YouTubeu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in ostalih platformah, kakor tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nČe imate drugačen predlog podpore našemu delovanju oz. za sodelovanje, vas prosimo, da nas kontaktirate na drustvo@sledilnik.org in z veseljem bomo našli rešitev."
+            "description": "Podatke za mednarodna bančna nakazila najdete na straneh v drugih jezikih, na primer v [angleščini](/en/donate).\n\nVeseli vaših pohval, predlogov in deljenja naših informacij na [Twitterju](https://twitter.com/sledilnik), [Facebooku](https://fb.me/COVID19Sledilnik), [YouTubu](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagramu](https://www.instagram.com/sledilnik/) in drugih platformah, pa tudi dopolnitev in popravkov izvorne kode na [GitHubu](https://github.com/sledilnik).\n\nŠe bolj veseli bomo, če nam omogočite dostop do kakršnih koli odprtih podatkov, primernih za naše analize.\n\nŽelite drugače podpreti Sledilnik ali imate svojo idejo o sodelovanju? Kontaktirajte nas na drustvo@sledilnik.org in z veseljem bomo našli rešitev."
         }
     }
 }
