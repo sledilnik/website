@@ -24,7 +24,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 <!--# Modeli-->
 
 ## <a id="seir"></a>Nadgrajen model SEIR
-[Prof. Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani je pripravil [nadgrajen model SEIR](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) za spremljanje bolnišničnih obravnav, obravnav na intenzivni negi in smrti.
+[Prof. Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani je pripravil [nadgrajen model SEIR](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) za spremljanje bolnišničnih obravnav, obravnav v enotah intenzivne terapije in dnevnega oz. kumulativnega števila smrti v Sloveniji.
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
