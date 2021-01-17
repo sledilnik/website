@@ -641,6 +641,10 @@
         "planRelaxation2": {
             "title": "Načrt",
             "description": "Vlada sprejela popravljen načrt sproščanja ukrepov v petih fazah."
+        },
+        "gym": {
+            "title": "Fitnes",
+            "description": "Zaprejo se fitnesi, bazeni, športne dvorane (razen za izjeme).<br>Zaprejo se muzeji in galerije. Knjižnice dovoljene le za prevzem."
         }
     },
     "phase": {

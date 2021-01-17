@@ -1020,6 +1020,10 @@
         "planRelaxation2": {
             "title": "Plan",
             "description": "Government has accepted the revised plan of relaxation of measures in five phases."
+        },
+        "gym": {
+            "title": "Gym",
+            "description": "Closure of gyms, pools, sport facilities (with exceptions).<br>Closing of museums and galleries. Libraries open only for pick-up."
         }
     },
     "days": {
