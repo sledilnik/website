@@ -52,7 +52,7 @@
         "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
         "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
         "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev",
-        "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu "
+        "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu"
     },
     "infocard": {
         "vaccinationSummary": "Cepljenih oseb",
@@ -1605,7 +1605,7 @@
             "answer": "[Graf](/sl/stats#tests-chart) prikazuje skupno število rednih testiranj (prikaz *Redno PCR*) in testiranj [nacionalne raziskave IMI](https://covid19.biolab.si/) (z izbiro prikaza *Raziskava*). S stolpci je prikazano število negativnih in pozitivnih testov na posamezni dan, krivulja kaže dnevni delež pozitivnih testov v odstotkih.\n\nOd Decembra 2020 pa spremljamo tudi hitre antigenske teste (HAT) - število testiranj in število odkritih pozitivnih oseb (prikaz *Redno HAT*)."
         },
         "infections-chart": {
-            "question": "Kaj nam pove graf \"Struktura potrjenih primerov?",
+            "question": "Kaj nam pove graf \"Struktura potrjenih primerov\"?",
             "answer": "[Graf](/sl/stats#infections-chart) nudi vpogled, kolikšen je med vsemi potrjenimi primeri dnevni delež potrjeno okuženih oseb iz rizičnih skupin oz. zaposlenih na rizičnih območjih. Zaradi časovno ne dovolj natančnih vhodnih podatkov o potrjenih primerih so dnevne vrednosti (*Po dnevih (povprečno)*) prikazane kot drseče povprečje 7 dni. Seštevek vrednosti tega dneva, 3 dni pred dnevom in 3 dni po tem dnevu je deljen s 7. Zato graf kaže stanje za štiri dni nazaj, na ta način pa dobimo boljšo predstavo o trendih po posameznih skupinah. Če spodaj izberemo prikaz *Skupno* oz. *Relativno*, bomo iz krivulje potrjenih primerov preskočili na stolpčni prikaz, ki kaže, kolikšno je število potrjenih primerov znotraj posamezne kategorije za na določen dan.\n\nPrirast primerov med zdravstvenimi delavci ne pomeni, da so bili odkriti točno na ta dan; lahko so bili pozitivni že prej in se je samo podatek o njihovem statusu pridobil naknadno. Postavka *Zaposleni v DSO* vključuje zdravstvene delavce, sodelavce in zunanjo pomoč (študentje zdravstvenih smeri), zato so dnevni podatki o zdravstvenih delavcih (modra krivulja oz. stolpci) ustrezno zmanjšani na račun zaposlenih v DSO. To pomeni, da je število zdravstvenih delavcev zelo konzervativna ocena."
         },
         "spread-chart": {
@@ -1714,7 +1714,7 @@
             "description": "Vaša donacija nam bo pomagala pri našem delu.<br>Vabimo Vas, da k donaciji povabite tudi svoje znance in prijatelje, ki so z našim delom zadovoljni.",
             "session": "ID seje plačila:"
         },
-        "onetime" : {
+        "onetime": {
             "title": "Enkratna donacija",
             "banktransfer": {
                 "description": "Donacijo nam lahko **nakažete z bančnega računa** z uporabo UPN naloga v vaši spletni banki s podatki v spodnji preglednici. V kolikor uporabljate mobilno bančno aplikacijo, lahko nalog izpolnite hitreje s skeniranjem QR kode. V obeh primerih na nalog vpišite **poljuben znesek**."
