@@ -245,6 +245,7 @@ let renderStructureChart (state: State) dispatch =
 
         let mutable curGroup = 0
         let mutable sum = 0.
+
         match points with
         | [||] -> ""
         | _ ->
@@ -266,6 +267,7 @@ let renderStructureChart (state: State) dispatch =
 
                     if group > curGroup then
                         s.Append "<tr>" |> ignore
+
                         let sumStr =
                             sprintf
                                 "<td></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
@@ -388,8 +390,7 @@ let renderStructureChart (state: State) dispatch =
                      ``type`` = "linear"
                      opposite = true
                      gridZIndex = -1
-                     visible = true
-                     plotLines = [| {| value = 0; color = "black" |} |] |}
+                     visible = true |}
                   {| index = 1
                      height = "35%"
                      top = "65%"
@@ -398,8 +399,7 @@ let renderStructureChart (state: State) dispatch =
                      ``type`` = "linear"
                      opposite = true
                      gridZIndex = -1
-                     visible = true
-                     plotLines = [| {| value = 0; color = "black" |} |] |} |]
+                     visible = true |} |]
            plotOptions =
                pojo
                    {| column =
@@ -422,7 +422,16 @@ let renderStructureChart (state: State) dispatch =
            legend =
                pojo
                    {| enabled = true
-                      layout = "horizontal" |} |}
+                      layout = "horizontal" |}
+           responsive =
+               pojo
+                   {| rules =
+                          [| {| condition = {| maxWidth = 768 |}
+                                chartOptions =
+                                    {| yAxis =
+                                           [| {| labels = pojo {| enabled = false |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
+
 
     |> pojo
 
