@@ -63,9 +63,13 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec (IBMI MF UL) v analizi [Določanje 
 
 ## <a id="articles"></a>Prispevki
 
+- Raziskovalci [Inštituta za biostatistiko in medicinsko informatiko](https://ibmi.mf.uni-lj.si/) (IBMI MF LJ) so pod vodstvom dr. Nine Ružić Gorenjec v svoji analizi ["Od zgodbe o uspehu do katastrofe"](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1) poudaril, kako zelo važna sta naša mobilnost in epidemiološko sledenje stikom za uspešen odziv proti epidemiji. (13. 1. 2021)
+
 - ["Kaj ima matematika z epidemijo?"](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) Članek razloži osnovne pojme in predstavi matematični vidik modeliranja. Povzeto po predavanju prof. Janeza Žiberta. (17. 12. 2020)
 
 - Spletni pogovor STAznanost z naslovom ["Statistični podatki - osnova za razumevanje epidemije"](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). V pogovoru so sodelovali: prof. dr. Leon Cizelj, vodja odseka za reaktorsko tehniko na Inštitutu Jožef Stefan; dr. Zarja Muršič, predstavnica Sledilnika; Mario Fafangel, predstojnik Centra za nalezljive bolezni Nacionalnega inštituta za javno zdravje (NIJZ). (11. 12. 2020)
+
+- Člani Sledilnika smo v prispevku ["Dve Sloveniji - ali res stopicamo na mestu?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) opozorili na krajevne razlike v širitvi virusa in da je za zmanjšanje epidemije pomemben sočasen odziv v vsej državi. (2. 12. 2020)
 
 - Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)
 
