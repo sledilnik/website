@@ -327,7 +327,7 @@ let renderStructureChart (state: State) dispatch =
             match series with
             | InHospital -> ps.inHospital.today
             | Acute -> ps.inHospital.today |> subtract ps.icu.today
-            | Icu -> ps.icu.today |> subtract ps.critical.today
+            | Icu -> ps.icu.today
             | IcuOther ->
                 ps.icu.today
                 |> subtract ps.niv.today
