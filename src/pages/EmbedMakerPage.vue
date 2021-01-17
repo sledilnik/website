@@ -74,7 +74,7 @@ export default {
           dimensions: [1140, 720]
         },
         "CarePatients": {
-          value: "Patients",
+          value: "CarePatients",
           text: this.$t('charts.carePatients.title'),
           dimensions: [1140, 720]
         },
