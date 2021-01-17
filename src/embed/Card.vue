@@ -36,7 +36,7 @@ export default {
         field: 'inHospital',
       },
       icu: {
-        title: 'V intenzivni enoti',
+        title: 'V intenzivni terapiji',
         field: 'icu',
       },
       facility: {
@@ -47,7 +47,7 @@ export default {
             category: 'inHospital',
           },
           {
-            title: 'V intenzivni enoti',
+            title: 'V intenzivni terapiji',
             category: 'icu',
           },
           // {

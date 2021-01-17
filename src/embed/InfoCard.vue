@@ -30,7 +30,7 @@ const cards = {
   },
   icu: {
     cardName: 'icuCurrent',
-    title: 'V intenzivni enoti',
+    title: 'V intenzivni terapiji',
   },
   deceased: {
     cardName: 'deceasedToDate',
