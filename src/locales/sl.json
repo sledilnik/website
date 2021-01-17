@@ -1019,7 +1019,7 @@
             "population": "prebivalcev",
             "mortalityOfConfirmedCases": "Smrtnost potrjenih primerov",
             "relativeIncrease": "Tedenski prirast",
-            "disclaimerRegion": "Opomba: podatkov o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu.",
+            "disclaimerRegion": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni. Zaradi tega prihaja do razlike med skupnim številom umrlih in podatki na zemljevidu.",
             "disclaimer": "Opomba: Podatkov o umrlih po občinah od 12. decembra ne prejemamo, že pred tem pa so bili pomankljivi. Zaradi tega prihaja do velike razlike med skupnim številom umrlih in podatki na zemljevidu."
         },
         "rmap": {
