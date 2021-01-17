@@ -29,7 +29,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
-            | "Weekly" -> Some Sources
+            | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
             | "AgeGroups" -> Some AgeGroups
@@ -37,14 +37,15 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "HCenters" -> Some HCenters
             | "Hospitals" -> Some Hospitals
             | "Infections" -> Some Infections
-            | "CountriesCasesPer1M" -> Some CountriesCasesPer1M
-            | "CountriesActiveCasesPer1M" -> Some CountriesActiveCasesPer1M
-            | "CountriesNewDeathsPer1M" -> Some CountriesNewDeathsPer1M
-            | "CountriesTotalDeathsPer1M" -> Some CountriesTotalDeathsPer1M
+            | "CountriesCasesPer100k" -> Some CountriesCasesPer100k
+            | "CountriesActiveCasesPer100k" -> Some CountriesActiveCasesPer100k
+            | "CountriesNewDeathsPer100k" -> Some CountriesNewDeathsPer100k
+            | "CountriesTotalDeathsPer100k" -> Some CountriesTotalDeathsPer100k
             | "PhaseDiagram" -> Some PhaseDiagram
             | "Deceased" -> Some Deceased
             | "ExcessDeaths" -> Some ExcessDeaths
             | "MetricsCorrelation" -> Some MetricsCorrelation
+            | "WeeklyDemographics" -> Some WeeklyDemographics
             | _ -> None
             |> Embedded
 
@@ -56,6 +57,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
           StatsData = NotAsked
           WeeklyStatsData = NotAsked
           RegionsData = NotAsked
+          MunicipalitiesData = NotAsked
           RenderingMode = renderingMode }
 
     // Request data loading based on the page we are on
@@ -65,7 +67,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
-                  Cmd.ofMsg RegionsDataRequest ]
+                  Cmd.ofMsg RegionsDataRequest
+                  Cmd.ofMsg MunicipalitiesDataRequest ]
         | "world" ->
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
@@ -74,7 +77,8 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             Cmd.batch
                 [ Cmd.ofMsg StatsDataRequested
                   Cmd.ofMsg WeeklyStatsDataRequested
-                  Cmd.ofMsg RegionsDataRequest ]
+                  Cmd.ofMsg RegionsDataRequest
+                  Cmd.ofMsg MunicipalitiesDataRequest ]
 
     initialState, cmd
 
@@ -95,6 +99,11 @@ let update (msg: Msg) (state: State) =
         | Loading -> state, Cmd.none
         | _ -> { state with RegionsData = Loading }, Cmd.OfAsync.result (Data.Regions.load state.ApiEndpoint)
     | RegionsDataLoaded data -> { state with RegionsData = data }, Cmd.none
+    | MunicipalitiesDataRequest ->
+        match state.MunicipalitiesData with
+        | Loading -> state, Cmd.none
+        | _ -> { state with MunicipalitiesData = Loading }, Cmd.OfAsync.result (Data.Municipalities.load state.ApiEndpoint)
+    | MunicipalitiesDataLoaded data -> { state with MunicipalitiesData = data }, Cmd.none
 
 open Elmish.React
 
@@ -152,11 +161,11 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.RegionsData with
+                    match state.MunicipalitiesData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Municipality; data = data |} }
+                    | Success data -> lazyView Map.mapMunicipalitiesChart {| data = data |} }
 
     let regionMap =
           { VisualizationType = RegionMap
@@ -169,7 +178,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapChart {| mapToDisplay = Map.MapToDisplay.Region; data = data |} }
+                    | Success data -> lazyView Map.mapRegionChart {| data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities
@@ -178,7 +187,7 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.RegionsData with
+                    match state.MunicipalitiesData with
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
@@ -231,13 +240,7 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
             Explicit = false
-            Renderer =
-                fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView TestsChart.testsChart {| data = data |} }
+            Renderer = fun _ -> lazyView TestsChart.testsChart () }
 
     let hCenters =
           { VisualizationType = HCenters
@@ -387,13 +390,20 @@ let render (state: State) (_: Msg -> unit) =
             ClassName = "deceased-chart"
             ChartTextsGroup = "deceased"
             Explicit = false
-            Renderer = fun _ -> DeceasedViz.Rendering.renderChart()
-         }
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success statsData ->
+                        lazyView DeceasedViz.Rendering.renderChart statsData
+          }
 
-    let countriesCasesPer1M =
-          { VisualizationType = CountriesCasesPer1M
+    let countriesCasesPer100k =
+          { VisualizationType = CountriesCasesPer100k
             ClassName = "countries-cases-chart"
-            ChartTextsGroup = "countriesNewCasesPer1M"
+            ChartTextsGroup = "countriesNewCasesPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -404,16 +414,16 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = NewCasesPer1M
-                              ChartTextsGroup = "countriesNewCasesPer1M"
+                              MetricToDisplay = NewCasesPer100k
+                              ChartTextsGroup = "countriesNewCasesPer100k"
                               DataSource = "dsOWD_NIJZ"
                             }
           }
 
-    let countriesActiveCasesPer1M =
-          { VisualizationType = CountriesActiveCasesPer1M
+    let countriesActiveCasesPer100k =
+          { VisualizationType = CountriesActiveCasesPer100k
             ClassName = "countries-active-chart"
-            ChartTextsGroup = "countriesActiveCasesPer1M"
+            ChartTextsGroup = "countriesActiveCasesPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -424,14 +434,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = ActiveCasesPer1M
-                              ChartTextsGroup = "countriesActiveCasesPer1M"
+                              MetricToDisplay = ActiveCasesPer100k
+                              ChartTextsGroup = "countriesActiveCasesPer100k"
                               DataSource = "dsOWD_NIJZ"
                             }
           }
 
-    let countriesNewDeathsPer1M =
-          { VisualizationType = CountriesNewDeathsPer1M
+    let countriesNewDeathsPer100k =
+          { VisualizationType = CountriesNewDeathsPer100k
             ClassName = "countries-new-deaths-chart"
             ChartTextsGroup = "countriesNewDeathsPer100k"
             Explicit = false
@@ -444,16 +454,16 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = NewDeathsPer1M
+                              MetricToDisplay = NewDeathsPer100k
                               ChartTextsGroup = "countriesNewDeathsPer100k"
                               DataSource = "dsOWD_MZ"
                             }
           }
 
-    let countriesTotalDeathsPer1M =
-          { VisualizationType = CountriesTotalDeathsPer1M
+    let countriesTotalDeathsPer100k =
+          { VisualizationType = CountriesTotalDeathsPer100k
             ClassName = "countries-total-deaths-chart"
-            ChartTextsGroup = "countriesTotalDeathsPer1M"
+            ChartTextsGroup = "countriesTotalDeathsPer100k"
             Explicit = false
             Renderer =
                 fun state ->
@@ -464,14 +474,14 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data ->
                         lazyView CountriesChartViz.Rendering.renderChart
                             { StatsData = data
-                              MetricToDisplay = TotalDeathsPer1M
-                              ChartTextsGroup = "countriesTotalDeathsPer1M"
+                              MetricToDisplay = TotalDeathsPer100k
+                              ChartTextsGroup = "countriesTotalDeathsPer100k"
                               DataSource = "dsOWD_MZ"
                             }
           }
 
 //    let countriesDeathsPerCases =
-//          { VisualizationType = CountriesDeathsPer1M
+//          { VisualizationType = CountriesDeathsPer100k
 //            ClassName = "countries-deaths-per-cases"
 //            ChartTextsGroup = "countriesDeathsPerCases"
 //            Explicit = false
@@ -524,23 +534,37 @@ let render (state: State) (_: Msg -> unit) =
                         lazyView MetricsCorrelationViz.Rendering.renderChart
                             {| data = data |} }
 
+    let weeklyDemographics =
+          { VisualizationType = WeeklyDemographics
+            ClassName = "weekly-demographics-chart"
+            ChartTextsGroup = "weeklyDemographics"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
+
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison
+        [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; tests; ageGroups; hcCases;
+          ageGroupsTimeline; weeklyDemographics; ageGroups; 
+          infections; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
           phaseDiagram; spread;
-          hCenters; infections
+          hCenters
         ]
 
     let worldVisualizations =
         [ worldMap
-          countriesActiveCasesPer1M
-          countriesCasesPer1M
-          countriesNewDeathsPer1M
-          countriesTotalDeathsPer1M
+          countriesActiveCasesPer100k
+          countriesCasesPer100k
+          countriesNewDeathsPer100k
+          countriesTotalDeathsPer100k
           // countriesDeathsPerCases
         ]
 
@@ -550,12 +574,13 @@ let render (state: State) (_: Msg -> unit) =
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
-          countriesCasesPer1M
-          countriesActiveCasesPer1M
-          countriesNewDeathsPer1M
-          countriesTotalDeathsPer1M
+          countriesCasesPer100k
+          countriesActiveCasesPer100k
+          countriesNewDeathsPer100k
+          countriesTotalDeathsPer100k
           phaseDiagram
           excessDeaths
+          weeklyDemographics
         ]
 
     let embedded, visualizations =

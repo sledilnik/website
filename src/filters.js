@@ -1,5 +1,6 @@
 import Vue from "vue";
 import marked from "marked"
+import { formatNumber } from "./i18n";
 
 Vue.filter("prefixDiff", function (value) {
   if (value > 0) {
@@ -9,6 +10,18 @@ Vue.filter("prefixDiff", function (value) {
   }
 });
 
+Vue.filter("number", function(value, minimumFractionDigits = 0, maximumFractionDigits = 1) {
+  return formatNumber(value, { minimumFractionDigits, maximumFractionDigits });
+});
+
+Vue.filter("percent", function(value, minimumFractionDigits = 1, maximumFractionDigits = 1) {
+  return formatNumber(value / 100, {
+    style: "percent",
+    minimumFractionDigits,
+    maximumFractionDigits,
+    signDisplay: "always",
+  });
+});
 
 /**
  * markdown filter

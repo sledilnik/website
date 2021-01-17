@@ -47,8 +47,7 @@
         "confirmedToDate": "Позитивни случаи",
         "tests": "Тестови на ден",
         "lastUpdated": "{{ date, %A, %e. %b }}",
-        "incidence": "14-дневна инциденца",
-        "per100k": "на 100 илјади"
+        "incidence": "14-дневна инциденца"
     },
     "cm": {
         "publicTransport": {
@@ -547,8 +546,6 @@
             "numDateFormat": "%d. %m. %Y",
             "share": "Сподели",
             "noteFaq": "Напомена: ограничувањата на представените податоци се опишани во ",
-            "decimalPoint": ",",
-            "thousandsSep": " . ",
             "all": "Сите",
             "x_months": "{{ count }}м",
             "x_months_plural": "{{ count }}м",
@@ -645,12 +642,12 @@
             "max": "Макс",
             "titleMenu": "Капацитет"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "yAxisTitle": "Нови случаи на 100.000 жители",
             "legendTitle": "Нови случаи на 100.000 жители",
             "titleMenu": "Држави - нови случаи"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "yAxisTitle": "Вкупно починати на 100.000 жители",
             "legendTitle": "Вкупно починати на 100.000 жители",
             "titleMenu": "Држави - починати"
@@ -705,7 +702,7 @@
         "tests": {
             "positiveTests": "Позитивни тестови",
             "negativeTests": "Негативни тестови",
-            "allTesting": "Вкупно",
+            "totalPCR": "Вкупно",
             "title": "Тестирање",
             "shareOfPositive": "Дел до позитивните тестови (%)",
             "regular": "Редовно",
@@ -807,7 +804,7 @@
             "yAxisTitle": "Процент на починати од потврдените случаи",
             "titleMenu": "Држави - процент на смртни случаи"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Држави: Активни случаи на 100.000 жители",
             "red": "Критериум за црвената листа",
             "legendTitle": "Активни случаи на 100.000 жители",

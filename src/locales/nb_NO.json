@@ -17,8 +17,8 @@
             "shareOfPositive": "Andel positive tester (%)",
             "positiveTests": "Positive tester",
             "negativeTests": "Negative tester",
-            "ns-apr20": "Studie",
-            "allTesting": "Alle",
+            "ns-apr20": "Studie: PCR",
+            "totalPCR": "Alle: PCR",
             "title": "Testing"
         },
         "hCenters": {
@@ -43,7 +43,7 @@
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester",
+            "testsPerformed": "Tester: PCR",
             "showToday": "Daglig",
             "showActive": "Aktiv"
         },
@@ -84,7 +84,7 @@
                 "date": "Dato"
             }
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "legendTitle": "Aktive tilfeller per 100k folk",
             "yAxisTitle": "Aktive tilfeller per 100k folk"
         },
@@ -266,11 +266,6 @@
         "deceasedToDate": "Bekreftede dødsfall",
         "icu": "På intensivavdeling",
         "inHospital": "Hospitalisert",
-        "redPhase": "Rød-fase",
-        "orangePhase": "Oransje stadie",
-        "redPhaseGenitive": "rød",
-        "orangePhaseGenitive": "oransje",
-        "per100k": "per 100k",
         "active": "Aktive tilfeller",
         "confirmedToDate": "Bekreftede tilfeller",
         "tests": "Tester i dag"

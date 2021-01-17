@@ -30,12 +30,12 @@ type FullMetricType = {
         | Today, false -> chartText "showToday"
         | Today, true -> chartText "show7DaysAverage"
         | ToDate, _ -> chartText "showToDate"
-
-let availableMetricTypes =
-    [ { MetricType = Active; IsAveraged = false }
-      { MetricType = Today; IsAveraged = false }
-      { MetricType = ToDate; IsAveraged = false }
-      { MetricType = Today; IsAveraged = true } ]
+    static member All =
+        [ { MetricType = Active; IsAveraged = false }
+          { MetricType = Today; IsAveraged = false }
+          { MetricType = ToDate; IsAveraged = false }
+          { MetricType = Today; IsAveraged = true } ]
+    static member Default = { MetricType = Active; IsAveraged = false }
 
 type Metric =
     | PerformedTestsToday
@@ -59,10 +59,13 @@ type Metric =
     | VentilatorToDate
     | DeceasedToday
     | DeceasedToDate
+    | VacAdministeredToday
+    | VacAdministeredToDate
     with
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
-             ConfirmedCasesToDate; ActiveCases; RecoveredToDate]
+             ConfirmedCasesToDate; ActiveCases; RecoveredToDate 
+             VacAdministeredToday; VacAdministeredToDate ]
             |> List.contains metric
 
 type MetricCfg = {
@@ -83,6 +86,7 @@ module Metrics  =
         { Metric=VentilatorToday;       Color="#bf5747"; Visible=true;  Type=Active; Id="ventilator" }
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
+        // DISABLED { Metric=VacAdministeredToday;  Color="#189a73"; Visible=true;  Type=Today;  Id="vaccinationAdministered" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
         { Metric=ICUIn;                 Color="#d96756"; Visible=true;  Type=Today;  Id="icuAdmitted" }
@@ -93,6 +97,7 @@ module Metrics  =
         { Metric=PerformedTestsToDate;  Color="#19aebd"; Visible=false; Type=ToDate; Id="testsPerformed" }
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
+        { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
         { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#d96756"; Visible=false; Type=ToDate; Id="icuAdmitted" }
@@ -112,12 +117,14 @@ type State =
       PatientsData : PatientsStats []
       Error : string option
       RangeSelectionButtonIndex: int
+      ShowAll : bool
     }
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
     | ToggleMetricVisible of Metric
+    | ToggleAllMetrics of bool
     | ScaleTypeChanged of ScaleType
     | MetricTypeChanged of FullMetricType
     | RangeSelectionChanged of int
@@ -126,12 +133,13 @@ let init data : State * Cmd<Msg> =
     let cmd = Cmd.OfAsync.either getOrFetch () ConsumePatientsData ConsumeServerError
     let state = {
         ScaleType = Linear
-        MetricType = { MetricType = Active; IsAveraged = false }
+        MetricType = FullMetricType.Default
         Metrics = Metrics.initial
         StatsData = data
         PatientsData = [||]
         Error = None
         RangeSelectionButtonIndex = 0
+        ShowAll = true
     }
     state, cmd
 
@@ -148,6 +156,18 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             Metrics = state.Metrics
                       |> Metrics.update (fun mc -> { mc with Visible = not mc.Visible}) metric
         }, Cmd.none
+    | ToggleAllMetrics visibleOrHidden ->
+        let newMetricsConfig =
+            state.Metrics
+            |> List.map (fun m ->
+                { Metric = m.Metric
+                  Color = m.Color
+                  Type = m.Type
+                  Id = m.Id
+                  Visible = visibleOrHidden } )
+        { state with
+            Metrics = newMetricsConfig
+            ShowAll = not state.ShowAll }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
     | MetricTypeChanged metricType ->
@@ -167,6 +187,8 @@ let statsDataGenerator metric =
         | ConfirmedCasesToDate -> point.Cases.ConfirmedToDate
         | ActiveCases -> point.Cases.Active
         | RecoveredToDate -> point.Cases.RecoveredToDate
+        | VacAdministeredToday -> point.Vaccination.Administered.Today
+        | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
         | _ -> None
 
 let patientsDataGenerator metric =
@@ -249,9 +271,7 @@ let renderChartOptions state dispatch =
             yield pojo
                 {|
                     visible = true
-                    ``type`` =
-                        if state.MetricType.IsAveraged then "spline"
-                        else "line"
+                    ``type`` = "line"
                     color = metric.Color
                     name = chartText metric.Id
                     marker =
@@ -317,12 +337,13 @@ let renderMetricSelector (metric : MetricCfg) dispatch =
 let renderMetricsSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
-        prop.children [
-            for mc in state.Metrics do
-                if mc.Type = state.MetricType.MetricType then
-                    yield renderMetricSelector mc dispatch
-        ]
-    ]
+        prop.children (
+            [ Html.div [
+                prop.onClick (fun _ -> ToggleAllMetrics ( if state.ShowAll then false else true ) |> dispatch)
+                prop.className "btn btn-sm metric-selector"
+                prop.text ( if state.ShowAll then I18N.t "charts.common.hideAll" else I18N.t "charts.common.showAll" ) ] ]
+            |> List.append ( state.Metrics |> List.map (fun metric -> if metric.Type = state.MetricType.MetricType then renderMetricSelector metric dispatch else Html.none) )
+        )  ]
 
 let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
     let renderMetricTypeSelector (metricTypeToRender: FullMetricType) =
@@ -336,7 +357,7 @@ let renderMetricTypeSelectors (activeMetricType: FullMetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        availableMetricTypes
+        FullMetricType.All
         |> List.map renderMetricTypeSelector
 
     Html.div [

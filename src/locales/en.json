@@ -14,6 +14,7 @@
         "animation": "Animation",
         "faq": "FAQ",
         "about": "About",
+        "donate": "Donate!",
         "links": "Links",
         "github": "GitHub",
         "goToGraph": "Go to graph",
@@ -46,28 +47,21 @@
         "bubble": "Living in the bubble… How to limit contacts and not stay alone? 💭",
         "presentation": "How science helps decision makers - presentation in National Assembly",
         "weKnowWeDoNotKnow": "We know that data sometimes lies. How do we know, that we do (not) know? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "tests": "5 myths about tests ...",
+        "tests": "5 myths about tests …",
         "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
         "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
         "newsText": "Coronavirus World Map 🌍- active cases per 1M people",
         "restrictions": "Current measures and restrictions"
     },
     "infocard": {
-        "tests": "Tests Today",
+        "vaccinationSummary": "People Vaccinated",
+        "tests": "Tests Today: PCR",
+        "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
-        "per100k": "per 100k",
         "newCases7d": "New Cases",
         "newCases7dInfo": "average of last 7 days",
-        "orangePhase": "Orange phase",
-        "orangePhaseGenitive": "orange",
-        "redPhase": "Red phase",
-        "redPhaseGenitive": "red",
-        "nextCriteria": "<br/>Criteria for the package {{ phaseNextNumber }} of the {{ phaseNextPackage }} phase is {{ phaseNextCriteria }}.",
-        "package1": "package 1",
-        "package2": "package 2",
-        "package3": "package 3",
         "recoveredToDate": "Recovered",
         "inHospital": "Hospitalized",
         "icu": "In ICU",
@@ -197,6 +191,10 @@
         "13": {
             "title": "phase<br>13",
             "description": "new testing methodology"
+        },
+        "14": {
+            "title": "phase<br>14",
+            "description": "rapid antigen tests"
         }
     },
     "charts": {
@@ -219,8 +217,6 @@
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "all": "All",
-            "thousandsSep": " ",
-            "decimalPoint": ".",
             "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "view": "View:",
@@ -238,7 +234,9 @@
             "dateFormat": "%A, %B %e, %Y",
             "longDateFormat": "%B %e, %Y",
             "shortDateFormat": "%b %e",
-            "weekYearDateFormat": "Week %W of %Y"
+            "weekYearDateFormat": "Week %W of %Y",
+            "hideAll": "Hide all",
+            "showAll": "Show all"
         },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
@@ -252,10 +250,11 @@
             "showToday": "Daily",
             "showToDate": "To Date",
             "show7DaysAverage": "7-Day Average",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
+            "vaccinationAdministered": "Vaccinated",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -264,7 +263,7 @@
             "icuDischarged": "Discharged from ICU",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
-            "ventilatorDischarged": "Disconnected from Ventilator (intubated)",
+            "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
             "deceased": "Deaths"
         },
         "dailyComparison": {
@@ -272,8 +271,11 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
-            "tests": "Tests Performed",
-            "positivePct": "Share of Positive Tests (%)",
+            "vaccinated": "People Vaccinated",
+            "tests": "Tests Performed: PCR",
+            "positivePct": "Share of Positive: PCR (%)",
+            "testsHAT": "Tests Performed: RAT",
+            "positivePctHAT": "Share of Positive: RAT (%)",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
             "icuAdmitted": "Admitted to ICU",
@@ -282,10 +284,16 @@
         "deceased": {
             "title": "Deaths",
             "titleMenu": "Deaths",
-            "deceasedToday": "Deaths per Day",
-            "deceasedTodayRelative": "Deaths per Day (relative)",
-            "deceasedToDate": "Deaths to Date",
-            "deceasedToDateRelative": "Deaths to Date (relative)",
+            "disclaimer": "Note: deceased by age and retirement homes data is provided weekly, therefore it is not complete for last two weeks.",
+            "showToday": "Daily",
+            "showToDate": "To Date",
+            "showNormal": "Absolute",
+            "showPercent": "Proportion",
+            "deceasedHospitals": "Place of Death",
+            "deceasedByType": "Retirement Homes",
+            "deceasedByAge": "Age",
+            "deceased-rhoccupant": "Retirement Home Occupants",
+            "deceased-other": "Other",
             "deceased-icu": "ICU",
             "deceased-acute": "Acute Medical Unit",
             "deceased-care": "Care Hospital",
@@ -355,24 +363,30 @@
             "allRegions": "All regions"
         },
         "hcCases": {
-            "title": "Confirmed Cases among Health Care Employees",
-            "titleMenu": "HC Employees - cases",
+            "title": "Cases in Health Care and Retirement Homes, weekly",
+            "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
-            "confirmedCases": "Confirmed Cases",
-            "healthcareEmployeesCases": "Confirmed Health Care Employees",
-            "healthcareEmployees": "Health Care Employees",
-            "healthcareEmployeesRelative": "Health Care Employees (Relative)",
-            "totalConfirmed": "Confirmed Cases Total"
+            "all": "All",
+            "relative": "Relative",
+            "healthcareEmployeesCases": "Health Care Employees",
+            "rhOccupantCases": "Retirement Home Residents",
+            "totalConfirmed": "All Confirmed",
+            "otherCases": "Other Persons"
         },
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
             "disclaimer": "Note: From December 3, we do not received data per laboratory.",
-            "allTesting": "All",
-            "byLab": "By Laboratory: Tests",
+            "positiveSplit": "Positive PCR and RAT",
+            "positiveHAT": "Positive RAT",
+            "positivePCR": "Positive PCR",
+            "positiveTotal": "Positive Total",
+            "totalPCR": "All: PCR",
+            "byLab": "By Laboratory: Tests PCR",
             "byLabPercent": "By Laboratory: % positive",
-            "regular": "Regular",
-            "ns-apr20": "Study",
+            "hagt": "Regular: RAT",
+            "regular": "Regular: PCR",
+            "ns-apr20": "Study: PCR",
             "negativeTests": "Negative Tests",
             "positiveTests": "Positive Tests",
             "shareOfPositive": "Share of Positive Tests (%)"
@@ -380,7 +394,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
-            "disclaimer": "Note: this chart is not up-to-date. From October 11, NIJZ does not report the data about retirement homes and heltcare employees anymore.",
+            "disclaimer": "Note: from October 11, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
@@ -392,7 +406,7 @@
         },
         "metricsCorrelation": {
             "title": "Correlation between cases, hospitalized and deceased",
-            "titleMenu": "Correlation between cases, hospitalized and deceased",
+            "titleMenu": "Correlation",
             "averageByDay": "By Day (average)",
             "all": "Total",
             "cases": "Confirmed cases",
@@ -433,7 +447,8 @@
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "newCases7Days": "New Cases (7-day avg.)",
-            "deceased": "Deaths"
+            "deceased": "Deaths",
+            "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
             "title": "Cases by Region (per 100,000 people)",
@@ -460,7 +475,8 @@
             "confirmedCases": "Confirmed Cases",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
+            "disclaimer": "Note: deceased by municipality data is not provided by NIJZ since December 12 and even before it is not complete. This is the reason why there is a deviation with the total number of deaths."
         },
         "rmap": {
             "title": "Region Map",
@@ -523,7 +539,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: we receive data about deaths from daily reports from hospitals. Demographic data (gender, age, municipality) about the deceased is reported by institutions (healthcare, retirement homes) to the NIJZ, but this data is delayed for several weeks. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimer": "Note: Demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
@@ -533,14 +549,14 @@
             "activeCases": "Active cases",
             "activeCasesRelative": "Active cases (relative)"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",
             "titleMenu": "Countries - Active Cases",
             "yAxisTitle": "Active cases per 100,000 people",
             "legendTitle": "Active cases per 100,000 people",
             "red": "criteria for red list"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "title": "Countries: New Daily Cases Per 100,000 People (7-day average)",
             "titleMenu": "Countries - New Cases",
             "yAxisTitle": "New daily cases per 100,000 people",
@@ -552,7 +568,7 @@
             "yAxisTitle": "New daily deaths per 100,000 people",
             "legendTitle": "New daily deaths per 100,000 people"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "title": "Countries: Total Deaths Per 100,000 People (7-day average)",
             "titleMenu": "Countries - Deaths",
             "yAxisTitle": "Total deaths per 100,000 people",
@@ -594,6 +610,7 @@
             "title": "Excess deaths",
             "titleMenu": "Excess deaths",
             "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
             "absolute": {
                 "title": "Yearly comparison",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
@@ -603,6 +620,16 @@
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
                 "covidDeaths": "Confirmed COVID-19 deaths",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
+            },
+            "excessByAgeGroup": {
+                "title": "Excess relative to the last 5 years by age groups",
+                "disclaimer": "Note: data on deaths for the last month is incomplete. Column widths represent the ratio between deaths in the age group of the column versus all deaths in a given month.",
+                "totalDeceased": "Total deceased",
+                "sex": {
+                    "both": "All",
+                    "male": "Male",
+                    "female": "Female"
+                }
             }
         },
         "hospitals": {
@@ -681,15 +708,17 @@
             }
         },
         "sources": {
-            "title": "Sources of Infection and Quarantine",
-            "titleMenu": "Sources of Infection",
-            "disclaimerGeneral": "Note: data for last week are not complete yet - share of imported cases may be smaller than actual.",
+            "title": "Sources and Locations of Infection, weekly",
+            "titleMenu": "Sources and Locations of Infection",
+            "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
             "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
             "quarantine": "Quarantine",
             "quarantineRelative": "Quarantine (Relative)",
+            "byLocation": "By Location",
+            "byLocationRelative": "By Location (Relative)",
             "bySource": "Sources of Infection",
             "bySourceRelative": "Sources of Infection (Relative)",
             "bySourceCountry": "Imported Cases",
@@ -699,20 +728,46 @@
             "localSource": "Local Source",
             "sourceUnknown": "Unknown Source",
             "totalConfirmed": "Confirmed Cases Total",
-            "totalImported": "Imported Cases Total"
+            "totalImported": "Imported Cases Total",
+            "family": "Family",
+            "work": "Work",
+            "school": "Educational Institution",
+            "hospital": "Hospital",
+            "otherHealthcare": "Other Healthcare Institution",
+            "retirementHome": "Retirement Home",
+            "prison": "Prison",
+            "transport": "Public Transport",
+            "shop": "Shop",
+            "restaurant": "Restaurant",
+            "sport": "Sport Activity",
+            "gatheringPrivate": "Private Gathering",
+            "gatheringOrganized": "Organized Gathering",
+            "locationOther": "Other",
+            "locationUnknown": "Unknown"
+        },
+        "weeklyDemographics": {
+            "title": "Weekly Cases – Demographics",
+            "titleMenu": "Age Groups – Weekly",
+            "ageGroup": "Age Group",
+            "male": "Male",
+            "female": "Female",
+            "per100k": "per 100,000 people",
+            "newCases": "New Cases",
+            "ratio": "Cases Ratio M/F"
         }
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
     },
     "tableDict": {
-        "tests_performed": "Tests (daily)",
-        "tests_performed_todate": "Tests (to date)",
+        "tests_performed": "Tests PCR (daily)",
+        "tests_performed_todate": "Tests PCR (to date)",
         "cases_confirmed": "Confirmed Cases (daily)",
         "cases_confirmed_todate": "Confirmed Cases (to date)",
         "cases_active": "Active Cases",
         "cases_recovered_todate": "Recovered (to date)",
         "cases_closed_todate": "Closed Cases (to date)",
+        "vaccination_administered_todate": "People Vaccinated (to date)",
         "cases_hs_employee_confirmed_todate": "Confirmed Cases - Healthcare Staff (to date)",
         "cases_rh_employee_confirmed_todate": "Confirmed Cases - Retirement Home Staff (to date)",
         "cases_rh_occupant_confirmed_todate": "Confirmed Cases - Retirement Home Residents (to date)",
@@ -766,7 +821,7 @@
         },
         "liftFoodMarkets": {
             "title": "Markets",
-            "description": "Relaxation: markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
+            "description": "Relaxation: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
         },
         "liftMunicipality": {
             "description": "Relaxation: movement outside the boundaries of your municipality",
@@ -922,7 +977,7 @@
         },
         "services": {
             "title": "Services",
-            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, ....)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, …)<br>The suspension of public transport (exception: taxi). Removal of some exceptions for border crossings."
         },
         "planRelaxation": {
             "title": "Plan",
@@ -934,7 +989,27 @@
         },
         "liftServices": {
             "title": "Services",
-            "description": "Relaxation: public transport (limited service), some services (florist, car-wash, cleaners)<br>In 4 regions relaxation of shops with cloths and shoes and movement inside region borders with app."
+            "description": "Relaxation: public transport (limited service), florist, car-wash, cleaners.<br>In 4 regions also shops with cloths and shoes and movement inside region borders with app."
+        },
+        "liftReligiousCeremonies": {
+            "title": "Rel.c.",
+            "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
+        },
+        "services2": {
+            "title": "Services",
+            "description": "Prohibition of all shops and services to consumers (exceptions: groceries, pharmacies, banks, post offices, …).<br>Relaxation of some restrictions on gathering and movement until 25.12. 20:00."
+        },
+        "liftFoodMarkets2": {
+            "title": "Markets",
+            "description": "Relaxation: food markets, news-stands, hairdressing salons."
+        },
+        "liftGym": {
+            "title": "Gym",
+            "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+        },
+        "planRelaxation2": {
+            "title": "Plan",
+            "description": "Government has accepted the revised plan of relaxation of measures in five phases."
         }
     },
     "days": {
@@ -944,9 +1019,10 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo, Week %W of %Y}})"
     },
     "region": {
+        "si": "Slovenia (all regions)",
         "za": "Central Sava Region",
         "ce": "Savinja Region",
         "po": "Littoral–Inner Carniola",
@@ -1353,15 +1429,15 @@
         }
     },
     "restrictionsPage": {
-      "searchPlaceholder": "Enter search query",  
-      "title": "Measures and restrictions",
-      "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source. Data are collected in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-      "geoValidity": "Geographical validity",
-      "validity": "Validity",
-      "exceptions": "Exceptions",
-      "extrarule": "Additional rules / interpretations",
-      "notes": "Notes",
-      "link": "Link to decree (official text)"
+        "searchPlaceholder": "Enter search query",
+        "title": "Measures and restrictions",
+        "description": "Using the available data sources, we tried to collect and summarize the currently valid measures adopted by the Slovenian government in response to the COVID-19 pandemic, especially in selected areas that are most relevant to everyday life. The information available through this COVID-19 Tracker, including links to other sites, is collected from a number of official sources with which we are not affiliated, so it should be borne in mind that they are for information purposes only and may change from time to time. The tracker therefore does not guarantee the accuracy and completeness of the information collected on the measures and expressly disclaims any responsibility for further interpretations that cite our data as a source.",
+        "geoValidity": "Geographical validity",
+        "validity": "Validity",
+        "exceptions": "Exceptions",
+        "extrarule": "Additional rules / interpretations",
+        "notes": "Notes",
+        "link": "Link to decree (official text)"
     },
     "faq": {
         "searchPlaceholder": "Enter search query",
@@ -1415,7 +1491,7 @@
         },
         "data-publish-time": {
             "question": "When do you publish the data? Why are the dates on the visualizations different?",
-            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases ...), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/COVID19Sledilnik) and [Twitter](https://twitter.com/sledilnik))."
+            "answer": "Most data for the previous day is collected at 11:59 pm (tests, confirmed cases …), and hospitalization data is mostly obtained by 9 am every day for all hospitals. **Our data is usually updated between 10.00 and 12.00.**\nWhen we publish updated daily data, it is available on all our distribution channels (CSV, REST, website), and we also report it on social networks ([Facebook](https://www.facebook.com/COVID19Sledilnik) and [Twitter](https://twitter.com/sledilnik))."
         },
         "data-differences": {
             "question": "Several portals display numbers of infected people that are different from yours. Why?",
@@ -1431,7 +1507,7 @@
         },
         "data-recovered": {
             "question": "Why did you replace the number of *cured* with the number of *recovered* patients?",
-            "answer": "Sledilnik used to rely on official sources (Government of the Republic of Slovenia, media) for the number of cured people. Unfortunately, reports on when a person is totally cured from Covid-19 are scarce – for now, we only have few confirmed reports of \"cured patients\", and there is, as of yet, still no official definition of when a particular person is cured. A [COVID-19 national survey](https://covid19.biolab.si/) is currently underway at the *Institute of Microbiology and Immunology*, which will also, through voluntary sample testing, show how many people have already fallen ill and recovered from COVID-19. As it is not yet known what the potential consequences of COVID-19 could be (various studies are addressing this question and the results will not be known for a long time), and because health institutions are also talking about recovered rather than cured patients, we are thus changing both the terminology and the method of calculating the number of recoveries. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](#data-active-cases))\n\nOn April 14, the Department of Health released [Priporočila za zaključek izolacije in vrnitev na delovno mesto (Recommendations for Discontinuing Isolation and Returning to Work)](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) from which we can deduce when a person has recovered from the disease and can return to work. For people with symptoms, this is 14 days after the symptoms have subsided, and for healthcare professionals, a control swab is required after 14 days, which must be negative 2x in a row. The Government of the Republic of Slovenia regularly reports on discharges from the hospital, but we do not know if they have already recovered from the disease. The published recommendations indicate that these patients require two consecutive negative control swabs after discharge to home care in order to be considered able to return to work. [In its report](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) the ECDC stated that *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population...* – so we chose the 14-day period as the time when the average confirmed case can still be counted as an *active case*.\n\nWe noticed that the [Worldometer](https://www.worldometers.info/coronavirus/#countries) was reporting recovery numbers, but unfortunately we were unable to obtain data on where this information was coming from. Also, some other sources simply combine survivors with the number of discharged patients from hospitals. Since we believe that these two categories are interchangeable, we have decided to present them separately; these are the *Discharged from Hospital* and *Recovered* indicators.\n\n*Note: The calculation of recoveries was changed on 9 May 2020. We now consider a patient has recovered in 14 days after their infection was confirmed (previously 21 days), so there was be a noticeable jump in the number of survivors. Please take this difference into account when estimating the number of survivors. A more detailed explanation of the changed calculation is available in the Medium article [Od potrjeno okuženih do prebolelih (From Confirmed Case to Recovery )](https://medium.com/@sledilnik/94c81674718e).*"
+            "answer": "Sledilnik used to rely on official sources (Government of the Republic of Slovenia, media) for the number of cured people. Unfortunately, reports on when a person is totally cured from Covid-19 are scarce – for now, we only have few confirmed reports of \"cured patients\", and there is, as of yet, still no official definition of when a particular person is cured. A [COVID-19 national survey](https://covid19.biolab.si/) is currently underway at the *Institute of Microbiology and Immunology*, which will also, through voluntary sample testing, show how many people have already fallen ill and recovered from COVID-19. As it is not yet known what the potential consequences of COVID-19 could be (various studies are addressing this question and the results will not be known for a long time), and because health institutions are also talking about recovered rather than cured patients, we are thus changing both the terminology and the method of calculating the number of recoveries. See also [Do you keep an Active Case counter and do you know how many people are currently infected?](#data-active-cases))\n\nOn April 14, the Department of Health released [Priporočila za zaključek izolacije in vrnitev na delovno mesto (Recommendations for Discontinuing Isolation and Returning to Work)](https://www.zbornica-zveza.si/wp-content/uploads/2020/04/PRIPORO%C4%8CILO-Zaklju%C4%8Dek-izolacije-in-vrnitev-na-delovna-mesta-po-preboleli-bolezni-COVID-19.pdf) from which we can deduce when a person has recovered from the disease and can return to work. For people with symptoms, this is 14 days after the symptoms have subsided, and for healthcare professionals, a control swab is required after 14 days, which must be negative 2x in a row. The Government of the Republic of Slovenia regularly reports on discharges from the hospital, but we do not know if they have already recovered from the disease. The published recommendations indicate that these patients require two consecutive negative control swabs after discharge to home care in order to be considered able to return to work. [In its report](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf) the ECDC stated that *The 14-day incidence of reported COVID-19 cases in the EU/EEA and UK, providing an estimate of the prevalence of active cases in the population…* – so we chose the 14-day period as the time when the average confirmed case can still be counted as an *active case*.\n\nWe noticed that the [Worldometer](https://www.worldometers.info/coronavirus/#countries) was reporting recovery numbers, but unfortunately we were unable to obtain data on where this information was coming from. Also, some other sources simply combine survivors with the number of discharged patients from hospitals. Since we believe that these two categories are interchangeable, we have decided to present them separately; these are the *Discharged from Hospital* and *Recovered* indicators.\n\n*Note: The calculation of recoveries was changed on 9 May 2020. We now consider a patient has recovered in 14 days after their infection was confirmed (previously 21 days), so there was be a noticeable jump in the number of survivors. Please take this difference into account when estimating the number of survivors. A more detailed explanation of the changed calculation is available in the Medium article [Od potrjeno okuženih do prebolelih (From Confirmed Case to Recovery )](https://medium.com/@sledilnik/94c81674718e).*"
         },
         "data-active-cases": {
             "question": "Do you keep an Active Case counter and do you know how many people are currently infected?",
@@ -1459,18 +1535,18 @@
         },
         "chart-metrics-included": {
             "question": "Which indicators does the “COVID-19 Situation in Slovenia” graph include?",
-            "answer": "[Graf](/en/stats#metrics-comparison-chart) vključuje:\n\n* **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.\n\n* **Tests (total)** = Sum of tests up to; data is useful in terms of comparison or in terms of the proportion of the entire population tested, but it can be misleading as certain individuals can be tested several times (eg. health professionals, retirement home employees, etc.).\n\n* **Confirmed Cases (per day)** = Number of confirmed infected per day based on tests. This indicator does not reflect the actual dynamics of newly infected people in the population, as the tests do not sample the entire population but target the at-risk people and certain occupational groups.\n\n* **Confirmed cases (total)** = Total number of all confirmed cases by a given day.\n\n* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)\n\n* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)\n\n* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).\n\n* **Hospitalized (total) ** = Sum of hospital admissions by date.\n\n* **ICU** = Current number of people in ICUs (intensive care units).\n\n* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.\n\n* **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.\n\n* **Discharged from hospital (total)** = Sum of all discharged from a hospital up to this day.\n\n* **Deaths (per day) ** = Number of deaths due to COVID-19 on that day.\n\n* **Deaths (total) ** = Sum of all deaths to date."
+            "answer": "[Graf](/en/stats#metrics-comparison-chart) vključuje:\n\n* **Tests (per day)** = Number of tests for the presence of SARS-CoV-2 virus causing COVID-19 performed. In the first stages of the epidemic, this was an important indicator of the prevalence of the virus, but with the change in testing methodology, ie. of the tested sample, it turned into an indicator of the national health and diagnostics system’s capacity.\n\n* **Tests (total)** = Sum of tests up to; data is useful in terms of comparison or in terms of the proportion of the entire population tested, but it can be misleading as certain individuals can be tested several times (eg. health professionals, retirement home employees, etc.).\n\n* **Confirmed Cases (per day)** = Number of confirmed infected per day based on tests (from 21.12.2020 PCR and RAT). This indicator does not reflect the actual dynamics of newly infected people in the population, as the tests do not sample the entire population but target the at-risk people and certain occupational groups.\n\n* **Confirmed cases (total)** = Total number of all confirmed cases by a given day.\n\n* **Active cases** = Confirmed cases (total) – Recovered (total) – Died (total)\n\n* **Recovered (total)** = Number of recoveries on a given day is a simple estimate equal to the number of all confirmed cases two weeks prior to a given date (assuming an average of 14 days needed to recover), from which the number of fatalities till that very date is subtracted. See also [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)\n\n* **Hospitalized** = Current number of people in hospital care (either in the ordinary ward or in the ICU).\n\n* **Hospitalized (total) ** = Sum of hospital admissions by date.\n\n* **ICU** = Current number of people in ICUs (intensive care units).\n\n* **On ventilator (intubated) ** = Current number of persons in need of a ventilator and are intubated.\n\n* **Discharged from a hospital (daily)** = Number of discharged from hospital on that day.\n\n* **Discharged from hospital (total)** = Sum of all discharged from a hospital up to this day.\n\n* **Deaths (per day) ** = Number of deaths due to COVID-19 on that day.\n\n* **Deaths (total) ** = Sum of all deaths to date."
         },
         "chart-terminology": {
             "question": "What does it mean?",
-            "answer": "Sledilnik uses terminology which is consistent with the official directives of the WHO and ECDC (European Center for Disease Prevention and Control). We use the following tags in the displays:\n* **Confirmed cases** = This is the number of people who tested positive for the SARS-CoV-2 virus. Since the number of confirmed cases depends solely on testing, the number of confirmed cases is significantly lower than the actual number of infected people.\n\n* **Hospitalized** = This is the number of confirmed cases such severe symptoms of COVID-19 that they have been admitted to hospital.\n\n* **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category.\n\n* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.\n\n* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)"
+            "answer": "Sledilnik uses terminology which is consistent with the official directives of the WHO and ECDC (European Center for Disease Prevention and Control). We use the following tags in the displays:\n* **Confirmed cases** = This is the number of people who tested positive for the SARS-CoV-2 virus (from 21.12.2020 PCR and RAT). Since the number of confirmed cases depends solely on testing, the number of confirmed cases is significantly lower than the actual number of infected people.\n\n* **Hospitalized** = This is the number of confirmed cases such severe symptoms of COVID-19 that they have been admitted to hospital.\n\n* **In ICU** = Indicates the number of hospitalized persons who are at risk of death because of the severe symptoms of COVID-19 and require placement in the intensive care unit. This is a subset of the *Hospitalized* category.\n\n* **On ventilator (intubated)** = Indicates the number of hospitalized persons in the intensive care unit who require a ventilator to breathe and are intubated. It is a subset of the *Intensive Care* and *Hospitalized* categories.\n\n* **Recovered** = This is an estimate of the number confirmed cases that are expected to have recovered after 14 days. The number of recoveries is thus equal to the number of all confirmed cases two weeks prior – assuming that the disease should be overcome within 14 days – from which the number of deaths by that given day is subtracted. (See also the question [Why did you replace the number of cured with the number of recovered patients?](#data-recovered)"
         },
         "cases-chart": {
             "question": "What are the Closed cases and what are the Active cases?",
             "answer": "All confirmed cases are shown in the [Confirmed Cases graph](/en/stats#cases-chart). In order to be able to monitor the epidemic, it is important to know how many are still infected. For this reason, we use the following terminology:\n\n**Closed cases**  are the sum of all confirmed cases who are no longer infected with the virus, that is, the recovered and the deceased.\n\n**Active cases** are all confirmed virus infections that still haven’t recovered (are still infected with the virus). See also\n [Which indicators does the “COVID-19 Situation in Slovenia” graph include?](#chart-metrics-included)"
         },
         "chart-phases": {
-            "question": "What do the different phases (phases 1-7) in the graph mean?",
+            "question": "What do the different phases (phases 1-14) in the graph mean?",
             "answer": "The vertical lines divide the stages, delimited by the dates, when the authorities changed the way information about the spread of the infection was collected (the test method was changed, self-isolation interventions were introduced, bans on gathering and movement of persons, and mandatory basic protection were required).\n\nThe phases are shown because the change in testing methodology has also changed the importance of certain indicators by which the prevalence of infections can be judged.\n\n* **Phase 1 (March 4-12, 2020)**: The first cases of infection in Slovenia are recorded. All cases are followed, all contacts are tested.\n\n* **Phase 2 (March 13-19, 2020)**: The testing methodology is changed, and self-isolation and social distancing measures are introduced.\n\n* **Phase 3 (March 20-April 7)**: The testing methodology is revised and a ban on gathering more than five people in public areas is put in place.\n\n* **Phase 4 (April 8-15)**: New change in testing methodology – people with mild symptoms from households with more than one respiratory infections are also tested.\n\n* **Phase 5 (April 15-21)**: New change in testing methodology – re-testing, if possible, of **all suspected SARS-CoV-2 virus infections**.\n\n* ** Phase 6 (April 21–May 15**: New change in testing methodology – All persons **suspected of being infected with SARS-CoV-2** are tested again. A national survey of 3000 randomly sampled persons (additional testing, blood testing for the presence of antibodies) begins.\n\n* **Phase 7 (May 15–present)**: The Slovenian government called an official end to its coronavirus epidemic – a quarantine of at least 14 days will remain in place for people from non-EU states, except for some exemptions (diplomats, cargo). Citizens still have to follow basic rules to prevent a possible spread of infection."
         },
         "patients-chart": {
@@ -1483,11 +1559,11 @@
         },
         "hcenters-chart": {
             "question": "What does the “Healthcare Center Treatment” graph mean?",
-            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#test-charts)"
+            "answer": "The [graph](/en/stats#hcenters-chart) shows the treatment of suspicions of COVID-19 in healthcare centers (primary health care level). You can show data for whole country or select specific region. Healthcare centers are the first entry point for taking swabs to be tested for the presence of the virus, so an increase in the number of suspicions and referrals to self-isolation may be an early indicator that new outbreaks have occurred.\n\nThe graph thus shows the number of all emergency medical visits (also for other diseases) in healthcare centers (see notes below), the number of suspected cases of COVID-19 based on the number of examinations at the COVID-19 entry point, and all suspicions of infections based on telephone conversation with suspected infected patients. Some people may be recorded several times, first by telephone and then during the examination. We also show the total number of referrals to self-isolation.\n\n*Note 1: in some municipalities, the control point for COVID-19 is within the hospital premises (for example the Celje and Novo mesto General Hospitals). Data before 14.4. is not available for these general hospitals.\nNote 2: the methodology for recording suspicions of inspections via telephone conversation has changed, so all suspicions were initially recorded. Since April 23, however, only those suspicions via telephone conversation have been recorded, where no examination and swabbing (testing) was ordered. Therefore it is possible that there are differences in how individual healthcare centers report this data and that this number is too high.*\n\nWhen reporting the number of tests performed, all tests (including repeated tests) are recorded. The number of positive tests therefore includes all positive tests – the same person can be tested several times and counted as positive several times. The number of tests performed may therefore be greater than the number of positive tests reported by laboratories (there, each person is recorded only once). See also [What does the “Testing” graph tell us?](#tests-charts)"
         },
         "tests-chart": {
             "question": "What does the “Testing” graph tell us?",
-            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nAll important health organizations and institutions are aware of the fact that testing for coronavirus infection is one of the most important factors, as only through testing can we understand the course and extent of the pandemic and thus respond appropriately to the threat it poses. However, each country deals with the lack of testing capacities in its own way. On *March 14*, 2020, Slovenia changed the method of monitoring the spread of the infection. From that point on, people with a respiratory infection who did not require hospital care (the situation is therefore only assessed on the basis of the number of diseased patients) were no longer tested. However, all persons with a mild respiratory infection older than 60 years, persons with other confirmed diseases (hypertension, diabetes, and cardiovascular, lung, kidney, and severe liver diseases) and people with immune deficiencies (regardless of age) were tested. On *April 21*, 2020, the method of testing changed again as healthcare professionals were instructed to test all patients with suspected respiratory infection (including those with milder symptoms and regardless of their age)."
+            "answer": "The [graph](/en/stats#tests-chart) shows the total number of regular tests (the *Regular PCR* display), and the national IMI survey tests (by selecting the *Survey* display). The columns show the number of negative and positive tests on a specific day, and the curve shows the daily percentage of positive tests.\n\nSince December 2020 we are also tracking rapid antigen tests (RAT) - see *Regular RAT* display."
         },
         "infections-chart": {
             "question": "What does the “Structure of Confirmed Cases” graph tell us?",
@@ -1495,7 +1571,7 @@
         },
         "spread-chart": {
             "question": "What does the “Growth of Confirmed Cases” graph mean?",
-            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
+            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From 21.12.2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
             "question": "What does the “Confirmed Cases by Region” tell us?",
@@ -1523,7 +1599,19 @@
         },
         "chart-reality": {
             "question": "Do your graphs represent the real picture?",
-            "answer": "Yes, as far as they can, given the limitations of the current displays and of the data itself: the graphs on this page only show what can be deduced from the information given. For example, the total number of tests represents the number of tests performed to date, but does not reflect the total number of people tested, as some people, such as healthcare professionals and people suspected of being infected, have been repeatedly tested.\n\nHowever, the number of confirmed cases depends solely on testing. Since the majority of infected people, who have mild or no symptoms, have not been tested for COVID-19 at all, the number of confirmed cases is significantly lower than the actual number of infected people."
+            "answer": "Yes, as far as they can, given the limitations of the current displays and of the data itself: the graphs on this page only show what can be deduced from the information given. For example, the total number of tests represents the number of tests performed to date, but does not reflect the total number of people tested, as some people, such as healthcare professionals and people suspected of being infected, have been repeatedly tested.\n\nHowever, the number of confirmed cases depends solely on testing. Since the majority of infected people, who have mild or no symptoms, have not been tested for COVID-19 at all, the number of confirmed cases is significantly lower than the actual number of infected people (from 21.12.2020 people testing positive on rapid antigen tests (RAT) also count as confirmed cases)."
+        },
+        "chart-correlation": {
+            "question": "What does the \"Correlation between confirmed cases, hospitalization, and deaths\" graph mean?",
+            "answer": "The [correlation graph](/en/stats#metrics-correlation-chart) shows the temporal correlation between the number of confirmed cases (from 21.12.2020 PCR and RAT), the number of hospitalized patients with, and the number of deaths caused by COVID-19. Each of the three graphs is shown on its scale, as this is the easiest way to show how long after the growth of new confirmed cases of infections we can expect an increase in the number of hospitalized and how much later also an increase in death.\n\nThe graph offers two view menus. In the menu directly below the graph, you can turn an individual curve on or off by clicking on “Confirmed cases”, “Hospitalized”, or “Dead”. Under the first menu, you can switch between the seven-day average and the total number of confirmed cases, hospitalized, or deceased by clicking on the icons \"By days (7-day average)\" and \"Total\"."
+        },
+        "chart-cases-by-age-group": {
+            "question": "What does the \"Confirmed cases by age groups\" graph mean?",
+            "answer": "[Graph](/en/stats#age-groups-trends-chart) The graph divides the daily number of confirmed cases into age groups, according to ten-year age intervals. Exceptions are the first interval (0 to 4 years) and the last, open interval (85+). In the initial view, we see the absolute number of daily confirmed cases (from 21.12.2020 PCR and RAT), divided into age groups.\n\nBelow the graph are two view menus. The menu directly below the graph offers a view of an individual age group, and the menu below it also offers the possibility of switching views between absolute and relative values of different age groups in the daily number of confirmed cases and in the number of actively infected."
+        },
+        "weekly-demographics-chart": {
+            "question": "What does the \"Weekly Cases - Demographics\" graph mean?",
+            "answer": "[Weekly Cases - Demographics](/en/stats#weekly-demographics-chart) is a heatmap displaying the demographic data of confirmed cases accumulated on a weekly basis (from 21.12.2020 PCR and RAT). In the default view, the graph shows the case numbers in each age group per 100,000 people. The shades of green indicate low case numbers in the given week, whereas beige and brown colors indicate a large amount of confirmed cases.\n\n Clicking on the *Cases Ratio M/F* button in the lower-left corner, switches to the display of the ratio between confirmed cases amongst males and females. The color scale now ranges between blue (more male confirmed cases) and red (more female confirmed cases)."
         },
         "what-is-sledilnik": {
             "question": "What is Sledilnik?",
@@ -1533,5 +1621,56 @@
             "question": "I would like to help, where can I begin?",
             "answer": "Contact us at info@sledilnik.org and briefly describe who you are and how you can contribute to the project. Warmly welcome to help."
         }
-    }    
+    },
+    "donation": {
+        "title": "I support Sledilnik",
+        "intro": "Here at the **Sledilnik non-profit scientific society** we want to invite you to support our work by donating according to your means. With your help, we will be able to continue processing and analysing datasets critical to the functioning of our society, making them publicly available, increasing awareness, and improving decision-making.\n\nYour contribution will help us continue doing what we do best: publicly offer open data and accessible analyses – creating a **better today and tomorrow for us all**. Thank you for caring!",
+        "bankDetails": {
+            "recipient": "Recipient",
+            "purposeCode": "Purpose code",
+            "purpose": "Purpose",
+            "reference": "Reference",
+            "iban": "IBAN Account",
+            "bank": "Bank",
+            "bankBicSwift": "Bank SWIFT/BIC"
+        },
+        "success": {
+            "title": "Thank you for your donation",
+            "description": "Your donation will help us with our future work.<br>We kindly ask you to encourage others to donate as well.",
+            "session": "Payment session ID:"
+        },
+        "onetime": {
+            "title": "One-time support",
+            "banktransfer": {
+                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:"
+            },
+            "stripe": {
+                "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
+                "success": {
+                    "title": "Thank you for your one-time donation",
+                    "description": ""
+                }
+            }
+        },
+        "monthly": {
+            "title": "Monthly recurring donation",
+            "stripe": {
+                "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
+                "donateButton": "{{amount}} / month",
+                "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
+                "success": {
+                    "title": "Thank you for your monthly recurring donation",
+                    "description": "If you would like to stop your recurring donation please let us know at drustvo@sledilnik.org."
+                }
+            }
+        },
+        "companies": {
+            "title": "For companies",
+            "description": "Please contact us at drustvo@sledilnik.org to prepare a donation contract and/or other necessary documentation as required."
+        },
+        "other": {
+            "title": "Other ways of support",
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for open data, suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
+        }
+    }
 }

@@ -103,52 +103,57 @@ let addContainmentMeasuresFlags
     (endDate: JsTimestamp option) =
     let events = [|
     // day, mo, color,    i18n
-        4,  3, "#FFFFFF", "firstCase"
-        6,  3, "#FFe6e6", "retirementHomes"
-        8,  3, "#FFFFFF", "checkpoints"
-        10, 3, "#FFe6e6", "borders"
-        12, 3, "#FFFFFF", "epidemic"
-        14, 3, "#FFe6e6", "publicTransport"
-        16, 3, "#FFe6e6", "schools"
-        20, 3, "#FFe6e6", "gatherings"
-        30, 3, "#FFe6e6", "municipality"
-        4,  4, "#e6f0ff", "shops"
-        12, 4, "#FFe6e6", "quarantine"
-        18, 4, "#ebfaeb", "liftVacationHomes"
-        20, 4, "#ebfaeb", "liftService"
-        21, 4, "#FFFFFF", "nationalStudy"
-        29, 4, "#ebfaeb", "liftMuseums"
-        30, 4, "#ebfaeb", "liftMunicipality"
-        4,  5, "#ebfaeb", "liftFoodMarkets"
-        11, 5, "#ebfaeb", "liftPublicTransport"
-        15, 5, "#ebfaeb", "liftQuarantine"
-        18, 5, "#ebfaeb", "liftSchools1to3"
-        26, 5, "#FFe6e6", "quarantine14days"
-        1,  6, "#ebfaeb", "liftSchools4to5"
-        15, 6, "#ebfaeb", "liftGatherings500"
-        19, 6, "#FFe6e6", "quarantineStrict"
-        30, 6, "#FFe6e6", "gatherings50"
-        9,  7, "#FFe6e6", "gatherings10"
-        17, 8, "#FFFFFF", "app"
-        21, 8, "#FFe6e6", "croatia"
-        1,  9, "#ebfaeb", "allSchools"
-        13, 9, "#ebfaeb", "quarantine10days"
-        19, 9, "#FFe6e6", "masks"
-        28, 9, "#FFe6e6", "testOrQuarantine"
-        7, 10, "#FFe6e6", "cnk"
-        9, 10, "#FFe6e6", "gatherings10max"
-        16,10, "#FFe6e6", "regions"
-        19,10, "#FFe6e6", "schools6+"
-        20,10, "#FFe6e6", "movement"
-        24,10, "#FFe6e6", "restaurants"
-        27,10, "#FFe6e6", "municipality2"
-        31,10, "#ebfaeb", "liftLibraries"
-        6, 11, "#ebfaeb", "liftShops"
-        13,11, "#FFe6e6", "gatherings2"
-        16,11, "#FFe6e6", "services"
-        3, 12, "#FFFFFF", "planRelaxation"
-        7, 12, "#FFe6e6", "alcoDrinks"
-        15,12, "#ebfaeb", "liftServices"
+        4,  3, 2020, "#FFFFFF", "firstCase"
+        6,  3, 2020, "#FFe6e6", "retirementHomes"
+        8,  3, 2020, "#FFFFFF", "checkpoints"
+        10, 3, 2020, "#FFe6e6", "borders"
+        12, 3, 2020, "#FFFFFF", "epidemic"
+        14, 3, 2020, "#FFe6e6", "publicTransport"
+        16, 3, 2020, "#FFe6e6", "schools"
+        20, 3, 2020, "#FFe6e6", "gatherings"
+        30, 3, 2020, "#FFe6e6", "municipality"
+        4,  4, 2020, "#e6f0ff", "shops"
+        12, 4, 2020, "#FFe6e6", "quarantine"
+        18, 4, 2020, "#ebfaeb", "liftVacationHomes"
+        20, 4, 2020, "#ebfaeb", "liftService"
+        21, 4, 2020, "#FFFFFF", "nationalStudy"
+        29, 4, 2020, "#ebfaeb", "liftMuseums"
+        30, 4, 2020, "#ebfaeb", "liftMunicipality"
+        4,  5, 2020, "#ebfaeb", "liftFoodMarkets"
+        11, 5, 2020, "#ebfaeb", "liftPublicTransport"
+        15, 5, 2020, "#ebfaeb", "liftQuarantine"
+        18, 5, 2020, "#ebfaeb", "liftSchools1to3"
+        26, 5, 2020, "#FFe6e6", "quarantine14days"
+        1,  6, 2020, "#ebfaeb", "liftSchools4to5"
+        15, 6, 2020, "#ebfaeb", "liftGatherings500"
+        19, 6, 2020, "#FFe6e6", "quarantineStrict"
+        30, 6, 2020, "#FFe6e6", "gatherings50"
+        9,  7, 2020, "#FFe6e6", "gatherings10"
+        17, 8, 2020, "#FFFFFF", "app"
+        21, 8, 2020, "#FFe6e6", "croatia"
+        1,  9, 2020, "#ebfaeb", "allSchools"
+        13, 9, 2020, "#ebfaeb", "quarantine10days"
+        19, 9, 2020, "#FFe6e6", "masks"
+        28, 9, 2020, "#FFe6e6", "testOrQuarantine"
+        7, 10, 2020, "#FFe6e6", "cnk"
+        9, 10, 2020, "#FFe6e6", "gatherings10max"
+        16,10, 2020, "#FFe6e6", "regions"
+        19,10, 2020, "#FFe6e6", "schools6+"
+        20,10, 2020, "#FFe6e6", "movement"
+        24,10, 2020, "#FFe6e6", "restaurants"
+        27,10, 2020, "#FFe6e6", "municipality2"
+        31,10, 2020, "#ebfaeb", "liftLibraries"
+        6, 11, 2020, "#ebfaeb", "liftShops"
+        13,11, 2020, "#FFe6e6", "gatherings2"
+        16,11, 2020, "#FFe6e6", "services"
+        3, 12, 2020, "#FFFFFF", "planRelaxation"
+        7, 12, 2020, "#FFe6e6", "alcoDrinks"
+        15,12, 2020, "#ebfaeb", "liftServices"
+        19,12, 2020, "#ebfaeb", "liftReligiousCeremonies"
+        24,12, 2020, "#FFe6e6", "services2"
+        28,12, 2020, "#ebfaeb", "liftFoodMarkets2"
+        4,  1, 2021, "#ebfaeb", "liftGym"
+        8,  1, 2021, "#FFFFFF", "planRelaxation2"
     |]
     {|
         ``type`` = "flags"
@@ -156,8 +161,8 @@ let addContainmentMeasuresFlags
         showInLegend = false
         color = "#444"
         data =
-            events |> Array.choose (fun (d,m,color,i18n) ->
-                let ts = DateTime(2020,m,d) |> jsTime
+            events |> Array.choose (fun (d,m,y,color,i18n) ->
+                let ts = DateTime(y,m,d) |> jsTime
                 let showMeasure =
                     match startDate, endDate with
                     | startDate, None -> ts >= startDate
@@ -270,6 +275,7 @@ let basicChartOptions
                     {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -333,9 +339,14 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.12.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,11,6);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2020,12,21);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.13.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2020,12,21);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.14.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

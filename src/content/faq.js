@@ -34,7 +34,6 @@ export default [
             "data-usage",
             "chart-usage",
             "chart-infocard-percent",
-            "chart-infocard-phase",
             "metrics-comparison-chart",
             "chart-metrics-included",
             "chart-terminology",
@@ -65,7 +64,10 @@ export default [
             "countries-deaths-chart",
             "chart-reality",
             "chart-percentage",
-            "chart-log-scale"
+            "chart-log-scale",
+            "chart-correlation",
+            "chart-cases-by-age-group",
+            "weekly-demographics-chart"
         ]
     },
     {

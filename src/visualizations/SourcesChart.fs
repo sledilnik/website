@@ -40,15 +40,31 @@ let countryColors =
 type DisplayType =
     | Quarantine
     | QuarantineRelative
+    | ByLocation
+    | ByLocationRelative
     | BySource
     | BySourceRelative
     | BySourceCountry
     | BySourceCountryRelative
   with
-    static member all = [ BySource; BySourceRelative; BySourceCountry; BySourceCountryRelative; Quarantine; QuarantineRelative ]
-    static member getName = function
+    static member All =
+        [ ByLocation
+          ByLocationRelative
+          BySource
+          BySourceRelative
+          BySourceCountry
+          BySourceCountryRelative
+          Quarantine
+          QuarantineRelative ]
+
+    static member Default = ByLocation
+
+    member this.GetName =
+        match this with
         | Quarantine                -> chartText "quarantine"
         | QuarantineRelative        -> chartText "quarantineRelative"
+        | ByLocation                -> chartText "byLocation"
+        | ByLocationRelative        -> chartText "byLocationRelative"
         | BySource                  -> chartText "bySource"
         | BySourceRelative          -> chartText "bySourceRelative"
         | BySourceCountry           -> chartText "bySourceCountry"
@@ -68,7 +84,7 @@ type Msg =
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = BySource
+        { displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 0 }
 
@@ -93,14 +109,14 @@ let renderDisplaySelector state dt dispatch =
         Utils.classes
             [(true, "btn btn-sm metric-selector")
              (state.displayType = dt, "metric-selector--selected") ]
-        prop.text (dt |> DisplayType.getName)
+        prop.text dt.GetName
     ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            DisplayType.All
             |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
 
 type Series =
@@ -111,11 +127,27 @@ type Series =
     | ImportRelatedCases
     | SourceUnknown
     | LocalSource
+    | Family
+    | Work
+    | School
+    | Hospital
+    | OtherHealthcare
+    | RetirementHome
+    | Prison
+    | Transport
+    | Shop
+    | Restaurant
+    | Sport
+    | GatheringPrivate
+    | GatheringOrganized
+    | LocationOther
+    | LocationUnknown
 
 module Series =
     let quarantine = [ SentToQuarantine; ConfirmedCases; ConfirmedFromQuarantine ]
     let quarantineRelative = [  ConfirmedCases; ConfirmedFromQuarantine ]
     let bySource = [ImportedCases; ImportRelatedCases; LocalSource; SourceUnknown; ]
+    let byLocation = [Family; Work; School; Hospital; OtherHealthcare; RetirementHome; Prison; Transport; Shop; Restaurant; Sport; GatheringPrivate; GatheringOrganized; LocationOther; LocationUnknown ]
 
     let getSeriesInfo =
         function
@@ -128,6 +160,21 @@ module Series =
         | SourceUnknown -> "#f95d6a", "sourceUnknown", 0
         | LocalSource ->"#F59C9C", "localSource", 0
 
+        | Family -> "#457844", "family", 0
+        | Work -> "#f95d6a", "work", 0
+        | School -> "#ffa600", "school", 0
+        | Hospital -> "#dba51d", "hospital", 0
+        | OtherHealthcare -> "#10829a", "otherHealthcare", 0
+        | RetirementHome -> "#665191", "retirementHome", 0
+        | Prison -> "#d45087", "prison", 0
+        | Transport -> "#024a66", "transport", 0
+        | Shop -> "#afa53f", "shop", 0
+        | Restaurant -> "#a05195", "restaurant", 0
+        | Sport -> "#70a471", "sport", 0
+        | GatheringPrivate -> "#024a66", "gatheringPrivate", 0
+        | GatheringOrganized -> "#dba51d", "gatheringOrganized", 0
+        | LocationOther -> "#10829a", "locationOther", 0
+        | LocationUnknown -> "#cccccc", "locationUnknown", 0
 
 let tooltipFormatter jsThis =
     let pts: obj [] = jsThis?points
@@ -140,20 +187,20 @@ let tooltipFormatter jsThis =
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
+           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name (I18N.NumberFormat.formatNumber (p?point?fmtTotal : int)))
        |> String.concat "<br>")
 
 let tooltipFormatterWithTotal totalText jsThis =
     let pts: obj [] = jsThis?points
     let total = pts |> Array.map (fun p -> p?point?y |> Utils.optionToInt) |> Array.sum
-    tooltipFormatter jsThis + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" totalText (total |> string)
+    tooltipFormatter jsThis + sprintf """<br><br><span style="color: rgba(0,0,0,0)">●</span> %s: <b>%s</b>""" totalText (I18N.NumberFormat.formatNumber total)
 
 
 
 // ---------------------------
 // Data Massaging
 // ---------------------------
-let splitOutFromTotal (split : int option) (total : int option)  =
+let splitOutFromTotal (split) (total)  =
     match split, total with
     | Some split_, Some total_ -> Some (total_ - split_)
     | None, Some _ -> total
@@ -199,6 +246,21 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
         | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
         | SourceUnknown -> fun dp -> dp.Source.Unknown
         | LocalSource -> fun dp -> dp.Source.Local
+        | Family -> fun dp -> dp.Location.Family
+        | Work -> fun dp -> dp.Location.Work
+        | School -> fun dp -> dp.Location.School
+        | Hospital -> fun dp -> dp.Location.Hospital
+        | OtherHealthcare -> fun dp -> dp.Location.OtherHealthcare
+        | RetirementHome -> fun dp -> dp.Location.RetirementHome
+        | Prison -> fun dp -> dp.Location.Prison
+        | Transport -> fun dp -> dp.Location.Transport
+        | Shop -> fun dp -> dp.Location.Shop
+        | Restaurant -> fun dp -> dp.Location.Restaurant
+        | Sport -> fun dp -> dp.Location.Sport
+        | GatheringPrivate -> fun dp -> dp.Location.GatheringPrivate
+        | GatheringOrganized -> fun dp -> dp.Location.GatheringOrganized
+        | LocationOther -> fun dp -> dp.Location.Other
+        | LocationUnknown -> fun dp -> dp.Location.Unknown
 
     let getPointTotal: (WeeklyStatsDataPoint -> int option) =
         match series with
@@ -209,6 +271,21 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
         | ImportRelatedCases -> fun dp -> dp.Source.ImportRelated
         | SourceUnknown -> fun dp -> dp.Source.Unknown
         | LocalSource -> fun dp -> dp.Source.Local
+        | Family -> fun dp -> dp.Location.Family
+        | Work -> fun dp -> dp.Location.Work
+        | School -> fun dp -> dp.Location.School
+        | Hospital -> fun dp -> dp.Location.Hospital
+        | OtherHealthcare -> fun dp -> dp.Location.OtherHealthcare
+        | RetirementHome -> fun dp -> dp.Location.RetirementHome
+        | Prison -> fun dp -> dp.Location.Prison
+        | Transport -> fun dp -> dp.Location.Transport
+        | Shop -> fun dp -> dp.Location.Shop
+        | Restaurant -> fun dp -> dp.Location.Restaurant
+        | Sport -> fun dp -> dp.Location.Sport
+        | GatheringPrivate -> fun dp -> dp.Location.GatheringPrivate
+        | GatheringOrganized -> fun dp -> dp.Location.GatheringOrganized
+        | LocationOther -> fun dp -> dp.Location.Other
+        | LocationUnknown -> fun dp -> dp.Location.Unknown
 
     let color, seriesId, stack = Series.getSeriesInfo (series)
     {|
@@ -256,6 +333,7 @@ let renderChartOptions (state: State) dispatch =
            series = (match state.displayType with
                     | Quarantine -> Series.quarantine |> renderSeries state
                     | QuarantineRelative -> Series.quarantineRelative |> renderSeries state
+                    | ByLocation | ByLocationRelative -> Series.byLocation |> renderSeries state
                     | BySource | BySourceRelative -> Series.bySource |> renderSeries state
                     | BySourceCountry | BySourceCountryRelative -> renderSeriesImportedByCountry state
                     ) |> Seq.toArray
@@ -264,7 +342,7 @@ let renderChartOptions (state: State) dispatch =
                |> Array.map (fun yAxis -> {| yAxis with
                                               min = None
                                               labels = match state.displayType with
-                                                       | QuarantineRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
+                                                       | QuarantineRelative | ByLocationRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
 
                                               reversedStacks = match state.displayType with
@@ -290,6 +368,7 @@ let renderChartOptions (state: State) dispatch =
                       useHTML = true
                       formatter = match state.displayType with
                                   | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
+                                  | ByLocation | ByLocationRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
                                   | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
                                   | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
                       |}
@@ -300,7 +379,7 @@ let renderChartOptions (state: State) dispatch =
            plotOptions = pojo {|
                                 column = pojo {|
                                                 stacking = match state.displayType with
-                                                           | QuarantineRelative | BySourceRelative | BySourceCountryRelative -> "percent"
+                                                           | QuarantineRelative | ByLocationRelative | BySourceRelative | BySourceCountryRelative -> "percent"
                                                            | _ -> "normal" |}
 
                                 |}

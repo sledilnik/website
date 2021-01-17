@@ -157,14 +157,14 @@ let renderRatiosChart (state : State) dispatch =
         chart = pojo
             {|
                 animation = false
-                ``type`` = "spline"
+                ``type`` = "line"
                 zoomType = "x"
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
         plotOptions = pojo
             {|
-                spline = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
+                line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
             |}
 
         series = [|

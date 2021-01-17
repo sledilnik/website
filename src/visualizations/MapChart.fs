@@ -14,7 +14,7 @@ open Browser
 open Highcharts
 open Types
 
-type MapToDisplay = Municipality | Region
+type MapToDisplay = MunicipalityMap | RegionMap
 
 let munGeoJsonUrl = "/maps/municipalities-gurs-simplified-3857.geojson"
 let regGeoJsonUrl = "/maps/statistical-regions-gurs-simplified-3857.geojson"
@@ -36,9 +36,9 @@ type Area =
 type ContentType =
     | ConfirmedCases
     | Deceased
-
-    override this.ToString() =
-       match this with
+    with
+    static member Default = ConfirmedCases
+    static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Deceased       -> I18N.t "charts.map.deceased"
 
@@ -55,7 +55,7 @@ type DisplayType =
 with
     static member Default = RegionPopulationWeightedValues
 
-    override this.ToString() =
+    member this.GetName =
        match this with
        | AbsoluteValues                 -> I18N.t "charts.map.absolute"
        | RegionPopulationWeightedValues -> I18N.t "charts.map.populationShare"
@@ -65,18 +65,18 @@ with
 type DataTimeInterval =
     | Complete
     | LastDays of int
+    with
+    static member All =
+        [ LastDays 1
+          LastDays 7
+          LastDays 14
+          LastDays 21
+          Complete ]
 
-    override this.ToString() =
+    member this.GetName =
         match this with
         | Complete -> I18N.t "charts.map.all"
         | LastDays days -> I18N.tOptions "charts.map.last_x_days" {| count = days |}
-
-let dataTimeIntervals =
-    [ LastDays 1
-      LastDays 7
-      LastDays 14
-      LastDays 21
-      Complete ]
 
 type GeoJson = RemoteData<obj, string>
 
@@ -92,7 +92,7 @@ type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
     | DataTimeIntervalChanged of DataTimeInterval
-    | ContentTypeChanged of string
+    | ContentTypeChanged of ContentType
     | DisplayTypeChanged of DisplayType
 
 let loadMunGeoJson =
@@ -123,21 +123,19 @@ let loadRegGeoJson =
             | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
-let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd<Msg> =
-    let dataTimeInterval = LastDays 14
-
+let processData (municipalitiesData : MunicipalitiesData) : Area seq =
     let municipalityDataMap =
         seq {
-            for regionsDataPoint in regionsData do
-                for region in regionsDataPoint.Regions do
+            for municipalitiesDataPoint in municipalitiesData do
+                for region in municipalitiesDataPoint.Regions do
                     for municipality in region.Municipalities do
                         if not (Set.contains municipality.Name excludedMunicipalities) then
-                            yield {| Date = regionsDataPoint.Date
-                                     MunicipalityKey = municipality.Name
+                            yield {| Date = municipalitiesDataPoint.Date
+                                     Name = municipality.Name
                                      TotalConfirmedCases = municipality.ConfirmedToDate
                                      TotalDeceasedCases = municipality.DeceasedToDate |} }
-        |> Seq.groupBy (fun dp -> dp.MunicipalityKey)
-        |> Seq.map (fun (municipalityKey, dp) ->
+        |> Seq.groupBy (fun dp -> dp.Name)
+        |> Seq.map (fun (name, dp) ->
             let totalCases =
                 dp
                 |> Seq.map (fun dp ->
@@ -145,79 +143,74 @@ let init (mapToDisplay : MapToDisplay) (regionsData : RegionsData) : State * Cmd
                       TotalConfirmedCases = dp.TotalConfirmedCases
                       TotalDeceasedCases = dp.TotalDeceasedCases } )
                 |> Seq.sortBy (fun dp -> dp.Date)
-            ( municipalityKey, totalCases ) )
+            ( name, totalCases ) )
         |> Map.ofSeq
 
-    let munData =
-        seq {
-            for municipality in Utils.Dictionaries.municipalities do
-                match Map.tryFind municipality.Key municipalityDataMap with
-                | None ->
-                    yield { Id = municipality.Key
-                            Code = municipality.Value.Code
-                            Name = municipality.Value.Name
-                            Population = municipality.Value.Population
-                            Cases = None }
-                | Some cases ->
-                    yield { Id = municipality.Key
-                            Code = municipality.Value.Code
-                            Name = municipality.Value.Name
-                            Population = municipality.Value.Population
-                            Cases = Some cases }
-        }
+    seq {
+        for municipality in Utils.Dictionaries.municipalities do
+            match Map.tryFind municipality.Key municipalityDataMap with
+            | None ->
+                yield { Id = municipality.Key
+                        Code = municipality.Value.Code
+                        Name = municipality.Value.Name
+                        Population = municipality.Value.Population
+                        Cases = None }
+            | Some cases ->
+                yield { Id = municipality.Key
+                        Code = municipality.Value.Code
+                        Name = municipality.Value.Name
+                        Population = municipality.Value.Population
+                        Cases = Some cases }
+    }
 
+let processRegionsData (regionsData : RegionsData) : Area seq =
     let regDataMap =
         seq {
             for regionsDataPoint in regionsData do
-                for region in regionsDataPoint.Regions do
-                    yield {| Date = regionsDataPoint.Date
-                             RegionKey = region.Name
-                             TotalConfirmedCases =
-                                region.Municipalities
-                                 |> Seq.sumBy (fun municipality -> municipality.ConfirmedToDate |> Option.defaultValue 0)
-                             TotalDeceasedCases =
-                                region.Municipalities
-                                |> Seq.sumBy (fun municipality -> municipality.DeceasedToDate |> Option.defaultValue 0) |} }
-        |> Seq.groupBy (fun dp -> dp.RegionKey)
-        |> Seq.map (fun (regionKey, dp) ->
+                    for region in regionsDataPoint.Regions do
+                        if not (Set.contains region.Name Utils.Dictionaries.excludedRegions) then
+                            yield {| Date = regionsDataPoint.Date
+                                     Name = region.Name
+                                     TotalConfirmedCases = region.ConfirmedToDate
+                                     TotalDeceasedCases = region.DeceasedToDate |} }
+        |> Seq.groupBy (fun dp -> dp.Name)
+        |> Seq.map (fun (name, dp) ->
             let totalCases =
                 dp
                 |> Seq.map (fun dp ->
                     { Date = dp.Date
-                      TotalConfirmedCases = Some dp.TotalConfirmedCases
-                      TotalDeceasedCases = Some dp.TotalDeceasedCases } )
+                      TotalConfirmedCases = dp.TotalConfirmedCases
+                      TotalDeceasedCases = dp.TotalDeceasedCases } )
                 |> Seq.sortBy (fun dp -> dp.Date)
-            ( regionKey, totalCases ) )
+            ( name, totalCases ) )
         |> Map.ofSeq
 
-    let regData =
-        seq {
-            for region in Utils.Dictionaries.regions do
-                match Map.tryFind region.Key regDataMap with
-                | None ->
-                    yield { Id = region.Key
-                            Code = region.Key
-                            Name = I18N.tt "region" region.Key
-                            Population = region.Value.Population |> Option.defaultValue 0
-                            Cases = None }
-                | Some cases ->
-                    yield { Id = region.Key
-                            Code = region.Key
-                            Name = I18N.tt "region" region.Key
-                            Population = region.Value.Population |> Option.defaultValue 0
-                            Cases = Some cases }
-        }
+    seq {
+        for region in Utils.Dictionaries.regions do
+            match Map.tryFind region.Key regDataMap with
+            | None ->
+                yield { Id = region.Key
+                        Code = region.Key
+                        Name = I18N.tt "region" region.Key
+                        Population = region.Value.Population |> Option.defaultValue 0
+                        Cases = None }
+            | Some cases ->
+                yield { Id = region.Key
+                        Code = region.Key
+                        Name = I18N.tt "region" region.Key
+                        Population = region.Value.Population |> Option.defaultValue 0
+                        Cases = Some cases }
+    }
 
-    let data =
-        match mapToDisplay with
-        | Municipality -> munData
-        | Region -> regData
+
+let init (mapToDisplay : MapToDisplay) (data : Area seq) : State * Cmd<Msg> =
+    let dataTimeInterval = LastDays 14
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ConfirmedCases
+      ContentType = ContentType.Default
       DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 
@@ -226,25 +219,21 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | GeoJsonRequested ->
         let cmd =
             match state.MapToDisplay with
-            | Municipality -> Cmd.OfAsync.result loadMunGeoJson
-            | Region -> Cmd.OfAsync.result loadRegGeoJson
+            | MunicipalityMap -> Cmd.OfAsync.result loadMunGeoJson
+            | RegionMap -> Cmd.OfAsync.result loadRegGeoJson
         { state with GeoJson = Loading }, cmd
     | GeoJsonLoaded geoJson ->
         { state with GeoJson = geoJson }, Cmd.none
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | ContentTypeChanged contentType ->
-        let newContentType =
-            match contentType with
-            | ConfirmedCasesMsgCase -> ConfirmedCases
-            | DeceasedMsgCase -> Deceased
         let newDisplayType =
-            match newContentType, state.DisplayType with
+            match contentType, state.DisplayType with
             // for Deceased, RelativeIncrease not supported
             | Deceased, RelativeIncrease -> DisplayType.Default
             | Deceased, Bubbles -> DisplayType.Default
             | _ -> state.DisplayType
-        { state with ContentType = newContentType; DisplayType = newDisplayType }, Cmd.none
+        { state with ContentType = contentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
 
@@ -433,12 +422,12 @@ let sparklineFormatter newCases state =
                 |]
         |} |> pojo
     match state.MapToDisplay with
-    | Municipality ->
+    | MunicipalityMap ->
         Fable.Core.JS.setTimeout
             (fun () -> sparklineChart("tooltip-chart-mun", options)) 10
         |> ignore
         """<div id="tooltip-chart-mun"; class="tooltip-chart";></div>"""
-    | Region ->
+    | RegionMap ->
         Fable.Core.JS.setTimeout
             (fun () -> sparklineChart("tooltip-chart-reg", options)) 10
         |> ignore
@@ -456,36 +445,36 @@ let tooltipFormatter state jsThis =
     let newCases= points?newCases
     let population = points?population
     let pctPopulation = float absolute * 100.0 / float population
-    let fmtStr = sprintf "%s: <b>%d</b>" (I18N.t "charts.map.populationC") population
+    let fmtStr = sprintf "%s: <b>%s</b>" (I18N.t "charts.map.populationC") (I18N.NumberFormat.formatNumber(population : int))
 
     let lastTwoWeeks = newCases
 
     let label =
         match state.ContentType with
         | ConfirmedCases ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.confirmedCases") absolute
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.confirmedCases") (I18N.NumberFormat.formatNumber(absolute : int))
             if totalConfirmed > 0 then
                 label
-                    + sprintf " (%s %% %s)" (Utils.formatTo3DecimalWithTrailingZero pctPopulation) (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%0.1f</b> %s" (I18N.t "charts.map.confirmedCases") value100k (I18N.t "charts.map.per100k")
+                    + sprintf " (%s %% %s)" (Utils.formatTo1DecimalWithTrailingZero(pctPopulation)) (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.map.confirmedCases") (Utils.formatTo1DecimalWithTrailingZero(value100k:float)) (I18N.t "charts.map.per100k")
                     + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                     + if (Array.max lastTwoWeeks) > 0. then
                         state |> sparklineFormatter lastTwoWeeks else ""
             else
                 label
         | Deceased ->
-            let label = fmtStr + sprintf "<br>%s: <b>%d</b>" (I18N.t "charts.map.deceased") absolute
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (I18N.NumberFormat.formatNumber(absolute : int))
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
                 label + sprintf " (%s %% %s)"
-                        (Utils.formatTo3DecimalWithTrailingZero pctPopulation)
+                        (I18N.NumberFormat.formatNumber pctPopulation)
                         (I18N.t "charts.map.population")
-                    + sprintf "<br>%s: <b>%d</b> (%s %% %s)"
+                    + sprintf "<br>%s: <b>%s</b> (%s %% %s)"
                         (I18N.t "charts.map.confirmedCases")
-                        totalConfirmed (Utils.formatTo3DecimalWithTrailingZero (float totalConfirmed * 100.0 / float population))
+                        (I18N.NumberFormat.formatNumber totalConfirmed) (Utils.formatTo1DecimalWithTrailingZero(float totalConfirmed * 100.0 / float population))
                         (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%s %%</b>"
                         (I18N.t "charts.map.mortalityOfConfirmedCases")
-                        (Utils.formatTo1DecimalWithTrailingZero (float absolute * 100.0 / float totalConfirmed))
+                        (I18N.NumberFormat.formatNumber(float absolute * 100.0 / float totalConfirmed))
             else
                 label
     sprintf "<b>%s</b><br/>%s<br/>" area label
@@ -514,8 +503,8 @@ let renderMap (state : State) =
 
         let key =
             match state.MapToDisplay with
-            | Municipality -> "isoid"
-            | Region -> "code"
+            | MunicipalityMap -> "isoid"
+            | RegionMap -> "code"
 
         let series geoJson =
             {| visible = true
@@ -640,7 +629,7 @@ let renderMap (state : State) =
                 reversed = true
                 labels =
                     {|
-                        formatter = fun() -> jsThis?value
+                        formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
                     |} |> pojo
             |} |> pojo
 
@@ -697,7 +686,7 @@ let renderMap (state : State) =
                             reversed = true
                             labels =
                                 {|
-                                    formatter = fun() -> jsThis?value
+                                    formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
                                 |} |> pojo
                         |} |> pojo
 
@@ -775,9 +764,9 @@ let renderMap (state : State) =
         |}
         |> map
 
-let renderSelector option currentOption dispatch =
+let inline renderSelector (option: ^T when ^T : (member GetName: string)) (currentOption: ^T) dispatch =
     let defaultProps =
-        [ prop.text (option.ToString())
+        [ prop.text ( (^T: (member GetName: string) option))
           Utils.classes
               [(true, "chart-display-property-selector__item")
                (option = currentOption, "selected") ] ]
@@ -785,7 +774,7 @@ let renderSelector option currentOption dispatch =
     then Html.div defaultProps
     else Html.div ((prop.onClick (fun _ -> dispatch option)) :: defaultProps)
 
-let renderSelectors options currentOption dispatch =
+let inline renderSelectors options currentOption dispatch =
     options
     |> List.map (fun option ->
         renderSelector option currentOption dispatch)
@@ -793,10 +782,10 @@ let renderSelectors options currentOption dispatch =
 let renderDisplayTypeSelector state dispatch =
     let selectors =
         match state.MapToDisplay, state.ContentType with
-        | Municipality, ConfirmedCases ->
+        | MunicipalityMap, ConfirmedCases ->
             [ RelativeIncrease; AbsoluteValues
               RegionPopulationWeightedValues; Bubbles ]
-        | Region, ConfirmedCases ->
+        | RegionMap, ConfirmedCases ->
             [ RelativeIncrease; AbsoluteValues
               RegionPopulationWeightedValues ]
         | _, Deceased ->
@@ -810,27 +799,24 @@ let renderDataTimeIntervalSelector state dispatch =
     if state.DisplayType <> RelativeIncrease then
         Html.div [
             prop.className "chart-data-interval-selector"
-            prop.children ( Html.text "" :: renderSelectors dataTimeIntervals state.DataTimeInterval dispatch )
+            prop.children ( Html.text "" :: renderSelectors DataTimeInterval.All state.DataTimeInterval dispatch )
         ]
     else Html.none
 
 let renderContentTypeSelector selected dispatch =
-    let renderedTypes = seq {
-        yield Html.option [
-            prop.text (ContentType.ConfirmedCases.ToString())
-            prop.value (ContentType.ConfirmedCases.ToString())
-        ]
-        yield Html.option [
-            prop.text (ContentType.Deceased.ToString())
-            prop.value (ContentType.Deceased.ToString())
-        ]
-    }
+    let contentTypes = [("ConfirmedCases", ContentType.ConfirmedCases)
+                        ("Deceased", ContentType.Deceased)]
+    let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
+        Html.option [
+            prop.text (ContentType.GetName ct)
+            prop.value (id)
+        ])
 
     Html.select [
         prop.value (selected.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
-        prop.onChange (ContentTypeChanged >> dispatch)
+        prop.onChange ( fun ct ->  Map.find ct (contentTypes |> Map.ofList) |> ContentTypeChanged |> dispatch)
     ]
 
 let render (state : State) dispatch =
@@ -852,16 +838,26 @@ let render (state : State) dispatch =
             ]
             match state.ContentType with
             | Deceased ->
+                let disclaimerID = 
+                    if state.MapToDisplay = RegionMap 
+                    then "charts.map.disclaimerRegion" 
+                    else "charts.map.disclaimer"
                 Html.div [
                     prop.className "disclaimer"
                     prop.children [
-                        Html.text (I18N.t "charts.map.disclaimer")
+                        Html.text (I18N.t disclaimerID)
                     ]
                 ]
             | _ -> Html.none
         ]
     ]
 
-let mapChart (props : {| mapToDisplay : MapToDisplay; data : RegionsData |}) =
+let mapMunicipalitiesChart (props : {| data : MunicipalitiesData |}) =
+    let data = processData props.data
     React.elmishComponent
-        ("MapChart", init props.mapToDisplay props.data, update, render)
+        ("MapChart", init MunicipalityMap data, update, render)
+
+let mapRegionChart (props : {| data : RegionsData |}) =
+    let data = processRegionsData props.data
+    React.elmishComponent
+        ("MapChart", init RegionMap data, update, render)

@@ -80,11 +80,13 @@ COVID-19 Sledilnik in an open source project that would not be possible without 
 
 Project collaborators:
 
--   [Aleks Jakulin](https://twitter.com/aleksj) - modeling coordination, modeling, sources
+-   [Ana Slavec](https://twitter.com/aslavec) - surveys, analysis, content
+-   [Aleks Jakulin](https://twitter.com/aleksj) - modeling, sources
 -   [Andraž Vrhovec](https://github.com/overlordtm) - web page, infrastructure
 -   [Andrej Srakar](http://www.ier.si/) - sources, modeling
 -   [Andrej Viršček](https://udomacenastatistika.wordpress.com/author/vandrej/) - modeling
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - sources, source validation, modeling
+-   [Barbara Krajnc](https://twitter.com/bakrajnc) - content, communication
 -   [Bojan Košir](https://twitter.com/BojanKosir) - data model and validation, sources
 -   [Boštjan Špetič](https://www.igzebedze.com/) - data scraping, communication
 -   [Darja Potočan](http://www.marsowci.net/) - social networks, sources
@@ -93,19 +95,22 @@ Project collaborators:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Jaka Daneu](https://github.com/jalezi) -  web page
+-   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
--   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling
+-   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - modeling coordination, SEIR model, modeling
 -   [Joh Dokler](https://github.com/joahim) - visualisations, web page
 -   [Jure Novak](http://jurenovak.org/) - copywriting, sources
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, graphic design
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - data model, validation, user inclusion
--   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, sources, data validation
+-   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeling, data validation, covid-spark.info
 -   [Luka Renko](https://twitter.com/lukarenko) - coordination, data model and validation
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - coordination, data model and validation
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - data validation, visualisations
 -   [Marko Brumen](https://twitter.com/multikultivator) - social networks, web page, sources
 -   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - web page, sources
+-   [Matej Aleksov](https://www.linkedin.com/in/matej-aleksov/) - social networks, graphic design
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - sources, data validation
 -   [Matej Meglič](https://www.linkedin.com/in/matejmeglic/) - coordination, data model and validation
 -   [Matjaž Drolc](https://twitter.com/MatjazDrolc/) - visualisations
@@ -117,9 +122,12 @@ Project collaborators:
 -   [Mitja Potočin](https://github.com/mitjapotocin) - web page
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
+-   [Nina Rolih](https://www.facebook.com/tanoranina) - content, graphic design
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
+-   [Pika Založnik]() - content, sources
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - scripting, statistics
+-   [Sebastian Pleško](https://twitter.com/seba1337) - sources
 -   [Sebastjan Cizel](https://sebastjancizel.github.io/) - visualisations
 -   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - web page, map, translations
 -   [Tanja Ambrožič]()- data validation
@@ -127,4 +135,5 @@ Project collaborators:
 -   [Vanja Cvelbar](https://github.com/b100w11) - translations
 -   [Vladimir Nesković](https://www.linkedin.com/in/k35m4/) - data model, modeling
 -   [Zarja Muršič](https://twitter.com/piskotk) - modeling, validation, sources
--   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - modeling
+-   [Žiga Brenčič](https://zigabrencic.com) - modeling
+-   [Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) - network model, modeling

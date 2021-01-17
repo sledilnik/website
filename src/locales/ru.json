@@ -29,13 +29,6 @@
         "recoveredToDate": "Выздоровели",
         "confirmedToDate": "Подтвержденные заражение",
         "lastUpdated": "{{ date, %a, %b %e }}",
-        "package3": "пакет 3",
-        "package2": "пакет 2",
-        "package1": "пакет 1",
-        "redPhaseGenitive": "",
-        "redPhase": "",
-        "orangePhaseGenitive": "",
-        "orangePhase": "",
         "tests": ""
     },
     "notice": {

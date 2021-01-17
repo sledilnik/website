@@ -34,14 +34,15 @@ let dropdown (viz: Visualization) =
             | AgeGroups -> (1140, 720)
             | AgeGroupsTimeline -> (1140, 720)
             | Hospitals -> (1140, 1130)
-            | CountriesCasesPer1M -> (1140, 740)
-            | CountriesActiveCasesPer1M -> (1140, 740)
-            | CountriesNewDeathsPer1M -> (1140, 740)
-            | CountriesTotalDeathsPer1M -> (1140, 740)
+            | CountriesCasesPer100k -> (1140, 740)
+            | CountriesActiveCasesPer100k -> (1140, 740)
+            | CountriesNewDeathsPer100k -> (1140, 740)
+            | CountriesTotalDeathsPer100k -> (1140, 740)
             | PhaseDiagram -> (1140, 720)
             | Deceased -> (1140, 720)
             | ExcessDeaths -> (1140, 720)
             | MetricsCorrelation -> (1140, 720)
+            | WeeklyDemographics -> (1140, 720)
 
         let graphUrl =
             "https://covid-19.sledilnik.org/"

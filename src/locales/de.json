@@ -22,7 +22,8 @@
         "world": "Welt",
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
-        "goToGraph": "Gehe zum Diagramm"
+        "goToGraph": "Gehe zum Diagramm",
+        "posts": "Objave"
     },
     "country": {
         "ABW": "Aruba",
@@ -339,7 +340,7 @@
             "rhOccupant": "Bewohner von Altersheimen",
             "otherPersons": "Andere Personen",
             "titleMenu": "Fälle – Struktur",
-            "disclaimer": "Hinweis: Dieses Diagramm is nicht mehr aktuell. Seit dem 11. Oktober veröffentlicht das NIJZ über Altenheime und Angestellte im Gesundheitswesen keine Daten mehr."
+            "disclaimer": "Hinweis: Seit dem 11. Oktober veröffentlicht das NIJZ keine Daten mehr über Altenheime und das Gesundheitswesen."
         },
         "ageGroups": {
             "age": "Alter",
@@ -358,7 +359,7 @@
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
             "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung",
             "titleMenu": "Alter, Geschlecht",
-            "disclaimer": "Hinweis: wir erhalten Daten über Todesfälle aus den Krankenhäusern. Demographische Daten (Geschlecht, Alter, Gemeinde) der Verstorbenen werden hingegen von den Institutionen (aus dem Gesundheitswesen und Altenheime) mit mehreren Wochen Verzögerung an das NIJZ übertragen . Das ist der Grund, warum es hier eine Abweichung von der absoluten Anzahl an Todesfällen gibt."
+            "disclaimer": "Hinweis: Demographische Daten (Geschlecht, Alter) der Verstorbenen werden von NIJZ wöchentlich veröffentlicht. Das ist der Grund, warum es hier eine Abweichung von der Gesamtanzahl an Todesfällen gibt."
         },
         "ratios": {
             "icuDeceasedShare": "Anteil der Todesfälle auf Intensivstationen",
@@ -384,11 +385,9 @@
             "linear": "Linear",
             "longDateFormat": "%e. %B %Y",
             "view": "Ansicht:",
-            "decimalPoint": ".",
             "linkFaq": "FAQ",
             "share": "Teilen",
             "dateFormat": "%A, %e. %B %Y",
-            "thousandsSep": " ",
             "dsOWD": "Our World in Data",
             "webpage": "Internetseite",
             "shortDateFormat": "%e. %b",
@@ -416,7 +415,9 @@
             "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
             "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ",
             "dsMNZ": "MNZ",
-            "dsSURS": "SURS"
+            "dsSURS": "SURS",
+            "showAll": "Alle anzeigen",
+            "hideAll": "Alle verbergen"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -503,10 +504,10 @@
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "hospitalAdmitted": "Ins Krankenhaus eingewiesen",
             "icuAdmitted": "Auf Intensivstation eingewiesen",
-            "ventilatorDischarged": "Vom Beatmungsgerät abgekoppelt",
+            "ventilatorDischarged": "Vom Beatmungsgerät getrennt",
             "ventilatorAdmitted": "An Beatmungsgerät",
             "confirmedCases": "Bestätigte Fälle",
-            "testsPerformed": "Tests",
+            "testsPerformed": "Tests: PCR",
             "showToDate": "Bis heute",
             "showToday": "Tägliche",
             "showActive": "Aktive",
@@ -514,16 +515,8 @@
             "show7DaysAverage": "7-Tage-Durchschnitt",
             "titleMenu_MNE": "Montenegro – Lage",
             "titleMenu_MKD": "N. Mazedonien – Lage",
-            "titleMenu_SVN": "Slowenien – Lage"
-        },
-        "countries": {
-            "groupNordic": "Nordische Länder",
-            "title": "Ländervergleich",
-            "groupEastAsiaOceania": "Ostasien und Ozeanien",
-            "groupLatinAmerica": "Lateinamerika",
-            "groupExYu": "Ex-Jugoslawien",
-            "groupNeighbouring": "Nachbarländer",
-            "nrDeathsPerMillion": "Anzahl Todesfälle pro eine Million Menschen"
+            "titleMenu_SVN": "Slowenien – Lage",
+            "vaccinationAdministered": "Geimpft"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -552,17 +545,22 @@
             "titleMenu": "Kapazität"
         },
         "tests": {
-            "ns-apr20": "Studie",
+            "ns-apr20": "Studie: PCR",
             "shareOfPositive": "Anteil der positiven Tests (%)",
-            "allTesting": "Alle",
+            "totalPCR": "Alle: PCR",
             "title": "Testung",
-            "regular": "Regelmäßige",
+            "regular": "Standard: PCR",
             "positiveTests": "Positive Tests",
             "negativeTests": "Negative Tests",
             "titleMenu": "Testung",
             "byLabPercent": "Nach Labor: % positiv",
-            "byLab": "Nach Labor: Tests",
-            "disclaimer": "Hinweis: Ab dem 3. Dezember erhalten wir keine Daten einzelner Laboratorien."
+            "byLab": "Nach Labor: Tests PCR",
+            "disclaimer": "Hinweis: Ab dem 3. Dezember erhalten wir keine Daten einzelner Laboratorien.",
+            "hagt": "Standard: RAT",
+            "positiveTotal": "Positive gesamt",
+            "positivePCR": "Positive PCR",
+            "positiveHAT": "Positive HAT",
+            "positiveSplit": "Positive PCR und HAT"
         },
         "regions": {
             "activeCases": "Aktive Fälle",
@@ -593,13 +591,13 @@
             "activeCasesRelative": "Aktive Fälle (relativ)",
             "titleMenu": "Alter – Anteil"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "legendTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Gesamtzahl der Todesfälle pro 100.000 Menschen",
             "title": "Länder: Gesamtzahl der Todesfälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "titleMenu": "Länder – Todesfälle"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Neue tägliche Fälle pro 100.000 Menschen (7-Tage-Durchschnitt)",
             "yAxisTitle": "Neue tägliche Fälle pro 100.000 Menschen",
             "title": "Länder: Neue tägliche Fälle pro 100.000 Menschen (7-Tages-Durchschnitt)",
@@ -624,7 +622,7 @@
             "daysFromOneDeathPerMillion": "Anzahl Tage seit erstem Todesfall pro 1 Million Menschen",
             "titleMenu": "Länder – Todesfälle pro Fälle"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "Kriterien für die rote Liste",
             "legendTitle": "Aktive Fälle pro 100.000 Menschen",
             "yAxisTitle": "Aktive Fälle pro 100.000 Menschen",
@@ -632,8 +630,8 @@
             "titleMenu": "Länder – Aktive Fälle"
         },
         "dailyComparison": {
-            "positivePct": "Anteil der positiven Tests (%)",
-            "tests": "Durchgeführte Tests",
+            "positivePct": "Anteil der positiven Tests: PCR (%)",
+            "tests": "Durchgeführte Tests: PCR",
             "active": "Aktive Fälle",
             "new": "Bestätigte Fälle",
             "title": "Vergleich nach Wochentag",
@@ -641,7 +639,10 @@
             "deceased": "Todesfälle",
             "icuAdmitted": "Auf Intensivstation eingewiesen",
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
-            "titleMenu": "Wochentag – Vergleich"
+            "titleMenu": "Wochentag – Vergleich",
+            "positivePctHAT": "Anteil der positiven Tests: HAT (%)",
+            "testsHAT": "Durchgeführte Tests: HAT",
+            "vaccinated": "Geimpfte Personen"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -696,7 +697,7 @@
             "confirmedFromQuarantine": "Bestätigt aus der Quarantäne",
             "confirmedCases": "Bestätigte Fälle",
             "sentToQuarantine": "In die Quarantäne geschickt",
-            "title": "Infektionsquellen und Quaratäne",
+            "title": "Infektionsquellen und -orte, wöchentlich",
             "bySourceCountry": "Importierte Fälle",
             "bySourceRelative": "Infektionsquellen (relativ)",
             "bySource": "Infektionsquellen",
@@ -709,9 +710,26 @@
             "sourceUnknown": "Unbekannte Quelle",
             "totalConfirmed": "Bestätigte Fälle insgesamt",
             "totalImported": "Importierte Fälle insgesamt",
-            "titleMenu": "Infektionsquellen",
+            "titleMenu": "Infektionsquellen und -orte",
             "disclaimer": "Hinweis: Seit dem 17. Oktober werden durch die Epidemiologen keine individuellen Kontakte mehr verfolgt und keine Quarantäneanordnungen mehr ausgestellt. Das ist der Grund, warum wir diese Daten nicht mehr zeigen.",
-            "disclaimerGeneral": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der importierten Fälle könnte hier niedriger dargestellt sein, als er eigentlich ist."
+            "disclaimerGeneral": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig – die Anzahl der Fälle ist vielleicht kleiner, als er eigentlich ist.",
+            "gatheringOrganized": "Organisiertes Treffen",
+            "gatheringPrivate": "Privates Treffen",
+            "sport": "Sportliche Aktivität",
+            "restaurant": "Restaurant",
+            "shop": "Geschäft",
+            "transport": "Öffentlicher Verkehr",
+            "prison": "Gefängnis",
+            "retirementHome": "Altersheim",
+            "otherHealthcare": "Andere Gesundheitseinrichtung",
+            "hospital": "Krankenhaus",
+            "school": "Bildungseinrichtung",
+            "work": "Arbeit",
+            "family": "Familie",
+            "locationUnknown": "Unbekannt",
+            "locationOther": "Sonstige",
+            "byLocationRelative": "Nach Ort (Relativ)",
+            "byLocation": "Nach Ort"
         },
         "regions100k": {
             "red": "Kriterum für rote Liste",
@@ -747,14 +765,18 @@
             "title": "Pflege-Krankenhäuser"
         },
         "hcCases": {
-            "totalConfirmed": "Bestätigte Fälle insgesamt",
+            "totalConfirmed": "Alle bestätigte",
             "healthcareEmployeesRelative": "Angestellte im Gesundheitswesen (Relativ)",
             "healthcareEmployees": "Angestellte im Gesundheitswesen",
-            "healthcareEmployeesCases": "Bestätigt bei Angestellten im Gesundheitswesen",
+            "healthcareEmployeesCases": "Angestellte im Gesundheitswesen",
             "confirmedCases": "Bestätigte Fälle",
             "disclaimer": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der Angestellten im Gesundheitswesen könnte hier geringer ausfallen, als er eigentlich ist.",
-            "titleMenu": "Fälle Angestellte Gesundheitswesen",
-            "title": "Bestätigte Fälle bei Angestellten des Gesundheitswesens"
+            "titleMenu": "Fälle in Krankenhäusern und Altersheimen",
+            "title": "Fälle im Gesundheitswesens und in Altersheimen, wöchentlich",
+            "relative": "Relativ",
+            "all": "Alle",
+            "otherCases": "Andere Personen",
+            "rhOccupantCases": "Bewohner in Altersheimen"
         },
         "countriesNewDeathsPer100k": {
             "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
@@ -773,7 +795,10 @@
             "deceasedTodayRelative": "Todesfälle pro Tag (relativ)",
             "deceasedToday": "Todesfälle pro Tag",
             "titleMenu": "Todesfälle",
-            "title": "Todesfälle"
+            "title": "Todesfälle",
+            "deceasedByAgeTodayRelative": "Tägliche Todesfälle nach Alter (relativ)",
+            "deceasedByAgeToday": "Tägliche Todesfälle nach Alter",
+            "disclaimer": "Hinweis: Daten für Verstorbene nach Alter werden wöchentlich angegeben, daher sind sie für die letzten zwei Wochen nicht vollständig."
         },
         "excessDeaths": {
             "excess": {
@@ -788,12 +813,41 @@
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
                 "title": "Jahresvergleich"
             },
-            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b }} – {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} – {{ dateTo, %e. %b %Y }}",
+            "excessByAgeGroup": {
+                "sex": {
+                    "female": "Frauen",
+                    "male": "Männer",
+                    "both": "Alle"
+                },
+                "totalDeceased": "Verstorbene gesamt",
+                "title": "Sterberate im Vergleich zu den letzten 5 Jahren nach Altersgruppen"
+            }
+        },
+        "metricsCorrelation": {
+            "hospitalized": "Hospitalisierte",
+            "deceased": "Verstorbene",
+            "cases": "Bestätigte Fälle",
+            "all": "Gesamt",
+            "averageByDay": "Nach Tagen (Durchschnitt)",
+            "titleMenu": "Korrelation",
+            "title": "Korrelation zwischen Fälle, Hospitalisierte und Verstorbene"
+        },
+        "weeklyDemographics": {
+            "ratio": "Fallverhältnis M/F",
+            "newCases": "Neue Fälle",
+            "per100k": "pro 100.000 Menschen",
+            "female": "Frauen",
+            "male": "Männer",
+            "ageGroup": "Altersgruppe",
+            "titleMenu": "Altersgruppen – wöchentlich",
+            "title": "Wöchentliche Fälle – Demografie"
         }
     },
     "tableDict": {
         "cases_active": "Aktive Fälle",
-        "tests_performed": "Tests (täglich)",
+        "tests_performed": "Tests PCR (täglich)",
         "region_todate": "Gesamt",
         "age_female_0-4_todate": "0 – 4 Jahre",
         "region_za_todate": "Zasavska",
@@ -839,11 +893,12 @@
         "state_deceased_todate": "Bestätigte Todesfälle (bis heute)",
         "region_lj_todate": "Zentralslowenien",
         "cases_rh_employee_confirmed_todate": "Bestätigte Fälle – Personal in Altersheimen (bis heute)",
-        "tests_performed_todate": "Tests (bis heute)",
+        "tests_performed_todate": "Tests PCR (bis heute)",
         "cases_confirmed": "Bestätigte Fälle (täglich)",
         "region_kk_todate": "Posavska",
         "age_female_15-24_todate": "15 – 24 Jahre",
-        "age_female_65-74_todate": "65 – 74 Jahre"
+        "age_female_65-74_todate": "65 – 74 Jahre",
+        "vaccination_administered_todate": "Geimpfte Personen (bis heute)"
     },
     "footer": {
         "copyright": "© 2020 Sledilnik.org"
@@ -870,7 +925,7 @@
             "title": "1. Fall"
         },
         "liftFoodMarkets": {
-            "description": "Entspannung: Märkte, Service auf den Terrassen, Geschäfte bis zu 400 m2, Friseur- und Schönheitssalons",
+            "description": "Entspannung: Märkte, Service auf den Terrassen, Geschäfte bis zu 400 m², Friseur- und Schönheitssalons",
             "title": "Märkte"
         },
         "liftService": {
@@ -1020,6 +1075,24 @@
         "planRelaxation": {
             "description": "Die Regierung hat den Plan der Lockerung der Maßnahmen in fünf Phasen akzeptiert.",
             "title": "Plan"
+        },
+        "planRelaxation2": {
+            "title": "Plan"
+        },
+        "liftGym": {
+            "title": "Fitnessstudio"
+        },
+        "liftFoodMarkets2": {
+            "title": "Märkte"
+        },
+        "services2": {
+            "title": "Dienstleistungen"
+        },
+        "liftReligiousCeremonies": {
+            "title": "Gottesdienste"
+        },
+        "liftServices": {
+            "title": "Dienstleistungen"
         }
     },
     "region": {
@@ -1034,7 +1107,8 @@
         "po": "Notranjsko-kraška",
         "ce": "Savinjska",
         "za": "Zasavska",
-        "sg": "Koroška"
+        "sg": "Koroška",
+        "si": "Slowenien (alle Regionen)"
     },
     "meta": {
         "description": "COVID-19-Verfolgung in Slowenien – gesammelt, verifiziert, aktualisiert, analysiert und überprüft COVID-19-Daten für Slowenien.",
@@ -1045,22 +1119,15 @@
         "active": "Aktive Fälle",
         "incidence": "14-Tage-Inzidenz",
         "confirmedToDate": "Bestätigte Fälle",
-        "tests": "Tests heute",
+        "tests": "Tests heute: PCR",
         "lastUpdated": "{{ date, %a, %e. %b }}",
         "icu": "Auf Intensivstationen",
         "deceasedToDate": "Bestätigte Todesfälle",
         "inHospital": "Hospitalisierte",
-        "redPhase": "Rote Phase",
-        "orangePhase": "Orange Phase",
-        "per100k": "pro 100 tausend",
-        "package3": "Paket 3",
-        "package2": "Paket 2",
-        "package1": "Paket 1",
-        "nextCriteria": "<br> Kriterien für das Paket {{ phaseNextNumber }} der {{ phaseNextPackage }} Phase ist {{ phaseNextCriteria }}.",
-        "redPhaseGenitive": "roten",
-        "orangePhaseGenitive": "orangenen",
         "newCases7dInfo": "Durchschnitt der letzten 7 Tage",
-        "newCases7d": "Neue Fälle"
+        "newCases7d": "Neue Fälle",
+        "testsHAT": "Tests heute: Schnelltests",
+        "vaccinationSummary": "Geimpfte Personen"
     },
     "notice": {
         "newChart": "🆕 📊 Neues Diagramm:",
@@ -1279,6 +1346,10 @@
         "13": {
             "description": "Neue Testmethode",
             "title": "Phase<br>13"
+        },
+        "14": {
+            "description": "Schnelltests",
+            "title": "Phase<br>14"
         }
     },
     "embedMaker": {
@@ -1324,7 +1395,7 @@
         "x_days_ago_plural": "Vor {{ count }} Tagen",
         "in_x_days": "in {{ count }} Tag",
         "in_x_days_plural": "in {{ count }} Tagen",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{date, %W. Woche %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} – {{dateTo, %e. %b}}</b> ({{dateTo, %W. Woche %Y}})"
     },
     "country-groups": {
         "groupNeighbouring": "Nachbarländer",
@@ -1359,11 +1430,27 @@
         "exceptions": "Ausnahmen",
         "validity": "Gültigkeit",
         "geoValidity": "Geografische Gültigkeit",
-        "title": "Maßnahmen und Einschränkungen"
+        "title": "Maßnahmen und Einschränkungen",
+        "searchPlaceholder": "Suchbegriff eingeben"
     },
     "week": "Woche",
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Leider ist diese Seite noch nicht übersetzt._"
+        "intro": "_Leider ist diese Seite noch nicht übersetzt._",
+        "why-sledilnik": {
+            "answer": "_Unser Ziel ist es, die Verbreitung des Virus zu verstehen und dazu beizutragen, das Bewusstsein, die Reaktionsfähigkeit und die Wirksamkeit der Maßnahmen zur Eindämmung des Virus zu erhöhen. Mehr über das Projekt finden Sie in der Registerkarte [Über](/de/about)._",
+            "question": "Warum Sledilnik?"
+        },
+        "section": {
+            "project": "Über das Projekt",
+            "charts": "Über die Berechnungen und Grafiken",
+            "data": "Über die Daten",
+            "general": "Allgemeine Informationen"
+        },
+        "searchPlaceholder": "Suchbegriff eingeben"
+    },
+    "posts": {
+        "timestamp": "{{ date, %e. %B %Y }}",
+        "readingTime": "min"
     }
 }

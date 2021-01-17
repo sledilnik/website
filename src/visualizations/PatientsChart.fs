@@ -17,15 +17,43 @@ type HospitalType =
     | CovidHospitals
     | CareHospitals
 
+    static member All = [ CovidHospitals; CareHospitals ]
+
 type Breakdown =
     | ByHospital
     | AllHospitals
     | Facility of string
   with
-    static member getName = function
+    static member All state = seq {
+        yield ByHospital
+        yield AllHospitals
+        for fcode in state.AllFacilities do
+            yield Facility fcode
+    }
+    static member Default = AllHospitals
+    member this.GetName =
+        match this with
         | ByHospital -> I18N.t "charts.patients.byHospital"
         | AllHospitals -> I18N.t "charts.patients.allHospitals"
         | Facility facility -> Utils.Dictionaries.GetFacilityName(facility)
+
+and State = {
+    PatientsData : PatientsStats []
+    Error : string option
+    AllFacilities : string list
+    HTypeToDisplay : HospitalType
+    Breakdown : Breakdown
+    RangeSelectionButtonIndex: int
+  } with
+    static member initial hTypeToDisplay =
+        {
+            PatientsData = [||]
+            Error = None
+            AllFacilities = []
+            HTypeToDisplay = hTypeToDisplay
+            Breakdown = Breakdown.Default
+            RangeSelectionButtonIndex = 0
+        }
 
 type Series =
     | InHospital
@@ -63,30 +91,7 @@ module Series =
         | CareOut               -> "#8cd4b2", "discharged"
         | CareDeceased          -> "#a483c7", "deceased"
 
-type State = {
-    PatientsData : PatientsStats []
-    Error : string option
-    AllFacilities : string list
-    HTypeToDisplay : HospitalType
-    Breakdown : Breakdown
-    RangeSelectionButtonIndex: int
-  } with
-    static member initial hTypeToDisplay =
-        {
-            PatientsData = [||]
-            Error = None
-            AllFacilities = []
-            HTypeToDisplay = hTypeToDisplay
-            Breakdown = AllHospitals
-            RangeSelectionButtonIndex = 0
-        }
 
-let getAllBreakdowns state = seq {
-        yield ByHospital
-        yield AllHospitals
-        for fcode in state.AllFacilities do
-            yield Facility fcode
-    }
 
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
@@ -202,7 +207,7 @@ let renderStructureChart (state : State) dispatch =
                     fmtUnder
                     p?series?color
                     p?series?name
-                    p?point?fmtTotal
+                    (I18N.NumberFormat.formatNumber(p?point?fmtTotal : int))
                 if fmtStr.Length > 0 && List.contains p?point?seriesId [ "hospitalized"; "care" ] then
                     fmtStr <- fmtLine + fmtStr // if we got Admitted before, then put it after Hospitalized
                 else
@@ -348,14 +353,14 @@ let renderBreakdownSelector state breakdown dispatch =
         Utils.classes
             [(true, "btn btn-sm metric-selector")
              (state.Breakdown = breakdown, "metric-selector--selected") ]
-        prop.text (breakdown |> Breakdown.getName)
+        prop.text breakdown.GetName
     ]
 
 let renderBreakdownSelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            getAllBreakdowns state
+            Breakdown.All state
             |> Seq.map (fun breakdown -> renderBreakdownSelector state breakdown dispatch) ) ]
 
 let render (state : State) dispatch =

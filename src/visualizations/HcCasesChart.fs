@@ -11,13 +11,15 @@ open Highcharts
 let chartText = I18N.chartText "hcCases"
 
 type DisplayType =
-    | Healthcare
-    | HealthcareRelative
+    | Absolute
+    | Relative
   with
-    static member all = [ Healthcare; HealthcareRelative; ]
-    static member getName = function
-        | Healthcare                -> chartText "healthcareEmployees"
-        | HealthcareRelative        -> chartText "healthcareEmployeesRelative"
+    static member All = [ Absolute; Relative; ]
+    static member Default = Absolute
+    member this.GetName =
+        match this with
+        | Absolute -> chartText "all"
+        | Relative -> chartText "relative"
 
 // ---------------------------
 // State management
@@ -36,9 +38,9 @@ type Msg =
 let init data: State * Cmd<Msg> =
     let state =
         { scaleType = Linear
-          displayType = Healthcare
+          displayType = DisplayType.Default
           data = data
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 }
 
     state, Cmd.none
 
@@ -63,40 +65,50 @@ let renderDisplaySelector state dt dispatch =
         Utils.classes
             [(true, "btn btn-sm metric-selector")
              (state.displayType = dt, "metric-selector--selected") ]
-        prop.text (dt |> DisplayType.getName)
+        prop.text dt.GetName
     ]
 
 let renderDisplaySelectors state dispatch =
     Html.div [
         prop.className "metrics-selectors"
         prop.children (
-            DisplayType.all
+            DisplayType.All
             |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
 
 type Series =
     | ConfirmedCases
     | HealthcareCases
+    | RhOccupantCases
 
 module Series =
-    let healthcare = [ ConfirmedCases; HealthcareCases ]
+    let all = [ ConfirmedCases; HealthcareCases; RhOccupantCases ]
 
-    let getSeriesInfo =
-        function
-        | HealthcareCases ->  "#73ccd5", "healthcareEmployeesCases", 1
-        | ConfirmedCases ->  "#d5c768", "totalConfirmed", 1
+    let getSeriesInfo (state, series) =
+        match series with
+        | HealthcareCases   -> true,  "#73ccd5", "healthcareEmployeesCases", 1
+        | RhOccupantCases   -> true,  "#bf5747", "rhOccupantCases", 1
+        | ConfirmedCases ->
+            match state.displayType with
+            | Absolute      -> false, "#d5c768", "totalConfirmed", 1
+            | Relative      -> true,  "#d5c768", "otherCases", 1
 
-let tooltipFormatter jsThis =
+let tooltipFormatter jsThis dt =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
-    let arrows p = match p?point?seriesId with
-                                   | "healthcareEmployeesCases" -> "↳ "
-                                   |_ -> ""
+    let arrows p =
+        match dt with
+        | Absolute ->
+            match p?point?seriesId with
+            | "healthcareEmployeesCases" -> "↳ "
+            | "rhOccupantCases" -> "↳ "
+            |_ -> ""
+        |_ -> ""
 
     fmtWeekYearFromTo
     + "<br>"
     + (pts
        |> Seq.map (fun p ->
-           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name p?point?fmtTotal)
+           sprintf """%s<span style="color:%s">●</span> %s: <b>%s</b>""" (arrows p) p?series?color p?series?name (I18N.NumberFormat.formatNumber(p?point?fmtTotal:int)))
        |> String.concat "<br>")
 
 
@@ -113,18 +125,24 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let getPoint: (WeeklyStatsDataPoint -> int option) =
         match series with
         | ConfirmedCases -> fun dp -> (match state.displayType with
-                                       | Healthcare -> dp.ConfirmedCases
-                                       | HealthcareRelative -> dp.ConfirmedCases |> splitOutFromTotal dp.HealthcareCases) // Because "relative" is a stacked bar chart
+                                       | Absolute -> dp.ConfirmedCases
+                                       | Relative ->
+                                            dp.ConfirmedCases
+                                            |> splitOutFromTotal dp.HealthcareCases
+                                            |> splitOutFromTotal dp.RetirementHomeOccupantCases) // Because "relative" is a stacked bar chart
 
         | HealthcareCases -> fun dp -> dp.HealthcareCases
+        | RhOccupantCases -> fun dp -> dp.RetirementHomeOccupantCases
 
     let getPointTotal: (WeeklyStatsDataPoint -> int option) =
         match series with
         | ConfirmedCases -> fun dp -> dp.ConfirmedCases
         | HealthcareCases -> fun dp -> dp.HealthcareCases
+        | RhOccupantCases -> fun dp -> dp.RetirementHomeOccupantCases
 
-    let color, seriesId, stack = Series.getSeriesInfo (series)
+    let visible, color, seriesId, stack = Series.getSeriesInfo (state, series)
     {|
+       visible = visible
        color = color
        name = chartText seriesId
        stack = stack
@@ -145,7 +163,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
 
 let scaleType (state:State) =
     match state.displayType with
-    | HealthcareRelative -> ScaleType.Linear
+    | Relative -> ScaleType.Linear
     | _ -> state.scaleType
 
 let renderChartOptions (state: State) dispatch =
@@ -167,16 +185,13 @@ let renderChartOptions (state: State) dispatch =
             {|
                 animation = false
                 ``type`` = (match state.displayType with
-                            | HealthcareRelative -> "column"
+                            | Relative -> "column"
                             | _ -> "line")
                 zoomType = "x"
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series = (match state.displayType with
-                    | Healthcare -> Series.healthcare |> renderSeries state
-                    | HealthcareRelative -> Series.healthcare |> renderSeries state
-                    ) |> Seq.toArray
+           series = Series.all |> renderSeries state |> Seq.toArray
            yAxis =
                baseOptions.yAxis
                |> Array.map (fun yAxis -> {| yAxis with
@@ -184,7 +199,7 @@ let renderChartOptions (state: State) dispatch =
                                                     | Linear -> Some 0
                                                     | _ -> None
                                               labels = match state.displayType with
-                                                       |  HealthcareRelative  -> pojo {| format = "{value} %" |}
+                                                       |  Relative  -> pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
 
                                               reversedStacks = true
@@ -207,7 +222,7 @@ let renderChartOptions (state: State) dispatch =
                    {| shared = true
                       split = false
                       useHTML = true
-                      formatter = fun () -> tooltipFormatter jsThis
+                      formatter = fun () -> tooltipFormatter jsThis state.displayType
                       |}
            legend =
                pojo
@@ -216,7 +231,7 @@ let renderChartOptions (state: State) dispatch =
            plotOptions = pojo {|
                                 column = pojo {|
                                                 stacking = match state.displayType with
-                                                           |  HealthcareRelative -> "percent"
+                                                           |  Relative -> "percent"
                                                            | _ -> "normal" |}
 
                                 |}
@@ -257,7 +272,7 @@ let render (state: State) dispatch =
     Html.div [
         Utils.renderChartTopControlRight (
             Utils.renderMaybeVisible (match state.displayType with
-                                      | HealthcareRelative -> false
+                                      | Relative -> false
                                       | _ -> true) [
                 Utils.renderScaleSelector
                     state.scaleType (ScaleTypeChanged >> dispatch)])

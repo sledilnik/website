@@ -2,15 +2,15 @@ module ExcessDeathsChart.Main
 
 open Feliz
 open Browser
-open Fable.Core.JsInterop
 open Fable.DateFunctions
 
 open Types
 
 let init statsData =
-    { StatsData = statsData
+    { DisplayType = DisplayType.Default
+      StatsData = statsData
+      DailyDeathsData = Loading
       WeeklyDeathsData = Loading
-      DisplayType = AbsoluteDeaths
     }
 
 let update state msg =
@@ -20,14 +20,13 @@ let update state msg =
     | DailyDeathsDataReceived data ->
         match data with
         | Error err ->
-            { state with WeeklyDeathsData = Failure err }
+            { state with DailyDeathsData = Failure err ; WeeklyDeathsData = Failure err }
         | Ok data ->
             // Aggregate daily data into ISO weeks
             let weeklyDeathsData =
                 data
                 |> List.map (fun dp ->
-                    let date = System.DateTime(dp.year, dp.month, dp.day)
-                    {| year = Utils.getISOWeekYear(date) ; week = date.GetISOWeek() ; date = date ; deceased = dp.deceased |} )
+                    {| year = Utils.getISOWeekYear(dp.Date) ; week = dp.Date.GetISOWeek() ; date = dp.Date ; deceased = dp.Deceased |} )
                 |> List.groupBy (fun dp -> (dp.year, dp.week))
                 |> List.map (fun ((year, week), dps) ->
                     { Year = year
@@ -36,22 +35,48 @@ let update state msg =
                       WeekEndDate = dps |> List.map (fun dp -> dp.date) |> List.last
                       Deceased = dps |> List.sumBy (fun dp -> dp.deceased) } )
 
-            { state with WeeklyDeathsData = Success weeklyDeathsData }
+            { state with DailyDeathsData = Success data ; WeeklyDeathsData = Success weeklyDeathsData }
 
 let renderDisplayTypeSelectors state dispatch =
     let selectors =
-        DisplayType.available
+        DisplayType.All
         |> List.map (fun dt ->
+            let selected =
+                match state.DisplayType, dt with
+                | ExcessDeathsByAgeGroup _, ExcessDeathsByAgeGroup _ -> true
+                | ExcessDeaths, ExcessDeaths -> true
+                | AbsoluteDeaths, AbsoluteDeaths -> true
+                | _ -> false
+
             Html.div [
                 prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
+                prop.text dt.GetName
                 Utils.classes
-                    [(true, "chart-display-property-selector__item")
-                     (state.DisplayType = dt, "selected")]
-                prop.text (DisplayType.getName dt) ] )
+                    [ (true, "chart-display-property-selector__item")
+                      (selected, "selected") ] ] )
 
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children selectors
+    ]
+
+let renderDisplayTypeOptions (options) (selectedOption) dispatch =
+    let renderSelector option =
+        let active = option = selectedOption
+        Html.div [
+            prop.text (option :> IOption).Label
+            Utils.classes
+                [(true, "btn btn-sm metric-selector")
+                 (active, "metric-selector--selected selected")]
+            if not active then prop.onClick (fun _ -> dispatch option)
+            if active then prop.style [ style.backgroundColor "#808080" ]
+          ]
+
+    Html.div [
+        prop.className "metrics-selectors"
+        options
+        |> List.map renderSelector
+        |> prop.children
     ]
 
 let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsData : Types.StatsData |}) ->
@@ -64,48 +89,60 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
 
     React.useEffect(loadData >> Async.StartImmediate, [| |])
 
-    match state.WeeklyDeathsData with
-    | NotAsked
-    | Loading -> React.fragment [ ]
-    | Failure error -> Html.div [ Html.text error ]
-    | Success data ->
+    let renderRemoteData (data : RemoteData<'T, string>) renderer =
+        match data with
+        | NotAsked
+        | Loading -> React.fragment [ ]
+        | Failure error -> Html.div [ Html.text error ]
+        | Success data -> renderer data
+
+    Html.div [
+        Utils.renderChartTopControls [
+            renderDisplayTypeSelectors state dispatch ]
         Html.div [
-            Utils.renderChartTopControls [
-                renderDisplayTypeSelectors state dispatch ]
-            Html.div [
-                prop.style [ style.height 450 ]
-                prop.className "highcharts-wrapper"
-                prop.children [
-                    match state.DisplayType with
-                    | AbsoluteDeaths ->
-                        React.keyedFragment (1, [
-                            Html.div [
-                                prop.style [ style.height 420 ]
-                                prop.children [
-                                    Absolute.renderChartOptions data |> Highcharts.chart ] ]
-                            Html.div [
-                                prop.className "disclaimer"
-                                prop.children [
-                                    Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer")
-                                    Html.text " "
-                                    Html.a [
-                                        prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
-                                        prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
-                    | ExcessDeaths ->
-                        React.keyedFragment (2, [
-                            Html.div [
-                                prop.style [ style.height 420 ]
-                                prop.children [
-                                    Relative.renderChartOptions data state.StatsData |> Highcharts.chart ] ]
-                            Html.div [
-                                prop.className "disclaimer"
-                                prop.children [
-                                    Html.text (I18N.chartText "excessDeaths" "excess.disclaimer")
-                                    Html.text " "
-                                    Html.a [
-                                        prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
-                                        prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
-                ]
+            prop.className "highcharts-wrapper"
+            prop.children [
+                match state.DisplayType with
+                | AbsoluteDeaths ->
+                    React.keyedFragment (1, [
+                        Html.div [
+                            prop.style [ style.height 420 ]
+                            prop.children [
+                                renderRemoteData state.WeeklyDeathsData (Absolute.renderChartOptions >> Highcharts.chart) ] ]
+                        Html.div [
+                            prop.className "disclaimer"
+                            prop.children [
+                                Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer")
+                                Html.text " "
+                                Html.a [
+                                    prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
+                                    prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
+                | ExcessDeaths ->
+                    React.keyedFragment (2, [
+                        Html.div [
+                            prop.style [ style.height 420 ]
+                            prop.children [
+                                renderRemoteData state.WeeklyDeathsData (Relative.renderChartOptions state.StatsData >> Highcharts.chart) ] ]
+                        Html.div [
+                            prop.className "disclaimer"
+                            prop.children [
+                                Html.text (I18N.chartText "excessDeaths" "excess.disclaimer")
+                                Html.text " "
+                                Html.a [
+                                    prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
+                                    prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
+                | ExcessDeathsByAgeGroup sex ->
+                    React.keyedFragment (3, [
+                        Html.div [
+                            prop.style [ style.height 420 ]
+                            prop.children [
+                                renderRemoteData state.DailyDeathsData (RelativeByAgeGroup.renderChartOptions sex >> Highcharts.chart) ] ]
+                        renderDisplayTypeOptions Sex.All sex (ExcessDeathsByAgeGroup >> DisplayTypeChanged >> dispatch)
+                        Html.div [
+                            prop.className "disclaimer"
+                            prop.children [
+                                Html.text (I18N.chartText "excessDeaths" "excessByAgeGroup.disclaimer") ] ] ] )
             ]
         ]
-    )
+    ]
+)

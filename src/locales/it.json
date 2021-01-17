@@ -81,15 +81,15 @@
         "cm": {
             "bordersOopen": {
                 "title": "Confini aperti",
-                "description": "Rilassamento: confini aperti per i cittadini stranieri"
+                "description": "Distensione: confini aperti per i cittadini stranieri"
             },
             "kafanasOpen": {
                 "title": "Bar",
-                "description": "Rilassamento: bar e ristoranti riaperti"
+                "description": "Distensione: bar e ristoranti riaperti"
             },
             "lessMeasures": {
                 "title": "Blocco sollevato",
-                "description": "Rilassamento: spostamento libero in tutto il paese"
+                "description": "Distensione: spostamento libero in tutto il paese"
             },
             "masksOn": {
                 "title": "Mascherine",
@@ -438,7 +438,7 @@
         "x_days_ago_plural": "{{ count }} giorni fa",
         "in_x_days": "in {{ count }} giorno",
         "in_x_days_plural": "in {{ count }} giorni",
-        "weekYearFromToDate": "<b>{{date, %e %b}} - {{dateTo, %e %b}}</b> ({{date, Settimana %W del %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e %b}} - {{dateTo, %e %b}}</b> ({{dateTo, Settimana %W del %Y}})"
     },
     "cm": {
         "gatherings10": {
@@ -454,12 +454,12 @@
             "title": "Quarantena"
         },
         "liftGatherings500": {
-            "description": "Rilassamento: assembramenti fino a 500 persone, spettatori in eventi sportivi. <br> Valichi di frontiera aperti fuori dai posti di blocco per i cittadini di SLO, AUT, ITA e HUN",
+            "description": "Distensione: assembramenti fino a 500 persone, spettatori in eventi sportivi. <br> Valichi di frontiera aperti fuori dai posti di blocco per i cittadini di SLO, AUT, ITA e HUN",
             "title": "Fino a 500"
         },
         "liftSchools4to5": {
             "title": "Scuole",
-            "description": "Rilassamento: scuola elementare 4a, 5a classe, assembramenti fino a 200 persone, tutti gli alloggi"
+            "description": "Distensione: scuola elementare 4a, 5a classe, assembramenti fino a 200 persone, tutti gli alloggi"
         },
         "quarantine14days": {
             "description": "Quarantena obbligatoria di 14 giorni per gli stranieri che arrivino dall'estero <br> (per l'UE con eccezioni e paesi terzi)",
@@ -467,7 +467,7 @@
         },
         "liftSchools1to3": {
             "title": "Scuola materna",
-            "description": "Rilassamento: scuola materna ed elementare 1a-3a, 9a classe. Scuola secondaria 4 anno"
+            "description": "Distensione: scuola materna ed elementare 1a-3a, 9a classe. Scuola secondaria 4 anno"
         },
         "retirementHomes": {
             "title": "Case di riposo",
@@ -487,15 +487,15 @@
         },
         "liftVacationHomes": {
             "title": "Seconde case",
-            "description": "Rilassamento: spostamento tra i comuni (case di vacanza...), <br>chiarimenti sul divieto generale di spostamento"
+            "description": "Distensione: spostamento tra i comuni (case di vacanza...), <br>chiarimenti sul divieto generale di spostamento"
         },
         "liftPublicTransport": {
             "title": "Trasporto",
-            "description": "Rilassamento: trasporto pubblico, tutti i servizi sanitari e odontoiatrici"
+            "description": "Distensione: trasporto pubblico, tutti i servizi sanitari e odontoiatrici"
         },
         "liftQuarantine": {
             "title": "Quarantena",
-            "description": "Rilassamento: quarantena solo per stranieri provenienti da paesi terzi"
+            "description": "Distensione: quarantena solo per stranieri provenienti da paesi terzi"
         },
         "epidemic": {
             "title": "Epidemia",
@@ -522,7 +522,7 @@
             "description": "Quarantena obbligatoria di 7 giorni in caso di arrivo dall'estero"
         },
         "liftService": {
-            "description": "Rilassamento: lavori edili, servizi, sport all'aria aperta, <br>ammessi alcuni servizi di trasporto pubblico",
+            "description": "Distensione: lavori edili, servizi, sport all'aria aperta, <br>ammessi alcuni servizi di trasporto pubblico",
             "title": "Servizi"
         },
         "nationalStudy": {
@@ -530,15 +530,15 @@
             "title": "Ricerca"
         },
         "liftMuseums": {
-            "description": "Rilassamento: biblioteche, gallerie, musei, intermediazione di immobili, spazzacamini",
+            "description": "Distensione: biblioteche, gallerie, musei, intermediazione di immobili, spazzacamini",
             "title": "Musei"
         },
         "liftMunicipality": {
             "title": "Comuni",
-            "description": "Rilassamento: spostamento al di fuori dei confini del proprio comune"
+            "description": "Distensione: spostamento al di fuori dei confini del proprio comune"
         },
         "liftFoodMarkets": {
-            "description": "Rilassamento: mercati, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
+            "description": "Distensione: mercati alimentari, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
             "title": "Mercati"
         },
         "firstCase": {
@@ -586,11 +586,11 @@
             "title": "Comuni"
         },
         "liftShops": {
-            "description": "Rilassamento: negozi di materiale tecnico, auto, mobili e articoli per bambini, pedicure, copisterie, orologerie e gioiellerie",
+            "description": "Distensione: negozi di materiale tecnico, auto, mobili e articoli per bambini, pedicure, copisterie, orologerie e gioiellerie",
             "title": "Negozi"
         },
         "liftLibraries": {
-            "description": "Rilassamento: biblioteche, officine, servizi di costruzione e manutenzione, …",
+            "description": "Distensione: biblioteche, officine, servizi di costruzione e manutenzione, …",
             "title": "Librerie"
         },
         "restaurants": {
@@ -598,7 +598,7 @@
             "title": "Ristoranti"
         },
         "services": {
-            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ....) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
             "title": "Servizi"
         },
         "gatherings2": {
@@ -614,8 +614,28 @@
             "title": "Piano"
         },
         "liftServices": {
-            "description": "Rilassamento: trasporto pubblico (servizio limitato), alcuni servizi (fiorai, autolavaggi, tintorie)<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
+            "description": "Distensione: trasporto pubblico (servizio limitato), fiorai, autolavaggi, tintorie,<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
             "title": "Servizi"
+        },
+        "liftReligiousCeremonies": {
+            "description": "Distensione: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, libreriw, negozi specializzati.",
+            "title": "Funz.Rel."
+        },
+        "services2": {
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …).<br>Distensione di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
+            "title": "Servizi"
+        },
+        "liftFoodMarkets2": {
+            "title": "Mercati",
+            "description": "Distensione: mercati alimentari, edicole, parrucchieri."
+        },
+        "planRelaxation2": {
+            "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
+            "title": "Piano"
+        },
+        "liftGym": {
+            "description": "Distensione: ricreazione individuale e guidata con restrizioni<br> (1 persona per 50m2 e 5m di distanza interpersonale).",
+            "title": "Palestra"
         }
     },
     "tableDict": {
@@ -669,8 +689,9 @@
         "cases_active": "Casi attivi",
         "cases_confirmed_todate": "Casi confermati (ad oggi)",
         "cases_confirmed": "Casi confermati (giornalieri)",
-        "tests_performed_todate": "Tamponi (ad oggi)",
-        "tests_performed": "Tamponi (giornalieri)"
+        "tests_performed_todate": "Tamponi PCR (ad oggi)",
+        "tests_performed": "Tamponi PCR (giornalieri)",
+        "vaccination_administered_todate": "Persone vaccinate (ad oggi)"
     },
     "charts": {
         "ratios": {
@@ -747,14 +768,15 @@
             "hospitalAdmitted": "Ammessi in ospedale",
             "activeCases": "Casi attivi",
             "confirmedCases": "Casi confermati",
-            "testsPerformed": "Tamponi",
+            "testsPerformed": "Tamponi: PCR",
             "showToDate": "Ad oggi",
             "showToday": "Giornalieri",
             "showActive": "Attivi",
             "show7DaysAverage": "Media 7 giorni",
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
-            "titleMenu_SVN": "Slovenia - situazione"
+            "titleMenu_SVN": "Slovenia - situazione",
+            "vaccinationAdministered": "Vaccinati"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -782,7 +804,7 @@
             "allHospitals": "Tutti gli ospedali",
             "titleMenu": "Capacità"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "yAxisTitle": "Totale decessi su 100.000 persone",
             "legendTitle": "Totale decessi su 100.000 persone",
             "titleMenu": "Paesi - Decessi",
@@ -795,24 +817,29 @@
             "rhOccupant": "Residenti nelle case di riposo",
             "rhStaff": "Personale delle case di riposo",
             "hcStaff": "Personale sanitario",
-            "all": "Tutto",
+            "all": "Totale",
             "relative": "Relativo",
             "averageByDay": "Per giorno (media)",
             "titleMenu": "Casi - struttura",
-            "disclaimer": "Nota: questo grafico non è aggiornato. Dall'11 ottobre, la NIJZ non riporta più i dati relativi alle case di riposo e agli operatori sanitari."
+            "disclaimer": "Nota: dall'11 ottobre, la NIJZ non riporta più i dati relativi agli operatori sanitari e nelle case di riposo."
         },
         "tests": {
-            "ns-apr20": "Ricerca",
-            "regular": "Normale",
-            "title": "Analisi",
+            "ns-apr20": "Ricerca: PCR",
+            "regular": "Ordinario: PCR",
+            "title": "Analisi: PCR",
             "shareOfPositive": "Percentuale tamponi positivi (%)",
             "positiveTests": "Tamponi positivi",
             "negativeTests": "Tamponi negativi",
-            "allTesting": "Tutti",
+            "totalPCR": "Tutti: PCR",
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
-            "byLab": "Per laboratorio: test",
-            "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio."
+            "byLab": "Per laboratorio: test PCR",
+            "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio.",
+            "hagt": "Ordinario: TAR",
+            "positiveTotal": "Totale positivi",
+            "positivePCR": "PCR positivi",
+            "positiveHAT": "TAR positivi",
+            "positiveSplit": "PCR e TAR positivi"
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -826,7 +853,7 @@
             "titleMenu": "CS - trattamento",
             "disclaimer": "Nota: questo grafico non è aggiornato. Dal 25 ottobre il Ministero della Salute non riporta più i dati relativi ai centri sanitari in quanto non vengono più raccolti."
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
             "yAxisTitle": "Nuovi casi giornalieri su 100.000 persone",
             "titleMenu": "Paesi - Nuovi casi",
@@ -856,7 +883,7 @@
             "female": "Femmine",
             "male": "Maschi",
             "title": "Fasce di età",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri dagli ospedali. I dati demografici (sesso, età, comune di residenza) dei defunti sono riportati dalle istituzioni (assistenza sanitaria, case di riposo) al NIJZ, ma questi dati sono in ritardo di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale di morti.",
+            "disclaimer": "Nota: I dati demografici (sesso, età) dei defunti sono riportati dal NIJZ settimanalmente. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
             "populationShare": "Quota di popolazione",
             "titleMenu": "Età, Sesso"
         },
@@ -905,7 +932,7 @@
             "population": "popolazione",
             "populationShare": "Su popolazione",
             "populationC": "Popolazione",
-            "all": "Tutto",
+            "all": "Tutti",
             "yesterday": "Ieri",
             "mortalityOfConfirmedCases": "Mortalità nei casi confermati",
             "title": "Mappa dei comuni",
@@ -913,7 +940,8 @@
             "relativeIncrease": "Incremento settimanale",
             "titleMenu": "Comuni - mappa",
             "bubbles": "Distribuzione",
-            "disclaimer": "Nota: riceviamo i dati sui decessi dai rapporti giornalieri degli ospedali. I dati demografici (sesso, età, comune) sui deceduti sono riportati dalle istituzioni (sanità, case di riposo) al NIJZ, ma questi dati sono ritardati di diverse settimane. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi."
+            "disclaimer": "Nota: I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
+            "disclaimerRegion": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane. Questo è il motivo per cui c'è una deviazione dal numero totale di morti."
         },
         "regions": {
             "deceased": "Decessi",
@@ -921,7 +949,8 @@
             "activeCases": "Casi attivi",
             "title": "Casi per regione",
             "titleMenu": "Regioni - casi",
-            "newCases7Days": "Nuovi casi (media di 7 giorni)"
+            "newCases7Days": "Nuovi casi (media di 7 giorni)",
+            "disclaimer": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane."
         },
         "spread": {
             "absolute": "Crescita giornaliera assoluta",
@@ -968,8 +997,6 @@
             "view": "Visualizza:",
             "yAxis": "Asse Y:",
             "xAxis": "Asse X:",
-            "thousandsSep": " . ",
-            "decimalPoint": ",",
             "all": "Tutto",
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
@@ -989,7 +1016,9 @@
             "dsOWD_MZ": "Our World in Data &amp; Min. Salute",
             "dsOWD_NIJZ": "Our World in Data &amp; NIJZ",
             "dsMNZ": "MNZ",
-            "dsSURS": "SURS"
+            "dsSURS": "SURS",
+            "showAll": "Mostra tutto",
+            "hideAll": "Nascondi tutto"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1006,7 +1035,7 @@
             "title": "Paesi: totale decessi per casi",
             "titleMenu": "Paesi: decessi su casi"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "criteri per lista rossa",
             "legendTitle": "Casi attivi su 100.000 persone",
             "yAxisTitle": "Casi attivi su 100.000 persone",
@@ -1019,15 +1048,17 @@
         },
         "dailyComparison": {
             "title": "Confronto per giorno della settimana",
-            "positivePct": "Percentuale di tamponi positivi (%)",
-            "tests": "Tamponi effettuati",
+            "positivePct": "Percentuale positivi: PCR (%)",
+            "tests": "Tamponi effettuati: PCR",
             "active": "Casi attivi",
             "new": "Casi confermati",
             "titleMenu": "Giorni della settimana - confronto",
             "deceased": "Decessi",
             "icuAdmitted": "Ammessi in terapia intensiva",
             "hospitalDischarged": "Dimessi dall'ospedale",
-            "hospitalAdmitted": "Ammessi in ospedale"
+            "hospitalAdmitted": "Ammessi in ospedale",
+            "positivePctHAT": "Percentuale positivi: TAR (%)",
+            "testsHAT": "Test eseguiti: TAR"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -1045,10 +1076,27 @@
             "confirmedFromQuarantine": "Confermato dalla quarantena",
             "confirmedCases": "Casi confermati",
             "sentToQuarantine": "Inviato in quarantena",
-            "title": "Fonti di infezione e quarantena",
-            "titleMenu": "Fonti di infezione",
+            "title": "Fonti e luoghi di infezione",
+            "titleMenu": "Fonti e luoghi di infezione",
             "disclaimer": "Nota: dal 17 ottobre, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
-            "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - la quota di casi importati potrebbe essere inferiore a quella effettiva."
+            "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - il numero dei casi potrebbe essere inferiore a quello effettivo.",
+            "locationUnknown": "Sconosciuto",
+            "locationOther": "Altro",
+            "gatheringOrganized": "Raduno organizzato",
+            "gatheringPrivate": "Raduno privato",
+            "sport": "Attività sportiva",
+            "restaurant": "Ristorante",
+            "shop": "Negozio",
+            "transport": "Trasporto pubblico",
+            "prison": "Carcere",
+            "retirementHome": "Casa di riposo",
+            "otherHealthcare": "Altro istituto sanitario",
+            "hospital": "Ospedale",
+            "school": "Istituto scolastico",
+            "work": "Lavoro",
+            "family": "Famiglia",
+            "byLocationRelative": "Per luogo (relativo)",
+            "byLocation": "Per luogo"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -1129,14 +1177,18 @@
             "title": "Diagramma delle fasi"
         },
         "hcCases": {
-            "totalConfirmed": "Totale casi confermati",
+            "totalConfirmed": "Totale confermati",
             "healthcareEmployeesRelative": "Operatori sanitari (relativi)",
             "healthcareEmployees": "Operatori sanitari",
-            "healthcareEmployeesCases": "Operatori sanitari confermati",
+            "healthcareEmployeesCases": "Operatori sanitari",
             "confirmedCases": "Casi confermati",
             "disclaimer": "Nota: i dati della scorsa settimana non sono ancora completi - la quota dei dipendenti sanitari potrebbe essere inferiore a quella effettiva.",
-            "titleMenu": "Operatori sanitari - casi",
-            "title": "Casi confermati tra i dipendenti sanitari"
+            "titleMenu": "Sanità e Case di riposo- casi",
+            "title": "Casi nelle Case di cura e di riposo",
+            "otherCases": "Altre persone",
+            "rhOccupantCases": "Residenti nelle case di riposo",
+            "relative": "Relativo",
+            "all": "Tutti"
         },
         "carePatients": {
             "titleMenu": "Ospedali di cura",
@@ -1159,7 +1211,10 @@
             "deceasedTodayRelative": "Decessi al giorno (relativo)",
             "deceasedToday": "Decessi al giorno",
             "titleMenu": "Decessi",
-            "title": "Decessi"
+            "title": "Decessi",
+            "deceasedByAgeToday": "Decessi per età (giornalieri)",
+            "deceasedByAgeTodayRelative": "Decessi per età (giornalieri, relativi)",
+            "disclaimer": "Nota: i dati sui decessi per età vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane."
         },
         "excessDeaths": {
             "excess": {
@@ -1174,7 +1229,18 @@
             },
             "titleMenu": "Eccesso di mortalità",
             "title": "Eccesso di mortalità",
-            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}"
+            "weekDate": "{{ dateFrom, %e. %b }} - {{ dateTo, %e. %b }}",
+            "weekDateWithYear": "{{ dateFrom, %e. %b %Y }} - {{ dateTo, %e. %b %Y }}",
+            "excessByAgeGroup": {
+                "sex": {
+                    "female": "Femmine",
+                    "male": "Maschi",
+                    "both": "Tutti"
+                },
+                "totalDeceased": "Totale decessi",
+                "disclaimer": "Nota: i dati sui decessi dell'ultimo mese sono incompleti. La larghezze delle colonne rappresenta il rapporto tra i decessi nella fascia di età della colonna e tutti i decessi in un determinato mese.",
+                "title": "Eccesso rispetto agli ultimi 5 anni per classi di età"
+            }
         },
         "metricsCorrelation": {
             "deceased": "Deceduti",
@@ -1182,7 +1248,7 @@
             "cases": "Casi confermati",
             "all": "Totale",
             "averageByDay": "Per giorno (media)",
-            "titleMenu": "Correlazione tra casi, ricoveri e decessi",
+            "titleMenu": "Correlazione",
             "title": "Correlazione tra casi, ricoveri e decessi"
         }
     },
@@ -1205,22 +1271,15 @@
         "deceasedToDate": "Decessi confermati",
         "icu": "Terapie intensive",
         "inHospital": "Ricoveri",
-        "tests": "Tamponi giornalieri",
+        "tests": "Tamponi oggi: PCR",
         "recoveredToDate": "Guariti",
         "active": "Casi attivi",
         "confirmedToDate": "Casi confermati",
-        "package3": "pacchetto 3",
-        "package2": "pacchetto 2",
-        "package1": "pacchetto 1",
-        "nextCriteria": "<br>I criteri per il pacchetto {{ phaseNextNumber }} della fase {{ phaseNextPackage }} sono {{ phaseNextCriteria }}.",
-        "redPhaseGenitive": "rossa",
-        "redPhase": "Fase rossa",
-        "orangePhaseGenitive": "arancione",
-        "orangePhase": "Fase arancione",
-        "per100k": "per 100k",
         "incidence": "Incidenza a 14 giorni",
         "newCases7dInfo": "media degli ultimi 7 giorni",
-        "newCases7d": "Casi nuovi"
+        "newCases7d": "Casi nuovi",
+        "testsHAT": "Tamponi oggi: TAR",
+        "vaccinationSummary": "Persone vaccinate"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
@@ -1281,6 +1340,10 @@
         "12": {
             "description": "nuova metodologia dei test",
             "title": "fase<br>12"
+        },
+        "14": {
+            "title": "fase<br>14",
+            "description": "test rapidi antigenici"
         }
     },
     "weekday": {
@@ -1338,7 +1401,7 @@
         "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni",
         "progressC19": "Progresso tipico del COVID-19. Ricovero, terapia intensiva e mortalità.",
         "newInfographics": "🆕 📇 Nuova infografica:",
-        "tests": "5 miti sui test ...",
+        "tests": "5 miti sui test …",
         "weKnowWeDoNotKnow": "Sappiamo che i dati a volte mentono. Come facciamo a sapere, che (non) lo sappiamo? 🤔📉🧐📈🤷♂️🤷♀️",
         "checked": "🆕 Verificato:",
         "presentation": "Come la scienza aiuta i responsabili delle decisioni - presentazione all'Assemblea Nazionale RS",
@@ -1366,8 +1429,9 @@
         "exceptions": "Eccezioni",
         "validity": "Validità",
         "geoValidity": "Validità geografica",
-        "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte. I dati vengono raccolti in [Summary table](https://docs.google.com/spreadsheets/u/3/d/e/2PACX-1vRKEPPoL5l7hN6A8hb3tWiD2MGO3Xh6QmGIufEga9FD433HZ3k1iyGNYtZNbMPimg5Z5HF_3BcWx5KK/pubhtml).",
-        "title": "Misure e restrizioni"
+        "description": "Utilizzando le fonti di dati disponibili, abbiamo cercato di raccogliere e riassumere le misure attualmente valide adottate dal governo Sloveno in risposta alla pandemia di COVID-19, specialmente nelle aree selezionate che sono più rilevanti per la vita di tutti i giorni. Le informazioni disponibili attraverso questo TRACKER COVID-19, inclusi i link ad altri siti, vengono raccolte da una serie di fonti ufficiali con cui non siamo affiliati, quindi va tenuto presente che sono solo a scopo informativo e possono cambiare di volta in volta. Il tracker quindi non garantisce l'accuratezza e la completezza delle informazioni raccolte sulle misure e declina espressamente ogni responsabilità per ulteriori interpretazioni che citano i nostri dati come fonte.",
+        "title": "Misure e restrizioni",
+        "searchPlaceholder": "Immettere la query di ricerca"
     },
     "week": "Settimana",
     "posts": {
@@ -1376,6 +1440,144 @@
     },
     "faq": {
         "pageTitle": "FAQ",
-        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._"
+        "intro": "_Sfortunatamente, questa pagina non è stata ancora tradotta._",
+        "chart-infocard-percent": {
+            "question": "Cosa significano le percentuali nelle schede informative nella parte superiore della pagina web?",
+            "answer": "Si tratta di un tasso di crescita percentuale in una determinata data del numero di nuovi casi confermati rispetto al giorno precedente. Se, ad esempio, ieri c'erano 16 persone nel reparto di terapia intensiva e oggi ne hanno accettati altri quattro, si tratta del 25% in più rispetto alla situazione di ieri."
+        },
+        "chart-usage": {
+            "answer": "Certo! Potete incorporare qualsiasi grafico o visualizzazione nel vostro sito, citando la fonte, ovviamente. [Cliccare qui](/ it/embed) e selezionare dall'elenco il grafico che si desidera incorporare.",
+            "question": "Posso usare i vostri grafici sul mio sito web? Come?"
+        },
+        "data-usage": {
+            "question": "Come posso ottenere e utilizzare il vostro database?",
+            "answer": "Il nostro database è pubblico e disponibile gratuitamente sotto forma di [** file CSV **, ** API REST ** e ** foglio Google **] (/ it/ data). Fateci sapere lo scopo per il quale intendete utilizzare le informazioni e assicuratevi di includere Sledilnik come fonte dei vostri dati.\n\nPoiché tutti i dati nel database sono già contrassegnati con tag inglesi (vedi anche [La vostra pagina web è disponibile in inglese?](#english-translation)), è possibile anche il loro uso internazionale (esportazione, visualizzazione)."
+        },
+        "data-contribute": {
+            "question": "In che modo gli utenti possono essere coinvolti attivamente nella raccolta dei dati? Come posso partecipare?",
+            "answer": "È possibile aiutare volontariamente raccogliendo e verificando i dati dai media (e anche dal campo), con analisi statistiche o di altro tipo, ecc. Contattateci all'indirizzo info@sledilnik.org se volete partecipare.\n\nSledilnik non raccoglie le informazioni personali degli utenti né le informazioni che gli individui vorrebbero condividere sulla loro condizione o sullo stato ospedaliero."
+        },
+        "data-hospital-out": {
+            "question": "Come ottenete i dati sulle dimissioni ospedaliere?",
+            "answer": "Le informazioni sulle dimissioni dagli ospedali sono calcolate sulla base dei dati ottenuti giornalmente direttamente dagli ospedali, cioè da una fonte verificata. Per lo più otteniamo il numero giornaliero di dimissioni per tutti gli ospedali, da cui possiamo dedurre il numero di nuovi ricoveri. Vedi anche [Come ottenet i dati sui ricoveri ospedalieri?](#data-hospital-in)"
+        },
+        "data-hospital-in": {
+            "question": "Come ottenete i dati sui ricoveri ospedalieri?",
+            "answer": "Gli ospedali non sempre riportano i ricoveri individuali o le dimissioni dai quali possiamo ottenere dati accurati. Il numero di ricoveri viene solitamente calcolato in base ai dati sugli attualmente ricoverati e dalla differenza rispetto al giorno precedente, a cui aggiungiamo il numero di dimessi e morti in un determinato giorno. In maniera simile calcoliamo anche le ammissioni e le dimissioni nelle unità di terapia intensiva e il collegamento e la disconnessione dai ventilatori (intubati)."
+        },
+        "data-differences": {
+            "question": "Diversi portali visualizzano un numero di persone infette diverso dal vostro. Perché?",
+            "answer": "Sledilnik utilizza solo i dati convalidati e ufficiali riferiti giornalmente dall'Istituto Nazionale di Sanità Pubblica (NIJZ) e da tutti gli ospedali sloveni che sono impegnati con il COVID-19. I nostri dati provengono quindi direttamente da fonti verificate. Inoltre vengono anche verificati incrociando le informazioni fin dall'inizio (4 marzo 2020). Le discreopanze di solito si verificano perché i dati vengono ottenuti da media e portali diversi in momenti diversi della giornata. Vedi anche [I vostri dati e le vostre visualizzazioni sono affidabili?](#data-reliability)"
+        },
+        "data-publish-time": {
+            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati …) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/COVID19Sledilnik) e [ Twitter](https://twitter.com/sledilnik)).",
+            "question": "Quando pubblicate i dati? Perché le date nelle visualizzazioni sono diverse?"
+        },
+        "how-to-help": {
+            "question": "Vorrei aiutare, da dove posso iniziare?",
+            "answer": "Contattateci su info@sledilnik.org e descrivete brevemente chi siete e come potete contribuire al progetto. Il vostro aiuto è ben gradito."
+        },
+        "data-collection": {
+            "question": "Come raccogliete e modificate i dati?",
+            "answer": "Il database](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=0) è costruito a partire dai dati sorgente NIJZ (per categoria). I dati per regione e per età vengono elaborati con ritardo e vengono infine aggiornati una volta noti i risultati della ricerca demografica epidemiologica in corso. I comuni sono tracciati nella tabella [Kraji (Comuni)](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=598557107).\n\nModifica dei dati relativi all'assistenza ospedaliera - [Tabella Pacienti (Pazienti)](https://docs.google.com/spreadsheets/d/1N1qLMoWyi3WFGhIpPFzKsFmVE0IwNP3elb_c18t2DwY/edit#gid=918589010):\n\n- Riceviamo rapporti giornalieri e monitoriamo gli annunci di tutti gli ospedali COVID-19 (UKC Ljubljana, UKC Maribor, UKC Golnik, SB Celje) - verso le 8 del mattino.\n\n- Monitoriamo il numero di ricoveri: in tutti i reparti, in terapia intensiva e su ventilatori.\n\n- Dai dati ottenuti registriamo anche le transizioni (ammissione/dimissione) tra i singoli stadi della malattia (quando rilevabili).\n\n- Nel caso in cui le informazioni di transizione (ammissione/dimissione) siano incomplete, i valori sono determinati mediante inferenza (con una formula).\n\n- Tutte le fonti e le conclusioni sono registrate come commento in singole celle (verificabili).\n\n- I dati vengono confrontati con i dati sintetici sui pazienti ricoverati in terapia intensiva pubblicati dal Governo della Repubblica di Slovenia."
+        },
+        "data-reliability": {
+            "answer": "I dati vengono raccolti da fonti pubbliche verificate, elencate nella [Pagina dati](/it/data).\n\nLo Sledilnik riceve i dati ufficiali su COVID-19 direttamente dal Ministero della Salute, dal NIJZ (Istituto Nazionale per la Salute Pubblica) e da altre istituzioni sanitarie nazionali. Il team dello Sledilnik non garantisce l'accuratezza dei dati originali e pubblica esclusivamente i dati ottenuti da fonti ufficiali o dai media, ma verifichiamo che tutti i dati siano corretti e coerenti con la fonte fornita.",
+            "question": "I vostri dati e le vostre visualizzazioni sono affidabili?"
+        },
+        "tech-used": {
+            "answer": "Il sito è in JavaScript utilizzando Vue.js, le visualizzazioni e i grafici sono realizzati in F# utilizzando le librerie Highcharts e il progetto è aperto e disponibile su [GitHub - Sledilnik](https://github.com/sledilnik).",
+            "question": "Quali strumenti avete utilizzato per creare il sito web/la web app?"
+        },
+        "are-you-paid": {
+            "answer": "Niente affatto. Lo Sledilnik è un'iniziativa senza scopo di lucro creata per supportare la compilazione e la modifica in corso dei dati chiave sulla diffusione del coronavirus in Slovenia. Il nostro database è pubblico e liberamente disponibile, gratuito e non commerciale, e rimarrà così. Vedere anche [Come è possibile ottenere e utilizzare il database?](#data-usage)",
+            "question": "Siete pagati per la creazione della dashboard (grafici, tabelle, modelli)?"
+        },
+        "english-translation": {
+            "question": "La vostra pagina web è disponibile in inglese?",
+            "answer": "Attualmente sono disponibili solo le informazioni [sul progetto](/it/about) e queste FAQ, mentre il resto del sito web non è ancora completamente tradotto. Tuttavia, se siete interessati ad aiutarci nella traduzione, sia la parte di testo che il codice sorgente sono disponibili come open source. Tutti i [dati nel database](https://github.com/sledilnik) sono già contrassegnati con tag in inglese, quindi è possibile anche il loro utilizzo internazionale (esportazione)."
+        },
+        "other-countries": {
+            "answer": "Nella parte inferiore della dashboard è possibile trovare [un grafico di confronto](/it/stats#countries-chart). Il grafico mostra un confronto tra la Slovenia e i diversi cluster di paesi in relazione al *numero di decessi* causati dal COVID-19 *per milione di abitanti*.\nI gruppi di paesi che vengono confrontati con la Slovenia sono i seguenti:\n- Paesi limitrofi (esclusa l'Italia)\n- Paesi critici (UE)\n- Paesi critici (globale)\n- Paesi nordici\n- ex paesi Iugoslavi\n- Paesi dell'Asia orientale e Oceania\n\nIl grafico è disposto cronologicamente, dal 1° gennaio, dalla prima morte e dalla prima morte per milione, rispettivamente. È possibile modificare la visualizzazione di diverse visualizzazioni cronologiche dei confronti di diversi cluster di paesi cliccando sulle schede appropriate.",
+            "question": "Dove posso trovare un confronto tra la Slovenia e gli altri paesi?"
+        },
+        "all-infected": {
+            "answer": "Purtroppo, per ora questi dati non sono disponibili. Ci sono diversi motivi: in precedenza, i test coprivano solo una certa percentuale della popolazione (pazienti con segni e sintomi di infezione respiratoria acuta che potrebbero aver bisogno di cure ospedaliere, operatori sanitari, residenti in case di riposo con sintomi respiratori e persone sopra i 60 anni se il loro medico lo richiedeva). Anche se ora le linee guida ai test per COVID-19 sono state ampliate per includere chiunque mostri i sintomi della malattia, molti potrebbero essere portatori senza sintomi o solo con sintomi lievi. Per questo motivo, le nostre statistiche possono coprire solo una parte della popolazione che mostra chiaramente i segni di infezione. Pertanto, le popolazioni più giovani e quelle non testate sono rappresentate in modo sproporzionato. Non è quindi possibile ottenere dati per pazienti asintomatici che non mostrano sintomi e non sono registrati da nessuna parte.",
+            "question": "È possibile ottenere informazioni statistiche su tutte le persone infette, anche sui casi asintomatici?"
+        },
+        "confirmed-cases": {
+            "answer": "La terminologia in uso sullo Sledilnik è spiegata in [Cosa significa](# chart-terminology). Secondo la definizione dell'OMS, un *caso confermato* è una persona con conferma di laboratorio dell'infezione da COVID-19, indipendentemente dai segni e sintomi clinici. Altri termini, come i nuovi infetti, possono apparire nei media ma non vengono utilizzati nei nostri grafici. Tutti i termini utilizzati dallo Sledilnik sono spiegati in queste FAQ.",
+            "question": "Qual è la differenza tra \"casi nuovi\" e \"casi confermati\"?"
+        },
+        "virus-vs-disease": {
+            "answer": "** SARS-CoV-2 ** è l'abbreviazione di \"Sindrome respiratoria acuta grave Coronavirus 2\" - è il nome accettato a livello internazionale del virus che causa la malattia denominata ** COVID-19 **. Quest'ultimo nome è anche un acronimo, coniato dalle parole COrona VIrus Disease e 2019, l'anno in cui la malattia si è diffusa per la prima volta.",
+            "question": "Qual è la differenza tra SARS-CoV-2 e COVID-19?"
+        },
+        "why-sledilnik": {
+            "answer": "_Il nostro obiettivo è aiutare a comprendere la diffusione del virus e contribuire ad aumentare la consapevolezza, la reattività e l'efficacia delle misure implementate per frenare il virus. Potete trovare ulteriori informazioni sul progetto nella [scheda Informazioni] (/it/about) ._",
+            "question": "Perché Sledilnik?"
+        },
+        "section": {
+            "project": "Informazioni sul progetto",
+            "charts": "Informazioni sui calcoli e sui grafici",
+            "data": "Informazioni sui dati",
+            "general": "Informazioni generali"
+        },
+        "searchPlaceholder": "Immettere la query di ricerca",
+        "what-is-sledilnik": {
+            "answer": "[Sledilnik è un progetto](/it/about) open-data e open-source che raccoglie, analizza e visualizza alcuni dei dati più utili per comprendere meglio la diffusione della pandemia del coronavirus e della malattia COVID-19, insieme alle sue dinamiche e alla sua portata. Vogliamo rendere chiare le visualizzazioni grafiche e statistiche di ciò che i dati e le revisioni attuali ci dicono sulla diffusione del virus in Slovenia, e garantire che le informazioni sull'entità e la gravità del problema COVID-19 in Slovenia diventino accessibili e comprensibili a tutti.",
+            "question": "Che cos'è Sledilnik?"
+        },
+        "regions-chart": {
+            "answer": "Il [grafico](/it/stats#regions-chart) mostra la dinamica di crescita dei casi confermati nelle regioni selezionate. Le singole regioni possono essere facilmente confrontate selezionando quelle che si desidera visualizzare sul grafico, cliccando sulle specifiche regioni sotto il grafico. Dalla curva, possiamo vedere rapidamente quali regioni hanno più e quali meno casi confermati e come questo numero sia cambiato nel tempo.",
+            "question": "Cosa ci dicono i \"Casi per regione\"?"
+        },
+        "spread-chart": {
+            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
+            "question": "Cosa significa il grafico \"Variazione di casi confermati\"?"
+        },
+        "infections-chart": {
+            "answer": "Il [grafico](/it/stats#infections-chart)fornisce una visione della quota giornaliera di casi confermati dei gruppi ad alto rischio o di dipendenti in aree ad alto rischio. A causa dei dati di input non sufficientemente precisi sulle infezioni confermate, i valori giornalieri (Per giorno (media)) sono indicati come media mobile di 7 giorni. La somma dei valori di un determinato giorno, a partire da 3 giorni prima e 3 giorni dopo, viene divisa per 7. Pertanto, il grafico mostra la situazione quattro giorni prima di un giorno specifico, e in questo modo si ottiene un'idea migliore delle tendenze dei singoli gruppi. Se selezioniamo la visualizzazione *Totale* o *Relativo*, saltiamo dalla curva dei casi confermati all'istogramma, che mostra il numero di persone infette confermate all'interno di ogni categoria in un determinato giorno.\n\nL'aumento del personale sanitario infetto non significa che siano stati scoperti esattamente in quel giorno; possono essere stati positivi prima, ma le informazioni sul loro stato sono state ottenute successivamente. La categoria *Personale delle case di riposo* comprende gli operatori sanitari, i collaboratori e l'assistenza esterna (studenti di medicina), per cui i dati giornalieri sugli operatori sanitari (curva o colonne blu) sono ridotti di conseguenza. Ciò significa che il numero del personale sanitario è una stima molto prudente.",
+            "question": "Cosa ci dice il grafico \"Struttura dei casi confermati\"?"
+        },
+        "tests-chart": {
+            "answer": "Il [grafico](/it/stats#tests-chart) mostra il numero totale di test ordinari (visualizzazione *Ordinario PCR*) e i test nazionali dell'indagine IMI (selezionando la visualizzazione *Ricerca*). Le colonne mostrano il numero di tamponi negativi e positivi in un giorno specifico e la curva mostra la percentuale giornaliera di tamponi positivi.\n\nDa dicembre 2020 stiamo anche monitorando i test antigenici rapidi (TAR) - vedi visualizzazione *Ordinario TAR*.",
+            "question": "Cosa ci dice il grafico \"Tamponi\"?"
+        },
+        "hcenters-chart": {
+            "answer": "Il [grafico](/it/stats#hcenters-chart) mostra il trattamento dei sospetti di COVID-19 nelle Case di Sanità (livello di assistenza sanitaria primaria). È possibile mostrare i dati per l'intero paese o selezionare una regione specifica. Le Case di Sanità sono il primo punto di ingresso per l'esecuzione di tamponi da sottoporre a test per la presenza del virus, quindi un aumento del numero di sospetti e di rinvii all'autoisolamento può essere un indicatore precoce del fatto che si sono verificati nuovi focolai.\n\nIl grafico mostra quindi il numero di tutte le visite mediche d'emergenza (anche per altre malattie) nei centri sanitari (vedi note sotto), il numero di casi sospetti di COVID-19 in base al numero di esami al punto d'ingresso COVID-19 e tutti i sospetti di infezioni in base alle conversazioni telefoniche con i pazienti sospetti di infezione. Alcune persone possono essere registrate più volte, prima per telefono e poi durante l'esame. Mostriamo anche il numero totale di rinvii all'autoisolamento.\n\n*Nota 1: in alcuni comuni, il punto di controllo del COVID-19 è all'interno dei locali ospedalieri (per esempio gli ospedali generali di Celje e Novo mesto). I dati prima del 14.4. non sono disponibili per questi ospedali generali.\nNota 2: la metodologia per la registrazione dei sospetti tramite conversazione telefonica è cambiata, quindi tutti i sospetti sono stati inizialmente registrati. Dal 23 aprile, tuttavia, sono stati registrati solo i sospetti tramite conversazione telefonica, dove non sono stati ordinati esami e tamponi (test). È quindi possibile che vi siano differenze nel modo in cui i singoli centri sanitari riportano questi dati e che questo numero sia troppo elevato.*\n\nQuando si riporta il numero di test eseguiti, tutti i test (compresi i test ripetuti) vengono registrati. Il numero di test positivi comprende quindi tutti i test positivi - la stessa persona può essere testata più volte e contata come positiva più volte. Il numero di test eseguiti può quindi essere maggiore del numero di test positivi riportati dai laboratori (in questo caso ogni persona viene registrata una sola volta). Vedi anche [Cosa ci dice il grafico \"Tamponi\"?](#tests-charts)",
+            "question": "Cosa significa il grafico \"Trattamenti nelle Case di Sanità\"?"
+        },
+        "patients-chart": {
+            "answer": "Il [grafico](/it/stats#patients-chart) nella visualizzazione predefinita *Tutti gli ospedali* ci mostra l'intero quadro dei ricoveri per data disposti in base alle condizioni dei pazienti: le colonne con un valore positivo (quelle sopra l'asse orizzontale) mostrano il numero degli amessi in ospedale, il numero dei ricoveri, le sfumature di rosso vengono utilizzate per demarcare gli individui in terpia intensiva, specificando quanti di questi sono in condizioni critiche sui ventilatori (intubati). Le colonne con un valore negativo (quelle al di sotto dell'asse orizzontale) mostrano il numero di dimessioni e decessi quel giorno. Si può anche selezionare un ospedale specifico e vedere solo i ricoveri lì. Se selezionate la visualizzazione *Per ospedale* qui sotto, potete vedere il numero di persone in cura ospedaliera per giorno per ciascuno degli ospedali COVID-19.\nIl grafico può permettere una buona visione del carico di lavoro degli ospedali e può essere la base per valutare la capacità ospedaliera e pianificare il suo possibile incremento.",
+            "question": "Cosa ci dice il grafico \"Ricoveri\"?"
+        },
+        "chart-phases": {
+            "question": "Cosa significano le diverse fasi (fasi 1-14) nel grafico?"
+        },
+        "cases-chart": {
+            "answer": "Tutti i casi confermati sono visualizzati nel grafico [Casi confermati](/it/stats#cases-chart). Per poter monitorare l'epidemia, è importante sapere quanti sono ancora infetti. Per questo motivo, usiamo la terminologia seguente:\n\n**Casi chiusi** sono la somma di tutti i casi confermati che non sono più infetti dal virus, cioè il ristabilito e il defunto.\n\n**I casi attivi** sono tutte infezioni da virus confermate che non sono ancora state recuperate (sono ancora infettate dal virus). Vedi anche\n [Quali indicatori include il grafico \"COVID-19 Situazione in Slovenia\"?] (#chart-metrics-included)",
+            "question": "Cosa sono i casi chiusi e cosa sono i casi attivi?"
+        },
+        "chart-terminology": {
+            "question": "Che cosa significa?"
+        },
+        "chart-metrics-included": {
+            "question": "Quali indicatori include il grafico \"COVID-19 Situazione in Slovenia\"?"
+        },
+        "metrics-comparison-chart": {
+            "answer": "Il [grafico](/it/stats#metrics-comparison-chart) mostra la dinamica giornaliera e complessiva della diffusione dell'infezione dall'inizio ad oggi. Gli indicatori utilizzati (cfr. [Quali indicatori include il grafico \"Situazione COVID-19 in Slovenia\"?](#chart-metrics-included)) ci aiuta a capire se e quanto successo abbimao nel controllare la diffusione del virus. Possiamo monitorare il tasso di crescita giornaliero dei nuovi casi confermati e vedere indirettamente se le misure funzionano; le informazioni sul numero di ricoveri e sulla percentuale di persone in terapia intensiva mostrano quante persone sono seriamente a rischio a causa della malattia, ma allo stesso tempo, questi dati ci mostrano anche il reale onere per il sistema sanitario.\n\nI punti di interruzione sono indicati di seguito, sulla timeline: dal primo caso confermato (4 marzo 2020) alle misure (per parola chiave e data) adottate per frenare la diffusione e il loro allentamento. Questo ci aiuta a monitorare la dinamica delle variabili relative alle misure.",
+            "question": "Cosa significa il grafico \"COVID-19 Situazione in Slovenia\"?"
+        },
+        "data-active-cases": {
+            "answer": "Sì, questi indicatori sono stati visualizzati graficamente come **Casi attivi** e **Ristabiliti (totale)** a partire dalla fine di aprile.\n\n\nQueste visualizzazioni non sono dati provenienti da fonti pubbliche; entrambi gli indicatori mostrano il valore calcolato sulla base dei dati ufficiali, quindi sono indicati da una linea tratteggiata per una più facile distinzione. Il valore dei casi attivi è calcolato semplicemente sottraendo i dati ufficiali per la relativa categoria, il valore del Ristabiliti (totale) riflette lo stato di tutti i casi confermati tre settimane fa (meno i morti). Il numero dei ristabiliti è una semplice stima basata sul valore di tutti i casi confermati infettati in passato - partendo dal presupposto che i pazienti si riprendono dalla malattia in media entro 14 giorni (fonte: [rapporto dell'ECDC](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); quindi, il numero di guarigioni in un dato giorno equivale al numero di tutti i casi confermati tre settimane prima di una determinatab data, da cui si detrae il numero di decessi entro quel giorno. Questa stima semplificata non tiene conto dei casi più gravi di COVID-19 con tempi di recupero più lunghi.\n\n*Nota: Il calcolo dei ristabiliti è stato modificato il 9 maggio 2020. Ora consideriamo che un paziente è guarito in 14 giorni dopo che la sua infezione sia stata confermata (in precedenza 21 giorni), quindi c'è stato un notevole salto nel numero dei sopravvissuti. Si prega di tenere conto di questa differenza nella stima del numero di sopravvissuti. Una spiegazione più dettagliata del calcolo modificato è disponibile nell'articolo Medium [Od potrjeno okuženih do prebolelih (Da casi confermato a ristabilito)](https://medium.com/@sledilnik/94c81674718e).*\n\nFormula del valore:\n- Ristabiliti (totale) = Casi confermati (totale) 21 giorni fa - Morto (totale) entro il giorno del calcolo\n\n- Casi attivi = Casi confermati (totale) - Ristabiliti (totale) - Morti (totale)",
+            "question": "Avete un contatore sui casi attivi e sapete quante persone sono attualmente infette?"
+        },
+        "data-recovered": {
+            "question": "Perché avete sostituito il numero di *curati* con il numero di pazienti *ristabiliti*?"
+        },
+        "chart-reality": {
+            "question": "I vostri grafici rappresentano la situazione reale?"
+        }
     }
 }

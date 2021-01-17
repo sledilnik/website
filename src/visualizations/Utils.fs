@@ -59,32 +59,57 @@ let roundTo1Decimal = roundDecimals 1
 let roundTo3Decimals = roundDecimals 3
 
 let formatToInt (value: float) =
-    let formatted = sprintf "%.0f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(value)
 
 let formatTo1DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.1f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let formatTo2DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.2f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=2; maximumFractionDigits=2 |})
 
 let formatTo3DecimalWithTrailingZero (value: float) =
-    let formatted = sprintf "%.3f" value
-    // A hack to replace decimal point with decimal comma.
-    formatted.Replace('.', ',')
+    I18N.NumberFormat.formatNumber(
+        value, {| minimumFractionDigits=3; maximumFractionDigits=3 |})
 
-let percentageValuesWith1DecimalTrailingZeroLabelFormatter (value: float) =
-    let formatted = sprintf "%.1f" value
-    formatted.Replace('.', ',') + "%"
+let percentWith0DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
-let percentageValuesLabelFormatter (value: float) =
-    // A hack to replace decimal point with decimal comma.
-    ((abs value).ToString() + "%").Replace('.', ',')
+let percentWith1DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
+
+let percentWith2DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2 |})
+
+let percentWith3DecimalFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=3 |})
+
+let percentWith1DecimalSignFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1
+           maximumFractionDigits=1; signDisplay="always" |})
+
+let percentWith2DecimalSignFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=1
+           maximumFractionDigits=2; signDisplay="always" |})
+
+let percentWith3DecimalSignFormatter (value: float) =
+    I18N.NumberFormat.formatNumber(
+        (abs (value / 100.)),
+        {| style="percent"; minimumFractionDigits=0
+           maximumFractionDigits=3; signDisplay="always" |})
 
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)
@@ -257,6 +282,7 @@ module Dictionaries =
             "pbor",     "PB Ormož",             None
             "pbid",     "PB Idrija",            None
             "imi",      "IMI Ljubljana",        None
+            "nlzohce",  "NLZOH Celje",          None
             "nlzohkp",  "NLZOH Koper",          None
             "nlzohkr",  "NLZOH Kranj",          None
             "nlzohlj",  "NLZOH Ljubljana",      None
@@ -282,7 +308,7 @@ module Dictionaries =
         Name : string
         Population : int option }
 
-    let excludedRegions = Set.ofList ["si" ; "t" ; "n"]
+    let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"; "t" ; "n"]
 
     let regions =
         [ "si",  "SLOVENIJA",  Some 2095861
@@ -298,8 +324,8 @@ module Dictionaries =
           "po",  "Primorsko-notranjska",  Some 52841
           "ng",  "Goriška",  Some 118041
           "kp",  "Obalno-kraška",  Some 115913
-          "t",   "TUJINA",  None
-          "n",   "NEZNANO",  None ]
+          "unknown", "TUJINA", None
+          "foreign", "NEZNANO", None ]
         |> List.map
                (fun (key,  name,  population) ->
                     key, { Key = key ; Name = name ; Population = population })

@@ -74,7 +74,7 @@ export default {
   mounted() {
     // open question, if anchor link
     if (this.$route.hash && document.querySelector(this.$route.hash)) {
-      document.querySelector(this.$route.hash).parentElement.open = true;
+      document.querySelector(this.$route.hash).open = true;
     }
   },
 };

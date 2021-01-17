@@ -3,13 +3,9 @@
     <b-row>
       <div class="d-flex flex-wrap w-100 justify-content-center">
         <Info-card
-          :title="title"
-          :field="field"
-          :field-new-cases="fieldNewCases"
-          :field-deceased="fieldDeceased"
-          :total-in="totalIn"
-          :total-out="totalOut"
-          :total-deceased="totalDeceased"
+          :cardName="card.cardName"
+          :cardData="summary[card.cardName]"
+          :loading="!card || !summary || !summary[card.cardName] || !summary[card.cardName].value"
         />
       </div>
     </b-row>
@@ -18,6 +14,29 @@
 
 <script>
 import InfoCard from 'components/cards/InfoCard'
+import { mapState } from 'vuex'
+const cards = {
+  confirmedCases: {
+    cardName: 'casesToDateSummary',
+    title: 'Potrjeni primeri',
+  },
+  active: {
+    cardName: 'casesActive',
+    title: 'Aktivni primeri',
+  },
+  hospitalized: {
+    cardName: 'hospitalizedCurrent',
+    title: 'Hospitalizirani',
+  },
+  icu: {
+    cardName: 'icuCurrent',
+    title: 'V intenzivni enoti',
+  },
+  deceased: {
+    cardName: 'deceasedToDate',
+    title: 'Umrli',
+  },
+}
 
 export default {
   name: 'InfoCardEmbed',
@@ -26,56 +45,21 @@ export default {
   },
   data() {
     return {
-      title: null,
-      field: null,
-      fieldNewCases: null,
-      fieldDeceased: null,
-      totalIn: null,
-      totalOut: null,
-      totalDeceased: null,
-      hospital: null,
+      card: null,
     }
+  },
+  computed: {
+    ...mapState("stats", {
+      exportTime: "exportTime",
+      summary: "summary",
+    }),
   },
   created() {
-    const cards = {
-      confirmedCases: {
-        title: 'Potrjeni primeri',
-        field: 'cases.confirmed.todate',
-      },
-      active: {
-        title: 'Aktivni primeri',
-        field: 'cases.active',
-        fieldNewCases: 'cases.confirmedToday',
-        fieldDeceased: 'statePerTreatment.deceased',
-      },
-      hospitalized: {
-        title: 'Hospitalizirani',
-        field: 'statePerTreatment.inHospital',
-        totalIn: 'total.inHospital.in',
-        totalOut: 'total.inHospital.out',
-        totalDeceased: 'total.deceased.hospital.today',
-      },
-      icu: {
-        title: 'V intenzivni enoti',
-        field: 'statePerTreatment.inICU',
-        totalIn: 'total.icu.in',
-        totalOut: 'total.icu.out',
-        totalDeceased: 'total.deceased.hospital.icu.today',
-      },
-      deceased: {
-        title: 'Umrli',
-        field: 'statePerTreatment.deceasedToDate',
-      },
-    }
-
-    let data = cards[this.$route.params.type]
-
-    this.title = data.title
-    this.field = data.field
-    this.goodDirection = data.goodDirection
+    this.$store.dispatch('stats/fetchSummary')
   },
+  mounted(){
+    const cardType = this.$route.params.type
+    this.card = cards[cardType]
+  }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="sass"></style>

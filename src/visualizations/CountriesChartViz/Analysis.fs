@@ -5,10 +5,10 @@ open Types
 open System
 
 type MetricToDisplay =
-    | NewCasesPer1M
-    | ActiveCasesPer1M
-    | NewDeathsPer1M
-    | TotalDeathsPer1M
+    | NewCasesPer100k
+    | ActiveCasesPer100k
+    | NewDeathsPer100k
+    | TotalDeathsPer100k
     | DeathsPerCases
 
 type CountryDataDayEntry = {
@@ -30,19 +30,19 @@ let groupEntriesByCountries
     let transformFromRawOwid (entryRaw: DataPoint)
             : CountryDataDayEntry option =
         match metricToDisplay with
-        | NewCasesPer1M ->
+        | NewCasesPer100k ->
             match entryRaw.NewCasesPerMillion with
             | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
             | None -> None
-        | ActiveCasesPer1M ->
+        | ActiveCasesPer100k ->
             match entryRaw.NewCasesPerMillion with
             | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
             | None -> None
-        | NewDeathsPer1M ->
+        | NewDeathsPer100k ->
             match entryRaw.NewDeathsPerMillion with
             | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
             | None -> None
-        | TotalDeathsPer1M ->
+        | TotalDeathsPer100k ->
             match entryRaw.TotalDeathsPerMillion with
             | Some value -> Some { Date = entryRaw.Date; Value = value / 10. }
             | None -> None
@@ -190,13 +190,13 @@ let updateWithSloveniaDomesticData
 let findLatestDateWithDomesticData metricToDisplay statsData: DateTime =
     let hasData (dataPoint: StatsDataPoint) =
         match metricToDisplay with
-        | NewCasesPer1M ->
+        | NewCasesPer100k ->
             dataPoint.Cases.ConfirmedToday.IsSome
-        | ActiveCasesPer1M ->
+        | ActiveCasesPer100k ->
             dataPoint.Cases.ConfirmedToDate.IsSome
-        | NewDeathsPer1M ->
+        | NewDeathsPer100k ->
             dataPoint.StatePerTreatment.Deceased.IsSome
-        | TotalDeathsPer1M ->
+        | TotalDeathsPer100k ->
             dataPoint.StatePerTreatment.DeceasedToDate.IsSome
         | DeathsPerCases ->
             dataPoint.StatePerTreatment.DeceasedToDate.IsSome
@@ -212,10 +212,10 @@ let findLatestDateWithDomesticData metricToDisplay statsData: DateTime =
 let findLatestDateWithOwidData metricToDisplay owidData: DateTime =
     let hasData (dataPoint: DataPoint) =
         match metricToDisplay with
-        | NewCasesPer1M -> dataPoint.NewCasesPerMillion.IsSome
-        | ActiveCasesPer1M -> dataPoint.NewCasesPerMillion.IsSome
-        | NewDeathsPer1M -> dataPoint.NewDeathsPerMillion.IsSome
-        | TotalDeathsPer1M -> dataPoint.TotalDeathsPerMillion.IsSome
+        | NewCasesPer100k -> dataPoint.NewCasesPerMillion.IsSome
+        | ActiveCasesPer100k -> dataPoint.NewCasesPerMillion.IsSome
+        | NewDeathsPer100k -> dataPoint.NewDeathsPerMillion.IsSome
+        | TotalDeathsPer100k -> dataPoint.TotalDeathsPerMillion.IsSome
         | DeathsPerCases ->
             dataPoint.TotalDeathsPerMillion.IsSome
             && dataPoint.NewCasesPerMillion.IsSome
@@ -271,15 +271,15 @@ let aggregateOurWorldInData
                 |> Map.map (fun _ (countryData: CountryData) ->
                     let postProcessedEntries =
                         match metricToDisplay with
-                        | NewCasesPer1M ->
+                        | NewCasesPer100k ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
-                        | ActiveCasesPer1M ->
+                        | ActiveCasesPer100k ->
                             countryData.Entries |> calculateActiveCases
-                        | NewDeathsPer1M ->
+                        | NewDeathsPer100k ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
-                        | TotalDeathsPer1M ->
+                        | TotalDeathsPer100k ->
                             countryData.Entries
                             |> calculateMovingAverages daysOfMovingAverage
                         | DeathsPerCases ->
@@ -288,10 +288,10 @@ let aggregateOurWorldInData
 
                     let minValueFilter =
                         match metricToDisplay with
-                        | NewCasesPer1M -> 0.1
-                        | ActiveCasesPer1M -> 0.1
-                        | NewDeathsPer1M -> 0.001
-                        | TotalDeathsPer1M -> 0.1
+                        | NewCasesPer100k -> 0.1
+                        | ActiveCasesPer100k -> 0.1
+                        | NewDeathsPer100k -> 0.001
+                        | TotalDeathsPer100k -> 0.1
                         | DeathsPerCases -> 0.001
 
                     let trimmedEntries =

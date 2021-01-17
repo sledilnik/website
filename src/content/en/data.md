@@ -14,9 +14,16 @@ You can also inspect the data directly on the [Tables page](/en/tables).
 ## CSV files
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
-- [municipality.csv](https://github.com/sledilnik/data/blob/master/csv/municipality.csv)
-    - [regions.csv](https://github.com/sledilnik/data/blob/master/csv/regions.csv)
-    - [deceased-regions.csv](https://github.com/sledilnik/data/blob/master/csv/deceased-regions.csv)
+- [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
+- [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
+    - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
+    - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
+    - [region-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/region-deceased.csv)
+- [municipality-cases.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-cases.csv)
+    - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
+    - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
+    - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+- [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
@@ -36,14 +43,18 @@ Complete data and source code used to process the data are available on [GitHub]
 
 
 ## REST API
+- [summary](https://api.sledilnik.org/api/summary)
 - [stats](https://api.sledilnik.org/api/stats)
+- [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
+- [lab-tests](https://api.sledilnik.org/api/lab-tests)
+- [regions](https://api.sledilnik.org/api/regions)
 - [municipalities](https://api.sledilnik.org/api/municipalities)
-    - [regions](https://api.sledilnik.org/api/regions)
-    - [deceased-regions](https://api.sledilnik.org/api/deceased-regions)
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
-- [retirement-homes](https://api.sledilnik.org/api/retirement-homes)
+- [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
+- [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
+- [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
 - **Dictionaries**:
     - [hospitals-list](https://api.sledilnik.org/api/hospitals-list)
     - [retirement-homes-list](https://api.sledilnik.org/api/retirement-homes-list)
