@@ -598,7 +598,7 @@
             "title": "Ristoranti"
         },
         "services": {
-            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ...) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …) <br>Sospensione temporanea del trasporto pubblico (eccezione: taxi). Rimozione di alcune eccezioni per il passaggio del confine.",
             "title": "Servizi"
         },
         "gatherings2": {
@@ -622,7 +622,7 @@
             "title": "Funz.Rel."
         },
         "services2": {
-            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, ...).<br>Distensione di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …).<br>Distensione di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
             "title": "Servizi"
         },
         "liftFoodMarkets2": {
@@ -1401,7 +1401,7 @@
         "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni",
         "progressC19": "Progresso tipico del COVID-19. Ricovero, terapia intensiva e mortalità.",
         "newInfographics": "🆕 📇 Nuova infografica:",
-        "tests": "5 miti sui test ...",
+        "tests": "5 miti sui test …",
         "weKnowWeDoNotKnow": "Sappiamo che i dati a volte mentono. Come facciamo a sapere, che (non) lo sappiamo? 🤔📉🧐📈🤷♂️🤷♀️",
         "checked": "🆕 Verificato:",
         "presentation": "Come la scienza aiuta i responsabili delle decisioni - presentazione all'Assemblea Nazionale RS",
@@ -1470,7 +1470,7 @@
             "answer": "Sledilnik utilizza solo i dati convalidati e ufficiali riferiti giornalmente dall'Istituto Nazionale di Sanità Pubblica (NIJZ) e da tutti gli ospedali sloveni che sono impegnati con il COVID-19. I nostri dati provengono quindi direttamente da fonti verificate. Inoltre vengono anche verificati incrociando le informazioni fin dall'inizio (4 marzo 2020). Le discreopanze di solito si verificano perché i dati vengono ottenuti da media e portali diversi in momenti diversi della giornata. Vedi anche [I vostri dati e le vostre visualizzazioni sono affidabili?](#data-reliability)"
         },
         "data-publish-time": {
-            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati ...) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/COVID19Sledilnik) e [ Twitter](https://twitter.com/sledilnik)).",
+            "answer": "La maggior parte dei dati per il giorno precedente viene raccolta alle 23:59 (test, casi confermati …) e i dati sui ricoveri vengono per lo più ottenuti entro le 9 del mattino per tutti gli ospedali. **I nostri dati vengono solitamente aggiornati tra le 10.00 e le 12.00.**\nQuando pubblichiamo i dati giornalieri aggiornati, questi sono disponibili su tutti i nostri canali di distribuzione (CSV, REST, sito web) e li segnaliamo anche sui social network ([Facebook](https://www.facebook.com/COVID19Sledilnik) e [ Twitter](https://twitter.com/sledilnik)).",
             "question": "Quando pubblicate i dati? Perché le date nelle visualizzazioni sono diverse?"
         },
         "how-to-help": {
