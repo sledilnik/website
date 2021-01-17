@@ -318,18 +318,19 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
-            "care": "In Care",
+            "acute": "Acute Unit",
+            "care": "Nursing Unit",
             "admitted": "Admitted",
             "hospitalized": "Hospitalized",
-            "icu": "In ICU",
+            "icu": "ICU",
             "niVentilator": "On Ventilator (non-invasive)",
             "ventilator": "On Ventilator (intubated)",
             "discharged": "Discharged",
             "deceased": "Died",
-            "icu-deceased": "Died (ICU)",
+            "icu-deceased": "Died",
             "icu-admitted": "Admitted in ICU",
             "icu-discharged": "Discharged from ICU",
-            "icu-minus": "In ICU",
+            "icu-other": "Without Ventilator",
             "allHospitals": "All Hospitals"
         },
         "icuPatients": {
@@ -337,8 +338,8 @@
             "titleMenu": "Intensive Care"
         },
         "carePatients": {
-            "title": "Care Hospitals",
-            "titleMenu": "Care Hospitals"
+            "title": "Nursing Hospitals",
+            "titleMenu": "Nursing Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",
