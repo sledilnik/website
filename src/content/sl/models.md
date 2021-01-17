@@ -17,7 +17,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 - [Nadgrajen model SEIR](#seir)
 - [Model socialnega omrežja](#social_network)
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
-- [Določanje alarmov](#alerts)
+- [Določanje alarmov](#alarms)
 - [Prispevki](#articles)
 
 
