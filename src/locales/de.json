@@ -23,7 +23,8 @@
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
         "goToGraph": "Gehe zum Diagramm",
-        "posts": "Objave"
+        "posts": "Objave",
+        "donate": "Spenden Sie!"
     },
     "country": {
         "ABW": "Aruba",
@@ -516,7 +517,8 @@
             "titleMenu_MNE": "Montenegro – Lage",
             "titleMenu_MKD": "N. Mazedonien – Lage",
             "titleMenu_SVN": "Slowenien – Lage",
-            "vaccinationAdministered": "Geimpft"
+            "vaccinationAdministered": "Geimpft",
+            "niVentilator": "Unter Beatmung (nicht-invasiv)"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -640,8 +642,8 @@
             "icuAdmitted": "Auf Intensivstation eingewiesen",
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "titleMenu": "Wochentag – Vergleich",
-            "positivePctHAT": "Anteil der positiven Tests: HAT (%)",
-            "testsHAT": "Durchgeführte Tests: HAT",
+            "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
+            "testsHAT": "Durchgeführte Tests: RAT",
             "vaccinated": "Geimpfte Personen"
         },
         "ostanizdrav": {
@@ -798,7 +800,16 @@
             "title": "Todesfälle",
             "deceasedByAgeTodayRelative": "Tägliche Todesfälle nach Alter (relativ)",
             "deceasedByAgeToday": "Tägliche Todesfälle nach Alter",
-            "disclaimer": "Hinweis: Daten für Verstorbene nach Alter werden wöchentlich angegeben, daher sind sie für die letzten zwei Wochen nicht vollständig."
+            "disclaimer": "Hinweis: Daten für Verstorbene nach Alter und Daten aus Seniorenheimen werden wöchentlich angegeben, daher sind sie für die letzten zwei Wochen nicht vollständig.",
+            "deceased-other": "Andere",
+            "deceased-rhoccupant": "Bewohner von Seniorenheimen",
+            "deceasedByAge": "Alter",
+            "deceasedByType": "Seniorenheime",
+            "deceasedHospitals": "Ort des Todes",
+            "showPercent": "Verhältnis",
+            "showNormal": "Absolut",
+            "showToDate": "Bis heute",
+            "showToday": "Täglich"
         },
         "excessDeaths": {
             "excess": {
