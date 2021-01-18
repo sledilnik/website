@@ -23,7 +23,8 @@
         "animation": "Animazione",
         "ostanizdrav": "#OstaniZdrav",
         "goToGraph": "Vai al grafico",
-        "posts": "Post"
+        "posts": "Post",
+        "donate": "Donate!"
     },
     "mk": {
         "hospital": {
@@ -429,7 +430,8 @@
         "kk": "Posavska",
         "po": "Primorsko-notranjska",
         "ce": "Savinjska",
-        "za": "Zasavska"
+        "za": "Zasavska",
+        "si": "Slovenia (tutte le regioni)"
     },
     "days": {
         "longerDate": "{{ date, %A, %e %B %Y }}",
@@ -636,6 +638,10 @@
         "liftGym": {
             "description": "Distensione: ricreazione individuale e guidata con restrizioni<br> (1 persona per 50m2 e 5m di distanza interpersonale).",
             "title": "Palestra"
+        },
+        "gym": {
+            "description": "Chiusura di palestre, piscine, impianti sportivi (salvo eccezioni). <br> Chiusura di musei e gallerie. Le biblioteche sono aperte solo per il ritiro.",
+            "title": "Palestra"
         }
     },
     "tableDict": {
@@ -717,7 +723,7 @@
             "allHospitals": "Tutti gli ospedali",
             "deceased": "Deceduti",
             "discharged": "Dimessi",
-            "icu": "In terapia intensiva",
+            "icu": "Unità di Terapia Intensiva",
             "hospitalized": "Ricoverati",
             "admitted": "Ammessi",
             "hospitalizedIn": "Ricoverati in:",
@@ -725,8 +731,13 @@
             "structure": "Struttura",
             "title": "Ricoveri",
             "titleMenu": "Ricoveri",
-            "care": "In cura",
-            "icu-deceased": "Deceduti (in terapia intensiva)"
+            "care": "Unità infermieristica",
+            "icu-deceased": "Deceduti",
+            "icu-other": "Senza ventilatore",
+            "icu-discharged": "Dimessi dalla terapia intensiva",
+            "icu-admitted": "Ammessi in terapia intensiva",
+            "niVentilator": "Su ventilatore (non invasivo)",
+            "acute": "Unità acuta"
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -760,7 +771,7 @@
             "title_SVN": "COVID-19 Situazione in Slovenia",
             "title_MNE": "COVID-19 Situazione nel Montenegro",
             "title_MKD": "COVID-19 Situazione nella Macedonia del Nord",
-            "ventilatorDischarged": "Disconnessi dal ventilatore (intubati)",
+            "ventilatorDischarged": "Disconnessi dal ventilatore (estubati)",
             "ventilatorAdmitted": "Collegati al ventilatore (intubati)",
             "icuDischarged": "Dimessi dalla terapia intensiva",
             "icuAdmitted": "Ammessi in terapia intensiva",
@@ -776,7 +787,8 @@
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
-            "vaccinationAdministered": "Vaccinati"
+            "vaccinationAdministered": "Vaccinati",
+            "niVentilator": "Su ventilatore (non invasivo)"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -1058,7 +1070,8 @@
             "hospitalDischarged": "Dimessi dall'ospedale",
             "hospitalAdmitted": "Ammessi in ospedale",
             "positivePctHAT": "Percentuale positivi: TAR (%)",
-            "testsHAT": "Test eseguiti: TAR"
+            "testsHAT": "Test eseguiti: TAR",
+            "vaccinated": "Persone vaccinate"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -1076,7 +1089,7 @@
             "confirmedFromQuarantine": "Confermato dalla quarantena",
             "confirmedCases": "Casi confermati",
             "sentToQuarantine": "Inviato in quarantena",
-            "title": "Fonti e luoghi di infezione",
+            "title": "Fonti e luoghi di infezione, settimanale",
             "titleMenu": "Fonti e luoghi di infezione",
             "disclaimer": "Nota: dal 17 ottobre, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
             "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - il numero dei casi potrebbe essere inferiore a quello effettivo.",
@@ -1184,7 +1197,7 @@
             "confirmedCases": "Casi confermati",
             "disclaimer": "Nota: i dati della scorsa settimana non sono ancora completi - la quota dei dipendenti sanitari potrebbe essere inferiore a quella effettiva.",
             "titleMenu": "Sanità e Case di riposo- casi",
-            "title": "Casi nelle Case di cura e di riposo",
+            "title": "Casi nelle Case di cura e di riposo, settimanale",
             "otherCases": "Altre persone",
             "rhOccupantCases": "Residenti nelle case di riposo",
             "relative": "Relativo",
@@ -1214,7 +1227,16 @@
             "title": "Decessi",
             "deceasedByAgeToday": "Decessi per età (giornalieri)",
             "deceasedByAgeTodayRelative": "Decessi per età (giornalieri, relativi)",
-            "disclaimer": "Nota: i dati sui decessi per età vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane."
+            "disclaimer": "Nota: i dati sui decessi per età e sulle case di riposo vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane.",
+            "deceased-other": "Altro",
+            "deceased-rhoccupant": "Residenti nelle case di riposo",
+            "deceasedByAge": "Età",
+            "deceasedByType": "Casa di riposo",
+            "deceasedHospitals": "Luogo del decesso",
+            "showPercent": "Proporzione",
+            "showNormal": "Assoluto",
+            "showToDate": "Ad oggi",
+            "showToday": "Giornalieri"
         },
         "excessDeaths": {
             "excess": {
@@ -1250,6 +1272,20 @@
             "averageByDay": "Per giorno (media)",
             "titleMenu": "Correlazione",
             "title": "Correlazione tra casi, ricoveri e decessi"
+        },
+        "weeklyDemographics": {
+            "ratio": "Rapporto casi M/F",
+            "newCases": "Casi nuovi",
+            "per100k": "per 100.000 persone",
+            "female": "Femmine",
+            "male": "Maschi",
+            "ageGroup": "Fascia d'età",
+            "titleMenu": "Fasce d'età - Settimanale",
+            "title": "Casi settimanali - Dati demografici"
+        },
+        "icuPatients": {
+            "titleMenu": "Terapia intensiva",
+            "title": "Terapia intensiva"
         }
     },
     "footer": {
