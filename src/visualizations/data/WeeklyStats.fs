@@ -77,6 +77,8 @@ type private TransferWStatsDataPoint =
         confirmed : int option
         investigated : int option
         healthcare : int option
+        healthcareMale : int option
+        healthcareFemale : int option
         ``rh-occupant`` : int option
         sentTo :
               {|
@@ -95,6 +97,8 @@ type private TransferWStatsDataPoint =
           ConfirmedCases = this.confirmed
           InvestigatedCases = this.investigated
           HealthcareCases = this.healthcare
+          HealthcareMaleCases = this.healthcareMale
+          HealthcareFemaleCases = this.healthcareFemale
           RetirementHomeOccupantCases = this.``rh-occupant``
           SentToQuarantine = this.sentTo.quarantine
           Location = this.locations.ToDomain

@@ -128,6 +128,8 @@ type WeeklyStatsDataPoint =
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
+      HealthcareMaleCases : int option
+      HealthcareFemaleCases : int option
       RetirementHomeOccupantCases : int option
       SentToQuarantine : int option
       Location : InfectionLocation
