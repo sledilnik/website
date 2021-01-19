@@ -311,19 +311,19 @@ module Dictionaries =
     let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"; "t" ; "n"]
 
     let regions =
-        [ "si",  "SLOVENIJA",  Some 2095861
-          "ms",  "Pomurska",  Some 114238
-          "mb",  "Podravska",  Some 325994
-          "sg",  "Koroška",  Some 70755
-          "ce",  "Savinjska",  Some 257847
-          "za",  "Zasavska",  Some 57156
-          "kk",  "Posavska",  Some 75824
-          "nm",  "Jugovzhodna Slovenija",  Some 145357
-          "lj",  "Osrednjeslovenska",  Some 555274
-          "kr",  "Gorenjska",  Some 206621
-          "po",  "Primorsko-notranjska",  Some 52841
-          "ng",  "Goriška",  Some 118041
-          "kp",  "Obalno-kraška",  Some 115913
+        [ "si",  "SLOVENIJA",  Some 2100126
+          "ms",  "Pomurska",  Some 114397
+          "mb",  "Podravska",  Some 326510
+          "sg",  "Koroška",  Some 70835
+          "ce",  "Savinjska",  Some 258345
+          "za",  "Zasavska",  Some 57148
+          "kk",  "Posavska",  Some 75983
+          "nm",  "Jugovzhodna Slovenija",  Some 145859
+          "lj",  "Osrednjeslovenska",  Some 554823
+          "kr",  "Gorenjska",  Some 207842
+          "po",  "Primorsko-notranjska",  Some 53092
+          "ng",  "Goriška",  Some 118421
+          "kp",  "Obalno-kraška",  Some 116871
           "unknown", "TUJINA", None
           "foreign", "NEZNANO", None ]
         |> List.map
