@@ -18,21 +18,21 @@
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.in"
-          class="card-diff-item"
+          class="card-diff-item in"
         >
           <div class="trend-icon in" :class="[cardData.flipGoodDirection ? 'good up' : 'bad up']"></div>
           <span class="in" :class="[cardData.flipGoodDirection ? 'good' : 'bad']">{{ cardData.subValues.in | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.out"
-          class="card-diff-item"
+          class="card-diff-item out"
         >
           <div class="trend-icon out good down"></div>
           <span class="out good">{{ cardData.subValues.out | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.deceased"
-          class="card-diff-item"
+          class="card-diff-item deceased"
         >
           <div class="trend-icon deceased"></div>
           <span class="deceased"
@@ -41,14 +41,14 @@
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.positive"
-          class="card-diff-item"
+          class="card-diff-item positive"
         >
           <div class="trend-icon positive bad"></div>
           <span class="positive bad">{{ cardData.subValues.positive | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.percent"
-          class="card-diff-item"
+          class="card-diff-item percent"
         >
           <div class="trend-icon percent tests"></div>
           <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
