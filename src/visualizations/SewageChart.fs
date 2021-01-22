@@ -207,6 +207,18 @@ let renderChartOptions (state: State) dispatch =
                       snap = 50
                       valueSuffix = ""
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+           credits =
+               {| enabled = true
+                  text =
+                      sprintf
+                          "%s: %s, %s"
+                          (I18N.t "charts.common.dataSource")
+                          (I18N.tOptions ("charts.common.dsNIB") {| context = localStorage.getItem ("contextCountry") |})
+                          (I18N.tOptions
+                              ("charts.common.dsNIJZ")
+                               {| context = localStorage.getItem ("contextCountry") |})
+                  href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |}
+               |> pojo
            responsive =
                pojo
                    {| rules =
