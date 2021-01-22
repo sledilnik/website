@@ -1222,6 +1222,9 @@
                 "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
             }
         },
+        "sewage": {
+            "title": "Odpadne vode \uD83D\uDCA9"
+        },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
             "titleMenu": "Viri in lokacije okužb",

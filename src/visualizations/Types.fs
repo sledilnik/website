@@ -178,6 +178,7 @@ type VisualizationType =
     | Regions
     | Regions100k
     | Sources
+    | Sewage
     | Municipalities
     | AgeGroups
     | AgeGroupsTimeline

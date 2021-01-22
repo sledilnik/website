@@ -380,6 +380,20 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
+    let sewage =
+          { VisualizationType = Sewage
+            ClassName = "sewage-chart"
+            ChartTextsGroup = "sewage"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.MunicipalitiesData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView SewageChart.chart {| data = data |} }
+
     let hcCases =
           { VisualizationType = HcCases
             ClassName = "hc-cases-chart"
@@ -556,10 +570,11 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests;
+        [ sewage
+          hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; weeklyDemographics; ageGroups; 
+          ageGroupsTimeline; weeklyDemographics; ageGroups;
           infections; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
@@ -577,7 +592,8 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+        [ sewage;
+          metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
