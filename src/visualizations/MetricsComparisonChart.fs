@@ -61,12 +61,12 @@ type Metric =
     | DeceasedToday
     | DeceasedToDate
     | VacAdministeredToDate
-    | VacAdministered2ndToDate
+    | VacAdministered2ToDate
     with
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
              ConfirmedCasesToDate; ActiveCases; RecoveredToDate 
-             VacAdministeredToDate; VacAdministered2ndToDate ]
+             VacAdministeredToDate; VacAdministered2ToDate ]
             |> List.contains metric
 
 type MetricCfg = {
@@ -99,7 +99,7 @@ module Metrics  =
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
         { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
-        { Metric=VacAdministered2ndToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered2ToDate;Color="#1c9b60"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
         { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#fb6a4a"; Visible=false; Type=ToDate; Id="icuAdmitted" }
@@ -190,7 +190,7 @@ let statsDataGenerator metric =
         | ActiveCases -> point.Cases.Active
         | RecoveredToDate -> point.Cases.RecoveredToDate
         | VacAdministeredToDate -> point.Vaccination.Administered.ToDate
-        | VacAdministered2ndToDate -> point.Vaccination.Administered2nd.ToDate
+        | VacAdministered2ToDate -> point.Vaccination.Administered2nd.ToDate
         | _ -> None
 
 let patientsDataGenerator metric =
