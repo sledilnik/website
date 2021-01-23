@@ -1,5 +1,5 @@
 <template>
-  <div class="hp-card-holder">
+  <div class="hp-card-holder" :class="['cardtype-'+cardName]">
     <div class="hp-card" v-if="!loading">
       <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
@@ -12,7 +12,7 @@
           {{ cardData.diffPercentage | percent }}
         </div>
       </div>
-      <div :id="cardName" class="card-diff" :class="['cardtype-'+cardName]">
+      <div :id="cardName" class="card-diff">
         <div v-if="cardData.subTitle">
           <span class="card-note">{{ cardData.subTitle }} <span>{{ subLabelExtraText }}</span></span>
         </div>
@@ -273,13 +273,48 @@ export default {
  */
 
 .cardtype-vaccinationSummary {
-  .in {  display: none; } // DISABLED temporarily
   .percent {
     &.trend-icon {
       background-color: #a0a0a0;
     }
     &.tests {
       color: #a0a0a0;
+    }
+  }
+  .up{
+    -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+    mask: url(../../assets/svg/syringe.svg) no-repeat center;
+    -webkit-mask-size: 20px;
+    mask-size: 20px;
+  }
+  .card-diff{
+    display: flex;
+    &:before{
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: #20b16d;
+      display: inline-block;
+      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      -webkit-mask-size: 20px;
+      mask-size: 20px;
+      margin-right: -8px;
+    }
+  }
+  .card-number{
+    display: flex;
+    align-items: center;
+    &::before{
+      content: "";
+      width: 24px;
+      height: 24px;
+      background-color: #000000;
+      display: inline-block;
+      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      -webkit-mask-size: 24px;
+      mask-size: 24px;
     }
   }
 }
