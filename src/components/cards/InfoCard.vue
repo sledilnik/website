@@ -273,7 +273,6 @@ export default {
  */
 
 .cardtype-vaccinationSummary {
-  .in {  display: none; } // DISABLED temporarily
   .percent {
     &.trend-icon {
       background-color: #a0a0a0;
