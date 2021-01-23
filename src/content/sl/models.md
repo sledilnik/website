@@ -14,7 +14,7 @@ Negotovosti v modele in analize epidemije COVID-19 vstopajo na različne načine
 Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot projiciramo v prihodnost, hitreje rastejo.
 
 ## <a id="tableOfContent"></a>Vsebina
-- [Nadgrajen model SEIR](#seir)
+- [Nadgrajeni modeli SEIR](#seir)
 - [Model socialnega omrežja](#social_network)
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
 - [Določanje alarmov](#alarms)
@@ -23,7 +23,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 
 <!--# Modeli-->
 
-## <a id="seir"></a>Nadgrajen model SEIR
+## <a id="seir"></a>Nadgrajeni modeli SEIR
 [Prof. Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani je pripravil [nadgrajen model SEIR](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) za spremljanje bolnišničnih obravnav, obravnav v enotah intenzivne terapije in dnevnega oz. kumulativnega števila smrti v Sloveniji.
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
@@ -31,8 +31,16 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 
 Oglejte si tudi [podrobnejše prikaze projekcij in simulacij](https://apps.lusy.fri.uni-lj.si/~janezz/reports/report_latest.html).
 
-## <a id="social_network"></a>Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
+[Dr. Matjaž Leskovar](https://r4.ijs.si/leskovar#elf_l1_Lw) iz Instituta “Jožef Stefan” (IJS, Odsek R4) pripravlja [dnevno analizo stanja in projekcije](https://r4.ijs.si/COVID19#elf_l1_Lw) razvoja epidemije v Sloveniji. Izračuni temeljijo na modelu tipa SEIR z razširitvami.
+
+<a href="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png">
+<img alt="Model IJS-R4" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
+
+## <a id="social_network"></a>Model socialnega omrežja
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
+
+<a href="https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pone.0238090/1/pone.0238090.g002.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210123%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210123T224722Z&X-Goog-Expires=3600&X-Goog-SignedHeaders=host&X-Goog-Signature=657ea0d5093acda6530442d1f4ffe01b323d0dbed171cdd85b4f68cd85cb5727815b7d65549817549484258fec58e9968908bc29e23fa25bd082886a14dea8daedac39d219ee6f740f434affd985b0290a5a5b97edae299a0e9ac19ecc87e8e56b1c5246cdd6ee8ea3d8add3c6b3c0f2efe1ac56031095cf4b183c4b6032671c4521b0a72d676ef7814ed2e7044e78a9459628e141d76d704a20efc5c7d29c38f2731fbb2126db53e22728214ef8308671766e55e481c956bb6be7bda2740c4a6179b58248268155d7ad6d9b04e1adf2218ef1917832fdf64ae8e1aa651a1b1453360e417fda42579eb9cb08a38d1c82066aab31953f02e00782b91419efeb02">
+<img alt="Social network model" src="https://storage.googleapis.com/plos-corpus-prod/10.1371/journal.pone.0238090/1/pone.0238090.g002.PNG_L?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wombat-sa%40plos-prod.iam.gserviceaccount.com%2F20210123%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20210123T224722Z&X-Goog-Expires=3600&X-Goog-SignedHeaders=host&X-Goog-Signature=657ea0d5093acda6530442d1f4ffe01b323d0dbed171cdd85b4f68cd85cb5727815b7d65549817549484258fec58e9968908bc29e23fa25bd082886a14dea8daedac39d219ee6f740f434affd985b0290a5a5b97edae299a0e9ac19ecc87e8e56b1c5246cdd6ee8ea3d8add3c6b3c0f2efe1ac56031095cf4b183c4b6032671c4521b0a72d676ef7814ed2e7044e78a9459628e141d76d704a20efc5c7d29c38f2731fbb2126db53e22728214ef8308671766e55e481c956bb6be7bda2740c4a6179b58248268155d7ad6d9b04e1adf2218ef1917832fdf64ae8e1aa651a1b1453360e417fda42579eb9cb08a38d1c82066aab31953f02e00782b91419efeb02" width="50%" height="50%"></a>
 
 Virus se v simulaciji prenaša po karseda realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije). Vozlišča so najprej zbrana v skupke, ki ponazarjajo gospodinjstva in domove oskrbovancev, nato pa jih ob vsakem koraku simulacije naključno prevezujemo med izbranimi skupki, glede na znane porazdelitve kontaktov – nekatere osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom simuliramo različne pristope spopada z virusom. Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19.
 
