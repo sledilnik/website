@@ -1029,6 +1029,14 @@
         "gym": {
             "title": "Gym",
             "description": "Closure of gyms, pools, sport facilities (with exceptions).<br>Closing of museums and galleries. Libraries open only for pick-up."
+        },
+        "liftRegions": {
+            "title": "Regions",
+            "description": "Relaxation: shops for children, museums, galleries, libraries and ski-resorts are open in some regions."
+        },
+        "liftSchools3": {
+            "title": "Schools 3",
+            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions."
         }
     },
     "days": {

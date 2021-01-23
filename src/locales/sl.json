@@ -645,6 +645,14 @@
         "gym": {
             "title": "Fitnes",
             "description": "Zaprejo se fitnesi, bazeni, športne dvorane (razen za izjeme).<br>Zaprejo se muzeji in galerije. Knjižnice dovoljene le za prevzem."
+        },
+        "liftRegions": {
+            "title": "Regije",
+            "description": "Sproščanje: v nekaterih regijah se odprejo trgovine za otroke, muzeji, galerije, knjižnice, smučišča."
+        },
+        "liftSchools3": {
+            "title": "OŠ 1-3",
+            "description": "Sproščanje: v nekaterih regijah se odpro vrtci in osnovna šola od 1. do 3. razreda."
         }
     },
     "phase": {
