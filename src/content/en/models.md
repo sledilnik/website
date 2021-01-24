@@ -45,7 +45,7 @@ More detailed projections of the model are to be found [at this link](https://ap
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) from the Faculty of Mathematics and Physics of the University of Ljubljana developed a probabilistic Model of virus transmission via the Social Network of Slovenia, which was published in the scientific journal [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
 
 <a href="/images/zaplotnik-plos-social-network-model.png" class="img-link">
-<img alt="Social network model" src="/images/zaplotnik-plos-social-network-model.png"></a>
+<img class="rightThumbnail" alt="Social network model" src="/images/zaplotnik-plos-social-network-model.png"></a>
 
 In the simulation, the virus is transmitted according to a realistic model of the social network of Slovenians, which contains more than 2 million nodes (1 for each inhabitant of Slovenia), divided into households and retirement homes. The nodes are also randomly connected outside of these units, according to the known distribution of contacts - some people have more daily contacts, others less. This allows the model to effectively simulate different virus containment strategies. A probabilistic prediction is obtained by preparing a set of simulations with slightly altered initial conditions and parameters that determine coronavirus spread and the course of the COVID-19 disease.
 
