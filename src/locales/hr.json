@@ -1502,5 +1502,12 @@
             "answer": "Obrati nam se info@sledilnik.org i ukratko opiši tko si i kako možeš pridonijeti projektu. Svaka pomoć je dobrodošla.",
             "question": "Želim pomoći. Gdje mogu početi?"
         }
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} mjesečno"
+            }
+        }
     }
 }
