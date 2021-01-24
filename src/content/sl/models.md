@@ -80,6 +80,7 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) 
 - Člani Sledilnika smo v prispevku ["Dve Sloveniji - ali res stopicamo na mestu?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) opozorili na krajevne razlike v širitvi virusa in da je za zmanjšanje epidemije pomemben sočasen odziv v vsej državi. (2. 12. 2020)
 
 - Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)
+
 <iframe width="320" height="180" src="https://www.youtube.com/embed/rwcqGV0fyC0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 - ["Epidemija in modeli - Osnove epidemiološkega modeliranja"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) vam v krajših posnetkih predstavi osnovne pojme, ki so najnujnejši za razumevanje epidemije v številkah. (3. 11. 2020)
