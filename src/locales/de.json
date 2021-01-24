@@ -1463,5 +1463,12 @@
     "posts": {
         "timestamp": "{{ date, %e. %B %Y }}",
         "readingTime": "min"
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} pro Monat"
+            }
+        }
     }
 }
