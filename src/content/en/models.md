@@ -9,21 +9,15 @@ Uncertainties enter the models and analyses of the COVID-19 epidemic in differen
 - we lack more accurate, deeper and machine readable data, and
 - any change in testing methodology can completely change the assumptions on which the models and analyses were based on.
 
-- [Interactive SEIR Model](#seir)
-- [Evaluating the Reproduction Rate](#reproduction-rate)
-- [Model of Virus Transmission via the Social Network of Slovenia](#social_network)
-- [Other Models for Slovenia](#other)
-- [Interesting Articles about Epidemic Modeling](#articles)
-
 All of these are reasons why the uncertainty associated with the models is relatively large, and, the further we look to the future, the larger it becomes.
 
-<!--> **_NOTE:_**  The models take into account the information known so far about COVID-19 and its spread in Slovenia. No model can offer accurate predictions for the future course of the epidemic, but we seek to carefully disclose all the assumptions of the model. Data on the number of COVID-19 tests performed and the number of COVID-19 cases confirmed in Slovenia does not necessarily reveal the number of asymptomatic infections, so most of our models are calibrated to data on hospitalizations. The uncertainty about the exact number confirmed cases propagates to the uncertainty in the predictions.-->
+<!-- The models take into account the information known so far about COVID-19 and its spread in Slovenia. No model can offer accurate predictions for the future course of the epidemic, but we seek to carefully disclose all the assumptions of the model. Data on the number of COVID-19 tests performed and the number of COVID-19 cases confirmed in Slovenia does not necessarily reveal the number of asymptomatic infections, so most of our models are calibrated to data on hospitalizations. The uncertainty about the exact number confirmed cases propagates to the uncertainty in the predictions.-->
 
 <!--Scientists worldwide are making great efforts to combat COVID-19, but many aspects of the spread and development of the disease have not yet been fully explored. In particular, there is uncertainty about the impact of measures taken by the public and the governments around the world to control the disease. In addition, due to the time lag between the infection and the onset of symptoms, it is practically impossible to accurately estimate the actual state and the rate of spread of the infection in the population. All of these are reasons why the uncertainty associated with the models is relatively large, and, the further we look to the future, the larger it becomes.-->
 
 <!-- *Mathematical modeling with an accompanying display of the possible outcomes of an epidemic helps to shape public health measures. In order to make the modeling results more reliable, it is very important to critically evaluate the data used and to check whether all the possible ways of the disease spreading in a population have been taken into account.* -->
 
-## <a id="tableOfContent"></a>Content:
+## <a id="tableOfContent"></a>Content
 - [Upgraded SEIR models](#seir)
 - [Social Network Model](#social_network)
 - [Evaluating the Reproduction Rate](#reproduction-rate)
@@ -38,7 +32,7 @@ All of these are reasons why the uncertainty associated with the models is relat
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
 <img alt="SEIR model" src="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png"></a>
 
-More detailed projections of the model are to be found [at this link](https://apps.lusy.fri.uni-lj.si/~janezz/reports/report_latest.html)
+More detailed projections of the model are to be found [at this link](https://apps.lusy.fri.uni-lj.si/~janezz/reports/report_latest.html).
 
 [Dr. Matjaž Leskovar](https://r4.ijs.si/leskovar#elf_l1_Lw) from the Jožef Stefan Institute prepares [daily analysis and projections](https://r4.ijs.si/COVID19#elf_l1_Lw) of the epidemic in Slovenia. The calculations are based on the SEIR type model with extensions.
 
@@ -73,7 +67,7 @@ The University of Ljubljana Medical Faculty’s [Institute for Biostatistics and
 <!--<img alt="R_t model" src="https://stat.columbia.edu/~jakulin/Covid/ocene_rt.png">-->
 </a>
 
-More about the methodology and results can be found in the articles in the [Zdravniški vestnik] (https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([summary](https: //ibmi.mf.uni -lj.si/files/Pregledni%20povzetek_74e.pdf)) and the scientific journal [Mathematical Biosciences] (https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
+More about the methodology and results can be found in the articles in the [Zdravniški vestnik](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([summary](https://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf)) and the scientific journal [Mathematical Biosciences](https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
 
 ## <a id="alarms"></a>Determining alarms
 Dr. Janez Stare and dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/)) in the analysis [Determining alarms in the COVID-19 epidemic in Slovenia](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) assess the extent to which the epidemic has been restarted. The results are particularly relevant for periods of low virus incidence in the population. In the calculations the ratios of confirmed cases among all tested cases are used.
