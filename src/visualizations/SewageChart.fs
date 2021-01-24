@@ -1,6 +1,7 @@
 [<RequireQualifiedAccess>]
 module SewageChart
 
+open System.Collections.Generic
 open Browser
 open Fable.Core.JsInterop
 open Elmish
@@ -68,7 +69,20 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 
 
 
-let municipalityCasesXY (municipalitiesData: MunicipalitiesData) (wastewaterTreatmentPlantKey: string) =
+let chooseWithSomeYValue (xy: (JsTimestamp * float option) []): (JsTimestamp * float) [] =
+    xy
+    |> Array.choose (fun v ->
+        match v with
+        | t, Some v -> Some(t, v)
+        | _ -> None)
+
+
+//let chooseWithSomeYValue = id
+
+let valueOrZero (dict: Dictionary<string, int>) (key: string): int =
+    if dict.ContainsKey key then dict.[key] else 0
+
+let connectedMunicipalitiesDataPoints (municipalitiesData: MunicipalitiesData) (wastewaterTreatmentPlantKey: string) =
     let wastewaterTreatmentPlant =
         Utils.Dictionaries.wastewaterTreatmentPlants.Item wastewaterTreatmentPlantKey
 
@@ -79,20 +93,74 @@ let municipalityCasesXY (municipalitiesData: MunicipalitiesData) (wastewaterTrea
     municipalitiesData
     |> List.map (fun municipalityData ->
         municipalityData.Date |> jsTimeMidnight,
-        municipalityData.Regions
-        |> List.sumBy (fun region ->
-            region.Municipalities
-            |> List.filter (fun mun -> municipalityNames.Contains mun.Name)
-            |> List.sumBy (fun mun -> Option.defaultValue 0 mun.ActiveCases)))
+        (municipalityData.Regions
+         |> List.map (fun region ->
+             region.Municipalities
+             |> List.filter (fun mun -> municipalityNames.Contains mun.Name)))
+        |> List.concat)
     |> Array.ofList
+    |> Array.sortBy fst
 
-let municipalitySewageXY (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
+
+let connectedMunicipalitiesActiveCasesAsXYSeries (municipalitiesData: MunicipalitiesData)
+                                                 (wastewaterTreatmentPlantKey: string)
+                                                 =
+    let lastSeenActiveCasesByMunicipality = new Dictionary<string, int>()
+
+    connectedMunicipalitiesDataPoints municipalitiesData wastewaterTreatmentPlantKey
+    |> Array.map (fun (ts, dps) ->
+        for dp in dps do
+            lastSeenActiveCasesByMunicipality.[dp.Name] <- (Option.defaultValue
+                                                                (valueOrZero lastSeenActiveCasesByMunicipality dp.Name)
+                                                                dp.ActiveCases)
+
+
+        ts,
+        lastSeenActiveCasesByMunicipality.Values
+        |> Seq.sum)
+
+let connectedMunicipalitiesNewCasesAsXYSeries (municipalitiesData: MunicipalitiesData)
+                                              (wastewaterTreatmentPlantKey: string)
+                                              =
+    let lastSeenConfirmedCasesByMunicipality = new Dictionary<string, int>()
+    let mutable before = 0
+
+    connectedMunicipalitiesDataPoints municipalitiesData wastewaterTreatmentPlantKey
+    |> Array.map (fun (ts, dps) ->
+        for dp in dps do
+            lastSeenConfirmedCasesByMunicipality.[dp.Name] <- max
+                                                                  (Option.defaultValue 0 dp.ConfirmedToDate)
+                                                                  (valueOrZero
+                                                                      lastSeenConfirmedCasesByMunicipality
+                                                                       dp.Name)
+
+        let now =
+            lastSeenConfirmedCasesByMunicipality.Values
+            |> Seq.sum
+
+        let diff = now - before
+        before <- now
+        ts, diff)
+
+
+
+let plantCovN1AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
     sewageData
-    |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.wastewaterTreatmentPlants)
+    |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
     |> Array.map (fun (dp: SewageStats) ->
         dp.Date |> jsTimeMidnight,
-        (Map.find wastewaterTreatmentPlantKey dp.wastewaterTreatmentPlants)
-            .covN1)
+        (Map.find wastewaterTreatmentPlantKey dp.plants)
+            .covN1Compensated)
+    |> chooseWithSomeYValue
+
+let plantCovN2AsXYSeries (sewageData: SewageStats array) wastewaterTreatmentPlantKey =
+    sewageData
+    |> Array.filter (fun (dp: SewageStats) -> Map.containsKey wastewaterTreatmentPlantKey dp.plants)
+    |> Array.map (fun (dp: SewageStats) ->
+        dp.Date |> jsTimeMidnight,
+        (Map.find wastewaterTreatmentPlantKey dp.plants)
+            .covN2Compensated)
+    |> chooseWithSomeYValue
 
 let renderSelector (state: State) (wastewaterTreatmentPlant: WastewaterTreatmentPlant) dispatch =
     Html.div [ let isActive =
@@ -147,7 +215,7 @@ let renderChartOptions (state: State) dispatch =
               title = {| text = null |}
               labels =
                   pojo
-                      {| format = "{value}%"
+                      {| format = "{value}"
                          align = "center"
                          x = 10
                          reserveSpace = false |}
@@ -170,13 +238,33 @@ let renderChartOptions (state: State) dispatch =
                       color = wastewaterTreatmentPlant.Color
                       yAxis = 1
                       dashStyle = DashStyle.Dot.ToString()
-                      data = municipalityCasesXY state.MunicipalitiesData wastewaterTreatmentPlantKey |}
+                      data =
+                          connectedMunicipalitiesActiveCasesAsXYSeries
+                              state.MunicipalitiesData
+                              wastewaterTreatmentPlantKey |}
+
+               pojo
+                   {| name = "Potrjeni primer"
+                      ``type`` = "line"
+                      color = wastewaterTreatmentPlant.Color
+                      yAxis = 1
+                      dashStyle = DashStyle.Dot.ToString()
+                      data =
+                          connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
+
                pojo
                    {| name = "cp-luc-pmmov-rawpmmov-n1"
                       ``type`` = "line"
                       color = wastewaterTreatmentPlant.Color
                       yAxis = 0
-                      data = municipalitySewageXY state.SewageData wastewaterTreatmentPlantKey |} |])
+                      data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
+
+               pojo
+                   {| name = "cp-luc-pmmov-rawpmmov-n2"
+                      ``type`` = "line"
+                      color = wastewaterTreatmentPlant.Color
+                      yAxis = 0
+                      data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
         |> Array.concat
 
 
@@ -217,7 +305,8 @@ let renderChartOptions (state: State) dispatch =
                           (I18N.tOptions
                               ("charts.common.dsNIJZ")
                                {| context = localStorage.getItem ("contextCountry") |})
-                  href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |}
+                  href =
+                      "https://www.nib.si/aktualno/novice/1474-sporocilo-za-javnost-merjenje-prisotnosti-sars-cov-2-v-odpadni-vodi-slovenskih-cistilnih-naprav-je-lahko-ucinkovito-orodje-za-spremljanje-epidemije" |}
                |> pojo
            responsive =
                pojo

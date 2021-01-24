@@ -1,21 +1,22 @@
 module Data.Sewage
 
 open System
+open Fable.Core
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-let url = "/sewage.json"
+let url = "https://api-stage.sledilnik.org/api/sewage"
 
-
-type WastewaterTreatmentPlantStats = {
-   covN1: float
+type PlantStats = {
+   covN1Compensated: float option
+   covN2Compensated: float option
 }
 
 type SewageStats = {
     year: int
     month: int
     day: int
-    wastewaterTreatmentPlants: Map<string, WastewaterTreatmentPlantStats>
+    plants: Map<string, PlantStats>
 
 } with
     member lt.Date = System.DateTime(lt.year, lt.month, lt.day)
@@ -29,11 +30,12 @@ let getOrFetch =
         return
             match response_code with
             | 200 ->
-                let data = json
+                let data = json |> JS.JSON.parse |> JS.JSON.stringify // TODO: This is an ugly hack but it's needed, otherwise SimpleJson parser complains
                            |> SimpleJson.parse
                            |> SimpleJson.mapKeys (function
-                               | "wastewater_treatment_plants" -> "wastewaterTreatmentPlants"
-                               | "cp-luc-pmmov-rawpmmov-n1" -> "covN1"
+                               | "wastewater_treatment_plants" -> "plants"
+                               | "cp-luc-pmmov-rawpmmov-n1" -> "covN1Compensated"
+                               | "cp-luc-pmmov-rawpmmov-n2" -> "covN2Compensated"
                                | key -> key)
                            |> Json.tryConvertFromJsonAs<SewageStats array>
 
