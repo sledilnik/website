@@ -34,7 +34,7 @@ Oglejte si tudi [podrobnejše prikaze projekcij in simulacij](https://apps.lusy.
 [Dr. Matjaž Leskovar](https://r4.ijs.si/leskovar#elf_l1_Lw) iz Instituta “Jožef Stefan” (IJS, Odsek R4) pripravlja [dnevno analizo stanja in projekcije](https://r4.ijs.si/COVID19#elf_l1_Lw) razvoja epidemije v Sloveniji. Izračuni temeljijo na modelu tipa SEIR z razširitvami.
 
 <a href="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png">
-<img alt="Model IJS-R4" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
+<img alt="Model IJS-R4" style="max-width:100%" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
 
 ## <a id="social_network"></a>Model socialnega omrežja
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
