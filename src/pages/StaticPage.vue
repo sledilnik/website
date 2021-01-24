@@ -249,7 +249,21 @@ export default {
 
     img {
       width: 100%;
+        &.rightThumbnail {
+          @media only screen and (min-width: 480px) {
+            width: 50%;
+            float:right;
+            margin: 0 0 20px 20px;
+          }
+        }
+
     }
+  }
+
+  iframe.youtube {
+    width:320px;
+    height:180px;
+    max-width:100%;
   }
 }
 

@@ -40,7 +40,7 @@ Oglejte si tudi [podrobnejše prikaze projekcij in simulacij](https://apps.lusy.
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
 
 <a href="/images/zaplotnik-plos-social-network-model.png" class="img-link">
-<img alt="Social network model" src="/images/zaplotnik-plos-social-network-model.png"></a>
+<img class="rightThumbnail" alt="Social network model" src="/images/zaplotnik-plos-social-network-model.png"></a>
 
 Virus se v simulaciji prenaša po karseda realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije). Vozlišča so najprej zbrana v skupke, ki ponazarjajo gospodinjstva in domove oskrbovancev, nato pa jih ob vsakem koraku simulacije naključno prevezujemo med izbranimi skupki, glede na znane porazdelitve kontaktov – nekatere osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom simuliramo različne pristope spopada z virusom. Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19.
 
@@ -79,7 +79,7 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) 
 
 - Člani Sledilnika smo v prispevku ["Dve Sloveniji - ali res stopicamo na mestu?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) opozorili na krajevne razlike v širitvi virusa in da je za zmanjšanje epidemije pomemben sočasen odziv v vsej državi. (2. 12. 2020)
 
-- Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)<br><iframe width="320" height="180" src="https://www.youtube.com/embed/rwcqGV0fyC0?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+- Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)<br><iframe class="youtube" src="https://www.youtube.com/embed/rwcqGV0fyC0?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 - ["Epidemija in modeli - Osnove epidemiološkega modeliranja"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) vam v krajših posnetkih predstavi osnovne pojme, ki so najnujnejši za razumevanje epidemije v številkah. (3. 11. 2020)
 
