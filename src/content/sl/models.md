@@ -54,7 +54,7 @@ Zgodovina izračunov je dostopna v [arhivu](https://fiz.fmf.uni-lj.si/~zaplotnik
 <!--# Analize-->
 
 ## <a id="reproduction-rate"></a>Ocenjevanje stopnje reprodukcije
-Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) (IBMI) Medicinske fakultete Univerze v Ljubljani pod vodstvom prof. Maje Pohar Perme na podlagi podatkov [ocenjuje stopnjo reprodukcije](http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf), to je hitrost širjenja okužbe, med posamičnimi intervencijami.
+Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) (IBMI) Medicinske fakultete Univerze v Ljubljani pod vodstvom prof. Maje Pohar Perme na podlagi podatkov [ocenjuje stopnjo reprodukcije](https://oblak8.mf.uni-lj.si/covid19/), to je hitrost širjenja okužbe, med posamičnimi intervencijami.
 
 <a href="https://oblak8.mf.uni-lj.si/covid19/" class="img-link">
 <img alt="R_t model" src="https://oblak8.mf.uni-lj.si/covid19/rt_graph.svg" width=600>
@@ -75,7 +75,7 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) 
 
 - ["Kaj ima matematika z epidemijo?"](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) Članek razloži osnovne pojme in predstavi matematični vidik modeliranja. Povzeto po predavanju prof. Janeza Žiberta. (17. 12. 2020)
 
-- Spletni pogovor STAznanost z naslovom ["Statistični podatki - osnova za razumevanje epidemije"](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). V pogovoru so sodelovali: prof. dr. Leon Cizelj, vodja odseka za reaktorsko tehniko na Inštitutu Jožef Stefan; dr. Zarja Muršič, predstavnica Sledilnika; Mario Fafangel, predstojnik Centra za nalezljive bolezni Nacionalnega inštituta za javno zdravje (NIJZ). (11. 12. 2020)
+- Spletni pogovor STAznanost z naslovom ["Statistični podatki - osnova za razumevanje epidemije"](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). V pogovoru so sodelovali: prof. dr. Leon Cizelj, vodja odseka za reaktorsko tehniko na Inštitutu Jožef Stefan; dr. Zarja Muršič, predstavnica Sledilnika; dr. Mario Fafangel, predstojnik Centra za nalezljive bolezni Nacionalnega inštituta za javno zdravje (NIJZ). (11. 12. 2020)
 
 - Člani Sledilnika smo v prispevku ["Dve Sloveniji - ali res stopicamo na mestu?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) opozorili na krajevne razlike v širitvi virusa in da je za zmanjšanje epidemije pomemben sočasen odziv v vsej državi. (2. 12. 2020)
 
