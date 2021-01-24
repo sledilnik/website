@@ -425,10 +425,10 @@
             "admitted": "Prihvaćeni",
             "title": "Hospitalizacije",
             "titleMenu": "Hospitalizacije",
-            "care": "Ustanova za njegu",
+            "care": "Odjel za njegu",
             "icu-deceased": "Umrli",
             "niVentilator": "Na respiratoru (neinvazivno)",
-            "acute": "Ustanova za akutne slučajeve",
+            "acute": "Odjel za akutne slučajeve",
             "icu-other": "Bez respiratora",
             "icu-discharged": "Otpušteni s odjela intenzivne njege",
             "icu-admitted": "Prihvaćeni na odjelu intenzivne njege"
@@ -468,8 +468,9 @@
             "titleMenu_MNE": "Crna Gora – stanje",
             "titleMenu_MKD": "Sjeverna Makedonija – stanje",
             "titleMenu_SVN": "Slovenija – stanje",
-            "vaccinationAdministered": "Cijepljeni",
-            "niVentilator": "Na respiratoru (neinvazivno)"
+            "vaccinationAdministered": "Cijepljeni 💉",
+            "niVentilator": "Na respiratoru (neinvazivno)",
+            "vaccinationAdministered2nd": "Cijepljeni 💉💉"
         },
         "spread": {
             "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
@@ -787,10 +788,13 @@
             "relative": "Relativno",
             "all": "Svi",
             "structure": "Struktura",
-            "absolute": "Apsolutno"
+            "absolute": "Apsolutno",
+            "healthcareFemaleCases": "Zdravstvo – žene",
+            "healthcareMaleCases": "Zdravstvo – muškarci",
+            "healthcare": "Zdravstvo po spolu"
         },
         "deceased": {
-            "deceased-acute": "Medicinska ustanova za akutne slučajeve",
+            "deceased-acute": "Medicinski odjel za akutne slučajeve",
             "deceased-icu": "Odjel intenzivne njege",
             "deceasedTodayRelative": "Dnevni smrtni slučajevi (relativno)",
             "deceasedToday": "Dnevni smrtni slučajevi",
@@ -1074,6 +1078,18 @@
         "planRelaxation2": {
             "description": "Vlada je prihvatila revidirani plan popuštanja mjera u pet faza.",
             "title": "Plan"
+        },
+        "liftSchools3": {
+            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama.",
+            "title": "Škole 3"
+        },
+        "liftRegions": {
+            "description": "Opuštanje: trgovine za djecu, muzeji, galerije, knjižnice i skijališta su otvorena u nekim regijama.",
+            "title": "Regije"
+        },
+        "gym": {
+            "description": "Zatvaranje teretana, bazena, sportskih objekata (s iznimkama).<br>Zatvaranje muzeja i galerija. Knjižnice su otvarene samo za preuzimanje građe.",
+            "title": "Fitness"
         }
     },
     "pageNotFound": {
