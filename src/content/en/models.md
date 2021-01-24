@@ -36,8 +36,8 @@ More detailed projections of the model are to be found [at this link](https://ap
 
 [Dr. Matjaž Leskovar](https://r4.ijs.si/leskovar#elf_l1_Lw) from the Jožef Stefan Institute prepares [daily analysis and projections](https://r4.ijs.si/COVID19#elf_l1_Lw) of the epidemic in Slovenia. The calculations are based on the SEIR type model with extensions.
 
-<a href="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png">
-<img alt="Model IJS-R4" style="max-width:100%" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
+<a href="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png" class="img-link">
+<img alt="Model IJS-R4" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
 
 ## <a id="social_network"></a>The Social Network Model
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
