@@ -1763,7 +1763,7 @@
             "stripe": {
                 "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vaš strošek podpore pa se enakomerno porazdeli skozi leto. Izberite znesek, s katerim ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
                 "stopping": "Donacijo lahko prekinete kadarkoli tako, da nam to sporočite na drustvo@sledilnik.org.",
-                "donateButton": "{{amount}} / mesec",
+                "donateButton": "{{amount}} na mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
                     "description": "V kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."
