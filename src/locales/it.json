@@ -1615,5 +1615,12 @@
         "chart-reality": {
             "question": "I vostri grafici rappresentano la situazione reale?"
         }
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} al mese"
+            }
+        }
     }
 }
