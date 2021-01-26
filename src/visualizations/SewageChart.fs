@@ -166,13 +166,6 @@ let renderSelector (state: State) (wastewaterTreatmentPlant: WastewaterTreatment
     Html.div [ let isActive =
                    state.ShownWastewaterTreatmentPlants.Contains wastewaterTreatmentPlant.Key
 
-               let style =
-                   if isActive then
-                       [ style.backgroundColor wastewaterTreatmentPlant.Color
-                         style.borderColor wastewaterTreatmentPlant.Color ]
-                   else
-                       []
-
                prop.onClick (fun _ ->
                    (match isActive with
                     | true -> HideWastewaterTreatmentPlant
@@ -181,8 +174,6 @@ let renderSelector (state: State) (wastewaterTreatmentPlant: WastewaterTreatment
 
                Utils.classes [ (true, "btn btn-sm metric-selector")
                                (isActive, "metric-selector--selected") ]
-
-               prop.style style
 
                prop.text (wastewaterTreatmentPlant.Name) ]
 
@@ -235,34 +226,32 @@ let renderChartOptions (state: State) dispatch =
                pojo
                    {| name = "Aktivni primeri"
                       ``type`` = "line"
-                      color = wastewaterTreatmentPlant.Color
+                      color = "rgb(219, 165, 29)"
                       yAxis = 1
-                      dashStyle = DashStyle.Dot.ToString()
                       data =
                           connectedMunicipalitiesActiveCasesAsXYSeries
                               state.MunicipalitiesData
                               wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "Potrjeni primer"
+                   {| name = "Potrjeni primeri"
                       ``type`` = "line"
-                      color = wastewaterTreatmentPlant.Color
+                      color = "rgb(189, 165, 6)"
                       yAxis = 1
-                      dashStyle = DashStyle.Dot.ToString()
                       data =
                           connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "cp-luc-pmmov-rawpmmov-n1"
+                   {| name = "Koncentracija SARS-CoV-2, gen 1"
                       ``type`` = "line"
-                      color = wastewaterTreatmentPlant.Color
+                      color = "#c59eef"
                       yAxis = 0
                       data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "cp-luc-pmmov-rawpmmov-n2"
+                   {| name = "Koncentracija SARS-CoV-2, gen 2"
                       ``type`` = "line"
-                      color = wastewaterTreatmentPlant.Color
+                      color = "#6d5b80"
                       yAxis = 0
                       data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
         |> Array.concat
@@ -334,7 +323,22 @@ let render (state: State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [ renderChartContainer state dispatch
-                   renderDisplaySelectors state dispatch ]
+                   Html.div [ Html.text "Aktivni in potrjeni primeri vključujejo prebivalce občin:"
+                              Html.ul
+                                  (state.ShownWastewaterTreatmentPlants
+                                   |> Set.toSeq
+                                   |> Seq.map (fun treatmentPlantKey ->
+                                       Utils.Dictionaries.wastewaterTreatmentPlants.[treatmentPlantKey]
+                                           .Municipalities
+                                       |> Array.toSeq
+                                       |> Seq.map (fun municipality ->
+                                           Html.li [ prop.text
+                                                         ((municipality |> snd |> Map.find)
+                                                             Utils.Dictionaries.municipalities)
+                                                             .Name ]))
+                                   |> Seq.concat) ]
+                   renderDisplaySelectors state dispatch
+                   ]
 
 let chart =
     React.functionComponent (fun (props: {| data: MunicipalitiesData |}) ->
@@ -342,3 +346,8 @@ let chart =
             React.useElmish (init props.data, update, [||])
 
         render state dispatch)
+
+
+// TODO: 7-day average for new confirmed cases
+// TODO: color scheme: use region colors?
+// TODO: move texts to locale JSON
