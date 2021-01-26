@@ -448,13 +448,14 @@
             "allHospitals": "Alle Krankenhäuser",
             "hospitalized": "Hospitalisierte",
             "ventilator": "An Beatmungsgeräten",
-            "care": "In Pflege",
+            "care": "Pflegeabteilung",
             "titleMenu": "Hospitalisiert",
             "icu-deceased": "Verstorbene",
             "icu-other": "Ohne Beatmung",
             "icu-discharged": "Aus Intensivstation entlassen",
             "icu-admitted": "Aufgenommen auf Intensivstation",
-            "niVentilator": "An Beatmungsgeräten (nicht-invasiv)"
+            "niVentilator": "An Beatmungsgeräten (nicht-invasiv)",
+            "acute": "Akutmedizinische Abteilung"
         },
         "hCenters": {
             "suspectedCovidPhone": "Verdacht auf COVID-19 (Telefon)",
@@ -784,7 +785,11 @@
             "all": "Alle",
             "otherCases": "Andere Personen",
             "rhOccupantCases": "Bewohner in Altersheimen",
-            "absolute": "Absolut"
+            "absolute": "Absolut",
+            "healthcareFemaleCases": "Gesundheitswesen – weiblich",
+            "healthcare": "Gesundheitswesen nach Geschlecht",
+            "healthcareMaleCases": "Gesundheitswesen – männlich",
+            "structure": "Struktur"
         },
         "countriesNewDeathsPer100k": {
             "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
