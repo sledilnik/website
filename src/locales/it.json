@@ -642,6 +642,14 @@
         "gym": {
             "description": "Chiusura di palestre, piscine, impianti sportivi (salvo eccezioni). <br> Chiusura di musei e gallerie. Le biblioteche sono aperte solo per il ritiro.",
             "title": "Palestra"
+        },
+        "liftSchools3": {
+            "description": "Distensione: scuola materna ed elementare fino al 3° grado in alcune regioni.",
+            "title": "Scuole 1-3"
+        },
+        "liftRegions": {
+            "description": "Distensione: i negozi per bambini, i musei, gallerie, le biblioteche e le piste da sci sono aperte in alcune regioni.",
+            "title": "Regioni"
         }
     },
     "tableDict": {
@@ -787,8 +795,9 @@
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
-            "vaccinationAdministered": "Vaccinati",
-            "niVentilator": "Su ventilatore (non invasivo)"
+            "vaccinationAdministered": "Vaccinati 💉",
+            "niVentilator": "Su ventilatore (non invasivo)",
+            "vaccinationAdministered2nd": "Vaccinati 💉💉"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -1201,7 +1210,12 @@
             "otherCases": "Altre persone",
             "rhOccupantCases": "Residenti nelle case di riposo",
             "relative": "Relativo",
-            "all": "Tutti"
+            "all": "Tutti",
+            "healthcareFemaleCases": "Personale sanitario - femmine",
+            "healthcareMaleCases": "Personale sanitario - maschi",
+            "healthcare": "Personale sanitario per genere",
+            "structure": "Struttura",
+            "absolute": "Assoluto"
         },
         "carePatients": {
             "titleMenu": "Ospedali di cura",
@@ -1614,6 +1628,13 @@
         },
         "chart-reality": {
             "question": "I vostri grafici rappresentano la situazione reale?"
+        }
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} al mese"
+            }
         }
     }
 }

@@ -419,14 +419,19 @@
             "hospitalizedIn": "Hospitalizirani u:",
             "allHospitals": "Sve bolnice",
             "discharged": "Otpušteni",
-            "icu": "Na odjelu intenzivne njege",
+            "icu": "Intenzivna njega",
             "hospitalized": "Hospitalizirani",
             "byHospital": "Po bolnicama",
             "admitted": "Prihvaćeni",
             "title": "Hospitalizacije",
             "titleMenu": "Hospitalizacije",
-            "care": "Na njezi",
-            "icu-deceased": "Umrli (na odjelu intenzivne njege)"
+            "care": "Odjel za njegu",
+            "icu-deceased": "Umrli",
+            "niVentilator": "Na respiratoru (neinvazivno)",
+            "acute": "Odjel za akutne slučajeve",
+            "icu-other": "Bez respiratora",
+            "icu-discharged": "Otpušteni s odjela intenzivne njege",
+            "icu-admitted": "Prihvaćeni na odjelu intenzivne njege"
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
@@ -463,7 +468,9 @@
             "titleMenu_MNE": "Crna Gora – stanje",
             "titleMenu_MKD": "Sjeverna Makedonija – stanje",
             "titleMenu_SVN": "Slovenija – stanje",
-            "vaccinationAdministered": "Cijepljeni"
+            "vaccinationAdministered": "Cijepljeni 💉",
+            "niVentilator": "Na respiratoru (neinvazivno)",
+            "vaccinationAdministered2nd": "Cijepljeni 💉💉"
         },
         "spread": {
             "absoluteTitle": "Dnevni porast potvrđenih slučajeva",
@@ -534,8 +541,8 @@
             "hagt": "Regularni: RAT",
             "positiveTotal": "Pozitivni ukupno",
             "positivePCR": "Pozitivni PCR",
-            "positiveHAT": "Pozitivni HAT",
-            "positiveSplit": "Pozitivni PCR i HAT"
+            "positiveHAT": "Pozitivni RAT",
+            "positiveSplit": "Pozitivni PCR i RAT"
         },
         "infections": {
             "rhStaff": "Osoblje domova umirovljenika",
@@ -637,8 +644,8 @@
             "icuAdmitted": "Primljeni na odjel intenzivne njege",
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
-            "positivePctHAT": "Udio pozitivnih: HAT (%)",
-            "testsHAT": "Provedeni testovi: HAT",
+            "positivePctHAT": "Udio pozitivnih: RAT (%)",
+            "testsHAT": "Provedeni testovi: RAT",
             "vaccinated": "Cijepljene osobe"
         },
         "sources": {
@@ -779,10 +786,15 @@
             "otherCases": "Ostale osobe",
             "rhOccupantCases": "Stanovnici domova umirovljenika",
             "relative": "Relativno",
-            "all": "Svi"
+            "all": "Svi",
+            "structure": "Struktura",
+            "absolute": "Apsolutno",
+            "healthcareFemaleCases": "Zdravstvo – žene",
+            "healthcareMaleCases": "Zdravstvo – muškarci",
+            "healthcare": "Zdravstvo po spolu"
         },
         "deceased": {
-            "deceased-acute": "Medicinska jedinica za akutne slučajeve",
+            "deceased-acute": "Medicinski odjel za akutne slučajeve",
             "deceased-icu": "Odjel intenzivne njege",
             "deceasedTodayRelative": "Dnevni smrtni slučajevi (relativno)",
             "deceasedToday": "Dnevni smrtni slučajevi",
@@ -850,6 +862,10 @@
             "ageGroup": "Dobna skupina",
             "titleMenu": "Dobne skupine – tjedno",
             "title": "Demografija potvrđenih slučajeva, tjedno"
+        },
+        "icuPatients": {
+            "titleMenu": "Intenzivna njega",
+            "title": "Intenzivna njega"
         }
     },
     "shortMonth": {
@@ -1062,6 +1078,18 @@
         "planRelaxation2": {
             "description": "Vlada je prihvatila revidirani plan popuštanja mjera u pet faza.",
             "title": "Plan"
+        },
+        "liftSchools3": {
+            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama.",
+            "title": "Škole 3"
+        },
+        "liftRegions": {
+            "description": "Opuštanje: trgovine za djecu, muzeji, galerije, knjižnice i skijališta su otvorena u nekim regijama.",
+            "title": "Regije"
+        },
+        "gym": {
+            "description": "Zatvaranje teretana, bazena, sportskih objekata (s iznimkama).<br>Zatvaranje muzeja i galerija. Knjižnice su otvarene samo za preuzimanje građe.",
+            "title": "Fitness"
         }
     },
     "pageNotFound": {
@@ -1489,6 +1517,13 @@
         "how-to-help": {
             "answer": "Obrati nam se info@sledilnik.org i ukratko opiši tko si i kako možeš pridonijeti projektu. Svaka pomoć je dobrodošla.",
             "question": "Želim pomoći. Gdje mogu početi?"
+        }
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} mjesečno"
+            }
         }
     }
 }

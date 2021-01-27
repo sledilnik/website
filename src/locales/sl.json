@@ -645,6 +645,14 @@
         "gym": {
             "title": "Fitnes",
             "description": "Zaprejo se fitnesi, bazeni, športne dvorane (razen za izjeme).<br>Zaprejo se muzeji in galerije. Knjižnice dovoljene le za prevzem."
+        },
+        "liftRegions": {
+            "title": "Regije",
+            "description": "Sproščanje: v nekaterih regijah se odprejo trgovine za otroke, muzeji, galerije, knjižnice, smučišča."
+        },
+        "liftSchools3": {
+            "title": "OŠ 1-3",
+            "description": "Sproščanje: v nekaterih regijah se odpro vrtci in osnovna šola od 1. do 3. razreda."
         }
     },
     "phase": {
@@ -764,7 +772,8 @@
             "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
             "recovered": "Preboleli",
-            "vaccinationAdministered": "Cepljeni",
+            "vaccinationAdministered": "Cepljeni 💉",
+            "vaccinationAdministered2nd": "Cepljeni 💉💉",
             "hospitalized": "Hospitalizirani",
             "hospitalAdmitted": "Sprejeti v bolnišnico",
             "hospitalDischarged": "Odpuščeni iz bolnišnice",
@@ -1758,7 +1767,7 @@
             "stripe": {
                 "description": "Redna mesečna donacija nam omogoča predvidljiv prihodek in boljše načrtovanje plačljivih aktivnosti, vaš strošek podpore pa se enakomerno porazdeli skozi leto. Izberite znesek, s katerim ste pripravljeni redno podpreti naše delovanje **s kreditno kartico**:",
                 "stopping": "Donacijo lahko prekinete kadarkoli tako, da nam to sporočite na drustvo@sledilnik.org.",
-                "donateButton": "{{amount}} / mesec",
+                "donateButton": "{{amount}} na mesec",
                 "success": {
                     "title": "Hvala za redno mesečno donacijo",
                     "description": "V kolikor bi iz kakršnegakoli razloga redno donacijo želeli ustaviti nam pišite na drustvo@sledilnik.org."

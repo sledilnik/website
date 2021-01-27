@@ -34,7 +34,7 @@
               :pk="publishableKey"
               :success-url="successURL+'&type=monthly'"
               :cancel-url="cancelURL"
-              :locale="language"
+              :locale="stripeLanguage"
               @loading="v => loading = v"
             />
             <span v-for="(item) in stripeSubscriptions" :key="item.price">
@@ -150,7 +150,7 @@
               :pk="publishableKey"
               :success-url="successURL+'&type=onetime'"
               :cancel-url="cancelURL"
-              :locale="language"
+              :locale="stripeLanguage"
               @loading="v => loading = v"
             />
             <span v-for="(item) in stripeOneTimeDonations" :key="item.price">
@@ -229,6 +229,7 @@ export default {
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
       language: `${this.$i18n.i18next.language}`,
+      stripeLanguage: `${this.$i18n.i18next.language=='hr'?'auto':this.$i18n.i18next.language}`,
     };
   },
   methods: {

@@ -254,7 +254,8 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
-            "vaccinationAdministered": "Vaccinated",
+            "vaccinationAdministered": "Vaccinated 💉",
+            "vaccinationAdministered2nd": "Vaccinated 💉💉",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -1028,6 +1029,14 @@
         "gym": {
             "title": "Gym",
             "description": "Closure of gyms, pools, sport facilities (with exceptions).<br>Closing of museums and galleries. Libraries open only for pick-up."
+        },
+        "liftRegions": {
+            "title": "Regions",
+            "description": "Relaxation: shops for children, museums, galleries, libraries and ski-resorts are open in some regions."
+        },
+        "liftSchools3": {
+            "title": "Schools 3",
+            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions."
         }
     },
     "days": {
@@ -1674,7 +1683,7 @@
             "title": "Monthly recurring donation",
             "stripe": {
                 "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
-                "donateButton": "{{amount}} / month",
+                "donateButton": "{{amount}} per month",
                 "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",

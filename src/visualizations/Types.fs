@@ -34,7 +34,10 @@ type Cases =
     }
 
 type Vaccination =
-    { Administered : TodayToDate }
+    { Administered : TodayToDate
+      Administered2nd : TodayToDate
+      Used : TodayToDate
+      Delivered : TodayToDate }
 
 type Treatment =
     { InHospital : int option

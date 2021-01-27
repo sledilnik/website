@@ -14,7 +14,7 @@ Negotovosti v modele in analize epidemije COVID-19 vstopajo na različne načine
 Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenosti sorazmerno veliki, in, dlje kot projiciramo v prihodnost, hitreje rastejo.
 
 ## <a id="tableOfContent"></a>Vsebina
-- [Nadgrajen model SEIR](#seir)
+- [Nadgrajeni modeli SEIR](#seir)
 - [Model socialnega omrežja](#social_network)
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
 - [Določanje alarmov](#alarms)
@@ -23,7 +23,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 
 <!--# Modeli-->
 
-## <a id="seir"></a>Nadgrajen model SEIR
+## <a id="seir"></a>Nadgrajeni modeli SEIR
 [Prof. Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) z Zdravstvene fakultete, Univerze v Ljubljani je pripravil [nadgrajen model SEIR](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) za spremljanje bolnišničnih obravnav, obravnav v enotah intenzivne terapije in dnevnega oz. kumulativnega števila smrti v Sloveniji.
 
 <a href="https://apps.lusy.fri.uni-lj.si/~janezz/zadnja-simulacija_V2.png" class="img-link">
@@ -31,8 +31,16 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 
 Oglejte si tudi [podrobnejše prikaze projekcij in simulacij](https://apps.lusy.fri.uni-lj.si/~janezz/reports/report_latest.html).
 
-## <a id="social_network"></a>Model prenosa virusa po socialnem omrežju prebivalcev Slovenije
+[Dr. Matjaž Leskovar](https://r4.ijs.si/leskovar#elf_l1_Lw) iz Instituta “Jožef Stefan” (IJS, Odsek R4) pripravlja [dnevno analizo stanja in projekcije](https://r4.ijs.si/COVID19#elf_l1_Lw) razvoja epidemije v Sloveniji. Izračuni temeljijo na modelu tipa SEIR z razširitvami.
+
+<a href="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png" class="img-link">
+<img alt="Model IJS-R4" src="https://r4.ijs.si/files/figures/COVID19/Prognoza-IJS-R4.png"></a>
+
+## <a id="social_network"></a>Model socialnega omrežja
 [Dr. Žiga Zaplotnik](https://twitter.com/ZaplotnikZiga) s Fakultete za matematiko in fiziko Univerze v Ljubljani je razvil model prenosa virusa po socialnem omrežju prebivalcev v Sloveniji, ki je bil objavljen v znanstveni reviji [PLOS ONE](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238090).
+
+<a href="/images/zaplotnik-plos-social-network-model.png" class="img-link">
+<img class="rightThumbnail" alt="Social network model" src="/images/zaplotnik-plos-social-network-model.png"></a>
 
 Virus se v simulaciji prenaša po karseda realističnem modelu socialnega omrežja Slovencev, ki vsebuje več kot 2 milijona vozlišč (1 za vsakega prebivalca Slovenije). Vozlišča so najprej zbrana v skupke, ki ponazarjajo gospodinjstva in domove oskrbovancev, nato pa jih ob vsakem koraku simulacije naključno prevezujemo med izbranimi skupki, glede na znane porazdelitve kontaktov – nekatere osebe imajo dnevno več kontaktov, druge manj. To omogoča, da lahko z modelom simuliramo različne pristope spopada z virusom. Verjetnostno napoved dobimo tako, da pripravimo množico simulacij z rahlo spremenjenim začetnim pogojem in parametri, ki določajo širjenje koronavirusa in potek bolezni COVID-19.
 
@@ -46,7 +54,7 @@ Zgodovina izračunov je dostopna v [arhivu](https://fiz.fmf.uni-lj.si/~zaplotnik
 <!--# Analize-->
 
 ## <a id="reproduction-rate"></a>Ocenjevanje stopnje reprodukcije
-Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) (IBMI) Medicinske fakultete Univerze v Ljubljani pod vodstvom prof. Maje Pohar Perme na podlagi podatkov [ocenjuje stopnjo reprodukcije](http://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf), to je hitrost širjenja okužbe, med posamičnimi intervencijami.
+Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.uni-lj.si/) (IBMI) Medicinske fakultete Univerze v Ljubljani pod vodstvom prof. Maje Pohar Perme na podlagi podatkov [ocenjuje stopnjo reprodukcije](https://oblak8.mf.uni-lj.si/covid19/), to je hitrost širjenja okužbe, med posamičnimi intervencijami.
 
 <a href="https://oblak8.mf.uni-lj.si/covid19/" class="img-link">
 <img alt="R_t model" src="https://oblak8.mf.uni-lj.si/covid19/rt_graph.svg" width=600>
@@ -67,11 +75,11 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) 
 
 - ["Kaj ima matematika z epidemijo?"](https://medium.com/sledilnik/kaj-ima-matematika-z-epidemijo-155023c10221) Članek razloži osnovne pojme in predstavi matematični vidik modeliranja. Povzeto po predavanju prof. Janeza Žiberta. (17. 12. 2020)
 
-- Spletni pogovor STAznanost z naslovom ["Statistični podatki - osnova za razumevanje epidemije"](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). V pogovoru so sodelovali: prof. dr. Leon Cizelj, vodja odseka za reaktorsko tehniko na Inštitutu Jožef Stefan; dr. Zarja Muršič, predstavnica Sledilnika; Mario Fafangel, predstojnik Centra za nalezljive bolezni Nacionalnega inštituta za javno zdravje (NIJZ). (11. 12. 2020)
+- Spletni pogovor STAznanost z naslovom ["Statistični podatki - osnova za razumevanje epidemije"](https://www.youtube.com/watch?v=Bwn6cfgPZ1Q&t=3s). V pogovoru so sodelovali: prof. dr. Leon Cizelj, vodja odseka za reaktorsko tehniko na Inštitutu Jožef Stefan; dr. Zarja Muršič, predstavnica Sledilnika; dr. Mario Fafangel, predstojnik Centra za nalezljive bolezni Nacionalnega inštituta za javno zdravje (NIJZ). (11. 12. 2020)
 
 - Člani Sledilnika smo v prispevku ["Dve Sloveniji - ali res stopicamo na mestu?"](https://medium.com/sledilnik/dve-sloveniji-ali-res-stopicamo-na-mestu-27fac63d9e6f) opozorili na krajevne razlike v širitvi virusa in da je za zmanjšanje epidemije pomemben sočasen odziv v vsej državi. (2. 12. 2020)
 
-- Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)
+- Sodelavci Sledilnika so v Državnem zboru RS predstavili [pomen podatkov in modeliranja za odločevalce](https://medium.com/sledilnik/povzetek-nastopov-strokovnjakov-s-seje-parlamentarnega-odbora-12-11-2020-5a3ead7b4898). (12. 11. 2020)<br><iframe class="youtube" src="https://www.youtube.com/embed/rwcqGV0fyC0?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 - ["Epidemija in modeli - Osnove epidemiološkega modeliranja"](https://medium.com/sledilnik/epidemija-in-modeli-786e02f1bd8a) vam v krajših posnetkih predstavi osnovne pojme, ki so najnujnejši za razumevanje epidemije v številkah. (3. 11. 2020)
 
