@@ -14,6 +14,7 @@ open Types
 open Data.Sewage
 open Utils.Dictionaries
 
+let chartText = I18N.chartText "sewage"
 
 type State =
     { SewageData: SewageStats array
@@ -224,7 +225,7 @@ let renderChartOptions (state: State) dispatch =
             [|
 
                pojo
-                   {| name = "Aktivni primeri"
+                   {| name = chartText "activeCases"
                       ``type`` = "line"
                       color = "rgb(219, 165, 29)"
                       yAxis = 1
@@ -234,7 +235,7 @@ let renderChartOptions (state: State) dispatch =
                               wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "Potrjeni primeri"
+                   {| name = chartText "confirmedCases"
                       ``type`` = "line"
                       color = "rgb(189, 165, 6)"
                       yAxis = 1
@@ -242,14 +243,14 @@ let renderChartOptions (state: State) dispatch =
                           connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "Koncentracija SARS-CoV-2, gen 1"
+                   {| name = chartText "concentrationGen1"
                       ``type`` = "line"
                       color = "#c59eef"
                       yAxis = 0
                       data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = "Koncentracija SARS-CoV-2, gen 2"
+                   {| name = chartText "concentrationGen2"
                       ``type`` = "line"
                       color = "#6d5b80"
                       yAxis = 0
@@ -323,7 +324,8 @@ let render (state: State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [ renderChartContainer state dispatch
-                   Html.div [ Html.text "Aktivni in potrjeni primeri vključujejo prebivalce občin:"
+                   renderDisplaySelectors state dispatch
+                   Html.div [ Html.text (chartText "muncipalitiesIncluded")
                               Html.ul
                                   (state.ShownWastewaterTreatmentPlants
                                    |> Set.toSeq
@@ -336,9 +338,7 @@ let render (state: State) dispatch =
                                                          ((municipality |> snd |> Map.find)
                                                              Utils.Dictionaries.municipalities)
                                                              .Name ]))
-                                   |> Seq.concat) ]
-                   renderDisplaySelectors state dispatch
-                   ]
+                                   |> Seq.concat) ] ]
 
 let chart =
     React.functionComponent (fun (props: {| data: MunicipalitiesData |}) ->
@@ -347,7 +347,6 @@ let chart =
 
         render state dispatch)
 
-
+// TODO: convert bulleted list of municipalities to simple enumeration with commas? 
 // TODO: 7-day average for new confirmed cases
 // TODO: color scheme: use region colors?
-// TODO: move texts to locale JSON

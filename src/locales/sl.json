@@ -1233,7 +1233,13 @@
             }
         },
         "sewage": {
-            "title": "Odpadne vode \uD83D\uDCA9"
+            "title": "Virus v odpadnih vodah \uD83D\uDCA9",
+            "titleMenu": "Odpadne vode \uD83D\uDCA9",
+            "activeCases": "Aktivni primeri",
+            "confirmedCases": "Potrjeni primeri",
+            "concentrationGen1": "Koncentracija SARS-CoV-2, gen 1",
+            "concentrationGen2": "Koncentracija SARS-CoV-2, gen 2",
+            "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz občin:"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",

@@ -30,6 +30,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
+            | "Sewage" -> Some Sewage
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -570,10 +571,9 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ sewage
-          hospitals; metricsComparison; dailyComparison; tests;
+        [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
-          regions100k; map; municipalities
+          regions100k; map; municipalities; sewage;
           ageGroupsTimeline; weeklyDemographics; ageGroups;
           infections; hcCases;
           europeMap; sources

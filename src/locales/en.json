@@ -201,6 +201,7 @@
         "common": {
             "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
+            "dsNIB": "National Institute of Biology (NIB)",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
@@ -721,6 +722,15 @@
                 "users": "Users",
                 "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower."
             }
+        },
+        "sewage": {
+            "title": "Virus in Sewage \uD83D\uDCA9",
+            "titleMenu": "Sewage \uD83D\uDCA9",
+            "activeCases": "Active Cases",
+            "confirmedCases": "Confirmed Cases",
+            "concentrationGen1": "SARS-CoV-2 Gene 1 Concentration",
+            "concentrationGen2": "SARS-CoV-2 Gene 2 Concentration",
+            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
