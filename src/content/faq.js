@@ -45,6 +45,7 @@ export default [
             "deceased-chart",
             "excess-deaths-chart",
             "daily-comparison-chart",
+            "sewage-chart",
             "sources-chart",
             "ratios-chart",
             "hcenters-chart",
