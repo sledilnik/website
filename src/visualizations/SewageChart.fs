@@ -320,6 +320,7 @@ let renderChartOptions (state: State) dispatch =
                                 chartOptions =
                                     {| yAxis =
                                            [| {| labels = {| enabled = false |} |}
+                                              {| labels = {| enabled = false |} |}
                                               {| labels = {| enabled = false |} |} |] |} |} |] |} |}
     |> pojo
 
