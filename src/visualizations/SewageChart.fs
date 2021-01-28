@@ -141,7 +141,8 @@ let connectedMunicipalitiesNewCasesAsXYSeries (municipalitiesData: Municipalitie
 
         let diff = now - before
         before <- now
-        ts, diff)
+        ts, float diff)
+        |> Statistics.calcRunningAverage
 
 
 
@@ -200,7 +201,7 @@ let renderChartOptions (state: State) dispatch =
                          reserveSpace = false |}
               showFirstLabel = false
               opposite = true
-              visible = true
+              visible = false
               crosshair = true |}
            |> pojo
            {| index = 1
@@ -215,6 +216,19 @@ let renderChartOptions (state: State) dispatch =
               opposite = false
               visible = true
               crosshair = true |}
+           |> pojo 
+           {| index = 2
+              title = {| text = null |}
+              labels =
+                  pojo
+                      {| format = "{value}"
+                         align = "center"
+                         x = -10
+                         reserveSpace = false |}
+              showFirstLabel = false
+              opposite = true
+              visible = true
+              crosshair = true |}
            |> pojo |]
 
     let allSeries =
@@ -223,29 +237,31 @@ let renderChartOptions (state: State) dispatch =
         |> Array.filter (fun (key, _) -> state.ShownWastewaterTreatmentPlants.Contains key)
         |> Array.map (fun (wastewaterTreatmentPlantKey, wastewaterTreatmentPlant) ->
             [|
+               pojo
+                   {| name = chartText "newCases7dAve"
+                      ``type`` = "line"
+                      color = "#bda506"
+                      dashStyle = "ShortDot"
+                      yAxis = 1
+                      data =
+                          connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
 
                pojo
                    {| name = chartText "activeCases"
                       ``type`` = "line"
-                      color = "rgb(219, 165, 29)"
-                      yAxis = 1
+                      color = "#dba51d"
+                      dashStyle = "Dot"
+                      yAxis = 2
                       data =
                           connectedMunicipalitiesActiveCasesAsXYSeries
                               state.MunicipalitiesData
                               wastewaterTreatmentPlantKey |}
 
                pojo
-                   {| name = chartText "confirmedCases"
-                      ``type`` = "line"
-                      color = "rgb(189, 165, 6)"
-                      yAxis = 1
-                      data =
-                          connectedMunicipalitiesNewCasesAsXYSeries state.MunicipalitiesData wastewaterTreatmentPlantKey |}
-
-               pojo
                    {| name = chartText "concentrationGen1"
                       ``type`` = "line"
                       color = "#c59eef"
+                      dashStyle = "Solid"
                       yAxis = 0
                       data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
@@ -253,11 +269,10 @@ let renderChartOptions (state: State) dispatch =
                    {| name = chartText "concentrationGen2"
                       ``type`` = "line"
                       color = "#6d5b80"
+                      dashStyle = "Solid"
                       yAxis = 0
                       data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
         |> Array.concat
-
-
 
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
