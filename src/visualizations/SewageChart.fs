@@ -260,7 +260,7 @@ let renderChartOptions (state: State) dispatch =
                pojo
                    {| name = chartText "concentrationGen1"
                       ``type`` = "line"
-                      color = "#c59eef"
+                      color = "#d45087"
                       dashStyle = "Solid"
                       yAxis = 0
                       data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
@@ -268,7 +268,7 @@ let renderChartOptions (state: State) dispatch =
                pojo
                    {| name = chartText "concentrationGen2"
                       ``type`` = "line"
-                      color = "#6d5b80"
+                      color = "#a05195"
                       dashStyle = "Solid"
                       yAxis = 0
                       data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
@@ -363,5 +363,3 @@ let chart =
         render state dispatch)
 
 // TODO: convert bulleted list of municipalities to simple enumeration with commas? 
-// TODO: 7-day average for new confirmed cases
-// TODO: color scheme: use region colors?
