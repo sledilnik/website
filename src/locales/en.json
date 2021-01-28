@@ -201,7 +201,7 @@
         "common": {
             "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
-            "dsNIB": "National Institute of Biology (NIB)",
+            "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
