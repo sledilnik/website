@@ -8,10 +8,206 @@
         "ostanizdrav": "#OstaniZdrav",
         "world": "Mundo",
         "home": "Home",
-        "menu": "Menú"
+        "menu": "Menú",
+        "language": {
+            "nb": "Noruego",
+            "me": "Montenegrino",
+            "it": "Italiano",
+            "sq": "Albanés",
+            "sl": "Esloveno",
+            "mk": "Macedonio",
+            "hr": "Croata",
+            "en": "Inglés",
+            "de": "Alemán"
+        },
+        "goToGraph": "Ir al gráfico",
+        "github": "GitHub",
+        "links": "Vínculos",
+        "donate": "Donaciones",
+        "about": "Sobre el proyecto"
     },
     "meta": {
         "description": "Seguimiento COVID-19 Eslovenia: todos los datos sobre COVID-19 en Eslovenia; actualizados, analizados y verificados.",
         "title": "Seguimiento COVID-19"
+    },
+    "charts": {
+        "common": {
+            "x_months": "{{ count }}m",
+            "x_months_plural": "{{ count }}m",
+            "to": "-",
+            "from": " ",
+            "dsSURS": "SURS",
+            "dsNIJZ": "NIJZ",
+            "twitter": "Twitter",
+            "facebook": "Facebook",
+            "linkFaq": "FAQ",
+            "sortBy": "Ordenar por:",
+            "yAxis": "Eje de ordenadas:",
+            "xAxis": "Eje de abscisas:",
+            "all": "Todo",
+            "resetZoomTitle": "Restablecer zoom a 1:1",
+            "resetZoom": "Restablecer zoom",
+            "zoom": "Zoom",
+            "loading": "Cargando datos…",
+            "dsOWD_MZ": "El Mundo en Datos &amp; Min. Salud",
+            "dsOWD_NIJZ": "El Mundo en Datos &amp; NIJZ",
+            "dsOWD": "El Mundo en Datos",
+            "dsMNZ": "MNZ",
+            "dsMZ": "Ministerio de Salud",
+            "dataSource": "fuente",
+            "dataDate": "Datos hasta: {{ date, %a., %e. %b. }}"
+        }
+    },
+    "infocard": {
+        "lastUpdated": "{{ date, %a, %b %e }}",
+        "testsHAT": "Testeos Hoy: RAT (testeos rápidos)",
+        "tests": "Testeos Hoy: PCR",
+        "deceasedToDate": "Muertes Confirmadas",
+        "icu": "En UTI",
+        "inHospital": "Hospitalizados",
+        "recoveredToDate": "Recuperados",
+        "newCases7dInfo": "promedio de los últimos 7 días",
+        "newCases7d": "Nuevos Casos",
+        "active": "Casos Activos",
+        "confirmedToDate": "Casos Confirmados",
+        "vaccinationSummary": "Personas Vacunadas"
+    },
+    "phase": {
+        "14": {
+            "description": "testeos rápidos de antígenos",
+            "title": "fase<br>14"
+        },
+        "13": {
+            "description": "nueva metodología de testeo",
+            "title": "fase<br>13"
+        },
+        "12": {
+            "description": "nueva metodología de testeo",
+            "title": "fase<br>12"
+        },
+        "11": {
+            "description": "epidemia",
+            "title": "fase<br>11"
+        },
+        "10": {
+            "title": "fase<br>10"
+        },
+        "9": {
+            "title": "fase<br>9"
+        },
+        "8": {
+            "description": "nueva metodología de testeo (niñxs)",
+            "title": "fase<br>8"
+        },
+        "7": {
+            "description": "fin de la epidemia",
+            "title": "fase<br>7"
+        },
+        "6": {
+            "description": "nueva metodología de testeo, estudio",
+            "title": "fase<br>6"
+        },
+        "5": {
+            "description": "nueva metodología de testeo",
+            "title": "fase<br>5"
+        },
+        "4": {
+            "description": "nueva metodología de testeo",
+            "title": "fase<br>4"
+        },
+        "3": {
+            "description": "nueva metodología de testeo",
+            "title": "fase<br>3"
+        },
+        "2": {
+            "description": "epidemia, nueva metodología de testeo",
+            "title": "fase<br>2"
+        },
+        "1": {
+            "title": "fase<br>1"
+        }
+    },
+    "weekdayShort": {
+        "6": "sab",
+        "5": "vie",
+        "4": "jue",
+        "3": "mie",
+        "2": "mar",
+        "1": "lun",
+        "0": "dom"
+    },
+    "weekday": {
+        "6": "sábado",
+        "5": "viernes",
+        "4": "jueves",
+        "3": "miércoles",
+        "2": "martes",
+        "1": "lunes",
+        "0": "domingo"
+    },
+    "week": "Semana",
+    "shortMonth": {
+        "11": "dec",
+        "10": "nov",
+        "9": "oct",
+        "8": "sep",
+        "7": "ago",
+        "6": "jul",
+        "5": "jun",
+        "4": "may",
+        "3": "apr",
+        "2": "mar",
+        "1": "feb",
+        "0": "ene"
+    },
+    "month": {
+        "11": "diciembre",
+        "10": "noviembre",
+        "9": "octubre",
+        "8": "septiembre",
+        "7": "agosto",
+        "6": "julio",
+        "5": "junio",
+        "4": "mayo",
+        "3": "abril",
+        "2": "marzo",
+        "1": "febrero",
+        "0": "enero"
+    },
+    "embedMaker": {
+        "copied": "Copiado!",
+        "copy": "Copiar",
+        "embedCode": "Incrustar código:",
+        "preview": "Previsualización:"
+    },
+    "tables": {
+        "day": "{{ date, %m/%d }}",
+        "sourceLink": "Planilla GDocs, formato CSV o API REST",
+        "tabByAgeFemale": "Por edad (mujeres)",
+        "tabByAgeMale": "Por edad (hombres)",
+        "tabByRegion": "Por región",
+        "tabSummary": "Resumen",
+        "title": "Tabla"
+    },
+    "notice": {
+        "weKnowWeDoNotKnow": "Sabemos que los datos a veces mienten. ¿Cómo sabemos que (no) sabemos? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
+        "newsText": "Mapamundi de Coronavirus 🌍- casos activos por millón de personas",
+        "bubble": "Viviendo en la burbuja. ¿Cómo limitar el contacto sin quedarse solx? 💭",
+        "checked": "🆕 Chequeado:",
+        "newMedium": "🆕 📝 Nueva publicación en Medium:",
+        "newPage": "🆕 Nueva página:",
+        "newChart": "🆕 📊 Nuevo gráfico:",
+        "newInfographics": "🆕 📇 Nuevo infográfico:"
+    },
+    "youtube": {
+        "titleMenu": "Animación"
+    },
+    "posts": {
+        "readingTime": "minutos de lectura",
+        "timestamp": "{{ date, %e. %B %Y }}"
+    },
+    "timestamp": {
+        "at": "a las {{ date, %H:%M }}",
+        "updated": "Actualizado el {{ date, %A, %B %e, %Y }}"
     }
 }
