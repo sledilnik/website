@@ -91,7 +91,7 @@ i18next.use(LanguageDetector).init({
     sq: { translation: sq },
     me: { translation: me },
     nb: { translation: nb },
-    nb: { translation: es },
+    es: { translation: es },
   },
   detection: detectionOptions,
   interpolation: {
