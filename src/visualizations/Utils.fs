@@ -311,19 +311,19 @@ module Dictionaries =
     let excludedRegions = Set.ofList ["si" ; "unknown" ; "foreign"; "t" ; "n"]
 
     let regions =
-        [ "si",  "SLOVENIJA",  Some 2095861
-          "ms",  "Pomurska",  Some 114238
-          "mb",  "Podravska",  Some 325994
-          "sg",  "Koroška",  Some 70755
-          "ce",  "Savinjska",  Some 257847
-          "za",  "Zasavska",  Some 57156
-          "kk",  "Posavska",  Some 75824
-          "nm",  "Jugovzhodna Slovenija",  Some 145357
-          "lj",  "Osrednjeslovenska",  Some 555274
-          "kr",  "Gorenjska",  Some 206621
-          "po",  "Primorsko-notranjska",  Some 52841
-          "ng",  "Goriška",  Some 118041
-          "kp",  "Obalno-kraška",  Some 115913
+        [ "si",  "SLOVENIJA",  Some 2100126
+          "ms",  "Pomurska",  Some 114397
+          "mb",  "Podravska",  Some 326510
+          "sg",  "Koroška",  Some 70835
+          "ce",  "Savinjska",  Some 258345
+          "za",  "Zasavska",  Some 57148
+          "kk",  "Posavska",  Some 75983
+          "nm",  "Jugovzhodna Slovenija",  Some 145859
+          "lj",  "Osrednjeslovenska",  Some 554823
+          "kr",  "Gorenjska",  Some 207842
+          "po",  "Primorsko-notranjska",  Some 53092
+          "ng",  "Goriška",  Some 118421
+          "kp",  "Obalno-kraška",  Some 116871
           "unknown", "TUJINA", None
           "foreign", "NEZNANO", None ]
         |> List.map
@@ -340,219 +340,218 @@ module Dictionaries =
 
     let municipalities =
         [
-            "ajdovščina", "Ajdovščina", "SI-001", 19418
-            "ankaran", "Ankaran/Ancarano", "SI-213", 3224
-            "apače", "Apače", "SI-195", 3533
-            "beltinci", "Beltinci", "SI-002", 8059
-            "benedikt", "Benedikt", "SI-148", 2615
-            "bistrica_ob_sotli", "Bistrica ob Sotli", "SI-149", 1336
-            "bled", "Bled", "SI-003", 7868
-            "bloke", "Bloke", "SI-150", 1564
-            "bohinj", "Bohinj", "SI-004", 5145
-            "borovnica", "Borovnica", "SI-005", 4579
-            "bovec", "Bovec", "SI-006", 3073
-            "braslovče", "Braslovče", "SI-151", 5639
-            "brda", "Brda", "SI-007", 5619
-            "brezovica", "Brezovica", "SI-008", 12671
-            "brežice", "Brežice", "SI-009", 24051
-            "cankova", "Cankova", "SI-152", 1734
-            "celje", "Celje", "SI-011", 49540
-            "cerklje_na_gorenjskem", "Cerklje na Gorenjskem", "SI-012", 7769
-            "cerknica", "Cerknica", "SI-013", 11580
-            "cerkno", "Cerkno", "SI-014", 4547
-            "cerkvenjak", "Cerkvenjak", "SI-153", 2083
-            "cirkulane", "Cirkulane", "SI-196", 2345
-            "črenšovci", "Črenšovci", "SI-015", 3968
-            "črna_na_koroškem", "Črna na Koroškem", "SI-016", 3285
-            "črnomelj", "Črnomelj", "SI-017", 14241
-            "destrnik", "Destrnik", "SI-018", 2643
-            "divača", "Divača", "SI-019", 4213
-            "dobje", "Dobje", "SI-154", 949
-            "dobrepolje", "Dobrepolje", "SI-020", 3878
-            "dobrna", "Dobrna", "SI-155", 2234
-            "dobrova-polhov_gradec", "Dobrova - Polhov Gradec", "SI-021", 7800
-            "dobrovnik", "Dobrovnik/Dobronak", "SI-156", 1284
-            "dol_pri_ljubljani", "Dol pri Ljubljani", "SI-022", 6310
-            "dolenjske_toplice", "Dolenjske Toplice", "SI-157", 3553
-            "domžale", "Domžale", "SI-023", 36675
-            "dornava", "Dornava", "SI-024", 2902
-            "dravograd", "Dravograd", "SI-025", 8884
-            "duplek", "Duplek", "SI-026", 6996
-            "gorenja_vas-poljane", "Gorenja vas - Poljane", "SI-027", 7557
-            "gorišnica", "Gorišnica", "SI-028", 4112
-            "gorje", "Gorje", "SI-207", 2738
-            "gornja_radgona", "Gornja Radgona", "SI-029", 8417
-            "gornji_grad", "Gornji Grad", "SI-030", 2476
-            "gornji_petrovci", "Gornji Petrovci", "SI-031", 1995
-            "grad", "Grad", "SI-158", 2042
-            "grosuplje", "Grosuplje", "SI-032", 21314
-            "hajdina", "Hajdina", "SI-159", 3879
-            "hoče-slivnica", "Hoče - Slivnica", "SI-160", 11753
-            "hodoš", "Hodoš/Hodos", "SI-161", 353
-            "horjul", "Horjul", "SI-162", 3024
-            "hrastnik", "Hrastnik", "SI-034", 9113
-            "hrpelje-kozina", "Hrpelje - Kozina", "SI-035", 4604
-            "idrija", "Idrija", "SI-036", 11811
-            "ig", "Ig", "SI-037", 7617
-            "ilirska_bistrica", "Ilirska Bistrica", "SI-038", 13297
-            "ivančna_gorica", "Ivančna Gorica", "SI-039", 17008
-            "izola", "Izola/Isola", "SI-040", 16486
-            "jesenice", "Jesenice", "SI-041", 21340
-            "jezersko", "Jezersko", "SI-163", 625
-            "juršinci", "Juršinci", "SI-042", 2380
-            "kamnik", "Kamnik", "SI-043", 29925
-            "kanal", "Kanal", "SI-044", 5291
-            "kidričevo", "Kidričevo", "SI-045", 6541
-            "kobarid", "Kobarid", "SI-046", 4052
-            "kobilje", "Kobilje", "SI-047", 542
-            "kočevje", "Kočevje", "SI-048", 15674
-            "komen", "Komen", "SI-049", 3529
-            "komenda", "Komenda", "SI-164", 6387
-            "koper", "Koper/Capodistria", "SI-050", 52630
-            "kostanjevica_na_krki", "Kostanjevica na Krki", "SI-197", 2432
-            "kostel", "Kostel", "SI-165", 635
-            "kozje", "Kozje", "SI-051", 2989
-            "kranj", "Kranj", "SI-052", 57065
-            "kranjska_gora", "Kranjska Gora", "SI-053", 5225
-            "križevci", "Križevci", "SI-166", 3537
-            "krško", "Krško", "SI-054", 26224
-            "kungota", "Kungota", "SI-055", 4724
-            "kuzma", "Kuzma", "SI-056", 1573
-            "laško", "Laško", "SI-057", 13067
-            "lenart", "Lenart", "SI-058", 8502
-            "lendava", "Lendava/Lendva", "SI-059", 10426
-            "litija", "Litija", "SI-060", 15499
-            "ljubljana", "Ljubljana", "SI-061", 295504
-            "ljubno", "Ljubno", "SI-062", 2550
-            "ljutomer", "Ljutomer", "SI-063", 11268
-            "log-dragomer", "Log - Dragomer", "SI-208", 3656
-            "logatec", "Logatec", "SI-064", 14396
-            "loška_dolina", "Loška dolina", "SI-065", 3757
-            "loški_potok", "Loški Potok", "SI-066", 1789
-            "lovrenc_na_pohorju", "Lovrenc na Pohorju", "SI-167", 2963
-            "luče", "Luče", "SI-067", 1448
-            "lukovica", "Lukovica", "SI-068", 5890
-            "majšperk", "Majšperk", "SI-069", 4056
-            "makole", "Makole", "SI-198", 2010
-            "maribor", "Maribor", "SI-070", 112682
-            "markovci", "Markovci", "SI-168", 4039
-            "medvode", "Medvode", "SI-071", 16829
-            "mengeš", "Mengeš", "SI-072", 8279
-            "metlika", "Metlika", "SI-073", 8470
-            "mežica", "Mežica", "SI-074", 3595
-            "miklavž_na_dravskem_polju", "Miklavž na Dravskem polju", "SI-169", 6929
-            "miren-kostanjevica", "Miren - Kostanjevica", "SI-075", 4977
-            "mirna", "Mirna", "SI-212", 2649
-            "mirna_peč", "Mirna Peč", "SI-170", 2988
-            "mislinja", "Mislinja", "SI-076", 4566
-            "mokronog-trebelno", "Mokronog - Trebelno", "SI-199", 3089
-            "moravče", "Moravče", "SI-077", 5449
-            "moravske_toplice", "Moravske Toplice", "SI-078", 5837
-            "mozirje", "Mozirje", "SI-079", 4150
-            "murska_sobota", "Murska Sobota", "SI-080", 18758
-            "muta", "Muta", "SI-081", 3414
-            "naklo", "Naklo", "SI-082", 5384
-            "nazarje", "Nazarje", "SI-083", 2639
-            "nova_gorica", "Nova Gorica", "SI-084", 31884
-            "novo_mesto", "Novo mesto", "SI-085", 37587
-            "odranci", "Odranci", "SI-086", 1632
-            "oplotnica", "Oplotnica", "SI-171", 4137
-            "ormož", "Ormož", "SI-087", 11906
-            "osilnica", "Osilnica", "SI-088", 353
-            "pesnica", "Pesnica", "SI-089", 7410
-            "piran", "Piran/Pirano", "SI-090", 17676
-            "pivka", "Pivka", "SI-091", 6201
-            "podčetrtek", "Podčetrtek", "SI-092", 3446
-            "podlehnik", "Podlehnik", "SI-172", 1801
-            "podvelka", "Podvelka", "SI-093", 2339
-            "poljčane", "Poljčane", "SI-200", 4449
-            "polzela", "Polzela", "SI-173", 6258
-            "postojna", "Postojna", "SI-094", 16442
-            "prebold", "Prebold", "SI-174", 5103
-            "preddvor", "Preddvor", "SI-095", 3714
-            "prevalje", "Prevalje", "SI-175", 6799
-            "ptuj", "Ptuj", "SI-096", 23530
-            "puconci", "Puconci", "SI-097", 5873
-            "rače-fram", "Rače - Fram", "SI-098", 7531
-            "radeče", "Radeče", "SI-099", 4139
-            "radenci", "Radenci", "SI-100", 5112
-            "radlje_ob_dravi", "Radlje ob Dravi", "SI-101", 6169
-            "radovljica", "Radovljica", "SI-102", 19072
-            "ravne_na_koroškem", "Ravne na Koroškem", "SI-103", 11348
-            "razkrižje", "Razkrižje", "SI-176", 1277
-            "rečica_ob_savinji", "Rečica ob Savinji", "SI-209", 2322
-            "renče-vogrsko", "Renče - Vogrsko", "SI-201", 4371
-            "ribnica", "Ribnica", "SI-104", 9527
-            "ribnica_na_pohorju", "Ribnica na Pohorju", "SI-177", 1116
-            "rogaška_slatina", "Rogaška Slatina", "SI-106", 11132
-            "rogašovci", "Rogašovci", "SI-105", 3024
-            "rogatec", "Rogatec", "SI-107", 3106
-            "ruše", "Ruše", "SI-108", 7017
-            "selnica_ob_dravi", "Selnica ob Dravi", "SI-178", 4493
-            "semič", "Semič", "SI-109", 3864
-            "sevnica", "Sevnica", "SI-110", 17642
-            "sežana", "Sežana", "SI-111", 13551
-            "slovenj_gradec", "Slovenj Gradec", "SI-112", 16591
-            "slovenska_bistrica", "Slovenska Bistrica", "SI-113", 25827
-            "slovenske_konjice", "Slovenske Konjice", "SI-114", 15042
-            "sodražica", "Sodražica", "SI-179", 2185
-            "solčava", "Solčava", "SI-180", 513
-            "središče_ob_dravi", "Središče ob Dravi", "SI-202", 1902
-            "starše", "Starše", "SI-115", 4046
-            "straža", "Straža", "SI-203", 3936
-            "sveta_ana", "Sveta Ana", "SI-181", 2294
-            "sveta_trojica_v_slovenskih_goricah", "Sveta Trojica v Slovenskih goricah", "SI-204", 2101
-            "sveti_andraž_v_slovenskih_goricah", "Sveti Andraž v Slovenskih goricah", "SI-182", 1180
-            "sveti_jurij_ob_ščavnici", "Sveti Jurij ob Ščavnici", "SI-116", 2782
-            "sveti_jurij_v_slovenskih_goricah", "Sveti Jurij v Slovenskih goricah", "SI-210", 2098
-            "sveti_tomaž", "Sveti Tomaž", "SI-205", 1988
-            "šalovci", "Šalovci", "SI-033", 1380
-            "šempeter-vrtojba", "Šempeter - Vrtojba", "SI-183", 6292
-            "šenčur", "Šenčur", "SI-117", 8814
-            "šentilj", "Šentilj", "SI-118", 8351
-            "šentjernej", "Šentjernej", "SI-119", 7199
-            "šentjur", "Šentjur", "SI-120", 19225
-            "šentrupert", "Šentrupert", "SI-211", 2969
-            "škocjan", "Škocjan", "SI-121", 3352
-            "škofja_loka", "Škofja Loka", "SI-122", 23297
-            "škofljica", "Škofljica", "SI-123", 11577
-            "šmarje_pri_jelšah", "Šmarje pri Jelšah", "SI-124", 10271
-            "šmarješke_toplice", "Šmarješke Toplice", "SI-206", 3462
-            "šmartno_ob_paki", "Šmartno ob Paki", "SI-125", 3265
-            "šmartno_pri_litiji", "Šmartno pri Litiji", "SI-194", 5642
-            "šoštanj", "Šoštanj", "SI-126", 8784
-            "štore", "Štore", "SI-127", 4529
-            "tabor", "Tabor", "SI-184", 1669
-            "tišina", "Tišina", "SI-010", 3970
-            "tolmin", "Tolmin", "SI-128", 11003
-            "trbovlje", "Trbovlje", "SI-129", 16105
-            "trebnje", "Trebnje", "SI-130", 13133
-            "trnovska_vas", "Trnovska vas", "SI-185", 1366
-            "trzin", "Trzin", "SI-186", 3940
-            "tržič", "Tržič", "SI-131", 14961
-            "turnišče", "Turnišče", "SI-132", 3145
-            "velenje", "Velenje", "SI-133", 33656
-            "velika_polana", "Velika Polana", "SI-187", 1392
-            "velike_lašče", "Velike Lašče", "SI-134", 4410
-            "veržej", "Veržej", "SI-188", 1325
-            "videm", "Videm", "SI-135", 5625
-            "vipava", "Vipava", "SI-136", 5703
-            "vitanje", "Vitanje", "SI-137", 2272
-            "vodice", "Vodice", "SI-138", 4985
-            "vojnik", "Vojnik", "SI-139", 8907
-            "vransko", "Vransko", "SI-189", 2624
-            "vrhnika", "Vrhnika", "SI-140", 17529
-            "vuzenica", "Vuzenica", "SI-141", 2649
-            "zagorje_ob_savi", "Zagorje ob Savi", "SI-142", 16439
-            "zavrč", "Zavrč", "SI-143", 1479
-            "zreče", "Zreče", "SI-144", 6550
-            "žalec", "Žalec", "SI-190", 21492
-            "železniki", "Železniki", "SI-146", 6720
-            "žetale", "Žetale", "SI-191", 1309
-            "žiri", "Žiri", "SI-147", 4933
-            "žirovnica", "Žirovnica", "SI-192", 4394
-            "žužemberk", "Žužemberk", "SI-193", 4702
-        ]
+            "ajdovščina", "Ajdovščina", "SI-001", 19671
+            "ankaran", "Ankaran/Ancarano", "SI-213", 3253
+            "apače", "Apače", "SI-195", 3541
+            "beltinci", "Beltinci", "SI-002", 8044
+            "benedikt", "Benedikt", "SI-148", 2611
+            "bistrica_ob_sotli", "Bistrica ob Sotli", "SI-149", 1341
+            "bled", "Bled", "SI-003", 7983
+            "bloke", "Bloke", "SI-150", 1603
+            "bohinj", "Bohinj", "SI-004", 5360
+            "borovnica", "Borovnica", "SI-005", 4625
+            "bovec", "Bovec", "SI-006", 3193
+            "braslovče", "Braslovče", "SI-151", 5640
+            "brda", "Brda", "SI-007", 5613
+            "brezovica", "Brezovica", "SI-008", 12771
+            "brežice", "Brežice", "SI-009", 24250
+            "cankova", "Cankova", "SI-152", 1746
+            "celje", "Celje", "SI-011", 49069
+            "cerklje_na_gorenjskem", "Cerklje na Gorenjskem", "SI-012", 7796
+            "cerknica", "Cerknica", "SI-013", 11668
+            "cerkno", "Cerkno", "SI-014", 4588
+            "cerkvenjak", "Cerkvenjak", "SI-153", 2170
+            "cirkulane", "Cirkulane", "SI-196", 2374
+            "črenšovci", "Črenšovci", "SI-015", 3995
+            "črna_na_koroškem", "Črna na Koroškem", "SI-016", 3271
+            "črnomelj", "Črnomelj", "SI-017", 14318
+            "destrnik", "Destrnik", "SI-018", 2640
+            "divača", "Divača", "SI-019", 4255
+            "dobje", "Dobje", "SI-154", 942
+            "dobrepolje", "Dobrepolje", "SI-020", 3894
+            "dobrna", "Dobrna", "SI-155", 2241
+            "dobrova-polhov_gradec", "Dobrova - Polhov Gradec", "SI-021", 7830
+            "dobrovnik", "Dobrovnik/Dobronak", "SI-156", 1273
+            "dol_pri_ljubljani", "Dol pri Ljubljani", "SI-022", 6315
+            "dolenjske_toplice", "Dolenjske Toplice", "SI-157", 3570
+            "domžale", "Domžale", "SI-023", 36648
+            "dornava", "Dornava", "SI-024", 2910
+            "dravograd", "Dravograd", "SI-025", 8891
+            "duplek", "Duplek", "SI-026", 6978
+            "gorenja_vas-poljane", "Gorenja vas - Poljane", "SI-027", 7631
+            "gorišnica", "Gorišnica", "SI-028", 4152
+            "gorje", "Gorje", "SI-207", 2759
+            "gornja_radgona", "Gornja Radgona", "SI-029", 8439
+            "gornji_grad", "Gornji Grad", "SI-030", 2490
+            "gornji_petrovci", "Gornji Petrovci", "SI-031", 2000
+            "grad", "Grad", "SI-158", 2055
+            "grosuplje", "Grosuplje", "SI-032", 21406
+            "hajdina", "Hajdina", "SI-159", 3905
+            "hoče-slivnica", "Hoče - Slivnica", "SI-160", 11721
+            "hodoš", "Hodoš/Hodos", "SI-161", 355
+            "horjul", "Horjul", "SI-162", 3014
+            "hrastnik", "Hrastnik", "SI-034", 9139
+            "hrpelje-kozina", "Hrpelje - Kozina", "SI-035", 4671
+            "idrija", "Idrija", "SI-036", 11793
+            "ig", "Ig", "SI-037", 7595
+            "ilirska_bistrica", "Ilirska Bistrica", "SI-038", 13337
+            "ivančna_gorica", "Ivančna Gorica", "SI-039", 17235
+            "izola", "Izola/Isola", "SI-040", 16589
+            "jesenice", "Jesenice", "SI-041", 21519
+            "jezersko", "Jezersko", "SI-163", 645
+            "juršinci", "Juršinci", "SI-042", 2397
+            "kamnik", "Kamnik", "SI-043", 29933
+            "kanal", "Kanal", "SI-044", 5295
+            "kidričevo", "Kidričevo", "SI-045", 6526
+            "kobarid", "Kobarid", "SI-046", 4045
+            "kobilje", "Kobilje", "SI-047", 540
+            "kočevje", "Kočevje", "SI-048", 15702
+            "komen", "Komen", "SI-049", 3549
+            "komenda", "Komenda", "SI-164", 6422
+            "koper", "Koper/Capodistria", "SI-050", 52773
+            "kostanjevica_na_krki", "Kostanjevica na Krki", "SI-197", 2443
+            "kostel", "Kostel", "SI-165", 674
+            "kozje", "Kozje", "SI-051", 3010
+            "kranj", "Kranj", "SI-052", 57133
+            "kranjska_gora", "Kranjska Gora", "SI-053", 5590
+            "križevci", "Križevci", "SI-166", 3542
+            "krško", "Krško", "SI-054", 26078
+            "kungota", "Kungota", "SI-055", 4796
+            "kuzma", "Kuzma", "SI-056", 1581
+            "laško", "Laško", "SI-057", 13085
+            "lenart", "Lenart", "SI-058", 8532
+            "lendava", "Lendava/Lendva", "SI-059", 10474
+            "litija", "Litija", "SI-060", 15593
+            "ljubljana", "Ljubljana", "SI-061", 294054
+            "ljubno", "Ljubno", "SI-062", 2564
+            "ljutomer", "Ljutomer", "SI-063", 11233
+            "log-dragomer", "Log - Dragomer", "SI-208", 3642
+            "logatec", "Logatec", "SI-064", 14514
+            "loška_dolina", "Loška dolina", "SI-065", 3770
+            "loški_potok", "Loški Potok", "SI-066", 1814
+            "lovrenc_na_pohorju", "Lovrenc na Pohorju", "SI-167", 2982
+            "luče", "Luče", "SI-067", 1444
+            "lukovica", "Lukovica", "SI-068", 5907
+            "majšperk", "Majšperk", "SI-069", 4042
+            "makole", "Makole", "SI-198", 2042
+            "maribor", "Maribor", "SI-070", 112395
+            "markovci", "Markovci", "SI-168", 4019
+            "medvode", "Medvode", "SI-071", 16781
+            "mengeš", "Mengeš", "SI-072", 8402
+            "metlika", "Metlika", "SI-073", 8458
+            "mežica", "Mežica", "SI-074", 3596
+            "miklavž_na_dravskem_polju", "Miklavž na Dravskem polju", "SI-169", 6980
+            "miren-kostanjevica", "Miren - Kostanjevica", "SI-075", 4976
+            "mirna", "Mirna", "SI-212", 2689
+            "mirna_peč", "Mirna Peč", "SI-170", 3018
+            "mislinja", "Mislinja", "SI-076", 4567
+            "mokronog-trebelno", "Mokronog - Trebelno", "SI-199", 3138
+            "moravče", "Moravče", "SI-077", 5479
+            "moravske_toplice", "Moravske Toplice", "SI-078", 5879
+            "mozirje", "Mozirje", "SI-079", 4216
+            "murska_sobota", "Murska Sobota", "SI-080", 18684
+            "muta", "Muta", "SI-081", 3415
+            "naklo", "Naklo", "SI-082", 5417
+            "nazarje", "Nazarje", "SI-083", 2650
+            "nova_gorica", "Nova Gorica", "SI-084", 31881
+            "novo_mesto", "Novo mesto", "SI-085", 37430
+            "odranci", "Odranci", "SI-086", 1630
+            "oplotnica", "Oplotnica", "SI-171", 4146
+            "ormož", "Ormož", "SI-087", 11916
+            "osilnica", "Osilnica", "SI-088", 347
+            "pesnica", "Pesnica", "SI-089", 7457
+            "piran", "Piran/Pirano", "SI-090", 18079
+            "pivka", "Pivka", "SI-091", 6196
+            "podčetrtek", "Podčetrtek", "SI-092", 3529
+            "podlehnik", "Podlehnik", "SI-172", 1825
+            "podvelka", "Podvelka", "SI-093", 2354
+            "poljčane", "Poljčane", "SI-200", 4469
+            "polzela", "Polzela", "SI-173", 6346
+            "postojna", "Postojna", "SI-094", 16518
+            "prebold", "Prebold", "SI-174", 5155
+            "preddvor", "Preddvor", "SI-095", 3776
+            "prevalje", "Prevalje", "SI-175", 6829
+            "ptuj", "Ptuj", "SI-096", 23636
+            "puconci", "Puconci", "SI-097", 5861
+            "rače-fram", "Rače - Fram", "SI-098", 7549
+            "radeče", "Radeče", "SI-099", 4142
+            "radenci", "Radenci", "SI-100", 5132
+            "radlje_ob_dravi", "Radlje ob Dravi", "SI-101", 6178
+            "radovljica", "Radovljica", "SI-102", 19034
+            "ravne_na_koroškem", "Ravne na Koroškem", "SI-103", 11343
+            "razkrižje", "Razkrižje", "SI-176", 1296
+            "rečica_ob_savinji", "Rečica ob Savinji", "SI-209", 2369
+            "renče-vogrsko", "Renče - Vogrsko", "SI-201", 4361
+            "ribnica", "Ribnica", "SI-104", 9619
+            "ribnica_na_pohorju", "Ribnica na Pohorju", "SI-177", 1127
+            "rogaška_slatina", "Rogaška Slatina", "SI-106", 11210
+            "rogašovci", "Rogašovci", "SI-105", 3046
+            "rogatec", "Rogatec", "SI-107", 3105
+            "ruše", "Ruše", "SI-108", 7002
+            "selnica_ob_dravi", "Selnica ob Dravi", "SI-178", 4579
+            "semič", "Semič", "SI-109", 3885
+            "sevnica", "Sevnica", "SI-110", 17729
+            "sežana", "Sežana", "SI-111", 13702
+            "slovenj_gradec", "Slovenj Gradec", "SI-112", 16609
+            "slovenska_bistrica", "Slovenska Bistrica", "SI-113", 25890
+            "slovenske_konjice", "Slovenske Konjice", "SI-114", 15161
+            "sodražica", "Sodražica", "SI-179", 2215
+            "solčava", "Solčava", "SI-180", 524
+            "središče_ob_dravi", "Središče ob Dravi", "SI-202", 1921
+            "starše", "Starše", "SI-115", 4034
+            "straža", "Straža", "SI-203", 3910
+            "sveta_ana", "Sveta Ana", "SI-181", 2298
+            "sveta_trojica_v_slovenskih_goricah", "Sveta Trojica v Slov. goricah", "SI-204", 2161
+            "sveti_andraž_v_slovenskih_goricah", "Sveti Andraž v Slov. goricah", "SI-182", 1184
+            "sveti_jurij_ob_ščavnici", "Sveti Jurij ob Ščavnici", "SI-116", 2789
+            "sveti_jurij_v_slovenskih_goricah", "Sveti Jurij v Slov. goricah", "SI-210", 2096
+            "sveti_tomaž", "Sveti Tomaž", "SI-205", 2007
+            "šalovci", "Šalovci", "SI-033", 1381
+            "šempeter-vrtojba", "Šempeter - Vrtojba", "SI-183", 6245
+            "šenčur", "Šenčur", "SI-117", 8797
+            "šentilj", "Šentilj", "SI-118", 8324
+            "šentjernej", "Šentjernej", "SI-119", 7216
+            "šentjur", "Šentjur", "SI-120", 19333
+            "šentrupert", "Šentrupert", "SI-211", 2983
+            "škocjan", "Škocjan", "SI-121", 3410
+            "škofja_loka", "Škofja Loka", "SI-122", 23336
+            "škofljica", "Škofljica", "SI-123", 11692
+            "šmarje_pri_jelšah", "Šmarje pri Jelšah", "SI-124", 10243
+            "šmarješke_toplice", "Šmarješke Toplice", "SI-206", 3507
+            "šmartno_ob_paki", "Šmartno ob Paki", "SI-125", 3291
+            "šmartno_pri_litiji", "Šmartno pri Litiji", "SI-194", 5672
+            "šoštanj", "Šoštanj", "SI-126", 8870
+            "štore", "Štore", "SI-127", 4511
+            "tabor", "Tabor", "SI-184", 1667
+            "tišina", "Tišina", "SI-010", 3953
+            "tolmin", "Tolmin", "SI-128", 10997
+            "trbovlje", "Trbovlje", "SI-129", 16014
+            "trebnje", "Trebnje", "SI-130", 13262
+            "trnovska_vas", "Trnovska vas", "SI-185", 1368
+            "trzin", "Trzin", "SI-186", 3929
+            "tržič", "Tržič", "SI-131", 15003
+            "turnišče", "Turnišče", "SI-132", 3193
+            "velenje", "Velenje", "SI-133", 33638
+            "velika_polana", "Velika Polana", "SI-187", 1391
+            "velike_lašče", "Velike Lašče", "SI-134", 4452
+            "veržej", "Veržej", "SI-188", 1344
+            "videm", "Videm", "SI-135", 5680
+            "vipava", "Vipava", "SI-136", 5763
+            "vitanje", "Vitanje", "SI-137", 2277
+            "vodice", "Vodice", "SI-138", 4956
+            "vojnik", "Vojnik", "SI-139", 8980
+            "vransko", "Vransko", "SI-189", 2642
+            "vrhnika", "Vrhnika", "SI-140", 17655
+            "vuzenica", "Vuzenica", "SI-141", 2655
+            "zagorje_ob_savi", "Zagorje ob Savi", "SI-142", 16402
+            "zavrč", "Zavrč", "SI-143", 1485
+            "zreče", "Zreče", "SI-144", 6586
+            "žalec", "Žalec", "SI-190", 21557
+            "železniki", "Železniki", "SI-146", 6686
+            "žetale", "Žetale", "SI-191", 1311
+            "žiri", "Žiri", "SI-147", 4952
+            "žirovnica", "Žirovnica", "SI-192", 4425
+            "žužemberk", "Žužemberk", "SI-193", 4694        ]
         |> List.map (fun (key, name, code, population) -> key,  { Key = key ; Name = name ; Code = code ; Population = population})
         |> Map.ofList
 

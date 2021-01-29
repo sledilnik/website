@@ -15,6 +15,10 @@ export default {
     titleKey: 'charts.patients.titleMenu',
     icon: 'column',
   },
+  'icu-patients-chart': {
+    titleKey: 'charts.icuPatients.titleMenu',
+    icon: 'column',
+  },
   'care-patients-chart': {
     titleKey: 'charts.carePatients.titleMenu',
     icon: 'column',

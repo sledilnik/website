@@ -34,7 +34,10 @@ type Cases =
     }
 
 type Vaccination =
-    { Administered : TodayToDate }
+    { Administered : TodayToDate
+      Administered2nd : TodayToDate
+      Used : TodayToDate
+      Delivered : TodayToDate }
 
 type Treatment =
     { InHospital : int option
@@ -128,6 +131,8 @@ type WeeklyStatsDataPoint =
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
+      HealthcareMaleCases : int option
+      HealthcareFemaleCases : int option
       RetirementHomeOccupantCases : int option
       SentToQuarantine : int option
       Location : InfectionLocation
@@ -164,6 +169,7 @@ type VisualizationType =
     | MetricsComparison
     | DailyComparison
     | Patients
+    | IcuPatients
     | CarePatients
     | Ratios
     | HCenters

@@ -1,0 +1,17 @@
+{
+    "navbar": {
+        "faq": "Preguntas frecuentes",
+        "animation": "Animaciones",
+        "models": "Modelos",
+        "posts": "Publicaciones",
+        "data": "Datos",
+        "ostanizdrav": "#OstaniZdrav",
+        "world": "Mundo",
+        "home": "Home",
+        "menu": "Menú"
+    },
+    "meta": {
+        "description": "Seguimiento COVID-19 Eslovenia: todos los datos sobre COVID-19 en Eslovenia; actualizados, analizados y verificados.",
+        "title": "Seguimiento COVID-19"
+    }
+}

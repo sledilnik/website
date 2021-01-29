@@ -254,13 +254,15 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
-            "vaccinationAdministered": "Vaccinated",
+            "vaccinationAdministered": "Vaccinated 💉",
+            "vaccinationAdministered2nd": "Vaccinated 💉💉",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
             "icu": "In ICU",
             "icuAdmitted": "Admitted to ICU",
             "icuDischarged": "Discharged from ICU",
+            "niVentilator": "On Ventilator (non-invasive)",
             "ventilator": "On Ventilator (intubated)",
             "ventilatorAdmitted": "Connected to Ventilator (intubated)",
             "ventilatorDischarged": "Disconnected from Ventilator (extubated)",
@@ -318,19 +320,28 @@
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
-            "care": "In Care",
+            "acute": "Acute Unit",
+            "care": "Nursing Unit",
             "admitted": "Admitted",
             "hospitalized": "Hospitalized",
-            "icu": "In ICU",
+            "icu": "ICU",
+            "niVentilator": "On Ventilator (non-invasive)",
             "ventilator": "On Ventilator (intubated)",
             "discharged": "Discharged",
             "deceased": "Died",
-            "icu-deceased": "Died (ICU)",
+            "icu-deceased": "Died",
+            "icu-admitted": "Admitted in ICU",
+            "icu-discharged": "Discharged from ICU",
+            "icu-other": "Without Ventilator",
             "allHospitals": "All Hospitals"
         },
+        "icuPatients": {
+            "title": "Intensive Care",
+            "titleMenu": "Intensive Care"
+        },
         "carePatients": {
-            "title": "Care Hospitals",
-            "titleMenu": "Care Hospitals"
+            "title": "Nursing Hospitals",
+            "titleMenu": "Nursing Hospitals"
         },
         "ratios": {
             "title": "Share of Serious Cases",
@@ -366,8 +377,12 @@
             "title": "Cases in Health Care and Retirement Homes, weekly",
             "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
-            "all": "All",
+            "absolute": "Absolute",
             "relative": "Relative",
+            "structure": "Structure",
+            "healthcare": "Healh Care by Gender",
+            "healthcareMaleCases": "Health Care - Male",
+            "healthcareFemaleCases": "Health Care - Female",
             "healthcareEmployeesCases": "Health Care Employees",
             "rhOccupantCases": "Retirement Home Residents",
             "totalConfirmed": "All Confirmed",
@@ -1010,6 +1025,18 @@
         "planRelaxation2": {
             "title": "Plan",
             "description": "Government has accepted the revised plan of relaxation of measures in five phases."
+        },
+        "gym": {
+            "title": "Gym",
+            "description": "Closure of gyms, pools, sport facilities (with exceptions).<br>Closing of museums and galleries. Libraries open only for pick-up."
+        },
+        "liftRegions": {
+            "title": "Regions",
+            "description": "Relaxation: shops for children, museums, galleries, libraries and ski-resorts are open in some regions."
+        },
+        "liftSchools3": {
+            "title": "Schools 3",
+            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions."
         }
     },
     "days": {
@@ -1656,7 +1683,7 @@
             "title": "Monthly recurring donation",
             "stripe": {
                 "description": "A regular monthly donation gives us a stable income and distributes your costs evenly throughout the year. Please choose your monthly amount below to pay **by credit card**:",
-                "donateButton": "{{amount}} / month",
+                "donateButton": "{{amount}} per month",
                 "stopping": "You can stop your donation at any time. Just drop us a line at drustvo@sledilnik.org.",
                 "success": {
                     "title": "Thank you for your monthly recurring donation",
@@ -1670,7 +1697,7 @@
         },
         "other": {
             "title": "Other ways of support",
-            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for open data, suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
         }
     }
 }

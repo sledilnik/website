@@ -22,6 +22,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "MetricsComparison" -> Some MetricsComparison
             | "DailyComparison" -> Some DailyComparison
             | "Patients" -> Some Patients
+            | "IcuPatients" -> Some IcuPatients
             | "CarePatients" -> Some CarePatients
             | "Ratios" -> Some Ratios
             | "Tests" -> Some Tests
@@ -281,6 +282,13 @@ let render (state: State) (_: Msg -> unit) =
             ChartTextsGroup = "patients"
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
+
+    let patientsICU =
+          { VisualizationType = IcuPatients
+            ClassName = "icu-patients-chart"
+            ChartTextsGroup = "icuPatients"
+            Explicit = false
+            Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitalsICU |} }
 
     let patientsCare =
           { VisualizationType = CarePatients
@@ -549,7 +557,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests;
-          patients; patientsCare; deceased; metricsCorrelation; excessDeaths
+          patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
           ageGroupsTimeline; weeklyDemographics; ageGroups; 
           infections; hcCases;
@@ -572,7 +580,7 @@ let render (state: State) (_: Msg -> unit) =
         [ metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
-          cases; patients; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
+          cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; hcCases; sources
           countriesCasesPer100k
           countriesActiveCasesPer100k

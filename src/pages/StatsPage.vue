@@ -22,11 +22,13 @@
           <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
+<!-- COMMENT OUT
       <b-row cols="12">
         <b-col>
           <Youtube id="zJtKZ82jXAI"></Youtube>
         </b-col>
       </b-row>
+     COMMENT OUT -->
     </b-container>
     <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
@@ -52,7 +54,7 @@ export default {
     TimeStamp,
     PostTeaser,
     PostTeaserSkeleton,
-    Youtube,
+    //Youtube,
     FloatingMenu,
   },
   data() {

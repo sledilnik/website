@@ -67,7 +67,10 @@ type private TransferStatsDataPoint =
            other : int option |}
       vaccination :
         {|
-            administered : {| toDate : int option; today : int option |} 
+            administered : {| toDate : int option |} 
+            administered2nd : {| toDate : int option |} 
+            used : {| toDate : int option |} 
+            delivered : {| toDate : int option |} 
         |}
     }
 
@@ -110,7 +113,10 @@ type private TransferStatsDataPoint =
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
           UnclassifiedPositiveTestsToDate = this.cases.unclassified.confirmedToDate
           Vaccination =
-            { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today } }
+            { Administered = { ToDate = this.vaccination.administered.toDate; Today = None } 
+              Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = None }
+              Used = { ToDate = this.vaccination.used.toDate; Today = None }
+              Delivered = { ToDate = this.vaccination.delivered.toDate; Today = None } }
         }
 
 type private TransferStatsData = TransferStatsDataPoint list

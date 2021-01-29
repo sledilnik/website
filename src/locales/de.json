@@ -23,7 +23,8 @@
         "animation": "Animation",
         "ostanizdrav": "#OstaniZdrav",
         "goToGraph": "Gehe zum Diagramm",
-        "posts": "Objave"
+        "posts": "Objave",
+        "donate": "Spenden Sie!"
     },
     "country": {
         "ABW": "Aruba",
@@ -447,9 +448,14 @@
             "allHospitals": "Alle Krankenhäuser",
             "hospitalized": "Hospitalisierte",
             "ventilator": "An Beatmungsgeräten",
-            "care": "In Pflege",
+            "care": "Pflegeabteilung",
             "titleMenu": "Hospitalisiert",
-            "icu-deceased": "Verstorbene (Intensivstationen)"
+            "icu-deceased": "Verstorbene",
+            "icu-other": "Ohne Beatmung",
+            "icu-discharged": "Aus Intensivstation entlassen",
+            "icu-admitted": "Aufgenommen auf Intensivstation",
+            "niVentilator": "An Beatmungsgeräten (nicht-invasiv)",
+            "acute": "Akutmedizinische Abteilung"
         },
         "hCenters": {
             "suspectedCovidPhone": "Verdacht auf COVID-19 (Telefon)",
@@ -516,7 +522,9 @@
             "titleMenu_MNE": "Montenegro – Lage",
             "titleMenu_MKD": "N. Mazedonien – Lage",
             "titleMenu_SVN": "Slowenien – Lage",
-            "vaccinationAdministered": "Geimpft"
+            "vaccinationAdministered": "Geimpft 💉",
+            "niVentilator": "Unter Beatmung (nicht-invasiv)",
+            "vaccinationAdministered2nd": "Geimpft 💉💉"
         },
         "hospitals": {
             "bedsICU": "Intensivbetten",
@@ -559,8 +567,8 @@
             "hagt": "Standard: RAT",
             "positiveTotal": "Positive gesamt",
             "positivePCR": "Positive PCR",
-            "positiveHAT": "Positive HAT",
-            "positiveSplit": "Positive PCR und HAT"
+            "positiveHAT": "Positive RAT",
+            "positiveSplit": "Positive PCR und RAT"
         },
         "regions": {
             "activeCases": "Aktive Fälle",
@@ -640,8 +648,8 @@
             "icuAdmitted": "Auf Intensivstation eingewiesen",
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "titleMenu": "Wochentag – Vergleich",
-            "positivePctHAT": "Anteil der positiven Tests: HAT (%)",
-            "testsHAT": "Durchgeführte Tests: HAT",
+            "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
+            "testsHAT": "Durchgeführte Tests: RAT",
             "vaccinated": "Geimpfte Personen"
         },
         "ostanizdrav": {
@@ -761,8 +769,8 @@
             "title": "Phasendiagramm"
         },
         "carePatients": {
-            "titleMenu": "Pflege-Krankenhäuser",
-            "title": "Pflege-Krankenhäuser"
+            "titleMenu": "Pflegekrankenhäuser",
+            "title": "Pflegekrankenhäuser"
         },
         "hcCases": {
             "totalConfirmed": "Alle bestätigte",
@@ -776,7 +784,12 @@
             "relative": "Relativ",
             "all": "Alle",
             "otherCases": "Andere Personen",
-            "rhOccupantCases": "Bewohner in Altersheimen"
+            "rhOccupantCases": "Bewohner in Altersheimen",
+            "absolute": "Absolut",
+            "healthcareFemaleCases": "Gesundheitswesen – weiblich",
+            "healthcare": "Gesundheitswesen nach Geschlecht",
+            "healthcareMaleCases": "Gesundheitswesen – männlich",
+            "structure": "Struktur"
         },
         "countriesNewDeathsPer100k": {
             "legendTitle": "Neue tägliche Todesfälle pro 100.000 Menschen",
@@ -798,7 +811,16 @@
             "title": "Todesfälle",
             "deceasedByAgeTodayRelative": "Tägliche Todesfälle nach Alter (relativ)",
             "deceasedByAgeToday": "Tägliche Todesfälle nach Alter",
-            "disclaimer": "Hinweis: Daten für Verstorbene nach Alter werden wöchentlich angegeben, daher sind sie für die letzten zwei Wochen nicht vollständig."
+            "disclaimer": "Hinweis: Daten für Verstorbene nach Alter und Daten aus Seniorenheimen werden wöchentlich angegeben, daher sind sie für die letzten zwei Wochen nicht vollständig.",
+            "deceased-other": "Andere",
+            "deceased-rhoccupant": "Bewohner von Seniorenheimen",
+            "deceasedByAge": "Alter",
+            "deceasedByType": "Seniorenheime",
+            "deceasedHospitals": "Ort des Todes",
+            "showPercent": "Verhältnis",
+            "showNormal": "Absolut",
+            "showToDate": "Bis heute",
+            "showToday": "Täglich"
         },
         "excessDeaths": {
             "excess": {
@@ -843,6 +865,10 @@
             "ageGroup": "Altersgruppe",
             "titleMenu": "Altersgruppen – wöchentlich",
             "title": "Wöchentliche Fälle – Demografie"
+        },
+        "icuPatients": {
+            "titleMenu": "Intensivbehandlung",
+            "title": "Intensivbehandlung"
         }
     },
     "tableDict": {
@@ -1452,5 +1478,12 @@
     "posts": {
         "timestamp": "{{ date, %e. %B %Y }}",
         "readingTime": "min"
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} pro Monat"
+            }
+        }
     }
 }

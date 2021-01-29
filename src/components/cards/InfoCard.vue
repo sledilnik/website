@@ -1,5 +1,5 @@
 <template>
-  <div class="hp-card-holder">
+  <div class="hp-card-holder" :class="['cardtype-'+cardName]">
     <div class="hp-card" v-if="!loading">
       <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
@@ -12,27 +12,27 @@
           {{ cardData.diffPercentage | percent }}
         </div>
       </div>
-      <div :id="cardName" class="card-diff" :class="['cardtype-'+cardName]">
+      <div :id="cardName" class="card-diff">
         <div v-if="cardData.subTitle">
           <span class="card-note">{{ cardData.subTitle }} <span>{{ subLabelExtraText }}</span></span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.in"
-          class="card-diff-item"
+          class="card-diff-item in"
         >
           <div class="trend-icon in" :class="[cardData.flipGoodDirection ? 'good up' : 'bad up']"></div>
           <span class="in" :class="[cardData.flipGoodDirection ? 'good' : 'bad']">{{ cardData.subValues.in | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.out"
-          class="card-diff-item"
+          class="card-diff-item out"
         >
           <div class="trend-icon out good down"></div>
           <span class="out good">{{ cardData.subValues.out | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.deceased"
-          class="card-diff-item"
+          class="card-diff-item deceased"
         >
           <div class="trend-icon deceased"></div>
           <span class="deceased"
@@ -41,14 +41,14 @@
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.positive"
-          class="card-diff-item"
+          class="card-diff-item positive"
         >
           <div class="trend-icon positive bad"></div>
           <span class="positive bad">{{ cardData.subValues.positive | number }}</span>
         </div>
         <div
           v-if="cardData.subValues && cardData.subValues.percent"
-          class="card-diff-item"
+          class="card-diff-item percent"
         >
           <div class="trend-icon percent tests"></div>
           <span class="percent tests">{{ cardData.subValues.percent | number }}</span>
@@ -273,13 +273,48 @@ export default {
  */
 
 .cardtype-vaccinationSummary {
-  .in {  display: none; } // DISABLED temporarily
   .percent {
     &.trend-icon {
       background-color: #a0a0a0;
     }
     &.tests {
       color: #a0a0a0;
+    }
+  }
+  .up{
+    -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+    mask: url(../../assets/svg/syringe.svg) no-repeat center;
+    -webkit-mask-size: 20px;
+    mask-size: 20px;
+  }
+  .card-diff{
+    display: flex;
+    &:before{
+      content: "";
+      width: 20px;
+      height: 20px;
+      background-color: #20b16d;
+      display: inline-block;
+      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      -webkit-mask-size: 20px;
+      mask-size: 20px;
+      margin-right: -8px;
+    }
+  }
+  .card-number{
+    display: flex;
+    align-items: center;
+    &::before{
+      content: "";
+      width: 24px;
+      height: 24px;
+      background-color: #000000;
+      display: inline-block;
+      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      mask: url(../../assets/svg/syringe.svg) no-repeat center;
+      -webkit-mask-size: 24px;
+      mask-size: 24px;
     }
   }
 }
