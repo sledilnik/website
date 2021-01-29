@@ -13,7 +13,7 @@ import mk from './locales/mk.json'
 import sq from './locales/sq.json'
 import me from './locales/me.json'
 import nb from './locales/nb_NO.json'
-import nb from './locales/es.json'
+import es from './locales/es.json'
 
 import {Highcharts} from './visualizations/_highcharts'
 
