@@ -180,6 +180,7 @@ type VisualizationType =
     | Spread
     | Regions
     | Regions100k
+    | Schools
     | Sources
     | Municipalities
     | AgeGroups

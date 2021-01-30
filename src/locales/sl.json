@@ -719,6 +719,7 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsSURS": "SURS",
+            "dsMIZS": "MIZŠ",
             "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
@@ -1230,6 +1231,24 @@
                 "users": "Uporabnikov",
                 "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
             }
+        },
+        "schools": {
+            "title": "Primeri v vrtcih in šolah",
+            "titleMenu": "Vrtci in šole",
+            "active": "Aktivni",
+            "today": "Na dan",
+            "kindergarten": "Vrtec",
+            "elementary": "Osnovna šola",
+            "highschool": "Srednja šola",
+            "elementary_special": "OŠ posebni program",
+            "music": "Glasbena šola",
+            "dormitory": "Dijaški dom",
+            "institutions": "Zavodi",
+            "employeesCases": "Zaposleni - potrjeni",
+            "attendeesCases": "Učenci - potrjeni",
+            "attendeesQuarantine": "Učenci - karantena",
+            "unitsQuarantine": "Oddelki - karantena",
+            "unitsRemote": "Oddelki - na daljavo"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
