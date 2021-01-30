@@ -18,7 +18,8 @@
             "mk": "Macedonio",
             "hr": "Croata",
             "en": "Inglés",
-            "de": "Alemán"
+            "de": "Alemán",
+            "es": "Español"
         },
         "goToGraph": "Ir al gráfico",
         "github": "GitHub",
@@ -70,7 +71,8 @@
         "newCases7d": "Nuevos Casos",
         "active": "Casos Activos",
         "confirmedToDate": "Casos Confirmados",
-        "vaccinationSummary": "Personas Vacunadas"
+        "vaccinationSummary": "Personas Vacunadas",
+        "incidence": "Incidencia acumulada a 14 días"
     },
     "phase": {
         "14": {
