@@ -56,7 +56,44 @@
             "dsMNZ": "MNZ",
             "dsMZ": "Ministerio de Salud",
             "dataSource": "fuente",
-            "dataDate": "Datos hasta: {{ date, %a., %e. %b. }}"
+            "dataDate": "Datos hasta: {{ date, %a., %e. %b. }}",
+            "view": "Visualización:",
+            "showAll": "Mostrar todo",
+            "hideAll": "Ocultar todo",
+            "weekYearDateFormat": "Semana %W de %Y",
+            "shortDateFormat": "%b %e",
+            "longDateFormat": "%B %e, %Y",
+            "dateFormat": "%A, %B %e, %Y",
+            "numDateFormat": "%m/%d/%Y",
+            "close": "Cerrar",
+            "share": "Compartir",
+            "webpage": "Página web",
+            "log": "Logarítmica",
+            "linear": "Lineal"
+        },
+        "metricsComparison": {
+            "icuDischarged": "Altas de UTI",
+            "icuAdmitted": "Ingresos a UTI",
+            "icu": "En UTI",
+            "hospitalDischarged": "Altas",
+            "hospitalAdmitted": "Internaciones",
+            "recovered": "Recuperaciones",
+            "hospitalized": "Hospitalizaciones",
+            "vaccinationAdministered2nd": "Vacunaciones 💉💉",
+            "vaccinationAdministered": "Vacunaciones 💉",
+            "activeCases": "Casos Activos",
+            "confirmedCases": "Casos Confirmados",
+            "testsPerformed": "Testeos: PCR",
+            "show7DaysAverage": "Promedio 7 días",
+            "showToDate": "A la fecha",
+            "showToday": "Diario",
+            "titleMenu_MNE": "Montenegro: situación",
+            "titleMenu_MKD": "Macedonia del Norte: situación",
+            "titleMenu_SVN": "Eslovenia: situación",
+            "title_MNE": "Situación en Montenegro",
+            "title_MKD": "Situación en Macedonia del Norte",
+            "title_SVN": "Situación en Eslovenia",
+            "title": "Situación en el país"
         }
     },
     "infocard": {
@@ -92,10 +129,12 @@
             "title": "fase<br>11"
         },
         "10": {
-            "title": "fase<br>10"
+            "title": "fase<br>10",
+            "description": "rastreo de contactos interrumpido"
         },
         "9": {
-            "title": "fase<br>9"
+            "title": "fase<br>9",
+            "description": "cambio a rastreo de contactos parcial"
         },
         "8": {
             "description": "nueva metodología de testeo (niñxs)",
@@ -180,7 +219,12 @@
         "copied": "Copiado!",
         "copy": "Copiar",
         "embedCode": "Incrustar código:",
-        "preview": "Previsualización:"
+        "preview": "Previsualización:",
+        "descriptionPart2": "haga clic aquí.",
+        "descriptionPart1": "La visualización a incluir puede ser modificada de acuerdo a sus necesidades: cambiar el tamaño o limitarla a una región o municipalidad específica. Para saber más, ",
+        "description": "La visualización a incluir puede ser modificada de acuerdo a sus necesidades: cambiar el tamaño o limitarla a una región o municipalidad específica. <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">Ver más</a>.",
+        "chooseChart": "Elija un gráfico",
+        "title": "Incluya este gráfico en su página web"
     },
     "tables": {
         "day": "{{ date, %m/%d }}",
@@ -189,7 +233,8 @@
         "tabByAgeMale": "Por edad (hombres)",
         "tabByRegion": "Por región",
         "tabSummary": "Resumen",
-        "title": "Tabla"
+        "title": "Tabla",
+        "source": "Datos en otros formatos"
     },
     "notice": {
         "weKnowWeDoNotKnow": "Sabemos que los datos a veces mienten. ¿Cómo sabemos que (no) sabemos? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
@@ -199,10 +244,15 @@
         "newMedium": "🆕 📝 Nueva publicación en Medium:",
         "newPage": "🆕 Nueva página:",
         "newChart": "🆕 📊 Nuevo gráfico:",
-        "newInfographics": "🆕 📇 Nuevo infográfico:"
+        "newInfographics": "🆕 📇 Nuevo infográfico:",
+        "restrictions": "Medidas y restricciones en vigencia",
+        "weeklyIncrease": "Incremento Semanal en las municipalidades y regiones de 🇸🇮",
+        "progressC19": "Progreso típico de COVID-19. Hospitalización, terapia intensiva y mortalidad.",
+        "tests": "5 mitos sobre el testeo…"
     },
     "youtube": {
-        "titleMenu": "Animación"
+        "titleMenu": "Animación",
+        "title": "Animación de la extensión del COVID-19"
     },
     "posts": {
         "readingTime": "minutos de lectura",
@@ -211,5 +261,12 @@
     "timestamp": {
         "at": "a las {{ date, %H:%M }}",
         "updated": "Actualizado el {{ date, %A, %B %e, %Y }}"
+    },
+    "donation": {
+        "monthly": {
+            "stripe": {
+                "donateButton": "{{amount}} por mes"
+            }
+        }
     }
 }
