@@ -46,6 +46,7 @@ const mdContent = {
     en: dataMdEn,
     hr: dataMdHr,
     de: dataMdDe,
+    it: dataMdIt,
     es: dataMdEs,
   },
   models: {
@@ -53,6 +54,7 @@ const mdContent = {
     en: modelsMdEn,
     hr: modelsMdHr,
     de: modelsMdDe,
+    it: modelsMdIt,
     es: modelsMdEs,
   },
 }
