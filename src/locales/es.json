@@ -72,13 +72,13 @@
             "linear": "Lineal"
         },
         "metricsComparison": {
-            "icuDischarged": "Altas de UTI",
+            "icuDischarged": "Dados de Alta de UTI",
             "icuAdmitted": "Ingresos a UTI",
             "icu": "En UTI",
-            "hospitalDischarged": "Altas",
-            "hospitalAdmitted": "Internaciones",
+            "hospitalDischarged": "Dados de Alta de Hospital",
+            "hospitalAdmitted": "Ingresados a Hospital",
             "recovered": "Recuperaciones",
-            "hospitalized": "Hospitalizaciones",
+            "hospitalized": "Hospitalizados",
             "vaccinationAdministered2nd": "Vacunaciones 💉💉",
             "vaccinationAdministered": "Vacunaciones 💉",
             "activeCases": "Casos Activos",
@@ -93,7 +93,83 @@
             "title_MNE": "Situación en Montenegro",
             "title_MKD": "Situación en Macedonia del Norte",
             "title_SVN": "Situación en Eslovenia",
-            "title": "Situación en el país"
+            "title": "Situación en el país",
+            "deceased": "Muertes",
+            "ventilatorDischarged": "Desconectados de Respirador (desentubados)",
+            "ventilator": "En Respirador (entubados)",
+            "ventilatorAdmitted": "Conectados a Respirador (entubados)",
+            "niVentilator": "En Respirador (no invasivo)",
+            "showActive": "Activos"
+        },
+        "hospitals": {
+            "bedsICU": "Camas en UTI",
+            "bedsICUShort": "Camas UTI",
+            "bedsMax": "Camas, máximo",
+            "bedsAll": "Camas, todas",
+            "beds70": "Camas, 70%",
+            "bedsICUFull": "Camas UTI, llenas",
+            "bedsFull": "Camas, llenas",
+            "bedsICUAll": "Camas UTI, todas",
+            "bedsICU70": "Camas ITU, 70%",
+            "empty": "Vacío",
+            "full": "Completo",
+            "all": "Todos",
+            "max": "Max",
+            "data": "Datos",
+            "allHospitals": "Todos los hospitales",
+            "beds": "Camas en hospitales",
+            "bedsShort": "Camas"
+        },
+        "phaseDiagram": {
+            "hospitalized": "Hospitalizados"
+        },
+        "spread": {
+            "hospitalized": "hospitalizados"
+        },
+        "metricsCorrelation": {
+            "hospitalized": "Hospitalizados"
+        },
+        "ratios": {
+            "hospitalDeceasedShare": "Porción de Muertes en Hospital",
+            "hospitalMortality": "Mortalidad en Hospitales",
+            "deceasedHospital": "Muertes",
+            "ventilatorHospital": "En Respirador (entubado)",
+            "icuHospital": "En ITU",
+            "hospitalCases": "Hospitalizados",
+            "hospitalizations": "Hospitalizaciones"
+        },
+        "patients": {
+            "allHospitals": "Todos Hospitales",
+            "hospitalized": "Hospitalizado",
+            "hospitalizedIn": "Hospitalizado en:",
+            "byHospital": "Por Hospital",
+            "titleMenu": "Hospitalizaciones",
+            "title": "Hospitalizaciones"
+        },
+        "cases": {
+            "deceased-hospital": "Muertes (en hospital)",
+            "hospitalized": "Hospitalizados"
+        },
+        "deceased": {
+            "deceased-rest": "Fuera de Hospital",
+            "deceasedHospitals": "Lugar de Defunción",
+            "titleMenu": "Muertes",
+            "title": "Muertes"
+        },
+        "dailyComparison": {
+            "hospitalDischarged": "Dados de Alta de Hospital",
+            "deceased": "Muertes",
+            "icuAdmitted": "Ingresados a UTI",
+            "hospitalAdmitted": "Ingresados a Hospital",
+            "positivePctHAT": "% Positivos: RAT",
+            "testsHAT": "Testeos Realizados: RAT",
+            "positivePct": "% Positivos: PCR",
+            "tests": "Testeos Realizados: PCR",
+            "vaccinated": "Personas Vacunadas",
+            "active": "Casos Activos",
+            "new": "Casos Confirmados",
+            "title": "Comparación por Día de Semana",
+            "titleMenu": "Día de Semana: Comparación"
         }
     },
     "infocard": {
@@ -216,7 +292,7 @@
         "0": "enero"
     },
     "embedMaker": {
-        "copied": "Copiado!",
+        "copied": "¡Copiado!",
         "copy": "Copiar",
         "embedCode": "Incrustar código:",
         "preview": "Previsualización:",
@@ -248,7 +324,8 @@
         "restrictions": "Medidas y restricciones en vigencia",
         "weeklyIncrease": "Incremento Semanal en las municipalidades y regiones de 🇸🇮",
         "progressC19": "Progreso típico de COVID-19. Hospitalización, terapia intensiva y mortalidad.",
-        "tests": "5 mitos sobre el testeo…"
+        "tests": "5 mitos sobre el testeo…",
+        "presentation": "Cómo la ciencia asiste a la toma de decisiones: ponencia en la Asamblea Nacional eslovena"
     },
     "youtube": {
         "titleMenu": "Animación",
@@ -268,5 +345,14 @@
                 "donateButton": "{{amount}} por mes"
             }
         }
+    },
+    "cm": {
+        "epidemic": {
+            "description": "Declaración de epidemia, prescrito aislamiento general"
+        }
+    },
+    "country": {
+        "MLT": "Malta",
+        "GIB": "Gibraltar"
     }
 }
