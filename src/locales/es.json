@@ -71,7 +71,8 @@
         "newCases7d": "Nuevos Casos",
         "active": "Casos Activos",
         "confirmedToDate": "Casos Confirmados",
-        "vaccinationSummary": "Personas Vacunadas"
+        "vaccinationSummary": "Personas Vacunadas",
+        "incidence": "Incidencia acumulada a 14 días"
     },
     "phase": {
         "14": {
