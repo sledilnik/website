@@ -55,7 +55,7 @@ function setHighchartsOptions () {
 };
 
 export function getSeparator(locale, separatorType) {
-  const numberWithGroupAndDecimalSeparator = 1000.1;
+  const numberWithGroupAndDecimalSeparator = 10000.1;
   return Intl.NumberFormat(locale)
       .formatToParts(numberWithGroupAndDecimalSeparator)
       .find(part => part.type === separatorType)
