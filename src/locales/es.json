@@ -154,7 +154,9 @@
             "deceased-rest": "Fuera de Hospital",
             "deceasedHospitals": "Lugar de Defunción",
             "titleMenu": "Muertes",
-            "title": "Muertes"
+            "title": "Muertes",
+            "showToDate": "A la fecha",
+            "showToday": "Por día"
         },
         "dailyComparison": {
             "hospitalDischarged": "Dados de Alta de Hospital",
