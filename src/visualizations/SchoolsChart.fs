@@ -53,12 +53,17 @@ type DisplayType =
         | Attendees -> chartText "attendeeCases"
         | Employees -> chartText "employeeCases"
         | Type typ  -> chartText typ
+    static member IsBarChart =
+        function
+        | Attendees | Employees -> true
+        | _ -> false
 
 
 type State =
     { SchoolsData: SchoolsStats array
       Error: string option
       ScaleType: ScaleType
+      ChartType: BarChartType
       MetricType: MetricType
       DisplayType: DisplayType
       RangeSelectionButtonIndex: int }
@@ -68,6 +73,7 @@ type Msg =
     | ConsumeSchoolsData of Result<SchoolsStats array, string>
     | ConsumeServerError of exn
     | ScaleTypeChanged of ScaleType
+    | BarChartTypeChanged of BarChartType
     | MetricTypeChanged of MetricType
     | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
@@ -80,6 +86,7 @@ let init: State * Cmd<Msg> =
         { SchoolsData = [||]
           Error = None
           ScaleType = Linear
+          ChartType = AbsoluteChart
           MetricType = MetricType.Default
           DisplayType = DisplayType.Default
           RangeSelectionButtonIndex = 0 }
@@ -96,6 +103,8 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with Error = Some ex.Message }, Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with ScaleType = scaleType }, Cmd.none
+    | BarChartTypeChanged chartType ->
+        { state with ChartType = chartType }, Cmd.none
     | MetricTypeChanged metricType ->
         { state with MetricType = metricType }, Cmd.none
     | ChangeDisplayType dt -> 
@@ -113,6 +122,11 @@ let chartCredits =
                     (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
         href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/" 
     |}
+
+let scaleType (state:State) =
+    if DisplayType.IsBarChart state.DisplayType
+    then Linear
+    else state.ScaleType
 
 let renderPerSchoolChart state dispatch =
 
@@ -207,14 +221,16 @@ let renderPerSchoolChart state dispatch =
         res
 
     let baseOptions =
-        basicChartOptions state.ScaleType "covid19-schools"
+        basicChartOptions (scaleType state) "covid19-schools"
             state.RangeSelectionButtonIndex
             onRangeSelectorButtonClick
     {| baseOptions with
         series = List.toArray allSeries
         yAxis =
-            let showFirstLabel = state.ScaleType <> Linear
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+            let showFirstLabel = (scaleType state) <> Linear
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with 
+                                                          showFirstLabel = Some showFirstLabel
+                                                          labels = pojo {| format = "{value}" |} |})
         plotOptions =
             pojo
                {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
@@ -255,20 +271,30 @@ let renderStackedChart state dispatch =
         res
 
     let baseOptions =
-        basicChartOptions state.ScaleType "covid19-schools"
+        basicChartOptions (scaleType state) "covid19-schools"
             state.RangeSelectionButtonIndex
             onRangeSelectorButtonClick
     {| baseOptions with
         series = Seq.toArray allSeries
         yAxis =
-            let showFirstLabel = state.ScaleType <> Linear
+            let showFirstLabel = (scaleType state)
+            let labelFormat =
+                match state.ChartType with
+                | RelativeChart -> "{value} %"
+                | AbsoluteChart -> "{value}"
             baseOptions.yAxis 
-            |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel; reversedStacks = false; |})
+            |> Array.map (fun ax -> {| ax with 
+                                        showFirstLabel = Some showFirstLabel
+                                        labels = pojo {| format = labelFormat |}
+                                        reversedStacks = false |})
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series =
-                      {| stacking = "normal"
+                      {| stacking = 
+                            match state.ChartType with
+                            | RelativeChart -> "percent"
+                            | AbsoluteChart -> "normal"
                          crisp = false
                          borderWidth = 0
                          pointPadding = 0
@@ -308,7 +334,6 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         prop.children (metricTypesSelectors)
     ]
 
-
 let renderDisplaySelectors state dispatch =
     let renderSelector (dt: DisplayType) dispatch =
         Html.div [ let isActive = state.DisplayType = dt
@@ -332,8 +357,12 @@ let render (state: State) dispatch =
             Utils.renderChartTopControls [
                 renderMetricTypeSelectors
                     state.MetricType (MetricTypeChanged >> dispatch)
-                Utils.renderScaleSelector
-                    state.ScaleType (ScaleTypeChanged >> dispatch)
+                if DisplayType.IsBarChart state.DisplayType then
+                    Utils.renderBarChartTypeSelector
+                        state.ChartType (BarChartTypeChanged >> dispatch)
+                else
+                    Utils.renderScaleSelector
+                        state.ScaleType (ScaleTypeChanged >> dispatch)
             ]
             renderChartContainer state dispatch
             renderDisplaySelectors state dispatch ]

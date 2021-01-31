@@ -4,6 +4,10 @@ type ScaleType =
     | Linear
     | Logarithmic
 
+type BarChartType =
+    | AbsoluteChart
+    | RelativeChart
+
 type RemoteData<'data, 'error> =
     | NotAsked
     | Loading
