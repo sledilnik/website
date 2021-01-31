@@ -43,9 +43,7 @@
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester: PCR",
-            "showToday": "Daglig",
-            "showActive": "Aktiv"
+            "testsPerformed": "Tester: PCR"
         },
         "common": {
             "close": "Lukk",
@@ -61,6 +59,8 @@
             "view": "Vis:",
             "yAxis": "Y-akse:",
             "all": "Alle",
+            "showActive": "Aktiv",
+            "showToday": "Daglig",
             "resetZoomTitle": "Tilbakestill forstørrelse til 1:1",
             "resetZoom": "Tilbakestill forstørrelse",
             "zoom": "Forstørrelse",

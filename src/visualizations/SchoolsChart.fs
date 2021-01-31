@@ -23,8 +23,8 @@ with
     static member Default = Active
     static member GetName =
         function
-        | Active -> chartText "active"
-        | Today -> chartText "today"
+        | Active -> I18N.t "charts.common.showActive"
+        | Today -> I18N.t "charts.common.showToday"
 
 let AllSchoolTypes = [ 
     "kindergarten",         "#ffa600" 

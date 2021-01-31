@@ -198,7 +198,6 @@ let renderChartOptions (state: State) dispatch =
                                               labels = match state.chartType with
                                                        | RelativeChart -> pojo {| format = "{value} %" |}
                                                        | AbsoluteChart -> pojo {| format = "{value}" |}
-
                                               reversedStacks = true
                                               |})
            xAxis =
