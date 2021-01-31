@@ -722,7 +722,7 @@
                 "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
                 "users": "Users",
-                "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower."
+                "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day until 2021-01-21. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower. On 2021-01-22 the application was upgraded from version 1.3.1 to 1.10.1 with varying transmission risks vectors, making the estimate too unreliable."
             }
         },
         "schools": {

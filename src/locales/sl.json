@@ -1234,7 +1234,7 @@
                 "tooltip": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
                 "count": "(povprečno) število ključev na uporabnika na dan",
                 "users": "Uporabnikov",
-                "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
+                "description": "Graf za vsak dan do 21.1.2021 prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj. 22.1.2021 je bila izdana nadgradnja iz verzije 1.3.1 na verzijo 1.10.1 z različnimi vzorci zaporedij dnevnih ključev, zaradi česar ocena ni več dovolj zanesljiva."
             }
         },
         "schools": {
