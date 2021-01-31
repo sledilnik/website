@@ -719,6 +719,7 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsSURS": "SURS",
+            "dsMIZS": "MIZŠ",
             "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
@@ -734,12 +735,18 @@
             "x_months_2": "{{ count }}m",
             "x_months_3": "{{ count }}m",
             "all": "Vse",
+            "showActive": "Aktivni",
+            "showToday": "Na dan",
+            "showToDate": "Skupaj",
+            "show7DaysAverage": "7-dnevno povprečje",
             "view": "Prikaži:",
             "sortBy": "Razvrsti po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
             "log": "Logaritemska",
+            "absolute": "Absolutno",
+            "relative": "Relativno",
             "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
             "linkFaq": "FAQ",
             "facebook": "Facebook",
@@ -763,10 +770,6 @@
             "title_SVN": "Stanje COVID-19 v Sloveniji",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",
-            "showActive": "Aktivni",
-            "showToday": "Na dan",
-            "showToDate": "Skupaj",
-            "show7DaysAverage": "7-dnevno povprečje",
             "testsPerformed": "Testiranja: PCR",
             "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
@@ -989,8 +992,6 @@
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
             "titleMenu": "Zdravstvo in DSO - primeri",
             "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
-            "absolute": "Absolutno",
-            "relative": "Relativno",
             "structure": "Struktura",
             "healthcare": "Zdravstvo po spolu",
             "healthcareMaleCases": "Zdravstvo - moški",
@@ -1230,6 +1231,24 @@
                 "users": "Uporabnikov",
                 "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
             }
+        },
+        "schools": {
+            "title": "Primeri v šolstvu",
+            "titleMenu": "Šolstvo - primeri",
+            "attendeeCases": "Učenci",
+            "employeeCases": "Zaposleni",
+            "kindergarten": "Vrtec",
+            "elementary": "Osnovna šola",
+            "highschool": "Srednja šola",
+            "elementary_special": "OŠ prilagojen program",
+            "music": "Glasbena šola",
+            "dormitory": "Dijaški dom",
+            "institutions": "Zavodi",
+            "employeesCases": "Zaposleni - potrjeni",
+            "attendeesCases": "Učenci - potrjeni",
+            "attendeesQuarantine": "Učenci - karantena",
+            "unitsQuarantine": "Oddelki - karantena",
+            "unitsRemote": "Oddelki - na daljavo"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
@@ -1618,6 +1637,10 @@
         "daily-comparison-chart": {
             "question": "Kaj kaže graf \"Primerjava po dnevih v tednu\"?",
             "answer": "[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).\nNa grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu."
+        },
+        "schools-chart": {
+            "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
+            "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Možen je prikaz aktivnih primerov ali potrjenih primerov na dan. Podatke lahko prikažete *Absolutno* ali *Relativno*.\n\nV prikazu po posameznem tipu šole/organizacije so prikazane tudi karantene med učenci in oddelki. V tem prikazu je omogočen prikaz tudi z logaritemsko skalo."
         },
         "sources-chart": {
             "question": "Kaj kaže graf \"Karantena in viri okužb\"?",

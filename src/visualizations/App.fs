@@ -30,6 +30,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
+            | "Schools" -> Some Schools
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -367,6 +368,13 @@ let render (state: State) (_: Msg -> unit) =
                             (RegionsChartViz.Rendering.renderChart config) props
          }
 
+    let schools =
+          { VisualizationType = Schools
+            ClassName = "schools-chart"
+            ChartTextsGroup = "schools"
+            Explicit = false
+            Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
+
     let sources =
           { VisualizationType = Sources
             ClassName = "sources-chart"
@@ -559,7 +567,7 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; dailyComparison; tests;
           patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          ageGroupsTimeline; weeklyDemographics; ageGroups; 
+          schools; ageGroupsTimeline; weeklyDemographics; ageGroups; 
           infections; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
@@ -581,7 +589,7 @@ let render (state: State) (_: Msg -> unit) =
           municipalities; sources
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; hcCases; sources
+          regions100k; schools; hcCases; sources
           countriesCasesPer100k
           countriesActiveCasesPer100k
           countriesNewDeathsPer100k

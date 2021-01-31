@@ -522,11 +522,7 @@
             "hospitalAdmitted": "Примени во болници",
             "activeCases": "Активни случаи",
             "confirmedCases": "Потврдени случаи",
-            "testsPerformed": "Тестови",
-            "show7DaysAverage": "7-дневен просек",
-            "showToDate": "До денес",
-            "showToday": "Дневно",
-            "showActive": "Активни"
+            "testsPerformed": "Тестови"
         },
         "common": {
             "twitter": "Twitter",
@@ -547,6 +543,10 @@
             "share": "Сподели",
             "noteFaq": "Напомена: ограничувањата на представените податоци се опишани во ",
             "all": "Сите",
+            "showActive": "Активни",
+            "showToday": "Дневно",
+            "showToDate": "До денес",
+            "show7DaysAverage": "7-дневен просек",
             "x_months": "{{ count }}м",
             "x_months_plural": "{{ count }}м",
             "resetZoomTitle": "Прикажи го целиот период",

@@ -4,6 +4,10 @@ type ScaleType =
     | Linear
     | Logarithmic
 
+type BarChartType =
+    | AbsoluteChart
+    | RelativeChart
+
 type RemoteData<'data, 'error> =
     | NotAsked
     | Loading
@@ -180,6 +184,7 @@ type VisualizationType =
     | Spread
     | Regions
     | Regions100k
+    | Schools
     | Sources
     | Municipalities
     | AgeGroups
