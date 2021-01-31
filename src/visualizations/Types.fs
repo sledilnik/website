@@ -87,6 +87,8 @@ type StatsDataPoint =
     { DayFromStart : int
       Date : System.DateTime
       Phase : string
+      Deceased : int option
+      DeceasedToDate : int option
       Tests : Tests
       Cases : Cases
       StatePerTreatment : Treatment
