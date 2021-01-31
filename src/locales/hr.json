@@ -1525,6 +1525,13 @@
             "stripe": {
                 "donateButton": "{{amount}} mjesečno"
             }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
+            }
         }
     }
 }
