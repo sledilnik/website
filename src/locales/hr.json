@@ -822,8 +822,8 @@
             "excess": {
                 "excessDeaths": "Prekomjerni mortalitet (u usporedbi s 2015. do 2019.)",
                 "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina",
-                "covidDeathsMZ": "Potvrđeni smrtni slučajevi od COVID-19 MZ",
-                "covidDeathsNIJZ": "Potvrđeni smrtni slučajevi od COVID-19 NIJZ",
+                "covidDeathsMZ": "Potvrđeni smrtni slučajevi od COVID-19 (vlada)",
+                "covidDeathsNIJZ": "Potvrđeni smrtni slučajevi od COVID-19 (NIJZ)",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
             "titleMenu": "Prekomjerni mortalitet",

@@ -1173,8 +1173,8 @@
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
-                "covidDeathsMZ": "Potrjene COVID-19 smrti MZ",
-                "covidDeathsNIJZ": "Potrjene COVID-19 smrti NIJZ",
+                "covidDeathsMZ": "COVID-19 smrti v bolnišnicah in DSO-jih (Vlada)",
+                "covidDeathsNIJZ": "Smrti s COVID-19 (NIJZ)",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
             },
             "excessByAgeGroup": {
