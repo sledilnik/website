@@ -1255,7 +1255,8 @@
         "excessDeaths": {
             "excess": {
                 "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo. Nell'articolo trovate un approfondimento sul grafico",
-                "covidDeaths": "Decessi confermati per COVID-19",
+                "covidDeaths MZ": "Decessi confermati per COVID-19 MZ",
+                "covidDeaths NIJZ": "Decessi confermati per COVID-19 NIJZ",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
                 "title": "Eccedenza rispetto agli ultimi 5 anni"
             },
