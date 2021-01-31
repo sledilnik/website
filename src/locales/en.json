@@ -635,7 +635,8 @@
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
-                "covidDeaths": "Confirmed COVID-19 deaths",
+                "covidDeathsMZ": "COVID-19 deaths in hospitals and DSO-jih (Government)",
+                "covidDeathsNIJZ": "COVID-19 deaths (NIJZ)",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excessByAgeGroup": {

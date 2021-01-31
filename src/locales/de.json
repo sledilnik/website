@@ -827,7 +827,8 @@
                 "excessDeaths": "Sterberate (im Vergleich zu 2015 bis 2019)",
                 "title": "Sterberate im Vergleich zu den letzten 5 Jahren",
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
-                "covidDeaths": "Bestätigte COVID-19-Todesfälle"
+                "covidDeathsMZ": "Bestätigte COVID-19-Todesfälle (Regierung)",
+                "covidDeathsNIJZ": "Bestätigte COVID-19-Todesfälle (NIJZ)"
             },
             "titleMenu": "Sterberate",
             "title": "Sterberate",
