@@ -724,6 +724,24 @@
                 "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower."
             }
         },
+        "schools": {
+            "title": "Cases in Education",
+            "titleMenu": "Education - cases",
+            "active": "Active",
+            "today": "Today",
+            "kindergarten": "Kindergarten",
+            "elementary": "Elementary School",
+            "highschool": "High School",
+            "elementary_special": "ES Special Curriculum",
+            "music": "Music School",
+            "dormitory": "Dormitory",
+            "institutions": "Institutions",
+            "employeesCases": "Employees - Confirmed",
+            "attendeesCases": "Attendees - Confirmed",
+            "attendeesQuarantine": "Attendees - Quarantine",
+            "unitsQuarantine": "Units - Quarantine",
+            "unitsRemote": "Units - Remote"
+        },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",

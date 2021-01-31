@@ -1233,14 +1233,14 @@
             }
         },
         "schools": {
-            "title": "Primeri v vrtcih in šolah",
-            "titleMenu": "Vrtci in šole",
+            "title": "Primeri v šolstvu",
+            "titleMenu": "Šolstvo - primeri",
             "active": "Aktivni",
             "today": "Na dan",
             "kindergarten": "Vrtec",
             "elementary": "Osnovna šola",
             "highschool": "Srednja šola",
-            "elementary_special": "OŠ posebni program",
+            "elementary_special": "OŠ prilagojen program",
             "music": "Glasbena šola",
             "dormitory": "Dijaški dom",
             "institutions": "Zavodi",
