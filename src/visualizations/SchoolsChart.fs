@@ -258,7 +258,8 @@ let renderStackedChart state dispatch =
         series = Seq.toArray allSeries
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+            baseOptions.yAxis 
+            |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel; reversedStacks = false; |})
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
