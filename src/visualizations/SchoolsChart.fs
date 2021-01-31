@@ -215,6 +215,10 @@ let renderPerSchoolChart state dispatch =
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+        plotOptions =
+            pojo
+               {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                  series = pojo {| stacking = None |} |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         credits = pojo chartCredits
     |}
