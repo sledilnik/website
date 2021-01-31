@@ -1485,6 +1485,13 @@
             "stripe": {
                 "donateButton": "{{amount}} pro Monat"
             }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
+            }
         }
     }
 }
