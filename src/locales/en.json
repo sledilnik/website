@@ -729,6 +729,8 @@
             "titleMenu": "Education - cases",
             "active": "Active",
             "today": "Today",
+            "attendeeCases": "Attendees",
+            "employeeCases": "Employees",
             "kindergarten": "Kindergarten",
             "elementary": "Elementary School",
             "highschool": "High School",
