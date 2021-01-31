@@ -217,7 +217,7 @@ let renderPerSchoolChart state dispatch =
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
         plotOptions =
             pojo
-               {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+               {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                   series = pojo {| stacking = None |} |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         credits = pojo chartCredits
