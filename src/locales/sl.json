@@ -652,7 +652,11 @@
         },
         "liftSchools3": {
             "title": "OŠ 1-3",
-            "description": "Sproščanje: v nekaterih regijah se odpro vrtci in osnovna šola od 1. do 3. razreda."
+            "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v nekaterih regijah<br>(razen goriške, posavske in jugovzhodne Slovenije)."
+        },
+        "closeSchools3": {
+            "title": "OŠ 1-3",
+            "description": "Zapro se vrtci in osnovna šola od 1. do 3. razreda v obalno-kraški in zasavski regiji.<br>Omogočena prodaja 🧦 in 🩲 v živilskih trgovinah."
         }
     },
     "phase": {
