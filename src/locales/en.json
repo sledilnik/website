@@ -1676,7 +1676,7 @@
                 "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
                 "success": {
                     "title": "Thank you for your one-time donation",
-                    "description": ""
+                    "description": " "
                 }
             }
         },
