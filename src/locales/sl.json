@@ -1640,7 +1640,7 @@
         },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
-            "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Prikazane so tudi karantene med učenci in oddelki. Prikaz je omogočen po posameznem tipu šole/institucije in pa kot prikaz aktivnih primerov ali potrjenih primerov na dan."
+            "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Možen je prikaz aktivnih primerov ali potrjenih primerov na dan. Podatke lahko prikažete *Absolutno* ali *Relativno*.\n\nV prikazu po posameznem tipu šole/organizacije so prikazane tudi karantene med učenci in oddelki. V tem prikazu je omogočen prikaz tudi z logaritemsko skalo."
         },
         "sources-chart": {
             "question": "Kaj kaže graf \"Karantena in viri okužb\"?",
