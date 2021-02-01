@@ -1156,22 +1156,6 @@
         "testsHAT": "Tests heute: Schnelltests",
         "vaccinationSummary": "Geimpfte Personen"
     },
-    "notice": {
-        "newChart": "🆕 📊 Neues Diagramm:",
-        "news002": "Bestätigte Fälle nach Altersgruppen",
-        "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "🆕 Neue Seite:",
-        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens",
-        "progressC19": "Typische COVID-19 Entwicklung. Krankenhausaufenthalt, Intensivtherapie und Mortalität.",
-        "tests": "Fünf Mythen über Tests …",
-        "weKnowWeDoNotKnow": "Wir wissen, dass Daten manchmal lügen. Woher wissen wir, dass wir (nicht) wissen? 🤔📉🧐📈🤷 ♂️🤷 ♀️",
-        "checked": "🆕 Geprüft:",
-        "newMedium": "🆕 📝 Neuer Medium Nachricht:",
-        "newInfographics": "🆕 📇 Neue Infografiken:",
-        "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭",
-        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung",
-        "restrictions": "Aktuelle Maßnahmen und Beschränkungen"
-    },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
         "updated": "Aktualisiert am {{ date, %A, %B %e, %Y }}"

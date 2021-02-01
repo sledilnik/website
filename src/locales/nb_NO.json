@@ -270,11 +270,6 @@
         "confirmedToDate": "Bekreftede tilfeller",
         "tests": "Tester i dag"
     },
-    "notice": {
-        "newsText": "Koronavirus-verdenskart 🌍 - aktive tilfeller mer 1M folk",
-        "newPage": "🆕 Ny side:",
-        "newChart": "🆕 📊 Nytt diagram:"
-    },
     "timestamp": {
         "at": "klokken {{ date, %H:%M }}",
         "updated": "Oppdatert {{ date, %A, %B %e, %Y }}"

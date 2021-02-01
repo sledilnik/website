@@ -39,21 +39,6 @@
         "timestamp": "{{ date, %e. %B %Y }}",
         "readingTime": "min read"
     },
-    "notice": {
-        "newInfographics": "🆕 📇 New infographics:",
-        "newChart": "🆕 📊 New chart:",
-        "newPage": "🆕 New page:",
-        "newMedium": "🆕 📝 New Medium post:",
-        "checked": "🆕 Checked:",
-        "bubble": "Living in the bubble… How to limit contacts and not stay alone? 💭",
-        "presentation": "How science helps decision makers - presentation in National Assembly",
-        "weKnowWeDoNotKnow": "We know that data sometimes lies. How do we know, that we do (not) know? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "tests": "5 myths about tests …",
-        "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
-        "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
-        "newsText": "Coronavirus World Map 🌍- active cases per 1M people",
-        "restrictions": "Current measures and restrictions"
-    },
     "infocard": {
         "vaccinationSummary": "People Vaccinated",
         "tests": "Tests Today: PCR",

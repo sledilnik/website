@@ -166,10 +166,6 @@
         "confirmedToDate": "Potvrdjeni slucajevi",
         "tests": "Testova danas"
     },
-    "notice": {
-        "news002": "Potvrdjeni slucajevi po godistima",
-        "newChart": "Novi dijagram:"
-    },
     "timestamp": {
         "at": "at {{ date, %H:%M }}",
         "updated": "Azurirano"

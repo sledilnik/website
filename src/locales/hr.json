@@ -1330,22 +1330,6 @@
         "title": "COVID-19 praćenje",
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
     },
-    "notice": {
-        "newChart": "🆕 📊 Novi dijagram:",
-        "news002": "Potvrđeni slučajevi po dobnim skupinama",
-        "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
-        "newPage": "🆕 Nova stranica:",
-        "weeklyIncrease": "Tjedni rast na kartama općina i regija Slovenije",
-        "progressC19": "Tipičan napredak bolesti COVID-19. Hospitalizacija, intenzivna terapija i smrtnost.",
-        "newInfographics": "🆕 📇 Nove infografike:",
-        "tests": "Pet mitova o testiranjima …",
-        "weKnowWeDoNotKnow": "Znamo, da podaci ponekad lažu. Kako znamo, da (ne) znamo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "checked": "🆕 Provjereno:",
-        "newMedium": "🆕 📝 Nova Medium objava:",
-        "presentation": "Kako znanost pomaže donositeljima odluka – prezentacija u Nacionalnoj skupštini",
-        "bubble": "Živjeti u balonu … Kako ograničiti kontakte i ne ostati sam? 💭",
-        "restrictions": "Trenutačne mjere i ograničenja"
-    },
     "timestamp": {
         "at": "{{ date, %H:%M }}",
         "updated": "Aktualizirano: {{ date, %A, %e. %B %Y. }}"
