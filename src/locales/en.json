@@ -39,21 +39,6 @@
         "timestamp": "{{ date, %e. %B %Y }}",
         "readingTime": "min read"
     },
-    "notice": {
-        "newInfographics": "🆕 📇 New infographics:",
-        "newChart": "🆕 📊 New chart:",
-        "newPage": "🆕 New page:",
-        "newMedium": "🆕 📝 New Medium post:",
-        "checked": "🆕 Checked:",
-        "bubble": "Living in the bubble… How to limit contacts and not stay alone? 💭",
-        "presentation": "How science helps decision makers - presentation in National Assembly",
-        "weKnowWeDoNotKnow": "We know that data sometimes lies. How do we know, that we do (not) know? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "tests": "5 myths about tests …",
-        "progressC19": "Typical progress of COVID-19. Hospitalization, intensive therapy and mortality.",
-        "weeklyIncrease": "Weekly Increase on the 🇸🇮 map of municipalities and regions",
-        "newsText": "Coronavirus World Map 🌍- active cases per 1M people",
-        "restrictions": "Current measures and restrictions"
-    },
     "infocard": {
         "vaccinationSummary": "People Vaccinated",
         "tests": "Tests Today: PCR",
@@ -205,6 +190,7 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
+            "dsMIZS": "MIZŠ",
             "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data & NIJZ",
@@ -218,12 +204,18 @@
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "all": "All",
+            "showActive": "Active",
+            "showToday": "Daily",
+            "showToDate": "To Date",
+            "show7DaysAverage": "7-Day Average",
             "xAxis": "X axis:",
             "yAxis": "Y axis:",
             "view": "View:",
             "sortBy": "Sort by:",
             "linear": "Linear",
             "log": "Logarithmic",
+            "absolute": "Absolute",
+            "relative": "Relative",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
             "facebook": "Facebook",
@@ -247,10 +239,6 @@
             "titleMenu_SVN": "Slovenia - situation",
             "titleMenu_MKD": "N. Macedonia - situation",
             "titleMenu_MNE": "Montenegro - situation",
-            "showActive": "Active",
-            "showToday": "Daily",
-            "showToDate": "To Date",
-            "show7DaysAverage": "7-Day Average",
             "testsPerformed": "Tests: PCR",
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
@@ -378,8 +366,6 @@
             "title": "Cases in Health Care and Retirement Homes, weekly",
             "titleMenu": "HC & RH - cases",
             "disclaimer": "Note: data for last week are not complete yet - share of health care employees may be smaller than actual.",
-            "absolute": "Absolute",
-            "relative": "Relative",
             "structure": "Structure",
             "healthcare": "Healh Care by Gender",
             "healthcareMaleCases": "Health Care - Male",
@@ -634,7 +620,8 @@
             "excess": {
                 "title": "Excess relative to the last 5 years",
                 "excessDeaths": "Excess deaths (compared to 2015-19)",
-                "covidDeaths": "Confirmed COVID-19 deaths",
+                "covidDeathsMZ": "COVID-19 deaths in hospitals and DSO-jih (Government)",
+                "covidDeathsNIJZ": "COVID-19 deaths (NIJZ)",
                 "disclaimer": "Note: data on deaths for the last displayed week is incomplete. You can read more about the chart in the article"
             },
             "excessByAgeGroup": {
@@ -720,8 +707,26 @@
                 "tooltip": "datum.user_count + ' users uploaded ' + datum.key_count + ' keys'",
                 "count": "(average) key count per user on given day",
                 "users": "Users",
-                "description": "The chart shows the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower."
+                "description": "The chart shows (until 2021-01-21) the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower. On 2021-01-22 the application was upgraded from version 1.3.1 to 1.10.1 with varying transmission risks vectors, making the estimate too unreliable."
             }
+        },
+        "schools": {
+            "title": "Cases in Education",
+            "titleMenu": "Education - cases",
+            "attendeeCases": "Attendees",
+            "employeeCases": "Employees",
+            "kindergarten": "Kindergarten",
+            "elementary": "Elementary School",
+            "highschool": "High School",
+            "elementary_special": "ES Special Curriculum",
+            "music": "Music School",
+            "dormitory": "Dormitory",
+            "institutions": "Institutions",
+            "employeesCases": "Employees - Confirmed",
+            "attendeesCases": "Attendees - Confirmed",
+            "attendeesQuarantine": "Attendees - Quarantine",
+            "unitsQuarantine": "Units - Quarantine",
+            "unitsRemote": "Units - Remote"
         },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
@@ -1037,7 +1042,11 @@
         },
         "liftSchools3": {
             "title": "Schools 3",
-            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions."
+            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions (all but Gorizia, Lower Sava and Southeast Slovenia region)."
+        },
+        "closeSchools3": {
+            "title": "Schools 3",
+            "description": "Closed kindergarten and elementary school up to 3rd grade in Coastal–Karst and Central Sava region.<br>Allowed selling of 🧦 in 🩲 in grocery shops."
         }
     },
     "days": {
@@ -1676,7 +1685,7 @@
                 "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",
                 "success": {
                     "title": "Thank you for your one-time donation",
-                    "description": ""
+                    "description": " "
                 }
             }
         },

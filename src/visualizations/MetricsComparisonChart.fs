@@ -26,10 +26,10 @@ type FullMetricType = {
   with
     member this.Name =
         match this.MetricType, this.IsAveraged with
-        | Active, _ -> chartText "showActive"
-        | Today, false -> chartText "showToday"
-        | Today, true -> chartText "show7DaysAverage"
-        | ToDate, _ -> chartText "showToDate"
+        | Active, _ -> I18N.t "charts.common.showActive"
+        | Today, false -> I18N.t "charts.common.showToday"
+        | Today, true -> I18N.t "charts.common.show7DaysAverage"
+        | ToDate, _ -> I18N.t "charts.common.showToDate"
     static member All =
         [ { MetricType = Active; IsAveraged = false }
           { MetricType = Today; IsAveraged = false }

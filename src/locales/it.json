@@ -788,10 +788,6 @@
             "activeCases": "Casi attivi",
             "confirmedCases": "Casi confermati",
             "testsPerformed": "Tamponi: PCR",
-            "showToDate": "Ad oggi",
-            "showToday": "Giornalieri",
-            "showActive": "Attivi",
-            "show7DaysAverage": "Media 7 giorni",
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
@@ -1015,10 +1011,16 @@
             "noteFaq": "Nota: le limitazioni dei dati presentati sono descritte in ",
             "log": "Logaritmica",
             "linear": "Lineare",
+            "absolute": "Assoluto",
+            "relative": "Relativo",
             "view": "Visualizza:",
             "yAxis": "Asse Y:",
             "xAxis": "Asse X:",
             "all": "Tutto",
+            "showActive": "Attivi",
+            "showToday": "Giornalieri",
+            "showToDate": "Ad oggi",
+            "show7DaysAverage": "Media 7 giorni",
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "resetZoom": "Ripristina lo zoom",
@@ -1209,13 +1211,11 @@
             "title": "Casi nelle Case di cura e di riposo, settimanale",
             "otherCases": "Altre persone",
             "rhOccupantCases": "Residenti nelle case di riposo",
-            "relative": "Relativo",
             "all": "Tutti",
             "healthcareFemaleCases": "Personale sanitario - femmine",
             "healthcareMaleCases": "Personale sanitario - maschi",
             "healthcare": "Personale sanitario per genere",
-            "structure": "Struttura",
-            "absolute": "Assoluto"
+            "structure": "Struttura"
         },
         "carePatients": {
             "titleMenu": "Ospedali di cura",
@@ -1255,7 +1255,8 @@
         "excessDeaths": {
             "excess": {
                 "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo. Nell'articolo trovate un approfondimento sul grafico",
-                "covidDeaths": "Decessi confermati per COVID-19",
+                "covidDeaths MZ": "Decessi confermati per COVID-19 (governo)",
+                "covidDeaths NIJZ": "Decessi confermati per COVID-19 (NIJZ)",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
                 "title": "Eccedenza rispetto agli ultimi 5 anni"
             },
@@ -1443,22 +1444,6 @@
         "tabSummary": "Sommario",
         "title": "Tabella"
     },
-    "notice": {
-        "news002": "Casi confermati per fasce di età",
-        "newChart": "🆕 📊 Nuovo grafico:",
-        "newPage": "🆕 Nuova pagina:",
-        "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone",
-        "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni",
-        "progressC19": "Progresso tipico del COVID-19. Ricovero, terapia intensiva e mortalità.",
-        "newInfographics": "🆕 📇 Nuova infografica:",
-        "tests": "5 miti sui test …",
-        "weKnowWeDoNotKnow": "Sappiamo che i dati a volte mentono. Come facciamo a sapere, che (non) lo sappiamo? 🤔📉🧐📈🤷♂️🤷♀️",
-        "checked": "🆕 Verificato:",
-        "presentation": "Come la scienza aiuta i responsabili delle decisioni - presentazione all'Assemblea Nazionale RS",
-        "bubble": "Vivere nella bolla… Come limitare i contatti e non restare soli? 💭",
-        "newMedium": "🆕 📝 Nuovo post Medium:",
-        "restrictions": "Misure e restrizioni attuali"
-    },
     "weekdayShort": {
         "6": "Sa",
         "5": "Ve",
@@ -1634,6 +1619,13 @@
         "monthly": {
             "stripe": {
                 "donateButton": "{{amount}} al mese"
+            }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
             }
         }
     }

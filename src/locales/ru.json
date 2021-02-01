@@ -31,10 +31,6 @@
         "lastUpdated": "{{ date, %a, %b %e }}",
         "tests": ""
     },
-    "notice": {
-        "newChart": "Новый график:",
-        "newPage": ""
-    },
     "navbar": {
         "language": {
             "en": "Английский",

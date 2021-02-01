@@ -170,6 +170,25 @@ let renderScaleSelector scaleType dispatch =
         ]
     ]
 
+let renderBarChartTypeSelector (activeChartType: BarChartType) dispatch =
+    let renderSelector (chartType : BarChartType) (label : string) =
+        let active = chartType = activeChartType
+        Html.div [
+            prop.text label
+            prop.onClick (fun _ -> dispatch chartType)
+            classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+        ]
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children [
+            renderSelector AbsoluteChart (I18N.t "charts.common.absolute")
+            renderSelector RelativeChart (I18N.t "charts.common.relative")
+        ]
+    ]
+
 let renderChartTopControls (children: ReactElement seq) =
     Html.div [
         prop.className "chart-display-properties"

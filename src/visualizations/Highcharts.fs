@@ -157,6 +157,7 @@ let addContainmentMeasuresFlags
         9,  1, 2021, "#FFe6e6", "gym"
         23, 1, 2021, "#ebfaeb", "liftRegions"
         26, 1, 2021, "#ebfaeb", "liftSchools3"
+        1,  2, 2021, "#FFe6e6", "closeSchools3"
     |]
     {|
         ``type`` = "flags"
@@ -408,8 +409,8 @@ let basicChartOptions
                         |}
                         {|
                             ``type`` = "month"
-                            count = 3
-                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                            count = 4
+                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
                             events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
                         |}
                         {|

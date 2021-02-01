@@ -38,22 +38,6 @@
         "timestamp": "{{ date, %e. %B %Y }}",
         "readingTime": "min"
     },
-    "notice": {
-        "newInfographics": "🆕 📇 Nova infografika:",
-        "newChart": "🆕 📊 Nov graf:",
-        "newPage": "🆕 Nova stran:",
-        "newMedium": "🆕 📝 Nova Medium objava:",
-        "checked": "🆕 Preverjeno:",
-        "presentation": "Kako lahko znanost pomaga odločevalcem - predstavitev v Državnem zboru RS",
-        "bubble": "Ostanimo v mehurčku… Kako v času epidemije omejiti stike in ne ostati sam? 💭",
-        "weKnowWeDoNotKnow": "Vemo, da podatki včasih lažejo. Kako vemo, da (ne) vemo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "tests": "5 mitov o testih…",
-        "progressC19": "Običajen potek bolezni COVID-19. Hospitalizacije, intenzivna terapija in smrtnost.",
-        "weeklyIncrease": "Tedenski prirast na zemljevidu 🇸🇮 po občinah in pokrajinah",
-        "ostanizdrav": "Zakaj uporabljati aplikacijo #OstaniZdrav – v grafih 📈",
-        "newsText": "Zemljevid sveta 🌍- stanje aktivnih primerov na 1M prebivalcev",
-        "restrictions": "(I)zbrani ukrepi in omejitve na enem mestu"
-    },
     "infocard": {
         "vaccinationSummary": "Cepljenih oseb",
         "tests": "Testi na dan: PCR",
@@ -652,7 +636,11 @@
         },
         "liftSchools3": {
             "title": "OŠ 1-3",
-            "description": "Sproščanje: v nekaterih regijah se odpro vrtci in osnovna šola od 1. do 3. razreda."
+            "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v nekaterih regijah<br>(razen goriške, posavske in jugovzhodne Slovenije)."
+        },
+        "closeSchools3": {
+            "title": "OŠ 1-3",
+            "description": "Zapro se vrtci in osnovna šola od 1. do 3. razreda v obalno-kraški in zasavski regiji.<br>Omogočena prodaja 🧦 in 🩲 v živilskih trgovinah."
         }
     },
     "phase": {
@@ -719,6 +707,7 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsSURS": "SURS",
+            "dsMIZS": "MIZŠ",
             "dsMNZ": "MNZ",
             "dsOWD": "Our World in Data",
             "dsOWD_NIJZ": "Our World in Data, NIJZ",
@@ -734,12 +723,18 @@
             "x_months_2": "{{ count }}m",
             "x_months_3": "{{ count }}m",
             "all": "Vse",
+            "showActive": "Aktivni",
+            "showToday": "Na dan",
+            "showToDate": "Skupaj",
+            "show7DaysAverage": "7-dnevno povprečje",
             "view": "Prikaži:",
             "sortBy": "Razvrsti po:",
             "xAxis": "X os:",
             "yAxis": "Y os:",
             "linear": "Linearna",
             "log": "Logaritemska",
+            "absolute": "Absolutno",
+            "relative": "Relativno",
             "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
             "linkFaq": "FAQ",
             "facebook": "Facebook",
@@ -763,10 +758,6 @@
             "title_SVN": "Stanje COVID-19 v Sloveniji",
             "title_MKD": "Stanje COVID-19 v S. Makedoniji",
             "title_MNE": "Stanje COVID-19 v Črni gori",
-            "showActive": "Aktivni",
-            "showToday": "Na dan",
-            "showToDate": "Skupaj",
-            "show7DaysAverage": "7-dnevno povprečje",
             "testsPerformed": "Testiranja: PCR",
             "confirmedCases": "Potrjeni primeri",
             "activeCases": "Aktivni primeri",
@@ -989,8 +980,6 @@
             "title": "Primeri v zdravstvu in domovih za starejše občane, tedensko",
             "titleMenu": "Zdravstvo in DSO - primeri",
             "disclaimer": "Opomba: podatki za zadnji teden še niso dokončni, zato je delež zdravstvenih delavcev lahko manjši kot je dejansko.",
-            "absolute": "Absolutno",
-            "relative": "Relativno",
             "structure": "Struktura",
             "healthcare": "Zdravstvo po spolu",
             "healthcareMaleCases": "Zdravstvo - moški",
@@ -1168,7 +1157,8 @@
             "excess": {
                 "title": "Presežek glede na zadnjih 5 let",
                 "excessDeaths": "Presežne smrti (glede na 2015-19)",
-                "covidDeaths": "Potrjene COVID-19 smrti",
+                "covidDeathsMZ": "COVID-19 smrti v bolnišnicah in DSO-jih (Vlada)",
+                "covidDeathsNIJZ": "Smrti s COVID-19 (NIJZ)",
                 "disclaimer": "Opomba: podatki o smrtih za zadnji prikazani teden niso popolni. Več o grafu lahko preberete v članku"
             },
             "excessByAgeGroup": {
@@ -1228,8 +1218,26 @@
                 "tooltip": "datum.user_count + ' uporabnikov je objavilo ' + datum.key_count + ' ključev'",
                 "count": "(povprečno) število ključev na uporabnika na dan",
                 "users": "Uporabnikov",
-                "description": "Graf za vsak dan prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj."
+                "description": "Graf za vsak dan do 21.1.2021 prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj. 22.1.2021 je bila izdana nadgradnja iz verzije 1.3.1 na verzijo 1.10.1 z različnimi vzorci zaporedij dnevnih ključev, zaradi česar ocena ni več dovolj zanesljiva."
             }
+        },
+        "schools": {
+            "title": "Primeri v šolstvu",
+            "titleMenu": "Šolstvo - primeri",
+            "attendeeCases": "Učenci",
+            "employeeCases": "Zaposleni",
+            "kindergarten": "Vrtec",
+            "elementary": "Osnovna šola",
+            "highschool": "Srednja šola",
+            "elementary_special": "OŠ prilagojen program",
+            "music": "Glasbena šola",
+            "dormitory": "Dijaški dom",
+            "institutions": "Zavodi",
+            "employeesCases": "Zaposleni - potrjeni",
+            "attendeesCases": "Učenci - potrjeni",
+            "attendeesQuarantine": "Učenci - karantena",
+            "unitsQuarantine": "Oddelki - karantena",
+            "unitsRemote": "Oddelki - na daljavo"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
@@ -1619,6 +1627,10 @@
             "question": "Kaj kaže graf \"Primerjava po dnevih v tednu\"?",
             "answer": "[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).\nNa grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu."
         },
+        "schools-chart": {
+            "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
+            "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Možen je prikaz aktivnih primerov ali potrjenih primerov na dan. Podatke lahko prikažete *Absolutno* ali *Relativno*.\n\nV prikazu po posameznem tipu šole/organizacije so prikazane tudi karantene med učenci in oddelki. V tem prikazu je omogočen prikaz tudi z logaritemsko skalo."
+        },
         "sources-chart": {
             "question": "Kaj kaže graf \"Karantena in viri okužb\"?",
             "answer": "[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* (spodaj) prikazuje število oseb, poslanih v karanteno, potrjene primere v določenem tednu in delež potrjenih primerov, ki so bili že v karanteni.\n\nPozor: Prikaz podatkov o karanteni je narejen na podlagi virov NIJZ. Ker NIJZ podatkov ne objavlja redno oz. lahko prihaja do njihove zakasnitve, za njihovo točnost in popolnost ne odgovarjamo.\n\nČe spodaj preklopimo na prikaz *Viri okužb*, so prikazani potrjeni primeri v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznani vir. Povečanje neznanega vira je kazalnik, da epidemiološko sledenje ni uspešno pri odkrivanju vira.\nPrikaz *Uvoženi primeri* po tednih prikaže države, iz katerih so bili uvoženi posamezni primeri, in število teh primerov.\nVsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) – tako lahko primerjate gibanje kategorij po posameznih tednih."
@@ -1754,7 +1766,7 @@
                 "description": "Enkratni prispevek Sledilniku lahko vplačate tudi **s kreditno kartico**. Izberite znesek, s katerim želite podpreti naše delovanje:",
                 "success": {
                     "title": "Hvala za enkratno donacijo",
-                    "description": ""
+                    "description": " "
                 }
             }
         },

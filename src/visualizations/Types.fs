@@ -4,6 +4,10 @@ type ScaleType =
     | Linear
     | Logarithmic
 
+type BarChartType =
+    | AbsoluteChart
+    | RelativeChart
+
 type RemoteData<'data, 'error> =
     | NotAsked
     | Loading
@@ -83,6 +87,8 @@ type StatsDataPoint =
     { DayFromStart : int
       Date : System.DateTime
       Phase : string
+      Deceased : int option
+      DeceasedToDate : int option
       Tests : Tests
       Cases : Cases
       StatePerTreatment : Treatment
@@ -180,6 +186,7 @@ type VisualizationType =
     | Spread
     | Regions
     | Regions100k
+    | Schools
     | Sources
     | Municipalities
     | AgeGroups
