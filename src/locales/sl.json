@@ -1286,6 +1286,11 @@
             "per100k": "na 100.000 prebivalcev",
             "newCases": "Novi primeri",
             "ratio": "Razmerje primerov M/Ž"
+        },
+        "countriesDeathsPerCases": {
+            "chronologically": "Kronološki",
+            "sinceFirstDeath": "Od prve smrti",
+            "daysFromFirstDeath": "Št. dni od prve smrti"
         }
     },
     "footer": {
@@ -1738,6 +1743,9 @@
         "how-to-help": {
             "question": "Želim pomagati, kje lahko začnem?",
             "answer": "Pišite nam na info@sledilnik.org in na kratko opišite, kdo ste in kako lahko prispevate k projektu. Vabljeni!"
+        },
+        "countries-chart": {
+            "question": "Kaj nam pove graf \"Primerjava po državah\"?"
         }
     },
     "donation": {
