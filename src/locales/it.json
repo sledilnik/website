@@ -1081,8 +1081,7 @@
             "hospitalDischarged": "Dimessi dall'ospedale",
             "hospitalAdmitted": "Ammessi in ospedale",
             "positivePctHAT": "Percentuale positivi: TAR (%)",
-            "testsHAT": "Test eseguiti: TAR",
-            "vaccinated": "Persone vaccinate"
+            "testsHAT": "Test eseguiti: TAR"
         },
         "sources": {
             "totalImported": "Totale casi importati",

@@ -651,8 +651,7 @@
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "titleMenu": "Wochentag – Vergleich",
             "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
-            "testsHAT": "Durchgeführte Tests: RAT",
-            "vaccinated": "Geimpfte Personen"
+            "testsHAT": "Durchgeführte Tests: RAT"
         },
         "ostanizdrav": {
             "userPublishedByCount": {

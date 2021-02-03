@@ -647,8 +647,7 @@
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "positivePctHAT": "Udio pozitivnih: RAT (%)",
-            "testsHAT": "Provedeni testovi: RAT",
-            "vaccinated": "Cijepljene osobe"
+            "testsHAT": "Provedeni testovi: RAT"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
