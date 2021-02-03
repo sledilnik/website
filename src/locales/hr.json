@@ -1313,7 +1313,7 @@
         "si": "Slovenija (sve regije)"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "days": {
         "x_days_ago_0": "Prije {{ count }} dan",
