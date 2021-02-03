@@ -16,6 +16,7 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
 - [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
+- [lab-tests.csv](https://github.com/sledilnik/data/blob/master/csv/lab-tests.csv)
 - [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
     - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
     - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
@@ -24,13 +25,18 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
     - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
     - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
     - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
+    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
+    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
 - [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
+- [sawage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
+- **Zastarelo - se ne osvežuje več**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
-- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
 - **Slovarji**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
@@ -38,6 +44,8 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
     - [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv)
     - [dict-age-groups.csv](https://github.com/sledilnik/data/blob/master/csv/dict-age-groups.csv)
     - [dict-risk-factors-country.csv](https://github.com/sledilnik/data/blob/master/csv/dict-risk-factors-country.csv)
+    - [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv)
+    - [dict-schools-values.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools-values.csv)
 
 
 Celotni podatki skupaj z izvorno kodo za njihovo obdelavo so na voljo na [GitHub](https://github.com/sledilnik/data/)-u.

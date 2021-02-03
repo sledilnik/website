@@ -15,6 +15,7 @@ You can also inspect the data directly on the [Tables page](/en/tables).
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
 - [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
+- [lab-tests.csv](https://github.com/sledilnik/data/blob/master/csv/lab-tests.csv)
 - [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
     - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
     - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
@@ -23,13 +24,18 @@ You can also inspect the data directly on the [Tables page](/en/tables).
     - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
     - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
     - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
+    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
+    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
 - [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
+- [sawage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
+- **Obsolete - not updated anymore**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
-- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
 - **Dictionaries**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
@@ -37,6 +43,8 @@ You can also inspect the data directly on the [Tables page](/en/tables).
     - [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv)
     - [dict-age-groups.csv](https://github.com/sledilnik/data/blob/master/csv/dict-age-groups.csv)
     - [dict-risk-factors-country.csv](https://github.com/sledilnik/data/blob/master/csv/dict-risk-factors-country.csv)
+    - [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv)
+    - [dict-schools-values.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools-values.csv)
 
 
 Complete data and source code used to process the data are available on [GitHub](https://github.com/sledilnik/data/).
@@ -52,6 +60,8 @@ Complete data and source code used to process the data are available on [GitHub]
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
+- [schools](https://api.sledilnik.org/api/schools)
+- [sewage](https://api.sledilnik.org/api/sewage)
 - [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
 - [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
 - [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
