@@ -5,6 +5,8 @@ In order to ensure a maximum accuracy and reliability of the data, Sledilnik com
 <a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
 " alt="Ministrstvo za zdravje" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="https://www.gov.si/assets/ministrstva/MIZS/Pasice-in-slike/O-ministrstvu/Logo_MIZS_slo.jpg" alt="MIZŠ" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="https://www.nil.com/assets/Blog/_resampled/FillWyIxMTY4IiwiNDAwIl0/MNZ.jpg" alt="MNZ" width="300"></a>
 
 Collected and cross-checked data is available in the form of **CSV files**, **REST API** and **Google Docs sheets**. Reuse of data and visualizations is welcome and encouraged. For more information about the terms of reuse please see the [About page](/en/about).
 

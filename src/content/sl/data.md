@@ -5,6 +5,8 @@ Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, skupn
 <a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
 " alt="Ministrstvo za zdravje" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="https://www.gov.si/assets/ministrstva/MIZS/Pasice-in-slike/O-ministrstvu/Logo_MIZS_slo.jpg" alt="MIZŠ" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="https://www.nil.com/assets/Blog/_resampled/FillWyIxMTY4IiwiNDAwIl0/MNZ.jpg" alt="MNZ" width="300"></a>
 
 Zbrani in preverjeni podatki so na voljo v obliki **CSV datotek**, **REST API-ja** in **Google Docs preglednic**. Nadaljna uporaba podatkov kot tudi grafov in sodelovanje pri zbiranju, obdelavi in prikazu so dobrodošli in zaželjeni. Več informacij o načinu in pogojih uporabe ter sodelovanju je na voljo v poglavju [O projektu](/sl/about).
 
@@ -61,6 +63,8 @@ Celotni podatki skupaj z izvorno kodo za njihovo obdelavo so na voljo na [GitHub
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
+- [schools](https://api.sledilnik.org/api/schools)
+- [sewage](https://api.sledilnik.org/api/sewage)
 - [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
 - [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
 - [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
