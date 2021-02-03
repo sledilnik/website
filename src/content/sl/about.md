@@ -75,6 +75,7 @@ Sodelavci projekta:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
+-   [Igor Kolar](https://twitter.com/igorkolar) - podatkovni model, odprti podatki
 -   [Jaka Daneu](https://github.com/jalezi) -  spletna stran
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - vsebine, viri
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi

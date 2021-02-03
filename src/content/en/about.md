@@ -95,6 +95,7 @@ Project collaborators:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Igor Kolar](https://twitter.com/igorkolar) - data model, open data
 -   [Jaka Daneu](https://github.com/jalezi) -  web page
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
