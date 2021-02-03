@@ -91,7 +91,7 @@ module Metrics  =
         { Metric=PerformedTestsToday;   Color="#19aebd"; Visible=false; Type=Today;  Id="testsPerformed" }
         { Metric=ConfirmedCasesToday;   Color="#bda506"; Visible=true;  Type=Today;  Id="confirmedCases" }
         { Metric=VacAdministeredToday;  Color="#189a73"; Visible=true;  Type=Today;  Id="vaccinationAdministered" }
-        { Metric=VacAdministered2Today; Color="#1c9b60"; Visible=true;  Type=Today;  Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered2Today; Color="#0e5842"; Visible=true;  Type=Today;  Id="vaccinationAdministered2nd" }
         { Metric=HospitalIn;            Color="#be7A2a"; Visible=true;  Type=Today;  Id="hospitalAdmitted" }
         { Metric=HospitalOut;           Color="#8cd4b2"; Visible=false; Type=Today;  Id="hospitalDischarged" }
         { Metric=ICUIn;                 Color="#fb6a4a"; Visible=true;  Type=Today;  Id="icuAdmitted" }
@@ -103,7 +103,7 @@ module Metrics  =
         { Metric=ConfirmedCasesToDate;  Color="#bda506"; Visible=true;  Type=ToDate; Id="confirmedCases" }
         { Metric=RecoveredToDate;       Color="#20b16d"; Visible=true;  Type=ToDate; Id="recovered" }
         { Metric=VacAdministeredToDate; Color="#189a73"; Visible=true;  Type=ToDate; Id="vaccinationAdministered" }
-        { Metric=VacAdministered2ToDate;Color="#1c9b60"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
+        { Metric=VacAdministered2ToDate;Color="#0e5842"; Visible=true;  Type=ToDate; Id="vaccinationAdministered2nd" }
         { Metric=HospitalToDate;        Color="#be7A2a"; Visible=true;  Type=ToDate; Id="hospitalAdmitted" }
         { Metric=HospitalOutToDate;     Color="#8cd4b2"; Visible=false; Type=ToDate; Id="hospitalDischarged" }
         { Metric=ICUToDate;             Color="#fb6a4a"; Visible=false; Type=ToDate; Id="icuAdmitted" }
