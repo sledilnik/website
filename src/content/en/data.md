@@ -85,6 +85,7 @@ More information on how to use the API and the API source code are available on 
 
 For collection of current measures and restrictions, see page [Measures and Restritions](/sl/restrictions).
 
+<!---
 ## Data Sources
 
 To ensure the precision and reliability of our data, we collect and cross-check the data from different official sources. In case we owerlooked any relevant source, please let us know at [info@sledilnik.org](mailto:info@sledilnik.org)
@@ -143,3 +144,6 @@ To ensure the precision and reliability of our data, we collect and cross-check 
 | [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)              |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
 | [Register prostorskih enot, Geodetska uprava RS](https://www.e-prostor.gov.si/zbirke-prostorskih-podatkov/nepremicnine/register-prostorskih-enot/)                           |     |
+ 
+ --->
+ 

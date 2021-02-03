@@ -88,6 +88,7 @@ Zaradi obsežnosti in tehničnih omejitev smo jo 11.12.2020 prenehali osveževat
 
 Ob uporabi razpoložljivih virov podatkov smo se trudili kar se da celovito zbrati in povzeti trenutno veljavne ukrepe, ki jih je sprejela slovenska vlada kot odgovor na pandemijo covid-19, predvsem na izbranih področjih, ki se najbolj dotikajo vsakdanjega življenja. Trenutni ukrepi so zbrani na strani [Ukrepi in omejitve](/sl/restrictions).
 
+<!---
 ## Viri podatkov
 
 Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, podatke zbiramo in primerjamo iz večih uradnih virov. Če smo kak relevanten vir spregledali, nas lahko o tem, prosimo, obvestite na [info@sledilnik.org](mailto:info@sledilnik.org)
@@ -146,3 +147,5 @@ Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, podat
 | [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)              |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
 | [Register prostorskih enot, Geodetska uprava RS](https://www.e-prostor.gov.si/zbirke-prostorskih-podatkov/nepremicnine/register-prostorskih-enot/)                           |     |
+
+--->
