@@ -12,7 +12,7 @@ type DiagramKind =
 
     with
 
-    member this.Name =
+    member this.GetName =
         match this with
         | TotalVsWeek -> i18n "totalVsWeek.name"
         | WeekVsWeekBefore -> i18n "weekVsWeekBefore.name"
@@ -31,13 +31,13 @@ type Metric =
 
     with
 
-    member this.Name =
+    member this.GetName =
         match this with
         | Cases -> i18n "cases"
         | Hospitalized -> i18n "hospitalized"
         | Deceased -> i18n "deceased"
 
-    member this.Color =
+    member this.GetColor =
         match this with
         | Cases ->
             { Dark = "#dba51d"
@@ -49,14 +49,8 @@ type Metric =
             { Dark = "#000000"
               Light = "#999999" }
 
-    static member AllMetrics =
+    static member All =
         [ Cases ; Hospitalized ; Deceased ]
-
-let (|CasesMetric|HospitalizedMetric|DeceasedMetric|UnknownMetric|) str =
-    if str = Metric.Cases.ToString() then CasesMetric
-    elif str = Metric.Hospitalized.ToString() then HospitalizedMetric
-    elif str = Metric.Deceased.ToString() then DeceasedMetric
-    else UnknownMetric
 
 type DisplayData = {
     x : int
@@ -74,5 +68,5 @@ type State = {
 
 type Msg =
     | DiagramKindSelected of DiagramKind
-    | MetricSelected of string
+    | MetricSelected of Metric
     | DayChanged of int

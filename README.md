@@ -23,7 +23,7 @@ This software is licensed under [GNU Affero General Public License](LICENSE).
 
 ## Deployment
 
-Overview of current [deployments](https://github.com/overlordtm/website/deployments)
+Overview of current [deployments](https://github.com/sledilnik/website/deployments)
 
 Deployment is done using GitHub actions in `.github/workflows`
 

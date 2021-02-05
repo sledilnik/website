@@ -17,7 +17,7 @@ export default function ($t) {
         "encoding": {
           "x": {
             "title": $t('charts.ostanizdrav.publishedByRisk.date'),
-            "timeUnit": "utcmonthdate",
+            "timeUnit": "utcyearmonthdate",
             "field": "date",
             "type": "temporal",
             "axis": {
@@ -116,7 +116,7 @@ export default function ($t) {
             },
             "encoding": {
               "x": {
-                "timeUnit": "utcmonthdate",
+                "timeUnit": "utcyearmonthdate",
                 "field": "date",
                 "type": "temporal",
                 "axis": {
@@ -132,7 +132,7 @@ export default function ($t) {
                 "field": "tt"
               },
               "x": {
-                "timeUnit": "utcmonthdate",
+                "timeUnit": "utcyearmonthdate",
                 "field": "date",
                 "type": "temporal",
                 "axis": {

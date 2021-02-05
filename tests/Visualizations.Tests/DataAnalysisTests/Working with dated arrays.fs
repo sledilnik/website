@@ -1,7 +1,7 @@
 ﻿module AgeGroupsTimelineTests.``Working with dated arrays``
 
 open System
-open AgeGroupsTimelineViz.Analysis
+open DataAnalysis.DatedTypes
 open Xunit
 open Swensen.Unquote
 

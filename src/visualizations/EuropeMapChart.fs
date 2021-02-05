@@ -46,7 +46,9 @@ type ChartType =
     | Restrictions
     | WeeklyIncrease
 
-    override this.ToString() =
+    static member All = [ TwoWeekIncidence; WeeklyIncrease; Restrictions ]
+    static member Default = TwoWeekIncidence
+    member this.GetName =
         match this with
         | TwoWeekIncidence -> chartText "twoWeekIncidence"
         | Restrictions -> chartText "restrictions"
@@ -124,20 +126,7 @@ let euCountries =
       "NMA" ]
 
 let greenCountries =
-    Map.ofList
-        [
-            ("DNK", "pokrajini Ferski otoki in Grenlandija")
-            ("FIN", "administrativna enota Aland")
-            ("NOR", "administrativna enota Trøndelag")
-            ("AUS", "")
-            ("JPN", "")
-            ("KOR", "")
-            ("NZL", "")
-            ("RWA", "")
-            ("SGP", "")
-            ("THA", "")
-            ("URY", "")
-        ]
+    Map.empty
 
 let redCountries =
     Map.ofList
@@ -154,6 +143,7 @@ let redCountries =
             ("BAH", "")
             ("BHR", "")
             ("BGD", "")
+            ("BRB", "")
             ("BEL", "")
             ("BLZ", "")
             ("BLR", "")
@@ -161,30 +151,30 @@ let redCountries =
             ("BGR", "")
             ("BOL", "")
             ("BIH", "")
+            ("BWA", "")
             ("BRA", "")
             ("BFA", "")
             ("BDI", "")
             ("BTN", "")
-            ("TCD", "")
             ("CYP", "")
+            ("TCD", "")
             ("CZE", "")
             ("CHL", "")
             ("MNE", "")
-            ("DNK", "administrativna enota: vse razen Nordjylland ter pokrajin Ferski otoki in Grenlandija")
+            ("DNK", "administrativna enota: vse razen Ferski otoki in Grenlandija")
             ("DOM", "")
             ("EGY", "")
             ("ECU", "")
             ("GNQ", "")
             ("ERI", "")
+            ("EST", "")
             ("SWZ", "")
             ("ETH", "")
             ("PHL", "")
-            ("FIN", "administrativna enota: Uusimaa")
-            ("FRA", "vse administrativne enote celinske Francije, čezmorsko ozemlje: vsa razen Guadeloupe")
+            ("FRA", "vse administrativne enote celinske Francije in vsa čezmorska ozemlja, razen čezmorskih ozemelj Guadeloupe, Martinique in La Reunion")
             ("GAB", "")
             ("GMB", "")
             ("GHA", "")
-            ("GRC", "")
             ("GEO", "")
             ("GUY", "")
             ("GTM", "")
@@ -197,6 +187,7 @@ let redCountries =
             ("IDN", "")
             ("IRQ", "")
             ("IRN", "")
+            ("IRL", "")
             ("ITA", "")
             ("ISR", "")
             ("JAM", "")
@@ -205,6 +196,7 @@ let redCountries =
             ("ZAF", "")
             ("SSD", "")
             ("CMR", "")
+            ("CAN", "")
             ("QAT", "")
             ("KAZ", "")
             ("KEN", "")
@@ -228,6 +220,7 @@ let redCountries =
             ("HUN", "")
             ("MWL", "")
             ("MDV", "")
+            ("MYS", "")
             ("MLI", "")
             ("MLT", "")
             ("MAR", "")
@@ -237,13 +230,14 @@ let redCountries =
             ("MNG", "")
             ("MOZ", "")
             ("MCO", "")
+            ("NAM", "")
             ("DEU", "")
             ("NPL", "")
             ("NIG", "")
             ("NGA", "")
             ("NIC", "")
             ("NLD", "")
-            ("NOR", "administrativni enoti: Oslo, Viken")
+            ("NOR", "administrativni enoti: Oslo, Rogaland, Viken")
             ("OMN", "")
             ("PAK", "")
             ("PAN", "")
@@ -260,6 +254,7 @@ let redCountries =
             ("SAU", "")
             ("SEN", "")
             ("PRK", "")
+            ("SYC", "")
             ("MKD", "")
             ("SLE", "")
             ("SYR", "")
@@ -269,7 +264,8 @@ let redCountries =
             ("SRB", "")
             ("CAF", "")
             ("SUR", "")
-            ("ESP", "administrativne enote: vse razen Kanarskih otokov")
+            ("VCT", "")
+            ("ESP", "")
             ("SWE", "")
             ("CHE", "")
             ("TJK", "")
@@ -280,6 +276,7 @@ let redCountries =
             ("TUR", "")
             ("TKM", "")
             ("UKR", "")
+            ("URY", "")
             ("UZB", "")
             ("VAT", "")
             ("VEN", "")
@@ -340,10 +337,7 @@ let init (mapToDisplay: MapToDisplay) (data: WeeklyStatsData): State * Cmd<Msg> 
       GeoJson = NotAsked
       OwdData = NotAsked
       CountryData = Map.empty
-      ChartType =
-        match mapToDisplay with
-        | Europe -> Restrictions
-        | World -> TwoWeekIncidence },
+      ChartType = TwoWeekIncidence },
     (cmdGeoJson @ cmdOwdData)
 
 let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
@@ -399,10 +393,7 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
                     if redNote.Length > 0
                     then chartText "statusRed", "#FF9057", redNote
                     else chartText "statusRed", "#FF5348", redNote
-                | _ ->
-                    match green with
-                    | Some greenNote -> chartText "statusGreen", "#C4DE6F", greenNote
-                    | _ -> chartText "statusGreen", "#FFC65A", ""  // orange is w/o restrictions now
+                | _ -> chartText "statusGreen", "#F8F8F8", ""  // all non-red are open now
 
         let imported =
             importedFrom.TryFind(fixedCode)
@@ -761,8 +752,8 @@ let renderMap state geoJson _ =
                 (chartText "countryStatus") rType rAltText
                 (chartText "importedCases") imported impDate
                 (chartText "incidence100k") incidence100k
-                (chartText "newCases") newCases ncDate
-            + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                (chartText "newCases") (I18N.NumberFormat.formatNumber(newCases:int)) ncDate
+            + sprintf "<br>%s: <b>%s%s %%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
 
         match twoWeekIncidence with
         | null -> chartText "noData"
@@ -818,16 +809,12 @@ let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
             Utils.classes
                 [(true, "chart-display-property-selector__item")
                  (active, "selected")]
-            prop.text (chartSelector.ToString())
+            prop.text chartSelector.GetName
         ]
 
     Html.div
         [ prop.className "chart-display-property-selector"
-          prop.children
-              [ renderChartSelector Restrictions
-                renderChartSelector TwoWeekIncidence
-                renderChartSelector WeeklyIncrease
-              ]
+          prop.children (ChartType.All |> Seq.map renderChartSelector)
         ]
 
 

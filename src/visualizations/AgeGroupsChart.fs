@@ -11,6 +11,8 @@ open Types
 open Highcharts
 open System
 
+let chartText = I18N.chartText "ageGroups"
+
 type ScaleType = Absolute | Relative
 
 type ChartMode =
@@ -20,8 +22,25 @@ type ChartMode =
     | DeathsPerPopulation
     | DeathsPerInfections
 
-    static member ScaleType mode =
-        match mode with
+    static member All =
+        [ AbsoluteInfections
+          AbsoluteDeaths
+          InfectionsPerPopulation
+          DeathsPerPopulation
+          DeathsPerInfections ]
+
+    static member Default = AbsoluteInfections
+
+    member this.GetName: string =
+        match this with
+        | AbsoluteInfections -> chartText "confirmedCases"
+        | AbsoluteDeaths -> chartText "deceased"
+        | InfectionsPerPopulation -> chartText "confirmedCases"
+        | DeathsPerPopulation -> chartText "deceased"
+        | DeathsPerInfections -> chartText "deceasedPerConfirmedCases"
+
+    member this.ScaleType =
+        match this with
         | AbsoluteInfections -> Absolute
         | AbsoluteDeaths -> Absolute
         | InfectionsPerPopulation -> Relative
@@ -44,7 +63,6 @@ let LabelMale = "Moški"
 [<Literal>]
 let LabelFemale = "Ženske"
 
-let chartText = I18N.chartText "ageGroups"
 
 let populationOf sexLabel ageGroupLabel =
     let parseAgeGroupLabel (label: string): AgeGroupKey =
@@ -295,19 +313,12 @@ let renderChartCategorySelector
         Utils.classes [
             (true, "btn btn-sm metric-selector")
             (isActive, "metric-selector--selected") ]
-        prop.text (
-            match chartModeToRender with
-            | AbsoluteInfections        -> chartText "confirmedCases"
-            | AbsoluteDeaths            -> chartText "deceased"
-            | InfectionsPerPopulation   -> chartText "confirmedCases"
-            | DeathsPerPopulation       -> chartText "deceased"
-            | DeathsPerInfections       -> chartText "deceasedPerConfirmedCases"
-            )
+        prop.text ( chartModeToRender.GetName )
     ]
 
 let renderChartCategorySelectors activeChartMode dispatch =
-    let categoriesForChartMode chartMode =
-        match ChartMode.ScaleType chartMode with
+    let categoriesForChartMode (chartMode: ChartMode) =
+        match chartMode.ScaleType with
         | Absolute -> [ AbsoluteInfections; AbsoluteDeaths ]
         | Relative ->
             [
@@ -327,9 +338,9 @@ let renderChartOptions
     (state : State) (latestDate: DateTime) (chartData: AgesChartData) =
 
     let valuesLabelFormatter (value: float) =
-        match ChartMode.ScaleType state.ChartMode with
-        | Absolute -> (abs value).ToString()
-        | Relative -> Utils.percentageValuesLabelFormatter value
+        match state.ChartMode.ScaleType with
+        | Absolute -> (I18N.NumberFormat.formatNumber (abs value))
+        | Relative -> Utils.percentWith3DecimalFormatter value
 
     let dateText = (I18N.tOptions "charts.common.dataDate" {| date = latestDate  |})
 
@@ -353,7 +364,7 @@ let renderChartOptions
                  {| formatter = fun () -> valuesLabelFormatter jsThis?value |}
                // allowDecimals needs to be enabled because the values can be
                // be below 1, otherwise it won't auto-scale to below 1.
-               allowDecimals = ChartMode.ScaleType state.ChartMode = Relative
+               allowDecimals = state.ChartMode.ScaleType = Relative
             |}
         plotOptions = pojo
             {| series = pojo
@@ -383,7 +394,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "confirmedCases")
-                         (abs dataValue)
+                         (I18N.NumberFormat.formatNumber (abs dataValue))
                  | InfectionsPerPopulation ->
                      sprintf
                          "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"
@@ -391,7 +402,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfInfectedPopulation")
-                         (Utils.percentageValuesLabelFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
                          (chartText "populationTotal")
                          (populationOf sex ageGroup)
                  | AbsoluteDeaths ->
@@ -401,7 +412,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "deceased")
-                         (abs dataValue)
+                         (I18N.NumberFormat.formatNumber (abs dataValue))
                  | DeathsPerPopulation ->
                      sprintf
                          "<b>%s</b><br/>%s: %s<br/>%s: %s<br/>%s: %d"
@@ -409,7 +420,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfDeceasedPopulation")
-                         (Utils.percentageValuesLabelFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
                          (chartText "populationTotal")
                          (populationOf sex ageGroup)
                  | DeathsPerInfections ->
@@ -419,7 +430,7 @@ let renderChartOptions
                          (chartText "age")
                          ageGroup
                          (chartText "shareOfDeceasedConfirmedCases")
-                         (Utils.percentageValuesLabelFormatter dataValue)
+                         (Utils.percentWith2DecimalFormatter dataValue)
             |}
         series = [|
             {| name = chartText "male"
@@ -447,7 +458,7 @@ let renderChartOptions
     |}
 
 let init (data : StatsData) : State * Cmd<Msg> =
-    { ChartMode = AbsoluteInfections; Data = data }, Cmd.none
+    { ChartMode = ChartMode.Default; Data = data }, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
@@ -480,8 +491,7 @@ let renderChartContainer state =
     ]
 
 let render (state : State) dispatch =
-    let activeScaleType = ChartMode.ScaleType state.ChartMode
-
+    let activeScaleType = state.ChartMode.ScaleType
     Html.div [
         Utils.renderChartTopControlRight
             (renderScaleTypeSelectors activeScaleType (ScaleTypeChanged >> dispatch))

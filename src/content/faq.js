@@ -34,17 +34,18 @@ export default [
             "data-usage",
             "chart-usage",
             "chart-infocard-percent",
-            "chart-infocard-phase",
             "metrics-comparison-chart",
             "chart-metrics-included",
             "chart-terminology",
             "cases-chart",
             "chart-phases",
             "patients-chart",
+            "icu-patients-chart",
             "care-patients-chart",
             "deceased-chart",
             "excess-deaths-chart",
             "daily-comparison-chart",
+            "schools-chart",
             "sources-chart",
             "ratios-chart",
             "hcenters-chart",
@@ -65,7 +66,10 @@ export default [
             "countries-deaths-chart",
             "chart-reality",
             "chart-percentage",
-            "chart-log-scale"
+            "chart-log-scale",
+            "chart-correlation",
+            "chart-cases-by-age-group",
+            "weekly-demographics-chart"
         ]
     },
     {

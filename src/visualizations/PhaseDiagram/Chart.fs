@@ -38,14 +38,9 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
             DisplayData = displayData
             Day = displayData.Length - 1 }, Cmd.none
     | MetricSelected metric ->
-        let newState =
-            match metric with
-            | CasesMetric -> { state with Metric = Cases }
-            | HospitalizedMetric -> { state with Metric = Hospitalized }
-            | DeceasedMetric -> { state with Metric = Deceased }
-            | UnknownMetric -> state
-        let newDisplayData = displayData newState.Metric state.DiagramKind state.StatsData
-        { newState with
+        let newDisplayData = displayData metric state.DiagramKind state.StatsData
+        { state with
+            Metric = metric
             DisplayData = newDisplayData
             Day = newDisplayData.Length - 1 }, Cmd.none
 
@@ -80,19 +75,19 @@ let totalVsWeekChartOptions state =
         tooltip = pojo
             {| formatter = fun () ->
                     let date = I18N.tOptions "days.longerDate" {| date = jsThis?point?date |}
-                    sprintf "<b>%s</b><br>%s: %d<br>%s: %d"
+                    sprintf "<b>%s</b><br>%s: %s<br>%s: %s"
                         date
-                        (i18n "totalVsWeek.xAxisLabel") jsThis?x
-                        (i18n "totalVsWeek.yAxisLabel") jsThis?y |}
+                        (i18n "totalVsWeek.xAxisLabel") (I18N.NumberFormat.formatNumber(jsThis?x : int))
+                        (i18n "totalVsWeek.yAxisLabel") (I18N.NumberFormat.formatNumber(jsThis?y : int)) |}
 
         series = [|
             {| data = data
-               color = state.Metric.Color.Light
+               color = state.Metric.GetColor.Light
                marker = pojo {| symbol = "circle" ; radius = 2 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
             {| data = [| data.[state.Day] |]
-               color = state.Metric.Color.Dark
+               color = state.Metric.GetColor.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
@@ -130,12 +125,12 @@ let weekVsWeekBeforeOptions state =
 
         series = [|
             {| data = data
-               color = state.Metric.Color.Light
+               color = state.Metric.GetColor.Light
                marker = pojo {| symbol = "circle" ; radius = 3 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
             {| data = [| data.[state.Day] |]
-               color = state.Metric.Color.Dark
+               color = state.Metric.GetColor.Dark
                marker = pojo {| symbol = "circle" ; radius = 8 |}
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
@@ -143,12 +138,11 @@ let weekVsWeekBeforeOptions state =
     |} |> pojo
 
 let renderMetricSelector (selected : Metric) dispatch =
-    let options =
-        Metric.AllMetrics
-        |> List.map (fun metric ->
+    let metrics = Metric.All |> List.map (fun metric -> (metric.ToString(), metric))
+    let options = metrics |> List.map (fun (metricString, metric) ->
             Html.option [
-                prop.text metric.Name
-                prop.value (metric.ToString())
+                prop.text metric.GetName
+                prop.value (metricString)
             ]
         )
 
@@ -156,7 +150,7 @@ let renderMetricSelector (selected : Metric) dispatch =
         prop.value (selected.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children options
-        prop.onChange (MetricSelected >> dispatch)
+        prop.onChange ( (fun ct -> Map.find ct (metrics |> Map.ofList)) >> MetricSelected >> dispatch)
     ]
 
 let renderDiagramKindSelectors (selected : DiagramKind) dispatch =
@@ -166,7 +160,7 @@ let renderDiagramKindSelectors (selected : DiagramKind) dispatch =
             Utils.classes
                 [(true, "chart-display-property-selector__item")
                  (diagramKind = selected, "selected") ]
-            prop.text diagramKind.Name
+            prop.text diagramKind.GetName
         ]
 
     Html.div [

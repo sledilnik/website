@@ -9,7 +9,6 @@ import hr from './locales/hr.json'
 import de from './locales/de.json'
 import it from './locales/it.json'
 
-
 import {Highcharts} from './visualizations/_highcharts'
 
 Vue.use(VueI18Next)
@@ -34,6 +33,20 @@ Highcharts.dateFormats.W = function (timestamp) {
   return getWeek(timestamp, {weekStartsOn: 1}).toString()
 };
 
+const langSeparators = {
+  "en": { decimal: ".", group: ","},
+  "sl": { decimal: ",", group: "."},
+  "de": { decimal: ",", group: "."},
+  "es": { decimal: ",", group: "."},
+  "hr": { decimal: ",", group: "."},
+  "it": { decimal: ",", group: "."},
+  "me": { decimal: ".", group: ","},
+  "mk": { decimal: ",", group: "."},
+  "ru": { decimal: ",", group: " "},
+  "sq": { decimal: ",", group: " "},
+  "nb": { decimal: ",", group: " "}
+}
+
 function setHighchartsOptions () {
     (window.Highcharts || Highcharts).setOptions({
         global: {
@@ -49,14 +62,18 @@ function setHighchartsOptions () {
             rangeSelectorZoom: i18next.t("charts.common.zoom"),
             resetZoom: i18next.t("charts.common.resetZoom"),
             resetZoomTitle: i18next.t("charts.common.resetZoomTitle"),
-            thousandsSep: i18next.t("charts.common.thousandsSep"),
-            decimalPoint: i18next.t("charts.common.decimalPoint"),
+            thousandsSep: i18next.separators.group,
+            decimalPoint: i18next.separators.decimal,
         }
     });
 };
 
 i18next.on('languageChanged', function(lng) {
-    setHighchartsOptions(Highcharts);
+  i18next.separators = {
+    decimal: langSeparators[lng].decimal,
+    group: langSeparators[lng].group
+  }
+  setHighchartsOptions(Highcharts);
 });
 
 i18next.use(LanguageDetector).init({
@@ -97,5 +114,9 @@ i18next.services.pluralResolver.addRule(
 localStorage.setItem('contextCountry', process.env.VUE_APP_LOCALE_CONTEXT)
 
 const i18n = new VueI18Next(i18next)
+
+export function formatNumber(number, opts = {}){
+  return Intl.NumberFormat(i18next.language || 'sl', opts).format(number)
+}
 
 export default i18n

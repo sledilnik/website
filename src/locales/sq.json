@@ -43,15 +43,6 @@
             "full": "Të plotësuar",
             "titleMenu": "Kapaciteti"
         },
-        "countries": {
-            "groupNeighbouring": "Shtetet e rajonit",
-            "groupNordic": "Shtetet Nordike",
-            "groupExYu": "Ish-Jugosllavia",
-            "groupEastAsiaOceania": "Azia Lindore dhe Oqeania",
-            "groupLatinAmerica": "Amerika Latine",
-            "nrDeathsPerMillion": "Nr. i të vdekurve për 1 milion banorë",
-            "title": "Krahasim sipas shtetit"
-        },
         "ageGroups": {
             "confirmedCases": "Raste të konfirmuara",
             "deceased": "Të vdekur",
@@ -149,7 +140,7 @@
             "negativeTests": "Teste negative",
             "ns-apr20": "Studim",
             "regular": "Të rregullt",
-            "allTesting": "Gjithsej",
+            "totalPCR": "Gjithsej",
             "title": "Testimi",
             "titleMenu": "Testimi"
         },
@@ -234,10 +225,6 @@
             "activeCases": "Raste aktive",
             "confirmedCases": "Raste të konfirmuara",
             "testsPerformed": "Teste",
-            "showToDate": "Deri tani",
-            "showToday": "Në ditë",
-            "showActive": "Aktive",
-            "show7DaysAverage": "Mesatarja 7-ditore",
             "titleMenu_MNE": "Mali i Zi - gjendja",
             "titleMenu_MKD": "M. Veriut - gjendja"
         },
@@ -258,8 +245,11 @@
             "yAxis": "Boshti Y:",
             "xAxis": "Boshti X:",
             "view": "Shfaq:",
-            "decimalPoint": ".",
             "all": "Të gjithë",
+            "showActive": "Aktive",
+            "showToday": "Në ditë",
+            "showToDate": "Deri tani",
+            "show7DaysAverage": "Mesatarja 7-ditore",
             "resetZoomTitle": "Shfaq tërë periudhën",
             "resetZoom": "Vlera fillestare e zmadhimit",
             "zoom": "Periudha",
@@ -267,7 +257,6 @@
             "loading": "Ngarkim i të dhënave…",
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
-            "thousandsSep": " ",
             "from": " ",
             "dataSource": "burim i të dhënave",
             "dsNIJZ": "ISHP",
@@ -300,17 +289,17 @@
             "newCases": "Raste të reja",
             "titleMenu": "Mosha - përqindja"
         },
-        "countriesTotalDeathsPer1M": {
+        "countriesTotalDeathsPer100k": {
             "legendTitle": "Gjithsej raste vdekje për 100.000 banorë",
             "yAxisTitle": "Gjithsej raste vdekje për 100.000 banorë",
             "titleMenu": "Shtetet - rastet e vdekjes"
         },
-        "countriesNewCasesPer1M": {
+        "countriesNewCasesPer100k": {
             "legendTitle": "Raste të reja në ditë për 100.000 banorë",
             "yAxisTitle": "Raste të reja në ditë për 100.000 banorë",
             "titleMenu": "Shtetet - raste të reja"
         },
-        "countriesActiveCasesPer1M": {
+        "countriesActiveCasesPer100k": {
             "red": "kriteret për listën e kuqe",
             "legendTitle": "Rastet aktive për 100.000 banorë",
             "yAxisTitle": "Rastet aktive për 100.000 banorë",
@@ -742,11 +731,6 @@
         "active": "Raste aktive",
         "confirmedToDate": "Raste të konfirmuara",
         "tests": "Teste sot",
-        "redPhaseGenitive": "kuqe",
-        "redPhase": "Faza e kuqe",
-        "orangePhaseGenitive": "portokalli",
-        "orangePhase": "Faza portokalli",
-        "per100k": "për 100 mijë",
         "incidence": "Incidenca 14-ditore"
     },
     "notice": {
@@ -1009,7 +993,7 @@
         "in_x_days_plural": "për {{ count }} ditë"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "region": {
         "kr": "Rajoni i Karniolës së Epërme (Gorenjska)",

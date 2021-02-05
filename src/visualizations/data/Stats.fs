@@ -26,6 +26,8 @@ type private TransferStatsDataPoint =
       month : int
       day : int
       phase : string
+      deceased : int option
+      deceasedToDate : int option
       tests :
         {|
             performed : {| toDate : int option; today : int option |}
@@ -59,16 +61,27 @@ type private TransferStatsDataPoint =
            deceasedToDate : int option
            deceased : int option
            outOfHospitalToDate : int option
-           outOfHospital : int option
-           recoveredToDate : int option |}
+           outOfHospital : int option |}
       statePerAgeToDate : TransferAgeGroup list
       deceasedPerAgeToDate : TransferAgeGroup list
+      deceasedPerType :
+        {| rhOccupant : int option
+           other : int option |}
+      vaccination :
+        {|
+            administered : {| toDate : int option; today : int option |}
+            administered2nd : {| toDate : int option; today : int option |}
+            used : {| toDate : int option |}
+            delivered : {| toDate : int option |}
+        |}
     }
 
     member this.ToDomain : StatsDataPoint =
         { DayFromStart = this.dayFromStart
           Date = System.DateTime(this.year, this.month, this.day)
           Phase = this.phase
+          Deceased = this.deceased
+          DeceasedToDate = this.deceasedToDate
           Tests =
             { Performed = { ToDate = this.tests.performed.toDate; Today = this.tests.performed.today }
               Positive = { ToDate = this.tests.positive.toDate; Today = this.tests.positive.today }
@@ -93,14 +106,21 @@ type private TransferStatsDataPoint =
               DeceasedToDate = this.statePerTreatment.deceasedToDate
               Deceased = this.statePerTreatment.deceased
               OutOfHospitalToDate = this.statePerTreatment.outOfHospitalToDate
-              OutOfHospital = this.statePerTreatment.outOfHospital
-              RecoveredToDate = this.statePerTreatment.recoveredToDate }
+              OutOfHospital = this.statePerTreatment.outOfHospital }
           StatePerAgeToDate = this.statePerAgeToDate |> List.map (fun item -> item.ToDomain)
           DeceasedPerAgeToDate = this.deceasedPerAgeToDate |> List.map (fun item -> item.ToDomain)
+          DeceasedPerType =
+            { RhOccupant = this.deceasedPerType.rhOccupant
+              Other = this.deceasedPerType.other }
           HospitalEmployeePositiveTestsToDate = this.cases.hs.employeeConfirmedToDate
           RestHomeEmployeePositiveTestsToDate = this.cases.rh.employeeConfirmedToDate
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
           UnclassifiedPositiveTestsToDate = this.cases.unclassified.confirmedToDate
+          Vaccination =
+            { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today }
+              Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = this.vaccination.administered2nd.today }
+              Used = { ToDate = this.vaccination.used.toDate; Today = None }
+              Delivered = { ToDate = this.vaccination.delivered.toDate; Today = None } }
         }
 
 type private TransferStatsData = TransferStatsDataPoint list

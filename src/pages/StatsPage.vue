@@ -2,90 +2,33 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
+      <div class="cards-wrapper">
+        <InfoCard
+          v-for="cardName in displayedInfoCards"
+          :key="cardName"
+          :cardName="cardName"
+          :cardData="summary[cardName]"
+          :loading="!summary || !summary[cardName] || !summary[cardName].value"
+        />
+      </div>
       <div class="posts d-flex" v-if="lastestTwoPosts && lastestTwoPosts.length">
           <PostTeaser class="col-md-6" v-for="post in lastestTwoPosts" :post="post" :key="post.id" />
       </div>
       <div class="posts d-flex" v-else>
           <PostTeaserSkeleton class="col-md-6" v-for="i in 2" :key="i" />
       </div>
-      <div class="cards-wrapper">
-        <!--
-        <Info-card
-          :title="$t('infocard.tests')"
-          field="tests.performed.today"
-          good-trend="up"
-          series-type="state"
-        />
--->
-        <Info-card
-          :title="$t('infocard.confirmedToDate')"
-          field="cases.confirmedToDate"
-          name="cases.confirmedToDate"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <!--
-        <Info-card
-          :title="$t('infocard.recoveredToDate')"
-          field="cases.recoveredToDate"
-          good-trend="up"
-          series-type="state"
-        />
--->
-        <Info-card
-          :title="$t('infocard.active')"
-          field="cases.active"
-          field-new-cases="cases.confirmedToday"
-          field-deceased="statePerTreatment.deceased"
-          name="cases.active"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.newCases7d')"
-          field="cases.active"
-          name="newCases7d"
-          running-sum-field="cases.confirmedToday"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.inHospital')"
-          field="statePerTreatment.inHospital"
-          total-in="total.inHospital.in"
-          total-out="total.inHospital.out"
-          total-deceased="total.deceased.hospital.today"
-          name="statePerTreatment.inHospital"
-          running-sum-field="total.inHospital.in"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.icu')"
-          field="statePerTreatment.inICU"
-          total-in="total.icu.in"
-          total-out="total.icu.out"
-          total-deceased="total.deceased.hospital.icu.today"
-          name="statePerTreatment.inICU"
-          running-sum-field="total.icu.in"
-          series-type="state"
-        />
-        <Info-card
-          :title="$t('infocard.deceasedToDate')"
-          field="statePerTreatment.deceasedToDate"
-          name="statePerTreatment.deceasedToDate"
-          running-sum-field="statePerTreatment.deceased"
-          series-type="state"
-        />
-      </div>
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
         </b-col>
       </b-row>
+<!-- COMMENT OUT
       <b-row cols="12">
         <b-col>
-          <Youtube id="R_VftBj375I"></Youtube>
+          <Youtube id="zJtKZ82jXAI"></Youtube>
         </b-col>
       </b-row>
+     COMMENT OUT -->
     </b-container>
     <FloatingMenu :list="charts" :title="$t('navbar.goToGraph')" />
   </div>
@@ -98,7 +41,6 @@ import PostTeaser from "components/cards/PostTeaser";
 import PostTeaserSkeleton from "components/cards/PostTeaserSkeleton";
 import TimeStamp from "components/TimeStamp";
 import Notice from "components/Notice";
-import Posts from "components/Posts";
 import Youtube from "components/Youtube";
 import FloatingMenu from "components/FloatingMenu";
 import { Visualizations } from "visualizations/App.fsproj";
@@ -112,18 +54,30 @@ export default {
     TimeStamp,
     PostTeaser,
     PostTeaserSkeleton,
-    Youtube,
+    //Youtube,
     FloatingMenu,
   },
   data() {
     return {
       loaded: false,
       charts: [],
-      headerTeasers: false
+      headerTeasers: false,
+      displayedInfoCards: [
+        'testsToday',
+        'testsTodayHAT',
+        // 'casesToDateSummary',
+        'casesActive',
+        'casesAvg7Days',
+        'hospitalizedCurrent',
+        'icuCurrent',
+        'deceasedToDate',
+        'vaccinationSummary'
+      ]
     };
   },
   created(){
     this.$store.dispatch('posts/fetchLatestPosts')
+    this.$store.dispatch('stats/fetchSummary')
   },
   mounted() {
     this.$nextTick(() => {
@@ -149,6 +103,7 @@ export default {
   computed: {
     ...mapState("stats", {
       exportTime: "exportTime",
+      summary: "summary",
     }),
     ...mapGetters('posts', [
       'lastestTwoPosts'
@@ -207,17 +162,21 @@ $loader-width: 50px
     min-height: 247px
 
 .cards-wrapper
-  display: flex
-  flex-wrap: wrap
   display: grid
   gap: 15px
-  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr))
+  grid-template-columns: repeat(1, minmax(165px, 1fr))
   margin: 0px auto 44px
+
+  @media only screen and (min-width: 411px)
+    grid-template-columns: repeat(2, minmax(165px, 1fr))
 
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
     margin: 0px 15px 88px
+
+  @media only screen and (min-width: 992px)
+    grid-template-columns: repeat(4, minmax(165px, 1fr))
 
 .stats-page
   margin-top: 48px

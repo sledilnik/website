@@ -1,68 +1,28 @@
 ﻿module AgeGroupsTimelineViz.Synthesis
 
-open Types
-open AgeGroupsTimelineViz.Analysis
-open System.Collections.Generic
+open DataAnalysis.AgeGroupsTimeline
+open DataVisualization.ChartingTypes
 open System.Text
 open Fable.Core
 open JsInterop
 
-type CasesInAgeGroupForDay = int
-type CasesInAgeGroupTimeline = DatedArray<CasesInAgeGroupForDay>
-type CasesInAgeGroupSeries = {
-    AgeGroupKey: AgeGroupKey
-    Timeline: CasesInAgeGroupTimeline
-}
 
-type AllCasesInAgeGroupSeries = IDictionary<AgeGroupKey, CasesInAgeGroupSeries>
-
-type ChartType =
-    | StackedBarNormal
-    | StackedBarPercent
-
-type DisplayMetricsType = NewCases | ActiveCases
 type DisplayMetrics = {
     Id: string
-    MetricsType: DisplayMetricsType
+    ValueCalculation: ValueCalculationFormula
     ChartType: ChartType
-}
-
-let availableDisplayMetrics = [|
-    { Id = "newCases"; MetricsType = NewCases
-      ChartType = StackedBarNormal }
-    { Id = "newCasesRelative"; MetricsType = NewCases
-      ChartType = StackedBarPercent }
-    { Id = "activeCases"; MetricsType = ActiveCases
-      ChartType = StackedBarNormal }
-    { Id = "activeCasesRelative"; MetricsType = ActiveCases
-      ChartType = StackedBarPercent }
-|]
-
-let listAgeGroups (timeline: CasesByAgeGroupsTimeline): AgeGroupKey list  =
-    timeline.Data.[0]
-    |> List.map (fun group -> group.GroupKey)
-    |> List.sortBy (fun groupKey -> groupKey.AgeFrom)
-
-let extractTimelineForAgeGroup
-    ageGroupKey
-    (metricsType: DisplayMetricsType)
-    (casesTimeline: CasesByAgeGroupsTimeline)
-    : CasesInAgeGroupTimeline =
-
-    let newCasesTimeline =
-        casesTimeline
-        |> mapDatedArrayItems (fun dayGroupsData ->
-                    let dataForGroup =
-                        dayGroupsData
-                        |> List.find(fun group -> group.GroupKey = ageGroupKey)
-                    dataForGroup.All
-                    |> Utils.optionToInt
-                )
-    match metricsType with
-    | NewCases -> newCasesTimeline
-    | ActiveCases ->
-        newCasesTimeline
-        |> mapDatedArray (Statistics.calculateWindowedSumInt 14)
+} with
+    static member All = [|
+        { Id = "newCases"; ValueCalculation = Daily
+          ChartType = StackedBarNormal }
+        { Id = "newCasesRelative"; ValueCalculation = Daily
+          ChartType = StackedBarPercent }
+        { Id = "activeCases"; ValueCalculation = Active
+          ChartType = StackedBarNormal }
+        { Id = "activeCasesRelative"; ValueCalculation = Active
+          ChartType = StackedBarPercent }
+    |]
+    static member Default = DisplayMetrics.All.[0]
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points
@@ -93,7 +53,7 @@ let tooltipFormatter jsThis =
                     let dataValue: int = dataPoint?y
 
                     match dataValue with
-                    | 0 -> ignore()
+                    | 0 -> ()
                     | _ ->
                         let format =
                             "<td style='color: {0}'>●</td>"+
@@ -105,7 +65,7 @@ let tooltipFormatter jsThis =
 
                         let percentage =
                             (float dataValue) * 100. / totalCases
-                            |> Utils.percentageValuesWith1DecimalTrailingZeroLabelFormatter
+                            |> Utils.percentWith1DecimalFormatter
 
                         s.Append "<tr>" |> ignore
                         let ageGroupTooltip =
@@ -113,7 +73,7 @@ let tooltipFormatter jsThis =
                                 (format,
                                  ageGroupColor,
                                  ageGroupLabel,
-                                 dataValue,
+                                 I18N.NumberFormat.formatNumber(dataValue),
                                  percentage)
                         s.Append ageGroupTooltip |> ignore
                         s.Append "</tr>" |> ignore

@@ -21,12 +21,13 @@ type RegionsChartState =
       ScaleType : ScaleType
       MetricType : MetricType
       RegionsData : RegionsData
-      Regions : Region list
+      RegionsSorted : AreaCases list
       RegionsConfig : RegionRenderingConfiguration list
       RangeSelectionButtonIndex: int
+      ShowAll : bool
     }
 
-type RegionSeriesValues = (JsTimestamp * float)[]
+type RegionSeriesValues = (DateTime * float)[]
 
 let visibleRegions state =
     state.RegionsConfig
@@ -59,8 +60,9 @@ let allSeries state =
         let regionName = regionConfig.Key
 
         let regionMetrics =
-            metricForRegion state.RegionsData
-                startDate regionName state.MetricType
+            match regionName with
+            | "si"  -> metricForAllRegions state.RegionsData startDate regionName state.MetricType
+            | _     -> metricForRegion state.RegionsData startDate regionName state.MetricType
 
         let regionPopulation =
             Utils.Dictionaries.regions.[regionName].Population
@@ -77,14 +79,14 @@ let allSeries state =
         let seriesValuesHc: RegionSeriesValues =
             regionMetrics2nStep.MetricValues
             |> Array.mapi (fun i metricValue ->
-                let ts = startDate |> Days.add i |> jsTime12h
+                let date = startDate |> Days.add i
 
                 let finalValue =
                     match state.ChartConfig.RelativeTo with
                     | Absolute -> metricValue |> float
                     | Pop100k -> (float metricValue) / regionPopBy100k
 
-                ts, finalValue
+                date, finalValue
             )
 
         let seriesValuesHc2nStep =
@@ -92,6 +94,12 @@ let allSeries state =
             |> match state.MetricType with
                | NewCases7Days -> Statistics.calcRunningAverage
                | _ -> id
+            |> Array.map (fun value -> 
+                            let date = value |> fst
+                            pojo {|
+                                    x = date |> jsTime12h
+                                    y = value |> snd
+                                    date = I18N.tOptions "days.longerDate" {| date = date |} |})
 
         {|
             name = I18N.tt "region" regionConfig.Key

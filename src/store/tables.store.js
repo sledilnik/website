@@ -1,4 +1,5 @@
 import i18next from 'i18next'
+import { formatNumber } from '../i18n';
 import { exportTime, loadCsv } from './index'
 
 function processTableData(data) {
@@ -16,7 +17,7 @@ function processTableData(data) {
             date: new Date(day.date),
             interpolation: { escapeValue: false },
           })
-          newData[date] = day[dimension]
+          newData[date] = formatNumber(day[dimension])
         })
       return newData
     })

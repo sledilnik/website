@@ -15,7 +15,7 @@ let barMaxHeight = 65
 let showMaxBars = 30
 let collapsedMunicipalityCount = 16
 
-let excludedMunicipalities = Set.ofList ["kraj"]
+let excludedMunicipalities = Set.ofList [ "neznano" ]
 
 type Region =
     { Key : string
@@ -46,6 +46,26 @@ type View =
     | TotalConfirmedCases
     | LastConfirmedCase
     | DoublingTime
+
+    static member All =
+        if Highcharts.showDoublingTimeFeatures then
+            [ DoublingTime
+              LastConfirmedCase
+              ActiveCases
+              TotalConfirmedCases ]
+        else
+            [ LastConfirmedCase
+              ActiveCases
+              TotalConfirmedCases ]
+
+    static member Default = LastConfirmedCase
+
+    member this.GetName =
+        match this with
+        | DoublingTime -> I18N.t "charts.municipalities.viewDoublingTime"
+        | ActiveCases -> I18N.t "charts.municipalities.viewActive"
+        | TotalConfirmedCases -> I18N.t "charts.municipalities.viewTotal"
+        | LastConfirmedCase -> I18N.t "charts.municipalities.viewLast"
 
 type Query (query : obj, regions : Region list) =
     member this.Query = query
@@ -90,7 +110,7 @@ type Msg =
     | RegionFilterChanged of string
     | ViewChanged of View
 
-let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
+let init (queryObj : obj) (data : MunicipalitiesData) : State * Cmd<Msg> =
     let lastDataPoint = List.last data
 
     let regions =
@@ -103,11 +123,11 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
 
     let municipalities =
         seq {
-            for regionsDataPoint in data do
-                for region in regionsDataPoint.Regions do
+            for municipalitiesDataPoint in data do
+                for region in municipalitiesDataPoint.Regions do
                     for municipality in region.Municipalities do
                         if not (Set.contains municipality.Name excludedMunicipalities) then
-                            yield {| Date = regionsDataPoint.Date
+                            yield {| Date = municipalitiesDataPoint.Date
                                      RegionKey = region.Name
                                      MunicipalityKey = municipality.Name
                                      ActiveCases = municipality.ActiveCases
@@ -161,7 +181,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
         { Municipalities = municipalities
           Regions = regions
           ShowAll = false
-          SearchQuery = 
+          SearchQuery =
             match query.Search with
             | None -> ""
             | Some search -> search
@@ -171,7 +191,7 @@ let init (queryObj : obj) (data : RegionsData) : State * Cmd<Msg> =
             | Some region -> region
           View =
             match query.View with
-            | None -> LastConfirmedCase
+            | None -> View.Default
             | Some view -> view }
 
     state, Cmd.none
@@ -282,24 +302,24 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                                 prop.className "active"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.active") ]
-                                                    Html.b [ prop.text activeCases ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(activeCases)) ] ] ]
                                         Html.div [
                                             if (recoveredToDate > 0) then
                                                 prop.className "recovered"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.recovered") ]
-                                                    Html.b [ prop.text recoveredToDate ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(recoveredToDate)) ] ] ]
                                         Html.div [
                                             if (deceasedToDate > 0) then
                                                 prop.className "deceased"
                                                 prop.children [
                                                     Html.span [ prop.text (I18N.t "charts.municipalities.deceased") ]
-                                                    Html.b [ prop.text deceasedToDate ] ] ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(deceasedToDate)) ] ] ]
                                         Html.div [
                                             prop.className "confirmed"
                                             prop.children [
                                                 Html.span [ prop.text (I18N.t "charts.municipalities.all") ]
-                                                Html.b [ prop.text confirmedToDate ] ] ]
+                                                Html.b [ prop.text (I18N.NumberFormat.formatNumber(confirmedToDate)) ] ] ]
                                     ]
                                 ]
                             ]
@@ -328,17 +348,17 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         prop.children [
                             Html.div [
                                 prop.className "active"
-                                prop.text (sprintf "%d" (municipality.ActiveCases |> Option.defaultValue 0)) ]
+                                prop.text (I18N.NumberFormat.formatNumber(municipality.ActiveCases |> Option.defaultValue 0)) ]
                             Html.div [
                                 prop.className "total-and-new"
                                 prop.children [
                                     Html.div [
                                         prop.className "total"
-                                        prop.text (sprintf "%d" (municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
+                                        prop.text (I18N.NumberFormat.formatNumber(municipality.MaxConfirmedCases |> Option.defaultValue 0)) ]
                                     if municipality.NewCases.IsSome then
                                         Html.div [
                                             prop.className "new"
-                                            prop.text (sprintf "(+%d)" (municipality.NewCases |> Option.defaultValue 0)) ]
+                                            prop.text (sprintf "(+%s)" (I18N.NumberFormat.formatNumber(municipality.NewCases |> Option.defaultValue 0))) ]
                                 ]
                             ]
                             Html.div [
@@ -499,9 +519,9 @@ let renderRegionSelector (regions : Region list) (selected : string) dispatch =
 
 let renderView (currentView : View) dispatch =
 
-    let renderSelector (view : View) (label : string) =
+    let renderSelector (view : View) =
         let defaultProps =
-            [ prop.text label
+            [ prop.text view.GetName
               Utils.classes [
                   (true, "chart-display-property-selector__item")
                   (view = currentView, "selected") ] ]
@@ -509,17 +529,11 @@ let renderView (currentView : View) dispatch =
         then Html.div defaultProps
         else Html.div ((prop.onClick (fun _ -> ViewChanged view |> dispatch)) :: defaultProps)
 
-    Html.div [
-        prop.className "chart-display-property-selector"
-        prop.children [
-            Html.text (I18N.t "charts.common.sortBy")
-            if Highcharts.showDoublingTimeFeatures then
-                renderSelector View.DoublingTime (I18N.t "charts.municipalities.viewDoublingTime")
-            renderSelector View.LastConfirmedCase (I18N.t "charts.municipalities.viewLast")
-            renderSelector View.ActiveCases (I18N.t "charts.municipalities.viewActive")
-            renderSelector View.TotalConfirmedCases (I18N.t "charts.municipalities.viewTotal")
-        ]
-    ]
+    Html.div [ prop.className "chart-display-property-selector"
+               prop.children
+                   (Seq.append
+                       (Seq.singleton (Html.text (I18N.t "charts.common.sortBy")))
+                        (Seq.map renderSelector View.All)) ]
 
 let render (state : State) dispatch =
     let renderedMunicipalities, showMore = renderMunicipalities state dispatch
@@ -562,5 +576,5 @@ let render (state : State) dispatch =
 
     element
 
-let municipalitiesChart (props : {| query : obj ; data : RegionsData |}) =
+let municipalitiesChart (props : {| query : obj ; data : MunicipalitiesData |}) =
     React.elmishComponent("MunicipalitiesChart", init props.query props.data, update, render)

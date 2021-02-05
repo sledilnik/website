@@ -1,8 +1,8 @@
 [<RequireQualifiedAccess>]
 module AgeGroupsTimelineViz.Rendering
 
-open System
-open Analysis
+open DataAnalysis.AgeGroupsTimeline
+open DataVisualization.ChartingTypes
 open Synthesis
 open Highcharts
 open Types
@@ -29,7 +29,7 @@ type Msg =
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        Metrics = availableDisplayMetrics.[0]
+        Metrics = DisplayMetrics.Default
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
@@ -41,64 +41,10 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let renderChartOptions state dispatch =
-
-    // map state data into a list needed for calculateCasesByAgeTimeline
-    let totalCasesByAgeGroupsList =
-        state.Data
-        |> List.map (fun point -> (point.Date, point.StatePerAgeToDate))
-
-    let totalCasesByAgeGroups =
-        mapDateTuplesListToArray totalCasesByAgeGroupsList
-
-    // calculate complete merged timeline
-    let timeline = calculateCasesByAgeTimeline totalCasesByAgeGroups
-
-    // get keys of all age groups
-    let allGroupsKeys = listAgeGroups timeline
-
-    let colorOfAgeGroup ageGroupIndex =
-        let colors =
-            [| "#FFEEBA"; "#FFDA6B";"#E9B825";"#AEEFDB";"#52C4A2";"#33AB87"
-               "#189A73";"#F4B2E0";"#D559B0";"#B01C83" |]
-        colors.[ageGroupIndex]
-
-    let mapPoint
-        (startDate: DateTime)
-        (daysFromStartDate: int)
-        (cases: CasesInAgeGroupForDay) =
-        let date = startDate |> Days.add daysFromStartDate
-
-        pojo {|
-             x = date |> jsTime12h :> obj
-             y = cases
-             date = I18N.tOptions "days.longerDate" {| date = date |}
-        |}
-
-    let mapAllPoints (groupTimeline: CasesInAgeGroupTimeline) =
-        let startDate = groupTimeline.StartDate
-        let timelineArray = groupTimeline.Data
-
-        timelineArray
-        |> Array.mapi (fun i cases -> mapPoint startDate i cases)
-
-    // generate all series
     let allSeries =
-        allGroupsKeys
-        |> List.mapi (fun index ageGroupKey ->
-            let points =
-                timeline
-                |> extractTimelineForAgeGroup
-                       ageGroupKey state.Metrics.MetricsType
-                |> mapAllPoints
-
-            pojo {|
-                 visible = true
-                 name = ageGroupKey.Label
-                 color = colorOfAgeGroup index
-                 data = points
-            |}
-        )
-        |> List.toArray
+        getAgeGroupTimelineAllSeriesData
+            state.Data state.Metrics.ValueCalculation
+            (fun dataPoint -> dataPoint.StatePerAgeToDate)
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -108,7 +54,7 @@ let renderChartOptions state dispatch =
 
     let className = "covid19-infections"
     let baseOptions =
-        Highcharts.basicChartOptions
+        basicChartOptions
             ScaleType.Linear className
             state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
@@ -138,6 +84,7 @@ let renderChartOptions state dispatch =
                     match state.Metrics.ChartType with
                     | StackedBarNormal -> pojo {| stacking = "normal" |}
                     | StackedBarPercent -> pojo {| stacking = "percent" |}
+                    | _ -> invalidOp "not supported"
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
@@ -153,7 +100,7 @@ let renderChartContainer state dispatch =
         prop.className "highcharts-wrapper"
         prop.children [
             renderChartOptions state dispatch
-            |> Highcharts.chartFromWindow
+            |> chartFromWindow
         ]
     ]
 
@@ -171,7 +118,7 @@ let renderMetricsSelectors activeMetrics dispatch =
 
     Html.div [
         prop.className "metrics-selectors"
-        availableDisplayMetrics
+        DisplayMetrics.All
         |> Array.map renderSelector
         |> prop.children
     ]

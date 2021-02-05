@@ -11,12 +11,13 @@
         <Compile Include="AgeGroupsChartTests\Merging infections and deaths.fs" />
         <Compile Include="AgeGroupsChartTests\Sorting age groups.fs" />
         <Compile Include="AgeGroupsTimelineTests\TestHelpers.fs" />
-        <Compile Include="AgeGroupsTimelineTests\Working with dated arrays.fs" />
         <Compile Include="AgeGroupsTimelineTests\Calculating cases by age for day.fs" />
         <Compile Include="AgeGroupsTimelineTests\Calculating cases by age timeline.fs" />
         <Compile Include="AgeGroupsTimelineTests\Sythensizing data.fs" />
         <Compile Include="CountriesChartTests\Grouping OWID data by countries.fs" />
         <Compile Include="CountriesChartTests\Averaging country data.fs" />
+        <Compile Include="DataAnalysisTests\Working with dated arrays.fs" />
+        <Compile Include="StatisticsTests\calcRunningAverage tests.fs" />
         <Compile Include="Date arithmetic.fs" />
         <Compile Include="Calculating windowed sums.fs" />
         <Compile Include="Program.fs" />

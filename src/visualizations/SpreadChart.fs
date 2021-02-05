@@ -15,8 +15,8 @@ type Scale =
     | Percentage
     | DoublingRate
   with
-    static member all = [ Absolute; Percentage; DoublingRate ]
-    static member getName = function
+    static member All = [ Absolute; Percentage; DoublingRate ]
+    static member GetName = function
         | Absolute      -> I18N.t "charts.spread.absolute"
         | Percentage    -> I18N.t "charts.spread.percentage"
         | DoublingRate  -> I18N.t "charts.spread.doublingRate"
@@ -25,9 +25,10 @@ type Page =
     | Chart of Scale
     | Explainer
   with
-    static member all = (Scale.all |> List.map Chart) @ [ Explainer ]
-    static member getName = function
-        | Chart scale   -> Scale.getName scale
+    static member All = (Scale.All |> List.map Chart) @ [ Explainer ]
+    static member Default = Chart Absolute
+    static member GetName = function
+        | Chart scale   -> Scale.GetName scale
         | Explainer     -> I18N.t "charts.spread.explainer"
 
 type State = {
@@ -42,7 +43,7 @@ type Msg =
 
 let init data : State * Cmd<Msg> =
     let state = {
-        page = Chart Absolute
+        page = Page.Default
         data = data
         RangeSelectionButtonIndex = 0
     }
@@ -276,12 +277,12 @@ let renderScaleSelectors state dispatch =
                 [(true, "btn  btn-sm metric-selector")
                  (isActive, "metric-selector--selected")]
             prop.style style
-            prop.text (page |> Page.getName) ]
+            prop.text (page |> Page.GetName) ]
 
     Html.div [
         prop.className "metrics-selectors"
         prop.children [
-            for page in Page.all do
+            for page in Page.All do
                 yield renderScaleSelector page dispatch
         ]
     ]

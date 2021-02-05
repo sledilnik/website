@@ -1,8 +1,9 @@
-﻿module AgeGroupsTimelineViz.Analysis
+﻿module WeeklyDemographicsViz.Analysis
 
 open System
 open System.Collections.Generic
 open Types
+
 
 type DateTuple<'T> = DateTime * 'T
 type DateTupleList<'T> = DateTuple<'T> list
@@ -10,6 +11,11 @@ type DatedArray<'T> = {
     StartDate: DateTime
     Data: 'T[]
 }
+
+type CasesByAgeGroupsForDay = AgeGroupsList
+
+type CasesByAgeGroupsTimeline = DatedArray<AgeGroupsList>
+
 
 let mapDateTuplesListToArray (dateTupleList: DateTupleList<'T>)
     : DatedArray<'T> =
@@ -61,9 +67,6 @@ let mapDatedArray mapping datedArray =
     let originalArray = datedArray.Data
     { StartDate = startDate; Data = originalArray |> mapping }
 
-type CasesByAgeGroupsForDay = AgeGroupsList
-
-type CasesByAgeGroupsTimeline = DatedArray<AgeGroupsList>
 
 let calcCasesByAgeForDay
     (prevDay: AgeGroupsList option)

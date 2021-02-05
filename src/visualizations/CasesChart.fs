@@ -13,13 +13,9 @@ open Browser
 open Types
 open Highcharts
 
-type DisplayType =
-    | MultiChart
-
 type State = {
     data: StatsData
     PatientsData : PatientsStats []
-    displayType: DisplayType
     RangeSelectionButtonIndex: int
     Error : string option
 }
@@ -27,7 +23,6 @@ type State = {
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
-    | ChangeDisplayType of DisplayType
     | RangeSelectionChanged of int
 
 type Series =
@@ -40,12 +35,12 @@ type Series =
     | Icu
     | Critical
 
-module Series =
-    let all =
+    static member All =
         [ Active; InHospital; Icu; Critical; Recovered
           DeceasedOther; DeceasedInHospitals; DeceasedInIcu ]
 
-    let getSeriesInfo = function
+    member this.GetSeriesInfo =
+        match this with
         | DeceasedInIcu        -> true,  "#6d5b80",   "deceased-icu"
         | DeceasedInHospitals  -> true,  "#8c71a8",   "deceased-hospital"
         | DeceasedOther        -> true,  "#c59eef",   "deceased-rest"
@@ -59,7 +54,6 @@ let init data : State * Cmd<Msg> =
     let state = {
         data = data
         PatientsData = [||]
-        displayType = MultiChart
         RangeSelectionButtonIndex = 0
         Error = None
     }
@@ -77,8 +71,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeDisplayType rt ->
-        { state with displayType=rt }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -101,7 +93,7 @@ let legendFormatter jsThis =
                 fmtUnder
                 p?series?color
                 p?series?name
-                p?point?fmtTotal
+                (I18N.NumberFormat.formatNumber(p?point?fmtTotal:int))
     fmtStr
 
 let renderChartOptions (state : State) dispatch =
@@ -174,7 +166,7 @@ let renderChartOptions (state : State) dispatch =
             |> Seq.toList
             |> List.sortBy (fun (date, _, _) -> date)
 
-        let visible, color, seriesId = Series.getSeriesInfo series
+        let visible, color, seriesId = series.GetSeriesInfo
         {|
             ``type`` = "column"
             visible = visible
@@ -198,7 +190,7 @@ let renderChartOptions (state : State) dispatch =
         |> pojo
 
     let allSeries = [|
-        for series in Series.all do
+        for series in Series.All do
             yield renderSeries series
     |]
 

@@ -108,6 +108,7 @@ $table-border: rgb(222,222 ,222)
 
       &:not(.b-table-sticky-column)
         color: rgba(0, 0, 0, 0.7) !important
+        text-align: right
 
 
   .border
