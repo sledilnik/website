@@ -1776,6 +1776,10 @@
                     "title": "Hvala za enkratno donacijo",
                     "description": " "
                 }
+            },
+            "sms": {
+                "description": "Donacijo lahko izvedete s poslanim **SMS sporočilom**. Pri operaterjih Telekom Slovenije, A1 Slovenija, TODO... na številko **1919** pošljite SMS sporočilo z vsebino:",
+                "donateButton": "\"{{keyword}}\" za donacijo {{amount}}"
             }
         },
         "monthly": {

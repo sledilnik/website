@@ -95,6 +95,15 @@
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
         <div>
+          <div v-html-md="$t('donation.onetime.sms.description')" />
+          <div class="stripeCheckout">
+            <span v-for="(item) in [1,5,10]" :key="item">
+                <button @click="sendSms(item)">{{ $t("donation.onetime.sms.donateButton", {amount: item + " EUR", keyword: "SLEDILNIK" + item }) }}</button>
+            </span>
+          </div>
+        </div>
+
+        <div>
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -240,6 +249,9 @@ export default {
     submitOneTimeDonation (item) {
       this.$refs.checkoutOneTimeDonationRef.lineItems = item.lineItems;
       this.$refs.checkoutOneTimeDonationRef.redirectToCheckout();
+    },
+    sendSms (item) {
+      window.location.href="sms:1919?&body=SLEDILNIK"+item
     },
   },
 };
