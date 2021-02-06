@@ -641,6 +641,18 @@
         "closeSchools3": {
             "title": "OŠ 1-3",
             "description": "Zapro se vrtci in osnovna šola od 1. do 3. razreda v obalno-kraški in zasavski regiji.<br>Omogočena prodaja 🧦 in 🩲 v živilskih trgovinah."
+        },
+        "bordersStrict": {
+            "title": "Meje",
+            "description": "Manj izjem za vstop v državo brez negativnega testa in karantene."
+        },
+        "liftShops2": {
+            "title": "Prodajalne",
+            "description": "Sproščanje: vse trgovine do 400 m2, kozmetične storitve, individualno strokovno izobraževanje,...<br>(za nekatere storitve potreben negativen test potrošnikov in/ali zaposlenih)"
+        },
+        "liftSchools3All": {
+            "title": "OŠ 1-3",
+            "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v vseh regijah."
         }
     },
     "phase": {
@@ -698,6 +710,10 @@
         "14": {
             "title": "faza<br>14",
             "description": "hitri antigenski testi"
+        },
+        "15": {
+            "title": "faza<br>15",
+            "description": "nov režim testiranja HAT"
         }
     },
     "charts": {
