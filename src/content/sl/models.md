@@ -74,7 +74,7 @@ Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) 
 
 ## <a id="articles"></a>Prispevki
 
-- Prof. Janez Žibert na podlagi številnih simulacij [v krajših prispevkih](https://rpubs.com/janezz/) opisuje nekatere ključne in aktualne dejavnike ob širitvi virusa, med drugim: [vpliv cepljenja](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [medgeneracijsko mešanje in odprtje šol](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev) ter [prisotnost nove različice virusa](https://rpubs.com/janezz/sir_dva_seva). (26. 1. 2021)
+- Prof. Janez Žibert na podlagi številnih simulacij v krajših prispevkih opisuje nekatere [ključne in aktualne dejavnike ob širitvi virusa](https://rpubs.com/janezz/), med drugim: [vpliv cepljenja](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [medgeneracijsko mešanje in odprtje šol](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev) ter [prisotnost nove različice virusa](https://rpubs.com/janezz/sir_dva_seva). (26. 1. 2021)
 
 - Raziskovalci IBMI so pod vodstvom dr. Nine Ružić Gorenjec v svoji analizi ["Od zgodbe o uspehu do katastrofe"](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1) poudaril, kako zelo važna sta naša mobilnost in epidemiološko sledenje stikom za uspešen odziv proti epidemiji. (13. 1. 2021)
 
