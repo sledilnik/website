@@ -187,6 +187,7 @@ type VisualizationType =
     | Regions
     | Regions100k
     | Schools
+    | SchoolStatus
     | Sources
     | Municipalities
     | AgeGroups

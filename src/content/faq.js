@@ -46,6 +46,7 @@ export default [
             "excess-deaths-chart",
             "daily-comparison-chart",
             "schools-chart",
+            "school-status-chart",
             "sources-chart",
             "ratios-chart",
             "hcenters-chart",
