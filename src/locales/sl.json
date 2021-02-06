@@ -1778,8 +1778,8 @@
                 }
             },
             "sms": {
-                "description": "Donacijo lahko izvedete s poslanim **SMS sporočilom**. Pri operaterjih Telekom Slovenije, A1 Slovenija, TODO... na številko **1919** pošljite SMS sporočilo z vsebino:",
-                "donateButton": "\"{{keyword}}\" za donacijo {{amount}}"
+                "description": "Donacijo lahko izvedete s poslanim **SMS sporočilom** pri mobilnih operaterjih Telekom Slovenije ([pogoji](/doc/TODO.pdf)), A1 Slovenija ([pogoji](/doc/TODO.pdf)) ali Telemach ([pogoji](/doc/TODO.pdf)). Izberite znesek:",
+                "donateDetails": "Za donacijo **{{amount}}** pošljite SMS sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** ali z mobilnim telefonom poskenirajte QR kodo."
             }
         },
         "monthly": {

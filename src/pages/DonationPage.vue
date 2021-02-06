@@ -95,15 +95,6 @@
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
         <div>
-          <div v-html-md="$t('donation.onetime.sms.description')" />
-          <div class="stripeCheckout">
-            <span v-for="(item) in [1,5,10]" :key="item">
-                <button @click="sendSms(item)">{{ $t("donation.onetime.sms.donateButton", {amount: item + " EUR", keyword: "SLEDILNIK" + item }) }}</button>
-            </span>
-          </div>
-        </div>
-
-        <div>
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -167,6 +158,20 @@
             </span>
           </div>
         </div>
+
+        <div v-if="language=='sl'">
+          <div v-html-md="$t('donation.onetime.sms.description')" />
+          <div class="stripeCheckout">
+            <span v-for="(item) in smsAmounts" :key="item">
+                <button v-if="showSmsButtons" @click="smsDonateClick(item)">{{ item + " EUR" }}</button>
+            </span>
+          </div>
+          <div v-if="smsShowDetails" class="smsDetails">
+            <img :src="smsQrImage(smsSelectedItem)" class="smsqr">
+            <div v-html="smsDetailsHtml"></div>
+          </div>
+        </div>
+
       </div>
 
       <!--
@@ -191,6 +196,7 @@
 
 <script>
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
+import marked from "marked";
 
 function parseStripeItemsFromConfig(config) {
   var items = [];
@@ -238,6 +244,13 @@ export default {
       successURL: `${location.origin}/${this.$i18n.i18next.language}/donate?stripeSessionId={CHECKOUT_SESSION_ID}`,
       cancelURL: `${location.origin}/${this.$i18n.i18next.language}/donate`,
       language: `${this.$i18n.i18next.language}`,
+      smsNumber: 1919,
+      smsKeyword: "SLEDILNIK",
+      smsAmounts: [1,5,10],
+      smsSelectedItem: 10,
+      smsShowDetails: false,
+      smsDetailsHtml: "",
+      showSmsButtons: true
     };
   },
   methods: {
@@ -250,9 +263,19 @@ export default {
       this.$refs.checkoutOneTimeDonationRef.lineItems = item.lineItems;
       this.$refs.checkoutOneTimeDonationRef.redirectToCheckout();
     },
-    sendSms (item) {
-      window.location.href="sms:1919?&body=SLEDILNIK"+item
+    smsDonateClick (item) {
+      this.smsShowDetails = true;
+      this.smsSelectedItem = item;
+      this.smsDetailsHtml = marked(this.$t('donation.onetime.sms.donateDetails', {amount: item + ' EUR', number: 1919, keyword: this.smsKeyword + item }))
+      // console.log(screen.width, screen.height);
+      if(screen.width < 600 && screen.height < 1000 || screen.width < 1000 && screen.height < 600) {
+        window.location.href="sms:1919?&body=" + this.smsKeyword + item;
+      }
     },
+    smsQrImage(amount) {
+      var images = require.context('../assets/donate/', false, /sms.*\.png$/)
+      return images(`./sms-${this.smsNumber}-${this.smsKeyword}${amount}.png`)
+    }
   },
 };
 </script>
@@ -295,12 +318,29 @@ img {
   &.qr {
     float: right;
     margin: 0 0 20px 20px;
+    image-rendering: crisp-edges;
 
     @media only screen and (max-width: 400px) {
       width: 100%;
       margin: 0 0 20px 0;
     }
   }
+
+  &.smsqr {
+    float: right;
+    image-rendering: crisp-edges;
+    width: 84px;
+    margin: 0 0 20px 20px;
+
+    @media only screen and (max-width: 240px) {
+      width: 100%;
+      margin: 0 0 20px 0;
+    }
+  }
+}
+
+.smsDetails {
+  margin-bottom: 48px;
 }
 
 .stripeCheckout {
