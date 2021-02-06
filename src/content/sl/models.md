@@ -17,6 +17,7 @@ Vse to so razlogi, da so modelom in analizam pripadajoči intervali nedoločenos
 - [Nadgrajeni modeli SEIR](#seir)
 - [Model socialnega omrežja](#social_network)
 - [Ocenjevanje stopnje reprodukcije](#reproduction-rate)
+- [Dnevne analize podatkov](#observable)
 - [Določanje alarmov](#alarms)
 - [Prispevki](#articles)
 
@@ -64,12 +65,16 @@ Skupina [Inštituta za biostatistiko in medicinsko informatiko](http://ibmi.mf.u
 
 Več o metodologiji in izsledkih najdete v člankih v [Zdravniškem vestniku](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([povzetek](https://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf)) in znanstveni reviji [Mathematical Biosciences](https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
 
-<!--# Simulacije-->
+## <a id="observable"></a>Dnevne analize podatkov
+Na [spletnem portalu](https://observablehq.com/collection/@mkadunc/covid-19-sledilnik-org) je [Miha Kadunc](https://twitter.com/miha_kadunc), član ekipe Sledilnik, pripravil računalniške skripte za dnevne analize podatkov. Ogledate si lahko: [fazne diagrame po občinah in regijah](https://observablehq.com/@mkadunc/municipalities-phase-diagram-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [incidence po starostnih skupinah](https://observablehq.com/@mkadunc/relativna-incidenca-po-starostnih-skupinah-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [EU barvno kodiranje](https://observablehq.com/@mkadunc/eu-proposed-color-coding-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [karte sveta s 14-dnevnimi incidencami](https://observablehq.com/@mkadunc/map-of-14-days-incidence-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [razmerja potrjenih primerov, hospitalizacij, obravnav v enotah intenzivne terapije in smrti](https://observablehq.com/@mkadunc/sledilnik-covid-19-delez-hospitaliziranih-na-intenzivni-n?collection=@mkadunc/covid-19-sledilnik-org), ...
+<br><iframe width="600" height="410" frameborder="0" src="https://observablehq.com/embed/@mkadunc/municipalities-phase-diagram-sledilnik-org?cells=regions"></iframe>
 
 ## <a id="alarms"></a>Določanje alarmov
 Dr. Janez Stare in dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/) MF UL) v analizi [Določanje alarmov pri epidemiji COVID-19 v Sloveniji](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) ocenjujeta zgornje meje pragov, ko je že prišlo do ponovnega zagona epidemije. Rezultati so relevantni predvsem za obdobja nizke pojavnosti virusa v populaciji. Za oceno uporabljata delež potrjeno okuženih izmed testiranih.
 
 ## <a id="articles"></a>Prispevki
+
+- Prof. Janez Žibert na podlagi številnih simulacij [v krajših prispevkih](https://rpubs.com/janezz/) opisuje nekatere ključne in aktualne dejavnike ob širitvi virusa, med drugim: [vpliv cepljenja](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [medgeneracijsko mešanje in odprtje šol](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev) ter [prisotnost nove različice virusa](https://rpubs.com/janezz/sir_dva_seva). (26. 1. 2021)
 
 - Raziskovalci IBMI so pod vodstvom dr. Nine Ružić Gorenjec v svoji analizi ["Od zgodbe o uspehu do katastrofe"](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1) poudaril, kako zelo važna sta naša mobilnost in epidemiološko sledenje stikom za uspešen odziv proti epidemiji. (13. 1. 2021)
 
