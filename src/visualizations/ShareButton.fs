@@ -26,6 +26,7 @@ let dropdown (viz: Visualization) =
             | Regions -> (1140, 720)
             | Regions100k -> (1140, 720)
             | HcCases -> (1140, 720)
+            | Vaccination -> (1140, 720)
             | Schools -> (1140, 720)
             | Sources -> (1140, 720)
             | Map -> (1140, 820)

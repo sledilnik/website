@@ -30,6 +30,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
+            | "Vaccination" -> Some Vaccination
             | "Schools" -> Some Schools
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
@@ -368,6 +369,13 @@ let render (state: State) (_: Msg -> unit) =
                             (RegionsChartViz.Rendering.renderChart config) props
          }
 
+    let vaccination =
+          { VisualizationType = Vaccination
+            ClassName = "vaccination-chart"
+            ChartTextsGroup = "vaccination"
+            Explicit = false
+            Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
+
     let schools =
           { VisualizationType = Schools
             ClassName = "schools-chart"
@@ -564,7 +572,7 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests;
+        [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
           patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
           schools; ageGroupsTimeline; weeklyDemographics; ageGroups; 
@@ -586,7 +594,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources
+          municipalities; sources; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; hcCases; sources
