@@ -167,7 +167,7 @@
             </span>
           </div>
           <div v-if="smsShowDetails" class="smsDetails">
-            <img :src="smsQrImage(smsSelectedItem)" @click="triggerSms(item)" class="smsqr">
+            <img :src="smsQrImage(smsSelectedItem)" @click="triggerSms(smsSelectedItem)" class="smsqr">
             <div v-html="smsDetailsHtml"></div>
           </div>
         </div>
