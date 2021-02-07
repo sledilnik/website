@@ -1795,7 +1795,7 @@
             },
             "sms": {
                 "description": "Donacijo lahko izvedete s poslanim **SMS sporočilom** pri mobilnih operaterjih Telekom Slovenije ([pogoji](/doc/TODO.pdf)), A1 Slovenija ([pogoji](/doc/TODO.pdf)) ali Telemach ([pogoji](/doc/TODO.pdf)). Izberite znesek:",
-                "donateDetails": "Za donacijo **{{amount}}** pošljite SMS sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** ali z mobilnim telefonom poskenirajte QR kodo."
+                "donateDetails": "Za donacijo **{{amount}}** pošljite SMS sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}**. Za enostavnejšo sestavo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo."
             }
         },
         "monthly": {
