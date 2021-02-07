@@ -26,6 +26,7 @@
         <h2>{{ $t("donation.monthly.title") }}</h2>
 
         <div class="paymentMethod">
+          <font-awesome-icon icon="credit-card" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.monthly.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
@@ -45,6 +46,7 @@
         </div>
 
         <div v-if="language=='sl'" class="paymentMethod">
+          <font-awesome-icon icon="university" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
           <table class="bankDetails">
             <tr>
@@ -95,6 +97,7 @@
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
         <div class="paymentMethod">
+          <font-awesome-icon icon="university" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -142,6 +145,7 @@
         </div>
 
         <div class="paymentMethod">
+          <font-awesome-icon icon="credit-card"  pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.onetime.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
@@ -160,6 +164,7 @@
         </div>
 
         <div v-if="language=='sl'" class="paymentMethod" id="sms">
+          <font-awesome-icon icon="mobile-alt" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.onetime.sms.description')" />
           <div class="stripeCheckout">
             <span v-for="(item) in smsAmounts" :key="item">
@@ -183,6 +188,7 @@
 
       <div>
         <h2>{{ $t("donation.companies.title") }}</h2>
+        <font-awesome-icon icon="file-contract" pull="left" size="2x" class="icon" />
         <div v-html-md="$t('donation.companies.description')" />
       </div>
 
@@ -288,6 +294,10 @@ export default {
 .donation {
   h2 {
     margin-top: 48px;
+  }
+
+  .icon {
+    margin-top: 4px;
   }
 }
 
