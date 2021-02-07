@@ -167,7 +167,6 @@
             "testsHAT": "Testeos Realizados: RAT",
             "positivePct": "% Positivos: PCR",
             "tests": "Testeos Realizados: PCR",
-            "vaccinated": "Personas Vacunadas",
             "active": "Casos Activos",
             "new": "Casos Confirmados",
             "title": "Comparación por Día de Semana",

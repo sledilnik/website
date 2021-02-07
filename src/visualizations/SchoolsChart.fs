@@ -116,10 +116,9 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 let chartCredits =
     {| 
         enabled = true
-        text = sprintf "%s: %s, %s"
+        text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsMIZS") {| context = localStorage.getItem ("contextCountry") |})
-                    (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
         href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/" 
     |}
 

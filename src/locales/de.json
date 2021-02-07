@@ -651,8 +651,7 @@
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "titleMenu": "Wochentag – Vergleich",
             "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
-            "testsHAT": "Durchgeführte Tests: RAT",
-            "vaccinated": "Geimpfte Personen"
+            "testsHAT": "Durchgeführte Tests: RAT"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -928,7 +927,7 @@
         "vaccination_administered_todate": "Geimpfte Personen (bis heute)"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "cm": {
         "shops": {

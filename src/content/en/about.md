@@ -95,6 +95,7 @@ Project collaborators:
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
 -   [Igor Brejc](https://twitter.com/breki74) - visualisations
+-   [Igor Kolar](https://twitter.com/igorkolar) - data model, open data
 -   [Jaka Daneu](https://github.com/jalezi) -  web page
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - content, sources
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - translations
@@ -123,6 +124,7 @@ Project collaborators:
 -   [Nace Štruc](https://www.nace.si/) - visualisations
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
 -   [Nina Rolih](https://www.facebook.com/tanoranina) - content, graphic design
+-   [Nina Ružić Gorenjec](https://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Pika Založnik]() - content, sources
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ

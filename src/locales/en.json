@@ -181,6 +181,10 @@
         "14": {
             "title": "phase<br>14",
             "description": "rapid antigen tests"
+        },
+        "15": {
+            "title": "phase<br>15",
+            "description": "rapid antigen tests methodology"
         }
     },
     "charts": {
@@ -262,7 +266,7 @@
             "titleMenu": "Day of Week - comparison",
             "new": "Confirmed Cases",
             "active": "Active Cases",
-            "vaccinated": "People Vaccinated",
+            "vaccineDosesAdministered": "Vaccine Doses Administered",
             "tests": "Tests Performed: PCR",
             "positivePct": "Share of Positive: PCR (%)",
             "testsHAT": "Tests Performed: RAT",
@@ -778,7 +782,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1047,6 +1051,18 @@
         "closeSchools3": {
             "title": "Schools 3",
             "description": "Closed kindergarten and elementary school up to 3rd grade in Coastal–Karst and Central Sava region.<br>Allowed selling of 🧦 in 🩲 in grocery shops."
+        },
+        "bordersStrict": {
+            "title": "Borders",
+            "description": "Less exceptions for entering the country without negative test or quarantine."
+        },
+        "liftShops2": {
+            "title": "Shops",
+            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,...<br>(negative test of customers and/od employees required for some services)"
+        },
+        "liftSchools3All": {
+            "title": "Schools 3",
+            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in all regions."
         }
     },
     "days": {
