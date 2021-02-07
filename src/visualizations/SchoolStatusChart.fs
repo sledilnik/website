@@ -108,7 +108,7 @@ let renderChart schoolStatus state dispatch =
                             x2 = d |> snd
                             y = startIdx + i 
                             color = color
-                            pType = pType
+                            pType = (I18N.tt "schoolDict" pType)
                             pCount = v.Length
                         |} |> pojo )
 
@@ -120,7 +120,7 @@ let renderChart schoolStatus state dispatch =
                             x2 = reg.JsDate12hChangedTo
                             y = startIdx + i 
                             color = color
-                            pClass = reg.personClass 
+                            pClass = (I18N.tt "schoolDict" reg.personClass)
                             pCount = reg.attendees
                         |} |> pojo )
 
@@ -131,39 +131,34 @@ let renderChart schoolStatus state dispatch =
         [| 
             {| name = "Zaposleni" 
                color = "#dba51d"
-               pointWidth = 20
+               pointWidth = 15
                dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = "{point.pCount}" |} |]
+                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
                data = empData |} 
             {| name = "Udeleženci" 
                color = "#bda506"
-               pointWidth = 20
+               pointWidth = 15
                dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = "{point.pCount}" |} |]
+                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
                data = attData |} 
             {| name = "Oddelki" 
                color = "#f4b2e0"
-               pointWidth = 20
+               pointWidth = 15
                dataLabels = [| {| align =  "left"; format = "{point.pClass}" |}
-                               {| align =  "right"; format = "{point.pCount}" |} |]
+                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
                data = regData |} 
         |]
 
     {| optionsWithOnLoadEvent "covid19-school-status" with
-           chart = pojo {| ``type`` = "xrange" |}
+           chart = pojo {| ``type`` = "xrange"; animation = false |}
            title = pojo {| text = null |}
            xAxis = pojo {| ``type`` = "datetime" |}
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
            series = allSeries
-           plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |}
-           tooltip = pojo
-            {|
-                shared = false
-                split = false
-                xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
-            |}
-
+           plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |} 
+           tooltip = pojo {| shared = false; split = false
+                             xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            legend = pojo {| enabled = true |}
            navigator = pojo {| enabled = false |}
            scrollbar = pojo {| enabled = false |}
