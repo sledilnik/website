@@ -66,7 +66,8 @@ let renderAbsences (absences : SchoolAbsence array) =
     seq {
         for absence in absences do
             let abs = 
-                sprintf "ABSENCE: %s - %s: %s %s %s"
+                sprintf "%s ABSENCE: %s - %s: %s %s %s"
+                    (I18N.tt "schoolDict" absence.schoolType)
                     (I18N.tOptions "charts.schoolStatus.date" {| date = absence.AbsentFromDate  |})
                     (I18N.tOptions "charts.schoolStatus.date" {| date = absence.AbsentToDate  |})
                     (I18N.tt "schoolDict" absence.personType)
@@ -82,7 +83,8 @@ let renderRegimes (regimes : SchoolRegime array) =
     seq {
         for regime in regimes do
             let reg = 
-                sprintf "REGIME: %s - %s: %s %d %s %s"
+                sprintf "%s REGIME: %s - %s: %s %d %s %s"
+                    (I18N.tt "schoolDict" regime.schoolType)
                     (I18N.tOptions "charts.schoolStatus.date" {| date = regime.ChangedFromDate  |})
                     (I18N.tOptions "charts.schoolStatus.date" {| date = regime.ChangedToDate  |})
                     (I18N.tt "schoolDict" regime.personClass)
@@ -100,8 +102,12 @@ let renderSchool (state : State) (schoolId : string) (schoolStatus : SchoolStatu
         prop.className "school"
         prop.children [
             Html.div [
+                let schoolName = 
+                    match Utils.Dictionaries.schools.TryFind(schoolId) with
+                    | Some s -> s.Name
+                    | _ -> schoolId
                 prop.className "name"
-                prop.text schoolId
+                prop.text schoolName
             ]
             Html.div [
                 prop.className "absences"
