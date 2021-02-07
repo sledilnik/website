@@ -25,7 +25,7 @@
       <div>
         <h2>{{ $t("donation.monthly.title") }}</h2>
 
-        <div>
+        <div class="paymentMethod">
           <div v-html-md="$t('donation.monthly.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
@@ -44,7 +44,7 @@
           <div v-html-md="$t('donation.monthly.stripe.stopping')" />
         </div>
 
-        <div v-if="language=='sl'">
+        <div v-if="language=='sl'" class="paymentMethod">
           <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
           <table class="bankDetails">
             <tr>
@@ -94,7 +94,7 @@
 
       <div>
       <h2>{{ $t("donation.onetime.title") }}</h2>
-        <div>
+        <div class="paymentMethod">
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
           <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
           <table class="bankDetails">
@@ -141,7 +141,7 @@
           <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
         </div>
 
-        <div>
+        <div class="paymentMethod">
           <div v-html-md="$t('donation.onetime.stripe.description')" />
           <div class="stripeCheckout">
             <stripe-checkout
@@ -159,7 +159,7 @@
           </div>
         </div>
 
-        <div v-if="language=='sl'">
+        <div v-if="language=='sl'" class="paymentMethod">
           <div v-html-md="$t('donation.onetime.sms.description')" />
           <div class="stripeCheckout">
             <span v-for="(item) in smsAmounts" :key="item">
@@ -175,7 +175,7 @@
       </div>
 
       <!--
-      <div v-if="language=='sl'">
+      <div v-if="language=='sl'" class="paymentMethod">
         <h2>{{ $t("donation.incomeTax.title") }}</h2>
         <div v-html-md="$t('donation.incomeTax.description')" />
       </div>
@@ -339,8 +339,14 @@ img {
   }
 }
 
-.smsDetails {
-  margin-bottom: 48px;
+
+
+.paymentMethod {
+  margin: 24px 0;
+
+  .smsDetails {
+    min-height: 84px;
+  }
 }
 
 .stripeCheckout {
