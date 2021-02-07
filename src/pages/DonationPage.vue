@@ -159,7 +159,7 @@
           </div>
         </div>
 
-        <div v-if="language=='sl'" class="paymentMethod">
+        <div v-if="language=='sl'" class="paymentMethod" id="sms">
           <div v-html-md="$t('donation.onetime.sms.description')" />
           <div class="stripeCheckout">
             <span v-for="(item) in smsAmounts" :key="item">
