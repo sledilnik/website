@@ -20,7 +20,7 @@ type SchoolAbsence = {
             month: int
             day: int
         |}
-    school : int
+    school : string
     schoolType : string
     personType : string
     personClass : string
@@ -47,7 +47,7 @@ type SchoolRegime = {
             month: int
             day: int
         |}
-    school : int
+    school : string
     schoolType : string
     personClass : string
     attendees : int
