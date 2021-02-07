@@ -167,7 +167,7 @@
             </span>
           </div>
           <div v-if="smsShowDetails" class="smsDetails">
-            <img :src="smsQrImage(smsSelectedItem)" class="smsqr">
+            <img :src="smsQrImage(smsSelectedItem)" @click="triggerSms(item)" class="smsqr">
             <div v-html="smsDetailsHtml"></div>
           </div>
         </div>
@@ -269,8 +269,11 @@ export default {
       this.smsDetailsHtml = marked(this.$t('donation.onetime.sms.donateDetails', {amount: item + ' EUR', number: 1919, keyword: this.smsKeyword + item }))
       // console.log(screen.width, screen.height);
       if(screen.width < 600 && screen.height < 1000 || screen.width < 1000 && screen.height < 600) {
-        window.location.href="sms:1919?&body=" + this.smsKeyword + item;
+        this.triggerSms(item);
       }
+    },
+    triggerSms (item) {
+      window.location.href="sms:1919?&body=" + this.smsKeyword + item;
     },
     smsQrImage(amount) {
       var images = require.context('../assets/donate/', false, /sms.*\.png$/)
