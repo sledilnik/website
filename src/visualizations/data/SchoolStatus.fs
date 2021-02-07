@@ -2,7 +2,8 @@ module Data.SchoolStatus
 
 open System
 
-let url = "https://api-stage.sledilnik.org/api/school-status"
+//let url = "https://api.sledilnik.org/api/school-status"
+let url = "https://api.sledilnik.org/api/school-status?id=14709&id=679&id=3545&id=229"
 
 type SchoolAbsence = {
     year: int
@@ -28,8 +29,10 @@ type SchoolAbsence = {
 }
 with
     member lt.Date = DateTime(lt.year, lt.month, lt.day)
-    member lt.AbsentFromDate = DateTime(lt.absentFrom.year, lt.absentFrom.month, lt.absentFrom.day)
-    member lt.AbsentToDate = DateTime(lt.absentTo.year, lt.absentTo.month, lt.absentTo.day)
+    member lt.DateAbsentFrom = DateTime(lt.absentFrom.year, lt.absentFrom.month, lt.absentFrom.day)
+    member lt.DateAbsentTo = DateTime(lt.absentTo.year, lt.absentTo.month, lt.absentTo.day)
+    member lt.JsDate12hAbsentFrom = DateTime(lt.absentFrom.year, lt.absentFrom.month, lt.absentFrom.day) |> Highcharts.Helpers.jsTime12h
+    member lt.JsDate12hAbsentTo = DateTime(lt.absentTo.year, lt.absentTo.month, lt.absentTo.day) |> Highcharts.Helpers.jsTime12h
 
 type SchoolRegime = {
     year: int
@@ -56,8 +59,10 @@ type SchoolRegime = {
 }
 with 
     member lt.Date = DateTime(lt.year, lt.month, lt.day)
-    member lt.ChangedFromDate = DateTime(lt.changedFrom.year, lt.changedFrom.month, lt.changedFrom.day)
-    member lt.ChangedToDate = DateTime(lt.changedTo.year, lt.changedTo.month, lt.changedTo.day)
+    member lt.DateChangedFrom = DateTime(lt.changedFrom.year, lt.changedFrom.month, lt.changedFrom.day)
+    member lt.DateChangedTo = DateTime(lt.changedTo.year, lt.changedTo.month, lt.changedTo.day)
+    member lt.JsDate12hChangedFrom = DateTime(lt.changedFrom.year, lt.changedFrom.month, lt.changedFrom.day) |> Highcharts.Helpers.jsTime12h
+    member lt.JsDate12hChangedTo = DateTime(lt.changedTo.year, lt.changedTo.month, lt.changedTo.day) |> Highcharts.Helpers.jsTime12h
 
 
 type SchoolStatus = {
@@ -67,4 +72,5 @@ type SchoolStatus = {
 
 type SchoolStatusMap = Map<string,SchoolStatus>
 
-let getOrFetch = DataLoader.makeDataLoader<SchoolStatusMap> url
+let getOrFetch = 
+    DataLoader.makeDataLoader<SchoolStatusMap> url

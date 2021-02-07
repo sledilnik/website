@@ -6,10 +6,12 @@ import StockModule from 'highcharts/modules/stock'
 import MapModule from 'highcharts/modules/map'
 import Heatmap from 'highcharts/modules/heatmap'
 import Boost from 'highcharts/modules/boost'
+import XRange from 'highcharts/modules/xrange'
 StockModule(Highcharts)
 MapModule(Highcharts)
 Heatmap(Highcharts)
 Boost(Highcharts)
+XRange(Highcharts)
 
 import HighchartsReact from 'highcharts-react-official';
 require("./_highcharts.scss");
