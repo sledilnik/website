@@ -1655,10 +1655,12 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@vue-stripe/vue-stripe@^4.0.0-beta.0":
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/@vue-stripe/vue-stripe/-/vue-stripe-4.0.3.tgz#4d503434857757fdaeb848f1efd7027f1d58212b"
-  integrity sha512-+GoKNZ4Hf02LIKNCBui86RvJnzsWjGun+lMLhEr+hYI2NT7OsiKgPJe9fkjUYfemlmD5yASBfVI1n24B+HqIDw==
+"@vue-stripe/vue-stripe@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@vue-stripe/vue-stripe/-/vue-stripe-4.1.1.tgz#37bd70e9d74a9a18566ee0c048a6aac17746a8e7"
+  integrity sha512-ME3U0kq/c8OuAYgYfcpqNUUPFlqvvVllI/TV813pwx+DzPtznTZNfQNT+3fbxPTJEV4r37yiqUPRo+3Kq2x3FQ==
+  dependencies:
+    vue-coerce-props "^1.0.0"
 
 "@vue/babel-helper-vue-jsx-merge-props@^1.0.0":
   version "1.0.0"
@@ -11738,6 +11740,11 @@ vue-clickaway@^2.2.2:
   integrity sha512-25SpjXKetL06GLYoLoC8pqAV6Cur9cQ//2g35GRFBV4FgoljbZZjTINR8g2NuVXXDMLSUXaKx5dutgO4PaDE7A==
   dependencies:
     loose-envify "^1.2.0"
+
+vue-coerce-props@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue-coerce-props/-/vue-coerce-props-1.0.0.tgz#af3d00aa419f0de79c2b020824c6c0387070d66e"
+  integrity sha512-4fdRMXO6FHzmE7H4soAph6QmPg3sL/RiGdd+axuxuU07f02LNMns0jMM88fmt1bvSbN+2Wyd8raho6p6nXUzag==
 
 vue-date-fns@^2.0.1:
   version "2.0.1"

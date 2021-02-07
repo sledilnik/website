@@ -384,6 +384,8 @@
             "close": "Schließen",
             "log": "Logarithmisch",
             "linear": "Linear",
+            "absolute": "Absolut",
+            "relative": "Relativ",
             "longDateFormat": "%e. %B %Y",
             "view": "Ansicht:",
             "linkFaq": "FAQ",
@@ -398,6 +400,10 @@
             "dsNIJZ": "NIJZ",
             "dsMZ": "Gesundheitsministerium",
             "all": "Alle",
+            "showActive": "Aktive",
+            "showToday": "Tägliche",
+            "showToDate": "Bis heute",
+            "show7DaysAverage": "7-Tage-Durchschnitt",
             "xAxis": "X-Achse:",
             "twitter": "Twitter",
             "numDateFormat": "%d. %m. %Y",
@@ -514,11 +520,7 @@
             "ventilatorAdmitted": "An Beatmungsgerät",
             "confirmedCases": "Bestätigte Fälle",
             "testsPerformed": "Tests: PCR",
-            "showToDate": "Bis heute",
-            "showToday": "Tägliche",
-            "showActive": "Aktive",
             "activeCases": "Aktive Fälle",
-            "show7DaysAverage": "7-Tage-Durchschnitt",
             "titleMenu_MNE": "Montenegro – Lage",
             "titleMenu_MKD": "N. Mazedonien – Lage",
             "titleMenu_SVN": "Slowenien – Lage",
@@ -649,8 +651,7 @@
             "hospitalDischarged": "Aus Krankenhäusern entlassen",
             "titleMenu": "Wochentag – Vergleich",
             "positivePctHAT": "Anteil der positiven Tests: RAT (%)",
-            "testsHAT": "Durchgeführte Tests: RAT",
-            "vaccinated": "Geimpfte Personen"
+            "testsHAT": "Durchgeführte Tests: RAT"
         },
         "ostanizdrav": {
             "userPublishedByCount": {
@@ -781,11 +782,9 @@
             "disclaimer": "Hinweis: Daten für die letzte Woche sind noch nicht vollständig - der Anteil der Angestellten im Gesundheitswesen könnte hier geringer ausfallen, als er eigentlich ist.",
             "titleMenu": "Fälle in Krankenhäusern und Altersheimen",
             "title": "Fälle im Gesundheitswesens und in Altersheimen, wöchentlich",
-            "relative": "Relativ",
             "all": "Alle",
             "otherCases": "Andere Personen",
             "rhOccupantCases": "Bewohner in Altersheimen",
-            "absolute": "Absolut",
             "healthcareFemaleCases": "Gesundheitswesen – weiblich",
             "healthcare": "Gesundheitswesen nach Geschlecht",
             "healthcareMaleCases": "Gesundheitswesen – männlich",
@@ -827,7 +826,8 @@
                 "excessDeaths": "Sterberate (im Vergleich zu 2015 bis 2019)",
                 "title": "Sterberate im Vergleich zu den letzten 5 Jahren",
                 "disclaimer": "Hinweis: Die Daten über Todesfälle für die letzte angezeigte Woche sind unvollständig. Finde weitere Informationen zum Diagramm im Artikel",
-                "covidDeaths": "Bestätigte COVID-19-Todesfälle"
+                "covidDeathsMZ": "Bestätigte COVID-19-Todesfälle (Regierung)",
+                "covidDeathsNIJZ": "Bestätigte COVID-19-Todesfälle (NIJZ)"
             },
             "titleMenu": "Sterberate",
             "title": "Sterberate",
@@ -927,7 +927,7 @@
         "vaccination_administered_todate": "Geimpfte Personen (bis heute)"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "cm": {
         "shops": {
@@ -1154,22 +1154,6 @@
         "newCases7d": "Neue Fälle",
         "testsHAT": "Tests heute: Schnelltests",
         "vaccinationSummary": "Geimpfte Personen"
-    },
-    "notice": {
-        "newChart": "🆕 📊 Neues Diagramm:",
-        "news002": "Bestätigte Fälle nach Altersgruppen",
-        "newsText": "Weltkarte 🌍 – aktive Fälle pro 1 Million Menschen",
-        "newPage": "🆕 Neue Seite:",
-        "weeklyIncrease": "Wöchentlicher Anstieg in den Karten der Gemeinden und Regionen Sloweniens",
-        "progressC19": "Typische COVID-19 Entwicklung. Krankenhausaufenthalt, Intensivtherapie und Mortalität.",
-        "tests": "Fünf Mythen über Tests …",
-        "weKnowWeDoNotKnow": "Wir wissen, dass Daten manchmal lügen. Woher wissen wir, dass wir (nicht) wissen? 🤔📉🧐📈🤷 ♂️🤷 ♀️",
-        "checked": "🆕 Geprüft:",
-        "newMedium": "🆕 📝 Neuer Medium Nachricht:",
-        "newInfographics": "🆕 📇 Neue Infografiken:",
-        "bubble": "Leben in der Blase... Wie Kontakte begrenzen und gleichzeitig nicht alleine sein? 💭",
-        "presentation": "Wie Wissenschaft Entscheidungsträgern hilft - Vortrag in der Staatsversammlung",
-        "restrictions": "Aktuelle Maßnahmen und Beschränkungen"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1483,6 +1467,13 @@
         "monthly": {
             "stripe": {
                 "donateButton": "{{amount}} pro Monat"
+            }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
             }
         }
     }

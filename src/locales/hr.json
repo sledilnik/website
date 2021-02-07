@@ -318,6 +318,10 @@
             "dsOWD": "Our World in Data",
             "numDateFormat": "%d. %m. %Y.",
             "all": "Sve",
+            "showActive": "Aktivni",
+            "showToday": "Dnevni",
+            "showToDate": "Do danas",
+            "show7DaysAverage": "Sedmodnevni prosjek",
             "resetZoomTitle": "Prikaži cijelo razdoblje",
             "dateFormat": "%A, %e. %B %Y.",
             "webpage": "Web-stranica",
@@ -327,6 +331,8 @@
             "facebook": "Facebook",
             "yAxis": "Os y:",
             "linear": "Linearno",
+            "absolute": "Apsolutno",
+            "relative": "Relativno",
             "close": "Zatvori",
             "xAxis": "Os x:",
             "view": "Prikaz:",
@@ -461,10 +467,6 @@
             "activeCases": "Aktivni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "testsPerformed": "Testovi: Lančana reakcija polimeraze",
-            "showToDate": "Do danas",
-            "showToday": "Dnevni",
-            "showActive": "Aktivni",
-            "show7DaysAverage": "Sedmodnevni prosjek",
             "titleMenu_MNE": "Crna Gora – stanje",
             "titleMenu_MKD": "Sjeverna Makedonija – stanje",
             "titleMenu_SVN": "Slovenija – stanje",
@@ -645,8 +647,7 @@
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "positivePctHAT": "Udio pozitivnih: RAT (%)",
-            "testsHAT": "Provedeni testovi: RAT",
-            "vaccinated": "Cijepljene osobe"
+            "testsHAT": "Provedeni testovi: RAT"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -785,10 +786,8 @@
             "disclaimer": "Napomena: podaci za prošli tjedan još nisu potpuni – udio zdravstvenih radnika može biti manji od stvarnog.",
             "otherCases": "Ostale osobe",
             "rhOccupantCases": "Stanovnici domova umirovljenika",
-            "relative": "Relativno",
             "all": "Svi",
             "structure": "Struktura",
-            "absolute": "Apsolutno",
             "healthcareFemaleCases": "Zdravstvo – žene",
             "healthcareMaleCases": "Zdravstvo – muškarci",
             "healthcare": "Zdravstvo po spolu"
@@ -822,7 +821,8 @@
             "excess": {
                 "excessDeaths": "Prekomjerni mortalitet (u usporedbi s 2015. do 2019.)",
                 "title": "Prekomjerni mortalitet u odnosu na zadnjih pet godina",
-                "covidDeaths": "Potvrđeni smrtni slučajevi od COVID-19",
+                "covidDeathsMZ": "Potvrđeni smrtni slučajevi od COVID-19 (vlada)",
+                "covidDeathsNIJZ": "Potvrđeni smrtni slučajevi od COVID-19 (NIJZ)",
                 "disclaimer": "Napomena: podaci o smrtnim slučajevima za zadnji prikazani tjedan nisu potpuni. Saznaj više o dijagramu u članku"
             },
             "titleMenu": "Prekomjerni mortalitet",
@@ -1312,7 +1312,7 @@
         "si": "Slovenija (sve regije)"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "days": {
         "x_days_ago_0": "Prije {{ count }} dan",
@@ -1328,22 +1328,6 @@
     "meta": {
         "title": "COVID-19 praćenje",
         "description": "COVID-19 praćenje Slovenija – prikupljeni, provjereni, aktualizirani, analizirani i pregledani podaci o COVID-19 za Sloveniju."
-    },
-    "notice": {
-        "newChart": "🆕 📊 Novi dijagram:",
-        "news002": "Potvrđeni slučajevi po dobnim skupinama",
-        "newsText": "Karta svijeta 🌍 – aktivni slučajevi na milijun stanovnika",
-        "newPage": "🆕 Nova stranica:",
-        "weeklyIncrease": "Tjedni rast na kartama općina i regija Slovenije",
-        "progressC19": "Tipičan napredak bolesti COVID-19. Hospitalizacija, intenzivna terapija i smrtnost.",
-        "newInfographics": "🆕 📇 Nove infografike:",
-        "tests": "Pet mitova o testiranjima …",
-        "weKnowWeDoNotKnow": "Znamo, da podaci ponekad lažu. Kako znamo, da (ne) znamo? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "checked": "🆕 Provjereno:",
-        "newMedium": "🆕 📝 Nova Medium objava:",
-        "presentation": "Kako znanost pomaže donositeljima odluka – prezentacija u Nacionalnoj skupštini",
-        "bubble": "Živjeti u balonu … Kako ograničiti kontakte i ne ostati sam? 💭",
-        "restrictions": "Trenutačne mjere i ograničenja"
     },
     "timestamp": {
         "at": "{{ date, %H:%M }}",
@@ -1523,6 +1507,13 @@
         "monthly": {
             "stripe": {
                 "donateButton": "{{amount}} mjesečno"
+            }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
             }
         }
     }

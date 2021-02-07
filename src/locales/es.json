@@ -167,7 +167,6 @@
             "testsHAT": "Testeos Realizados: RAT",
             "positivePct": "% Positivos: PCR",
             "tests": "Testeos Realizados: PCR",
-            "vaccinated": "Personas Vacunadas",
             "active": "Casos Activos",
             "new": "Casos Confirmados",
             "title": "Comparación por Día de Semana",
@@ -314,21 +313,6 @@
         "title": "Tabla",
         "source": "Datos en otros formatos"
     },
-    "notice": {
-        "weKnowWeDoNotKnow": "Sabemos que los datos a veces mienten. ¿Cómo sabemos que (no) sabemos? 🤔📉🧐📈🤷‍♂️🤷‍♀️",
-        "newsText": "Mapamundi de Coronavirus 🌍- casos activos por millón de personas",
-        "bubble": "Viviendo en la burbuja. ¿Cómo limitar el contacto sin quedarse solx? 💭",
-        "checked": "🆕 Chequeado:",
-        "newMedium": "🆕 📝 Nueva publicación en Medium:",
-        "newPage": "🆕 Nueva página:",
-        "newChart": "🆕 📊 Nuevo gráfico:",
-        "newInfographics": "🆕 📇 Nuevo infográfico:",
-        "restrictions": "Medidas y restricciones en vigencia",
-        "weeklyIncrease": "Incremento Semanal en las municipalidades y regiones de 🇸🇮",
-        "progressC19": "Progreso típico de COVID-19. Hospitalización, terapia intensiva y mortalidad.",
-        "tests": "5 mitos sobre el testeo…",
-        "presentation": "Cómo la ciencia asiste a la toma de decisiones: ponencia en la Asamblea Nacional eslovena"
-    },
     "youtube": {
         "titleMenu": "Animación",
         "title": "Animación de la extensión del COVID-19"
@@ -345,6 +329,13 @@
         "monthly": {
             "stripe": {
                 "donateButton": "{{amount}} por mes"
+            }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
             }
         }
     },

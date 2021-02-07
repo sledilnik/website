@@ -9,7 +9,8 @@ open Types
 
 let colors = {|
     ExcessDeaths = "#ff3333"
-    CovidDeaths = "#a483c7"
+    CovidDeathsMZ = "#a483c7"
+    CovidDeathsNIJZ = "#8c71a8"
     ConfidenceInterval = "#a0a0a0"
 |}
 
@@ -54,17 +55,8 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
                 Some (dp, System.Math.Round((float dp.Deceased - baseline) / baseline * 100.)) )
         |> List.choose id
 
-    let deceasedCovidFromStartYear =
-        statsData
-        // Filter the data to the current year
-        |> List.filter (fun dp -> dp.Date.Year >= START_YEAR)
-
-        // Select only the non-empty deceased data points
-        |> List.map (fun dp ->
-            match dp.StatePerTreatment.Deceased with
-            | None -> None
-            | Some deceased -> Some (dp.Date, deceased) )
-        |> List.choose id
+    let deceasedCovidFromStartYear data =
+        data
         |> List.map (fun (date, deceased) ->
             {| year = Utils.getISOWeekYear(date) ; week = date.GetISOWeek() ; date = date ; deceased = deceased |} )
         |> List.groupBy (fun dp -> (dp.year, dp.week))
@@ -84,14 +76,43 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
               WeekEndDate = dps |> List.map (fun dp -> dp.date) |> List.last
               Deceased = dps |> List.sumBy (fun dp -> dp.deceased) } )
 
-    let deceasedCovidFromStartYearPercent =
-        deceasedCovidFromStartYear
+    let deceasedCovidFromStartYearPercent data =
+        data
         |> List.map (fun dp ->
             match deceasedBaselineMap.TryFind(dp.Week) with
             | None -> None
             | Some deceasedTotal ->
                 Some (dp, System.Math.Round(float dp.Deceased / float deceasedTotal * 100., 1)) )
         |> List.choose id
+
+    let deceasedCovidFromStartYearPercentMZ =
+        statsData
+        // Filter the data to the current year
+        |> List.filter (fun dp -> dp.Date.Year >= START_YEAR)
+
+        // Select only the non-empty deceased data points
+        |> List.map (fun dp ->
+            match dp.StatePerTreatment.Deceased with
+            | None -> None
+            | Some deceased -> Some (dp.Date, deceased) )
+        |> List.choose id
+        |> deceasedCovidFromStartYear
+        |> deceasedCovidFromStartYearPercent
+
+    let deceasedCovidFromStartYearPercentNIJZ =
+        statsData
+        // Filter the data to the current year
+        |> List.filter (fun dp -> dp.Date.Year >= START_YEAR)
+
+        // Select only the non-empty deceased data points
+        |> List.map (fun dp ->
+            match dp.Deceased with
+            | None -> None
+            | Some deceased -> Some (dp.Date, deceased) )
+        |> List.choose id
+        |> deceasedCovidFromStartYear
+        |> deceasedCovidFromStartYearPercent
+
 
     let deceasedMinPercent =
         deceasedFromStartYearRelativeToBaseline |> List.map (fun (dp, _) -> dp.Week, dp.WeekStartDate)
@@ -160,14 +181,29 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
                    |> List.toArray
             |} |> pojo
 
-            {| ``type`` = "area"
-               name = (I18N.t "charts.excessDeaths.excess.covidDeaths")
+            {| ``type`` = "line"
+               name = (I18N.t "charts.excessDeaths.excess.covidDeathsNIJZ")
                animation = false
                marker = {| enabled = false |} |> pojo
-               color = colors.CovidDeaths
+               color = colors.CovidDeathsNIJZ
+               data =
+                   deceasedCovidFromStartYearPercentNIJZ
+                   |> List.map (fun (dp, percent) ->
+                        {| x = dp.WeekStartDate
+                           y = percent
+                           name = (I18N.tOptions "charts.excessDeaths" {| dateFrom = dp.WeekStartDate ; dateTo = dp.WeekEndDate |})?weekDateWithYear
+                        |} |> pojo)
+                   |> List.toArray
+            |} |> pojo
+
+            {| ``type`` = "area"
+               name = (I18N.t "charts.excessDeaths.excess.covidDeathsMZ")
+               animation = false
+               marker = {| enabled = false |} |> pojo
+               color = colors.CovidDeathsMZ
                lineWidth = 0
                data =
-                   deceasedCovidFromStartYearPercent
+                   deceasedCovidFromStartYearPercentMZ
                    |> List.map (fun (dp, percent) ->
                         {| x = dp.WeekStartDate
                            y = System.Math.Round(percent, 1)
@@ -185,9 +221,10 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
        series = series
        credits =
         {| enabled = true
-           text = sprintf "%s: %s, %s"
+           text = sprintf "%s: %s, %s, %s"
                 (I18N.t "charts.common.dataSource")
                 (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
+                (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
                 (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
            href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
     |} |> pojo

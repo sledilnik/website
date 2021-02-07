@@ -10,17 +10,6 @@ open Highcharts
 
 let chartText = I18N.chartText "hcCases"
 
-type ChartType =
-    | Absolute
-    | Relative
-with
-    static member Default = Absolute
-    static member All = [ Absolute; Relative ]
-    member this.GetName =
-        match this with
-        | Absolute -> chartText "absolute"
-        | Relative -> chartText "relative"
-
 type DisplayType =
     | Structure
     | Healthcare
@@ -37,7 +26,7 @@ type DisplayType =
 // ---------------------------
 type State =
     { scaleType : ScaleType
-      chartType: ChartType
+      chartType: BarChartType
       displayType: DisplayType
       data: WeeklyStatsData
       RangeSelectionButtonIndex: int }
@@ -45,13 +34,13 @@ type State =
 type Msg =
     | RangeSelectionChanged of int
     | ScaleTypeChanged of ScaleType
-    | ChartTypeChanged of ChartType
+    | BarChartTypeChanged of BarChartType
     | DisplayTypeChanged of DisplayType
 
 let init data: State * Cmd<Msg> =
     let state =
         { scaleType = Linear
-          chartType = ChartType.Default
+          chartType = AbsoluteChart
           displayType = DisplayType.Default
           data = data
           RangeSelectionButtonIndex = 3 }
@@ -66,7 +55,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         Cmd.none
     | ScaleTypeChanged scaleType ->
         { state with scaleType = scaleType }, Cmd.none
-    | ChartTypeChanged chartType ->
+    | BarChartTypeChanged chartType ->
         { state with chartType = chartType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with displayType = displayType }, Cmd.none
@@ -90,14 +79,14 @@ module Series =
         | RhOccupantCases       -> true,  "#bf5747", "rhOccupantCases", 1
         | ConfirmedCases ->
             match state.chartType with
-            | Absolute -> false, "#d5c768", "totalConfirmed", 1
-            | Relative -> true,  "#d5c768", "otherCases", 1
+            | AbsoluteChart -> false, "#d5c768", "totalConfirmed", 1
+            | RelativeChart -> true,  "#d5c768", "otherCases", 1
 
 let tooltipFormatter jsThis state =
     let pts: obj [] = jsThis?points
     let fmtWeekYearFromTo = pts.[0]?point?fmtWeekYearFromTo
     let arrows p =
-        if state.displayType = Structure && state.chartType = Absolute then
+        if state.displayType = Structure && state.chartType = AbsoluteChart then
             match p?point?seriesId with
             | "healthcareEmployeesCases" -> "↳ "
             | "rhOccupantCases" -> "↳ "
@@ -126,8 +115,8 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
     let getPoint: (WeeklyStatsDataPoint -> int option) =
         match series with
         | ConfirmedCases -> fun dp -> (match state.chartType with
-                                       | Absolute -> dp.ConfirmedCases
-                                       | Relative ->
+                                       | AbsoluteChart -> dp.ConfirmedCases
+                                       | RelativeChart ->
                                             dp.ConfirmedCases
                                             |> splitOutFromTotal dp.HealthcareCases
                                             |> splitOutFromTotal dp.RetirementHomeOccupantCases)
@@ -168,8 +157,8 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
 
 let scaleType (state:State) =
     match state.chartType with
-    | Relative -> ScaleType.Linear
-    | Absolute -> state.scaleType
+    | RelativeChart -> ScaleType.Linear
+    | AbsoluteChart -> state.scaleType
 
 let renderChartOptions (state: State) dispatch =
     let onRangeSelectorButtonClick (buttonIndex: int) =
@@ -190,8 +179,8 @@ let renderChartOptions (state: State) dispatch =
             {|
                 animation = false
                 ``type`` = (match state.chartType with
-                            | Relative -> "column"
-                            | Absolute -> "line")
+                            | RelativeChart -> "column"
+                            | AbsoluteChart -> "line")
                 zoomType = "x"
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
@@ -207,9 +196,8 @@ let renderChartOptions (state: State) dispatch =
                                                     | Linear -> Some 0
                                                     | _ -> None
                                               labels = match state.chartType with
-                                                       | Relative -> pojo {| format = "{value} %" |}
-                                                       | Absolute -> pojo {| format = "{value}" |}
-
+                                                       | RelativeChart -> pojo {| format = "{value} %" |}
+                                                       | AbsoluteChart -> pojo {| format = "{value}" |}
                                               reversedStacks = true
                                               |})
            xAxis =
@@ -239,8 +227,8 @@ let renderChartOptions (state: State) dispatch =
            plotOptions = pojo {|
                                 column = pojo {|
                                                 stacking = match state.chartType with
-                                                           | Relative -> "percent"
-                                                           | Absolute -> "normal" |}
+                                                           | RelativeChart -> "percent"
+                                                           | AbsoluteChart -> "normal" |}
 
                                 |}
            rangeSelector = configureRangeSelector state.RangeSelectionButtonIndex
@@ -275,26 +263,6 @@ let renderChartContainer state dispatch =
                      |> chartFromWindow ] ]
 
 
-let renderChartTypeSelectors (activeChartType: ChartType) dispatch =
-    let renderChartTypeSelector (chartType: ChartType) =
-        let active = chartType = activeChartType
-        Html.div [
-            prop.text chartType.GetName
-            prop.onClick (fun _ -> dispatch chartType)
-            Utils.classes
-                [(true, "chart-display-property-selector__item")
-                 (active, "selected") ]
-        ]
-
-    let chartTypesSelectors =
-        ChartType.All
-        |> List.map renderChartTypeSelector
-
-    Html.div [
-        prop.className "chart-display-property-selector"
-        prop.children (chartTypesSelectors)
-    ]
-
 let renderDisplaySelector state dt dispatch =
     Html.div [
         prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
@@ -315,9 +283,9 @@ let renderDisplaySelectors state dispatch =
 let render (state: State) dispatch =
     Html.div [
         Utils.renderChartTopControls [
-            renderChartTypeSelectors
-                state.chartType (ChartTypeChanged >> dispatch)
-            Utils.renderMaybeVisible (state.chartType = Absolute) [
+            Utils.renderBarChartTypeSelector
+                state.chartType (BarChartTypeChanged >> dispatch)
+            Utils.renderMaybeVisible (state.chartType = AbsoluteChart) [
                 Utils.renderScaleSelector
                     state.scaleType (ScaleTypeChanged >> dispatch)]
         ]

@@ -130,7 +130,12 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                                 Html.text " "
                                 Html.a [
                                     prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
-                                    prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
+                                    prop.children [ Html.text "Koliko preveč?"] ]
+                                Html.text " Več o poročanju COVID-19 smrti s strani NIJZ in vlade pa v članku "
+                                Html.a [
+                                    prop.href "https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2"
+                                    prop.children [ Html.text "Zakaj razlike v številu umrlih?"] ]
+                            ] ] ] )
                 | ExcessDeathsByAgeGroup sex ->
                     React.keyedFragment (3, [
                         Html.div [

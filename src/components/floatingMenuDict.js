@@ -47,6 +47,10 @@ export default {
     titleKey: 'charts.hcCases.titleMenu',
     icon: 'graph',
   },
+  'schools-chart': {
+    titleKey: 'charts.schools.titleMenu',
+    icon: 'graph',
+  },
   'sources-chart': {
     titleKey: 'charts.sources.titleMenu',
     icon: 'column',
