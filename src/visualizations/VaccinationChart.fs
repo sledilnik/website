@@ -26,9 +26,9 @@ type DisplayType =
         | ByManufacturer -> chartText "byManufacturer"
 
 let AllVaccinationTypes = [ 
-    "pfizer",      "#73ccd5" 
-    "moderna",     "#f95d6a"
     "az",          "#ffa600"
+    "moderna",     "#f95d6a"
+    "pfizer",      "#73ccd5" 
 ]
 
 type State =
@@ -123,7 +123,7 @@ let renderVaccinationChart state dispatch =
         series = List.toArray allSeries
         yAxis =
             baseOptions.yAxis 
-            |> Array.map (fun ax -> {| ax with showFirstLabel = false; reversedStacks = false |})
+            |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
                {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
@@ -160,7 +160,7 @@ let renderStackedChart state dispatch =
         series = Seq.toArray allSeries
         yAxis =
             baseOptions.yAxis 
-            |> Array.map (fun ax -> {| ax with showFirstLabel = false; reversedStacks = false |})
+            |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
