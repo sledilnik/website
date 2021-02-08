@@ -116,7 +116,7 @@
           </div>
           <div v-if="showBanktransferDetails">
             <div v-html-md="$t('donation.onetime.banktransfer.description')" />
-            <img src="../assets/donate-qr.png" class="qr" />
+            <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
             <table class="bankDetails">
               <tr>
                 <td>{{ $t("donation.banktransfer.details.recipient") }}</td>
@@ -157,7 +157,7 @@
                 </td>
               </tr>
             </table>
-            <img src="../assets/donate-upn.png" class="upn" />
+            <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
           </div>
         </div>
 
