@@ -3,7 +3,7 @@ module Data.SchoolStatus
 open System
 
 //let url = "https://api.sledilnik.org/api/school-status"
-let url = "https://api.sledilnik.org/api/school-status?id=1275&id=3545&id=229&id=3767&id=9594"
+let url = "https://api.sledilnik.org/api/school-status?id=1275&id=3545&id=229&id=3767&id=9594&id=10342"
 
 type SchoolAbsence = {
     year: int

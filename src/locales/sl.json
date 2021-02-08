@@ -1256,7 +1256,7 @@
             "unitsRemote": "Oddelki - na daljavo"
         },
         "schoolStatus": {
-            "title": "Stanje v šoli",
+            "title": "Stanje v posamezni šoli",
             "titleMenu": "Šola - stanje",
             "search": "Išči",
             "persons": "Oseb",
