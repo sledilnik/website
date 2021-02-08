@@ -51,7 +51,6 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
               SearchQuery = query },
         cmd
 
-
 let renderSearch (query: string) dispatch =
     Html.input [ prop.className "form-control form-control-sm filters__query"
                  prop.type'.text
@@ -59,41 +58,6 @@ let renderSearch (query: string) dispatch =
                  prop.valueOrDefault query
                  prop.onChange (SearchInputChanged >> dispatch) ]
 
-let renderAbsences (absences: SchoolAbsence array) =
-    absences 
-    |> Array.toSeq
-    |> Seq.sortByDescending (fun absence -> absence.DateAbsentTo)
-    |> Seq.map (fun absence ->
-                let abs =
-                    sprintf
-                        "ABSENCE: %s - %s: %s %s %s"
-                        (I18N.tOptions "charts.schoolStatus.date" {| date = absence.DateAbsentFrom |})
-                        (I18N.tOptions "charts.schoolStatus.date" {| date = absence.DateAbsentTo |})
-                        (I18N.tt "schoolDict" absence.personType)
-                        (I18N.tt "schoolDict" absence.personClass)
-                        (I18N.tt "schoolDict" absence.reason)
-
-                Html.div [ prop.className "absence"
-                           prop.text abs ] )
-
-let renderRegimes (regimes: SchoolRegime array) =
-    regimes 
-    |> Array.toSeq
-    |> Seq.sortByDescending (fun regime -> regime.DateChangedTo)
-    |> Seq.map (fun regime ->
-                    let reg =
-                        sprintf
-                            "REGIME: %s - %s: %s %d %s %s"
-                            (I18N.tOptions "charts.schoolStatus.date" {| date = regime.DateChangedFrom |})
-                            (I18N.tOptions "charts.schoolStatus.date" {| date = regime.DateChangedTo |})
-                            (I18N.tt "schoolDict" regime.personClass)
-                            regime.attendees
-                            (I18N.tt "schoolDict" regime.regime)
-                            (I18N.tt "schoolDict" regime.reason)
-
-                    Html.div [ prop.className "regime"
-                               prop.text reg ] )
-   
 
 let renderChart schoolStatus state dispatch =
  
@@ -189,10 +153,6 @@ let renderSchool (state: State) (schoolId: string) (schoolStatus: SchoolStatus) 
                                              | _ -> schoolId
                                          prop.className "name"
                                          prop.text schoolName ]
-                               Html.div [ prop.className "absences"
-                                          prop.children (renderAbsences schoolStatus.absences) ]
-                               Html.div [ prop.className "regimes"
-                                          prop.children (renderRegimes schoolStatus.regimes) ] 
                                Html.div [ prop.style [ style.height 480 ]
                                           prop.className "highcharts-wrapper"
                                           prop.children [ renderChart schoolStatus state dispatch
