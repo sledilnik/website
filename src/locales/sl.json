@@ -1661,6 +1661,10 @@
             "question": "Kaj kaže graf \"Primerjava po dnevih v tednu\"?",
             "answer": "[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).\nNa grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu."
         },
+        "vaccination-chart": {
+            "question": "Kaj kaže graf \"Cepljenje\"?",
+            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Poraba cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
+        },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
             "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Možen je prikaz aktivnih primerov ali potrjenih primerov na dan. Podatke lahko prikažete *Absolutno* ali *Relativno*.\n\nV prikazu po posameznem tipu šole/organizacije so prikazane tudi karantene med učenci in oddelki. V tem prikazu je omogočen prikaz tudi z logaritemsko skalo."
