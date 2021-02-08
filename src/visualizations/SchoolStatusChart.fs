@@ -96,8 +96,17 @@ let renderRegimes (regimes: SchoolRegime array) =
    
 
 let renderChart schoolStatus state dispatch =
-
+ 
     let allSeries =
+
+        let absenceText (absences : SchoolAbsence array) =
+            absences
+            |> Array.mapi (fun i abs -> 
+                            sprintf "%s: %s<br>"
+                                (I18N.tt "schoolDict" abs.personClass)
+                                (I18N.tt "schoolDict" abs.reason))
+            |> String.Concat
+
         let absenceData color pType startIdx =
             schoolStatus.absences 
             |> Array.filter (fun abs -> abs.personType = pType)
@@ -110,6 +119,7 @@ let renderChart schoolStatus state dispatch =
                             color = color
                             pType = (I18N.tt "schoolDict" pType)
                             pCount = v.Length
+                            text = absenceText v
                         |} |> pojo )
 
         let regimeData color startIdx =
@@ -122,6 +132,11 @@ let renderChart schoolStatus state dispatch =
                             color = color
                             pClass = (I18N.tt "schoolDict" reg.personClass)
                             pCount = reg.attendees
+                            text = sprintf "%s<br>%s<br>%s<br>Oseb: %d"
+                                    (I18N.tt "schoolDict" reg.personClass)
+                                    (I18N.tt "schoolDict" reg.regime)
+                                    (I18N.tt "schoolDict" reg.reason)
+                                    reg.attendees
                         |} |> pojo )
 
         let empData = absenceData "#dba51d" "E" 0
@@ -158,6 +173,7 @@ let renderChart schoolStatus state dispatch =
            series = allSeries
            plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |} 
            tooltip = pojo {| shared = false; split = false
+                             pointFormat = "{point.text}"
                              xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            legend = pojo {| enabled = true |}
            navigator = pojo {| enabled = false |}
