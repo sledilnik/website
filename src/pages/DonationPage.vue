@@ -48,49 +48,55 @@
         <div v-if="language=='sl'" class="paymentMethod">
           <font-awesome-icon icon="university" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
-          <table class="bankDetails">
-            <tr>
-              <td>{{ $t("donation.bankDetails.recipient") }}</td>
-              <td>
-                Znanstveno društvo Sledilnik
-                <br>Celovška cesta 111
-                <br><span v-if="language!='sl'">1000 </span>Ljubljana
-                <span v-if="language!='sl'"><br>Slovenia</span>
-              </td>
-            </tr>
-            <tr>
-              <td>{{ $t("donation.bankDetails.iban") }}</td>
-              <td>SI56 6100 0002 5152 059</td>
-            </tr>
-            <tr>
-              <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
-              <td>CHAR</td>
-            </tr>
-            <tr v-if="language=='sl'">
-              <td>{{ $t("donation.bankDetails.purpose") }}</td>
-              <td>Donacija</td>
-            </tr>
-            <tr v-if="language=='sl'">
-              <td>{{ $t("donation.bankDetails.reference") }}</td>
-              <td>SI99</td>
-            </tr>
-            <tr v-if="language!='sl'">
-              <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
-              <td>HDELSI22</td>
-            </tr>
-            <tr v-if="language!='sl'">
-              <td>{{ $t("donation.bankDetails.bank") }}</td>
-              <td>
-                Delavska hranilnica d.d.
-                <br>Miklošičeva 5
-                <br><span v-if="language!='sl'">1000 </span>Ljubljana
-                <span v-if="language!='sl'"><br>Slovenia</span>
-              </td>
-            </tr>
+          <div class="stripeCheckout">
+            <span>
+              <button @click="showpermanentBankTransferOrderDetails = !showpermanentBankTransferOrderDetails">{{ $t("donation.monthly.permanentBankTransferOrder.detailsButton") }}</button>
+            </span>
+          </div>
+          <div v-if="showpermanentBankTransferOrderDetails">
+            <table class="bankDetails">
+              <tr>
+                <td>{{ $t("donation.bankDetails.recipient") }}</td>
+                <td>
+                  Znanstveno društvo Sledilnik
+                  <br>Celovška cesta 111
+                  <br><span v-if="language!='sl'">1000 </span>Ljubljana
+                  <span v-if="language!='sl'"><br>Slovenia</span>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ $t("donation.bankDetails.iban") }}</td>
+                <td>SI56 6100 0002 5152 059</td>
+              </tr>
+              <tr>
+                <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
+                <td>CHAR</td>
+              </tr>
+              <tr v-if="language=='sl'">
+                <td>{{ $t("donation.bankDetails.purpose") }}</td>
+                <td>Donacija</td>
+              </tr>
+              <tr v-if="language=='sl'">
+                <td>{{ $t("donation.bankDetails.reference") }}</td>
+                <td>SI99</td>
+              </tr>
+              <tr v-if="language!='sl'">
+                <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
+                <td>HDELSI22</td>
+              </tr>
+              <tr v-if="language!='sl'">
+                <td>{{ $t("donation.bankDetails.bank") }}</td>
+                <td>
+                  Delavska hranilnica d.d.
+                  <br>Miklošičeva 5
+                  <br><span v-if="language!='sl'">1000 </span>Ljubljana
+                  <span v-if="language!='sl'"><br>Slovenia</span>
+                </td>
+              </tr>
 
-          </table>
-
-          <!-- <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.authorisation')" /> -->
+            </table>
+            <!-- <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.authorisation')" /> -->
+          </div>
         </div>
       </div>
 
@@ -99,49 +105,56 @@
         <div class="paymentMethod">
           <font-awesome-icon icon="university" pull="left" size="2x" class="icon" />
           <div v-html-md="$t('donation.onetime.banktransfer.description')" />
-          <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
-          <table class="bankDetails">
-            <tr>
-              <td>{{ $t("donation.bankDetails.recipient") }}</td>
-              <td>
-                Znanstveno društvo Sledilnik
-                <br>Celovška cesta 111
-                <br><span v-if="language!='sl'">1000 </span>Ljubljana
-                <span v-if="language!='sl'"><br>Slovenia</span>
-              </td>
-            </tr>
-            <tr>
-              <td>{{ $t("donation.bankDetails.iban") }}</td>
-              <td>SI56 6100 0002 5152 059</td>
-            </tr>
-            <tr>
-              <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
-              <td>CHAR</td>
-            </tr>
-            <tr v-if="language=='sl'">
-              <td>{{ $t("donation.bankDetails.purpose") }}</td>
-              <td>Donacija</td>
-            </tr>
-            <tr v-if="language=='sl'">
-              <td>{{ $t("donation.bankDetails.reference") }}</td>
-              <td>SI99</td>
-            </tr>
-            <tr v-if="language!='sl'">
-              <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
-              <td>HDELSI22</td>
-            </tr>
-            <tr v-if="language!='sl'">
-              <td>{{ $t("donation.bankDetails.bank") }}</td>
-              <td>
-                Delavska hranilnica d.d.
-                <br>Miklošičeva 5
-                <br><span v-if="language!='sl'">1000 </span>Ljubljana
-                <span v-if="language!='sl'"><br>Slovenia</span>
-              </td>
-            </tr>
-          </table>
+          <div class="stripeCheckout">
+            <span>
+              <button @click="showBanktransferDetails = !showBanktransferDetails">{{ $t("donation.onetime.banktransfer.detailsButton") }}</button>
+            </span>
+          </div>
+          <div v-if="showBanktransferDetails">
+            <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
+            <table class="bankDetails">
+              <tr>
+                <td>{{ $t("donation.bankDetails.recipient") }}</td>
+                <td>
+                  Znanstveno društvo Sledilnik
+                  <br>Celovška cesta 111
+                  <br><span v-if="language!='sl'">1000 </span>Ljubljana
+                  <span v-if="language!='sl'"><br>Slovenia</span>
+                </td>
+              </tr>
+              <tr>
+                <td>{{ $t("donation.bankDetails.iban") }}</td>
+                <td>SI56 6100 0002 5152 059</td>
+              </tr>
+              <tr>
+                <td>{{ $t("donation.bankDetails.purposeCode") }}</td>
+                <td>CHAR</td>
+              </tr>
+              <tr v-if="language=='sl'">
+                <td>{{ $t("donation.bankDetails.purpose") }}</td>
+                <td>Donacija</td>
+              </tr>
+              <tr v-if="language=='sl'">
+                <td>{{ $t("donation.bankDetails.reference") }}</td>
+                <td>SI99</td>
+              </tr>
+              <tr v-if="language!='sl'">
+                <td>{{ $t("donation.bankDetails.bankBicSwift") }}</td>
+                <td>HDELSI22</td>
+              </tr>
+              <tr v-if="language!='sl'">
+                <td>{{ $t("donation.bankDetails.bank") }}</td>
+                <td>
+                  Delavska hranilnica d.d.
+                  <br>Miklošičeva 5
+                  <br><span v-if="language!='sl'">1000 </span>Ljubljana
+                  <span v-if="language!='sl'"><br>Slovenia</span>
+                </td>
+              </tr>
+            </table>
 
-          <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+            <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+          </div>
         </div>
 
         <div class="paymentMethod">
@@ -256,7 +269,9 @@ export default {
       smsSelectedItem: 10,
       smsShowDetails: false,
       smsDetailsHtml: "",
-      showSmsButtons: true
+      showSmsButtons: true,
+      showBanktransferDetails: false,
+      showpermanentBankTransferOrderDetails: false
     };
   },
   methods: {

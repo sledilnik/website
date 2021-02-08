@@ -1784,7 +1784,8 @@
         "onetime": {
             "title": "Enkratna donacija",
             "banktransfer": {
-                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**.",
+                "detailsButton": "Podatki za nakazilo z UPN"
             },
             "stripe": {
                 "description": "Enkratni prispevek Sledilniku lahko vplačate tudi **s kreditno kartico**. Izberite znesek, s katerim želite podpreti naše delovanje:",
@@ -1811,7 +1812,8 @@
             },
             "permanentBankTransferOrder": {
                 "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
-                "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi."
+                "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi.",
+                "detailsButton": "Podatki za trajnik"
             }
         },
         "incomeTax": {
