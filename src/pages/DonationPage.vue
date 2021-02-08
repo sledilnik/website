@@ -50,10 +50,10 @@
           <div v-html-md="$t('donation.monthly.permanentBankTransferOrder.description')" />
           <div class="stripeCheckout">
             <span>
-              <button @click="showpermanentBankTransferOrderDetails = !showpermanentBankTransferOrderDetails">{{ $t("donation.monthly.permanentBankTransferOrder.detailsButton") }}</button>
+              <button @click="showPermanentBankTransferOrderDetails = !showPermanentBankTransferOrderDetails">{{ $t("donation.monthly.permanentBankTransferOrder.detailsButton") }}</button>
             </span>
           </div>
-          <div v-if="showpermanentBankTransferOrderDetails">
+          <div v-if="showPermanentBankTransferOrderDetails">
             <table class="bankDetails">
               <tr>
                 <td>{{ $t("donation.bankDetails.recipient") }}</td>
@@ -271,7 +271,7 @@ export default {
       smsDetailsHtml: "",
       showSmsButtons: true,
       showBanktransferDetails: false,
-      showpermanentBankTransferOrderDetails: false
+      showPermanentBankTransferOrderDetails: false
     };
   },
   methods: {
