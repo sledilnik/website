@@ -186,6 +186,7 @@ type VisualizationType =
     | Spread
     | Regions
     | Regions100k
+    | Vaccination
     | Schools
     | Sources
     | Municipalities
