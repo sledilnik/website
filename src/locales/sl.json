@@ -1260,6 +1260,10 @@
             "titleMenu": "Šola - stanje",
             "search": "Išči",
             "persons": "Oseb",
+            "unit": "Oddelek",
+            "kid": "Otrok",
+            "pupil": "Učenec",
+            "student-hs": "Dijak",
             "date": "%A, %e. %B"
         },
         "sources": {

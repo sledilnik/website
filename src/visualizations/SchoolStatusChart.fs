@@ -19,18 +19,22 @@ let chartText = I18N.chartText "schoolStatus"
 type State =
     { SchoolStatus: SchoolStatusMap
       Error: string option
-      SearchQuery: string }
+      SearchQuery: string
+      RangeSelectionButtonIndex: int }
 
 type Msg =
     | ConsumeSchoolStatusData of Result<SchoolStatusMap, string>
     | ConsumeServerError of exn
     | SearchInputChanged of string
+    | RangeSelectionChanged of int
+
 
 let init (queryObj: obj): State * Cmd<Msg> =
     let state =
         { SchoolStatus = Map.empty
           Error = None
-          SearchQuery = "" }
+          SearchQuery = ""
+          RangeSelectionButtonIndex = 0 }
 
     state, Cmd.none
 
@@ -44,6 +48,8 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | ConsumeSchoolStatusData (Ok data) -> { state with SchoolStatus = data }, Cmd.none
     | ConsumeSchoolStatusData (Error err) -> { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
+    | RangeSelectionChanged buttonIndex ->
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
     | SearchInputChanged query ->
         let cmd =
             Cmd.OfAsync.either getOrFetch () ConsumeSchoolStatusData ConsumeServerError
@@ -65,10 +71,18 @@ let renderChart schoolStatus state dispatch =
  
     let allSeries =
 
+        let personType pType schoolType =
+            match pType, schoolType with
+            | "E", _ -> (I18N.tt "schoolDict" pType)
+            | _, "PV" -> chartText "kid" 
+            | _, "OS" | _, "OSPP" -> chartText "pupil" 
+            | _, "SS" | _, "DD" -> chartText "student-hs" 
+            | _, _ -> chartText "kid" 
+
         let absenceText (absences : SchoolAbsence array) =
             absences
             |> Array.mapi (fun i abs -> 
-                            sprintf "%s: %s<br>"
+                            sprintf "- %s: %s<br>"
                                 (I18N.tt "schoolDict" abs.personClass)
                                 (I18N.tt "schoolDict" abs.reason))
             |> String.Concat
@@ -83,8 +97,10 @@ let renderChart schoolStatus state dispatch =
                             x2 = d |> snd
                             y = startIdx + i 
                             color = color
-                            pType = (I18N.tt "schoolDict" pType)
-                            pCount = v.Length
+                            label = (personType pType v.[0].schoolType)
+                                     + if v.Length > 1 
+                                       then sprintf " (%d)" v.Length 
+                                       else ""
                             text = absenceText v
                         |} |> pojo )
 
@@ -96,9 +112,12 @@ let renderChart schoolStatus state dispatch =
                             x2 = reg.JsDate12hChangedTo
                             y = startIdx + i 
                             color = color
-                            pType = (I18N.tt "schoolDict" reg.personClass)
-                            pCount = reg.attendees
-                            text = sprintf "%s<br>%s<br>%s<br>%s: %d"
+                            label = (I18N.tt "schoolDict" reg.personClass) 
+                                     + if reg.attendees > 1 
+                                       then sprintf " (%d)" reg.attendees
+                                       else ""
+                            text = sprintf "%s: %s<br>- %s<br>- %s<br>%s: %d"
+                                    (chartText "unit")
                                     (I18N.tt "schoolDict" reg.personClass)
                                     (I18N.tt "schoolDict" reg.regime)
                                     (I18N.tt "schoolDict" reg.reason)
@@ -112,20 +131,28 @@ let renderChart schoolStatus state dispatch =
 
         [| 
             {| pointWidth = 15
-               dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
+               dataLabels = {| format = "{point.label}" |}
                data = empData |} 
             {| pointWidth = 15
-               dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
+               dataLabels = {| format = "{point.label}" |}
                data = attData |} 
             {| pointWidth = 15
-               dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
+               dataLabels = {| format = "{point.label}" |}
                data = regData |} 
         |]
 
-    {| basicChart Linear "covid19-school-status" with
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        basicChartOptions Linear "covid19-school-status"
+            state.RangeSelectionButtonIndex
+            onRangeSelectorButtonClick
+
+    {| baseOptions with
            chart = pojo {| ``type`` = "xrange" |}
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
