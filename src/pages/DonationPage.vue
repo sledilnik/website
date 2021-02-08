@@ -372,7 +372,7 @@ img {
   margin-right: -20px;
 
   span {
-    flex-grow: 1;
+    flex: 1 1 0px;
     margin-right: 20px;
     margin-bottom: 20px;
 
