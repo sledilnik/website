@@ -128,10 +128,8 @@ let renderChart schoolStatus state dispatch =
                data = regData |} 
         |]
 
-    {| optionsWithOnLoadEvent "covid19-school-status" with
-           chart = pojo {| ``type`` = "xrange"; animation = false |}
-           title = pojo {| text = null |}
-           xAxis = pojo {| ``type`` = "datetime" |}
+    {| basicChart Linear "covid19-school-status" with
+           chart = pojo {| ``type`` = "xrange" |}
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
            series = allSeries
@@ -139,10 +137,8 @@ let renderChart schoolStatus state dispatch =
            tooltip = pojo {| shared = false; split = false
                              pointFormat = "{point.text}"
                              xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
-           legend = pojo {| enabled = true |}
-           navigator = pojo {| enabled = false |}
-           scrollbar = pojo {| enabled = false |}
-           rangeSelector = pojo {| enabled = false |} |}
+           credits = chartCreditsMIZS           
+    |}
 
 
 let renderSchool (state: State) (schoolId: string) (schoolStatus: SchoolStatus) dispatch =
