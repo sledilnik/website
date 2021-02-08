@@ -1259,7 +1259,8 @@
             "title": "Stanje v šoli",
             "titleMenu": "Šola - stanje",
             "search": "Išči",
-            "date": "{{ date, %a., %e. %b. }}"
+            "persons": "Oseb",
+            "date": "%A, %e. %B"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",

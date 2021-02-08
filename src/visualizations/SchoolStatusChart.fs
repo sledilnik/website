@@ -14,6 +14,8 @@ open Highcharts
 
 open Data.SchoolStatus
 
+let chartText = I18N.chartText "schoolStatus"
+
 type State =
     { SchoolStatus: SchoolStatusMap
       Error: string option
@@ -54,7 +56,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
 let renderSearch (query: string) dispatch =
     Html.input [ prop.className "form-control form-control-sm filters__query"
                  prop.type'.text
-                 prop.placeholder (I18N.t "charts.schoolStatus.search")
+                 prop.placeholder (chartText "search")
                  prop.valueOrDefault query
                  prop.onChange (SearchInputChanged >> dispatch) ]
 
@@ -94,12 +96,13 @@ let renderChart schoolStatus state dispatch =
                             x2 = reg.JsDate12hChangedTo
                             y = startIdx + i 
                             color = color
-                            pClass = (I18N.tt "schoolDict" reg.personClass)
+                            pType = (I18N.tt "schoolDict" reg.personClass)
                             pCount = reg.attendees
-                            text = sprintf "%s<br>%s<br>%s<br>Oseb: %d"
+                            text = sprintf "%s<br>%s<br>%s<br>%s: %d"
                                     (I18N.tt "schoolDict" reg.personClass)
                                     (I18N.tt "schoolDict" reg.regime)
                                     (I18N.tt "schoolDict" reg.reason)
+                                    (chartText "persons")
                                     reg.attendees
                         |} |> pojo )
 
@@ -108,23 +111,17 @@ let renderChart schoolStatus state dispatch =
         let regData = regimeData "#f4b2e0" (empData.Length+attData.Length)
 
         [| 
-            {| name = "Zaposleni" 
-               color = "#dba51d"
-               pointWidth = 15
+            {| pointWidth = 15
                dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
+                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
                data = empData |} 
-            {| name = "Udeleženci" 
-               color = "#bda506"
-               pointWidth = 15
+            {| pointWidth = 15
                dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
-                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
+                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
                data = attData |} 
-            {| name = "Oddelki" 
-               color = "#f4b2e0"
-               pointWidth = 15
-               dataLabels = [| {| align =  "left"; format = "{point.pClass}" |}
-                               {| align =  "right"; format = "oseb: {point.pCount}" |} |]
+            {| pointWidth = 15
+               dataLabels = [| {| align =  "left"; format = "{point.pType}" |}
+                               {| align =  "right"; format = chartText "persons" + ": {point.pCount}" |} |]
                data = regData |} 
         |]
 
@@ -136,7 +133,7 @@ let renderChart schoolStatus state dispatch =
            plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |} 
            tooltip = pojo {| shared = false; split = false
                              pointFormat = "{point.text}"
-                             xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+                             xDateFormat = "<b>" + chartText "date" + "</b>" |}
            credits = chartCreditsMIZS           
     |}
 
