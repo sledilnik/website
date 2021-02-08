@@ -21,6 +21,7 @@ All of these are reasons why the uncertainty associated with the models is relat
 - [Upgraded SEIR models](#seir)
 - [Social Network Model](#social_network)
 - [Evaluating the Reproduction Rate](#reproduction-rate)
+- [Daily data analyses](#observable)
 - [Determining alarms](#alarms)
 - [Interesting Articles](#articles)
 
@@ -69,11 +70,18 @@ The University of Ljubljana Medical Faculty’s [Institute for Biostatistics and
 
 More about the methodology and results can be found in the articles in the [Zdravniški vestnik](https://vestnik.szd.si/index.php/ZdravVest/article/view/3068) ([summary](https://ibmi.mf.uni-lj.si/files/Pregledni%20povzetek_74e.pdf)) and the scientific journal [Mathematical Biosciences](https://www.sciencedirect.com/science/article/abs/pii/S0025556420301279).
 
+## <a id="observable"></a>Daily data analyses
+[Miha Kadunc](https://twitter.com/miha_kadunc), a member of the Sledilnik team, prepared [scripts on the Observable web portal](https://observablehq.com/collection/@mkadunc/covid-19-sledilnik-org) for daily data analysis. There you can find: [Municipalities phase diagrams](https://observablehq.com/@mkadunc/municipalities-phase-diagram-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [Incidences by age groups](https://observablehq.com/@mkadunc/relativna-incidenca-po-starostnih-skupinah-sledilnik-org?collection=@mkadunc/covid-19-sledilnik-org), [EU color coding](https://observablehq.com/@mkadunc/eu-proposed-color-coding-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [Maps of 14-days incidence](https://observablehq.com/@mkadunc/map-of-14-days-incidence-sledilnik-covid-19?collection=@mkadunc/covid-19-sledilnik-org), [Ratios and offsets between confirmed cases, hospitalised, ICU and deceased](https://observablehq.com/@mkadunc/sledilnik-covid-19-delez-hospitaliziranih-na-intenzivni-n?collection=@mkadunc/covid-19-sledilnik-org), etc.
+
+<iframe style="width:660; height:440; max-width:100%" frameborder="0" src="https://observablehq.com/embed/@mkadunc/municipalities-phase-diagram-sledilnik-org?cells=regions"></iframe>
+
 ## <a id="alarms"></a>Determining alarms
 Dr. Janez Stare and dr. Nina Ružić Gorenjec ([IBMI](http://ibmi.mf.uni-lj.si/)) in the analysis [Determining alarms in the COVID-19 epidemic in Slovenia](https://ibmi.mf.uni-lj.si/sl/centri/biostatisticni-center/interaktivno/dolocanje-alarmov-pri-epidemiji-covid-19-v-sloveniji) assess the extent to which the epidemic has been restarted. The results are particularly relevant for periods of low virus incidence in the population. In the calculations the ratios of confirmed cases among all tested cases are used.
 
 
 ## <a id="articles"></a>Interesting Articles
+
+- Via short simulations prof. Janez Žibert describes some [key factors in the spread of the virus](https://rpubs.com/janezz/), including: [the impact of vaccination](https://rpubs.com/janezz/vpliv_cepljenja_osnove), [intergenerational mixing and opening of schools](https://rpubs.com/janezz/serC19SIV5-sim_sole_cep_sev), and [the presence of a new version of the virus](https://rpubs.com/janezz/sir_dva_seva). (2021/1/26)
 
 - IBMI researchers, led by Dr. Nina Ružić Gorenjec, in their analysis, [From the story of success to the disaster](https://medium.com/sledilnik/od-zgodbe-o-uspehu-do-katastrofe-63b77b1a23e1), emphasized the importance of the reduced public mobility and epidemiological contact tracing for a successful response to the epidemic. (2021/1/13)
 

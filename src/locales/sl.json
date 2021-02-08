@@ -1237,6 +1237,19 @@
                 "description": "Graf za vsak dan do 21.1.2021 prikazuje število dnevnih ključev za vse uporabnike, ki so na tisti dan vnesli potrditev okužbe. Vsaka pika na grafu predstavlja skupino uporabnikov, ki so na tisti dan objavili enako število ključev. Temno modra črta označuje, koliko ključev je povprečen uporabnik naložil na posamezen dan. Aplikacija uporabnika s potrjeno okužbo na strežnik naloži največ 13 dnevnih ključev, če pa aplikacija ni bila ves čas vklopljena, je teh ključev ustrezno manj. 22.1.2021 je bila izdana nadgradnja iz verzije 1.3.1 na verzijo 1.10.1 z različnimi vzorci zaporedij dnevnih ključev, zaradi česar ocena ni več dovolj zanesljiva."
             }
         },
+        "vaccination": {
+            "title": "Cepljenje",
+            "titleMenu": "Cepljenje",
+            "used": "Poraba cepiva",
+            "byManufacturer": "Dobavljena cepiva",
+            "pfizer": "Pfizer/BioNTech",
+            "moderna": "Moderna",
+            "az": "AstraZeneca",
+            "administered": "Cepljeni 💉",
+            "administered2nd": "Cepljeni 💉💉",
+            "usedDoses": "Uporabljenih odmerkov",
+            "deliveredDoses": "Dobavljenih odmerkov"
+        },
         "schools": {
             "title": "Primeri v šolstvu",
             "titleMenu": "Šolstvo - primeri",
@@ -1864,6 +1877,10 @@
         "daily-comparison-chart": {
             "question": "Kaj kaže graf \"Primerjava po dnevih v tednu\"?",
             "answer": "[Graf](/sl/stats#daily-comparison-chart) prikazuje dinamiko širjenja okužbe po posameznih dnevih v tednu. Izberete lahko tri poglede: *Potrjeni primeri* (novi primeri na ta dan), *Aktivni primeri* (skupno število aktivnih primerov na ta dan) in *Opravljeni testi* (na ta dan).\nNa grafu je tako razvidna tipična tedenska dinamika (vikendi z zmanjšano dejavnostjo testiranja), kakor tudi tedenske rasti ali zmanjšanja na posameznem dnevu v tednu."
+        },
+        "vaccination-chart": {
+            "question": "Kaj kaže graf \"Cepljenje\"?",
+            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Poraba cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
         },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
