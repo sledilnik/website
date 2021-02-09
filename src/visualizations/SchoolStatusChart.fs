@@ -19,13 +19,13 @@ let chartText = I18N.chartText "schoolStatus"
 type State =
     { SchoolStatus: SchoolStatusMap
       Error: string option
-      SearchQuery: string
+      SelectedSchool: string
       RangeSelectionButtonIndex: int }
 
 type Msg =
     | ConsumeSchoolStatusData of Result<SchoolStatusMap, string>
     | ConsumeServerError of exn
-    | SearchInputChanged of string
+    | SchoolsFilterChanged of string
     | RangeSelectionChanged of int
 
 
@@ -33,7 +33,7 @@ let init (queryObj: obj): State * Cmd<Msg> =
     let state =
         { SchoolStatus = Map.empty
           Error = None
-          SearchQuery = ""
+          SelectedSchool = ""
           RangeSelectionButtonIndex = 0 }
 
     state, Cmd.none
@@ -50,21 +50,14 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
-    | SearchInputChanged query ->
+    | SchoolsFilterChanged schoolId ->
         let cmd =
             Cmd.OfAsync.either getOrFetch () ConsumeSchoolStatusData ConsumeServerError
 
         { state with
               SchoolStatus = Map.empty
-              SearchQuery = query },
+              SelectedSchool = schoolId },
         cmd
-
-let renderSearch (query: string) dispatch =
-    Html.input [ prop.className "form-control form-control-sm filters__query"
-                 prop.type'.text
-                 prop.placeholder (chartText "search")
-                 prop.valueOrDefault query
-                 prop.onChange (SearchInputChanged >> dispatch) ]
 
 
 let renderChart schoolStatus state dispatch =
@@ -182,12 +175,30 @@ let renderSchools (state: State) dispatch =
     (state.SchoolStatus
      |> Seq.map (fun school -> renderSchool state school.Key school.Value dispatch))
 
+let renderSchoolSelector state dispatch =
+    let renderedSchools =
+        Utils.Dictionaries.schools 
+        |> Map.toSeq
+        |> Seq.map (fun school -> school |> snd)
+        |> Seq.sortBy (fun sData -> sData.Name)
+        |> Seq.map (fun sData ->
+                        Html.option [
+                            prop.text sData.Name
+                            prop.value sData.Key
+                        ] )
+
+    Html.select [
+        prop.value state.SelectedSchool
+        prop.className "form-control form-control-sm filters__school"
+        prop.children renderedSchools
+        prop.onChange (SchoolsFilterChanged >> dispatch)
+    ]
+
 let render (state: State) dispatch =
     let element =
         Html.div [ prop.children [ Utils.renderChartTopControls [ Html.div [ prop.className "filters"
-                                                                             prop.children [ renderSearch
-                                                                                                 state.SearchQuery
-                                                                                                 dispatch ] ] ]
+                                                                             prop.children [ renderSchoolSelector 
+                                                                                                state dispatch ] ] ]
                                    Html.div [ prop.className "schools"
                                               prop.children (renderSchools state dispatch) ] ] ]
 
