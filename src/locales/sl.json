@@ -1269,7 +1269,7 @@
             "unitsRemote": "Oddelki - na daljavo"
         },
         "schoolStatus": {
-            "title": "Stanje v posamezni šoli",
+            "title": "Stanje po šolah",
             "titleMenu": "Šola - stanje",
             "search": "Išči",
             "persons": "Oseb",
@@ -1277,7 +1277,7 @@
             "kid": "Otrok",
             "pupil": "Učenec",
             "student-hs": "Dijak",
-            "noData": "Ni podatka o odsotnosti zaradi okužb ali suma okužbe in spremenjenem režimu v tej enoti.",
+            "noData": "Za to enoto ni podatkov o odsotnostih zaradi (suma) okužb ali o spremenjenem režimu.",
             "date": "%A, %e. %B"
         },
         "sources": {
