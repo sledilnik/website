@@ -173,30 +173,6 @@ let renderSchools (state: State) dispatch =
 
 let renderSchoolSelector state dispatch =
 
-    // let emptyValue =
-    //     Html.option [
-    //         prop.text "<izberi šolo>"
-    //         prop.value ""
-    //     ]
-
-    // let renderedSchools =
-    //     Utils.Dictionaries.schools
-    //     |> Map.toList
-    //     |> List.map (fun school -> school |> snd)
-    //     |> List.sortBy (fun sData -> sData.Name)
-    //     |> List.map (fun sData ->
-    //                     Html.option [
-    //                         prop.text sData.Name
-    //                         prop.value sData.Key
-    //                     ] )
-
-    // Html.select [
-    //     prop.value state.SelectedSchool
-    //     prop.className "form-control form-control-sm filters__school"
-    //     prop.children (emptyValue :: renderedSchools)
-    //     prop.onChange (SchoolsFilterChanged >> dispatch)
-    // ]
-
     React.functionComponent(fun () ->
         let (query, setQuery) = React.useState("")
         let (suggestions, setSuggestions) = React.useState(Array.empty<School>)
@@ -213,10 +189,11 @@ let renderSchoolSelector state dispatch =
 
         let filterSchools (query : string) =
             let tokens = tokenizeQuery query
-            Utils.Dictionaries.schools
+            Utils.Dictionaries.schoolsList
             |> Array.filter (schoolMatches tokens)
 
         let inputProps = {|
+            placeholder = chartText "search"
             value = query
             onChange = (fun (ev) -> setQuery ev?target?value)
         |}
@@ -232,6 +209,23 @@ let renderSchoolSelector state dispatch =
         ]
     ) ()
 
+let renderSchoolName state dispatch =
+    let schoolName = 
+        match Utils.Dictionaries.schools.TryFind(state.SelectedSchool) with
+        | Some s -> s.Name
+        | _ -> ""
+
+    seq {
+        yield Html.h3 [ prop.className "name" 
+                        prop.text schoolName ]
+
+        if state.SelectedSchool <> "" && state.SchoolStatus.IsEmpty 
+        then                
+            yield Html.text [ prop.className "nodata"
+                              prop.text (chartText "noData") ]
+    }
+
+
 let render (state: State) dispatch =
     let element =
         Html.div [
@@ -242,6 +236,10 @@ let render (state: State) dispatch =
                         prop.children [
                             renderSchoolSelector state dispatch
                         ] ] ]
+                Html.div [
+                    prop.className "name"
+                    prop.children (renderSchoolName state dispatch)
+                ]
                 Html.div [
                     prop.className "schools"
                     prop.children (renderSchools state dispatch)
