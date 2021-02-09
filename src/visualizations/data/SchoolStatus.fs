@@ -10,13 +10,13 @@ type SchoolAbsence = {
     year: int
     month: int
     day: int
-    absentFrom : 
+    absentFrom :
         {|
             year: int
             month: int
             day: int
         |}
-    absentTo : 
+    absentTo :
         {|
             year: int
             month: int
@@ -27,8 +27,7 @@ type SchoolAbsence = {
     personType : string
     personClass : string
     reason : string
-}
-with
+} with
     member lt.Date = DateTime(lt.year, lt.month, lt.day)
     member lt.DateAbsentFrom = DateTime(lt.absentFrom.year, lt.absentFrom.month, lt.absentFrom.day)
     member lt.DateAbsentTo = DateTime(lt.absentTo.year, lt.absentTo.month, lt.absentTo.day)
@@ -39,13 +38,13 @@ type SchoolRegime = {
     year: int
     month: int
     day: int
-    changedFrom : 
+    changedFrom :
         {|
             year: int
             month: int
             day: int
         |}
-    changedTo : 
+    changedTo :
         {|
             year: int
             month: int
@@ -57,23 +56,21 @@ type SchoolRegime = {
     attendees : int
     regime : string
     reason : string
-}
-with 
+} with
     member lt.Date = DateTime(lt.year, lt.month, lt.day)
     member lt.DateChangedFrom = DateTime(lt.changedFrom.year, lt.changedFrom.month, lt.changedFrom.day)
     member lt.DateChangedTo = DateTime(lt.changedTo.year, lt.changedTo.month, lt.changedTo.day)
     member lt.JsDate12hChangedFrom = DateTime(lt.changedFrom.year, lt.changedFrom.month, lt.changedFrom.day) |> Highcharts.Helpers.jsTime12h
     member lt.JsDate12hChangedTo = DateTime(lt.changedTo.year, lt.changedTo.month, lt.changedTo.day) |> Highcharts.Helpers.jsTime12h
 
-
 type SchoolStatus = {
     absences: SchoolAbsence array
     regimes: SchoolRegime array
-  }
+}
 
-type SchoolStatusMap = Map<string,SchoolStatus>
+type private SchoolStatusMap = Map<string, SchoolStatus>
 
-let loadData (schoolId: string) = 
+let loadData (schoolId: string) =
     async {
         let! response_code, json = Http.get (url + "?id=" + schoolId)
         return
@@ -82,12 +79,9 @@ let loadData (schoolId: string) =
                 let data = Json.tryParseNativeAs<SchoolStatusMap> json
                 match data with
                 | Error err ->
-                    Error (sprintf "Napaka pri branju podatkov šole: %s" err)
+                    Error (sprintf "Error reading school data: %s" err)
                 | Ok data ->
-                    Ok data
+                    Map.tryFind schoolId data |> Ok
             | _ ->
-                Error (sprintf "Napaka pri branju podatkov šole: %d" response_code)
+                Error (sprintf "Error reading school data: %d" response_code)
     }
-
-let getOrFetch = 
-    DataLoader.makeDataLoader<SchoolStatusMap> url

@@ -20,23 +20,20 @@ type School = Utils.Dictionaries.School
 let chartText = I18N.chartText "schoolStatus"
 
 type State =
-    { SchoolStatus: SchoolStatusMap
-      Error: string option
-      SelectedSchool: string
-      RangeSelectionButtonIndex: int }
+    { SchoolStatus : RemoteData<SchoolStatus option, string>
+      SelectedSchool : School option
+      RangeSelectionButtonIndex : int }
 
 type Msg =
-    | ConsumeSchoolStatusData of Result<SchoolStatusMap, string>
+    | ConsumeSchoolStatusData of Result<SchoolStatus option, string>
     | ConsumeServerError of exn
-    | SchoolsFilterChanged of string
+    | SchoolSelected of School
     | RangeSelectionChanged of int
-
 
 let init (queryObj: obj): State * Cmd<Msg> =
     let state =
-        { SchoolStatus = Map.empty
-          Error = None
-          SelectedSchool = ""
+        { SchoolStatus = NotAsked
+          SelectedSchool = None
           RangeSelectionButtonIndex = 0 }
 
     state, Cmd.none
@@ -48,21 +45,22 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     document.dispatchEvent (evt) |> ignore
 
     match msg with
-    | ConsumeSchoolStatusData (Ok data) -> { state with SchoolStatus = data }, Cmd.none
-    | ConsumeSchoolStatusData (Error err) -> { state with Error = Some err }, Cmd.none
-    | ConsumeServerError ex -> { state with Error = Some ex.Message }, Cmd.none
+    | ConsumeSchoolStatusData (Ok data) ->
+        { state with SchoolStatus = Success data }, Cmd.none
+    | ConsumeSchoolStatusData (Error err) ->
+        { state with SchoolStatus = Failure err }, Cmd.none
+    | ConsumeServerError ex ->
+        { state with SchoolStatus = Failure ex.Message }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
-    | SchoolsFilterChanged schoolId ->
-        let cmd =
-            Cmd.OfAsync.either loadData schoolId ConsumeSchoolStatusData ConsumeServerError
+    | SchoolSelected school ->
+        let cmd = Cmd.OfAsync.either loadData school.Key ConsumeSchoolStatusData ConsumeServerError
+        let newState = {
+            state with SchoolStatus = Loading
+                       SelectedSchool = Some school }
+        newState, cmd
 
-        { state with
-              SchoolStatus = Map.empty
-              SelectedSchool = schoolId },
-        cmd
-
-let renderChart schoolStatus state dispatch =
+let renderChartOptions state schoolStatus dispatch =
 
     let allSeries =
 
@@ -159,45 +157,30 @@ let renderChart schoolStatus state dispatch =
            credits = chartCreditsMIZS
     |}
 
+let renderSchool (state: State) dispatch =
+    match state.SchoolStatus with
+    | NotAsked -> Html.none
+    | Loading -> Html.none
+    | Failure err -> Html.text err
+    | Success data ->
+        match data with
+        | None ->
+            Html.div [
+                prop.className "no-data"
+                prop.children [
+                    Html.text (chartText "noData")
+                ]
+            ]
+        | Some schoolStatus ->
+            Html.div [
+                prop.className "highcharts-wrapper"
+                prop.style [ style.height 480 ]
+                prop.children [
+                    renderChartOptions state schoolStatus dispatch |> Highcharts.chart
+                ]
+            ]
 
-let renderSchool (state: State) (schoolId: string) (schoolStatus: SchoolStatus) dispatch =
-    Html.div [ prop.className "school"
-               prop.children [ Html.div [ prop.style [ style.height 480 ]
-                                          prop.className "highcharts-wrapper"
-                                          prop.children [ renderChart schoolStatus state dispatch
-                                                           |> Highcharts.chart ] ] ] ]
-
-let renderSchools (state: State) dispatch =
-    (state.SchoolStatus
-     |> Seq.map (fun school -> renderSchool state school.Key school.Value dispatch))
-
-let renderSchoolSelector state dispatch =
-
-    // let emptyValue =
-    //     Html.option [
-    //         prop.text "<izberi šolo>"
-    //         prop.value ""
-    //     ]
-
-    // let renderedSchools =
-    //     Utils.Dictionaries.schools
-    //     |> Map.toList
-    //     |> List.map (fun school -> school |> snd)
-    //     |> List.sortBy (fun sData -> sData.Name)
-    //     |> List.map (fun sData ->
-    //                     Html.option [
-    //                         prop.text sData.Name
-    //                         prop.value sData.Key
-    //                     ] )
-
-    // Html.select [
-    //     prop.value state.SelectedSchool
-    //     prop.className "form-control form-control-sm filters__school"
-    //     prop.children (emptyValue :: renderedSchools)
-    //     prop.onChange (SchoolsFilterChanged >> dispatch)
-    // ]
-
-    React.functionComponent(fun () ->
+let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : Msg -> unit |}) ->
         let (query, setQuery) = React.useState("")
         let (suggestions, setSuggestions) = React.useState(Array.empty<School>)
 
@@ -213,11 +196,19 @@ let renderSchoolSelector state dispatch =
 
         let filterSchools (query : string) =
             let tokens = tokenizeQuery query
-            Utils.Dictionaries.schools
-            |> Array.filter (schoolMatches tokens)
+            let maxTokenLen =
+                tokens
+                |> List.map (fun t -> t.Length)
+                |> List.max
+            if maxTokenLen <= 1 then
+                Array.empty
+            else
+                Utils.Dictionaries.schools
+                |> Array.filter (schoolMatches tokens)
 
         let inputProps = {|
             value = query
+            placeholder = chartText "search"
             onChange = (fun (ev) -> setQuery ev?target?value)
         |}
 
@@ -228,9 +219,9 @@ let renderSchoolSelector state dispatch =
             AutoSuggest<School>.onSuggestionsClearRequested (fun () -> setSuggestions Array.empty<School>)
             AutoSuggest<School>.getSuggestionValue (fun (school : School) -> school.Key)
             AutoSuggest<School>.renderSuggestion (fun (school : School) -> Html.text school.Name)
-            AutoSuggest<School>.onSuggestionSelected (fun ev payload -> setQuery "" ; dispatch (SchoolsFilterChanged payload.suggestionValue))
+            AutoSuggest<School>.onSuggestionSelected (fun ev payload -> setQuery "" ; props.dispatch (SchoolSelected payload.suggestion))
         ]
-    ) ()
+    )
 
 let render (state: State) dispatch =
     let element =
@@ -240,11 +231,14 @@ let render (state: State) dispatch =
                     Html.div [
                         prop.className "filters"
                         prop.children [
-                            renderSchoolSelector state dispatch
+                            autoSuggestSchoolInput {| dispatch = dispatch |}
+                            match state.SelectedSchool with
+                            | None -> Html.none
+                            | Some school -> Html.h3 school.Name
                         ] ] ]
                 Html.div [
-                    prop.className "schools"
-                    prop.children (renderSchools state dispatch)
+                    prop.className "school"
+                    prop.children (renderSchool state dispatch)
                 ] ] ]
 
     // trigger event for iframe resize
