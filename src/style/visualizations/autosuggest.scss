@@ -27,7 +27,7 @@
   display: block;
   position: absolute;
   top: 29px;
-  width: 600px;
+  width: 630px;
   border: 1px solid #aaa;
   background-color: #fff;
   font-size: 14px;
@@ -44,7 +44,7 @@
 
 .react-autosuggest__suggestion {
   cursor: pointer;
-  padding: 10px;
+  padding: 6px 0 6px 10px;
 }
 
 .react-autosuggest__suggestion--highlighted {
