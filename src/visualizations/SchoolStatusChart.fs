@@ -170,12 +170,18 @@ let renderSchools (state: State) dispatch =
      |> Seq.map (fun school -> renderSchool state school.Key school.Value dispatch))
 
 let renderSchoolSelector state dispatch =
+    let emptyValue =
+        Html.option [
+            prop.text "<izberi šolo>"
+            prop.value "" 
+        ] 
+
     let renderedSchools =
         Utils.Dictionaries.schools 
-        |> Map.toSeq
-        |> Seq.map (fun school -> school |> snd)
-        |> Seq.sortBy (fun sData -> sData.Name)
-        |> Seq.map (fun sData ->
+        |> Map.toList
+        |> List.map (fun school -> school |> snd)
+        |> List.sortBy (fun sData -> sData.Name)
+        |> List.map (fun sData ->
                         Html.option [
                             prop.text sData.Name
                             prop.value sData.Key
@@ -184,7 +190,7 @@ let renderSchoolSelector state dispatch =
     Html.select [
         prop.value state.SelectedSchool
         prop.className "form-control form-control-sm filters__school"
-        prop.children renderedSchools
+        prop.children (emptyValue :: renderedSchools)
         prop.onChange (SchoolsFilterChanged >> dispatch)
     ]
 
