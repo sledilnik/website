@@ -52,7 +52,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
     | SchoolsFilterChanged schoolId ->
         let cmd =
-            Cmd.OfAsync.either getOrFetch () ConsumeSchoolStatusData ConsumeServerError
+            Cmd.OfAsync.either loadData schoolId ConsumeSchoolStatusData ConsumeServerError
 
         { state with
               SchoolStatus = Map.empty
@@ -146,7 +146,7 @@ let renderChart schoolStatus state dispatch =
             onRangeSelectorButtonClick
 
     {| baseOptions with
-           chart = pojo {| ``type`` = "xrange" |}
+           chart = pojo {| ``type`` = "xrange"; animation = false |}
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
            series = allSeries
@@ -160,13 +160,7 @@ let renderChart schoolStatus state dispatch =
 
 let renderSchool (state: State) (schoolId: string) (schoolStatus: SchoolStatus) dispatch =
     Html.div [ prop.className "school"
-               prop.children [ Html.h3 [ let schoolName =
-                                             match Utils.Dictionaries.schools.TryFind(schoolId) with
-                                             | Some s -> s.Name
-                                             | _ -> schoolId
-                                         prop.className "name"
-                                         prop.text schoolName ]
-                               Html.div [ prop.style [ style.height 480 ]
+               prop.children [ Html.div [ prop.style [ style.height 480 ]
                                           prop.className "highcharts-wrapper"
                                           prop.children [ renderChart schoolStatus state dispatch
                                                            |> Highcharts.chart ] ] ] ]

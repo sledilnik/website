@@ -1,9 +1,10 @@
 module Data.SchoolStatus
 
+open Fable.SimpleHttp
+open Fable.SimpleJson
 open System
 
-//let url = "https://api.sledilnik.org/api/school-status"
-let url = "https://api.sledilnik.org/api/school-status?id=1275&id=3545&id=229&id=3767&id=9594&id=10342"
+let url = "https://api.sledilnik.org/api/school-status"
 
 type SchoolAbsence = {
     year: int
@@ -71,6 +72,22 @@ type SchoolStatus = {
   }
 
 type SchoolStatusMap = Map<string,SchoolStatus>
+
+let loadData (schoolId: string) = 
+    async {
+        let! response_code, json = Http.get (url + "?id=" + schoolId)
+        return
+            match response_code with
+            | 200 ->
+                let data = Json.tryParseNativeAs<SchoolStatusMap> json
+                match data with
+                | Error err ->
+                    Error (sprintf "Napaka pri branju podatkov šole: %s" err)
+                | Ok data ->
+                    Ok data
+            | _ ->
+                Error (sprintf "Napaka pri branju podatkov šole: %d" response_code)
+    }
 
 let getOrFetch = 
     DataLoader.makeDataLoader<SchoolStatusMap> url
