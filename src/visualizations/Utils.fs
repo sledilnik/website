@@ -582,7 +582,7 @@ module Dictionaries =
         Name : string
     }
 
-    let schoolsList =
+    let schools =
         [|
             "121","121","OS","ng","Osnovna šola Col"
             "645","121","OS","ng","Osnovna šola Col Podružnica Podkraj"
@@ -2902,11 +2902,9 @@ module Dictionaries =
         |]
         |> Array.map (fun (key, keyM, sType, region, name) ->
             { Key = key; KeyMain = keyM; Type = sType; Region = region; Name = name})
- 
-    let schools =
-        schoolsList    
-        |> Array.map (fun school -> school.Key, school)
-        |> Map.ofArray
+        // |> Array.map (fun (key, keyM, sType, region, name) ->
+        //     key, { Key = key; KeyMain = keyM; Type = sType; Region = region; Name = name})
+        // |> Map.ofArray
 
 module AgePopulationStats =
     type AgeGroupId = string

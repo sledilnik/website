@@ -1277,7 +1277,6 @@
             "kid": "Otrok",
             "pupil": "Učenec",
             "student-hs": "Dijak",
-            "noData": "Ni podatka o odsotnosti zaradi okužb ali suma okužbe in spremenjenem režimu v tej enoti.",
             "date": "%A, %e. %B"
         },
         "sources": {
