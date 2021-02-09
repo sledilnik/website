@@ -11,8 +11,11 @@ open Feliz.ElmishComponents
 
 open Types
 open Highcharts
-
+open Components.AutoSuggest
+open Utils.Dictionaries
 open Data.SchoolStatus
+
+type School = Utils.Dictionaries.School
 
 let chartText = I18N.chartText "schoolStatus"
 
@@ -59,54 +62,53 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
               SelectedSchool = schoolId },
         cmd
 
-
 let renderChart schoolStatus state dispatch =
- 
+
     let allSeries =
 
         let personType pType schoolType =
             match pType, schoolType with
             | "E", _ -> (I18N.tt "schoolDict" pType)
-            | _, "PV" -> chartText "kid" 
-            | _, "OS" | _, "OSPP" -> chartText "pupil" 
-            | _, "SS" | _, "DD" -> chartText "student-hs" 
-            | _, _ -> chartText "kid" 
+            | _, "PV" -> chartText "kid"
+            | _, "OS" | _, "OSPP" -> chartText "pupil"
+            | _, "SS" | _, "DD" -> chartText "student-hs"
+            | _, _ -> chartText "kid"
 
         let absenceText (absences : SchoolAbsence array) =
             absences
-            |> Array.mapi (fun i abs -> 
+            |> Array.mapi (fun i abs ->
                             sprintf "- %s: %s<br>"
                                 (I18N.tt "schoolDict" abs.personClass)
                                 (I18N.tt "schoolDict" abs.reason))
             |> String.Concat
 
         let absenceData color pType startIdx =
-            schoolStatus.absences 
+            schoolStatus.absences
             |> Array.filter (fun abs -> abs.personType = pType)
             |> Array.groupBy (fun abs -> (abs.JsDate12hAbsentFrom, abs.JsDate12hAbsentTo))
             |> Array.mapi (fun i (d, v) ->
-                        {| 
+                        {|
                             x =  d |> fst
                             x2 = d |> snd
-                            y = startIdx + i 
+                            y = startIdx + i
                             color = color
                             label = (personType pType v.[0].schoolType)
-                                     + if v.Length > 1 
-                                       then sprintf " (%d)" v.Length 
+                                     + if v.Length > 1
+                                       then sprintf " (%d)" v.Length
                                        else ""
                             text = absenceText v
                         |} |> pojo )
 
         let regimeData color startIdx =
-            schoolStatus.regimes 
+            schoolStatus.regimes
             |> Array.mapi (fun i reg ->
-                        {| 
+                        {|
                             x =  reg.JsDate12hChangedFrom
                             x2 = reg.JsDate12hChangedTo
-                            y = startIdx + i 
+                            y = startIdx + i
                             color = color
-                            label = (I18N.tt "schoolDict" reg.personClass) 
-                                     + if reg.attendees > 1 
+                            label = (I18N.tt "schoolDict" reg.personClass)
+                                     + if reg.attendees > 1
                                        then sprintf " (%d)" reg.attendees
                                        else ""
                             text = sprintf "%s: %s<br>- %s<br>- %s<br>%s: %d"
@@ -122,16 +124,16 @@ let renderChart schoolStatus state dispatch =
         let attData = absenceData "#bda506" "A" empData.Length
         let regData = regimeData "#f4b2e0" (empData.Length+attData.Length)
 
-        [| 
+        [|
             {| pointWidth = 15
                dataLabels = {| format = "{point.label}" |}
-               data = empData |} 
+               data = empData |}
             {| pointWidth = 15
                dataLabels = {| format = "{point.label}" |}
-               data = attData |} 
+               data = attData |}
             {| pointWidth = 15
                dataLabels = {| format = "{point.label}" |}
-               data = regData |} 
+               data = regData |}
         |]
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -150,11 +152,11 @@ let renderChart schoolStatus state dispatch =
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
            series = allSeries
-           plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |} 
+           plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |}
            tooltip = pojo {| shared = false; split = false
                              pointFormat = "{point.text}"
                              xDateFormat = "<b>" + chartText "date" + "</b>" |}
-           credits = chartCreditsMIZS           
+           credits = chartCreditsMIZS
     |}
 
 
@@ -170,37 +172,80 @@ let renderSchools (state: State) dispatch =
      |> Seq.map (fun school -> renderSchool state school.Key school.Value dispatch))
 
 let renderSchoolSelector state dispatch =
-    let emptyValue =
-        Html.option [
-            prop.text "<izberi šolo>"
-            prop.value "" 
-        ] 
 
-    let renderedSchools =
-        Utils.Dictionaries.schools 
-        |> Map.toList
-        |> List.map (fun school -> school |> snd)
-        |> List.sortBy (fun sData -> sData.Name)
-        |> List.map (fun sData ->
-                        Html.option [
-                            prop.text sData.Name
-                            prop.value sData.Key
-                        ] )
+    // let emptyValue =
+    //     Html.option [
+    //         prop.text "<izberi šolo>"
+    //         prop.value ""
+    //     ]
 
-    Html.select [
-        prop.value state.SelectedSchool
-        prop.className "form-control form-control-sm filters__school"
-        prop.children (emptyValue :: renderedSchools)
-        prop.onChange (SchoolsFilterChanged >> dispatch)
-    ]
+    // let renderedSchools =
+    //     Utils.Dictionaries.schools
+    //     |> Map.toList
+    //     |> List.map (fun school -> school |> snd)
+    //     |> List.sortBy (fun sData -> sData.Name)
+    //     |> List.map (fun sData ->
+    //                     Html.option [
+    //                         prop.text sData.Name
+    //                         prop.value sData.Key
+    //                     ] )
+
+    // Html.select [
+    //     prop.value state.SelectedSchool
+    //     prop.className "form-control form-control-sm filters__school"
+    //     prop.children (emptyValue :: renderedSchools)
+    //     prop.onChange (SchoolsFilterChanged >> dispatch)
+    // ]
+
+    React.functionComponent(fun () ->
+        let (query, setQuery) = React.useState("")
+        let (suggestions, setSuggestions) = React.useState(Array.empty<School>)
+
+        let tokenizeQuery (query : string) =
+            query.Split(" ")
+            |> Array.map (fun (token : string) -> token.Trim().ToLower())
+            |> Array.distinct
+            |> Array.toList
+
+        let schoolMatches (tokens : string list) (school : School) =
+            tokens
+            |> List.forall (fun t -> school.Name.ToLower().Contains(t))
+
+        let filterSchools (query : string) =
+            let tokens = tokenizeQuery query
+            Utils.Dictionaries.schools
+            |> Array.filter (schoolMatches tokens)
+
+        let inputProps = {|
+            value = query
+            onChange = (fun (ev) -> setQuery ev?target?value)
+        |}
+
+        AutoSuggest<School>.input [
+            AutoSuggest<School>.inputProps inputProps
+            AutoSuggest<School>.suggestions suggestions
+            AutoSuggest<School>.onSuggestionsFetchRequested (fun query -> filterSchools query?value |> setSuggestions)
+            AutoSuggest<School>.onSuggestionsClearRequested (fun () -> setSuggestions Array.empty<School>)
+            AutoSuggest<School>.getSuggestionValue (fun (school : School) -> school.Key)
+            AutoSuggest<School>.renderSuggestion (fun (school : School) -> Html.text school.Name)
+            AutoSuggest<School>.onSuggestionSelected (fun ev payload -> setQuery "" ; dispatch (SchoolsFilterChanged payload.suggestionValue))
+        ]
+    ) ()
 
 let render (state: State) dispatch =
     let element =
-        Html.div [ prop.children [ Utils.renderChartTopControls [ Html.div [ prop.className "filters"
-                                                                             prop.children [ renderSchoolSelector 
-                                                                                                state dispatch ] ] ]
-                                   Html.div [ prop.className "schools"
-                                              prop.children (renderSchools state dispatch) ] ] ]
+        Html.div [
+            prop.children [
+                Utils.renderChartTopControls [
+                    Html.div [
+                        prop.className "filters"
+                        prop.children [
+                            renderSchoolSelector state dispatch
+                        ] ] ]
+                Html.div [
+                    prop.className "schools"
+                    prop.children (renderSchools state dispatch)
+                ] ] ]
 
     // trigger event for iframe resize
     let evt = document.createEvent ("event")

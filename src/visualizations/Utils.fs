@@ -2900,10 +2900,11 @@ module Dictionaries =
             "10529","10529","ZAV","ms","Osnovna šola Veržej - Zav"
             "1004","1004","ZAV","ng","Center za izobraževanje, rehabilitacijo in usposabljanje Vipava"
         |]
-        |> Array.map (fun (key, keyM, sType, region, name) -> 
-                        key,  { Key = key; KeyMain = keyM; Type = sType; Region = region; Name = name})
-        |> Map.ofArray
-
+        |> Array.map (fun (key, keyM, sType, region, name) ->
+            { Key = key; KeyMain = keyM; Type = sType; Region = region; Name = name})
+        // |> Array.map (fun (key, keyM, sType, region, name) ->
+        //     key, { Key = key; KeyMain = keyM; Type = sType; Region = region; Name = name})
+        // |> Map.ofArray
 
 module AgePopulationStats =
     type AgeGroupId = string
