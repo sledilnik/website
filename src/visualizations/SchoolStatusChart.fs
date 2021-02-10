@@ -30,13 +30,30 @@ type Msg =
     | SchoolSelected of School
     | RangeSelectionChanged of int
 
+type Query (query : obj) =
+    member this.Query = query
+    member this.SchoolId =
+        match query?("schoolId") with
+        | Some (id : string) -> Some id
+        | _ -> None
+
 let init (queryObj: obj): State * Cmd<Msg> =
+    let query = Query(queryObj) 
+    
+    let status, school, cmd = 
+        match query.SchoolId with
+        | Some id ->
+            match Utils.Dictionaries.schools.TryFind(id) with
+            | Some school -> Loading, Some school, Cmd.OfAsync.either loadData school.Key ConsumeSchoolStatusData ConsumeServerError
+            | _ -> NotAsked, None, Cmd.none
+        | _ -> NotAsked, None, Cmd.none
+
     let state =
-        { SchoolStatus = NotAsked
-          SelectedSchool = None
+        { SchoolStatus = status
+          SelectedSchool = school
           RangeSelectionButtonIndex = 0 }
 
-    state, Cmd.none
+    state, cmd
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     // trigger event for iframe resize
@@ -233,7 +250,7 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
             if maxTokenLen <= 1 then
                 Array.empty
             else
-                Utils.Dictionaries.schools
+                Utils.Dictionaries.schoolsList
                 |> Array.filter (schoolMatches tokens)
 
         let inputProps = {|
