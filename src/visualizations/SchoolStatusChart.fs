@@ -186,13 +186,13 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
 
         let tokenizeQuery (query : string) =
             query.Split(" ")
-            |> Array.map (fun (token : string) -> token.Trim().ToLower())
+            |> Array.map (fun (token : string) -> token.Trim().ToLower() |> Utils.transliterateCSZ)
             |> Array.distinct
             |> Array.toList
 
         let schoolMatches (tokens : string list) (school : School) =
             tokens
-            |> List.forall (fun t -> school.Name.ToLower().Contains(t))
+            |> List.forall (fun t -> (school.Name.ToLower() |> Utils.transliterateCSZ).Contains(t))
 
         let filterSchools (query : string) =
             let tokens = tokenizeQuery query
