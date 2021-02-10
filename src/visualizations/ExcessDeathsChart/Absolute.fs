@@ -50,10 +50,5 @@ let renderChartOptions (data : WeeklyDeathsData) =
        responsive = ChartOptions.responsive
        tooltip = {| formatter = fun () -> sprintf "%s<br>%s: <b>%d</b>" jsThis?series?name jsThis?key jsThis?y |} |> pojo
        series = series
-       credits =
-        {| enabled = true
-           text = sprintf "%s: %s"
-                (I18N.t "charts.common.dataSource")
-                (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-           href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" |} |> pojo
+       credits = chartCreditsMNZ
     |} |> pojo
