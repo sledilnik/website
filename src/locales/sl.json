@@ -121,13 +121,13 @@
     },
     "week": "Teden",
     "weekday": {
-        "0": "Nedelja",
-        "1": "Ponedeljek",
-        "2": "Torek",
-        "3": "Sreda",
-        "4": "Četrtek",
-        "5": "Petek",
-        "6": "Sobota"
+        "0": "nedelja",
+        "1": "ponedeljek",
+        "2": "torek",
+        "3": "sreda",
+        "4": "četrtek",
+        "5": "petek",
+        "6": "sobota"
     },
     "weekdayShort": {
         "0": "Ne",
