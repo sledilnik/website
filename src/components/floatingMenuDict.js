@@ -55,6 +55,10 @@ export default {
     titleKey: 'charts.schools.titleMenu',
     icon: 'graph',
   },
+  'school-status-chart': {
+    titleKey: 'charts.schoolStatus.titleMenu',
+    icon: 'column',
+  },
   'sources-chart': {
     titleKey: 'charts.sources.titleMenu',
     icon: 'column',

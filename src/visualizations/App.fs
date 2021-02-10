@@ -32,6 +32,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions100k" -> Some Regions100k
             | "Vaccination" -> Some Vaccination
             | "Schools" -> Some Schools
+            | "SchoolStatus" -> Some SchoolStatus
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -383,6 +384,13 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
 
+    let schoolStatus =
+          { VisualizationType = SchoolStatus
+            ClassName = "school-status-chart"
+            ChartTextsGroup = "schoolStatus"
+            Explicit = false
+            Renderer = fun _ -> lazyView SchoolStatusChart.schoolStatusChart {| query = state.Query |} }
+
     let sources =
           { VisualizationType = Sources
             ClassName = "sources-chart"
@@ -575,7 +583,7 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
           patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          schools; ageGroupsTimeline; weeklyDemographics; ageGroups; 
+          schools; schoolStatus; ageGroupsTimeline; weeklyDemographics; ageGroups; 
           infections; hcCases;
           europeMap; sources
           cases; regionMap; regionsAbs
@@ -597,7 +605,7 @@ let render (state: State) (_: Msg -> unit) =
           municipalities; sources; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; schools; hcCases; sources
+          regions100k; schools; schoolStatus; hcCases; sources
           countriesCasesPer100k
           countriesActiveCasesPer100k
           countriesNewDeathsPer100k

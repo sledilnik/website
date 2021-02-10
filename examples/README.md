@@ -9,25 +9,37 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 
 ## Charts
 
-| Chart | Url |
-| ----- | --- |
+| Chart                       | Url                                                                |
+|-----------------------------|--------------------------------------------------------------------|
 | Stanje COVID-19 v Sloveniji | https://covid-19.sledilnik.org/embed.html#/chart/MetricsComparison |
-| Stanje COVID-19 v Evropi | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap |
-| Stanje COVID-19 v svetu | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap |
-| Hospitalizirani | https://covid-19.sledilnik.org/embed.html#/chart/Patients |
-| Intenzivna terapija | https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients |
-| Negovalne bolnišnice | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients |
-| Delež resnih primerov | https://covid-19.sledilnik.org/embed.html#/chart/Ratios |
-| Testiranje | https://covid-19.sledilnik.org/embed.html#/chart/Tests |
-| Obravnava v ZD | https://covid-19.sledilnik.org/embed.html#/chart/HCenters |
-| Potrjeni primeri | https://covid-19.sledilnik.org/embed.html#/chart/Cases |
-| Prirast potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Spread |
-| Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections |
-| Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions |
-| Zemljevid po regijah | https://covid-19.sledilnik.org/embed.html#/chart/RegionMap |
-| Zemljevid po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Map |
-| Primeri po občinah | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities |
-| Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
+| Stanje COVID-19 v Evropi    | https://covid-19.sledilnik.org/embed.html#/chart/EuropeMap         |
+| Stanje COVID-19 v svetu     | https://covid-19.sledilnik.org/embed.html#/chart/WorldMap          |
+| Hospitalizirani             | https://covid-19.sledilnik.org/embed.html#/chart/Patients          |
+| Intenzivna terapija         | https://covid-19.sledilnik.org/embed.html#/chart/IcuPatients       |
+| Negovalne bolnišnice        | https://covid-19.sledilnik.org/embed.html#/chart/CarePatients      |
+| Delež resnih primerov       | https://covid-19.sledilnik.org/embed.html#/chart/Ratios            |
+| Testiranje                  | https://covid-19.sledilnik.org/embed.html#/chart/Tests             |
+| Obravnava v ZD              | https://covid-19.sledilnik.org/embed.html#/chart/HCenters          |
+| Potrjeni primeri            | https://covid-19.sledilnik.org/embed.html#/chart/Cases             |
+| Prirast potrjeno okuženih   | https://covid-19.sledilnik.org/embed.html#/chart/Spread            |
+| Struktura potrjeno okuženih | https://covid-19.sledilnik.org/embed.html#/chart/Infections        |
+| Potrjeno okuženi po regijah | https://covid-19.sledilnik.org/embed.html#/chart/Regions           |
+| Zemljevid po regijah        | https://covid-19.sledilnik.org/embed.html#/chart/RegionMap         |
+| Zemljevid po občinah        | https://covid-19.sledilnik.org/embed.html#/chart/Map               |
+| Primeri po občinah          | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities    |
+| Stanje po šolah             | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus      |
+| Po starostnih skupinah      | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups         |
+
+### SchoolStatus: show specific school
+Parameters:
+`schoolId`=
+- `id` (ID of school - see [https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv](dict-schools.csv) for list of school IDs)
+
+| Chart                                  | Url                                                                         |
+|----------------------------------------|-----------------------------------------------------------------------------|
+| Vrtec Koper                            | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=1065 |
+| OŠ Komenda Moste Podružnica Moste      | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=3545 |
+| Mladinski dom Malči Beličeve Ljubljana | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=3577 |
 
 ### Municipalities: filter specific region or change sort order
 Parameters:
@@ -52,12 +64,12 @@ Parameters:
 `search`=
 - `search string`
 
-| Chart | Url |
-| ----- | --- |
-| Občine - Pomurska | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms |
+| Chart                          | Url                                                                                           |
+|--------------------------------|-----------------------------------------------------------------------------------------------|
+| Občine - Pomurska              | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms                     |
 | Občine - Savinjska, podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=time-to-double |
-| Občine - podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double |
-| Občine - Medvode | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?search=medvode |
+| Občine - podvojitev            | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double           |
+| Občine - Medvode               | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?search=medvode                |
 
 ### Resize
 

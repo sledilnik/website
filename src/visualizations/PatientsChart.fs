@@ -117,8 +117,6 @@ module Series =
         | CareOut -> "#8cd4b2", "discharged", 1
         | CareDeceased -> "#8c71a8", "deceased", 1
 
-
-
 type Msg =
     | ConsumePatientsData of Result<PatientsStats [], string>
     | ConsumeServerError of exn
@@ -243,47 +241,42 @@ let renderStructureChart (state: State) dispatch =
     let tooltipFormatter jsThis =
         let points: obj [] = jsThis?points
 
-        let mutable curGroup = 0
-        let mutable sum = 0.
-
         match points with
         | [||] -> ""
         | _ ->
             let s = StringBuilder()
             let date = points.[0]?point?date
+            let total: float = points.[0]?point?total
 
             s.AppendFormat("<b>{0}</b><br/>", date.ToString())
             |> ignore
 
+
+            let title =
+                match state.HTypeToDisplay with
+                | CovidHospitals    -> I18N.t "charts.patients.hospitalized"
+                | CovidHospitalsICU -> I18N.t "charts.patients.icu"
+                | CareHospitals     -> I18N.t "charts.patients.care"                    
+
             s.Append "<table>" |> ignore
+            s.Append "<tr>" |> ignore
+            let totalStr =
+                sprintf
+                    "<td></td><td><b>%s</b></td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
+                    title
+                    (I18N.NumberFormat.formatNumber total)
+
+            s.Append totalStr |> ignore
+            s.Append "</tr>" |> ignore
 
             points
             |> Array.iter
                 (fun dp ->
                     let name = dp?series?name
                     let color = dp?series?color
-                    let group = dp?point?group
                     let value: float = dp?point?y
 
-                    if group > curGroup then
-                        s.Append "<tr>" |> ignore
-
-                        let sumStr =
-                            sprintf
-                                "<td></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
-                                "SKUPAJ"
-                                (I18N.NumberFormat.formatNumber (abs sum))
-
-                        s.Append sumStr |> ignore
-                        s.Append "</tr><tr></tr>" |> ignore
-
-                        curGroup <- group
-                        sum <- 0.
-                    else
-                        sum <- sum + value
-
                     s.Append "<tr>" |> ignore
-
                     let tooltip =
                         sprintf
                             "<td><span style='color:%s'>●</span></td><td>%s</td><td style='text-align: right; padding-left: 10px'><b>%s</b></td>"
@@ -345,8 +338,14 @@ let renderStructureChart (state: State) dispatch =
             | CareOut -> negative ps.care.out
             | CareDeceased -> negative ps.deceasedCare.today
 
-        let color, seriesId, seriesIdx = Series.getSeriesInfo series
+        let getTotal (ps: FacilityPatientStats): int option =
+            match state.HTypeToDisplay with
+            | CovidHospitals    -> ps.inHospital.today
+            | CovidHospitalsICU -> ps.icu.today 
+            | CareHospitals     -> ps.care.today
+           
 
+        let color, seriesId, seriesIdx = Series.getSeriesInfo series
         {| color = color
            name = I18N.tt "charts.patients" seriesId
            yAxis = seriesIdx
@@ -356,7 +355,7 @@ let renderStructureChart (state: State) dispatch =
                    (fun (date, ps) ->
                        {| x = date |> jsTime12h
                           y = getPoint ps
-                          group = seriesIdx
+                          total = getTotal ps
                           date = I18N.tOptions "days.longerDate" {| date = date |} |})
                |> Seq.toArray |}
         |> pojo
