@@ -30,12 +30,16 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 | Stanje po šolah | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus |
 | Po starostnih skupinah | https://covid-19.sledilnik.org/embed.html#/chart/AgeGroups |
 
-http://localhost:8080/sl/stats?schoolId=3721#school-status-chart
-
 ### SchoolStatus: show specific school
 Parameters:
 `schoolId`=
 - `id` (ID of school - see [https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv](dict-schools.csv) for list of school IDs)
+
+| Chart | Url |
+| ----- | --- |
+| Vrtec Koper | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=1065 |
+| OŠ Komenda Moste Podružnica Moste | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=3545 |
+| Mladinski dom Malči Beličeve Ljubljana | https://covid-19.sledilnik.org/embed.html#/chart/SchoolStatus?schoolId=3577 |
 
 ### Municipalities: filter specific region or change sort order
 Parameters:
