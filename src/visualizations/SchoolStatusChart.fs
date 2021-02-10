@@ -122,17 +122,46 @@ let renderChartOptions state schoolStatus dispatch =
         let attData = absenceData "#bda506" "A" empData.Length
         let regData = regimeData "#f4b2e0" (empData.Length+attData.Length)
 
-        [|
-            {| pointWidth = 15
-               dataLabels = {| format = "{point.label}" |}
-               data = empData |}
-            {| pointWidth = 15
-               dataLabels = {| format = "{point.label}" |}
-               data = attData |}
-            {| pointWidth = 15
-               dataLabels = {| format = "{point.label}" |}
-               data = regData |}
-        |]
+        let min x y = if x < y then x else y
+        let startTime = 
+             schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom) 
+             |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom)) 
+             |> Array.reduce min
+        let endTime = DateTime.Today |> jsTime12h 
+
+        let personStr =
+            match state.SelectedSchool with
+            | Some school -> personType "A" school.Type
+            | _ -> personType "A" ""
+
+        seq {
+            yield
+                {| name = chartText "regimeChange"
+                   color = "#f4b2e0"
+                   pointWidth = 15
+                   dataLabels = {| format = "{point.label}" |}
+                   data = empData |} |> pojo
+            yield
+                {| name = personStr + chartText "absence"
+                   color = "#bda506"
+                   pointWidth = 15
+                   dataLabels = {| format = "{point.label}" |}
+                   data = attData |} |> pojo
+            yield
+                {| name = chartText "employee" + chartText "absence"
+                   color = "#dba51d"
+                   pointWidth = 15
+                   dataLabels = {| format = "{point.label}" |}
+                   data = regData |} |> pojo
+            yield
+                {| showInLegend = false
+                   opacity = 0
+                   data = [| {| x = startTime
+                                x2 = endTime
+                                y = -1 |} |] |} |> pojo
+
+            yield addContainmentMeasuresFlags startTime (Some endTime) |> pojo
+        }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
         let res (_ : Event) =
@@ -149,11 +178,12 @@ let renderChartOptions state schoolStatus dispatch =
            chart = pojo {| ``type`` = "xrange"; animation = false |}
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
-           series = allSeries
+           series = Seq.toArray allSeries
            plotOptions = pojo {| series = {| dataLabels = {| enabled = true; inside = true |} |} |}
            tooltip = pojo {| shared = false; split = false
                              pointFormat = "{point.text}"
                              xDateFormat = "<b>" + chartText "date" + "</b>" |}
+           legend = pojo {| enabled = true ; layout = "horizontal" |}
            credits = chartCreditsMIZS
     |}
 
