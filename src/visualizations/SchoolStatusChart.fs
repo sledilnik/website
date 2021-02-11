@@ -351,8 +351,10 @@ let renderFilterTypes (activeFilterType: FilterType) dispatch =
             |> List.map (fun ft -> renderFilterSelector ft dispatch) ) ]
 
 let renderResetSearch dispatch =
-    Html.div [
-        prop.text (chartText "reset")
+    Html.img [
+        prop.className "reset-search"
+        prop.src "/images/close-dd.svg"
+        prop.alt ("X")
         prop.onClick (fun _ -> ResetSearch |> dispatch ) ]
 
 let render (state: State) dispatch =
@@ -368,8 +370,11 @@ let render (state: State) dispatch =
                         | Some school ->
                             Html.h3 school.Name
                             (renderResetSearch dispatch)
-                            (renderFilterTypes state.FilterType dispatch)
                     ] ] ]
+            match state.SelectedSchool with
+            | None -> Html.none
+            | Some school ->
+                Utils.renderChartTopControlRight (renderFilterTypes state.FilterType dispatch)
             Html.div [
                 prop.className "school"
                 prop.children (renderSchool state dispatch)
