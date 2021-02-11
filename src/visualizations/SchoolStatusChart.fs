@@ -20,11 +20,13 @@ type School = Utils.Dictionaries.School
 let chartText = I18N.chartText "schoolStatus"
 
 type State =
-    { SchoolStatus : RemoteData<SchoolStatus option, string>
+    { SchoolStatusMap : RemoteData<SchoolStatusMap, string>
+      SchoolStatus : RemoteData<SchoolStatus option, string>
       SelectedSchool : School option
       RangeSelectionButtonIndex : int }
 
 type Msg =
+    | ConsumeSchoolStatusMapData of Result<SchoolStatusMap, string>
     | ConsumeSchoolStatusData of Result<SchoolStatus option, string>
     | ConsumeServerError of exn
     | SchoolSelected of School
@@ -40,23 +42,32 @@ type Query (query : obj) =
 let init (queryObj: obj): State * Cmd<Msg> =
     let query = Query(queryObj)
 
-    let status, school, cmd =
-        match query.SchoolId with
-        | Some id ->
-            match Utils.Dictionaries.schools.TryFind(id) with
-            | Some school -> Loading, Some school, Cmd.OfAsync.either loadData school.Key ConsumeSchoolStatusData ConsumeServerError
-            | _ -> NotAsked, None, Cmd.none
-        | _ -> NotAsked, None, Cmd.none
-
-    let state =
-        { SchoolStatus = status
-          SelectedSchool = school
+    let defaultState =
+        { SchoolStatusMap = Loading
+          SchoolStatus = NotAsked
+          SelectedSchool = None
           RangeSelectionButtonIndex = 0 }
 
-    state, cmd
+    let defaultCmd = Cmd.OfAsync.either loadData DateTime.Today ConsumeSchoolStatusMapData ConsumeServerError
+
+    match query.SchoolId with
+    | Some id ->
+        match Utils.Dictionaries.schools.TryFind(id) with
+        | Some school ->
+            let state =
+                { defaultState with
+                    SchoolStatus = Loading
+                    SelectedSchool = Some school }
+            state, Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
+        | _ -> defaultState, defaultCmd
+    | _ -> defaultState, defaultCmd
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
+    | ConsumeSchoolStatusMapData (Ok data) ->
+        { state with SchoolStatusMap = Success data }, Cmd.none
+    | ConsumeSchoolStatusMapData (Error err) ->
+        { state with SchoolStatusMap = Failure err }, Cmd.none
     | ConsumeSchoolStatusData (Ok data) ->
         { state with SchoolStatus = Success data }, Cmd.none
     | ConsumeSchoolStatusData (Error err) ->
@@ -66,7 +77,7 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
     | SchoolSelected school ->
-        let cmd = Cmd.OfAsync.either loadData school.Key ConsumeSchoolStatusData ConsumeServerError
+        let cmd = Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         let newState = {
             state with SchoolStatus = Loading
                        SelectedSchool = Some school }
@@ -199,9 +210,36 @@ let renderChartOptions state schoolStatus dispatch =
            credits = chartCreditsMIZS
     |}
 
+let renderChangedSchools (state: State) dispatch =
+
+    let renderChanges (schoolStatusMap: SchoolStatusMap) dispatch =
+        schoolStatusMap
+        |> Map.toSeq
+        |> Seq.map (fun value ->
+                        match Utils.Dictionaries.schools.TryFind(value |> fst) with
+                        | Some school ->
+                                Html.div [
+                                    prop.className "changed-school"
+                                    prop.onClick (fun _ -> SchoolSelected school |> dispatch)
+                                    prop.text school.Name
+                                ]
+                        | _ -> Html.none )
+
+    match state.SchoolStatusMap with
+    | NotAsked -> Html.none
+    | Loading -> Html.none
+    | Failure err -> Html.text err
+    | Success data ->
+        Html.div [
+            prop.className "changes"
+            prop.children (renderChanges data dispatch)
+        ]
+
+
 let renderSchool (state: State) dispatch =
     match state.SchoolStatus with
-    | NotAsked -> Html.none
+    | NotAsked ->
+        renderChangedSchools state dispatch
     | Loading -> Html.none
     | Failure err -> Html.text err
     | Success data ->
