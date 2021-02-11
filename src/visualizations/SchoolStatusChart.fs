@@ -243,12 +243,13 @@ let renderChangedSchools (state: State) dispatch =
         schoolStatusMap
         |> Map.toSeq
         |> Seq.map (fun value ->
-                        match Utils.Dictionaries.schools.TryFind(value |> fst) with
+                        let (id, status) = value
+                        match Utils.Dictionaries.schools.TryFind(id) with
                         | Some school ->
                                 Html.div [
                                     prop.className "changed-school"
                                     prop.onClick (fun _ -> SchoolSelected school |> dispatch)
-                                    prop.text school.Name
+                                    prop.text (sprintf "%s (oddelkov: %d oseb: %d)" school.Name status.regimes.Length status.absences.Length)
                                 ]
                         | _ -> Html.none )
 
