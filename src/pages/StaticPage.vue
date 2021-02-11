@@ -265,6 +265,15 @@ export default {
     height:180px;
     max-width:100%;
   }
+  
+  iframe.observable {
+    width:660px;
+    height:67vw;
+    max-width:100%;
+    max-height:440px;
+    min-width:400px;
+    min-height:300px
+  }
 }
 
 details summary::-webkit-details-marker {

@@ -38,9 +38,9 @@ type Query (query : obj) =
         | _ -> None
 
 let init (queryObj: obj): State * Cmd<Msg> =
-    let query = Query(queryObj) 
-    
-    let status, school, cmd = 
+    let query = Query(queryObj)
+
+    let status, school, cmd =
         match query.SchoolId with
         | Some id ->
             match Utils.Dictionaries.schools.TryFind(id) with
@@ -140,11 +140,11 @@ let renderChartOptions state schoolStatus dispatch =
         let regData = regimeData "#f4b2e0" (empData.Length+attData.Length)
 
         let min x y = if x < y then x else y
-        let startTime = 
-             schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom) 
-             |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom)) 
+        let startTime =
+             schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
+             |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
              |> Array.reduce min
-        let endTime = DateTime.Today |> jsTime12h 
+        let endTime = DateTime.Today |> jsTime12h
 
         let personStr =
             match state.SelectedSchool with
@@ -267,6 +267,7 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
             AutoSuggest<School>.getSuggestionValue (fun (school : School) -> school.Key)
             AutoSuggest<School>.renderSuggestion (fun (school : School) -> Html.text school.Name)
             AutoSuggest<School>.onSuggestionSelected (fun ev payload -> setQuery "" ; props.dispatch (SchoolSelected payload.suggestion))
+            AutoSuggest<School>.focusInputOnSuggestionClick false
         ]
     )
 
