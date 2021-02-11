@@ -19,18 +19,35 @@ type School = Utils.Dictionaries.School
 
 let chartText = I18N.chartText "schoolStatus"
 
+type FilterType =
+    | ShowActive
+    | ShowAll
+    | Reset
+  with
+    static member All = [ ShowActive; ShowAll; Reset ]
+    static member Default = Reset
+    member this.GetName =
+        match this with
+        | ShowActive  -> chartText "showActive"
+        | ShowAll -> chartText "showAll"
+        | Reset -> chartText "reset"
+
+let filterActiveDate =
+    DateTime.Today.AddDays(-14.)
+
 type State =
     { SchoolStatusMap : RemoteData<SchoolStatusMap, string>
       SchoolStatus : RemoteData<SchoolStatus option, string>
       SelectedSchool : School option
-      RangeSelectionButtonIndex : int }
+      FilterType : FilterType }
 
 type Msg =
     | ConsumeSchoolStatusMapData of Result<SchoolStatusMap, string>
     | ConsumeSchoolStatusData of Result<SchoolStatus option, string>
     | ConsumeServerError of exn
     | SchoolSelected of School
-    | RangeSelectionChanged of int
+    | FilterTypeChanged of FilterType
+
 
 type Query (query : obj) =
     member this.Query = query
@@ -39,6 +56,8 @@ type Query (query : obj) =
         | Some (id : string) -> Some id
         | _ -> None
 
+let defaultCmd = Cmd.OfAsync.either loadData DateTime.Today ConsumeSchoolStatusMapData ConsumeServerError
+
 let init (queryObj: obj): State * Cmd<Msg> =
     let query = Query(queryObj)
 
@@ -46,9 +65,7 @@ let init (queryObj: obj): State * Cmd<Msg> =
         { SchoolStatusMap = Loading
           SchoolStatus = NotAsked
           SelectedSchool = None
-          RangeSelectionButtonIndex = 0 }
-
-    let defaultCmd = Cmd.OfAsync.either loadData DateTime.Today ConsumeSchoolStatusMapData ConsumeServerError
+          FilterType = FilterType.Default }
 
     match query.SchoolId with
     | Some id ->
@@ -57,7 +74,8 @@ let init (queryObj: obj): State * Cmd<Msg> =
             let state =
                 { defaultState with
                     SchoolStatus = Loading
-                    SelectedSchool = Some school }
+                    SelectedSchool = Some school
+                    FilterType = ShowActive }
             state, Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         | _ -> defaultState, defaultCmd
     | _ -> defaultState, defaultCmd
@@ -74,13 +92,21 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with SchoolStatus = Failure err }, Cmd.none
     | ConsumeServerError ex ->
         { state with SchoolStatus = Failure ex.Message }, Cmd.none
-    | RangeSelectionChanged buttonIndex ->
-        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+    | FilterTypeChanged ft ->
+        match ft with
+        | Reset ->
+            { state with SchoolStatusMap = Loading
+                         SchoolStatus = NotAsked
+                         SelectedSchool = None
+                         FilterType = ft }, defaultCmd
+        | _ ->
+            { state with FilterType = ft  }, Cmd.none
     | SchoolSelected school ->
         let cmd = Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         let newState = {
             state with SchoolStatus = Loading
-                       SelectedSchool = Some school }
+                       SelectedSchool = Some school
+                       FilterType = ShowActive }
         newState, cmd
 
 let renderChartOptions state schoolStatus dispatch =
@@ -103,9 +129,14 @@ let renderChartOptions state schoolStatus dispatch =
                                 (I18N.tt "schoolDict" abs.reason))
             |> String.Concat
 
+        let filterByDate fromDate toDate =
+            match state.FilterType with
+            | ShowActive -> toDate >= filterActiveDate || fromDate >= filterActiveDate
+            | _ -> true
         let absenceData color pType startIdx =
             schoolStatus.absences
             |> Array.filter (fun abs -> abs.personType = pType)
+            |> Array.filter (fun abs -> filterByDate abs.DateAbsentFrom abs.DateAbsentTo)
             |> Array.groupBy (fun abs -> (abs.JsDate12hAbsentFrom, abs.JsDate12hAbsentTo))
             |> Array.mapi (fun i (d, v) ->
                         {|
@@ -122,6 +153,7 @@ let renderChartOptions state schoolStatus dispatch =
 
         let regimeData color startIdx =
             schoolStatus.regimes
+            |> Array.filter (fun abs -> filterByDate abs.DateChangedFrom abs.DateChangedTo)
             |> Array.mapi (fun i reg ->
                         {|
                             x =  reg.JsDate12hChangedFrom
@@ -147,9 +179,12 @@ let renderChartOptions state schoolStatus dispatch =
 
         let min x y = if x < y then x else y
         let startTime =
-             schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
-             |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
-             |> Array.reduce min
+            match state.FilterType with
+            | ShowActive -> filterActiveDate |> jsTime12h
+            | _ ->
+                 schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
+                 |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
+                 |> Array.reduce min
         let endTime = DateTime.Today |> jsTime12h
 
         let personStr =
@@ -186,16 +221,8 @@ let renderChartOptions state schoolStatus dispatch =
             yield addContainmentMeasuresFlags startTime (Some endTime) |> pojo
         }
 
-    let onRangeSelectorButtonClick(buttonIndex: int) =
-        let res (_ : Event) =
-            RangeSelectionChanged buttonIndex |> dispatch
-            true
-        res
-
     let baseOptions =
-        basicChartOptions Linear "covid19-school-status"
-            state.RangeSelectionButtonIndex
-            onRangeSelectorButtonClick
+        basicChart Linear "covid19-school-status"
 
     {| baseOptions with
            chart = pojo {| ``type`` = "xrange"; animation = false |}
@@ -304,6 +331,26 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
         ]
     )
 
+let renderFilterTypes (activeFilterType: FilterType) dispatch =
+
+    let renderFilterSelector (filterType : FilterType) dispatch =
+        let active = filterType = activeFilterType
+
+        Html.div [
+            prop.text filterType.GetName
+            prop.onClick (fun _ -> FilterTypeChanged filterType |> dispatch )
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+        ]
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (
+            FilterType.All
+            |> List.map (fun ft -> renderFilterSelector ft dispatch) ) ]
+
+
 let render (state: State) dispatch =
     Html.div [
         prop.children [
@@ -314,7 +361,9 @@ let render (state: State) dispatch =
                         autoSuggestSchoolInput {| dispatch = dispatch |}
                         match state.SelectedSchool with
                         | None -> Html.none
-                        | Some school -> Html.h3 school.Name
+                        | Some school ->
+                            Html.h3 school.Name
+                            (renderFilterTypes state.FilterType dispatch)
                     ] ] ]
             Html.div [
                 prop.className "school"
