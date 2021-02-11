@@ -4,6 +4,7 @@ $text-c: rgba(0, 0, 0, 0.7)
 $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0, 0.22)
 
 @import "slider"
+@import "autosuggest"
 
 @mixin nav-break
   @media only screen and (min-width: 900px)
@@ -507,6 +508,40 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
       @media only screen and (max-width: 767px)
         padding: 0 1rem
+
+  .school-status-chart
+    min-height: 654px
+
+    .react-autosuggest__container
+      display: inline-block
+
+    .react-autosuggest__input
+      width: 200px
+
+    .react-autosuggest__suggestions-container--open
+      max-height: 480px
+      overflow-y: scroll
+
+    .no-data
+      font-size: 14px
+
+    h3
+      margin-left: $gap / 2
+      display: inline-block
+      font-size: 14px
+      line-height: 15px
+      font-weight: bold
+      background: #fff
+      margin-bottom: 0
+
+    .highcharts-legend-item.highcharts-series-0 .highcharts-point
+      fill: #f4b2e0 !important
+    
+    .highcharts-legend-item.highcharts-series-1 .highcharts-point
+      fill: #bda506 !important
+
+    .highcharts-legend-item.highcharts-series-2 .highcharts-point
+      fill: #dba51d !important
 
   .municipalities-chart
     min-height: 897px

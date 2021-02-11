@@ -112,16 +112,6 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-
-let chartCredits =
-    {| 
-        enabled = true
-        text = sprintf "%s: %s"
-                    (I18N.t "charts.common.dataSource")
-                    (I18N.tOptions ("charts.common.dsMIZS") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/" 
-    |}
-
 let scaleType (state:State) =
     if DisplayType.IsBarChart state.DisplayType
     then Linear
@@ -235,7 +225,7 @@ let renderPerSchoolChart state dispatch =
                {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                   series = pojo {| stacking = None |} |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        credits = pojo chartCredits
+        credits = chartCreditsMIZS
     |}
 
 
@@ -299,7 +289,7 @@ let renderStackedChart state dispatch =
                          pointPadding = 0
                          groupPadding = 0 |} |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        credits = pojo chartCredits
+        credits = chartCreditsMIZS
     |}
 
 let renderChartContainer (state: State) dispatch =

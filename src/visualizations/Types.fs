@@ -188,6 +188,7 @@ type VisualizationType =
     | Regions100k
     | Vaccination
     | Schools
+    | SchoolStatus
     | Sources
     | Municipalities
     | AgeGroups

@@ -162,17 +162,14 @@
         </div>
 
 
-        <div v-if="language=='sl'" class="paymentMethod" id="sms">
+        <div v-if="language=='sl'" class="paymentMethod smsDetails" id="sms">
           <font-awesome-icon icon="mobile-alt" pull="left" size="2x" class="icon" />
-          <div v-html-md="$t('donation.onetime.sms.description')" />
+          <img :src="smsQrImage(this.smsAmount)" @click="triggerSms()" class="smsqr">
+          <div v-html-md="$t('donation.onetime.sms.description', {amount: this.smsAmount + ' EUR', number: this.smsNumber, keyword: this.smsKeyword + this.smsAmount })"></div>
           <div class="stripeCheckout">
-            <span v-for="(item) in smsAmounts" :key="item">
-                <button v-if="showSmsButtons" @click="smsDonateClick(item)">{{ item + " EUR" }}</button>
+            <span>
+                <button @click="triggerSms()">{{ this.smsAmount + " EUR" }}</button>
             </span>
-          </div>
-          <div v-if="smsShowDetails" class="smsDetails">
-            <img :src="smsQrImage(smsSelectedItem)" @click="triggerSms(smsSelectedItem)" class="smsqr">
-            <div v-html="smsDetailsHtml"></div>
           </div>
         </div>
 
@@ -251,11 +248,7 @@ export default {
       language: `${this.$i18n.i18next.language}`,
       smsNumber: 1919,
       smsKeyword: "SLEDILNIK",
-      smsAmounts: [1,5,10],
-      smsSelectedItem: 10,
-      smsShowDetails: false,
-      smsDetailsHtml: "",
-      showSmsButtons: true,
+      smsAmount: 5,
       showBanktransferDetails: false,
       showPermanentBankTransferOrderDetails: false
     };
@@ -270,21 +263,10 @@ export default {
       this.$refs.checkoutOneTimeDonationRef.lineItems = item.lineItems;
       this.$refs.checkoutOneTimeDonationRef.redirectToCheckout();
     },
-    smsDonateClick (item) {
-      this.smsShowDetails = !this.smsShowDetails || item!=this.smsSelectedItem;
-      if (!this.smsShowDetails) {
-        return
-      }
-      this.smsSelectedItem = item;
-      this.smsDetailsHtml = marked(this.$t('donation.onetime.sms.donateDetails', {amount: item + ' EUR', number: 1919, keyword: this.smsKeyword + item }))
-      if(screen.width < 600 || screen.height < 600) {
-        this.triggerSms(item);
-      }
+    triggerSms () {
+      window.location.href=`sms:${this.smsNumber}?&body=${this.smsKeyword}${this.smsAmount}`;
     },
-    triggerSms (item) {
-      window.location.href=`sms:${this.smsNumber}?&body=${this.smsKeyword}${item}`;
-    },
-    smsQrImage(amount) {
+    smsQrImage (amount) {
       var images = require.context('../assets/donate/', false, /sms.*\.png$/)
       return images(`./sms-${this.smsNumber}-${this.smsKeyword}${amount}.png`)
     }
@@ -378,6 +360,7 @@ img {
 
     button {
       width: 100%;
+      min-width: 120px;
       white-space: nowrap;
       padding: 10px;
       background-color: $yellow;
