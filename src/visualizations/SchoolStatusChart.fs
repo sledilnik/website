@@ -22,15 +22,13 @@ let chartText = I18N.chartText "schoolStatus"
 type FilterType =
     | ShowActive
     | ShowAll
-    | Reset
   with
-    static member All = [ ShowActive; ShowAll; Reset ]
-    static member Default = Reset
+    static member All = [ ShowActive; ShowAll ]
+    static member Default = ShowActive
     member this.GetName =
         match this with
         | ShowActive  -> chartText "showActive"
         | ShowAll -> chartText "showAll"
-        | Reset -> chartText "reset"
 
 let filterActiveDate =
     DateTime.Today.AddDays(-14.)
@@ -47,6 +45,7 @@ type Msg =
     | ConsumeServerError of exn
     | SchoolSelected of School
     | FilterTypeChanged of FilterType
+    | ResetSearch
 
 
 type Query (query : obj) =
@@ -93,14 +92,12 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | ConsumeServerError ex ->
         { state with SchoolStatus = Failure ex.Message }, Cmd.none
     | FilterTypeChanged ft ->
-        match ft with
-        | Reset ->
-            { state with SchoolStatusMap = Loading
-                         SchoolStatus = NotAsked
-                         SelectedSchool = None
-                         FilterType = ft }, defaultCmd
-        | _ ->
-            { state with FilterType = ft  }, Cmd.none
+        { state with FilterType = ft  }, Cmd.none
+    | ResetSearch ->
+        { state with SchoolStatusMap = Loading
+                     SchoolStatus = NotAsked
+                     SelectedSchool = None
+                     FilterType = ShowActive }, defaultCmd
     | SchoolSelected school ->
         let cmd = Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         let newState = {
@@ -129,10 +126,11 @@ let renderChartOptions state schoolStatus dispatch =
                                 (I18N.tt "schoolDict" abs.reason))
             |> String.Concat
 
-        let filterByDate fromDate toDate =
+        let filterByDate (fromDate: DateTime) (toDate:DateTime) =
             match state.FilterType with
-            | ShowActive -> toDate >= filterActiveDate || fromDate >= filterActiveDate
+            | ShowActive -> toDate.CompareTo(filterActiveDate) >= 0
             | _ -> true
+
         let absenceData color pType startIdx =
             schoolStatus.absences
             |> Array.filter (fun abs -> abs.personType = pType)
@@ -142,7 +140,7 @@ let renderChartOptions state schoolStatus dispatch =
                         {|
                             x =  d |> fst
                             x2 = d |> snd
-                            y = startIdx + i
+                            y = startIdx + i + 1
                             color = color
                             label = (personType pType v.[0].schoolType)
                                      + if v.Length > 1
@@ -153,12 +151,12 @@ let renderChartOptions state schoolStatus dispatch =
 
         let regimeData color startIdx =
             schoolStatus.regimes
-            |> Array.filter (fun abs -> filterByDate abs.DateChangedFrom abs.DateChangedTo)
+            |> Array.filter (fun reg -> filterByDate reg.DateChangedFrom reg.DateChangedTo)
             |> Array.mapi (fun i reg ->
                         {|
                             x =  reg.JsDate12hChangedFrom
                             x2 = reg.JsDate12hChangedTo
-                            y = startIdx + i
+                            y = startIdx + i + 1
                             color = color
                             label = (I18N.tt "schoolDict" reg.personClass)
                                      + if reg.attendees > 1
@@ -182,9 +180,11 @@ let renderChartOptions state schoolStatus dispatch =
             match state.FilterType with
             | ShowActive -> filterActiveDate |> jsTime12h
             | _ ->
-                 schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
-                 |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
-                 |> Array.reduce min
+                min
+                     (filterActiveDate |> jsTime12h)
+                     (schoolStatus.absences |> Array.map (fun v -> v.JsDate12hAbsentFrom)
+                      |> Array.append (schoolStatus.regimes |> Array.map (fun v -> v.JsDate12hChangedFrom))
+                      |> Array.reduce min)
         let endTime = DateTime.Today |> jsTime12h
 
         let personStr =
@@ -350,6 +350,10 @@ let renderFilterTypes (activeFilterType: FilterType) dispatch =
             FilterType.All
             |> List.map (fun ft -> renderFilterSelector ft dispatch) ) ]
 
+let renderResetSearch dispatch =
+    Html.div [
+        prop.text (chartText "reset")
+        prop.onClick (fun _ -> ResetSearch |> dispatch ) ]
 
 let render (state: State) dispatch =
     Html.div [
@@ -363,6 +367,7 @@ let render (state: State) dispatch =
                         | None -> Html.none
                         | Some school ->
                             Html.h3 school.Name
+                            (renderResetSearch dispatch)
                             (renderFilterTypes state.FilterType dispatch)
                     ] ] ]
             Html.div [
