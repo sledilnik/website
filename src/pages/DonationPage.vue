@@ -342,7 +342,7 @@ img {
     float: right;
     image-rendering: crisp-edges;
     width: 84px;
-    margin: 0 0 20px 20px;
+    margin: 0 0 8px 8px;
 
     @media only screen and (max-width: 240px) {
       width: 100%;
