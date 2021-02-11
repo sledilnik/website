@@ -56,11 +56,6 @@ let init (queryObj: obj): State * Cmd<Msg> =
     state, cmd
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
-    // trigger event for iframe resize
-    let evt = document.createEvent ("event")
-    evt.initEvent ("chartLoaded", true, true)
-    document.dispatchEvent (evt) |> ignore
-
     match msg with
     | ConsumeSchoolStatusData (Ok data) ->
         { state with SchoolStatus = Success data }, Cmd.none
@@ -272,29 +267,21 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
     )
 
 let render (state: State) dispatch =
-    let element =
-        Html.div [
-            prop.children [
-                Utils.renderChartTopControls [
-                    Html.div [
-                        prop.className "filters"
-                        prop.children [
-                            autoSuggestSchoolInput {| dispatch = dispatch |}
-                            match state.SelectedSchool with
-                            | None -> Html.none
-                            | Some school -> Html.h3 school.Name
-                        ] ] ]
+    Html.div [
+        prop.children [
+            Utils.renderChartTopControls [
                 Html.div [
-                    prop.className "school"
-                    prop.children (renderSchool state dispatch)
-                ] ] ]
-
-    // trigger event for iframe resize
-    let evt = document.createEvent ("event")
-    evt.initEvent ("chartLoaded", true, true)
-    document.dispatchEvent (evt) |> ignore
-
-    element
+                    prop.className "filters"
+                    prop.children [
+                        autoSuggestSchoolInput {| dispatch = dispatch |}
+                        match state.SelectedSchool with
+                        | None -> Html.none
+                        | Some school -> Html.h3 school.Name
+                    ] ] ]
+            Html.div [
+                prop.className "school"
+                prop.children (renderSchool state dispatch)
+            ] ] ]
 
 let schoolStatusChart (props: {| query: obj |}) =
     React.elmishComponent ("SchoolStatusChart", init props.query, update, render)
