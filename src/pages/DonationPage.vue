@@ -374,6 +374,7 @@ img {
 
     button {
       width: 100%;
+      min-width: 120px;
       white-space: nowrap;
       padding: 10px;
       background-color: $yellow;
