@@ -136,10 +136,10 @@ let renderChartOptions state schoolStatus dispatch =
             |> Array.filter (fun abs -> abs.personType = pType)
             |> Array.filter (fun abs -> filterByDate abs.DateAbsentFrom abs.DateAbsentTo)
             |> Array.groupBy (fun abs -> (abs.JsDate12hAbsentFrom, abs.JsDate12hAbsentTo))
-            |> Array.mapi (fun i (d, v) ->
+            |> Array.mapi (fun i ((f,t), v) ->
                         {|
-                            x =  d |> fst
-                            x2 = d |> snd
+                            x =  f
+                            x2 = t
                             y = startIdx + i + 1
                             color = color
                             label = (personType pType v.[0].schoolType)
@@ -239,11 +239,9 @@ let renderChartOptions state schoolStatus dispatch =
 
 let renderChangedSchools (state: State) dispatch =
 
-    let renderChanges (schoolStatusMap: SchoolStatusMap) dispatch =
-        schoolStatusMap
-        |> Map.toSeq
-        |> Seq.map (fun value ->
-                        let (id, status) = value
+    let renderChanges regionsSchools dispatch =
+        regionsSchools
+        |> List.map (fun (id, status) ->
                         match Utils.Dictionaries.schools.TryFind(id) with
                         | Some school ->
                                 Html.div [
@@ -253,6 +251,23 @@ let renderChangedSchools (state: State) dispatch =
                                 ]
                         | _ -> Html.none )
 
+    let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
+        schoolStatusMap
+        |> Map.toList
+        |> List.groupBy (fun (id, _) ->
+            match Utils.Dictionaries.schools.TryFind(id) with
+            | Some school -> school.Region
+            | _ -> "")
+        |> List.sortByDescending (fun (k,v) -> v.Length)
+        |> List.map (fun (reg, regionSchools) ->
+            if reg.Length > 0 then
+                Html.div [
+                    prop.className "region"
+                    prop.children (
+                        Html.b (I18N.tt "region" reg) :: renderChanges regionSchools dispatch) ]
+            else Html.none)
+
+
     match state.SchoolStatusMap with
     | NotAsked -> Html.none
     | Loading -> Html.none
@@ -260,7 +275,8 @@ let renderChangedSchools (state: State) dispatch =
     | Success data ->
         Html.div [
             prop.className "changes"
-            prop.children (renderChanges data dispatch)
+            prop.children (
+                Html.h5 "Regije s spremembami danes:" :: renderRegionChanges data dispatch)
         ]
 
 
