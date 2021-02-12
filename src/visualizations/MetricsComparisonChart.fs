@@ -67,7 +67,7 @@ type Metric =
     with
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
-             ConfirmedCasesToDate; ActiveCases; RecoveredToDate 
+             ConfirmedCasesToDate; ActiveCases; RecoveredToDate
              VacAdministeredToday; VacAdministeredToDate; VacAdministered2Today; VacAdministered2ToDate ]
             |> List.contains metric
 
@@ -318,6 +318,7 @@ let renderChartOptions state dispatch =
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+        credits = chartCreditsNIJZMZ
     |}
 
 let renderChartContainer state dispatch =

@@ -37,7 +37,7 @@ type DisplayType =
           PositivePctPCR
           TestsHAT
           PositivePctHAT
-          VacDosesAdministered 
+          VacDosesAdministered
           HospitalAdmitted
           HospitalDischarged
           ICUAdmitted
@@ -276,7 +276,7 @@ let renderChartOptions (state: State) dispatch =
                                                   pojo
                                                       {| enabled = true
                                                          formatter = fun () -> percentageFormatter jsThis?y |}
-                                              | _ -> 
+                                              | _ ->
                                                   pojo {| enabled = true |}
                                           else
                                               pojo {|  |} |}
@@ -302,7 +302,7 @@ let renderChartOptions (state: State) dispatch =
                          match state.DisplayType with
                          | PositivePctPCR | PositivePctHAT ->
                              pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
-                         | _ -> 
+                         | _ ->
                              pojo {| formatter = None |} |} |]
            series = List.toArray allSeries
            plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
@@ -313,15 +313,9 @@ let renderChartOptions (state: State) dispatch =
                       shared = true
                       useHTML = true |}
            credits =
-               pojo
-                   {| enabled = true
-                      text =
-                          sprintf
-                              "%s: %s, %s"
-                              (I18N.t "charts.common.dataSource")
-                              (I18N.t "charts.common.dsNIJZ")
-                              (I18N.t "charts.common.dsMZ")
-                      href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |}
+                match state.DisplayType with
+                | HospitalAdmitted | HospitalDischarged | ICUAdmitted | Deceased -> chartCreditsMZ
+                | _ -> chartCreditsNIJZ
            responsive =
                pojo
                    {| rules =
