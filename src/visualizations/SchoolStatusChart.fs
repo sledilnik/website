@@ -261,21 +261,14 @@ let renderChangedSchools (state: State) dispatch =
         |> List.sortBy (fun (school,status) -> school.Name)
         |> List.map (fun (school, status) ->
                         Html.option [
-                            prop.text (sprintf "%s - %s %s"
-                                           school.Name
-                                           (if status.regimes.Length > 0
-                                            then sprintf "%s: %d" (chartText "units") status.regimes.Length
-                                            else "")
-                                           (if status.absences.Length > 0
-                                            then sprintf "%s: %d" (chartText "absences") status.absences.Length
-                                            else "") )
+                            prop.text (sprintf "%s (%d)" school.Name (status.regimes.Length + status.absences.Length))
                             prop.value school.Key
                         ] )
 
     let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
         let regionSummary reg nrSchools  =
             Html.option [
-                prop.text (sprintf "%s - %s: %d" (I18N.tt "region" reg) (chartText "schoolsWithChange") nrSchools)
+                prop.text (sprintf "%s (%d)" (I18N.tt "region" reg) nrSchools)
                 prop.value ""
             ]
 

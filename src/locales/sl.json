@@ -1269,15 +1269,12 @@
             "unitsRemote": "Oddelki - na daljavo"
         },
         "schoolStatus": {
-            "title": "Stanje po šolah",
-            "titleMenu": "Šola - stanje",
+            "title": "Stanje po šolah in vrtcih",
+            "titleMenu": "Šole in vrtci - stanje",
             "search": "Išči po imenu šole ali vrtca",
             "showActive": "Aktivni",
             "showAll": "Vsi",
-            "regionsWithChanges": "Šole s spremembami v zadnjem tednu po regijah:",
-            "schoolsWithChange": "šol s spremembo",
-            "units": "oddelkov",
-            "absences": "odsotnosti",
+            "regionsWithChanges": "Spremenjen potek šolanja in predšolske vzgoje v zadnjem tednu po regijah:",
             "regimeChange": "Oddelek - spremenjen režim",
             "absence": " - odsotnost zaradi okužbe",
             "employee": "Zaposleni",
