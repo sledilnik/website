@@ -33,7 +33,7 @@ type FilterType =
 let filterChangesDate =
     DateTime.Today.AddDays(-1.)
 let filterActiveDate =
-    DateTime.Today.AddDays(-14.)
+    DateTime.Today.AddDays(-28.)
 
 type State =
     { SchoolStatusMap : RemoteData<SchoolStatusMap, string>
