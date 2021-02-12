@@ -30,6 +30,8 @@ type FilterType =
         | ShowActive  -> chartText "showActive"
         | ShowAll -> chartText "showAll"
 
+let filterChangesDate =
+    DateTime.Today.AddDays(-1.)
 let filterActiveDate =
     DateTime.Today.AddDays(-14.)
 
@@ -43,6 +45,7 @@ type Msg =
     | ConsumeSchoolStatusMapData of Result<SchoolStatusMap, string>
     | ConsumeSchoolStatusData of Result<SchoolStatus option, string>
     | ConsumeServerError of exn
+    | ChangedSchoolSelected of string
     | SchoolSelected of School
     | FilterTypeChanged of FilterType
     | ResetSearch
@@ -55,7 +58,7 @@ type Query (query : obj) =
         | Some (id : string) -> Some id
         | _ -> None
 
-let defaultCmd = Cmd.OfAsync.either loadData DateTime.Today ConsumeSchoolStatusMapData ConsumeServerError
+let defaultCmd = Cmd.OfAsync.either loadData filterChangesDate ConsumeSchoolStatusMapData ConsumeServerError
 
 let init (queryObj: obj): State * Cmd<Msg> =
     let query = Query(queryObj)
@@ -98,6 +101,12 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
                      SchoolStatus = NotAsked
                      SelectedSchool = None
                      FilterType = ShowActive }, defaultCmd
+    | ChangedSchoolSelected id ->
+        let cmd =
+            match Utils.Dictionaries.schools.TryFind(id) with
+            | Some school -> Cmd.ofMsg (SchoolSelected school)
+            | None -> Cmd.none
+        state, cmd
     | SchoolSelected school ->
         let cmd = Cmd.OfAsync.either loadSchoolData school.Key ConsumeSchoolStatusData ConsumeServerError
         let newState = {
@@ -241,17 +250,24 @@ let renderChangedSchools (state: State) dispatch =
 
     let renderChanges regionsSchools dispatch =
         regionsSchools
-        |> List.map (fun (id, status) ->
-                        match Utils.Dictionaries.schools.TryFind(id) with
-                        | Some school ->
-                                Html.div [
-                                    prop.className "changed-school"
-                                    prop.onClick (fun _ -> SchoolSelected school |> dispatch)
-                                    prop.text (sprintf "%s (oddelkov: %d oseb: %d)" school.Name status.regimes.Length status.absences.Length)
-                                ]
-                        | _ -> Html.none )
+        |> List.map (fun (id, status) -> Utils.Dictionaries.schools.TryFind(id), status)
+        |> List.choose (fun (school, status) ->
+                        match school with
+                        | Some a -> Some (a, status)
+                        | None -> None)
+        |> List.map (fun (school, status) ->
+                        Html.option [
+                            prop.text (sprintf "%s (oddelkov: %d oseb: %d)" school.Name status.regimes.Length status.absences.Length)
+                            prop.value school.Key
+                        ] )
 
     let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
+        let regionSummary reg nrSchools  =
+            Html.option [
+                prop.text (sprintf "%s (%d šol s spremembami v zadnjem dnevu)" (I18N.tt "region" reg) nrSchools)
+                prop.value ""
+            ]
+
         schoolStatusMap
         |> Map.toList
         |> List.groupBy (fun (id, _) ->
@@ -261,10 +277,12 @@ let renderChangedSchools (state: State) dispatch =
         |> List.sortByDescending (fun (k,v) -> v.Length)
         |> List.map (fun (reg, regionSchools) ->
             if reg.Length > 0 then
-                Html.div [
-                    prop.className "region"
-                    prop.children (
-                        Html.b (I18N.tt "region" reg) :: renderChanges regionSchools dispatch) ]
+                Html.select [
+                    prop.value ""
+                    prop.className "form-control form-control-sm filters__region"
+                    prop.children (regionSummary reg regionSchools.Length :: renderChanges regionSchools dispatch)
+                    prop.onChange (ChangedSchoolSelected >> dispatch)
+                ]
             else Html.none)
 
 
