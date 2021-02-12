@@ -714,6 +714,19 @@
                 "description": "The chart shows (until 2021-01-21) the number of daily keys published by each user who entered their positive test confirmation code on that day. Each dot on the chart represents a group of users that published the same number of daily keys on a particular day. The dark blue line is the average number of keys published per user. The app will publish a maximum of 13 keys per user, but if it was not active for the whole period, the number of published keys will be suitably lower. On 2021-01-22 the application was upgraded from version 1.3.1 to 1.10.1 with varying transmission risks vectors, making the estimate too unreliable."
             }
         },
+        "vaccination": {
+            "title": "Vaccination",
+            "titleMenu": "Vaccination",
+            "used": "Vaccination Used",
+            "byManufacturer": "Vaccination Delivered",
+            "pfizer": "Pfizer/BioNTech",
+            "moderna": "Moderna",
+            "az": "AstraZeneca",
+            "administered": "Vaccinated 💉",
+            "administered2nd": "Vaccinated 💉💉",
+            "usedDoses": "Used Doses",
+            "deliveredDoses": "Delivered Doses"
+        },
         "schools": {
             "title": "Cases in Education",
             "titleMenu": "Education - cases",
@@ -731,6 +744,21 @@
             "attendeesQuarantine": "Attendees - Quarantine",
             "unitsQuarantine": "Units - Quarantine",
             "unitsRemote": "Units - Remote"
+        },
+        "schoolStatus": {
+            "title": "Cases by School",
+            "titleMenu": "School - cases",
+            "search": "Search by name of school",
+            "regimeChange": "Class - changed regime",
+            "absence": " - absence due to infection",
+            "employee": "Employee",
+            "persons": "Persons",
+            "unit": "Class",
+            "kid": "Kid",
+            "pupil": "Pupil",
+            "student-hs": "Student",
+            "noData": "There is no data about absence due to (suspected) infection or changed regime for this school unit.",
+            "date": "%A, %e. %B"
         },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",

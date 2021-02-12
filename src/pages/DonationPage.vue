@@ -298,12 +298,13 @@ img {
   margin-right: -20px;
 
   span {
-    flex-grow: 1;
+    flex: 1 1 0px;
     margin-right: 20px;
     margin-bottom: 20px;
 
     button {
       width: 100%;
+      min-width: 120px;
       white-space: nowrap;
       padding: 10px;
       background-color: $yellow;

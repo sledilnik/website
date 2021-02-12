@@ -234,7 +234,7 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttons = buttons
             |}
 
-let credictsOptions =
+let chartCreditsDefault =
     {| enabled = true
        text = sprintf "%s: %s, %s"
             (I18N.t "charts.common.dataSource")
@@ -243,12 +243,45 @@ let credictsOptions =
        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
     |} |> pojo
 
+let chartCreditsNIJZ =
+    {| 
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" 
+    |} |> pojo
 
-let basicChartOptions
+let chartCreditsMZ =
+    {| 
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/" 
+    |} |> pojo
+
+let chartCreditsMIZS =
+    {| 
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMIZS") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/" 
+    |} |> pojo
+
+let chartCreditsMNZ =
+    {| 
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" 
+    |} |> pojo
+
+let basicChart
     (scaleType:ScaleType)
     (className:string)
-    (selectedRangeSelectionButtonIndex: int)
-    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
     =
     {|
         chart = pojo
@@ -409,27 +442,6 @@ let basicChartOptions
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
-        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
-                        {|
-                            ``type`` = "month"
-                            count = 2
-                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
-                        |}
-                        {|
-                            ``type`` = "month"
-                            count = 4
-                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
-                        |}
-                        {|
-                            ``type`` = "all"
-                            count = 1
-                            text = I18N.t "charts.common.all"
-                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
-                        |}
-                    |]
-
         responsive = pojo
             {|
                 rules =
@@ -452,5 +464,36 @@ let basicChartOptions
                     |}
             |}
 
-        credits = credictsOptions
+        credits = chartCreditsDefault
+    |}
+
+
+let basicChartOptions
+    (scaleType:ScaleType)
+    (className:string)
+    (selectedRangeSelectionButtonIndex: int)
+    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
+    =
+    {| basicChart scaleType className with
+
+        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 4
+                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
+                        |}
+                    |]
     |}

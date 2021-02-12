@@ -225,10 +225,5 @@ let renderChartOptions sex (data : DailyDeathsData) =
        responsive = ChartOptions.responsive
        plotOptions = {| series = {| pointPadding = 0 ; borderWidth = 0 |} |> pojo |} |> pojo
        series = series
-       credits =
-        {| enabled = true
-           text = sprintf "%s: %s"
-                (I18N.t "charts.common.dataSource")
-                (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-           href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" |} |> pojo
+       credits = chartCreditsMNZ
     |} |> pojo

@@ -175,7 +175,7 @@
     },
     "infocard": {
         "lastUpdated": "{{ date, %a, %b %e }}",
-        "testsHAT": "Testeos Hoy: RAT (testeos rápidos)",
+        "testsHAT": "Testeos Hoy: RAT",
         "tests": "Testeos Hoy: PCR",
         "deceasedToDate": "Muertes Confirmadas",
         "icu": "En UTI",
