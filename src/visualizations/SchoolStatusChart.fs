@@ -261,14 +261,21 @@ let renderChangedSchools (state: State) dispatch =
         |> List.sortBy (fun (school,status) -> school.Name)
         |> List.map (fun (school, status) ->
                         Html.option [
-                            prop.text (sprintf "%s (oddelkov: %d oseb: %d)" school.Name status.regimes.Length status.absences.Length)
+                            prop.text (sprintf "%s - %s %s"
+                                           school.Name
+                                           (if status.regimes.Length > 0
+                                            then sprintf "%s: %d" (chartText "units") status.regimes.Length
+                                            else "")
+                                           (if status.absences.Length > 0
+                                            then sprintf "%s: %d" (chartText "absences") status.absences.Length
+                                            else "") )
                             prop.value school.Key
                         ] )
 
     let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
         let regionSummary reg nrSchools  =
             Html.option [
-                prop.text (sprintf "%s (%d šol s spremembami)" (I18N.tt "region" reg) nrSchools)
+                prop.text (sprintf "%s - %s: %d" (I18N.tt "region" reg) (chartText "schoolsWithChange") nrSchools)
                 prop.value ""
             ]
 
@@ -283,7 +290,7 @@ let renderChangedSchools (state: State) dispatch =
             if reg.Length > 0 then
                 Html.select [
                     prop.value ""
-                    prop.className "form-control form-control-sm filters__region"
+                    prop.className "form-control form-control-sm changes__region"
                     prop.children (regionSummary reg regionSchools.Length :: renderChanges regionSchools dispatch)
                     prop.onChange (ChangedSchoolSelected >> dispatch)
                 ]
@@ -298,7 +305,7 @@ let renderChangedSchools (state: State) dispatch =
         Html.div [
             prop.className "changes"
             prop.children (
-                Html.h5 "Regije s spremembami v zadnjem tednu:" :: renderRegionChanges data dispatch)
+                Html.h4 (chartText "regionsWithChanges"):: renderRegionChanges data dispatch)
         ]
 
 
@@ -371,7 +378,6 @@ let autoSuggestSchoolInput = React.functionComponent(fun (props : {| dispatch : 
     )
 
 let renderFilterTypes (activeFilterType: FilterType) dispatch =
-
     let renderFilterSelector (filterType : FilterType) dispatch =
         let active = filterType = activeFilterType
 
@@ -389,35 +395,39 @@ let renderFilterTypes (activeFilterType: FilterType) dispatch =
             FilterType.All
             |> List.map (fun ft -> renderFilterSelector ft dispatch) ) ]
 
-let renderResetSearch dispatch =
-    Html.img [
-        prop.className "reset-search"
-        prop.src "/images/close-dd.svg"
-        prop.alt ("X")
-        prop.onClick (fun _ -> ResetSearch |> dispatch ) ]
+let renderSchoolControls (school: School) dispatch =
+    Html.div [
+        prop.className "name"
+        prop.children [
+
+            Html.h3 school.Name
+            Html.img [
+                prop.className "reset-search"
+                prop.src "/images/close-dd.svg"
+                prop.alt ("X")
+                prop.onClick (fun _ -> ResetSearch |> dispatch )
+            ]
+        ]
+    ]
 
 let render (state: State) dispatch =
     Html.div [
         prop.children [
             Utils.renderChartTopControls [
-                Html.div [
-                    prop.className "filters"
-                    prop.children [
-                        autoSuggestSchoolInput {| dispatch = dispatch |}
-                        match state.SelectedSchool with
-                        | None -> Html.none
-                        | Some school ->
-                            Html.h3 school.Name
-                            (renderResetSearch dispatch)
-                    ] ] ]
-            match state.SelectedSchool with
-            | None -> Html.none
-            | Some school ->
-                Utils.renderChartTopControlRight (renderFilterTypes state.FilterType dispatch)
+                autoSuggestSchoolInput {| dispatch = dispatch |}
+                (match state.SelectedSchool with
+                 | None -> Html.none
+                 | Some school -> renderSchoolControls school dispatch)
+                (match state.SelectedSchool with
+                 | None -> Html.none
+                 | Some school -> renderFilterTypes state.FilterType dispatch)
+            ]
             Html.div [
                 prop.className "school"
                 prop.children (renderSchool state dispatch)
-            ] ] ]
+            ]
+        ]
+    ]
 
 let schoolStatusChart (props: {| query: obj |}) =
     React.elmishComponent ("SchoolStatusChart", init props.query, update, render)
