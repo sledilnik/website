@@ -74,11 +74,9 @@ let shadedWeekendPlotBands =
     let saturday = DateTime(2020, 02, 22)
     let nWeeks = (DateTime.Today-saturday).TotalDays / 7.0 |> int
     let oneDay = 86400000.0
-    let origin = jsTime saturday // - oneDay / 2.0
+    let origin = jsTime saturday
     [|
         for i in 0..nWeeks+2 do
-            //yield {| value=origin + oneDay * 7.0 * float i; label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
-            //yield {| value=origin + oneDay * 7.0 * float (i+1); label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
             yield
                 {|
                     ``from`` = origin + oneDay * 7.0 * float i
@@ -244,39 +242,39 @@ let chartCreditsDefault =
     |} |> pojo
 
 let chartCreditsNIJZ =
-    {| 
+    {|
         enabled = true
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" 
+        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
     |} |> pojo
 
 let chartCreditsMZ =
-    {| 
+    {|
         enabled = true
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/" 
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
     |} |> pojo
 
 let chartCreditsMIZS =
-    {| 
+    {|
         enabled = true
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsMIZS") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/" 
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/"
     |} |> pojo
 
 let chartCreditsMNZ =
-    {| 
+    {|
         enabled = true
         text = sprintf "%s: %s"
                     (I18N.t "charts.common.dataSource")
                     (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
-        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" 
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"
     |} |> pojo
 
 let basicChart
@@ -296,12 +294,10 @@ let basicChart
         xAxis = [|
             {|
                 index=0; crosshair=true; ``type``="datetime"
-                gridLineWidth=1 //; isX=true
+                gridLineWidth=1
                 gridZIndex = -1
                 tickInterval=86400000
-                //labels = pojo {| align = "center"; y = 30; reserveSpace = false |} // style = pojo {| marginBottom = "-30px" |}
-                labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |} // style = pojo {| marginBottom = "-30px" |}
-                //labels = {| rotation= -45 |}
+                labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |}
                 plotLines=[|
                     {| value=jsTime <| DateTime(2020,3,13); label=Some {| text=I18N.t "phase.2.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,3,20); label=Some {| text=I18N.t "phase.3.description"; rotation=270; align="right"; x=12 |} |}
@@ -317,6 +313,7 @@ let basicChart
                     {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |}
                     {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |}
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -390,13 +387,17 @@ let basicChart
                        label=Some {| align="center"; text=I18N.t "phase.14.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2021,2,1);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2021,2,13);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.15.title" |}
                     |}
+                    {| ``from``=jsTime <| DateTime(2021,2,13);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.16.title" |}
+                    |}
                     yield! shadedWeekendPlotBands
                 |]
-                // https://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats
                 dateTimeLabelFormats = pojo
                     {|
                         week = I18N.t "charts.common.shortDateFormat"
@@ -410,9 +411,8 @@ let basicChart
                 ``type`` = if scaleType=Linear then "linear" else "logarithmic"
                 min = if scaleType=Linear then None else Some 0.5
                 max = None
-                //floor = if scaleType=Linear then None else Some 1.0
-                opposite = true // right side
-                title = {| text = null |} // "oseb" |}
+                opposite = true
+                title = {| text = null |}
                 showFirstLabel = None
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
@@ -435,9 +435,7 @@ let basicChart
                 verticalAlign = "top"
                 borderColor = "#ddd"
                 borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
                 layout = "vertical"
-                //backgroundColor = None :> string option
             |}
 
         navigator = pojo {| enabled = false |}
@@ -458,9 +456,7 @@ let basicChart
             {|
                 line = pojo
                     {|
-                        //dataLabels = pojo {| enabled = true |}
                         marker = pojo {| symbol = "circle"; radius = 3 |}
-                        //enableMouseTracking = false
                     |}
             |}
 

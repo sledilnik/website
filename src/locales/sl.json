@@ -714,6 +714,10 @@
         "15": {
             "title": "faza<br>15",
             "description": "nov režim testiranja HAT"
+        },
+        "16": {
+            "title": "faza<br>16",
+            "description": "nov režim testiranja HAT"
         }
     },
     "charts": {
