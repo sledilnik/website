@@ -255,6 +255,7 @@ let renderChangedSchools (state: State) dispatch =
                         match school with
                         | Some a -> Some (a, status)
                         | None -> None)
+        |> List.sortBy (fun (school,status) -> school.Name)
         |> List.map (fun (school, status) ->
                         Html.option [
                             prop.text (sprintf "%s (oddelkov: %d oseb: %d)" school.Name status.regimes.Length status.absences.Length)
@@ -264,7 +265,7 @@ let renderChangedSchools (state: State) dispatch =
     let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
         let regionSummary reg nrSchools  =
             Html.option [
-                prop.text (sprintf "%s (%d šol s spremembami v zadnjem tednu)" (I18N.tt "region" reg) nrSchools)
+                prop.text (sprintf "%s (%d šol s spremembami)" (I18N.tt "region" reg) nrSchools)
                 prop.value ""
             ]
 
