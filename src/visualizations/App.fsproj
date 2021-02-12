@@ -4,6 +4,7 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="Components/Slider.fs" />
+        <Compile Include="Components/AutoSuggest.fs" />
         <Compile Include="Types.fs" />
         <Compile Include="I18N.fs" />
         <Compile Include="IntersectionObserver.fs" />
@@ -23,6 +24,8 @@
         <Compile Include="data/HCenters.fs" />
         <Compile Include="data/Hospitals.fs" />
         <Compile Include="data/Schools.fs" />
+        <Compile Include="data/SchoolStatus.fs" />
+        <Compile Include="data/Vaccinations.fs" />
         <Compile Include="data/OurWorldInData.fs" />
         <Compile Include="data/DailyDeaths.fs" />
         <Compile Include="data/MonthlyDeaths.fs" />
@@ -44,6 +47,8 @@
         <Compile Include="EuropeMapChart.fs" />
         <Compile Include="InfectionsChart.fs" />
         <Compile Include="SchoolsChart.fs" />
+        <Compile Include="SchoolStatusChart.fs" />
+        <Compile Include="VaccinationChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="HcCasesChart.fs" />
         <Compile Include="PhaseDiagram/Types.fs" />

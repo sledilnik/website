@@ -48,7 +48,7 @@ let sharedChartOptions displayData =
     {| title = None
        chart = pojo {| ``type`` = "scatter" ; animation = false ; zoomType = None |}
        legend = {| |}
-       credits = Highcharts.credictsOptions |}
+       credits = Highcharts.chartCreditsDefault |}
 
 let totalVsWeekChartOptions state =
     let sharedOptions = sharedChartOptions()

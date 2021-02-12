@@ -47,9 +47,17 @@ export default {
     titleKey: 'charts.hcCases.titleMenu',
     icon: 'graph',
   },
+  'vaccination-chart': {
+    titleKey: 'charts.vaccination.titleMenu',
+    icon: 'graph',
+  },
   'schools-chart': {
     titleKey: 'charts.schools.titleMenu',
     icon: 'graph',
+  },
+  'school-status-chart': {
+    titleKey: 'charts.schoolStatus.titleMenu',
+    icon: 'column',
   },
   'sources-chart': {
     titleKey: 'charts.sources.titleMenu',
