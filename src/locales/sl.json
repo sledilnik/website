@@ -2052,7 +2052,7 @@
                 }
             },
             "permanentBankTransferOrder": {
-                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
+                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska.",
                 "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi.",
                 "detailsButton": "Podatki za trajnik"
             }
