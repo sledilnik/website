@@ -148,6 +148,8 @@ let renderChartOptions (state : State) dispatch =
         yAxis = baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
+
+        credits = chartCreditsMZ
     |}
 
 let renderChartContainer (state : State) dispatch =

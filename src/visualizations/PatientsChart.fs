@@ -229,7 +229,9 @@ let renderByHospitalChart (state: State) dispatch =
            legend =
                pojo
                    {| enabled = true
-                      layout = "horizontal" |} |}
+                      layout = "horizontal" |}
+
+           credits = chartCreditsMZ |}
 
     |> pojo
 
@@ -256,7 +258,7 @@ let renderStructureChart (state: State) dispatch =
                 match state.HTypeToDisplay with
                 | CovidHospitals    -> I18N.t "charts.patients.hospitalized"
                 | CovidHospitalsICU -> I18N.t "charts.patients.icu"
-                | CareHospitals     -> I18N.t "charts.patients.care"                    
+                | CareHospitals     -> I18N.t "charts.patients.care"
 
             s.Append "<table>" |> ignore
             s.Append "<tr>" |> ignore
@@ -341,9 +343,9 @@ let renderStructureChart (state: State) dispatch =
         let getTotal (ps: FacilityPatientStats): int option =
             match state.HTypeToDisplay with
             | CovidHospitals    -> ps.inHospital.today
-            | CovidHospitalsICU -> ps.icu.today 
+            | CovidHospitalsICU -> ps.icu.today
             | CareHospitals     -> ps.care.today
-           
+
 
         let color, seriesId, seriesIdx = Series.getSeriesInfo series
         {| color = color
@@ -429,8 +431,9 @@ let renderStructureChart (state: State) dispatch =
                                 chartOptions =
                                     {| yAxis =
                                            [| {| labels = pojo {| enabled = false |} |}
-                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
 
+           credits = chartCreditsMZ |}
 
     |> pojo
 
