@@ -31,7 +31,7 @@ type FilterType =
         | ShowAll -> chartText "showAll"
 
 let filterChangesDate =
-    DateTime.Today.AddDays(-1.)
+    DateTime.Today.AddDays(-6.)
 let filterActiveDate =
     DateTime.Today.AddDays(-28.)
 
@@ -264,7 +264,7 @@ let renderChangedSchools (state: State) dispatch =
     let renderRegionChanges (schoolStatusMap: SchoolStatusMap) dispatch =
         let regionSummary reg nrSchools  =
             Html.option [
-                prop.text (sprintf "%s (%d šol s spremembami v zadnjem dnevu)" (I18N.tt "region" reg) nrSchools)
+                prop.text (sprintf "%s (%d šol s spremembami v zadnjem tednu)" (I18N.tt "region" reg) nrSchools)
                 prop.value ""
             ]
 
@@ -294,7 +294,7 @@ let renderChangedSchools (state: State) dispatch =
         Html.div [
             prop.className "changes"
             prop.children (
-                Html.h5 "Regije s spremembami danes:" :: renderRegionChanges data dispatch)
+                Html.h5 "Regije s spremembami v zadnjem tednu:" :: renderRegionChanges data dispatch)
         ]
 
 
