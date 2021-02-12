@@ -2037,7 +2037,7 @@
                 }
             },
             "sms": {
-                "description": "Pošljite **SMS** sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** in prispevali boste **{{amount}}** za Znanstveno društvo Sledilnik.\nZa pripravo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo.\n\n*Prispevajo lahko uporabniki mobilnih storitev družb\nTelekom Slovenije d.d. (<a href=\"/docs/sms-donation-terms-Telekom-Slovenije.pdf\" target=\"_blank\">pravila in pogoji</a>) in \nA1 Slovenija d.d. (<a href=\"https://www.a1.si/pomoc-in-informacije/-/pomoc/sms-donacije\" target=\"_blank\">info</a>)<!--,\nTelemach d.o.o. ([pogoji](/docs/sms-donation-terms-Telemach.pdf)) in\nT-2 d.o.o. ([pogoji](/docs/sms-donation-terms-T2.pdf))-->,\nv sodelovanju s katerima je storitev omogočena.*"
+                "description": "Pošljite **SMS** sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** in prispevali boste **{{amount}}** za Znanstveno društvo Sledilnik.\nZa pripravo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo.\n\n*Prispevajo lahko uporabniki mobilnih storitev družb\nTelekom Slovenije d.d. (<a href=\"/docs/sms-donation-terms-Telekom-Slovenije.pdf\" target=\"_blank\">pravila in pogoji</a>) in \nA1 Slovenija d.d. (<a href=\"/docs/sms-donation-terms-A1.pdf\" target=\"_blank\">pogoji</a>)<!--,\nTelemach d.o.o. (<a href=\"/docs/sms-donation-terms-Telemach.pdf\" target=\"_blank\">pogoji</a>) in\nT-2 d.o.o. (<a href=\"/docs/sms-donation-terms-T2.pdf\" target=\"_blank\">pogoji</a>)-->,\nv sodelovanju s katerima je storitev omogočena.*"
             }
         },
         "monthly": {
