@@ -207,19 +207,22 @@ let renderChartOptions state schoolStatus dispatch =
                    color = "#f4b2e0"
                    pointWidth = 15
                    dataLabels = {| format = "{point.label}" |}
-                   data = empData |} |> pojo
+                   showInLegend = true
+                   data = regData |} |> pojo
             yield
                 {| name = personStr + chartText "absence"
                    color = "#bda506"
                    pointWidth = 15
                    dataLabels = {| format = "{point.label}" |}
+                   showInLegend = true
                    data = attData |} |> pojo
             yield
                 {| name = chartText "employee" + chartText "absence"
                    color = "#dba51d"
                    pointWidth = 15
                    dataLabels = {| format = "{point.label}" |}
-                   data = regData |} |> pojo
+                   showInLegend = true
+                   data = empData |} |> pojo
             yield
                 {| showInLegend = false
                    opacity = 0
