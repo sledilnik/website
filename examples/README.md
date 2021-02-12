@@ -33,7 +33,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 ### SchoolStatus: show specific school
 Parameters:
 `schoolId`=
-- `id` (ID of school - see [https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv](dict-schools.csv) for list of school IDs)
+- `id` (ID of school - see [https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv) for list of school IDs)
 
 | Chart                                  | Url                                                                         |
 |----------------------------------------|-----------------------------------------------------------------------------|
