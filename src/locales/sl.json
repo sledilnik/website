@@ -1255,8 +1255,8 @@
             "deliveredDoses": "Dobavljenih odmerkov"
         },
         "schools": {
-            "title": "Primeri v šolstvu",
-            "titleMenu": "Šolstvo - primeri",
+            "title": "Primeri v šolah in vrtcih",
+            "titleMenu": "Šole, vrtci - primeri",
             "attendeeCases": "Učenci",
             "employeeCases": "Zaposleni",
             "kindergarten": "Vrtec",
@@ -1273,9 +1273,12 @@
             "unitsRemote": "Oddelki - na daljavo"
         },
         "schoolStatus": {
-            "title": "Stanje po šolah",
-            "titleMenu": "Šola - stanje",
+            "title": "Stanje po šolah in vrtcih",
+            "titleMenu": "Šole, vrtci - stanje",
             "search": "Išči po imenu šole ali vrtca",
+            "showActive": "Aktivni",
+            "showAll": "Vsi",
+            "regionsWithChanges": "Spremenjen potek šolanja in predšolske vzgoje v zadnjem tednu po regijah:",
             "regimeChange": "Oddelek - spremenjen režim",
             "absence": " - odsotnost zaradi okužbe",
             "employee": "Zaposleni",
@@ -1891,11 +1894,11 @@
             "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Poraba cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
         },
         "schools-chart": {
-            "question": "Kaj kaže graf \"Primeri v šolstvu\"?",
+            "question": "Kaj kaže graf \"Primeri v šolah in vrtcih\"?",
             "answer": "[Graf](/sl/stats#schools-chart) prikazuje potrjene primere med učenci in zaposlenimi v šolstvu. Možen je prikaz aktivnih primerov ali potrjenih primerov na dan. Podatke lahko prikažete *Absolutno* ali *Relativno*.\n\nV prikazu po posameznem tipu šole/organizacije so prikazane tudi karantene med učenci in oddelki. V tem prikazu je omogočen prikaz tudi z logaritemsko skalo."
         },
         "school-status-chart": {
-            "question": "Kaj kaže graf \"Stanje po šolah\"?",
+            "question": "Kaj kaže graf \"Stanje po šolah in vrtcih\"?",
             "answer": "[Graf](/sl/stats#school-status-chart) omogoča časovni prikaz odsotnosti in ukrepov za posamezno šolo, vrtec ali drugo vzgojno-izobraževalno ustanovo, ki jo poiščete s pomočjo iskalnika zgoraj levo.\n\nČe za izbrano ustanovo obstajajo podatki, se v zgornjem delu grafa prikažejo spremenjeni režimi za zadevne oddelke (karantena, šola na daljavo), na sredini odsotnosti učencev in v spodnjem delu grafa odsotnosti zaposlenih zaradi okužbe ali suma na okužbo. Dolžina vsakega pravokotnika ustreza datumom trajanja posameznega ukrepa za oddelek, v oklepaju pa je zapisano število oseb, na katerega se ukrep nanaša. Ob prehodu z miško čez pravokotnik se pojavi oblaček z dodatnimi informacijami (vrsta ukrepa, vzrok za ukrep in osebe, na katere se nanaša)."
         },
         "sources-chart": {

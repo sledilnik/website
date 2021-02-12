@@ -68,9 +68,9 @@ type SchoolStatus = {
     regimes: SchoolRegime array
 }
 
-type private SchoolStatusMap = Map<string, SchoolStatus>
+type SchoolStatusMap = Map<string, SchoolStatus>
 
-let loadData (schoolId: string) =
+let loadSchoolData (schoolId: string) =
     async {
         let! response_code, json = Http.get (url + "?id=" + schoolId)
         return
@@ -82,6 +82,22 @@ let loadData (schoolId: string) =
                     Error (sprintf "Error reading school data: %s" err)
                 | Ok data ->
                     Map.tryFind schoolId data |> Ok
+            | _ ->
+                Error (sprintf "Error reading school data: %d" response_code)
+    }
+
+let loadData (filter: DateTime) =
+    async {
+        let! response_code, json = Http.get (url + "?from=" + filter.ToString("yyyy-MM-dd"))
+        return
+            match response_code with
+            | 200 ->
+                let data = Json.tryParseNativeAs<SchoolStatusMap> json
+                match data with
+                | Error err ->
+                    Error (sprintf "Error reading school data: %s" err)
+                | Ok data ->
+                    Ok data
             | _ ->
                 Error (sprintf "Error reading school data: %d" response_code)
     }

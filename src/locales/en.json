@@ -732,8 +732,8 @@
             "deliveredDoses": "Delivered Doses"
         },
         "schools": {
-            "title": "Cases in Education",
-            "titleMenu": "Education - cases",
+            "title": "Cases in School and Kindergarten",
+            "titleMenu": "School, Kindergarten - cases",
             "attendeeCases": "Attendees",
             "employeeCases": "Employees",
             "kindergarten": "Kindergarten",
@@ -750,9 +750,12 @@
             "unitsRemote": "Units - Remote"
         },
         "schoolStatus": {
-            "title": "Cases by School",
-            "titleMenu": "School - cases",
+            "title": "Situation in School and Kindergarten",
+            "titleMenu": "School, Kindergarten - situation",
             "search": "Search by name of school",
+            "showActive": "Active",
+            "showAll": "All",
+            "regionsWithChanges": "Changec regime in school or kindergarten in past week by region:",
             "regimeChange": "Class - changed regime",
             "absence": " - absence due to infection",
             "employee": "Employee",
