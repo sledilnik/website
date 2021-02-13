@@ -1730,7 +1730,8 @@
         "onetime": {
             "title": "One-time support",
             "banktransfer": {
-                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:"
+                "description": "Our activities can also be supported **by bank transfer**. The payment instructions are as follows:",
+                "detailsButton": "Bank transfer details"
             },
             "stripe": {
                 "description": "You can also make a one-off donation **by credit card**. Choose your donation amount below:",

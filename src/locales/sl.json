@@ -2033,7 +2033,8 @@
         "onetime": {
             "title": "Enkratna donacija",
             "banktransfer": {
-                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**."
+                "description": "Prispevek lahko **nakažete tudi z bančnega računa** z uporabo naloga UPN v vaši spletni banki. Podatki so spodaj. Če uporabljate mobilno bančno aplikacijo, lahko nalog preprosto izpolnite s skeniranjem QR-kode. V obeh primerih na nalog vpišite **poljuben znesek**.",
+                "detailsButton": "Podatki za nakazilo z UPN"
             },
             "stripe": {
                 "description": "Enkratni prispevek Sledilniku lahko vplačate tudi **s kreditno kartico**. Izberite znesek, s katerim želite podpreti naše delovanje:",
@@ -2041,6 +2042,9 @@
                     "title": "Hvala za enkratno donacijo",
                     "description": " "
                 }
+            },
+            "sms": {
+                "description": "Pošljite **SMS** sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** in prispevali boste **{{amount}}** za Znanstveno društvo Sledilnik.\nZa pripravo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo.\n\n*Prispevajo lahko uporabniki mobilnih storitev družb\nTelekom Slovenije d.d. (<a href=\"/docs/sms-donation-terms-Telekom-Slovenije.pdf\" target=\"_blank\">pravila in pogoji</a>) in \nA1 Slovenija d.d. (<a href=\"/docs/sms-donation-terms-A1.pdf\" target=\"_blank\">pogoji</a>)<!--,\nTelemach d.o.o. (<a href=\"/docs/sms-donation-terms-Telemach.pdf\" target=\"_blank\">pogoji</a>) in\nT-2 d.o.o. (<a href=\"/docs/sms-donation-terms-T2.pdf\" target=\"_blank\">pogoji</a>)-->,\nv sodelovanju s katerima je storitev omogočena.*"
             }
         },
         "monthly": {
@@ -2055,8 +2059,9 @@
                 }
             },
             "permanentBankTransferOrder": {
-                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska:",
-                "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi."
+                "description": "Redna mesečna donacija je mogoča tudi **z vzpostavitvijo trajnega naloga**, kar uredite pri svoji banki z navedbo naših podatkov in poljubnega zneska.",
+                "authorisation": "Lahko pa izpolnite obrazec - pooblastilo in bomo to z vašo banko **uredili mi**.<br>Ko želite trajnik preklicati, nas o tem obvestite na drustvo@sledilnik.org in preklic uredimo mi.",
+                "detailsButton": "Podatki za trajnik"
             }
         },
         "incomeTax": {
