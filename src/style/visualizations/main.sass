@@ -526,17 +526,27 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       font-size: 14px
 
     h3
-      margin-left: $gap / 2
       display: inline-block
+      line-height: 2
+      margin: 0 8px
       font-size: 14px
-      line-height: 15px
       font-weight: bold
       background: #fff
-      margin-bottom: 0
+      box-shadow: inset 0 1px 0 white, inset 0 -9px $yellow
+
+    h4
+      font-size: 14px
+      font-weight: bold
+      background: #fff
+      margin-top: $gap / 2
+
+    .changes__region
+      margin-left: $gap/2
+      margin-bottom: $gap / 2
 
     .highcharts-legend-item.highcharts-series-0 .highcharts-point
       fill: #f4b2e0 !important
-    
+
     .highcharts-legend-item.highcharts-series-1 .highcharts-point
       fill: #bda506 !important
 

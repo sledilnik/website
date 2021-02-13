@@ -25,10 +25,10 @@ type DisplayType =
         | Used -> chartText "used"
         | ByManufacturer -> chartText "byManufacturer"
 
-let AllVaccinationTypes = [ 
+let AllVaccinationTypes = [
     "az",          "#ffa600"
     "moderna",     "#f95d6a"
-    "pfizer",      "#73ccd5" 
+    "pfizer",      "#73ccd5"
 ]
 
 type State =
@@ -60,11 +60,11 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
     | ConsumeVaccinationData (Ok data) ->
         { state with VaccinationData = data }, Cmd.none
-    | ConsumeVaccinationData (Error err) -> 
+    | ConsumeVaccinationData (Error err) ->
         { state with Error = Some err }, Cmd.none
-    | ConsumeServerError ex -> 
+    | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeDisplayType dt -> 
+    | ChangeDisplayType dt ->
         { state with DisplayType = dt }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
@@ -122,7 +122,7 @@ let renderVaccinationChart state dispatch =
     {| baseOptions with
         series = List.toArray allSeries
         yAxis =
-            baseOptions.yAxis 
+            baseOptions.yAxis
             |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
@@ -142,8 +142,8 @@ let renderStackedChart state dispatch =
                        color = vColor
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp -> 
-                                         (dp.JsDate12h, dp.deliveredByManufacturer.TryFind(vType))) |} 
+                           |> Array.map (fun dp ->
+                                         (dp.JsDate12h, dp.deliveredByManufacturer.TryFind(vType))) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -159,7 +159,7 @@ let renderStackedChart state dispatch =
     {| baseOptions with
         series = Seq.toArray allSeries
         yAxis =
-            baseOptions.yAxis 
+            baseOptions.yAxis
             |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
@@ -177,7 +177,7 @@ let renderStackedChart state dispatch =
 let renderChartContainer (state: State) dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
-               prop.children [ 
+               prop.children [
                     match state.DisplayType with
                     | Used ->
                         renderVaccinationChart state dispatch |> Highcharts.chartFromWindow
@@ -203,7 +203,7 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ 
+        Html.div [
             renderChartContainer state dispatch
             renderDisplaySelectors state dispatch ]
 

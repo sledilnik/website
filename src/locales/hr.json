@@ -356,7 +356,8 @@
             "dsMNZ": "MNZ",
             "dsSURS": "SURS",
             "showAll": "Prikaži sve",
-            "hideAll": "Sakrij sve"
+            "hideAll": "Sakrij sve",
+            "dsMIZS": "MIZŠ"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -647,7 +648,8 @@
             "hospitalDischarged": "Otpušteni iz bolnice",
             "hospitalAdmitted": "Primljeni u bolnici",
             "positivePctHAT": "Udio pozitivnih: RAT (%)",
-            "testsHAT": "Provedeni testovi: RAT"
+            "testsHAT": "Provedeni testovi: RAT",
+            "vaccineDosesAdministered": "Primijenjene doze cjepiva"
         },
         "sources": {
             "totalImported": "Ukupno uvezenih slučajeva",
@@ -866,6 +868,52 @@
         "icuPatients": {
             "titleMenu": "Intenzivna njega",
             "title": "Intenzivna njega"
+        },
+        "schoolStatus": {
+            "date": "%A, %e. %B",
+            "noData": "Nema podataka o odsutnosti zbog (sumnje) infekcije ili promijenjenog rasporeda za ovu školsku jedinicu.",
+            "student-hs": "Student",
+            "pupil": "Učenik",
+            "kid": "Dijete",
+            "unit": "Razred",
+            "persons": "Osobe",
+            "employee": "Zaposlenik",
+            "absence": " – odsutnost zbog infekcije",
+            "regimeChange": "Razred – promijenjen raspored",
+            "search": "Pretraži po imenu škole",
+            "titleMenu": "Škola – slučajevi",
+            "title": "Slučajevi po školama"
+        },
+        "schools": {
+            "unitsRemote": "Jedinice – Udaljene",
+            "unitsQuarantine": "Jedinice – Karantena",
+            "attendeesQuarantine": "Sudionici – Karantena",
+            "attendeesCases": "Sudionici – Potvrđeno",
+            "employeesCases": "Zaposlenici – Potvrđeno",
+            "institutions": "Institucije",
+            "dormitory": "Konvikt",
+            "music": "Glazbena škola",
+            "elementary_special": "ES posebni kurikulum",
+            "highschool": "Srednja škola",
+            "elementary": "Osnovna škola",
+            "kindergarten": "Dječji vrtić",
+            "employeeCases": "Zaposlenici",
+            "attendeeCases": "Sudionici",
+            "titleMenu": "Obrazovanje – slučajevi",
+            "title": "Slučajevi u obrazovanju"
+        },
+        "vaccination": {
+            "deliveredDoses": "Isporučene doze",
+            "usedDoses": "Korištene doze",
+            "administered2nd": "Cijepljeni 💉💉",
+            "administered": "Cijepljeni 💉",
+            "az": "AstraZeneca",
+            "moderna": "Moderna",
+            "pfizer": "Pfizer/BioNTech",
+            "byManufacturer": "Isporučeno cijepivo",
+            "used": "Korišteno cijepivo",
+            "titleMenu": "Cijepivo",
+            "title": "Cijepivo"
         }
     },
     "shortMonth": {
@@ -1080,7 +1128,7 @@
             "title": "Plan"
         },
         "liftSchools3": {
-            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama.",
+            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama (sve osim Goriške, Posavske i Jugoistočne Slovenije).",
             "title": "Škole 3"
         },
         "liftRegions": {
@@ -1090,6 +1138,18 @@
         "gym": {
             "description": "Zatvaranje teretana, bazena, sportskih objekata (s iznimkama).<br>Zatvaranje muzeja i galerija. Knjižnice su otvarene samo za preuzimanje građe.",
             "title": "Fitness"
+        },
+        "liftSchools3All": {
+            "title": "Škole 3"
+        },
+        "liftShops2": {
+            "title": "Dućani"
+        },
+        "bordersStrict": {
+            "title": "Granice"
+        },
+        "closeSchools3": {
+            "title": "Škole 3"
         }
     },
     "pageNotFound": {
@@ -1128,7 +1188,8 @@
             "de": "Njemački",
             "me": "Crnogorski",
             "it": "Talijanski",
-            "nb": "Bokmål"
+            "nb": "Bokmål",
+            "es": "Španjolski"
         },
         "about": "O projektu",
         "faq": "FAQ",
@@ -1194,6 +1255,14 @@
         "14": {
             "description": "brzo testiranje antigena",
             "title": "faza<br>14"
+        },
+        "16": {
+            "description": "brza metoda ispitivanja antigena",
+            "title": "faza<br>16"
+        },
+        "15": {
+            "description": "brza metoda ispitivanja antigena",
+            "title": "faza<br>15"
         }
     },
     "embedMaker": {
