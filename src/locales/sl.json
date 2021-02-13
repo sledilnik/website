@@ -27,7 +27,8 @@
             "sq": "Albanščina",
             "me": "Črnogorščina",
             "it": "Italijanščina",
-            "nb": "Bokmål"
+            "nb": "Bokmål",
+            "es": "Španščina"
         }
     },
     "timestamp": {
@@ -1341,7 +1342,9 @@
         "countriesDeathsPerCases": {
             "chronologically": "Kronološki",
             "sinceFirstDeath": "Od prve smrti",
-            "daysFromFirstDeath": "Št. dni od prve smrti"
+            "daysFromFirstDeath": "Št. dni od prve smrti",
+            "titleMenu": "Države - smrti na primer",
+            "title": "Države: vseh smrti na primer"
         }
     },
     "footer": {
