@@ -1093,7 +1093,7 @@
         },
         "liftShops2": {
             "title": "Shops",
-            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,...<br>(negative test of customers and/od employees required for some services)"
+            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,…<br>(negative test of customers and/od employees required for some services)"
         },
         "liftSchools3All": {
             "title": "Schools 3",
@@ -1642,7 +1642,7 @@
             "answer": "The [graph](/en/stats#patients-chart) in the default view *All Hospitals* shows us the whole picture of hospitalizations by date arranged by the condition of patients: columns with a positive value (those above the horizontal axis) show the number admitted to hospital, the number hospitalized, shades of red are used to demark individuals in ICUs, specifically depicting how many of these are in critical condition on the ventilators (intubated). Columns with a negative value (those below the horizontal axis) show the number of discharges and deaths that day. You can also select specific hospital and see only hospitalizations there. If you select the *By Hospitals* view below, you can see the number of people in hospital care by day for each of the COVID-19 hospitals.\nThe graph can offer a good insight into the workload of hospitals and can be the basis for assessing hospital capacity and planning their possible increase."
         },
         "ratios-chart": {
-            "question": "Kaj nam pove graf \"Delež resnih primerov\"?",
+            "question": "What does the “Share of Serious Cases” graph tell us?",
             "answer": "[Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%).\n\n(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju (intubirani) in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.\n\n(*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.\n\n(*Smrtnost*) nam pokaže delež smrti v bolnišnici glede na vse umrle in delež smrti v intenzivni enoti glede na vse umrle v bolnišnici - prikazano s polno črto. Prikaz nam tudi prikaže Smrtnost v bolnišnici (koliko oseb umre glede na vse hospitalizirane) in Smrtnost v intenzivni enoti (koliko oseb umre glede na vse sprejete v intenzivno enoto) - prikazano s črtkano črto.\n\nGraf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z ostalimi državami (glede na njihova poročila)."
         },
         "hcenters-chart": {

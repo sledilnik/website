@@ -115,8 +115,8 @@ let chart = React.functionComponent("ExcessDeathsChart", fun (props : {| statsDa
                                 Html.text (I18N.chartText "excessDeaths" "absolute.disclaimer")
                                 Html.text " "
                                 Html.a [
-                                    prop.href "https://medium.com/sledilnik/koliko-preveč-a9afd320653b"
-                                    prop.children [ Html.text "Koliko preveč?"] ] ] ] ] )
+                                    prop.href "https://medium.com/sledilnik/prese%C5%BEna-smrtnost-v-letu-2020-99840508e337"
+                                    prop.children [ Html.text "Presežna smrtnost v letu 2020"] ] ] ] ] )
                 | ExcessDeaths ->
                     React.keyedFragment (2, [
                         Html.div [

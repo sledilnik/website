@@ -204,7 +204,7 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
 
 
 let init (mapToDisplay : MapToDisplay) (data : Area seq) : State * Cmd<Msg> =
-    let dataTimeInterval = LastDays 14
+    let dataTimeInterval = LastDays 7
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
