@@ -559,10 +559,9 @@ let render (state : State) dispatch =
                 prop.children [
                     Html.a [
                         prop.href "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-                        prop.text (sprintf "%s: %s, %s"
+                        prop.text (sprintf "%s: %s"
                             (I18N.t "charts.common.dataSource")
-                            (I18N.t "charts.common.dsNIJZ")
-                            (I18N.t "charts.common.dsMZ"))
+                            (I18N.t "charts.common.dsNIJZ"))
                     ]
                 ]
             ]

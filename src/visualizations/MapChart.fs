@@ -204,7 +204,7 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
 
 
 let init (mapToDisplay : MapToDisplay) (data : Area seq) : State * Cmd<Msg> =
-    let dataTimeInterval = LastDays 14
+    let dataTimeInterval = LastDays 7
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
@@ -751,10 +751,9 @@ let renderMap (state : State) =
                 {|
                     enabled = true
                     text =
-                        sprintf "%s: %s, %s"
+                        sprintf "%s: %s"
                             (I18N.t "charts.common.dataSource")
                             (I18N.t "charts.common.dsNIJZ")
-                            (I18N.t "charts.common.dsMZ")
                     mapTextFull = ""
                     mapText = ""
                     href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
@@ -838,9 +837,9 @@ let render (state : State) dispatch =
             ]
             match state.ContentType with
             | Deceased ->
-                let disclaimerID = 
-                    if state.MapToDisplay = RegionMap 
-                    then "charts.map.disclaimerRegion" 
+                let disclaimerID =
+                    if state.MapToDisplay = RegionMap
+                    then "charts.map.disclaimerRegion"
                     else "charts.map.disclaimer"
                 Html.div [
                     prop.className "disclaimer"

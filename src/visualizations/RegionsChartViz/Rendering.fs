@@ -53,7 +53,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         regionsWithoutExcluded
         |> List.sortByDescending (fun region -> region.ActiveCases)
 
-    let regConfig = 
+    let regConfig =
         regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
@@ -69,7 +69,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
             |> List.append regConfig
         | _ ->
             regConfig
-             
+
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
@@ -172,7 +172,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
 
     let xAxis =
             baseOptions.xAxis
-            |> Array.map(fun xAxis -> 
+            |> Array.map(fun xAxis ->
                {| xAxis with
                       gridZIndex = 1
                       plotBands =
@@ -190,7 +190,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
     let chartTextGroup = state.ChartConfig.ChartTextsGroup
 
     let threshold100k value =
-        (value * 100000.) 
+        (value * 100000.)
         / (Utils.Dictionaries.regions.["si"].Population |> Utils.optionToInt |> float)
     let redThreshold = threshold100k 1350.
     let orangeThreshold = threshold100k 1000.

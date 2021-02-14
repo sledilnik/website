@@ -31,11 +31,11 @@ type FullMetricType = {
         | Today, true -> I18N.t "charts.common.show7DaysAverage"
         | ToDate, _ -> I18N.t "charts.common.showToDate"
     static member All =
-        [ { MetricType = Active; IsAveraged = false }
+        [ { MetricType = Today; IsAveraged = true }
+          { MetricType = Active; IsAveraged = false }
           { MetricType = Today; IsAveraged = false }
-          { MetricType = ToDate; IsAveraged = false }
-          { MetricType = Today; IsAveraged = true } ]
-    static member Default = { MetricType = Active; IsAveraged = false }
+          { MetricType = ToDate; IsAveraged = false } ]
+    static member Default = { MetricType = Today; IsAveraged = true }
 
 type Metric =
     | PerformedTestsToday
@@ -67,7 +67,7 @@ type Metric =
     with
         static member UseStatsData metric =
             [PerformedTestsToday; PerformedTestsToDate; ConfirmedCasesToday
-             ConfirmedCasesToDate; ActiveCases; RecoveredToDate 
+             ConfirmedCasesToDate; ActiveCases; RecoveredToDate
              VacAdministeredToday; VacAdministeredToDate; VacAdministered2Today; VacAdministered2ToDate ]
             |> List.contains metric
 
@@ -318,6 +318,7 @@ let renderChartOptions state dispatch =
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
             baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+        credits = chartCreditsNIJZMZ
     |}
 
 let renderChartContainer state dispatch =

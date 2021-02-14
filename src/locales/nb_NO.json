@@ -284,7 +284,8 @@
             "hr": "Kroatisk",
             "en": "Engelsk",
             "de": "Tysk",
-            "nb": "Norsk bokmål"
+            "nb": "Norsk bokmål",
+            "es": "Spansk"
         },
         "github": "GitHub",
         "links": "Lenker",
@@ -297,7 +298,8 @@
         "world": "Verden",
         "home": "Hjem",
         "menu": "Meny",
-        "goToGraph": "Gå til diagram"
+        "goToGraph": "Gå til diagram",
+        "posts": "Publikasjoner"
     },
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",
@@ -392,5 +394,9 @@
         "liftFoodMarkets": {
             "title": "Markeder"
         }
+    },
+    "week": "Uke",
+    "youtube": {
+        "titleMenu": "Animasjon"
     }
 }

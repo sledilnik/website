@@ -174,6 +174,7 @@ let renderByLabChart (state: State) dispatch =
            series =
                [| for lab in state.AllLabs do
                    yield renderSources lab |]
+           credits = chartCreditsNIJZ
            plotOptions = pojo {| series = {| stacking = None |} |}
            legend =
                pojo
@@ -395,6 +396,7 @@ let renderPositiveChart (state: State) dispatch =
 
     {| baseOptions with
            series = List.toArray allSeries
+           credits = chartCreditsNIJZ
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}

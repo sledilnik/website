@@ -581,12 +581,15 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
-          patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
           regions100k; map; municipalities
-          schools; schoolStatus; ageGroupsTimeline; weeklyDemographics; ageGroups; 
+          schools; schoolStatus;
+          patients; patientsICU; patientsCare;
+          ageGroupsTimeline; weeklyDemographics; ageGroups;
+          metricsCorrelation; deceased; excessDeaths
           infections; hcCases;
-          europeMap; sources
-          cases; regionMap; regionsAbs
+          europeMap;
+          sources; cases;
+          regionMap; regionsAbs
           phaseDiagram; spread;
           hCenters
         ]

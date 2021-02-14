@@ -220,6 +220,7 @@ let renderChartOptions (state : State) dispatch =
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
+        credits = chartCreditsNIJZMZ
     |}
 
 let renderChartContainer (state : State) dispatch =
