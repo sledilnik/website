@@ -236,8 +236,17 @@ let renderChartOptions state schoolStatus dispatch =
     let baseOptions =
         basicChart Linear "covid19-school-status"
 
+    let xAxis = baseOptions.xAxis
+                |> Array.map(fun xAxis ->
+                    {| xAxis with
+                        plotLines = xAxis.plotLines
+                                    |> Array.append [| {| value=jsTime <| DateTime.Today
+                                                          dashStyle = "Dot"
+                                                          width = 2
+                                                          color = "red" |} |> pojo |] |} )
     {| baseOptions with
            chart = pojo {| ``type`` = "xrange"; animation = false |}
+           xAxis = xAxis
            yAxis = [| {| title = {| text = null |}
                          labels = {| enabled = false |} |} |]
            series = Seq.toArray allSeries

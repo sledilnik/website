@@ -301,21 +301,21 @@ let basicChart
                 tickInterval=86400000
                 labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |}
                 plotLines=[|
-                    {| value=jsTime <| DateTime(2020,3,13); label=Some {| text=I18N.t "phase.2.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,3,20); label=Some {| text=I18N.t "phase.3.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text=I18N.t "phase.4.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,3,13); label=Some {| text=I18N.t "phase.2.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,3,20); label=Some {| text=I18N.t "phase.3.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text=I18N.t "phase.4.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
