@@ -1098,6 +1098,14 @@
         "liftSchools3All": {
             "title": "Schools 3",
             "description": "Relaxation: kindergarten and elementary school up to 3rd grade in all regions."
+        },
+        "liftBorders": {
+            "title": "Borders",
+            "description": "No checkpoints on borders, quarantine and negative test not required for vaccinated and recovered."
+        },
+        "liftMunicipality2": {
+            "title": "Municipalities",
+            "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
         }
     },
     "days": {

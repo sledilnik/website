@@ -654,6 +654,14 @@
         "liftSchools3All": {
             "title": "OŠ 1-3",
             "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v vseh regijah."
+        },
+        "liftBorders": {
+            "title": "Meje",
+            "description": "Ukinejo se kontrolne točke, prestop meje brez karantene in testa tudi za cepljene in prebolele."
+        },
+        "liftMunicipality2": {
+            "title": "Občine",
+            "description": "Sproščanje: prost prehod med občinami ali regijami, zbiranje do 10 ljudi, odpro se vse trgovine.<br>Odprejo se osnovne šole za vse in srednje šole za zaključne letnike, na univerzah dovoljeni izpiti in vaje do 10 ljudi.<br>Dovoljena je brezkontaktna športno-rekreativna vadba v skupini do 10 ob upoštevanju 2m razdalje."
         }
     },
     "phase": {
