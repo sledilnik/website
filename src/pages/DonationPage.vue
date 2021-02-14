@@ -3,7 +3,7 @@
     <div v-if="isStripeSuccess" class="static-page-wrapper stripeSuccess">
       <div class="header-wrapper">
           <div>
-            <img src="../assets/donate-thanks.png" />
+            <img src="../assets/donate/donate-thanks.png" />
           </div>
           <h1 v-if="successTranslationKey!=null">{{ $t(`donation.${successTranslationKey}success.title`) }}</h1>
           <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
@@ -111,7 +111,7 @@
             </span>
           </div>
           <div v-if="showBanktransferDetails">
-            <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
+            <img v-if="language=='sl'" src="../assets/donate/donate-qr.png" class="qr" />
             <table class="bankDetails">
               <tr>
                 <td>{{ $t("donation.bankDetails.recipient") }}</td>
@@ -153,7 +153,7 @@
               </tr>
             </table>
 
-            <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+            <img v-if="language=='sl'" src="../assets/donate/donate-upn.png" class="upn" />
           </div>
         </div>
 
