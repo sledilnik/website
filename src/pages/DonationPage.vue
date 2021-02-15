@@ -356,8 +356,12 @@ img {
 .paymentMethod {
   margin: 24px 0;
 
-  .smsDetails {
+  &.smsDetails {
     min-height: 84px;
+
+    a {
+      font-weight: normal;
+    }
   }
 }
 
