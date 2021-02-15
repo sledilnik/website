@@ -9,7 +9,8 @@
             "hr": "Croato",
             "en": "Inglese",
             "de": "Tedesco",
-            "nb": "Bokmål"
+            "nb": "Bokmål",
+            "es": "Spagnolo"
         },
         "github": "GitHub",
         "links": "Collegamenti",
@@ -1394,6 +1395,10 @@
         "14": {
             "title": "fase<br>14",
             "description": "test rapidi antigenici"
+        },
+        "15": {
+            "description": "metodologia dei test antigeni rapidi",
+            "title": "fase<br>15"
         }
     },
     "weekday": {
