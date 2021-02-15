@@ -1042,7 +1042,8 @@
             "dsMNZ": "MNZ",
             "dsSURS": "SURS",
             "showAll": "Mostra tutto",
-            "hideAll": "Nascondi tutto"
+            "hideAll": "Nascondi tutto",
+            "dsMIZS": "MIZŠ"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1082,7 +1083,8 @@
             "hospitalDischarged": "Dimessi dall'ospedale",
             "hospitalAdmitted": "Ammessi in ospedale",
             "positivePctHAT": "Percentuale positivi: TAR (%)",
-            "testsHAT": "Test eseguiti: TAR"
+            "testsHAT": "Test eseguiti: TAR",
+            "vaccineDosesAdministered": "Dosi di vaccino somministrate"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -1124,7 +1126,7 @@
         },
         "ostanizdrav": {
             "userPublishedByCount": {
-                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate da ogni utente che ha inserito il codice di conferma del test positivo in quel giorno. Ogni punto del grafico rappresenta un gruppo di utenti che hanno pubblicato lo stesso numero di chiavi giornaliere in un determinato giorno. La linea blu scuro è il numero medio di chiavi pubblicate per utente. L'app pubblicherà un massimo di 13 chiavi per utente, ma se non è stata attiva per tutto il periodo, il numero di chiavi pubblicate sarà adeguatamente inferiore.",
+                "description": "Il grafico mostra (fino al 2021-01-21) il numero di chiavi giornaliere pubblicate da ogni utente che ha inserito il codice di conferma del test positivo in quel giorno. Ogni punto del grafico rappresenta un gruppo di utenti che hanno pubblicato lo stesso numero di chiavi giornaliere in un determinato giorno. La linea blu scuro è il numero medio di chiavi pubblicate per utente. L'app pubblicherà un massimo di 13 chiavi per utente, ma se non è stata attiva per tutto il periodo, il numero di chiavi pubblicate sarà adeguatamente inferiore. Il 2021-01-22 l'applicazione è stata aggiornata dalla versione 1.3.1 alla 1.10.1 con vettori di rischio di trasmissione variabili, rendendo la stima troppo inaffidabile.",
                 "users": "Utenti",
                 "count": "Numero di chiavi (medio) per utente in un determinato giorno",
                 "tooltip": "datum.user_count + ' utenti hanno caricato ' + datum.key_count + ' chiavi'",
@@ -1258,7 +1260,9 @@
                 "covidDeaths MZ": "Decessi confermati per COVID-19 (governo)",
                 "covidDeaths NIJZ": "Decessi confermati per COVID-19 (NIJZ)",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
-                "title": "Eccedenza rispetto agli ultimi 5 anni"
+                "title": "Eccedenza rispetto agli ultimi 5 anni",
+                "covidDeathsNIJZ": "Morti da COVID-19 (NIJZ)",
+                "covidDeathsMZ": "Morti di COVID-19 negli ospedali e Case di riposo (Governo)"
             },
             "absolute": {
                 "title": "Confronto annuale",
@@ -1301,6 +1305,35 @@
         "icuPatients": {
             "titleMenu": "Terapia intensiva",
             "title": "Terapia intensiva"
+        },
+        "schools": {
+            "attendeesQuarantine": "Alunni - Quarantena",
+            "attendeesCases": "Alunni - Confermati",
+            "employeesCases": "Dipendenti - Confermato",
+            "institutions": "Istituti",
+            "dormitory": "Casa dello studente",
+            "music": "Scuola di musica",
+            "elementary_special": "SE programma speciale",
+            "highschool": "Scuola media",
+            "elementary": "Scuola elementare",
+            "title": "Casi nella scuola e nella scuola materna",
+            "titleMenu": "Scuola, scuola materna - casi",
+            "kindergarten": "Scuola materna",
+            "employeeCases": "Dipendenti",
+            "attendeeCases": "Alunni"
+        },
+        "vaccination": {
+            "deliveredDoses": "Dosi consegnate",
+            "usedDoses": "Dosi utilizzate",
+            "administered2nd": "Vaccinati 💉💉",
+            "administered": "Vaccinati 💉",
+            "az": "AstraZeneca",
+            "moderna": "Moderna",
+            "pfizer": "Pfizer/BioNTech",
+            "byManufacturer": "Vaccini consegnati",
+            "used": "Vaccini utilizzati",
+            "titleMenu": "Vaccinazione",
+            "title": "Vaccinazione"
         }
     },
     "footer": {
@@ -1399,6 +1432,10 @@
         "15": {
             "description": "metodologia dei test antigeni rapidi",
             "title": "fase<br>15"
+        },
+        "16": {
+            "description": "metodologia dei test antigeni rapidi",
+            "title": "fase<br>16"
         }
     },
     "weekday": {
