@@ -696,7 +696,7 @@
                 "users": "Broj korisnika",
                 "count": "(prosječni) dnevni broj ključeva po broju korisnika",
                 "tooltip": "datum.user_count + ' korisnik je objavio ' + datum.key_count + ' ključeva'",
-                "description": "Dijagram prikazuje broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji."
+                "description": "Dijagram prikazuje (do 21. siječnja 2021.) broj dnevnih ključeva koje je objavio svaki korisnik koji je tog dana upisao svoj kod za potvrdu pozitivnog testa. Svaka točka na dijagramu predstavlja skupinu korisnika koji su objavili isti broj dnevnih ključeva na određeni dan. Tamno plava linija predstavlja prosječan broj objavljenih ključeva po korisniku. Program će objaviti najviše 13 ključeva po korisniku, no ako program nije bio aktivan cijelo razdoblje, broj objavljenih ključeva bit će sukladno tome manji. 22. siječnja 2021. program je nadograđen s verzije 1.3.1 na 1.10.1 s različitim vektorima rizika prijenosa, što je procjenu učinilo previše nepouzdanom."
             },
             "usercount": {
                 "title": "Procijenjeni broj korisnika koji su objavili ključeve",
@@ -881,8 +881,11 @@
             "absence": " – odsutnost zbog infekcije",
             "regimeChange": "Razred – promijenjen raspored",
             "search": "Pretraži po imenu škole",
-            "titleMenu": "Škola – slučajevi",
-            "title": "Slučajevi po školama"
+            "titleMenu": "Škole, vrtići – slučajevi",
+            "title": "Slučajevi u školama i vrtićima",
+            "regionsWithChanges": "Promijenjen način rada u školama ili vrtićima u prošlom tjednu po regijama:",
+            "showAll": "Svi",
+            "showActive": "Aktivni"
         },
         "schools": {
             "unitsRemote": "Jedinice – Udaljene",
@@ -899,8 +902,8 @@
             "kindergarten": "Dječji vrtić",
             "employeeCases": "Zaposlenici",
             "attendeeCases": "Sudionici",
-            "titleMenu": "Obrazovanje – slučajevi",
-            "title": "Slučajevi u obrazovanju"
+            "titleMenu": "Škole, vrtići – slučajevi",
+            "title": "Slučajevi u školama i vrtićima"
         },
         "vaccination": {
             "deliveredDoses": "Isporučene doze",
@@ -1140,16 +1143,28 @@
             "title": "Fitness"
         },
         "liftSchools3All": {
-            "title": "Škole 3"
+            "title": "Škole 3",
+            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama."
         },
         "liftShops2": {
-            "title": "Dućani"
+            "title": "Dućani",
+            "description": "Opuštanje: sve trgovine do 400 m², kozmetičke usluge, individualna edukacija, …<br>(za neke usluge potreban je negativan test kupca i zaposlenika)"
         },
         "bordersStrict": {
-            "title": "Granice"
+            "title": "Granice",
+            "description": "Smanjivanje iznimaka za ulazak u zemlju bez negativnog testa ili karantene."
         },
         "closeSchools3": {
-            "title": "Škole 3"
+            "title": "Škole 3",
+            "description": "Zatvoreni vrtići i osnovne škole do 3. razreda u Obalno-kraškoj regiji i Zasavlju.<br>U trgovinama je dozvoljena je prodaja 🧦 u 🩲."
+        },
+        "liftMunicipality2": {
+            "description": "Opuštanje: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2 metra.",
+            "title": "Općine"
+        },
+        "liftBorders": {
+            "description": "Kontrole na granicama, karantene i negativni testovi nisu potrebni za cijepljene i oporavljene.",
+            "title": "Granice"
         }
     },
     "pageNotFound": {
@@ -1570,6 +1585,9 @@
         "how-to-help": {
             "answer": "Obrati nam se info@sledilnik.org i ukratko opiši tko si i kako možeš pridonijeti projektu. Svaka pomoć je dobrodošla.",
             "question": "Želim pomoći. Gdje mogu početi?"
+        },
+        "ratios-chart": {
+            "question": "Što nam govori dijagram „Udio teških slučajeva”?"
         }
     },
     "donation": {
