@@ -26,6 +26,8 @@ type private TransferStatsDataPoint =
       month : int
       day : int
       phase : string
+      deceased : int option
+      deceasedToDate : int option
       tests :
         {|
             performed : {| toDate : int option; today : int option |}
@@ -67,10 +69,10 @@ type private TransferStatsDataPoint =
            other : int option |}
       vaccination :
         {|
-            administered : {| toDate : int option |} 
-            administered2nd : {| toDate : int option |} 
-            used : {| toDate : int option |} 
-            delivered : {| toDate : int option |} 
+            administered : {| toDate : int option; today : int option |}
+            administered2nd : {| toDate : int option; today : int option |}
+            used : {| toDate : int option |}
+            delivered : {| toDate : int option |}
         |}
     }
 
@@ -78,6 +80,8 @@ type private TransferStatsDataPoint =
         { DayFromStart = this.dayFromStart
           Date = System.DateTime(this.year, this.month, this.day)
           Phase = this.phase
+          Deceased = this.deceased
+          DeceasedToDate = this.deceasedToDate
           Tests =
             { Performed = { ToDate = this.tests.performed.toDate; Today = this.tests.performed.today }
               Positive = { ToDate = this.tests.positive.toDate; Today = this.tests.positive.today }
@@ -113,8 +117,8 @@ type private TransferStatsDataPoint =
           RestHomeOccupantPositiveTestsToDate = this.cases.rh.occupantConfirmedToDate
           UnclassifiedPositiveTestsToDate = this.cases.unclassified.confirmedToDate
           Vaccination =
-            { Administered = { ToDate = this.vaccination.administered.toDate; Today = None } 
-              Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = None }
+            { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today }
+              Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = this.vaccination.administered2nd.today }
               Used = { ToDate = this.vaccination.used.toDate; Today = None }
               Delivered = { ToDate = this.vaccination.delivered.toDate; Today = None } }
         }

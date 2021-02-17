@@ -25,19 +25,19 @@ type DisplayType =
     | HospitalDischarged
     | ICUAdmitted
     | Deceased
-    | Vaccinated
-    static member UseStatsData dType = [ Active; New; Vaccinated ] |> List.contains dType
+    | VacDosesAdministered
+    static member UseStatsData dType = [ Active; New; VacDosesAdministered ] |> List.contains dType
 
     static member UseLabTestsData dType =[ TestsPCR; PositivePctPCR; TestsHAT; PositivePctHAT ] |> List.contains dType
 
     static member All =
         [ New
           Active
-          // DISABLED Vaccinated 
           TestsPCR
           PositivePctPCR
           TestsHAT
           PositivePctHAT
+          VacDosesAdministered
           HospitalAdmitted
           HospitalDischarged
           ICUAdmitted
@@ -57,7 +57,7 @@ type DisplayType =
         | HospitalDischarged -> I18N.t "charts.dailyComparison.hospitalDischarged"
         | ICUAdmitted -> I18N.t "charts.dailyComparison.icuAdmitted"
         | Deceased -> I18N.t "charts.dailyComparison.deceased"
-        | Vaccinated -> I18N.t "charts.dailyComparison.vaccinated"
+        | VacDosesAdministered -> I18N.t "charts.dailyComparison.vaccineDosesAdministered"
 
     member this.GetColor =
         match this with
@@ -71,7 +71,7 @@ type DisplayType =
         | HospitalDischarged -> "#20b16d"
         | ICUAdmitted -> "#d96756"
         | Deceased -> "#6d5b80"
-        | Vaccinated -> "#189a73"
+        | VacDosesAdministered -> "#189a73"
 
 type State =
     { StatsData: StatsData
@@ -148,11 +148,18 @@ let renderChartOptions (state: State) dispatch =
         fmtStr <- fmtStr + "</table>"
         fmtStr
 
+    let add (a : int option) (b : int option) =
+        match a, b with
+        | Some aa, Some bb -> Some (aa + bb)
+        | Some _, None -> a
+        | None, Some _ -> b
+        | _ -> None
+
     let getStatsValue dp =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
-        | Vaccinated -> dp.Vaccination.Administered.Today
+        | VacDosesAdministered -> dp.Vaccination.Administered.Today |> add dp.Vaccination.Administered2nd.Today
         | _ -> None
 
     let getTestsValue (dp: LabTestsStats) =
@@ -269,7 +276,7 @@ let renderChartOptions (state: State) dispatch =
                                                   pojo
                                                       {| enabled = true
                                                          formatter = fun () -> percentageFormatter jsThis?y |}
-                                              | _ -> 
+                                              | _ ->
                                                   pojo {| enabled = true |}
                                           else
                                               pojo {|  |} |}
@@ -295,7 +302,7 @@ let renderChartOptions (state: State) dispatch =
                          match state.DisplayType with
                          | PositivePctPCR | PositivePctHAT ->
                              pojo {| formatter = fun () -> percentageFormatter jsThis?value |}
-                         | _ -> 
+                         | _ ->
                              pojo {| formatter = None |} |} |]
            series = List.toArray allSeries
            plotOptions = pojo {| series = {| groupPadding = 0.05 |} |}
@@ -306,15 +313,9 @@ let renderChartOptions (state: State) dispatch =
                       shared = true
                       useHTML = true |}
            credits =
-               pojo
-                   {| enabled = true
-                      text =
-                          sprintf
-                              "%s: %s, %s"
-                              (I18N.t "charts.common.dataSource")
-                              (I18N.t "charts.common.dsNIJZ")
-                              (I18N.t "charts.common.dsMZ")
-                      href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19" |}
+                match state.DisplayType with
+                | HospitalAdmitted | HospitalDischarged | ICUAdmitted | Deceased -> chartCreditsMZ
+                | _ -> chartCreditsNIJZ
            responsive =
                pojo
                    {| rules =

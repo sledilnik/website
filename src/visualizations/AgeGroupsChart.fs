@@ -370,16 +370,7 @@ let renderChartOptions
             {| series = pojo
                 {| stacking = "normal" |}
             |}
-        credits = pojo
-            {|
-                enabled = true
-                text =
-                    sprintf "%s: %s, %s"
-                        (I18N.chartText "common" "dataSource")
-                        (I18N.chartText "common" "dsNIJZ")
-                        (I18N.chartText "common" "dsMZ")
-                href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
-            |}
+        credits = chartCreditsNIJZ
         tooltip = pojo
             {| formatter = fun () ->
                  let sex = jsThis?series?name

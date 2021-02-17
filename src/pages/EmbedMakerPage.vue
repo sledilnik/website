@@ -108,6 +108,21 @@ export default {
           text: this.$t('charts.deceased.title'),
           dimensions: [1140, 720]
         },
+        "Vaccination": {
+          value: "Vaccination",
+          text: this.$t('charts.vaccination.title'),
+          dimensions: [1140, 720]
+        },
+        "Schools": {
+          value: "Schools",
+          text: this.$t('charts.schools.title'),
+          dimensions: [1140, 720]
+        },
+        "SchoolStatus": {
+          value: "SchoolStatus",
+          text: this.$t('charts.schoolStatus.title'),
+          dimensions: [1140, 720]
+        },
         "Sources": {
           value: "Sources",
           text: this.$t('charts.sources.title'),

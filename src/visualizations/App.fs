@@ -30,6 +30,9 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Spread" -> Some Spread
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
+            | "Vaccination" -> Some Vaccination
+            | "Schools" -> Some Schools
+            | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
@@ -368,6 +371,27 @@ let render (state: State) (_: Msg -> unit) =
                             (RegionsChartViz.Rendering.renderChart config) props
          }
 
+    let vaccination =
+          { VisualizationType = Vaccination
+            ClassName = "vaccination-chart"
+            ChartTextsGroup = "vaccination"
+            Explicit = false
+            Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
+
+    let schools =
+          { VisualizationType = Schools
+            ClassName = "schools-chart"
+            ChartTextsGroup = "schools"
+            Explicit = false
+            Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
+
+    let schoolStatus =
+          { VisualizationType = SchoolStatus
+            ClassName = "school-status-chart"
+            ChartTextsGroup = "schoolStatus"
+            Explicit = false
+            Renderer = fun _ -> lazyView SchoolStatusChart.schoolStatusChart {| query = state.Query |} }
+
     let sources =
           { VisualizationType = Sources
             ClassName = "sources-chart"
@@ -571,13 +595,16 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests;
-          patients; patientsICU; patientsCare; deceased; metricsCorrelation; excessDeaths
-          regions100k; map; municipalities; sewage;
+        [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
+          regions100k; map; municipalities; sewage
+          schools; schoolStatus;
+          patients; patientsICU; patientsCare;
           ageGroupsTimeline; weeklyDemographics; ageGroups;
+          metricsCorrelation; deceased; excessDeaths
           infections; hcCases;
-          europeMap; sources
-          cases; regionMap; regionsAbs
+          europeMap;
+          sources; cases;
+          regionMap; regionsAbs
           phaseDiagram; spread;
           hCenters
         ]
@@ -592,12 +619,11 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ sewage;
-          metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources
+        [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+          municipalities; sources; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; hcCases; sources
+          regions100k; schools; schoolStatus; hcCases; sources
           countriesCasesPer100k
           countriesActiveCasesPer100k
           countriesNewDeathsPer100k

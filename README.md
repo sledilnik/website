@@ -23,16 +23,16 @@ This software is licensed under [GNU Affero General Public License](LICENSE).
 
 ## Deployment
 
-Overview of current [deployments](https://github.com/overlordtm/website/deployments)
+Overview of current [deployments](https://github.com/sledilnik/website/deployments)
 
 Deployment is done using GitHub actions in `.github/workflows`
 
-| file | about |
-| ---- | ----- |
-| prod.yml | Deploy producition when GitHub release is created |
-| stage.yml | Deploy staging on every commit pushed to `master` |
-| pr.yml | Deploy PRs with label `deploy-peview` |
-| pr-cleanup.yml | Undeploy PRs when label is removed or PR closed |
+| file           | about                                             |
+|----------------|---------------------------------------------------|
+| prod.yml       | Deploy producition when GitHub release is created |
+| stage.yml      | Deploy staging on every commit pushed to `master` |
+| pr.yml         | Deploy PRs with label `deploy-peview`             |
+| pr-cleanup.yml | Undeploy PRs when label is removed or PR closed   |
 
 Actions consist mostly of 3 jobs, `test`, `build` and `deploy`. Each job depends on previous job (`needs` keyword in action's YAML).
 When deploy job finishes, it also sends Slack notification to #devops chanel, and adds comment on PR (if PR build)

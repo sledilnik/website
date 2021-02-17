@@ -9,7 +9,8 @@
             "hr": "Croato",
             "en": "Inglese",
             "de": "Tedesco",
-            "nb": "Bokmål"
+            "nb": "Bokmål",
+            "es": "Spagnolo"
         },
         "github": "GitHub",
         "links": "Collegamenti",
@@ -82,15 +83,15 @@
         "cm": {
             "bordersOopen": {
                 "title": "Confini aperti",
-                "description": "Distensione: confini aperti per i cittadini stranieri"
+                "description": "Allentamento: confini aperti per i cittadini stranieri"
             },
             "kafanasOpen": {
                 "title": "Bar",
-                "description": "Distensione: bar e ristoranti riaperti"
+                "description": "Allentamento: bar e ristoranti riaperti"
             },
             "lessMeasures": {
                 "title": "Blocco sollevato",
-                "description": "Distensione: spostamento libero in tutto il paese"
+                "description": "Allentamento: spostamento libero in tutto il paese"
             },
             "masksOn": {
                 "title": "Mascherine",
@@ -456,12 +457,12 @@
             "title": "Quarantena"
         },
         "liftGatherings500": {
-            "description": "Distensione: assembramenti fino a 500 persone, spettatori in eventi sportivi. <br> Valichi di frontiera aperti fuori dai posti di blocco per i cittadini di SLO, AUT, ITA e HUN",
+            "description": "Allentamento: assembramenti fino a 500 persone, spettatori in eventi sportivi. <br> Valichi di frontiera aperti fuori dai posti di blocco per i cittadini di SLO, AUT, ITA e HUN",
             "title": "Fino a 500"
         },
         "liftSchools4to5": {
             "title": "Scuole",
-            "description": "Distensione: scuola elementare 4a, 5a classe, assembramenti fino a 200 persone, tutti gli alloggi"
+            "description": "Allentamento: scuola elementare 4a, 5a classe, assembramenti fino a 200 persone, tutti gli alloggi"
         },
         "quarantine14days": {
             "description": "Quarantena obbligatoria di 14 giorni per gli stranieri che arrivino dall'estero <br> (per l'UE con eccezioni e paesi terzi)",
@@ -469,7 +470,7 @@
         },
         "liftSchools1to3": {
             "title": "Scuola materna",
-            "description": "Distensione: scuola materna ed elementare 1a-3a, 9a classe. Scuola secondaria 4 anno"
+            "description": "Allentamento: scuola materna ed elementare 1a-3a, 9a classe. Scuola secondaria 4 anno"
         },
         "retirementHomes": {
             "title": "Case di riposo",
@@ -489,15 +490,15 @@
         },
         "liftVacationHomes": {
             "title": "Seconde case",
-            "description": "Distensione: spostamento tra i comuni (case di vacanza...), <br>chiarimenti sul divieto generale di spostamento"
+            "description": "Allentamento: spostamento tra i comuni (case di vacanza...), <br>chiarimenti sul divieto generale di spostamento"
         },
         "liftPublicTransport": {
             "title": "Trasporto",
-            "description": "Distensione: trasporto pubblico, tutti i servizi sanitari e odontoiatrici"
+            "description": "Allentamento: trasporto pubblico, tutti i servizi sanitari e odontoiatrici"
         },
         "liftQuarantine": {
             "title": "Quarantena",
-            "description": "Distensione: quarantena solo per stranieri provenienti da paesi terzi"
+            "description": "Allentamento: quarantena solo per stranieri provenienti da paesi terzi"
         },
         "epidemic": {
             "title": "Epidemia",
@@ -524,7 +525,7 @@
             "description": "Quarantena obbligatoria di 7 giorni in caso di arrivo dall'estero"
         },
         "liftService": {
-            "description": "Distensione: lavori edili, servizi, sport all'aria aperta, <br>ammessi alcuni servizi di trasporto pubblico",
+            "description": "Allentamento: lavori edili, servizi, sport all'aria aperta, <br>ammessi alcuni servizi di trasporto pubblico",
             "title": "Servizi"
         },
         "nationalStudy": {
@@ -532,15 +533,15 @@
             "title": "Ricerca"
         },
         "liftMuseums": {
-            "description": "Distensione: biblioteche, gallerie, musei, intermediazione di immobili, spazzacamini",
+            "description": "Allentamento: biblioteche, gallerie, musei, intermediazione di immobili, spazzacamini",
             "title": "Musei"
         },
         "liftMunicipality": {
             "title": "Comuni",
-            "description": "Distensione: spostamento al di fuori dei confini del proprio comune"
+            "description": "Allentamento: spostamento al di fuori dei confini del proprio comune"
         },
         "liftFoodMarkets": {
-            "description": "Distensione: mercati alimentari, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
+            "description": "Allentamento: mercati alimentari, servizio sulle terrazze, negozi fino a 400m2, parrucchieri e saloni di bellezza",
             "title": "Mercati"
         },
         "firstCase": {
@@ -588,11 +589,11 @@
             "title": "Comuni"
         },
         "liftShops": {
-            "description": "Distensione: negozi di materiale tecnico, auto, mobili e articoli per bambini, pedicure, copisterie, orologerie e gioiellerie",
+            "description": "Allentamento: negozi di materiale tecnico, auto, mobili e articoli per bambini, pedicure, copisterie, orologerie e gioiellerie",
             "title": "Negozi"
         },
         "liftLibraries": {
-            "description": "Distensione: biblioteche, officine, servizi di costruzione e manutenzione, …",
+            "description": "Allentamento: biblioteche, officine, servizi di costruzione e manutenzione, …",
             "title": "Librerie"
         },
         "restaurants": {
@@ -616,27 +617,27 @@
             "title": "Piano"
         },
         "liftServices": {
-            "description": "Distensione: trasporto pubblico (servizio limitato), fiorai, autolavaggi, tintorie,<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
+            "description": "Allentamento: trasporto pubblico (servizio limitato), fiorai, autolavaggi, tintorie,<br>In 4 regioni riapertura dei negozi con vestiti e scarpe e rilassamento dei movimenti all'interno dei confini della regione con app.",
             "title": "Servizi"
         },
         "liftReligiousCeremonies": {
-            "description": "Distensione: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, libreriw, negozi specializzati.",
+            "description": "Allentamento: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, libreriw, negozi specializzati.",
             "title": "Funz.Rel."
         },
         "services2": {
-            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …).<br>Distensione di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
+            "description": "Chiusura di tutti i negozi e servizi ai consumatori (eccezioni: generi alimentari, farmacie, banche, uffici postali, …).<br>Allentamento di alcune restrizioni sugli assembramenti e spostamenti fino al 25.12. 20:00.",
             "title": "Servizi"
         },
         "liftFoodMarkets2": {
             "title": "Mercati",
-            "description": "Distensione: mercati alimentari, edicole, parrucchieri."
+            "description": "Allentamento: mercati alimentari, edicole, parrucchieri."
         },
         "planRelaxation2": {
             "description": "Il governo ha addottato il piano di allentamento delle misure in cinque fasi.",
             "title": "Piano"
         },
         "liftGym": {
-            "description": "Distensione: ricreazione individuale e guidata con restrizioni<br> (1 persona per 50m2 e 5m di distanza interpersonale).",
+            "description": "Allentamento: ricreazione individuale e guidata con restrizioni<br>(1 persona per 50m2 e 5m di distanza interpersonale).",
             "title": "Palestra"
         },
         "gym": {
@@ -644,12 +645,36 @@
             "title": "Palestra"
         },
         "liftSchools3": {
-            "description": "Distensione: scuola materna ed elementare fino al 3° grado in alcune regioni.",
+            "description": "Allentamento: scuola materna ed elementare fino al 3° grado in alcune regioni(tutte tranne Gorizia, Posavska e la Slovenia sudorientale).",
             "title": "Scuole 1-3"
         },
         "liftRegions": {
-            "description": "Distensione: i negozi per bambini, i musei, gallerie, le biblioteche e le piste da sci sono aperte in alcune regioni.",
+            "description": "Allentamento: i negozi per bambini, i musei, gallerie, le biblioteche e le piste da sci sono aperte in alcune regioni.",
             "title": "Regioni"
+        },
+        "liftMunicipality2": {
+            "description": "Allentamento: libera circolazione tra i comuni e le regioni, assembramenti fino a 10 persone, tutti i negozi.<br>Aperte le scuole elementari per tutti e le scuole superiori per l'ultimo grado, consentiti esami ed esercizi di gruppo fino a 10 persone all'università.<br>Consentiti gli sport senza contatto e gli esercizi ricreativi in gruppi fino a 10 persone con distanza di 2m.",
+            "title": "Comuni"
+        },
+        "liftBorders": {
+            "description": "Nessun punto di controllo alle frontiere, quarantena e test negativo non richiesti per i vaccinati e i guariti.",
+            "title": "Frontiere"
+        },
+        "liftSchools3All": {
+            "description": "Allentamento: scuola materna ed elementare fino alla terza elementare in tutte le regioni.",
+            "title": "Scuole 3"
+        },
+        "liftShops2": {
+            "description": "Allentamento: tutti i negozi fino a 400 m2, servizi cosmetici, educazione individuale,...<br>(test negativo dei clienti e/o dei dipendenti richiesto per alcuni servizi)",
+            "title": "Negozi"
+        },
+        "bordersStrict": {
+            "description": "Meno eccezioni per l'ingresso nel paese senza test negativo o quarantena.",
+            "title": "Frontiere"
+        },
+        "closeSchools3": {
+            "description": "Chiusa la scuola materna e la scuola elementare fino alla terza elementare nella regione Obalno kraška e Zasavska.<br>Ammesso la vendita di 🧦 in 🩲 nei negozi di alimentari.",
+            "title": "Scuole 3"
         }
     },
     "tableDict": {
@@ -788,10 +813,6 @@
             "activeCases": "Casi attivi",
             "confirmedCases": "Casi confermati",
             "testsPerformed": "Tamponi: PCR",
-            "showToDate": "Ad oggi",
-            "showToday": "Giornalieri",
-            "showActive": "Attivi",
-            "show7DaysAverage": "Media 7 giorni",
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
@@ -1015,10 +1036,16 @@
             "noteFaq": "Nota: le limitazioni dei dati presentati sono descritte in ",
             "log": "Logaritmica",
             "linear": "Lineare",
+            "absolute": "Assoluto",
+            "relative": "Relativo",
             "view": "Visualizza:",
             "yAxis": "Asse Y:",
             "xAxis": "Asse X:",
             "all": "Tutto",
+            "showActive": "Attivi",
+            "showToday": "Giornalieri",
+            "showToDate": "Ad oggi",
+            "show7DaysAverage": "Media 7 giorni",
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "resetZoom": "Ripristina lo zoom",
@@ -1039,7 +1066,8 @@
             "dsMNZ": "MNZ",
             "dsSURS": "SURS",
             "showAll": "Mostra tutto",
-            "hideAll": "Nascondi tutto"
+            "hideAll": "Nascondi tutto",
+            "dsMIZS": "MIZŠ"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1080,7 +1108,7 @@
             "hospitalAdmitted": "Ammessi in ospedale",
             "positivePctHAT": "Percentuale positivi: TAR (%)",
             "testsHAT": "Test eseguiti: TAR",
-            "vaccinated": "Persone vaccinate"
+            "vaccineDosesAdministered": "Dosi di vaccino somministrate"
         },
         "sources": {
             "totalImported": "Totale casi importati",
@@ -1122,7 +1150,7 @@
         },
         "ostanizdrav": {
             "userPublishedByCount": {
-                "description": "Il grafico mostra il numero di chiavi giornaliere pubblicate da ogni utente che ha inserito il codice di conferma del test positivo in quel giorno. Ogni punto del grafico rappresenta un gruppo di utenti che hanno pubblicato lo stesso numero di chiavi giornaliere in un determinato giorno. La linea blu scuro è il numero medio di chiavi pubblicate per utente. L'app pubblicherà un massimo di 13 chiavi per utente, ma se non è stata attiva per tutto il periodo, il numero di chiavi pubblicate sarà adeguatamente inferiore.",
+                "description": "Il grafico mostra (fino al 2021-01-21) il numero di chiavi giornaliere pubblicate da ogni utente che ha inserito il codice di conferma del test positivo in quel giorno. Ogni punto del grafico rappresenta un gruppo di utenti che hanno pubblicato lo stesso numero di chiavi giornaliere in un determinato giorno. La linea blu scuro è il numero medio di chiavi pubblicate per utente. L'app pubblicherà un massimo di 13 chiavi per utente, ma se non è stata attiva per tutto il periodo, il numero di chiavi pubblicate sarà adeguatamente inferiore. Il 2021-01-22 l'applicazione è stata aggiornata dalla versione 1.3.1 alla 1.10.1 con vettori di rischio di trasmissione variabili, rendendo la stima troppo inaffidabile.",
                 "users": "Utenti",
                 "count": "Numero di chiavi (medio) per utente in un determinato giorno",
                 "tooltip": "datum.user_count + ' utenti hanno caricato ' + datum.key_count + ' chiavi'",
@@ -1209,13 +1237,11 @@
             "title": "Casi nelle Case di cura e di riposo, settimanale",
             "otherCases": "Altre persone",
             "rhOccupantCases": "Residenti nelle case di riposo",
-            "relative": "Relativo",
             "all": "Tutti",
             "healthcareFemaleCases": "Personale sanitario - femmine",
             "healthcareMaleCases": "Personale sanitario - maschi",
             "healthcare": "Personale sanitario per genere",
-            "structure": "Struttura",
-            "absolute": "Assoluto"
+            "structure": "Struttura"
         },
         "carePatients": {
             "titleMenu": "Ospedali di cura",
@@ -1255,9 +1281,12 @@
         "excessDeaths": {
             "excess": {
                 "disclaimer": "Nota: il calcolo delle morti in eccesso combina i dati di SURS (2015-2018) e MNZ (2019-2020) che non sono completamente comparabili. Poiché i dati SURS per il 2020 sono solo provvisori e non includono i dati per il mese precedente, questo è l'unico modo per presentare i dati attuali. Stiamo lavorando per ottenere i dati MNZ per l'intero periodo. Nell'articolo trovate un approfondimento sul grafico",
-                "covidDeaths": "Decessi confermati per COVID-19",
+                "covidDeaths MZ": "Decessi confermati per COVID-19 (governo)",
+                "covidDeaths NIJZ": "Decessi confermati per COVID-19 (NIJZ)",
                 "excessDeaths": "Decessi in eccesso (rispetto al 2015-19)",
-                "title": "Eccedenza rispetto agli ultimi 5 anni"
+                "title": "Eccedenza rispetto agli ultimi 5 anni",
+                "covidDeathsNIJZ": "Morti da COVID-19 (NIJZ)",
+                "covidDeathsMZ": "Morti di COVID-19 negli ospedali e Case di riposo (Governo)"
             },
             "absolute": {
                 "title": "Confronto annuale",
@@ -1300,10 +1329,59 @@
         "icuPatients": {
             "titleMenu": "Terapia intensiva",
             "title": "Terapia intensiva"
+        },
+        "schools": {
+            "attendeesQuarantine": "Alunni - Quarantena",
+            "attendeesCases": "Alunni - Confermati",
+            "employeesCases": "Dipendenti - Confermato",
+            "institutions": "Istituti",
+            "dormitory": "Casa dello studente",
+            "music": "Scuola di musica",
+            "elementary_special": "SE programma speciale",
+            "highschool": "Scuola media",
+            "elementary": "Scuola elementare",
+            "title": "Casi nella scuola e nella scuola materna",
+            "titleMenu": "Scuola, scuola materna - casi",
+            "kindergarten": "Scuola materna",
+            "employeeCases": "Dipendenti",
+            "attendeeCases": "Alunni",
+            "unitsRemote": "Unità - A distanza",
+            "unitsQuarantine": "Unità - Quarantena"
+        },
+        "vaccination": {
+            "deliveredDoses": "Dosi consegnate",
+            "usedDoses": "Dosi utilizzate",
+            "administered2nd": "Vaccinati 💉💉",
+            "administered": "Vaccinati 💉",
+            "az": "AstraZeneca",
+            "moderna": "Moderna",
+            "pfizer": "Pfizer/BioNTech",
+            "byManufacturer": "Vaccini consegnati",
+            "used": "Vaccini utilizzati",
+            "titleMenu": "Vaccinazione",
+            "title": "Vaccinazione"
+        },
+        "schoolStatus": {
+            "date": "%A, %e. %B",
+            "noData": "Non ci sono dati sull'assenza a causa di (sospetta) infezione o cambio di modalità per questa unità scolastica.",
+            "student-hs": "Studente scuola media",
+            "pupil": "Alunno",
+            "kid": "Bambino",
+            "unit": "Classe",
+            "persons": "Persone",
+            "employee": "Dipendente",
+            "absence": " - assenza per infezione",
+            "regimeChange": "Classe - modalità cambiata",
+            "regionsWithChanges": "Cambio della modalità a scuola o nella scuola materna nella scorsa settimana per regione:",
+            "showAll": "Tutti",
+            "showActive": "Attivi",
+            "search": "Ricerca per nome della scuola",
+            "titleMenu": "Scuola e scuola materna - situazione",
+            "title": "Situazione nella scuola e nella scuola materna"
         }
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "embedMaker": {
         "description": "La visualizzazione specifica può essere adattata alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. Ulteriori <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">informazioni</a>.",
@@ -1394,6 +1472,14 @@
         "14": {
             "title": "fase<br>14",
             "description": "test rapidi antigenici"
+        },
+        "15": {
+            "description": "metodologia dei test antigeni rapidi",
+            "title": "fase<br>15"
+        },
+        "16": {
+            "description": "metodologia dei test antigeni rapidi",
+            "title": "fase<br>16"
         }
     },
     "weekday": {
@@ -1442,22 +1528,6 @@
         "tabByRegion": "Per regione",
         "tabSummary": "Sommario",
         "title": "Tabella"
-    },
-    "notice": {
-        "news002": "Casi confermati per fasce di età",
-        "newChart": "🆕 📊 Nuovo grafico:",
-        "newPage": "🆕 Nuova pagina:",
-        "newsText": "Coronavirus Mapa mondiale 🌍- casi attivi su 1M di persone",
-        "weeklyIncrease": "Incremento settimanale sulla 🇸🇮 mappa dei comuni e delle regioni",
-        "progressC19": "Progresso tipico del COVID-19. Ricovero, terapia intensiva e mortalità.",
-        "newInfographics": "🆕 📇 Nuova infografica:",
-        "tests": "5 miti sui test …",
-        "weKnowWeDoNotKnow": "Sappiamo che i dati a volte mentono. Come facciamo a sapere, che (non) lo sappiamo? 🤔📉🧐📈🤷♂️🤷♀️",
-        "checked": "🆕 Verificato:",
-        "presentation": "Come la scienza aiuta i responsabili delle decisioni - presentazione all'Assemblea Nazionale RS",
-        "bubble": "Vivere nella bolla… Come limitare i contatti e non restare soli? 💭",
-        "newMedium": "🆕 📝 Nuovo post Medium:",
-        "restrictions": "Misure e restrizioni attuali"
     },
     "weekdayShort": {
         "6": "Sa",
@@ -1564,7 +1634,7 @@
             "question": "Qual è la differenza tra SARS-CoV-2 e COVID-19?"
         },
         "why-sledilnik": {
-            "answer": "_Il nostro obiettivo è aiutare a comprendere la diffusione del virus e contribuire ad aumentare la consapevolezza, la reattività e l'efficacia delle misure implementate per frenare il virus. Potete trovare ulteriori informazioni sul progetto nella [scheda Informazioni] (/it/about) ._",
+            "answer": "Il nostro obiettivo è aiutare a comprendere la diffusione del virus e contribuire ad aumentare la consapevolezza, la reattività e l'efficacia delle misure implementate per frenare il virus. Potete trovare ulteriori informazioni sul progetto nella [scheda Informazioni] (/it/about).",
             "question": "Perché Sledilnik?"
         },
         "section": {
@@ -1634,6 +1704,13 @@
         "monthly": {
             "stripe": {
                 "donateButton": "{{amount}} al mese"
+            }
+        },
+        "onetime": {
+            "stripe": {
+                "success": {
+                    "description": " "
+                }
             }
         }
     }

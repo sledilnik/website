@@ -43,9 +43,7 @@
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester: PCR",
-            "showToday": "Daglig",
-            "showActive": "Aktiv"
+            "testsPerformed": "Tester: PCR"
         },
         "common": {
             "close": "Lukk",
@@ -61,6 +59,8 @@
             "view": "Vis:",
             "yAxis": "Y-akse:",
             "all": "Alle",
+            "showActive": "Aktiv",
+            "showToday": "Daglig",
             "resetZoomTitle": "Tilbakestill forstørrelse til 1:1",
             "resetZoom": "Tilbakestill forstørrelse",
             "zoom": "Forstørrelse",
@@ -270,11 +270,6 @@
         "confirmedToDate": "Bekreftede tilfeller",
         "tests": "Tester i dag"
     },
-    "notice": {
-        "newsText": "Koronavirus-verdenskart 🌍 - aktive tilfeller mer 1M folk",
-        "newPage": "🆕 Ny side:",
-        "newChart": "🆕 📊 Nytt diagram:"
-    },
     "timestamp": {
         "at": "klokken {{ date, %H:%M }}",
         "updated": "Oppdatert {{ date, %A, %B %e, %Y }}"
@@ -289,7 +284,8 @@
             "hr": "Kroatisk",
             "en": "Engelsk",
             "de": "Tysk",
-            "nb": "Norsk bokmål"
+            "nb": "Norsk bokmål",
+            "es": "Spansk"
         },
         "github": "GitHub",
         "links": "Lenker",
@@ -302,7 +298,8 @@
         "world": "Verden",
         "home": "Hjem",
         "menu": "Meny",
-        "goToGraph": "Gå til diagram"
+        "goToGraph": "Gå til diagram",
+        "posts": "Publikasjoner"
     },
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",
@@ -397,5 +394,9 @@
         "liftFoodMarkets": {
             "title": "Markeder"
         }
+    },
+    "week": "Uke",
+    "youtube": {
+        "titleMenu": "Animasjon"
     }
 }

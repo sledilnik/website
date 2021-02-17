@@ -74,11 +74,9 @@ let shadedWeekendPlotBands =
     let saturday = DateTime(2020, 02, 22)
     let nWeeks = (DateTime.Today-saturday).TotalDays / 7.0 |> int
     let oneDay = 86400000.0
-    let origin = jsTime saturday // - oneDay / 2.0
+    let origin = jsTime saturday
     [|
         for i in 0..nWeeks+2 do
-            //yield {| value=origin + oneDay * 7.0 * float i; label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
-            //yield {| value=origin + oneDay * 7.0 * float (i+1); label=None; color=Some "rgba(0,0,0,0.05)"; width=Some 5 |}
             yield
                 {|
                     ``from`` = origin + oneDay * 7.0 * float i
@@ -157,6 +155,12 @@ let addContainmentMeasuresFlags
         9,  1, 2021, "#FFe6e6", "gym"
         23, 1, 2021, "#ebfaeb", "liftRegions"
         26, 1, 2021, "#ebfaeb", "liftSchools3"
+        1,  2, 2021, "#FFe6e6", "closeSchools3"
+        5,  2, 2021, "#FFe6e6", "bordersStrict"
+        6,  2, 2021, "#ebfaeb", "liftShops2"
+        9,  2, 2021, "#ebfaeb", "liftSchools3All"
+        13, 2, 2021, "#ebfaeb", "liftBorders"
+        15, 2, 2021, "#ebfaeb", "liftMunicipality2"
     |]
     {|
         ``type`` = "flags"
@@ -230,7 +234,16 @@ let configureRangeSelector selectedRangeSelectionButtonIndex buttons =
                 buttons = buttons
             |}
 
-let credictsOptions =
+let chartCreditsNIJZ =
+    {|
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
+    |} |> pojo
+
+let chartCreditsNIJZMZ =
     {| enabled = true
        text = sprintf "%s: %s, %s"
             (I18N.t "charts.common.dataSource")
@@ -239,12 +252,36 @@ let credictsOptions =
        href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
     |} |> pojo
 
+let chartCreditsMZ =
+    {|
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"
+    |} |> pojo
 
-let basicChartOptions
+let chartCreditsMIZS =
+    {|
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMIZS") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport/"
+    |} |> pojo
+
+let chartCreditsMNZ =
+    {|
+        enabled = true
+        text = sprintf "%s: %s"
+                    (I18N.t "charts.common.dataSource")
+                    (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
+        href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"
+    |} |> pojo
+
+let basicChart
     (scaleType:ScaleType)
     (className:string)
-    (selectedRangeSelectionButtonIndex: int)
-    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
     =
     {|
         chart = pojo
@@ -259,26 +296,26 @@ let basicChartOptions
         xAxis = [|
             {|
                 index=0; crosshair=true; ``type``="datetime"
-                gridLineWidth=1 //; isX=true
+                gridLineWidth=1
                 gridZIndex = -1
                 tickInterval=86400000
-                //labels = pojo {| align = "center"; y = 30; reserveSpace = false |} // style = pojo {| marginBottom = "-30px" |}
-                labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |} // style = pojo {| marginBottom = "-30px" |}
-                //labels = {| rotation= -45 |}
+                labels = pojo {| align = "center"; y = 30; reserveSpace = true; distance = -20; |}
                 plotLines=[|
-                    {| value=jsTime <| DateTime(2020,3,13); label=Some {| text=I18N.t "phase.2.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,3,20); label=Some {| text=I18N.t "phase.3.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text=I18N.t "phase.4.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |}
-                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |}
+                    {| value=jsTime <| DateTime(2020,3,13); label=Some {| text=I18N.t "phase.2.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,3,20); label=Some {| text=I18N.t "phase.3.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,8);  label=Some {| text=I18N.t "phase.4.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,15); label=Some {| text=I18N.t "phase.5.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,4,21); label=Some {| text=I18N.t "phase.6.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,5,15); label=Some {| text=I18N.t "phase.7.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,9,10); label=Some {| text=I18N.t "phase.8.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,9); label=Some {| text=I18N.t "phase.9.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,17);label=Some {| text=I18N.t "phase.10.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,19);label=Some {| text=I18N.t "phase.11.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,10,26);label=Some {| text=I18N.t "phase.12.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,11,6); label=Some {| text=I18N.t "phase.13.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -347,13 +384,22 @@ let basicChartOptions
                        label=Some {| align="center"; text=I18N.t "phase.13.title" |}
                     |}
                     {| ``from``=jsTime <| DateTime(2020,12,21);
-                       ``to``=jsTime <| DateTime.Today;
+                       ``to``=jsTime <| DateTime(2021,2,1);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.14.title" |}
                     |}
+                    {| ``from``=jsTime <| DateTime(2021,2,1);
+                       ``to``=jsTime <| DateTime(2021,2,13);
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.15.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2021,2,13);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.16.title" |}
+                    |}
                     yield! shadedWeekendPlotBands
                 |]
-                // https://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats
                 dateTimeLabelFormats = pojo
                     {|
                         week = I18N.t "charts.common.shortDateFormat"
@@ -367,9 +413,8 @@ let basicChartOptions
                 ``type`` = if scaleType=Linear then "linear" else "logarithmic"
                 min = if scaleType=Linear then None else Some 0.5
                 max = None
-                //floor = if scaleType=Linear then None else Some 1.0
-                opposite = true // right side
-                title = {| text = null |} // "oseb" |}
+                opposite = true
+                title = {| text = null |}
                 showFirstLabel = None
                 tickInterval = if scaleType=Linear then None else Some 0.25
                 gridZIndex = -1
@@ -392,34 +437,11 @@ let basicChartOptions
                 verticalAlign = "top"
                 borderColor = "#ddd"
                 borderWidth = 1
-                //labelFormatter = string //fun series -> series.name
                 layout = "vertical"
-                //backgroundColor = None :> string option
             |}
 
         navigator = pojo {| enabled = false |}
         scrollbar = pojo {| enabled = false |}
-        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
-                        {|
-                            ``type`` = "month"
-                            count = 2
-                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
-                        |}
-                        {|
-                            ``type`` = "month"
-                            count = 3
-                            text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
-                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
-                        |}
-                        {|
-                            ``type`` = "all"
-                            count = 1
-                            text = I18N.t "charts.common.all"
-                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
-                        |}
-                    |]
-
         responsive = pojo
             {|
                 rules =
@@ -436,11 +458,40 @@ let basicChartOptions
             {|
                 line = pojo
                     {|
-                        //dataLabels = pojo {| enabled = true |}
                         marker = pojo {| symbol = "circle"; radius = 3 |}
-                        //enableMouseTracking = false
                     |}
             |}
 
-        credits = credictsOptions
+        credits = chartCreditsNIJZ
+    |}
+
+
+let basicChartOptions
+    (scaleType:ScaleType)
+    (className:string)
+    (selectedRangeSelectionButtonIndex: int)
+    (rangeSelectorButtonClickHandler: int -> (Event -> bool))
+    =
+    {| basicChart scaleType className with
+
+        rangeSelector = configureRangeSelector selectedRangeSelectionButtonIndex [|
+                        {|
+                            ``type`` = "month"
+                            count = 2
+                            text = I18N.tOptions "charts.common.x_months" {| count = 2 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 0 |}
+                        |}
+                        {|
+                            ``type`` = "month"
+                            count = 4
+                            text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
+                            events = pojo {| click = rangeSelectorButtonClickHandler 1 |}
+                        |}
+                        {|
+                            ``type`` = "all"
+                            count = 1
+                            text = I18N.t "charts.common.all"
+                            events = pojo {| click = rangeSelectorButtonClickHandler 2 |}
+                        |}
+                    |]
     |}

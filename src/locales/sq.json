@@ -225,10 +225,6 @@
             "activeCases": "Raste aktive",
             "confirmedCases": "Raste të konfirmuara",
             "testsPerformed": "Teste",
-            "showToDate": "Deri tani",
-            "showToday": "Në ditë",
-            "showActive": "Aktive",
-            "show7DaysAverage": "Mesatarja 7-ditore",
             "titleMenu_MNE": "Mali i Zi - gjendja",
             "titleMenu_MKD": "M. Veriut - gjendja"
         },
@@ -250,6 +246,10 @@
             "xAxis": "Boshti X:",
             "view": "Shfaq:",
             "all": "Të gjithë",
+            "showActive": "Aktive",
+            "showToday": "Në ditë",
+            "showToDate": "Deri tani",
+            "show7DaysAverage": "Mesatarja 7-ditore",
             "resetZoomTitle": "Shfaq tërë periudhën",
             "resetZoom": "Vlera fillestare e zmadhimit",
             "zoom": "Periudha",
@@ -993,7 +993,7 @@
         "in_x_days_plural": "për {{ count }} ditë"
     },
     "footer": {
-        "copyright": "© 2020 Sledilnik.org"
+        "copyright": "© 2020-2021 Sledilnik.org"
     },
     "region": {
         "kr": "Rajoni i Karniolës së Epërme (Gorenjska)",

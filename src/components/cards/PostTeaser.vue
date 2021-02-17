@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { format, parseISO } from "date-fns";
 export default {
   props: {
     post: Object,

@@ -5,6 +5,8 @@ In order to ensure a maximum accuracy and reliability of the data, Sledilnik com
 <a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
 <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
 " alt="Ministrstvo za zdravje" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="https://www.gov.si/assets/ministrstva/MIZS/Pasice-in-slike/O-ministrstvu/Logo_MIZS_slo.jpg" alt="MIZŠ" width="300"/></a>
+<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="https://www.nil.com/assets/Blog/_resampled/FillWyIxMTY4IiwiNDAwIl0/MNZ.jpg" alt="MNZ" width="300"></a>
 
 Collected and cross-checked data is available in the form of **CSV files**, **REST API** and **Google Docs sheets**. Reuse of data and visualizations is welcome and encouraged. For more information about the terms of reuse please see the [About page](/en/about).
 
@@ -15,6 +17,7 @@ You can also inspect the data directly on the [Tables page](/en/tables).
 
 - [stats.csv](https://github.com/sledilnik/data/blob/master/csv/stats.csv)
 - [stats-weekly.csv](https://github.com/sledilnik/data/blob/master/csv/stats-weekly.csv)
+- [lab-tests.csv](https://github.com/sledilnik/data/blob/master/csv/lab-tests.csv)
 - [region-cases.csv](https://github.com/sledilnik/data/blob/master/csv/region-cases.csv)
     - [region-active.csv](https://github.com/sledilnik/data/blob/master/csv/region-active.csv)
     - [region-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/region-confirmed.csv)
@@ -23,13 +26,18 @@ You can also inspect the data directly on the [Tables page](/en/tables).
     - [municipality-active.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-active.csv)
     - [municipality-confirmed.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-confirmed.csv)
     - [municipality-deceased.csv](https://github.com/sledilnik/data/blob/master/csv/municipality-deceased.csv)
+- [schools-cases.csv](https://github.com/sledilnik/data/blob/master/csv/schools-cases.csv)
+    - [schools-absences.csv](https://github.com/sledilnik/data/blob/master/csv/schools-absenses.csv)
+    - [schools-regimes.csv](https://github.com/sledilnik/data/blob/master/csv/schools-regimes.csv)
 - [vaccination.csv](https://github.com/sledilnik/data/blob/master/csv/vaccination.csv)
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
+- [sawage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
+- **Obsolete - not updated anymore**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
 - [retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/retirement_homes.csv)
-- [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
 - **Dictionaries**:
     - [dict-hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/dict-hospitals.csv)
     - [dict-retirement_homes.csv](https://github.com/sledilnik/data/blob/master/csv/dict-retirement_homes.csv)
@@ -37,6 +45,8 @@ You can also inspect the data directly on the [Tables page](/en/tables).
     - [dict-muncipality.csv](https://github.com/sledilnik/data/blob/master/csv/dict-municipality.csv)
     - [dict-age-groups.csv](https://github.com/sledilnik/data/blob/master/csv/dict-age-groups.csv)
     - [dict-risk-factors-country.csv](https://github.com/sledilnik/data/blob/master/csv/dict-risk-factors-country.csv)
+    - [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv)
+    - [dict-schools-values.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools-values.csv)
 
 
 Complete data and source code used to process the data are available on [GitHub](https://github.com/sledilnik/data/).
@@ -47,11 +57,15 @@ Complete data and source code used to process the data are available on [GitHub]
 - [stats](https://api.sledilnik.org/api/stats)
 - [stats-weekly](https://api.sledilnik.org/api/stats-weekly)
 - [lab-tests](https://api.sledilnik.org/api/lab-tests)
+- [vaccinations](https://api.sledilnik.org/api/vaccinations)
 - [regions](https://api.sledilnik.org/api/regions)
 - [municipalities](https://api.sledilnik.org/api/municipalities)
 - [patients](https://api.sledilnik.org/api/patients)
 - [hospitals](https://api.sledilnik.org/api/hospitals)
 - [health-centers](https://api.sledilnik.org/api/health-centers)
+- [schools](https://api.sledilnik.org/api/schools)
+- [school-status](https://api.sledilnik.org/api/school-status)
+- [sewage](https://api.sledilnik.org/api/sewage)
 - [monthly-deaths-slovenia](https://api.sledilnik.org/api/monthly-deaths-slovenia)
 - [daily-deaths-slovenia](https://api.sledilnik.org/api/daily-deaths-slovenia)
 - [age-daily-deaths-slovenia](https://api.sledilnik.org/api/age-daily-deaths-slovenia)
@@ -73,6 +87,7 @@ More information on how to use the API and the API source code are available on 
 
 For collection of current measures and restrictions, see page [Measures and Restritions](/sl/restrictions).
 
+<!---
 ## Data Sources
 
 To ensure the precision and reliability of our data, we collect and cross-check the data from different official sources. In case we owerlooked any relevant source, please let us know at [info@sledilnik.org](mailto:info@sledilnik.org)
@@ -131,3 +146,6 @@ To ensure the precision and reliability of our data, we collect and cross-check 
 | [Tabele o poročanju - Navodila za organizacijo dela](https://www.gov.si/novice/2020-03-17-navodila-za-organizacijo-dela-obravnavo-bolnika-in-dnevno-porocanje/)              |     |
 | [Pojasnilo UKC-LJ o hospitaliziranih pacientih](https://twitter.com/ukclj/status/1242123118161911808)                                                                        |     |
 | [Register prostorskih enot, Geodetska uprava RS](https://www.e-prostor.gov.si/zbirke-prostorskih-podatkov/nepremicnine/register-prostorskih-enot/)                           |     |
+ 
+ --->
+ 
