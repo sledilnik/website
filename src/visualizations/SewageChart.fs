@@ -202,6 +202,7 @@ let renderChartOptions (state: State) dispatch =
               showFirstLabel = false
               opposite = true
               visible = false
+              ``type`` = "logarithmic"
               crosshair = true |}
            |> pojo
            {| index = 1
@@ -216,7 +217,7 @@ let renderChartOptions (state: State) dispatch =
               opposite = false
               visible = true
               crosshair = true |}
-           |> pojo 
+           |> pojo
            {| index = 2
               title = {| text = null |}
               labels =
@@ -261,15 +262,21 @@ let renderChartOptions (state: State) dispatch =
                    {| name = chartText "concentrationGen1"
                       ``type`` = "line"
                       color = "#d45087"
-                      dashStyle = "Solid"
                       yAxis = 0
+                      lineWidth = 0
+                      marker = pojo {|
+                                      radius = 4
+                                      enabled = true |}
                       data = plantCovN1AsXYSeries state.SewageData wastewaterTreatmentPlantKey |}
 
                pojo
                    {| name = chartText "concentrationGen2"
                       ``type`` = "line"
                       color = "#a05195"
-                      dashStyle = "Solid"
+                      lineWidth = 0
+                      marker = pojo {|
+                                      radius = 4
+                                      enabled = true |}
                       yAxis = 0
                       data = plantCovN2AsXYSeries state.SewageData wastewaterTreatmentPlantKey |} |])
         |> Array.concat
@@ -363,4 +370,4 @@ let chart =
 
         render state dispatch)
 
-// TODO: convert bulleted list of municipalities to simple enumeration with commas? 
+// TODO: convert bulleted list of municipalities to simple enumeration with commas?
