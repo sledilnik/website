@@ -128,12 +128,16 @@ let renderChartOptions state schoolStatus dispatch =
             | _, _ -> chartText "kid"
 
         let absenceText (absences : SchoolAbsence array) =
-            absences
-            |> Array.mapi (fun i abs ->
-                            sprintf "- %s: %s<br>"
-                                (I18N.tt "schoolDict" abs.personClass)
-                                (I18N.tt "schoolDict" abs.reason))
-            |> String.Concat
+            sprintf "%s: %d"
+                    (chartText "persons")
+                    absences.Length
+
+            // absences
+            // |> Array.mapi (fun i abs ->
+            //                 sprintf "- %s: %s<br>"
+            //                     (I18N.tt "schoolDict" abs.personClass)
+            //                     (I18N.tt "schoolDict" abs.reason))
+            // |> String.Concat
 
         let filterByDate (fromDate: DateTime) (toDate:DateTime) =
             match state.FilterType with
