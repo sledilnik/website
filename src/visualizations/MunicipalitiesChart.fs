@@ -248,6 +248,10 @@ let renderMunicipality (state : State) (municipality : Municipality) =
         match municipality.WeeklyGrowth with
         | None -> Html.none
         | Some growth ->
+            let direction =
+                if growth > 0. then "up"
+                else if growth < 0. then "down"
+                else ""
             Html.div [
                 prop.className "weekly-growth"
                 prop.children [
@@ -256,7 +260,7 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         prop.text (I18N.t "charts.municipalities.weeklyGrowth")
                     ]
                     Html.span [
-                        prop.className "value"
+                        prop.className ("value " + direction)
                         prop.text (growth |> Utils.percentWith1DecimalSignFormatter)
                     ]
                 ]
