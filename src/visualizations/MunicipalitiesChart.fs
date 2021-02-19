@@ -12,7 +12,7 @@ open Feliz.ElmishComponents
 open Types
 
 let barMaxHeight = 65
-let showMaxBars = 30
+let showMaxBars = 28
 let collapsedMunicipalityCount = 16
 
 let excludedMunicipalities = Set.ofList [ "neznano" ]
