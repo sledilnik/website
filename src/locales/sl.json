@@ -1087,6 +1087,7 @@
             "lastCase": "Zadnji primer: ",
             "today": "danes",
             "yesterday": "včeraj",
+            "weeklyGrowth": "Tedenski prirast ",
             "doubles": "Podvojitev ",
             "deceased": "Umrli: ",
             "recovered": "Preboleli: ",
@@ -1099,6 +1100,7 @@
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
             "viewDoublingTime": "Podvojitven čas",
+            "viewWeeklyGrowth": "Tedenski prirast",
             "viewLast": "Zadnji"
         },
         "ageGroups": {

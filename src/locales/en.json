@@ -517,6 +517,7 @@
             "titleMenu": "Municipalities - cases",
             "viewLast": "Last",
             "viewDoublingTime": "Doubling time",
+            "viewWeeklyGrowth": "Weekly growth",
             "viewTotal": "All",
             "viewActive": "Active",
             "allRegions": "All regions",
@@ -528,6 +529,7 @@
             "recovered": "Recovered: ",
             "deceased": "Deaths: ",
             "doubles": "Doubles ",
+            "weeklyGrowth": "Weekly growth ",
             "yesterday": "yesterday",
             "today": "today",
             "lastCase": "Last case: "
