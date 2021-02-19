@@ -25,6 +25,7 @@ type Region =
 type TotalsForDate =
     { Date : DateTime
       ActiveCases : int option
+      ConfirmedToday : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
     }
@@ -138,12 +139,14 @@ let init (queryObj : obj) (data : MunicipalitiesData) : State * Cmd<Msg> =
         |> Seq.map (fun (municipalityKey, dp) ->
             let totals =
                 dp
+                |> Seq.pairwise
                 |> Seq.map (
-                    fun dp -> {
-                        Date = dp.Date
-                        ActiveCases = dp.ActiveCases
-                        ConfirmedToDate = dp.ConfirmedToDate
-                        DeceasedToDate = dp.DeceasedToDate } )
+                    fun (prevDay, currDay) -> {
+                        Date = currDay.Date
+                        ActiveCases = currDay.ActiveCases
+                        ConfirmedToday = currDay.ConfirmedToDate |> Utils.subtractIntOption prevDay.ConfirmedToDate
+                        ConfirmedToDate = currDay.ConfirmedToDate
+                        DeceasedToDate = currDay.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
@@ -282,12 +285,14 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
+                                let confirmedCases = dp.ConfirmedToday |> Option.defaultValue 0
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
-                                let aHeight = Math.Ceiling(float activeCases * float barMaxHeight / float maxValue)
+                                let cHeight = Math.Ceiling(float confirmedCases * float barMaxHeight / float maxValue)
+                                let aHeight = Math.Ceiling(float (activeCases-confirmedCases) * float barMaxHeight / float maxValue)
                                 let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight - int cHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
@@ -301,6 +306,9 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                         Html.div [
                                             prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
+                                        Html.div [
+                                            prop.style [ style.height (int cHeight) ]
+                                            prop.className "bar--confirmed" ]
                                     ]
                                 ]
                                 Html.div [
@@ -309,6 +317,12 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                         Html.div [
                                             prop.className "date"
                                             prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
+                                        Html.div [
+                                            if (confirmedCases > 0) then
+                                                prop.className "confirmed"
+                                                prop.children [
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.confirmed") ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(confirmedCases)) ] ] ]
                                         Html.div [
                                             if (activeCases > 0) then
                                                 prop.className "active"

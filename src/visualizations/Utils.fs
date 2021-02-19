@@ -35,6 +35,13 @@ let noneToZeroFloat (value: float option) =
     | Some x -> x
     | None -> 0.
 
+let subtractIntOption (a : int option) (b : int option) =
+    match a, b with
+    | Some aa, Some bb -> Some (bb - aa)
+    | Some aa, None -> -aa |> Some
+    | None, Some _ -> b
+    | _ -> None
+
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 

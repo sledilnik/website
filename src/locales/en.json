@@ -525,6 +525,7 @@
             "showAll": "Show All",
             "showLess": "Show Less",
             "all": "All: ",
+            "confirmed": "Confirmed: ",
             "active": "Active: ",
             "recovered": "Recovered: ",
             "deceased": "Deaths: ",
