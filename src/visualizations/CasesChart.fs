@@ -100,40 +100,29 @@ let renderChartOptions (state : State) dispatch =
     let className = "cases-chart"
     let scaleType = ScaleType.Linear
 
-    let subtract (a : int option) (b : int option) =
-        match a, b with
-        | Some aa, Some bb -> Some (bb - aa)
-        | Some aa, None -> -aa |> Some
-        | None, Some _ -> b
-        | _ -> None
-    let negative (a : int option) =
-        match a with
-        | Some aa -> -aa |> Some
-        | None -> None
-
     let renderSeries series =
 
         let getPoint sdp pdp : int option =
             match series with
-            | Recovered -> negative sdp.Cases.RecoveredToDate
-            | DeceasedInIcu -> negative pdp.total.deceased.hospital.icu.toDate
+            | Recovered -> Utils.negativeIntOption sdp.Cases.RecoveredToDate
+            | DeceasedInIcu -> Utils.negativeIntOption pdp.total.deceased.hospital.icu.toDate
             | DeceasedInHospitals ->
                     pdp.total.deceased.hospital.toDate
-                    |> subtract pdp.total.deceased.hospital.icu.toDate
-                    |> negative
+                    |> Utils.subtractIntOption pdp.total.deceased.hospital.icu.toDate
+                    |> Utils.negativeIntOption
             | DeceasedOther ->
                     sdp.StatePerTreatment.DeceasedToDate
-                    |> subtract pdp.total.deceased.hospital.toDate
-                    |> negative
+                    |> Utils.subtractIntOption pdp.total.deceased.hospital.toDate
+                    |> Utils.negativeIntOption
             | Active ->
                     sdp.Cases.Active
-                    |> subtract sdp.StatePerTreatment.InHospital
+                    |> Utils.subtractIntOption sdp.StatePerTreatment.InHospital
             | InHospital ->
                     sdp.StatePerTreatment.InHospital
-                    |> subtract sdp.StatePerTreatment.InICU
+                    |> Utils.subtractIntOption sdp.StatePerTreatment.InICU
             | Icu ->
                     sdp.StatePerTreatment.InICU
-                    |> subtract sdp.StatePerTreatment.Critical
+                    |> Utils.subtractIntOption sdp.StatePerTreatment.Critical
             | Critical -> sdp.StatePerTreatment.Critical
 
         let getPointTotal sdp pdp : int option =

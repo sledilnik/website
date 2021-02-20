@@ -42,6 +42,11 @@ let subtractIntOption (a : int option) (b : int option) =
     | None, Some _ -> b
     | _ -> None
 
+let negativeIntOption (a : int option) =
+    match a with
+    | Some aa -> -aa |> Some
+    | None -> None
+
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
