@@ -35,6 +35,13 @@ let noneToZeroFloat (value: float option) =
     | Some x -> x
     | None -> 0.
 
+let subtractIntOption (a : int option) (b : int option) =
+    match a, b with
+    | Some aa, Some bb -> Some (bb - aa)
+    | Some aa, None -> -aa |> Some
+    | None, Some _ -> b
+    | _ -> None
+
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
@@ -75,39 +82,39 @@ let formatTo3DecimalWithTrailingZero (value: float) =
 
 let percentWith0DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
 let percentWith1DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let percentWith2DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2 |})
 
 let percentWith3DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=3 |})
 
 let percentWith1DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1
            maximumFractionDigits=1; signDisplay="always" |})
 
 let percentWith2DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1
            maximumFractionDigits=2; signDisplay="always" |})
 
 let percentWith3DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=0
            maximumFractionDigits=3; signDisplay="always" |})
 

@@ -87,11 +87,6 @@ let shadedWeekendPlotBands =
     |]
 
 // if set to true:
-// - MunicipalitiesChart will showDoublesInXday
-let showDoublingTimeFeatures =
-    true
-
-// if set to true:
 // - SpreadChart will show exponential growth pages
 let showExpGrowthFeatures =
     false

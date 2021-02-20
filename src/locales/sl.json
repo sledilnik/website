@@ -1087,10 +1087,12 @@
             "lastCase": "Zadnji primer: ",
             "today": "danes",
             "yesterday": "včeraj",
+            "weeklyGrowth": "Tedenski prirast ",
             "doubles": "Podvojitev ",
             "deceased": "Umrli: ",
             "recovered": "Preboleli: ",
             "active": "Aktivni: ",
+            "confirmed": "Potrjeni: ",
             "all": "Vsi: ",
             "showLess": "Prikaži manj občin",
             "showAll": "Prikaži vse občine",
@@ -1099,6 +1101,7 @@
             "viewActive": "Aktivni",
             "viewTotal": "Vsi",
             "viewDoublingTime": "Podvojitven čas",
+            "viewWeeklyGrowth": "Tedenski prirast",
             "viewLast": "Zadnji"
         },
         "ageGroups": {
