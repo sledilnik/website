@@ -201,34 +201,21 @@ let renderTestsChart (state: State) dispatch =
 
     let positiveTests (dp: LabTestsStats) =
         match state.DisplayType with
-        | Data typ ->
-            dp.data.[typ].positive.today
-            |> Option.defaultValue 0
-        | Lab lab ->
-            dp.labs.[lab].positive.today
-            |> Option.defaultValue 0
-        | _ -> dp.total.positive.today |> Option.defaultValue 0
+        | Data typ -> dp.data.[typ].positive.today
+        | Lab lab -> dp.labs.[lab].positive.today
+        | _ -> dp.total.positive.today
 
     let negativeTests (dp: LabTestsStats) =
         match state.DisplayType with
-        | Data typ ->
-            (dp.data.[typ].performed.today
-             |> Option.defaultValue 0)
-            - (dp.data.[typ].positive.today
-               |> Option.defaultValue 0)
-        | Lab lab ->
-            (dp.labs.[lab].performed.today
-             |> Option.defaultValue 0)
-            - (dp.labs.[lab].positive.today
-               |> Option.defaultValue 0)
-        | _ ->
-            (dp.total.performed.today |> Option.defaultValue 0)
-            - (dp.total.positive.today |> Option.defaultValue 0)
+        | Data typ -> dp.data.[typ].performed.today |> Utils.subtractIntOption dp.data.[typ].positive.today
+        | Lab lab -> dp.labs.[lab].performed.today |> Utils.subtractIntOption dp.labs.[lab].positive.today
+        | _ -> dp.total.performed.today |> Utils.subtractIntOption dp.total.positive.today
 
     let percentPositive (dp: LabTestsStats) =
-        let positive = positiveTests dp
-        let performed = positiveTests dp + negativeTests dp
-        Math.Round(float positive / float performed * float 100.0, 2)
+        match positiveTests dp, negativeTests dp with
+        | Some positive, Some negative ->
+            Some (Math.Round(float positive / float (positive+negative) * float 100.0, 2))
+        | _ -> None
 
     let allYAxis =
         [| {| index = 0
@@ -268,7 +255,7 @@ let renderTestsChart (state: State) dispatch =
                    color = "#19aebd"
                    yAxis = 0
                    data =
-                       state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                       state.LabData
                        |> Seq.map (fun dp -> (dp.JsDate12h, negativeTests dp))
                        |> Seq.toArray |}
           yield
@@ -278,7 +265,7 @@ let renderTestsChart (state: State) dispatch =
                      color = "#d5c768"
                      yAxis = 0
                      data =
-                         state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                         state.LabData
                          |> Seq.map (fun dp -> (dp.JsDate12h, positiveTests dp))
                          |> Seq.toArray |}
           yield
@@ -288,7 +275,7 @@ let renderTestsChart (state: State) dispatch =
                      color = "#665191"
                      yAxis = 1
                      data =
-                         state.LabData //|> Seq.filter (fun dp -> dp.Tests.Positive.Today.IsSome )
+                         state.LabData
                          |> Seq.map (fun dp -> (dp.JsDate12h, percentPositive dp))
                          |> Seq.toArray |} ]
 
