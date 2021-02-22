@@ -2064,6 +2064,10 @@
             },
             "sms": {
                 "description": "Pošljite **SMS** sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** in prispevali boste **{{amount}}** za Znanstveno društvo Sledilnik.\nZa pripravo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo.\n\n*Prispevajo lahko uporabniki mobilnih storitev družb\nTelekom Slovenije d.d. (<a href=\"/docs/sms-donation-terms-Telekom-Slovenije.pdf\" target=\"_blank\">pravila in pogoji</a>), \nA1 Slovenija d.d. (<a href=\"/docs/sms-donation-terms-A1.pdf\" target=\"_blank\">pogoji</a>),\nTelemach d.o.o. (<a href=\"/docs/sms-donation-terms-Telemach.pdf\" target=\"_blank\">pogoji</a>) in\nT-2 d.o.o. (<a href=\"/docs/sms-donation-terms-T2.pdf\" target=\"_blank\">pogoji</a>),\nv sodelovanju s katerimi je storitev omogočena.*"
+            },
+            "mbills": {
+                "description": "Donirate lahko tudi prek mBills.",
+                "detailsButton": "Podrobnosti"
             }
         },
         "monthly": {
