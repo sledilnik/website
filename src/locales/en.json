@@ -772,12 +772,12 @@
             "date": "%A, %e. %B"
         },
         "sewage": {
-            "title": "Virus in Sewage \uD83D\uDCA9",
-            "titleMenu": "Sewage \uD83D\uDCA9",
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage",
             "activeCases": "Active Cases",
             "newCases7dAve": "New Cases (7-day average)",
-            "concentrationGen1": "SARS-CoV-2 Gene 1 Concentration",
-            "concentrationGen2": "SARS-CoV-2 Gene 2 Concentration",
+            "concentrationGen1": "Ratio of SARS-CoV-2 Gene N1 and PMMoV",
+            "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
             "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
         "sources": {
