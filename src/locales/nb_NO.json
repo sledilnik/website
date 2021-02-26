@@ -52,7 +52,9 @@
             "icuAdmitted": "Innlagt på intensivavdeling",
             "deceased": "Dødsfall",
             "hospitalDischarged": "Utskrevet fra sykehus",
-            "hospitalAdmitted": "Innlagt på sykehus"
+            "hospitalAdmitted": "Innlagt på sykehus",
+            "positivePctHAT": "Andell positive: hurtigtester (%s)",
+            "testsHAT": "Tester utført: Hurtigtester"
         },
         "metricsComparison": {
             "deceased": "Dødsfall",
@@ -67,7 +69,13 @@
             "hospitalDischarged": "Utskrevet fra sykehus",
             "vaccinationAdministered2nd": "Vaksinert 💉💉",
             "vaccinationAdministered": "Vaksinert 💉",
-            "title": "COVID-19-situasjonen i landet"
+            "title": "COVID-19-situasjonen i landet",
+            "titleMenu_MNE": "Montenegro - tilstand",
+            "titleMenu_MKD": "Nord-Makedonia - tilstand",
+            "titleMenu_SVN": "Slovenia - tilstand",
+            "title_MNE": "COVID-19-situasjonen i Montenegro",
+            "title_SVN": "COVID-19-situasjonen i Slovenia",
+            "title_MKD": "COVID-19-situasjonen i Nord-Makedonia"
         },
         "common": {
             "close": "Lukk",
@@ -99,7 +107,14 @@
             "dsOWD_MZ": "Vår verden gjennom data og helseministeri",
             "dsOWD_NIJZ": "Vår verden gjennom data og NIJZ",
             "dsOWD": "Vår verden gjennom data",
-            "dataDate": "Data til: {{ date, %a., %e. %b. }}"
+            "dataDate": "Data til: {{ date, %a., %e. %b. }}",
+            "shortDateFormat": "%e. %b",
+            "relative": "Relativ",
+            "absolute": "Absolutt",
+            "dsMNZ": "MNZ",
+            "dsMIZS": "MIZŠ",
+            "dsSURS": "SURS",
+            "dsNIJZ": "NIJZ"
         },
         "ostanizdrav": {
             "publishedByRisk": {
@@ -290,7 +305,17 @@
             "showToDate": "Til dags dato",
             "showToday": "Daglig",
             "titleMenu": "Dødsfall",
-            "title": "Dødsfall"
+            "title": "Dødsfall",
+            "deceased-rest": "Utenfor sykehus",
+            "deceased-care": "Pleiehjem",
+            "deceased-acute": "Akuttmedisinsk enhet",
+            "deceased-icu": "Intensivavdeling",
+            "deceased-other": "Annet",
+            "deceasedByAge": "Alder",
+            "deceasedByType": "Aldershjem",
+            "deceasedHospitals": "Dødssted",
+            "showPercent": "Forholdsvis",
+            "showNormal": "Absolutt"
         }
     },
     "phase": {
@@ -336,16 +361,24 @@
             "title": "fase<br>1"
         },
         "15": {
-            "title": "fase<br>15"
+            "title": "fase<br>15",
+            "description": "hurtigtestmetode"
         },
         "14": {
-            "title": "fase<br>14"
+            "title": "fase<br>14",
+            "description": "hurtigtester"
         },
         "13": {
-            "title": "fase<br>13"
+            "title": "fase<br>13",
+            "description": "ny testmetode"
         },
         "12": {
-            "title": "fase<br>12"
+            "title": "fase<br>12",
+            "description": "ny testmetode"
+        },
+        "16": {
+            "description": "hurtigtestmetode",
+            "title": "fase<br>16"
         }
     },
     "weekdayShort": {
@@ -409,7 +442,8 @@
         "tabByAgeMale": "Etter alder - Mannlig",
         "tabByRegion": "Etter sted",
         "tabSummary": "Sammendrag",
-        "title": "Tabell"
+        "title": "Tabell",
+        "day": "{{ date, %e. %m. }}"
     },
     "infocard": {
         "lastUpdated": "{{ date, %a, %b %e }}",
@@ -420,7 +454,9 @@
         "confirmedToDate": "Bekreftede tilfeller",
         "tests": "Tester i dag",
         "newCases7dInfo": "gjennomsnitt siste 7 dager",
-        "newCases7d": "Nye tilfeller"
+        "newCases7d": "Nye tilfeller",
+        "testsHAT": "Tester i dag: hurtigtest",
+        "vaccinationSummary": "Vaksinerte mennesker"
     },
     "timestamp": {
         "at": "klokken {{ date, %H:%M }}",
@@ -552,5 +588,9 @@
     "youtube": {
         "titleMenu": "Animasjon",
         "title": "Animasjon av COVID-19-spredning"
+    },
+    "posts": {
+        "readingTime": "min å lese",
+        "timestamp": "{{ date, %e. %B %Y }}"
     }
 }
