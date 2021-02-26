@@ -93,7 +93,9 @@ main {
   flex-direction: column;
 }
 
-.visualization-chart {
+.visualization-chart,
+.hp-card-holder,
+.post__teaser ~ .post__teaser {
   -webkit-filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%);
   filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%);
 
