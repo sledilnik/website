@@ -662,6 +662,10 @@
         "liftMunicipality2": {
             "title": "Občine",
             "description": "Sproščanje: prost prehod med občinami ali regijami, zbiranje do 10 ljudi, odpro se vse trgovine.<br>Odprejo se osnovne šole za vse in srednje šole za zaključne letnike, na univerzah dovoljeni izpiti in vaje do 10 ljudi.<br>Dovoljena je brezkontaktna športno-rekreativna vadba v skupini do 10 ob upoštevanju 2m razdalje."
+        },
+        "okRed": {
+            "title": "Obalno-k.",
+            "description": "Obalno-kraška regija: prepoved zbiranja, zaprtje nekaterih trgovin, prepoved prehajanja v in iz regije."
         }
     },
     "phase": {

@@ -1119,6 +1119,10 @@
         "liftMunicipality2": {
             "title": "Municipalities",
             "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
+        },
+        "okRed": {
+            "title": "Coastal–K",
+            "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
         }
     },
     "days": {
