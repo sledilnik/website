@@ -606,7 +606,7 @@ let render (state: State) (_: Msg -> unit) =
           sources; cases;
           regionMap; regionsAbs
           phaseDiagram; spread;
-          hCenters
+          //hCenters
         ]
 
     let worldVisualizations =
