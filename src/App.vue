@@ -91,5 +91,25 @@ main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  // upside-down
+  -ms-transform:rotate(180deg);
+  -webkit-transform:rotate(180deg);
+  transform: rotate(180deg);
+
+  -webkit-filter: grayscale(100%) blur(1px) brightness(80%) contrast(150%);
+  filter: grayscale(100%) blur(1px) brightness(80%) contrast(150%);
+
+  // ignore all mouse events (click, hover...)
+  pointer-events: none;
+
+  // prevent text selection
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+     -moz-user-select: none; /* Old versions of Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+          user-select: none; /* Non-prefixed version, currently
+                                supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
