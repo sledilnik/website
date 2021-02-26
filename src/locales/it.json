@@ -657,15 +657,15 @@
             "title": "Comuni"
         },
         "liftBorders": {
-            "description": "Nessun punto di controllo alle frontiere, quarantena e test negativo non richiesti per i vaccinati e i guariti.",
+            "description": "Nessun punto di controllo alle frontiere, quarantena e test negativo non richiesti anche per i vaccinati e i guariti.",
             "title": "Frontiere"
         },
         "liftSchools3All": {
             "description": "Allentamento: scuola materna ed elementare fino alla terza elementare in tutte le regioni.",
-            "title": "Scuole 3"
+            "title": "Scuole 1-3"
         },
         "liftShops2": {
-            "description": "Allentamento: tutti i negozi fino a 400 m2, servizi cosmetici, educazione individuale,...<br>(test negativo dei clienti e/o dei dipendenti richiesto per alcuni servizi)",
+            "description": "Allentamento: tutti i negozi fino a 400 m2, servizi cosmetici, educazione individuale, ...<br>(test negativo dei clienti e/o dei dipendenti richiesto per alcuni servizi)",
             "title": "Negozi"
         },
         "bordersStrict": {
@@ -673,8 +673,8 @@
             "title": "Frontiere"
         },
         "closeSchools3": {
-            "description": "Chiusa la scuola materna e la scuola elementare fino alla terza elementare nella regione Obalno kraška e Zasavska.<br>Ammesso la vendita di 🧦 in 🩲 nei negozi di alimentari.",
-            "title": "Scuole 3"
+            "description": "Chiusa la scuola materna e la scuola elementare fino alla terza elementare nella regione Obalno kraška e Zasavska.<br>Ammesso la vendita di 🧦 e 🩲 nei negozi di alimentari.",
+            "title": "Scuole 1-3"
         }
     },
     "tableDict": {
@@ -947,7 +947,10 @@
             "viewDoublingTime": "Tempo di raddoppio",
             "viewLast": "Ultimo",
             "title": "Casi per comune",
-            "titleMenu": "Comuni - casi"
+            "titleMenu": "Comuni - casi",
+            "weeklyGrowth": "Incremento settimanale ",
+            "confirmed": "Confermati: ",
+            "viewWeeklyGrowth": "Incremento settimanale"
         },
         "europe": {
             "noData": "Nessun dato",

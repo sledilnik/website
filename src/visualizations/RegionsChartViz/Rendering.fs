@@ -207,24 +207,28 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                            match state.ChartConfig.RelativeTo, state.MetricType with
                            | Pop100k, NewCases7Days -> [|
                                {| value=redThreshold
+                                  label= {| text = (sprintf "%0.1f" redThreshold); align="left" |}
                                   color="red"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=orangeThreshold
+                                  label={| text = (sprintf "%0.1f" orangeThreshold); align="left" |}
                                   color="orange"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=yellowThreshold
+                                  label={| text = (sprintf "%0.1f" yellowThreshold); align="left" |}
                                   color="#d8d800"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=greenThreshold
+                                  label={| text = (sprintf "%0.1f" greenThreshold); align="left" |}
                                   color="green"
                                   width=1
                                   dashStyle="longdashdot"

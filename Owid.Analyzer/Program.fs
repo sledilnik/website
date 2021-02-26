@@ -49,8 +49,10 @@ let parseInt (value: string) =
             printf "invalid value: %s\n" value
             raise ex
 
+
 let parseCsvLine (line: string) : Row =
     line.Split(",")
+
 
 let getLatestCountryData (countryData: (string * Row[])) =
     let (iso_code, countryRows) = countryData
@@ -78,7 +80,7 @@ let getLatestCountryData (countryData: (string * Row[])) =
         let lastRow = countryRows.[countryRows.Length - 1]
         let location = lastRow.[2]
         let continent = lastRow.[1]
-        let population = lastRow.[26] |> parseFloat
+        let population = lastRow.[44] |> parseFloat
 
         { IsoCode = iso_code
           CountryName = location
@@ -98,8 +100,7 @@ let dumpCsvPropertyNames (csvLines: string[]) =
     |> Array.iteri (fun i property -> printf "%d %s\n" i property)
 
 
-[<EntryPoint>]
-let main _ =
+let fetchCountriesLatestData() =
     let csvUrl =
         "https://github.com/owid/covid-19-data/raw/master/public/data/" +
         "owid-covid-data.csv"
@@ -127,11 +128,63 @@ let main _ =
         |> Array.map getLatestCountryData
         |> Array.choose id
 
+    countriesLatestData
+
+
+let renderCsvFile countriesLatestData =
     printf "%s\n" (LatestCountryData.CsvHeader())
     countriesLatestData
     |> Array.iter
         (fun latestData ->
             printf "%s\n" (latestData.ToString())
             ignore())
-
     0
+
+
+let renderHighestCountriesCodes label orderBy
+        (countriesLatestData: LatestCountryData[]) =
+    printfn label
+
+    let highestIsoCodes =
+        countriesLatestData
+        |> Array.sortByDescending orderBy
+        // filter out smaller countries, but include Montenegro
+        |> Array.filter (fun country -> country.Population > 600000.)
+        |> Array.map (fun country -> country.IsoCode)
+        |> Array.filter (fun isoCode -> isoCode <> "SVN")
+        |> Array.take 10
+        |> Array.map (fun isoCode -> "\"" + isoCode + "\"")
+
+    let line = "[| " + String.Join("; ", highestIsoCodes) + " |]"
+    printfn "%s" line
+    printfn ""
+
+    countriesLatestData
+
+[<EntryPoint>]
+let main args =
+    let countriesLatestData = fetchCountriesLatestData()
+
+    if args |> Array.length = 0 then
+        countriesLatestData |> renderCsvFile
+    else
+        match args.[0] with
+        | "highest" ->
+            countriesLatestData
+            |> renderHighestCountriesCodes
+                   "By new cases / 100k:"
+                   (fun country -> country.NewCasesPer100k)
+            |> renderHighestCountriesCodes
+                   "By active cases / 100k:"
+                   (fun country -> country.ActiveCasesPer100k)
+            |> renderHighestCountriesCodes
+                   "By new deaths / 100k:"
+                   (fun country -> country.NewDeathsPer100k)
+            |> renderHighestCountriesCodes
+                   "By total deaths / 100k:"
+                   (fun country -> country.TotalDeathsPer100k)
+            |> ignore
+            0
+        | _ ->
+            printfn "Unknown command."
+            1
