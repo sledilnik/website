@@ -91,14 +91,11 @@ main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
 
-  // upside-down
-  -ms-transform:rotate(180deg);
-  -webkit-transform:rotate(180deg);
-  transform: rotate(180deg);
-
-  -webkit-filter: grayscale(100%) blur(1px) brightness(80%) contrast(150%);
-  filter: grayscale(100%) blur(1px) brightness(80%) contrast(150%);
+.visualization-chart {
+  -webkit-filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%);
+  filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%);
 
   // ignore all mouse events (click, hover...)
   pointer-events: none;
