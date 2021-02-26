@@ -595,12 +595,12 @@ module Dictionaries =
     let wastewaterTreatmentPlants =
         [
             "ljubljana", "OČN Ljubljana", "#457844", [|"lj", "ljubljana"|]
-            "domzale", "Domžale - Kamnik", "#10829a", [|"lj", "domžale"; "lj", "kamnik"; "lj", "mengeš"; "lj", "trzin"; "lj", "komenda"; "kr", "cerklje_na_gorenjskem"|]
-            "celje", "Celje", "#665191", [|"ce", "celje"; "ce", "štore"; "ce", "žalec"|] // Žalec: only Levec, part of Žalec
+            "domzale", "ČN Domžale - Kamnik", "#10829a", [|"lj", "domžale"; "lj", "kamnik"; "lj", "mengeš"; "lj", "trzin"; "lj", "komenda"; "kr", "cerklje_na_gorenjskem"|]
+            "celje", "ČN Celje", "#665191", [|"ce", "celje"; "ce", "štore"; "ce", "žalec"|] // Žalec: only Levec, part of Žalec
             "velenje", "OČN Šaleške doline", "#777c29", [|"ce", "velenje"; "ce", "šoštanj"|]
-            "koper", "Koper", "#70a471", [|"kp", "koper"; "kp", "izola"; "kp", "ankaran"|]
-            "kranj", "Kranj", "#ffa600", [|"kr", "kranj"; "kr", "naklo"; "kr", "šenčur"|]
-            "maribor", "Maribor", "#f95d6a", [|"mb", "maribor"; "mb", "miklavž_na_dravskem_polju"; "mb", "duplek"; "mb", "hoče-slivnica"|]]
+            "koper", "ČN Koper", "#70a471", [|"kp", "koper"; "kp", "izola"; "kp", "ankaran"|]
+            "kranj", "ČN Kranj", "#ffa600", [|"kr", "kranj"; "kr", "naklo"; "kr", "šenčur"|]
+            "maribor", "ČN Maribor", "#f95d6a", [|"mb", "maribor"; "mb", "miklavž_na_dravskem_polju"; "mb", "duplek"; "mb", "hoče-slivnica"|]]
         |> List.map(fun (key, name, color, municipalities_) -> key, {
             Key = key
             Name = name
