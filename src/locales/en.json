@@ -195,6 +195,7 @@
         "common": {
             "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
+            "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
@@ -769,6 +770,15 @@
             "student-hs": "Student",
             "noData": "There is no data about absence due to (suspected) infection or changed regime for this school unit.",
             "date": "%A, %e. %B"
+        },
+        "sewage": {
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage",
+            "activeCases": "Active Cases",
+            "newCases7dAve": "New Cases (7-day average)",
+            "concentrationGen1": "Ratio of SARS-CoV-2 Gene N1 and PMMoV",
+            "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
+            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
         },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",

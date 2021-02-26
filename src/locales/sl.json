@@ -733,6 +733,7 @@
         "common": {
             "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
             "dataSource": "vir podatkov",
+            "dsNIB": "Nacionalni inštitut za biologijo",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsSURS": "SURS",
@@ -1301,6 +1302,15 @@
             "student-hs": "Dijak",
             "noData": "Za to enoto ni podatkov o odsotnostih zaradi (suma) okužb ali o spremenjenem režimu.",
             "date": "%A, %e. %B"
+        },
+        "sewage": {
+            "title": "Virus v odpadnih vodah",
+            "titleMenu": "Odpadne vode",
+            "activeCases": "Aktivni primeri",
+            "newCases7dAve": "Novi primeri (7-dnevno povprečje)",
+            "concentrationGen1": "Razmerje SARS-CoV-2 gen N1 in PMMoV",
+            "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
+            "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz občin:"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
@@ -1918,6 +1928,10 @@
         "school-status-chart": {
             "question": "Kaj kaže graf \"Stanje po šolah in vrtcih\"?",
             "answer": "[Graf](/sl/stats#school-status-chart) omogoča časovni prikaz odsotnosti in drugih ukrepov za posamezno šolo, vrtec ali drugo vzgojno-izobraževalno ustanovo.\n\nV osnovnem pogledu je po regijah prikazano število ustanov, ki so v zadnjih sedmih dneh imele kakršnokoli spremembo (novo odsotnost učenca ali zaposlenega zaradi suma na okužbo ali okužbe, spremenjen režim šolanja za oddelek). Tako dobite hiter pregled nad aktualnim dogajanjem.\n\nNatančnejši vpogled v stanje v posameznih ustanovah lahko dobite z izbiro regije in potem iskane ustanove, lahko pa določeno ustanovo preprosto poiščete s pomočjo iskalnika zgoraj levo. Na osnovni pogled se vrnete tako, da zaprete trenutni prikaz s klikom na križec poleg imena ustanove na vrhu grafa.\n\nČe za izbrano ustanovo obstajajo podatki, se v zgornjem delu grafa prikažejo spremenjeni režimi za zadevne oddelke (karantena, šola na daljavo), na sredini odsotnosti učencev in v spodnjem delu grafa odsotnosti zaposlenih zaradi okužbe ali suma na okužbo.\n\nDolžina vsakega pravokotnika ustreza datumom trajanja posameznega ukrepa, v oklepaju je zapisano število oseb, na katerega se nanaša. Ob prehodu z miško čez pravokotnik se pojavi oblaček z dodatnimi informacijami (vrsta ukrepa, vzrok za ukrep in osebe, na katere se nanaša).\n\nPrivzeti prikaz (*Aktivni*) vključuje podatke za zadnjih 28 dni; če želite videti celotno zgodovino za posamezno ustanovo, kliknite zgoraj desno na izbiro *Vsi*."
+        },
+        "sewage-chart": {
+            "question": "Kaj kaže graf \"Virus v odpadnih vodah\"?",
+            "answer": "[Graf](/sl/stats#sewage-chart) prikazuje prisotnost koronavirusa v odpadnih vodah na posameznih čistilnih napravah. Meritve redno izvaja Nacionalni inštitut za biologijo na 7 čistilnih napravah.\n\nGre za meritev količine virusne RNA v 24-urnih vzorcih odpadnih vodah, za dva različna virusna strukturna gena, N1 in N2, pri čemer uporabljamo test razvit pri CDC. Vzorec se dostavi v laboratorije NIB, kjer se ga najprej skoncentrira, potem pa v njem izmeri koncentracijo koronavirusa in koncentracijo virusa PMMoV, ki se ga uporablja kot fekalni indikator v odpadnih vodah. Vrednosti predstavljene na grafu so razmerja med koncentracijami SARS-CoV-2 in PMMoV v vzorcih.\n\nPrikaz je po posamezni čistilni napravi kjer so poleg koncentracij N1 in N2 za primerjavo prikazano tudi število novih in aktivnih primerov v občinah, ki so priklopljene na posamezno čistilno napravo. Tako lahko iz sprememb koncentracije gena N1 in N2 vidim spremembe v trendu."
         },
         "sources-chart": {
             "question": "Kaj kaže graf \"Karantena in viri okužb\"?",

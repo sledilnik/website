@@ -33,6 +33,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Vaccination" -> Some Vaccination
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
+            | "Sewage" -> Some Sewage
             | "Sources" -> Some Sources
             | "HcCases" -> Some HcCases
             | "Municipalities" -> Some Municipalities
@@ -404,6 +405,20 @@ let render (state: State) (_: Msg -> unit) =
                     | Failure error -> Utils.renderErrorLoading error
                     | Success data -> lazyView SourcesChart.sourcesChart {| data = data |} }
 
+    let sewage =
+          { VisualizationType = Sewage
+            ClassName = "sewage-chart"
+            ChartTextsGroup = "sewage"
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.MunicipalitiesData with
+                    | NotAsked -> Html.none
+                    | Loading -> Utils.renderLoading
+                    | Failure error -> Utils.renderErrorLoading error
+                    | Success data ->
+                        lazyView SewageChart.chart {| data = data |} }
+
     let hcCases =
           { VisualizationType = HcCases
             ClassName = "hc-cases-chart"
@@ -581,7 +596,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let localVisualizations =
         [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
-          regions100k; map; municipalities
+          regions100k; map; municipalities; sewage
           schools; schoolStatus;
           patients; patientsICU; patientsCare;
           ageGroupsTimeline; weeklyDemographics; ageGroups;
@@ -604,7 +619,7 @@ let render (state: State) (_: Msg -> unit) =
         ]
 
     let allVisualizations =
-        [ metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
+        [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
           municipalities; sources; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
