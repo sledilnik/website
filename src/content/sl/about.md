@@ -105,6 +105,7 @@ Sodelavci projekta:
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - tekstopisje, viri
 -   [Nina Rolih](https://www.facebook.com/tanoranina) - vsebine, grafično oblikovanje
 -   [Nina Ružić Gorenjec](https://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
+-   [Nuša Jazbinšek]() - podatkovni model in validacija
 -   [Peter Keše](https://twitter.com/pkese/) - vizualizacije
 -   [Pika Založnik]() - vsebine, viri
 -   [Roman Luštrik](https://www.linkedin.com/in/roman-lu%C5%A1trik-5a6586ab) - skriptanje, statistika
