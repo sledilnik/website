@@ -443,7 +443,7 @@
         "tabByRegion": "Etter sted",
         "tabSummary": "Sammendrag",
         "title": "Tabell",
-        "day": "{{ date, %e. %m. }}"
+        "day": "{{ date, %e. %m. %Y }}"
     },
     "infocard": {
         "lastUpdated": "{{ date, %a, %b %e }}",

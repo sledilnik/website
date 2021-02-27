@@ -1350,7 +1350,7 @@
         "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
-        "day": "{{ date, %d. %m. }}",
+        "day": "{{ date, %d. %m. %Y }}",
         "tabByRegion": "Po regijama",
         "title": "Tablica",
         "tabByAgeFemale": "Po dobi – žene",
