@@ -147,7 +147,7 @@
         "title": "Preuzimanje dijagrama u svoju web stranicu"
     },
     "tables": {
-        "day": "{{ date, %m/%e/%y }}",
+        "day": "{{ date, %m/%e/%Y }}",
         "sourceLink": "GDocs spreadsheet, CSV format or REST API",
         "source": "Izvori podataka u drugim formatima",
         "tabByAgeFemale": "Po starosti - Zene",

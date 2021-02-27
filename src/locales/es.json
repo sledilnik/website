@@ -304,7 +304,7 @@
         "title": "Incluya este gráfico en su página web"
     },
     "tables": {
-        "day": "{{ date, %m/%d/%y }}",
+        "day": "{{ date, %m/%d/%Y }}",
         "sourceLink": "Planilla GDocs, formato CSV o API REST",
         "tabByAgeFemale": "Por edad (mujeres)",
         "tabByAgeMale": "Por edad (hombres)",
