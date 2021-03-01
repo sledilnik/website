@@ -1314,7 +1314,7 @@
             "newCases7dAve": "Novi primeri (7-dnevno povprečje)",
             "concentrationGen1": "Razmerje SARS-CoV-2 gen N1 in PMMoV",
             "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
-            "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz občin:"
+            "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
