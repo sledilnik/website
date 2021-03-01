@@ -675,6 +675,10 @@
         "closeSchools3": {
             "description": "Chiusa la scuola materna e la scuola elementare fino alla terza elementare nella regione Obalno kraška e Zasavska.<br>Ammesso la vendita di 🧦 e 🩲 nei negozi di alimentari.",
             "title": "Scuole 1-3"
+        },
+        "okRed": {
+            "description": "Regione Obalno-kraška: vietato l'assembramento, chiusura di alcuni negozi, mobilità limitata da/per altre regioni.",
+            "title": "Obalno-k."
         }
     },
     "tableDict": {
@@ -1070,7 +1074,8 @@
             "dsSURS": "SURS",
             "showAll": "Mostra tutto",
             "hideAll": "Nascondi tutto",
-            "dsMIZS": "MIZŠ"
+            "dsMIZS": "MIZŠ",
+            "dsNIB": "Istituto Nazionale di Biologia"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1381,10 +1386,19 @@
             "search": "Ricerca per nome della scuola",
             "titleMenu": "Scuola e scuola materna - situazione",
             "title": "Situazione nella scuola e nella scuola materna"
+        },
+        "sewage": {
+            "muncipalitiesIncluded": "I casi attivi e confermati includono i dati dei comuni:",
+            "concentrationGen2": "Rapporto tra SARS-CoV-2 Gene N2 e PMMoV",
+            "concentrationGen1": "Rapporto tra SARS-CoV-2 Gene N1 e PMMoV",
+            "newCases7dAve": "Nuovi casi (media di 7 giorni)",
+            "activeCases": "Casi attivi",
+            "titleMenu": "Acque di scarico",
+            "title": "Virus nelle acque di scarico"
         }
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
     },
     "embedMaker": {
         "description": "La visualizzazione specifica può essere adattata alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. Ulteriori <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">informazioni</a>.",
