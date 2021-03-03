@@ -66,7 +66,7 @@
         "tabByAgeFemale": "By age - Female",
         "source": "Data source in other formats",
         "sourceLink": "GDocs spreadsheet, CSV format or REST API",
-        "day": "{{ date, %m/%d }}"
+        "day": "{{ date, %m/%d/%y }}"
     },
     "embedMaker": {
         "title": "Embed a chart into your web page",
@@ -195,6 +195,7 @@
         "common": {
             "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
+            "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
@@ -770,6 +771,15 @@
             "noData": "There is no data about absence due to (suspected) infection or changed regime for this school unit.",
             "date": "%A, %e. %B"
         },
+        "sewage": {
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage",
+            "activeCases": "Active Cases",
+            "newCases7dAve": "New Cases (7-day average)",
+            "concentrationGen1": "Ratio of SARS-CoV-2 Gene N1 and PMMoV",
+            "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
+            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
+        },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
@@ -820,7 +830,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1109,6 +1119,10 @@
         "liftMunicipality2": {
             "title": "Municipalities",
             "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
+        },
+        "okRed": {
+            "title": "Coastal–K",
+            "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
         }
     },
     "days": {

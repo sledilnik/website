@@ -1387,7 +1387,7 @@
         "tabByAgeMale": "Nach Alter – Männer",
         "tabByRegion": "Nach Regionen",
         "source": "Datenquelle in anderen Formaten",
-        "day": "{{ date, %e. %m. }}"
+        "day": "{{ date, %e. %m. %Y }}"
     },
     "weekday": {
         "5": "Freitag",

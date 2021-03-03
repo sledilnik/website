@@ -291,7 +291,10 @@
             "viewTotal": "Sve",
             "viewDoublingTime": "Vrijeme udvostručenja",
             "viewLast": "Zadnje",
-            "titleMenu": "Općine – slučajevi"
+            "titleMenu": "Općine – slučajevi",
+            "weeklyGrowth": "Tjedni prirast ",
+            "confirmed": "Potvrđeni: ",
+            "viewWeeklyGrowth": "Tjedni prirast"
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
@@ -357,7 +360,8 @@
             "dsSURS": "SURS",
             "showAll": "Prikaži sve",
             "hideAll": "Sakrij sve",
-            "dsMIZS": "MIZŠ"
+            "dsMIZS": "MIZŠ",
+            "dsNIB": "Nacionalni biološki institut"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -917,6 +921,11 @@
             "used": "Korišteno cijepivo",
             "titleMenu": "Cijepivo",
             "title": "Cijepivo"
+        },
+        "sewage": {
+            "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
+            "newCases7dAve": "Novi slučajevi (sedmodnevni prosjek)",
+            "activeCases": "Aktivni slučajevi"
         }
     },
     "shortMonth": {
@@ -1156,7 +1165,7 @@
         },
         "closeSchools3": {
             "title": "Škole 3",
-            "description": "Zatvoreni vrtići i osnovne škole do 3. razreda u Obalno-kraškoj regiji i Zasavlju.<br>U trgovinama je dozvoljena je prodaja 🧦 u 🩲."
+            "description": "Zatvoreni vrtići i osnovne škole do 3. razreda u Obalno-kraškoj regiji i Zasavlju.<br>U trgovinama je dozvoljena je prodaja 🧦 i 🩲."
         },
         "liftMunicipality2": {
             "description": "Opuštanje: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2 metra.",
@@ -1350,7 +1359,7 @@
         "tabByAgeMale": "Po dobi – muškarci",
         "source": "Izvor podataka u drugim formatima",
         "sourceLink": "GDocs proračunska tablica, CSV format ili REST API",
-        "day": "{{ date, %d. %m. }}",
+        "day": "{{ date, %d. %m. %Y }}",
         "tabByRegion": "Po regijama",
         "title": "Tablica",
         "tabByAgeFemale": "Po dobi – žene",
@@ -1396,7 +1405,7 @@
         "si": "Slovenija (sve regije)"
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "© 2020. – 2021. Sledilnik.org"
     },
     "days": {
         "x_days_ago_0": "Prije {{ count }} dan",

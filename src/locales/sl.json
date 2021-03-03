@@ -66,7 +66,7 @@
         "tabByAgeFemale": "Po starosti - Ženske",
         "source": "Viri podatkov in druge oblike",
         "sourceLink": "GDocs preglednica, CSV oblika ali REST API",
-        "day": "{{ date, %e.%m. }}"
+        "day": "{{ date, %e.%m.%Y }}"
     },
     "embedMaker": {
         "title": "Vgradite graf v vašo spletno stran",
@@ -662,6 +662,10 @@
         "liftMunicipality2": {
             "title": "Občine",
             "description": "Sproščanje: prost prehod med občinami ali regijami, zbiranje do 10 ljudi, odpro se vse trgovine.<br>Odprejo se osnovne šole za vse in srednje šole za zaključne letnike, na univerzah dovoljeni izpiti in vaje do 10 ljudi.<br>Dovoljena je brezkontaktna športno-rekreativna vadba v skupini do 10 ob upoštevanju 2m razdalje."
+        },
+        "okRed": {
+            "title": "Obalno-k.",
+            "description": "Obalno-kraška regija: prepoved zbiranja, zaprtje nekaterih trgovin, prepoved prehajanja v in iz regije."
         }
     },
     "phase": {
@@ -733,6 +737,7 @@
         "common": {
             "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
             "dataSource": "vir podatkov",
+            "dsNIB": "Nacionalni inštitut za biologijo",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministrstvo za zdravje",
             "dsSURS": "SURS",
@@ -1301,6 +1306,15 @@
             "student-hs": "Dijak",
             "noData": "Za to enoto ni podatkov o odsotnostih zaradi (suma) okužb ali o spremenjenem režimu.",
             "date": "%A, %e. %B"
+        },
+        "sewage": {
+            "title": "Virus v odpadnih vodah",
+            "titleMenu": "Odpadne vode",
+            "activeCases": "Aktivni primeri",
+            "newCases7dAve": "Novi primeri (7-dnevno povprečje)",
+            "concentrationGen1": "Razmerje SARS-CoV-2 gen N1 in PMMoV",
+            "concentrationGen2": "Razmerje SARS-CoV-2 gen N2 in PMMoV",
+            "muncipalitiesIncluded": "Aktivni in potrjeni primeri vključujejo podatke iz naslednjih občin, ki uporabljajo to čistilno napravo (ČN):"
         },
         "sources": {
             "title": "Viri in lokacije okužb, tedensko",
@@ -1919,6 +1933,10 @@
             "question": "Kaj kaže graf \"Stanje po šolah in vrtcih\"?",
             "answer": "[Graf](/sl/stats#school-status-chart) omogoča časovni prikaz odsotnosti in drugih ukrepov za posamezno šolo, vrtec ali drugo vzgojno-izobraževalno ustanovo.\n\nV osnovnem pogledu je po regijah prikazano število ustanov, ki so v zadnjih sedmih dneh imele kakršnokoli spremembo (novo odsotnost učenca ali zaposlenega zaradi suma na okužbo ali okužbe, spremenjen režim šolanja za oddelek). Tako dobite hiter pregled nad aktualnim dogajanjem.\n\nNatančnejši vpogled v stanje v posameznih ustanovah lahko dobite z izbiro regije in potem iskane ustanove, lahko pa določeno ustanovo preprosto poiščete s pomočjo iskalnika zgoraj levo. Na osnovni pogled se vrnete tako, da zaprete trenutni prikaz s klikom na križec poleg imena ustanove na vrhu grafa.\n\nČe za izbrano ustanovo obstajajo podatki, se v zgornjem delu grafa prikažejo spremenjeni režimi za zadevne oddelke (karantena, šola na daljavo), na sredini odsotnosti učencev in v spodnjem delu grafa odsotnosti zaposlenih zaradi okužbe ali suma na okužbo.\n\nDolžina vsakega pravokotnika ustreza datumom trajanja posameznega ukrepa, v oklepaju je zapisano število oseb, na katerega se nanaša. Ob prehodu z miško čez pravokotnik se pojavi oblaček z dodatnimi informacijami (vrsta ukrepa, vzrok za ukrep in osebe, na katere se nanaša).\n\nPrivzeti prikaz (*Aktivni*) vključuje podatke za zadnjih 28 dni; če želite videti celotno zgodovino za posamezno ustanovo, kliknite zgoraj desno na izbiro *Vsi*."
         },
+        "sewage-chart": {
+            "question": "Kaj kaže graf \"Virus v odpadnih vodah\"?",
+            "answer": "[Graf](/sl/stats#sewage-chart) prikazuje prisotnost koronavirusa v odpadnih vodah na posameznih čistilnih napravah. Meritve redno izvaja Nacionalni inštitut za biologijo na sedmih čistilnih napravah.\n\nGre za meritev količine virusne RNA v 24-urnih vzorcih odpadnih voda, in sicer za dva različna virusna strukturna gena, N1 in N2. Pri tem se uporablja test, razvit pri CDC. Vzorec se dostavi v laboratorije NIB, kjer se ga najprej skoncentrira, potem pa v njem izmeri koncentracijo koronavirusa in koncentracijo virusa PMMoV; slednji je uporabljan kot fekalni indikator v odpadnih vodah. Vrednosti, predstavljene na grafu, so razmerja med koncentracijami SARS-CoV-2 in PMMoV v vzorcih.\n\nNa grafu izberemo prikaz po posamezni čistilni napravi (spodaj se izpiše, za katere občine se vključujejo podatki). Poleg koncentracij N1 in N2 je za primerjavo prikazano tudi število novih (7-dnevno povprečje) in aktivnih primerov v občinah, ki so priklopljene na posamezno čistilno napravo. Tako lahko iz sprememb koncentracije gena N1 in N2 razberemo spremembe v trendu. Višja vrednost pomeni večjo relativno prisotnost virusa v populaciji in obratno."
+        },
         "sources-chart": {
             "question": "Kaj kaže graf \"Karantena in viri okužb\"?",
             "answer": "[Graf](/sl/stats#sources-chart) v osnovnem prikazu *Karantena* (spodaj) prikazuje število oseb, poslanih v karanteno, potrjene primere v določenem tednu in delež potrjenih primerov, ki so bili že v karanteni.\n\nPozor: Prikaz podatkov o karanteni je narejen na podlagi virov NIJZ. Ker NIJZ podatkov ne objavlja redno oz. lahko prihaja do njihove zakasnitve, za njihovo točnost in popolnost ne odgovarjamo.\n\nČe spodaj preklopimo na prikaz *Viri okužb*, so prikazani potrjeni primeri v določenem tednu po viru: uvoženi, povezani z uvoženimi, lokalni vir in neznani vir. Povečanje neznanega vira je kazalnik, da epidemiološko sledenje ni uspešno pri odkrivanju vira.\nPrikaz *Uvoženi primeri* po tednih prikaže države, iz katerih so bili uvoženi posamezni primeri, in število teh primerov.\nVsi trije prikazi (spodaj) so na voljo tudi v obliki *(relativno)*, ki omogoča prikaz po deležu (%) – tako lahko primerjate gibanje kategorij po posameznih tednih."
@@ -2064,6 +2082,10 @@
             },
             "sms": {
                 "description": "Pošljite **SMS** sporočilo s ključno besedo **{{keyword}}** na številko **{{number}}** in prispevali boste **{{amount}}** za Znanstveno društvo Sledilnik.\nZa pripravo SMS sporočila lahko z mobilnim telefonom poskenirate QR kodo.\n\n*Prispevajo lahko uporabniki mobilnih storitev družb\nTelekom Slovenije d.d. (<a href=\"/docs/sms-donation-terms-Telekom-Slovenije.pdf\" target=\"_blank\">pravila in pogoji</a>), \nA1 Slovenija d.d. (<a href=\"/docs/sms-donation-terms-A1.pdf\" target=\"_blank\">pogoji</a>),\nTelemach d.o.o. (<a href=\"/docs/sms-donation-terms-Telemach.pdf\" target=\"_blank\">pogoji</a>) in\nT-2 d.o.o. (<a href=\"/docs/sms-donation-terms-T2.pdf\" target=\"_blank\">pogoji</a>),\nv sodelovanju s katerimi je storitev omogočena.*"
+            },
+            "mbills": {
+                "description": "Donirate lahko tudi z mobilno denarnico **mBills**.",
+                "detailsButton": "Podrobnosti"
             }
         },
         "monthly": {

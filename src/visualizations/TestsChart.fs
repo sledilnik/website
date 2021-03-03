@@ -23,13 +23,13 @@ type DisplayType =
     static member All state =
         seq {
             yield PositiveSplit
-            for typ in [ "hagt"; "regular"; "ns-apr20" ] do
+            for typ in [ "hagt"; "regular"; ] do // "ns-apr20" ] do
                 yield Data typ
-            yield TotalPCR
-            yield ByLab
-            yield ByLabPercent
-            for lab in state.AllLabs do
-                yield Lab lab
+            // yield TotalPCR
+            // yield ByLab
+            // yield ByLabPercent
+            // for lab in state.AllLabs do
+            //     yield Lab lab
         }
     static member Default = Data "regular"
     static member GetName =
