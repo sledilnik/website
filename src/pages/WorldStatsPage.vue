@@ -2,7 +2,7 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="custom-container" v-if="this.$i18n.i18next.language=='sl'" >
+      <div class="custom-container">
         <div class="static-page-wrapper">
           <div v-html-md="$t('anniversary')" />
         </div>
