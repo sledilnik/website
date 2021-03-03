@@ -2,6 +2,11 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
+      <div class="custom-container" v-if="this.$i18n.i18next.language=='sl'">
+        <div class="static-page-wrapper">
+          <div v-html-md="$t('anniversary')" />
+        </div>
+      </div>
       <div class="cards-wrapper">
         <InfoCard
           v-for="cardName in displayedInfoCards"
