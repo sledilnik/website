@@ -344,10 +344,7 @@ let renderChartOptions (state: State) dispatch =
                                               labels = match state.displayType with
                                                        | QuarantineRelative | ByLocationRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
                                                        | _ -> pojo {| format = "{value}" |}
-
-                                              reversedStacks = match state.displayType with
-                                                               | Quarantine | QuarantineRelative -> true
-                                                               | _ -> false |})
+                                              reversedStacks = true |})
            xAxis =
                baseOptions.xAxis
                |> Array.map (fun xAxis ->

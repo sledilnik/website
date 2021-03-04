@@ -33,7 +33,7 @@ For example, see [`embed.html`](https://github.com/sledilnik/website/tree/master
 ### SchoolStatus: show specific school
 Parameters:
 `schoolId`=
-- `id` (ID of school - see [https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv](dict-schools.csv) for list of school IDs)
+- `id` (ID of school - see [dict-schools.csv](https://github.com/sledilnik/data/blob/master/csv/dict-schools.csv) for list of school IDs)
 
 | Chart                                  | Url                                                                         |
 |----------------------------------------|-----------------------------------------------------------------------------|
@@ -45,7 +45,7 @@ Parameters:
 Parameters:
 `sort`=
 - `total-positive-tests`
-- `time-to-double`
+- `weekly-growth`
 
 `region`=
 - `ms` (Pomurska)
@@ -67,8 +67,8 @@ Parameters:
 | Chart                          | Url                                                                                           |
 |--------------------------------|-----------------------------------------------------------------------------------------------|
 | Občine - Pomurska              | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ms                     |
-| Občine - Savinjska, podvojitev | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=time-to-double |
-| Občine - podvojitev            | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=time-to-double           |
+| Občine - Savinjska, rast       | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?region=ce&sort=weekly-growth |
+| Občine - rast                  | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?sort=weekly-growth           |
 | Občine - Medvode               | https://covid-19.sledilnik.org/embed.html#/chart/Municipalities?search=medvode                |
 
 ### Resize

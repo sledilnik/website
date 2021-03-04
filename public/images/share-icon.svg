@@ -1,11 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
-    <defs>
-        <path id="prefix__a" d="M0 0L12 0 12 10.8 0 10.8z"/>
-    </defs>
-    <g fill="none" fill-rule="evenodd" transform="translate(6 6)">
-        <mask id="prefix__b" fill="#fff">
-            <use xlink:href="#prefix__a"/>
-        </mask>
-        <path fill="#000" d="M11.795 4.348l-4.8-4.2c-.177-.154-.43-.191-.642-.095C6.138.151 6 .364 6 .6v1.8H4.8C2.153 2.4 0 4.553 0 7.2v3c0 .332.269.6.6.6.332 0 .6-.268.6-.6 0-1.653 1.346-3 3-3H6V9c0 .236.138.45.353.547.212.097.464.06.642-.095l4.8-4.2c.13-.114.205-.278.205-.452 0-.173-.074-.337-.205-.45" mask="url(#prefix__b)"/>
-    </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="prefix__a" d="M0 0L12 0 12 10.8 0 10.8z"/></defs><g fill="none" fill-rule="evenodd" transform="translate(6 6)"><mask id="prefix__b" fill="#fff"><use xlink:href="#prefix__a"/></mask><path fill="#000" d="M11.795 4.348l-4.8-4.2c-.177-.154-.43-.191-.642-.095C6.138.151 6 .364 6 .6v1.8H4.8C2.153 2.4 0 4.553 0 7.2v3c0 .332.269.6.6.6.332 0 .6-.268.6-.6 0-1.653 1.346-3 3-3H6V9c0 .236.138.45.353.547.212.097.464.06.642-.095l4.8-4.2c.13-.114.205-.278.205-.452 0-.173-.074-.337-.205-.45" mask="url(#prefix__b)"/></g></svg>

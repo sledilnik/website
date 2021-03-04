@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import { LayoutPlugin, TabsPlugin, BTable, FormTextareaPlugin, BFormSelect, TooltipPlugin, CardPlugin, VBVisiblePlugin } from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faSpinner, faGlobe, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner, faGlobe, faCaretDown, faCreditCard, faMobileAlt, faUniversity, faFileContract } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import './filters'
 import './directives'
@@ -20,7 +20,7 @@ Vue.component('b-table', BTable)
 Vue.component('b-form-select', BFormSelect)
 
 // fontawesome
-library.add(faSpinner, faGlobe, faCaretDown)
+library.add(faSpinner, faGlobe, faCaretDown, faCreditCard, faMobileAlt, faUniversity, faFileContract)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false

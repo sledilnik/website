@@ -33,7 +33,7 @@ let (|HospitalSeriesType|AgeGroupSeriesType|PersonTypeSeriesType|) (seriesType: 
     | DeceasedCare -> HospitalSeriesType
     | DeceasedOther -> HospitalSeriesType
     | DeceasedAgeGroup _ -> AgeGroupSeriesType
-    | DeceasedTypeRhOccupant -> PersonTypeSeriesType 
+    | DeceasedTypeRhOccupant -> PersonTypeSeriesType
     | DeceasedTypeOther -> PersonTypeSeriesType
 
 type SeriesInfo = {
@@ -42,13 +42,6 @@ type SeriesInfo = {
     Color: string
 }
 
-let subtract (a : int option) (b : int option) =
-    match a, b with
-    | Some aa, Some bb -> Some (bb - aa)
-    | Some aa, None -> -aa |> Some
-    | None, Some _ -> b
-    | _ -> None
-
 let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
     match state.MetricType with
     | Today ->
@@ -56,24 +49,24 @@ let getHospitalsPointValue state (series: SeriesInfo) dataPoint : int option =
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.today
         | DeceasedAcute ->
                 dataPoint.total.deceased.hospital.today
-                |> subtract dataPoint.total.deceased.hospital.icu.today
+                |> Utils.subtractIntOption dataPoint.total.deceased.hospital.icu.today
         | DeceasedCare -> dataPoint.total.deceasedCare.today
         | DeceasedOther ->
                 dataPoint.total.deceased.today
-                |> subtract dataPoint.total.deceased.hospital.today
-                |> subtract dataPoint.total.deceasedCare.today
+                |> Utils.subtractIntOption dataPoint.total.deceased.hospital.today
+                |> Utils.subtractIntOption dataPoint.total.deceasedCare.today
         | _ -> invalidOp "bug"
     | ToDate ->
         match series.SeriesType with
         | DeceasedInIcu -> dataPoint.total.deceased.hospital.icu.toDate
         | DeceasedAcute ->
                 dataPoint.total.deceased.hospital.toDate
-                |> subtract dataPoint.total.deceased.hospital.icu.toDate
+                |> Utils.subtractIntOption dataPoint.total.deceased.hospital.icu.toDate
         | DeceasedCare -> dataPoint.total.deceasedCare.toDate
         | DeceasedOther ->
                 dataPoint.total.deceased.toDate
-                |> subtract dataPoint.total.deceased.hospital.toDate
-                |> subtract dataPoint.total.deceasedCare.toDate
+                |> Utils.subtractIntOption dataPoint.total.deceased.hospital.toDate
+                |> Utils.subtractIntOption dataPoint.total.deceasedCare.toDate
         | _ -> invalidOp "bug"
 
 let getHospitalsPointTotalValue state series dataPoint : int option =
@@ -143,7 +136,7 @@ let constructPersonTypeSeriesData state series =
         let data =
             state.StatsData
             |> Seq.map (fun dataPoint ->
-                {| date = dataPoint.Date 
+                {| date = dataPoint.Date
                    value =
                         match series.SeriesType with
                         | DeceasedTypeRhOccupant -> dataPoint.DeceasedPerType.RhOccupant
@@ -152,13 +145,13 @@ let constructPersonTypeSeriesData state series =
                    |} )
         match state.MetricType with
         | Today ->
-            data 
+            data
             |> Seq.pairwise
             |> Seq.map
                    (fun (prevDay, currDay) ->
                         {| date = currDay.date
                            value =  match currDay.value with
-                                    | Some value -> currDay.value |> subtract prevDay.value 
+                                    | Some value -> currDay.value |> Utils.subtractIntOption prevDay.value
                                     | None -> None |} )
         | ToDate -> data
 

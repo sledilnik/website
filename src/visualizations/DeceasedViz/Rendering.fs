@@ -105,7 +105,7 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
 
     let xAxis =
             baseOptions.xAxis
-            |> Array.map(fun xAxis -> 
+            |> Array.map(fun xAxis ->
                {| xAxis with
                       plotBands =
                         match state.Page with
@@ -144,6 +144,10 @@ let renderChartOptions (state : DeceasedVizState) dispatch =
 
         legend = pojo {| enabled = true ; layout = "horizontal" |}
 
+        credits =
+            match state.Page with
+            | AgeGroupsPage | PersonTypePage -> chartCreditsNIJZ
+            | HospitalsPage -> chartCreditsMZ
     |}
 
 let renderChartContainer (state : DeceasedVizState) dispatch =

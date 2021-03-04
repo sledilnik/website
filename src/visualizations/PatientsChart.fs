@@ -229,7 +229,9 @@ let renderByHospitalChart (state: State) dispatch =
            legend =
                pojo
                    {| enabled = true
-                      layout = "horizontal" |} |}
+                      layout = "horizontal" |}
+
+           credits = chartCreditsMZ |}
 
     |> pojo
 
@@ -256,7 +258,7 @@ let renderStructureChart (state: State) dispatch =
                 match state.HTypeToDisplay with
                 | CovidHospitals    -> I18N.t "charts.patients.hospitalized"
                 | CovidHospitalsICU -> I18N.t "charts.patients.icu"
-                | CareHospitals     -> I18N.t "charts.patients.care"                    
+                | CareHospitals     -> I18N.t "charts.patients.care"
 
             s.Append "<table>" |> ignore
             s.Append "<tr>" |> ignore
@@ -304,46 +306,35 @@ let renderStructureChart (state: State) dispatch =
             |> Seq.toArray
 
     let renderBarSeries series =
-        let subtract (a: int option) (b: int option) =
-            match a, b with
-            | Some aa, Some bb -> Some(bb - aa)
-            | Some aa, None -> -aa |> Some
-            | None, Some _ -> b
-            | _ -> None
-
-        let negative (a: int option) =
-            match a with
-            | Some aa -> -aa |> Some
-            | None -> None
 
         let getPoint (ps: FacilityPatientStats): int option =
             match series with
             | InHospital -> ps.inHospital.today
-            | Acute -> ps.inHospital.today |> subtract ps.icu.today
+            | Acute -> ps.inHospital.today |> Utils.subtractIntOption ps.icu.today
             | Icu -> ps.icu.today
             | IcuOther ->
                 ps.icu.today
-                |> subtract ps.niv.today
-                |> subtract ps.critical.today
+                |> Utils.subtractIntOption ps.niv.today
+                |> Utils.subtractIntOption ps.critical.today
             | NivVentilator -> ps.niv.today
             | InvVentilator -> ps.critical.today
             | Care -> ps.care.today
             | IcuIn -> ps.icu.``in``
-            | IcuOut -> negative ps.icu.out
-            | IcuDeceased -> negative ps.deceased.icu.today
+            | IcuOut -> Utils.negativeIntOption ps.icu.out
+            | IcuDeceased -> Utils.negativeIntOption ps.deceased.icu.today
             | InHospitalIn -> ps.inHospital.``in``
-            | InHospitalOut -> negative ps.inHospital.out
-            | InHospitalDeceased -> negative ps.deceased.today
+            | InHospitalOut -> Utils.negativeIntOption ps.inHospital.out
+            | InHospitalDeceased -> Utils.negativeIntOption ps.deceased.today
             | CareIn -> ps.care.``in``
-            | CareOut -> negative ps.care.out
-            | CareDeceased -> negative ps.deceasedCare.today
+            | CareOut -> Utils.negativeIntOption ps.care.out
+            | CareDeceased -> Utils.negativeIntOption ps.deceasedCare.today
 
         let getTotal (ps: FacilityPatientStats): int option =
             match state.HTypeToDisplay with
             | CovidHospitals    -> ps.inHospital.today
-            | CovidHospitalsICU -> ps.icu.today 
+            | CovidHospitalsICU -> ps.icu.today
             | CareHospitals     -> ps.care.today
-           
+
 
         let color, seriesId, seriesIdx = Series.getSeriesInfo series
         {| color = color
@@ -429,8 +420,9 @@ let renderStructureChart (state: State) dispatch =
                                 chartOptions =
                                     {| yAxis =
                                            [| {| labels = pojo {| enabled = false |} |}
-                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |} |}
+                                              {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
 
+           credits = chartCreditsMZ |}
 
     |> pojo
 

@@ -204,7 +204,7 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
 
 
 let init (mapToDisplay : MapToDisplay) (data : Area seq) : State * Cmd<Msg> =
-    let dataTimeInterval = LastDays 14
+    let dataTimeInterval = LastDays 7
 
     { MapToDisplay = mapToDisplay
       GeoJson = NotAsked
@@ -751,10 +751,9 @@ let renderMap (state : State) =
                 {|
                     enabled = true
                     text =
-                        sprintf "%s: %s, %s"
+                        sprintf "%s: %s"
                             (I18N.t "charts.common.dataSource")
                             (I18N.t "charts.common.dsNIJZ")
-                            (I18N.t "charts.common.dsMZ")
                     mapTextFull = ""
                     mapText = ""
                     href = "https://www.nijz.si/sl/dnevno-spremljanje-okuzb-s-sars-cov-2-covid-19"
@@ -803,9 +802,14 @@ let renderDataTimeIntervalSelector state dispatch =
         ]
     else Html.none
 
-let renderContentTypeSelector selected dispatch =
-    let contentTypes = [("ConfirmedCases", ContentType.ConfirmedCases)
-                        ("Deceased", ContentType.Deceased)]
+let renderContentTypeSelector state dispatch =
+    let contentTypes =
+        if state.MapToDisplay = RegionMap then
+            [("ConfirmedCases", ContentType.ConfirmedCases)
+             ("Deceased", ContentType.Deceased)]
+         else
+            [("ConfirmedCases", ContentType.ConfirmedCases)]
+
     let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
         Html.option [
             prop.text (ContentType.GetName ct)
@@ -813,7 +817,7 @@ let renderContentTypeSelector selected dispatch =
         ])
 
     Html.select [
-        prop.value (selected.ToString())
+        prop.value (state.ContentType.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
         prop.onChange ( fun ct ->  Map.find ct (contentTypes |> Map.ofList) |> ContentTypeChanged |> dispatch)
@@ -826,7 +830,7 @@ let render (state : State) dispatch =
                 Html.div [
                     prop.className "filters"
                     prop.children [
-                        renderContentTypeSelector state.ContentType dispatch
+                        renderContentTypeSelector state dispatch
                         renderDataTimeIntervalSelector state (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]
@@ -838,9 +842,9 @@ let render (state : State) dispatch =
             ]
             match state.ContentType with
             | Deceased ->
-                let disclaimerID = 
-                    if state.MapToDisplay = RegionMap 
-                    then "charts.map.disclaimerRegion" 
+                let disclaimerID =
+                    if state.MapToDisplay = RegionMap
+                    then "charts.map.disclaimerRegion"
                     else "charts.map.disclaimer"
                 Html.div [
                     prop.className "disclaimer"

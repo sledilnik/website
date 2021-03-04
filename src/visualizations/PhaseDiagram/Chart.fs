@@ -48,7 +48,7 @@ let sharedChartOptions displayData =
     {| title = None
        chart = pojo {| ``type`` = "scatter" ; animation = false ; zoomType = None |}
        legend = {| |}
-       credits = Highcharts.chartCreditsDefault |}
+       credits = Highcharts.chartCreditsNIJZ |}
 
 let totalVsWeekChartOptions state =
     let sharedOptions = sharedChartOptions()
@@ -92,6 +92,12 @@ let totalVsWeekChartOptions state =
                states = pojo {| hover = pojo {| lineWidth = 0 |} |}
             |} |> pojo
         |]
+
+        credits =
+            match state.Metric with
+            | Cases -> chartCreditsNIJZ
+            | Hospitalized | Deceased -> chartCreditsMZ
+
     |} |> pojo
 
 let weekVsWeekBeforeOptions state =

@@ -125,6 +125,7 @@ Project collaborators:
 -   [Nejc Davidović](https://twitter.com/NejcDavidovic) - copywriting, sources
 -   [Nina Rolih](https://www.facebook.com/tanoranina) - content, graphic design
 -   [Nina Ružić Gorenjec](https://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeling
+-   [Nuša Jazbinšek]() - data model and validation
 -   [Peter Keše](https://twitter.com/pkese/) - visualisations
 -   [Pika Založnik]() - content, sources
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - copywriting, sources, FAQ

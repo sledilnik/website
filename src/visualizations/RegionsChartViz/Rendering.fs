@@ -53,7 +53,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         regionsWithoutExcluded
         |> List.sortByDescending (fun region -> region.ActiveCases)
 
-    let regConfig = 
+    let regConfig =
         regionsSorted
         |> List.map (fun region ->
             let regionKey = region.Name
@@ -69,7 +69,7 @@ let init (config: RegionsChartConfig) (data : RegionsData)
             |> List.append regConfig
         | _ ->
             regConfig
-             
+
     { ScaleType = Linear; MetricType = MetricType.Default
       ChartConfig = config
       RegionsData = data
@@ -172,7 +172,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
 
     let xAxis =
             baseOptions.xAxis
-            |> Array.map(fun xAxis -> 
+            |> Array.map(fun xAxis ->
                {| xAxis with
                       gridZIndex = 1
                       plotBands =
@@ -190,7 +190,7 @@ let renderChartOptions (state : RegionsChartState) dispatch =
     let chartTextGroup = state.ChartConfig.ChartTextsGroup
 
     let threshold100k value =
-        (value * 100000.) 
+        (value * 100000.)
         / (Utils.Dictionaries.regions.["si"].Population |> Utils.optionToInt |> float)
     let redThreshold = threshold100k 1350.
     let orangeThreshold = threshold100k 1000.
@@ -207,24 +207,28 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                            match state.ChartConfig.RelativeTo, state.MetricType with
                            | Pop100k, NewCases7Days -> [|
                                {| value=redThreshold
+                                  label= {| text = (sprintf "%0.1f" redThreshold); align="left" |}
                                   color="red"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=orangeThreshold
+                                  label={| text = (sprintf "%0.1f" orangeThreshold); align="left" |}
                                   color="orange"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=yellowThreshold
+                                  label={| text = (sprintf "%0.1f" yellowThreshold); align="left" |}
                                   color="#d8d800"
                                   width=1
                                   dashStyle="longdashdot"
                                   zIndex=2
                                |}
                                {| value=greenThreshold
+                                  label={| text = (sprintf "%0.1f" greenThreshold); align="left" |}
                                   color="green"
                                   width=1
                                   dashStyle="longdashdot"
