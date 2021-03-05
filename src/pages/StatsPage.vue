@@ -2,11 +2,6 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="custom-container">
-        <div class="static-page-wrapper">
-          <div v-html-md="$t('anniversary')" />
-        </div>
-      </div>
       <div class="cards-wrapper">
         <InfoCard
           v-for="cardName in displayedInfoCards"
@@ -170,7 +165,7 @@ $loader-width: 50px
   display: grid
   gap: 15px
   grid-template-columns: repeat(1, minmax(165px, 1fr))
-  margin: 44px auto 44px
+  margin: 0px auto 44px
 
   @media only screen and (min-width: 411px)
     grid-template-columns: repeat(2, minmax(165px, 1fr))
@@ -178,7 +173,7 @@ $loader-width: 50px
   @media only screen and (min-width: 768px)
     grid-template-columns: repeat(3, minmax(165px, 1fr))
     gap: 30px
-    margin: 88px 15px 88px
+    margin: 0px 15px 88px
 
   @media only screen and (min-width: 992px)
     grid-template-columns: repeat(4, minmax(165px, 1fr))

@@ -2,11 +2,6 @@
   <div @click="checkClick($event)">
     <Time-stamp :date="exportTime" />
     <b-container class="stats-page">
-      <div class="custom-container">
-        <div class="static-page-wrapper">
-          <div v-html-md="$t('anniversary')" />
-        </div>
-      </div>
       <b-row cols="12">
         <b-col>
           <div id="visualizations" class="visualizations"></div>
