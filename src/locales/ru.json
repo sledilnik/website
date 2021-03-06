@@ -17,7 +17,7 @@
     },
     "tables": {
         "title": "Таблица",
-        "day": "{{ date, %m/%d }}",
+        "day": "{{ date, %m/%d/%Y }}",
         "source": "Источник данных в других форматах",
         "tabByRegion": "По регионам",
         "tabSummary": "Сводка"

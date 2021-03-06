@@ -3,7 +3,7 @@
     <div v-if="isStripeSuccess" class="static-page-wrapper stripeSuccess">
       <div class="header-wrapper">
           <div>
-            <img src="../assets/donate-thanks.png" />
+            <img src="../assets/donate/donate-thanks.png" />
           </div>
           <h1 v-if="successTranslationKey!=null">{{ $t(`donation.${successTranslationKey}success.title`) }}</h1>
           <h1 v-else>{{ $t(`donation.success.title`) }}</h1>
@@ -111,7 +111,7 @@
             </span>
           </div>
           <div v-if="showBanktransferDetails">
-            <img v-if="language=='sl'" src="../assets/donate-qr.png" class="qr" />
+            <img v-if="language=='sl'" src="../assets/donate/donate-qr.png" class="qr" />
             <table class="bankDetails">
               <tr>
                 <td>{{ $t("donation.bankDetails.recipient") }}</td>
@@ -153,7 +153,7 @@
               </tr>
             </table>
 
-            <img v-if="language=='sl'" src="../assets/donate-upn.png" class="upn" />
+            <img v-if="language=='sl'" src="../assets/donate/donate-upn.png" class="upn" />
           </div>
         </div>
 
@@ -184,6 +184,21 @@
             <span>
                 <button @click="triggerSms()">{{ this.smsAmount + " EUR" }}</button>
             </span>
+          </div>
+        </div>
+
+        <div v-if="language=='sl'" class="paymentMethod mbillsDetails" id="mbills">
+          <img src="../assets/donate/mbills_logo_bw.svg" alt="mbills" class="mbillsLogo">
+          <div v-html-md="$t('donation.onetime.mbills.description')" class="description"></div>
+          <div class="stripeCheckout">
+            <span>
+              <button @click="showMbillsDetails = !showMbillsDetails">{{ $t("donation.onetime.mbills.detailsButton") }}</button>
+            </span>
+          </div>
+          <div v-if="showMbillsDetails">
+            <a href="mbills://www.mbills.si/dl/?type=2&amp;qritemid=298757">
+              <img src="../assets/donate/mBills_QR_298757.png">
+            </a>
           </div>
         </div>
 
@@ -264,7 +279,8 @@ export default {
       smsKeyword: "SLEDILNIK",
       smsAmount: 5,
       showBanktransferDetails: false,
-      showPermanentBankTransferOrderDetails: false
+      showPermanentBankTransferOrderDetails: false,
+      showMbillsDetails: false
     };
   },
   methods: {
@@ -356,8 +372,28 @@ img {
 .paymentMethod {
   margin: 24px 0;
 
-  .smsDetails {
+  &.smsDetails {
     min-height: 84px;
+
+    a {
+      font-weight: normal;
+    }
+  }
+
+  &.mbillsDetails {
+
+    .description {
+      min-height: 42px;
+    }
+
+    .mbillsLogo {
+      width: 30px;
+      float:left;
+      margin-right: 8px;
+      margin-top: 4px;
+      margin-bottom: 5px;
+
+    }
   }
 }
 
@@ -413,8 +449,8 @@ img {
   }
 
   .session {
-    margin-top: 50px;
     font-size: 10px;
+    margin-top: 50px;
     color: #999999;
     overflow-wrap: break-word;
     word-wrap: break-word;

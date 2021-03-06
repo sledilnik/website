@@ -802,9 +802,14 @@ let renderDataTimeIntervalSelector state dispatch =
         ]
     else Html.none
 
-let renderContentTypeSelector selected dispatch =
-    let contentTypes = [("ConfirmedCases", ContentType.ConfirmedCases)
-                        ("Deceased", ContentType.Deceased)]
+let renderContentTypeSelector state dispatch =
+    let contentTypes =
+        if state.MapToDisplay = RegionMap then
+            [("ConfirmedCases", ContentType.ConfirmedCases)
+             ("Deceased", ContentType.Deceased)]
+         else
+            [("ConfirmedCases", ContentType.ConfirmedCases)]
+
     let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
         Html.option [
             prop.text (ContentType.GetName ct)
@@ -812,7 +817,7 @@ let renderContentTypeSelector selected dispatch =
         ])
 
     Html.select [
-        prop.value (selected.ToString())
+        prop.value (state.ContentType.ToString())
         prop.className "form-control form-control-sm filters__type"
         prop.children renderedTypes
         prop.onChange ( fun ct ->  Map.find ct (contentTypes |> Map.ofList) |> ContentTypeChanged |> dispatch)
@@ -825,7 +830,7 @@ let render (state : State) dispatch =
                 Html.div [
                     prop.className "filters"
                     prop.children [
-                        renderContentTypeSelector state.ContentType dispatch
+                        renderContentTypeSelector state dispatch
                         renderDataTimeIntervalSelector state (DataTimeIntervalChanged >> dispatch)
                     ]
                 ]

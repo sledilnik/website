@@ -66,7 +66,7 @@
         "tabByAgeFemale": "By age - Female",
         "source": "Data source in other formats",
         "sourceLink": "GDocs spreadsheet, CSV format or REST API",
-        "day": "{{ date, %m/%d }}"
+        "day": "{{ date, %m/%d/%y }}"
     },
     "embedMaker": {
         "title": "Embed a chart into your web page",
@@ -195,6 +195,7 @@
         "common": {
             "dataDate": "Data until: {{ date, %a., %e. %b. }}",
             "dataSource": "data source",
+            "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
             "dsMZ": "Ministry of Health",
             "dsSURS": "SURS",
@@ -517,6 +518,7 @@
             "titleMenu": "Municipalities - cases",
             "viewLast": "Last",
             "viewDoublingTime": "Doubling time",
+            "viewWeeklyGrowth": "Weekly growth",
             "viewTotal": "All",
             "viewActive": "Active",
             "allRegions": "All regions",
@@ -524,10 +526,12 @@
             "showAll": "Show All",
             "showLess": "Show Less",
             "all": "All: ",
+            "confirmed": "Confirmed: ",
             "active": "Active: ",
             "recovered": "Recovered: ",
             "deceased": "Deaths: ",
             "doubles": "Doubles ",
+            "weeklyGrowth": "Weekly growth ",
             "yesterday": "yesterday",
             "today": "today",
             "lastCase": "Last case: "
@@ -767,6 +771,15 @@
             "noData": "There is no data about absence due to (suspected) infection or changed regime for this school unit.",
             "date": "%A, %e. %B"
         },
+        "sewage": {
+            "title": "Virus in Sewage",
+            "titleMenu": "Sewage",
+            "activeCases": "Active Cases",
+            "newCases7dAve": "New Cases (7-day average)",
+            "concentrationGen1": "Ratio of SARS-CoV-2 Gene N1 and PMMoV",
+            "concentrationGen2": "Ratio of SARS-CoV-2 Gene N2 and PMMoV",
+            "muncipalitiesIncluded": "Active and Confirmed cases includes data from municipalities:"
+        },
         "sources": {
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
@@ -817,7 +830,7 @@
         }
     },
     "footer": {
-        "copyright": "© 2020-2021 Sledilnik.org"
+        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1085,7 +1098,7 @@
         },
         "closeSchools3": {
             "title": "Schools 3",
-            "description": "Closed kindergarten and elementary school up to 3rd grade in Coastal–Karst and Central Sava region.<br>Allowed selling of 🧦 in 🩲 in grocery shops."
+            "description": "Closed kindergarten and elementary school up to 3rd grade in Coastal–Karst and Central Sava region.<br>Allowed selling of 🧦 and 🩲 in grocery shops."
         },
         "bordersStrict": {
             "title": "Borders",
@@ -1093,11 +1106,23 @@
         },
         "liftShops2": {
             "title": "Shops",
-            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,...<br>(negative test of customers and/od employees required for some services)"
+            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,…<br>(negative test of customers and/od employees required for some services)"
         },
         "liftSchools3All": {
             "title": "Schools 3",
             "description": "Relaxation: kindergarten and elementary school up to 3rd grade in all regions."
+        },
+        "liftBorders": {
+            "title": "Borders",
+            "description": "No checkpoints on borders, quarantine and negative test not required for vaccinated and recovered."
+        },
+        "liftMunicipality2": {
+            "title": "Municipalities",
+            "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
+        },
+        "okRed": {
+            "title": "Coastal–K",
+            "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
         }
     },
     "days": {
@@ -1539,7 +1564,7 @@
         },
         "why-sledilnik": {
             "question": "Why Sledilnik?",
-            "answer": "_Our goal is to help understand the spread of the virus and to help raise awareness, responsiveness, and the effectiveness of the measures implemented to curb the virus. You can find more about the project in the [About tab](/en/about)._"
+            "answer": "Our goal is to help understand the spread of the virus and to help raise awareness, responsiveness, and the effectiveness of the measures implemented to curb the virus. You can find more about the project in the [About tab](/en/about)."
         },
         "virus-vs-disease": {
             "question": "What is the difference between SARS-CoV-2 and COVID-19?",
@@ -1642,7 +1667,7 @@
             "answer": "The [graph](/en/stats#patients-chart) in the default view *All Hospitals* shows us the whole picture of hospitalizations by date arranged by the condition of patients: columns with a positive value (those above the horizontal axis) show the number admitted to hospital, the number hospitalized, shades of red are used to demark individuals in ICUs, specifically depicting how many of these are in critical condition on the ventilators (intubated). Columns with a negative value (those below the horizontal axis) show the number of discharges and deaths that day. You can also select specific hospital and see only hospitalizations there. If you select the *By Hospitals* view below, you can see the number of people in hospital care by day for each of the COVID-19 hospitals.\nThe graph can offer a good insight into the workload of hospitals and can be the basis for assessing hospital capacity and planning their possible increase."
         },
         "ratios-chart": {
-            "question": "Kaj nam pove graf \"Delež resnih primerov\"?",
+            "question": "What does the “Share of Serious Cases” graph tell us?",
             "answer": "[Graf](/en/stats#ratios-chart) prikazuje deleže resnih primerov bolezni in smrtnosti v treh različnih prikazih. Vsi podatki so prikazani kot procent (%).\n\n(*Resni primeri*) nam kaže hospitalizirane, v intenzivni enoti, na respiratorju (intubirani) in umrle kot delež vseh potrjeno okuženih. Iz tega je razvidno kako velik delež vseh potrjeno okuženih oseb ima težjo obliko bolezni, ki zahteva hospitalizacijo, sprejem v intenzivno enoto in uporabo respiratorja.\n\n(*Hospitalizirani*) nam kaže osebe v intenzivni enoti, na respiratorju in umrle v bolnišnici kot delež vseh hospitaliziranih. Ta prikaz ponazori na kakšnem oddelku in kakšno obravnavo potrebujejo hospitalizirani bolniki.\n\n(*Smrtnost*) nam pokaže delež smrti v bolnišnici glede na vse umrle in delež smrti v intenzivni enoti glede na vse umrle v bolnišnici - prikazano s polno črto. Prikaz nam tudi prikaže Smrtnost v bolnišnici (koliko oseb umre glede na vse hospitalizirane) in Smrtnost v intenzivni enoti (koliko oseb umre glede na vse sprejete v intenzivno enoto) - prikazano s črtkano črto.\n\nGraf je uporaben za razumevanje obravnave bolnikov v Sloveniji in primerjave z ostalimi državami (glede na njihova poročila)."
         },
         "hcenters-chart": {
@@ -1759,7 +1784,7 @@
         },
         "other": {
             "title": "Other ways of support",
-            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at drustvo@sledilnik.org - we will be happy to find a solution."
+            "description": "For a few more ways to support us from within Slovenia you might want to check out the [Slovenian translation of this page](/sl/donate).\n\nWe are always grateful for suggestions and shares of our posts on [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) and other platforms, as well as new features and source code fixes on [GitHub](https://github.com/sledilnik).\n\nWe will appreciate it even more if you can grant us access to any open data that might be relevant for our analyses. \n\nIf you have a different proposal for how to support our activities or for how we could cooperate, please do not hesitate and contact us at info@sledilnik.org - we will be happy to find a solution."
         }
     }
 }

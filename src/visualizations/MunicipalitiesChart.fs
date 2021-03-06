@@ -12,10 +12,11 @@ open Feliz.ElmishComponents
 open Types
 
 let barMaxHeight = 65
-let showMaxBars = 30
+let showMaxBars = 28
 let collapsedMunicipalityCount = 16
 
 let excludedMunicipalities = Set.ofList [ "neznano" ]
+let showWeeklyGrowth = true
 
 type Region =
     { Key : string
@@ -24,6 +25,7 @@ type Region =
 type TotalsForDate =
     { Date : DateTime
       ActiveCases : int option
+      ConfirmedToday : int option
       ConfirmedToDate : int option
       DeceasedToDate : int option
     }
@@ -32,7 +34,7 @@ type Municipality =
     { Key : string
       Name : string option
       RegionKey : string
-      DoublingTime : float option
+      WeeklyGrowth : float option
       NewCases : int option
       ActiveCases : int option
       MaxActiveCases : int option
@@ -45,11 +47,11 @@ type View =
     | ActiveCases
     | TotalConfirmedCases
     | LastConfirmedCase
-    | DoublingTime
+    | WeeklyGrowth
 
     static member All =
-        if Highcharts.showDoublingTimeFeatures then
-            [ DoublingTime
+        if showWeeklyGrowth then
+            [ WeeklyGrowth
               LastConfirmedCase
               ActiveCases
               TotalConfirmedCases ]
@@ -62,7 +64,7 @@ type View =
 
     member this.GetName =
         match this with
-        | DoublingTime -> I18N.t "charts.municipalities.viewDoublingTime"
+        | WeeklyGrowth -> I18N.t "charts.municipalities.viewWeeklyGrowth"
         | ActiveCases -> I18N.t "charts.municipalities.viewActive"
         | TotalConfirmedCases -> I18N.t "charts.municipalities.viewTotal"
         | LastConfirmedCase -> I18N.t "charts.municipalities.viewLast"
@@ -89,9 +91,9 @@ type Query (query : obj, regions : Region list) =
             | "active-cases" -> Some ActiveCases
             | "total-confirmed-cases" -> Some TotalConfirmedCases
             | "last-confirmed-case" -> Some LastConfirmedCase
-            | "time-to-double" ->
-                match Highcharts.showDoublingTimeFeatures with
-                | true -> Some DoublingTime
+            | "weekly-growth" ->
+                match showWeeklyGrowth with
+                | true -> Some WeeklyGrowth
                 | _ -> None
             | _ -> None
         | _ -> None
@@ -137,12 +139,14 @@ let init (queryObj : obj) (data : MunicipalitiesData) : State * Cmd<Msg> =
         |> Seq.map (fun (municipalityKey, dp) ->
             let totals =
                 dp
+                |> Seq.pairwise
                 |> Seq.map (
-                    fun dp -> {
-                        Date = dp.Date
-                        ActiveCases = dp.ActiveCases
-                        ConfirmedToDate = dp.ConfirmedToDate
-                        DeceasedToDate = dp.DeceasedToDate } )
+                    fun (prevDay, currDay) -> {
+                        Date = currDay.Date
+                        ActiveCases = currDay.ActiveCases
+                        ConfirmedToday = currDay.ConfirmedToDate |> Utils.subtractIntOption prevDay.ConfirmedToDate
+                        ConfirmedToDate = currDay.ConfirmedToDate
+                        DeceasedToDate = currDay.DeceasedToDate } )
                 |> Seq.sortBy (fun dp -> dp.Date)
                 |> Seq.toList
             let totalsShown = totals |> Seq.skip ((Seq.length totals) - showMaxBars) |> Seq.toList
@@ -156,18 +160,26 @@ let init (queryObj : obj) (data : MunicipalitiesData) : State * Cmd<Msg> =
                 | Some before, Some last -> if last > before then Some (last - before) else None
                 | None, Some last -> Some last
                 | _ -> None
-            let doublingTime =
-                if activeCases.IsSome && activeCases.Value >= 5
-                then
-                    dp
-                    |> Seq.map (fun dp -> {| Date = dp.Date ; Value = dp.ActiveCases |})
-                    |> Seq.toList
-                    |> Utils.findDoublingTime
+            let weeklyGrowth =
+                let getConfirmedCases x =
+                    match x with
+                    | None -> 0.
+                    | Some x -> x.ConfirmedToDate |> Option.defaultValue 0 |> float
+                let casesNow = totals |> Seq.tryLast |> getConfirmedCases
+                let cases7dAgo = totals |> Seq.tryItem(totals.Length - 8) |> getConfirmedCases
+                let cases14dAgo = totals |> Seq.tryItem(totals.Length - 15) |> getConfirmedCases
+
+                let incidenceThisWeek = casesNow - cases7dAgo
+                let incedenceLastWeek = cases7dAgo - cases14dAgo
+
+                if activeCases.IsSome && activeCases.Value > 5 then
+                    if (incidenceThisWeek, incedenceLastWeek) = (0.,0.) then Some 0.
+                    else Some (100. * min ( incidenceThisWeek/incedenceLastWeek - 1.) 5.)  // Set the maximum value to 5 to cut off infinities
                 else None
             { Key = municipalityKey
               Name = (Utils.Dictionaries.municipalities.TryFind municipalityKey) |> Option.map (fun municipality -> municipality.Name)
               RegionKey = (dp |> Seq.last).RegionKey
-              DoublingTime = doublingTime
+              WeeklyGrowth = weeklyGrowth
               NewCases = newCases
               ActiveCases = activeCases
               MaxActiveCases = maxActive
@@ -235,21 +247,24 @@ let renderMunicipality (state : State) (municipality : Municipality) =
             ]
         ]
 
-    let renderedDoublingTime =
-        match municipality.DoublingTime with
+    let renderWeeklyGrowth =
+        match municipality.WeeklyGrowth with
         | None -> Html.none
-        | Some value ->
-            let displayValue = int (round value)
+        | Some growth ->
+            let direction =
+                if growth > 0. then "up"
+                else if growth < 0. then "down"
+                else ""
             Html.div [
-                prop.className "doubling-time"
+                prop.className "weekly-growth"
                 prop.children [
                     Html.span [
                         prop.className "label"
-                        prop.text (I18N.t "charts.municipalities.doubles")
+                        prop.text (I18N.t "charts.municipalities.weeklyGrowth")
                     ]
                     Html.span [
-                        prop.className "value"
-                        prop.text (I18N.tOptions "days.in_x_days"  {| count = displayValue |})
+                        prop.className ("value " + direction)
+                        prop.text (growth |> Utils.percentWith1DecimalSignFormatter)
                     ]
                 ]
             ]
@@ -270,12 +285,14 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                         yield Html.div [
                             prop.className "bar-wrapper"
                             prop.children [
+                                let confirmedCases = dp.ConfirmedToday |> Option.defaultValue 0
                                 let activeCases = dp.ActiveCases |> Option.defaultValue 0
                                 let deceasedToDate = dp.DeceasedToDate |> Option.defaultValue 0
                                 let recoveredToDate = confirmedToDate - deceasedToDate - activeCases
-                                let aHeight = Math.Ceiling(float activeCases * float barMaxHeight / float maxValue)
+                                let cHeight = Math.Ceiling(float confirmedCases * float barMaxHeight / float maxValue)
+                                let aHeight = Math.Ceiling(float (activeCases-confirmedCases) * float barMaxHeight / float maxValue)
                                 let dHeight = Math.Ceiling(float deceasedToDate * float barMaxHeight / float maxValue)
-                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight
+                                let rHeight = confirmedToDate * barMaxHeight / maxValue - int dHeight - int aHeight - int cHeight
                                 Html.div [
                                     prop.className "bar"
                                     prop.children [
@@ -289,6 +306,9 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                         Html.div [
                                             prop.style [ style.height (int aHeight) ]
                                             prop.className "bar--active" ]
+                                        Html.div [
+                                            prop.style [ style.height (int cHeight) ]
+                                            prop.className "bar--confirmed" ]
                                     ]
                                 ]
                                 Html.div [
@@ -297,6 +317,12 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                                         Html.div [
                                             prop.className "date"
                                             prop.text (I18N.tOptions "days.date" {| date = dp.Date |} )]
+                                        Html.div [
+                                            if (confirmedCases > 0) then
+                                                prop.className "confirmed"
+                                                prop.children [
+                                                    Html.span [ prop.text (I18N.t "charts.municipalities.confirmed") ]
+                                                    Html.b [ prop.text (I18N.NumberFormat.formatNumber(confirmedCases)) ] ] ]
                                         Html.div [
                                             if (activeCases > 0) then
                                                 prop.className "active"
@@ -368,8 +394,8 @@ let renderMunicipality (state : State) (municipality : Municipality) =
                     ]
                 ]
             ]
-            if Highcharts.showDoublingTimeFeatures then
-                renderedDoublingTime
+            if showWeeklyGrowth then
+                renderWeeklyGrowth
             else
                 renderLastCase
         ]
@@ -423,16 +449,16 @@ let renderMunicipalities (state : State) _ =
         | TotalConfirmedCases ->
             dataFilteredByRegion
             |> Seq.sortWith compareMaxCases
-        | DoublingTime ->
+        | WeeklyGrowth ->
             dataFilteredByRegion
             |> Seq.sortWith (fun m1 m2 ->
-                match m1.DoublingTime, m2.DoublingTime with
-                | None, None -> compareStringOption m1.Name m2.Name
+                match m1.WeeklyGrowth, m2.WeeklyGrowth with
+                | None, None -> compareActiveCases m1 m2
                 | Some _, None -> -1
                 | None, Some _ -> 1
                 | Some d1, Some d2 ->
-                    if d1 > d2 then 1
-                    else if d1 < d2 then -1
+                    if d1 < d2 then 1
+                    else if d1 > d2 then -1
                     else compareActiveCases m1 m2)
         | LastConfirmedCase ->
             dataFilteredByRegion

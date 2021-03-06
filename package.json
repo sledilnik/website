@@ -27,7 +27,7 @@
     "highcharts-react-official": "^3.0.0",
     "i18next": "^19.7.0",
     "i18next-browser-languagedetector": "^6.0.1",
-    "marked": "^1.2.0",
+    "marked": "^2.0.0",
     "rc-slider": "^9.5.4",
     "react": "^16.13.1",
     "react-autosuggest": "^10.1.0",

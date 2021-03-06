@@ -48,6 +48,7 @@ export default [
             "vaccination-chart",
             "schools-chart",
             "school-status-chart",
+            "sewage-chart",
             "sources-chart",
             "ratios-chart",
             "hcenters-chart",

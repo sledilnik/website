@@ -35,6 +35,18 @@ let noneToZeroFloat (value: float option) =
     | Some x -> x
     | None -> 0.
 
+let subtractIntOption (a : int option) (b : int option) =
+    match a, b with
+    | Some aa, Some bb -> Some (bb - aa)
+    | Some aa, None -> -aa |> Some
+    | None, Some _ -> b
+    | _ -> None
+
+let negativeIntOption (a : int option) =
+    match a with
+    | Some aa -> -aa |> Some
+    | None -> None
+
 [<Emit("(x => isNaN(x) ? null : x)(+$0)")>]
 let nativeParseInt (input : string) : int option = jsNative
 
@@ -75,39 +87,39 @@ let formatTo3DecimalWithTrailingZero (value: float) =
 
 let percentWith0DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=0; maximumFractionDigits=0 |})
 
 let percentWith1DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=1 |})
 
 let percentWith2DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=2 |})
 
 let percentWith3DecimalFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1; maximumFractionDigits=3 |})
 
 let percentWith1DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1
            maximumFractionDigits=1; signDisplay="always" |})
 
 let percentWith2DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=1
            maximumFractionDigits=2; signDisplay="always" |})
 
 let percentWith3DecimalSignFormatter (value: float) =
     I18N.NumberFormat.formatNumber(
-        (abs (value / 100.)),
+        (value / 100.),
         {| style="percent"; minimumFractionDigits=0
            maximumFractionDigits=3; signDisplay="always" |})
 
@@ -574,6 +586,27 @@ module Dictionaries =
         |> List.map (fun (key, name, code, population) -> key,  { Key = key ; Name = name ; Code = code ; Population = population})
         |> Map.ofList
 
+    type WastewaterTreatmentPlant = {
+        Key: string
+        Name: string
+        Color: string
+        Municipalities: (string*string)[]
+    }
+    let wastewaterTreatmentPlants =
+        [
+            "ljubljana", "OČN Ljubljana", "#457844", [|"lj", "ljubljana"|]
+            "domzale", "ČN Domžale - Kamnik", "#10829a", [|"lj", "domžale"; "lj", "kamnik"; "lj", "mengeš"; "lj", "trzin"; "lj", "komenda"; "kr", "cerklje_na_gorenjskem"|]
+            "celje", "ČN Celje", "#665191", [|"ce", "celje"; "ce", "štore"; "ce", "žalec"|] // Žalec: only Levec, part of Žalec
+            "velenje", "OČN Šaleške doline", "#777c29", [|"ce", "velenje"; "ce", "šoštanj"|]
+            "koper", "ČN Koper", "#70a471", [|"kp", "koper"; "kp", "izola"; "kp", "ankaran"|]
+            "kranj", "ČN Kranj", "#ffa600", [|"kr", "kranj"; "kr", "naklo"; "kr", "šenčur"|]
+            "maribor", "ČN Maribor", "#f95d6a", [|"mb", "maribor"; "mb", "miklavž_na_dravskem_polju"; "mb", "duplek"; "mb", "hoče-slivnica"|]]
+        |> List.map(fun (key, name, color, municipalities_) -> key, {
+            Key = key
+            Name = name
+            Color = color
+            Municipalities = municipalities_
+        }) |> Map.ofList
     type School = {
         Key : string
         KeyMain : string

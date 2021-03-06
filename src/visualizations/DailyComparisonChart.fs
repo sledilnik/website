@@ -36,7 +36,7 @@ type DisplayType =
           TestsPCR
           PositivePctPCR
           TestsHAT
-          PositivePctHAT
+          // PositivePctHAT
           VacDosesAdministered
           HospitalAdmitted
           HospitalDischarged

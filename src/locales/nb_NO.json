@@ -7,7 +7,15 @@
             "today": "I dag",
             "hospitalized": "hospitalisert",
             "title": "Vekst i bekreftede tilfeller",
-            "explainer": ""
+            "explainer": "",
+            "oneDay": "Én dag",
+            "oneWeek": "Én uke",
+            "oneMonth": "Én måned",
+            "inOneWeek": "På én uke",
+            "inTwoWeeks": "På to uker",
+            "inThreeWeeks": "På tre uker",
+            "inFourWeeks": "På fire uker",
+            "titleMenu": "Økning"
         },
         "infections": {
             "otherPersons": "Andre personer",
@@ -19,7 +27,8 @@
             "negativeTests": "Negative tester",
             "ns-apr20": "Studie: PCR",
             "totalPCR": "Alle: PCR",
-            "title": "Testing"
+            "title": "Testing",
+            "titleMenu": "Testing"
         },
         "hCenters": {
             "allRegions": "Alle steder",
@@ -30,20 +39,43 @@
             "icu": "På intensivavdeling",
             "hospitalized": "Hospitalisert",
             "active": "Aktive",
-            "title": "Bekreftede tilfeller"
+            "title": "Bekreftede tilfeller",
+            "deceased-rest": "Død",
+            "deceased-hospital": "Død (sykehus)",
+            "titleMenu": "Tilfeller"
         },
         "dailyComparison": {
             "positivePct": "Andel positive tester (%)",
             "tests": "Tester utført",
             "active": "Aktive tilfeller",
-            "new": "Bekreftede tilfeller"
+            "new": "Bekreftede tilfeller",
+            "icuAdmitted": "Innlagt på intensivavdeling",
+            "deceased": "Dødsfall",
+            "hospitalDischarged": "Utskrevet fra sykehus",
+            "hospitalAdmitted": "Innlagt på sykehus",
+            "positivePctHAT": "Andell positive: hurtigtester (%s)",
+            "testsHAT": "Tester utført: Hurtigtester"
         },
         "metricsComparison": {
             "deceased": "Dødsfall",
             "hospitalized": "Hospitalisert",
             "activeCases": "Aktive tilfeller",
             "confirmedCases": "Bekreftede tilfeller",
-            "testsPerformed": "Tester: PCR"
+            "testsPerformed": "Tester: PCR",
+            "icuDischarged": "Utskrevet fra intensivavdeling",
+            "icuAdmitted": "Innlagt på intensivavdeling",
+            "icu": "På intensivavdeling",
+            "hospitalAdmitted": "Innlagt på sykehus",
+            "hospitalDischarged": "Utskrevet fra sykehus",
+            "vaccinationAdministered2nd": "Vaksinert 💉💉",
+            "vaccinationAdministered": "Vaksinert 💉",
+            "title": "COVID-19-situasjonen i landet",
+            "titleMenu_MNE": "Montenegro - tilstand",
+            "titleMenu_MKD": "Nord-Makedonia - tilstand",
+            "titleMenu_SVN": "Slovenia - tilstand",
+            "title_MNE": "COVID-19-situasjonen i Montenegro",
+            "title_SVN": "COVID-19-situasjonen i Slovenia",
+            "title_MKD": "COVID-19-situasjonen i Nord-Makedonia"
         },
         "common": {
             "close": "Lukk",
@@ -66,7 +98,23 @@
             "zoom": "Forstørrelse",
             "loading": "Laster inn data…",
             "dsMZ": "Helseminister",
-            "dataSource": "datakilde"
+            "dataSource": "datakilde",
+            "showAll": "Vis alle",
+            "hideAll": "Skjul alle",
+            "weekYearDateFormat": "Uke %W av %Y",
+            "show7DaysAverage": "7-dagers gjennomsnitt",
+            "showToDate": "Til dags dato",
+            "dsOWD_MZ": "Vår verden gjennom data og helseministeri",
+            "dsOWD_NIJZ": "Vår verden gjennom data og NIJZ",
+            "dsOWD": "Vår verden gjennom data",
+            "dataDate": "Data til: {{ date, %a., %e. %b. }}",
+            "shortDateFormat": "%e. %b",
+            "relative": "Relativ",
+            "absolute": "Absolutt",
+            "dsMNZ": "MNZ",
+            "dsMIZS": "MIZŠ",
+            "dsSURS": "SURS",
+            "dsNIJZ": "NIJZ"
         },
         "ostanizdrav": {
             "publishedByRisk": {
@@ -81,6 +129,12 @@
                 "date": "Dato"
             },
             "valid": {
+                "date": "Dato"
+            },
+            "userPublishedByCount": {
+                "users": "Brukere"
+            },
+            "usercount": {
                 "date": "Dato"
             }
         },
@@ -102,7 +156,9 @@
             "absolute": "Absolutt",
             "female": "Kvinnelig",
             "male": "Mannlig",
-            "title": "Aldersgrupper"
+            "title": "Aldersgrupper",
+            "populationShare": "Befolkningsandel",
+            "titleMenu": "Alder, kjønn"
         },
         "municipalities": {
             "doubles": "Fordobling ",
@@ -126,23 +182,25 @@
             "countryStatus": "",
             "incidence100k": "",
             "newCases": "",
-            "title": ""
+            "title": "",
+            "titleMenu": "Europa - situasjon"
         },
         "rmap": {
             "title": ""
         },
         "map": {
-            "per100k": "",
-            "confirmedCases": "",
+            "per100k": "per 100000",
+            "confirmedCases": "Bekreftede tilfeller",
             "deceased": "",
             "absolute": "",
-            "last_x_days": "",
-            "last_x_days_plural": "",
-            "population": "",
-            "populationC": "",
-            "populationShare": "",
-            "all": "",
-            "yesterday": ""
+            "last_x_days": "{{ count }} dag",
+            "last_x_days_plural": "{{ count }} dager",
+            "population": "befolkning",
+            "populationC": "Befolkning",
+            "populationShare": "Befokningsandel",
+            "all": "Alle",
+            "yesterday": "",
+            "relativeIncrease": "Ukentlig økning"
         },
         "regions100k": {
             "deceased": "",
@@ -151,14 +209,119 @@
             "title": ""
         },
         "regions": {
-            "deceased": "",
-            "confirmedCases": "",
-            "activeCases": ""
+            "deceased": "Dødsfall",
+            "confirmedCases": "Bekreftede tilfeller",
+            "activeCases": "Aktive tilfeller"
+        },
+        "weeklyDemographics": {
+            "newCases": "Nye tilfeller",
+            "female": "Kvinner",
+            "male": "Menn",
+            "ageGroup": "Aldersgruppe"
+        },
+        "sources": {
+            "locationUnknown": "Ukjent",
+            "locationOther": "Annet",
+            "gatheringOrganized": "Organisert sammenkomst",
+            "gatheringPrivate": "Privat sammenkomst",
+            "sport": "Sportsaktivitet",
+            "restaurant": "Restaurant",
+            "shop": "Butikk",
+            "transport": "Offentlig transport",
+            "prison": "Fengsel",
+            "retirementHome": "Aldershjem",
+            "hospital": "Sykehus",
+            "work": "Arbeid",
+            "family": "Familie",
+            "quarantine": "Karantene"
+        },
+        "schoolStatus": {
+            "student-hs": "Student",
+            "pupil": "Elev",
+            "kid": "Barn",
+            "unit": "Klasse",
+            "persons": "Personer",
+            "showAll": "Alle"
+        },
+        "hospitals": {
+            "full": "Full",
+            "empty": "Tom",
+            "all": "Alle",
+            "title": "Sykehuskapasitet",
+            "titleMenu": "Kapasitet",
+            "max": "Maks.",
+            "data": "Data",
+            "allHospitals": "Alle sykehus",
+            "beds": "Sykehussenger",
+            "bedsShort": "Sengeplasser"
+        },
+        "vaccination": {
+            "byManufacturer": "Vaksinasjon levert",
+            "used": "Vaksinasjon brukt",
+            "titleMenu": "Vaksinasjon",
+            "title": "Vaksinasjon"
+        },
+        "excessDeaths": {
+            "excessByAgeGroup": {
+                "sex": {
+                    "female": "Kvinner",
+                    "male": "Menn"
+                }
+            },
+            "absolute": {
+                "title": "Årvis sammenligning"
+            }
+        },
+        "metricsCorrelation": {
+            "cases": "Bekreftede tilfeller",
+            "titleMenu": "Korrelasjon"
+        },
+        "hcCases": {
+            "otherCases": "Andre personer",
+            "totalConfirmed": "Alle bekreftede"
+        },
+        "ratios": {
+            "deceasedHospital": "Dødsfall",
+            "icuHospital": "På intensivavdeling",
+            "deceasedCases": "Dødsfall",
+            "icuCases": "På intensivavdeling",
+            "mortality": "Dødelighet"
+        },
+        "icuPatients": {
+            "titleMenu": "Intensivbehandling",
+            "title": "Intensivbehandling"
+        },
+        "patients": {
+            "allHospitals": "Alle sykehus",
+            "icu-other": "Uten ventilator",
+            "icu-discharged": "Utskrevet fra intensivavdeling",
+            "icu-admitted": "Innlagt på intensivavdeling",
+            "icu-deceased": "Død",
+            "deceased": "Død",
+            "byHospital": "Etter sykehus"
+        },
+        "deceased": {
+            "deceased-total": "Totale dødsfall",
+            "showToDate": "Til dags dato",
+            "showToday": "Daglig",
+            "titleMenu": "Dødsfall",
+            "title": "Dødsfall",
+            "deceased-rest": "Utenfor sykehus",
+            "deceased-care": "Pleiehjem",
+            "deceased-acute": "Akuttmedisinsk enhet",
+            "deceased-icu": "Intensivavdeling",
+            "deceased-other": "Annet",
+            "deceasedByAge": "Alder",
+            "deceasedByType": "Aldershjem",
+            "deceasedHospitals": "Dødssted",
+            "showPercent": "Forholdsvis",
+            "showNormal": "Absolutt"
         }
     },
     "phase": {
         "11": {
-            "description": "epidemi"
+            "description": "epidemi",
+            "title": "fase<br>11"
         },
         "10": {
             "title": "fase<br>10"
@@ -196,6 +359,26 @@
         },
         "1": {
             "title": "fase<br>1"
+        },
+        "15": {
+            "title": "fase<br>15",
+            "description": "hurtigtestmetode"
+        },
+        "14": {
+            "title": "fase<br>14",
+            "description": "hurtigtester"
+        },
+        "13": {
+            "title": "fase<br>13",
+            "description": "ny testmetode"
+        },
+        "12": {
+            "title": "fase<br>12",
+            "description": "ny testmetode"
+        },
+        "16": {
+            "description": "hurtigtestmetode",
+            "title": "fase<br>16"
         }
     },
     "weekdayShort": {
@@ -259,7 +442,8 @@
         "tabByAgeMale": "Etter alder - Mannlig",
         "tabByRegion": "Etter sted",
         "tabSummary": "Sammendrag",
-        "title": "Tabell"
+        "title": "Tabell",
+        "day": "{{ date, %e. %m. %Y }}"
     },
     "infocard": {
         "lastUpdated": "{{ date, %a, %b %e }}",
@@ -268,7 +452,11 @@
         "inHospital": "Hospitalisert",
         "active": "Aktive tilfeller",
         "confirmedToDate": "Bekreftede tilfeller",
-        "tests": "Tester i dag"
+        "tests": "Tester i dag",
+        "newCases7dInfo": "gjennomsnitt siste 7 dager",
+        "newCases7d": "Nye tilfeller",
+        "testsHAT": "Tester i dag: hurtigtest",
+        "vaccinationSummary": "Vaksinerte mennesker"
     },
     "timestamp": {
         "at": "klokken {{ date, %H:%M }}",
@@ -299,7 +487,8 @@
         "home": "Hjem",
         "menu": "Meny",
         "goToGraph": "Gå til diagram",
-        "posts": "Publikasjoner"
+        "posts": "Publikasjoner",
+        "donate": "Doner!"
     },
     "meta": {
         "description": "Sporing av COVID-19 i Slovenia - innsamlet, bekreftet, oppdatert, analysert og vurdert COVID-19-data for Slovenia.",
@@ -397,6 +586,11 @@
     },
     "week": "Uke",
     "youtube": {
-        "titleMenu": "Animasjon"
+        "titleMenu": "Animasjon",
+        "title": "Animasjon av COVID-19-spredning"
+    },
+    "posts": {
+        "readingTime": "min å lese",
+        "timestamp": "{{ date, %e. %B %Y }}"
     }
 }
