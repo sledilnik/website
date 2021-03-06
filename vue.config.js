@@ -9,13 +9,13 @@ const paths = {
 // see https://github.com/itgalaxy/generate-robotstxt
 const robotstxtPluginOptions = {
   policy: [
-    process.env.NODE_ENV === 'production' ? {
+    process.env.VUE_APP_MODE === 'production' ? {
       userAgent: "*",
       disallow: "/embed.html",
     } : {
-      userAgent: "*",
-      disallow: "/",
-    }
+        userAgent: "*",
+        disallow: "/",
+      }
   ],
 }
 
