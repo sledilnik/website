@@ -317,7 +317,9 @@ let renderChartOptions state dispatch =
         series = List.toArray allSeries
         yAxis =
             let showFirstLabel = state.ScaleType <> Linear
-            baseOptions.yAxis |> Array.map (fun ax -> {| ax with showFirstLabel = Some showFirstLabel |})
+            baseOptions.yAxis |> Array.map (fun ax -> {| ax with
+                                                          showFirstLabel = Some showFirstLabel
+                                                          min = if state.ScaleType=Linear then Some 0.0 else Some 0.5 |})
         credits = chartCreditsNIJZMZ
     |}
 
