@@ -159,7 +159,7 @@ const routes = [
   {
     path: '/',
     beforeEnter: (to, from, next) => {
-      next(i18next.language)
+      next({ path: i18next.language, replace: true })
     },
   },
   {

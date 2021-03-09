@@ -925,7 +925,11 @@
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
             "newCases7dAve": "Novi slučajevi (sedmodnevni prosjek)",
-            "activeCases": "Aktivni slučajevi"
+            "activeCases": "Aktivni slučajevi",
+            "titleMenu": "Kanalizacija",
+            "title": "Virus u kanalizaciji",
+            "concentrationGen2": "Omjer SARS-CoV-2 gena N2 i PMMoV",
+            "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV"
         }
     },
     "shortMonth": {
@@ -1174,6 +1178,10 @@
         "liftBorders": {
             "description": "Kontrole na granicama, karantene i negativni testovi nisu potrebni za cijepljene i oporavljene.",
             "title": "Granice"
+        },
+        "okRed": {
+            "title": "Obalno-krška",
+            "description": "Obalno-krška regija: zabranjeno okupljanje, zatvaranje nekih trgovina, ograničeno kretanje u/iz drugih regija."
         }
     },
     "pageNotFound": {
