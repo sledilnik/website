@@ -100,6 +100,10 @@ module.exports = {
       .use('fable-loader')
       .loader('fable-loader')
       .end()
+    
+    config.module
+      .rule('js')
+      .use('babel-loader')          
 
     config.resolve.modules.prepend(paths.src)
   }
