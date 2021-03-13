@@ -1123,6 +1123,10 @@
         "okRed": {
             "title": "Coastal–K",
             "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
+        },
+        "liftHighSchools": {
+            "title": "H.schools",
+            "description": "Relaxation: high-school grade 1-3 opened (model C), opened dormitories. Opening of teraces and caffees in Southeast Slovenia in Lower Sava region.<br>Checkpoints on borders, quarantive or negative test after five days."
         }
     },
     "days": {
@@ -1457,7 +1461,7 @@
             },
             "bordersClosure": {
                 "title": "borders",
-                "description": "All bordres and airports closed for international travelers to enter the country"
+                "description": "All borders and airports closed for international travelers to enter the country"
             },
             "debarQuarantine": {
                 "description": "First city put into full isolation",
@@ -1484,7 +1488,7 @@
                 "title": "Kafanas"
             },
             "bordersOopen": {
-                "description": "Relaxation: borders openned for foreighn citizens",
+                "description": "Relaxation: borders openned for foreign citizens",
                 "title": "Borders Open"
             }
         },
