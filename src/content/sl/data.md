@@ -10,6 +10,9 @@ Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, skupn
 
 Zbrani in preverjeni podatki so na voljo v obliki **CSV datotek**, **REST API-ja** in **Google Docs preglednic**. Nadaljna uporaba podatkov kot tudi grafov in sodelovanje pri zbiranju, obdelavi in prikazu so dobrodošli in zaželjeni. Več informacij o načinu in pogojih uporabe ter sodelovanju je na voljo v poglavju [O projektu](/sl/about).
 
+<a href="https://majazaloznik.github.io/sledilnik-data_pipelines/" class="img-link">
+<img alt="Sledilnik - tok podatkov" src="/images/data-pipelines.png"></a>
+
 ## Tabela
 
 Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).

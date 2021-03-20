@@ -10,6 +10,9 @@ In order to ensure a maximum accuracy and reliability of the data, Sledilnik com
 
 Collected and cross-checked data is available in the form of **CSV files**, **REST API** and **Google Docs sheets**. Reuse of data and visualizations is welcome and encouraged. For more information about the terms of reuse please see the [About page](/en/about).
 
+<a href="https://majazaloznik.github.io/sledilnik-data_pipelines/" class="img-link">
+<img alt="Sledilnik - data flow" src="/images/data-pipelines.png"></a>
+
 ## Table
 You can also inspect the data directly on the [Tables page](/en/tables).
 
