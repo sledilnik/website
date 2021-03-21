@@ -1402,7 +1402,7 @@
         }
     },
     "footer": {
-        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
+        "copyright": "© 2020–⁠2021 Sledilnik.org"
     },
     "embedMaker": {
         "description": "La visualizzazione specifica può essere adattata alle proprie esigenze. Potete cambiare le dimensioni della visualizzazione o limitarla ad una specifica regione o comune. Ulteriori <a href=\"https://github.com/sledilnik/website/blob/master/examples/README.md\">informazioni</a>.",

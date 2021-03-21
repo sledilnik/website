@@ -830,7 +830,7 @@
         }
     },
     "footer": {
-        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
+        "copyright": "© 2020–⁠2021 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
