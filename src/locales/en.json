@@ -1121,12 +1121,16 @@
             "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
         },
         "okRed": {
-            "title": "Coastal–K",
+            "title": "Coastal–K.",
             "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
         },
         "liftHighSchools": {
             "title": "H.schools",
             "description": "Relaxation: high-school grade 1-3 opened (model C), opened dormitories. Opening of terraces and cafes in Southeast Slovenia in Lower Sava region.<br>Checkpoints on borders, quarantive or negative test after five days."
+        },
+        "liftOkPn": {
+            "title": "Coastal–K.",
+            "description": "Coastal–Karst region: movement to/from other regions allowed. Littoral–Inner Carniola region: opening of terraces and cafes.<br>Allowed religious rites for up to 10 people in smaller churches and religious education."
         }
     },
     "days": {

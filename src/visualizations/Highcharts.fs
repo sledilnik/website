@@ -158,6 +158,7 @@ let addContainmentMeasuresFlags
         15, 2, 2021, "#ebfaeb", "liftMunicipality2"
         27, 2, 2021, "#FFe6e6", "okRed"
         8,  3, 2021, "#ebfaeb", "liftHighSchools"
+        20, 3, 2021, "#ebfaeb", "liftOkPn"
     |]
     {|
         ``type`` = "flags"
