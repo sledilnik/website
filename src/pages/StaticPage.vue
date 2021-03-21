@@ -260,6 +260,35 @@ export default {
     }
   }
 
+  div.logos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-grow: 1;
+    margin-bottom: 12px;
+
+    a {
+      display: inline-block;
+      flex: 1 1 0;
+      margin-bottom: 12px;
+      max-width: 230px;
+      min-width: 200px;
+      box-shadow: none;
+      text-decoration: none;
+
+      &:hover {
+        box-shadow: none;
+        text-decoration: none;
+      }
+
+      img {
+        padding: 10px;
+        width: 100%;
+      }
+    }
+  }
+
   iframe.youtube {
     width:320px;
     height:180px;
