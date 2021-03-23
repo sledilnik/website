@@ -814,7 +814,7 @@
             "restaurant": "Restaurant",
             "sport": "Sport Activity",
             "gatheringPrivate": "Private Gathering",
-            "gatheringOrganized": "Organized Gathering",
+            "gatheringOrganized": "Organized Event",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
         },

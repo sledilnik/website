@@ -1348,7 +1348,7 @@
             "totalImported": "Skupaj uvoženi",
             "family": "družina, skupno gospodinjstvo",
             "work": "delovno mesto",
-            "school": "vzgojno-izobraževalna institucija",
+            "school": "vzgojno-izobraževalni zavod",
             "hospital": "bolnišnica",
             "otherHealthcare": "druga zdravstvena ustanova",
             "retirementHome": "DSO/SVZ",
@@ -1358,7 +1358,7 @@
             "restaurant": "gostinski obrat",
             "sport": "športna dejavnost",
             "gatheringPrivate": "zasebno druženje",
-            "gatheringOrganized": "organizirano druženje",
+            "gatheringOrganized": "organiziran dogodek",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
         },
