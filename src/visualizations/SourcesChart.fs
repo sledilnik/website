@@ -4,6 +4,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Fable.DateFunctions
 open Browser
 open Types
 open Highcharts
@@ -229,7 +230,7 @@ let renderSeriesImportedByCountry (state: State) =
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
                                                                                                                fmtWeekYearFromTo =
-                                                                                                                  I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |}
+                                                                                                                  I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo; week=dp.DateTo.GetISOWeek() |}
 
                                                                                                               |} |> pojo) |> Array.ofSeq
                                                                       |} |> pojo
@@ -302,7 +303,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
                   fmtWeekYearFromTo =
-                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo; week=dp.DateTo.GetISOWeek() |} |}
                |> pojo)
            |> Array.ofSeq |}
     |> pojo)

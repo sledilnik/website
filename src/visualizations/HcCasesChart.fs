@@ -4,6 +4,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Fable.DateFunctions
 open Browser
 open Types
 open Highcharts
@@ -91,7 +92,7 @@ let tooltipFormatter jsThis state =
             | "healthcareEmployeesCases" -> "↳ "
             | "rhOccupantCases" -> "↳ "
             |_ -> ""
-        else    
+        else
             ""
 
     fmtWeekYearFromTo
@@ -150,7 +151,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
                   fmtTotal = getPointTotal dp |> string
                   seriesId = seriesId
                   fmtWeekYearFromTo =
-                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |}
+                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo; week=dp.DateTo.GetISOWeek() |} |}
                |> pojo)
            |> Array.ofSeq |}
     |> pojo)
@@ -185,7 +186,7 @@ let renderChartOptions (state: State) dispatch =
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series = 
+           series =
                 match state.displayType with
                 | Structure -> Series.structure |> renderSeries state |> Seq.toArray
                 | Healthcare -> Series.healthcareSplit |> renderSeries state |> Seq.toArray

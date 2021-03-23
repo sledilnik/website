@@ -11,6 +11,7 @@ open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Fable.Core.JsInterop
+open Fable.DateFunctions
 open Browser.Types
 
 open Utils.AgePopulationStats
@@ -87,7 +88,7 @@ let renderChartOptions state dispatch =
             totalCases = ageGroupData.Data.All
             maleCases = ageGroupData.Data.Male
             femaleCases = ageGroupData.Data.Female
-            dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo |}
+            dateSpan = I18N.tOptions "days.weekYearFromToDate" {| date = date; dateTo = dateTo; week=dateTo.GetISOWeek() |}
         |}
 
         point |> pojo
