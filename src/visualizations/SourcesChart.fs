@@ -390,8 +390,8 @@ let renderChartOptions (state: State) dispatch =
                                             |}
                                             {|
                                                 ``type`` = "month"
-                                                count = 3
-                                                text = I18N.tOptions "charts.common.x_months" {| count = 3 |}
+                                                count = 4
+                                                text = I18N.tOptions "charts.common.x_months" {| count = 4 |}
                                                 events = pojo {| click = onRangeSelectorButtonClick 1 |}
                                             |}
                                             {|
