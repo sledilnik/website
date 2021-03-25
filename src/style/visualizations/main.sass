@@ -543,8 +543,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background: #fff
       margin-top: $gap / 2
 
+    .changes
+      width: 95%
+      margin: 0 auto
+
     .changes__region
-      margin-left: $gap/2
       margin-bottom: $gap / 2
 
     .highcharts-legend-item.highcharts-series-0 .highcharts-point
@@ -555,6 +558,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .highcharts-legend-item.highcharts-series-2 .highcharts-point
       fill: #dba51d !important
+
+    @media only screen and (min-width: 768px)
+      .changes
+        width: 100%
 
   .municipalities-chart
     min-height: 897px
