@@ -733,7 +733,8 @@
             "administered": "Vaccinated 💉",
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
-            "deliveredDoses": "Delivered Doses"
+            "deliveredDoses": "Delivered Doses",
+            "disabled": "Data are not updated anymore since 2021-03-25. They're available on the NIJZ site: https://app.powerbi.com/view?r=eyJrIjoiZTg2ODI4MGYtMTMyMi00YmUyLWExOWEtZTlmYzIxMTI2MDlmIiwidCI6ImFkMjQ1ZGFlLTQ0YTAtNGQ5NC04OTY3LTVjNjk5MGFmYTQ2MyIsImMiOjl9&pageName=ReportSectionf7478503942700dada61 (in slovenian language only)"
         },
         "schools": {
             "title": "Cases in School and Kindergarten",

@@ -36,8 +36,24 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     border-radius: 6px
 
     &.chart-disabled
-      >div:not(.title-chart-wrapper)
-        //background: #f00
+      .disabled-notice
+        border: solid $yellow 1px
+        padding: 30px
+        margin: 0 25%
+        overflow-wrap: break-word
+        position: absolute
+        width: 50%
+        top: 200px
+        left: 0
+        z-index: 1000
+        background: $white
+        background-opacity: 50%
+        box-shadow: 0 3px 11px rgba(0,0,0,0.60)
+        @media only screen and (max-width: 400px)
+          width: 80%
+          margin: 0 10%
+
+      >div:not(.title-chart-wrapper):not(.disabled-notice)
         -webkit-filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%)
         filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%)
         // ignore all mouse events (click, hover...)

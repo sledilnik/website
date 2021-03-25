@@ -1277,7 +1277,8 @@
             "administered": "Cepljeni 💉",
             "administered2nd": "Cepljeni 💉💉",
             "usedDoses": "Uporabljenih odmerkov",
-            "deliveredDoses": "Dobavljenih odmerkov"
+            "deliveredDoses": "Dobavljenih odmerkov",
+            "disabled": "Podatki se od 25.3.2021 ne osvežujejo več. Dostopni so na spletni strani NIJZ: https://app.powerbi.com/view?r=eyJrIjoiZTg2ODI4MGYtMTMyMi00YmUyLWExOWEtZTlmYzIxMTI2MDlmIiwidCI6ImFkMjQ1ZGFlLTQ0YTAtNGQ5NC04OTY3LTVjNjk5MGFmYTQ2MyIsImMiOjl9&pageName=ReportSectionf7478503942700dada61"
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",

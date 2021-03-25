@@ -791,6 +791,12 @@ let render (state: State) (_: Msg -> unit) =
                                 renderFaqAndShareBtn viz
                             ]
                         ]
+                        if not viz.ChartEnabled then (
+                            Html.div [
+                                prop.className "disabled-notice"
+                                prop.text (t ("charts." + viz.ChartTextsGroup + ".disabled"))
+                            ]
+                        )
                         IntersectionObserver.Component.intersectionObserver
                             {| targetElementId = viz.ClassName
                                content = state |> viz.Renderer
