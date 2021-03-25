@@ -35,6 +35,21 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     box-shadow: $element-box-shadow
     border-radius: 6px
 
+    &.chart-disabled
+      >div:not(.title-chart-wrapper)
+        //background: #f00
+        -webkit-filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%)
+        filter: grayscale(100%) blur(0.8px) brightness(100%) contrast(110%)
+        // ignore all mouse events (click, hover...)
+        pointer-events: none
+        // prevent text selection
+        -webkit-touch-callout: none /* iOS Safari */
+        -webkit-user-select: none /* Safari */
+        -khtml-user-select: none /* Konqueror HTML */
+        -moz-user-select: none /* Old versions of Firefox */
+        -ms-user-select: none /* Internet Explorer/Edge */
+        user-select: none /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+
     @media only screen and (min-width: 768px)
       padding: 0 29px 32px 32px
       margin-bottom: 88px
