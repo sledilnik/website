@@ -678,7 +678,7 @@
             "retirementHome": "Dom umirovljenika",
             "locationUnknown": "Nepoznato",
             "locationOther": "Ostalo",
-            "gatheringOrganized": "Organizirano okupljanje",
+            "gatheringOrganized": "Organiziran događaj",
             "gatheringPrivate": "Privatno okupljanje",
             "sport": "Sportska aktivnost",
             "restaurant": "Restoran",
@@ -1182,6 +1182,12 @@
         "okRed": {
             "title": "Obalno-krška",
             "description": "Obalno-krška regija: zabranjeno okupljanje, zatvaranje nekih trgovina, ograničeno kretanje u/iz drugih regija."
+        },
+        "liftOkPn": {
+            "title": "Obalno-krška"
+        },
+        "liftHighSchools": {
+            "title": "Srednja škola"
         }
     },
     "pageNotFound": {
