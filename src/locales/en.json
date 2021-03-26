@@ -1131,6 +1131,10 @@
         "liftOkPn": {
             "title": "Coastal–K.",
             "description": "Coastal–Karst region: movement to/from other regions allowed. Littoral–Inner Carniola region: opening of terraces and cafes.<br>Allowed religious rites for up to 10 people in smaller churches and religious education."
+        },
+        "okGoKoRed": {
+            "title": "Red 3",
+            "description": "Coastal–Karst, Gorizia, Carinthia regions: limited movement to/from other regions.<br>HAT test is not accepted as proof to enter the country or to shorten the quarantine."
         }
     },
     "days": {

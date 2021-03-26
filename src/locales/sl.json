@@ -674,6 +674,10 @@
         "liftOkPn": {
             "title": "Obalno-k.",
             "description": "Obalno-kraška regija: dovoljeno prehajanje v in iz regije. Primorsko-notranjska regija: odprtje teras in lokalov.<br>Dovoljeni verski obredi do 10 oseb v manjših cerkvah in verska vzgoja in izobraževanje."
+        },
+        "okGoKoRed": {
+            "title": "Rdeče 3",
+            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan."
         }
     },
     "phase": {
