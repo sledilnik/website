@@ -1,6 +1,6 @@
 <template>
   <div class="hp-card-holder" :class="['cardtype-'+cardName]">
-    <div class="hp-card" v-if="!loading">
+    <div class="hp-card" :class="{ outdated }" v-if="!loading">
       <div class="card-title">{{ cardData.title }}</div>
       <div class="card-number">
         <span>{{ cardData.value | number }}<span class="card-number-extra" v-if="valueExtraText"> {{ valueExtraText | percent }}</span></span>
@@ -126,6 +126,11 @@ export default {
   background: #fff;
   box-shadow: $element-box-shadow;
   border-radius: 6px;
+
+  &.outdated>div:not(.outdated) {
+    -webkit-filter: grayscale(100%) blur(0.8px) contrast(110%);
+    filter: grayscale(100%) blur(0.8px) contrast(110%);
+  }
 
   @media only screen and (min-width: 480px) {
     padding: 26px;
