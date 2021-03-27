@@ -128,7 +128,6 @@ export default {
   border-radius: 6px;
 
   &.outdated {
-    >div:not(.outdated) {
     >div:not(.outdated):not(.card-title) {
       -webkit-filter: grayscale(100%) blur(1.3px) contrast(110%);
       filter: grayscale(100%) blur(1.3px) contrast(110%);
