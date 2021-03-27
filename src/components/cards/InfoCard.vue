@@ -127,9 +127,16 @@ export default {
   box-shadow: $element-box-shadow;
   border-radius: 6px;
 
-  &.outdated>div:not(.outdated) {
-    -webkit-filter: grayscale(100%) blur(0.8px) contrast(110%);
-    filter: grayscale(100%) blur(0.8px) contrast(110%);
+  &.outdated {
+    >div:not(.outdated) {
+      -webkit-filter: grayscale(100%) blur(1.3px) contrast(110%);
+      filter: grayscale(100%) blur(1.3px) contrast(110%);
+    }
+
+    >div.card-number {
+      -webkit-filter: grayscale(100%) blur(2.0px) contrast(110%);
+      filter: grayscale(100%) blur(2.0px) contrast(110%);
+    }
   }
 
   @media only screen and (min-width: 480px) {
