@@ -734,7 +734,7 @@
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
             "deliveredDoses": "Delivered Doses",
-            "disabled": "Data about vaccination are not updated anymore since 2021-03-25 as they are not available in machine readable form anymore. Vaccination data is currently available only via cepimose.si website (in slovenian language only)."
+            "disabled": "We have stopped updating the vaccination chart on March 25, 2021 because the data is currently not available in machine readable form. For the time being you are kindly directed to the cepimose.si website (in Slovenian only)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
