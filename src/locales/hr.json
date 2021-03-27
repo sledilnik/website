@@ -1430,7 +1430,7 @@
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana",
-        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{week}}. tjedan)"
+        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{dateTo, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",
