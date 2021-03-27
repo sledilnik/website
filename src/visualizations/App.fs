@@ -117,6 +117,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Hospitals
             ClassName = "hospitals-chart"
             ChartTextsGroup = "hospitals"
+            ChartEnabled = true
             Explicit = true
             Renderer = fun _ -> lazyView HospitalsChart.hospitalsChart () }
 
@@ -124,6 +125,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = MetricsComparison
             ClassName = "metrics-comparison-chart"
             ChartTextsGroup = "metricsComparison"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -137,6 +139,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = DailyComparison
             ClassName = "daily-comparison-chart"
             ChartTextsGroup = "dailyComparison"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -150,6 +153,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Spread
             ClassName = "spread-chart"
             ChartTextsGroup = "spread"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -163,6 +167,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Map
             ClassName = "map-chart"
             ChartTextsGroup = "map"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -176,6 +181,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = RegionMap
             ClassName = "rmap-chart"
             ChartTextsGroup = "rmap"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -189,6 +195,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Municipalities
             ClassName = "municipalities-chart"
             ChartTextsGroup = "municipalities"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -203,6 +210,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = EuropeMap
             ClassName = "europe-chart"
             ChartTextsGroup = "europe"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -216,6 +224,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = WorldMap
             ClassName = "world-chart"
             ChartTextsGroup = "world"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -229,6 +238,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = AgeGroupsTimeline
             ClassName = "age-groups-trends-chart"
             ChartTextsGroup = "ageGroupsTimeline"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -244,6 +254,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Tests
             ClassName = "tests-chart"
             ChartTextsGroup = "tests"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView TestsChart.testsChart () }
 
@@ -251,6 +262,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = HCenters
             ClassName = "hcenters-chart"
             ChartTextsGroup = "hCenters"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView HCentersChart.hCentersChart state.ApiEndpoint }
 
@@ -258,6 +270,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Infections
             ClassName = "infections-chart"
             ChartTextsGroup = "infections"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -271,6 +284,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Cases
             ClassName = "cases-chart"
             ChartTextsGroup = "cases"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -284,6 +298,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Patients
             ClassName = "patients-chart"
             ChartTextsGroup = "patients"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitals |} }
 
@@ -291,6 +306,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = IcuPatients
             ClassName = "icu-patients-chart"
             ChartTextsGroup = "icuPatients"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CovidHospitalsICU |} }
 
@@ -298,6 +314,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = CarePatients
             ClassName = "care-patients-chart"
             ChartTextsGroup = "carePatients"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView PatientsChart.patientsChart {| hTypeToDisplay = PatientsChart.HospitalType.CareHospitals |} }
 
@@ -305,6 +322,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Ratios
             ClassName = "ratios-chart"
             ChartTextsGroup = "ratios"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -318,6 +336,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = AgeGroups
             ClassName = "age-groups-chart"
             ChartTextsGroup = "ageGroups"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -331,6 +350,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Regions
             ClassName = "regions-chart"
             ChartTextsGroup = "regions"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -353,6 +373,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Regions100k
             ClassName = "regions-chart-100k"
             ChartTextsGroup = "regions100k"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -375,6 +396,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Vaccination
             ClassName = "vaccination-chart"
             ChartTextsGroup = "vaccination"
+            ChartEnabled = false
             Explicit = false
             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
 
@@ -382,6 +404,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Schools
             ClassName = "schools-chart"
             ChartTextsGroup = "schools"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView SchoolsChart.schoolsChart () }
 
@@ -389,6 +412,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = SchoolStatus
             ClassName = "school-status-chart"
             ChartTextsGroup = "schoolStatus"
+            ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView SchoolStatusChart.schoolStatusChart {| query = state.Query |} }
 
@@ -396,6 +420,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Sources
             ClassName = "sources-chart"
             ChartTextsGroup = "sources"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -409,6 +434,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Sewage
             ClassName = "sewage-chart"
             ChartTextsGroup = "sewage"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -423,6 +449,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = HcCases
             ClassName = "hc-cases-chart"
             ChartTextsGroup = "hcCases"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -436,6 +463,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = Deceased
             ClassName = "deceased-chart"
             ChartTextsGroup = "deceased"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -451,6 +479,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = CountriesCasesPer100k
             ClassName = "countries-cases-chart"
             ChartTextsGroup = "countriesNewCasesPer100k"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -471,6 +500,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = CountriesActiveCasesPer100k
             ClassName = "countries-active-chart"
             ChartTextsGroup = "countriesActiveCasesPer100k"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -491,6 +521,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = CountriesNewDeathsPer100k
             ClassName = "countries-new-deaths-chart"
             ChartTextsGroup = "countriesNewDeathsPer100k"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -511,6 +542,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = CountriesTotalDeathsPer100k
             ClassName = "countries-total-deaths-chart"
             ChartTextsGroup = "countriesTotalDeathsPer100k"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -531,6 +563,7 @@ let render (state: State) (_: Msg -> unit) =
 //          { VisualizationType = CountriesDeathsPer100k
 //            ClassName = "countries-deaths-per-cases"
 //            ChartTextsGroup = "countriesDeathsPerCases"
+//            ChartEnabled = true
 //            Explicit = false
 //            Renderer =
 //                fun _ ->
@@ -544,6 +577,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = PhaseDiagram
             ClassName = "phase-diagram-chart"
             ChartTextsGroup = "phaseDiagram"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -557,6 +591,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = ExcessDeaths
             ClassName = "excess-deaths-chart"
             ChartTextsGroup = "excessDeaths"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -570,6 +605,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = MetricsCorrelation
             ClassName = "metrics-correlation-chart"
             ChartTextsGroup = "metricsCorrelation"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -585,6 +621,7 @@ let render (state: State) (_: Msg -> unit) =
           { VisualizationType = WeeklyDemographics
             ClassName = "weekly-demographics-chart"
             ChartTextsGroup = "weeklyDemographics"
+            ChartEnabled = true
             Explicit = false
             Renderer =
                 fun state ->
@@ -744,7 +781,7 @@ let render (state: State) (_: Msg -> unit) =
             visualizations
             |> List.map (fun viz ->
                 Html.section [
-                    prop.className [ viz.ClassName ; "visualization-chart" ]
+                    prop.className [ viz.ClassName ; "visualization-chart"; (if viz.ChartEnabled then "" else "chart-disabled") ]
                     prop.id viz.ClassName
                     prop.children [
                         Html.div [
@@ -754,6 +791,12 @@ let render (state: State) (_: Msg -> unit) =
                                 renderFaqAndShareBtn viz
                             ]
                         ]
+                        if not viz.ChartEnabled then (
+                            Html.div [
+                                prop.className "disabled-notice"
+                                prop.text (chartText viz.ChartTextsGroup "disabled")
+                            ]
+                        )
                         IntersectionObserver.Component.intersectionObserver
                             {| targetElementId = viz.ClassName
                                content = state |> viz.Renderer

@@ -228,6 +228,7 @@ type Visualization = {
     VisualizationType: VisualizationType
     ClassName: string
     ChartTextsGroup: string
+    ChartEnabled: bool
     Explicit: bool
     Renderer: State -> Fable.React.ReactElement
 }
