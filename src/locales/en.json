@@ -734,7 +734,7 @@
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
             "deliveredDoses": "Delivered Doses",
-            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the cepimose.si website (in Slovenian only)."
+            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the [cepimose.si](https://cepimose.si) website (in Slovenian only)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
