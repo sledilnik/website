@@ -793,7 +793,7 @@ let render (state: State) (_: Msg -> unit) =
                         ]
                         if not viz.ChartEnabled then (
                             Html.div [
-                                prop.className ["disabled-notice"; "link"]
+                                prop.className "disabled-notice"
                                 prop.children
                                         (Markdown.Markdown.markdown [prop.text (chartText viz.ChartTextsGroup "disabled")])
                             ]
