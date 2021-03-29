@@ -678,6 +678,10 @@
         "okGoKoRed": {
             "title": "Rdeče 3",
             "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Meje",
+            "description": "Prepoved potovanj v rdeča območja (razen za cepljene in prebolele).<br>Strožji režim na meji (sprejeti le PCR iz EU/Schengena, prečkanje meje le na kontrolnih točkah)."
         }
     },
     "phase": {
