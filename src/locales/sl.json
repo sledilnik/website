@@ -677,7 +677,11 @@
         },
         "okGoKoRed": {
             "title": "Rdeče 3",
-            "description": "power"
+            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Meje",
+            "description": "Prepoved potovanj v rdeča območja (razen za cepljene in prebolele).<br>Strožji režim na meji (sprejeti le PCR iz EU/Schengena, prečkanje meje le na kontrolnih točkah)."
         }
     },
     "phase": {
@@ -1282,7 +1286,7 @@
             "administered2nd": "Cepljeni 💉💉",
             "usedDoses": "Uporabljenih odmerkov",
             "deliveredDoses": "Dobavljenih odmerkov",
-            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na cepimose.si strani."
+            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani [cepimose.si](https://cepimose.si)."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",

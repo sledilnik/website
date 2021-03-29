@@ -38,7 +38,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     &.chart-disabled
       .disabled-notice
         border: solid $yellow 1px
-        padding: 30px
+        padding: 25px 30px 12px 30px
         margin: 0 25%
         overflow-wrap: break-word
         position: absolute
@@ -52,6 +52,25 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
         @media only screen and (max-width: 768px)
           width: 80%
           margin: 0 10%
+
+        font-size: 14px
+        line-height: 1.7
+
+        a
+          font-weight: 600
+          transition: all 0.35s ease-in-out
+          box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow
+          text-decoration: none
+          color: rgba(0, 0, 0, 0.8)
+
+          &:hover
+            text-decoration: none
+            color: rgba(0, 0, 0, 0.8)
+            font-weight: 600
+            box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
+
+          strong
+            font-weight: 600
 
       >div:not(.title-chart-wrapper):not(.disabled-notice)
         -webkit-filter: grayscale(100%) blur(1.3px) brightness(100%) contrast(110%)

@@ -160,6 +160,7 @@ let addContainmentMeasuresFlags
         8,  3, 2021, "#ebfaeb", "liftHighSchools"
         20, 3, 2021, "#ebfaeb", "liftOkPn"
         26, 3, 2021, "#FFe6e6", "okGoKoRed"
+        29, 3, 2021, "#FFe6e6", "bordersClosed"
     |]
     {|
         ``type`` = "flags"

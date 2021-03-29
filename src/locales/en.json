@@ -734,7 +734,7 @@
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
             "deliveredDoses": "Delivered Doses",
-            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the cepimose.si website (in Slovenian only)."
+            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the [cepimose.si](https://cepimose.si) website (in Slovenian only)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
@@ -1135,7 +1135,11 @@
         },
         "okGoKoRed": {
             "title": "Red 3",
-            "description": "Coastal–Karst, Gorizia, Carinthia regions: limited movement to/from other regions.<br>HAT test is not accepted as proof to enter the country or to shorten the quarantine."
+            "description": "Coastal–Karst, Gorizia, Carinthia regions: limited movement to/from other regions.<br>HAT test is not accepted as proof to enter the country or to shorten the quarantine. Movement restricted between 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Borders",
+            "description": "Travel restricted to red zones (allowed for vaccinated and recovered).<br>Strict border regime (only PCR from EU/Schengen countries, border crossing only on checkpoints)."
         }
     },
     "days": {
