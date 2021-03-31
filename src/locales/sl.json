@@ -682,6 +682,14 @@
         "bordersClosed": {
             "title": "Meje",
             "description": "Prepoved potovanj v rdeča območja (razen za cepljene in prebolele).<br>Strožji režim na meji (sprejeti le PCR iz EU/Schengena, prečkanje meje le na kontrolnih točkah)."
+        },
+        "elevenDays": {
+            "title": "11 dni",
+            "description": "Prepoved zbiranja ljudi, shodov, porok, praznovanj, verskih obredov. Zaprejo se vrtci in šole (šolanje na daljavo) ter nenujne trgovine (razen živilskih, tehničnih in vrtnih oddelkov).<br>Prepoved prehajanja med statističnimi regijami. Obvezna uporaba mask na prostem razen pri športni dejavnosti na zelenih površinah."
+        },
+        "liftEaster": {
+            "title": "V.noč",
+            "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti)."
         }
     },
     "phase": {
