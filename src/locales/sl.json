@@ -1294,7 +1294,7 @@
             "administered2nd": "Cepljeni 💉💉",
             "usedDoses": "Uporabljenih odmerkov",
             "deliveredDoses": "Dobavljenih odmerkov",
-            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani [cepimose.si](https://cepimose.si)."
+            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href='https://cepimose.si' target='_blank'>cepimose.si</a>."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
