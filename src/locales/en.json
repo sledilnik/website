@@ -1147,7 +1147,7 @@
         },
         "liftEaster": {
             "title": "Easter",
-            "description": "Easter lockdown measures: Travelling between regions and family visits are allowed between 5 am and 10 pm<br>in a group of up to 6 people from 2 households (children under 15 years are not included). All other curfew rules remain in place."
+            "description": "Easter lockdown measures: Travelling between regions and family visits are allowed between 5 am and 10 pm<br>in a group of up to 6 people from 2 households (children under 15 are not included in the restrictions). All other curfew rules remain in place."
         }
     },
     "days": {
