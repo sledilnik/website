@@ -685,11 +685,11 @@
         },
         "elevenDays": {
             "title": "11 dni",
-            "description": "Prepoved zbiranja ljudi, shodov, porok, praznovanj, verskih obredov. Zaprejo se vrtci in šole (šolanje na daljavo) ter nenujne trgovine (razen živilskih, tehničnih in vrtnih oddelkov).<br>Prepoved prehajanja med statističnimi regijami. Obvezna uporaba mask na prostem razen pri športni dejavnosti na zelenih površinah."
+            "description": "Prepoved zbiranja ljudi, shodov, porok, praznovanj, verskih obredov.<br>Zaprejo se vrtci in šole (šolanje na daljavo) ter nenujne trgovine (razen živilskih, tehničnih in vrtnih oddelkov).<br>Prepoved prehajanja med statističnimi regijami. Obvezna uporaba mask na prostem razen pri športni dejavnosti na zelenih površinah."
         },
         "liftEaster": {
             "title": "V.noč",
-            "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti)."
+            "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah<br>z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti). Ostale omejitve ostajajo nespremenjene."
         }
     },
     "phase": {
