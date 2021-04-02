@@ -52,7 +52,8 @@
         "links": "",
         "animation": "",
         "world": "",
-        "menu": "Меню"
+        "menu": "Меню",
+        "posts": "Публикации"
     },
     "weekday": {
         "6": "Суббота",
