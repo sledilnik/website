@@ -794,7 +794,9 @@ let render (state: State) (_: Msg -> unit) =
                         if not viz.ChartEnabled then (
                             Html.div [
                                 prop.className "disabled-notice"
-                                prop.text (chartText viz.ChartTextsGroup "disabled")
+                                prop.children [
+                                    Utils.Markdown.render (chartText viz.ChartTextsGroup "disabled")
+                                ]
                             ]
                         )
                         IntersectionObserver.Component.intersectionObserver

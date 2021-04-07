@@ -677,7 +677,19 @@
         },
         "okGoKoRed": {
             "title": "Rdeče 3",
-            "description": "power"
+            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Meje",
+            "description": "Prepoved potovanj v rdeča območja (razen za cepljene in prebolele).<br>Strožji režim na meji (sprejeti le PCR iz EU/Schengena, prečkanje meje le na kontrolnih točkah)."
+        },
+        "elevenDays": {
+            "title": "11 dni",
+            "description": "Prepoved zbiranja ljudi, shodov, porok, praznovanj, verskih obredov.<br>Zaprejo se vrtci in šole (šolanje na daljavo) ter nenujne trgovine (razen živilskih, tehničnih in vrtnih oddelkov).<br>Prepoved prehajanja med statističnimi regijami. Obvezna uporaba mask na prostem razen pri športni dejavnosti na zelenih površinah."
+        },
+        "liftEaster": {
+            "title": "V.noč",
+            "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah<br>z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti). Ostale omejitve ostajajo nespremenjene."
         }
     },
     "phase": {
@@ -1282,7 +1294,7 @@
             "administered2nd": "Cepljeni 💉💉",
             "usedDoses": "Uporabljenih odmerkov",
             "deliveredDoses": "Dobavljenih odmerkov",
-            "disabled": "Podatki o cepljenju se od 25.3.2021 ne osvežujejo več saj niso več na voljo v strojno berljivi obliki. Podatke o cepljenju lahko trenutno spremljate samo na cepimose.si strani."
+            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href='https://cepimose.si' target='_blank'>cepimose.si</a>."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
