@@ -733,7 +733,8 @@
             "administered": "Vaccinated 💉",
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
-            "deliveredDoses": "Delivered Doses"
+            "deliveredDoses": "Delivered Doses",
+            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href='https://cepimose.si' target='_blank'>cepimose.si</a> website (in Slovenian only)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
@@ -759,7 +760,7 @@
             "search": "Search by name of school",
             "showActive": "Active",
             "showAll": "All",
-            "regionsWithChanges": "Changec regime in school or kindergarten in past week by region:",
+            "regionsWithChanges": "Changes regime in school or kindergarten in the past week by region:",
             "regimeChange": "Class - changed regime",
             "absence": " - absence due to infection",
             "employee": "Employee",
@@ -814,7 +815,7 @@
             "restaurant": "Restaurant",
             "sport": "Sport Activity",
             "gatheringPrivate": "Private Gathering",
-            "gatheringOrganized": "Organized Gathering",
+            "gatheringOrganized": "Organized Event",
             "locationOther": "Other",
             "locationUnknown": "Unknown"
         },
@@ -830,7 +831,7 @@
         }
     },
     "footer": {
-        "copyright": "🄯© 2020–⁠2021 Sledilnik.org"
+        "copyright": "© 2020–⁠2021 Sledilnik.org"
     },
     "tableDict": {
         "tests_performed": "Tests PCR (daily)",
@@ -1121,8 +1122,32 @@
             "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
         },
         "okRed": {
-            "title": "Coastal–K",
+            "title": "Coastal–K.",
             "description": "Coastal–Karst region: gathering forbidden, closure of some shops, limited movement to/from other regions."
+        },
+        "liftHighSchools": {
+            "title": "H.schools",
+            "description": "Relaxation: high-school grade 1-3 opened (model C), opened dormitories. Opening of terraces and cafes in Southeast Slovenia in Lower Sava region.<br>Checkpoints on borders, quarantive or negative test after five days."
+        },
+        "liftOkPn": {
+            "title": "Coastal–K.",
+            "description": "Coastal–Karst region: movement to/from other regions allowed. Littoral–Inner Carniola region: opening of terraces and cafes.<br>Allowed religious rites for up to 10 people in smaller churches and religious education."
+        },
+        "okGoKoRed": {
+            "title": "Red 3",
+            "description": "Coastal–Karst, Gorizia, Carinthia regions: limited movement to/from other regions.<br>HAT test is not accepted as proof to enter the country or to shorten the quarantine. Movement restricted between 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Borders",
+            "description": "Travel restricted to red zones (allowed for vaccinated and recovered).<br>Strict border regime (only PCR from EU/Schengen countries, border crossing only on checkpoints)."
+        },
+        "elevenDays": {
+            "title": "11 Days",
+            "description": "Social gatherings ban (incl. weddings, celebrations, religious ceremonies). A closure of all schools and kindergartens as well as non-essential shops<br>(except for food stores and markets, technical stores and garden centres). Travel between different Slovene regions is banned.<br>Mandatory use of masks outdoors except for sport activities on green areas."
+        },
+        "liftEaster": {
+            "title": "Easter",
+            "description": "Easter lockdown measures: Travelling between regions and family visits are allowed between 5 am and 10 pm<br>in a group of up to 6 people from 2 households (children under 15 are not included in the restrictions). All other curfew rules remain in place."
         }
     },
     "days": {
@@ -1132,7 +1157,7 @@
         "x_days_ago_plural": "{{ count }} days ago",
         "date": "{{ date, %b %e }}",
         "longerDate": "{{ date, %A, %B %e, %Y }}",
-        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{dateTo, Week %W of %Y}})"
+        "weekYearFromToDate": "<b>{{date, %b %e}} - {{dateTo, %b %e}}</b> ({{date, Week %W of %Y}})"
     },
     "region": {
         "si": "Slovenia (all regions)",
@@ -1457,7 +1482,7 @@
             },
             "bordersClosure": {
                 "title": "borders",
-                "description": "All bordres and airports closed for international travelers to enter the country"
+                "description": "All borders and airports closed for international travelers to enter the country"
             },
             "debarQuarantine": {
                 "description": "First city put into full isolation",
@@ -1484,7 +1509,7 @@
                 "title": "Kafanas"
             },
             "bordersOopen": {
-                "description": "Relaxation: borders openned for foreighn citizens",
+                "description": "Relaxation: borders openned for foreign citizens",
                 "title": "Borders Open"
             }
         },

@@ -2,13 +2,18 @@
 
 In order to ensure a maximum accuracy and reliability of the data, Sledilnik community uses (cross-checked) publicly available data from __official governemnt sources__, such as the NIJZ, the Government of the Republic of Slovenia, the Ministry of Health, etc., from __health system sources__, such as UKC Ljubljana, UKC Maribor, UK Golnik and others, __Civil protection services__ and from the __national and local media__.
 
-<a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
-" alt="Ministrstvo za zdravje" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="https://www.gov.si/assets/ministrstva/MIZS/Pasice-in-slike/O-ministrstvu/Logo_MIZS_slo.jpg" alt="MIZŠ" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="https://www.nil.com/assets/Blog/_resampled/FillWyIxMTY4IiwiNDAwIl0/MNZ.jpg" alt="MNZ" width="300"></a>
+<div class="logos">
+    <a href="https://nijz.si"><img src="/images/logo-NIJZ.jpeg" alt="NIJZ"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="/images/logo-MZ.jpeg" alt="Ministrstvo za zdravje"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="/images/logo-MIZS.jpeg" alt="MIZŠ"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="/images/logo-MNZ.jpeg" alt="MNZ"></a>
+    <a href="https://www.nib.si/"><img src="/images/logo-NIB.png" alt="NIB - National Institute of Biology"/></a>
+</div>
 
 Collected and cross-checked data is available in the form of **CSV files**, **REST API** and **Google Docs sheets**. Reuse of data and visualizations is welcome and encouraged. For more information about the terms of reuse please see the [About page](/en/about).
+
+<a href="https://majazaloznik.github.io/sledilnik-data_pipelines/" class="img-link">
+<img alt="Sledilnik - data flow" src="/images/data-pipelines.png"></a>
 
 ## Table
 You can also inspect the data directly on the [Tables page](/en/tables).

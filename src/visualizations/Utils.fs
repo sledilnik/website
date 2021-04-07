@@ -123,6 +123,14 @@ let percentWith3DecimalSignFormatter (value: float) =
         {| style="percent"; minimumFractionDigits=0
            maximumFractionDigits=3; signDisplay="always" |})
 
+module Markdown =
+
+    let marked (mardown : string) : string =
+        importDefault "marked"
+
+    let render markdown : ReactElement =
+        Html.div [ prop.dangerouslySetInnerHTML (marked markdown) ]
+
 let calculateDoublingTime (v1 : {| Day : int ; PositiveTests : int |}) (v2 : {| Day : int ; PositiveTests : int |}) =
     let v1,  v2,  dt = float v1.PositiveTests,  float v2.PositiveTests,  float (v2.Day - v1.Day)
     if v1 = v2 then None

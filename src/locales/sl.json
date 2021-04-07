@@ -90,7 +90,7 @@
         "x_days_ago_3": "Pred {{ count }} dnevi",
         "date": "{{ date, %e. %b }}",
         "longerDate": "{{ date, %A, %e. %B %Y }}",
-        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{dateTo, %W. teden %Y}})"
+        "weekYearFromToDate": "<b>{{date, %e. %b}} - {{dateTo, %e. %b}}</b> ({{date, %W. teden %Y}})"
     },
     "month": {
         "0": "januar",
@@ -666,6 +666,30 @@
         "okRed": {
             "title": "Obalno-k.",
             "description": "Obalno-kraška regija: prepoved zbiranja, zaprtje nekaterih trgovin, prepoved prehajanja v in iz regije."
+        },
+        "liftHighSchools": {
+            "title": "S.šole",
+            "description": "Sproščanje: 1-3.letnik srednjih šol po modelu C, dijaški domovi. Odprtje teras in lokalov v Jugovzhodni Sloveniji in Posavski regiji.<br>Uvedba kontrolnih točk na mejah, prekinitev karantene s testom šele peti dan."
+        },
+        "liftOkPn": {
+            "title": "Obalno-k.",
+            "description": "Obalno-kraška regija: dovoljeno prehajanje v in iz regije. Primorsko-notranjska regija: odprtje teras in lokalov.<br>Dovoljeni verski obredi do 10 oseb v manjših cerkvah in verska vzgoja in izobraževanje."
+        },
+        "okGoKoRed": {
+            "title": "Rdeče 3",
+            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22:00-5:00."
+        },
+        "bordersClosed": {
+            "title": "Meje",
+            "description": "Prepoved potovanj v rdeča območja (razen za cepljene in prebolele).<br>Strožji režim na meji (sprejeti le PCR iz EU/Schengena, prečkanje meje le na kontrolnih točkah)."
+        },
+        "elevenDays": {
+            "title": "11 dni",
+            "description": "Prepoved zbiranja ljudi, shodov, porok, praznovanj, verskih obredov.<br>Zaprejo se vrtci in šole (šolanje na daljavo) ter nenujne trgovine (razen živilskih, tehničnih in vrtnih oddelkov).<br>Prepoved prehajanja med statističnimi regijami. Obvezna uporaba mask na prostem razen pri športni dejavnosti na zelenih površinah."
+        },
+        "liftEaster": {
+            "title": "V.noč",
+            "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah<br>z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti). Ostale omejitve ostajajo nespremenjene."
         }
     },
     "phase": {
@@ -1269,7 +1293,8 @@
             "administered": "Cepljeni 💉",
             "administered2nd": "Cepljeni 💉💉",
             "usedDoses": "Uporabljenih odmerkov",
-            "deliveredDoses": "Dobavljenih odmerkov"
+            "deliveredDoses": "Dobavljenih odmerkov",
+            "disabled": "Podatki o cepljenju se od 25. 3. NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href='https://cepimose.si' target='_blank'>cepimose.si</a>."
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
@@ -1340,7 +1365,7 @@
             "totalImported": "Skupaj uvoženi",
             "family": "družina, skupno gospodinjstvo",
             "work": "delovno mesto",
-            "school": "vzgojno-izobraževalna institucija",
+            "school": "vzgojno-izobraževalni zavod",
             "hospital": "bolnišnica",
             "otherHealthcare": "druga zdravstvena ustanova",
             "retirementHome": "DSO/SVZ",
@@ -1350,7 +1375,7 @@
             "restaurant": "gostinski obrat",
             "sport": "športna dejavnost",
             "gatheringPrivate": "zasebno druženje",
-            "gatheringOrganized": "organizirano druženje",
+            "gatheringOrganized": "organiziran dogodek",
             "locationOther": "drugo",
             "locationUnknown": "neznano"
         },
