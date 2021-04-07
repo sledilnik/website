@@ -887,7 +887,7 @@
             "search": "Pretraži po imenu škole",
             "titleMenu": "Škole, vrtići – slučajevi",
             "title": "Slučajevi u školama i vrtićima",
-            "regionsWithChanges": "Promijenjen način rada u školama ili vrtićima u prošlom tjednu po regijama:",
+            "regionsWithChanges": "Mijenja raspored u školama ili vrtićima u prošlom tjednu po regijama:",
             "showAll": "Svi",
             "showActive": "Aktivni"
         },
@@ -1187,7 +1187,19 @@
             "title": "Obalno-krška"
         },
         "liftHighSchools": {
-            "title": "Srednja škola"
+            "title": "Srednje škole"
+        },
+        "liftEaster": {
+            "title": "Uskrs"
+        },
+        "elevenDays": {
+            "title": "11 dana"
+        },
+        "bordersClosed": {
+            "title": "Granice"
+        },
+        "okGoKoRed": {
+            "title": "Crvena 3"
         }
     },
     "pageNotFound": {
