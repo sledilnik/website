@@ -2,13 +2,18 @@
 
 Da bi zagotovili maksimalno natančnost in zanesljivost podatkov v zbirki, skupnost Sledilnik za vnos in obdelavo podatkov uporablja (navzkrižno preverjane) javno dostopne podatke iz __uradnih virov__, kot so NIJZ, Vlada RS, Ministrstvo za zdravje itn., iz __administrativnih virov zdravstvenega sistema__, kot so UKC Ljubljana, UKC Maribor, UK Golnik in drugi, __virov Civilne zaščite__ ter iz __nacionalnih in lokalnih medijev__.
 
-<a href="https://nijz.si"><img src="https://www.nijz.si/sites/www.nijz.si/files/uploaded/logotip-01.jpg" alt="NIJZ" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="https://www.skupine.si/mma/logo%20Ministrstvo%20za%20zdravje%20RS/2017102413574462/mid/
-" alt="Ministrstvo za zdravje" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="https://www.gov.si/assets/ministrstva/MIZS/Pasice-in-slike/O-ministrstvu/Logo_MIZS_slo.jpg" alt="MIZŠ" width="300"/></a>
-<a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="https://www.nil.com/assets/Blog/_resampled/FillWyIxMTY4IiwiNDAwIl0/MNZ.jpg" alt="MNZ" width="300"></a>
+<div class="logos">
+    <a href="https://nijz.si"><img src="/images/logo-NIJZ.jpeg" alt="NIJZ"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-zdravje/"><img src="/images/logo-MZ.jpeg" alt="Ministrstvo za zdravje"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-izobrazevanje-znanost-in-sport"><img src="/images/logo-MIZS.jpeg" alt="MIZŠ"/></a>
+    <a href="https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/"><img src="/images/logo-MNZ.jpeg" alt="MNZ"></a>
+    <a href="https://www.nib.si/"><img src="/images/logo-NIB.png" alt="NIB - Nacionalni inštitut za biologijo"/></a>
+</div>
 
 Zbrani in preverjeni podatki so na voljo v obliki **CSV datotek**, **REST API-ja** in **Google Docs preglednic**. Nadaljna uporaba podatkov kot tudi grafov in sodelovanje pri zbiranju, obdelavi in prikazu so dobrodošli in zaželjeni. Več informacij o načinu in pogojih uporabe ter sodelovanju je na voljo v poglavju [O projektu](/sl/about).
+
+<a href="https://majazaloznik.github.io/sledilnik-data_pipelines/" class="img-link">
+<img alt="Sledilnik - tok podatkov" src="/images/data-pipelines.png"></a>
 
 ## Tabela
 

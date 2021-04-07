@@ -678,7 +678,7 @@
             "retirementHome": "Dom umirovljenika",
             "locationUnknown": "Nepoznato",
             "locationOther": "Ostalo",
-            "gatheringOrganized": "Organizirano okupljanje",
+            "gatheringOrganized": "Organiziran događaj",
             "gatheringPrivate": "Privatno okupljanje",
             "sport": "Sportska aktivnost",
             "restaurant": "Restoran",
@@ -887,7 +887,7 @@
             "search": "Pretraži po imenu škole",
             "titleMenu": "Škole, vrtići – slučajevi",
             "title": "Slučajevi u školama i vrtićima",
-            "regionsWithChanges": "Promijenjen način rada u školama ili vrtićima u prošlom tjednu po regijama:",
+            "regionsWithChanges": "Mijenja raspored u školama ili vrtićima u prošlom tjednu po regijama:",
             "showAll": "Svi",
             "showActive": "Aktivni"
         },
@@ -1182,6 +1182,24 @@
         "okRed": {
             "title": "Obalno-krška",
             "description": "Obalno-krška regija: zabranjeno okupljanje, zatvaranje nekih trgovina, ograničeno kretanje u/iz drugih regija."
+        },
+        "liftOkPn": {
+            "title": "Obalno-krška"
+        },
+        "liftHighSchools": {
+            "title": "Srednje škole"
+        },
+        "liftEaster": {
+            "title": "Uskrs"
+        },
+        "elevenDays": {
+            "title": "11 dana"
+        },
+        "bordersClosed": {
+            "title": "Granice"
+        },
+        "okGoKoRed": {
+            "title": "Crvena 3"
         }
     },
     "pageNotFound": {
@@ -1424,7 +1442,7 @@
         "in_x_days_0": "za {{ count }} dan",
         "in_x_days_1": "za {{ count }} dana",
         "in_x_days_2": "za {{ count }} dana",
-        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{dateTo, %W. tjedan %Y.}})"
+        "weekYearFromToDate": "<b>{{date, %e. %m.}} – {{dateTo, %e. %m.}}</b> ({{date, %W. tjedan %Y.}})"
     },
     "meta": {
         "title": "COVID-19 praćenje",

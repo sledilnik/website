@@ -35,6 +35,56 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
     box-shadow: $element-box-shadow
     border-radius: 6px
 
+    &.chart-disabled
+      .disabled-notice
+        border: solid $yellow 1px
+        padding: 25px 30px 12px 30px
+        margin: 0 25%
+        overflow-wrap: break-word
+        position: absolute
+        width: 50%
+        top: 200px
+        left: 0
+        z-index: 1
+        background: $white
+        background-opacity: 50%
+        box-shadow: 0 3px 11px rgba(0,0,0,0.60)
+        @media only screen and (max-width: 768px)
+          width: 80%
+          margin: 0 10%
+
+        font-size: 14px
+        line-height: 1.7
+
+        a
+          font-weight: 600
+          transition: all 0.35s ease-in-out
+          box-shadow: inset 0 -1px 0 white, inset 0 -4px $yellow
+          text-decoration: none
+          color: rgba(0, 0, 0, 0.8)
+
+          &:hover
+            text-decoration: none
+            color: rgba(0, 0, 0, 0.8)
+            font-weight: 600
+            box-shadow: inset 0 -1px 0 white, inset 0 -20px $yellow
+
+          strong
+            font-weight: 600
+
+      >div:not(.title-chart-wrapper):not(.disabled-notice)
+        -webkit-filter: grayscale(100%) blur(1.3px) brightness(100%) contrast(110%)
+        filter: grayscale(100%) blur(1.3px) brightness(100%) contrast(110%)
+        // ignore all mouse events (click, hover...)
+        pointer-events: none
+        // prevent text selection
+        -webkit-touch-callout: none /* iOS Safari */
+        -webkit-user-select: none /* Safari */
+        -khtml-user-select: none /* Konqueror HTML */
+        -moz-user-select: none /* Old versions of Firefox */
+        -ms-user-select: none /* Internet Explorer/Edge */
+        user-select: none /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+
     @media only screen and (min-width: 768px)
       padding: 0 29px 32px 32px
       margin-bottom: 88px
@@ -163,7 +213,7 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       &.show
         opacity: 1
         visibility: visible
-        z-index: 1
+        z-index: 2
         transform: translateY(0)
 
       .share-link
@@ -543,8 +593,11 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
       background: #fff
       margin-top: $gap / 2
 
+    .changes
+      width: 95%
+      margin: 0 auto
+
     .changes__region
-      margin-left: $gap/2
       margin-bottom: $gap / 2
 
     .highcharts-legend-item.highcharts-series-0 .highcharts-point
@@ -555,6 +608,10 @@ $box-shadow: 0 6px 38px -18px rgba(0, 0, 0, 0.3), 0 11px 12px -12px rgba(0, 0, 0
 
     .highcharts-legend-item.highcharts-series-2 .highcharts-point
       fill: #dba51d !important
+
+    @media only screen and (min-width: 768px)
+      .changes
+        width: 100%
 
   .municipalities-chart
     min-height: 897px

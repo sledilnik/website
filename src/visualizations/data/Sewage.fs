@@ -5,7 +5,7 @@ open Fable.Core
 open Fable.SimpleHttp
 open Fable.SimpleJson
 
-let url = "https://api-stage.sledilnik.org/api/sewage"
+let url = "https://api.sledilnik.org/api/sewage"
 
 type PlantStats = {
    covN1Compensated: float option
