@@ -240,6 +240,9 @@
             "hideAll": "Hide all",
             "showAll": "Show all"
         },
+        "note": {
+            "deceasedReporting": "More information about reporting of deceased by NIJZ and government is available in article <b><a href='https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2' target='_blank'>Zakaj razlike v številu umrlih?</a></b>."
+        },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
             "title_SVN": "COVID-19 Situation in Slovenia",

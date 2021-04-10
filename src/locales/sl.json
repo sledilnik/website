@@ -812,6 +812,9 @@
             "hideAll": "Skrij vse",
             "showAll": "Prikaži vse"
         },
+        "note": {
+            "deceasedReporting": "Več o poročanju COVID-19 smrti s strani NIJZ in vlade pa v članku <b><a href='https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2' target='_blank'>Zakaj razlike v številu umrlih?</a></b>."
+        },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
             "titleMenu_SVN": "Slovenija – stanje",

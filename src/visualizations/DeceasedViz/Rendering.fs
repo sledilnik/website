@@ -234,15 +234,17 @@ let render (state: DeceasedVizState) dispatch =
             renderChartContainer state dispatch
             renderPagesSwitchers state.Page (ChangePage >> dispatch)
 
-            match state.Page with
-            | AgeGroupsPage | PersonTypePage ->
-                Html.div [
-                    prop.className "disclaimer"
-                    prop.children [
+
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    match state.Page with
+                    | AgeGroupsPage | PersonTypePage ->
                         Html.text (chartText "disclaimer")
-                    ]
+                    | _ -> Html.none
+                    Utils.Markdown.render (I18N.t "charts.note.deceasedReporting")
                 ]
-            | _ -> Html.none
+            ]
 
         ]
 
