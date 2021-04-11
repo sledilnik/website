@@ -469,11 +469,11 @@
         },
         "liftVacationHomes": {
             "title": "Vikendi",
-            "description": "Sproščanje: gibanje med občinami (vikendi…), <br>pojasnila glede splošne prepovedi gibanja"
+            "description": "Sprostitev ukrepov: gibanje med občinami (vikendi…), <br>pojasnila glede splošne prepovedi gibanja"
         },
         "liftService": {
             "title": "Servisi",
-            "description": "Sproščanje: gradnja, servisi, šport na prostem,<br>dovoljeni nekateri linijski prevozi"
+            "description": "Sprostitev ukrepov: gradnja, servisi, šport na prostem,<br>dovoljeni nekateri linijski prevozi"
         },
         "nationalStudy": {
             "title": "Raziskava",
@@ -481,27 +481,27 @@
         },
         "liftMuseums": {
             "title": "Muzeji",
-            "description": "Sproščanje: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
+            "description": "Sprostitev ukrepov: knjižnice, galerije, muzeji, nep.posredovanje, dimnikarji"
         },
         "liftMunicipality": {
             "title": "Občine",
-            "description": "Sproščanje: gibanje izven meja svoje občine"
+            "description": "Sprostitev ukrepov: gibanje izven meja svoje občine"
         },
         "liftFoodMarkets": {
             "title": "Tržnice",
-            "description": "Sproščanje: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
+            "description": "Sprostitev ukrepov: tržnice, strežba na terasah, trgovine do 400m2, frizerski in kozmetični saloni"
         },
         "liftPublicTransport": {
             "title": "Prevozi",
-            "description": "Sproščanje: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
+            "description": "Sprostitev ukrepov: javni prevozi, vse zdravstvene in zobozdravstvene storitve"
         },
         "liftQuarantine": {
             "title": "Karantena",
-            "description": "Sproščanje: karantena samo za tujce iz tretjih držav"
+            "description": "Sprostitev ukrepov: karantena samo za tujce iz tretjih držav"
         },
         "liftSchools1to3": {
             "title": "Vrtci",
-            "description": "Sproščanje: vrtci in osnovna šola 1.-3., 9. razred, 4. letnik SŠ"
+            "description": "Sprostitev ukrepov: vrtci in osnovna šola 1.-3., 9. razred, 4. letnik SŠ"
         },
         "quarantine14days": {
             "title": "Karantena",
@@ -509,11 +509,11 @@
         },
         "liftSchools4to5": {
             "title": "OŠ",
-            "description": "Sproščanje: osnovna šola 4., 5. razred, zbiranje do 200 ljudi, vse namestitve"
+            "description": "Sprostitev ukrepov: osnovna šola 4., 5. razred, zbiranje do 200 ljudi, vse namestitve"
         },
         "liftGatherings500": {
             "title": "Do 500",
-            "description": "Sproščanje: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
+            "description": "Sprostitev ukrepov: zbiranje do 500 ljudi, dovoljeni gledalci na športnih prireditvah.<br>Prost prestop meje izven kontrolnih točk za državljanje SLO, AUT, ITA in HUN"
         },
         "quarantineStrict": {
             "title": "Karantena",
@@ -581,11 +581,11 @@
         },
         "liftLibraries": {
             "title": "Knjižnice",
-            "description": "Sproščanje: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,…"
+            "description": "Sprostitev ukrepov: knjižnice, servisne delavnice, gradbena, vzdrževalna dela,…"
         },
         "liftShops": {
             "title": "Prodajalne",
-            "description": "Sproščanje: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
+            "description": "Sprostitev ukrepov: tehnične, motorne, pohištvene in otroške prodajalne, pedikura, fotokopirnice, zlatarstva in urarstva"
         },
         "gatherings2": {
             "title": "Zbiranje",
@@ -605,11 +605,11 @@
         },
         "liftServices": {
             "title": "Storitve",
-            "description": "Sproščanje: javni promet (v omejenem obsegu), cvetličarne, avtopralnice, kemične čistilnice.<br>V 4 regijah tudi prodajalne z oblačili in obutvijo in prehodi med občinami z aplikacijo."
+            "description": "Sprostitev ukrepov: javni promet (v omejenem obsegu), cvetličarne, avtopralnice, kemične čistilnice.<br>V 4 regijah tudi prodajalne z oblačili in obutvijo in prehodi med občinami z aplikacijo."
         },
         "liftReligiousCeremonies": {
             "title": "V.obredi",
-            "description": "Sproščanje: ob določenih omejitvah dovoljeni verski obredi. Knjižnice, servisi in montaže.<br>V 4 regijah tudi muzeji, knjigarne, specializirane prodajalne."
+            "description": "Sprostitev ukrepov: ob določenih omejitvah dovoljeni verski obredi. Knjižnice, servisi in montaže.<br>V 4 regijah tudi muzeji, knjigarne, specializirane prodajalne."
         },
         "services2": {
             "title": "Storitve",
@@ -617,11 +617,11 @@
         },
         "liftFoodMarkets2": {
             "title": "Tržnice",
-            "description": "Sproščanje: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
+            "description": "Sprostitev ukrepov: tržnice, trafike in kioski za prodajo časopisov in revij, frizerski saloni."
         },
         "liftGym": {
             "title": "Fitnes",
-            "description": "Sproščanje: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
+            "description": "Sprostitev ukrepov: samostojna ali vodena športna rekreacija posameznikov z omejitvami<br>(1 udeleženec na 50m2 in 5m medsebojne razdalje)."
         },
         "planRelaxation2": {
             "title": "Načrt",
@@ -633,11 +633,11 @@
         },
         "liftRegions": {
             "title": "Regije",
-            "description": "Sproščanje: v nekaterih regijah se odprejo trgovine za otroke, muzeji, galerije, knjižnice, smučišča."
+            "description": "Sprostitev ukrepov: v nekaterih regijah se odprejo trgovine za otroke, muzeji, galerije, knjižnice, smučišča."
         },
         "liftSchools3": {
             "title": "OŠ 1-3",
-            "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v nekaterih regijah<br>(razen goriške, posavske in jugovzhodne Slovenije)."
+            "description": "Sprostitev ukrepov: odpro se vrtci in osnovna šola od 1. do 3. razreda v nekaterih regijah<br>(razen goriške, posavske in jugovzhodne Slovenije)."
         },
         "closeSchools3": {
             "title": "OŠ 1-3",
@@ -649,19 +649,19 @@
         },
         "liftShops2": {
             "title": "Prodajalne",
-            "description": "Sproščanje: vse trgovine do 400 m2, kozmetične storitve, individualno strokovno izobraževanje,…<br>(za nekatere storitve potreben negativen test potrošnikov in/ali zaposlenih)"
+            "description": "Sprostitev ukrepov: vse trgovine do 400 m2, kozmetične storitve, individualno strokovno izobraževanje,…<br>(za nekatere storitve potreben negativen test potrošnikov in/ali zaposlenih)"
         },
         "liftSchools3All": {
             "title": "OŠ 1-3",
-            "description": "Sproščanje: odpro se vrtci in osnovna šola od 1. do 3. razreda v vseh regijah."
+            "description": "Sprostitev ukrepov: odpro se vrtci in osnovna šola od 1. do 3. razreda v vseh regijah."
         },
         "liftBorders": {
             "title": "Meje",
-            "description": "Ukinejo se kontrolne točke, prestop meje brez karantene in testa tudi za cepljene in prebolele."
+            "description": "Sprostitev ukrepov: ukinejo se kontrolne točke, prestop meje brez karantene in testa tudi za cepljene in prebolele."
         },
         "liftMunicipality2": {
             "title": "Občine",
-            "description": "Sproščanje: prost prehod med občinami ali regijami, zbiranje do 10 ljudi, odpro se vse trgovine.<br>Odprejo se osnovne šole za vse in srednje šole za zaključne letnike, na univerzah dovoljeni izpiti in vaje do 10 ljudi.<br>Dovoljena je brezkontaktna športno-rekreativna vadba v skupini do 10 ob upoštevanju 2m razdalje."
+            "description": "Sprostitev ukrepov: prost prehod med občinami ali regijami, zbiranje do 10 ljudi, odpro se vse trgovine.<br>Odprejo se osnovne šole za vse in srednje šole za zaključne letnike, na univerzah dovoljeni izpiti in vaje do 10 ljudi.<br>Dovoljena je brezkontaktna športno-rekreativna vadba v skupini do 10 ob upoštevanju 2m razdalje."
         },
         "okRed": {
             "title": "Obalno-k.",
@@ -669,7 +669,7 @@
         },
         "liftHighSchools": {
             "title": "S.šole",
-            "description": "Sproščanje: 1-3.letnik srednjih šol po modelu C, dijaški domovi. Odprtje teras in lokalov v Jugovzhodni Sloveniji in Posavski regiji.<br>Uvedba kontrolnih točk na mejah, prekinitev karantene s testom šele peti dan."
+            "description": "Sprostitev ukrepov: 1-3.letnik srednjih šol po modelu C, dijaški domovi. Odprtje teras in lokalov v Jugovzhodni Sloveniji in Posavski regiji.<br>Uvedba kontrolnih točk na mejah, prekinitev karantene s testom šele peti dan."
         },
         "liftOkPn": {
             "title": "Obalno-k.",
@@ -690,6 +690,10 @@
         "liftEaster": {
             "title": "V.noč",
             "description": "Velika noč: med 5. in 22. uro dovoljeno prehajanje med regijami za obiske na zasebnih površinah<br>z največ 6 osebami iz največ dveh gospodinjstev (mlajši od 15 let niso všteti). Ostale omejitve ostajajo nespremenjene."
+        },
+        "liftMasksOutside": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: uporaba maske je zunaj obvezna ko ni mogoče vzdrževati medosebne razdalje najmanj 1,5 metra."
         }
     },
     "phase": {
@@ -807,6 +811,9 @@
             "weekYearDateFormat": "%W. teden %Y",
             "hideAll": "Skrij vse",
             "showAll": "Prikaži vse"
+        },
+        "note": {
+            "deceasedReporting": "Več o poročanju COVID-19 smrti s strani NIJZ in vlade pa v članku <b><a href='https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2' target='_blank'>Zakaj razlike v številu umrlih?</a></b>."
         },
         "metricsComparison": {
             "title": "Stanje COVID-19 v državi",
@@ -1753,15 +1760,15 @@
         "cm": {
             "bordersOopen": {
                 "title": "Meje odprte",
-                "description": "Sprostitev: meje odprte za tuje državljane"
+                "description": "Sprostitev ukrepov: meje odprte za tuje državljane"
             },
             "kafanasOpen": {
                 "title": "Kafane",
-                "description": "Sprostitev: odprli so se bari in restavracije"
+                "description": "Sprostitev ukrepov: odprli so se bari in restavracije"
             },
             "lessMeasures": {
                 "title": "Prekinitev zapore",
-                "description": "Sprostitev: prosto gibanje v celotni državi"
+                "description": "Sprostitev ukrepov: prosto gibanje v celotni državi"
             },
             "masksOn": {
                 "title": "Maske",
