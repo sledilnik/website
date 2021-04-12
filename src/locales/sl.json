@@ -545,7 +545,7 @@
         },
         "masks": {
             "title": "Maske",
-            "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22:30."
+            "description": "Obvezne maske v vseh zaprtih javnih prostorih in zunaj pri manj kot 2m razdalje.<br>Gostinski in nastanitveni obrati odprti le do 22.30."
         },
         "testOrQuarantine": {
             "title": "Test",
@@ -569,7 +569,7 @@
         },
         "movement": {
             "title": "🚫21-6h",
-            "description": "Omejitev gibanja med 21:00-6:00, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
+            "description": "Omejitev gibanja med 21. in 6. uro, omejitev gibanja na svojo regijo.<br>Omejitev zbiranja na 6 oseb. Prepoved vseh prireditev."
         },
         "restaurants": {
             "title": "Gostilne",
@@ -677,7 +677,7 @@
         },
         "okGoKoRed": {
             "title": "Rdeče 3",
-            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22:00-5:00."
+            "description": "Obalno-kraška, Goriška, Koroška regija: prepoved prehajanja v in iz regije.<br>Za prečkanje meje brez karantene ali prekinitev karantene ob prečkanju HAT test ni več priznan. Omejitev gibanja med 22. in 5. uro."
         },
         "bordersClosed": {
             "title": "Meje",
@@ -697,7 +697,7 @@
         },
         "liftMovement": {
             "title": "🚫22-5h",
-            "description": "Sprostitev ukrepov: odpravi se omejitev gibanja med 22:00-5:00. Vrtci, osnovne šole in srednje šole po modelu C.<br>Knjižnice, galerije, muzeji, vse trgovine in večina storitev. Dovoljena športno-rekreativna vadba do 10 oseb."
+            "description": "Sprostitev ukrepov: odpravi se omejitev gibanja med 22. in 5. uro. Vrtci, osnovne šole in srednje šole po modelu C.<br>Knjižnice, galerije, muzeji, vse trgovine in večina storitev. Dovoljena športno-rekreativna vadba do 10 oseb."
         }
     },
     "phase": {
