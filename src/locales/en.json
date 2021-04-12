@@ -1156,8 +1156,8 @@
             "title": "Masks",
             "description": "Easing of restrictions: use of face masks outdoors not required if distance between persons can be maintained at at least 1.5 meters."
         },
-        "liftRed": {
-            "title": "Red",
+        "liftMovement": {
+            "title": "🚫22-5h",
             "description": "Easing of restrictions: no movement restricition between 22:00-5:00. Kindergarten, elementary schools and high-schools (model C).<br>Libraries, galleries, museums, all shops and most services. Sport and recreational excersises in groups of up to 10 people."
        }
     },
