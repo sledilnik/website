@@ -694,6 +694,10 @@
         "liftMasksOutside": {
             "title": "Maske",
             "description": "Sprostitev ukrepov: uporaba maske je zunaj obvezna ko ni mogoče vzdrževati medosebne razdalje najmanj 1,5 metra."
+        },
+        "liftRed": {
+            "title": "Rdeča",
+            "description": "Sprostitev ukrepov: odpravi se omejitev gibanja med 22:00-5:00. Odprejo se vrtci, osnovne šole in srednje šole po modelu C.<br>Odprejo se knjižnice, galerije, muzeji, vse trgovine in večina storitev. Dovoljenja športno-rekreativna vadba do 10 oseb."
         }
     },
     "phase": {

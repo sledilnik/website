@@ -164,6 +164,7 @@ let addContainmentMeasuresFlags
         1,  4, 2021, "#FFe6e6", "elevenDays"
         4,  4, 2021, "#ebfaeb", "liftEaster"
         10, 4, 2021, "#ebfaeb", "liftMasksOutside"
+        11, 4, 2021, "#ebfaeb", "liftRed"
     |]
     {|
         ``type`` = "flags"

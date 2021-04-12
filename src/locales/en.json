@@ -969,7 +969,7 @@
             "title": "RH"
         },
         "liftSchools1to3": {
-            "description": "Easing of restrictions: kindergarten and primary school 1-3, 9 grade. Secondary school 4 grade",
+            "description": "Easing of restrictions: kindergarten and elementary school 1-3, 9 grade. Secondary school 4 grade",
             "title": "Kindergarten"
         },
         "quarantine14days": {
@@ -1026,7 +1026,7 @@
         },
         "schools6+": {
             "title": "Schools 6+",
-            "description": "Remote schooling for primary schools from grade 6, secondary and music schools"
+            "description": "Remote schooling for elementary schools from grade 6, secondary and music schools"
         },
         "movement": {
             "title": "🚫21-6h",
@@ -1155,7 +1155,11 @@
         "liftMasksOutside": {
             "title": "Masks",
             "description": "Easing of restrictions: use of face masks outdoors not required if distance between persons can be maintained at at least 1.5 meters."
-        }
+        },
+        "liftRed": {
+            "title": "Red",
+            "description": "Easing of restrictions: no movement restricition between 22:00-5:00. Kindergarten, elementary schools and high-schools (model C).<br>Libraries, galleries, museums, all shops and most services. Sport and recreational excersises in groups of up to 10 people."
+       }
     },
     "days": {
         "in_x_days": "in {{ count }} day",
