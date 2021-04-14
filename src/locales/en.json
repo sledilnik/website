@@ -240,6 +240,9 @@
             "hideAll": "Hide all",
             "showAll": "Show all"
         },
+        "note": {
+            "deceasedReporting": "More information about reporting of deceased by NIJZ and government is available in article <b><a href='https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2' target='_blank'>Zakaj razlike v številu umrlih?</a></b>."
+        },
         "metricsComparison": {
             "title": "COVID-19 Situation in the country",
             "title_SVN": "COVID-19 Situation in Slovenia",
@@ -895,15 +898,15 @@
         },
         "liftFoodMarkets": {
             "title": "Markets",
-            "description": "Relaxation: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
+            "description": "Easing of restrictions: food markets, service on the terraces, shops up to 400m2, hairdressing and beauty salons"
         },
         "liftMunicipality": {
-            "description": "Relaxation: movement outside the boundaries of your municipality",
+            "description": "Easing of restrictions: movement outside the boundaries of your municipality",
             "title": "Municipalities"
         },
         "liftMuseums": {
             "title": "Museums",
-            "description": "Relaxation: libraries, galleries, museums, real-estate, chimney sweeping"
+            "description": "Easing of restrictions: libraries, galleries, museums, real-estate, chimney sweeping"
         },
         "nationalStudy": {
             "title": "Study",
@@ -911,7 +914,7 @@
         },
         "liftService": {
             "title": "Services",
-            "description": "Relaxation: construction, services, outdoor sports, <br>some regular public transport services allowed"
+            "description": "Easing of restrictions: construction, services, outdoor sports, <br>some regular public transport services allowed"
         },
         "quarantine": {
             "description": "Mandatory 7 day quarantine when arriving from abroad",
@@ -938,15 +941,15 @@
             "title": "Epidemic"
         },
         "liftQuarantine": {
-            "description": "Relaxation: quarantine only for foreigners from third countries",
+            "description": "Easing of restrictions: quarantine only for foreigners from third countries",
             "title": "Quarantine"
         },
         "liftPublicTransport": {
-            "description": "Relaxation: public transport, all health and dental services",
+            "description": "Easing of restrictions: public transport, all health and dental services",
             "title": "Transport"
         },
         "liftVacationHomes": {
-            "description": "Relaxation: movement between municipalities (vacation homes…), <br>explanations regarding the general ban on movement",
+            "description": "Easing of restrictions: movement between municipalities (vacation homes…), <br>explanations regarding the general ban on movement",
             "title": "Vac.homes"
         },
         "publicTransport": {
@@ -966,7 +969,7 @@
             "title": "RH"
         },
         "liftSchools1to3": {
-            "description": "Relaxation: kindergarten and primary school 1-3, 9 grade. Secondary school 4 grade",
+            "description": "Easing of restrictions: kindergarten and elementary school 1-3, 9 grade. Secondary school 4 grade",
             "title": "Kindergarten"
         },
         "quarantine14days": {
@@ -974,12 +977,12 @@
             "description": "Mandatory 14 day quarantine for foreigners arriving from abroad <br> (for the EU with exceptions and third countries)"
         },
         "liftSchools4to5": {
-            "description": "Relaxation: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
+            "description": "Easing of restrictions: elementary school 4th, 5th grade, gathering up to 200 people, all accommodations",
             "title": "Schools"
         },
         "liftGatherings500": {
             "title": "Up to 500",
-            "description": "Relaxation: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA and HUN"
+            "description": "Easing of restrictions: gathering up to 500 people, spectators on sport events.<br>Free border crossing outside checkpoints for citizens of SLO, AUT, ITA and HUN"
         },
         "quarantineStrict": {
             "title": "Quarantine",
@@ -1011,7 +1014,7 @@
         },
         "masks": {
             "title": "Masks",
-            "description": "Face masks required in all indoor public places and outside when distance less than 2m.<br>Restaurants open only until 22:30."
+            "description": "Face masks required in all indoor public places and outdoors when distance less than 2m.<br>Restaurants open only until 22:30."
         },
         "testOrQuarantine": {
             "title": "Test",
@@ -1023,7 +1026,7 @@
         },
         "schools6+": {
             "title": "Schools 6+",
-            "description": "Remote schooling for primary schools from grade 6, secondary and music schools"
+            "description": "Remote schooling for elementary schools from grade 6, secondary and music schools"
         },
         "movement": {
             "title": "🚫21-6h",
@@ -1039,11 +1042,11 @@
         },
         "liftLibraries": {
             "title": "Libraries",
-            "description": "Relaxation: libraries, service workshops, construction and maintenance services, …"
+            "description": "Easing of restrictions: libraries, service workshops, construction and maintenance services, …"
         },
         "liftShops": {
             "title": "Shops",
-            "description": "Relaxation: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
+            "description": "Easing of restrictions: technical, car, furniture in children's shops, pedicure, photocopier, jewelry and watch shops"
         },
         "gatherings2": {
             "title": "Gatherings",
@@ -1063,11 +1066,11 @@
         },
         "liftServices": {
             "title": "Services",
-            "description": "Relaxation: public transport (limited service), florist, car-wash, cleaners.<br>In 4 regions also shops with cloths and shoes and movement inside region borders with app."
+            "description": "Easing of restrictions: public transport (limited service), florist, car-wash, cleaners.<br>In 4 regions also shops with cloths and shoes and movement inside region borders with app."
         },
         "liftReligiousCeremonies": {
             "title": "Rel.c.",
-            "description": "Relaxation: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
+            "description": "Easing of restrictions: religious ceremonies allowes with some restrictionsob. Libraries, maintenance, installation.<br>In 4 regions also museums, book stores, specialized stores."
         },
         "services2": {
             "title": "Services",
@@ -1075,11 +1078,11 @@
         },
         "liftFoodMarkets2": {
             "title": "Markets",
-            "description": "Relaxation: food markets, news-stands, hairdressing salons."
+            "description": "Easing of restrictions: food markets, news-stands, hairdressing salons."
         },
         "liftGym": {
             "title": "Gym",
-            "description": "Relaxation: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
+            "description": "Easing of restrictions: individual and guided recreation with restrictions<br>(1 person per 50m2 and 5m interpersonal distance)."
         },
         "planRelaxation2": {
             "title": "Plan",
@@ -1091,11 +1094,11 @@
         },
         "liftRegions": {
             "title": "Regions",
-            "description": "Relaxation: shops for children, museums, galleries, libraries and ski-resorts are open in some regions."
+            "description": "Easing of restrictions: shops for children, museums, galleries, libraries and ski-resorts are open in some regions."
         },
         "liftSchools3": {
             "title": "Schools 3",
-            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in some regions (all but Gorizia, Lower Sava and Southeast Slovenia region)."
+            "description": "Easing of restrictions: kindergarten and elementary school up to 3rd grade in some regions (all but Gorizia, Lower Sava and Southeast Slovenia region)."
         },
         "closeSchools3": {
             "title": "Schools 3",
@@ -1107,11 +1110,11 @@
         },
         "liftShops2": {
             "title": "Shops",
-            "description": "Relaxation: all shops up to 400 m2, cosmetic services, individual education,…<br>(negative test of customers and/od employees required for some services)"
+            "description": "Easing of restrictions: all shops up to 400 m2, cosmetic services, individual education,…<br>(negative test of customers and/od employees required for some services)"
         },
         "liftSchools3All": {
             "title": "Schools 3",
-            "description": "Relaxation: kindergarten and elementary school up to 3rd grade in all regions."
+            "description": "Easing of restrictions: kindergarten and elementary school up to 3rd grade in all regions."
         },
         "liftBorders": {
             "title": "Borders",
@@ -1119,7 +1122,7 @@
         },
         "liftMunicipality2": {
             "title": "Municipalities",
-            "description": "Relaxation: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
+            "description": "Easing of restrictions: free movement between municipalities and regions, gathering og up to 10 people, all shops.<br>Opened elementary schools (all) and high-schools for last grade, allowed exams and group excersises up to 10 people on university.<br>Contactless sport and recreational excersises in groups of up to 10 people allowed with distance of 2m."
         },
         "okRed": {
             "title": "Coastal–K.",
@@ -1127,7 +1130,7 @@
         },
         "liftHighSchools": {
             "title": "H.schools",
-            "description": "Relaxation: high-school grade 1-3 opened (model C), opened dormitories. Opening of terraces and cafes in Southeast Slovenia in Lower Sava region.<br>Checkpoints on borders, quarantive or negative test after five days."
+            "description": "Easing of restrictions: high-school grade 1-3 opened (model C), opened dormitories. Opening of terraces and cafes in Southeast Slovenia in Lower Sava region.<br>Checkpoints on borders, quarantive or negative test after five days."
         },
         "liftOkPn": {
             "title": "Coastal–K.",
@@ -1148,7 +1151,15 @@
         "liftEaster": {
             "title": "Easter",
             "description": "Easter lockdown measures: Travelling between regions and family visits are allowed between 5 am and 10 pm<br>in a group of up to 6 people from 2 households (children under 15 are not included in the restrictions). All other curfew rules remain in place."
-        }
+        },
+        "liftMasksOutside": {
+            "title": "Masks",
+            "description": "Easing of restrictions: use of face masks outdoors not required if distance between persons can be maintained at at least 1.5 meters."
+        },
+        "liftMovement": {
+            "title": "🚫22-5h",
+            "description": "Easing of restrictions: no movement restricition between 22:00-5:00. Kindergarten, elementary schools and high-schools (model C).<br>Libraries, galleries, museums, all shops and most services. Sport and recreational excersises in groups of up to 10 people."
+       }
     },
     "days": {
         "in_x_days": "in {{ count }} day",
@@ -1501,15 +1512,15 @@
                 "title": "Masks"
             },
             "lessMeasures": {
-                "description": "Relaxation: movement free in whole country",
+                "description": "Easing of restrictions: movement free in whole country",
                 "title": "Lockdown off"
             },
             "kafanasOpen": {
-                "description": "Relaxation: bars and reaturants oppened",
+                "description": "Easing of restrictions: bars and reaturants oppened",
                 "title": "Kafanas"
             },
             "bordersOopen": {
-                "description": "Relaxation: borders openned for foreign citizens",
+                "description": "Easing of restrictions: borders openned for foreign citizens",
                 "title": "Borders Open"
             }
         },
