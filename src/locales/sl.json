@@ -702,6 +702,10 @@
         "liftTerrace": {
             "title": "Terase",
             "description": "Sprostitev ukrepov: v 8 regijah dovoljena strežba jedi in pijač na vrtovih in terasah med 7. in 19. uro.<br>Dovoljeni so organizirani javni shodi do 100 ljudi."
+        },
+        "liftRegions2": {
+            "title": "Regije",
+            "description": "Sprostitev ukrepov: prosto prehajanje med regijami, dovoljeno je zbiranje do 10 ljudi."
         }
     },
     "phase": {
