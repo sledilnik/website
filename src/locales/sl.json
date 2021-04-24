@@ -698,6 +698,18 @@
         "liftMovement": {
             "title": "🚫22-5h",
             "description": "Sprostitev ukrepov: odpravi se omejitev gibanja med 22. in 5. uro. Vrtci, osnovne šole in srednje šole po modelu C.<br>Knjižnice, galerije, muzeji, vse trgovine in večina storitev. Dovoljena športno-rekreativna vadba do 10 oseb."
+        },
+        "liftTerrace": {
+            "title": "Terase",
+            "description": "Sprostitev ukrepov: v 8 regijah dovoljena strežba jedi in pijač na vrtovih in terasah med 7. in 19. uro.<br>Dovoljeni so organizirani javni shodi do 100 ljudi."
+        },
+        "liftRegions2": {
+            "title": "Regije",
+            "description": "Sprostitev ukrepov: prosto prehajanje med regijami, dovoljeno je zbiranje do 10 ljudi."
+        },
+        "liftTerrace2": {
+            "title": "Lokali",
+            "description": "Sprostitev ukrepov: odprejo se terase in manjši nastanitveni objekti (z omejitvami).<br>V Goriški, Obalno-kraški in Pomurski regiji se lahko odprejo gostinski lokali (z omejitvami)."
         }
     },
     "phase": {
