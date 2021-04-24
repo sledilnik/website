@@ -706,6 +706,10 @@
         "liftRegions2": {
             "title": "Regije",
             "description": "Sprostitev ukrepov: prosto prehajanje med regijami, dovoljeno je zbiranje do 10 ljudi."
+        },
+        "liftTerrace2": {
+            "title": "Lokali",
+            "description": "Sprostitev ukrepov: odprejo se terase in manjši nastanitveni objekti (z omejitvami).<br>V Goriški, Obalno-kraški in Pomurski regiji se lahko odprejo gostinski lokali (z omejitvami)."
         }
     },
     "phase": {

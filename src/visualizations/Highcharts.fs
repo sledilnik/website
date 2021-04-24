@@ -167,6 +167,7 @@ let addContainmentMeasuresFlags
         12, 4, 2021, "#ebfaeb", "liftMovement"
         19, 4, 2021, "#ebfaeb", "liftTerrace"
         23, 4, 2021, "#ebfaeb", "liftRegions2"
+        24, 4, 2021, "#ebfaeb", "liftTerrace2"
     |]
     {|
         ``type`` = "flags"

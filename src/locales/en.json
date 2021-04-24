@@ -1165,8 +1165,12 @@
             "description": "Easing of restrictions: Outdoor drinking and dining is allowed from 7AM to 7PM in 8 regions.<br>Allowed organized public outdoor gatherings of up to 100 people."
         },
         "liftRegions2": {
-            "title": "Regije",
+            "title": "Regions",
             "description": "Easing of restrictions: free movement between regions, gathering up to 10 people."
+        },
+        "liftTerrace2": {
+            "title": "Terrace",
+            "description": "Easing of restrictions: Outdoor drinking and dining allowed. Smaller tourist accommodations opened (with limitations).<br>Indoor food and dining allowed in Gorizia, Coastal-Karst and Mura regions (with limitations)."
         }
     },
     "days": {
