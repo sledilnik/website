@@ -557,7 +557,7 @@
             "description": "Croazia sulla lista rossa, quarantena rigorosa di 14 giorni al ritorno"
         },
         "masks": {
-            "description": "Mascherine obbligatorie in tutti gli ambienti pubblici chiusi e all'esterno se la distanza è meno di 2m.<br>Ristoranti aperti solo fino alle 22:30.",
+            "description": "Mascherine obbligatorie in tutti gli ambienti pubblici chiusi e all'aperto se la distanza è meno di 2m.<br>Ristoranti aperti solo fino alle 22:30.",
             "title": "Mascherine"
         },
         "quarantine10days": {
@@ -621,7 +621,7 @@
             "title": "Servizi"
         },
         "liftReligiousCeremonies": {
-            "description": "Allentamento: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, libreriw, negozi specializzati.",
+            "description": "Allentamento: le funzioni religiose sono consentite con alcune restrizioni. Biblioteche, manutenzioni, installazioni. <br>In 4 regioni anche musei, librerie, negozi specializzati.",
             "title": "Funz.Rel."
         },
         "services2": {
@@ -645,7 +645,7 @@
             "title": "Palestra"
         },
         "liftSchools3": {
-            "description": "Allentamento: scuola materna ed elementare fino al 3° grado in alcune regioni(tutte tranne Gorizia, Posavska e la Slovenia sudorientale).",
+            "description": "Allentamento: scuola materna ed elementare fino al 3° grado in alcune regioni (tutte tranne Gorizia, Posavska e la Slovenia sudorientale).",
             "title": "Scuole 1-3"
         },
         "liftRegions": {
@@ -683,6 +683,34 @@
         "liftHighSchools": {
             "description": "Allentamento: scuole superiori di classi 1-3 (modello C), case dello studente. Apertura di terrazze e caffè nel sud-est della Slovenia nella regione della Bassa Sava.<br>Punti di controllo alle frontiere, sospensione della quarantena con test negativo solo al quinto giorno.",
             "title": "S.Secondarie"
+        },
+        "liftMovement": {
+            "description": "Allentamento: nessuna restrizione di movimento tra le 22:00-5:00. Scuole materne, scuole elementari e scuole superiori (modello C).<br>Biblioteche, gallerie, musei, tutti i negozi e la maggior parte dei servizi. Esercizi sportivi e ricreativi in gruppi fino a 10 persone.",
+            "title": "🚫22-5h"
+        },
+        "liftMasksOutside": {
+            "description": "Allentamento: l'uso di mascherine facciali all'aperto non è richiesto se può essere mantenutala la distanza di almeno 1,5 metri tra le persone.",
+            "title": "Mascherine"
+        },
+        "liftEaster": {
+            "description": "Misure di blocco per la Pasqua: I viaggi tra le regioni e le visite familiari sono permesse tra le 5 del mattino e le 10 di sera<br>in un gruppo di massimo 6 persone di 2 famiglie (i bambini sotto i 15 anni non sono inclusi nelle restrizioni). Tutte le altre regole di coprifuoco rimangono in vigore.",
+            "title": "Pasqua"
+        },
+        "elevenDays": {
+            "description": "Divieto di riunioni sociali (inclusi matrimoni, celebrazioni, cerimonie religiose). Chiusura di tutte le scuole e degli asili, nonché dei negozi non essenziali<br>(eccetto i negozi e i mercati alimentari, i negozi tecnici e i centri di giardinaggio). Sono vietati i viaggi tra le diverse regioni slovene.<br>Uso obbligatorio di mascherine all'aperto, tranne che per le attività sportive nelle aree verdi.",
+            "title": "11 giorni"
+        },
+        "bordersClosed": {
+            "description": "Viaggio limitato alle zone rosse (consentito per vaccinati e guariti). <br> Regime di frontiera rigoroso (solo PCR proveniente da paesi UE/Schengen, valico di frontiera solo ai posti di blocco).",
+            "title": "Frontiere"
+        },
+        "okGoKoRed": {
+            "description": "Regioni obalno-Kraška, Gorizia, Koroška: movimento limitato verso/da altre regioni.<br>Il test rapido non consente più l'ingresso nel paese o l'abbreviazione della quarantena. Movimento limitato tra le 22:00-5:00.",
+            "title": "Rosso 3"
+        },
+        "liftOkPn": {
+            "description": "Regione Obalno-Kraška: sono consentiti movimenti da/verso altre regioni. Regione Primorsko-notranjska: apertura di terrazze e caffè. <br>Consentiti riti religiosi per un massimo di 10 persone in chiese più piccole e l'educazione religiosa.",
+            "title": "Obalno-k."
         }
     },
     "tableDict": {
@@ -1144,7 +1172,7 @@
             "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - il numero dei casi potrebbe essere inferiore a quello effettivo.",
             "locationUnknown": "Sconosciuto",
             "locationOther": "Altro",
-            "gatheringOrganized": "Raduno organizzato",
+            "gatheringOrganized": "Evento organizzato",
             "gatheringPrivate": "Raduno privato",
             "sport": "Attività sportiva",
             "restaurant": "Ristorante",
@@ -1371,7 +1399,8 @@
             "byManufacturer": "Vaccini consegnati",
             "used": "Vaccini utilizzati",
             "titleMenu": "Vaccinazione",
-            "title": "Vaccinazione"
+            "title": "Vaccinazione",
+            "disabled": "Abbiamo interrotto l'aggiornamento della tabella delle vaccinazioni il 25 marzo perché i dati non sono attualmente disponibili in formato leggibile dalla macchina. Per il momento siete gentilmente indirizzati al sito web <a href=\"https://cepimose.si\" target=\"_blank\"> cepimose.si </a> (solo in sloveno)."
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
@@ -1399,6 +1428,9 @@
             "activeCases": "Casi attivi",
             "titleMenu": "Acque di scarico",
             "title": "Virus nelle acque di scarico"
+        },
+        "note": {
+            "deceasedReporting": "Maggiori informazioni sulla denuncia di deceduti da parte della NIJZ e del governo sono disponibili nell'articolo <b> <a href=\"https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2\" target=\"_blank\"> Zakaj razlike v številu umrlih? </a> </b>."
         }
     },
     "footer": {
