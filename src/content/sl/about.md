@@ -71,6 +71,7 @@ Sodelavci projekta:
 -   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno skrejpanje, komunikacija
 -   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
 -   [Demjan Vester](https://github.com/VesterDe) - spletna stran
+-   [Dunja Fabjan](https://twitter.com/denebdulfim) - novičnik
 -   [Eva Matjašič](https://github.com/Blonduos/) - spletna stran
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - podatkovni model in validacija, viri
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov

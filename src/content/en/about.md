@@ -91,6 +91,7 @@ Project collaborators:
 -   [Boštjan Špetič](https://www.igzebedze.com/) - data scraping, communication
 -   [Darja Potočan](http://www.marsowci.net/) - social networks, sources
 -   [Demjan Vester](https://github.com/VesterDe) - web page
+-   [Dunja Fabjan](https://twitter.com/denebdulfim) - newsletter
 -   [Eva Matjašič](https://github.com/Blonduos/) - web page
 -   [Gašper Mramor](https://www.linkedin.com/in/gaspermramor) - data model and validation, sources
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - sources, data validation
