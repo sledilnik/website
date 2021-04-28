@@ -10,7 +10,8 @@
             "en": "Inglese",
             "de": "Tedesco",
             "nb": "Bokmål",
-            "es": "Spagnolo"
+            "es": "Spagnolo",
+            "ru": "Russo"
         },
         "github": "GitHub",
         "links": "Collegamenti",
@@ -711,6 +712,18 @@
         "liftOkPn": {
             "description": "Regione Obalno-Kraška: sono consentiti movimenti da/verso altre regioni. Regione Primorsko-notranjska: apertura di terrazze e caffè. <br>Consentiti riti religiosi per un massimo di 10 persone in chiese più piccole e l'educazione religiosa.",
             "title": "Obalno-k."
+        },
+        "liftTerrace2": {
+            "description": "Allentamento: Consentito bere e mangiare all'aperto. Piccoli alloggi turistici aperti (con limitazioni).<br>Cibo e pasti all'aperto permessi nelle regioni di Gorizia, Obalno-kraška e Pomurska (con limitazioni).",
+            "title": "Locali"
+        },
+        "liftRegions2": {
+            "description": "Allentamento: libera circolazione tra le regioni, assembramenti fino a 10 persone.",
+            "title": "Regioni"
+        },
+        "liftTerrace": {
+            "description": "Allentamento: Bere e mangiare all'aperto è permesso in 8 regioni dalle 7:00 alle 19:00.<br>Sono permessi i raduni pubblici organizzati all'aperto fino a 100 persone.",
+            "title": "Terrazze"
         }
     },
     "tableDict": {
