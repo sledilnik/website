@@ -1200,6 +1200,12 @@
         },
         "okGoKoRed": {
             "title": "Crvena 3"
+        },
+        "liftRegions2": {
+            "title": "Regije"
+        },
+        "liftMasksOutside": {
+            "title": "Maske"
         }
     },
     "pageNotFound": {
@@ -1239,7 +1245,8 @@
             "me": "Crnogorski",
             "it": "Talijanski",
             "nb": "Bokmål",
-            "es": "Španjolski"
+            "es": "Španjolski",
+            "ru": "Ruski"
         },
         "about": "O projektu",
         "faq": "FAQ",
