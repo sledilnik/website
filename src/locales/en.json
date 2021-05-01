@@ -28,7 +28,8 @@
             "it": "Italian",
             "me": "Montenegrin",
             "nb": "Bokmål",
-            "es": "Spanish"
+            "es": "Spanish",
+            "ru": "Russian"
         }
     },
     "timestamp": {
@@ -733,11 +734,12 @@
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
+            "janssen": "Janssen",
             "administered": "Vaccinated 💉",
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
             "deliveredDoses": "Delivered Doses",
-            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href='https://cepimose.si' target='_blank'>cepimose.si</a> website (in Slovenian only)."
+            "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a> website (in Slovenian only)."
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
