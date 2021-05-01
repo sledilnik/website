@@ -26,6 +26,7 @@ type DisplayType =
         | ByManufacturer -> chartText "byManufacturer"
 
 let AllVaccinationTypes = [
+    "janssen",     "#019cdc"
     "az",          "#ffa600"
     "moderna",     "#f95d6a"
     "pfizer",      "#73ccd5"
