@@ -734,6 +734,7 @@
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
+            "janssen": "Janssen",
             "administered": "Vaccinated 💉",
             "administered2nd": "Vaccinated 💉💉",
             "usedDoses": "Used Doses",
