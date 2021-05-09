@@ -462,6 +462,7 @@
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
             "newCases7Days": "New Cases (7-day avg.)",
+            "vaccinated7Days": "Vaccinated (7-day avg.)",
             "vaccinated1st": "Vaccinated 💉",
             "vaccinated2nd": "Vaccinated 💉💉",
             "deceased": "Deaths",

@@ -8,16 +8,18 @@ type MetricType =
     | ConfirmedCases
     | NewCases7Days
     | Deceased
+    | Vaccinated7Days
     | Vaccinated1st
     | Vaccinated2nd
   with
     static member Default = MetricType.NewCases7Days
-    static member All = [ NewCases7Days; ActiveCases; ConfirmedCases; Deceased; Vaccinated1st; Vaccinated2nd ]
+    static member All = [ NewCases7Days; ActiveCases; ConfirmedCases; Deceased; Vaccinated7Days; Vaccinated1st; Vaccinated2nd ]
     static member GetName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
         | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
         | NewCases7Days -> I18N.chartText "regions" "newCases7Days"
         | Deceased -> I18N.chartText "regions" "deceased"
+        | Vaccinated7Days -> I18N.chartText "regions" "vaccinated7Days"
         | Vaccinated1st -> I18N.chartText "regions" "vaccinated1st"
         | Vaccinated2nd -> I18N.chartText "regions" "vaccinated2nd"
 
@@ -36,6 +38,7 @@ let getMetric regionDayData metricType =
     | ConfirmedCases -> regionDayData.ConfirmedToDate
     | NewCases7Days -> regionDayData.ConfirmedToDate
     | Deceased -> regionDayData.DeceasedToDate
+    | Vaccinated7Days -> regionDayData.Vaccinated1stToDate |> Utils.sumIntOption regionDayData.Vaccinated2ndToDate
     | Vaccinated1st -> regionDayData.Vaccinated1stToDate
     | Vaccinated2nd -> regionDayData.Vaccinated2ndToDate
     |> Utils.optionToInt
