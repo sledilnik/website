@@ -9,6 +9,8 @@ type Metric =
     | ActiveCases
     | ConfirmedToDate
     | DeceasedToDate
+    | Vaccinated1stToDate
+    | Vaccinated2ndToDate
 
 type DataPoint = {
     Region : string
@@ -31,6 +33,10 @@ let parseRegionsData (csv : string) =
                 Some { Region = region ; Metric = ConfirmedToDate ; Value = None }
             | [| "region" ; region ; "deceased" ; "todate" |] ->
                 Some { Region = region ; Metric = DeceasedToDate ; Value = None }
+            | [| "region" ; region ; "vaccinated" ; "1st" ; "todate" |] ->
+                Some { Region = region ; Metric = Vaccinated1stToDate ; Value = None }
+            | [| "region" ; region ; "vaccinated" ; "2nd" ; "todate" |] ->
+                Some { Region = region ; Metric = Vaccinated2ndToDate ; Value = None }
             | unknown ->
                 printfn "Error parsing regions header: %s" col
                 None
@@ -67,12 +73,18 @@ let parseRegionsData (csv : string) =
                                 { state with ConfirmedToDate = dp.Value }
                             | DeceasedToDate ->
                                 { state with DeceasedToDate = dp.Value }
+                            | Vaccinated1stToDate ->
+                                { state with Vaccinated1stToDate = dp.Value }
+                            | Vaccinated2ndToDate ->
+                                { state with Vaccinated2ndToDate = dp.Value }
                         ) { Name = region
                             ActiveCases = None
                             ConfirmedToDate = None
-                            DeceasedToDate = None })
-                
-                let dataPoint : RegionsDataPoint = { Date = date ; Regions = data |> Array.toList } 
+                            DeceasedToDate = None
+                            Vaccinated1stToDate = None
+                            Vaccinated2ndToDate = None })
+
+                let dataPoint : RegionsDataPoint = { Date = date ; Regions = data |> Array.toList }
                 return dataPoint
         })
     |> Array.choose (fun row ->
