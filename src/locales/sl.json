@@ -1077,6 +1077,8 @@
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
             "newCases7Days": "Novi primeri (7-dnevno povpr.)",
+            "vaccinated1st": "Cepljeni 💉",
+            "vaccinated2nd": "Cepljeni 💉💉",
             "deceased": "Umrli",
             "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },

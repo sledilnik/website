@@ -325,7 +325,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        [ NewCases7Days; ActiveCases; ConfirmedCases;  MetricType.Deceased ]
+        MetricType.All
         |> List.map renderMetricTypeSelector
 
     Html.div [
