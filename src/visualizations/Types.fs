@@ -152,7 +152,9 @@ type AreaCases =
     { Name : string
       ActiveCases : int option
       ConfirmedToDate : int option
-      DeceasedToDate : int option }
+      DeceasedToDate : int option
+      Vaccinated1stToDate : int option
+      Vaccinated2ndToDate : int option }
 
 type RegionMunicipalities =
     { Name : string
