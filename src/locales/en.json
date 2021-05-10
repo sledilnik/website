@@ -493,6 +493,8 @@
             "bubbles": "Distribution",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
+            "vaccinated1st": "Cepljeni 1.odmerek",
+            "vaccinated2nd": "Cepljeni 2.odmerek",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
             "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",

@@ -24,7 +24,9 @@ let excludedMunicipalities = Set.ofList ["kraj" ; "tujina"]
 type TotalCasesForDate =
     { Date : DateTime
       TotalConfirmedCases : int option
-      TotalDeceasedCases : int option }
+      TotalDeceasedCases : int option
+      TotalVaccinated1st : int option
+      TotalVaccinated2nd : int option }
 
 type Area =
     { Id : string
@@ -35,11 +37,15 @@ type Area =
 
 type ContentType =
     | ConfirmedCases
+    | Vaccinated1st
+    | Vaccinated2nd
     | Deceased
     with
     static member Default = ConfirmedCases
     static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
+       | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
+       | Vaccinated2nd  -> I18N.t "charts.map.vaccinated2nd"
        | Deceased       -> I18N.t "charts.map.deceased"
 
 let (|ConfirmedCasesMsgCase|DeceasedMsgCase|) str =
@@ -133,7 +139,9 @@ let processData (municipalitiesData : MunicipalitiesData) : Area seq =
                             yield {| Date = municipalitiesDataPoint.Date
                                      Name = municipality.Name
                                      TotalConfirmedCases = municipality.ConfirmedToDate
-                                     TotalDeceasedCases = municipality.DeceasedToDate |} }
+                                     TotalDeceasedCases = municipality.DeceasedToDate
+                                     TotalVaccinated1st = municipality.Vaccinated1stToDate
+                                     TotalVaccinated2nd = municipality.Vaccinated2ndToDate |} }
         |> Seq.groupBy (fun dp -> dp.Name)
         |> Seq.map (fun (name, dp) ->
             let totalCases =
@@ -141,7 +149,9 @@ let processData (municipalitiesData : MunicipalitiesData) : Area seq =
                 |> Seq.map (fun dp ->
                     { Date = dp.Date
                       TotalConfirmedCases = dp.TotalConfirmedCases
-                      TotalDeceasedCases = dp.TotalDeceasedCases } )
+                      TotalDeceasedCases = dp.TotalDeceasedCases
+                      TotalVaccinated1st = dp.TotalVaccinated1st
+                      TotalVaccinated2nd = dp.TotalVaccinated2nd } )
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( name, totalCases ) )
         |> Map.ofSeq
@@ -172,7 +182,9 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
                             yield {| Date = regionsDataPoint.Date
                                      Name = region.Name
                                      TotalConfirmedCases = region.ConfirmedToDate
-                                     TotalDeceasedCases = region.DeceasedToDate |} }
+                                     TotalDeceasedCases = region.DeceasedToDate
+                                     TotalVaccinated1st = region.Vaccinated1stToDate
+                                     TotalVaccinated2nd = region.Vaccinated2ndToDate|} }
         |> Seq.groupBy (fun dp -> dp.Name)
         |> Seq.map (fun (name, dp) ->
             let totalCases =
@@ -180,7 +192,9 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
                 |> Seq.map (fun dp ->
                     { Date = dp.Date
                       TotalConfirmedCases = dp.TotalConfirmedCases
-                      TotalDeceasedCases = dp.TotalDeceasedCases } )
+                      TotalDeceasedCases = dp.TotalDeceasedCases
+                      TotalVaccinated1st = dp.TotalVaccinated1st
+                      TotalVaccinated2nd = dp.TotalVaccinated2nd } )
                 |> Seq.sortBy (fun dp -> dp.Date)
             ( name, totalCases ) )
         |> Map.ofSeq
@@ -253,10 +267,14 @@ let seriesData (state : State) =
                         |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc)
                         |> Array.skip (confirmedCasesValue.Length - 56) // we only show last 56 days
                         |> Seq.toArray
+                    let vaccinated1stValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated1st) |> Seq.choose id |> Seq.toArray
+                    let vaccinated2ndValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated2nd) |> Seq.choose id |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
                         | ConfirmedCases -> confirmedCasesValue
+                        | Vaccinated1st -> vaccinated1stValue
+                        | Vaccinated2nd -> vaccinated2ndValue
                         | Deceased -> deceasedValue
 
                     let totalConfirmed = confirmedCasesValue |> Array.tryLast
@@ -323,7 +341,7 @@ let seriesData (state : State) =
                                     else 0.0001
                                 | RelativeIncrease ->
                                     min weeklyIncrease 200. // for colorAxis limit to 200%
-                            | Deceased ->
+                            | Vaccinated1st | Vaccinated2nd | Deceased ->
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
@@ -462,6 +480,18 @@ let tooltipFormatter state jsThis =
                         state |> sparklineFormatter lastTwoWeeks else ""
             else
                 label
+        | Vaccinated1st | Vaccinated2nd ->
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (I18N.NumberFormat.formatNumber(absolute : int))
+            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+                label + sprintf " (%s %% %s)"
+                        (I18N.NumberFormat.formatNumber pctPopulation)
+                        (I18N.t "charts.map.population")
+                    + sprintf "<br>%s: <b>%s</b> (%s %% %s)"
+                        (I18N.t "charts.map.confirmedCases")
+                        (I18N.NumberFormat.formatNumber totalConfirmed) (Utils.formatTo1DecimalWithTrailingZero(float totalConfirmed * 100.0 / float population))
+                        (I18N.t "charts.map.population")
+            else
+                label
         | Deceased ->
             let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (I18N.NumberFormat.formatNumber(absolute : int))
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
@@ -583,7 +613,7 @@ let renderMap (state : State) =
                         | 7 -> 3500.
                         | 1 -> 500.
                         | _ -> 100.
-            | Deceased, _ ->
+            | Vaccinated1st, _ | Vaccinated2nd, _ | Deceased, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
 
@@ -636,6 +666,27 @@ let renderMap (state : State) =
 
         let colorAxis =
             match state.ContentType with
+                | Vaccinated1st | Vaccinated2nd ->
+                    {|
+                        ``type`` = "linear"
+                        tickInterval = 0.4
+                        max = colorMax
+                        min = colorMin
+                        endOnTick = false
+                        startOnTick = false
+                        stops =
+                            [|
+                                (0.000, "#ffffff")
+                                (0.111, "#e5f5f9")
+                                (0.222, "#ccece6")
+                                (0.333, "#99d8c9")
+                                (0.444, "#66c2a4")
+                                (0.556, "#41ae76")
+                                (0.667, "#238b45")
+                                (0.778, "#006d2c")
+                                (0.889, "#00441b")
+                            |]
+                    |} |> pojo
                 | Deceased ->
                     {|
                         ``type`` = "linear"
@@ -787,6 +838,8 @@ let renderDisplayTypeSelector state dispatch =
         | RegionMap, ConfirmedCases ->
             [ RelativeIncrease; AbsoluteValues
               RegionPopulationWeightedValues ]
+        | _, Vaccinated1st | _, Vaccinated2nd ->
+            [ AbsoluteValues; RegionPopulationWeightedValues ]
         | _, Deceased ->
             [ AbsoluteValues; RegionPopulationWeightedValues ]
     Html.div [
@@ -806,9 +859,13 @@ let renderContentTypeSelector state dispatch =
     let contentTypes =
         if state.MapToDisplay = RegionMap then
             [("ConfirmedCases", ContentType.ConfirmedCases)
+             ("Vaccinated1st", ContentType.Vaccinated1st)
+             ("Vaccinated2nd", ContentType.Vaccinated2nd)
              ("Deceased", ContentType.Deceased)]
          else
-            [("ConfirmedCases", ContentType.ConfirmedCases)]
+            [("ConfirmedCases", ContentType.ConfirmedCases)
+             ("Vaccinated1st", ContentType.Vaccinated1st)
+             ("Vaccinated2nd", ContentType.Vaccinated2nd)]
 
     let renderedTypes = contentTypes |>  Seq.map (fun (id, ct) ->
         Html.option [
