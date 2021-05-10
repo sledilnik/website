@@ -19,6 +19,7 @@ type RegionsChartState =
     {
       ChartConfig: RegionsChartConfig
       ScaleType : ScaleType
+      ContentType : ContentType
       MetricType : MetricType
       RegionsData : RegionsData
       RegionsSorted : AreaCases list

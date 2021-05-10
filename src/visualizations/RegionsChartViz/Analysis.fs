@@ -3,6 +3,18 @@
 open System
 open Types
 
+type ContentType =
+    | ViewConfirmed
+    | ViewDeceased
+    | ViewVaccinated
+    with
+    static member Default = ViewConfirmed
+    static member All = [ ViewConfirmed; ViewVaccinated; ViewDeceased ]
+    static member GetName = function
+       | ViewConfirmed      -> I18N.chartText "regions" "confirmedCases"
+       | ViewDeceased       -> I18N.chartText "regions" "deceased"
+       | ViewVaccinated     -> I18N.chartText "regions" "vaccinated"
+
 type MetricType =
     | ActiveCases
     | ConfirmedCases
@@ -12,11 +24,19 @@ type MetricType =
     | Vaccinated1st
     | Vaccinated2nd
   with
-    static member Default = MetricType.NewCases7Days
-    static member All = [ NewCases7Days; ActiveCases; ConfirmedCases; Deceased; Vaccinated7Days; Vaccinated1st; Vaccinated2nd ]
+    static member Default (ct : ContentType) =
+        match ct with
+        | ViewConfirmed -> NewCases7Days
+        | ViewDeceased -> Deceased
+        | ViewVaccinated -> Vaccinated7Days
+    static member All (ct : ContentType) =
+        match ct with
+        | ViewConfirmed -> [ NewCases7Days; ActiveCases; ConfirmedCases ]
+        | ViewDeceased -> [ ]
+        | ViewVaccinated -> [ Vaccinated7Days; Vaccinated1st; Vaccinated2nd ]
     static member GetName = function
         | ActiveCases -> I18N.chartText "regions" "activeCases"
-        | ConfirmedCases -> I18N.chartText "regions" "confirmedCases"
+        | ConfirmedCases -> I18N.chartText "regions" "allCases"
         | NewCases7Days -> I18N.chartText "regions" "newCases7Days"
         | Deceased -> I18N.chartText "regions" "deceased"
         | Vaccinated7Days -> I18N.chartText "regions" "vaccinated7Days"

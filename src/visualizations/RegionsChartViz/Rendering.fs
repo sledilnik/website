@@ -36,6 +36,7 @@ let regionsInfo = dict[
 type Msg =
     | ToggleAllRegions of bool
     | ToggleRegionVisible of string
+    | ContentTypeChanged of ContentType
     | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
@@ -70,7 +71,9 @@ let init (config: RegionsChartConfig) (data : RegionsData)
         | _ ->
             regConfig
 
-    { ScaleType = Linear; MetricType = MetricType.Default
+    { ScaleType = Linear
+      ContentType = ContentType.Default
+      MetricType = MetricType.Default ContentType.Default
       ChartConfig = config
       RegionsData = data
       RegionsSorted = regionsSorted
@@ -98,6 +101,8 @@ let update (msg: Msg) (state: RegionsChartState)
                 then { m with Visible = not m.Visible }
                 else m)
         { state with RegionsConfig = newRegionsConfig }, Cmd.none
+    | ContentTypeChanged contentType ->
+        { state with ContentType = contentType; MetricType = MetricType.Default contentType }, Cmd.none
     | MetricTypeChanged newMetricType ->
         { state with MetricType = newMetricType }, Cmd.none
     | ScaleTypeChanged scaleType ->
@@ -176,8 +181,8 @@ let renderChartOptions (state : RegionsChartState) dispatch =
                {| xAxis with
                       gridZIndex = 1
                       plotBands =
-                        match state.MetricType with
-                        | MetricType.Deceased ->
+                        match state.ContentType with
+                        | ViewDeceased ->
                             [|
                                {| from=jsTime <| previousSunday
                                   ``to``=jsTime <| lastDataPoint.Date
@@ -313,9 +318,29 @@ let renderRegionsSelectors (state: RegionsChartState) dispatch =
             |> List.append ( state.RegionsConfig |> List.map (fun metric -> renderRegionSelector metric dispatch ) )
         ) ]
 
-let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
+let renderContentTypeSelector state dispatch =
+    let contentTypes =
+        [("ViewConfirmed", ViewConfirmed)
+         ("ViewVaccinated", ViewVaccinated)
+         ("ViewDeceased", ViewDeceased)]
+        |> Map.ofList
+
+    let renderedTypes = ContentType.All |> Seq.map (fun ct ->
+        Html.option [
+            prop.text (ContentType.GetName ct)
+            prop.value (ct.ToString())
+        ])
+
+    Html.select [
+        prop.value (state.ContentType.ToString())
+        prop.className "form-control form-control-sm filters__type"
+        prop.children renderedTypes
+        prop.onChange ( fun ct ->  Map.find ct contentTypes |> ContentTypeChanged |> dispatch)
+    ]
+
+let renderMetricTypeSelectors state dispatch =
     let renderMetricTypeSelector (typeSelector: MetricType) =
-        let active = typeSelector = activeMetricType
+        let active = typeSelector = state.MetricType
         Html.div [
             prop.onClick (fun _ -> dispatch typeSelector)
             Utils.classes
@@ -325,7 +350,7 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
         ]
 
     let metricTypesSelectors =
-        MetricType.All
+        (MetricType.All state.ContentType)
         |> List.map renderMetricTypeSelector
 
     Html.div [
@@ -336,16 +361,21 @@ let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
 let render (state : RegionsChartState) dispatch =
     Html.div [
         Utils.renderChartTopControls [
-            renderMetricTypeSelectors
-                state.MetricType (MetricTypeChanged >> dispatch)
+            Html.div [
+                prop.className "filters"
+                prop.children [
+                    renderContentTypeSelector state dispatch
+                    renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                ]
+            ]
             Utils.renderScaleSelector
                 state.ScaleType (ScaleTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
         renderRegionsSelectors state dispatch
 
-        match state.MetricType with
-        | MetricType.Deceased ->
+        match state.ContentType with
+        | ViewDeceased ->
             Html.div [
                 prop.className "disclaimer"
                 prop.children [
