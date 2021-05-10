@@ -1072,7 +1072,7 @@
             "otherCases": "Ostali potrjeni"
         },
         "regions": {
-            "title": "Primeri po regijah",
+            "title": "Po regijah",
             "titleMenu": "Regije – primeri",
             "allCases": "Vsi",
             "activeCases": "Aktivni",
@@ -1086,7 +1086,7 @@
             "disclaimer": "Opomba: podatke o umrlih po regijah prejemamo tedensko, zato so za zadnja dva tedna nepopolni."
         },
         "regions100k": {
-            "title": "Primeri po regijah (na 100.000 prebivalcev)",
+            "title": "Po regijah (na 100.000 prebivalcev)",
             "titleMenu": "Regije – primerjava",
             "activeCases": "Aktivni primeri",
             "confirmedCases": "Potrjeni primeri",
@@ -2017,11 +2017,11 @@
             "answer": "[Graf](/sl/stats#spread-chart) prikazuje število novih prijavljenih primerov okužbe na določen dan, pri čemer upošteva oznako WHO in  [ECDC (Evropskega centra za preprečevanje in obvladovanje bolezni)](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov), da so potrjeni primeri \"osebe z laboratorijsko potrjeno okužbo s COVID-19\". Od 21.12.2020 to vključuje tudi primere potrjene s hitrim antigenskim testom (HAT). Ker je število potrjenih primerov oseb še vedno odvisno zgolj od testiranja, je podatek o potrjenih primerih bistveno manjši od dejanskega števila okuženih ljudi."
         },
         "regions-chart-100k": {
-            "question": "Kaj nam pove graf \"Primeri po regijah (na 100.000 prebivalcev)\"?",
+            "question": "Kaj nam pove graf \"Po regijah (na 100.000 prebivalcev)\"?",
             "answer": "[Graf](/sl/stats#regions-chart-100k) kaže dinamiko rasti potrjenih primerov po izbranih regijah, uteženo na 100.000 prebivalcev. Posamezne regije je mogoče enostavno primerjati tako, da pod grafom s klikom na določene regije izberemo tiste, ki jih želimo prikazati na grafu. Iz krivulje lahko hitro razberemo, katere regije imajo največ in katere najmanj potrjenih primerov ter kako se to število spreminja skozi čas."
         },
         "regions-chart": {
-            "question": "Kaj nam pove graf \"Primeri po regijah\"?",
+            "question": "Kaj nam pove graf \"Po regijah\"?",
             "answer": "[Graf](/sl/stats#regions-chart) kaže dinamiko rasti potrjenih primerov po izbranih regijah. Posamezne regije je mogoče enostavno primerjati tako, da pod grafom s klikom na določene regije izberemo tiste, ki jih želimo prikazati na grafu. Iz krivulje lahko hitro razberemo, katere regije imajo največ in katere najmanj potrjenih primerov ter kako se to število spreminja skozi čas."
         },
         "map-chart": {
