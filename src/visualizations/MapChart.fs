@@ -60,6 +60,16 @@ type DisplayType =
     | RelativeIncrease
 with
     static member Default = RegionPopulationWeightedValues
+    static member All mapToDisplay contentType =
+        match mapToDisplay, contentType with
+        | MunicipalityMap, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues; Bubbles ]
+        | RegionMap, ConfirmedCases ->
+            [ RelativeIncrease; AbsoluteValues; RegionPopulationWeightedValues ]
+        | _, Vaccinated1st | _, Vaccinated2nd ->
+            [ AbsoluteValues; RegionPopulationWeightedValues ]
+        | _, Deceased ->
+            [ AbsoluteValues; RegionPopulationWeightedValues ]
 
     member this.GetName =
        match this with
@@ -245,12 +255,11 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     | DataTimeIntervalChanged dataTimeInterval ->
         { state with DataTimeInterval = dataTimeInterval }, Cmd.none
     | ContentTypeChanged contentType ->
+        let supportedDisplayTypes = DisplayType.All state.MapToDisplay contentType
         let newDisplayType =
-            match contentType, state.DisplayType with
-            // for Deceased, RelativeIncrease not supported
-            | Deceased, RelativeIncrease -> DisplayType.Default
-            | Deceased, Bubbles -> DisplayType.Default
-            | _ -> state.DisplayType
+            match (supportedDisplayTypes |> List.tryFind (fun dt -> dt = state.DisplayType)) with
+            | Some dt -> dt
+            | _ -> DisplayType.Default
         { state with ContentType = contentType; DisplayType = newDisplayType }, Cmd.none
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
@@ -866,18 +875,7 @@ let inline renderSelectors options currentOption dispatch =
         renderSelector option currentOption dispatch)
 
 let renderDisplayTypeSelector state dispatch =
-    let selectors =
-        match state.MapToDisplay, state.ContentType with
-        | MunicipalityMap, ConfirmedCases ->
-            [ RelativeIncrease; AbsoluteValues
-              RegionPopulationWeightedValues; Bubbles ]
-        | RegionMap, ConfirmedCases ->
-            [ RelativeIncrease; AbsoluteValues
-              RegionPopulationWeightedValues ]
-        | _, Vaccinated1st | _, Vaccinated2nd ->
-            [ AbsoluteValues; RegionPopulationWeightedValues ]
-        | _, Deceased ->
-            [ AbsoluteValues; RegionPopulationWeightedValues ]
+    let selectors = DisplayType.All state.MapToDisplay state.ContentType
     Html.div [
         prop.className "chart-display-property-selector"
         prop.children (renderSelectors selectors state.DisplayType dispatch)
