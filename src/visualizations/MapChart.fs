@@ -94,6 +94,10 @@ type State =
       ContentType : ContentType
       DisplayType : DisplayType }
 
+// we do not have all historical data for vaccinations by municipaality - do not show date intervals
+let mapWithoutHistoricalData state =
+    state.MapToDisplay = MunicipalityMap && (state.ContentType = Vaccinated1st || state.ContentType = Vaccinated2nd)
+
 type Msg =
     | GeoJsonRequested
     | GeoJsonLoaded of GeoJson
@@ -289,6 +293,8 @@ let seriesData (state : State) =
                         let dateInterval =
                             if state.DisplayType = RelativeIncrease
                             then LastDays 7     // for weekly relative increase we force 7 day interval for display in tooltip
+                            else if mapWithoutHistoricalData state
+                            then Complete
                             else state.DataTimeInterval
                         match dateInterval with
                         | Complete -> lastValueTotal
@@ -487,7 +493,7 @@ let tooltipFormatter state jsThis =
         | Vaccinated1st | Vaccinated2nd ->
             let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (I18N.NumberFormat.formatNumber(absolute : int))
             let chart =
-                if state.MapToDisplay = RegionMap && (Array.max newCases) > 0.
+                if not (mapWithoutHistoricalData state) && (Array.max newCases) > 0.
                 then sparklineFormatter newCases "#189a73" state
                 else ""
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
@@ -860,12 +866,14 @@ let renderDisplayTypeSelector state dispatch =
     ]
 
 let renderDataTimeIntervalSelector state dispatch =
-    if state.DisplayType <> RelativeIncrease then
+    if mapWithoutHistoricalData state || state.DisplayType = RelativeIncrease
+    then
+        Html.none
+    else
         Html.div [
             prop.className "chart-data-interval-selector"
             prop.children ( Html.text "" :: renderSelectors DataTimeInterval.All state.DataTimeInterval dispatch )
         ]
-    else Html.none
 
 let renderContentTypeSelector state dispatch =
     let contentTypes =
