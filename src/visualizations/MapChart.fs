@@ -491,7 +491,7 @@ let tooltipFormatter state jsThis =
                 label
                     + sprintf " (%s %% %s)" (Utils.formatTo1DecimalWithTrailingZero(pctPopulation)) (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.map.confirmedCases") (Utils.formatTo1DecimalWithTrailingZero(value100k:float)) (I18N.t "charts.map.per100k")
-                    + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
+                    + sprintf "<br>%s: <b>%s%s %%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
                     + if (Array.max newCases) > 0.
                       then sparklineFormatter newCases "#bda506" state
                       else ""
@@ -617,7 +617,7 @@ let renderMap (state : State) =
                floating = true
                borderWidth = 1
                backgroundColor = "white"
-               width = 80
+               width = 70
             |}
             |> pojo
 
@@ -715,8 +715,8 @@ let renderMap (state : State) =
                             {|
                                 formatter = fun() ->
                                     if state.DisplayType = RegionPopulationWeightedValues
-                                    then sprintf "%s%%" (Utils.formatToInt jsThis?value)
-                                    else Utils.formatToInt jsThis?value
+                                    then sprintf "%s %%" (Utils.formatToInt jsThis?value)
+                                    else Utils.formatToInt (Utils.roundToInt jsThis?value)
                             |} |> pojo
                     |} |> pojo
                 | Deceased ->
@@ -800,7 +800,7 @@ let renderMap (state : State) =
                             reversed=false
                             labels =
                             {|
-                               formatter = fun() -> sprintf "%s%%" jsThis?value
+                               formatter = fun() -> sprintf "%s %%" jsThis?value
                             |} |> pojo
                         |} |> pojo
 
