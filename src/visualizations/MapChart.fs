@@ -352,7 +352,14 @@ let seriesData (state : State) =
                                     else 0.0001
                                 | RelativeIncrease ->
                                     min weeklyIncrease 200. // for colorAxis limit to 200%
-                            | Vaccinated1st | Vaccinated2nd | Deceased ->
+                            | Vaccinated1st | Vaccinated2nd ->
+                                match state.DisplayType with
+                                | AbsoluteValues ->
+                                    if absolute > 0 then float absolute
+                                    else 0.0001
+                                | _ ->
+                                    float value / 10000.
+                            | Deceased ->
                                 match value with
                                 | 0 -> 0.
                                 | x -> float x + Math.E |> Math.Log
@@ -474,12 +481,12 @@ let tooltipFormatter state jsThis =
     let newCases= points?newCases
     let population = points?population
     let pctPopulation = float absolute * 100.0 / float population
-    let fmtStr = sprintf "%s: <b>%s</b>" (I18N.t "charts.map.populationC") (I18N.NumberFormat.formatNumber(population : int))
+    let fmtStr = sprintf "%s: <b>%s</b>" (I18N.t "charts.map.populationC") (Utils.formatToInt population)
 
     let label =
         match state.ContentType with
         | ConfirmedCases ->
-            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.confirmedCases") (I18N.NumberFormat.formatNumber(absolute : int))
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.confirmedCases") (Utils.formatToInt absolute)
             if totalConfirmed > 0 then
                 label
                     + sprintf " (%s %% %s)" (Utils.formatTo1DecimalWithTrailingZero(pctPopulation)) (I18N.t "charts.map.population")
@@ -491,12 +498,12 @@ let tooltipFormatter state jsThis =
             else
                 label
         | Vaccinated1st | Vaccinated2nd ->
-            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (I18N.NumberFormat.formatNumber(absolute : int))
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (Utils.formatToInt absolute)
             let chart =
                 if not (mapWithoutHistoricalData state) && (Array.max newCases) > 0.
                 then sparklineFormatter newCases "#189a73" state
                 else ""
-            if absolute > 0 then
+            if absolute > 0. then
                 label + sprintf " (%s %% %s)"
                         (Utils.formatTo1DecimalWithTrailingZero pctPopulation)
                         (I18N.t "charts.map.population")
@@ -508,8 +515,8 @@ let tooltipFormatter state jsThis =
             else
                 label + chart
         | Deceased ->
-            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (I18N.NumberFormat.formatNumber(absolute : int))
-            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+            let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (Utils.formatToInt absolute)
+            if absolute > 0. && state.DataTimeInterval = Complete then // deceased
                 label + sprintf " (%s %% %s)"
                         (I18N.NumberFormat.formatNumber pctPopulation)
                         (I18N.t "charts.map.population")
@@ -601,7 +608,7 @@ let renderMap (state : State) =
            |}
 
         let legend =
-            let enabled = state.ContentType = ConfirmedCases
+            let enabled = state.ContentType <> Deceased
             {| enabled = enabled
                title = {| text = null |}
                align = "right"
@@ -610,8 +617,7 @@ let renderMap (state : State) =
                floating = true
                borderWidth = 1
                backgroundColor = "white"
-               valueDecimals = 0
-               width = 70
+               width = 80
             |}
             |> pojo
 
@@ -630,24 +636,25 @@ let renderMap (state : State) =
                         | _ -> 100.
             | Vaccinated1st, _ | Vaccinated2nd, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
-                if dataMax < 1. then 10. else dataMax
+                if dataMax < 1. then 1. else dataMax
             | Deceased, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
-                if dataMax < 1. then 10. else dataMax
+                if dataMax < 1. then 1. else dataMax
 
         let colorMin =
-            match state.DisplayType with
-                | AbsoluteValues -> 0.9
-                | Bubbles -> minValue100k()
-                | RegionPopulationWeightedValues -> colorMax / 7000.
-                | RelativeIncrease -> -100.
+            match state.ContentType, state.DisplayType with
+                //| Vaccinated1st, RegionPopulationWeightedValues | Vaccinated2nd, RegionPopulationWeightedValues ->
+                //    data |> Seq.map(fun dp -> dp.value) |> Seq.min
+                | _, RegionPopulationWeightedValues -> colorMax / 7000.
+                | _, AbsoluteValues -> 0.9
+                | _, Bubbles -> minValue100k()
+                | _, RelativeIncrease -> -100.
 
         let whiteMuniColorAxis =
             {|
                 ``type`` = "linear"
                 visible = false
                 stops = [| (0.000, "#ffffff") |]
-//                stops = [| (0.000, "#f8f8f8") |]
             |} |> pojo
 
         let relativeColorAxis =
@@ -677,7 +684,7 @@ let renderMap (state : State) =
                 reversed = true
                 labels =
                     {|
-                        formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
+                        formatter = fun() -> Utils.formatToInt jsThis?value
                     |} |> pojo
             |} |> pojo
 
@@ -704,6 +711,13 @@ let renderMap (state : State) =
                                 (0.778, "#006d2c")
                                 (0.889, "#00441b")
                             |]
+                        labels =
+                            {|
+                                formatter = fun() ->
+                                    if state.DisplayType = RegionPopulationWeightedValues
+                                    then sprintf "%s%%" (Utils.formatToInt jsThis?value)
+                                    else Utils.formatToInt jsThis?value
+                            |} |> pojo
                     |} |> pojo
                 | Deceased ->
                     {|
@@ -725,6 +739,10 @@ let renderMap (state : State) =
                                 (0.778, "#54278f")
                                 (0.889, "#3f007d")
                             |]
+                        labels =
+                            {|
+                                formatter = fun() -> Utils.formatToInt jsThis?value
+                            |} |> pojo
                     |} |> pojo
                 | ConfirmedCases ->
                     match state.DisplayType with
@@ -755,7 +773,7 @@ let renderMap (state : State) =
                             reversed = true
                             labels =
                                 {|
-                                    formatter = fun() -> I18N.NumberFormat.formatNumber(jsThis?value:int)
+                                    formatter = fun() -> Utils.formatToInt jsThis?value
                                 |} |> pojo
                         |} |> pojo
 
