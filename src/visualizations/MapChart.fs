@@ -496,9 +496,9 @@ let tooltipFormatter state jsThis =
                 if not (mapWithoutHistoricalData state) && (Array.max newCases) > 0.
                 then sparklineFormatter newCases "#189a73" state
                 else ""
-            if absolute > 0 && state.DataTimeInterval = Complete then // deceased
+            if absolute > 0 then
                 label + sprintf " (%s %% %s)"
-                        (I18N.NumberFormat.formatNumber pctPopulation)
+                        (Utils.formatTo1DecimalWithTrailingZero pctPopulation)
                         (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%s</b> (%s %% %s)"
                         (I18N.t "charts.map.confirmedCases")
