@@ -262,13 +262,18 @@ let seriesData (state : State) =
                 | None -> None, 0.0001, 0, 0., 0, 0., areaData.Population, null
                 | Some totalCases ->
                     let confirmedCasesValue = totalCases |> Seq.map (fun dp -> dp.TotalConfirmedCases) |> Seq.choose id |> Seq.toArray
-                    let newCases =
-                        confirmedCasesValue
-                        |> Array.mapi (fun i cc -> if i > 0 then cc - confirmedCasesValue.[i-1] else cc)
-                        |> Array.skip (confirmedCasesValue.Length - 56) // we only show last 56 days
-                        |> Seq.toArray
                     let vaccinated1stValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated1st) |> Seq.choose id |> Seq.toArray
                     let vaccinated2ndValue = totalCases |> Seq.map (fun dp -> dp.TotalVaccinated2nd) |> Seq.choose id |> Seq.toArray
+                    let chartValue =
+                        match state.ContentType with
+                        | Vaccinated1st -> vaccinated1stValue
+                        | Vaccinated2nd -> vaccinated2ndValue
+                        | _ -> confirmedCasesValue
+                    let newCases =
+                        chartValue
+                        |> Array.mapi (fun i cc -> if i > 0 then cc - chartValue.[i-1] else cc)
+                        |> Array.skip (chartValue.Length - 56) // we only show last 56 days
+                        |> Seq.toArray
                     let deceasedValue = totalCases |> Seq.map (fun dp -> dp.TotalDeceasedCases) |> Seq.choose id |> Seq.toArray
                     let values =
                         match state.ContentType with
@@ -368,7 +373,7 @@ let seriesData (state : State) =
 
 
 
-let sparklineFormatter newCases state =
+let sparklineFormatter newCases color state =
     let desaturateColor (rgb:string) (sat:float) =
         let argb = Int32.Parse (rgb.Replace("#", ""), Globalization.NumberStyles.HexNumber)
         let r = (argb &&& 0x00FF0000) >>> 16
@@ -380,7 +385,7 @@ let sparklineFormatter newCases state =
         let newB = int (Math.Round (float(b) * sat + avg * (1.0 - sat)))
         sprintf "#%02x%02x%02x" newR newG newB
 
-    let color1 = "#bda506"
+    let color1 = color
     let color2 = desaturateColor color1 0.6
     let color3 = desaturateColor color1 0.3
 
@@ -465,8 +470,6 @@ let tooltipFormatter state jsThis =
     let pctPopulation = float absolute * 100.0 / float population
     let fmtStr = sprintf "%s: <b>%s</b>" (I18N.t "charts.map.populationC") (I18N.NumberFormat.formatNumber(population : int))
 
-    let lastTwoWeeks = newCases
-
     let label =
         match state.ContentType with
         | ConfirmedCases ->
@@ -476,12 +479,17 @@ let tooltipFormatter state jsThis =
                     + sprintf " (%s %% %s)" (Utils.formatTo1DecimalWithTrailingZero(pctPopulation)) (I18N.t "charts.map.population")
                     + sprintf "<br>%s: <b>%s</b> %s" (I18N.t "charts.map.confirmedCases") (Utils.formatTo1DecimalWithTrailingZero(value100k:float)) (I18N.t "charts.map.per100k")
                     + sprintf "<br>%s: <b>%s%s%%</b>" (I18N.t "charts.map.relativeIncrease") (if weeklyIncrease < 500. then "" else ">") (weeklyIncrease |> Utils.formatTo1DecimalWithTrailingZero)
-                    + if (Array.max lastTwoWeeks) > 0. then
-                        state |> sparklineFormatter lastTwoWeeks else ""
+                    + if (Array.max newCases) > 0.
+                      then sparklineFormatter newCases "#bda506" state
+                      else ""
             else
                 label
         | Vaccinated1st | Vaccinated2nd ->
             let label = fmtStr + sprintf "<br>%s: <b>%s</b>" ((ContentType.GetName state.ContentType)) (I18N.NumberFormat.formatNumber(absolute : int))
+            let chart =
+                if state.MapToDisplay = RegionMap && (Array.max newCases) > 0.
+                then sparklineFormatter newCases "#189a73" state
+                else ""
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
                 label + sprintf " (%s %% %s)"
                         (I18N.NumberFormat.formatNumber pctPopulation)
@@ -490,8 +498,9 @@ let tooltipFormatter state jsThis =
                         (I18N.t "charts.map.confirmedCases")
                         (I18N.NumberFormat.formatNumber totalConfirmed) (Utils.formatTo1DecimalWithTrailingZero(float totalConfirmed * 100.0 / float population))
                         (I18N.t "charts.map.population")
+                    + chart
             else
-                label
+                label + chart
         | Deceased ->
             let label = fmtStr + sprintf "<br>%s: <b>%s</b>" (I18N.t "charts.map.deceased") (I18N.NumberFormat.formatNumber(absolute : int))
             if absolute > 0 && state.DataTimeInterval = Complete then // deceased
@@ -613,7 +622,10 @@ let renderMap (state : State) =
                         | 7 -> 3500.
                         | 1 -> 500.
                         | _ -> 100.
-            | Vaccinated1st, _ | Vaccinated2nd, _ | Deceased, _ ->
+            | Vaccinated1st, _ | Vaccinated2nd, _ ->
+                let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
+                if dataMax < 1. then 10. else dataMax
+            | Deceased, _ ->
                 let dataMax = data |> Seq.map(fun dp -> dp.value) |> Seq.max
                 if dataMax < 1. then 10. else dataMax
 
