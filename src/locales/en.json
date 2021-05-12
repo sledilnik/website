@@ -738,6 +738,7 @@
             "titleMenu": "Vaccination",
             "used": "Vaccination Used",
             "byManufacturer": "Vaccination Delivered",
+            "byWeek": "By Week",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
