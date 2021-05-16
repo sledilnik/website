@@ -9,6 +9,8 @@ type Metric =
     | ActiveCases
     | ConfirmedToDate
     | DeceasedToDate
+    | Vaccinated1stToDate
+    | Vaccinated2ndToDate
 
 type DataPoint = {
     Region : string
@@ -32,6 +34,11 @@ let parseMunicipalitiesData (csv : string) =
                 Some { Region = region ; Municipality = municipality ; Metric = ConfirmedToDate ; Value = None }
             | [| "region" ; region ; municipality ; "deceased" ; "todate" |] ->
                 Some { Region = region ; Municipality = municipality ; Metric = DeceasedToDate ; Value = None }
+            | [| "region" ; region ; municipality ; "vaccinated" ; "1st" ; "todate" |] ->
+                Some { Region = region ; Municipality = municipality ; Metric = Vaccinated1stToDate ; Value = None }
+            | [| "region" ; region ; municipality ; "vaccinated" ; "2nd" ; "todate" |] ->
+                Some { Region = region ; Municipality = municipality ; Metric = Vaccinated2ndToDate ; Value = None }
+
             | unknown ->
                 printfn "Error parsing municipalities header: %s" col
                 None
@@ -73,15 +80,21 @@ let parseMunicipalitiesData (csv : string) =
                                         { state with ConfirmedToDate = dp.Value }
                                     | DeceasedToDate ->
                                         { state with DeceasedToDate = dp.Value }
+                                    | Vaccinated1stToDate ->
+                                        { state with Vaccinated1stToDate = dp.Value }
+                                    | Vaccinated2ndToDate ->
+                                        { state with Vaccinated2ndToDate = dp.Value }
                                 ) { Name = municipality
                                     ActiveCases = None
                                     ConfirmedToDate = None
-                                    DeceasedToDate = None })
+                                    DeceasedToDate = None
+                                    Vaccinated1stToDate = None
+                                    Vaccinated2ndToDate = None })
                         // Region
                         { Name = region
                           Municipalities = municipalities |> Array.toList }
                     )
-                let dataPoint : MunicipalitiesDataPoint = { Date = date ; Regions = data |> Array.toList } 
+                let dataPoint : MunicipalitiesDataPoint = { Date = date ; Regions = data |> Array.toList }
                 return dataPoint
         })
     |> Array.choose (fun row ->

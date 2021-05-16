@@ -19,6 +19,7 @@ type RegionsChartState =
     {
       ChartConfig: RegionsChartConfig
       ScaleType : ScaleType
+      ContentType : ContentType
       MetricType : MetricType
       RegionsData : RegionsData
       RegionsSorted : AreaCases list
@@ -48,6 +49,20 @@ let newCases (regionMetricData: RegionMetricData): RegionMetricData =
 
     { regionMetricData with MetricValues = newCasesArray }
 
+let vaccinatedPerDay (regionMetricData: RegionMetricData): RegionMetricData =
+    let totalVaccinatedArray = regionMetricData.MetricValues
+    let valuesLength = totalVaccinatedArray.Length
+
+    let vaccinatedPerDayArray =
+        Array.init valuesLength
+            (fun i ->
+                match i with
+                | 0 -> totalVaccinatedArray.[i]
+                | _ -> totalVaccinatedArray.[i] - totalVaccinatedArray.[i - 1]
+            )
+
+    { regionMetricData with MetricValues = vaccinatedPerDayArray }
+
 
 let allSeries state =
     let startDate =
@@ -74,6 +89,7 @@ let allSeries state =
             regionMetrics
             |> match state.MetricType with
                | NewCases7Days -> newCases
+               | Vaccinated7Days -> vaccinatedPerDay
                | _ -> id
 
         let seriesValuesHc: RegionSeriesValues =
@@ -93,8 +109,9 @@ let allSeries state =
             seriesValuesHc
             |> match state.MetricType with
                | NewCases7Days -> Statistics.calcRunningAverage
+               | Vaccinated7Days -> Statistics.calcRunningAverage
                | _ -> id
-            |> Array.map (fun value -> 
+            |> Array.map (fun value ->
                             let date = value |> fst
                             pojo {|
                                     x = date |> jsTime12h

@@ -382,7 +382,9 @@
             "titleMenu": "Općine – karta",
             "bubbles": "Distribucija",
             "disclaimer": "Napomena: podatke o preminulima po općinama, NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih.",
-            "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva."
+            "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva.",
+            "vaccinated2nd": "Dvaput cijepljeni",
+            "vaccinated1st": "Jednom cijepljeni"
         },
         "countriesNewCasesPer100k": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -577,13 +579,18 @@
             "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
         },
         "regions": {
-            "title": "Slučajevi po regijama",
+            "title": "Po regijiama",
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "activeCases": "Aktivni slučajevi",
+            "activeCases": "Aktivni",
             "titleMenu": "Regija – slučajevi",
-            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)",
-            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna."
+            "newCases7Days": "Novi (7-dnevni prosjek)",
+            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna.",
+            "vaccinated2nd": "2. doza",
+            "vaccinated1st": "1. doza",
+            "vaccinated7Days": "Na dan (7-dnevni prosjek)",
+            "vaccinated": "Cijepljeni",
+            "allCases": "Svi"
         },
         "cases": {
             "active": "Aktivni",
@@ -747,7 +754,7 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "title": "Slučajevi po regijama (na 100.000 stanovnika)",
+            "title": "Po regijama (na 100.000 stanovnika)",
             "titleMenu": "Regija – usporedba"
         },
         "phaseDiagram": {
@@ -920,7 +927,9 @@
             "byManufacturer": "Isporučeno cijepivo",
             "used": "Korišteno cijepivo",
             "titleMenu": "Cijepivo",
-            "title": "Cijepivo"
+            "title": "Cijepivo",
+            "janssen": "Janssen",
+            "byWeek": "Po tjednima"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
@@ -948,7 +957,7 @@
     },
     "cm": {
         "liftSchools4to5": {
-            "description": "Opuštanje: osnovna škola 4., 5. razred, okupljanje do 200 osoba, sve usluge smještaja",
+            "description": "Ublažavanje ograničenja: osnovne škole 4., 5. razred, okupljanje do 200 osoba, sve usluge smještaja",
             "title": "Škole"
         },
         "schools": {
@@ -960,7 +969,7 @@
             "description": "Zabrana kretanja izvan općinskih granica, obavezna dezinfekcija <br>višestambenih zgrada, dućani za ugrožene skupine do 10 sati ujutro"
         },
         "liftService": {
-            "description": "Opuštanje: gradnja, usluge, sportovi na otvorenom, <br>dopušteni su neki redovni javni prijevozi",
+            "description": "Ublažavanje ograničenja: gradnja, usluge, sportovi na otvorenom, <br>dopušteni su neki redovni javni prijevozi",
             "title": "Usluge"
         },
         "epidemic": {
@@ -981,7 +990,7 @@
         },
         "liftPublicTransport": {
             "title": "Javni prijevoz",
-            "description": "Opuštanje: javni prijevoz, sve zdravstvene i stomatološke usluge"
+            "description": "Ublažavanje ograničenja: javni prijevoz, sve zdravstvene i stomatološke usluge"
         },
         "retirementHomes": {
             "title": "Domovi umirovljenika",
@@ -996,7 +1005,7 @@
             "description": "Prvi potvrđeni slučaj:<br>turist koji se vraća iz Maroka"
         },
         "liftMuseums": {
-            "description": "Opuštanje: knjižnice, galerije, muzeji, posredovanje nekretninama, čišćenje dimnjaka",
+            "description": "Ublažavanje ograničenja: knjižnice, galerije, muzeji, posredovanje nekretninama, čišćenje dimnjaka",
             "title": "Muzeji"
         },
         "checkpoints": {
@@ -1016,7 +1025,7 @@
             "description": "Obavezna 14-dnevna karantena za strance koji dolaze iz inozemstva <br>(za EU s iznimkama i treće države)"
         },
         "liftQuarantine": {
-            "description": "Opuštanje: karantena samo za strance iz trećih država",
+            "description": "Ublažavanje ograničenja: karantena samo za strance iz trećih država",
             "title": "Karantena"
         },
         "quarantineStrict": {
@@ -1029,19 +1038,19 @@
         },
         "liftVacationHomes": {
             "title": "Vikendice",
-            "description": "Opuštanje: kretanje između općina (vikendice …), <br>objašnjenja o općoj zabrani kretanja"
+            "description": "Ublažavanje ograničenja: kretanje između općina (vikendice …), <br>objašnjenja o općoj zabrani kretanja"
         },
         "liftMunicipality": {
             "title": "Općine",
-            "description": "Opuštanje: kretanje izvan granica vlastite općine"
+            "description": "Ublažavanje ograničenja: kretanje izvan granica vlastite općine"
         },
         "liftSchools1to3": {
             "title": "Dječji vrtići",
-            "description": "Opuštanje: vrtići i osnovna škola 1 – 3, 9 razred. Srednja škola 4 razred"
+            "description": "Ublažavanje ograničenja: vrtići i osnovne škole 1 – 3, 9 razred. Srednje škole 4 razred"
         },
         "liftGatherings500": {
             "title": "Do 500",
-            "description": "Opuštanje: okupljanje do 500 osoba, gledatelji na sportskim događajima.<br>Slobodan prijelaz preko granice izvan kontrolnih točaka za građane SLO, AUT, ITA i HUN"
+            "description": "Ublažavanje ograničenja: okupljanje do 500 osoba, gledatelji na sportskim događajima.<br>Slobodan prijelaz preko granice izvan kontrolnih točaka za građane SLO, AUT, ITA i HUN"
         },
         "gatherings50": {
             "description": "Okupljanje do 50 osoba, do 500 ako ih odobri NIJZ",
@@ -1084,7 +1093,7 @@
             "title": "🚫21 – 6 h"
         },
         "schools6+": {
-            "description": "Nastava na daljinu za učenike od 6. razreda osnovne škole, srednje škole i muzičkih škola",
+            "description": "Nastava na daljinu za 6. razrede osnovne škole, srednje škole i muzičke škole",
             "title": "Škole 6+"
         },
         "municipality2": {
@@ -1105,11 +1114,11 @@
         },
         "liftShops": {
             "title": "Dućani",
-            "description": "Opuštanje: tehnički, auto, namještaj u dječjim trgovinama, pedikura, fotokopiraonice, zlatarnice i trgovine satovima"
+            "description": "Ublažavanje ograničenja: tehnički, auto, namještaj u dječjim trgovinama, pedikura, fotokopiraonice, zlatarnice i trgovine satovima"
         },
         "liftLibraries": {
             "title": "Knjižnice",
-            "description": "Opuštanje: knjižnice, servisne radionice, usluge gradnje i održavanja, …"
+            "description": "Ublažavanje ograničenja: knjižnice, servisne radionice, usluge gradnje i održavanja, …"
         },
         "alcoDrinks": {
             "description": "Zabrana alkohola i alkoholnih pića u restoranima brze hrane i sl.",
@@ -1120,23 +1129,23 @@
             "title": "Plan"
         },
         "liftServices": {
-            "description": "Opuštanje: javni prijevoz (ograničena usluga), cvjećarnice, praonice automobila, čistionice.<br>U četiri regije također trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
+            "description": "Ublažavanje ograničenja: javni prijevoz (ograničena usluga), cvjećarnice, praonice automobila, čistionice.<br>U četiri regije također trgovine odjeće i obuće, te kretanje unutar granica regije s aplikacijom.",
             "title": "Usluge"
         },
         "liftReligiousCeremonies": {
             "title": "Vjerski obredi",
-            "description": "Opuštanje: vjerski obredi su dopušteni s nekim ograničenjima. Knjižnice, usluge održavanja i instalacija.<br>U četiri regije također muzeji, knjižare, specijalizirane trgovine."
+            "description": "Ublažavanje ograničenja: vjerski obredi su dopušteni s nekim ograničenjima. Knjižnice, usluge održavanja i instalacija.<br>U četiri regije također muzeji, knjižare, specijalizirane trgovine."
         },
         "services2": {
             "description": "Zabrana za sve trgovine i usluge (iznimke: namirnice, ljekarne, banke, poštanski uredi …).<br>Opuštanje za neka ograničenja okupljanja i kretanja do 25.12. 20:00.",
             "title": "Usluge"
         },
         "liftFoodMarkets2": {
-            "description": "Opuštanje: tržnice, kiosci, frizerski saloni.",
+            "description": "Ublažavanje ograničenja: tržnice, kiosci, frizerski saloni.",
             "title": "Tržnice"
         },
         "liftGym": {
-            "description": "Opuštanje: individualna i vođena rekreacija s ograničenjima<br>(1 osoba na 50 m² i razmak između osoba od 5 m).",
+            "description": "Ublažavanje ograničenja: individualna i vođena rekreacija s ograničenjima<br>(1 osoba na 50 m² i razmak između osoba od 5 m).",
             "title": "Fitness"
         },
         "planRelaxation2": {
@@ -1144,11 +1153,11 @@
             "title": "Plan"
         },
         "liftSchools3": {
-            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama (sve osim Goriške, Posavske i Jugoistočne Slovenije).",
+            "description": "Ublažavanje ograničenja: vrtići i osnovne škole do 3. razreda u nekim regijama (sve osim Goriške, Posavske i Jugoistočne Slovenije).",
             "title": "Škole 3"
         },
         "liftRegions": {
-            "description": "Opuštanje: trgovine za djecu, muzeji, galerije, knjižnice i skijališta su otvorena u nekim regijama.",
+            "description": "Ublažavanje ograničenja: trgovine za djecu, muzeji, galerije, knjižnice i skijališta su otvorena u nekim regijama.",
             "title": "Regije"
         },
         "gym": {
@@ -1157,11 +1166,11 @@
         },
         "liftSchools3All": {
             "title": "Škole 3",
-            "description": "Opuštanje: vrtići i osnovne škole do 3. razreda u nekim regijama."
+            "description": "Ublažavanje ograničenja: vrtići i osnovne škole do 3. razreda u nekim regijama."
         },
         "liftShops2": {
             "title": "Dućani",
-            "description": "Opuštanje: sve trgovine do 400 m², kozmetičke usluge, individualna edukacija, …<br>(za neke usluge potreban je negativan test kupca i zaposlenika)"
+            "description": "Ublažavanje ograničenja: sve trgovine do 400 m², kozmetičke usluge, individualna edukacija, …<br>(za neke usluge potreban je negativan test kupca i zaposlenika)"
         },
         "bordersStrict": {
             "title": "Granice",
@@ -1172,7 +1181,7 @@
             "description": "Zatvoreni vrtići i osnovne škole do 3. razreda u Obalno-kraškoj regiji i Zasavlju.<br>U trgovinama je dozvoljena je prodaja 🧦 i 🩲."
         },
         "liftMunicipality2": {
-            "description": "Opuštanje: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2 metra.",
+            "description": "Ublažavanje ograničenja: slobodno kretanje po općinama i regijama, okupljanje do 10 osoba, sve trgovine.<br>Otvaranje (svih) osnovnih škola i srednjih škola za maturante, dozvoljeni su ispiti i grupne vježbe do 10 osoba na sveučilištu.<br>Bezkontaktni sportovi i rekreativne vježbe u grupama do 10 osoba dopušteni su s udaljenosti od 2 metra.",
             "title": "Općine"
         },
         "liftBorders": {
