@@ -382,7 +382,9 @@
             "titleMenu": "Općine – karta",
             "bubbles": "Distribucija",
             "disclaimer": "Napomena: podatke o preminulima po općinama, NIJZ ne pruža od 12. prosinca, a i prije nisu bili nisu potpuni. To je razlog za odstupanje u odnosu na ukupan broj umrlih.",
-            "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva."
+            "disclaimerRegion": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna. To je razlog za odstupanje od ukupnog broja smrtnih slučajeva.",
+            "vaccinated2nd": "Dvaput cijepljeni",
+            "vaccinated1st": "Jednom cijepljeni"
         },
         "countriesNewCasesPer100k": {
             "title": "Države: novi dnevni slučajevi na 100.000 stanovnika (7-dnevni prosjek)",
@@ -577,13 +579,18 @@
             "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
         },
         "regions": {
-            "title": "Slučajevi po regijama",
+            "title": "Po regijiama",
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
-            "activeCases": "Aktivni slučajevi",
+            "activeCases": "Aktivni",
             "titleMenu": "Regija – slučajevi",
-            "newCases7Days": "Novi slučajevi (7-dnevni prosjek)",
-            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna."
+            "newCases7Days": "Novi (7-dnevni prosjek)",
+            "disclaimer": "Napomena: podaci o preminulima prema dobi pružaju se tjedno, stoga nisu potpuni za zadnja dva tjedna.",
+            "vaccinated2nd": "2. doza",
+            "vaccinated1st": "1. doza",
+            "vaccinated7Days": "Na dan (7-dnevni prosjek)",
+            "vaccinated": "Cijepljeni",
+            "allCases": "Svi"
         },
         "cases": {
             "active": "Aktivni",
@@ -747,7 +754,7 @@
             "deceased": "Smrtni slučajevi",
             "confirmedCases": "Potvrđeni slučajevi",
             "activeCases": "Aktivni slučajevi",
-            "title": "Slučajevi po regijama (na 100.000 stanovnika)",
+            "title": "Po regijama (na 100.000 stanovnika)",
             "titleMenu": "Regija – usporedba"
         },
         "phaseDiagram": {
@@ -921,7 +928,8 @@
             "used": "Korišteno cijepivo",
             "titleMenu": "Cijepivo",
             "title": "Cijepivo",
-            "janssen": "Janssen"
+            "janssen": "Janssen",
+            "byWeek": "Po tjednima"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
