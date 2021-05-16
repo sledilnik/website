@@ -35,6 +35,13 @@ let noneToZeroFloat (value: float option) =
     | Some x -> x
     | None -> 0.
 
+let sumIntOption (a : int option) (b : int option) =
+    match a, b with
+    | Some aa, Some bb -> Some (aa + bb)
+    | Some aa, None -> aa |> Some
+    | None, Some bb -> bb |> Some
+    | _ -> None
+
 let subtractIntOption (a : int option) (b : int option) =
     match a, b with
     | Some aa, Some bb -> Some (bb - aa)

@@ -660,7 +660,7 @@ let render (state: State) (_: Msg -> unit) =
           municipalities; sources; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
-          regions100k; schools; schoolStatus; hcCases; sources
+          regions100k; schools; schoolStatus; hcCases
           countriesCasesPer100k
           countriesActiveCasesPer100k
           countriesNewDeathsPer100k

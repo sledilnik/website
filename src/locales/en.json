@@ -457,16 +457,21 @@
             "absolute": "Absolute Daily Growth"
         },
         "regions": {
-            "title": "Cases by Region",
+            "title": "By Region",
             "titleMenu": "Region - cases",
-            "activeCases": "Active Cases",
+            "activeCases": "Active",
+            "allCases": "All",
             "confirmedCases": "Confirmed Cases",
-            "newCases7Days": "New Cases (7-day avg.)",
+            "newCases7Days": "New (7-day avg.)",
+            "vaccinated": "Vaccinated",
+            "vaccinated7Days": "Per Day (7-day avg.)",
+            "vaccinated1st": "1st Dose",
+            "vaccinated2nd": "2nd Dose",
             "deceased": "Deaths",
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
         "regions100k": {
-            "title": "Cases by Region (per 100,000 people)",
+            "title": "By Region (per 100,000 people)",
             "titleMenu": "Region - comparison",
             "activeCases": "Active Cases",
             "confirmedCases": "Confirmed Cases",
@@ -488,6 +493,8 @@
             "bubbles": "Distribution",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
+            "vaccinated1st": "Vaccinated 1st dose",
+            "vaccinated2nd": "Vaccinated 2nd dose",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
             "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
@@ -731,6 +738,7 @@
             "titleMenu": "Vaccination",
             "used": "Vaccination Used",
             "byManufacturer": "Vaccination Delivered",
+            "byWeek": "By Week",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
@@ -1737,7 +1745,7 @@
             "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From 21.12.2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
-            "question": "What does the “Confirmed Cases by Region” tell us?",
+            "question": "What does the “By Region” tell us?",
             "answer": "The [graph](/en/stats#regions-chart) shows the dynamics of growth of confirmed cases by selected regions. Individual regions can be easily compared by selecting the ones you want shown on the graph by clicking on specific regions below the graph. From the curve, we can quickly see which regions have the most and which the least confirmed cases and how this number has changed over time."
         },
         "map-chart": {
