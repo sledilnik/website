@@ -1181,7 +1181,20 @@
         "liftTerrace2": {
             "title": "Terrace",
             "description": "Easing of restrictions: Outdoor drinking and dining allowed. Smaller tourist accommodations opened (with limitations).<br>Indoor food and dining allowed in Gorizia, Coastal-Karst and Mura regions (with limitations)."
+        },
+        "liftSport": {
+            "title": "Sport",
+            "description": "Easing of restrictions: all trainings in groups up to 10 and all competition (w/o spectators).<br>All schools opened, recommended model C for university."
+        },
+        "liftHotels": {
+            "title": "Hotels",
+            "description": "Easing of restrictions: larger hotels with 50% capacity.<br>One person per 20 sq m in indoor public spaces (was 30 sq m)."
+        },
+        "liftHighSchools2": {
+            "title": "H.schools",
+            "description": "Easing of restrictions: high schools and universities. Sport events with spectators (with test).<br>Camping up to 70% capacity. Bars and restaurants opened from 5AM to 10PM."
         }
+
     },
     "days": {
         "in_x_days": "in {{ count }} day",

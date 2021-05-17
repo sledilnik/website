@@ -711,6 +711,18 @@
         "liftTerrace2": {
             "title": "Lokali",
             "description": "Sprostitev ukrepov: odprejo se terase in manjši nastanitveni objekti (z omejitvami).<br>V Goriški, Obalno-kraški in Pomurski regiji se lahko odprejo gostinski lokali (z omejitvami)."
+        },
+        "liftSport": {
+            "title": "Šport",
+            "description": "Sprostitev ukrepov: vsi treningi v skupinah do 10 in vsa športna tekmovanja (brez gledalcev, pogoji PCT).<br>Odprejo se vse šole, tudi univerze in visokošolski zavodi, priporočen je model C."
+        },
+        "liftHotels": {
+            "title": "Hoteli",
+            "description": "Sprostitev ukrepov: večji hoteli lahko obratujejo s 50% zasedenostjo.<br>V zaprtih javih prostorih dovoljena ena oseba na 20 m2 (pred tem na 30 m2)."
+        },
+        "liftHighSchools2": {
+            "title": "S.šole",
+            "description": "Sprostitev ukrepov: srednje šole in univerze v živo. Športne prireditve z gledalci (pogoji PCT).<br>Kampi do 70% kapacitet. Gostinski lokali odprti od 5. do 22. ure."
         }
     },
     "phase": {
