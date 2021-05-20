@@ -1192,9 +1192,13 @@
             "title": "Hotels",
             "description": "Easing of restrictions: larger hotels with 50% capacity.<br>One person per 20 sq m in indoor public spaces (was 30 sq m)."
         },
+        "liftGatherings50": {
+            "title": "Up to 50",
+            "description": "Easing of restrictions: gathering up to 50 people."
+        },
         "liftHighSchools2": {
             "title": "H.schools",
-            "description": "Easing of restrictions: high schools and universities. Sport events with spectators (with test).<br>Camping up to 70% capacity. Bars and restaurants opened from 5AM to 10PM."
+            "description": "Easing of restrictions: high schools and universities. Sport and culture events with spectators (with test).<br>Camping up to 70% capacity. Bars and restaurants opened from 5AM to 10PM."
         }
 
     },

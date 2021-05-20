@@ -720,9 +720,13 @@
             "title": "Hoteli",
             "description": "Sprostitev ukrepov: večji hoteli lahko obratujejo s 50% zasedenostjo.<br>V zaprtih javih prostorih dovoljena ena oseba na 20 m2 (pred tem na 30 m2)."
         },
+        "liftGatherings50": {
+            "title": "Do 50",
+            "description": "Sprostitev ukrepov: zbiranje do 50 ljudi."
+        },
         "liftHighSchools2": {
             "title": "S.šole",
-            "description": "Sprostitev ukrepov: srednje šole in univerze v živo. Športne prireditve z gledalci (pogoji PCT).<br>Kampi do 70% kapacitet. Gostinski lokali odprti od 5. do 22. ure."
+            "description": "Sprostitev ukrepov: srednje šole in univerze v živo. Športne in kulturne prireditve z gledalci (pogoji PCT).<br>Kampi do 70% kapacitet. Gostinski lokali odprti od 5. do 22. ure."
         }
     },
     "phase": {
