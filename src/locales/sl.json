@@ -1362,6 +1362,7 @@
         "schoolStatus": {
             "title": "Stanje po šolah in vrtcih",
             "titleMenu": "Šole, vrtci - stanje",
+            "disclaimer": "Opomba: prikazani so samo podatki, ki jih šole posredujejo MIZŠ, zato so lahko nepopolni.",
             "search": "Išči po imenu šole ali vrtca",
             "showActive": "Aktivni",
             "showAll": "Vsi",

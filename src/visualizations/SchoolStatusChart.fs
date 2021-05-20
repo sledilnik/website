@@ -437,6 +437,12 @@ let render (state: State) dispatch =
                 prop.className "school"
                 prop.children (renderSchool state dispatch)
             ]
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text (chartText "disclaimer")
+                ]
+            ]
         ]
     ]
 

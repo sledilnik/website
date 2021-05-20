@@ -391,7 +391,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: From December 3, we do not received data per laboratory.",
+            "disclaimer": "Note: from December 3, we do not received data per laboratory.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
@@ -564,7 +564,7 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: Demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimer": "Note: demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
@@ -770,6 +770,7 @@
         "schoolStatus": {
             "title": "Situation in School and Kindergarten",
             "titleMenu": "School, Kindergarten - situation",
+            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete.",
             "search": "Search by name of school",
             "showActive": "Active",
             "showAll": "All",
