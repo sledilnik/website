@@ -319,6 +319,7 @@
         "patients": {
             "title": "Hospitalizations",
             "titleMenu": "Hospitalizations",
+            "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
@@ -366,7 +367,7 @@
         "hCenters": {
             "title": "Healthcare Center Treatment",
             "titleMenu": "HC - treatment",
-            "disclaimer": "Note: this chart is not up-to-date. From October 25, Ministry of Health does not report data about health centers as they are not collected anymore.",
+            "disclaimer": "Note: this chart is not up-to-date. From October 25, 2020, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
@@ -391,7 +392,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: from December 3, we do not received data per laboratory.",
+            "disclaimer": "Note: from December 3, 2020, we do not received data per laboratory.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
@@ -409,7 +410,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
-            "disclaimer": "Note: from October 11, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
+            "disclaimer": "Note: from October 11, 2020, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
@@ -799,7 +800,7 @@
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
             "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
-            "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
+            "disclaimer": "Note: from October 17, 2020, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -1756,7 +1757,7 @@
         },
         "spread-chart": {
             "question": "What does the “Growth of Confirmed Cases” graph mean?",
-            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From 21.12.2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
+            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From December 21, 2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
             "question": "What does the “By Region” tell us?",
