@@ -923,7 +923,7 @@
         "patients": {
             "title": "Hospitalizirani",
             "titleMenu": "Hospitalizirani",
-            "disclaimerCare": "Opomba: negovalne bolnišnice od 8. aprila 2021 ne poročajo več dnevno stanje.",
+            "disclaimerCare": "Opomba: negovalne bolnišnice od 8. aprila 2021 ne poročajo več dnevnega stanja.",
             "byHospital": "Po bolnišnicah",
             "allHospitals": "Vse bolnišnice",
             "hospitalizedIn": "Hospitalizirani v:",
