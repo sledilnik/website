@@ -1199,8 +1199,11 @@
         "liftHighSchools2": {
             "title": "H.schools",
             "description": "Easing of restrictions: high schools and universities. Sport and culture events with spectators (with test).<br>Camping up to 70% capacity. Bars and restaurants opened from 5AM to 10PM."
+        },
+        "liftGatherings": {
+            "title": "Gatherings",
+            "description": "Easing of restrictions: no limitations on public gatherings and events with required interpersonal distance."
         }
-
     },
     "days": {
         "in_x_days": "in {{ count }} day",

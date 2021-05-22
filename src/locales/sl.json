@@ -727,6 +727,10 @@
         "liftHighSchools2": {
             "title": "S.šole",
             "description": "Sprostitev ukrepov: srednje šole in univerze v živo. Športne in kulturne prireditve z gledalci (pogoji PCT).<br>Kampi do 70% kapacitet. Gostinski lokali odprti od 5. do 22. ure."
+        },
+        "liftGatherings": {
+            "title": "Shodi",
+            "description": "Sprostitev ukrepov: na javnih shodih in prireditvah ni več omejitve zbiranja, le predpisana medosebna razdalja."
         }
     },
     "phase": {

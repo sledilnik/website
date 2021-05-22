@@ -172,6 +172,7 @@ let addContainmentMeasuresFlags
         10, 5, 2021, "#ebfaeb", "liftHotels"
         15, 5, 2021, "#ebfaeb", "liftGatherings50"
         17, 5, 2021, "#ebfaeb", "liftHighSchools2"
+        22, 5, 2021, "#ebfaeb", "liftGatherings"
     |]
     {|
         ``type`` = "flags"
