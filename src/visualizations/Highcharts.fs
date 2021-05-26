@@ -215,20 +215,17 @@ let parseDate (value: String) =
     match I18N.t "charts.common.numDateFormat" with
     | "%m/%d/%Y" -> // EN, ME
         let date = value.Replace(" ", "").Split('/')
-        DateTime
-            .Parse(date.[2] + "-" + date.[0] + "-" + date.[1])
+        DateTime(date.[2] |> int, date.[0] |> int, date.[1] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
     | "%d/%m/%Y" -> // IT
         let date = value.Replace(" ", "").Split('/')
-        DateTime
-            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
+        DateTime(date.[2] |> int, date.[1] |> int, date.[0] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
     | _ -> // DE, HR, MK, SL, SQ
         let date = value.Replace(" ", "").Split('.')
-        DateTime
-            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
+        DateTime(date.[2] |> int, date.[1] |> int, date.[0] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
 
