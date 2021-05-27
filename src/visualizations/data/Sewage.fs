@@ -6,7 +6,6 @@ open Fable.SimpleHttp
 open Fable.SimpleJson
 
 let url = "https://api.sledilnik.org/api/sewage"
-
 type PlantStats = {
    covN1Compensated: float option
    covN2Compensated: float option
@@ -30,10 +29,9 @@ let getOrFetch =
         return
             match response_code with
             | 200 ->
-                let data = json |> JS.JSON.parse |> JS.JSON.stringify // TODO: This is an ugly hack but it's needed, otherwise SimpleJson parser complains
-                           |> SimpleJson.parse
+                let data = json
+                           |> SimpleJson.parseNative
                            |> SimpleJson.mapKeys (function
-                               | "wastewater_treatment_plants" -> "plants"
                                | "cp-luc-pmmov-rawpmmov-n1" -> "covN1Compensated"
                                | "cp-luc-pmmov-rawpmmov-n2" -> "covN2Compensated"
                                | key -> key)
