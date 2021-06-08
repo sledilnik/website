@@ -80,6 +80,14 @@ let defaultTooltip =
         xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
     |} |> pojo
 
+let defaultSeriesOptions stackType =
+    {|
+        stacking = stackType
+        crisp = false
+        borderWidth = 0
+        pointPadding = 0
+        groupPadding = 0
+    |}
 let renderVaccinationChart state dispatch =
 
     let allSeries =
@@ -104,7 +112,7 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "administered"
-                       ``type`` = "line"
+                       ``type`` = "column"
                        color = "#189a73"
                        data =
                            state.VaccinationData
@@ -112,7 +120,7 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "administered2nd"
-                       ``type`` = "line"
+                       ``type`` = "column"
                        color = "#0e5842"
                        data =
                            state.VaccinationData
@@ -138,7 +146,7 @@ let renderVaccinationChart state dispatch =
         plotOptions =
             pojo
                {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
-                  series = pojo {| stacking = None |} |}
+                  series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = defaultTooltip
     |}
@@ -177,12 +185,7 @@ let renderStackedChart state dispatch =
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                  series =
-                      {| stacking = "normal"
-                         crisp = false
-                         borderWidth = 0
-                         pointPadding = 0
-                         groupPadding = 0 |} |}
+                  series = defaultSeriesOptions "normal" |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = defaultTooltip
     |}
@@ -209,6 +212,30 @@ let renderWeeklyChart state dispatch =
     let allSeries = seq {
         yield
             pojo
+                {| name = chartText "deliveredDoses"
+                   ``type`` = "line"
+                   color = "#73ccd5"
+                   data =
+                       state.VaccinationData
+                       |> toWeeklyData
+                       |> Array.map (
+                            fun (prevW, currW) ->
+                                valueToWeeklyDataPoint
+                                    currW.Date (currW.deliveredToDate |> Utils.subtractIntOption prevW.deliveredToDate)) |}
+        yield
+            pojo
+                {| name = chartText "usedDoses"
+                   ``type`` = "line"
+                   color = "#20b16d"
+                   data =
+                       state.VaccinationData
+                       |> toWeeklyData
+                       |> Array.map (
+                            fun (prevW, currW) ->
+                                valueToWeeklyDataPoint
+                                    currW.Date (currW.usedToDate |> Utils.subtractIntOption prevW.usedToDate)) |}
+        yield
+            pojo
                 {| name = chartText "administered"
                    ``type`` = "column"
                    color = "#189a73"
@@ -231,18 +258,6 @@ let renderWeeklyChart state dispatch =
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
                                     currW.Date (currW.administered2nd.toDate |> Utils.subtractIntOption prevW.administered2nd.toDate)) |}
-        yield
-            pojo
-                {| name = chartText "deliveredDoses"
-                   ``type`` = "line"
-                   color = "#73ccd5"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (currW.deliveredToDate |> Utils.subtractIntOption prevW.deliveredToDate)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -263,12 +278,7 @@ let renderWeeklyChart state dispatch =
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                  series =
-                      {| stacking = "normal"
-                         crisp = false
-                         borderWidth = 0
-                         pointPadding = 0
-                         groupPadding = 0 |} |}
+                  series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {| split = false; shared = true; headerFormat = "{point.fmtHeader}<br>" |}
     |}
