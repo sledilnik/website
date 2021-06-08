@@ -210,7 +210,7 @@ let redCountries =
             ("LBR", "")
             ("LBY", "")
             ("LIE", "")
-            ("LTU", "temno rdeča: administrativna enota Sostinės regionas")
+            ("LTU", "")
             ("LUX", "")
             ("MDG", "")
             ("MWL", "")
