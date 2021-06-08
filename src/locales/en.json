@@ -1203,6 +1203,10 @@
         "liftGatherings": {
             "title": "Gatherings",
             "description": "Easing of restrictions: no limitations on public gatherings and events with required interpersonal distance."
+        },
+        "liftCapacity75p": {
+            "title": "75%",
+            "description": "Easing of restrictions: larger hotels, culture and sport events can operate with 75% capacity."
         }
     },
     "days": {

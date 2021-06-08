@@ -731,6 +731,10 @@
         "liftGatherings": {
             "title": "Shodi",
             "description": "Sprostitev ukrepov: na javnih shodih in prireditvah ni več omejitve zbiranja, le predpisana medosebna razdalja."
+        },
+        "liftCapacity75p": {
+            "title": "75%",
+            "description": "Sprostitev ukrepov: večji hoteli, kulturne in športne prireditve lahko obratujejo s 75% zasedenostjo."
         }
     },
     "phase": {
