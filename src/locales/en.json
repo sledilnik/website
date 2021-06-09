@@ -739,6 +739,7 @@
             "titleMenu": "Vaccination",
             "used": "Vaccination Used",
             "byManufacturer": "Vaccination Delivered",
+            "unused": "Vaccination Unused",
             "byWeek": "By Week",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",

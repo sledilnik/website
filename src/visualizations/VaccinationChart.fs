@@ -18,13 +18,15 @@ let chartText = I18N.chartText "vaccination"
 type DisplayType =
     | Used
     | ByManufacturer
+    | Unused
     | ByWeek
-    static member All = [ Used ; ByManufacturer; ByWeek; ]
+    static member All = [ Used ; ByManufacturer; Unused; ByWeek; ]
     static member Default = Used
     static member GetName =
         function
         | Used -> chartText "used"
         | ByManufacturer -> chartText "byManufacturer"
+        | Unused -> chartText "unused"
         | ByWeek -> chartText "byWeek"
 
 let AllVaccinationTypes = [
@@ -154,6 +156,15 @@ let renderVaccinationChart state dispatch =
 
 let renderStackedChart state dispatch =
 
+    let getValue dp vType =
+        match state.DisplayType with
+        | Unused ->
+            match dp.deliveredByManufacturer.TryFind(vType) with
+            | Some v -> Some v |> Utils.subtractIntOption (dp.usedByManufacturer.TryFind(vType))
+            | None -> None
+        | _ ->
+            dp.deliveredByManufacturer.TryFind(vType)
+
     let allSeries = seq {
         for vType, vColor in AllVaccinationTypes do
             yield
@@ -164,7 +175,7 @@ let renderStackedChart state dispatch =
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp ->
-                                         (dp.JsDate12h, dp.deliveredByManufacturer.TryFind(vType))) |}
+                                         (dp.JsDate12h, getValue dp vType)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -293,6 +304,8 @@ let renderChartContainer (state: State) dispatch =
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
                     | Used ->
                         renderVaccinationChart state dispatch |> Highcharts.chartFromWindow
+                    | Unused ->
+                        renderStackedChart state dispatch |> Highcharts.chartFromWindow
                     | ByManufacturer ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow ] ]
 
