@@ -159,9 +159,10 @@ let renderStackedChart state dispatch =
     let getValue dp vType =
         match state.DisplayType with
         | Unused ->
-            match dp.deliveredByManufacturer.TryFind(vType) with
-            | Some v -> Some v |> Utils.subtractIntOption (dp.usedByManufacturer.TryFind(vType))
-            | None -> None
+            match dp.deliveredByManufacturer.TryFind(vType), dp.usedByManufacturer.TryFind(vType) with
+            | Some d, Some u  -> Some (d - u)
+            | Some d, None -> Some d
+            | _ -> None
         | _ ->
             dp.deliveredByManufacturer.TryFind(vType)
 
