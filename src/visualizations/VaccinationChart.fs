@@ -99,7 +99,6 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "administered"
-                       visible = true
                        ``type`` = "column"
                        color = "#189a73"
                        data =
@@ -108,7 +107,6 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "administered2nd"
-                       visible = true
                        ``type`` = "column"
                        color = "#0e5842"
                        data =
@@ -117,7 +115,6 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "deliveredDoses"
-                       visible = true
                        ``type`` = "line"
                        color = "#73ccd5"
                        data =
@@ -126,7 +123,6 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "usedDoses"
-                       visible = true
                        ``type`` = "line"
                        color = "#20b16d"
                        data =
@@ -135,7 +131,6 @@ let renderVaccinationChart state dispatch =
               yield
                 pojo
                     {| name = chartText "unusedDoses"
-                       visible = true
                        ``type`` = "line"
                        color = "#ffa600"
                        data =
@@ -239,7 +234,6 @@ let renderWeeklyChart state dispatch =
         yield
             pojo
                 {| name = chartText "administered"
-                   visible = true
                    ``type`` = "column"
                    color = "#189a73"
                    data =
@@ -252,7 +246,6 @@ let renderWeeklyChart state dispatch =
         yield
             pojo
                 {| name = chartText "administered2nd"
-                   visible = true
                    ``type`` = "column"
                    color = "#0e5842"
                    data =
@@ -265,7 +258,6 @@ let renderWeeklyChart state dispatch =
         yield
             pojo
                 {| name = chartText "deliveredDoses"
-                   visible = true
                    ``type`` = "line"
                    color = "#73ccd5"
                    data =
@@ -278,7 +270,6 @@ let renderWeeklyChart state dispatch =
         yield
             pojo
                 {| name = chartText "usedDoses"
-                   visible = true
                    ``type`` = "line"
                    color = "#20b16d"
                    data =
@@ -291,7 +282,6 @@ let renderWeeklyChart state dispatch =
         yield
             pojo
                 {| name = chartText "unusedDoses"
-                   visible = true
                    ``type`` = "line"
                    color = "#ffa600"
                    data =
