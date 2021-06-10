@@ -165,7 +165,7 @@ let renderStackedChart state dispatch =
         | Unused ->
             match dp.deliveredByManufacturer.TryFind(vType), dp.usedByManufacturer.TryFind(vType) with
             | Some d, Some u  -> Some (d - u)
-            | Some d, None -> Some d
+            // | Some d, None -> Some d    - last date does not have used, temp fix
             | _ -> None
         | _ ->
             dp.deliveredByManufacturer.TryFind(vType)
