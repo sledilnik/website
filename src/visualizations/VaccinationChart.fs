@@ -95,7 +95,26 @@ let renderVaccinationChart state dispatch =
     let allSeries =
         match state.DisplayType with
         | Used ->
-            [ yield
+            [
+              yield
+                pojo
+                    {| name = chartText "administered"
+                       visible = true
+                       ``type`` = "column"
+                       color = "#189a73"
+                       data =
+                           state.VaccinationData
+                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered.toDate)) |}
+              yield
+                pojo
+                    {| name = chartText "administered2nd"
+                       visible = true
+                       ``type`` = "column"
+                       color = "#0e5842"
+                       data =
+                           state.VaccinationData
+                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered2nd.toDate)) |}
+              yield
                 pojo
                     {| name = chartText "deliveredDoses"
                        visible = true
@@ -115,22 +134,13 @@ let renderVaccinationChart state dispatch =
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.usedToDate)) |}
               yield
                 pojo
-                    {| name = chartText "administered"
+                    {| name = chartText "unusedDoses"
                        visible = true
-                       ``type`` = "column"
-                       color = "#189a73"
+                       ``type`` = "line"
+                       color = "#ffa600"
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered.toDate)) |}
-              yield
-                pojo
-                    {| name = chartText "administered2nd"
-                       visible = true
-                       ``type`` = "column"
-                       color = "#0e5842"
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered2nd.toDate)) |}
+                           |> Array.map (fun dp -> (dp.JsDate12h, dp.deliveredToDate |> Utils.subtractIntOption dp.usedToDate)) |}
             ]
         | _ -> []
 
@@ -228,6 +238,32 @@ let renderWeeklyChart state dispatch =
     let allSeries = seq {
         yield
             pojo
+                {| name = chartText "administered"
+                   visible = true
+                   ``type`` = "column"
+                   color = "#189a73"
+                   data =
+                       state.VaccinationData
+                       |> toWeeklyData
+                       |> Array.map (
+                            fun (prevW, currW) ->
+                                valueToWeeklyDataPoint
+                                    currW.Date (currW.administered.toDate |> Utils.subtractIntOption prevW.administered.toDate)) |}
+        yield
+            pojo
+                {| name = chartText "administered2nd"
+                   visible = true
+                   ``type`` = "column"
+                   color = "#0e5842"
+                   data =
+                       state.VaccinationData
+                       |> toWeeklyData
+                       |> Array.map (
+                            fun (prevW, currW) ->
+                                valueToWeeklyDataPoint
+                                    currW.Date (currW.administered2nd.toDate |> Utils.subtractIntOption prevW.administered2nd.toDate)) |}
+        yield
+            pojo
                 {| name = chartText "deliveredDoses"
                    visible = true
                    ``type`` = "line"
@@ -254,30 +290,17 @@ let renderWeeklyChart state dispatch =
                                     currW.Date (currW.usedToDate |> Utils.subtractIntOption prevW.usedToDate)) |}
         yield
             pojo
-                {| name = chartText "administered"
+                {| name = chartText "unusedDoses"
                    visible = true
-                   ``type`` = "column"
-                   color = "#189a73"
+                   ``type`` = "line"
+                   color = "#ffa600"
                    data =
                        state.VaccinationData
                        |> toWeeklyData
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.administered.toDate |> Utils.subtractIntOption prevW.administered.toDate)) |}
-        yield
-            pojo
-                {| name = chartText "administered2nd"
-                   visible = true
-                   ``type`` = "column"
-                   color = "#0e5842"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (currW.administered2nd.toDate |> Utils.subtractIntOption prevW.administered2nd.toDate)) |}
+                                    currW.Date (currW.deliveredToDate |> Utils.subtractIntOption currW.usedToDate)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
