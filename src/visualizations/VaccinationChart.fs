@@ -2,6 +2,7 @@
 module VaccinationChart
 
 open System
+open System.Text
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
@@ -82,6 +83,7 @@ let defaultTooltip =
     {|
         split = false
         shared = true
+        formatter = None
         headerFormat = "{point.key}<br>"
         xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
     |} |> pojo
@@ -219,6 +221,74 @@ let renderStackedChart state dispatch =
 
 let renderAgeChart state dispatch =
 
+    let tooltipFormatter jsThis =
+        let points: obj[] = jsThis?points
+
+        match points with
+        | [||] -> ""
+        | _ ->
+            let totalVaccinated = points |> Array.sumBy(fun point -> float point?point?y)
+            let totalPopulation = points |> Array.sumBy(fun point -> float point?point?population)
+
+            let s = StringBuilder()
+
+            let date = points.[0]?point?date
+            s.AppendFormat ("<b>{0}</b><br/>", date.ToString()) |> ignore
+
+            s.Append "<table>" |> ignore
+
+            points
+            |> Array.iter
+                   (fun ageGroup ->
+                        let ageGroupLabel = ageGroup?series?name
+                        let ageGroupColor = ageGroup?series?color
+                        let dataPoint = ageGroup?point
+
+                        let dataValue: int = dataPoint?y
+                        let population: int = dataPoint?population
+
+                        match dataValue with
+                        | 0 -> ()
+                        | _ ->
+                            let format =
+                                "<td style='color: {0}'>●</td>"+
+                                "<td style='text-align: center; padding-left: 6px'>{1}:</td>"+
+                                "<td style='text-align: right; padding-left: 6px'>{2}</td>" +
+                                "<td style='text-align: right; padding-left: 10px'><b>{3}</b></td>"
+
+                            let percentage = float dataValue * 100. / float population |> Utils.percentWith1DecimalFormatter
+
+                            s.Append "<tr>" |> ignore
+                            let ageGroupTooltip =
+                                String.Format
+                                    (format,
+                                     ageGroupColor,
+                                     ageGroupLabel,
+                                     I18N.NumberFormat.formatNumber(dataValue),
+                                     percentage)
+                            s.Append ageGroupTooltip |> ignore
+                            s.Append "</tr>" |> ignore
+                    )
+            let format =
+                "<td></td>"+
+                "<td style='text-align: center; padding-left: 6px'><b>{0}:</b></td>"+
+                "<td style='text-align: right; padding-left: 6px'>{1}</td>" +
+                "<td style='text-align: right; padding-left: 10px'><b>{2}</b></td>"
+
+            let percentage = float totalVaccinated * 100. / float totalPopulation |> Utils.percentWith1DecimalFormatter
+            s.Append "<tr>" |> ignore
+            let ageGroupTooltip =
+                String.Format
+                    (format,
+                     "Skupaj",
+                     I18N.NumberFormat.formatNumber(totalVaccinated),
+                     percentage)
+            s.Append ageGroupTooltip |> ignore
+            s.Append "</tr>" |> ignore
+
+            s.Append "</table>" |> ignore
+            s.ToString()
+
     let getAgeGroupValue dp ageGroup =
         let aG =
             dp.administeredPerAge
@@ -238,8 +308,10 @@ let renderAgeChart state dispatch =
             [| "#FFDA6B";"#E9B825";"#AEEFDB";"#80DABF";"#52C4A2";"#43B895";"#33AB87";"#2DA782"
                "#26A37D";"#189A73";"#F4B2E0";"#E586C8";"#D559B0";"#C33B9A";"#B01C83";"#9e1975" |]
 
-    let ageGroupData =
-        state.VaccinationData
+    let ageGroupPopulation =
+            [| 372727; 141046; 113475; 134316; 151422; 160837; 150023; 151029
+               150947; 144449; 135564; 101248;  77562;  60447;  37062;  17972 |]
+
     let allSeries = seq {
         for ageGroup, idx in allAgeGroups do
             yield
@@ -250,7 +322,12 @@ let renderAgeChart state dispatch =
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp ->
-                                         (dp.JsDate12h, getAgeGroupValue dp ageGroup)) |}
+                                         {|
+                                            x = dp.JsDate12h
+                                            y = getAgeGroupValue dp ageGroup
+                                            population = ageGroupPopulation.[idx]
+                                            date = I18N.tOptions "days.longerDate" {| date = dp.Date |}
+                                         |} |> pojo ) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -273,7 +350,11 @@ let renderAgeChart state dispatch =
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions "normal" |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = defaultTooltip
+        tooltip = pojo {|
+                          formatter = fun () -> tooltipFormatter jsThis
+                          shared = true
+                          useHTML = true
+                        |}
     |}
 
 let renderWeeklyChart state dispatch =
