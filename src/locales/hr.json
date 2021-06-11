@@ -414,7 +414,7 @@
             "shareOfInfectedPopulation": "Udio potvrđenih slučajeva u stanovništvu",
             "shareOfDeceasedPopulation": "Udio smrtnih slučajeva u stanovništvu",
             "confirmedCases": "Potvrđeni slučajevi",
-            "disclaimer": "Napomena: Demografske podatke (spol, dob) o preminulima NIJZ prijavljuje tjedno. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva.",
+            "disclaimer": "Napomena: demografske podatke (spol, dob) o preminulima NIJZ prijavljuje tjedno. To je razlog što postoji odstupanje u ukupnom broju smrtnih slučajeva.",
             "titleMenu": "Dob, spol"
         },
         "ageGroupsTimeline": {
@@ -546,7 +546,7 @@
             "titleMenu": "Testiranje",
             "byLabPercent": "Po laboratorijima: postotak pozitivnih",
             "byLab": "Po laboratorijima: PCR testovi",
-            "disclaimer": "Napomena: Od 3. prosinca ne dobivamo podatke po laboratorijima.",
+            "disclaimer": "Napomena: od 3. prosinca 2020. ne dobivamo podatke po laboratorijima.",
             "hagt": "Regularni: RAT",
             "positiveTotal": "Pozitivni ukupno",
             "positivePCR": "Pozitivni PCR",
@@ -564,7 +564,7 @@
             "all": "Sve",
             "averageByDay": "Po danu (prosjek)",
             "titleMenu": "Slučajevi – struktura",
-            "disclaimer": "Napomena: NIJZ je 11. listopada prekinuo izvještavati o zaposlenicima u domovima umirovljenika i zdravstvenim radnicima."
+            "disclaimer": "Napomena: NIJZ je 11. listopada 2020. prekinuo izvještavati o zaposlenicima u domovima umirovljenika i zdravstvenim radnicima."
         },
         "hCenters": {
             "testsPositive": "Testiranja (pozitivni*)",
@@ -576,7 +576,7 @@
             "testsPerformed": "Testiranja (provedena)",
             "allRegions": "Sve regije",
             "titleMenu": "Dom zdravlja – liječenje",
-            "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
+            "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada 2020. prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
         },
         "regions": {
             "title": "Po regijiama",
@@ -590,7 +590,7 @@
             "vaccinated1st": "1. doza",
             "vaccinated7Days": "Na dan (7-dnevni prosjek)",
             "vaccinated": "Cijepljeni",
-            "allCases": "Svi"
+            "allCases": "Sve"
         },
         "cases": {
             "active": "Aktivni",
@@ -680,7 +680,7 @@
             "sentToQuarantine": "Poslani u karantenu",
             "title": "Izvori i mjesta zaraze, tjedno",
             "titleMenu": "Izvori i mjesta zaraze",
-            "disclaimer": "Napomena: epidemiolozi su 25. listopada prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
+            "disclaimer": "Napomena: epidemiolozi su 25. listopada 2020. prekinuli pratiti pojedinačne kontakte i ne izdaju prijedloge za karantenu. Iz tog razloga više ne prikazujemo ove podatke.",
             "disclaimerGeneral": "Napomena: podaci za prošli tjedan još nisu cjeloviti – broj slučajeva je možda manji od stvarnog.",
             "retirementHome": "Dom umirovljenika",
             "locationUnknown": "Nepoznato",
@@ -924,12 +924,14 @@
             "az": "AstraZeneca",
             "moderna": "Moderna",
             "pfizer": "Pfizer/BioNTech",
-            "byManufacturer": "Isporučeno cijepivo",
-            "used": "Korišteno cijepivo",
-            "titleMenu": "Cijepivo",
-            "title": "Cijepivo",
+            "byManufacturer": "Isporučeno cjepivo",
+            "used": "Korišteno cjepivo",
+            "titleMenu": "Cjepivo",
+            "title": "Cjepivo",
             "janssen": "Janssen",
-            "byWeek": "Po tjednima"
+            "byWeek": "Po tjednima",
+            "unusedDoses": "Nekorištene doze",
+            "unused": "Nekorišteno cjepivo"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
@@ -1014,7 +1016,7 @@
         },
         "liftFoodMarkets": {
             "title": "Tržnice",
-            "description": "Opuštanje: tržnice, usluga na terasama, trgovine do 400 m², frizerski i kozmetički saloni"
+            "description": "Ublažavanje ograničenja: tržnice, usluga na terasama, trgovine do 400 m², frizerski i kozmetički saloni"
         },
         "borders": {
             "description": "Zatvaranje nekih graničnih prijelaza s Italijom,<br>strožija kontrola osobnih automobila",
@@ -1215,6 +1217,15 @@
         },
         "liftMasksOutside": {
             "title": "Maske"
+        },
+        "liftGatherings": {
+            "title": "Okupljanja"
+        },
+        "liftHighSchools2": {
+            "title": "Gimnazije"
+        },
+        "liftGatherings50": {
+            "title": "Do 50"
         }
     },
     "pageNotFound": {
@@ -1508,11 +1519,11 @@
                 "title": "Karantena"
             },
             "lessMeasures": {
-                "description": "Opuštanje: slobodno kretanje u cijeloj državi",
+                "description": "Ublažavanje ograničenja: slobodno kretanje u cijeloj državi",
                 "title": "Karantena obustavljena"
             },
             "kafanasOpen": {
-                "description": "Opuštanje: kafići i restorani su otvoreni",
+                "description": "Ublažavanje ograničenja: kafići i restorani su otvoreni",
                 "title": "Kafići"
             },
             "masksOn": {
@@ -1520,7 +1531,7 @@
                 "title": "Maske"
             },
             "bordersOopen": {
-                "description": "Opuštanje: otvorene granice za strance",
+                "description": "Ublažavanje ograničenja: otvorene granice za strance",
                 "title": "Granice otvorene"
             },
             "gatherings5": {
