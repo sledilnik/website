@@ -741,6 +741,8 @@
             "byManufacturer": "Vaccination Delivered",
             "unused": "Vaccination Unused",
             "byWeek": "By Week",
+            "byAgeAll": "By Age",
+            "byAge1st": "By Age: One Dose",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",

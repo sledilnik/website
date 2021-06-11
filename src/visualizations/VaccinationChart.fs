@@ -20,7 +20,9 @@ type DisplayType =
     | ByManufacturer
     | Unused
     | ByWeek
-    static member All = [ Used ; ByManufacturer; Unused; ByWeek; ]
+    | ByAge1st
+    | ByAgeAll
+    static member All = [ Used ; ByManufacturer; Unused; ByWeek; ByAgeAll; ByAge1st; ]
     static member Default = Used
     static member GetName =
         function
@@ -28,6 +30,8 @@ type DisplayType =
         | ByManufacturer -> chartText "byManufacturer"
         | Unused -> chartText "unused"
         | ByWeek -> chartText "byWeek"
+        | ByAge1st -> chartText "byAge1st"
+        | ByAgeAll -> chartText "byAgeAll"
 
 let AllVaccinationTypes = [
     "janssen",     "#019cdc"
@@ -90,6 +94,7 @@ let defaultSeriesOptions stackType =
         pointPadding = 0
         groupPadding = 0
     |}
+
 let renderVaccinationChart state dispatch =
 
     let allSeries =
@@ -212,6 +217,65 @@ let renderStackedChart state dispatch =
     |}
 
 
+let renderAgeChart state dispatch =
+
+    let getAgeGroupValue dp ageGroup =
+        let aG =
+            dp.administeredPerAge
+            |> List.find (fun aG -> aG.ageFrom = ageGroup.AgeFrom && aG.ageTo = ageGroup.AgeTo)
+        match state.DisplayType with
+        | ByAge1st -> aG.administered
+        | _ -> aG.administered2nd
+
+    let allAgeGroups =
+        state.VaccinationData
+        |> Array.tryLast
+        |> Option.map (fun dp -> dp.administeredPerAge)
+        |> Option.defaultValue List.empty
+        |> List.mapi (fun idx aG -> { AgeFrom = aG.ageFrom; AgeTo = aG.ageTo }, idx)
+
+    let ageGroupColors =
+            [| "#FFDA6B";"#E9B825";"#AEEFDB";"#80DABF";"#52C4A2";"#43B895";"#33AB87";"#2DA782"
+               "#26A37D";"#189A73";"#F4B2E0";"#E586C8";"#D559B0";"#C33B9A";"#B01C83";"#9e1975" |]
+
+    let ageGroupData =
+        state.VaccinationData
+    let allSeries = seq {
+        for ageGroup, idx in allAgeGroups do
+            yield
+                pojo
+                    {| name = ageGroup.Label
+                       ``type`` = "column"
+                       color = ageGroupColors.[idx]
+                       data =
+                           state.VaccinationData
+                           |> Array.map (fun dp ->
+                                         (dp.JsDate12h, getAgeGroupValue dp ageGroup)) |}
+    }
+
+    let onRangeSelectorButtonClick(buttonIndex: int) =
+        let res (_ : Event) =
+            RangeSelectionChanged buttonIndex |> dispatch
+            true
+        res
+
+    let baseOptions =
+        basicChartOptions Linear "covid19-vaccination-stacked"
+            state.RangeSelectionButtonIndex
+            onRangeSelectorButtonClick
+    {| baseOptions with
+        series = Seq.toArray allSeries
+        yAxis =
+            baseOptions.yAxis
+            |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
+        plotOptions =
+            pojo
+               {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+                  series = defaultSeriesOptions "normal" |}
+        legend = pojo {| enabled = true ; layout = "horizontal" |}
+        tooltip = defaultTooltip
+    |}
+
 let renderWeeklyChart state dispatch =
 
     let valueToWeeklyDataPoint (date: DateTime) (value : int option) =
@@ -326,10 +390,10 @@ let renderChartContainer (state: State) dispatch =
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
                     | Used ->
                         renderVaccinationChart state dispatch |> Highcharts.chartFromWindow
-                    | Unused ->
+                    | Unused | ByManufacturer ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow
-                    | ByManufacturer ->
-                        renderStackedChart state dispatch |> Highcharts.chartFromWindow ] ]
+                    | ByAgeAll | ByAge1st ->
+                        renderAgeChart state dispatch |> Highcharts.chartFromWindow ] ]
 
 let renderDisplaySelectors state dispatch =
     let renderSelector (dt: DisplayType) dispatch =

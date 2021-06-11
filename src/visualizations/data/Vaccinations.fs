@@ -13,7 +13,7 @@ type VaccinationAgeGroup =
     { ageFrom : int option
       ageTo : int option
       administered : int option
-      femadministered2nd : int option }
+      administered2nd : int option }
 
 type VaccinationStats = {
     year: int

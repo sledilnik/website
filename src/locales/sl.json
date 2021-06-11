@@ -1345,6 +1345,8 @@
             "byManufacturer": "Dobavljena cepiva",
             "unused": "Neporabljena cepiva",
             "byWeek": "Po tednih",
+            "byAgeAll": "Po starosti",
+            "byAge1st": "Po starosti: 1.odmerek",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
