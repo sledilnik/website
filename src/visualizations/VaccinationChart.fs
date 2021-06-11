@@ -97,6 +97,11 @@ let defaultSeriesOptions stackType =
         groupPadding = 0
     |}
 
+let calcUnusedDoses delivered used =
+    match delivered, used with
+    | Some d, Some u  -> Some (d - u)
+    | _ -> None
+
 let renderVaccinationChart state dispatch =
 
     let allSeries =
@@ -142,7 +147,7 @@ let renderVaccinationChart state dispatch =
                        color = "#ffa600"
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.deliveredToDate |> Utils.subtractIntOption dp.usedToDate)) |}
+                           |> Array.map (fun dp -> (dp.JsDate12h, calcUnusedDoses dp.deliveredToDate dp.usedToDate)) |}
             ]
         | _ -> []
 
@@ -175,10 +180,7 @@ let renderStackedChart state dispatch =
     let getValue dp vType =
         match state.DisplayType with
         | Unused ->
-            match dp.deliveredByManufacturer.TryFind(vType), dp.usedByManufacturer.TryFind(vType) with
-            | Some d, Some u  -> Some (d - u)
-            // | Some d, None -> Some d    - last date does not have used, temp fix
-            | _ -> None
+            calcUnusedDoses (dp.deliveredByManufacturer.TryFind(vType)) (dp.usedByManufacturer.TryFind(vType))
         | _ ->
             dp.deliveredByManufacturer.TryFind(vType)
 
@@ -435,7 +437,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.deliveredToDate |> Utils.subtractIntOption currW.usedToDate)) |}
+                                    currW.Date (calcUnusedDoses currW.deliveredToDate currW.usedToDate)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
