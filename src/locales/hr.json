@@ -567,13 +567,13 @@
             "disclaimer": "Napomena: NIJZ je 11. listopada 2020. prekinuo izvještavati o zaposlenicima u domovima umirovljenika i zdravstvenim radnicima."
         },
         "hCenters": {
-            "testsPositive": "Testiranja (pozitivni*)",
+            "testsPositive": "Testovi (pozitivni*)",
             "title": "Liječenje u domu zdravlja",
             "emergencyExamination": "Hitni pregledi",
             "sentToSelfIsolation": "Poslani u samoizolaciju",
             "suspectedCovidExamination": "Sumnja na COVID-19 (pregled)",
             "suspectedCovidPhone": "Sumnja na COVID-19 (telefon)",
-            "testsPerformed": "Testiranja (provedena)",
+            "testsPerformed": "Testovi (provedeni)",
             "allRegions": "Sve regije",
             "titleMenu": "Dom zdravlja – liječenje",
             "disclaimer": "Napomena: ovaj dijagram nije aktualan. Ministarstvo zdravlja je 25. listopada 2020. prekinulo izvještavati o domovima zdravlja, jer se podaci više ne prikupljaju."
@@ -931,7 +931,9 @@
             "janssen": "Janssen",
             "byWeek": "Po tjednima",
             "unusedDoses": "Nekorištene doze",
-            "unused": "Nekorišteno cjepivo"
+            "unused": "Nekorišteno cjepivo",
+            "byAge1st": "Po starosti: Jedna doza",
+            "byAgeAll": "Po starosti"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
@@ -1226,6 +1228,24 @@
         },
         "liftGatherings50": {
             "title": "Do 50"
+        },
+        "liftCapacity75p": {
+            "title": "75 %"
+        },
+        "liftHotels": {
+            "title": "Hoteli"
+        },
+        "liftSport": {
+            "title": "Sport"
+        },
+        "liftTerrace2": {
+            "title": "Terase"
+        },
+        "liftTerrace": {
+            "title": "Terase"
+        },
+        "liftMovement": {
+            "title": "🚫22 – 5 h"
         }
     },
     "pageNotFound": {
@@ -1330,7 +1350,7 @@
             "title": "faza<br>13"
         },
         "14": {
-            "description": "brzo testiranje antigena",
+            "description": "brzi testovi antigena",
             "title": "faza<br>14"
         },
         "16": {
@@ -1439,7 +1459,7 @@
         "lastUpdated": "{{ date, %A, %e. %B }}",
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi",
-        "testsHAT": "Testiranja danas: Brzo testiranje antigena",
+        "testsHAT": "Testovi danas: Brzo testiranje antigena",
         "vaccinationSummary": "Cijepljene osobe"
     },
     "region": {
@@ -1649,7 +1669,34 @@
             "question": "Želim pomoći. Gdje mogu početi?"
         },
         "ratios-chart": {
-            "question": "Što nam govori dijagram „Udio teških slučajeva”?"
+            "question": "Što prikazuje dijagram „Udio teških slučajeva”?"
+        },
+        "phase-diagram-chart": {
+            "question": "Što prikazuje dijagram „Dijagram faza”?"
+        },
+        "municipalities-chart": {
+            "question": "Što prikazuje dijagram „Slučajevi po općinama”?"
+        },
+        "spread-chart": {
+            "question": "Što prikazuje dijagram „Prirast potvrđenih slučajeva”?"
+        },
+        "infections-chart": {
+            "question": "Što prikazuje dijagram „Struktura potvrđenih slučajeva”?"
+        },
+        "tests-chart": {
+            "question": "Što prikazuje dijagram „Testiranja”?"
+        },
+        "patients-chart": {
+            "question": "Što prikazuje dijagram „Hospitalizacije”?"
+        },
+        "chart-terminology": {
+            "question": "Što to znači?"
+        },
+        "metrics-comparison-chart": {
+            "question": "Što znači dijagram „COVID-19 situacija u Sloveniji”?"
+        },
+        "chart-phases": {
+            "question": "Što znače faze (faze 1 – 14) u dijagramu?"
         }
     },
     "donation": {
