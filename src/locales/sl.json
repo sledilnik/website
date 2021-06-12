@@ -1341,7 +1341,7 @@
         "vaccination": {
             "title": "Cepljenje",
             "titleMenu": "Cepljenje",
-            "used": "Poraba cepiva",
+            "used": "Porabljena cepiva",
             "byManufacturer": "Dobavljena cepiva",
             "unused": "Neporabljena cepiva",
             "byWeek": "Po tednih",
@@ -1352,9 +1352,9 @@
             "az": "AstraZeneca",
             "administered": "Cepljeni 💉",
             "administered2nd": "Cepljeni 💉💉",
-            "usedDoses": "Uporabljenih odmerkov",
-            "unusedDoses": "Neporabljenih odmerkov",
-            "deliveredDoses": "Dobavljenih odmerkov",
+            "usedDoses": "Uporabljeni odmerki",
+            "unusedDoses": "Neporabljeni odmerki",
+            "deliveredDoses": "Dobavljeni odmerki",
             "disabled": "Podatki o cepljenju se od 25. 3. 2020 NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a>.",
             "janssen": "Janssen"
         },
@@ -2011,7 +2011,7 @@
         },
         "vaccination-chart": {
             "question": "Kaj kaže graf \"Cepljenje\"?",
-            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Poraba cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
+            "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Porabljena cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
         },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolah in vrtcih\"?",
