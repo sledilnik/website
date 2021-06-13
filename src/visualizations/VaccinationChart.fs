@@ -97,6 +97,11 @@ let defaultSeriesOptions stackType =
         groupPadding = 0
     |}
 
+let subtractWeekly curr prev =
+    match curr, prev with
+    | Some c, Some p  -> Some (c - p)
+    | _ -> None
+
 let calcUnusedDoses delivered used =
     match delivered, used with
     | Some d, Some u  -> Some (d - u)
@@ -389,7 +394,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.administered.toDate |> Utils.subtractIntOption prevW.administered.toDate)) |}
+                                    currW.Date (subtractWeekly currW.administered.toDate prevW.administered.toDate)) |}
         yield
             pojo
                 {| name = chartText "administered2nd"
@@ -401,7 +406,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.administered2nd.toDate |> Utils.subtractIntOption prevW.administered2nd.toDate)) |}
+                                    currW.Date (subtractWeekly currW.administered2nd.toDate prevW.administered2nd.toDate)) |}
         yield
             pojo
                 {| name = chartText "deliveredDoses"
@@ -413,7 +418,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.deliveredToDate |> Utils.subtractIntOption prevW.deliveredToDate)) |}
+                                    currW.Date (subtractWeekly currW.deliveredToDate prevW.deliveredToDate)) |}
         yield
             pojo
                 {| name = chartText "usedDoses"
@@ -425,7 +430,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (currW.usedToDate |> Utils.subtractIntOption prevW.usedToDate)) |}
+                                    currW.Date (subtractWeekly currW.usedToDate prevW.usedToDate)) |}
         yield
             pojo
                 {| name = chartText "unusedDoses"
