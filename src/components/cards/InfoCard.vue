@@ -293,14 +293,8 @@ export default {
       color: #a0a0a0;
     }
   }
-  .up{
-    -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
-    mask: url(../../assets/svg/syringe.svg) no-repeat center;
-    -webkit-mask-size: 20px;
-    mask-size: 20px;
-  }
-  .card-diff{
-    display: flex;
+  .in {
+    display: none;
   }
 }
 </style>
