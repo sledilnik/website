@@ -932,8 +932,8 @@
             "byWeek": "Po tjednima",
             "unusedDoses": "Nekorištene doze",
             "unused": "Nekorišteno cjepivo",
-            "byAge1st": "Po starosti: Jedna doza",
-            "byAgeAll": "Po starosti: potpuno"
+            "byAge1st": "Po starosti: Cijepljeni",
+            "byAgeAll": "Po starosti: Potpuno cijepljeni"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
