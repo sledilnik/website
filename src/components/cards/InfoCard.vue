@@ -301,33 +301,6 @@ export default {
   }
   .card-diff{
     display: flex;
-    &:before{
-      content: "";
-      width: 20px;
-      height: 20px;
-      background-color: #20b16d;
-      display: inline-block;
-      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
-      mask: url(../../assets/svg/syringe.svg) no-repeat center;
-      -webkit-mask-size: 20px;
-      mask-size: 20px;
-      margin-right: -8px;
-    }
-  }
-  .card-number{
-    display: flex;
-    align-items: center;
-    &::before{
-      content: "";
-      width: 24px;
-      height: 24px;
-      background-color: #000000;
-      display: inline-block;
-      -webkit-mask: url(../../assets/svg/syringe.svg) no-repeat center;
-      mask: url(../../assets/svg/syringe.svg) no-repeat center;
-      -webkit-mask-size: 24px;
-      mask-size: 24px;
-    }
   }
 }
 </style>

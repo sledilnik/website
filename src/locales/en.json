@@ -41,12 +41,13 @@
         "readingTime": "min read"
     },
     "infocard": {
-        "vaccinationSummary": "People Vaccinated",
+        "vaccinationSummary": "Fully Vaccinated",
         "tests": "Tests Today: PCR",
         "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
+        "incidenceInfo": "per 100,000 people",
         "newCases7d": "New Cases",
         "newCases7dInfo": "average of last 7 days",
         "recoveredToDate": "Recovered",

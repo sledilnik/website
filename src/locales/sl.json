@@ -41,12 +41,13 @@
         "readingTime": "min"
     },
     "infocard": {
-        "vaccinationSummary": "Cepljenih oseb",
+        "vaccinationSummary": "Polno cepljeni",
         "tests": "Testi na dan: PCR",
         "testsHAT": "Testi na dan: HAT",
         "confirmedToDate": "Potrjeni primeri",
         "active": "Aktivni primeri",
         "incidence": "14-dnevna pojavnost",
+        "incidenceInfo": "na 100.000 prebivalcev",
         "newCases7d": "Novi primeri",
         "newCases7dInfo": "povprečje zadnjih 7 dni",
         "recoveredToDate": "Preboleli",
