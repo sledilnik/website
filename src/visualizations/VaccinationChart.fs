@@ -193,6 +193,59 @@ let renderVaccinationChart state dispatch =
 
 let renderStackedChart state dispatch =
 
+    let tooltipFormatter jsThis =
+        let points: obj[] = jsThis?points
+
+        match points with
+        | [||] -> ""
+        | _ ->
+            let total = points |> Array.sumBy(fun point -> float point?point?y)
+
+            let s = StringBuilder()
+
+            let date = points.[0]?point?date
+            s.AppendFormat ("<b>{0}</b><br/>", date.ToString()) |> ignore
+
+            s.Append "<table>" |> ignore
+
+            points
+            |> Array.iter
+                   (fun dp ->
+                        match dp?point?y with
+                        | 0 -> ()
+                        | value ->
+                            let format =
+                                "<td style='color: {0}'>●</td>"+
+                                "<td style='text-align: left; padding-left: 6px'>{1}:</td>"+
+                                "<td style='text-align: right; padding-left: 6px'><b>{2}</b></td>"
+
+                            s.Append "<tr>" |> ignore
+                            let dpTooltip =
+                                String.Format
+                                    (format,
+                                     dp?series?color,
+                                     dp?series?name,
+                                     I18N.NumberFormat.formatNumber(value))
+                            s.Append dpTooltip |> ignore
+                            s.Append "</tr>" |> ignore
+                    )
+            let format =
+                "<td></td>"+
+                "<td style='text-align: left; padding-left: 6px'><b>{0}:</b></td>"+
+                "<td style='text-align: right; padding-left: 6px'><b>{1}</b></td>"
+
+            s.Append "<tr>" |> ignore
+            let totalTooltip =
+                String.Format
+                    (format,
+                     I18N.t "charts.common.total",
+                     I18N.NumberFormat.formatNumber(total))
+            s.Append totalTooltip |> ignore
+            s.Append "</tr>" |> ignore
+
+            s.Append "</table>" |> ignore
+            s.ToString()
+
     let getValue dp vType =
         match state.DisplayType with
         | Unused ->
@@ -210,7 +263,11 @@ let renderStackedChart state dispatch =
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp ->
-                                         (dp.JsDate12h, getValue dp vType)) |}
+                                            {|
+                                                x = dp.JsDate12h
+                                                y = getValue dp vType
+                                                date = I18N.tOptions "days.longerDate" {| date = dp.Date |}
+                                            |} |> pojo ) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -233,7 +290,11 @@ let renderStackedChart state dispatch =
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions "normal" |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = defaultTooltip
+        tooltip = pojo {|
+                          formatter = fun () -> tooltipFormatter jsThis
+                          shared = true
+                          useHTML = true
+                        |}
     |}
 
 
@@ -303,7 +364,7 @@ let renderAgeChart state dispatch =
             let ageGroupTooltip =
                 String.Format
                     (format,
-                     "Skupaj",
+                     I18N.t "charts.common.total",
                      I18N.NumberFormat.formatNumber(totalVaccinated),
                      percentage)
             s.Append ageGroupTooltip |> ignore

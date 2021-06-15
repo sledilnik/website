@@ -826,6 +826,7 @@
             "x_months_1": "{{ count }}m",
             "x_months_2": "{{ count }}m",
             "x_months_3": "{{ count }}m",
+            "total": "Skupaj",
             "all": "Vse",
             "showActive": "Aktivni",
             "showToday": "Na dan",

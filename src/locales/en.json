@@ -215,6 +215,7 @@
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "all": "All",
+            "total": "Total",
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
