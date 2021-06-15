@@ -16,6 +16,8 @@ open Data.Vaccinations
 
 let chartText = I18N.chartText "vaccination"
 
+type ScaleType = Absolute | Relative
+
 type DisplayType =
     | Used
     | ByManufacturer
@@ -33,6 +35,10 @@ type DisplayType =
         | ByWeek -> chartText "byWeek"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
+    static member ShowScaleType =
+        function
+        | ByAgeAll | ByAge1st -> true
+        | _ -> false
 
 let AllVaccinationTypes = [
     "janssen",     "#019cdc"
@@ -45,13 +51,15 @@ type State =
     { VaccinationData: VaccinationStats array
       Error: string option
       DisplayType: DisplayType
+      ScaleType: ScaleType
       RangeSelectionButtonIndex: int }
 
 
 type Msg =
     | ConsumeVaccinationData of Result<VaccinationStats array, string>
     | ConsumeServerError of exn
-    | ChangeDisplayType of DisplayType
+    | DisplayTypeChanged of DisplayType
+    | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
 let init: State * Cmd<Msg> =
@@ -62,6 +70,7 @@ let init: State * Cmd<Msg> =
         { VaccinationData = [||]
           Error = None
           DisplayType = DisplayType.Default
+          ScaleType = ScaleType.Relative
           RangeSelectionButtonIndex = 0 }
 
     state, cmd
@@ -74,8 +83,10 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with Error = Some err }, Cmd.none
     | ConsumeServerError ex ->
         { state with Error = Some ex.Message }, Cmd.none
-    | ChangeDisplayType dt ->
+    | DisplayTypeChanged dt ->
         { state with DisplayType = dt }, Cmd.none
+    | ScaleTypeChanged st ->
+        { state with ScaleType = st }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -234,7 +245,7 @@ let renderAgeChart state dispatch =
         match points with
         | [||] -> ""
         | _ ->
-            let totalVaccinated = points |> Array.sumBy(fun point -> float point?point?y)
+            let totalVaccinated = points |> Array.sumBy(fun point -> float point?point?vaccinated)
             let totalPopulation = points |> Array.sumBy(fun point -> float point?point?population)
 
             let s = StringBuilder()
@@ -245,13 +256,14 @@ let renderAgeChart state dispatch =
             s.Append "<table>" |> ignore
 
             points
+            |> Array.sortByDescending (fun ag -> ((float)ag?point?vaccinated / (float)ag?point?population))
             |> Array.iter
                    (fun ageGroup ->
                         let ageGroupLabel = ageGroup?series?name
                         let ageGroupColor = ageGroup?series?color
                         let dataPoint = ageGroup?point
 
-                        let dataValue: int = dataPoint?y
+                        let dataValue: int = dataPoint?vaccinated
                         let population: int = dataPoint?population
 
                         match dataValue with
@@ -296,13 +308,31 @@ let renderAgeChart state dispatch =
             s.Append "</table>" |> ignore
             s.ToString()
 
-    let getAgeGroupValue dp ageGroup =
+    let getAgeGroupRec dp ageGroup population =
         let aG =
             dp.administeredPerAge
             |> List.find (fun aG -> aG.ageFrom = ageGroup.AgeFrom && aG.ageTo = ageGroup.AgeTo)
-        match state.DisplayType with
-        | ByAge1st -> aG.administered
-        | _ -> aG.administered2nd
+        let value =
+            match state.DisplayType with
+            | ByAge1st -> aG.administered
+            | _ -> aG.administered2nd
+        let y =
+            match state.ScaleType with
+            | Absolute ->
+                match value with
+                | Some v -> Some ((float)v)
+                | _ -> None
+            | Relative ->
+                match value with
+                | Some v -> Some ((float)v / (float)population * 100.)
+                | _ -> None
+        {|
+            x = dp.JsDate12h
+            y = y
+            vaccinated = value
+            population = population
+            date = I18N.tOptions "days.longerDate" {| date = dp.Date |}
+        |} |> pojo
 
     let allAgeGroups =
         state.VaccinationData
@@ -324,17 +354,14 @@ let renderAgeChart state dispatch =
             yield
                 pojo
                     {| name = ageGroup.Label
-                       ``type`` = "column"
+                       ``type`` =
+                            match state.ScaleType with
+                            | Absolute -> "column"
+                            | Relative -> "line"
                        color = ageGroupColors.[idx]
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp ->
-                                         {|
-                                            x = dp.JsDate12h
-                                            y = getAgeGroupValue dp ageGroup
-                                            population = ageGroupPopulation.[idx]
-                                            date = I18N.tOptions "days.longerDate" {| date = dp.Date |}
-                                         |} |> pojo ) |}
+                           |> Array.map (fun dp -> getAgeGroupRec dp ageGroup ageGroupPopulation.[idx]) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -343,6 +370,10 @@ let renderAgeChart state dispatch =
             true
         res
 
+    let stackType =
+        match state.ScaleType with
+        | Absolute -> Some "normal"
+        | Relative -> None
     let baseOptions =
         basicChartOptions Linear "covid19-vaccination-stacked"
             state.RangeSelectionButtonIndex
@@ -355,7 +386,7 @@ let renderAgeChart state dispatch =
         plotOptions =
             pojo
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
-                  series = defaultSeriesOptions "normal" |}
+                  series = defaultSeriesOptions stackType |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
                           formatter = fun () -> tooltipFormatter jsThis
@@ -483,10 +514,36 @@ let renderChartContainer (state: State) dispatch =
                     | ByAgeAll | ByAge1st ->
                         renderAgeChart state dispatch |> Highcharts.chartFromWindow ] ]
 
+let renderScaleTypeSelectors state dispatch =
+    let renderScaleTypeSelector
+        (scaleType : ScaleType)
+        (activeScaleType : ScaleType)
+        (label : string) =
+        let defaultProps =
+            [ prop.text label
+              Utils.classes [
+                  (true, "chart-display-property-selector__item")
+                  (scaleType = activeScaleType, "selected") ] ]
+        if scaleType = activeScaleType then
+            Html.div defaultProps
+        else
+            Html.div
+                ((prop.onClick (fun _ -> dispatch scaleType)) :: defaultProps)
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children [
+            renderScaleTypeSelector
+                Absolute state.ScaleType (I18N.t "charts.common.absolute")
+            renderScaleTypeSelector
+                Relative state.ScaleType (I18N.t "charts.common.populationShare")
+        ]
+    ]
+
 let renderDisplaySelectors state dispatch =
     let renderSelector (dt: DisplayType) dispatch =
         Html.div [ let isActive = state.DisplayType = dt
-                   prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
+                   prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
                    Utils.classes [ (true, "btn btn-sm metric-selector")
                                    (isActive, "metric-selector--selected") ]
                    prop.text (DisplayType.GetName dt) ]
@@ -503,6 +560,9 @@ let render (state: State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
+            if DisplayType.ShowScaleType state.DisplayType then
+                Utils.renderChartTopControlRight
+                    (renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch))
             renderChartContainer state dispatch
             renderDisplaySelectors state dispatch ]
 
