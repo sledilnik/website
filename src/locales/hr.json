@@ -336,6 +336,7 @@
             "linear": "Linearno",
             "absolute": "Apsolutno",
             "relative": "Relativno",
+            "populationShare": "Udio stanovništva",
             "close": "Zatvori",
             "xAxis": "Os x:",
             "view": "Prikaz:",
@@ -400,8 +401,6 @@
         },
         "ageGroups": {
             "male": "Muškarci",
-            "absolute": "Apsolutno",
-            "populationShare": "Udio stanovništva",
             "populationTotal": "Stanovništvo ukupno",
             "title": "Dobne skupine",
             "age": "Dob",

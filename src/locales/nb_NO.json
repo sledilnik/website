@@ -111,6 +111,7 @@
             "shortDateFormat": "%e. %b",
             "relative": "Relativ",
             "absolute": "Absolutt",
+            "populationShare": "Befolkningsandel",
             "dsMNZ": "MNZ",
             "dsMIZS": "MIZŠ",
             "dsSURS": "SURS",
@@ -152,12 +153,9 @@
             "confirmedCases": "Bekreftede tilfeller",
             "deceased": "Dødsfall",
             "age": "Alder",
-            "relative": "Relativ",
-            "absolute": "Absolutt",
             "female": "Kvinnelig",
             "male": "Mannlig",
             "title": "Aldersgrupper",
-            "populationShare": "Befolkningsandel",
             "titleMenu": "Alder, kjønn"
         },
         "municipalities": {

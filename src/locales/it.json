@@ -969,13 +969,10 @@
             "shareOfDeceasedPopulation": "Quota di decessi nella popolazione",
             "shareOfDeceasedConfirmedCases": "Quota di decessi nei casi confermati",
             "populationTotal": "Popolazione totale",
-            "relative": "Relativo",
-            "absolute": "Assoluto",
             "female": "Femmine",
             "male": "Maschi",
             "title": "Fasce di età",
             "disclaimer": "Nota: I dati demografici (sesso, età) dei defunti sono riportati dal NIJZ settimanalmente. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
-            "populationShare": "Quota di popolazione",
             "titleMenu": "Età, Sesso"
         },
         "municipalities": {
@@ -1097,6 +1094,7 @@
             "linear": "Lineare",
             "absolute": "Assoluto",
             "relative": "Relativo",
+            "populationShare": "Quota di popolazione",
             "view": "Visualizza:",
             "yAxis": "Asse Y:",
             "xAxis": "Asse X:",

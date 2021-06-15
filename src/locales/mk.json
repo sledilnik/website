@@ -659,8 +659,6 @@
             "populationTotal": "Население (вкупно)",
             "female": "Женски",
             "male": "Машки",
-            "relative": "Релативно",
-            "absolute": "Апсолутно",
             "title": "Старосни групи",
             "shareOfInfectedPopulation": "Дел од популацијата на заразени",
             "shareOfDeceasedPopulation": "Дел на мртвите од популацијата",

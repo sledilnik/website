@@ -839,6 +839,7 @@
             "log": "Logaritemska",
             "absolute": "Absolutno",
             "relative": "Relativno",
+            "populationShare": "Delež prebivalstva",
             "noteFaq": "Opomba: omejitve prikazanih podatkov so razložene v ",
             "linkFaq": "FAQ",
             "facebook": "Facebook",
@@ -1193,8 +1194,6 @@
         "ageGroups": {
             "title": "Po starostnih skupinah",
             "titleMenu": "Starost, spol",
-            "absolute": "Absolutno",
-            "populationShare": "Delež prebivalstva",
             "male": "Moški",
             "female": "Ženske",
             "confirmedCases": "Potrjeni primeri",
