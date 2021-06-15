@@ -544,11 +544,11 @@ let renderDisplaySelectors state dispatch =
     let renderSelector (dt: DisplayType) dispatch =
         Html.div [ let isActive = state.DisplayType = dt
                    prop.onClick (fun _ -> DisplayTypeChanged dt |> dispatch)
-                   Utils.classes [ (true, "btn btn-sm metric-selector")
-                                   (isActive, "metric-selector--selected") ]
+                   Utils.classes [ (true, "chart-display-property-selector__item")
+                                   (isActive, "selected") ]
                    prop.text (DisplayType.GetName dt) ]
 
-    Html.div [ prop.className "metrics-selectors"
+    Html.div [ prop.className "chart-display-property-selector"
                prop.children
                    (DisplayType.All
                     |> Seq.map (fun dt -> renderSelector dt dispatch)) ]
@@ -560,11 +560,11 @@ let render (state: State) dispatch =
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
         Html.div [
-            if DisplayType.ShowScaleType state.DisplayType then
-                Utils.renderChartTopControlRight
-                    (renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch))
-            renderChartContainer state dispatch
-            renderDisplaySelectors state dispatch ]
+            Utils.renderChartTopControls [
+                renderDisplaySelectors state dispatch
+                if DisplayType.ShowScaleType state.DisplayType then
+                    renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch) ]
+            renderChartContainer state dispatch ]
 
 let vaccinationChart () =
     React.elmishComponent ("VaccinationChart", init, update, render)
