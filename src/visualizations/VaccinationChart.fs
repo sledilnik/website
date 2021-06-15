@@ -256,7 +256,11 @@ let renderAgeChart state dispatch =
             s.Append "<table>" |> ignore
 
             points
-            |> Array.sortByDescending (fun ag -> ((float)ag?point?vaccinated / (float)ag?point?population))
+            |> Array.sortByDescending
+                (fun ag ->
+                    match state.ScaleType with
+                    | Absolute -> 0.
+                    | Relative -> ((float)ag?point?vaccinated / (float)ag?point?population))
             |> Array.iter
                    (fun ageGroup ->
                         let ageGroupLabel = ageGroup?series?name
