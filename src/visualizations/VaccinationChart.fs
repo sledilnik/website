@@ -90,12 +90,13 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
-let defaultTooltip =
+let defaultTooltip hdrFormat formatter =
     {|
         split = false
         shared = true
-        formatter = None
-        headerFormat = "{point.key}<br>"
+        useHTML = true
+        formatter = formatter
+        headerFormat = hdrFormat
         xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>"
     |} |> pojo
 
@@ -187,7 +188,7 @@ let renderVaccinationChart state dispatch =
                {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = defaultTooltip
+        tooltip = defaultTooltip "{point.key}<br>" None
     |}
 
 
@@ -290,11 +291,7 @@ let renderStackedChart state dispatch =
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions "normal" |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter jsThis
-                          shared = true
-                          useHTML = true
-                        |}
+        tooltip = defaultTooltip "" (fun () -> tooltipFormatter jsThis)
     |}
 
 
@@ -453,11 +450,7 @@ let renderAgeChart state dispatch =
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions stackType |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = pojo {|
-                          formatter = fun () -> tooltipFormatter jsThis
-                          shared = true
-                          useHTML = true
-                        |}
+        tooltip = defaultTooltip "" (fun () -> tooltipFormatter jsThis)
     |}
 
 let renderWeeklyChart state dispatch =
@@ -561,7 +554,7 @@ let renderWeeklyChart state dispatch =
                {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = pojo {| split = false; shared = true; headerFormat = "{point.fmtHeader}<br>" |}
+        tooltip = defaultTooltip "{point.fmtHeader}<br>" None
     |}
 
 
