@@ -635,7 +635,7 @@ let render (state: State) (_: Msg -> unit) =
         [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
           regions100k; map; municipalities; sewage
           schools; schoolStatus;
-          patients; patientsICU; patientsCare;
+          patients; patientsICU; // patientsCare;
           ageGroupsTimeline; weeklyDemographics; ageGroups;
           metricsCorrelation; deceased; excessDeaths
           infections; hcCases;
