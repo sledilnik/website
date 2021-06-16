@@ -191,6 +191,10 @@
         "16": {
             "title": "phase<br>16",
             "description": "rapid antigen tests methodology"
+        },
+        "17": {
+            "title": "phase<br>17",
+            "description": "end of epidemic, high risk contact tracing"
         }
     },
     "charts": {

@@ -326,6 +326,7 @@ let basicChart
                     {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,6,15); label=Some {| text=I18N.t "phase.17.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -403,10 +404,15 @@ let basicChart
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.15.title" |}
                     |}
-                    {| ``from``=jsTime <| DateTime(2021,2,13);
-                       ``to``=jsTime <| DateTime.Today;
+                    {| ``from``=jsTime <| DateTime(2021,3,13);
+                       ``to``=jsTime <| DateTime(2021,6,15);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.16.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2021,6,15);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.17.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]
