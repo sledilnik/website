@@ -136,6 +136,7 @@ let greenCountries =
             ("CZE", "")
             ("AUT", "")
             ("DNK", "na zelenem seznamu administrativna enota Syddanmark, ostale enote na oranžnem seznamu")
+            ("FIN", "")
             ("GRC", "na zelenem seznamu administrativne enote Voreio Aigaio, Anatoliki Makedonia, Thraki, Ipeiros in Peloponnisos, ostale enote na oranžnem seznamu")
             ("HRV", "na zelenem seznamu administrativna enota Panonska Hrvatska, ostale enote na oranžnem seznamu")
             ("ITA", "na zelenem seznamu administrativne enote Piemonte, Ligurija, Lombardija, Abruzzo, Molise, Puglia, Sardinija, Provincia Autonoma di Bolzano/Bozen, Provincia Autonoma di Trento, Veneto, Furlanija-Julijska krajina, Emilia-Romagna, Toskana, Umbria, Marche in Lazio, ostale enote na oranžnem seznamu")
