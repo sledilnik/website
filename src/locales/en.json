@@ -524,8 +524,8 @@
             "countryStatus": "Restrictions",
             "statusNone": "-",
             "statusGreen": "no restrictions",
-            "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10 day quarantine",
-            "statusRed": "recovered/vaccinated or negative PCR test or 10 day quarantine",
+            "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine",
+            "statusRed": "recovered/vaccinated or negative PCR test or 10-day quarantine",
             "noData": "No data"
         },
         "world": {
