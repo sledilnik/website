@@ -1165,8 +1165,8 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusOrange": "PCT (preboleli/cepljen/negativen test PCR/HAT) ali 10-dnevna karantena",
-            "statusRed": "PCT (preboleli/cepljeni/negativen test PCR) ali 10-dnevna karantena",
+            "statusOrange": "Peboleli/cepljen/negativen test PCR/HAT ali 10-dnevna karantena",
+            "statusRed": "Preboleli/cepljeni ali test PCR in 10-dnevna karantena",
             "noData": "Ni podatkov"
         },
         "world": {
@@ -2084,7 +2084,7 @@
         },
         "europe-chart": {
             "question": "Kaj nam kaže \"Stanje COVID-19 v Evropi\"?",
-            "answer": "[Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu *Omejitve in uvoženi primeri* prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja [listo varnih držav](https://www.nijz.si/sl/seznam-drzav-za-prehajanje-drzavne-meje-brez-omejitev) (t.i. zeleni seznam). Na osnovi sklepa vlade pa se določa [seznam držav z obvezno 14-dnevno karanteno](https://www.gov.si/novice/2020-06-08-pravila-za-prehajanje-slovenske-meje/) (t.i. rdeči seznam). Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.\n\n*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*\n\nPogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases)."
+            "answer": "[Stanje COVID-19 v Evropi](/sl/stats#europe-chart) nam v osnovnem pogledu Omejitve in uvoženi primeri prikaže epidemiološko sliko posameznih držav na osnovi ocene NIJZ, ki pripravlja listo varnih držav (t.i. zeleni seznam). Na osnovi [sklepa vlade](https://www.gov.si/teme/koronavirus-sars-cov-2/prehajanje-meja/) pa se določa oranžni seznam držav (pogoj PCT ali 10-dnevna karantena) ter rdeči in temno rdeči seznam (PC ali PCR in 10-dnevna karantena. Novo potrjeni primeri, ki smo jih v Slovenijo uvozili iz posamezne države v zadnjih 14 dneh, so s številom prikazani v posamezni državi.\n\n*Opomba: NIJZ podatke o uvoženih primerih objavlja ob ponedeljkih za pretekli teden, zato podatki žal niso dnevni, ampak lahko kažejo tudi več kot teden dni staro stanje.*\n\nPogled *14-dnevna pojavnost na 1M prebivalcev* prikazuje epidemiološko ogroženost v posameznih državah na podlagi števila novo potrjenih primerov v zadnjih 14 dneh na milijon prebivalcev. Podatke dobivamo od [Our World In Data](https://ourworldindata.org/coronavirus), ki uporablja [podatke ECDC](https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases)."
         },
         "age-groups-chart": {
             "question": "Kaj kaže graf \"Po starostnih skupinah\"?",
