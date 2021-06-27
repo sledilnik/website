@@ -1359,6 +1359,9 @@
         "15": {
             "description": "brza metoda ispitivanja antigena",
             "title": "faza<br>15"
+        },
+        "17": {
+            "title": "faza<br>17"
         }
     },
     "embedMaker": {
@@ -1459,7 +1462,8 @@
         "newCases7dInfo": "prosjek zadnjih 7 dana",
         "newCases7d": "Novi slučajevi",
         "testsHAT": "Testovi danas: Brzo testiranje antigena",
-        "vaccinationSummary": "Potpuno cijepljeni"
+        "vaccinationSummary": "Potpuno cijepljeni",
+        "incidenceInfo": "na 100.000 stanovnika"
     },
     "region": {
         "za": "Zasavlje",
