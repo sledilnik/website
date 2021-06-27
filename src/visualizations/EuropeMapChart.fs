@@ -139,13 +139,17 @@ let greenCountries =
             ("FIN", "")
             ("GRC", "na zelenem seznamu administrativne enote Voreio Aigaio, Anatoliki Makedonia, Thraki, Ipeiros in Peloponnisos, ostale enote na oranžnem seznamu")
             ("HRV", "na zelenem seznamu administrativna enota Panonska Hrvatska, ostale enote na oranžnem seznamu")
+            ("ISL", "")
             ("ITA", "na zelenem seznamu administrativne enote Piemonte, Ligurija, Lombardija, Abruzzo, Molise, Puglia, Sardinija, Provincia Autonoma di Bolzano/Bozen, Provincia Autonoma di Trento, Veneto, Furlanija-Julijska krajina, Emilia-Romagna, Toskana, Umbria, Marche in Lazio, ostale enote na oranžnem seznamu")
             ("ISR", "")
             ("JPN", "")
             ("KOR", "")
+            ("CHN", "na zelenem seznamu administrativne enote Hongkong, Macau in Tajvan")
             ("XKX", "")
+            ("LBN", "")
+            ("HUN", "")
             ("MLT", "")
-            ("DEU", "na zelenem seznamu administrativne enote Bavarska, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Spodnja Saška, Severno Porenje-Vestfalija, Rheinland-Pfalz, Posarje, Saška, Sachsen-Anhalt, Schleswig-Holstein in Turingija <br>Baden-Württemberg na oranžnem seznamu")
+            ("DEU", "na zelenem seznamu administrativne enote Bavarska, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Spodnja Saška, Severno Porenje-Vestfalija, Rheinland-Pfalz, Saška, Sachsen-Anhalt, Schleswig-Holstein in Turingija <br>na oranžnem seznamu Baden-Württemberg  in Posarje")
             ("NOR", "na zelenem seznamu administrativne enote Rogaland, Møre og Romsdal, Nordland, Viken, Innlandet, Vestland in Trøndelag, ostale enote na oranžnem seznamu")
             ("NZL", "")
             ("POL", "")
@@ -157,6 +161,7 @@ let greenCountries =
             ("SVK", "")
             ("SRB", "")
             ("THA", "")
+            ("USA", "")
         ]
 
 let redCountries =
@@ -207,7 +212,6 @@ let redCountries =
             ("IRN", "")
             ("IRL", "")
             ("YEM", "")
-            ("JOR", "")
             ("ZAF", "")
             ("SSD", "")
             ("CMR", "")
@@ -261,7 +265,6 @@ let redCountries =
             ("CAF", "")
             ("SDN", "")
             ("SUR", "")
-            ("LCA", "")
             ("ESP", "na rdečem seznamu administrativne enote Andaluzija, Aragonija, La Rioja in Castilla-La Mancha <br>na zelenem seznamu administrativne enote Galicija, Comunitat Valenciana in Balearski otoki, ostale enote na oranžnem seznamu")
             ("SWE", "na rdečem seznamu administrativne enote Smaland Med Oarna, Norra Mellansverige in Ovre Norrland, ostale enote na oranžnem seznamu")
             ("LKA", "")
@@ -272,6 +275,7 @@ let redCountries =
             ("TUN", "")
             ("TUR", "")
             ("TKM", "")
+            ("UGA", "")
             ("URY", "")
             ("UZB", "")
             ("VEN", "")
@@ -281,6 +285,7 @@ let redCountries =
             ("GBR", "")
             ("CPV", "")
             ("ZWE", "")
+            ("KNA", "")
         ]
 
 let loadEuropeGeoJson =
