@@ -362,7 +362,8 @@
             "showAll": "Prikaži sve",
             "hideAll": "Sakrij sve",
             "dsMIZS": "MIZŠ",
-            "dsNIB": "Nacionalni biološki institut"
+            "dsNIB": "Nacionalni biološki institut",
+            "total": "Ukupno"
         },
         "map": {
             "populationC": "Stanovništvo",
@@ -1361,7 +1362,8 @@
             "title": "faza<br>15"
         },
         "17": {
-            "title": "faza<br>17"
+            "title": "faza<br>17",
+            "description": "kraj epidemije, traženje kontakata s visokim rizikom"
         }
     },
     "embedMaker": {
