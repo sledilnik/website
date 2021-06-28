@@ -549,10 +549,10 @@ module Dictionaries =
             "starše","Starše","SI-115",4081
             "straža","Straža","SI-203",3881
             "sveta_ana","Sveta Ana","SI-181",2323
-            "sveta_trojica_v_slov._goricah","Sveta Trojica v Slov. goricah","SI-204",2193
-            "sveti_andraž_v_slov._goricah","Sveti Andraž v Slov. goricah","SI-182",1203
+            "sveta_trojica_v_slovenskih_goricah","Sveta Trojica v Slov. goricah","SI-204",2193
+            "sveti_andraž_v_slovenskih_goricah","Sveti Andraž v Slov. goricah","SI-182",1203
             "sveti_jurij_ob_ščavnici","Sveti Jurij ob Ščavnici","SI-116",2834
-            "sveti_jurij_v_slov._goricah","Sveti Jurij v Slov. goricah","SI-210",2114
+            "sveti_jurij_v_slovenskih_goricah","Sveti Jurij v Slov. goricah","SI-210",2114
             "sveti_tomaž","Sveti Tomaž","SI-205",2007
             "šalovci","Šalovci","SI-033",1388
             "šempeter-vrtojba","Šempeter - Vrtojba","SI-183",6292
