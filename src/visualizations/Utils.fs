@@ -400,7 +400,7 @@ module Dictionaries =
             "borovnica","Borovnica","SI-005",4664
             "bovec","Bovec","SI-006",3245
             "braslovče","Braslovče","SI-151",5656
-            "brda","brda","SI-007",5639
+            "brda","Brda","SI-007",5639
             "brezovica","Brezovica","SI-008",12785
             "brežice","Brežice","SI-009",24419
             "cankova","Cankova","SI-152",1753
