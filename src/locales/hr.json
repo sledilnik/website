@@ -444,7 +444,8 @@
             "acute": "Odjel za akutne slučajeve",
             "icu-other": "Bez respiratora",
             "icu-discharged": "Otpušteni s odjela intenzivne njege",
-            "icu-admitted": "Prihvaćeni na odjelu intenzivne njege"
+            "icu-admitted": "Prihvaćeni na odjelu intenzivne njege",
+            "disclaimerCare": "Napomena: Od 8. travnja 2021. bolnice za njegu ne izvještavaju o dnevnom stanju."
         },
         "metricsComparison": {
             "deceased": "Smrtni slučajevi",
@@ -606,8 +607,8 @@
             "deceased-hospital": "Umrli (bolinca)"
         },
         "europe": {
-            "statusRed": "stroga 10-dnevna karantena",
-            "statusOrange": "10-dnevna karantena s iznimkama",
+            "statusRed": "oporavljeni/cijepljeni ili PCR/RAT test i desetodnevna karantena",
+            "statusOrange": "oporavljeni/cijepljeni ili negativni PCR/RAT test ili desetodnevna karantena",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
             "countryStatus": "Ograničenja",
@@ -896,7 +897,8 @@
             "title": "Slučajevi u školama i vrtićima",
             "regionsWithChanges": "Mijenja raspored u školama ili vrtićima u prošlom tjednu po regijama:",
             "showAll": "Svi",
-            "showActive": "Aktivni"
+            "showActive": "Aktivni",
+            "disclaimer": "Napomena: škole prijavljuju podatke ministarstvu i možda su nepotpuni."
         },
         "schools": {
             "unitsRemote": "Jedinice – Udaljene",
