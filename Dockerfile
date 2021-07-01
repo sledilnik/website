@@ -12,7 +12,7 @@ RUN CADDY_BUILD=1 yarn build --mode ${BUILD_MODE}
 ########################################
 # Actual webserver image
 ########################################
-FROM caddy:2.2.1-alpine
+FROM caddy:2.4.3-alpine
 
 WORKDIR /app
 COPY --from=builder /app/dist /app
