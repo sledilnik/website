@@ -43,7 +43,7 @@
     "vue-date-fns": "^2.0.1",
     "vue-fuse": "^2.2.1",
     "vue-meta": "^2.4.0",
-    "vue-router": "^3.4.3",
+    "vue-router": "^3.5.2",
     "vue-scrollto": "^2.18.2",
     "vuex": "^3.5.1"
   },
