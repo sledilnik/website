@@ -526,7 +526,7 @@
             "statusGreen": "no restrictions",
             "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine",
             "statusRed": "recovered/vaccinated or PCR test and 10-day quarantine",
-            "statusDarkRed": "10-day quarantine",
+            "statusDarkRed": "10-day quarantine, denied entry for foreigners without residence",
             "noData": "No data"
         },
         "world": {

@@ -1167,7 +1167,7 @@
             "statusGreen": "brez omejitev",
             "statusOrange": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena",
             "statusRed": "preboleli/cepljeni ali test PCR in 10-dnevna karantena",
-            "statusDarkRed": "obvezna 10-dnevna karantena",
+            "statusDarkRed": "obvezna 10-dnevna karantena, prepoved vstopa za tujce brez prebivališča",
             "noData": "Ni podatkov"
         },
         "world": {
