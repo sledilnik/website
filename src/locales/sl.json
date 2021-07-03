@@ -1165,8 +1165,9 @@
             "countryStatus": "Omejitve",
             "statusNone": "-",
             "statusGreen": "brez omejitev",
-            "statusOrange": "Preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena",
-            "statusRed": "Preboleli/cepljeni ali test PCR in 10-dnevna karantena",
+            "statusOrange": "preboleli/cepljeni/negativen test PCR/HAT ali 10-dnevna karantena",
+            "statusRed": "preboleli/cepljeni ali test PCR in 10-dnevna karantena",
+            "statusDarkRed": "obvezna 10-dnevna karantena",
             "noData": "Ni podatkov"
         },
         "world": {

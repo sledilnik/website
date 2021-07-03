@@ -134,23 +134,30 @@ let greenCountries =
             ("BGR", "")
             ("BIH", "")
             ("CZE", "")
+            ("MNE", "")
             ("AUT", "")
-            ("DNK", "na zelenem seznamu administrativna enota Syddanmark, ostale enote na oranžnem seznamu")
+            ("BEL", "na zelenem seznamu Flandrija <br>na oranžnem seznamu Valonija in Bruselj")
+            ("DNK", "na zelenem seznamu administrativne enote Syddanmark, Midtjylland in Sjælland <br>na oranžnem seznamu Hovestaden in Nordjylland")
+            ("EST", "")
             ("FIN", "")
-            ("GRC", "na zelenem seznamu administrativne enote Voreio Aigaio, Anatoliki Makedonia, Thraki, Ipeiros in Peloponnisos, ostale enote na oranžnem seznamu")
-            ("HRV", "na zelenem seznamu administrativna enota Panonska Hrvatska, ostale enote na oranžnem seznamu")
+            ("FRA", "na oranžnem seznamu administrativna enota Île-de-France in čezmorsko ozemlje Guadeloupe, ostale enote na zelenem seznamu<br>na rdečem seznamu: čezmorsko ozemlje La Reunion <br>na temno rdečem seznamu: čezmorsko ozemlje Guyane")
+            ("GRC", "na zelenem seznamu vse administrativne enote razen enoti Attiki in Dytiki Makedonia, ki sta na oranžnem seznamu")
+            ("HRV", "")
             ("ISL", "")
-            ("ITA", "na zelenem seznamu administrativne enote Piemonte, Ligurija, Lombardija, Abruzzo, Molise, Puglia, Sardinija, Provincia Autonoma di Bolzano/Bozen, Provincia Autonoma di Trento, Veneto, Furlanija-Julijska krajina, Emilia-Romagna, Toskana, Umbria, Marche in Lazio, ostale enote na oranžnem seznamu")
+            ("ITA", "na zelenem seznamu vse administrativne enote razen enot Sicilija, Kalabrija in Basilicata, ki so na oranžnem seznamu")
             ("ISR", "")
             ("JPN", "")
             ("KOR", "")
-            ("CHN", "na zelenem seznamu administrativne enote Hongkong, Macau in Tajvan")
+            ("CHN", "na zelenem seznamu administrativni enoti Hongkong in Macau")
             ("XKX", "")
             ("LBN", "")
+            ("LTU", "")
+            ("LUX", "")
             ("HUN", "")
             ("MLT", "")
-            ("DEU", "na zelenem seznamu administrativne enote Bavarska, Berlin, Brandenburg, Bremen, Hamburg, Hessen, Mecklenburg-Vorpommern, Spodnja Saška, Severno Porenje-Vestfalija, Rheinland-Pfalz, Saška, Sachsen-Anhalt, Schleswig-Holstein in Turingija <br>na oranžnem seznamu Baden-Württemberg  in Posarje")
-            ("NOR", "na zelenem seznamu administrativne enote Rogaland, Møre og Romsdal, Nordland, Viken, Innlandet, Vestland in Trøndelag, ostale enote na oranžnem seznamu")
+            ("DEU", "")
+            ("NLD", "na zelenem seznamu administrativni enoti Friesland in Groningen, ostale enote na oranžnem seznamu<br>na rdečem seznamu Aruba in Sveti Martin")
+            ("NOR", "na zelenem seznamu vse administrativne enote razen enot Rogaland, Agder in Oslo, ki so na oranžnem seznamu")
             ("NZL", "")
             ("POL", "")
             ("PRT", "na zelenem seznamu avtonomna regija Madeira, ostale enote na oranžnem seznamu")
@@ -160,7 +167,10 @@ let greenCountries =
             ("SGP", "")
             ("SVK", "")
             ("SRB", "")
+            ("SWE", "na zelenem seznamu administrativni enoti Mallersta Norrland in Stockholm, ostale enote na oranžnem seznamu")
+            ("CHE", "")
             ("THA", "")
+            ("TWN", "")
             ("USA", "")
         ]
 
@@ -171,31 +181,22 @@ let redCountries =
             ("DZA", "")
             ("AND", "")
             ("AGO", "")
-            ("ARG", "")
             ("BHS", "")
-            ("BHR", "")
             ("BGD", "")
             ("BLZ", "")
             ("BLR", "")
             ("BEN", "")
-            ("BOL", "")
-            ("BWA", "")
-            ("BRA", "")
             ("BFA", "")
             ("BDI", "")
             ("BTN", "")
             ("TCD", "")
-            ("CHL", "")
             ("DOM", "")
             ("DJI", "")
-            ("EGY", "")
-            ("ECU", "")
             ("GNQ", "")
             ("ERI", "")
-            ("SWZ", "")
             ("ETH", "")
+            ("FJI", "")
             ("PHL", "")
-            ("FRA", "na rdečem seznamu: čezmorsko ozemlje La Reunion <br>na temno rdečem seznamu: čezmorsko ozemlje Guyane <br>na zelenem seznamu administrativne enote Korzika ter čezmorski ozemlji Martinique in Mayotte, ostale enote na oranžnem seznamu")
             ("GAB", "")
             ("GMB", "")
             ("GHA", "")
@@ -206,87 +207,100 @@ let redCountries =
             ("GNB", "")
             ("HTI", "")
             ("HND", "")
-            ("IND", "")
             ("IDN", "")
             ("IRQ", "")
-            ("IRN", "")
-            ("IRL", "")
             ("YEM", "")
-            ("ZAF", "")
             ("SSD", "")
             ("CMR", "")
             ("QAT", "")
             ("KAZ", "")
             ("KEN", "")
             ("KGZ", "")
-            ("COL", "")
             ("COM", "")
             ("COG", "")
             ("COD", "")
-            ("CRI", "")
             ("CUB", "")
-            ("KWT", "")
-            ("LSO", "")
             ("LBR", "")
             ("LBY", "")
-            ("LIE", "")
             ("MDG", "")
-            ("MWL", "")
-            ("MDV", "")
-            ("MYS", "")
             ("MLI", "")
             ("MAR", "")
             ("MRT", "")
             ("MEX", "")
-            ("MNG", "")
-            ("MOZ", "")
-            ("NAM", "")
-            ("NPL", "")
             ("NIG", "")
             ("NGA", "")
             ("NIC", "")
-            ("NLD", "")
-            ("OMN", "")
             ("PAK", "")
             ("PAN", "")
             ("PNG", "")
-            ("PRY", "")
-            ("PER", "")
-            ("RUS", "")
             ("SLV", "")
             ("SAU", "")
             ("SEN", "")
             ("PRK", "")
-            ("SYC", "")
             ("SLE", "")
-            ("SYR", "")
             ("CIV", "")
             ("SOM", "")
             ("CAF", "")
-            ("SDN", "")
-            ("SUR", "")
             ("ESP", "na rdečem seznamu administrativne enote Andaluzija, Aragonija, La Rioja in Castilla-La Mancha <br>na zelenem seznamu administrativne enote Galicija, Comunitat Valenciana in Balearski otoki, ostale enote na oranžnem seznamu")
             ("SWE", "na rdečem seznamu administrativne enote Smaland Med Oarna, Norra Mellansverige in Ovre Norrland, ostale enote na oranžnem seznamu")
-            ("LKA", "")
             ("TJK", "")
-            ("TZA", "")
             ("TGO", "")
-            ("TTO", "")
-            ("TUN", "")
             ("TUR", "")
             ("TKM", "")
             ("UGA", "")
-            ("URY", "")
             ("UZB", "")
             ("VEN", "")
             ("TLS", "")
-            ("ZMB", "")
             ("ARE", "")
-            ("GBR", "")
             ("CPV", "")
-            ("ZWE", "")
             ("KNA", "")
         ]
+
+let darkRedCountries =
+    Map.ofList
+        [
+            ("ARG", "")
+            ("BHR", "")
+            ("BOL", "")
+            ("BWA", "")
+            ("BRA", "")
+            ("CHL", "")
+            ("EGY", "")
+            ("ECU", "")
+            ("SWZ", "")
+            ("IND", "")
+            ("IRN", "")
+            ("IRL", "")
+            ("ZAF", "")
+            ("COL", "")
+            ("CRI", "")
+            ("KWT", "")
+            ("LSO", "")
+            ("LIE", "")
+            ("MWL", "")
+            ("MDV", "")
+            ("MYS", "")
+            ("MNG", "")
+            ("MOZ", "")
+            ("NAM", "")
+            ("NPL", "")
+            ("OMN", "")
+            ("PRY", "")
+            ("PER", "")
+            ("RUS", "")
+            ("SYC", "")
+            ("SYR", "")
+            ("SDN", "")
+            ("SUR", "")
+            ("LKA", "")
+            ("TZA", "")
+            ("TTO", "")
+            ("TUN", "")
+            ("URY", "")
+            ("ZMB", "")
+            ("GBR", "")
+            ("ZWE", "")
+    ]
 
 let loadEuropeGeoJson =
     async {
@@ -380,25 +394,32 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
         let owdDate =
             dps |> List.map (fun dp -> dp.Date) |> List.max
 
-        let red, green =
+        let darkRed, red, green =
+            darkRedCountries.TryFind(fixedCode),
             redCountries.TryFind(fixedCode),
             greenCountries.TryFind(fixedCode)
         let rText, rColor, rAltText =
             match fixedCode with
             | "SVN" -> chartText "statusNone", "#10829a", ""
             | _ ->
-                match red with
-                | Some redNote ->
-                    if redNote.Length > 0
-                    then chartText "statusRed", "#FF9057", redNote
-                    else chartText "statusRed", "#FF5348", redNote
+                match darkRed with
+                | Some dRedNote ->
+                    if dRedNote.Length > 0
+                    then chartText "statusDarkRed", "#B23A32", dRedNote
+                    else chartText "statusDarkRed", "#B23A32", dRedNote
                 | _ ->
-                    match green with
-                    | Some greenNote ->
-                        if greenNote.Length > 0
-                        then chartText "statusOrange", "#FFC65A", greenNote // partially orange
-                        else chartText "statusGreen", "#C4DE6F", greenNote
-                    | _ -> chartText "statusOrange", "#FFC65A", ""  // orange is w/o restrictions now
+                    match red with
+                    | Some redNote ->
+                        if redNote.Length > 0
+                        then chartText "statusRed", "#FF9057", redNote
+                        else chartText "statusRed", "#FF5348", redNote
+                    | _ ->
+                        match green with
+                        | Some greenNote ->
+                            if greenNote.Length > 0
+                            then chartText "statusOrange", "#FFC65A", greenNote // partially orange
+                            else chartText "statusGreen", "#C4DE6F", greenNote
+                        | _ -> chartText "statusOrange", "#FFC65A", ""  // orange is w/o restrictions now
 
         let imported =
             importedFrom.TryFind(fixedCode)
