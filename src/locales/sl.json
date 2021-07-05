@@ -736,6 +736,14 @@
         "liftCapacity75p": {
             "title": "75%",
             "description": "Sprostitev ukrepov: večji hoteli, kulturne in športne prireditve lahko obratujejo s 75% zasedenostjo."
+        },
+        "liftServicesAll": {
+            "title": "Storitve",
+            "description": "Sprostitev ukrepov: odprte skoraj vse storitve, odpravi se časovna omejitev delovanja lokalov in restavracij."
+        },
+        "liftMasksOnEvents": {
+            "title": "Maske",
+            "description": "Sprostitev ukrepov: maske niso več obvezne na javnih prireditvah (kulturne, športne) in v gostinski, kongresni in igralniški dejavnosti,<br>kjer velja pogoj PCT za obiskovalce. Sprostijo se omejitve kapacitet na športnih in kulturnih dogodkih."
         }
     },
     "phase": {
