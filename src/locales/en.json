@@ -1220,11 +1220,11 @@
         },
         "liftServicesAll": {
             "title": "Services",
-            "description": "Easing of restrictions: almost all services opened, no open time restrictions for shops and restaurants."
+            "description": "Easing restrictions: almost all services open, no restrictions on opening hours for shops and restaurants."
         },
         "liftMasksOnEvents": {
             "title": "Masks",
-            "description": "Easing of restrictions: masks not required on public culture and sport events and in restaurants, congresses in gambling saloons,<br>where attendees are required to be tested/recovered/vaccinated. Relaxation of capacity limitations on culture and sport events."
+            "description": "EEasing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
         }
     },
     "days": {
