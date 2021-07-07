@@ -724,6 +724,38 @@
         "liftTerrace": {
             "description": "Allentamento: Bere e mangiare all'aperto è permesso in 8 regioni dalle 7:00 alle 19:00.<br>Sono permessi i raduni pubblici organizzati all'aperto fino a 100 persone.",
             "title": "Terrazze"
+        },
+        "liftMasksOnEvents": {
+            "description": "Allentamenti: nessun obbligo di mascherina in occasione di eventi culturali e sportivi pubblici e in ristoranti, congressi e sale da gioco,<br>ma solo per le persone che sono state testate, guarite o vaccinate. Rimozione delle limitazioni di capacità in occasione di eventi culturali e sportivi.",
+            "title": "Mascherine"
+        },
+        "liftServicesAll": {
+            "description": "Allentamenti: quasi tutti i servizi aperti, nessuna restrizione sugli orari di apertura di negozi e ristoranti.",
+            "title": "Servizi"
+        },
+        "liftCapacity75p": {
+            "description": "Allentamento: i grandi alberghi, gli eventi culturali e sportivi possono operare con il 75% di capacità.",
+            "title": "75%"
+        },
+        "liftGatherings": {
+            "description": "Allentamento: nessuna limitazione a riunioni ed eventi pubblici con distanza interpersonale richiesta.",
+            "title": "Assembramenti"
+        },
+        "liftHighSchools2": {
+            "description": "Allentamento: scuole superiori e università. Eventi sportivi e culturali con spettatori (con tampone).<br>Campeggi fino al 70% di capienza. Bar e ristoranti aperti dalle 5:00 alle 22:00.",
+            "title": "S.Secondarie"
+        },
+        "liftGatherings50": {
+            "description": "Allentamento: assembramento fino a 50 persone.",
+            "title": "Fino a 50"
+        },
+        "liftHotels": {
+            "description": "Allentamento: hotel grandi con capacità del 50%.<br>Una persona per 20 mq negli spazi pubblici interni (prima 30 mq).",
+            "title": "Alberghi"
+        },
+        "liftSport": {
+            "description": "Allentamento: tutti gli allenamenti in gruppi fino a 10 e tutte le competizioni (senza spettatori).<br>Tutte le scuole aperte, per l'università è raccomandato il modello C.",
+            "title": "Sport"
         }
     },
     "tableDict": {
@@ -819,7 +851,8 @@
             "icu-discharged": "Dimessi dalla terapia intensiva",
             "icu-admitted": "Ammessi in terapia intensiva",
             "niVentilator": "Su ventilatore (non invasivo)",
-            "acute": "Unità acuta"
+            "acute": "Unità acuta",
+            "disclaimerCare": "Nota: gli ospedali di cura non inviano rapporti giornalieri dall'8 aprile 2021."
         },
         "cases": {
             "ventilator": "Su ventilatore (intubati)",
@@ -865,9 +898,9 @@
             "titleMenu_MNE": "Montenegro - situazione",
             "titleMenu_MKD": "Macedonia del Nord - situazione",
             "titleMenu_SVN": "Slovenia - situazione",
-            "vaccinationAdministered": "Vaccinati 💉",
+            "vaccinationAdministered": "Vaccinati",
             "niVentilator": "Su ventilatore (non invasivo)",
-            "vaccinationAdministered2nd": "Vaccinati 💉💉"
+            "vaccinationAdministered2nd": "Vaccinazioni completate"
         },
         "hospitals": {
             "title": "Capacità ospedaliere",
@@ -912,7 +945,7 @@
             "relative": "Relativo",
             "averageByDay": "Per giorno (media)",
             "titleMenu": "Casi - struttura",
-            "disclaimer": "Nota: dall'11 ottobre, la NIJZ non riporta più i dati relativi agli operatori sanitari e nelle case di riposo."
+            "disclaimer": "Nota: dall'11 ottobre 2020, la NIJZ non riporta più i dati relativi agli operatori sanitari e nelle case di riposo."
         },
         "tests": {
             "ns-apr20": "Ricerca: PCR",
@@ -925,7 +958,7 @@
             "titleMenu": "Tamponi",
             "byLabPercent": "Per laboratorio:% positivi",
             "byLab": "Per laboratorio: test PCR",
-            "disclaimer": "Nota: dal 3 dicembre non riceviamo più i dati per laboratorio.",
+            "disclaimer": "Nota: dal 3 dicembre 2020 non riceviamo più i dati per laboratorio.",
             "hagt": "Ordinario: TAR",
             "positiveTotal": "Totale positivi",
             "positivePCR": "PCR positivi",
@@ -942,7 +975,7 @@
             "testsPerformed": "Tamponi (effettuati)",
             "sentToSelfIsolation": "Autoisolamento",
             "titleMenu": "CS - trattamento",
-            "disclaimer": "Nota: questo grafico non è aggiornato. Dal 25 ottobre il Ministero della Salute non riporta più i dati relativi ai centri sanitari in quanto non vengono più raccolti."
+            "disclaimer": "Nota: questo grafico non è aggiornato. Dal 25 ottobre 2020 il Ministero della Salute non riporta più i dati relativi ai centri sanitari in quanto non vengono più raccolti."
         },
         "countriesNewCasesPer100k": {
             "legendTitle": "Nuovi casi giornalieri su 100.000 persone",
@@ -1000,8 +1033,8 @@
         },
         "europe": {
             "noData": "Nessun dato",
-            "statusRed": "quarantena rigorosa di 10 giorni",
-            "statusOrange": "Quarantena di 10 giorni con eccezioni",
+            "statusRed": "guariti/vaccinati o test PCR e quarantena di 10 giorni",
+            "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
             "countryStatus": "Restrizioni",
@@ -1012,7 +1045,8 @@
             "twoWeekIncidence": "Incidenza di 14 giorni su 100.000",
             "title": "COVID-19 Situazione in Europa",
             "titleMenu": "Europa - situazione",
-            "weeklyIncrease": "Aumento settimanale"
+            "weeklyIncrease": "Aumento settimanale",
+            "statusDarkRed": "quarantena di 10 giorni, divieto di ammissione per gli stranieri senza residenza"
         },
         "map": {
             "confirmedCases": "Casi confermati",
@@ -1033,8 +1067,8 @@
             "bubbles": "Distribuzione",
             "disclaimer": "Nota: I dati dei decessi per comune non vengono forniti dall'NIJZ dal 12 dicembre e anche prima non sono completi. Questo è il motivo per cui c'è una deviazione con il numero totale dei decessi.",
             "disclaimerRegion": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane. Questo è il motivo per cui c'è una deviazione dal numero totale di morti.",
-            "vaccinated2nd": "Vaccinati 2a dose",
-            "vaccinated1st": "Vaccinati 1a dose"
+            "vaccinated2nd": "Vaccinazioni completate",
+            "vaccinated1st": "Vaccinati"
         },
         "regions": {
             "deceased": "Decessi",
@@ -1044,8 +1078,8 @@
             "titleMenu": "Regioni - casi",
             "newCases7Days": "Nuovi (media di 7 giorni)",
             "disclaimer": "Nota: i dati sui decessi per regione vengono forniti settimanalmente, quindi non sono completi per le ultime due settimane.",
-            "vaccinated2nd": "2a dose",
-            "vaccinated1st": "1a dose",
+            "vaccinated2nd": "Vaccinazioni completate",
+            "vaccinated1st": "Vaccinazioni",
             "vaccinated7Days": "Al giorno (media di 7 giorni)",
             "vaccinated": "Vaccinati",
             "allCases": "Tutti"
@@ -1125,7 +1159,8 @@
             "showAll": "Mostra tutto",
             "hideAll": "Nascondi tutto",
             "dsMIZS": "MIZŠ",
-            "dsNIB": "Istituto Nazionale di Biologia"
+            "dsNIB": "Istituto Nazionale di Biologia",
+            "total": "Totale"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1186,7 +1221,7 @@
             "sentToQuarantine": "Inviato in quarantena",
             "title": "Fonti e luoghi di infezione, settimanale",
             "titleMenu": "Fonti e luoghi di infezione",
-            "disclaimer": "Nota: dal 17 ottobre, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
+            "disclaimer": "Nota: dal 17 ottobre 2020, gli epidemiologi non tracciano più i singoli contatti e non rilasciano suggerimenti per la quarantena. Questo è il motivo per cui non mostriamo più questi dati.",
             "disclaimerGeneral": "Nota: i dati della scorsa settimana non sono ancora completi - il numero dei casi potrebbe essere inferiore a quello effettivo.",
             "locationUnknown": "Sconosciuto",
             "locationOther": "Altro",
@@ -1409,8 +1444,8 @@
         "vaccination": {
             "deliveredDoses": "Dosi consegnate",
             "usedDoses": "Dosi utilizzate",
-            "administered2nd": "Vaccinati 💉💉",
-            "administered": "Vaccinati 💉",
+            "administered2nd": "Vaccinazioni completate",
+            "administered": "Vaccinati",
             "az": "AstraZeneca",
             "moderna": "Moderna",
             "pfizer": "Pfizer/BioNTech",
@@ -1420,7 +1455,11 @@
             "title": "Vaccinazione",
             "disabled": "Abbiamo interrotto l'aggiornamento della tabella delle vaccinazioni il 25 marzo perché i dati non sono attualmente disponibili in formato leggibile dalla macchina. Per il momento siete gentilmente indirizzati al sito web <a href=\"https://cepimose.si\" target=\"_blank\"> cepimose.si </a> (solo in sloveno).",
             "janssen": "Janssen",
-            "byWeek": "Per settimana"
+            "byWeek": "Per settimana",
+            "unusedDoses": "Dosi non utilizzate",
+            "byAge1st": "Per età: Vaccinati",
+            "byAgeAll": "Per età: Vaccinazione completata",
+            "unused": "Vaccini inutilizzati"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
@@ -1438,7 +1477,8 @@
             "showActive": "Attivi",
             "search": "Ricerca per nome della scuola",
             "titleMenu": "Scuola e scuola materna - situazione",
-            "title": "Situazione nella scuola e nella scuola materna"
+            "title": "Situazione nella scuola e nella scuola materna",
+            "disclaimer": "Nota: i dati sono comunicati al ministero dalle scuole stesse e potrebbero essere incompleti."
         },
         "sewage": {
             "muncipalitiesIncluded": "I casi attivi e confermati includono i dati dei comuni:",
@@ -1480,7 +1520,8 @@
         "newCases7dInfo": "media degli ultimi 7 giorni",
         "newCases7d": "Casi nuovi",
         "testsHAT": "Tamponi oggi: TAR",
-        "vaccinationSummary": "Persone vaccinate"
+        "vaccinationSummary": "Vaccinazioni completate",
+        "incidenceInfo": "per 100.000 persone"
     },
     "meta": {
         "title": "Monitoraggio COVID-19",
@@ -1553,6 +1594,10 @@
         "16": {
             "description": "metodologia dei test antigeni rapidi",
             "title": "fase<br>16"
+        },
+        "17": {
+            "description": "fine dell'epidemia, tracciamento dei contatti ad alto rischio",
+            "title": "fase<br>17"
         }
     },
     "weekday": {
@@ -1723,10 +1768,10 @@
         },
         "regions-chart": {
             "answer": "Il [grafico](/it/stats#regions-chart) mostra la dinamica di crescita dei casi confermati nelle regioni selezionate. Le singole regioni possono essere facilmente confrontate selezionando quelle che si desidera visualizzare sul grafico, cliccando sulle specifiche regioni sotto il grafico. Dalla curva, possiamo vedere rapidamente quali regioni hanno più e quali meno casi confermati e come questo numero sia cambiato nel tempo.",
-            "question": "Cosa ci dicono i \"Casi per regione\"?"
+            "question": "Cosa ci dice il \"Per regione\"?"
         },
         "spread-chart": {
-            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
+            "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
             "question": "Cosa significa il grafico \"Variazione di casi confermati\"?"
         },
         "infections-chart": {
@@ -1776,15 +1821,46 @@
     "donation": {
         "monthly": {
             "stripe": {
-                "donateButton": "{{amount}} al mese"
-            }
+                "donateButton": "{{amount}} al mese",
+                "success": {
+                    "description": "Se desidera interrompere la sua donazione ricorrente, ce lo faccia sapere a drustvo@sledilnik.org.",
+                    "title": "Grazie della donazione mensile ricorrente"
+                },
+                "stopping": "Può interrompere la sua donazione in qualsiasi momento. Ci spedisca un messaggio a drustvo@sledilnik.org.",
+                "description": "Una donazione mensile regolare ci dà un reddito stabile e distribuisce i tuoi costi in modo uniforme durante tutto l'anno. Scelga l'importo mensile qui sotto per pagare **con carta di credito**:"
+            },
+            "title": "Donazione mensile ricorrente"
         },
         "onetime": {
             "stripe": {
                 "success": {
-                    "description": " "
-                }
-            }
+                    "description": " ",
+                    "title": "Grazie della donazione una tantum"
+                },
+                "description": "Può anche fare una donazione una tantum **con carta di credito**. Scelga l'importo della sua donazione qui sotto:"
+            },
+            "banktransfer": {
+                "detailsButton": "Dettagli bonifico bancario",
+                "description": "Le nostre attività possono essere sostenute anche **con bonifico bancario**. Le istruzioni di pagamento sono le seguenti:"
+            },
+            "title": "Sostegno una tantum"
+        },
+        "other": {
+            "title": "Altri modi di supporto"
+        },
+        "companies": {
+            "description": "Si prega di contattarci su drustvo@sledilnik.org per preparare un contratto di donazione e/o altra documentazione necessaria come richiesto.",
+            "title": "Per le aziende"
+        },
+        "success": {
+            "title": "Grazie della donazione",
+            "session": "ID sessione di pagamento:",
+            "description": "La sua donazione ci aiuterà nel nostro lavoro futuro.<br>Le chiediamo gentilmente di incoraggiare anche altri a donare."
+        },
+        "bankDetails": {
+            "bankBicSwift": "Banca SWIFT/BIC",
+            "bank": "Banca",
+            "iban": "Conto IBAN"
         }
     }
 }
