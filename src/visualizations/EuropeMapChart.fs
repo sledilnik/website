@@ -410,24 +410,25 @@ let prepareCountryData (data: DataPoint list) (weeklyData: WeeklyStatsData) =
             match fixedCode with
             | "SVN" -> chartText "statusNone", "#10829a", ""
             | _ ->
-                match darkRed with
-                | Some dRedNote ->
-                    if dRedNote.Length > 0
-                    then chartText "statusDarkRed", "#B23A32", dRedNote
-                    else chartText "statusDarkRed", "#B23A32", dRedNote
-                | _ ->
-                    match red with
-                    | Some redNote ->
-                        if redNote.Length > 0
-                        then chartText "statusRed", "#FF9057", redNote
-                        else chartText "statusRed", "#FF5348", redNote
-                    | _ ->
-                        match green with
-                        | Some greenNote ->
-                            if greenNote.Length > 0
-                            then chartText "statusOrange", "#FFC65A", greenNote // partially orange
-                            else chartText "statusGreen", "#C4DE6F", greenNote
-                        | _ -> chartText "statusOrange", "#FFC65A", ""  // orange is w/o restrictions now
+                chartText "statusOrange", "#FFC65A", ""
+                // match darkRed with
+                // | Some dRedNote ->
+                //     if dRedNote.Length > 0
+                //     then chartText "statusDarkRed", "#B23A32", dRedNote
+                //     else chartText "statusDarkRed", "#B23A32", dRedNote
+                // | _ ->
+                //     match red with
+                //     | Some redNote ->
+                //         if redNote.Length > 0
+                //         then chartText "statusRed", "#FF9057", redNote
+                //         else chartText "statusRed", "#FF5348", redNote
+                //     | _ ->
+                //         match green with
+                //         | Some greenNote ->
+                //             if greenNote.Length > 0
+                //             then chartText "statusOrange", "#FFC65A", greenNote // partially orange
+                //             else chartText "statusGreen", "#C4DE6F", greenNote
+                //         | _ -> chartText "statusOrange", "#FFC65A", ""  // orange is w/o restrictions now
 
         let imported =
             importedFrom.TryFind(fixedCode)
