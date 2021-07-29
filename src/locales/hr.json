@@ -607,7 +607,7 @@
             "deceased-hospital": "Umrli (bolinca)"
         },
         "europe": {
-            "statusRed": "oporavljeni/cijepljeni ili PCR/RAT test i desetodnevna karantena",
+            "statusRed": "oporavljeni/cijepljeni ili desetodnevna karantena (negativan PCR test potreban za strance bez prebivališta)",
             "statusOrange": "oporavljeni/cijepljeni ili negativni PCR/RAT test ili desetodnevna karantena",
             "statusGreen": "bez ograničenja",
             "statusNone": "-",
@@ -620,7 +620,8 @@
             "newCases": "Novi slučajevi",
             "noData": "Nema podataka",
             "titleMenu": "Europa – stanje",
-            "weeklyIncrease": "Tjedni rast"
+            "weeklyIncrease": "Tjedni rast",
+            "statusDarkRed": "oporavljeni/cijepljeni ili desetodnevna karantena (zabranjen ulazak strancima bez prebivališta)"
         },
         "world": {
             "title": "COVID-19 stanje u svijetu",
