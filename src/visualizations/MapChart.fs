@@ -41,7 +41,10 @@ type ContentType =
     | Vaccinated2nd
     | Deceased
     with
-    static member Default = ConfirmedCases
+    static member Default mapToDisplay =
+        match mapToDisplay with
+        | MunicipalityMap -> ConfirmedCases
+        | RegionMap       -> Vaccinated1st
     static member GetName = function
        | ConfirmedCases -> I18N.t "charts.map.confirmedCases"
        | Vaccinated1st  -> I18N.t "charts.map.vaccinated1st"
@@ -238,7 +241,7 @@ let init (mapToDisplay : MapToDisplay) (data : Area seq) : State * Cmd<Msg> =
       GeoJson = NotAsked
       Data = data
       DataTimeInterval = dataTimeInterval
-      ContentType = ContentType.Default
+      ContentType = ContentType.Default mapToDisplay
       DisplayType = DisplayType.Default
     }, Cmd.ofMsg GeoJsonRequested
 

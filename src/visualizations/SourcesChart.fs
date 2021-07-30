@@ -57,7 +57,7 @@ type DisplayType =
           Quarantine
           QuarantineRelative ]
 
-    static member Default = ByLocation
+    static member Default = BySourceCountry
 
     member this.GetName =
         match this with

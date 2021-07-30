@@ -632,17 +632,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
+        [ hospitals; metricsComparison;  spread; dailyComparison; tests;
+          vaccination; regionMap;
           map; municipalities;
-          regions100k; europeMap;
-          sewage; schools; (*schoolStatus;*)
+          regions100k; sources; europeMap;
+          sewage; ageGroupsTimeline;
           patients; patientsICU; // patientsCare;
-          ageGroupsTimeline; weeklyDemographics; ageGroups;
+          weeklyDemographics; ageGroups;
+          schools; (*schoolStatus;*)
           metricsCorrelation; deceased; excessDeaths
           infections; hcCases;
-          sources; cases;
-          regionMap; regionsAbs
-          phaseDiagram; spread;
+          cases;
+          regionsAbs
+          phaseDiagram;
           //hCenters
         ]
 
