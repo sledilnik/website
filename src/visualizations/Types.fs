@@ -35,6 +35,7 @@ type Cases =
       RecoveredToDate : int option
       ClosedToDate : int option
       Active : int option
+      VaccinatedConfirmedToDate : int option
     }
 
 type Vaccination =
