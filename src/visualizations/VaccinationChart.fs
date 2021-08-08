@@ -119,6 +119,17 @@ let calcUnusedDoses delivered used =
     | Some d, Some u  -> Some (d - u)
     | _ -> None
 
+
+
+
+// Highcharts will sum columns together when there aren't enough pixels to draw them individually
+// As data in some of the vaccination charts is cumulative already, the aggregation method must be "high"
+// instead of the default "sum"
+// Docs: https://api.highcharts.com/highstock/series.column.dataGrouping.approximation
+// This fixes https://github.com/sledilnik/website/issues/927
+let dataGroupingConfigurationForCumulativeData = pojo {| approximation = "high" |}
+
+
 let renderVaccinationChart state dispatch =
 
     let allSeries =
@@ -130,6 +141,7 @@ let renderVaccinationChart state dispatch =
                     {| name = chartText "administered"
                        ``type`` = "column"
                        color = "#189a73"
+                       dataGrouping = dataGroupingConfigurationForCumulativeData
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.administered.toDate)) |}
@@ -138,6 +150,7 @@ let renderVaccinationChart state dispatch =
                     {| name = chartText "administered2nd"
                        ``type`` = "column"
                        color = "#0e5842"
+                       dataGrouping = dataGroupingConfigurationForCumulativeData
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.administered2nd.toDate)) |}
@@ -146,6 +159,7 @@ let renderVaccinationChart state dispatch =
                     {| name = chartText "deliveredDoses"
                        ``type`` = "line"
                        color = "#73ccd5"
+                       dataGrouping = dataGroupingConfigurationForCumulativeData
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.deliveredToDate)) |}
@@ -154,6 +168,7 @@ let renderVaccinationChart state dispatch =
                     {| name = chartText "usedDoses"
                        ``type`` = "line"
                        color = "#20b16d"
+                       dataGrouping = dataGroupingConfigurationForCumulativeData
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp -> (dp.JsDate12h, dp.usedToDate)) |}
@@ -162,6 +177,7 @@ let renderVaccinationChart state dispatch =
                     {| name = chartText "unusedDoses"
                        ``type`` = "line"
                        color = "#ffa600"
+                       dataGrouping = dataGroupingConfigurationForCumulativeData
                        data =
                            state.VaccinationData
                            |> Array.map (fun dp -> (dp.JsDate12h, calcUnusedDoses dp.deliveredToDate dp.usedToDate)) |}
