@@ -257,5 +257,22 @@
                 "title": "фаза<br>1"
             }
         }
+    },
+    "charts": {
+        "metricsComparison": {
+            "vaccinationAdministered2nd": "Полностью вакцинировано",
+            "vaccinationAdministered": "Вакцинировано"
+        },
+        "common": {
+            "showAll": "Показать все",
+            "hideAll": "Скрыть все",
+            "close": "Закрыть",
+            "share": "Поделиться",
+            "twitter": "Твиттер",
+            "sortBy": "Сортировка по:",
+            "to": "-",
+            "from": " ",
+            "loading": "Загрузка данных…"
+        }
     }
 }
