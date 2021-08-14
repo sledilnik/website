@@ -50,6 +50,7 @@
         <Compile Include="SchoolsChart.fs" />
         <Compile Include="SchoolStatusChart.fs" />
         <Compile Include="VaccinationChart.fs" />
+        <Compile Include="VaccineEffectChart.fs" />
         <Compile Include="SourcesChart.fs" />
         <Compile Include="SewageChart.fs" />
         <Compile Include="HcCasesChart.fs" />

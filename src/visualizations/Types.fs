@@ -190,6 +190,7 @@ type VisualizationType =
     | Regions
     | Regions100k
     | Vaccination
+    | VaccineEffect
     | Schools
     | SchoolStatus
     | Sources

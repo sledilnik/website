@@ -46,6 +46,7 @@ export default [
             "excess-deaths-chart",
             "daily-comparison-chart",
             "vaccination-chart",
+            "vaccine-effect-chart",
             "schools-chart",
             "school-status-chart",
             "sewage-chart",
