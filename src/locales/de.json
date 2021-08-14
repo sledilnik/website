@@ -417,7 +417,7 @@
             "loading": "Daten werden geladen …",
             "sortBy": "Sortieren nach:",
             "weekYearDateFormat": "%W. Woche %Y",
-            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}",
+            "dataDate": "Daten bis: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
             "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ",
             "dsMNZ": "MNZ",

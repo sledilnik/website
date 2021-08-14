@@ -1151,7 +1151,7 @@
             "dataSource": "origine dei dati",
             "sortBy": "Ordina per:",
             "weekYearDateFormat": "Settimana %W del %Y",
-            "dataDate": "Dati fino a: {{ date, %a., %e. %b. }}",
+            "dataDate": "Dati fino a: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Our World in Data &amp; Min. Salute",
             "dsOWD_NIJZ": "Our World in Data &amp; NIJZ",
             "dsMNZ": "MNZ",

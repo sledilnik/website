@@ -199,7 +199,7 @@
     },
     "charts": {
         "common": {
-            "dataDate": "Data until: {{ date, %a., %e. %b. }}",
+            "dataDate": "Data until: {{ date, %a., %e. %b. %Y }}",
             "dataSource": "data source",
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",

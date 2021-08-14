@@ -175,7 +175,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapMunicipalitiesChart {| data = data |} }
+                    | Success data -> lazyView Map.mapMunicipalitiesChart {| query = state.Query; data = data |} }
 
     let regionMap =
           { VisualizationType = RegionMap
@@ -189,7 +189,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapRegionChart {| data = data |} }
+                    | Success data -> lazyView Map.mapRegionChart {|query = state.Query; data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities

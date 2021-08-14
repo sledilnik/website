@@ -817,7 +817,7 @@
     },
     "charts": {
         "common": {
-            "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
+            "dataDate": "Podatki do: {{ date, %a., %e. %b. %Y }}",
             "dataSource": "vir podatkov",
             "dsNIB": "Nacionalni inštitut za biologijo",
             "dsNIJZ": "NIJZ",

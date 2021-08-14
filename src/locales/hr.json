@@ -354,7 +354,7 @@
             "from": " ",
             "sortBy": "Razvrstaj prema:",
             "weekYearDateFormat": "%W. tjedan %Y.",
-            "dataDate": "Podaci do: {{ date, %A, %e. %B }}",
+            "dataDate": "Podaci do: {{ date, %A, %e. %B %Y }}",
             "dsOWD_MZ": "Naš svijet u podacima i ministarstvo zdravstva",
             "dsOWD_NIJZ": "Naš svijet u podacima i NIJZ",
             "dsMNZ": "MNZ",
