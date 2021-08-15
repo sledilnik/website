@@ -144,10 +144,6 @@
             "yAxisTitle": "Aktive tilfeller per 100k folk"
         },
         "ageGroupsTimeline": {
-            "activeCasesRelative": "Aktive tilfeller (relativ)",
-            "activeCases": "Aktive tilfeller",
-            "newCasesRelative": "Nye tilfeller (relativ)",
-            "newCases": "Nye tilfeller"
         },
         "ageGroups": {
             "confirmedCases": "Bekreftede tilfeller",

@@ -785,10 +785,6 @@
         },
         "ageGroupsTimeline": {
             "title": "Потврдени случаи по старосни групи",
-            "activeCasesRelative": "Активни случаи (релативно)",
-            "activeCases": "Активни случаи",
-            "newCasesRelative": "Нови случаи (релативно)",
-            "newCases": "Нови случаи",
             "titleMenu": "Старост - удел"
         },
         "countriesDeathsPerCases": {
