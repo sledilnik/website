@@ -135,6 +135,8 @@ type WeeklyStatsDataPoint =
     { Week : string
       Date : System.DateTime
       DateTo : System.DateTime
+      HospitalizedVaccinated : int option
+      HospitalizedOther : int option
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
