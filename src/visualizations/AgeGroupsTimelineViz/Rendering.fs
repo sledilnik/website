@@ -90,7 +90,6 @@ let renderChartOptions state dispatch =
                     match state.ChartType with
                     | AbsoluteChart -> pojo {| stacking = "normal" |}
                     | RelativeChart -> pojo {| stacking = "percent" |}
-                    | _ -> invalidOp "not supported"
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
