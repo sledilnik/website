@@ -984,10 +984,6 @@
             "title": "Paesi: nuovi casi giornalieri su 100.000 persone (media di 7 giorni)"
         },
         "ageGroupsTimeline": {
-            "activeCasesRelative": "Casi attivi (relativi)",
-            "activeCases": "Casi attivi",
-            "newCasesRelative": "Nuovi casi (relativi)",
-            "newCases": "Nuovi casi",
             "title": "Casi confermati per fasce di età",
             "titleMenu": "Età - quota"
         },
@@ -1151,7 +1147,7 @@
             "dataSource": "origine dei dati",
             "sortBy": "Ordina per:",
             "weekYearDateFormat": "Settimana %W del %Y",
-            "dataDate": "Dati fino a: {{ date, %a., %e. %b. }}",
+            "dataDate": "Dati fino a: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Our World in Data &amp; Min. Salute",
             "dsOWD_NIJZ": "Our World in Data &amp; NIJZ",
             "dsMNZ": "MNZ",

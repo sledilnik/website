@@ -17,33 +17,39 @@ type DayValueIntMaybe = JsTimestamp*int option
 type DayValueFloat = JsTimestamp*float
 
 type State = {
-    Metrics : DisplayMetrics
     Data : StatsData
+    MetricType : MetricType
+    ChartType : BarChartType
     RangeSelectionButtonIndex: int
 }
 
 type Msg =
-    | ChangeMetrics of DisplayMetrics
+    | MetricTypeChanged of MetricType
+    | BarChartTypeChanged of BarChartType
     | RangeSelectionChanged of int
 
 let init data : State * Cmd<Msg> =
     let state = {
         Data = data
-        Metrics = DisplayMetrics.Default
+        MetricType = MetricType.Default
+        ChartType = AbsoluteChart
         RangeSelectionButtonIndex = 0
     }
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | ChangeMetrics metrics -> { state with Metrics=metrics }, Cmd.none
+    | BarChartTypeChanged chartType ->
+        { state with ChartType = chartType }, Cmd.none
+    | MetricTypeChanged metricType ->
+        { state with MetricType = metricType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 let renderChartOptions state dispatch =
     let allSeries =
         getAgeGroupTimelineAllSeriesData
-            state.Data state.Metrics.ValueCalculation
+            state.Data state.MetricType.Value
             (fun dataPoint -> dataPoint.StatePerAgeToDate)
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -52,7 +58,7 @@ let renderChartOptions state dispatch =
             true
         res
 
-    let className = "covid19-infections"
+    let className = "covid19-agegroups-timeline"
     let baseOptions =
         basicChartOptions
             ScaleType.Linear className
@@ -81,10 +87,9 @@ let renderChartOptions state dispatch =
                           pointPadding = 0
                           borderWidth = 0 |}
                 series =
-                    match state.Metrics.ChartType with
-                    | StackedBarNormal -> pojo {| stacking = "normal" |}
-                    | StackedBarPercent -> pojo {| stacking = "percent" |}
-                    | _ -> invalidOp "not supported"
+                    match state.ChartType with
+                    | AbsoluteChart -> pojo {| stacking = "normal" |}
+                    | RelativeChart -> pojo {| stacking = "percent" |}
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = pojo {|
@@ -104,29 +109,34 @@ let renderChartContainer state dispatch =
         ]
     ]
 
-let renderMetricsSelectors activeMetrics dispatch =
-    let renderSelector (metrics : DisplayMetrics) =
-        let active = metrics = activeMetrics
+
+let renderMetricTypeSelectors (activeMetricType: MetricType) dispatch =
+    let renderMetricTypeSelector (metricTypeToRender: MetricType) =
+        let active = metricTypeToRender = activeMetricType
         Html.div [
-            prop.text (I18N.chartText "ageGroupsTimeline" metrics.Id)
+            prop.onClick (fun _ -> dispatch metricTypeToRender)
             Utils.classes
-                [(true, "btn btn-sm metric-selector")
-                 (active, "metric-selector--selected selected")]
-            if not active then prop.onClick (fun _ -> dispatch metrics)
-            if active then prop.style [ style.backgroundColor "#808080" ]
-          ]
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text (I18N.tt "charts.common" metricTypeToRender.Id)
+        ]
 
     Html.div [
-        prop.className "metrics-selectors"
-        DisplayMetrics.All
-        |> Array.map renderSelector
+        prop.className "chart-display-property-selector"
+        MetricType.All
+        |> Array.map renderMetricTypeSelector
         |> prop.children
     ]
 
 let render state dispatch =
     Html.div [
+        Utils.renderChartTopControls [
+            renderMetricTypeSelectors
+                state.MetricType (MetricTypeChanged >> dispatch)
+            Utils.renderBarChartTypeSelector
+                state.ChartType (BarChartTypeChanged >> dispatch)
+        ]
         renderChartContainer state dispatch
-        renderMetricsSelectors state.Metrics (ChangeMetrics >> dispatch)
     ]
 
 let renderChart (props : {| data : StatsData |}) =

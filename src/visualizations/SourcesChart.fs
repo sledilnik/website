@@ -39,86 +39,77 @@ let countryColors =
 
 type DisplayType =
     | Quarantine
-    | QuarantineRelative
     | ByLocation
-    | ByLocationRelative
     | BySource
-    | BySourceRelative
     | BySourceCountry
-    | BySourceCountryRelative
   with
     static member All =
         [ ByLocation
-          ByLocationRelative
           BySource
-          BySourceRelative
           BySourceCountry
-          BySourceCountryRelative
-          Quarantine
-          QuarantineRelative ]
+          Quarantine ]
 
     static member Default = BySourceCountry
 
     member this.GetName =
         match this with
         | Quarantine                -> chartText "quarantine"
-        | QuarantineRelative        -> chartText "quarantineRelative"
         | ByLocation                -> chartText "byLocation"
-        | ByLocationRelative        -> chartText "byLocationRelative"
         | BySource                  -> chartText "bySource"
-        | BySourceRelative          -> chartText "bySourceRelative"
         | BySourceCountry           -> chartText "bySourceCountry"
-        | BySourceCountryRelative   -> chartText "bySourceCountryRelative"
 
 // ---------------------------
 // State management
 // ---------------------------
 type State =
-    { displayType: DisplayType
-      data: WeeklyStatsData
+    { DisplayType: DisplayType
+      ChartType: BarChartType
+      Data: WeeklyStatsData
       RangeSelectionButtonIndex: int }
 
 type Msg =
+    | DisplayTypeChanged of DisplayType
+    | BarChartTypeChanged of BarChartType
     | RangeSelectionChanged of int
-    | ChangeDisplayType of DisplayType
 
 let init data: State * Cmd<Msg> =
     let state =
-        { displayType = DisplayType.Default
-          data = data
+        { DisplayType = DisplayType.Default
+          ChartType = AbsoluteChart
+          Data = data
           RangeSelectionButtonIndex = 0 }
 
     state, Cmd.none
 
 let update (msg: Msg) (state: State): State * Cmd<Msg> =
     match msg with
+    | DisplayTypeChanged displayType ->
+        { state with DisplayType = displayType }, Cmd.none
+    | BarChartTypeChanged chartType ->
+        { state with ChartType = chartType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
-        { state with
-              RangeSelectionButtonIndex = buttonIndex },
-        Cmd.none
-    | ChangeDisplayType displayType ->
-        { state with displayType = displayType },
-        Cmd.none
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 // ---------------------------
 // Display Type Selection
 // ---------------------------
-let renderDisplaySelector state dt dispatch =
+let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
+    let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
+        let active = displayTypeToRender = activeDisplayType
+        Html.div [
+            prop.onClick (fun _ -> dispatch displayTypeToRender)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text displayTypeToRender.GetName
+        ]
+
     Html.div [
-        prop.onClick (fun _ -> ChangeDisplayType dt |> dispatch)
-        Utils.classes
-            [(true, "btn btn-sm metric-selector")
-             (state.displayType = dt, "metric-selector--selected") ]
-        prop.text dt.GetName
+        prop.className "chart-display-property-selector"
+        DisplayType.All
+        |> List.map renderDisplayTypeSelector
+        |> prop.children
     ]
-
-let renderDisplaySelectors state dispatch =
-    Html.div [
-        prop.className "metrics-selectors"
-        prop.children (
-            DisplayType.All
-            |> List.map (fun dt -> renderDisplaySelector state dt dispatch) ) ]
-
 type Series =
     | ConfirmedCases
     | SentToQuarantine
@@ -211,7 +202,7 @@ let splitOutFromTotal (split) (total)  =
 // Chart Rendering w Highcharts
 // ---------------------------
 let renderSeriesImportedByCountry (state: State) =
-    let countryCodesSortedByTotal = state.data |> Data.WeeklyStats.countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
+    let countryCodesSortedByTotal = state.Data |> Data.WeeklyStats.countryTotals |> Array.map (fun (countryCode, _) -> countryCode)
 
     let countriesToShowInLegend = Array.sub countryCodesSortedByTotal 0 10 |> Set.ofArray// Top 10
     //let countriesToShowInLegend = countriesToShowInLegend |> Set.ofArray // All
@@ -224,7 +215,7 @@ let renderSeriesImportedByCountry (state: State) =
                                                                       color = countryColors.[countryIndex% countryColors.Length]
                                                                       name = I18N.tt "country" countryCode
                                                                       showInLegend = Set.contains countryCode countriesToShowInLegend
-                                                                      data = state.data |> Seq.map (fun dp -> {|
+                                                                      data = state.Data |> Seq.map (fun dp -> {|
                                                                                                                x = jsDatesMiddle dp.Date dp.DateTo
                                                                                                                y = dp.ImportedFrom.Item countryCode
                                                                                                                fmtTotal = dp.ImportedFrom.Item countryCode |> string
@@ -295,7 +286,7 @@ let renderSeries state = Seq.mapi (fun legendIndex series ->
        animation = false
        legendIndex = legendIndex
        data =
-           state.data
+           state.Data
            |> Seq.map (fun dp ->
                {| x = jsDatesMiddle dp.Date dp.DateTo
                   y = getPoint dp
@@ -315,7 +306,7 @@ let renderChartOptions (state: State) dispatch =
 
         res
 
-    let lastWeek = state.data.[state.data.Length-1]
+    let lastWeek = state.Data.[state.Data.Length-1]
 
     let className = "covid19-weekly-stats"
     let baseOptions =
@@ -330,20 +321,22 @@ let renderChartOptions (state: State) dispatch =
                 className = className
                 events = pojo {| load = onLoadEvent(className) |}
             |}
-           series = (match state.displayType with
-                    | Quarantine -> Series.quarantine |> renderSeries state
-                    | QuarantineRelative -> Series.quarantineRelative |> renderSeries state
-                    | ByLocation | ByLocationRelative -> Series.byLocation |> renderSeries state
-                    | BySource | BySourceRelative -> Series.bySource |> renderSeries state
-                    | BySourceCountry | BySourceCountryRelative -> renderSeriesImportedByCountry state
+           series = (match state.DisplayType with
+                    | Quarantine ->
+                        match state.ChartType with
+                        | AbsoluteChart -> Series.quarantine |> renderSeries state
+                        | RelativeChart -> Series.quarantineRelative |> renderSeries state
+                    | ByLocation -> Series.byLocation |> renderSeries state
+                    | BySource -> Series.bySource |> renderSeries state
+                    | BySourceCountry -> renderSeriesImportedByCountry state
                     ) |> Seq.toArray
            yAxis =
                baseOptions.yAxis
                |> Array.map (fun yAxis -> {| yAxis with
                                               min = None
-                                              labels = match state.displayType with
-                                                       | QuarantineRelative | ByLocationRelative | BySourceRelative | BySourceCountryRelative ->pojo {| format = "{value} %" |}
-                                                       | _ -> pojo {| format = "{value}" |}
+                                              labels = match state.ChartType with
+                                                       | RelativeChart ->pojo {| format = "{value} %" |}
+                                                       | AbsoluteChart -> pojo {| format = "{value}" |}
                                               reversedStacks = true |})
            xAxis =
                baseOptions.xAxis
@@ -363,11 +356,11 @@ let renderChartOptions (state: State) dispatch =
                    {| shared = true
                       split = false
                       useHTML = true
-                      formatter = match state.displayType with
-                                  | Quarantine | QuarantineRelative -> fun () -> tooltipFormatter jsThis
-                                  | ByLocation | ByLocationRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
-                                  | BySource | BySourceRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
-                                  | BySourceCountry | BySourceCountryRelative -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
+                      formatter = match state.DisplayType with
+                                  | Quarantine -> fun () -> tooltipFormatter jsThis
+                                  | ByLocation -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
+                                  | BySource -> fun () -> tooltipFormatterWithTotal (chartText "totalConfirmed") jsThis
+                                  | BySourceCountry -> fun () -> tooltipFormatterWithTotal (chartText "totalImported") jsThis
                       |}
            legend =
                pojo
@@ -375,9 +368,9 @@ let renderChartOptions (state: State) dispatch =
                       layout = "horizontal" |}
            plotOptions = pojo {|
                                 column = pojo {|
-                                                stacking = match state.displayType with
-                                                           | QuarantineRelative | ByLocationRelative | BySourceRelative | BySourceCountryRelative -> "percent"
-                                                           | _ -> "normal" |}
+                                                stacking = match state.ChartType with
+                                                           | RelativeChart -> "percent"
+                                                           | AbsoluteChart -> "normal" |}
 
                                 |}
            rangeSelector = configureRangeSelector state.RangeSelectionButtonIndex
@@ -424,13 +417,18 @@ let renderChartContainer state dispatch =
 
 let render (state: State) dispatch =
     let disclaimer =
-        match state.displayType with
-        | Quarantine | QuarantineRelative -> "disclaimer"
+        match state.DisplayType with
+        | Quarantine -> "disclaimer"
         | _ -> "disclaimerGeneral"
 
     Html.div [
+        Utils.renderChartTopControls [
+            renderDisplaySelectors
+                state.DisplayType (DisplayTypeChanged >> dispatch)
+            Utils.renderBarChartTypeSelector
+                state.ChartType (BarChartTypeChanged >> dispatch)
+        ]
         renderChartContainer state dispatch
-        renderDisplaySelectors state dispatch
 
         Html.div [
             prop.className "disclaimer"

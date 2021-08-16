@@ -118,6 +118,13 @@ type Msg =
     | ContentTypeChanged of ContentType
     | DisplayTypeChanged of DisplayType
 
+type Query (query : obj) =
+    member this.Query = query
+    member this.Date =
+        match query?("date") with
+        | Some (dateStr : string) -> Some (DateTime.Parse dateStr)
+        | _ -> None
+
 let loadMunGeoJson =
     async {
         let! (statusCode, response) = Http.get munGeoJsonUrl
@@ -146,7 +153,9 @@ let loadRegGeoJson =
             | ex -> return GeoJsonLoaded (sprintf "Error loading map: %s" ex.Message |> Failure)
     }
 
-let processData (municipalitiesData : MunicipalitiesData) : Area seq =
+let processData (queryObj : obj) (municipalitiesData : MunicipalitiesData) : Area seq =
+    let query = Query(queryObj)
+
     let municipalityDataMap =
         seq {
             for municipalitiesDataPoint in municipalitiesData do
@@ -163,6 +172,10 @@ let processData (municipalitiesData : MunicipalitiesData) : Area seq =
         |> Seq.map (fun (name, dp) ->
             let totalCases =
                 dp
+                |> Seq.filter (fun dp ->
+                    match query.Date with
+                    | Some date -> dp.Date <= date
+                    | None -> true)
                 |> Seq.map (fun dp ->
                     { Date = dp.Date
                       TotalConfirmedCases = dp.TotalConfirmedCases
@@ -190,7 +203,9 @@ let processData (municipalitiesData : MunicipalitiesData) : Area seq =
                         Cases = Some cases }
     }
 
-let processRegionsData (regionsData : RegionsData) : Area seq =
+let processRegionsData (queryObj : obj) (regionsData : RegionsData) : Area seq =
+    let query = Query(queryObj)
+
     let regDataMap =
         seq {
             for regionsDataPoint in regionsData do
@@ -206,6 +221,10 @@ let processRegionsData (regionsData : RegionsData) : Area seq =
         |> Seq.map (fun (name, dp) ->
             let totalCases =
                 dp
+                |> Seq.filter (fun dp ->
+                    match query.Date with
+                    | Some date -> dp.Date <= date
+                    | None -> true)
                 |> Seq.map (fun dp ->
                     { Date = dp.Date
                       TotalConfirmedCases = dp.TotalConfirmedCases
@@ -952,12 +971,12 @@ let render (state : State) dispatch =
         ]
     ]
 
-let mapMunicipalitiesChart (props : {| data : MunicipalitiesData |}) =
-    let data = processData props.data
+let mapMunicipalitiesChart (props : {| query : obj ; data : MunicipalitiesData |}) =
+    let data = processData props.query props.data
     React.elmishComponent
         ("MapChart", init MunicipalityMap data, update, render)
 
-let mapRegionChart (props : {| data : RegionsData |}) =
-    let data = processRegionsData props.data
+let mapRegionChart (props : {| query : obj ; data : RegionsData |}) =
+    let data = processRegionsData props.query props.data
     React.elmishComponent
         ("MapChart", init RegionMap data, update, render)

@@ -817,7 +817,7 @@
     },
     "charts": {
         "common": {
-            "dataDate": "Podatki do: {{ date, %a., %e. %b. }}",
+            "dataDate": "Podatki do: {{ date, %a., %e. %b. %Y }}",
             "dataSource": "vir podatkov",
             "dsNIB": "Nacionalni inštitut za biologijo",
             "dsNIJZ": "NIJZ",
@@ -1224,11 +1224,7 @@
         },
         "ageGroupsTimeline": {
             "title": "Potrjeni primeri po starostnih skupinah",
-            "titleMenu": "Starost – delež",
-            "newCases": "Novi primeri",
-            "newCasesRelative": "Novi primeri (relativno)",
-            "activeCases": "Aktivni primeri",
-            "activeCasesRelative": "Aktivni primeri (relativno)"
+            "titleMenu": "Starost – delež"
         },
         "countriesActiveCasesPer100k": {
             "title": "Države: aktivni primeri na 100.000 prebivalcev",

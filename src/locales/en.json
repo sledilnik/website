@@ -199,7 +199,7 @@
     },
     "charts": {
         "common": {
-            "dataDate": "Data until: {{ date, %a., %e. %b. }}",
+            "dataDate": "Data until: {{ date, %a., %e. %b. %Y }}",
             "dataSource": "data source",
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
@@ -575,11 +575,7 @@
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
-            "titleMenu": "Age - share",
-            "newCases": "New cases",
-            "newCasesRelative": "New cases (relative)",
-            "activeCases": "Active cases",
-            "activeCasesRelative": "Active cases (relative)"
+            "titleMenu": "Age - share"
         },
         "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",

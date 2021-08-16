@@ -263,7 +263,7 @@
             "dsMZ": "Ministria e shëndetësisë",
             "dsOWD": "Our World in Data",
             "sortBy": "Rendit sipas:",
-            "dataDate": "Data deri: {{ date, %a., %e. %b. }}"
+            "dataDate": "Data deri: {{ date, %a., %e. %b. %Y }}"
         },
         "europe": {
             "restrictions": "Kufizimet dhe rastet e importuara",
@@ -283,10 +283,6 @@
         },
         "ageGroupsTimeline": {
             "title": "Rastet e konfirmuara sipas grupmoshës",
-            "activeCasesRelative": "Raste aktive (relative)",
-            "activeCases": "Raste aktive",
-            "newCasesRelative": "Raste të reja (relative)",
-            "newCases": "Raste të reja",
             "titleMenu": "Mosha - përqindja"
         },
         "countriesTotalDeathsPer100k": {

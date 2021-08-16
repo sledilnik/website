@@ -559,7 +559,7 @@
             "dsMZ": "Министерство за Здравје",
             "dsOWD": "Our World in Data",
             "sortBy": "Прикажи според:",
-            "dataDate": "До: {{ date, %a., %e. %b. }}",
+            "dataDate": "До: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Our World in Data и МЗ",
             "dsOWD_NIJZ": "Our World in Data &amp; ИЈЗ"
         },
@@ -785,10 +785,6 @@
         },
         "ageGroupsTimeline": {
             "title": "Потврдени случаи по старосни групи",
-            "activeCasesRelative": "Активни случаи (релативно)",
-            "activeCases": "Активни случаи",
-            "newCasesRelative": "Нови случаи (релативно)",
-            "newCases": "Нови случаи",
             "titleMenu": "Старост - удел"
         },
         "countriesDeathsPerCases": {

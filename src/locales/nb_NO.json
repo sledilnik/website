@@ -107,7 +107,7 @@
             "dsOWD_MZ": "Vår verden gjennom data og helseministeri",
             "dsOWD_NIJZ": "Vår verden gjennom data og NIJZ",
             "dsOWD": "Vår verden gjennom data",
-            "dataDate": "Data til: {{ date, %a., %e. %b. }}",
+            "dataDate": "Data til: {{ date, %a., %e. %b. %Y }}",
             "shortDateFormat": "%e. %b",
             "relative": "Relativ",
             "absolute": "Absolutt",
@@ -144,10 +144,6 @@
             "yAxisTitle": "Aktive tilfeller per 100k folk"
         },
         "ageGroupsTimeline": {
-            "activeCasesRelative": "Aktive tilfeller (relativ)",
-            "activeCases": "Aktive tilfeller",
-            "newCasesRelative": "Nye tilfeller (relativ)",
-            "newCases": "Nye tilfeller"
         },
         "ageGroups": {
             "confirmedCases": "Bekreftede tilfeller",
