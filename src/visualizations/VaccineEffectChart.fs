@@ -12,6 +12,21 @@ open Types
 
 let chartText = I18N.chartText "vaccineEffect"
 
+type DisplayType =
+    | ConfirmedCases
+    | HospitalizedCases
+  with
+    static member All =
+        [ ConfirmedCases
+          HospitalizedCases ]
+
+    static member Default = ConfirmedCases
+
+    member this.GetName =
+        match this with
+        | ConfirmedCases    -> chartText "confirmedCases"
+        | HospitalizedCases -> chartText "hospitalizedCases"
+
 type DataPoint =
     { Date: DateTime
       ProtectedWithVaccineToDate: int option
@@ -19,50 +34,51 @@ type DataPoint =
       ConfirmedOther: int option }
 
 type State =
-    { Data: StatsData
+    { DisplayType: DisplayType
       ChartType: BarChartType
+      Data: StatsData
+      WeeklyData : WeeklyStatsData
       RangeSelectionButtonIndex: int }
 
 type Msg =
+    | DisplayTypeChanged of DisplayType
     | BarChartTypeChanged of BarChartType
     | RangeSelectionChanged of int
 
 
-let init data : State * Cmd<Msg> =
+let init data weeklyData : State * Cmd<Msg> =
     let state =
-        { Data = data
+        { DisplayType = DisplayType.Default
           ChartType = AbsoluteChart
+          Data = data
+          WeeklyData = weeklyData
           RangeSelectionButtonIndex = 0 }
 
     state, Cmd.none
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | BarChartTypeChanged chartType -> { state with ChartType = chartType }, Cmd.none
+    | DisplayTypeChanged displayType ->
+        { state with DisplayType = displayType }, Cmd.none
+    | BarChartTypeChanged chartType ->
+        { state with ChartType = chartType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
-        { state with
-              RangeSelectionButtonIndex = buttonIndex },
-        Cmd.none
+        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
 
 let renderChartOptions state dispatch =
-
-// - ProtectedWithVaccineToDate:
-//   - Administered2nd + 14 dni (zamik)
-// - pairwise to Today:
-//   - ProtectedWithVaccine: VaccinatedConfirmedToDate
-//   - Others: ConfirmedToDate - VaccinatedConfirmedToDate
-// - calcRunningAverage
-// - per 100k:
-//    - ProtectedWithVaccine * 100k / ProtectedWithVaccineToDate
-//    - Others * 100k / (Population - ProtectedWithVaccineToDate)
 
     let sloPopulation =
         Utils.Dictionaries.regions.["si"].Population
         |> Utils.optionToInt
         |> float
 
-    let dailyData =
+    let get100k value population =
+        match value with
+        | Some v -> Some ((float)v * 100000. / (float) (population |> Utils.optionToInt))
+        | None -> None
+
+    let protectedWithVaccineMap =
         state.Data
         |> Seq.toArray
         |> Seq.mapi
@@ -75,6 +91,20 @@ let renderChartOptions state dispatch =
                             .ToDate
                     else
                         None
+                dp.Date, protectedWithVaccine)
+        |> Map.ofSeq
+
+    let protectedWithVaccineOnDay date =
+        match protectedWithVaccineMap.TryFind(date) with
+        | Some v -> v
+        | None -> None
+
+    let dailyData =
+        state.Data
+        |> Seq.toArray
+        |> Seq.mapi
+            (fun i dp ->
+                let protectedWithVaccine = protectedWithVaccineOnDay(dp.Date)
 
                 let confirmedProtectedWithVaccine =
                     match dp.Cases.VaccinatedConfirmedToDate with
@@ -96,79 +126,51 @@ let renderChartOptions state dispatch =
                             dp.Cases.ConfirmedToDate
                             |> Utils.subtractIntOption confirmedProtectedWithVaccine
                     | _ -> None
-                let get100k value population =
-                    match value with
-                    | Some v -> Some ((float)v * 100000. / (float) (population |> Utils.optionToInt))
-                    | None -> None
 
                 {| Date = dp.Date
                    ProtectedWithVaccineToDate = protectedWithVaccine
-                   ConfirmedProtectedWithVaccine = get100k confirmedProtectedWithVaccine protectedWithVaccine
-                   ConfirmedOther = get100k confirmedOther (Utils.Dictionaries.regions.["si"].Population |>Utils.subtractIntOption protectedWithVaccine) |})
+                   CasesProtectedWithVaccine = get100k confirmedProtectedWithVaccine protectedWithVaccine
+                   CasesOther = get100k confirmedOther (Utils.Dictionaries.regions.["si"].Population |>Utils.subtractIntOption protectedWithVaccine) |})
+
+    let weeklyData =
+        state.WeeklyData
+        |> Seq.toArray
+        |> Seq.mapi
+            (fun i dp ->
+                let protectedWithVaccine = protectedWithVaccineOnDay(dp.DateTo)
+
+                {| Date = dp.Date
+                   ProtectedWithVaccineToDate = protectedWithVaccine
+                   CasesProtectedWithVaccine = get100k dp.HospitalizedVaccinated protectedWithVaccine
+                   CasesOther = get100k dp.HospitalizedOther (Utils.Dictionaries.regions.["si"].Population |>Utils.subtractIntOption protectedWithVaccine) |})
 
     let allSeries =
+        let data, color =
+            match state.DisplayType with
+            | ConfirmedCases -> dailyData |> Seq.filter (fun dp -> dp.CasesOther.IsSome), "#d5c768"
+            | HospitalizedCases -> weeklyData |> Seq.filter (fun dp -> dp.CasesOther.IsSome), "#de9a5a"
         [ yield
-              pojo
-                  {| name = chartText "confirmedOther"
-                     ``type`` = "column"
-                     color = "#d5c768"
-                     yAxis = 0
-                     data =
-                         dailyData
-                         |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.ConfirmedOther))
-                         |> Seq.toArray |}
+            pojo
+            {| name = chartText "casesProtected"
+               ``type`` = "column"
+               color = "#0e5842"
+               yAxis = 0
+               data =
+                   data
+                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesProtectedWithVaccine))
+                   |> Seq.toArray |}
           yield
             pojo
-                {| name = chartText "confirmedProtected"
-                   ``type`` = "column"
-                   color = "#0e5842"
-                   yAxis = 0
-                   data =
-                       dailyData
-                       |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.ConfirmedProtectedWithVaccine))
-                       |> Seq.toArray |}
-          yield
-              pojo
-                  {| name = chartText "protectedWithVaccine"
-                     ``type`` = "line"
-                     color = "#0e5842"
-                     yAxis = 1
-                     data =
-                         dailyData
-                         |> Seq.map (fun dp -> (dp.Date |> jsTime12h, Math.Round((dp.ProtectedWithVaccineToDate |> Utils.optionToInt |> float) * 100. / sloPopulation, 1)))
-                         |> Seq.toArray |}
+            {| name = chartText "casesOther"
+               ``type`` = "column"
+               color = color
+               yAxis = 0
+               data =
+                   data
+                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesOther))
+                   |> Seq.toArray |}
+        ]
 
-          ]
-
-    let allYAxis =
-        [| {| index = 0
-              title = {| text = null |}
-              labels =
-                  pojo
-                      {| format = "{value}"
-                         align = "center"
-                         x = -15
-                         reserveSpace = false |}
-              max = None
-              showFirstLabel = false
-              opposite = true
-              visible = true
-              crosshair = true |}
-           |> pojo
-           {| index = 1
-              title = {| text = null |}
-              labels =
-                  pojo
-                      {| format = "{value}%"
-                         align = "center"
-                         x = 10
-                         reserveSpace = false |}
-              max = 100
-              showFirstLabel = false
-              opposite = false
-              visible = true
-              crosshair = true |}
-           |> pojo |]
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
         let res (_: Event) =
@@ -181,13 +183,16 @@ let renderChartOptions state dispatch =
         basicChartOptions Linear "covid19-vaccine-effect" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
     {| baseOptions with
-           yAxis = allYAxis
            series = List.toArray allSeries
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                       series =
-                          {| crisp = false
+                          {| stacking =
+                                match state.ChartType with
+                                | AbsoluteChart -> "normal"
+                                | RelativeChart -> "percent"
+                             crisp = false
                              borderWidth = 0
                              pointPadding = 0
                              groupPadding = 0 |} |}
@@ -211,17 +216,42 @@ let renderChartOptions state dispatch =
                                            [| {| labels = {| enabled = false |} |}
                                               {| labels = {| enabled = false |} |} |] |} |} |] |} |}
 
+
+
 let renderChartContainer state dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
                prop.children [ renderChartOptions state dispatch
+                               //renderBarChart state dispatch
                                |> chartFromWindow ] ]
 
-let render state dispatch =
-    Html.div [ Utils.renderChartTopControls [ Utils.renderBarChartTypeSelector
-                                                  state.ChartType
-                                                  (BarChartTypeChanged >> dispatch) ]
-               renderChartContainer state dispatch ]
+let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
+    let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
+        let active = displayTypeToRender = activeDisplayType
+        Html.div [
+            prop.onClick (fun _ -> dispatch displayTypeToRender)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text displayTypeToRender.GetName
+        ]
 
-let vaccineEffectChart (props: {| data: StatsData |}) =
-    React.elmishComponent ("VaccineEffectChart", init props.data, update, render)
+    Html.div [
+        prop.className "chart-display-property-selector"
+        DisplayType.All
+        |> List.map renderDisplayTypeSelector
+        |> prop.children
+    ]
+
+let render state dispatch =
+    Html.div [
+        Utils.renderChartTopControls [
+            renderDisplaySelectors
+                state.DisplayType (DisplayTypeChanged >> dispatch)
+            Utils.renderBarChartTypeSelector
+                state.ChartType (BarChartTypeChanged >> dispatch)
+        ]
+        renderChartContainer state dispatch ]
+
+let vaccineEffectChart (props: {| data: StatsData ; weeklyData: WeeklyStatsData |}) =
+    React.elmishComponent ("VaccineEffectChart", init props.data props.weeklyData, update, render)

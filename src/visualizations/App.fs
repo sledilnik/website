@@ -409,11 +409,15 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer =
                 fun state ->
-                    match state.StatsData with
-                    | NotAsked -> Html.none
-                    | Loading -> Utils.renderLoading
-                    | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView VaccineEffectChart.vaccineEffectChart {| data = data |} }
+                    match state.StatsData, state.WeeklyStatsData with
+                    | NotAsked, _ -> Html.none
+                    | _, NotAsked -> Html.none
+                    | Loading, _ -> Utils.renderLoading
+                    | _,  Loading -> Utils.renderLoading
+                    | Failure error, _ -> Utils.renderErrorLoading error
+                    | _, Failure error-> Utils.renderErrorLoading error
+                    | Success data, Success weeklyData ->
+                        lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
 
     let schools =
           { VisualizationType = Schools

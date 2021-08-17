@@ -1371,9 +1371,11 @@
         "vaccineEffect": {
             "title": "Primeri med cepljenimi",
             "titleMenu": "Cepljeni - primeri",
+            "confirmedCases": "Potrjeni primeri",
+            "hospitalizedCases": "Hospitalizirani",
             "protectedWithVaccine": "Zaščiteni s cepljenjem [%]",
-            "confirmedProtected": "Zaščiteni s cepljenjem",
-            "confirmedOther": "Ostali"
+            "casesProtected": "Zaščiteni s cepljenjem",
+            "casesOther": "Ostali"
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
