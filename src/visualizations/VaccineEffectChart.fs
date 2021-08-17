@@ -54,6 +54,7 @@ type DataPoint =
 type State =
     { DisplayType: DisplayType
       ChartType: ChartType
+      Label : string option
       Data: StatsData
       WeeklyData : WeeklyStatsData
       RangeSelectionButtonIndex: int }
@@ -61,6 +62,7 @@ type State =
 type Msg =
     | DisplayTypeChanged of DisplayType
     | ChartTypeChanged of ChartType
+    | LabelChanged of string option
     | RangeSelectionChanged of int
 
 
@@ -68,6 +70,7 @@ let init data weeklyData : State * Cmd<Msg> =
     let state =
         { DisplayType = DisplayType.Default
           ChartType = ChartType.Default
+          Label = None
           Data = data
           WeeklyData = weeklyData
           RangeSelectionButtonIndex = 0 }
@@ -80,6 +83,8 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with DisplayType = displayType }, Cmd.none
     | ChartTypeChanged chartType ->
         { state with ChartType = chartType }, Cmd.none
+    | LabelChanged label ->
+        { state with Label = label }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -188,7 +193,7 @@ let renderChartOptions state dispatch =
                    CasesProtectedWithVaccine = dp.HospitalizedVaccinated |> intOptionToFloat
                    CasesOther = dp.HospitalizedOther |> intOptionToFloat |})
 
-    let allSeries =
+    let multiple, allSeries =
         let color, data =
             match state.DisplayType with
             | ConfirmedCases ->
@@ -224,6 +229,12 @@ let renderChartOptions state dispatch =
                 weeklyHospitalizedData
                 |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                 |> Seq.map checkAndProcess100k
+
+        let multiple =
+            Utils.roundTo1Decimal
+                ((data |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.))
+                 / (data |> Seq.sumBy (fun dp -> dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)))
+        multiple,
         [ yield
             pojo
             {| name = chartText "casesOther"
@@ -262,6 +273,18 @@ let renderChartOptions state dispatch =
 
     let baseOptions =
         basicChartOptions Linear "covid19-vaccine-effect" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
+
+    match state.ChartType with
+    | Absolute ->
+        LabelChanged None |> dispatch
+    | _ ->
+        let label =
+            match state.DisplayType with
+            | ConfirmedCases ->
+                sprintf "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+            | HospitalizedCases ->
+                sprintf "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+        LabelChanged (Some label) |> dispatch
 
     {| baseOptions with
            series = List.toArray allSeries
@@ -359,7 +382,18 @@ let render state dispatch =
             renderChartTypeSelector
                 state.ChartType (ChartTypeChanged >> dispatch)
         ]
-        renderChartContainer state dispatch ]
+        renderChartContainer state dispatch
+
+        match state.Label with
+        | Some label ->
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text label
+                ]
+            ]
+        | None -> Html.none
+    ]
 
 let vaccineEffectChart (props: {| data: StatsData ; weeklyData: WeeklyStatsData |}) =
     React.elmishComponent ("VaccineEffectChart", init props.data props.weeklyData, update, render)
