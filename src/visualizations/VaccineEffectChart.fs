@@ -91,6 +91,13 @@ let renderChartOptions state dispatch =
         | Some i -> Some ((float) i)
         | None -> None
 
+    let addFloatOption a b =
+        match a,b with
+        | Some a, Some b -> Some (a+b)
+        | Some a, None -> Some (a)
+        | None, Some b -> Some (b)
+        | None, None -> None
+
     let get100k value population =
         match value with
         | Some v -> Some (v * 100000. / (float) (population |> Utils.optionToInt))
@@ -101,6 +108,7 @@ let renderChartOptions state dispatch =
         | Absolute -> dp
         | Absolute100k | Relative100k ->
             {| Date = dp.Date
+               DateTo = dp.DateTo
                ProtectedWithVaccineToDate = dp.ProtectedWithVaccineToDate
                CasesProtectedWithVaccine =
                     get100k
@@ -133,7 +141,7 @@ let renderChartOptions state dispatch =
         | Some v -> v
         | None -> None
 
-    let dailyData =
+    let dailyConfirmedData =
         state.Data
         |> Seq.toArray
         |> Seq.mapi
@@ -162,11 +170,12 @@ let renderChartOptions state dispatch =
                     | _ -> None
 
                 {| Date = dp.Date
+                   DateTo = dp.Date
                    ProtectedWithVaccineToDate = protectedWithVaccine
                    CasesProtectedWithVaccine = confirmedProtectedWithVaccine |> intOptionToFloat
                    CasesOther = confirmedOther |> intOptionToFloat |})
 
-    let weeklyData =
+    let weeklyHospitalizedData =
         state.WeeklyData
         |> Seq.toArray
         |> Seq.mapi
@@ -174,6 +183,7 @@ let renderChartOptions state dispatch =
                 let protectedWithVaccine = protectedWithVaccineOnDay(dp.DateTo)
 
                 {| Date = dp.Date
+                   DateTo = dp.DateTo
                    ProtectedWithVaccineToDate = protectedWithVaccine
                    CasesProtectedWithVaccine = dp.HospitalizedVaccinated |> intOptionToFloat
                    CasesOther = dp.HospitalizedOther |> intOptionToFloat |})
@@ -182,13 +192,36 @@ let renderChartOptions state dispatch =
         let color, data =
             match state.DisplayType with
             | ConfirmedCases ->
-                "#d5c768",
-                dailyData
-                |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
-                |> Seq.map checkAndProcess100k
+                let daily =
+                    dailyConfirmedData
+                    |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                    |> Seq.map checkAndProcess100k
+                let emptyRec =
+                    {| Date = DateTime.MaxValue
+                       DateTo = DateTime.MinValue
+                       ProtectedWithVaccineToDate = None
+                       CasesProtectedWithVaccine = None
+                       CasesOther = None |}
+                let mutable sumRec = emptyRec
+                let weeklyConfirmedData =
+                    seq {
+                        for dp in daily do
+                            sumRec <-
+                                {| Date = if dp.Date.CompareTo(sumRec.Date) < 0 then dp.Date else sumRec.Date
+                                   DateTo = if dp.DateTo.CompareTo(sumRec.Date) > 0 then dp.DateTo else sumRec.Date
+                                   ProtectedWithVaccineToDate = if dp.ProtectedWithVaccineToDate > sumRec.ProtectedWithVaccineToDate then dp.ProtectedWithVaccineToDate else sumRec.ProtectedWithVaccineToDate
+                                   CasesProtectedWithVaccine = sumRec.CasesProtectedWithVaccine |> addFloatOption dp.CasesProtectedWithVaccine
+                                   CasesOther = sumRec.CasesOther |> addFloatOption dp.CasesOther |}
+                            if dp.Date.DayOfWeek = DayOfWeek.Sunday then
+                                yield sumRec
+                                sumRec <- emptyRec
+                        if sumRec.Date <> DateTime.MaxValue then
+                            yield sumRec // flush
+                    }
+                "#d5c768", weeklyConfirmedData
             | HospitalizedCases ->
                 "#de9a5a",
-                weeklyData
+                weeklyHospitalizedData
                 |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                 |> Seq.map checkAndProcess100k
         [ yield
@@ -199,7 +232,7 @@ let renderChartOptions state dispatch =
                yAxis = 0
                data =
                    data
-                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesOther))
+                   |> Seq.map (fun dp -> (dp.DateTo |> jsTime12h, dp.CasesOther))
                    |> Seq.toArray |}
           yield
             pojo
@@ -209,7 +242,7 @@ let renderChartOptions state dispatch =
                yAxis = 0
                data =
                    data
-                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesProtectedWithVaccine))
+                   |> Seq.map (fun dp -> (dp.DateTo |> jsTime12h, dp.CasesProtectedWithVaccine))
                    |> Seq.toArray |}
         ]
 
