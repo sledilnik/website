@@ -229,20 +229,26 @@ let renderChartOptions state dispatch =
             {| name = chartText "casesOther"
                ``type`` = "column"
                color = color
-               yAxis = 0
                data =
                    data
-                   |> Seq.map (fun dp -> (dp.DateTo |> jsTime12h, dp.CasesOther))
+                   |> Seq.map (fun dp ->
+                       {| x = jsDatesMiddle dp.Date dp.DateTo
+                          y = dp.CasesOther
+                          fmtHeader =
+                              I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
                    |> Seq.toArray |}
           yield
             pojo
             {| name = chartText "casesProtected"
                ``type`` = "column"
                color = "#0e5842"
-               yAxis = 0
                data =
                    data
-                   |> Seq.map (fun dp -> (dp.DateTo |> jsTime12h, dp.CasesProtectedWithVaccine))
+                   |> Seq.map (fun dp ->
+                       {| x = jsDatesMiddle dp.Date dp.DateTo
+                          y = dp.CasesProtectedWithVaccine
+                          fmtHeader =
+                              I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
                    |> Seq.toArray |}
         ]
 
@@ -259,6 +265,14 @@ let renderChartOptions state dispatch =
 
     {| baseOptions with
            series = List.toArray allSeries
+           yAxis =
+               baseOptions.yAxis
+               |> Array.map (fun yAxis -> {| yAxis with
+                                              min = None
+                                              labels = match state.ChartType with
+                                                       | Relative100k ->pojo {| format = "{value} %" |}
+                                                       | _ -> pojo {| format = "{value}" |}
+                                              reversedStacks = true |})
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
@@ -279,8 +293,10 @@ let renderChartOptions state dispatch =
                pojo
                    {| shared = true
                       split = false
+                      useHTML = true
                       formatter = None
                       valueSuffix = ""
+                      headerFormat = "{point.fmtHeader}<br>"
                       xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
            responsive =
                pojo
