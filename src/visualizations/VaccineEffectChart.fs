@@ -233,7 +233,7 @@ let renderChartOptions state dispatch =
                    data
                    |> Seq.map (fun dp ->
                        {| x = jsDatesMiddle dp.Date dp.DateTo
-                          y = dp.CasesOther
+                          y = Utils.roundTo1Decimal (dp.CasesOther |> Option.defaultValue 0.)
                           fmtHeader =
                               I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
                    |> Seq.toArray |}
@@ -246,7 +246,7 @@ let renderChartOptions state dispatch =
                    data
                    |> Seq.map (fun dp ->
                        {| x = jsDatesMiddle dp.Date dp.DateTo
-                          y = dp.CasesProtectedWithVaccine
+                          y = Utils.roundTo1Decimal (dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)
                           fmtHeader =
                               I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
                    |> Seq.toArray |}
