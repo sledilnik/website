@@ -1373,6 +1373,9 @@
             "titleMenu": "Cepljeni - primeri",
             "confirmedCases": "Potrjeni primeri",
             "hospitalizedCases": "Hospitalizirani",
+            "absolute": "Absolutno",
+            "absolute100k": "Na 100.000 prebivalcev",
+            "relative100k": "Relativno na 100.000 prebivalcev",
             "protectedWithVaccine": "Zaščiteni s cepljenjem [%]",
             "casesProtected": "Zaščiteni s cepljenjem",
             "casesOther": "Ostali"

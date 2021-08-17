@@ -27,6 +27,24 @@ type DisplayType =
         | ConfirmedCases    -> chartText "confirmedCases"
         | HospitalizedCases -> chartText "hospitalizedCases"
 
+type ChartType =
+    | Absolute
+    | Absolute100k
+    | Relative100k
+  with
+    static member All =
+        [ Absolute
+          Absolute100k
+          Relative100k ]
+
+    static member Default = Absolute
+
+    member this.GetName =
+        match this with
+        | Absolute    -> chartText "absolute"
+        | Absolute100k -> chartText "absolute100k"
+        | Relative100k -> chartText "relative100k"
+
 type DataPoint =
     { Date: DateTime
       ProtectedWithVaccineToDate: int option
@@ -35,21 +53,21 @@ type DataPoint =
 
 type State =
     { DisplayType: DisplayType
-      ChartType: BarChartType
+      ChartType: ChartType
       Data: StatsData
       WeeklyData : WeeklyStatsData
       RangeSelectionButtonIndex: int }
 
 type Msg =
     | DisplayTypeChanged of DisplayType
-    | BarChartTypeChanged of BarChartType
+    | ChartTypeChanged of ChartType
     | RangeSelectionChanged of int
 
 
 let init data weeklyData : State * Cmd<Msg> =
     let state =
         { DisplayType = DisplayType.Default
-          ChartType = AbsoluteChart
+          ChartType = ChartType.Default
           Data = data
           WeeklyData = weeklyData
           RangeSelectionButtonIndex = 0 }
@@ -60,7 +78,7 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
     | DisplayTypeChanged displayType ->
         { state with DisplayType = displayType }, Cmd.none
-    | BarChartTypeChanged chartType ->
+    | ChartTypeChanged chartType ->
         { state with ChartType = chartType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
@@ -68,15 +86,31 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
 
 let renderChartOptions state dispatch =
 
-    let sloPopulation =
-        Utils.Dictionaries.regions.["si"].Population
-        |> Utils.optionToInt
-        |> float
+    let intOptionToFloat opt =
+        match opt with
+        | Some i -> Some ((float) i)
+        | None -> None
 
     let get100k value population =
         match value with
-        | Some v -> Some ((float)v * 100000. / (float) (population |> Utils.optionToInt))
+        | Some v -> Some (v * 100000. / (float) (population |> Utils.optionToInt))
         | None -> None
+
+    let checkAndProcess100k dp =
+        match state.ChartType with
+        | Absolute -> dp
+        | Absolute100k | Relative100k ->
+            {| Date = dp.Date
+               ProtectedWithVaccineToDate = dp.ProtectedWithVaccineToDate
+               CasesProtectedWithVaccine =
+                    get100k
+                        dp.CasesProtectedWithVaccine
+                        dp.ProtectedWithVaccineToDate
+               CasesOther =
+                    get100k
+                        dp.CasesOther
+                        (Utils.Dictionaries.regions.["si"].Population
+                         |> Utils.subtractIntOption dp.ProtectedWithVaccineToDate) |}
 
     let protectedWithVaccineMap =
         state.Data
@@ -129,8 +163,8 @@ let renderChartOptions state dispatch =
 
                 {| Date = dp.Date
                    ProtectedWithVaccineToDate = protectedWithVaccine
-                   CasesProtectedWithVaccine = get100k confirmedProtectedWithVaccine protectedWithVaccine
-                   CasesOther = get100k confirmedOther (Utils.Dictionaries.regions.["si"].Population |>Utils.subtractIntOption protectedWithVaccine) |})
+                   CasesProtectedWithVaccine = confirmedProtectedWithVaccine |> intOptionToFloat
+                   CasesOther = confirmedOther |> intOptionToFloat |})
 
     let weeklyData =
         state.WeeklyData
@@ -141,25 +175,23 @@ let renderChartOptions state dispatch =
 
                 {| Date = dp.Date
                    ProtectedWithVaccineToDate = protectedWithVaccine
-                   CasesProtectedWithVaccine = get100k dp.HospitalizedVaccinated protectedWithVaccine
-                   CasesOther = get100k dp.HospitalizedOther (Utils.Dictionaries.regions.["si"].Population |>Utils.subtractIntOption protectedWithVaccine) |})
+                   CasesProtectedWithVaccine = dp.HospitalizedVaccinated |> intOptionToFloat
+                   CasesOther = dp.HospitalizedOther |> intOptionToFloat |})
 
     let allSeries =
-        let data, color =
+        let color, data =
             match state.DisplayType with
-            | ConfirmedCases -> dailyData |> Seq.filter (fun dp -> dp.CasesOther.IsSome), "#d5c768"
-            | HospitalizedCases -> weeklyData |> Seq.filter (fun dp -> dp.CasesOther.IsSome), "#de9a5a"
+            | ConfirmedCases ->
+                "#d5c768",
+                dailyData
+                |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                |> Seq.map checkAndProcess100k
+            | HospitalizedCases ->
+                "#de9a5a",
+                weeklyData
+                |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                |> Seq.map checkAndProcess100k
         [ yield
-            pojo
-            {| name = chartText "casesProtected"
-               ``type`` = "column"
-               color = "#0e5842"
-               yAxis = 0
-               data =
-                   data
-                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesProtectedWithVaccine))
-                   |> Seq.toArray |}
-          yield
             pojo
             {| name = chartText "casesOther"
                ``type`` = "column"
@@ -168,6 +200,16 @@ let renderChartOptions state dispatch =
                data =
                    data
                    |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesOther))
+                   |> Seq.toArray |}
+          yield
+            pojo
+            {| name = chartText "casesProtected"
+               ``type`` = "column"
+               color = "#0e5842"
+               yAxis = 0
+               data =
+                   data
+                   |> Seq.map (fun dp -> (dp.Date |> jsTime12h, dp.CasesProtectedWithVaccine))
                    |> Seq.toArray |}
         ]
 
@@ -190,8 +232,8 @@ let renderChartOptions state dispatch =
                       series =
                           {| stacking =
                                 match state.ChartType with
-                                | AbsoluteChart -> "normal"
-                                | RelativeChart -> "percent"
+                                | Absolute | Absolute100k -> "normal"
+                                | Relative100k -> "percent"
                              crisp = false
                              borderWidth = 0
                              pointPadding = 0
@@ -222,8 +264,25 @@ let renderChartContainer state dispatch =
     Html.div [ prop.style [ style.height 480 ]
                prop.className "highcharts-wrapper"
                prop.children [ renderChartOptions state dispatch
-                               //renderBarChart state dispatch
                                |> chartFromWindow ] ]
+
+let renderChartTypeSelector (activeChartType: ChartType) dispatch =
+    let renderSelector (chartType : ChartType) =
+        let active = chartType = activeChartType
+        Html.div [
+            prop.text chartType.GetName
+            prop.onClick (fun _ -> dispatch chartType)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+        ]
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        ChartType.All
+        |> List.map renderSelector
+        |> prop.children
+    ]
 
 let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
     let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
@@ -248,8 +307,8 @@ let render state dispatch =
         Utils.renderChartTopControls [
             renderDisplaySelectors
                 state.DisplayType (DisplayTypeChanged >> dispatch)
-            Utils.renderBarChartTypeSelector
-                state.ChartType (BarChartTypeChanged >> dispatch)
+            renderChartTypeSelector
+                state.ChartType (ChartTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch ]
 
