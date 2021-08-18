@@ -414,6 +414,7 @@ let renderChartOptions state dispatch =
            legend =
                pojo
                    {| enabled = true
+                      reversed = true
                       layout = "horizontal" |}
            tooltip =
                pojo
