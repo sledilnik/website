@@ -54,7 +54,6 @@ type DataPoint =
 type State =
     { DisplayType: DisplayType
       ChartType: ChartType
-      Label : string option
       Data: StatsData
       WeeklyData : WeeklyStatsData
       RangeSelectionButtonIndex: int }
@@ -62,7 +61,6 @@ type State =
 type Msg =
     | DisplayTypeChanged of DisplayType
     | ChartTypeChanged of ChartType
-    | LabelChanged of string option
     | RangeSelectionChanged of int
 
 
@@ -70,7 +68,6 @@ let init data weeklyData : State * Cmd<Msg> =
     let state =
         { DisplayType = DisplayType.Default
           ChartType = ChartType.Default
-          Label = None
           Data = data
           WeeklyData = weeklyData
           RangeSelectionButtonIndex = 0 }
@@ -83,8 +80,6 @@ let update (msg: Msg) (state: State) : State * Cmd<Msg> =
         { state with DisplayType = displayType }, Cmd.none
     | ChartTypeChanged chartType ->
         { state with ChartType = chartType }, Cmd.none
-    | LabelChanged label ->
-        { state with Label = label }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
         { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
 
@@ -193,7 +188,7 @@ let renderChartOptions state dispatch =
                    CasesProtectedWithVaccine = dp.HospitalizedVaccinated |> intOptionToFloat
                    CasesOther = dp.HospitalizedOther |> intOptionToFloat |})
 
-    let multiple, allSeries =
+    let label, allSeries =
         let color, data =
             match state.DisplayType with
             | ConfirmedCases ->
@@ -230,11 +225,28 @@ let renderChartOptions state dispatch =
                 |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                 |> Seq.map checkAndProcess100k
 
-        let multiple =
-            Utils.roundTo1Decimal
-                ((data |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.))
-                 / (data |> Seq.sumBy (fun dp -> dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)))
-        multiple,
+        let startDate = data |> Seq.map (fun dp -> dp.Date) |> Seq.min
+        let endDate = data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max
+        let otherC = data |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
+        let protectedC = data |> Seq.sumBy (fun dp -> dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)
+        let multiple = Utils.roundTo1Decimal (otherC / protectedC)
+
+        let label =
+            match state.ChartType with
+            | Absolute ->
+                match state.DisplayType with
+                | ConfirmedCases ->
+                    sprintf "Od %s do %s je bilo med potrjenimi primeri %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb." (I18N.tOptions "days.date" {| date = startDate |}) (I18N.tOptions "days.date" {| date = endDate |}) protectedC otherC
+                | HospitalizedCases ->
+                    sprintf "Od %s do %s je bilo med hospitaliziranimi %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb." (I18N.tOptions "days.date" {| date = startDate |}) (I18N.tOptions "days.date" {| date = endDate |}) protectedC otherC
+            | _ ->
+                match state.DisplayType with
+                | ConfirmedCases ->
+                    sprintf "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+                | HospitalizedCases ->
+                    sprintf "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+
+        label,
         [ yield
             pojo
             {| name = chartText "casesOther"
@@ -274,18 +286,7 @@ let renderChartOptions state dispatch =
     let baseOptions =
         basicChartOptions Linear "covid19-vaccine-effect" state.RangeSelectionButtonIndex onRangeSelectorButtonClick
 
-    match state.ChartType with
-    | Absolute ->
-        LabelChanged None |> dispatch
-    | _ ->
-        let label =
-            match state.DisplayType with
-            | ConfirmedCases ->
-                sprintf "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
-            | HospitalizedCases ->
-                sprintf "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
-        LabelChanged (Some label) |> dispatch
-
+    label,
     {| baseOptions with
            series = List.toArray allSeries
            yAxis =
@@ -333,10 +334,17 @@ let renderChartOptions state dispatch =
 
 
 let renderChartContainer state dispatch =
-    Html.div [ prop.style [ style.height 480 ]
-               prop.className "highcharts-wrapper"
-               prop.children [ renderChartOptions state dispatch
-                               |> chartFromWindow ] ]
+    let label, chart = renderChartOptions state dispatch
+
+    Html.div [
+            Html.div [ prop.style [ style.height 480 ]
+                       prop.className "highcharts-wrapper"
+                       prop.children [ chart
+                                       |> chartFromWindow ] ]
+            Html.div [
+                prop.className "disclaimer"
+                prop.children [
+                    Html.text label ] ] ]
 
 let renderChartTypeSelector (activeChartType: ChartType) dispatch =
     let renderSelector (chartType : ChartType) =
@@ -383,16 +391,6 @@ let render state dispatch =
                 state.ChartType (ChartTypeChanged >> dispatch)
         ]
         renderChartContainer state dispatch
-
-        match state.Label with
-        | Some label ->
-            Html.div [
-                prop.className "disclaimer"
-                prop.children [
-                    Html.text label
-                ]
-            ]
-        | None -> Html.none
     ]
 
 let vaccineEffectChart (props: {| data: StatsData ; weeklyData: WeeklyStatsData |}) =

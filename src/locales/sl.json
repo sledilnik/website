@@ -1369,7 +1369,7 @@
             "janssen": "Janssen"
         },
         "vaccineEffect": {
-            "title": "Učinek cepiva na okužbe in hospitalizacije, tedensko",
+            "title": "Učinek cepljenja",
             "titleMenu": "Cepljenje - učinek",
             "confirmedCases": "Potrjeni primeri",
             "hospitalizedCases": "Hospitalizirani",
