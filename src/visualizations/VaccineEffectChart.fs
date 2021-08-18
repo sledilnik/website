@@ -32,7 +32,7 @@ type ChartType =
     | Relative100k
     static member All = [ Absolute; Absolute100k; Relative100k ]
 
-    static member Default = Absolute
+    static member Default = Relative100k
 
     member this.GetName =
         match this with
