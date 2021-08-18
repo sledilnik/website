@@ -329,8 +329,10 @@ let renderChartOptions state dispatch =
                     txtId
                     {| startDate = startDate
                        endDate = endDate
-                       protectedC = protectedC
-                       otherC = otherC |}
+                       protectedC = I18N.NumberFormat.formatNumber (protectedC)
+                       protectedPct = Utils.percentWith1DecimalFormatter (protectedC * 100. / (protectedC+otherC))
+                       otherC = I18N.NumberFormat.formatNumber (otherC)
+                       otherPct = Utils.percentWith1DecimalFormatter (otherC * 100. / (protectedC+otherC)) |}
             | _ ->
                 let txtId =
                     match state.DisplayType with
