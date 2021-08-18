@@ -225,8 +225,8 @@ let renderChartOptions state dispatch =
                 |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                 |> Seq.map checkAndProcess100k
 
-        let startDate = data |> Seq.map (fun dp -> dp.Date) |> Seq.min
-        let endDate = data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max
+        let startDate = data |> Seq.map (fun dp -> dp.Date) |> Seq.min // TODO: can we get it from raneg selector?
+        let endDate = data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max // TODO: can we get it from raneg selector?
         let otherC = data |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
         let protectedC = data |> Seq.sumBy (fun dp -> dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)
         let multiple = Utils.roundTo1Decimal (otherC / protectedC)
