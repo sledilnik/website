@@ -91,7 +91,7 @@ let tooltipFormatter jsThis =
 
         let s = StringBuilder()
 
-        let fmtHeader : string = points.[0]?point?fmtHeader
+        let fmtHeader: string = points.[0]?point?fmtHeader
 
         s.AppendFormat("<b>{0}</b><br/>", fmtHeader)
         |> ignore
@@ -320,31 +320,24 @@ let renderChartOptions state dispatch =
         let label =
             match state.ChartType with
             | Absolute ->
-                match state.DisplayType with
-                | ConfirmedCases ->
-                    sprintf
-                        "Od %s do %s je bilo med potrjenimi primeri %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb."
-                        (I18N.tOptions "days.date" {| date = startDate |})
-                        (I18N.tOptions "days.date" {| date = endDate |})
-                        protectedC
-                        otherC
-                | HospitalizedCases ->
-                    sprintf
-                        "Od %s do %s je bilo med hospitaliziranimi %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb."
-                        (I18N.tOptions "days.date" {| date = startDate |})
-                        (I18N.tOptions "days.date" {| date = endDate |})
-                        protectedC
-                        otherC
+                let txtId =
+                    match state.DisplayType with
+                    | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesAbs"
+                    | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesAbs"
+
+                I18N.tOptions
+                    txtId
+                    {| startDate = startDate
+                       endDate = endDate
+                       protectedC = protectedC
+                       otherC = otherC |}
             | _ ->
-                match state.DisplayType with
-                | ConfirmedCases ->
-                    sprintf
-                        "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito."
-                        multiple
-                | HospitalizedCases ->
-                    sprintf
-                        "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito."
-                        multiple
+                let txtId =
+                    match state.DisplayType with
+                    | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesRatio"
+                    | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesRatio"
+
+                I18N.tOptions txtId {| multiple = multiple |}
 
         label,
         [ yield

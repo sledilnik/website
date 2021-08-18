@@ -1376,6 +1376,10 @@
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 prebivalcev",
             "relative100k": "Relativno na 100.000 prebivalcev",
+            "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri {{protectedC}} cepljenih s polno zaščito in {{otherC}} ostalih oseb.",
+            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med hospitaliziranimi {{protectedC}} cepljenih s polno zaščito in {{otherC}} ostalih oseb.",
+            "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri {{multiple}}-krat toliko kot cepljenih s polno zaščito.",
+            "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitalizirano {{multiple}}-krat toliko kot cepljenih s polno zaščito.",
             "protectedWithVaccine": "Zaščiteni s cepljenjem [%]",
             "casesProtected": "Zaščiteni s cepljenjem",
             "casesOther": "Ostali"
