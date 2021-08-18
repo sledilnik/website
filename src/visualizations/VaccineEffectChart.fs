@@ -2,10 +2,12 @@
 module VaccineEffectChart
 
 open System
+open System.Text
 open Elmish
 open Feliz
 open Feliz.ElmishComponents
 open Browser
+open Fable.Core.JsInterop
 
 open Highcharts
 open Types
@@ -15,33 +17,26 @@ let chartText = I18N.chartText "vaccineEffect"
 type DisplayType =
     | ConfirmedCases
     | HospitalizedCases
-  with
-    static member All =
-        [ ConfirmedCases
-          HospitalizedCases ]
+    static member All = [ ConfirmedCases; HospitalizedCases ]
 
     static member Default = ConfirmedCases
 
     member this.GetName =
         match this with
-        | ConfirmedCases    -> chartText "confirmedCases"
+        | ConfirmedCases -> chartText "confirmedCases"
         | HospitalizedCases -> chartText "hospitalizedCases"
 
 type ChartType =
     | Absolute
     | Absolute100k
     | Relative100k
-  with
-    static member All =
-        [ Absolute
-          Absolute100k
-          Relative100k ]
+    static member All = [ Absolute; Absolute100k; Relative100k ]
 
     static member Default = Absolute
 
     member this.GetName =
         match this with
-        | Absolute    -> chartText "absolute"
+        | Absolute -> chartText "absolute"
         | Absolute100k -> chartText "absolute100k"
         | Relative100k -> chartText "relative100k"
 
@@ -55,7 +50,7 @@ type State =
     { DisplayType: DisplayType
       ChartType: ChartType
       Data: StatsData
-      WeeklyData : WeeklyStatsData
+      WeeklyData: WeeklyStatsData
       RangeSelectionButtonIndex: int }
 
 type Msg =
@@ -76,49 +71,104 @@ let init data weeklyData : State * Cmd<Msg> =
 
 let update (msg: Msg) (state: State) : State * Cmd<Msg> =
     match msg with
-    | DisplayTypeChanged displayType ->
-        { state with DisplayType = displayType }, Cmd.none
-    | ChartTypeChanged chartType ->
-        { state with ChartType = chartType }, Cmd.none
+    | DisplayTypeChanged displayType -> { state with DisplayType = displayType }, Cmd.none
+    | ChartTypeChanged chartType -> { state with ChartType = chartType }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
-        { state with RangeSelectionButtonIndex = buttonIndex }, Cmd.none
+        { state with
+              RangeSelectionButtonIndex = buttonIndex },
+        Cmd.none
+
+let tooltipFormatter jsThis =
+    let points: obj [] = jsThis?points
+
+    match points with
+    | [||] -> ""
+    | _ ->
+        // points.[0].point.y
+
+        let totalCases =
+            points |> Array.sumBy (fun point -> point?point?y)
+
+        let s = StringBuilder()
+
+        let fmtHeader : string = points.[0]?point?fmtHeader
+
+        s.AppendFormat("<b>{0}</b><br/>", fmtHeader)
+        |> ignore
+
+        s.Append "<table>" |> ignore
+
+        points
+        |> Array.iter
+            (fun dp ->
+                let label = dp?series?name
+                let color = dp?series?color
+                let value: float = dp?point?y
+
+                match value with
+                | 0. -> ()
+                | _ ->
+                    let format =
+                        "<td style='color: {0}'>●</td>"
+                        + "<td style='text-align: left; padding-left: 6px'>{1}:</td>"
+                        + "<td style='text-align: right; padding-left: 6px'>"
+                        + "<b>{2}</b></td>"
+                        + "<td style='text-align: right; padding-left: 10px'>"
+                        + "{3}</td>"
+
+                    let percentage =
+                        value * 100. / totalCases
+                        |> Utils.percentWith1DecimalFormatter
+
+                    s.Append "<tr>" |> ignore
+
+                    let tooltipStr =
+                        String.Format(format, color, label, I18N.NumberFormat.formatNumber (value), percentage)
+
+                    s.Append tooltipStr |> ignore
+                    s.Append "</tr>" |> ignore)
+
+        s.Append "</table>" |> ignore
+        s.ToString()
 
 
 let renderChartOptions state dispatch =
 
     let intOptionToFloat opt =
         match opt with
-        | Some i -> Some ((float) i)
+        | Some i -> Some((float) i)
         | None -> None
 
     let addFloatOption a b =
-        match a,b with
-        | Some a, Some b -> Some (a+b)
-        | Some a, None -> Some (a)
-        | None, Some b -> Some (b)
+        match a, b with
+        | Some a, Some b -> Some(a + b)
+        | Some a, None -> Some(a)
+        | None, Some b -> Some(b)
         | None, None -> None
 
     let get100k value population =
         match value with
-        | Some v -> Some (v * 100000. / (float) (population |> Utils.optionToInt))
+        | Some v ->
+            Some(
+                v * 100000.
+                / (float) (population |> Utils.optionToInt)
+            )
         | None -> None
 
     let checkAndProcess100k dp =
         match state.ChartType with
         | Absolute -> dp
-        | Absolute100k | Relative100k ->
+        | Absolute100k
+        | Relative100k ->
             {| Date = dp.Date
                DateTo = dp.DateTo
                ProtectedWithVaccineToDate = dp.ProtectedWithVaccineToDate
-               CasesProtectedWithVaccine =
-                    get100k
-                        dp.CasesProtectedWithVaccine
-                        dp.ProtectedWithVaccineToDate
+               CasesProtectedWithVaccine = get100k dp.CasesProtectedWithVaccine dp.ProtectedWithVaccineToDate
                CasesOther =
-                    get100k
-                        dp.CasesOther
-                        (Utils.Dictionaries.regions.["si"].Population
-                         |> Utils.subtractIntOption dp.ProtectedWithVaccineToDate) |}
+                   get100k
+                       dp.CasesOther
+                       (Utils.Dictionaries.regions.["si"].Population
+                        |> Utils.subtractIntOption dp.ProtectedWithVaccineToDate) |}
 
     let protectedWithVaccineMap =
         state.Data
@@ -133,6 +183,7 @@ let renderChartOptions state dispatch =
                             .ToDate
                     else
                         None
+
                 dp.Date, protectedWithVaccine)
         |> Map.ofSeq
 
@@ -146,7 +197,7 @@ let renderChartOptions state dispatch =
         |> Seq.toArray
         |> Seq.mapi
             (fun i dp ->
-                let protectedWithVaccine = protectedWithVaccineOnDay(dp.Date)
+                let protectedWithVaccine = protectedWithVaccineOnDay (dp.Date)
 
                 let confirmedProtectedWithVaccine =
                     match dp.Cases.VaccinatedConfirmedToDate with
@@ -157,6 +208,7 @@ let renderChartOptions state dispatch =
                         else
                             dp.Cases.VaccinatedConfirmedToDate
                     | _ -> None
+
                 let confirmedOther =
                     match dp.Cases.ConfirmedToDate with
                     | Some v ->
@@ -180,7 +232,7 @@ let renderChartOptions state dispatch =
         |> Seq.toArray
         |> Seq.mapi
             (fun i dp ->
-                let protectedWithVaccine = protectedWithVaccineOnDay(dp.DateTo)
+                let protectedWithVaccine = protectedWithVaccineOnDay (dp.DateTo)
 
                 {| Date = dp.Date
                    DateTo = dp.DateTo
@@ -196,28 +248,48 @@ let renderChartOptions state dispatch =
                     dailyConfirmedData
                     |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                     |> Seq.map checkAndProcess100k
+
                 let emptyRec =
                     {| Date = DateTime.MaxValue
                        DateTo = DateTime.MinValue
                        ProtectedWithVaccineToDate = None
                        CasesProtectedWithVaccine = None
                        CasesOther = None |}
+
                 let mutable sumRec = emptyRec
+
                 let weeklyConfirmedData =
                     seq {
                         for dp in daily do
                             sumRec <-
-                                {| Date = if dp.Date.CompareTo(sumRec.Date) < 0 then dp.Date else sumRec.Date
-                                   DateTo = if dp.DateTo.CompareTo(sumRec.Date) > 0 then dp.DateTo else sumRec.Date
-                                   ProtectedWithVaccineToDate = if dp.ProtectedWithVaccineToDate > sumRec.ProtectedWithVaccineToDate then dp.ProtectedWithVaccineToDate else sumRec.ProtectedWithVaccineToDate
-                                   CasesProtectedWithVaccine = sumRec.CasesProtectedWithVaccine |> addFloatOption dp.CasesProtectedWithVaccine
+                                {| Date =
+                                       if dp.Date.CompareTo(sumRec.Date) < 0 then
+                                           dp.Date
+                                       else
+                                           sumRec.Date
+                                   DateTo =
+                                       if dp.DateTo.CompareTo(sumRec.Date) > 0 then
+                                           dp.DateTo
+                                       else
+                                           sumRec.Date
+                                   ProtectedWithVaccineToDate =
+                                       if dp.ProtectedWithVaccineToDate > sumRec.ProtectedWithVaccineToDate then
+                                           dp.ProtectedWithVaccineToDate
+                                       else
+                                           sumRec.ProtectedWithVaccineToDate
+                                   CasesProtectedWithVaccine =
+                                       sumRec.CasesProtectedWithVaccine
+                                       |> addFloatOption dp.CasesProtectedWithVaccine
                                    CasesOther = sumRec.CasesOther |> addFloatOption dp.CasesOther |}
+
                             if dp.Date.DayOfWeek = DayOfWeek.Sunday then
                                 yield sumRec
                                 sumRec <- emptyRec
+
                         if sumRec.Date <> DateTime.MaxValue then
                             yield sumRec // flush
                     }
+
                 "#d5c768", weeklyConfirmedData
             | HospitalizedCases ->
                 "#de9a5a",
@@ -225,55 +297,88 @@ let renderChartOptions state dispatch =
                 |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
                 |> Seq.map checkAndProcess100k
 
-        let startDate = data |> Seq.map (fun dp -> dp.Date) |> Seq.min // TODO: can we get it from raneg selector?
-        let endDate = data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max // TODO: can we get it from raneg selector?
-        let otherC = data |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
-        let protectedC = data |> Seq.sumBy (fun dp -> dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)
-        let multiple = Utils.roundTo1Decimal (otherC / protectedC)
+        let startDate =
+            data |> Seq.map (fun dp -> dp.Date) |> Seq.min // TODO: can we get it from raneg selector?
+
+        let endDate =
+            data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max // TODO: can we get it from raneg selector?
+
+        let otherC =
+            data
+            |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
+
+        let protectedC =
+            data
+            |> Seq.sumBy
+                (fun dp ->
+                    dp.CasesProtectedWithVaccine
+                    |> Option.defaultValue 0.)
+
+        let multiple =
+            Utils.roundTo1Decimal (otherC / protectedC)
 
         let label =
             match state.ChartType with
             | Absolute ->
                 match state.DisplayType with
                 | ConfirmedCases ->
-                    sprintf "Od %s do %s je bilo med potrjenimi primeri %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb." (I18N.tOptions "days.date" {| date = startDate |}) (I18N.tOptions "days.date" {| date = endDate |}) protectedC otherC
+                    sprintf
+                        "Od %s do %s je bilo med potrjenimi primeri %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb."
+                        (I18N.tOptions "days.date" {| date = startDate |})
+                        (I18N.tOptions "days.date" {| date = endDate |})
+                        protectedC
+                        otherC
                 | HospitalizedCases ->
-                    sprintf "Od %s do %s je bilo med hospitaliziranimi %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb." (I18N.tOptions "days.date" {| date = startDate |}) (I18N.tOptions "days.date" {| date = endDate |}) protectedC otherC
+                    sprintf
+                        "Od %s do %s je bilo med hospitaliziranimi %0.0f cepljenih s polno zaščito in %0.0f ostalih oseb."
+                        (I18N.tOptions "days.date" {| date = startDate |})
+                        (I18N.tOptions "days.date" {| date = endDate |})
+                        protectedC
+                        otherC
             | _ ->
                 match state.DisplayType with
                 | ConfirmedCases ->
-                    sprintf "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+                    sprintf
+                        "Necepljenih in delno cepljenih je med potrjenimi primeri %0.1f-krat toliko kot cepljenih s polno zaščito."
+                        multiple
                 | HospitalizedCases ->
-                    sprintf "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito." multiple
+                    sprintf
+                        "Necepljenih in delno cepljenih je hospitalizirano %0.1f-krat toliko kot cepljenih s polno zaščito."
+                        multiple
 
         label,
         [ yield
             pojo
-            {| name = chartText "casesOther"
-               ``type`` = "column"
-               color = color
-               data =
-                   data
-                   |> Seq.map (fun dp ->
-                       {| x = jsDatesMiddle dp.Date dp.DateTo
-                          y = Utils.roundTo1Decimal (dp.CasesOther |> Option.defaultValue 0.)
-                          fmtHeader =
-                              I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
-                   |> Seq.toArray |}
+                {| name = chartText "casesOther"
+                   ``type`` = "column"
+                   color = color
+                   data =
+                       data
+                       |> Seq.map
+                           (fun dp ->
+                               {| x = jsDatesMiddle dp.Date dp.DateTo
+                                  y = Utils.roundTo1Decimal (dp.CasesOther |> Option.defaultValue 0.)
+                                  fmtHeader =
+                                      I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
+                       |> Seq.toArray |}
           yield
-            pojo
-            {| name = chartText "casesProtected"
-               ``type`` = "column"
-               color = "#0e5842"
-               data =
-                   data
-                   |> Seq.map (fun dp ->
-                       {| x = jsDatesMiddle dp.Date dp.DateTo
-                          y = Utils.roundTo1Decimal (dp.CasesProtectedWithVaccine |> Option.defaultValue 0.)
-                          fmtHeader =
-                              I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |} )
-                   |> Seq.toArray |}
-        ]
+              pojo
+                  {| name = chartText "casesProtected"
+                     ``type`` = "column"
+                     color = "#0e5842"
+                     data =
+                         data
+                         |> Seq.map
+                             (fun dp ->
+                                 {| x = jsDatesMiddle dp.Date dp.DateTo
+                                    y =
+                                        Utils.roundTo1Decimal (
+                                            dp.CasesProtectedWithVaccine
+                                            |> Option.defaultValue 0.
+                                        )
+                                    fmtHeader =
+                                        I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
+                         |> Seq.toArray |} ]
 
 
     let onRangeSelectorButtonClick (buttonIndex: int) =
@@ -291,20 +396,24 @@ let renderChartOptions state dispatch =
            series = List.toArray allSeries
            yAxis =
                baseOptions.yAxis
-               |> Array.map (fun yAxis -> {| yAxis with
-                                              min = None
-                                              labels = match state.ChartType with
-                                                       | Relative100k ->pojo {| format = "{value} %" |}
-                                                       | _ -> pojo {| format = "{value}" |}
-                                              reversedStacks = true |})
+               |> Array.map
+                   (fun yAxis ->
+                       {| yAxis with
+                              min = None
+                              labels =
+                                  match state.ChartType with
+                                  | Relative100k -> pojo {| format = "{value} %" |}
+                                  | _ -> pojo {| format = "{value}" |}
+                              reversedStacks = true |})
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                       series =
                           {| stacking =
-                                match state.ChartType with
-                                | Absolute | Absolute100k -> "normal"
-                                | Relative100k -> "percent"
+                                 match state.ChartType with
+                                 | Absolute
+                                 | Absolute100k -> "normal"
+                                 | Relative100k -> "percent"
                              crisp = false
                              borderWidth = 0
                              pointPadding = 0
@@ -315,13 +424,10 @@ let renderChartOptions state dispatch =
                       layout = "horizontal" |}
            tooltip =
                pojo
-                   {| shared = true
+                   {| formatter = fun () -> tooltipFormatter jsThis
+                      shared = true
                       split = false
-                      useHTML = true
-                      formatter = None
-                      valueSuffix = ""
-                      headerFormat = "{point.fmtHeader}<br>"
-                      xDateFormat = "<b>" + I18N.t "charts.common.dateFormat" + "</b>" |}
+                      useHTML = true |}
            responsive =
                pojo
                    {| rules =
@@ -336,62 +442,47 @@ let renderChartOptions state dispatch =
 let renderChartContainer state dispatch =
     let label, chart = renderChartOptions state dispatch
 
-    Html.div [
-            Html.div [ prop.style [ style.height 480 ]
-                       prop.className "highcharts-wrapper"
-                       prop.children [ chart
-                                       |> chartFromWindow ] ]
-            Html.div [
-                prop.className "disclaimer"
-                prop.children [
-                    Html.text label ] ] ]
+    Html.div [ Html.div [ prop.style [ style.height 480 ]
+                          prop.className "highcharts-wrapper"
+                          prop.children [ chart |> chartFromWindow ] ]
+               Html.div [ prop.className "disclaimer"
+                          prop.children [ Html.text label ] ] ]
 
 let renderChartTypeSelector (activeChartType: ChartType) dispatch =
-    let renderSelector (chartType : ChartType) =
+    let renderSelector (chartType: ChartType) =
         let active = chartType = activeChartType
-        Html.div [
-            prop.text chartType.GetName
-            prop.onClick (fun _ -> dispatch chartType)
-            Utils.classes
-                [(true, "chart-display-property-selector__item")
-                 (active, "selected") ]
-        ]
 
-    Html.div [
-        prop.className "chart-display-property-selector"
-        ChartType.All
-        |> List.map renderSelector
-        |> prop.children
-    ]
+        Html.div [ prop.text chartType.GetName
+                   prop.onClick (fun _ -> dispatch chartType)
+                   Utils.classes [ (true, "chart-display-property-selector__item")
+                                   (active, "selected") ] ]
+
+    Html.div [ prop.className "chart-display-property-selector"
+               ChartType.All
+               |> List.map renderSelector
+               |> prop.children ]
 
 let renderDisplaySelectors (activeDisplayType: DisplayType) dispatch =
     let renderDisplayTypeSelector (displayTypeToRender: DisplayType) =
         let active = displayTypeToRender = activeDisplayType
-        Html.div [
-            prop.onClick (fun _ -> dispatch displayTypeToRender)
-            Utils.classes
-                [(true, "chart-display-property-selector__item")
-                 (active, "selected") ]
-            prop.text displayTypeToRender.GetName
-        ]
 
-    Html.div [
-        prop.className "chart-display-property-selector"
-        DisplayType.All
-        |> List.map renderDisplayTypeSelector
-        |> prop.children
-    ]
+        Html.div [ prop.onClick (fun _ -> dispatch displayTypeToRender)
+                   Utils.classes [ (true, "chart-display-property-selector__item")
+                                   (active, "selected") ]
+                   prop.text displayTypeToRender.GetName ]
+
+    Html.div [ prop.className "chart-display-property-selector"
+               DisplayType.All
+               |> List.map renderDisplayTypeSelector
+               |> prop.children ]
 
 let render state dispatch =
-    Html.div [
-        Utils.renderChartTopControls [
-            renderDisplaySelectors
-                state.DisplayType (DisplayTypeChanged >> dispatch)
-            renderChartTypeSelector
-                state.ChartType (ChartTypeChanged >> dispatch)
-        ]
-        renderChartContainer state dispatch
-    ]
+    Html.div [ Utils.renderChartTopControls [ renderDisplaySelectors state.DisplayType (DisplayTypeChanged >> dispatch)
+                                              renderChartTypeSelector state.ChartType (ChartTypeChanged >> dispatch) ]
+               renderChartContainer state dispatch ]
 
-let vaccineEffectChart (props: {| data: StatsData ; weeklyData: WeeklyStatsData |}) =
+let vaccineEffectChart
+    (props: {| data: StatsData
+               weeklyData: WeeklyStatsData |})
+    =
     React.elmishComponent ("VaccineEffectChart", init props.data props.weeklyData, update, render)
