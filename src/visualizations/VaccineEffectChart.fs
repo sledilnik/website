@@ -339,7 +339,7 @@ let renderChartOptions state dispatch =
                     | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesRatio"
                     | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesRatio"
 
-                I18N.tOptions txtId {| multiple = multiple |}
+                I18N.tOptions txtId {| multiple = I18N.NumberFormat.formatNumber (multiple) |}
 
         label,
         [ yield
