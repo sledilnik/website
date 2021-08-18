@@ -1382,7 +1382,7 @@
             "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitalizirano **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "protectedWithVaccine": "Zaščiteni s cepljenjem [%]",
             "casesProtected": "Zaščiteni s cepljenjem",
-            "casesOther": "Ostali"
+            "casesOther": "Ostali (necepljeni, delno cepljeni)"
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",

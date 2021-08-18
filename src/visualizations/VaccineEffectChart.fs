@@ -430,8 +430,7 @@ let renderChartOptions state dispatch =
                           [| {| condition = {| maxWidth = 768 |}
                                 chartOptions =
                                     {| yAxis =
-                                           [| {| labels = {| enabled = false |} |}
-                                              {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                           [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
 
 
 
