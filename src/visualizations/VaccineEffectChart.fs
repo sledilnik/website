@@ -65,7 +65,7 @@ let init data weeklyData : State * Cmd<Msg> =
           ChartType = ChartType.Default
           Data = data
           WeeklyData = weeklyData
-          RangeSelectionButtonIndex = 0 }
+          RangeSelectionButtonIndex = 3 }
 
     state, Cmd.none
 
