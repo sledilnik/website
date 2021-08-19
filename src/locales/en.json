@@ -764,11 +764,11 @@
             "absolute": "Absolute",
             "absolute100k": "Per 100.000 People in Group",
             "relative100k": "Relative per 100.000 People in Group",
-            "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
-            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
-            "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
-            "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
-            "casesProtected": "Protected with Vaccine",
+            "confirmedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
+            "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}).",
+            "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
+            "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
+            "casesProtected": "Protected with Vaccination",
             "casesOther": "Other (unvaccinated, partially vaccinated)"
         },
         "schools": {
