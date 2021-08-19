@@ -1029,7 +1029,7 @@
         },
         "europe": {
             "noData": "Nessun dato",
-            "statusRed": "guariti/vaccinati o test PCR e quarantena di 10 giorni",
+            "statusRed": "guariti/vaccinati o quarantena di 10 giorni (richiesto test negativo PCR per gli stranieri senza residenza)",
             "statusOrange": "guariti/vaccinati o PCR/TAR negativo o quarantena di 10 giorni",
             "statusGreen": "nessuna restrizione",
             "statusNone": "-",
@@ -1042,7 +1042,7 @@
             "title": "COVID-19 Situazione in Europa",
             "titleMenu": "Europa - situazione",
             "weeklyIncrease": "Aumento settimanale",
-            "statusDarkRed": "quarantena di 10 giorni, divieto di ammissione per gli stranieri senza residenza"
+            "statusDarkRed": "guariti/vaccinati o quarantena di 10 giorni (divieto di ammissione per gli stranieri senza residenza)"
         },
         "map": {
             "confirmedCases": "Casi confermati",
