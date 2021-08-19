@@ -303,6 +303,9 @@ let renderChartOptions state dispatch =
         let endDate =
             data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max // TODO: can we get it from raneg selector?
 
+        let totalProtected =
+            data |> Seq.map (fun dp -> dp.ProtectedWithVaccineToDate) |> Seq.last |> Option.defaultValue 0
+
         let otherC =
             data
             |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
@@ -329,9 +332,11 @@ let renderChartOptions state dispatch =
                     txtId
                     {| startDate = startDate
                        endDate = endDate
-                       protectedC = I18N.NumberFormat.formatNumber (protectedC)
+                       protectedToDatePct = Utils.percentWith3DecimalFormatter (protectedC * 100. / (float)totalProtected)
+                       totalProtected = I18N.NumberFormat.formatNumber totalProtected
+                       protectedC = I18N.NumberFormat.formatNumber protectedC
                        protectedPct = Utils.percentWith1DecimalFormatter (protectedC * 100. / (protectedC+otherC))
-                       otherC = I18N.NumberFormat.formatNumber (otherC)
+                       otherC = I18N.NumberFormat.formatNumber otherC
                        otherPct = Utils.percentWith1DecimalFormatter (otherC * 100. / (protectedC+otherC)) |}
             | _ ->
                 let txtId =
@@ -339,7 +344,9 @@ let renderChartOptions state dispatch =
                     | ConfirmedCases -> "charts.vaccineEffect.confirmedCasesRatio"
                     | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesRatio"
 
-                I18N.tOptions txtId {| multiple = I18N.NumberFormat.formatNumber (multiple) |}
+                I18N.tOptions
+                    txtId
+                    {| multiple = I18N.NumberFormat.formatNumber multiple |}
 
         label,
         [ yield
