@@ -744,6 +744,10 @@
         "liftMasksOnEvents": {
             "title": "Maske",
             "description": "Sprostitev ukrepov: maske niso več obvezne na javnih prireditvah (kulturne, športne) in v gostinski, kongresni in igralniški dejavnosti,<br>kjer velja pogoj PCT za obiskovalce. Sprostijo se omejitve kapacitet na športnih in kulturnih dogodkih."
+        },
+        "masksOnEvents": {
+            "title": "Maske",
+            "description": "Maske obvezne na javnih kulturnih prireditvah."
         }
     },
     "phase": {

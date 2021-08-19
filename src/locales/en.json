@@ -1235,7 +1235,11 @@
         },
         "liftMasksOnEvents": {
             "title": "Masks",
-            "description": "EEasing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
+            "description": "Easing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
+        },
+        "masksOnEvents": {
+            "title": "Masks",
+            "description": "Mask requirement at public cultural events."
         }
     },
     "days": {
