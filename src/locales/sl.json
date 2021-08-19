@@ -1380,7 +1380,6 @@
             "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitalizirano **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitalizirano **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
             "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitalizirano **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
-            "protectedWithVaccine": "Zaščiteni s cepljenjem [%]",
             "casesProtected": "Zaščiteni s cepljenjem",
             "casesOther": "Ostali (necepljeni, delno cepljeni)"
         },
