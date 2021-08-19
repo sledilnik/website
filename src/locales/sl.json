@@ -1368,6 +1368,21 @@
             "disabled": "Podatki o cepljenju se od 25. 3. 2020 NE osvežujejo, saj niso več na voljo v strojno berljivi obliki. Te podatke lahko trenutno spremljate samo na strani <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a>.",
             "janssen": "Janssen"
         },
+        "vaccineEffect": {
+            "title": "Učinek cepljenja",
+            "titleMenu": "Cepljenje - učinek",
+            "confirmedCases": "Potrjeni primeri",
+            "hospitalizedCases": "Hospitalizirani",
+            "absolute": "Absolutno",
+            "absolute100k": "Na 100.000 oseb v skupini",
+            "relative100k": "Relativno na 100.000 oseb v skupini",
+            "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
+            "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
+            "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
+            "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
+            "casesProtected": "Zaščiteni s cepljenjem",
+            "casesOther": "Ostali (necepljeni, delno cepljeni)"
+        },
         "schools": {
             "title": "Primeri v šolah in vrtcih",
             "titleMenu": "Šole, vrtci - primeri",
@@ -2022,6 +2037,10 @@
         "vaccination-chart": {
             "question": "Kaj kaže graf \"Cepljenje\"?",
             "answer": "[Graf](/sl/stats#vaccination-chart) prikazuje dobave cepiva in potek cepljenja. Osnovni pogled *Porabljena cepiva* prikazuje skupno število dobavljenih odmerkov cepiva, uporabljenih odmerkov in število oseb, ki je prejelo prvi in drugi odmerek cepiva.\n\nV pogledu *Dobavljena cepiva* pa lahko vidide število dobavljenih odmerkov po proizvajalcu."
+        },
+        "vaccine-effect-chart": {
+            "question": "Kaj kaže graf \"Učinek cepljenja\"?",
+            "answer": "[Graf](/sl/stats#vaccine-effect-chart) prikazuje podatke o potrjenih primerih in hospitalizacijah med osebami s polno zaščito s cepljenjem in ostalimi (necepljenimi in delno cepljenimi). Med osebe s polno zaščito s cepljenjem štejejo posamezniki, ki so cepljeni z vsemi predpisanimi odmerki cepiva in je od zadnjega odmerka cepiva preteklo vsaj 14 dni za vzpostavitev polne zaščite.\n\nOsnovni pogled je *Relativno na 100.000 oseb v skupini*: primeri v vsaki od skupin so uteženi na 100.000 oseb v posamezni skupini. Tako da se vidi relativna razlika med deležem primerov med zaščitenimi s cepljenjem in ostalimi, ki zaščite cepiva nimajo (necepljeni, delno cepljeni). Iz tega pogleda je hitro razvidno kolikokrat več je primerov (potrjenih primerov ali hospitalizacij) med osebami brez polne zaščite.\n\nV pogledu *Na 100.000 oseb v skupini* so podatki še vedno uteženi na velikost posamezne skupine, vendar so prikazani z absolutnimi vrednostmi tako da se vidi tudi trend skozi čas.\n\nV pogledu *Absolutno* pa so prikazane dejanske vrednosti potrjenih primerov in hospitalizacij v posameznem tednu. "
         },
         "schools-chart": {
             "question": "Kaj kaže graf \"Primeri v šolah in vrtcih\"?",

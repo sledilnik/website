@@ -756,6 +756,21 @@
             "deliveredDoses": "Delivered Doses",
             "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a> website (in Slovenian only)."
         },
+        "vaccineEffect": {
+            "title": "Vaccination Effect",
+            "titleMenu": "Vaccination - effect",
+            "confirmedCases": "Confirmed Cases",
+            "hospitalizedCases": "Hospitalized",
+            "absolute": "Absolute",
+            "absolute100k": "Per 100.000 People in Group",
+            "relative100k": "Relative per 100.000 People in Group",
+            "confirmedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
+            "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}).",
+            "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
+            "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
+            "casesProtected": "Protected with Vaccination",
+            "casesOther": "Other (unvaccinated, partially vaccinated)"
+        },
         "schools": {
             "title": "Cases in School and Kindergarten",
             "titleMenu": "School, Kindergarten - cases",

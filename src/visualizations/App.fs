@@ -31,6 +31,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Vaccination" -> Some Vaccination
+            | "VaccineEffect" -> Some VaccineEffect
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
@@ -400,6 +401,24 @@ let render (state: State) (_: Msg -> unit) =
             Explicit = false
             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
 
+    let vaccineEffect =
+          { VisualizationType = VaccineEffect
+            ClassName = "vaccine-effect-chart"
+            ChartTextsGroup = "vaccineEffect"
+            ChartEnabled = true
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData, state.WeeklyStatsData with
+                    | NotAsked, _ -> Html.none
+                    | _, NotAsked -> Html.none
+                    | Loading, _ -> Utils.renderLoading
+                    | _,  Loading -> Utils.renderLoading
+                    | Failure error, _ -> Utils.renderErrorLoading error
+                    | _, Failure error-> Utils.renderErrorLoading error
+                    | Success data, Success weeklyData ->
+                        lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
+
     let schools =
           { VisualizationType = Schools
             ClassName = "schools-chart"
@@ -632,8 +651,8 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison;  spread; dailyComparison; tests;
-          vaccination; regionMap;
+        [ hospitals; metricsComparison; spread; dailyComparison; tests;
+          vaccineEffect; vaccination; regionMap;
           map; municipalities;
           regions100k; sources; europeMap;
           sewage; ageGroupsTimeline;
@@ -659,7 +678,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources; vaccination
+          municipalities; sources; vaccineEffect; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; schoolStatus; hcCases
