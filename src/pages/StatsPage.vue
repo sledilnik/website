@@ -66,12 +66,13 @@ export default {
         'testsToday',
         'testsTodayHAT',
         // 'casesToDateSummary',
-        'casesActive',
+        // 'casesActive',
         'casesAvg7Days',
+        'casesActive100k',
+        'vaccinationSummary',
         'hospitalizedCurrent',
         'icuCurrent',
-        'deceasedToDate',
-        'vaccinationSummary'
+        'deceasedToDate'
       ]
     };
   },

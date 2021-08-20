@@ -150,6 +150,8 @@ let renderHighestCountriesCodes label orderBy
         |> Array.sortByDescending orderBy
         // filter out smaller countries, but include Montenegro
         |> Array.filter (fun country -> country.Population > 600000.)
+        // filter out special "countries" (actually just continent summary data)
+        |> Array.filter (fun country -> country.IsoCode.StartsWith("OWID_") |> not)
         |> Array.map (fun country -> country.IsoCode)
         |> Array.filter (fun isoCode -> isoCode <> "SVN")
         |> Array.take 10

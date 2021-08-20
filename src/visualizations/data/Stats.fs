@@ -7,6 +7,13 @@ open Types
 
 let url = "https://api.sledilnik.org/api/stats"
 
+let todayFromToDate (a : int option) (b : int option) =
+  match a, b with
+  | Some aa, Some bb -> Some (bb - aa)
+  | Some aa, None -> None
+  | None, Some _ -> b
+  | _ -> None
+
 type TransferAgeGroup =
     { ageFrom : int option
       ageTo : int option
@@ -52,6 +59,7 @@ type private TransferStatsDataPoint =
            hs : {| employeeConfirmedToDate: int option |}
            rh : {| employeeConfirmedToDate: int option; occupantConfirmedToDate: int option |}
            unclassified : {| confirmedToDate: int option |}
+           vaccinatedConfirmedToDate : int option
         |}
       statePerTreatment :
         {| inHospital : int option
@@ -76,7 +84,8 @@ type private TransferStatsDataPoint =
         |}
     }
 
-    member this.ToDomain : StatsDataPoint =
+    member this.ToDomain prevDP : StatsDataPoint =
+
         { DayFromStart = this.dayFromStart
           Date = System.DateTime(this.year, this.month, this.day)
           Phase = this.phase
@@ -97,7 +106,9 @@ type private TransferStatsDataPoint =
               ConfirmedToDate = this.cases.confirmedToDate
               RecoveredToDate = this.cases.recoveredToDate
               ClosedToDate = this.cases.closedToDate
-              Active = this.cases.active }
+              Active = this.cases.active
+              VaccinatedConfirmedToDate = this.cases.vaccinatedConfirmedToDate
+            }
           StatePerTreatment =
             { InHospital = this.statePerTreatment.inHospital
               InHospitalToDate = this.statePerTreatment.inHospitalToDate
@@ -119,8 +130,13 @@ type private TransferStatsDataPoint =
           Vaccination =
             { Administered = { ToDate = this.vaccination.administered.toDate; Today = this.vaccination.administered.today }
               Administered2nd = { ToDate = this.vaccination.administered2nd.toDate; Today = this.vaccination.administered2nd.today }
-              Used = { ToDate = this.vaccination.used.toDate; Today = None }
-              Delivered = { ToDate = this.vaccination.delivered.toDate; Today = None } }
+              Used = {
+                ToDate = this.vaccination.used.toDate
+                Today = this.vaccination.used.toDate |> todayFromToDate prevDP.vaccination.used.toDate
+              }
+              Delivered = {
+                ToDate = this.vaccination.delivered.toDate
+                Today = this.vaccination.delivered.toDate |> todayFromToDate prevDP.vaccination.delivered.toDate } }
         }
 
 type private TransferStatsData = TransferStatsDataPoint list
@@ -131,7 +147,8 @@ let parseStatsData responseData =
         |> Json.parseNativeAs<TransferStatsData>
 
     transferStatsData
-    |> List.map (fun transferDataPoint -> transferDataPoint.ToDomain)
+    |> List.pairwise
+    |> List.map (fun (prevDP, transferDP) -> transferDP.ToDomain prevDP)
 
 let load =
     async {

@@ -168,6 +168,15 @@ let addContainmentMeasuresFlags
         19, 4, 2021, "#ebfaeb", "liftTerrace"
         23, 4, 2021, "#ebfaeb", "liftRegions2"
         24, 4, 2021, "#ebfaeb", "liftTerrace2"
+        26, 4, 2021, "#ebfaeb", "liftSport"
+        10, 5, 2021, "#ebfaeb", "liftHotels"
+        15, 5, 2021, "#ebfaeb", "liftGatherings50"
+        17, 5, 2021, "#ebfaeb", "liftHighSchools2"
+        22, 5, 2021, "#ebfaeb", "liftGatherings"
+        7,  6, 2021, "#ebfaeb", "liftCapacity75p"
+        21, 6, 2021, "#ebfaeb", "liftServicesAll"
+        5,  7, 2021, "#ebfaeb", "liftMasksOnEvents"
+        16, 8, 2021, "#FFe6e6", "masksOnEvents"
     |]
     {|
         ``type`` = "flags"
@@ -210,20 +219,17 @@ let parseDate (value: String) =
     match I18N.t "charts.common.numDateFormat" with
     | "%m/%d/%Y" -> // EN, ME
         let date = value.Replace(" ", "").Split('/')
-        DateTime
-            .Parse(date.[2] + "-" + date.[0] + "-" + date.[1])
+        DateTime(date.[2] |> int, date.[0] |> int, date.[1] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
     | "%d/%m/%Y" -> // IT
         let date = value.Replace(" ", "").Split('/')
-        DateTime
-            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
+        DateTime(date.[2] |> int, date.[1] |> int, date.[0] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
     | _ -> // DE, HR, MK, SL, SQ
         let date = value.Replace(" ", "").Split('.')
-        DateTime
-            .Parse(date.[2] + "-" + date.[1] + "-" + date.[0])
+        DateTime(date.[2] |> int, date.[1] |> int, date.[0] |> int)
             .Subtract(DateTime(1970,1,1))
             .TotalMilliseconds
 
@@ -323,6 +329,7 @@ let basicChart
                     {| value=jsTime <| DateTime(2020,12,21);label=Some {| text=I18N.t "phase.14.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,2,1);  label=Some {| text=I18N.t "phase.15.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                     {| value=jsTime <| DateTime(2021,2,13); label=Some {| text=I18N.t "phase.16.description"; rotation=270; align="right"; x=12 |} |} |> pojo
+                    {| value=jsTime <| DateTime(2021,6,15); label=Some {| text=I18N.t "phase.17.description"; rotation=270; align="right"; x=12 |} |} |> pojo
                 |]
                 plotBands=[|
                     {| ``from``=jsTime <| DateTime(2020,2,29);
@@ -400,10 +407,15 @@ let basicChart
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.15.title" |}
                     |}
-                    {| ``from``=jsTime <| DateTime(2021,2,13);
-                       ``to``=jsTime <| DateTime.Today;
+                    {| ``from``=jsTime <| DateTime(2021,3,13);
+                       ``to``=jsTime <| DateTime(2021,6,15);
                        color="transparent"
                        label=Some {| align="center"; text=I18N.t "phase.16.title" |}
+                    |}
+                    {| ``from``=jsTime <| DateTime(2021,6,15);
+                       ``to``=jsTime <| DateTime.Today;
+                       color="transparent"
+                       label=Some {| align="center"; text=I18N.t "phase.17.title" |}
                     |}
                     yield! shadedWeekendPlotBands
                 |]

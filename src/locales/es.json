@@ -56,7 +56,7 @@
             "dsMNZ": "MNZ",
             "dsMZ": "Ministerio de Salud",
             "dataSource": "fuente",
-            "dataDate": "Datos hasta: {{ date, %a., %e. %b. }}",
+            "dataDate": "Datos hasta: {{ date, %a., %e. %b. %Y }}",
             "view": "Visualización:",
             "showAll": "Mostrar todo",
             "hideAll": "Ocultar todo",

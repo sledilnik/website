@@ -559,7 +559,7 @@
             "dsMZ": "Министерство за Здравје",
             "dsOWD": "Our World in Data",
             "sortBy": "Прикажи според:",
-            "dataDate": "До: {{ date, %a., %e. %b. }}",
+            "dataDate": "До: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Our World in Data и МЗ",
             "dsOWD_NIJZ": "Our World in Data &amp; ИЈЗ"
         },
@@ -659,8 +659,6 @@
             "populationTotal": "Население (вкупно)",
             "female": "Женски",
             "male": "Машки",
-            "relative": "Релативно",
-            "absolute": "Апсолутно",
             "title": "Старосни групи",
             "shareOfInfectedPopulation": "Дел од популацијата на заразени",
             "shareOfDeceasedPopulation": "Дел на мртвите од популацијата",
@@ -787,10 +785,6 @@
         },
         "ageGroupsTimeline": {
             "title": "Потврдени случаи по старосни групи",
-            "activeCasesRelative": "Активни случаи (релативно)",
-            "activeCases": "Активни случаи",
-            "newCasesRelative": "Нови случаи (релативно)",
-            "newCases": "Нови случаи",
             "titleMenu": "Старост - удел"
         },
         "countriesDeathsPerCases": {
