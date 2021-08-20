@@ -7,22 +7,16 @@ open Fable.Core
 open JsInterop
 
 
-type DisplayMetrics = {
+type MetricType = {
     Id: string
-    ValueCalculation: ValueCalculationFormula
-    ChartType: ChartType
+    Value: ValueCalculationFormula
 } with
     static member All = [|
-        { Id = "newCases"; ValueCalculation = Daily
-          ChartType = StackedBarNormal }
-        { Id = "newCasesRelative"; ValueCalculation = Daily
-          ChartType = StackedBarPercent }
-        { Id = "activeCases"; ValueCalculation = Active
-          ChartType = StackedBarNormal }
-        { Id = "activeCasesRelative"; ValueCalculation = Active
-          ChartType = StackedBarPercent }
+        { Id = "showToday"; Value = Daily }
+        { Id = "showActive"; Value = Active }
+        { Id = "showToDate"; Value = Total }
     |]
-    static member Default = DisplayMetrics.All.[0]
+    static member Default = MetricType.All.[0]
 
 let tooltipFormatter jsThis =
     let points: obj[] = jsThis?points

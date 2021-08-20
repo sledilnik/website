@@ -355,8 +355,6 @@
             "confirmedCases": "Bestätigte Fälle",
             "deceasedPerConfirmedCases": "Todesfälle pro bestätigte Fälle",
             "male": "Männer",
-            "populationShare": "Anteil der Bevölkerung",
-            "absolute": "Absolut",
             "shareOfInfectedPopulation": "Anzahl bestätigter Fälle in der Bevölkerung",
             "shareOfDeceasedPopulation": "Anzahl Todesfälle in der Bevölkerung",
             "titleMenu": "Alter, Geschlecht",
@@ -386,6 +384,7 @@
             "linear": "Linear",
             "absolute": "Absolut",
             "relative": "Relativ",
+            "populationShare": "Anteil der Bevölkerung",
             "longDateFormat": "%e. %B %Y",
             "view": "Ansicht:",
             "linkFaq": "FAQ",
@@ -418,7 +417,7 @@
             "loading": "Daten werden geladen …",
             "sortBy": "Sortieren nach:",
             "weekYearDateFormat": "%W. Woche %Y",
-            "dataDate": "Daten bis: {{ date, %a., %e. %b. }}",
+            "dataDate": "Daten bis: {{ date, %a., %e. %b. %Y }}",
             "dsOWD_MZ": "Unsere Welt in Daten &amp; Gesundheitsministerium",
             "dsOWD_NIJZ": "Unsere Welt in Daten &amp; NIJZ",
             "dsMNZ": "MNZ",
@@ -595,10 +594,6 @@
         },
         "ageGroupsTimeline": {
             "title": "Bestätigte Fälle nach Altersgruppen",
-            "newCases": "Neue Fälle",
-            "newCasesRelative": "Neue Fälle (relativ)",
-            "activeCases": "Aktive Fälle",
-            "activeCasesRelative": "Aktive Fälle (relativ)",
             "titleMenu": "Alter – Anteil"
         },
         "countriesTotalDeathsPer100k": {

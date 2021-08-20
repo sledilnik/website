@@ -159,7 +159,7 @@ let renderChartOptions (state: State) dispatch =
         match state.DisplayType with
         | New -> dp.Cases.ConfirmedToday
         | Active -> dp.Cases.Active
-        | VacDosesAdministered -> dp.Vaccination.Administered.Today |> add dp.Vaccination.Administered2nd.Today
+        | VacDosesAdministered -> dp.Vaccination.Used.Today
         | _ -> None
 
     let getTestsValue (dp: LabTestsStats) =

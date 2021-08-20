@@ -74,6 +74,8 @@ type private TransferWStatsDataPoint =
                 month : int
                 day : int
             |}
+        hospitalizedVaccinated : int option
+        hospitalizedOther : int option
         confirmed : int option
         investigated : int option
         healthcare : int option
@@ -94,6 +96,8 @@ type private TransferWStatsDataPoint =
           Week = this.week
           Date = System.DateTime(this.year, this.month, this.day)
           DateTo = System.DateTime(this.``to``.year, this.``to``.month, this.``to``.day)
+          HospitalizedVaccinated = this.hospitalizedVaccinated
+          HospitalizedOther = this.hospitalizedOther
           ConfirmedCases = this.confirmed
           InvestigatedCases = this.investigated
           HealthcareCases = this.healthcare

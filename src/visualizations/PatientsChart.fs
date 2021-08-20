@@ -456,8 +456,19 @@ let render (state: State) dispatch =
     | [||], None -> Html.div [ Utils.renderLoading ]
     | _, Some err -> Html.div [ Utils.renderErrorLoading err ]
     | _, None ->
-        Html.div [ renderChartContainer state dispatch
-                   renderBreakdownSelectors state dispatch ]
+        Html.div [
+            renderChartContainer state dispatch
+            renderBreakdownSelectors state dispatch
+            match state.HTypeToDisplay with
+            | CareHospitals ->
+                Html.div [
+                        prop.className "disclaimer"
+                        prop.children [
+                            Html.text (I18N.t "charts.patients.disclaimerCare")
+                        ]
+                    ]
+            | _ -> Html.none
+]
 
 let patientsChart (props: {| hTypeToDisplay: HospitalType |}) =
     React.elmishComponent ("PatientsChart", init props.hTypeToDisplay, update, render)

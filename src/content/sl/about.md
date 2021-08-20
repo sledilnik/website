@@ -68,7 +68,7 @@ Sodelavci projekta:
 -   [Anže Voh Boštic](https://podcrto.si/author/anze/) - viri, validacija virov, modeliranje
 -   [Barbara Krajnc](https://twitter.com/bakrajnc) - vsebine, komunikacija
 -   [Bojan Košir](https://twitter.com/BojanKosir) - podatkovni model in validacija, viri
--   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno skrejpanje, komunikacija
+-   [Boštjan Špetič](https://www.igzebedze.com/) - podatkovno strganje, komunikacija
 -   [Darja Potočan](http://www.marsowci.net/) - družabna omrežja, viri
 -   [Demjan Vester](https://github.com/VesterDe) - spletna stran
 -   [Dunja Fabjan](https://twitter.com/denebdulfim) - novičnik
@@ -77,7 +77,7 @@ Sodelavci projekta:
 -   [Grega Milčinski](https://www.linkedin.com/in/gregamilcinski/) - viri, validacija podatkov
 -   [Igor Brejc](https://twitter.com/breki74) - vizualizacije
 -   [Igor Kolar](https://twitter.com/igorkolar) - podatkovni model, odprti podatki
--   [Jaka Daneu](https://github.com/jalezi) -  spletna stran
+-   [Jaka Daneu](https://github.com/jalezi) -  podatkovno strganje, spletna stran
 -   [Jana Javornik](https://twitter.com/JanaSvenska) - vsebine, viri
 -   [Janez Gorenc](https://si.linkedin.com/in/janez-gorenc-03415868) - prevodi
 -   [Janez Žibert](https://pacs.zf.uni-lj.si/janez-zibert/) - koordinacija za modeliranje, SEIR model, modeliranje
@@ -86,11 +86,11 @@ Sodelavci projekta:
 -   [Jure Sobočan](https://www.linkedin.com/in/juresobocan) - logo, grafično oblikovanje
 -   [Jurij Bajželj](https://www.linkedin.com/in/bajzelj) - podatkovni model, validacija, vključevanje uporabnikov
 -   [Luka Medic](https://www.facebook.com/luka.medic.79) - modeliranje, validacija podatkov, covid-spark.info
--   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija
+-   [Luka Renko](https://twitter.com/lukarenko) - koordinacija, podatkovni model in validacija, vizualizacije
 -   [Maja Pohar Perme](http://ibmi.mf.uni-lj.si/sl/o-ibmi/osebje) - modeliranje
 -   [Maja Založnik](https://www.linkedin.com/in/maja-zalo%C5%BEnik-26034a84) - koordinacija, podatkovni model in validacija, viri
 -   [Maks Mržek](https://www.linkedin.com/in/maks-mr%C5%BEek-98798066/) - validacija podatkov, vizualizacije
--   [Marko Brumen](https://twitter.com/multikultivator) - družabna omrežja, spletna stran, viri
+-   [Marko Brumen](https://twitter.com/multikultivator) - koordinacija, družabna omrežja, spletna stran, vsebine
 -   [Maruša Gorišek](https://www.linkedin.com/in/marusagorisek/) - spletna stran, viri
 -   [Matej Aleksov](https://www.linkedin.com/in/matej-aleksov/) - družabna omrežja, grafično oblikovanje
 -   [Matej Jurko](https://www.linkedin.com/in/matejjurko/) - viri, validacija podatkov
@@ -113,7 +113,7 @@ Sodelavci projekta:
 -   [Sabina Tamše Kozovinc](https://www.linkedin.com/in/sabina-tamse-copywriter/) - tekstopisje, viri, FAQ
 -   [Sebastian Pleško](https://twitter.com/seba1337) - viri
 -   [Sebastjan Cizel](https://sebastjancizel.github.io) - vizualizacije
--   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - spletna stran, zemljevid, prevodi
+-   [Štefan Baebler](https://www.linkedin.com/in/stefanbaebler/) - podatkovno strganje, spletna stran, zemljevid, prevodi
 -   [Tanja Ambrožič]() - validacija podatkov
 -   [Tomaž Kovačič](https://www.linkedin.com/in/tomazkovacic) - vizualizacije
 -   [Vanja Cvelbar](https://github.com/b100w11) - prevodi

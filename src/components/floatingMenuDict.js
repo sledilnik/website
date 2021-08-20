@@ -51,6 +51,10 @@ export default {
     titleKey: 'charts.vaccination.titleMenu',
     icon: 'graph',
   },
+  'vaccine-effect-chart': {
+    titleKey: 'charts.vaccineEffect.titleMenu',
+    icon: 'graph',
+  },
   'schools-chart': {
     titleKey: 'charts.schools.titleMenu',
     icon: 'graph',

@@ -35,6 +35,7 @@ type Cases =
       RecoveredToDate : int option
       ClosedToDate : int option
       Active : int option
+      VaccinatedConfirmedToDate : int option
     }
 
 type Vaccination =
@@ -134,6 +135,8 @@ type WeeklyStatsDataPoint =
     { Week : string
       Date : System.DateTime
       DateTo : System.DateTime
+      HospitalizedVaccinated : int option
+      HospitalizedOther : int option
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option
@@ -189,6 +192,7 @@ type VisualizationType =
     | Regions
     | Regions100k
     | Vaccination
+    | VaccineEffect
     | Schools
     | SchoolStatus
     | Sources

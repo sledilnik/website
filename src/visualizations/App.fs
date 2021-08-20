@@ -31,6 +31,7 @@ let init (query: obj) (visualization: string option) (page: string) (apiEndpoint
             | "Regions" -> Some Regions
             | "Regions100k" -> Some Regions100k
             | "Vaccination" -> Some Vaccination
+            | "VaccineEffect" -> Some VaccineEffect
             | "Schools" -> Some Schools
             | "SchoolStatus" -> Some SchoolStatus
             | "Sewage" -> Some Sewage
@@ -175,7 +176,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapMunicipalitiesChart {| data = data |} }
+                    | Success data -> lazyView Map.mapMunicipalitiesChart {| query = state.Query; data = data |} }
 
     let regionMap =
           { VisualizationType = RegionMap
@@ -189,7 +190,7 @@ let render (state: State) (_: Msg -> unit) =
                     | NotAsked -> Html.none
                     | Loading -> Utils.renderLoading
                     | Failure error -> Utils.renderErrorLoading error
-                    | Success data -> lazyView Map.mapRegionChart {| data = data |} }
+                    | Success data -> lazyView Map.mapRegionChart {|query = state.Query; data = data |} }
 
     let municipalities =
           { VisualizationType = Municipalities
@@ -399,6 +400,24 @@ let render (state: State) (_: Msg -> unit) =
             ChartEnabled = true
             Explicit = false
             Renderer = fun _ -> lazyView VaccinationChart.vaccinationChart () }
+
+    let vaccineEffect =
+          { VisualizationType = VaccineEffect
+            ClassName = "vaccine-effect-chart"
+            ChartTextsGroup = "vaccineEffect"
+            ChartEnabled = true
+            Explicit = false
+            Renderer =
+                fun state ->
+                    match state.StatsData, state.WeeklyStatsData with
+                    | NotAsked, _ -> Html.none
+                    | _, NotAsked -> Html.none
+                    | Loading, _ -> Utils.renderLoading
+                    | _,  Loading -> Utils.renderLoading
+                    | Failure error, _ -> Utils.renderErrorLoading error
+                    | _, Failure error-> Utils.renderErrorLoading error
+                    | Success data, Success weeklyData ->
+                        lazyView VaccineEffectChart.vaccineEffectChart {| data = data; weeklyData = weeklyData |} }
 
     let schools =
           { VisualizationType = Schools
@@ -632,17 +651,19 @@ let render (state: State) (_: Msg -> unit) =
                     | Success data -> lazyView WeeklyDemographicsViz.Rendering.renderChart {| data = data |} }
 
     let localVisualizations =
-        [ hospitals; metricsComparison; dailyComparison; tests; vaccination;
-          regions100k; map; municipalities; sewage
-          schools; schoolStatus;
-          patients; patientsICU; patientsCare;
-          ageGroupsTimeline; weeklyDemographics; ageGroups;
+        [ hospitals; metricsComparison; spread; dailyComparison; tests;
+          vaccineEffect; vaccination; regionMap;
+          map; municipalities;
+          regions100k; sources; europeMap;
+          sewage; ageGroupsTimeline;
+          patients; patientsICU; // patientsCare;
+          weeklyDemographics; ageGroups;
+          schools; (*schoolStatus;*)
           metricsCorrelation; deceased; excessDeaths
           infections; hcCases;
-          europeMap;
-          sources; cases;
-          regionMap; regionsAbs
-          phaseDiagram; spread;
+          cases;
+          regionsAbs
+          phaseDiagram;
           //hCenters
         ]
 
@@ -657,7 +678,7 @@ let render (state: State) (_: Msg -> unit) =
 
     let allVisualizations =
         [ sewage; metricsCorrelation; hospitals; metricsComparison; spread; dailyComparison; map
-          municipalities; sources; vaccination
+          municipalities; sources; vaccineEffect; vaccination
           europeMap; worldMap; ageGroupsTimeline; tests; hCenters; infections
           cases; patients; patientsICU; patientsCare; deceased; ratios; ageGroups; regionMap; regionsAbs
           regions100k; schools; schoolStatus; hcCases

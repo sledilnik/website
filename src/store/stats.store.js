@@ -7,10 +7,14 @@ import i18n from '../i18n'
 const dataApi = new ApiService({})
 
 // This is a function so that the translations are changed when a language change happend.
-const infoCardConfig = () => { 
+const infoCardConfig = () => {
   return {
     casesActive: {
       title: i18n.t('infocard.active'),
+    },
+    casesActive100k: {
+      title: i18n.t('infocard.incidence'),
+      subTitle: i18n.t('infocard.incidenceInfo')
     },
     casesAvg7Days: {
       title: i18n.t('infocard.newCases7d'),
@@ -38,7 +42,7 @@ const infoCardConfig = () => {
       title: i18n.t('infocard.vaccinationSummary'),
       flipGoodDirection: true
     },
-  } 
+  }
 }
 
 const state = {

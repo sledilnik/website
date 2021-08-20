@@ -41,12 +41,13 @@
         "readingTime": "min read"
     },
     "infocard": {
-        "vaccinationSummary": "People Vaccinated",
+        "vaccinationSummary": "Fully Vaccinated",
         "tests": "Tests Today: PCR",
         "testsHAT": "Tests Today: RAT",
         "confirmedToDate": "Confirmed Cases",
         "active": "Active Cases",
         "incidence": "14-days incidence",
+        "incidenceInfo": "per 100,000 people",
         "newCases7d": "New Cases",
         "newCases7dInfo": "average of last 7 days",
         "recoveredToDate": "Recovered",
@@ -190,11 +191,15 @@
         "16": {
             "title": "phase<br>16",
             "description": "rapid antigen tests methodology"
+        },
+        "17": {
+            "title": "phase<br>17",
+            "description": "end of epidemic, high risk contact tracing"
         }
     },
     "charts": {
         "common": {
-            "dataDate": "Data until: {{ date, %a., %e. %b. }}",
+            "dataDate": "Data until: {{ date, %a., %e. %b. %Y }}",
             "dataSource": "data source",
             "dsNIB": "National Institute of Biology",
             "dsNIJZ": "NIJZ",
@@ -214,6 +219,7 @@
             "x_months": "{{ count }}m",
             "x_months_plural": "{{ count }}m",
             "all": "All",
+            "total": "Total",
             "showActive": "Active",
             "showToday": "Daily",
             "showToDate": "To Date",
@@ -226,6 +232,7 @@
             "log": "Logarithmic",
             "absolute": "Absolute",
             "relative": "Relative",
+            "populationShare": "Population Share",
             "noteFaq": "Note: limitation of presented data is described in ",
             "linkFaq": "FAQ",
             "facebook": "Facebook",
@@ -256,8 +263,8 @@
             "confirmedCases": "Confirmed Cases",
             "activeCases": "Active Cases",
             "recovered": "Recovered",
-            "vaccinationAdministered": "Vaccinated 💉",
-            "vaccinationAdministered2nd": "Vaccinated 💉💉",
+            "vaccinationAdministered": "Vaccinated",
+            "vaccinationAdministered2nd": "Fully Vaccinated",
             "hospitalized": "Hospitalized",
             "hospitalAdmitted": "Admitted to Hospital",
             "hospitalDischarged": "Discharged from Hospital",
@@ -319,6 +326,7 @@
         "patients": {
             "title": "Hospitalizations",
             "titleMenu": "Hospitalizations",
+            "disclaimerCare": "Note: nursing hospitals are not reporting daily state since April 8, 2021.",
             "structure": "Structure",
             "byHospital": "By Hospital",
             "hospitalizedIn": "Hospitalized In:",
@@ -366,7 +374,7 @@
         "hCenters": {
             "title": "Healthcare Center Treatment",
             "titleMenu": "HC - treatment",
-            "disclaimer": "Note: this chart is not up-to-date. From October 25, Ministry of Health does not report data about health centers as they are not collected anymore.",
+            "disclaimer": "Note: this chart is not up-to-date. From October 25, 2020, Ministry of Health does not report data about health centers as they are not collected anymore.",
             "emergencyExamination": "Emergency Examinations",
             "suspectedCovidExamination": "Suspected COVID-19 (examination)",
             "suspectedCovidPhone": "Suspected COVID-19 (phone)",
@@ -391,7 +399,7 @@
         "tests": {
             "title": "Testing",
             "titleMenu": "Testing",
-            "disclaimer": "Note: From December 3, we do not received data per laboratory.",
+            "disclaimer": "Note: from December 3, 2020, we do not received data per laboratory.",
             "positiveSplit": "Positive PCR and RAT",
             "positiveHAT": "Positive RAT",
             "positivePCR": "Positive PCR",
@@ -409,7 +417,7 @@
         "infections": {
             "title": "Structure of Confirmed Cases",
             "titleMenu": "Cases - structure",
-            "disclaimer": "Note: from October 11, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
+            "disclaimer": "Note: from October 11, 2020, NIJZ does not report the data about employees in retirement homes and healtcare anymore.",
             "averageByDay": "By Day (average)",
             "all": "All",
             "relative": "Relative",
@@ -465,8 +473,8 @@
             "newCases7Days": "New (7-day avg.)",
             "vaccinated": "Vaccinated",
             "vaccinated7Days": "Per Day (7-day avg.)",
-            "vaccinated1st": "1st Dose",
-            "vaccinated2nd": "2nd Dose",
+            "vaccinated1st": "Vaccinated",
+            "vaccinated2nd": "Fully Vaccinated",
             "deceased": "Deaths",
             "disclaimer": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks."
         },
@@ -493,8 +501,8 @@
             "bubbles": "Distribution",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "vaccinated1st": "Vaccinated 1st dose",
-            "vaccinated2nd": "Vaccinated 2nd dose",
+            "vaccinated1st": "Vaccinated",
+            "vaccinated2nd": "Fully Vaccinated",
             "relativeIncrease": "Weekly Increase",
             "per100k": "per 100k",
             "disclaimerRegion": "Note: deceased by region data is provided weekly, therefore it is not complete for last two weeks. This is the reason why there is a deviation with the total number of deaths.",
@@ -516,8 +524,9 @@
             "countryStatus": "Restrictions",
             "statusNone": "-",
             "statusGreen": "no restrictions",
-            "statusOrange": "negative test or 10 day quarantine with exceptions",
-            "statusRed": "negative test or strict 10 day quarantine",
+            "statusOrange": "recovered/vaccinated or negative PCR/RAT test or 10-day quarantine",
+            "statusRed": "recovered/vaccinated or 10-day quarantine (negative PCR test required for foreigners without residence)",
+            "statusDarkRed": "recovered/vaccinated or 10-day quarantine (denied entry for foreigners without residence)",
             "noData": "No data"
         },
         "world": {
@@ -552,8 +561,6 @@
             "titleMenu": "Age, Gender",
             "male": "Male",
             "female": "Female",
-            "absolute": "Absolute",
-            "populationShare": "Population Share",
             "populationTotal": "Population Total",
             "shareOfDeceasedConfirmedCases": "Share of Deaths in Confirmed Cases",
             "shareOfDeceasedPopulation": "Share of Deaths in Population",
@@ -564,15 +571,11 @@
             "age": "Age",
             "deceased": "Deaths",
             "confirmedCases": "Confirmed Cases",
-            "disclaimer": "Note: Demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
+            "disclaimer": "Note: demographic data (gender, age) about the deceased is reported by NIJZ weekly. This is the reason why there is a deviation with the total number of deaths."
         },
         "ageGroupsTimeline": {
             "title": "Confirmed Cases by Age Groups",
-            "titleMenu": "Age - share",
-            "newCases": "New cases",
-            "newCasesRelative": "New cases (relative)",
-            "activeCases": "Active cases",
-            "activeCasesRelative": "Active cases (relative)"
+            "titleMenu": "Age - share"
         },
         "countriesActiveCasesPer100k": {
             "title": "Countries: Active Cases Per 100,000 People",
@@ -738,16 +741,35 @@
             "titleMenu": "Vaccination",
             "used": "Vaccination Used",
             "byManufacturer": "Vaccination Delivered",
+            "unused": "Vaccination Unused",
             "byWeek": "By Week",
+            "byAgeAll": "By Age: Fully Vaccinated",
+            "byAge1st": "By Age: Vaccinated",
             "pfizer": "Pfizer/BioNTech",
             "moderna": "Moderna",
             "az": "AstraZeneca",
             "janssen": "Janssen",
-            "administered": "Vaccinated 💉",
-            "administered2nd": "Vaccinated 💉💉",
+            "administered": "Vaccinated",
+            "administered2nd": "Fully Vaccinated",
             "usedDoses": "Used Doses",
+            "unusedDoses": "Unused Doses",
             "deliveredDoses": "Delivered Doses",
             "disabled": "We have stopped updating the vaccination chart on March 25 because the data is currently not available in machine readable form. For the time being you are kindly directed to the <a href=\"https://cepimose.si\" target=\"_blank\">cepimose.si</a> website (in Slovenian only)."
+        },
+        "vaccineEffect": {
+            "title": "Vaccination Effect",
+            "titleMenu": "Vaccination - effect",
+            "confirmedCases": "Confirmed Cases",
+            "hospitalizedCases": "Hospitalized",
+            "absolute": "Absolute",
+            "absolute100k": "Per 100.000 People in Group",
+            "relative100k": "Relative per 100.000 People in Group",
+            "confirmedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were among the confirmed cases. Among protected with vaccination (fully vaccinated at least 14 days ago), infection was confirmed in **{{protectedToDatePct}}** ({{protectedC}} out of {{totalProtected}}).",
+            "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}).",
+            "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
+            "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
+            "casesProtected": "Protected with Vaccination",
+            "casesOther": "Other (unvaccinated, partially vaccinated)"
         },
         "schools": {
             "title": "Cases in School and Kindergarten",
@@ -770,6 +792,7 @@
         "schoolStatus": {
             "title": "Situation in School and Kindergarten",
             "titleMenu": "School, Kindergarten - situation",
+            "disclaimer": "Note: the data is reported to the ministry by the schools themselves, and may be incomplete.",
             "search": "Search by name of school",
             "showActive": "Active",
             "showAll": "All",
@@ -798,7 +821,7 @@
             "title": "Sources and Locations of Infection, weekly",
             "titleMenu": "Sources and Locations of Infection",
             "disclaimerGeneral": "Note: data for last week are not complete yet - number of cases may be be lower than actual.",
-            "disclaimer": "Note: from October 17, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
+            "disclaimer": "Note: from October 17, 2020, epidemiologists does not trace individual contacts and does not issue suggestions for quarantine. This is the reason we do not show this data anymore.",
             "sentToQuarantine": "Sent to Quarantine",
             "confirmedCases": "Confirmed Cases",
             "confirmedFromQuarantine": "Confirmed from Quarantine",
@@ -1181,6 +1204,42 @@
         "liftTerrace2": {
             "title": "Terrace",
             "description": "Easing of restrictions: Outdoor drinking and dining allowed. Smaller tourist accommodations opened (with limitations).<br>Indoor food and dining allowed in Gorizia, Coastal-Karst and Mura regions (with limitations)."
+        },
+        "liftSport": {
+            "title": "Sport",
+            "description": "Easing of restrictions: all trainings in groups up to 10 and all competition (w/o spectators).<br>All schools opened, recommended model C for university."
+        },
+        "liftHotels": {
+            "title": "Hotels",
+            "description": "Easing of restrictions: larger hotels with 50% capacity.<br>One person per 20 sq m in indoor public spaces (was 30 sq m)."
+        },
+        "liftGatherings50": {
+            "title": "Up to 50",
+            "description": "Easing of restrictions: gathering up to 50 people."
+        },
+        "liftHighSchools2": {
+            "title": "H.schools",
+            "description": "Easing of restrictions: high schools and universities. Sport and culture events with spectators (with test).<br>Camping up to 70% capacity. Bars and restaurants opened from 5AM to 10PM."
+        },
+        "liftGatherings": {
+            "title": "Gatherings",
+            "description": "Easing of restrictions: no limitations on public gatherings and events with required interpersonal distance."
+        },
+        "liftCapacity75p": {
+            "title": "75%",
+            "description": "Easing of restrictions: larger hotels, culture and sport events can operate with 75% capacity."
+        },
+        "liftServicesAll": {
+            "title": "Services",
+            "description": "Easing restrictions: almost all services open, no restrictions on opening hours for shops and restaurants."
+        },
+        "liftMasksOnEvents": {
+            "title": "Masks",
+            "description": "Easing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
+        },
+        "masksOnEvents": {
+            "title": "Masks",
+            "description": "Mask requirement at public cultural events."
         }
     },
     "days": {
@@ -1742,7 +1801,7 @@
         },
         "spread-chart": {
             "question": "What does the “Growth of Confirmed Cases” graph mean?",
-            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From 21.12.2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
+            "answer": "The [graph](/en/stats#spread-chart) tells us how many new confirmed cases of infections there were on a given day, where the WHO and the [ECDC definition](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) that confirmed cases are “persons with a lab confirmation of infection with COVID19” is followed. From December 21, 2020 this includes cases confirmed with rapid antigen tests (RAT). As the number of confirmed cases still depends on testing, the data in confirmed cases is estimated to be much smaller that the actual number of infected people."
         },
         "regions-chart": {
             "question": "What does the “By Region” tell us?",

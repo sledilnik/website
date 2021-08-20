@@ -295,9 +295,9 @@ let renderScaleTypeSelectors activeScaleType dispatch =
         prop.className "chart-display-property-selector"
         prop.children [
             renderScaleTypeSelector
-                Absolute activeScaleType (chartText "absolute")
+                Absolute activeScaleType (I18N.t "charts.common.absolute")
             renderScaleTypeSelector
-                Relative activeScaleType (chartText "populationShare")
+                Relative activeScaleType (I18N.t "charts.common.populationShare")
         ]
     ]
 
