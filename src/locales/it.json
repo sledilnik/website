@@ -756,6 +756,10 @@
         "liftSport": {
             "description": "Allentamento: tutti gli allenamenti in gruppi fino a 10 e tutte le competizioni (senza spettatori).<br>Tutte le scuole aperte, per l'università è raccomandato il modello C.",
             "title": "Sport"
+        },
+        "masksOnEvents": {
+            "description": "Obbligo di mascherina in occasione di eventi culturali pubblici.",
+            "title": "Mascherine"
         }
     },
     "tableDict": {
@@ -1487,6 +1491,21 @@
         },
         "note": {
             "deceasedReporting": "Maggiori informazioni sulla denuncia di deceduti da parte della NIJZ e del governo sono disponibili nell'articolo <b> <a href=\"https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2\" target=\"_blank\"> Zakaj razlike v številu umrlih? </a> </b>."
+        },
+        "vaccineEffect": {
+            "casesOther": "Altri (non vaccinati, parzialmente vaccinati)",
+            "casesProtected": "Protetti con la vaccinazione",
+            "hospitalizedCasesRatio": "I non vaccinati e quelli parzialmente vaccinati sono ricoverati **{{multiple}}** volte tanto quanto completamente protetti con la vaccinazione.",
+            "confirmedCasesRatio": "Tra i casi confermati, ci sono **{{multiple}}** volte tanti non vaccinati e parzialmente vaccinati rispetto a quelli completamente protetti con la vaccinazione.",
+            "confirmedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, ci sono state tra i casi confermati **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), l'infezione è stata confermata in **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}).",
+            "hospitalizedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, sono state ricoverate **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}) sono stati ricoverati.",
+            "relative100k": "Relativo per 100.000 persone nel gruppo",
+            "absolute100k": "Per 100.000 persone nel gruppo",
+            "absolute": "Assoluto",
+            "hospitalizedCases": "Ricoverati",
+            "confirmedCases": "Casi confermati",
+            "titleMenu": "Vaccinazione - effetto",
+            "title": "Effetto della vaccinazione"
         }
     },
     "footer": {
