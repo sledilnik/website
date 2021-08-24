@@ -246,7 +246,10 @@ let renderChartOptions state dispatch =
             | ConfirmedCases ->
                 let daily =
                     dailyConfirmedData
-                    |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                    |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone) // head
+                    |> Seq.rev
+                    |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone) // tail
+                    |> Seq.rev
                     |> Seq.map checkAndProcess100k
 
                 let emptyRec =
@@ -294,7 +297,7 @@ let renderChartOptions state dispatch =
             | HospitalizedCases ->
                 "#de9a5a",
                 weeklyHospitalizedData
-                |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone)
                 |> Seq.map checkAndProcess100k
 
         let startDate =
