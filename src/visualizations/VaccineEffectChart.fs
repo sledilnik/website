@@ -298,6 +298,9 @@ let renderChartOptions state dispatch =
                 "#de9a5a",
                 weeklyHospitalizedData
                 |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone)
+                |> Seq.rev
+                |> Seq.skipWhile (fun dp -> dp.CasesOther.IsNone) // skip empty weeks at tail
+                |> Seq.rev
                 |> Seq.map checkAndProcess100k
 
         let startDate =
