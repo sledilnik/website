@@ -263,6 +263,8 @@ let renderChartOptions state dispatch =
 
                 let weeklyConfirmedData =
                     seq {
+                        sumRec <- emptyRec
+
                         for dp in daily do
                             sumRec <-
                                 {| Date =
