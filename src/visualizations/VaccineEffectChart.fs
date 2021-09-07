@@ -456,7 +456,7 @@ let renderChartContainer state dispatch =
                           prop.className "highcharts-wrapper"
                           prop.children [ chart |> chartFromWindow ] ]
                Html.div [ prop.className "disclaimer"
-                          prop.children [ Utils.Markdown.render label ] ] ]
+                          prop.children [ Utils.Markdown.render (label + chartText "disclaimer") ] ] ]
 
 let renderChartTypeSelector (activeChartType: ChartType) dispatch =
     let renderSelector (chartType: ChartType) =
