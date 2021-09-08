@@ -38,7 +38,7 @@ You can also inspect the data directly on the [Tables page](/en/tables).
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
-- [sawage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+- [sewage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
 - [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
 - **Obsolete - not updated anymore**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)
