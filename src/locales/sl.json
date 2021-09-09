@@ -746,8 +746,16 @@
             "description": "Sprostitev ukrepov: maske niso več obvezne na javnih prireditvah (kulturne, športne) in v gostinski, kongresni in igralniški dejavnosti,<br>kjer velja pogoj PCT za obiskovalce. Sprostijo se omejitve kapacitet na športnih in kulturnih dogodkih."
         },
         "masksOnEvents": {
-            "title": "Maske",
+            "title": "Maske🎭",
             "description": "Maske obvezne na javnih kulturnih prireditvah."
+        },
+        "pctSports": {
+            "title": "PCT⛹️",
+            "description": "Pogoj PCT (prebolel, cepljen, testiran) obvezen za udeležence rekreativne vadbe."
+        },
+        "pctContacts": {
+            "title": "PCT",
+            "description": "Pogoj PCT (prebolel, cepljen, testiran) morajo izpolnjevati vse osebe, ki pri opravljanju dela prihajajo v neposreden stik z drugimi osebami."
         }
     },
     "phase": {

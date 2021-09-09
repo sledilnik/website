@@ -177,6 +177,8 @@ let addContainmentMeasuresFlags
         21, 6, 2021, "#ebfaeb", "liftServicesAll"
         5,  7, 2021, "#ebfaeb", "liftMasksOnEvents"
         16, 8, 2021, "#FFe6e6", "masksOnEvents"
+        23, 8, 2021, "#FFe6e6", "pctSports"
+        6,  9, 2021, "#FFe6e6", "pctContacts"
     |]
     {|
         ``type`` = "flags"

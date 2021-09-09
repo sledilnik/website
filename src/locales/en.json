@@ -1243,8 +1243,16 @@
             "description": "Easing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
         },
         "masksOnEvents": {
-            "title": "Masks",
+            "title": "Masks🎭",
             "description": "Mask requirement at public cultural events."
+        },
+        "pctSports": {
+            "title": "RVT⛹️",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all attendees of organized recreational activities."
+        },
+        "pctContacts": {
+            "title": "RVT",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all persons who come into direct contact with other persons in the course of their work."
         }
     },
     "days": {
