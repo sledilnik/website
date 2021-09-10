@@ -759,7 +759,15 @@
         },
         "masksOnEvents": {
             "description": "Obbligo di mascherina in occasione di eventi culturali pubblici.",
-            "title": "Mascherine"
+            "title": "Mascherine🎭"
+        },
+        "pctContacts": {
+            "description": "La condizione GVT (guarito, vaccinato, testato) deve essere soddisfatta da tutte le persone che entrano in contatto diretto con altre persone durante il loro lavoro.",
+            "title": "GVT"
+        },
+        "pctSports": {
+            "description": "La condizione GVT (guarito, vaccinato, testato) deve essere soddisfatta da tutti i partecipanti alle attività ricreative organizzate.",
+            "title": "GVT⛹️"
         }
     },
     "tableDict": {
@@ -1505,7 +1513,8 @@
             "hospitalizedCases": "Ricoveri",
             "confirmedCases": "Casi confermati",
             "titleMenu": "Vaccinazione - effetto",
-            "title": "Effetto della vaccinazione"
+            "title": "Effetto della vaccinazione",
+            "disclaimer": "<br>Tuttavia, a causa delle differenze nei tassi di vaccinazione tra i gruppi di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [l'articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
         }
     },
     "footer": {
