@@ -756,6 +756,10 @@
         "pctContacts": {
             "title": "PCT",
             "description": "Pogoj PCT (prebolel, cepljen, testiran) morajo izpolnjevati vse osebe, ki pri opravljanju dela prihajajo v neposreden stik z drugimi osebami."
+        },
+        "pctEverywhere": {
+            "title": "PCT!",
+            "description": "Pogoj PCT (prebolel, cepljen, testiran) morajo izpolnjevati vsi, ki opravljajo delo in vsi uporabniki storitev."
         }
     },
     "phase": {

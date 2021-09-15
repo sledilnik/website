@@ -179,6 +179,7 @@ let addContainmentMeasuresFlags
         16, 8, 2021, "#FFe6e6", "masksOnEvents"
         23, 8, 2021, "#FFe6e6", "pctSports"
         6,  9, 2021, "#FFe6e6", "pctContacts"
+        15, 9, 2021, "#FFe6e6", "pctEverywhere"
     |]
     {|
         ``type`` = "flags"

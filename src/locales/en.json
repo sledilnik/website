@@ -1253,6 +1253,10 @@
         "pctContacts": {
             "title": "RVT",
             "description": "RVT (recovered, vaccinated, tested) condition must be met by all persons who come into direct contact with other persons in the course of their work."
+        },
+        "pctEverywhere": {
+            "title": "RVT!",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all those who perform the work and all users of the services."
         }
     },
     "days": {
