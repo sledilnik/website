@@ -39,7 +39,7 @@ Podatke lahko neposredno pregledujete tudi na strani [Tabela](/sl/tables).
 - [patients.csv](https://github.com/sledilnik/data/blob/master/csv/patients.csv)
     - [icu.csv](https://github.com/sledilnik/data/blob/master/csv/icu.csv)
 - [hospitals.csv](https://github.com/sledilnik/data/blob/master/csv/hospitals.csv)
-- [sawage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
+- [sewage.csv](https://github.com/sledilnik/data/blob/master/csv/sewage.csv)
 - [safety_measures.csv](https://github.com/sledilnik/data/blob/master/csv/safety_measures.csv)
 - **Zastarelo - se ne osvežuje več**:
 - [health_centers.csv](https://github.com/sledilnik/data/blob/master/csv/health_centers.csv)

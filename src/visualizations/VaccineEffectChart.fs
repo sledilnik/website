@@ -246,7 +246,10 @@ let renderChartOptions state dispatch =
             | ConfirmedCases ->
                 let daily =
                     dailyConfirmedData
-                    |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                    |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone) // head
+                    |> Seq.rev
+                    |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone) // tail
+                    |> Seq.rev
                     |> Seq.map checkAndProcess100k
 
                 let emptyRec =
@@ -260,6 +263,8 @@ let renderChartOptions state dispatch =
 
                 let weeklyConfirmedData =
                     seq {
+                        sumRec <- emptyRec
+
                         for dp in daily do
                             sumRec <-
                                 {| Date =
@@ -294,7 +299,10 @@ let renderChartOptions state dispatch =
             | HospitalizedCases ->
                 "#de9a5a",
                 weeklyHospitalizedData
-                |> Seq.filter (fun dp -> dp.CasesProtectedWithVaccine.IsSome)
+                |> Seq.skipWhile (fun dp -> dp.CasesProtectedWithVaccine.IsNone)
+                |> Seq.rev
+                |> Seq.skipWhile (fun dp -> dp.CasesOther.IsNone) // skip empty weeks at tail
+                |> Seq.rev
                 |> Seq.map checkAndProcess100k
 
         let startDate =
@@ -448,7 +456,7 @@ let renderChartContainer state dispatch =
                           prop.className "highcharts-wrapper"
                           prop.children [ chart |> chartFromWindow ] ]
                Html.div [ prop.className "disclaimer"
-                          prop.children [ Utils.Markdown.render label ] ] ]
+                          prop.children [ Utils.Markdown.render (label + chartText "disclaimer") ] ] ]
 
 let renderChartTypeSelector (activeChartType: ChartType) dispatch =
     let renderSelector (chartType: ChartType) =

@@ -195,6 +195,10 @@
         "17": {
             "title": "phase<br>17",
             "description": "end of epidemic, high risk contact tracing"
+        },
+        "18": {
+            "title": "phase<br>18",
+            "description": "rapid antigen tests methodology"
         }
     },
     "charts": {
@@ -768,6 +772,7 @@
             "hospitalizedCasesAbs": "From {{ startDate, %b %e }} to {{ endDate, %b %e }}, **{{protectedC}}** ({{protectedPct}}) persons fully protected with vaccination and **{{otherC}}** ({{otherPct}}) other persons (unvaccinated, partially vaccinated) were hospitalized. Among protected with vaccination (fully vaccinated at least 14 days ago), **{{protectedToDatePct}}** were hospitalized ({{protectedC}} out of {{totalProtected}}).",
             "confirmedCasesRatio": "Among the confirmed cases, there are **{{multiple}}** times as many unvaccinated and partially vaccinated as fully protected with vaccination.",
             "hospitalizedCasesRatio": "Unvaccinated and partially vaccinated are hospitalized **{{multiple}}** times as many as fully protected with vaccination.",
+            "disclaimer": "<br>However, due to the differences in vaccination rates between age groups, this interpretation should be treated with caution - read more about the Simpson's paradox in [the article](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Protected with Vaccination",
             "casesOther": "Other (unvaccinated, partially vaccinated)"
         },
@@ -1238,8 +1243,20 @@
             "description": "Easing restrictions: no mask requirement at public cultural and sporting events and in restaurants, congresses and gaming salons,<br>but only for people who are tested, recovered or vaccinated. Relaxation of capacity restrictions at cultural and sporting events."
         },
         "masksOnEvents": {
-            "title": "Masks",
+            "title": "Masks🎭",
             "description": "Mask requirement at public cultural events."
+        },
+        "pctSports": {
+            "title": "RVT⛹️",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all attendees of organized recreational activities."
+        },
+        "pctContacts": {
+            "title": "RVT",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all persons who come into direct contact with other persons in the course of their work."
+        },
+        "pctEverywhere": {
+            "title": "RVT!",
+            "description": "RVT (recovered, vaccinated, tested) condition must be met by all those who perform the work and all users of the services."
         }
     },
     "days": {
