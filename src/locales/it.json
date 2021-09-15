@@ -768,6 +768,10 @@
         "pctSports": {
             "description": "La condizione GVT (guarito, vaccinato, testato) deve essere soddisfatta da tutti i partecipanti alle attività ricreative organizzate.",
             "title": "GVT⛹️"
+        },
+        "pctEverywhere": {
+            "description": "Devono ricadere nelle categorie GVT (guariti, vaccinati, testati) coloro che lavorano o usufruiscono dei servizi.",
+            "title": "GVT!"
         }
     },
     "tableDict": {
