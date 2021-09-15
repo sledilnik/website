@@ -72,7 +72,16 @@ Do you have a suggestion, would like to help with organising the data or contrib
 Use and collaboration are desired: the data is collected from sources in the public domain and can be freely used, edited, processed or incorporated into any non-marketable content if citing the source – covid-19.sledilnik.org.
 To export data to other formats, or use for visualization use please contact us at info@sledilnik.org.
 
+## Protection of personal data
+The Tracker Slovenia Scientific Society (Znanstveno društvo Sledilnik) endeavours to publish only information that cannot be linked to a specific or identifiable person or that has been previously anonymised in such a way that the data subject is no longer specific or identifiable (so-called anonymised information). We strive to achieve this by only publishing information that originates from publicly available official sources and that has previously been assessed by the relevant public authority (e.g. NIJZ, MZ, MIZŠ, etc.) as sufficiently anonymised to be suitable for public release. Furthermore, additional anonymisation measures are applied to certain graphs and visualisations, such as grouping data into larger groups or presenting average values. We believe that the published information does not constitute personal data.
 
+If you believe that the published information nevertheless constitutes personal data about you, we encourage you to contact us by email at info@sledilnik.org and in accordance with the provisions of Section III - Rectification and erasure of the General Data Protection Regulation (GDPR), to request the rectification, erasure or restriction of the processing of your personal data, to object to processing or to request access to your personal data. When doing so, please indicate as precisely as possible to which graph or visualisation or to which information your request relates. We would also like to inform you that in this case you have the right to submit a complaint with the Information Commissioner, who can be contacted by e-mail at gp.ip@ip-rs.si.
+
+More information
+- Contact details: Znanstveno društvo Sledilnik, Celovška cesta 111, 1000 Ljubljana, info@sledilnik.org
+- Purpose of publishing information: As stated at the top of the page, under the section "Why".
+- Legal basis: Article 39 (Freedom of Expression) of the Constitution of the Republic of Slovenia (Freedom of expression of thought, freedom of speech and public appearance, freedom of the press, and other forms of public communication and expression shall be guaranteed. Everyone may freely collect, receive, and disseminate information and opinions. Except in such cases as are provided by law, everyone has the right to obtain information of a public nature in which he has a well founded legal interest under law.)
+- Data source: publicly available information provided by public institutions, as indicated in each graph or visualisation.
 
 ## Covid-19 Tracker Team
 

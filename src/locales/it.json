@@ -756,6 +756,22 @@
         "liftSport": {
             "description": "Allentamento: tutti gli allenamenti in gruppi fino a 10 e tutte le competizioni (senza spettatori).<br>Tutte le scuole aperte, per l'università è raccomandato il modello C.",
             "title": "Sport"
+        },
+        "masksOnEvents": {
+            "description": "Obbligo di mascherina in occasione di eventi culturali pubblici.",
+            "title": "Mascherine🎭"
+        },
+        "pctContacts": {
+            "description": "La condizione GVT (guarito, vaccinato, testato) deve essere soddisfatta da tutte le persone che entrano in contatto diretto con altre persone durante il loro lavoro.",
+            "title": "GVT"
+        },
+        "pctSports": {
+            "description": "La condizione GVT (guarito, vaccinato, testato) deve essere soddisfatta da tutti i partecipanti alle attività ricreative organizzate.",
+            "title": "GVT⛹️"
+        },
+        "pctEverywhere": {
+            "description": "Devono ricadere nelle categorie GVT (guariti, vaccinati, testati) coloro che lavorano o usufruiscono dei servizi.",
+            "title": "GVT!"
         }
     },
     "tableDict": {
@@ -1487,6 +1503,22 @@
         },
         "note": {
             "deceasedReporting": "Maggiori informazioni sulla denuncia di deceduti da parte della NIJZ e del governo sono disponibili nell'articolo <b> <a href=\"https://medium.com/sledilnik/zakaj-razlike-v-%C5%A1tevilu-umrlih-185e6a94d6d2\" target=\"_blank\"> Zakaj razlike v številu umrlih? </a> </b>."
+        },
+        "vaccineEffect": {
+            "casesOther": "Altri (non vaccinati, parzialmente vaccinati)",
+            "casesProtected": "Protetti con la vaccinazione",
+            "hospitalizedCasesRatio": "I non vaccinati e quelli parzialmente vaccinati sono ricoverati **{{multiple}}** volte tanto quanto completamente protetti con la vaccinazione.",
+            "confirmedCasesRatio": "Tra i casi confermati, ci sono **{{multiple}}** volte tanti non vaccinati e parzialmente vaccinati rispetto a quelli completamente protetti con la vaccinazione.",
+            "confirmedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, ci sono state tra i casi confermati **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), l'infezione è stata confermata in **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}).",
+            "hospitalizedCasesAbs": "Dal {{ startDate, %e %b }} al {{ endDate, %e %b }}, sono state ricoverate **{{protectedC}}** ({{protectedPct}}) persone completamente protette con vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, parzialmente vaccinate). Tra i protetti con vaccinazione (completamente vaccinati almeno 14 giorni prima), **{{protectedToDatePct}}** ({{protectedC}} su {{totalProtected}}) sono stati ricoverati.",
+            "relative100k": "Relativo per 100.000 persone nel gruppo",
+            "absolute100k": "Per 100.000 persone nel gruppo",
+            "absolute": "Assoluto",
+            "hospitalizedCases": "Ricoveri",
+            "confirmedCases": "Casi confermati",
+            "titleMenu": "Vaccinazione - effetto",
+            "title": "Effetto della vaccinazione",
+            "disclaimer": "<br>Tuttavia, a causa delle differenze nei tassi di vaccinazione tra i gruppi di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [l'articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
         }
     },
     "footer": {
@@ -1594,6 +1626,10 @@
         "17": {
             "description": "fine dell'epidemia, tracciamento dei contatti ad alto rischio",
             "title": "fase<br>17"
+        },
+        "18": {
+            "description": "metodologia dei test antigeni rapidi",
+            "title": "fase<br>18"
         }
     },
     "weekday": {
