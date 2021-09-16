@@ -10,7 +10,9 @@
             "hr": "Kroatisch",
             "it": "Italienisch",
             "me": "Montenegrinisch",
-            "nb": "Bokmål"
+            "nb": "Bokmål",
+            "ru": "Russisch",
+            "es": "Spanisch"
         },
         "github": "GitHub",
         "links": "Verknüpfungen",
@@ -341,7 +343,7 @@
             "rhOccupant": "Bewohner von Altersheimen",
             "otherPersons": "Andere Personen",
             "titleMenu": "Fälle – Struktur",
-            "disclaimer": "Hinweis: Seit dem 11. Oktober veröffentlicht das NIJZ keine Daten mehr über Altenheime und das Gesundheitswesen."
+            "disclaimer": "Hinweis: Seit dem 11. Oktober 2020 veröffentlicht das NIJZ keine Daten mehr über Altenheime und das Gesundheitswesen."
         },
         "ageGroups": {
             "age": "Alter",
@@ -423,7 +425,8 @@
             "dsMNZ": "MNZ",
             "dsSURS": "SURS",
             "showAll": "Alle anzeigen",
-            "hideAll": "Alle verbergen"
+            "hideAll": "Alle verbergen",
+            "total": "Gesamt"
         },
         "europe": {
             "newCases": "Neue Fälle",
@@ -472,7 +475,7 @@
             "testsPerformed": "Tests (durchgeführt)",
             "allRegions": "Alle Regionen",
             "titleMenu": "HC – Behandlung",
-            "disclaimer": "Hinweis: Dieses Diagramm is nicht mehr aktuell. Seit dem 25. Oktober veröffentlicht das Gesundheitsministerium keine Daten mehr über Gesundheitszentren, da diese nicht mehr gesammelt werden."
+            "disclaimer": "Hinweis: Dieses Diagramm is nicht mehr aktuell. Seit dem 25. Oktober 2020 veröffentlicht das Gesundheitsministerium keine Daten mehr über Gesundheitszentren, da diese nicht mehr gesammelt werden."
         },
         "map": {
             "populationShare": "Anteil der Bevölkerung",
@@ -490,7 +493,8 @@
             "all": "Alle",
             "relativeIncrease": "Wöchentlicher Anstieg",
             "titleMenu": "Gemeinde – Karte",
-            "bubbles": "Verteilung"
+            "bubbles": "Verteilung",
+            "vaccinated1st": "Geimpft"
         },
         "metricsComparison": {
             "hospitalizedToDate": "Hospitalisierte (bis heute)",
@@ -523,7 +527,7 @@
             "titleMenu_MNE": "Montenegro – Lage",
             "titleMenu_MKD": "N. Mazedonien – Lage",
             "titleMenu_SVN": "Slowenien – Lage",
-            "vaccinationAdministered": "Geimpft 💉",
+            "vaccinationAdministered": "Geimpft",
             "niVentilator": "Unter Beatmung (nicht-invasiv)",
             "vaccinationAdministered2nd": "Geimpft 💉💉"
         },
@@ -564,7 +568,7 @@
             "titleMenu": "Testung",
             "byLabPercent": "Nach Labor: % positiv",
             "byLab": "Nach Labor: Tests PCR",
-            "disclaimer": "Hinweis: Ab dem 3. Dezember erhalten wir keine Daten einzelner Laboratorien.",
+            "disclaimer": "Hinweis: Ab dem 3. Dezember 2020 erhalten wir keine Daten einzelner Laboratorien.",
             "hagt": "Standard: RAT",
             "positiveTotal": "Positive gesamt",
             "positivePCR": "Positive PCR",
@@ -577,7 +581,9 @@
             "deceased": "Todesfälle",
             "title": "Fälle nach Gemeinden",
             "titleMenu": "Region – Fälle",
-            "newCases7Days": "Neue Fälle (7-Tage-Durchschnitt)"
+            "newCases7Days": "Neue Fälle (7-Tage-Durchschnitt)",
+            "vaccinated1st": "Geimpft",
+            "vaccinated": "Geimpft"
         },
         "cases": {
             "hospitalized": "Hospitalisierte",
@@ -1148,7 +1154,8 @@
         "newCases7dInfo": "Durchschnitt der letzten 7 Tage",
         "newCases7d": "Neue Fälle",
         "testsHAT": "Tests heute: Schnelltests",
-        "vaccinationSummary": "Geimpfte Personen"
+        "vaccinationSummary": "Geimpfte Personen",
+        "incidenceInfo": "pro 100.000 Menschen"
     },
     "timestamp": {
         "at": "um {{ date, %H:%M }}",
@@ -1355,6 +1362,18 @@
         "14": {
             "description": "Schnelltests",
             "title": "Phase<br>14"
+        },
+        "18": {
+            "title": "Phase<br>18"
+        },
+        "17": {
+            "title": "Phase<br>17"
+        },
+        "16": {
+            "title": "Phase<br>16"
+        },
+        "15": {
+            "title": "Phase<br>15"
         }
     },
     "embedMaker": {
