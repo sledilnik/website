@@ -1041,7 +1041,8 @@
             "titleMenu": "Comuni - casi",
             "weeklyGrowth": "Incremento settimanale ",
             "confirmed": "Confermati: ",
-            "viewWeeklyGrowth": "Incremento settimanale"
+            "viewWeeklyGrowth": "Incremento settimanale",
+            "closed": "Chiusi: "
         },
         "europe": {
             "noData": "Nessun dato",
@@ -1328,8 +1329,8 @@
             "deceased": "Decessi",
             "hospitalized": "Ricoverati",
             "cases": "Casi confermati",
-            "titleMenu": "Diagramma delle fasi",
-            "title": "Diagramma delle fasi"
+            "titleMenu": "Diagramma di fase",
+            "title": "Diagramma di fase"
         },
         "hcCases": {
             "totalConfirmed": "Totale confermati",
@@ -1721,7 +1722,7 @@
         },
         "data-usage": {
             "question": "Come posso ottenere e utilizzare il vostro database?",
-            "answer": "Il nostro database è pubblico e disponibile gratuitamente sotto forma di [** file CSV **, ** API REST ** e ** foglio Google **] (/ it/ data). Fateci sapere lo scopo per il quale intendete utilizzare le informazioni e assicuratevi di includere Sledilnik come fonte dei vostri dati.\n\nPoiché tutti i dati nel database sono già contrassegnati con tag inglesi (vedi anche [La vostra pagina web è disponibile in inglese?](#english-translation)), è possibile anche il loro uso internazionale (esportazione, visualizzazione)."
+            "answer": "Il nostro database è pubblico e disponibile gratuitamente sotto forma di [** file CSV **, ** API REST ** e ** foglio Google **] (/it/data). Fateci sapere lo scopo per il quale intendete utilizzare le informazioni e assicuratevi di includere Sledilnik come fonte dei vostri dati.\n\nPoiché tutti i dati nel database sono già contrassegnati con tag inglesi (vedi anche [La vostra pagina web è disponibile in inglese?](#english-translation)), è possibile anche il loro uso internazionale (esportazione, visualizzazione)."
         },
         "data-contribute": {
             "question": "In che modo gli utenti possono essere coinvolti attivamente nella raccolta dei dati? Come posso partecipare?",
@@ -1800,30 +1801,31 @@
         },
         "regions-chart": {
             "answer": "Il [grafico](/it/stats#regions-chart) mostra la dinamica di crescita dei casi confermati nelle regioni selezionate. Le singole regioni possono essere facilmente confrontate selezionando quelle che si desidera visualizzare sul grafico, cliccando sulle specifiche regioni sotto il grafico. Dalla curva, possiamo vedere rapidamente quali regioni hanno più e quali meno casi confermati e come questo numero sia cambiato nel tempo.",
-            "question": "Cosa ci dice il \"Per regione\"?"
+            "question": "Cosa rappresenta il grafico \"Per regione\"?"
         },
         "spread-chart": {
             "answer": "Il [grafico](/it/stats#spread-chart) ci dice quanti nuovi casi confermati di infezioni ci sono stati in un determinato giorno, dove si seguono l'OMS e la [definizione ECDC](https://www.ecdc.europa.eu/en/case-definition-and-european-surveillance-human-infection-novel-coronavirus-2019-ncov) che i casi confermati sono \"persone con una conferma di laboratorio dell'infezione da COVID19\". Dal 21 dicembre 2020 vengono inclusi i casi confermati con un tampone antigenico rapido (TAR). Poiché il numero di casi confermati dipende ancora dai tamponi, si stima che i dati sui casi confermati siano molto inferiori al numero effettivo di persone infette.",
-            "question": "Cosa significa il grafico \"Variazione di casi confermati\"?"
+            "question": "Cosa rappresenta il grafico \"Variazione di casi confermati\"?"
         },
         "infections-chart": {
             "answer": "Il [grafico](/it/stats#infections-chart)fornisce una visione della quota giornaliera di casi confermati dei gruppi ad alto rischio o di dipendenti in aree ad alto rischio. A causa dei dati di input non sufficientemente precisi sulle infezioni confermate, i valori giornalieri (Per giorno (media)) sono indicati come media mobile di 7 giorni. La somma dei valori di un determinato giorno, a partire da 3 giorni prima e 3 giorni dopo, viene divisa per 7. Pertanto, il grafico mostra la situazione quattro giorni prima di un giorno specifico, e in questo modo si ottiene un'idea migliore delle tendenze dei singoli gruppi. Se selezioniamo la visualizzazione *Totale* o *Relativo*, saltiamo dalla curva dei casi confermati all'istogramma, che mostra il numero di persone infette confermate all'interno di ogni categoria in un determinato giorno.\n\nL'aumento del personale sanitario infetto non significa che siano stati scoperti esattamente in quel giorno; possono essere stati positivi prima, ma le informazioni sul loro stato sono state ottenute successivamente. La categoria *Personale delle case di riposo* comprende gli operatori sanitari, i collaboratori e l'assistenza esterna (studenti di medicina), per cui i dati giornalieri sugli operatori sanitari (curva o colonne blu) sono ridotti di conseguenza. Ciò significa che il numero del personale sanitario è una stima molto prudente.",
-            "question": "Cosa ci dice il grafico \"Struttura dei casi confermati\"?"
+            "question": "Cosa rappresenta il grafico \"Struttura dei casi confermati\"?"
         },
         "tests-chart": {
             "answer": "Il [grafico](/it/stats#tests-chart) mostra il numero totale di test ordinari (visualizzazione *Ordinario PCR*) e i test nazionali dell'indagine IMI (selezionando la visualizzazione *Ricerca*). Le colonne mostrano il numero di tamponi negativi e positivi in un giorno specifico e la curva mostra la percentuale giornaliera di tamponi positivi.\n\nDa dicembre 2020 stiamo anche monitorando i test antigenici rapidi (TAR) - vedi visualizzazione *Ordinario TAR*.",
-            "question": "Cosa ci dice il grafico \"Tamponi\"?"
+            "question": "Cosa rappresenta il grafico \"Tamponi\"?"
         },
         "hcenters-chart": {
             "answer": "Il [grafico](/it/stats#hcenters-chart) mostra il trattamento dei sospetti di COVID-19 nelle Case di Sanità (livello di assistenza sanitaria primaria). È possibile mostrare i dati per l'intero paese o selezionare una regione specifica. Le Case di Sanità sono il primo punto di ingresso per l'esecuzione di tamponi da sottoporre a test per la presenza del virus, quindi un aumento del numero di sospetti e di rinvii all'autoisolamento può essere un indicatore precoce del fatto che si sono verificati nuovi focolai.\n\nIl grafico mostra quindi il numero di tutte le visite mediche d'emergenza (anche per altre malattie) nei centri sanitari (vedi note sotto), il numero di casi sospetti di COVID-19 in base al numero di esami al punto d'ingresso COVID-19 e tutti i sospetti di infezioni in base alle conversazioni telefoniche con i pazienti sospetti di infezione. Alcune persone possono essere registrate più volte, prima per telefono e poi durante l'esame. Mostriamo anche il numero totale di rinvii all'autoisolamento.\n\n*Nota 1: in alcuni comuni, il punto di controllo del COVID-19 è all'interno dei locali ospedalieri (per esempio gli ospedali generali di Celje e Novo mesto). I dati prima del 14.4. non sono disponibili per questi ospedali generali.\nNota 2: la metodologia per la registrazione dei sospetti tramite conversazione telefonica è cambiata, quindi tutti i sospetti sono stati inizialmente registrati. Dal 23 aprile, tuttavia, sono stati registrati solo i sospetti tramite conversazione telefonica, dove non sono stati ordinati esami e tamponi (test). È quindi possibile che vi siano differenze nel modo in cui i singoli centri sanitari riportano questi dati e che questo numero sia troppo elevato.*\n\nQuando si riporta il numero di test eseguiti, tutti i test (compresi i test ripetuti) vengono registrati. Il numero di test positivi comprende quindi tutti i test positivi - la stessa persona può essere testata più volte e contata come positiva più volte. Il numero di test eseguiti può quindi essere maggiore del numero di test positivi riportati dai laboratori (in questo caso ogni persona viene registrata una sola volta). Vedi anche [Cosa ci dice il grafico \"Tamponi\"?](#tests-charts)",
-            "question": "Cosa significa il grafico \"Trattamenti nelle Case di Sanità\"?"
+            "question": "Cosa rappresenta il grafico \"Trattamenti nelle Case di Sanità\"?"
         },
         "patients-chart": {
             "answer": "Il [grafico](/it/stats#patients-chart) nella visualizzazione predefinita *Tutti gli ospedali* ci mostra l'intero quadro dei ricoveri per data disposti in base alle condizioni dei pazienti: le colonne con un valore positivo (quelle sopra l'asse orizzontale) mostrano il numero degli amessi in ospedale, il numero dei ricoveri, le sfumature di rosso vengono utilizzate per demarcare gli individui in terpia intensiva, specificando quanti di questi sono in condizioni critiche sui ventilatori (intubati). Le colonne con un valore negativo (quelle al di sotto dell'asse orizzontale) mostrano il numero di dimessioni e decessi quel giorno. Si può anche selezionare un ospedale specifico e vedere solo i ricoveri lì. Se selezionate la visualizzazione *Per ospedale* qui sotto, potete vedere il numero di persone in cura ospedaliera per giorno per ciascuno degli ospedali COVID-19.\nIl grafico può permettere una buona visione del carico di lavoro degli ospedali e può essere la base per valutare la capacità ospedaliera e pianificare il suo possibile incremento.",
-            "question": "Cosa ci dice il grafico \"Ricoveri\"?"
+            "question": "Cosa rappresenta il grafico \"Ricoveri\"?"
         },
         "chart-phases": {
-            "question": "Cosa significano le diverse fasi (fasi 1-14) nel grafico?"
+            "question": "Cosa significano le diverse fasi (fasi 1-18) nel grafico?",
+            "answer": "Le linee verticali dividono le fasi, delimitate dalle date, in cui le autorità hanno cambiato il modo in cui sono state raccolte le informazioni sulla diffusione dell'infezione (è stato cambiato il metodo del test, sono stati introdotti interventi di autoisolamento, sono stati imposti divieti di assembramento e movimento di persone e sono stata rese obbligatorie le misure di protezione di base).\n\nLe fasi sono indicate perché il cambiamento della metodologia dei test ha anche cambiato l'importanza di alcuni indicatori con cui si può giudicare la prevalenza delle infezioni.\n\n* **Fase 1 (4-12 marzo 2020)**: Vengono registrati i primi casi di infezione in Slovenia. Tutti i casi vengono seguiti, tutti i contatti vengono testati.\n\n* **Fase 2 (13-19 marzo 2020)**: La metodologia del test viene cambiata e vengono introdotte misure di autoisolamento e di distanziamento sociale.\n\n* **Fase 3 (20 marzo-7 aprile 2020)**: La metodologia di test viene rivista e viene messo in atto il divieto di assembramento per più di cinque persone in aree pubbliche.\n\n* **Fase 4 (8-15 aprile 2020)**: Nuovo cambiamento nella metodologia di test - vengono testate anche le persone con sintomi lievi provenienti da nuclei familiari con più di un'infezione respiratoria.\n\n* Fase 5 (15-21 aprile 2020)**: Nuovo cambiamento nella metodologia di test - ri-test, se possibile, di **tutte le infezioni sospette da virus SARS-CoV-2**.\n\n* Fase 6 (21 aprile-15 maggio 2020): Nuovo cambiamento nella metodologia di test - tutte le persone **sospettate di essere infette da SARS-CoV-2** vengono nuovamente testate. Inizia un'indagine nazionale su 3000 persone campionate a caso (test supplementari, analisi del sangue per la presenza di anticorpi).\n\n* **Fase 7 (15 maggio-10 settembre 2020)**: Il governo sloveno dichiara la fine ufficiale dell'epidemia di coronavirus - una quarantena di almeno 14 giorni rimarrà in vigore per le persone provenienti da stati non appartenenti all'UE, salvo alcune eccezioni (diplomatici, merci). I cittadini devono ancora seguire le regole di base per prevenire una possibile diffusione dell'infezione."
         },
         "cases-chart": {
             "answer": "Tutti i casi confermati sono visualizzati nel grafico [Casi confermati](/it/stats#cases-chart). Per poter monitorare l'epidemia, è importante sapere quanti sono ancora infetti. Per questo motivo, usiamo la terminologia seguente:\n\n**Casi chiusi** sono la somma di tutti i casi confermati che non sono più infetti dal virus, cioè il ristabilito e il defunto.\n\n**I casi attivi** sono tutte infezioni da virus confermate che non sono ancora state recuperate (sono ancora infettate dal virus). Vedi anche\n [Quali indicatori include il grafico \"COVID-19 Situazione in Slovenia\"?] (#chart-metrics-included)",
@@ -1837,7 +1839,7 @@
         },
         "metrics-comparison-chart": {
             "answer": "Il [grafico](/it/stats#metrics-comparison-chart) mostra la dinamica giornaliera e complessiva della diffusione dell'infezione dall'inizio ad oggi. Gli indicatori utilizzati (cfr. [Quali indicatori include il grafico \"Situazione COVID-19 in Slovenia\"?](#chart-metrics-included)) ci aiuta a capire se e quanto successo abbimao nel controllare la diffusione del virus. Possiamo monitorare il tasso di crescita giornaliero dei nuovi casi confermati e vedere indirettamente se le misure funzionano; le informazioni sul numero di ricoveri e sulla percentuale di persone in terapia intensiva mostrano quante persone sono seriamente a rischio a causa della malattia, ma allo stesso tempo, questi dati ci mostrano anche il reale onere per il sistema sanitario.\n\nI punti di interruzione sono indicati di seguito, sulla timeline: dal primo caso confermato (4 marzo 2020) alle misure (per parola chiave e data) adottate per frenare la diffusione e il loro allentamento. Questo ci aiuta a monitorare la dinamica delle variabili relative alle misure.",
-            "question": "Cosa significa il grafico \"COVID-19 Situazione in Slovenia\"?"
+            "question": "Cosa rappresenta il grafico \"COVID-19 Situazione in Slovenia\"?"
         },
         "data-active-cases": {
             "answer": "Sì, questi indicatori sono stati visualizzati graficamente come **Casi attivi** e **Ristabiliti (totale)** a partire dalla fine di aprile.\n\n\nQueste visualizzazioni non sono dati provenienti da fonti pubbliche; entrambi gli indicatori mostrano il valore calcolato sulla base dei dati ufficiali, quindi sono indicati da una linea tratteggiata per una più facile distinzione. Il valore dei casi attivi è calcolato semplicemente sottraendo i dati ufficiali per la relativa categoria, il valore del Ristabiliti (totale) riflette lo stato di tutti i casi confermati tre settimane fa (meno i morti). Il numero dei ristabiliti è una semplice stima basata sul valore di tutti i casi confermati infettati in passato - partendo dal presupposto che i pazienti si riprendono dalla malattia in media entro 14 giorni (fonte: [rapporto dell'ECDC](https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-ninth-update-23-april-2020.pdf)); quindi, il numero di guarigioni in un dato giorno equivale al numero di tutti i casi confermati tre settimane prima di una determinatab data, da cui si detrae il numero di decessi entro quel giorno. Questa stima semplificata non tiene conto dei casi più gravi di COVID-19 con tempi di recupero più lunghi.\n\n*Nota: Il calcolo dei ristabiliti è stato modificato il 9 maggio 2020. Ora consideriamo che un paziente è guarito in 14 giorni dopo che la sua infezione sia stata confermata (in precedenza 21 giorni), quindi c'è stato un notevole salto nel numero dei sopravvissuti. Si prega di tenere conto di questa differenza nella stima del numero di sopravvissuti. Una spiegazione più dettagliata del calcolo modificato è disponibile nell'articolo Medium [Od potrjeno okuženih do prebolelih (Da casi confermato a ristabilito)](https://medium.com/@sledilnik/94c81674718e).*\n\nFormula del valore:\n- Ristabiliti (totale) = Casi confermati (totale) 21 giorni fa - Morto (totale) entro il giorno del calcolo\n\n- Casi attivi = Casi confermati (totale) - Ristabiliti (totale) - Morti (totale)",
@@ -1848,6 +1850,34 @@
         },
         "chart-reality": {
             "question": "I vostri grafici rappresentano la situazione reale?"
+        },
+        "countries-chart": {
+            "answer": "Il [grafico](/it/stats#countries-chart) mostra un confronto tra la Slovenia e diversi gruppi di paesi in termini di numero di morti per COVID-19 per milione di abitanti. Il grafico è disposto cronologicamente. È possibile cambiare la visualizzazione delle diverse visualizzazioni cronologiche dei confronti tra diversi gruppi di paesi cliccando sulle schede appropriate qui sotto.",
+            "question": "Cosa rappresenta il grafico \"Confronto per paesi\"?"
+        },
+        "weekly-demographics-chart": {
+            "question": "Cosa rappresenta il grafico \"Casi settimanali - Dati demografici\"?"
+        },
+        "chart-cases-by-age-group": {
+            "question": "Cosa rappresenta il grafico \"Casi confermati per fasce di età\"?"
+        },
+        "chart-correlation": {
+            "question": "Cosa rappresenta il grafico \"Correlazione tra casi, ricoveri e decessi\"?"
+        },
+        "age-groups-chart": {
+            "question": "Cosa rappresenta il grafico \"Fasce di età\"?"
+        },
+        "phase-diagram-chart": {
+            "question": "Cosa rappresenta il grafico \"Diagramma di fase\"?"
+        },
+        "municipalities-chart": {
+            "question": "Cosa rappresenta il grafico “Casi per comune”?"
+        },
+        "map-chart": {
+            "question": "Cosa rappresenta la \"Mappa dei comuni\"?"
+        },
+        "ratios-chart": {
+            "question": "Cosa rappresenta il grafico \"Quota dei casi gravi\"?"
         }
     },
     "donation": {
@@ -1855,11 +1885,11 @@
             "stripe": {
                 "donateButton": "{{amount}} al mese",
                 "success": {
-                    "description": "Se desidera interrompere la sua donazione ricorrente, ce lo faccia sapere a drustvo@sledilnik.org.",
+                    "description": "Se desideri interrompere la tua donazione ricorrente, faccelo sapere su drustvo@sledilnik.org.",
                     "title": "Grazie della donazione mensile ricorrente"
                 },
-                "stopping": "Può interrompere la sua donazione in qualsiasi momento. Ci spedisca un messaggio a drustvo@sledilnik.org.",
-                "description": "Una donazione mensile regolare ci dà un reddito stabile e distribuisce i tuoi costi in modo uniforme durante tutto l'anno. Scelga l'importo mensile qui sotto per pagare **con carta di credito**:"
+                "stopping": "Puoi interrompere la tua donazione in qualsiasi momento. Spedisci un messaggio a drustvo@sledilnik.org.",
+                "description": "Una donazione mensile regolare ci dà un reddito stabile e distribuisce le tue spese in modo uniforme durante tutto l'anno. Scegli l'importo mensile qui sotto per pagare **con carta di credito**:"
             },
             "title": "Donazione mensile ricorrente"
         },
@@ -1869,7 +1899,7 @@
                     "description": " ",
                     "title": "Grazie della donazione una tantum"
                 },
-                "description": "Può anche fare una donazione una tantum **con carta di credito**. Scelga l'importo della sua donazione qui sotto:"
+                "description": "Puoi anche fare una donazione una tantum **con carta di credito**. Scegli l'importo della tua donazione qui sotto:"
             },
             "banktransfer": {
                 "detailsButton": "Dettagli bonifico bancario",
@@ -1878,7 +1908,8 @@
             "title": "Sostegno una tantum"
         },
         "other": {
-            "title": "Altri modi di supporto"
+            "title": "Altri modi di supporto",
+            "description": "Per altri modi di sostenerci dalla Slovenia potreste verificare la [traduzione slovena di questa pagina](/sl/donate).\n\nSiamo sempre grati per i suggerimenti e le condivisioni dei nostri post su [Twitter](https://twitter.com/sledilnik), [Facebook](https://fb.me/COVID19Sledilnik), [YouTube](https://www.youtube.com/channel/UCM_Sk2GZ8vTMiyBQ0SMHgJw/videos), [Instagram](https://www.instagram.com/sledilnik/) e altre piattaforme, così come per le nuove funzionalità e le correzioni del codice sorgente su [GitHub](https://github.com/sledilnik).\n\nApprezzeremo ancora di più se potete concederci l'accesso a qualsiasi dato aperto che potrebbe essere rilevante per le nostre analisi.\n\nAvete una proposta diversa su come sostenere le nostre attività o su come potremmo collaborare? Non esitate a contattarci su info@sledilnik.org - saremo felici di trovare insieme una soluzione."
         },
         "companies": {
             "description": "Si prega di contattarci su drustvo@sledilnik.org per preparare un contratto di donazione e/o altra documentazione necessaria come richiesto.",
@@ -1887,12 +1918,18 @@
         "success": {
             "title": "Grazie della donazione",
             "session": "ID sessione di pagamento:",
-            "description": "La sua donazione ci aiuterà nel nostro lavoro futuro.<br>Le chiediamo gentilmente di incoraggiare anche altri a donare."
+            "description": "La tua donazione ci aiuterà nel nostro lavoro futuro.<br>Ti chiediamo gentilmente di incoraggiare anche altri a donare."
         },
         "bankDetails": {
             "bankBicSwift": "Banca SWIFT/BIC",
             "bank": "Banca",
-            "iban": "Conto IBAN"
-        }
+            "iban": "Conto IBAN",
+            "reference": "Riferimento",
+            "purpose": "Causale",
+            "purposeCode": "Codice causale",
+            "recipient": "Beneficiario"
+        },
+        "intro": "Noi della **Società scientifica senza scopo di lucro Sledilnik** vogliamo invitarti a sostenere il nostro lavoro donando secondo le tue possibilità. Con il vostro aiuto, saremo in grado di continuare a elaborare e analizzare serie di dati critici per il funzionamento della nostra società, rendendoli disponibili al pubblico, aumentando la consapevolezza e migliorando il processo decisionale.\n\nIl tuo contributo ci aiuterà a continuare a fare quello che facciamo meglio: offrire pubblicamente dei dati e analisi liberamente accessibili - creando un **un oggi e un domani migliore per tutti noi**. Grazie di non essere indifferenti!",
+        "title": "Io sostengo il Sledilnik"
     }
 }
