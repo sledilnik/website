@@ -1037,6 +1037,7 @@
             "hagt": "Redno: HAT",
             "regular": "Redno: PCR",
             "ns-apr20": "Raziskava: PCR",
+            "performedTests": "Opravljenih testov",
             "negativeTests": "Negativnih testov",
             "positiveTests": "Pozitivnih testov",
             "shareOfPositive": "Delež pozitivnih testov (%)"
