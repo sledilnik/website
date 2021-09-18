@@ -263,12 +263,16 @@ let renderStackedChart state dispatch =
             s.Append "</table>" |> ignore
             s.ToString()
 
-    let getValue dp vType =
+    let getValue currDP prevDP vType =
         match state.DisplayType with
+        | Used ->
+            currDP.usedByManufacturer.TryFind(vType)
+            |> Utils.subtractIntOption (prevDP.usedByManufacturer.TryFind(vType))
         | Unused ->
-            calcUnusedDoses (dp.deliveredByManufacturer.TryFind(vType)) (dp.usedByManufacturer.TryFind(vType))
+            currDP.deliveredByManufacturer.TryFind(vType)
+            |> Utils.subtractIntOption (currDP.usedByManufacturer.TryFind(vType))
         | _ ->
-            dp.deliveredByManufacturer.TryFind(vType)
+            currDP.deliveredByManufacturer.TryFind(vType)
 
     let allSeries = seq {
         for vType, vColor in AllVaccinationTypes do
@@ -279,11 +283,12 @@ let renderStackedChart state dispatch =
                        color = vColor
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp ->
+                           |> Array.pairwise
+                           |> Array.map (fun (prevDP, currDP) ->
                                             {|
-                                                x = dp.JsDate12h
-                                                y = getValue dp vType
-                                                date = I18N.tOptions "days.longerDate" {| date = dp.Date |}
+                                                x = currDP.JsDate12h
+                                                y = getValue currDP prevDP vType
+                                                date = I18N.tOptions "days.longerDate" {| date = currDP.Date |}
                                             |} |> pojo ) |}
     }
 
@@ -581,9 +586,7 @@ let renderChartContainer (state: State) dispatch =
                     match state.DisplayType with
                     | ByWeek ->
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
-                    | Used ->
-                        renderVaccinationChart state dispatch |> Highcharts.chartFromWindow
-                    | Unused | ByManufacturer ->
+                    | Used | Unused | ByManufacturer ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow
                     | ByAgeAll | ByAge1st ->
                         renderAgeChart state dispatch |> Highcharts.chartFromWindow ] ]

@@ -1373,7 +1373,7 @@
         "vaccination": {
             "title": "Cepljenje",
             "titleMenu": "Cepljenje",
-            "used": "Porabljena cepiva",
+            "used": "Poraba cepiva",
             "byManufacturer": "Dobavljena cepiva",
             "unused": "Neporabljena cepiva",
             "byWeek": "Po tednih",
