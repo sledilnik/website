@@ -33,19 +33,21 @@ type DisplayType =
     | Used
     | Delivered
     | Unused
-    | ByWeek
+    | ByWeekUsage
+    | ByWeekSupply
     | ByAge1st
     | ByAgeAll
-    static member All = [ Used ; Delivered; Unused; ByAgeAll; ByAge1st; ByWeek; ]
+    static member All = [ Used ; Delivered; Unused; ByAgeAll; ByAge1st; ByWeekUsage; ByWeekSupply; ]
     static member Default = Used
     static member GetName =
         function
         | Used -> chartText "used"
         | Delivered -> chartText "byManufacturer"
         | Unused -> chartText "unused"
-        | ByWeek -> chartText "byWeek"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
+        | ByWeekUsage -> chartText "byWeek"
+        | ByWeekSupply -> chartText "byWeekSupply"
 
 let AllVaccinationTypes = [
     "janssen",     "#019cdc"
@@ -524,42 +526,6 @@ let renderWeeklyChart state dispatch =
     let allSeries = seq {
         yield
             pojo
-                {| name = chartText "administered"
-                   ``type`` = "column"
-                   color = "#189a73"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (subtractWeekly currW.administered.toDate prevW.administered.toDate)) |}
-        yield
-            pojo
-                {| name = chartText "administered2nd"
-                   ``type`` = "column"
-                   color = "#0e5842"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (subtractWeekly currW.administered2nd.toDate prevW.administered2nd.toDate)) |}
-        yield
-            pojo
-                {| name = chartText "deliveredDoses"
-                   ``type`` = "line"
-                   color = "#73ccd5"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (subtractWeekly currW.deliveredToDate prevW.deliveredToDate)) |}
-        yield
-            pojo
                 {| name = chartText "usedDoses"
                    ``type`` = "line"
                    color = "#20b16d"
@@ -570,18 +536,58 @@ let renderWeeklyChart state dispatch =
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
                                     currW.Date (subtractWeekly currW.usedToDate prevW.usedToDate)) |}
-        yield
-            pojo
-                {| name = chartText "unusedDoses"
-                   ``type`` = "line"
-                   color = "#ffa600"
-                   data =
-                       state.VaccinationData
-                       |> toWeeklyData
-                       |> Array.map (
-                            fun (prevW, currW) ->
-                                valueToWeeklyDataPoint
-                                    currW.Date (calcUnusedDoses currW.deliveredToDate currW.usedToDate)) |}
+
+        if state.DisplayType = ByWeekUsage then
+            yield
+                pojo
+                    {| name = chartText "administered"
+                       ``type`` = "column"
+                       color = "#189a73"
+                       data =
+                           state.VaccinationData
+                           |> toWeeklyData
+                           |> Array.map (
+                                fun (prevW, currW) ->
+                                    valueToWeeklyDataPoint
+                                        currW.Date (subtractWeekly currW.administered.toDate prevW.administered.toDate)) |}
+            yield
+                pojo
+                    {| name = chartText "administered2nd"
+                       ``type`` = "column"
+                       color = "#0e5842"
+                       data =
+                           state.VaccinationData
+                           |> toWeeklyData
+                           |> Array.map (
+                                fun (prevW, currW) ->
+                                    valueToWeeklyDataPoint
+                                        currW.Date (subtractWeekly currW.administered2nd.toDate prevW.administered2nd.toDate)) |}
+
+        if state.DisplayType = ByWeekSupply then
+            yield
+                pojo
+                    {| name = chartText "deliveredDoses"
+                       ``type`` = "line"
+                       color = "#73ccd5"
+                       data =
+                           state.VaccinationData
+                           |> toWeeklyData
+                           |> Array.map (
+                                fun (prevW, currW) ->
+                                    valueToWeeklyDataPoint
+                                        currW.Date (subtractWeekly currW.deliveredToDate prevW.deliveredToDate)) |}
+            yield
+                pojo
+                    {| name = chartText "unusedDoses"
+                       ``type`` = "line"
+                       color = "#ffa600"
+                       data =
+                           state.VaccinationData
+                           |> toWeeklyData
+                           |> Array.map (
+                                fun (prevW, currW) ->
+                                    valueToWeeklyDataPoint
+                                        currW.Date (calcUnusedDoses currW.deliveredToDate currW.usedToDate)) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -613,7 +619,7 @@ let renderChartContainer (state: State) dispatch =
                prop.className "highcharts-wrapper"
                prop.children [
                     match state.DisplayType with
-                    | ByWeek ->
+                    | ByWeekUsage | ByWeekSupply ->
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
                     | Used | Unused | Delivered ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow

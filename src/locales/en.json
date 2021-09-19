@@ -749,6 +749,7 @@
             "byManufacturer": "Vaccination Delivered",
             "unused": "Vaccination Unused",
             "byWeek": "By Week",
+            "byWeekSupply": "By Week: Supply",
             "byAgeAll": "By Age: Fully Vaccinated",
             "byAge1st": "By Age: Vaccinated",
             "pfizer": "Pfizer/BioNTech",

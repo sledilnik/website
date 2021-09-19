@@ -1377,6 +1377,7 @@
             "byManufacturer": "Dobavljena cepiva",
             "unused": "Neporabljena cepiva",
             "byWeek": "Po tednih",
+            "byWeekSupply": "Po tednih: Zaloga",
             "byAgeAll": "Po starosti: Polno cepljeni",
             "byAge1st": "Po starosti: Cepljeni",
             "pfizer": "Pfizer/BioNTech",
