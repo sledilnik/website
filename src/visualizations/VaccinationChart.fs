@@ -409,14 +409,24 @@ let renderAgeChart state dispatch =
             s.Append "</table>" |> ignore
             s.ToString()
 
-    let getAgeGroupRec dp ageGroup population =
+    let getAgeGroupRec dp prevDP ageGroup population =
         let aG =
             dp.administeredPerAge
             |> List.find (fun aG -> aG.ageFrom = ageGroup.AgeFrom && aG.ageTo = ageGroup.AgeTo)
+        let prevAG =
+            prevDP.administeredPerAge
+            |> List.find (fun aG -> aG.ageFrom = ageGroup.AgeFrom && aG.ageTo = ageGroup.AgeTo)
         let value =
             match state.DisplayType with
-            | ByAge1st -> aG.administered
-            | _ -> aG.administered2nd
+            | ByAge1st ->
+                match state.MetricType with
+                | Today  -> aG.administered |> Utils.subtractIntOption prevAG.administered
+                | ToDate -> aG.administered
+            | ByAgeAll ->
+                match state.MetricType with
+                | Today  -> aG.administered2nd |> Utils.subtractIntOption prevAG.administered2nd
+                | ToDate -> aG.administered2nd
+            | _ -> None
         let y =
             match state.ScaleType with
             | Absolute ->
@@ -462,7 +472,8 @@ let renderAgeChart state dispatch =
                        color = ageGroupColors.[idx]
                        data =
                            state.VaccinationData
-                           |> Array.map (fun dp -> getAgeGroupRec dp ageGroup ageGroupPopulation.[idx]) |}
+                           |> Array.pairwise
+                           |> Array.map (fun (prevDP, currDP) -> getAgeGroupRec currDP prevDP ageGroup ageGroupPopulation.[idx]) |}
     }
 
     let onRangeSelectorButtonClick(buttonIndex: int) =
@@ -677,8 +688,12 @@ let render (state: State) dispatch =
         Html.div [
             Utils.renderChartTopControls [
                 renderDisplaySelectors state dispatch
+
                 match state.DisplayType with
-                | Used | Delivered -> renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                | Used | Delivered | ByAgeAll | ByAge1st -> renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                | _ -> Html.none
+
+                match state.DisplayType with
                 | ByAgeAll | ByAge1st -> renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch)
                 | _ -> Html.none
             ]
