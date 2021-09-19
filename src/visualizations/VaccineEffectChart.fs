@@ -19,7 +19,7 @@ type DisplayType =
     | HospitalizedCases
     static member All = [ ConfirmedCases; HospitalizedCases ]
 
-    static member Default = ConfirmedCases
+    static member Default = HospitalizedCases
 
     member this.GetName =
         match this with
@@ -32,7 +32,7 @@ type ChartType =
     | Relative100k
     static member All = [ Absolute; Absolute100k; Relative100k ]
 
-    static member Default = Relative100k
+    static member Default = Absolute100k
 
     member this.GetName =
         match this with
