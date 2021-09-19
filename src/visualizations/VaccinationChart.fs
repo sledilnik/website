@@ -36,7 +36,7 @@ type DisplayType =
     | ByWeek
     | ByAge1st
     | ByAgeAll
-    static member All = [ Used ; Delivered; Unused; ByWeek; ByAgeAll; ByAge1st; ]
+    static member All = [ Used ; Delivered; Unused; ByAgeAll; ByAge1st; ByWeek; ]
     static member Default = Used
     static member GetName =
         function
@@ -80,7 +80,7 @@ let init: State * Cmd<Msg> =
           Error = None
           DisplayType = DisplayType.Default
           MetricType = MetricType.Default
-          ScaleType = ScaleType.Relative
+          ScaleType = ScaleType.Absolute
           RangeSelectionButtonIndex = 0 }
 
     state, cmd
