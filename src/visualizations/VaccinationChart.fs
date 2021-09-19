@@ -18,27 +18,34 @@ let chartText = I18N.chartText "vaccination"
 
 type ScaleType = Absolute | Relative
 
+type MetricType =
+    | Today
+    | ToDate
+  with
+    static member All = [ Today; ToDate ]
+    static member Default = Today
+    static member GetName =
+        function
+        | Today -> I18N.t "charts.common.showToday"
+        | ToDate -> I18N.t "charts.common.showToDate"
+
 type DisplayType =
     | Used
-    | ByManufacturer
+    | Delivered
     | Unused
     | ByWeek
     | ByAge1st
     | ByAgeAll
-    static member All = [ Used ; ByManufacturer; Unused; ByWeek; ByAgeAll; ByAge1st; ]
+    static member All = [ Used ; Delivered; Unused; ByWeek; ByAgeAll; ByAge1st; ]
     static member Default = Used
     static member GetName =
         function
         | Used -> chartText "used"
-        | ByManufacturer -> chartText "byManufacturer"
+        | Delivered -> chartText "byManufacturer"
         | Unused -> chartText "unused"
         | ByWeek -> chartText "byWeek"
         | ByAge1st -> chartText "byAge1st"
         | ByAgeAll -> chartText "byAgeAll"
-    static member ShowScaleType =
-        function
-        | ByAgeAll | ByAge1st -> true
-        | _ -> false
 
 let AllVaccinationTypes = [
     "janssen",     "#019cdc"
@@ -51,6 +58,7 @@ type State =
     { VaccinationData: VaccinationStats array
       Error: string option
       DisplayType: DisplayType
+      MetricType: MetricType
       ScaleType: ScaleType
       RangeSelectionButtonIndex: int }
 
@@ -59,6 +67,7 @@ type Msg =
     | ConsumeVaccinationData of Result<VaccinationStats array, string>
     | ConsumeServerError of exn
     | DisplayTypeChanged of DisplayType
+    | MetricTypeChanged of MetricType
     | ScaleTypeChanged of ScaleType
     | RangeSelectionChanged of int
 
@@ -70,6 +79,7 @@ let init: State * Cmd<Msg> =
         { VaccinationData = [||]
           Error = None
           DisplayType = DisplayType.Default
+          MetricType = MetricType.Default
           ScaleType = ScaleType.Relative
           RangeSelectionButtonIndex = 0 }
 
@@ -85,6 +95,8 @@ let update (msg: Msg) (state: State): State * Cmd<Msg> =
         { state with Error = Some ex.Message }, Cmd.none
     | DisplayTypeChanged dt ->
         { state with DisplayType = dt }, Cmd.none
+    | MetricTypeChanged mt ->
+        { state with MetricType = mt }, Cmd.none
     | ScaleTypeChanged st ->
         { state with ScaleType = st }, Cmd.none
     | RangeSelectionChanged buttonIndex ->
@@ -266,13 +278,19 @@ let renderStackedChart state dispatch =
     let getValue currDP prevDP vType =
         match state.DisplayType with
         | Used ->
-            currDP.usedByManufacturer.TryFind(vType)
-            |> Utils.subtractIntOption (prevDP.usedByManufacturer.TryFind(vType))
+            match state.MetricType with
+            | Today  -> currDP.usedByManufacturer.TryFind(vType)
+                        |> Utils.subtractIntOption (prevDP.usedByManufacturer.TryFind(vType))
+            | ToDate -> currDP.usedByManufacturer.TryFind(vType)
+        | Delivered ->
+            match state.MetricType with
+            | Today  -> currDP.deliveredByManufacturer.TryFind(vType)
+                        |> Utils.subtractIntOption (prevDP.deliveredByManufacturer.TryFind(vType))
+            | ToDate -> currDP.deliveredByManufacturer.TryFind(vType)
         | Unused ->
             currDP.deliveredByManufacturer.TryFind(vType)
             |> Utils.subtractIntOption (currDP.usedByManufacturer.TryFind(vType))
-        | _ ->
-            currDP.deliveredByManufacturer.TryFind(vType)
+        | _ -> None
 
     let allSeries = seq {
         for vType, vColor in AllVaccinationTypes do
@@ -586,7 +604,7 @@ let renderChartContainer (state: State) dispatch =
                     match state.DisplayType with
                     | ByWeek ->
                         renderWeeklyChart state dispatch |> Highcharts.chartFromWindow
-                    | Used | Unused | ByManufacturer ->
+                    | Used | Unused | Delivered ->
                         renderStackedChart state dispatch |> Highcharts.chartFromWindow
                     | ByAgeAll | ByAge1st ->
                         renderAgeChart state dispatch |> Highcharts.chartFromWindow ] ]
@@ -617,6 +635,26 @@ let renderScaleTypeSelectors state dispatch =
         ]
     ]
 
+let renderMetricTypeSelectors state dispatch =
+    let renderMetricTypeSelector (metricTypeToRender: MetricType) =
+        let active = metricTypeToRender = state.MetricType
+        Html.div [
+            prop.onClick (fun _ -> dispatch metricTypeToRender)
+            Utils.classes
+                [(true, "chart-display-property-selector__item")
+                 (active, "selected") ]
+            prop.text (MetricType.GetName metricTypeToRender)
+        ]
+
+    let metricTypesSelectors =
+        MetricType.All
+        |> List.map renderMetricTypeSelector
+
+    Html.div [
+        prop.className "chart-display-property-selector"
+        prop.children (metricTypesSelectors)
+    ]
+
 let renderDisplaySelectors state dispatch =
     let renderSelector (dt: DisplayType) dispatch =
         Html.div [ let isActive = state.DisplayType = dt
@@ -639,8 +677,11 @@ let render (state: State) dispatch =
         Html.div [
             Utils.renderChartTopControls [
                 renderDisplaySelectors state dispatch
-                if DisplayType.ShowScaleType state.DisplayType then
-                    renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch) ]
+                match state.DisplayType with
+                | Used | Delivered -> renderMetricTypeSelectors state (MetricTypeChanged >> dispatch)
+                | ByAgeAll | ByAge1st -> renderScaleTypeSelectors state (ScaleTypeChanged >> dispatch)
+                | _ -> Html.none
+            ]
             renderChartContainer state dispatch ]
 
 let vaccinationChart () =
