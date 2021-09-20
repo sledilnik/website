@@ -1372,7 +1372,7 @@
         },
         "vaccination": {
             "title": "Cepljenje",
-            "titleMenu": "Cepljenje",
+            "titleMenu": "Cepljenje - stanje",
             "used": "Poraba",
             "byManufacturer": "Dobava",
             "unused": "Zaloga",
