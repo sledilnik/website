@@ -429,7 +429,7 @@ let renderAgeChart state dispatch =
 let renderWeeklyChart state dispatch =
 
     let valueToWeeklyDataPoint (date: DateTime) (value : int option) =
-        let fromDate = date.AddDays(-7.)
+        let fromDate = date.AddDays(-6.)
         {|
             x = jsDatesMiddle fromDate date
             y = value
@@ -532,7 +532,7 @@ let renderWeeklyChart state dispatch =
                   column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = defaultTooltip "{point.fmtHeader}<br>" None
+        tooltip = defaultTooltip "<b>{point.fmtHeader}</b><br>" None
     |}
 
 
