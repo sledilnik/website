@@ -134,92 +134,12 @@ let calcUnusedDoses delivered used =
     | _ -> None
 
 
-
-
 // Highcharts will sum columns together when there aren't enough pixels to draw them individually
 // As data in some of the vaccination charts is cumulative already, the aggregation method must be "high"
 // instead of the default "sum"
 // Docs: https://api.highcharts.com/highstock/series.column.dataGrouping.approximation
 // This fixes https://github.com/sledilnik/website/issues/927
 let dataGroupingConfigurationForCumulativeData = pojo {| approximation = "high" |}
-
-
-let renderVaccinationChart state dispatch =
-
-    let allSeries =
-        match state.DisplayType with
-        | Used ->
-            [
-              yield
-                pojo
-                    {| name = chartText "administered"
-                       ``type`` = "column"
-                       color = "#189a73"
-                       dataGrouping = dataGroupingConfigurationForCumulativeData
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered.toDate)) |}
-              yield
-                pojo
-                    {| name = chartText "administered2nd"
-                       ``type`` = "column"
-                       color = "#0e5842"
-                       dataGrouping = dataGroupingConfigurationForCumulativeData
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.administered2nd.toDate)) |}
-              yield
-                pojo
-                    {| name = chartText "deliveredDoses"
-                       ``type`` = "line"
-                       color = "#73ccd5"
-                       dataGrouping = dataGroupingConfigurationForCumulativeData
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.deliveredToDate)) |}
-              yield
-                pojo
-                    {| name = chartText "usedDoses"
-                       ``type`` = "line"
-                       color = "#20b16d"
-                       dataGrouping = dataGroupingConfigurationForCumulativeData
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, dp.usedToDate)) |}
-              yield
-                pojo
-                    {| name = chartText "unusedDoses"
-                       ``type`` = "line"
-                       color = "#ffa600"
-                       dataGrouping = dataGroupingConfigurationForCumulativeData
-                       data =
-                           state.VaccinationData
-                           |> Array.map (fun dp -> (dp.JsDate12h, calcUnusedDoses dp.deliveredToDate dp.usedToDate)) |}
-            ]
-        | _ -> []
-
-    let onRangeSelectorButtonClick(buttonIndex: int) =
-        let res (_ : Event) =
-            RangeSelectionChanged buttonIndex |> dispatch
-            true
-        res
-
-    let baseOptions =
-        basicChartOptions Linear "covid19-vaccination"
-            state.RangeSelectionButtonIndex
-            onRangeSelectorButtonClick
-    {| baseOptions with
-        series = List.toArray allSeries
-        yAxis =
-            baseOptions.yAxis
-            |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
-        plotOptions =
-            pojo
-               {| line = pojo {| dataLabels = pojo {| enabled = false |}; marker = pojo {| enabled = false |} |}
-                  series = defaultSeriesOptions None |}
-        legend = pojo {| enabled = true ; layout = "horizontal" |}
-        tooltip = defaultTooltip "{point.key}<br>" None
-    |}
 
 
 let renderStackedChart state dispatch =
@@ -510,7 +430,7 @@ let renderWeeklyChart state dispatch =
     let valueToWeeklyDataPoint (date: DateTime) (value : int option) =
         let fromDate = date.AddDays(-7.)
         {|
-            x = date |> jsTime
+            x = jsDatesMiddle fromDate date
             y = value
             fmtHeader =
               I18N.tOptions "days.weekYearFromToDate" {| date = fromDate; dateTo = date |}
