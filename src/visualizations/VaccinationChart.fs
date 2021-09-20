@@ -419,7 +419,8 @@ let renderAgeChart state dispatch =
             |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
-               {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+               {| line = pojo {| marker = pojo {| enabled = false |} |}
+                  column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions stackType |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = defaultTooltip "" (fun () -> tooltipFormatter jsThis)
@@ -527,7 +528,8 @@ let renderWeeklyChart state dispatch =
             |> Array.map (fun ax -> {| ax with showFirstLabel = false |})
         plotOptions =
             pojo
-               {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
+               {| line = pojo {| marker = pojo {| enabled = false |} |}
+                  column = pojo {| dataGrouping = pojo {| enabled = false |} |}
                   series = defaultSeriesOptions None |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         tooltip = defaultTooltip "{point.fmtHeader}<br>" None
