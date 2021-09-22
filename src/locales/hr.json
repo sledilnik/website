@@ -294,7 +294,8 @@
             "titleMenu": "Općine – slučajevi",
             "weeklyGrowth": "Tjedni prirast ",
             "confirmed": "Potvrđeni: ",
-            "viewWeeklyGrowth": "Tjedni prirast"
+            "viewWeeklyGrowth": "Tjedni prirast",
+            "closed": "Zatvoreno: "
         },
         "ratios": {
             "hospitalMortality": "Smrtnost u bolnicama",
@@ -548,7 +549,8 @@
             "positiveTotal": "Pozitivni ukupno",
             "positivePCR": "Pozitivni PCR",
             "positiveHAT": "Pozitivni RAT",
-            "positiveSplit": "Pozitivni PCR i RAT"
+            "positiveSplit": "Pozitivni PCR i RAT",
+            "performedTests": "Izvršeni testovi"
         },
         "infections": {
             "rhStaff": "Osoblje domova umirovljenika",
@@ -923,16 +925,17 @@
             "az": "AstraZeneca",
             "moderna": "Moderna",
             "pfizer": "Pfizer/BioNTech",
-            "byManufacturer": "Isporučeno cjepivo",
-            "used": "Korišteno cjepivo",
+            "byManufacturer": "Isporučeno",
+            "used": "Korišteno",
             "titleMenu": "Cjepivo",
             "title": "Cjepivo",
             "janssen": "Janssen",
-            "byWeek": "Po tjednima",
+            "byWeek": "Korištenje (tjedno)",
             "unusedDoses": "Nekorištene doze",
-            "unused": "Nekorišteno cjepivo",
-            "byAge1st": "Po starosti: Cijepljeni",
-            "byAgeAll": "Po starosti: Potpuno cijepljeni"
+            "unused": "Opskrba",
+            "byAge1st": "Cijepljeni (dob)",
+            "byAgeAll": "Potpuno cijepljeni (dob)",
+            "byWeekSupply": "Opskrba (tjedno)"
         },
         "sewage": {
             "muncipalitiesIncluded": "Aktivni i potvrđeni slučajevi uključuju podatke općina:",
@@ -942,6 +945,15 @@
             "title": "Virus u kanalizaciji",
             "concentrationGen2": "Omjer SARS-CoV-2 gena N2 i PMMoV",
             "concentrationGen1": "Omjer SARS-CoV-2 gena N1 i PMMoV"
+        },
+        "vaccineEffect": {
+            "relative100k": "Relativno na 100.000 osoba u grupi",
+            "absolute100k": "Na 100.000 osoba u grupi",
+            "titleMenu": "Cijepljenje – učinak",
+            "title": "Učinak cijepljenja",
+            "absolute": "Apsolutno",
+            "hospitalizedCases": "Hospitalizirani",
+            "confirmedCases": "Potvrđeni slučajevi"
         }
     },
     "shortMonth": {
@@ -1245,6 +1257,15 @@
         },
         "liftMovement": {
             "title": "🚫22 – 5 h"
+        },
+        "masksOnEvents": {
+            "title": "Maske🎭"
+        },
+        "liftMasksOnEvents": {
+            "title": "Maske"
+        },
+        "liftServicesAll": {
+            "title": "Usluge"
         }
     },
     "pageNotFound": {
@@ -1363,6 +1384,10 @@
         "17": {
             "title": "faza<br>17",
             "description": "kraj epidemije, traženje kontakata s visokim rizikom"
+        },
+        "18": {
+            "title": "faza<br>18",
+            "description": "metoda brzog testiranja antigena"
         }
     },
     "embedMaker": {
@@ -1700,7 +1725,7 @@
             "question": "Što znači dijagram „COVID-19 situacija u Sloveniji”?"
         },
         "chart-phases": {
-            "question": "Što znače faze (faze 1 – 14) u dijagramu?"
+            "question": "Što znače faze (faze 1 – 18) u dijagramu?"
         },
         "map-chart": {
             "question": "Što prikazuje dijagram „Karta općina”?"
