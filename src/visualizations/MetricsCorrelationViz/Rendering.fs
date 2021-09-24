@@ -77,7 +77,7 @@ let init data : State * Cmd<Msg> =
     let state = {
         Data = data
         DisplayType = DisplayType.Default
-        RangeSelectionButtonIndex = 1
+        RangeSelectionButtonIndex = 3
     }
     state, Cmd.none
 
