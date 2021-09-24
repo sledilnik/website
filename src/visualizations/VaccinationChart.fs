@@ -123,9 +123,10 @@ let defaultSeriesOptions stackType =
         groupPadding = 0
     |}
 
-let subtractWeekly curr prev =
+let subtractSafely curr prev =
     match curr, prev with
     | Some c, Some p  -> Some (c - p)
+    | Some c, None -> Some c
     | _ -> None
 
 let calcUnusedDoses delivered used =
@@ -201,13 +202,13 @@ let renderStackedChart state dispatch =
         match state.DisplayType with
         | Used ->
             match state.MetricType with
-            | Today  -> currDP.usedByManufacturer.TryFind(vType)
-                        |> Utils.subtractIntOption (prevDP.usedByManufacturer.TryFind(vType))
+            | Today  -> subtractSafely (currDP.usedByManufacturer.TryFind(vType))
+                                       (prevDP.usedByManufacturer.TryFind(vType))
             | ToDate -> currDP.usedByManufacturer.TryFind(vType)
         | Delivered ->
             match state.MetricType with
-            | Today  -> currDP.deliveredByManufacturer.TryFind(vType)
-                        |> Utils.subtractIntOption (prevDP.deliveredByManufacturer.TryFind(vType))
+            | Today  -> subtractSafely (currDP.deliveredByManufacturer.TryFind(vType))
+                                       (prevDP.deliveredByManufacturer.TryFind(vType))
             | ToDate -> currDP.deliveredByManufacturer.TryFind(vType)
         | Unused ->
             currDP.deliveredByManufacturer.TryFind(vType)
@@ -342,11 +343,11 @@ let renderAgeChart state dispatch =
             match state.DisplayType with
             | ByAge1st ->
                 match state.MetricType with
-                | Today  -> aG.administered |> Utils.subtractIntOption prevAG.administered
+                | Today  -> subtractSafely aG.administered prevAG.administered
                 | ToDate -> aG.administered
             | ByAgeAll ->
                 match state.MetricType with
-                | Today  -> aG.administered2nd |> Utils.subtractIntOption prevAG.administered2nd
+                | Today  -> subtractSafely aG.administered2nd prevAG.administered2nd
                 | ToDate -> aG.administered2nd
             | _ -> None
         let y =
@@ -456,7 +457,7 @@ let renderWeeklyChart state dispatch =
                        |> Array.map (
                             fun (prevW, currW) ->
                                 valueToWeeklyDataPoint
-                                    currW.Date (subtractWeekly currW.usedToDate prevW.usedToDate)) |}
+                                    currW.Date (subtractSafely currW.usedToDate prevW.usedToDate)) |}
 
         if state.DisplayType = ByWeekUsage then
             yield
@@ -470,7 +471,7 @@ let renderWeeklyChart state dispatch =
                            |> Array.map (
                                 fun (prevW, currW) ->
                                     valueToWeeklyDataPoint
-                                        currW.Date (subtractWeekly currW.administered.toDate prevW.administered.toDate)) |}
+                                        currW.Date (subtractSafely currW.administered.toDate prevW.administered.toDate)) |}
             yield
                 pojo
                     {| name = chartText "administered2nd"
@@ -482,7 +483,7 @@ let renderWeeklyChart state dispatch =
                            |> Array.map (
                                 fun (prevW, currW) ->
                                     valueToWeeklyDataPoint
-                                        currW.Date (subtractWeekly currW.administered2nd.toDate prevW.administered2nd.toDate)) |}
+                                        currW.Date (subtractSafely currW.administered2nd.toDate prevW.administered2nd.toDate)) |}
 
         if state.DisplayType = ByWeekSupply then
             yield
@@ -496,7 +497,7 @@ let renderWeeklyChart state dispatch =
                            |> Array.map (
                                 fun (prevW, currW) ->
                                     valueToWeeklyDataPoint
-                                        currW.Date (subtractWeekly currW.deliveredToDate prevW.deliveredToDate)) |}
+                                        currW.Date (subtractSafely currW.deliveredToDate prevW.deliveredToDate)) |}
             yield
                 pojo
                     {| name = chartText "unusedDoses"
