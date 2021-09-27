@@ -979,7 +979,8 @@
             "positiveTotal": "Totale positivi",
             "positivePCR": "PCR positivi",
             "positiveHAT": "TAR positivi",
-            "positiveSplit": "PCR e TAR positivi"
+            "positiveSplit": "PCR e TAR positivi",
+            "performedTests": "Tamponi effettuati"
         },
         "hCenters": {
             "suspectedCovidPhone": "Sospetto COVID-19 (telefono)",
@@ -1462,17 +1463,18 @@
             "az": "AstraZeneca",
             "moderna": "Moderna",
             "pfizer": "Pfizer/BioNTech",
-            "byManufacturer": "Vaccini consegnati",
-            "used": "Vaccini utilizzati",
+            "byManufacturer": "Consegnati",
+            "used": "Utilizzati",
             "titleMenu": "Vaccinazione",
             "title": "Vaccinazione",
             "disabled": "Abbiamo interrotto l'aggiornamento della tabella delle vaccinazioni il 25 marzo perché i dati non sono attualmente disponibili in formato leggibile dalla macchina. Per il momento siete gentilmente indirizzati al sito web <a href=\"https://cepimose.si\" target=\"_blank\"> cepimose.si </a> (solo in sloveno).",
             "janssen": "Janssen",
-            "byWeek": "Per settimana",
+            "byWeek": "Somministrazioni (per settimana)",
             "unusedDoses": "Dosi non utilizzate",
-            "byAge1st": "Per età: Vaccinati",
-            "byAgeAll": "Per età: Vaccinazione completata",
-            "unused": "Vaccini inutilizzati"
+            "byAge1st": "Vaccinati (età)",
+            "byAgeAll": "Vaccinazione completata (età)",
+            "unused": "Giacenza",
+            "byWeekSupply": "Giacenza (per settimana)"
         },
         "schoolStatus": {
             "date": "%A, %e. %B",
