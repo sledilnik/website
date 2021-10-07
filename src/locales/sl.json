@@ -1396,16 +1396,22 @@
             "titleMenu": "Cepljenje - učinek",
             "confirmedCases": "Potrjeni primeri",
             "hospitalizedCases": "Hospitalizirani",
+            "icuCases": "Intenzivna terapija",
             "absolute": "Absolutno",
             "absolute100k": "Na 100.000 oseb v skupini",
             "relative100k": "Relativno na 100.000 oseb v skupini",
             "confirmedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je bilo med potrjenimi primeri **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je okužba potrjena pri **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
             "hospitalizedCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je hospitaliziranih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, delno cepljeni). Med polno zaščitenimi osebami s cepljenjem (polno cepljene osebe pred vsaj 14 dnevi) je hospitaliziranih **{{protectedToDatePct}}** ({{protectedC}} od {{totalProtected}}).",
+            "icuCasesAbs": "Od {{ startDate, %e. %b }} do {{ endDate, %e. %b }} je v intenzivno terapijo sprejetih **{{protectedC}}** ({{protectedPct}}) oseb cepljenih s polno zaščito in **{{otherC}}** ({{otherPct}}) ostalih oseb (necepljeni, prebolevniki, delno cepljeni).",
             "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
+            "icuCasesRatio": "Necepljenih, prebolevnikov in delno cepljenih je v intenzivno terapijo sprejetih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "disclaimer": "<br>Je pa pri interpretaciji zaradi razlik v precepljenosti med starostnimi skupinami treba biti previden - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Zaščiteni s cepljenjem",
-            "casesOther": "Ostali (necepljeni, delno cepljeni)"
+            "casesPartiallyVaccinated": "Delno cepljeni",
+            "casesRecovered": "Prebolevniki",
+            "casesOther": "Ostali (necepljeni, delno cepljeni)",
+            "casesOtherShort": "Ostali"
         },
         "schools": {
             "title": "Primeri v šolah in vrtcih",

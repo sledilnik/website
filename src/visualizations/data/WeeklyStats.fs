@@ -4,7 +4,7 @@ open Fable.SimpleHttp
 open Fable.SimpleJson
 open Types
 
-let url = "https://api.sledilnik.org/api/stats-weekly"
+let url = "https://api-stage.sledilnik.org/api/stats-weekly" // TODO: switch to production before merge
 
 type private TransferLocation =
     { family : int option
@@ -76,6 +76,10 @@ type private TransferWStatsDataPoint =
             |}
         hospitalizedVaccinated : int option
         hospitalizedOther : int option
+        icuVaccinated : int option
+        icuVaccinatedPartially : int option
+        icuRecovered : int option
+        icuOther : int option
         confirmed : int option
         investigated : int option
         healthcare : int option
@@ -98,6 +102,10 @@ type private TransferWStatsDataPoint =
           DateTo = System.DateTime(this.``to``.year, this.``to``.month, this.``to``.day)
           HospitalizedVaccinated = this.hospitalizedVaccinated
           HospitalizedOther = this.hospitalizedOther
+          IcuVaccinated = this.icuVaccinated
+          IcuVaccinatedPartially = this.icuVaccinatedPartially
+          IcuRecovered = this.icuRecovered
+          IcuOther = this.icuOther
           ConfirmedCases = this.confirmed
           InvestigatedCases = this.investigated
           HealthcareCases = this.healthcare
