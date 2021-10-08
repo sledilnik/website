@@ -387,7 +387,12 @@ let renderChartOptions state dispatch =
 
         let otherC =
             data
-            |> Seq.sumBy (fun dp -> dp.CasesOther |> Option.defaultValue 0.)
+            |> Seq.sumBy
+                (fun dp ->
+                    (dp.CasesOther |> Option.defaultValue 0.)
+                    + (dp.CasesPartiallyVaccinated
+                       |> Option.defaultValue 0.)
+                    + (dp.CasesRecovered |> Option.defaultValue 0.))
 
         let protectedC =
             data
