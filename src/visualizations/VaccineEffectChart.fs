@@ -531,19 +531,18 @@ let renderChartOptions state dispatch =
            series = List.toArray allSeries
            xAxis =
                baseOptions.xAxis
-               |> Array.map (fun xAxis ->
-                   match lastWeek with
-                   | Some lw ->
-                      {| xAxis with
-                          tickInterval = 86400000 * 7
-                          plotBands =
-                                [|
-                                   {| from=jsTime <| lw.Date
-                                      ``to``=jsTime <| lw.DateTo.AddDays(7.) // ugly hack to fully color incomplete week
-                                      color="#ffffe0"
-                                    |}
-                                |] |} |> pojo
-                   | None -> pojo xAxis )
+               |> Array.map
+                   (fun xAxis ->
+                       match lastWeek with
+                       | Some lw ->
+                           {| xAxis with
+                                  tickInterval = 86400000 * 7
+                                  plotBands =
+                                      [| {| from = jsTime <| lw.Date
+                                            ``to`` = jsTime <| lw.DateTo.AddDays(7.) // ugly hack to fully color incomplete week
+                                            color = "#ffffe0" |} |] |}
+                           |> pojo
+                       | None -> pojo xAxis)
            yAxis =
                baseOptions.yAxis
                |> Array.map
