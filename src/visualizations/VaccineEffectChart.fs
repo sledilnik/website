@@ -18,7 +18,10 @@ type DisplayType =
     | ConfirmedCases
     | HospitalizedCases
     | IcuCases
-    static member All = [ ConfirmedCases; HospitalizedCases; IcuCases ]
+    static member All =
+        [ ConfirmedCases
+          HospitalizedCases
+          IcuCases ]
 
     static member Default = IcuCases
 
@@ -174,7 +177,9 @@ let renderChartOptions state dispatch =
                     else
                         None
 
-                dp.Date, dp.Vaccination.Administered.ToDate |> Utils.subtractIntOption protectedWithVaccine)
+                dp.Date,
+                dp.Vaccination.Administered.ToDate
+                |> Utils.subtractIntOption protectedWithVaccine)
         |> Map.ofSeq
 
     let partiallyVaccinatedOnDay date =
@@ -185,9 +190,7 @@ let renderChartOptions state dispatch =
     let recoveredMap =
         state.Data
         |> Seq.toArray
-        |> Seq.mapi
-            (fun i dp ->
-                dp.Date, dp.Cases.RecoveredToDate)
+        |> Seq.mapi (fun i dp -> dp.Date, dp.Cases.RecoveredToDate)
         |> Map.ofSeq
 
     let recoveredOnDay date =
@@ -217,7 +220,7 @@ let renderChartOptions state dispatch =
             )
         | None -> None
 
-    let checkAndProcess100k (dp : DataPoint) : DataPoint =
+    let checkAndProcess100k (dp: DataPoint) : DataPoint =
         match state.ChartType with
         | Absolute -> dp
         | Absolute100k
@@ -225,9 +228,9 @@ let renderChartOptions state dispatch =
             let protectedWithVaccine = protectedWithVaccineOnDay dp.DateTo
             let partiallyVaccinated = partiallyVaccinatedOnDay dp.DateTo
             let recovered = recoveredOnDay dp.DateTo
+
             let otherPopulation =
-                if state.DisplayType = IcuCases
-                then
+                if state.DisplayType = IcuCases then
                     Utils.Dictionaries.regions.["si"].Population
                     |> Utils.subtractIntOption protectedWithVaccine
                     |> Utils.subtractIntOption partiallyVaccinated
@@ -237,10 +240,10 @@ let renderChartOptions state dispatch =
                     |> Utils.subtractIntOption protectedWithVaccine
 
             { dp with
-                CasesProtectedWithVaccine = get100k dp.CasesProtectedWithVaccine protectedWithVaccine
-                CasesPartiallyVaccinated = get100k dp.CasesPartiallyVaccinated partiallyVaccinated
-                CasesRecovered = get100k dp.CasesRecovered recovered
-                CasesOther = get100k dp.CasesOther otherPopulation }
+                  CasesProtectedWithVaccine = get100k dp.CasesProtectedWithVaccine protectedWithVaccine
+                  CasesPartiallyVaccinated = get100k dp.CasesPartiallyVaccinated partiallyVaccinated
+                  CasesRecovered = get100k dp.CasesRecovered recovered
+                  CasesOther = get100k dp.CasesOther otherPopulation }
 
 
     let dailyConfirmedData =
@@ -329,21 +332,21 @@ let renderChartOptions state dispatch =
 
                         for dp in daily do
                             sumRec <-
-                                {  sumRec with
-                                       Date =
-                                           if dp.Date.CompareTo(sumRec.Date) < 0 then
-                                               dp.Date
-                                           else
-                                               sumRec.Date
-                                       DateTo =
-                                           if dp.DateTo.CompareTo(sumRec.Date) > 0 then
-                                               dp.DateTo
-                                           else
-                                               sumRec.Date
-                                       CasesProtectedWithVaccine =
-                                           sumRec.CasesProtectedWithVaccine
-                                           |> addFloatOption dp.CasesProtectedWithVaccine
-                                       CasesOther = sumRec.CasesOther |> addFloatOption dp.CasesOther }
+                                { sumRec with
+                                      Date =
+                                          if dp.Date.CompareTo(sumRec.Date) < 0 then
+                                              dp.Date
+                                          else
+                                              sumRec.Date
+                                      DateTo =
+                                          if dp.DateTo.CompareTo(sumRec.Date) > 0 then
+                                              dp.DateTo
+                                          else
+                                              sumRec.Date
+                                      CasesProtectedWithVaccine =
+                                          sumRec.CasesProtectedWithVaccine
+                                          |> addFloatOption dp.CasesProtectedWithVaccine
+                                      CasesOther = sumRec.CasesOther |> addFloatOption dp.CasesOther }
 
                             if dp.Date.DayOfWeek = DayOfWeek.Sunday then
                                 yield sumRec
@@ -352,6 +355,7 @@ let renderChartOptions state dispatch =
                         if sumRec.Date <> DateTime.MaxValue then
                             yield sumRec // flush
                     }
+
                 "#d5c768", weeklyConfirmedData
 
             | HospitalizedCases ->
@@ -376,7 +380,10 @@ let renderChartOptions state dispatch =
             data |> Seq.map (fun dp -> dp.DateTo) |> Seq.max // TODO: can we get it from raneg selector?
 
         let totalProtected =
-            data |> Seq.map (fun dp -> protectedWithVaccineOnDay (dp.DateTo)) |> Seq.last |> Option.defaultValue 0
+            data
+            |> Seq.map (fun dp -> protectedWithVaccineOnDay (dp.DateTo))
+            |> Seq.last
+            |> Option.defaultValue 0
 
         let otherC =
             data
@@ -405,12 +412,13 @@ let renderChartOptions state dispatch =
                     txtId
                     {| startDate = startDate
                        endDate = endDate
-                       protectedToDatePct = Utils.percentWith3DecimalFormatter (protectedC * 100. / (float)totalProtected)
+                       protectedToDatePct =
+                           Utils.percentWith3DecimalFormatter (protectedC * 100. / (float) totalProtected)
                        totalProtected = I18N.NumberFormat.formatNumber totalProtected
                        protectedC = I18N.NumberFormat.formatNumber protectedC
-                       protectedPct = Utils.percentWith1DecimalFormatter (protectedC * 100. / (protectedC+otherC))
+                       protectedPct = Utils.percentWith1DecimalFormatter (protectedC * 100. / (protectedC + otherC))
                        otherC = I18N.NumberFormat.formatNumber otherC
-                       otherPct = Utils.percentWith1DecimalFormatter (otherC * 100. / (protectedC+otherC)) |}
+                       otherPct = Utils.percentWith1DecimalFormatter (otherC * 100. / (protectedC + otherC)) |}
             | _ ->
                 let txtId =
                     match state.DisplayType with
@@ -418,12 +426,13 @@ let renderChartOptions state dispatch =
                     | HospitalizedCases -> "charts.vaccineEffect.hospitalizedCasesRatio"
                     | IcuCases -> "charts.vaccineEffect.icuCasesRatio"
 
-                I18N.tOptions
-                    txtId
-                    {| multiple = I18N.NumberFormat.formatNumber multiple |}
+                I18N.tOptions txtId {| multiple = I18N.NumberFormat.formatNumber multiple |}
 
         let otherLabel =
-            if state.DisplayType = IcuCases then "casesOtherShort" else "casesOther"
+            if state.DisplayType = IcuCases then
+                "casesOtherShort"
+            else
+                "casesOther"
 
         label,
         [ yield
@@ -451,14 +460,13 @@ let renderChartOptions state dispatch =
                              |> Seq.map
                                  (fun dp ->
                                      {| x = jsDatesMiddle dp.Date dp.DateTo
-                                        y =
-                                            Utils.roundTo1Decimal (
-                                                dp.CasesRecovered
-                                                |> Option.defaultValue 0.
-                                            )
+                                        y = Utils.roundTo1Decimal (dp.CasesRecovered |> Option.defaultValue 0.)
                                         fmtHeader =
-                                            I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
+                                            I18N.tOptions
+                                                "days.weekYearFromToDate"
+                                                {| date = dp.Date; dateTo = dp.DateTo |} |})
                              |> Seq.toArray |}
+
               yield
                   pojo
                       {| name = chartText "casesPartiallyVaccinated"
@@ -475,7 +483,9 @@ let renderChartOptions state dispatch =
                                                 |> Option.defaultValue 0.
                                             )
                                         fmtHeader =
-                                            I18N.tOptions "days.weekYearFromToDate" {| date = dp.Date; dateTo = dp.DateTo |} |})
+                                            I18N.tOptions
+                                                "days.weekYearFromToDate"
+                                                {| date = dp.Date; dateTo = dp.DateTo |} |})
                              |> Seq.toArray |}
           yield
               pojo
@@ -522,9 +532,9 @@ let renderChartOptions state dispatch =
                                   | _ -> pojo {| format = "{value}" |}
                               reversedStacks = true |})
            credits =
-                match state.DisplayType with
-                | IcuCases -> chartCreditsHospitals
-                | _ -> chartCreditsNIJZ
+               match state.DisplayType with
+               | IcuCases -> chartCreditsHospitals
+               | _ -> chartCreditsNIJZ
            plotOptions =
                pojo
                    {| column = pojo {| dataGrouping = pojo {| enabled = false |} |}
@@ -553,9 +563,7 @@ let renderChartOptions state dispatch =
                pojo
                    {| rules =
                           [| {| condition = {| maxWidth = 768 |}
-                                chartOptions =
-                                    {| yAxis =
-                                           [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
+                                chartOptions = {| yAxis = [| {| labels = {| enabled = false |} |} |] |} |} |] |} |}
 
 
 
