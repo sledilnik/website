@@ -1407,7 +1407,7 @@
             "confirmedCasesRatio": "Necepljenih in delno cepljenih je med potrjenimi primeri **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "hospitalizedCasesRatio": "Necepljenih in delno cepljenih je hospitaliziranih **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
             "icuCasesRatio": "Necepljenih, prebolevnikov in delno cepljenih je sprejetih v intenzivno terapijo **{{multiple}}-krat toliko** kot polno zaščitenih s cepljenjem.",
-            "disclaimer": "<br>Je pa pri interpretaciji zaradi razlik v precepljenosti med starostnimi skupinami treba biti previden - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
+            "disclaimer": "<br>Zaradi razlik v precepljenosti med starostnimi skupinami moramo biti previdni pri interpretaciji - več o Simpsonovem paradoksu v [članku](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
             "casesProtected": "Zaščiteni s cepljenjem",
             "casesPartiallyVaccinated": "Delno cepljeni",
             "casesRecovered": "Prebolevniki",
