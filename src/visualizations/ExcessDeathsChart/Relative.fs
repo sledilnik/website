@@ -221,10 +221,11 @@ let renderChartOptions (statsData : StatsData) (data : WeeklyDeathsData)  =
        series = series
        credits =
         {| enabled = true
-           text = sprintf "%s: %s, %s, %s"
+           text = sprintf "%s: %s, %s, %s, %s"
                 (I18N.t "charts.common.dataSource")
                 (I18N.tOptions ("charts.common.dsMNZ") {| context = localStorage.getItem ("contextCountry") |})
                 (I18N.tOptions ("charts.common.dsNIJZ") {| context = localStorage.getItem ("contextCountry") |})
                 (I18N.tOptions ("charts.common.dsMZ") {| context = localStorage.getItem ("contextCountry") |})
-           href = "https://www.stat.si/StatWeb/Field/Index/17/95" |} |> pojo
+                (I18N.tOptions ("charts.common.dsHospitals") {| context = localStorage.getItem ("contextCountry") |})
+           href = "https://www.gov.si/drzavni-organi/ministrstva/ministrstvo-za-notranje-zadeve/" |} |> pojo
     |} |> pojo

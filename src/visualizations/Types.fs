@@ -137,6 +137,10 @@ type WeeklyStatsDataPoint =
       DateTo : System.DateTime
       HospitalizedVaccinated : int option
       HospitalizedOther : int option
+      IcuVaccinated : int option
+      IcuVaccinatedPartially : int option
+      IcuRecovered : int option
+      IcuOther : int option
       ConfirmedCases : int option
       InvestigatedCases : int option
       HealthcareCases : int option

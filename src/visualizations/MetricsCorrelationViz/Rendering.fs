@@ -274,7 +274,7 @@ let renderChartOptions state dispatch =
             |}
         legend = pojo {| enabled = true ; layout = "horizontal" |}
         responsive = responsive
-        credits = chartCreditsNIJZMZ
+        credits = chartCreditsNIJZMZHospitals
     |}
 
 let renderChartContainer state dispatch =

@@ -230,8 +230,10 @@ let renderByHospitalChart (state: State) dispatch =
                pojo
                    {| enabled = true
                       layout = "horizontal" |}
-
-           credits = chartCreditsMZ |}
+           credits =
+               match state.HTypeToDisplay with
+               | CovidHospitalsICU -> chartCreditsHospitals
+               | _ -> chartCreditsMZHospitals |}
 
     |> pojo
 
@@ -421,8 +423,10 @@ let renderStructureChart (state: State) dispatch =
                                     {| yAxis =
                                            [| {| labels = pojo {| enabled = false |} |}
                                               {| labels = pojo {| enabled = false |} |} |] |} |} |] |}
-
-           credits = chartCreditsMZ |}
+           credits =
+               match state.HTypeToDisplay with
+               | CovidHospitalsICU -> chartCreditsHospitals
+               | _ -> chartCreditsMZHospitals |}
 
     |> pojo
 
