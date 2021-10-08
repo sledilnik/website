@@ -1174,7 +1174,8 @@
             "hideAll": "Nascondi tutto",
             "dsMIZS": "MIZŠ",
             "dsNIB": "Istituto Nazionale di Biologia",
-            "total": "Totale"
+            "total": "Totale",
+            "dsHospitals": "ospedali"
         },
         "world": {
             "title": "COVID-19 Situazione nel mondo",
@@ -1521,7 +1522,9 @@
             "confirmedCases": "Casi confermati",
             "titleMenu": "Vaccinazione - effetto",
             "title": "Effetto della vaccinazione",
-            "disclaimer": "<br>Tuttavia, a causa delle differenze nei tassi di vaccinazione tra i gruppi di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [l'articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e)."
+            "disclaimer": "<br>Tuttavia, a causa delle differenze nei tassi di vaccinazione tra i gruppi di età, questa interpretazione dovrebbe essere trattata con cautela - leggi di più sul paradosso di Simpson in [l'articolo](https://medium.com/sledilnik/ko-u%C4%8Dinkovita-cepiva-naletijo-na-statisti%C4%8Dni-paradoks-4fd9c154086e).",
+            "icuCasesAbs": "Dal {{ startDate, %b %e }} al {{ endDate, %b %e }}  sono state ricoverate in terapia intensiva **{{protectedC}}** ({{protectedPct}}) persone completamente protette con la vaccinazione e **{{otherC}}** ({{otherPct}}) altre persone (non vaccinate, recuperate, parzialmente vaccinate).",
+            "icuCases": "Terapia intensiva"
         }
     },
     "footer": {
